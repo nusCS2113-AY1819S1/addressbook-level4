@@ -66,14 +66,8 @@ Logs into application using relevant credentials. +
 Format: `login USERID PASSWORD ROLE`
 
 ****
-* USERID refers to student matriculation number
-* PASSWORD refers to the password associated with the existing account
-* ROLE refers to the role in NUSSU associated with the existing account
 * The USERID must be in the `X1234567X` format, where X can only be upper case letter alphabets, and there must be exactly 7 digits between the two `X`
-* USERID must belong to an existing account
 * ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
-* There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
-* There must be at least 1 space between `login` keyword and USERID
 * The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the login process
 * There must not be any additional unnecessary parameters in user input during the login process
 * There must not be any spaces in USERID, PASSWORD and ROLE
@@ -82,9 +76,7 @@ Format: `login USERID PASSWORD ROLE`
 Examples:
 
 * `login A1234567M zaq1xsw2cde3 president` +
-Logs into NUSSU-Connect with user ID as A1234567M, password as zaq1xsw2cde3 and role as president.
-
-image::DefaultAccountDetails.PNG[width="300"]
+Logs in with user ID as A1234567M, password as zaq1xsw2cde3 and role as president.
 
 [NOTE]
 ====
@@ -111,16 +103,9 @@ User Id, Password and Role inputs are all case-sensitive!
 
 [NOTE]
 ====
-If you attempt to minimize the application before logging in to do other things, only to come back to the application later, and you want to close the application, you should not click on the cross button on the top right hand corner of the application, as shown in the image below. Look at the next note below to see the correct step to safely close the application.
-====
-image::WrongCloseApplication.PNG[width="300"]
-
-[NOTE]
-====
-It is not recommended to close the application as shown in the image above, as this would cause the application to become unresponsive. You should switch windows repeatedly with the Alt + Tab keys on your keyboard until you can see the login dialog box shown in the image below. Once that is done, you can then safely click on the cross button found on the top right hand corner of the dialog box to close the application.
+If you attempt to minimize the application before logging in to do other things, only to come back to the application later, and you want to close the application, you should not click on the cross button on the top right hand corner of the application, as shown in the image below. It is not recommended to close the application as shown in the image below, as this would cause the application to become unresponsive. You should switch windows repeatedly with the Alt + Tab keys on your keyboard until you can see the login dialog box shown in the image below. Once that is done, you can then safely click on the cross button found on the top right hand corner of the dialog box, circled in red, to close the application.
 ====
 image::CorrectCloseApplication.PNG[width="300"]
-
 
 === Creating a new user account: `createaccount`
 
@@ -128,14 +113,8 @@ Creates a new user account in the NUSSU-Connect. +
 Format: `createaccount USERID PASSWORD ROLE`
 
 ****
-* USERID refers to student matriculation number
-* PASSWORD refers to any desired passphrases the new user wishes to have
-* ROLE refers to the role in NUSSU associated with the existing account
 * The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabets, and there must be exactly 7 digits between the two `X`
-* USERID must not belong to an existing account
 * ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
-* There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
-* There must be at least 1 space between `createaccount` keyword and USERID
 * The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the account creation process
 * There must not be any additional unnecessary parameters in user input during the account creation process
 * There must not be any spaces in USERID, PASSWORD and ROLE

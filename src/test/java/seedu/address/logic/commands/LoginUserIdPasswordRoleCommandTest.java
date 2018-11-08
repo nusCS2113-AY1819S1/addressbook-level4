@@ -106,29 +106,40 @@ public class LoginUserIdPasswordRoleCommandTest {
     @Test
     public void updateFilteredAccountList_nullLoginInputs_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates(null,
+        updateLoginListBasedOnPredicates(null,
                 null, null);
     }
 
     @Test
     public void updateFilteredAccountList_nullLoginId_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates(null,
+        updateLoginListBasedOnPredicates(null,
                 "zaq1xsw2cde3", "member");
     }
 
     @Test
     public void updateFilteredAccountList_nullLoginPassword_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+        updateLoginListBasedOnPredicates("A1234561M",
                 null, "member");
     }
 
     @Test
     public void updateFilteredAccountList_nullLoginRole_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates("A1234561M",
+        updateLoginListBasedOnPredicates("A1234561M",
                 "zaq1xsw2cde3", null);
+    }
+
+    @Test
+    public void checkUpdatedAccountListSetLoginCondition_loginFailed_setAllRolesFalse() {
+        LoginUserIdPasswordRoleCommand command = updateLoginListBasedOnPredicates(" ",
+                "zaq1xsw2cde3", "member");
+        assertCommandSuccess(command, model, commandHistory, MESSAGE_LOGIN_LISTED_OVERVIEW, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredLoginDetailsList());
+        assertFalse(LoginManager.getIsMember());
+        assertFalse(LoginManager.getIsTreasurer());
+        assertFalse(LoginManager.getIsPresident());
     }
 
     @Test

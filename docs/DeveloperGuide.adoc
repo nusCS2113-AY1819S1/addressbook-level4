@@ -281,8 +281,7 @@ which is often used:
 * `FilteredList#setPredicate(predicate)` -- Filters the list of accounts in `filteredLoginDetails` according to the
 predicates determined after the user inputs their login credentials.
 
-The operation above is called when the method, `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)`, is
-called in `ModelManager`. `ModelManager` implements `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)` and
+`ModelManager` implements `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)` and
 `getFilteredLoginDetailsList()` found in the `Model` interface. `getFilteredLoginDetailsList()` is called when the
 list of accounts in `LoginBook` is filtered to the extent where only one or no account remains in the list.
 
@@ -295,7 +294,7 @@ image::LoginSequenceDiagram.png[width="800"]
 Step 1. The user launches the application for the first time. The `filteredLoginDetails` object will be initialized with
 a list of all the accounts in `LoginBook`.
 
-image::InitialLoginBookList.PNG[width="300"]
+image::InitialLoginBookList.PNG[width="240"]
 
 Step 2. The user executes `login A1234568M zaq1xsw2cde3 member` command in the input box that matches an account in
 `LoginBook`. `LogicManager` then calls `ParseCommand(login A1234568M zaq1xsw2cde3 member)` in `AddressBookParser`.
@@ -313,7 +312,7 @@ mismatch with updatedIdPredicate. `filteredLoginDetails` is updated as shown bel
 
 image::ParseCorrectLoginDetailList.PNG[width="300"]
 
-Step 6. `LoginUserIdPasswordRoleCommand` calls `updateFilteredLoginDetailsList(updatedPasswordPredicate)` in `Model` with the
+Step 6. `LoginUserIdPasswordRoleCommand` calls `updateFilteredLoginDetailsList(updatedPassPredicate)` in `Model` with the
 computed predicate from user password field input.
 
 Step 7. `Model` calls `setPredicate(updatedPasswordPredicate)` in `FilteredList`, which then further filters out accounts
@@ -350,28 +349,21 @@ credentials again, as shown in the image below.
 image::BlankLoginInput.PNG[width="300"]
 
 [NOTE]
-In step 2, if the user types in a string of login input that has either the id, password or role parameters missing instead, the application will
-throw a new ParseException and consider the login attempt as unsuccessful and initiate a new pop-up window asking the user
-for input of login credentials again, as shown in the image below.
+In step 2, if the user types in a string of login input that has either the id, password or role missing instead, the application will
+throw ParseException, consider the login attempt as unsuccessful and initiate a new pop-up window asking the user for input of login credentials again, as shown in the image below.
 
 image::MissingLoginInput.PNG[width="300"]
 
-[NOTE]
-In all cases where the user inputs either the wrong ID, password, role, any combination of two or all three, there will
-be no account left in the account list when `getFilteredLoginDetailsList` method in `Model` is called. The
-`isLoginSuccessful` boolean in `LoginManager` will be set to false via the setter method, `setIsLoginSuccessful`
-in `LoginManager`. This is done by the `checkUpdatedAccountListSetLoginCondition` method in `LoginUserIdPasswordRoleCommand`.
-The `initializeLoginProcess` method in `MainWindow` will be called repeatedly until `isLoginSuccessful` is set to true.
-The sequence diagram below shows the high level workflow of the login mechanism in the event of log-in failure.
+In all cases where the user inputs either the wrong ID, password, or role, there will be no account left in the account list when `getFilteredLoginDetailsList` method in `Model` is called. The `isLoginSuccessful` boolean in `LoginManager` will be set to false via the setter method, `setIsLoginSuccessful` in `LoginManager`. This is done by the `checkUpdatedAccountListSetLoginCondition` method in `LoginUserIdPasswordRoleCommand`. The `initializeLoginProcess` method in `MainWindow` will be called repeatedly until `isLoginSuccessful` is set to true. The sequence diagram below shows the high level workflow of the login mechanism in the event of log-in failure.
 
-image::RepeatLoginSequenceDiagram.png[width="300"]
+image::RepeatLoginSequenceDiagram.png[width="200"]
 
 The activity diagram below shows the overall picture of how the login mechanism works.
 
-image::LoginActivityDiagram.png[width="300"]
+image::LoginActivityDiagram.png[width="400"]
 The activity diagram below is an extension of the activity diagram above.
 
-image::LoginExtendedActivityDiagram.png[width="300"]
+image::LoginExtendedActivityDiagram.png[width="400"]
 
 ==== Design Considerations
 
@@ -387,15 +379,6 @@ It will also talk about the different alternatives in different design aspects, 
 * **Alternative 2:** Saves login credentials using JSON.
 ** Pros: Does not take up a lot of space.
 ** Cons: Harder to read.
-
-===== Aspect: Choice of hashing algorithms to hash login details securely
-
-* **Alternative 1 (current choice):** Using Base64 as the encoding and decoding scheme for login details
-** Pros: Easier to implement, in the context of project time constraints
-** Cons: Not as secure compared to other regular hashing algorithms like MD5 with added salt
-* **Alternative 2:** Using MD5 with added salt as a hashing algorithm
-** Pros: More secure than using Base64 as a hashing algorithm
-** Cons: Harder and takes a longer time to implement
 // end::login[]
 
 //tag::budget[]
