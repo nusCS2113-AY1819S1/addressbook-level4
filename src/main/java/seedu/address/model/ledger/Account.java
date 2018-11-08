@@ -34,6 +34,9 @@ public class Account {
         value += amount;
     }
 
+    /**
+     * @param amount
+     */
     public void debit (Double amount) {
         requireNonNull(amount);
         value -= amount;
