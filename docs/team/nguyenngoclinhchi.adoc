@@ -11,18 +11,24 @@
 
 In semester 1 year 2, I had a chance to learn NUS CS2113T - Software Engineering and Object Oriented Programming module. Thanks to this module, I had an hand-on experience to develop a desktop application with my teammate. Guidelines are given during 10 weeks to assist us create the application focusing on a particular group of users.
 
-FinancialPlanner's target is for everyone who needs help to manage their financial status, but we focus mainly on *students*. As a NUS student, I understand how great impact finance can impose on a student. With this application, I, myself and my teammate, hopes to bring positive effect to users.
+4 - 5 students from all walk of life are assigned to one group. We adjust each other working style within few weeks and support each other to develop the project. Be it minor enhancement or major enhancement, we are expected to contribute to the team.
 
-This application is perfectly designed for users who like typing and are proficient in organizing their data with command line interface (CLI). Typing allows user have a glimpse back to the expense user spent or received.
+Initially, a source code https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4] is given to us at the beginning of the CS2113T module. This has about 10 kLoc. Choosing the morphing direction, we were tasked to modify the existing code into other software we opted to.
+
+We would be evaluated based on our ability to work with existing base code and the quality of our new enhancements to
+the existing code. Besides code, we were expected to write a User Guide and Developer Guide as well for the product
+as though we were releasing an official product for public usage to simulate an actual work schedule.
+
+FinancialPlanner's target is for everyone who needs help to manage their financial status, but we focus mainly on *students*. As a NUS student, I understand how great impact finance can impose on a student. With this application, I, myself and my teammate, hopes to bring positive support to users.
+
+This application is perfectly designed for users who like typing and are proficient in organizing their data with command line interface (CLI). User can store `name`, `date`, `money flow`, and optional `tag`. With 3 compulsory components, namely, `name`, `date`, `money flow`, we create a `Record`. Typing might be time-consuming but it allows user have a glimpse back to the expense user spent or received. Hence, the user will have a chance to recall their expenses as well as be more aware about their financial status.
 
 Locating at the topmost of the Financial Planner application is the text box, which user can use to type the command into the system. Graphic User Interface (GUI) created by JavaFX is the main component used to display output of the system to create a instinctive and engaging user experience.
 
 == Summary of contributions
 
-A sample code https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4] is given to us at the beginning of the CS2113T module.
-The Financial Planner was adapted from this source code.
+Milestone is set every fortnight. Be it minor enhancement or major enhancement, every member is expected to contribute to the project every milestone. Working as a team, I am so happy to see the development of my teammate, and also satisfied to see myself grow through the progress.
 
-Milestone is set every fortnight. Working as a team, I am so happy to see the development of my teammate, and also satisfied to see myself grow through every milestone.
 A summary of my contributions is given below.
 
 === Enhancements:
@@ -32,10 +38,10 @@ A summary of my contributions is given below.
 ** `Overview`: Significant effort is required to morph this application. Our group did join hand to make this success.
 ** `My contributions`: I refactored function together with variables across classes, to make these components compatible and consistent for the application. Along the way I developed my code, I have to adjust to the new structure of the Financial Planner, as not only we did rename the variable, methods, classes, we also build up our own structure for the application.
 
-* *Major enhancements*: Added the feature that allows users to display a summary of their expensive
-** `Reason for enhancement`:
-** `Overview`:
-** `My contributions`:
+* *Major enhancements*: Added the feature that allows the user delete all the record whose date is required.
+** `Reason for enhancement`: As this application is designed for daily expense management and in case when user type in wrong date at the beginning. This feature allows user to delete multiple records at the same time, compared to the original delete one record at the time.
+** `Overview`: This requires a in-depth knowledge for the Internal List structure building up the list of records, and pointer when looping through the list and deleting records.
+** `My contributions`: I wrote the code for the command, parser, tests. The coverage for these class is 100%.
 
 * *Major enhancements*:
 ** `Reason for enhancement`:

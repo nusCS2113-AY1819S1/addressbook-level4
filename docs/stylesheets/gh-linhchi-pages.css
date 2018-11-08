@@ -1,10 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat|Open+Sans);
-@import "boot-darkly.css"; /* Default asciidoc style framework - important */
+@import "ubuntu.css"; /* Default asciidoc style framework - important */
 
 /* Custom block: details */
 
 .sidebarblock.details > .content {
-    border-left: .25rem solid rgba(0, 0, 0, 0.1);
+    border-left: .25rem solid rgba(0, 153, 153, 153);
 }
 
 .sidebarblock.details > .content {
@@ -21,7 +21,7 @@
 /* Overrides for asciidoctor.css */
 
 a {
-    color: #0074c7;
+    color: #b30047;
 }
 
 h1,
@@ -40,7 +40,7 @@ h5,
 h5 > a.link,
 h6,
 h6 > a.link {
-    color: #0074c7;
+    color: #ff0066;
 }
 
 .subheader,
@@ -62,7 +62,7 @@ table.tableblock > .title,
 .ulist > .title,
 .qlist > .title,
 .hdlist > .title {
-    color: rgb(197, 90, 17);
+    color: rgb(0, 102, 102);
 }
 
 @media screen {
@@ -74,7 +74,7 @@ table.tableblock > .title,
     }
 
     #footer-text {
-        color: #595959;
+        color: #4d0026;
         line-height: 1;
     }
 }
@@ -123,12 +123,12 @@ table.tableblock > .title,
 }
 
 .navbar-light a {
-    color: #595959;
+    color: #4d0026;
 }
 
 .navbar-light a:hover,
 .navbar-light a:focus {
-    color: #000000;
+    color: #009999;
 }
 
 .navbar a.active,
@@ -140,7 +140,7 @@ table.tableblock > .title,
 .navbar-light a.active,
 .navbar-light a.active:hover,
 .navbar-light a.active:focus {
-    color: #000000;
+    color: #009999;
 }
 
 .navbar-light .nav-link {
@@ -148,7 +148,7 @@ table.tableblock > .title,
 }
 
 .navbar-light .nav-link.active {
-    border-bottom: 2px #e46c0a solid;
+    border-bottom: 2px #009999 solid;
 }
 
 .navbar-lg .nav-link.active {
