@@ -5,8 +5,14 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteEventCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -16,6 +22,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -86,6 +93,27 @@ public class EmployeeParser extends CommandsParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommandParser().parse(arguments);
+
+        case AddCommand.COMMAND_WORD:
+            return new InvalidPrivilegeParser().parse(IDENTITY);
+
+        case AddEventCommand.COMMAND_WORD:
+            return new InvalidPrivilegeParser().parse(IDENTITY);
+
+        case EditCommand.COMMAND_WORD:
+            return new InvalidPrivilegeParser().parse(IDENTITY);
+
+        case EditEventCommand.COMMAND_WORD:
+            return new InvalidPrivilegeParser().parse(IDENTITY);
+
+        case DeleteCommand.COMMAND_WORD:
+            return new InvalidPrivilegeParser().parse(IDENTITY);
+
+        case DeleteEventCommand.COMMAND_WORD:
+            return new InvalidPrivilegeParser().parse(IDENTITY);
+
+        case RemoveCommand.COMMAND_WORD:
+            return new InvalidPrivilegeParser().parse(IDENTITY);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
