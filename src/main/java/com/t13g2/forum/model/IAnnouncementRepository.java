@@ -1,4 +1,4 @@
-//@@Meowzz95
+//@@author Meowzz95
 package com.t13g2.forum.model;
 
 import com.t13g2.forum.model.forum.Announcement;

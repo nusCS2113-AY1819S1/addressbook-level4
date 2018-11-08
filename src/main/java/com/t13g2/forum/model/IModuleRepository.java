@@ -1,4 +1,4 @@
-//@@Meowzz95
+//@@author Meowzz95
 package com.t13g2.forum.model;
 
 import java.util.List;
@@ -15,6 +15,8 @@ public interface IModuleRepository {
     void removeModule(Module module);
 
     void removeModule(int moduleId);
+
+    void updateModule(Module module);
 
     Module getModule(int moduleId) throws EntityDoesNotExistException;
 
