@@ -21,7 +21,8 @@ import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryByDateList;
 import seedu.planner.ui.SummaryEntry;
 
-//@author nguyenngoclinhchi
+//@@author nguyenngoclinhchi
+
 /**
  * Export the data of the records within specific period.
  */

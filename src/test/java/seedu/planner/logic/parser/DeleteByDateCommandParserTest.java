@@ -6,7 +6,8 @@ import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.commands.DeleteByDateCommand;
 import seedu.planner.testutil.TypicalDates;
 
-//@author nguyenngoclinhchi
+//@@author nguyenngoclinhchi
+
 public class DeleteByDateCommandParserTest {
     private DeleteCommandByDateEntryParser parser = new DeleteCommandByDateEntryParser();
 

@@ -13,7 +13,8 @@ import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Record;
 
-//@author nguyenngoclinhchi
+//@@author nguyenngoclinhchi
+
 /**
  * Imports all the records given in the Excel file.
  */
