@@ -7,8 +7,11 @@ import com.google.common.eventbus.Subscribe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -60,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem homeMenuItem;
+
+    @FXML
     private StackPane recordListPanelPlaceholder;
 
     @FXML
@@ -93,7 +99,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(helpMenuItem, new KeyCodeCombination(KeyCode.F1));
+        setAccelerator(homeMenuItem, new KeyCodeCombination(KeyCode.HOME));
     }
 
     /**
@@ -120,6 +127,10 @@ public class MainWindow extends UiPart<Stage> {
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+                menuItem.getOnAction().handle(new ActionEvent());
+                event.consume();
+            }
+            if (event.getTarget() instanceof ListView && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
             }
@@ -198,6 +209,17 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Switches the welcome panel to the front and displays it.
+     */
+    @FXML
+    public void handleHome() {
+        for (Node node: mainUiPanelPlaceholder.getChildren()) {
+            node.setVisible(false);
+        }
+        welcomePanel.show();
     }
 
     void show() {
