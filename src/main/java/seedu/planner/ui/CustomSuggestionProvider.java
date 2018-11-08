@@ -15,14 +15,17 @@ import java.util.stream.Stream;
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.AddLimitCommand;
+import seedu.planner.logic.commands.AddMonthlyLimitCommand;
 import seedu.planner.logic.commands.ArchiveCommand;
 import seedu.planner.logic.commands.CheckLimitCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.DeleteByDateCommand;
 import seedu.planner.logic.commands.DeleteCommand;
 import seedu.planner.logic.commands.DeleteLimitCommand;
+import seedu.planner.logic.commands.DeleteMonthlyLimitCommand;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.EditLimitCommand;
+import seedu.planner.logic.commands.EditMonthlyLimitCommand;
 import seedu.planner.logic.commands.ExitCommand;
 import seedu.planner.logic.commands.ExportExcelCommand;
 import seedu.planner.logic.commands.FindCommand;
@@ -50,10 +53,12 @@ public class CustomSuggestionProvider {
     private static final Set<String> commandKeywordsSet =
             new HashSet<>(Arrays.asList(
                     AddCommand.COMMAND_WORD, AddLimitCommand.COMMAND_WORD,
-                    ArchiveCommand.COMMAND_WORD, CheckLimitCommand.COMMAND_WORD,
-                    ClearCommand.COMMAND_WORD, DeleteByDateCommand.COMMAND_WORD,
-                    DeleteCommand.COMMAND_WORD, DeleteLimitCommand.COMMAND_WORD,
+                    AddMonthlyLimitCommand.COMMAND_WORD, ArchiveCommand.COMMAND_WORD,
+                    CheckLimitCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD,
+                    DeleteByDateCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
+                    DeleteLimitCommand.COMMAND_WORD, DeleteMonthlyLimitCommand.COMMAND_WORD,
                     EditCommand.COMMAND_WORD, EditLimitCommand.COMMAND_WORD,
+                    EditMonthlyLimitCommand.COMMAND_WORD,
                     ExitCommand.COMMAND_WORD, ExportExcelCommand.COMMAND_WORD,
                     FindCommand.COMMAND_WORD, FindTagCommand.COMMAND_WORD,
                     HelpCommand.COMMAND_WORD, HistoryCommand.COMMAND_WORD,
@@ -87,6 +92,13 @@ public class CustomSuggestionProvider {
     }
 
     /**
+     * Clears the set of suggestions
+     */
+    private void emptySuggestions() {
+        suggestionProvider.clearSuggestions();
+    }
+
+    /**
      * Clears the current set of suggestions and insert the new set of suggestions
      * @param suggestions is the complete list of strings that can be suggested to the user
      */
@@ -108,7 +120,11 @@ public class CustomSuggestionProvider {
         for (; strIndex < inputs.length && !inputs[strIndex].equals(wordInput); strIndex++);
 
         if (strIndex == 0) {
-            updateSuggestions(commandKeywordsSet);
+            if (!commandKeywordsSet.contains(inputs[strIndex])) {
+                updateSuggestions(commandKeywordsSet);
+            } else {
+                emptySuggestions();
+            }
         } else if (inputs[0].equals(SortCommand.COMMAND_WORD)) {
             if (inputs.length == 2) {
                 updateSuggestions(sortKeywordsSet);
@@ -127,28 +143,28 @@ public class CustomSuggestionProvider {
                     } else if (SortCommand.CATEGORY_SET.contains(inputs[1])) {
                         updateSuggestions(SortCommand.ORDER_SET);
                     } else {
-                        updateSuggestions(emptySet);
+                        emptySuggestions();
                     }
                 }
             } else {
-                updateSuggestions(emptySet);
+                emptySuggestions();
             }
         } else if (possibleTagKeywordsSet.contains(inputs[0])) {
             if (wordInput.startsWith(PREFIX_TAG.getPrefix())) {
                 updateSuggestions(tagsSuggestionSet);
             } else {
-                updateSuggestions(emptySet);
+                emptySuggestions();
             }
         } else if (inputs[0].equals(SummaryCommand.COMMAND_WORD)) {
-            if (inputs.length == 2) {
+            if (strIndex == 1) {
                 updateSuggestions(summaryKeywordsSet);
             } else {
-                updateSuggestions(emptySet);
+                emptySuggestions();
             }
         } else if (inputs[0].equals(FindTagCommand.COMMAND_WORD)) {
             updateSuggestions(tagsSuggestionSet);
         } else {
-            updateSuggestions(emptySet);
+            emptySuggestions();
         }
     }
 
