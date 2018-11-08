@@ -27,6 +27,7 @@ public class EditLimitCommandParser implements Parser <EditLimitCommand> {
     private String [] datesIn; //the string is used to divide two the whole strings into two substrings.
     private Date dateStart;
     private Date dateEnd;
+    private String moneyString;
     @Override
     public EditLimitCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -36,7 +37,13 @@ public class EditLimitCommandParser implements Parser <EditLimitCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLimitCommand.MESSAGE_USAGE));
         }
-        MoneyFlow money = ParserUtil.parseMoneyFlow("-" + argMultimap.getValue(PREFIX_MONEYFLOW).get());
+        moneyString = "-" + argMultimap.getValue(PREFIX_MONEYFLOW).get();
+
+        if (!(MoneyFlow.isValidMoneyFlow(moneyString))) {
+            throw new ParseException("The limit money can only be normal real number. \n"
+                    + "Example: m/100.");
+        }
+        MoneyFlow money = ParserUtil.parseMoneyFlow(moneyString);
         datesIn = argMultimap.getValue(PREFIX_DATE).get().split("\\s+");
         if (datesIn.length == 2) {
             dateStart = ParserUtil.parseDate(datesIn[0]);
