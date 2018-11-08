@@ -415,13 +415,15 @@ The Comand Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `Rep
 
 Given below is an example usage scenario and how the Comments mechanism behaves at each step.
 
-Step 1. The user launches the application, click on an event or types `select INDEX` into the CLI. The comment section will be seen.
+Step 1. The user launches the application, logs in and click on an event or types `select INDEX` into the CLI. The comment section will be seen along with other details in the `BrowserPanel`
 
 Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. `AddCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into `eventmanager.xml`
 
 Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply the comment in step 2. `ReplyCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to reply comment with "Athletic attire", into the comment section and stores the comment section into `eventmanager.xml`
 
 Step 4. The admin executes `deleteComment 1 L/1` to delete a comment at index 1, line 1 of comment section. `DeleteCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to delete "Athletic attire" from the comment section and stores the comment section into `eventmanager.xml`
+
+Step 5. If the admin wants to reset or make a new comment section of an event, the valid command of `edit INDEX C/{span}Comment Section{/span}{ol}{/ol}` can be used
 
 [NOTE]
 ====
@@ -445,17 +447,17 @@ If the user uses the `find` command, the following functions will follow the ind
 ===== Aspect: How comment section is stored
 
 * **Alternative 1 (current choice):** Comment section stored in a single field in `eventmanager.xml`
-** Pros: Easy to parse because one field is used for comment section.
+** Pros: Comment section will be easy to parse because only one field is used for comment section.
 ** Cons: If a developer wants to manipulate specific comments through eventmanager.xml file, there is no functions created for it.
 * **Alternative 2:** Store each comment as a seperate field and extract each comment individually.
 ** Pros: No HTML tags will be stored in the field.
-** Cons: New methods will need to be implemented to make many fields for comments.
+** Cons: New methods or data structures will need to be implemented to make many fields for comments.
 
 ===== Aspect: Data structure to support the comment function commands
 
-* **Alternative 1 (current choice):** Vector is used to store the comment section.
-** Pros: A simple data structure that has vector.add() and vector.delete() to help add comments easily.
-** Cons: Additional code is needed to parse the comment section into a vector.
+* **Alternative 1 (current choice):** A vector is used to store the comment section to add, insert or delete relevant comments.
+** Pros: A simple data structure that has vector.add() and vector.delete() methods to help edit the comment section easily.
+** Cons: Additional method is needed to parse the comment section into a vector.
 * **Alternative 2:** An arrayList or List
 ** Pros: Library functions can help parse the comment section into the arrayList.
 ** Cons: More code is needed to simply insert or delete elements inside the data structure.
