@@ -3,10 +3,12 @@ package seedu.address.logic.parser;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+//@@author: IcedCoffeeBoy
+
 /**
  * Parses user input.
  */
-public class LoginCommandParser {
+public class LoginCommandParser implements Parser<LoginCommand> {
     public static final String KEY_MANAGER = "manager";
     public static final String KEY_EMPLOYEE = "employee";
 

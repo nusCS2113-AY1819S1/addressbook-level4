@@ -6,7 +6,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-
+//@@author: IcedCoffeeBoy
 /**
  * Sort the event list based on the parameters given
  */
@@ -60,5 +60,13 @@ public class SortCommand extends Command {
         }
         model.commitEventList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, key));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortCommand // instanceof handles nulls
+                && key.equals(((SortCommand) other).key));
+
     }
 }

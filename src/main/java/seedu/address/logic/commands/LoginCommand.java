@@ -7,6 +7,8 @@ import seedu.address.logic.parser.EmployeeParser;
 import seedu.address.logic.parser.ManagerParser;
 import seedu.address.model.Model;
 
+//@@author: IcedCoffeeBoy
+
 /**
  * Login the person into ProManage
  */
