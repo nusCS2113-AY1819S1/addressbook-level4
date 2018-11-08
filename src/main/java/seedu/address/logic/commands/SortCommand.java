@@ -1,22 +1,23 @@
 package seedu.address.logic.commands;
 
-import static java.lang.Integer.compare;
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Parameter;
+import seedu.address.model.person.Person;
 
 /**
  * Sorts all persons in the address book by specified criteria.
  */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
-    // public static final String MESSAGE_ARGUMENTS = "Parameter: %1$s";
-    public static final String MESSAGE_SUCCESS = "Sorted as asked";
+    public static final String MESSAGE_ARGUMENTS = "Parameter: %1$s";
+    public static final String MESSAGE_SUCCESS = "Sorted %1$d people";
 
     private final Parameter parameter;
 
@@ -25,10 +26,17 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.getFilteredPersonList().sort(Comparator.comparingInt(o -> o.getSkillLevel().skillLevel));
-        return new CommandResult(MESSAGE_SUCCESS);
+        List<Person> filteredPersonList = new ArrayList<>(model.getFilteredPersonList());
+        filteredPersonList.sort(Comparator.comparingInt(o -> o.getSkillLevel().skillLevel));
+        for (Person person: filteredPersonList) {
+            model.deletePerson(person);
+        }
+        for (Person person: filteredPersonList) {
+            model.addPerson(person);
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filteredPersonList.size()));
     }
 
     @Override
