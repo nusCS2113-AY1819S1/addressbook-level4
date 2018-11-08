@@ -76,7 +76,7 @@ public class CheckPassword {
 
         Label label = new Label("Password");
         final PasswordField pb = new PasswordField();
-        // to be omitted @@author iashcole
+        // TODO: to be omitted @@author iashcole
         // ~start~
         pb.setText("owner");
         // ~end~

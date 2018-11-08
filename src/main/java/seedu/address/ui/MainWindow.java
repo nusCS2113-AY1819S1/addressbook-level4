@@ -52,6 +52,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem fullScreenMenuItem;
+
+    @FXML
     private StackPane bookListPanelPlaceholder;
 
     @FXML
@@ -88,6 +91,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(fullScreenMenuItem, KeyCombination.valueOf("F11"));
     }
 
     /**
@@ -204,6 +208,16 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+        }
+    }
+    /**
+     * Toggles fullscreen in MainWindow
+     */
+    public void handleFullScreen() {
+        if (primaryStage.isFullScreen()) {
+            primaryStage.setFullScreen(false);
+        } else {
+            primaryStage.setFullScreen(true);
         }
     }
 
