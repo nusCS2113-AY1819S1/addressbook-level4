@@ -186,6 +186,7 @@ public class MainApp extends Application {
         EventsCenter.getInstance().registerHandler(this);
     }
 
+    //@@author cqinkai
     /**
      * Starts performing status update for Events listed in event manager by making calls to
      * {@code execute} method for {@code UpdateStatusCommand}.
