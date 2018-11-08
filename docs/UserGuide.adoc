@@ -107,6 +107,7 @@ Examples:
 
 * `login uName/user1 uPass/user1`
 
+// tag::curd[]
 === Listing all the modules : `listModule`
 
 List all the existing modules in the forum book. +
@@ -203,6 +204,7 @@ Format: `deleteComment cId/COMMENT ID`
 Examples:
 
 * `deleteComment cId/1`
+// end::curd[]
 
 // tag::adminManagement[]
 === Announcing new command : `announce`
