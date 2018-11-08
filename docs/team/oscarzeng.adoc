@@ -32,9 +32,7 @@ Detailed information about my contributions is listed below.
 ** What it does: allows the user to set multiple limits for different periods of time or a single day to better manage their spend.
 All the limits will be stored and automatically checked whenever the records were updated.
 The user will be reminded if any of the limits have been exceeded.
-** Justification:This feature improves the product significantly because user will be able to make plans for their expense in advance and store all the limits.
-Since user may need to set limits for multiple periods of time while it is hard to remember all the limits they have set.
-This will help user better control their spend and keep their limits updated.
+** Justification:This feature improves the product significantly because the user no longer .
 This feature is challenging because it requires me to build a storage for limits to store limits' details and read from the storage.
 Besides that, I also need to keep limits' information updated whenever there is a change of records and generate output if any limit has been exceeded.
 ** Highlights: This enhancement is the foundation of all the features below. It affects existing commands, commands to be added in future, and storage. A new xml file will be created to store all the limits. It required an in-depth analysis of design alternatives.
@@ -56,7 +54,20 @@ two dates.
 ** What it does: allows the user to check all the existing limits' condition.
 ** Justification: This feature improves the product significantly because the user is able to check all the limit he/she had set.
 
-=== `completed` *Major enhancement #2*: added the ability to set the monthly limit
+=== `completed` *Major enhancement #2*: added the ability to set the monthly limit.
+
+** What it does: allows the user to set the continuous monthly limit which will always check the total spending for the
+current month. For example, if the limit was set to be 200 at April, the limit will check the total spend for April.
+When the time comes to May, the limit will no longer check April, instead, the limit
+will check the total spend of May until the last second of May.
+The user will be reminded if any of the limits have been exceeded.
+** Justification:This feature improves the product significantly because user will be able to make plans for their expense in advance and store all the limits.
+Since user may need to set limits for multiple periods of time while it is hard to remember all the limits they have set.
+This will help user better control their spend and keep their limits updated.
+This feature is challenging because it requires me to build a storage for limits to store limits' details and read from the storage.
+Besides that, I also need to keep limits' information updated whenever there is a change of records and generate output if any limit has been exceeded.
+** Highlights: This enhancement is the foundation of all the features below. It affects existing commands, commands to be added in future, and storage. A new xml file will be created to store all the limits. It required an in-depth analysis of design alternatives.
+
 
 * *Code contributed*:
 Example:
