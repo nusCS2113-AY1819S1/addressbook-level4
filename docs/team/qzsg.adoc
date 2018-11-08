@@ -24,6 +24,7 @@ The implementation too was challenging as the backing up and restoring of online
 The current implementation exhibits a working knowledge of multithreaded applications, concurrency, event driven programming as well as GUI application design.
 ** Credits: GitHub Api by kohsuke.
 
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=qzsg[Overview]]
 * *Other contributions*:
 
 ** Project management:
