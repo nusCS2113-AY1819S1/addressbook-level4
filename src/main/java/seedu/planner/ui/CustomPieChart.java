@@ -47,12 +47,19 @@ public class CustomPieChart extends PieChart {
      */
     class CustomLegend extends GridPane {
 
+        private static final int defaultVGap = 10;
+        private static final int defaultHGap = 10;
+        private static final int defaultSymbolXPos = 10;
+        private static final int defaultSymbolYPos = 10;
+        private static final int defaultSymbolWidth = 10;
+        private static final int defaultSymbolHeight = 10;
+
         private List<String> labelList;
 
         CustomLegend(PieChart chart, List<Data> pieChartData) {
             labelList = new ArrayList<>();
-            setHgap(10);
-            setVgap(10);
+            setHgap(defaultHGap);
+            setVgap(defaultVGap);
             int index = 0;
             for (Data d : pieChartData) {
                 Label legendText = createLabel(d.getName() + "   " + convertToMoney(d.getPieValue()));
@@ -77,7 +84,7 @@ public class CustomPieChart extends PieChart {
          * Creates the symbol to be placed at the side of the label
          */
         private Node createSymbol(int index) {
-            Shape symbol = new Rectangle(10, 10, 10, 10);
+            Shape symbol = new Rectangle(defaultSymbolXPos, defaultSymbolYPos, defaultSymbolWidth, defaultSymbolHeight);
             symbol.getStyleClass().add(String.format("default-color%d-chart-pie-legend", index % 8));
             return symbol;
         }

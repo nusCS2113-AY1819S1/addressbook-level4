@@ -21,6 +21,9 @@ public class CategoryBreakdown extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(CategoryBreakdown.class);
 
     private static final String FXML = "CategoryBreakdown.fxml";
+    private static final int defaultPrefWidth = 800;
+    private static final int defaultPrefHeight = 400;
+    private static final int defaultLabelLength = 20;
 
     @FXML
     private AnchorPane categoryBreakdown;
@@ -46,13 +49,17 @@ public class CategoryBreakdown extends UiPart<Region> {
     private void initPieChart(String label) {
         pieChart.setTitle(label);
         pieChart.setLabelsVisible(true);
-        pieChart.setLabelLineLength(20);
+        pieChart.setLabelLineLength(defaultLabelLength);
         pieChart.setLegendSide(Side.RIGHT);
 
-        pieChart.setPrefSize(800, 400);
+        pieChart.setPrefSize(defaultPrefWidth, defaultPrefHeight);
         pieChart.setMinSize(Control.USE_PREF_SIZE, Control.USE_PREF_SIZE);
         pieChart.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
+        setAllSideAnchors();
+    }
+
+    private void setAllSideAnchors() {
         AnchorPane.setTopAnchor(pieChart, 0.0);
         AnchorPane.setBottomAnchor(pieChart, 0.0);
         AnchorPane.setRightAnchor(pieChart, 0.0);
