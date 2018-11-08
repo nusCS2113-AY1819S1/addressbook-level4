@@ -1,11 +1,13 @@
 package seedu.address.model.member;
 
-import seedu.address.commons.util.StringUtil;
-
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 
+/**
+ * Major keyword predicate
+ */
 public class MajorContainsKeywordsPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
