@@ -32,7 +32,7 @@ public class ProductDatabase implements ReadOnlyProductDatabase {
     public ProductDatabase() {}
 
     /**
-     * Creates an ProductDatabase using the Persons in the {@code toBeCopied}
+     * Creates an ProductDatabase using the products in the {@code toBeCopied}
      */
     public ProductDatabase(ReadOnlyProductDatabase toBeCopied) {
         this();
@@ -47,7 +47,7 @@ public class ProductDatabase implements ReadOnlyProductDatabase {
      * {@code products} must not contain duplicate products.
      */
     public void setProducts(List<Product> products) {
-        this.products.setPersons(products);
+        this.products.setProducts(products);
     }
 
     //// product-level operations
@@ -63,7 +63,7 @@ public class ProductDatabase implements ReadOnlyProductDatabase {
     /**
      * Returns true if a product with the same identity as {@code product} exists in the address book.
      */
-    public boolean hasPerson(Product product) {
+    public boolean hasProduct(Product product) {
         requireNonNull(product);
         return products.contains(product);
     }
@@ -81,16 +81,16 @@ public class ProductDatabase implements ReadOnlyProductDatabase {
      * {@code target} must exist in the address book.
      * product identity of {@code editedProduct} must not be the same as another existing product in the address book.
      */
-    public void updatePerson(Product target, Product editedProduct) {
+    public void updateProducts(Product target, Product editedProduct) {
         requireNonNull(editedProduct);
-        products.setPerson(target, editedProduct);
+        products.setProduct(target, editedProduct);
     }
 
     /**
      * Removes {@code key} from this {@code ProductDatabase}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Product key) {
+    public void removeProduct(Product key) {
         products.remove(key);
     }
     //// util methods

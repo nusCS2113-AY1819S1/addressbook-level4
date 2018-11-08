@@ -49,8 +49,8 @@ public class Distributor {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both distirubtors of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two distributors.
      */
     public boolean isSameDistributor(seedu.address.model.distributor.Distributor otherDistributor) {
         if (otherDistributor.getDistName() == this.getDistName()
@@ -64,8 +64,8 @@ public class Distributor {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both distribuors have the same identity and data fields.
+     * This defines a stronger notion of equality between two distributors.
      */
     @Override
     public boolean equals(Object other) {

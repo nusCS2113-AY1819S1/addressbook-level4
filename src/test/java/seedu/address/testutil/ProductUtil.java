@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditProductCommand.EditProductDescriptor;
 import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
@@ -19,19 +19,19 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class for Product.
  */
-public class PersonUtil {
+public class ProductUtil {
 
     /**
      * Returns an add command string for adding the {@code product}.
      */
     public static String getAddCommand(Product product) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(product);
+        return AddCommand.COMMAND_WORD + " " + getProductDetails(product);
     }
 
     /**
      * Returns the part of command string for the given {@code product}'s details.
      */
-    public static String getPersonDetails(Product product) {
+    public static String getProductDetails(Product product) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + product.getName().fullName + " ");
         sb.append(PREFIX_SERIAL_NR + product.getSerialNumber().value + " ");
@@ -45,9 +45,9 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditProductDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(EditProductDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getSerialNumber().ifPresent(phone -> sb.append(PREFIX_SERIAL_NR).append(phone.value).append(" "));

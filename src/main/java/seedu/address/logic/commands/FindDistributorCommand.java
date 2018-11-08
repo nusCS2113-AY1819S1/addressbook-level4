@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.distributor.DNameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all distributor in distirubtor book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindDistributorCommand extends Command {

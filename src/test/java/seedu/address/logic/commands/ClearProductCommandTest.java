@@ -14,7 +14,7 @@ import seedu.address.model.TestStorage;
 import seedu.address.model.UserDatabase;
 import seedu.address.model.UserPrefs;
 
-public class ClearCommandTest {
+public class ClearProductCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -24,7 +24,8 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(new TestStorage());
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearProductCommand(),
+                model, commandHistory, ClearProductCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -36,7 +37,8 @@ public class ClearCommandTest {
         expectedModel.resetData(new ProductDatabase());
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearProductCommand(),
+                model, commandHistory, ClearProductCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }

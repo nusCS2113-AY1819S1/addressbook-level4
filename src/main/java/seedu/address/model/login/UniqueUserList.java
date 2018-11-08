@@ -124,12 +124,12 @@ public class UniqueUserList implements Iterable<User> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique users.
+     * Returns true if {@code products} contains only unique users.
      */
-    private boolean usersAreUnique(List<User> persons) {
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSameUser(persons.get(j))) {
+    private boolean usersAreUnique(List<User> products) {
+        for (int i = 0; i < products.size() - 1; i++) {
+            for (int j = i + 1; j < products.size(); j++) {
+                if (products.get(i).isSameUser(products.get(j))) {
                     return false;
                 }
             }

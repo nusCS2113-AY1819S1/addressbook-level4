@@ -31,7 +31,7 @@ public class DistributorBook implements ReadOnlyDistributorBook {
     public DistributorBook() {}
 
     /**
-     * Creates an DistributorBook using the Persons in the {@code toBeCopied}
+     * Creates an DistributorBook using the Distirbutors in the {@code toBeCopied}
      */
     public DistributorBook(ReadOnlyDistributorBook toBeCopied) {
         this();
@@ -41,8 +41,8 @@ public class DistributorBook implements ReadOnlyDistributorBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the product data base with {@code products}.
+     * {@code Distributor} must not contain duplicate Distributors.
      */
     public void setDistributors(List<Distributor> distributors) {
         this.distributors.setDistributors(distributors);
@@ -59,7 +59,7 @@ public class DistributorBook implements ReadOnlyDistributorBook {
     //// product-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code distributor} exists in the address book.
+     * Returns true if a distributor with the same identity as {@code distributor} exists in the distributor book.
      */
     public boolean hasDistributor(Distributor distributor) {
         requireNonNull(distributor);

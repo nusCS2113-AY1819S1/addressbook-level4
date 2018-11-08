@@ -10,7 +10,7 @@ import seedu.address.model.ProductDatabase;
 /**
  * Clears the address book.
  */
-public class ClearCommand extends Command {
+public class ClearProductCommand extends Command {
 
     public static final String COMMAND_WORD = "clearproducts";
     public static final String MESSAGE_SUCCESS = "ProductInfo book has been cleared!";

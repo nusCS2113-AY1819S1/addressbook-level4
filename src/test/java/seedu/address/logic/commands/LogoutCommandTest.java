@@ -44,7 +44,7 @@ public class LogoutCommandTest {
     }
 
     /**
-     * Generates a new AddCommand with the details of the given person.
+     * Generates a new AddCommand with the details of the given products.
      */
     private LogoutCommand getLogoutCommand(Model model) {
         LogoutCommand command = new LogoutCommand();
@@ -115,7 +115,7 @@ public class LogoutCommandTest {
         }
 
         @Override
-        public void addUser(User person) throws DuplicateUserException {
+        public void addUser(User product) throws DuplicateUserException {
             fail("This method should not be called.");
         }
 
@@ -154,7 +154,7 @@ public class LogoutCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Product product) {
+        public boolean hasProduct(Product product) {
             fail("This method should not be called.");
             return false;
         }
@@ -165,12 +165,12 @@ public class LogoutCommandTest {
         }
 
         @Override
-        public void deletePerson(Product product) {
+        public void deleteProduct(Product product) {
             fail("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Product product) {
+        public void addProduct(Product product) {
             fail("This method should not be called.");
         }
 
@@ -185,7 +185,7 @@ public class LogoutCommandTest {
         }
 
         @Override
-        public void updatePerson(Product target, Product editedProduct) {
+        public void updateProduct(Product target, Product editedProduct) {
             fail("This method should not be called.");
         }
 
@@ -239,7 +239,7 @@ public class LogoutCommandTest {
             fail("This method should not be called.");
         }
 
-        public void redoAddressBook() {
+        public void redoProductDatabase() {
             fail("This method should not be called.");
         }
 

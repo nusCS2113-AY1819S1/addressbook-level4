@@ -83,9 +83,9 @@ public class XmlAdaptedProduct {
      * @throws IllegalValueException if there were any data constraints violated in the adapted product
      */
     public Product toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> productTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            productTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -131,7 +131,7 @@ public class XmlAdaptedProduct {
         }
         final RemainingItems modelRemainingItems = new RemainingItems(remainingItems);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(productTags);
         return new Product(modelName, modelSerialNumber,
                 modelDistName, modelProductInfo, modelRemainingItems, modelTags);
     }
@@ -146,12 +146,12 @@ public class XmlAdaptedProduct {
             return false;
         }
 
-        XmlAdaptedProduct otherPerson = (XmlAdaptedProduct) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(serialNumber, otherPerson.serialNumber)
-                && Objects.equals(distributor, otherPerson.distributor)
-                && Objects.equals(info, otherPerson.info)
-                && tagged.equals(otherPerson.tagged)
-              && Objects.equals(remainingItems, otherPerson.remainingItems);
+        XmlAdaptedProduct otherProduct = (XmlAdaptedProduct) other;
+        return Objects.equals(name, otherProduct.name)
+                && Objects.equals(serialNumber, otherProduct.serialNumber)
+                && Objects.equals(distributor, otherProduct.distributor)
+                && Objects.equals(info, otherProduct.info)
+                && tagged.equals(otherProduct.tagged)
+              && Objects.equals(remainingItems, otherProduct.remainingItems);
     }
 }

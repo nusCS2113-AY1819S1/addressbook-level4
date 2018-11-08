@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the product in the {@code model}'s product list at {@code index}.
      */
-    public static Product getPerson(Model model, Index index) {
+    public static Product getProduct(Model model, Index index) {
         return model.getFilteredProductList().get(index.getZeroBased());
     }
 }

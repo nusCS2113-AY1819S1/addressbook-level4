@@ -25,8 +25,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.distributor.Distributor;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code DeleteCommand}.
+ * Contains integration tests (interaction with the Model, UndoProductCommand and RedoProductCommand) and unit tests for
+ * {@code DeleteProductCommand}.
  */
 public class DeleteDistributorCommandTest {
 
@@ -70,15 +70,15 @@ public class DeleteDistributorCommandTest {
         expectedModel.deleteDistributor(distributorToDelete);
         expectedModel.commitDistributorBook();
 
-        // delete -> first person deleted
+        // delete -> first distributor deleted
         deleteDistributorCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
+        // undo -> reverts addressbook back to previous state and filtered distributor list to show all distributors
         expectedModel.undoDistributorBook();
         assertCommandSuccess(new UndoDistributorCommand(), model, commandHistory,
                 UndoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // redo -> same first person deleted again
+        // redo -> same first distributor deleted again
         expectedModel.redoDistributorBook();
         assertCommandSuccess(new RedoDistributorCommand(), model, commandHistory,
                 RedoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
@@ -101,11 +101,12 @@ public class DeleteDistributorCommandTest {
     }
 
     /**
-     * 1. Deletes a {@code Person} from a filtered list.
+     * 1. Deletes a {@code distributor} from a filtered list.
      * 2. Undo the deletion.
-     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted person in the
+     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted distributor in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the person object regardless of indexing.
+     * 4. Redo the deletion. This ensures {@code RedoProductCommand}
+     * deletes the distributor object regardless of indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
@@ -119,15 +120,16 @@ public class DeleteDistributorCommandTest {
         expectedModel.deleteDistributor(distributorToDelete);
         expectedModel.commitDistributorBook();
 
-        // delete -> deletes second person in unfiltered person list / first person in filtered person list
+        // delete -> deletes second distributor
+        // in unfiltered distributor list / first distributor in filtered distributor list
         deleteDistributorCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
+        // undo -> reverts addressbook back to previous state and filtered distributor list to show all distributors
         expectedModel.undoDistributorBook();
         assertCommandSuccess(new UndoDistributorCommand(), model, commandHistory,
                 UndoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // redo -> deletes same second person in unfiltered person list
+        // redo -> deletes same second distributor in unfiltered distributor list
         expectedModel.redoDistributorBook();
         assertCommandSuccess(new RedoDistributorCommand(), model, commandHistory,
                 RedoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
@@ -151,7 +153,7 @@ public class DeleteDistributorCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different distributor -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 

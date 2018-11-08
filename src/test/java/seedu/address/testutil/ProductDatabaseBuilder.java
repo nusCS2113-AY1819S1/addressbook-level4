@@ -7,24 +7,24 @@ import seedu.address.model.product.Product;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code ProductDatabase ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code ProductDatabase ab = new ProductDatabaseBuilder().withProduct("John", "Doe").build();}
  */
-public class AddressBookBuilder {
+public class ProductDatabaseBuilder {
 
     private ProductDatabase productDatabase;
 
-    public AddressBookBuilder() {
+    public ProductDatabaseBuilder() {
         productDatabase = new ProductDatabase();
     }
 
-    public AddressBookBuilder(ProductDatabase productDatabase) {
+    public ProductDatabaseBuilder(ProductDatabase productDatabase) {
         this.productDatabase = productDatabase;
     }
 
     /**
      * Adds a new {@code Product} to the {@code ProductDatabase} that we are building.
      */
-    public AddressBookBuilder withPerson(Product product) {
+    public ProductDatabaseBuilder withProduct(Product product) {
         productDatabase.addProduct(product);
         return this;
     }

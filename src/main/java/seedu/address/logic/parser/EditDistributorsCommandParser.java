@@ -18,13 +18,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditProductCommand object
  */
 public class EditDistributorsCommandParser implements Parser<EditDistributorCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditProductCommand
+     * and returns an EditProductCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */

@@ -32,7 +32,8 @@ import seedu.address.testutil.DistributorBuilder;
 import seedu.address.testutil.EditDistributorDescriptorBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model, UndoProductCommand and RedoProductCommand)
+ * and unit tests for EditProductCommand.
  * @author Denise
  */
 public class EditDistributorCommandTest {
@@ -100,7 +101,7 @@ public class EditDistributorCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicateDistributorUnfilteredList_failure() {
         Distributor firstDistributor = model.getFilteredDistributorList().get(INDEX_FIRST.getZeroBased());
         EditDistributorDescriptor descriptor = new EditDistributorDescriptorBuilder(firstDistributor).build();
         EditDistributorCommand editDistributorCommand = new EditDistributorCommand(INDEX_SECOND, descriptor);
@@ -110,7 +111,7 @@ public class EditDistributorCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
+    public void execute_duplicateDistributorFilteredList_failure() {
         showDistributorAtIndex(model, INDEX_FIRST);
 
         // edit product in filtered list into a duplicate in address book
@@ -124,7 +125,7 @@ public class EditDistributorCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidDistributorIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDistributorList().size() + 1);
         EditDistributorDescriptor descriptor =
                 new EditDistributorDescriptorBuilder().withName(VALID_DIST_NAME_AHBENG).build();
@@ -194,7 +195,7 @@ public class EditDistributorCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ClearProductCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditDistributorCommand(INDEX_SECOND, DESC_AHSENG)));

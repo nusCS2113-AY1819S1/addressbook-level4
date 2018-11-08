@@ -118,14 +118,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Product product) {
+    public boolean hasProduct(Product product) {
         requireNonNull(product);
-        return versionedAddressBook.hasPerson(product);
+        return versionedAddressBook.hasProduct(product);
     }
 
     @Override
-    public void deletePerson(Product target) {
-        versionedAddressBook.removePerson(target);
+    public void deleteProduct(Product target) {
+        versionedAddressBook.removeProduct(target);
         indicateAddressBookChanged();
     }
 
@@ -324,16 +324,16 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Product List Modifiers =================================================================
 
     @Override
-    public void addPerson(Product product) {
+    public void addProduct(Product product) {
         versionedAddressBook.addProduct(product);
-        updateFilteredProductList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(Product target, Product editedProduct) {
+    public void updateProduct(Product target, Product editedProduct) {
         requireAllNonNull(target, editedProduct);
-        versionedAddressBook.updatePerson(target, editedProduct);
+        versionedAddressBook.updateProducts(target, editedProduct);
         indicateAddressBookChanged();
     }
 
@@ -403,7 +403,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void redoAddressBook() {
+    public void redoProductDatabase() {
         versionedAddressBook.redo();
         indicateAddressBookChanged();
     }
