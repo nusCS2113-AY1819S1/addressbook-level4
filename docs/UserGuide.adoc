@@ -51,20 +51,20 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`
+=== Viewing help
 
 Opens up this user guide
 Format: `help`
 
 
-=== Listing all persons : `list`
+=== Listing all persons
 
 Shows a list of all persons in the ClubHub. +
 Format: `list`
 
 
 
-=== Selecting a person : `select`
+=== Selecting a person
 
 Selects the person identified by the index number used in the displayed person list. +
 Format: `select INDEX`
@@ -84,7 +84,7 @@ Selects the 2nd person in ClubHub.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
-=== Listing entered commands : `history`
+=== Listing entered commands
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
@@ -95,7 +95,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo`
+=== Undoing previous command
 
 Restores ClubHub to the state before the previous _undoable_ command was executed. +
 Format: `undo`
@@ -121,7 +121,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo`
+=== Redoing the previously undone command
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -144,22 +144,22 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Undoing all previous commands : `undoAll`
+=== Undoing all previous commands
 
 Restores ClubHub to the state before all previous undoable commands were executed. +
 Format: `undoAll`
 
-=== Redoing all previously undone commands : `redoAll`
+=== Redoing all previously undone commands
 
 Reverses all undo commands. +
 Format: `redoAll`
 
-=== Clearing all entries : `clear`
+=== Clearing all entries
 
 Clears all entries from ClubHub. +
 Format: `clear`
 
-=== Exiting the program : `exit`
+=== Exiting the program
 
 Exits the program. +
 Format: `exit`
@@ -177,7 +177,7 @@ _{explain how the user can enable/disable data encryption}_
 
 == Main Features
 
-=== Members:
+=== Members
 
 ==== Adding a member: `addmember`
 
@@ -207,9 +207,9 @@ Format: `editmember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/POSTALCODE
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
+* `editmember 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
+* `editmember 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ==== Locating members by name: `find`
@@ -289,7 +289,7 @@ Examples:
 * `findpostalcode 609653` +
 Returns member whose postalcode is `609653`
 * `findpostalcode 609653 555555` +
-Returns members whose postalcodes are `97233234 or 84280511`
+Returns members whose postalcodes are `609653 or 555555`
 
 ==== Deleting a member : `delete`
 
@@ -311,7 +311,7 @@ Deletes the 2nd person in ClubHub.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
-=== Accounts:
+=== Accounts
 
 
 The accounts features a ledger column to record the spending of the club
@@ -345,7 +345,7 @@ Example: `debit d/ 10/10 b/ 100`
 
 
 
-=== Calendar:
+=== Calendar
 
 ==== List events: `listEvents`
 Lists all the events sorted by date. +
@@ -443,6 +443,31 @@ Examples:
 * `decreaseItem 2 q/1` +
 Decreases the quantity of the 2nd item by `1`.
 
+==== Locating items by name: `findItem`
+
+Finds items whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `balls` will match `Balls`
+* The order of the keywords does not matter. e.g. `Soccer Balls` will match `Balls Soccer`
+* Only the name is searched.
+* Only full words will be matched e.g. `Ball` will not match `Balls`
+* Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `Soccer Balls` will return `Soccer Boots`, `Tennis Balls`
+****
+
+Examples:
+
+* `find Balls` +
+Returns `balls` and `Soccer Balls`
+* `find White Soccer Balls` +
+Returns any item having names `White`, `Soccer`, or `Balls`
+
+=== Listing all items : `listItems`
+
+Shows a list of all items in the ClubHub. +
+Format: `listItems`
+
 
 == FAQ
 
@@ -479,3 +504,5 @@ e.g.`select 2`
 * *EditItem* : `editItem INDEX [n/ITEM_NAME] [q/ITEM_QUANTITY]…​`
 * *IncreaseItem* : `increaseItem INDEX q/ITEM_QUANTITY`
 * *DecreaseItem* : `decreaseItem INDEX q/ITEM_QUANTITY`
+* *FindItem* : `findItem KEYWORD [MORE_KEYWORDS]`
+* *ListItem* : `listItems`
