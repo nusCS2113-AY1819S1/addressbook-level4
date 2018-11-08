@@ -122,13 +122,13 @@ Examples:
 
 ==== Find a product by tag: `findtag`
 
-Format: `findtag PRODUCT_TAG`
+Format: `findtagproduct PRODUCT_TAG`
 
 Locates products./ that are related to the PRODUCT_TAG entered.
 
 Examples:
 
-* `findtag snack`
+* `findtagproduct snack`
 
 ==== List all products: `listproducts`
 
