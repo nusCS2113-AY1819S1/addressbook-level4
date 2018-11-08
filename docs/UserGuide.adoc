@@ -611,6 +611,7 @@ Format: +
 Examples:
 
 * `import dir/C:\Financial_Planner_ALL.xlsx`
+* `import dir/C:\ n/Financial_Planner_ALL`
 * `import dir/C:\ n/Financial_Planner_All.xlsx`
 
 Please note that User have to add the post-fix `.xlsx` at the end to indicate this is a Excel file.
@@ -942,6 +943,7 @@ e.g. +
 * *Import from Excel file into app* : multiple modes of `import` +
 e.g. +
 . `import dir/C:\Financial_Planner_ALL.xlsx`
+. `import dir/C:\ n/Financial_Planner_ALL`
 . `import dir/C:\ n/Financial_Planner_All.xlsx`
 
 * *Archive records into Excel file* : multiple modes of `archive` +
