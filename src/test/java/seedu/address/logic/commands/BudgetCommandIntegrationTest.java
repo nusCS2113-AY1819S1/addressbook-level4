@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
 import static seedu.address.testutil.TypicalClubBudgetElements.getTypicalClubBudgetElementsBook;
 import static seedu.address.testutil.TypicalFinalClubBudget.getTypicalFinalBudgetsBook;
@@ -15,7 +14,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.budgetelements.ClubBudgetElements;
-import seedu.address.testutil.ClubBudgetElementsBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code BudgetCommand}.
@@ -30,7 +28,7 @@ public class BudgetCommandIntegrationTest {
         model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(),
                 getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(), new UserPrefs());
     }
-/**
+    /**
     @Test
     public void execute_newClubBudgetElements_success() {
         ClubBudgetElements validClub = new ClubBudgetElementsBuilder().build();
