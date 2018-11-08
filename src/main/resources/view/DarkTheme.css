@@ -76,7 +76,7 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 14pt;
     -fx-font-family: Georgia;
     -fx-text-fill: white;
     -fx-alignment: center-left;
