@@ -20,8 +20,7 @@ import javafx.util.StringConverter;
 
 /**
  * This object creates the binding for the auto complete popup to the commandBox
- * and handles whenever there is a change in the user input by updating the suggestions
- * and inserts the new suggested text when selected by the user.
+ * and updates the list of suggestions for the commandbox
  */
 public class NewAutoCompletionBinding<T> {
 
@@ -37,51 +36,28 @@ public class NewAutoCompletionBinding<T> {
     private String suffixText = "";
     private final StringConverter<T> converter = defaultStringConverter();
 
-    /** This listeners observes the position of the caret in the command box and updates the list
-     * of suggestions when there is a change detected. It passes the new input word to the other
-     * methods to compare and match for suggestions.
+    /**
+     * This listener observes the position of the caret in the command box and passed different String
+     * arguments to allow for accurate text suggestions.
      */
     private final ChangeListener<Number> caretChangedListener = (obs, oldPosition, newPosition) -> {
         String newText = getCompletionTarget().getText();
         String inputText;
         String prefix = "";
-        int startIndex = newPosition.intValue();
-        int endIndex = newPosition.intValue();
         if (newPosition.intValue() == newText.length()) {
-            suffixText = "";
-            if (newPosition.intValue() > 0) {
-                startIndex--;
-                for (; startIndex > 0 && !Character.isWhitespace(newText.charAt(startIndex)); startIndex--);
-            }
-            inputText = newText.substring((startIndex == 0) ? startIndex : startIndex + 1);
-            prefixText = newText.substring(0, (startIndex == 0) ? startIndex : startIndex + 1);
+            inputText = caretAtEnd(newPosition, newText);
         } else {
             if (newPosition.intValue() == 0) {
-                prefixText = ""; // necessary to reset parameters
-                suffixText = "";
-                inputText = "";
+                inputText = resetTexts();
             } else {
                 if (Character.isWhitespace(newText.charAt(newPosition.intValue()))
                         && Character.isWhitespace(newText.charAt(newPosition.intValue() - 1))) {
-                    prefixText = "";
-                    suffixText = "";
-                    inputText = "";
+                    inputText = resetTexts();
                 } else {
                     if (Character.isWhitespace(newText.charAt(newPosition.intValue()))) {
-                        startIndex--;
-                        for (; startIndex > 0 && !Character.isWhitespace(newText.charAt(startIndex)); startIndex--);
-                        prefixText = (startIndex == 0) ? "" : newText.substring(0, startIndex + 1);
-
-                        for (; endIndex < newText.length()
-                                && !Character.isWhitespace(newText.charAt(endIndex)); endIndex++);
-                        suffixText = (endIndex == newText.length()) ? "" : newText.substring(endIndex);
-
-                        inputText = newText.substring((startIndex == 0) ? startIndex : startIndex + 1, (
-                                endIndex == newText.length()) ? endIndex : endIndex);
+                        inputText = caretInBetween(newPosition, newText);
                     } else {
-                        prefixText = "";
-                        suffixText = "";
-                        inputText = "";
+                        inputText = resetTexts();
                     }
                 }
             }
@@ -134,6 +110,61 @@ public class NewAutoCompletionBinding<T> {
             }
         });
         init();
+    }
+
+    /**
+     * Splits the input text accordingly when the caret is found to be at the end of the command box
+     * @param newPosition is the current position of the caret
+     * @param newText is the entire input in the command box
+     * @return
+     */
+    private String caretAtEnd(Number newPosition, String newText) {
+        int startIndex = newPosition.intValue();
+        String inputText;
+        suffixText = "";
+        if (newPosition.intValue() > 0) {
+            startIndex--;
+            for (; startIndex > 0 && !Character.isWhitespace(newText.charAt(startIndex)); startIndex--);
+        }
+        inputText = newText.substring((startIndex == 0) ? startIndex : startIndex + 1);
+        prefixText = newText.substring(0, (startIndex == 0) ? startIndex : startIndex + 1);
+        return inputText;
+    }
+
+    /**
+     * Splits the input text when the caret is found in the middle of the string in the command box
+     * and is found at the end of a word.
+     * @param newText
+     * @param newPosition
+     * @return
+     */
+    private String caretInBetween(Number newPosition, String newText) {
+        int startIndex = newPosition.intValue();
+        int endIndex = newPosition.intValue();
+        String inputText;
+        startIndex--;
+        for (; startIndex > 0 && !Character.isWhitespace(newText.charAt(startIndex)); startIndex--);
+        prefixText = (startIndex == 0) ? "" : newText.substring(0, startIndex + 1);
+
+        for (; endIndex < newText.length()
+                && !Character.isWhitespace(newText.charAt(endIndex)); endIndex++);
+        suffixText = (endIndex == newText.length()) ? "" : newText.substring(endIndex);
+
+        inputText = newText.substring((startIndex == 0) ? startIndex : startIndex + 1, (
+                endIndex == newText.length()) ? endIndex : endIndex);
+        return inputText;
+    }
+
+    /**
+     * Reset the text Strings to an empty String when there is no word to autocomplete
+     * @return the Word to be autocompleted
+     */
+    private String resetTexts() {
+        String inputText;
+        prefixText = "";
+        suffixText = "";
+        inputText = "";
+        return inputText;
     }
 
     /**

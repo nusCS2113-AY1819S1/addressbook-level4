@@ -881,7 +881,7 @@ e.g. `add n/Dinner with family d/20-12-2017 m/-10 t/food t/family`
 e.g. +
 .  `list`
 . `list d/20-12-2017`
-. `list d/20-12-2017 31-09-2018`
+. `list d/20-12-2017 30-09-2018`
 
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
@@ -948,7 +948,7 @@ e.g. +
 * *Add limit* : `addlimit d/DATE [DATE] m/MONEYFLOW` +
 e.g. +
 . `addlimit d/20-12-2017`
-. `addlimit d/20-12-2017 31-09-2018`
+. `addlimit d/20-12-2017 30-09-2018`
 
 * *Check limit* : `checklimit d/DATE [DATE]` +
 
@@ -959,8 +959,8 @@ e.g. +
 
 * *Edit limit* `editlimit d/DATE [DATE] m/MONEYFLOW` +
 e.g. +
-. `editLimit d/20-12-2017 m/100`
-. `editLimit d/20-12-2017 31-09-2018 m/100`
+. `editlimit d/20-12-2017 m/100`
+. `editlimit d/20-12-2017 31-09-2018 m/100`
 
 * *Check limit* : `checklimit`
 e.g. +
