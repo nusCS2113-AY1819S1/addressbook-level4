@@ -22,7 +22,7 @@ import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.tag.Tag;
 
-@Ignore("not updated with new UI changes")
+@Ignore
 public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
 
     @Test

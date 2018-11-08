@@ -3,6 +3,7 @@ package seedu.recruit.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_REVERSE;
 
 import seedu.recruit.logic.commands.SortCompanyCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
@@ -25,6 +26,8 @@ public class SortCompanyCommandParser implements Parser<SortCompanyCommand> {
             return new SortCompanyCommand(PREFIX_COMPANY_NAME);
         case "e/":
             return new SortCompanyCommand(PREFIX_EMAIL);
+        case "r/":
+            return new SortCompanyCommand(PREFIX_REVERSE);
         default:
             throw new ParseException(SortCompanyCommand.MESSAGE_TAG_USAGE);
         }

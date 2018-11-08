@@ -43,7 +43,8 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         requireAllNonNull(candidateBook, userPrefs);
 
-        logger.fine("Initializing with recruit book: " + candidateBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with recruit book: " + candidateBook + companyBook
+                + " and user prefs " + userPrefs);
 
         EmailUtil.setEmailSettings(userPrefs.getEmailSettings());
         versionedCandidateBook = new VersionedCandidateBook(candidateBook);
