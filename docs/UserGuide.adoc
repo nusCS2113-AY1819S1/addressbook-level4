@@ -869,6 +869,8 @@ Examples:
 
 === Auto Complete for wider range of inputs and accuracy `[Coming in v2.0]`
 
+===
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +

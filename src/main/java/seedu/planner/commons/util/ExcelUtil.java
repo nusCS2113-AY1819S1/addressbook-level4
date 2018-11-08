@@ -96,16 +96,8 @@ public class ExcelUtil {
             }
             FileInputStream targetFile = new FileInputStream(new File(filePath));
             XSSFWorkbook workbook = new XSSFWorkbook(targetFile);
-            File filexssf = new File(filePath);
-            File filexssfCopy = new File(filePath);
-            if (filexssf.renameTo(filexssfCopy)) {
-                logger.info("READ EXCEL: FILE CLOSED");
-            } else {
-                logger.info("READ EXCEL: FILE OPENED");
-                throw new ParseException(Messages.MESSAGE_FILE_OPENED);
-            }
 
-            boolean isRightSheet = true;
+            boolean isRightSheet;
 
             List<Record> records = new ArrayList<>();
 
