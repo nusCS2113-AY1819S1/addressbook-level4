@@ -13,7 +13,6 @@ public class LogoutCommandParser implements Parser<LogoutCommand> {
             + "\nlogout should not have any params"
             + "\nExample: logout";
 
-
     /**
      * Parses user input into command for execution.
      *
@@ -29,5 +28,4 @@ public class LogoutCommandParser implements Parser<LogoutCommand> {
             throw new ParseException(MESSAGE_INVALID_LOGOUT);
         }
     }
-
 }
