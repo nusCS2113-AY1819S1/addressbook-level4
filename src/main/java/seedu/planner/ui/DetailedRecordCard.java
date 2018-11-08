@@ -4,8 +4,8 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.RecordPanelSelectionChangedEvent;
@@ -23,7 +23,7 @@ public class DetailedRecordCard extends UiPart<Region> implements Switchable {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
-    private GridPane detailedCard;
+    private ScrollPane detailedCard;
 
     @FXML
     private Label dateLabel;

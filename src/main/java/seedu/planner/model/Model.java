@@ -173,4 +173,6 @@ public interface Model {
      * Saves the current financial planner state for undo/redo.
      */
     void commitFinancialPlanner();
+
+    Month getCurrentMonth();
 }

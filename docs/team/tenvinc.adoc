@@ -80,6 +80,9 @@ number of records become very large. Thus, a more specific and user friendly com
 This broke many of the tests, and to preserve the coverage at a high level of 80%, I fixed all the tests relating to storage and combined storage for limitlist and recordlist together which is
 also used by other teammates.
 
+* *Code contributed* can be found here:
+https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tenvinc
+
 === Non-enhancement related contributions
 
 * Project management
