@@ -21,7 +21,7 @@ import seedu.recruit.model.Model;
 
 
 
-@Ignore("not updated with new UI changes")
+@Ignore
 
 public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
 

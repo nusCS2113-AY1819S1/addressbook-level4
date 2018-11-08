@@ -309,7 +309,8 @@ public abstract class CandidateBookSystemTest {
      */
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
-        assertEquals("Welcome to RecruitBook!", getResultDisplay().getText());
+        assertEquals("RecruitBook is password-protected.\n"
+                + "Enter admin password to continue.", getResultDisplay().getText());
         assertListMatching(getCandidateDetailsPanel(), getModel().getFilteredCandidateList());
         assertEquals(Paths.get(".").resolve(testApp.getCandidateStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());

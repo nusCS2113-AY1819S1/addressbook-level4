@@ -64,6 +64,7 @@ include::../UserGuide.adoc[tag=clear]
 |===
 
 include::../DeveloperGuide.adoc[tag=add/delete]
+include::../DeveloperGuide.adoc[tag=undoredo]
 
 
 

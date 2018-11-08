@@ -1,6 +1,9 @@
 package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
+import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_JOBOFFERS;
+import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.ui.ShowShortlistPanelRequestEvent;
@@ -48,6 +51,9 @@ public class ShortlistCandidateInitializationCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        model.updateFilteredCompanyJobList(PREDICATE_SHOW_ALL_JOBOFFERS);
+        model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
         EventsCenter.getInstance().post(new ShowShortlistPanelRequestEvent());
         shortlistStatus = true;
         LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);

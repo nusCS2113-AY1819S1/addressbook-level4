@@ -19,10 +19,7 @@ import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
 import seedu.recruit.logic.commands.ShortlistCandidateCommand;
 
-/**
- * Test scope: similar to {@code DeleteCandidateCommandParserTest}.
- * @see DeleteCandidateCommandParserTest
- */
+
 public class ShortlistCommandParserTest {
 
     private ShortlistParser parser = new ShortlistParser();

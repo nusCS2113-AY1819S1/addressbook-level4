@@ -49,30 +49,29 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
                 if (MainWindow.getDisplayedBook().equals("candidateBook")) {
                     addCandidates(model, emailUtil);
                 } else {
-                    return new CommandResult("ERROR: You can only add candidates!\n" + MESSAGE_USAGE);
+                    return new CommandResult(ADD_RECIPIENTS_ERROR_ONLY_CANDIDATES + MESSAGE_USAGE);
                 }
             } else {
                 if (MainWindow.getDisplayedBook().equals("companyBook")) {
                     addJobOffers(model, emailUtil);
                 } else {
-                    return new CommandResult("ERROR: You can only add job offers!\n" + MESSAGE_USAGE);
+                    return new CommandResult(ADD_RECIPIENTS_ERROR_ONLY_JOB_OFFERS + MESSAGE_USAGE);
                 }
             }
         }
 
         //Generate duplicate string (if any)
-        StringBuilder duplicates = new StringBuilder(
-                "Unable to add the following because it already has been added before:\n");
+        StringBuilder duplicates = new StringBuilder(ADD_RECIPIENTS_DUPLICATE_MESSAGE);
         boolean hasDuplicates = generateDuplicate(emailUtil, duplicates);
 
         //Generate added recipients string
-        StringBuilder recipients = new StringBuilder("Recipients added:\n");
+        StringBuilder recipients = new StringBuilder(ADD_RECIPIENTS_RECIPIENTS_ADDED);
         generateRecipients(emailUtil, recipients);
 
         //Check if both recipients string and duplicate string is empty
-        if (duplicates.toString().equals("Unable to add the following because it already has been added before:\n")
-            && recipients.toString().equals("Recipients added:\n")) {
-            return new CommandResult("ERROR: Nothing was selected!\n" + MESSAGE_USAGE);
+        if (duplicates.toString().equals(ADD_RECIPIENTS_DUPLICATE_MESSAGE)
+            && recipients.toString().equals(ADD_RECIPIENTS_RECIPIENTS_ADDED)) {
+            return new CommandResult(ADD_RECIPIENTS_NOTHING_SELECTED + MESSAGE_USAGE);
         }
 
         //Generate output string

@@ -16,9 +16,10 @@ import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.LogicManager;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
-import seedu.recruit.model.candidate.CandidateContainsKeywordsPredicate;
+import seedu.recruit.model.candidate.CandidateContainsFindKeywordsPredicate;
 
 
 /**
@@ -44,9 +45,9 @@ public class FindCandidateCommand extends Command {
             + PREFIX_TAG + "TAG " + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice" + PREFIX_SALARY + " 2500";
 
-    private final CandidateContainsKeywordsPredicate candidatePredicate;
+    private final CandidateContainsFindKeywordsPredicate candidatePredicate;
 
-    public FindCandidateCommand(CandidateContainsKeywordsPredicate candidatePredicate) {
+    public FindCandidateCommand(CandidateContainsFindKeywordsPredicate candidatePredicate) {
         this.candidatePredicate = candidatePredicate;
     }
 
@@ -54,6 +55,15 @@ public class FindCandidateCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.updateFilteredCandidateList(candidatePredicate);
+
+        if (ShortlistCandidateInitializationCommand.isShortlisting()) {
+            LogicManager.setLogicState(SelectCandidateCommand.COMMAND_LOGIC_STATE);
+            return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                    model.getFilteredCandidateList().size())
+                    + SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST
+                    + SelectCandidateCommand.MESSAGE_USAGE);
+        }
+
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredCandidateList().size()));

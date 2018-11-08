@@ -37,7 +37,8 @@ import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.JobOffer;
-import seedu.recruit.testutil.CandidateContainsKeywordsPredicateBuilder;
+import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
+import seedu.recruit.testutil.CompanyContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
 
@@ -163,7 +164,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the recruit book and the filtered candidate list in the {@code actualModel} remain unchanged <br>
+     * - the recruit book and the filtered candidate/company list in the {@code actualModel} remain unchanged <br>
      * - {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
@@ -190,22 +191,25 @@ public class CommandTestUtil {
         }
     }
 
+
+    // =========================================== CANDIDATE BOOK ============================================== //
+
     /**
      * Updates {@code model}'s filtered list to show only the candidate at the given {@code targetIndex} in the
-     * {@code model}'s recruit book.
+     * {@code model}'s candidate book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCandidateList().size());
         Candidate candidate = model.getFilteredCandidateList().get(targetIndex.getZeroBased());
         final String[] splitName = candidate.getName().fullName.split("\\s+");
-        model.updateFilteredCandidateList(
-                new CandidateContainsKeywordsPredicateBuilder(" n/" + splitName[0]).getCandidatePredicate());
+        model.updateFilteredCandidateList(new CandidateContainsFindKeywordsPredicateBuilder(
+                " n/" + splitName[0]).getCandidatePredicate());
         assertEquals(1, model.getFilteredCandidateList().size());
     }
 
 
     /**
-     * Deletes the first candidate in {@code model}'s filtered list from {@code model}'s recruit book.
+     * Deletes the first candidate in {@code model}'s filtered list from {@code model}'s candidate book.
      */
     public static void deleteFirstPerson(Model model) {
         Candidate firstCandidate = model.getFilteredCandidateList().get(0);
@@ -437,5 +441,20 @@ public class CommandTestUtil {
         public void setEmailUtil(EmailUtil emailUtil) {
             throw new AssertionError("This method should not be called.");
         }
+    }
+
+    // =========================================== COMPANY BOOK ============================================== //
+
+    /**
+     * Updates {@code model}'s filtered list to show only the company at the given {@code targetIndex} in the
+     * {@code model}'s company book.
+     */
+    public static void showCompanyAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyList().size());
+        Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
+        final String[] splitName = company.getCompanyName().value.split("\\s+");
+        model.updateFilteredCompanyList(new CompanyContainsFindKeywordsPredicateBuilder(
+                " c/" + splitName[0]).getCompanyPredicate());
+        assertEquals(1, model.getFilteredCompanyList().size());
     }
 }

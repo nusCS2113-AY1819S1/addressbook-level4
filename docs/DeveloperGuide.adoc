@@ -148,17 +148,24 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/recruit/ui/Ui.java[`Ui.java`]
 
-As illustrated in Figure 5, the UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CandidateDetailsPanel`, `CompanyJobDetailsPanel`, `ShortlistPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+As illustrated in Figure 5, the UI consists of a `MainWindow` that is made up of parts
+e.g.`CommandBox`, `ResultDisplay`, `CandidateDetailsPanel`, `CompanyJobDetailsPanel`,
+`ShortlistPanel`, `MasterCandidateListPanel`, `MasterJobListPanel`, `StatusBarFooter`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-There are 4 placeholders inside `MainWindow` that fills the screen along with the menu bar.
+There are 5 placeholders inside `MainWindow` that fills the screen along with the menu bar.
 
 |============
 |Placeholder | Parts of `MainWindow`
 |commandBoxPlaceholder | `CommandBox`
 | resultDisplayPlaceholder | `ResultDisplay`
 | panelViewPlaceholder | `CandidateDetailsPanel` `CompanyJobDetailsPanel` `ShortlistPanel`
+| masterListPlaceholder | `MasterCandidateListPanel` `MasterJobListPanel`
 | statusbarPlaceholder | `StatusBarFooter`
 |============
+
+In `Company Book`, panelViewPlaceholder holds `CompanyJobDetailsPanel` and `masterListPlaceholder`
+holds `MasterJobListPanel`, while in `Candidate Book`, panelViewPlaceholder holds `CandidateDetailsPanel`
+and masterListPlaceholder holds `MasterCandidateListPanel`.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/recruit/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -300,6 +307,13 @@ Step 3. The user executes ...
 ===== Aspect: How add/delete feature executes
 
 ===== Aspect: Data structure to support the add/delete feature
+* **Alternative 1 (current choice):** Create a new list object to store objects e.g. `UniqueCompanyList`
+** Pros: Easy to implement, allows for manipulation of data within the data structure (e.g) sorting.
+Also allows us to define a stricter form duplicity between objects.
+** Cons: Storing objects in a list makes certain operations O(n) e.g. delete operation searches the whole list to find the exact object to remove from list.
+* **Alternative 2:** Use a HashTable to store objects
+** Pros: Delete operation is O(1). Checking for duplicates before adding is also O(1) since HashTable does not allow duplicates
+** Cons: Can't really manipulate data in the HashTable.
 
 // end::add/delete[]
 
@@ -313,15 +327,15 @@ It implements the following operations to support the checking of keywords with 
 * `keywordsMap#add(String arg)` - Adds a keyword into the `keywordMap` based on the preceding prefix
 
 ===== Candidates
-The `findCandidateCommand` is facilitated by the `CandidateContainsKeywordsPredicate` which implements `Predicate<Candidate>`
+The `findCandidateCommand` is facilitated by the `CandidateContainsFindKeywordsPredicate` which implements `Predicate<Candidate>`
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 ===== Companies
-The `findCompanyCommand` is facilitated by the `CompanyContainsKeywordsPredicate` which implements `Predicate<Company>`
+The `findCompanyCommand` is facilitated by the `CompanyContainsFindKeywordsPredicate` which implements `Predicate<Company>`
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 ===== Job Offers
-The `findJobOfferCommand` is facilitated by the `JobOfferContainsKeywordsPredicate` which implements `Predicate<JobOffer>`
+The `findJobOfferCommand` is facilitated by the `JobOfferContainsFindKeywordsPredicate` which implements `Predicate<JobOffer>`
 and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
 
 [NOTE]
@@ -569,7 +583,9 @@ Unblacklisting a candidate who is not blacklisted will do likewise.
 ==== Current Implementation
 ===== Shortlisting a Candidate
 
-The shortlist mechanism is facilitated by `select`, `selectCompany` and `selectJob` command.
+The shortlist mechanism is facilitated by `selectc`, `selectC` and `selectj` command. The parsing of these commands
+is facilitated by `ShortlistParser`.
+
 It extends `CompanyBook` with a list of shortlisted candidate(s) for each job offer, stored internally as a
 Unique Candidate List called `candidateList`. The reason for storing as a unique list is to prevent duplicated
 candidates from being added into the same `candidateList`.
@@ -599,13 +615,25 @@ Since RecruitBook opens up Candidate Book by default, adding a job offer will au
 [NOTE]
 `candidateList` is empty upon creation of the `Cashier` object.
 
-. User executes `shortlist` command. RecruitBook enters Stage 2 of the shortlisting process to shortlist a candidate for a job offer.
+. User executes `shortlist` command. The view changes from `Company Book` to `ShortlistPanel`.
+`ShortlistPanel` lists out all the candidates, companies and job offers.
+
+. RecruitBook enters Stage 2 of the shortlisting process to shortlist a candidate for a job offer.
 This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
 `cancel` command to exit from the shortlist process. The 5-stage process is described in order below.
 .. `shortlist` -> User initializes the shortlisting process.
-.. `selectCompany x` -> User selects the company of the job offer.
-.. `selectJob x` -> User selects the job offer.
-.. `select x` -> User selects the candidate to shortlist.
+.. `selectC x` -> User selects the company of the job offer.
+[TIP]
+`sortC`, `findC` and `filterC` commands can be used to easily locate the company before selecting it.
+
+.. `selectj x` -> User selects the job offer.
+[TIP]
+`sortj` command can be used to easily locate the job offer before selecting it.
+
+.. `selectc x` -> User selects the candidate to shortlist.
+[TIP]
+`sortc`, `findc` and `filterc` commands can be used to easily locate the candidate before selecting.
+
 .. `confirm` -> User confirms the above inputs.
 
 . RecruitBook proceeds to add shortlisted candidate through `Model`.
@@ -619,12 +647,25 @@ You can access this list by calling `selectedJob.getUniqueCandidateList()`.
 . `model.commitCompanyBook()` is then called to indicate that Company Book has been changed.
 . RecruitBook exits the shortlisting process and returns your view to your last viewed book.
 
+The following sequence diagram shows how the shortlist operation works:
+
+image::shortlistSequenceDiagram.png[width="800"]
+
+The following activity diagram summarizes what happens when a user executes `shortlist` command:
+
+image::shortlistActivityDiagram.png[width="650"]
+
 ===== Deleting a Shortlisted Candidate
 
 Deletion of a shortlisted candidate uses similar implementation as <<Shortlisting a Candidate>>.
 
-The shortlist mechanism is facilitated by `selectCompany` and `selectJob` command.
+The shortlist mechanism is facilitated by `selectC` and `selectj` command. The parsing of these commands
+is facilitated by `ShortlistParser`.
+
 It deletes a shortlisted candidate from the `candidateList` through `Model`.
+[NOTE]
+Deleting a shortlisted candidate does not delete the candidate from `Candidate Book`. It simply
+removes the candidate from the list of shortlisted candidates for that particular job offer.
 
 It is a 4-stage process supported by `LogicManager` by keeping track of the `LogicState`.
 
@@ -651,8 +692,14 @@ will automatically switch the view to Company Book.
 This is implemented by `LogicManager` where `setLogicState` is called in each stage to connect one after another. User will need to execute
 `cancel` command to exit from the shortlist process. The 4-stage process is described in order below.
 .. `deleteShortlist` -> User initializes the deleting process.
-.. `selectCompany x` -> User selects the company of the job offer.
-.. `selectJob x` -> User selects the job offer.
+.. `selectC x` -> User selects the company of the job offer.
+[TIP]
+`sortC`, `findC` and `filterC` commands can be used to easily locate the company before selecting it.
+
+.. `selectj x` -> User selects the job offer.
+[TIP]
+`sortj` command can be used to easily locate the job offer before selecting it.
+
 .. `delete x` -> User selects the candidate to delete.
 
 . RecruitBook proceeds to delete the shortlisted candidate through `Model`.
@@ -667,11 +714,15 @@ this command returns a message to be displayed to inform the user.
 . `model.commitCompanyBook()` is then called to indicate that Company Book has been changed.
 . RecruitBook exits the deleting process.
 
+The following activity diagram summarizes what happens when a user executes `deleteShortlist` command:
+
+image::deleteShortlistActivityDiagram.png[width="650"]
+
 ==== Design Considerations
 
 ===== Aspect: How shortlist feature executes
 
-* **Alternative 1 (current choice):** Use existing `select`, `selectCompany` and `selectJob` commands.
+* **Alternative 1 (current choice):** Use existing `selectc`, `selectC` and `selectj` commands.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Shortlist command executes the 5-stage process by itself.
@@ -706,7 +757,8 @@ MainWindow knows an event is posted because it is subscribed to the event bus `c
 handle any event that matches the parameter of the handling methods in `MainWindow` class.
 For example, `SwitchBookRequestEvent` will match with the `handleSwitchBookEvent(*SwitchBookRequestEvent* event)` as the parameter matches.
 
-As mentioned <<UI component, above>>, inside MainWindow, there are 4 placeholders and the panelViewPlaceholder holds the panels `CandidateDetailsPanel` and `CompanyJobDetailsPanel`.
+As mentioned <<UI component, above>>, inside MainWindow, there are 5 placeholders and
+the panelViewPlaceholder can hold either `CandidateDetailsPanel`, `CompanyJobDetailsPanel` or `ShortlistPanel`.
 
 The methods `switchToCandidateBook` and `switchToCompanyBook` work by placing the desired panel in panelViewPlaceholder, to be shown on the MainWindow.
 
@@ -751,7 +803,7 @@ for better integrity purposes.
 and returning false if the current book is Company Book.
 ** Pros: Eliminates the possibility of misspelling the books.
 ** Cons: Can be confusing for multiple contributors. There is also an assumption that there are only 2 distinct
-cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `shortlistPanel`.
+cases of the view of `panelViewPlaceholder`, which is not the case as we introduced another view `ShortlistPanel`.
 // end::switch[]
 
 // tag::email[]
@@ -830,8 +882,8 @@ In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCa
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
-
-The undo/redo mechanism is facilitated by `VersionedCandidateBook`.
+===== CandidateBook
+The undo/redo mechanism for changes made to CandidateBook is facilitated by `VersionedCandidateBook`.
 It extends `CandidateBook` with an undo/redo history, stored internally as an `candidateBookStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
@@ -841,24 +893,36 @@ Additionally, it implements the following operations:
 
 These operations are exposed in the `Model` interface as `Model#commitCandidateBook()`, `Model#undoCandidateBook()` and `Model#redoCandidateBook()` respectively.
 
+===== CompanyBook
+
+The undo/redo mechanism for changes made to CompanyBook is facilitated by `VersionedCompanyBook`.
+It extends `CompanyBook` with an undo/redo history, stored internally as an `companyBookStateList` and `currentStatePointer`.
+Additionally, it implements the following operations:
+
+* `VersionedCompanyBook#commit()` -- Saves the current company book state in its history.
+* `VersionedCompanyBook#undo()` -- Restores the previous company book state from its history.
+* `VersionedCompanyBook#redo()` -- Restores a previously undone company book state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitCompanyBook()`, `Model#undoCompanyBook()`
+
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedCandidateBook` will be initialized with the initial candidate book state, and the `currentStatePointer` pointing to that single candidate book state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th candidate in the candidate book. The `delete` command calls `Model#commitCandidateBook()`, causing the modified state of the candidate book after the `delete 5` command executes to be saved in the `candidateBookStateList`, and the `currentStatePointer` is shifted to the newly inserted candidate book state.
+Step 2. The user executes `deletec 5` command to delete the 5th candidate in the candidate book. The `deletec` command calls `Model#commitCandidateBook()`, causing the modified state of the candidate book after the `deletec 5` command executes to be saved in the `candidateBookStateList`, and the `currentStatePointer` is shifted to the newly inserted candidate book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `addc n/David ...` to add a new candidate. The `add` command also calls `Model#commitCandidateBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
+Step 3. The user executes `addc`, `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitCandidateBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitCandidateBook()`, so the candidate book state will not be saved into the `candidateBookStateList`.
 
-Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCandidateBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
+Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undoc` command. The `undoc` command will call `Model#undoCandidateBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
@@ -869,16 +933,16 @@ The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoCandidateBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the candidate book to that state.
+The `redoc` command does the opposite -- it calls `Model#redoCandidateBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the candidate book to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `candidateBookStateList.size() - 1`, pointing to the latest candidate book state, then there are no undone candidate book states to restore. The `redo` command uses `Model#canRedoCandidateBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `candidateBookStateList.size() - 1`, pointing to the latest candidate book state, then there are no undone candidate book states to restore. The `redoc` command uses `Model#canRedoCandidateBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the candidate book, such as `list`, will usually not call `Model#commitCandidateBook()`, `Model#undoCandidateBook()` or `Model#redoCandidateBook()`. Thus, the `candidateBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `listc`. Commands that do not modify the candidate book, such as `listc`, will usually not call `Model#commitCandidateBook()`, `Model#undoCandidateBook()` or `Model#redoCandidateBook()`. Thus, the `candidateBookStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitCandidateBook()`. Since the `currentStatePointer` is not pointing at the end of the `candidateBookStateList`, all candidate book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clearc`, which calls `Model#commitCandidateBook()`. Since the `currentStatePointer` is not pointing at the end of the `candidateBookStateList`, all candidate book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
