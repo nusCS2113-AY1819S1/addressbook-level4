@@ -9,14 +9,13 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import javafx.geometry.Pos;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
+import seedu.address.model.member.Major;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Person;
 import seedu.address.model.member.Phone;
-import seedu.address.model.member.Major;
 import seedu.address.model.member.Postalcode;
 import seedu.address.model.tag.Tag;
 
@@ -54,7 +53,8 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given member details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, String postalcode, String major, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address, String postalcode,
+                            String major, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -127,7 +127,8 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (postalcode == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Postalcode.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Postalcode.class.getSimpleName()));
         }
         if (!Postalcode.isValidPostalcode(postalcode)) {
             throw new IllegalValueException(Postalcode.MESSAGE_POSTALCODE_CONSTRAINTS);
@@ -143,7 +144,7 @@ public class XmlAdaptedPerson {
         final Major modelMajor = new Major(major);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress,modelPostalcode, modelMajor, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPostalcode, modelMajor, modelTags);
     }
 
     @Override
