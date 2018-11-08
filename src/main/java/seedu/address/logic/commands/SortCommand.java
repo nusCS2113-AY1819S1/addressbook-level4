@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,16 +18,11 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_ARGUMENTS = "Parameter: %1$s";
     public static final String MESSAGE_SUCCESS = "Sorted %1$d people";
-    private static Predicate<Person> predicate;
 
     private final Parameter parameter;
 
     public SortCommand(Parameter parameter) {
         this.parameter = parameter;
-    }
-
-    public static void setPredicateForSort(Predicate<Person> sortPredicate) {
-        predicate = sortPredicate;
     }
 
     @Override
@@ -46,7 +40,6 @@ public class SortCommand extends Command {
         for (Person person: filteredPersonList) {
             model.addPerson(person);
         }
-        model.executeSearch(predicate);
         return new CommandResult(String.format(MESSAGE_SUCCESS, filteredPersonList.size()));
     }
 

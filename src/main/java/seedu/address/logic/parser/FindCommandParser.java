@@ -9,7 +9,6 @@ import java.util.List;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameSubCommand;
 import seedu.address.logic.commands.FindTagSubCommand;
-import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -45,18 +44,14 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (isExcludeTagSearch(argumentsList)) {
             removesFirstTwoItemsFromArgumentsList(argumentsList);
-            SortCommand.setPredicateForSort(new TagContainsKeywordsPredicate(argumentsList));
             return new FindTagSubCommand(new TagContainsKeywordsPredicate(argumentsList), true);
         } else if (isIncludeTagSearch(argumentsList)) {
             argumentsList.remove(0);
-            SortCommand.setPredicateForSort(new TagContainsKeywordsPredicate(argumentsList));
             return new FindTagSubCommand(new TagContainsKeywordsPredicate(argumentsList));
         } else if (isExcludePersonSearch(argumentsList)) {
             argumentsList.remove(0);
-            SortCommand.setPredicateForSort(new NameContainsKeywordsPredicate(argumentsList));
             return new FindNameSubCommand(new NameContainsKeywordsPredicate(argumentsList), true);
         } else {
-            SortCommand.setPredicateForSort(new NameContainsKeywordsPredicate(argumentsList));
             return new FindNameSubCommand(new NameContainsKeywordsPredicate(argumentsList));
         }
     }
