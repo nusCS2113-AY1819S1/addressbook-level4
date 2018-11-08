@@ -81,11 +81,6 @@
         </SplitPane>
           </ScrollPane>
         </StackPane>
-        <StackPane fx:id="browserPlaceholder" prefWidth="340" prefHeight="200" >
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-        </StackPane>
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

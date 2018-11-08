@@ -24,10 +24,14 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ledger.AddLedgerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ledger.Ledger;
 import seedu.address.model.member.NameContainsKeywordsPredicate;
 import seedu.address.model.member.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.LedgerBuilder;
+import seedu.address.testutil.LedgerUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -213,5 +217,12 @@ public class AddressBookParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
+    }
+
+    @Test
+    public void parseCommand_addLedger_throwsParseException() throws Exception {
+        Ledger ledger = new LedgerBuilder().build();
+        AddLedgerCommand command = (AddLedgerCommand) parser.parseCommand(LedgerUtil.getAddLedgerCommand(ledger));
+        assertEquals(new AddLedgerCommand(ledger), command);
     }
 }

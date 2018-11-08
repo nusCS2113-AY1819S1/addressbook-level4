@@ -1,10 +1,10 @@
 package seedu.address.model.ledger;
 
-import seedu.address.commons.core.LogsCenter;
-
 import java.util.logging.Logger;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents a Ledger in the Club Book

@@ -1,5 +1,8 @@
 package seedu.address.logic.parser.ledger;
 
+import java.util.logging.Logger;
+import java.util.stream.Stream;
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
@@ -11,13 +14,9 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 import seedu.address.model.ledger.Account;
 import seedu.address.model.ledger.DateLedger;
 import seedu.address.model.ledger.Ledger;
-
-import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 /**
  * Parses input command arguments and creates a new addLedgerCommand object
@@ -37,7 +36,7 @@ public class AddLedgerCommandParser implements Parser<AddLedgerCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE);
 
-        if(!arePrefixesPresent(argMultimap, PREFIX_DATE) /*|| argMultimap.getPreamble().isEmpty()*/) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE) /*|| argMultimap.getPreamble().isEmpty()*/) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLedgerCommand.MESSAGE_USAGE));
         }
 
