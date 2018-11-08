@@ -22,11 +22,8 @@ import seedu.planner.ui.SummaryEntry;
 public class SummaryByDateList extends SummaryList {
     private HashMap<Date, Summary<Date>> summaryMap = new HashMap<>();
 
-    private MoneyFlow total = new MoneyFlow("-0");
-    private MoneyFlow totalIncome = new MoneyFlow("-0");
-    private MoneyFlow totalExpense = new MoneyFlow("-0");
-
     public SummaryByDateList(List<Record> recordList) {
+        super();
         requireNonNull(recordList);
         for (Record r : recordList) {
             addRecordToMap(r);
