@@ -1,12 +1,13 @@
-package seedu.address.commons.util;
+package seedu.address.model.distribute;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.util.DistributeUtil.GROUP_LOCATION;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_FLAG_WORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_FEMALE;
+import static seedu.address.model.distribute.DistributeUtil.GROUP_LOCATION;
 import static seedu.address.model.person.Gender.VALID_GENDER_MALE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
@@ -27,11 +28,16 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.VersionedAddressBook;
+import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
@@ -40,6 +46,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.GroupBuilder;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 public class DistributeUtilTest {
@@ -79,11 +86,6 @@ public class DistributeUtilTest {
         Collections.shuffle(allPersonList, stubSeed);
         assertTrue(distUtil.shuffle(allPersonList, stubSeed).equals(allPersonList));
 
-    }
-
-    @Test
-    public void createNationalityMapTest() {
-        //create a stub
     }
 
     @Test
@@ -174,16 +176,6 @@ public class DistributeUtilTest {
     }
 
     @Test
-    public void selectiveDistributionByGenderTest() {
-
-    }
-
-    @Test
-    public void selectiveDistributionByNationalityTest() {
-
-    }
-
-    @Test
     public void filterGenderTest() {
         ObservableList<Person> allStubPerson = setUpObservableListStub();
         LinkedList<Person> allPerson = new LinkedList<>(allStubPerson);
@@ -223,8 +215,13 @@ public class DistributeUtilTest {
     }
 
     @Test
-    public void existDuplicateGroupTest() {
+    public void existDuplicateGroupTest() throws CommandException {
+        Group stubGroup = new GroupBuilder().withGroupName("TestGroup").build();
+        CreateGroupCommand createGroupCommand = new CreateGroupCommand(stubGroup);
+        createGroupCommand.execute(model, commandHistory);
+        assertTrue(distUtil.doesDuplicateGroupExist("TestGroup", model));
 
+        assertFalse(distUtil.doesDuplicateGroupExist("CS2113Group", model));
     }
 
     @Test
@@ -250,11 +247,6 @@ public class DistributeUtilTest {
     }
 
     @Test
-    public void doesGroupNameExistTest() {
-
-    }
-
-    @Test
     public void groupBuilderTest() {
         //check if groupName is null
         Assert.assertThrows(NullPointerException.class, () -> distUtil.groupBuilder(null));
@@ -275,21 +267,86 @@ public class DistributeUtilTest {
         //check if model is null
         Group expectedGroup = new Group(new GroupName("TestGroup"), new GroupLocation("UNKNOWN"), new HashSet<>());
         Assert.assertThrows(NullPointerException.class, () -> distUtil.createGroupWithoutCommit(expectedGroup, null));
-        //TODO
+
+        //check if VersionAddressBook updates if createGroupWithoutCommit is ran
+        //it should not update
+        VersionedAddressBook currentVersion = ((ModelManager) model).getVersionedAddressBook();
+        Group stubGroup = new GroupBuilder().build();
+        distUtil.createGroupWithoutCommit(stubGroup, model);
+        VersionedAddressBook expectedVersion = ((ModelManager) model).getVersionedAddressBook();
+        assertEquals(expectedVersion, currentVersion);
+
+        //add a new group with commit
+        //it should update and fail.
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        currentVersion = ((ModelManager) model).getVersionedAddressBook();
+        VersionedAddressBook copyOfCurrentVersion = new VersionedAddressBook(currentVersion);
+        Group commitGroup = new GroupBuilder().withGroupName("CommitedGroup").build();
+        CreateGroupCommand createGroupCommand = new CreateGroupCommand(commitGroup);
+        createGroupCommand.execute(model, commandHistory);
+        expectedVersion = ((ModelManager) model).getVersionedAddressBook();
+        assertNotEquals(expectedVersion, copyOfCurrentVersion);
+
+        //if undo is ran, the version should be the same.
+        expectedVersion.undo();
+        assertEquals(expectedVersion.toString(), copyOfCurrentVersion.toString());
     }
 
     @Test
-    public void addPersonIntoGroupWithoutCommitTest() {
+    public void addPersonIntoGroupWithoutCommitTest() throws CommandException {
         //check if addGroup is null
         Assert.assertThrows(NullPointerException.class, () -> distUtil.addPersonIntoGroupWithoutCommit(null, model));
 
-        //check if model is null
-        //Group newGroup = distUtil.groupBuilder();
-        //AddGroup expectedGroup = new AddGroup(distUtil.returnGroupIndex(newGroup, model)
-        // , new HashSet<>().add(Index.fromZeroBased(3)));
-        //Assert.assertThrows(NullPointerException.class, () -> distUtil
-        // .addPersonIntoGroupWithoutCommit(expectedGroup, null));
-        //TODO
+        //check if VersionAddressBook updates if addPersonIntoGroupWithoutCommit
+        //It should not update.
+        //Creating a Group for person to be added into.
+        Group stubGroup = new GroupBuilder().build();
+        CreateGroupCommand createGroupCommand = new CreateGroupCommand(stubGroup);
+        createGroupCommand.execute(model, commandHistory);
+        //Creating the Person Object
+        Person stubPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(stubPerson);
+        addCommand.execute(model, commandHistory);
+
+        VersionedAddressBook currentVersion = ((ModelManager) model).getVersionedAddressBook();
+        //copyOfCurrentVersion should store the pointer where only group is created.
+        VersionedAddressBook copyOfCurrentVersion = new VersionedAddressBook(currentVersion);
+        Index groupIndex = distUtil.returnGroupIndex(stubGroup, model);
+        Index personIndex = distUtil.returnPersonIndex(stubPerson, model);
+        Set<Index> personIndices = new HashSet<>();
+        personIndices.add(personIndex);
+        //Creating the AddGroup Object
+        AddGroup addGroup = new AddGroup(groupIndex, personIndices);
+        //addPersonIntoGroupWithoutCommit will add the person into the group
+        distUtil.addPersonIntoGroupWithoutCommit(addGroup, model);
+        //Pointer should not update as it does not commit.
+        VersionedAddressBook expectedVersion = ((ModelManager) model).getVersionedAddressBook();
+        //Check if pointer is still the same.
+        assertEquals(expectedVersion.toString(), copyOfCurrentVersion.toString());
+
+        // New Test Case:
+        // Test if add using the default way(commit) will result in different results.
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        VersionedAddressBook version = ((ModelManager) model).getVersionedAddressBook();
+        VersionedAddressBook updatedVersion = new VersionedAddressBook(version);
+        //Create Group
+        stubGroup = new GroupBuilder().build();
+        createGroupCommand = new CreateGroupCommand(stubGroup);
+        createGroupCommand.execute(model, commandHistory);
+        groupIndex = distUtil.returnGroupIndex(stubGroup, model);
+        Person newPerson = new PersonBuilder().withName("TsuTsuWeiKuan").withNationality("CN").withGender("M")
+                .withEmail("tsuweikuan@zoho.com").build();
+        addCommand = new AddCommand(newPerson);
+        addCommand.execute(model, commandHistory);
+        personIndex = distUtil.returnPersonIndex(newPerson, model);
+        personIndices = new HashSet<>();
+        personIndices.add(personIndex);
+        //Creating the AddGroup Object
+        addGroup = new AddGroup(groupIndex, personIndices);
+        AddGroupCommand addGroupCommand = new AddGroupCommand(addGroup);
+        addGroupCommand.execute(model, commandHistory);
+        expectedVersion = ((ModelManager) model).getVersionedAddressBook();
+        assertNotEquals(expectedVersion, updatedVersion);
     }
 
     @Test
@@ -313,9 +370,5 @@ public class DistributeUtilTest {
                 .withTags("morning").build();
         assertEquals(distUtil.returnGroupIndex(missingGroup, model), expectedIndex);
 
-    }
-
-    @Test
-    public void distributeProcessTest() {
     }
 }
