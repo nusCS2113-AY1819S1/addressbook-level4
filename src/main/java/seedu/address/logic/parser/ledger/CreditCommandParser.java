@@ -7,7 +7,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ledger.Account;
 import seedu.address.model.ledger.DateLedger;
 
 import java.util.stream.Stream;
