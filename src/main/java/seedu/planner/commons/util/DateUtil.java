@@ -38,6 +38,7 @@ public class DateUtil {
         }
     }
 
+    //@author tztzt
     /**
      * Checks if the year is Leap Year or not.
      * @param year
@@ -52,6 +53,7 @@ public class DateUtil {
             return year % 4 == 0;
         }
     }
+    //@author
 
     /**
      * Checks whether a {@code Date} is earlier than another given {@code Date}

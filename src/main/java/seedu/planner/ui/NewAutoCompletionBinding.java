@@ -18,6 +18,7 @@ import javafx.scene.control.Skin;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 
+//@author tztzt
 /**
  * This object creates the binding for the auto complete popup to the commandBox
  * and updates the list of suggestions for the commandbox
@@ -134,8 +135,8 @@ public class NewAutoCompletionBinding<T> {
     /**
      * Splits the input text when the caret is found in the middle of the string in the command box
      * and is found at the end of a word.
-     * @param newText
-     * @param newPosition
+     * @param newPosition is the current position of the caret
+     * @param newText is the entire input in the command box
      * @return
      */
     private String caretInBetween(Number newPosition, String newText) {

@@ -44,6 +44,7 @@ import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
 
+//@author tztzt
 /**
  *  This object is responsible for the logic behind the {@code AutoCompleteBox} that decides the range of possible
  *  suggested texts that are to appear whenever a user enters a new word.
