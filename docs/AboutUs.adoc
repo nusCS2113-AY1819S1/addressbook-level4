@@ -29,7 +29,7 @@ Responsibilities: <tbc>
 '''
 
 === Lim Xuan Hao
-image::Lunastryke.png[width="150", align="left"]
+image::lunastryke.png[width="150", align="left"]
 {empty}[http://github.com/Lunastryke[github]] [<<johndoe#, portfolio>>]
 
 Role: Documentation +
@@ -38,7 +38,7 @@ Responsibilities: Git Expert
 '''
 
 === Liu Tianhang
-image::LIU-TIANHANG.png[width="150", align="left"]
+image::liu-tianhang.png[width="150", align="left"]
 {empty}[http://github.com/LIU-TIANHANG[github]] [<<tianhang#, portfolio>>]
 
 Role: <tbc> +
