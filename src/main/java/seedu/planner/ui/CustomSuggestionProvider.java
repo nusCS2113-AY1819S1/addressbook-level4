@@ -140,7 +140,7 @@ public class CustomSuggestionProvider {
                 updateSuggestions(emptySet);
             }
         } else if (inputs[0].equals(SummaryCommand.COMMAND_WORD)) {
-            if (inputs.length == 2) {
+            if (strIndex == 1) {
                 updateSuggestions(summaryKeywordsSet);
             } else {
                 updateSuggestions(emptySet);
