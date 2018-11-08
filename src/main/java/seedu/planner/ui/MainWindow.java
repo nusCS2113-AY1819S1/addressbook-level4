@@ -249,6 +249,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        recordListPanel.unselect();
         for (Node node: mainUiPanelPlaceholder.getChildren()) {
             node.setVisible(false);
         }
@@ -258,6 +259,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowPieCharStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        recordListPanel.unselect();
         for (Node node: mainUiPanelPlaceholder.getChildren()) {
             node.setVisible(false);
         }
@@ -278,6 +280,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleUpdateWelcomePanelEvent(UpdateWelcomePanelEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        recordListPanel.unselect();
         for (Node node: mainUiPanelPlaceholder.getChildren()) {
             node.setVisible(false);
         }
