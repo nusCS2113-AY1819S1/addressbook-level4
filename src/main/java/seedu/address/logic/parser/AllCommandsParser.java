@@ -6,43 +6,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddDistributorCommand;
-import seedu.address.logic.commands.AddReminderCommand;
-import seedu.address.logic.commands.AddTransactionCommand;
-import seedu.address.logic.commands.ChangePasswordCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ClearDistributorsCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteDistributorCommand;
-import seedu.address.logic.commands.DeregisterCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditDistributorCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindDistributorCommand;
-import seedu.address.logic.commands.FindTagCommand;
-import seedu.address.logic.commands.FindTagDistributorCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListDistributorCommand;
-import seedu.address.logic.commands.LoginCommand;
-import seedu.address.logic.commands.LogoutCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.RedoDistributorCommand;
-import seedu.address.logic.commands.RegisterCommand;
-import seedu.address.logic.commands.RemoveReminderCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.ThreadDueRemindersCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.UndoDistributorCommand;
-import seedu.address.logic.commands.ViewAllRemindersCommand;
-import seedu.address.logic.commands.ViewAllTransactionsInDayCommand;
-import seedu.address.logic.commands.ViewDueRemindersCommand;
-import seedu.address.logic.commands.ViewLastTransactionCommand;
-import seedu.address.logic.commands.ViewTransactionCommand;
+import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.DeleteProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -81,7 +46,7 @@ public class AllCommandsParser {
         case EditDistributorCommand.COMMAND_WORD:
             return new EditDistributorsCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EditProductCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
@@ -90,11 +55,11 @@ public class AllCommandsParser {
         case DeleteDistributorCommand.COMMAND_WORD:
             return new DeleteDistributorsCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteProductCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case ClearProductCommand.COMMAND_WORD:
+            return new ClearProductCommand();
 
         case ClearDistributorsCommand.COMMAND_WORD:
             return new ClearDistributorsCommand();
@@ -105,17 +70,17 @@ public class AllCommandsParser {
         case FindTagDistributorCommand.COMMAND_WORD:
             return new FindTagDistributorsCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
+        case FindProductCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case FindTagCommand.COMMAND_WORD:
+        case FindTagProductCommand.COMMAND_WORD:
             return new FindTagCommandParser().parse(arguments);
 
         case ListDistributorCommand.COMMAND_WORD:
             return new ListDistributorCommand();
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListProductCommand.COMMAND_WORD:
+            return new ListProductCommand();
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
@@ -129,8 +94,8 @@ public class AllCommandsParser {
         case UndoDistributorCommand.COMMAND_WORD:
             return new UndoDistributorCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+        case UndoProductCommand.COMMAND_WORD:
+            return new UndoProductCommand();
 
         case AddTransactionCommand.COMMAND_WORD:
             return new AddTransactionCommandParser().parse(arguments);
@@ -141,8 +106,8 @@ public class AllCommandsParser {
         case RedoDistributorCommand.COMMAND_WORD:
             return new RedoDistributorCommand();
 
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+        case RedoProductCommand.COMMAND_WORD:
+            return new RedoProductCommand();
 
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);

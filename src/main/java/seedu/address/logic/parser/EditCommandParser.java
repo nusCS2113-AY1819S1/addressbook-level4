@@ -15,23 +15,23 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditProductCommand;
+import seedu.address.logic.commands.EditProductCommand.EditProductDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditProductCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditCommandParser implements Parser<EditProductCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditProductCommand
+     * and returns an EditProductCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditProductCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SERIAL_NR, PREFIX_DISTRIBUTOR,
@@ -43,35 +43,35 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditProductCommand.MESSAGE_USAGE), pe);
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditProductDescriptor editProductDescriptor = new EditProductDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editProductDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_SERIAL_NR).isPresent()) {
-            editPersonDescriptor.setSerialNumber(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_SERIAL_NR).get()));
+            editProductDescriptor.setSerialNumber(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_SERIAL_NR).get()));
         }
         if (argMultimap.getValue(PREFIX_DISTRIBUTOR).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseDistName(argMultimap.getValue(PREFIX_DISTRIBUTOR).get()));
+            editProductDescriptor.setEmail(ParserUtil.parseDistName(argMultimap.getValue(PREFIX_DISTRIBUTOR).get()));
         }
         if (argMultimap.getValue(PREFIX_PRODUCT_INFO).isPresent()) {
-            editPersonDescriptor
+            editProductDescriptor
                     .setProductInfo(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_PRODUCT_INFO).get()));
         }
         if (argMultimap.getValue(PREFIX_REMAINING_ITEMS).isPresent()) {
-            editPersonDescriptor.setRemainingItems(ParserUtil.parseRemainingItems
+            editProductDescriptor.setRemainingItems(ParserUtil.parseRemainingItems
                     (argMultimap.getValue(PREFIX_REMAINING_ITEMS).get()));
         }
 
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editProductDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        if (!editProductDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditProductCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditProductCommand(index, editProductDescriptor);
     }
 
     /**

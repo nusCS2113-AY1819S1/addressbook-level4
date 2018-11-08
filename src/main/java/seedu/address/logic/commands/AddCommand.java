@@ -64,11 +64,11 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasProduct(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
-        model.addPerson(toAdd);
+        model.addProduct(toAdd);
 
         if (model.hasDistributor(distToAdd)) {
             throw new CommandException(MESSAGE_EDIT_DIST_PHONE);

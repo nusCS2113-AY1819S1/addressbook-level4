@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDistributors.getTypicalDistributorBook;
 import static seedu.address.testutil.TypicalProducts.GRAPE;
@@ -26,7 +26,7 @@ import seedu.address.model.product.TagContainsKeywordsPredicate;
 /**
  * Contains integration tests (interaction with the Model) for {@code FindTagDistributorCommand}.
  */
-public class FindTagCommandTest {
+public class FindTagProductCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(), new UserPrefs(),
             new UserDatabase(), new TestStorage());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(),
@@ -40,14 +40,14 @@ public class FindTagCommandTest {
         TagContainsKeywordsPredicate secondPredicate =
                 new TagContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindTagCommand findFirstCommand = new FindTagCommand(firstPredicate);
-        FindTagCommand findSecondCommand = new FindTagCommand(secondPredicate);
+        FindTagProductCommand findFirstCommand = new FindTagProductCommand(firstPredicate);
+        FindTagProductCommand findSecondCommand = new FindTagProductCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindTagCommand findFirstCommandCopy = new FindTagCommand(firstPredicate);
+        FindTagProductCommand findFirstCommandCopy = new FindTagProductCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -62,9 +62,9 @@ public class FindTagCommandTest {
 
     @Test
     public void execute_zeroKeywords_noDistributorFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 0);
         TagContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindTagCommand command = new FindTagCommand(predicate);
+        FindTagProductCommand command = new FindTagProductCommand(predicate);
         expectedModel.updateFilteredProductList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredProductList());
@@ -72,9 +72,9 @@ public class FindTagCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleDistributorsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 2);
         TagContainsKeywordsPredicate predicate = preparePredicate("healthy sweet");
-        FindTagCommand command = new FindTagCommand(predicate);
+        FindTagProductCommand command = new FindTagProductCommand(predicate);
         expectedModel.updateFilteredProductList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ORANGE, GRAPE), model.getFilteredProductList());

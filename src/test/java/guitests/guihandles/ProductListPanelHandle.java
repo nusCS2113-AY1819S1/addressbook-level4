@@ -12,24 +12,24 @@ import seedu.address.model.product.Product;
 /**
  * Provides a handle for {@code ProductListPanel} containing the list of {@code ProductCard}.
  */
-public class PersonListPanelHandle extends NodeHandle<ListView<Product>> {
-    public static final String PERSON_LIST_VIEW_ID = "#personListView";
+public class ProductListPanelHandle extends NodeHandle<ListView<Product>> {
+    public static final String PRODUCT_LIST_VIEW_ID = "#productListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Product> lastRememberedSelectedPersonCard;
+    private Optional<Product> lastRememberedSelectedProductCard;
 
-    public PersonListPanelHandle(ListView<Product> personListPanelNode) {
-        super(personListPanelNode);
+    public ProductListPanelHandle(ListView<Product> productListPanelNode) {
+        super(productListPanelNode);
     }
 
     /**
-     * Returns a handle to the selected {@code PersonCardHandle}.
+     * Returns a handle to the selected {@code ProductCardHandle}.
      * A maximum of 1 item can be selected at any time.
      * @throws AssertionError if no card is selected, or more than 1 card is selected.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getHandleToSelectedCard() {
+    public ProductCardHandle getHandleToSelectedCard() {
         List<Product> selectedProductList = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedProductList.size() != 1) {
@@ -37,7 +37,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Product>> {
         }
 
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
+                .map(ProductCardHandle::new)
                 .filter(handle -> handle.equals(selectedProductList.get(0)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
@@ -102,15 +102,15 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Product>> {
      * Returns the product card handle of a product associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getPersonCardHandle(int index) {
+    public ProductCardHandle getProductCardHandle(int index) {
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
-                .filter(handle -> handle.equals(getPerson(index)))
+                .map(ProductCardHandle::new)
+                .filter(handle -> handle.equals(getProduct(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
-    private Product getPerson(int index) {
+    private Product getProduct(int index) {
         return getRootNode().getItems().get(index);
     }
 
@@ -126,28 +126,28 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Product>> {
     /**
      * Remembers the selected {@code ProductCard} in the list.
      */
-    public void rememberSelectedPersonCard() {
+    public void rememberSelectedProductCard() {
         List<Product> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedPersonCard = Optional.empty();
+            lastRememberedSelectedProductCard = Optional.empty();
         } else {
-            lastRememberedSelectedPersonCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedProductCard = Optional.of(selectedItems.get(0));
         }
     }
 
     /**
      * Returns true if the selected {@code ProductCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedPersonCard()} call.
+     * {@code rememberSelectedProductCard()} call.
      */
-    public boolean isSelectedPersonCardChanged() {
+    public boolean isSelectedProductCardChanged() {
         List<Product> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedPersonCard.isPresent();
+            return lastRememberedSelectedProductCard.isPresent();
         } else {
-            return !lastRememberedSelectedPersonCard.isPresent()
-                    || !lastRememberedSelectedPersonCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedProductCard.isPresent()
+                    || !lastRememberedSelectedProductCard.get().equals(selectedItems.get(0));
         }
     }
 

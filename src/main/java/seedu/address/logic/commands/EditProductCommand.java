@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -32,9 +32,9 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing product in the productInfo book.
  */
 
-public class EditCommand extends Command {
+public class EditProductCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editproduct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the product identified "
             + "by the index number used in the displayed product list. "
@@ -49,24 +49,24 @@ public class EditCommand extends Command {
             + PREFIX_SERIAL_NR + "91234567 "
             + PREFIX_DISTRIBUTOR + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Product: %1$s";
+    public static final String MESSAGE_EDIT_PRODUCT_SUCCESS = "Edited Product: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "A product with the same serialnumber already exists.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditProductDescriptor editProductDescriptor;
 
     /**
      * @param index of the product in the filtered product list to edit
-     * @param editPersonDescriptor details to edit the product with
+     * @param editProductDescriptor details to edit the product with
      */
 
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditProductCommand(Index index, EditProductDescriptor editProductDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editProductDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editProductDescriptor = new EditProductDescriptor(editProductDescriptor);
     }
 
     @Override
@@ -75,38 +75,38 @@ public class EditCommand extends Command {
         List<Product> lastShownList = model.getFilteredProductList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
         }
 
         Product productToEdit = lastShownList.get(index.getZeroBased());
-        Product editedProduct = createEditedPerson(productToEdit, editPersonDescriptor);
+        Product editedProduct = createEditedProdcut(productToEdit, editProductDescriptor);
 
-        if (!productToEdit.isSameProduct(editedProduct) && model.hasPerson(editedProduct)) {
+        if (!productToEdit.isSameProduct(editedProduct) && model.hasProduct(editedProduct)) {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
-        model.updatePerson(productToEdit, editedProduct);
-        model.updateFilteredProductList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateProduct(productToEdit, editedProduct);
+        model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedProduct));
+        return new CommandResult(String.format(MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct));
     }
 
     /**
      * Creates and returns a {@code Product} with the details of {@code productToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editProductDescriptor}.
      */
-    private static Product createEditedPerson(Product productToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Product createEditedProdcut(Product productToEdit, EditProductDescriptor editProductDescriptor) {
         assert productToEdit != null;
 
 
-        Name updatedName = editPersonDescriptor.getName().orElse(productToEdit.getName());
+        Name updatedName = editProductDescriptor.getName().orElse(productToEdit.getName());
         SerialNumber updatedSerialNumber =
-                editPersonDescriptor.getSerialNumber().orElse(productToEdit.getSerialNumber());
-        DistributorName updatedDistName = editPersonDescriptor.getDistributor().orElse(productToEdit.getDistributor());
-        ProductInfo updatedProductInfo = editPersonDescriptor.getProductInfo().orElse(productToEdit.getProductInfo());
+                editProductDescriptor.getSerialNumber().orElse(productToEdit.getSerialNumber());
+        DistributorName updatedDistName = editProductDescriptor.getDistributor().orElse(productToEdit.getDistributor());
+        ProductInfo updatedProductInfo = editProductDescriptor.getProductInfo().orElse(productToEdit.getProductInfo());
         RemainingItems updatedRemainingItems =
-                editPersonDescriptor.getRemainingItems().orElse(productToEdit.getRemainingItems());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(productToEdit.getTags());
+                editProductDescriptor.getRemainingItems().orElse(productToEdit.getRemainingItems());
+        Set<Tag> updatedTags = editProductDescriptor.getTags().orElse(productToEdit.getTags());
         return new Product(updatedName, updatedSerialNumber,
                 updatedDistName, updatedProductInfo, updatedRemainingItems, updatedTags);
     }
@@ -119,14 +119,14 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditProductCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditProductCommand e = (EditProductCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editProductDescriptor.equals(e.editProductDescriptor);
     }
 
     /**
@@ -134,7 +134,7 @@ public class EditCommand extends Command {
      * corresponding field value of the product.
      */
 
-    public static class EditPersonDescriptor {
+    public static class EditProductDescriptor {
         private Name name;
         private SerialNumber serialNumber;
         private DistributorName distname;
@@ -142,13 +142,13 @@ public class EditCommand extends Command {
         private RemainingItems remainingItems;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditProductDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
         */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditProductDescriptor(EditProductDescriptor toCopy) {
             setName(toCopy.name);
             setSerialNumber(toCopy.serialNumber);
             setEmail(toCopy.distname);
@@ -229,12 +229,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditProductDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditProductDescriptor e = (EditProductDescriptor) other;
 
             return getName().equals(e.getName())
                     && getSerialNumber().equals(e.getSerialNumber())

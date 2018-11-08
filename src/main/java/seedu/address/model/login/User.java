@@ -135,11 +135,11 @@ public class User {
             return false;
         }
 
-        User otherPerson = (User) other;
-        return otherPerson.getUsername().equals(this.getUsername())
-                && otherPerson.getPassword().equals(this.getPassword())
-                && otherPerson.getAddressBookFilePath().equals(this.getAddressBookFilePath())
-                && otherPerson.getDistributorBookFilePath().equals(this.getDistributorBookFilePath());
+        User otherProduct = (User) other;
+        return otherProduct.getUsername().equals(this.getUsername())
+                && otherProduct.getPassword().equals(this.getPassword())
+                && otherProduct.getAddressBookFilePath().equals(this.getAddressBookFilePath())
+                && otherProduct.getDistributorBookFilePath().equals(this.getDistributorBookFilePath());
     }
 
     @Override

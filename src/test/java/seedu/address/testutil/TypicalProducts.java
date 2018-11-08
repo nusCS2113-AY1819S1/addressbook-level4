@@ -58,17 +58,17 @@ public class TypicalProducts {
     private TypicalProducts() {} // prevents instantiation
 
     /**
-     * Returns an {@code ProductDatabase} with all the typical persons.
+     * Returns an {@code ProductDatabase} with all the typical products.
      */
     public static ProductDatabase getTypicalAddressBook() {
         ProductDatabase ab = new ProductDatabase();
-        for (Product product : getTypicalPersons()) {
+        for (Product product : getTypicalProducts()) {
             ab.addProduct(product);
         }
         return ab;
     }
 
-    public static List<Product> getTypicalPersons() {
+    public static List<Product> getTypicalProducts() {
         return new ArrayList<>(Arrays.asList(ORANGE, GRAPE, CHOCOLATE, DORITOS));
     }
 }

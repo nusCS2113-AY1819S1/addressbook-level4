@@ -180,7 +180,7 @@ public class RegisterCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Product product) {
+        public boolean hasProduct(Product product) {
             fail("This method should not be called.");
             return false;
         }
@@ -191,12 +191,12 @@ public class RegisterCommandTest {
         }
 
         @Override
-        public void deletePerson(Product product) {
+        public void deleteProduct(Product product) {
             fail("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Product product) {
+        public void addProduct(Product product) {
             fail("This method should not be called.");
         }
 
@@ -211,7 +211,7 @@ public class RegisterCommandTest {
         }
 
         @Override
-        public void updatePerson(Product target, Product editedProduct) {
+        public void updateProduct(Product target, Product editedProduct) {
             fail("This method should not be called.");
         }
 
@@ -265,7 +265,7 @@ public class RegisterCommandTest {
             fail("This method should not be called.");
         }
 
-        public void redoAddressBook() {
+        public void redoProductDatabase() {
             fail("This method should not be called.");
         }
 

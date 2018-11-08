@@ -100,7 +100,7 @@ public class AddDistributorCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Product product) {
+        public void addProduct(Product product) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -110,7 +110,7 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void updatePerson(Product target, Product editedProduct) {
+        public void updateProduct(Product target, Product editedProduct) {
         }
 
         @Override
@@ -143,7 +143,7 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Product product) {
+        public boolean hasProduct(Product product) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -153,7 +153,7 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void deletePerson(Product target) {
+        public void deleteProduct(Product target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -193,7 +193,7 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoProductDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -321,7 +321,7 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void addUser(User person) {
+        public void addUser(User product) {
             throw new AssertionError("This method should not be called.");
         }
 

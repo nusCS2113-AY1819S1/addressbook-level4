@@ -14,7 +14,7 @@ import seedu.address.model.distributor.DTagContainsKeywordsPredicate;
 public class FindTagDistributorsCommandParser implements Parser<FindTagDistributorCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
+     * Parses the given {@code String} of arguments in the context of the FindProductCommand
      * and returns an FindTagDistributorCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
