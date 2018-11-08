@@ -21,6 +21,8 @@ public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
 
+    // ================================== Candidate Book functions ====================================== //
+
     @Test
     public void hasCandidate_nullCandidate_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
@@ -86,7 +88,13 @@ public class ModelManagerTest {
     // ================================== Shortlist functions ====================================== //
 
     @Test
-    public void shortlistCandidateToJobOffer_candidateInAddressBook_returnsTrue() {
+    public void shortlistCandidateToJobOffer_candidateSuccessfullyShortlisted_returnsTrue() {
+
+        //modelManager.shortlistCandidateToJobOffer(ALICE,);
+    }
+
+    @Test
+    public void shortlistCandidateToJobOffer_candidateAlreadyShortlisted_returnsFalse() {
 
         //modelManager.shortlistCandidateToJobOffer(ALICE,);
     }
@@ -97,7 +105,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsFalse() {
+    public void deleteShortlistedCandidateFromJobOffer_candidateNotInShortlistedCandidateList_returnsFalse() {
 
     }
 }
