@@ -1,10 +1,13 @@
 package seedu.address.model.member;
 
-import seedu.address.commons.util.StringUtil;
-
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
+
+/**
+ * postalcode keyword predicate
+ */
 public class PostalcodeContainsKeywordPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
