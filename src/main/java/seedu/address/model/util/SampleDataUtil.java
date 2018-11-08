@@ -53,9 +53,8 @@ public class SampleDataUtil {
 
             new Person(new Name("David Li"), new Gender("M"), new Nationality("CN"),
                     new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Address("Blk 436 Seran"
-                            + "on Gardens Street 26, #16-43"),
-                     getTagSet("family"), test),
+                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                    getTagSet("family"), test),
 
             new Person(new Name("Irfan Ibrahim"), new Gender("M"), new Nationality("MY"),
                     new Phone("92492021"), new Email("irfan@example.com"),
@@ -70,142 +69,142 @@ public class SampleDataUtil {
             new Person(new Name("Khadijah Saine"), new Gender("F"), new Nationality("IN"),
                     new Phone("92142978"), new Email("KhadijahSaine@example.com"),
                     new Address("Blk 112, Simei Street 1"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Jeni Eisenhower"), new Gender("F"), new Nationality("US"),
                     new Phone("91077545"), new Email("JeniEisenhower@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Tien Agan"), new Gender("F"), new Nationality("US"),
                     new Phone("96175570"), new Email("TienAgan@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Brendan"), new Gender("M"), new Nationality("SG"),
                     new Phone("95704308"), new Email("Brendan@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Fay"), new Gender("M"), new Nationality("SG"),
                     new Phone("97894720"), new Email("Fay@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Tracey"), new Gender("F"), new Nationality("SG"),
                     new Phone("99944817"), new Email("Tracey@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Christy"), new Gender("F"), new Nationality("SG"),
                     new Phone("98496742"), new Email("Christy@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Heidi"), new Gender("F"), new Nationality("SG"),
                     new Phone("95067553"), new Email("Heidi@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Christene"), new Gender("F"), new Nationality("SG"),
                     new Phone("96573233"), new Email("Christene@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Les"), new Gender("F"), new Nationality("SG"),
                     new Phone("94615325"), new Email("Les@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Luigi"), new Gender("M"), new Nationality("SG"),
                     new Phone("96259361"), new Email("Luigi@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Reatha"), new Gender("F"), new Nationality("IN"),
                     new Phone("96775760"), new Email("Reatha@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Dorethea"), new Gender("F"), new Nationality("CN"),
                     new Phone("94680649"), new Email("Dorethea@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Deon"), new Gender("M"), new Nationality("SG"),
                     new Phone("96200344"), new Email("Deon@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Joleen"), new Gender("F"), new Nationality("SG"),
                     new Phone("98481923"), new Email("Joleen@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Glynis"), new Gender("F"), new Nationality("SG"),
                     new Phone("91174790"), new Email("Glynis@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Corinna"), new Gender("F"), new Nationality("SG"),
                     new Phone("91082076"), new Email("Corinna@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Lianne"), new Gender("F"), new Nationality("SG"),
                     new Phone("97181574"), new Email("Lianne@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Deanne"), new Gender("F"), new Nationality("SG"),
                     new Phone("96849130"), new Email("Deanne@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Donna"), new Gender("F"), new Nationality("SG"),
                     new Phone("95435362"), new Email("Donna@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Chandra"), new Gender("M"), new Nationality("IN"),
                     new Phone("91410083"), new Email("Chandra@example.com"),
                     new Address("NUS Utown"),
-                    getTagSet("classmate"), test),
+                    getTagSet("classmates"), test),
 
             new Person(new Name("Tsu Wei Quan"), new Gender("M"), new Nationality("SG"),
                     new Phone("96259561"), new Email("tsuweiquan@gmail.com"),
                     new Address("Blk 111, Simei Street 1"),
-                    getTagSet("teammate"), test),
+                    getTagSet("colleagues"), test),
 
             new Person(new Name("Novin Tong Yong Kang"), new Gender("M"), new Nationality("SG"),
                     new Phone("99999999"), new Email("E0176909@u.nus.edu"),
                     new Address("Pasir Ris street 99,#02-25"),
-                    getTagSet("friends"), test),
+                    getTagSet("colleagues"), test),
 
             new Person(new Name("TsuraJovin"), new Gender("M"), new Nationality("SG"),
                     new Phone("99999999"), new Email("tsurajovin@gmail.com"),
                     new Address("Bedok street 99,#02-25"),
-                    getTagSet("GithubBot"), test),
+                    getTagSet("colleagues"), test),
 
             new Person(new Name("Joel"), new Gender("M"), new Nationality("MY"),
                     new Phone("9784230"), new Email("joeltan98@gmail.com"),
                     new Address("Jurong West Street 52"),
-                    getTagSet("GithubBot"), test),
+                    getTagSet("colleagues"), test),
 
             new Person(new Name("JoelTan"), new Gender("M"), new Nationality("MY"),
                     new Phone("9784230"), new Email("joel.twh@u.nus.edu"),
                     new Address("Jurong West Street 52"),
-                    getTagSet("CSGOHacker"), test),
+                    getTagSet("colleagues"), test),
 
             new Person(new Name("Rajdeep"), new Gender("M"), new Nationality("SG"),
                     new Phone("9784230"), new Email("rajdeepsh@outlook.com"),
                     new Address("Pasir ris street 2"),
-                    getTagSet("Dota2Hacker"), test),
+                    getTagSet("colleagues"), test),
 
             new Person(new Name("Clara"), new Gender("F"), new Nationality("SG"),
                     new Phone("9784230"), new Email("Clara@example.com"),
                     new Address("UTown"),
-                    getTagSet("Developer"), test)
+                    getTagSet("colleagues"), test)
         };
     }
 
