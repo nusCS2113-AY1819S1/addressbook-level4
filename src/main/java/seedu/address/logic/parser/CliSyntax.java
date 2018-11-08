@@ -18,6 +18,7 @@ public class CliSyntax {
 
     public static final Prefix PREFIX_ITEM_NAME = new Prefix("n/");
     public static final Prefix PREFIX_ITEM_QUANTITY = new Prefix("q/");
+    public static final Prefix PREFIX_ITEM_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_BALANCE = new Prefix("b/");
 
