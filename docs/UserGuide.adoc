@@ -291,6 +291,7 @@ Removes a reminder in the system. There must only be a single
 space between "dd" and "HH" in the command format.
 
 Examples:
+
 * `removereminder time/ 2018/10/26 12:30:00`
 // end::journal[]
 
