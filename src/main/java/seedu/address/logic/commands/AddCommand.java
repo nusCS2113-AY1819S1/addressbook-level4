@@ -28,6 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_SERIAL_NR + "SERIAL NUMBER "
             + PREFIX_DISTRIBUTOR + "DISTRIBUTOR "
             + PREFIX_PRODUCT_INFO + "PRODUCT INFO "
+            + PREFIX_REMAINING_ITEMS + "REMAINING ITEMS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Apple "
@@ -37,10 +38,13 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "fruit "
             + PREFIX_REMAINING_ITEMS + "12";
 
-    public static final String MESSAGE_SUCCESS = "New product added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New product added: %1$s \n\nRemember to edit the added distributor's"
+            + "phone number instead of leaving it as the default 00000000!";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the product database";
-    public static final String MESSAGE_EDIT_DIST_PHONE = "Please edit the distributor number "
-            + "with the default 00000000, then add the distributor manually.";
+    public static final String MESSAGE_EDIT_DIST_PHONE = "The product was successfully added!\n\n"
+            + "The distributor has not been added because"
+            + "\n1. The distributor already exists, or"
+            + "\n2. Another distributor with the default 00000000 phone number exists.";
 
 
     private final Product toAdd;

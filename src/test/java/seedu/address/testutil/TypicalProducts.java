@@ -18,6 +18,7 @@ import java.util.List;
 import seedu.address.model.ProductDatabase;
 import seedu.address.model.product.Product;
 
+//@@author Gara
 /**
  * A utility class containing a list of {@code Product} objects to be used in tests.
  */
@@ -29,7 +30,7 @@ public class TypicalProducts {
             .withTags("healthy").build();
     public static final Product GRAPE = new ProductBuilder().withName("Grape")
             .withInfo("fruit").withDistributor("Ah Beng").withSerialNumber("002").withRemainingItems("2")
-            .withTags("healthy").build();
+            .withTags("sweet").build();
     public static final Product CHOCOLATE = new ProductBuilder().withName("Chocolate").withSerialNumber("003")
             .withDistributor("Ahmad").withRemainingItems("22").withInfo("snack").build();
     public static final Product DORITOS = new ProductBuilder().withName("Doritos").withSerialNumber("004")

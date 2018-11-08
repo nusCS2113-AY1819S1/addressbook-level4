@@ -55,6 +55,10 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
             throw new ParseException("Transaction entered has no products!");
         }
 
+        // checks
+
+        // update the quantities
+
         Transaction transaction = new Transaction();
 
         for (String productName : productsToAdd) {

@@ -120,9 +120,9 @@ public class Product {
                 .append(getDistributor())
                 .append("\nProduct info: ")
                 .append(getProductInfo())
-                .append (" Remaining products: ")
+                .append ("\nRemaining products: ")
                 .append(getRemainingItems())
-                .append(" Tags: ");
+                .append("\nTags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

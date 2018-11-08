@@ -25,7 +25,7 @@ public class ReminderTest {
         // null transaction time
         Assert.assertThrows(NullPointerException.class, () -> Reminder.isValidReminderTime(null));
 
-        // empty transaction time
+        // empty reminder time
         assertFalse(Reminder.isValidReminderTime(""));
         // invalid time
         assertFalse(Reminder.isValidReminderTime("invalid time"));
@@ -47,13 +47,23 @@ public class ReminderTest {
         assertFalse(Reminder.isValidReminderTime("2018/01/20 23:60:00"));
         // invalid second
         assertFalse(Reminder.isValidReminderTime("2018/01/20 12:12:60"));
-
+        // leap year with february 30th
+        assertFalse(Reminder.isValidReminderTime("2016/02/30 12:12:12"));
+        // non-leap year with february 29th
+        assertFalse(Reminder.isValidReminderTime("2015/02/29 12:12:12"));
     }
 
     @Test
     public void isValidReminderTime_validTimes() {
+        //typical days and extreme times
         assertTrue(Reminder.isValidReminderTime("2018/12/31 23:59:59"));
         assertTrue(Reminder.isValidReminderTime("2018/12/31 00:00:00"));
+        // leap year february 29th
+        assertTrue(Reminder.isValidReminderTime("2016/02/29 23:59:59"));
+        // non leap year february 28th
+        assertTrue(Reminder.isValidReminderTime("2016/02/28 23:59:59"));
+        //trailing whitespaces
+        assertTrue(Reminder.isValidReminderTime("  2016/02/26 23:59:59  "));
     }
 
     @Test
@@ -64,13 +74,20 @@ public class ReminderTest {
         Assert.assertThrows(NullPointerException.class, () -> toTest.changeTime(null));
         // invalid time
         Assert.assertThrows(InvalidTimeFormatException.class, () -> toTest.changeTime("invalid time"));
+        // incorrect date
+        Assert.assertThrows(InvalidTimeFormatException.class, () -> toTest.changeTime("2015/02/31 12:00:00"));
+        // incorrect time
+        Assert.assertThrows(InvalidTimeFormatException.class, () -> toTest.changeTime("2015/02/28 24:00:00"));
     }
 
     @Test
     public void changeReminderTime_validTime() {
         Reminder toTest = new Reminder();
         try {
+            // normal valid time
             toTest.changeTime("2018/10/12 12:00:00");
+            // leap year february 29th
+            toTest.changeTime("2004/02/29 12:00:00");
         } catch (Exception e) {
             fail("Should be able to change reminder time with valid time");
         }

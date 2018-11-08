@@ -16,7 +16,7 @@ public class DistributorBuilder {
 
     public static final String DEFAULT_NAME = "Ah Bee";
     public static final String DEFAULT_PHONE = "00000000";
-
+    public static final String DEFAULT_TAG = "fruits";
 
     private DistributorName name;
     private DistributorPhone phone;
@@ -26,7 +26,7 @@ public class DistributorBuilder {
     public DistributorBuilder() {
         name = new DistributorName(DEFAULT_NAME);
         phone = new DistributorPhone(DEFAULT_PHONE);
-        tags = new HashSet<>();
+        tags = new HashSet<Tag>();
     }
 
     /**
