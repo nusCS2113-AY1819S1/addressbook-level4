@@ -56,46 +56,46 @@ public class ListCommandTest {
                 new DepartmentContainsKeywordsPredicate(Collections.singletonList("Finance"));
         List<String> showAll = new ArrayList<>();
         DepartmentContainsKeywordsPredicate thirdPredicate = new DepartmentContainsKeywordsPredicate(showAll);
-        ListCommand findFirstCommand = new ListCommand(firstSortByParams, firstPredicate);
-        ListCommand findSecondCommand = new ListCommand(firstSortByParams, secondPredicate);
-        ListCommand findThirdCommand = new ListCommand(secondSortByParams, thirdPredicate);
-        ListCommand findFourthCommand = new ListCommand(thirdSortByParams, thirdPredicate);
+        ListCommand listFirstCommand = new ListCommand(firstSortByParams, firstPredicate);
+        ListCommand listSecondCommand = new ListCommand(firstSortByParams, secondPredicate);
+        ListCommand listThirdCommand = new ListCommand(secondSortByParams, thirdPredicate);
+        ListCommand listFourthCommand = new ListCommand(thirdSortByParams, thirdPredicate);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(listFirstCommand.equals(listFirstCommand));
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(listFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(listFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(listFirstCommand.equals(listSecondCommand));
 
         // same object -> returns true
-        assertTrue(findThirdCommand.equals(findThirdCommand));
+        assertTrue(listThirdCommand.equals(listThirdCommand));
 
         // same object -> returns true
-        assertTrue(findFourthCommand.equals(findFourthCommand));
+        assertTrue(listFourthCommand.equals(listFourthCommand));
 
         // different types -> returns false
-        assertFalse(findThirdCommand.equals(1));
+        assertFalse(listThirdCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findThirdCommand.equals(null));
+        assertFalse(listThirdCommand.equals(null));
 
         // same values -> returns true
-        ListCommand findFirstCommandCopy = new ListCommand(firstSortByParams, firstPredicate);
-        assertEquals(findFirstCommand, findFirstCommandCopy);
+        ListCommand listFirstCommandCopy = new ListCommand(firstSortByParams, firstPredicate);
+        assertEquals(listFirstCommand, listFirstCommandCopy);
 
         // same values -> returns true
-        ListCommand findSecondCommandCopy = new ListCommand(secondSortByParams, thirdPredicate);
-        assertEquals(findThirdCommand, findSecondCommandCopy);
+        ListCommand listSecondCommandCopy = new ListCommand(secondSortByParams, thirdPredicate);
+        assertEquals(listThirdCommand, listSecondCommandCopy);
 
         // same values -> returns true
-        ListCommand findSThirdCommandCopy = new ListCommand(thirdSortByParams, thirdPredicate);
-        assertEquals(findFourthCommand, findSThirdCommandCopy);
+        ListCommand listThirdCommandCopy = new ListCommand(thirdSortByParams, thirdPredicate);
+        assertEquals(listFourthCommand, listThirdCommandCopy);
 
 
     }

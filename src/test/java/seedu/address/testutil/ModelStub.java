@@ -7,6 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventList;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,6 +52,11 @@ public class ModelStub implements Model {
     @Override
     public void redoBothState() {
         throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasEmail(Email email) {
+        return false;
     }
 
     @Override
@@ -105,6 +111,11 @@ public class ModelStub implements Model {
 
     @Override
     public void commitAddressBook() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Person getPerson(Email email) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -200,4 +211,5 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 }
+
 

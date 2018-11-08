@@ -7,6 +7,7 @@
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <department>Finance</department>
+        <designation>manager</designation>
         <tagged>friends</tagged>
     </persons>
 
@@ -17,6 +18,7 @@
         <email>alice@example.com</email>
         <address>4th street</address>
         <department>Finance</department>
+        <designation>manager</designation>
     </persons>
 
 </addressbook>

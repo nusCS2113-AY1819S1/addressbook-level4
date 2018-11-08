@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESIGNATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -48,6 +49,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_DEPARTMENT_AMY = "Marketing";
     public static final String VALID_DEPARTMENT_BOB = "Admin";
+    public static final String VALID_DESIGNATION_AMY = "manager";
+    public static final String VALID_DESIGNATION_BOB = "manager";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -70,6 +73,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String DEPARTMENT_DESC_AMY = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_AMY;
     public static final String DEPARTMENT_DESC_BOB = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_BOB;
+    public static final String DESIGNATION_DESC_AMY = " " + PREFIX_DESIGNATION + VALID_DESIGNATION_AMY;
+    public static final String DESIGNATION_DESC_BOB = " " + PREFIX_DESIGNATION + VALID_DESIGNATION_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -84,6 +89,8 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_DEPARTMENT_DESC = " " + PREFIX_DEPARTMENT + "M@rketing";
     // '@' not allowed in department
+    public static final String INVALID_DESIGNATION_DESC = " " + PREFIX_DESIGNATION + "m@nager";
+    // '@' not allowed in designation
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2018/12/25";
@@ -99,11 +106,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder()
                 .withPhone(VALID_PHONE_AMY).withName(VALID_NAME_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withDepartment(VALID_DEPARTMENT_AMY)
+                .withDepartment(VALID_DEPARTMENT_AMY).withDesignation(VALID_DESIGNATION_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder()
                 .withPhone(VALID_PHONE_BOB).withName(VALID_NAME_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withDepartment(VALID_DEPARTMENT_BOB)
+                .withDepartment(VALID_DEPARTMENT_BOB).withDesignation(VALID_DESIGNATION_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
