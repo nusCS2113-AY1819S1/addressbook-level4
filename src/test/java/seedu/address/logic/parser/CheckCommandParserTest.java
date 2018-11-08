@@ -18,16 +18,24 @@ public class CheckCommandParserTest {
     @Test
     public void parse_invalidArg_throwsParseException() {
         // empty arguments
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
 
         // multiple arguments
-        assertParseFailure(parser, "4 5", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "4 5",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
 
         // negative argument
-        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
 
         // not numeric argument
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+
+        // 1000 and above argument
+        assertParseFailure(parser, "1000",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_EXCEEDED_QUANTITY));
     }
 
     @Test

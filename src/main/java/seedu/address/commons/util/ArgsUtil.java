@@ -15,7 +15,11 @@ public class ArgsUtil {
     public static Book getBookToEdit (Model model, List<Book> lastShownList, String argsType, String findBookBy)
             throws CommandException {
         if (argsType.equals("Isbn")) {
-            return model.getBook(findBookBy);
+            if (model.getBook(findBookBy) != null) {
+                return model.getBook(findBookBy);
+            } else {
+                throw new CommandException(Messages.MESSAGE_ISBN_NOT_IN_BOOK);
+            }
         } else if (argsType.equals("Index") && Integer.parseInt(findBookBy) < lastShownList.size()) {
             return lastShownList.get(Integer.parseInt(findBookBy));
         } else {
