@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LEDGERS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,6 +33,7 @@ public class UndoCommand extends Command {
         model.updateFilteredLedgerList(PREDICATE_SHOW_ALL_LEDGERS);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.updateFilteredLedgerList(PREDICATE_SHOW_ALL_LEDGERS);
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

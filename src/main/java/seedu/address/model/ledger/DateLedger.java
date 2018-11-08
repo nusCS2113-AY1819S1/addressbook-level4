@@ -12,7 +12,7 @@ public class DateLedger {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Dates should be in the format DD/MM, and it should not be blank";
     public static final String MESSAGE_VALIDATION_REGEX =
-            "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])$";
+            "^(0[1-9]||[1-2][0-9]||3[0-1])/(0[0-9]||1[0-2])$";
 
     public final String value;
 

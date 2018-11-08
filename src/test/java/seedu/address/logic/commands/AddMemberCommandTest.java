@@ -122,7 +122,7 @@ public class AddMemberCommandTest {
 
         @Override
         public void deleteEvent(Event event) {
-
+            throw new AssertionError("This method should not be called");
         }
 
         @Override

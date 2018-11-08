@@ -16,6 +16,7 @@ import seedu.address.model.ledger.DateLedger;
 import seedu.address.model.ledger.Ledger;
 
 
+
 /**
  * Decreases the value of balance in the ledger
  */
