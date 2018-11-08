@@ -814,8 +814,8 @@ classes which extends the `Command` class, and `EmailUtil` attribute in `Model` 
 and the `EmailSettings` class which stores email subject and email body text settings.
 
 ._Some of these classes also contain children classes which act as sub-commands:_
-. `EmailRecipientsAddCommand`, `EmailRecipientsNextCommand` extends `EmailRecipientsSelectCommand`.
-. `EmailContentsAddCommand`, `EmailContentsBackCommand` and `EmailContentsNextCommand` extends `EmailContentsSelectCommand`.
+. `EmailRecipientsAddCommand`, `EmailRecipientsNextCommand` extends `EmailRecipientsCommand`.
+. `EmailContentsAddCommand`, `EmailContentsBackCommand` and `EmailContentsNextCommand` extends `EmailContentsCommand`.
 . `EmailSendBackCommand`, `EmailSendPreviewCommand` and `EmailSendSendCommand` extends `EmailSendCommand`.
 
 The email command is a 4-stage process supported by `LogicManager` by keeping track of the `LogicState`.
@@ -861,6 +861,8 @@ In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCa
 . The user is satisfied with the preview and executes the `send` command. This generates the email as a `MimeMessage`
   which is the Java format used for emails and is sent via `EmailUtil#sendMessage`. `LogicState` is reset back to orignal and this marks the end of the email command.
 
+image::EmailActivityDiagram.png[width="650"]
+
 ==== Design Considerations
 ===== Aspect: Data structure to store recipients and candidates
 
@@ -875,7 +877,7 @@ In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCa
 * **Alternative 3 (current choice):** Linked Hash Set
 ** Pros: Does not allow duplicates, indicates if an object being added is successful or not,
    and maintains order in which objects were added in.
-** Cons: -
+** Cons: Not as fast as a hash set, but speed can be sacrificed for the pros.
 
 // end::email[]
 
