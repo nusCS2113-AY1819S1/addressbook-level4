@@ -21,14 +21,6 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SORT);
-        /*
-        try {
-        index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-        SortCommand.MESSAGE_USAGE), ive);
-        }
-        */
         Parameter parameter = new Parameter(argMultimap.getValue(PREFIX_SORT).orElse(""));
         return new SortCommand(parameter);
     }

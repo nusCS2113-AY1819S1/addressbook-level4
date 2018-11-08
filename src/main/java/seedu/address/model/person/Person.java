@@ -20,6 +20,14 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    private static Comparator<Person> bySkillLevel = Comparator.comparingInt(p -> p.getSkillLevel().skillLevel);
+
+    private static Comparator<Person> byName = (p1, p2) -> {
+        String name1 = p1.toString();
+        String name2 = p2.toString();
+        return name1.compareTo(name2);
+    };
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -45,14 +53,6 @@ public class Person {
         this.skillLevel = skillLevel;
         this.tags.addAll(tags);
     }
-
-    private static Comparator<Person> bySkillLevel = Comparator.comparingInt(p -> p.getSkillLevel().skillLevel);
-
-    private static Comparator<Person> byName = (p1, p2) -> {
-        String name1 = p1.toString();
-        String name2 = p2.toString();
-        return name1.compareTo(name2);
-    };
 
     public static Comparator<Person> getComparator(Parameter parameter) throws ParseException {
         switch(parameter.value) {
