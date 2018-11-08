@@ -51,7 +51,7 @@ public class EditEventCommand extends Command {
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EVENT =
-            "The edited location has been booked for another event at the selected time.";
+            "The location has been booked for another event at the selected time.";
     public static final String MESSAGE_EVENT_CLASH = "The updated time will result in clash with %1$s's schedule.";
 
     private final Index index;

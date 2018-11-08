@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Lee Ming Liang
 image::icedcoffeeboy.png[width="150", align="left"]
-{empty}[https://github.com/IcedCoffeeBoy[github]] [<<#, portfolio>>]
+{empty}[https://github.com/IcedCoffeeBoy[github]] [<<icedcoffeeboy#, portfolio>>]
 
 **Role:** Developer +
 **Responsibilities:** In charge of Storage, Code Quality
@@ -22,7 +22,7 @@ image::icedcoffeeboy.png[width="150", align="left"]
 
 === Ang Jie Liang
 image::jieliangang.png[width="150", align="left"]
-{empty}[https://github.com/jieliangang[github]] [<<#, portfolio>>]
+{empty}[https://github.com/jieliangang[github]] [<<jieliangang#, portfolio>>]
 
 **Role:** Team Lead +
 **Responsibilities:** Integration, Scheduling and Tracking, Deliverable and Deadlines
@@ -32,7 +32,7 @@ image::jieliangang.png[width="150", align="left"]
 
 === Jeevan Neralakere Somashekhar
 image::jeevz10.png[width="150", align="left"]
-{empty}[https://github.com/Jeevz10[github]] [<<#, portfolio>>]
+{empty}[https://github.com/Jeevz10[github]] [<<jeevz10#, portfolio>>]
 
 **Role:** Developer +
 **Responsibilities:** Documentation, Testing
@@ -42,7 +42,7 @@ image::jeevz10.png[width="150", align="left"]
 
 === Perry Wang Zhi Ming
 image::perrythewang.png[width="150", align="left"]
-{empty}[https://github.com/perrythewang[github]] [<<#, portfolio>>]
+{empty}[https://github.com/perrythewang[github]] [<<perrythewang#, portfolio>>]
 
 **Role:** Developer +
 **Responsibilities:** In Charge of Model
@@ -51,7 +51,7 @@ image::perrythewang.png[width="150", align="left"]
 
 === Ruslan Farkhutdinov
 image::fr3ddy4.png[width="150", align="left"]
-{empty}[https://github.com/fr3ddy4[github]] [<<#, portfolio>>]
+{empty}[https://github.com/fr3ddy4[github]] [<<fr3ddy4#, portfolio>>]
 
 **Role:** Developer +
 **Responsibilities:** In charge of UI
