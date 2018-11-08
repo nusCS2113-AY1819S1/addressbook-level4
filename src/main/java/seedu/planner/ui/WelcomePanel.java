@@ -23,9 +23,11 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
     private static final Logger logger = LogsCenter.getLogger(WelcomePanel.class);
 
     private static final String FXML = "WelcomePanel.fxml";
+    private static final String defaultWelcomeMessage = "Welcome to FinancialPlanner!\n"
+            + "To start off, press F1 or type help into the command box above for the help windows! Enjoy!";
 
-    private final double prefPieChartWidth = 300.0;
-    private final double prefPieChartHeight = 300.0;
+    private final double prefPieChartWidth = 500.0;
+    private final double prefPieChartHeight = 400.0;
 
     @FXML
     private AnchorPane expenseStats;
@@ -38,9 +40,9 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
 
     public WelcomePanel(Model model) {
         super(FXML);
-        welcomeMessage.setText("Welcome to FinancialPlanner!\n"
-                + "To start off, press F1 or type help into the command box above for the help windows! Enjoy!");
-        populateUi(new CategoryStatisticsList(model.getRecordsThisMonth()).getReadOnlyStatsList());
+        welcomeMessage.setText(defaultWelcomeMessage);
+        populateUi(new CategoryStatisticsList(model.getRecordsThisMonth()).getReadOnlyStatsList(),
+                model.getCurrentMonth().toString());
         registerAsAnEventHandler(this);
     }
 
@@ -57,9 +59,10 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
     }
 
     /** Creates the CategoryBreakdown object with the total expense and tag of each CategoryStatistic */
-    private Node createTotalExpenseBreakdown(MixedPieChartDataList dataList) {
+    private Node createTotalExpenseBreakdown(MixedPieChartDataList dataList, String monthLabel) {
         CategoryBreakdown categoryBreakdown = new CurrentMonthPieChartDisplay(dataList.getExpenseChartLabelData(),
-                dataList.getExpenseChartLegendData(), "Expense Breakdown for the period");
+                dataList.getExpenseChartLegendData(), String.format("%s< Total expenses: $%.2f>",
+                monthLabel, dataList.getTotalExpense()));
         categoryBreakdown.setPieChartSize(prefPieChartWidth, prefPieChartHeight);
         categoryBreakdown.disableLegend();
         categoryBreakdown.setTitlePosition(Side.BOTTOM);
@@ -67,9 +70,10 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
     }
 
     /** Creates the CategoryBreakdown object with the total income and tag of each CategoryStatistic */
-    private Node createTotalIncomeBreakdown(MixedPieChartDataList dataList) {
+    private Node createTotalIncomeBreakdown(MixedPieChartDataList dataList, String monthLabel) {
         CategoryBreakdown categoryBreakdown = new CurrentMonthPieChartDisplay(dataList.getIncomeChartLabelData(),
-                dataList.getIncomeChartLegendData(), "Income Breakdown for the period");
+                dataList.getIncomeChartLegendData(), String.format("%s< Total income: $%.2f>",
+                monthLabel, dataList.getTotalIncome()));
         categoryBreakdown.setPieChartSize(prefPieChartWidth, prefPieChartHeight);
         categoryBreakdown.disableLegend();
         categoryBreakdown.setTitlePosition(Side.BOTTOM);
@@ -77,18 +81,18 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
     }
 
     /** Populates the welcome panel with its UI elements */
-    private void populateUi(ObservableList<CategoryStatistic> toDisplay) {
+    private void populateUi(ObservableList<CategoryStatistic> toDisplay, String monthLabel) {
         MixedPieChartDataList dataList = new MixedPieChartDataList(toDisplay);
         if (dataList.isExpenseDataEmpty()) {
             expenseStats.getChildren().clear();
         } else {
-            Node expenseNode = createTotalExpenseBreakdown(dataList);
+            Node expenseNode = createTotalExpenseBreakdown(dataList, monthLabel);
             expenseStats.getChildren().add(expenseNode);
         }
         if (dataList.isIncomeDataEmpty()) {
             incomeStats.getChildren().clear();
         } else {
-            Node incomeNode = createTotalIncomeBreakdown(dataList);
+            Node incomeNode = createTotalIncomeBreakdown(dataList, monthLabel);
             incomeStats.getChildren().add(incomeNode);
         }
     }
@@ -99,7 +103,7 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
      */
     public void handleUpdateWelcomePanelEvent(UpdateWelcomePanelEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        populateUi(event.data);
+        populateUi(event.data, event.monthLabel);
         show();
     }
 }
