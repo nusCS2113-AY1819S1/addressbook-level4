@@ -27,11 +27,12 @@ public class BudgetCalculationCommand extends Command {
             + "clubs in the list of clubs in the address book. "
             + "Parameters:  "
             + PREFIX_TOTAL_BUDGET + "TOTAL BUDGET (IN SGD) "
-            + "Example: " + COMMAND_WORD + " 50000 ";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TOTAL_BUDGET + "50000 ";
 
     public static final String MESSAGE_CALCULATE_BUDGET_SUCCESS = "The budgets have been calculated.";
     public static final String MESSAGE_INVALID_TOTAL_BUDGET = "Please enter a valid total budget!";
     public static final String MESSAGE_DUPLICATE_CLUB = "This is a duplicate club";
+    public static final String MESSAGE_BUDGETS_NOT_CALCULATED = "You have not added budgets for any clubs!";
 
     private final TotalBudget totalBudget;
 
@@ -54,6 +55,8 @@ public class BudgetCalculationCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_TOTAL_BUDGET);
         } else if (budgetCalculationManager.getHaveBudgetsBeenCalculated(model)) {
             return new CommandResult(String.format(MESSAGE_BUDGETS_ALREADY_CALCULATED));
+        } else if (budgetCalculationManager.isClubBudgetElementsBookEmpty(model)) {
+            return new CommandResult(String.format(MESSAGE_BUDGETS_NOT_CALCULATED));
         } else {
             int i;
 

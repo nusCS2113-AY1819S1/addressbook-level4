@@ -26,7 +26,7 @@ public class ViewClubBudgetsCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLUB_NAME + "Computing Club ";
 
-    public static final String MESSAGE_SUCCESS = "Club budget is: %1$s";
+    public static final String MESSAGE_SUCCESS = "Club budget is: $ %1$s";
     public static final String MESSAGE_INVALID_CLUB = "This club's budget does not exist in the address book";
 
     private final ClubName toShow;
