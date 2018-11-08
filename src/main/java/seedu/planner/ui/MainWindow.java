@@ -275,6 +275,9 @@ public class MainWindow extends UiPart<Stage> {
             }
         }
         detailedRecordCard.handleRecordPanelSelectionChangedEvent(event);
+        if (!detailedRecordCard.getRoot().isVisible()) {
+            welcomePanel.show();
+        }
     }
 
     @Subscribe
