@@ -33,6 +33,7 @@ public class BudgetCalculationCommand extends Command {
     public static final String MESSAGE_INVALID_TOTAL_BUDGET =
             "Please enter a valid total budget! Total Budget can only be positive numbers, even zero.";
     public static final String MESSAGE_DUPLICATE_CLUB = "This is a duplicate club";
+    public static final String MESSAGE_BUDGETS_NOT_CALCULATED = "You have not added budgets for any clubs!";
 
     private final TotalBudget totalBudget;
 
@@ -55,6 +56,8 @@ public class BudgetCalculationCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_TOTAL_BUDGET);
         } else if (budgetCalculationManager.getHaveBudgetsBeenCalculated(model)) {
             return new CommandResult(String.format(MESSAGE_BUDGETS_ALREADY_CALCULATED));
+        } else if (budgetCalculationManager.isClubBudgetElementsBookEmpty(model)) {
+            return new CommandResult(String.format(MESSAGE_BUDGETS_NOT_CALCULATED));
         } else {
             int i;
 
