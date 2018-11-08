@@ -57,19 +57,21 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
-        limits = new FilteredList<Limit>(versionedFinancialPlanner.getLimitList());
+        limits = new FilteredList<>(versionedFinancialPlanner.getLimitList());
         recordsInCurrentMonth = new FilteredList<>(versionedFinancialPlanner.getRecordList(),
                 new DateIsWithinIntervalPredicate(DateUtil.generateFirstOfMonth(getCurrentMonth()),
                         DateUtil.generateLastOfMonth(getCurrentMonth())));
         recordsInCurrentMonth.addListener((ListChangeListener<Record>) c -> {
+            Month currentMonth = getCurrentMonth();
             Predicate<Record> newPredicate = new DateIsWithinIntervalPredicate(
-                    DateUtil.generateFirstOfMonth(getCurrentMonth()),
-                    DateUtil.generateLastOfMonth(getCurrentMonth()));
+                    DateUtil.generateFirstOfMonth(currentMonth),
+                    DateUtil.generateLastOfMonth(currentMonth));
             if (!newPredicate.equals(recordsInCurrentMonth.getPredicate())) {
                 recordsInCurrentMonth.setPredicate(newPredicate);
             }
             CategoryStatisticsList statsList = new CategoryStatisticsList(recordsInCurrentMonth);
-            EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(statsList.getReadOnlyStatsList()));
+            EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(statsList.getReadOnlyStatsList(),
+                    currentMonth.toString()));
         });
         EventsCenter.getInstance().registerHandler(this);
     }
@@ -78,7 +80,8 @@ public class ModelManager extends ComponentManager implements Model {
         this(new FinancialPlanner(), new UserPrefs());
     }
 
-    private Month getCurrentMonth() {
+    //TODO: refactor into date util
+    public Month getCurrentMonth() {
         Date currentDate = DateUtil.getDateToday();
         return new Month(currentDate.getMonth(), currentDate.getYear());
     }

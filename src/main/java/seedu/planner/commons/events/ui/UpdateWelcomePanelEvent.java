@@ -10,9 +10,11 @@ import seedu.planner.model.summary.CategoryStatistic;
 public class UpdateWelcomePanelEvent extends BaseEvent {
 
     public final ObservableList<CategoryStatistic> data;
+    public final String monthLabel;
 
-    public UpdateWelcomePanelEvent(ObservableList<CategoryStatistic> data) {
+    public UpdateWelcomePanelEvent(ObservableList<CategoryStatistic> data, String monthLabel) {
         this.data = data;
+        this.monthLabel = monthLabel;
     }
 
     @Override

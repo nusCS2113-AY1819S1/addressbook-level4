@@ -115,4 +115,12 @@ public class MixedPieChartDataList {
     public List<PieChart.Data> getIncomeChartLabelData() {
         return incomeChartLabelData;
     }
+
+    public Double getTotalIncome() {
+        return totalIncome;
+    }
+
+    public Double getTotalExpense() {
+        return totalExpense;
+    }
 }
