@@ -120,7 +120,7 @@ public class RecruitBookParserTest {
     }
 
     @Test
-    public void parseCommand_clear_candidatebook() throws Exception {
+    public void parseCommand_clear_candidateBook() throws Exception {
         assertTrue(parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD, state, emailUtil, userPrefs)
                 instanceof ClearCandidateBookCommand);
         try {
@@ -133,7 +133,7 @@ public class RecruitBookParserTest {
     }
 
     @Test
-    public void parseCommand_clear_companybook() throws Exception {
+    public void parseCommand_clear_companyBook() throws Exception {
         assertTrue(parser.parseCommand(ClearCompanyBookCommand.COMMAND_WORD, state, emailUtil, userPrefs)
                 instanceof ClearCompanyBookCommand);
         try {
@@ -169,7 +169,7 @@ public class RecruitBookParserTest {
     }
 
     @Test
-    public void parseCommand_invaidArgsForDeleteShortlistedCandidateInitializationCommand_throwsParseException() {
+    public void parseCommand_invalidArgsForDeleteShortlistedCandidateInitializationCommand_throwsParseException() {
         assertDeleteShortlistedCandidateInitializationCommandParseFailure(parser, "1",
                 state, emailUtil, MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
                         + DeleteShortlistedCandidateInitializationCommand.MESSAGE_USAGE);
@@ -322,7 +322,7 @@ public class RecruitBookParserTest {
     }
 
     @Test
-    public void parseCommand_add_joboffer() throws Exception {
+    public void parseCommand_add_jobOffer() throws Exception {
         JobOffer jobOffer = new JobOfferBuilder().build();
         LogicState addJobState = new LogicState(AddJobDetailsCommand.COMMAND_WORD);
         AddJobDetailsCommand command =
