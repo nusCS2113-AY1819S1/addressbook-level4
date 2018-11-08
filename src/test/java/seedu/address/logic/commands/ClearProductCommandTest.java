@@ -24,8 +24,8 @@ public class ClearProductCommandTest {
         Model expectedModel = new ModelManager(new TestStorage());
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess
-                (new ClearProductCommand(), model, commandHistory, ClearProductCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearProductCommand(),
+                model, commandHistory, ClearProductCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -37,8 +37,8 @@ public class ClearProductCommandTest {
         expectedModel.resetData(new ProductDatabase());
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess
-                (new ClearProductCommand(), model, commandHistory, ClearProductCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearProductCommand(),
+                model, commandHistory, ClearProductCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }
