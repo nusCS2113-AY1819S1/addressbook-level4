@@ -32,7 +32,8 @@ import seedu.address.testutil.DistributorBuilder;
 import seedu.address.testutil.EditDistributorDescriptorBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoProductCommand and RedoProductCommand) and unit tests for EditProductCommand.
+ * Contains integration tests (interaction with the Model, UndoProductCommand and RedoProductCommand)
+ * and unit tests for EditProductCommand.
  * @author Denise
  */
 public class EditDistributorCommandTest {
