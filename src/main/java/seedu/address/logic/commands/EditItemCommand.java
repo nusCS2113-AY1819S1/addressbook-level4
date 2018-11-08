@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_QUANTITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
@@ -15,6 +16,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemLocation;
 import seedu.address.model.item.ItemName;
 import seedu.address.model.item.ItemQuantity;
 
@@ -31,10 +33,12 @@ public class EditItemCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_ITEM_NAME + "ITEM_NAME] "
-            + "[" + PREFIX_ITEM_QUANTITY + "ITEM_QUANTITY]...\n"
+            + "[" + PREFIX_ITEM_QUANTITY + "ITEM_QUANTITY] "
+            + "[" + PREFIX_ITEM_LOCATION + "ITEM_LOCATION]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ITEM_NAME + "Ball "
-            + PREFIX_ITEM_QUANTITY + "4";
+            + PREFIX_ITEM_QUANTITY + "4"
+            + PREFIX_ITEM_LOCATION + "Storeroom";
 
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -86,8 +90,9 @@ public class EditItemCommand extends Command {
 
         ItemName updatedItemName = editItemDescriptor.getItemName().orElse(itemToEdit.getItemName());
         ItemQuantity updatedItemQuantity = editItemDescriptor.getItemQuantity().orElse(itemToEdit.getItemQuantity());
+        ItemLocation updatedItemLocation = editItemDescriptor.getItemLocation().orElse(itemToEdit.getItemLocation());
 
-        return new Item(updatedItemName, updatedItemQuantity);
+        return new Item(updatedItemName, updatedItemQuantity, updatedItemLocation);
     }
 
     @Override
@@ -115,6 +120,7 @@ public class EditItemCommand extends Command {
     public static class EditItemDescriptor {
         private ItemName itemName;
         private ItemQuantity itemQuantity;
+        private ItemLocation itemLocation;
 
         public EditItemDescriptor() {}
 
@@ -125,13 +131,14 @@ public class EditItemCommand extends Command {
         public EditItemDescriptor(EditItemDescriptor toCopy) {
             setItemName(toCopy.itemName);
             setItemQuantity(toCopy.itemQuantity);
+            setItemLocation(toCopy.itemLocation);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(itemName, itemQuantity);
+            return CollectionUtil.isAnyNonNull(itemName, itemQuantity, itemLocation);
         }
 
         public void setItemName(ItemName itemName) {
@@ -150,6 +157,14 @@ public class EditItemCommand extends Command {
             return Optional.ofNullable(itemQuantity);
         }
 
+        public void setItemLocation(ItemLocation itemLocation) {
+            this.itemLocation = itemLocation;
+        }
+
+        public Optional<ItemLocation> getItemLocation() {
+            return Optional.ofNullable(itemLocation);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -166,7 +181,8 @@ public class EditItemCommand extends Command {
             EditItemDescriptor e = (EditItemDescriptor) other;
 
             return getItemName().equals(e.getItemName())
-                    && getItemQuantity().equals(e.getItemQuantity());
+                    && getItemQuantity().equals(e.getItemQuantity())
+                    && getItemLocation().equals(e.getItemLocation());
         }
     }
 }

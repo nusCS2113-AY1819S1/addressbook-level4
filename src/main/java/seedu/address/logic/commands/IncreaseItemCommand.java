@@ -58,7 +58,8 @@ public class IncreaseItemCommand extends Command {
         Item itemToIncrease = lastShownList.get(index.getZeroBased());
         Item increasedItem = new Item(itemToIncrease.getItemName(),
                 new ItemQuantity(Integer.toString((Integer.parseInt(quantityToAdd.toString()))
-                        + Integer.parseInt(itemToIncrease.getItemQuantity().toString()))));
+                        + Integer.parseInt(itemToIncrease.getItemQuantity().toString()))),
+                itemToIncrease.getItemLocation());
 
         model.updateItem(itemToIncrease, increasedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);

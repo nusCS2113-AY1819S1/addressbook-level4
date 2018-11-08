@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemLocation;
 import seedu.address.model.item.ItemName;
 import seedu.address.model.item.ItemQuantity;
 
@@ -20,7 +21,8 @@ public class XmlAdaptedItem {
     private String itemName;
     @XmlElement(required = true)
     private String itemQuantity;
-
+    @XmlElement(required = true)
+    private String itemLocation;
 
 
     /**
@@ -32,9 +34,10 @@ public class XmlAdaptedItem {
     /**
      * Constructs an {@code XmlAdaptedItem} with the given item details.
      */
-    public XmlAdaptedItem(String itemName, String itemQuantity) {
+    public XmlAdaptedItem(String itemName, String itemQuantity, String itemLocation) {
         this.itemName = itemName;
         this.itemQuantity = itemQuantity;
+        this.itemLocation = itemLocation;
     }
 
     /**
@@ -45,6 +48,7 @@ public class XmlAdaptedItem {
     public XmlAdaptedItem(Item source) {
         itemName = source.getItemName().fullItemName;
         itemQuantity = source.getItemQuantity().itemQuantity.toString();
+        itemLocation = source.getItemLocation().fullItemLocation;
     }
 
     /**
@@ -71,7 +75,16 @@ public class XmlAdaptedItem {
         }
         final ItemQuantity modelItemQuantity = new ItemQuantity(itemQuantity);
 
-        return new Item(modelItemName, modelItemQuantity);
+        if (itemLocation == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ItemLocation.class.getSimpleName()));
+        }
+        if (!ItemLocation.isValidItemLocation(itemLocation)) {
+            throw new IllegalValueException(ItemLocation.MESSAGE_ITEM_LOCATION_CONSTRAINTS);
+        }
+        final ItemLocation modelItemLocation = new ItemLocation(itemLocation);
+
+        return new Item(modelItemName, modelItemQuantity, modelItemLocation);
     }
 
     @Override
@@ -86,6 +99,7 @@ public class XmlAdaptedItem {
 
         XmlAdaptedItem otherItem = (XmlAdaptedItem) other;
         return Objects.equals(itemName, otherItem.itemName)
-                && Objects.equals(itemQuantity, otherItem.itemQuantity);
+                && Objects.equals(itemQuantity, otherItem.itemQuantity)
+                && Objects.equals(itemLocation, otherItem.itemLocation);
     }
 }
