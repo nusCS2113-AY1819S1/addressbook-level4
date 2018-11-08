@@ -11,8 +11,10 @@ public class Parameter {
 
     public static final String MESSAGE_PARAMETER_CONSTRAINTS = "Sort Command Parameters must conform to the following "
             + "values: 'Sort'";
+    public static final String MESSAGE_UNKNOWN_PARAM = "Invalid Parameter. Please enter 'name' or 'skill'";
+    // TODO expand with more parameters
 
-    private static final String PARAMETERS_REGEX = "SKILL"; // TODO expand with more parameters
+    private static final String PARAMETERS_REGEX = "skill|name"; // TODO expand with more parameters
 
     public final String value;
 

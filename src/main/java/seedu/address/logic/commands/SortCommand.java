@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Parameter;
 import seedu.address.model.person.Person;
@@ -29,7 +30,11 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         List<Person> filteredPersonList = new ArrayList<>(model.getFilteredPersonList());
-        filteredPersonList.sort(Person.getByName());
+        try {
+            filteredPersonList.sort(Person.getComparator(parameter));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         for (Person person: filteredPersonList) {
             model.deletePerson(person);
         }

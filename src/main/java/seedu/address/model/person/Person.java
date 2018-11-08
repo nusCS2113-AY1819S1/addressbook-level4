@@ -1,6 +1,9 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.SortingParams.PARAM_NAME;
+import static seedu.address.logic.parser.SortingParams.PARAM_SKILL;
+import static seedu.address.model.person.Parameter.MESSAGE_UNKNOWN_PARAM;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,6 +11,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,12 +46,23 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public static Comparator<Person> getByName() {
-        return byName;
-    }
+    private static Comparator<Person> bySkillLevel = Comparator.comparingInt(p -> p.getSkillLevel().skillLevel);
 
-    public static Comparator<Person> getBySkillLevel() {
-        return bySkillLevel;
+    private static Comparator<Person> byName = (p1, p2) -> {
+        String name1 = p1.toString();
+        String name2 = p2.toString();
+        return name1.compareTo(name2);
+    };
+
+    public static Comparator<Person> getComparator(Parameter parameter) throws ParseException {
+        switch(parameter.value) {
+        case PARAM_SKILL:
+            return bySkillLevel;
+        case PARAM_NAME:
+            return byName;
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_PARAM);
+        }
     }
 
     public Name getName() {
@@ -137,12 +152,4 @@ public class Person {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
-    private static Comparator<Person> bySkillLevel = Comparator.comparingInt(p -> p.getSkillLevel().skillLevel);
-
-    private static Comparator<Person> byName = (p1, p2) -> {
-        String name1 = p1.toString();
-        String name2 = p2.toString();
-        return name1.compareTo(name2);
-    };
 }
