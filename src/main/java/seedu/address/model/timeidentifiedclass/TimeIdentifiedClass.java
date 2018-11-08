@@ -27,16 +27,14 @@ public abstract class TimeIdentifiedClass {
      * Gives the date and time in the format specified by {@code dateAndTimeFormatter}
      */
     public static String getCurrentDateAndTime() {
-        String currentDateAndTime = dateAndTimeFormatter.format(time.now());
-        return currentDateAndTime;
+        return dateAndTimeFormatter.format(time.now());
     }
 
     /**
      * Gives the current date in the format specified by {@code dayFormatter}
      */
     public static String getCurrentDate() {
-        String currentDate = dayFormatter.format(time.now());
-        return currentDate;
+        return dayFormatter.format(time.now());
     }
 
     /**
@@ -46,6 +44,9 @@ public abstract class TimeIdentifiedClass {
      * @return true if the month is valid
      */
     public static boolean isValidMonth(String month) {
+        if (month == null) {
+            return false;
+        }
         if (month.matches("\\d{2}")) {
             int monthValue = Integer.parseInt(month);
             if (monthValue <= NUMBER_OF_MONTHS_IN_YEAR && monthValue > 0) {
@@ -62,6 +63,9 @@ public abstract class TimeIdentifiedClass {
      * @return true if the day is valid
      */
     public static boolean isValidDay(String day) {
+        if (day == null) {
+            return false;
+        }
         if (day.matches("\\d{2}")) {
             int dayValue = Integer.parseInt(day);
             if (dayValue <= MAXIMUM_NUMBER_OF_DAYS_IN_MONTH && dayValue > 0) {
@@ -78,6 +82,9 @@ public abstract class TimeIdentifiedClass {
      * @return true if the year is valid.
      */
     public static boolean isValidYear(String year) {
+        if (year == null) {
+            return false;
+        }
         if (year.matches("\\d{4}")) {
             return true;
         }
@@ -139,7 +146,10 @@ public abstract class TimeIdentifiedClass {
      * @return true if the string is in valid day and time format
      */
     public static boolean isValidDateAndTime(String dateAndTime) {
-        String[] splitDateAndTime = dateAndTime.split("[/ \\s+ :]");
+        if (dateAndTime == null) {
+            return false;
+        }
+        String[] splitDateAndTime = dateAndTime.trim().split("[/ \\s+ :]");
         if (splitDateAndTime.length != 6) {
             return false;
         }
@@ -212,6 +222,9 @@ public abstract class TimeIdentifiedClass {
      * @return true if and only if the date is valid.
      */
     public static boolean isValidDate(String date) {
+        if (date == null) {
+            return false;
+        }
         String[] splitDate = date.split("/");
         if (splitDate.length != 3) {
             return false;

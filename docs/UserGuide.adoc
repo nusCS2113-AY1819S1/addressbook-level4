@@ -23,7 +23,7 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 == Quick Start
 
 .  Ensure you have Java version 9 installed in your Computer.
-.  Download the latest Inventarie.jar here (link will be added later).
+.  Download the latest `Inventarie.jar` link:https://github.com/CS2113-AY1819S1-T13-3/main/releases/download/v1.3.2/inventariepro.jar[here].
 .  Copy the file to the folder you want to use as the home folder for your Inventarie Pro.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 .  Register a new user account (Jump to `register` in <<Authentication>>.
@@ -164,7 +164,7 @@ Format: `listdistributors`
 
 Provides the list of distributors engaged with the store.
 
-==== Edit a distributor: `editdistributor index`
+==== Edit a distributor: `editdistributor`
 
 Format: `editdistributor index dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
@@ -240,10 +240,27 @@ Format: `latest`
 
 Displays the details of the latest transaction.
 
+==== View all the transactions for a given day: `alltransactions`
+
+Format: `alltransactions time/<yyyy/MM/dd>`
+
+Displays the timings for all the transactions made on a specified day.
+
+==== View the details for a given transaction: `viewtransaction`
+
+Format: `viewtransaction time/<yyyy/MM/dd HH:mm:ss>`
+
+Displays the details of a transaction made on a given date and time.
+
+* It is important to note that there must be a single space between 'dd' and 'HH'
+in the command format.
+
 ==== Add a reminder: `setreminder`
 
 Format: `addreminder time/ <yyyy/MM/dd HH:mm:ss> message/<The reminder message>`
-Sets and stores a reminder.
+
+Sets and stores a reminder. The reminder notification will appear once
+the reminder time has elapsed.
 
 * All reminders must have unique times.
 * There must only be a single space between "dd" and "HH" in the command format.
@@ -274,6 +291,7 @@ Removes a reminder in the system. There must only be a single
 space between "dd" and "HH" in the command format.
 
 Examples:
+
 * `removereminder time/ 2018/10/26 12:30:00`
 // end::journal[]
 

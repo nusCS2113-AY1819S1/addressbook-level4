@@ -81,6 +81,7 @@ public class Reminder extends TimeIdentifiedClass {
      * @param reminderTime
      */
     public static boolean isValidReminderTime(String reminderTime) {
+        requireNonNull(reminderTime);
         return isValidDateAndTime(reminderTime);
     }
 }
