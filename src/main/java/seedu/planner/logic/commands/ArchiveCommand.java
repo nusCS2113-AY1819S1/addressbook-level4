@@ -21,7 +21,8 @@ import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryByDateList;
 import seedu.planner.ui.SummaryEntry;
 
-//@author nguyenngoclinhchi
+//@@author nguyenngoclinhchi
+
 /**
  * Archive the records into Excel file and then deletes all the records exported.
  */

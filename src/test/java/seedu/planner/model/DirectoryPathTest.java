@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import seedu.planner.testutil.Assert;
 
+//@@author nguyenngoclinhchi
+
 public class DirectoryPathTest {
 
     @Test

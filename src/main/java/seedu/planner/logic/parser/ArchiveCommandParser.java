@@ -12,7 +12,8 @@ import seedu.planner.logic.commands.ArchiveCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 
-//@author nguyenngoclinhchi
+//@@author nguyenngoclinhchi
+
 /**
  * Archive the records, export into  Excel file then delete all records exported.
  */

@@ -10,7 +10,8 @@ import seedu.planner.commons.util.ExcelUtil;
 import seedu.planner.logic.commands.ImportExcelCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 
-//@author nguyenngoclinhchi
+//@@author nguyenngoclinhchi
+
 /**
  * Parses input arguments and create ImportExcelCommand object.
  */

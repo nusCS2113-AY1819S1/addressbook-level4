@@ -6,7 +6,8 @@ import seedu.planner.logic.commands.DeleteByDateCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
 
-//@author nguyenngoclinhchi
+//@@author nguyenngoclinhchi
+
 /**
  * Parses input arguments and creates a new DeleteByDateCommand object
  */

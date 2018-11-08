@@ -23,7 +23,8 @@ import seedu.planner.testutil.TypicalDates;
 import seedu.planner.testutil.TypicalIndexes;
 import seedu.planner.testutil.TypicalRecords;
 
-//@author nguyenngoclinhchi
+//@@author nguyenngoclinhchi
+
 public class DeleteByDateCommandTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();

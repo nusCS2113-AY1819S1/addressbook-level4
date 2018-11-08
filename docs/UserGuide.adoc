@@ -269,10 +269,10 @@ Deletes the 2nd record in the expense book.
 Deletes the 1st record in the results of the `find` command.
 
 // tag::delete_by_date_entry[]
-=== Deleting records by date. `delete_date`
+=== Deleting records by date. `deletedate`
 
 Deletes the records with a specified date from the expense book. +
-Format: `delete_date DATE`
+Format: `deletedate DATE`
 
 ****
 * Deletes records with the specified `DATE`.
@@ -281,7 +281,7 @@ Format: `delete_date DATE`
 
 Examples:
 
-* `delete_date 31-7-2018` +
+* `deletedate 31-7-2018` +
 Deletes the records with date 31-7-2018.
 
 // end::delete_by_date_entry[]
@@ -304,7 +304,7 @@ Format: `undo`
 [NOTE]
 ====
 Undoable commands: those commands that modify the FinancialPlanner's stored content (
-`add`, `delete`, `deletedate`, `edit`, `addlimit`, `deletelimit`, `editlimit` and `clear`).
+`add`, `delete`, `deletedate`, `exportexcel`, `archive`, `import`, `edit`, `addlimit`, `deletelimit`, `editlimit` and `clear`).
 ====
 
 Examples:
@@ -515,9 +515,9 @@ image::WelcomePanelWithPieCharts.png[width="790"]
 
 This section describe features for the user to manage his/her records data in the Financial Planner, with the help of Excel.
 
-// tag::export_excel[]
+// tag::exportexcel[]
 
-=== Export the records into the Excel file. `export_excel`
+=== Export the records into the Excel file. `exportexcel`
 
 Exports the records into an Excel file. +
 
@@ -525,12 +525,12 @@ Exports the records into an Excel file. +
 There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
 Format: +
 
-* Default mode: `export_excel` +
-* Single argument Date mode: `export_excel d/DATE` +
-* Dual argument Date mode: `export_excel d/START_DATE END_DATE`
-* Single argument Directory Path mode: `export_excel dir/DIRECTORY_PATH`
-* Single argument Directory Path + Single argument Date mode: `export_excel d/DATE dir/DIRECTORY_PATH`
-* Single argument Directory Path + Dual argument Date mode: `export_excel d/START_DATE END_DATE dir/DIRECTORY_PATH`
+* Default mode: `exportexcel` +
+* Single argument Date mode: `exportexcel d/DATE` +
+* Dual argument Date mode: `exportexcel d/START_DATE END_DATE`
+* Single argument Directory Path mode: `exportexcel dir/DIRECTORY_PATH`
+* Single argument Directory Path + Single argument Date mode: `exportexcel d/DATE dir/DIRECTORY_PATH`
+* Single argument Directory Path + Dual argument Date mode: `exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH`
 
 ****
 * *Default mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
@@ -547,6 +547,8 @@ Format: +
 +
 ****
 
+Please note that
+
 ****
 * Date follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
 *yyyy* requires exactly 4 digits.
@@ -554,11 +556,12 @@ Format: +
 
 Examples:
 
-* `export_excel`
-* `export_excel d/31-3-1999`
-* `export_excel d/31-3-1999 31-03-2019`
-* `export_excel d/31-3-1999 dir/C:\`
-* `export_excel d/31-3-1999 31-3-2019 dir/C:\`
+* `exportexcel`
+* `exportexcel d/31-3-1999`
+* `exportexcel dir/C:\`
+* `exportexcel d/31-3-1999 31-03-2019`
+* `exportexcel d/31-3-1999 dir/C:\`
+* `exportexcel d/31-3-1999 31-3-2019 dir/C:\`
 
 The Excel file name will be named based on the command, relating to Date: +
 
@@ -573,7 +576,7 @@ There will be two sheets in the Excel file, namely `RECORD DATA` and `SUMMARY DA
 
 image::Export_Capture1_LinhChi.png[width:800]
 
-* `SUMMARY DATA` stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information].
+* `SUMMARY DATA` stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw a line chart automatically inside the Excel sheet` part for more information].
 ** As you can see in the picture, there are 3 series shown:
 *** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
 *** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
@@ -584,11 +587,11 @@ image::Export_Capture2_LinhChi.png[width:800]
 As the size of the Chart is fixed initially. Sometimes, when user exports too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
 
 
-// end::export_excel[]
+// end::exportexcel[]
 
 // tag::import[]
 
-=== Import the records stored from the Excel file. `import`
+=== Import the records stored from the Excel file into the App. `import`
 
 There are 2 modes, single argument File Path mode and (single argument Directory Path + single argument File Name) mode +
 
@@ -658,6 +661,8 @@ Format: +
 +
 ****
 
+Please note that
+
 ****
 * Date follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
 *yyyy* requires exactly 4 digits.
@@ -674,6 +679,7 @@ Examples:
 
 * `archive`
 * `archive d/31-3-1999`
+* `archive dir/C:\`
 * `archive d/31-3-1999 31-03-2019`
 * `archive d/31-3-1999 dir/C:\`
 * `archive d/31-3-1999 31-3-2019 dir/C:\`
@@ -684,7 +690,7 @@ There will be two sheets in the Excel file, namely `RECORD DATA` and `SUMMARY DA
 
 image::Export_Capture1_LinhChi.png[width:800]
 
-* `SUMMARY DATA` stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information].
+* `SUMMARY DATA` stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw a line chart automatically inside the Excel sheet` part for more information].
 ** As you can see in the picture, there are 3 series shown:
 *** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
 *** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
@@ -696,11 +702,11 @@ image::Export_Capture2_LinhChi.png[width:800]
 
 // end::archive[]
 
+// tag::draw_line_chart[]
+
 === Draw a line chart automatically inside the Excel sheet
 
-Automatically uses the the summary data from the `SUMMARY DATA` sheet in the Excel sheet after the command `archive` or `export_excel` is called.
-
-This feature does not require user typing the command. It is automatically done if the user type in command `archive` or `export_excel`.
+Automatically uses the the summary data from the `SUMMARY DATA` sheet in the Excel sheet after the command `archive` or `exportexcel` is called.
 
 As you can see the screenshot below, in the `SUMMARY DATA` sheet, next to the summary table:
 
@@ -713,6 +719,8 @@ As you can see the screenshot below, in the `SUMMARY DATA` sheet, next to the su
 ** The third grey line shows the Net (total of income and outcome) based on Date.
 
 image::Export_Capture2_LinhChi.png[width:800]
+
+// end::draw_line_chart[]
 
 // tag::limitfeatures[]
 
@@ -862,6 +870,8 @@ Examples:
 
 === Auto Complete for wider range of inputs and accuracy `[Coming in v2.0]`
 
+===
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -925,19 +935,21 @@ e.g. `stats d/20-12-2017 31-09-2018`
 e.g. +
 . `exportexcel`
 . `exportexcel d/31-3-1999`
+. `exportexcel dir/C:\`
 . `exportexcel d/31-3-1999 31-03-2019`
 . `exportexcel d/31-3-1999 dir/C:\`
 . `exportexcel d/31-3-1999 31-3-2019 dir/C:\`
 
-* *Import into app* : multiple modes of `import` +
+* *Import from Excel file into app* : multiple modes of `import` +
 e.g. +
 . `import dir/C:\Financial_Planner_ALL.xlsx`
 . `import dir/C:\ n/Financial_Planner_All.xlsx`
 
-* *Archive records* : multiple modes of `archive` +
+* *Archive records into Excel file* : multiple modes of `archive` +
 e.g. +
 . `archive`
 . `archive d/31-3-1999`
+. `archive dir/C:\`
 . `archive d/31-3-1999 31-03-2019`
 . `archive d/31-3-1999 dir/C:\`
 . `archive d/31-3-1999 31-3-2019 dir/C:\`
