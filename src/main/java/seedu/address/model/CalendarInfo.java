@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import java.util.Calendar;
 /**
- * Calendar information initializer
+ * Calendar information initializer.
  */
 public class CalendarInfo {
 
