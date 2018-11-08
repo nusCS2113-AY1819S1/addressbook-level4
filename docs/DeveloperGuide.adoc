@@ -1230,20 +1230,24 @@ _{More to be added}_
 
 For all the use cases below, System refers to the EventManager, Actor refers to the admin/user.
 
-*Use Case: Authentication* +
-MSS (main system success): +
-1. EventManager prompts user for username and password. +
-2. User inputs correct username and password. +
-3. EventManager grants access to User and displays welcome message. +
+[discrete]
+=== Use Case: Authentication
+*MSS*
+
+. User signs up for an account in the Event Manager. +
+. User logs in by entering correct username and password. +
+. Event Manager grants access to User and displays welcome message. +
 Use case ends.
 
 Extensions: +
-     2a. User inputs incorrect password. +
-	2a1. EventManager denies access to user and displays error message. +
+[none]
+* 2a. User inputs incorrect password.
+[none]
+** 2a1. Event Manager denies access to the user and displays error message. +
 Use Case resumes at step 1.
 
 *Use Case: View events, RSVP and Reminders* +
-MSS (main system success): +
+*MSS* +
 1. User requests for list of events. +
 2. EventManager displays list of events. +
 3. User selects event. +
