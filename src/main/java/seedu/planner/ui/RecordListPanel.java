@@ -31,6 +31,10 @@ public class RecordListPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    public void unselect() {
+        recordListView.getSelectionModel().select(null);
+    }
+
     private void setConnections(ObservableList<Record> recordList) {
         recordListView.setItems(recordList);
         recordListView.setCellFactory(listView -> new RecordListViewCell());

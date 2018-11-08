@@ -589,7 +589,8 @@ image::FindTagSequenceDiagram.png[width:800]
 
 // tag::limitfeatures[]
 === Limit features
-===== Limit features' storage:
+
+* Limit features' storage:
 ** The limit features are based on the data type `Limit`, which includes two `Date` s and one `moneyFlow`.
 When entering only one date, the parser will let the date be both dateStart and dateEnd.
 It is equivalent to entering two same dates.
@@ -597,7 +598,7 @@ It is equivalent to entering two same dates.
 ** The limit storage is based on the `Date` . More than one limit for the same
 period of time is not allowed.
 
-===== Limit features's check:
+* Limit features's check:
 ** Whenever the user change the recordList information, including adding a record, deleting a record
 and editing a record, all the limits will be checked automatically by calling the function `autoLimitCheck()`.
 ** The `autoCheckLimit()` function will look through all the records, calculate the total money for each limit
@@ -607,14 +608,14 @@ out to warn the user.
 execute the `isExceeded()`, `getTotalSpend()` and `generateLimitOutput()` for every limit
 and combine all the limits' output into one string.
 
-===== Limit features' MoneyFlow:
+* Limit features' MoneyFlow:
 ** Unlike the moneyFlow used by addCommand, the limit moneyFlow input can only be normal real number, which does not have "-" or
 "+" in front of the number. For example, `m/500`.
 ** After user input the normal real number, the parser will add a "-"
 at the beginning of the real number, which makes it a normal moneyFlow.
 ** If user input wrong form of limit moneyFlow, the program will throw an error.
 
-===== Limit features' parsers:
+* Limit features' parsers:
 ** `All the limitCommand Parsers are similar to each other. However, there are some differences between different commands.
 Detailed information will be provided in specific commands.`
 . The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
@@ -627,7 +628,7 @@ If there is only one date string, this date will be set to both dateStart and da
 . After parsing the two dates, the parser will check whether the dateStart is earlier than dateEnd.
 . Lastly a new limit will be generated with the dateStart, dateEnd and money and return the xxxLimitCommand with the limit.
 
-===== Monthly Limit:
+* Monthly Limit:
 ** The addMonthlyLimit command is to add a continuous limit always for the current month. The limit will always check
 the spend of the month according to the current time. For example, if the limit was set to be 200 at April, the
 limit will check the total spend for April. When the time comes to May, the limit will no longer check April, instead, the limit

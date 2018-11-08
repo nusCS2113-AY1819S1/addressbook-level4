@@ -1,5 +1,7 @@
 package seedu.planner.model.summary;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,11 +23,10 @@ import seedu.planner.ui.SummaryEntry;
 public class SummaryByMonthList extends SummaryList {
 
     protected HashMap<Month, Summary<Month>> summaryMap = new HashMap<>();
-    private MoneyFlow total = new MoneyFlow("-0");
-    private MoneyFlow totalIncome = new MoneyFlow("-0");
-    private MoneyFlow totalExpense = new MoneyFlow("-0");
 
     public SummaryByMonthList(List<Record> recordList) {
+        super();
+        requireNonNull(recordList);
         for (Record r : recordList) {
             addRecordToMap(r);
             updateTotals(r);
