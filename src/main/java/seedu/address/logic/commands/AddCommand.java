@@ -39,7 +39,7 @@ public class AddCommand extends Command {
             + PREFIX_REMAINING_ITEMS + "12";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s \n\nRemember to edit the added distributor's"
-            + " hone number instead of leaving it as the default 00000000!";
+            + "phone number instead of leaving it as the default 00000000!";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the product database";
     public static final String MESSAGE_EDIT_DIST_PHONE = "The product was successfully added!\n\n"
             + "The distributor has not been added because"
