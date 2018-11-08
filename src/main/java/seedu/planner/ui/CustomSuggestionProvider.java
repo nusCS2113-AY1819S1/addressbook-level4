@@ -92,19 +92,19 @@ public class CustomSuggestionProvider {
     }
 
     /**
+     * Clears the set of suggestions
+     */
+    private void emptySuggestions() {
+        suggestionProvider.clearSuggestions();
+    }
+
+    /**
      * Clears the current set of suggestions and insert the new set of suggestions
      * @param suggestions is the complete list of strings that can be suggested to the user
      */
     private void updateSuggestions(Set<String> suggestions) {
         suggestionProvider.clearSuggestions();
         suggestionProvider.addPossibleSuggestions(suggestions);
-    }
-
-    /**
-     * Clears the set of suggestions
-     */
-    private void emptySuggestions() {
-        suggestionProvider.clearSuggestions();
     }
 
     /**
