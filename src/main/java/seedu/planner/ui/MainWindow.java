@@ -269,7 +269,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (!event.getNewSelection().equals(null)) {
+        if (event.getNewSelection() != null) {
             for (Node node: mainUiPanelPlaceholder.getChildren()) {
                 node.setVisible(false);
             }
