@@ -7,5 +7,6 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
         <department isPrivate="false">Admin</department>
+        <designation isPrivate="false">manager</designation>
     </persons>
 </addressbook>

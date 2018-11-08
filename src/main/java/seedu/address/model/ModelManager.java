@@ -18,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.EventListChangedEvent;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
 /**
@@ -180,6 +181,24 @@ public class ModelManager extends ComponentManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return versionedAddressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasEmail(Email email) {
+        requireNonNull(email);
+        return versionedAddressBook.hasEmail(email);
+    }
+
+    @Override
+    public Person getPerson(Email email) {
+        requireNonNull(email);
+
+        if (versionedAddressBook.hasEmail(email)) {
+            return versionedAddressBook.getPerson(email);
+        } else {
+            return null;
+        }
+
     }
 
     @Override

@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import seedu.address.model.person.Email;
+
 /**
  * The API of the Model component.
  */
@@ -26,4 +28,6 @@ public interface Model extends PersonModel, EventModel {
     /** Redoes a resetData command */
     void redoBothState();
 
+    /** check if the email is present */
+    boolean hasEmail(Email email);
 }

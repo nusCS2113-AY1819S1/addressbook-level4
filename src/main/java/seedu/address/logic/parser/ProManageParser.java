@@ -4,6 +4,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 //@@author: IcedCoffeeBoy
 
@@ -17,7 +18,6 @@ public class ProManageParser {
      */
 
     private CommandsParser commandsParser;
-
     public ProManageParser() {
         this.commandsParser = new DefaultParser();
     }
@@ -28,10 +28,10 @@ public class ProManageParser {
      * @throws ParseException
      */
 
-    public Command parseCommand(String userInput) throws CommandException, ParseException {
+    public Command parseCommand(String userInput, Model model) throws CommandException, ParseException {
         Command command = commandsParser.parseCommand(userInput);
         if (command instanceof LoginCommand) {
-            this.commandsParser = ((LoginCommand) command).getParser();
+            this.commandsParser = ((LoginCommand) command).getParser(model);
         }
         return command;
     }
