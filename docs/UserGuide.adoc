@@ -400,7 +400,7 @@ Adds "What is the attire to wear for the event?" into event 1 comment section wi
 Adds "What is the attire to wear for this event?" into event 5 comment section with username
 
 .Adding a comment
-image::addComment.png[width="600"]
+image::addComment.png[width="790"]
 
 
 
