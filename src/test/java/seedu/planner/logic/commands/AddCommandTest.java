@@ -19,6 +19,7 @@ import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
+import seedu.planner.model.Month;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
@@ -229,6 +230,9 @@ public class AddCommandTest {
         public void commitFinancialPlanner() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Month getCurrentMonth() { throw new AssertionError("This method should not be called."); }
     }
 
     /**
