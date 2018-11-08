@@ -841,6 +841,7 @@ The monthly limit will be deleted and no longer check the spend of the current m
 Examples:
 * `deletemonthlylimit`
 //end::limitfeatures[]
+
 == Upcoming Features
 
 === Showing a visual representation of daily/monthly summary `[Coming in v2.0]`
@@ -946,22 +947,18 @@ e.g. +
 . `addlimit d/20-12-2017`
 . `addlimit d/20-12-2017 30-09-2018`
 
-* *Check limit* : `checklimit d/DATE [DATE]` +
+* *Check limit* : `checklimit` +
 
 * *Delete limit* `deletelimit d/DATE [DATE]` +
 e.g. +
 . `deleteLimit d/20-12-2017`
-. `deleteLimit d/20-12-2017 31-09-2018`
+. `deleteLimit d/20-12-2017 30-09-2018`
 
 * *Edit limit* `editlimit d/DATE [DATE] m/MONEYFLOW` +
 e.g. +
 . `editlimit d/20-12-2017 m/100`
-. `editlimit d/20-12-2017 31-09-2018 m/100`
+. `editlimit d/20-12-2017 30-09-2018 m/100`
 
-* *Check limit* : `checklimit`
-e.g. +
-. `checklimit d/20-12-2017`
-. `checklimit d/20-12-2018 31-09-2018`
 
 * *Add monthly limit* : `addmonthlylimit m/MONEYFLOW` +
 e.g. +
