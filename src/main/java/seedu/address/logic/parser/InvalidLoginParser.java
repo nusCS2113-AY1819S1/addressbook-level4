@@ -10,7 +10,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class InvalidLoginParser implements Parser<LoginCommand> {
 
-    private static final String MESSAGE_INVALID_LOGIN = "User already login as %s";
+    private static final String MESSAGE_INVALID_LOGIN = "User already login as %s"
+            + "\nPlease logout to login again"
+            + "\nExample: logout";
 
     /**
      * Parses user input into command for execution.
