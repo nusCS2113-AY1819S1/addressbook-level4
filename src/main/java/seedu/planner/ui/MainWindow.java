@@ -7,8 +7,11 @@ import com.google.common.eventbus.Subscribe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -60,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem homeMenuItem;
+
+    @FXML
     private StackPane recordListPanelPlaceholder;
 
     @FXML
@@ -93,7 +99,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(helpMenuItem, new KeyCodeCombination(KeyCode.F1));
+        setAccelerator(homeMenuItem, new KeyCodeCombination(KeyCode.HOME));
     }
 
     /**
@@ -120,6 +127,10 @@ public class MainWindow extends UiPart<Stage> {
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+                menuItem.getOnAction().handle(new ActionEvent());
+                event.consume();
+            }
+            if (event.getTarget() instanceof ListView && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
             }
@@ -200,6 +211,17 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Switches the welcome panel to the front and displays it.
+     */
+    @FXML
+    public void handleHome() {
+        for (Node node: mainUiPanelPlaceholder.getChildren()) {
+            node.setVisible(false);
+        }
+        welcomePanel.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -227,6 +249,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        recordListPanel.unselect();
         for (Node node: mainUiPanelPlaceholder.getChildren()) {
             node.setVisible(false);
         }
@@ -236,6 +259,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowPieCharStatsEvent(ShowPieChartStatsEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        recordListPanel.unselect();
         for (Node node: mainUiPanelPlaceholder.getChildren()) {
             node.setVisible(false);
         }
@@ -245,8 +269,10 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        for (Node node: mainUiPanelPlaceholder.getChildren()) {
-            node.setVisible(false);
+        if (event.getNewSelection() != null) {
+            for (Node node: mainUiPanelPlaceholder.getChildren()) {
+                node.setVisible(false);
+            }
         }
         detailedRecordCard.handleRecordPanelSelectionChangedEvent(event);
     }
@@ -254,6 +280,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleUpdateWelcomePanelEvent(UpdateWelcomePanelEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        recordListPanel.unselect();
         for (Node node: mainUiPanelPlaceholder.getChildren()) {
             node.setVisible(false);
         }
