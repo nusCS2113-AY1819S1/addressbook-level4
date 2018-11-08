@@ -16,9 +16,11 @@ import seedu.address.logic.commands.DecreaseItemCommand;
 import seedu.address.logic.commands.DeleteItemCommand;
 import seedu.address.logic.commands.EditItemCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindItemCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.IncreaseItemCommand;
+import seedu.address.logic.commands.ListItemCommand;
 import seedu.address.logic.commands.MemberCommand.AddMemberCommand;
 import seedu.address.logic.commands.MemberCommand.DeleteMemberCommand;
 import seedu.address.logic.commands.MemberCommand.EditMemberCommand;
@@ -157,6 +159,12 @@ public class AddressBookParser {
 
         case DecreaseItemCommand.COMMAND_WORD:
             return new DecreaseItemCommandParser().parse(arguments);
+
+        case FindItemCommand.COMMAND_WORD: case FindItemCommand.COMMAND_ALIAS:
+            return new FindItemCommandParser().parse(arguments);
+
+        case ListItemCommand.COMMAND_WORD: case ListItemCommand.COMMAND_ALIAS:
+            return new ListItemCommand();
 
         case UndoAllCommand.COMMAND_WORD:
             return new UndoAllCommand();

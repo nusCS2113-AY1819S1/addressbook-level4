@@ -2,24 +2,23 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_QUANTITY;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditItemCommand;
-import seedu.address.logic.commands.EditItemCommand.EditItemDescriptor;
 import seedu.address.logic.commands.IncreaseItemCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.ItemQuantity;
 
 /**
- * Parses input arguments and creates a new EditItemCommand object
+ * Parses input arguments and creates a new IncreaseItemCommand object
  */
 public class IncreaseItemCommandParser implements Parser<IncreaseItemCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditItemCommand
-     * and returns an EditItemCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the IncreaseItemCommand
+     * and returns an IncreaseItemCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public IncreaseItemCommand parse(String args) throws ParseException {
@@ -31,18 +30,20 @@ public class IncreaseItemCommandParser implements Parser<IncreaseItemCommand> {
         try {
             index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, IncreaseItemCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, IncreaseItemCommand.MESSAGE_USAGE),
+                    pe);
         }
 
-//        IncreaseItemDescriptor increaseItemDescriptor = new IncreaseItemDescriptor();
-//            increaseItemDescriptor.setItemQuantity(ParserUtil
-//                    .parseItemQuantity(argMultimap.getValue(PREFIX_ITEM_QUANTITY).get()));
-//        }
+        if (!arePrefixesPresent(argumentMultimap, PREFIX_ITEM_QUANTITY)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, IncreaseItemCommand.MESSAGE_USAGE));
+        }
 
-//        DateLedger dateLedger = ParserUtil.parseDateLedger(argumentMultimap.getValue(PREFIX_DATE).get());
         ItemQuantity itemQuantity = ParserUtil.parseItemQuantity(argumentMultimap.getValue(PREFIX_ITEM_QUANTITY).get());
 
         return new IncreaseItemCommand(index, itemQuantity);
     }
 
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }
