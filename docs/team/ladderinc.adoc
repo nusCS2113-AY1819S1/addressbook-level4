@@ -49,7 +49,7 @@ the keywords that were previously executed by the user.
 ** What it does: Searching by tags allows users to filter the contacts according to the tags (extra description). Exclude functionality allows users to remove
 unwanted results from their search.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=ladderinc[Overview]]
 
 * *Other contributions*:
 
