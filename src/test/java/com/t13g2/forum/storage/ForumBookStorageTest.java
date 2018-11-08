@@ -1,4 +1,4 @@
-//@@Meowzz95
+//@@author Meowzz95
 package com.t13g2.forum.storage;
 
 import org.junit.Assert;

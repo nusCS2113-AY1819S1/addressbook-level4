@@ -1,4 +1,4 @@
-//@@Meowzz95
+//@@author Meowzz95
 package com.t13g2.forum.model;
 
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import com.sun.istack.NotNull;
+import com.t13g2.forum.commons.util.Extensions;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 import com.t13g2.forum.storage.forum.IForumBookStorage;
@@ -39,6 +40,13 @@ public class ModuleRepository extends BaseRepository implements IModuleRepositor
     @Override
     public void removeModule(int moduleId) {
         forumBookStorage.getModules().getList().removeIf(module -> module.getId() == moduleId);
+        forumBookStorage.getModules().setDirty();
+    }
+
+    @Override
+    public void updateModule(@NotNull Module module) {
+        Objects.requireNonNull(module, "module can't be null");
+        Extensions.updateObjectInList(forumBookStorage.getModules().getList(), module);
         forumBookStorage.getModules().setDirty();
     }
 
