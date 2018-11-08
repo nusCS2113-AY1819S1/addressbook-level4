@@ -14,7 +14,6 @@ import java.util.List;
 import seedu.address.model.ClubBudgetElementsBook;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 
-
 /**
  * A utility class containing a list of {@code ClubBudgetElements} objects to be used in tests.
  */

@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLUB_NAME;
 
 import java.util.List;
 
+import seedu.address.logic.BudgetCalculationManager;
 import seedu.address.logic.CommandHistory;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,8 +27,9 @@ public class ViewClubBudgetsCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLUB_NAME + "Computing Club ";
 
-    public static final String MESSAGE_SUCCESS = "Club budget is: $ %1$s";
-    public static final String MESSAGE_INVALID_CLUB = "This club's budget does not exist in the address book";
+    public static final String MESSAGE_SUCCESS = "Club budget is: $%1$s";
+    public static final String MESSAGE_INVALID_CLUB = "This club's budget does not exist in the address book.";
+    public static final String MESSAGE_BUDGETS_NOT_CALCULATED = "Sorry! The budgets have not been allocated yet.";
 
     private final ClubName toShow;
 
@@ -44,28 +46,29 @@ public class ViewClubBudgetsCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        /**if (!(model.hasClubBudget(toShow))) {
-         throw new CommandException(MESSAGE_INVALID_CLUB);
-         }*/
-
-
         List<FinalClubBudget> listOfBudgets = model.getFilteredClubBudgetsList();
+        BudgetCalculationManager budgetCalculationManager = new BudgetCalculationManager();
 
-        int i;
+        if (!budgetCalculationManager.getHaveBudgetsBeenCalculated(model)) {
+            return new CommandResult(String.format(MESSAGE_BUDGETS_NOT_CALCULATED));
+        } else {
 
-        String budgetToShow = null;
+            int i;
 
-        for (i = 0; i < listOfBudgets.size(); i++) {
+            String budgetToShow = null;
 
-            FinalClubBudget currentBudget = listOfBudgets.get(i);
+            for (i = 0; i < listOfBudgets.size(); i++) {
 
-            if (currentBudget.getClubName().equals(toShow)) {
-                budgetToShow = Integer.toString(currentBudget.getAllocatedBudget());
-                //System.out.println("the budget is " + budgetToShow);
-                return new CommandResult(String.format(MESSAGE_SUCCESS, budgetToShow));
+                FinalClubBudget currentBudget = listOfBudgets.get(i);
+
+                if (currentBudget.getClubName().equals(toShow)) {
+                    budgetToShow = Integer.toString(currentBudget.getAllocatedBudget());
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, budgetToShow));
+                }
+
             }
+            return new CommandResult(String.format(MESSAGE_INVALID_CLUB));
 
         }
-        return new CommandResult(String.format(MESSAGE_INVALID_CLUB));
     }
 }

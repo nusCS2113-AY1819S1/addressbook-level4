@@ -50,7 +50,7 @@ public class BudgetCommand extends Command {
         }
 
         model.addClub(toAdd);
-        model.commitAddressBook();
+        model.commitClubBudgetElementsBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
