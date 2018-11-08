@@ -13,7 +13,7 @@ public class Account {
     public static final String MESSAGE_BALANCE_CONSTRAINTS =
             "Account should only contain numbers and no spaces, and it should not be blank";
 
-    public Double value;
+    private Double value;
 
     public Account(Double balance) {
         requireNonNull(balance);
@@ -25,6 +25,10 @@ public class Account {
         return value.toString();
     }
 
+    /**
+     * Increases the amount of money in the ledger account
+     * @param amount
+     */
     public void credit (Double amount) {
         requireNonNull(amount);
         value += amount;
