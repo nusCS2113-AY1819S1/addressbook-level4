@@ -33,6 +33,7 @@ Some key features of the Jalil Enterprises application are storing quantities an
 == Summary of contributions
 For the project, I was responsible for the storage component of the application as well as the implementation of “saving and viewing a version of the stock list” feature.
 
+* Code contributed: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kelvintankaiboon[Project Code Dashboard]
 * *Major enhancement*: : Implemented a series of commands which allow the user to *save and view past versions of the inventory*.
 ** What it does: allows the user to save the current inventory as a .xml file and open it anytime in a table format.
 ** Justification: This feature improves the product significantly because a lab technician would need to save and review past inventory statuses monthly.
