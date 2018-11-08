@@ -5,6 +5,7 @@ import java.util.HashMap;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
 
+//@author tztzt
 /**
  *  This object represents the in memory model of a HashMap containing integers as values which can be retrieved with
  *  Strings as the key. It keeps track of the number of usage of each unique tag in the model.

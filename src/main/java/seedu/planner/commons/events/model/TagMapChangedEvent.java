@@ -4,6 +4,7 @@ import seedu.planner.commons.events.BaseEvent;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.ui.CustomSuggestionProvider;
 
+//@author tztzt
 /** Indicates that the summary map in the model has been changed*/
 public class TagMapChangedEvent extends BaseEvent {
 

@@ -117,6 +117,7 @@ public class UniqueRecordList implements Iterable<Record> {
         internalList.setAll(records);
     }
 
+    //@author tztzt
     /**
      * Sorts the contents of this list by {@code category} and in reverse if {@code ascending} is true.
      * {@code records} must not contain duplicate records.
@@ -165,6 +166,7 @@ public class UniqueRecordList implements Iterable<Record> {
         }
         return tagMap.getAsReadOnlyTagMap();
     }
+    //@author
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
