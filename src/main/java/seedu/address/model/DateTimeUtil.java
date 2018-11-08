@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import seedu.address.model.event.DateTime;
@@ -14,7 +15,8 @@ import seedu.address.model.event.DateTime;
  * and system clock
  */
 public class DateTimeUtil {
-    public static final DateFormat PAGE_DATE_FORMAT = new SimpleDateFormat("EEEEE dd-MMMMM-yyyy 'at' HH:mm a");
+    public static final DateFormat PAGE_DATE_FORMAT =
+            new SimpleDateFormat("EEEEE dd-MMMMM-yyyy 'at' HH:mm", Locale.US);
 
     /**
      * Utility method to get system current timestamp
