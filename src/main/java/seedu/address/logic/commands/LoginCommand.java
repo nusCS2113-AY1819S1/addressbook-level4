@@ -26,6 +26,13 @@ public class LoginCommand extends Command {
     private static final String MESSAGE_SUCCESS = "Successfully login as %s";
 
     private String loginIdentity;
+
+    /**
+     * type == 1 -> argument is an email, there is a need to check if email is present in addressbook and check the
+     * person's designation to see whether the person is a manager or employee
+     * type == 2 -> argument is a manager
+     * type == 3 -> argument is an employee
+     */
     private final int type;
     private Model model;
 
