@@ -100,12 +100,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsTrue() {
+    public void deleteShortlistedCandidateFromJobOffer_noCandidatesInShortlistedCandidateList_returnsFalse() {
 
     }
 
     @Test
-    public void deleteShortlistedCandidateFromJobOffer_candidateNotInShortlistedCandidateList_returnsFalse() {
+    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsTrue() {
 
     }
 }
