@@ -55,42 +55,52 @@ public class ExpenditureGetAdviceCommand extends Command {
         map = model.getExpenditureRecords();
         StringBuilder x = new StringBuilder();
 
-        x.append("This is a summary of the expenditures you have made in the past.\n"
-                + "From the first day you used this app till now, you have spent:\n");
+        if (!map.isEmpty()) {
+            x.append("This is a summary of the expenditures you have made in the past.\n"
+                    + "From the first day you used this app till now, you have spent:\n");
 
-        for (Map.Entry s : map.entrySet()) {
-            totalExpenditure += map.get(s.getKey());
+            for (Map.Entry s : map.entrySet()) {
+                totalExpenditure += map.get(s.getKey());
+            }
+
+            for (Map.Entry m : map.entrySet()) {
+                percentageMap.put(m.getKey().toString(),
+                        (int) Math.round(100 * map.get(m.getKey()) / totalExpenditure));
+                x.append(m.getValue())
+                        .append(" SGD on ")
+                        .append(m.getKey())
+                        .append(", which takes approximately ")
+                        .append((int) Math.round(100 * map.get(m.getKey()) / totalExpenditure))
+                        .append("% of the total expenditure you have made.")
+                        .append("\n");
+            }
+
+            x.append("\nBased on the information given, I hope you can better understand how you spent your money.\n");
+
+        } else {
+            x.append("There is no expenditure record in the Expenditure Tracker.\n");
         }
 
-        for (Map.Entry m : map.entrySet()) {
-            percentageMap.put(m.getKey().toString(), (int) Math.round(100 * map.get(m.getKey()) / totalExpenditure));
-            x.append(m.getValue())
-                .append(" SGD on ")
-                .append(m.getKey())
-                .append(", which takes approximately ")
-                .append((int) Math.round(100 * map.get(m.getKey()) / totalExpenditure))
-                .append("% of the total expenditure you have made.")
-                .append("\n");
-        }
-
-        x.append("\nBased on the information given, I hope you can better understand how you spent your money.\n");
         x.append("If you plan to spend a total of ")
-            .append(money)
-            .append(" SGD in a period of ")
-            .append(numOfDays)
-            .append(" days, on average, the maximum amount of money that you can spend per day is ")
-            .append(dailyExpense)
-            .append(".\n\n")
-            .append("According to your expenditure history, here's a more detailed advice "
-                    + "on how much money you can spend on each category in the following period.\n")
-            .append("Do note that the sum of advised individual expenditure will not necessarily "
-                    + "be the same as the target money, and there might be a slight difference.\n");
+                .append(money)
+                .append(" SGD in a period of ")
+                .append(numOfDays)
+                .append(" days, on average, the maximum amount of money that you can spend per day is ")
+                .append(String.format("%.2f", dailyExpense))
+                .append(".\n\n");
 
-        for (Map.Entry t : map.entrySet()) {
-            x.append(t.getKey())
-                    .append(": ")
-                    .append(money * percentageMap.get(t.getKey()) / 100)
-                    .append(" SGD\n");
+        if (!map.isEmpty()) {
+            x.append("According to your expenditure history, here's a more detailed advice "
+                    + "on how much money you can spend on each category in the following period.\n")
+                .append("Do note that the sum of advised individual expenditure will not necessarily "
+                        + "be the same as the target money, and there might be a slight difference.\n");
+
+            for (Map.Entry t : map.entrySet()) {
+                x.append(t.getKey())
+                        .append(": ")
+                        .append(money * percentageMap.get(t.getKey()) / 100)
+                        .append(" SGD\n");
+            }
         }
 
         x.append("\nHappy planning! : )");

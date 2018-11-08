@@ -35,8 +35,17 @@ public class ExpenditureGetAdviceCommandParser implements Parser<ExpenditureGetA
 
         String m = money.addingMoney;
         String n = argMultimap.getValue(PREFIX_PERIOD).get();
-
+        if (!isValidNumOfDays(n)) {
+            throw new ParseException("numofdays should only contain positive integer.");
+        }
         return new ExpenditureGetAdviceCommand(m, n);
+    }
+
+    /**
+     * Checks whether the numofdays is valid.
+     */
+    private static boolean isValidNumOfDays (String test) {
+        return test.matches("[1-9][0-9]*");
     }
 
     /**
