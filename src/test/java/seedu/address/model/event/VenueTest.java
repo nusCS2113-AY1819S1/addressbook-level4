@@ -1,3 +1,4 @@
+//@@author cqinkai
 package seedu.address.model.event;
 
 import static org.junit.Assert.assertFalse;

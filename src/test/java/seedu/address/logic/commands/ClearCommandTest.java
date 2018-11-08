@@ -19,7 +19,7 @@ public class ClearCommandTest {
 
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyEventManager_success() {
         User user = new UserBuilder().build();
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
@@ -31,7 +31,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyEventManager_success() {
         Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
 
