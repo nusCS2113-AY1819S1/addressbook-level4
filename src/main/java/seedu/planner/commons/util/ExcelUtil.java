@@ -416,7 +416,8 @@ public class ExcelUtil {
     public static String setPathFile (String nameFile, String directoryPath) {
         String checkedNameFile;
 
-        checkedNameFile = (nameFile.length() > 5 && nameFile.substring(nameFile.length() - 5, nameFile.length()).equals(".xlsx"))
+        checkedNameFile = (nameFile.length() > 5
+                && nameFile.substring(nameFile.length() - 5, nameFile.length()).equals(".xlsx"))
                 ? nameFile : (nameFile + ".xlsx");
         logger.info("=----------------------------------------" + checkedNameFile);
         return directoryPath + (System.getProperty("file.separator") + checkedNameFile);
