@@ -68,14 +68,5 @@ public class Event {
                 .append(getEventDate());
         return builder.toString();
     }
-
-
-
-
-
-
-
-
-
-
 }
+

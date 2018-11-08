@@ -113,7 +113,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteEvent(Event event) {
+        requireNonNull(event);
         versionedAddressBook.removeEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        indicateAddressBookChanged();
     }
 
     @Override

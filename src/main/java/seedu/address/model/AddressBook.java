@@ -150,7 +150,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * add an event.
+     * add an event to the ClubHub..
      * @param event
      */
     public void addEvent(Event event) {

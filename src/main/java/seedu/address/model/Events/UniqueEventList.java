@@ -127,6 +127,4 @@ public class UniqueEventList implements Iterable<Event> {
         return internalList.hashCode();
     }
 
-
-
 }
