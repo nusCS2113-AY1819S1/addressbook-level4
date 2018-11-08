@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class LoginCommandParser {
+public class LoginCommandParser implements Parser<LoginCommand> {
     public static final String KEY_MANAGER = "manager";
     public static final String KEY_EMPLOYEE = "employee";
 
