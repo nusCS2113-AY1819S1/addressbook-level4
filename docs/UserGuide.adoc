@@ -164,7 +164,7 @@ Format: `listdistributors`
 
 Provides the list of distributors engaged with the store.
 
-==== Edit a distributor: `editdistributor index`
+==== Edit a distributor: `editdistributor`
 
 Format: `editdistributor index dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
