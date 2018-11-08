@@ -1,0 +1,57 @@
+= Xu Hanhui - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ForumBook
+
+---
+
+== Overview
+
+ForumBook is a desktop forum application which allows students to exchange information of the courses offered by their school. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in OOP fashion.
+
+== Summary of contributions
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=hanskoh&sort=displayName&since=2018-09-12&until=2018-11-02&timeframe=day&reverse=false&repoSort=true[Functional code]]
+
+* *Main feature implemented:*: added *various commands(CRUD) to enable users and admin to use ForumBook*
+** What it does: allows users to use ForumBook by providing the following commands:
+*** `CreateThreadCommand`: unblocked users and admin are able to create a new thread under a specific module.
+*** `CreateCommentCommand`: unblocked users and admin are able to create a new comment under a specific thread.
+*** `UpdateThreadCommand`: thread owner and admin are able to update the thread title.
+*** `UpdateCommentCommand`: comment owner and admin are able to update the comment content.
+*** `DeleteThreadCommand`: thread owner and admin are able to delete the thread.
+*** `DeleteCommentCommand`: comment owner and admin are able to delete the comment.
+*** `ListModuleCommand`: all logged in users are able to list all the modules exist in the ForumBook.
+*** `SelectModuleCommand`: all logged in users are able to select a specific module code to list all threads under that module.
+*** `SelectThreadCommand`: all logged in users are able to select a specific thread to list all comments under that thread.
+** Justification: This CRUD feature is the basic function of the ForumBook. It provides the essential commands for users to share and communicate through the ForumBook.
+** Highlights: This CRUD feature would greatly satisfy all the users who can type fast when using this CLI ForumBook Application. The prefixes of all the parameters used in the commands are simple and meaningful.
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/3[#3], https://github.com/CS2113-AY1819S1-T13-2/main/pull/100[#100], https://github.com/CS2113-AY1819S1-T13-2/main/pull/151/files[#151]
+*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/7[#7], https://github.com/CS2113-AY1819S1-T13-2/main/pull/65[#65], https://github.com/CS2113-AY1819S1-T13-2/main/pull/100[#100], https://github.com/CS2113-AY1819S1-T13-2/main/pull/118[#118]
+** Community:
+*** Reported bugs and suggestions for other teams in the class: https://github.com/CS2113-AY1819S1-F09-4/main/issues/154[#154], https://github.com/CS2113-AY1819S1-F09-4/main/issues/169[#169]
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=curd]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=curd]
