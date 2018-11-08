@@ -113,7 +113,8 @@ public class UniqueCompanyList implements Iterable<Company> {
         Collections.sort(internalList, new Comparator<Company>() {
             @Override
             public int compare(Company o1, Company o2) {
-                return (o1.getCompanyName().toString()).compareTo(o2.getCompanyName().toString());
+                return ((o1.getCompanyName().toString()).toLowerCase()).compareTo((
+                        o2.getCompanyName().toString()).toLowerCase());
             }
         });
     }
@@ -126,7 +127,7 @@ public class UniqueCompanyList implements Iterable<Company> {
         Collections.sort(internalList, new Comparator<Company>() {
             @Override
             public int compare(Company o1, Company o2) {
-                return (o1.getEmail().toString()).compareTo(o2.getEmail().toString());
+                return ((o1.getEmail().toString()).toLowerCase()).compareTo((o2.getEmail().toString()).toLowerCase());
             }
         });
     }
