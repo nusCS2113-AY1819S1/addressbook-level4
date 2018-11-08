@@ -31,6 +31,7 @@ This document serves as a summary of my contributions to the Event Manager proje
 ** Justification: This feature allows the Event Manager to keep track of individual attendees of events.
 ** Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 ** Credits: GSON library by Google.
+** Code contributed (https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=james&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Click here])
 
 
 . *Other contributions*:
