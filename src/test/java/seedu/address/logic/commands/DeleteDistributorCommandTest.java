@@ -105,7 +105,8 @@ public class DeleteDistributorCommandTest {
      * 2. Undo the deletion.
      * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted distributor in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the deletion. This ensures {@code RedoProductCommand} deletes the distributor object regardless of indexing.
+     * 4. Redo the deletion. This ensures {@code RedoProductCommand}
+     * deletes the distributor object regardless of indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
@@ -119,7 +120,8 @@ public class DeleteDistributorCommandTest {
         expectedModel.deleteDistributor(distributorToDelete);
         expectedModel.commitDistributorBook();
 
-        // delete -> deletes second distributor in unfiltered distributor list / first distributor in filtered distributor list
+        // delete -> deletes second distributor
+        // in unfiltered distributor list / first distributor in filtered distributor list
         deleteDistributorCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered distributor list to show all distributors
