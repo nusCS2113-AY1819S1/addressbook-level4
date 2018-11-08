@@ -30,7 +30,7 @@ The code that was adapted from Stack Overflow was from [https://stackoverflow.co
 in the `numberOfDifferentNationality` method.
 
 //* *Minor enhancement*: Added the Nationality and Gender Field into Person Object, Fixed Undo/Redo feature for Distribute Command.
-//* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tsuweiquan[Functional code]]
+* *Code contributed*: [https://github.com/Tsuweiquan[Github]][https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tsuweiquan[RepoSense]]
 
 * *Other contributions*:
 
