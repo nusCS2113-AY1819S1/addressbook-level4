@@ -257,6 +257,7 @@ public class ExcelUtil {
         }
         return true;
     }
+
     /**
      * Check if the first row has the appropriate title.
      */
@@ -413,7 +414,13 @@ public class ExcelUtil {
      * Create the fileName path.
      */
     public static String setPathFile (String nameFile, String directoryPath) {
-        return directoryPath + (System.getProperty("file.separator") + nameFile);
+        String checkedNameFile;
+
+        checkedNameFile = (nameFile.length() > 5
+                && nameFile.substring(nameFile.length() - 5, nameFile.length()).equals(".xlsx"))
+                ? nameFile : (nameFile + ".xlsx");
+        logger.info("=----------------------------------------" + checkedNameFile);
+        return directoryPath + (System.getProperty("file.separator") + checkedNameFile);
     }
     /**
      * Set the name for the Excel file based on type of inputs.

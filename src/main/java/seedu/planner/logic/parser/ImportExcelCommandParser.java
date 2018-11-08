@@ -53,7 +53,7 @@ public class ImportExcelCommandParser implements Parser<ImportExcelCommand> {
             directoryPath = ParserUtil.parseDirectoryString(argMultimap.getValue(PREFIX_DIR).get().trim());
             checkedDirectoryPath = ParserUtil.parseFilePathString(ExcelUtil.setPathFile(nameFile, directoryPath));
         } else {
-            checkedDirectoryPath = ParserUtil.parseFilePathString(directoryPath);
+            checkedDirectoryPath = ParserUtil.parseFilePathString(argMultimap.getValue(PREFIX_DIR).get().trim());
         }
         return new ImportExcelCommand(checkedDirectoryPath);
     }
