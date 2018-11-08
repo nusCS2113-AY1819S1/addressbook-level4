@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -81,5 +80,5 @@ public interface PersonModel {
      * @param email email input
      * @return the person who has the same email as input
      */
-    Optional<Person> getPerson(Email email);
+    Person getPerson(Email email);
 }

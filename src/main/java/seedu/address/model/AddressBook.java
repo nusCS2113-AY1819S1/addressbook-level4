@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Email;
@@ -81,7 +80,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param email
      * @return the person who has the same email
      */
-    public Optional<Person> getPerson(Email email) {
+    public Person getPerson(Email email) {
         requireNonNull(email);
         return persons.getPerson(email);
     }

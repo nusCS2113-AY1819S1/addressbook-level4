@@ -7,7 +7,6 @@ import static seedu.address.model.StateHistoryList.STATE_EVENTLIST;
 import static seedu.address.model.StateHistoryList.STATE_NONE;
 import static seedu.address.model.StateHistoryList.STATE_RESET;
 
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -191,13 +190,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public Optional<Person> getPerson(Email email) {
+    public Person getPerson(Email email) {
         requireNonNull(email);
 
         if (versionedAddressBook.hasEmail(email)) {
             return versionedAddressBook.getPerson(email);
         } else {
-            return Optional.empty();
+            return null;
         }
 
     }

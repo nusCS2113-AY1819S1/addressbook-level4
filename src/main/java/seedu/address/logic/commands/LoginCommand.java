@@ -15,29 +15,31 @@ import seedu.address.model.person.Email;
  */
 public class LoginCommand extends Command {
     public static final String COMMAND_WORD = "login";
-    private static final String KEY_MANAGER = "manager";
-    private static final String KEY_EMPLOYEE = "employee";
-    private static final String MESSAGE_INVALID_LOGIN = "Login identity should be either the following:"
+    public static final String MESSAGE_INVALID_LOGIN = "Login identity should be either the following:"
             + "\nmanager\nemployee\nas EMAIL"
             + "\nExample: login manager"
             + "\nExample: login as hello@gmail.com";
+
+    private static final String KEY_MANAGER = "manager";
+    private static final String KEY_EMPLOYEE = "employee";
+
     private static final String MESSAGE_SUCCESS = "Successfully login as %s";
 
     private String loginIdentity;
-    private final int key;
+    private final int type;
     private Model model;
 
     public LoginCommand(String arguments, int type) {
         requireNonNull(arguments);
         requireNonNull(type);
         this.loginIdentity = arguments;
-        this.key = type;
+        this.type = type;
     }
 
     public CommandsParser getParser(Model model) throws CommandException {
         this.model = model;
 
-        if (key == 1 && isEmailPresent(loginIdentity)) {
+        if (type == 1 && isEmailPresent(loginIdentity)) {
             if (isEmailManager(loginIdentity)) {
                 loginIdentity = KEY_MANAGER;
             } else if (isEmailEmployee(loginIdentity)) {
@@ -76,7 +78,7 @@ public class LoginCommand extends Command {
      * @return true or false depending if the login identity is manager
      */
     private boolean isEmailManager(String loginIdentity) {
-        return model.getPerson(new Email(loginIdentity)).get()
+        return model.getPerson(new Email(loginIdentity))
             .getDesignation().toString().equalsIgnoreCase("manager");
     }
 
@@ -87,9 +89,15 @@ public class LoginCommand extends Command {
      */
     private boolean isEmailEmployee(String loginIdentity) {
         //return model.getPerson(new Email(loginIdentity)).get().getDesignation().equals(new Designation("employee"));
-        return model.getPerson(new Email(loginIdentity)).get().getDesignation().toString()
+        return model.getPerson(new Email(loginIdentity)).getDesignation().toString()
             .equalsIgnoreCase("employee");
     }
 
-
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof LoginCommand
+                && ((loginIdentity == null && ((LoginCommand) other).loginIdentity == null) // instanceof handles nulls
+                || loginIdentity.equals(((LoginCommand) other).loginIdentity)));
+    }
 }

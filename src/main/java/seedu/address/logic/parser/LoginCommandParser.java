@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class LoginCommandParser {
+public class LoginCommandParser implements Parser<LoginCommand> {
     public static final String KEY_MANAGER = "manager";
     public static final String KEY_EMPLOYEE = "employee";
     private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-";
@@ -35,22 +35,20 @@ public class LoginCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public LoginCommand parse(String args) throws ParseException {
-
-        if (parseAs(args) && isEmailEmpty(args)) {
+        String trimmedArgs = args.trim();
+        if (isArgsAs(args) && isEmailEmpty(args)) {
             throw new ParseException(MESSAGE_INVALID_LOGIN);
-        } else if (parseAs(args) && parseEmail(args)) {
+        } else if (isArgsAs(args) && isArgsEmail(args)) {
             String emailArgs = extractEmail(args);
             return new LoginCommand(emailArgs, 1);
+        } else if (trimmedArgs.equalsIgnoreCase("manager")) {
+            return new LoginCommand(KEY_MANAGER, 2);
+        } else if (trimmedArgs.equalsIgnoreCase("employee")) {
+            return new LoginCommand(KEY_EMPLOYEE, 3);
         } else {
-            String trimmedArgs = args.trim();
-            if (trimmedArgs.equalsIgnoreCase("manager")) {
-                return new LoginCommand(KEY_MANAGER, 2);
-            } else if (trimmedArgs.equalsIgnoreCase("employee")) {
-                return new LoginCommand(KEY_EMPLOYEE, 3);
-            } else {
-                throw new ParseException(MESSAGE_INVALID_LOGIN);
-            }
+            throw new ParseException(MESSAGE_INVALID_LOGIN);
         }
+
     }
 
     private boolean isEmailEmpty(String args) {
@@ -61,7 +59,7 @@ public class LoginCommandParser {
      * Checks if first word of the userInput is equals to "as"
      * @return boolean true if it is equal, if not, false
      */
-    private boolean parseAs(String userInput) {
+    private boolean isArgsAs(String userInput) {
         return userInput.trim().split("\\s+")[0]
                 .equalsIgnoreCase("as");
     }
@@ -70,7 +68,7 @@ public class LoginCommandParser {
      * Checks if second word of the userInput is equals to an email
      * @return boolean true if it is equal, if not, false
      */
-    private boolean parseEmail(String userInput) {
+    private boolean isArgsEmail(String userInput) {
         String specificEmail = userInput.trim().split("\\s+")[1];
         return isEmailValid(specificEmail);
     }

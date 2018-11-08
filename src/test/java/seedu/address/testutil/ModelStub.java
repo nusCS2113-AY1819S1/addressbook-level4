@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -116,8 +115,8 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Optional<Person> getPerson(Email email) {
-        return Optional.empty();
+    public Person getPerson(Email email) {
+        throw new AssertionError("This method should not be called.");
     }
 
     // Implemented EventList Methods go here
