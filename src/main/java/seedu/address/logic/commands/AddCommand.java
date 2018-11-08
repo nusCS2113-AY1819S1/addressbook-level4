@@ -28,6 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_SERIAL_NR + "SERIAL NUMBER "
             + PREFIX_DISTRIBUTOR + "DISTRIBUTOR "
             + PREFIX_PRODUCT_INFO + "PRODUCT INFO "
+            + PREFIX_REMAINING_ITEMS + "REMAINING ITEMS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Apple "
