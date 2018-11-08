@@ -19,8 +19,7 @@ import seedu.address.model.grades.GradesManager;
 public class GradeAddCommand extends Command {
     public static final String COMMAND_WORD = "grade add";
     public static final String MESSAGE_MARKS_EXCEED = "Marks assigned is above maximum marks %1$s.";
-    public static final String MESSAGE_ADD_GRADE_SUCCESS = "\nSuccessfully assign! \nModule Code: %1$s"
-            + "\nGradebook Component Name: %2$s" + "\nMatric No.: %3$s" + "\nMarks: %4$s";
+    public static final String MESSAGE_ADD_GRADE_SUCCESS = "\nSuccessfully assigned! \nNumber of grade components: ";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds grade to Trajectory. "
             + "\nParameters: "
             + PREFIX_MODULE_CODE + "MODULE_CODE  "
@@ -51,12 +50,15 @@ public class GradeAddCommand extends Command {
         }
         gradesManager.addGrade(toAddGrade);
         gradesManager.saveGradeList();
-        return new CommandResult(String.format(
-                MESSAGE_ADD_GRADE_SUCCESS,
-                toAddGrade.getModuleCode(),
-                toAddGrade.getGradeComponentName(),
-                toAddGrade.getAdminNo(),
-                toAddGrade.getMarks()));
+        String gradeList = gradesManager.listGrade();
+        int size = gradesManager.getGradeSize();
+        return new CommandResult(MESSAGE_ADD_GRADE_SUCCESS + size + "\n" + "", gradeList);
+//        return new CommandResult(String.format(
+//                MESSAGE_ADD_GRADE_SUCCESS,
+//                toAddGrade.getModuleCode(),
+//                toAddGrade.getGradeComponentName(),
+//                toAddGrade.getAdminNo(),
+//                toAddGrade.getMarks()));
     }
 
     @Override

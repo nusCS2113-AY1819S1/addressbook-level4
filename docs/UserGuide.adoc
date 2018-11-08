@@ -415,7 +415,7 @@ Format: `gradebook add mc/MODULE_CODE cn/COMPONENT_NAME [mm/MAX_MARKS] [w/WEIGHT
 ****
 * Inputs are case sensitive.
 * Module code must exist
-* http://Component[Component] name must not already exist in Trajectory.
+* Component name must not already exist in Trajectory.
 * Accumulated weightage for grade components in module cannot exceed 100%.
 * Weightage can be 0 for grade components like Mock Practical Exam.
 ****
