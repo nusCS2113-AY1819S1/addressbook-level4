@@ -12,6 +12,7 @@ import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
+//@@author Gara
 /**
  * A utility class to help with building Product objects.
  */
