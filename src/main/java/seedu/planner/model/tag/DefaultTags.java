@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+//@author tztzt
 /**
  * Contains a set of pre-defined tags that the user may use to their convenience and will
  * always be in the suggested list of tags.
