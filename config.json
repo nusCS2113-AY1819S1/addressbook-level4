@@ -1,5 +1,6 @@
 {
   "appTitle" : "Address App",
   "logLevel" : "INFO",
-  "userPrefsFilePath" : "preferences.json"
+  "userPrefsFilePath" : "preferences.json",
+
 }
