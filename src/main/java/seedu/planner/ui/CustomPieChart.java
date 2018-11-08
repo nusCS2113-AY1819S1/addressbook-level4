@@ -1,6 +1,7 @@
 package seedu.planner.ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ public class CustomPieChart extends PieChart {
         setLegend(new CustomLegend(this, legendData));
         setData(FXCollections.observableList(labelData));
         labelData.forEach(data ->
-                data.nameProperty().bind(Bindings.concat(data.getName(), " ", data.pieValueProperty(), "%")));
+                data.nameProperty().bind(Bindings.concat(customTextWrap(data.getName()), "\n", data.pieValueProperty(), "%")));
         observableData = FXCollections.observableList(getData().stream()
                 .map(d -> String.format("%s %f", d.getName(), d.getPieValue()))
                 .collect(Collectors.toList()));
@@ -40,6 +41,25 @@ public class CustomPieChart extends PieChart {
                 || (other instanceof CustomPieChart // instanceof handles nulls
                 && getLegend().equals(((CustomPieChart) other).getLegend())
                 && observableData.equals(((CustomPieChart) other).observableData));
+    }
+
+    /**
+     * It will slice the label input based on commas as delimiters. Each slice of the label will be on a new line to
+     * simulate the text wrap feature of java
+     * @param label label to be wrapped
+     * @return wrapped label
+     */
+    private String customTextWrap(String label) {
+        List<String> labelArr = Arrays.asList(label.split(","));
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String s : labelArr) {
+            s.trim();
+            stringBuilder.append(s);
+            if (labelArr.indexOf(s) < labelArr.size() - 1) {
+                stringBuilder.append("\n");
+            }
+        }
+        return stringBuilder.toString();
     }
 
     /**
