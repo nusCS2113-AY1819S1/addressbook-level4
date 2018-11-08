@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 
 //@@author jieliangang
 /**
- * Invites an existing person to an existing event.
+ * Invites an employee to an event.
  */
 public class InviteCommand extends Command {
 
@@ -23,8 +23,8 @@ public class InviteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Invites an employee to an event "
             + "by the index number used in the displayed employee list and displayed event list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TO + "INDEX (must be a positive integer)\n"
+            + "Parameters: PERSON_INDEX (must be a positive integer) "
+            + PREFIX_TO + "EVENT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TO + "2";
 
     public static final String MESSAGE_INVITE_PERSON_SUCCESS = "Invited Employee: %1$s to %2$s";
