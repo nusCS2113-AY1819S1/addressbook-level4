@@ -32,7 +32,6 @@ public class CategoryBreakdown extends UiPart<Region> {
         super(FXML);
         pieChart = new CustomPieChart(labelData, legendData);
         initPieChart(label);
-        categoryBreakdown.setStyle("-fx-background-color: grey");
         categoryBreakdown.getChildren().add(pieChart);
     }
 
@@ -40,7 +39,6 @@ public class CategoryBreakdown extends UiPart<Region> {
         super(fxml);
         pieChart = new CustomPieChart(labelData, legendData);
         initPieChart(label);
-        categoryBreakdown.setStyle("-fx-background-color: grey");
         categoryBreakdown.getChildren().add(pieChart);
     }
 
@@ -53,16 +51,12 @@ public class CategoryBreakdown extends UiPart<Region> {
 
         pieChart.setPrefSize(800, 400);
         pieChart.setMinSize(Control.USE_PREF_SIZE, Control.USE_PREF_SIZE);
-        pieChart.maxHeight(Double.MAX_VALUE);
-        pieChart.maxWidth(Double.MAX_VALUE);
-        pieChart.minHeight(Control.USE_PREF_SIZE);
-        pieChart.minHeight(Control.USE_PREF_SIZE);
+        pieChart.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
         AnchorPane.setTopAnchor(pieChart, 0.0);
         AnchorPane.setBottomAnchor(pieChart, 0.0);
         AnchorPane.setRightAnchor(pieChart, 0.0);
         AnchorPane.setLeftAnchor(pieChart, 0.0);
-
     }
 
     public void setPieChartSize(Double prefWidth, Double prefHeight) {

@@ -24,8 +24,8 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
 
     private static final String FXML = "WelcomePanel.fxml";
 
-    private final double prefPieChartWidth = 300.0;
-    private final double prefPieChartHeight = 300.0;
+    private final double prefPieChartWidth = 500.0;
+    private final double prefPieChartHeight = 400.0;
 
     @FXML
     private AnchorPane expenseStats;
