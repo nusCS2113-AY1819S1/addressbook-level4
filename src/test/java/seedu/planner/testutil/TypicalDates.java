@@ -7,6 +7,8 @@ import seedu.planner.model.ModelManager;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.Date;
 
+//@@author nguyenngoclinhchi
+
 /**
  * A utility class containing a list of {@code Date} objects to be used in tests.
  */

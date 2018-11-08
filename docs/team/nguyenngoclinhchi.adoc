@@ -41,7 +41,9 @@ A summary of my contributions is given below.
 * *Major enhancements*: Added the feature that allows the user delete all the record whose date is required.
 ** `Reason for enhancement`: As this application is designed for daily expense management and in case when user type in wrong date at the beginning. This feature allows user to delete multiple records at the same time, compared to the original delete one record at the time.
 ** `Overview`: This requires a in-depth knowledge for the Internal List structure building up the list of records, and pointer when looping through the list and deleting records.
-** `My contributions`: I wrote the code for the command, parser, tests. The coverage for these class is 100%.
+** Highli
+** `My contributions`: I wrote the code for the command, parser, and tests to increase the coverage of the application.
+
 
 * *Major enhancements*:
 ** `Reason for enhancement`:

@@ -13,7 +13,8 @@ import seedu.planner.model.DirectoryPath;
 import seedu.planner.model.record.Date;
 import seedu.planner.testutil.TypicalRecords;
 
-//@author nguyenngoclinhchi
+//@@author nguyenngoclinhchi
+
 public class ExportCommandParserTest {
     private static final String WHITE_SPACE = " ";
     private ExportExcelCommandParser parser = new ExportExcelCommandParser();

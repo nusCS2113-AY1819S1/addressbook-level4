@@ -756,7 +756,7 @@ DeleteByDateEntryCommand calls `ModelManager#getFilteredRecordList` to retrieve 
 
 If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Financial Planner and the message, which states records have been deleted. Then, `ModelManager#autoLimitCheck` will be called to check the current change in limit as we delete some records exceeds the limit or not.
 
-This feature has only one keyword `delete_date` and implements only 1 argument mode.
+This feature has only one keyword `deletedate` and implements only 1 argument mode.
 The three argument modes are as listed below:
 
 * Single Argument mode -- Requires only one date. It deletes all records whose date is required.
@@ -768,7 +768,7 @@ image::DeleteByDateEntrySequenceDiagram.png[width:800]
 
 // end::delete_by_date_entry[]
 
-// tag::export_excel[]
+// tag::exportexcel[]
 === Export into Excel file
 ==== Current implementation
 The export into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
@@ -789,27 +789,27 @@ With the sufficient information, `List<Record> records`, `List<SummaryByDateEntr
 
 image::Export_Capture1_LinhChi.png[width:800]
 
-* `SUMMARY DATA` stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information]. As you can see in the picture, there are 3 series shown:
+* `SUMMARY DATA` stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw a line chart automatically inside the Excel sheet` part for more information]. As you can see in the picture, there are 3 series shown:
 ** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
 ** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
 ** The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).
 
 image::Export_Capture2_LinhChi.png[width:800]
 
-This feature has only one keyword `export_excel` but implements 6 different argument modes to allow users to access multiple versions of the same command.
+This feature has only one keyword `exportexcel` but implements 6 different argument modes to allow users to access multiple versions of the same command.
 The six argument modes are as listed below:
 
-* *No argument mode* `export_excel` will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
+* *No argument mode* `exportexcel` will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
 
-* *Single argument Date mode* `export_excel d/DATE` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
+* *Single argument Date mode* `exportexcel d/DATE` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
 
-* *Dual argument Date mode* `export_excel d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
+* *Dual argument Date mode* `exportexcel d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
 
-* *Single argument Directory Path mode* `export_excel dir/DIRECTORY_PATH` will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.
+* *Single argument Directory Path mode* `exportexcel dir/DIRECTORY_PATH` will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.
 
-* *Single argument Date mode + Single argument Directory path mode* `export_excel d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
+* *Single argument Date mode + Single argument Directory path mode* `exportexcel d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
 
-* *Dual argument Date mode + Single argument Directory path mode* `export_excel d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.
+* *Dual argument Date mode + Single argument Directory path mode* `exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.
 +
 
 The mechanism that facilitates these modes can be found in the `ExportExcelCommandParser#parse`. Below is a overview of the mechanism:
@@ -845,7 +845,7 @@ The update of the UI `RecordListPanel` is done through the event system. `Filter
 implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
 listener is present in `RecordListPanel` and will update the UI list automatically.
 
-// end::export_excel[]
+// end::exportexcel[]
 
 // tag::import[]
 
@@ -936,7 +936,7 @@ With the sufficient information, `List<Record> records`, `List<SummaryByDateEntr
 
 image::Export_Capture1_LinhChi.png[width:800]
 
-* `SUMMARY DATA` stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw line chart` part for more information]. As you can see in the picture, there are 3 series shown:
+* `SUMMARY DATA` stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw a line chart automatically inside the Excel sheet` part for more information]. As you can see in the picture, there are 3 series shown:
 ** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
 ** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
 ** The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).
@@ -1005,7 +1005,7 @@ This feature will automatically uses the the summary data from the `SUMMARY DATA
 
 The feature mechanism is facilitated by `ExcelUtil`, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with `ExcelUtil#drawChart`.
 
-As you can see the screenshot below, in the `SUMMARY DATA` sheet (refer to Export Excel or Archive feature), next to the summary table:
+As you can see the screenshot below, in the `SUMMARY DATA` sheet (refer to `Export into Excel file` or `Archive into Excel file` feature), next to the summary table:
 
 * The size of the line chart (based on default column width and default row height) is:
 ** The width is 15 columns

@@ -13,7 +13,8 @@ import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
 
-//@author nguyenngoclinhchi
+//@@author nguyenngoclinhchi
+
 /**
  * Delete the records whose date is required.
  */
