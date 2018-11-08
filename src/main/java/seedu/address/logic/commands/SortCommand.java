@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.lang.Integer.compare;
 import static java.util.Objects.requireNonNull;
+
+import java.util.Comparator;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -12,8 +15,8 @@ import seedu.address.model.person.Parameter;
  */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_ARGUMENTS = "Parameter: %1$s";
-    // public static final String MESSAGE_SUCCESS = "Sorted as asked";
+    // public static final String MESSAGE_ARGUMENTS = "Parameter: %1$s";
+    public static final String MESSAGE_SUCCESS = "Sorted as asked";
 
     private final Parameter parameter;
 
@@ -24,7 +27,8 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, parameter));
+        model.getFilteredPersonList().sort(Comparator.comparingInt(o -> o.getSkillLevel().skillLevel));
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
