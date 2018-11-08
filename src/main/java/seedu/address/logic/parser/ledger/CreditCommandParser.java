@@ -1,5 +1,11 @@
 package seedu.address.logic.parser.ledger;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BALANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.ledger.CreditCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -9,19 +15,20 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ledger.DateLedger;
 
-import java.util.stream.Stream;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BALANCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-
+/**
+ * CreditCommandParser
+ */
 public class CreditCommandParser implements Parser<CreditCommand> {
-
+    /**
+     * @param args
+     * @return
+     * @throws ParseException
+     */
     public CreditCommand parse (String args) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_BALANCE);
 
-        if(!arePrefixesPresent(argumentMultimap, PREFIX_DATE, PREFIX_BALANCE) ||
-                !argumentMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argumentMultimap, PREFIX_DATE, PREFIX_BALANCE)
+                || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreditCommand.MESSAGE_USAGE));
         }
         DateLedger dateLedger = ParserUtil.parseDateLedger(argumentMultimap.getValue(PREFIX_DATE).get());

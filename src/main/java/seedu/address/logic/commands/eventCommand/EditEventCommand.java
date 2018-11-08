@@ -1,17 +1,15 @@
 package seedu.address.logic.commands.eventCommand;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
 
 import java.util.List;
 import java.util.Optional;
 
-import javafx.scene.control.ListView;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -101,7 +99,7 @@ public class EditEventCommand extends Command {
         Description updatedDescription = editEventDescriptor.getDescription().orElse(eventToEdit.getDescription());
         EventDate updatedEventDate = editEventDescriptor.getEventDate().orElse(eventToEdit.getEventDate());
 
-        return new Event(updatedEventName, updatedVenue,updatedDescription,updatedEventDate);
+        return new Event(updatedEventName, updatedVenue, updatedDescription, updatedEventDate);
     }
 
     @Override
@@ -149,7 +147,7 @@ public class EditEventCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(eventName, venue,description,eventDate);
+            return CollectionUtil.isAnyNonNull(eventName, venue, description, eventDate);
         }
 
         public void setEventName(EventName eventName) {
