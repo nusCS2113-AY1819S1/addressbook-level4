@@ -51,10 +51,12 @@ Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_inter
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 // TODO: end
 // TODO: add screenshot here
-* *Minor enhancement*: added an UI enhancement that *displays the total number of persons* in the application and the ability for the application to *backup the storage file* locally.
+
+// Excluded for 2113T
+//* *Minor enhancement*: added an UI enhancement that *displays the total number of persons* in the application and the ability for the application to *backup the storage file* locally.
 
 // TODO: edit this part
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jitwei98[Functional code]]
 
 * *Other contributions*:
 

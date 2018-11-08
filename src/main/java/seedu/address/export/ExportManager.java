@@ -10,7 +10,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.person.Person;
-import seedu.address.model.todo.Todo;
 import seedu.address.storage.XmlFileStorage;
 import seedu.address.storage.XmlSerializableAddressBook;
 
@@ -23,12 +22,10 @@ public class ExportManager implements Export {
     private static final Logger logger = LogsCenter.getLogger(seedu.address.export.ExportManager.class);
 
     private FilteredList<Person> filteredPersons;
-    private FilteredList<Todo> filteredTodos;
     private Path exportPath;
 
-    public ExportManager(FilteredList<Person> filteredPersons, FilteredList<Todo> filteredTodos, Path filePath) {
+    public ExportManager(FilteredList<Person> filteredPersons, Path filePath) {
         this.filteredPersons = filteredPersons;
-        this.filteredTodos = filteredTodos;
         this.exportPath = filePath;
     }
 
@@ -39,7 +36,7 @@ public class ExportManager implements Export {
     // TODO: add header in the interface header, refer to XmlAddressBookStorage
     @Override
     public void saveFilteredAddressBook() throws IOException {
-        saveFilteredAddressBook(filteredPersons, filteredTodos, exportPath);
+        saveFilteredAddressBook(filteredPersons, exportPath);
     }
 
     /**
@@ -48,13 +45,16 @@ public class ExportManager implements Export {
      * @param filePath location of the data. Cannot be null
      */
     @Override
-    public void saveFilteredAddressBook(FilteredList<Person> filteredPersons, FilteredList<Todo> filteredTodos,
-                                        Path filePath) throws IOException {
+    public void saveFilteredAddressBook(FilteredList<Person> filteredPersons, Path filePath) throws IOException {
         requireNonNull(filteredPersons);
-        requireNonNull(filteredTodos);
         requireNonNull(filePath);
 
-        FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(filteredPersons, filteredTodos));
+        if (FileUtil.isFileExists(filePath)) {
+            logger.fine("File exists. Overwriting output file: " + filePath.toString());
+        } else {
+            logger.fine("Initializing output file: " + filePath.toString());
+            FileUtil.createIfMissing(filePath);
+        }
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(filteredPersons));
     }
 }

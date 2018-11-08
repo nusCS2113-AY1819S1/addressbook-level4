@@ -187,34 +187,29 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Import/ Export ==============================================================================
     @Override
-    public void importAddressBook(Path importFilePath) throws IOException, DataConversionException {
+    public void importPersonsFromAddressBook(Path importFilePath) throws IOException, DataConversionException {
         ImportManager importManager = new ImportManager(importFilePath);
 
         // TODO: dont use null in orElse(), use orElseThrow()
         ReadOnlyAddressBook addressBookImported = importManager.readAddressBook().orElse(null);
-        addToAddressBook(addressBookImported);
+        addPersonsToAddressBook(addressBookImported);
 
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        updateFilteredTodoList(PREDICATE_SHOW_ALL_TODOS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void addToAddressBook(ReadOnlyAddressBook addressBookImported) {
+    public void addPersonsToAddressBook(ReadOnlyAddressBook addressBookImported) {
         ObservableList<Person> persons = addressBookImported.getPersonList();
         persons.forEach((person) -> {
             // TODO: explain why this instead of addPerson() above in developer guide (indicate ab changed at the end)
             versionedAddressBook.addPerson(person);
         });
-        ObservableList<Todo> todos = addressBookImported.getTodoList();
-        todos.forEach((todo) -> {
-            versionedAddressBook.addTodo(todo);
-        });
     }
 
     @Override
     public void exportFilteredAddressBook(Path exportFilePath) throws IOException {
-        Export export = new ExportManager(filteredPersons, filteredTodos, exportFilePath);
+        Export export = new ExportManager(filteredPersons, exportFilePath);
         export.saveFilteredAddressBook();
     }
 

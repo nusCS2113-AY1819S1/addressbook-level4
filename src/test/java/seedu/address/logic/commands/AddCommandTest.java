@@ -164,12 +164,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void importAddressBook(Path importFilePath) throws IOException, DataConversionException {
+        public void importPersonsFromAddressBook(Path importFilePath) throws IOException, DataConversionException {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addToAddressBook(ReadOnlyAddressBook addressBookToImported) {
+        public void addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported) {
             throw new AssertionError("This method should not be called.");
         }
 
