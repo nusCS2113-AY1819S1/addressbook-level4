@@ -29,7 +29,8 @@ public class CustomPieChart extends PieChart {
         setLegend(new CustomLegend(this, legendData));
         setData(FXCollections.observableList(labelData));
         labelData.forEach(data ->
-                data.nameProperty().bind(Bindings.concat(customTextWrap(data.getName()), "\n", data.pieValueProperty(), "%")));
+                data.nameProperty().bind(Bindings.concat(customTextWrap(data.getName()), "\n",
+                        data.pieValueProperty(), "%")));
         observableData = FXCollections.observableList(getData().stream()
                 .map(d -> String.format("%s %f", d.getName(), d.getPieValue()))
                 .collect(Collectors.toList()));
