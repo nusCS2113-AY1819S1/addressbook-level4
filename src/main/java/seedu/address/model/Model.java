@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.distribute.Distribute;
 import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
@@ -146,4 +148,5 @@ public interface Model {
      */
     String getScriptFolderLocation();
 
+    void executeDistributeAlgorithm(Model mode, Distribute distribute) throws CommandException;
 }

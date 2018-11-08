@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.distribute.Distribute;
 import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
@@ -197,6 +198,11 @@ public class AddCommandTest {
 
         @Override
         public String getScriptFolderLocation() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void executeDistributeAlgorithm(Model mode, Distribute distribute) {
             throw new AssertionError("This method should not be called.");
         }
     }
