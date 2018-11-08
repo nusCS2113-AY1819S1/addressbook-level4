@@ -237,7 +237,9 @@ public class AddLimitCommandTest {
         }
 
         @Override
-        public Month getCurrentMonth() { throw new AssertionError("This method should not be called."); }
+        public Month getCurrentMonth() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
