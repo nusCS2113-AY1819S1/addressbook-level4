@@ -44,7 +44,7 @@ public class DateTime {
      * @return boolean
      */
     public static boolean isValidDateTime (String dateTimeAsString) {
-        if(dateTimeAsString == null) {
+        if (dateTimeAsString == null) {
             throw new NullPointerException();
         }
 
