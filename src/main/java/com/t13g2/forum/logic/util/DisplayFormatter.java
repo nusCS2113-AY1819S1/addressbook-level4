@@ -1,11 +1,11 @@
 package com.t13g2.forum.logic.util;
 
+import java.util.List;
+
 import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
-
-import java.util.List;
 
 
 //@@author HansKoh

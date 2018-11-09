@@ -1,13 +1,13 @@
 package com.t13g2.forum.logic.parser;
 
-import com.t13g2.forum.commons.core.Messages;
-import com.t13g2.forum.logic.commands.UpdateThreadCommand;
-import com.t13g2.forum.logic.parser.exceptions.ParseException;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
 
 import java.util.stream.Stream;
 
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
+import com.t13g2.forum.commons.core.Messages;
+import com.t13g2.forum.logic.commands.UpdateThreadCommand;
+import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
 //@@author HansKoh
 /**
