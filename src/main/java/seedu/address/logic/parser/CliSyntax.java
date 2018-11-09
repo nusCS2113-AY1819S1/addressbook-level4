@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static java.util.Map.entry;
-
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +54,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_NOTE_START_TIME = new Prefix("st/");
     public static final Prefix PREFIX_NOTE_TITLE = new Prefix("tt/");
 
-    public static final Map<String, List<String>> COMMAND_LIST = Map.ofEntries(
+    /* List of existing commands in Trajectory to be used for auto-completion */
+    public static final Map<String, List<String>> COMMAND_LIST =
+            Map.ofEntries(
             new AbstractMap.SimpleEntry<>("class", new ArrayList<>(Arrays.asList(
                     "add",
                     "list",
@@ -114,34 +114,4 @@ public class CliSyntax {
                     "export"
             )))
     );
-
-    /* Current existing command keywords (first command word)*/
-    public static final List<String> FIRST_COMMAND_KEYWORDS = new ArrayList<>(Arrays.asList(
-            "class",
-            "course",
-            "grade",
-            "gradebook",
-            "module",
-            "note",
-            "student"
-    ));
-
-    /* Current existing command keywords (second command word and beyond) */
-    public static final List<String> SECOND_COMMAND_KEYWORDS = new ArrayList<>(Arrays.asList(
-            "add",
-            "addstudent",
-            "delete",
-            "delstudent",
-            "edit",
-            "enrol",
-            "export",
-            "find",
-            "graph",
-            "list",
-            "listattendance",
-            "liststudents",
-            "markattendance",
-            "modattendance",
-            "view"
-    ));
 }

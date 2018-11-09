@@ -1,13 +1,7 @@
 package seedu.address.ui;
 
 import static seedu.address.logic.parser.CliSyntax.COMMAND_LIST;
-import static seedu.address.logic.parser.CliSyntax.FIRST_COMMAND_KEYWORDS;
-import static seedu.address.logic.parser.CliSyntax.SECOND_COMMAND_KEYWORDS;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -41,6 +35,7 @@ public class CommandBox extends UiPart<Region> {
     private static final Pattern LAST_WORD_REGEX =
             Pattern.compile("(?<previousWord>(\\S*\\s+)*)(?<lastWord>\\S+\\s*$)");
     private static KeyCode previousKeyPressed;
+    private static String commandTextSnapshot;
     private static String lastWord;
     private static int index;
 
@@ -61,67 +56,71 @@ public class CommandBox extends UiPart<Region> {
                 event.consume();
 
                 if (!commandTextField.getText().trim().isEmpty()) {
-                    String commandWord = commandTextField.getText();
-
-                    String[] previousWords = new String[0];
-                    Matcher matcher = LAST_WORD_REGEX.matcher(commandWord);
-                    if (matcher.find()) {
-                        String previous = matcher.group("previousWord");
-                        if (!previous.trim().isEmpty()) {
-                            previousWords = previous.trim().split("\\s+");
-                        }
-
-                        if (previousKeyPressed != KeyCode.TAB) {
-                            lastWord = matcher.group("lastWord");
-                        }
-                    }
-
-                    List<String> matches = null;
-                    if (previousWords.length == 0) {
-                        matches = COMMAND_LIST.keySet().stream()
-                                .filter(key -> key.indexOf(lastWord) == 0)
-                                .collect(Collectors.toList());
-                    } else if (previousWords.length == 1) {
-                        String firstCommandWord = previousWords[0];
-                        for (Map.Entry<String, List<String>> entry : COMMAND_LIST.entrySet()) {
-                            if (entry.getKey().equals(firstCommandWord)) {
-                                matches = entry.getValue().stream()
-                                        .filter(second -> second.indexOf(lastWord) == 0)
-                                        .collect(Collectors.toList());
-                            }
-                        }
-//                        matches = COMMAND_LIST.entrySet().stream()
-//                                .filter(entry -> entry.getKey().equals(firstCommandWord))
-//                                .map(entry -> entry.getValue())
-//                                .flatMap(List::stream)
-//                                .collect(Collectors.toList());
-//                        matches = matches.stream()
-//                                .filter(m -> m.indexOf(lastWord) == 0)
-//                                .collect(Collectors.toList());
-                    }
-
-                    String wordToAppend;
-                    if (matches != null && matches.size() >= 1) {
-                        if (previousKeyPressed == KeyCode.TAB && !lastWord.isEmpty()) {
-                            index = (index + 1) % matches.size();
-                            wordToAppend = matches.get(index).replace(lastWord, "");
-                            commandTextField.setText(
-                                    commandTextField
-                                            .getText()
-                                            .substring(0, commandTextField
-                                                    .getText()
-                                                    .lastIndexOf(lastWord) + lastWord.length()));
-                        } else {
-                            index = 0;
-                            wordToAppend = matches.get(index).replace(lastWord, "");
-                        }
-                        commandTextField.appendText(wordToAppend);
-                    }
+                    executeAutoComplete();
                 }
             }
             previousKeyPressed = event.getCode();
         });
         historySnapshot = logic.getHistorySnapshot();
+    }
+
+    /**
+     * Handles the auto-completing of command words.
+     *
+     * This method attempts to match the user's premature input to one of
+     * the existing commands words.
+     *
+     * First word matches only with the command identifier keywords(e.g. "student", "module", etc.)
+     *
+     * For second word, the search is narrowed down to command words available only from the first word.
+     */
+    private void executeAutoComplete() {
+        String commandText = commandTextField.getText();
+
+        String[] previousWords = new String[0];
+        Matcher matcher = LAST_WORD_REGEX.matcher(commandText);
+        if (matcher.find()) {
+            String previous = matcher.group("previousWord");
+            if (!previous.trim().isEmpty()) {
+                previousWords = previous.trim().split("\\s+");
+            }
+
+            if (previousKeyPressed != KeyCode.TAB) {
+                lastWord = matcher.group("lastWord");
+            }
+        }
+
+        List<String> matches = null;
+        if (previousWords.length == 0) {
+            matches = COMMAND_LIST.keySet()
+                    .stream()
+                    .filter(first -> first.indexOf(lastWord) == 0)
+                    .collect(Collectors.toList());
+        } else if (previousWords.length == 1) {
+            String firstCommandWord = previousWords[0];
+            for (Map.Entry<String, List<String>> entry : COMMAND_LIST.entrySet()) {
+                if (entry.getKey().equals(firstCommandWord)) {
+                    matches = entry.getValue()
+                            .stream()
+                            .filter(second -> second.indexOf(lastWord) == 0)
+                            .collect(Collectors.toList());
+                }
+            }
+        }
+
+        String wordToAppend;
+        if (matches != null && matches.size() >= 1) {
+            if (previousKeyPressed == KeyCode.TAB && !lastWord.isEmpty()) {
+                index = (index + 1) % matches.size();
+                wordToAppend = matches.get(index).replaceFirst(lastWord, "");
+                commandTextField.setText(commandTextSnapshot);
+            } else {
+                index = 0;
+                wordToAppend = matches.get(index).replace(lastWord, "");
+                commandTextSnapshot = commandText;
+            }
+            commandTextField.appendText(wordToAppend);
+        }
     }
 
     /**
