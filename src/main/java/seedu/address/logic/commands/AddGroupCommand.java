@@ -10,7 +10,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -35,6 +38,13 @@ public class AddGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Person index(s) added to group at index %1$s";
     public static final String MESSAGE_DUPLICATE_PERSONS = "Person(s) already exist in group";
+    public static final String LOG_DUPLICATE_PERSONS = "Person(s) already detected in group";
+    public static final String LOG_COMMIT = "Version Committed";
+    public static final String LOG_COMMAND_SUCCESS = "Person(s) have been added to group";
+    public static final String LOG_INVALID_PERSON_INDEX = "Invalid person index detected";
+    public static final String LOG_INVALID_GROUP_INDEX = "Invalid group index detected";
+
+    private static final Logger logger = LogsCenter.getLogger(AddGroupCommand.class);
 
     private final AddGroup toAdd;
     private boolean shouldCommit;
@@ -57,8 +67,10 @@ public class AddGroupCommand extends Command {
         List<Group> lastShownGroupList = model.getFilteredGroupList();
 
         if (!toAdd.validGroupIndex(lastShownGroupList.size())) {
+            logger.log(Level.WARNING, LOG_INVALID_GROUP_INDEX);
             throw new CommandException(MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         } else if (!toAdd.validPersonIndexSet(lastShownPersonList.size())) {
+            logger.log(Level.WARNING, LOG_INVALID_PERSON_INDEX);
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -66,12 +78,16 @@ public class AddGroupCommand extends Command {
         toAdd.setGroupSet(lastShownGroupList);
 
         if (model.hasPersonInGroup(toAdd)) {
+            logger.log(Level.WARNING, LOG_DUPLICATE_PERSONS);
             throw new CommandException(MESSAGE_DUPLICATE_PERSONS);
         }
 
         model.addGroup(toAdd);
+        logger.log(Level.INFO, LOG_COMMAND_SUCCESS);
+
         if (shouldCommit) {
             model.commitAddressBook();
+            logger.log(Level.INFO, LOG_COMMIT);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
 
