@@ -56,6 +56,11 @@ public class EditAccountCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Account> lastShownList = model.getFilteredAccountList();
 
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Quantity;
@@ -22,8 +23,13 @@ public class LostandFoundCommand extends Command {
     public static final String COMMAND_WORD = "lost&found";
     public static final String MESSAGE_SUCCESS = "Lost items listed";
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         ArrayList<SimpleItem> lostItems = new ArrayList<>();
         List<Item> lastShownList = model.getFilteredItemList();
         sortSimpleItems(lastShownList, lostItems);
