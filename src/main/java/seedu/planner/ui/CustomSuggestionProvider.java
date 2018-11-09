@@ -113,43 +113,27 @@ public class CustomSuggestionProvider {
      * for comparison to the input String by the user. It can autocomplete the command word or when a tag is expected
      * of the user input or when a sort parameter is expected.
      * @param userInput is the current word/substring to be automatically completed
+     * @
+     */
+
+    /**
+     * This method is responsible for deciding which collection of Strings is to be used as the reference collection
+     * for comparison to the input String by the user. It can autocomplete the command word or when a tag is expected
+     * of the user input or when a sort parameter is expected.
+     * @param userInput is the entire input of text in the command box.
+     * @param prefix is the prefix of the word to be completed, if any.
+     * @param wordInput is the word to be completed.
      */
     public void updateSuggestions(String userInput, String prefix, String wordInput) {
-        String[] inputs = userInput.split(" ");
+        String[] inputs = userInput.trim().split("\\s+");
         wordInput = prefix + wordInput;
         int strIndex = 0;
         for (; strIndex < inputs.length && !inputs[strIndex].equals(wordInput); strIndex++);
 
         if (strIndex == 0) {
-            if (!commandKeywordsSet.contains(inputs[strIndex])) {
-                updateSuggestions(commandKeywordsSet);
-            } else {
-                emptySuggestions();
-            }
+            expectingCommandWord(prefix, inputs, strIndex);
         } else if (inputs[0].equals(SortCommand.COMMAND_WORD)) {
-            if (inputs.length == 2) {
-                updateSuggestions(sortKeywordsSet);
-            } else if (inputs.length == 3) {
-                if (strIndex == 1) {
-                    if (SortCommand.ORDER_SET.contains(inputs[2])) {
-                        updateSuggestions(SortCommand.CATEGORY_SET);
-                    } else if (SortCommand.CATEGORY_SET.contains(inputs[2])) {
-                        updateSuggestions(SortCommand.ORDER_SET);
-                    } else {
-                        updateSuggestions(sortKeywordsSet);
-                    }
-                } else { // strIndex = 2
-                    if (SortCommand.ORDER_SET.contains(inputs[1])) {
-                        updateSuggestions(SortCommand.CATEGORY_SET);
-                    } else if (SortCommand.CATEGORY_SET.contains(inputs[1])) {
-                        updateSuggestions(SortCommand.ORDER_SET);
-                    } else {
-                        emptySuggestions();
-                    }
-                }
-            } else {
-                emptySuggestions();
-            }
+            sortCommandKeywordDetected(inputs, strIndex);
         } else if (possibleTagKeywordsSet.contains(inputs[0])) {
             if (wordInput.startsWith(PREFIX_TAG.getPrefix())) {
                 updateSuggestions(tagsSuggestionSet);
@@ -164,6 +148,61 @@ public class CustomSuggestionProvider {
             }
         } else if (inputs[0].equals(FindTagCommand.COMMAND_WORD)) {
             updateSuggestions(tagsSuggestionSet);
+        } else {
+            emptySuggestions();
+        }
+    }
+
+    /**
+     * Function that handles when the word to be completed is found to be at index 0.
+     * @param prefix is the prefix of the word to be completed, if any.
+     * @param inputs is an array of all the non-whitespace words found in the user input.
+     * @param strIndex is the index of the word to be completed in the entire string of input.
+     */
+    private void expectingCommandWord(String prefix, String[] inputs, int strIndex) {
+        if (prefix != "") {
+            emptySuggestions();
+        } else if (!commandKeywordsSet.contains(inputs[strIndex])) {
+            updateSuggestions(commandKeywordsSet);
+        } else {
+            emptySuggestions();
+        }
+    }
+
+    /**
+     * Function that handles when the sort command keyword is found at index 0.
+     * @param inputs is the word to be completed.
+     * @param strIndex is the index of the word to be completed in the entire string of input.
+     */
+    private void sortCommandKeywordDetected(String[] inputs, int strIndex) {
+        if (inputs.length == 2) {
+            if (sortKeywordsSet.contains(inputs[strIndex])) {
+                emptySuggestions();
+            } else {
+                updateSuggestions(sortKeywordsSet);
+            }
+        } else if (inputs.length == 3) {
+            if (strIndex == 1) {
+                if (sortKeywordsSet.contains(inputs[strIndex])) {
+                    emptySuggestions();
+                } else {
+                    if (SortCommand.ORDER_SET.contains(inputs[2])) {
+                        updateSuggestions(SortCommand.CATEGORY_SET);
+                    } else if (SortCommand.CATEGORY_SET.contains(inputs[2])) {
+                        updateSuggestions(SortCommand.ORDER_SET);
+                    } else {
+                        updateSuggestions(sortKeywordsSet);
+                    }
+                }
+            } else { // strIndex = 2
+                if (SortCommand.ORDER_SET.contains(inputs[1])) {
+                    updateSuggestions(SortCommand.CATEGORY_SET);
+                } else if (SortCommand.CATEGORY_SET.contains(inputs[1])) {
+                    updateSuggestions(SortCommand.ORDER_SET);
+                } else {
+                    emptySuggestions();
+                }
+            }
         } else {
             emptySuggestions();
         }

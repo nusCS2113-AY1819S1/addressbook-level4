@@ -21,7 +21,7 @@ import javafx.util.StringConverter;
 //@author tztzt
 /**
  * This object creates the binding for the auto complete popup to the commandBox
- * and updates the list of suggestions for the commandbox
+ * and is the controller for the popup of the suggested list of autocomplete texts.
  */
 public class NewAutoCompletionBinding<T> {
 
@@ -51,16 +51,7 @@ public class NewAutoCompletionBinding<T> {
             if (newPosition.intValue() == 0) {
                 inputText = resetTexts();
             } else {
-                if (Character.isWhitespace(newText.charAt(newPosition.intValue()))
-                        && Character.isWhitespace(newText.charAt(newPosition.intValue() - 1))) {
-                    inputText = resetTexts();
-                } else {
-                    if (Character.isWhitespace(newText.charAt(newPosition.intValue()))) {
-                        inputText = caretInBetween(newPosition, newText);
-                    } else {
-                        inputText = resetTexts();
-                    }
-                }
+                inputText = whitespaceAfterCaret(newPosition, newText);
             }
         }
 
@@ -114,9 +105,31 @@ public class NewAutoCompletionBinding<T> {
     }
 
     /**
+     * Function that detects when there is a whitespace after the caret, which means the word is currently being typed
+     * and expected to be autocompleted.
+     * @param newPosition is the current position of the caret.
+     * @param newText is the entire input in the command box.
+     * @return
+     */
+    private String whitespaceAfterCaret(Number newPosition, String newText) {
+        String inputText;
+        if (Character.isWhitespace(newText.charAt(newPosition.intValue()))
+                && Character.isWhitespace(newText.charAt(newPosition.intValue() - 1))) {
+            inputText = resetTexts();
+        } else {
+            if (Character.isWhitespace(newText.charAt(newPosition.intValue()))) {
+                inputText = caretInBetween(newPosition, newText);
+            } else {
+                inputText = resetTexts();
+            }
+        }
+        return inputText;
+    }
+
+    /**
      * Splits the input text accordingly when the caret is found to be at the end of the command box
-     * @param newPosition is the current position of the caret
-     * @param newText is the entire input in the command box
+     * @param newPosition is the current position of the caret.
+     * @param newText is the entire input in the command box.
      * @return
      */
     private String caretAtEnd(Number newPosition, String newText) {
@@ -135,8 +148,8 @@ public class NewAutoCompletionBinding<T> {
     /**
      * Splits the input text when the caret is found in the middle of the string in the command box
      * and is found at the end of a word.
-     * @param newPosition is the current position of the caret
-     * @param newText is the entire input in the command box
+     * @param newPosition is the current position of the caret.
+     * @param newText is the entire input in the command box.
      * @return
      */
     private String caretInBetween(Number newPosition, String newText) {
