@@ -51,7 +51,8 @@ public class EmailCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Email sent";
     public static final String MESSAGE_FAIL = "Send failed";
-    public static final String MESSAGE_INVALID_ADDRESSES = "Invalid address found";
+    public static final String MESSAGE_INVALID_ADDRESSES = "Invalid address found: "
+            + "example@example.com (Recipient address reserved by RFC 2606)";
     public static final String MESSAGE_NO_RECIPIENT = "Group contains no recipient";
     public static final String MESSAGE_NO_LOGIN = "No login credentials found. Please login using 'login' command";
     public static final String MESSAGE_AUTHENTICATION_FAIL = "Invalid login credentials entered";
@@ -115,7 +116,7 @@ public class EmailCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person personToSend = lastShownList.get(targetIndex.getZeroBased());
-            logger.log(Level.INFO, "Recipient: " + personToSend.getName() + "is added to recipient list");
+            logger.log(Level.INFO, "Recipient: " + personToSend.getName() + " is added to recipient list");
             toSend.add(personToSend);
         }
 
@@ -124,7 +125,7 @@ public class EmailCommand extends Command {
             for (Index targetIndex : targetMultipleIndex) {
                 try {
                     Person personToSend = lastShownList.get(targetIndex.getZeroBased());
-                    logger.log(Level.INFO, "Recipient: " + personToSend.getName() + "is added to recipient list");
+                    logger.log(Level.INFO, "Recipient: " + personToSend.getName() + " is added to recipient list");
                     toSend.add(personToSend);
                 } catch (IndexOutOfBoundsException e) {
                     logger.log(Level.WARNING, "EmailCommand Received An Invalid Index For Multiple Target Email");
@@ -143,7 +144,7 @@ public class EmailCommand extends Command {
             Group groupToSend = groupList.get(targetGroup.getZeroBased());
             Set<Person> personsInGroup = groupToSend.getPersons();
             for (Person person : personsInGroup) {
-                logger.log(Level.INFO, "Recipient: " + person.getName() + "is added to recipient list");
+                logger.log(Level.INFO, "Recipient: " + person.getName() + " is added to recipient list");
             }
             toSend.addAll(personsInGroup);
         }
@@ -154,8 +155,10 @@ public class EmailCommand extends Command {
             logger.log(Level.WARNING, "Email Credentials Entered But Incorrect");
             throw new CommandException(MESSAGE_AUTHENTICATION_FAIL);
         } catch (SMTPSendFailedException ssfe) {
+            logger.log(Level.WARNING, Throwables.getStackTraceAsString(ssfe));
             throw new CommandException(setErrorMessageForSendFailedException(ssfe.getMessage()));
         } catch (SendFailedException sfe) {
+            logger.log(Level.WARNING, Throwables.getStackTraceAsString(sfe));
             throw new CommandException(setErrorMessageForSendFailedException(sfe.getMessage()));
         } catch (MessagingException e) {
             logger.log(Level.WARNING, "General Failure, Please Refer To Stacktrace\n"

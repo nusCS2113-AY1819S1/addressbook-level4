@@ -30,7 +30,7 @@ The code that was adapted from Stack Overflow was from [https://stackoverflow.co
 in the `numberOfDifferentNationality` method.
 
 //* *Minor enhancement*: Added the Nationality and Gender Field into Person Object, Fixed Undo/Redo feature for Distribute Command.
-//* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tsuweiquan[Functional code]]
+* *Code contributed*: [https://github.com/Tsuweiquan[Github]][https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tsuweiquan[RepoSense]]
 
 * *Other contributions*:
 
@@ -47,6 +47,7 @@ in the `numberOfDifferentNationality` method.
 *** Responsible for updating App version (Pull request: https://github.com/CS2113-AY1819S1-T13-4/main/pull/102[#102])
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-4/main/pull/78[#78], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Replied to false positive bugs (Pull Request: https://github.com/CS2113-AY1819S1-T13-4/main/issues/113[#Issue 113])
 *** Contributed to forum discussions (Questions:  https://github.com/nusCS2113-AY1819S1/forum/issues/101[#101])
 *** Reported bugs and suggestions for other teams in the class (Tested on T09-3:  https://github.com/CS2113-AY1819S1-T09-3/main/issues/75[1], https://github.com/CS2113-AY1819S1-T09-3/main/issues/79[2], https://github.com/CS2113-AY1819S1-T09-3/main/issues/82[3], https://github.com/CS2113-AY1819S1-T09-3/main/issues/86[4], https://github.com/CS2113-AY1819S1-T09-3/main/issues/91[5])
 *** Responsible for the setup of Travis, Appveyor and Coveralls.
