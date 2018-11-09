@@ -33,12 +33,10 @@ public class LoginCommand extends Command {
     public static final String MESSAGE_ALREADY_LOGGED_IN = "Already logged in as: %1$s";
 
     private final UsernameMatchPredicate predicate;
-    private final String username;
     private final String password;
 
     public LoginCommand(UsernameMatchPredicate predicate, Account account) {
         this.predicate = predicate;
-        this.username = account.getUsername().toString();
         this.password = account.getPassword().toString();
     }
 
