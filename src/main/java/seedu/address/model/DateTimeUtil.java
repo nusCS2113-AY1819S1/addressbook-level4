@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import seedu.address.model.event.DateTime;
-
 /**
  * This class is utility class for method related to @DateTime field
  * and system clock
@@ -30,9 +28,9 @@ public class DateTimeUtil {
      * Compare to know how many TimeUnit until or past the date of comparision
      * TimeUnit: NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS
      */
-    public static long daysDiff(DateTime eventDate, Date currentDate, TimeUnit timeUnit) {
+    public static long daysDiff(Date eventDate, Date currentDate, TimeUnit timeUnit) {
         requireAllNonNull(eventDate, currentDate, timeUnit);
-        return timeUnit.convert(
-                eventDate.dateTime.getTime() - currentDate.getTime(), timeUnit);
+        return timeUnit.HOURS.convert(
+                eventDate.getTime() - currentDate.getTime(), timeUnit);
     }
 }

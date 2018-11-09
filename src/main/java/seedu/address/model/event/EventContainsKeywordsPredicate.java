@@ -172,12 +172,12 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
     }
 
     /**
-     * To check if any of tag prefix keywords match with any of event tags
+     * To check if any of attendee prefix keywords match with any of event attendees
      * @param keywords list of keywords
      * @param event event to compare
      * @return a boolean indicate matching
      */
-    public boolean checkAttendeeKeywordsMatchEventAttendee (List<String> keywords, Event event) {
+    public static boolean checkAttendeeKeywordsMatchEventAttendee (List<String> keywords, Event event) {
         if (keywords == null) {
             return true;
         }
