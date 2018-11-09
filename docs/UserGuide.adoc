@@ -34,7 +34,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all events
-* **`add`**`n/Computer Science Workshop c/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `Computer Science` to the Event Manager.
+* **`add`**`n/Computer Science Workshop c/John Doe p/98765432 e/johnd@example.com v/John street, block 123, #01-01 d/12/03/2018 15:30` : adds an event named `Computer Science Workshop` to the Event Manager.
 * **`delete`**`3` : deletes the 3rd event shown in the current list
 * *`exit`* : exits the app
 
@@ -46,7 +46,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 // tag::autosort[]
 
 ====
-*Automatic sorting*: events in Event Manager will always be displayed in chronological order, follow by alphabetical order.
+*Automatic sorting*: Events in Event Manager will always be displayed in chronological order, followed by alphabetical order.
 ====
 // end::autosort[]
 
@@ -128,7 +128,7 @@ An event can have any number of tags (including 0).
 
 Examples:
 
-* `add n/Com Sci Workshop c/John Doe p/98765432 e/johnd@example.com v/John street, block 123, #01-01` d/20/10/2017 10:30
+* `add n/Com Sci Workshop c/John Doe p/98765432 e/johnd@example.com v/John street, block 123, #01-01 d/20/10/2017 10:30`
 * `add n/Sports Day c/Betsy Crow t/Sports e/betsycrow@example.com v/COM2 #02-01 p/12345678 d/21/02/2019 08:30 t/Leisure`
 
 === Listing all events : `list`
@@ -196,9 +196,9 @@ Examples:
 Returns events with names `Sports Day` and `Any day`
 * `find k/Sports Sci friends` +
 Returns events having the name `Sports Competition`, venue `Sci Avenue`, and tag `friends`
-* `find d/12/01/2018 04:30`
+* `find d/12/01/2018 04:30` +
 Returns any event having date `12/01/2018` or time `04:30`
-* `find k/Day n/Sports d/12/01/2018
+* `find k/Day n/Sports d/12/01/2018` +
 Returns any event having keyword `day` with names including `Sports` and with dates `12/01/2018`
 // end::find[]
 
@@ -228,7 +228,7 @@ Admin/User: Selects the event identified by the index number in the displayed ev
 Format: `select INDEX`
 
 ****
-* Selects the event and loads the Google search page the event at the specified `INDEX`.
+* Selects the event and loads the Browser Panel of the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -334,7 +334,7 @@ Examples:
 Unregisters user from the 1st event of the Event Manager.
 * `find Sports` +
 `unregister 2` +
-Unregisters User from the 2nd event in the results of the `find` command.
+Unregisters user from the 2nd event in the results of the `find` command.
 
 === List all registered events : `attending`
 
@@ -345,10 +345,10 @@ Format: `attending`
 //tag::eventState&Reminder[]
 === Show event reminders : `reminder`
 
-User: Shows event reminders for all upcoming events that the user has registered for. 
+Admin/User: Shows event reminders for all upcoming events that the user has registered for. 
 Format: `reminder`
 
-IMPORTANT: Upcoming events are those that are occurring within the next 24 hours.
+NOTE: Upcoming events are those that are occurring within the next 24 hours.
 
 ****
 * Users will only receive reminders for events that they have registered for.
@@ -357,12 +357,11 @@ IMPORTANT: Upcoming events are those that are occurring within the next 24 hours
 
 === Updates the statuses of events : `update` 
 
-User: Updates the statuses of events. +
+Admin/User: Updates the statuses of events. +
 Format: `update`
 
-IMPORTANT: Events that have already occurred will have the [COMPLETED] status. Events that have yet to occur will have the [UPCOMING] status.
-
 ****
+* Events that have already occurred will have the [COMPLETED] status. Events that have yet to occur will have the [UPCOMING] status.
 * The `update` command can be used without the user having to log in.
 * Event statuses are automatically updated every 5 minutes. 
 ****
@@ -505,8 +504,8 @@ e.g.`select 2`
 e.g. `register 1`
 * *Unregister* : `unregister INDEX` +
 e.g. `unregister 1`
-* *Reminder* : `reminder`
-* *StatusUpdate* : `update`
+* *Show reminders* : `reminder`
+* *Update event statuses* : `update`
 * *AddComment* : `addComment INDEX C/STRING` +
 e.g. `addComment 1 C/HELLO`
 * *ReplyComment* : `replyComment INDEX L/LINE C/STRING` +
