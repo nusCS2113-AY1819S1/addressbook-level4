@@ -46,9 +46,7 @@ public class SellCommand extends Command {
             "Quantity of books left cannot be less than 0.";
     public static final String COMMAND_SYNTAX = COMMAND_WORD
             + " " + PREFIX_QUANTITY + " "
-            + PREFIX_ISBN + " " + PREFIX_QUANTITY
-            + " " + COMMAND_WORD + " "
-            + PREFIX_QUANTITY;
+            + PREFIX_ISBN;
     private final String findBookBy;
     private final String argsType;
     private final SellBookDescriptor sellBookDescriptor;
