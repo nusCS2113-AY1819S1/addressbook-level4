@@ -1,8 +1,10 @@
 package seedu.address.model.request;
 
+import static seedu.address.commons.core.Messages.MESSAGE_ACCESS_DENIED;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_SIMILARITY_FOUND;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import static seedu.address.logic.parser.DiceCoefficient.diceCoefficient;
 
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.Role;
 import seedu.address.logic.parser.DiceCoefficient;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -33,6 +36,8 @@ public class RequestListParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public CommandSecondary parseCommandRequest(String userInput) throws ParseException {
+        CommandSecondary finalCommand;
+        final String finalCommandWord;
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -50,20 +55,25 @@ public class RequestListParser {
 
         switch (commandWord) {
         case RequestCommand.COMMAND_WORD:
-            return new RequestCommandParser().parse(arguments);
-
+            finalCommandWord = RequestCommand.COMMAND_WORD;
+            finalCommand = new RequestCommandParser().parse(arguments);
+            break;
         case ViewRequestCommand.COMMAND_WORD:
-            return new ViewRequestCommand();
-
+            finalCommandWord = ViewRequestCommand.COMMAND_WORD;
+            finalCommand = new ViewRequestCommand();
+            break;
         case DeleteRequestCommand.COMMAND_WORD:
-            return new DeleteRequestCommandParser().parse(arguments);
-
+            finalCommandWord = DeleteRequestCommand.COMMAND_WORD;
+            finalCommand = new DeleteRequestCommandParser().parse(arguments);
+            break;
         case UndoRequestCommand.COMMAND_WORD:
-            return new UndoRequestCommand();
-
+            finalCommandWord = UndoRequestCommand.COMMAND_WORD;
+            finalCommand = new UndoRequestCommand();
+            break;
         case RedoRequestCommand.COMMAND_WORD:
-            return new RedoRequestCommand();
-
+            finalCommandWord = RedoRequestCommand.COMMAND_WORD;
+            finalCommand = new RedoRequestCommand();
+            break;
         default: {
             for (String command : commandList) {
                 if (diceCoefficient(commandWord, command) > DICE_COEFFICIENT_THRESHOLD) {
@@ -73,5 +83,14 @@ public class RequestListParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
         }
+        if (finalCommand != null) {
+            try {
+                Role.checkAccess(finalCommandWord);
+            } catch (IllegalAccessException e) {
+                throw new ParseException(MESSAGE_ACCESS_DENIED + finalCommandWord + ".");
+            }
+            return finalCommand;
+        }
+        return null;
     }
 }
