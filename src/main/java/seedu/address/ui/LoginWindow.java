@@ -13,6 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.LoginCommand;
@@ -133,5 +134,13 @@ public class LoginWindow extends UiPart<Stage> {
     @Subscribe
     public void handleUnsuccessfulLoginEvent(UnsuccessfulLoginEvent loginFailure) {
         label.setText("Incorrect Username/Password");
+    }
+
+    @Subscribe
+    public void handleNewResultAvailableEvent(NewResultAvailableEvent e) {
+        //Prevents this message from showing on login box, but only on ResultDisplay
+        if (!e.message.equals("Successfully Displayed UI")) {
+            label.setText(e.message);
+        }
     }
 }
