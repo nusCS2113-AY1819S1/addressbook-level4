@@ -1,5 +1,6 @@
 package seedu.planner.model.record;
 
+import static java.lang.Double.isFinite;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
 
@@ -23,17 +24,19 @@ public class MoneyFlow {
     public static final String CURRENCY = "$";
     public static final String POSITIVE_SIGN = "+";
     public static final String NEGATIVE_SIGN = "-";
+    public static final String REPRESENTATION_ZERO = "-0";
 
     private static final String MONEYFLOW_VALIDATION_REGEX = "^[+-](0|[1-9]\\d{0,11})(\\.\\d{1,2})?";
 
     public final String value;
-    public final double valueDouble;
+    public final Double valueDouble;
 
     public MoneyFlow(String moneyFlow) {
         requireNonNull(moneyFlow);
         checkArgument(isValidMoneyFlow(moneyFlow), MESSAGE_MONEY_FLOW_CONSTRAINTS);
         this.value = moneyFlow;
         valueDouble = Double.valueOf(moneyFlow);
+        checkArgument(isFinite(valueDouble), MESSAGE_MONEY_FLOW_CONSTRAINTS);
     }
 
     public MoneyFlow(Double moneyFlow) {

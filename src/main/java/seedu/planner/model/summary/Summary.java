@@ -24,10 +24,10 @@ public class Summary<Identifier> {
         MoneyFlow money = record.getMoneyFlow();
         if (isExpense(money)) {
             totalExpense = money;
-            totalIncome = new MoneyFlow("+0");
+            totalIncome = new MoneyFlow(MoneyFlow.REPRESENTATION_ZERO);
         } else {
             totalIncome = money;
-            totalExpense = new MoneyFlow("-0");
+            totalExpense = new MoneyFlow(MoneyFlow.REPRESENTATION_ZERO);
         }
         total = money;
     }
