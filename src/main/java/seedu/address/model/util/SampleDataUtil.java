@@ -1,7 +1,12 @@
 package seedu.address.model.util;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyTaskBook;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
@@ -31,13 +36,13 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
-    //    /**
-    //     * Returns a tag set containing the list of strings given.
-    //     */
-    //    public static Set<Tag> getTagSet(String... strings) {
-    //        return Arrays.stream(strings)
-    //                .map(Tag::new)
-    //                .collect(Collectors.toSet());
-    //    }
+    /**
+     * Returns a tag set containing the list of strings given.
+     */
+    public static Set<Tag> getTagSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
 
 }

@@ -1,19 +1,22 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
-
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
 import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
+
 
 /**
  * JAXB-friendly version of the Task.
@@ -39,6 +42,8 @@ public class XmlAdaptedTask {
     private boolean isCompleted;
     @XmlElement
     private List<XmlAdaptedMilestone> milestonelist;
+    @XmlElement
+    private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -51,7 +56,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(String deadline, String moduleCode, String title, String description, String priorityLevel,
                           String expectedNumOfHours, String completedNumOfHours,
-                          boolean isCompleted, List<XmlAdaptedTask> milestoneList) {
+                          boolean isCompleted, List<XmlAdaptedTask> milestoneList, List<XmlAdaptedTag> tagged) {
         this.deadline = deadline;
         this.moduleCode = moduleCode;
         this.title = title;
@@ -63,6 +68,9 @@ public class XmlAdaptedTask {
         this.milestonelist = new ArrayList<>();
         if (milestoneList != null) {
             this.milestonelist = new ArrayList<>(milestonelist);
+        }
+        if (tagged != null) {
+            this.tagged = new ArrayList<>(tagged);
         }
         if (moduleCode != null) {
             this.moduleCode = moduleCode;
@@ -84,6 +92,7 @@ public class XmlAdaptedTask {
         this.completedNumOfHours = "0";
         this.isCompleted = false;
         this.milestonelist = new ArrayList<>();
+        this.tagged = new ArrayList<>();
     }
 
     /**
@@ -103,6 +112,7 @@ public class XmlAdaptedTask {
         completedNumOfHours = Integer.toString(source.getCompletedNumOfHours());
         isCompleted = source.isCompleted();
         milestonelist = source.getMilestoneList().stream().map(XmlAdaptedMilestone::new).collect(Collectors.toList());
+        tagged = source.getTags().stream().map(XmlAdaptedTag::new).collect(Collectors.toList());
     }
 
     /**
@@ -111,6 +121,10 @@ public class XmlAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
+        final List<Tag> taskTags = new ArrayList<>();
+        for (XmlAdaptedTag tag : tagged) {
+            taskTags.add(tag.toModelType());
+        }
         if (deadline == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Deadline.class.getSimpleName()));
@@ -175,9 +189,11 @@ public class XmlAdaptedTask {
 
         }
 
+        final Set<Tag> modelTags = new HashSet<>(taskTags);
+
         return new Task(modelDeadline, modelModuleCode, modelTitle, modelDescription,
                 modelPriority, modelExpectedNumOfHours,
-                modelCompletedNumOfHours, modelIsCompleted, milestoneEntries);
+                modelCompletedNumOfHours, modelIsCompleted, milestoneEntries, modelTags);
     }
 
     @Override

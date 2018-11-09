@@ -24,6 +24,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskBook;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 
@@ -131,10 +132,33 @@ public class SelectDeadlineCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        //author ChanChunCheong
+        @Override
+        public void addTag(Task task, Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeTag(Task task, Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void selectTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deferTaskDeadline(Task task, int deferredDay) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void sortTask(String method) {
             throw new AssertionError("This method should not be called.");
         }
+        //author
+
 
         @Override
         public Deadline getDeadline() {
@@ -158,11 +182,6 @@ public class SelectDeadlineCommandTest {
 
         @Override
         public boolean isTheExactSameTaskAs(Task task) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deferTaskDeadline(Task task, Deadline deadline) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
@@ -56,17 +57,66 @@ public class UniqueTaskList implements Iterable<Task> {
 
     //@@author ChanChunCheong
     /**
-     * Defer the deadline of the task (@code target) in the list with (@code deadline).
-     * (@code target) must exist in the list.
+     * Adds a task to the list.
+     * The task must not already exist in the list.
      */
-    public void defer(Task target, Deadline deadline) {
+    public void addTag(Task target, Tag tag) {
         requireNonNull(target);
-        requireNonNull(deadline);
+        requireNonNull(tag);
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new TaskNotFoundException();
         }
-        Task deferredTask = target.deferred(deadline);
+        Task targetedTask = target.addTag(tag);
+        internalList.set(index, targetedTask);
+    }
+    /**
+     * Removes {@code tag} from {@code person} in this {@code AddressBook}.
+     */
+    public void removeTagFromTask(Task target, Tag tag) {
+        requireNonNull(target);
+        requireNonNull(tag);
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new TaskNotFoundException();
+        }
+        /*
+        Set<Tag> newTags = new HashSet<>(target.getTags());
+        if (!newTags.remove(tag)) {
+            return;
+        }
+
+        Task newTask =
+                new (newTask.get(), newTask.getPhone(), newTask.getEmail(), newTask.getAddress(), newTaskTags);
+        updateTask(Task, newTask);
+        */
+        Task targetedTask = target.removeTag(tag);
+        internalList.set(index, targetedTask);
+    }
+
+
+    /**
+     * Removes {@code tag} from all persons in this {@code AddressBook}.
+     */
+    /*
+    public void removeTag(Tag tag) {
+        Tasks.forEach(Tasks -> removeTagFromPerson(tag, task));
+    }
+    */
+
+    //@@author ChanChunCheong
+    /**
+     * Defer the deadline of the task (@code target) in the list with (@code deadline).
+     * (@code target) must exist in the list.
+     */
+    public void defer(Task target, int deferredDays) {
+        requireNonNull(target);
+        requireNonNull(deferredDays);
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new TaskNotFoundException();
+        }
+        Task deferredTask = target.deferred(deferredDays);
         internalList.set(index, deferredTask);
     }
 

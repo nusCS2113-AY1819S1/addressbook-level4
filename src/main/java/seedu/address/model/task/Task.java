@@ -2,8 +2,12 @@ package seedu.address.model.task;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Task in the address book.
@@ -21,6 +25,7 @@ public class Task {
     private final int expectedNumOfHours;
     private int completedNumOfHours;
     private final List<Milestone> milestoneList = new ArrayList<Milestone>();
+    private final Set<Tag> tagList = new HashSet<>();
 
     public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours) {
@@ -34,7 +39,7 @@ public class Task {
 
     public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours, int completedNumOfHours, boolean isCompleted,
-                List<Milestone> milestoneList) {
+                List<Milestone> milestoneList, Set<Tag> tagList) {
         this.deadline = deadline;
         this.moduleCode = moduleCode;
         this.title = title;
@@ -44,6 +49,7 @@ public class Task {
         this.completedNumOfHours = completedNumOfHours;
         this.isCompleted = isCompleted;
         this.milestoneList.addAll(milestoneList);
+        this.tagList.addAll(tagList);
     }
 
     public Task(Task other) {
@@ -56,6 +62,7 @@ public class Task {
         this.expectedNumOfHours = other.expectedNumOfHours;
         this.completedNumOfHours = other.completedNumOfHours;
         this.milestoneList.addAll(other.milestoneList);
+        this.tagList.addAll(other.tagList);
     }
 
     public Deadline getDeadline() {
@@ -92,6 +99,9 @@ public class Task {
     public int getCompletedNumOfHours() {
         return completedNumOfHours;
     }
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tagList);
+    }
 
     public boolean isCompleted() {
         return isCompleted;
@@ -123,15 +133,40 @@ public class Task {
     }
     //@@author ChanChunCheong
     /**
+     * Add tag to a task
+     * @param tag
+     * @return the new Task
+     */
+    public Task addTag(Tag tag) {
+        Task deferredTask = new Task(this);
+        deferredTask.tagList.add(tag);
+        return deferredTask;
+    }
+
+    /**
+     * Removes a tag to a task
+     * @param tag
+     * @return the new Task
+     */
+    public Task removeTag(Tag tag) {
+        Task deferredTask = new Task(this);
+        deferredTask.tagList.remove(tag);
+        return deferredTask;
+    }
+
+    //@@author ChanChunCheong
+    /**
      * Defers the task to a later
      * @param deadline
      * @return the new Task
      */
-    public Task deferred(Deadline deadline) {
+    public Task deferred(int deferredDays) {
         Task deferredTask = new Task(this);
-        deferredTask.deadline = deadline;
+        Deadline deferreDeadline = deferredTask.deadline.deferDeadline(deferredDays);
+        deferredTask.deadline = deferreDeadline;
         return deferredTask;
     }
+
 
     //@@JeremyInElysium
     /**

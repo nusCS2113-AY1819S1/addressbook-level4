@@ -1,11 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.List;
 
@@ -15,7 +12,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.DeferDeadlineCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 
 //@@author ChanChunCheong
@@ -30,47 +26,32 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
             + ": Defers the deadline of the selected task in the taskbook. \n"
             + "Parameters: "
             + PREFIX_INDEX + "INDEX (must be a positive integer) "
-            + PREFIX_DAY + "DAY "
-            + PREFIX_MONTH + "MONTH "
-            + PREFIX_YEAR + "YEAR (between 2018 and 9999)\n"
-
+            + PREFIX_DAY + "DAY \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_INDEX + "1 "
-            + PREFIX_DAY + "04 "
-            + PREFIX_MONTH + "01 "
-            + PREFIX_YEAR + "2018 ";
-    /*
-    + PREFIX_DAY + "DAY"
-    + PREFIX_MONTH + "MONTH"
-    + PREFIX_YEAR +  "YEAR \n"
-    + "Example: " + COMMAND_WORD + "1"
-    + PREFIX_DAY + "01"
-    + PREFIX_MONTH + "01"
-    + PREFIX_YEAR + "2018";
-    */
+            + PREFIX_DAY + "04 ";
 
     public static final String MESSAGE_NONEXISTENT_TASK = "This task does not exist in the task book";
     public static final String MESSAGE_SUCCESS = "Date deferred for task: %1$s";
-    //public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Defer deadline command not implemented yet";
 
     private final Index taskIndex;
-    private final Deadline deadline;
+    private final int deferredDays;
 
     public DeferDeadlineCommand() {
         // Null so that it can be initialized in LogicManager
         // Check in JUnit test
         taskIndex = null;
-        deadline = null;
+        deferredDays = 0;
     }
 
     /**
      * Creates an DeferDeadlineCommand to add the specified {@code Task & @code Deadline}
      */
-    public DeferDeadlineCommand(Index taskIndex, Deadline deadline) {
+    public DeferDeadlineCommand(Index taskIndex, int deferredDays) {
         requireNonNull(taskIndex);
-        requireNonNull(deadline);
+        requireNonNull(deferredDays);
         this.taskIndex = taskIndex;
-        this.deadline = deadline;
+        this.deferredDays = deferredDays;
     }
 
 
@@ -81,19 +62,17 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
 
         if (taskIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_NONEXISTENT_TASK);
-        } else if (!Deadline.isValidDeadline(deadline.toString())) {
+        }
+        /*
+        else if (!Deadline.isValidDeadline(deadline.toString())) {
             throw new CommandException(MESSAGE_INVALID_DEADLINE);
         }
+        */
 
         Task taskToDefer = lastShownList.get(taskIndex.getZeroBased()); // get the task from the filteredtasklist;
-        model.deferTaskDeadline(taskToDefer, deadline);
+        model.deferTaskDeadline(taskToDefer, deferredDays);
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToDefer));
-
-        /*
-        requireNonNull(model);
-        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
-        */
     }
 
     @Override

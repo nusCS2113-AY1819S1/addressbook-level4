@@ -44,6 +44,8 @@ public class TaskCard extends UiPart<Region> {
     private Label status;
     @FXML
     private FlowPane milestones;
+    @FXML
+    private FlowPane tags;
 
     /*
     @FXML
@@ -68,7 +70,7 @@ public class TaskCard extends UiPart<Region> {
         expectedNumOfHours.setText(Integer.toString(task.getExpectedNumOfHours()) + " hours");
         task.getMilestoneList().forEach(milestone -> milestones.getChildren()
                 .add(new Label(milestone.getMilestoneDescriptionString())));
-
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         setTextForStatus(task);
         setColorForPriorityLevel(task);
     }

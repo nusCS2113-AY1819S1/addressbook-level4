@@ -63,12 +63,19 @@
                </padding></Label>
             <Label text="To complete in: " GridPane.rowIndex="4" />
             <Label fx:id="status" styleClass="cell_small_label" text="\$status" GridPane.rowIndex="5" />
+
          </children>
       </GridPane>
       <HBox prefHeight="30.0" prefWidth="264.0" spacing="10">
          <children>
             <Label text="Milestones:" />
             <FlowPane fx:id="milestones" hgap="10" prefHeight="0.0" prefWidth="200.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="30.0" prefWidth="264.0" spacing="10">
+         <children>
+            <Label text="Tags:" />
+            <FlowPane fx:id="tags" hgap="10" prefHeight="0.0" prefWidth="200.0" />
          </children>
       </HBox>
    </children>

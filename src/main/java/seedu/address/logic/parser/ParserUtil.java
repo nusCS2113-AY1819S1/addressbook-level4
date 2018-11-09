@@ -17,9 +17,12 @@ import seedu.address.model.task.PriorityLevel;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
+    public static final String MESSAGE_INVALID_DEFERRED_DAYS = "Deferred Days need to be positive integer and "
+        + "less than 32";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_HOURS = "Hour(s) must be an integer!";
     public static final String MESSAGE_EMPTY_DESCRIPTION = "Description is empty!";
+    public static final String MESSAGE_EMPTY_DEFERRED_DAYS = "Deferred Days is empty!";
     public static final String MESSAGE_EMPTY_TITLE = "Title is empty!";
     public static final String MESSAGE_EMPTY_MODULE_CODE = "Module code is empty!";
     public static final String MESSAGE_EMPTY_MILESTONE = "Milestone description is empty!";
@@ -40,6 +43,27 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
+
+    //@@author ChanChunCheong
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String hours}
+     * If DeferredDays is not a positive integer or is too big to be an integer,
+     * @throws ParseException
+     */
+    public static int parseDefferedDays(String deferredDays) throws ParseException {
+        requireNonNull(deferredDays);
+        String trimmedIndex = deferredDays.trim();
+        if (trimmedIndex.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_DEFERRED_DAYS);
+        }
+        int numOfDays = Integer.parseInt(deferredDays);
+        if (numOfDays < 1 || numOfDays > 31) {
+            throw new ParseException(MESSAGE_INVALID_DEFERRED_DAYS);
+        }
+        return numOfDays;
+    }
+    //@@author
+
     //@@author chelseyong
     /**
      * Leading and trailing whitespaces will be trimmed from {@code String hours}

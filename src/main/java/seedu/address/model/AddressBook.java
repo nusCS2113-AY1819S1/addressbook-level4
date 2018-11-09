@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.SortTaskList;
 import seedu.address.model.task.Task;
@@ -87,7 +88,25 @@ public class AddressBook implements ReadOnlyTaskBook {
         tasks.add(t);
     }
 
-    //@@suthor emobeany
+    //@@author ChanChunCheong
+    /**
+     * Adds a tag to a tag in the address book.
+     * The tag must not already exist in the task.
+     */
+    public void addTag(Task target, Tag tag) {
+        tasks.addTag(target, tag);
+    }
+
+    //@@author ChanChunCheong
+    /**
+     * Adds a tag to a tag in the address book.
+     * The tag must not already exist in the task.
+     */
+    public void removeTag(Task target, Tag tag) {
+        tasks.removeTagFromTask(target, tag);
+    }
+
+
     /**
      * Replaces the given task {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -112,9 +131,9 @@ public class AddressBook implements ReadOnlyTaskBook {
      * Defer {@code key} previous deadline with (@code deadline) from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void deferDeadline(Task key, Deadline deadline) {
-        requireNonNull(deadline);
-        tasks.defer(key, deadline);
+    public void deferDeadline(Task key, int deferredDays) {
+        requireNonNull(deferredDays);
+        tasks.defer(key, deferredDays);
     }
 
     /**
