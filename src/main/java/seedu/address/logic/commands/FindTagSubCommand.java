@@ -35,9 +35,10 @@ public class FindTagSubCommand extends FindCommand {
             model.recordKeywords(KeywordType.IncludeTags, predicate.getLowerCaseKeywords());
             model.executeSearch(predicate);
         }
+        String keywordHistoryString = getKeywordHistoryString(model.getReadOnlyKeywordsRecord());
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
-                        + formatter.getOutputString(model.getReadOnlyKeywordsRecord()));
+                        + keywordHistoryString);
     }
 
     @Override

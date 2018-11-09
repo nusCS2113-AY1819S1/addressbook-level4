@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.formatter.KeywordsOutputFormatter;
 import seedu.address.logic.parser.FindCommandParser;
+import seedu.address.model.searchhistory.ReadOnlyKeywordsRecord;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -19,5 +20,9 @@ public abstract class FindCommand extends Command {
             + "Example3: " + COMMAND_WORD + " " + FindCommandParser.TAG_OPTION_STRING + " President";
 
     protected boolean isExcludeMode = false;
-    protected KeywordsOutputFormatter formatter = new KeywordsOutputFormatter();
+    private KeywordsOutputFormatter formatter = new KeywordsOutputFormatter();
+
+    protected String getKeywordHistoryString(ReadOnlyKeywordsRecord record) {
+        return formatter.getOutputString(record);
+    }
 }
