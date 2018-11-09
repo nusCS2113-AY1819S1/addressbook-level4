@@ -18,7 +18,6 @@ import static seedu.address.logic.commands.GradebookFindCommand.MESSAGE_FIND_SUC
 
 public class GradebookFindCommandTest {
     private static GradebookManager gradebookManager = new GradebookManager();
-
     private static GradebookBuilder dummyGradebookComponent = new GradebookBuilder();
 
     @Rule

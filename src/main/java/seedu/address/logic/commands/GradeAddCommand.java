@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
@@ -32,6 +33,7 @@ public class GradeAddCommand extends Command {
             + PREFIX_MATRIC + "A0167789S "
             + PREFIX_STUDENT_MARKS + "50";
     private final Grades toAddGrade;
+
     public GradeAddCommand(Grades grade) {
         this.toAddGrade = grade;
     }
@@ -53,12 +55,6 @@ public class GradeAddCommand extends Command {
         String gradeList = gradesManager.listGrade();
         int size = gradesManager.getGradeSize();
         return new CommandResult(MESSAGE_ADD_GRADE_SUCCESS + size + "\n" + "", gradeList);
-//        return new CommandResult(String.format(
-//                MESSAGE_ADD_GRADE_SUCCESS,
-//                toAddGrade.getModuleCode(),
-//                toAddGrade.getGradeComponentName(),
-//                toAddGrade.getAdminNo(),
-//                toAddGrade.getMarks()));
     }
 
     @Override

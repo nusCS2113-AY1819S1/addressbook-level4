@@ -3,12 +3,10 @@ package seedu.address.testutil;
 import seedu.address.model.gradebook.Gradebook;
 
 public class GradebookBuilder {
-
     public static final String DEFAULT_MODULE_CODE = "CS2113";
     public static final String DEFAULT_GRADEBOOK_COMPONENT_NAME = "Finals";
     public static final int DEFAULT_GRADEBOOK_MAX_MARKS = 20;
     public static final int DEFAULT_GRADEBOOK_WEIGHTAGE = 10;
-
     private String moduleCode;
     private String gradebookComponentName;
     private int gradebookMaxMarks;
