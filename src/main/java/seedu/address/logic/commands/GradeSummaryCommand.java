@@ -61,7 +61,7 @@ public class GradeSummaryCommand extends Command {
 
         DisplayGrade gradeDisplay;
 
-        if (testName.isEmpty()){
+        if (testName.isEmpty()) {
             throw new CommandException(MESSAGE_ERROR_COMMAND);
         }
 
