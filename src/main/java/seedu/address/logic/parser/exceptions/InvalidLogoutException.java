@@ -3,7 +3,7 @@ package seedu.address.logic.parser.exceptions;
 //@@author: IcedCoffeeBoy
 
 /**
- * Represents a invalid login error when user is already login
+ * Represents a invalid logout error when no user has login
  */
 public class InvalidLogoutException extends ParseException {
 
