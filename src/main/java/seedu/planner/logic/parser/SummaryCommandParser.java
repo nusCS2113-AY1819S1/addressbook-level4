@@ -26,6 +26,26 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
     private Logger logger = LogsCenter.getLogger(SummaryCommandParser.class);
 
     /**
+     * Parses the given {@code String} of arguments in the context of the SummaryCommand
+     * and returns an SummaryCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform to the expected format
+     */
+    public SummaryCommand parse(String args) throws ParseException {
+        logger.info("The summary command: " + args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
+        if (argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE));
+        }
+        String mode = argMultimap.getPreamble().trim();
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)) {
+            return checkWhatErrorMessageToThrow(mode);
+        }
+        String[] argList = getArguments(argMultimap.getValue(PREFIX_DATE).get());
+        return createSummaryCommand(mode, argList[0], argList[1]);
+    }
+
+    /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
@@ -58,42 +78,30 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SummaryCommand
-     * and returns an SummaryCommand object for execution.
-     *
-     * @throws ParseException if the user input does not conform the expected format
+     * Checks the mode inputted to determine what message to be placed inside the ParseException
+     * @param mode mode inputted
+     * @throws ParseException
      */
-    public SummaryCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
-        if (argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE));
+    private SummaryCommand checkWhatErrorMessageToThrow(String mode) throws ParseException {
+        switch(mode) {
+        case SummaryByDateCommand.COMMAND_MODE_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByDateCommand.MESSAGE_USAGE));
+        case SummaryByMonthCommand.COMMAND_MODE_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByMonthCommand.MESSAGE_USAGE));
+        case SummaryByCategoryCommand.COMMAND_MODE_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByCategoryCommand.MESSAGE_USAGE));
+        default:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryCommand.MESSAGE_USAGE));
         }
-        String mode = argMultimap.getPreamble().trim();
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)) {
-            switch(mode) {
-            case SummaryByDateCommand.COMMAND_MODE_WORD:
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SummaryByDateCommand.MESSAGE_USAGE));
-            case SummaryByMonthCommand.COMMAND_MODE_WORD:
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SummaryByMonthCommand.MESSAGE_USAGE));
-            case SummaryByCategoryCommand.COMMAND_MODE_WORD:
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SummaryByCategoryCommand.MESSAGE_USAGE));
-            default:
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SummaryCommand.MESSAGE_USAGE));
-            }
-        }
-        String intervalString = argMultimap.getValue(PREFIX_DATE).get();
-        logger.info("Interval String: " + intervalString);
-        String[] argList = getArguments(intervalString);
-        return createSummaryCommand(mode, argList[0], argList[1]);
     }
 
     /**
-     * Creates a SummaryCommand object from 2 strings arg1 and arg2.
-     *
+     * Creates a SummaryCommand object from 2 strings arg1 and arg2. Chooses which command to create based on the mode
+     * inputted
      * @param mode - determines which SummaryCommand is created
      * @param arg1 - 1st argument
      * @param arg2 - 2nd argument

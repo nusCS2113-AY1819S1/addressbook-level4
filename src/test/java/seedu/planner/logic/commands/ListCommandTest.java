@@ -2,6 +2,7 @@ package seedu.planner.logic.commands;
 
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.planner.logic.commands.CommandTestUtil.showRecordAtIndex;
+import static seedu.planner.logic.commands.ListCommand.MESSAGE_SUCCESS_DATE_MODE;
 import static seedu.planner.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
 import static seedu.planner.testutil.TypicalRecords.TYPICAL_END_DATE;
 import static seedu.planner.testutil.TypicalRecords.TYPICAL_START_DATE;
@@ -44,13 +45,13 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS_ALL, expectedModel);
     }
 
     @Test
     public void execute_listIsFilteredWithDefault_showsEverything() {
         showRecordAtIndex(model, INDEX_FIRST_RECORD);
-        assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS_ALL, expectedModel);
     }
 
     /**
@@ -62,14 +63,18 @@ public class ListCommandTest {
         showRecordAtIndex(model, INDEX_FIRST_RECORD);
         Model expectedModelAfterFilter = filterListWithSpecificDateInterval(
                 expectedModel, TYPICAL_START_DATE, TYPICAL_END_DATE);
+        String expectedMessage = String.format(MESSAGE_SUCCESS_DATE_MODE,
+                expectedModelAfterFilter.getFilteredRecordList().size(), TYPICAL_START_DATE, TYPICAL_END_DATE);
         assertCommandSuccess(new ListCommand(TYPICAL_START_DATE, TYPICAL_END_DATE), model, commandHistory,
-                ListCommand.MESSAGE_SUCCESS, expectedModelAfterFilter);
+                expectedMessage, expectedModelAfterFilter);
     }
 
     @Test
     public void execute_emptyListFiltered_showsCorrectList() {
+        String expectedMessage = String.format(MESSAGE_SUCCESS_DATE_MODE,
+                emptyModel.getFilteredRecordList().size(), TYPICAL_START_DATE, TYPICAL_END_DATE);
         assertCommandSuccess(new ListCommand(TYPICAL_START_DATE, TYPICAL_END_DATE), emptyModel, commandHistory,
-                ListCommand.MESSAGE_SUCCESS, expectedEmptyModel);
+                expectedMessage, expectedEmptyModel);
     }
 
     /**

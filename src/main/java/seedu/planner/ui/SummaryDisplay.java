@@ -1,7 +1,5 @@
 package seedu.planner.ui;
 
-import java.util.logging.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,15 +8,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.model.summary.SummaryList;
 //@@author tenvinc
 /**
  * This UI component is responsible for displaying the summary requested by the user
  */
 public class SummaryDisplay extends UiPart<Region> {
-
-    private static final Logger logger = LogsCenter.getLogger(UiManager.class);
 
     private static final String FXML = "SummaryDisplay.fxml";
 

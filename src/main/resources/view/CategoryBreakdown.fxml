@@ -2,9 +2,13 @@
 
 <!-- @@author tenvinc -->
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<ScrollPane xmlns:fx="http://javafx.com/fxml/1" fitToHeight="true" fitToWidth="true"
-            xmlns="http://javafx.com/javafx/10.0.1">
-   <AnchorPane fx:id="categoryBreakdown" style="-fx-background-color: grey"/>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <AnchorPane fx:id="categoryBreakdown" styleClass="default-piechart-bg">
+      <padding>
+         <Insets left="5.0" right="5.0" />
+      </padding></AnchorPane>
 </ScrollPane>

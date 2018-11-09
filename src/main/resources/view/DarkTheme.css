@@ -438,6 +438,43 @@
 .default-color6.chart-pie { -fx-pie-color: CHART_COLOR_7; }
 .default-color7.chart-pie { -fx-pie-color: CHART_COLOR_8; }
 
+.default-legend-bg {
+    -fx-background-color: grey;
+}
+
+.default-legend-scroll {
+    -fx-background-color: grey;
+}
+
+/* The main scrollbar CSS class of ListView */
+.default-legend-scroll .scroll-bar:horizontal ,
+.default-legend-scroll  .scroll-bar:vertical{
+    -fx-background-color: #545454;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.default-legend-scroll .increment-button ,.default-legend-scroll .decrement-button {
+    -fx-border-color:derive(#686869,80%);
+}
+
+/* The main scrollbar **track** CSS class  */
+.default-legend-scroll .scroll-bar:horizontal .track ,
+.default-legend-scroll .scroll-bar:vertical .track{
+    -fx-border-color:grey;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.default-legend-scroll .scroll-bar:horizontal .thumb,
+.default-legend-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color:derive(#000000,90%);
+    -fx-background-insets: 2, 2, 2;
+    -fx-border-color: #404040;
+}
+
+.default-piechart-bg {
+    -fx-background-color: grey;
+}
+
 .negative.chart-pie {
     -fx-pie-color: transparent;
     -fx-background-color: white;
