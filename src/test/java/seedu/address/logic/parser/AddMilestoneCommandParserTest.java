@@ -1,11 +1,5 @@
 package seedu.address.logic.parser;
 
-import org.junit.Test;
-import seedu.address.logic.commands.AddMilestoneCommand;
-import seedu.address.model.task.Milestone;
-import seedu.address.model.task.Rank;
-import seedu.address.testutil.MilestoneBuilder;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MILESTONEDESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.EMPTY_INDEX_DESC;
@@ -25,6 +19,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_RANK_1;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+
+import org.junit.Test;
+
+import seedu.address.logic.commands.AddMilestoneCommand;
+import seedu.address.model.task.Milestone;
+import seedu.address.testutil.MilestoneBuilder;
 
 //@@author JeremyInElysium
 public class AddMilestoneCommandParserTest {
