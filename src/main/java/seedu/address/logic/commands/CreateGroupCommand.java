@@ -36,7 +36,7 @@ public class CreateGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the student management system";
-    public static final String LOG_DUPLICATE_GROUP = "Duplicate group %1$s has been detected";
+    public static final String LOG_DUPLICATE_GROUP = "Duplicate group has been detected";
     public static final String LOG_COMMIT = "Version Committed";
     public static final String LOG_COMMAND_SUCCESS = "Group has been created";
 
@@ -58,7 +58,7 @@ public class CreateGroupCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         if (model.hasGroup(toCreate)) {
-            logger.log(Level.WARNING, String.format(LOG_DUPLICATE_GROUP, toCreate));
+            logger.log(Level.WARNING, LOG_DUPLICATE_GROUP);
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
         model.createGroup(toCreate);
