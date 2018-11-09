@@ -12,6 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.distribute.Distribute;
+import seedu.address.model.distribute.DistributeAlgorithm;
 import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
@@ -54,6 +57,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
+        return versionedAddressBook;
+    }
+
+    public VersionedAddressBook getVersionedAddressBook() {
         return versionedAddressBook;
     }
 
@@ -198,6 +205,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public String getScriptFolderLocation() {
         return scriptFolderLocation;
+    }
+
+    @Override
+    public void executeDistributeAlgorithm(Model model, Distribute distribute) throws CommandException {
+        new DistributeAlgorithm(model, distribute);
+        indicateAddressBookChanged();
     }
 
     @Override

@@ -12,7 +12,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.util.DistributeUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.distribute.Distribute;
+import seedu.address.model.distribute.DistributeUtil;
 import seedu.address.model.group.Group;
 import seedu.address.testutil.DistributeBuilder;
 import seedu.address.testutil.GroupBuilder;
@@ -85,10 +85,7 @@ public class DistributeCommandTest {
                 .build();
         thrown.expect(CommandException.class);
         thrown.expectMessage(MESSAGE_TO_BE_IMPLEMENTED);
-        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(model, commandHistory);
-        //        assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
-        //                commandResult.feedbackToUser);
-        //        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+        new DistributeCommand(validDistributeCommand).execute(model, commandHistory);
     }
 
 
@@ -122,14 +119,12 @@ public class DistributeCommandTest {
         DistributeCommand differentNationalityFlagCommand = new DistributeCommand(differentNationalityFlagDistribution);
         DistributeCommand allDifferentCommand = new DistributeCommand(allDifferent);
 
-
         // same object -> returns true
         assertTrue(distributeFirstCommand.equals(distributeFirstCommand));
 
         // same values -> returns true
         DistributeCommand differentIndexCommandCopy = new DistributeCommand(differentIndexDistribution);
         assertTrue(differentIndexCommandCopy.equals(differentIndexCommand));
-
 
         // different Index
         assertFalse(distributeFirstCommand.equals(differentIndexCommand));

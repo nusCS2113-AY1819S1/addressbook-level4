@@ -1,6 +1,7 @@
 package seedu.address.model.distribute;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Gender.VALID_GENDER_FEMALE;
 import static seedu.address.model.person.Gender.VALID_GENDER_MALE;
 
@@ -9,9 +10,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.DistributeUtil;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Nationality;
@@ -28,20 +31,20 @@ import seedu.address.model.person.Person;
 public class DistributeAlgorithm {
 
     public static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
-    public static final String MESSAGE_TO_BE_IMPLEMENTED = "Currently under development. Stay tuned in v.20";
+    public static final String MESSAGE_TO_BE_IMPLEMENTED = "Currently under development. Stay tuned in v2.0";
     public static final String MESSAGE_FLAG_ERROR = "Gender and Nationality flags only accept "
             + "'1' or '0' or \"true\" or \"false\"";
-
+    private static final Logger logger = LogsCenter.getLogger(DistributeAlgorithm.class);
     private DistributeUtil distUtil = new DistributeUtil();
 
-    public DistributeAlgorithm(Model model, Distribute dist) throws CommandException {
-        requireNonNull(dist);
+    public DistributeAlgorithm(Model model, Distribute distribute) throws CommandException {
+        requireAllNonNull(model, distribute);
         distUtil.setModel(model);
 
-        int numOfGroups = dist.getIndex();
-        String groupName = dist.getGroupName().toString();
-        boolean genderFlag = dist.getGender();
-        boolean nationalityFlag = dist.getNationality();
+        int numOfGroups = distribute.getIndex();
+        String groupName = distribute.getGroupName().toString();
+        boolean isGenderFlagSet = distribute.getGender();
+        boolean isNationalityFlagSet = distribute.getNationality();
         ArrayList<ArrayList<Person>> groupArrayList = new ArrayList<>();
 
         // Get all person data via ObservableList
@@ -53,23 +56,25 @@ public class DistributeAlgorithm {
             throw new CommandException(MESSAGE_INVALID_SIZE);
         }
         distUtil.doesGroupNameExist(numOfGroups, groupName, model);
-
         //Convert ObservableList into ArrayList to use Randomizer via Collections
         LinkedList<Person> personLinkedList = new LinkedList<>(allPerson);
-
         //Randomizer function
         Instant instant = Instant.now();
         distUtil.shuffle(personLinkedList, new Random(instant.getEpochSecond()));
-
-        if (!genderFlag && !nationalityFlag) {
+        if (!isGenderFlagSet && !isNationalityFlagSet) {
+            logger.log(Level.INFO, "Normal Distribution will be executed.");
             normalDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
-        } else if (!genderFlag && nationalityFlag) {
+        } else if (!isGenderFlagSet && isNationalityFlagSet) {
+            logger.log(Level.INFO, "Distribution by Nationality will be executed.");
             nationalityDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
-        } else if (genderFlag && !nationalityFlag) {
+        } else if (isGenderFlagSet && !isNationalityFlagSet) {
+            logger.log(Level.INFO, "Distribution by Gender will be executed.");
             genderDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         } else {
+            logger.log(Level.INFO, "Distribution by Nationality and Gender will be executed.");
             strictDistribution(numOfGroups, groupArrayList, personLinkedList, groupName);
         }
+        logger.log(Level.INFO, "Distribution has been completed.");
     }
 
     /**
@@ -79,6 +84,7 @@ public class DistributeAlgorithm {
     private void normalDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                     LinkedList<Person> personLinkedList,
                                     String groupName) throws CommandException {
+        requireAllNonNull(index, groupArrayList, personLinkedList, groupName);
         for (int i = index; i > 0; i--) { //number of groups to add into the groupArrayList
             ArrayList<Person> addPerson = new ArrayList<>();
             int paxInAGroup = personLinkedList.size() / i;
@@ -101,6 +107,7 @@ public class DistributeAlgorithm {
     private void genderDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                     LinkedList<Person> allPersonLinkList, String groupName)
             throws CommandException {
+        requireAllNonNull(index, groupArrayList, allPersonLinkList, groupName);
         LinkedList<Person> maleLinkList = new LinkedList<>();
         LinkedList<Person> femaleLinkList = new LinkedList<>();
         int loopCounter = 0;
@@ -143,6 +150,7 @@ public class DistributeAlgorithm {
     private void nationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                          LinkedList<Person> personLinkedList, String groupName)
             throws CommandException {
+        requireAllNonNull(index, groupArrayList, personLinkedList, groupName);
         Map<Nationality, Integer> nationalityMap = distUtil.createNationalityMap(personLinkedList);
         int loopCounter = 0;
         for (Map.Entry<Nationality, Integer> entry : nationalityMap.entrySet()) {
@@ -160,10 +168,13 @@ public class DistributeAlgorithm {
     /**
      * This Method distribute all students into n number of groups
      * Distribution will try to include balanced gender and include multi-national students.
+     * To be completed in v2.0
      */
     private void strictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                     LinkedList<Person> personLinkedList, String groupName)
             throws CommandException {
+        requireAllNonNull(index, groupArrayList, personLinkedList, groupName);
+        logger.log(Level.WARNING, "Distribution by Nationality and Gender will be implemented in v2.0");
         throw new CommandException(MESSAGE_TO_BE_IMPLEMENTED);
     }
 

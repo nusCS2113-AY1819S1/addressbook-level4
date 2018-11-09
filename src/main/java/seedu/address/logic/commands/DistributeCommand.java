@@ -12,7 +12,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.distribute.Distribute;
-import seedu.address.model.distribute.DistributeAlgorithm;
 
 /**
  * Distribute will automatically split all persons into n number of groups based on user choice
@@ -47,7 +46,7 @@ public class DistributeCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        new DistributeAlgorithm(model, distribute);
+        model.executeDistributeAlgorithm(model, distribute);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(MESSAGE_SUCCESS);

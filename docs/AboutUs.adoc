@@ -48,7 +48,7 @@ Email Feature - Supports multiple popular SMTP Domains +
 
 === Tsu Wei Quan
 image::tsuweiquan.png[width="150", align="left"]
-{empty}[https://github.com/Tsuweiquan[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/Tsuweiquan[github]] [<<tsuweiquan#, portfolio>>]
 
 Role: Developer + Integration +
 Responsibilities: Development of features, maintainance of github site and other administrative duties
