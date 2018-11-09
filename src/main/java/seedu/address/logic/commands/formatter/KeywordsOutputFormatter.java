@@ -36,8 +36,8 @@ public class KeywordsOutputFormatter {
         if (hasNameKeywords()) {
             currentStringWidth = 0;
             outputString.append(NAME_KEYWORDS_HEADING);
-            appendIncludedKeywordsFromSet(record.getKeywordSet(KeywordType.IncludeNames));
-            appendExcludedKeywordsFromSet(record.getKeywordSet(KeywordType.ExcludeNames));
+            appendIncludedKeywordsFromSet(record.getReadOnlyKeywordsSet(KeywordType.IncludeNames));
+            appendExcludedKeywordsFromSet(record.getReadOnlyKeywordsSet(KeywordType.ExcludeNames));
         }
     }
 
@@ -48,8 +48,8 @@ public class KeywordsOutputFormatter {
         if (hasTagKeywords()) {
             currentStringWidth = 0;
             outputString.append(TAG_KEYWORDS_HEADING);
-            appendIncludedKeywordsFromSet(record.getKeywordSet(KeywordType.IncludeTags));
-            appendExcludedKeywordsFromSet(record.getKeywordSet(KeywordType.ExcludeTags));
+            appendIncludedKeywordsFromSet(record.getReadOnlyKeywordsSet(KeywordType.IncludeTags));
+            appendExcludedKeywordsFromSet(record.getReadOnlyKeywordsSet(KeywordType.ExcludeTags));
         }
     }
 
@@ -86,13 +86,13 @@ public class KeywordsOutputFormatter {
     }
 
     private boolean hasTagKeywords() {
-        return !record.getKeywordSet(KeywordType.IncludeTags).isEmpty()
-                || !record.getKeywordSet(KeywordType.ExcludeTags).isEmpty();
+        return !record.getReadOnlyKeywordsSet(KeywordType.IncludeTags).isEmpty()
+                || !record.getReadOnlyKeywordsSet(KeywordType.ExcludeTags).isEmpty();
     }
 
     private boolean hasNameKeywords() {
-        return !record.getKeywordSet(KeywordType.IncludeNames).isEmpty()
-                || !record.getKeywordSet(KeywordType.ExcludeNames).isEmpty();
+        return !record.getReadOnlyKeywordsSet(KeywordType.IncludeNames).isEmpty()
+                || !record.getReadOnlyKeywordsSet(KeywordType.ExcludeNames).isEmpty();
     }
 
     private void appendIncludedKeyword(String keyword) {
