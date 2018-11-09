@@ -24,6 +24,7 @@ public class FindTagSubCommand extends FindCommand {
         this.predicate = predicate;
         this.isExcludeMode = isExcludeMode;
     }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
