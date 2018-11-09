@@ -168,29 +168,6 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(SEGWIT), model.getFilteredPersonList());
     }
 
-    @Test
-    public void execute_twoBackToBackFindCommand_onePersonFound() {
-        String firstExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
-                + KeywordsOutputUtil.getOutputString(Collections.singletonList(VALID_TAG_FRIEND),
-                null, null, null), 2);
-        String secondExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
-                + KeywordsOutputUtil.getOutputString(Collections.singletonList(VALID_TAG_FRIEND),
-                Collections.singletonList("choo"), null, null), 1);
-
-        TagContainsKeywordsPredicate firstPredicate = prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND);
-        FindCommand firstCommand = new IncludeTagFindCommand(firstPredicate);
-        expectedModel.executeSearch(firstPredicate);
-        expectedModel.recordKeywords(KeywordType.IncludeTags, Collections.singletonList(VALID_TAG_FRIEND));
-        assertCommandSuccess(firstCommand, model, commandHistory, firstExpectedMessage, expectedModel);
-        assertEquals(Arrays.asList(SEGWIT, KHOR), model.getFilteredPersonList());
-
-        NameContainsKeywordsPredicate secondPredicate = prepareNameContainsKeywordsPredicate("Choo");
-        FindCommand secondCommand = new IncludeNameFindCommand(secondPredicate);
-        expectedModel.executeSearch(secondPredicate);
-        expectedModel.recordKeywords(KeywordType.IncludeNames, Collections.singletonList("choo"));
-        assertCommandSuccess(secondCommand, model, commandHistory, secondExpectedMessage, expectedModel);
-        assertEquals(Arrays.asList(SEGWIT), model.getFilteredPersonList());
-    }
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
