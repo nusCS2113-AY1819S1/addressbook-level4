@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import seedu.planner.commons.core.EventsCenter;
+import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
@@ -30,8 +32,10 @@ public class SummaryByCategoryCommand extends SummaryCommand {
             + "Example: " + COMMAND_WORD + " " + COMMAND_MODE_WORD + " "
             + PREFIX_DATE + "1-1-2018 " + "12-12-2018 ";
 
-    public static final String MESSAGE_SUCCESS = "Listed summary for %d categories";
+    public static final String MESSAGE_SUCCESS = "Listed summary for %d category(s)";
     public static final String FORMAT_TITLE_SUMMARY = "Summary by category from %s to %s";
+
+    private static Logger logger = LogsCenter.getLogger(SummaryByCategoryCommand.class);
 
     private final Date startDate;
     private final Date endDate;
@@ -50,15 +54,12 @@ public class SummaryByCategoryCommand extends SummaryCommand {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
         summaryList = new SummaryByCategoryList(model.getFilteredRecordList());
+        logger.info("Creating SummaryByCategoryList: " + summaryList.size() + " summaries");
         String tabTitle = String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate),
                 DateUtil.formatDate(endDate));
         EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList, TOTAL_LABEL,
                 tabTitle));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
-    }
-
-    public SummaryList getSummaryList() {
-        return summaryList;
     }
 
     @Override

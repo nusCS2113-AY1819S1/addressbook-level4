@@ -2,15 +2,11 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
-import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import seedu.planner.commons.core.LogsCenter;
 //@@author tenvinc
 /**
  * Represents a month with year information in the financial planner.
