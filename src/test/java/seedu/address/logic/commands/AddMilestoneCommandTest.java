@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
@@ -37,5 +39,31 @@ public class AddMilestoneCommandTest {
         assertCommandSuccess(addMilestoneCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void equals() {
+        Milestone firstMilestone = new MilestoneBuilder().withMilestoneDescription("First milestone").withRank("1").
+                build();
+        Milestone secondMilestone = new MilestoneBuilder().withMilestoneDescription("Second milestone").withRank("2").
+                build();
+
+        AddMilestoneCommand addFirstMilestoneCommand = new AddMilestoneCommand(INDEX_FIRST_TASK, firstMilestone);
+        AddMilestoneCommand addSecondMilestoneCommand = new AddMilestoneCommand(INDEX_FIRST_TASK, secondMilestone);
+
+        //same object -> returns true
+        assertTrue(addFirstMilestoneCommand.equals(addFirstMilestoneCommand));
+
+        //same values -> return true
+        AddMilestoneCommand addFirstMilestoneCommandCopy = new AddMilestoneCommand(INDEX_FIRST_TASK, firstMilestone);
+        assertTrue(addFirstMilestoneCommand.equals(addFirstMilestoneCommandCopy));
+
+        //different types -> return false
+        assertFalse(addFirstMilestoneCommand.equals(1));
+
+        //null -> return false
+        assertFalse(addFirstMilestoneCommand.equals(null));
+
+        //different milestone -> return false
+        assertFalse(addFirstMilestoneCommand.equals(addSecondMilestoneCommand));
+    }
 
 }
