@@ -50,7 +50,7 @@ public class MainApp extends Application {
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    private static File LoanListFile;
+    private static File loanListFile;
 
     protected Ui ui;
     protected Logic logic;
@@ -60,7 +60,7 @@ public class MainApp extends Application {
     protected UserPrefs userPrefs;
 
     public static File getLoanListFile() {
-        return LoanListFile;
+        return loanListFile;
     }
     @Override
     public void init() throws Exception {
@@ -71,7 +71,7 @@ public class MainApp extends Application {
         String loanListDirectory = userDirectory.getAbsolutePath().replace("\\", "/");
         loanListDirectory += "/data/LoanList.xml";
         System.out.println(loanListDirectory);
-        LoanListFile = new File(loanListDirectory);
+        loanListFile = new File(loanListDirectory);
 
 
         AppParameters appParameters = AppParameters.parse(getParameters());
