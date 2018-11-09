@@ -246,8 +246,8 @@ CURD refers to `create`, `update`, `read` and `delete`. This feature is implemen
 
 * `createThread`: Create a new thread under a specific module that exists with comment.
 * `createComment`: Create a new comment under a specific thread that exists.
-* `updateThread`: Update a existing thread title created by its user.
-* `updateComment`: Update a existing comment content created by its user.
+* `updateThread`: Update an existing thread title created(unblocked) by its user.
+* `updateComment`: Update an existing comment content created(unblocked) by its user.
 * `listModule`: List out all the modules in the Forum Book.
 * `selectModule`: Select a specific module and list out all the threads under the module.
 * `selectThread`: Select a specific thread and list out all the comments under the thread.

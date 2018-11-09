@@ -26,7 +26,9 @@ public class SelectModuleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": List all the threads under certain module in the forum book.\n"
-            + "Example: "
+            + "Parameters: "
+            + PREFIX_MODULE_CODE + "MODULE CODE"
+            + "\nExample: "
             + COMMAND_WORD + " "
             + PREFIX_MODULE_CODE + "CS2113";
 

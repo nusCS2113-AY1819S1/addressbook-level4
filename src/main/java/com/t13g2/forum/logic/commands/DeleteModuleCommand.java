@@ -60,6 +60,7 @@ public class DeleteModuleCommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Context.getInstance().setCurrentModuleId(-1);
         return new CommandResult(String.format(MESSAGE_SUCCESS, moduleCodeToDelete));
     }
 }

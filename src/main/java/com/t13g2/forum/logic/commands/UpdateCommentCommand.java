@@ -1,11 +1,13 @@
 package com.t13g2.forum.logic.commands;
 
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_BLOCKED_USER;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_COMMENT;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_COMMENT_ID;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_COMMENT_OWNER;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_LOGIN;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_ID;
+
 import static java.util.Objects.requireNonNull;
 
 import com.t13g2.forum.logic.CommandHistory;
@@ -19,14 +21,17 @@ import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 //@@author HansKoh
 /**
  * Update a existing comment content in the forum book
- * User could only update comment content created by his/her own.
+ * Only unblocked user could only update comment content created by his/her own.
  */
 public class UpdateCommentCommand extends Command {
     public static final String COMMAND_WORD = "updateComment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Update a existing comment title created by its user in the forum book.\n"
-            + "Example: "
+            + ": Update an existing comment title created by its user(Unblocked) in the forum book.\n"
+            + "Parameters: "
+            + PREFIX_COMMENT_ID + "COMMENT ID"
+            + PREFIX_COMMENT_CONTENT + "COMMENT CONTENT"
+            + "\nExample: "
             + COMMAND_WORD + " "
             + PREFIX_COMMENT_ID + "123 "
             + PREFIX_COMMENT_CONTENT + "This is a new comment";
@@ -52,6 +57,9 @@ public class UpdateCommentCommand extends Command {
             throw new CommandException(MESSAGE_NOT_LOGIN);
         }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            if (Context.getInstance().isCurrentUserBlocked()) {
+                throw new CommandException(MESSAGE_BLOCKED_USER);
+            }
             currentThreadId = Context.getInstance().getCurrentThreadId();
             currentModuleId = Context.getInstance().getCurrentModuleId();
             currentModuleCode = unitOfWork.getModuleRepository().getModule(currentModuleId).getModuleCode();
