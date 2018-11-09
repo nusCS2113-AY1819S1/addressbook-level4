@@ -39,16 +39,12 @@ public class NoteDeleteCommandParser implements Parser<NoteDeleteCommand> {
                 int lowerIndex = Integer.parseInt(matcher.group("from"));
                 int upperIndex = Integer.parseInt(matcher.group("to"));
 
-                if (lowerIndex >= upperIndex) {
+                if (lowerIndex >= upperIndex || lowerIndex <= 0) {
                     throw new ParseException(NoteDeleteCommand.MESSAGE_PARSE_INDEX_ERROR);
                 }
 
                 for (int i = lowerIndex; i <= upperIndex; i++) {
-                    if (i > 0) {
-                        indexList.add(i);
-                    } else {
-                        throw new ParseException(NoteDeleteCommand.MESSAGE_PARSE_INDEX_ERROR);
-                    }
+                    indexList.add(i);
                 }
             } else {
                 try {
