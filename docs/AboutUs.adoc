@@ -14,7 +14,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::bluein-green.png[width="150", align="left"]
 {empty}[http://github.com/bluein-green[github]] [<<johndoe#, portfolio>>]
 
-Role: <tbc> +
+Role: Developer
 Responsibilities: <tbc>
 
 '''
@@ -23,7 +23,7 @@ Responsibilities: <tbc>
 image::scottljw.png[width="150", align="left"]
 {empty}[http://github.com/scottljw[github]] [<<johndoe#, portfolio>>]
 
-Role: <tbc> +
+Role: Developer
 Responsibilities: <tbc>
 
 '''
@@ -32,8 +32,8 @@ Responsibilities: <tbc>
 image::Lunastryke.png[width="150", align="left"]
 {empty}[http://github.com/Lunastryke[github]] [<<johndoe#, portfolio>>]
 
-Role: Documentation +
-Responsibilities: Git Expert
+Role:  Developer
+Responsibilities: Documentation + Git Expert
 
 '''
 

@@ -49,6 +49,7 @@ public class BatchListPanel extends UiPart<Region> {
     private void handleInventoryPanelSelectionChangedEvent(InventoryPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         // insert what to do here
+        batchListView.setItems(event.getNewSelection().getObservableBatchList());
     }
 
     /**
