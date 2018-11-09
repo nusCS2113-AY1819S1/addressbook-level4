@@ -100,15 +100,15 @@ public class EmailSendCommand extends Command {
      * @return bodytext String
      */
     public String generateContent(EmailUtil emailUtil) {
-        String bodyText;
+        StringBuilder bodyText;
         if (emailUtil.isAreRecipientsCandidates()) {
-            bodyText = emailUtil.getEmailSettings().getBodyTextCandidateAsRecipient();
+            bodyText = new StringBuilder(emailUtil.getEmailSettings().getBodyTextCandidateAsRecipient());
             //contents are companies
             for (JobOffer jobOfferContent : jobOfferContents) {
-                bodyText = bodyText + '\n' + "Company: " + jobOfferContent.getCompanyName().toString();
-                bodyText = bodyText + '\n' + "Job: " + jobOfferContent.getJob().toString();
-                bodyText = bodyText + '\n' + "Salary offered: " + jobOfferContent.getSalary().toString();
-                bodyText += '\n';
+                bodyText.append('\n').append("Company: ").append(jobOfferContent.getCompanyName().toString());
+                bodyText.append('\n').append("Job: ").append(jobOfferContent.getJob().toString());
+                bodyText.append('\n').append("Salary offered: ").append(jobOfferContent.getSalary().toString());
+                bodyText.append('\n');
             }
         } else {
             ArrayList<String> jobNames = new ArrayList<>();
@@ -116,19 +116,19 @@ public class EmailSendCommand extends Command {
                 jobNames.add(jobOfferRecipient.getJob().toString());
             }
 
-            bodyText = emailUtil.getEmailSettings().getBodyTextCompanyAsRecipient()
-                    + jobNames.toString() + '\n';
+            bodyText = new StringBuilder(emailUtil.getEmailSettings().getBodyTextCompanyAsRecipient()
+                    + jobNames.toString() + '\n');
             //contents are candidates
             for (Candidate candidateContent : candidateContents) {
-                bodyText = bodyText + '\n' + "Name: " + candidateContent.getName().toString();
-                bodyText = bodyText + '\n' + "Age: " + candidateContent.getAge().toString();
-                bodyText = bodyText + '\n' + "Education: " + candidateContent.getEducation().toString();
-                bodyText = bodyText + '\n' + "Email: " + candidateContent.getEmail().toString();
-                bodyText = bodyText + '\n' + "Phone Number: " + candidateContent.getPhone().toString();
-                bodyText += '\n';
+                bodyText.append('\n').append("Name: ").append(candidateContent.getName().toString());
+                bodyText.append('\n').append("Age: ").append(candidateContent.getAge().toString());
+                bodyText.append('\n').append("Education: ").append(candidateContent.getEducation().toString());
+                bodyText.append('\n').append("Email: ").append(candidateContent.getEmail().toString());
+                bodyText.append('\n').append("Phone Number: ").append(candidateContent.getPhone().toString());
+                bodyText.append('\n');
             }
         }
-        return bodyText;
+        return bodyText.toString();
     }
 
     /**
