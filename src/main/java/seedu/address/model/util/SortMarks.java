@@ -21,7 +21,8 @@ public class SortMarks { //from lowest to highest
     /**
      * sort student in ascending order by scores.
      */
-    public static ArrayList<PersonTest> sortingFromLowestToHighest(ObservableList<Person> personList, String testName) throws CommandException{
+    public static ArrayList<PersonTest> sortingFromLowestToHighest(ObservableList<Person> personList,
+                                                                   String testName) throws CommandException {
         PersonTest student;
         String name1;
         String testName1;
@@ -31,7 +32,7 @@ public class SortMarks { //from lowest to highest
         for (int i = 0; i < personList.size(); i++) {
             for (Test test: personList.get(i).getTests()) {
                 if (test.getTestName().testName.equals(testName)) {
-                    testExists= true;
+                    testExists = true;
                     name1 = personList.get(i).getName().fullName;
                     testName1 = test.getTestName().testName;
                     marks1 = test.getMarks().value;
@@ -41,7 +42,7 @@ public class SortMarks { //from lowest to highest
             }
 
         }
-        if (!testExists){
+        if (!testExists) {
             throw new CommandException(MESSAGE_ERROR_NOT_FOUND);
         }
 

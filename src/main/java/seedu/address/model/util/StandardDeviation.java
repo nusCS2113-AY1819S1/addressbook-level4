@@ -17,7 +17,8 @@ public class StandardDeviation {
     /**
      * calculate the Standard Deviation values of student's scores.
      */
-    public static double calculateStandardDeviation(ObservableList<Person> personList, String testName) throws CommandException {
+    public static double calculateStandardDeviation(ObservableList<Person> personList,
+                                                    String testName) throws CommandException {
         PersonTest student;
         String name1;
         String testName1;

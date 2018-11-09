@@ -23,7 +23,8 @@ public class AssignGrades {
     /**
      * A method to calculate student grade base on their marks
      */
-    public String assignGradeByMarks(String testName, String marks, Person person, ObservableList<Person> personList) throws CommandException {
+    public String assignGradeByMarks(String testName, String marks, Person person,
+                                     ObservableList<Person> personList) throws CommandException {
 
         double meanVal = Mean.calculateMean(personList, testName);
         double sd = StandardDeviation.calculateStandardDeviation(personList, testName);

@@ -13,7 +13,8 @@ public class LastTwentyFivePercen {
     /**
      * find the last 25 percent student's list.
      */
-    public ArrayList<PersonTest> findLastTwentyFive(ObservableList<Person> personList, String testName) throws CommandException {
+    public ArrayList<PersonTest> findLastTwentyFive(ObservableList<Person> personList,
+                                                    String testName) throws CommandException {
         ArrayList<PersonTest> sortedList =
                 new ArrayList<>(SortMarks.sortingFromLowestToHighest(personList, testName));
 

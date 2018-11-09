@@ -13,7 +13,8 @@ public class TopTwentyFivePercen {
     /**
      * find the top 25 percent student's list
      */
-    public ArrayList<PersonTest> findTopTwentyFive(ObservableList<Person> personList, String testName) throws CommandException {
+    public ArrayList<PersonTest> findTopTwentyFive(ObservableList<Person> personList,
+                                                   String testName) throws CommandException {
         ArrayList<PersonTest> sortedList =
                 new ArrayList<>(SortMarks.sortingFromLowestToHighest(personList, testName));
 
