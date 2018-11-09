@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_KEY_WORD;
 
 import org.junit.AfterClass;
@@ -41,22 +43,34 @@ public class NoteFindCommandParserTest {
 
         String expectedMessageInvalidKeyword = NoteFindCommand.MESSAGE_INVALID_KEYWORD;
 
-        // invalid args, empty
-        String args = "";
+        String args;
 
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessageInvalidCommand);
-        parser.parse(args);
+        try {
+            // invalid args, empty
+            args = "";
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertEquals(expectedMessageInvalidCommand, e.getMessage());
+        }
 
-        // invalid args with prefix but blank param
-        args = " " + PREFIX_NOTE_KEY_WORD;
+        try {
+            // invalid args with prefix but blank param
+            args = " " + PREFIX_NOTE_KEY_WORD;
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertEquals(expectedMessageInvalidKeyword, e.getMessage());
+        }
 
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessageInvalidKeyword);
-        parser.parse(args);
-
-        // invalid args with prefix but contains a space in between
-        args = " " + PREFIX_NOTE_KEY_WORD + "hello world";
+        try {
+            // invalid args with prefix but contain multiple words separated by space
+            args = " " + PREFIX_NOTE_KEY_WORD + "hello world";
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertEquals(expectedMessageInvalidKeyword, e.getMessage());
+        }
     }
 
     @Test

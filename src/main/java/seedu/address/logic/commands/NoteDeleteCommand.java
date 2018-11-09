@@ -23,14 +23,15 @@ public class NoteDeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete notes. "
             + "Parameters: "
-            + "INDEX [MORE_INDEXES]..\n"
+            + "INDEX/INDEX_RANGE [MORE_INDEXES]..\n"
             + "Example: " + COMMAND_WORD + " "
-            + "2 4 3";
+            + "2-4 7 6";
 
-    public static final String MESSAGE_SUCCESS = "(%s) note(s) successfully deleted.";
+    public static final String MESSAGE_SUCCESS = "%s note(s) successfully deleted.";
     public static final String MESSAGE_INVALID_INDEX = "Invalid input! INDEX is out of bounds.";
-    public static final String MESSAGE_PARSE_INDEX_ERROR = "You entered an invalid index. "
-            + "Please enter positive integers only.";
+    public static final String MESSAGE_PARSE_INDEX_ERROR = "Invalid index! Please ensure the following:\n"
+            + "- INDEX is a positive integer\n"
+            + "- INDEX_RANGE has the lower bound INDEX smaller than the upper bound INDEX.";
 
     public static final String MESSAGE_NOTE_PAGE_NOT_LOADED = "The command has been blocked by the system.\n"
             + "Please call the command to list notes before calling this command again "
