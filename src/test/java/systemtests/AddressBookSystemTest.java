@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import guitests.guihandles.EventListPanelHandle;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -96,6 +97,10 @@ public abstract class AddressBookSystemTest {
 
     public PersonListPanelHandle getPersonListPanel() {
         return mainWindowHandle.getPersonListPanel();
+    }
+
+    public EventListPanelHandle getEventListPanel() {
+        return mainWindowHandle.getEventListPanel();
     }
 
     public MainMenuHandle getMainMenu() {
