@@ -151,14 +151,30 @@ public interface Model {
      */
     void updateFilteredExpenditureList(Predicate<Expenditure> predicate);
 
+    /**
+     * Sort the task list based on their deadline date
+     */
     void rankFilteredTaskDeadline();
 
+    /**
+     * Sort the task list based on their module code
+     */
     void rankFilteredTaskModule();
 
+    /**
+     * Sort the task list based on their priority
+     */
     void rankFilteredTaskPriority();
 
+    /**
+     * Reverse the sequence of tasks in the to-do list
+     */
     void reverseTodoList();
 
+    /**
+     * Sort the task list based on their task name
+     * No difference between upper case and lower case in the comparator
+     */
     void rankTaskDefault();
 
 
@@ -217,19 +233,45 @@ public interface Model {
      * Saves the current expenditure tracker state for undo/redo.
      */
 
+    /**
+     * Judge whether last expenditure command can be undo
+     * @return true if can undo, else return false
+     */
     boolean canUndoExpenditureList();
 
+    /**
+     * Judge whether last undo can be redo/ last "undo"exist or not
+     * @return true if can redo, else return false
+     */
     boolean canRedoExpenditureList();
 
+    /**
+     * Restores the model's expenditure tracker to its previous state.
+     */
     void undoExpenditureList();
 
+    /**
+     * Restores the model's expenditure tracker to its previously undone state.
+     */
     void redoExpenditureList();
 
+    /**
+     * Saves the current expenditure tracker state for undo/redo.
+     */
     void commitExpenditureList();
 
+    /**
+     * get the previous undoable command (to-do list/ expenditure tracker)
+     */
     String getUndoableCommand();
 
+    /**
+     * save the previous to-do list command in the stack<Task>
+     */
     void commitUndoableTodoList();
 
+    /**
+     * save the previous expenditure command in the stack<Task>
+     */
     void commitUndoableExpenditure();
 }

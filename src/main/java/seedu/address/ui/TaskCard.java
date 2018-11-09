@@ -46,8 +46,10 @@ public class TaskCard extends UiPart<Region> {
         taskmodule.setText(task.getModule().value);
         taskdate.setText(task.getDate().value);
 
-        // task state show red for uncompleted
-        // green for completed
+        /**
+         * set color for task status
+         * red for uncompleted, green for completed
+         */
         if (task.getComplete()) {
             taskstate.setStyle("-fx-text-fill: #7fce92");
         }
@@ -57,8 +59,10 @@ public class TaskCard extends UiPart<Region> {
 
         int notification = task.notification();
 
-        //deadline of task has passed or will come within 7 days
-        if (notification != 0) {
+        /**
+         * deadline of task has passed or will come within 7 days
+         */
+         if (notification != 0) {
             //deadline of task has passed
             if (notification == -1) {
                 //task is marked as "uncompleted"
