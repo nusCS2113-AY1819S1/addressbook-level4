@@ -239,7 +239,6 @@ Examples:
 * `deleteEvent 2` +
 Deletes the 2nd event in the address book.
 
-
 === Sorting all events: `sort`
 Priority level: all
 
@@ -256,6 +255,21 @@ Format: sort `key word` +
 Example:
 
 * `sort name`
+
+
+=== Searching for the events using keywords: `findEvent`
+Priority level: all
+
+Finds events whose names contain any of the given keywords or whose description contains any of the given keywords (case-insensitive). +
+Format: `findEvent KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched
+* Events matching at least one keyword will be returned
+****
+
 
 // tag::invite[]
 === Inviting employee to event: `invite`
@@ -458,6 +472,8 @@ There is no need to save manually.
 * *editEvent* : `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME] [e/END_TIME]`
 
 * *deleteEvent* : `deleteEvent EVENT_INDEX`
+
+* *findEvent* : `findEvent KEYWORD [MORE KEYWORDS]`
 
 * *Invite* : `invite PERSON_INDEX to/EVENT_INDEX`
 
