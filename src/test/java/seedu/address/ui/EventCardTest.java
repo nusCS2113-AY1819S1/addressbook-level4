@@ -41,11 +41,11 @@ public class EventCardTest extends GuiUnitTest {
         // different types -> returns false
         assertFalse(eventCard.equals(0));
 
-        // different person, same index -> returns false
+        // different event, same index -> returns false
         Event differentEvent = new EventBuilder().withEventName("differentName").build();
         assertFalse(eventCard.equals(new EventCard(differentEvent, 0)));
 
-        // same person, different index -> returns false
+        // same event, different index -> returns false
         assertFalse(eventCard.equals(new EventCard(event, 1)));
     }
 
