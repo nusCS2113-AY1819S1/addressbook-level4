@@ -12,6 +12,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import com.google.common.eventbus.Subscribe;
+
+import seedu.address.commons.events.security.GetAuthenticationEvent;
+import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
 import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -22,18 +26,25 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTable;
 import seedu.address.model.tag.Tag;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Parses input arguments and creates a new RegisterCommand object
  */
-public class RegisterCommandParser implements Parser<RegisterCommand> {
+public class RegisterCommandParser extends ParserClass implements Parser<RegisterCommand> {
+
+    private boolean isAuthenticated;
 
     /**
      * Parses the given {@code String} of arguments in the context of the RegisterCommand
      * and returns an RegisterCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public RegisterCommand parse(String args) throws ParseException {
+    public RegisterCommand parse(String args) throws ParseException, SecurityAuthenticationException {
+        raise(new GetAuthenticationEvent());
+        if (isAuthenticated) {
+            throw new SecurityAuthenticationException("Please logout if you would like register a new account");
+        }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PASSWORD, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_TAG);
@@ -63,6 +74,11 @@ public class RegisterCommandParser implements Parser<RegisterCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    @Subscribe
+    public void handleGetAuthenticationReplyEvent(GetAuthenticationReplyEvent e) {
+        isAuthenticated = e.isAuthenticated();
     }
 
 }

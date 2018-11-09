@@ -13,7 +13,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Adds a person to the address book.
@@ -33,11 +32,11 @@ public class RegisterCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USERNAME + "John Doe "
+            + PREFIX_PASSWORD + "testpassword "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "CS2113T ";
 
     public static final String MESSAGE_SUCCESS = "New person registered: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
@@ -64,13 +63,8 @@ public class RegisterCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history)
-            throws CommandException, SecurityAuthenticationException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        if (model.getUser() != null) {
-            throw new SecurityAuthenticationException("Please logout if you would like register a new account");
-        }
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
