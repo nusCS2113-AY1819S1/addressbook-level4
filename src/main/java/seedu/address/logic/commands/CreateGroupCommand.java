@@ -7,6 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -32,6 +36,11 @@ public class CreateGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the student management system";
+    public static final String LOG_DUPLICATE_GROUP = "Duplicate group %1$s has been detected";
+    public static final String LOG_COMMIT = "Version Committed";
+    public static final String LOG_COMMAND_SUCCESS = "Group %1$s has been created";
+
+    private static final Logger logger = LogsCenter.getLogger(CreateGroupCommand.class);
 
     private final Group toCreate;
     private boolean shouldCommit;
@@ -49,11 +58,14 @@ public class CreateGroupCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         if (model.hasGroup(toCreate)) {
+            logger.log(Level.WARNING, String.format(LOG_DUPLICATE_GROUP, toCreate));
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
         model.createGroup(toCreate);
+        logger.log(Level.INFO, String.format(LOG_COMMAND_SUCCESS, toCreate));
         if (shouldCommit) {
             model.commitAddressBook();
+            logger.log(Level.INFO, LOG_COMMIT);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
     }
