@@ -91,6 +91,11 @@ public class SearchHistoryManager<T> {
         }
 
         SearchHistoryManager other = (SearchHistoryManager) obj;
+        /*
+        size of searchHistoryStack will be used for equality checking since
+        we could not compare 2 Predicate objects without creating a subclass
+        of Predicate and overriding the equals() method in the subclass
+        */
         return searchHistoryStack.size() == other.searchHistoryStack.size();
     }
 }
