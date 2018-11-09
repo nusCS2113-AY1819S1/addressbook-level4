@@ -61,24 +61,23 @@ public class ProductDatabase implements ReadOnlyProductDatabase {
     }
 
     /**
-     * Returns true if a product with the same identity as {@code product} exists in the address book.
+     * Returns true if a product with the same identity as {@code product} exists in the product database.
      */
     public boolean hasProduct(Product product) {
         requireNonNull(product);
         return products.contains(product);
     }
 
-
-    public boolean hasProductName (String name) {
-        System.out.print("Namnet vi letar efter är:" + name);
-        for (Product product : products){  /// For loopen fungerar vi går igenom alla produkter.
+    /**
+     * Returns true if a product with the same name as {@code product} exists in the Product database.
+     */
+    public boolean hasProductName(String name) {
+        for (Product product : products) {
             System.out.print(product.getName().fullName);
-            if(product.getName().fullName.equals(name)){
-                System.out.print("Vi ska nu ha returnerat true");
+            if (product.getName().fullName.equals(name)) {
                 return true;
             }
         }
-        System.out.print("Vi ska nu ha returnerat False");
         return false;
     }
 

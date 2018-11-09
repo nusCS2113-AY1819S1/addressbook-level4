@@ -4,16 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 // TODO: To add transaction items with quantity.
 // import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import java.util.*;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ProductDatabase;
 import seedu.address.model.timeidentifiedclass.Transaction;
 import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
@@ -60,11 +58,10 @@ public class AddTransactionCommand extends Command {
                 }
                 model.commitProductDatabase();
                 return new CommandResult(MESSAGE_SUCCESS + toAdd.getTransactionTime());
-            }else {
-                 throw new CommandException("The product does not exist");
+            } else {
+                throw new CommandException("The product does not exist");
             }
         }
         throw new CommandException("The product does not exist");
+    }
 }
-
- }
