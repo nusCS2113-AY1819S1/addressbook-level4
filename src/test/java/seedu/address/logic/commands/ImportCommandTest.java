@@ -64,7 +64,7 @@ public class ImportCommandTest {
         Command command = new ImportCommand(NO_DATA_FILE);
 
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
-        String expectedMessage = String.format(ImportCommand.MESSAGE_EMPTY, NO_DATA_FILE.toString());
+        String expectedMessage = String.format(ImportCommand.MESSAGE_FILE_EMPTY, NO_DATA_FILE.toString());
 
         assertEquals(expectedMessage, commandResult.feedbackToUser);
     }
@@ -76,7 +76,7 @@ public class ImportCommandTest {
         Command command = new ImportCommand(NO_TT_DATA_FILE);
 
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
-        String expectedMessage = String.format(ImportCommand.MESSAGE_EMPTY, NO_TT_DATA_FILE.toString());
+        String expectedMessage = String.format(ImportCommand.MESSAGE_FILE_EMPTY, NO_TT_DATA_FILE.toString());
         assertEquals(expectedMessage, commandResult.feedbackToUser);
     }
 
@@ -88,7 +88,8 @@ public class ImportCommandTest {
 
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
 
-        assertEquals(String.format(ImportCommand.MESSAGE_EMPTY, EMPTY_FILE.toString()), commandResult.feedbackToUser);
+        assertEquals(String.format(ImportCommand.MESSAGE_FILE_EMPTY, EMPTY_FILE.toString()),
+                commandResult.feedbackToUser);
     }
 
 
