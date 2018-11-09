@@ -77,6 +77,13 @@ public class CommandTestUtil {
             + Long.toString((long) OVERFLOW_INT + 1); // integer overflow
     public static final int MAX_HOURS = 24; // integer overflow
     public static final String INVALID_MAX_HOURS = " " + PREFIX_HOURS + Integer.toString(24); // integer overflow
+    public static final String INVALID_INDEX_DESC_ZERO = " " + PREFIX_INDEX + "0";
+    public static final String INVALID_INDEX_DESC_NEGATIVE = " " + PREFIX_INDEX + "-1";
+    public static final String INVALID_RANK_DESC_ZERO = " " + PREFIX_RANK + "0";
+    public static final String INVALID_RANK_DESC_NEGATIVE = " " + PREFIX_RANK + "-1";
+    public static final String EMPTY_INDEX_DESC = " " + PREFIX_INDEX + " ";
+    public static final String EMPTY_MILESTONE_DESCRIPTION_DESC = " " + PREFIX_MILESTONE + " ";
+    public static final String EMPTY_RANK_DESC = " " + PREFIX_RANK + " ";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

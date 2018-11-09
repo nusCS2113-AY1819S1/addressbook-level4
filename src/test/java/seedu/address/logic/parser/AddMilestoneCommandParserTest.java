@@ -3,10 +3,18 @@ package seedu.address.logic.parser;
 import org.junit.Test;
 import seedu.address.logic.commands.AddMilestoneCommand;
 import seedu.address.model.task.Milestone;
+import seedu.address.model.task.Rank;
 import seedu.address.testutil.MilestoneBuilder;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_INDEX_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_MILESTONE_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_RANK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INDEX_DESC_1;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_DESC_NEGATIVE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_DESC_ZERO;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_RANK_DESC_NEGATIVE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_RANK_DESC_ZERO;
 import static seedu.address.logic.commands.CommandTestUtil.MILESTONE_DESCRIPTION_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.RANK_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INDEX_1;
@@ -42,5 +50,34 @@ public class AddMilestoneCommandParserTest {
 
         //missing rank prefix
         assertParseFailure(parser, INDEX_DESC_1 + MILESTONE_DESCRIPTION_DESC_1 + VALID_RANK_1, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidValue_failure() {
+        //invalid index, cannot be zero
+        assertParseFailure(parser, INVALID_INDEX_DESC_ZERO + MILESTONE_DESCRIPTION_DESC_1 + RANK_DESC_1,
+                ParserUtil.MESSAGE_INVALID_INDEX);
+        //invalid index, cannot be negative integers
+        assertParseFailure(parser, INVALID_INDEX_DESC_NEGATIVE + MILESTONE_DESCRIPTION_DESC_1 + RANK_DESC_1,
+                ParserUtil.MESSAGE_INVALID_INDEX);
+        //invalid milestone description, cannot be more longer than 40 characters
+
+        //TODO:zero rank and negative rank is found under AddMilestoneCommand instead of
+        //TODO: AddMilestoneCommandParser->parseRank, maybe that's why got error
+        //invalid rank, cannot be zero
+        //assertParseFailure(parser, INDEX_DESC_1 + MILESTONE_DESCRIPTION_DESC_1 + INVALID_RANK_DESC_ZERO,
+        //        Rank.MESSAGE_RANK_CONSTRAINTS);
+        //invalid rank, cannot be negative integers
+        //assertParseFailure(parser, INDEX_DESC_1 + MILESTONE_DESCRIPTION_DESC_1 + INVALID_RANK_DESC_NEGATIVE,
+        //        Rank.MESSAGE_RANK_CONSTRAINTS);
+        //empty index
+        assertParseFailure(parser, EMPTY_INDEX_DESC + MILESTONE_DESCRIPTION_DESC_1 + RANK_DESC_1,
+                ParserUtil.MESSAGE_EMPTY_INDEX);
+        //empty milestone description
+        assertParseFailure(parser, INDEX_DESC_1 + EMPTY_MILESTONE_DESCRIPTION_DESC + RANK_DESC_1,
+                ParserUtil.MESSAGE_EMPTY_MILESTONE);
+        //empty rank
+        assertParseFailure(parser, INDEX_DESC_1 + MILESTONE_DESCRIPTION_DESC_1 + EMPTY_RANK_DESC,
+                ParserUtil.MESSAGE_EMPTY_RANK);
     }
 }
