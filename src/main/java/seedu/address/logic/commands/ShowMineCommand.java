@@ -4,6 +4,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.event.AttendeeContainsEmailPredicate;
 
+//@@author: IcedCoffeeBoy
 
 /**
  * List only events associated with the login user

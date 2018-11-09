@@ -10,8 +10,6 @@ import seedu.address.logic.parser.ManagerParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
 
-//@@author: IcedCoffeeBoy
-
 /**
  * Login the person into ProManage
  */
