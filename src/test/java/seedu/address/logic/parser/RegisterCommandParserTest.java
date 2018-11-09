@@ -42,7 +42,6 @@ import seedu.address.testutil.PersonBuilder;
 
 public class RegisterCommandParserTest {
 
-    private ParserClassTest test = new ParserClassTest();
     private RegisterCommandParser parser = new RegisterCommandParser();
 
     @Test
