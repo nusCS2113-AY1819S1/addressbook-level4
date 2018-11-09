@@ -58,7 +58,7 @@ public class DeleteCompanyCommand extends Command {
             deletedCompanies.append(companyToDelete + "\n");
         }
 
-        model.commitCompanyBook();
+        model.commitRecruitBook();
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
                 model.getFilteredCompanyJobList().size()));
         return new CommandResult(String.format(MESSAGE_DELETE_COMPANY_SUCCESS, deletedCompanies));

@@ -30,7 +30,7 @@ public class AddressBookBuilder {
      * Adds a new {@code Candidate} to the {@code CandidateBook} that we are building.
      */
     public AddressBookBuilder withCandidate(Candidate candidate) {
-        candidateBook.addPerson(candidate);
+        candidateBook.addCandidate(candidate);
         return this;
     }
 

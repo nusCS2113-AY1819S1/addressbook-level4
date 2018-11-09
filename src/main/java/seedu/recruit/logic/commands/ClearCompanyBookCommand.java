@@ -24,7 +24,7 @@ public class ClearCompanyBookCommand extends Command {
         requireNonNull(model);
         EventsCenter.getInstance().post(new FocusOnCompanyBookRequestEvent());
         model.resetCompanyData(new CompanyBook());
-        model.commitCompanyBook();
+        model.commitRecruitBook();
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
                 model.getFilteredCompanyJobList().size()));
         return new CommandResult(MESSAGE_SUCCESS);

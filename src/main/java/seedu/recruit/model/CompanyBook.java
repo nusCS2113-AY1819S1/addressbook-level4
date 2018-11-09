@@ -62,8 +62,7 @@ public class CompanyBook implements ReadOnlyCompanyBook {
         requireNonNull(newData);
 
         setCompanyList(newData.getCompanyList());
-
-        companyJobList.setJobOffers(newData.getCompanyJobList());
+        setCompanyJobList(newData.getCompanyJobList());
     }
 
     //// company -level operations
@@ -172,11 +171,28 @@ public class CompanyBook implements ReadOnlyCompanyBook {
         companyJobList.setJobOffer(target, editedJobOffer);
     }
 
+    /**
+     * Replaces the contents of the company job list with {@code companyJobList}.
+     * {@code companyJobList} must not contain duplicate job offers.
+     */
+    public void setCompanyJobList(List<JobOffer> companyJobList) {
+        this.companyJobList.clear();
+        for (JobOffer jobOffer: companyJobList) {
+            this.companyJobList.add(new JobOffer(jobOffer));
+        }
+    }
+
+    public void setCompanyJobList(UniqueJobList companyJobList) {
+        this.companyJobList.clear();
+        for (JobOffer jobOffer: companyJobList) {
+            this.companyJobList.add(new JobOffer(jobOffer));
+        }
+    }
+
     /** Cascading changes of candidates in to the candidate lists stored in job offers from shortlistcommand
      */
     public void cascadeJobListWithEditedCandidate(Candidate target, Candidate editedCandidate) {
         requireAllNonNull(target, editedCandidate);
-
         for (JobOffer jobOffer: companyJobList) {
             if (jobOffer.getUniqueCandidateList().contains(target)) {
                 jobOffer.getUniqueCandidateList().setCandidate(target, editedCandidate);

@@ -37,7 +37,7 @@ public class SortCompanyCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.sortCompanies(prefixToSort);
-        model.commitCompanyBook();
+        model.commitRecruitBook();
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
             return new CommandResult(MESSAGE_SUCCESS

@@ -49,10 +49,10 @@ public class XmlSerializableCandidateBook {
         CandidateBook candidateBook = new CandidateBook();
         for (XmlAdaptedCandidate p : candidates) {
             Candidate candidate = p.toModelType();
-            if (candidateBook.hasPerson(candidate)) {
+            if (candidateBook.hasCandidate(candidate)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            candidateBook.addPerson(candidate);
+            candidateBook.addCandidate(candidate);
         }
         return candidateBook;
     }

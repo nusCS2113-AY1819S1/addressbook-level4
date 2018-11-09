@@ -122,7 +122,7 @@ public class AddJobDetailsCommandTest {
         }
 
         @Override
-        public void commitCompanyBook() {
+        public void commitRecruitBook() {
             // called by {@code AddJobDetailsCommand#execute()}
         }
 
@@ -184,7 +184,7 @@ public class AddJobDetailsCommandTest {
         }
 
         @Override
-        public void commitCompanyBook() {
+        public void commitRecruitBook() {
             // called by {@code AddJobDetailsCommand#execute()}
         }
 

@@ -69,8 +69,8 @@ public class DeleteShortlistedCandidateCommand extends Command {
 
         model.deleteShortlistedCandidateFromJobOffer(selectedCandidate, selectedJob);
         model.updateCandidate(selectedCandidate, removedShortlistedTagFromCandidate);
-        model.commitCompanyBook();
-        model.commitCandidateBook();
+        model.commitRecruitBook();
+
 
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
             DeleteShortlistedCandidateInitializationCommand.isDoneDeleting();

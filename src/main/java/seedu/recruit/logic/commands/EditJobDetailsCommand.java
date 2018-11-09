@@ -103,7 +103,7 @@ public class EditJobDetailsCommand extends Command {
 
         model.updateJobOfferInCompanyBook(jobOfferToEdit, editedJobOffer);
         model.updateFilteredCompanyJobList(PREDICATE_SHOW_ALL_JOBOFFERS);
-        model.commitCompanyBook();
+        model.commitRecruitBook();
         return new CommandResult(String.format(MESSAGE_EDIT_JOB_OFFER_SUCCESS, editedJobOffer));
     }
 
