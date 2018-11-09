@@ -1,15 +1,9 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.GradeAddCommand.MESSAGE_ADD_GRADE_SUCCESS;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ModelManager;
-import seedu.address.model.grades.Grades;
 import seedu.address.model.grades.GradesManager;
 import seedu.address.testutil.GradeBuilder;
 
