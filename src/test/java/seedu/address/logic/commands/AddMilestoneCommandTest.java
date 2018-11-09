@@ -41,10 +41,10 @@ public class AddMilestoneCommandTest {
 
     @Test
     public void equals() {
-        Milestone firstMilestone = new MilestoneBuilder().withMilestoneDescription("First milestone").withRank("1").
-                build();
-        Milestone secondMilestone = new MilestoneBuilder().withMilestoneDescription("Second milestone").withRank("2").
-                build();
+        Milestone firstMilestone = new MilestoneBuilder().withMilestoneDescription("First milestone").withRank("1")
+                .build();
+        Milestone secondMilestone = new MilestoneBuilder().withMilestoneDescription("Second milestone").withRank("2")
+                .build();
 
         AddMilestoneCommand addFirstMilestoneCommand = new AddMilestoneCommand(INDEX_FIRST_TASK, firstMilestone);
         AddMilestoneCommand addSecondMilestoneCommand = new AddMilestoneCommand(INDEX_FIRST_TASK, secondMilestone);
