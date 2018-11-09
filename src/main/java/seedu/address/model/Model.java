@@ -266,12 +266,12 @@ public interface Model {
     String getUndoableCommand();
 
     /**
-     * save the previous to-do list command in the stack<Task>
+     * save the previous to-do list command in the stack
      */
     void commitUndoableTodoList();
 
     /**
-     * save the previous expenditure command in the stack<Task>
+     * save the previous expenditure command in the stack
      */
     void commitUndoableExpenditure();
 }

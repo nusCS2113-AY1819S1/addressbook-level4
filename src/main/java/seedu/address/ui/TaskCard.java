@@ -59,9 +59,7 @@ public class TaskCard extends UiPart<Region> {
 
         int notification = task.notification();
 
-        /**
-         * deadline of task has passed or will come within 7 days
-         */
+         // deadline of task has passed or will come within 7 days
          if (notification != 0) {
             //deadline of task has passed
             if (notification == -1) {
