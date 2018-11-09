@@ -9,6 +9,6 @@ public class GetAuthenticationEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "Login Success";
+        return "Get Application Authentication State";
     }
 }
