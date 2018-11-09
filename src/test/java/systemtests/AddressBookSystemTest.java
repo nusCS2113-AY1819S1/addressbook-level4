@@ -3,6 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_EVENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_PEOPLE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -153,12 +154,21 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all persons and events in ProManage.
      */
-    protected void deleteAllPersons() {
+    protected void deleteAll() {
         executeCommand(ClearCommand.COMMAND_WORD);
         assertEquals(0, getModel().getAddressBook().getPersonList().size());
     }
+
+    /**
+     * Displays all events in the event list.
+     */
+    protected void showAllEvents() {
+        executeCommand(ListCommand.COMMAND_WORD + " " + PREFIX_ALL_EVENTS);
+        assertEquals(getModel().getEventList().getEventList().size(), getModel().getFilteredEventList().size());
+    }
+
 
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays

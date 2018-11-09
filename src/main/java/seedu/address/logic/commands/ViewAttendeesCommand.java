@@ -58,10 +58,9 @@ public class ViewAttendeesCommand extends Command {
         eventPredicate = new EventSingleDisplayPredicate(eventToShow);
         personPredicate = new PersonAttendingEventPredicate(eventToShow);
 
-        //model.updateFilteredEventList(eventPredicate);
+        model.updateFilteredEventList(eventPredicate);
         model.updateFilteredPersonList(personPredicate);
 
-        EventsCenter.getInstance().post(new JumpToEventListRequestEvent(indexEvent));
         return new CommandResult(String.format(MESSAGE_SUCCESS, indexEvent.getOneBased()));
     }
 
