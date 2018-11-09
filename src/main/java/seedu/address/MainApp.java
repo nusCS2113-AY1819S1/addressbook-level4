@@ -40,7 +40,6 @@ import seedu.address.storage.XmlEventStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
-//@@author: IcedCoffeeBoy
 
 
 /**
@@ -110,7 +109,7 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialAddressData = new AddressBook();
         }
-
+        //@@author: IcedCoffeeBoy
         // Done by IcedCoffeeBoy
         try {
             eventListOptional = storage.readEventList();
