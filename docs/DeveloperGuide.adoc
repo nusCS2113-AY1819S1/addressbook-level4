@@ -825,16 +825,12 @@ The email command is a 4-stage process supported by `LogicManager` by keeping tr
 . `EmailContentsCommand`
 . `EmailSendCommand`
 
-This is the action diagram when the user executes the email command.
-
-image::EmailActivityDiagram.png[width="1000", align="center"]
-
 Given below is an example usage scenario of how the email command behaves at each step.
 
 . The user launches the application. The application loads email settings from `preferences.json` which is stored in `Model#EmailUtil`.
 
-. The user executes the `email` command. A new `EmailUtil` object is constructed and replaces the `EmailUtil` object in `Model`.
-  `LogicState` is changed to reflect initialisation of the email command and to move it into recipients selection stage
+. The user executes the `email` command. A new `EmailUtil` object is constructed and replaces the `EmailUtil` object in `Model`
+  using model#resetEmailUtil. `LogicState` is changed to reflect initialisation of the email command and to move it into recipients selection stage
 . The user executes the `add` command for the first time. This calls `EmailRecipientsAddCommand`.
 .. In `EmailRecipientsAddCommand`, `EmailUtil#hasRecipientsAdded` boolean value will be changed to true.
 .. `MainWindow#getCurrentBook()` is called to determine the current book that the user is on and
@@ -853,17 +849,21 @@ Given below is an example usage scenario of how the email command behaves at eac
 . The user executes `next` command. This calls `EmailRecipientsNextCommand` which based on
   `EmailUtil#areRecipientsCandidates`, switches the current book and changes `LogicState` to select contents phase.
 [NOTE]
-In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCandidates`, the current book will be locked and only
-  commands pertaining to the current book can be used. This is to enforce that recipients and contents must be contrasting.
+In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCandidates`, the book displayed will be locked and only
+commands pertaining to the current book can be used. This is to enforce that recipients and contents are either candidates and job offers or
+job offers and candidates.
 . The user executes `add` command. This calls `EmailContentsAddCommand` which adds contents similarly to `EmailRecipientsAddCommand` as seen above.
-. The user executes `back` command. This calls `EmailContentsBackCommand` which switches the current book and changes `LogicState` back to select recipients phase.
-. The user executes `next` command. This calls `EmailRecipientsNextCommand` which switches the current book and changes `LogicState` to select contents phase.
 . The user executes `next` command. This calls `EmailContentsNextCommand` which changes `LogicState` to the send phase.
 . The user executes `preview` command. This calls `EmailSendPreviewCommand`.
 .. This generates a string of the email based on recipients and contents in `EmailUtil` which calls `EventCenter` to post `ShowEmailPreviewEvent`
    with the email String and shows the string in a new window, `EmailPreview`.
 . The user is satisfied with the preview and executes the `send` command. This generates the email as a `MimeMessage`
   which is the Java format used for emails and is sent via `EmailUtil#sendMessage`. `LogicState` is reset back to orignal and this marks the end of the email command.
+
+This is the simplified action diagram when the user executes the email command, assuming the user is only executing the `add`
+command once per `selectRecipients` and `selectContents` step.
+
+image::EmailActivityDiagram.png[width="1000", align="center"]
 
 ==== Design Considerations
 ===== Aspect: Data structure to store recipients and candidates

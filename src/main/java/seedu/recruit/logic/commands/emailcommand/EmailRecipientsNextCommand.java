@@ -22,28 +22,39 @@ public class EmailRecipientsNextCommand extends EmailRecipientsCommand {
         EmailUtil emailUtil = model.getEmailUtil();
 
         //Check if content array is empty, if it is, do not allow to move on to next stage
-        boolean isEmpty = false;
-
-        //if recipient are candidates and candidate arraylist is empty
-        if (emailUtil.isAreRecipientsCandidates() && emailUtil.getCandidates().size() == 0) {
-            isEmpty = true;
-        }
-        //if companies are candidates and job offers arraylist is empty
-        if (!emailUtil.isAreRecipientsCandidates() && emailUtil.getJobOffers().size() == 0) {
-            isEmpty = true;
-        }
-
-        if (isEmpty) {
+        if (isEmpty(emailUtil)) {
             return new CommandResult(NEXT_RECIPIENTS_ERROR_NO_RECIPIENTS + EmailRecipientsCommand.MESSAGE_USAGE);
         } else {
-            if (emailUtil.isAreRecipientsCandidates()) {
-                EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
-            } else {
-                EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
-            }
-
+            changeBook(emailUtil);
             LogicManager.setLogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(EmailContentsCommand.MESSAGE_USAGE);
+        }
+    }
+
+    /**
+     * checks if recipients array is empty
+     * @param emailUtil
+     * @return boolean value to see if recipients array is empty
+     */
+    private boolean isEmpty(EmailUtil emailUtil) {
+        if (emailUtil.isAreRecipientsCandidates() && emailUtil.getCandidates().size() == 0) {
+            return true;
+        }
+        if (!emailUtil.isAreRecipientsCandidates() && emailUtil.getJobOffers().size() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * changes the current book when proceeding to the next step
+     * @param emailUtil
+     */
+    private void changeBook(EmailUtil emailUtil) {
+        if (emailUtil.isAreRecipientsCandidates()) {
+            EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        } else {
+            EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         }
     }
 }

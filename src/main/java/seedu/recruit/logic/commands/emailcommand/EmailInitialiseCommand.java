@@ -24,6 +24,7 @@ public class EmailInitialiseCommand extends Command {
 
         //Initiailising a fresh instance of EmailUtil
         model.resetEmailUtil();
+        EmailSendCommand.resetRecipientsAndContents();
         LogicManager.setLogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
         return new CommandResult(EmailRecipientsCommand.MESSAGE_USAGE);
     }

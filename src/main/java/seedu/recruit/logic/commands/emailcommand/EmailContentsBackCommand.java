@@ -21,13 +21,20 @@ public class EmailContentsBackCommand extends EmailContentsCommand {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
 
+        changeBook(emailUtil);
+        LogicManager.setLogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
+        return new CommandResult(EmailRecipientsCommand.MESSAGE_USAGE);
+    }
+
+    /**
+     * Changes the book when returning to add recipients step
+     * @param emailUtil
+     */
+    public void changeBook(EmailUtil emailUtil) {
         if (emailUtil.isAreRecipientsCandidates()) {
             EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         } else {
             EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         }
-
-        LogicManager.setLogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
-        return new CommandResult(EmailRecipientsCommand.MESSAGE_USAGE);
     }
 }
