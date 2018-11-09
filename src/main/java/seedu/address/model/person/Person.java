@@ -63,7 +63,7 @@ public class Person {
     public Address getAddress() {
         return address;
     }
-
+  
     public Department getDepartment() {
         return department;
     }
