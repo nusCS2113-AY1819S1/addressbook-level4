@@ -3,9 +3,6 @@ package seedu.planner.model.record;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
 
-import java.util.logging.Logger;
-
-import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.util.DateUtil;
 
 /**
