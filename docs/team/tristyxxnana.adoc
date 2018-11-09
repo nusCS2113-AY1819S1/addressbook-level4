@@ -12,8 +12,8 @@
 Trajectory is a lightweight management system for those who need a no-frills solution for managing students, modules, grades, classes and notes. It is built for users who prefer typing (CLI) over GUI interaction and has a GUI created with JavaFX.
 
 == Summary of contributions
-* *Code contributed*: TO BE UPDATED
-* *Main Feature Implemented*: added *the ability to display a graph command for student grades*
+* Code Contributed: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tristyxxnana
+* *Major enhancement*: added *the ability to display a graph command for student grades*
 ** What it does: Allows the teacher to display a graph to show results of all students of a particular grade component in a module.
 ** Justification: This feature allows the teacher to monitor the progress of students conveniently through the use of a graph instead of a list of numbers.
 ** Highlights: This enhancement requires an in-depth analysis of design as it gathers information from several features like Student Management, Module Management and Gradebook Management. Additionally, the data for the x and y axis (marks and number of students) respectively involves the use of a hash-map which involves comprehensive coding.
