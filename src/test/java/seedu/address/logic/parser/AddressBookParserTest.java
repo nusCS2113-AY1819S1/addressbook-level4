@@ -24,7 +24,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -40,20 +39,6 @@ public class AddressBookParserTest {
 
     private ParserClassTest test = new ParserClassTest();
     private final AddressBookParser parser = new AddressBookParser();
-
-    @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        RegisterCommand command = (RegisterCommand) parser.parseCommand(PersonUtil.getRegisterCommand(person));
-        assertEquals(new RegisterCommand(person), command);
-    }
-
-    @Test
-    public void parseCommandAlias_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        RegisterCommand command = (RegisterCommand) parser.parseCommand(PersonUtil.getRegisterCommandAlias(person));
-        assertEquals(new RegisterCommand(person), command);
-    }
 
     @Test
     public void parseCommand_clear() throws Exception {
