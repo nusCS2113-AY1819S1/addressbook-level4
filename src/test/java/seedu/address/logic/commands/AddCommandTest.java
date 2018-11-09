@@ -40,7 +40,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_EventAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().build();
 
@@ -228,7 +228,7 @@ public class AddCommandTest {
      * A Model stub that always accept the event being added.
      */
     private class ModelStubAcceptingEventAdded extends ModelStub {
-        final ArrayList<Event> EventsAdded = new ArrayList<>();
+        final ArrayList<Event> eventsAdded = new ArrayList<>();
 
         @Override
         public boolean getLoginStatus() {
@@ -243,13 +243,13 @@ public class AddCommandTest {
         @Override
         public boolean hasEvent(Event event) {
             requireNonNull(event);
-            return EventsAdded.stream().anyMatch(event::isSameEvent);
+            return eventsAdded.stream().anyMatch(event::isSameEvent);
         }
 
         @Override
         public void addEvent(Event event) {
             requireNonNull(event);
-            EventsAdded.add(event);
+            eventsAdded.add(event);
         }
 
         @Override
