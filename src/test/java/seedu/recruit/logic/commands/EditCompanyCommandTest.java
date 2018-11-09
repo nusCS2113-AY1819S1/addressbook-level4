@@ -7,17 +7,14 @@ import static seedu.recruit.logic.commands.CommandTestUtil.DESC_ALFA;
 import static seedu.recruit.logic.commands.CommandTestUtil.DESC_BMW;
 import static seedu.recruit.logic.commands.CommandTestUtil.VALID_EMAIL_ALFA;
 import static seedu.recruit.logic.commands.CommandTestUtil.VALID_NAME_ALFA;
-import static seedu.recruit.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.recruit.logic.commands.CommandTestUtil.VALID_PHONE_ALFA;
-import static seedu.recruit.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.recruit.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.recruit.logic.commands.CommandTestUtil.showCompanyAtIndex;
+import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.recruit.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.Messages;
@@ -34,13 +31,13 @@ import seedu.recruit.testutil.CompanyBuilder;
 import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCandidateBookCommand and RedoCandidateBookCommand)
+ * Contains integration tests (interaction with the Model, UndoCompanyBookCommand and RedoCompanyBookCommand)
  * and unit tests for EditCompanyCommand.
  */
-@Ignore
+
 public class EditCompanyCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
+    private Model model = new ModelManager(new CandidateBook(), getTypicalCompanyBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();
 
@@ -70,13 +67,13 @@ public class EditCompanyCommandTest {
         Company editedCompany = companyInList.withCompanyName(VALID_NAME_ALFA).withPhone(VALID_PHONE_ALFA)
                 .withEmail(VALID_EMAIL_ALFA).build();
 
-        EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withCompanyName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_ALFA).build();
+        EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withCompanyName(VALID_NAME_ALFA)
+                .withPhone(VALID_PHONE_ALFA).withEmail(VALID_EMAIL_ALFA).build();
         EditCompanyCommand editCompanyCommand = new EditCompanyCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(editCompanyCommand.MESSAGE_EDIT_COMPANY_SUCCESS, editedCompany);
 
-        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
+        Model expectedModel = new ModelManager(new CandidateBook(), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.updateCompany(lastCompany, editedCompany);
         expectedModel.commitCompanyBook();
@@ -101,7 +98,7 @@ public class EditCompanyCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showCompanyAtIndex(model, INDEX_FIRST);
 
         Company companyInFilteredList = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
         Company editedCompany = new CompanyBuilder(companyInFilteredList).withCompanyName(VALID_NAME_ALFA).build();
@@ -119,7 +116,7 @@ public class EditCompanyCommandTest {
     }
 
     @Test
-    public void execute_duplicateCompanyUnfilteredList_failure() {
+    public void execute_duplicateCompanyFilteredList_failure() {
         Company firstCompany = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(firstCompany).build();
         EditCompanyCommand editCompanyCommand = new EditCompanyCommand(INDEX_SECOND, descriptor);
@@ -129,10 +126,9 @@ public class EditCompanyCommandTest {
     }
 
     @Test
-    public void execute_duplicateCompanyFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+    public void execute_duplicateCompanyUnfilteredList_failure() {
+        showCompanyAtIndex(model, INDEX_FIRST);
 
-        // edit company in filtered list into a duplicate in company book
         Company companyInList = model.getCompanyBook().getCompanyList().get(INDEX_SECOND.getZeroBased());
         EditCompanyCommand editCompanyCommand = new EditCompanyCommand(INDEX_FIRST,
                 new EditCompanyDescriptorBuilder(companyInList).build());
@@ -157,7 +153,7 @@ public class EditCompanyCommandTest {
      */
     @Test
     public void execute_invalidCompanyIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showCompanyAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of company book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getCompanyBook().getCompanyList().size());
@@ -175,7 +171,7 @@ public class EditCompanyCommandTest {
         Company companyToEdit = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(editedCompany).build();
         EditCompanyCommand editCompanyCommand = new EditCompanyCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), new CompanyBook(),
+        Model expectedModel = new ModelManager(new CandidateBook(), new CompanyBook(model.getCompanyBook()),
                 new UserPrefs());
         expectedModel.updateCompany(companyToEdit, editedCompany);
         expectedModel.commitCompanyBook();
@@ -185,13 +181,13 @@ public class EditCompanyCommandTest {
 
         // undo -> reverts Companybook back to previous state and filtered company list to show all companies
         expectedModel.undoCompanyBook();
-        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoCompanyBookCommand(), model, commandHistory,
+                UndoCompanyBookCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first company edited again
         expectedModel.redoCompanyBook();
-        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCompanyBookCommand(), model, commandHistory,
+                RedoCompanyBookCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -216,17 +212,17 @@ public class EditCompanyCommandTest {
      * 2. Undo the edit.
      * 3. The unfiltered list should be shown now. Verify that the index of the previously edited company in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the edit. This ensures {@code RedoCandidateBookCommand} edits the company object regardless of indexing.
+     * 4. Redo the edit. This ensures {@code RedoCompanyBookCommand} edits the company object regardless of indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameCompanyEdited() throws Exception {
         Company editedCompany = new CompanyBuilder().build();
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(editedCompany).build();
         EditCompanyCommand editCompanyCommand = new EditCompanyCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), new CompanyBook(),
+        Model expectedModel = new ModelManager(new CandidateBook(), new CompanyBook(model.getCompanyBook()),
                 new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_SECOND);
+        showCompanyAtIndex(model, INDEX_SECOND);
         Company companyToEdit = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
         expectedModel.updateCompany(companyToEdit, editedCompany);
         expectedModel.commitCompanyBook();
@@ -236,14 +232,14 @@ public class EditCompanyCommandTest {
 
         // undo -> reverts companybook back to previous state and filtered company list to show all persons
         expectedModel.undoCompanyBook();
-        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoCompanyBookCommand(), model, commandHistory,
+                UndoCompanyBookCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased()), companyToEdit);
         // redo -> edits same second company in unfiltered company list
         expectedModel.redoCompanyBook();
-        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCompanyBookCommand(), model, commandHistory,
+                RedoCompanyBookCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
