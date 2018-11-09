@@ -31,13 +31,14 @@ public class MoneyTest {
         assertFalse(Money.isValidMoney(" ")); // spaces only
         assertFalse(Money.isValidMoney("32-")); // contains alphanumeric symbol
         assertFalse(Money.isValidMoney(".3")); // missing digits before '.'
+        assertFalse(Money.isValidMoney("+4.222")); // floating point number with '+' symbol in the front
+        assertFalse(Money.isValidMoney("-4.222")); // floating point number with '-' symbol in the front
+        assertFalse(Money.isValidMoney("+12")); // integer with '+' symbol in the front
+        assertFalse(Money.isValidMoney("-12")); // integer with '-' symbol in the front
 
         // valid categories
         assertTrue(Money.isValidMoney("12")); // integer
-        assertTrue(Money.isValidMoney("+12")); // integer with '+' symbol in the front
-        assertTrue(Money.isValidMoney("-12")); // integer with '-' symbol in the front
+        assertTrue(Money.isValidMoney("3.4")); // floating point number
         assertTrue(Money.isValidMoney("4.")); // incomplete floating point number without digits after '.'
-        assertTrue(Money.isValidMoney("+4.222")); // floating point number with '+' symbol in the front
-        assertTrue(Money.isValidMoney("-4.222")); // floating point number with '-' symbol in the front
     }
 }
