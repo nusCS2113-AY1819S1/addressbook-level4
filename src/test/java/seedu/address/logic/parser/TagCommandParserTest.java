@@ -9,6 +9,7 @@ import seedu.address.logic.commands.TagCommand;
 
 public class TagCommandParserTest {
 
+    private ParserClassTest test = new ParserClassTest();
     private TagCommandParser parser = new TagCommandParser();
 
     @Test

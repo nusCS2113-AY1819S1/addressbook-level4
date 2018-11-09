@@ -11,6 +11,7 @@ import seedu.address.testutil.TypicalTimeSlots;
 
 public class DeleteTimeCommandParserTest {
 
+    private ParserClassTest test = new ParserClassTest();
     private DeleteTimeCommandParser parser = new DeleteTimeCommandParser();
 
     @Test

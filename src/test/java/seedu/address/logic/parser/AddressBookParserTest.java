@@ -38,6 +38,7 @@ public class AddressBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    private ParserClassTest test = new ParserClassTest();
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test

@@ -41,6 +41,8 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class RegisterCommandParserTest {
+
+    private ParserClassTest test = new ParserClassTest();
     private RegisterCommandParser parser = new RegisterCommandParser();
 
     @Test

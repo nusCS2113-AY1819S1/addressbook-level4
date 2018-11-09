@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Contains helper methods for testing command parsers.
@@ -20,6 +21,8 @@ public class CommandParserTestUtil {
             assertEquals(expectedCommand, command);
         } catch (ParseException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);
+        } catch (SecurityAuthenticationException sae) {
+            throw new AssertionError("Security Authentication Exception is thrown wrongly.");
         }
     }
 
@@ -30,6 +33,8 @@ public class CommandParserTestUtil {
     public static void assertParseFailure(Parser parser, String userInput, String expectedMessage) {
         try {
             parser.parse(userInput);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (SecurityAuthenticationException sae) {
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
