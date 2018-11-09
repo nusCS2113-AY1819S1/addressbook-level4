@@ -39,7 +39,7 @@ Responsibilities: Git Expert
 
 === Liu Tianhang
 image::liu-tianhang.png[width="150", align="left"]
-{empty}[http://github.com/LIU-TIANHANG[github]] [<<tianhang#, portfolio>>]
+{empty}[http://github.com/LIU-TIANHANG[github]] [<<liu-tianhang#, portfolio>>]
 
 Role: <tbc> +
 Responsibilities: <tbc>
