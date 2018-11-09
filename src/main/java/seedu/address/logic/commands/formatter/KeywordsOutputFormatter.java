@@ -1,10 +1,12 @@
 package seedu.address.logic.commands.formatter;
 
+import java.util.SortedSet;
+
 import seedu.address.model.searchhistory.KeywordType;
 import seedu.address.model.searchhistory.ReadOnlyKeywordsRecord;
 
 /**
- * A class that creates output strings of keywords according to KeywordsRecord
+ * A class that creates output strings of name and tag keywords according to KeywordsRecord
  */
 public class KeywordsOutputFormatter {
 
@@ -34,16 +36,8 @@ public class KeywordsOutputFormatter {
         if (hasNameKeywords()) {
             currentStringWidth = 0;
             outputString.append(NAME_KEYWORDS_HEADING);
-            for (String keyword: record.getKeywordSet(KeywordType.IncludeNames)) {
-                ensureStringWidthWithinLimit();
-                appendIncludedKeyword(keyword);
-                recalculateCurrentStringWidth(keyword);
-            }
-            for (String keyword: record.getKeywordSet(KeywordType.ExcludeNames)) {
-                ensureStringWidthWithinLimit();
-                appendExcludedKeyword(keyword);
-                recalculateCurrentStringWidth(keyword);
-            }
+            appendIncludedKeywordsFromSet(record.getKeywordSet(KeywordType.IncludeNames));
+            appendExcludedKeywordsFromSet(record.getKeywordSet(KeywordType.ExcludeNames));
         }
     }
 
@@ -54,16 +48,30 @@ public class KeywordsOutputFormatter {
         if (hasTagKeywords()) {
             currentStringWidth = 0;
             outputString.append(TAG_KEYWORDS_HEADING);
-            for (String keyword: record.getKeywordSet(KeywordType.IncludeTags)) {
-                ensureStringWidthWithinLimit();
-                appendIncludedKeyword(keyword);
-                recalculateCurrentStringWidth(keyword);
-            }
-            for (String keyword: record.getKeywordSet(KeywordType.ExcludeTags)) {
-                ensureStringWidthWithinLimit();
-                appendExcludedKeyword(keyword);
-                recalculateCurrentStringWidth(keyword);
-            }
+            appendIncludedKeywordsFromSet(record.getKeywordSet(KeywordType.IncludeTags));
+            appendExcludedKeywordsFromSet(record.getKeywordSet(KeywordType.ExcludeTags));
+        }
+    }
+
+    /**
+     * Appends excluded keywords to output string
+     */
+    private void appendExcludedKeywordsFromSet(SortedSet<String> set) {
+        for (String keyword : set) {
+            ensureStringWidthWithinLimit();
+            appendExcludedKeyword(keyword);
+            recalculateCurrentStringWidth(keyword);
+        }
+    }
+
+    /**
+     * Appends included keywords to output string
+     */
+    private void appendIncludedKeywordsFromSet(SortedSet<String> set) {
+        for (String keyword : set) {
+            ensureStringWidthWithinLimit();
+            appendIncludedKeyword(keyword);
+            recalculateCurrentStringWidth(keyword);
         }
     }
 
