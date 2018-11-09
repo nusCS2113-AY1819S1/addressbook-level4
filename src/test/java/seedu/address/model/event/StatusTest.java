@@ -1,3 +1,4 @@
+//@@author cqinkai
 package seedu.address.model.event;
 
 import static org.junit.Assert.assertFalse;
@@ -36,5 +37,17 @@ public class StatusTest {
         assertTrue(Status.isValidStatus("UPCOMING")); // UPCOMING
         assertTrue(Status.isValidStatus("COMPLETED")); // COMPLETED
         assertTrue(Status.isValidStatus("NULL")); // NULL
+    }
+
+    @Test
+    public void setStatus() {
+        DateTime dateBeforeCurrent = new DateTime("01/01/2018 10:00");
+        DateTime dateAfterCurrent = new DateTime("02/02/2020 20:00");
+
+        // date before current date 07/11/2018
+        assertTrue((Status.setStatus(dateBeforeCurrent)).equals("COMPLETED"));
+
+        // date after current date 07/11/2018
+        assertTrue((Status.setStatus(dateAfterCurrent)).equals("UPCOMING"));
     }
 }
