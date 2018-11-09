@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_KEY_WORD;
 
 import org.junit.AfterClass;
@@ -48,6 +49,7 @@ public class NoteFindCommandParserTest {
             // invalid args, empty
             args = "";
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertEquals(expectedMessageInvalidCommand, e.getMessage());
         }
@@ -56,6 +58,7 @@ public class NoteFindCommandParserTest {
             // invalid args with prefix but blank param
             args = " " + PREFIX_NOTE_KEY_WORD;
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertEquals(expectedMessageInvalidKeyword, e.getMessage());
         }
@@ -64,6 +67,7 @@ public class NoteFindCommandParserTest {
             // invalid args with prefix but contain multiple words separated by space
             args = " " + PREFIX_NOTE_KEY_WORD + "hello world";
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertEquals(expectedMessageInvalidKeyword, e.getMessage());
         }

@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_END_TIME;
@@ -91,6 +92,7 @@ public class NoteAddCommandParserTest {
                     + PREFIX_MODULE_CODE + "CS2113 "
                     + PREFIX_NOTE_START_DATE;
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertEquals(expectedMessageBlankField, e.getMessage());
         }
@@ -101,6 +103,7 @@ public class NoteAddCommandParserTest {
                     + PREFIX_MODULE_CODE + "CS2113 "
                     + PREFIX_NOTE_START_DATE + "21 September 2013";
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertTrue(e.getMessage().contains(expectedMessageInvalidDate));
         }
@@ -112,6 +115,7 @@ public class NoteAddCommandParserTest {
                     + PREFIX_NOTE_START_DATE + "21/1/2013 "
                     + PREFIX_NOTE_START_TIME + "23:59";
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertTrue(e.getMessage().contains(expectedMessageInvalidTime));
         }
@@ -123,6 +127,7 @@ public class NoteAddCommandParserTest {
                     + PREFIX_NOTE_START_DATE + "1/1/2018 "
                     + PREFIX_NOTE_END_DATE + "2018-10-12";
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertTrue(e.getMessage().contains(expectedMessageInvalidDate));
         }
@@ -135,6 +140,7 @@ public class NoteAddCommandParserTest {
                     + PREFIX_NOTE_START_TIME + "11:00 AM "
                     + PREFIX_NOTE_END_TIME + "1:00PM";
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertTrue(e.getMessage().contains(expectedMessageInvalidTime));
         }
@@ -153,6 +159,7 @@ public class NoteAddCommandParserTest {
                     + PREFIX_NOTE_START_DATE + "20-12-2012 "
                     + PREFIX_NOTE_END_DATE + "19-12-2012";
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertEquals(expectedMessage, e.getMessage());
         }
@@ -165,6 +172,7 @@ public class NoteAddCommandParserTest {
                     + PREFIX_NOTE_START_TIME + "9:01 PM "
                     + PREFIX_NOTE_END_TIME + "9:00 PM";
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertEquals(expectedMessage, e.getMessage());
         }

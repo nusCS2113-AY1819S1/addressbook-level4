@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import org.junit.AfterClass;
@@ -47,14 +48,16 @@ public class NoteListCommandParserTest {
             // invalid args, missing prefix
             args = " CS2113";
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertEquals(expectedMessageInvalidCommand, e.getMessage());
         }
 
         try {
-            // invalid args, with prefix but has empty param
+            // invalid args, with prefix but blank param
             args = " " + PREFIX_MODULE_CODE;
             parser.parse(args);
+            fail("Exception not thrown");
         } catch (ParseException e) {
             assertEquals(expectedMessageEmptyModuleCodeArg, e.getMessage());
         }
