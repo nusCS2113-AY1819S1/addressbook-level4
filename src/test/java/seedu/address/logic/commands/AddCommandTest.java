@@ -47,7 +47,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validEvent).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validEvent), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validEvent), modelStub.EventsAdded);
+        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
