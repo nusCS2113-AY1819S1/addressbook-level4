@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.NoteDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import javax.sound.midi.SysexMessage;
-
 /**
  * Parses input arguments and creates a new NoteDeleteCommand object
  */
