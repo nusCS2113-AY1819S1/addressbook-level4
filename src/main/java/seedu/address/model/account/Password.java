@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Password {
 
     public static final String MESSAGE_PASSWORD_CONSTRAINTS =
-            "Passwords should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Passwords should have no spaces and cannot be empty";
 
     /*
      * The first character of the password must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String PASSWORD_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String PASSWORD_VALIDATION_REGEX = "^[^\\s]+$";
 
     public final String fullPassword;
 

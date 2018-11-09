@@ -11,6 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.account.Account;
 import seedu.address.model.account.Password;
 import seedu.address.model.account.Username;
+import seedu.address.model.account.UsernameMatchPredicate;
 
 /**
  * Parses input arguments and creates a new LoginCommand object
@@ -33,10 +34,13 @@ public class LoginCommandParser implements Parser<LoginCommand> {
 
         Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
         Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
-
         Account account = new Account(username, password);
 
-        return new LoginCommand(account);
+        return new LoginCommand(new UsernameMatchPredicate(username.toString()), account);
+
+
+
+        //return new LoginCommand(account);
     }
 
     /**

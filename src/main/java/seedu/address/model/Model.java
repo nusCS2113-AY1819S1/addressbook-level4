@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.account.Account;
+import seedu.address.model.account.Username;
 import seedu.address.model.item.Item;
 
 /**
@@ -102,5 +103,24 @@ public interface Model {
      */
     void commitStockList();
 
+    /**
+     * Get login status to determine if user can run commands
+     */
+    boolean getLoginStatus();
+
+    /**
+     * Get logged in user in the model
+     */
+    String getLoggedInUser();
+
+    /**
+     * Set logout status
+     */
+    void setLoggedOutStatus();
+
+    /**
+     * Set logged in user status
+     */
+    void setLoggedInUser(Username username);
 
 }

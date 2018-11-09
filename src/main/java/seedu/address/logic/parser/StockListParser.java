@@ -28,6 +28,8 @@ import seedu.address.logic.commands.ListAccountsCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoanListCommand;
 import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LoginStatusCommand;
+import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.LostCommand;
 import seedu.address.logic.commands.LostandFoundCommand;
 import seedu.address.logic.commands.OpenCommand;
@@ -70,8 +72,12 @@ public class StockListParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case LoginStatusCommand.COMMAND_WORD:
+            return new LoginStatusCommand();
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
         case AddAccountCommand.COMMAND_WORD:
