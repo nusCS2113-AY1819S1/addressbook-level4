@@ -18,6 +18,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.ExpeditedInputs;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -69,6 +70,7 @@ public class MainApp extends Application {
         initLogging(config);
 
         StorageController.retrieveData();
+        ExpeditedInputs.loadInputData();
 
         model = initModelManager(storage, userPrefs);
         StudentManager sm = StudentManager.getInstance();
@@ -79,6 +81,8 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+
+
     }
 
     /**

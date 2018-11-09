@@ -43,6 +43,9 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_COURSE_CODE_CEG = "CEG";
+    public static final String VALID_COURSE_CODE_CS = "CS";
+    public static final String VALID_COURSE_NAME_CEG = "Computer Engineering";
+    public static final String VALID_COURSE_NAME_CS = "Computer Science";
     public static final String VALID_MATRIC_NO_MEGAN = "A0168412C";
     public static final String VALID_MATRIC_NO_TAYLOR = "A0168412D";
     public static final String VALID_CLASS_T16 = "T16";

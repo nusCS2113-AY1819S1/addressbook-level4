@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewInfoMessageEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.logic.ExpeditedInputs;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
@@ -56,6 +57,13 @@ public class CommandBox extends UiPart<Region> {
             keyEvent.consume();
             navigateToNextInput();
             break;
+        case RIGHT:
+            commandTextField.setText(ExpeditedInputs.getNextCommand());
+            break;
+        case LEFT:
+            commandTextField.setText(ExpeditedInputs.getPreviousCommand());
+            break;
+
         default:
             // let JavaFx handle the keypress
         }
