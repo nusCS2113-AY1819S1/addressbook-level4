@@ -54,7 +54,7 @@ public class SummaryByCategoryCommand extends SummaryCommand {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
         summaryList = new SummaryByCategoryList(model.getFilteredRecordList());
-        logger.info("Creating SummaryByCategoryList: " + summaryList.size() + " summaries");
+        logger.info("Created SummaryByCategoryList: " + summaryList.size() + " summaries");
         String tabTitle = String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate),
                 DateUtil.formatDate(endDate));
         EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList, TOTAL_LABEL,

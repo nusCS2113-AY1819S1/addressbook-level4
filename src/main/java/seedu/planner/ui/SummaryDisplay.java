@@ -18,8 +18,6 @@ import seedu.planner.model.summary.SummaryList;
  */
 public class SummaryDisplay extends UiPart<Region> {
 
-    private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-
     private static final String FXML = "SummaryDisplay.fxml";
 
     private ObservableList<SummaryEntry> data = FXCollections.emptyObservableList();

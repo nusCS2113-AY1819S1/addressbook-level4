@@ -216,6 +216,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHome() {
+        logger.info("=================== [Home key has been activated. Returning to HOME] ====================");
         for (Node node: mainUiPanelPlaceholder.getChildren()) {
             node.setVisible(false);
         }
