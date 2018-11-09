@@ -57,10 +57,16 @@ Responsibilities: Development of features, maintainance of github site and other
 
 === Yang Shuang
 image::clara1234566.png[width="150", align="left"]
-{empty}[https://github.com/clara1234566[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/clara1234566[github]] [<<clara1234566#, portfolio>>]
 
 Role: Developer + Tester +
-Responsibilities: Development of features and rigorous testing of application
+Responsibilities: +
+grade management - add tests and test marks +
+grade management - edit test marks +
+grade management - delete tests and test marks +
+grade management - give summary of certain test +
+grade management - grading students automatically +
+Development of features and ensuring document correctness
 
 '''
 

@@ -38,7 +38,7 @@ public class AddTestMarksCommand extends Command {
             + "Example: " + COMMAND_WORD_2 + " alice " + PREFIX_TEST_NAME + "cs2113quiz1 " + PREFIX_TEST_MARK + "67";
 
 
-    public static final String MESSAGE_DUPLICATE_TEST = "This test already exists in the system";
+    public static final String MESSAGE_DUPLICATE_TEST = "This test mark already added ";
     public static final String MESSAGE_PERSONNAME_NOT_FOUND = "This person cannot be found";
     public static final String MESSAGE_PERSON_DUPLICATE_FOUND = "There are more then one "
             + "person's name contain the keyword found please indicate the full name";

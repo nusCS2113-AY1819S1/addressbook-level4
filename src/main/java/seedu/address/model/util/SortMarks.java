@@ -1,9 +1,12 @@
 package seedu.address.model.util;
 
+import static seedu.address.logic.commands.GradeSummaryCommand.MESSAGE_ERROR_NOT_FOUND;
+
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.PersonTest;
 import seedu.address.model.grade.Test;
@@ -18,15 +21,17 @@ public class SortMarks { //from lowest to highest
     /**
      * sort student in ascending order by scores.
      */
-    public static ArrayList<PersonTest> sortingFromLowestToHighest(ObservableList<Person> personList, String testName) {
+    public static ArrayList<PersonTest> sortingFromLowestToHighest(ObservableList<Person> personList, String testName) throws CommandException{
         PersonTest student;
         String name1;
         String testName1;
         String marks1;
         ArrayList<PersonTest> listToSort = new ArrayList<PersonTest>();
+        Boolean testExists = false;
         for (int i = 0; i < personList.size(); i++) {
             for (Test test: personList.get(i).getTests()) {
                 if (test.getTestName().testName.equals(testName)) {
+                    testExists= true;
                     name1 = personList.get(i).getName().fullName;
                     testName1 = test.getTestName().testName;
                     marks1 = test.getMarks().value;
@@ -35,6 +40,9 @@ public class SortMarks { //from lowest to highest
                 }
             }
 
+        }
+        if (!testExists){
+            throw new CommandException(MESSAGE_ERROR_NOT_FOUND);
         }
 
         ArrayList<PersonTest> pList = new ArrayList<>(bubbleSort(listToSort, testName, listToSort.size()));

@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 
 import seedu.address.logic.commands.EditTestMarksCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 /**
@@ -22,7 +23,7 @@ public class AssignGrades {
     /**
      * A method to calculate student grade base on their marks
      */
-    public String assignGradeByMarks(String testName, String marks, Person person, ObservableList<Person> personList) {
+    public String assignGradeByMarks(String testName, String marks, Person person, ObservableList<Person> personList) throws CommandException {
 
         double meanVal = Mean.calculateMean(personList, testName);
         double sd = StandardDeviation.calculateStandardDeviation(personList, testName);

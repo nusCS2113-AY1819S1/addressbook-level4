@@ -688,7 +688,7 @@ Coming in v2.0
 
 // end::distribute[]
 
-// tag::grademanagement[]
+// tag::grade management[]
 === Grade_management feature
 ==== Current Implementation
 The grade management feature is to help university lecturer to manage students grade. It includes to add Test (test name test marks) and edit test marks for each student, grade summary
@@ -707,9 +707,9 @@ In the current version, the following operations have been implemented:
 
 Given below is an example usage scenario and how the grade management mechanism behaves at each step.
 
-Step 1. User inputs `adt studentname tn/CS1231 tm/66` to add test into a student in the student management system.
+Step 1. User inputs `adt student_name tn/CS1231 tm/66` to add test into a student in the student management system.
 The `AddressBookParser` detects `adt` as a command word to use `AddTestMarksCommandParser` to parse the input given.
-`AddTestMarksCommandParser` will then pass studentname, testname,testmarks to `AddTestMarksCommand` which will then
+`AddTestMarksCommandParser` will then pass student_name, test_name,test_marks to `AddTestMarksCommand` which will then
 execute adding the test to the student.
   +
 [NOTE]
@@ -717,16 +717,18 @@ If a duplicate tests are found in the student management system during its execu
 If a duplicate name keywords are found in the student management system during its execution,
 it will not add the test , it will throw a `DuplicatePersonException` to ask user to indicate the full name
 which will then notify the user of the issue.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+ Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
 
 The following sequence diagram shows how the add test operation works within both `Model` and `Logic` components:
 
-.Interactions Inside the Logic and Model Component for the `adt studentname tn/CS1231 tm/66` Command +
+.Interactions Inside the Logic and Model Component for the `adt student_name tn/CS1231 tm/66` Command +
 image::AddTestMarks.png[width="800"]
 
 
-Step 2. User inputs `edt studentname tn/CS1231 tm/77` to edit test marks of a student in the student management system.
+Step 2. User inputs `edt student_name tn/CS1231 tm/77` to edit test marks of a student in the student management system.
         The `AddressBookParser` detects `edt` as a command word to use `EditTestMarksCommandParser` to parse the input given.
-        `EditTestMarksCommandParser` will then pass studentname, testname,testmarks to `editTestMarksCommand` which will then
+        `EditTestMarksCommandParser` will then pass student_name, test_name,test_marks to `editTestMarksCommand` which will then
         execute editing the test of the student.
  +
 [NOTE]
@@ -734,29 +736,35 @@ If a duplicate tests are found in the student management system during its execu
 If a duplicate name keywords are found in the student management system during its execution,
 it will not add the test , it will throw a `DuplicatePersonException` to ask user to indicate the full name
 which will then notify the user of the issue.
-
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
 The sequence diagram is similar to the adt command above, just the command name changed.
 
-Step 3. The user inputs `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/` to show grade summary of certain test.
+Step 3. The user inputs `disp tn/cs2113 highest/` or `disp tn/cs2113 lowest/` or `disp tn/cs2113 median/` or `disp tn/cs2113 mean/` or `disp tn/cs2113 TTF/` or `disp tn/cs2113 LTF/` to show grade summary of certain test.
 The `AddressBookParser` detects `disp` as a command word will use `GradeSummaryCommandParser`
 to parse the input given. `GradeSummaryCommandParser` will pass test name to `GradeSummaryCommand`
 which will then execute display the grade summary.
  +
-
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
 The following sequence diagram shows how the grade summary command works within both `logic` and `UI` components:
 
-.Interactions Inside the Logic and UI Component for the `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/` Command +
+.Interactions Inside the Logic and UI Component for the Command +
 image::GradeSummary.png[width="800"]
 
-Step 4. The user inputs `agpt` grading students who has taken certain test. The `AddressBookParser` detects `agpt` as a command word and will use `AssignGradeCommandParser`
+Step 4. The user inputs `agpt tn/cs2113` grading students who has taken certain test automatically. The `AddressBookParser` detects `agpt` as a command word and will use `AssignGradeCommandParser`
 to parse the input given. `AssignGradeCommandParser` will then  pass test name to `AssignGradeCommand`
 which will then execute grading students of certain test in the student management system.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+ Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
 The sequence diagram is similar to the adt command above.
  +
 
-Step 5. The user inputs `dt` to delete certain test in the student management system. The `AddressBookParser` detects `dt` as a command word and will use `DeleteTestMarksCommandParser`
+Step 5. The user inputs `dt tn/cs2113` to delete certain test in the student management system. The `AddressBookParser` detects `dt` as a command word and will use `DeleteTestMarksCommandParser`
 to parse the input given. `DeleteTestMarksCommandParser` will then  pass test name to `DeleteTestMarksCommand`
 which will then execute deleting the test from the student management system.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
 The sequence diagram is similar to the adt command above.
  +
 
@@ -772,11 +780,11 @@ before you add test. use name as input save a lot of time for user.
 
 ===== Aspect: Storage
 
-* **Alternative 1 (current choice):** Stores test in Person as a list.
-** Pros: Easy to link test to each person,cause it is part of person.
-** Cons: need to add test in every part relate to person,hard to implement.
+* **Alternative 1 (current choice):** Stores test in Person as a set (like the tags).
+** Pros: Easy to link test to each person,cause it is implement as a part of person.
+** Cons: need to add test in every part relate to person, hard to implement.
 
-// end::grademanagement[]
+// end::grade management[]
 
 // tag::sendmail[]
 === Send Email feature
