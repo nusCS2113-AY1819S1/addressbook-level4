@@ -1,9 +1,9 @@
 //@@author cqinkai
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.model.DateTimeUtil.daysDiff;
 import static seedu.address.model.event.EventContainsKeywordsPredicate.checkAttendeeKeywordsMatchEventAttendee;
-import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +16,8 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.SendEventReminder;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.event.Event;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 
 /**
  * Sends reminders to logged-in user based on upcoming events that the user has registered for

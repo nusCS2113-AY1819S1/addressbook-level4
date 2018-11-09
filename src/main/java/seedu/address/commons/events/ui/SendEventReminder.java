@@ -20,5 +20,7 @@ public class SendEventReminder extends BaseEvent {
     }
 
     @Override
-    public String toString() { return getClass().getSimpleName(); }
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 }
