@@ -25,7 +25,7 @@ public class SummaryByMonthCommand extends SummaryCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_MODE_WORD
             + ": Lists the summary for each month for a period of time."
             + " Parameters: "
-            + PREFIX_DATE + "MONTH_START " + "MONTH_END "
+            + PREFIX_DATE + "START_MONTH " + "END_MONTH "
             + "Example: " + COMMAND_WORD + " " + COMMAND_MODE_WORD + " "
             + PREFIX_DATE + "sep-2018 " + "oct-2018 ";
 

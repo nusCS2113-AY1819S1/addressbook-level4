@@ -31,6 +31,7 @@ public class Month {
 
     public static final List<String> STANDARD_MONTHS = Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
             "JUL", "AUG", "SEP", "OCT", "NOV", "DEC");
+    public static final String STANDARD_MONTH_REP = "%s-%d";
 
     public final String value;
 
@@ -45,17 +46,27 @@ public class Month {
      *
      * @param input A valid string.
      */
-    //TODO: refactor this
     public Month(String input) {
         requireNonNull(input);
         checkArgument(isValidMonth(input), MESSAGE_MONTH_CONSTRAINTS);
+        initMonth(input);
+        value = String.format(STANDARD_MONTH_REP, STANDARD_MONTHS.get(month - 1), year);
+    }
+
+    /**
+     * Initiates the values of month and year after parsing the input
+     * @param input input to be parsed
+     */
+    private void initMonth(String input) {
         matcher = MONTH_VALIDATION_PATTERN.matcher(input);
         if (!matcher.matches()) {
             checkArgument(false, MESSAGE_MONTH_CONSTRAINTS);
         }
-        checkArgument(isLogicalMonth(matcher.group("month")), MESSAGE_MONTH_LOGICAL_CONSTRAINTS);
-        initMonth(matcher.group("month"), matcher.group("year"));
-        value = String.format("%s-%d", STANDARD_MONTHS.get(month - 1), year);
+        String month = matcher.group("month");
+        String year = matcher.group("year");
+        checkArgument(isLogicalMonth(month), MESSAGE_MONTH_LOGICAL_CONSTRAINTS);
+        this.year = Integer.parseInt(year);
+        this.month = STANDARD_MONTHS.indexOf(month.toUpperCase()) + 1;
     }
 
     public Month(int month, int year) {
@@ -89,12 +100,6 @@ public class Month {
     public static boolean isLogicalMonth(String test) {
         requireNonNull(test);
         return STANDARD_MONTHS.contains(test.toUpperCase());
-    }
-
-    private void initMonth(String month, String year) {
-        requireAllNonNull(month, year);
-        this.year = Integer.parseInt(year);
-        this.month = STANDARD_MONTHS.indexOf(month.toUpperCase()) + 1;
     }
 
     @Override

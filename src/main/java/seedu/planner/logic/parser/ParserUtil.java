@@ -79,7 +79,7 @@ public class ParserUtil {
     /**
      * Parses a string into a {@code Month}.
      * Leading and trailing whitespaces will be trimmed.
-     * @param month
+     * @param month month given as a string
      * @throws ParseException if the given {@code month} is invalid.
      */
     public static Month parseMonth(String month) throws ParseException {
