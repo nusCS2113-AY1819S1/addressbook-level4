@@ -1,0 +1,49 @@
+= Gian Zhi Cai - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Trajectory
+
+---
+
+== Overview
+
+Trajectory is a lightweight management system for those who need a no-frills solution for managing students, modules, grades, classes and notes. It is built for users who prefer typing (CLI) over GUI interaction and has a GUI created with JavaFX.
+
+== Summary of contributions
+* Code Contributed: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=zhicaizack
+* *Major enhancement*: added *the ability to manage a classroom*
+** What it does: allows the user to add a classroom, edit and delete a classroom, assign/unassign students from the classroom and mark the attendance of the students in the classroom.
+** Justification: This feature improves the cohesiveness of the product as a student enrolled into a module inside a course should have his/her classroom.
+** Highlights: This enhancement can be further enhanced to allow for calculation of student attendance that may be factored into their grades in the future release.
+** Credits: https://cs2113-ay1819s1-t16-1.github.io/main/AboutUs.html and https://github.com/nusCS2113-AY1819S1/addressbook-level4
+
+* *Other contributions*:
+
+** Project management:
+*** Friendly reminder for team to update documentation for `v1.2` on GitHub
+** Community:
+*** Contributed to issue discussions (examples:  https://github.com/CS2113-AY1819S1-T16-1/main/issues/280#issuecomment-435569592)
+*** Reported bugs and suggestions for other teams in the class (examples: https://github.com/CS2113-AY1819S1-W13-4/main)
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=classmanagementdepth]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=classmanagementbrief]
+
+include::../DeveloperGuide.adoc[tag=classmanagementdepth]
