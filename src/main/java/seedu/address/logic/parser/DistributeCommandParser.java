@@ -7,8 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
 import static seedu.address.model.distribute.DistributeAlgorithm.MESSAGE_INVALID_SIZE;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.DistributeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.distribute.Distribute;
@@ -18,6 +21,8 @@ import seedu.address.model.group.GroupName;
  * Parses input arguments and creates a new DistributeCommand object
  */
 public class DistributeCommandParser implements Parser<DistributeCommand> {
+
+    private static final Logger logger = LogsCenter.getLogger(DistributeCommandParser.class);
 
     @Override
     public DistributeCommand parse(String args) throws ParseException {
@@ -31,13 +36,16 @@ public class DistributeCommandParser implements Parser<DistributeCommand> {
         try {
             index = ParserUtil.parseInteger(argMultimap.getPreamble());
         } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, "numOfGroups Index specified to be create is more than number of Students.");
             throw new NumberFormatException(MESSAGE_INVALID_SIZE);
         } catch (ParseException pe) {
+            logger.log(Level.WARNING, "Index is unable to parse.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DistributeCommand.MESSAGE_USAGE), pe);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_NATIONALITY)) {
+            logger.log(Level.WARNING, "One of the required prefix is missing.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DistributeCommand.MESSAGE_USAGE));
         }
 
