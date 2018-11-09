@@ -27,6 +27,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewAttendeesCommand;
+import seedu.address.logic.parser.exceptions.InvalidLoginException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 //@@author: IcedCoffeeBoy
@@ -113,7 +114,7 @@ public class ManagerParser extends CommandsParser {
             return new RedoCommand();
 
         case LoginCommand.COMMAND_WORD:
-            return new InvalidLoginParser().parse(IDENTITY);
+            throw new InvalidLoginException(IDENTITY);
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommandParser().parse(arguments);

@@ -26,6 +26,8 @@ import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.parser.exceptions.InvalidLoginException;
+import seedu.address.logic.parser.exceptions.InvalidPrivilegeException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -89,31 +91,31 @@ public class EmployeeParser extends CommandsParser {
             return new RedoCommand();
 
         case LoginCommand.COMMAND_WORD:
-            return new InvalidLoginParser().parse(IDENTITY);
+            throw new InvalidLoginException(IDENTITY);
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
-            return new InvalidPrivilegeParser().parse(IDENTITY);
+            throw new InvalidPrivilegeException(IDENTITY);
 
         case AddEventCommand.COMMAND_WORD:
-            return new InvalidPrivilegeParser().parse(IDENTITY);
+            throw new InvalidPrivilegeException(IDENTITY);
 
         case EditCommand.COMMAND_WORD:
-            return new InvalidPrivilegeParser().parse(IDENTITY);
+            throw new InvalidPrivilegeException(IDENTITY);
 
         case EditEventCommand.COMMAND_WORD:
-            return new InvalidPrivilegeParser().parse(IDENTITY);
+            throw new InvalidPrivilegeException(IDENTITY);
 
         case DeleteCommand.COMMAND_WORD:
-            return new InvalidPrivilegeParser().parse(IDENTITY);
+            throw new InvalidPrivilegeException(IDENTITY);
 
         case DeleteEventCommand.COMMAND_WORD:
-            return new InvalidPrivilegeParser().parse(IDENTITY);
+            throw new InvalidPrivilegeException(IDENTITY);
 
         case RemoveCommand.COMMAND_WORD:
-            return new InvalidPrivilegeParser().parse(IDENTITY);
+            throw new InvalidPrivilegeException(IDENTITY);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
