@@ -19,6 +19,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTable;
+import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,10 +38,12 @@ public class ImportCommand extends Command {
             + " my_import_file_name";
 
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported timetable at: %1$s.";
-    public static final String MESSAGE_EMPTY = "Could not obtain any TimeTable data from: %1$s"
+    public static final String MESSAGE_FILE_EMPTY = "Could not obtain any TimeTable data from: %1$s"
             + "\nPlease check that the file is not empty, and contains timetable data.";
     public static final String MESSAGE_IO_ERROR =
             "Failed to read the file at: %1$s.\nPlease check the file exists.";
+    public static final String MESSAGE_FILE_OVERLAP_TIMESLOT = "There was at least 1 overlapping timeslot "
+            + "in the file: %1$s. Overlapping timeslots are currently not supported in FreeTime!";
     private final Path filePath;
 
     /**
@@ -66,10 +69,12 @@ public class ImportCommand extends Command {
             optionalTimeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath);
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_IO_ERROR, filePath.toString()));
+        } catch (TimeSlotOverlapException e) {
+            throw new CommandException(String.format(MESSAGE_FILE_OVERLAP_TIMESLOT, filePath.toString()));
         }
 
         if (!optionalTimeTable.isPresent()) {
-            return new CommandResult(String.format(MESSAGE_EMPTY, filePath.toString()));
+            return new CommandResult(String.format(MESSAGE_FILE_EMPTY, filePath.toString()));
         }
         timeTable = optionalTimeTable.get();
 

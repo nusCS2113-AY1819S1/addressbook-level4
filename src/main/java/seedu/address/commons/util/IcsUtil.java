@@ -30,6 +30,7 @@ import biweekly.util.Recurrence;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
+import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
  * Utility functions for the reading and writing of {@code TimeTable} objects to disk as .ics file. (and vice versa)
@@ -58,10 +59,11 @@ public class IcsUtil {
      *
      * @param filePath cannot be null.
      * @throws IOException if any IO error occurs, or file is not found.
+     * @throws TimeSlotOverlapException if the file to be imported has overlapping timeslots.
      *
      */
     public Optional<TimeTable> readTimeTableFromFile(Path filePath)
-            throws IOException {
+            throws IOException, TimeSlotOverlapException {
         requireNonNull(filePath);
 
         ICalendar iCalendar = new ICalendar();
@@ -100,7 +102,7 @@ public class IcsUtil {
      * Converts {@code ICalendar} to {@code TimeTable}
      * @param iCalendar {@code ICalendar} to convert. Cannot be null.
      */
-    private Optional<TimeTable> iCalendarToTimeTable(ICalendar iCalendar) {
+    private Optional<TimeTable> iCalendarToTimeTable(ICalendar iCalendar) throws TimeSlotOverlapException {
         requireNonNull(iCalendar);
         TimeTable timeTable = new TimeTable();
         /*
