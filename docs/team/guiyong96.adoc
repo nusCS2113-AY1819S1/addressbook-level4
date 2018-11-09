@@ -9,18 +9,37 @@
 
 == Overview
 
-BookInventory is a desktop application to assist store managers in managing their books stock supply and engaging a larger market to customers who do not frequently visit book stores. This 3 in 1 application offers utilities for three parties, the bookstore owner, bookstore in-house accountants and potential customers. Bookstore in-house accountants may assist the managers with a separate set of privileges specifically to manage profit margins and make subsequent plans. Lastly, students may access the app to browse the book of their choice and issue requests to the store owners to express interest. This application is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). In this paper, I will elaborate on my ability to illustrate a clear documentation of the thought process as well as the implementation procedure.
+BookInventory is a desktop application to assist store managers in managing their books stock supply and engaging a larger market to customers who do not frequently visit book stores. This 3 in 1 application targets three parties, the bookstore owner, bookstore in-house accountants and potential customers. Bookstore in-house accountants may assist the managers with a separate set of privileges specifically to manage profit margins and make subsequent plans. Lastly, students may access the app to browse the book of their choice and issue requests to the store owners to express interest. This application is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). In this paper, I will elaborate on my ability to illustrate a clear documentation of the thought process as well as the implementation procedure.
+
 == Summary of contributions
 
 * *Major enhancement* Added a command for students to request for books.*
-** What it does: Students may request for any book by typing the command in the format given in the user guide. Students may request for any book, regardless of whether the book exists in the book store.
+** Functionality: Students may request for any book by typing the command in the format given in the user guide. Students may request for any book, regardless of whether the book exists in the book store.
 ** Justification: This feature brings about convenience for students who can demand a book at the comfort of their homes. This is also advantageous for bookstore owners to track popular books and manage their book supply more efficiently.
-** Highlights: The implementation of an additional panel requires a separated segment from the original code. In the course of implementation, it is only necessary for me to be well-versed in JavaFX. The design approach and precautions taken required careful analysis and a considerably long period of time. Thorough checking and elaborate lengthy testings were also necessary to minimise undesirable bugs surfacing. 
-** Credits: 
+** Highlights: The implementation of an additional panel requires a separated segment from the original code. During the course of implementation, I have learnt to be well-versed in JavaFX. The design approach and precautions taken required careful analysis and a considerably long period of time. Thorough checking and elaborate lengthy tests were also necessary to minimise undesirable bugs surfacing. ** Credits:
 
-* *Minor enhancement*: added a stock command that allows the user to stock books.
+*Minor enhancements*
 
+* Secondary UI panel now enabled strictly for store owners to view ongoing requests.
+** Functionality: Owners are able to view a list of requests sent in by students.
+** Justification: This feature is necessary for owners to view and decide whether to accept or reject a request.
+** Highlights: This feature requires heavy implementation in coding as we require an additional storage and an additional model which require due amount of time to implement.
+** Credits:
+
+* Default page is replaced with a command list.
+** Functionality: Users can now refer from the command list and decide what command he/she wishes to start.
+** Justification:
+
+* Command Line now scans for misspelt commands and prompts the user if he or she is using the correct command. Credits: {}
+** Functionality:
+** Justification:
+** Credits:
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+
+* Predictive text enabled for users.
+** Functionality: Display a message to inform user if the system detects a spelling error.
+** Justification:  
+** Credits:
 
 * *Other contributions*:
 
@@ -40,30 +59,42 @@ BookInventory is a desktop application to assist store managers in managing thei
 == Contributions to the User Guide
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_This segment highlights my potential in writing documentations targeting end-users. Users are shown how the commands are called and the rationale behind these implementations._
 |===
-// tag::sellcommand[]
-=== Sell feature
-==== Current implementation
-The sell command utilises both the `Model` and `Logic` component to fulfil its function.
 
-The following sequence diagram shows how the sell operation is implemented
+=== Requesting for a book : `request`
 
-image::SellSequenceDiagram.png[width="800"]
+Requests to buy a book in the inventory. +
+Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 
-After SoldBook is created, the inventory book will be updated through `Model#updateBook()`, `Model#updateFilteredBookList()` and `Model#commitBookInventory()` to store the latest quantity of books left.
+****
+*   Students may indicate interest by requesting an item of a certain ISBN.
+•	The email given helps bookstore owners confirm order with requester. It is up to the owner's’ preference to decide whether he/she wishes to accept the request.
+•	Possible reasons may include: Item is not a book, item not found in bookstore (Unable to find stock), quantity demanded too high.
+•	Note: This app does not have an automatic email response from owner. Thus, it depends on the owner’s personal preference to decide if he/she wishes to reply.
+****
 
-==== Design Considerations
+=== Deleting a request : `deleterequest`
 
-===== Aspect: How sell command is implemented
+Deletes the specified request from the request list. Strictly for bookstore owners. +
+Format: `deleterequest INDEX`
 
-* **Alternative 1 (current choice):** Decreases quantity in the Quantity Class.
-** Pros: Code is more cohesive.
-** Cons: Adds more code to Quantity Class
-* **Alternative 2:** Decreases quantity in the Book Class.
-** Pros: Does not need to edit Quantity Class.
-** Cons: Code becomes less cohesive.
-// end::sellcommand[]
+Examples:
+
+* `deleterequest 2` +
+Deletes the 2nd request in the displayed request list.
+
+Examples:
+
+•	`request` i/978-2-12-345680-3 e/johnd@gmail.com q/5
+
+Requests for 5 same books with the corresponding iSBN13 with requester’s email eg. johnd@gmail.com
+
+== Contributions to the Developer Guide
+
+|===
+|_This segment is an elaborate technical documentation which illustrates the insights on the technical depth of my contributions to the project._
+|===
 
 // tag::Request[]
 === Request feature
