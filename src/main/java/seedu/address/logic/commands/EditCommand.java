@@ -28,8 +28,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTable;
 import seedu.address.model.tag.Tag;
-import seedu.address.security.SecurityAuthenticationException;
-
 
 /**
  * Edits the details of an existing person in the address book.
@@ -72,13 +70,8 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history)
-            throws CommandException, SecurityAuthenticationException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        if (model.getUser() == null) {
-            throw new SecurityAuthenticationException();
-        }
 
         List<Person> lastShownList = model.getFilteredPersonList();
 

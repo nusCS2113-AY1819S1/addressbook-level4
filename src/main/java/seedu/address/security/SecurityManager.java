@@ -7,6 +7,8 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.logic.LoginEvent;
 import seedu.address.commons.events.logic.RegisterSuccessEvent;
+import seedu.address.commons.events.security.GetAuthenticationEvent;
+import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
 import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
@@ -102,5 +104,10 @@ public class SecurityManager extends ComponentManager implements Security {
             break;
 
         }
+    }
+
+    @Subscribe
+    public void handleGetAuthenticationEvent(GetAuthenticationEvent e) {
+        raise(new GetAuthenticationReplyEvent(isAuthenticated));
     }
 }

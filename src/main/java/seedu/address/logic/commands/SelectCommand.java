@@ -12,7 +12,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Selects a person identified using it's displayed index from the address book.
@@ -42,13 +41,8 @@ public class SelectCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history)
-            throws CommandException, SecurityAuthenticationException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        if (model.getUser() == null) {
-            throw new SecurityAuthenticationException();
-        }
 
         if (targetIndex == null) {
             model.updateTimeTable(model.getUser().getTimeTable());

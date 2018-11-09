@@ -11,7 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Friend;
 import seedu.address.model.person.Person;
-import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Allows user to befriend a user from the others list, add a user to their friend list
@@ -34,13 +33,8 @@ public class FriendCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history)
-            throws CommandException, SecurityAuthenticationException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        if (model.getUser() == null) {
-            throw new SecurityAuthenticationException();
-        }
 
         List<Person> otherList = model.getOtherList(model.getUser());
 

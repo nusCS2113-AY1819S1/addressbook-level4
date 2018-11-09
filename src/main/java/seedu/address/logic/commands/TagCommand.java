@@ -7,7 +7,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.TagsContainsKeywords;
-import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Find and display the persons with the same tag
@@ -30,13 +29,8 @@ public class TagCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history)
-            throws CommandException, SecurityAuthenticationException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        if (model.getUser() == null) {
-            throw new SecurityAuthenticationException();
-        }
 
         model.updateFilteredPersonList(tagsKeywords);
         model.updateFriendList(tagsKeywords);
