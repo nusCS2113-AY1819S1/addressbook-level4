@@ -119,11 +119,7 @@ public class RegistrationWindow extends UiPart<Stage> {
                     + " " + PREFIX_PASSWORD + passwordTextField.getText() + " " + PREFIX_EMAIL
                     + emailTextField.getText() + " " + PREFIX_PHONE + phoneTextField.getText() + " "
                     + PREFIX_ADDRESS + addressTextField.getText());
-        } catch (CommandException e) {
-            label.setText(e.getMessage());
-        } catch (ParseException e) {
-            label.setText(e.getMessage());
-        } catch (SecurityAuthenticationException e) {
+        } catch (CommandException | ParseException | SecurityAuthenticationException e) {
             label.setText(e.getMessage());
         }
     }
