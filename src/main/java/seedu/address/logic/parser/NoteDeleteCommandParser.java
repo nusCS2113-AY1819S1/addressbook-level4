@@ -62,11 +62,8 @@ public class NoteDeleteCommandParser implements Parser<NoteDeleteCommand> {
 
         Set<Integer> indexListWithoutDuplicates = new HashSet<>(indexList);
 
-        if (indexListWithoutDuplicates.size() < indexList.size()) {
-            throw new ParseException(NoteDeleteCommand.MESSAGE_DUPLICATE_INDEX_FOUND);
-        } else {
-            indexList.sort(Collections.reverseOrder());
-        }
+        indexList = new ArrayList<>(indexListWithoutDuplicates);
+        indexList.sort(Collections.reverseOrder());
 
         return new NoteDeleteCommand(indexList);
     }
