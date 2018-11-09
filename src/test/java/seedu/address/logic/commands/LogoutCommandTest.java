@@ -297,6 +297,11 @@ public class LogoutCommandTest {
         private boolean loginStatus = false;
 
         @Override
+        public boolean hasProductName(String name) {
+            return false;
+        }
+
+        @Override
         public ArrayList<Reminder> getAllReminders() {
             return null;
         }

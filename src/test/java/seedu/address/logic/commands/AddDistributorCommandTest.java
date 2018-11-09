@@ -148,6 +148,11 @@ public class AddDistributorCommandTest {
         }
 
         @Override
+        public boolean hasProductName(String name) {
+            return false;
+        }
+
+        @Override
         public void deleteDistributor(Distributor target) {
 
         }
