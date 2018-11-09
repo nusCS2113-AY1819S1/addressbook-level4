@@ -35,34 +35,25 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         String[] splittedArgumentsArray = trimmedArgs.split("\\s+");
-        List<String> argumentsList = new ArrayList<String>(Arrays.asList(splittedArgumentsArray));
+        List<String> argumentsList = new ArrayList<>(Arrays.asList(splittedArgumentsArray));
 
-        if (!hasValidInputFormat(argumentsList)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
+        int sizeOfList = argumentsList.size();
 
         if (isExcludeTagSearch(argumentsList)) {
-            removesFirstTwoItemsFromArgumentsList(argumentsList);
-            return new FindTagSubCommand(new TagContainsKeywordsPredicate(argumentsList), true);
+            List<String> keywordsList = argumentsList.subList(2, sizeOfList);
+            return new FindTagSubCommand(new TagContainsKeywordsPredicate(keywordsList), true);
         } else if (isIncludeTagSearch(argumentsList)) {
-            argumentsList.remove(0);
-            return new FindTagSubCommand(new TagContainsKeywordsPredicate(argumentsList));
+            List<String> keywordsList = argumentsList.subList(1, sizeOfList);
+            return new FindTagSubCommand(new TagContainsKeywordsPredicate(keywordsList));
         } else if (isExcludePersonSearch(argumentsList)) {
-            argumentsList.remove(0);
-            return new FindNameSubCommand(new NameContainsKeywordsPredicate(argumentsList), true);
-        } else {
+            List<String> keywordsList = argumentsList.subList(1, sizeOfList);
+            return new FindNameSubCommand(new NameContainsKeywordsPredicate(keywordsList), true);
+        } else if (isIncludeNameSearch(argumentsList)) {
             return new FindNameSubCommand(new NameContainsKeywordsPredicate(argumentsList));
         }
-    }
 
-    private boolean isExcludePersonSearch(List<String> argumentsList) {
-        return argumentsList.size() >= 1 && argumentsList.get(0).equals(EXCLUDE_OPTION_STRING);
-    }
-
-    private boolean isIncludeTagSearch(List<String> argumentsList) {
-        return argumentsList.size() >= 2 && argumentsList.get(0).equals(TAG_OPTION_STRING)
-                && !argumentsList.get(1).equals(EXCLUDE_OPTION_STRING);
+        throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     /**
@@ -70,43 +61,23 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Exclude Tag Search has to be executed.
      */
     private boolean isExcludeTagSearch(List<String> argumentsList) {
-        return argumentsList.size() >= 2 && (argumentsList.get(0).equals(TAG_OPTION_STRING)
-                && argumentsList.get(1).equals(EXCLUDE_OPTION_STRING)
-                || argumentsList.get(0).equals(EXCLUDE_OPTION_STRING)
-                && argumentsList.get(1).equals(TAG_OPTION_STRING));
-    }
-
-    /**
-     * Returns false if the user's input is in the incorrect format
-     */
-    private boolean hasValidInputFormat(List<String> argumentsList) {
-        if (hasTagOptionStringWithNoKeywords(argumentsList)) {
-            return false;
-        } else if (hasExcludeOptionStringWithNoKeywords(argumentsList)) {
-            return false;
-        } else if (hasTagAndExcludeOptionStringWithNoKeywords(argumentsList)) {
-            return false;
-        }
-        return true;
-    }
-
-    private boolean hasExcludeOptionStringWithNoKeywords(List<String> argumentsList) {
-        return argumentsList.get(0).equals(EXCLUDE_OPTION_STRING) && argumentsList.size() == 1;
-    }
-
-    private boolean hasTagAndExcludeOptionStringWithNoKeywords(List<String> argumentsList) {
-        return argumentsList.size() == 2 && (argumentsList.get(0).equals(TAG_OPTION_STRING)
+        return argumentsList.size() > 2 && (argumentsList.get(0).equals(TAG_OPTION_STRING)
                 && argumentsList.get(1).equals(EXCLUDE_OPTION_STRING) || argumentsList.get(1).equals(TAG_OPTION_STRING)
                 && argumentsList.get(0).equals(EXCLUDE_OPTION_STRING));
     }
 
-    private boolean hasTagOptionStringWithNoKeywords(List<String> argumentsList) {
-        return argumentsList.get(0).equals(TAG_OPTION_STRING) && argumentsList.size() == 1;
+    private boolean isExcludePersonSearch(List<String> argumentsList) {
+        return argumentsList.size() > 1 && argumentsList.get(0).equals(EXCLUDE_OPTION_STRING)
+                && !argumentsList.get(1).equals(TAG_OPTION_STRING);
     }
 
-    private void removesFirstTwoItemsFromArgumentsList(List<String> argumentsList) {
-        assert argumentsList.size() >= 2;
-        argumentsList.remove(1);
-        argumentsList.remove(0);
+    private boolean isIncludeTagSearch(List<String> argumentsList) {
+        return argumentsList.size() > 1 && argumentsList.get(0).equals(TAG_OPTION_STRING)
+                && !argumentsList.get(1).equals(EXCLUDE_OPTION_STRING);
+    }
+
+    private boolean isIncludeNameSearch(List<String> argumentsList) {
+        return argumentsList.size() > 0 && !argumentsList.get(0).equals(TAG_OPTION_STRING)
+                && !argumentsList.get(0).equals(EXCLUDE_OPTION_STRING);
     }
 }
