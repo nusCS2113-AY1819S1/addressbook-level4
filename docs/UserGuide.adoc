@@ -50,7 +50,7 @@ image::Ui.png[width="790"]
 Format: `help`
 
 === Student and Course Management
-
+// tag::studandcoursemanagement[]
 ==== Add a course : `course add`
 Adds a student to the system. +
 Format: course_add n/COURSE_NAME c/COURSE_CODE f/FACULTY_NAME
@@ -145,7 +145,7 @@ Examples:
 * `student export C:\export`
 Exports all students in .csv format to the 'export' folder in C drive.
 
-
+// end::studandcoursemanagement[]
 
 
 === Module Management
@@ -405,15 +405,17 @@ Examples:
 * `class listattendance cn/T16 mc/CG1111` +
 Displays the class attendance list for the class T16 for the module CG1111
 // end::classmanagementdepth[]
-=== Grade Management
-==== Add Grade Component : `gradebook add`
+
+// tag::gradebook[]
+=== Gradebook Management
+==== Add Gradebook Component : `gradebook add`
 Creates a grade item to a module code. +
 Format: `gradebook add mc/MODULE_CODE cn/COMPONENT_NAME [mm/MAX_MARKS] [w/WEIGHTAGE]`
 
 ****
 * Inputs are case sensitive.
 * Module code must exist
-* Component name must not already exist in Trajectory.
+* http://Component[Component] name must not already exist in Trajectory.
 * Accumulated weightage for grade components in module cannot exceed 100%.
 * Weightage can be 0 for grade components like Mock Practical Exam.
 ****
@@ -423,8 +425,8 @@ Examples:
 * `gradebook add mc/CS2113 cn/Assignment 1 mm/60` +
 Adds gradebook component, Assignment 1 with maximum marks of 60, to module CS2040C.
 
-==== Edit Grade Component : `gradebook edit`
-Edits a grade item. +
+==== Edit Gradebook Component : `gradebook edit`
+Edits a gradebook item. +
 Format: `gradebook edit mc/MODULE_CODE cn/COMPONENT_NAME [ei/EDITED_COMPONENT_NAME] [mm/EDITED_MAX_MARKS] [w/EDITED_WEIGHTAGE]`
 
 ****
@@ -441,8 +443,8 @@ Updated component name for CS2040C Assignment 1 to Finals.
 * `gradebook edit mc/CS2113 cn/Assignment 1 mm/60 w/50` +
 Updated maximum marks and weightage of Assignment 1 in CS2113 to 60 and 50% respectively.
 
-==== Remove Grade Component : `gradebook delete`
-Removes a grade item to a module code. +
+==== Remove Gradebook Component : `gradebook delete`
+Removes a gradebook item to a module code. +
 Format: `gradebook delete mc/MODULE_CODE cn/COMPONENT_NAME`
 
 ****
@@ -455,7 +457,7 @@ Examples:
 * `gradebook delete mc/CS2113 cn/Assignment 1` +
 Deletes Assignment 1 from module CS2113.
 
-==== Find Grade Component : `gradebook find`
+==== Find Gradebook Component : `gradebook find`
 Finds gradebook component. +
 Format: `gradebook find mc/MODULE_CODE cn/COMPONENT_NAME`
 
@@ -469,15 +471,18 @@ Examples:
 * `gradebook find mc/CS2113 cn/Assignment 1` +
 Finds Assignment 1 to module CS2113.
 
-==== List Grade Components : `gradebook list`
-Lists all the grade items in a certain module. +
+==== List Gradebook Components : `gradebook list`
+Lists all the gradebook items in a certain module. +
 Format: `gradebook list`
 
 Examples:
 
 * `gradebook list` +
-Lists all the grade items found in Trajectory.
+Lists all the gradebook items found in Trajectory.
+// end::gradebook[]
 
+// tag::grade[]
+=== Grade Management
 ==== List Students Grades : `grade list`
 Lists grades of all students enrolled in all modules. +
 Format: `grade list`
@@ -485,7 +490,7 @@ Format: `grade list`
 Examples:
 
 * `grade list` +
-Lists all students grades recorded in Trajectory.
+Lists all students grades recorded in Trajectory. +
 
 ==== Add Student Grade : `grade add`
 Assigns marks to a student. +
@@ -517,6 +522,7 @@ Examples:
 
 * `grade graph mc/CS2113 cn/Finals` +
 Displays graph which shows result of 'Finals' grade component of all CS2113 students.
+// end::grade[]
 
 // tag::notesmanagementdepth[]
 === Notes Management
@@ -673,6 +679,7 @@ _{explain how the user can enable/disable data encryption}_
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
 == Command Summary
+// tag::studandcoursemanagementsummary[]
 * *Add course* : `course add c/COURSE_CODE n/COURSE_NAME f/FACULTY_NAME` +
 e.g. `course add c/CEG n/Computer Engineering f/FoE`
 * *Delete course* : `course delete c/COURSE_CODE` +
@@ -690,7 +697,7 @@ e.g. `student find Megan Nicole`
 e.g. `student delete 2`
 * *Export students [COMING IN V1.4]* : `student export` +
 e.g. `student export C:\export`
-
+// end::studandcoursemanagementsummary[]
 * *Add module* : `module add mc/MODULE_CODE mn/MODULE_NAME` +
 e.g. `module add mc/CS2113 mn/Software Engineering`
 * *Update module* : `module edit mc/MODULE_CODE​ mn/MODULE_NAME` +
@@ -702,6 +709,7 @@ e.g. `module view mc/CS2113`
 * *Find module by module code* : `module find KEYWORD [MORE_KEYWORDS]​` +
 e.g. `module find cs2113 structures`
 * *List modules* : `module list​` +
+
 * *Enrol student in module* : `module enrol mc/MODULE_CODE i/MATRIC_NUMBER…​` +
 e.g. `module enrol mc/CS2113 i/A0167263X i/A0179821B`
 * *Archive module* : `module archive mc/MODULE_CODE​` `[coming in v1.4]` +
@@ -709,22 +717,35 @@ e.g. `module archive mc/CS2113`
 * *Assign TA* : `module assign mc/MODULE_CODE [i/MATRIC_NUMBER] [e/EMAIL]` `[coming in v2.0]` +
 e.g. `module assign mc/CS2113 i/A0171234B`
 
-* *Add Grade Component* : `gradebook add mc/MODULE_CODE cn/COMPONENT_NAME [mm/MAX_MARKS] [w/WEIGHTAGE]` +
+* *Archive module* : `module archive c/MODULE_CODE​` +
+e.g. `module archive c/CS2113`
+* *Enrol student in module* : `module enrol [i/MATRIC_NUMBER]…​ [e/EMAIL]…​​` +
+e.g. `module enrol i/A0167263X i/A0179821B`
+* *Assign TA* : `module assign [i/MATRIC_NUMBER] [e/EMAIL]` +
+e.g. `module assign i/A0171234B`
+
+// tag::gradebookcommandsummary[]
+* *Add Gradebook Component* : `gradebook add mc/MODULE_CODE cn/COMPONENT_NAME [mm/MAX_MARKS] [w/WEIGHTAGE]` +
 e.g. `gradebook add mc/CS2113 cn/Assignment 1 mm/60`
-* *Edit Grade Component* : `gradebook edit mc/MODULE_CODE cn/COMPONENT_NAME [en/EDITED_COMPONENT_NAME] [mm/EDITED_MAX_MARKS] [w/EDITED_WEIGHTAGE]` +
+* *Edit Gradebook Component* : `gradebook edit mc/MODULE_CODE cn/COMPONENT_NAME [en/EDITED_COMPONENT_NAME] [mm/EDITED_MAX_MARKS] [w/EDITED_WEIGHTAGE]` +
 e.g. `gradebook edit mc/CS2113 cn/Assignment 1 en/Finals`
-* *Delete Grade Component* : `gradebook delete mc/MODULE_CODE cn/COMPONENT_NAME` +
+* *Delete Gradebook Component* : `gradebook delete mc/MODULE_CODE cn/COMPONENT_NAME` +
 e.g. `gradebook delete mc/CS2113 cn/Assignment 1`
-* *List Grade Components* : `gradebook list` +
+* *List Gradebook Components* : `gradebook list` +
 e.g. `gradebook list`
-* *Find Grade Components* : `gradebook find mc/MODULE_CODE cn/COMPONENT_NAME` +
+* *Find Gradebook Components* : `gradebook find mc/MODULE_CODE cn/COMPONENT_NAME` +
 e.g. `gradebook find mc/CS2113 cn/Assignment 1`
+// end::gradebookcommandsummary[]
+
+// tag::gradecommandsummary[]
 * *List Students Grades* : `grade list` +
 e.g. `grade list`
 * *Add Student Grade* : `grade add mc/MODULE_CODE cn/COMPONENT_NAME i/MATRIC_NO m/MARKS` +
 e.g. `grade add mc/CS2113 cn/Assignment 1 i/A0167789S m/50`
 * *Display Graph of Student Grades* : `grade graph mc/MODULE_CODE cn/COMPONENT_NAME` +
 e.g. `grade graph mc/CS2113 cn/Finals`
+// end::gradecommandsummary[]
+
 * *Creating a class* `class add cn/CLASS_NAME mc/MODULE_CODE e/ENROLLMENT_SIZE` +
 e.g. `class add cn/T16 mc/CG1111 e/20`
 * *List class* `class list` +
