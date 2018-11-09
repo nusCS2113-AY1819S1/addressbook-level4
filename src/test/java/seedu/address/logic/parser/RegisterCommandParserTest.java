@@ -30,6 +30,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seedu.address.logic.commands.RegisterCommand;
@@ -43,6 +44,11 @@ import seedu.address.testutil.PersonBuilder;
 public class RegisterCommandParserTest {
 
     private RegisterCommandParser parser = new RegisterCommandParser();
+
+    @BeforeClass
+    public static void init() {
+        RegisterCommandParserHelper help = new RegisterCommandParserHelper();
+    }
 
     @Test
     public void parse_allFieldsPresent_success() {
