@@ -19,7 +19,9 @@ endif::[]
 
 == Overview
 
-Event Manager is a desktop application used for managing events in the Halls and Residential Colleges of NUS. The user interacts with it using a Command Line Interface, alongside a Graphical User Interface written using JavaFX. It is written in Java, and has about 10 thousand lines of code.
+Event Manager is a desktop application used for managing events in the Halls and Residential Colleges of NUS. Our application is primarily designed to aid residents in staying engaged and up-to-date with events happening within their community.
+
+The user interacts with the Event Manager using a Command Line Interface, alongside a Graphical User Interface written using JavaFX. It is written in Java, and has about 10 thousand lines of code.
 
 This document serves as a summary of my contributions to the Event Manager project and highlights both my technical skills in software engineering and my non-technical skills in writing documentation for a product.
 
@@ -65,3 +67,4 @@ include::../UserGuide.adoc[tag=authentication]
 
 include::../DeveloperGuide.adoc[tag=authentication]
 
+include::../DeveloperGuide.adoc[tag=authenticationUsecase]

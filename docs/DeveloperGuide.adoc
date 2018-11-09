@@ -279,13 +279,20 @@ image::AuthenticationDiagram.png[width="800"]
 [NOTE]
 If an authentication fails, i.e. credentials are wrong or do not exist in the JSON file, the `login` command will throw a `CommandException`.
 
-[NOTE]
+[IMPORTANT]
 Only one admin account is registered at any given time, with `admin` and `root` being used as username and password respectively.
 
 ==== Password encryption
 Allows passwords to be encrypted instead of being stored as plain text. Password encryption and validating is done through the `PasswordUtil` class using the _PBKDF2WithHmacSHA1_ encryption algorithm. +
 
 The encrypted password consists of a randomly generated salt and a hash generated from the plain text password, both converted to hexadecimal before being stored inside `users.json`.
+
+==== Design Considerations
+* Instead of encrypting each user's password, we initially considered encrypting the entire `users.json` file instead. However, after careful consideration, we decided that it would be sub-optimal due to the
+inefficiency of having to constantly encypt and decrypt the files while the application is running.
+* Instead of having the authentication feature being a part of the `logic` component, we initially considered having `authentication` as a component of its own, which precedes the entire running of the `MainApp`. However,
+we decided that it would introduce redundancies in the codebase as it requires rewriting a handful of functionalities that are already present within the `logic` component, thus we opted for our current implementation.
+
 // end::authentication[]
 
 // tag::undoredo[]
@@ -1232,6 +1239,7 @@ _{More to be added}_
 
 For all the use cases below, System refers to the EventManager, Actor refers to the admin/user.
 
+// tag::authenticationUsecase[]
 [discrete]
 === Use Case: Authentication
 *MSS*
@@ -1247,6 +1255,7 @@ Extensions: +
 [none]
 ** 2a1. Event Manager denies access to the user and displays error message. +
 Use Case resumes at step 1.
+// end::authenticationUsecase[]
 
 *Use Case: View events, RSVP and Reminders* +
 *MSS* +
