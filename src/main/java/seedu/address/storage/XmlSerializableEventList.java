@@ -12,6 +12,8 @@ import seedu.address.model.EventList;
 import seedu.address.model.ReadOnlyEventList;
 import seedu.address.model.event.Event;
 
+//@@author: IcedCoffeeBoy
+
 /**
  * An Immutable EventList that is serializable to XML format
  */

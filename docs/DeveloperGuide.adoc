@@ -267,7 +267,7 @@ image::SortSequenceDiagram.png[width="650"]
 // end::Sorting[]
 
 
-// tag:: Invite[]
+// tag::Invite[]
 === Invite feature
 
 ==== Current Implementation
@@ -277,7 +277,7 @@ The command currently only allows users to add a single person to an event, base
 This command adds the invited `Person` 's email, which is unique, to a chosen `Event`, so that the attendees of a particular event is recorded.
 This command only executes successfully if the event does not not clash with the person's schedule.
 
-The adding of attendees is facilitated by the class: `Attendees`, a list of names of type `String`.
+The adding of attendees is facilitated by the class: `Attendees`, a list of emails of type `String`.
 
 The following is a more detailed description of the class:
 
@@ -290,7 +290,9 @@ Storing only the *email* of `Person` in the `Attendees` object of `Event` saves 
 
 Given below is an illustration to describe the detection of whether two events clash, which is facilitated by the method `hasClash` in `Event`:
 
-Implementation of RemoveCommand is similar to InviteCommand, but removes persons from attendees of events instead.
+
+
+Implementation of `RemoveCommand` is similar to `InviteCommand`, but removes persons from attendees of events instead.
 
 ==== Execution of Command
 
@@ -306,11 +308,15 @@ Step 4. `Logic Manager` then executes this `InviteCommand` by calling `InviteCom
 
 Step 5. The filtered person list and event list is first obtained by calling `PersonModel#getFilteredPersonList` and `EventModel#getFilteredEventList`. Based on the indices, the `Person` and `Event` is selected.
 
-Step 6. Next, the `Person` object's name is obtained and added to the obtained `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
+Step 6. Next, the `Person` object's email is obtained by calling `Person#getEmail`
 
-Step 7. The new `Event` object is updated to the model by calling `Model#updateEvent`.
+Step 7. Two steps of verification is required before the person is invited to the event. First, `Event#hasAttendee` checks whether the person is already invited to the event. Secondly, `Model#hasClash` checks whether the event clashes with the person's schedule.
 
-Step 8. The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
+Step 8. After verification, the person's email is added to the obtained `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
+
+Step 9. The new `Event` object is updated to the model by calling `Model#updateEvent`.
+
+Step 10. The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
 
 The sequence diagram below illustrates the execution of the `invite` command.
 
@@ -320,17 +326,13 @@ image::InviteSequenceDiagram.png[width="800"]
 
 ===== Aspect: How to link `Person` and `Event`
 
-* **Alternative 1 (current choice):** Saves only the names of the Persons in the Attendees of Events.
+* **Alternative 1 (current choice):** Saves only the emails of the Persons in the Attendees of Events.
 ** Pros: Saves space. Able to filter EventList easily.
 ** Cons: Requires going through the entire list of AddressBook to obtain details of persons attending the particular event.
 
 * **Alternative 2:** Saves the entire information of Events for each Persons.
 ** Pros: Fast access to information of Events attended by any Persons.
 ** Cons: Takes up a lot of storage space and memory. Many repeated items within the storage files.
-
-* **Alternative 3:** Assign an ID to each Persons and store in Attendees of Events.
-** Pros: Able to edit names in a straightforward coding manner.
-** Cons: We must add or assign an ID during creation of Person. This may require some refactoring of the current code base. Unnecessary if name is unique and uneditable.
 
 ===== Aspect: Data structure to support `invite` command
 
@@ -344,7 +346,7 @@ image::InviteSequenceDiagram.png[width="800"]
 
 ==== Future Improvements
 
-===== Adding multiple persons to an event
+===== Adding entire department or multiple persons to an event
 
 The current `invite` command only invites one person to a chosen event based on the index chosen. This feature can be further extended to enable inviting more than one person or an entire department to an event.
 One possible way to to implement this is to have the user
@@ -358,6 +360,48 @@ The same concept can also be applied to events, being able to invite one person 
 
 Implementation of this additional feature would require changes to both `InviteCommandParser` and `InviteCommand#execute`. Additionally, handling of clashing events needs to be considered as it now involves more than one participants.
 // end::Invite[]
+
+// tag::Select[]
+=== Select feature
+
+==== Current Implementation
+The `select` command allows users to view the event schedules of an employee on a certain date, month, and year, or all of his/her events.
+The command currently only allows users to view the event of a single employee, based on the indices of the employee list on the UI.
+This command only executes successfully if the input index is valid (not out of bound).
+
+The command is facilitated by the class: `Attendees`, a list of emails of type `String`, as described in Section 3.2.1.
+
+==== Execution of Command
+Given below is an example usage scenario and how the `select` mechanism works.
+
+Step 1. The user inputs `select 1 y/2018 m/06` to select the 1st person in the address book and view his/her event schedule on June 2018.
+
+Step 2. The command text is passed to an instance of the `LogicManager` class.
+
+Step 3. The `LogicManager` instance calls `AddressBookParser#parsecommand`, which parses the `select` command phrase.
+
+Step 3. `InviteCommandParser#parse` parses the person and date parameter(optional). Depending on whether the date parameter is inputted,  an instance of the `Select` encapsulating the relevant information is then returned.
+
+Step 4. `Logic Manager` then executes this `SelectCommand` by calling `SelectCommand#execute`.
+
+Step 5. The filtered person list is first obtained by calling `PersonModel#getFilteredPersonList`. Based on the index, the `Person` is selected.
+
+Step 6. Next, the `Person` object's email is obtained by calling `Person#getEmail`
+
+Step 7a. If the user chose to view all the events of the person (e.g. `select 1`), an `AttendeeContainsEmailPredicate` object will be instantiated.
+
+Step 7b. If the user chose to view the events of the person on a certain time period (e.g. `select 1 y/2018 m/12`), an `EventContainsAttendeeAndDatePredicate` object will be instantiated.
+
+Step 8. The filtered event list is then updated by calling `Model#updateFilteredEventList` with the generated predicate.
+
+Step 9. The filtered event list is then sorted by calling `Model@sortByDate`.
+
+Step 10. The `SelectCommand#execute` finally returns a `CommandResult` with a success message.
+
+The sequence diagram below illustrates the execution of the `invite` command.
+
+
+// end::Select[]
 
 
 === List Feature
@@ -664,35 +708,50 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |New Project Manager|See usage instructions |Refer to instructions when I forget how to use the ProManage
 
-|`* * *` |Project Manager |Add a new person (Department Head or Employee) |To maintain a record of that person
+|`* * *` |Project Manager |Add a new person  |Maintain a record of that employee
 
-|`* * *` |Project Manager |Delete a person (Department Head or Employee) |Remove entries that I no longer need
+|`* * *` |Project Manager |Delete a person  |Remove employees that left the company
 
 |`* * *` |Project Manager |Edit a person's details |Change the relevant information
 
 |`* * *` |Project Manager |Find a person by name |Locate details of people without having to go through the entire list
 
+|`* * *` |Project Manager |Find a person by email |Locate people through their unique work email address
+
 |`* * *` |Project Manager |List the people in alphabetical order by name or by department |View the whole list of
 relevant people
 
-|`* * *` |Project Manager |Select a person |To know more information about the person
-
-|`* * *` |Project Manager |Add a new event |To maintain a record of that event
+|`* * *` |Project Manager |Add a new event |Maintain a record of that event
 
 |`* * *` |Project Manager |Delete an event |Remove events that are no longer relevant
 
 |`* * *` |Project Manager |Edit the information of an event |Update the relevant information
 
-|`* * *` |Project Manager |Invite department heads or employee to events |Tag the person to the relevant event
+|`* * *` |Project Manager |View an employee's events |To monitor my employee's event schedule
+
+|`* * *` |Project Manager |View a colleague's events |To monitor my colleague's event schedule before I plan an event
+
+|`* * *` |Project Manager |View an employee's events on a certain date, month or year |To view the employee's events on a certain date, month or year
+
+|`* * *` |Project Manager |View an underling's events on a certain date, month or year |To check what have my underlings have been busy with
+
+|`* * *` |Project Manager |View a colleague's events on a certain date, month or year |To check if he/she is free for an important meeting
+
+|`* * *` |Project Manager |Invite an employee to events |Add the person to the a department meeting
+
+|`* * *` |Project Manager |Invite an employee to events |Add the person to the a company outing
 
 |`* * *` |Project Manager |Remove people from the event |Remove irrelevant people from an event
 
+|`* * *` |Project Manager |Remove people from the event |Remove people who I accidentally invited
+
 |`* * *` |Project Manager |Find an event |Locate details of the event without having to look through the entire list
 
-|`* * *` |Project Manager |Select an event |To know more information about the event
+|`* * *` |Project Manager |Sort the event list by name |View the events by alphabetical order
 
-|`* * *` |Project Manager |Schedule for the time period |To have a calendar view of the events for that time period and
-to keep track/ Plan schedule properly
+|`* * *` |Project Manager |Sort the event list by time and date |View what are the more recent events of the event list
+
+|`* * *` |Project Manager |Select an event |To know more information about the event
 
 |`* * *` |Project Manager |History of commands |To view the commands previously inserted into ProManage
 
@@ -700,52 +759,23 @@ to keep track/ Plan schedule properly
 
 |`* * *` |Project Manager |Redo command |Redo my previously undo command
 
-|`* * *` |Project Manager |Exit command |
-
-|`* * *` |New Department Head|See usage instructions |Refer to instructions when I forget how to use the ProManage
-
-|`* * *` |Department Head |Add a new Employee |To maintain a record of that employee
-
-|`* * *` |Department Head |Delete an Employee |Remove entries that I no longer need
-
-|`* * *` |Department Head |Edit an employee's details |Change the relevant information
-
-|`* * *` |Department Head |Find an employee by name |Locate details of employees without having to go through the entire list
-
-|`* * *` |Department Head |List the people in alphabetical order by name or by department |View the whole list of
-relevant people
-
-|`* * *` |Department Head |Select an employee |To know more information about the employee
-
-|`* * *` |Department Head |Add a new event |To maintain a record of that event
-
-|`* * *` |Department Head |Delete an event |Remove events that are no longer relevant
-
-|`* * *` |Department Head |Edit the information of an event |Update the relevant information
-
-|`* * *` |Department Head |Invite employees to events |Tag the person to the relevant event
-
-|`* * *` |Department Head |Remove employees from the event |Remove uninvolved employees from an event
-
-|`* * *` |Department Head |Find an event |Locate details of the event without having to look through the entire list
-
-|`* * *` |Department Head |Select an event |To know more information about the event
-
-|`* * *` |Department Head |Schedule for the time period |To have a calendar view of the events for that time period and
-to keep track/ Plan schedule properly
-
-|`* * *` |Department Head |History of commands |To view the commands previously inserted into ProManage
-
-|`* * *` |Department Head |Undo command |Undo my previously entered command
-
-|`* * *` |Department Head |Redo command |Redo my previously undo command
-
-|`* * *` |Department Head |Exit command |
+|`* * *` |User |Exit command |
 
 |`* * *` |New Employee |See usage instructions |Refer to instructions when I forget how to use the ProManage
 
-|`* * *` |Employee |Schedule for the time period |To have a calendar view of the events for that time period and
-to keep track/ Plan schedule properly
+|`* * *` |Employee |Find a person by name |Locate details of people without having to go through the entire list
+
+|`* * *` |Employee |Find a person by email |Locate people through their unique work email address
+
+|`* * *` |Employee  |Sort the event list by name |View the events by alphabetical order
+
+|`* * *` |Employee  |Sort the event list by time and date |View what are the more recent events of the event list
+
+|`* * *` |Employee |View a colleague's events |To check out what have my colleague been up to
+
+|`* * *` |Employee |Invite my colleagues to events |Add persons to the selected event
+
+
 |=======================================================================
 
 _{More to be added}_
@@ -917,48 +947,77 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to add employees to events.
-2.  ProManage request employee name and event ID.
-3.  User enters employee name and event ID.
-4.  ProManage confirms result with user.
-5.  User confirms with ProManage.
-6. ProManage adds employees to events
+1.  User requests to add employee to events.
+2.  ProManage request employee details and event details.
+3.  User enters employee and event information.
+4.  ProManage adds employee to events
 
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. Invalid name or event ID.
-+
-[none]
+* 3a. Invalid employee.
 ** 3a1. AddressBook shows an error message.
+** Use case ends
 +
-Use case resumes at step 2.
+* 3b. Employee is not originally invited to event.
+** 3b1. AddressBook shows an error message.
+** Use case ends
++
+* 3c. Event has no attendees
+** 3c1. AddressBook shows an error message.
+** Use case ends
 
 [discrete]
 === Use case: Remove employees from events
 
 *MSS*
 
-1.  User requests to remove employees to events.
-2.  ProManage request employee name and event ID.
-3.  User enters employee name and event ID.
-4.  ProManage confirms result with user.
-5.  User confirms with ProManage.
-6. ProManage removes employees to events
+1.  User requests to remove employee from an event.
+2.  ProManage request employee details and event details.
+3.  User enters employee and event information.
+4.  ProManage remove employee from events
 
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. Invalid name or event ID.
-+
-[none]
+* 3a. Invalid employee.
 ** 3a1. AddressBook shows an error message.
+** Use case ends
 +
-Use case resumes at step 2.
+* 3b. Employee is already invited to event.
+** 3b1. AddressBook shows an error message.
+** Use case ends
++
+* 3c. Event conflicts with employee's schedule
+** 3c1. AddressBook shows an error message.
+** Use case ends
+
+[discrete]
+=== Use case: View an employee's schedule on a date/month/year
+
+*MSS*
+
+1.  User requests to view an employee's schedule.
+2.  ProManage request employee details and date details.
+3.  User enters employee and date information.
+4.  ProManage remove employee from events
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Invalid employee.
+** 3a1. AddressBook shows an error message.
+** Use case ends
++
+* 3b. Invalid date format
+** 3b1. AddressBook shows an error message.
+** Use case ends
 
 
 _{More to be added}_

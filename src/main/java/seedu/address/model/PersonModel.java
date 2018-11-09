@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
 
@@ -73,4 +74,11 @@ public interface PersonModel {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     *
+     * @param email email input
+     * @return the person who has the same email as input
+     */
+    Person getPerson(Email email);
 }

@@ -72,11 +72,14 @@ public class SelectCommand extends Command {
         if (type == TimeType.NONE) {
             AttendeeContainsEmailPredicate predicateNoDateFilter = new AttendeeContainsEmailPredicate(personEmail);
             model.updateFilteredEventList(predicateNoDateFilter);
-        } else {
+        } else if (type == TimeType.DAY || type == TimeType.MONTH
+                || type == TimeType.YEAR || type == TimeType.MONTH_AND_YEAR) {
             assert date != null;
             EventContainsAttendeeAndDatePredicate predicateWithDateFilter =
                     new EventContainsAttendeeAndDatePredicate(personEmail, date, type);
             model.updateFilteredEventList(predicateWithDateFilter);
+        } else {
+            throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
 
         model.sortByDate();

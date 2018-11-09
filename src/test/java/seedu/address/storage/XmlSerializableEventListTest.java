@@ -14,6 +14,8 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.EventList;
 import seedu.address.testutil.TypicalEvents;
 
+//@@author: IcedCoffeeBoy
+
 public class XmlSerializableEventListTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlSerializableEventListTest");

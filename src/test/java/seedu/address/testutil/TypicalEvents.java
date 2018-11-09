@@ -92,4 +92,60 @@ public class TypicalEvents {
 
         return eventList;
     }
+
+    public static EventList getAllTypicalEventList() {
+        EventList eventList = new EventList();
+        eventList.addEvent(EVENT_1);
+        eventList.addEvent(EVENT_2);
+        eventList.addEvent(EVENT_3);
+        eventList.addEvent(EVENT_4);
+        eventList.addEvent(EVENT_5);
+
+        return eventList;
+    }
+
+    public static EventList getSortByNameEventList() {
+        EventList eventList = new EventList();
+        eventList.addEvent(EVENT_1);
+        eventList.addEvent(EVENT_2);
+        eventList.addEvent(EVENT_3);
+        eventList.addEvent(EVENT_4);
+        eventList.addEvent(EVENT_5);
+
+        return eventList;
+    }
+
+    public static EventList getSortByDateEventList() {
+        EventList eventList = new EventList();
+        eventList.addEvent(EVENT_4);
+        eventList.addEvent(EVENT_3);
+        eventList.addEvent(EVENT_1);
+        eventList.addEvent(EVENT_2);
+        eventList.addEvent(EVENT_5);
+
+        return eventList;
+    }
+
+    public static EventList getSortByStartTimeEventList() {
+        EventList eventList = new EventList();
+        eventList.addEvent(EVENT_4);
+        eventList.addEvent(EVENT_5);
+        eventList.addEvent(EVENT_3);
+        eventList.addEvent(EVENT_1);
+        eventList.addEvent(EVENT_2);
+
+        return eventList;
+    }
+
+    public static EventList getSortByEndTimeEventList() {
+        EventList eventList = new EventList();
+        eventList.addEvent(EVENT_4);
+        eventList.addEvent(EVENT_5);
+        eventList.addEvent(EVENT_1);
+        eventList.addEvent(EVENT_2);
+        eventList.addEvent(EVENT_3);
+
+        return eventList;
+    }
+
 }
