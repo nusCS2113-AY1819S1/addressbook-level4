@@ -21,6 +21,7 @@ public class ParserUtil {
         + "less than 32";
     public static final String MESSAGE_INVALID_INDEX = "Index must be a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_HOURS = "Hour(s) must be an integer!";
+    public static final String MESSAGE_INVALID_RANK = "Rank must be a non-zero positive integer.";
     public static final String MESSAGE_EMPTY_DESCRIPTION = "Description is empty!";
     public static final String MESSAGE_EMPTY_DEFERRED_DAYS = "Deferred Days is empty!";
     public static final String MESSAGE_EMPTY_TITLE = "Title is empty!";
@@ -207,7 +208,11 @@ public class ParserUtil {
         String trimmedRank = rank.trim();
         if (trimmedRank.isEmpty()) {
             throw new ParseException(MESSAGE_EMPTY_RANK);
+        } else if (!isNonZeroUnsignedInteger(trimmedRank)) {
+            throw new ParseException(MESSAGE_INVALID_RANK);
         }
+
+
         return trimmedRank;
     }
 

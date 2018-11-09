@@ -62,14 +62,12 @@ public class AddMilestoneCommandParserTest {
                 ParserUtil.MESSAGE_INVALID_INDEX);
         //invalid milestone description, cannot be more longer than 40 characters
 
-        //TODO:zero rank and negative rank is found under AddMilestoneCommand instead of
-        //TODO: AddMilestoneCommandParser->parseRank, maybe that's why got error
         //invalid rank, cannot be zero
-        //assertParseFailure(parser, INDEX_DESC_1 + MILESTONE_DESCRIPTION_DESC_1 + INVALID_RANK_DESC_ZERO,
-        //        Rank.MESSAGE_RANK_CONSTRAINTS);
+        assertParseFailure(parser, INDEX_DESC_1 + MILESTONE_DESCRIPTION_DESC_1 + INVALID_RANK_DESC_ZERO,
+                ParserUtil.MESSAGE_INVALID_RANK);
         //invalid rank, cannot be negative integers
-        //assertParseFailure(parser, INDEX_DESC_1 + MILESTONE_DESCRIPTION_DESC_1 + INVALID_RANK_DESC_NEGATIVE,
-        //        Rank.MESSAGE_RANK_CONSTRAINTS);
+        assertParseFailure(parser, INDEX_DESC_1 + MILESTONE_DESCRIPTION_DESC_1 + INVALID_RANK_DESC_NEGATIVE,
+                ParserUtil.MESSAGE_INVALID_RANK);
         //empty index
         assertParseFailure(parser, EMPTY_INDEX_DESC + MILESTONE_DESCRIPTION_DESC_1 + RANK_DESC_1,
                 ParserUtil.MESSAGE_EMPTY_INDEX);
