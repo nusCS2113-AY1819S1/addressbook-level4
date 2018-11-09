@@ -80,7 +80,7 @@ public class ExcelUtil {
     private static final String INCOME_TITLE = "INCOME";
     private static final String OUTCOME_TITLE = "EXPENSE";
     private static final String TOTAL_MONEY = "TOTAL";
-    private static final String TAG_SEPARATOR = "...";
+    private static final String TAG_SEPARATOR = "  ... ";
 
     private static Logger logger = LogsCenter.getLogger(ExcelUtil.class);
 
@@ -305,7 +305,9 @@ public class ExcelUtil {
         Set<Tag> tagList = new HashSet<>();
         if (tagsString != null) {
             String processedTags = tagsString.replace(TAG_SEPARATOR, WHITE_SPACE + PREFIX_TAG);
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(processedTags, PREFIX_TAG);
+            System.out.println("TAG ADDED: " + PREFIX_TAG + processedTags);
+            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
+                    WHITE_SPACE + PREFIX_TAG + processedTags, PREFIX_TAG);
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         }
         return new Record(nameParse, dateParse, moneyFlow, tagList);
@@ -331,6 +333,7 @@ public class ExcelUtil {
      * Write Record data into Excel Sheet.
      */
     private static void writeDataIntoExcelSheetRecord (List<Record> records, XSSFSheet sheet) {
+        logger.info("----------------------------------------------------------START WRITE INTO EXCEL FILE");
         int rowNum = STARTING_INDEX;
         Row startingRow = sheet.createRow(rowNum);
         writeDataIntoCell(startingRow, FIRST_COLUMN, NAME_TITLE);
@@ -349,6 +352,8 @@ public class ExcelUtil {
                     stringBuilder.append(tag.tagName + TAG_SEPARATOR);
                 }
                 writeDataIntoCell(row, FOURTH_COLUMN, stringBuilder.toString()
+                        .substring(STARTING_INDEX, stringBuilder.toString().length() - LEFT_OUT_CHARACTER));
+                logger.info("---------------------Tag: " + stringBuilder.toString()
                         .substring(STARTING_INDEX, stringBuilder.toString().length() - LEFT_OUT_CHARACTER));
             }
         }

@@ -100,7 +100,6 @@ public class ExportExcelCommand extends Command {
         } else {
             message = Messages.MESSAGE_EXPORT_COMMAND_ERRORS;
         }
-
         return new CommandResult(message);
     }
 
