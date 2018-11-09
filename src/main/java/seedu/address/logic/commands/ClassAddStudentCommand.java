@@ -10,7 +10,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleManager;
+import seedu.address.model.person.Person;
 import seedu.address.model.student.StudentManager;
 
 /**
@@ -39,6 +41,7 @@ public class ClassAddStudentCommand extends Command {
     private static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
     private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
     private static final String MESSAGE_CLASSROOM_FULL = "The classroom is full!";
+    private static final String MESSAGE_INVALID_STUDENT_MODULE = "Student is not enrolled in module!";
 
     private Classroom classToAssignStudent;
     private final String className;
@@ -72,6 +75,12 @@ public class ClassAddStudentCommand extends Command {
 
         if (!studentManager.doesStudentExistForGivenMatricNo(matricNo)) {
             throw new CommandException(MESSAGE_INVALID_STUDENT);
+        }
+
+        Module module = moduleManager.getModuleByModuleCode(moduleCode);
+        Person student = studentManager.retrieveStudentByMatricNo(matricNo);
+        if (!moduleManager.isStudentEnrolledInModule(module, student)) {
+            throw new CommandException(MESSAGE_INVALID_STUDENT_MODULE);
         }
 
         classToAssignStudent = classroomManager.findClassroom(className, moduleCode);
