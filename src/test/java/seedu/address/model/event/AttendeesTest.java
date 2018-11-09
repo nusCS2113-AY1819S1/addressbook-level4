@@ -19,7 +19,6 @@ public class AttendeesTest {
 
     private Set<String> attendeesSetOne;
     private Set<String> attendeesSetTwo;
-    private Set<String> attendeesSetThree;
     private Set<String> attendeesSetNull;
     private Attendees attendeesOne;
     private Attendees attendeesTwo;
@@ -29,29 +28,20 @@ public class AttendeesTest {
     public void setup() {
         attendeesSetOne = new HashSet<>();
         attendeesSetTwo = new HashSet<>();
-        attendeesSetThree = new HashSet<>();
         attendeesSetNull = null;
 
         attendeesSetOne.add(VALID_EMAIL_AMY);
         attendeesSetTwo.add(VALID_EMAIL_BOB);
-        attendeesSetThree.add(VALID_EMAIL_BOB);
-        attendeesSetThree.add(VALID_EMAIL_CALVIN);
 
         attendeesOne = new Attendees(attendeesSetOne);
         attendeesTwo = new Attendees(attendeesSetTwo);
-        attendeesThree = new Attendees(attendeesSetThree);
+        attendeesThree = new Attendees(VALID_EMAIL_BOB, VALID_EMAIL_CALVIN);
     }
 
 
     @Test
     public void constructor_nullSingleSet_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Attendees(attendeesSetNull));
-    }
-
-    @Test
-    public void constructor_nullMultipleSet_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Attendees(attendeesSetOne,
-                attendeesSetTwo, attendeesSetNull));
     }
 
     @Test

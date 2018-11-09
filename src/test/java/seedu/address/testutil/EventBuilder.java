@@ -10,6 +10,7 @@ import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
+import seedu.address.model.util.SampleDataUtil;
 
 
 /**
@@ -109,6 +110,15 @@ public class EventBuilder {
      */
     public EventBuilder withAttendee(Set<String> attendeesSet) {
         this.attendees = new Attendees(attendeesSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Attendees} of the {@code Event} that we are building.
+     */
+    public EventBuilder withAttendee(String... strings) {
+        Set<String> set = SampleDataUtil.getAttendeeSet(strings);
+        this.attendees = new Attendees(set);
         return this;
     }
 

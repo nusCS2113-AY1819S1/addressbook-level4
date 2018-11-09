@@ -34,9 +34,6 @@ This project portfolio documents my contributions to the development of the CS21
 ** Project management:
 *** Managed releases `v1.1` - `v1.3.2` (6 releases) on GitHub
 *** Managed the issue tracker and project dashboard on GitHub
-//** Enhancements to existing features:
-//*** Updated the GUI color scheme
-//*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
 *** Updated the User Guide for Practical Exam 1: https://github.com/CS2113-AY1819S1-T16-2/main/pull/84[#84] https://github.com/CS2113-AY1819S1-T16-2/main/pull/85[#85]
 *** Updated the Developer Guide to include `invite` command: https://github.com/CS2113-AY1819S1-T16-2/main/pull/58[#58]

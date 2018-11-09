@@ -10,6 +10,7 @@ import seedu.address.logic.parser.ManagerParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
 
+
 /**
  * Login the person into ProManage
  */
@@ -26,7 +27,6 @@ public class LoginCommand extends Command {
     private static final String MESSAGE_SUCCESS = "Successfully login as %s";
 
     private String loginIdentity;
-
     /**
      * type == 1 -> argument is an email, there is a need to check if email is present in addressbook and check the
      * person's designation to see whether the person is a manager or employee

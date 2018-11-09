@@ -18,6 +18,7 @@ import seedu.address.model.event.TimeType;
  */
 public class SelectCommandParser implements Parser<SelectCommand> {
 
+    public static final String MESSAGE_INVALID_PREFIX = "m/ or y/ should not be used if date/ is used";
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand
      * and returns an SelectCommand object for execution.
@@ -40,6 +41,10 @@ public class SelectCommandParser implements Parser<SelectCommand> {
         boolean hasDate = argMultimap.getValue(PREFIX_DATE).isPresent();
         boolean hasMonth = argMultimap.getValue(PREFIX_MONTH).isPresent();
         boolean hasYear = argMultimap.getValue(PREFIX_YEAR).isPresent();
+
+        if (hasDate && (hasMonth || hasYear)) {
+            throw new ParseException(MESSAGE_INVALID_PREFIX);
+        }
 
         if (!hasDate && !hasMonth && !hasYear) {
             return new SelectCommand(index);
