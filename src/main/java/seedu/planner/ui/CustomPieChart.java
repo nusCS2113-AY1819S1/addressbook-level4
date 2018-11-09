@@ -23,11 +23,13 @@ public class CustomPieChart extends PieChart {
 
     public static final String CSS_FILE = "view/DarkTheme.css";
     private ObservableList<String> observableData;
+    private CustomLegend legend;
 
     public CustomPieChart(List<Data> labelData, List<Data> legendData) {
         super();
         getStylesheets().add(CSS_FILE);
-        setLegend(new CustomLegend(this, legendData).getRoot());
+        legend = new CustomLegend(this, legendData);
+        setLegend(legend.getRoot());
         setData(FXCollections.observableList(labelData));
         labelData.forEach(data ->
                 data.nameProperty().bind(Bindings.concat(customTextWrap(data.getName()), "\n",
@@ -41,7 +43,7 @@ public class CustomPieChart extends PieChart {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CustomPieChart // instanceof handles nulls
-                && getLegend().equals(((CustomPieChart) other).getLegend())
+                && legend.equals(((CustomPieChart) other).legend)
                 && observableData.equals(((CustomPieChart) other).observableData));
     }
 
