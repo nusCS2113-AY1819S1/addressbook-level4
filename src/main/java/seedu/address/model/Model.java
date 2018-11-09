@@ -36,7 +36,7 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyDistributorBook newData);
 
-    /** Returns the AddressBook */
+    /** Returns the Product database */
     ReadOnlyProductDatabase getProductInfoBook();
 
     /** Returns the DistributorBook */
@@ -50,6 +50,10 @@ public interface Model {
      * Returns true if a product with the same identity as {@code product} exists in the address book.
      */
     boolean hasProduct(Product product);
+
+
+    boolean hasProductName(String name);
+
 
     /**
      * Deletes the given distributor.
@@ -149,7 +153,7 @@ public interface Model {
     /**
      * Saves the current address book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitProductDatabase();
 
     /**
      * Saves the current address book state for undo/redo.

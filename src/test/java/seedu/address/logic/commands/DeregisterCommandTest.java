@@ -281,7 +281,7 @@ public class DeregisterCommandTest {
             fail("This method should not be called.");
         }
 
-        public void commitAddressBook() {
+        public void commitProductDatabase() {
             fail("This method should not be called.");
         }
 
@@ -326,6 +326,11 @@ public class DeregisterCommandTest {
         final ArrayList<User> usersAdded = new ArrayList<>();
 
         @Override
+        public boolean hasProductName(String name) {
+            return false;
+        }
+
+        @Override
         public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
 
         @Override
@@ -363,6 +368,11 @@ public class DeregisterCommandTest {
     private class ModelStubThrowingUserNotFoundException extends DeregisterCommandTest.ModelStub {
 
         @Override
+        public boolean hasProductName(String name) {
+            return false;
+        }
+
+        @Override
         public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
 
         @Override
@@ -396,6 +406,11 @@ public class DeregisterCommandTest {
      * A Model stub that always throw a AuthenticatiedException when trying to login.
      */
     private class ModelStubThrowingAuthenticationFailedException extends DeregisterCommandTest.ModelStub {
+
+        @Override
+        public boolean hasProductName(String name) {
+            return false;
+        }
 
         @Override
         public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}

@@ -191,6 +191,13 @@ public class LoginCommandTest {
         }
 
         @Override
+        public boolean hasProductName(String name) {
+            fail ("This methos should not be called.");
+            return false;
+        }
+
+
+        @Override
         public void deleteDistributor(Distributor distributor) {
             fail("This method should not be called.");
         }
@@ -278,7 +285,7 @@ public class LoginCommandTest {
             fail("This method should not be called.");
         }
 
-        public void commitAddressBook() {
+        public void commitProductDatabase() {
             fail("This method should not be called.");
         }
 

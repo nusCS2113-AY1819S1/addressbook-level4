@@ -247,7 +247,7 @@ public class LogoutCommandTest {
             fail("This method should not be called.");
         }
 
-        public void commitAddressBook() {
+        public void commitProductDatabase() {
             fail("This method should not be called.");
         }
 
@@ -295,6 +295,11 @@ public class LogoutCommandTest {
     private class ModelStubAcceptingLogout extends ModelStub {
 
         private boolean loginStatus = false;
+
+        @Override
+        public boolean hasProductName(String name) {
+            return false;
+        }
 
         @Override
         public ArrayList<Reminder> getAllReminders() {

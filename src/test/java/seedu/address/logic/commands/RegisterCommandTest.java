@@ -273,7 +273,7 @@ public class RegisterCommandTest {
             fail("This method should not be called.");
         }
 
-        public void commitAddressBook() {
+        public void commitProductDatabase() {
             fail("This method should not be called.");
         }
 
@@ -318,6 +318,11 @@ public class RegisterCommandTest {
         final ArrayList<User> usersAdded = new ArrayList<>();
 
         @Override
+        public boolean hasProductName(String name) {
+            return false;
+        }
+
+        @Override
         public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
 
         @Override
@@ -352,6 +357,11 @@ public class RegisterCommandTest {
      * A Model stub that always throw a DuplicateUserException when trying to login.
      */
     private class ModelStubThrowingDuplicateUserException extends RegisterCommandTest.ModelStub {
+
+        @Override
+        public boolean hasProductName(String name) {
+            return false;
+        }
 
         @Override
         public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
