@@ -21,7 +21,7 @@ public class BlockUserFromCreatingCommand extends Command {
     public static final String COMMAND_WORD = "blockUser";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Blocks a certain user from posting new thread."
-        + "Parameters: "
+        + "\nParameters: "
         + PREFIX_USER_NAME + "USER NAME "
         + PREFIX_BLOCK + "BLOCK OR UNBLOCK"
         + "\nExample: " + COMMAND_WORD + " "

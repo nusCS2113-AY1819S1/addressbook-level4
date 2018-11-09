@@ -20,7 +20,7 @@ public class SetAdminCommand extends Command {
     public static final String COMMAND_WORD = "setAdmin";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set/Revert (true/false) a user as admin. "
-        + "Parameters: "
+        + "\nParameters: "
         + PREFIX_USER_NAME + "USER NAME "
         + PREFIX_ADMIN_SET + "SET/REVERT "
         + "\nExample: " + COMMAND_WORD + " "

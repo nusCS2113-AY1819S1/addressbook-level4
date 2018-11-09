@@ -806,7 +806,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Blocking a given user by admin.
 
-.. Prerequisites: Current user must login as an admin. The given user should be in the UserStorage.
+.. Prerequisites: Current user must login as an admin. The given user should not be an admin and should be in the UserStorage.
 .. Test case: `blockUser uName/john block/true` +
    Expected: The given user will be blocked and a success message will be shown in the result display panel.
 .. Test case: `blockUser uName/abcd block/true` +
@@ -816,7 +816,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Setting a user as admin or revert an admin to a user.
 
-.. Prerequisites: Current user must login as an admin. Admin is unable to set/revert himself/herself to admin/user. The given user must be in UserStorage.
+.. Prerequisites: Current user must login as an admin. Admin is unable to set/revert himself/herself to admin/user. The given user must not been blocked and must be in UserStorage.
 .. Test case: `setAdmin uName/john set/true` +
    Expected: The given user will be set to an admin and the success message will be shown in the result display panel.
 .. Test case: `setAdmin uName/abcd set/true` +

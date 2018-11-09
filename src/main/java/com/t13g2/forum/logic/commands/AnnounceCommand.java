@@ -23,7 +23,7 @@ public class AnnounceCommand extends Command {
     public static final String COMMAND_WORD = "announce";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Post new announcement. "
-        + "Parameters: "
+        + "\nParameters: "
         + PREFIX_ANNOUNCE_TITLE + "TITLE "
         + PREFIX_ANNOUNCE_CONTENT + "CONTENT "
         + "\nExample: " + COMMAND_WORD + " "

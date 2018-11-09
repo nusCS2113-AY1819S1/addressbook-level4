@@ -21,7 +21,7 @@ public class DeleteModuleCommand extends Command {
     public static final String COMMAND_WORD = "deleteModule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a module. "
-        + "Parameters: "
+        + "\nParameters: "
         + PREFIX_MODULE_CODE + "MODULE CODE "
         + "\nExample: " + COMMAND_WORD + " "
         + PREFIX_MODULE_CODE + "CS2113";

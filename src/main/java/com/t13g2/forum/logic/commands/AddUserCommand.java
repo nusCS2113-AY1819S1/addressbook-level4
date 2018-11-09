@@ -20,7 +20,7 @@ public class AddUserCommand extends Command {
      */
     public static final String COMMAND_WORD = "addUser";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add user to forum book. "
-        + "Parameters: "
+        + "\nParameters: "
         + PREFIX_USER_NAME + "USER NAME "
         + PREFIX_USER_PASSWORD + "PASSWORD \n"
         + "Example: " + COMMAND_WORD + " "

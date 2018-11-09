@@ -20,7 +20,7 @@ import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 public class LoginCommand extends Command {
     public static final String COMMAND_WORD = "login";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": login to forum book. "
-            + "Parameters: "
+            + "\nParameters: "
             + PREFIX_USER_NAME + "USER NAME "
             + PREFIX_USER_PASSWORD + "PASSWORD \n"
             + "Example: " + COMMAND_WORD + " "

@@ -20,7 +20,7 @@ public class DeleteUserCommand extends Command {
     public static final String COMMAND_WORD = "deleteUser";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a certain user. "
-        + "Parameters: "
+        + "\nParameters: "
         + PREFIX_USER_NAME + "USER NAME "
         + "\nExample: " + COMMAND_WORD + " "
         + PREFIX_USER_NAME + "john ";
