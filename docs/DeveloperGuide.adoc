@@ -827,7 +827,7 @@ The email command is a 4-stage process supported by `LogicManager` by keeping tr
 
 This is the action diagram when the user executes the email command.
 
-image::EmailActivityDiagram.png[width="325", align="center"]
+image::EmailActivityDiagram.png[width="1000", align="center"]
 
 Given below is an example usage scenario of how the email command behaves at each step.
 

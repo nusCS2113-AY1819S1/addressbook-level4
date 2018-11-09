@@ -260,4 +260,9 @@ public interface Model {
      * Setter for emailUtil in model
      */
     void setEmailUtil(EmailUtil emailUtil);
+
+    /**
+     * resets emailUtil object
+     */
+    void resetEmailUtil();
 }

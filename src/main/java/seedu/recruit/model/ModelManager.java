@@ -399,4 +399,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void setEmailUtil(EmailUtil emailUtil) {
         this.emailUtil = emailUtil;
     }
+
+    public void resetEmailUtil() {
+        emailUtil = new EmailUtil();
+    }
 }
