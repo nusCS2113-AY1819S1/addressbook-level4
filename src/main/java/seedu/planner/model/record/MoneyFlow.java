@@ -25,6 +25,7 @@ public class MoneyFlow {
     public static final String POSITIVE_SIGN = "+";
     public static final String NEGATIVE_SIGN = "-";
     public static final String REPRESENTATION_ZERO = "-0";
+    public static final String FORMAT_STANDARD_MONEY = "%.2f";
 
     private static final String MONEYFLOW_VALIDATION_REGEX = "^[+-](0|[1-9]\\d{0,11})(\\.\\d{1,2})?";
 
@@ -54,12 +55,12 @@ public class MoneyFlow {
 
     @Override
     public String toString() {
-        if (String.format("%.2f", Math.abs(valueDouble)).equals("0.00")) {
-            return CURRENCY + String.format("%.2f", Math.abs(valueDouble));
+        if (String.format(FORMAT_STANDARD_MONEY, Math.abs(valueDouble)).equals("0.00")) {
+            return CURRENCY + String.format(FORMAT_STANDARD_MONEY, Math.abs(valueDouble));
         } else if (valueDouble > 0) {
-            return POSITIVE_SIGN + CURRENCY + String.format("%.2f", Math.abs(valueDouble));
+            return POSITIVE_SIGN + CURRENCY + String.format(FORMAT_STANDARD_MONEY, Math.abs(valueDouble));
         } else {
-            return NEGATIVE_SIGN + CURRENCY + String.format("%.2f", Math.abs(valueDouble));
+            return NEGATIVE_SIGN + CURRENCY + String.format(FORMAT_STANDARD_MONEY, Math.abs(valueDouble));
         }
     }
 
