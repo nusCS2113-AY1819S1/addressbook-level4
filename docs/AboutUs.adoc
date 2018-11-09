@@ -19,7 +19,7 @@ Responsibilities: Task features
 
 '''
 
-=== Jeremy Aw
+=== Aw Meng Shen
 image::jeremyinelysium.png[width="150", align="left"]
 {empty}[http://github.com/jeremyinelysium[github]] [<<johndoe#, portfolio>>]
 
