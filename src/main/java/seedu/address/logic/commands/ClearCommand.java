@@ -5,11 +5,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.security.SecurityAuthenticationException;
-
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeTable;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Clears the user's {@code TimeTable}.
