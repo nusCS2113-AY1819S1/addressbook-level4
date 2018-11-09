@@ -154,9 +154,9 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
-     * Deletes all persons and events in ProManage.
+     * Deletes all persons in ProManage.
      */
-    protected void deleteAll() {
+    protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
         assertEquals(0, getModel().getAddressBook().getPersonList().size());
     }
