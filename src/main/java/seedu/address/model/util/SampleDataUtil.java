@@ -71,18 +71,32 @@ public class SampleDataUtil {
     //@@author ChenSongJian
     public static Expense[] getSampleExpenses() {
         return new Expense[] {
-            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
-                    getTagSet("friends")),
-            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
-                    getTagSet("friends")),
-            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
-                    getTagSet("friends")),
-            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
-                    getTagSet("friends")),
-            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
-                    getTagSet("friends")),
-            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/1111"), new ExpenseValue("11.11"),
-                    getTagSet("friends"))
+            new Expense(new ExpenseCategory("shopping"), new ExpenseDate("11/11/2018"), new ExpenseValue("99.80"),
+                    getTagSet("taobao")),
+            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/2018"), new ExpenseValue("11.11"),
+                    getTagSet("lunch", "doubleSamurai")),
+            new Expense(new ExpenseCategory("Food"), new ExpenseDate("11/11/2018"), new ExpenseValue("11.11"),
+                    getTagSet("dinner", "grass")),
+            new Expense(new ExpenseCategory("transport"), new ExpenseDate("01/11/2018"), new ExpenseValue("45.00"),
+                    getTagSet("concession")),
+            new Expense(new ExpenseCategory("bill"), new ExpenseDate("01/11/2018"), new ExpenseValue("30.00"),
+                    getTagSet("phone")),
+            new Expense(new ExpenseCategory("transport"), new ExpenseDate("11/11/2018"), new ExpenseValue("11.11"),
+                    getTagSet("Grab", "training")),
+            new Expense(new ExpenseCategory("transport"), new ExpenseDate("01/10/2018"), new ExpenseValue("45.00"),
+                    getTagSet("concession")),
+            new Expense(new ExpenseCategory("Movie"), new ExpenseDate("11/10/2018"), new ExpenseValue("14.00"),
+                    getTagSet("Avengers")),
+            new Expense(new ExpenseCategory("bill"), new ExpenseDate("01/10/2018"), new ExpenseValue("55.55"),
+                    getTagSet("phone", "exceed2GB")),
+            new Expense(new ExpenseCategory("transport"), new ExpenseDate("01/09/2018"), new ExpenseValue("45.00"),
+                    getTagSet("concession")),
+            new Expense(new ExpenseCategory("bill"), new ExpenseDate("01/08/2018"), new ExpenseValue("30.00"),
+                    getTagSet("phone")),
+            new Expense(new ExpenseCategory("transport"), new ExpenseDate("01/07/2018"), new ExpenseValue("45.00"),
+                    getTagSet("concession")),
+            new Expense(new ExpenseCategory("bill"), new ExpenseDate("01/06/2018"), new ExpenseValue("30.00"),
+                    getTagSet("phone"))
         };
     }
 
@@ -91,6 +105,7 @@ public class SampleDataUtil {
         for (Expense sampleExpense : getSampleExpenses()) {
             sampleEb.addExpense(sampleExpense);
         }
+
         return sampleEb;
     }
 

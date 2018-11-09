@@ -44,4 +44,12 @@ include::../UserGuide.adoc[tag=expense]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+//not my contribution, it is just the heading for the section of my contribution
+include::../DeveloperGuide.adoc[tag=implementationHeading]
+
 include::../DeveloperGuide.adoc[tag=expensefeature]
+
+//not my contribution, it is just the heading for the section of my contribution
+include::../DeveloperGuide.adoc[tag=manualTestHeading]
+
+include::../DeveloperGuide.adoc[tag=manualTestMonthlyExpense]

@@ -256,9 +256,11 @@ for files which when converted to their respectively objects may have some depen
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+// tag::implementationHeading[]
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
+// end::implementationHeading[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -1395,12 +1397,14 @@ Cons:
 * Not open source.
 
 [appendix]
+// tag::manualTestHeading[]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
 
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+// end::manualTestHeading[]
 
 === Launch and Shutdown
 
@@ -1512,3 +1516,24 @@ _{ more test cases ... }_
    Expected: No restore is performed. Invalid command status message is shown to user with correct usage.
 // end::manualTestBackupRestore[]
 //@@author
+
+//@@author chensongjian
+// tag::manualTestMonthlyExpense[]
+=== Displaying monthly expense
+
+. Displaying monthly expenses
+
+.. Prerequisites: User has entered some expenses occurred in November 2018
+
+.. Test case: `monthlyExpense 11/2018` +
+   Expected: Opens a new window with a pie chart displaying the percentage for each category of expenses.
+
+.. Test case: `monthlyExpense 10/2018` +
+   Expected: Opens a new window with a message "Expense not found in 10/2018"
+
+.. Test case: `monthlyExpense 13/2018`+
+   Expected: No operation performed. Error message shown in the result display section
+
+.. Test case: Other incorrect monthly expense commands to try: `monthlyExpense`, `monthlyExpense 5/2018` +
+   Expected: same as the previous test case
+// end::manualTestMonthlyExpense[]
