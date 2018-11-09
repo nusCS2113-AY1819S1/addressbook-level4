@@ -16,7 +16,7 @@ public class UserPrefs {
     private String scriptFileDirectory = "/scripts/";
 
     public UserPrefs() {
-        setGuiSettings(1500, 800, 0, 0);
+        setGuiSettings(500, 500, 0, 0);
     }
 
     public GuiSettings getGuiSettings() {
