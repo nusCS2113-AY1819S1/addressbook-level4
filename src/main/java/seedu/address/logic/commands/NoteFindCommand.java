@@ -78,7 +78,6 @@ public class NoteFindCommand extends Command {
         }
         sb.append(REGEX_CLOSER);
 
-        System.out.println(sb.toString());
         return sb.toString();
     }
 }

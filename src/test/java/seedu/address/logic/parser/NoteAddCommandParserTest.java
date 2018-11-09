@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_END_TIME;
@@ -79,66 +81,93 @@ public class NoteAddCommandParserTest {
     public void parse_invalidDateTimeFormat_throwsParseException() throws ParseException {
         String expectedMessageInvalidDate = Messages.MESSAGE_INVALID_DATE_FORMAT;
         String expectedMessageInvalidTime = Messages.MESSAGE_INVALID_TIME_FORMAT;
+        String expectedMessageBlankField = Messages.MESSAGE_BLANK_FIELD;
 
-        // unrecognized date format for start date
-        String args = " "
-                + PREFIX_MODULE_CODE + "CS2113 "
-                + PREFIX_NOTE_START_DATE + "21 September 2013 ";
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessageInvalidDate);
-        parser.parse(args);
+        String args;
 
-        // unrecognized time format for start time
-        args = " "
-                + PREFIX_MODULE_CODE + "CS2113 "
-                + PREFIX_NOTE_START_DATE + "21/1/2013 "
-                + PREFIX_NOTE_START_TIME + "23:59";
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessageInvalidTime);
-        parser.parse(args);
+        try {
+            // args contain prefix with blank value
+            args = " "
+                    + PREFIX_MODULE_CODE + "CS2113 "
+                    + PREFIX_NOTE_START_DATE;
+            parser.parse(args);
+        } catch (ParseException e) {
+            assertEquals(expectedMessageBlankField, e.getMessage());
+        }
 
-        // unrecognized date format for end date
-        args = " "
-                + PREFIX_MODULE_CODE + "CS2113 "
-                + PREFIX_NOTE_START_DATE + "1/1/2018 "
-                + PREFIX_NOTE_END_DATE + "2018-10-12";
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessageInvalidDate);
-        parser.parse(args);
+        try {
+            // unrecognized date format for start date
+            args = " "
+                    + PREFIX_MODULE_CODE + "CS2113 "
+                    + PREFIX_NOTE_START_DATE + "21 September 2013";
+            parser.parse(args);
+        } catch (ParseException e) {
+            assertTrue(e.getMessage().contains(expectedMessageInvalidDate));
+        }
 
-        // unrecognized time format for end time
-        args = " "
-                + PREFIX_MODULE_CODE + "CS2113 "
-                + PREFIX_NOTE_START_DATE + "1.1.2013 "
-                + PREFIX_NOTE_START_TIME + "11:00 AM "
-                + PREFIX_NOTE_END_TIME + "1:00PM";
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessageInvalidTime);
-        parser.parse(args);
+        try {
+            // unrecognized time format for start time
+            args = " "
+                    + PREFIX_MODULE_CODE + "CS2113 "
+                    + PREFIX_NOTE_START_DATE + "21/1/2013 "
+                    + PREFIX_NOTE_START_TIME + "23:59";
+            parser.parse(args);
+        } catch (ParseException e) {
+            assertTrue(e.getMessage().contains(expectedMessageInvalidTime));
+        }
+
+        try {
+            // unrecognized date format for end date
+            args = " "
+                    + PREFIX_MODULE_CODE + "CS2113 "
+                    + PREFIX_NOTE_START_DATE + "1/1/2018 "
+                    + PREFIX_NOTE_END_DATE + "2018-10-12";
+            parser.parse(args);
+        } catch (ParseException e) {
+            assertTrue(e.getMessage().contains(expectedMessageInvalidDate));
+        }
+
+        try {
+            // unrecognized time format for end time, no space separation between the time and period(AM/PM)
+            args = " "
+                    + PREFIX_MODULE_CODE + "CS2113 "
+                    + PREFIX_NOTE_START_DATE + "1.1.2013 "
+                    + PREFIX_NOTE_START_TIME + "11:00 AM "
+                    + PREFIX_NOTE_END_TIME + "1:00PM";
+            parser.parse(args);
+        } catch (ParseException e) {
+            assertTrue(e.getMessage().contains(expectedMessageInvalidTime));
+        }
+
     }
 
     @Test
     public void parse_invalidDateTimeDifference_throwsParseException() throws ParseException {
         String expectedMessage = NoteAddCommandParser.MESSAGE_INVALID_DATE_TIME_DIFFERENCE;
 
-        // end date is earlier than start date
-        String args = " "
-                + PREFIX_MODULE_CODE + "CS2113 "
-                + PREFIX_NOTE_START_DATE + "20-12-2012 "
-                + PREFIX_NOTE_END_DATE + "19-12-2012";
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessage);
-        parser.parse(args);
+        String args;
+        try {
+            // end date is earlier than start date
+            args = " "
+                    + PREFIX_MODULE_CODE + "CS2113 "
+                    + PREFIX_NOTE_START_DATE + "20-12-2012 "
+                    + PREFIX_NOTE_END_DATE + "19-12-2012";
+            parser.parse(args);
+        } catch (ParseException e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
 
-        // omitting end date sets its date similar to start date, hence, end date is earlier than start date
-        args = " "
-                + PREFIX_MODULE_CODE + "CS2113 "
-                + PREFIX_NOTE_START_DATE + "20-12-2012 "
-                + PREFIX_NOTE_START_TIME + "9:01 PM "
-                + PREFIX_NOTE_END_TIME + "9:00 PM";
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessage);
-        parser.parse(args);
+        try {
+            // omitting end date sets its date similar to start date, hence, end date is earlier than start date
+            args = " "
+                    + PREFIX_MODULE_CODE + "CS2113 "
+                    + PREFIX_NOTE_START_DATE + "20-12-2012 "
+                    + PREFIX_NOTE_START_TIME + "9:01 PM "
+                    + PREFIX_NOTE_END_TIME + "9:00 PM";
+            parser.parse(args);
+        } catch (ParseException e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
     }
 
     @Test
