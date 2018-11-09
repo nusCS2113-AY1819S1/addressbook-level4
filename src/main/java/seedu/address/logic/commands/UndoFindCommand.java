@@ -21,7 +21,8 @@ public class UndoFindCommand extends Command {
         requireNonNull(model);
         try {
             model.revertLastSearch();
-            return new CommandResult(MESSAGE_SUCCESS + formatter.getOutputString(model.getReadOnlyKeywordsRecord()));
+            String keywordHistoryString = formatter.getOutputString(model.getReadOnlyKeywordsRecord());
+            return new CommandResult(MESSAGE_SUCCESS + keywordHistoryString);
         } catch (EmptyHistoryException e) {
             model.resetSearchHistoryToInitialState();
             return new CommandResult(MESSAGE_FAILURE);
