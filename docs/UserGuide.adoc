@@ -20,8 +20,8 @@ By: `T16-2`      Since: `Sept 2018`      Licence: `MIT`
 
 ProManage is a *professional desktop application* for companies that specialises in executing projects that undergoes a
 long and tedious planning phase. This is particularly useful for companies that have a distinct structure
-and chain of command. For each project, there is a project team, which is usually led by a *Manager*. The planning
-committee consists of various branches such as *Admin, Logistics, Programmes, Finance, Publicity, Marketing and Safety*.
+and chain of command. For each project, there is a project team, which is usually led by a *Manager*. The company would usually
+consist of various departments such as *Admin, Logistics, Programmes, Finance, Publicity, Marketing and Safety*.
 ProManage targets these respective project teams, and allow *Manager* and *Employees* to manage their teams and events.
 
 Our application aims to ease the mode of task, event allocation and management by providing an all-in-one platform for
@@ -100,6 +100,14 @@ Priority level: `default`,`manager`
 Adds an employee to ProManage +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
 
+[NOTE]
+====
+
+* Each employee must have a unique work email address.
+* Email address is case insensitive.
+
+====
+
 [TIP]
 An employee can have any number of tags (including 0)
 
@@ -115,13 +123,13 @@ Priority level: `default`,`manager`
 
 Edits the details of the employee: +
 Format:
-`edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
+`edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
 
 ****
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
 index *must be a positive integer* 1, 2, 3, ... +
 * At least one of the optional fields must be provided.
-* Name is not editable
+* *Email is not editable*
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
 * You can remove all the employee’s tags by typing t/ without specifying any tags after it.
@@ -129,8 +137,8 @@ index *must be a positive integer* 1, 2, 3, ... +
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 1 p/91234567 a/The Vision` +
+Edits the phone number and address of the 1st person to be `91234567` and `The Vision` respectively.
 
 === Deleting an employee : `delete`
 Priority level: `default`,`manager`
@@ -164,6 +172,7 @@ Example: +
 `list dep Admin` +
 `list dep Admin Finance`
 
+// tag::addevent[]
 === Adding an event: `addEvent`
 Priority level: `default`,`manager`
 
@@ -178,17 +187,19 @@ Format: `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_T
 
 [NOTE]
 ====
-* Leap years are not considered during date validation.
+* One location can only hold one event at any time.
 * Events created cannot span multiple days.
+* Leap years are not considered during date validation.
 ====
 
 Example:
 
 * `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` +
-Creates an event named Board Meeting.
+Creates an event named Board Meeting at Conference Room 1 at 2018-09-28, 12:00 to 23:59.
+// end::addevent[]
 
-
-=== Modifying an event: `editEvent`
+// tag::editevent[]
+=== Editing an event: `editEvent`
 Priority level: `default`,`manager`
 
 Edits the details of the events: +
@@ -201,12 +212,15 @@ index *must be a positive integer* 1, 2, 3, ... +
 * DATE needs to be in YYYY-MM-DD format
 * TIME needs to be in 00:00 format
 * START_TIME must not be later than END_TIME
+* Leap years are not considered during date validation.
 * Existing values will be updated to the input values.
+* One location can only hold one event at any time.
 ****
 
 Examples:
 
 * `editEvent 10 n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
+// end::editevent[]
 
 === Deleting an event : `deleteEvent`
 Priority level: `default`,`manager`
@@ -226,7 +240,6 @@ Examples:
 * `deleteEvent 2` +
 Deletes the 2nd event in the address book.
 
-
 === Sorting all events: `sort`
 Priority level: all
 
@@ -234,7 +247,7 @@ Sort the event listing based on the key words provided. +
 Able to sort with event's name, event's date, event's starttime, event's endtime.  +
 *Key word:* +
 1) event's name: `name` +
-2) event's data: `date` +
+2) event's date: `date` +
 3) event's starttime: `starttime` +
 4) event's endtime: `endtime`
 
@@ -244,6 +257,22 @@ Example:
 
 * `sort name`
 
+
+=== Searching for the events using keywords: `findEvent`
+Priority level: all
+
+Finds events whose names contain any of the given keywords or whose description contains any of the given keywords (case-insensitive). +
+Format: `findEvent KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched
+* Events matching at least one keyword will be returned
+****
+
+
+// tag::invite[]
 === Inviting employee to event: `invite`
 
 Priority level: `all` +
@@ -252,18 +281,20 @@ Format: `invite PERSON_INDEX to/EVENT_INDEX` +
 Example:
 
 * `invite 1 to/3` +
-Invite 1st employee at employee list to 3rd event at event list
+Invite 1st employee on employee list to 3rd event on event list
 
-image::InviteCommandGuide.png[width="600"]
+image::InviteCommandGuide.png[width="800"]
 
 ****
 * Invites the employee at the specified `PERSON_INDEX` *TO* the event at the specified `EVENT_INDEX`.
 * The index refers to the index number shown in the displayed person list and event list respectively.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Employee should not have already been invited to the selected event.
-* Event invited to should not clash with the selected employee's schedule.
+* Event invited to should not clash with the selected employee's schedule or other events at the same location and time.
 ****
+// end::invite[]
 
+// tag::remove[]
 === Removing employee from event: `remove`
 Priority level: `default`,`manager`
 
@@ -280,7 +311,9 @@ Remove 1st employee at employee list from 2nd event at event list
 * The index *must be a positive integer* 1, 2, 3, ...
 * The employee to be remove must be previously invited to an event in order to be removed.
 ****
+// end::remove[]
 
+// tag::select[]
 === Selecting a person: `select`
 Priority level: `all`
 
@@ -311,19 +344,21 @@ view all events of employee at index 1 in August
 view all events of employee at index 1 in 2018
 * `select 1 y/2018 m/08` +
 view all events of employee at index 1 in August 2018
+// end::select[]
 
 === Locating persons by name: `find`
 Priority level: all
 
-Finds employees whose names contain any of the given keywords. +
+Finds employees whose names contain any of the given keywords or whose email matches any of the given keywords (case-insensitive). +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
+* The search is case insensitive. e.g `hans` will match `Hans`, `hans@example.com` will match `Hans@Example.Com`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the name and email is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only complete email will be matched e.g. `alice` will not match `alice@example.com`
 ****
 
 
@@ -339,6 +374,7 @@ Enter a command: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
+// tag::undoredo[]
 === Undoing previous command : `undo`
 Priority level: all
 
@@ -390,7 +426,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
-// end::undoredo[]_v1.4
+// end::undoredo[]
 
 === Clearing all entries : `clear`
 Priority level: all
@@ -435,9 +471,11 @@ There is no need to save manually.
 
 * *addEvent* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`
 
-* *editEvent* : `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME [e/END_TIME]`
+* *editEvent* : `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME] [e/END_TIME]`
 
 * *deleteEvent* : `deleteEvent EVENT_INDEX`
+
+* *findEvent* : `findEvent KEYWORD [MORE KEYWORDS]`
 
 * *Invite* : `invite PERSON_INDEX to/EVENT_INDEX`
 

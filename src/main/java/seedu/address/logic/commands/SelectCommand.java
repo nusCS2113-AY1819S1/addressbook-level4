@@ -21,20 +21,21 @@ import seedu.address.model.person.Person;
 
 //@@author jieliangang
 /**
- * Selects a person identified using it's displayed index from the address book.
+ * Selects an employee identified using it's displayed index from the address book and
+ * display the selected employee's events on the event list.
  */
 public class SelectCommand extends Command {
 
     public static final String COMMAND_WORD = "select";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the person identified by the index number used in the displayed person list "
-            + "and display events the person is attending. Show events in selected date/month/year if indicated\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + ": Selects the employee identified by the index number used in the displayed person list "
+            + "and display events the employee is attending. Show events in selected date/month/year if indicated\n"
+            + "Parameters: PERSON_INDEX (must be a positive integer) "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_YEAR + "YEAR] "
             + "[" + PREFIX_MONTH + "MONTH] "
-            + "If " + PREFIX_DATE + " is used, " + PREFIX_YEAR + " and " + PREFIX_MONTH + " will be ignored\n"
+            + "If " + PREFIX_DATE + " is used, " + PREFIX_YEAR + " and " + PREFIX_MONTH + " must not be used\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_DATE + "2018-05-24" + "   or  "
             + COMMAND_WORD + " 1 " + PREFIX_MONTH + "05";
 
@@ -68,16 +69,18 @@ public class SelectCommand extends Command {
 
         Person person = filteredPersonList.get(targetIndex.getZeroBased());
         String personEmail = person.getEmail().toString();
-        AttendeeContainsEmailPredicate predicate = new AttendeeContainsEmailPredicate(personEmail);
 
         if (type == TimeType.NONE) {
-            model.updateFilteredEventList(predicate);
-        } else {
+            AttendeeContainsEmailPredicate predicateNoDateFilter = new AttendeeContainsEmailPredicate(personEmail);
+            model.updateFilteredEventList(predicateNoDateFilter);
+        } else if (type == TimeType.DAY || type == TimeType.MONTH
+                || type == TimeType.YEAR || type == TimeType.MONTH_AND_YEAR) {
             assert date != null;
-            EventContainsAttendeeAndDatePredicate predicate2 =
+            EventContainsAttendeeAndDatePredicate predicateWithDateFilter =
                     new EventContainsAttendeeAndDatePredicate(personEmail, date, type);
-            model.updateFilteredEventList(predicate2);
-
+            model.updateFilteredEventList(predicateWithDateFilter);
+        } else {
+            throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
 
         model.sortByDate();
@@ -94,7 +97,7 @@ public class SelectCommand extends Command {
                 && targetIndex.equals(((SelectCommand) other).targetIndex) // state check
                 && (((date == null && (((SelectCommand) other).date) == null)) // short circuit if both are null
                     || ((date != null && (((SelectCommand) other).date) != null)
-                && date.equals(((SelectCommand) other).date)))
+                    && date.equals(((SelectCommand) other).date)))
                 && type.equals(((SelectCommand) other).type));
     }
 }

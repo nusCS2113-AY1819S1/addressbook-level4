@@ -3,9 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.StateHistoryList.STATE_ADDRESSBOOK;
+import static seedu.address.model.StateHistoryList.STATE_BOTH;
 import static seedu.address.model.StateHistoryList.STATE_EVENTLIST;
 import static seedu.address.model.StateHistoryList.STATE_NONE;
-import static seedu.address.model.StateHistoryList.STATE_RESET;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -59,7 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyAddressBook newData, ReadOnlyEventList newEventList) {
-        stateHistoryList.addResetState();
+        stateHistoryList.addBothState();
 
         versionedAddressBook.resetData(newData);
         versionedEventList.resetData(newEventList);
@@ -75,7 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
             return canUndoAddressBook();
         case STATE_EVENTLIST:
             return canUndoEventList();
-        case STATE_RESET:
+        case STATE_BOTH:
             return canUndoEventList() && canUndoAddressBook();
         case STATE_NONE:
             // pass-through
@@ -94,8 +94,8 @@ public class ModelManager extends ComponentManager implements Model {
         case STATE_EVENTLIST:
             undoEventList();
             break;
-        case STATE_RESET:
-            undoResetData();
+        case STATE_BOTH:
+            undoBothState();
             break;
         case STATE_NONE:
             // pass-through
@@ -112,7 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
             return canRedoAddressBook();
         case STATE_EVENTLIST:
             return canRedoEventList();
-        case STATE_RESET:
+        case STATE_BOTH:
             return canRedoEventList() && canRedoAddressBook();
         case STATE_NONE:
             // pass-through
@@ -131,8 +131,8 @@ public class ModelManager extends ComponentManager implements Model {
         case STATE_EVENTLIST:
             redoEventList();
             break;
-        case STATE_RESET:
-            redoResetData();
+        case STATE_BOTH:
+            redoBothState();
             break;
         case STATE_NONE:
             // pass-through
@@ -142,7 +142,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void undoResetData() {
+    public void undoBothState() {
         stateHistoryList.decrementPointer();
 
         versionedAddressBook.undo();
@@ -153,7 +153,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void redoResetData() {
+    public void redoBothState() {
         stateHistoryList.incrementPointer();
 
         versionedAddressBook.redo();
@@ -203,9 +203,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        stateHistoryList.addAddressBookState();
+        requireNonNull(target);
+        stateHistoryList.addBothState();
+
         versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();
+
+        removePersonFromAllEvents(target);
     }
 
     @Override

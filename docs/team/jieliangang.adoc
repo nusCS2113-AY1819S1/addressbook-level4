@@ -1,0 +1,72 @@
+= Ang Jie Liang - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ProManage
+
+---
+
+== Overview
+
+This project portfolio documents my contributions to the development of the CS2113 project, as part of my team T16-2.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to manage and view employees' events* via the `invite`, `remove` and `select` commands
+** What it does: allows the user to invite employees to events, remove employees from events, and view an employee's event schedule on a selected date, month or year.
+** Justification: This feature facilitates managing and scheduling of events among teams of employees, and allow employees to handle their own work schedule easily.
+** Highlights: This feature considers whether the event an employee is invited to clashes with the employee's work schedule. The `select` feature also allows user to view the selected employee's schedule by day, month, or year.
+
+
+* *Minor enhancement*:
+** added the `addEvent` command, which also warns the user when the planned event clashes or coincides with other existing events at the same location and time
+** improved the `editEvent` command, which warns the user when the changed time or date of the event leads to schedule conflicts with any of the event's attendees
+** set up the event list panel to display the events on the UI
+** updated the `deletePerson` command, which properly handles the removal of person data used in Events
+** updated the `add` and `edit` command to distinguish different employees by their unique work email address
+** updated the `find` command to search for employees via their email address
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jieliangang[Functional code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.3.2` (6 releases) on GitHub
+*** Managed the issue tracker and project dashboard on GitHub
+** Documentation:
+*** Updated the User Guide for Practical Exam 1: https://github.com/CS2113-AY1819S1-T16-2/main/pull/84[#84] https://github.com/CS2113-AY1819S1-T16-2/main/pull/85[#85]
+*** Updated the Developer Guide to include `invite` command: https://github.com/CS2113-AY1819S1-T16-2/main/pull/58[#58]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T16-2/main/pull/65[#65] https://github.com/CS2113-AY1819S1-T16-2/main/pull/77[#77] https://github.com/CS2113-AY1819S1-T16-2/main/pull/114[#114]
+** Tools:
+*** Integrated GitHub Plugins (Coveralls, Travis CI, AppVeyor)
+*** Automated team documentation build on GitHub pages
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=addevent]
+
+include::../UserGuide.adoc[tag=invite]
+
+include::../UserGuide.adoc[tag=remove]
+
+include::../UserGuide.adoc[tag=select]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=Invite]
+
+include::../DeveloperGuide.adoc[tag=Select]
+
+

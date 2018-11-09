@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+//@@author: IcedCoffeeBoy
+
 /**
  * Parses user input.
  */

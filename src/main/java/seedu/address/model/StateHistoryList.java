@@ -10,7 +10,7 @@ public class StateHistoryList extends LinkedList<Integer> {
 
     static final int STATE_ADDRESSBOOK = 0;
     static final int STATE_EVENTLIST = 1;
-    static final int STATE_RESET = 2;
+    static final int STATE_BOTH = 2;
     static final int STATE_NONE = -1;
 
     private int pointer;
@@ -39,10 +39,10 @@ public class StateHistoryList extends LinkedList<Integer> {
     }
 
     /**
-     * Adds a new ResetData state to the history list.
+     * Adds a new double AddressBook and EventList state to the history list.
      */
-    public void addResetState() {
-        addState(STATE_RESET);
+    public void addBothState() {
+        addState(STATE_BOTH);
     }
 
     /**

@@ -66,10 +66,19 @@ public class EventListTest {
     @Test
     public void hasEvent_eventWithSameIdentityFieldsInEventList_returnsTrue() {
         eventList.addEvent(EVENT_1);
-        Event editedEvent = new EventBuilder(EVENT_1).withLocation(VALID_LOCATION_LT)
+        Event editedEvent = new EventBuilder(EVENT_1)
                 .withDescription(VALID_DESCRIPTION_PUNCTUAL)
                 .build();
         assertTrue(eventList.hasEvent(editedEvent));
+    }
+
+    @Test
+    public void hasEvent_eventWithDifferentLocationInEventList_returnsFalse() {
+        eventList.addEvent(EVENT_1);
+        Event editedEvent = new EventBuilder(EVENT_1).withLocation(VALID_LOCATION_LT)
+                .withDescription(VALID_DESCRIPTION_PUNCTUAL)
+                .build();
+        assertFalse(eventList.hasEvent(editedEvent));
     }
 
     @Test

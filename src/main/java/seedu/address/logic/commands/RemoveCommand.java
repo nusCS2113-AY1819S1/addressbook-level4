@@ -16,20 +16,20 @@ import seedu.address.model.person.Person;
 
 //@@author jieliangang
 /**
- * Removes an existing person from an existing event.
+ * Removes an employee from an event.
  */
 public class RemoveCommand extends Command {
 
     public static final String COMMAND_WORD = "remove";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes an existing person from an existing event "
-            + "by the index number used in the displayed person list and displayed event list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_FROM + "INDEX (must be a positive integer)\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes an employee from an event "
+            + "by the index number used in the displayed employee list and displayed event list.\n"
+            + "Parameters: PERSON_INDEX (must be a positive integer) "
+            + PREFIX_FROM + "EVENT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_FROM + "1";
 
-    public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed Person: %1$s from %2$s";
-    public static final String MESSAGE_ABSENT_PERSON = "This person is not originally in the event's attendee list.";
+    public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed Employee: %1$s from %2$s";
+    public static final String MESSAGE_ABSENT_PERSON = "This employee is not originally in the event's attendee list.";
     public static final String MESSAGE_ATTENDEE_EMPTY = "The event selected has no invited persons.";
 
     private final Index indexEvent;
@@ -59,6 +59,7 @@ public class RemoveCommand extends Command {
 
         String personName = person.getName().toString();
         String personEmail = person.getEmail().toString();
+        String eventName = event.getEventName().toString();
 
         if (event.isAttendeeEmpty()) {
             throw new CommandException(MESSAGE_ATTENDEE_EMPTY);
@@ -71,7 +72,7 @@ public class RemoveCommand extends Command {
         model.updateEvent(event, updatedEvent);
         model.commitEventList();
 
-        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personName, event.getEventName()));
+        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personName, eventName));
     }
 
 

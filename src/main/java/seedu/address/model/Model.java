@@ -23,10 +23,10 @@ public interface Model extends PersonModel, EventModel {
     void redo();
 
     /** Undoes a resetData command */
-    void undoResetData();
+    void undoBothState();
 
     /** Redoes a resetData command */
-    void redoResetData();
+    void redoBothState();
 
     /** check if the email is present */
     boolean hasEmail(Email email);

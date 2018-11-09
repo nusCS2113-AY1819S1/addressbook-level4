@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class EventDate {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Date should only be given in YYYY-MM-DD format and in valid form";
+            "Date should only be given in YYYY-MM-DD format and in valid form. Leap year anomalies are not validated.";
 
     /*
      * The date should be valid and in the correct YYYY-MM-DD format.

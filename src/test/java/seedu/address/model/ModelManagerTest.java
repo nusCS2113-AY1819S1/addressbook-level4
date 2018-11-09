@@ -78,9 +78,9 @@ public class ModelManagerTest {
 
 
     @Test
-    public void hasClash_eventClashWithEventList_returnsFalse() {
+    public void hasClash_eventClashWithEventList_returnsTrue() {
         modelManager.addEvent(TypicalEvents.eventwithAttendee());
-        assertFalse(modelManager.hasClash(EVENT_3, "alice@example.com"));
+        assertTrue(modelManager.hasClash(EVENT_3, "alice@example.com"));
     }
 
     @Test

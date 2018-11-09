@@ -15,6 +15,8 @@ import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
 import seedu.address.testutil.Assert;
 
+//@@author: IcedCoffeeBoy
+
 public class XmlAdaptedEventTest {
     private static final String INVALID_EVENT_NAME = "CS@3$%?/>21";
     private static final String INVALID_DESCRIPTION = "LOL $$$$ ";

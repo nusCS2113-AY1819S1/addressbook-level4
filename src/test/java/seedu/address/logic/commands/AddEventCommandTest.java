@@ -65,7 +65,7 @@ public class AddEventCommandTest {
 
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that accepts any event.
      */
     private class ModelStubWithEvent extends ModelStub {
         private final Event event;

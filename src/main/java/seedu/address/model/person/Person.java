@@ -63,13 +63,14 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+  
+    public Department getDepartment() {
+        return department;
+    }
 
-    public Department getDepartment() { return department; }
-
-    public Designation getDesignation() { return designation; }
-
-
-
+    public Designation getDesignation() {
+        return designation;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -88,6 +89,7 @@ public class Person {
             return true;
         }
 
+        // person is identified by their work email, which must be unique
         return otherPerson != null
                 && otherPerson.getEmail().equals(getEmail());
     }
