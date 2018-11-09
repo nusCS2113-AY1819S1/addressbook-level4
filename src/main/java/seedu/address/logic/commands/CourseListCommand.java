@@ -13,12 +13,12 @@ public class CourseListCommand extends Command {
 
     public static final String COMMAND_WORD = "course list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all courses";
+    public static final String MESSAGE_SUCCESS = "Listed all courses.";
 
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         CourseManager cm = CourseManager.getInstance();
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + "", cm.getTableRepresentation());
+        return new CommandResult(MESSAGE_SUCCESS, cm.getTableRepresentation());
     }
 }
