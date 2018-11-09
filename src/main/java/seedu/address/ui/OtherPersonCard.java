@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
  */
 public class OtherPersonCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "OtherPersonListCard.fxml";
 
     public final Person person;
 
@@ -23,12 +23,6 @@ public class OtherPersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
 
     public OtherPersonCard(Person person, int displayedIndex) {
@@ -36,9 +30,6 @@ public class OtherPersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(null);
-        address.setText(null);
-        email.setText(null);
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
