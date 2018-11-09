@@ -23,7 +23,7 @@ public class CategoryBreakdown extends UiPart<Region> {
     private static final String FXML = "CategoryBreakdown.fxml";
     private static final int defaultPrefWidth = 800;
     private static final int defaultPrefHeight = 400;
-    private static final int defaultLabelLength = 20;
+    private static final int defaultLabelLength = 50;
 
     @FXML
     private AnchorPane categoryBreakdown;

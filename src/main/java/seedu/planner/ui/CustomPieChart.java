@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
@@ -26,7 +27,7 @@ public class CustomPieChart extends PieChart {
     public CustomPieChart(List<Data> labelData, List<Data> legendData) {
         super();
         getStylesheets().add(CSS_FILE);
-        setLegend(new CustomLegend(this, legendData));
+        setLegend(new CustomLegend(this, legendData).getRoot());
         setData(FXCollections.observableList(labelData));
         labelData.forEach(data ->
                 data.nameProperty().bind(Bindings.concat(customTextWrap(data.getName()), "\n",
@@ -66,26 +67,28 @@ public class CustomPieChart extends PieChart {
     /**
      * This class represents a customized legend panel for the pieChart
      */
-    class CustomLegend extends GridPane {
+    class CustomLegend extends UiPart<Node> {
 
-        private static final int defaultVGap = 10;
-        private static final int defaultHGap = 10;
         private static final int defaultSymbolXPos = 10;
         private static final int defaultSymbolYPos = 10;
         private static final int defaultSymbolWidth = 10;
         private static final int defaultSymbolHeight = 10;
 
+        private static final String FXML = "CustomLegend.fxml";
+
+        @FXML
+        private GridPane legendGrid;
+
         private List<String> labelList;
 
         CustomLegend(PieChart chart, List<Data> pieChartData) {
+            super(FXML);
             labelList = new ArrayList<>();
-            setHgap(defaultHGap);
-            setVgap(defaultVGap);
             int index = 0;
             for (Data d : pieChartData) {
                 Label legendText = createLabel(d.getName() + "   " + convertToMoney(d.getPieValue()));
                 legendText.setWrapText(true);
-                addRow(index, createSymbol(pieChartData.indexOf(d)), legendText);
+                legendGrid.addRow(index, createSymbol(pieChartData.indexOf(d)), legendText);
                 labelList.add(legendText.getText());
                 index++;
             }
