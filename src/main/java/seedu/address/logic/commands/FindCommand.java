@@ -22,7 +22,7 @@ public abstract class FindCommand extends Command {
     protected boolean isExcludeMode = false;
     private KeywordsOutputFormatter formatter = new KeywordsOutputFormatter();
 
-    protected String getKeywordHistoryString(ReadOnlyKeywordsRecord record) {
+    String getKeywordHistoryString(ReadOnlyKeywordsRecord record) {
         return formatter.getOutputString(record);
     }
 }
