@@ -40,6 +40,8 @@ import seedu.address.storage.XmlEventStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
+//@@author: IcedCoffeeBoy
+
 
 /**
  * The main entry point to the application.
@@ -109,7 +111,7 @@ public class MainApp extends Application {
             initialAddressData = new AddressBook();
         }
 
-
+        // Done by IcedCoffeeBoy
         try {
             eventListOptional = storage.readEventList();
             if (!eventListOptional.isPresent()) {
@@ -125,6 +127,7 @@ public class MainApp extends Application {
         }
         initialEventListData.sortByName();
         return new ModelManager(initialAddressData, initialEventListData, userPrefs);
+        //End of modification
     }
 
     private void initLogging(Config config) {
