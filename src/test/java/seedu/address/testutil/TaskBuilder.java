@@ -1,13 +1,17 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
 import seedu.address.model.task.ModuleCode;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Task objects.
@@ -23,6 +27,7 @@ public class TaskBuilder {
     public static final String DEFAULT_EXPECTED_NUM_OF_HOURS = "1";
     public static final String DEFAULT_COMPLETED_NUM_OF_HOURS = "0";
     public static final List<Milestone> DEFAULT_MILESTONES = new ArrayList<>();
+    public static final Set<Tag> DEFAULT_TAGS = new HashSet<>();
 
     private Deadline deadline;
     private ModuleCode moduleCode;
@@ -33,6 +38,7 @@ public class TaskBuilder {
     private int expectedNumOfHours;
     private int completedNumOfHours;
     private List<Milestone> milestones;
+    private Set<Tag> tags;
 
     public TaskBuilder() {
         this.deadline = new Deadline(DEFAULT_DEADLINE);
@@ -44,6 +50,7 @@ public class TaskBuilder {
         this.completedNumOfHours = Integer.parseInt(DEFAULT_COMPLETED_NUM_OF_HOURS);
         this.expectedNumOfHours = Integer.parseInt(DEFAULT_EXPECTED_NUM_OF_HOURS);
         this.milestones = DEFAULT_MILESTONES;
+        this.tags = DEFAULT_TAGS;
     }
 
     /**
@@ -59,6 +66,7 @@ public class TaskBuilder {
         this.expectedNumOfHours = taskToCopy.getExpectedNumOfHours();
         this.completedNumOfHours = taskToCopy.getCompletedNumOfHours();
         this.milestones = taskToCopy.getMilestoneList();
+        this.tags = new HashSet<>(taskToCopy.getTags());
     }
     /**
      * Sets the {@code Deadline} of the {@code Task} that we are building.
@@ -126,11 +134,19 @@ public class TaskBuilder {
     }
 
     /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public TaskBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
      * Build the task with the parameters set
      * @return Task
      */
     public Task build() {
         return new Task(deadline, moduleCode, title, description, priority,
-                expectedNumOfHours, completedNumOfHours, isCompleted, milestones);
+                expectedNumOfHours, completedNumOfHours, isCompleted, milestones, tags);
     }
 }

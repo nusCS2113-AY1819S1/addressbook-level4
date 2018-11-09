@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 
@@ -74,8 +75,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author ChanChunCheong
     @Override
-    public void deferTaskDeadline(Task target, Deadline deadline) {
-        versionedTaskBook.deferDeadline(target, deadline);
+    public void deferTaskDeadline(Task target, int deferredDays) {
+        versionedTaskBook.deferDeadline(target, deferredDays);
         indicateTaskBookChanged();
     }
 
@@ -101,11 +102,32 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author ChanChunCheong
     @Override
+    public void addTag(Task task, Tag tag) {
+        versionedTaskBook.addTag(task, tag);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        indicateTaskBookChanged();
+    }
+
+    @Override
+    public void removeTag(Task task, Tag tag) {
+        versionedTaskBook.removeTag(task, tag);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        indicateTaskBookChanged();
+    }
+
+    @Override
     public void sortTask(String method) {
         versionedTaskBook.sortTask(method);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         indicateTaskBookChanged();
     }
+
+    @Override
+    public void selectTag(Tag tag) {
+        updateFilteredTaskList(predicateShowTasksWithSameTag(tag));
+        indicateTaskBookChanged();
+    }
+    //@@author
 
     //@@author emobeany
     @Override
@@ -126,6 +148,13 @@ public class ModelManager extends ComponentManager implements Model {
     private Predicate<Task> predicateShowTasksWithSameDate(Deadline deadline) {
         return task -> task.getDeadline().equals(deadline);
     }
+
+    //@author ChanChunCheong
+    /**{@code Predicate} that returns true when the date is equal*/
+    private Predicate<Task> predicateShowTasksWithSameTag(Tag tag) {
+        return task -> task.getTags().contains(tag);
+    }
+    //@author
 
     @Override
     public Deadline getDeadline() {

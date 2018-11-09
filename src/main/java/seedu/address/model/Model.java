@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 
@@ -30,7 +31,7 @@ public interface Model {
      */
     boolean isTheExactSameTaskAs(Task task);
 
-    void deferTaskDeadline(Task task, Deadline deadline);
+    void deferTaskDeadline(Task task, int deferredDay);
     /**
      * Deletes the given task.
      * The task must exist in the task book.
@@ -48,6 +49,22 @@ public interface Model {
      * {@code task} must not already exist in the task book.
      */
     void addTask(Task task);
+
+    //@@author ChanChunCheong
+    /**
+     * Adds the to the selected task.
+     * {@code task} must not already exist in the task book.
+     */
+    void addTag(Task task, Tag tag);
+
+    /**
+     * Removes the tag from the selected task.
+     * {@code task} must not already exist in the task book.
+     */
+    void removeTag(Task task, Tag tag);
+
+    /** Selects the input tag as Tag.*/
+    void selectTag(Tag tag);
 
     //@@author emobeany
     /** Selects the input date as deadline.*/

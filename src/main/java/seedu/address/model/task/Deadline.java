@@ -86,13 +86,28 @@ public class Deadline {
         if (entries.length != 3) {
             return false;
         }
-        String day = entries[0];
-        String month = entries[1];
-        String year = entries[2];
+        int day = Integer.parseInt(entries[0]);
+        int month = Integer.parseInt(entries[1]);
+        int year = Integer.parseInt(entries[2]);
 
-        ArrayList<Integer> monthsWith30Days = new ArrayList<>(Arrays.asList(4, 6, 9, 11));
-        ArrayList<Integer> monthsWith31Days = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 8, 10, 12));
 
+        if (month < 1 || month > 12) {
+            return false;
+        } else if (year < 2018 || year > 9999) {
+            return false;
+        } else if (isMonthWith30Days(month)) {
+            return (day > 0 && day < 31);
+        } else if (isMonthWith31Days(month)) {
+            return (day > 0 && day < 32);
+        } else {
+            if (isLeapYear(year)) {
+                return (day > 0 && day < 30);
+            } else {
+                return (day > 0 && day < 29);
+            }
+        }
+
+        /*
         if (Integer.parseInt(month) < 1 || Integer.parseInt(month) > 12) {
             return false;
         } else if (Integer.parseInt(year) < 2018 || Integer.parseInt(year) > 9999) {
@@ -108,6 +123,83 @@ public class Deadline {
                 return (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 29);
             }
         }
+        */
+
+    }
+
+    //@@author ChanChunCheong
+    /**
+     * Defers the deadline of the task.
+     */
+    public Deadline deferDeadline(int deferredDays) {
+        int year = Integer.parseInt(getYear());
+        int month = Integer.parseInt(getMonth());
+        int day = Integer.parseInt(getDay());
+        int baseDays;
+        int numofMonths = 0;
+        //int numofYears = 0;
+        int newDay;
+        int updatedDay;
+
+        if (isMonthWith30Days(month)) {
+            baseDays = 30;
+        } else if (isMonthWith31Days(month)) {
+            baseDays = 31;
+        } else {
+            if (isLeapYear(year)) {
+                baseDays = 29;
+            } else {
+                baseDays = 28;
+            }
+        }
+
+        newDay = day + deferredDays;
+        System.out.println(newDay);
+        updatedDay = newDay % baseDays;
+        System.out.println(updatedDay);
+        // if daystoAdd == 0 then no change to the original day.
+        if (!(updatedDay == 0)) {
+            day = updatedDay;
+        }
+        //Count the number of months added
+        while (newDay > baseDays) {
+            newDay = day - baseDays;
+            numofMonths++;
+        }
+
+        if (numofMonths > 0) {
+            if (month + numofMonths > 12) {
+                year = year + 1;
+            }
+        }
+
+        month = (month + numofMonths) % 12;
+        if (month == 0) {
+            //month is December
+            month = 12;
+        }
+
+        String deferredDay = Integer.toString(day);
+        String deferredMonth = Integer.toString(month);
+        String deferredYear = Integer.toString(year);
+        Deadline deferredDeadline = new Deadline(deferredDay, deferredMonth, deferredYear);
+        return deferredDeadline;
+    }
+
+    /**
+     * Returns false if any fields are not within the limits (not a valid date).
+     */
+    public static boolean isMonthWith30Days(int month) {
+        ArrayList<Integer> monthsWith30Days = new ArrayList<>(Arrays.asList(4, 6, 9, 11));
+        return monthsWith30Days.contains(month);
+    }
+
+    /**
+     * Returns false if any fields are not within the limits (not a valid date).
+     */
+    public static boolean isMonthWith31Days(int month) {
+        ArrayList<Integer> monthsWith31Days = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 8, 10, 12));
+        return monthsWith31Days.contains(month);
     }
 
     @Override

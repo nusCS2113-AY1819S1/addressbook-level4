@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddMilestoneCommand;
+import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -19,7 +20,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RemoveTagCommand;
 import seedu.address.logic.commands.SelectDeadlineCommand;
+import seedu.address.logic.commands.SelectTagCommand;
 import seedu.address.logic.commands.SortTaskCommand;
 import seedu.address.logic.commands.TrackProductivityCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -51,6 +54,7 @@ public class LogicManager extends ComponentManager implements Logic {
                 new ListCommand(),
                 new TrackProductivityCommand(),
                 new SelectDeadlineCommand(),
+                new SelectTagCommand(),
                 new SortTaskCommand(),
                 new HelpCommand(),
                 new ExitCommand(),
@@ -58,6 +62,8 @@ public class LogicManager extends ComponentManager implements Logic {
                 new UndoCommand(),
                 new RedoCommand(),
                 new AddMilestoneCommand(),
+                new AddTagCommand(),
+                new RemoveTagCommand(),
                 new EditTaskCommand()
         );
     }

@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -19,6 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.EditTaskCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
 import seedu.address.model.task.ModuleCode;
@@ -116,9 +118,10 @@ public class EditTaskCommand extends Command implements CommandParser {
         int completedNumOfHours = taskToEdit.getCompletedNumOfHours();
         boolean isCompleted = taskToEdit.isCompleted();
         List<Milestone> milestoneList = taskToEdit.getMilestoneList();
+        Set<Tag> tag = taskToEdit.getTags();
 
         return new Task(deadline, updatedModuleCode, updatedTitle, updatedDescription, updatedPriority, updatedHours,
-                completedNumOfHours, isCompleted, milestoneList);
+                completedNumOfHours, isCompleted, milestoneList, tag);
     }
 
     @Override
