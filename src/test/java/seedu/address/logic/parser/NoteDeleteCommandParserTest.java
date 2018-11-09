@@ -25,7 +25,6 @@ public class NoteDeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() throws ParseException {
         String expectedMessageIndexError = NoteDeleteCommand.MESSAGE_PARSE_INDEX_ERROR;
-        String expectedMessageDuplicate = NoteDeleteCommand.MESSAGE_DUPLICATE_INDEX_FOUND;
 
         String args;
 
@@ -72,15 +71,6 @@ public class NoteDeleteCommandParserTest {
             fail("Exception not thrown");
         } catch (ParseException e) {
             assertEquals(expectedMessageIndexError, e.getMessage());
-        }
-
-        try {
-            // invalid args, duplicate index exists
-            args = "1 2-4 3";
-            parser.parse(args);
-            fail("Exception not thrown");
-        } catch (ParseException e) {
-            assertEquals(expectedMessageDuplicate, e.getMessage());
         }
     }
 
