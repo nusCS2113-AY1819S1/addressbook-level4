@@ -351,6 +351,7 @@ image::UserLoginActivityDiagram.png[width="650"]
 but prevent TAs from seeing it, although TAs can assign marks.
 ** Cons: Harder to implement.
 // end::umsimplementation[]
+
 // tag::classmanagementbrief[]
 === Class Add feature
 ==== Current Implementation
@@ -2177,6 +2178,7 @@ Use case resumes at step 1.
 === Use case: Update Class Enrollment Limits
 
 *Precondition(s)* :
+
 * Module code exists in data file.
 * Class belonging to the module code exists in data file.
 
