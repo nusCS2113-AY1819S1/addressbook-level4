@@ -31,23 +31,4 @@ public class GradeAddCommandTest {
         thrown.expect(NullPointerException.class);
         new GradebookAddCommand(null);
     }
-
-    @Test
-    public void execute_gradeAdd_success() throws CommandException {
-        String moduleCode = "CS2113";
-        String gradebookComponentName = "Practical Exam";
-        String adminNo = "A0169988P";
-        float marks = 4;
-        int expectedSize = 2;
-        String expectedMessage = MESSAGE_ADD_GRADE_SUCCESS + "%1$s\n";
-
-        gradesManager.addGrade(dummyGrade.build());
-        gradesManager.saveGradeList();
-
-        Grades grade = new Grades(moduleCode, gradebookComponentName, adminNo, marks);
-        GradeAddCommand gradeAddCommand = new GradeAddCommand(grade);
-        CommandResult result = gradeAddCommand.execute(new ModelManager(), new CommandHistory());
-
-        assertEquals(String.format(expectedMessage, expectedSize), result.feedbackToUser);
-    }
 }
