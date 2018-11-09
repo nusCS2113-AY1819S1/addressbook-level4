@@ -56,10 +56,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 
-    /**
-     * Returns true if the first two arguments list implies that
-     * Exclude Tag Search has to be executed.
-     */
     private boolean isExcludeTagSearch(List<String> argumentsList) {
         return argumentsList.size() > 2 && (argumentsList.get(0).equals(TAG_OPTION_STRING)
                 && argumentsList.get(1).equals(EXCLUDE_OPTION_STRING) || argumentsList.get(1).equals(TAG_OPTION_STRING)
