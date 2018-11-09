@@ -26,9 +26,6 @@ public class NoteFindCommandTest {
 
     private static NoteManager noteManager = NoteManager.getInstance();
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     private NoteBuilder note1 = new NoteBuilder();
 
     @Before

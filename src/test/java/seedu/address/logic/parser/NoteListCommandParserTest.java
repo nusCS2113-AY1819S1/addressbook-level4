@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import org.junit.AfterClass;
@@ -40,19 +42,25 @@ public class NoteListCommandParserTest {
                 Messages.MESSAGE_INVALID_COMMAND_FORMAT, NoteListCommand.MESSAGE_USAGE);
         String expectedMessageEmptyModuleCodeArg = NoteListCommand.MESSAGE_EMPTY_MODULE_CODE_ARG;
 
-        // invalid args, missing prefix
-        String args = " CS2113";
+        String args;
 
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessageInvalidCommand);
-        parser.parse(args);
+        try {
+            // invalid args, missing prefix
+            args = " CS2113";
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertEquals(expectedMessageInvalidCommand, e.getMessage());
+        }
 
-        // invalid args, with prefix but has empty param
-        args = " " + PREFIX_MODULE_CODE;
-
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessageEmptyModuleCodeArg);
-        parser.parse(args);
+        try {
+            // invalid args, with prefix but blank param
+            args = " " + PREFIX_MODULE_CODE;
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertEquals(expectedMessageEmptyModuleCodeArg, e.getMessage());
+        }
     }
 
     @Test
