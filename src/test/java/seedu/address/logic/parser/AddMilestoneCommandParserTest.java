@@ -66,7 +66,7 @@ public class AddMilestoneCommandParserTest {
 
         //invalid milestone description, cannot be more longer than 40 characters
         assertParseFailure(parser, INDEX_DESC_1 + INVALID_MILESTONE_DESCRIPTION_DESC + RANK_DESC_1,
-                String.format(MESSAGE_INVALID_MILESTONEDESCRIPTION, AddMilestoneCommand.MESSAGE_USAGE) );
+                String.format(MESSAGE_INVALID_MILESTONEDESCRIPTION, AddMilestoneCommand.MESSAGE_USAGE));
 
         //invalid rank, cannot be zero
         assertParseFailure(parser, INDEX_DESC_1 + MILESTONE_DESCRIPTION_DESC_1 + INVALID_RANK_DESC_ZERO,
