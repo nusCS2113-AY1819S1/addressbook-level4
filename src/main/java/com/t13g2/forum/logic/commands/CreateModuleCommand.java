@@ -21,7 +21,7 @@ public class CreateModuleCommand extends Command {
     public static final String COMMAND_WORD = "createModule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a module. "
-        + "Parameters: "
+        + "\nParameters: "
         + PREFIX_MODULE_CODE + "MODULE CODE "
         + PREFIX_MODULE_TITLE + "MODULE TITLE "
         + "\nExample: " + COMMAND_WORD + " "

@@ -27,7 +27,7 @@ public class CreateThreadCommand extends Command {
     public static final String COMMAND_WORD = "createThread";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a thread to the forum book. "
-            + "Parameters: "
+            + "\nParameters: "
             + PREFIX_MODULE_CODE + "MODULE CODE "
             + PREFIX_THREAD_TITLE + "THREAD TITILE "
             + PREFIX_COMMENT_CONTENT + "COMMENT...\n"

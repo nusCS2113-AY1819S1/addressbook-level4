@@ -24,7 +24,7 @@ public class CreateCommentCommand extends Command {
     public static final String COMMAND_WORD = "createComment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a comment to a thread. "
-            + "Parameters: "
+            + "\nParameters: "
             + PREFIX_THREAD_ID + "THREAD ID "
             + PREFIX_COMMENT_CONTENT + "COMMENT...\n"
             + "Example: " + COMMAND_WORD + " "

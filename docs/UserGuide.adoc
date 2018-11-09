@@ -223,7 +223,7 @@ Format: `checkAnnounce`
 
 === Blocking a user from creating thread or comment : `blockUser`
 
-Block a specific user that match the given argument by admin. `block` only takes `true` or `false`  +
+Block a specific user that match the given argument by admin. User to be blocked must not be an admin. `block` only takes `true` or `false`  +
 Format: `blockUser uName/USER_NAME block/BLOCK_OR_UNBLOCK`
 
 Example:
@@ -234,7 +234,7 @@ Example:
 
 === Setting a user as admin or revert an admin to user : `setAdmin`
 
-Set a user as an admin or revert an admin to user. The user to set as admin must not be blocked. `set` only takes `true` or `false` +
+Set a user as an admin or revert an admin to user. The user to set as admin must not been blocked. `set` only takes `true` or `false` +
 Format: `setAdmin uName/USER_NAME set/SET_OR_REVERT`
 
 Examples:

@@ -23,14 +23,15 @@ public class UpdateModuleCommand extends Command {
     public static final String COMMAND_WORD = "updateModule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates a module. "
-        + "Parameters: "
+        + "\nNote: either one of mCode and mTitle or both must be provided"
+        + "\nParameters: "
         + PREFIX_MODULE_ID + "MODULE ID "
-        + PREFIX_MODULE_CODE + "MODULE CODE "
-        + PREFIX_MODULE_TITLE + "MODULE TITLE "
+        + "[" + PREFIX_MODULE_CODE + "MODULE CODE " + "]"
+        + "[" + PREFIX_MODULE_TITLE + "MODULE TITLE " + "]"
         + "\nExample: " + COMMAND_WORD + " "
         + PREFIX_MODULE_ID + "1 "
-        + PREFIX_MODULE_CODE + "CS2113 "
-        + PREFIX_MODULE_TITLE + "Software Engineering and OOP";
+        + "[" + PREFIX_MODULE_CODE + "CS2113 " + "]"
+        + "[" + PREFIX_MODULE_TITLE + "Software Engineering and OOP" + "]";
 
     public static final String MESSAGE_SUCCESS = "The module is now updated to\n"
         + "Module Code: %s\nModule Title: %s";
