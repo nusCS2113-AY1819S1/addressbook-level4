@@ -19,7 +19,9 @@ public class LoggedInAccount {
         return username;
     }
 
-    public boolean getLoginStatus() { return loginStatus; }
+    public boolean getLoginStatus() {
+        return loginStatus;
+    }
 
     /**
      * Returns true if both items of the same name have at least one other identity field that is the same.

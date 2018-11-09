@@ -43,7 +43,7 @@ public class LoginCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException{
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         if (model.getLoginStatus()) {
             throw new CommandException(String.format(MESSAGE_ALREADY_LOGGED_IN, model.getLoggedInUser()));
         }
@@ -65,7 +65,9 @@ public class LoginCommand extends Command {
                 && predicate.equals(((LoginCommand) other).predicate)); // state check
     }
 
-    // sets logged in user in the model if passwords match
+    /**
+     * sets logged in user in the model if passwords match
+     */
     private void modifyLoginStatus (List<Account> matchedAccounts, String givenPassword, Model model) {
         for (Account account : matchedAccounts) {
             if (account.getPassword().toString().equals(givenPassword)) {
