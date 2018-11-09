@@ -50,10 +50,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindNameSubCommand(new NameContainsKeywordsPredicate(keywordsList), true);
         } else if (isIncludeNameSearch(argumentsList)) {
             return new FindNameSubCommand(new NameContainsKeywordsPredicate(argumentsList));
+        } else {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
-        throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     /**
