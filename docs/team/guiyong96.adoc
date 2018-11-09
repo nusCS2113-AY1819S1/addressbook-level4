@@ -38,7 +38,7 @@ BookInventory is a desktop application to assist store managers in managing thei
 
 * Predictive text enabled for users.
 ** Functionality: Display a message to inform user if the system detects a spelling error.
-** Justification:  
+** Justification:
 ** Credits:
 
 * *Other contributions*:
