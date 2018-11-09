@@ -116,7 +116,7 @@ public class CommandBox extends UiPart<Region> {
                 commandTextField.setText(commandTextSnapshot);
             } else {
                 index = 0;
-                wordToAppend = matches.get(index).replace(lastWord, "");
+                wordToAppend = matches.get(index).replaceFirst(lastWord, "");
                 commandTextSnapshot = commandText;
             }
             commandTextField.appendText(wordToAppend);
