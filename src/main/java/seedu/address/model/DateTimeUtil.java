@@ -7,8 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import seedu.address.model.event.DateTime;
-
 /**
  * This class is utility class for method related to @DateTime field
  * and system clock
