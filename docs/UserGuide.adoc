@@ -212,6 +212,7 @@ index *must be a positive integer* 1, 2, 3, ... +
 * DATE needs to be in YYYY-MM-DD format
 * TIME needs to be in 00:00 format
 * START_TIME must not be later than END_TIME
+* Leap years are not considered during date validation.
 * Existing values will be updated to the input values.
 * One location can only hold one event at any time.
 ****
@@ -280,7 +281,7 @@ Format: `invite PERSON_INDEX to/EVENT_INDEX` +
 Example:
 
 * `invite 1 to/3` +
-Invite 1st employee at employee list to 3rd event at event list
+Invite 1st employee on employee list to 3rd event on event list
 
 image::InviteCommandGuide.png[width="800"]
 
@@ -373,6 +374,7 @@ Enter a command: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
+// tag::undoredo[]
 === Undoing previous command : `undo`
 Priority level: all
 
@@ -424,7 +426,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
-// end::undoredo[]_v1.4
+// end::undoredo[]
 
 === Clearing all entries : `clear`
 Priority level: all

@@ -64,12 +64,13 @@ public class Person {
         return address;
     }
 
-    public Department getDepartment() { return department; }
+    public Department getDepartment() {
+        return department;
+    }
 
-    public Designation getDesignation() { return designation; }
-
-
-
+    public Designation getDesignation() {
+        return designation;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

@@ -16,16 +16,16 @@ import seedu.address.model.person.Person;
 
 //@@author jieliangang
 /**
- * Removes an existing person from an existing event.
+ * Removes an employee from an event.
  */
 public class RemoveCommand extends Command {
 
     public static final String COMMAND_WORD = "remove";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes an employee from an existing event "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes an employee from an event "
             + "by the index number used in the displayed employee list and displayed event list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_FROM + "INDEX (must be a positive integer)\n"
+            + "Parameters: PERSON_INDEX (must be a positive integer) "
+            + PREFIX_FROM + "EVENT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_FROM + "1";
 
     public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed Employee: %1$s from %2$s";

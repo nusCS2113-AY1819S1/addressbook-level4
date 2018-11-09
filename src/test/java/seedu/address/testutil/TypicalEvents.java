@@ -1,6 +1,9 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.EventList;
@@ -146,6 +149,10 @@ public class TypicalEvents {
         eventList.addEvent(EVENT_3);
 
         return eventList;
+    }
+
+    public static List<Event> getTypicalEvents() {
+        return new ArrayList<>(Arrays.asList(EVENT_1, EVENT_2, EVENT_3, EVENT_4, EVENT_5));
     }
 
 }
