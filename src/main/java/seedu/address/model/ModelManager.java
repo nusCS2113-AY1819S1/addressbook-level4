@@ -124,6 +124,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasProductName(String name) {
+        requireNonNull(name);
+        return versionedAddressBook.hasProductName(name);
+    }
+
+    @Override
     public void deleteProduct(Product target) {
         versionedAddressBook.removeProduct(target);
         indicateAddressBookChanged();
@@ -409,7 +415,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void commitAddressBook() {
+    public void commitProductDatabase() {
         versionedAddressBook.commit();
     }
 

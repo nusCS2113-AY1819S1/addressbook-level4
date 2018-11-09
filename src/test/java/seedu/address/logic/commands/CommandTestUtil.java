@@ -183,7 +183,7 @@ public class CommandTestUtil {
     public static void deleteFirstProduct(Model model) {
         Product firstProduct = model.getFilteredProductList().get(0);
         model.deleteProduct(firstProduct);
-        model.commitAddressBook();
+        model.commitProductDatabase();
     }
 
 }

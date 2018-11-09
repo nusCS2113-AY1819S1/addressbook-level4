@@ -22,7 +22,7 @@ public class ClearProductCommandTest {
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager(new TestStorage());
         Model expectedModel = new ModelManager(new TestStorage());
-        expectedModel.commitAddressBook();
+        expectedModel.commitProductDatabase();
 
         assertCommandSuccess(new ClearProductCommand(),
                 model, commandHistory, ClearProductCommand.MESSAGE_SUCCESS, expectedModel);
@@ -35,7 +35,7 @@ public class ClearProductCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(), new UserPrefs(),
                 new UserDatabase(), new TestStorage());
         expectedModel.resetData(new ProductDatabase());
-        expectedModel.commitAddressBook();
+        expectedModel.commitProductDatabase();
 
         assertCommandSuccess(new ClearProductCommand(),
                 model, commandHistory, ClearProductCommand.MESSAGE_SUCCESS, expectedModel);

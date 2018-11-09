@@ -43,7 +43,7 @@ public class DeleteProductCommand extends Command {
 
         Product productToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteProduct(productToDelete);
-        model.commitAddressBook();
+        model.commitProductDatabase();
         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete));
     }
 

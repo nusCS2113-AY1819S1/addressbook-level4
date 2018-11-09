@@ -68,6 +68,20 @@ public class ProductDatabase implements ReadOnlyProductDatabase {
         return products.contains(product);
     }
 
+
+    public boolean hasProductName (String name) {
+        System.out.print("Namnet vi letar efter är:" + name);
+        for (Product product : products){  /// For loopen fungerar vi går igenom alla produkter.
+            System.out.print(product.getName().fullName);
+            if(product.getName().fullName.equals(name)){
+                System.out.print("Vi ska nu ha returnerat true");
+                return true;
+            }
+        }
+        System.out.print("Vi ska nu ha returnerat False");
+        return false;
+    }
+
     /**
      * Adds a product to the address book.
      * The product must not already exist in the address book.

@@ -20,7 +20,7 @@ public class ClearProductCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.resetData(new ProductDatabase());
-        model.commitAddressBook();
+        model.commitProductDatabase();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

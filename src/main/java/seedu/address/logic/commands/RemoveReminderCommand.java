@@ -39,7 +39,7 @@ public class RemoveReminderCommand extends Command {
         } catch (NoSuchElementException e) {
             return new CommandResult(FAILURE_NO_SUCH_REMINDER);
         }
-        model.commitAddressBook();
+        model.commitProductDatabase();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toRemoveReminderTime));
     }
 }

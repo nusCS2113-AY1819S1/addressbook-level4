@@ -87,7 +87,7 @@ public class EditProductCommand extends Command {
 
         model.updateProduct(productToEdit, editedProduct);
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
-        model.commitAddressBook();
+        model.commitProductDatabase();
         return new CommandResult(String.format(MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct));
     }
 

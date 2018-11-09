@@ -198,7 +198,7 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitProductDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
