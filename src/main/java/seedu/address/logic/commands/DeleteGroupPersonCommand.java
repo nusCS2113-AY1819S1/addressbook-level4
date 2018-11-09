@@ -8,7 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -34,6 +37,12 @@ public class DeleteGroupPersonCommand extends Command {
 
     public static final String MESSAGE_DELETE_GROUP_PERSON_SUCCESS =
             "Person index deleted from group at index [%1$s] : [%2$s]";
+    public static final String LOG_COMMIT = "Version Committed";
+    public static final String LOG_COMMAND_SUCCESS = "Person has been deleted from group";
+    public static final String LOG_INVALID_PERSON_INDEX = "Invalid person index detected";
+    public static final String LOG_INVALID_GROUP_INDEX = "Invalid group index detected";
+
+    private static final Logger logger = LogsCenter.getLogger(DeleteGroupPersonCommand.class);
 
     private final Index groupTargetIndex;
     private final Index personTargetIndex;
@@ -56,6 +65,7 @@ public class DeleteGroupPersonCommand extends Command {
         List<Group> lastShownList = model.getFilteredGroupList();
 
         if (groupTargetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.log(Level.WARNING, LOG_INVALID_GROUP_INDEX);
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
@@ -65,13 +75,16 @@ public class DeleteGroupPersonCommand extends Command {
         List<Person> personList = new ArrayList<>(personSet);
 
         if (personTargetIndex.getZeroBased() >= personList.size()) {
+            logger.log(Level.WARNING, LOG_INVALID_PERSON_INDEX);
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToDelete = personList.get(personTargetIndex.getZeroBased());
 
         model.deleteGroupPerson(group, personToDelete);
+        logger.log(Level.INFO, LOG_COMMAND_SUCCESS);
         model.commitAddressBook();
+        logger.log(Level.INFO, LOG_COMMIT);
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_PERSON_SUCCESS,
                 groupTargetIndex.getOneBased(), personTargetIndex.getOneBased()));
     }
