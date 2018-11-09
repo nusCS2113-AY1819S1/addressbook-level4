@@ -29,7 +29,6 @@ the distribution process. In order to make it modular and reduce duplicate code,
 The code that was adapted from Stack Overflow was from [https://stackoverflow.com/a/22132422/3818748[Sort a Map<Key, Value> by values]]. The code was used in `DistributeUtil.java` file,
 in the `numberOfDifferentNationality` method.
 
-//* *Minor enhancement*: Added the Nationality and Gender Field into Person Object, Fixed Undo/Redo feature for Distribute Command.
 * *Code contributed*: [https://github.com/Tsuweiquan[Github]][https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tsuweiquan[RepoSense]]
 
 * *Other contributions*:
