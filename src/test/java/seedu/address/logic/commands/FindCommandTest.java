@@ -27,7 +27,7 @@ import seedu.address.model.item.NameContainsKeywordsPredicate;
 
 
 public class FindCommandTest {
-    /*
+/*
     private Model model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
     private Model expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
     private CommandHistory commandHistory = new CommandHistory();
@@ -82,9 +82,9 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-/*
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+
+  /*  private NameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
-    */
+*/
 }
