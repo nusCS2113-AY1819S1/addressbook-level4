@@ -28,9 +28,11 @@ public class ImportExcelCommand extends Command {
             + "Parameters: (FILE_PATH) or (DIRECTORY PATH and FILE NAME)\n"
             + "Example 1: " + COMMAND_WORD + " " + PREFIX_DIR
                     + DirectoryPath.WORKING_DIRECTORY_STRING + DirectoryPath.FILE_SEPERATOR
-                    + "Book1.xlsx (MUST end with .xlsx)\n"
+                    + "Financial_Planner_ALL.xlsx (MUST end with .xlsx)\n"
             + "Example 2: " + COMMAND_WORD + " " + PREFIX_DIR
-                    + DirectoryPath.WORKING_DIRECTORY_STRING + " " + PREFIX_NAME + " Book1\n";
+                    + DirectoryPath.WORKING_DIRECTORY_STRING + " " + PREFIX_NAME + " Financial_Planner_ALL.xlsx\n"
+            + "Example 3: " + COMMAND_WORD + " " + PREFIX_DIR
+                    + DirectoryPath.WORKING_DIRECTORY_STRING + " " + PREFIX_NAME + " Financial_Planner_ALL\n";
     private String directoryPath;
 
     public ImportExcelCommand(String directoryPath) {

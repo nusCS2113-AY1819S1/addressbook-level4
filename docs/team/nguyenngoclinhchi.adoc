@@ -45,12 +45,11 @@ A summary of my contributions is given below.
 ** `Highlights`: This major enhancement was unexpectedly difficult as it requires a in-depth knowledge for the Internal List structure building up the list of records, and pointer when looping through the list and deleting records.
 ** `My contributions`: I wrote the code for the command, parser, and tests, and modify other classes and codes to adjust when a new command is added.
 
-* *Major enhancements*: Export the records data into
-** `Reason for enhancement`:
-** `Overview`:
-** `Highlights`:
-** `My contributions`:
-
+* *Major enhancements*: Export the records data into Excel file
+** `Reason for enhancement`: As the user has used the application long time, the memory made up this application will be very large. Hence, it will impose a memory burden on the computer. It would be great that we can archive this data and store them in differen location, like Google Drive, One Drive, ...
+** `Overview`: The feature allows users to archive the data in excel file.
+** `Highlights`: This major enhancement requires significant effort and time, as initially, the library is not included in Java SDK10. I have to read the documentation as well as learn how to utilize the library in the short time.
+** `My contributions`: I created Excel utility that can be used for other Excel related command. This feature have a sophisticated parser as it takes in 6 different modes command and execute different Archive command for each mode.
 * *Major enhancements*:
 ** `Reason for enhancement`:
 ** `Overview`:
