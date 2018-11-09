@@ -270,6 +270,7 @@ Examples:
 Assigns the student with matric no. `A0171234B` as a TA.
 * `module assign mc/CS2113 e/e0191234@u.nus.edu` +
 Assigns the student with email `e0191234@u.nus.edu` as a TA.
+
 // tag::classmanagementdepth[]
 === Class Management
 ==== Add Class : `class add`
