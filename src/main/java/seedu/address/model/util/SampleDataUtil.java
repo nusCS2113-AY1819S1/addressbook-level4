@@ -262,7 +262,7 @@ public class SampleDataUtil {
         int count = 0;
         for (Group abGroup : sampleAb.getGroupList()) {
             for (Person abPerson : sampleAb.getPersonList()) {
-                if (++count == 4) {
+                if (++count == 5) {
                     count = 0;
                     continue;
                 }
