@@ -344,6 +344,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
+        stateHistoryList.addEventListState();
         filteredEvents.setPredicate(predicate);
     }
 
