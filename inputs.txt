@@ -1,0 +1,3 @@
+course add c/ECONS n/Economics f/Faculty of Arts and Social Science
+course delete c/ECONS
+course list

@@ -17,7 +17,7 @@ public class ExpeditedInputs {
      * Loads input data (pre-typed commands).
      */
     public static void loadInputData() {
-        try (BufferedReader br = new BufferedReader(new FileReader("data/inputs.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("inputs.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 commands.add(line);
