@@ -59,4 +59,12 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns an attendee set containing the list of strings given.
+     */
+    public static Set<String> getAttendeeSet(String... strings) {
+        return Arrays.stream(strings)
+                .collect(Collectors.toSet());
+    }
+
 }
