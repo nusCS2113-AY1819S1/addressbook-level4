@@ -198,17 +198,29 @@ All uncompleted tasks will be sorted by their priority level.
 // tag::TDLNotification[]
 === Deadline notification : (default by system)
 
-Notify when the deadline of tasks come in the following seven days +
-No commands required
+Notify when the deadline of uncompleted tasks come in the following seven days
+or the deadline of uncompleted tasks have passed +
+No commands input required
 
 ****
-* The name of "urgent" tasks will turn yellow.
-* The sum of "urgent" tasks will form a notification sentence after each operation.
+* If one task is uncompleted and its deadline has passed, the color of id, task name, deadline time
+and module code will turn into red
+* If one task is uncompleted and its deadline comes within seven days, the color of id, task name,
+deadline time and module code will turn into yellow
+* The color of task status is red for "completed" and green for "uncompleted"
+* The "current time" is as same as system time
+* We currently assume all tasks are all in the same year. (follow the system time)
+* We will fix the year issue in the future release. (fix in V2.1)
 ****
 
 Example:
 
-* (Unavailable for this feature)
+
+image::deadline_notification.png[width="300"]
+
+As shown above (current date: 9.Nov)
+
+No command related example available
 
 // end::TDLNotification[]
 
@@ -327,6 +339,30 @@ Gives a short summary of the expenditures made so far and provides advice on how
 Gives a short summary of the expenditures made so far and provides advice on how to spend 240 SGD in the following 14 days.
 // end::ETadvice[]
 
+// tag::Calendar[]
+=== Calendar
+
+A GUI related feature, user can easily get date information from calendar GUI and the calendar will
+automatically show the calendar for this month.
+
+****
+* "this month" follow the system time.
+* User can view tasks and spending on a certain day by clicking the calendar GUI.
+(come in V2.1)
+* User can switch the calendar view (from this month to the next month ...)
+(come in V2.1)
+****
+
+Examples:
+
+image::Calendar.png[width="450"]
+
+As shown above (screenshot from GUI)
+
+No Click event related examples available now.
+
+// end::Calendar[]
+
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -375,11 +411,19 @@ All to-do list data are saved in the hard disk automatically after any command t
 There is no need to save manually.
 
 
+// tag::FAQ[]
 == FAQ
 
 *Q*: How do I transfer my data to another computer? +
 *A*: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data in your previous data folder.
 
+*Q*: How can I run this product in Linux terminal/ Dos terminal? +
+*A*: After installing/ updating the java package, you can run `java -jar something.jar` in terminal.
+
+*Q*: Can I import my to-do list related or expenditure tracker related information into your product in certain form? +
+*A*: At present, you cannot import any related information from other sources, we are considering to add
+a feature in future release to help users to import information from other sources by csv files.
+// end::FAQ[]
 
 == Command Summary
 
