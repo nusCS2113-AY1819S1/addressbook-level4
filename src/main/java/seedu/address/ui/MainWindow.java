@@ -107,7 +107,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         loginWindow = new LoginWindow(security);
-        registrationWindow = new RegistrationWindow(security);
+        registrationWindow = new RegistrationWindow(logic);
     }
 
     public Stage getPrimaryStage() {

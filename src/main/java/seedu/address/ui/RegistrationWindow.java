@@ -1,12 +1,22 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.events.ui.ExitRegisterEvent;
-import seedu.address.security.Security;
+import seedu.address.logic.Logic;
+import seedu.address.logic.commands.RegisterCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.security.SecurityAuthenticationException;
 
 /***
  * Controller for the login
@@ -14,7 +24,7 @@ import seedu.address.security.Security;
 public class RegistrationWindow extends UiPart<Stage> {
 
     private static final String FXML = "RegistrationWindow.fxml";
-    private Security user;
+    private Logic logic;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -46,11 +56,12 @@ public class RegistrationWindow extends UiPart<Stage> {
     /**
      * Creates a new Registration Window.
      */
-    public RegistrationWindow(Security user) {
+    public RegistrationWindow(Logic logic) {
         this(new Stage());
-        this.user = user;
+        this.logic = logic;
         //Links with eventsCenter I believe
         registerAsAnEventHandler(this);
+        label.setText(" ");
     }
 
     /**
@@ -102,7 +113,18 @@ public class RegistrationWindow extends UiPart<Stage> {
      * Runs whenever the register button is clicked
      */
     public void handleRegister() {
-        //TODO Implement this
+        try {
+            logic.execute(RegisterCommand.COMMAND_WORD + " " + PREFIX_USERNAME + usernameTextField.getText()
+                    + " " + PREFIX_PASSWORD + passwordTextField.getText() + " " + PREFIX_EMAIL
+                    + emailTextField.getText() + " " + PREFIX_PHONE + phoneTextField.getText() + " "
+                    + PREFIX_ADDRESS + addressTextField.getText());
+        } catch (CommandException e) {
+            label.setText(e.getMessage());
+        } catch (ParseException e) {
+            label.setText(e.getMessage());
+        } catch (SecurityAuthenticationException e) {
+            label.setText(e.getMessage());
+        }
     }
 
 
