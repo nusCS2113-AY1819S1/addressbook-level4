@@ -29,6 +29,7 @@ public class ImportCommandTest {
     private static final Path NO_DATA_FILE = TEST_DATA_FOLDER.resolve("no_data.ics"); //no calendar data
     private static final Path NO_TT_DATA_FILE = TEST_DATA_FOLDER.resolve("no_timetable_data.ics"); //no timetable data
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.ics"); //totally missing
+    private static final Path OVERLAP_FILE = TEST_DATA_FOLDER.resolve("overlap.ics"); //overlapping timeslot
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("temp.ics");
 
     private static final Path TYPICAL_FILE = TEST_DATA_FOLDER.resolve("typical.ics"); //same data as TYPICAL_TIMETABLE
@@ -55,6 +56,18 @@ public class ImportCommandTest {
         thrown.expectMessage(String.format(ImportCommand.MESSAGE_IO_ERROR, MISSING_FILE));
 
         command.execute(actualModelStub, commandHistory);
+    }
+
+    //Trying to import file that has overlapping timeslots will fail, for now.
+    @Test
+    public void execute_overlapFile_showsMessageOverlap() throws Exception {
+        ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
+        Command command = new ImportCommand(OVERLAP_FILE);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(String.format(ImportCommand.MESSAGE_FILE_OVERLAP_TIMESLOT, OVERLAP_FILE));
+
+        CommandResult commandResult = command.execute(actualModelStub, commandHistory);
     }
 
     //Trying to import file with no iCalendar data; tell user it is empty.
@@ -91,7 +104,6 @@ public class ImportCommandTest {
         assertEquals(String.format(ImportCommand.MESSAGE_FILE_EMPTY, EMPTY_FILE.toString()),
                 commandResult.feedbackToUser);
     }
-
 
     /**
      * Tests if an imported timetable is identical to the expected timetable.
