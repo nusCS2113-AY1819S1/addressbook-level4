@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.logic.commands.ExcludeNameFindCommand;
+import seedu.address.logic.commands.ExcludeTagFindCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindNameSubCommand;
-import seedu.address.logic.commands.FindTagSubCommand;
+import seedu.address.logic.commands.IncludeNameFindCommand;
+import seedu.address.logic.commands.IncludeTagFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -41,15 +43,15 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (isExcludeTagSearch(argumentsList)) {
             List<String> keywordsList = argumentsList.subList(2, sizeOfList);
-            return new FindTagSubCommand(new TagContainsKeywordsPredicate(keywordsList), true);
+            return new ExcludeTagFindCommand(new TagContainsKeywordsPredicate(keywordsList));
         } else if (isIncludeTagSearch(argumentsList)) {
             List<String> keywordsList = argumentsList.subList(1, sizeOfList);
-            return new FindTagSubCommand(new TagContainsKeywordsPredicate(keywordsList));
-        } else if (isExcludePersonSearch(argumentsList)) {
+            return new IncludeTagFindCommand(new TagContainsKeywordsPredicate(keywordsList));
+        } else if (isExcludeNameSearch(argumentsList)) {
             List<String> keywordsList = argumentsList.subList(1, sizeOfList);
-            return new FindNameSubCommand(new NameContainsKeywordsPredicate(keywordsList), true);
+            return new ExcludeNameFindCommand(new NameContainsKeywordsPredicate(keywordsList));
         } else if (isIncludeNameSearch(argumentsList)) {
-            return new FindNameSubCommand(new NameContainsKeywordsPredicate(argumentsList));
+            return new IncludeNameFindCommand(new NameContainsKeywordsPredicate(argumentsList));
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -62,7 +64,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 && argumentsList.get(0).equals(EXCLUDE_OPTION_STRING));
     }
 
-    private boolean isExcludePersonSearch(List<String> argumentsList) {
+    private boolean isExcludeNameSearch(List<String> argumentsList) {
         return argumentsList.size() > 1 && argumentsList.get(0).equals(EXCLUDE_OPTION_STRING)
                 && !argumentsList.get(1).equals(TAG_OPTION_STRING);
     }

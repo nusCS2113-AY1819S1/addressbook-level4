@@ -8,9 +8,11 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import seedu.address.logic.commands.ExcludeNameFindCommand;
+import seedu.address.logic.commands.ExcludeTagFindCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindNameSubCommand;
-import seedu.address.logic.commands.FindTagSubCommand;
+import seedu.address.logic.commands.IncludeNameFindCommand;
+import seedu.address.logic.commands.IncludeTagFindCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
@@ -27,7 +29,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindNameSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), false);
+                new IncludeNameFindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -35,17 +37,17 @@ public class FindCommandParserTest {
 
         // parsing with exclude option enabled
         FindCommand expectedFindCommand2 =
-                new FindNameSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), true);
+                new ExcludeNameFindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "\\exclude Alice Bob", expectedFindCommand2);
 
         // parsing with tag option enabled
         FindCommand expectedFindCommand3 =
-                new FindTagSubCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleagues")));
+                new IncludeTagFindCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleagues")));
         assertParseSuccess(parser, "\\tag friends colleagues", expectedFindCommand3);
 
         // parsing with tag and exclude options enabled
         FindCommand expectedFindCommand4 =
-                new FindTagSubCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleagues")), true);
+                new ExcludeTagFindCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleagues")));
         assertParseSuccess(parser, "\\tag \\exclude friends colleagues", expectedFindCommand4);
         assertParseSuccess(parser, "\\exclude \\tag friends colleagues", expectedFindCommand4);
     }

@@ -12,29 +12,19 @@ import seedu.address.model.searchhistory.KeywordType;
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindNameSubCommand extends FindCommand {
+public class IncludeNameFindCommand extends FindCommand {
 
     private final NameContainsKeywordsPredicate predicate;
 
-    public FindNameSubCommand(NameContainsKeywordsPredicate predicate) {
-        this(predicate, false);
-    }
-
-    public FindNameSubCommand(NameContainsKeywordsPredicate predicate, boolean isExcludeMode) {
+    public IncludeNameFindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
-        this.isExcludeMode = isExcludeMode;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        if (isExcludeMode) {
-            model.recordKeywords(KeywordType.ExcludeNames, predicate.getLowerCaseKeywords());
-            model.executeSearch(predicate.negate());
-        } else {
-            model.recordKeywords(KeywordType.IncludeNames, predicate.getLowerCaseKeywords());
-            model.executeSearch(predicate);
-        }
+        model.recordKeywords(KeywordType.IncludeNames, predicate.getLowerCaseKeywords());
+        model.executeSearch(predicate);
         String keywordHistoryString = getKeywordHistoryString(model.getReadOnlyKeywordsRecord());
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
@@ -44,7 +34,7 @@ public class FindNameSubCommand extends FindCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindNameSubCommand // instanceof handles nulls
-                && predicate.equals(((FindNameSubCommand) other).predicate)); // state check
+                || (other instanceof IncludeNameFindCommand // instanceof handles nulls
+                && predicate.equals(((IncludeNameFindCommand) other).predicate)); // state check
     }
 }

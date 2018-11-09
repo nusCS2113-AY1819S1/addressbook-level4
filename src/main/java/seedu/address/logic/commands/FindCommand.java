@@ -19,7 +19,6 @@ public abstract class FindCommand extends Command {
             + "Example2: " + COMMAND_WORD + " " + FindCommandParser.EXCLUDE_OPTION_STRING + " alice\n"
             + "Example3: " + COMMAND_WORD + " " + FindCommandParser.TAG_OPTION_STRING + " President";
 
-    protected boolean isExcludeMode = false;
     private KeywordsOutputFormatter formatter = new KeywordsOutputFormatter();
 
     String getKeywordHistoryString(ReadOnlyKeywordsRecord record) {
