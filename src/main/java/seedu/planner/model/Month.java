@@ -35,9 +35,6 @@ public class Month {
 
     public final String value;
 
-    private Logger logger = LogsCenter.getLogger(Month.class);
-    private Matcher matcher;
-
     private int year;
     private int month;
 
@@ -53,12 +50,19 @@ public class Month {
         value = String.format(STANDARD_MONTH_REP, STANDARD_MONTHS.get(month - 1), year);
     }
 
+    public Month(int month, int year) {
+        this.month = month;
+        this.year = year;
+        checkArgument(month <= STANDARD_MONTHS.size(), MESSAGE_MONTH_CONSTRAINTS);
+        value = String.format("%s-%d", STANDARD_MONTHS.get(month - 1), year);
+    }
+
     /**
      * Initiates the values of month and year after parsing the input
      * @param input input to be parsed
      */
     private void initMonth(String input) {
-        matcher = MONTH_VALIDATION_PATTERN.matcher(input);
+        Matcher matcher = MONTH_VALIDATION_PATTERN.matcher(input);
         if (!matcher.matches()) {
             checkArgument(false, MESSAGE_MONTH_CONSTRAINTS);
         }
@@ -69,13 +73,6 @@ public class Month {
         this.month = STANDARD_MONTHS.indexOf(month.toUpperCase()) + 1;
     }
 
-    public Month(int month, int year) {
-        this.month = month;
-        this.year = year;
-        checkArgument(month <= STANDARD_MONTHS.size(), MESSAGE_MONTH_CONSTRAINTS);
-        value = String.format("%s-%d", STANDARD_MONTHS.get(month - 1), year);
-    }
-
     public int getYear() {
         return year;
     }
@@ -83,7 +80,6 @@ public class Month {
     public int getMonth() {
         return month;
     }
-
 
     /**
      * Returns if a given string is a valid Month.

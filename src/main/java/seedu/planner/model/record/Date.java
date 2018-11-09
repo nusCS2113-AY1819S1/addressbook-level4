@@ -27,8 +27,6 @@ public class Date {
 
     public final String value;
 
-    private Logger logger = LogsCenter.getLogger(Date.class);
-
     private int day;
     private int month;
     private int year;
