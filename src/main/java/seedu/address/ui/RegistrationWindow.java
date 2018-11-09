@@ -6,7 +6,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.events.ui.ExitRegisterEvent;
-import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.security.Security;
 
 /***
@@ -103,14 +102,7 @@ public class RegistrationWindow extends UiPart<Stage> {
      * Runs whenever the register button is clicked
      */
     public void handleRegister() {
-//        switch(user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
-//             phoneTextField.getText(), addressTextField.getText())) {
-//        case SUCCESS:
-//            raise(new SuccessfulRegisterEvent());
-//            break;
-//        default:
-//            break;
-//        }
+        //TODO Implement this
     }
 
 
