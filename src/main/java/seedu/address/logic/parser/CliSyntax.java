@@ -59,13 +59,13 @@ public class CliSyntax {
             Map.ofEntries(
             new AbstractMap.SimpleEntry<>("class", new ArrayList<>(Arrays.asList(
                     "add",
-                    "list",
-                    "delete",
                     "addstudent",
+                    "delete",
                     "delstudent",
                     "edit",
-                    "markattendance",
+                    "list",
                     "listattendance",
+                    "markattendance",
                     "modattendance"
             ))),
             new AbstractMap.SimpleEntry<>("course", new ArrayList<>(Arrays.asList(
@@ -76,42 +76,42 @@ public class CliSyntax {
             ))),
             new AbstractMap.SimpleEntry<>("grade", new ArrayList<>(Arrays.asList(
                     "add",
-                    "list",
-                    "graph"
+                    "graph",
+                    "list"
             ))),
             new AbstractMap.SimpleEntry<>("gradebook", new ArrayList<>(Arrays.asList(
                     "add",
                     "delete",
-                    "list",
                     "edit",
-                    "find"
+                    "find",
+                    "list"
             ))),
             new AbstractMap.SimpleEntry<>("module", new ArrayList<>(Arrays.asList(
                     "add",
-                    "delete",
-                    "list",
-                    "edit",
-                    "view",
-                    "find",
-                    "enrol",
+                    "archive",
                     "assign",
-                    "archive"
+                    "delete",
+                    "edit",
+                    "enrol",
+                    "find",
+                    "list",
+                    "view"
             ))),
             new AbstractMap.SimpleEntry<>("note", new ArrayList<>(Arrays.asList(
                     "add",
                     "delete",
-                    "list",
                     "edit",
+                    "export",
                     "find",
-                    "export"
+                    "list"
             ))),
             new AbstractMap.SimpleEntry<>("student", new ArrayList<>(Arrays.asList(
                     "add",
                     "delete",
-                    "list",
                     "edit",
+                    "export",
                     "find",
-                    "export"
+                    "list"
             )))
     );
 }
