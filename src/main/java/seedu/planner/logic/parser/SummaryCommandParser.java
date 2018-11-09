@@ -29,7 +29,7 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
      * Parses the given {@code String} of arguments in the context of the SummaryCommand
      * and returns an SummaryCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public SummaryCommand parse(String args) throws ParseException {
         logger.info("The summary command: " + args);

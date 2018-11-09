@@ -49,6 +49,12 @@ public class ListCommand extends Command {
         this.predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 
+    public ListCommand(Date date) {
+        this.startDate = date;
+        this.endDate = date;
+        this.predicate = new DateIsWithinIntervalPredicate(date, date);
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
