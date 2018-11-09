@@ -3,7 +3,7 @@ package seedu.address.commons.events.model;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.person.TimeTable;
 
-/** Indicates the TimeTable in the model has changed*/
+/** Indicates the {@code TimeTable} in {@code Model} has changed*/
 public class TimeTableChangedEvent extends BaseEvent {
 
     public final TimeTable data;
@@ -18,6 +18,6 @@ public class TimeTableChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "TimeTable";
+        return "Number of timeslots: " + data.getTimeSlots().size();
     }
 }

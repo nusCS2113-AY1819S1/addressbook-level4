@@ -50,6 +50,11 @@ public class ParserUtilTest {
     private static final String VALID_TIME_0800HRS_SHORT_4 = "8";
     private static final String VALID_TIME_1000HRS_FULL = "10:00";
     private static final String VALID_TIME_1000HRS_SHORT = "10";
+    private static final String VALID_TIME_0830HRS_FULL = "08:30";
+    private static final String VALID_TIME_0830HRS_SHORT_1 = "8:30";
+    private static final String VALID_TIME_0830HRS_SHORT_2 = "830";
+    private static final String VALID_TIME_1030HRS_FULL = "10:30";
+    private static final String VALID_TIME_1030HRS_SHORT = "1030";
 
     private static final String WHITESPACE = " \t\r\n";
     private static final String DASH = "-";
@@ -261,10 +266,18 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTimeSlot_validValues_returnsTimeSlot() throws Exception {
+    public void parseTimeSlot_validValuesZeroMinute_returnsTimeSlot() throws Exception {
         TimeSlot expected = TypicalTimeSlots.MON_8_TO_10;
         TimeSlot actual = ParserUtil.parseTimeSlot(VALID_DAY_FULL
                 + WHITESPACE + VALID_TIME_0800HRS_FULL + DASH + VALID_TIME_1000HRS_FULL);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseTimeSlot_validValuesNonZeroMinute_returnsTimeSlot() throws Exception {
+        TimeSlot expected = TypicalTimeSlots.MON_830_TO_1030;
+        TimeSlot actual = ParserUtil.parseTimeSlot(VALID_DAY_FULL
+                + WHITESPACE + VALID_TIME_0830HRS_FULL + DASH + VALID_TIME_1030HRS_FULL);
         assertEquals(expected, actual);
     }
 
@@ -277,7 +290,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTimeSlot_validValuesShortTime_returnsTimeSlot() throws Exception {
+    public void parseTimeSlot_validValuesShortTimeZeroMinute_returnsTimeSlot() throws Exception {
         TimeSlot expected = TypicalTimeSlots.MON_8_TO_10;
 
         TimeSlot actual1 = ParserUtil.parseTimeSlot(VALID_DAY_FULL
@@ -299,6 +312,23 @@ public class ParserUtilTest {
         TimeSlot actual5 = ParserUtil.parseTimeSlot(VALID_DAY_FULL
                 + WHITESPACE + VALID_TIME_0800HRS_FULL + DASH + VALID_TIME_1000HRS_SHORT);
         assertEquals(expected, actual5);
+    }
+
+    @Test
+    public void parseTimeSlot_validValuesShortTimeNoNZeroMinute_returnsTimeSlot() throws Exception {
+        TimeSlot expected = TypicalTimeSlots.MON_830_TO_1030;
+
+        TimeSlot actual1 = ParserUtil.parseTimeSlot(VALID_DAY_FULL
+                + WHITESPACE + VALID_TIME_0830HRS_SHORT_1 + DASH + VALID_TIME_1030HRS_FULL);
+        assertEquals(expected, actual1);
+
+        TimeSlot actual2 = ParserUtil.parseTimeSlot(VALID_DAY_FULL
+                + WHITESPACE + VALID_TIME_0830HRS_SHORT_2 + DASH + VALID_TIME_1030HRS_FULL);
+        assertEquals(expected, actual2);
+
+        TimeSlot actual3 = ParserUtil.parseTimeSlot(VALID_DAY_FULL
+                + WHITESPACE + VALID_TIME_0830HRS_FULL + DASH + VALID_TIME_1030HRS_SHORT);
+        assertEquals(expected, actual3);
     }
 
     @Test

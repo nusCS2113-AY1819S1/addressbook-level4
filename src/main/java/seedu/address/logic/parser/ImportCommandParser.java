@@ -3,11 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.nio.file.Path;
-import java.util.NoSuchElementException;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.security.GetAuthenticationEvent;
 import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
 import seedu.address.logic.commands.ImportCommand;
@@ -31,14 +29,11 @@ public class ImportCommandParser extends ParserClass implements Parser<ImportCom
         if (!isAuthenticated) {
             throw new SecurityAuthenticationException("User is not authenticated");
         }
-        Index index = Index.fromZeroBased(1); //have to change this to the user after user is implemented.
-
-        try {
-            Path path;
-            path = ParserUtil.parseImportFileLocation(args);
-            return new ImportCommand(index, path);
-        } catch (NoSuchElementException | ParseException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE), e);
+        if (args.trim().length() == 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+        } else {
+            Path path = ParserUtil.parseImportExportFileName(args);
+            return new ImportCommand(path);
         }
     }
 

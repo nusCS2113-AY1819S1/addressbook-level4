@@ -178,18 +178,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoAddressBook() {
         versionedAddressBook.undo();
         indicateAddressBookChanged();
-
-        // TODO: Implement after user comes online
-        // indicateTimeTableChanged(user.getTimeTable());
     }
 
     @Override
     public void redoAddressBook() {
         versionedAddressBook.redo();
         indicateAddressBookChanged();
-
-        // TODO: Implement after user comes online
-        // indicateTimeTableChanged(user.getTimeTable());
     }
 
     @Override

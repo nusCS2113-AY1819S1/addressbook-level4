@@ -14,7 +14,7 @@ import seedu.address.model.person.exceptions.TimeSlotDoesNotExistException;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
- * Deletes a {@code TimeSlot} from the {@code TimeTable} of person at {@code Index index}
+ * Deletes a {@code TimeSlot} from the {@code TimeTable} of the currently logged in {@code User}
  */
 public class DeleteTimeCommand extends Command {
     public static final String COMMAND_WORD = "deletetime";

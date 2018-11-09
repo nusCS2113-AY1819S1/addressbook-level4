@@ -14,19 +14,22 @@ import javafx.scene.paint.Color;
 import seedu.address.model.person.exceptions.TimeSlotNotOverlapException;
 
 /**
- * Represents a single TimeSlot in TimeTable Class
- *
+ * Represents a single {@code TimeSlot} to be placed inside a {@code TimeTable}
  */
 public class TimeSlot {
-    // TODO: Make constraint message more descriptive
-    public static final String MESSAGE_GENERAL_CONSTRAINTS = "Does not fit constraints!";
-    public static final String MESSAGE_CANNOT_PARSE_DAY = "Accepted day format: MONDAY";
-    public static final String MESSAGE_CANNOT_PARSE_TIME = "Accepted time format: 8-10";
-    public static final String MESSAGE_INVALID_TIME_SLOT = "Invalid TimeSlot";
+    public static final String MESSAGE_GENERAL_CONSTRAINTS =
+            "A timeslot should have a day of week (Monday, Tue), a start time, and an end time.";
+    public static final String MESSAGE_CANNOT_PARSE_DAY = "Accepted day format: Monday, Mon";
+    public static final String MESSAGE_CANNOT_PARSE_TIME = "Accepted time format: 8:00-10:00, 8-10";
+    public static final String MESSAGE_INVALID_TIME_SLOT =
+            "Invalid timeslot, check that your timeslot makes sense.\n"
+                + "FreeTime uses the 24-hour clock system, so please use '10-14' instead of '10-2'.";
 
-    // TODO: Change to accept times with non 0 minutes
     public static final String VALIDATION_REGEX =
-            "\\w+(\\s*)([0-9]|[0-1][0-9]|[2][0-3])[:]?[0]?[0]?(\\s*)[-](\\s*)([0-9]|[0-1][0-9]|[2][0-3])[:]?[0]?[0]?";
+            "\\w+(\\s*)"
+            + "([0-9]|[0-1][0-9]|[2][0-3])[:]?[0-5]?[0-9]?"
+            + "(\\s*)[-](\\s*)"
+            + "([0-9]|[0-1][0-9]|[2][0-3])[:]?[0-5]?[0-9]?";
 
     private static final Color DEFAULT_COLOR = Color.BLACK;
 
@@ -48,13 +51,7 @@ public class TimeSlot {
     }
 
     public TimeSlot(DayOfWeek day, LocalTime start, LocalTime end, Color col) {
-        requireAllNonNull(day, start, end);
-
-        checkArgument(isValidTimeSlot(start, end), MESSAGE_INVALID_TIME_SLOT);
-
-        dayOfWeek = day;
-        startTime = start;
-        endTime = end;
+        this(day, start, end);
         color = col;
     }
 
@@ -102,35 +99,6 @@ public class TimeSlot {
     }
 
     /**
-     * Checks whether this {@code TimeSlot} overlaps with {@code toCompare}
-     *
-     * @param toCompare {@code TimeSlot} to compare against
-     * @return Whether this {@code TimeSlot} overlaps with {@code toCompare}
-     */
-    public boolean isOverlap(TimeSlot toCompare) {
-        boolean isNotOverlapTime = (this.endTime.isBefore(toCompare.startTime)
-                || toCompare.endTime.isBefore(this.startTime)
-                || isAdjacent(toCompare));
-
-        return isSameDay(toCompare) && !isNotOverlapTime;
-    }
-
-    /**
-     * Checks whether this {@code TimeSlot} is adjacent to {@code toCompare}
-     *
-     * @param toCompare {@code TimeSlot} to compare against
-     * @return Whether this {@code TimeSlot} is adjacent to {@code toCompare}
-     */
-    public boolean isAdjacent(TimeSlot toCompare) {
-        return isSameDay(toCompare)
-                && (this.endTime.equals(toCompare.startTime) || this.startTime.equals(toCompare.endTime));
-    }
-
-    public boolean isSameDay(TimeSlot toCompare) {
-        return this.dayOfWeek == toCompare.dayOfWeek;
-    }
-
-    /**
      * Merges {@code toMerge} into this {@code TimeSlot}
      * This {@code TimeSlot} must overlap or be adjacent with {@code toMerge}
      *
@@ -169,6 +137,36 @@ public class TimeSlot {
         DayOfWeek toReturnDay = this.dayOfWeek;
 
         return new TimeSlot(toReturnDay, toReturnStart, toReturnEnd);
+    }
+
+    /**
+     * Checks whether this {@code TimeSlot} overlaps with {@code toCompare}
+     *
+     * @param toCompare {@code TimeSlot} to compare against
+     * @return Whether this {@code TimeSlot} overlaps with {@code toCompare}
+     */
+    public boolean isOverlap(TimeSlot toCompare) {
+        boolean isNotOverlapTime = (this.endTime.isBefore(toCompare.startTime)
+                || toCompare.endTime.isBefore(this.startTime)
+                || isAdjacent(toCompare));
+
+        return isSameDay(toCompare) && !isNotOverlapTime;
+    }
+
+    /**
+     * Checks whether this {@code TimeSlot} is adjacent to {@code toCompare}
+     * Two {@code TimeSlot}s are adjacent if the start time of one is equal to the end time of the other
+     *
+     * @param toCompare {@code TimeSlot} to compare against
+     * @return Whether this {@code TimeSlot} is adjacent to {@code toCompare}
+     */
+    public boolean isAdjacent(TimeSlot toCompare) {
+        return isSameDay(toCompare)
+                && (this.endTime.equals(toCompare.startTime) || this.startTime.equals(toCompare.endTime));
+    }
+
+    public boolean isSameDay(TimeSlot toCompare) {
+        return this.dayOfWeek.equals(toCompare.dayOfWeek);
     }
 
     @Override

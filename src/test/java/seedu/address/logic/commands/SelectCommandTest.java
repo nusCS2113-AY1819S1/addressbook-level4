@@ -135,7 +135,7 @@ public class SelectCommandTest {
      */
     private void assertExecutionSuccess(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);
-        String nameSelected = model.getFilteredPersonList().get(index.getZeroBased()).getName().toString();
+        String nameSelected = model.getFriendList(model.getUser()).get(index.getZeroBased()).getName().toString();
 
         String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, nameSelected);
 

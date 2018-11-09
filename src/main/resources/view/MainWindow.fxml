@@ -13,7 +13,7 @@
 
 <?import javafx.scene.text.Text?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         minWidth="800" minHeight="600" onCloseRequest="#handleExit">
+         minWidth="1280" minHeight="720" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/FreeTime_32.png" />
   </icons>
@@ -58,7 +58,7 @@
               <padding>
                   <Insets top="10" right="10" bottom="10" left="10"/>
               </padding>
-              <StackPane fx:id="mePanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              <StackPane fx:id="mePanelPlaceholder" minHeight="110" maxHeight="110"/>
 
               <SplitPane id="splitteringPane" fx:id="splitteringPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
                   <VBox fx:id="FriendsList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">

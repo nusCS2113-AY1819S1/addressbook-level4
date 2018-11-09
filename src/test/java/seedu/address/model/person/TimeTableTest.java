@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.exceptions.TimeSlotDoesNotExistException;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
+import seedu.address.model.person.exceptions.TimeTableEmptyException;
 import seedu.address.testutil.TypicalTimeSlots;
 
 public class TimeTableTest {
@@ -74,5 +76,57 @@ public class TimeTableTest {
     public void removeTimeSlot_timeSlotNotInTimeTable_throwsTimeSlotDoesNotExistException() {
         thrown.expect(TimeSlotDoesNotExistException.class);
         timeTableBlank.removeTimeSlot(TypicalTimeSlots.MON_8_TO_10);
+    }
+
+    @Test
+    public void getEarliest_emptyTimeTable_throwsTimeTableEmptyException() {
+        thrown.expect(TimeTableEmptyException.class);
+        timeTableBlank.getEarliest();
+    }
+
+    @Test
+    public void getLatest_emptyTimeTable_throwsTimeTableEmptyException() {
+        thrown.expect(TimeTableEmptyException.class);
+        timeTableBlank.getLatest();
+    }
+
+    @Test
+    public void getEarliestLatest_nonEmptyTimeTable_returnsEarliestLatest() {
+        timeTableBlank.addTimeSlot(TypicalTimeSlots.MON_10_TO_12);
+        assertEquals(timeTableBlank.getEarliest(), LocalTime.parse("10:00"));
+        assertEquals(timeTableBlank.getLatest(), LocalTime.parse("12:00"));
+
+        timeTableBlank.addTimeSlot(TypicalTimeSlots.TUE_10_TO_12);
+        assertEquals(timeTableBlank.getEarliest(), LocalTime.parse("10:00"));
+        assertEquals(timeTableBlank.getLatest(), LocalTime.parse("12:00"));
+
+        timeTableBlank.addTimeSlot(TypicalTimeSlots.MON_8_TO_10);
+        assertEquals(timeTableBlank.getEarliest(), LocalTime.parse("08:00"));
+        assertEquals(timeTableBlank.getLatest(), LocalTime.parse("12:00"));
+
+        timeTableBlank.addTimeSlot(TypicalTimeSlots.TUE_12_TO_14);
+        assertEquals(timeTableBlank.getEarliest(), LocalTime.parse("08:00"));
+        assertEquals(timeTableBlank.getLatest(), LocalTime.parse("14:00"));
+
+        timeTableBlank.addTimeSlot(TypicalTimeSlots.WED_10_TO_12);
+        assertEquals(timeTableBlank.getEarliest(), LocalTime.parse("08:00"));
+        assertEquals(timeTableBlank.getLatest(), LocalTime.parse("14:00"));
+
+        timeTableBlank.removeTimeSlot(TypicalTimeSlots.TUE_10_TO_12);
+        assertEquals(timeTableBlank.getEarliest(), LocalTime.parse("08:00"));
+        assertEquals(timeTableBlank.getLatest(), LocalTime.parse("14:00"));
+
+        timeTableBlank.removeTimeSlot(TypicalTimeSlots.TUE_12_TO_14);
+        assertEquals(timeTableBlank.getEarliest(), LocalTime.parse("08:00"));
+        assertEquals(timeTableBlank.getLatest(), LocalTime.parse("12:00"));
+
+        timeTableBlank.removeTimeSlot(TypicalTimeSlots.WED_10_TO_12);
+        assertEquals(timeTableBlank.getEarliest(), LocalTime.parse("08:00"));
+        assertEquals(timeTableBlank.getLatest(), LocalTime.parse("12:00"));
+
+        timeTableBlank.removeTimeSlot(TypicalTimeSlots.MON_10_TO_12);
+        assertEquals(timeTableBlank.getEarliest(), LocalTime.parse("08:00"));
+        assertEquals(timeTableBlank.getLatest(), LocalTime.parse("10:00"));
+
     }
 }

@@ -12,7 +12,7 @@ import seedu.address.model.person.TimeSlot;
 import seedu.address.security.SecurityAuthenticationException;
 
 /**
- * Parses input arguments and creates a new AddTimeCommand object
+ * Parses input arguments and creates a new {@code AddTimeCommand} object
  */
 public class AddTimeCommandParser extends ParserClass implements Parser<AddTimeCommand> {
 
@@ -20,7 +20,7 @@ public class AddTimeCommandParser extends ParserClass implements Parser<AddTimeC
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddTimeCommand
-     * and returns an AddTimeCommand object for execution.
+     * and returns an {@code AddTimeCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddTimeCommand parse (String args) throws ParseException, SecurityAuthenticationException {
