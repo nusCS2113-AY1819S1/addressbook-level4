@@ -17,6 +17,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -188,9 +189,11 @@ public class MainApp extends Application {
 
     //@@author cqinkai
     /**
-     * Starts performing status update for Events listed in event manager by making calls to
-     * {@code execute} method for {@code UpdateStatusCommand}.
-     * First update after delay of 300,000 milliseconds of 300,000 milliseconds.
+     * Starts performing the following commands for Events listed in event manager:
+     * 1. Status update by calling {@code UpdateStatusCommand} through {@code updateEventStatus}
+     * 2. Reminders for upcoming events by calling {@code ReminderCommand} through {@code checkEventReminders}
+     * Status update occurs every 300,000 milliseconds (5 minutes).
+     * Event reminders are sent every 36,000,000 milliseconds (6 hours).
      */
     private void initStatusUpdate() {
         Timer timer = new Timer();
@@ -199,7 +202,7 @@ public class MainApp extends Application {
             @Override
             public void run() {
                 try {
-                    CommandResult commandResult = logic.execute("update");
+                    CommandResult updateCommandResult = logic.execute("update");
                 } catch (CommandException | ParseException pe) {
                     // Will never happen
                 }
@@ -207,6 +210,21 @@ public class MainApp extends Application {
         };
 
         timer.scheduleAtFixedRate(updateEventStatus, 300000, 300000);
+
+        TimerTask checkEventReminders = new TimerTask() {
+
+            @Override
+            public void run() {
+                try {
+                    CommandResult reminderCommandResult = logic.execute("reminder");
+                } catch (CommandException | ParseException pe) {
+                    logger.info("No upcoming reminders.");
+                    new NewResultAvailableEvent(pe.getMessage());
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(checkEventReminders, 36000000, 36000000);
     }
 
     @Override
