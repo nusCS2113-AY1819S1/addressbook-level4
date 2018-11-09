@@ -26,6 +26,10 @@ Something Daily is a desktop address book application used for teaching Software
 ** What it does: Provide users a way to sort tasks in the To-do List by certain task attribution (name, module code, deadline) and users can also reverse the rank of sorting
 ** Justification: This enhancement make users easier to check their tasks recorded in the To-do list based on a certain standard.
 
+* *Major enhancement*: deigned *deadline notification*
+** What it does: Notify users the deadline is approaching or have due by changing the font color.
+** Justification: This enhancement is one of key components of manging the to-do list
+
 * *Minor enhancement*: add "undoable_command" class related methods to fix "undo" command on both To-do List side and Expenditure Tracker side.
 * *Minor enhancement*: add a few tests to increase coverage.
 
@@ -35,8 +39,11 @@ Something Daily is a desktop address book application used for teaching Software
 
 ** Documentation:
 *** Add implementation of TDL_sort command in the Developer Guide and update To-do List-related logic part in both User guide and Developer guide.
+*** Add implementation of deadline notification in the Developer Guide
+*** Update deadline notification and calendar in the User Guide.
+*** Update Q&A in the user guide
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#20], https://github.com[#24], https://github.com[#47], https://github.com[#48], https://github.com[#74], https://github.com[#78], https://github.com[#82]
+*** PRs reviewed (with non-trivial review comments): https://github.com[#20], https://github.com[#24], https://github.com[#47], https://github.com[#48], https://github.com[#74], https://github.com[#78], https://github.com[#82], https://github.com[#122]
 
 
 

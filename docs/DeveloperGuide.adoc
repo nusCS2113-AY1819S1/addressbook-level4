@@ -352,16 +352,26 @@ image::CompleteUncompleteTaskSequenceDiagram.png[width="800"]
 
 ==== Current Implementation
 
-Sorting tasks in the to-do list uses both Logic and Model components.
+Sorting tasks in the to-do list uses both `Logic` and `Model` components.
 Generally, the implementation of `TDL_sort date`, `TDL_sort priority` and `TDL_sort module` are quite similar,
 and they use different comparators. These features sort ObservableList<Task> and use the method sort()
 from List<>.
 
 `TDL_sort reverse` use the method `Collection.reverse()` to reverse the sequence of tasks in to-do list.
 
+To avoid the sequential order of upper case and lower case, we use `TaskName a -> a.toString().toLowerCase()` transfer all upper case into lower case.
+
 ==== Design Considerations
 
 ===== Aspect: Methods to support the sort commands
+
+* **Alternative 1 (current choice):**
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
 
 // end::sorttask[]
 
@@ -371,13 +381,44 @@ from List<>.
 
 ==== Current Implementation
 
-Deadline Notification in the to-do list uses both logic and ui components.
+Deadline Notification in the to-do list uses both `Model` and `UI` components.
+
+* **In `Model` part**: We convert all deadline of task from `TaskDate` into `Date` type which can easily be processed with Java library.
+Besides that, we set all deadline to 0am and assume all tasks listed in the to-do list are in the same year as the date in system.
+We new a `Date` variable which initialized with the system date and compare it with the deadline of tasks.
+* **In `UI` part**: We use `setStyle` method of `Label` class to change the font color of id, task name, module code
+and deadline for distinguishing uncompleted tasks with different deadline.
+* **In `commons` part**: We store all `Date` type related methods in the `TimeUtil` class.
 
 ==== Design Considerations
 
 ==== Aspect: Methods to support the deadline notification feature
 
+* **Alternative 1 (current choice):**
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
 // end::deadlinenotification[]
+
+// tag::calendar[]
+
+=== Calendar
+
+==== Current Implementation
+
+==== Aspect: Methods to support the calendar feature
+
+* **Alternative 1 (current choice):**
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+// end::calendar[]
 
 // tag::checkexpenditure[]
 === Check Expenditure
