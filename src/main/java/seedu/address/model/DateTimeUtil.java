@@ -28,6 +28,7 @@ public class DateTimeUtil {
      */
     public static long daysDiff(Date eventDate, Date currentDate, TimeUnit timeUnit) {
         requireAllNonNull(eventDate, currentDate, timeUnit);
+
         return timeUnit.HOURS.convert(
                 eventDate.getTime() - currentDate.getTime(), timeUnit);
     }
