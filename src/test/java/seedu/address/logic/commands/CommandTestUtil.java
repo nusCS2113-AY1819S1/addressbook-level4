@@ -4,8 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MILESTONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.ArrayList;
@@ -38,6 +41,9 @@ public class CommandTestUtil {
     public static final String VALID_PRIORITY_LEVEL_MEDIUM = "medium";
     public static final String VALID_1_HOUR = "1";
     public static final String VALID_2_HOURS = "2";
+    public static final String VALID_INDEX_1 = "1";
+    public static final String VALID_MILESTONE_DESCRIPTION_1 = "Dummy milestone";
+    public static final String VALID_RANK_1 = "1";
 
     public static final String DEADLINE_DESC_1ST_JAN = " " + PREFIX_DEADLINE + VALID_DEADLINE_1ST_JAN;
     public static final String DEADLINE_DESC_31ST_MARCH = " " + PREFIX_DEADLINE + VALID_DEADLINE_31ST_MARCH;
@@ -55,6 +61,9 @@ public class CommandTestUtil {
     public static final String PRIORITY_LEVEL_DESC_MEDIUM = " " + PREFIX_PRIORITY + VALID_PRIORITY_LEVEL_MEDIUM;
     public static final String HOURS_DESC_1 = " " + PREFIX_HOURS + VALID_1_HOUR;
     public static final String HOURS_DESC_2 = " " + PREFIX_HOURS + VALID_2_HOURS;
+    public static final String INDEX_DESC_1 = " " + PREFIX_INDEX + VALID_INDEX_1;
+    public static final String MILESTONE_DESCRIPTION_DESC_1 = " " + PREFIX_MILESTONE + VALID_MILESTONE_DESCRIPTION_1;
+    public static final String RANK_DESC_1 = " " + PREFIX_RANK + VALID_RANK_1;
 
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "31/2"; // No 31st February in calendar
     public static final String INVALID_TITLE_DESC = " " + PREFIX_TITLE + " "; // Title is empty

@@ -94,6 +94,13 @@ public class AddMilestoneCommand extends Command implements CommandParser {
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddMilestoneCommand // instanceof handles nulls
+                && toAdd.equals(((AddMilestoneCommand) other).toAdd));
+    }
+
+    @Override
     public Command parse(String arguments) throws ParseException {
         return new AddMilestoneCommandParser().parse(arguments);
     }
