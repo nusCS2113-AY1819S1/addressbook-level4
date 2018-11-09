@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,7 +29,7 @@ public class RegistrationWindow extends UiPart<Stage> {
     @FXML
     private TextField usernameTextField;
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
     @FXML
     private TextField phoneTextField;
     @FXML
