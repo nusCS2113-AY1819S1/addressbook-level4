@@ -30,6 +30,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_USER_PHONE = new Prefix("uPhone/");
     public static final Prefix PREFIX_USER_IS_ADMIN = new Prefix("uAdmin/");
     /* Prefix for Module */
+    public static final Prefix PREFIX_MODULE_ID = new Prefix("mId/");
     public static final Prefix PREFIX_MODULE_TITLE = new Prefix("mTitle/");
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("mCode/");
     /* Prefix for Comment */

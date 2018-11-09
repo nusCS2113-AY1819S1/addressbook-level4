@@ -2,6 +2,7 @@ package com.t13g2.forum.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -171,25 +172,42 @@ public class ParserUtil {
     }
 
     /**
-     * Parse {@code }
+     * Parse {@code moduleTitle} into {@code trimmedModuleTitle}
      */
-    public static Module parseModuleCodeAndTitle(String moduleTitle, String moduleCode) throws ParseException {
+    public static String parseModuleTitle(String moduleTitle) throws ParseException {
         requireNonNull(moduleTitle);
-        requireNonNull(moduleCode);
         String trimmedModuleTitle = moduleTitle.trim();
-        String trimmedModuleCode = moduleCode.trim();
-        if (!isValidModule(trimmedModuleCode)) {
-            throw new ParseException(Module.MESSAGE_MODULE_CODE_CONSTRAINTS);
-        }
         if (!isValidModuleTitle(trimmedModuleTitle)) {
             throw new ParseException(Module.MESSAGE_MODULE_TITLE_CONSTRAINTS);
         }
-        return new Module(trimmedModuleTitle, trimmedModuleCode);
+        return trimmedModuleTitle;
     }
 
     //Returns true if a given strings is a valid module title.
     public static boolean isValidModuleTitle(String trimmedModuleTitle) {
         return trimmedModuleTitle.matches(Module.MODULE_TITLE_VALIDATION_REGEX);
+    }
+
+    /**
+     * Parse a {@code s} into a {@code int}
+     */
+    public static int parseIntWithOverflow(String s) throws ParseException {
+        int result = 0;
+        try {
+            result = Integer.parseInt(s);
+        } catch (Exception e) {
+            try {
+                new BigInteger(s);
+            } catch (Exception e1) {
+                throw e;
+            }
+            throw new ParseException(Module.MESSAGE_MODULE_ID_OUT_OF_BOUND);
+        }
+
+        if (result < 0) {
+            throw new ParseException(Module.MESSAGE_MODULE_ID_NEGATIVE);
+        }
+        return result;
     }
 
     //@@author HansKoh

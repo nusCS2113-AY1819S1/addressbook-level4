@@ -31,7 +31,7 @@ Responsibilities: CRUD feature
 
 === Dinesh Mangalanathadurai
 image::e0191729.png[width="150", align="left"]
-{empty}[http://github.com/E0191729[github]] [https://github.com/CS2113-AY1819S1-T13-2/main/tree/master/docs/team/E0191729.adoc[Project Portfolio page]]
+{empty}[http://github.com/E0191729[github]] [https://github.com/CS2113-AY1819S1-T13-2/main/tree/master/docs/team/e0191729.adoc[Project Portfolio page]]
 
 Role: Developer +
 Responsibilities:
