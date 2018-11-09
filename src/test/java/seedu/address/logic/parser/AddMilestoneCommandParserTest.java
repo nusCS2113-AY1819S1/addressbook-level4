@@ -83,7 +83,7 @@ public class AddMilestoneCommandParserTest {
         //empty milestone description
         assertParseFailure(parser, INDEX_DESC_1 + EMPTY_MILESTONE_DESCRIPTION_DESC + RANK_DESC_1,
                 ParserUtil.MESSAGE_EMPTY_MILESTONE);
-        
+
         //empty rank
         assertParseFailure(parser, INDEX_DESC_1 + MILESTONE_DESCRIPTION_DESC_1 + EMPTY_RANK_DESC,
                 ParserUtil.MESSAGE_EMPTY_RANK);
