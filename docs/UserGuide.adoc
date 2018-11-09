@@ -159,7 +159,7 @@ Update an existing forumThread title in the forum book. +
 Format: `updateThread tId/THREAD ID tTitle/NEW THREAD TITLE`
 
 ****
-*  Only admin and the forumThread creator are allowed to update the title.
+*  Only admin and the forumThread creator(unblocked) are allowed to update the title.
 ****
 
 Examples:
@@ -172,7 +172,7 @@ Update an existing comment title in the forum book. +
 Format: `updateComment cId/COMMENT ID cContent/NEW COMMENT CONTENT`
 
 ****
-*  Only admin and the comment creator are allowed to update the content.
+*  Only admin and the comment creator(unblocked) are allowed to update the content.
 ****
 
 Examples:

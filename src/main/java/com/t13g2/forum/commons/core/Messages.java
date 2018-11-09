@@ -11,7 +11,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
 
     public static final String MESSAGE_NOT_LOGIN = "Sorry! You have to login to proceed.";
-    public static final String MESSAGE_BLOCKED_USER = "You have been blocked for creating new thread and comment!";
+    public static final String MESSAGE_BLOCKED_USER =
+            "You have been blocked for creating and updating thread and comment!";
     public static final String MESSAGE_NOT_THREAD_OWNER = "Sorry! You are not the owner of this thread.";
     public static final String MESSAGE_NOT_COMMENT_OWNER = "Sorry! You are not the owner of this comment.";
 
@@ -20,7 +21,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMENT_ID = "Comment ID does not exist in the forum book!";
 
     public static final String MESSAGE_INVALID_THREAD =
-            "Sorry! The entity you requested is not under the current scope";
+            "Sorry! The entity you requested is not under the current scope."
+            + "\nPlease go to the corresponding thread list.";
     public static final String MESSAGE_INVALID_COMMENT =
-            "Sorry! The entity you requested is not under the current scope";
+            "Sorry! The entity you requested is not under the current scope."
+            + "\nPlease go to rhe corresponding comment list.";
 }

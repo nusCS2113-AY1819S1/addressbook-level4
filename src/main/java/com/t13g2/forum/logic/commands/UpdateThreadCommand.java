@@ -1,5 +1,6 @@
 package com.t13g2.forum.logic.commands;
 
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_BLOCKED_USER;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_THREAD;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_THREAD_ID;
 import static com.t13g2.forum.commons.core.Messages.MESSAGE_NOT_LOGIN;
@@ -16,19 +17,20 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
-
-
 //@@author HansKoh
 /**
  * Update an existing thread title in the forum book
- * User could only update thread title created by his/her own.
+ * Only unblocked user could update thread title created by his/her own.
  */
 public class UpdateThreadCommand extends Command {
     public static final String COMMAND_WORD = "updateThread";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Update a existing thread title created by its user in the forum book.\n"
-            + "Example: "
+            + ": Update an existing thread title created by its user(Unblocked) in the forum book.\n"
+            + "Parameters: "
+            + PREFIX_THREAD_ID + "THREAD ID"
+            + PREFIX_THREAD_TITLE + "THREAD TITLE"
+            + "\nExample: "
             + COMMAND_WORD + " "
             + PREFIX_THREAD_ID + "123 "
             + PREFIX_THREAD_TITLE + "This is a new title";
@@ -53,6 +55,9 @@ public class UpdateThreadCommand extends Command {
             throw new CommandException(MESSAGE_NOT_LOGIN);
         }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            if (Context.getInstance().isCurrentUserBlocked()) {
+                throw new CommandException(MESSAGE_BLOCKED_USER);
+            }
             ForumThread forumThread = unitOfWork.getForumThreadRepository().getThread(threadIdToUpdate);
             moduleId = unitOfWork.getForumThreadRepository().getThread(threadIdToUpdate).getModuleId();
             moduleCode = unitOfWork.getModuleRepository().getModule(moduleId).getModuleCode();

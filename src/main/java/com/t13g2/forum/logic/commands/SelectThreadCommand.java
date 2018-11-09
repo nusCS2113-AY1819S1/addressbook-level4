@@ -25,7 +25,9 @@ public class SelectThreadCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": List out all the comments under certain thread in the forum book.\n"
-            + "Example: "
+            + "Parameters: "
+            + PREFIX_THREAD_ID + "THREAD ID"
+            + "\nExample: "
             + COMMAND_WORD + " "
             + PREFIX_THREAD_ID + "1";
 
