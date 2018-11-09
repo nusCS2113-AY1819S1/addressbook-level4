@@ -181,7 +181,7 @@ image::loginPic/password_change_successful.PNG[width="300"]
 === Create additional account
 As a [red]#manager# or [red]#administrator#, you want to create new account for new employee.
 
-Format:`createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
+Format: `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
 
 `AUTHENTICATION_LEVEL` must be one of:
 
