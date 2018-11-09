@@ -19,7 +19,7 @@ import seedu.address.model.task.PriorityLevel;
 public class ParserUtil {
     public static final String MESSAGE_INVALID_DEFERRED_DAYS = "Deferred Days need to be positive integer and "
         + "less than 32";
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index must be a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_HOURS = "Hour(s) must be an integer!";
     public static final String MESSAGE_EMPTY_DESCRIPTION = "Description is empty!";
     public static final String MESSAGE_EMPTY_DEFERRED_DAYS = "Deferred Days is empty!";

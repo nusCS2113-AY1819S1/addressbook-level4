@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 public class Rank {
 
     public static final String MESSAGE_RANK_CONSTRAINTS =
-            "Rank can only contain positive integers.";
+            "Rank can only contain non-zero positive integers.";
 
     /**
      * The input must not be a whitespace, zero or a negative integer
