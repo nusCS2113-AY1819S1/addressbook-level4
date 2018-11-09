@@ -1,8 +1,12 @@
 package seedu.address.logic.parser;
 
+import static java.util.Map.entry;
+
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
@@ -51,6 +55,65 @@ public class CliSyntax {
     public static final Prefix PREFIX_NOTE_START_DATE = new Prefix("sd/");
     public static final Prefix PREFIX_NOTE_START_TIME = new Prefix("st/");
     public static final Prefix PREFIX_NOTE_TITLE = new Prefix("tt/");
+
+    public static final Map<String, List<String>> COMMAND_LIST = Map.ofEntries(
+            new AbstractMap.SimpleEntry<>("class", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "list",
+                    "delete",
+                    "addstudent",
+                    "delstudent",
+                    "edit",
+                    "markattendance",
+                    "listattendance",
+                    "modattendance"
+            ))),
+            new AbstractMap.SimpleEntry<>("course", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "delete",
+                    "list",
+                    "liststudents"
+            ))),
+            new AbstractMap.SimpleEntry<>("grade", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "list",
+                    "graph"
+            ))),
+            new AbstractMap.SimpleEntry<>("gradebook", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "delete",
+                    "list",
+                    "edit",
+                    "find"
+            ))),
+            new AbstractMap.SimpleEntry<>("module", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "delete",
+                    "list",
+                    "edit",
+                    "view",
+                    "find",
+                    "enrol",
+                    "assign",
+                    "archive"
+            ))),
+            new AbstractMap.SimpleEntry<>("note", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "delete",
+                    "list",
+                    "edit",
+                    "find",
+                    "export"
+            ))),
+            new AbstractMap.SimpleEntry<>("student", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "delete",
+                    "list",
+                    "edit",
+                    "find",
+                    "export"
+            )))
+    );
 
     /* Current existing command keywords (first command word)*/
     public static final List<String> FIRST_COMMAND_KEYWORDS = new ArrayList<>(Arrays.asList(

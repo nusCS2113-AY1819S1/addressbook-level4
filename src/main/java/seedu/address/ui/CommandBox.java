@@ -1,9 +1,15 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.parser.CliSyntax.COMMAND_LIST;
 import static seedu.address.logic.parser.CliSyntax.FIRST_COMMAND_KEYWORDS;
 import static seedu.address.logic.parser.CliSyntax.SECOND_COMMAND_KEYWORDS;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -72,11 +78,26 @@ public class CommandBox extends UiPart<Region> {
 
                     List<String> matches = null;
                     if (previousWords.length == 0) {
-                        matches = FIRST_COMMAND_KEYWORDS.stream()
-                                .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
+                        matches = COMMAND_LIST.keySet().stream()
+                                .filter(key -> key.indexOf(lastWord) == 0)
+                                .collect(Collectors.toList());
                     } else if (previousWords.length == 1) {
-                        matches = SECOND_COMMAND_KEYWORDS.stream()
-                                .filter(words -> words.indexOf(lastWord) == 0).collect(Collectors.toList());
+                        String firstCommandWord = previousWords[0];
+                        for (Map.Entry<String, List<String>> entry : COMMAND_LIST.entrySet()) {
+                            if (entry.getKey().equals(firstCommandWord)) {
+                                matches = entry.getValue().stream()
+                                        .filter(second -> second.indexOf(lastWord) == 0)
+                                        .collect(Collectors.toList());
+                            }
+                        }
+//                        matches = COMMAND_LIST.entrySet().stream()
+//                                .filter(entry -> entry.getKey().equals(firstCommandWord))
+//                                .map(entry -> entry.getValue())
+//                                .flatMap(List::stream)
+//                                .collect(Collectors.toList());
+//                        matches = matches.stream()
+//                                .filter(m -> m.indexOf(lastWord) == 0)
+//                                .collect(Collectors.toList());
                     }
 
                     String wordToAppend;
