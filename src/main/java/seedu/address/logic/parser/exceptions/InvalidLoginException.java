@@ -1,7 +1,9 @@
 package seedu.address.logic.parser.exceptions;
 
+//@@author: IcedCoffeeBoy
+
 /**
- * Represents a parse error encountered by a parser.
+ * Represents a invalid login error when user is already login
  */
 public class InvalidLoginException extends ParseException {
 

@@ -13,6 +13,7 @@ import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 
 
+//@@author: IcedCoffeeBoy
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
  * A event is considered unique by comparing using {@code Person#isSameEvent(Event)}. As such, adding and updating of
