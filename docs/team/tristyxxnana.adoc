@@ -65,8 +65,6 @@ include::../UserGuide.adoc[tag=gradecommandsummary]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=logicdiagram]
-
 include::../DeveloperGuide.adoc[tag=graph]
 
 include::../DeveloperGuide.adoc[tag=gradebookuserstories]
