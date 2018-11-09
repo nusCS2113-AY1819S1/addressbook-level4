@@ -1,13 +1,13 @@
 package com.t13g2.forum.logic.parser;
 
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
-
-import java.util.stream.Stream;
-
 import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.UpdateThreadCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
+
+import java.util.stream.Stream;
+
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
 
 //@@author HansKoh
 /**
@@ -23,7 +23,7 @@ public class UpdateThreadCommandParser implements Parser<UpdateThreadCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_THREAD_ID, PREFIX_THREAD_TITLE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_THREAD_ID)
+        if (!arePrefixesPresent(argMultimap, PREFIX_THREAD_ID, PREFIX_THREAD_TITLE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     UpdateThreadCommand.MESSAGE_USAGE));

@@ -1,11 +1,11 @@
 package com.t13g2.forum.logic.util;
 
-import java.util.List;
-
 import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
+
+import java.util.List;
 
 
 //@@author HansKoh
@@ -26,8 +26,9 @@ public class DisplayFormatter {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             message = "";
             for (Module module : moduleList) {
-                message += "[Module id: " + module.getId() + "] "
-                    + module.getModuleCode() + ": " + module.getTitle() + "\n";
+                message += "Module ID      : " + module.getId() + "\n"
+                        + "Module Code : " + module.getModuleCode() + "\n"
+                        + "Module Title  : " + module.getTitle() + "\n";
                 message += "----------------------------------------------------------------------------------\n";
             }
         } catch (Exception e) {

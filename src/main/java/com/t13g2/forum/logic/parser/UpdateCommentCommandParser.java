@@ -23,14 +23,14 @@ public class UpdateCommentCommandParser implements Parser<UpdateCommentCommand> 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COMMENT_ID, PREFIX_COMMENT_CONTENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_COMMENT_ID)
+        if (!arePrefixesPresent(argMultimap, PREFIX_COMMENT_ID, PREFIX_COMMENT_CONTENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     UpdateCommentCommand.MESSAGE_USAGE));
         }
         int commentId = Integer.parseInt(ParserUtil.parseCommentId(argMultimap.getValue(PREFIX_COMMENT_ID).get()));
-        String commenContentToUpdate = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT_CONTENT).get());
-        return new UpdateCommentCommand(commentId, commenContentToUpdate);
+        String commentContentToUpdate = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT_CONTENT).get());
+        return new UpdateCommentCommand(commentId, commentContentToUpdate);
     }
 
     /**
