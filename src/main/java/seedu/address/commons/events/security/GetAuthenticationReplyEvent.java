@@ -17,6 +17,6 @@ public class GetAuthenticationReplyEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "Register Success";
+        return "Authentication state replied";
     }
 }
