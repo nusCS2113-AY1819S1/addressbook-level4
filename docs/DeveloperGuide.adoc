@@ -825,6 +825,10 @@ The email command is a 4-stage process supported by `LogicManager` by keeping tr
 . `EmailContentsCommand`
 . `EmailSendCommand`
 
+This is the action diagram when the user executes the email command.
+
+image::EmailActivityDiagram.png[width="325", align="center"]
+
 Given below is an example usage scenario of how the email command behaves at each step.
 
 . The user launches the application. The application loads email settings from `preferences.json` which is stored in `Model#EmailUtil`.
@@ -860,8 +864,6 @@ In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCa
    with the email String and shows the string in a new window, `EmailPreview`.
 . The user is satisfied with the preview and executes the `send` command. This generates the email as a `MimeMessage`
   which is the Java format used for emails and is sent via `EmailUtil#sendMessage`. `LogicState` is reset back to orignal and this marks the end of the email command.
-
-image::EmailActivityDiagram.png[width="650"]
 
 ==== Design Considerations
 ===== Aspect: Data structure to store recipients and candidates
