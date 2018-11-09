@@ -5,11 +5,13 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -35,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private CheckPassword checkPassword;
 
     // Independent Ui parts residing in this Ui container
+    private CommandPanel commandPanel;
     private BrowserPanel browserPanel;
     private BookListPanel bookListPanel;
     private RequestListPanel requestListPanel;
@@ -44,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane browserPlaceholder;
+
+    @FXML
+    private HBox commandPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -149,6 +155,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        commandPanel = new CommandPanel(commandBox);
+        commandPanelPlaceholder.getChildren().add(commandPanel.getRoot());
     }
     /**
      *  * * Fills up all the
@@ -169,6 +178,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        commandPanel = new CommandPanel(commandBox);
+        commandPanelPlaceholder.getChildren().add(commandPanel.getRoot());
     }
 
     void hide() {

@@ -49,6 +49,9 @@ public class StockCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the book inventory.";
     public static final String MESSAGE_MAX_QUANTITY =
             "Quantity of books cannot be more than 999.";
+    public static final String COMMAND_SYNTAX = COMMAND_WORD + " " + PREFIX_ISBN + " "
+            + PREFIX_QUANTITY;
+
 
     private final String findBookBy;
     private final String argsType;

@@ -42,7 +42,13 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New book added: %1$s";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the inventory list";
-
+    public static final String COMMAND_SYNTAX = COMMAND_WORD + " "
+            + PREFIX_NAME + " "
+            + PREFIX_ISBN + " "
+            + PREFIX_PRICE + " "
+            + PREFIX_COST + " "
+            + PREFIX_QUANTITY + " "
+            + PREFIX_TAG + " ";
     private final Book toAdd;
 
     /**
