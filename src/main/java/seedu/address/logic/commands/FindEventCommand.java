@@ -6,15 +6,16 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.event.EventContainsKeywordsPredicate;
 /**
- * Finds and lists all events in address book whose name contains any of the argument keywords
+ * Finds and lists all events in event whose name and description contains any of the argument keywords
  * Keyword matching is case insensitive.
  */
 public class FindEventCommand extends Command {
 
     public static final String COMMAND_WORD = "findEvent";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose names contain any of "
-            + "the specified keywords (case-insensitive) or the description matches the keywords (case-insensitive)"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose names or description contain "
+            + "any of the specified keywords (case-insensitive) "
+            + "or the description matches the keywords (case-insensitive) "
             + "and displays them.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " meeting";
@@ -30,7 +31,7 @@ public class FindEventCommand extends Command {
         requireNonNull(model);
         model.updateFilteredEventList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
     }
 
     @Override
