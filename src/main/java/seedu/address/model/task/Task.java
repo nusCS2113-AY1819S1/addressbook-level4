@@ -71,10 +71,18 @@ public class Task {
         return date.toString().substring(0, 2);
     }
 
+    /**
+     * get the name of the task
+     * all letters are in lower case
+     */
     public String getNameString() {
         return name.toString().toLowerCase();
     }
 
+    /**
+     * get the task date in the type of Date
+     * assume all tasks in the to-do list are in the same year of system date
+     */
     public Date getDayInTypeDate() {
         TimeUtil timeUtil = new TimeUtil();
         String date = timeUtil.dateToStringConverter(new Date());

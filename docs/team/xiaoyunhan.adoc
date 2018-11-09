@@ -51,6 +51,10 @@ include::../UserGuide.adoc[tag=TDLsort]
 
 include::../UserGuide.adoc[tag=TDLNotification]
 
+include::../UserGuide.adoc[tag=Calendar]
+
+include::../UserGuide.adoc[tag=FAQ]
+
 == Contributions to the Developer Guide
 
 |===

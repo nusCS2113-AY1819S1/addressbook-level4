@@ -27,6 +27,10 @@ public class UndoableCommandHistory {
         undoableCommandList.push("ET");
     }
 
+    /**
+     * Return "EMPTY" if there is no undoable command
+     * the previous undoable command = TDL : ET ? return "TDL" : return "ET"
+     */
     public String getCommand() {
         if (undoableCommandList.empty()) {
             return "EMPTY";
