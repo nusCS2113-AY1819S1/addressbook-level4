@@ -28,6 +28,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoFindCommand;
 import seedu.address.logic.commands.ViewClubBudgetsCommand;
@@ -119,6 +120,9 @@ public class AddressBookParser {
 
         case UndoFindCommand.COMMAND_WORD:
             return new UndoFindCommand();
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         case BudgetCommand.COMMAND_WORD:
             if (LoginManager.getIsMember()) {
