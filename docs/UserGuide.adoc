@@ -19,8 +19,7 @@ By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
 
-NUSSU-Connect is an application designed and created specifically for executive committee (exco) members of the NUS Student Union (NUSSU). It enables the committee members to reduce their daily workload and the organisation to potentially minimize manpower and logistics issues during peak periods of activity by providing them a convenient platform to manage recruitment, contacts, budgets and projects efficiently. The application can also be used by every organisation with a clearly defined hierarchy of roles and responsibilities of each and every member belonging to the organisation.
-
+NUSSU-Connect is an application designed and created specifically for executive committee (exco) members of the NUS Student Union (NUSSU). It enables you, as a committee member, to reduce your daily workload and your organisation to potentially minimize manpower and logistics issues during peak periods of activity by providing them a convenient platform to manage recruitment, contacts, budgets and projects efficiently. The application can also be used by every organisation with a clearly defined hierarchy of roles and responsibilities of each and every member belonging to the organisation.
 The aim of this application is to digitise any company’s or organisation’s standard operating procedures, through the process of streamlining workflow to essentially solve, or at least minimize, any manpower and logistics issues that can happen during any peak periods of business activities.
 
 == Quick Start
@@ -89,22 +88,19 @@ image::DefaultAccountDetails.PNG[width="300"]
 
 [NOTE]
 ====
-The default account login details for logging in when the application is launched for the very first time, can be illustrated in the picture
-below. Enter the login details shown in the picture exactly, as all the login parameters are case-sensitive. Thus, any difference
-in casing between the actual and expected input characters will lead to failure in logging into the application.
+The default account login details for logging in when the application is launched for the very first time, can be illustrated in the picture below. You must enter the login details shown in the picture exactly, as all the login parameters are case-sensitive. Thus, any difference in casing between the actual and expected input characters will lead to failure in logging into the application.
 ====
 image::DefaultAccountDetails.PNG[width="300"]
 
 [NOTE]
 ====
-After the user logs in successfully, they should expect to see the main window of the application as shown below.
+After you log in successfully, you should expect to see the main window of the application as shown below.
 ====
 image::LoginSuccess.PNG[width="300"]
 
 [NOTE]
 ====
-If the user is unable to log in successfully, they should expect to see the login input field in a pop-up box again, asking the user
-to input their login credentials again.
+If you are unable to log in successfully, you should expect to see the login input field in a pop-up box again, asking you to input your login credentials again.
 ====
 image::BlankLoginInput.PNG[width="300"]
 
@@ -112,6 +108,19 @@ image::BlankLoginInput.PNG[width="300"]
 ====
 User Id, Password and Role inputs are all case-sensitive!
 ====
+
+[NOTE]
+====
+If you attempt to minimize the application before logging in to do other things, only to come back to the application later, and you want to close the application, you should not click on the cross button on the top right hand corner of the application, as shown in the image below. Look at the next note below to see the correct step to safely close the application.
+====
+image::WrongCloseApplication.PNG[width="300"]
+
+[NOTE]
+====
+It is not recommended to close the application as shown in the image above, as this would cause the application to become unresponsive. You should switch windows repeatedly with the Alt + Tab keys on your keyboard until you can see the login dialog box shown in the image below. Once that is done, you can then safely click on the cross button found on the top right hand corner of the dialog box to close the application.
+====
+image::CorrectCloseApplication.PNG[width="300"]
+
 
 === Creating a new user account: `createaccount`
 
@@ -162,6 +171,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 // tag:aslUser[]
+
 === Adding person's skill: `asl`
 
 Edits a person's skill in NUSSU-Connect.
@@ -176,6 +186,7 @@ Examples:
 * `asl 2 s/Photography l/30`
 * `asl 4 s/Java l/40`
 // end:aslUser[]
+
 === Editing a person : `edit`
 
 Edits an existing person in NUSSU-Connect. +
@@ -320,13 +331,13 @@ image::SearchPruning10th.png[align="left"]
 === Deleting : `delete`
 
 Deletes a specific person from NUSSU-Connect. +
-Format: `delete [-a all] [INDEX]`
+Format: `delete [INDEX]`
 
 ****
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* If -a option is selected, all contacts on the list will be deleted and INDEX will be ignored.
+* delete -a will delete all contacts in the displayed list (to be released in v2.0)
 ****
 
 Examples:
@@ -337,10 +348,6 @@ Deletes the 2nd person in NUSSU-Connect.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
-* `list` +
-`delete -a` +
-Deletes everyone in the results of the `find` command.
-
 
 === Selecting a person : `select`
 
@@ -522,7 +529,7 @@ e.g. `login A1234567M zaq1xsw2cde3 member`
 e.g. `createaccount A1234567M zaq1xsw2cde3 member`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 * *Clear* : `clear`
-* *Delete* : `delete [-a all][INDEX]` +
+* *Delete* : `delete [INDEX]` +
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
