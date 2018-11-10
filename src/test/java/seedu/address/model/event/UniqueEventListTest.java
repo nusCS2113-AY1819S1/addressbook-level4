@@ -22,7 +22,6 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.testutil.EventBuilder;
-import seedu.address.testutil.TypicalEvents;
 
 public class UniqueEventListTest {
     @Rule
@@ -189,10 +188,11 @@ public class UniqueEventListTest {
 
     @Test
     public void removeAttendee_personEmailExistInList_success () {
-        uniqueEventList.add(TypicalEvents.eventwithAttendee());
+        uniqueEventList.add(EVENT_3);
         uniqueEventList.removeAttendee("alice@example.com");
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
-        expectedUniqueEventList.add(EVENT_3);
+        Event updatedEvent = new EventBuilder(EVENT_3).withAttendee().build();
+        expectedUniqueEventList.add(updatedEvent);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
 
@@ -203,14 +203,14 @@ public class UniqueEventListTest {
 
     @Test
     public void hasClash_clashWithEventInList_returnsTrue() {
-        uniqueEventList.add(TypicalEvents.eventwithAttendee());
+        uniqueEventList.add(EVENT_3);
         assertTrue(uniqueEventList.hasClash(EVENT_1, "alice@example.com"));
     }
 
     @Test
     public void hasClash_doesNotClashWithEventInList_returnsFalse() {
         uniqueEventList.add(EVENT_1);
-        uniqueEventList.add(TypicalEvents.eventwithAttendee());
+        uniqueEventList.add(EVENT_3);
         assertFalse(uniqueEventList.hasClash(EVENT_4, "alice@example.com"));
     }
 }

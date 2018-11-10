@@ -19,7 +19,6 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.event.Event;
 import seedu.address.testutil.EventBuilder;
-import seedu.address.testutil.TypicalEvents;
 
 public class EventListTest {
 
@@ -107,13 +106,13 @@ public class EventListTest {
 
     @Test
     public void hasClash_eventClashWithList_returnsTrue() {
-        eventList.addEvent(TypicalEvents.eventwithAttendee());
+        eventList.addEvent(EVENT_3);
         assertTrue(eventList.hasClash(EVENT_1, "alice@example.com"));
     }
 
     @Test
     public void hasClash_eventDoesNotClashWithList_returnsFalse() {
-        eventList.addEvent(TypicalEvents.eventwithAttendee());
+        eventList.addEvent(EVENT_3);
         assertFalse(eventList.hasClash(EVENT_3, VALID_NAME_BOB));
     }
 
