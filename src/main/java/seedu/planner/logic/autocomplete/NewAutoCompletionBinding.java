@@ -1,4 +1,4 @@
-package seedu.planner.ui;
+package seedu.planner.logic.autocomplete;
 
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -17,6 +17,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Skin;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
+import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
 
 //@author tztzt
 /**

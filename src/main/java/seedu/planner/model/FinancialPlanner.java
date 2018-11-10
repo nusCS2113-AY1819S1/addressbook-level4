@@ -7,13 +7,14 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 
+import seedu.planner.model.autocomplete.RecordMap;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
-import seedu.planner.model.tag.TagMap;
-import seedu.planner.ui.CustomSuggestionProvider;
+import seedu.planner.model.autocomplete.TagMap;
+import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
 
 
 /**
@@ -24,7 +25,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     private final UniqueRecordList records;
     private DateBasedLimitList limits;
-    private TagMap tagMap;
+    private RecordMap recordMap;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -36,7 +37,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     {
         records = new UniqueRecordList();
         limits = new DateBasedLimitList();
-        tagMap = new TagMap();
+        recordMap = new RecordMap();
     }
 
     public FinancialPlanner() {}
@@ -63,9 +64,9 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         this.limits.setLimits(limits);
     }
 
-    public void setTagMap(HashMap<String, Integer> tagMap) {
-        this.tagMap.setTagMap(tagMap);
-        CustomSuggestionProvider.updateTagMap(tagMap);
+    public void setRecordMap(RecordMap recordMap) {
+        this.recordMap.setRecordMap(recordMap);
+        CustomSuggestionProvider.updateRecordMap(recordMap);
     }
 
     /**
@@ -75,7 +76,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         requireNonNull(newData);
 
         setRecords(newData.getRecordList());
-        setTagMap(newData.getTagMap());
+        setRecordMap(newData.getRecordMap());
         setLimits(newData.getLimitList());
     }
 
@@ -222,25 +223,22 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void removeLimit(Limit limitLn) {
         limits.remove(limitLn); }
 
-    public HashMap<String, Integer> fetchTagMap() {
-        return tagMap.getAsReadOnlyTagMap();
+    public void addRecordToRecordMap(Record record) {
+        recordMap.addRecordToRecordMap(record);
     }
 
-    public void addRecordToTagMap(Record record) {
-        tagMap.addRecordToTagMap(record);
+    public void removeRecordFromRecordMap(Record target) {
+        recordMap.removeRecordFromRecordMap(target);
     }
 
-    public void removeRecordFromTagMap(Record target) {
-        tagMap.removeRecordFromTagMap(target);
+    public void updateRecordInRecordMap(Record target, Record editedRecord) {
+        recordMap.updateRecordInRecordMap(target, editedRecord);
     }
 
-    public void updateRecordInTagMap(Record target, Record editedRecord) {
-        tagMap.updateRecordInTagMap(target, editedRecord);
-    }
-
-    @Override
-    public HashMap<String, Integer> getTagMap () {
-        return tagMap.makeTagMapFromRecordList(records);
+    public RecordMap getRecordMap () {
+        RecordMap recordMap = new RecordMap();
+        recordMap.makeRecordMapFromRecordList(records);
+        return recordMap;
     }
 
     @Override

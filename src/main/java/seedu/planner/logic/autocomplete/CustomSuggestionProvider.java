@@ -1,7 +1,7 @@
-package seedu.planner.ui;
+package seedu.planner.logic.autocomplete;
 
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.planner.model.tag.DefaultTags.getSampleTagsForSuggestion;
+import static seedu.planner.model.autocomplete.DefaultTags.getSampleTagsForSuggestion;
 import static seedu.planner.ui.SuggestionClass.newCreate;
 
 import java.util.Arrays;
@@ -43,6 +43,7 @@ import seedu.planner.logic.commands.SummaryByDateCommand;
 import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
+import seedu.planner.model.autocomplete.RecordMap;
 
 //@author tztzt
 /**
@@ -77,9 +78,14 @@ public class CustomSuggestionProvider {
     private static final Set<String> sortKeywordsSet = Stream.concat(SortCommand.ORDER_SET.stream(),
             SortCommand.CATEGORY_SET.stream()).collect(Collectors.toSet());
 
+    private static RecordMap recordsMap = new RecordMap();
+
+    private static Set<String> nameSuggestionSet = new HashSet<>();
+
+    private static Set<String> dateSuggestionSet = new HashSet<>();
+
     private static final Set<String> emptySet = new HashSet<>();
     private static final Set<String> defaultTagsSet = getSampleTagsForSuggestion();
-    private static Map<String, Integer> tagKeywordsMap = new HashMap<>();
     private static Set<String> tagsSuggestionSet = new HashSet<>();
 
     private SuggestionProvider<String> suggestionProvider;
@@ -209,17 +215,17 @@ public class CustomSuggestionProvider {
     }
 
     /**
-     * Updates the TagMap in this class whenever the TagMap in the Model is updated.
-     * @param newTagKeywordsMap is the new TagMap object that is to replace the old TagMap
+     * Updates the RecordMap in this class whenever the RecordMap in the Model is updated.
+     * @param newRecordMap is the new TagMap object that is to replace the old TagMap
      */
-    public static void updateTagMap(HashMap<String, Integer> newTagKeywordsMap) {
-        tagKeywordsMap = newTagKeywordsMap;
-        updateTagSet();
+    public static void updateRecordMap(RecordMap newRecordMap) {
+        recordsMap = newRecordMap;
+        updateRecordSets();
     }
 
-    private static void updateTagSet() {
-        tagsSuggestionSet = Stream.concat(tagKeywordsMap.keySet().stream(),
-                defaultTagsSet.stream()).collect(Collectors.toSet());
+    private static void updateRecordSets() {
+        tagsSuggestionSet = recordsMap.getAsReadOnlyTagMap().getAsReadOnlyTagMap().keySet();
+        nameSuggestionSet = recordsMap.getAsReadOnlyNameMap().getAsReadOnlyNameMap().keySet();
+        dateSuggestionSet = recordsMap.getAsReadOnlyDateMap().getAsReadOnlyDateMap().keySet();
     }
-
 }

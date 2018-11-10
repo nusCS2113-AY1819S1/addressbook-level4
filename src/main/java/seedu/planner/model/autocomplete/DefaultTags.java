@@ -1,8 +1,10 @@
-package seedu.planner.model.tag;
+package seedu.planner.model.autocomplete;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.planner.model.tag.Tag;
 
 //@author tztzt
 /**

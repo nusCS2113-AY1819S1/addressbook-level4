@@ -1,9 +1,10 @@
-package seedu.planner.model.tag;
+package seedu.planner.model.autocomplete;
 
 import java.util.HashMap;
 
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
+import seedu.planner.model.tag.Tag;
 
 //@author tztzt
 /**
@@ -77,5 +78,12 @@ public class TagMap {
     @Override
     public String toString() {
         return tagMap.size() + " Key Values in Map";
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TagMap // instanceof handles nulls
+                && this.getAsReadOnlyTagMap().equals(((TagMap) other).getAsReadOnlyTagMap()));
     }
 }
