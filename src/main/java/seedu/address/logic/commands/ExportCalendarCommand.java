@@ -184,7 +184,8 @@ public class ExportCalendarCommand extends Command {
      * @throws IOException when file stream have problems
      */
     public void exportICalenderFile(ObservableList<Event> registeredEventList, String fileName) throws IOException {
-        String outputFilename = "data" + "/" + String.format("%1$s.ics", fileName);
+        String outputFilename = CALENDAR_FILE_PATH + File.separator + File.separator
+                + String.format("%1$s.ics", fileName);
         File outputFile = new File(outputFilename);
 
         FileOutputStream fileOut = new FileOutputStream(outputFile, false);
