@@ -46,9 +46,11 @@ public class FilterCandidateCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_SALARY + "2500";
 
     private final CandidateContainsFilterKeywordsPredicate candidatePredicate;
+    private final String args;
 
-    public FilterCandidateCommand(CandidateContainsFilterKeywordsPredicate candidatePredicate) {
+    public FilterCandidateCommand(CandidateContainsFilterKeywordsPredicate candidatePredicate, String args) {
         this.candidatePredicate = candidatePredicate;
+        this.args = args;
     }
 
     @Override
@@ -66,8 +68,8 @@ public class FilterCandidateCommand extends Command {
         }
 
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredCandidateList().size()));
+        return new CommandResult("Candidate Book showing: " + COMMAND_WORD + args + "\n"
+                + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredCandidateList().size()));
     }
 
     @Override
