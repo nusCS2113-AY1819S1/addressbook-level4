@@ -1,7 +1,5 @@
 package seedu.planner.model;
 
-import java.util.HashMap;
-
 import javafx.collections.ObservableList;
 import seedu.planner.model.autocomplete.RecordMap;
 import seedu.planner.model.record.DateBasedLimitList;

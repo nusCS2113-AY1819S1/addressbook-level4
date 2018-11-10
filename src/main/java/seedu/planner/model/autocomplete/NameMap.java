@@ -2,23 +2,21 @@ package seedu.planner.model.autocomplete;
 
 import java.util.HashMap;
 
-import seedu.planner.model.record.Name;
 import seedu.planner.model.record.Record;
-import seedu.planner.model.record.UniqueRecordList;
 
+//@author tztzt
+/**
+ *  This object represents the in memory model of a HashMap containing integers as values which can be retrieved with
+ *  Strings as the key. It keeps track of the number of usage of each unique word used in the records' names
+ *  in the model.
+ *  It supports addition, deletion, updating and finding the size of the Hashmap.
+ */
 public class NameMap {
 
     private HashMap<String, Integer> nameMap = new HashMap<>();
 
-    public NameMap(){
-    }
-
     public int size() {
         return nameMap.size();
-    }
-
-    public HashMap<String, Integer> makeNameMapFromRecordList(UniqueRecordList internalList) {
-        return nameMap = internalList.makeNameMap();
     }
 
     /**
@@ -27,10 +25,13 @@ public class NameMap {
      */
     public void addRecordToNameMap(Record record) {
         String name = record.getName().fullName;
-        if (nameMap.containsKey(name)) {
-            nameMap.replace(name, nameMap.get(name) + 1);
-        } else {
-            nameMap.put(name, 1);
+        String[] nameStrings = name.split("\\s+");
+        for (String string : nameStrings) {
+            if (nameMap.containsKey(string)) {
+                nameMap.replace(string, nameMap.get(string) + 1);
+            } else {
+                nameMap.put(string, 1);
+            }
         }
     }
 
@@ -40,10 +41,13 @@ public class NameMap {
      */
     public void removeRecordFromNameMap(Record record) {
         String name = record.getName().fullName;
-        if (nameMap.containsKey(name)) {
-            nameMap.replace(name, nameMap.get(name) - 1);
-            if (nameMap.get(name) == 0) {
-                nameMap.remove(name);
+        String[] nameStrings = name.split("\\s+");
+        for (String string : nameStrings) {
+            if (nameMap.containsKey(string)) {
+                nameMap.replace(string, nameMap.get(string) - 1);
+                if (nameMap.get(string) == 0) {
+                    nameMap.remove(string);
+                }
             }
         }
     }
@@ -57,10 +61,6 @@ public class NameMap {
     public void updateRecordInNameMap(Record initialRecord, Record editedRecord) {
         removeRecordFromNameMap(initialRecord);
         addRecordToNameMap(editedRecord);
-    }
-
-    public void setNameMap(HashMap<String, Integer> nameMap) {
-        this.nameMap = nameMap;
     }
 
     public HashMap<String, Integer> getAsReadOnlyNameMap() {

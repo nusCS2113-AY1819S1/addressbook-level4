@@ -1,18 +1,22 @@
 package seedu.planner.logic.autocomplete;
 
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.planner.model.autocomplete.DefaultTags.getSampleTagsForSuggestion;
 import static seedu.planner.ui.SuggestionClass.newCreate;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.AddLimitCommand;
 import seedu.planner.logic.commands.AddMonthlyLimitCommand;
@@ -44,6 +48,7 @@ import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
 import seedu.planner.model.autocomplete.RecordMap;
+import seedu.planner.model.record.Date;
 
 //@author tztzt
 /**
@@ -83,6 +88,8 @@ public class CustomSuggestionProvider {
     private static Set<String> nameSuggestionSet = new HashSet<>();
 
     private static Set<String> dateSuggestionSet = new HashSet<>();
+    private static Set<String> defaultDateSuggestionSet = new HashSet<>(Arrays.asList(Date.DATE_INPUT_TODAY,
+            Date.DATE_INPUT_YESTERDAY));
 
     private static final Set<String> emptySet = new HashSet<>();
     private static final Set<String> defaultTagsSet = getSampleTagsForSuggestion();
@@ -118,14 +125,6 @@ public class CustomSuggestionProvider {
      * This method is responsible for deciding which collection of Strings is to be used as the reference collection
      * for comparison to the input String by the user. It can autocomplete the command word or when a tag is expected
      * of the user input or when a sort parameter is expected.
-     * @param userInput is the current word/substring to be automatically completed
-     * @
-     */
-
-    /**
-     * This method is responsible for deciding which collection of Strings is to be used as the reference collection
-     * for comparison to the input String by the user. It can autocomplete the command word or when a tag is expected
-     * of the user input or when a sort parameter is expected.
      * @param userInput is the entire input of text in the command box.
      * @param prefix is the prefix of the word to be completed, if any.
      * @param wordInput is the word to be completed.
@@ -139,21 +138,45 @@ public class CustomSuggestionProvider {
         if (strIndex == 0) {
             expectingCommandWord(prefix, inputs, strIndex);
         } else if (inputs[0].equals(SortCommand.COMMAND_WORD)) {
-            sortCommandKeywordDetected(inputs, strIndex);
+            sortCommandKeyword(inputs, strIndex);
         } else if (possibleTagKeywordsSet.contains(inputs[0])) {
-            if (wordInput.startsWith(PREFIX_TAG.getPrefix())) {
-                updateSuggestions(tagsSuggestionSet);
-            } else {
-                emptySuggestions();
-            }
+            addEditCommandKeyword(inputs, wordInput);
         } else if (inputs[0].equals(SummaryCommand.COMMAND_WORD)) {
             if (strIndex == 1) {
                 updateSuggestions(summaryKeywordsSet);
             } else {
                 emptySuggestions();
             }
-        } else if (inputs[0].equals(FindTagCommand.COMMAND_WORD)) {
+        } else if (inputs[0].equals(FindCommand.COMMAND_WORD)) {
+            updateSuggestions(nameSuggestionSet);
+        }else if (inputs[0].equals(FindTagCommand.COMMAND_WORD)) {
             updateSuggestions(tagsSuggestionSet);
+        } else if (inputs[0].equals(ListCommand.COMMAND_WORD)) {
+            listCommandKeyword(inputs, wordInput, strIndex);
+        } else {
+            emptySuggestions();
+        }*/
+    }
+
+    /**
+     * Function that handles when the word to be completed is found to be at index 0.
+     * @param inputs is an array of all the non-whitespace words found in the user input.
+     * @param wordInput is word to be completed.
+     * @param strIndex is the index of the word to be completed in the entire string of input.
+     */
+    private void listCommandKeyword(String[] inputs, String wordInput, int strIndex) {
+        if (strIndex == 1) {
+            if (wordInput.startsWith(PREFIX_DATE.getPrefix())) {
+                updateSuggestions(dateSuggestionSet);
+            } else {
+                emptySuggestions();
+            }
+        } else if (strIndex == 2) {
+            if (!inputs[1].startsWith(PREFIX_DATE.getPrefix())) {
+                emptySuggestions();
+            } else {
+                updateSuggestions(dateSuggestionSet);
+            }
         } else {
             emptySuggestions();
         }
@@ -176,11 +199,60 @@ public class CustomSuggestionProvider {
     }
 
     /**
+     * Function that handles when the command word is found to be either add or edit and there
+     * is a possibility of completion for names, dates and tags.
+     * @param inputs is the delimited user input, by whitespaces.
+     * @param wordInput is the word to be completed.
+     */
+    private void addEditCommandKeyword(String[] inputs, String wordInput) {
+        int strIndex = 0;
+        int indexWithNamePrefix = 0;
+        int otherPrefixIndex = 0;
+        Boolean namePrefixPresent = false;
+        Boolean prefixAfterNamePrefix = false;
+
+        for (; strIndex < inputs.length && !inputs[strIndex].equals(wordInput); strIndex++) {
+            if (namePrefixPresent && !prefixAfterNamePrefix && (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())
+                    || inputs[strIndex].startsWith(PREFIX_TAG.getPrefix())
+                    || inputs[strIndex].startsWith(PREFIX_MONEYFLOW.getPrefix()))) {
+                otherPrefixIndex = strIndex;
+                prefixAfterNamePrefix = true;
+            }
+            if (inputs[strIndex].startsWith(PREFIX_NAME.getPrefix())) {
+                indexWithNamePrefix = strIndex;
+                namePrefixPresent = true;
+            }
+        }
+
+        if (wordInput.startsWith(PREFIX_TAG.getPrefix())) {
+            updateSuggestions(tagsSuggestionSet);
+        } else if (wordInput.startsWith(PREFIX_DATE.getPrefix())) {
+            updateSuggestions(dateSuggestionSet);
+        } else if (wordInput.startsWith(PREFIX_NAME.getPrefix())) {
+            updateSuggestions(nameSuggestionSet);
+        } else if (wordInput.startsWith(PREFIX_MONEYFLOW.getPrefix())) {
+            emptySuggestions();
+        } else if (namePrefixPresent) {
+            if (!prefixAfterNamePrefix) {
+                updateSuggestions(nameSuggestionSet);
+            } else {
+                if (strIndex > indexWithNamePrefix && strIndex < otherPrefixIndex) {
+                    updateSuggestions(nameSuggestionSet);
+                } else {
+                    emptySuggestions();
+                }
+            }
+        } else {
+            emptySuggestions();
+        }
+    }
+
+    /**
      * Function that handles when the sort command keyword is found at index 0.
      * @param inputs is the word to be completed.
      * @param strIndex is the index of the word to be completed in the entire string of input.
      */
-    private void sortCommandKeywordDetected(String[] inputs, int strIndex) {
+    private void sortCommandKeyword(String[] inputs, int strIndex) {
         if (inputs.length == 2) {
             if (sortKeywordsSet.contains(inputs[strIndex])) {
                 emptySuggestions();
@@ -224,8 +296,10 @@ public class CustomSuggestionProvider {
     }
 
     private static void updateRecordSets() {
-        tagsSuggestionSet = recordsMap.getAsReadOnlyTagMap().getAsReadOnlyTagMap().keySet();
         nameSuggestionSet = recordsMap.getAsReadOnlyNameMap().getAsReadOnlyNameMap().keySet();
-        dateSuggestionSet = recordsMap.getAsReadOnlyDateMap().getAsReadOnlyDateMap().keySet();
+        dateSuggestionSet = defaultDateSuggestionSet;
+        dateSuggestionSet.addAll(recordsMap.getAsReadOnlyDateMap().getAsReadOnlyDateMap().keySet());
+        tagsSuggestionSet = defaultTagsSet;
+        tagsSuggestionSet.addAll(recordsMap.getAsReadOnlyTagMap().getAsReadOnlyTagMap().keySet());
     }
 }

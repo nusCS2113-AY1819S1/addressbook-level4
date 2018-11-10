@@ -3,21 +3,19 @@ package seedu.planner.model.autocomplete;
 import java.util.HashMap;
 
 import seedu.planner.model.record.Record;
-import seedu.planner.model.record.UniqueRecordList;
 
+//@author tztzt
+/**
+ *  This object represents the in memory model of a HashMap containing integers as values which can be retrieved with
+ *  Strings as the key. It keeps track of the number of usage of each unique date in the model.
+ *  It supports addition, deletion, updating and finding the size of the Hashmap.
+ */
 public class DateMap {
 
     private HashMap<String, Integer> dateMap = new HashMap<>();
 
-    public DateMap(){
-    }
-
     public int size() {
         return dateMap.size();
-    }
-
-    public HashMap<String, Integer> makeDateMapFromRecordList(UniqueRecordList internalList) {
-        return dateMap = internalList.makeDateMap();
     }
 
     /**
@@ -56,10 +54,6 @@ public class DateMap {
     public void updateRecordInDateMap(Record initialRecord, Record editedRecord) {
         removeRecordFromDateMap(initialRecord);
         addRecordToDateMap(editedRecord);
-    }
-
-    public void setDateMap(HashMap<String, Integer> dateMap) {
-        this.dateMap = dateMap;
     }
 
     public HashMap<String, Integer> getAsReadOnlyDateMap() {

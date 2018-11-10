@@ -3,7 +3,6 @@ package seedu.planner.model.record;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,12 +10,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.planner.commons.util.CompareUtil;
 import seedu.planner.logic.commands.SortCommand;
-import seedu.planner.model.autocomplete.DateMap;
-import seedu.planner.model.autocomplete.NameMap;
 import seedu.planner.model.autocomplete.RecordMap;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
 import seedu.planner.model.record.exceptions.RecordNotFoundException;
-import seedu.planner.model.autocomplete.TagMap;
 
 /**
  * A list of records that enforces uniqueness between its elements and does not allow nulls.
@@ -171,29 +167,6 @@ public class UniqueRecordList implements Iterable<Record> {
         return recordMap;
     }
 
-    public HashMap<String, Integer> makeTagMap() {
-        TagMap tagMap = new TagMap();
-        for (Record record : internalList) {
-            tagMap.addRecordToTagMap(record);
-        }
-        return tagMap.getAsReadOnlyTagMap();
-    }
-
-    public HashMap<String, Integer> makeDateMap() {
-        DateMap dateMap =  new DateMap();
-        for (Record record : internalList) {
-            dateMap.addRecordToDateMap(record);
-        }
-        return dateMap.getAsReadOnlyDateMap();
-    }
-
-    public HashMap<String, Integer> makeNameMap() {
-        NameMap nameMap = new NameMap();
-        for (Record record : internalList) {
-            nameMap.addRecordToNameMap(record);
-        }
-        return nameMap.getAsReadOnlyNameMap();
-    }
     //@author
 
     /**

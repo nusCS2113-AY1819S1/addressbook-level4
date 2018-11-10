@@ -1,8 +1,8 @@
 package seedu.planner.commons.events.model;
 
 import seedu.planner.commons.events.BaseEvent;
-import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
+import seedu.planner.model.ReadOnlyFinancialPlanner;
 
 //@author tztzt
 /** Indicates that the summary map in the model has been changed*/

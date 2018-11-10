@@ -2,20 +2,17 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 
+import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
 import seedu.planner.model.autocomplete.RecordMap;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
-import seedu.planner.model.autocomplete.TagMap;
-import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
-
 
 /**
  * Wraps all data at the planner-book level

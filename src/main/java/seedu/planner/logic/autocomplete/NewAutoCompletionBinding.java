@@ -1,5 +1,7 @@
 package seedu.planner.logic.autocomplete;
 
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -17,7 +19,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Skin;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
-import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
 
 //@author tztzt
 /**
@@ -45,7 +46,6 @@ public class NewAutoCompletionBinding<T> {
     private final ChangeListener<Number> caretChangedListener = (obs, oldPosition, newPosition) -> {
         String newText = getCompletionTarget().getText();
         String inputText;
-        String prefix = "";
         if (newPosition.intValue() == newText.length()) {
             inputText = caretAtEnd(newPosition, newText);
         } else {
@@ -56,15 +56,7 @@ public class NewAutoCompletionBinding<T> {
             }
         }
 
-        if (inputText.startsWith(PREFIX_TAG.getPrefix())) {
-            prefixText += PREFIX_TAG.getPrefix();
-            prefix = PREFIX_TAG.getPrefix();
-            inputText = inputText.substring(2);
-        }
-
-        if (getCompletionTarget().isFocused()) {
-            setUserInput(newText, prefix, inputText);
-        }
+        checkPrefix(newText, inputText);
     };
 
     /**
@@ -103,6 +95,34 @@ public class NewAutoCompletionBinding<T> {
             }
         });
         init();
+    }
+
+    /**
+     * Function that checks if the word to be completed has a prefix
+     * @param newText is the entire input in the command box.
+     * @param inputText is the input word to be completed
+     */
+    private void checkPrefix(String newText, String inputText) {
+        String prefix;
+        if (inputText.startsWith(PREFIX_TAG.getPrefix())) {
+            prefixText += PREFIX_TAG.getPrefix();
+            prefix = PREFIX_TAG.getPrefix();
+            inputText = inputText.substring(2);
+        } else if (inputText.startsWith(PREFIX_NAME.getPrefix())) {
+            prefixText += PREFIX_NAME.getPrefix();
+            prefix = PREFIX_NAME.getPrefix();
+            inputText = inputText.substring(2);
+        } else if (inputText.startsWith(PREFIX_DATE.getPrefix())) {
+            prefixText += PREFIX_DATE.getPrefix();
+            prefix = PREFIX_DATE.getPrefix();
+            inputText = inputText.substring(2);
+        } else {
+            prefix = "";
+        }
+
+        if (getCompletionTarget().isFocused()) {
+            setUserInput(newText, prefix, inputText);
+        }
     }
 
     /**

@@ -3,28 +3,20 @@ package seedu.planner.model.autocomplete;
 import java.util.HashMap;
 
 import seedu.planner.model.record.Record;
-import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.tag.Tag;
 
 //@author tztzt
 /**
  *  This object represents the in memory model of a HashMap containing integers as values which can be retrieved with
  *  Strings as the key. It keeps track of the number of usage of each unique tag in the model.
- *  It supports creation from scratch, addition, deletion, updating and finding the size of the Hashmap.
+ *  It supports addition, deletion, updating and finding the size of the Hashmap.
  */
 public class TagMap {
 
     private HashMap<String, Integer> tagMap = new HashMap<>();
 
-    public TagMap(){
-    }
-
     public int size() {
         return tagMap.size();
-    }
-
-    public HashMap<String, Integer> makeTagMapFromRecordList(UniqueRecordList internalList) {
-        return tagMap = internalList.makeTagMap();
     }
 
     /**
@@ -65,10 +57,6 @@ public class TagMap {
     public void updateRecordInTagMap(Record initialRecord, Record editedRecord) {
         removeRecordFromTagMap(initialRecord);
         addRecordToTagMap(editedRecord);
-    }
-
-    public void setTagMap(HashMap<String, Integer> tagMap) {
-        this.tagMap = tagMap;
     }
 
     public HashMap<String, Integer> getAsReadOnlyTagMap() {

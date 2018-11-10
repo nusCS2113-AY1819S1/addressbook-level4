@@ -23,12 +23,12 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private static final int MAX_SUGGESTIONS = 5;
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
 
-    private final int MAX_SUGGESTIONS = 5;
 
     @FXML
     private TextField commandTextField;
