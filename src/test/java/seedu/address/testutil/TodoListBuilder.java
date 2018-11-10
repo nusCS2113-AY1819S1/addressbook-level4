@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.TodoList;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.*;
 
 /**
  * A utility class to help with building Todolist objects.
@@ -31,4 +31,5 @@ public class TodoListBuilder {
     public TodoList build() {
         return todoList;
     }
+
 }
