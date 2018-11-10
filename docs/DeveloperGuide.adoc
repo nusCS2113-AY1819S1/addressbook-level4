@@ -1746,14 +1746,48 @@ Use case ends.
 ** Use case resumes at step 2
 
 [discrete]
-=== 11. Use case: Create daily limit for expenses [Oscar]
+=== 11. Use case: Create a normal limit for a period of time or a day [Oscar]
 
 *MSS*
 
-1.  User requests to create limits for expenses different period of time or a day.
-2.  FinancialPlanner requests for the maximum amount of spending for that period of time or the day.
-3.  User enters the dateStart and dateEnd or the day and the amount of spending.
-4.  FinancialPlanner records the amount in the hard drive.
+1.  User requests to create a normal limit for expenses different period of time or a day.
+2.  FinancialPlanner requests for the dateStart and dateEnd of that period of time or the date of the day and the maximum amount of spending.
+3.  User enters the dateStart and dateEnd or the date and the amount of spending.
+4.  FinancialPlanner records the limit in the hard drive.
+5.  FinancialPlanner keeps tracking the spending during that period of time or that day.
+6.  FinancialPlanner warns user when the total spend exceeds the limit amount of spending.
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. The dateStart is later than dateEnd. +
+** System shows date error.
+** Use case ends.
+
+* 3c. There is already a limit for the time period or the day. +
+** System shows redundant limit error.
+** Use case ends.
+
+[discrete]
+=== 12. Use case: Edit an existing normal limit [Oscar]
+
+*MSS*
+
+1.  User requests to edit an existing normal limit.
+2.  FinancialPlanner requests for the new maximum amount of spending for that period of time or the day.
+3.  User enters the dateStart and dateEnd or the date and the amount of spending.
+4.  FinancialPlanner records the limit in the hard drive.
 5.  FinancialPlanner keeps tracking the spending during that period of time or that day.
 6.  FinancialPlanner warns user when the total spend exceeds the limit amount of spending.
 
