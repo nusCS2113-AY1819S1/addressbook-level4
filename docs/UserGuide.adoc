@@ -363,7 +363,7 @@ Format: `attending`
 === Remove user from event : `removeAttendee`
 
 Admin: Removes a user registered for an event. +
-Format: `removeAttendee INDEX USERNAME`
+Format: `removeAttendee INDEX u/USERNAME`
 
 ****
 * Removes USERNAME from the event at the specified INDEX.
@@ -375,10 +375,10 @@ Format: `removeAttendee INDEX USERNAME`
 Examples:
 
 * `list` +
-`removeAttendee 1 Peter Parker` +
+`removeAttendee 1 u/Peter Parker` +
 Removes the user with username `Peter Parker` from the attendance of the 1st event of the Event Manager.
 * `find Party` +
-`removeAttendee 2 Alice` +
+`removeAttendee 2 u/Alice` +
 Removes the user with username `Alice` from the attendance of the 2nd event in the results of the `find` command.
 // end::rsvp[]
 
@@ -548,8 +548,8 @@ e.g. `register 1`
 * *Unregister* : `unregister INDEX` +
 e.g. `unregister 1`
 * *View Attending* : `attending`
-* *Remove Attendee* : `removeAttendee INDEX USERNAME` +
-e.g. `removeAttendee 1 Peter Parker`
+* *Remove Attendee* : `removeAttendee INDEX u/USERNAME` +
+e.g. `removeAttendee 1 u/Peter Parker`
 * *Set reminders* : `setReminder INDEX` +
 e.g. `setReminder 1`
 * *View Reminders* : `reminders` +
