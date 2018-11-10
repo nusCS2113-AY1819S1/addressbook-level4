@@ -550,20 +550,6 @@ Each Algorithm serve different purposes.
 * Distribute Students Randomly with Balanced Nationality
 * Distribute Students Randomly with Balanced Gender & Nationality (Coming in v2.0)
 
-Every Algorithm will require inputs such as:
-****
-* int _n_ : `Number of Groups to be created of Integer Data Type`
-* ArrayList<ArrayList<Person>> groupArrayList : `2D ArrayList of Person Type`
-* LinkList<Person> allPerson : `LinkList containing all person data from the current address book`
-* String groupName : `Group Name in String Type`
-****
-
-From these 4 inputs, every algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
-
-[NOTE]
-Before any Algorithm execute, the system will check if there exist any duplicate group name.
-If such an event occur, the command will stop and throw a `CommandException : Duplicate Groups Found` which will notify the user of the issue.
-
 ==== Pre Execution Checks and Operations
 Before any Algorithm is execute, there are some checks and functions to be performed.
 
@@ -576,15 +562,18 @@ Before any Algorithm is execute, there are some checks and functions to be perfo
 . Place All Persons into an LinkList.
 
 ==== Algorithm Design Input Parameters
+Every Algorithm will require inputs such as:
+****
+* int _n_ : `Number of Groups to be created of Integer Data Type`
+* ArrayList<ArrayList<Person>> groupArrayList : `2D ArrayList of Person Type`
+* LinkList<Person> allPerson : `LinkList containing all person data from the current address book`
+* String groupName : `Group Name in String Type`
+****
 
-. `int _n_`
-.. Number of Groups to be created
-. `ArrayList<ArrayList<Person>> groupArrayList`
-.. A 2D Array List where the *Outer Array List* acts as a Group while the *Inner Array List* stores the *Person Object*.
-. `LinkList<Person> allPerson`
-.. A LinkList containing all person data from the current address book. Meant for distribution into the 2D ArrayList.
-. `String groupName`
-.. The group name required to create the groups.
+From these 4 inputs, every algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
+
+[NOTE]
+Before any of the 4 Algorithm execute, the system will conduct the Pre-Execution check mentioned above.
 
 ===== Aspect: Distribute Students Equally Algorithm Explanation `g/0 nat/0`
 
