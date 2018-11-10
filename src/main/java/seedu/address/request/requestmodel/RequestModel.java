@@ -1,8 +1,10 @@
-package seedu.address.model.request;
+package seedu.address.request.requestmodel;
 
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.request.ReadOnlyRequests;
+import seedu.address.request.Request;
 
 /**
  * The API of the RequestModel component.

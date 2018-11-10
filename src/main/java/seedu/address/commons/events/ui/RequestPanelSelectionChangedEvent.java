@@ -1,7 +1,7 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.request.Request;
+import seedu.address.request.Request;
 
 /**
  * Represents a selection change in the Book List Panel

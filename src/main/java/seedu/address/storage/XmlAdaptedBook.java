@@ -82,9 +82,9 @@ public class XmlAdaptedBook {
      * @throws IllegalValueException if there were any data constraints violated in the adapted book
      */
     public Book toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> bookTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            bookTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -129,7 +129,7 @@ public class XmlAdaptedBook {
         }
         final Quantity modelQuantity = new Quantity(quantity);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(bookTags);
         return new Book(modelName, modelIsbn, modelPrice, modelCost, modelQuantity, modelTags);
     }
 
@@ -143,12 +143,12 @@ public class XmlAdaptedBook {
             return false;
         }
 
-        XmlAdaptedBook otherPerson = (XmlAdaptedBook) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(isbn, otherPerson.isbn)
-                && Objects.equals(price, otherPerson.price)
-                && Objects.equals(cost, otherPerson.cost)
-                && Objects.equals(quantity, otherPerson.quantity)
-                && tagged.equals(otherPerson.tagged);
+        XmlAdaptedBook otherBook = (XmlAdaptedBook) other;
+        return Objects.equals(name, otherBook.name)
+                && Objects.equals(isbn, otherBook.isbn)
+                && Objects.equals(price, otherBook.price)
+                && Objects.equals(cost, otherBook.cost)
+                && Objects.equals(quantity, otherBook.quantity)
+                && tagged.equals(otherBook.tagged);
     }
 }

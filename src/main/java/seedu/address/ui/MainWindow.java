@@ -13,10 +13,12 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.RequestPanelChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
@@ -36,6 +38,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
     private CheckPassword checkPassword;
 
+    //Check status of panel;
+    private boolean panelIsShowing;
     // Independent Ui parts residing in this Ui container
     private CommandPanel commandPanel;
     private BrowserPanel browserPanel;
@@ -62,6 +66,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane bookListPanelPlaceholder;
+
+    @FXML
+    private VBox requestList;
 
     @FXML
     private StackPane requestListPanelPlaceholder;
@@ -144,6 +151,8 @@ public class MainWindow extends UiPart<Stage> {
         requestListPanel = new RequestListPanel(logic.getFilteredRequestList());
         requestListPanelPlaceholder.getChildren().addAll(requestListPanel.getRoot());
 
+        panelIsShowing = true;
+
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -181,6 +190,19 @@ public class MainWindow extends UiPart<Stage> {
 
         commandPanel = new CommandPanel(commandBox);
         commandPanelPlaceholder.getChildren().add(commandPanel.getRoot());
+    }
+
+    @Subscribe
+    public void handleRequestPanelChangedEvent(RequestPanelChangedEvent rpce) {
+        if (panelIsShowing) {
+            requestListPanelPlaceholder.setVisible(false);
+            requestList.setManaged(false);
+            panelIsShowing = false;
+        } else {
+            requestListPanelPlaceholder.setVisible(true);
+            requestList.setManaged(true);
+            panelIsShowing = true;
+        }
     }
 
     void hide() {

@@ -67,18 +67,18 @@ public class BookInventoryTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasBook_bookNotInBookInventory_returnsFalse() {
         assertFalse(bookInventory.hasBook(ART));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasBook_bookInBookInventory_returnsTrue() {
         bookInventory.addBook(ART);
         assertTrue(bookInventory.hasBook(ART));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasBook_bookWithSameIdentityFieldsInBookInventory_returnsTrue() {
         bookInventory.addBook(ART);
         Book editedAlice = new BookBuilder(ART).withQuantity(VALID_QUANTITY_BIOLOGY).withTags(VALID_TAG_SCIENCE)
                 .build();
@@ -86,7 +86,7 @@ public class BookInventoryTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getBookList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         bookInventory.getBookList().remove(0);
     }

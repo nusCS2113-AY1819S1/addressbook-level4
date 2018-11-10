@@ -4,7 +4,7 @@
 //import static seedu.address.commons.core.Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX;
 //import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 //import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-//import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
+//import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_BOOK_SUCCESS;
 //import static seedu.address.testutil.TestUtil.getLastIndex;
 //import static seedu.address.testutil.TestUtil.getMidIndex;
 //import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
@@ -115,7 +115,7 @@
 //    private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
 //        Model expectedModel = getModel();
 //        String expectedResultMessage = String.format(
-//                MESSAGE_SELECT_PERSON_SUCCESS, expectedSelectedCardIndex.getOneBased());
+//                MESSAGE_SELECT_BOOK_SUCCESS, expectedSelectedCardIndex.getOneBased());
 //        int preExecutionSelectedCardIndex = getPersonListPanel().getSelectedCardIndex();
 //
 //        executeCommand(command);

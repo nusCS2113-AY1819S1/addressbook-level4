@@ -13,5 +13,4 @@ public class Messages {
     public static final String MESSAGE_BOOKS_LISTED_OVERVIEW = "%1$d books listed!";
     public static final String MESSAGE_ACCESS_DENIED =
             "Access Denied. You do not have permission to use this command: ";
-
 }

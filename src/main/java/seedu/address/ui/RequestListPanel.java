@@ -13,10 +13,10 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.RequestPanelSelectionChangedEvent;
-import seedu.address.model.request.Request;
+import seedu.address.request.Request;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of requests.
  */
 public class RequestListPanel extends UiPart<Region> {
     private static final String FXML = "RequestListPanel.fxml";
@@ -41,14 +41,14 @@ public class RequestListPanel extends UiPart<Region> {
         requestListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in book list panel changed to : '" + newValue + "'");
+                        logger.fine("Selection in request list panel changed to : '" + newValue + "'");
                         raise(new RequestPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
 
     /**
-     * Scrolls to the {@code BookCard} at the {@code index} and selects it.
+     * Scrolls to the {@code RequestCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
@@ -64,7 +64,7 @@ public class RequestListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code BookCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Request} using a {@code RequestCard}.
      */
     class RequestListViewCell extends ListCell<Request> {
         @Override

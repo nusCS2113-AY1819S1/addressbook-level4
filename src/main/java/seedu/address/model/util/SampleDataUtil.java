@@ -12,10 +12,10 @@ import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
 import seedu.address.model.book.Quantity;
-import seedu.address.model.request.Email;
-import seedu.address.model.request.ReadOnlyRequests;
-import seedu.address.model.request.Request;
-import seedu.address.model.request.RequestList;
+import seedu.address.request.Email;
+import seedu.address.request.ReadOnlyRequests;
+import seedu.address.request.Request;
+import seedu.address.request.RequestList;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -1,4 +1,4 @@
-package seedu.address.model.request;
+package seedu.address.request.requestparser;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,6 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Quantity;
+import seedu.address.request.Email;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
