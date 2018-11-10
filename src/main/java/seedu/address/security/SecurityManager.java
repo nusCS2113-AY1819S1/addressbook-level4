@@ -14,6 +14,9 @@ import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.User;
 
 /***
@@ -82,6 +85,13 @@ public class SecurityManager extends ComponentManager implements Security {
     @Override
     public User getUser() {
         return logic.getUser();
+    }
+
+    @Override
+    public CommandResult execute(String commandText) throws CommandException, ParseException,
+            SecurityAuthenticationException {
+        String Command = logic.parseCommandWord(commandText);
+        return logic.execute("test");
     }
 
     @Subscribe
