@@ -22,9 +22,14 @@ public interface EventModel {
     ReadOnlyEventList getEventList();
 
     /**
-     * Returns true if a person with the same identity as {@code event} exists in the event list.
+     * Returns true if an event with the same location and time as {@code event} exists in the event list.
      */
     boolean hasEvent(Event event);
+
+    /**
+     * Returns true if an edited event with the same location and time as {@code event} exists in the event list.
+     */
+    boolean hasEventAfterEdit(Event eventToEdit, Event editedEvent );
 
     /**
      * Deletes the given event.
@@ -67,6 +72,11 @@ public interface EventModel {
      * Returns true if an {@code event} clashes with any event in the event list.
      */
     boolean hasClash(Event event, String personName);
+
+    /**
+     * Returns true if an {@code event} clashes with any event in the event list.
+     */
+    boolean hasClashAfterEdit(Event eventBeforeEdit, Event eventAfterEdit, String personName);
 
     /**
      * Returns true if the model has previous event list states to restore.

@@ -15,6 +15,8 @@ public class EventContainsAttendeeAndDatePredicate implements Predicate<Event> {
     private final TimeType type;
 
     public EventContainsAttendeeAndDatePredicate(String personEmail, String inputDate, TimeType type) {
+        assert type != TimeType.NONE;
+        assert type != null;
         this.personEmail = personEmail;
         this.inputDate = inputDate;
         this.type = type;
@@ -44,7 +46,7 @@ public class EventContainsAttendeeAndDatePredicate implements Predicate<Event> {
             eventMatchesDate = eventTokens[1].matches(tokens[1]) && eventTokens[0].matches(tokens[0]);
             break;
         default:
-            eventMatchesDate = false;
+            throw new NullPointerException();
         }
         return eventHasAttendee && eventMatchesDate;
     }

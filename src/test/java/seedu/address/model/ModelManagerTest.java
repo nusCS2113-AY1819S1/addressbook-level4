@@ -19,7 +19,6 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.TypicalEvents;
 
 public class ModelManagerTest {
     @Rule
@@ -79,13 +78,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasClash_eventClashWithEventList_returnsTrue() {
-        modelManager.addEvent(TypicalEvents.eventwithAttendee());
+        modelManager.addEvent(EVENT_3);
         assertTrue(modelManager.hasClash(EVENT_3, "alice@example.com"));
     }
 
     @Test
     public void hasClash_eventDoesNotClashWithEventList_returnsFalse() {
-        modelManager.addEvent(TypicalEvents.eventwithAttendee());
+        modelManager.addEvent(EVENT_3);
         assertFalse(modelManager.hasClash(EVENT_3, "bob@example.com"));
     }
 

@@ -1,0 +1,76 @@
+= Lee Ming Liang - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ProManage
+
+---
+
+== Overview
+
+This project portfolio documents my contributions to the development of the CS2113 project, as part of my team T16-2.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to store, login, logout, showmine and sort* via the login, logout, showmine
+ and sort command
+** What it does: Allow users to save the events created, login according to designation and sorting the event based
+on the parameters they input.
+** Justification: These features allow users to use application's function according to their designation. Users who login
+  with their personal email are able to list event they are associated with. The sort function sort the current
+event list view  based on their requirement. For example, if the user need to see which event is coming soon, they are able to so by
+using the sort date command.
+** Highlights:
+
+
+* *Minor enhancement*:
+** Created the event class along with its relevant components
+** Updated the mainapp to load saved xml events or a sample list of events when the app starts
+**
+**
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=IcedCoffeeBoy[Functional code]]
+
+* *Other contributions*:
+
+** Project management:
+***
+***
+//** Enhancements to existing features:
+//*** Updated the GUI color scheme
+//*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+** Documentation:
+***
+***
+** Community:
+***
+** Tools:
+
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=login]
+
+include::../UserGuide.adoc[tag=logout]
+
+include::../UserGuide.adoc[tag=sort]
+
+include::../UserGuide.adoc[tag=showmine]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=Sort]
+
+
+
+

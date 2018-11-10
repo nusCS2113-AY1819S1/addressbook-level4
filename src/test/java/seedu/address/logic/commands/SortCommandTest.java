@@ -166,5 +166,4 @@ public class SortCommandTest {
         assertCommandSuccess(sortByNameCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
-
 }
