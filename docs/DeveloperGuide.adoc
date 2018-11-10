@@ -575,74 +575,77 @@ Before any of the 4 Algorithm execute, the system will conduct the Pre-Execution
 
 ===== Aspect: Distribute Students Equally Algorithm Explanation `g/0 nat/0`
 
+*Pseudo Explanation of the Allocation Process*
+
 To ensure a balanced number of persons in each group, we have to calculate the minimum number of people to place in a group.
-This process of recalculation has to be executed as we access the next group. This allows the distribution to be balanced.
+Once the minimum number of persons is obtained, we can proceed to allocate these students into a group.
+This process of recalculation and reassigning has to be executed as we access the next group. This allows the distribution to be balanced.
 
-*Allocation Process*
-
-. Creates a For Loop of _n_ number of times. Starting with i equals to _n_ and count down to 0.
-. Creates an ArrayList of Person Object.
-.. This ArrayList acts as the inner array list to hold all Persons.
-. Calculates the number of Person should be in a group.
-.. This can be done by having the *total number of Person* in the LinkList divided by *i* from the for loop.
-.. Lets label this as _paxInAGroup_
-. Creates a While Loop with the condition of _paxInAGroup_ more than 0.
-.. In the while loop, we will load a person object from the LinkList into the ArrayList.
-. Once the while loop is complete, the array list will be filled with _paxInAGroup_ Persons.
-. Now, we add this ArrayList with _paxInAGroup_ of Persons into the 2D ArrayList where the outer acts as a group.
-. This process is repeated until the total number of group required to be allocated is complete.
+//. Creates a For Loop of _n_ number of times. Starting with i equals to _n_ and count down to 0.
+//. Creates an ArrayList of Person Object.
+//.. This ArrayList acts as the inner array list to hold all Persons.
+//. Calculates the number of Person should be in a group.
+//.. This can be done by having the *total number of Person* in the LinkList divided by *i* from the for loop.
+//.. Lets label this as _paxInAGroup_
+//. Creates a While Loop with the condition of _paxInAGroup_ more than 0.
+//.. In the while loop, we will load a person object from the LinkList into the ArrayList.
+//. Once the while loop is complete, the array list will be filled with _paxInAGroup_ Persons.
+//. Now, we add this ArrayList with _paxInAGroup_ of Persons into the 2D ArrayList where the outer acts as a group.
+//. This process is repeated until the total number of group required to be allocated is complete.
 
 *Now we will proceed with the Distribution Process* +
 (Distribution Process will be explained after all Aspect)
 
 ===== Aspect: Distribute Students Equally with Balanced Gender Explanation `g/1 nat/0`
 
+*Pseudo Explanation of the Allocation Process*
+
 The process is quite different from the Algorithm used above. The key difference is that we had separate all female person into a list
 and all male persons into another list. After separation, we start the allocation of 1 male person to each group and process repeats until there are no males left.
-At that same pointer where the male list turns empty, we will start the allocation of 1 female person to each group. This process continues until all female persons are allocated.
+At that same pointer where the male list turns empty, we will start the allocation of 1 female person to each group. This process continues until all female persons are also allocated.
 
-*Allocation Process*
-
-. Creates a For Loop of _n_ number of times. Starting with i equals to _n_ and counts down to 0.
-. Creates 2 LinkedList of Person Object.
-.. 1 LinkedList to store all male persons
-.. 1 LinkedList to store all female persons
-. Iterate through allPersonLinkList, store male persons into maleLinkList and store female persons into femaleLinkList.
-. Creates a while loops to check if maleLinkList or femaleLinkList is not empty
-.. Create a pointer to point to the group number.
-.. Creates another while loop to allow the group pointer to iterate infinitely.
-... if the group pointer points to the last group, it will reset its pointer back to the first group.
-. In the inner While Loop from 4b.
-.. Creates an ArrayList of Person Object.
-.. Allocate 1 male person from the male LinkList into the inner ArrayList.
-... This process is done in the selectiveDistributionByGender method.
-.. Add the inner ArrayList into the outer ArrayList of the 2D ArrayList.
-.. Move the group pointer to the next group and repeat from Step 5
-. Once maleLinkList is exhausted, repeat Step 5 with the female LinkList.
+//. Creates a For Loop of _n_ number of times. Starting with i equals to _n_ and counts down to 0.
+//. Creates 2 LinkedList of Person Object.
+//.. 1 LinkedList to store all male persons
+//.. 1 LinkedList to store all female persons
+//. Iterate through allPersonLinkList, store male persons into maleLinkList and store female persons into femaleLinkList.
+//. Creates a while loops to check if maleLinkList or femaleLinkList is not empty
+//.. Create a pointer to point to the group number.
+//.. Creates another while loop to allow the group pointer to iterate infinitely.
+//... if the group pointer points to the last group, it will reset its pointer back to the first group.
+//. In the inner While Loop from 4b.
+//.. Creates an ArrayList of Person Object.
+//.. Allocate 1 male person from the male LinkList into the inner ArrayList.
+//... This process is done in the selectiveDistributionByGender method.
+//.. Add the inner ArrayList into the outer ArrayList of the 2D ArrayList.
+//.. Move the group pointer to the next group and repeat from Step 5
+//. Once maleLinkList is exhausted, repeat Step 5 with the female LinkList.
 
 *Now we will proceed with the Distribution Process* +
 (Distribution Process will be explained after all Aspect)
 
 ===== Aspect: Distribute Students Equally with Balanced Nationality Explanation `g/0 nat/1`
 
-The process is quite similar to the Algorithm used above. The key difference is that we had to collect the total number of different nationalities in the Person list.
+*Pseudo Explanation of the Allocation Process*
+
+The process is quite similar to the Algorithm mentioned in Distribute Students Equally with Balanced Gender Explanation.
+The key difference is that we had to collect the total number of different nationalities in the Person list first.
 We can achieve this by using a Map to filter out the different nationalities as the key and the number of persons belonging to that nationality as the values.
 We have to also sort the map by the values decreasingly to ensure the highest pax of a single nationality is distributed first.
 Once we have the Map of different nationalities and the number of values in each nationality, we can follow the previous algorithm and allocate 1 person from the same nationality to 1 group at a time.
 After exhausting all person from the same nationality, we can repeat the same process for the next nationality. This ensure all groups to have a balanced and mixed nationality.
 
-*Allocation Process*
 
-. Initialize a group pointer.
-. Creates a for loop that iterates based on the Map's number of key which is the number of different nationality.
-. Creates another for loop that iterates based on the key's values which is the number of person that has the same nationality.
-.. Creates an ArrayList of Person Object.
-.. In each iteration, we locate a person with the specific Nationality (key) and add into inner ArrayList.
-... This process is done by the selectiveDistributionByNationality method.
-.. Next, we will add the inner ArrayList into the outer ArrayList of the 2D ArrayList.
-.. A group pointer will be moved to the next group and the process is repeated from Step 3b.
-. Once the value in the particular nationality is exhausted, the for loop in Step 2 will point to the next Nationality.
-. The process now repeats from Step 3 until the For Loop in Step 2 is exhausted.
+//. Initialize a group pointer.
+//. Creates a for loop that iterates based on the Map's number of key which is the number of different nationality.
+//. Creates another for loop that iterates based on the key's values which is the number of person that has the same nationality.
+//.. Creates an ArrayList of Person Object.
+//.. In each iteration, we locate a person with the specific Nationality (key) and add into inner ArrayList.
+//... This process is done by the selectiveDistributionByNationality method.
+//.. Next, we will add the inner ArrayList into the outer ArrayList of the 2D ArrayList.
+//.. A group pointer will be moved to the next group and the process is repeated from Step 3b.
+//. Once the value in the particular nationality is exhausted, the for loop in Step 2 will point to the next Nationality.
+//. The process now repeats from Step 3 until the For Loop in Step 2 is exhausted.
 
 *Now we will proceed with the Distribution Process* +
 (Distribution Process will be explained after all Aspect)
@@ -652,8 +655,9 @@ Currently In Development - Coming in v2.0
 (Reason: Due to lack of time)
 
 
-===== Distribution Process
-
+===== Pseudo Explanation of the Distribution Process
+.The 2D ArrayList should be filled up with Person Objects before the Distribution Process is called.
+image::DistributeProcess.png[width=500]
 . The `distributeProcess` method will access the 2D ArrayList.
 . In each ArrayList of the 2D ArrayList, the distributeProcess Method will access the outer ArrayList and creates a group.
 .. The group is created with the given Group Name that the user specified in the Command.
