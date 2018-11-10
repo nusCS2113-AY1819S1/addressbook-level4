@@ -7,7 +7,7 @@ import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.recruit.logic.commands.SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS;
 import static seedu.recruit.testutil.TestUtil.getCompanyLastIndex;
 import static seedu.recruit.testutil.TestUtil.getCompanyMidIndex;
-import static seedu.recruit.testutil.TypicalCompanies.KEYWORD_MATCHING_AUDI;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.KEYWORD_MATCHING_AUDI;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.Test;

@@ -2,7 +2,7 @@ package seedu.recruit.logic.commands;
 
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.getTypicalCompanyBook;
 
 import org.junit.Before;
 import org.junit.Test;

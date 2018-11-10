@@ -19,7 +19,7 @@ import static seedu.recruit.logic.commands.CommandTestUtil.VALID_NAME_BMW;
 import static seedu.recruit.logic.commands.CommandTestUtil.VALID_PHONE_BMW;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.recruit.testutil.TypicalCompanies.BMW;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.BMW;
 
 import org.junit.Test;
 

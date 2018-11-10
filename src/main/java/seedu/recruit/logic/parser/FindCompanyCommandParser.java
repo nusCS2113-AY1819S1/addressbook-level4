@@ -45,8 +45,7 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
         }
 
         if (keywordsList.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCompanyCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + FindCompanyCommand.MESSAGE_USAGE);
         }
 
         return new FindCompanyCommand(new CompanyContainsFindKeywordsPredicate(keywordsList));

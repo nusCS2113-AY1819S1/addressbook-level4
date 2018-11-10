@@ -6,8 +6,8 @@ import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_REVERSE;
-import static seedu.recruit.testutil.TypicalCompanies.getReversedCompanyBook;
-import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.getReversedCompanyBook;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.getTypicalCompanyBook;
 
 import org.junit.Test;
 
