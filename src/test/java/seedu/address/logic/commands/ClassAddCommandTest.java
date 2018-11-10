@@ -18,6 +18,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.StorageController;
@@ -28,8 +29,9 @@ import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleManager;
-import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
+import seedu.address.testutil.ClassroomBuilder;
+import seedu.address.testutil.ModuleBuilder;
 
 /**
  * Provides a test for the class add command
@@ -39,15 +41,13 @@ public class ClassAddCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private CommandHistory commandHistory = new CommandHistory();
 
     @Before
     public void setup() {
+        StorageController.enterTestMode();
         ModuleManager moduleManager = ModuleManager.getInstance();
-        final String moduleCodeStr = "CG1111";
-        final String moduleNameStr = "Computer Engineering Physics";
-        ModuleCode moduleCode = new ModuleCode(moduleCodeStr);
-        ModuleName moduleName = new ModuleName(moduleNameStr);
-        Module module = new Module(moduleCode, moduleName);
+        Module module = new ModuleBuilder().withModuleCode("CG1111").build();
         try {
             moduleManager.addModule(module);
         } catch (DuplicateModuleException e) {
@@ -57,20 +57,38 @@ public class ClassAddCommandTest {
     }
 
     @Test
-    public void execute() {
-        final String className = "T16";
-        final String moduleCode = "CG1111";
-        final String maxEnrollment = "20";
+    public void execute_classroomAccepted_addSuccessful() {
+        Classroom classroom = new ClassroomBuilder().build();
 
-        assertCommandSuccess(new ClassAddCommand(new Classroom(new ClassName(className),
-                        new ModuleCode(moduleCode), new Enrollment(maxEnrollment))), model, new CommandHistory(),
-                String.format(MESSAGE_SUCCESS, className, moduleCode, maxEnrollment),
+        assertCommandSuccess(new ClassAddCommand(classroom), model, commandHistory,
+                String.format(MESSAGE_SUCCESS, classroom.getClassName(),
+                        classroom.getModuleCode(), classroom.getMaxEnrollment()),
                 model);
+    }
+
+    @Test
+    public void execute_duplicateClassroom_throwsCommandException() throws Exception {
+        Classroom validClassroom = new ClassroomBuilder().build();
+        ClassAddCommand classAddCommand = new ClassAddCommand(validClassroom);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(ClassAddCommand.MESSAGE_DUPLICATE_CLASSROOM);
+        classAddCommand.execute(model, commandHistory);
+    }
+
+    @Test
+    public void execute_classroomInvalidModule_throwsCommandException() throws Exception {
+        Classroom validClassroom = new ClassroomBuilder().withModuleCode("CG1112").build();
+        ClassAddCommand classAddCommand = new ClassAddCommand(validClassroom);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(ClassAddCommand.MESSAGE_MODULE_CODE_INVALID);
+        classAddCommand.execute(model, commandHistory);
     }
 
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullClassroom_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new ClassAddCommand(null);
     }
