@@ -59,10 +59,20 @@ public class EditEventCommandTest {
     }
 
     @Test
+    public void execute_existingListcontainEditedEvent_failure() {
+
+        EditEventDescriptor descriptor = new EditEventDescriptorBuilder(EVENT_1).build();
+        EditEventCommand editEventCommand = new EditEventCommand(INDEX_SECOND_EVENT, descriptor);
+
+        assertCommandFailure(editEventCommand, model, commandHistory, EditEventCommand.MESSAGE_DUPLICATE_EVENT);
+
+    }
+
+    @Test
     public void execute_clashWithOtherEvents_failure() {
 
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(EVENT_1)
-                .withLocation("Test Location 2").build();
+                .withLocation("Test Location 4").withDate("2018-08-18").withStartTime("07:00").build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT, descriptor);
 
         assertCommandFailure(editEventCommand, model, commandHistory, EditEventCommand.MESSAGE_DUPLICATE_EVENT);

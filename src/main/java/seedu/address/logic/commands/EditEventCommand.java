@@ -19,8 +19,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
