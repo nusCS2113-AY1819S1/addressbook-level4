@@ -35,7 +35,7 @@ public class UnfriendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> friendList = model.getFriendList(model.getUser());
+        List<Person> friendList = model.getFriendList();
 
         if (targetIndex.getZeroBased() >= friendList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

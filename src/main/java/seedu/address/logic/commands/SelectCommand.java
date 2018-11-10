@@ -48,7 +48,7 @@ public class SelectCommand extends Command {
             model.updateTimeTable(model.getUser().getTimeTable());
             return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, ARGS_ME));
         } else {
-            List<Person> friendList = model.getFriendList(model.getUser());
+            List<Person> friendList = model.getFriendList();
 
             if (targetIndex.getZeroBased() >= friendList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -56,7 +56,7 @@ public class SelectCommand extends Command {
 
             model.updateTimeTable(friendList.get(targetIndex.getZeroBased()).getTimeTable());
             EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-            String namePerson = model.getFriendList(model.getUser())
+            String namePerson = model.getFriendList()
                     .get(targetIndex.getZeroBased()).getName().toString();
 
             return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, namePerson));

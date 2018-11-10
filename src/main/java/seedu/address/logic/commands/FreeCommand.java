@@ -39,7 +39,7 @@ public class FreeCommand extends Command {
         requireNonNull(model);
 
         User user = model.getUser();
-        List<Person> friendList = model.getFriendList(user);
+        List<Person> friendList = model.getFriendList();
 
         DeconflictTimeTable deconflict = new DeconflictTimeTable(user.getTimeTable());
 

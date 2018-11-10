@@ -195,13 +195,13 @@ public class MainWindow extends UiPart<Stage> {
         timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
-        mePanel = new MePanel(FXCollections.observableArrayList(security.getUser()));
+        mePanel = new MePanel(logic.getFilteredPersonList());
         mePanelPlaceholder.getChildren().add(mePanel.getRoot());
 
-        friendListPanel = new FriendListPanel(logic.getFriendList(security.getUser()));
+        friendListPanel = new FriendListPanel(logic.getFriendList());
         personListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
-        otherListPanel = new OtherListPanel(logic.getOtherList(security.getUser()));
+        otherListPanel = new OtherListPanel(logic.getOtherList());
         otherListPanelPlaceholder.getChildren().add(otherListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();

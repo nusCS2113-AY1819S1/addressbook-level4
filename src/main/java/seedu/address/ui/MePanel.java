@@ -17,7 +17,6 @@ import seedu.address.model.person.Person;
 public class MePanel extends UiPart<Region> {
 
     private static final String FXML = "MePanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(MePanel.class);
 
     @FXML
     private ListView<Person> meView;
@@ -25,23 +24,11 @@ public class MePanel extends UiPart<Region> {
     public MePanel(ObservableList<Person> personList) {
         super(FXML);
         setConnections(personList);
-        registerAsAnEventHandler(this);
     }
 
     private void setConnections(ObservableList<Person> personList) {
         meView.setItems(personList);
         meView.setCellFactory(listView -> new MePanel.MeViewCell());
-        setEventHandlerForSelectionChangeEvent();
-    }
-
-    private void setEventHandlerForSelectionChangeEvent() {
-        meView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
-                    }
-                });
     }
 
     /**

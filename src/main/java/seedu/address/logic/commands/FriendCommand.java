@@ -36,7 +36,7 @@ public class FriendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> otherList = model.getOtherList(model.getUser());
+        List<Person> otherList = model.getOtherList();
 
         if (targetIndex.getZeroBased() >= otherList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
