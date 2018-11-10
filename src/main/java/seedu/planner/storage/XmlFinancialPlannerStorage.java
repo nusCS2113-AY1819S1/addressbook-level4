@@ -102,9 +102,9 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
                 XmlSerializableFinancialPlanner.class);
         try {
             return Optional.of(xmlFinancialPlanner.toModelType());
-        } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-            throw new DataConversionException(ive);
+        } catch (IllegalValueException | IllegalArgumentException ie) {
+            logger.info("Illegal values found in " + filePath + ": " + ie.getMessage());
+            throw new DataConversionException(ie);
         }
     }
 
@@ -149,9 +149,9 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
                 XmlSerializableLimitList.class);
         try {
             return Optional.of(xmlLimitList.toModelType());
-        } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-            throw new DataConversionException(ive);
+        } catch (IllegalValueException | IllegalArgumentException ie) {
+            logger.info("Illegal values found in " + filePath + ": " + ie.getMessage());
+            throw new DataConversionException(ie);
         }
     }
 

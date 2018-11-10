@@ -3,9 +3,6 @@ package seedu.planner.model.record;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
 
-import java.util.logging.Logger;
-
-import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.util.DateUtil;
 
 /**
@@ -26,8 +23,6 @@ public class Date {
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
 
     public final String value;
-
-    private Logger logger = LogsCenter.getLogger(Date.class);
 
     private int day;
     private int month;

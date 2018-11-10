@@ -1,4 +1,4 @@
-﻿= Financial Planner - Developer Guide
+﻿= Savee - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -50,7 +50,7 @@ This will generate all resources required by the application and tests.
 
 === Verifying the setup
 
-. Run the `seedu.expense.MainApp` and try a few commands
+. Run the `seedu.planner.MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
 
 === Configurations to do before writing code
@@ -110,9 +110,9 @@ image::Architecture.png[width="600"]
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
-The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/tree/master/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called link:{repoURL}/src/main/java/seedu/expense/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has only one class called link:{repoURL}/src/main/java/seedu/planner/MainApp.java[`MainApp`]. It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -201,31 +201,33 @@ image::DeletePersonSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
-
+//@@tztzt(Zhithon)
 .Structure of the Model Component
 image::ModelClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/expense/model/Model.java[`Model.java`]
+*API* : link:{repoURL}/src/main/java/seedu/planner/model/Model.java[`Model.java`]
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Financial Planner data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Record>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Limit>` that can be `observed`
+* contains a `FilteredList<Record>` of all records in the current month which is updated automatically and has listeners bound to it that will notify the Ui of any changes
 * does not depend on any of the other three components.
 
 [NOTE]
 As a more OOP model, we can store a `Tag` list in `Financial Planner`, which `Record` can reference. This would allow `Financial Planner` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
-
+//@@tztzt(Zhithon)
 [[Design-Storage]]
 === Storage component
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/expense/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/src/main/java/seedu/planner/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -251,9 +253,9 @@ It extends `FinancialPlanner` with an undo/redo history, stored internally as an
 `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedFinancialPlanner#commit()` -- Saves the current expense book state in its history.
-* `VersionedFinancialPlanner#undo()` -- Restores the previous expense book state from its history.
-* `VersionedFinancialPlanner#redo()` -- Restores a previously undone expense book state from its history.
+* `VersionedFinancialPlanner#commit()` -- Saves the current financial planner state in its history.
+* `VersionedFinancialPlanner#undo()` -- Restores the previous financial planner state from its history.
+* `VersionedFinancialPlanner#redo()` -- Restores a previously undone financial planner state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitFinancialPlanner()`,
 `Model#undoFinancialPlanner()` and `Model#redoFinancialPlanner()` respectively.
@@ -261,35 +263,35 @@ These operations are exposed in the `Model` interface as `Model#commitFinancialP
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedFinancialPlanner` will be initialized with
-the initial expense book state, and the `currentStatePointer` pointing to that single expense planner state.
+the initial financial planner state, and the `currentStatePointer` pointing to that single financial planner state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the expense book. The `delete` command calls
-`Model#commitFinancialPlanner()`, causing the modified state of the expense book after the `delete 5` command executes
-to be saved in the `financialPlannerStateList`, and the `currentStatePointer` is shifted to the newly inserted expense book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the financial planner. The `delete` command calls
+`Model#commitFinancialPlanner()`, causing the modified state of the financial planner after the `delete 5` command executes
+to be saved in the `financialPlannerStateList`, and the `currentStatePointer` is shifted to the newly inserted financial planner state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls
-`Model#commitFinancialPlanner()`, causing another modified expense book state to be saved into the
+Step 3. The user executes `add n/Mala ...` to add a new record. The `add` command also calls
+`Model#commitFinancialPlanner()`, causing another modified financial planner state to be saved into the
 `financialPlannerStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitFinancialPlanner()`, so the expense book state will
+If a command fails its execution, it will not call `Model#commitFinancialPlanner()`, so the financial planner state will
 not be saved into the `financialPlannerStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the
+Step 4. The user now decides that adding the record was a mistake, and decides to undo that action by executing the
 `undo` command. The `undo` command will call `Model#undoFinancialPlanner()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous expense book state, and restores the expense book to that state.
+once to the left, pointing it to the previous financial planner state, and restores the financial planner to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial expense book state, then there are no previous
-expense book states to restore. The `undo` command uses `Model#canUndoFinancialPlanner()` to check if this is the case.
+If the `currentStatePointer` is at index 0, pointing to the initial financial planner state, then there are no previous
+financial planner states to restore. The `undo` command uses `Model#canUndoFinancialPlanner()` to check if this is the case.
 If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
@@ -297,20 +299,20 @@ The following sequence diagram shows how the undo operation works:
 image::UndoRedoSequenceDiagram.png[width="800"]
 
 The `redo` command does the opposite -- it calls `Model#redoFinancialPlanner()`, which shifts the `currentStatePointer`
-once to the right, pointing to the previously undone state, and restores the expense book to that state.
+once to the right, pointing to the previously undone state, and restores the financial planner to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `financialPlannerStateList.size() - 1`, pointing to the latest expense book
-state, then there are no undone expense book states to restore. The `redo` command uses `Model#canRedoFinancialPlanner()`
+If the `currentStatePointer` is at index `financialPlannerStateList.size() - 1`, pointing to the latest financial planner
+state, then there are no undone financial planner states to restore. The `redo` command uses `Model#canRedoFinancialPlanner()`
 to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the expense book, such as
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the financial planner, such as
 `list`, will usually not call `Model#commitFinancialPlanner()`, `Model#undoFinancialPlanner()` or
 `Model#redoFinancialPlanner()`. Thus, the `financialPlannerStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitFinancialPlanner()`. Since the `currentStatePointer` is not pointing at the end of the `financialPlannerStateList`, all expense book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitFinancialPlanner()`. Since the `currentStatePointer` is not pointing at the end of the `financialPlannerStateList`, all financial planner states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -322,7 +324,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire expense book.
+* **Alternative 1 (current choice):** Saves the entire financial planner.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
@@ -331,7 +333,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of expense book states.
+* **Alternative 1 (current choice):** Use a list to store the history of financial planner states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
 ** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedFinancialPlanner`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
@@ -746,9 +748,9 @@ image::checkLimitSequenceDiagram.png[width:800]
 // end::checkLimit[]
 // end::limitfeatures[]
 
-// tag::delete_by_date_entry[]
+// tag::deletedate[]
 
-=== Delete By Date Entry
+=== Delete all the record whose date is required
 ==== Current implementation
 The delete by date entry mechanism is facilitated by `ModelManager`.
 It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
@@ -767,10 +769,10 @@ The following sequence diagram shows how the list operation works:
 
 image::DeleteByDateEntrySequenceDiagram.png[width:800]
 
-// end::delete_by_date_entry[]
+// end::deletedate[]
 
 // tag::exportexcel[]
-=== Export into Excel file
+=== Export the records from Financial Planner into the Excel file.
 ==== Current implementation
 The export into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
 
@@ -784,34 +786,7 @@ The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together
 
 After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User's Working Directory.
 
-With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file, containing 2 Excel sheet, namely `RECORD DATA` and `SUMMARY DATA`.
-
-* `RECORD DATA` stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit.
-
-image::Export_Capture1_LinhChi.png[width:800]
-
-* `SUMMARY DATA` stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw a line chart automatically inside the Excel sheet` part for more information]. As you can see in the picture, there are 3 series shown:
-** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
-** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
-** The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).
-
-image::Export_Capture2_LinhChi.png[width:800]
-
-This feature has only one keyword `exportexcel` but implements 6 different argument modes to allow users to access multiple versions of the same command.
-The six argument modes are as listed below:
-
-* *No argument mode* `exportexcel` will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
-
-* *Single argument Date mode* `exportexcel d/DATE` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
-
-* *Dual argument Date mode* `exportexcel d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
-
-* *Single argument Directory Path mode* `exportexcel dir/DIRECTORY_PATH` will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.
-
-* *Single argument Date mode + Single argument Directory path mode* `exportexcel d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
-
-* *Dual argument Date mode + Single argument Directory path mode* `exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.
-+
+With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file.
 
 The mechanism that facilitates these modes can be found in the `ExportExcelCommandParser#parse`. Below is a overview of the mechanism:
 
@@ -839,18 +814,16 @@ The `ExportExcelCommand` has four constructors which makes use of overloading to
 
 The following sequence diagram shows how the list operation works:
 
-image::ExportExcelSequenceDiagram.png[width="800"]
+image::ExportExcelSequenceDiagram.png[width:800]
 
-For simplicity, interactions with the UI is not shown in the diagram above. +
-The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList
-implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
-listener is present in `RecordListPanel` and will update the UI list automatically.
+[NOTE]
+Please note that the `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `exportexcel` command, the Excel file created will not be deleted.
 
 // end::exportexcel[]
 
 // tag::import[]
 
-=== Import from Excel file
+=== Import the record data from the Excel file to the Financial Planner
 ==== Current implementation
 The import from Excel file mechanism is facilitated by `ExcelUtil`, the utility created to handle all method relating to Excel.
 
@@ -893,18 +866,7 @@ The mechanism that facilitates these modes can be found in the `ImportExcelComma
 .. The String associated with `n/` is optionally entered.
 .. Please note that User have to add the post-fix `.xlsx` at the end to indicate this is a Excel file.
 
-When performing `import` command to import all the records data from the Excel file to the Financial Planner, user should take note that there are some constraints which helps the `import` command performs smoothly.
-
-* The excel file can have multiple sheets, containing records data. The starting row of the table does not have to be first row of the sheet. This also applies to the column.
-* There can be blank row blending in the table, but there must be *no* blank column.
-* The First row of the table *must* have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will *not* be read.
-* The information of NAME, DATE, MONEY columns should be fully filled, while the TAGS columns is optionally filled.
-* Each tag should be separated by ... (3 *consecutive* dots). Beside ... , numbers and alphabet character, there should be no other character.
-
-The picture below shows a good example for the Excel Sheet.
-
-image::Export_Capture1_LinhChi.png[width:800]
-
+. If the string associated with `n/`, method `ExcelUtil#setPathFile` is called to combine the name of the Excel file to the string associated with `dir/`.
 
 The `ImportExcelCommand` has only one constructor.
 
@@ -912,12 +874,12 @@ The `ImportExcelCommand` has only one constructor.
 
 The following sequence diagram shows how the list operation works:
 
-image::ImportExcelSequenceDiagram.png[width="800"]
+image::ImportExcelSequenceDiagram.png[width:800]
 
 // end::import[]
 
 // tag::archive[]
-=== Archive into Excel file
+=== Archive the record data from Financial Planner to the Excel file
 ==== Current implementation
 The archive into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
 
@@ -931,36 +893,9 @@ The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together
 
 After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User's Working Directory.
 
-With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file, containing 2 Excel sheet, namely `RECORD DATA` and `SUMMARY DATA`.
-
-* `RECORD DATA` stores all the data of record the user want to archive, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit.
-
-image::Export_Capture1_LinhChi.png[width:800]
-
-* `SUMMARY DATA` stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw a line chart automatically inside the Excel sheet` part for more information]. As you can see in the picture, there are 3 series shown:
-** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
-** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
-** The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).
+With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file.
 
 After records are archived to Excel file, `ModelManager#deleteListRecord` is called to delete the archived records.If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Financial Planner and the message, which states records have been deleted.
-
-image::Export_Capture2_LinhChi.png[width:800]
-
-This feature has only one keyword `archive` but implements 6 different argument modes to allow users to access multiple versions of the same command.
-The six argument modes are as listed below:
-
-* *No argument mode* `archive` will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
-
-* *Single argument Date mode* `archive d/DATE` will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
-
-* *Dual argument Date mode* `archive d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
-
-* *Single argument Directory Path mode* `archive dir/DIRECTORY_PATH` will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the chosen Directory Path.
-
-* *Single argument Date mode + Single argument Directory path mode* `archive d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.
-
-* *Dual argument Date mode + Single argument Directory path mode* `archive d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.
-+
 
 The mechanism that facilitates these modes can be found in the `ArchiveCommandParser#parse`. Below is a overview of the mechanism:
 
@@ -988,12 +923,10 @@ The `ArchiveCommand` has four constructors which makes use of overloading to red
 
 The following sequence diagram shows how the list operation works:
 
-image::ArchiveSequenceDiagram.png[width="800"]
+image::ArchiveSequenceDiagram.png[width:800]
 
-For simplicity, interactions with the UI is not shown in the diagram above. +
-The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList
-implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
-listener is present in `RecordListPanel` and will update the UI list automatically.
+[NOTE]
+Please note that the `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `archive` command, the records archived will be added again back to the Financial Planner but the Excel file created will not be deleted.
 
 // end::archive[]
 
@@ -1006,31 +939,7 @@ This feature will automatically uses the the summary data from the `SUMMARY DATA
 
 The feature mechanism is facilitated by `ExcelUtil`, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with `ExcelUtil#drawChart`.
 
-As you can see the screenshot below, in the `SUMMARY DATA` sheet (refer to `Export into Excel file` or `Archive into Excel file` feature), next to the summary table:
-
-* The size of the line chart (based on default column width and default row height) is:
-** The width is 15 columns
-** The height is 30 rows.
-* On the top left of the chart, the legend shows 3 lines, namely Income, Outcome, and Net.
-** The first blue line shows the Income based on Date.
-** The second orange line shows the Outcome based on Date
-** The third grey line shows the Net (total of income and outcome) based on Date.
-
-image::Export_Capture2_LinhChi.png[width:800]
-
 // end::draw_line_chart[]
-
-=== Design Considerations
-==== Aspect: Data structure to support listing of records
-
-* **Alternative 1 (current choice):** Uses a FilteredList that is tracked by the UI. FilteredLIst is a wrapper around the ObservableList<Record> that is stored in UniquePersonList which allows for any changes in the observable list to be propagated to the filtered list automatically.
-** Pros: Easy to implement
-** Cons: May take a significantly longer time to list records if there are many records spanning across a large timeframe.
-
-* **Alternative 2:** Implement a HashMap with Date as the key and Record as the value.
-** Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.
-** Cons: Current UI implementation relies on `FilteredList`. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to `ObservableMap` instead. Alternatively, one can utilise a `HashMap` to first generate the list and pass the list reference into `FilteredList`. However, there is a need to code a filter function.
-
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
