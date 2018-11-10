@@ -82,9 +82,9 @@ public class BookListPanelTest extends GuiUnitTest {
      */
     private ObservableList<Book> createBackingList(int bookCount) throws Exception {
         Path xmlFile = createXmlFileWithBooks(bookCount);
-        XmlSerializableBookInventory xmlAddressBook =
+        XmlSerializableBookInventory xmlBookInventory =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableBookInventory.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getBookList());
+        return FXCollections.observableArrayList(xmlBookInventory.toModelType().getBookList());
     }
 
     /**
@@ -94,6 +94,7 @@ public class BookListPanelTest extends GuiUnitTest {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
         builder.append("<bookinventory>\n");
+
         String partialIsbn = "9780000";
         for (int i = 10000; i < bookCount; i++) {
             String completeIsbn = partialIsbn + Integer.toString(i);
