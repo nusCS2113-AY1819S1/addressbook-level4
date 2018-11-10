@@ -22,19 +22,19 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("John Doe"), new Phone("87438807"), new Email("john_doe@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), SampleTimeTableUtil.getTimeTableJohnDoe(), new HashSet<>()),
+                getTagSet("CS2113T-F16-1"), SampleTimeTableUtil.getTimeTableJohnDoe(), new HashSet<>()),
             new Person(new Name("John Roe"), new Phone("99272758"), new Email("rowjohn@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), SampleTimeTableUtil.getTimeTableJohnRoe(), new HashSet<>()),
+                getTagSet("CS2113T-F16-1", "CS2101-A"), SampleTimeTableUtil.getTimeTableJohnRoe(), new HashSet<>()),
             new Person(new Name("Johnny Doe"), new Phone("93210283"), new Email("johnny@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), SampleTimeTableUtil.getTimeTableJohnnyDoe(), new HashSet<>()),
+                getTagSet("CS2113T-F16-1"), SampleTimeTableUtil.getTimeTableJohnnyDoe(), new HashSet<>()),
             new Person(new Name("Benson Meier"), new Phone("91031282"), new Email("meierbenson@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), SampleTimeTableUtil.getTimeTableBensonMeier(), new HashSet<>()),
+                getTagSet("CS2113T-F16-1", "CS2101-B"), SampleTimeTableUtil.getTimeTableBensonMeier(), new HashSet<>()),
             new Person(new Name("test"), new Phone("88888888"), new Email("test@test.com"),
                 new Address("Testy Road"),
-                getTagSet("family"), SampleTimeTableUtil.getTimeTableBensonMeier(), new HashSet<>()),
+                getTagSet("Test Group"), SampleTimeTableUtil.getTimeTableBensonMeier(), new HashSet<>()),
         };
     }
 
