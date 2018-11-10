@@ -71,6 +71,12 @@ public class XmlSerializableAddressBook {
         return addressBook;
     }
 
+    /**
+     * Returns true if both objects have the same fields.
+     *
+     * @param other Object to compare with.
+     * @return Comparison result.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

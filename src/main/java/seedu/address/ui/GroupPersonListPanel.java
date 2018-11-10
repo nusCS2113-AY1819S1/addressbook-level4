@@ -26,14 +26,18 @@ public class GroupPersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> groupPersonListView;
 
+    /**
+     * Registers event handler.
+     */
     public GroupPersonListPanel() {
         super(FXML);
         registerAsAnEventHandler(this);
     }
 
     /**
-     * Displays list of person(s) in group selected
-     * @param group
+     * Displays list of person(s) in group selected.
+     *
+     * @param group Group selected.
      */
     private void loadGroupPersons(Group group) {
         ObservableList<Person> personObservableList = FXCollections.observableArrayList();
@@ -45,6 +49,11 @@ public class GroupPersonListPanel extends UiPart<Region> {
         groupPersonListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
+    /**
+     * Updates the GroupPersonPanel when a new selection is made on the GroupListPanel.
+     *
+     * @param event Event which triggers the update.
+     */
     @Subscribe
     private void handleGroupPanelSelectionChangedEvent(GroupPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
