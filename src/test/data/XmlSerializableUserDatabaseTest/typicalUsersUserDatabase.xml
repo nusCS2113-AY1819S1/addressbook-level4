@@ -3,19 +3,22 @@
     <users>
         <username>user</username>
         <password>pass</password>
-        <addressBookFilePath>data/addressbook-user.xml</addressBookFilePath>
+        <addressbookfilepath>data/addressbook-user.xml</addressbookfilepath>
+        <distributorbookfilepath>data/distributor-user.xml</distributorbookfilepath>
         <salesHistoryFilePath>data/saleshistory-user.xml</salesHistoryFilePath>
     </users>
     <users>
         <username>amy</username>
         <password>pass</password>
-        <addressBookFilePath>data/addressbook-amy.xml</addressBookFilePath>
+        <addressbookfilepath>data/addressbook-amy.xml</addressbookfilepath>
+        <distributorbookfilepath>data/distributor-amy.xml</distributorbookfilepath>
         <salesHistoryFilePath>data/saleshistory-amy.xml</salesHistoryFilePath>
     </users>
     <users>
         <username>bob</username>
         <password>pass</password>
-        <addressBookFilePath>data/addressbook-bob.xml</addressBookFilePath>
+        <addressbookfilepath>data/addressbook-bob.xml</addressbookfilepath>
+        <distributorbookfilepath>data/distributor-bob.xml</distributorbookfilepath>
         <salesHistoryFilePath>data/saleshistory-bob.xml</salesHistoryFilePath>
     </users>
 </userdatabase>
