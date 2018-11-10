@@ -26,7 +26,6 @@ public class EventContainsAttendeeAndDatePredicateTest {
         eventTwo = new EventBuilder().build();
     }
 
-
     @Test
     public void test_attendeesContainNameAndEventMatchesDate_returnsTrue() {
         EventContainsAttendeeAndDatePredicate predicate = new EventContainsAttendeeAndDatePredicate(

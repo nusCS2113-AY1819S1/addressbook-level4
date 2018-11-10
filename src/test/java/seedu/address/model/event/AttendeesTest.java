@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CALVIN;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
@@ -17,8 +16,6 @@ import seedu.address.testutil.Assert;
 
 public class AttendeesTest {
 
-    private Set<String> attendeesSetOne;
-    private Set<String> attendeesSetTwo;
     private Set<String> attendeesSetNull;
     private Attendees attendeesOne;
     private Attendees attendeesTwo;
@@ -26,15 +23,9 @@ public class AttendeesTest {
 
     @Before
     public void setup() {
-        attendeesSetOne = new HashSet<>();
-        attendeesSetTwo = new HashSet<>();
-        attendeesSetNull = null;
 
-        attendeesSetOne.add(VALID_EMAIL_AMY);
-        attendeesSetTwo.add(VALID_EMAIL_BOB);
-
-        attendeesOne = new Attendees(attendeesSetOne);
-        attendeesTwo = new Attendees(attendeesSetTwo);
+        attendeesOne = new Attendees(VALID_EMAIL_AMY);
+        attendeesTwo = new Attendees(VALID_EMAIL_BOB);
         attendeesThree = new Attendees(VALID_EMAIL_BOB, VALID_EMAIL_CALVIN);
     }
 
@@ -44,25 +35,6 @@ public class AttendeesTest {
         Assert.assertThrows(NullPointerException.class, () -> new Attendees(attendeesSetNull));
     }
 
-    @Test
-    public void equals() {
-
-        // Attendees equal to itself
-        assertTrue(attendeesOne.equals(attendeesOne));
-
-        Attendees attendeesOneCopy = attendeesOne;
-        // Attendees equal to one with same content
-        assertTrue(attendeesOne.equals(attendeesOneCopy));
-
-        // Attendees not equal to one with different content
-        assertFalse(attendeesOne.equals(attendeesTwo));
-        assertFalse(attendeesOne.equals(attendeesThree));
-        assertFalse(attendeesTwo.equals(attendeesThree));
-
-        // Attendees equal after adding new person
-        Attendees attendeesTest = attendeesTwo.createAttendeesWithAddedEmail(VALID_EMAIL_CALVIN);
-        assertTrue(attendeesTest.equals(attendeesThree));
-    }
 
     @Test
     public void hasEmail_presentEmail_success() {
@@ -73,7 +45,7 @@ public class AttendeesTest {
 
     @Test
     public void hasEmail_absentEmail_success() {
-        // Attendees does not have emails absent in list
+        // Attendees does not have emails in list
         assertFalse(attendeesOne.hasPerson(VALID_EMAIL_BOB));
     }
 
@@ -101,6 +73,24 @@ public class AttendeesTest {
         assertFalse(attendeesOne.isSetEmpty());
     }
 
+    @Test
+    public void equals() {
 
+        // Attendees equal to itself
+        assertTrue(attendeesOne.equals(attendeesOne));
+
+        Attendees attendeesOneCopy = attendeesOne;
+        // Attendees equal to one with same content
+        assertTrue(attendeesOne.equals(attendeesOneCopy));
+
+        // Attendees not equal to one with different content
+        assertFalse(attendeesOne.equals(attendeesTwo));
+        assertFalse(attendeesOne.equals(attendeesThree));
+        assertFalse(attendeesTwo.equals(attendeesThree));
+
+        // Attendees equal after adding new person
+        Attendees attendeesTest = attendeesTwo.createAttendeesWithAddedEmail(VALID_EMAIL_CALVIN);
+        assertTrue(attendeesTest.equals(attendeesThree));
+    }
 
 }

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_PUNCTUAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_LT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -39,7 +40,7 @@ public class EventListTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyEventList_replacesData() {
         EventList newData = getTypicalEventList();
         eventList.resetData(newData);
         assertEquals(newData, eventList);
@@ -107,7 +108,7 @@ public class EventListTest {
     @Test
     public void hasClash_eventClashWithList_returnsTrue() {
         eventList.addEvent(EVENT_3);
-        assertTrue(eventList.hasClash(EVENT_1, "alice@example.com"));
+        assertTrue(eventList.hasClash(EVENT_1, VALID_EMAIL_ALICE));
     }
 
     @Test

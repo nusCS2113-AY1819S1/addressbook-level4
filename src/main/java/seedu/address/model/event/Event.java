@@ -95,7 +95,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Returns true if both event are at the same location and clashes.
-     * This defines a weaker notion of equality between two events.
+     * This defines a weaker notion of equality between two events, indicating that they overlap.
      */
     public boolean isSameEvent(Event event) {
         if (event == this) {
@@ -204,7 +204,7 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Returns true if both event time clashes
+     * Returns true if both event time and date clashes
      */
     public boolean hasClash(Event event) {
         if (!event.date.equals(this.date)) {
