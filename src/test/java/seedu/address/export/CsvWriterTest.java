@@ -2,8 +2,11 @@ package seedu.address.export;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.commons.util.FileUtil.isFileExists;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -23,8 +26,6 @@ public class CsvWriterTest {
     private CsvWriter csvWriter = new CsvWriter(model.getFilteredPersonList(), outputFilepath);
 
     private Path expectedPath = Paths.get("data" , "addressbook.csv");
-    // AddressBookStub addressBookStub = new AddressBookStub();
-    // CsvWriter csvWriter = new CsvWriter(new AddressBookStub.getPersonList());
 
     @Test
     public void getOutputFilepath_notNull() {
@@ -34,6 +35,12 @@ public class CsvWriterTest {
     @Test
     public void getOutputFilepath_equalsDefault() {
         assertEquals(csvWriter.getOutputFilepath(), expectedPath);
+    }
+
+    @Test
+    public void checkOutputFileExists() throws IOException {
+        csvWriter.write();
+        assertTrue(isFileExists(outputFilepath));
     }
 
     @Test
