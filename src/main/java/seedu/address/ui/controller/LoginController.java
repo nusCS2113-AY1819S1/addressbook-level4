@@ -266,8 +266,10 @@ public class LoginController {
     public void getLoginInfoList (LoginInfoManager loginInfoManager) {
         this.loginInfoManager = loginInfoManager;
     }
+
     private void openHelpWindow() {
         LoginHelpWindow loginHelpWindow = new LoginHelpWindow ();
         loginHelpWindow.show ();
     }
+
 }
