@@ -11,6 +11,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -18,6 +19,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.EndTime;
@@ -108,9 +111,7 @@ public class EditEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
-        //TODO: Write tests for EditEvent
-
-        /*
+        
         Model modelDummy = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
         modelDummy.deleteEvent(eventToEdit);
         Set<String> attendeeSet = editedEvent.getAttendees().getAttendeesSet();
@@ -118,7 +119,7 @@ public class EditEventCommand extends Command {
             if (modelDummy.hasClash(editedEvent, personEmail)) {
                 throw new CommandException(String.format(MESSAGE_EVENT_CLASH, personEmail));
             }
-        } */
+        }
 
         model.updateEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);

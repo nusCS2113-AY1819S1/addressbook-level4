@@ -66,7 +66,7 @@ public class TypicalEvents {
             new StartTime("06:00"),
             new EndTime("12:00"),
             new Location("Test Location 5"),
-            new Attendees("johnd@example.com")
+            new Attendees("johnd@example.com", "alice@example.com")
     );
 
     public static final Event EVENT_6 = new Event(
