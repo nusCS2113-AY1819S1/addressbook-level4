@@ -1,15 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_DRINKS;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.drink.Date;
-import seedu.address.model.drink.NameContainsKeywordsPredicate;
-import seedu.address.model.drink.Quantity;
+import seedu.address.model.drink.*;
 
 
 /**
@@ -26,29 +23,25 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " coca cola pepsi fanta";
 
     private final NameContainsKeywordsPredicate predicate;
-    private final Date date;
-    private final Quantity quantity;
-    private final boolean modifier;
+    private final DateCompareBeforePredicate datePredicate;
+    private final QuantityCompareLessPredicate quantityPredicate;
 
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
-        this.date = null;
-        this.quantity = null;
-        this.modifier = false;
+        this.datePredicate = null;
+        this.quantityPredicate = null;
     }
 
-    public FindCommand(Date date, Boolean modifier) {
+    public FindCommand(DateCompareBeforePredicate date) {
         this.predicate = null;
-        this.date = date;
-        this.quantity = null;
-        this.modifier = modifier;
+        this.datePredicate = date;
+        this.quantityPredicate = null;
     }
 
-    public FindCommand(Quantity quantity, Boolean modifier) {
+    public FindCommand(QuantityCompareLessPredicate quantity) {
         this.predicate = null;
-        this.date = null;
-        this.quantity = quantity;
-        this.modifier = modifier;
+        this.datePredicate = null;
+        this.quantityPredicate = quantity;
     }
 
     @Override
@@ -56,8 +49,22 @@ public class FindCommand extends Command {
         requireNonNull(model);
         if (predicate != null) {
             model.updateFilteredDrinkList(predicate);
-        } else if (date != null && modifier == false) {
-            model.updateFilteredDrinkList()
+        } else if (datePredicate != null) {
+            try {
+                model.updateFilteredDrinkList(datePredicate);
+            } catch (NullPointerException e) {
+                model.updateFilteredDrinkList(PREDICATE_SHOW_NO_DRINKS);
+                return new CommandResult(
+                        String.format(Messages.MESSAGE_NO_DRINK_BATCHES, model.getFilteredDrinkList().size()));
+            }
+        } else if (quantityPredicate != null) {
+            try {
+                model.updateFilteredDrinkList(quantityPredicate);
+            } catch (NullPointerException e) {
+                model.updateFilteredDrinkList(PREDICATE_SHOW_NO_DRINKS);
+                return new CommandResult(
+                        String.format(Messages.MESSAGE_NO_DRINK_BATCHES, model.getFilteredDrinkList().size()));
+            }
         }
         return new CommandResult(
                 String.format(Messages.MESSAGE_DRINKS_LISTED_OVERVIEW, model.getFilteredDrinkList().size()));

@@ -19,6 +19,8 @@ public interface Model {
 
     Predicate<Drink> PREDICATE_SHOW_ALL_DRINKS = unused -> true;
 
+    Predicate<Drink> PREDICATE_SHOW_NO_DRINKS = unused -> false;
+
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyInventoryList newData);
 

@@ -5,10 +5,6 @@ package seedu.address.logic.parser;
  */
 public class CliSyntax {
 
-    /* Prefix definitions */
-    public static final Prefix PREFIX_NAME = new Prefix("n/");
-
-
     /* Common prefix*/
     public static final Prefix PREFIX_DRINK_NAME = new Prefix ("n/");
 
@@ -19,11 +15,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_DRINK_TAG = new Prefix ("t/");
 
     /* Stock taker prefix*/
-    public static final Prefix PREFIX_DATE_AFTER = new Prefix("da/");
-    public static final Prefix PREFIX_DATE_BEFORE = new Prefix("db/");
+    public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_QUANTITY = new Prefix("q/");
-    public static final Prefix PREFIX_QUANTITY_MORE = new Prefix("qm");
-    public static final Prefix PREFIX_QUANTITY_LESS = new Prefix("qm");
     public static final Prefix PREFIX_PRICE = new Prefix("p/");
 
     /* Prefix definition for change password and create account*/

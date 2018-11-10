@@ -1,17 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.drink.Date;
-import seedu.address.model.drink.Name;
-import seedu.address.model.drink.NameContainsKeywordsPredicate;
-import seedu.address.model.drink.Quantity;
+import seedu.address.model.drink.*;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -25,36 +24,28 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE_BEFORE, PREFIX_DATE_AFTER,
-                        PREFIX_QUANTITY_MORE, PREFIX_QUANTITY_LESS);
+                ArgumentTokenizer.tokenize(args, PREFIX_DRINK_NAME, PREFIX_DATE, PREFIX_QUANTITY);
         String trimmedArgs = args.trim();
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE_BEFORE, PREFIX_DATE_AFTER,
-                PREFIX_QUANTITY_MORE, PREFIX_QUANTITY_LESS)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DRINK_NAME, PREFIX_DATE, PREFIX_QUANTITY)
                 || !argMultimap.getPreamble().isEmpty() || trimmedArgs.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_DRINK_NAME) != null) {
+        if (argMultimap.getValue(PREFIX_DRINK_NAME).isPresent()) {
             Name drinkName = ParserUtil.parseDrinkName(argMultimap.getValue(PREFIX_DRINK_NAME).get());
             String[] nameKeywords = drinkName.toString().trim().split("\\s+");
             System.out.println("Name");
             return new FindCommand(new NameContainsKeywordsPredicate (Arrays.asList(nameKeywords)));
-        } else if (argMultimap.getValue(PREFIX_DATE_BEFORE) != null) {
-            Date dateBefore = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE_BEFORE).get());
-            System.out.println("DateB");
-            return new FindCommand(dateBefore,false);
-        } else if (argMultimap.getValue(PREFIX_DATE_AFTER) != null) {
-            System.out.println("DateA");
-            Date dateAfter = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE_AFTER).get());
-            return new FindCommand(dateAfter,true);
-        } else if (argMultimap.getValue(PREFIX_QUANTITY_MORE) != null) {
-            System.out.println("QuantityM");
-            Quantity quantityMore = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY_MORE).get());
-            return new FindCommand(quantityMore, true);
+        } else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            Date dateBefore = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            System.out.println("Date");
+            return new FindCommand(new DateCompareBeforePredicate(dateBefore));
+        } else if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
+            System.out.println("Quantity");
+            Quantity quantityLess = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
+            return new FindCommand(new QuantityCompareLessPredicate(quantityLess));
         } else {
-            System.out.println("QuantityL");
-            Quantity quantityLess = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY_LESS).get());
-            return new FindCommand(quantityLess, false);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 
