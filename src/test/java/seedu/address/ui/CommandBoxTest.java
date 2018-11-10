@@ -132,6 +132,12 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
+    public void commandBox_handleTabPressed_forSuggestionWithParameters() {
+        commandBoxHandle.pressTab("a n/JOHN DOE");
+        assertEquals("add n/JOHN DOE", commandBoxHandle.getInput());
+    }
+
+    @Test
     public void commandBox_handleTabPressed_forMultipleSuggestion() {
         commandBoxHandle.pressTab("e");
         assertEquals("e", commandBoxHandle.getInput());

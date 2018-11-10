@@ -20,7 +20,6 @@ import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.commands.UndoCommand;
 
 //@@author elstonayx
-//TODO: write test cases
 /**
  * Checks whether input is valid in the commands after each key press
  */
