@@ -3,18 +3,18 @@ package seedu.planner.commons.events.model;
 import seedu.planner.commons.events.BaseEvent;
 import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
-//@@Author OscarZeng
 
-/**indicates that the limitList has been changed*/
-public class LimitListChangedEvent extends BaseEvent {
+public class LimitMapChangedEvent extends BaseEvent {
+
     public final ReadOnlyFinancialPlanner data;
 
-    public LimitListChangedEvent(ReadOnlyFinancialPlanner limitList) {
-        this.data = limitList;
+    public LimitMapChangedEvent(ReadOnlyFinancialPlanner newData) {
+        this.data = newData;
+        CustomSuggestionProvider.updateLimitMap(newData.getLimitMap());
     }
 
     @Override
     public String toString() {
-        return "number of limits " + data.getLimitList().size(); }
-
+        return "Number of Limits Added: " + data.getLimitMap().size();
+    }
 }

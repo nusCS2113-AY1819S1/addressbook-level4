@@ -17,6 +17,8 @@ public class RecordMapChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of tags added: " + data.getRecordMap().getAsReadOnlyTagMap().size();
+        return data.getRecordMap().getAsReadOnlyTagMap().size() + " tags, "
+                + data.getRecordMap().getAsReadOnlyDateMap().size() + " dates, "
+                + data.getRecordMap().getAsReadOnlyNameMap().size() + " names";
     }
 }

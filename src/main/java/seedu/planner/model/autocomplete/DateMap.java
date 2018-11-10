@@ -2,6 +2,7 @@ package seedu.planner.model.autocomplete;
 
 import java.util.HashMap;
 
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 
 //@author tztzt
@@ -54,6 +55,47 @@ public class DateMap {
     public void updateRecordInDateMap(Record initialRecord, Record editedRecord) {
         removeRecordFromDateMap(initialRecord);
         addRecordToDateMap(editedRecord);
+    }
+
+    public void setLimitMap(HashMap<String, Integer> limitMap) {
+        this.dateMap = limitMap;
+    }
+
+    public void addLimitToLimitMap(Limit limit) {
+        String date = limit.getDateStart().getStandardValue();
+        if (dateMap.containsKey(date)) {
+            dateMap.replace(date, dateMap.get(date) + 1);
+        } else {
+            dateMap.put(date, 1);
+        }
+        date = limit.getDateEnd().getStandardValue();
+        if (dateMap.containsKey(date)) {
+            dateMap.replace(date, dateMap.get(date) + 1);
+        } else {
+            dateMap.put(date, 1);
+        }
+    }
+
+    public void removeLimitFromLimitMap(Limit target) {
+        String date = target.getDateStart().getStandardValue();
+        if (dateMap.containsKey(date)) {
+            dateMap.replace(date, dateMap.get(date) - 1);
+            if (dateMap.get(date) == 0) {
+                dateMap.remove(date);
+            }
+        }
+        date = target.getDateEnd().getStandardValue();
+        if (dateMap.containsKey(date)) {
+            dateMap.replace(date, dateMap.get(date) - 1);
+            if (dateMap.get(date) == 0) {
+                dateMap.remove(date);
+            }
+        }
+    }
+
+    public void updateLimitInLimitMap(Limit target, Limit editedLimit) {
+        removeLimitFromLimitMap(target);
+        addLimitToLimitMap(editedLimit);
     }
 
     public HashMap<String, Integer> getAsReadOnlyDateMap() {
