@@ -3,10 +3,10 @@ package seedu.address.ui;
 import static seedu.address.model.DateTimeUtil.PAGE_DATE_FORMAT;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
