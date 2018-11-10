@@ -2,6 +2,7 @@ package systemtests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BENSON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CARL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.TestUtil.getEvent;
 import static seedu.address.testutil.TestUtil.getPerson;
@@ -61,12 +62,12 @@ public class InviteCommandSystemTest extends AddressBookSystemTest {
         indexPerson = INDEX_THIRD_PERSON;
         command = InviteCommand.COMMAND_WORD + "  " + indexPerson.getOneBased() + " "
                 + PREFIX_TO + indexEvent.getOneBased();
-        updatedEvent = new EventBuilder(EVENT_1).withAttendee(VALID_EMAIL_BENSON, "heinz@example.com").build();
+        updatedEvent = new EventBuilder(EVENT_1).withAttendee(VALID_EMAIL_BENSON, VALID_EMAIL_CARL).build();
         assertCommandSuccess(command, indexPerson, indexEvent, updatedEvent);
 
 
         /* ------------------ Performing invite operation while a filtered list is being shown ------------------ */
-        /* Case: filtered person list, person  and event index within bounds of person list and event list respectively
+        /* Case: filtered person list, person and event index within bounds of person list and event list respectively
          * -> invited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         showEventsWithName("4");
@@ -151,8 +152,8 @@ public class InviteCommandSystemTest extends AddressBookSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} and in addition,<br>
      * 1. Asserts that result display box displays the success message of executing {@code InviteCommand}.<br>
      *
-     * @param indexPerson the index of the current model's filtered list
-     * @param indexEvent the index of the current model's filtered list.
+     * @param indexPerson the index of the current model's filtered person list
+     * @param indexEvent the index of the current model's filtered event list.
      * @see InviteCommandSystemTest#assertCommandSuccess(String, Model, String)
      */
     private void assertCommandSuccess(String command, Index indexPerson, Index indexEvent, Event updatedEvent) {

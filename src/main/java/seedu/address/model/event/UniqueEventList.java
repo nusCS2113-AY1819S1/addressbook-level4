@@ -116,6 +116,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public boolean hasClash(Event toCheck, String personEmail) {
         requireNonNull(toCheck);
+        requireNonNull(personEmail);
         EventClashPredicate predicate = new EventClashPredicate(toCheck, personEmail);
         return internalList.stream().anyMatch(predicate);
     }

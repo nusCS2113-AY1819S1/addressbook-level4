@@ -15,6 +15,7 @@ public class EventContainsAttendeeAndDatePredicate implements Predicate<Event> {
     private final TimeType type;
 
     public EventContainsAttendeeAndDatePredicate(String personEmail, String inputDate, TimeType type) {
+        assert type != TimeType.NONE;
         this.personEmail = personEmail;
         this.inputDate = inputDate;
         this.type = type;

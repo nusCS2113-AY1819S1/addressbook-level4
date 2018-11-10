@@ -204,7 +204,7 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Returns true if both event clashes
+     * Returns true if both event time clashes
      */
     public boolean hasClash(Event event) {
         if (!event.date.equals(this.date)) {
