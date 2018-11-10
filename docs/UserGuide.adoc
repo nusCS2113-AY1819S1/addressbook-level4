@@ -204,7 +204,7 @@ No command inputs are required.
 ****
 * If one task is uncompleted and its deadline has passed, the colour of index, task name, module code, deadline date and priority will turn into red.
 * If one task is uncompleted and its deadline comes within seven days, the colour of index, task name, module code, due date and priority will turn into yellow.
-* The _current time_ in the application is the as same as system time.
+* The _current time_ in the application is the same as system time.
 * All tasks are currently assumed to be in the same year of 2018.
 * Only the year 2018 is supported for now, future releases will support future years. [Coming in v2.0]
 ****
@@ -367,6 +367,7 @@ Format: `check d/DATE`
 ****
 * The format for `d/DATE` must be DD-MM-YYYY, where DD refers to the date, MM refers to the month and YYYY refers to the year in numbers.
 * The summary uses user's data from both the to-do list and the expenditure tracker. It will be empty if no data can be retrieved.
+* The command can also be executed by clicking on a particular day in the calendar GUI. [Coming v2.0]
 ****
 
 Examples:
