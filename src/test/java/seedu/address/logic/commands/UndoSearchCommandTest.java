@@ -18,7 +18,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.searchhistory.KeywordType;
 
 
-public class UndoFindCommandTest {
+public class UndoSearchCommandTest {
     private final Model model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(),
             getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(), new UserPrefs());
 
@@ -30,15 +30,15 @@ public class UndoFindCommandTest {
 
     @Test
     public void execute_emptySearchHistory_showFailureMessage() {
-        assertCommandSuccess(new UndoFindCommand(), model,
-                commandHistory, UndoFindCommand.MESSAGE_FAILURE, expectedModel);
+        assertCommandSuccess(new UndoSearchCommand(), model,
+                commandHistory, UndoSearchCommand.MESSAGE_FAILURE, expectedModel);
     }
 
     @Test
     public void execute_nonEmptySearchHistory_showSuccessMessage() {
         prepareSearchedModel();
-        assertCommandSuccess(new UndoFindCommand(), model,
-                commandHistory, UndoFindCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoSearchCommand(), model,
+                commandHistory, UndoSearchCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     private void prepareSearchedModel() {
