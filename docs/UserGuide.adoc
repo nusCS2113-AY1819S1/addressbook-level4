@@ -500,9 +500,11 @@ Format: `listItems`
 
 == Record feature `[coming in v2.0]`
 
-Record feature allows the user to update club information all at once.
+Record feature allows the user to update many new club information all at once.
 
-E.g:  `Bernice` pays `$100` membership fee, attends `Basketball training on 01/11` and borrows
+For Example:
+
+ `Bernice` pays `$100` membership fee, attends `Basketball training on 01/11` and borrows
 `1 chair`.
 
 In order to record this information on Clubhub, the user just has to enter the following command:
@@ -512,17 +514,17 @@ In order to record this information on Clubhub, the user just has to enter the f
 This command will do the following:
 
 * Look for the name Bernice to see whether it already exists in Clubhub
-(It will inform the user that the input is invalid if the name does not already exist in Clubhub
+(It will inform the user that the input is invalid if the name does not already exist in Clubhub)
 
 *  Add a ledger in `Club Account` panel and update the balance accordingly
 
-*  Add an event a basketball event on 01/11
+*  Add a basketball event on 01/11 in `Club Calendar`
 
-*  Take away 1 chair from the inventory
+*  Take away 1 chair from the inventory from `Club Inventory`
 
 Furthermore, there will a panel at the bottom of Clubhub to show history of all the `Records` added
 
-image::AddRecordUI.png [width="790"]
+image:: AddRecordUI.png [width="790"]
 
 
 
