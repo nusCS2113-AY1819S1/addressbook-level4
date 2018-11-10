@@ -4,14 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_2_HOURS;
 //import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_1ST_JAN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_3;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_3;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_TASK;
@@ -36,6 +30,7 @@ import seedu.address.model.task.Task;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 import seedu.address.testutil.TaskBuilder;
 
+//@@author emobeany
 public class EditTaskCommandTest {
 
     @Rule
@@ -131,6 +126,45 @@ public class EditTaskCommandTest {
 
         // non null field present in descriptor -> return true
         assertTrue(nonNullDescriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    public void executeUndoRedo_validIndexEditTaskCommand_success() throws Exception {
+        // Task with same deadline but different fields to be edited
+        Task editedTask = new TaskBuilder().withTitle(VALID_TITLE_3).withDescription(VALID_DESCRIPTION_3)
+                .withModuleCode(VALID_MODULE_CODE_CS2101).withPriority(VALID_PRIORITY_LEVEL_HIGH)
+                .withExpectedNumOfHours(Integer.parseInt(VALID_2_HOURS)).build();
+        Task taskToEdit = model.getFilteredTaskList().get(INDEX_THIRD_TASK.getZeroBased());
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
+        EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_THIRD_TASK, descriptor);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateTask(taskToEdit, editedTask);
+        expectedModel.commitTaskBook();
+
+        // edit -> first person edited
+        editTaskCommand.execute(model, commandHistory);
+
+        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
+        expectedModel.undoTaskBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+
+        // redo -> same first person edited again
+        expectedModel.redoTaskBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void executeUndoRedo_invalidIndexEditTaskCommand_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withTitle(VALID_TITLE_1).build();
+        EditTaskCommand editCommand = new EditTaskCommand(outOfBoundIndex, descriptor);
+
+        // execution failed -> address book state not added into model
+        assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        // single address book state in model -> undoCommand and redoCommand fail
+        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 
     @Test
