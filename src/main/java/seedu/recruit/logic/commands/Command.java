@@ -1,8 +1,5 @@
 package seedu.recruit.logic.commands;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.logic.parser.exceptions.ParseException;

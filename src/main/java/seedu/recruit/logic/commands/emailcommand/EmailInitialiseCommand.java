@@ -2,7 +2,6 @@ package seedu.recruit.logic.commands.emailcommand;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
@@ -22,7 +21,7 @@ public class EmailInitialiseCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
 
-        //Initiailising a fresh instance of EmailUtil
+        //resetting EmailUtil
         model.resetEmailUtil();
         EmailSendCommand.resetRecipientsAndContents();
         LogicManager.setLogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);

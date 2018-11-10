@@ -36,8 +36,8 @@ public class EmailSendSendCommand extends EmailSendCommand {
 
         //Sending the email
         try {
-            MimeMessage mimeMessage = EmailUtil.createEmail(EmailUtil.DEFAULT_FROM, recipientEmails, subject, bodyText);
-            EmailUtil.sendMessage(EmailUtil.serviceInit(), EmailUtil.DEFAULT_FROM, mimeMessage);
+            MimeMessage mimeMessage = createEmail(DEFAULT_FROM, recipientEmails, subject, bodyText);
+            sendMessage(serviceInit(), DEFAULT_FROM, mimeMessage);
         } catch (MessagingException | GeneralSecurityException | IOException e) {
             e.printStackTrace();
             return new CommandResult(EMAIL_FAILURE);
