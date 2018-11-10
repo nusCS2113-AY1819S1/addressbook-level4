@@ -73,7 +73,7 @@ public class ProductDatabase implements ReadOnlyProductDatabase {
      */
     public boolean hasProductName(String name) {
         for (Product product : products) {
-            System.out.print(product.getName().fullName);
+
             if (product.getName().fullName.equals(name)) {
                 return true;
             }

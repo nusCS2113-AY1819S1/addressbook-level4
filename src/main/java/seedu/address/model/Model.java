@@ -94,6 +94,7 @@ public interface Model {
      */
     void updateProduct(Product target, Product editedProduct);
 
+
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();
 

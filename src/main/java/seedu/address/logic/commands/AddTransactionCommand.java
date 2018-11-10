@@ -7,11 +7,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.RemainingItems;
 import seedu.address.model.timeidentifiedclass.Transaction;
 import seedu.address.model.timeidentifiedclass.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
@@ -41,27 +44,61 @@ public class AddTransactionCommand extends Command {
         requireNonNull(transaction);
         toAdd = transaction;
     }
+
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
-        TreeMap<String, Integer> transactionRecord = toAdd.getTransactionRecord();
+        Map<String, Integer> transactionRecord = toAdd.getTransactionRecord();
         List<String> listWithProductsToAdd = new ArrayList<String>(transactionRecord.keySet());
+        List<Integer> values = transactionRecord.values().stream().collect(Collectors.toList());
+        boolean invalidInventory = false;
 
-        for (String x: listWithProductsToAdd) {
-            if (model.hasProductName(x)) {
-                try {
-                    model.addTransaction(toAdd);
-                } catch (InvalidTimeFormatException e) {
-                    return new CommandResult(e.getExceptionMessage() + ". Upon adding this transaction");
-                } catch (DuplicateTransactionException e) {
-                    return new CommandResult(e.getLocalizedMessage() + ". Upon adding this transaction");
-                }
-                model.commitProductDatabase();
-                return new CommandResult(MESSAGE_SUCCESS + toAdd.getTransactionTime());
-            } else {
-                throw new CommandException("The product does not exist");
+        for (String x : listWithProductsToAdd) {
+            if (!model.hasProductName(x)) {
+                throw new CommandException("One or more of the products you have "
+                        + "typed in does not exist in your inventory");
             }
         }
-        throw new CommandException("The product does not exist");
+
+        for (String name : listWithProductsToAdd) {
+            for (Product product : model.getProductInfoBook().getProductList()) {
+                if (product.getName().fullName.equals(name)) {
+                    int foo = Integer.parseInt(product.getRemainingItems().value);
+                    int newRemainingItems = foo - values.get(listWithProductsToAdd.indexOf(name));
+
+                    if (newRemainingItems < 0) {
+                        invalidInventory = true;
+                        RemainingItems itemsRemaining = new RemainingItems("0");
+                        Product updateProduct = new Product(product.getName(), product.getSerialNumber(),
+                                product.getDistributor(), product.getProductInfo(), itemsRemaining, product.getTags());
+                        model.updateProduct(product, updateProduct);
+                    } else {
+                        RemainingItems itemsRemaining = new RemainingItems(Integer.toString(newRemainingItems));
+                        Product updateProduct = new Product(product.getName(), product.getSerialNumber(),
+                                product.getDistributor(), product.getProductInfo(), itemsRemaining, product.getTags());
+                        model.updateProduct(product, updateProduct);
+                    }
+
+                }
+            }
+        }
+
+        try {
+            model.addTransaction(toAdd);
+        } catch (InvalidTimeFormatException e) {
+            return new CommandResult(e.getExceptionMessage() + ". Upon adding this transaction");
+        } catch (DuplicateTransactionException e) {
+            return new CommandResult(e.getLocalizedMessage() + ". Upon adding this transaction");
+        }
+        model.commitProductDatabase();
+
+        if (invalidInventory) {
+            return new CommandResult("FYI: The inventory does not seem to be uptodate. You have less"
+                    + " products then what you just sold\n" + MESSAGE_SUCCESS + toAdd.getTransactionTime());
+        } else {
+            return new CommandResult(MESSAGE_SUCCESS + toAdd.getTransactionTime());
+        }
     }
 }
+
