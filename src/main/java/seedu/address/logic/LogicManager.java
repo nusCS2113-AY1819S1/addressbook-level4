@@ -1,6 +1,6 @@
 package seedu.address.logic;
 
-import static seedu.address.logic.parser.DiceCoefficient.diceCoefficient;
+import static seedu.address.logic.DiceCoefficient.diceCoefficient;
 
 import java.util.List;
 import java.util.Queue;
@@ -13,7 +13,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.BookInventoryParser;
-import seedu.address.logic.parser.DiceCoefficient;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;

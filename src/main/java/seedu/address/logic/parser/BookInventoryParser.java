@@ -3,12 +3,13 @@ import static seedu.address.commons.core.Messages.MESSAGE_ACCESS_DENIED;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_SIMILARITY_FOUND;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.DiceCoefficient.diceCoefficient;
+import static seedu.address.logic.DiceCoefficient.diceCoefficient;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.DiceCoefficient;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CheckCommand;
 import seedu.address.logic.commands.ClearCommand;

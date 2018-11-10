@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_SIMILARITY_FOUND;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import static seedu.address.logic.parser.DiceCoefficient.diceCoefficient;
+import static seedu.address.logic.DiceCoefficient.diceCoefficient;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.Role;
-import seedu.address.logic.parser.DiceCoefficient;
+import seedu.address.logic.DiceCoefficient;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.request.requestcommands.CommandSecondary;
 import seedu.address.request.requestcommands.DeleteRequestCommand;

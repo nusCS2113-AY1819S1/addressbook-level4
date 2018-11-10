@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
+import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalBooks.getTypicalBooks;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
@@ -63,7 +65,7 @@ public class BookListPanelTest extends GuiUnitTest {
      * Verifies that creating and deleting large number of books in {@code BookListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
-    /*
+
     @Test
     public void performanceTest() throws Exception {
         ObservableList<Book> backingList = createBackingList(10000);
@@ -73,16 +75,16 @@ public class BookListPanelTest extends GuiUnitTest {
             guiRobot.interact(backingList::clear);
         }, "Creation and deletion of book cards exceeded time limit");
     }
-    */
+
     /**
      * Returns a list of books containing {@code bookCount} books that is used to populate the
      * {@code BookListPanel}.
      */
     private ObservableList<Book> createBackingList(int bookCount) throws Exception {
         Path xmlFile = createXmlFileWithBooks(bookCount);
-        XmlSerializableBookInventory xmlAddressBook =
+        XmlSerializableBookInventory xmlBookInventory =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableBookInventory.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getBookList());
+        return FXCollections.observableArrayList(xmlBookInventory.toModelType().getBookList());
     }
 
     /**
@@ -91,7 +93,7 @@ public class BookListPanelTest extends GuiUnitTest {
     private Path createXmlFileWithBooks(int bookCount) throws Exception {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
-        builder.append("<addressbook>\n");
+        builder.append("<bookinventory>\n");
         for (int i = 0; i < bookCount; i++) {
             builder.append("<persons>\n");
             builder.append("<name>").append(i).append("a</name>\n");
