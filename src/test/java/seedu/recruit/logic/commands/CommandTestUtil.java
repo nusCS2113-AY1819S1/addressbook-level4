@@ -14,8 +14,6 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -156,7 +154,7 @@ public class CommandTestUtil {
             assertEquals(expectedMessage, result.feedbackToUser);
             assertEquals(expectedModel, actualModel);
             assertEquals(expectedCommandHistory, actualCommandHistory);
-        } catch (IOException | GeneralSecurityException | CommandException | ParseException ce) {
+        } catch (CommandException | ParseException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
@@ -182,7 +180,7 @@ public class CommandTestUtil {
         try {
             command.execute(actualModel, actualCommandHistory, userPrefs);
             throw new AssertionError("The expected CommandException was not thrown.");
-        } catch (IOException | GeneralSecurityException | CommandException | ParseException e) {
+        } catch (CommandException | ParseException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedCandidateBook, actualModel.getCandidateBook());
             assertEquals(expectedFilteredCandidateList, actualModel.getFilteredCandidateList());
@@ -199,7 +197,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the candidate at the given {@code targetIndex} in the
      * {@code model}'s candidate book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showPersonAtIndex(Model model, Index targetIndex) throws ParseException {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCandidateList().size());
         Candidate candidate = model.getFilteredCandidateList().get(targetIndex.getZeroBased());
         final String[] splitName = candidate.getName().fullName.split("\\s+");
@@ -415,6 +413,11 @@ public class CommandTestUtil {
 
         @Override
         public void setEmailUtil(EmailUtil emailUtil) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetEmailUtil() {
             throw new AssertionError("This method should not be called.");
         }
     }

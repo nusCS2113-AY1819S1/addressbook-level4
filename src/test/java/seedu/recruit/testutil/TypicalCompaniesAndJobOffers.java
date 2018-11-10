@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.recruit.model.CompanyBook;
-import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
 

@@ -12,7 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.testutil.RecruitBookBuilder;
 
 public class ModelManagerTest {
@@ -47,7 +47,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws ParseException {
         CandidateBook candidateBook = new
                 RecruitBookBuilder().withCandidate(ALICE).withCandidate(BENSON).buildCandidateBook();
         CandidateBook differentCandidateBook = new CandidateBook();
@@ -69,12 +69,6 @@ public class ModelManagerTest {
 
         // different candidateBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentCandidateBook, new CompanyBook(), userPrefs)));
-
-        // different filteredList -> returns false
-        String keywords = ALICE.getName().fullName;
-        modelManager.updateFilteredCandidateList(
-                new CandidateContainsFindKeywordsPredicateBuilder(keywords).getCandidatePredicate());
-        assertFalse(modelManager.equals(new ModelManager(candidateBook, new CompanyBook(), userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);

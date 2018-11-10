@@ -28,9 +28,11 @@ import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.AddCandidateCommand;
 import seedu.recruit.logic.commands.AddCompanyCommand;
 import seedu.recruit.logic.commands.AddJobDetailsCommand;
+import seedu.recruit.logic.commands.CancelCommand;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
 import seedu.recruit.logic.commands.ClearCompanyBookCommand;
 import seedu.recruit.logic.commands.DeleteCandidateCommand;
+import seedu.recruit.logic.commands.DeleteShortlistedCandidateCommand;
 import seedu.recruit.logic.commands.DeleteShortlistedCandidateInitializationCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand.EditPersonDescriptor;
@@ -48,6 +50,8 @@ import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
+import seedu.recruit.logic.commands.ShortlistCandidateCommand;
+import seedu.recruit.logic.commands.ShortlistCandidateInitializationCommand;
 import seedu.recruit.logic.commands.SortCandidateCommand;
 import seedu.recruit.logic.commands.SortCompanyCommand;
 import seedu.recruit.logic.commands.SortJobOfferCommand;
@@ -309,14 +313,16 @@ public class RecruitBookParserTest {
     @Test
     public void parseCommand_selectCandidate() throws Exception {
         SelectCandidateCommand command = (SelectCandidateCommand) parser.parseCommand(
-                SelectCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil, userPrefs);
+                SelectCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(),
+                state, emailUtil, userPrefs);
         assertEquals(new SelectCandidateCommand(INDEX_FIRST), command);
     }
 
     @Test
     public void parseCommand_selectCompany() throws Exception {
         SelectCompanyCommand command = (SelectCompanyCommand) parser.parseCommand(
-                SelectCompanyCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil, userPrefs);
+                SelectCompanyCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(),
+                state, emailUtil, userPrefs);
         assertEquals(new SelectCompanyCommand(INDEX_FIRST), command);
     }
 
@@ -328,10 +334,15 @@ public class RecruitBookParserTest {
     }
 
     @Test
-    public void parseCommand_shortlistCandidate() throws Exception {
-        SelectJobCommand command = (SelectJobCommand) parser.parseCommand(
-                SelectJobCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil, userPrefs);
-        assertEquals(new SelectJobCommand(INDEX_FIRST), command);
+    public void parseCommand_shortlistCandidateInitialization() throws Exception {
+        assertTrue(parser.parseCommand(ShortlistCandidateInitializationCommand.COMMAND_WORD, state, emailUtil,
+                userPrefs) instanceof ShortlistCandidateInitializationCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteShortlistInitializationCandidate() throws Exception {
+        assertTrue(parser.parseCommand(DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD, state, emailUtil,
+                userPrefs) instanceof DeleteShortlistedCandidateInitializationCommand);
     }
 
     @Test
@@ -364,7 +375,7 @@ public class RecruitBookParserTest {
         parser.parseCommand("unknownCommand", state, emailUtil, userPrefs);
     }
 
-    // =========================================== Intermediate Commands =========================================== //
+    // =========================================== ADD INTERMEDIATE COMMANDS ======================================= //
 
     @Test
     public void parseCommand_add_candidate() throws Exception {
@@ -394,5 +405,76 @@ public class RecruitBookParserTest {
                 (AddCompanyCommand) parser.parseCommand(ModelUtil.getAddCompanyCommand(company),
                         addCompanyState, emailUtil, userPrefs);
         assertEquals(new AddCompanyCommand(company), command);
+    }
+
+
+    // ================================ SHORTLIST INTERMEDIATE COMMANDS ===================================== //
+
+    @Test
+    public void parseCommand_selectCompanyForShortlist() throws Exception {
+        LogicState selectCompanyState = new LogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
+        SelectCompanyCommand command =
+                (SelectCompanyCommand) parser.parseCommand(SelectCompanyCommand.COMMAND_WORD + " 1",
+                        selectCompanyState, emailUtil, userPrefs);
+        assertEquals(new SelectCompanyCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_selectJobForShortlist() throws Exception {
+        LogicState selectJobState = new LogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
+        SelectJobCommand command =
+                (SelectJobCommand) parser.parseCommand(SelectJobCommand.COMMAND_WORD + " 1",
+                        selectJobState, emailUtil, userPrefs);
+        assertEquals(new SelectJobCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_selectCandidateForShortlist() throws Exception {
+        LogicState selectCandidateState = new LogicState(SelectCandidateCommand.COMMAND_LOGIC_STATE);
+        SelectCandidateCommand command =
+                (SelectCandidateCommand) parser.parseCommand(SelectCandidateCommand.COMMAND_WORD + " 1",
+                        selectCandidateState, emailUtil, userPrefs);
+        assertEquals(new SelectCandidateCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_confirmationForShortlist() throws Exception {
+        assertTrue(parser.parseCommand(ShortlistCandidateCommand.COMMAND_WORD,
+                new LogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE), emailUtil, userPrefs)
+                instanceof ShortlistCandidateCommand);
+    }
+
+    @Test
+    public void parseCommand_cancel() throws Exception {
+        assertTrue(parser.parseCommand(CancelCommand.COMMAND_WORD,
+                new LogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST), emailUtil, userPrefs)
+                instanceof CancelCommand);
+    }
+
+    // ================================ DELETE SHORTLIST INTERMEDIATE COMMANDS ===================================== //
+
+    @Test
+    public void parseCommand_selectCompanyForDeleteShortlist() throws Exception {
+        LogicState selectCompanyState = new LogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
+        SelectCompanyCommand command =
+                (SelectCompanyCommand) parser.parseCommand(SelectCompanyCommand.COMMAND_WORD + " 1",
+                        selectCompanyState, emailUtil, userPrefs);
+        assertEquals(new SelectCompanyCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_selectJobForDeleteShortlist() throws Exception {
+        LogicState selectJobState = new LogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
+        SelectJobCommand command =
+                (SelectJobCommand) parser.parseCommand(SelectJobCommand.COMMAND_WORD + " 1",
+                        selectJobState, emailUtil, userPrefs);
+        assertEquals(new SelectJobCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_deleteCandidateForDeleteShortlist() throws Exception {
+        assertTrue(parser.parseCommand(DeleteShortlistedCandidateCommand.COMMAND_WORD + " 1",
+                new LogicState(DeleteShortlistedCandidateCommand.COMMAND_LOGIC_STATE), emailUtil, userPrefs)
+                instanceof DeleteShortlistedCandidateCommand);
     }
 }

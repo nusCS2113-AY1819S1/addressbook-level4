@@ -21,6 +21,7 @@ import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.EditCompanyCommand.EditCompanyDescriptor;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
@@ -96,7 +97,7 @@ public class EditCompanyCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws ParseException{
         showCompanyAtIndex(model, INDEX_FIRST);
 
         Company companyInFilteredList = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
@@ -125,7 +126,7 @@ public class EditCompanyCommandTest {
     }
 
     @Test
-    public void execute_duplicateCompanyUnfilteredList_failure() {
+    public void execute_duplicateCompanyUnfilteredList_failure() throws ParseException {
         showCompanyAtIndex(model, INDEX_FIRST);
 
         Company companyInList = model.getCompanyBook().getCompanyList().get(INDEX_SECOND.getZeroBased());
@@ -151,7 +152,7 @@ public class EditCompanyCommandTest {
      * but smaller than size of company book
      */
     @Test
-    public void execute_invalidCompanyIndexFilteredList_failure() {
+    public void execute_invalidCompanyIndexFilteredList_failure() throws ParseException {
         showCompanyAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of company book list
