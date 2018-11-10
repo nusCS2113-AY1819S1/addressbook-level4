@@ -26,7 +26,7 @@ import seedu.address.model.event.Event;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String EVENT_PAGE_URL = "https://cs2113-ay1819s1-t12-1.github.io/main/EventSearchPage.html";
+    private static final String EVENT_PAGE_URL = "https://cs2113-ay1819s1-t12-1.github.io/main/EventSearchPage.html";
 
 
     private static final String FXML = "BrowserPanel.fxml";
@@ -57,16 +57,20 @@ public class BrowserPanel extends UiPart<Region> {
      * Translates a string into {@code application/x-www-form-urlencoded}
      * format using UTF_8 encoding scheme. Spaces are replaced with '%20' instead of '+'.
      */
-    public static String encodeString(String arg) throws UnsupportedEncodingException {
-        String encoded = URLEncoder.encode(arg, StandardCharsets.UTF_8.toString());
-        encoded = encoded.replaceAll("\\+", "%20");
+    public String encodeString(String arg) {
+        String encoded = "";
+        try {
+            encoded = URLEncoder.encode(arg, StandardCharsets.UTF_8.toString()).replaceAll("\\+", "%20");
+        } catch (UnsupportedEncodingException uee) {
+            logger.info("Encoding not supported.");
+        }
         return encoded;
     }
 
     /**
      * Formats HTML file path into string
      */
-    private String formatEventPageUrl(Event event) throws UnsupportedEncodingException {
+    private String formatEventPageUrl(Event event) {
         String queryString = "?name=" + encodeString(event.getName().toString())
                 + "&contact=" + encodeString(event.getContact().toString())
                 + "&phone=" + encodeString(event.getPhone().toString())
@@ -84,7 +88,7 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Loads a HTML file with variables passed into it
      */
-    private void loadEventPage(Event event) throws MalformedURLException, UnsupportedEncodingException {
+    private void loadEventPage(Event event) throws MalformedURLException {
         URL searchPage = new URL(formatEventPageUrl(event));
         loadPage(searchPage.toExternalForm());
     }
@@ -110,7 +114,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     @Subscribe
     private void handleEventSelectionChangedEvent(EventSelectionChangedEvent event)
-            throws MalformedURLException, UnsupportedEncodingException {
+            throws MalformedURLException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadEventPage(event.getNewSelection());
     }

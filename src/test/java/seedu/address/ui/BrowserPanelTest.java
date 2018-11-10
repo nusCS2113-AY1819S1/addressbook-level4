@@ -43,25 +43,25 @@ public class BrowserPanelTest extends GuiUnitTest {
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(BrowserPanel.getEventPageUrl()
                 + "?name="
-                + BrowserPanel.encodeString(ALICE.getName().fullName)
+                + browserPanel.encodeString(ALICE.getName().fullName)
                 + "&contact="
-                + BrowserPanel.encodeString(ALICE.getContact().fullContactName)
+                + browserPanel.encodeString(ALICE.getContact().fullContactName)
                 + "&phone="
-                + BrowserPanel.encodeString(ALICE.getPhone().toString())
+                + browserPanel.encodeString(ALICE.getPhone().toString())
                 + "&email="
-                + BrowserPanel.encodeString(ALICE.getEmail().toString())
+                + browserPanel.encodeString(ALICE.getEmail().toString())
                 + "&venue="
-                + BrowserPanel.encodeString(ALICE.getVenue().value)
+                + browserPanel.encodeString(ALICE.getVenue().value)
                 + "&dateTime="
-                + BrowserPanel.encodeString(PAGE_DATE_FORMAT.format(ALICE.getDateTime().dateTime))
+                + browserPanel.encodeString(PAGE_DATE_FORMAT.format(ALICE.getDateTime().dateTime))
                 + "&status="
-                + BrowserPanel.encodeString(ALICE.getStatus().toString())
+                + browserPanel.encodeString(ALICE.getStatus().toString())
                 + "&tags="
-                + BrowserPanel.encodeString(ALICE.getTagsString())
+                + browserPanel.encodeString(ALICE.getTagsString())
                 + "&attendance="
-                + BrowserPanel.encodeString(ALICE.getAttendanceString())
+                + browserPanel.encodeString(ALICE.getAttendanceString())
                 + "&comment="
-                + BrowserPanel.encodeString(ALICE.getComment().value.replace("{", "<").replace("}", ">")));
+                + browserPanel.encodeString(ALICE.getComment().value.replace("{", "<").replace("}", ">")));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

@@ -62,6 +62,7 @@ public abstract class EventManagerSystemTest {
     private MainWindowHandle mainWindowHandle;
     private TestApp testApp;
     private SystemTestSetupHelper setupHelper;
+    private BrowserPanel browserPanel;
 
     @BeforeClass
     public static void setupBeforeClass() {
@@ -225,27 +226,25 @@ public abstract class EventManagerSystemTest {
 
             expectedUrl = new URL(BrowserPanel.getEventPageUrl()
                     + "?name="
-                    + selectedCardHandle.getName().replaceAll(" ", "%20")
+                    + browserPanel.encodeString(selectedCardHandle.getName())
                     + "&contact="
-                    + selectedCardHandle.getContact().replaceAll(" ", "%20")
+                    + browserPanel.encodeString(selectedCardHandle.getContact())
                     + "&phone="
-                    + selectedCardHandle.getPhone()
+                    + browserPanel.encodeString(selectedCardHandle.getPhone())
                     + "&email="
-                    + selectedCardHandle.getEmail()
+                    + browserPanel.encodeString(selectedCardHandle.getEmail())
                     + "&venue="
-                    + selectedCardHandle.getVenue().replaceAll(" ", "%20").replaceAll("#", "%23")
+                    + browserPanel.encodeString(selectedCardHandle.getVenue())
                     + "&dateTime="
-                    + PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime).replaceAll(" ", "%20")
+                    + browserPanel.encodeString(PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime))
                     + "&status="
-                    + selectedCardHandle.getStatus()
+                    + browserPanel.encodeString(selectedCardHandle.getStatus())
                     + "&tags="
-                    + selectedCardHandle.getTagsString().replaceAll(" ", "%20")
+                    + browserPanel.encodeString(selectedCardHandle.getTagsString())
                     + "&attendance="
-                    + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20")
-                        .replaceAll("<br>", "%3Cbr%3E")
+                    + browserPanel.encodeString(selectedCardHandle.getAttendanceString())
                     + "&comment="
-                    + selectedCardHandle.getComment().replaceAll("[{]", "%3C")
-                    .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
+                    + browserPanel.encodeString(selectedCardHandle.getComment()));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }
