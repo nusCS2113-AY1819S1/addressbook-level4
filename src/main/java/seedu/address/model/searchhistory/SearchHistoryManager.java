@@ -31,7 +31,7 @@ public class SearchHistoryManager<T> {
      **/
     private void addNewPredicateToStack(Predicate<T> newPredicate) {
         if (newPredicate == null) {
-            return;
+            throw new NullPointerException();
         }
         if (searchHistoryStack.isEmpty()) {
             searchHistoryStack.push(newPredicate);
@@ -64,7 +64,7 @@ public class SearchHistoryManager<T> {
      * @param predicate a Predicate containing the user-defined search logic.
      * @return a Predicate containing the system search logic.
      **/
-    public Predicate<T> executeNewSearch(Predicate<T> predicate) {
+    public Predicate<T> executeNewSearch(Predicate<T> predicate) throws NullPointerException {
         addNewPredicateToStack(predicate);
         return retrievePredicateAtTopOfStack();
     }

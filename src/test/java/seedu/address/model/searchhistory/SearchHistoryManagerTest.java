@@ -34,7 +34,7 @@ public class SearchHistoryManagerTest {
         assertTrue(firstFilledSearchHistoryManager.equals(thirdFilledSearchHistoryManager));
 
         // different size -> returns false
-        assertFalse(firstFilledSearchHistoryManager.equals(secondFilledSearchHistoryManager));
+        assertFalse(thirdFilledSearchHistoryManager.equals(secondFilledSearchHistoryManager));
 
         // different types -> returns false
         assertFalse(emptySearchHistoryManager.equals(1));
@@ -52,30 +52,43 @@ public class SearchHistoryManagerTest {
     }
 
     @Test
-    public void clearSearchHistory_nonEmptySearchHistory_searchHistoryIsEmpty() {
-        SearchHistoryManager searchHistoryManager = getFilledSearchHistoryManager(2);
-        searchHistoryManager.clearSearchHistory();
+    public void revertLastSearch_sizedOneSearchHistory_searchHistoryIsEmpty() {
+        SearchHistoryManager searchHistoryManager = getFilledSearchHistoryManager(1);
+        searchHistoryManager.revertLastSearch();
         assertTrue(searchHistoryManager.isEmpty());
     }
 
     @Test
-    public void revertLastSearch_nonEmptySearchHistory_searchHistoryIsNotEmpty() {
+    public void revertLastSearch_sizedTwoSearchHistory_searchHistoryIsNotEmpty() {
         SearchHistoryManager searchHistoryManager = getFilledSearchHistoryManager(2);
         searchHistoryManager.revertLastSearch();
         assertFalse(searchHistoryManager.isEmpty());
     }
 
     @Test
-    public void executeNewSearch_validPredicate_searchHistoryIsNotEmpty() {
+    public void executeNewSearch_nullPredicate_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        SearchHistoryManager searchHistoryManager = getEmptySearchHistoryManager();
+        searchHistoryManager.executeNewSearch(null);
+    }
+
+    @Test
+    public void executeNewSearch_validPredicate_success() {
+        SearchHistoryManager searchHistoryManager = getFilledSearchHistoryManager(1);
+        searchHistoryManager.executeNewSearch(DEFAULT_PREDICATE);
+    }
+
+    @Test
+    public void executeNewSearch_validPredicateAndEmptySearchHistory_searchHistoryIsNotEmpty() {
         SearchHistoryManager searchHistoryManager = getEmptySearchHistoryManager();
         searchHistoryManager.executeNewSearch(DEFAULT_PREDICATE);
         assertFalse(searchHistoryManager.isEmpty());
     }
 
     @Test
-    public void executeNewSearch_nullPredicate_searchHistoryIsEmpty() {
-        SearchHistoryManager searchHistoryManager = getEmptySearchHistoryManager();
-        searchHistoryManager.executeNewSearch(null);
+    public void clearSearchHistory_sizedTwoSearchHistory_searchHistoryIsEmpty() {
+        SearchHistoryManager searchHistoryManager = getFilledSearchHistoryManager(2);
+        searchHistoryManager.clearSearchHistory();
         assertTrue(searchHistoryManager.isEmpty());
     }
 }

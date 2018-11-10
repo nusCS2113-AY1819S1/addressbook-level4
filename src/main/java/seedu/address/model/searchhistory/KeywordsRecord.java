@@ -46,7 +46,7 @@ public class KeywordsRecord implements ReadOnlyKeywordsRecord {
      */
     public void recordKeywords (KeywordType type, List<String> keywords) {
         if (type == null || keywords == null) {
-            return;
+            throw new NullPointerException();
         }
         KeywordsSet set = map.get(type);
         set.addKeywordsToSet(keywords);
