@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 
 //@@author: IcedCoffeeBoy
 
-
 /**
  * Parses user input.
  */
@@ -19,7 +18,6 @@ public class ProManageParser {
      */
 
     private CommandsParser commandsParser;
-
     public ProManageParser() {
         this.commandsParser = new DefaultParser();
     }

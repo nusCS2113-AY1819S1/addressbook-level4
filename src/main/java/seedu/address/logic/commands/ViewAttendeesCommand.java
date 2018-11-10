@@ -58,6 +58,7 @@ public class ViewAttendeesCommand extends Command {
 
         model.updateFilteredEventList(eventPredicate);
         model.updateFilteredPersonList(personPredicate);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, indexEvent.getOneBased()));
     }
 
