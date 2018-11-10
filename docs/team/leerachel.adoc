@@ -69,12 +69,13 @@ as I was new to Java and JavaFX.
 * *Minor enhancement*:
 ** Select feature is extended to 3 different commands: select company, select job and select candidate.
 ** List feature is extended to list candidates, and list companies and job offers.
+** Added master list view to not confuse the user.
 ** StatusFooterBar at the bottom of the application keeps track of the total number of candidates and companies,
 as well as their last updated time and locations of the files saved.
 ** Credits: https://github.com/se-edu/addressbook-level4/pull/803[StatusFooterBar]
 
 * *Code contributed*:
-Under the username of https://github.com/CS2113-AY1819S1-F09-4/main/commits?author=leerachel[leerachel].
+Under the username of https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=leerachel[leerachel].
 . https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/main[Functional Code]
 . https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/test[Test Code]
 

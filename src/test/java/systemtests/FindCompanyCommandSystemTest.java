@@ -3,11 +3,11 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static seedu.recruit.commons.core.Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.recruit.testutil.TypicalCompanies.AUDI;
-import static seedu.recruit.testutil.TypicalCompanies.BENTLEY;
-import static seedu.recruit.testutil.TypicalCompanies.CHEVROLET;
-import static seedu.recruit.testutil.TypicalCompanies.DODGE;
-import static seedu.recruit.testutil.TypicalCompanies.KEYWORD_MATCHING_WHEELER;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.AUDI;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.BENTLEY;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.CHEVROLET;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.DODGE;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.KEYWORD_MATCHING_WHEELER;
 
 import org.junit.Ignore;
 import org.junit.Test;

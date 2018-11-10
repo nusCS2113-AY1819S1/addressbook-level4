@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.logic.commands.CommandTestUtil.VALID_ADDRESS_ALFA;
 import static seedu.recruit.logic.commands.CommandTestUtil.VALID_EMAIL_ALFA;
-import static seedu.recruit.testutil.TypicalCompanies.ALFA;
-import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.ALFA;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.getTypicalCompanyBook;
 
 import java.util.Arrays;
 import java.util.Collection;

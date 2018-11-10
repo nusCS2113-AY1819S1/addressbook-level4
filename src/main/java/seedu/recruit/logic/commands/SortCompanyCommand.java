@@ -39,6 +39,7 @@ public class SortCompanyCommand extends Command {
         requireNonNull(model);
         model.sortCompanies(prefixToSort);
         model.commitRecruitBook();
+
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             EventsCenter.getInstance()
                     .post(new ChangeLogicStateEvent(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST));
