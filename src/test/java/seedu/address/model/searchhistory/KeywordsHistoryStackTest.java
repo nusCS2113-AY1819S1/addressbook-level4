@@ -2,9 +2,9 @@ package seedu.address.model.searchhistory;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import seedu.address.model.searchhistory.util.SearchHistoryTestUtil;
 import static seedu.address.model.searchhistory.util.SearchHistoryTestUtil.getEmptyKeywordsHistoryStack;
 import static seedu.address.model.searchhistory.util.SearchHistoryTestUtil.getFilledKeywordsHistoryStack;
+import static seedu.address.model.searchhistory.util.SearchHistoryTestUtil.getKeywordsBundleStub;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
-import static seedu.address.model.searchhistory.util.SearchHistoryTestUtil.getKeywordsBundleStub;
 
 public class KeywordsHistoryStackTest {
 
