@@ -303,7 +303,7 @@ Sends an email to all persons belonging to a group +
 Format: `sendmail g/GROUP_INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
 Shortcut Format: `sm g/GROUP_INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
 
-Examples:
+Examples:D
 
 * sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
 * sm 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
@@ -311,6 +311,11 @@ Examples:
 * sm 1,4,6 s/Tutorial Cancelled m/Tutorial Class for Friday has been cancelled. +
 * sendmail g/2 s/Announcement m/Please bring your calculator tomorrow. +
 * sm g/2 s/Announcement m/Please bring your calculator tomorrow.
+
+[NOTE]
+Please be informed that there is currently a known bug in the program that if the `Subject` or the `Message` content +
+contains any of their prefixes (s/ or m/), the content after the prefix will be removed.
+We apologize for any inconvenience caused and the developers are looking to resolve this issue as soon as possible!
 
 // tag::distmail[]
 ==== Sending Email to Persons after they have been Distributed into Groups (Coming in V2.0!)
