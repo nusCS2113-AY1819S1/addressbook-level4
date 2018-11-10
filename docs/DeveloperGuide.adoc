@@ -434,7 +434,8 @@ image::addCommentSequenceDiagram.png[width="800"]
 
 [Note]
 ====
-*Detailed description of diagram*: The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user.
+*Detailed description of diagram*: +
+The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user.
 
 The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 ====
