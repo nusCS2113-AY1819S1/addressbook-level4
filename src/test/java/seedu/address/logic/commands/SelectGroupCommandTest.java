@@ -24,7 +24,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SelectGroupCommand}.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code SelectGroupCommand}.
  */
 public class SelectGroupCommandTest {
     @Rule

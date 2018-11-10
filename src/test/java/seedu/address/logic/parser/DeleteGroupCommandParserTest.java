@@ -10,7 +10,7 @@ import org.junit.Test;
 import seedu.address.logic.commands.DeleteGroupCommand;
 
 /**
- * Test different boundary values of DeleteGroupCommandParser
+ * Test different boundary values of DeleteGroupCommandParser.
  */
 public class DeleteGroupCommandParserTest {
 

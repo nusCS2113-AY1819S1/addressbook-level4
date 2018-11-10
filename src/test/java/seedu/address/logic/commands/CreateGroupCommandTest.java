@@ -25,6 +25,9 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model stub) and unit tests for CreateGroupCommand.
+ */
 public class CreateGroupCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -226,7 +229,7 @@ public class CreateGroupCommandTest {
     }
 
     /**
-     * A Model stub that always accept the group being added.
+     * A Model stub that always accepts the group being added.
      */
     private class ModelStubAcceptingGroupCreated extends CreateGroupCommandTest.ModelStub {
         final ArrayList<Group> groupsCreated = new ArrayList<>();

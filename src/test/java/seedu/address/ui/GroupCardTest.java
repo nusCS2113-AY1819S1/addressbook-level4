@@ -11,6 +11,9 @@ import guitests.guihandles.GroupCardHandle;
 import seedu.address.model.group.Group;
 import seedu.address.testutil.GroupBuilder;
 
+/**
+ * Contains unit and integration tests for {@code GroupCard}.
+ */
 public class GroupCardTest extends GuiUnitTest {
     @Test
     public void display() {

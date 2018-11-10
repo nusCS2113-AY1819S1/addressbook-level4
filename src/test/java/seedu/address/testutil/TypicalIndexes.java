@@ -16,12 +16,22 @@ public class TypicalIndexes {
     public static final Index INDEX_SECOND_GROUP = Index.fromOneBased(2);
     public static final Index INDEX_THIRD_GROUP = Index.fromOneBased(3);
 
+    /**
+     * Returns a single index in a set.
+     *
+     * @return Index set.
+     */
     public static Set<Index> getSingleTypicalPersonIndicesSet() {
         Set<Index> index = new HashSet<>();
         index.add(INDEX_FIRST_PERSON);
         return index;
     }
 
+    /**
+     * Returns multiple indexes in a set.
+     *
+     * @return Index set.
+     */
     public static Set<Index> getTypicalPersonIndicesSet() {
         Set<Index> index = new HashSet<>();
         index.add(INDEX_FIRST_PERSON);

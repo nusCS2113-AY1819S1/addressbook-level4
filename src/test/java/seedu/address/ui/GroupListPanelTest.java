@@ -24,6 +24,9 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.group.Group;
 import seedu.address.storage.XmlSerializableAddressBook;
 
+/**
+ * Contains unit and integration tests for {@code GroupListPanel}.
+ */
 public class GroupListPanelTest extends GuiUnitTest {
     private static final ObservableList<Group> TYPICAL_GROUPS =
             FXCollections.observableList(getTypicalGroups());

@@ -52,6 +52,8 @@ public class TypicalGroups {
 
     /**
      * Returns an {@code AddressBook} with all the typical groups.
+     *
+     * @return AddressBook with all typical groups added.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
@@ -62,8 +64,9 @@ public class TypicalGroups {
     }
 
     /**
-     * Returns an {@code AddressBook} with all the typical groups
-     * and persons in them.
+     * Returns an {@code AddressBook} with all the typical groups and persons in them.
+     *
+     * @return AddressBook with all typical groups added with persons in them.
      */
     public static AddressBook getTypicalAddressBookWithGroupPersons() {
         AddressBook ab = new AddressBook();
@@ -74,6 +77,11 @@ public class TypicalGroups {
         return ab;
     }
 
+    /**
+     * Returns a new group object with {@code TUT_1} details.
+     *
+     * @return Group with {@code TUT_1} details.
+     */
     public static Group getTut1() {
         return new GroupBuilder()
                 .withGroupName(VALID_GROUP_NAME_TUT_1)
@@ -81,6 +89,11 @@ public class TypicalGroups {
                 .withTags(VALID_GROUP_TAG_TUT_1).build();
     }
 
+    /**
+     * Returns a new group object with {@code CS1010} details.
+     *
+     * @return Group with {@code CS1010} details.
+     */
     public static Group getCS1010() {
         return new GroupBuilder()
                 .withGroupName(VALID_GROUP_NAME_CS1010)
@@ -88,20 +101,40 @@ public class TypicalGroups {
                 .withTags(VALID_GROUP_TAG_CS1010).build();
     }
 
+    /**
+     * Returns a list of typical static groups objects.
+     *
+     * @return List of groups.
+     */
     public static List<Group> getTypicalGroups() {
         return new ArrayList<>(Arrays.asList(TUT_1, CS1010, TUT_2, TUT_3, TUT_4));
     }
 
+    /**
+     * Returns a list of new group objects.
+     *
+     * @return List of groups.
+     */
     public static List<Group> getTypicalGroupsCopy() {
         return new ArrayList<>(Arrays.asList(getTut1(), getCS1010()));
     }
 
+    /**
+     * Returns a group with a single person in it.
+     *
+     * @return Group with person.
+     */
     public static final Group getTypicalGroupsWithPersons() {
         Group group = new GroupBuilder(getTut1()).build();
         group.addPersons(ALICE);
         return group;
     }
 
+    /**
+     * Returns a group with persons with valid emails.
+     *
+     * @return Group with person with valid emails.
+     */
     public static final Group getTypicalGroupsValidEmailPersons() {
         Group group = new GroupBuilder(EMAIL_TEST_GROUP).build();
         group.addPersons(JOEL);

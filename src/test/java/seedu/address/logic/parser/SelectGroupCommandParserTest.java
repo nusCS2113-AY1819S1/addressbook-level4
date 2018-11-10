@@ -10,8 +10,7 @@ import org.junit.Test;
 import seedu.address.logic.commands.SelectGroupCommand;
 
 /**
- * Test scope: similar to {@code DeleteCommandParserTest}.
- * @see DeleteCommandParserTest
+ * Test different boundary values of SelectGroupPersonCommandParser.
  */
 public class SelectGroupCommandParserTest {
     private SelectGroupCommandParser parser = new SelectGroupCommandParser();

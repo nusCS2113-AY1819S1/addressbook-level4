@@ -29,6 +29,9 @@ import seedu.address.model.group.GroupName;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.GroupBuilder;
 
+/**
+ * Test different boundary values of CreateGroupCommandParser.
+ */
 public class CreateGroupCommandParserTest {
     private CreateGroupCommandParser parser = new CreateGroupCommandParser();
 

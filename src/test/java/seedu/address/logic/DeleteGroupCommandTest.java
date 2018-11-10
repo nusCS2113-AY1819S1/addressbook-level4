@@ -33,7 +33,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Contains integration tests (interaction with Model) and unit tests for DeleteGroupCommand
+ * Contains integration tests (interaction with Model and Model stub) and unit tests for DeleteGroupCommand.
  */
 public class DeleteGroupCommandTest {
 

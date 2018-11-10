@@ -18,6 +18,11 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
 
     private Optional<Group> lastRememberedSelectedGroupCard;
 
+    /**
+     * Sets the root node.
+     *
+     * @param groupListPanelNode To be set as root node.
+     */
     public GroupListPanelHandle(ListView<Group> groupListPanelNode) {
         super(groupListPanelNode);
     }
@@ -25,6 +30,7 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
     /**
      * Returns a handle to the selected {@code GroupCardHandle}.
      * A maximum of 1 item can be selected at any time.
+     *
      * @throws AssertionError if no card is selected, or more than 1 card is selected.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
@@ -44,6 +50,8 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
 
     /**
      * Returns the index of the selected card.
+     *
+     * @return Index of selected card.
      */
     public int getSelectedCardIndex() {
         return getRootNode().getSelectionModel().getSelectedIndex();
@@ -51,6 +59,8 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
 
     /**
      * Returns true if a card is currently selected.
+     *
+     * @return Size empty check result.
      */
     public boolean isAnyCardSelected() {
         List<Group> selectedCardsList = getRootNode().getSelectionModel().getSelectedItems();
@@ -64,6 +74,8 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
 
     /**
      * Navigates the listview to display {@code group}.
+     *
+     * @param group Group card to be displayed.
      */
     public void navigateToCard(Group group) {
         if (!getRootNode().getItems().contains(group)) {
@@ -78,6 +90,8 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
 
     /**
      * Navigates the listview to {@code index}.
+     *
+     * @param index Index tp be displayed.
      */
     public void navigateToCard(int index) {
         if (index < 0 || index >= getRootNode().getItems().size()) {
@@ -92,6 +106,8 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
 
     /**
      * Selects the {@code GroupCard} at {@code index} in the list.
+     *
+     * @param index Index of group card to be selected.
      */
     public void select(int index) {
         getRootNode().getSelectionModel().select(index);
@@ -99,6 +115,9 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
 
     /**
      * Returns the group card handle of a group associated with the {@code index} in the list.
+     *
+     * @param index Index of group to be returned.
+     * @return GroupCardHandel of group at index.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
     public GroupCardHandle getGroupCardHandle(int index) {
@@ -117,6 +136,8 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
      * Returns all card nodes in the scene graph.
      * Card nodes that are visible in the listview are definitely in the scene graph, while some nodes that are not
      * visible in the listview may also be in the scene graph.
+     *
+     * @return All card nodes.
      */
     private Set<Node> getAllCardNodes() {
         return guiRobot.lookup(CARD_PANE_ID).queryAll();
@@ -138,6 +159,8 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
     /**
      * Returns true if the selected {@code GroupCard} is different from the value remembered by the most recent
      * {@code rememberSelectedPersonCard()} call.
+     *
+     * @return Comparison result.
      */
     public boolean isSelectedGroupCardChanged() {
         List<Group> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
@@ -152,6 +175,8 @@ public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
 
     /**
      * Returns the size of the list.
+     *
+     * @return List size.
      */
     public int getListSize() {
         return getRootNode().getItems().size();
