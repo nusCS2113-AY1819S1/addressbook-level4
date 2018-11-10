@@ -411,7 +411,7 @@ The comments feature is facilitated by `Comments` class in the Logic/Comments fo
 
 * `CommentFacade` -- An implementation of the Facade design pattern to interact with `AddCommentCommand`, `DeleteCommentCommand` and `ReplyCommentCommand`. It contains `addComment(String input, String comment, String username)` to be used in the `AddCommentCommand` to add a comment, `deleteComment(String input, int line)` to be used in `DeleteCommentCommand` to delete a comment and `deleteComment(String input, int line)` to be used in `ReplyCommentCommand` to reply comments.
 
-The Command Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `ReplyCommentCommand` and `EditCommand` for the user to interact with the comment section. The features of the following classes are as such:
+The Comand Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `ReplyCommentCommand` and `EditCommand` for the user to interact with the comment section. The features of the following classes are as such:
 
 * `AddCommentCommand` -- Adds a comment using `CommentFacade` and `AddCommentCommandParser`
 
@@ -425,7 +425,7 @@ Given below is an example usage scenario and how the Comments mechanism behaves 
 
 Step 1. The user launches the application, logs in and click on an event or types `select INDEX` into the CLI. The comment section will be seen along with other details in the `BrowserPanel`
 
-Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. `AddCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into `eventmanager.xml`. This is done by `LogicManager#execute("addComment 1 C/May i ask, what is the attire"`
+Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. `AddCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into `eventmanager.xml`
 
 Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply the comment in step 2. `ReplyCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to reply comment with "Athletic attire", into the comment section and stores the comment section into `eventmanager.xml`
 
@@ -445,10 +445,7 @@ The following sequence diagram shows how the AddCommentCommand operation works:
 .Sequence Diagram for AddCommentCommand
 image::addCommentSequenceDiagram.png[width="800"]
 
-
-
 The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
-
 
 [NOTE]
 If the user uses the `find` command, the following functions will follow the indexing of the `find` command.
