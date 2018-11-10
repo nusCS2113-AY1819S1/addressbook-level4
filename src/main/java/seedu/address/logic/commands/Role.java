@@ -18,10 +18,10 @@ public class Role {
     public Role(String role) {
         this.role = role;
         switch(role) {
-        case ROLE_STUDENT:
+        case ROLE_ACCOUNTANT:
             legalCommands = commandList.getAccountantCommands();
             break;
-        case ROLE_ACCOUNTANT:
+        case ROLE_STUDENT:
             legalCommands = commandList.getStudentCommands();
             break;
         case ROLE_ADMIN:
@@ -43,5 +43,9 @@ public class Role {
             }
         }
         throw new IllegalAccessException();
+    }
+
+    public static ArrayList<String> getLegalCommands() {
+        return legalCommands;
     }
 }

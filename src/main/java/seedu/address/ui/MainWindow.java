@@ -5,11 +5,13 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -35,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private CheckPassword checkPassword;
 
     // Independent Ui parts residing in this Ui container
+    private CommandPanel commandPanel;
     private BrowserPanel browserPanel;
     private BookListPanel bookListPanel;
     private RequestListPanel requestListPanel;
@@ -46,10 +49,16 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane browserPlaceholder;
 
     @FXML
+    private HBox commandPanelPlaceholder;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem fullScreenMenuItem;
 
     @FXML
     private StackPane bookListPanelPlaceholder;
@@ -78,7 +87,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
         registerAsAnEventHandler(this);
-        helpWindow = new HelpWindow();
+        //helpWindow = new HelpWindow();
 
     }
 
@@ -88,6 +97,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(fullScreenMenuItem, KeyCombination.valueOf("F11"));
     }
 
     /**
@@ -145,6 +155,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        commandPanel = new CommandPanel(commandBox);
+        commandPanelPlaceholder.getChildren().add(commandPanel.getRoot());
     }
     /**
      *  * * Fills up all the
@@ -165,6 +178,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        commandPanel = new CommandPanel(commandBox);
+        commandPanelPlaceholder.getChildren().add(commandPanel.getRoot());
     }
 
     void hide() {
@@ -204,6 +220,16 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+        }
+    }
+    /**
+     * Toggles fullscreen in MainWindow
+     */
+    public void handleFullScreen() {
+        if (primaryStage.isFullScreen()) {
+            primaryStage.setFullScreen(false);
+        } else {
+            primaryStage.setFullScreen(true);
         }
     }
 

@@ -1,0 +1,170 @@
+= Lee Gui Yong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Book Inventory
+
+---
+
+== Overview
+
+BookInventory is a desktop application to assist store managers in managing their books stock supply and engaging a larger market to customers who do not frequently visit book stores. This 3 in 1 application targets three parties, the bookstore owner, bookstore in-house accountants and potential customers. Bookstore in-house accountants may assist the managers with a separate set of privileges specifically to manage profit margins and make subsequent plans. Lastly, students may access the app to browse the book of their choice and issue requests to the store owners to express interest. This application is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). In this paper, I will elaborate on my ability to illustrate a clear documentation of the thought process as well as the implementation procedure.
+
+== Summary of contributions
+
+* *Major enhancement* Added a command for students to request for books.*
+** Functionality: Students may request for any book by typing the command in the format given in the user guide. Students may request for any book, regardless of whether the book exists in the book store.
+** Justification: This feature brings about convenience for students who can demand a book at the comfort of their homes. This is also advantageous for bookstore owners to track popular books and manage their book supply more efficiently.
+** Highlights: The implementation of an additional panel requires a separated segment from the original code. During the course of implementation, I have learnt to be well-versed in JavaFX. The design approach and precautions taken required careful analysis and a considerably long period of time. Thorough checking and elaborate lengthy tests were also necessary to minimise undesirable bugs surfacing. ** Credits:
+
+*Minor enhancements*
+
+* Secondary UI panel now enabled strictly for store owners to view ongoing requests.
+** Functionality: Owners are able to view a list of requests sent in by students.
+** Justification: This feature is necessary for owners to view and decide whether to accept or reject a request.
+** Highlights: This feature requires heavy implementation in coding as we require an additional storage and an additional model which require due amount of time to implement.
+** Credits:
+
+* Default page is replaced with a command list.
+** Functionality: Users can now refer from the command list and decide what command he/she wishes to start.
+** Justification:
+
+* Command Line now scans for misspelt commands and prompts the user if he or she is using the correct command. Credits: {}
+** Functionality:
+** Justification:
+** Credits:
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+
+* Predictive text enabled for users.
+** Functionality: Display a message to inform user if the system detects a spelling error.
+** Justification:
+** Credits:
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.0` - `v1.1` (2 releases) on GitHub
+** Project morphing:
+*** Morphed model portion of addressbook 4.
+** Enhancements to existing features:
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/58[1])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the stock feature I added was adopted by several other class mates
+** Tools:
+
+
+== Contributions to the User Guide
+
+|===
+|_This segment highlights my potential in writing documentations targeting end-users. Users are shown how the commands are called and the rationale behind these implementations._
+|===
+
+=== Requesting for a book : `request`
+
+Requests to buy a book in the inventory. +
+Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
+
+****
+*   Students may indicate interest by requesting an item of a certain ISBN.
+•	The email given helps bookstore owners confirm order with requester. It is up to the owner's’ preference to decide whether he/she wishes to accept the request.
+•	Possible reasons may include: Item is not a book, item not found in bookstore (Unable to find stock), quantity demanded too high.
+•	Note: This app does not have an automatic email response from owner. Thus, it depends on the owner’s personal preference to decide if he/she wishes to reply.
+****
+
+=== Deleting a request : `deleterequest`
+
+Deletes the specified request from the request list. Strictly for bookstore owners. +
+Format: `deleterequest INDEX`
+
+Examples:
+
+* `deleterequest 2` +
+Deletes the 2nd request in the displayed request list.
+
+Examples:
+
+•	`request` i/978-2-12-345680-3 e/johnd@gmail.com q/5
+
+Requests for 5 same books with the corresponding iSBN13 with requester’s email eg. johnd@gmail.com
+
+== Contributions to the Developer Guide
+
+|===
+|_This segment is an elaborate technical documentation which illustrates the insights on the technical depth of my contributions to the project._
+|===
+
+// tag::Request[]
+=== Request feature
+==== Current implementation
+The Request command utilises both the `RequestModel` and `Logic` component to fulfil its function.
+This is accessible for all users.
+
+==== Design Considerations
+===== Aspect: Request command is implemented in a different category
+As mentioned above, Request is called in RequestModel and RequestStorage.
+A request object consists of three objects, Isbn, Email, and Quantity.
+
+===== RequestModel component
+
+.Structure of the RequestModel Component
+image::RequestModelClassDiagram.jpg[width="800"]
+
+The implementation is similar to 2.4. Model component.
+Note that XmlAdaptedTag class is removed as request has no tags.
+
+===== RequestStorage component
+
+.Structure of the RequestStorage Component
+image::RequestStorageClassDiagram.jpg[width="800"]
+
+Likewise, this implementation is similar to 2.5. Storage component.
+
+===== Aspect: How Request command is implemented
+
+.Structure of Request (High Level Sequence Diagram)
+image::HighLevelRequestSequenceDiagram.png[width="800"]
+
+* **Similar to Add Command**
+** After request command is called by the user, it gets parsed through a RequestListParser.
+** The UI also prompts to EventCenter and logs out that the Request List has changed.
+** Request object is created and added to the model.
+** The storage then receives the request and returns message to model, which is then transferred to the UI.
+** This notifies the user that the request is successfully submitted.
+
+* **Similar to Delete Command**
+** The bookstore owner may decide whether to accept or reject a request offer.
+** After deciding, he or she can type deleterequest to remove Request from the RequestList.
+
+// end::Request[]
+
+// tag::commandprediction[]
+=== Command Prediction
+
+==== Current Implementation
+To maximize user friendliness, we have implemented predictive text which will appear
+familiar for phone users. BookInventory users may inadvertently misspell command words,
+e.g. lis (Expected command: list). This will now prompt a GUI log stating, "Did you mean,
+list?". To achieve this, we have utilized the Dice Coefficient.
+
+==== Design Considerations
+
+===== Aspect: How does Dice Coefficient works?
+
+Dice's coefficient measures the similarity between two sets. It can also be used to help measure how
+similar two strings are in terms of the number of common bigrams (a bigram is a pair of adjacent
+letters in the string).The Coefficient result of 1 indicates identical vectors (completely equal strings) as
+where a 0 equals orthogonal vectors (completely unequal strings).
+
+Formula: Dice's coefficient = (2 * Common Terms) / (Number of terms in String1 + Number of terms in String2)
+
+===== Aspect: How well does this algorithm predicts?
+
+Our current implementation sets Dice's Coefficient to 0.5. Through our testing, this appears
+fine for most spelling errors. However, it will not predict too ridiculous errors because we
+do not wish to face a scenario where the suggestion offers another command word which is
+unintended by the user.
+
+// end::commandprediction[]
