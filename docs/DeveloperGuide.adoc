@@ -1,4 +1,4 @@
-﻿= Financial Planner - Developer Guide
+﻿= Savee - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -110,7 +110,7 @@ image::Architecture.png[width="600"]
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
-The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/tree/master/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
 `Main` has only one class called link:{repoURL}/src/main/java/seedu/planner/MainApp.java[`MainApp`]. It is responsible for,
 
@@ -253,9 +253,9 @@ It extends `FinancialPlanner` with an undo/redo history, stored internally as an
 `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedFinancialPlanner#commit()` -- Saves the current expense book state in its history.
-* `VersionedFinancialPlanner#undo()` -- Restores the previous expense book state from its history.
-* `VersionedFinancialPlanner#redo()` -- Restores a previously undone expense book state from its history.
+* `VersionedFinancialPlanner#commit()` -- Saves the current financial planner state in its history.
+* `VersionedFinancialPlanner#undo()` -- Restores the previous financial planner state from its history.
+* `VersionedFinancialPlanner#redo()` -- Restores a previously undone financial planner state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitFinancialPlanner()`,
 `Model#undoFinancialPlanner()` and `Model#redoFinancialPlanner()` respectively.
@@ -263,35 +263,35 @@ These operations are exposed in the `Model` interface as `Model#commitFinancialP
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedFinancialPlanner` will be initialized with
-the initial expense book state, and the `currentStatePointer` pointing to that single expense planner state.
+the initial financial planner state, and the `currentStatePointer` pointing to that single financial planner state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the expense book. The `delete` command calls
-`Model#commitFinancialPlanner()`, causing the modified state of the expense book after the `delete 5` command executes
-to be saved in the `financialPlannerStateList`, and the `currentStatePointer` is shifted to the newly inserted expense book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the financial planner. The `delete` command calls
+`Model#commitFinancialPlanner()`, causing the modified state of the financial planner after the `delete 5` command executes
+to be saved in the `financialPlannerStateList`, and the `currentStatePointer` is shifted to the newly inserted financial planner state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls
-`Model#commitFinancialPlanner()`, causing another modified expense book state to be saved into the
+Step 3. The user executes `add n/Mala ...` to add a new record. The `add` command also calls
+`Model#commitFinancialPlanner()`, causing another modified financial planner state to be saved into the
 `financialPlannerStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitFinancialPlanner()`, so the expense book state will
+If a command fails its execution, it will not call `Model#commitFinancialPlanner()`, so the financial planner state will
 not be saved into the `financialPlannerStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the
+Step 4. The user now decides that adding the record was a mistake, and decides to undo that action by executing the
 `undo` command. The `undo` command will call `Model#undoFinancialPlanner()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous expense book state, and restores the expense book to that state.
+once to the left, pointing it to the previous financial planner state, and restores the financial planner to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial expense book state, then there are no previous
-expense book states to restore. The `undo` command uses `Model#canUndoFinancialPlanner()` to check if this is the case.
+If the `currentStatePointer` is at index 0, pointing to the initial financial planner state, then there are no previous
+financial planner states to restore. The `undo` command uses `Model#canUndoFinancialPlanner()` to check if this is the case.
 If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
@@ -299,20 +299,20 @@ The following sequence diagram shows how the undo operation works:
 image::UndoRedoSequenceDiagram.png[width="800"]
 
 The `redo` command does the opposite -- it calls `Model#redoFinancialPlanner()`, which shifts the `currentStatePointer`
-once to the right, pointing to the previously undone state, and restores the expense book to that state.
+once to the right, pointing to the previously undone state, and restores the financial planner to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `financialPlannerStateList.size() - 1`, pointing to the latest expense book
-state, then there are no undone expense book states to restore. The `redo` command uses `Model#canRedoFinancialPlanner()`
+If the `currentStatePointer` is at index `financialPlannerStateList.size() - 1`, pointing to the latest financial planner
+state, then there are no undone financial planner states to restore. The `redo` command uses `Model#canRedoFinancialPlanner()`
 to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the expense book, such as
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the financial planner, such as
 `list`, will usually not call `Model#commitFinancialPlanner()`, `Model#undoFinancialPlanner()` or
 `Model#redoFinancialPlanner()`. Thus, the `financialPlannerStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitFinancialPlanner()`. Since the `currentStatePointer` is not pointing at the end of the `financialPlannerStateList`, all expense book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitFinancialPlanner()`. Since the `currentStatePointer` is not pointing at the end of the `financialPlannerStateList`, all financial planner states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -324,7 +324,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire expense book.
+* **Alternative 1 (current choice):** Saves the entire financial planner.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
