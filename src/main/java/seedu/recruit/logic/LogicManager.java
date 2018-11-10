@@ -56,7 +56,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText)
-            throws CommandException, ParseException, IOException, GeneralSecurityException {
+            throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
             EmailUtil emailUtil = model.getEmailUtil();

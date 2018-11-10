@@ -23,7 +23,7 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText)
-            throws CommandException, ParseException, IOException, GeneralSecurityException;
+            throws CommandException, ParseException;
 
     /** Returns an unmodifiable view of the filtered list of candidates */
     ObservableList<Candidate> getFilteredPersonList();

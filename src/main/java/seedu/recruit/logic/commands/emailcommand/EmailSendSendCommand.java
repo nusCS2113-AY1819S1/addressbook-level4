@@ -20,10 +20,8 @@ import seedu.recruit.model.UserPrefs;
 public class EmailSendSendCommand extends EmailSendCommand {
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws IOException,
-            GeneralSecurityException {
+    public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         EmailUtil emailUtil = model.getEmailUtil();
-        String result;
         updateRecipientsAndContents(emailUtil);
 
         //Generating recipients
@@ -40,14 +38,13 @@ public class EmailSendSendCommand extends EmailSendCommand {
         try {
             MimeMessage mimeMessage = EmailUtil.createEmail(EmailUtil.DEFAULT_FROM, recipientEmails, subject, bodyText);
             EmailUtil.sendMessage(EmailUtil.serviceInit(), EmailUtil.DEFAULT_FROM, mimeMessage);
-            result = EMAIL_SUCCESS;
-        } catch (MessagingException | GeneralSecurityException e) {
+        } catch (MessagingException | GeneralSecurityException | IOException e) {
             e.printStackTrace();
-            result = EMAIL_FAILURE;
+            return new CommandResult(EMAIL_FAILURE);
         }
 
         resetRecipientsAndContents();
         LogicManager.setLogicState("primary");
-        return new CommandResult(result);
+        return new CommandResult(EMAIL_SUCCESS);
     }
 }

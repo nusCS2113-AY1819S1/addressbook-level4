@@ -29,7 +29,8 @@ public class EmailSendCommand extends Command {
             + "Type \"cancel\" to cancel the email command.";
     public static final String COMMAND_LOGIC_STATE = "EmailSend";
     public static final String EMAIL_SUCCESS = "Successfully sent the email!";
-    public static final String EMAIL_FAILURE = "Failed to send the email!";
+    public static final String EMAIL_FAILURE = "Failed to send the email. Either you are not authorised or " +
+            "you are not connected to the internet.";
     public static final String EMAIL_SEND_SHOWING_PREVIEW_MESSAGE = "Opened preview.\n";
 
     private static ArrayList<Candidate> candidateRecipients;
@@ -39,7 +40,7 @@ public class EmailSendCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs)
-            throws ParseException, IOException, GeneralSecurityException {
+            throws ParseException {
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 
@@ -83,7 +84,7 @@ public class EmailSendCommand extends Command {
             //recipients are companies
             for (JobOffer jobOfferRecipient : jobOfferRecipients) {
                 int index = model.getCompanyIndexFromName(jobOfferRecipient.getCompanyName());
-                //Company not found in CompanyBook
+                //Company not found in CompanyBook, prevent null pointer exception
                 if (index == -1) {
                     continue;
                 }

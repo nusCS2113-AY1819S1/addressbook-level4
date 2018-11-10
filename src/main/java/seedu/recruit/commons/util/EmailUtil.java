@@ -49,6 +49,7 @@ public class EmailUtil {
     public static final String EMAIL_NEXT_COMMAND = "next";
     public static final String EMAIL_BACK_COMMAND = "back";
     public static final String EMAIL_SEND_COMMAND = "send";
+    public static final String EMAIL_PREVIEW_COMMAND = "preview";
     private static final String APPLICATION_NAME = "CS2113 F09 T04";
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -238,10 +239,7 @@ public class EmailUtil {
     public static void sendMessage(Gmail service, String userId, MimeMessage email)
             throws MessagingException, IOException {
         Message message = createMessageWithEmail(email);
-        message = service.users().messages().send(userId, message).execute();
-
-        System.out.println("Message id: " + message.getId());
-        System.out.println(message.toPrettyString());
+        service.users().messages().send(userId, message).execute();
     }
 
     /**

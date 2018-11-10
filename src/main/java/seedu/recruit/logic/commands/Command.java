@@ -25,6 +25,6 @@ public abstract class Command {
      * @throws GeneralSecurityException Something to do with email command
      */
     public abstract CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs)
-            throws CommandException, IOException, GeneralSecurityException, ParseException;
+            throws CommandException, ParseException;
 
 }
