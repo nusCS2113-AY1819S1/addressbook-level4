@@ -79,19 +79,33 @@ All clicking features are disabled. Clicking on persons and events will not trig
 
 Format: `help`
 
-
+// tag::login[]
 === Login the app: `login`
 Priority level: `default`
 
-Login to the app as one of the following identity: `manager` or `employee` or `as EMAIL` +
+Login to the app as one of the following identity: `manager` or `employee` or `as EMAIL`. +
 The user can only login into ProManage if his/her email has been registered in the ProManage system before. +
-Once login, the user is unable to logout till the app is closed.
+Once login, you will not be able to login again unless the user chooses to logout
 
 Format: login `identity`
 
 Example: +
 `login manager` +
 `login as johnd@example.com`
+// end::login[]
+
+// tag::logout[]
+=== Logout the app: `logout`
+Priority level: `manager`, `employee`
+
+Logout the app once you have login. +
+After successfully logging out, you will be able to login again.
+
+Format: logout
+
+Example: +
+`logout`
+// end::logout[]
 
 === Adding an employee : `add`
 Priority level: `default`,`manager`

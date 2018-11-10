@@ -11,7 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Email;
 
 
-//@@author: IcedCoffeeBoy
 /**
  * Login the person into ProManage
  */
@@ -48,10 +47,13 @@ public class LoginCommand extends Command {
         this.model = model;
 
         if (type == 1 && isEmailPresent(loginIdentity)) {
+            String loginEmail = loginIdentity;
             if (isEmailManager(loginIdentity)) {
                 loginIdentity = KEY_MANAGER;
+                return new ManagerParser(loginEmail);
             } else if (isEmailEmployee(loginIdentity)) {
                 loginIdentity = KEY_EMPLOYEE;
+                return new EmployeeParser(loginEmail);
             } else {
                 throw new CommandException(MESSAGE_INVALID_LOGIN);
             }

@@ -81,4 +81,7 @@ public class LoginCommandTest {
         LoginCommand loginThirdCommandCopy = new LoginCommand(thirdInput, 1);
         assertEquals(loginThirdCommand, loginThirdCommandCopy);
     }
+
+
+
 }
