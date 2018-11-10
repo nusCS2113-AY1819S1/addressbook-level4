@@ -64,14 +64,35 @@ Examples:
 // tag::add_milestone[]
 === Adding a milestone: `add_milestone`
 
+|===
+|Have a task that requires a lot of things to be done? Break it up into smaller, more manageable subtasks called milestones!
+|===
+
 Adds a milestone to selected task from the task book +
-Format: `add_milestone i/INDEX m/MILESTONE r/RANK`
+Format: `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK`
+
+[WARNING]
+====
+Milestone description cannot be longer than 40 characters!
+====
+
+[WARNING]
+====
+Index must be a non-zero, positive integer not greater than the number of tasks currently available
+in the Task Book!
+====
 
 Examples:
 
-* `add_milestone i/1 m/Complete Sections 8.1 to 8.5 r/1`
+* `add_milestone i/1 m/Q1 - 3 r/1`
 
+*Before*
+image::AddMilestoneCommand_before.png[width="600", align="left"]
+
+*After*
+image::AddMilestoneCommand_after.png[width="600", align="left"]
 // end::add_milestone[]
+
 === Complete a task: `complete`
 
 Complete a task in the task book by providing its index and the actual number of hours taken to complete the task +
