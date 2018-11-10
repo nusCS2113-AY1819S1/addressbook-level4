@@ -2,10 +2,10 @@ package seedu.address.model.statistic;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INVENTORY_JUNE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_JUNE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REVENUE_JUNE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INVENTORY_JUNE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MONTH_JUNE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REVENUE_JUNE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_JUNE;
 import static seedu.address.testutil.TypicalStatistic.JAN;
 import static seedu.address.testutil.TypicalStatistic.MAY;
@@ -29,7 +29,8 @@ public class StatisticTest {
         assertFalse(JAN.isSameStatistic(null));
 
         // different month and year -> returns false
-        Statistic editedStatistic = new StatisticBuilder(JAN).withYear(VALID_YEAR_JUNE).withMonth(VALID_MONTH_JUNE).build();
+        Statistic editedStatistic = new StatisticBuilder(JAN).withYear(VALID_YEAR_JUNE)
+                .withMonth(VALID_MONTH_JUNE).build();
         assertFalse(JAN.isSameStatistic(editedStatistic));
 
         // different month -> returns false
@@ -37,23 +38,26 @@ public class StatisticTest {
         assertFalse(JAN.isSameStatistic(editedStatistic));
 
         // same month, same year , same inventory, different attributes -> returns true
-        editedStatistic = new StatisticBuilder(JAN).withExpense(VALID_EXPENSE_JUNE).withRevenue(VALID_REVENUE_JUNE).build();
+        editedStatistic = new StatisticBuilder(JAN).withExpense(VALID_EXPENSE_JUNE)
+                .withRevenue(VALID_REVENUE_JUNE).build();
         assertTrue(JAN.isSameStatistic(editedStatistic));
 
         // same month, same year, same revenue, different attributes -> returns true
-        editedStatistic = new StatisticBuilder(JAN).withInventory(VALID_INVENTORY_JUNE).withExpense(VALID_EXPENSE_JUNE).build();
+        editedStatistic = new StatisticBuilder(JAN).withInventory(VALID_INVENTORY_JUNE)
+                .withExpense(VALID_EXPENSE_JUNE).build();
         assertTrue(JAN.isSameStatistic(editedStatistic));
 
         // same month, same year, same expense, different attributes -> returns true
-        editedStatistic = new StatisticBuilder(JAN).withRevenue(VALID_REVENUE_JUNE).withInventory(VALID_INVENTORY_JUNE).build();
+        editedStatistic = new StatisticBuilder(JAN).withRevenue(VALID_REVENUE_JUNE)
+                .withInventory(VALID_INVENTORY_JUNE).build();
         assertTrue(JAN.isSameStatistic(editedStatistic));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Statistic JanCopy = new StatisticBuilder(JAN).build();
-        assertTrue(JAN.equals(JanCopy));
+        Statistic janCopy = new StatisticBuilder(JAN).build();
+        assertTrue(JAN.equals(janCopy));
 
         // same object -> returns true
         assertTrue(JAN.equals(JAN));

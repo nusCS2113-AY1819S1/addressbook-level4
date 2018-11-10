@@ -1,6 +1,12 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.StockCommand.MESSAGE_QUANTITY_STOCK;
+import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
+
 import org.junit.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.BookInventory;
@@ -10,11 +16,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.book.Book;
 import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.StockBookDescriptorBuilder;
-
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BIOLOGY;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.StockCommand.MESSAGE_QUANTITY_STOCK;
-import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for StockCommand.

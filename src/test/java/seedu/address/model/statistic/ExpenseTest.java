@@ -9,7 +9,7 @@ import seedu.address.testutil.Assert;
 
 
 
-public class ExpenseTest{
+public class ExpenseTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Expense(null));
