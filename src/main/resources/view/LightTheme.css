@@ -113,14 +113,14 @@
 }
 
 .list-cell:filled:selected #eventCardPane {
-    -fx-background-color: #fc995f;
-    -fx-border-color: #f9a16d;
+    -fx-background-color: #91ffed;
+    -fx-border-color: #91ffed;
     -fx-border-width: 1;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-background-color: #f98440;
-    -fx-border-color: #ef8b51;
+    -fx-background-color: #fca471;
+    -fx-border-color: #fca471;
     -fx-border-width: 1;
 }
 
@@ -296,7 +296,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#23ddd0, 10%);
+    -fx-background-color: derive(#91ffed, 10%);
     -fx-background-insets: 3;
 }
 
