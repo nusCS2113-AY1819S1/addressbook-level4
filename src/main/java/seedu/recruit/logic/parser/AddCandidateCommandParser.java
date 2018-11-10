@@ -35,7 +35,7 @@ import seedu.recruit.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddCandidateCommand object
  */
-public class AddCandidateCommandParser {
+public class AddCandidateCommandParser implements Parser<Command> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCandidateCommand
@@ -44,10 +44,11 @@ public class AddCandidateCommandParser {
      */
     public Command parse(String args) throws ParseException {
         switch (args) {
-            case UndoCommand.COMMAND_WORD:
-                return new UndoCommand();
-            case RedoCommand.COMMAND_WORD:
-                return new RedoCommand();
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+        default:
         }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(" " + args, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_PHONE,
