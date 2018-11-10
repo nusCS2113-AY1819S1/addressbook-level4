@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.GradeSummaryCommand.MESSAGE_ERROR_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HIGHEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOWEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
@@ -38,7 +39,7 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
                 && !argMultimap.getValue(PREFIX_HIGHEST).isPresent()
                 && !argMultimap.getValue(PREFIX_LOWEST).isPresent()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ERROR_COMMAND));
         }
 
         if (argMultimap.getValue(PREFIX_TWENTY_FIVE).isPresent()) {

@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.grade.PersonTest;
 import seedu.address.model.person.Person;
 /**
@@ -12,7 +13,7 @@ public class Median {
     /**
      * this is the method to find median scores in certain test in GradeSummaryCommand
      */
-    public double calculateMedian(ObservableList<Person> personList, String testName) {
+    public double calculateMedian(ObservableList<Person> personList, String testName) throws CommandException {
         //calculate the mean score of a test
         double median = 0;
         ArrayList<PersonTest> sortedList =

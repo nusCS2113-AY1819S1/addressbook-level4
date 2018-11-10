@@ -35,13 +35,15 @@ public class GradeSummaryCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Success Showing List";
     public static final String MESSAGE_ERROR = "ERROR showing List";
+    public static final String MESSAGE_ERROR_NOT_FOUND = "ERROR! Test Does not exists";
     public static final String MESSAGE_ERROR_COMMAND = "Invalid Command "
-            + "or invalid test name, please check again and re input";
+            + "or invalid test name, correct format is disp tn/cs2113 highest/";
     private final String commandType;
     private final String testName;
 
     public GradeSummaryCommand (String command, String test) {
-        requireNonNull(command, test);
+        requireNonNull(command);
+        requireNonNull(test);
         commandType = command;
         testName = test;
     }
@@ -59,13 +61,17 @@ public class GradeSummaryCommand extends Command {
 
         DisplayGrade gradeDisplay;
 
+        if (testName.isEmpty()) {
+            throw new CommandException(MESSAGE_ERROR_COMMAND);
+        }
+
         if ("TTF".equals(commandType)) {
             ArrayList<PersonTest> studentList = topTwentyFivePercen.findTopTwentyFive(model
                     .getFilteredPersonList(), testName);
 
 
             if (studentList.isEmpty()) {
-                throw new CommandException(MESSAGE_ERROR);
+                throw new CommandException(MESSAGE_ERROR_NOT_FOUND);
             }
 
             gradeDisplay = new DisplayGrade(studentList);
@@ -102,7 +108,7 @@ public class GradeSummaryCommand extends Command {
             return new CommandResult(String.format("Median of this test is " + medianVal));
         }
 
-        return new CommandResult(String.format(MESSAGE_ERROR_COMMAND));
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
 
     }
 
