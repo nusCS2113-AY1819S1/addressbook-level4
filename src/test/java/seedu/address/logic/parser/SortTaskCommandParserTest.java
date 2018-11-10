@@ -9,8 +9,8 @@ import static seedu.address.logic.commands.SortTaskCommand.INPUT_INVALID;
 import static seedu.address.logic.commands.SortTaskCommand.INPUT_MODULE;
 import static seedu.address.logic.commands.SortTaskCommand.INPUT_PRIORITY;
 import static seedu.address.logic.commands.SortTaskCommand.INPUT_REVERSE;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.Test;
 
