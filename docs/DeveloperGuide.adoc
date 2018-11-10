@@ -743,7 +743,7 @@ ready in v2.0.
 
 // end::distribute[]
 
-// tag::grade management[]
+// tag::grademanagement[]
 === Grade_management feature
 ==== Current Implementation
 The grade management feature is to help university lecturer to manage students grade. It includes to add Test (test name test marks) and edit test marks for each student, grade summary
@@ -839,7 +839,7 @@ before you add test. use name as input save a lot of time for user.
 ** Pros: Easy to link test to each person,cause it is implement as a part of person.
 ** Cons: need to add test in every part relate to person, hard to implement.
 
-// end::grade management[]
+// end::grademanagement[]
 
 // tag::sendmail[]
 === Send Email feature

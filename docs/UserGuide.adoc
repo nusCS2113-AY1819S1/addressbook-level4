@@ -197,7 +197,7 @@ Examples:
 * `di 2 n/CS2113-T14- g/true nat/0`
 // end::distribute[]
 
-// tag::garde management[]
+// tag::gardemanagement[]
 === Add test and test marks to student: `adt student name tn/ tm/`
 The system is allowed user to input different test name and test marks for each student by indicate
 the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
@@ -247,7 +247,7 @@ please note that when you want to check in UI after you enter the command, pleas
 Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
 Format: `dt tn/`
 Example: `dt tn/CS2113Midterm`
-// end::grade management[]
+// end::grademanagement[]
 
 // tag::login[]
 === Entering email credential into the Student Management System: `login`
