@@ -1436,13 +1436,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* has a need to manage his finances using other means because user is not as good at saving
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: manage income and spending faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -1522,14 +1522,14 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `FinancialPlanner` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `Savee` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === 1.  Use case: Input expense for a certain activity.
 
 *MSS*
 
-1.  User requests to add record into FinancialPlanner.
+1.  User requests to add record into Savee.
 2.  System adds the record into the system.
 3.  System displays the record added to the user.
 +
@@ -1538,95 +1538,132 @@ Use case ends.
 *Extensions*
 
 * 1a. User’s input command is invalid. +
-** FinancialPlanner throws invalid command error and shows an example command input needed.
+** Savee throws invalid command error and shows an example command input needed.
 ** Use case ends.
 
 * 1a. User's input parameters are missing or invalid. +
-** FinancialPlanner throws invalid command error and notifies user of the correct format.
+** Savee throws invalid command error and notifies user of the correct format.
 ** Use case ends.
 
 * 1a. The record to be added is a duplicate of existing record in the system.
-** FinancialPlanner throws duplicated record error.
+** Savee throws duplicated record error.
 ** Use case ends.
 
 [discrete]
-=== 2.  Use case: Delete expense entry whose date is required. [Linh Chi]
+=== 2.  Use case: delete past finance records
 
 *MSS*
 
-1.  User requests to delete records whose date is required.
-2.  FinancialPlanner requests for date of entry to be deleted.
-3.  User enters the date entry he/she wants to delete.
-4.  FinancialPlanner entry confirms date to be deleted.
-5.  User confirms the deletion
-6.  FinancialPlanner deletes the entry
+1.  User requests to delete record.
+2.  System deletes the record from the system and shows the user the result.
 +
 Use case ends.
 
 *Extensions*
 
-* 1a. There are no entries to be delete.
-** FinancialPlanner throws no entry error.
-** Use Case Ends
-* 3a. User’s input is invalid.
-** FinancialPlanner throws invalid format error and shows format needed.
-** Use case resumes at step 2.
-* 3b. User’s input date has no entries
-** FinancialPlanner throws no entry error.
-** Use case resumes at step 2.
-* 4a. User’s input is not a valid entry.
-** FinancialPlanner throws invalid data error and resumes at step 4.
-* 5a. User declines the confirmation.
-** Use case resumes at step 3.
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case ends.
 
 [discrete]
-=== 3.  Use case: See history of expenses for a certain period [Vincent]
+=== 3.  Use case: update past finance records with information
+
+*MSS*
+
+1.  User requests to update records and enters the parameters needed.
+2.  System updates the record in the system and shows the user the result.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 1a. The record to be added is a duplicate of existing record in the system.
+** Savee throws duplicated record error.
+** Use case ends.
+
+[discrete]
+=== 4.  Use case: See history of expenses for a certain period
 
 *MSS*
 
 1.  User requests to see history within a certain date period.
-2.  FinancialPlanner returns the history of all expenses within the period.
+2.  Savee returns the history of all expenses within the period.
 +
 Use case ends.
 
 *Extensions*
 
 * 1a. User’s command is of invalid form.
-** FinancialPlanner throws invalid command error.
+** Savee throws invalid command error.
 ** Use case resumes at step 1.
 
 * 1a. User does not specify any arguments.
-** FinancialPlanner returns all records in the FinancialPlanner.
+** Savee returns all records in the Savee.
 ** Use case ends.
 
 * 1a. The arguments are of incorrect format
-** FinancialPlanner throws invalid command error and notifies user of the correct format.
+** Savee throws invalid command error and notifies user of the correct format.
 ** Use case resumes at step 1.
 
 * 2a. There is no history.
-** FinancialPlanner shows a blank list.
+** Savee shows a blank list.
 ** Use case ends.
 
 [discrete]
-=== 4.  Use case: Clear history of expenses
+=== 5.  Use case: Delete expense entry whose date is required. [Linh Chi]
 
 *MSS*
 
-1.  User requests to clear history of expenses.
-2.  FinancialPlanner requests for period of time of expenses to clear.
-3.  User enters period of time to clear expenses for.
-4.  FinancialPlanner deletes all entries within specific time period.
+1.  User requests to delete records whose date is required.
+2.  Savee requests for date of entry to be deleted.
+3.  User enters the date entry he/she wants to delete.
+4.  Savee entry confirms date to be deleted.
+5.  User confirms the deletion
+6.  Savee deletes the entry
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. User’s input is not a valid period of time
-** FinancialPlanner throws invalid input command
-** Use case continues from step 2
+* 1a. There are no entries to be delete.
+** Savee throws no entry error.
+** Use Case Ends
+* 3a. User’s input is invalid.
+** Savee throws invalid format error and shows format needed.
+** Use case resumes at step 2.
+* 3b. User’s input date has no entries
+** Savee throws no entry error.
+** Use case resumes at step 2.
+* 4a. User’s input is not a valid entry.
+** Savee throws invalid data error and resumes at step 4.
+* 5a. User declines the confirmation.
+** Use case resumes at step 3.
+
 
 [discrete]
-=== 5.  Use case: View breakdown of financial activity into category [Vincent]
+=== 6.  Use case: Clear history of expenses
+
+*MSS*
+
+1.  User requests to clear history of expenses.
+2.  System clears the history
++
+Use case ends.
+
+[discrete]
+=== 7.  Use case: View breakdown of financial activity into category
 
 *MSS*
 
@@ -1651,24 +1688,24 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 6.  Use case: Search expenses based on category [Zhi Thon]
+=== 8.  Use case: Search expenses based on category [Zhi Thon]
 
 *MSS*
 
 1.  User requests to search for expenses by category
-2.  FinancialPlanner requests for category of expenditure
+2.  Savee requests for category of expenditure
 3.  User enters category desired
-4.  FinancialPlanner displays each expenditure with name category and the total expenditure.
+4.  Savee displays each expenditure with name category and the total expenditure.
 +
 Use case ends.
 
 *Extensions*
 
 * 3a User’s input category cannot be found.
-** FinancialPlanner shows no expenditure for selected category
+** Savee shows no expenditure for selected category
 
 [discrete]
-=== 7.  Use case: View daily/monthly summary within a period of time [Vincent]
+=== 9.  Use case: View daily/monthly summary within a period of time
 
 *MSS*
 
@@ -1693,103 +1730,89 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 8.  Use case: Usage Instructions guide
+=== 10.  Use case: Usage Instructions guide
 
 *MSS*
 
 1.  User requests for usage instructions
-2.  FinancialPlanner displays different commands
-3.  User inputs which command he wants to find out about
-4.  Financial displays information on selected command
+2.  System returns a help window with all the instructions.
 +
 Use case ends.
 
-*Extensions*
-
-* 3a User enter invalid command
-** FinancialPlanner throws invalid command error.
-** Use case resumes at step 2.
-
 [discrete]
-=== 9.  Use case: Undo expense entry
+=== 11.  Use case: Undo record entry
 
 *MSS*
 
 1.  User requests for undo
-2.  FinancialPlanner confirms the undo request
-3.  User enter the item they would like to undo
-4.  FinancialPlanner undo the deleted item
+4.  Savee undo the deleted item
 +
 Use case ends.
 
-*Extensions*
-
-* 3a User enter invalid command
-** FinancialPlanner throws invalid command error.
-** Use case resumes at step 2
-
 [discrete]
-=== 10. Use case: Add notes to each expense
+=== 12. Use case: Add notes to each expense
 
 *MSS*
 
-1.  User requests for adding notes
-2.  Financial Planner request for the date of entry and confirm the request
-3.  User enter the notes
+1.  User requests for adding notes and enters the notes
+2.  Savee adds the notes into the system and notifies the user.
 +
 Use case ends.
 
 *Extensions*
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
 
-* 3a User enter invalid command
-** FinancialPlanner throws invalid command error.
-** Use case resumes at step 2
+* 1a. User's input parameters are missing or invalid. +
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case ends.
 
 [discrete]
-=== 11. Use case: Create daily limit for expenses [Oscar]
+=== 13. Use case: Create daily limit for expenses [Oscar]
 
 *MSS*
 
 1.  User requests to create daily limit for expenses
-2.  FinancialPlanner requests for the maximum amount for the day
+2.  Savee requests for the maximum amount for the day
 3.  User enters the amount.
-4.  FinancialPlanner confirms amount with user.
+4.  Savee confirms amount with user.
 5.  User confirms the amount.
-6.  FinancialPlanner records the amount in the hard drive
+6.  Savee records the amount in the hard drive
 +
 Use case ends.
 
 *Extensions*
 
 * 6a. The location for the record is invalid.
-** FinancialPlanner throws invalid location error and prompts for new location.
+** Savee throws invalid location error and prompts for new location.
 ** User enters a new location.
-** FinancialPlanner requests for confirmation.
+** Savee requests for confirmation.
 ** User confirms the location
 ** Use case ends.
 
 [discrete]
-=== 12. Use case: Export expenses into Excel file [Linh Chi]
+=== 14. Use case: Export expenses into Excel file [Linh Chi]
 
 *MSS*
 
 1.  User requests export format.
-2.  FinancialPlanner shows list of possible formats for export.
+2.  Savee shows list of possible formats for export.
 3.  User enters preferred export format.
-4.  FinancialPlanner exports the records data in Excel file.
+4.  Savee exports the records data in Excel file.
 
 *Extensions*
 
 * 3a User input wrong directory path that the Excel file will be stored
-** FinancialPlanner throws unsupported format error
+** Savee throws unsupported format error
 ** Use case resumes at step 2.
 
 * 3b User input wrong date format or unreal date.
-** FinancialPlanner throws unsupported format error
+** Savee throws unsupported format error
 ** Use case resumes at step 2.
 
 [discrete]
-==== 14. Use case: Import the Excel file into Financial Planner. [Linh Chi]
+==== 15. Use case: Import the Excel file into Financial Planner. [Linh Chi]
 
 *MSS*
 
@@ -1801,12 +1824,12 @@ Use case ends.
 *Extensions*
 
 * 3a User input wrong file path that the Excel file is stored
-** FinancialPlanner throws unsupported format error
+** Savee throws unsupported format error
 ** Use case resumes at step 2.
 
 
 [discrete]
-=== 15. Use case: Archive the records data into Excel file. [Linh Chi]
+=== 16. Use case: Archive the records data into Excel file. [Linh Chi]
 
 *MSS*
 
@@ -1818,47 +1841,73 @@ Use case ends.
 *Extension*
 
 * 3a User input wrong directory path that the Excel file will be stored
-** FinancialPlanner throws unsupported format error
+** Savee throws unsupported format error
 ** Use case resumes at step 2.
 
 * 3b User input wrong date format or unreal date.
-** FinancialPlanner throws unsupported format error
+** Savee throws unsupported format error
 ** Use case resumes at step 2.
 
 [discrete]
-=== 16. Use case: Freely edit expenses tags
+=== 17. Use case: See monthly financial activity
 
 *MSS*
 
-1.  User requests to edit expenses tags.
-2.  FinancialPlanner requests for date of entry to edit tags
-3.  User enters date to edit entry for
-4.  FinancialPlanner shows list of entries on specified date
-5.  User enters entry to edit.
-6.  FinancialPlanner shows current tags of selected entry.
-7.  User enters tag to remove
-8.  FinancialPlanner removes tag entered.
+1. User requests to see monthly financial activity.
+2. Savee returns a report on monthly financial activity.
 
-*Extensions*
+[discrete]
+=== 18. Use case: Record parties to make payment to
 
-* 3a User inputs invalid date
-** FinancialPlanner throws invalid date error.
-** Use case resumes at step 2.
-* 3b Date input has no entries to edit
-** FinancialPlanner throws no entry error.
-** Use case resumes at step 2.
-* 5a User’s input is not a valid entry.
-** FinancialPlanner throws invalid data error and resumes at step 4.
-* 5a User’s input entry has no tags.
-** FinancialPlanner displays ‘No tags’ and continues to step 7.
-* 7a User’s input tag does not exist
-** FinancialPlanner adds tag to entry.
+*MSS*
+
+1. User requests to add parties to make payment to.
+2. Savee adds the person into the system.
+
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+[discrete]
+=== 19. View bank balance
+
+*MSS*
+
+1.  User requests to view bank balance.
+2.  Savee asks for authentication.
+3.  User provides authentication.
+4.  Savee verifies the authentication and shows the bank balance.
+
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's authentication is invalid. +
+** Savee returns error and asks for authentication again.
+** Use case resumes at 2.
+
+=== 20. Adjust configurations
+
+*MSS*
+
+1.  User requests to change application configurations.
+2.  Savee returns the configuration page.
+3.  User changes configuration.
+4.  Savee confirms the configuration and applies it to the system.
+
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
 
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 records without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  Should be able to retain data in the event of app exiting or crashing.
 
