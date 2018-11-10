@@ -51,14 +51,17 @@ public class SummaryByCategoryCommandTest {
 
     @Test
     public void equals() {
-        SummaryByCategoryCommand summaryByCategoryCommandOne = new SummaryByCategoryCommand(sampleStartDate, sampleEndDate);
-        SummaryByCategoryCommand summaryByCategoryCommandTwo = new SummaryByCategoryCommand(sampleEndDate, sampleEndDate);
+        SummaryByCategoryCommand summaryByCategoryCommandOne =
+                new SummaryByCategoryCommand(sampleStartDate, sampleEndDate);
+        SummaryByCategoryCommand summaryByCategoryCommandTwo =
+                new SummaryByCategoryCommand(sampleEndDate, sampleEndDate);
 
         // same object -> returns true
         assertTrue(summaryByCategoryCommandOne.equals(summaryByCategoryCommandOne));
 
         // same values -> returns true
-        SummaryByCategoryCommand summaryByCategoryCommandOneCopy = new SummaryByCategoryCommand(sampleStartDate, sampleEndDate);
+        SummaryByCategoryCommand summaryByCategoryCommandOneCopy =
+                new SummaryByCategoryCommand(sampleStartDate, sampleEndDate);
         assertTrue(summaryByCategoryCommandOne.equals(summaryByCategoryCommandOneCopy));
 
         // different types -> returns false

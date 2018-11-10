@@ -17,7 +17,6 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
-import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
