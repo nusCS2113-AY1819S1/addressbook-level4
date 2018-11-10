@@ -35,7 +35,7 @@ public class AuthenticateUserCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         numTries++;
-        if (enteredPassword.equals(userPrefs.getHashedPassword())) {
+        if (Integer.toHexString(enteredPassword.hashCode()).equals(userPrefs.getHashedPassword())) {
             EventsCenter.getInstance().post(new UserAuthenticatedEvent());
             EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
 

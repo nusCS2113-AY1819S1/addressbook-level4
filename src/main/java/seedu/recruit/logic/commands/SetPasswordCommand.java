@@ -47,7 +47,7 @@ public class SetPasswordCommand extends Command {
             newPassword = enteredPassword;
             return new CommandResult(MESSAGE_CONFIRM_PASSWORD);
         } else if (enteredPassword.equals(newPassword)) {
-            userPrefs.setHashedPassword(newPassword);
+            userPrefs.setHashedPassword(Integer.toHexString(newPassword.hashCode()));
             EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
             EventsCenter.getInstance().post(new UserPrefsChangedEvent(userPrefs));
 
