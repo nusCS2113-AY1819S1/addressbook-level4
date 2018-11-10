@@ -179,25 +179,26 @@ The `UI` component,
 * The BrowserPanel will be updated with either the HtmlTableProcessor or the HtmlCardProcessor.
 
 [[Design-Logic]]
+// tag::logiccomponent[]
 === Logic component
 
 [[fig-LogicClassDiagram]]
-.Structure of the Logic Component
-image::LogicClassDiagram.png[width="800"]
+.Structure of Trajectory Logic Component
+image::TrajectoryLogicClassDiagram.png[width="800"]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+link:https://github.com/CS2113-AY1819S1-T16-1/main/blob/master/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+.  The command execution can affect the `Model` (e.g. deleting a gradebook component) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("gradebook delete mc/CS2113 cn/Assignment 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
-
+.Interactions Inside the Logic Component for the `gradebook delete mc/CS2113 cn/Assignment 1` Command
+image::GradebookDeleteSDForLogic.png[width="800"]
+// end::logiccomponent[]
 [[Design-Model]]
 === Model component
 
@@ -418,7 +419,7 @@ Given below is an example usage scenario and how the gradebook data-to-graph mec
 
 Step 1. The user launches the application for the first time. The StorageController which interacts with #xmlAdaptedGradebook to retrieve data from Array List using #retrieveData.
 
-Step 2. The user executes `gradebook find m/cs2113 i/Finals` command to find the relevant gradebook component. The `find` command calls `GradebookManager#findGradebookComponent()`, which finds and filters the Array List to the relevant search.
+Step 2. The user executes `gradebook find mc/cs2113 cn/Finals` command to find the relevant gradebook component. The `find` command calls `GradebookManager#findGradebookComponent()`, which finds and filters the Array List to the relevant search.
 
 Step 3. The user executes `gradebook graph student`. GradebookManager#graphStudentProgress will convert the Array List to graph form and display to the user.
 
@@ -2749,3 +2750,136 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+// tag::gradebookmanualtesting[]
+=== Gradebook List
+
+. Listing all gradebook components to existing module(s) in Trajectory. +
+*Parameters (prefix): NIL*
+
+.. Prerequisites: NIL
+.. Test case: `gradebook list` +
+   Expected: Gradebook list will be displayed on the system with all the gradebook components set to a module. The total number of gradebook components are indicated in the status message.
+
+=== Gradebook Add
+
+. Adding a gradebook component to an existing module in Trajectory. +
+*Parameters (prefix):* +
+Module code (mc/), +
+gradebook component name (cn/), +
+[optional] maximum marks (mm/), +
+[optional] weightage(w/).
+
+.. Prerequisites: Module code must already exist in system. Gradebook component name cannot already exist to module. In this case, take 'CS2113' as a module that already exist in Trajectory.
+.. Test case: `gradebook add mc/CS2113 cn/Assignment 1` +
+   Expected: Gradebook list will be displayed on the system with the newly added gradebook component 'Assignment 1'. The total number of gradebook components are indicated in the status message.
+.. Test case: `gradebook add mc/CS2113 cn/Assignment 1 mm/20` +
+   Expected: Gradebook component will not be added into the system as 'Assignment 1' is already found in the system. Error details shown in the status message.
+.. Other incorrect gradebook add commands to try: +
+`gradebook add`, +
+`gradebook add mc/CS2113 cn/x mm/y` (where x is *not* an existing component name to 'CS2113', y is a value *below 0 and above 100*), +
+`gradebook add mc/CS2113 cn/x w/y` (where x is *not* an existing component name to 'CS2113', y is a value *below 0 and above 100*), +
+`gradebook add mc/CS2113 cn/x w/y` (where x is *not* an existing component name to 'CS2113', where y is a value above the remaining weightage available to module code -> Add up all weightage of grade components set to 'CS2113''), +
+   Expected: Similar to previous.
+
+=== Gradebook Find
+
+. Finding a gradebook component to an existing module in Trajectory. +
+*Parameters (prefix):* +
+Module code (mc/), +
+gradebook component name (cn/).
+
+.. Prerequisites: Gradebook component name to a module must already exist in system. In this case, take 'Assignment 1' as the gradebook component set to 'CS2113' in Trajectory.
+.. Test case: `gradebook find mc/CS2113 cn/Assignment 1` +
+  Expected: Information of the gradebook component to module will be displayed on the system.
+.. Test case: `gradebook find mc/CS2113 cn/Finals` +
+  Expected: Since gradebook component is not found in the system, error details will be shown in the status message. +
+.. Other incorrect gradebook find commands to try: +
+`gradebook find`, +
+`gradebook find mc/MA1511 cn/Finals` +
+  Expected: Similar to previous.
+
+=== Gradebook Delete
+
+. Deleting a gradebook component to an existing module in Trajectory. +
+*Parameters (prefix):* +
+Module code (mc/), +
+gradebook component name (cn/).
+
+.. Prerequisites: Gradebook component name to a module must already exist in system. In this case, take 'Assignment 1' as *only* the gradebook component set to 'CS2113' in Trajectory.
+.. Test case: `gradebook delete mc/CS2113 cn/Assignment 1` +
+   Expected: Gradebook list will be displayed on the system with the deleted gradebook component missing from the list. The total number of gradebook components remaining are indicated in the status message.
+.. Test case: `gradebook delete mc/CS2113 cn/Finals` +
+   Expected: Since gradebook component is not found in the system, error details will be shown in the status message. +
+.. Other incorrect gradebook delete commands to try: +
+`gradebook delete`, +
+`gradebook delete mc/MA1511 cn/Finals` +
+   Expected: Similar to previous.
+
+=== Gradebook Edit
+
+. Editing a gradebook component to an existing module in Trajectory. +
+*Parameters (prefix):* +
+Module code (mc/), +
+gradebook component name (cn/), +
+[Optional] edited gradebook component name (en/), +
+[Optional] edited maximum marks (mm/), +
+[Optional] edited weightage [w/]. +
+**Take note that at least one optional parameter must be indicated in the command.*
+
+.. Prerequisites: Gradebook component name to a module must already exist in system. In this case, take 'Assignment 1' as the gradebook components set to 'CS2113' in Trajectory.
+.. Test case: `gradebook edit mc/CS2113 cn/Assignment 1 mm/20` +
+  Expected: Gradebook list will be displayed on the system with the edited gradebook component. The total number of gradebook components is indicated in the status message.
+.. Test case: `gradebook edit mc/CS2113 cn/Finals w/50` +
+  Expected: Since gradebook component is not found in the system, error details will be shown in the status message. +
+.. Other incorrect gradebook edit commands to try: +
+`gradebook edit`, +
+`gradebook edit mc/CS2113 cn/Assignment 1 w/x` where x is a value above the remaining weightage available to module code -> Add up all weightage of grade components set to 'CS2113'  +
+  Expected: Similar to previous.
+// end::gradebookmanualtesting[]
+// tag::grademanualtesting[]
+=== Grade Add
+
+. Adding marks to a student for grade component to a module. In this case, take 'Assignment 1' with maximum marks of 20 as the gradebook components set to 'CS2113' in Trajectory. Student enrolled to the module has matric no. 'A0169999A'  +
+*Parameters (prefix):* +
+Module code (mc/), +
+Gradebook component name (cn/), +
+Student Matric Number (i/), +
+Marks (m/).
+
+.. Prerequisites: Gradebook component name to a module must already exist in system. Student must be enrolled to the module.
+.. Test case: `grade add mc/CS2113 cn/Assignment 1 i/A0169999A m/15` +
+   Expected: Grade list will be displayed. The total number of gradebook components is indicated in the status message.
+.. Test case: `grade add mc/CS2113 cn/Assignment 1 i/A0169999A m/30` +
+  Expected: Since the marks indicated is above the maximum marks set of 20, error details will be shown in the status message. +
+.. Other incorrect grade add commands to try: +
+`grade add`, +
+`grade add mc/CS2113 cn/Assignment 1 i/x m/10` where x is a matric number of a student that is not enrolled in module. +
+Expected: Similar to previous.
+
+=== Grade List
+
+. Listing all grade of students of an existing gradebook component for module in Trajectory. +
+*Parameters (prefix): NIL*
+
+.. Prerequisites: NIL
+.. Test case: `grade list` +
+   Expected: Grade list will be displayed on the system with all the grade information. The total number of grade components remaining are indicated in the status message.
+
+=== Grade Graph
+
+. Displaying the graph of all students marks to a gradebook component for a module in Trajectory. In this case, take 'Assignment 1' as the gradebook components set to 'CS2113' in Trajectory. Alse, all marks of students enrolled to the module is already in the system. +
+*Parameters (prefix):* +
+Module code (mc/), +
+Gradebook component name (cn/).
+
+.. Prerequisites: All students enrolled in the module must have their marks recorded. Else, user has no access to graph.
+.. Test case: `grade graph mc/CS2113 cn/Assignment 1` +
+   Expected: Grade graph will be pop up.
+.. Other incorrect grade graph commands to try: +
+`grade graph`, +
+`grade add mc/CS2113 cn/x` where x is a grade component is either not associated to module *or* not all marks of students enrolled in module is recorded in Trajectory. +
+Expected: Similar to previous.
+// end::grademanualtesting[]
+
+
+
