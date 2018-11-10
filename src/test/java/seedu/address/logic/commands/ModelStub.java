@@ -79,7 +79,17 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Person> getCurrentFriendList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Person> getOtherList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Person> getCurrentOtherList() {
         throw new AssertionError("This method should not be called.");
     }
 
