@@ -3,16 +3,19 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 :sectnums:
+:mainRepoPRURL: https://github.com/CS2113-AY1819S1-W13-1/main/pull
+:mainRepoIssueURL: https://github.com/CS2113-AY1819S1-W13-1/main/issue
+:F09-2RepoIssueURL: https://github.com/CS2113-AY1819S1-F09-2/main/issues
 
 = PROJECT: FreeTime
 
 == Overview
 
-FreeTime is a desktop application that helps users coordinate their schedules with their friends or groupmates. It displays timeslots where everyone the user wants to meet is free. +
+FreeTime is a desktop application that helps users coordinate their schedules with their friends or groupmates. It allows users to add and remove events from their timetables. It also uses these individual user timetables to generate a combined timetable showing when everyone the user wants to meet is available. +
 
 FreeTime receives input through a command line interface (CLI) while displaying output through a graphical user interface (GUI). It is written in Java, and has approximately 10 kLoC.
 
-FreeTime was developed in a team of four throughout the course of a semester. It is modified from the Address Book (Level 4) project by SE-EDU.
+FreeTime was developed in a team of four throughout the course of a semester. It is modified from the Address Book (Level 4) (AB4) project by SE-EDU.
 
 FreeTime was developed as part of the module requirements for the following modules offered by the School of Computing, National University of Singapore: +
 
@@ -26,15 +29,24 @@ This project portfolio documents my contributions to the FreeTime project.
 * *Major enhancement: Added timetables to FreeTime*
 ** What it does: Implements timetables for each user and allows the user to add and remove timeslots from their own timetables. Additionally, allows users to determine when they can organise meetings such that every person can be present.
 ** Highlights: This enhancement requires changes in almost every component of FreeTime, Thus, it required a thorough understanding of the existing codebase. Through this project, I have put into practice key principles of the object-oriented programming paradigm as well as the skills needed for writing technical documentation.
-** Justification: As it is often difficult for students with varied and complex time
-* *Code contributed*: [Functional code] [Test code]
+** Justification: As it is difficult for students with varied and complex timetables to schedule meetings for their many group projects, FreeTime simplifies this process by automatically highlighting mutually free timeslots among different user timetables.
+* https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=nianfei97&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[*Code contributed*]
 * *Other contributions*:
-** Project management: Managed releases `v1.1` - `v1.4` on GitHub (4 releases)
-** Enhancements to existing features: Added aliases for all commands (Pull request https://github.com[#3])
+** Project management:
+*** Managed releases `v1.1` - `v1.4` on GitHub (4 releases)
+** Community
+*** PRs reviewed: Pull requests {mainRepoPRURL}/20[#20], {mainRepoPRURL}/63[#63], {mainRepoPRURL}/68[#68], {mainRepoPRURL}/153[#153]
+*** Reported bugs for other teams in the class: {F09-2RepoIssueURL}/159[1], {F09-2RepoIssueURL}/150[2], {F09-2RepoIssueURL}/146[3]
+** Tools:
+*** Set up continuous integration (https://travis-ci.org/CS2113-AY1819S1-W13-1/main.svg?branch=master[Travis], https://ci.appveyor.com/project/nianfei97/main/branch/master[Appveyor]) and coverage analysis tools (https://coveralls.io/github/CS2113-AY1819S1-W13-1/main?branch=master[Coveralls]) for the project
+** Miscellaneous enhancements to new and existing features:
+*** Added aliases for all commands: Pull request {mainRepoPRURL}/3[#3]
+*** Updated sample data loaded when FreeTime first loads up: Pull requests {mainRepoPRURL}/80[#80], {mainRepoPRURL}/167[#167], {mainRepoPRURL}/169[#169]
+*** Updated existing commands in AB4 to work with FreeTime: Pull requests {mainRepoPRURL}/82[#82], {mainRepoPRURL}/108[#108], {mainRepoPRURL}/109[#109]
 
 == Contributions to the User Guide
 
-The following section details my contributions to FreeTime's User Guide.
+This section details my contributions to FreeTime's User Guide.
 
 include::../UserGuide.adoc[tag=timeslot]
 
@@ -42,6 +54,6 @@ include::../UserGuide.adoc[tag=freecommand]
 
 == Contributions to the Developer Guide
 
-The following section details my contributions to FreeTime's Developer Guide.
+This section details my contributions to FreeTime's Developer Guide.
 
 include::../DeveloperGuide.adoc[tag=timetable]
