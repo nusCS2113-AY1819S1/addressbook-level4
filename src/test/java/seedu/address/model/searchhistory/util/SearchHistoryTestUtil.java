@@ -25,7 +25,7 @@ public class SearchHistoryTestUtil {
     }
 
     public static SearchHistoryManager getFilledSearchHistoryManager(int size) {
-        return new SearchHistoryManagerSpy<>(size);
+        return new SearchHistoryManagerMock<>(size);
     }
 
     public static KeywordsHistoryStack getEmptyKeywordsHistoryStack() {
@@ -33,7 +33,7 @@ public class SearchHistoryTestUtil {
     }
 
     public static KeywordsHistoryStack getFilledKeywordsHistoryStack(int size) {
-        return new KeywordsHistoryStackSpy(size);
+        return new KeywordsHistoryStackMock(size);
     }
 
     public static KeywordsRecord getEmptyKeywordsRecord() {
@@ -41,17 +41,17 @@ public class SearchHistoryTestUtil {
     }
 
     public static KeywordsRecord getFilledKeywordsRecord(int size) {
-        return new KeywordsRecordSpy(size);
+        return new KeywordsRecordMock(size);
     }
 
     /**
-     * A SearchHistoryManagerSpy object.
+     * A Mock of SearchHistoryManager.
      */
-    private static class SearchHistoryManagerSpy<T> extends SearchHistoryManager<T> {
+    private static class SearchHistoryManagerMock<T> extends SearchHistoryManager<T> {
 
         final Predicate<T> defaultPredicate = (t) -> true;
 
-        private SearchHistoryManagerSpy(int size) {
+        private SearchHistoryManagerMock(int size) {
             for (int x = 0; x < size; x++) {
                 searchHistoryStack.push(defaultPredicate);
             }
@@ -60,39 +60,19 @@ public class SearchHistoryTestUtil {
 
 
     /**
-     * KeywordsHistoryStackSpy object.
+     * A Mock of KeywordsHistoryStack.
      */
-    private static class KeywordsHistoryStackSpy extends KeywordsHistoryStack {
+    private static class KeywordsHistoryStackMock extends KeywordsHistoryStack {
 
-        private KeywordsHistoryStackSpy(int size) {
+        private KeywordsHistoryStackMock(int size) {
             for (int x = 0; x < size; x++) {
-                keywordsBundlesStack.push(new KeywordsBundleDummy());
+                keywordsBundlesStack.push(new KeywordsBundleStub());
             }
         }
     }
 
     /**
-     * A dummy class for KeywordsBundle
-     */
-    private static class KeywordsBundleDummy extends KeywordsBundle {
-
-        KeywordsBundleDummy() {
-            super(KeywordType.IncludeNames, Collections.singletonList("keyword"));
-        }
-
-        @Override
-        public KeywordType getType() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public List<String> getKeywords() {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A KeywordsBundle stub that always returns the Keyword Type
+     * A KeywordsBundle stub that always returns the IncludeNames KeywordsType.
      */
     private static class KeywordsBundleStub extends KeywordsBundle {
 
@@ -112,11 +92,11 @@ public class SearchHistoryTestUtil {
     }
 
     /**
-     * KeywordsRecordSpy object.
+     * A Mock of KeywordsRecord.
      */
-    private static class KeywordsRecordSpy extends KeywordsRecord {
+    private static class KeywordsRecordMock extends KeywordsRecord {
 
-        private KeywordsRecordSpy(int size) {
+        private KeywordsRecordMock(int size) {
             super();
             TreeMultiset<String> treeMultiset = TreeMultiset.create();
             for (int x = 0; x < size; x++) {
