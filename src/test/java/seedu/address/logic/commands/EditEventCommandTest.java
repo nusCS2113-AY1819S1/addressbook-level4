@@ -59,7 +59,7 @@ public class EditEventCommandTest {
     }
 
     @Test
-    public void execute_existingListcontainEditedEvent_failure() {
+    public void execute_existingListContainEditedEvent_failure() {
 
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(EVENT_1).build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_SECOND_EVENT, descriptor);
@@ -80,7 +80,7 @@ public class EditEventCommandTest {
     }
 
     @Test
-    public void execute_clashWithAttendee_failure() {
+    public void execute_clashWithAttendeeSchedule_failure() {
 
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(EVENT_3).withDate("2018-11-18").build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_THIRD_EVENT, descriptor);
@@ -187,9 +187,6 @@ public class EditEventCommandTest {
 
         assertCommandFailure(editEventCommand, model, commandHistory, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
-
-
-
 
 
     @Test

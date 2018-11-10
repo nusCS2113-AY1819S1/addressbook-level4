@@ -100,14 +100,6 @@ public class EventContainsAttendeeAndDatePredicateTest {
     }
 
     @Test
-    public void test_invalidType_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        EventContainsAttendeeAndDatePredicate predicate = new EventContainsAttendeeAndDatePredicate(
-                "bob@example.com", "2018-10-25", null);
-        predicate.test(eventOne);
-    }
-
-    @Test
     public void equals() {
         String personEmailAlice = "alice@example.com";
         String personEmailBob = "bob@example.com";
