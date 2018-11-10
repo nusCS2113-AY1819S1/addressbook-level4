@@ -197,7 +197,7 @@ Examples:
 * `di 2 n/CS2113-T14- g/true nat/0`
 // end::distribute[]
 
-// tag::gardemanagement[]
+// tag::grademanagement[]
 === Add test and test marks to student: `adt student name tn/ tm/`
 The system is allowed user to input different test name and test marks for each student by indicate
 the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
