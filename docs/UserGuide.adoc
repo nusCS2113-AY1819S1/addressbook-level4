@@ -699,15 +699,13 @@ Automatically uses the the summary data from the `SUMMARY DATA` sheet in the Exc
 
 As you can see the screenshot below, in the `SUMMARY DATA` sheet, next to the summary table:
 
-* The size of the line chart (based on default column width and default row height) is:
-** The width is 15 columns
-** The height is 30 rows.
+image::Export_Capture2_LinhChi.png[width:800]
+
 * On the top left of the chart, the legend shows 3 lines, namely Income, Outcome, and Net.
 ** The first blue line shows the Income based on Date.
 ** The second orange line shows the Outcome based on Date
 ** The third grey line shows the Net (total of income and outcome) based on Date.
 
-image::Export_Capture2_LinhChi.png[width:800]
 
 // end::draw_line_chart[]
 
