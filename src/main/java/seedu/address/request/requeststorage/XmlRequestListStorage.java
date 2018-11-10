@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.request.requeststorage;
 
 import static java.util.Objects.requireNonNull;
 
@@ -13,7 +13,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.model.request.ReadOnlyRequests;
+import seedu.address.request.ReadOnlyRequests;
+import seedu.address.storage.XmlFileStorage;
 
 /**
  * A class to access RequestList data stored as an xml file on the hard disk.

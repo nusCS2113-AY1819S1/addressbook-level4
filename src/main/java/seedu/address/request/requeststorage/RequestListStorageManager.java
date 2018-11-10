@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.request.requeststorage;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,7 +13,8 @@ import seedu.address.commons.events.model.RequestListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.request.ReadOnlyRequests;
+import seedu.address.request.ReadOnlyRequests;
+import seedu.address.storage.UserPrefsStorage;
 
 /**
  * Manages storage of RequestList data in local storage.

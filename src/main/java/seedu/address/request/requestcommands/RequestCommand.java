@@ -1,4 +1,4 @@
-package seedu.address.model.request;
+package seedu.address.request.requestcommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.request.Request;
+import seedu.address.request.requestmodel.RequestModel;
 
 /**
  * Adds a request to the BookInventory.

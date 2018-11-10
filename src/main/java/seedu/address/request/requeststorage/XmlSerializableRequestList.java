@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.request.requeststorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.request.ReadOnlyRequests;
-import seedu.address.model.request.Request;
-import seedu.address.model.request.RequestList;
+import seedu.address.request.ReadOnlyRequests;
+import seedu.address.request.Request;
+import seedu.address.request.RequestList;
 
 /**
  * An Immutable RequestList that is serializable to XML format

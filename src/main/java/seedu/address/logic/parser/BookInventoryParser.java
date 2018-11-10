@@ -33,9 +33,9 @@ import seedu.address.logic.commands.ViewStatisticCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import seedu.address.model.request.DeleteRequestCommand;
-import seedu.address.model.request.RequestCommand;
-import seedu.address.model.request.ToggleRequestCommand;
+import seedu.address.request.requestcommands.DeleteRequestCommand;
+import seedu.address.request.requestcommands.RequestCommand;
+import seedu.address.request.requestcommands.ToggleRequestCommand;
 import seedu.address.ui.BookListPanel;
 
 /**

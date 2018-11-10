@@ -1,10 +1,11 @@
-package seedu.address.model.request;
+package seedu.address.request.requestcommands;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.events.model.RequestPanelChangedEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.request.requestmodel.RequestModel;
 
 /**
  * Lists all persons in the BookInventory to the user.

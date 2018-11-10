@@ -1,4 +1,4 @@
-package seedu.address.model.request;
+package seedu.address.request;
 
 import java.util.ArrayList;
 import java.util.List;

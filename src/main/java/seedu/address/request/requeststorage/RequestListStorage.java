@@ -1,11 +1,11 @@
-package seedu.address.storage;
+package seedu.address.request.requeststorage;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.request.ReadOnlyRequests;
+import seedu.address.request.ReadOnlyRequests;
 
 /**
  * Represents a storage for {@link RequestListStorage}.
