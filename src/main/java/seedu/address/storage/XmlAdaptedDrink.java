@@ -1,13 +1,19 @@
 package seedu.address.storage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Name;
 import seedu.address.model.drink.Price;
+import seedu.address.model.drink.UniqueBatchList;
 import seedu.address.model.tag.Tag;
 
 
@@ -25,8 +31,12 @@ public class XmlAdaptedDrink {
     @XmlElement(required = true)
     private String costPrice;
 
+    @XmlElementWrapper
+    @XmlElement(name = "batchList")
+    private List<XmlAdaptedBatch> batchList = new ArrayList<>();
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
 
     /**
      * Constructs an XmlAdaptedDrink.
@@ -37,10 +47,14 @@ public class XmlAdaptedDrink {
     /**
      * Constructs an {@code XmlAdaptedDrink} with the given drink details.
      */
-    public XmlAdaptedDrink(String name, String sellingPrice, String costPrice, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedDrink(String name, String sellingPrice, String costPrice, List<XmlAdaptedBatch> batchList,
+                           List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.sellingPrice = sellingPrice;
         this.costPrice = costPrice;
+        if (!batchList.isEmpty()) {
+            this.batchList = new ArrayList<>(batchList);
+        }
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -49,15 +63,17 @@ public class XmlAdaptedDrink {
     /**
      * Converts a given Drink into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedDrink
      */
     public XmlAdaptedDrink(Drink source) {
         name = source.getName().toString();
         sellingPrice = source.getRetailPrice().toString();
         costPrice = source.getCostPrice().toString();
+        batchList = source.getObservableBatchList().stream().map(XmlAdaptedBatch::new).collect(Collectors.toList());
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+
     }
 
     /**
@@ -67,6 +83,10 @@ public class XmlAdaptedDrink {
      */
     public Drink toModelType() throws IllegalValueException {
         final List<Tag> drinkTags = new ArrayList<>();
+        final UniqueBatchList drinkBatches = new UniqueBatchList();
+        for (XmlAdaptedBatch batch: batchList) {
+            drinkBatches.addBatch(batch.toModelType());
+        }
         for (XmlAdaptedTag tag : tagged) {
             drinkTags.add(tag.toModelType());
         }
@@ -94,9 +114,9 @@ public class XmlAdaptedDrink {
             throw new IllegalValueException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
         final Price modelCostPrice = new Price(costPrice);
-
+        final UniqueBatchList modelBatchList = drinkBatches;
         final Set<Tag> modelTags = new HashSet<>(drinkTags);
-        return new Drink(modelName, modelSellingPrice, modelCostPrice, modelTags);
+        return new Drink(modelName, modelSellingPrice, modelCostPrice, modelBatchList, modelTags);
     }
 
     @Override
@@ -113,6 +133,7 @@ public class XmlAdaptedDrink {
         return Objects.equals(name, otherDrink.name)
                 && Objects.equals(sellingPrice, otherDrink.sellingPrice)
                 && Objects.equals(costPrice, otherDrink.costPrice)
+                && Objects.equals(batchList, otherDrink.batchList)
                 && tagged.equals(otherDrink.tagged);
     }
 }
