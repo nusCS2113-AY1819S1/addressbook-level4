@@ -41,7 +41,7 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a event
         postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName()
+        URL expectedPersonUrl = new URL(BrowserPanel.getEventPageUrl()
                 + "?name="
                 + ALICE.getName().fullName.replaceAll(" ", "%20")
                 + "&contact="
