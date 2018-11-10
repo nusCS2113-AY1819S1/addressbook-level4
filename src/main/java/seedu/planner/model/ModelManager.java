@@ -230,16 +230,24 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public String autoLimitCheck () {
         String output = "";
+        int numExceeded = 0;
         int count = 1;
         for (Limit i: limits) {
             if (isExceededLimit(i) && i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
                 output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
+                numExceeded = numExceeded +1;
             }
         }
         for (Limit i: limits) {
             if (isExceededLimit(i) && !i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
                 output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
+                numExceeded = numExceeded +1;
             }
+        }
+            if (numExceeded != 0 && numExceeded != 1) {
+                output = String.format("\n%d limits exceeded: ", numExceeded) + output;
+            } else if (numExceeded == 1) {
+                output = "\n1 limit exceeded: " + output;
         }
         return output;
     }
@@ -250,7 +258,7 @@ public class ModelManager extends ComponentManager implements Model {
         int count = 1;
         for (Limit i: limits) {
             if (i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
-                output += "\n" + "Monthly Limit:\n"
+                output +=  "Monthly Limit:\n"
                         + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
             }
         }
@@ -293,26 +301,26 @@ public class ModelManager extends ComponentManager implements Model {
         Date dateEnd;
         dateStart = limit.getDateStart();
         dateEnd = limit.getDateEnd();
-        if (dateStart.equals(DATE_SPECIAL_FOR_MONTHLY)) {
-            output = String.format(MESSAGE_MONTHLY, DateUtil.getDateToday().getMonth());
-        } else if (dateEnd.equals(dateStart)) {
-            output = String.format(MESSAGE_SINGLE_DATE, dateStart);
+        if (isExceeded) {
+            output = MESSAGE_EXCEED;
         } else {
-            output = String.format(MESSAGE_DOUBLE_DATE, dateStart, dateEnd);
+            output = MESSAGE_NOT_EXCEED;
+        }
+        if (dateStart.equals(DATE_SPECIAL_FOR_MONTHLY)) {
+            output += String.format(MESSAGE_MONTHLY, DateUtil.getDateToday().getMonth());
+        } else if (dateEnd.equals(dateStart)) {
+            output += String.format(MESSAGE_SINGLE_DATE, dateStart);
+        } else {
+            output += String.format(MESSAGE_DOUBLE_DATE, dateStart, dateEnd);
         }
 
         if (totalMoney >= 0) {
             output += String.format(MESSAGE_BASIC_EARNED,
-                    -1 * limit.getLimitMoneyFlow().toDouble(), totalMoney)
-                    + MESSAGE_NOT_EXCEED;
-        } else if (isExceeded) {
-            output += String.format(MESSAGE_BASIC_SPEND,
-                    -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney)
-                    + MESSAGE_EXCEED;
+                    -1 * limit.getLimitMoneyFlow().toDouble(), totalMoney);
+
         } else {
             output += String.format(MESSAGE_BASIC_SPEND,
-                    -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney)
-                    + MESSAGE_NOT_EXCEED;
+                    -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney);
         }
         return output;
     }
