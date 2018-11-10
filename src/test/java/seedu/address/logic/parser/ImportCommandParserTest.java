@@ -10,13 +10,14 @@ import java.nio.file.Paths;
 import org.junit.Test;
 
 import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.ImportCommand;
 
 //@@author jitwei98
-public class ExportCommandParserTest {
+public class ImportCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE);
-    private ExportCommandParser parser = new ExportCommandParser();
+    private ImportCommandParser parser = new ImportCommandParser();
 
     @Test
     public void parse_missingNotNullField_failure() {
@@ -27,25 +28,25 @@ public class ExportCommandParserTest {
     @Test
     public void parse_validArgs_success() {
         Path filePath;
-        ExportCommand expectedCommand;
+        ImportCommand expectedCommand;
 
-        filePath = Paths.get("data", "testExportFile.xml");
-        expectedCommand = new ExportCommand(filePath);
+        filePath = Paths.get("data", "testImportFile.xml");
+        expectedCommand = new ImportCommand(filePath);
 
         // parse user input without whitespaces
-        assertParseSuccess(parser, " testExportFile.xml", expectedCommand);
+        assertParseSuccess(parser, " testImportFile.xml", expectedCommand);
 
         // parse user input with whitespaces
-        assertParseSuccess(parser, "  testExportFile.xml    ", expectedCommand);
+        assertParseSuccess(parser, "  testImportFile.xml    ", expectedCommand);
     }
 
     @Test
     public void parse_invalidFilename_throwsParseException() {
         // wrong filetype
-        assertParseFailure(parser, "testExportFile.pdf", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "testImportFile.pdf", MESSAGE_INVALID_FORMAT);
 
         // no extension
-        assertParseFailure(parser, "testExportFile", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "testImportFile", MESSAGE_INVALID_FORMAT);
     }
 
 }
