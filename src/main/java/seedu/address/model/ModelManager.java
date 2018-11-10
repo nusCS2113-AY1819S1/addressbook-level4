@@ -31,7 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> friendList;
     private final FilteredList<Person> otherList;
-    private final TimeTable timeTable;
+    private TimeTable timeTable;
     private ObservableList<Person> list;
     private User user;
 
@@ -116,7 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTimeTable(TimeTable timeTable) {
         requireNonNull(timeTable);
 
-        this.timeTable.updateTimeTable(timeTable);
+        this.timeTable = timeTable;
         indicateTimeTableChanged();
     }
 

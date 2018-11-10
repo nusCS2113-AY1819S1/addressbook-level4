@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TimeTableChangedEvent;
+import seedu.address.model.person.DeconflictTimeTable;
 import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 
@@ -129,6 +130,14 @@ public class TimeTablePanel extends UiPart<Region> {
 
         for (TimeSlot timeSlot : timeTableLastLoaded.getTimeSlots()) {
             timeTablePanelMainGrid.addTimeSlot(timeSlot, currRowDimensions, currColDimensions, currStartHour);
+        }
+
+        if (timeTableLastLoaded instanceof DeconflictTimeTable) {
+            DeconflictTimeTable inverse = ((DeconflictTimeTable) timeTableLastLoaded).getInverse();
+
+            for (TimeSlot timeSlot : inverse.getTimeSlots()) {
+                timeTablePanelMainGrid.addTimeSlot(timeSlot, currRowDimensions, currColDimensions, currStartHour);
+            }
         }
     }
 
