@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.CommandList;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.Role;
 import seedu.address.logic.DiceCoefficient;
+import seedu.address.logic.parser.SimilarityParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.request.requestcommands.CommandSecondary;
 import seedu.address.request.requestcommands.DeleteRequestCommand;
@@ -34,8 +36,7 @@ public class RequestListParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static ArrayList<String> commandList;
-    private static DiceCoefficient diceCoefficient;
+
     private static final double DICE_COEFFICIENT_THRESHOLD = 0.5;
 
     /**
@@ -46,19 +47,15 @@ public class RequestListParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public CommandSecondary parseCommandRequest(String userInput) throws ParseException {
+        SimilarityParser similarityParser = new SimilarityParser();
+        CommandList commandList = new CommandList();
         CommandSecondary finalCommand;
         final String finalCommandWord;
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-        diceCoefficient = new DiceCoefficient();
-        commandList = new ArrayList<>();
-        commandList.add(ToggleRequestCommand.COMMAND_WORD);
-        commandList.add(RequestCommand.COMMAND_WORD);
-        commandList.add(UndoRequestCommand.COMMAND_WORD);
-        commandList.add(RedoRequestCommand.COMMAND_WORD);
-        commandList.add(DeleteRequestCommand.COMMAND_WORD);
+
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
@@ -85,9 +82,11 @@ public class RequestListParser {
             finalCommand = new RedoRequestCommand();
             break;
         default: {
-            for (String command : commandList) {
-                if (diceCoefficient(commandWord, command) > DICE_COEFFICIENT_THRESHOLD) {
-                    throw new ParseException(MESSAGE_SIMILARITY_FOUND + command + "?");
+            {
+                String similarCommandFound = similarityParser
+                        .performSimilarityCheck(commandWord, commandList.getCommandList());
+                if (!similarCommandFound.isEmpty()) {
+                    throw new ParseException(MESSAGE_SIMILARITY_FOUND + similarCommandFound + "?");
                 }
             }
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

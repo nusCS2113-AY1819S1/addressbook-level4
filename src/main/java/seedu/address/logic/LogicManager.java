@@ -1,7 +1,5 @@
 package seedu.address.logic;
 
-import static seedu.address.logic.DiceCoefficient.diceCoefficient;
-
 import java.util.List;
 import java.util.Queue;
 import java.util.logging.Logger;
@@ -16,20 +14,16 @@ import seedu.address.logic.parser.BookInventoryParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
-import seedu.address.request.requestcommands.CommandSecondary;
-import seedu.address.request.requestcommands.DeleteRequestCommand;
 import seedu.address.request.Request;
-import seedu.address.request.requestcommands.RequestCommand;
-import seedu.address.request.requestparser.RequestListParser;
+import seedu.address.request.requestcommands.CommandSecondary;
 import seedu.address.request.requestmodel.RequestModel;
-import seedu.address.request.requestcommands.UndoRequestCommand;
+import seedu.address.request.requestparser.RequestListParser;
+
 
 /**
  * The main LogicManager of the app.
  */
 public class LogicManager extends ComponentManager implements Logic {
-    private static DiceCoefficient diceCoefficient;
-    private static final double DICE_COEFFICIENT_THRESHOLD = 0.5;
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Model model;
@@ -37,6 +31,9 @@ public class LogicManager extends ComponentManager implements Logic {
     private final CommandHistory history;
     private final BookInventoryParser bookInventoryParser;
     private final RequestListParser requestListParser;
+    private final DifferentiatingParser differentiatingParser;
+
+    private String prevCommand;
 
     public LogicManager(Model model, RequestModel requestModel) {
         this.model = model;
@@ -44,17 +41,21 @@ public class LogicManager extends ComponentManager implements Logic {
         history = new CommandHistory();
         bookInventoryParser = new BookInventoryParser();
         requestListParser = new RequestListParser();
+        differentiatingParser = new DifferentiatingParser();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        diceCoefficient = new DiceCoefficient();
         String[] string = commandText.trim().split("\\s+", 8);
-        if (diceCoefficient(string[0], RequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD
-            || diceCoefficient(string[0], DeleteRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD + 0.2
-            || ((diceCoefficient(string[0], UndoRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD)
-            && (history.getHistory().get(getHistoryList().size() - 1).contains("request")))) {
+        /*
+         * Assign prevCommand appropriately, if Command History is not empty.
+         */
+        prevCommand = differentiatingParser.getPreviousCommand(history);
+        /*
+         * Decide if user input belongs to BookInventoryParser or RequestListParser.
+         */
+        if (differentiatingParser.parseInput(string, prevCommand, history)) {
             CommandSecondary command = requestListParser.parseCommandRequest(commandText);
             history.add(commandText);
             return command.execute(requestModel, history);
