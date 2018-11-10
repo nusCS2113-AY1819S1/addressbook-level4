@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import seedu.planner.commons.core.EventsCenter;
+import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
@@ -25,12 +27,14 @@ public class SummaryByMonthCommand extends SummaryCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_MODE_WORD
             + ": Lists the summary for each month for a period of time."
             + " Parameters: "
-            + PREFIX_DATE + "MONTH_START " + "MONTH_END "
+            + PREFIX_DATE + "START_MONTH " + "END_MONTH "
             + "Example: " + COMMAND_WORD + " " + COMMAND_MODE_WORD + " "
             + PREFIX_DATE + "sep-2018 " + "oct-2018 ";
 
-    public static final String MESSAGE_SUCCESS = "Listed summary for %d months";
+    public static final String MESSAGE_SUCCESS = "Listed summary for %d month(s)";
     public static final String FORMAT_TITLE_SUMMARY = "Summary by month from %s to %s";
+
+    private static Logger logger = LogsCenter.getLogger(SummaryByMonthCommand.class);
 
     private final Date startDate;
     private final Date endDate;
@@ -47,6 +51,7 @@ public class SummaryByMonthCommand extends SummaryCommand {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
         SummaryList summaryList = new SummaryByMonthList(model.getFilteredRecordList());
+        logger.info("Created SummaryByMonthList: " + summaryList.size() + " summaries");
         String tabTitle = String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate),
                 DateUtil.formatDate(endDate));
         EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList, TOTAL_LABEL,

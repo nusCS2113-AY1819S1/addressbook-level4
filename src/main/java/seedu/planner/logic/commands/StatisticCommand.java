@@ -4,8 +4,10 @@ import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import seedu.planner.commons.core.EventsCenter;
+import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
@@ -35,6 +37,8 @@ public class StatisticCommand extends Command {
     private final Date startDate;
     private final Date endDate;
 
+    private Logger logger = LogsCenter.getLogger(StatisticCommand.class);
+
     public StatisticCommand(Date startDate, Date endDate) {
         requireAllNonNull(startDate, endDate);
         this.startDate = startDate;
@@ -48,6 +52,7 @@ public class StatisticCommand extends Command {
         CategoryStatisticsList categoryStats = new CategoryStatisticsList(model.getFilteredRecordList());
         String startDateFormatted = DateUtil.formatDate(startDate);
         String endDateFormatted = DateUtil.formatDate(endDate);
+        logger.info("Created stats: " + String.format("%s from %s", startDateFormatted, endDateFormatted));
         EventsCenter.getInstance().post(new ShowPieChartStatsEvent(categoryStats.getReadOnlyStatsList(),
                 startDateFormatted, endDateFormatted));
         return new CommandResult(String.format(MESSAGE_SUCCESS, startDateFormatted, endDateFormatted));

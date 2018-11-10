@@ -2,15 +2,11 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
-import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import seedu.planner.commons.core.LogsCenter;
 //@@author tenvinc
 /**
  * Represents a month with year information in the financial planner.
@@ -31,11 +27,9 @@ public class Month {
 
     public static final List<String> STANDARD_MONTHS = Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
             "JUL", "AUG", "SEP", "OCT", "NOV", "DEC");
+    public static final String STANDARD_MONTH_REP = "%s-%d";
 
     public final String value;
-
-    private Logger logger = LogsCenter.getLogger(Month.class);
-    private Matcher matcher;
 
     private int year;
     private int month;
@@ -45,17 +39,11 @@ public class Month {
      *
      * @param input A valid string.
      */
-    //TODO: refactor this
     public Month(String input) {
         requireNonNull(input);
         checkArgument(isValidMonth(input), MESSAGE_MONTH_CONSTRAINTS);
-        matcher = MONTH_VALIDATION_PATTERN.matcher(input);
-        if (!matcher.matches()) {
-            checkArgument(false, MESSAGE_MONTH_CONSTRAINTS);
-        }
-        checkArgument(isLogicalMonth(matcher.group("month")), MESSAGE_MONTH_LOGICAL_CONSTRAINTS);
-        initMonth(matcher.group("month"), matcher.group("year"));
-        value = String.format("%s-%d", STANDARD_MONTHS.get(month - 1), year);
+        initMonth(input);
+        value = String.format(STANDARD_MONTH_REP, STANDARD_MONTHS.get(month - 1), year);
     }
 
     public Month(int month, int year) {
@@ -65,6 +53,22 @@ public class Month {
         value = String.format("%s-%d", STANDARD_MONTHS.get(month - 1), year);
     }
 
+    /**
+     * Initiates the values of month and year after parsing the input
+     * @param input input to be parsed
+     */
+    private void initMonth(String input) {
+        Matcher matcher = MONTH_VALIDATION_PATTERN.matcher(input);
+        if (!matcher.matches()) {
+            checkArgument(false, MESSAGE_MONTH_CONSTRAINTS);
+        }
+        String month = matcher.group("month");
+        String year = matcher.group("year");
+        checkArgument(isLogicalMonth(month), MESSAGE_MONTH_LOGICAL_CONSTRAINTS);
+        this.year = Integer.parseInt(year);
+        this.month = STANDARD_MONTHS.indexOf(month.toUpperCase()) + 1;
+    }
+
     public int getYear() {
         return year;
     }
@@ -72,7 +76,6 @@ public class Month {
     public int getMonth() {
         return month;
     }
-
 
     /**
      * Returns if a given string is a valid Month.
@@ -89,12 +92,6 @@ public class Month {
     public static boolean isLogicalMonth(String test) {
         requireNonNull(test);
         return STANDARD_MONTHS.contains(test.toUpperCase());
-    }
-
-    private void initMonth(String month, String year) {
-        requireAllNonNull(month, year);
-        this.year = Integer.parseInt(year);
-        this.month = STANDARD_MONTHS.indexOf(month.toUpperCase()) + 1;
     }
 
     @Override

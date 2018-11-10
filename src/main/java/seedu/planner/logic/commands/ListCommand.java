@@ -30,7 +30,8 @@ public class ListCommand extends Command {
             + "END_DATE must be later than or equal to START_DATE.";
 
 
-    public static final String MESSAGE_SUCCESS = "Listed all records";
+    public static final String MESSAGE_SUCCESS_ALL = "Listed all records.";
+    public static final String MESSAGE_SUCCESS_DATE_MODE = "Listed %d record(s) from %s to %s.";
 
     private final Date startDate;
     private final Date endDate;
@@ -49,11 +50,22 @@ public class ListCommand extends Command {
         this.predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 
+    public ListCommand(Date date) {
+        this.startDate = date;
+        this.endDate = date;
+        this.predicate = new DateIsWithinIntervalPredicate(date, date);
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredRecordList(predicate);
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (startDate == null && endDate == null) {
+            return new CommandResult(MESSAGE_SUCCESS_ALL);
+        } else {
+            return new CommandResult(String.format(
+                    MESSAGE_SUCCESS_DATE_MODE, model.getFilteredRecordList().size(), startDate, endDate));
+        }
     }
 
     @Override
