@@ -501,6 +501,9 @@ Format: `backup | [GITHUB ACCESS_TOKEN]`
 `Personal Access Token`, allow the `gist` scope to allow Gists Creation. The create token is your authentication token
 ****
 
+image::gettoken.gif[width="800"]
+.Sample to show how to obtain Github Authentication Token
+
 Examples:
 
 * `backup` +
