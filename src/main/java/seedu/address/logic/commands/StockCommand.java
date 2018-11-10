@@ -44,7 +44,7 @@ public class StockCommand extends Command {
 
 
     public static final String MESSAGE_QUANTITY_STOCK = "Number of Book Stocked: ";
-    public static final String MESSAGE_STOCK_PERSON_SUCCESS = "Stocked Book: %1$s";
+    public static final String MESSAGE_STOCK_BOOK_SUCCESS = "Stocked Book: %1$s";
     public static final String MESSAGE_NOT_STOCKED = "Quantity provided must be a non-zero integer of max. 999.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the book inventory.";
     public static final String MESSAGE_MAX_QUANTITY =
@@ -94,7 +94,7 @@ public class StockCommand extends Command {
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
         return new CommandResult(MESSAGE_QUANTITY_STOCK + stockBookDescriptor.getQuantity().getValue()
-                + "\n" + String.format(MESSAGE_STOCK_PERSON_SUCCESS, stockedBook));
+                + "\n" + String.format(MESSAGE_STOCK_BOOK_SUCCESS, stockedBook));
     }
 
     /**

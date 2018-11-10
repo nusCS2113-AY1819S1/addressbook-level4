@@ -1,11 +1,17 @@
 package seedu.address.model.statistic;
 
+import static java.util.Objects.requireNonNull;
+
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents Inventory in the month's Statistic
  */
 public class Expense {
-    private static final String QUANTITY_VALIDATION_REGEX = "[-+]?[0-9]*\\.?[0-9]+";
+    public static final String MESSAGE_EXPENSE_CONSTRAINTS =
+            "Expense should be numerical and in 2 decimal places or none at all\n"
+                    + "E.g. 4, 3.02";
+    private static final String QUANTITY_VALIDATION_REGEX = "\\d+(\\.\\d{2})?";
     private volatile String value;
 
     /**
@@ -15,8 +21,10 @@ public class Expense {
         super();
     }
 
-    public Expense(String revenue) {
-        value = revenue;
+    public Expense(String expense) {
+        requireNonNull(expense);
+        checkArgument(isValidExpense(expense), MESSAGE_EXPENSE_CONSTRAINTS);
+        value = expense;
     }
 
     public String getValue() {
@@ -27,7 +35,7 @@ public class Expense {
         this.value = value;
     }
 
-    public static boolean isValid(String test) {
+    public static boolean isValidExpense(String test) {
         return test.matches(QUANTITY_VALIDATION_REGEX);
     }
 
@@ -41,15 +49,6 @@ public class Expense {
                 Float.parseFloat(value) + (Float.parseFloat(price) * Float.parseFloat(quantity)));
     }
 
-    /**
-     * Decrease expense
-     * @param price
-     * @param quantity
-     */
-    public void decrease(String price, String quantity) {
-        this.value = Float.toString(
-                Float.parseFloat(value) - (Float.parseFloat(price) * Float.parseFloat(quantity)));
-    }
 
     @Override
     public String toString() {
