@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class FriendCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ADD_FRIEND_SUCCESS = "Person added to the friend list!";
+    public static final String MESSAGE_ADD_FRIEND_SUCCESS = "%s added to the friend list!";
 
     private final Index targetIndex;
 
@@ -36,7 +37,7 @@ public class FriendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Person> otherList = model.getOtherList();
+        List<Person> otherList = model.getCurrentOtherList();
 
         if (targetIndex.getZeroBased() >= otherList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -44,17 +45,13 @@ public class FriendCommand extends Command {
         Person personToEdit = otherList.get(targetIndex.getZeroBased());
         Person editedPerson = personToEdit;
         Person editedUser = model.getUser();
-        addFriendToPerson(editedPerson, model.getUser());
-        addFriendToPerson(editedUser, personToEdit);
+
         editedPerson.getFriends().add(new Friend(model.getUser().getName()));
         editedUser.getFriends().add(new Friend(personToEdit.getName()));
 
         model.updatePerson(personToEdit, editedPerson);
         model.updatePerson(model.getUser(), editedUser);
         model.commitAddressBook();
-        return new CommandResult(MESSAGE_ADD_FRIEND_SUCCESS);
-    }
-
-    private void addFriendToPerson(Person editedPerson, Person person) {
+        return new CommandResult(String.format(MESSAGE_ADD_FRIEND_SUCCESS, editedPerson.getName().toString()));
     }
 }

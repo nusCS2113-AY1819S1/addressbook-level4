@@ -9,6 +9,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_COMMAND_SUCCESS = "Command success!";
 
     //messages thrown by {@code ParserUtil#parseImportExportFileName}
     public static final String MESSAGE_PATH_TOO_LONG = "Destination file path is too long, consider making your "

@@ -153,6 +153,14 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(friendList);
     }
 
+    public ObservableList<Person> getCurrentFriendList() {
+        return FXCollections.unmodifiableObservableList(friendList);
+    }
+
+    public ObservableList<Person> getCurrentOtherList() {
+        return FXCollections.unmodifiableObservableList(otherList);
+    }
+
     public ObservableList<Person> getOtherList() {
         otherList.setPredicate(othersPredicateFromPerson(user));
         return FXCollections.unmodifiableObservableList(otherList);

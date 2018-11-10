@@ -77,6 +77,16 @@ public interface Model {
     ObservableList<Person> getFriendList();
 
     /**
+     * Return the current friend list with the predicates still set
+     */
+    ObservableList<Person> getCurrentFriendList();
+
+    /**
+     * Return the current other list with the predicate still set
+     */
+    ObservableList<Person> getCurrentOtherList();
+
+    /**
      * Return the non-friends list of the current user
      */
     ObservableList<Person> getOtherList();
