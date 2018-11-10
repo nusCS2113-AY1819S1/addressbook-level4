@@ -236,6 +236,7 @@ your inventory to let *[blue]#_Drink I/O_#* track them.
 
 * `NAME` is the name of the drink you wish to record
 ** This name must be unique among the drinks recorded in *[blue]#_Drink I/O_#*
+** Names are case-sensitive
 * `SELLING_PRICE` is the default selling price of 1 carton of the drink
 * `COST_PRICE` is the default cost price of 1 carton of the drink
 ** Prices must not be negative values `[Coming in v1.4]`
