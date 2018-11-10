@@ -1,11 +1,11 @@
 package seedu.address.model.product;
 
 import org.junit.Test;
-import seedu.address.testutil.Assert;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import seedu.address.testutil.Assert;
 //@@author Gara
 public class RemainingItemsTest {
 
