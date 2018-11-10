@@ -25,13 +25,13 @@ public class KeywordsBundleTest {
         // null -> returns false
         assertFalse(firstBundle.equals(null));
 
-        //different list same type-> return false
+        //different list same keyword type-> return false
         assertFalse(secondBundle.equals(firstBundle));
 
-        //different type same list-> return false
+        //different keyword type same list-> return false
         assertFalse(secondBundle.equals(thirdBundle));
 
-        // same type same list -> returns true
+        // same keyword type same list -> returns true
         assertTrue(secondBundle.equals(fourthBundle));
     }
 }

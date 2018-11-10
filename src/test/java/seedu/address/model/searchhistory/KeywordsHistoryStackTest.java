@@ -49,7 +49,7 @@ public class KeywordsHistoryStackTest {
 
     @Test
     public void clear_nonEmptyHistoryStack_isEmpty() {
-        KeywordsHistoryStack historyStack = getFilledKeywordsHistoryStack(1);
+        KeywordsHistoryStack historyStack = getFilledKeywordsHistoryStack(2);
         historyStack.clear();
         assertTrue(historyStack.isEmpty());
     }
@@ -62,31 +62,64 @@ public class KeywordsHistoryStackTest {
     }
 
     @Test
-    public void pop_nonEmptyHistoryStack_isEmpty() {
+    public void pop_sizedOneHistoryStack_isEmpty() {
         KeywordsHistoryStack historyStack = getFilledKeywordsHistoryStack(1);
         historyStack.pop();
         assertTrue(historyStack.isEmpty());
     }
 
+    @Test
+    public void pop_sizedTwoHistoryStack_isNotEmpty() {
+        KeywordsHistoryStack historyStack = getFilledKeywordsHistoryStack(2);
+        historyStack.pop();
+        assertFalse(historyStack.isEmpty());
+    }
 
     @Test
-    public void push_validInput_isNotEmpty() {
+    public void push_validInput_success() {
+        KeywordsHistoryStack historyStack = getEmptyKeywordsHistoryStack();
+        historyStack.push(KeywordType.IncludeNames, new ArrayList<>());
+    }
+
+    @Test
+    public void push_nullKeywordType_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        KeywordsHistoryStack historyStack = getEmptyKeywordsHistoryStack();
+        historyStack.push(null, new ArrayList<>());
+    }
+
+    @Test
+    public void push_nullKeywordList_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        KeywordsHistoryStack historyStack = getEmptyKeywordsHistoryStack();
+        historyStack.push(KeywordType.IncludeNames, null);
+    }
+
+    @Test
+    public void push_includeNamesTypeAndEmptyHistoryStack_isNotEmpty() {
         KeywordsHistoryStack historyStack = getEmptyKeywordsHistoryStack();
         historyStack.push(KeywordType.IncludeNames, new ArrayList<>());
         assertFalse(historyStack.isEmpty());
     }
 
     @Test
-    public void push_nullKeywordType_isEmpty() {
+    public void push_excludeNamesTypeAndEmptyHistoryStack_isNotEmpty() {
         KeywordsHistoryStack historyStack = getEmptyKeywordsHistoryStack();
-        historyStack.push(null, new ArrayList<>());
-        assertTrue(historyStack.isEmpty());
+        historyStack.push(KeywordType.ExcludeNames, new ArrayList<>());
+        assertFalse(historyStack.isEmpty());
     }
 
     @Test
-    public void push_nullKeywordList_isEmpty() {
+    public void push_includeTagsTypeAndEmptyHistoryStack_isNotEmpty() {
         KeywordsHistoryStack historyStack = getEmptyKeywordsHistoryStack();
-        historyStack.push(null, new ArrayList<>());
-        assertTrue(historyStack.isEmpty());
+        historyStack.push(KeywordType.IncludeTags, new ArrayList<>());
+        assertFalse(historyStack.isEmpty());
+    }
+
+    @Test
+    public void push_excludeTagsTypeAndEmptyHistoryStack_isNotEmpty() {
+        KeywordsHistoryStack historyStack = getEmptyKeywordsHistoryStack();
+        historyStack.push(KeywordType.ExcludeTags, new ArrayList<>());
+        assertFalse(historyStack.isEmpty());
     }
 }
