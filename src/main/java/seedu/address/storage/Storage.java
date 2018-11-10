@@ -25,7 +25,7 @@ public interface Storage extends InventoryListStorage, UserPrefsStorage, LoginIn
 
     @Override
     Path getInventoryListFilePath();
-    
+
     @Override
     Optional<ReadOnlyInventoryList> readInventoryList() throws DataConversionException, IOException;
 
