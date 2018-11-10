@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.InventoryList;
 import seedu.address.model.ReadOnlyInventoryList;
 
 /**
