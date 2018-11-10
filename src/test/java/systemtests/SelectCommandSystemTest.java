@@ -7,7 +7,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
+import static seedu.address.testutil.TypicalEvents.EVENT_3;
+import static seedu.address.testutil.TypicalEvents.EVENT_5;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
@@ -27,30 +31,34 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
          * -> selected
          */
         String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "   ";
-        assertCommandSuccess(command, INDEX_FIRST_PERSON);
+        Model expectedModel = getModel();
+        ModelHelper.setEventFilteredList(expectedModel, EVENT_3);
+        assertCommandSuccess(command, INDEX_FIRST_PERSON, expectedModel);
 
         /* Case: select the last card in the person list -> selected */
         Index personCount = getLastIndex(getModel());
         command = SelectCommand.COMMAND_WORD + " " + personCount.getOneBased();
-        assertCommandSuccess(command, personCount);
+        ModelHelper.setEventFilteredList(expectedModel);
+        assertCommandSuccess(command, personCount, expectedModel);
 
         /* Case: undo previous selection -> rejected */
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
-        assertCommandFailure(command, expectedResultMessage);
+        assertCommandFailure(command, expectedResultMessage, expectedModel);
 
         /* Case: redo selecting last card in the list -> rejected */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
-        assertCommandFailure(command, expectedResultMessage);
+        assertCommandFailure(command, expectedResultMessage, expectedModel);
 
         /* Case: select the middle card in the person list -> selected */
         Index middleIndex = getMidIndex(getModel());
         command = SelectCommand.COMMAND_WORD + " " + middleIndex.getOneBased();
-        assertCommandSuccess(command, middleIndex);
+        ModelHelper.setEventFilteredList(expectedModel);
+        assertCommandSuccess(command, middleIndex, expectedModel);
 
         /* Case: select the current selected card -> selected */
-        assertCommandSuccess(command, middleIndex);
+        assertCommandSuccess(command, middleIndex, expectedModel);
 
         /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 
@@ -59,43 +67,47 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getPersonList().size();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL);
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " "
+                + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, expectedModel);
 
         /* Case: filtered person list, select index within bounds of address book and person list -> selected */
         Index validIndex = Index.fromOneBased(1);
         assertTrue(validIndex.getZeroBased() < getModel().getFilteredPersonList().size());
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
-        assertCommandSuccess(command, validIndex);
+        ModelHelper.setEventFilteredList(expectedModel, EVENT_5);
+        assertCommandSuccess(command, validIndex, expectedModel);
 
         /* ----------------------------------- Perform invalid select operations ------------------------------------ */
 
         /* Case: invalid index (0) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + 0,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), expectedModel);
 
         /* Case: invalid index (-1) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + -1,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), expectedModel);
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredPersonList().size() + 1;
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " "
+                + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, expectedModel);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " abc",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), expectedModel);
 
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " 1 abc",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), expectedModel);
 
         /* Case: mixed case command word -> rejected */
-        assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
+        assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND, expectedModel);
 
         /* Case: select from empty address book -> rejected */
         deleteAllPersons();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
-                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, getModel());
     }
 
     /**
@@ -112,8 +124,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
      */
-    private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
-        Model expectedModel = getModel();
+    private void assertCommandSuccess(String command, Index expectedSelectedCardIndex, Model expectedModel) {
         String expectedResultMessage = String.format(
                 MESSAGE_SELECT_PERSON_SUCCESS, expectedSelectedCardIndex.getOneBased());
         int preExecutionSelectedCardIndex = getPersonListPanel().getSelectedCardIndex();
@@ -142,9 +153,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandFailure(String command, String expectedResultMessage) {
-        Model expectedModel = getModel();
-
+    private void assertCommandFailure(String command, String expectedResultMessage, Model expectedModel) {
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();

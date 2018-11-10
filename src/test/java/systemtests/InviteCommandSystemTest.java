@@ -75,7 +75,7 @@ public class InviteCommandSystemTest extends AddressBookSystemTest {
         assertTrue(indexPerson.getZeroBased() < getModel().getFilteredPersonList().size());
         command = " " + InviteCommand.COMMAND_WORD + "  " + indexPerson.getOneBased() + " "
                 + PREFIX_TO + " " + indexEvent.getOneBased();
-        updatedEvent = new EventBuilder(EVENT_4).withAttendee(VALID_EMAIL_BENSON).build();
+        updatedEvent = new EventBuilder(EVENT_4).withAttendee(VALID_EMAIL_BENSON, "lydia@example.com").build();
         assertCommandSuccess(command, indexPerson, indexEvent, updatedEvent);
 
         /* Case: filtered person list, event index within bounds of event list

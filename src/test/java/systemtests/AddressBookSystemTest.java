@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_EVENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_PEOPLE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.address.ui.testutil.GuiTestAssert.assertEventListMatching;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.nio.file.Path;
@@ -205,6 +206,7 @@ public abstract class AddressBookSystemTest {
         assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
         assertEquals(new EventList(expectedModel.getEventList()), testApp.readStorageEventList());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
+        //assertEventListMatching(getEventListPanel(), expectedModel.getFilteredEventList());
     }
 
     /**
@@ -302,6 +304,7 @@ public abstract class AddressBookSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
         assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
+        assertEventListMatching(getEventListPanel(), getModel().getFilteredEventList());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());

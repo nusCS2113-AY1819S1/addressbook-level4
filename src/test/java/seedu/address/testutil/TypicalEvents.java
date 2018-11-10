@@ -69,6 +69,15 @@ public class TypicalEvents {
             new Attendees("johnd@example.com")
     );
 
+    public static final Event EVENT_6 = new Event(
+            new EventName("Test Event 6"),
+            new Description("Test Description 6"),
+            new EventDate("2018-11-10"),
+            new StartTime("09:00"),
+            new EndTime("13:00"),
+            new Location("Test Location 6")
+    );
+
     /**
      * Returns test event list.
      */

@@ -9,11 +9,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+
+import org.junit.rules.ExpectedException;
 
 import seedu.address.testutil.EventBuilder;
 
 public class EventContainsAttendeeAndDatePredicateTest {
+
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private Set<String> attendeesSetOne;
     private Set<String> attendeesSetTwo;
@@ -147,6 +154,14 @@ public class EventContainsAttendeeAndDatePredicateTest {
         assertFalse(predicate.test(eventOne));
         //event with attendee size zero
         assertFalse(predicate.test(eventTwo));
+    }
+
+    @Test
+    public void test_invalidType_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        EventContainsAttendeeAndDatePredicate predicate =
+                new EventContainsAttendeeAndDatePredicate("Bob Choo", "2018-10-25", null);
+        predicate.test(eventOne);
     }
 
 
