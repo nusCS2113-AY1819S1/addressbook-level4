@@ -18,7 +18,7 @@ Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-Task Book is for students who prefer to use a desktop app for managing their daily tasks and ultimately, lead a more productive life. More importantly, AB is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB can get your management of tasks done faster than traditional paper notebooks or a mobile application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Task Book is for students who prefer to use a desktop app for managing their daily tasks and ultimately, lead a more productive life. More importantly, Task Book is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Task Book can get your management of tasks done faster than traditional paper notebooks or a mobile application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -255,8 +255,8 @@ There is no need to save manually.
 
 * *Add task* : `add c/MODULE_CODE t/ACTION d/DESCRIPTION p/PRIORITY_LEVEL h/HOURS_TO_COMPLETE` +
 e.g. `add c/CS2113 t/Complete 2113 Tutorial d/with code done p/high h/2`
-* *Add milestone* : `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...` +
-e.g. `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
+* *Add milestone* : `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK...` +
+e.g. `add_milestone i/1 m/Q1 - 3 r/1`
 * *Clear* : `clear`
 * *Complete* : `complete i/INDEX h/HOURS_COMPLETED` +
 e.g. `complete i/1 h/2`
