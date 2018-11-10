@@ -333,7 +333,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of expense book states.
+* **Alternative 1 (current choice):** Use a list to store the history of financial planner states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
 ** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedFinancialPlanner`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
