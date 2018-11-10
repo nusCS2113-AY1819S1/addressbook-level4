@@ -6,19 +6,24 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.rules.TemporaryFolder;
 
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+    @Rule
+    public TemporaryFolder testFolder = new TemporaryFolder();
 
     private ModelManager modelManager = new ModelManager();
 
@@ -43,6 +48,35 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
+    }
+
+    @Test
+    public void importPersonsFromAddressBook_nullImportFilePath_throwsNullPointerException()
+            throws IOException, DataConversionException {
+        thrown.expect(NullPointerException.class);
+        modelManager.importPersonsFromAddressBook(null);
+    }
+
+    @Test
+    public void addPersonsToAddressBook() {
+        AddressBook addressBookwithMorePerson = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBook();
+        UserPrefs userPrefs = new UserPrefs();
+
+        ModelManager expectedModel = new ModelManager(addressBook, userPrefs);
+        expectedModel.addPerson(ALICE);
+        expectedModel.addPerson(BENSON);
+
+        modelManager = new ModelManager(addressBook, userPrefs);
+        modelManager.addPersonsToAddressBook(addressBookwithMorePerson);
+
+        assertTrue(modelManager.equals(expectedModel));
+    }
+
+    @Test
+    public void exportFilteredAddressBook_nullExportFilePath_throwsNullPointerException() throws IOException {
+        thrown.expect(NullPointerException.class);
+        modelManager.exportFilteredAddressBook(null);
     }
 
     @Test
