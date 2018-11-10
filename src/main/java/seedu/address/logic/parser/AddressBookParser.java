@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.CommandsEnum;
 import seedu.address.logic.commands.AddTimeCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -48,10 +49,10 @@ public class AddressBookParser {
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
-     * @return the command based on the user input
+     * @return the CommandsEnum constants which represents a command
      * @throws ParseException if the user input does not conform the expected format
      */
-    public String parseCommand(String userInput) throws ParseException {
+    public CommandsEnum parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -60,8 +61,13 @@ public class AddressBookParser {
         commandWord = matcher.group("commandWord");
         arguments = matcher.group("arguments");
 
-        //TODO to prevent people from changing it?
-        return new String(commandWord);
+        //Returns the correct command enum constant
+        CommandsEnum commandtype = CommandsEnum.find(commandWord);
+        if (commandtype == null) {
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+
+        return commandtype;
     }
 
     /**

@@ -18,7 +18,7 @@ public interface Logic {
      * @param commandText The command entered in the CLI
      * @return The specific Command Word
      */
-    String parseCommandWord(String commandText) throws ParseException;
+    CommandsEnum parseCommandWord(String commandText) throws ParseException;
 
     /**
      * Executes the command and returns the result.

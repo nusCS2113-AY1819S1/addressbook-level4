@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.CommandsEnum;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -32,7 +33,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public String parseCommandWord(String commandText) throws ParseException {
+    public CommandsEnum parseCommandWord(String commandText) throws ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         return addressBookParser.parseCommand(commandText);
     }
