@@ -39,7 +39,7 @@ public class DeleteShortlistedCandidateCommand extends Command {
             + "Delete Process for shortlisted candidates done. You may carry out other commands.\n";
 
     public static final String MESSAGE_EMPTY_LIST =
-            "ERROR: There are no shortlisted candidates for this job offer.\n"
+            "ERROR: No candidate shortlisted for this job offer yet.\n"
             + "Exited from delete process.\n";
 
     private final Index targetIndex;

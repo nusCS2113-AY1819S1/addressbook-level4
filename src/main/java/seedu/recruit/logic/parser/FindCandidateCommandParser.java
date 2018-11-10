@@ -68,8 +68,7 @@ public class FindCandidateCommandParser implements Parser<FindCandidateCommand> 
         }
 
         if (keywordsMap.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCandidateCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + FindCandidateCommand.MESSAGE_USAGE);
         }
 
         return new FindCandidateCommand(new CandidateContainsFindKeywordsPredicate(keywordsMap));
