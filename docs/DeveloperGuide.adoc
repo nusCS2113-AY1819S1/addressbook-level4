@@ -1021,18 +1021,6 @@ As you can see the screenshot below, in the `SUMMARY DATA` sheet (refer to `Expo
 image::Export_Capture2_LinhChi.png[width:800]
 
 // end::draw_line_chart[]
-
-=== Design Considerations
-==== Aspect: Data structure to support listing of records
-
-* **Alternative 1 (current choice):** Uses a FilteredList that is tracked by the UI. FilteredLIst is a wrapper around the ObservableList<Record> that is stored in UniquePersonList which allows for any changes in the observable list to be propagated to the filtered list automatically.
-** Pros: Easy to implement
-** Cons: May take a significantly longer time to list records if there are many records spanning across a large timeframe.
-
-* **Alternative 2:** Implement a HashMap with Date as the key and Record as the value.
-** Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.
-** Cons: Current UI implementation relies on `FilteredList`. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to `ObservableMap` instead. Alternatively, one can utilise a `HashMap` to first generate the list and pass the list reference into `FilteredList`. However, there is a need to code a filter function.
-
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
