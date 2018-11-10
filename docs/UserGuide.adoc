@@ -319,6 +319,7 @@ User: Registers for an event, adding current user's username to attendance list.
 Format: `register INDEX`
 
 ****
+* Registers for the event at the specified INDEX.
 * The index refers to the index number shown in the displayed event list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * User must not be registered for event.
@@ -339,6 +340,7 @@ User: Unregisters for an event, removing current user's username to attendance l
 Format: `unregister INDEX`
 
 ****
+* Unegisters for the event at the specified INDEX.
 * The index refers to the index number shown in the displayed event list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * User must be already registered for event.
@@ -364,6 +366,7 @@ Admin: Removes a user registered for an event. +
 Format: `removeAttendee INDEX USERNAME`
 
 ****
+* Removes USERNAME from the event at the specified INDEX.
 * The index refers to the index number shown in the displayed event list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * User with the specified username must be registered for the event.
