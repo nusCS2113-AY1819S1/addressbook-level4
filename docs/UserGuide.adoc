@@ -91,6 +91,12 @@ image::AddMilestoneCommand_before.png[width="600", align="left"]
 
 *After*
 image::AddMilestoneCommand_after.png[width="600", align="left"]
+
+[NOTE]
+====
+Rank is the level of importance assigned to that particular milestone by the user. Milestones are automatically sorted by rank with the most important one at the top (*Rank 1*).
+====
+
 // end::add_milestone[]
 
 === Complete a task: `complete`
