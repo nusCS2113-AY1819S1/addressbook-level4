@@ -5,7 +5,7 @@
 :stylesheet: gh-linhchi-pages.css
 
 
-== PROJECT: FinancialPlanner
+== PROJECT: SAVEE - FinancialPlanner
 
 == FinancialPlanner - Overview:
 
@@ -13,17 +13,17 @@ In semester 1 year 2, I had a chance to learn NUS CS2113T - Software Engineering
 
 4 - 5 students from all walk of life are assigned to one group. We adjust each other working style within few weeks and support each other to develop the project. Be it minor enhancement or major enhancement, we are expected to contribute to the team.
 
-Initially, a source code https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4] is given to us at the beginning of the CS2113T module. This has about 10 kLoc (10000 lines of code). Choosing the morphing direction, we were tasked to modify the existing code into other software we opted to.
+Initially, a source code https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4] is given to us at the beginning of the CS2113T module. This has about 10 kLoc (10,000 lines of code). Choosing the morphing direction, we were tasked to modify the existing code into other software we opted to.
 
 We would be evaluated based on our ability to work with existing base code and the quality of our new enhancements to
 the existing code. Besides code, we were expected to write a User Guide and Developer Guide as well for the product
 as though we were releasing an official product for public usage to simulate an actual work schedule.
 
-FinancialPlanner's target is for everyone who needs help to manage their financial status, but we focus mainly on *students*. As a NUS student, I understand how great impact finance can impose on a student. With this application, I, myself and my teammate, hopes to bring positive support to users.
+Savee's target is for everyone who needs help to manage their financial status, but we focus mainly on *students*. As a NUS student, I understand how great impact finance can impose on a student. With this application, I and my teammates hope to bring positive support to users.
 
 This application is perfectly designed for users who like typing and are proficient in organizing their data with command line interface (CLI). User can store `name`, `date`, `money flow`, and optional `tag`. With 3 compulsory components, namely, `name`, `date`, `money flow`, we create a `Record`. The `date` component refers to the actual date when the financial activity is performed and `money flow` component refers to the income or expenditure of the user on the specific date. Typing might be time-consuming but it allows user have a glimpse back to the expense user spent or received. Hence, the user will have a chance to recall their expenses as well as be more aware about their financial status.
 
-Locating at the topmost of the Financial Planner application is the text box, which user can use to type the command into the system. Graphic User Interface (GUI) created by JavaFX is the main component used to display output of the system to create a instinctive and engaging user experience.
+Locating at the topmost of the Savee application is the text box, which user can use to type the command into the system. Graphic User Interface (GUI) created by JavaFX is the main component used to display output of the system to create a instinctive and engaging user experience.
 
 == Summary of contributions
 
@@ -31,71 +31,90 @@ Milestone is set every fortnight. Be it minor enhancement or major enhancement, 
 
 A summary of my contributions is given below.
 
-=== Enhancements:
+=== Enhancement-related contributions:
 
-* *Major enhancements*: Assisted morph the AddressBook4 to FinancialPlanner
+* *_Major enhancements_*: Assisted morph the AddressBook4 to Savee.
 ** `Reason for enhancement`: Different from the AddressBook4, which stores the contact data, our app mainly aims supporting users who prefer to keep track of their daily financial activity.
 ** `Overview`: Significant effort is required to morph this application.
 ** `Highlights`: This major enhancement requires large amount of time as I have to read through all 10 kLoc and understand them before making any modifications.
-** `My contributions`: I refactored function together with variables across classes, to make these components compatible and consistent for the application. Along the way I developed my code, I had to adjust to the new structure of the Financial Planner, as not only we did rename the variable, methods, classes, we also build up our own structure for the application.
+** `My contributions`: I refactored function together with variables across classes, to make these components compatible and consistent for the application. Along the way I developed my code, I had to adjust to the new structure of the Savee, as not only we did rename the variable, methods, classes, we also build up our own structure for the application.
 
-* *Major enhancements*: Added the feature that allows the user delete all the record whose date is required.
+* *_Major enhancements_*: Added the feature that allows the user delete all the record whose date is required.
 ** `Reason for enhancement`: As this application is designed for daily expense/income management and in case when user type in wrong date at the beginning. This feature allows user to delete multiple records at the same time, compared to the original delete one record at the time.
 ** `Overview`: I developed this enhancement with the hope to increase the user-friendliness of the application by decreasing the time spent on delete feature.
-** `Highlights`: This major enhancement was unexpectedly difficult as it requires a in-depth knowledge for the Internal List structure building up the list of records, and pointer when looping through the list and deleting records.
+** `Highlights`: This major enhancement was simple to code but unexpectedly difficult to debug as it requires a in-depth knowledge for the Internal List structure building up the list of records, and pointer when looping through the list and deleting records.
 ** `My contributions`: I wrote the code for the command, parser, and tests, and modify other classes and codes to adjust when a new command is added.
 
-* *Major enhancements*: Export the records data into Excel file
+* *_Major enhancements_*: Added the feature that allows the user archive the record data from Savee to the Excel file.
 ** `Reason for enhancement`: As the user has used the application long time, the memory made up this application will be very large. Hence, it will impose a memory burden on the computer. It would be great that we can archive this data and store them in different location.
-** `Overview`: The feature allows users to archive the data in excel file, this excel file can be saved to other places.
-** `Highlights`: This major enhancement requires significant effort and time, as initially, the library is not included in Java SDK10. I have to read the documentation as well as learn how to utilize the library in the short time.
-** `My contributions`: I created Excel utility that can be used for other Excel related command. This feature have a sophisticated parser as it takes in 6 different modes command and execute different Archive command for each mode.
+** `Overview`: The feature allows users to archive the data in excel file, this *Excel file* can be saved to other places, such as computer drive, google drive, one drive,...
+** `Highlights`: This major enhancement requires significant effort and time, as initially, the library is not included in Java 10 library, I have to read the documentation as well as learn how to utilize the library in the short time. Therefore, it is reasonable to consider this feature as *advanced* feature. Moreover, I put effort on designing a user-friendly Excel file.
+** `My contributions`: This feature takes in *6 different input mode*. Every possible input is taken into consideration and I have to make sure that there is no error thrown for all  possible inputs. As the number of possible cases are quite large, time spent on this feature are mainly testing and debugging.
+** `Credits`: Apache Poi Library and its inner class were used and modified to fit into the feature.
 
-* *Major enhancements*:
-** `Reason for enhancement`:
-** `Overview`:
-** `Highlights`:
-** `My contributions`:
+* *_Major enhancements_*: Added the feature that allows the user import the record data from the Excel file to the Savee.
+** `Reason for enhancement`: When the user archive or export record data into Excel file. They can import these record data back automatically. The number of sheets in Excel file should not be limited and the application will import as many as Excel sheets in the file if found eligible.
+** `Overview`: The feature allows user to import the record data from the Excel file.
+** `Highlights`: This major enhancement requires significant effort and time, as initially, the library is not included in Java 10 library, I have to read the documentation as well as learn how to utilize the library in the short time. Therefore, it is reasonable to consider this feature as *advanced* feature. Moreover, I have to consider to check the existence of the directory path of the Excel file.
+** `My contributions`: This feature takes in *2 different input modes*. I have to set up the Directory check to make sure that the Directory given is existing and the Excel file is clearly created. There are some pre-conditions for the Excel file to be successfully imported [refer to the User guide *Import the record data from the Excel file to the Savee* part].
+** `Credits`: Apache Poi Library and its inner class were used and modified to fit into the feature.
 
-* *Major enhancements*:
-** `Reason for enhancement`:
-** `Overview`:
-** `Highlights`:
-** `My contributions`:
+* *_Major enhancements_*: Added the feature that allows the user export the record data from Savee to the Excel file.
+** `Reason for enhancement`: Since the our application is only used on one device. Hence, the data cannot be shared directly. I want to offer help for users wanting to share the record data to their friends, family members,... by implementing the Export Excel feature.
+** `Overview`: This feature allows user export data into Excel file.
+** `Highlights`: This major enhancement requires significant effort and time, as initially, the library is not included in Java 10 library, I have to read the documentation as well as learn how to utilize the library in the short time. Therefore, it is reasonable to consider this feature as *advanced* feature. Moreover, I put effort on designing a user-friendly Excel file.
+** `My contributions`: This feature takes in *6 different input mode*. Every possible input is taken into consideration and I have to make sure that there is no error thrown for all possible inputs. As the number of possible cases are quite large, time spent on this feature are mainly testing and debugging.
+** `Credits`: Apache Poi Library and its inner class were used and modified to fit into the feature.
 
+* *_Minor enhancement_*: Added the feature that automatically draw a line chart in the Excel file.
+** `Reason for enhancement`: Since the *export the record data from Savee to the Excel file* feature and *archive the record data from Savee to the Excel file*
+** `Overview`: This feature will draw a line chart about the summary of Income, Outcome, and Net based on Date.
+** `Highlights`: This major enhancement requires significant effort and time, as initially, the library is not included in Java 10 library, I have to read the documentation as well as learn how to utilize the library in the short time. Therefore, it is reasonable to consider this feature as *advanced* feature.
+** `My contributions`: This feature does not take in any input, as it will be automatically drawn after the Excel file is created, meaning that user enter the `exportexcel` commmand or `archive` command.
+** `Credits`: Apache Poi Library and its inner class were used and modified to fit into the feature.
 
 * *Code contributed*:
+https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=nguyenngoclinhchi
 
-=== *Other contributions*:
+=== Non-enhancement related contributions:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+* Project management
+** Set up some `issues` for milestones and tried to complete before the deadline for each milestone.
+** Ensured that milestone objectives are met and submit relevant PRs to module repo
 
-_{you can add/remove categories in the list above}_
+* Enhancements to existing features:
+** Wrote additional tests for existing or new features to increase coverage.
+
+* Documentation:
+** Did cosmetic tweaks to existing contents of the User Guide and Developer Guide.
+** Prof-read, organised documentation to maintain its coherence.
+
+* Tools:
+*** Integrated a third party library (Apache Poi) to the project and the team repo
+
+* Debugging team members code
+** Helped debug other team member's code and offer suggestions when they are stuck
+** Helped provide ideas for possible implementation for other team member's features
+
+* Team Management
+** Coordinated some team meetings
+** Ensured that team members meet feature deadlines set within the team
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=deletedate]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=exportexcel]
+
+include::../UserGuide.adoc[tag=import]
+
+include::../UserGuide.adoc[tag=archive]
+
+include::../UserGuide.adoc[tag=draw_line_chart]
 
 == Contributions to the Developer Guide
 
@@ -103,13 +122,12 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=deletedate]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=exportexcel]
 
+include::../DeveloperGuide.adoc[tag=import]
 
-== PROJECT: PowerPointLabs
+include::../DeveloperGuide.adoc[tag=archive]
 
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=draw_line_chart]
