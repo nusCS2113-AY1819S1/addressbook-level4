@@ -98,12 +98,25 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    /**
+     * Returns true if a group with the same identity fields
+     * as {@code group} exists in the versioned address book.
+     *
+     * @param group Group to check for.
+     * @return Check result.
+     */
     @Override
     public boolean hasGroup(Group group) {
         requireNonNull(group);
         return versionedAddressBook.hasGroup(group);
     }
 
+    /**
+     * Adds a group to the versioned address book.
+     * The group must not already exist in the versioned address book.
+     *
+     * @param group Group to add.
+     */
     @Override
     public void createGroup(Group group) {
         requireNonNull(group);
@@ -112,6 +125,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    /**
+     * Adds persons to a group in the versioned address book.
+     * The persons must not already exist in the group.
+     * The group must exist in the versioned address book.
+     *
+     * @param addGroup Contains group and persons to add to group.
+     */
     @Override
     public void addGroup(AddGroup addGroup) {
         requireNonNull(addGroup);
@@ -120,18 +140,36 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    /**
+     * Return true if a person is already in the specified group.
+     *
+     * @param addGroup Contains group and person to check with.
+     * @return Check result.
+     */
     @Override
     public boolean hasPersonInGroup(AddGroup addGroup) {
         requireNonNull(addGroup);
         return versionedAddressBook.hasPersonInGroup(addGroup);
     }
 
+    /**
+     * Deletes {@code target} from the versioned address book.
+     * {@code target} must exist in the versioned address book.
+     *
+     * @param target Group to delete.
+     */
     @Override
     public void deleteGroup(Group target) {
         versionedAddressBook.removeGroup(target);
         indicateAddressBookChanged();
     }
 
+    /**
+     * Removes person from a group.
+     *
+     * @param group Group to remove person from.
+     * @param target Person to be removed.
+     */
     @Override
     public void deleteGroupPerson(Group group, Person target) {
         versionedAddressBook.removeGroupPerson(group, target);
@@ -158,13 +196,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedAddressBook}.
+     *
+     * @return Unmodifiable list.
      */
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return FXCollections.unmodifiableObservableList(filteredGroups);
     }
 
+    /**
+     * Sets the predicate's value so that an updated group list will be displayed.
+     *
+     * @param predicate Group predicate to be set.
+     */
     @Override
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         requireNonNull(predicate);
@@ -213,6 +258,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    /**
+     * Returns true if both objects have the same fields.
+     *
+     * @param obj Object to compare with.
+     * @return Comparison result.
+     */
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

@@ -7,6 +7,10 @@ package seedu.address.model.group.exceptions;
  * fields with the exceptions of persons in group).
  */
 public class DuplicateGroupException extends RuntimeException {
+
+    /**
+     * Signals that the operation will result in duplicate Groups.
+     */
     public DuplicateGroupException() {
         super("Operation would result in duplicate groups");
     }

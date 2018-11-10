@@ -13,8 +13,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Group in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a group in the address book.
+ * Guarantees: Details are present and not null, field values are validated.
  */
 public class Group {
 
@@ -26,11 +26,15 @@ public class Group {
     private final GroupLocation groupLocation;
     private final Set<Tag> tags = new HashSet<>();
 
-    //Data Fields
+    // Data Fields
     private final Set<Person> persons = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Receives group details.
+     *
+     * @param groupName Group name.
+     * @param groupLocation Group Location.
+     * @param tags Group tags.
      */
     public Group(GroupName groupName, GroupLocation groupLocation, Set<Tag> tags) {
         requireAllNonNull(groupName, groupLocation, tags);
@@ -39,10 +43,20 @@ public class Group {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Returns group name.
+     *
+     * @return Group name.
+     */
     public GroupName getGroupName() {
         return groupName;
     }
 
+    /**
+     * Returns group location.
+     *
+     * @return Group location.
+     */
     public GroupLocation getGroupLocation() {
         return groupLocation;
     }
@@ -50,6 +64,8 @@ public class Group {
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
+     *
+     * @return Tag Set.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
@@ -58,14 +74,17 @@ public class Group {
     /**
      * Returns an immutable person set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
+     *
+     * @return Person Set.
      */
     public Set<Person> getPersons() {
         return Collections.unmodifiableSet(persons);
     }
 
     /**
-     * Adds a single person
-     * @param persons
+     * Adds a person to the group.
+     *
+     * @param persons Person to add.
      */
     public void addPersons(Person persons) {
         requireNonNull(persons);
@@ -73,8 +92,9 @@ public class Group {
     }
 
     /**
-     * Adds multiple persons
-     * @param persons
+     * Adds multiple persons to the group.
+     *
+     * @param persons Persons to add.
      */
     public void addPersons(Set<Person> persons) {
         requireNonNull(persons);
@@ -84,6 +104,9 @@ public class Group {
     /**
      * Returns true if both groups of the same name, location and tags.
      * This defines a weaker notion of equality between two groups.
+     *
+     * @param otherGroup Group to compare with.
+     * @return Comparison result.
      */
     public boolean isSameGroup(Group otherGroup) {
         if (otherGroup == this) {
@@ -97,7 +120,10 @@ public class Group {
 
     /**
      * Returns true if both groups have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two groups.
+     *
+     * @param other Group to compare with.
+     * @return Comparison result.
      */
     @Override
     public boolean equals(Object other) {
@@ -116,6 +142,11 @@ public class Group {
                 && otherGroup.getPersons().equals(getPersons());
     }
 
+    /**
+     * Returns string with group identity field details.
+     *
+     * @return Group details.
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
