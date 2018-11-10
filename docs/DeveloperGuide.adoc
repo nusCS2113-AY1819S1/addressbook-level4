@@ -590,6 +590,9 @@ It extends `CompanyBook` with a list of shortlisted candidate(s) for each job of
 Unique Candidate List called `candidateList`. The reason for storing as a unique list is to prevent duplicated
 candidates from being added into the same `candidateList`.
 
+It also uses `EventsCenter` to post a new `ChangeLogicStateEvent` so that
+`LogicManager` will handle the event with its `handleChangeLogicStateEvent` method.
+
 It is a 5-stage process supported by `LogicManager` by keeping track of the `LogicState`.
 
 . `primary`
@@ -666,6 +669,9 @@ It deletes a shortlisted candidate from the `candidateList` through `Model`.
 [NOTE]
 Deleting a shortlisted candidate does not delete the candidate from `Candidate Book`. It simply
 removes the candidate from the list of shortlisted candidates for that particular job offer.
+
+It also uses `EventsCenter` to post a new `ChangeLogicStateEvent` so that
+`LogicManager` will handle the event with its `handleChangeLogicStateEvent` method.
 
 It is a 4-stage process supported by `LogicManager` by keeping track of the `LogicState`.
 

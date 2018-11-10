@@ -10,10 +10,10 @@ import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.getTypicalComp
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
 
-
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.events.ui.JumpToCompanyJobListRequestEvent;
