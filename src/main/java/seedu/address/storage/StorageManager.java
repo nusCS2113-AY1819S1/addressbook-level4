@@ -9,28 +9,29 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.InventoryListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.LoginInfoManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.logininfo.LoginInfoStorage;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of Inventory List data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private InventoryListStorage inventoryListStorage;
     private UserPrefsStorage userPrefsStorage;
     private LoginInfoStorage loginInfoStorage;
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+    public StorageManager(InventoryListStorage inventoryListStorage, UserPrefsStorage userPrefsStorage,
                           LoginInfoStorage loginInfoStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        // this.addressBookStorage = addressBookStorage;
+        this.inventoryListStorage = inventoryListStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.loginInfoStorage = loginInfoStorage;
     }
@@ -69,7 +70,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     // ================ AddressBook methods ==============================
-
+    /*
     @Override
     public Path getAddressBookFilePath() {
         return addressBookStorage.getAddressBookFilePath();
@@ -107,5 +108,45 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+    */
+    // ================ Inventory List methods ==============================
+    @Override
+    public Path getInventoryListFilePath() {
+        return inventoryListStorage.getInventoryListFilePath();
+    }
 
+
+    @Override
+    public Optional<ReadOnlyInventoryList> readInventoryList() throws DataConversionException, IOException {
+        return readInventoryList(inventoryListStorage.getInventoryListFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyInventoryList> readInventoryList(Path filePath)
+            throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return inventoryListStorage.readInventoryList(filePath);
+    }
+
+    @Override
+    public void saveInventoryList(ReadOnlyInventoryList inventoryList) throws IOException {
+        saveInventoryList(inventoryList, inventoryListStorage.getInventoryListFilePath());
+    }
+
+    @Override
+    public void saveInventoryList(ReadOnlyInventoryList inventoryList, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        inventoryListStorage.saveInventoryList(inventoryList, filePath);
+    }
+
+
+    @Subscribe
+    public void handleInventoryListChangedEvent(InventoryListChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveInventoryList(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
 }

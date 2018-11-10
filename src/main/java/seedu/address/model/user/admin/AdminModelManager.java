@@ -32,7 +32,6 @@ public class AdminModelManager extends ModelManager implements AdminModel {
         super(inventoryList, userPrefs, loginInfoManager, transactionList);
     }
 
-
     /**
      * Raises an event to indicate the model has changed
      */

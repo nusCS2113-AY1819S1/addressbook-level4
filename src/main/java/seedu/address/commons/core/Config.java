@@ -45,11 +45,11 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public Path getUserLoginInfoilePath() {
+    public Path getUserLoginInfoFilePath() {
         return userLoginInfoFilePath;
     }
 
-    public void setUserLoginInfoilePath(Path userLoginInfoFilePath) {
+    public void setUserLoginInfoFilePath(Path userLoginInfoFilePath) {
         this.userLoginInfoFilePath = userLoginInfoFilePath;
     };
 

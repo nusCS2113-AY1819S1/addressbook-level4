@@ -42,17 +42,28 @@ public class Drink {
         this.tags.addAll(tags);
     }
 
-    /**
-     * Every field must be present and not null.
-     */
-    public Drink(Name name, Price costPrice, Price retailPrice, Quantity quantity, Set<Tag> tags) {
-        requireAllNonNull(name, costPrice, retailPrice, quantity, tags);
+    public Drink(Name name, Price costPrice, Price retailPrice) {
+        requireAllNonNull(name, costPrice, retailPrice);
         this.name = name;
         this.costPrice = costPrice;
         this.retailPrice = retailPrice;
-        this.quantity = quantity;
+        uniqueBatchList = new UniqueBatchList();
+        quantity = new Quantity("0");
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Drink(Name name, Price costPrice, Price retailPrice, UniqueBatchList batchList, Set<Tag> tags) {
+        requireAllNonNull(name, costPrice, retailPrice, batchList, tags);
+        this.name = name;
+        this.costPrice = costPrice;
+        this.retailPrice = retailPrice;
+        this.uniqueBatchList = batchList;
+        this.quantity = uniqueBatchList.getTotalQuantity();
         this.tags.addAll(tags);
     }
+
 
     public Drink(Name name) {
         this.name = name;
@@ -228,7 +239,7 @@ public class Drink {
         BatchId tempId = new BatchId();
         BatchPrice tempPrice = new BatchPrice(this.getCostPrice().toString());
         BatchQuantity tempQuantity = new BatchQuantity(quantity.toString());
-        Batch toAdd = new Batch(tempId, tempQuantity, tempPrice);
+        Batch toAdd = new Batch(tempId, tempQuantity);
         this.uniqueBatchList.addBatch(toAdd);
         updateQuantity();
     }

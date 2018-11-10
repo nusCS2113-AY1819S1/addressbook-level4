@@ -33,7 +33,6 @@ public class ModelManager extends ComponentManager implements Model {
     protected final FilteredList<Transaction> filteredTransactions;
     protected final TransactionList transactionList;
 
-
     /**
      * Initializes a ModelManager with the given inventoryList, userPrefs and transactionList
      */
@@ -42,7 +41,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         super();
         requireAllNonNull(readOnlyInventoryList, userPrefs);
-
         logger.fine("Initializing with inventory list: " + readOnlyInventoryList + " and user prefs " + userPrefs);
 
         inventoryList = new InventoryList(readOnlyInventoryList);
@@ -51,6 +49,8 @@ public class ModelManager extends ComponentManager implements Model {
         this.transactionList = new TransactionList(transactionList);
         filteredTransactions = new FilteredList<>(this.transactionList.getTransactionList());
     }
+
+
 
     public ModelManager() {
         this(new InventoryList(), new UserPrefs(), new LoginInfoManager(), new TransactionList());

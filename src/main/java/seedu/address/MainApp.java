@@ -29,14 +29,13 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.init.InventoryListInitializer;
 import seedu.address.logic.Logic;
 import seedu.address.model.LoginInfoManager;
-import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
-import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.InventoryListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.XmlInventoryListStorage;
 import seedu.address.storage.logininfo.JsonLoginInfoStorage;
 import seedu.address.storage.logininfo.LoginInfoStorage;
 import seedu.address.ui.Ui;
@@ -56,7 +55,6 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
-    protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
     protected Stage loginWindow;
@@ -75,12 +73,11 @@ public class MainApp extends Application {
         config = initConfig(appParameters.getConfigPath());
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        LoginInfoStorage loginInfoStorage = new JsonLoginInfoStorage (config.getUserLoginInfoilePath ());
+        LoginInfoStorage loginInfoStorage = new JsonLoginInfoStorage (config.getUserLoginInfoFilePath ());
         loginInfoList = initLoginInfo (loginInfoStorage);
         loginPathPath = config.getLoginPagePath ().toString ();
-
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, loginInfoStorage);
+        InventoryListStorage inventoryListStorage = new XmlInventoryListStorage(userPrefs.getInventoryListFilePath());
+        storage = new StorageManager(inventoryListStorage, userPrefsStorage, loginInfoStorage);
 
         inventoryListInitializer = new InventoryListInitializer (config, storage, userPrefs, loginInfoList);
         initLogging(config);
@@ -178,6 +175,8 @@ public class MainApp extends Application {
 
         return initLoginInfoManager;
     }
+
+
 
     /**
      * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,

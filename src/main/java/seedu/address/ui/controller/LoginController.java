@@ -272,5 +272,4 @@ public class LoginController {
         loginHelpWindow.show ();
     }
 
-
 }

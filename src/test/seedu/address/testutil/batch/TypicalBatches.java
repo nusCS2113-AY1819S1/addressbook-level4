@@ -12,23 +12,23 @@ import seedu.address.model.drink.UniqueBatchList;
  */
 public class TypicalBatches {
 
-    public static final Batch COKE1 = new BatchBuilder().withId("0001").withQuantity("10").withPrice("1.20")
-            .withDate("01/11/2018").build();
-    public static final Batch COKE2 = new BatchBuilder().withId("0002").withQuantity("20").withPrice("1.20")
+    public static final Batch COKE1 = new BatchBuilder().withId("0001").withQuantity("10").
+            withDate("01/11/2018").build();
+    public static final Batch COKE2 = new BatchBuilder().withId("0002").withQuantity("20")
             .withDate("02/11/2018").build();
-    public static final Batch COKE3 = new BatchBuilder().withId("0003").withQuantity("30").withPrice("1.20")
+    public static final Batch COKE3 = new BatchBuilder().withId("0003").withQuantity("30")
             .withDate("03/11/2018").build();
-    public static final Batch COKE4 = new BatchBuilder().withId("0004").withQuantity("40").withPrice("1.20")
+    public static final Batch COKE4 = new BatchBuilder().withId("0004").withQuantity("40")
             .withDate("04/11/2018").build();
-    public static final Batch COKE5 = new BatchBuilder().withId("0005").withQuantity("50").withPrice("1.20")
+    public static final Batch COKE5 = new BatchBuilder().withId("0005").withQuantity("50")
             .withDate("05/11/2018").build();
-    public static final Batch COKE6 = new BatchBuilder().withId("0006").withQuantity("60").withPrice("1.20")
+    public static final Batch COKE6 = new BatchBuilder().withId("0006").withQuantity("60")
             .withDate("30/10/2018").build();
 
     // Manually added
-    public static final Batch COKE7 = new BatchBuilder().withId("0007").withQuantity("70").withPrice("1.20")
+    public static final Batch COKE7 = new BatchBuilder().withId("0007").withQuantity("70")
             .withDate("29/10/2018").build();
-    public static final Batch COKE8 = new BatchBuilder().withId("0008").withQuantity("80").withPrice("1.20")
+    public static final Batch COKE8 = new BatchBuilder().withId("0008").withQuantity("80")
             .withDate("28/10/2018").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}

@@ -8,8 +8,11 @@ import java.time.Instant;
  */
 
 public class BatchId {
-    private final int value;
 
+    public static final String MESSAGE_BATCH_ID_CONSTRAINTS = "Batch Id must be an integer value";
+    public static final String BATCH_ID_VALIDATION_REGEX = "\\d+";
+
+    private final int value;
     /**
      * Constructs an {@code BatchId}.
      *
@@ -26,6 +29,12 @@ public class BatchId {
         return value;
     }
 
+    /**
+     * Returns true if a given string is a valid batch id.
+     */
+    public static boolean isValidBatchId(String test) {
+        return test.matches(BATCH_ID_VALIDATION_REGEX);
+    }
     @Override
     public String toString() {
         return Integer.toString(value);
