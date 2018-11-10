@@ -233,7 +233,7 @@ Admin/User: Selects the event identified by the index number used in the display
 Format: `select INDEX`
 
 ****
-* Selects the event and loads the Google search page the event at the specified `INDEX`.
+* Selects the event and loads the event page of the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -318,6 +318,12 @@ Format: `clear`
 User: Registers for an event, adding current user's username to attendance list. +
 Format: `register INDEX`
 
+****
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* User must not be registered for event.
+****
+
 Examples:
 
 * `list` +
@@ -331,6 +337,12 @@ Registers User to the 1st event in the results of the `find` command.
 
 User: Unregisters for an event, removing current user's username to attendance list. +
 Format: `unregister INDEX`
+
+****
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* User must be already registered for event.
+****
 
 Examples:
 
@@ -350,6 +362,12 @@ Format: `attending`
 
 Admin: Removes a user registered for an event. +
 Format: `removeAttendee INDEX USERNAME`
+
+****
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* User with the specified username must be registered for the event.
+****
 
 Examples:
 
@@ -526,6 +544,9 @@ e.g.`select 2`
 e.g. `register 1`
 * *Unregister* : `unregister INDEX` +
 e.g. `unregister 1`
+* *View Attending* : `attending`
+* *Remove Attendee* : `removeAttendee INDEX USERNAME` +
+e.g. `removeAttendee 1 Peter Parker`
 * *Set reminders* : `setReminder INDEX` +
 e.g. `setReminder 1`
 * *View Reminders* : `reminders` +
