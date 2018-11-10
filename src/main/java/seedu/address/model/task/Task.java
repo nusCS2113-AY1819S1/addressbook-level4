@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Task {
 
-    //private static final String PLACEHOLDER_MODULECODE = "A2113";
+    //private static final Logger logger = LogsCenter.getLogger(Task.class);
     private Deadline deadline;
     private ModuleCode moduleCode;
     private final String title;
@@ -119,17 +119,26 @@ public class Task {
     }
 
     /**
-     * Returns true if both tasks have the same deadline and title.
+     * Returns true if both tasks have the same deadline, title, and module code.
      * This defines a weaker notion of equality between two tasks.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
             return true;
+        } else if (otherTask == null) {
+            return false;
+        } else if (getModuleCode() == null && otherTask.getModuleCode() != null) {
+            return false;
+        } else if (getModuleCode() != null && otherTask.getModuleCode() == null) {
+            return false;
+        } else if (getModuleCode() == null && otherTask.getModuleCode() == null) {
+            return otherTask.getDeadline().equals(getDeadline())
+                    && otherTask.getTitle().equals(getTitle());
+        } else {
+            return otherTask.getDeadline().equals(getDeadline())
+                    && otherTask.getTitle().equals(getTitle())
+                    && otherTask.getModuleCode().equals(getModuleCode());
         }
-        return otherTask != null
-                && otherTask.getDeadline().equals(getDeadline())
-                && otherTask.getTitle().equals(getTitle())
-                && otherTask.getModuleCode().equals(getModuleCode());
     }
     //@@author ChanChunCheong
     /**
@@ -157,7 +166,7 @@ public class Task {
     //@@author ChanChunCheong
     /**
      * Defers the task to a later
-     * @param deadline
+     * @param deferredDays
      * @return the new Task
      */
     public Task deferred(int deferredDays) {
@@ -201,21 +210,35 @@ public class Task {
         }
 
         Task otherTask = (Task) other;
-        return otherTask.getTitle().equals(getTitle())
-                && otherTask.getDeadline().equals(getDeadline())
-                && otherTask.getDescription().equals(getDescription())
-                && otherTask.getPriorityLevel().equals(getPriorityLevel())
-                && otherTask.isCompleted() == isCompleted()
-                && otherTask.getExpectedNumOfHours() == getExpectedNumOfHours()
-                && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours()
-                && otherTask.getModuleCode().equals(getModuleCode());
+        if (getModuleCode() == null && otherTask.getModuleCode() != null) {
+            return false;
+        } else if (getModuleCode() != null && otherTask.getModuleCode() == null) {
+            return false;
+        } else if (getModuleCode() == null && otherTask.getModuleCode() == null) {
+            return otherTask.getTitle().equals(getTitle())
+                    && otherTask.getDeadline().equals(getDeadline())
+                    && otherTask.getDescription().equals(getDescription())
+                    && otherTask.getPriorityLevel().equals(getPriorityLevel())
+                    && otherTask.isCompleted() == isCompleted()
+                    && otherTask.getExpectedNumOfHours() == getExpectedNumOfHours()
+                    && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours();
+        } else {
+            return otherTask.getTitle().equals(getTitle())
+                    && otherTask.getDeadline().equals(getDeadline())
+                    && otherTask.getDescription().equals(getDescription())
+                    && otherTask.getPriorityLevel().equals(getPriorityLevel())
+                    && otherTask.isCompleted() == isCompleted()
+                    && otherTask.getExpectedNumOfHours() == getExpectedNumOfHours()
+                    && otherTask.getCompletedNumOfHours() == getCompletedNumOfHours()
+                    && otherTask.getModuleCode().equals(getModuleCode());
+        }
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(deadline, title, description, priorityLevel, expectedNumOfHours,
-                completedNumOfHours, isCompleted);
+                completedNumOfHours, isCompleted, moduleCode);
     }
 
     @Override

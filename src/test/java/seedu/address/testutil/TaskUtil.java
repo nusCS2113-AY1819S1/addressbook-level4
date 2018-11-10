@@ -26,7 +26,9 @@ public class TaskUtil {
      */
     public static String getTaskDetails(Task task) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_MODULE_CODE + task.getModuleCode().toString() + " ");
+        if (task.getModuleCode() != null) {
+            sb.append(PREFIX_MODULE_CODE + task.getModuleCode().toString() + " ");
+        }
         sb.append(PREFIX_TITLE + task.getTitle() + " ");
         sb.append(PREFIX_DESCRIPTION + task.getDescription() + " ");
         sb.append(PREFIX_PRIORITY + task.getPriorityLevel().priorityLevel + " ");

@@ -42,7 +42,7 @@ public class TaskBuilder {
 
     public TaskBuilder() {
         this.deadline = new Deadline(DEFAULT_DEADLINE);
-        this.moduleCode = new ModuleCode(DEFAULT_MODULECODE);
+        this.moduleCode = null;
         this.title = DEFAULT_TITLE;
         this.description = DEFAULT_DESCRIPTION;
         this.priority = new PriorityLevel(DEFAULT_PRIORITY);

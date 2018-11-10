@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CG2
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_2;
 import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1;
+import static seedu.address.testutil.TypicalTasks.CS2113_TASK_1_WITHOUT_MODULE_CODE;
 import static seedu.address.testutil.TypicalTasks.CS2113_TASK_2;
 
 import java.util.logging.Logger;
@@ -36,6 +37,9 @@ public class TaskTest {
         // different deadline -> returns false
         Task editedTask1 = new TaskBuilder(CS2113_TASK_1).withDeadline(VALID_DEADLINE_1ST_JAN).build();
         assertFalse(CS2113_TASK_1.isSameTask(editedTask1));
+
+        // null module code -> returns false
+        assertFalse(CS2113_TASK_1.isSameTask(CS2113_TASK_1_WITHOUT_MODULE_CODE));
 
         // different title -> returns false
         editedTask1 = new TaskBuilder(CS2113_TASK_1).withTitle(VALID_TITLE_2).build();
