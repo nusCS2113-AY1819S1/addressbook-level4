@@ -12,10 +12,10 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import guitests.guihandles.BookListPanelHandle;
 import org.junit.Test;
 
 import guitests.guihandles.BookCardHandle;
+import guitests.guihandles.BookListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
@@ -68,7 +68,7 @@ public class BookListPanelTest extends GuiUnitTest {
 
     @Test
     public void performanceTest() throws Exception {
-        ObservableList<Book> backingList = createBackingList(10000);
+        ObservableList<Book> backingList = createBackingList(20000);
 
         assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
             initUi(backingList);
@@ -94,15 +94,20 @@ public class BookListPanelTest extends GuiUnitTest {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
         builder.append("<bookinventory>\n");
-        for (int i = 0; i < bookCount; i++) {
-            builder.append("<persons>\n");
-            builder.append("<name>").append(i).append("a</name>\n");
-            builder.append("<phone>000</phone>\n");
-            builder.append("<email>a@aa</email>\n");
-            builder.append("<address>a</address>\n");
-            builder.append("</persons>\n");
+
+        String partialIsbn = "9780000";
+        for (int i = 10000; i < bookCount; i++) {
+            String completeIsbn = partialIsbn + Integer.toString(i);
+            completeIsbn = createValidIsbn13(completeIsbn);
+            builder.append("<books>\n");
+            builder.append("<name>").append("hello</name>\n");
+            builder.append("<isbn>").append(completeIsbn).append("</isbn>\n");
+            builder.append("<price>1</price>\n");
+            builder.append("<cost>1</cost>\n");
+            builder.append("<quantity>1</quantity>\n");
+            builder.append("</books>\n");
         }
-        builder.append("</addressbook>\n");
+        builder.append("</bookinventory>\n");
 
         Path manyBooksFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");
         FileUtil.createFile(manyBooksFile);
@@ -121,5 +126,22 @@ public class BookListPanelTest extends GuiUnitTest {
 
         bookListPanelHandle = new BookListPanelHandle(getChildNode(bookListPanel.getRoot(),
                 BookListPanelHandle.BOOK_LIST_VIEW_ID));
+    }
+
+    /**
+     * Returns a valid 13 digit isbn
+     */
+    public static String createValidIsbn13(String str) {
+        int[] arr = {1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3};
+        int sum = 0;
+        for (int i = 0; i < 12; i++) {
+            sum += arr[i] * (str.charAt(i) - '0');
+        }
+        sum %= 10;
+        if (sum != 0) {
+            sum = 10 - sum;
+        }
+
+        return str + Integer.toString(sum);
     }
 }
