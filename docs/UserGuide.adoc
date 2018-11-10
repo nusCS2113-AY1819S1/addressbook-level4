@@ -382,10 +382,10 @@ for StudentList.txt in the script folder
 ** CommandType is the command that you want to execute E.g add, delete, creategroup, etc
 ****
 
-image::SampleScriptFile.png[width="800"]
 .Example of a ScriptFile for executing the `add` Command
-Please refer to <<Adding a person: `add` `a`>> for more information about `add` command
+image::SampleScriptFile.png[width="800"]
 
+Please refer to <<Adding a person: `add` `a`>> for more information about `add` command
 
 Examples:
 
