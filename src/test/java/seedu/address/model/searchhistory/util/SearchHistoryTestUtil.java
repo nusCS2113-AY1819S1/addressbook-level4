@@ -44,6 +44,9 @@ public class SearchHistoryTestUtil {
         return new KeywordsRecordMock(size);
     }
 
+    public static KeywordsBundle getKeywordsBundleStub() {
+        return new KeywordsBundleStub();
+    }
     /**
      * A Mock of SearchHistoryManager.
      */
