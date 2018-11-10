@@ -113,18 +113,18 @@ class DateTest {
     }
 
     @Test
-    void between_notBetweenTwoDates_returnsFalse() {
+    void isBetween_notBetweenTwoDates_returnsFalse() {
         Date dateToTest = new Date().getDateTwentyNineDaysBefore();
         Date endDate = new Date();
         Date startDate = new Date().getDateSixDaysBefore();
-        assertFalse(dateToTest.between(startDate, endDate));
+        assertFalse(dateToTest.isBetween(startDate, endDate));
     }
 
     @Test
-    void between_isBetweenTwoDates_returnsTrue() {
+    void isBetween_isBetweenTwoDates_returnsTrue() {
         Date dateToTest = new Date().getDateSixDaysBefore();
         Date endDate = new Date();
         Date startDate = new Date().getDateTwentyNineDaysBefore();
-        assertTrue(dateToTest.between(startDate, endDate));
+        assertTrue(dateToTest.isBetween(startDate, endDate));
     }
 }

@@ -2,6 +2,7 @@
 package seedu.address.logic.commands.accountant;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.HYPHEN_DAY;
 import static seedu.address.logic.parser.CliSyntax.HYPHEN_MONTH;
 import static seedu.address.logic.parser.CliSyntax.HYPHEN_WEEK;
 
@@ -15,20 +16,24 @@ import seedu.address.model.drink.Price;
 import seedu.address.model.user.accountant.AccountantModel;
 
 /**
- *  Command to calculate the profit
+ * Command to calculate the profit
  */
 public class AnalyseProfitCommand extends Command {
     public static final String COMMAND_WORD = "profit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Analyse the total profit recorded in Drink I/O."
-            + "optional + " + COMMAND_WORD + " " + HYPHEN_WEEK
-            + "\n or" + COMMAND_WORD + " " + HYPHEN_MONTH;
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Analyse the total revenue recorded in Drink I/O for given period.\n"
+            + " Possible formats:\n"
+            + " * " + COMMAND_WORD + " " + HYPHEN_DAY + ": for a day\n"
+            + " * " + COMMAND_WORD + " " + HYPHEN_WEEK + ": for 7 days\n"
+            + " * " + COMMAND_WORD + " " + HYPHEN_MONTH + ": for 30 days\n";
 
     public static final String MESSAGE_SUCCESS = "Total profit: $%1$s";
 
     private AnalysisPeriodType period;
+
     /**
-     * Creates an AnalyseCostsCommand to compute total costs incurred.
+     * Creates an AnalyseProfitCommand to compute total profits earned.
      */
     public AnalyseProfitCommand(AnalysisPeriodType period) {
         this.period = period;
@@ -40,8 +45,7 @@ public class AnalyseProfitCommand extends Command {
         assert model instanceof AccountantModel;
 
         AccountantModel accountantModel = (AccountantModel) model;
-        //need change this to right model API
-        Price totalProfit = accountantModel.analyseCosts(period);
+        Price totalProfit = accountantModel.analyseProfit(period);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, totalProfit));
     }

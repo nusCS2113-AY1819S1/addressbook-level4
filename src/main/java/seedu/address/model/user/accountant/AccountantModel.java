@@ -9,18 +9,18 @@ import seedu.address.model.drink.Price;
  */
 public interface AccountantModel extends Model {
     /**
-     * Returns the total cost incurred.
+     * Returns the total cost incurred in specified period.
      */
     Price analyseCosts(AnalysisPeriodType period);
 
     /**
-     * Returns the total revenue earned.
+     * Returns the total revenue earned in specified period.
      */
-    //    Price analyseRevenue();
+    Price analyseRevenue(AnalysisPeriodType period);
 
     /**
-     * Returns the total profit earned.
+     * Returns the total profit earned in specified period.
      */
-    //    Price analyseProfit();
+    Price analyseProfit(AnalysisPeriodType period);
 
 }

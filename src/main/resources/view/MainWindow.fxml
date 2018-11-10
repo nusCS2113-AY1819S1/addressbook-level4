@@ -54,11 +54,21 @@
             <StackPane fx:id="drinkListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <StackPane fx:id="drinkDetailPanePlaceholder" prefWidth="340" SplitPane.resizableWithParent="true">
-            <padding>
-              <Insets top="5" right="5" bottom="5" left="5" />
-            </padding>
-          </StackPane>
+          <VBox>
+            <StackPane fx:id="drinkDetailPanePlaceholder" VBox.vgrow="NEVER" prefWidth="340"
+                       SplitPane.resizableWithParent="true">
+              <padding>
+                <Insets top="5" right="5" bottom="5" left="5" />
+              </padding>
+            </StackPane>
+
+              <StackPane fx:id="transactionsPanelPlaceholder" VBox.vgrow="NEVER" prefWidth="340"
+                         SplitPane.resizableWithParent="true">
+                <padding>
+                <Insets top="5" right="5" bottom="5" left="5" />
+              </padding>
+              </StackPane>
+          </VBox>
 
           <VBox fx:id="batchListView" minWidth="280" prefWidth="280" SplitPane.resizableWithParent="false">
             <padding>

@@ -20,6 +20,7 @@ public class ManagerModelManager extends ModelManager implements ManagerModel {
                                TransactionList transactionList) {
         super(inventoryList, userPrefs, loginInfoManager, transactionList);
     }
+
     //===============login command ============================//
     @Override
     public void createNewAccount(UserName userName, Password password, AuthenticationLevel authenticationLevel) {

@@ -3,20 +3,19 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.analysis.Analysis;
-import seedu.address.analysis.AnalysisManager;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.InventoryListChangedEvent;
+import seedu.address.commons.events.model.TransactionListChangedEvent;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.transaction.ReadOnlyTransactionList;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionList;
 import seedu.address.model.user.Password;
@@ -31,22 +30,8 @@ public class ModelManager extends ComponentManager implements Model {
     protected LoginInfoManager loginInfoManager;
     protected final FilteredList<Drink> filteredDrinks;
     protected final InventoryList inventoryList;
+    protected final FilteredList<Transaction> filteredTransactions;
     protected final TransactionList transactionList;
-    protected final Analysis analysis;
-
-    public ModelManager(ReadOnlyInventoryList readOnlyInventoryList, UserPrefs userPrefs) {
-        super();
-        requireAllNonNull(readOnlyInventoryList, userPrefs);
-
-        logger.fine("Initializing with inventory list: " + readOnlyInventoryList + " and user prefs " + userPrefs);
-        System.out.println(readOnlyInventoryList.getDrinkList().toString());
-        inventoryList = new InventoryList(readOnlyInventoryList);
-        filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
-        this.loginInfoManager = new LoginInfoManager();
-        this.transactionList = new TransactionList();
-        analysis = new AnalysisManager(transactionList);
-        // TODO: transaction manager, facade for transactions
-    }
 
     /**
      * Initializes a ModelManager with the given inventoryList, userPrefs and transactionList
@@ -61,10 +46,8 @@ public class ModelManager extends ComponentManager implements Model {
         inventoryList = new InventoryList(readOnlyInventoryList);
         filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
         this.loginInfoManager = loginInfoManager;
-        this.transactionList = transactionList;
-        analysis = new AnalysisManager(transactionList);
-        resetData(readOnlyInventoryList);
-        // TODO: transaction manager, facade for transactions
+        this.transactionList = new TransactionList(transactionList);
+        filteredTransactions = new FilteredList<>(this.transactionList.getTransactionList());
     }
 
 
@@ -98,17 +81,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 
-    /*
-    @Override
-    public void updateDrink(Drink target, Drink editedDrink) {
-        requireAllNonNull(target, editedDrink);
-
-        inventoryList.updateDrink(target, editedDrink);
-        indicateInventoryListChanged();
-    }
-    */
-
-
     //=========== Filtered Drink List Accessors =============================================================
 
     /**
@@ -125,6 +97,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredDrinks.setPredicate(predicate);
     }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -146,17 +119,30 @@ public class ModelManager extends ComponentManager implements Model {
 
     // ========== common commands ====================================
     @Override
-    public ObservableList<Transaction> getTransactionList() {
-        List<Transaction> transactions = transactionList.getTransactions();
-        return FXCollections.unmodifiableObservableList(FXCollections.observableList(transactions));
+    public ReadOnlyTransactionList getTransactionList() {
+        return transactionList;
+    }
+
+    // ========== transactions  =================================================
+
+
+    @Override
+    public ObservableList<Transaction> getFilteredTransactionList() {
+        return FXCollections.unmodifiableObservableList(filteredTransactions);
     }
 
     @Override
-    public String getTransactions() {
-        return transactionList.toString();
+    public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
+        requireNonNull(predicate);
+        filteredTransactions.setPredicate(predicate);
     }
 
-    // ========== Accountant commands =================================================
+    /**
+     * Raises an event to indicate the transactions have changed
+     */
+    protected void indicateTransactionListChanged() {
+        raise(new TransactionListChangedEvent(filteredTransactions));
+    }
 
 
     //=========== Login feature command ==============================================

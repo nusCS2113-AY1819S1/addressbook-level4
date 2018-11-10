@@ -19,5 +19,15 @@
     "authenticationLevel" : {
       "authenticationLevel" : "ADMIN"
     }
+  }, {
+    "userName" : {
+      "userName" : "bla"
+    },
+    "password" : {
+      "password" : "fcZGTS/iFhX76g2TSN0Xwco2kKX6jThyljIAHUj540w="
+    },
+    "authenticationLevel" : {
+      "authenticationLevel" : "ACCOUNTANT"
+    }
   } ]
 }

@@ -75,8 +75,7 @@ public class AdminParser {
         case BuyDrinkCommand.COMMAND_WORD:
             return new BuyDrinkCommandParser ().parse(arguments);
 
-        case ViewTransactionsCommand.COMMAND_WORD:
-            return new ViewTransactionsCommand();
+
 
         // ========= accountant commands ==================
 
@@ -119,6 +118,9 @@ public class AdminParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ViewTransactionsCommand.COMMAND_WORD:
+            return new ViewTransactionsCommand();
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();

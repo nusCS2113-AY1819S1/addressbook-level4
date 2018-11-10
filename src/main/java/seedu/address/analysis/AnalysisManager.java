@@ -1,11 +1,8 @@
 package seedu.address.analysis;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.function.Predicate;
-
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
+import seedu.address.model.drink.NegativePrice;
 import seedu.address.model.drink.Price;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionList;
@@ -13,42 +10,36 @@ import seedu.address.model.transaction.TransactionType;
 
 /**
  * Represents functions to analyse profit, revenue, cost, quantity sold.
+ * Functions are performed on the filteredTransactions list
  */
 public class AnalysisManager extends ComponentManager implements Analysis {
     private TransactionList transactionList;
     private FilteredList<Transaction> filteredTransactions;
 
-    public AnalysisManager(TransactionList transactionList) {
+    public AnalysisManager(TransactionList transactionList, FilteredList<Transaction> filteredTransactions) {
         this.transactionList = transactionList;
-        filteredTransactions = new FilteredList<>(transactionList.getTransactionsAsObservableList());
+        this.filteredTransactions = filteredTransactions;
     }
 
     @Override
     public Price analyseProfit(AnalysisPeriodType period) {
-        updateFilteredTransactionsList(period.periodFilterPredicate());
-        // return transactionList.calculateTotalProfit();
-        return null;
+        return calculateTotalProfit();
     }
 
     @Override
     public Price analyseCost(AnalysisPeriodType period) {
-        updateFilteredTransactionsList(period.periodFilterPredicate());
         return calculateTotalCost();
     }
 
     @Override
     public Price analyseRevenue(AnalysisPeriodType period) {
-        // return transactionList.calculateTotalRevenue();
-        return null;
+        return calculateTotalRevenue();
     }
 
-    private void updateFilteredTransactionsList(Predicate<Transaction> periodPredicate) {
-        requireNonNull(periodPredicate);
-        filteredTransactions.setPredicate(periodPredicate);
-    }
 
     /**
      * Calculates the total cost of all the transactions.
+     *
      * @return total cost incurred for all transactions
      */
     private Price calculateTotalCost() {
@@ -61,4 +52,47 @@ public class AnalysisManager extends ComponentManager implements Analysis {
 
         return new Price(Float.toString(totalCost));
     }
+
+    /**
+     * Calculates the total revenue of the transactions in the {@code filteredTransactions}.
+     *
+     * @return total revenue earned for the transactions listed.
+     */
+    private Price calculateTotalRevenue() {
+        float totalRevenue = 0;
+        for (Transaction transaction : filteredTransactions) {
+            if (transaction.getTransactionType() == TransactionType.SALE) {
+                totalRevenue += transaction.getAmountMoney().getValue();
+            }
+        }
+
+        return new Price(Float.toString(totalRevenue));
+    }
+
+
+    /**
+     * Calculates the total profit from the transactions in the {@code filteredTransactions}.
+     *
+     * @return total profit earned for the transactions listed.
+     */
+    private Price calculateTotalProfit() {
+        float totalCost = 0;
+        float totalRevenue = 0;
+        for (Transaction transaction : filteredTransactions) {
+            if (transaction.getTransactionType() == TransactionType.SALE) {
+                totalRevenue += transaction.getAmountMoney().getValue();
+            } else {
+                totalCost += transaction.getAmountMoney().getValue();
+            }
+        }
+
+        float totalProfit = totalRevenue - totalCost;
+        if (totalProfit < 0) {
+            return new NegativePrice(Float.toString(-1 * totalProfit));
+        } else {
+            return new Price(Float.toString(totalProfit));
+        }
+    }
+
+
 }
