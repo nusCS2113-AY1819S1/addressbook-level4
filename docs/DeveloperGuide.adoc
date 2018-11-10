@@ -746,9 +746,9 @@ image::checkLimitSequenceDiagram.png[width:800]
 // end::checkLimit[]
 // end::limitfeatures[]
 
-// tag::delete_by_date_entry[]
+// tag::deletedate[]
 
-=== Delete By Date Entry
+=== Delete all the record whose date is required
 ==== Current implementation
 The delete by date entry mechanism is facilitated by `ModelManager`.
 It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
@@ -767,10 +767,10 @@ The following sequence diagram shows how the list operation works:
 
 image::DeleteByDateEntrySequenceDiagram.png[width:800]
 
-// end::delete_by_date_entry[]
+// end::deletedate[]
 
 // tag::exportexcel[]
-=== Export into Excel file
+=== Export the records from Financial Planner into the Excel file.
 ==== Current implementation
 The export into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
 
@@ -784,34 +784,7 @@ The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together
 
 After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User's Working Directory.
 
-With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file, containing 2 Excel sheet, namely `RECORD DATA` and `SUMMARY DATA`.
-
-* `RECORD DATA` stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit.
-
-image::Export_Capture1_LinhChi.png[width:800]
-
-* `SUMMARY DATA` stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw a line chart automatically inside the Excel sheet` part for more information]. As you can see in the picture, there are 3 series shown:
-** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
-** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
-** The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).
-
-image::Export_Capture2_LinhChi.png[width:800]
-
-This feature has only one keyword `exportexcel` but implements 6 different argument modes to allow users to access multiple versions of the same command.
-The six argument modes are as listed below:
-
-* *No argument mode* `exportexcel` will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
-
-* *Single argument Date mode* `exportexcel d/DATE` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
-
-* *Dual argument Date mode* `exportexcel d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
-
-* *Single argument Directory Path mode* `exportexcel dir/DIRECTORY_PATH` will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.
-
-* *Single argument Date mode + Single argument Directory path mode* `exportexcel d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
-
-* *Dual argument Date mode + Single argument Directory path mode* `exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.
-+
+With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file.
 
 The mechanism that facilitates these modes can be found in the `ExportExcelCommandParser#parse`. Below is a overview of the mechanism:
 
@@ -839,18 +812,16 @@ The `ExportExcelCommand` has four constructors which makes use of overloading to
 
 The following sequence diagram shows how the list operation works:
 
-image::ExportExcelSequenceDiagram.png[width="800"]
+image::ExportExcelSequenceDiagram.png[width:800]
 
-For simplicity, interactions with the UI is not shown in the diagram above. +
-The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList
-implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
-listener is present in `RecordListPanel` and will update the UI list automatically.
+[NOTE]
+Please note that the `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `exportexcel` command, the Excel file created will not be deleted.
 
 // end::exportexcel[]
 
 // tag::import[]
 
-=== Import from Excel file
+=== Import the record data from the Excel file to the Financial Planner
 ==== Current implementation
 The import from Excel file mechanism is facilitated by `ExcelUtil`, the utility created to handle all method relating to Excel.
 
@@ -893,18 +864,7 @@ The mechanism that facilitates these modes can be found in the `ImportExcelComma
 .. The String associated with `n/` is optionally entered.
 .. Please note that User have to add the post-fix `.xlsx` at the end to indicate this is a Excel file.
 
-When performing `import` command to import all the records data from the Excel file to the Financial Planner, user should take note that there are some constraints which helps the `import` command performs smoothly.
-
-* The excel file can have multiple sheets, containing records data. The starting row of the table does not have to be first row of the sheet. This also applies to the column.
-* There can be blank row blending in the table, but there must be *no* blank column.
-* The First row of the table *must* have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will *not* be read.
-* The information of NAME, DATE, MONEY columns should be fully filled, while the TAGS columns is optionally filled.
-* Each tag should be separated by ... (3 *consecutive* dots). Beside ... , numbers and alphabet character, there should be no other character.
-
-The picture below shows a good example for the Excel Sheet.
-
-image::Export_Capture1_LinhChi.png[width:800]
-
+. If the string associated with `n/`, method `ExcelUtil#setPathFile` is called to combine the name of the Excel file to the string associated with `dir/`.
 
 The `ImportExcelCommand` has only one constructor.
 
@@ -912,12 +872,12 @@ The `ImportExcelCommand` has only one constructor.
 
 The following sequence diagram shows how the list operation works:
 
-image::ImportExcelSequenceDiagram.png[width="800"]
+image::ImportExcelSequenceDiagram.png[width:800]
 
 // end::import[]
 
 // tag::archive[]
-=== Archive into Excel file
+=== Archive the record data from Financial Planner to the Excel file
 ==== Current implementation
 The archive into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
 
@@ -931,36 +891,9 @@ The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together
 
 After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User's Working Directory.
 
-With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file, containing 2 Excel sheet, namely `RECORD DATA` and `SUMMARY DATA`.
-
-* `RECORD DATA` stores all the data of record the user want to archive, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit.
-
-image::Export_Capture1_LinhChi.png[width:800]
-
-* `SUMMARY DATA` stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw a line chart automatically inside the Excel sheet` part for more information]. As you can see in the picture, there are 3 series shown:
-** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
-** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
-** The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).
+With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file.
 
 After records are archived to Excel file, `ModelManager#deleteListRecord` is called to delete the archived records.If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Financial Planner and the message, which states records have been deleted.
-
-image::Export_Capture2_LinhChi.png[width:800]
-
-This feature has only one keyword `archive` but implements 6 different argument modes to allow users to access multiple versions of the same command.
-The six argument modes are as listed below:
-
-* *No argument mode* `archive` will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
-
-* *Single argument Date mode* `archive d/DATE` will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
-
-* *Dual argument Date mode* `archive d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically User's Working Directory*.
-
-* *Single argument Directory Path mode* `archive dir/DIRECTORY_PATH` will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the chosen Directory Path.
-
-* *Single argument Date mode + Single argument Directory path mode* `archive d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.
-
-* *Dual argument Date mode + Single argument Directory path mode* `archive d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.
-+
 
 The mechanism that facilitates these modes can be found in the `ArchiveCommandParser#parse`. Below is a overview of the mechanism:
 
@@ -988,12 +921,10 @@ The `ArchiveCommand` has four constructors which makes use of overloading to red
 
 The following sequence diagram shows how the list operation works:
 
-image::ArchiveSequenceDiagram.png[width="800"]
+image::ArchiveSequenceDiagram.png[width:800]
 
-For simplicity, interactions with the UI is not shown in the diagram above. +
-The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList
-implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
-listener is present in `RecordListPanel` and will update the UI list automatically.
+[NOTE]
+Please note that the `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `archive` command, the records archived will be added again back to the Financial Planner but the Excel file created will not be deleted.
 
 // end::archive[]
 
@@ -1005,18 +936,6 @@ listener is present in `RecordListPanel` and will update the UI list automatical
 This feature will automatically uses the the summary data from the `SUMMARY DATA` sheet in the Excel sheet after the command `archive` or `export_excel` is called.
 
 The feature mechanism is facilitated by `ExcelUtil`, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with `ExcelUtil#drawChart`.
-
-As you can see the screenshot below, in the `SUMMARY DATA` sheet (refer to `Export into Excel file` or `Archive into Excel file` feature), next to the summary table:
-
-* The size of the line chart (based on default column width and default row height) is:
-** The width is 15 columns
-** The height is 30 rows.
-* On the top left of the chart, the legend shows 3 lines, namely Income, Outcome, and Net.
-** The first blue line shows the Income based on Date.
-** The second orange line shows the Outcome based on Date
-** The third grey line shows the Net (total of income and outcome) based on Date.
-
-image::Export_Capture2_LinhChi.png[width:800]
 
 // end::draw_line_chart[]
 
