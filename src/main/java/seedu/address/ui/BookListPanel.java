@@ -11,12 +11,12 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.BookPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.book.Book;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of books.
  */
 public class BookListPanel extends UiPart<Region> {
     private static final String FXML = "BookListPanel.fxml";
@@ -33,7 +33,7 @@ public class BookListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<Book> bookList) {
         bookListView.setItems(bookList);
-        bookListView.setCellFactory(listView -> new PersonListViewCell());
+        bookListView.setCellFactory(listView -> new BookListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -42,7 +42,7 @@ public class BookListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in book list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new BookPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
@@ -66,7 +66,7 @@ public class BookListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code BookCard}.
      */
-    class PersonListViewCell extends ListCell<Book> {
+    class BookListViewCell extends ListCell<Book> {
         @Override
         protected void updateItem(Book book, boolean empty) {
             super.updateItem(book, empty);

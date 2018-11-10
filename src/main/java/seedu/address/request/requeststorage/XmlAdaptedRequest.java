@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.request.requeststorage;
 
 import java.util.Objects;
 
@@ -7,8 +7,8 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Quantity;
-import seedu.address.model.request.Email;
-import seedu.address.model.request
+import seedu.address.request.Email;
+import seedu.address.request
         .Request;
 
 /**
@@ -95,9 +95,9 @@ public class XmlAdaptedRequest {
             return false;
         }
 
-        XmlAdaptedRequest otherPerson = (XmlAdaptedRequest) other;
-        return Objects.equals(isbn, otherPerson.isbn)
-                && Objects.equals(quantity, otherPerson.quantity)
-                && Objects.equals(email, otherPerson.email);
+        XmlAdaptedRequest otherRequest = (XmlAdaptedRequest) other;
+        return Objects.equals(isbn, otherRequest.isbn)
+                && Objects.equals(quantity, otherRequest.quantity)
+                && Objects.equals(email, otherRequest.email);
     }
 }

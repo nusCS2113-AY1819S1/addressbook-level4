@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.request.Email;
+import seedu.address.request.Email;
 import seedu.address.testutil.Assert;
 
 public class EmailTest {

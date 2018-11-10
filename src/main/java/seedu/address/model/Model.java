@@ -82,12 +82,12 @@ public interface Model {
     /**
      * Restores the model's BookInventory to its previous state.
      */
-    void undoAddressBook();
+    void undoBookInventory();
 
     /**
      * Restores the model's BookInventory to its previously undone state.
      */
-    void redoAddressBook();
+    void redoBookInventory();
 
     /**
      * Saves the current BookInventory state for undo/redo.

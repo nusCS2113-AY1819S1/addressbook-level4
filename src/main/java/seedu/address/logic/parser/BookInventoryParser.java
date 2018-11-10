@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javafx.fxml.FXML;
-import javafx.scene.layout.StackPane;
-import seedu.address.logic.Logic;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CheckCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -30,13 +27,10 @@ import seedu.address.logic.commands.SellCommand;
 import seedu.address.logic.commands.StockCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewStatisticCommand;
-
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import seedu.address.model.request.DeleteRequestCommand;
-import seedu.address.model.request.RequestCommand;
-import seedu.address.model.request.ToggleRequestCommand;
-import seedu.address.ui.BookListPanel;
+import seedu.address.request.requestcommands.DeleteRequestCommand;
+import seedu.address.request.requestcommands.RequestCommand;
+import seedu.address.request.requestcommands.ToggleRequestCommand;
 
 /**
  * Parses user input.
@@ -51,11 +45,7 @@ public class BookInventoryParser {
     private static ArrayList<String> commandList;
     private static DiceCoefficient diceCoefficient;
     private static final double DICE_COEFFICIENT_THRESHOLD = 0.5;
-    @FXML
-    private StackPane personListPanelPlaceholder;
 
-    private Logic logic;
-    private BookListPanel bookListPanel;
 
     /**
      * Parses user input into command for execution.

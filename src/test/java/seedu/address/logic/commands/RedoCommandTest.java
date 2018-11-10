@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
+import static seedu.address.logic.commands.CommandTestUtil.deleteFirstBook;
 import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 
 import org.junit.Before;
@@ -22,25 +22,25 @@ public class RedoCommandTest {
     @Before
     public void setUp() {
         // set up of both models' undo/redo history
-        deleteFirstPerson(model);
-        deleteFirstPerson(model);
-        model.undoAddressBook();
-        model.undoAddressBook();
+        deleteFirstBook(model);
+        deleteFirstBook(model);
+        model.undoBookInventory();
+        model.undoBookInventory();
 
-        deleteFirstPerson(expectedModel);
-        deleteFirstPerson(expectedModel);
-        expectedModel.undoAddressBook();
-        expectedModel.undoAddressBook();
+        deleteFirstBook(expectedModel);
+        deleteFirstBook(expectedModel);
+        expectedModel.undoBookInventory();
+        expectedModel.undoBookInventory();
     }
 
     @Test
     public void execute() {
         // multiple redoable states in model
-        expectedModel.redoAddressBook();
+        expectedModel.redoBookInventory();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single redoable state in model
-        expectedModel.redoAddressBook();
+        expectedModel.redoBookInventory();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no redoable state in model

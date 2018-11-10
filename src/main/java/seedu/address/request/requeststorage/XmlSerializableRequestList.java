@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.request.requeststorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,17 +7,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.request.ReadOnlyRequests;
-import seedu.address.model.request.Request;
-import seedu.address.model.request.RequestList;
+import seedu.address.request.ReadOnlyRequests;
+import seedu.address.request.Request;
+import seedu.address.request.RequestList;
 
 /**
  * An Immutable RequestList that is serializable to XML format
  */
 @XmlRootElement(name = "requestlist")
 public class XmlSerializableRequestList {
-
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate request(s).";
 
     @XmlElement
     private List<XmlAdaptedRequest> requests;
@@ -48,9 +46,6 @@ public class XmlSerializableRequestList {
         RequestList requestList = new RequestList();
         for (XmlAdaptedRequest p : requests) {
             Request request = p.toModelType();
-            if (requestList.hasRequest(request)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
             requestList.addRequest(request);
         }
         return requestList;

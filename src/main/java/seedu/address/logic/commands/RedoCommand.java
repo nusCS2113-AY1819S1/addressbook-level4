@@ -24,7 +24,7 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.redoAddressBook();
+        model.redoBookInventory();
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

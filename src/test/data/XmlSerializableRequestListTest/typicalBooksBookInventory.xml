@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- BookInventory save file which contains the same Book values as in TypicalPersons#getTypicalAddressBook() -->
+<!-- BookInventory save file which contains the same Book values as in TypicalBooks#getTypicalBookInventory() -->
 <bookinventory>
     <books>
         <name>Alice Pauline</name>
