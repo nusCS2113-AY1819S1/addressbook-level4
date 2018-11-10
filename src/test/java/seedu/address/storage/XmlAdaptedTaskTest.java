@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.OVERFLOW_INT;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_HOURS;
 import static seedu.address.storage.XmlAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalTasks.CS2102_HOMEWORK;
 
@@ -17,6 +19,8 @@ public class XmlAdaptedTaskTest {
     private static final String INVALID_DEADLINE = "#$@(";
     private static final String INVALID_PRIORITY_LEVEL = "midhigh";
     private static final String INVALID_EXPECTED_NUM_OF_HOURS = "one";
+    private static final String ZERO_EXPECTED_NUM_OF_HOURS = "0";
+    private static final String OVERFLOW_EXPECTED_NUM_OF_HOURS = Long.toString((long) OVERFLOW_INT + 1);
     private static final String INVALID_MODULE_CODE = "2113CS";
     //private static final String INVALID_TAG = "#friend";
 
@@ -85,8 +89,23 @@ public class XmlAdaptedTaskTest {
         XmlAdaptedTask task =
                 new XmlAdaptedTask(VALID_DEADLINE, VALID_MODULECODE, VALID_TITLE, VALID_DESCRIPTION,
                         VALID_PRIORITY_LEVEL, INVALID_EXPECTED_NUM_OF_HOURS);
-        String expectedMessage = "Expected number of hours have to be an integer";
-        Assert.assertThrows(NumberFormatException.class, task::toModelType);
+        Assert.assertThrows(IllegalValueException.class, MESSAGE_INVALID_HOURS, task::toModelType);
+    }
+
+    @Test
+    public void toModelType_zeroExpectedNumOfHours_throwsIllegalValueException() {
+        XmlAdaptedTask task =
+                new XmlAdaptedTask(VALID_DEADLINE, VALID_MODULECODE, VALID_TITLE, VALID_DESCRIPTION,
+                        VALID_PRIORITY_LEVEL, ZERO_EXPECTED_NUM_OF_HOURS);
+        Assert.assertThrows(IllegalValueException.class, MESSAGE_INVALID_HOURS, task::toModelType);
+    }
+
+    @Test
+    public void toModelType_overflowExpectedNumOfHours_throwsIllegalValueException() {
+        XmlAdaptedTask task =
+                new XmlAdaptedTask(VALID_DEADLINE, VALID_MODULECODE, VALID_TITLE, VALID_DESCRIPTION,
+                        VALID_PRIORITY_LEVEL, OVERFLOW_EXPECTED_NUM_OF_HOURS);
+        Assert.assertThrows(IllegalValueException.class, MESSAGE_INVALID_HOURS, task::toModelType);
     }
 
     @Test
