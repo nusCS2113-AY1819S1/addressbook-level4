@@ -233,7 +233,10 @@ public abstract class EventManagerSystemTest {
                     + "&email="
                     + selectedCardHandle.getEmail().replaceAll("@", "%40")
                     + "&venue="
-                    + selectedCardHandle.getVenue().replaceAll(" ", "%20").replaceAll("#", "%23")
+                    + selectedCardHandle.getVenue()
+                            .replaceAll(" ", "%20")
+                            .replaceAll("#", "%23")
+                            .replaceAll(",", "%2C")
                     + "&dateTime="
                     + PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime)
                             .replaceAll(" ", "%20")
@@ -249,7 +252,10 @@ public abstract class EventManagerSystemTest {
                             .replaceAll("[{]", "%3C")
                             .replaceAll("[}]", "%3E")
                             .replaceAll("/", "%2F")
-                            .replaceAll(" ", "%20"));
+                            .replaceAll(" ", "%20")
+                            .replaceAll(":", "%3A")
+                            .replaceAll("[(]", "%28")
+                            .replaceAll("[)]", "%29"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }

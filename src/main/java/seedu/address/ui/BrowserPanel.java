@@ -56,15 +56,16 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Translates a string into {@code application/x-www-form-urlencoded}
      * format using UTF_8 encoding scheme. Spaces are replaced with '%20' instead of '+'.
+     * Returns an empty string if UnsupportedEncodingException is encountered.
      */
     public String encodeString(String arg) {
-        String encoded = "";
         try {
-            encoded = URLEncoder.encode(arg, StandardCharsets.UTF_8.toString()).replaceAll("\\+", "%20");
+            String encodedString = URLEncoder.encode(arg, StandardCharsets.UTF_8.toString()).replaceAll("\\+", "%20");
+            return encodedString;
         } catch (UnsupportedEncodingException uee) {
             logger.info("Encoding not supported.");
+            return "";
         }
-        return encoded;
     }
 
     /**
@@ -88,9 +89,13 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Loads a HTML file with variables passed into it
      */
-    private void loadEventPage(Event event) throws MalformedURLException {
-        URL searchPage = new URL(formatEventPageUrl(event));
-        loadPage(searchPage.toExternalForm());
+    private void loadEventPage(Event event) {
+        try {
+            URL searchPage = new URL(formatEventPageUrl(event));
+            loadPage(searchPage.toExternalForm());
+        } catch (MalformedURLException mue) {
+
+        }
     }
 
     public void loadPage(String url) {
@@ -113,8 +118,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleEventSelectionChangedEvent(EventSelectionChangedEvent event)
-            throws MalformedURLException {
+    private void handleEventSelectionChangedEvent(EventSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadEventPage(event.getNewSelection());
     }
