@@ -3,8 +3,6 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalUsers.AMY;
-import static seedu.address.testutil.TypicalUsers.BOB;
-import static seedu.address.testutil.TypicalUsers.DEFAULT_USER;
 import static seedu.address.testutil.TypicalUsers.JOHN;
 import static seedu.address.testutil.TypicalUsers.RICK;
 
