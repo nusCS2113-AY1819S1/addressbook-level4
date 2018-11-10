@@ -42,5 +42,6 @@
         <endTime>12:00</endTime>
         <location>Test Location 5</location>
         <attendees>johnd@example.com</attendees>
+        <attendees>alice@example.com</attendees>
     </events>
 </eventlist>

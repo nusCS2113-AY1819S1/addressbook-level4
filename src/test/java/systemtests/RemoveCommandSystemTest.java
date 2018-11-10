@@ -1,6 +1,7 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.testutil.TypicalEvents.EVENT_3;
 import static seedu.address.testutil.TypicalEvents.EVENT_5;
@@ -65,7 +66,7 @@ public class RemoveCommandSystemTest extends AddressBookSystemTest {
         assertTrue(indexPerson.getZeroBased() < getModel().getFilteredPersonList().size());
         command = " " + RemoveCommand.COMMAND_WORD + "  " + indexPerson.getOneBased() + " "
                 + PREFIX_FROM + " " + indexEvent.getOneBased();
-        updatedEvent = new EventBuilder(EVENT_5).withAttendee().build();
+        updatedEvent = new EventBuilder(EVENT_5).withAttendee(VALID_EMAIL_ALICE).build();
         assertCommandSuccess(command, indexPerson, indexEvent, updatedEvent);
 
         /* Case: filtered person list, event index within bounds of event list
