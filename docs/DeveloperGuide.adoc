@@ -423,9 +423,18 @@ The Comand Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `Rep
 
 Given below is an example usage scenario and how the Comments mechanism behaves at each step.
 
-Step 1. The user launches the application, logs in and click on an event or types `select INDEX` into the CLI. The comment section will be seen along with other details in the `BrowserPanel`
+Step 1. The user launches the application, logs in and click on an event or types `select INDEX` into the CLI. The comment section will be seen along with other details in the `BrowserPanel`. 
 
 Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. `AddCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into `eventmanager.xml`
+
+The following sequence diagram shows how the AddCommentCommand operation works:
+
+.Sequence Diagram for AddCommentCommand
+image::addCommentSequenceDiagram.png[width="800"]
+
+Detailed description of diagram: The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user.
+
+The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 
 Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply the comment in step 2. `ReplyCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to reply comment with "Athletic attire", into the comment section and stores the comment section into `eventmanager.xml`
 
@@ -439,13 +448,6 @@ Step 5. If the admin wants to reset or make a new comment section of an event, t
 * In the case a false indexed event is not present, the functions will return an invalid index message.
 * In the case a false comment section line is given, the functions will return an invalid line message.
 ====
-
-The following sequence diagram shows how the AddCommentCommand operation works:
-
-.Sequence Diagram for AddCommentCommand
-image::addCommentSequenceDiagram.png[width="800"]
-
-The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 
 [NOTE]
 If the user uses the `find` command, the following functions will follow the indexing of the `find` command.
