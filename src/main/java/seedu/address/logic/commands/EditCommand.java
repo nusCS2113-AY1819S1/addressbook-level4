@@ -53,6 +53,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_QUANTITY_PRESENT = "Quantity Field Present.\n" + "Unable to edit Book";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the BookInventory.";
+    public static final String COMMAND_SYNTAX = COMMAND_WORD
+            + " " + PREFIX_NAME
+            + " " + PREFIX_ISBN
+            + " " + PREFIX_PRICE
+            + " " + PREFIX_COST
+            + " " + PREFIX_TAG;
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;
