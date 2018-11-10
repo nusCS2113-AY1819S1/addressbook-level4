@@ -125,7 +125,7 @@ public class UniqueBookList implements Iterable<Book> {
     public Queue<String> getIsbnList(String isbnText) {
         for (Book book : internalList) {
             String isbn = book.getIsbn().value;
-            if (isbn.contains(isbnText)) {
+            if (isbn.startsWith(isbnText)) {
                 isbnList.add(isbn);
             }
         }

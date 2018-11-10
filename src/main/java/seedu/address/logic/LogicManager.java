@@ -17,13 +17,13 @@ import seedu.address.logic.parser.DiceCoefficient;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
+import seedu.address.request.Request;
 import seedu.address.request.requestcommands.CommandSecondary;
 import seedu.address.request.requestcommands.DeleteRequestCommand;
-import seedu.address.request.Request;
 import seedu.address.request.requestcommands.RequestCommand;
-import seedu.address.request.requestparser.RequestListParser;
-import seedu.address.request.requestmodel.RequestModel;
 import seedu.address.request.requestcommands.UndoRequestCommand;
+import seedu.address.request.requestmodel.RequestModel;
+import seedu.address.request.requestparser.RequestListParser;
 
 /**
  * The main LogicManager of the app.
