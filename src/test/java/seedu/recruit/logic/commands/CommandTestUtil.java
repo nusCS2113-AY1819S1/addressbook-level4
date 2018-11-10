@@ -14,8 +14,6 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;

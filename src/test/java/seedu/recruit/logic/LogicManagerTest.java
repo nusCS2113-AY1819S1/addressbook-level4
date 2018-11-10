@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

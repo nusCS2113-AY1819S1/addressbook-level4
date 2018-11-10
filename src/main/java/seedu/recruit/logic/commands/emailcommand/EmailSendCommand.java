@@ -71,10 +71,10 @@ public class EmailSendCommand extends Command {
     protected static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_COMPOSE);
     protected static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
-    private static ArrayList<Candidate> candidateRecipients;
-    private static ArrayList<JobOffer> jobOfferRecipients;
-    private static ArrayList<Candidate> candidateContents;
-    private static ArrayList<JobOffer> jobOfferContents;
+    protected static ArrayList<Candidate> candidateRecipients;
+    protected static ArrayList<JobOffer> jobOfferRecipients;
+    protected static ArrayList<Candidate> candidateContents;
+    protected static ArrayList<JobOffer> jobOfferContents;
 
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs)
@@ -134,40 +134,37 @@ public class EmailSendCommand extends Command {
     }
 
     /**
-     * Generates bodytext of the email.
+     * Generates body text of the email if recipients are candidates
      * @param emailUtil
      * @return bodytext String
      */
-    public String generateContent(EmailUtil emailUtil) {
-        StringBuilder bodyText;
-        if (emailUtil.isAreRecipientsCandidates()) {
-            bodyText = new StringBuilder(emailUtil.getEmailSettings().getBodyTextCandidateAsRecipient());
-            //contents are companies
-            for (JobOffer jobOfferContent : jobOfferContents) {
-                bodyText.append('\n').append("Company: ").append(jobOfferContent.getCompanyName().toString());
-                bodyText.append('\n').append("Job: ").append(jobOfferContent.getJob().toString());
-                bodyText.append('\n').append("Salary offered: ").append(jobOfferContent.getSalary().toString());
-                bodyText.append('\n');
-            }
-        } else {
-            ArrayList<String> jobNames = new ArrayList<>();
-            for (JobOffer jobOfferRecipient : jobOfferRecipients) {
-                jobNames.add(jobOfferRecipient.getJob().toString());
-            }
-
-            bodyText = new StringBuilder(emailUtil.getEmailSettings().getBodyTextCompanyAsRecipient()
-                    + jobNames.toString() + '\n');
-            //contents are candidates
-            for (Candidate candidateContent : candidateContents) {
-                bodyText.append('\n').append("Name: ").append(candidateContent.getName().toString());
-                bodyText.append('\n').append("Age: ").append(candidateContent.getAge().toString());
-                bodyText.append('\n').append("Education: ").append(candidateContent.getEducation().toString());
-                bodyText.append('\n').append("Email: ").append(candidateContent.getEmail().toString());
-                bodyText.append('\n').append("Phone Number: ").append(candidateContent.getPhone().toString());
-                bodyText.append('\n');
-            }
+    public String generateContentWhenRecipientsAreCandidates(EmailUtil emailUtil) {
+        StringBuilder bodyText = new StringBuilder(emailUtil.getEmailSettings().getBodyTextCandidateAsRecipient());
+        //contents are companies
+        for (JobOffer jobOfferContent : jobOfferContents) {
+            bodyText.append('\n').append("Company: ").append(jobOfferContent.getCompanyName().toString());
+            bodyText.append('\n').append("Job: ").append(jobOfferContent.getJob().toString());
+            bodyText.append('\n').append("Salary offered: ").append(jobOfferContent.getSalary().toString());
+            bodyText.append('\n');
         }
         return bodyText.toString();
+    }
+
+    /**
+     * Generates candidate details when candidates are contents
+     * @return
+     */
+    public String generateCandidateContentDetails() {
+        StringBuilder output = new StringBuilder();
+        for (Candidate candidateContent : candidateContents) {
+            output.append('\n').append("Name: ").append(candidateContent.getName().toString());
+            output.append('\n').append("Age: ").append(candidateContent.getAge().toString());
+            output.append('\n').append("Education: ").append(candidateContent.getEducation().toString());
+            output.append('\n').append("Email: ").append(candidateContent.getEmail().toString());
+            output.append('\n').append("Phone Number: ").append(candidateContent.getPhone().toString());
+            output.append('\n');
+        }
+        return output.toString();
     }
 
     /**
