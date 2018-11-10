@@ -442,6 +442,7 @@ Format: +
 ****
 
 Once the command has been executed, a panel will appear showing the summary table containing data that is relevant in the range. +
+The table entries are sorted according to either date, month or category depending on the mode used in ascending order. +
 At the same time, currently selected record will be unselected to reduce confusion for the user.
 
 [NOTE]

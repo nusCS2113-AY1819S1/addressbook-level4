@@ -1996,11 +1996,12 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Listing with valid prefix and 1st date earlier than 2nd date
 .. Test case: Enter `list d/1-1-2018 12-12-2018`
-.. Expected: System will list all records equal to or between the 2 dates.
+.. Expected: System will list all records equal to or between the 2 dates
+
 === Viewing summary
 . Entering `summary` command without modes
 .. Test case: Enter `summary abcd`
-.. Expected: System would throw an error saying invalid command and show what modes the command can support.
+.. Expected: System would throw an error saying invalid command and provide the error message for the generic summary command
 
 . Entering `summary` command with modes but no arguments
 .. Test case: Enter `summary date` or `summary month` or `summary category`
@@ -2011,13 +2012,21 @@ the command in that specific mode.
 .. for e.g. `summary date` will give you an error message specific to viewing summary by date and `summary month` will give you
 and error message specific to viewing summary by month.
 
-. Entering `summary` command with modes and invalid prefixes
+. Entering `summary` command with modes and invalid prefixes or no prefix
 .. Test case: Enter `summary date m/` or `summary month m/` or `summary category m/`
-.. Expected: System would throw error saying invalid command and provide a different error message depending on the mode similar to
-the case with modes but no arguments.
+.. Expected: System would throw error saying invalid command and provide the error message for the generic summary command
 
-. Entering `summary` command with modes and invalid arguments
-.. Test case: Enter `summary date d/1--1` or `summary month d/1---1` or summary category d/apr-2018`
+. Entering `summary` command with modes and date prefix but only 1 argument
+.. Test case: Enter `summary date d/1-1-2018` or `summary month d/1-1` or `summary category d/1-1-1`
+.. Expected:
+.. System would throw an error saying invalid command.
+.. System will provide a different error message depending on the mode and provide more information about the format of
+the command in that specific mode.
+.. for e.g. `summary date` will give you an error message specific to viewing summary by date and `summary month` will give you
+and error message specific to viewing summary by month.
+
+. Entering `summary` command with modes and 2 arguments with either invalid
+.. Test case: Enter `summary date d/1--1 1--1` or `summary month d/1---1 1--1` or summary category d/apr-2018 1--1`
 .. Expected:
 .. System would throw error regarding the constraints of dates/months depending on the mode. If mode is `date` or `category`, the error message is
 about the date. If mode is `month`, the error message will be about the month.
@@ -2026,7 +2035,7 @@ about the date. If mode is `month`, the error message will be about the month.
 . View summary of range with no records inside
 .. Prerequisite: Choose 2 dates/months such that no records are inside that range and select a record in the list.
 .. Test case: Execute the summary command.
-.. Expected: The table should be empty and record should be unselected.
+.. Expected: The table should be empty with just an entry saying total is 0 for all the money columns and record should be unselected.
 
 . View summary of range with some records inside
 .. Prerequisite: Choose 2 dates/months such that records have these characteristics and select a record in the list.
