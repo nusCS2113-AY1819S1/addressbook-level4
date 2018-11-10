@@ -22,7 +22,7 @@ import seedu.recruit.model.company.Company;
 
 public class TypicalCompanies {
     public static final Company AUDI = new CompanyBuilder().withCompanyName("Audi AG")
-            .withAddress("281 Alexandra Rd, Singapore 159938").withEmail("customerservice@myaudiworld.sg")
+            .withAddress("281 Alexandra Rd, Singapore 159938").withEmail("customerservice@audiworld.sg")
             .withPhone("65133674").build();
     public static final Company BENTLEY = new CompanyBuilder().withCompanyName("Bentley Motors Limited")
             .withAddress("45 Leng Kee Rd, Singapore 159103").withEmail("customerservice@bentley.sg")
@@ -59,6 +59,21 @@ public class TypicalCompanies {
 
     public static List<Company> getTypicalCompanies() {
         return new ArrayList<>(Arrays.asList(AUDI, BENTLEY, CHEVROLET, DODGE));
+    }
+
+    /**
+     * Returns an {@code CompanyBook} with all the typical companies in a reversed order.
+     */
+    public static CompanyBook getReversedCompanyBook() {
+        CompanyBook cb = new CompanyBook();
+        for (Company company : getReversedCompanies()) {
+            cb.addCompany(company);
+        }
+        return cb;
+    }
+
+    public static List<Company> getReversedCompanies() {
+        return new ArrayList<>(Arrays.asList(DODGE, CHEVROLET, BENTLEY, AUDI));
     }
 
 }
