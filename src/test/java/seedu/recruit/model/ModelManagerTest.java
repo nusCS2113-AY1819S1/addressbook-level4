@@ -12,8 +12,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.recruit.testutil.RecruitBookBuilder;
 import seedu.recruit.logic.parser.exceptions.ParseException;
+import seedu.recruit.testutil.RecruitBookBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -69,7 +69,7 @@ public class ModelManagerTest {
 
         // different candidateBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentCandidateBook, new CompanyBook(), userPrefs)));
-        
+
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
 
