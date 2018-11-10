@@ -2,10 +2,13 @@ package seedu.address.model.drink;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Drink}'s {@code Quantity} is less than the quantity given.
+ */
 public class QuantityCompareLessPredicate implements Predicate<Drink> {
     public final Quantity quantity;
 
-    public QuantityCompareLessPredicate(Quantity quantity){
+    public QuantityCompareLessPredicate(Quantity quantity) {
         this.quantity = quantity;
     }
 

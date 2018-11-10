@@ -12,10 +12,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.drink.Date;
 import seedu.address.model.drink.Price;
 import seedu.address.model.drink.Quantity;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
@@ -149,6 +145,9 @@ public class ParserUtil {
         return new Quantity(trimmedQuantity);
     }
 
+    /**
+     * Parses {@code String date} into a {@code Date}.
+     */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();

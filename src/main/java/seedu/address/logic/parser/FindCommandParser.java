@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_MULTIPLE_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
@@ -10,7 +11,13 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.drink.*;
+import seedu.address.model.drink.Date;
+import seedu.address.model.drink.DateCompareBeforePredicate;
+import seedu.address.model.drink.Name;
+import seedu.address.model.drink.NameContainsKeywordsPredicate;
+import seedu.address.model.drink.Quantity;
+import seedu.address.model.drink.QuantityCompareLessPredicate;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -31,11 +38,19 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
+        if ((argMultimap.getValue(PREFIX_DRINK_NAME).isPresent() && argMultimap.getValue(PREFIX_DATE).isPresent())
+            || (argMultimap.getValue(PREFIX_DRINK_NAME).isPresent()
+                && argMultimap.getValue(PREFIX_QUANTITY).isPresent())
+            || (argMultimap.getValue(PREFIX_QUANTITY).isPresent() && argMultimap.getValue(PREFIX_DATE).isPresent())) {
+            throw new ParseException(String.format(MESSAGE_MULTIPLE_PREFIX, FindCommand.MESSAGE_USAGE));
+        }
+
+
         if (argMultimap.getValue(PREFIX_DRINK_NAME).isPresent()) {
             Name drinkName = ParserUtil.parseDrinkName(argMultimap.getValue(PREFIX_DRINK_NAME).get());
             String[] nameKeywords = drinkName.toString().trim().split("\\s+");
             System.out.println("Name");
-            return new FindCommand(new NameContainsKeywordsPredicate (Arrays.asList(nameKeywords)));
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             Date dateBefore = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
             System.out.println("Date");

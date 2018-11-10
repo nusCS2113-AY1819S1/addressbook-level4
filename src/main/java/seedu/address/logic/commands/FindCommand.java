@@ -6,7 +6,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_NO_DRINKS;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.drink.*;
+import seedu.address.model.drink.DateCompareBeforePredicate;
+import seedu.address.model.drink.NameContainsKeywordsPredicate;
+import seedu.address.model.drink.QuantityCompareLessPredicate;
 
 
 /**

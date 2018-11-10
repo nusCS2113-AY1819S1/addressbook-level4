@@ -2,6 +2,9 @@ package seedu.address.model.drink;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Drink}'s {@code Date} is earlier than the date given.
+ */
 public class DateCompareBeforePredicate implements Predicate<Drink> {
     public final Date date;
 
