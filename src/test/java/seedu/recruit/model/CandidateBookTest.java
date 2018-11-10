@@ -63,26 +63,26 @@ public class CandidateBookTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        candidateBook.hasPerson(null);
+        candidateBook.hasCandidate(null);
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(candidateBook.hasPerson(ALICE));
+        assertFalse(candidateBook.hasCandidate(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        candidateBook.addPerson(ALICE);
-        assertTrue(candidateBook.hasPerson(ALICE));
+        candidateBook.addCandidate(ALICE);
+        assertTrue(candidateBook.hasCandidate(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        candidateBook.addPerson(ALICE);
+        candidateBook.addCandidate(ALICE);
         Candidate editedAlice = new CandidateBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(candidateBook.hasPerson(editedAlice));
+        assertTrue(candidateBook.hasCandidate(editedAlice));
     }
 
     @Test

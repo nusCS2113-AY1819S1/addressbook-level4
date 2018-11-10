@@ -14,12 +14,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
-import seedu.recruit.logic.commands.RedoCandidateBookCommand;
+import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.SelectCandidateCommand;
-import seedu.recruit.logic.commands.UndoCandidateBookCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.model.Model;
 
-@Ignore("Works locally only?")
+@Ignore
 public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
     @Test
     public void select() {
@@ -37,13 +37,13 @@ public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, personCount);
 
         /* Case: undo previous selection -> rejected */
-        command = UndoCandidateBookCommand.COMMAND_WORD;
-        String expectedResultMessage = UndoCandidateBookCommand.MESSAGE_FAILURE;
+        command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: redo selecting last card in the list -> rejected */
-        command = RedoCandidateBookCommand.COMMAND_WORD;
-        expectedResultMessage = RedoCandidateBookCommand.MESSAGE_FAILURE;
+        command = RedoCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: select the middle card in the candidate list -> selected */
@@ -108,8 +108,8 @@ public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
      * 2. Command box has the default style class.<br>
      * 3. Result display box displays the success message of executing select command with the
      * {@code expectedSelectedCardIndex} of the selected candidate.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
-     * 5. Selected card is at {@code expectedSelectedCardIndex} and the browser url is updated accordingly.<br>
+     * 4. {@code Storage} and {@code CandidateDetailsPanel} remain unchanged.<br>
+     * 5. Selected card is at {@code expectedSelectedCardIndex} and the candidate details are updated accordingly.<br>
      * 6. Status bar remains unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code CandidateBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
@@ -140,8 +140,8 @@ public class SelectCandidateCommandSystemTest extends CandidateBookSystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
-     * 5. Browser url, selected card and status bar remain unchanged.<br>
+     * 4. {@code Storage} and {@code CandidateDetailsPanel} remain unchanged.<br>
+     * 5. Selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code CandidateBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see CandidateBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)

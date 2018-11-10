@@ -4,6 +4,7 @@ import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.recruit.commons.util.EmailUtil.EMAIL_ADD_COMMAND;
 import static seedu.recruit.commons.util.EmailUtil.EMAIL_BACK_COMMAND;
 import static seedu.recruit.commons.util.EmailUtil.EMAIL_NEXT_COMMAND;
+import static seedu.recruit.commons.util.EmailUtil.EMAIL_PREVIEW_COMMAND;
 import static seedu.recruit.commons.util.EmailUtil.EMAIL_SEND_COMMAND;
 
 import seedu.recruit.commons.util.EmailUtil;
@@ -158,7 +159,7 @@ public class EmailParser {
             case EMAIL_BACK_COMMAND:
                 return new EmailSendBackCommand();
 
-            case "preview":
+            case EMAIL_PREVIEW_COMMAND:
                 return new EmailSendPreviewCommand();
 
             default:

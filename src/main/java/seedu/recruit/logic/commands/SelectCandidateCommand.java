@@ -7,10 +7,10 @@ import java.util.List;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
+import seedu.recruit.commons.events.ui.FocusOnCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
-import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -78,17 +78,18 @@ public class SelectCandidateCommand extends Command {
 
             Company selectedCompany = SelectCompanyCommand.getSelectedCompany();
             JobOffer selectedJobOffer = SelectJobCommand.getSelectedJobOffer();
-            LogicManager.setLogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE);
+            EventsCenter.getInstance().post(new ChangeLogicStateEvent(ShortlistCandidateCommand.COMMAND_LOGIC_STATE));
+
             return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS,
-                    selectedCandidate.getName())
+                    targetIndex.getOneBased())
                     + String.format(MESSAGE_CONFIRMATION_FOR_SHORTLIST,
                     selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value)
                     + ShortlistCandidateCommand.MESSAGE_USAGE);
         }
 
-        EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
+        EventsCenter.getInstance().post(new FocusOnCandidateBookRequestEvent());
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, selectedCandidate.getName()));
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
     }
 
     @Override

@@ -42,14 +42,18 @@ import seedu.recruit.model.joboffer.JobOffer;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    public static final String WELCOME_AUTHENTICATE_MESSAGE = "RecruitBook is password-protected.\n"
+            + "Enter admin password to continue.";
+
+    public static final String WELCOME_MESSAGE = "Welcome to RecruitBook!\n"
+            + "You have not set a password for RecruitBook! Enter 'setPW' to set a password!";
+
     //Tracks whether an instance of MainWindow exists
     private static boolean exists = false;
 
-    private static final String WELCOME_AUTHENTICATE_MESSAGE = "RecruitBook is password-protected.\n"
-            + "Enter admin password to continue.";
-
     private static final String FXML = "MainWindow.fxml";
     private static String currentBook = "candidateBook";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
     private ObservableList<Candidate> masterCandidateList = FXCollections.observableArrayList();
     private ObservableList<JobOffer> masterJobList = FXCollections.observableArrayList();
@@ -57,7 +61,6 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private Config config;
     private Logic logic;
     private UserPrefs prefs;
@@ -161,7 +164,8 @@ public class MainWindow extends UiPart<Stage> {
         masterListPlaceholder.getChildren().add(getMasterCandidateListPanel().getRoot());
         panelViewPlaceholder.getChildren().add(getCandidateDetailsPanel().getRoot());
 
-        ResultDisplay resultDisplay = new ResultDisplay(WELCOME_AUTHENTICATE_MESSAGE);
+        ResultDisplay resultDisplay = prefs.getHashedPassword() == null
+                ? new ResultDisplay(WELCOME_MESSAGE) : new ResultDisplay(WELCOME_AUTHENTICATE_MESSAGE);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(
@@ -406,10 +410,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     public static boolean isExisting() {
         return exists;
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
     @Subscribe

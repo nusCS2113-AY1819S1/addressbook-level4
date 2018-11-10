@@ -1,8 +1,5 @@
 package seedu.recruit.logic;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-
 import javafx.collections.ObservableList;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -23,7 +20,7 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText)
-            throws CommandException, ParseException, IOException, GeneralSecurityException;
+            throws CommandException, ParseException;
 
     /** Returns an unmodifiable view of the filtered list of candidates */
     ObservableList<Candidate> getFilteredPersonList();

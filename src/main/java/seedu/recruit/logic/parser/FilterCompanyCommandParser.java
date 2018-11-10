@@ -55,8 +55,7 @@ public class FilterCompanyCommandParser implements Parser<FilterCompanyCommand> 
         }
 
         if (keywordsList.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCompanyCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + FilterCompanyCommand.MESSAGE_USAGE);
         }
 
         return new FilterCompanyCommand(new CompanyContainsFilterKeywordsPredicate(keywordsList));

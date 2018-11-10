@@ -2,18 +2,12 @@ package seedu.recruit.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.recruit.commons.core.LogsCenter;
-import seedu.recruit.commons.events.ui.CompanyJobListDetailsPanelSelectionChangedEvent;
-import seedu.recruit.commons.events.ui.JumpToCompanyJobListRequestEvent;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
@@ -26,21 +20,20 @@ public class MasterJobListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<JobOffer> jobListView;
-    @FXML
-    private HBox cardPane;
 
     public MasterJobListPanel(ObservableList<JobOffer> jobList) {
         super(FXML);
         setConnectionsForJobList(jobList);
-        registerAsAnEventHandler(this);
+        //registerAsAnEventHandler(this);
     }
 
     private void setConnectionsForJobList(ObservableList<JobOffer> jobList) {
         jobListView.setItems(jobList);
         jobListView.setCellFactory(listView -> new JobListViewCell());
-        setEventHandlerForJobListSelectionChangeEvent();
+        //setEventHandlerForJobListSelectionChangeEvent();
     }
 
+    /**
     private void setEventHandlerForJobListSelectionChangeEvent() {
         jobListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
@@ -49,11 +42,11 @@ public class MasterJobListPanel extends UiPart<Region> {
                         raise(new CompanyJobListDetailsPanelSelectionChangedEvent(newValue));
                     }
                 });
-    }
+    } */
 
     /**
      * Scrolls to the {@code JobCard} at the {@code index} and selects it.
-     */
+
     private void scrollToJobCard(int index) {
         Platform.runLater(() -> {
             jobListView.scrollTo(index);
@@ -72,7 +65,7 @@ public class MasterJobListPanel extends UiPart<Region> {
                                                                                event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 "Selection Changed to " + event.getNewSelection().getJob().value));
-    }
+    } */
 
     /**
      * Custom {@code ListCell} that displays the graphics of a job using a {@code JobCard}.

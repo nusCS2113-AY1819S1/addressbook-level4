@@ -1,11 +1,14 @@
 package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
+import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_JOBOFFERS;
 
 import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -50,9 +53,13 @@ public class DeleteShortlistedCandidateInitializationCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        model.updateFilteredCompanyJobList(PREDICATE_SHOW_ALL_JOBOFFERS);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         deleteStatus = true;
-        LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
+        EventsCenter.getInstance()
+                .post(new ChangeLogicStateEvent(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE));
+
         return new CommandResult(MESSAGE_ENTERING_DELETE_PROCESS + MESSAGE_NEXT_STEP
                 + SelectCompanyCommand.MESSAGE_USAGE);
     }

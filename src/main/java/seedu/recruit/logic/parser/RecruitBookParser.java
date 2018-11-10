@@ -8,8 +8,10 @@ import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.util.EmailUtil;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.AddCandidateCommand;
 import seedu.recruit.logic.commands.AddCompanyCommand;
@@ -38,8 +40,7 @@ import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.HistoryCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.ListCompanyCommand;
-import seedu.recruit.logic.commands.RedoCandidateBookCommand;
-import seedu.recruit.logic.commands.RedoCompanyBookCommand;
+import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
@@ -54,8 +55,7 @@ import seedu.recruit.logic.commands.StartAddCompanyCommand;
 import seedu.recruit.logic.commands.StartAddJobCommand;
 import seedu.recruit.logic.commands.StartSetPasswordCommand;
 import seedu.recruit.logic.commands.SwitchBookCommand;
-import seedu.recruit.logic.commands.UndoCandidateBookCommand;
-import seedu.recruit.logic.commands.UndoCompanyBookCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailContentsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailInitialiseCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailRecipientsCommand;
@@ -104,7 +104,6 @@ public class RecruitBookParser {
                     throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
                             + CancelCommand.MESSAGE_USAGE);
                 }
-                EmailSendCommand.resetRecipientsAndContents();
                 return new CancelCommand(state.nextCommand);
             }
 
@@ -139,7 +138,8 @@ public class RecruitBookParser {
                 return new DeleteShortlistedCandidateParser().parseCommand(commandWord, arguments, state);
 
             default:
-                LogicManager.setLogicState("primary");
+                EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
+
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } else {
@@ -286,17 +286,11 @@ public class RecruitBookParser {
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
 
-            case UndoCandidateBookCommand.COMMAND_WORD:
-                return new UndoCandidateBookCommand();
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
 
-            case RedoCandidateBookCommand.COMMAND_WORD:
-                return new RedoCandidateBookCommand();
-
-            case UndoCompanyBookCommand.COMMAND_WORD:
-                return new UndoCompanyBookCommand();
-
-            case RedoCompanyBookCommand.COMMAND_WORD:
-                return new RedoCompanyBookCommand();
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
 
             case EmailInitialiseCommand.COMMAND_WORD:
                 if (!arguments.isEmpty()) {

@@ -9,7 +9,23 @@
 
 == Overview
 
-RecruitBook is a desktop application created for job agent. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+RecruitBook is a project created for CS2113T, Object Oriented Programming and Software Engineering, in the first semester of the second year of my undergraduate studies in the National University of Singapore.
+
+It was created with reference from https://se-edu.github.io/addressbook-level4/[SE-EDU's AddressBook 4] in a group of 5 using GitHub as our collaboration medium.
+
+The project involved turning the AddressBook application into RecruitBook, an application which aids Job Agents find suitable candidates for companies and vice versa.
+My role in this project was to develop the email feature.
+
+Apart from simply developing the software, I have picked up many hard skills from working on this project such as using proper coding standards, using continuous integrations, writing tests, using JavaFX, and many software engineering principles
+such as the Law of Demeter and Brooks' Law.
+
+I have also picked up soft skills while working with my team such as using the "I message" to get my points across without sounding rude,
+meeting skills to include everybody in the discussion so as to get everybody's input to prevent future misunderstandings,
+and when conflicts arise, which is unavoidable, conflict resolution skills where I have to be careful in my choice of words
+so as to solve the conflict professionally, while mitigating damage where possible.
+
+RecruitBook is a desktop application created for job agents. The user interacts with it using a command line interface, and it has a GUI created with JavaFX. It is written in Java, and has about 10,000 lines of code. +
+
 
 == Summary of contributions
 
@@ -18,12 +34,12 @@ RecruitBook is a desktop application created for job agent. The user interacts w
 ** Justification: It is imperative for a job agent to be able to inform candidates about job offers or inform companies about candidates. This feature allows emails to be done automatically without any hassle.
 ** Highlights: The email will be automatically generated, all the user needs to do is select the recipients and contents of the email. There is a preview feature built into the command to allow the user to double check the recipients and contents of the email. Subject text and body text of the email is also customisable.
 
-* *Code contributed*: [https://github.com/CS2113-AY1819S1-F09-4/main/pulls?utf8=%E2%9C%93&q=is%3Apr+author%3Aandrewome+is%3Amerged[Functional code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=andrewome[Functional code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
+*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
 ** Enhancements to existing features:
 *** https://github.com/CS2113-AY1819S1-F09-4/main/pull/76[Updated project website]
 ** Community:
@@ -51,6 +67,8 @@ include::../DeveloperGuide.adoc[tag=email]
 
 == Overview
 
+PartyCards was a project created for CP2106, Independent Software Development Project (Orbital), during the summer after my first year in the National University of Singapore.
+The project was created from scratch in a group of 2, using GitHub as our collaboration medium.
 PartyCards is a web-application that allows up to 4 users play card games. Card games include: Cheat, Taiti, Bridge and Hearts. PartyCards was written with ReactJS frontend and Node.js backend.
 
 == Summary of contributions

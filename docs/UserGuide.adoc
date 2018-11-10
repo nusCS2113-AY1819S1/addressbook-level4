@@ -414,14 +414,23 @@ Format: `deleteShortlist`
 . *Initialization*
 .. Type `deleteShortlist` and press kbd:[Enter] to initialize the delete process.
 . *Choose the company*
-.. Type `selectCompany` `<INDEX>` and press kbd:[Enter] to select the company.
+.. Type `selectC` `<INDEX>` and press kbd:[Enter] to select the company.
+[TIP]
+You can use `sortC`, `findC` or `filterC` command to easily locate the company before selecting it.
+
 . *Choose the job offer*
-.. Type `selectJob` `<INDEX>` and press kbd:[Enter] to select the job offer.
-. *Choose the candidate to delete*
+.. Type `selectj` `<INDEX>` and press kbd:[Enter] to select the job offer.
+[TIP]
+You can use `sortj` command to easily locate the job offer before selecting it.
+
+. *Choose the candidate to delete from the list of shortlisted candidates*
 .. Type `delete` `<INDEX>` and press kbd:[Enter] to select the shortlisted candidate to delete.
 
 [NOTE]
 Index must be an index number shown in the displayed list.
+Deleting a shortlisted candidate does not delete the candidate completely. It removes the candidate from
+the list of shortlisted candidates for that particular job offer.
+
 // end::deleteShortlist[]
 
 // tag::list[]
@@ -481,6 +490,7 @@ Format: `selectj` `<INDEX>`
 
 . Selects the job offer with the specified INDEX
 . This index must be an index number shown in the displayed job offer list.
+
 // end::select[]
 
 // tag::sort[]
@@ -559,11 +569,20 @@ Format: `shortlist`
 . *Initialization*
 .. Type `shortlist` and press kbd:[Enter] to initialize the shortlist process.
 . *Choose the company*
-.. Type `selectCompany` `<INDEX>` and press kbd:[Enter] to select the company.
+.. Type `selectC` `<INDEX>` and press kbd:[Enter] to select the company.
+[TIP]
+You can use `sortC`, `findC` or `filterC` command to easily locate the company before selecting it.
+
 . *Choose the job offer*
-.. Type `selectJob` `<INDEX>` and press kbd:[Enter] to select the job offer.
+.. Type `selectj` `<INDEX>` and press kbd:[Enter] to select the job offer.
+[TIP]
+You can use `sortj` command to easily locate the job offer before selecting it.
+
 . *Choose the candidate*
-.. Type `select` `<INDEX>` and press kbd:[Enter] to select the candidate to shortlist.
+.. Type `selectc` `<INDEX>` and press kbd:[Enter] to select the candidate to shortlist.
+[TIP]
+You can use `sortc`, `findc` or `filterc` command to easily locate the candidate before selecting.
+
 . *Confirm the details*
 .. Type `confirm` and press kbd:[Enter] to confirm.
 
@@ -713,9 +732,9 @@ _{explain how the user can enable/disable data encryption}_
 |   *Delete Shortlisted Candidate* | `deleteShortlist`
 |	*List all Candidates* | `listc`
 |   *List all Companies and all Job Offers* | `listC`
-|   *Select Candidate* | `select` `<INDEX>`
-|   *Select Company* | `selectCompany` `<INDEX>`
-|   *Select Job Offer* | `selectJob` `<INDEX>`
+|   *Select Candidate* | `selectc` `<INDEX>`
+|   *Select Company* | `selectC` `<INDEX>`
+|   *Select Job Offer* | `selectj` `<INDEX>`
 |	*Find* | `find <tag>/KEYWORD [MORE_KEYWORDS]` +
 |	*Filter* | `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
 
@@ -725,10 +744,8 @@ _{explain how the user can enable/disable data encryption}_
 |   *Shortlist Candidate* | `shortlist`
 |   *Email* | `email`
 |   *Cancel* | `cancel`
-|	*Clear CandidateBook* | `clearc`
 |	*Clear CompanyBook* | `clearC`
-|	*Undo CandidateBook* | `undoc`
-|	*Undo CompanyBook* | `undoC`
-|	*Redo CandidateBook* | `redoc`
-|	*Redo CompanyBook* | `redoC`
+|	*Clear CandidateBook* | `clearc`
+|	*Undo CompanyBook* | `undo`
+|	*Redo CandidateBook* | `redo`
 |	*Exit* | `exit`

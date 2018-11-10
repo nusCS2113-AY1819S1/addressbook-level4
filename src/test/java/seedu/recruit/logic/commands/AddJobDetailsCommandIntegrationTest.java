@@ -2,7 +2,7 @@ package seedu.recruit.logic.commands;
 
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.getTypicalCompanyBook;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +41,7 @@ public class AddJobDetailsCommandIntegrationTest {
         Model expectedModel = new ModelManager(new CandidateBook(), getTypicalCompanyBook(), new UserPrefs());
         expectedModel.addCompany(new CompanyBuilder().withCompanyName("Dummy").build());
         expectedModel.addJobOffer(jobOffer);
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(new AddJobDetailsCommand(jobOffer), model, commandHistory,
                 String.format(AddJobDetailsCommand.MESSAGE_SUCCESS, jobOffer), expectedModel);

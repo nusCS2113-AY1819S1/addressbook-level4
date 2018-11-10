@@ -12,14 +12,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.recruit.testutil.RecruitBookBuilder;
 import seedu.recruit.logic.parser.exceptions.ParseException;
-import seedu.recruit.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private ModelManager modelManager = new ModelManager();
+
+    // ================================== Candidate Book functions ====================================== //
 
     @Test
     public void hasCandidate_nullCandidate_throwsNullPointerException() {
@@ -47,7 +49,7 @@ public class ModelManagerTest {
     @Test
     public void equals() throws ParseException {
         CandidateBook candidateBook = new
-                AddressBookBuilder().withCandidate(ALICE).withCandidate(BENSON).buildCandidateBook();
+                RecruitBookBuilder().withCandidate(ALICE).withCandidate(BENSON).buildCandidateBook();
         CandidateBook differentCandidateBook = new CandidateBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -67,13 +69,7 @@ public class ModelManagerTest {
 
         // different candidateBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentCandidateBook, new CompanyBook(), userPrefs)));
-
-        // different filteredList -> returns false
-        // String keyword = "n/" + ALICE.getName().fullName;
-        // modelManager.updateFilteredCandidateList(
-        //      new CandidateContainsFindKeywordsPredicateBuilder(keyword).getCandidatePredicate());
-        // assertFalse(modelManager.equals(new ModelManager(candidateBook, new CompanyBook(), userPrefs)));
-
+        
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
 
@@ -86,18 +82,24 @@ public class ModelManagerTest {
     // ================================== Shortlist functions ====================================== //
 
     @Test
-    public void shortlistCandidateToJobOffer_candidateInAddressBook_returnsTrue() {
+    public void shortlistCandidateToJobOffer_candidateSuccessfullyShortlisted_returnsTrue() {
 
         //modelManager.shortlistCandidateToJobOffer(ALICE,);
     }
 
     @Test
-    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsTrue() {
+    public void shortlistCandidateToJobOffer_candidateAlreadyShortlisted_returnsFalse() {
+
+        //modelManager.shortlistCandidateToJobOffer(ALICE,);
+    }
+
+    @Test
+    public void deleteShortlistedCandidateFromJobOffer_noCandidatesInShortlistedCandidateList_returnsFalse() {
 
     }
 
     @Test
-    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsFalse() {
+    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsTrue() {
 
     }
 }

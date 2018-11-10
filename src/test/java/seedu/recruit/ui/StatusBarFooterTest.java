@@ -2,7 +2,7 @@ package seedu.recruit.ui;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.recruit.testutil.EventsUtil.postNow;
-import static seedu.recruit.testutil.TypicalCompanies.AUDI;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.AUDI;
 import static seedu.recruit.testutil.TypicalPersons.ALICE;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_INITIAL;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_UPDATED;
@@ -26,7 +26,7 @@ import org.junit.Test;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
-import seedu.recruit.testutil.AddressBookBuilder;
+import seedu.recruit.testutil.RecruitBookBuilder;
 
 public class StatusBarFooterTest extends GuiUnitTest {
 
@@ -36,10 +36,10 @@ public class StatusBarFooterTest extends GuiUnitTest {
     private static final Path COMPANY_RELATIVE_PATH = Paths.get(".");
 
     private static final CandidateBookChangedEvent EVENT_STUB_CANDIDATE = new CandidateBookChangedEvent(
-            new AddressBookBuilder().withCandidate(ALICE).buildCandidateBook());
+            new RecruitBookBuilder().withCandidate(ALICE).buildCandidateBook());
 
     private static final CompanyBookChangedEvent EVENT_STUB_COMPANY = new CompanyBookChangedEvent(
-            new AddressBookBuilder().withCompany(AUDI).buildCompanyBook());
+            new RecruitBookBuilder().withCompany(AUDI).buildCompanyBook());
 
     private static final int INITIAL_TOTAL_PERSONS = 0;
     private static final int INITIAL_TOTAL_COMPANIES = 0;

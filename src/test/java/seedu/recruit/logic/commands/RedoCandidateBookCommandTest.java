@@ -25,29 +25,29 @@ public class RedoCandidateBookCommandTest {
         // set up of both models' undo/redo history
         deleteFirstPerson(model);
         deleteFirstPerson(model);
-        model.undoCandidateBook();
-        model.undoCandidateBook();
+        model.undoRecruitBook();
+        model.undoRecruitBook();
 
         deleteFirstPerson(expectedModel);
         deleteFirstPerson(expectedModel);
-        expectedModel.undoCandidateBook();
-        expectedModel.undoCandidateBook();
+        expectedModel.undoRecruitBook();
+        expectedModel.undoRecruitBook();
     }
 
     @Test
     public void execute() {
         // multiple redoable states in model
-        expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.redoRecruitBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single redoable state in model
-        expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.redoRecruitBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no redoable state in model
-        assertCommandFailure(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_FAILURE);
     }
 }

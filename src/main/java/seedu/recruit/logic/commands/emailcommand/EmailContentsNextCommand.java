@@ -2,9 +2,10 @@ package seedu.recruit.logic.commands.emailcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -19,23 +20,27 @@ public class EmailContentsNextCommand extends EmailContentsCommand {
         EmailUtil emailUtil = model.getEmailUtil();
 
         //Check if content array is empty, if it is, do not allow to move on to next stage
-        boolean isEmpty = false;
-
-
-        if (emailUtil.isAreRecipientsCandidates() && emailUtil.getJobOffers().size() == 0) {
-            isEmpty = true;
-        }
-
-        if (!emailUtil.isAreRecipientsCandidates() && emailUtil.getCandidates().size() == 0) {
-            isEmpty = true;
-        }
-
-        if (isEmpty) {
+        if (isEmpty(emailUtil)) {
             return new CommandResult(NEXT_CONTENTS_ERROR_NO_CONTENTS + EmailContentsCommand.MESSAGE_USAGE);
         } else {
-            LogicManager.setLogicState(EmailSendCommand.COMMAND_LOGIC_STATE);
+            EventsCenter.getInstance().post(new ChangeLogicStateEvent(EmailSendCommand.COMMAND_LOGIC_STATE));
 
             return new CommandResult(EmailSendCommand.MESSAGE_USAGE);
         }
+    }
+
+    /**
+     * checks if contents array is empty
+     * @param emailUtil
+     * @return boolean value to see if contents array is empty
+     */
+    private boolean isEmpty(EmailUtil emailUtil) {
+        if (emailUtil.isAreRecipientsCandidates() && emailUtil.getJobOffers().size() == 0) {
+            return true;
+        }
+        if (!emailUtil.isAreRecipientsCandidates() && emailUtil.getCandidates().size() == 0) {
+            return true;
+        }
+        return false;
     }
 }

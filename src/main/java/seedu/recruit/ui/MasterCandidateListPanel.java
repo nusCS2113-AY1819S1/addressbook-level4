@@ -2,18 +2,12 @@ package seedu.recruit.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.recruit.commons.core.LogsCenter;
-import seedu.recruit.commons.events.ui.CandidateDetailsPanelSelectionChangedEvent;
-import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
@@ -26,9 +20,6 @@ public class MasterCandidateListPanel extends UiPart<Region> {
     @FXML
     private ListView<Candidate> candidateListView;
 
-    @FXML
-    private HBox cardPane;
-
     public MasterCandidateListPanel(ObservableList<Candidate> candidateList) {
         super(FXML);
         setConnectionsForCandidateList(candidateList);
@@ -38,9 +29,10 @@ public class MasterCandidateListPanel extends UiPart<Region> {
     private void setConnectionsForCandidateList(ObservableList<Candidate> candidateList) {
         candidateListView.setItems(candidateList);
         candidateListView.setCellFactory(listView -> new CandidateListViewCell());
-        setEventHandlerForCandidateListSelectionChangeEvent();
+        //setEventHandlerForCandidateListSelectionChangeEvent();
     }
 
+    /**
     private void setEventHandlerForCandidateListSelectionChangeEvent() {
         candidateListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
@@ -49,11 +41,11 @@ public class MasterCandidateListPanel extends UiPart<Region> {
                         raise(new CandidateDetailsPanelSelectionChangedEvent(newValue));
                     }
                 });
-    }
+    } */
 
     /**
      * Scrolls to the {@code CandidateCard} at the {@code index} and selects it.
-     */
+
     private void scrollToCandidateCard(int index) {
         Platform.runLater(() -> {
             candidateListView.scrollTo(index);
@@ -71,7 +63,7 @@ public class MasterCandidateListPanel extends UiPart<Region> {
     private void handleCandidateDetailsPanelSelectionChangedEvent(CandidateDetailsPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 "Selection Changed to " + event.getNewSelection().getName().fullName));
-    }
+    } */
 
     /**
      * Custom {@code ListCell} that displays the graphics of a Candidate using a {@code CandidateCard}.

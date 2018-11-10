@@ -1,7 +1,5 @@
 package seedu.recruit.logic;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.LogsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.CompanyListDetailsPanelSelectionChangedEvent;
 import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.commons.util.EmailUtil;
@@ -56,7 +55,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText)
-            throws CommandException, ParseException, IOException, GeneralSecurityException {
+            throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
             EmailUtil emailUtil = model.getEmailUtil();
@@ -70,12 +69,8 @@ public class LogicManager extends ComponentManager implements Logic {
         }
     }
 
-    public static void setLogicState(String newState) {
-        state = new LogicState(newState);
-    }
-
-    public static LogicState getState() {
-        return state;
+    private void setLogicState(LogicState newState) {
+        state = newState;
     }
 
     @Override
@@ -120,6 +115,11 @@ public class LogicManager extends ComponentManager implements Logic {
         model.updateFilteredCompanyJobList(new JobOfferContainsFindKeywordsPredicate(keywordsList));
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
                 model.getFilteredCompanyJobList().size()));
+    }
+
+    @Subscribe
+    private void handleChangeLogicStateEvent(ChangeLogicStateEvent event) {
+        setLogicState(event.newState);
     }
 
 }

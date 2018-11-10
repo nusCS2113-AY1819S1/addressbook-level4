@@ -2,26 +2,27 @@ package seedu.recruit.testutil;
 
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.CompanyBook;
+import seedu.recruit.model.RecruitBook;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building CandidateBook objects.
  * Example usage: <br>
- *     {@code CandidateBook ab = new AddressBookBuilder().withCandidate("John", "Doe").buildCandidateBook();}
- *     {@code CompanyBook abc = new AddressBookBuilder().withCompany("BMW", "AUDI").buildCompanyBook();}
+ *     {@code CandidateBook ab = new RecruitBookBuilder().withCandidate("John", "Doe").buildCandidateBook();}
+ *     {@code CompanyBook abc = new RecruitBookBuilder().withCompany("BMW", "AUDI").buildCompanyBook();}
  */
-public class AddressBookBuilder {
+public class RecruitBookBuilder {
 
     private CandidateBook candidateBook;
     private CompanyBook companyBook;
 
-    public AddressBookBuilder() {
+    public RecruitBookBuilder() {
         candidateBook = new CandidateBook();
         companyBook = new CompanyBook();
     }
 
-    public AddressBookBuilder(CandidateBook candidateBook, CompanyBook companyBook) {
+    public RecruitBookBuilder(CandidateBook candidateBook, CompanyBook companyBook) {
         this.candidateBook = candidateBook;
         this.companyBook = companyBook;
     }
@@ -29,15 +30,15 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code Candidate} to the {@code CandidateBook} that we are building.
      */
-    public AddressBookBuilder withCandidate(Candidate candidate) {
-        candidateBook.addPerson(candidate);
+    public RecruitBookBuilder withCandidate(Candidate candidate) {
+        candidateBook.addCandidate(candidate);
         return this;
     }
 
     /**
      * Adds a new {@code Company} to the {@code CompanyBook} that we are building.
      */
-    public AddressBookBuilder withCompany(Company company) {
+    public RecruitBookBuilder withCompany(Company company) {
         companyBook.addCompany(company);
         return this;
     }
@@ -48,5 +49,9 @@ public class AddressBookBuilder {
 
     public CompanyBook buildCompanyBook() {
         return companyBook;
+    }
+
+    public RecruitBook buildRecruitBook() {
+        return new RecruitBook(candidateBook, companyBook);
     }
 }

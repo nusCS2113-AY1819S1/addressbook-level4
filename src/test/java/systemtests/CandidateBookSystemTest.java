@@ -3,6 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.recruit.ui.MainWindow.WELCOME_MESSAGE;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_INITIAL;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_UPDATED;
 import static seedu.recruit.ui.StatusBarFooter.TOTAL_CANDIDATES_STATUS;
@@ -36,7 +37,7 @@ import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
-import seedu.recruit.testutil.TypicalCompanies;
+import seedu.recruit.testutil.TypicalCompaniesAndJobOffers;
 import seedu.recruit.testutil.TypicalPersons;
 import seedu.recruit.ui.CommandBox;
 
@@ -89,7 +90,7 @@ public abstract class CandidateBookSystemTest {
      * Returns the data to be loaded into the file in {@link #getCompanyDataFileLocation()}.
      */
     protected CompanyBook getInitialCompanyData() {
-        return TypicalCompanies.getTypicalCompanyBook();
+        return TypicalCompaniesAndJobOffers.getTypicalCompanyBook();
     }
 
     /**
@@ -309,8 +310,7 @@ public abstract class CandidateBookSystemTest {
      */
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
-        assertEquals("RecruitBook is password-protected.\n"
-                + "Enter admin password to continue.", getResultDisplay().getText());
+        assertEquals(WELCOME_MESSAGE, getResultDisplay().getText());
         assertListMatching(getCandidateDetailsPanel(), getModel().getFilteredCandidateList());
         assertEquals(Paths.get(".").resolve(testApp.getCandidateStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
