@@ -182,7 +182,7 @@ Format: `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_T
 ****
 * DATE needs to be in YYYY-MM-DD format
 * TIME needs to be in 00:00 format
-* START_TIME must not be later than END_TIME
+* START_TIME must be earlier than END_TIME
 ****
 
 [NOTE]
@@ -203,7 +203,7 @@ Creates an event named Board Meeting at Conference Room 1 at 2018-09-28, 12:00 t
 Priority level: `default`,`manager`
 
 Edits the details of the events: +
-Format: `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME [e/END_TIME]`
+Format: `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME] [e/END_TIME]`
 
 ****
 * Edits the event at the specified `EVENT_INDEX`. The index refers to the index number shown in the displayed event list. The
@@ -211,10 +211,11 @@ index *must be a positive integer* 1, 2, 3, ... +
 * At least one of the optional fields must be provided.
 * DATE needs to be in YYYY-MM-DD format
 * TIME needs to be in 00:00 format
-* START_TIME must not be later than END_TIME
+* START_TIME must be earlier than END_TIME
 * Leap years are not considered during date validation.
-* Existing values will be updated to the input values.
 * One location can only hold one event at any time.
+* Event cannot be editted if result clashes with any of the attendees' event schedule
+* Existing values will be updated to the input values.
 ****
 
 Examples:
@@ -263,10 +264,13 @@ Priority level: all
 
 Finds events whose names contain any of the given keywords or whose description contains any of the given keywords (case-insensitive). +
 Format: `findEvent KEYWORD [MORE_KEYWORDS]`
+Example:
+
+* `findEvent Meeting Weekly`
 
 ****
 * The search is case insensitive
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the keywords does not matter. e.g. `Weekly Meeting` will match `Meeting Weekly`
 * Only full words will be matched
 * Events matching at least one keyword will be returned
 ****
@@ -290,7 +294,7 @@ image::InviteCommandGuide.png[width="800"]
 * The index refers to the index number shown in the displayed person list and event list respectively.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Employee should not have already been invited to the selected event.
-* Event invited to should not clash with the selected employee's schedule or other events at the same location and time.
+* Event invited to *should not clash* with the selected employee's schedule.
 ****
 // end::invite[]
 
