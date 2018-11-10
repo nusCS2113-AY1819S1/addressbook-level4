@@ -49,7 +49,8 @@ public class ExportCalendarCommandTest {
     }
 
     //********************************************Success test case**************************************************
-    //Command success when filtered list match expected list
+    //Command success when filtered list match expected list, since file to file compare is not possible due to
+    //Event UID in Calendar format
     @Test
     public void execute_exportCommand_success() {
         String filename = "mycal";
