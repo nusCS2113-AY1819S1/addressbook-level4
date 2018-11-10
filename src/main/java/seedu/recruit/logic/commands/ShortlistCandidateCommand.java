@@ -55,8 +55,7 @@ public class ShortlistCandidateCommand extends Command {
 
         model.updateCandidate(selectedCandidate, selectedShortlistedCandidate);
         model.shortlistCandidateToJobOffer(selectedShortlistedCandidate, selectedJobOffer);
-        model.commitCompanyBook();
-        model.commitCandidateBook();
+        model.commitRecruitBook();
 
         LogicManager.setLogicState("primary");
         EventsCenter.getInstance().post(new ShowLastViewedBookRequestEvent());

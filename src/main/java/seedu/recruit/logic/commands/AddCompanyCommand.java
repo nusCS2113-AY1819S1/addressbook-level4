@@ -61,7 +61,7 @@ public class AddCompanyCommand extends Command {
         }
 
         model.addCompany(toAdd);
-        model.commitCompanyBook();
+        model.commitRecruitBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

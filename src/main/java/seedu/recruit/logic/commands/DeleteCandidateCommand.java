@@ -56,7 +56,7 @@ public class DeleteCandidateCommand extends Command {
         }
 
 
-        model.commitCandidateBook();
+        model.commitRecruitBook();
         return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS, deletedCandidates));
     }
 

@@ -79,7 +79,7 @@ public class AddCandidateCommand extends Command {
         }
 
         model.addCandidate(toAdd);
-        model.commitCandidateBook();
+        model.commitRecruitBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

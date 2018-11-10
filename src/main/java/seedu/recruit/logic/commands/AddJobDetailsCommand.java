@@ -73,7 +73,7 @@ public class AddJobDetailsCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_JOB_OFFER);
         }
         model.addJobOffer(toAdd);
-        model.commitCompanyBook();
+        model.commitRecruitBook();
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
                 model.getFilteredCompanyJobList().size()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

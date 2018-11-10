@@ -214,7 +214,7 @@ public class CommandTestUtil {
     public static void deleteFirstPerson(Model model) {
         Candidate firstCandidate = model.getFilteredCandidateList().get(0);
         model.deleteCandidate(firstCandidate);
-        model.commitCandidateBook();
+        model.commitRecruitBook();
     }
 
     /**
@@ -273,27 +273,27 @@ public class CommandTestUtil {
         }
 
         @Override
-        public boolean canUndoCandidateBook() {
+        public boolean canUndoRecruitBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoCandidateBook() {
+        public boolean canRedoRecruitBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoCandidateBook() {
+        public void undoRecruitBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoCandidateBook() {
+        public void redoRecruitBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitCandidateBook() {
+        public void commitRecruitBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -354,31 +354,6 @@ public class CommandTestUtil {
 
         @Override
         public void updateFilteredCompanyList(Predicate<Company> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean canUndoCompanyBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean canRedoCompanyBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void undoCompanyBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void redoCompanyBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void commitCompanyBook() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -45,7 +45,7 @@ public class SortCandidateCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.sortCandidates(prefixToSort);
-        model.commitCandidateBook();
+        model.commitRecruitBook();
 
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             LogicManager.setLogicState(SelectCandidateCommand.COMMAND_LOGIC_STATE);
