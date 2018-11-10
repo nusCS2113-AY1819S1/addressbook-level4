@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -30,6 +32,9 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="Window">
+            <MenuItem fx:id="fullScreenMenuItem" mnemonicParsing="false" onAction="#handleFullScreen" text="Toggle Full Screen" />
           </Menu>
         </MenuBar>
 
@@ -66,8 +71,14 @@
             </padding>
             <StackPane fx:id="requestListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
+          <VBox fx:id="commandPanelList" minWidth="240" prefWidth="240" SplitPane.resizableWithParent="false">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <Label fx:id="commandPromptText" text="Available Commands" styleClass="label-bright" />
+            <HBox fx:id="commandPanelPlaceholder"></HBox>
+          </VBox>
         </SplitPane>
-
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

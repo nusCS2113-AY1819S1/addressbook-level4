@@ -25,6 +25,8 @@ public class DeleteCommand extends Command {
             + PREFIX_ISBN + "978-3-16-148410-0";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Book: %1$s";
+    public static final String COMMAND_SYNTAX = COMMAND_WORD + " "
+            + PREFIX_ISBN;
 
     private final String findBookBy;
     private final String argsType;

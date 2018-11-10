@@ -33,6 +33,9 @@ import seedu.address.logic.commands.ViewStatisticCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import seedu.address.model.request.DeleteRequestCommand;
+import seedu.address.model.request.RequestCommand;
+import seedu.address.model.request.ViewRequestCommand;
 import seedu.address.ui.BookListPanel;
 
 /**
@@ -90,6 +93,12 @@ public class BookInventoryParser {
         commandList.add(RedoCommand.COMMAND_WORD);
         commandList.add(ViewStatisticCommand.COMMAND_WORD);
 
+        // Gui Yong's Commands
+        commandList.add(RequestCommand.COMMAND_WORD);
+        commandList.add(ViewRequestCommand.COMMAND_WORD);
+        commandList.add(DeleteRequestCommand.COMMAND_WORD);
+        commandList.add(UndoCommand.COMMAND_WORD);
+        commandList.add(RedoCommand.COMMAND_WORD);
 
         switch (commandWord) {
 
