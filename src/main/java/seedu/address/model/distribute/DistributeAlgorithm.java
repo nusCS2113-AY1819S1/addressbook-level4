@@ -26,7 +26,7 @@ import seedu.address.model.person.Person;
  * First - normalDistribution
  * Second - genderDistribution
  * Third - nationalityDistribution
- * Forth - Gender & Nationality Distribution
+ * Forth - strictDistribution (Coming in v2.0)
  */
 public class DistributeAlgorithm {
 
@@ -53,6 +53,7 @@ public class DistributeAlgorithm {
 
         //Checks if numOfGroups intended to be created is > number of people
         if (allPerson.size() < numOfGroups) {
+            logger.log(Level.WARNING, "numOfGroups specified to be create is more than number of Students.");
             throw new CommandException(MESSAGE_INVALID_SIZE);
         }
         distUtil.doesGroupNameExist(numOfGroups, groupName, model);

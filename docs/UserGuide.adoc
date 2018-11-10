@@ -21,14 +21,14 @@ By: `Team T13-4`      Since: `Aug 2018`      Licence: `MIT`
 *Student Management System (SMS)* is a desktop application which uses CLI for its interactions.
 SMS allows university lectures to easily organise and manage their students and classes by allowing the lectures to easily import student lists given by their department.
 SMS also provides neat features such as distributing students into groups, sending emails to them and assigning test grades,
-SMS makes being a university lecturer more convenient!
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+SMS makes being a university lecturer more convenient! +
+Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `Student.Management.System.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Copy the file to the folder you want to use as the home folder for your SMS.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -38,7 +38,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` :
+adds a contact named `John Doe` to the Student Management System.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
@@ -231,10 +232,16 @@ User must choose to either distribute all students equally via Gender or Nationa
 ** `g/0 nat/0` -> Distribution all students randomly into _n_ groups.
 ** `g/1 nat/0` -> Distribution all students randomly into _n_ groups with balanced Gender.
 ** `g/0 nat/1` -> Distribution all students randomly into _n_ groups with balanced Nationality.
-** `g/1 nat/1` -> Distribution all students randomly into _n_ groups with balanced Gender and Nationality. (Coming in v2.0)
+** `g/1 nat/1` -> Distribution all students randomly into _n_ groups with balanced Gender and Nationality. *(Coming in v2.0)*
 ****
 Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
 Shortcut Format: `di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1` +
+
+****
+*Coming in v2.0* +
+
+Distribute feature will be integrating with the Email feature. Details will be shown under Email section.
+****
 
 ==== Command Input Guide ====
 ****
