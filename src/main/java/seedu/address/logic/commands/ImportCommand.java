@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.FileUtil.isFileExists;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,6 +27,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported %1$s persons.";
     private static final String MESSAGE_FAILURE = "Import failed! Error: %1$s";
     private static final String MESSAGE_INVALID_LIST_SIZE = "Invalid list size.";
+    private static final String MESSAGE_FILE_NOT_FOUND = "File not found!";
 
     private final Path filePath;
 
@@ -40,6 +42,10 @@ public class ImportCommand extends Command {
         requireNonNull(model);
 
         int initialNumberOfPersons = model.getFilteredPersonList().size();
+
+        if (!isFileExists(filePath)) {
+            throw new CommandException(MESSAGE_FILE_NOT_FOUND);
+        }
 
         // TODO: Write better Exception messages
         try {
