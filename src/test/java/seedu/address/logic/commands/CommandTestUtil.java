@@ -23,8 +23,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -44,6 +46,7 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BENSON = "johnd@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMAIL_CALVIN = "calvin@example.com";
+    public static final String VALID_EMAIL_CARL = "heinz@example.com";
     public static final String VALID_EMAIL_HOON = "stefan@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
@@ -55,12 +58,17 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String VALID_EVENT_NAME_BIRTHDAY = "Birthday";
+    public static final String VALID_EVENT_NAME_MEETING = "Meeting";
     public static final String VALID_DATE = "2018-10-28";
+    public static final String VALID_DATE_CHRISTMAS = "2018-12-25";
     public static final String VALID_DESCRIPTION_PUNCTUAL = "Please be punctual.";
+    public static final String VALID_DESCRIPTION_CHRISTMAS = "It's Christmas!";
     public static final String VALID_LOCATION_LT = "LT15";
+    public static final String VALID_LOCATION_ROOM = "Room";
     public static final String VALID_MONTH = "01";
     public static final String VALID_TIME_MORNING = "08:00";
     public static final String VALID_TIME_NOON = "12:00";
+    public static final String VALID_TIME_NIGHT = "19:00";
     public static final String VALID_YEAR = "2018";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -103,6 +111,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditEventCommand.EditEventDescriptor DESC_BIRTHDAY;
+    public static final EditEventCommand.EditEventDescriptor DESC_MEETING;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder()
                 .withPhone(VALID_PHONE_AMY).withName(VALID_NAME_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -112,6 +123,12 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withName(VALID_NAME_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withDepartment(VALID_DEPARTMENT_BOB).withDesignation(VALID_DESIGNATION_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_BIRTHDAY = new EditEventDescriptorBuilder().withEventName(VALID_EVENT_NAME_BIRTHDAY)
+                .withDescription(VALID_DESCRIPTION_PUNCTUAL).withLocation(VALID_LOCATION_LT).withDate(VALID_DATE)
+                .withStartTime(VALID_TIME_MORNING).withEndTime(VALID_TIME_NOON).build();
+        DESC_MEETING = new EditEventDescriptorBuilder().withEventName(VALID_EVENT_NAME_MEETING)
+                .withDescription(VALID_DESCRIPTION_CHRISTMAS).withLocation(VALID_LOCATION_ROOM)
+                .withDate(VALID_DATE_CHRISTMAS).withStartTime(VALID_TIME_NOON).withEndTime(VALID_TIME_NIGHT).build();
     }
 
     /**
@@ -172,6 +189,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the event at the given {@code targetIndex} in the
+     * {@code model}'s event list.
+     */
+    public static void showEventAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
+
+        Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
+        final String[] splitName = event.getEventName().fullName.split("\\s+");
+        model.updateFilteredEventList(new EventContainsKeywordsPredicate(Arrays.asList(splitName[2])));
+
+        assertEquals(1, model.getFilteredEventList().size());
     }
 
     /**

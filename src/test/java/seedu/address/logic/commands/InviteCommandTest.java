@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BENSON;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventList;
@@ -26,7 +28,6 @@ import seedu.address.model.EventList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EventBuilder;
@@ -49,7 +50,7 @@ public class InviteCommandTest {
     @Before
     public void setup() {
         Set<String> set = new HashSet<>();
-        set.add("alice@example.com");
+        set.add(VALID_EMAIL_ALICE);
 
         event1 = new EventBuilder().build();
         event2 = new EventBuilder().withAttendee(set).build();
@@ -59,7 +60,6 @@ public class InviteCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person personChosen = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Event eventChosen = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        String personEmail = personChosen.getEmail().toString();
 
         InviteCommand inviteCommand = new InviteCommand(INDEX_SECOND_PERSON, INDEX_FIRST_EVENT);
 
@@ -69,10 +69,7 @@ public class InviteCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new EventList(model.getEventList()), new UserPrefs());
 
-        Attendees attendeesChosen = eventChosen.getAttendees();
-        Attendees attendeesUpdated = attendeesChosen.createAttendeesWithAddedEmail(personEmail);
-        Set<String> setUpdated = attendeesUpdated.getAttendeesSet();
-        Event eventUpdated = new EventBuilder(eventChosen).withAttendee(setUpdated).build();
+        Event eventUpdated = new EventBuilder(eventChosen).withAttendee(VALID_EMAIL_BENSON).build();
 
         expectedModel.updateEvent(eventChosen, eventUpdated);
         expectedModel.commitEventList();
@@ -126,11 +123,13 @@ public class InviteCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Person personChosen = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Event eventChosen = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        String personEmail = personChosen.getEmail().toString();
+
         InviteCommand inviteCommand = new InviteCommand(INDEX_SECOND_PERSON, INDEX_FIRST_EVENT);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new EventList(model.getEventList()), new UserPrefs());
-        Event eventUpdated = eventChosen.createEventWithUpdatedAttendee(personEmail);
+
+        Event eventUpdated = new EventBuilder(eventChosen).withAttendee(personChosen.getEmail().toString()).build();
+
         expectedModel.updateEvent(eventChosen, eventUpdated);
         expectedModel.commitEventList();
 
@@ -176,6 +175,7 @@ public class InviteCommandTest {
 
         InviteCommand command1 = new InviteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT);
         InviteCommand command2 = new InviteCommand(INDEX_FIRST_PERSON, INDEX_SECOND_EVENT);
+        InviteCommand command3 = new InviteCommand(INDEX_SECOND_PERSON, INDEX_FIRST_EVENT);
 
         // same object -> returns true
         assertTrue(command1.equals(command1));
@@ -192,6 +192,7 @@ public class InviteCommandTest {
 
         // different event -> returns false
         assertFalse(command1.equals(command2));
+        assertFalse(command1.equals(command3));
     }
 
 }
