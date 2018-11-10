@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
 import static seedu.address.testutil.TypicalEvents.EVENT_2;
+import static seedu.address.testutil.TypicalEvents.EVENT_3;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,7 @@ public class EventSingleDisplayPredicateTest {
 
     @Before
     public void setup() {
-        eventWithAlice = TypicalEvents.eventwithAttendee();
+        eventWithAlice = EVENT_3;
         eventOther = TypicalEvents.EVENT_1;
     }
 

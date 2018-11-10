@@ -63,7 +63,10 @@ public class TypicalPersons {
     public static final Person BOB_DUMMY = new PersonBuilder(BOB).withEmail(VALID_EMAIL_ALICE)
             .build();
 
+    public static final String KEYWORD_MATCHING_CARL = "Carl"; // A keyword that matches CARL
+    public static final String KEYWORD_MATCHING_EVENT = "Event"; // A keyword that matches EVENT
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_PAULINE = "Pauline"; // A keyword that matches PAULINE
 
     private TypicalPersons() {
     } // prevents instantiation

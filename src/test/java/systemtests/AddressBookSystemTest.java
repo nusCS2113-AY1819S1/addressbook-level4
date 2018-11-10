@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_EVENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_PEOPLE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.address.ui.testutil.GuiTestAssert.assertEventListMatching;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.nio.file.Path;
@@ -32,6 +33,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.AddressBook;
@@ -176,6 +178,14 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
+     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
+     */
+    protected void showEventsWithName(String keyword) {
+        executeCommand(FindEventCommand.COMMAND_WORD + " " + keyword);
+        assertTrue(getModel().getFilteredEventList().size() < getModel().getEventList().getEventList().size());
+    }
+
+    /**
      * Displays all events in the event list.
      */
     protected void showAllEvents() {
@@ -194,7 +204,9 @@ public abstract class AddressBookSystemTest {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new EventList(expectedModel.getEventList()), testApp.readStorageEventList());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
+        //assertEventListMatching(getEventListPanel(), expectedModel.getFilteredEventList());
     }
 
     /**
@@ -206,6 +218,7 @@ public abstract class AddressBookSystemTest {
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
         getPersonListPanel().rememberSelectedPersonCard();
+        getEventListPanel().rememberSelectedEventCard();
     }
 
     /**
@@ -230,6 +243,23 @@ public abstract class AddressBookSystemTest {
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getPersonListPanel().isSelectedPersonCardChanged());
+    }
+
+    /**
+     * Asserts that only the card at {@code expectedSelectedCardIndex} is selected.
+     * @see EventListPanelHandle#isSelectedEventCardChanged()
+     */
+    protected void assertSelectedEventCardChanged(Index expectedSelectedCardIndex) {
+        getEventListPanel().navigateToCard(getEventListPanel().getSelectedCardIndex());
+        assertEquals(expectedSelectedCardIndex.getZeroBased(), getEventListPanel().getSelectedCardIndex());
+    }
+
+    /**
+     * Asserts that the selected card in the event list panel remain unchanged.
+     * @see EventListPanelHandle#isSelectedEventCardChanged()
+     */
+    protected void assertSelectedEventCardUnchanged() {
+        assertFalse(getEventListPanel().isSelectedEventCardChanged());
     }
 
     /**
@@ -274,6 +304,7 @@ public abstract class AddressBookSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
         assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
+        assertEventListMatching(getEventListPanel(), getModel().getFilteredEventList());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());

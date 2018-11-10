@@ -3,8 +3,7 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
-import static seedu.address.testutil.TypicalEvents.EVENT_4;
-import static seedu.address.testutil.TypicalEvents.EVENT_5;
+import static seedu.address.testutil.TypicalEvents.EVENT_6;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventList;
 
 import java.io.IOException;
@@ -87,14 +86,14 @@ public class XmlEventListStorageTest {
         assertEquals(original, new EventList(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addEvent(EVENT_4);
+        original.addEvent(EVENT_6);
         original.removeEvent(EVENT_1);
         xmlEventStorage.saveEventList(original, filePath);
         readBack = xmlEventStorage.readEventList(filePath).get();
         assertEquals(original, new EventList(readBack));
 
         //Save and read without specifying file path
-        original.addEvent(EVENT_5);
+        original.addEvent(EVENT_1);
         xmlEventStorage.saveEventList(original); //file path not specified
         readBack = xmlEventStorage.readEventList().get(); //file path not specified
         assertEquals(original, new EventList(readBack));
