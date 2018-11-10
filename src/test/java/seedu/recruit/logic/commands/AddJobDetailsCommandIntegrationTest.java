@@ -41,7 +41,7 @@ public class AddJobDetailsCommandIntegrationTest {
         Model expectedModel = new ModelManager(new CandidateBook(), getTypicalCompanyBook(), new UserPrefs());
         expectedModel.addCompany(new CompanyBuilder().withCompanyName("Dummy").build());
         expectedModel.addJobOffer(jobOffer);
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(new AddJobDetailsCommand(jobOffer), model, commandHistory,
                 String.format(AddJobDetailsCommand.MESSAGE_SUCCESS, jobOffer), expectedModel);

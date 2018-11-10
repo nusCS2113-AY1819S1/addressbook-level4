@@ -15,8 +15,8 @@ import org.junit.Test;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.DeleteCompanyCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
-import seedu.recruit.logic.commands.RedoCompanyBookCommand;
-import seedu.recruit.logic.commands.UndoCompanyBookCommand;
+import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.model.Model;
 
 
@@ -76,13 +76,13 @@ public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: undo previous find command -> rejected */
-        command = UndoCompanyBookCommand.COMMAND_WORD;
-        String expectedResultMessage = UndoCompanyBookCommand.MESSAGE_FAILURE;
+        command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: redo previous find command -> rejected */
-        command = RedoCompanyBookCommand.COMMAND_WORD;
-        expectedResultMessage = RedoCompanyBookCommand.MESSAGE_FAILURE;
+        command = RedoCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: find same companies in recruit book after deleting 1 of them -> 1 company found */

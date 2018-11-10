@@ -29,7 +29,7 @@ public class JobOffer {
     private final UniqueCandidateList candidateList;
 
     public JobOffer(CompanyName companyName, Job job, Gender gender, AgeRange ageRange, Education education,
-                    Salary salary, UniqueCandidateList candidateList) {
+                     Salary salary, UniqueCandidateList candidateList) {
         this.companyName = companyName;
         this.job = job;
         this.ageRange = ageRange;
@@ -37,6 +37,17 @@ public class JobOffer {
         this.salary = salary;
         this.gender = gender;
         this.candidateList = candidateList;
+    }
+
+    public JobOffer(JobOffer src) {
+        this.companyName = src.getCompanyName();
+        this.job = src.getJob();
+        this.ageRange = src.getAgeRange();
+        this.education = src.getEducation();
+        this.salary = src.getSalary();
+        this.gender = src.getGender();
+        this.candidateList = new UniqueCandidateList();
+        this.candidateList.setCandidates(src.getUniqueCandidateList());
     }
 
     public CompanyName getCompanyName() {

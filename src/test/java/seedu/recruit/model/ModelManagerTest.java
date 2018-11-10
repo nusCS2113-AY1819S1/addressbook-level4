@@ -12,8 +12,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.recruit.testutil.AddressBookBuilder;
 import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
+import seedu.recruit.testutil.RecruitBookBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -49,7 +49,7 @@ public class ModelManagerTest {
     @Test
     public void equals() {
         CandidateBook candidateBook = new
-                AddressBookBuilder().withCandidate(ALICE).withCandidate(BENSON).buildCandidateBook();
+                RecruitBookBuilder().withCandidate(ALICE).withCandidate(BENSON).buildCandidateBook();
         CandidateBook differentCandidateBook = new CandidateBook();
         UserPrefs userPrefs = new UserPrefs();
 
