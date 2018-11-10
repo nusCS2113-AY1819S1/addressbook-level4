@@ -303,7 +303,7 @@ Sends an email to all persons belonging to a group +
 Format: `sendmail g/GROUP_INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
 Shortcut Format: `sm g/GROUP_INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
 
-Examples:D
+Examples:
 
 * sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
 * sm 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
