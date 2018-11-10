@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Wang Shining
 image::SHININGGGG.png[width="150", align="left"]
-{empty}[http://github.com/SHININGGGG[github]] [<<SHININGGGG#, portfolio>>]
+{empty}[http://github.com/SHININGGGG[github]] [<<shiningggg#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: Expenditure tracker & Calender components
@@ -39,7 +39,7 @@ Responsibilities: Expenditure tracker component
 
 === Xiao Yunhan
 image::XiaoYunhan.png[width="150", align="left"]
-{empty}[http://github.com/XiaoYunhan[github]] [<<XiaoYunhan#, portfolio>>]
+{empty}[http://github.com/XiaoYunhan[github]] [<<xiaoyunhan#, portfolio>>]
 
 Role: Developer +
 Responsibilities: To-do list component
