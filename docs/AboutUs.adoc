@@ -28,7 +28,7 @@ Responsibilities: API expert
 
 '''
 
-=== Rachel Lee
+=== Rachel Lee Wang Ling
 image::leerachel.png[width="150", align="left"]
 {empty}[http://github.com/leerachel[github]][https://cs2113-ay1819s1-f09-4.github.io/main/team/leerachel.html[portfolio]]
 
