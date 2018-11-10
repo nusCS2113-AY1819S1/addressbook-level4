@@ -5,8 +5,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
-import java.util.concurrent.CompletableFuture;
-
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
