@@ -1,5 +1,6 @@
 package seedu.address.model.searchhistory;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.SortedSet;
@@ -59,9 +60,10 @@ public class KeywordsRecord implements ReadOnlyKeywordsRecord {
     }
 
     @Override
-    public SortedSet<String> getKeywordSet(KeywordType type) {
+    public SortedSet<String> getReadOnlyKeywordsSet(KeywordType type) {
         KeywordsSet set = map.get(type);
-        return set.getUniqueKeywordsSet();
+        SortedSet<String> uniqueKeywordsSet = set.getUniqueKeywordsSet();
+        return Collections.unmodifiableSortedSet(uniqueKeywordsSet);
     }
 
     private void prepareKeywordSets() {

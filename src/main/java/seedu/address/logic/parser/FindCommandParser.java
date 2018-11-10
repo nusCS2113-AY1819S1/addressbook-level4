@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.logic.commands.ExcludeNameFindCommand;
+import seedu.address.logic.commands.ExcludeTagFindCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindNameSubCommand;
-import seedu.address.logic.commands.FindTagSubCommand;
+import seedu.address.logic.commands.IncludeNameFindCommand;
+import seedu.address.logic.commands.IncludeTagFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -35,78 +37,45 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         String[] splittedArgumentsArray = trimmedArgs.split("\\s+");
-        List<String> argumentsList = new ArrayList<String>(Arrays.asList(splittedArgumentsArray));
+        List<String> argumentsList = new ArrayList<>(Arrays.asList(splittedArgumentsArray));
 
-        if (!hasValidInputFormat(argumentsList)) {
+        int sizeOfList = argumentsList.size();
+
+        if (isExcludeTagSearch(argumentsList)) {
+            List<String> keywordsList = argumentsList.subList(2, sizeOfList);
+            return new ExcludeTagFindCommand(new TagContainsKeywordsPredicate(keywordsList));
+        } else if (isIncludeTagSearch(argumentsList)) {
+            List<String> keywordsList = argumentsList.subList(1, sizeOfList);
+            return new IncludeTagFindCommand(new TagContainsKeywordsPredicate(keywordsList));
+        } else if (isExcludeNameSearch(argumentsList)) {
+            List<String> keywordsList = argumentsList.subList(1, sizeOfList);
+            return new ExcludeNameFindCommand(new NameContainsKeywordsPredicate(keywordsList));
+        } else if (isIncludeNameSearch(argumentsList)) {
+            return new IncludeNameFindCommand(new NameContainsKeywordsPredicate(argumentsList));
+        } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
-        if (isExcludeTagSearch(argumentsList)) {
-            removesFirstTwoItemsFromArgumentsList(argumentsList);
-            return new FindTagSubCommand(new TagContainsKeywordsPredicate(argumentsList), true);
-        } else if (isIncludeTagSearch(argumentsList)) {
-            argumentsList.remove(0);
-            return new FindTagSubCommand(new TagContainsKeywordsPredicate(argumentsList));
-        } else if (isExcludePersonSearch(argumentsList)) {
-            argumentsList.remove(0);
-            return new FindNameSubCommand(new NameContainsKeywordsPredicate(argumentsList), true);
-        } else {
-            return new FindNameSubCommand(new NameContainsKeywordsPredicate(argumentsList));
-        }
     }
 
-    private boolean isExcludePersonSearch(List<String> argumentsList) {
-        return argumentsList.size() >= 1 && argumentsList.get(0).equals(EXCLUDE_OPTION_STRING);
-    }
-
-    private boolean isIncludeTagSearch(List<String> argumentsList) {
-        return argumentsList.size() >= 2 && argumentsList.get(0).equals(TAG_OPTION_STRING)
-                && !argumentsList.get(1).equals(EXCLUDE_OPTION_STRING);
-    }
-
-    /**
-     * Returns true if the first two arguments list implies that
-     * Exclude Tag Search has to be executed.
-     */
     private boolean isExcludeTagSearch(List<String> argumentsList) {
-        return argumentsList.size() >= 2 && (argumentsList.get(0).equals(TAG_OPTION_STRING)
-                && argumentsList.get(1).equals(EXCLUDE_OPTION_STRING)
-                || argumentsList.get(0).equals(EXCLUDE_OPTION_STRING)
-                && argumentsList.get(1).equals(TAG_OPTION_STRING));
-    }
-
-    /**
-     * Returns false if the user's input is in the incorrect format
-     */
-    private boolean hasValidInputFormat(List<String> argumentsList) {
-        if (hasTagOptionStringWithNoKeywords(argumentsList)) {
-            return false;
-        } else if (hasExcludeOptionStringWithNoKeywords(argumentsList)) {
-            return false;
-        } else if (hasTagAndExcludeOptionStringWithNoKeywords(argumentsList)) {
-            return false;
-        }
-        return true;
-    }
-
-    private boolean hasExcludeOptionStringWithNoKeywords(List<String> argumentsList) {
-        return argumentsList.get(0).equals(EXCLUDE_OPTION_STRING) && argumentsList.size() == 1;
-    }
-
-    private boolean hasTagAndExcludeOptionStringWithNoKeywords(List<String> argumentsList) {
-        return argumentsList.size() == 2 && (argumentsList.get(0).equals(TAG_OPTION_STRING)
+        return argumentsList.size() > 2 && (argumentsList.get(0).equals(TAG_OPTION_STRING)
                 && argumentsList.get(1).equals(EXCLUDE_OPTION_STRING) || argumentsList.get(1).equals(TAG_OPTION_STRING)
                 && argumentsList.get(0).equals(EXCLUDE_OPTION_STRING));
     }
 
-    private boolean hasTagOptionStringWithNoKeywords(List<String> argumentsList) {
-        return argumentsList.get(0).equals(TAG_OPTION_STRING) && argumentsList.size() == 1;
+    private boolean isExcludeNameSearch(List<String> argumentsList) {
+        return argumentsList.size() > 1 && argumentsList.get(0).equals(EXCLUDE_OPTION_STRING)
+                && !argumentsList.get(1).equals(TAG_OPTION_STRING);
     }
 
-    private void removesFirstTwoItemsFromArgumentsList(List<String> argumentsList) {
-        assert argumentsList.size() >= 2;
-        argumentsList.remove(1);
-        argumentsList.remove(0);
+    private boolean isIncludeTagSearch(List<String> argumentsList) {
+        return argumentsList.size() > 1 && argumentsList.get(0).equals(TAG_OPTION_STRING)
+                && !argumentsList.get(1).equals(EXCLUDE_OPTION_STRING);
+    }
+
+    private boolean isIncludeNameSearch(List<String> argumentsList) {
+        return argumentsList.size() > 0 && !argumentsList.get(0).equals(TAG_OPTION_STRING)
+                && !argumentsList.get(0).equals(EXCLUDE_OPTION_STRING);
     }
 }

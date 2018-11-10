@@ -30,7 +30,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        HashSet<String> tagsAsString = retrievePersonTagsAsString(person);
+        HashSet<String> tagsAsString = retrievePersonTagsAsStringSet(person);
         for (String s:keywords) {
             if (tagsAsString.contains(s.toLowerCase())) {
                 return true;
@@ -40,15 +40,18 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
-     * Returns a HashSet of String representing a {@code Person}'s Tags
+     * Returns a HashSet of String representing a {@code Person}'s Tags.
+     * @param person the Person you are retrieving the tags from.
+     * @return a HashSet of lower-cased tag strings of the specified person.
      */
-    private HashSet<String> retrievePersonTagsAsString(Person person) {
-        HashSet<String> tagsAsString = new HashSet<>();
+    private HashSet<String> retrievePersonTagsAsStringSet(Person person) {
+        HashSet<String> tagsAsStringSet = new HashSet<>();
         Set<Tag> tags = person.getTags();
         for (Tag tag:tags) {
-            tagsAsString.add(tag.toSearchString().toLowerCase());
+            String searchString = tag.toSearchString();
+            tagsAsStringSet.add(searchString.toLowerCase());
         }
-        return tagsAsString;
+        return tagsAsStringSet;
     }
 
     @Override
