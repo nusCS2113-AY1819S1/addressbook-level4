@@ -31,10 +31,6 @@ that scored badly for their midterms for extra supplementary classes
 
 * *Other contributions*:
 ** Managed releases from `v1.3.2` (1 release) on GitHub
-** Enhancements to existing features:
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
 *** PRs reviewed : https://github.com/CS2113-AY1819S1-T13-4/main/pull/23[#23], https://github.com/CS2113-AY1819S1-T13-4/main/pull/28[#28],
 https://github.com/CS2113-AY1819S1-T13-4/main/pull/77[#77], https://github.com/CS2113-AY1819S1-T13-4/main/pull/81[#81], https://github.com/CS2113-AY1819S1-T13-4/main/pull/89[#89], https://github.com/CS2113-AY1819S1-T13-4/main/pull/90[#90]
@@ -61,6 +57,7 @@ include::../UserGuide.adoc[tag=ScriptCommand]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+include::../DeveloperGuide.adoc[tag=ScriptSetup]
 include::../DeveloperGuide.adoc[tag=ScriptCommand]
 
 
