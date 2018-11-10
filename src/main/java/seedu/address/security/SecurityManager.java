@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.address.commons.AuthReturn;
+import seedu.address.commons.CommandsEnum;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.logic.LoginEvent;
 import seedu.address.commons.events.logic.RegisterSuccessEvent;
@@ -90,8 +92,30 @@ public class SecurityManager extends ComponentManager implements Security {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException,
             SecurityAuthenticationException {
-        String Command = logic.parseCommandWord(commandText);
-        return logic.execute("test");
+
+        CommandsEnum commandConstant = logic.parseCommandWord(commandText);
+
+        //Handles AuthReturn enum constant types
+        AuthReturn flag = isCommandParsedAllowed(commandConstant);
+        if (flag == AuthReturn.COMMAND_ALLOWED) {
+            return logic.execute(commandConstant.getValues().get(0)); //Parameter to store in history
+        } else if (flag == AuthReturn.COMMAND_LOGINFIRST) {
+            throw new SecurityAuthenticationException("Please Login First");
+        } else if (flag == AuthReturn.COMMAND_LOGOUTFIRST) {
+            throw new SecurityAuthenticationException("Please Logout First");
+        } else {
+            throw new SecurityAuthenticationException("This should not happen");
+        }
+    }
+
+    /**
+     * Checks whether the command entered is entered at the right time (Before/After logging in)
+     * @paramCommandsEnum The name of the command as CommandsEnum constant
+     * @returnAuthReturn One of AuthReturn Enum's Constants
+     */
+    private AuthReturn isCommandParsedAllowed(CommandsEnum commandConstant) {
+        //Checks CommandsEnum method isCommandAllowed
+        return commandConstant.isCommandAllowed(commandConstant, getAuthentication());
     }
 
     @Subscribe
