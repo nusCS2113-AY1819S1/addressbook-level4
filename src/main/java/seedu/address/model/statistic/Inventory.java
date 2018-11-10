@@ -1,5 +1,8 @@
 package seedu.address.model.statistic;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.book.Book;
@@ -8,7 +11,10 @@ import seedu.address.model.book.Book;
  * Represents Revenue in the month's Statistic
  */
 public class Inventory {
-    private static final String QUANTITY_VALIDATION_REGEX = "[-+]?[0-9]*\\.?[0-9]+";
+    public static final String MESSAGE_INVENTORY_CONSTRAINTS =
+            "Inventory should be numerical and in 2 decimal places or none at all\n"
+                    + "E.g. 4, 3.02";
+    private static final String QUANTITY_VALIDATION_REGEX = "\\d+(\\.\\d{2})?";
     private volatile String value;
 
     /**
@@ -18,8 +24,10 @@ public class Inventory {
         super();
     }
 
-    public Inventory(String revenue) {
-        value = revenue;
+    public Inventory(String inventory) {
+        requireNonNull(inventory);
+        checkArgument(isValidInventory(inventory), MESSAGE_INVENTORY_CONSTRAINTS);
+        value = inventory;
     }
 
     public String getValue() {
@@ -30,9 +38,10 @@ public class Inventory {
         this.value = value;
     }
 
-    public static boolean isValid(String test) {
+    public static boolean isValidInventory(String test) {
         return test.matches(QUANTITY_VALIDATION_REGEX);
     }
+
 
     /**
      * increase inventory

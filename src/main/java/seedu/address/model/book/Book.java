@@ -63,7 +63,9 @@ public class Book {
      * @return the updated quantity for books
      */
     public Quantity increaseQuantity(Quantity amount) throws CommandException {
-        this.quantity.increase(amount.toInteger());
+        Quantity quantity = new Quantity(this.quantity.toString());
+        quantity.increase(amount.toInteger());
+
         return quantity;
     }
 
@@ -73,7 +75,8 @@ public class Book {
      * @return updated quantity
      */
     public Quantity deductQuantity(Quantity selling) throws CommandException {
-        this.quantity.decrease(selling.toInteger());
+        Quantity quantity = new Quantity(this.quantity.toString());
+        quantity.decrease(selling.toInteger());
         return quantity;
     }
 
