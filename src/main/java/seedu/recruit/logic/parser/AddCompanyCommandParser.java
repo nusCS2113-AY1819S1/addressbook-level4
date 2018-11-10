@@ -9,6 +9,9 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.stream.Stream;
 
 import seedu.recruit.logic.commands.AddCompanyCommand;
+import seedu.recruit.logic.commands.Command;
+import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
@@ -20,14 +23,21 @@ import seedu.recruit.model.company.CompanyName;
  * Parses input arguments and creates a new AddCompanyCommand object
  */
 
-public class AddCompanyCommandParser implements Parser<AddCompanyCommand> {
+public class AddCompanyCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCompanyCommand
      * and returns an AddCompanyCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCompanyCommand parse(String args) throws ParseException {
+    public Command parse(String args) throws ParseException {
+        switch (args) {
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(" " + args, PREFIX_COMPANY_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE);
 

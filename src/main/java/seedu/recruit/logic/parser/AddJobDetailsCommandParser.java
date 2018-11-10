@@ -11,6 +11,9 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 import java.util.stream.Stream;
 
 import seedu.recruit.logic.commands.AddJobDetailsCommand;
+import seedu.recruit.logic.commands.Command;
+import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
@@ -25,14 +28,20 @@ import seedu.recruit.model.joboffer.Salary;
 /**
  * Parses input arguments and creates a new AddJobDetailsCommand object
  */
-public class AddJobDetailsCommandParser implements Parser<AddJobDetailsCommand> {
+public class AddJobDetailsCommandParser  {
     /**
      * Parses the given {@code String} of arguments in the context of the AddJobDetailsCommand
      * and returns an AddJobDetailsCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddJobDetailsCommand parse(String args) throws ParseException {
+    public Command parse(String args) throws ParseException {
+        switch (args) {
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
 
+        }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(" " + args, PREFIX_COMPANY_NAME, PREFIX_JOB, PREFIX_GENDER,
                         PREFIX_AGE_RANGE, PREFIX_EDUCATION, PREFIX_SALARY);

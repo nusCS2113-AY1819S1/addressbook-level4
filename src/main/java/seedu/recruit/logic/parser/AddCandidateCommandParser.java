@@ -16,6 +16,9 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.recruit.logic.commands.AddCandidateCommand;
+import seedu.recruit.logic.commands.Command;
+import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Age;
 import seedu.recruit.model.candidate.Candidate;
@@ -32,14 +35,20 @@ import seedu.recruit.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddCandidateCommand object
  */
-public class AddCandidateCommandParser implements Parser<AddCandidateCommand> {
+public class AddCandidateCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCandidateCommand
      * and returns an AddCandidateCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCandidateCommand parse(String args) throws ParseException {
+    public Command parse(String args) throws ParseException {
+        switch (args) {
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
+        }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(" " + args, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOB, PREFIX_EDUCATION, PREFIX_SALARY, PREFIX_TAG);
