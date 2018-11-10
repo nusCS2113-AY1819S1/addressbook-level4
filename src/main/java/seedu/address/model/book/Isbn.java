@@ -20,7 +20,7 @@ public class Isbn {
     /**
      * Constructs a {@code Isbn}.
      *
-     * @param isbn A valid phone number.
+     * @param isbn A valid isbn number.
      */
     public Isbn(String isbn) {
         requireNonNull(isbn);

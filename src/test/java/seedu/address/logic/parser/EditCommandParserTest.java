@@ -71,14 +71,13 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        // assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 z/ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        // assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS); // invalid name
         assertParseFailure(parser,
-                "1" + INVALID_ISBN_DESC, Isbn.MESSAGE_ISBN_CONSTRAINTS); // invalid phone
+                "1" + INVALID_ISBN_DESC, Isbn.MESSAGE_ISBN_CONSTRAINTS); // invalid isbn
         assertParseFailure(parser, "1" + INVALID_PRICE_DESC, Price.MESSAGE_PRICE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_QUANTITY_DESC,
                 EditCommand.MESSAGE_QUANTITY_PRESENT); // invalid address
@@ -87,7 +86,7 @@ public class EditCommandParserTest {
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_ISBN_DESC + PRICE_DESC_AMY, Isbn.MESSAGE_ISBN_CONSTRAINTS);
 
-        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
+        // valid isbn followed by invalid isbn. The test case for invalid isbn followed by valid isbn
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + ISBN_DESC_BOB + INVALID_ISBN_DESC, Isbn.MESSAGE_ISBN_CONSTRAINTS);
 
@@ -98,8 +97,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        // assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_PRICE_DESC + VALID_QUANTITY_ADD
-        // + VALID_ISBN_ADD, Name.MESSAGE_NAME_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_PRICE_DESC
+                + VALID_QUANTITY_ADD + INVALID_ISBN_DESC, Isbn.MESSAGE_ISBN_CONSTRAINTS);
     }
 
     @Test
@@ -137,19 +136,19 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // phone
+        // isbn
         userInput = targetIndex.getOneBased() + ISBN_DESC_AMY;
         descriptor = new EditBookDescriptorBuilder().withIsbn(VALID_ISBN_ADD).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // email
+        // price
         userInput = targetIndex.getOneBased() + PRICE_DESC_AMY;
         descriptor = new EditBookDescriptorBuilder().withPrice(VALID_PRICE_ADD).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // address
+        // quantity
         userInput = targetIndex.getOneBased() + QUANTITY_DESC_AMY;
         descriptor = new EditBookDescriptorBuilder().withQuantity(VALID_QUANTITY_ADD).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
