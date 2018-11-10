@@ -14,7 +14,6 @@ import seedu.address.logic.parser.AddMilestoneCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Milestone;
-import seedu.address.model.task.Rank;
 import seedu.address.model.task.Task;
 
 //@@author JeremyInElysium
@@ -65,9 +64,11 @@ public class AddMilestoneCommand extends Command implements CommandParser {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
-        } else if (!Rank.isValidRank(toAdd.getRank().toString())) {
-            throw new CommandException(Rank.MESSAGE_RANK_CONSTRAINTS);
         }
+
+        //else if (!Rank.isValidRank(toAdd.getRank().toString())) {
+        //    throw new CommandException(Rank.MESSAGE_RANK_CONSTRAINTS);
+        //}
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
 
@@ -80,17 +81,18 @@ public class AddMilestoneCommand extends Command implements CommandParser {
             }
         }
 
-        /*
-        if(taskToEdit.milestoneSet.size() <= rank) {
-            throw new CommandException(MESSAGE_DUPLICATE_RANK);
-        }
-        */
-
         Task editedTask = taskToEdit.addMilestone(toAdd);
         model.updateTask(taskToEdit, editedTask);
         //model.addMilestone(toAdd);
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddMilestoneCommand // instanceof handles nulls
+                && toAdd.equals(((AddMilestoneCommand) other).toAdd));
     }
 
     @Override
