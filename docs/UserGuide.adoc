@@ -234,6 +234,7 @@ Format:
 
 * The selected person will be searched on google. Refer to `select` on how to select a person.
 
+// TODO: update according to the latest features
 // TODO: Add preface
 === Exporting all contacts : `exportall`
 
