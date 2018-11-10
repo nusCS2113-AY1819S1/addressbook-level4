@@ -12,37 +12,29 @@ import seedu.address.model.searchhistory.KeywordType;
  * Finds and lists all persons in address book whose tags contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindTagSubCommand extends FindCommand {
+public class IncludeTagFindCommand extends FindCommand {
 
     private final TagContainsKeywordsPredicate predicate;
 
-    public FindTagSubCommand(TagContainsKeywordsPredicate predicate) {
-        this(predicate, false);
+    public IncludeTagFindCommand(TagContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
     }
 
-    public FindTagSubCommand(TagContainsKeywordsPredicate predicate, boolean isExcludeMode) {
-        this.predicate = predicate;
-        this.isExcludeMode = isExcludeMode;
-    }
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        if (isExcludeMode) {
-            model.recordKeywords(KeywordType.ExcludeTags, predicate.getLowerCaseKeywords());
-            model.executeSearch(predicate.negate());
-        } else {
-            model.recordKeywords(KeywordType.IncludeTags, predicate.getLowerCaseKeywords());
-            model.executeSearch(predicate);
-        }
+        model.recordKeywords(KeywordType.IncludeTags, predicate.getLowerCaseKeywords());
+        model.executeSearch(predicate);
+        String keywordHistoryString = getKeywordHistoryString(model.getReadOnlyKeywordsRecord());
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
-                        + formatter.getOutputString(model.getReadOnlyKeywordsRecord()));
+                        + keywordHistoryString);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindTagSubCommand // instanceof handles nulls
-                && predicate.equals(((FindTagSubCommand) other).predicate)); // state check
+                || (other instanceof IncludeTagFindCommand // instanceof handles nulls
+                && predicate.equals(((IncludeTagFindCommand) other).predicate)); // state check
     }
 }
