@@ -41,6 +41,40 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code age} falls within the {@code ageRange}.
+     * {@code minAge}, {@code maxAge} and {@code age} should be an integer >= 16 and <60
+     * <br>examples:<pre>
+     *     isWithinRange("18", "16-30") == true
+     *     isWithinRange("10", "20-35") == false
+     *     isWithinRange("62", "20-35") == false
+     * </pre>
+     * @param minAge cannot be null
+     * @param maxAge cannot be null
+     * @param userAge cannot be null
+     */
+
+    public static boolean isWithinRange(int minAge, int maxAge, int userAge) {
+        requireNonNull(userAge);
+        requireNonNull(minAge);
+        requireNonNull(maxAge);
+
+        return ((userAge >= minAge) && (userAge <= maxAge));
+    }
+
+    /** Returns true if the integer value of {@code expectedSalary} is greater than that of {@code jobSalary}.
+     * <br>examples:<pre>
+     *     isGreaterThanOrEqualTo("4000", "3500") == true
+     *     isGreaterThanOrEqualTo("4000", "4500") == false
+     * </pre>
+     * @param expectedSalary cannot be null, must be greater than zero
+     * @param jobSalary cannot be null, must be greater than zero
+     */
+
+    public static boolean isGreaterThanOrEqualTo (String jobSalary, String expectedSalary) {
+        return Integer.parseInt(jobSalary) >= Integer.parseInt(expectedSalary);
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
