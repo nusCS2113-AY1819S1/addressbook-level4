@@ -23,10 +23,6 @@ public class HistoryCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws SecurityAuthenticationException {
         requireNonNull(history);
 
-        if (model.getUser() == null) {
-            throw new SecurityAuthenticationException();
-        }
-
         List<String> previousCommands = history.getHistory();
 
         if (previousCommands.isEmpty()) {

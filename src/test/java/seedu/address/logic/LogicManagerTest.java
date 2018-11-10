@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import org.junit.Rule;
@@ -29,22 +28,18 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
+        //History Commands records itself in implementation
+        String invalidCommand2 = "history\nuicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
-        assertHistoryCorrect(invalidCommand);
-    }
-
-    @Test
-    public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        assertHistoryCorrect(deleteCommand);
+        assertHistoryCorrect(invalidCommand2);
     }
 
     @Test
     public void execute_validCommand_success() {
         String listCommand = ListCommand.COMMAND_WORD;
+        String invalidCommand2 = "history\n" + listCommand;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-        assertHistoryCorrect(listCommand);
+        assertHistoryCorrect(invalidCommand2);
     }
 
     @Test
@@ -97,6 +92,7 @@ public class LogicManagerTest {
                                            String expectedMessage, Model expectedModel) {
 
         try {
+            logic.parseCommandWord(inputCommand);
             CommandResult result = logic.execute(inputCommand);
             assertEquals(expectedException, null);
             assertEquals(expectedMessage, result.feedbackToUser);
@@ -114,6 +110,7 @@ public class LogicManagerTest {
      */
     private void assertHistoryCorrect(String... expectedCommands) {
         try {
+            logic.parseCommandWord(HistoryCommand.COMMAND_WORD);
             CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD);
             String expectedMessage = String.format(
                     HistoryCommand.MESSAGE_SUCCESS, String.join("\n", expectedCommands));

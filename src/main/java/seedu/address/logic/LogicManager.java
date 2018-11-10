@@ -35,6 +35,7 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandsEnum parseCommandWord(String commandText) throws ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        history.add(commandText);
         return addressBookParser.parseCommand(commandText);
     }
 
@@ -42,12 +43,9 @@ public class LogicManager extends ComponentManager implements Logic {
     public CommandResult execute(String commandText)
             throws CommandException, ParseException, SecurityAuthenticationException {
         logger.info("Parsing Arguments");
-        try {
-            Command command = addressBookParser.parseCommandArguments();
-            return command.execute(model, history);
-        } finally {
-            history.add(commandText);
-        }
+
+        Command command = addressBookParser.parseCommandArguments();
+        return command.execute(model, history);
     }
 
     @Override
