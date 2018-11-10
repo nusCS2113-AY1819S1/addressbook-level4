@@ -411,7 +411,7 @@ The comments feature is facilitated by `Comments` class in the Logic/Comments fo
 
 * `CommentFacade` -- An implementation of the Facade design pattern to interact with `AddCommentCommand`, `DeleteCommentCommand` and `ReplyCommentCommand`. It contains `addComment(String input, String comment, String username)` to be used in the `AddCommentCommand` to add a comment, `deleteComment(String input, int line)` to be used in `DeleteCommentCommand` to delete a comment and `deleteComment(String input, int line)` to be used in `ReplyCommentCommand` to reply comments.
 
-The Comand Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `ReplyCommentCommand` and `EditCommand` for the user to interact with the comment section. The features of the following classes are as such:
+The Command Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `ReplyCommentCommand` and `EditCommand` for the user to interact with the comment section. The features of the following classes are as such:
 
 * `AddCommentCommand` -- Adds a comment using `CommentFacade` and `AddCommentCommandParser`
 
@@ -419,7 +419,7 @@ The Comand Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `Rep
 
 * `ReplyCommentCommand` -- Replies a comment using `CommentFacade` and `ReplyCommentCommandParser`
 
-* `EditComamnd` -- Resets the whole comment section using `editEventDescriptor` and `EditCommandParser`
+* `EditCommand` -- Resets the whole comment section using `editEventDescriptor` and `EditCommandParser`
 
 Given below is an example usage scenario and how the Comments mechanism behaves at each step.
 
@@ -434,7 +434,7 @@ image::addCommentSequenceDiagram.png[width="800"]
 
 [Note]
 ====
-Detailed description of diagram: The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user.
+*Detailed description of diagram*: The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user.
 
 The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 ====
