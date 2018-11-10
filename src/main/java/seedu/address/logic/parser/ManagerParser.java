@@ -24,6 +24,7 @@ import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ShowMineCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewAttendeesCommand;
@@ -38,6 +39,17 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class ManagerParser extends CommandsParser {
 
     public static final String IDENTITY = "Manager";
+
+    private static String LOGIN_IDENTITY;
+
+    public ManagerParser() {
+        LOGIN_IDENTITY = null;
+    }
+
+    public ManagerParser(String loginidentity) {
+        this.LOGIN_IDENTITY = loginidentity;
+    }
+
 
     /**
      * Parses user input into command for execution.
@@ -118,6 +130,9 @@ public class ManagerParser extends CommandsParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommandParser().parse(arguments);
+
+        case ShowMineCommand.COMMAND_WORD:
+            return new ShowMineCommandParser().parse(LOGIN_IDENTITY);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
