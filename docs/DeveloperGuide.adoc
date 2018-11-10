@@ -218,6 +218,8 @@ As a more OOP model, we can store a `Tag` list in `Forum Book`, which `Thread` c
 image:ModelClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
+
+// tag::storage_component[]
 === Storage component
 
 
@@ -226,6 +228,8 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Forum Book data in encrypted json format and read it back.
 
+
+// end::storage_component[]
 [[Design-Commons]]
 === Common classes
 
@@ -274,6 +278,7 @@ Step 9. The user executes `deleteComment cId/123` to delete/remove the comment w
 If the syntax of a command is wrong, the program will prompt the user to try again and show a suggested command format.
 // end::curd[]
 
+// tag::storage[]
 === Storage
 
 ==== Design Consideration
@@ -325,6 +330,7 @@ has been modified so that it can save some unnecessary disk IO if nothing change
 Data are saved in encrypted Json format, the encryption algorithm is provided by `IEncryptor`
 
 `RunningId` does not work as the other entities do, it has its own logic to make sure IDs are not repeated.
+// end::storage[]
 
 === User management
 
