@@ -2,7 +2,7 @@ package seedu.recruit.ui;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.recruit.testutil.EventsUtil.postNow;
-import static seedu.recruit.testutil.TypicalCompanies.AUDI;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.AUDI;
 import static seedu.recruit.testutil.TypicalPersons.ALICE;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_INITIAL;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_UPDATED;

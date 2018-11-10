@@ -36,7 +36,7 @@ import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
-import seedu.recruit.testutil.TypicalCompanies;
+import seedu.recruit.testutil.TypicalCompaniesAndJobOffers;
 import seedu.recruit.testutil.TypicalPersons;
 import seedu.recruit.ui.CommandBox;
 
@@ -89,7 +89,7 @@ public abstract class CandidateBookSystemTest {
      * Returns the data to be loaded into the file in {@link #getCompanyDataFileLocation()}.
      */
     protected CompanyBook getInitialCompanyData() {
-        return TypicalCompanies.getTypicalCompanyBook();
+        return TypicalCompaniesAndJobOffers.getTypicalCompanyBook();
     }
 
     /**

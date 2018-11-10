@@ -41,6 +41,7 @@ import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.CompanyContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
+import seedu.recruit.testutil.JobOfferContainsFindKeywordsPredicateBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -446,7 +447,7 @@ public class CommandTestUtil {
     // =========================================== COMPANY BOOK ============================================== //
 
     /**
-     * Updates {@code model}'s filtered list to show only the company at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered company list to show only the company at the given {@code targetIndex} in the
      * {@code model}'s company book.
      */
     public static void showCompanyAtIndex(Model model, Index targetIndex) {
@@ -456,5 +457,18 @@ public class CommandTestUtil {
         model.updateFilteredCompanyList(new CompanyContainsFindKeywordsPredicateBuilder(
                 " c/" + splitName[0]).getCompanyPredicate());
         assertEquals(1, model.getFilteredCompanyList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered job list to show only the job offer at the given {@code targetIndex} in the
+     * {@code model}'s company book.
+     */
+    public static void showJobOfferAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyJobList().size());
+        JobOffer jobOffer = model.getFilteredCompanyJobList().get(targetIndex.getZeroBased());
+        final String[] splitName = jobOffer.getJob().value.split("\\s+");
+        model.updateFilteredCompanyJobList(new JobOfferContainsFindKeywordsPredicateBuilder(
+                " j/" + splitName[0]).getJobOfferPredicate());
+        assertEquals(1, model.getFilteredCompanyJobList().size());
     }
 }

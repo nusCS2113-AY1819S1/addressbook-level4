@@ -2,8 +2,6 @@ package seedu.recruit.logic.parser;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT;
-import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertDeleteShortlistedCandidateCommandParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertFilterCompanyCommandForDeleteShortlistParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertFindCompanyCommandForDeleteShortlistParseFailure;
@@ -59,7 +57,7 @@ public class DeleteShortlistedCandidateParserTest {
 
     @Test
     public void parse_invalidArgsForSortCompanyCommand_throwsParseException() {
-        assertSortCompanyCommandForDeleteShortlistParseFailure(parser, " C/",
+        assertSortCompanyCommandForDeleteShortlistParseFailure(parser, " abc/",
                 SortCompanyCommand.MESSAGE_TAG_USAGE);
     }
 
@@ -72,7 +70,7 @@ public class DeleteShortlistedCandidateParserTest {
 
     @Test
     public void parse_invalidArgsForFindCompanyCommand_throwsParseException() {
-        assertFindCompanyCommandForDeleteShortlistParseFailure(parser, " C/",
+        assertFindCompanyCommandForDeleteShortlistParseFailure(parser, " abc/",
                 MESSAGE_INVALID_COMMAND_FORMAT + FindCompanyCommand.MESSAGE_USAGE);
     }
 
@@ -85,7 +83,7 @@ public class DeleteShortlistedCandidateParserTest {
 
     @Test
     public void parse_invalidArgsForFilterCompanyCommand_throwsParseException() {
-        assertFilterCompanyCommandForDeleteShortlistParseFailure(parser, " C/",
+        assertFilterCompanyCommandForDeleteShortlistParseFailure(parser, " abc/",
                 MESSAGE_INVALID_COMMAND_FORMAT + FilterCompanyCommand.MESSAGE_USAGE);
     }
 
@@ -115,7 +113,7 @@ public class DeleteShortlistedCandidateParserTest {
 
     @Test
     public void parse_invalidArgsForSortJobCommand_throwsParseException() {
-        assertSortJobCommandForDeleteShortlistParseFailure(parser, " J/",
+        assertSortJobCommandForDeleteShortlistParseFailure(parser, " abc/",
                 SortJobOfferCommand.MESSAGE_TAG_USAGE);
     }
 
@@ -135,7 +133,7 @@ public class DeleteShortlistedCandidateParserTest {
 
     @Test
     public void parse_emptyArgsForDeleteShortlistedCandidateCommand_throwsParseException() {
-        assertDeleteShortlistedCandidateCommandParseFailure(parser, " ", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertDeleteShortlistedCandidateCommandParseFailure(parser, "", ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
 }

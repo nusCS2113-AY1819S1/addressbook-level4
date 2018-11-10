@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.logic.commands.CommandTestUtil.showCompanyAtIndex;
-import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.getTypicalCompanyBook;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_THIRD;
