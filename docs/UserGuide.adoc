@@ -301,16 +301,33 @@ Format: `logout`
 Exits the program. +
 Format: `exit`
 
+
 === Saving the data
 
 Forum book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+// tag::encryption[]
+=== Security
 
+All data including user credential and application data are encrypted on your disk. You don't need to worry
+about other people who have access to your computer steal your information.
+
+// end::encryption[]
+
+// tag::faq[]
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Forum Book folder.`
+
+*Q*: What if I forget my password? +
+*A*: Ask an admin to help, he/she has the privilege to reset your password.
+
+*Q*: How do I uninstall this application? +
+*A*: Just delete the folder containing this application, it does not touch any other part of your computer.
+
+// end::faq[]
 
 == Command Summary
 * *Help*: `help`
