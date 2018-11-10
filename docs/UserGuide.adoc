@@ -291,24 +291,18 @@ Examples:
 * `schedule 1 d/09092018 st/1200 et/1400 en/CS1231 Exam`
 * `schedule 2 d/08072018 st/1000 et/1900 en/CS2040C Practical Exam`
 
-*To clear the schedules, please restart the program on your end.
-Delete and clear schedules will be coming in version 1.4.*
-
 *Currently, the date validation regex allows for 31 days every month. This issue will be fixed
 in v1.4*
 
-=== Add and Delete personal weekly schedule : `schedule` [coming in v1.4]
+=== Clear personal weekly schedule : `clearSchedule`
 
 Format:
 
-`addschedule IndexOfPerson d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
-`delschedule IndexOfPerson d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+`clearSchedule IndexOfPerson`
 
 Examples:
 
-* `addschedule 1 d/08112018 st/1000 et/1200 en/GER1000`
-* `addschedule 2 d/01012019 st/1000 et/1800 en/FireworkParty`
-* `delschedule 2 d/01012019 st/1000 et/1800 en/FireworkParty`
+* `clearSchedule 1`
 
 === List Common Schedule : `commonschedule` [coming in v1.4]
 
