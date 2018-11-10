@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import seedu.address.model.request.DeleteRequestCommand;
 import seedu.address.model.request.RedoRequestCommand;
@@ -35,9 +36,9 @@ public class CommandList {
 
         commandList.add(ViewRequestCommand.COMMAND_WORD);
         commandList.add(RequestCommand.COMMAND_WORD);
-        commandList.add(UndoRequestCommand.COMMAND_WORD);
-        commandList.add(RedoRequestCommand.COMMAND_WORD);
         commandList.add(DeleteRequestCommand.COMMAND_WORD);
+
+        Collections.sort(commandList);
     }
     public ArrayList<String> getAccountantCommands() {
         commandList.remove(AddCommand.COMMAND_WORD);

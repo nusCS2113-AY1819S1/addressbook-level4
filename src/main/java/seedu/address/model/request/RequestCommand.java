@@ -28,11 +28,10 @@ public class RequestCommand extends CommandSecondary {
 
     public static final String MESSAGE_SUCCESS = "New request added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This request already exists in the address book";
-    public static final String COMMAND_SYNTAX = COMMAND_WORD
-            + " "
-            + PREFIX_ISBN + " "
+    public static final String COMMAND_SYNTAX = COMMAND_WORD + " "
+            + PREFIX_EMAIL + " "
             + PREFIX_QUANTITY + " "
-            + PREFIX_EMAIL + " ";
+            + PREFIX_ISBN;
 
     private final Request toAdd;
 
