@@ -122,7 +122,7 @@ public class AddCompanyCommandTest {
         }
 
         @Override
-        public void commitCompanyBook() {
+        public void commitRecruitBook() {
             // called by {@code AddCompanyCommand#execute()}
         }
 

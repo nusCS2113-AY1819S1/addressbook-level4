@@ -124,7 +124,7 @@ public class AddCandidateCommandTest {
         }
 
         @Override
-        public void commitCandidateBook() {
+        public void commitRecruitBook() {
             // called by {@code AddCandidateCommand#execute()}
         }
 

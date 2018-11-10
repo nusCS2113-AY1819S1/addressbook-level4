@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.LogsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.CompanyListDetailsPanelSelectionChangedEvent;
 import seedu.recruit.commons.events.ui.ShowUpdatedCompanyJobListRequestEvent;
 import seedu.recruit.commons.util.EmailUtil;
@@ -68,12 +69,8 @@ public class LogicManager extends ComponentManager implements Logic {
         }
     }
 
-    public static void setLogicState(String newState) {
-        state = new LogicState(newState);
-    }
-
-    public static LogicState getState() {
-        return state;
+    private void setLogicState(LogicState newState) {
+        state = newState;
     }
 
     @Override
@@ -118,6 +115,11 @@ public class LogicManager extends ComponentManager implements Logic {
         model.updateFilteredCompanyJobList(new JobOfferContainsFindKeywordsPredicate(keywordsList));
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
                 model.getFilteredCompanyJobList().size()));
+    }
+
+    @Subscribe
+    private void handleChangeLogicStateEvent(ChangeLogicStateEvent event) {
+        setLogicState(event.newState);
     }
 
 }

@@ -32,7 +32,7 @@ import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCandidateBookCommand and RedoCandidateBookCommand)
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
  * and unit tests for EditCandidateCommand.
  */
 @Ignore
@@ -54,7 +54,7 @@ public class EditCandidateCommandTest {
         Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.updateCandidate(model.getFilteredCandidateList().get(0), editedCandidate);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(editCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -77,7 +77,7 @@ public class EditCandidateCommandTest {
         Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.updateCandidate(lastCandidate, editedCandidate);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(editCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -92,7 +92,7 @@ public class EditCandidateCommandTest {
 
         Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(editCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -111,7 +111,7 @@ public class EditCandidateCommandTest {
         Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.updateCandidate(model.getFilteredCandidateList().get(0), editedCandidate);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(editCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -176,20 +176,20 @@ public class EditCandidateCommandTest {
         Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), new CompanyBook(),
                 new UserPrefs());
         expectedModel.updateCandidate(candidateToEdit, editedCandidate);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         // edit -> first candidate edited
         editCandidateCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts Candidatebook back to previous state and filtered candidate list to show all persons
-        expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.undoRecruitBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first candidate edited again
-        expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.redoRecruitBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -203,10 +203,10 @@ public class EditCandidateCommandTest {
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // single recruit book state in model -> undoCommand and redoCommand fail
-        assertCommandFailure(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_FAILURE);
-        assertCommandFailure(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_FAILURE);
     }
 
     /**
@@ -214,7 +214,7 @@ public class EditCandidateCommandTest {
      * 2. Undo the edit.
      * 3. The unfiltered list should be shown now. Verify that the index of the previously edited candidate in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the edit. This ensures {@code RedoCandidateBookCommand} edits the candidate object regardless of
+     * 4. Redo the edit. This ensures {@code RedoCommand} edits the candidate object regardless of
      * indexing.
      */
     @Test
@@ -228,21 +228,21 @@ public class EditCandidateCommandTest {
         showPersonAtIndex(model, INDEX_SECOND);
         Candidate candidateToEdit = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
         expectedModel.updateCandidate(candidateToEdit, editedCandidate);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         // edit -> edits second candidate in unfiltered candidate list / first candidate in filtered candidate list
         editCandidateCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts candidatebook back to previous state and filtered candidate list to show all persons
-        expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.undoRecruitBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased()), candidateToEdit);
         // redo -> edits same second candidate in unfiltered candidate list
-        expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.redoRecruitBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test

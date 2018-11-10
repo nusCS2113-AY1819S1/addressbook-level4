@@ -110,8 +110,8 @@ public class EditCandidateCommand extends Command {
 
         model.updateCandidate(candidateToEdit, editedCandidate);
         model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitCandidateBook();
-        model.commitCompanyBook();
+        model.commitRecruitBook();
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate));
     }
 

@@ -12,14 +12,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.recruit.testutil.AddressBookBuilder;
 import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
+import seedu.recruit.testutil.RecruitBookBuilder;
 
 public class ModelManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private ModelManager modelManager = new ModelManager();
+
+    // ================================== Candidate Book functions ====================================== //
 
     @Test
     public void hasCandidate_nullCandidate_throwsNullPointerException() {
@@ -47,7 +49,7 @@ public class ModelManagerTest {
     @Test
     public void equals() {
         CandidateBook candidateBook = new
-                AddressBookBuilder().withCandidate(ALICE).withCandidate(BENSON).buildCandidateBook();
+                RecruitBookBuilder().withCandidate(ALICE).withCandidate(BENSON).buildCandidateBook();
         CandidateBook differentCandidateBook = new CandidateBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -86,18 +88,24 @@ public class ModelManagerTest {
     // ================================== Shortlist functions ====================================== //
 
     @Test
-    public void shortlistCandidateToJobOffer_candidateInAddressBook_returnsTrue() {
+    public void shortlistCandidateToJobOffer_candidateSuccessfullyShortlisted_returnsTrue() {
 
         //modelManager.shortlistCandidateToJobOffer(ALICE,);
     }
 
     @Test
-    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsTrue() {
+    public void shortlistCandidateToJobOffer_candidateAlreadyShortlisted_returnsFalse() {
+
+        //modelManager.shortlistCandidateToJobOffer(ALICE,);
+    }
+
+    @Test
+    public void deleteShortlistedCandidateFromJobOffer_noCandidatesInShortlistedCandidateList_returnsFalse() {
 
     }
 
     @Test
-    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsFalse() {
+    public void deleteShortlistedCandidateFromJobOffer_candidateInShortlistedCandidateList_returnsTrue() {
 
     }
 }

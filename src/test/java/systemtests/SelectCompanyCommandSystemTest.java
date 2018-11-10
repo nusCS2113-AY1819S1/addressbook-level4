@@ -7,15 +7,15 @@ import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.recruit.logic.commands.SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS;
 import static seedu.recruit.testutil.TestUtil.getCompanyLastIndex;
 import static seedu.recruit.testutil.TestUtil.getCompanyMidIndex;
-import static seedu.recruit.testutil.TypicalCompanies.KEYWORD_MATCHING_AUDI;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.KEYWORD_MATCHING_AUDI;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
-import seedu.recruit.logic.commands.RedoCompanyBookCommand;
+import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
-import seedu.recruit.logic.commands.UndoCompanyBookCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.model.Model;
 
 public class SelectCompanyCommandSystemTest extends CompanyBookSystemTest {
@@ -35,13 +35,13 @@ public class SelectCompanyCommandSystemTest extends CompanyBookSystemTest {
         assertCommandSuccess(command, companyCount);
 
         /* Case: undo previous selection -> rejected */
-        command = UndoCompanyBookCommand.COMMAND_WORD;
-        String expectedResultMessage = UndoCompanyBookCommand.MESSAGE_FAILURE;
+        command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: redo selecting last card in the list -> rejected */
-        command = RedoCompanyBookCommand.COMMAND_WORD;
-        expectedResultMessage = RedoCompanyBookCommand.MESSAGE_FAILURE;
+        command = RedoCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: select the middle card in the company list -> selected */

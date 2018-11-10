@@ -5,10 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -37,7 +39,7 @@ public class DeleteShortlistedCandidateCommand extends Command {
             + "Delete Process for shortlisted candidates done. You may carry out other commands.\n";
 
     public static final String MESSAGE_EMPTY_LIST =
-            "ERROR: There are no shortlisted candidates for this job offer.\n"
+            "ERROR: No candidate shortlisted for this job offer yet.\n"
             + "Exited from delete process.\n";
 
     private final Index targetIndex;
@@ -55,7 +57,8 @@ public class DeleteShortlistedCandidateCommand extends Command {
 
         // If there are no candidates inside the list of shortlisted candidates.
         if (selectedJob.getObservableCandidateList().isEmpty()) {
-            LogicManager.setLogicState("primary");
+            EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
+
             return new CommandResult(MESSAGE_EMPTY_LIST);
         }
 
@@ -69,14 +72,14 @@ public class DeleteShortlistedCandidateCommand extends Command {
 
         model.deleteShortlistedCandidateFromJobOffer(selectedCandidate, selectedJob);
         model.updateCandidate(selectedCandidate, removedShortlistedTagFromCandidate);
-        model.commitCompanyBook();
-        model.commitCandidateBook();
+        model.commitRecruitBook();
+
 
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
             DeleteShortlistedCandidateInitializationCommand.isDoneDeleting();
         }
+        EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
 
-        LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS,
                 removedShortlistedTagFromCandidate.getName().fullName, selectedJob.getJob().value,
                 selectedCompany.getCompanyName().value));

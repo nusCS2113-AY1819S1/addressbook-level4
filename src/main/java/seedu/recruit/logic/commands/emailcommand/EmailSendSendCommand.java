@@ -10,9 +10,10 @@ import javax.mail.internet.MimeMessage;
 
 import com.google.api.services.gmail.Gmail;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -71,9 +72,8 @@ public class EmailSendSendCommand extends EmailSendCommand {
             }
         }
         resetRecipientsAndContents();
-        LogicManager.setLogicState("primary");
+        EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
         return new CommandResult(EMAIL_SUCCESS);
-    }
 
     /**
      * Generate a body text where job offers are paired with its company.

@@ -3,11 +3,11 @@ package seedu.recruit.logic.commands.emailcommand;
 import static java.util.Objects.requireNonNull;
 
 import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -56,5 +56,7 @@ public class EmailRecipientsNextCommand extends EmailRecipientsCommand {
         } else {
             EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         }
+        EventsCenter.getInstance().post(new ChangeLogicStateEvent(EmailContentsCommand.COMMAND_LOGIC_STATE));
+        return new CommandResult(EmailContentsCommand.MESSAGE_USAGE);
     }
 }

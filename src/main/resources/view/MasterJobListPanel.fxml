@@ -2,14 +2,11 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="416.0" prefWidth="269.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="338.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="416.0" prefWidth="269.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
       <children>
-         <ListView fx:id="jobListView" layoutY="26.0" prefHeight="390.0" prefWidth="338.0" />
-         <Label layoutX="106.0" layoutY="5.0" styleClass="label-bright" text="Master Job List:" />
+         <Label layoutX="79.0" layoutY="5.0" prefHeight="43.0" prefWidth="178.0" styleClass="label-bright" text="Master Job List:" />
+         <ListView fx:id="jobListView" layoutY="26.0" prefHeight="399.0" prefWidth="269.0" />
       </children>
-</AnchorPane>
-</HBox>
+</VBox>

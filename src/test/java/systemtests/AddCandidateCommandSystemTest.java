@@ -45,8 +45,8 @@ import org.junit.Test;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.AddCandidateCommand;
-import seedu.recruit.logic.commands.RedoCandidateBookCommand;
-import seedu.recruit.logic.commands.UndoCandidateBookCommand;
+import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.Name;
@@ -76,14 +76,14 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
-        command = UndoCandidateBookCommand.COMMAND_WORD;
-        String expectedResultMessage = UndoCandidateBookCommand.MESSAGE_SUCCESS;
+        command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: redo adding Amy to the list -> Amy added again */
-        command = RedoCandidateBookCommand.COMMAND_WORD;
+        command = RedoCommand.COMMAND_WORD;
         model.addCandidate(toAdd);
-        expectedResultMessage = RedoCandidateBookCommand.MESSAGE_SUCCESS;
+        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add a candidate with all fields same as another candidate in the recruit book except name -> added */

@@ -85,7 +85,7 @@ public class SampleDataUtil {
     public static ReadOnlyCandidateBook getSampleCandidateBook() {
         CandidateBook sampleAb = new CandidateBook();
         for (Candidate sampleCandidate : getSampleCandidates()) {
-            sampleAb.addPerson(sampleCandidate);
+            sampleAb.addCandidate(sampleCandidate);
         }
         return sampleAb;
     }

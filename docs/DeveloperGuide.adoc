@@ -644,7 +644,7 @@ to `Command`.
 [TIP]
 You can access this list by calling `selectedJob.getUniqueCandidateList()`.
 
-. `model.commitCompanyBook()` is then called to indicate that Company Book has been changed.
+. `model.commitRecruitBook()` is then called to indicate that Company Book has been changed.
 . RecruitBook exits the shortlisting process and returns your view to your last viewed book.
 
 The following sequence diagram shows how the shortlist operation works:
@@ -711,7 +711,7 @@ This command checks if the selected candidate exists inside `candidateList` by e
 `selectedJob.getUniqueCandidateList().contains(selectedCandidate)`. If the candidate does not exists inside the list,
 this command returns a message to be displayed to inform the user.
 
-. `model.commitCompanyBook()` is then called to indicate that Company Book has been changed.
+. `model.commitRecruitBook()` is then called to indicate that Company Book has been changed.
 . RecruitBook exits the deleting process.
 
 The following activity diagram summarizes what happens when a user executes `deleteShortlist` command:
@@ -895,7 +895,7 @@ Additionally, it implements the following operations:
 * `VersionedCandidateBook#undo()` -- Restores the previous candidate book state from its history.
 * `VersionedCandidateBook#redo()` -- Restores a previously undone candidate book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitCandidateBook()`, `Model#undoCandidateBook()` and `Model#redoCandidateBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitCandidateBook()`, `Model#UndoRecruitBook()` and `Model#redoCandidateBook()` respectively.
 
 ===== CompanyBook
 
@@ -907,7 +907,7 @@ Additionally, it implements the following operations:
 * `VersionedCompanyBook#undo()` -- Restores the previous company book state from its history.
 * `VersionedCompanyBook#redo()` -- Restores a previously undone company book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitCompanyBook()`, `Model#undoCompanyBook()`
+These operations are exposed in the `Model` interface as `Model#commitRecruitBook()`, `Model#undoCompanyBook()`
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
@@ -926,12 +926,12 @@ image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 [NOTE]
 If a command fails its execution, it will not call `Model#commitCandidateBook()`, so the candidate book state will not be saved into the `candidateBookStateList`.
 
-Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undoc` command. The `undoc` command will call `Model#undoCandidateBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
+Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undoc` command. The `undoc` command will call `Model#UndoRecruitBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial candidate book state, then there are no previous candidate book states to restore. The `undo` command uses `Model#canUndoCandidateBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial candidate book state, then there are no previous candidate book states to restore. The `undo` command uses `Model#canUndoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
@@ -942,7 +942,7 @@ The `redoc` command does the opposite -- it calls `Model#redoCandidateBook()`, w
 [NOTE]
 If the `currentStatePointer` is at index `candidateBookStateList.size() - 1`, pointing to the latest candidate book state, then there are no undone candidate book states to restore. The `redoc` command uses `Model#canRedoCandidateBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `listc`. Commands that do not modify the candidate book, such as `listc`, will usually not call `Model#commitCandidateBook()`, `Model#undoCandidateBook()` or `Model#redoCandidateBook()`. Thus, the `candidateBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `listc`. Commands that do not modify the candidate book, such as `listc`, will usually not call `Model#commitCandidateBook()`, `Model#UndoRecruitBook()` or `Model#redoCandidateBook()`. Thus, the `candidateBookStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 

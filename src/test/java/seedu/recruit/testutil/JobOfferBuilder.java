@@ -1,5 +1,6 @@
 package seedu.recruit.testutil;
 
+import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
 import seedu.recruit.model.candidate.UniqueCandidateList;
@@ -99,6 +100,14 @@ public class JobOfferBuilder {
      */
     public JobOfferBuilder withSalary(String salary) {
         this.salary = new Salary(salary);
+        return this;
+    }
+
+    /**
+     * Sets the {@code candidateList} of the {@code JobOffer} that we are building.
+     */
+    public JobOfferBuilder withCandidateList(Candidate candidate) {
+        candidateList.add(candidate);
         return this;
     }
 

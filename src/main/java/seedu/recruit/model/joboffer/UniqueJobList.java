@@ -96,7 +96,8 @@ public class UniqueJobList implements Iterable<JobOffer> {
         Collections.sort(internalList, new Comparator<JobOffer>() {
             @Override
             public int compare(JobOffer o1, JobOffer o2) {
-                return (o1.getCompanyName().toString()).compareTo(o2.getCompanyName().toString());
+                return ((o1.getCompanyName().toString()).toLowerCase()).compareTo((
+                        o2.getCompanyName().toString()).toLowerCase());
             }
         });
     }
@@ -109,7 +110,7 @@ public class UniqueJobList implements Iterable<JobOffer> {
         Collections.sort(internalList, new Comparator<JobOffer>() {
             @Override
             public int compare(JobOffer o1, JobOffer o2) {
-                return (o1.getJob().toString()).compareTo(o2.getJob().toString());
+                return ((o1.getJob().toString()).toLowerCase()).compareTo((o2.getJob().toString()).toLowerCase());
             }
         });
     }

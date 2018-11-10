@@ -3,7 +3,7 @@ package seedu.recruit.logic.commands;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.testutil.TestUtil.getIndexSet;
-import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
+import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.getTypicalCompanyBook;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_THIRD;
@@ -23,7 +23,7 @@ import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.Company;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCandidateBookCommand and RedoCandidateBookCommand)
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
  * and unit tests for {@code DeleteCompanyCommand}.
  */
 
@@ -48,7 +48,7 @@ public class DeleteCompanyCommandTest {
 
         ModelManager expectedModel = new ModelManager(new CandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCompany(companyToDelete);
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(deleteCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -75,7 +75,7 @@ public class DeleteCompanyCommandTest {
             expectedModel.deleteCompany(company);
         }
 
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(deleteCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
     }

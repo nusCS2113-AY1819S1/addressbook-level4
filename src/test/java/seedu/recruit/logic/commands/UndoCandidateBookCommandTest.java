@@ -33,17 +33,17 @@ public class UndoCandidateBookCommandTest {
     @Test
     public void execute() {
         // multiple undoable states in model
-        expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.undoRecruitBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single undoable state in model
-        expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.undoRecruitBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no undoable states in model
-        assertCommandFailure(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_FAILURE);
     }
 }

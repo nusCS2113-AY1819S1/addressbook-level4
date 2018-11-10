@@ -39,6 +39,7 @@ import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.CompanyContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
+import seedu.recruit.testutil.JobOfferContainsFindKeywordsPredicateBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -212,7 +213,7 @@ public class CommandTestUtil {
     public static void deleteFirstPerson(Model model) {
         Candidate firstCandidate = model.getFilteredCandidateList().get(0);
         model.deleteCandidate(firstCandidate);
-        model.commitCandidateBook();
+        model.commitRecruitBook();
     }
 
     /**
@@ -271,27 +272,27 @@ public class CommandTestUtil {
         }
 
         @Override
-        public boolean canUndoCandidateBook() {
+        public boolean canUndoRecruitBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoCandidateBook() {
+        public boolean canRedoRecruitBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoCandidateBook() {
+        public void undoRecruitBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoCandidateBook() {
+        public void redoRecruitBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitCandidateBook() {
+        public void commitRecruitBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -352,31 +353,6 @@ public class CommandTestUtil {
 
         @Override
         public void updateFilteredCompanyList(Predicate<Company> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean canUndoCompanyBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean canRedoCompanyBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void undoCompanyBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void redoCompanyBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void commitCompanyBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -449,7 +425,7 @@ public class CommandTestUtil {
     // =========================================== COMPANY BOOK ============================================== //
 
     /**
-     * Updates {@code model}'s filtered list to show only the company at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered company list to show only the company at the given {@code targetIndex} in the
      * {@code model}'s company book.
      */
     public static void showCompanyAtIndex(Model model, Index targetIndex) {
@@ -459,5 +435,18 @@ public class CommandTestUtil {
         model.updateFilteredCompanyList(new CompanyContainsFindKeywordsPredicateBuilder(
                 " c/" + splitName[0]).getCompanyPredicate());
         assertEquals(1, model.getFilteredCompanyList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered job list to show only the job offer at the given {@code targetIndex} in the
+     * {@code model}'s company book.
+     */
+    public static void showJobOfferAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyJobList().size());
+        JobOffer jobOffer = model.getFilteredCompanyJobList().get(targetIndex.getZeroBased());
+        final String[] splitName = jobOffer.getJob().value.split("\\s+");
+        model.updateFilteredCompanyJobList(new JobOfferContainsFindKeywordsPredicateBuilder(
+                " j/" + splitName[0]).getJobOfferPredicate());
+        assertEquals(1, model.getFilteredCompanyJobList().size());
     }
 }
