@@ -19,9 +19,10 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all drinks that meets the given parameters " +
-            "and displays them as a list with index numbers. Only a single parameter can be used at a time\n"
-            + "All available parameters:         " + "Name: n/DRINK NAME         "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all drinks that meets the given parameters "
+            + "and displays them as a list with index numbers. Only a single parameter can be used at a time\n"
+            + "All available parameters:         "
+            + "Name: n/DRINK NAME         "
             + "Date: d/IMPORT DATE         "
             + "Quantity: q/DRINK QUANTITY\n"
             + "Example: " + COMMAND_WORD + " n/Coca Cola";
