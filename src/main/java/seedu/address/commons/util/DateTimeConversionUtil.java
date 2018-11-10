@@ -21,10 +21,10 @@ import java.util.Date;
  */
 public class DateTimeConversionUtil {
     private static DateTimeConversionUtil instance;
-    private static final String DEFAULT_ZONE_ID = "Asia/Shanghai";
+    private static ZoneId localZoneId;
 
     private DateTimeConversionUtil() {
-
+        localZoneId = ZoneId.systemDefault();
     }
 
     public static DateTimeConversionUtil getInstance() {
@@ -34,14 +34,22 @@ public class DateTimeConversionUtil {
         return instance;
     }
 
+    //should only be used during testing.
+    //TODO: make this non-accessible outside of JUnit tests.
+    public void setLocalZoneId(ZoneId setTo) {
+        localZoneId = setTo;
+    }
+
     /**
      * Utility function to convert {@code LocalDateTime} to {@code Date}
+     * Date will be in the timezone of what the system reports.
      */
     public Date localDateTimeToDate(LocalDateTime localDateTime) throws IllegalArgumentException {
         requireNonNull(localDateTime);
         Date out;
         try {
-            out = Date.from(localDateTime.atZone(ZoneId.of(DEFAULT_ZONE_ID)).toInstant());
+            //using '.systemDefault()' allows us to return the Date that has the local-timezone.
+            out = Date.from(localDateTime.atZone(localZoneId).toInstant());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException (e);
         }
@@ -54,7 +62,7 @@ public class DateTimeConversionUtil {
     public LocalDateTime dateToLocalDateTime(Date date) throws DateTimeException {
         requireNonNull(date);
         LocalDateTime localDateTime;
-        localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        localDateTime = LocalDateTime.ofInstant(date.toInstant(), localZoneId);
         return localDateTime;
     }
 
@@ -93,13 +101,13 @@ public class DateTimeConversionUtil {
      * ie: if {@code DayOfWeek} requested is monday, then the return the Date of the next monday from now.
      * if today is monday, then return today's date.
      */
-    public Date getNextDateOfDay(LocalTime startTime, DayOfWeek dayOfWeek) {
+    public Date getNextDateOfDay(LocalTime localTime, DayOfWeek dayOfWeek) {
         LocalDate nextDay =
-                LocalDate.now(ZoneId.of(DEFAULT_ZONE_ID))
+                LocalDate.now(localZoneId)
                         .with(TemporalAdjusters.nextOrSame(dayOfWeek));
 
-        LocalDateTime localDateTime = startTime.atDate(nextDay);
-        return DateTimeConversionUtil.getInstance().localDateTimeToDate(localDateTime);
+        LocalDateTime localDateTime = localTime.atDate(nextDay);
+        return getInstance().localDateTimeToDate(localDateTime);
     }
 
 }
