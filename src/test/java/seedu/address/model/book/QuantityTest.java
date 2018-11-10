@@ -28,7 +28,7 @@ public class QuantityTest {
         // invalid quantities
         assertFalse(Quantity.isValidQuantity("")); // empty string
         assertFalse(Quantity.isValidQuantity(" ")); // spaces only
-        assertFalse(Quantity.isValidQuantity("12492")); // Out of quantity range.
+        assertFalse(Quantity.isValidQuantity("1214")); // Out of quantity range.
         assertFalse(Quantity.isValidQuantity("-1")); // No negative
 
         // valid quantities

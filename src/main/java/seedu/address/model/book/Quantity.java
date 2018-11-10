@@ -70,10 +70,6 @@ public class Quantity {
         return Integer.parseInt(value);
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
     /**
      * Returns true if a given string is a valid quantity.
      */

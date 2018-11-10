@@ -29,7 +29,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_ADD = "Amy Bee";
     public static final String VALID_NAME_BIOLOGY = "Bob Choo";
-    public static final String VALID_ISBN_ADD = "978-3-16-148410-0";
+    public static final String VALID_ISBN_ADD = "9780748137992";
     public static final String VALID_ISBN_BIOLOGY = "978-1-56619-909-4";
     public static final String VALID_PRICE_ADD = "19.97";
     public static final String VALID_PRICE_BIOLOGY = "98.21";
