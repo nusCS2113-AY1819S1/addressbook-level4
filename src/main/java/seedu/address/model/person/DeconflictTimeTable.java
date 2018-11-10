@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import javafx.scene.paint.Color;
 import seedu.address.model.person.exceptions.TimeSlotNotOverlapException;
@@ -16,6 +20,9 @@ import seedu.address.model.person.exceptions.TimeSlotNotOverlapException;
  */
 public class DeconflictTimeTable extends TimeTable {
     public static final Color DECONFLICT_TIMESLOT_COLOR = Color.RED;
+    public static final Color DECONFLICT_INVERSE_TIMESLOT_COLOR = Color.LIGHTGREEN;
+    public static final LocalTime DEFAULT_START = LocalTime.parse("10:00");
+    public static final LocalTime DEFAULT_END = LocalTime.parse("19:00");
 
     public DeconflictTimeTable() {
         super();
@@ -71,6 +78,73 @@ public class DeconflictTimeTable extends TimeTable {
                 toReturn.add(timeSlot);
             }
         }
+        return toReturn;
+    }
+
+    /**
+     * Produces an inverse of the current {@code DeconflictTimeTable}, i.e. a {@code DeconflictTimeTable} with
+     * {@code TimeSlot}s corresponding to the blanks in this {@code DeconflictTimeTable}
+     *
+     * Used for showing green slots in the UI
+     *
+     * @return Inverse of the current {@code DeconflictTimeTable}
+     */
+    public DeconflictTimeTable getInverse() {
+        DeconflictTimeTable toReturn = new DeconflictTimeTable();
+
+        TreeMap<DayOfWeek, TreeSet <TimeSlot>> splitTimeSlots = splitByDay();
+
+        LocalTime currStart = getEarliest().isBefore(DEFAULT_START) ? getEarliest() : DEFAULT_START;
+        LocalTime currEnd = getLatest().isAfter(DEFAULT_END) ? getLatest() : DEFAULT_END;
+
+        for (DayOfWeek day : splitTimeSlots.keySet()) {
+            if (splitTimeSlots.get(day).isEmpty()) {
+                toReturn.addTimeSlotWithoutColor(
+                        new TimeSlot(day, currStart, currEnd, DECONFLICT_INVERSE_TIMESLOT_COLOR));
+            } else {
+                TreeSet<TimeSlot> currSet = splitTimeSlots.get(day);
+
+                if (!currStart.equals(currSet.first().getStartTime())) {
+                    toReturn.addTimeSlotWithoutColor(
+                            new TimeSlot(day, currStart, currSet.first().getStartTime(),
+                                    DECONFLICT_INVERSE_TIMESLOT_COLOR));
+                }
+
+                for (TimeSlot curr : currSet) {
+                    if (currSet.higher(curr) != null) {
+                        TimeSlot next = currSet.higher(curr);
+                        toReturn.addTimeSlotWithoutColor(
+                                new TimeSlot(day, curr.getEndTime(), next.getStartTime(),
+                                        DECONFLICT_INVERSE_TIMESLOT_COLOR));
+                    }
+                }
+
+                if (!currEnd.equals(currSet.last().getEndTime())) {
+                    toReturn.addTimeSlotWithoutColor(
+                            new TimeSlot(day, currSet.last().getEndTime(), currEnd,
+                                    DECONFLICT_INVERSE_TIMESLOT_COLOR));
+                }
+            }
+        }
+
+        return toReturn;
+    }
+
+    /**
+     * Splits up the {@code TimeSlot}s in this {@code DeconflictTimeTable} by day, and sorts the {@code TimeSlot}s
+     * @return {@code TreeMap} containing the {@code TimeSlot}s split by day
+     */
+    private TreeMap<DayOfWeek, TreeSet <TimeSlot>> splitByDay() {
+        TreeMap<DayOfWeek, TreeSet<TimeSlot>> toReturn = new TreeMap<>();
+
+        for (DayOfWeek day : DayOfWeek.values()) {
+            toReturn.put(day, new TreeSet<>());
+        }
+
+        for (TimeSlot timeSlot : timeSlots) {
+            toReturn.get(timeSlot.getDayOfWeek()).add(timeSlot);
+        }
+
         return toReturn;
     }
 }

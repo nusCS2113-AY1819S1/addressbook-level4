@@ -16,7 +16,7 @@ import seedu.address.model.person.exceptions.TimeSlotNotOverlapException;
 /**
  * Represents a single {@code TimeSlot} to be placed inside a {@code TimeTable}
  */
-public class TimeSlot {
+public class TimeSlot implements Comparable<TimeSlot> {
     public static final String MESSAGE_GENERAL_CONSTRAINTS =
             "A timeslot should have a day of week (Monday, Tue), a start time, and an end time.";
     public static final String MESSAGE_CANNOT_PARSE_DAY = "Accepted day format: Monday, Mon";
@@ -210,5 +210,18 @@ public class TimeSlot {
     @Override
     public int hashCode() {
         return Objects.hash(dayOfWeek, startTime, endTime);
+    }
+
+    @Override
+    public int compareTo(TimeSlot o) {
+        if (!this.dayOfWeek.equals(o.dayOfWeek)) {
+            return this.dayOfWeek.getValue() - o.dayOfWeek.getValue();
+        }
+
+        if (!this.startTime.equals(o.startTime)) {
+            return (int) Duration.between(o.startTime, this.startTime).toMillis();
+        }
+
+        return 0;
     }
 }
