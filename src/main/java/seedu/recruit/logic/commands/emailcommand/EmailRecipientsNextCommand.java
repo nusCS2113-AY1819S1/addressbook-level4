@@ -26,7 +26,7 @@ public class EmailRecipientsNextCommand extends EmailRecipientsCommand {
             return new CommandResult(NEXT_RECIPIENTS_ERROR_NO_RECIPIENTS + EmailRecipientsCommand.MESSAGE_USAGE);
         } else {
             changeBook(emailUtil);
-            LogicManager.setLogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
+            EventsCenter.getInstance().post(new ChangeLogicStateEvent(EmailContentsCommand.COMMAND_LOGIC_STATE));
             return new CommandResult(EmailContentsCommand.MESSAGE_USAGE);
         }
     }
@@ -56,7 +56,5 @@ public class EmailRecipientsNextCommand extends EmailRecipientsCommand {
         } else {
             EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         }
-        EventsCenter.getInstance().post(new ChangeLogicStateEvent(EmailContentsCommand.COMMAND_LOGIC_STATE));
-        return new CommandResult(EmailContentsCommand.MESSAGE_USAGE);
     }
 }

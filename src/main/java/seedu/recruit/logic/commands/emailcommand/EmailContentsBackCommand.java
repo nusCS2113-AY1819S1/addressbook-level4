@@ -22,7 +22,7 @@ public class EmailContentsBackCommand extends EmailContentsCommand {
         EmailUtil emailUtil = model.getEmailUtil();
 
         changeBook(emailUtil);
-        LogicManager.setLogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
+        EventsCenter.getInstance().post(new ChangeLogicStateEvent(EmailRecipientsCommand.COMMAND_LOGIC_STATE));
         return new CommandResult(EmailRecipientsCommand.MESSAGE_USAGE);
     }
 
@@ -36,8 +36,5 @@ public class EmailContentsBackCommand extends EmailContentsCommand {
         } else {
             EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         }
-        EventsCenter.getInstance().post(new ChangeLogicStateEvent(EmailRecipientsCommand.COMMAND_LOGIC_STATE));
-
-        return new CommandResult(EmailRecipientsCommand.MESSAGE_USAGE);
     }
 }

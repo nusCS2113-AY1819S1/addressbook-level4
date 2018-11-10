@@ -74,6 +74,7 @@ public class EmailSendSendCommand extends EmailSendCommand {
         resetRecipientsAndContents();
         EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
         return new CommandResult(EMAIL_SUCCESS);
+    }
 
     /**
      * Generate a body text where job offers are paired with its company.

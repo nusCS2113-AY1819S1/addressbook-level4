@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
-import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 
 import seedu.recruit.logic.commands.Command;
