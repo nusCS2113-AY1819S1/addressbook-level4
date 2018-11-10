@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -27,6 +28,7 @@ import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.commands.user.DeleteAccountCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.DeleteCommandParser;
+import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.SelectCommandParser;
 import seedu.address.logic.parser.accountant.AnalyseCostsCommandParser;
@@ -68,6 +70,10 @@ public class AdminParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+
         // ========= stock taker commands ==================
         case SellDrinkCommand.COMMAND_WORD:
             return new SellDrinkCommandParser().parse(arguments);
@@ -78,9 +84,6 @@ public class AdminParser {
 
 
         // ========= accountant commands ==================
-
-
-
         case AnalyseCostsCommand.COMMAND_WORD:
             return new AnalyseCostsCommandParser ().parse (arguments);
 
@@ -91,7 +94,6 @@ public class AdminParser {
             return new AnalyseRevenueCommandParser ().parse (arguments);
 
         // ==========login related command===============//
-
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser().parse(arguments);
 
@@ -105,6 +107,8 @@ public class AdminParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
+
+
         //=============general command==================//
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);

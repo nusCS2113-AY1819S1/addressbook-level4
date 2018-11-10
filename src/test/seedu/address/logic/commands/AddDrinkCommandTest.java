@@ -8,6 +8,7 @@ import static seedu.address.testutil.transaction.TypicalTransactions.getTypicalT
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -23,6 +24,8 @@ import seedu.address.logic.commands.manager.AddDrinkCommand;
 import seedu.address.model.InventoryList;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.Price;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.transaction.ReadOnlyTransactionList;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionList;
@@ -154,6 +157,24 @@ public class AddDrinkCommandTest {
         public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
             requireNonNull(predicate);
             //filteredTransactions.setPredicate(predicate);
+        }
+
+        @Override
+        public void updateSellingPrice(Drink drinkToEdit, Price newSellingPrice) {
+            //inventoryList.updateSellingPrice(drinkToEdit, newSellingPrice);
+            //indicateDrinkAttributesChanged(drinkToEdit);
+        }
+
+        @Override
+        public void updateCostPrice(Drink drinkToEdit, Price newCostPrice) {
+            //inventoryList.updateCostPrice(drinkToEdit, newCostPrice);
+            //indicateDrinkAttributesChanged(drinkToEdit);
+        }
+
+        @Override
+        public void updateTags(Drink drinkToEdit, Set<Tag> newTags) {
+            //inventoryList.updateTags(drinkToEdit, newTags);
+            //indicateDrinkAttributesChanged(drinkToEdit);
         }
 
         // TODO: end of review area

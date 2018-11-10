@@ -1,5 +1,7 @@
 package seedu.address.model.user.admin;
 
+import java.util.Set;
+
 import seedu.address.analysis.Analysis;
 import seedu.address.analysis.AnalysisManager;
 import seedu.address.analysis.AnalysisPeriodType;
@@ -13,6 +15,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Price;
 import seedu.address.model.drink.exceptions.InsufficientQuantityException;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionList;
 import seedu.address.model.user.AuthenticationLevel;
@@ -140,6 +143,26 @@ public class AdminModelManager extends ModelManager implements AdminModel {
 
     private void updateFilteredTransactionListToShowAll() {
         updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
+    }
+
+
+    // ================ EDIT DRINK DETAILS COMMANDS =========================
+    @Override
+    public void updateSellingPrice(Drink drinkToEdit, Price newSellingPrice) {
+        inventoryList.updateSellingPrice(drinkToEdit, newSellingPrice);
+        indicateDrinkAttributesChanged(drinkToEdit);
+    }
+
+    @Override
+    public void updateCostPrice(Drink drinkToEdit, Price newCostPrice) {
+        inventoryList.updateCostPrice(drinkToEdit, newCostPrice);
+        indicateDrinkAttributesChanged(drinkToEdit);
+    }
+
+    @Override
+    public void updateTags(Drink drinkToEdit, Set<Tag> newTags) {
+        inventoryList.updateTags(drinkToEdit, newTags);
+        indicateDrinkAttributesChanged(drinkToEdit);
     }
 
 }

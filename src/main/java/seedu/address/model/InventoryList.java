@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.drink.Drink;
@@ -10,6 +11,7 @@ import seedu.address.model.drink.Price;
 import seedu.address.model.drink.Quantity;
 import seedu.address.model.drink.UniqueDrinkList;
 import seedu.address.model.drink.exceptions.InsufficientQuantityException;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the inventory-list level
@@ -144,5 +146,18 @@ public class InventoryList implements ReadOnlyInventoryList {
 
     public Price getDefaultCostPrice(Drink drink) {
         return drinks.getCostPrice(drink);
+    }
+
+
+    public void updateSellingPrice(Drink drink, Price newPrice) {
+        drinks.updateSellingPrice(drink, newPrice);
+    }
+
+    public void updateCostPrice(Drink drink, Price newPrice) {
+        drinks.updateCostPrice(drink, newPrice);
+    }
+
+    public void updateTags(Drink drink, Set<Tag> newTags) {
+        drinks.updateTags(drink, newTags);
     }
 }

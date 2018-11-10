@@ -26,7 +26,7 @@ public class Drink {
     private Price retailPrice;
     private UniqueBatchList uniqueBatchList;
     private Quantity quantity;
-    private final Set<Tag> tags = new HashSet<>();
+    private Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructs a Drink for the use of adding new drink into inventory.
@@ -111,6 +111,10 @@ public class Drink {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
     /**
