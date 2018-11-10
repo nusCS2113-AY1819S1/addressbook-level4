@@ -1,8 +1,6 @@
 package seedu.address.model.task;
 
 //@@author JeremyInElysium
-
-
 /**
  * Represents a Milestone for any Task in the TaskBook
  */
