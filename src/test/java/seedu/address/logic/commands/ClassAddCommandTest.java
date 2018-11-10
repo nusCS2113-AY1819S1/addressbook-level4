@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,6 +26,7 @@ import seedu.address.model.StorageController;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Classroom;
+import seedu.address.model.classroom.ClassroomManager;
 import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
@@ -111,5 +113,11 @@ public class ClassAddCommandTest {
         assertFalse(standardCommand.equals(null));
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        ClassroomManager.getInstance().clearClassrooms();
+        ClassroomManager.getInstance().saveClassroomList();
     }
 }

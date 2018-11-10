@@ -4,6 +4,8 @@ import static seedu.address.logic.commands.ClassEditCommand.MESSAGE_EDIT_CLASSRO
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,17 +35,16 @@ public class ClassEditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
     private ClassroomManager classroomManager;
+    ModuleManager moduleManager;
 
     @Before
     public void setup() {
         StorageController.enterTestMode();
-        ModuleManager moduleManager = ModuleManager.getInstance();
+        moduleManager = ModuleManager.getInstance();
         Module module = new ModuleBuilder().withModuleCode("CG1111").build();
-        Module moduleTwo = new ModuleBuilder().withModuleCode("CG1112").build();
 
         try {
             moduleManager.addModule(module);
-            moduleManager.addModule(moduleTwo);
         } catch (DuplicateModuleException e) {
             e.printStackTrace();
         }
@@ -93,6 +94,8 @@ public class ClassEditCommandTest {
 
     @Test
     public void execute_classroomNotFound_throwsCommandException() throws Exception {
+        Module module = new ModuleBuilder().withModuleCode("CG1112").build();
+        moduleManager.addModule(module);
         ClassEditCommand classEditCommand = new ClassEditCommand("T16",
                 "CG1112",
                 new ClassEditCommand.EditClassDescriptor());
@@ -102,5 +105,10 @@ public class ClassEditCommandTest {
         classEditCommand.execute(model, commandHistory);
     }
 
+    @AfterClass
+    public static void tearDown() {
+        ClassroomManager.getInstance().clearClassrooms();
+        ClassroomManager.getInstance().saveClassroomList();
+    }
 
 }

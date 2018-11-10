@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -96,5 +97,11 @@ public class ClassDeleteCommandTest {
         assertFalse(standardCommand.equals(null));
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        ClassroomManager.getInstance().clearClassrooms();
+        ClassroomManager.getInstance().saveClassroomList();
     }
 }
