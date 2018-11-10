@@ -21,6 +21,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Content;
@@ -203,6 +204,8 @@ public class ParserUtil {
         return new Content(trimmedContent);
     }
 
+    //@author: driedmelon
+
     /**
      * Parses a {@code String date} into a {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
@@ -247,4 +250,5 @@ public class ParserUtil {
         }
         return new EventName(trimmedEventName);
     }
+
 }

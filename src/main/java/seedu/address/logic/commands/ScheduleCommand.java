@@ -57,13 +57,11 @@ public class ScheduleCommand extends Command {
 
     private Schedule toSchedule;
     private final Index index;
-    //private final SchedulePersonDescriptor schedulePersonDescriptor;
 
     public ScheduleCommand(Schedule schedule, Index index) {
         requireNonNull(schedule);
         this.index = index;
         this.toSchedule = schedule;
-        //this.schedulePersonDescriptor = new SchedulePersonDescriptor(schedulePersonDescriptor);
     }
 
     @Override
@@ -76,9 +74,9 @@ public class ScheduleCommand extends Command {
         }
 
         Person personToAddSchedule = lastShownList.get(index.getZeroBased());
-        System.out.println(personToAddSchedule.getSchedules().toString());
+        //        System.out.println(personToAddSchedule.getSchedules().toString());
         Person scheduledPerson = addScheduleToPerson(personToAddSchedule, this.toSchedule);
-        System.out.println(scheduledPerson.getSchedules().toString());
+        //        System.out.println(scheduledPerson.getSchedules().toString());
 
         model.updatePerson(personToAddSchedule, scheduledPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -100,10 +98,9 @@ public class ScheduleCommand extends Command {
         Address updatedAddress = personToAddSchedule.getAddress();
         Set<Tag> updatedTags = personToAddSchedule.getTags();
         Set<Schedule> oldSchedule = personToAddSchedule.getSchedules();
-
         Set<Schedule> updatedSchedule = new HashSet<>(oldSchedule);
         updatedSchedule.add(schedule);
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSchedule);
     }
-    
+
 }

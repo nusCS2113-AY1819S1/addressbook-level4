@@ -83,6 +83,11 @@ public class XmlAdaptedSchedule {
         if (!Time.isValidTime(endTime)) {
             throw new IllegalValueException(Time.MESSAGE_TIME_CONSTRAINTS);
         }
+
+        if (!Schedule.isValidStartEnd(startTime,endTime)) {
+            throw new IllegalValueException(Schedule.MESSAGE_START_END_CONSTRAINTS);
+        }
+
         final Time modelEndTime = new Time(endTime);
 
         if (eventName == null) {

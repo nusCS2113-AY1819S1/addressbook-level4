@@ -54,6 +54,13 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
         Schedule schedule = new Schedule(date, startTime, endTime, eventName);
 
+        //checks if startTime is before endTime
+        int startT = Integer.parseInt(startTime.toString());
+        int endT = Integer.parseInt(endTime.toString());
+        if (startT >= endT){
+            throw new ParseException(schedule.MESSAGE_START_END_CONSTRAINTS);
+        }
+
         return new ScheduleCommand(schedule, index);
     }
 

@@ -9,6 +9,7 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Schedule {
+    public static final String MESSAGE_START_END_CONSTRAINTS = "Event end time must be after start time.";
 
     public final String schedulePrint;
 
@@ -25,7 +26,7 @@ public class Schedule {
     /**
      * Every field must be present and not null.
      */
-    public Schedule(Date date, Time startTime, Time endTime, EventName eventName) {
+    public Schedule(Date date, Time startTime, Time endTime, EventName eventName){
         requireAllNonNull(date, startTime, endTime, eventName);
         this.date = date;
         this.startTime = startTime;
@@ -34,6 +35,17 @@ public class Schedule {
         this.schedulePrint = this.toString();
     }
 
+    /**
+     * Returns true if startTime is before endTime.
+     */
+    public static boolean isValidStartEnd (String startTime, String endTime){
+        int startT = Integer.parseInt(startTime);
+        int endT = Integer.parseInt(endTime);
+        if (startT >= endT){
+            return false;
+        }
+        return true;
+    }
 
     public Date getDate() {
         return date;
@@ -50,16 +62,6 @@ public class Schedule {
     public EventName getEventName() {
         return eventName;
     }
-
-    /**
-     * Returns true if another event has the same start time.
-     * This prevents one person from adding the same event at the same start time.
-     */
-    // TODO TODO TODO TODO TODO
-    //    public boolean isSameStartTime(Object otherStartTime) {
-    //        return otherStartTime == this ||
-    //                (otherStartTime instanceof Schedule && schedulePrint.equals(((Schedule) schedulePrint).value ));
-    //    }
 
     @Override
     public int hashCode() {
