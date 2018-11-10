@@ -67,7 +67,7 @@ public class SellCommandParser implements Parser<SellCommand> {
         }
 
         if (!sellBookDescriptor.isQuantityFieldSpecified() || sellBookDescriptor.getQuantity().getValue().equals("0")) {
-            throw new ParseException(SellCommand.MESSAGE_NOT_SOLD);
+            throw new ParseException(Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
         }
 
 
