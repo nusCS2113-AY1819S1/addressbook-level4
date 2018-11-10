@@ -20,7 +20,7 @@ By: `Team F09-4`      Since: `Sept 2018`      Licence: `MIT`
 
 [big]#*Welcome to RecruitBook User Guide!*#
 
-RecruitBook v2.0 is an offline desktop application that allows you to manage job candidates and job offers
+RecruitBook v1.4 is an offline desktop application that allows you to manage job candidates and job offers
 throughout the process of recruiting. Designed specifically to ease the recruitment process, you can use RecruitBook
 to add, edit, find, filter, shortlist, email and delete candidates, as well as job offers, to help you efficiently link
 potential candidates to the job offer that is best suited for them.
@@ -464,9 +464,9 @@ GUI (refer to examples shown on Figure 6, 7 and 8): Select a company on the left
 
 .Selecting KFC to show the available job offers
 image::companyPanel1.png[width="790", align="left"]
-.Selecting SingTel to show the available job offers
+.Selecting Google to show the available job offers
 image::companyPanel2.png[width="790", align="left"]
-.Selecting MOE to show the available job offers
+.Selecting DBS to show the available job offers
 image::companyPanel3.png[width="790", align="left"]
 // end::list[]
 
