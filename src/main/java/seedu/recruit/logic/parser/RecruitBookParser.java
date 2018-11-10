@@ -104,7 +104,6 @@ public class RecruitBookParser {
                     throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
                             + CancelCommand.MESSAGE_USAGE);
                 }
-                EmailSendCommand.resetRecipientsAndContents();
                 return new CancelCommand(state.nextCommand);
             }
 
@@ -224,22 +223,22 @@ public class RecruitBookParser {
                 return new ClearCompanyBookCommand();
 
             case FindCandidateCommand.COMMAND_WORD:
-                return new FindCandidateCommandParser().parse(arguments);
+                return new FindCandidateCommandParser(userInput).parse(arguments);
 
             case FindCompanyCommand.COMMAND_WORD:
-                return new FindCompanyCommandParser().parse(arguments);
+                return new FindCompanyCommandParser(userInput).parse(arguments);
 
             case FindJobOfferCommand.COMMAND_WORD:
-                return new FindJobOfferCommandParser().parse(arguments);
+                return new FindJobOfferCommandParser(userInput).parse(arguments);
 
             case FilterCandidateCommand.COMMAND_WORD:
-                return new FilterCandidateCommandParser().parse(arguments);
+                return new FilterCandidateCommandParser(userInput).parse(arguments);
 
             case FilterCompanyCommand.COMMAND_WORD:
-                return new FilterCompanyCommandParser().parse(arguments);
+                return new FilterCompanyCommandParser(userInput).parse(arguments);
 
             case FilterJobOfferCommand.COMMAND_WORD:
-                return new FilterJobOfferCommandParser().parse(arguments);
+                return new FilterJobOfferCommandParser(userInput).parse(arguments);
 
             case HistoryCommand.COMMAND_WORD:
                 return new HistoryCommand();

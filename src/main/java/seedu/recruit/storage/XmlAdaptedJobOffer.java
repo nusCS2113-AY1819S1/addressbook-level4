@@ -39,6 +39,8 @@ public class XmlAdaptedJobOffer {
     private String salary;
     @XmlElement(required = true)
     private List<XmlAdaptedCandidate> candidateList;
+    private int minAge;
+    private int maxAge;
 
 
     /**
@@ -75,6 +77,8 @@ public class XmlAdaptedJobOffer {
         job = source.getJob().value;
         gender = source.getGender().value;
         ageRange = source.getAgeRange().value;
+        minAge = source.getAgeRange().getMinAge();
+        maxAge = source.getAgeRange().getMaxAge();
         education = source.getEducation().value;
         salary = source.getSalary().value;
         candidateList = source.getUniqueCandidateList().asUnmodifiableObservableList()
@@ -132,7 +136,7 @@ public class XmlAdaptedJobOffer {
                     AgeRange.class.getSimpleName()));
         }
 
-        if (!AgeRange.isValidAgeRange(ageRange)) {
+        if (!AgeRange.isValidAgeRange(ageRange, minAge, maxAge)) {
             throw new IllegalValueException(AgeRange.MESSAGE_AGE_RANGE_CONSTRAINTS);
         }
 

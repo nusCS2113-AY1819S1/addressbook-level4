@@ -21,6 +21,16 @@ import seedu.recruit.model.joboffer.JobOfferContainsFilterKeywordsPredicate;
  */
 public class FilterJobOfferCommandParser implements Parser<FilterJobOfferCommand> {
 
+    private static String userInput;
+
+    public FilterJobOfferCommandParser(String userInput) {
+        this.userInput = userInput;
+    }
+
+    public static String getUserInput() {
+        return userInput;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindJobOfferCommand
      * and returns an FindJobCommand object for execution.
