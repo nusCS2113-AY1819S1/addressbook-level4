@@ -2,8 +2,6 @@ package seedu.recruit.logic.commands.emailcommand;
 
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Set;
 

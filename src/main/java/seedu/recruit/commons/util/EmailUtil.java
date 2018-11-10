@@ -50,7 +50,7 @@ public class EmailUtil {
     public static final String EMAIL_BACK_COMMAND = "back";
     public static final String EMAIL_SEND_COMMAND = "send";
     public static final String EMAIL_PREVIEW_COMMAND = "preview";
-    private static final String APPLICATION_NAME = "CS2113 F09 T04";
+    private static final String APPLICATION_NAME = "RecruitBook";
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_COMPOSE);

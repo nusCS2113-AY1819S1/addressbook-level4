@@ -1,7 +1,5 @@
 package seedu.recruit.ui;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;

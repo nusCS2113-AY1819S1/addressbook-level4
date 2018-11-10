@@ -1,7 +1,5 @@
 package seedu.recruit.logic;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

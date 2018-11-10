@@ -1,8 +1,5 @@
 package seedu.recruit.logic;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-
 import javafx.collections.ObservableList;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.commands.exceptions.CommandException;
