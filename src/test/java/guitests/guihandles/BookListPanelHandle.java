@@ -16,7 +16,7 @@ public class BookListPanelHandle extends NodeHandle<ListView<Book>> {
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Book> lastRememberedSelectedPersonCard;
+    private Optional<Book> lastRememberedSelectedBookCard;
 
     public BookListPanelHandle(ListView<Book> personListPanelNode) {
         super(personListPanelNode);
@@ -129,9 +129,9 @@ public class BookListPanelHandle extends NodeHandle<ListView<Book>> {
         List<Book> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedPersonCard = Optional.empty();
+            lastRememberedSelectedBookCard = Optional.empty();
         } else {
-            lastRememberedSelectedPersonCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedBookCard = Optional.of(selectedItems.get(0));
         }
     }
 
@@ -143,10 +143,10 @@ public class BookListPanelHandle extends NodeHandle<ListView<Book>> {
         List<Book> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedPersonCard.isPresent();
+            return lastRememberedSelectedBookCard.isPresent();
         } else {
-            return !lastRememberedSelectedPersonCard.isPresent()
-                    || !lastRememberedSelectedPersonCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedBookCard.isPresent()
+                    || !lastRememberedSelectedBookCard.get().equals(selectedItems.get(0));
         }
     }
 

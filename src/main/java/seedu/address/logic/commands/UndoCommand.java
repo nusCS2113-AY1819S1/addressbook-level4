@@ -24,7 +24,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoAddressBook();
+        model.undoBookInventory();
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

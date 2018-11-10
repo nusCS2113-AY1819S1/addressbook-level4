@@ -66,7 +66,7 @@ public class DeleteCommandTest {
         Model expectedModel = new ModelManager(model.getBookInventory(), new UserPrefs());
         expectedModel.deleteBook(bookToDelete);
         expectedModel.commitBookInventory();
-        showNoPerson(expectedModel);
+        showNoBook(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -96,11 +96,11 @@ public class DeleteCommandTest {
         deleteCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered book list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoBookInventory();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first book deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoBookInventory();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -125,7 +125,7 @@ public class DeleteCommandTest {
      * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the book object regardless of indexing.
      */
     @Test
-    public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
+    public void executeUndoRedo_validIndexFilteredList_sameBookDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX);
         Model expectedModel = new ModelManager(model.getBookInventory(), new UserPrefs());
 
@@ -137,13 +137,13 @@ public class DeleteCommandTest {
         // delete -> deletes second book in unfiltered book list / first book in filtered book list
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts inventory book back to previous state and filtered book list to show all persons
-        expectedModel.undoAddressBook();
+        // undo -> reverts inventory book back to previous state and filtered book list to show all books
+        expectedModel.undoBookInventory();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(bookToDelete, model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased()));
         // redo -> deletes same second book in unfiltered book list
-        expectedModel.redoAddressBook();
+        expectedModel.redoBookInventory();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -172,7 +172,7 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoBook(Model model) {
         model.updateFilteredBookList(p -> false);
 
         assertTrue(model.getFilteredBookList().isEmpty());

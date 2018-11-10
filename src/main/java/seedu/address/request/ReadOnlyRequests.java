@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 public interface ReadOnlyRequests {
 
     /**
-     * Returns an unmodifiable view of the persons list.
+     * Returns an unmodifiable view of the requests list.
      * This list will not contain any duplicate requests.
      */
     ObservableList<Request> getRequestList();

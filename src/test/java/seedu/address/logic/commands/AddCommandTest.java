@@ -40,21 +40,21 @@ public class AddCommandTest {
 
     @Test
     public void execute_bookAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        ModelStubAcceptingBookAdded modelStub = new ModelStubAcceptingBookAdded();
         Book validBook = new BookBuilder().build();
 
         CommandResult commandResult = new AddCommand(validBook).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validBook), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validBook), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validBook), modelStub.booksAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
+    public void execute_duplicateBook_throwsCommandException() throws Exception {
         Book validBook = new BookBuilder().build();
         AddCommand addCommand = new AddCommand(validBook);
-        ModelStub modelStub = new ModelStubWithPerson(validBook);
+        ModelStub modelStub = new ModelStubWithBook(validBook);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_BOOK);
@@ -155,12 +155,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoBookInventory() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoBookInventory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -173,10 +173,10 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single book.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithBook extends ModelStub {
         private final Book book;
 
-        ModelStubWithPerson(Book book) {
+        ModelStubWithBook(Book book) {
             requireNonNull(book);
             this.book = book;
         }
@@ -191,19 +191,19 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the book being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Book> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingBookAdded extends ModelStub {
+        final ArrayList<Book> booksAdded = new ArrayList<>();
 
         @Override
         public boolean hasBook(Book book) {
             requireNonNull(book);
-            return personsAdded.stream().anyMatch(book::isSameBook);
+            return booksAdded.stream().anyMatch(book::isSameBook);
         }
 
         @Override
         public void addBook(Book book) {
             requireNonNull(book);
-            personsAdded.add(book);
+            booksAdded.add(book);
         }
 
         @Override

@@ -27,9 +27,9 @@ public class SellCommandTest {
 
     @Test
     public void execute_quantityFieldSpecifiedWithIndex_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredBookList().size());
-        String lastIndex = Integer.toString(indexLastPerson.getZeroBased());
-        Book lastBook = model.getFilteredBookList().get(indexLastPerson.getZeroBased());
+        Index indexLastBook = Index.fromOneBased(model.getFilteredBookList().size());
+        String lastIndex = Integer.toString(indexLastBook.getZeroBased());
+        Book lastBook = model.getFilteredBookList().get(indexLastBook.getZeroBased());
 
         BookBuilder bookInList = new BookBuilder(lastBook);
         Integer expectedQuantityLeft = lastBook.getQuantity().toInteger() - Integer.parseInt(VALID_QUANTITY_BIOLOGY);

@@ -79,7 +79,7 @@ public class BookListPanelTest extends GuiUnitTest {
      * {@code BookListPanel}.
      */
     private ObservableList<Book> createBackingList(int bookCount) throws Exception {
-        Path xmlFile = createXmlFileWithPersons(bookCount);
+        Path xmlFile = createXmlFileWithBooks(bookCount);
         XmlSerializableBookInventory xmlAddressBook =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableBookInventory.class);
         return FXCollections.observableArrayList(xmlAddressBook.toModelType().getBookList());
@@ -88,7 +88,7 @@ public class BookListPanelTest extends GuiUnitTest {
     /**
      * Returns a .xml file containing {@code bookCount} books. This file will be deleted when the JVM terminates.
      */
-    private Path createXmlFileWithPersons(int bookCount) throws Exception {
+    private Path createXmlFileWithBooks(int bookCount) throws Exception {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
         builder.append("<addressbook>\n");
