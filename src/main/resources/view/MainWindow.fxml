@@ -70,12 +70,14 @@
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
             <StackPane fx:id="requestListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+          <VBox fx:id="commandPanelList" minWidth="240" prefWidth="240" SplitPane.resizableWithParent="false">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
             <Label fx:id="commandPromptText" text="Available Commands" styleClass="label-bright" />
             <HBox fx:id="commandPanelPlaceholder"></HBox>
-
-
           </VBox>
-
         </SplitPane>
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
