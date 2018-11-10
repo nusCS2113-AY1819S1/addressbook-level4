@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showBookAtIndex;
 import static seedu.address.testutil.TypicalArgTypes.ARGS_INDEX;
 import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
@@ -37,7 +37,7 @@ public class DeleteCommandTest {
         Book bookToDelete = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, bookToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getBookInventory(), new UserPrefs());
         expectedModel.deleteBook(bookToDelete);
@@ -56,12 +56,12 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_BOOK);
+        showBookAtIndex(model, INDEX_FIRST_BOOK);
 
         Book bookToDelete = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, bookToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete);
 
         Model expectedModel = new ModelManager(model.getBookInventory(), new UserPrefs());
         expectedModel.deleteBook(bookToDelete);
@@ -73,7 +73,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_BOOK);
+        showBookAtIndex(model, INDEX_FIRST_BOOK);
 
         Index outOfBoundIndex = INDEX_SECOND_BOOK;
         // ensures that outOfBoundIndex is still in bounds of BookInventory list
@@ -129,7 +129,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX);
         Model expectedModel = new ModelManager(model.getBookInventory(), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_SECOND_BOOK);
+        showBookAtIndex(model, INDEX_SECOND_BOOK);
         Book bookToDelete = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         expectedModel.deleteBook(bookToDelete);
         expectedModel.commitBookInventory();

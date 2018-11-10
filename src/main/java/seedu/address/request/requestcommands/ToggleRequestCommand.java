@@ -8,7 +8,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.request.requestmodel.RequestModel;
 
 /**
- * Lists all persons in the BookInventory to the user.
+ * Toggles the request panel.
+ * If request panel initially shows data, data will be hidden afterwards, and vice versa.
  */
 public class ToggleRequestCommand extends CommandSecondary {
 

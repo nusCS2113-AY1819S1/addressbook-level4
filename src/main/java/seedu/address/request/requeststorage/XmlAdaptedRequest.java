@@ -95,9 +95,9 @@ public class XmlAdaptedRequest {
             return false;
         }
 
-        XmlAdaptedRequest otherPerson = (XmlAdaptedRequest) other;
-        return Objects.equals(isbn, otherPerson.isbn)
-                && Objects.equals(quantity, otherPerson.quantity)
-                && Objects.equals(email, otherPerson.email);
+        XmlAdaptedRequest otherRequest = (XmlAdaptedRequest) other;
+        return Objects.equals(isbn, otherRequest.isbn)
+                && Objects.equals(quantity, otherRequest.quantity)
+                && Objects.equals(email, otherRequest.email);
     }
 }

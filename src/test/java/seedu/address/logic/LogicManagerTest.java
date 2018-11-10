@@ -50,7 +50,7 @@ public class LogicManagerTest {
     }
 */
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredBookList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         logic.getFilteredBookList().remove(0);
     }

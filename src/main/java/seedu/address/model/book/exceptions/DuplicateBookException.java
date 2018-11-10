@@ -6,6 +6,6 @@ package seedu.address.model.book.exceptions;
  */
 public class DuplicateBookException extends RuntimeException {
     public DuplicateBookException() {
-        super("Operation would result in duplicate persons");
+        super("Operation would result in duplicate books");
     }
 }

@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.book.exceptions.BookNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of requests that enforces uniqueness between its elements and does not allow nulls.
  * A request is considered unique by comparing using {@code Request#isSameRequest(Request)}.
  * As such, adding and updating of persons uses Request#isSameRequest(Request) for equality
  * so as to ensure that the request being added or updated is unique in terms of identity in

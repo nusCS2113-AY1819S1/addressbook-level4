@@ -29,7 +29,6 @@ public class RequestCommand extends CommandSecondary {
             + PREFIX_EMAIL + "johnd@example.com ";
 
     public static final String MESSAGE_SUCCESS = "New request added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This request already exists in the address book";
     public static final String COMMAND_SYNTAX = COMMAND_WORD
             + " "
             + PREFIX_ISBN + " "

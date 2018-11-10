@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BIOLOGY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SCIENCE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showBookAtIndex;
 import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
@@ -89,7 +89,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_BOOK);
+        showBookAtIndex(model, INDEX_FIRST_BOOK);
 
         Book bookInFilteredList = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         Book editedBook = new BookBuilder(bookInFilteredList).withName(VALID_NAME_BIOLOGY).build();
@@ -106,7 +106,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicateBookUnfilteredList_failure() {
         Book firstBook = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         EditBookDescriptor descriptor = new EditBookDescriptorBuilder(firstBook).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_BOOK, descriptor);
@@ -114,8 +114,8 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_BOOK);
+    public void execute_duplicateBookFilteredList_failure() {
+        showBookAtIndex(model, INDEX_FIRST_BOOK);
 
         // edit book in filtered list into a duplicate in BookInventory
         Book bookInList = model.getBookInventory().getBookList().get(INDEX_SECOND_BOOK.getZeroBased());
@@ -141,7 +141,7 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_BOOK);
+        showBookAtIndex(model, INDEX_FIRST_BOOK);
         Index outOfBoundIndex = INDEX_SECOND_BOOK;
         // ensures that outOfBoundIndex is still in bounds of BookInventory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getBookInventory().getBookList().size());
@@ -196,13 +196,13 @@ public class EditCommandTest {
      * 4. Redo the edit. This ensures {@code RedoCommand} edits the book object regardless of indexing.
      */
     @Test
-    public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
+    public void executeUndoRedo_validIndexFilteredList_sameBookEdited() throws Exception {
         Book editedBook = new BookBuilder().build();
         EditCommand.EditBookDescriptor descriptor = new EditBookDescriptorBuilder(editedBook).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_BOOK, descriptor);
         Model expectedModel = new ModelManager(new BookInventory(model.getBookInventory()), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_SECOND_BOOK);
+        showBookAtIndex(model, INDEX_SECOND_BOOK);
         Book bookToEdit = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
         expectedModel.updateBook(bookToEdit, editedBook);
         expectedModel.commitBookInventory();

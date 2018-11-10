@@ -17,8 +17,6 @@ import seedu.address.request.RequestList;
 @XmlRootElement(name = "requestlist")
 public class XmlSerializableRequestList {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate request(s).";
-
     @XmlElement
     private List<XmlAdaptedRequest> requests;
 
@@ -48,9 +46,6 @@ public class XmlSerializableRequestList {
         RequestList requestList = new RequestList();
         for (XmlAdaptedRequest p : requests) {
             Request request = p.toModelType();
-            if (requestList.hasRequest(request)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
             requestList.addRequest(request);
         }
         return requestList;

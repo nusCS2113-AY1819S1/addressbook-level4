@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 OR " + COMMAND_WORD + " "
             + PREFIX_ISBN + "978-3-16-148410-0";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Book: %1$s";
+    public static final String MESSAGE_DELETE_BOOK_SUCCESS = "Deleted Book: %1$s";
     public static final String COMMAND_SYNTAX = COMMAND_WORD + " "
             + PREFIX_ISBN;
 
@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
 
         model.deleteBook(bookToDelete);
         model.commitBookInventory();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, bookToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete));
     }
 
     @Override

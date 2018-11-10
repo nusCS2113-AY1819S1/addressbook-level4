@@ -10,11 +10,11 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.request.requeststorage.XmlSerializableRequestList;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores bookinventory data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given bookinventory data to the specified file.
      */
     public static void saveDataToFile(Path file, XmlSerializableBookInventory addressBook)
             throws FileNotFoundException {
