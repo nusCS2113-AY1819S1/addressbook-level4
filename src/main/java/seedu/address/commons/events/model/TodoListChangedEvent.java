@@ -1,3 +1,4 @@
+//@@author arty9
 package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
