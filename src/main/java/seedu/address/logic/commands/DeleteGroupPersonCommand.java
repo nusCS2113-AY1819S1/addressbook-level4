@@ -21,8 +21,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person from a group identified using their displayed index's
- * on the GroupListPanel & GroupPersonListPanel from the address book.
+ * Deletes a person from a group via indexes.
  */
 public class DeleteGroupPersonCommand extends Command {
 
@@ -47,10 +46,11 @@ public class DeleteGroupPersonCommand extends Command {
     private final Index groupTargetIndex;
     private final Index personTargetIndex;
 
-
     /**
-     * Creates an DeleteGroupPersonCommand to
-     * remove a person from a specified group
+     * Receives indexes for deleting.
+     *
+     * @param groupTargetIndex Group index to delete person from.
+     * @param personTargetIndex Person index to delete.
      */
     public DeleteGroupPersonCommand(Index groupTargetIndex, Index personTargetIndex) {
         requireAllNonNull(groupTargetIndex, personTargetIndex);
@@ -58,6 +58,14 @@ public class DeleteGroupPersonCommand extends Command {
         this.personTargetIndex = personTargetIndex;
     }
 
+    /**
+     * Deletes a person from a group.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return Successful command result.
+     * @throws CommandException If index is invalid.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -89,6 +97,12 @@ public class DeleteGroupPersonCommand extends Command {
                 groupTargetIndex.getOneBased(), personTargetIndex.getOneBased()));
     }
 
+    /**
+     * Returns true if the objects are the same.
+     *
+     * @param other Object to compare with.
+     * @return Result of comparison.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

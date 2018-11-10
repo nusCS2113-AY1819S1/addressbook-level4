@@ -4,7 +4,7 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.group.Group;
 
 /**
- * Represents a selection change in the Group List Panel
+ * Represents a selection change in the GroupListPanel.
  */
 public class GroupPanelSelectionChangedEvent extends BaseEvent {
 

@@ -22,7 +22,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Add persons to a group via their respective indexes
+ * Adds persons to a group via indexes.
  */
 public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD = "addgroup";
@@ -50,8 +50,9 @@ public class AddGroupCommand extends Command {
     private boolean shouldCommit;
 
     /**
-     * Creates an AddGroupCommand to add persons to group
-     * specified in {@code AddGroup}
+     * Receives people and group needed for adding.
+     *
+     * @param toAdd AddGroup containing required group and persons for adding.
      */
     public AddGroupCommand(AddGroup toAdd) {
         requireAllNonNull(toAdd);
@@ -59,6 +60,14 @@ public class AddGroupCommand extends Command {
         this.shouldCommit = true;
     }
 
+    /**
+     * Adds people to a group.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return Successful command result.
+     * @throws CommandException If index is invalid or duplicate persons found.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -93,6 +102,12 @@ public class AddGroupCommand extends Command {
 
     }
 
+    /**
+     * Returns true if the objects are the same.
+     *
+     * @param other Object to compare with.
+     * @return Result of comparison.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -100,6 +115,11 @@ public class AddGroupCommand extends Command {
                 && toAdd.equals(((AddGroupCommand) other).toAdd));
     }
 
+    /**
+     * Sets flag for committing.
+     *
+     * @param shouldCommit Committing flag.
+     */
     public void setShouldCommit(boolean shouldCommit) {
         this.shouldCommit = shouldCommit;
     }

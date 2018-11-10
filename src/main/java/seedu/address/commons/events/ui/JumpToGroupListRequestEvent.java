@@ -4,7 +4,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.BaseEvent;
 
 /**
- * Indicates a request to jump to the list of groups
+ * Indicates a request to jump to the list of groups.
  */
 public class JumpToGroupListRequestEvent extends BaseEvent {
     public final int targetIndex;

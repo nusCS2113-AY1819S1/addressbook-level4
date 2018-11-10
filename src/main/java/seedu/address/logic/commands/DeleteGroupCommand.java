@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
 /**
- * Deletes a group identified using it's displayed index from the address book.
+ * Deletes a group via indexes.
  */
 public class DeleteGroupCommand extends Command {
 
@@ -36,12 +36,24 @@ public class DeleteGroupCommand extends Command {
 
     private final Index targetIndex;
 
-
+    /**
+     * Receives index for deleting.
+     *
+     * @param targetIndex Group index to delete.
+     */
     public DeleteGroupCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Deletes a group.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return Successful command result.
+     * @throws CommandException If index is invalid.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -61,6 +73,12 @@ public class DeleteGroupCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete));
     }
 
+    /**
+     * Returns true if the objects are the same.
+     *
+     * @param other Object to compare with.
+     * @return Result of comparison.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
 /**
- * Creates a group in the AddressBook
+ * Creates a group in the AddressBook.
  */
 public class CreateGroupCommand extends Command {
 
@@ -46,7 +46,9 @@ public class CreateGroupCommand extends Command {
     private boolean shouldCommit;
 
     /**
-     * Creates an CreateGroupCommand to add the specified {@code Group}
+     * Receives group needed for creating.
+     *
+     * @param group Group to create.
      */
     public CreateGroupCommand(Group group) {
         requireNonNull(group);
@@ -54,6 +56,14 @@ public class CreateGroupCommand extends Command {
         this.shouldCommit = true;
     }
 
+    /**
+     * Creates a group.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return Successful command result.
+     * @throws CommandException If duplicate group found.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -70,6 +80,12 @@ public class CreateGroupCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
     }
 
+    /**
+     * Returns true if the objects are the same.
+     *
+     * @param other Object to compare with.
+     * @return Result of comparison.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -77,6 +93,11 @@ public class CreateGroupCommand extends Command {
                 && toCreate.equals(((CreateGroupCommand) other).toCreate));
     }
 
+    /**
+     * Sets flag for committing.
+     *
+     * @param shouldCommit Committing flag.
+     */
     public void setShouldCommit(boolean shouldCommit) {
         this.shouldCommit = shouldCommit;
     }

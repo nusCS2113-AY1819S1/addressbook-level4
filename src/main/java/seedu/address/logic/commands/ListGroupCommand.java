@@ -21,6 +21,13 @@ public class ListGroupCommand extends Command {
 
     private static final Logger logger = LogsCenter.getLogger(ListGroupCommand.class);
 
+    /**
+     * Lists groups.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return Successful command result.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);

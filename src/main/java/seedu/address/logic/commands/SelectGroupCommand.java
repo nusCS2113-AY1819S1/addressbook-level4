@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
 /**
- * Selects a group identified using it's displayed index from the address book.
+ * Selects a group via index.
  */
 public class SelectGroupCommand extends Command {
     public static final String COMMAND_WORD = "selectgroup";
@@ -36,10 +36,23 @@ public class SelectGroupCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Receives index for selecting.
+     *
+     * @param targetIndex Group index to select.
+     */
     public SelectGroupCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Selects a group.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return Successful command result.
+     * @throws CommandException If index is invalid.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -57,6 +70,12 @@ public class SelectGroupCommand extends Command {
 
     }
 
+    /**
+     * Returns true if the objects are the same.
+     *
+     * @param other Object to compare with.
+     * @return Result of comparison.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
