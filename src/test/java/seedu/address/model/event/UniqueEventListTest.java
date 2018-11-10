@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalEvents.EVENT_1;
 import static seedu.address.testutil.TypicalEvents.EVENT_2;
 import static seedu.address.testutil.TypicalEvents.EVENT_3;
 import static seedu.address.testutil.TypicalEvents.EVENT_4;
+import static seedu.address.testutil.TypicalEvents.EVENT_5;
+import static seedu.address.testutil.TypicalEvents.EVENT_6;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -56,6 +58,31 @@ public class UniqueEventListTest {
         uniqueEventList.add(EVENT_1);
         Event editedEvent = new EventBuilder(EVENT_1).withDescription(VALID_DESCRIPTION_PUNCTUAL).build();
         assertTrue(uniqueEventList.contains(editedEvent));
+    }
+
+    @Test
+    public void containsAfterEdit_nullEventToEdit_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueEventList.containsAfterEdit(null, EVENT_2);
+    }
+
+    @Test
+    public void containsAfterEdit_nullEditedEvent_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueEventList.containsAfterEdit(EVENT_1, null);
+    }
+
+    @Test
+    public void containsAfterEdit_eventNotInList_returnsFalse() {
+        uniqueEventList.add(EVENT_1);
+        uniqueEventList.add(EVENT_6);
+        assertFalse(uniqueEventList.containsAfterEdit(EVENT_1, EVENT_2));
+    }
+
+    @Test
+    public void containsAfterEdit_eventInList_returnsTrue() {
+        uniqueEventList.add(EVENT_1);
+        assertTrue(uniqueEventList.containsAfterEdit(EVENT_2, EVENT_1));
     }
 
     @Test
@@ -243,5 +270,21 @@ public class UniqueEventListTest {
         uniqueEventList.add(EVENT_1);
         uniqueEventList.add(EVENT_3);
         assertFalse(uniqueEventList.hasClash(EVENT_4, VALID_EMAIL_ALICE));
+    }
+
+    @Test
+    public void hasClashAfterEdit_clashWithEventInList_returnsTrue() {
+        uniqueEventList.add(EVENT_3);
+        uniqueEventList.add(EVENT_5);
+        Event editedEvent = new EventBuilder(EVENT_5).withLocation("Test Location 3").withDate("2018-09-18").build();
+        assertTrue(uniqueEventList.hasClashAfterEdit(EVENT_5, editedEvent, VALID_EMAIL_ALICE));
+    }
+
+    @Test
+    public void hasClashAfterEdit_doesNotClashWithEventInList_returnsFalse() {
+        uniqueEventList.add(EVENT_3);
+        uniqueEventList.add(EVENT_5);
+        Event editedEvent = new EventBuilder(EVENT_5).withLocation("Test Location 3").build();
+        assertFalse(uniqueEventList.hasClashAfterEdit(EVENT_5, editedEvent, VALID_EMAIL_ALICE));
     }
 }

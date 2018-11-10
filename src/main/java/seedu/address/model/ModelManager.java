@@ -298,6 +298,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasEventAfterEdit(Event eventToEdit, Event editedEvent) {
+        requireNonNull(eventToEdit);
+        requireNonNull(editedEvent);
+        return versionedEventList.hasEventAfterEdit(eventToEdit, editedEvent);
+    }
+
+    @Override
     public void deleteEvent(Event target) {
         stateHistoryList.addEventListState();
         versionedEventList.removeEvent(target);
@@ -334,6 +341,14 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(event);
         requireNonNull(personEmail);
         return versionedEventList.hasClash(event, personEmail);
+    }
+
+    @Override
+    public boolean hasClashAfterEdit(Event eventBeforeEdit, Event eventAfterEdit, String personEmail) {
+        requireNonNull(eventBeforeEdit);
+        requireNonNull(eventAfterEdit);
+        requireNonNull(personEmail);
+        return versionedEventList.hasClashAfterEdit(eventBeforeEdit, eventAfterEdit, personEmail);
     }
 
     @Override

@@ -196,6 +196,7 @@ public class Event implements Comparable<Event> {
         return attendees.hasPerson(personEmail);
     }
 
+
     /**
      * Check if Attendees of Event is empty.
      */

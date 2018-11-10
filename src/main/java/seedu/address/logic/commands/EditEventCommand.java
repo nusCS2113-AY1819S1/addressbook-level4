@@ -103,19 +103,17 @@ public class EditEventCommand extends Command {
         Event eventToEdit = lastShownList.get(index.getZeroBased());
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
-        if (editedEvent.getStartTime().compareTo(editedEvent.getEndTime()) > 0) {
+        if (editedEvent.getStartTime().compareTo(editedEvent.getEndTime()) >= 0) {
             throw new CommandException(EndTime.MESSAGE_INVALID_END_TIME);
         }
 
-        if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
+        if (model.hasEventAfterEdit(eventToEdit, editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
-        Model modelDummy = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
-        modelDummy.deleteEvent(eventToEdit);
         Set<String> attendeeSet = editedEvent.getAttendees().getAttendeesSet();
         for (String personEmail: attendeeSet) {
-            if (modelDummy.hasClash(editedEvent, personEmail)) {
+            if (model.hasClashAfterEdit(eventToEdit, editedEvent, personEmail)) {
                 throw new CommandException(String.format(MESSAGE_EVENT_CLASH, personEmail));
             }
         }
