@@ -35,7 +35,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventList;
 import seedu.address.model.Model;
+import seedu.address.testutil.TypicalEvents;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.CommandBox;
 
@@ -63,7 +65,8 @@ public abstract class AddressBookSystemTest {
     @Before
     public void setUp() {
         setupHelper = new SystemTestSetupHelper();
-        testApp = setupHelper.setupApplication(this::getInitialData, getDataFileLocation());
+        testApp = setupHelper.setupApplication(this::getInitialData, this::getInitialEventListData,
+                getDataFileLocation(), getEventDataFileLocation());
         mainWindowHandle = setupHelper.setupMainWindowHandle();
         assertApplicationStartingStateIsCorrect();
     }
@@ -82,10 +85,21 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
+     * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
+     */
+    protected EventList getInitialEventListData() {
+        return TypicalEvents.getTypicalEventList();
+    }
+
+    /**
      * Returns the directory of the data file.
      */
     protected Path getDataFileLocation() {
         return TestApp.SAVE_LOCATION_FOR_TESTING;
+    }
+
+    protected Path getEventDataFileLocation() {
+        return TestApp.SAVE_LOCATION_FOR_TESTING_EVENT;
     }
 
     public MainWindowHandle getMainWindowHandle() {
