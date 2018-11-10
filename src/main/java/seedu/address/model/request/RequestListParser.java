@@ -44,7 +44,7 @@ public class RequestListParser {
         }
         diceCoefficient = new DiceCoefficient();
         commandList = new ArrayList<>();
-        commandList.add(ViewRequestCommand.COMMAND_WORD);
+        commandList.add(ToggleRequestCommand.COMMAND_WORD);
         commandList.add(RequestCommand.COMMAND_WORD);
         commandList.add(UndoRequestCommand.COMMAND_WORD);
         commandList.add(RedoRequestCommand.COMMAND_WORD);
@@ -58,9 +58,9 @@ public class RequestListParser {
             finalCommandWord = RequestCommand.COMMAND_WORD;
             finalCommand = new RequestCommandParser().parse(arguments);
             break;
-        case ViewRequestCommand.COMMAND_WORD:
-            finalCommandWord = ViewRequestCommand.COMMAND_WORD;
-            finalCommand = new ViewRequestCommand();
+        case ToggleRequestCommand.COMMAND_WORD:
+            finalCommandWord = ToggleRequestCommand.COMMAND_WORD;
+            finalCommand = new ToggleRequestCommand();
             break;
         case DeleteRequestCommand.COMMAND_WORD:
             finalCommandWord = DeleteRequestCommand.COMMAND_WORD;

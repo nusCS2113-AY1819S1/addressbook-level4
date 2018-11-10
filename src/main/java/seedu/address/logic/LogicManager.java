@@ -58,7 +58,6 @@ public class LogicManager extends ComponentManager implements Logic {
             && (history.getHistory().get(getHistoryList().size() - 1).contains("request")))) {
             CommandSecondary command = requestListParser.parseCommandRequest(commandText);
             history.add(commandText);
-            System.out.println(history.getHistory().get(getHistoryList().size() - 1));
             return command.execute(requestModel, history);
         } else {
             try {
