@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.util.StringUtil.isNonZeroUnsignedInteger;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_HOURS;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -121,10 +124,13 @@ public class XmlAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
+        // Check validity of tags
         final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
+
+        // Check validity of deadline
         if (deadline == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Deadline.class.getSimpleName()));
@@ -136,6 +142,7 @@ public class XmlAdaptedTask {
         }
         final Deadline modelDeadline = new Deadline(deadline);
 
+        // Check validity of module code. Module code may be null.
         if (moduleCode != null && !ModuleCode.isValidModuleCode(moduleCode)) {
             throw new IllegalValueException(String.format(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINTS));
         }
@@ -144,16 +151,19 @@ public class XmlAdaptedTask {
             modelModuleCode = new ModuleCode(moduleCode);
         }
 
+        // Check validity of title
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Title"));
         }
         final String modelTitle = title;
 
+        // Check validity of description
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Description"));
         }
         final String modelDescription = description;
 
+        // Check validity of priority level
         if (priorityLevel == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     PriorityLevel.class.getSimpleName()));
@@ -163,24 +173,29 @@ public class XmlAdaptedTask {
         }
         final PriorityLevel modelPriority = new PriorityLevel(priorityLevel);
 
+        // Check validity of expected num of hours
         if (expectedNumOfHours == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     "Expected number of hours expected to complete"));
+        } else if (!isNonZeroUnsignedInteger(expectedNumOfHours)) {
+            throw new IllegalValueException(MESSAGE_INVALID_HOURS);
         }
         final int modelExpectedNumOfHours = Integer.parseInt(expectedNumOfHours);
 
+        // Check validity of completed num of hours
         final int modelCompletedNumOfHours;
-        if (completedNumOfHours == null) {
-            //throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-            //        "Number of hours taken to complete"));
-            modelCompletedNumOfHours = 0;
+        if (!completedNumOfHours.equals("-1") || Integer.valueOf(completedNumOfHours) < -1) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "Number of hours taken to complete"));
         } else {
             modelCompletedNumOfHours = Integer.parseInt(completedNumOfHours);
         }
 
+        // Check validity of isCompleted
         //Boolean cannot be checked for null --> if (isCompleted == null)
         final boolean modelIsCompleted = isCompleted;
 
+        // Check validity of Milestones
         final List<Milestone> milestoneEntries = new ArrayList<Milestone>();
         if (milestonelist != null && !milestonelist.isEmpty()) {
             for (XmlAdaptedMilestone entry : milestonelist) {
@@ -210,7 +225,10 @@ public class XmlAdaptedTask {
         return Objects.equals(deadline, otherTask.deadline)
                 && Objects.equals(title, otherTask.title)
                 && Objects.equals(description, otherTask.description)
-                && Objects.equals(priorityLevel, otherTask.priorityLevel);
+                && Objects.equals(priorityLevel, otherTask.priorityLevel)
+                && Objects.equals(moduleCode, otherTask.moduleCode)
+                && Objects.equals(expectedNumOfHours, otherTask.expectedNumOfHours)
+                && Objects.equals(completedNumOfHours, otherTask.completedNumOfHours);
 
     }
 }

@@ -47,7 +47,7 @@ public class XmlTaskBookStorage implements TaskBookStorage {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
-            logger.info("AddressBook file " + filePath + " not found");
+            logger.info("TaskBook file " + filePath + " not found");
             return Optional.empty();
         }
 
