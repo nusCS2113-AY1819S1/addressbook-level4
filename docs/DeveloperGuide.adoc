@@ -194,9 +194,9 @@ link:https://github.com/CS2113-AY1819S1-T16-1/main/blob/master/src/main/java/see
 .  The command execution can affect the `Model` (e.g. deleting a gradebook component) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("gradebook delete mc/CS2113 i/Assignment 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("gradebook delete mc/CS2113 cn/Assignment 1")` API call.
 
-.Interactions Inside the Logic Component for the `gradebook delete mc/CS2113 i/Assignment 1` Command
+.Interactions Inside the Logic Component for the `gradebook delete mc/CS2113 cn/Assignment 1` Command
 image::GradebookDeleteSDForLogic.png[width="800"]
 // end::logiccomponent[]
 [[Design-Model]]
@@ -419,7 +419,7 @@ Given below is an example usage scenario and how the gradebook data-to-graph mec
 
 Step 1. The user launches the application for the first time. The StorageController which interacts with #xmlAdaptedGradebook to retrieve data from Array List using #retrieveData.
 
-Step 2. The user executes `gradebook find m/cs2113 i/Finals` command to find the relevant gradebook component. The `find` command calls `GradebookManager#findGradebookComponent()`, which finds and filters the Array List to the relevant search.
+Step 2. The user executes `gradebook find mc/cs2113 cn/Finals` command to find the relevant gradebook component. The `find` command calls `GradebookManager#findGradebookComponent()`, which finds and filters the Array List to the relevant search.
 
 Step 3. The user executes `gradebook graph student`. GradebookManager#graphStudentProgress will convert the Array List to graph form and display to the user.
 
