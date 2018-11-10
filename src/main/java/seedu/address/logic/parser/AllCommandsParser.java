@@ -27,6 +27,7 @@ import seedu.address.logic.commands.FindTagProductCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListDistributorCommand;
+import seedu.address.logic.commands.ListDistributorProductsCommand;
 import seedu.address.logic.commands.ListProductCommand;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LogoutCommand;
@@ -79,7 +80,7 @@ public class AllCommandsParser {
             return new AddCommandParser().parse(arguments);
 
         case EditDistributorCommand.COMMAND_WORD:
-            return new EditDistributorsCommandParser().parse(arguments);
+            return new EditDistributorCommandParser().parse(arguments);
 
         case EditProductCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -88,7 +89,7 @@ public class AllCommandsParser {
             return new SelectCommandParser().parse(arguments);
 
         case DeleteDistributorCommand.COMMAND_WORD:
-            return new DeleteDistributorsCommandParser().parse(arguments);
+            return new DeleteDistributorCommandParser().parse(arguments);
 
         case DeleteProductCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
@@ -113,6 +114,9 @@ public class AllCommandsParser {
 
         case ListDistributorCommand.COMMAND_WORD:
             return new ListDistributorCommand();
+
+        case ListDistributorProductsCommand.COMMAND_WORD:
+            return new ListDistributorProductsCommandParser().parse(arguments);
 
         case ListProductCommand.COMMAND_WORD:
             return new ListProductCommand();

@@ -1,11 +1,11 @@
 package seedu.address.storage;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalDistributors.AHHUAT;
-import static seedu.address.testutil.TypicalDistributors.AHLONG;
-import static seedu.address.testutil.TypicalDistributors.AHTING;
-import static seedu.address.testutil.TypicalDistributors.getTypicalDistributorBook;
+//import static seedu.address.testutil.TypicalDistributors.AHHUAT;
+//import static seedu.address.testutil.TypicalDistributors.AHLONG;
+//import static seedu.address.testutil.TypicalDistributors.AHTING;
+//import static seedu.address.testutil.TypicalDistributors.getTypicalDistributorBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -76,7 +76,7 @@ public class XmlDistributorBookStorageTest {
         readDistributorBook("invalidAndValidDistributorDistributorBook.xml");
     }
 
-    @Test
+    /*@Test
     public void readAndSaveDistributorBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempDistributorBook.xml");
         DistributorBook original = getTypicalDistributorBook();
@@ -101,7 +101,7 @@ public class XmlDistributorBookStorageTest {
         assertEquals(original, new DistributorBook(readBack));
 
     }
-
+    */
     @Test
     public void saveDistributorBook_nullDistributorBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);

@@ -44,7 +44,6 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_NAME, PREFIX_PRODUCT_INFO, PREFIX_SERIAL_NR,
                 PREFIX_DISTRIBUTOR, PREFIX_REMAINING_ITEMS)
                 || !argMultimap.getPreamble().isEmpty()) {
-            System.out.print("\"Vi fel inne\"");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 

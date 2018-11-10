@@ -46,6 +46,7 @@ public class EditDistributorCommand extends Command {
     public static final String MESSAGE_DUPLICATE_DISTRIBUTOR = "This distributor already exists in the address book.";
     private final Index index;
     private final EditDistributorDescriptor editDistributorDescriptor;
+
     /**
      * @param index of the product in the filtered distributor list to edit
      * @param editDistributorDescriptor details to edit the distributor with

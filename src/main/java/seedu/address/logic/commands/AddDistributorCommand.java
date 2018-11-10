@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PROD;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,9 +21,12 @@ public class AddDistributorCommand extends Command {
             + "Parameters: "
             + PREFIX_DIST_NAME + "DISTRIBUTOR NAME "
             + PREFIX_DIST_PHONE + "DISTRIBUTOR PHONE "
+            + PREFIX_DIST_PROD + "DISTRIBUTOR PRODUCTS"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DIST_NAME + "Ah Bee Distributors"
-            + PREFIX_DIST_PHONE + "60123456 ";
+            + PREFIX_DIST_PHONE + "60123456 "
+            + PREFIX_DIST_PROD + "Apple"
+            + PREFIX_DIST_PROD + "Banana";
 
     public static final String MESSAGE_SUCCESS = "New distributor added: %1$s";
     public static final String MESSAGE_DUPLICATE_DISTRIBUTOR =
