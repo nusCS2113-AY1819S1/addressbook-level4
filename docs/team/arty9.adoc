@@ -33,7 +33,7 @@ Something Daily is a desktop task and expenditure tracker application created fo
 * *Minor enhancement*: updated application icon and application name to reflect on our product
 * *Minor enhancement*: modified console messages in the application to enhance user experience
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=arty9[RepoSense Dashboard]]
 
 * *Other contributions*:
 
@@ -72,6 +72,8 @@ include::../UserGuide.adoc[tag=TDLcomplete]
 include::../UserGuide.adoc[tag=TDLuncomplete]
 
 include::../UserGuide.adoc[tag=TDLview]
+
+include::../UserGuide.adoc[tag=check]
 
 == Contributions to the Developer Guide
 
