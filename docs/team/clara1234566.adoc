@@ -1,0 +1,61 @@
+= Yang Shuang - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Student management system
+
+---
+
+== Overview
+
+*Student Management System (SMS)* is a desktop application which uses CLI for its interactions.
+SMS allows university lectures to easily organise and manage their students and classes by allowing the lectures to easily import student lists given by their department.
+SMS also provides neat features such as distributing students into groups, sending emails to them and student grade management.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to help lectures to record students different test marks and manage students' grade*
+** What it does: allows the user to record and manage tests marks for all the students in the system. The user can add and edit multiple test's marks for each student. The user can also delete certain test form the system if it is not useful any more.
+         Also, the feature can help the user to summarize the students' performance during certain test(highest/lowest/mean/median scores and top/last twenty five percent students list). After that the system can also automatically calculate students' grade and record
+         in the system(base on bell_curve).
+** Justification: This feature consists of both new commands and commands created base on the existing commands and it is useful in helping lectures record and manage students test scores.
+** Highlights: This enhancement does not affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. It works well as an independent feature and it could also provides some useful information
+               that can be used and integrated with other features in the future. (eg. we can provide a list of top/last twenty five percentage students for email feature to send some message to these students).
+** Credits: For the assign grade command I make use of some of the information on how to calculate bell curve from [https://blog.nus.edu.sg/provost/2012/01/20/the-bell-curve/comment-page-2/[The Bell Curve]]
+            For standard division, I use the code from [https://stackoverflow.com/questions/40117353/standard-deviation-calculator-java[Standard Deviation Calculator (Java)]] as a reference
+
+* *Code contributed*: [https://github.com/clara1234566[Github]] [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=clara1234566[RepoSense]]
+
+* *Other contributions*:
+
+** Enhancements to existing features:
+*** Wrote additional tests for existing features to increase coverage (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/78[#78], https://github.com/CS2113-AY1819S1-T13-4/main/pull/133[#133])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-4/main/pull/103[#103], https://github.com/CS2113-AY1819S1-T13-4/main/pull/99[#99], https://github.com/CS2113-AY1819S1-T13-4/main/pull/44[#44]
+*** Reported bugs and suggestions for other teams in the class (examples: https://github.com/CS2113-AY1819S1-T16-3/main/issues/117[1])
+
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=grade management]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=grade management]
+
+

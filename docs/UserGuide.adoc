@@ -147,81 +147,6 @@ Examples:
 * `dgs g/1 p/1`
 // end::group[]
 
-=== Add test and test marks to student: `adt student name tn/ tm/`
-The system is allowed user to input different test name and test marks for each student by indicate
-the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
-the marks should be 1 digit double numbers or integers within 0-100.
-Each student should not have duplicate test name.
-Format: `adt student name tn/ tm/` or  `adt student name tm/ tn/`
-Example: `adt Alex tn/CS2113Midterm tm/77`
-This will add a test to the student
-
-=== Edit test marks of student: `edt student name tn/ tm/`
-The system is allowed user to input different test name and test marks for each student by indicate
-the student name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
-the marks should be 1 digit double numbers or integers within 0-100.
-The test to be edited should be exist in the system record, otherwise, the user should add the test first.
-Format: `edt student name tn/ tm/` or `edt student name tm/ tn/`
-Example: `edt Alex tn/CS2113Midterm tm/66`
-This will edit the student marks for test CS2113Midterm
-
-=== Generate grade summary for each test: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
-The system is allowed user to check any summary he want of each test (highest mark/ lowest mark / median mark / mean mark / generate top/last 25 percen students list)
-
-Format: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
-Example: `disp tn/CS2113Midterm highest/` gives the highest mark for all student taken the test CS2113Midterm
-         `disp tn/CS2113Midterm LTF/` will show a list of students who has fall into the last 25 percentage of this test
-
-=== Assign grade to each student taken certain test(Bell_curve): `agpt tn/`
-The system is allowed user to enter a command to assign grade for all students who has taken certain test base on the bell_curve calculation
-The user can check student's test and grade on the browser panel after you click on each student's name card.
-The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
-click the person to see the grade .
-Format: `agpt tn/`
-Example: `agpt tn/CS2113Midterm`
-
-=== Add test and test marks to student: `adt student name tn/ tm/`
-The system is allowed user to input different test name and test marks for each student by indicate
-the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
-the marks should be 1 digit double numbers or integers within 0-100.
-Each student should not have duplicate test name.
-This command is undoable and redoable.
-Format: `adt student name tn/ tm/` or  `adt student name tm/ tn/`
-Example: `adt Alex tn/CS2113Midterm tm/77`
-This will add a test to the student
-
-=== Edit test marks of student: `edt student name tn/ tm/`
-The system is allowed user to edit test marks for each student by indicate the student name and the test name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
-the marks should be 1 digit double numbers or integers within 0-100.
-The test to be edited should be exist in the system record, otherwise, the user should add the test first.
-This command is undoable and redoable.
-Format: `edt student name tn/ tm/` or `edt student name tm/ tn/`
-Example: `edt Alex tn/CS2113Midterm tm/66`
-This will edit the student marks for test CS2113Midterm
-
-=== Generate grade summary for each test: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
-The system is allowed user to check any summary he want of each test (highest mark/ lowest mark / median mark / mean mark / generate top/last 25 percen students list)
-
-Format: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
-Example: `disp tn/CS2113Midterm highest/` gives the highest mark for all student taken the test CS2113Midterm
-         `disp tn/CS2113Midterm LTF/` will show a list of students who has fall into the last 25 percentage of this test
-
-=== Assign grade to each student taken certain test(Bell_curve): `agpt tn/`
-The system is allowed user to enter a command to assign grade for all students who has taken certain test base on the bell_curve calculation
-The user can check student's test and grade on the browser panel after you click on each student's name card.
-The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
-click the person to see the grade.
-This command is undoable and redoable.
-Format: `agpt tn/`
-Example: `agpt tn/CS2113Midterm`
-
-=== delete certain test from students who has taken it: `dt tn/`
-The system is allowed user to enter a command to delete certain test from all students who has taken it.
-The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
-click the student to see the result after delete. This command is undoable and redoable.
-Format: `dt tn/`
-Example: `dt tn/CS2113Midterm`
-
 // tag::distribute[]
 === Distributed all students into _n_ groups with balanced number of Nationality or Gender: `distinto` `di`
 This functionality creates _n_ number of groups determined by the user, with a general group name specified and randomly distribute all students in the system into _n_ groups. +
@@ -272,6 +197,57 @@ Examples:
 * `di 2 n/CS2113-T14- g/true nat/0`
 // end::distribute[]
 
+// tag::garde management[]
+=== Add test and test marks to student: `adt student name tn/ tm/`
+The system is allowed user to input different test name and test marks for each student by indicate
+the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
+the marks should be 1 digit double numbers or integers within 0-100.
+Each student should not have duplicate test name.
+This command is undoable and redoable.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+Format: `adt student_name tn/ tm/` or  `adt student_name tm/ tn/`
+Example: `adt Alex tn/CS2113Midterm tm/77`
+This will add a test to the student
+
+=== Edit test marks of student: `edt student name tn/ tm/`
+The system is allowed user to edit test marks for each student by indicate the student name and the test name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
+the marks should be 1 digit double numbers or integers within 0-100.
+The test to be edited should be exist in the system record, otherwise, the user should add the test first.
+This command is undoable and redoable.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+Format: `edt student_name tn/ tm/` or `edt student_name tm/ tn/`
+Example: `edt Alex tn/CS2113Midterm tm/66`
+This will edit the student marks for test CS2113Midterm
+
+=== Generate grade summary for each test: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
+The system is allowed user to check any summary he want of each test (highest mark/ lowest mark / median mark / mean mark / generate top/last 25 percen students list)
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+ Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+Format: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
+Example: `disp tn/CS2113Midterm highest/` gives the highest mark for all student taken the test CS2113Midterm
+         `disp tn/CS2113Midterm LTF/` will show a list of students who has fall into the last 25 percentage of this test
+
+=== Assign grade to each student taken certain test(Bell_curve): `agpt tn/`
+The system is allowed user to enter a command to assign grade for all students who has taken certain test base on the bell_curve calculation
+The user can check student's test and grade on the browser panel after you click on each student's name card.
+The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the students you use to test for the feature should have distinct full name.
+This command is undoable and redoable.
+Format: `agpt tn/`
+Example: `agpt tn/CS2113Midterm`
+
+=== delete certain test from students who has taken it: `dt tn/`
+The system is allowed user to enter a command to delete certain test from all students who has taken it.
+The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
+click the student to see the result after delete. This command is undoable and redoable.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+Format: `dt tn/`
+Example: `dt tn/CS2113Midterm`
+// end::grade management[]
 
 // tag::login[]
 === Entering email credential into the Student Management System: `login`
@@ -670,7 +646,7 @@ e.g. `script txt/addpersons c/add`
 * *add test marks* : `adt tn/TESTNAME tm/MARKS` +
 e.g. `adt tn/cs2113 tm/16`
 * *edit test marks* : `edt tn/TESTNAME tm/MARKS` +
-e.g. `edt tn/cs2113 tm/16`
+e.g. `edt tn/cs2113 tm/17`
 * *display test summary* : `disp tn/TESTNAME INSTRUCTION/` +
 e.g. disp tn/CS2113 highest/` or `disp tn/CS2113 lowest/` or `disp tn/CS2113 median/` or `disp tn/CS2113 mean/` or `disp tn/CS2113 TTF/` or `disp tn/ LTF/`
 * *assign grade per test* : `agpt tn/TESTNAME ` +
