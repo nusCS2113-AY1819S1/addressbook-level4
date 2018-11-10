@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
@@ -15,10 +19,6 @@ import seedu.address.model.StorageController;
 import seedu.address.model.note.NoteManager;
 import seedu.address.testutil.NoteBuilder;
 import seedu.address.ui.BrowserPanel;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Contains tests for NoteDeleteCommand.
