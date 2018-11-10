@@ -227,28 +227,28 @@ Use the command `listall` to revert the panels back to its original state.
 // end::tagcommand[]
 
 // tag::timeslot[]
-=== Add a timeslot to your timetable: `addtime` (`at`)
+=== Add a timeslot to your timetable: `add` (`a`)
 
 Adds a timeslot to your timetable.
 
-Format: `addtime Monday 10:00-12:30`
+Format: `add Monday 10:00-12:30`
 
 ****
 * Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of `Monday`.
 * If you type a single number, like `10` for either the start or end time, FreeTime will assume that you mean `10:00`
-* You cannot add a timeslot that clashes with your timetable.
+* You cannot add a timeslot that clashes with your current timetable.
 ****
 
 Examples:
 
 
-* `addtime Monday 10:00-12:30` +
+* `add Monday 10:00-12:30` +
 Adds the timeslot from 10:00 to 12:30 on Monday to your timetable.
 
-* `addtime Fri 13:30-14:00` +
+* `add Fri 13:30-14:00` +
 Adds the timeslot from 13:30 to 14:00 on Friday to your timetable.
 
-* `addtime Wed 17-18` +
+* `add Wed 17-18` +
 Adds the timeslot from 17:00 to 18:00 on Wednesday to your timetable.
 
 After adding a timeslot, you should see the following:
@@ -256,11 +256,11 @@ After adding a timeslot, you should see the following:
 .Timeslot added to your timetable
 image::AddTimeSuccess.png[width="600"]
 
-=== Delete a timeslot from your timetable: `deletetime` (`dt`)
+=== Delete a timeslot from your timetable: `delete` (`d`)
 
-Delete a timeslot from your timetable.
+Deletes a timeslot from your timetable.
 
-Format: `deletetime Monday 10:00-12:30`
+Format: `delete Monday 10:00-12:30`
 
 ****
 * Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of `Monday`.
@@ -270,13 +270,13 @@ Format: `deletetime Monday 10:00-12:30`
 
 Examples:
 
-* `deletetime Monday 10:00-12:30` +
+* `delete Monday 10:00-12:30` +
 Deletes the timeslot from 10:00 to 12:00 on Monday from your timetable.
 
-* `deletetime Fri 13:30-14:00` +
+* `delete Fri 13:30-14:00` +
 Deletes the timeslot from 13:30 to 14:00 on Friday from your timetable.
 
-* `deletetime Wed 17-18` +
+* `delete Wed 17-18` +
 Deletes the timeslot from 17:00 to 18:00 on Wednesday from your timetable.
 // end::timeslot[]
 

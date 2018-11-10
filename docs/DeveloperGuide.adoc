@@ -381,9 +381,9 @@ The class `DeconflictTimeTable`, which inherits from `TimeTable`, is used to dis
 
 The key difference between `TimeTable` and `DeconflictTimeTable` lies in the implementation of the `addTimeSlot()` method. `TimeTable#addTimeSlot()` throws an exception when the `TimeSlot` to be added overlaps with an existing `TimeSlot` in the `TimeTable`. However, `DeconflictTimeTable#addTimeSlot()` merges the `TimeSlot` to be added with all overlapping `TimeSlot` objects in the `TimeTable`.
 
-The following sequence diagram shows the significant method calls for generating a `DeconflictTimeTable` object from two `TimeTable` objects:
+The following sequence diagram shows the significant method calls for the method `FreeCommand#execute()`:
 
-.Sequence Diagram Showing the Generation of a `DeconflictTimeTable`
+.Interactions between the Logic Component and Model Component for the `FreeTime#execute()` Method
 image::DeconflictSequenceDiagram.png[width="800"]
 
 ===== Frontend implementation
@@ -401,9 +401,9 @@ image::TimeTableScreenshotLabelled.png[width="800"]
 
 ===== Interaction between backend and frontend
 
-The following sequence diagram show the significant method calls for the execution of the `addtime` command. The execution of the `deletetime` is implemented in a similar manner.
+The following sequence diagram show the significant method calls for the execution of the `add` command. The execution of the `delete` is implemented in a similar manner.
 
-.Sequence Diagram Showing the Execution of an `addtime` Command
+.Sequence Diagram Showing the Execution of an `add` Command
 image::TimeTableSequenceDiagram.png[width="800"]
 
 {nbsp}
