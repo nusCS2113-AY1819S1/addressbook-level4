@@ -41,6 +41,8 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private String commandWord;
+    private String arguments;
 
     /**
      * Parses user input into command for execution.
@@ -49,16 +51,28 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException, SecurityAuthenticationException {
+    public String parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+        commandWord = matcher.group("commandWord");
+        arguments = matcher.group("arguments");
 
+        //TODO to prevent people from changing it?
+        return new String(commandWord);
+    }
+
+    /**
+     * //TODO
+     * @return
+     * @throws ParseException
+     * @throws SecurityAuthenticationException
+     */
+    public Command parseCommandArguments() throws ParseException, SecurityAuthenticationException {
+
+        switch (commandWord) {
         case RegisterCommand.COMMAND_WORD:
         case RegisterCommand.COMMAND_WORD_ALIAS:
             return new RegisterCommandParser().parse(arguments);
