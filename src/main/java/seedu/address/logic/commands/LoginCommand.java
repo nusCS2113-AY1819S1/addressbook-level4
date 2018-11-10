@@ -35,6 +35,6 @@ public class LoginCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         raise(new LoginEvent(username, password));
-        return new CommandResult("Login Successful");
+        return new CommandResult("Login Attempted");
     }
 }

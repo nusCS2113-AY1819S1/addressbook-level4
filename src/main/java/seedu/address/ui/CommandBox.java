@@ -111,7 +111,9 @@ public class CommandBox extends UiPart<Region> {
             // process result of the command
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            if (!commandResult.feedbackToUser.equals("Login Attempted")) {
+                raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            }
 
         } catch (CommandException | ParseException | SecurityAuthenticationException e) {
             initHistory();
