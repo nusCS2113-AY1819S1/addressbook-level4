@@ -25,5 +25,9 @@ public abstract class BaseEntityStorage<T> implements Serializable {
         dirty = true;
     }
 
+    public void setFresh() {
+        dirty = false;
+    }
+
 
 }

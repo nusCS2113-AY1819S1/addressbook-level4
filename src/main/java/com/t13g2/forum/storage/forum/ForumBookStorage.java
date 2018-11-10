@@ -54,6 +54,7 @@ public class ForumBookStorage implements IForumBookStorage {
     @Override
     public void saveAnnouncement() {
         if (announcements.isDirty()) {
+            announcements.setFresh();
             underlyingStorage.write(announcements);
         }
 
@@ -72,6 +73,7 @@ public class ForumBookStorage implements IForumBookStorage {
     @Override
     public void saveComment() {
         if (comments.isDirty()) {
+            comments.setFresh();
             underlyingStorage.write(comments);
         }
     }
@@ -89,6 +91,7 @@ public class ForumBookStorage implements IForumBookStorage {
     @Override
     public void saveForumThread() {
         if (forumThreads.isDirty()) {
+            forumThreads.setFresh();
             underlyingStorage.write(forumThreads);
         }
 
@@ -108,6 +111,7 @@ public class ForumBookStorage implements IForumBookStorage {
     @Override
     public void saveUser() {
         if (users.isDirty()) {
+            users.setFresh();
             underlyingStorage.write(users);
 
         }
@@ -127,6 +131,7 @@ public class ForumBookStorage implements IForumBookStorage {
     @Override
     public void saveModule() {
         if (modules.isDirty()) {
+            modules.setFresh();
             underlyingStorage.write(modules);
         }
     }

@@ -220,15 +220,11 @@ image:ModelClassBetterOopDiagram.png[width="800"]
 [[Design-Storage]]
 === Storage component
 
-.Structure of the Storage Component
-image::StorageClassDiagram.png[width="800"]
-
-*API* : link:{repoURL}/src/main/java/t13g2/forum/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Forum Book data in object string binary format and read it back.
+* can save the Forum Book data in encrypted json format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -308,23 +304,27 @@ These components are stored separately in six files for performance, see below f
 
 To avoid unnecessary disk IO, each part of the storage is saved in a file located in `forumData` directory.
 All data manipulation must be done within an `IUnitOfWork` where developer has to commit if the data
-should be persistent on disk, and rollback if the exception is thrown somewhere during the transaction.
+should be persistent on disk, or rollback if the exception is thrown somewhere during the transaction.
 
 `IStorage` defines interface to access file systems, this handles how our program actually get/read data.
-By default, we have `FileStorage` which stores and reads data from local hard disk. More storage options
- can be achieved by implementing this interface. eg: `FtpStorage`
+By default, we have `JsonFileStorage` which stores and reads data from local hard disk. More storage options
+ can be achieved by implementing this interface. eg: `FtpStorage`.
+
+`IEncryptor` defines interface to encrypt application data, it should be injected to `IStorage` providing a encryption/
+decryption layer just before data writes and just after data reads. By default, `JsonFileStorage` uses `SimpleEncryptor`
+which is a simple 'OR' encryptor.
 
 `IForumBookStorage` defines interface to access data entities
 
 `I*Repository` defines interface to how we can manipulate different entities.
 Each entity is managed by a repository, eg: `IUserRepository`
 
-`*Storage` is a thin wrapper for the ease of serializing data into `ObjectStream`
+`*Storage` is a thin wrapper for the `List` containing data objects, it keeps track of whether the underling list
+has been modified so that it can save some unnecessary disk IO if nothing changed when a `commit()` is issued.
 
-Data are saved in ObjectStream
+Data are saved in encrypted Json format, the encryption algorithm is provided by `IEncryptor`
 
-`RunningId` does not work as the other entities do, it has its own logic to make sure IDs are consistent among processes
-if the user runs more than one instance of the program.
+`RunningId` does not work as the other entities do, it has its own logic to make sure IDs are not repeated.
 
 === User management
 
@@ -425,12 +425,12 @@ If the syntax of a command is wrong, the program will prompt the user to try aga
 // tag::dataencryption[]
 === Data Encryption
 
-Data encryption is done in a transparent layer between `ForumBookStorage` and `FileStorage`.
+Data encryption is done in a transparent layer.
 
-All data using in this app is encrypted.
+All data in this application is encrypted.
 
-A very simple, naive, and insecure encryption is implemented, this is only for demoing the ability of
-encrypting data in this app. However, a more secure algorithm can be easily added in to the app by
+A very simple, naive, and insecure encryption is implemented in `SimpleEncryptor`, this is only for demoing the ability of
+encrypting data in this application. However, a more secure algorithm can be easily added into the app by
 implementing the `IEncryptor` interface and provide it into `IStorage`.
 
 // end::dataencryption[]
@@ -712,10 +712,8 @@ _{More to be added}_
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 threads with comments without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
 
 [appendix]
 == Glossary
@@ -723,8 +721,6 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
 
 [appendix]
 == Product Survey
@@ -981,4 +977,3 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
-_{ more test cases ... }_
