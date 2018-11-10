@@ -74,8 +74,7 @@ public class DeleteShortlistedCandidateCommandTest {
                 candidateToDelete.getName(), selectedJobOffer.getJob(), selectedCompany.getCompanyName());
 
         expectedModel.deleteShortlistedCandidateFromJobOffer(candidateToDelete, selectedJobOffer);
-        expectedModel.commitCandidateBook();
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(deleteCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -103,7 +102,7 @@ public class DeleteShortlistedCandidateCommandTest {
             expectedModel.deleteCandidate(candidate);
         }
 
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(deleteCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -129,7 +128,7 @@ public class DeleteShortlistedCandidateCommandTest {
 
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -155,20 +154,20 @@ public class DeleteShortlistedCandidateCommandTest {
         DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         // delete -> first candidate deleted
         deleteCandidateCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts Candidate book back to previous state and filtered candidate list to show all persons
-        expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.undoRecruitBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first candidate deleted again
-        expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.redoRecruitBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -181,10 +180,10 @@ public class DeleteShortlistedCandidateCommandTest {
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // single recruit book state in model -> undoCommand and redoCommand fail
-        assertCommandFailure(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_FAILURE);
-        assertCommandFailure(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_FAILURE);
     }
 
     /**
@@ -204,21 +203,21 @@ public class DeleteShortlistedCandidateCommandTest {
         showPersonAtIndex(model, INDEX_SECOND);
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
         expectedModel.deleteCandidate(candidateToDelete);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         // delete -> deletes second candidate in unfiltered candidate list / first candidate in filtered candidate list
         deleteCandidateCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts addressbook back to previous state and filtered candidate list to show all persons
-        expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.undoRecruitBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(candidateToDelete, model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second candidate in unfiltered candidate list
-        expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.redoRecruitBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
