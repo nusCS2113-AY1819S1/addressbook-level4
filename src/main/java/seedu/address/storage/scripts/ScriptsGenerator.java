@@ -76,14 +76,47 @@ public class ScriptsGenerator {
             + "a/UTown t/colleagues" + NEXT_LINE;
 
 
-    private static final String GROUP_COMMAND = "n/tut[01] l/e1-11-20 t/ma1301" + NEXT_LINE
-            + "n/tut[02] l/e3-11-20 t/ma1301" + NEXT_LINE
-            + "n/tut[03] l/e5-11-20 t/ma1301" + NEXT_LINE
-            + "n/tut[04] l/e11-11-20 t/ma1301" + NEXT_LINE
-            + "n/tut[05] l/s22-11-20 t/ma1301" + NEXT_LINE
-            + "n/tut[06] l/as4-11-20 t/ma1301" + NEXT_LINE
-            + "n/tut[07] l/e9-3-2 t/ma1301" + NEXT_LINE
-            + "n/tut[08] l/e5-1-2 t/ma1301" + NEXT_LINE;
+    private static final String GROUP_COMMAND = "g/1 p/11 p/21 p/31 p/34 p/14 p/5 p/4 p/3 p/2 p/12" + NEXT_LINE
+            + "g/2 p/1 p/2 p/3 p/16 p/26 p/11 p/27 p/28 p/29 p/23" + NEXT_LINE
+            + "g/3 p/5 p/6 p/7 p/8 p/9 p/10 p/11 p/12 p/13 p/14" + NEXT_LINE
+            + "g/4 p/11 p/12 p/13 p/14 p/15 p/16 p/17 p/18 p/19 p/20" + NEXT_LINE
+            + "g/5 p/1 p/2 p/3 p/4 p/5 p/6 p/7 p/8 p/9 p/20" + NEXT_LINE
+            + "g/6 p/21 p/22 p/23 p/24 p/25 p/26 p/27 p/28 p/29 p/10" + NEXT_LINE
+            + "g/7 p/14 p/25 p/13 p/4 p/5 p/6 p/17 p/28 p/29 p/3" + NEXT_LINE
+            + "g/8 p/1 p/22 p/13 p/20 p/10 p/9 p/19 p/17 p/18 p/16" + NEXT_LINE
+            + "g/9 p/21 p/26 p/31 p/30 p/10 p/5 p/4 p/7 p/9 p/8" + NEXT_LINE
+            + "g/10 p/30 p/20 p/10 p/14 p/15 p/16 p/27 p/18 p/19 p/11" + NEXT_LINE
+            + "g/11 p/12 p/2 p/3 p/24 p/15 p/26 p/17 p/18 p/29 p/30" + NEXT_LINE
+            + "g/12 p/11 p/2 p/3 p/24 p/25 p/26 p/7 p/18 p/19 p/1" + NEXT_LINE
+            + "g/13 p/11 p/12 p/3 p/24 p/15 p/6 p/7 p/8 p/29 p/30" + NEXT_LINE
+            + "g/14 p/11 p/12 p/3 p/24 p/25 p/6 p/7 p/28 p/29 p/5" + NEXT_LINE
+            + "g/15 p/1 p/2 p/3 p/4 p/5 p/6 p/27 p/28 p/19 p/10" + NEXT_LINE
+            + "g/16 p/1 p/2 p/23 p/24 p/15 p/16 p/7 p/28 p/9 p/8" + NEXT_LINE
+            + "g/17 p/1 p/22 p/3 p/24 p/5 p/16 p/17 p/8 p/19 p/2" + NEXT_LINE
+            + "g/18 p/1 p/12 p/3 p/4 p/15 p/6 p/27 p/28 p/29 p/7" + NEXT_LINE
+            + "g/19 p/1 p/22 p/3 p/23 p/15 p/6 p/7 p/8 p/9 p/28" + NEXT_LINE
+            + "g/20 p/1 p/2 p/3 p/14 p/5 p/16 p/7 p/18 p/9 p/20" + NEXT_LINE;
+
+    private static final String CREATE_GROUP_COMMAND = "n/CS2113 l/LT15 t/java t/friday t/4pm" + NEXT_LINE
+            + "n/CS2040C l/LT15 t/cpp t/tuesday t/5pm" + NEXT_LINE
+            + "n/MA1508 l/E1-01-01 t/maths t/wednesday t/2pm" + NEXT_LINE
+            + "n/CG2027 l/E2-02-02 t/circuits t/monday t/12pm" + NEXT_LINE
+            + "n/TUT[01] l/E3-03-03 t/pc1222 t/monday t/6pm" + NEXT_LINE
+            + "n/TUT[02] l/LT12 t/pc1222 t/thursday t/8am" + NEXT_LINE
+            + "n/TUT[03] l/LT12 t/pc1222 t/thursday t/10am" + NEXT_LINE
+            + "n/TUT[04] l/LT12 t/pc1222 t/thursday t/12pm" + NEXT_LINE
+            + "n/TUT[05] l/LT12 t/pc1222 t/thursday t/4pm" + NEXT_LINE
+            + "n/TUT[06] l/LT12 t/pc1222 t/thursday t/5pm" + NEXT_LINE
+            + "n/CG2028 l/LT16 t/cpu t/monday t/8am" + NEXT_LINE
+            + "n/EE2028 l/LT15 t/fsm t/monday t/10am" + NEXT_LINE
+            + "n/IS3261 l/E1-01-01 t/android t/monday t/2pm" + NEXT_LINE
+            + "n/MA1501 l/E2-02-02 t/maths t/tuesday t/8am" + NEXT_LINE
+            + "n/TUT[07] l/E3-03-03 t/pc1222 t/tuesday t/10am" + NEXT_LINE
+            + "n/TUT[08] l/LT12 t/pc1222 t/tuesday t/12pm" + NEXT_LINE
+            + "n/TUT[09] l/LT08 t/pc1222 t/tuesday t/2pm" + NEXT_LINE
+            + "n/CS1010 l/LT15 t/c t/tuesday t/4pm" + NEXT_LINE
+            + "n/CS4210 l/LT24 t/ai t/friday t/8am" + NEXT_LINE
+            + "n/CS2113T l/LT24 t/java t/friday t/10am" + NEXT_LINE;
 
     public static String getAddCommand() {
         return ADD_COMMAND;
@@ -91,5 +124,9 @@ public class ScriptsGenerator {
 
     public static String getGroupCommand() {
         return GROUP_COMMAND;
+    }
+
+    public static String getCreateGroupCommand() {
+        return CREATE_GROUP_COMMAND;
     }
 }
