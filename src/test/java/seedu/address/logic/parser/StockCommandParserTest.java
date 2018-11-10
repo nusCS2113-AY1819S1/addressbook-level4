@@ -1,7 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ISBN_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUANTITY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.ISBN_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_ADD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ADD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
