@@ -66,6 +66,8 @@ public class AdminParser {
         case AddDrinkCommand.COMMAND_WORD:
             return new AddDrinkCommandParser().parse(arguments);
 
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
         // ========= stock taker commands ==================
         case SellDrinkCommand.COMMAND_WORD:
             return new SellDrinkCommandParser().parse(arguments);
@@ -108,8 +110,6 @@ public class AdminParser {
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

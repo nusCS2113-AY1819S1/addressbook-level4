@@ -108,7 +108,6 @@ public class CommandBox extends UiPart<Region> {
      */
     private void handleConfirmCommand() {
         try {
-
             CommandResult commandResult = logic.execute(commandEntered);
             initHistory();
             historySnapshot.next();
@@ -122,6 +121,7 @@ public class CommandBox extends UiPart<Region> {
             // handle command failure
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
+            System.out.println ("triggered");
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }

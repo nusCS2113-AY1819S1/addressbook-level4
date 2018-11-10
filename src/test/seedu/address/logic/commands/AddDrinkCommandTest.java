@@ -21,6 +21,7 @@ import seedu.address.logic.commands.manager.AddDrinkCommand;
 import seedu.address.model.InventoryList;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.transaction.Transaction;
 import seedu.address.model.user.AuthenticationLevel;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
@@ -126,6 +127,16 @@ public class AddDrinkCommandTest {
 
         @Override
         public ObservableList<Drink> getFilteredDrinkList () {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Transaction> getTransactionList () {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getTransactions () {
             throw new AssertionError("This method should not be called.");
         }
 
