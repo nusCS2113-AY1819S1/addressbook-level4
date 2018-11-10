@@ -63,7 +63,7 @@ Adds a task to the to-do list +
 Format: `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
 
 ****
-* The format for `m/MODULE` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed. [Coming in v1.4]
+* The format for `m/MODULE` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed. [Coming in v2.0]
 * Currently, the format for `m/MODULE` tag is strictly 2 alphabetic characters (upper or lower case) followed by 4 numbers. For module codes with an additional character at the end that denotes a variant of a module, do remember to drop this character.
 * The format for `d/DATE` tag must be `DD-MM`, where `DD` refers to the date and `MM` refers to the month in numbers.
 * The `p/PRIORITY` tag only accepts integer 1, 2 or 3, where `1` refers to highest importance and `3` refers to lowest importance.
@@ -153,7 +153,6 @@ The 3rd task in the to-do list is now marked as uncompleted.
 // end::TDLuncomplete[]
 
 // tag::TDLview[]
-
 === Viewing tasks : `TDL_view`
 
 Shows a filtered list of tasks in the to-do list. +
@@ -173,22 +172,19 @@ The list is now populated with tasks marked as completed.
 
 * `TDL_view all` +
 The list is now populated with all tasks regardless of their completion status.
-
 // end::TDLview[]
 
 // tag::TDLsort[]
-
 === Sorting tasks : `TDL_sort`
 
-Sorts and displays the to-do list by a certain tag. +
+Sorts and displays the to-do list by a certain task parameter. +
 Format: `TDL_sort PARAMETER`
 
 ****
 * PARAMETER is either `module`, `date` or `priority`.
-* PARAMETER can be set as `default` and tasks will be sorted alphabetically by their names.
+* PARAMETER can be set as `default` and tasks will be sorted alphabetically by their names regardless of upper/lower cases.
 * PARAMETER can also be set as `reverse` and the former order of tasks will be reversed.
 * Users can use `TDL_sort` after `TDL_view` for sorting certain tasks (completed/uncompleted).
-* There is no sequential order between upper case and lower case.
 ****
 
 Examples:
@@ -197,37 +193,29 @@ Examples:
 The tasks are now sorted by its due date.
 * `TDL_view uncompleted` and then followed by `TDL_sort priority` +
 All uncompleted tasks will be sorted by their priority level.
-
 // end::TDLsort[]
 
 // tag::TDLNotification[]
+=== Deadline GUI notification
 
-=== Deadline notification : (default by system)
-
-Notify when the deadline of uncompleted tasks come in the following seven days
-or the deadline of uncompleted tasks have passed +
-No commands input required
+Notify when the uncompleted tasks is due within the following seven days from the current time or when the deadline of uncompleted tasks have passed. +
+No command inputs are required.
 
 ****
-* If one task is uncompleted and its deadline has passed, the color of id, task name, deadline time
-and module code will turn into red
-* If one task is uncompleted and its deadline comes within seven days, the color of id, task name,
-deadline time and module code will turn into yellow
-* The color of task status is red for "completed" and green for "uncompleted"
-* The "current time" is as same as system time
-* We currently assume all tasks are all in the same year. (follow the system time)
-* We will fix the year issue in the future release. (fix in V2.1)
+* If one task is uncompleted and its deadline has passed, the colour of index, task name, module code, deadline date and priority will turn into red.
+* If one task is uncompleted and its deadline comes within seven days, the colour of index, task name, module code, due date and priority will turn into yellow.
+* The _current time_ in the application is the same as system time.
+* All tasks are currently assumed to be in the same year of 2018.
+* Only the year 2018 is supported for now, future releases will support future years. [Coming in v2.0]
 ****
 
 Example:
 
-
 image::deadline_notification.png[width="300"]
 
-As shown above (current date: 9.Nov)
+As shown above (current date: 9th Nov 2018)
 
-No command related example available
-
+No command related examples are available.
 // end::TDLNotification[]
 
 // tag::ETadd[]
@@ -241,6 +229,7 @@ Format: `ET_add e/DESCRIPTION d/DATE m/MONEY c/CATEGORY`
 * The format for `d/DATE` must be DD-MM-YYYY, where DD refers to the date, MM refers to the month and YYYY refers to the year in numbers.
 * The m/MONEY field accepts both integer and floating point numbers.
 * The format for `c/CATEGORY` must be one of the following: Food, Drink, Clothing, Electronics, DailyNecessities, Sports, Communications, Travels, Study, Office, Pets, Gifts, Entertainment, Traffic, Shopping, Beauty, Furniture.
+* Duplicated expenses are allowed.
 ****
 
 Examples:
@@ -248,6 +237,7 @@ Examples:
 * `ET_add e/Chicken rice d/12-09-2018 m/4.2 c/Food`
 // end::ETadd[]
 
+// tag::ETedit[]
 === Editing an expenditure : `ET_edit`
 
 Edits an existing expenditure in the Expenditure Tracker. +
@@ -265,7 +255,9 @@ Examples:
 Edits the expenditure description and money detail of the 1st expenditure in the Expenditure Tracker list to be `Beef rice` and `12.5` respectively.
 * `ET_edit 2 d/09-12-2018 c/Electronics` +
 Edits the expenditure date and category of the 2nd expenditure to be `09-12-2018` and `Electronics` respectively.
+// end::ETedit[]
 
+// tag::ETdelete[]
 === Deleting an expenditure : `ET_delete`
 
 Deletes the specified expenditure from the Expenditure Tracker. +
@@ -283,6 +275,7 @@ Examples:
 Deletes the 2nd expenditure in the Expenditure Tracker.
 * `ET_delete 1` +
 Deletes the 1st expenditure in the Expenditure Tracker.
+// end::ETdelete[]
 
 // tag::ETview[]
 === Viewing expenditures : `ET_view`
@@ -346,29 +339,42 @@ Gives a short summary of the expenditures made so far and provides advice on how
 // end::ETadvice[]
 
 // tag::Calendar[]
+=== Calendar GUI
 
-=== Calendar
-
-A GUI related feature, user can easily get date information from calendar GUI and the calendar will
-automatically show the calendar for this month.
+A GUI related feature, the calendar will automatically show the full calendar for this current month and the current date.
 
 ****
-* "this month" follow the system time.
-* User can view tasks and spending on a certain day by clicking the calendar GUI.
-(come in V2.1)
-* User can switch the calendar view (from this month to the next month ...)
-(come in V2.1)
+* The current month shown follows the system time.
+* A summary of all tasks due and spendings on a certain day will be shown by clicking on the calendar GUI. [Coming in v2.0]
+* User can switch the calendar view from the current month to the next or previous months. [Coming in v2.0]
 ****
 
-Examples:
+Example:
 
 image::Calendar.png[width="450"]
 
 As shown above (screenshot from GUI)
 
-No Click event related examples available now.
-
+No click-event related examples available now.
 // end::Calendar[]
+
+// tag::check[]
+=== View daily summary : `check`
+
+View a summary of all due tasks and all expenses on a particular day. +
+Format: `check d/DATE`
+
+****
+* The format for `d/DATE` must be DD-MM-YYYY, where DD refers to the date, MM refers to the month and YYYY refers to the year in numbers.
+* The summary uses user's data from both the to-do list and the expenditure tracker. It will be empty if no data can be retrieved.
+* The command can also be executed by clicking on a particular day in the calendar GUI. [Coming v2.0]
+****
+
+Examples:
+
+* `check d/10-11-2018` +
+A summary of all due tasks and all expenses on `10-11-2018` is shown.
+// end::check[]
 
 === Listing entered commands : `history`
 
@@ -380,7 +386,7 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-=== Undoing previous command : `undo` [Coming in v1.4]
+=== Undoing previous command : `undo` [Coming in v2.0]
 
 Restores the application to the state before the previous _undoable_ command was executed. +
 Format: `undo`
@@ -396,7 +402,7 @@ Examples:
 `TDL_view completed` +
 `undo` (reverses the `TDL_complete 3` command) +
 
-=== Redoing the previously undone command : `redo` [Coming in v1.4]
+=== Redoing the previously undone command : `redo` [Coming in v2.0]
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -419,29 +425,25 @@ There is no need to save manually.
 
 
 // tag::FAQ[]
-
 == FAQ
 
 *Q*: How do I transfer my data to another computer? +
 *A*: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data in your previous data folder.
 
-*Q*: How can I run this product in Linux terminal/ Dos terminal? +
-*A*: After installing/ updating the java package, you can run `java -jar something.jar` in terminal.
+*Q*: How can I run this product in Linux terminal/Dos terminal? +
+*A*: After installing/updating the java package, you can run `java -jar somethingdaily.jar` in terminal.
 
-*Q*: Can I import my to-do list related or expenditure tracker related information into your product in certain form? +
-*A*: At present, you cannot import any related information from other sources, we are considering to add
-a feature in future release to help users to import information from other sources by csv files.
+*Q*: Can I import my to-do list related or expenditure tracker related data into your application? +
+*A*: At current release, you cannot import any related data from other sources. However, our team is considering to add a feature in future release to help users in importing data from other sources by CSV files.
 
-*Q*: When I run this product, it shows that `java.lang.NoClassDefFoundError: javafx/application/Application error`.
-*A*: You are missing javafx, you can run our product after installing it with `sudo apt install openjfx`.
+*Q*: When I run this application, it shows `java.lang.NoClassDefFoundError: javafx/application/Application error`. +
+*A*: You are missing JavaFX, you can run our application after installing it with `sudo apt install openjfx`.
 
-*Q*: How can I read User Guide in the interface of your product? +
-*A*: We can just key in `help` command to read this User Guide.
+*Q*: How can I read the User Guide in the interface of your product? +
+*A*: You can simply use the `help` command to read this User Guide.
 
-*Q*: How can I update this software if you release its latest version? +
-*A*: We do not have incrementally upgrading right now, so users may can only get the latest release from GitHub directly
-and we are also considering to use API from Google to implement the OTA upgrading in future release.
-
+*Q*: How can I update the application if you release a new version? +
+*A*: Unfortunately, we do not support incremental updates right now, so users can only obtain the latest release from our GitHub directly. We are considering to use API from Google to implement over-the-air updating in future release.
 // end::FAQ[]
 
 == Command Summary
@@ -449,9 +451,10 @@ and we are also considering to use API from Google to implement the OTA upgradin
 *General:*
 
 * *Help* : `help`
+* *Check* : `check d/DATE`
 * *History* : `history`
-* *Undo* : `undo` [Coming in v1.4]
-* *Redo* : `redo` [Coming in v1.4]
+* *Undo* : `undo` [Coming in v2.0]
+* *Redo* : `redo` [Coming in v2.0]
 * *Exit* : `exit`
 
 *To-do List:*
