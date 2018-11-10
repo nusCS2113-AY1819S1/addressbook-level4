@@ -44,7 +44,7 @@ import seedu.address.ui.LoginHelpWindow;
 public class LoginController {
 
     protected static LoginInfoManager loginInfoManager;
-    private static boolean firstTimeLogin = true;
+    private static boolean firstTimeLogin;
     private String username;
     private String password;
     @FXML
@@ -64,6 +64,7 @@ public class LoginController {
     public LoginController() {
         username = "";
         password = "";
+        firstTimeLogin = true;
     }
 
     /**
@@ -72,11 +73,6 @@ public class LoginController {
     @FXML
     public void handleHelpButtonClicked(MouseEvent event) {
         openHelpWindow();
-    }
-
-    private void openHelpWindow() {
-        LoginHelpWindow loginHelpWindow = new LoginHelpWindow ();
-        loginHelpWindow.show ();
     }
 
     /**
@@ -110,16 +106,6 @@ public class LoginController {
             }
             count++;
         }
-    }
-    private String setPasswordToStar() {
-
-        String staredCommand = username + " ";
-        int passwordLength = password.length();
-        while (passwordLength > 0) {
-            staredCommand += "*";
-            passwordLength--;
-        }
-        return staredCommand;
     }
     /**
      * handle when user press enter on login textfield or passwordField
@@ -156,12 +142,8 @@ public class LoginController {
     /**
      * Check for Login information such as username and password.
      *
-     * @throws Exception
      */
     public void verifyLoginInfo () {
-        if (!isLengthOfUserNameValid () || !isLengthOfPasswordValid ()) {
-            return;
-        }
         if (!isFormatOfUserNameAndPasswordCorrect ()) {
             return;
         }
@@ -182,45 +164,40 @@ public class LoginController {
         Password password = new Password (this.password);
         LoginUtils loginUtils = new LoginUtils (userName, password, loginInfoManager);
 
-        if (loginUtils.isPasswordAndUserNameValid ()) {
-            return true;
-        } else {
-            return false;
-        }
+        return loginUtils.isPasswordAndUserNameValid ();
     }
     /**
-     *Returns true if the input follow the format of UserName and Password
+     * Returns true if the input follow the format of UserName and Password.
      */
     private boolean isFormatOfUserNameAndPasswordCorrect () {
-        if (!UserName.isValidUserName (this.username)) {
+        if (isLengthOfUserNameInvalid ()) {
+            loginError.setText(MAX_USERNAME_LENGTH_MESSAGE);
+            return false;
+        }
+        if (isLengthOfPasswordInvalid ()) {
+            loginError.setText(MAX_PASSWORD_LENGTH_MESSAGE);
+            return false;
+        }
+        if (!UserName.isValidUserName (username)) {
             loginError.setText(EMPTY_USERNAME_MESSAGE);
             return false;
-        } else if (!Password.isValidPassword (this.password)) {
+        } else if (!Password.isValidPassword (password)) {
             loginError.setText(EMPTY_PASSWORD_MESSAGE);
             return false;
         }
         return true;
     }
     /**
-     *Return false if userName length is more than {@code MAX_LENGTH_FOR_USERNAME}
-     *
+     * Return false if userName length is more than {@code MAX_LENGTH_FOR_USERNAME}.
      */
-    private boolean isLengthOfUserNameValid() {
-        if (username.length () > MAX_LENGTH_FOR_USERNAME) {
-            loginError.setText(MAX_USERNAME_LENGTH_MESSAGE);
-            return false;
-        }
-        return true;
+    private boolean isLengthOfUserNameInvalid () {
+        return username.length () > MAX_LENGTH_FOR_USERNAME;
     }
     /**
      * Return false if password length is more than {@code MAX_LENGTH_FOR_PASSWORD}
      */
-    private boolean isLengthOfPasswordValid() {
-        if (password.length () > MAX_LENGTH_FOR_PASSWORD) {
-            loginError.setText(MAX_PASSWORD_LENGTH_MESSAGE);
-            return false;
-        }
-        return true;
+    private boolean isLengthOfPasswordInvalid () {
+        return password.length () > MAX_LENGTH_FOR_PASSWORD;
     }
 
     /**
@@ -260,24 +237,40 @@ public class LoginController {
         primaryStage.hide();
         Stage stage = new Stage ();
         if (firstTimeLogin) {
-            EventsCenter.getInstance ().post (new InitInventoryListEvent ());
-            EventsCenter.getInstance ().post (new StartUiEvent (stage));
-            firstTimeLogin = false;
+            postEventAfterFirstTimeLogin (stage);
+            setFirstTimeAsFalse ();
         } else {
-            EventsCenter.getInstance ().post (new ChangeModelEvent ());
-            EventsCenter.getInstance ().post (new ChangeHelpWindowEvent ());
-            EventsCenter.getInstance ().post (new RestartUiEvent (stage));
+            postEventAfterRepeatLogin (stage);
         }
 
     }
+
+    private void setFirstTimeAsFalse () {
+        firstTimeLogin = false;
+    }
+
+    private void postEventAfterFirstTimeLogin (Stage stage) {
+        EventsCenter.getInstance ().post (new InitInventoryListEvent ());
+        EventsCenter.getInstance ().post (new StartUiEvent (stage));
+    }
+
+    private void postEventAfterRepeatLogin (Stage stage) {
+        EventsCenter.getInstance ().post (new ChangeModelEvent ());
+        EventsCenter.getInstance ().post (new ChangeHelpWindowEvent ());
+        EventsCenter.getInstance ().post (new RestartUiEvent (stage));
+    }
+
     /**
-     * pass in LoginInfo list
-     * @param loginInfoManager
+     * pass in {@code LoginInfo} list from main app
      */
     public void getLoginInfoList (LoginInfoManager loginInfoManager) {
         this.loginInfoManager = loginInfoManager;
     }
 
+    private void openHelpWindow() {
+        LoginHelpWindow loginHelpWindow = new LoginHelpWindow ();
+        loginHelpWindow.show ();
+    }
 
 
 }

@@ -92,40 +92,53 @@ public class InventoryListInitializer {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs, LoginInfoManager loginInfoManager) {
+
+        ReadOnlyAddressBook addressBookData = initData(storage);
+        return chooseModelAccordingToAuthentication(loginInfoManager);
+    }
+
+    /**
+     * Return data for new addressbook
+     */
+    private ReadOnlyAddressBook initData(Storage storage) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            return addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook ();
+            return new AddressBook ();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            return new AddressBook();
         }
-        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ADMIN)) {
+    }
+    /**
+     * Returns the respective {@code model} according to Authentication level.
+     *
+     */
+    private Model chooseModelAccordingToAuthentication(LoginInfoManager loginInfoManager) {
+
+        switch (CurrentUser.getAuthenticationLevel ()) {
+        case AUTH_ADMIN:
             return new AdminModelManager (new InventoryList (), userPrefs, loginInfoManager, new TransactionList());
-        }
-        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_MANAGER)) {
+        case AUTH_MANAGER:
             return new ManagerModelManager (new InventoryList (), userPrefs, loginInfoManager, new TransactionList());
-        }
-        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_STOCK_TAKER)) {
+        case AUTH_STOCK_TAKER:
             return new StockTakerModelManager (new InventoryList () , userPrefs, loginInfoManager,
                     new TransactionList());
-        }
-
-        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ACCOUNTANT)) {
+        case AUTH_ACCOUNTANT:
             return new AccountantModelManager (new InventoryList (), userPrefs, loginInfoManager,
                     new TransactionList());
+        default: {
+            logger.severe ("Database authentication level do not match with predefined authentication level");
+            return new ModelManager (new InventoryList (), userPrefs, loginInfoManager,
+                    new TransactionList());
         }
-
-        //TODO: need change inventoryList () to storage when storage is done
-        return new ModelManager (new InventoryList () , userPrefs, loginInfoManager, new TransactionList());
+        }
     }
-
 
 }
