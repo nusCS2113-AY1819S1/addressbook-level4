@@ -44,7 +44,7 @@ public class EventContainsAttendeeAndDatePredicate implements Predicate<Event> {
             eventMatchesDate = eventTokens[1].matches(tokens[1]) && eventTokens[0].matches(tokens[0]);
             break;
         default:
-            eventMatchesDate = false;
+            throw new NullPointerException();
         }
         return eventHasAttendee && eventMatchesDate;
     }
