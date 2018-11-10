@@ -99,7 +99,7 @@ public class TypicalPersons {
     public static CandidateBook getReversedAddressBook() {
         CandidateBook ab = new CandidateBook();
         for (Candidate candidate : getReversedPersons()) {
-            ab.addPerson(candidate);
+            ab.addCandidate(candidate);
         }
         return ab;
     }

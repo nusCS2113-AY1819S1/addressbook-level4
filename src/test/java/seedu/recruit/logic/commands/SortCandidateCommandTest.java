@@ -22,7 +22,7 @@ import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCompanyBookCommand and RedoCompanyBookCommand)
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
  * and unit tests for the SortCandidateCommand.
  */
 @SuppressWarnings("Duplicates")
@@ -38,7 +38,7 @@ public class SortCandidateCommandTest {
     public void execute_sortByName_success() {
 
         expectedModel.sortCandidates(PREFIX_NAME);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
         SortCandidateCommand sortCandidateCommand = new SortCandidateCommand(PREFIX_NAME);
         String expectedMessage = sortCandidateCommand.MESSAGE_SUCCESS;
 
@@ -51,7 +51,7 @@ public class SortCandidateCommandTest {
     public void execute_sortByAge_success() {
 
         expectedModel.sortCandidates(PREFIX_AGE);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
         SortCandidateCommand sortCandidateCommand = new SortCandidateCommand(PREFIX_AGE);
         String expectedMessage = sortCandidateCommand.MESSAGE_SUCCESS;
 
@@ -64,7 +64,7 @@ public class SortCandidateCommandTest {
     public void execute_sortByEmail_success() {
 
         expectedModel.sortCandidates(PREFIX_EMAIL);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
         SortCandidateCommand sortCandidateCommand = new SortCandidateCommand(PREFIX_EMAIL);
         String expectedMessage = sortCandidateCommand.MESSAGE_SUCCESS;
 
@@ -77,7 +77,7 @@ public class SortCandidateCommandTest {
     public void execute_sortByJob_success() {
 
         expectedModel.sortCandidates(PREFIX_JOB);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
         SortCandidateCommand sortCandidateCommand = new SortCandidateCommand(PREFIX_JOB);
         String expectedMessage = sortCandidateCommand.MESSAGE_SUCCESS;
 
@@ -90,7 +90,7 @@ public class SortCandidateCommandTest {
     public void execute_sortByEducation_success() {
 
         expectedModel.sortCandidates(PREFIX_EDUCATION);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
         SortCandidateCommand sortCandidateCommand = new SortCandidateCommand(PREFIX_EDUCATION);
         String expectedMessage = sortCandidateCommand.MESSAGE_SUCCESS;
 
@@ -103,7 +103,7 @@ public class SortCandidateCommandTest {
     public void execute_sortBySalary_success() {
 
         expectedModel.sortCandidates(PREFIX_SALARY);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
         SortCandidateCommand sortCandidateCommand = new SortCandidateCommand(PREFIX_SALARY);
         String expectedMessage = sortCandidateCommand.MESSAGE_SUCCESS;
 
@@ -116,7 +116,7 @@ public class SortCandidateCommandTest {
     public void execute_sortInReverse_success() {
 
         expectedModel.sortCandidates(PREFIX_REVERSE);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
         SortCandidateCommand sortCandidateCommand = new SortCandidateCommand(PREFIX_REVERSE);
         String expectedMessage = sortCandidateCommand.MESSAGE_SUCCESS;
 
@@ -124,4 +124,5 @@ public class SortCandidateCommandTest {
         assertCommandSuccess(sortCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(model.getFilteredCandidateList(), sortedModel.getFilteredCandidateList());
     }
+
 }
