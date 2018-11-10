@@ -345,17 +345,17 @@ Format: `attending`
 //tag::eventState&Reminder[]
 === Show event reminders : `reminder`
 
-Admin/User: Shows event reminders for all upcoming events that the user has registered for. 
+Admin/User: Shows event reminders for all upcoming events that the user has registered for.
 Format: `reminder`
 
 NOTE: Upcoming events are those that are occurring within the next 24 hours.
 
 ****
 * Users will only receive reminders for events that they have registered for.
-* Reminders are automatically sent out every 6 hours, unless the user initiates the command. 
+* Reminders are automatically sent out every 6 hours, unless the user initiates the command.
 ****
 
-=== Updates the statuses of events : `update` 
+=== Updates the statuses of events : `update`
 
 Admin/User: Updates the statuses of events. +
 Format: `update`
@@ -363,10 +363,10 @@ Format: `update`
 ****
 * Events that have already occurred will have the [COMPLETED] status. Events that have yet to occur will have the [UPCOMING] status.
 * The `update` command can be used without the user having to log in.
-* Event statuses are automatically updated every 5 minutes. 
+* Event statuses are automatically updated every 5 minutes.
 ****
 
-TIP: You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load, and if the problem still persists, use the `update` command. 
+TIP: You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load, and if the problem still persists, use the `update` command.
 //end::eventState&Reminder
 
 
