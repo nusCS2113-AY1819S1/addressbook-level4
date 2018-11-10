@@ -8,6 +8,7 @@
         <description>Refer to notes</description>
         <priorityLevel>low</priorityLevel>
         <expectedNumOfHours>1</expectedNumOfHours>
+        <completedNumOfHours>-1</completedNumOfHours>
         <isCompleted>false</isCompleted>
     </tasks>
 
@@ -19,6 +20,7 @@
         <description>Refer to notes</description>
         <priorityLevel>low</priorityLevel>
         <expectedNumOfHours>1</expectedNumOfHours>
+        <completedNumOfHours>-1</completedNumOfHours>
         <isCompleted>false</isCompleted>
     </tasks>
 

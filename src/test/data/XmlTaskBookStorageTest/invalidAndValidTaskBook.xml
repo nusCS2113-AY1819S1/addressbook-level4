@@ -2,16 +2,24 @@
 <addressbook>
     <!-- Valid Task -->
     <tasks>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">4th street</address>
+        <deadline>4/11/2018</deadline>
+        <moduleCode>CG2271</moduleCode>
+        <title>Read notes</title>
+        <description>about Deadlock</description>
+        <priorityLevel>low</priorityLevel>
+        <expectedNumOfHours>1</expectedNumOfHours>
+        <completedNumOfHours>-1</completedNumOfHours>
+        <isCompleted>false</isCompleted>
     </tasks>
-    <!-- Task with invalid phone field -->
+    <!-- Task with invalid module code field -->
     <tasks>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">948asdf2424</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">4th street</address>
+        <deadline>22/11/2018</deadline>
+        <moduleCode>C271</moduleCode>
+        <title>Do lab</title>
+        <description>be productive!</description>
+        <priorityLevel>high</priorityLevel>
+        <expectedNumOfHours>1</expectedNumOfHours>
+        <completedNumOfHours>-1</completedNumOfHours>
+        <isCompleted>false</isCompleted>
     </tasks>
 </addressbook>

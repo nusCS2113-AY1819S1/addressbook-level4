@@ -25,7 +25,7 @@ public class TaskBuilder {
     public static final String DEFAULT_PRIORITY = "high";
     public static final boolean DEFAULT_COMPLETE = false;
     public static final String DEFAULT_EXPECTED_NUM_OF_HOURS = "1";
-    public static final String DEFAULT_COMPLETED_NUM_OF_HOURS = "0";
+    public static final String DEFAULT_COMPLETED_NUM_OF_HOURS = "-1";
     public static final List<Milestone> DEFAULT_MILESTONES = new ArrayList<>();
     public static final Set<Tag> DEFAULT_TAGS = new HashSet<>();
 

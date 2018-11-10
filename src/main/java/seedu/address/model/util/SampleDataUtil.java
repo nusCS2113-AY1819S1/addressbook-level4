@@ -1,6 +1,8 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,11 +22,14 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[] {
             new Task(new Deadline("1/11/2018"), new ModuleCode("CS2113"), "Complete code refactoring",
-                    "refer to notes", new PriorityLevel("high"), 2),
+                    "refer to notes", new PriorityLevel("high"), 2, -1,
+                    false, new ArrayList<>(), new HashSet<>()),
             new Task(new Deadline("2/11/2018"), new ModuleCode("CG2271"), "Complete lab 4",
-                    "Synchronization", new PriorityLevel("medium"), 2),
+                    "Synchronization", new PriorityLevel("medium"), 2, -1,
+                    false, new ArrayList<>(), new HashSet<>()),
             new Task(new Deadline("3/11/2018"), new ModuleCode("CS2101"), "Prepare presentation",
-                    "slides not done", new PriorityLevel("low"), 2),
+                    "slides not done", new PriorityLevel("low"), 2, -1,
+                    false, new ArrayList<>(), new HashSet<>()),
         };
     }
 

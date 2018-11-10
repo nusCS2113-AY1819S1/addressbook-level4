@@ -23,10 +23,14 @@ public class Task {
     private final PriorityLevel priorityLevel;
     private boolean isCompleted = false;
     private final int expectedNumOfHours;
-    private int completedNumOfHours;
+    private int completedNumOfHours = -1;
     private final List<Milestone> milestoneList = new ArrayList<Milestone>();
     private final Set<Tag> tagList = new HashSet<>();
 
+    /**
+     * Creating a new task
+     * which is incomplete
+     */
     public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours) {
         this.deadline = deadline;
@@ -37,6 +41,10 @@ public class Task {
         this.expectedNumOfHours = expectedNumOfHours;
     }
 
+    /**
+     * Re-creating a task
+     * which has been completed
+     */
     public Task(Deadline deadline, ModuleCode moduleCode, String title, String description, PriorityLevel priorityLevel,
                 int expectedNumOfHours, int completedNumOfHours, boolean isCompleted,
                 List<Milestone> milestoneList, Set<Tag> tagList) {
@@ -88,17 +96,15 @@ public class Task {
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
     }
-    //@@author ChanChunCheong
-    public int getPriorityLevelInt() {
-        return priorityLevel.priorityLevelInt;
-    }
-    //@@author
+
     public int getExpectedNumOfHours() {
         return expectedNumOfHours;
     }
+
     public int getCompletedNumOfHours() {
         return completedNumOfHours;
     }
+
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tagList);
     }
@@ -175,9 +181,11 @@ public class Task {
         deferredTask.deadline = deferreDeadline;
         return deferredTask;
     }
+    public int getPriorityLevelInt() {
+        return priorityLevel.priorityLevelInt;
+    }
 
-
-    //@@JeremyInElysium
+    //@@author JeremyInElysium
     /**
      * Add a milestone to the task.
      */
@@ -195,6 +203,7 @@ public class Task {
         return Collections.unmodifiableList(milestoneList);
     }
 
+    //@@author chelseyong
     /**
      * Returns true if both tasks have the same data fields.
      * This defines a stronger notion of equality between two tasks.
