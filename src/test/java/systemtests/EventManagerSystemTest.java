@@ -62,7 +62,6 @@ public abstract class EventManagerSystemTest {
     private MainWindowHandle mainWindowHandle;
     private TestApp testApp;
     private SystemTestSetupHelper setupHelper;
-    private BrowserPanel browserPanel;
 
     @BeforeClass
     public static void setupBeforeClass() {
