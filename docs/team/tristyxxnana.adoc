@@ -30,22 +30,17 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 *** Create student grade
 *** Delete student grade
 
-* *Code contributed*: TO BE UPDATED
-
 * *Other contributions*:
 
 ** Project management:
 *** Managed documentation-related files (User Guide, Developer Guide) in pull request on GitHub.
 ** Enhancements to existing features:
-*** Wrote additional tests for existing features to increase coverage(Pull requests https://github.com[#149], https://github.com[#175])
+*** Wrote additional tests for existing features to increase coverage(Pull requests link:https://github.com/CS2113-AY1819S1-T16-1/main/pull/149[#149], link:https://github.com/CS2113-AY1819S1-T16-1/main/pull/175[#175])
 ** Documentation:
-*** Did modifications to existing contents of the About Us, Developer Guide and User Guide: https://github.com[#38], https://github.com[#47]
+*** Did modifications to existing contents of the About Us, Developer Guide and User Guide: link:https://github.com/CS2113-AY1819S1-T16-1/main/pull/38[#38], link:https://github.com/CS2113-AY1819S1-T16-1/main/pull/47[#47]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#2127], https://github.com[#226], https://github.com[#234], https://github.com[#238]
-*** Contributed to forum discussions (TO BE UPDATED)
-*** Reported bugs and suggestions for other teams in the class (examples:  TO BE UPDATED)
-** Tools:
-*** TO BE UPDATED
+*** PRs reviewed (with non-trivial review comments): link:https://github.com/CS2113-AY1819S1-T16-1/main/pull/127[#127], link:https://github.com/CS2113-AY1819S1-T16-1/main/pull/226[#226], link:https://github.com/CS2113-AY1819S1-T16-1/main/pull/234[#234], link:https://github.com/CS2113-AY1819S1-T16-1/main/pull/238[#238]
+*** Reported bugs and suggestions for other teams in the class: link:https://github.com/CS2113-AY1819S1-F10-2/main/issues/90[#90], link:https://github.com/CS2113-AY1819S1-F10-2/main/issues/92[#92], link:https://github.com/CS2113-AY1819S1-F10-2/main/issues/108[#108], link:https://github.com/CS2113-AY1819S1-F10-2/main/issues/109[#109]
 
 == Contributions to the User Guide
 
@@ -79,10 +74,3 @@ include::../DeveloperGuide.adoc[tag=gradeuserstories]
 include::../DeveloperGuide.adoc[tag=gradebookusecase]
 
 include::../DeveloperGuide.adoc[tag=gradeusecase]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
