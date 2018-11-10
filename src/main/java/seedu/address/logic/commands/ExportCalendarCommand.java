@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URI;
 import java.net.UnknownHostException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -185,8 +184,8 @@ public class ExportCalendarCommand extends Command {
      * @throws IOException when file stream have problems
      */
     public void exportICalenderFile(ObservableList<Event> registeredEventList, String fileName) throws IOException {
-
-        String outputFilename = Paths.get(CALENDAR_FILE_PATH, String.format("%1$s.ics", fileName)).toString();
+        String fileSeparator = System.getProperty("file.separator");
+        String outputFilename = CALENDAR_FILE_PATH + fileSeparator + String.format("%1$s.ics", fileName);
         File outputFile = new File(outputFilename);
 
         FileOutputStream fileOut = new FileOutputStream(outputFile, false);
