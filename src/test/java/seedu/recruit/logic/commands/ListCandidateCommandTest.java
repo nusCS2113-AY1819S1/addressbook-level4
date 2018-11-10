@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
@@ -36,7 +37,7 @@ public class ListCandidateCommandTest {
     }
 
     @Test
-    public void execute_listIsFiltered_showsEverything() {
+    public void execute_listIsFiltered_showsEverything() throws ParseException {
         showPersonAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new ListCandidateCommand(), model, commandHistory,
                 ListCandidateCommand.MESSAGE_SUCCESS, expectedModel);

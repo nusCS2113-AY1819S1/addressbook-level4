@@ -22,6 +22,7 @@ import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.EditCandidateCommand.EditPersonDescriptor;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
@@ -98,7 +99,7 @@ public class EditCandidateCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws ParseException {
         showPersonAtIndex(model, INDEX_FIRST);
 
         Candidate candidateInFilteredList = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
@@ -127,7 +128,7 @@ public class EditCandidateCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
+    public void execute_duplicatePersonFilteredList_failure() throws ParseException {
         showPersonAtIndex(model, INDEX_FIRST);
 
         // edit candidate in filtered list into a duplicate in recruit book
@@ -154,7 +155,7 @@ public class EditCandidateCommandTest {
      * but smaller than size of recruit book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidPersonIndexFilteredList_failure() throws ParseException {
         showPersonAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of recruit book list
