@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDistributors.getTypicalDistributorBook;
-import static seedu.address.testutil.TypicalProducts.ORANGE;
-import static seedu.address.testutil.TypicalProducts.GRAPE;
 import static seedu.address.testutil.TypicalProducts.CHOCOLATE;
+import static seedu.address.testutil.TypicalProducts.GRAPE;
+import static seedu.address.testutil.TypicalProducts.ORANGE;
 import static seedu.address.testutil.TypicalProducts.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -17,7 +17,11 @@ import java.util.Collections;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.TestStorage;
+import seedu.address.model.UserDatabase
+import seedu.address.model.UserPrefs;
 import seedu.address.model.product.NameContainsKeywordsPredicate;
 
 /**
@@ -27,7 +31,8 @@ public class FindProductCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(), new UserPrefs(),
             new UserDatabase(), new TestStorage());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(), new UserPrefs(),
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(),
+            getTypicalDistributorBook(), new UserPrefs(),
             new UserDatabase(), new TestStorage());
     private CommandHistory commandHistory = new CommandHistory();
 
