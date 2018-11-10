@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
-import seedu.recruit.logic.commands.RedoCandidateBookCommand;
-import seedu.recruit.logic.commands.UndoCandidateBookCommand;
+import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 
@@ -32,8 +32,8 @@ public class ClearCandidateBookCommandSystemTest extends CandidateBookSystemTest
         assertSelectedCardUnchanged();
 
         /* Case: undo clearing candidate book -> original candidate book restored */
-        String command = UndoCandidateBookCommand.COMMAND_WORD;
-        String expectedResultMessage = UndoCandidateBookCommand.MESSAGE_SUCCESS;
+        String command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command,  expectedResultMessage, defaultModel);
         assertSelectedCardUnchanged();
 
@@ -43,15 +43,15 @@ public class ClearCandidateBookCommandSystemTest extends CandidateBookSystemTest
         assertSelectedCardDeselected();
 
         /* Case: filters the candidate list before clearing -> entire candidate book cleared */
-        executeCommand(UndoCandidateBookCommand.COMMAND_WORD); // restores the original candidate book
+        executeCommand(UndoCommand.COMMAND_WORD); // restores the original candidate book
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(ClearCandidateBookCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
         /* Case: redo clearing recruit book -> cleared */
-        executeCommand(UndoCandidateBookCommand.COMMAND_WORD); // restores the original candidate book
-        command = RedoCandidateBookCommand.COMMAND_WORD;
-        expectedResultMessage = RedoCandidateBookCommand.MESSAGE_SUCCESS;
+        executeCommand(UndoCommand.COMMAND_WORD); // restores the original candidate book
+        command = RedoCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, expectedResultMessage, new ModelManager());
         assertSelectedCardUnchanged();
 

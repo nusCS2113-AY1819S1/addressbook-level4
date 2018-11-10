@@ -31,7 +31,7 @@ import seedu.recruit.testutil.CompanyBuilder;
 import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCompanyBookCommand and RedoCompanyBookCommand)
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
  * and unit tests for EditCompanyCommand.
  */
 
@@ -40,7 +40,6 @@ public class EditCompanyCommandTest {
     private Model model = new ModelManager(new CandidateBook(), getTypicalCompanyBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();
-
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -53,7 +52,7 @@ public class EditCompanyCommandTest {
         Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.updateCompany(model.getFilteredCompanyList().get(0), editedCompany);
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(editCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -76,7 +75,7 @@ public class EditCompanyCommandTest {
         Model expectedModel = new ModelManager(new CandidateBook(), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.updateCompany(lastCompany, editedCompany);
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(editCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -91,7 +90,7 @@ public class EditCompanyCommandTest {
 
         Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(editCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -110,7 +109,7 @@ public class EditCompanyCommandTest {
         Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.updateCompany(model.getFilteredCompanyList().get(0), editedCompany);
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(editCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -174,20 +173,21 @@ public class EditCompanyCommandTest {
         Model expectedModel = new ModelManager(new CandidateBook(), new CompanyBook(model.getCompanyBook()),
                 new UserPrefs());
         expectedModel.updateCompany(companyToEdit, editedCompany);
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         // edit -> first company edited
         editCompanyCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts Companybook back to previous state and filtered company list to show all companies
-        expectedModel.undoCompanyBook();
-        assertCommandSuccess(new UndoCompanyBookCommand(), model, commandHistory,
-                UndoCompanyBookCommand.MESSAGE_SUCCESS, expectedModel);
+
+        expectedModel.undoRecruitBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first company edited again
-        expectedModel.redoCompanyBook();
-        assertCommandSuccess(new RedoCompanyBookCommand(), model, commandHistory,
-                RedoCompanyBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.redoRecruitBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -201,10 +201,10 @@ public class EditCompanyCommandTest {
                 Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
 
         // single company book state in model -> undoCommand and redoCommand fail
-        assertCommandFailure(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_FAILURE);
-        assertCommandFailure(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_FAILURE);
     }
 
     /**
@@ -212,7 +212,7 @@ public class EditCompanyCommandTest {
      * 2. Undo the edit.
      * 3. The unfiltered list should be shown now. Verify that the index of the previously edited company in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the edit. This ensures {@code RedoCompanyBookCommand} edits the company object regardless of indexing.
+     * 4. Redo the edit. This ensures {@code RedoCommand} edits the company object regardless of indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameCompanyEdited() throws Exception {
@@ -225,21 +225,22 @@ public class EditCompanyCommandTest {
         showCompanyAtIndex(model, INDEX_SECOND);
         Company companyToEdit = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
         expectedModel.updateCompany(companyToEdit, editedCompany);
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
+
 
         // edit -> edits second company in unfiltered company list / first company in filtered company list
         editCompanyCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts companybook back to previous state and filtered company list to show all persons
-        expectedModel.undoCompanyBook();
-        assertCommandSuccess(new UndoCompanyBookCommand(), model, commandHistory,
-                UndoCompanyBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.undoRecruitBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased()), companyToEdit);
         // redo -> edits same second company in unfiltered company list
-        expectedModel.redoCompanyBook();
-        assertCommandSuccess(new RedoCompanyBookCommand(), model, commandHistory,
-                RedoCompanyBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.redoRecruitBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test

@@ -57,7 +57,7 @@ public class DeleteJobOfferCommand extends Command {
             model.deleteJobOffer(jobOfferToDelete);
             deletedJobOffers.append(jobOfferToDelete + "\n");
         }
-        model.commitCompanyBook();
+        model.commitRecruitBook();
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
                 model.getFilteredCompanyJobList().size()));
         return new CommandResult(String.format(MESSAGE_DELETE_JOB_OFFER_SUCCESS, deletedJobOffers));

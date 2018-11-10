@@ -1,9 +1,10 @@
 package seedu.recruit.logic.commands;
 
 import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.ShowLastViewedBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -36,7 +37,8 @@ public class CancelCommand extends Command {
             DeleteShortlistedCandidateInitializationCommand.isDoneDeleting();
             this.cancelledCommand = DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD;
         }
-        LogicManager.setLogicState("primary");
+        EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, cancelledCommand));
     }
 }

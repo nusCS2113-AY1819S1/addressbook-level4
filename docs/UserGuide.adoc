@@ -744,10 +744,8 @@ _{explain how the user can enable/disable data encryption}_
 |   *Shortlist Candidate* | `shortlist`
 |   *Email* | `email`
 |   *Cancel* | `cancel`
-|	*Clear CandidateBook* | `clearc`
 |	*Clear CompanyBook* | `clearC`
-|	*Undo CandidateBook* | `undoc`
-|	*Undo CompanyBook* | `undoC`
-|	*Redo CandidateBook* | `redoc`
-|	*Redo CompanyBook* | `redoC`
+|	*Clear CandidateBook* | `clearc`
+|	*Undo CompanyBook* | `undo`
+|	*Redo CandidateBook* | `redo`
 |	*Exit* | `exit`

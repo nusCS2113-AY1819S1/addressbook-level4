@@ -20,8 +20,8 @@ import seedu.recruit.model.CompanyBook;
 import seedu.recruit.storage.XmlAdaptedCandidate;
 import seedu.recruit.storage.XmlAdaptedTag;
 import seedu.recruit.storage.XmlSerializableCandidateBook;
-import seedu.recruit.testutil.AddressBookBuilder;
 import seedu.recruit.testutil.CandidateBuilder;
+import seedu.recruit.testutil.RecruitBookBuilder;
 import seedu.recruit.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -142,7 +142,7 @@ public class XmlUtilTest {
                 XmlSerializableCandidateBook.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new CandidateBook(), new CompanyBook());
+        RecruitBookBuilder builder = new RecruitBookBuilder(new CandidateBook(), new CompanyBook());
         dataToWrite = new XmlSerializableCandidateBook(
                 builder.withCandidate(new CandidateBuilder().build()).buildCandidateBook());
 

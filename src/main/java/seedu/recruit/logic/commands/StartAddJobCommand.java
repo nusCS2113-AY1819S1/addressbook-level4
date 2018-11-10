@@ -3,9 +3,10 @@ package seedu.recruit.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -28,8 +29,8 @@ public class StartAddJobCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
+        EventsCenter.getInstance().post(new ChangeLogicStateEvent(AddJobDetailsCommand.COMMAND_WORD));
 
-        LogicManager.setLogicState(AddJobDetailsCommand.COMMAND_WORD);
         return new CommandResult(AddJobDetailsCommand.MESSAGE_USAGE);
     }
 

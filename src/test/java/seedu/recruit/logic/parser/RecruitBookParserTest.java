@@ -44,7 +44,7 @@ import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.HistoryCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.ListCompanyCommand;
-import seedu.recruit.logic.commands.RedoCandidateBookCommand;
+import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
@@ -54,7 +54,7 @@ import seedu.recruit.logic.commands.SortJobOfferCommand;
 import seedu.recruit.logic.commands.StartAddCandidateCommand;
 import seedu.recruit.logic.commands.StartAddCompanyCommand;
 import seedu.recruit.logic.commands.StartAddJobCommand;
-import seedu.recruit.logic.commands.UndoCandidateBookCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
@@ -336,18 +336,18 @@ public class RecruitBookParserTest {
 
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
-        assertTrue(parser.parseCommand(RedoCandidateBookCommand.COMMAND_WORD, state, emailUtil, userPrefs)
-                instanceof RedoCandidateBookCommand);
-        assertTrue(parser.parseCommand("redoc 1", state, emailUtil, userPrefs)
-                instanceof RedoCandidateBookCommand);
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD, state, emailUtil, userPrefs)
+                instanceof RedoCommand);
+        assertTrue(parser.parseCommand("redo 1", state, emailUtil, userPrefs)
+                instanceof RedoCommand);
     }
 
     @Test
     public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
-        assertTrue(parser.parseCommand(UndoCandidateBookCommand.COMMAND_WORD, state, emailUtil, userPrefs)
-                instanceof UndoCandidateBookCommand);
-        assertTrue(parser.parseCommand("undoc 3", state, emailUtil, userPrefs)
-                instanceof UndoCandidateBookCommand);
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD, state, emailUtil, userPrefs)
+                instanceof UndoCommand);
+        assertTrue(parser.parseCommand("undo 3", state, emailUtil, userPrefs)
+                instanceof UndoCommand);
     }
 
     @Test

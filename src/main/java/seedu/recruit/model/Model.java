@@ -22,6 +22,20 @@ public interface Model {
     Predicate<Company> PREDICATE_HIDE_ALL_COMPANIES = unused -> false;
     Predicate<JobOffer> PREDICATE_HIDE_ALL_JOBOFFERS = unused -> false;
 
+    // ================================== RecruitBook-level functions ===================================== //
+
+    boolean canUndoRecruitBook();
+
+    boolean canRedoRecruitBook();
+
+    void commitRecruitBook();
+
+    void undoRecruitBook();
+
+    void redoRecruitBook();
+
+
+
     // ================================== CandidateBook functions ====================================== //
     /** Clears existing backing model and replaces with the provided new data. */
     void resetCandidateData(ReadOnlyCandidateBook newData);
@@ -75,31 +89,7 @@ public interface Model {
      */
     void updateFilteredCandidateList(Predicate<Candidate> predicate);
 
-    /**
-     * Returns true if the model has previous CandidateBook states to restore.
-     */
 
-    boolean canUndoCandidateBook();
-
-    /**
-     * Returns true if the model has undone recruit book states to restore.
-     */
-    boolean canRedoCandidateBook();
-
-    /**
-     * Restores the model's CandidateBook to its previous state.
-     */
-    void undoCandidateBook();
-
-    /**
-     * Restores the model's Candidatebook to its previously undone state.
-     */
-    void redoCandidateBook();
-
-    /**
-     * Saves the current CandidateBook state for undo/redo.
-     */
-    void commitCandidateBook();
 
     // ================================== CompanyBook functions ===================================== //
 
@@ -161,30 +151,7 @@ public interface Model {
      */
     void updateFilteredCompanyList(Predicate<Company> predicate);
 
-    /**
-     * Returns true if the model has previous CompanyBook states to restore.
-     */
-    boolean canUndoCompanyBook();
 
-    /**
-     * Returns true if the model has undone CompanyBook states to restore.
-     */
-    boolean canRedoCompanyBook();
-
-    /**
-     * Restores the model's CompanyBook to its previous state.
-     */
-    void undoCompanyBook();
-
-    /**
-     * Restores the model's CompanyBook to its previously undone state.
-     */
-    void redoCompanyBook();
-
-    /**
-     * Saves the current CompanyBook state for undo/redo.
-     */
-    void commitCompanyBook();
 
     // ================================== Job Offer functions ===================================== //
 
