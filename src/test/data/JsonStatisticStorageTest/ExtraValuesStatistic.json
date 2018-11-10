@@ -1,0 +1,13 @@
+{
+  "revenue" : {
+    "value" : "0.00"
+  },
+  "inventory" : {
+    "value" : "0.00"
+  },
+  "expense" : {
+    "value" : "0.00"
+  },
+  "month" : "11",
+  "year" : "2018"
+}
