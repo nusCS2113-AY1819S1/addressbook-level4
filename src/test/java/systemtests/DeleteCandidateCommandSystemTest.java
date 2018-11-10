@@ -16,8 +16,8 @@ import org.junit.Test;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.DeleteCandidateCommand;
-import seedu.recruit.logic.commands.RedoCandidateBookCommand;
-import seedu.recruit.logic.commands.UndoCandidateBookCommand;
+import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 
@@ -45,14 +45,14 @@ public class DeleteCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(lastPersonIndex);
 
         /* Case: undo deleting the last candidate in the list -> last candidate restored */
-        command = UndoCandidateBookCommand.COMMAND_WORD;
-        expectedResultMessage = UndoCandidateBookCommand.MESSAGE_SUCCESS;
+        command = UndoCommand.COMMAND_WORD;
+        expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
         /* Case: redo deleting the last candidate in the list -> last candidate deleted again */
-        command = RedoCandidateBookCommand.COMMAND_WORD;
+        command = RedoCommand.COMMAND_WORD;
         removePerson(modelBeforeDeletingLast, lastPersonIndex);
-        expectedResultMessage = RedoCandidateBookCommand.MESSAGE_SUCCESS;
+        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
         /* Case: delete the middle candidate in the list -> deleted */

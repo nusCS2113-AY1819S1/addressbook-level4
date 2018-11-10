@@ -34,7 +34,7 @@ public class AddCandidateCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
         expectedModel.addCandidate(validCandidate);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(new AddCandidateCommand(validCandidate), model, commandHistory,
                 String.format(AddCandidateCommand.MESSAGE_SUCCESS, validCandidate), expectedModel);

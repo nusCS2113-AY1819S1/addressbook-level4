@@ -84,7 +84,7 @@ public class TypicalPersons {
     public static CandidateBook getTypicalAddressBook() {
         CandidateBook ab = new CandidateBook();
         for (Candidate candidate : getTypicalPersons()) {
-            ab.addPerson(candidate);
+            ab.addCandidate(candidate);
         }
         return ab;
     }

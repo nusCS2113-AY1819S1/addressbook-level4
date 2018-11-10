@@ -10,4 +10,9 @@ public class LogicState {
     public LogicState(String nextCommand) {
         this.nextCommand = nextCommand;
     }
+
+    @Override
+    public String toString() {
+        return nextCommand;
+    }
 }

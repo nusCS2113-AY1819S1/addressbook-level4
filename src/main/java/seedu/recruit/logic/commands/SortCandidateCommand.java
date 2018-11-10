@@ -9,9 +9,10 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -45,10 +46,11 @@ public class SortCandidateCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
         model.sortCandidates(prefixToSort);
-        model.commitCandidateBook();
+        model.commitRecruitBook();
 
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
-            LogicManager.setLogicState(SelectCandidateCommand.COMMAND_LOGIC_STATE);
+            EventsCenter.getInstance().post(new ChangeLogicStateEvent(SelectCandidateCommand.COMMAND_LOGIC_STATE));
+
             return new CommandResult(MESSAGE_SUCCESS
                     + SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST
                     + SelectCandidateCommand.MESSAGE_USAGE);
