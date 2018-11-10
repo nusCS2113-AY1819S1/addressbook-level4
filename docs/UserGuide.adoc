@@ -367,7 +367,7 @@ Format: `update`
 ****
 
 TIP: You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load, and if the problem still persists, use the `update` command.
-//end::eventState&Reminder
+//end::eventState&Reminder[]
 
 
 //tag::comment[]
