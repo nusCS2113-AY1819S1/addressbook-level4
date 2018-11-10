@@ -11,10 +11,16 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Novin Tong Yong Kang
 image::novin997.png[width="150", align="left"]
-{empty}[https://github.com/novin997[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/novin997[github]] [<<novin997#, portfolio>>]
 
 Role: Developer + Moderator +
-Responsibilities: Development of features, scheduling and tracking of tasks
+Responsibilities:
+
+* Development of features, scheduling and tracking of tasks
+* ScriptCommand Feature - Execute scripts based on Text File
+* ScriptCommand Feature - Provide logs to the user if the scripts files cannot be executed
+* ScriptSetup Feature - Create script folder if missing
+* ScriptSetup Feature - Allows user to set their preferred scripts location
 
 '''
 

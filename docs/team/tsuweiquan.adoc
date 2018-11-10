@@ -21,15 +21,14 @@ SMS makes being a university lecturer more convenient!
 ** Justification: This feature proves to be useful when a lecturer wish to form students into _n_ groups for any project wor. The user can also select the condition of having balanced gender in every group if he wish to do so.
 This feature was inspired during the group formation in CS2113 module where the lecturer wish to have a balanced number of a gender in every group.
 ** Highlights:
-This enhancement itself is a new command and it does not affect existing commands. It also requires the features of creating group and adding students into group to be complete. Hence this require in-depth analysis of
-group command features to allow Distribute command to be completed. The implementation started off easy as I added the nationality and gender fields into the person profile. However, the most challenging part was creating the algorithm for
+This enhancement itself is a new command and it does not affect existing commands. It also requires the features of creating group and adding students into group to be working. Hence this feature is strongly associated with
+Group features. The implementation was challenging as i had to develop the algorithm for the distribution of students into selected groups and the method for
 the distribution process. In order to make it modular and reduce duplicate code, much time was utilized in planning and designing the algorithm.
 
 ** Credits: 3rd party libraries were not used in this implementation. However, I have inferred a snippet of code provided on Stack Overflow.
 The code that was adapted from Stack Overflow was from [https://stackoverflow.com/a/22132422/3818748[Sort a Map<Key, Value> by values]]. The code was used in `DistributeUtil.java` file,
 in the `numberOfDifferentNationality` method.
 
-//* *Minor enhancement*: Added the Nationality and Gender Field into Person Object, Fixed Undo/Redo feature for Distribute Command.
 * *Code contributed*: [https://github.com/Tsuweiquan[Github]][https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tsuweiquan[RepoSense]]
 
 * *Other contributions*:
@@ -47,6 +46,7 @@ in the `numberOfDifferentNationality` method.
 *** Responsible for updating App version (Pull request: https://github.com/CS2113-AY1819S1-T13-4/main/pull/102[#102])
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-4/main/pull/78[#78], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Replied to false positive bugs (Pull Request: https://github.com/CS2113-AY1819S1-T13-4/main/issues/113[#Issue 113])
 *** Contributed to forum discussions (Questions:  https://github.com/nusCS2113-AY1819S1/forum/issues/101[#101])
 *** Reported bugs and suggestions for other teams in the class (Tested on T09-3:  https://github.com/CS2113-AY1819S1-T09-3/main/issues/75[1], https://github.com/CS2113-AY1819S1-T09-3/main/issues/79[2], https://github.com/CS2113-AY1819S1-T09-3/main/issues/82[3], https://github.com/CS2113-AY1819S1-T09-3/main/issues/86[4], https://github.com/CS2113-AY1819S1-T09-3/main/issues/91[5])
 *** Responsible for the setup of Travis, Appveyor and Coveralls.
@@ -54,7 +54,6 @@ in the `numberOfDifferentNationality` method.
 - Every Pull Request require 1 approval. +
 - Require Appveyor and Travis status check to pass before merging +
 - Require Branches to be up to date before merging
-- Applies to administrators too
 - Restrict anyone who can push to matching branches
 
 == Contributions to the User Guide

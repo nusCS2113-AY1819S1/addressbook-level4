@@ -441,60 +441,130 @@ can also provide the lecturers a option to choose their own script folder locati
 `preferences.json` contains a parameter called `scriptFileDirectory` which is used to indicate the scripts folder in
 the main program
 
-* Procedure of ScriptSetup
+Procedure of ScriptSetup
 
-** When the `execute` method is called, the program will get the `scriptFolder` from the `getScriptFileDirectory` function
+Step 1: When the `execute` method is called, the program will get the `scriptFolder` from the `getScriptFileDirectory` function
 and it will then check whether `scriptFolder` is a valid Path name
 
-*** If `scriptFolder` is valid, the program will automatically proceed to generate the path of the `scriptFolder`
+* If `scriptFolder` is valid, the program will automatically proceed to generate the path of the `scriptFolder` and
+the `logsPath` which is the logs folder for the scripts
 
+[NOTE]
+`logsPath` contains all the log files that are generated when there are commands that failed to execute due to the script
+Command
+
+* If `scriptFolder` is invalid, the program will instead use the `defaultScriptFolder` to generate the path of the `scriptFolder` and
+the `logsPath` which is the logs folder for the scripts
+
+* Similarly, if the `preferences.json` is not present, a new preferences.json will be automatically generated with the
+`defaultScriptFolder`
+
+[NOTE]
+`defaultScriptFolder` = `"/scripts/"`
+
+Step 2: The program will execute `createFolder(scriptPath)` and `createFolder(logPath)` to create the scripts folder and
+logs folder respectively if the folder is missing
 
 .Sequence Diagram for the `ScriptSetup` Function
 image::ScriptSetupSequenceDiagram.png[width="800"]
 
+Step 3: The program will add some Sample Scripts File into the scripts folder through `addSampleTextFile` function
 
+.Sequence Diagram for the `addSampleTextFile` Function
+image::AddSampleTextFileSequenceDiagram.png[width="800"]
 
-Step 1: ScriptSetup will be executed by `MainApp` when the program is initialized and the `ScriptSetup` will be
-execute with the parameter containing the default `scripts` folder location.
-
-[NOTE]
- The default scripts folder location is
- obtained from the `preferences.json` file in the main directory
-
-Step 2: `ScriptSetup` will obtain the path of the default script folder by calling `getPath` from the `FileUtil`
-
-Step 3: The `createFolder` function will be called to create a new folder if the `path` does not exist.
-A boolean `isScriptFolderPresent` will be return true if the script folder is present in the project folder and false
-if it is not present inside the project folder
-
-Step 4: If `isScriptFolderPresent` is false, `scriptSetup` will call `addSampleTextFile` which will add some Sample
-Text Files into the scripts folder
-
+Future Implementation[Coming in v2.0]:
+****
+* Provide the user with more options of reading other file types such as csv
+* Allow the user to select a folder outside of the project main directory
+****
 // end::ScriptSetup[]
 
 // tag::ScriptCommand[]
 === ScriptCommand feature
 ==== Current Implementation
 The `ScriptCommand` Feature allows the user to run `scripts` that execute the same command multiples time by importing
-all Command arguments from a specific text file.
+all Command arguments from a specific Text File.
 
-Before the `ScriptCommand` can be executed, there are some prerequisites:
+Prerequisites for `ScriptCommand` :
 
-* There must be a default folder for which all the scripts need to be stored
-* The default location of scripts folder is `root program location` + `/scripts/`
-* All scripts must be of `Text File Format/txt`
+* There must be a default folder for which all the scripts need to be stored.
+* All scripts must be of `Text File Format` or `txt` Extension.
 
-Future Implementation:
+Typical ScriptCommand `script txt/addpersons c/add`
+
+* `script` is the `CommandWord` that is used to differentiate between the different command.
+
+[NOTE]
+`scr` is also a valid `CommandWord`.
+
+* `txt/addpersons` consists two components
+** `txt/` represent the `TextFileName` Prefix which is used to parse the parameter
+** `addpersons` represent the `TextFileName` that you want to execute
+*** `TextFileName` does not include the file extensions E.g `addpersons` not `addpersons.txt`
+*** `Text File` must also be in the script folder if a error will be thrown to the user
+* `c/add` represent the `CommandType` that the user want to run with the scripts
+** `c/` represent the `CommandType` Prefix which is indicate the command to run
+** `add` represent any valid commands that the Student Management System have E.g `delete`,`addgroup`
+
+Procedure of ScriptCommand
+
+[NOTE]
+For the following example below we will be using the `script txt/addpersons c/add` to demonstrate the sequence of the
+ScriptCommand.
+
+Step 1: The user input `script txt/addpersons c/add` into the `CommandBox` of the UI.
+
+Step 2: The `LogicManager` will run the `execute(script txt/addpersons c/add)` and then the `AddressBookParser` will run
+the `parseCommand` function to parse the arguments of the Command.
+
+Step 3: After the program have determined that the `ScriptCommand` is
+selected, the `ScriptCommandParser` will then `parse` the remaining
+arguments `txt/addpersons c/add`.
+
+Step 4: The program check whether the `TextFileName` `addpersons` and `CommandType` `add` is valid before
+calling the `ScriptCommand("addpersons","add")`.
+
+Step 5: `ScriptCommand` will run the `execute` function and create a instance of `AddressBookParser` called `scriptParser`
+
+* The scriptParser is created to parse all the commands that are in the `addpersons` Text File
+
+.Sequence Diagram for the `ScriptCommand` Function
+image::ScriptCommandSequenceDiagram.png[width="800"]
+
+Step 6: `FileUtil` extract all the data line by line in the `addpersons` Text File and return a list of String called
+`commandArguments`
+
+Step 7: Lastly, to execute the all the commands, the `executeMutipleCommand` function will be run
+
+Step 8: In the `executeMutipleCommand` function, a `ScriptLog` constructor will be called to create a Text File in the `logs`
+folder
+
+[NOTE]
+The log file name will be generated as `CommandType_TextFileName`. E.g `add_addpersons.txt`
+
+Step 9: The program will loop though the `commandArguments` which contains the list of commands that the program is going to run
+
+Step 10: Within the loop, if there is an error in executing each of the individual commands, the `ScriptLog` will trigger the `write` function
+which will write the `ExceptionMessage` to the log file that we have previously created in `Step 8`. Furthermore, `errorMessage`
+will also be updated to include the line number in which the Text File failed to execute
+
+Step 11: After the loop has been completed, the `errorMessage` will be return
+
+.Sequence Diagram for the `executeMutipleCommand` Function
+image::ExecuteMutipleCommandSequenceDiagram.png[width="800"]
+
+Future Implementation[Coming in v2.0]:
 ****
-* Provide feedback and logging to users on which command has failed to executed
-* Allow the program to change the scripts default location
+* Improve the Undo/Redo function. Currently, the function only works on one command execution E.g if a Text File contains 100 Add Commands, the current implementation only
+allow the user to Undo and Redo one command only
 ****
 // end::ScriptCommand[]
 
 // tag::distribute[]
 === Distribute All Students Feature
 ==== Current Implementation
-The Distribute feature assist the user in distributing all students in the address book to specific number of groups randomly.
+The Distribute feature assist the user in distributing all students in the Student Management System to specific number of groups randomly.
 The user is able to control if the distribution process should take into consideration of balanced gender or balanced nationality.
 
 In the current version, the following operations have been implemented:
@@ -522,27 +592,23 @@ throw a `CommandException` which will notify the user of the issue.
 - The `GENDER_FLAG` and `NATIONALITY_FLAG` only accepts `1`, `0`, `true` and `false` else the command will be rejected and will throw a `CommandException` which will notify the user of the issue.
 ====
 
-Step 2: The `DistributeCommand` creates a new `DistributeAlgorithm` Object with an input parameter of a `Distribute` Object which contains the extracted information in Step 1 and a `model` object..
+Step 2: The `DistributeCommand` creates a new `DistributeAlgorithm` Object with an input parameter of a `Distribute` Object which contains the extracted information in Step 1 and a `model` object.
 The `DistributeAlgorithm` constructor will proceed to run and check for non null inputs. Once it is completed, it will set `DistributeUtils` to have the same model as the input model.
 Next, the method will gather a list of all person in the management system and check if the desired number of groups to be create is lesser than the number of people in the management system.
-Once the checks are complete, the `DistributeAlgorithm` method will shuffle all person in it list check the gender and nationality flags. Different combination of flags input results in different distribution algorithm to be run.
+Once the checks are complete, the `DistributeAlgorithm` method will shuffle all person in into a list and check the gender and nationality flags. Different combination of flags input results in different distribution algorithm to be executed.
 
-Step 3: In every algorithm, the allocation process is different. However, the *Distribution process* is the same throughout all algorithm.
+Step 3: In every algorithm, the allocation process is different. However, the *Distribution process* is the same throughout all algorithm. Hence the Distribution process will be explained at the last section of this feature.
 
 The following sequence diagram shows how the distribution process works within `Logic`, `Commons` components:
 
 .(Part 1) Interactions Inside the Logic and Commons Component for the `distinto 3 n/CS2113- g/0 nat/0` Command
-image::DistributeSequenceDiagram.png[width="800"]
+image::DistributeSequenceDiagram.png[width="600"]
 .(Part 2) Interactions Inside the Commons and Logic Component for the `distinto 3 n/CS2113- g/0 nat/0` Command
-image::DistributeSequenceDiagram_2.png[width="800"]
-
-==== Flow Diagram
+image::DistributeSequenceDiagram_2.png[width="600"]
 
 ==== UML Class Diagrams
-.(Part 1) UML Class Diagram for the Logic and Model Component for the `Distribute` Command
-image::DistributeComponentClassDiagramPart1.png[width="800"]
-.(Part 2) UML Class Diagram for the Model and Common Component for the `Distribute` Command
-image::DistributeComponentClassDiagramPart2.png[width="800"]
+.UML Class Diagram for the Model Component for the `Distribute` Command
+image::DistributeComponentClassDiagramPart2.png[width="600"]
 ==== Algorithm Implementation
 The Distribute Students Equally feature holds 4 different algorithms.
 Each Algorithm serve different purposes.
@@ -552,20 +618,6 @@ Each Algorithm serve different purposes.
 * Distribute Students Randomly with Balanced Nationality
 * Distribute Students Randomly with Balanced Gender & Nationality (Coming in v2.0)
 
-Every Algorithm will require inputs such as:
-****
-* int _n_ : Number of Groups to be created of Integer Data Type
-* ArrayList<ArrayList<Person>> groupArrayList : 2D ArrayList of Person Type
-* LinkList<Person> allPerson : LinkList containing all person data from the current address book
-* String groupName : Group Name in String Type
-****
-
-From these 4 inputs, every algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
-
-[NOTE]
-Before any Algorithm execute, the system will check if there exist any duplicate group name.
-If such an event occur, the command will stop and throw a `CommandException : Duplicate Groups Found` which will notify the user of the issue.
-
 ==== Pre Execution Checks and Operations
 Before any Algorithm is execute, there are some checks and functions to be performed.
 
@@ -573,77 +625,109 @@ Before any Algorithm is execute, there are some checks and functions to be perfo
 .. throw `Command Exception` if _n_ groups is more than > number of persons in address book.
 . Check if there exist a group with the *same group name* as the ones to be created.
 .. throw `Command Exception` if there exist another group with the intended name to be created.
-. Shuffle the Address Book with a time seed.
+. Shuffle the list containing all Students in the Management System with a time seed.
 .. A Better Distribution
 . Place All Persons into an LinkList.
 
 ==== Algorithm Design Input Parameters
+Every Algorithm will require inputs such as:
+****
+* int _n_ : `Number of Groups to be created of Integer Data Type`
+* ArrayList<ArrayList<Person>> groupArrayList : `2D ArrayList of Person Type`
+* LinkList<Person> allPerson : `LinkList containing all person data from the current address book`
+* String groupName : `Group Name in String Type`
+****
 
-. int _n_
-.. Number of Groups to be created
-. ArrayList<ArrayList<Person>> groupArrayList
-.. A 2D Array List where the *Outer Array List* acts as a group while the *Inner Array List* stores the *Person Object*.
-. LinkList<Person> allPerson
-.. A LinkList containing all person data from the current address book. Meant for distribution into the 2D ArrayList.
-. String groupName
-.. The group name required to create the groups.
+From these 4 inputs, every algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
 
-===== Aspect: Distribute Students Equally Algorithm Explanation
+[NOTE]
+Before any of the 4 Algorithm execute, the system will conduct the Pre-Execution check mentioned above.
+
+===== Aspect: Distribute Students Equally Algorithm Explanation `g/0 nat/0`
+
+*Pseudo Explanation of the Allocation Process*
 
 To ensure a balanced number of persons in each group, we have to calculate the minimum number of people to place in a group.
-This process of recalculation has to be executed as we access the next group. This allows the distribution to be balanced.
+Once the minimum number of persons is obtained, we can proceed to allocate these students into a group.
+This process of recalculation and reassigning has to be executed as we access the next group. This allows the distribution to be balanced.
 
-*Allocation Process*
+//. Creates a For Loop of _n_ number of times. Starting with i equals to _n_ and count down to 0.
+//. Creates an ArrayList of Person Object.
+//.. This ArrayList acts as the inner array list to hold all Persons.
+//. Calculates the number of Person should be in a group.
+//.. This can be done by having the *total number of Person* in the LinkList divided by *i* from the for loop.
+//.. Lets label this as _paxInAGroup_
+//. Creates a While Loop with the condition of _paxInAGroup_ more than 0.
+//.. In the while loop, we will load a person object from the LinkList into the ArrayList.
+//. Once the while loop is complete, the array list will be filled with _paxInAGroup_ Persons.
+//. Now, we add this ArrayList with _paxInAGroup_ of Persons into the 2D ArrayList where the outer acts as a group.
+//. This process is repeated until the total number of group required to be allocated is complete.
 
-. Creates a For Loop of _n_ number of times. Starting with i equals to _n_ and count down to 0.
-. Creates an ArrayList of Person Object.
-.. This ArrayList acts as the inner array list to hold all Persons.
-. Calculates the number of Person should be in a group.
-.. This can be done by having the *total number of Person* in the LinkList divided by *i* from the for loop.
-.. Lets label this as _paxInAGroup_
-. Creates a While Loop with the condition of _paxInAGroup_ more than 0.
-.. In the while loop, we will load a person object from the LinkList into the ArrayList.
-. Once the while loop is complete, the array list will be filled with _paxInAGroup_ Persons.
-. Now, we add this ArrayList with _paxInAGroup_ of Persons into the 2D ArrayList where the outer acts as a group.
-. This process is repeated until the total number of group required to be allocated is complete.
+*Now we will proceed with the Distribution Process* +
+(Distribution Process will be explained after all Aspect)
 
-*Distribution Process*
+===== Aspect: Distribute Students Equally with Balanced Gender Explanation `g/1 nat/0`
 
-. The `distributeProcess` method will access the 2D ArrayList.
-. In each ArrayList of the 2D ArrayList, the distributeProcess Method will access the outer ArrayList and creates a group.
-.. The group is created with the given Group Name that the user specified in the Command.
-. Next, it will access the inner ArrayList and add all the person allocated inside into the group.
-. This process is repeated until the 2D ArrayList is fully accessed.
-
-We will now be able to achieve _n_ groups with all students distributed randomly into them. +
-
-===== Aspect: Distribute Students Equally with Balanced Gender Explanation
+*Pseudo Explanation of the Allocation Process*
 
 The process is quite different from the Algorithm used above. The key difference is that we had separate all female person into a list
 and all male persons into another list. After separation, we start the allocation of 1 male person to each group and process repeats until there are no males left.
-At that same pointer where the male list turns empty, we will start the allocation of 1 female person to each group. This process continues until all female persons are allocated.
+At that same pointer where the male list turns empty, we will start the allocation of 1 female person to each group. This process continues until all female persons are also allocated.
 
-*Allocation Process*
+//. Creates a For Loop of _n_ number of times. Starting with i equals to _n_ and counts down to 0.
+//. Creates 2 LinkedList of Person Object.
+//.. 1 LinkedList to store all male persons
+//.. 1 LinkedList to store all female persons
+//. Iterate through allPersonLinkList, store male persons into maleLinkList and store female persons into femaleLinkList.
+//. Creates a while loops to check if maleLinkList or femaleLinkList is not empty
+//.. Create a pointer to point to the group number.
+//.. Creates another while loop to allow the group pointer to iterate infinitely.
+//... if the group pointer points to the last group, it will reset its pointer back to the first group.
+//. In the inner While Loop from 4b.
+//.. Creates an ArrayList of Person Object.
+//.. Allocate 1 male person from the male LinkList into the inner ArrayList.
+//... This process is done in the selectiveDistributionByGender method.
+//.. Add the inner ArrayList into the outer ArrayList of the 2D ArrayList.
+//.. Move the group pointer to the next group and repeat from Step 5
+//. Once maleLinkList is exhausted, repeat Step 5 with the female LinkList.
 
-. Creates a For Loop of _n_ number of times. Starting with i equals to _n_ and counts down to 0.
-. Creates 2 LinkedList of Person Object.
-.. 1 LinkedList to store all male persons
-.. 1 LinkedList to store all female persons
-. Iterate through allPersonLinkList, store male persons into maleLinkList and store female persons into femaleLinkList.
-. Creates a while loops to check if maleLinkList or femaleLinkList is not empty
-.. Create a pointer to point to the group number.
-.. Creates another while loop to allow the group pointer to iterate infinitely.
-... if the group pointer points to the last group, it will reset its pointer back to the first group.
-. In the inner While Loop from 4b.
-.. Creates an ArrayList of Person Object.
-.. Allocate 1 male person from the male LinkList into the inner ArrayList.
-... This process is done in the selectiveDistributionByGender method.
-.. Add the inner ArrayList into the outer ArrayList of the 2D ArrayList.
-.. Move the group pointer to the next group and repeat from Step 5
-. Once maleLinkList is exhausted, repeat Step 5 with the female LinkList.
+*Now we will proceed with the Distribution Process* +
+(Distribution Process will be explained after all Aspect)
 
-*Distribution Process*
+===== Aspect: Distribute Students Equally with Balanced Nationality Explanation `g/0 nat/1`
 
+*Pseudo Explanation of the Allocation Process*
+
+The process is quite similar to the Algorithm mentioned in Distribute Students Equally with Balanced Gender Explanation.
+The key difference is that we had to collect the total number of different nationalities in the Person list first.
+We can achieve this by using a Map to filter out the different nationalities as the key and the number of persons belonging to that nationality as the values.
+We have to also sort the map by the values decreasingly to ensure the highest pax of a single nationality is distributed first.
+Once we have the Map of different nationalities and the number of values in each nationality, we can follow the previous algorithm and allocate 1 person from the same nationality to 1 group at a time.
+After exhausting all person from the same nationality, we can repeat the same process for the next nationality. This ensure all groups to have a balanced and mixed nationality.
+
+
+//. Initialize a group pointer.
+//. Creates a for loop that iterates based on the Map's number of key which is the number of different nationality.
+//. Creates another for loop that iterates based on the key's values which is the number of person that has the same nationality.
+//.. Creates an ArrayList of Person Object.
+//.. In each iteration, we locate a person with the specific Nationality (key) and add into inner ArrayList.
+//... This process is done by the selectiveDistributionByNationality method.
+//.. Next, we will add the inner ArrayList into the outer ArrayList of the 2D ArrayList.
+//.. A group pointer will be moved to the next group and the process is repeated from Step 3b.
+//. Once the value in the particular nationality is exhausted, the for loop in Step 2 will point to the next Nationality.
+//. The process now repeats from Step 3 until the For Loop in Step 2 is exhausted.
+
+*Now we will proceed with the Distribution Process* +
+(Distribution Process will be explained after all Aspect)
+
+===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation `g/1 nat/1`
+Currently In Development - Coming in v2.0
+(Reason: Due to lack of time)
+
+
+===== Pseudo Explanation of the Distribution Process
+.The 2D ArrayList should be filled up with Person Objects before the Distribution Process is called.
+image::DistributeProcess.png[width=500]
 . The `distributeProcess` method will access the 2D ArrayList.
 . In each ArrayList of the 2D ArrayList, the distributeProcess Method will access the outer ArrayList and creates a group.
 .. The group is created with the given Group Name that the user specified in the Command.
@@ -652,39 +736,10 @@ At that same pointer where the male list turns empty, we will start the allocati
 
 We will now be able to achieve _n_ groups with all students distributed randomly with balanced gender. +
 
-===== Aspect: Distribute Students Equally with Balanced Nationality Explanation
-
-The process is quite similar to the Algorithm used above. The key difference is that we had to collect the total number of different nationalities in the Person list.
-We can achieve this by using a Map to filter out the different nationalities as the key and the number of persons belonging to that nationality as the values.
-We have to also sort the map by the values decreasingly to ensure the highest pax of a single nationality is distributed first.
-Once we have the Map of different nationalities and the number of values in each nationality, we can follow the previous algorithm and allocate 1 person from the same nationality to 1 group at a time.
-After exhausting all person from the same nationality, we can repeat the same process for the next nationality. This ensure all groups to have a balanced and mixed nationality.
-
-*Allocation Process*
-
-. Initialize a group pointer.
-. Creates a for loop that iterates based on the Map's number of key which is the number of different nationality.
-. Creates another for loop that iterates based on the key's values which is the number of person that has the same nationality.
-.. Creates an ArrayList of Person Object.
-.. In each iteration, we locate a person with the specific Nationality (key) and add into inner ArrayList.
-... This process is done by the selectiveDistributionByNationality method.
-.. Next, we will add the inner ArrayList into the outer ArrayList of the 2D ArrayList.
-.. A group pointer will be moved to the next group and the process is repeated from Step 3b.
-. Once the value in the particular nationality is exhausted, the for loop in Step 2 will point to the next Nationality.
-. The process now repeats from Step 3 until the For Loop in Step 2 is exhausted.
-
-*Distribution Process*
-
-. The `distributeProcess` method will access the 2D ArrayList.
-. In each ArrayList of the 2D ArrayList, the distributeProcess Method will access the outer ArrayList and creates a group.
-.. The group is created with the given Group Name that the user specified in the Command.
-. Next, it will access the inner ArrayList and add all the person allocated inside into the group.
-. This process is repeated until the 2D ArrayList is fully accessed.
-
-We will now be able to achieve _n_ groups with all students distributed randomly with balanced nationality. +
-
-===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation
-Coming in v2.0
+====  Disclaimer
+Groups created by Distribute feature will be pre-set with a Group Location of "UNKNOWN". This is because each group might holds the same location or different location.
+Hence it will always be pre-set to "UNKNOWN". User can only change the Group Location by editing the details of the specific Group. However, the feature to edit Group Details in under development and will be
+ready in v2.0.
 
 // end::distribute[]
 
