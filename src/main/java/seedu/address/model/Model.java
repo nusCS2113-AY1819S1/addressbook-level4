@@ -82,6 +82,11 @@ public interface Model {
     ObservableList<Person> getOtherList();
 
     /**
+     * Returns a list with just the current user
+     */
+    ObservableList<Person> getMeList();
+
+    /**
      * Instantiates the user with a Person in database
      * @param name
      */

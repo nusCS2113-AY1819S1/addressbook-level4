@@ -158,6 +158,11 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(otherList);
     }
 
+    public ObservableList<Person> getMeList() {
+        filteredPersons.setPredicate(p -> p.getName().equals(user.getName()));
+        return FXCollections.unmodifiableObservableList(filteredPersons);
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override

@@ -29,6 +29,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the non-friends of the person */
     ObservableList<Person> getOtherList();
 
+    /** Returns a a list of the to popular the MePanel */
+    ObservableList<Person> getMeList();
+
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
 
