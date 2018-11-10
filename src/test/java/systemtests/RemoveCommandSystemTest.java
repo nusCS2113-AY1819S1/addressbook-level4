@@ -1,6 +1,7 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.testutil.TypicalEvents.EVENT_3;
 import static seedu.address.testutil.TypicalEvents.EVENT_5;
@@ -43,7 +44,7 @@ public class RemoveCommandSystemTest extends AddressBookSystemTest {
         Event updatedEvent = new EventBuilder(EVENT_3).withAttendee().build();
         assertCommandSuccess(command, indexPerson, indexEvent, updatedEvent);
 
-        /* Case: undo removing the last person in the list -> last event with invited person restored */
+        /* Case: undo removing the last person in the list -> last event with attendee restored */
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
@@ -56,7 +57,7 @@ public class RemoveCommandSystemTest extends AddressBookSystemTest {
 
 
         /* ------------------ Performing remove operation while a filtered list is being shown ------------------ */
-        /* Case: filtered person list, person  and event index within bounds of person list and event list respectively
+        /* Case: filtered person list, person and event index within bounds of person list and event list respectively
          * -> removed */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         showEventsWithName("5");
@@ -65,7 +66,7 @@ public class RemoveCommandSystemTest extends AddressBookSystemTest {
         assertTrue(indexPerson.getZeroBased() < getModel().getFilteredPersonList().size());
         command = " " + RemoveCommand.COMMAND_WORD + "  " + indexPerson.getOneBased() + " "
                 + PREFIX_FROM + " " + indexEvent.getOneBased();
-        updatedEvent = new EventBuilder(EVENT_5).withAttendee().build();
+        updatedEvent = new EventBuilder(EVENT_5).withAttendee(VALID_EMAIL_ALICE).build();
         assertCommandSuccess(command, indexPerson, indexEvent, updatedEvent);
 
         /* Case: filtered person list, event index within bounds of event list

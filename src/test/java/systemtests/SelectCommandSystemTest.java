@@ -32,7 +32,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
          */
         String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setEventFilteredList(expectedModel, EVENT_3);
+        ModelHelper.setEventFilteredList(expectedModel, EVENT_3, EVENT_5);
         assertCommandSuccess(command, INDEX_FIRST_PERSON, expectedModel);
 
         /* Case: select the last card in the person list -> selected */
