@@ -866,10 +866,13 @@ job offers and candidates.
 . The user is satisfied with the preview and executes the `send` command. This generates the email as a `MimeMessage`
   which is the Java format used for emails and is sent via `EmailUtil#sendMessage`. `LogicState` is reset back to orignal and this marks the end of the email command.
 
-This is the simplified action diagram when the user executes the email command, assuming the user is only executing the `add`
+This is the simplified action diagram and sequence diagram when the user executes the email command, assuming the user is only executing the `add`
 command once per `selectRecipients` and `selectContents` step.
 
+.Action Diagram
 image::EmailActivityDiagram.png[width="1000", align="center"]
+.Sequence Diagram
+image::EmailSequenceDiagram.png[width="1000", align="center"]
 
 ==== Design Considerations
 ===== Aspect: Data structure to store recipients and candidates
@@ -887,6 +890,15 @@ image::EmailActivityDiagram.png[width="1000", align="center"]
    and maintains order in which objects were added in.
 ** Cons: Not as fast as a hash set, but speed can be sacrificed for the pros.
 
+===== Aspect: The design choice of the Email command
+
+* **Alternative 1:** Having a pop up Email window, with editable fields
+** Pros: More customisable, more intuitive and looks better
+** Cons: Very labour intensive to email many people. Adding candidates manually will take a very long time, even if the GUI can be used to assist.
+
+* **Alternative 2 (current choice):** Using command line to mass add recipients and contents
+** Pros: Very suitable for mass sending applications, which was the main design consideration when designing the email command.
+** Cons: Not very customisable, but we will try to add more customisability down the road.
 // end::email[]
 
 // tag::undoredo[]
