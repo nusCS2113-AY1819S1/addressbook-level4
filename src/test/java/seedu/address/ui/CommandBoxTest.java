@@ -14,6 +14,10 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
+import seedu.address.security.AppUsers;
+import seedu.address.security.AppUsersTestStub;
+import seedu.address.security.Security;
+import seedu.address.security.SecurityManager;
 
 public class CommandBoxTest extends GuiUnitTest {
 
@@ -29,8 +33,10 @@ public class CommandBoxTest extends GuiUnitTest {
     public void setUp() {
         Model model = new ModelManagerTestUserStub();
         Logic logic = new LogicManager(model);
+        AppUsers appUsers = new AppUsersTestStub();
+        Security security = new SecurityManager(true, logic, appUsers);
 
-        CommandBox commandBox = new CommandBox(logic);
+        CommandBox commandBox = new CommandBox(logic, security);
         commandBoxHandle = new CommandBoxHandle(getChildNode(commandBox.getRoot(),
                 CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         uiPartRule.setUiPart(commandBox);

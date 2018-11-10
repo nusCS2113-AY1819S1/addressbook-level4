@@ -20,14 +20,16 @@ public class AddressBookRegisterParserTest {
     @Test
     public void parseCommand_register() throws Exception {
         Person person = new PersonBuilder().build();
-        RegisterCommand command = (RegisterCommand) parser.parseCommand(PersonUtil.getRegisterCommand(person));
+        parser.parseCommand(PersonUtil.getRegisterCommand(person));
+        RegisterCommand command = (RegisterCommand) parser.parseCommandArguments();
         assertEquals(new RegisterCommand(person), command);
     }
 
     @Test
     public void parseCommandAlias_register() throws Exception {
         Person person = new PersonBuilder().build();
-        RegisterCommand command = (RegisterCommand) parser.parseCommand(PersonUtil.getRegisterCommandAlias(person));
+        parser.parseCommand(PersonUtil.getRegisterCommandAlias(person));
+        RegisterCommand command = (RegisterCommand) parser.parseCommandArguments();
         assertEquals(new RegisterCommand(person), command);
     }
 }
