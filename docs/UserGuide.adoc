@@ -68,7 +68,8 @@ which can be used as `add n/Grocery shopping`.
 ====
 
 ====
-*Parameter Constraints* [[constraints]]
+[[constraints]]
+*Parameter Constraints*
 
 * `NAME` can be any word, phrase or sentence.
 * `MONEYFLOW` must be made up of only digits, a single "+" or "-" and at most one decimal point. Also, note that the maximum number of
@@ -125,6 +126,7 @@ Dual argument mode: `list d/START_DATE END_DATE`
 * Default mode will list down all records in Savee. +
 * Single argument mode will list down all records with the date specified. +
 * Dual argument mode will list down all records with the date that fall on either dates or between both dates.
+* Refer to <<constraints>> for the more information on the parameters.
 ****
 
 Examples:
@@ -432,9 +434,10 @@ Format: +
 ****
 * Note that there are specific formats required for the dates and months entered.
 * For the commands *"summary date"* and *"summary category"*, START_DATE/END_DATE must be in the format of
-`dd-mm-yyyy` where `dd` represents day, `mm` represents month, `yyyy` represents year. All parameters should be specified in numerical form.
+`dd-mm-yyyy` where `dd` represents day, `mm` represents month, `yyyy` represents year.
 * For command *"summary month"*, START_MONTH/END_MONTH must in the format of `mmm-yyyy`, `mmm` represents the month with its three letter representations, and
 `yyyy` represents the year in its numerical form.
+* Refer to <<constraints>> for the more information on the parameters.
 * Note that for mmm, it is case-insensitive, meaning both *"APR"* and *"apr"* are accepted.
 ****
 
@@ -475,6 +478,7 @@ Format:`stats d/START_DATE END_DATE`
 * START_DATE/END_DATE follow the same configurations as date parameters required when adding records. It is in the form of
 *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
 *yyyy* requires exactly 4 digits.
+* Refer to <<constraints>> for the more information on the parameters.
 ****
 
 Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range. +
@@ -508,8 +512,8 @@ Shows a breakdown of total expenses and income into categories using data of thi
 No format is required for this feature as the feature is automatically triggered when there is any changes to the list of records within the application.
 Another way of returning to the welcome panel from anywhere in the app is to press `HOME` on the keyboard or click `Home` on the menu.
 
-This feature automatically tracks the current date and ensures that the data presented is updated regardless regardless of whether the application is off or on for
-prolonged periods of time. +
+This feature automatically tracks the *current date* and ensures that the data presented is updated regardless regardless of whether the application is *off* or *on for
+prolonged periods of time*. This feature also works offline and retrieves information from the system clock to determine the current date. +
 
 Even in the event where the user is using the application at close to 12 midnight of the last day of a particular month and the clocks strikes 12,
 the application will update the data whenever it detects any record data modifications in the app to reflect the next month.
