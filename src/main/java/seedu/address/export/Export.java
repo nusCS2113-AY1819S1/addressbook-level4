@@ -15,12 +15,12 @@ public interface Export {
      * Saves the filteredPersons to the storage.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveFilteredAddressBook() throws IOException;
+    void saveFilteredPersons() throws IOException;
 
     /**
-     * @see #saveFilteredAddressBook()
+     * @see #saveFilteredPersons()
      */
-    void saveFilteredAddressBook(FilteredList<Person> filteredPersons, Path filePath)
+    void saveFilteredPersons(FilteredList<Person> filteredPersons, Path filePath)
             throws IOException;
 
 }

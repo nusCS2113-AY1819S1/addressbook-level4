@@ -33,19 +33,24 @@ public class ExportManager implements Export {
         return exportPath;
     }
 
+
     // TODO: add header in the interface header, refer to XmlAddressBookStorage
+    /**
+     * Saves the {@code filteredPersons} to the {@code exportPath}.
+     * @throws IOException if there was any problem writing to the file.
+     */
     @Override
-    public void saveFilteredAddressBook() throws IOException {
-        saveFilteredAddressBook(filteredPersons, exportPath);
+    public void saveFilteredPersons() throws IOException {
+        saveFilteredPersons(filteredPersons, exportPath);
     }
 
     /**
-     * Similar to {@link #saveFilteredAddressBook()}
-     *
-     * @param filePath location of the data. Cannot be null
+     * Similar to {@link #saveFilteredPersons()}
+     * @param filteredPersons cannot be null.
+     * @param filePath file path of the data. Cannot be null
      */
     @Override
-    public void saveFilteredAddressBook(FilteredList<Person> filteredPersons, Path filePath) throws IOException {
+    public void saveFilteredPersons(FilteredList<Person> filteredPersons, Path filePath) throws IOException {
         requireNonNull(filteredPersons);
         requireNonNull(filePath);
 
