@@ -34,7 +34,7 @@ public class EditLimitCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "The limit has been edited. \n";
-
+    public static final String MESSAGE_SAME_LIMIT ="The edited limit has the same moneyFlow as the original limit.\n";
     private Limit originalLimit;
     private String output;
     private Limit limit;
@@ -50,6 +50,10 @@ public class EditLimitCommand extends Command {
             throw new CommandException(Messages.MESSAGE_LIMITS_DO_NOT_EXIST);
         }
         originalLimit = model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd());
+
+        if (originalLimit.getLimitMoneyFlow().equals(limit.getLimitMoneyFlow())) {
+            throw new CommandException(MESSAGE_SAME_LIMIT);
+        }
         model.updateLimit(originalLimit, limit);
 
         output = MESSAGE_SUCCESS + "Original Limit:\n"
