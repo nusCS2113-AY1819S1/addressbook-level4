@@ -91,4 +91,26 @@ public class TimeSlotTest {
         assertEquals(TypicalTimeSlots.MON_8_TO_10.merge(TypicalTimeSlots.MON_10_TO_12), TypicalTimeSlots.MON_8_TO_12);
         assertEquals(TypicalTimeSlots.MON_8_TO_10.merge(TypicalTimeSlots.MON_9_TO_11), TypicalTimeSlots.MON_8_TO_11);
     }
+
+    @Test
+    public void toCompare_diffDay_returnLessThan() {
+        boolean isLessThan = TypicalTimeSlots.MON_8_TO_10.compareTo(TypicalTimeSlots.TUE_10_TO_12) < 0 ? true : false;
+        assertEquals(true, isLessThan);
+    }
+
+    @Test
+    public void toCompare_sameDayDiffStart_returnLessThan() {
+        boolean isLessThan = TypicalTimeSlots.TUE_10_TO_12.compareTo(TypicalTimeSlots.TUE_12_TO_14) < 0 ? true : false;
+        assertEquals(true, isLessThan);
+    }
+
+    @Test
+    public void toCompare_sameDaySameStartDiffEnd_returnEquals() {
+        assertEquals(0, TypicalTimeSlots.MON_8_TO_10.compareTo(TypicalTimeSlots.MON_8_TO_12));
+    }
+
+    @Test
+    public void toCompare_equals_returnEquals() {
+        assertEquals(0, TypicalTimeSlots.MON_8_TO_10.compareTo(TypicalTimeSlots.MON_8_TO_10));
+    }
 }
