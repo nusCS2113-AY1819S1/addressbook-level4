@@ -8,9 +8,10 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.CompanyContainsFindKeywordsPredicate;
@@ -44,7 +45,9 @@ public class FindCompanyCommand extends Command {
         model.updateFilteredCompanyList(predicate);
 
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
-            LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
+            EventsCenter.getInstance()
+                    .post(new ChangeLogicStateEvent(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST));
+
             return new CommandResult(String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW,
                     model.getFilteredCompanyList().size())
                     + ShortlistCandidateInitializationCommand.MESSAGE_NEXT_STEP
@@ -52,7 +55,9 @@ public class FindCompanyCommand extends Command {
         }
 
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
-            LogicManager.setLogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
+            EventsCenter.getInstance()
+                    .post(new ChangeLogicStateEvent(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE));
+
             return new CommandResult(String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW,
                     model.getFilteredCompanyList().size())
                     + DeleteShortlistedCandidateInitializationCommand.MESSAGE_NEXT_STEP

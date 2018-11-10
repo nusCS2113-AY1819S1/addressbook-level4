@@ -7,10 +7,11 @@ import java.util.List;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.JumpToCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -71,7 +72,7 @@ public class SelectJobCommand extends Command {
          */
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
-            LogicManager.setLogicState(SelectCandidateCommand.COMMAND_LOGIC_STATE);
+            EventsCenter.getInstance().post(new ChangeLogicStateEvent(SelectCandidateCommand.COMMAND_LOGIC_STATE));
             return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS,
                     targetIndex.getOneBased()) + MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST
                     + SelectCandidateCommand.MESSAGE_USAGE);
@@ -82,7 +83,8 @@ public class SelectJobCommand extends Command {
          */
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
             EventsCenter.getInstance().post(new JumpToCompanyJobListRequestEvent(targetIndex));
-            LogicManager.setLogicState(DeleteShortlistedCandidateCommand.COMMAND_LOGIC_STATE);
+            EventsCenter.getInstance()
+                    .post(new ChangeLogicStateEvent(DeleteShortlistedCandidateCommand.COMMAND_LOGIC_STATE));
             return new CommandResult(String.format(MESSAGE_SELECT_JOB_SUCCESS,
                     targetIndex.getOneBased()) + MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST_DELETE
                     + DeleteShortlistedCandidateCommand.MESSAGE_USAGE);

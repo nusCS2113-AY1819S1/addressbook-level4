@@ -35,7 +35,7 @@ public class RecruitBook {
      * Resets the existing data of this {@code RecruitBook} with {@code newCandidateData} and {@code newCompanyData}.
      */
 
-    public void resetData (ReadOnlyCandidateBook newCandidateData, ReadOnlyCompanyBook newCompanyData ) {
+    public void resetData (ReadOnlyCandidateBook newCandidateData, ReadOnlyCompanyBook newCompanyData) {
         candidateBook.resetData(newCandidateData);
         companyBook.resetData(newCompanyData);
     }
