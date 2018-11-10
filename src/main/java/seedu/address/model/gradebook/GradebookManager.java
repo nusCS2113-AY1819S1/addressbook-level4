@@ -53,7 +53,7 @@ public class GradebookManager {
     }
 
     /**
-     This method adds gradebook component to a module in Trajectory.
+     This method lists gradebook component to a module in Trajectory.
      */
     public String listGradebookComponent () {
         StringBuilder sb = new StringBuilder();
@@ -184,7 +184,7 @@ public class GradebookManager {
     }
 
     /**
-     This method checks if maximum marks are within acceptable range.
+     This method checks if weightage are within acceptable range.
      */
     public boolean isWeightageValid (int gradebookWeightage) {
         boolean isWeightageValid = false;
