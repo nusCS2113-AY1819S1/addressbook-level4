@@ -119,7 +119,6 @@ public class EmailUtil {
         output.append(jobOffer.getJob().toString());
         output.append(" at ");
         output.append(jobOffer.getCompanyName().toString());
-        System.out.println(output.toString());
         return output.toString();
     }
 }
