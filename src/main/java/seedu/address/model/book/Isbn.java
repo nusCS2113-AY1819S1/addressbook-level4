@@ -20,7 +20,7 @@ public class Isbn {
     /**
      * Constructs a {@code Isbn}.
      *
-     * @param isbn A valid phone number.
+     * @param isbn A valid isbn number.
      */
     public Isbn(String isbn) {
         requireNonNull(isbn);
@@ -38,7 +38,6 @@ public class Isbn {
         for (int i = 0; i < 9; i++) {
             sum += arr[i] * (str.charAt(i) - '0');
         }
-        System.out.print(sum);
         sum %= 11;
         if (sum != 0) {
             sum = 11 - sum;
