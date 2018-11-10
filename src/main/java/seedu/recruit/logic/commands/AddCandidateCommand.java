@@ -55,6 +55,7 @@ public class AddCandidateCommand extends Command {
             + PREFIX_TAG + "excuseHeavyLoad";
 
     public static final String MESSAGE_SUCCESS = "New added candidate: %1$s\n"
+                                 + "You can undo this action by entering 'undo'\n"
                                  + "(Enter details of another candidate to add or enter 'cancel' to stop adding.)";
     public static final String MESSAGE_DUPLICATE_PERSON = "This candidate already exists in the CandidateBook";
 
