@@ -17,7 +17,7 @@ import seedu.recruit.model.UserPrefs;
 public class EmailInitialiseCommand extends Command {
     public static final String COMMAND_WORD = "email";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Emails specified candidates about specified job offers"
-            + "or specified companies about specified candidates.";
+            + " or specified companies about specified candidates.";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {

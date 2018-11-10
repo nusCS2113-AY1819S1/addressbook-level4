@@ -892,7 +892,7 @@ image::EmailSequenceDiagram.png[width="1000", align="center"]
 
 ===== Aspect: The design choice of the Email command
 
-* **Alternative 1:** Having a pop up Email window, with editable fields
+* **Alternative 1:** Having a pop up Email window with editable fields
 ** Pros: More customisable, more intuitive and looks better
 ** Cons: Very labour intensive to email many people. Adding candidates manually will take a very long time, even if the GUI can be used to assist.
 

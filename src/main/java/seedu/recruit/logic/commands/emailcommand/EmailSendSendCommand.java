@@ -26,6 +26,7 @@ import seedu.recruit.model.joboffer.JobOffer;
 public class EmailSendSendCommand extends EmailSendCommand {
 
     @Override
+    @SuppressWarnings("Duplicates")
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         EmailUtil emailUtil = model.getEmailUtil();
         updateRecipientsAndContents(emailUtil);
