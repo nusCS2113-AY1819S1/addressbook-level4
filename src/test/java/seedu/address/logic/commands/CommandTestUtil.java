@@ -42,6 +42,7 @@ public class CommandTestUtil {
     public static final String VALID_1_HOUR = "1";
     public static final String VALID_2_HOURS = "2";
     public static final String VALID_INDEX_1 = "1";
+    public static final String VALID_INDEX_2 = "2";
     public static final String VALID_MILESTONE_DESCRIPTION_1 = "Dummy milestone";
     public static final String VALID_RANK_1 = "1";
 
@@ -62,6 +63,7 @@ public class CommandTestUtil {
     public static final String HOURS_DESC_1 = " " + PREFIX_HOURS + VALID_1_HOUR;
     public static final String HOURS_DESC_2 = " " + PREFIX_HOURS + VALID_2_HOURS;
     public static final String INDEX_DESC_1 = " " + PREFIX_INDEX + VALID_INDEX_1;
+    public static final String INDEX_DESC_2 = " " + PREFIX_INDEX + VALID_INDEX_2;
     public static final String MILESTONE_DESCRIPTION_DESC_1 = " " + PREFIX_MILESTONE + VALID_MILESTONE_DESCRIPTION_1;
     public static final String RANK_DESC_1 = " " + PREFIX_RANK + VALID_RANK_1;
 
@@ -69,16 +71,22 @@ public class CommandTestUtil {
     public static final String INVALID_TITLE_DESC = " " + PREFIX_TITLE + " "; // Title is empty
     public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + " "; // Description is empty
     public static final String INVALID_PRIORITY_LEVEL_DESC = " " + PREFIX_PRIORITY + "mid"; // not a priority level
-    public static final String INVALID_HOURS_DESC = " " + PREFIX_HOURS + "one"; // not an integer
+
     public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "2113CS";
     public static final String EMPTY_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + " ";
+
     public static final int OVERFLOW_INT = Integer.MAX_VALUE;
+    public static final String INVALID_HOURS_DESC = " " + PREFIX_HOURS + "one"; // not an integer
+    public static final String ZERO_HOURS_DESC = " " + PREFIX_HOURS + "0";
+    public static final String NEGATIVE_HOURS_DESC = " " + PREFIX_HOURS + "-1";
     public static final String INVALID_HOURS_OVERFLOW = " " + PREFIX_HOURS
-            + Long.toString((long) OVERFLOW_INT + 1); // integer overflow
-    public static final int MAX_HOURS = 24; // integer overflow
-    public static final String INVALID_MAX_HOURS = " " + PREFIX_HOURS + Integer.toString(24); // integer overflow
+            + Long.toString((long) OVERFLOW_INT + 1);
+
+    public static final String INVALID_INDEX_OVERFLOW = " " + PREFIX_INDEX
+            + Long.toString((long) OVERFLOW_INT + 1);
     public static final String INVALID_INDEX_DESC_ZERO = " " + PREFIX_INDEX + "0";
     public static final String INVALID_INDEX_DESC_NEGATIVE = " " + PREFIX_INDEX + "-1";
+
     public static final String INVALID_MILESTONE_DESCRIPTION_DESC = " " + PREFIX_MILESTONE
             + "Dummy milestone with forty one characters";
     public static final String INVALID_RANK_DESC_ZERO = " " + PREFIX_RANK + "0";

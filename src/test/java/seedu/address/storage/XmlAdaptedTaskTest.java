@@ -89,6 +89,15 @@ public class XmlAdaptedTaskTest {
         Assert.assertThrows(NumberFormatException.class, task::toModelType);
     }
 
+    /*@Test
+    public void toModelType_zeroExpectedNumOfHours_throwsIllegalValueException() {
+        XmlAdaptedTask task =
+                new XmlAdaptedTask(VALID_DEADLINE, VALID_MODULECODE, VALID_TITLE, VALID_DESCRIPTION,
+                        VALID_PRIORITY_LEVEL, INVALID_EXPECTED_NUM_OF_HOURS);
+        String expectedMessage = "Expected number of hours have to be an integer";
+        Assert.assertThrows(NumberFormatException.class, task::toModelType);
+    }*/
+
     @Test
     public void toModelType_nullExpectedNumOfHours_throwsIllegalValueException() {
         XmlAdaptedTask person = new XmlAdaptedTask(VALID_DEADLINE, VALID_MODULECODE, VALID_TITLE, VALID_DESCRIPTION,

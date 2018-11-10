@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.util.StringUtil.isNonZeroUnsignedInteger;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.SelectDeadlineCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Deadline;
@@ -20,15 +19,17 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DEFERRED_DAYS = "Deferred Days need to be positive integer and "
         + "less than 32";
     public static final String MESSAGE_INVALID_INDEX = "Index must be a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_HOURS = "Hour(s) must be an integer!";
+    public static final String MESSAGE_INVALID_HOURS = "Hour(s) must be an integer greater than 0!";
     public static final String MESSAGE_INVALID_RANK = "Rank must be a non-zero positive integer.";
     public static final String MESSAGE_EMPTY_DESCRIPTION = "Description is empty!";
     public static final String MESSAGE_EMPTY_DEFERRED_DAYS = "Deferred Days is empty!";
     public static final String MESSAGE_EMPTY_TITLE = "Title is empty!";
     public static final String MESSAGE_EMPTY_MODULE_CODE = "Module code is empty!";
+    public static final String MESSAGE_EMPTY_HOURS = "Hours is empty!";
     public static final String MESSAGE_EMPTY_MILESTONE = "Milestone description is empty!";
     public static final String MESSAGE_EMPTY_RANK = "Rank is empty!";
     public static final String MESSAGE_EMPTY_INDEX = "Index is empty!";
+    public static final String MESSAGE_EMPTY_PRIORITY = "Priority level is empty!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -74,7 +75,9 @@ public class ParserUtil {
     public static int parseHours(String hours) throws ParseException {
         requireNonNull(hours);
         String trimmedHours = hours.trim();
-        if (!StringUtil.isUnsignedInteger(trimmedHours)) {
+        if (trimmedHours.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_HOURS);
+        } else if (!isNonZeroUnsignedInteger(trimmedHours)) {
             throw new ParseException(MESSAGE_INVALID_HOURS);
         }
         return Integer.parseInt(trimmedHours);
@@ -130,6 +133,9 @@ public class ParserUtil {
     public static PriorityLevel parsePriorityLevel(String priority) throws ParseException {
         requireNonNull(priority);
         String trimmedPriority = priority.trim();
+        if (trimmedPriority.isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_PRIORITY);
+        }
         if (!PriorityLevel.isValidPriorityLevel(trimmedPriority)) {
             throw new ParseException(PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
         }
