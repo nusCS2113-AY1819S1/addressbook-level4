@@ -2,10 +2,35 @@ package seedu.recruit.logic.commands.emailcommand;
 
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Properties;
 import java.util.Set;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.Base64;
+import com.google.api.client.util.store.FileDataStoreFactory;
+import com.google.api.services.gmail.Gmail;
+import com.google.api.services.gmail.GmailScopes;
+import com.google.api.services.gmail.model.Message;
 
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
@@ -22,24 +47,38 @@ import seedu.recruit.model.joboffer.JobOffer;
  * 4th step of the email command: send the email.
  */
 public class EmailSendCommand extends Command {
-    public static final String COMMAND_WORD = "send";
+
     public static final String MESSAGE_USAGE = "Type \"send\" to send the message\n"
             + "Type \"preview\" to preview the email.\n"
             + "Type \"back\" to go back to select contents command.\n"
             + "Type \"cancel\" to cancel the email command.";
     public static final String COMMAND_LOGIC_STATE = "EmailSend";
     public static final String EMAIL_SUCCESS = "Successfully sent the email!";
-    public static final String EMAIL_FAILURE = "Failed to send the email!";
+    public static final String EMAIL_FAILURE = "Failed to send the email. Either you are not authorised or "
+            + "you are not connected to the internet.";
     public static final String EMAIL_SEND_SHOWING_PREVIEW_MESSAGE = "Opened preview.\n";
 
-    private static ArrayList<Candidate> candidateRecipients;
-    private static ArrayList<JobOffer> jobOfferRecipients;
-    private static ArrayList<Candidate> candidateContents;
-    private static ArrayList<JobOffer> jobOfferContents;
+    /**
+     * Global instance of the scopes required by this the email command
+     * If modifying these scopes, delete your previously saved tokens/ folder.
+     *
+     */
+    //DEFAULT_FROM is "me" to work with any gmail account which was authenticated.
+    protected static final String DEFAULT_FROM = "me";
+    protected static final String APPLICATION_NAME = "RecruitBook";
+    protected static final String TOKENS_DIRECTORY_PATH = "tokens";
+    protected static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+    protected static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_COMPOSE);
+    protected static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+
+    protected static ArrayList<Candidate> candidateRecipients;
+    protected static ArrayList<JobOffer> jobOfferRecipients;
+    protected static ArrayList<Candidate> candidateContents;
+    protected static ArrayList<JobOffer> jobOfferContents;
 
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs)
-            throws ParseException, IOException, GeneralSecurityException {
+            throws ParseException {
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 
@@ -83,7 +122,7 @@ public class EmailSendCommand extends Command {
             //recipients are companies
             for (JobOffer jobOfferRecipient : jobOfferRecipients) {
                 int index = model.getCompanyIndexFromName(jobOfferRecipient.getCompanyName());
-                //Company not found in CompanyBook
+                //Company not found in CompanyBook, prevent null pointer exception
                 if (index == -1) {
                     continue;
                 }
@@ -95,40 +134,37 @@ public class EmailSendCommand extends Command {
     }
 
     /**
-     * Generates bodytext of the email.
+     * Generates body text of the email if recipients are candidates
      * @param emailUtil
      * @return bodytext String
      */
-    public String generateContent(EmailUtil emailUtil) {
-        String bodyText;
-        if (emailUtil.isAreRecipientsCandidates()) {
-            bodyText = emailUtil.getEmailSettings().getBodyTextCandidateAsRecipient();
-            //contents are companies
-            for (JobOffer jobOfferContent : jobOfferContents) {
-                bodyText = bodyText + '\n' + "Company: " + jobOfferContent.getCompanyName().toString();
-                bodyText = bodyText + '\n' + "Job: " + jobOfferContent.getJob().toString();
-                bodyText = bodyText + '\n' + "Salary offered: " + jobOfferContent.getSalary().toString();
-                bodyText += '\n';
-            }
-        } else {
-            ArrayList<String> jobNames = new ArrayList<>();
-            for (JobOffer jobOfferRecipient : jobOfferRecipients) {
-                jobNames.add(jobOfferRecipient.getJob().toString());
-            }
-
-            bodyText = emailUtil.getEmailSettings().getBodyTextCompanyAsRecipient()
-                    + jobNames.toString() + '\n';
-            //contents are candidates
-            for (Candidate candidateContent : candidateContents) {
-                bodyText = bodyText + '\n' + "Name: " + candidateContent.getName().toString();
-                bodyText = bodyText + '\n' + "Age: " + candidateContent.getAge().toString();
-                bodyText = bodyText + '\n' + "Education: " + candidateContent.getEducation().toString();
-                bodyText = bodyText + '\n' + "Email: " + candidateContent.getEmail().toString();
-                bodyText = bodyText + '\n' + "Phone Number: " + candidateContent.getPhone().toString();
-                bodyText += '\n';
-            }
+    public String generateContentWhenRecipientsAreCandidates(EmailUtil emailUtil) {
+        StringBuilder bodyText = new StringBuilder(emailUtil.getEmailSettings().getBodyTextCandidateAsRecipient());
+        //contents are companies
+        for (JobOffer jobOfferContent : jobOfferContents) {
+            bodyText.append('\n').append("Company: ").append(jobOfferContent.getCompanyName().toString());
+            bodyText.append('\n').append("Job: ").append(jobOfferContent.getJob().toString());
+            bodyText.append('\n').append("Salary offered: ").append(jobOfferContent.getSalary().toString());
+            bodyText.append('\n');
         }
-        return bodyText;
+        return bodyText.toString();
+    }
+
+    /**
+     * Generates candidate details when candidates are contents
+     * @return
+     */
+    public String generateCandidateContentDetails() {
+        StringBuilder output = new StringBuilder();
+        for (Candidate candidateContent : candidateContents) {
+            output.append('\n').append("Name: ").append(candidateContent.getName().toString());
+            output.append('\n').append("Age: ").append(candidateContent.getAge().toString());
+            output.append('\n').append("Education: ").append(candidateContent.getEducation().toString());
+            output.append('\n').append("Email: ").append(candidateContent.getEmail().toString());
+            output.append('\n').append("Phone Number: ").append(candidateContent.getPhone().toString());
+            output.append('\n');
+        }
+        return output.toString();
     }
 
     /**
@@ -144,5 +180,129 @@ public class EmailSendCommand extends Command {
             subject = emailUtil.getEmailSettings().getSubjectCompanyAsRecipient();
         }
         return subject;
+    }
+
+    /**
+     * Creates an authorized Credential object.
+     * @param httpTransport The network HTTP Transport.
+     * @return An authorized Credential object.
+     * @throws IOException If the credentials.json file cannot be found.
+     */
+    private static Credential getCredentials(final NetHttpTransport httpTransport) throws IOException {
+        // Load client secrets.
+        InputStream in = EmailUtil.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+
+        // Build flow and trigger user authorization request.
+        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                httpTransport, JSON_FACTORY, clientSecrets, SCOPES)
+                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
+                .setAccessType("offline")
+                .setApprovalPrompt("auto")
+                .build();
+        return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+    }
+
+    /**
+     * Initialiser for Gmail Service
+     */
+    public static Gmail serviceInit() throws IOException, GeneralSecurityException {
+        final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+        // Create a new authorized Gmail API client
+        return new Gmail.Builder(httpTransport, JSON_FACTORY, getCredentials(httpTransport))
+                .setApplicationName(APPLICATION_NAME)
+                .build();
+    }
+
+    /**
+     * Create a MimeMessage using the parameters provided.
+     *
+     * @param from sender of the email
+     * @param to email of the receiver
+     * @param subject subject of the email
+     * @param bodyText body text of the email
+     * @return the MimeMessage to be used to send email
+     * @throws MessagingException
+     */
+    public static MimeMessage createEmail(String from,
+                                          String to,
+                                          String subject,
+                                          String bodyText)
+            throws MessagingException {
+        Properties props;
+        props = System.getProperties();
+        Session session = Session.getDefaultInstance(props, null);
+
+        MimeMessage email = new MimeMessage(session);
+
+        email.setFrom(new InternetAddress(from));
+        email.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(to));
+        email.setSubject(subject);
+        email.setText(bodyText);
+        return email;
+    }
+
+    /**
+     * Create a MimeMessage using the parameters provided.
+     *
+     * @param from sender of the email
+     * @param to ArrayList of the emails of the receivers
+     * @param subject subject of the email
+     * @param bodyText body text of the email
+     * @return the MimeMessage used to send an email
+     * @throws MessagingException
+     */
+    public static MimeMessage createEmail(String from,
+                                          Set<String> to,
+                                          String subject,
+                                          String bodyText)
+            throws MessagingException {
+        Properties props;
+        props = System.getProperties();
+        Session session = Session.getDefaultInstance(props, null);
+
+        MimeMessage email = new MimeMessage(session);
+
+        email.setFrom(new InternetAddress(from));
+
+        for (String recipient : to) {
+            email.addRecipient(javax.mail.Message.RecipientType.BCC, new InternetAddress(recipient));
+        }
+        email.setSubject(subject);
+        email.setText(bodyText);
+        return email;
+    }
+
+    /**
+     * Send an email from the user's mailbox to its recipient.
+     *
+     * @param service Authorized Gmail API instance.
+     * @param userId  User's email recruit. The special value "me"
+     *                can be used to indicate the authenticated user.
+     * @param email   Email to be sent.
+     * @throws MessagingException
+     * @throws IOException
+     */
+    public static void sendMessage(Gmail service, String userId, MimeMessage email)
+            throws MessagingException, IOException {
+        Message message = createMessageWithEmail(email);
+        service.users().messages().send(userId, message).execute();
+    }
+
+    /**
+     * Create a Message from an email
+     *
+     * @param email Email to be set to raw of message
+     * @return Message containing base64url encoded email.
+     * @throws IOException
+     * @throws MessagingException
+     */
+    private static Message createMessageWithEmail(MimeMessage email) throws MessagingException, IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        email.writeTo(baos);
+        String encodedEmail = Base64.encodeBase64URLSafeString(baos.toByteArray());
+        Message message = new Message();
+        message.setRaw(encodedEmail);
+        return message;
     }
 }

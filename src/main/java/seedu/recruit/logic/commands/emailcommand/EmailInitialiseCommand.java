@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
-import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 
 import seedu.recruit.logic.commands.Command;
@@ -24,11 +23,10 @@ public class EmailInitialiseCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         requireNonNull(model);
 
-        //Initiailising a fresh instance of EmailUtil
-        EmailUtil emailUtil = new EmailUtil();
-        model.setEmailUtil(emailUtil);
+        //resetting EmailUtil
+        model.resetEmailUtil();
+        EmailSendCommand.resetRecipientsAndContents();
         EventsCenter.getInstance().post(new ChangeLogicStateEvent(EmailRecipientsCommand.COMMAND_LOGIC_STATE));
-
         return new CommandResult(EmailRecipientsCommand.MESSAGE_USAGE);
     }
 }

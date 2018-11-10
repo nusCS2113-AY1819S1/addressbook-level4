@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -21,8 +20,6 @@ public class MasterJobListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<JobOffer> jobListView;
-    @FXML
-    private HBox cardPane;
 
     public MasterJobListPanel(ObservableList<JobOffer> jobList) {
         super(FXML);

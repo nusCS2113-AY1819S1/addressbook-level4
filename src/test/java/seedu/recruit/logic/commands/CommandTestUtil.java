@@ -14,8 +14,6 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -41,6 +39,7 @@ import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.CompanyContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
+import seedu.recruit.testutil.JobOfferContainsFindKeywordsPredicateBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -155,7 +154,7 @@ public class CommandTestUtil {
             assertEquals(expectedMessage, result.feedbackToUser);
             assertEquals(expectedModel, actualModel);
             assertEquals(expectedCommandHistory, actualCommandHistory);
-        } catch (IOException | GeneralSecurityException | CommandException | ParseException ce) {
+        } catch (CommandException | ParseException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
@@ -181,7 +180,7 @@ public class CommandTestUtil {
         try {
             command.execute(actualModel, actualCommandHistory, userPrefs);
             throw new AssertionError("The expected CommandException was not thrown.");
-        } catch (IOException | GeneralSecurityException | CommandException | ParseException e) {
+        } catch (CommandException | ParseException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedCandidateBook, actualModel.getCandidateBook());
             assertEquals(expectedFilteredCandidateList, actualModel.getFilteredCandidateList());
@@ -416,12 +415,17 @@ public class CommandTestUtil {
         public void setEmailUtil(EmailUtil emailUtil) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void resetEmailUtil() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     // =========================================== COMPANY BOOK ============================================== //
 
     /**
-     * Updates {@code model}'s filtered list to show only the company at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered company list to show only the company at the given {@code targetIndex} in the
      * {@code model}'s company book.
      */
     public static void showCompanyAtIndex(Model model, Index targetIndex) {
@@ -431,5 +435,18 @@ public class CommandTestUtil {
         model.updateFilteredCompanyList(new CompanyContainsFindKeywordsPredicateBuilder(
                 " c/" + splitName[0]).getCompanyPredicate());
         assertEquals(1, model.getFilteredCompanyList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered job list to show only the job offer at the given {@code targetIndex} in the
+     * {@code model}'s company book.
+     */
+    public static void showJobOfferAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyJobList().size());
+        JobOffer jobOffer = model.getFilteredCompanyJobList().get(targetIndex.getZeroBased());
+        final String[] splitName = jobOffer.getJob().value.split("\\s+");
+        model.updateFilteredCompanyJobList(new JobOfferContainsFindKeywordsPredicateBuilder(
+                " j/" + splitName[0]).getJobOfferPredicate());
+        assertEquals(1, model.getFilteredCompanyJobList().size());
     }
 }
