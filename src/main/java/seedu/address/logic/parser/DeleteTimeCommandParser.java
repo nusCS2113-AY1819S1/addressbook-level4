@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.events.security.GetAuthenticationEvent;
-import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
+import seedu.address.commons.events.security.SendsAuthenticationStateEvent;
 import seedu.address.logic.commands.DeleteTimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TimeSlot;
@@ -37,7 +37,7 @@ public class DeleteTimeCommandParser extends ParserClass implements Parser<Delet
     }
 
     @Subscribe
-    public void handleGetAuthenticationReplyEvent(GetAuthenticationReplyEvent e) {
+    public void handleAuthenticationStateEvent(SendsAuthenticationStateEvent e) {
         isAuthenticated = e.isAuthenticated();
     }
 }

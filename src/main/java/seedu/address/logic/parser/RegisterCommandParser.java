@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.events.security.GetAuthenticationEvent;
-import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
+import seedu.address.commons.events.security.SendsAuthenticationStateEvent;
 import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -77,7 +77,7 @@ public class RegisterCommandParser extends ParserClass implements Parser<Registe
     }
 
     @Subscribe
-    public void handleGetAuthenticationReplyEvent(GetAuthenticationReplyEvent e) {
+    public void handleAuthenticationStateEvent(SendsAuthenticationStateEvent e) {
         isAuthenticated = e.isAuthenticated();
     }
 

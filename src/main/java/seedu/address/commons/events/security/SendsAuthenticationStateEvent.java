@@ -3,11 +3,11 @@ package seedu.address.commons.events.security;
 import seedu.address.commons.events.BaseEvent;
 
 /** Indicates the AddressBook in the model has changed*/
-public class GetAuthenticationReplyEvent extends BaseEvent {
+public class SendsAuthenticationStateEvent extends BaseEvent {
 
     private boolean isAuthenticated;
 
-    public GetAuthenticationReplyEvent(boolean isAuthenticated) {
+    public SendsAuthenticationStateEvent(boolean isAuthenticated) {
         this.isAuthenticated = isAuthenticated;
     }
 

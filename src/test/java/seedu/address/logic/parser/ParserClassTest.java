@@ -5,7 +5,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.commons.events.security.GetAuthenticationEvent;
-import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
+import seedu.address.commons.events.security.SendsAuthenticationStateEvent;
 
 /**
  * Represents a Parser Class with EventsCenter
@@ -32,6 +32,6 @@ public class ParserClassTest {
     //Returns true when testing for commands parsing
     @Subscribe
     public void handleGetAuthenticationEvent(GetAuthenticationEvent e) {
-        raise(new GetAuthenticationReplyEvent(true));
+        raise(new SendsAuthenticationStateEvent(true));
     }
 }

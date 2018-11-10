@@ -8,7 +8,7 @@ import java.util.Collection;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.events.security.GetAuthenticationEvent;
-import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
+import seedu.address.commons.events.security.SendsAuthenticationStateEvent;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.TagsContainsKeywords;
@@ -45,7 +45,7 @@ public class TagCommandParser extends ParserClass implements Parser<TagCommand> 
     }
 
     @Subscribe
-    public void handleGetAuthenticationReplyEvent(GetAuthenticationReplyEvent e) {
+    public void handleAuthenticationStateEvent(SendsAuthenticationStateEvent e) {
         isAuthenticated = e.isAuthenticated();
     }
 

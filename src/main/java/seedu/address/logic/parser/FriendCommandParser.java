@@ -6,7 +6,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.security.GetAuthenticationEvent;
-import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
+import seedu.address.commons.events.security.SendsAuthenticationStateEvent;
 import seedu.address.logic.commands.FriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.security.SecurityAuthenticationException;
@@ -38,7 +38,7 @@ public class FriendCommandParser extends ParserClass implements Parser<FriendCom
     }
 
     @Subscribe
-    public void handleGetAuthenticationReplyEvent(GetAuthenticationReplyEvent e) {
+    public void handleAuthenticationStateEvent(SendsAuthenticationStateEvent e) {
         isAuthenticated = e.isAuthenticated();
     }
 }

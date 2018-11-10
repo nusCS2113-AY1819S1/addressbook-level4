@@ -17,7 +17,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.security.GetAuthenticationEvent;
-import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
+import seedu.address.commons.events.security.SendsAuthenticationStateEvent;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -94,7 +94,7 @@ public class EditCommandParser extends ParserClass implements Parser<EditCommand
     }
 
     @Subscribe
-    public void handleGetAuthenticationReplyEvent(GetAuthenticationReplyEvent e) {
+    public void handleAuthenticationStateEvent(SendsAuthenticationStateEvent e) {
         isAuthenticated = e.isAuthenticated();
     }
 

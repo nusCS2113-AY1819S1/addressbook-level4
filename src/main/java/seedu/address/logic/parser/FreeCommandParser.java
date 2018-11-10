@@ -10,7 +10,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.security.GetAuthenticationEvent;
-import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
+import seedu.address.commons.events.security.SendsAuthenticationStateEvent;
 import seedu.address.logic.commands.FreeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.security.SecurityAuthenticationException;
@@ -47,7 +47,7 @@ public class FreeCommandParser extends ParserClass implements Parser<FreeCommand
     }
 
     @Subscribe
-    public void handleGetAuthenticationReplyEvent(GetAuthenticationReplyEvent e) {
+    public void handleAuthenticationStateEvent(SendsAuthenticationStateEvent e) {
         isAuthenticated = e.isAuthenticated();
     }
 }

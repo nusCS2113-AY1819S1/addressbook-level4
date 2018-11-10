@@ -8,8 +8,8 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.logic.LoginEvent;
 import seedu.address.commons.events.logic.RegisterSuccessEvent;
 import seedu.address.commons.events.security.GetAuthenticationEvent;
-import seedu.address.commons.events.security.GetAuthenticationReplyEvent;
 import seedu.address.commons.events.security.LogoutEvent;
+import seedu.address.commons.events.security.SendsAuthenticationStateEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
@@ -108,6 +108,6 @@ public class SecurityManager extends ComponentManager implements Security {
 
     @Subscribe
     public void handleGetAuthenticationEvent(GetAuthenticationEvent e) {
-        raise(new GetAuthenticationReplyEvent(isAuthenticated));
+        raise(new SendsAuthenticationStateEvent(isAuthenticated));
     }
 }
