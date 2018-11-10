@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
@@ -21,10 +22,10 @@ public class ExportManager implements Export {
 
     private static final Logger logger = LogsCenter.getLogger(seedu.address.export.ExportManager.class);
 
-    private FilteredList<Person> filteredPersons;
+    private ObservableList<Person> filteredPersons;
     private Path exportPath;
 
-    public ExportManager(FilteredList<Person> filteredPersons, Path filePath) {
+    public ExportManager(ObservableList<Person> filteredPersons, Path filePath) {
         this.filteredPersons = filteredPersons;
         this.exportPath = filePath;
     }
@@ -50,7 +51,7 @@ public class ExportManager implements Export {
      * @param filePath file path of the data. Cannot be null
      */
     @Override
-    public void saveFilteredPersons(FilteredList<Person> filteredPersons, Path filePath) throws IOException {
+    public void saveFilteredPersons(ObservableList<Person> filteredPersons, Path filePath) throws IOException {
         requireNonNull(filteredPersons);
         requireNonNull(filePath);
 

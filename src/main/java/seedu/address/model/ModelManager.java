@@ -209,7 +209,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void exportFilteredAddressBook(Path exportFilePath) throws IOException {
-        Export export = new ExportManager(filteredPersons, exportFilePath);
+        Export export = new ExportManager(getFilteredPersonList(), exportFilePath);
         export.saveFilteredPersons();
     }
 

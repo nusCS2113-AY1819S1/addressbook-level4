@@ -3,7 +3,7 @@ package seedu.address.export;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import javafx.collections.transformation.FilteredList;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,7 +20,7 @@ public interface Export {
     /**
      * @see #saveFilteredPersons()
      */
-    void saveFilteredPersons(FilteredList<Person> filteredPersons, Path filePath)
+    void saveFilteredPersons(ObservableList<Person> filteredPersons, Path filePath)
             throws IOException;
 
 }
