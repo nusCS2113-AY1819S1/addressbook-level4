@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URI;
 import java.net.UnknownHostException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -54,7 +55,7 @@ public class ExportCalendarCommand extends Command {
 
     public static final String MESSAGE_ZERO_EVENT_REGISTERED = "User %1$s has not registered for any event";
 
-    private static final String CALENDAR_FILE_PATH = "./data";
+    private static final String CALENDAR_FILE_PATH = "data\\";
 
     private final String fileName;
 
@@ -184,8 +185,9 @@ public class ExportCalendarCommand extends Command {
      * @throws IOException when file stream have problems
      */
     public void exportICalenderFile(ObservableList<Event> registeredEventList, String fileName) throws IOException {
-        String outputFilename = String.format("%1$s.ics", fileName);
-        File outputFile = new File(CALENDAR_FILE_PATH, outputFilename);
+        String outputFilename = Paths.get(CALENDAR_FILE_PATH).toString() + File.separator
+                + String.format("%1$s.ics", fileName);
+        File outputFile = new File(outputFilename);
 
         FileOutputStream fileOut = new FileOutputStream(outputFile, false);
 
