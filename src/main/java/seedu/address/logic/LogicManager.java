@@ -1,3 +1,4 @@
+//@@author liu-tianhang
 package seedu.address.logic;
 
 import java.util.logging.Logger;
@@ -26,7 +27,6 @@ import seedu.address.model.user.stocktaker.StockTakerModel;
 public class LogicManager extends ComponentManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final CommandHistory history;
-    //private final AddressBookParser addressBookParser;
     private final AdminParser adminParser;
     private final StockTakerParser stockTakerParser;
     private final ManagerParser managerParser;
@@ -45,24 +45,28 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        try {
-            Command command;
-            if (model instanceof AdminModel) {
-                command = adminParser.parseCommand(commandText);
-            } else if (model instanceof StockTakerModel) {
-                command = stockTakerParser.parseCommand(commandText);
-            } else if (model instanceof AccountantModel) {
-                command = accountantParser.parseCommand(commandText);
-            } else if (model instanceof ManagerModel) {
-                command = managerParser.parseCommand(commandText);
-            } else {
-                command = null; //TODO: CHANGE
-                //command = addressBookParser.isCommandNeedToConfirm(commandText);
-            }
-            return command.execute(model, history);
-        } finally {
-            history.add(commandText);
+
+        Command command = parseCommandAccordingToAuthentication(commandText);
+        history.add(commandText);
+        return command.execute(model, history);
+    }
+
+    /**
+     *  Parse respective command according to their model
+     *  Returns {@code command} according to {@code commandText}
+     *  @throws ParseException if there is no model
+     */
+    private Command parseCommandAccordingToAuthentication(String commandText) throws ParseException {
+        if (model instanceof AdminModel) {
+            return adminParser.parseCommand(commandText);
+        } else if (model instanceof StockTakerModel) {
+            return stockTakerParser.parseCommand(commandText);
+        } else if (model instanceof AccountantModel) {
+            return accountantParser.parseCommand(commandText);
+        } else if (model instanceof ManagerModel) {
+            return managerParser.parseCommand(commandText);
         }
+        throw new ParseException ("Unknown Command");
     }
 
     @Override

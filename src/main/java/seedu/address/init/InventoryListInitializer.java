@@ -22,7 +22,12 @@ import seedu.address.commons.events.model.InitInventoryListEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.*;
+import seedu.address.model.InventoryList;
+import seedu.address.model.LoginInfoManager;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyInventoryList;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.transaction.TransactionList;
 import seedu.address.model.user.accountant.AccountantModelManager;
 import seedu.address.model.user.admin.AdminModelManager;
@@ -101,21 +106,19 @@ public class InventoryListInitializer {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new InventoryList();
         }
-        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ADMIN)) {
-            return new AdminModelManager (initialData, userPrefs, loginInfoManager, new TransactionList());
+        switch (CurrentUser.getAuthenticationLevel()) {
+        case AUTH_ADMIN:
+            return new AdminModelManager(initialData, userPrefs, loginInfoManager, new TransactionList());
+        case AUTH_MANAGER:
+            return new ManagerModelManager(initialData, userPrefs, loginInfoManager, new TransactionList());
+        case AUTH_STOCK_TAKER:
+            return new StockTakerModelManager(initialData, userPrefs, loginInfoManager, new TransactionList());
+        case AUTH_ACCOUNTANT:
+            return new AccountantModelManager(initialData, userPrefs, loginInfoManager, new TransactionList());
+        default:
+            logger.severe("Database authentication level do not match with predefined authentication level");
+            return new ModelManager(initialData, userPrefs, loginInfoManager,
+                   new TransactionList());
         }
-        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_MANAGER)) {
-            return new ManagerModelManager (initialData, userPrefs, loginInfoManager, new TransactionList());
-        }
-        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_STOCK_TAKER)) {
-            return new StockTakerModelManager (initialData , userPrefs, loginInfoManager,
-                    new TransactionList());
-        }
-        if (CurrentUser.getAuthenticationLevel ().equals (AUTH_ACCOUNTANT)) {
-            return new AccountantModelManager (initialData, userPrefs, loginInfoManager,
-                    new TransactionList());
-        }
-        //TODO: need change inventoryList () to storage when storage is done
-        return new ModelManager (initialData , userPrefs, loginInfoManager, new TransactionList());
     }
 }

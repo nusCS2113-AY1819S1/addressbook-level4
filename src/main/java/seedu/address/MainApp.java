@@ -1,5 +1,5 @@
+//@@author liu-tianhang
 package seedu.address;
-
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
@@ -84,6 +84,22 @@ public class MainApp extends Application {
 
     }
 
+    @Override
+    public void start(Stage primaryStage) {
+        loginWindow = primaryStage;
+        logger.info("Starting AddressBook " + MainApp.VERSION);
+        showLoginPage();
+    }
+
+    @Override
+    public void stop() {
+        saveUserPrefs ();
+        Platform.exit();
+        System.exit(0);
+    }
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     private void initLogging(Config config) {
         LogsCenter.init(config);
@@ -116,7 +132,6 @@ public class MainApp extends Application {
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -125,7 +140,7 @@ public class MainApp extends Application {
         return initializedConfig;
     }
     /**
-     * Returns a {@code LoginInfoManager} using the hardcoded file path,
+     * Returns a {@code LoginInfoManager} using the file at {@code storage}'s login info file path,
      * or a new {@code LoginInfoManager} with default configuration if errors occur when
      * reading from the file.
      */
@@ -197,12 +212,6 @@ public class MainApp extends Application {
         EventsCenter.getInstance().registerHandler(this);
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        loginWindow = primaryStage;
-        logger.info("Starting AddressBook " + MainApp.VERSION);
-        showLoginPage();
-    }
 
     /**
      * Start Login scene
@@ -214,7 +223,7 @@ public class MainApp extends Application {
     private void settingUpLoginWindow() {
         URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(loginPathPath);
         Parent root = loadFxmlFile(fxmlLoginFileUrl, loginWindow);
-        //loginWindow.initStyle(StageStyle.UNDECORATED);
+
         loginWindow.setTitle("Login Page");
         loginWindow.setScene(new Scene(root));
         loginWindow.show();
@@ -231,15 +240,13 @@ public class MainApp extends Application {
         loginController.getLoginInfoList (loginInfoList);
     }
     /**
-     * loads the file from {@code location} and set {@code root}
-     * @param location
-     * @param stage
-     * @return root of primary stage
+     * loads the file from {@code location}, set {@code stage} and return the {@code root}
      */
     private Parent loadFxmlFile(URL location, Stage stage) {
         requireNonNull(location);
+
         fxmlLoader.setLocation(location);
-        Parent root = null;
+        Parent root;
         try {
             root = fxmlLoader.load ();
 
@@ -249,27 +256,8 @@ public class MainApp extends Application {
         }
         return root;
     }
-    @Override
-    public void stop() {
-        closeUiWindow();
-        Platform.exit();
-        System.exit(0);
-    }
 
-    /**
-     * Close Ui window and load LoginInfo and UserPref into storage
-     */
-    private void closeUiWindow() {
-        logger.info("============================ [ Stopping DRINK I/O ] =============================");
-        //EventsCenter.getInstance().post(new StopUiEvent ());
-        try {
-            storage.saveLoginInfo (loginInfoList);
-            storage.saveUserPrefs(userPrefs);
-        } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
-        }
-        //EventsCenter.clearSubscribers ();
-    }
+
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -278,14 +266,42 @@ public class MainApp extends Application {
     @Subscribe
     public void handleLogoutEvent(LogoutEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        Window currentStage = Stage.getWindows().filtered(window -> window.isShowing()).get (0);
-        closeUiWindow();
-        currentStage.hide ();
-        loginWindow.show ();
+        hideCurrentWindow();
+        saveUserPrefs ();
+        saveLoginInfo();
+        showLoginWindow();
     }
 
+    private void showLoginWindow() {
+        loginWindow.show ();
+    }
+    /**
+     *  Hide the current stage that is showing
+     */
+    private void hideCurrentWindow() {
+        Window currentStage = Stage.getWindows().filtered(window -> window.isShowing()).get (0);
+        currentStage.hide ();
+    }
+    /**
+     *  Save UserPref into storage
+     */
+    private void saveUserPrefs () {
+        logger.info("============================ [ Stopping DRINK I/O ] =============================");
+        try {
+            storage.saveUserPrefs(userPrefs);
+        } catch (IOException e) {
+            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+        }
+    }
 
-    public static void main(String[] args) {
-        launch(args);
+    /**
+     *  Save Login information into storage
+     */
+    private void saveLoginInfo () {
+        try {
+            storage.saveLoginInfo (loginInfoList);
+        } catch (IOException e) {
+            logger.severe("Failed to save Login information " + StringUtil.getDetails(e));
+        }
     }
 }

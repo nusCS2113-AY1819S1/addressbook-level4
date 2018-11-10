@@ -27,7 +27,6 @@ public class AdminModelManager extends ModelManager implements AdminModel {
                              LoginInfoManager loginInfoManager, TransactionList transactionList) {
         super(inventoryList, userPrefs, loginInfoManager, transactionList);
     }
-
     /**
      * Raises an event to indicate the model has changed
      */
