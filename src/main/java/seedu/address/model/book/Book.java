@@ -17,10 +17,10 @@ import seedu.address.model.tag.Tag;
 public class Book {
 
     // Identity fields
-    private final Name name;
     private final Isbn isbn;
 
     // Data fields
+    private final Name name;
     private final Price price;
     private final Cost cost;
     private final Quantity quantity;
