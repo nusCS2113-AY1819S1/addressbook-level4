@@ -60,7 +60,8 @@ public class SummaryByMonthCommandTest {
         assertTrue(summaryByMonthCommandOne.equals(summaryByMonthCommandOne));
 
         // same values -> returns true
-        SummaryByMonthCommand summaryByMonthCommandOneCopy = new SummaryByMonthCommand(sampleStartMonth, sampleEndMonth);
+        SummaryByMonthCommand summaryByMonthCommandOneCopy =
+                new SummaryByMonthCommand(sampleStartMonth, sampleEndMonth);
         assertTrue(summaryByMonthCommandOne.equals(summaryByMonthCommandOneCopy));
 
         // different types -> returns false

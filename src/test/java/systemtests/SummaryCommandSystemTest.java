@@ -252,8 +252,7 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
             expectedResultMessage = String.format(SummaryByMonthCommand.MESSAGE_SUCCESS, expectedList.size());
         } else if (mode.equals(BY_CATEGORY)) {
             expectedResultMessage = String.format(SummaryByCategoryCommand.MESSAGE_SUCCESS, expectedList.size());
-        }
-        else {
+        } else {
             expectedResultMessage = "";
         }
         executeCommand(command);
