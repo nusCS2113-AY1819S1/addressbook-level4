@@ -1,13 +1,16 @@
 package seedu.address.model.request;
 
+import seedu.address.commons.core.ComponentManager;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
+import java.util.concurrent.CompletableFuture;
+
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
-public abstract class CommandSecondary {
+public abstract class CommandSecondary extends ComponentManager {
 
     /**
      * Executes the command and returns the result message.
