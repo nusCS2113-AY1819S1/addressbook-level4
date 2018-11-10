@@ -13,9 +13,7 @@ import seedu.address.commons.util.XmlUtil;
 public class XmlSerializableUserDatabaseTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
             "XmlSerializableUserDatabaseTest");
-    private static final Path TYPICAL_USERS_FILE = TEST_DATA_FOLDER.resolve("typicalUsersUserDatabase.xml");
     private static final Path INVALID_USER_FILE = TEST_DATA_FOLDER.resolve("invalidUserUserDatabase.xml");
-    private static final Path DUPLICATE_USER_FILE = TEST_DATA_FOLDER.resolve("duplicateUserUserDatabase.xml");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
