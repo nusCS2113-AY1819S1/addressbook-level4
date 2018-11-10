@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.drink.Date;
 import seedu.address.model.drink.NameContainsKeywordsPredicate;
+import seedu.address.model.drink.Quantity;
 
 
 /**
@@ -21,18 +25,41 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " coca cola pepsi fanta";
 
-
     private final NameContainsKeywordsPredicate predicate;
+    private final Date date;
+    private final Quantity quantity;
+    private final boolean modifier;
 
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
+        this.date = null;
+        this.quantity = null;
+        this.modifier = false;
+    }
+
+    public FindCommand(Date date, Boolean modifier) {
+        this.predicate = null;
+        this.date = date;
+        this.quantity = null;
+        this.modifier = modifier;
+    }
+
+    public FindCommand(Quantity quantity, Boolean modifier) {
+        this.predicate = null;
+        this.date = null;
+        this.quantity = quantity;
+        this.modifier = modifier;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.updateFilteredDrinkList(predicate);
-        return new CommandResult (
+        if (predicate != null) {
+            model.updateFilteredDrinkList(predicate);
+        } else if (date != null && modifier == false) {
+            model.updateFilteredDrinkList()
+        }
+        return new CommandResult(
                 String.format(Messages.MESSAGE_DRINKS_LISTED_OVERVIEW, model.getFilteredDrinkList().size()));
     }
 
