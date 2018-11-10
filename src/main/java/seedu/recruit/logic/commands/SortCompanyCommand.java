@@ -56,4 +56,21 @@ public class SortCompanyCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCompanyCommand)) {
+            return false;
+        }
+
+        // state check
+        SortCompanyCommand s = (SortCompanyCommand) other;
+        return prefixToSort.equals(s.prefixToSort);
+    }
+
 }

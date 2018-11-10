@@ -16,6 +16,8 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.recruit.logic.commands.EditCandidateCommand.EditPersonDescriptor;
+import seedu.recruit.logic.commands.EditCompanyCommand.EditCompanyDescriptor;
+import seedu.recruit.logic.commands.EditJobDetailsCommand.EditJobOfferDescriptor;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -95,7 +97,13 @@ public class ModelUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.value).append(" "));
+        descriptor.getAge().ifPresent(age -> sb.append(PREFIX_AGE).append(age.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getJob().ifPresent(job -> sb.append(PREFIX_JOB).append(job.value).append(" "));
+        descriptor.getEducation().ifPresent(
+            education -> sb.append(PREFIX_EDUCATION).append(education.value).append(" "));
+        descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
@@ -106,4 +114,34 @@ public class ModelUtil {
         }
         return sb.toString();
     }
+
+    /**
+     * Returns the part of command string for the given {@code EditCompanyDescriptor}'s details.
+     */
+    public static String getEditCompanyDescriptorDetails(EditCompanyDescriptor descriptor) {
+        StringBuilder sb = new StringBuilder();
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_COMPANY_NAME).append(name.value).append(" "));
+        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code EditJobOfferDescriptor}'s details.
+     */
+    public static String getEditJobOfferDescriptorDetails(EditJobOfferDescriptor descriptor) {
+        StringBuilder sb = new StringBuilder();
+        descriptor.getCompanyName().ifPresent(name -> sb.append(PREFIX_COMPANY_NAME).append(name.value).append(" "));
+        descriptor.getJob().ifPresent(job -> sb.append(PREFIX_JOB).append(job.value).append(" "));
+        descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.value).append(" "));
+        descriptor.getAgeRange().ifPresent(ageRange -> sb.append(PREFIX_AGE_RANGE).append(ageRange.value).append(" "));
+        descriptor.getEducation().ifPresent(
+            education -> sb.append(PREFIX_EDUCATION).append(education.value).append(" "));
+        descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.value).append(" "));
+
+        return sb.toString();
+    }
+
 }
