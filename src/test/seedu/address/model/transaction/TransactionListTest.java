@@ -1,4 +1,4 @@
-package seedu.address.model.user.transaction;
+package seedu.address.model.transaction;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.transaction.TypicalTransactions.getTypicalTransactionList;
@@ -9,8 +9,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.transaction.TransactionList;
-
 public class TransactionListTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -19,7 +17,7 @@ public class TransactionListTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), transactionList.getTransactions());
+        assertEquals(Collections.emptyList(), transactionList.getTransactionList());
     }
 
     @Test

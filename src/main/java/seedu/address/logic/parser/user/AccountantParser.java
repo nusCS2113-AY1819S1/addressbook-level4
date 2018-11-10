@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ViewTransactionsCommand;
 import seedu.address.logic.commands.accountant.AnalyseCostsCommand;
 import seedu.address.logic.commands.accountant.AnalyseProfitCommand;
 import seedu.address.logic.commands.accountant.AnalyseRevenueCommand;
@@ -50,8 +51,8 @@ public class AccountantParser {
         //===========login command========================//
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser().parse(arguments);
-        //===========accountant only command=============//
 
+        //===========accountant only command=============//
         case AnalyseCostsCommand.COMMAND_WORD:
             return new AnalyseCostsCommandParser ().parse (arguments);
 
@@ -60,6 +61,7 @@ public class AccountantParser {
 
         case AnalyseRevenueCommand.COMMAND_WORD:
             return new AnalyseRevenueCommandParser ().parse (arguments);
+
         //=======general command=================//
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -69,6 +71,10 @@ public class AccountantParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand ();
+
+        case ViewTransactionsCommand.COMMAND_WORD:
+            return new ViewTransactionsCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

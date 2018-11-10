@@ -8,8 +8,8 @@ import seedu.address.model.drink.Drink;
  */
 public interface ReadOnlyInventoryList {
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the drinks list.
+     * This list will not contain any duplicate drinks.
      */
     ObservableList<Drink> getDrinkList();
 }

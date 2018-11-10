@@ -13,13 +13,13 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all ";
+    public static final String MESSAGE_SUCCESS = "Listed all %s";
 
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredDrinkList (PREDICATE_SHOW_ALL_DRINKS);
-        return new CommandResult(MESSAGE_SUCCESS + model.getInventoryList().toString());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getInventoryList().toString()));
     }
 }

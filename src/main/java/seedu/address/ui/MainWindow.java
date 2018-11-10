@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private TransactionsPanel transactionsPanel;
     private DrinkDetailPane drinkDetailPane;
     private DrinkListPanel drinkListPanel;
     private BatchListPanel batchListPanel;
@@ -45,10 +46,17 @@ public class MainWindow extends UiPart<Stage> {
     private UserPrefs prefs;
     private HelpWindow helpWindow;
 
+    // @FXML
+    // private StackPane transactionsPanelPlaceholder;
+
     // Stores current selection
     private Drink drinkSelection;
+
     @FXML
     private StackPane drinkDetailPanePlaceholder;
+
+    @FXML
+    private StackPane transactionsPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -130,6 +138,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this loginWindow.
      */
     void fillInnerParts() {
+        transactionsPanel = new TransactionsPanel(logic.getFilteredTransactionList());
+        transactionsPanelPlaceholder.getChildren().add(transactionsPanel.getRoot());
+
         // drinkDetailPane = new DrinkDetailPane(null);
         // drinkDetailPanePlaceholder.getChildren().add(drinkDetailPane.getRoot());
 
@@ -160,6 +171,8 @@ public class MainWindow extends UiPart<Stage> {
         batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
         drinkSelection = event.getNewSelection();
     }
+
+
 
     @Subscribe
     private void handleDrinkAttributeChangedEvent(DrinkAttributeChangedEvent event) {
@@ -228,6 +241,12 @@ public class MainWindow extends UiPart<Stage> {
     public DrinkListPanel getDrinkListPanel() {
         return drinkListPanel;
     }
+
+
+    public TransactionsPanel getTransactionsPanel() {
+        return transactionsPanel;
+    }
+
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
