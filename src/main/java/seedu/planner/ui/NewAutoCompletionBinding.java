@@ -105,8 +105,8 @@ public class NewAutoCompletionBinding<T> {
     }
 
     /**
-     * Function that detects when there is a whitespace after the caret, which means the word is currently being typed
-     * and expected to be autocompleted.
+     * Function that detects when there is a whitespace after the caret, which means the word is currently
+     * being typed and expected to be autocompleted.
      * @param newPosition is the current position of the caret.
      * @param newText is the entire input in the command box.
      * @return
@@ -237,7 +237,7 @@ public class NewAutoCompletionBinding<T> {
     }
 
     /**
-     * Initialise the binding for listeners.
+     * Initialise the binding for listeners to the command line box.
      */
     private void init() {
         getCompletionTarget().caretPositionProperty().addListener(caretChangedListener);
@@ -245,7 +245,7 @@ public class NewAutoCompletionBinding<T> {
     }
 
     /**
-     * Disposes the binding for listeners.
+     * Disposes the binding to the command line box for listeners.
      */
     public void dispose() {
         getCompletionTarget().caretPositionProperty().removeListener(caretChangedListener);
@@ -258,8 +258,9 @@ public class NewAutoCompletionBinding<T> {
      */
     private void completeUserInput(T completion) {
         dispose();
-        String newText = prefixText + converter.toString(completion) + suffixText;
-        getCompletionTarget().setText(newText);
+        String newText = prefixText + converter.toString(completion);
+        String resultingText = newText + suffixText;
+        getCompletionTarget().setText(resultingText);
         getCompletionTarget().positionCaret(newText.length());
         init();
     }
