@@ -4,7 +4,7 @@
       "userName" : "tester"
     },
     "password" : {
-      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
+      "password" : "UgoydIK6V3t3iMXySCrbeFKlcUc/u3ylo1gmElyQAmQ="
     },
     "authenticationLevel" : {
       "authenticationLevel" : "ADMIN"
@@ -18,6 +18,26 @@
     },
     "authenticationLevel" : {
       "authenticationLevel" : "MANAGER"
+    }
+  }, {
+    "userName" : {
+      "userName" : "accountant"
+    },
+    "password" : {
+      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
+    },
+    "authenticationLevel" : {
+      "authenticationLevel" : "ACCOUNTANT"
+    }
+  }, {
+    "userName" : {
+      "userName" : "stocktaker"
+    },
+    "password" : {
+      "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0="
+    },
+    "authenticationLevel" : {
+      "authenticationLevel" : "STOCKTAKER"
     }
   } ]
 }

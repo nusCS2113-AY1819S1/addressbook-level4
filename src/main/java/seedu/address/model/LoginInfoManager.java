@@ -16,12 +16,7 @@ public class LoginInfoManager {
     private ArrayList< LoginInfo > loginInfoList;
 
     public LoginInfoManager () {
-        UserName userName = new UserName ("tester");
-        Password password = new Password ("Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0=");
-        AuthenticationLevel authenticationLevel = new AuthenticationLevel ("ADMIN");
-        LoginInfo loginInfo = new LoginInfo (userName, password, authenticationLevel);
-        this.loginInfoList = new ArrayList<>();
-        loginInfoList.add (loginInfo);
+        this.loginInfoList = initialSetUpOfAccount();
     }
 
     public LoginInfo getLoginInfo(UserName userName) {
@@ -67,17 +62,44 @@ public class LoginInfoManager {
     }
 
     /**
-     * Add in a new account to the list
-     * @param userName The username of the account
-     * @param password The Password of the account
-     * @param authenticationLevel  the authentication level of the account
+     * Add in a {@code newAccount} to the list
      */
-    public void createNewAccount(UserName userName, Password password, AuthenticationLevel authenticationLevel) {
-        LoginInfo newAccount = new LoginInfo (userName, password, authenticationLevel);
+    public void createNewAccount(LoginInfo newAccount) {
         loginInfoList.add (newAccount);
     }
 
     public ArrayList< LoginInfo > getLoginInfoList() {
+        return loginInfoList;
+    }
+
+    /**
+     * Returns a predefined list of account.
+     */
+    private ArrayList<LoginInfo> initialSetUpOfAccount() {
+        ArrayList<LoginInfo> loginInfoList = new ArrayList<>();
+        UserName userName = new UserName ("tester");
+        Password password = new Password ("Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0=");
+        AuthenticationLevel authenticationLevel = new AuthenticationLevel ("ADMIN");
+        LoginInfo loginInfo = new LoginInfo (userName, password, authenticationLevel);
+        loginInfoList.add (loginInfo);
+
+        userName = new UserName ("manager");
+        password = new Password ("Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0=");
+        authenticationLevel = new AuthenticationLevel ("MANAGER");
+        loginInfo = new LoginInfo (userName, password, authenticationLevel);
+        loginInfoList.add (loginInfo);
+
+        userName = new UserName ("stocktaker");
+        password = new Password ("Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0=");
+        authenticationLevel = new AuthenticationLevel ("STOCKTAKER");
+        loginInfo = new LoginInfo (userName, password, authenticationLevel);
+        loginInfoList.add (loginInfo);
+
+        userName = new UserName ("accountant");
+        password = new Password ("Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0=");
+        authenticationLevel = new AuthenticationLevel ("ACCOUNTANT");
+        loginInfo = new LoginInfo (userName, password, authenticationLevel);
+        loginInfoList.add (loginInfo);
         return loginInfoList;
     }
 

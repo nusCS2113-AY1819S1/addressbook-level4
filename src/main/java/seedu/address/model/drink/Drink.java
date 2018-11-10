@@ -202,12 +202,16 @@ public class Drink {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append ("Drink name: ")
+                .append (getName ())
+                .append ("\nCost price: ")
+                .append (getCostPrice ())
+                .append (" Selling price: ")
+                .append (getRetailPrice ())
                 .append(", Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 
     /**
      * Decreases the quantity of the drink, using {@code quantity} as the value to decrease

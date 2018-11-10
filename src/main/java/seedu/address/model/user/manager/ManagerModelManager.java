@@ -2,6 +2,7 @@ package seedu.address.model.user.manager;
 
 import java.util.Set;
 
+import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.ModelManager;
@@ -11,8 +12,6 @@ import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Price;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.transaction.TransactionList;
-import seedu.address.model.user.AuthenticationLevel;
-import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 
 /**
@@ -28,8 +27,8 @@ public class ManagerModelManager extends ModelManager implements ManagerModel {
 
     //===============login command ============================//
     @Override
-    public void createNewAccount(UserName userName, Password password, AuthenticationLevel authenticationLevel) {
-        loginInfoManager.createNewAccount(userName, password, authenticationLevel);
+    public void createNewAccount(LoginInfo loginInfo) {
+        loginInfoManager.createNewAccount(loginInfo);
     }
 
     @Override

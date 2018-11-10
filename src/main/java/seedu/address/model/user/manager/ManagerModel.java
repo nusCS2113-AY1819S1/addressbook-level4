@@ -2,12 +2,11 @@ package seedu.address.model.user.manager;
 
 import java.util.Set;
 
+import seedu.address.commons.core.LoginInfo;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Price;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.user.AuthenticationLevel;
-import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 
 /**
@@ -19,7 +18,7 @@ public interface ManagerModel extends Model {
     /**
      * Create account based on {@code userName} {@code password} {@code authenticationLevel}
      */
-    void createNewAccount(UserName userName, Password password, AuthenticationLevel authenticationLevel);
+    void createNewAccount(LoginInfo loginInfo);
 
     /**
      * Delete a account based on the name
