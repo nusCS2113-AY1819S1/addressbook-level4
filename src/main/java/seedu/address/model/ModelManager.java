@@ -203,7 +203,9 @@ public class ModelManager extends ComponentManager implements Model {
         ObservableList<Person> persons = addressBookImported.getPersonList();
         persons.forEach((person) -> {
             // TODO: explain why this instead of addPerson() above in developer guide (indicate ab changed at the end)
-            versionedAddressBook.addPerson(person);
+            if (!hasPerson(person)) {
+                versionedAddressBook.addPerson(person);
+            }
         });
     }
 
