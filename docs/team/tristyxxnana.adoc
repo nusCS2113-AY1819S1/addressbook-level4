@@ -19,7 +19,6 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 ** Highlights: This enhancement requires an in-depth analysis of design as it gathers information from several features like Student Management, Module Management and Gradebook Management. Additionally, the data for the x and y axis (marks and number of students) respectively involves the use of a hash-map which involves comprehensive coding.
 ** Credits: http://tutorials.jenkov.com/javafx/linechart.html
             https://docs.oracle.com/javase/8/javafx/api/javafx/scene/chart/LineChart.html
-
 * *Minor enhancement*: Added features for Gradebook Management and Grade Management
 ** Gradebook Management
 *** Create gradebook component
@@ -29,8 +28,6 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 ** Grade Management
 *** Create student grade
 *** Delete student grade
-
-* *Code contributed*: TO BE UPDATED
 
 * *Other contributions*:
 
@@ -77,7 +74,6 @@ include::../DeveloperGuide.adoc[tag=gradeuserstories]
 include::../DeveloperGuide.adoc[tag=gradebookusecase]
 
 include::../DeveloperGuide.adoc[tag=gradeusecase]
-
 
 == PROJECT: PowerPointLabs
 

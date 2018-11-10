@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_MAXMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_WEIGHTAGE;
@@ -34,6 +35,7 @@ public class GradebookAddCommand extends Command {
     private final Gradebook toAddGradebookItem;
 
     public GradebookAddCommand (Gradebook gradebookComponent) {
+        requireNonNull(gradebookComponent);
         this.toAddGradebookItem = gradebookComponent;
     }
 
