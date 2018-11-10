@@ -32,6 +32,20 @@ public class ModelManager extends ComponentManager implements Model {
     protected final TransactionList transactionList;
     protected final Analysis analysis;
 
+    public ModelManager(ReadOnlyInventoryList readOnlyInventoryList, UserPrefs userPrefs) {
+        super();
+        requireAllNonNull(readOnlyInventoryList, userPrefs);
+
+        logger.fine("Initializing with inventory list: " + readOnlyInventoryList + " and user prefs " + userPrefs);
+        System.out.println(readOnlyInventoryList.getDrinkList().toString());
+        inventoryList = new InventoryList(readOnlyInventoryList);
+        filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
+        this.loginInfoManager = new LoginInfoManager();
+        this.transactionList = new TransactionList();
+        analysis = new AnalysisManager(transactionList);
+        // TODO: transaction manager, facade for transactions
+    }
+
     /**
      * Initializes a ModelManager with the given inventoryList, userPrefs and transactionList
      */
@@ -40,7 +54,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         super();
         requireAllNonNull(readOnlyInventoryList, userPrefs);
-
         logger.fine("Initializing with inventory list: " + readOnlyInventoryList + " and user prefs " + userPrefs);
 
         inventoryList = new InventoryList(readOnlyInventoryList);
@@ -48,8 +61,11 @@ public class ModelManager extends ComponentManager implements Model {
         this.loginInfoManager = loginInfoManager;
         this.transactionList = transactionList;
         analysis = new AnalysisManager(transactionList);
+        resetData(readOnlyInventoryList);
         // TODO: transaction manager, facade for transactions
     }
+
+
 
     public ModelManager() {
         this(new InventoryList(), new UserPrefs(), new LoginInfoManager(), new TransactionList());

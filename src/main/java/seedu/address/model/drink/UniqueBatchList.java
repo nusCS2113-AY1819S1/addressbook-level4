@@ -78,6 +78,21 @@ public class UniqueBatchList implements Iterable<Batch> {
     }
 
     /**
+     * Removes empty batches from the list
+     */
+    public void clearEmptyBatches() {
+        int counter = 0;
+        for (Batch b : internalList) {
+            if (b.getBatchQuantity().getValue() == 0) {
+                counter++;
+            }
+        }
+        if (counter > 0) {
+            internalList.remove(0, counter - 1);
+        }
+    }
+
+    /**
      * Updates the quantities in the batches whenever a transaction is made
      * Decreases quantities in the batches by the value specified
      * Decreases quantity in the batches by the order of date imported, with the oldest batches first
@@ -109,6 +124,7 @@ public class UniqueBatchList implements Iterable<Batch> {
             }
             toDecrease -= batchQuantity;
         }
+        clearEmptyBatches();
     }
 
     /**

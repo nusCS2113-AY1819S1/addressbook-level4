@@ -277,7 +277,4 @@ public class LoginController {
     public void getLoginInfoList (LoginInfoManager loginInfoManager) {
         this.loginInfoManager = loginInfoManager;
     }
-
-
-
 }

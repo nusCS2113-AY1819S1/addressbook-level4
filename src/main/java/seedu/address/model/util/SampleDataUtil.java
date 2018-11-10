@@ -4,19 +4,67 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.InventoryList;
+import seedu.address.model.ReadOnlyInventoryList;
+import seedu.address.model.drink.*;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    /**
+     * Initialising sample drinks for use
+     */
+    /*
+    // Coke
+    public static final Batch COKE1 = new SampleBatchBuilder().withId("0001").withQuantity("10").
+            withDate("01/11/2018").build();
+    public static final Batch COKE2 = new SampleBatchBuilder().withId("0002").withQuantity("20")
+            .withDate("02/11/2018").build();
+    public static final Batch COKE3 = new SampleBatchBuilder().withId("0003").withQuantity("30")
+            .withDate("20/11/2018").build();
+    //Green Tea
+    public static final Batch GT1 = new SampleBatchBuilder().withId("0004").withQuantity("10").
+            withDate("01/11/2018").build();
+    public static final Batch GT2 = new SampleBatchBuilder().withId("0005").withQuantity("20")
+            .withDate("02/11/2018").build();
+    public static final Batch GT3 = new SampleBatchBuilder().withId("0006").withQuantity("40")
+            .withDate("20/11/2018").build();
+    //Sprite
+    public static final Batch SPRITE1 = new SampleBatchBuilder().withId("0007").withQuantity("30").
+            withDate("01/11/2018").build();
+    public static final Batch SPRITE2 = new SampleBatchBuilder().withId("0008").withQuantity("20")
+            .withDate("02/11/2018").build();
+    public static final Batch SPRITE3 = new SampleBatchBuilder().withId("0009").withQuantity("40")
+            .withDate("20/11/2018").build();
+    //Milk Coffee
+    public static final Batch MC1 = new SampleBatchBuilder().withId("0010").withQuantity("10").
+            withDate("01/11/2018").build();
+    public static final Batch MC2 = new SampleBatchBuilder().withId("0011").withQuantity("30")
+            .withDate("02/11/2018").build();
+    public static final Batch MC3 = new SampleBatchBuilder().withId("0012").withQuantity("40")
+            .withDate("20/11/2018").build();
+    //Green Tea
+    public static final Batch MT1 = new SampleBatchBuilder().withId("0013").withQuantity("60").
+            withDate("01/11/2018").build();
+    public static final Batch MT2 = new SampleBatchBuilder().withId("0014").withQuantity("20")
+            .withDate("02/11/2018").build();
+    public static final Batch MT3 = new SampleBatchBuilder().withId("0015").withQuantity("40")
+            .withDate("20/11/2018").build();
+
+    public static final List<Batch> cokeBatches = Arrays.asList(COKE1, COKE2, COKE3);
+    public static final List<Batch> cokeBatches = Arrays.asList(COKE1, COKE2, COKE3);
+    public static final List<Batch> cokeBatches = Arrays.asList(COKE1, COKE2, COKE3);
+    public static final List<Batch> cokeBatches = Arrays.asList(COKE1, COKE2, COKE3);
+    public static final List<Batch> cokeBatches = Arrays.asList(COKE1, COKE2, COKE3);
+    UniqueBatchList cokeBatchList = new UniqueBatchList();
+    static UniqueBatchList greenTeaBatchList = new UniqueBatchList();
+    static UniqueBatchList spriteBatchList = new UniqueBatchList();
+    static UniqueBatchList milkCoffeeBatchList = new UniqueBatchList();
+    static UniqueBatchList milkTeaBatchList = new UniqueBatchList();
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -39,13 +87,24 @@ public class SampleDataUtil {
                 getTagSet("colleagues"))
         };
     }
+    */
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+    public static Drink[] getSampleDrinks() {
+        return new Drink[] {
+            new Drink(new Name("Coke"), new Price("1.5"), new Price("0.8"), getTagSet("Popular")),
+            new Drink(new Name("Green Tea"), new Price("1.5"), new Price("0.7"), getTagSet("Popular")),
+            new Drink(new Name("Sprite"), new Price("1.5"), new Price("0.7"), getTagSet("Popular")),
+            new Drink(new Name("Milk Coffee"), new Price("1.8"), new Price("1.0")),
+            new Drink(new Name("Milk Tea"), new Price("1.8"), new Price("1.0"))
+        };
+    }
+
+    public static ReadOnlyInventoryList getSampleInventoryList() {
+        InventoryList sampleIl = new InventoryList();
+        for (Drink sampleDrink : getSampleDrinks()) {
+            sampleIl.addDrink(sampleDrink);
         }
-        return sampleAb;
+        return sampleIl;
     }
 
     /**

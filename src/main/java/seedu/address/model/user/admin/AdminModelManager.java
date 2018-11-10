@@ -28,6 +28,10 @@ public class AdminModelManager extends ModelManager implements AdminModel {
         super(inventoryList, userPrefs, loginInfoManager, transactionList);
     }
 
+    public AdminModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs) {
+        super(inventoryList, userPrefs);
+    }
+
     @Override
     public boolean isValid () {
         return false;
