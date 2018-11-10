@@ -20,6 +20,7 @@ public class RemoveAttendeeCommandParser implements Parser<RemoveAttendeeCommand
     public RemoveAttendeeCommand parse(String args) throws ParseException {
         String[] argsSplit = args.split("\\s+", 3);
 
+        // Check if index and username are provided
         if (argsSplit.length < 3) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveAttendeeCommand.MESSAGE_USAGE));

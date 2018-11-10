@@ -345,6 +345,20 @@ Unregisters User from the 2nd event in the results of the `find` command.
 
 User: Lists all events that the user has registered for. +
 Format: `attending`
+
+=== Remove user from event : `removeAttendee`
+
+Admin: Removes a user registered for an event. +
+Format: `removeAttendee INDEX USERNAME`
+
+Examples:
+
+* `list` +
+`removeAttendee 1 Peter Parker` +
+Removes the user with username `Peter Parker` from the attendance of the 1st event of the Event Manager.
+* `find Party` +
+`removeAttendee 2 Alice` +
+Removes the user with username `Alice` from the attendance of the 2nd event in the results of the `find` command.
 // end::rsvp[]
 
 === Set reminders : `setReminder` [Proposed]
