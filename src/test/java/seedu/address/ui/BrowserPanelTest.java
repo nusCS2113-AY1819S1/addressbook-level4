@@ -43,27 +43,25 @@ public class BrowserPanelTest extends GuiUnitTest {
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(BrowserPanel.getEventPageUrl()
                 + "?name="
-                + ALICE.getName().fullName.replaceAll(" ", "%20")
+                + BrowserPanel.encodeString(ALICE.getName().fullName)
                 + "&contact="
-                + ALICE.getContact().fullContactName.replaceAll(" ", "%20")
+                + BrowserPanel.encodeString(ALICE.getContact().fullContactName)
                 + "&phone="
-                + ALICE.getPhone()
+                + BrowserPanel.encodeString(ALICE.getPhone().toString())
                 + "&email="
-                + ALICE.getEmail()
+                + BrowserPanel.encodeString(ALICE.getEmail().toString())
                 + "&venue="
-                + ALICE.getVenue().value.replaceAll(" ", "%20").replaceAll("#", "%23")
+                + BrowserPanel.encodeString(ALICE.getVenue().value)
                 + "&dateTime="
-                + PAGE_DATE_FORMAT.format(ALICE.getDateTime().dateTime).replaceAll(" ", "%20")
+                + BrowserPanel.encodeString(PAGE_DATE_FORMAT.format(ALICE.getDateTime().dateTime))
                 + "&status="
-                + ALICE.getStatus()
+                + BrowserPanel.encodeString(ALICE.getStatus().toString())
                 + "&tags="
-                + ALICE.getTagsString().replaceAll(" ", "%20")
+                + BrowserPanel.encodeString(ALICE.getTagsString())
                 + "&attendance="
-                + ALICE.getAttendanceString().replaceAll(" ", "%20")
-                    .replaceAll("<br>", "%3Cbr%3E")
+                + BrowserPanel.encodeString(ALICE.getAttendanceString())
                 + "&comment="
-                + ALICE.getComment().value.replaceAll("[{]", "%3C")
-                .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
+                + BrowserPanel.encodeString(ALICE.getComment().value.replace("{", "<").replace("}", ">")));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

@@ -57,7 +57,7 @@ public class BrowserPanel extends UiPart<Region> {
      * Translates a string into {@code application/x-www-form-urlencoded}
      * format using UTF_8 encoding scheme. Spaces are replaced with '%20' instead of '+'.
      */
-    private String encodeString(String arg) throws UnsupportedEncodingException {
+    public static String encodeString(String arg) throws UnsupportedEncodingException {
         String encoded = URLEncoder.encode(arg, StandardCharsets.UTF_8.toString());
         encoded = encoded.replaceAll("\\+", "%20");
         return encoded;
