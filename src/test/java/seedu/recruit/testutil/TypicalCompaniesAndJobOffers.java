@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.recruit.model.CompanyBook;
-import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
 
@@ -75,9 +74,9 @@ public class TypicalCompaniesAndJobOffers {
             .withAgeRange("20-35").withEducation("ALEVELS").withGender("F").withJob("Salesperson")
             .withSalary("3000").withCandidateList(ALICE).build();
 
-    public static final JobOffer SALESPERSON_CHEVROLET = new JobOfferBuilder().withCompanyName("Chevrolet Alpine Motors")
-            .withAgeRange("20-35").withEducation("ALEVELS").withGender("F").withJob("Salesperson")
-            .withSalary("2400").withCandidateList(ALICE).build();
+    public static final JobOffer SALESPERSON_CHEVROLET = new JobOfferBuilder()
+            .withCompanyName("Chevrolet Alpine Motors").withAgeRange("20-35").withEducation("ALEVELS")
+            .withGender("F").withJob("Salesperson").withSalary("2400").withCandidateList(ALICE).build();
 
     public static final JobOffer SALESPERSON_DODGE = new JobOfferBuilder().withCompanyName("Dodge Brothers Company")
             .withAgeRange("20-35").withEducation("ALEVELS").withGender("M").withJob("Salesperson")
