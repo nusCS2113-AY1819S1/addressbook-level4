@@ -28,6 +28,8 @@ public class LoginCommandParser implements Parser<LoginCommand> {
             + "\nExample: login manager"
             + "\nExample: login as hello@gmail.com";
 
+    private static final String MESSAGE_NO_EMAIL = "No email provided";
+
 
     /**
      * Parses user input into command for execution.
@@ -39,7 +41,7 @@ public class LoginCommandParser implements Parser<LoginCommand> {
     public LoginCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (isArgsAs(args) && isEmailEmpty(args)) {
-            throw new ParseException(MESSAGE_INVALID_LOGIN);
+            throw new ParseException(MESSAGE_NO_EMAIL);
         } else if (isArgsAs(args) && isArgsEmail(args)) {
             String emailArgs = extractEmail(args);
             return new LoginCommand(emailArgs, 1);

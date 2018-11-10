@@ -16,6 +16,7 @@ endif::[]
 
 By: `T16-2`      Since: `Sept 2018`      Licence: `MIT`
 
+// tag::introduction[]
 == Introduction
 
 ProManage is a *professional desktop application* for companies that specialises in executing projects that undergoes a
@@ -30,6 +31,7 @@ their project team setting. There is no better way to work than a CLI applicatio
 More importantly, ProManage is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
 having the benefits of a Graphical User Interface (GUI). ProManage can help you manage project scheduling effectively.
 Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+// end::introduction[]
 
 == Quick Start
 
@@ -79,7 +81,7 @@ All clicking features are disabled. Clicking on persons and events will not trig
 
 Format: `help`
 
-
+// tag::login[]
 === Login the app: `login`
 Priority level: `default`
 
@@ -92,6 +94,7 @@ Format: login `identity`
 Example: +
 `login manager` +
 `login as johnd@example.com`
+// end::login[]
 
 === Adding an employee : `add`
 Priority level: `default`,`manager`
@@ -158,6 +161,7 @@ Examples:
 `delete 2` +
 Deletes the 2nd person in the employee list.
 
+// tag::list[]
 === Listing all personnel of the company : `list`
 
 Shows a list of all the personnel, all the events, or those people in the specific department in the project team +
@@ -171,6 +175,7 @@ Enter a command to list people in the specific `DEPARTMENT`: `list dep DEPARTMEN
 Example: +
 `list dep Admin` +
 `list dep Admin Finance`
+// end::list[]
 
 // tag::addevent[]
 === Adding an event: `addEvent`
@@ -453,11 +458,12 @@ There is no need to save manually.
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
+// tag::commandSummary[]
 == Command Summary
 
 * *Help*: `help`
 
-* *Login*: `login IDENTITY`
+* *Login*: `login IDENTITY` where IDENTITY is either manager or employee or `login existingemail@example.com`
 
 * *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
 
@@ -494,4 +500,4 @@ There is no need to save manually.
 * *Clear* : `clear`
 
 * *Exit* : `exit`
-
+// end::commandSummary[]
