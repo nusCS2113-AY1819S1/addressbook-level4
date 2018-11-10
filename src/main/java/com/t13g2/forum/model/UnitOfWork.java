@@ -5,7 +5,6 @@ import com.t13g2.forum.storage.forum.ForumBookStorage;
 import com.t13g2.forum.storage.forum.IForumBookStorage;
 import com.t13g2.forum.storage.forum.IStorage;
 import com.t13g2.forum.storage.forum.JsonFileStorage;
-import com.t13g2.forum.storage.forum.SampleDataGenerator;
 
 /**
  *
