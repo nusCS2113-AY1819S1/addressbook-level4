@@ -2,7 +2,7 @@ package seedu.address.commons.events.logic;
 
 import seedu.address.commons.events.BaseEvent;
 
-/** Indicates the AddressBook in the model has changed*/
+/** Event that carries username and password for SecurityManager*/
 public class RegisterSuccessEvent extends BaseEvent {
 
     private String username;
