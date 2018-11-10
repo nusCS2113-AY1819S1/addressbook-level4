@@ -19,10 +19,12 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all drinks whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " coca cola pepsi fanta";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all drinks that meets the given parameters " +
+            "and displays them as a list with index numbers. Only a single parameter can be used at a time\n"
+            + "All available parameters:         " + "Name: n/DRINK NAME         "
+            + "Date: d/IMPORT DATE         "
+            + "Quantity: q/DRINK QUANTITY\n"
+            + "Example: " + COMMAND_WORD + " n/Coca Cola";
 
     private final NameContainsKeywordsPredicate predicate;
     private final DateCompareBeforePredicate datePredicate;
