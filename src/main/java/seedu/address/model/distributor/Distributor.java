@@ -20,15 +20,18 @@ public class Distributor {
     private final DistributorPhone distphone;
 
     // Data fields
+    private final Set<DistributorProduct> distprods = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Only name must be present and not null.
      */
-    public Distributor(DistributorName distname, DistributorPhone distphone, Set<Tag> tags) {
+    public Distributor(DistributorName distname, DistributorPhone distphone,
+                       Set<DistributorProduct> distprods, Set<Tag> tags) {
         requireAllNonNull(distname);
         this.distname = distname;
         this.distphone = distphone;
+        this.distprods.addAll(distprods);
         this.tags.addAll(tags);
     }
 
@@ -39,6 +42,9 @@ public class Distributor {
     public DistributorPhone getDistPhone() {
         return distphone;
     }
+
+    public Set<DistributorProduct> getDistProds() {
+        return distprods; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -53,8 +59,10 @@ public class Distributor {
      * This defines a weaker notion of equality between two distributors.
      */
     public boolean isSameDistributor(seedu.address.model.distributor.Distributor otherDistributor) {
+
         if (otherDistributor.getDistName() == this.getDistName()
-                || otherDistributor.getDistPhone() == this.getDistPhone()) {
+                || (otherDistributor.getDistPhone() == this.getDistPhone()
+                && otherDistributor.getDistPhone() != new DistributorPhone("00000000"))) {
             return true;
         }
 
@@ -81,13 +89,14 @@ public class Distributor {
                 (seedu.address.model.distributor.Distributor) other;
         return otherDistributor.getDistName().equals(getDistName())
                 && otherDistributor.getDistPhone().equals(getDistPhone())
+                && otherDistributor.getDistProds().equals(getDistProds())
                 && otherDistributor.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(distname, distphone, tags);
+        return Objects.hash(distname, distphone, distprods, tags);
     }
 
     @Override
@@ -98,6 +107,8 @@ public class Distributor {
                 .append(getDistPhone())
                 .append("\nTags: ");
         getTags().forEach(builder::append);
+        builder.append("\nProducts: ");
+        getDistProds().forEach(builder::append);
         return builder.toString();
     }
 

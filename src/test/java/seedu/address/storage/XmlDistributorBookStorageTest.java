@@ -78,7 +78,7 @@ public class XmlDistributorBookStorageTest {
 
     @Test
     public void readAndSaveDistributorBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
+        Path filePath = testFolder.getRoot().toPath().resolve("TempDistributorBook.xml");
         DistributorBook original = getTypicalDistributorBook();
         XmlDistributorBookStorage xmlDistributorBookStorage = new XmlDistributorBookStorage(filePath);
 

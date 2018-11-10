@@ -68,7 +68,7 @@ public class DistributorBook implements ReadOnlyDistributorBook {
 
     /**
      * Adds a distributor to the address book.
-     * The distributor must not already exist in the address book.
+     * The distributor must not already exist in the distributor book.
      */
     public void addDistributor(Distributor d) {
         distributors.add(d);
@@ -76,7 +76,7 @@ public class DistributorBook implements ReadOnlyDistributorBook {
 
     /**
      * Replaces the given distrbutor {@code target} in the list with {@code editedDistributor}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the distributor book.
      * The distributor identity of {@code editedDistributor} must not be the same as another existing distributor
      * in the Inventarie.
      */

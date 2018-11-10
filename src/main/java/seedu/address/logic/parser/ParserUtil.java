@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.distributor.DistributorProduct;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.Username;
 import seedu.address.model.product.Email;
@@ -189,6 +190,36 @@ public class ParserUtil {
         }
         return new RemainingItems(trimmedRemainingItems);
     }
+
+    /**
+     * Parses a {@code String distributorproduct} into a {@code DistributorProduct}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code distributorproduct} is invalid.
+     */
+
+    public static DistributorProduct parseDistProd(String distributorproduct) throws ParseException {
+        requireNonNull(distributorproduct);
+        String trimmedProd = distributorproduct.trim();
+        if (!Name.isValidName(trimmedProd)) {
+            throw new ParseException(DistributorProduct.MESSAGE_DISTPROD_CONSTRAINTS);
+        }
+        return new DistributorProduct(trimmedProd);
+    }
+
+    /**
+     * Parses {@code Collection<String> distributorproducts} into a {@code Set<DistributorProduct>}.
+     */
+
+    public static Set<DistributorProduct> parseDistProds(Collection<String> distributorproducts) throws ParseException {
+        requireNonNull(distributorproducts);
+        final Set<DistributorProduct> prodSet = new HashSet<>();
+        for (String prodName : distributorproducts) {
+            prodSet.add(parseDistProd(prodName));
+        }
+        return prodSet;
+    }
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.

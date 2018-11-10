@@ -73,7 +73,7 @@ public class AllCommandsParser {
 
         switch (commandWord) {
         case AddDistributorCommand.COMMAND_WORD:
-            return new AddDistributorsCommandParser().parse(arguments);
+            return new AddDistributorCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);

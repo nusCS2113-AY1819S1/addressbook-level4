@@ -11,6 +11,7 @@ import seedu.address.model.ReadOnlyDistributorBook;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.distributor.DistributorProduct;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,18 +21,18 @@ public class SampleDistributorsUtil {
 
     public static Distributor[] getSampleDistributors() {
         return new Distributor[] {
-            new Distributor(new DistributorName("Farm"),
-                    new DistributorPhone("87438807"), getTagSet("fruits")),
-            new Distributor(new DistributorName("Butcher"),
-                    new DistributorPhone("99272758"), getTagSet("meat")),
-            new Distributor(new DistributorName("Snack Shack"),
-                    new DistributorPhone("93210283"), getTagSet("snacks")),
-            new Distributor(new DistributorName("Pet Store"),
-                    new DistributorPhone("91031282"), getTagSet("pets")),
-            new Distributor(new DistributorName("Toiletries"),
-                    new DistributorPhone("92492021"), getTagSet("toiletries")),
-            new Distributor(new DistributorName("Ben Harrys"),
-                    new DistributorPhone("92624417"), getTagSet("dessert"))
+            new Distributor(new DistributorName("Farm"), new DistributorPhone("87438807"),
+                    getProdSet("Apple"), getTagSet("fruits")),
+            new Distributor(new DistributorName("Butcher"), new DistributorPhone("99272758"),
+                    getProdSet("Beef"), getTagSet("meat")),
+            new Distributor(new DistributorName("Snack Shack"), new DistributorPhone("93210283"),
+                    getProdSet("Cheezles"), getTagSet("snacks")),
+            new Distributor(new DistributorName("Pet Store"), new DistributorPhone("91031282"),
+                    getProdSet("Dog Biscuits"), getTagSet("pets")),
+            new Distributor(new DistributorName("Toiletries"), new DistributorPhone("92492021"),
+                    getProdSet("Toilet Paper"), getTagSet("toiletries")),
+            new Distributor(new DistributorName("Ben Harrys"), new DistributorPhone("92624417"),
+                    getProdSet("Ice Cream"), getTagSet("dessert"))
         };
     }
 
@@ -43,6 +44,15 @@ public class SampleDistributorsUtil {
         }
 
         return sampleDb;
+    }
+
+    /**
+     * Returns a tag set containing the list of strings given.
+     */
+    public static Set<DistributorProduct> getProdSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(DistributorProduct::new)
+                .collect(Collectors.toSet());
     }
 
     /**

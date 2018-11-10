@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.distributor.DistributorProduct;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductInfo;
@@ -38,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SERIAL_NR, PREFIX_DISTRIBUTOR, PREFIX_PRODUCT_INFO,
                          PREFIX_REMAINING_ITEMS, PREFIX_TAG);
-        // The problem is not here becuase the error does not occur....
+
         if (!arePrefixesPresent(argMultimap,
                 PREFIX_NAME, PREFIX_PRODUCT_INFO, PREFIX_SERIAL_NR,
                 PREFIX_DISTRIBUTOR, PREFIX_REMAINING_ITEMS)
@@ -55,12 +56,14 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .parseRemainingItems(argMultimap.getValue(PREFIX_REMAINING_ITEMS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-
         DistributorPhone distphone = new DistributorPhone("00000000");
+        DistributorProduct distprod =
+                new DistributorProduct(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString());
+        Set<DistributorProduct> distprodsSet = new HashSet<>();
+        distprodsSet.add(distprod);
 
         Product product = new Product(name, serialNumber, distname, productInfo, remainingItems, tagList);
-        Distributor distributor = new Distributor(distname, distphone, new HashSet<>());
-        System.out.print(product.getRemainingItems());
+        Distributor distributor = new Distributor(distname, distphone, distprodsSet, tagList);
         return new AddCommand(product, distributor);
     }
 
