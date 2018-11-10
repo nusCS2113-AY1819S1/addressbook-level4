@@ -410,16 +410,24 @@ Displays the monthly expense data for November 2018 in a new window
 Adds a task to the schedule planner +
 Format: `task n/NAME b/BODY s/START_DATETIME e/END_DATETIME [t/TAG]... p/PRIORITY`
 
+****
+* The *BODY* field contains details or remarks of a task.
+* A task can only have its start DATE (without specific TIME, *format: DD/MM(_HH:mm))*.
+* But its end valid DataTime should contain DATE & TIME *(format: DD/MM_HH:mm)*.
+* We only accept February 28th as a valid date, i.e. 28/2 *valid*, 29/2 *invalid*.
+* Task priority can only be *HIGH/high*, *MED/med* or *LOW/low*,
+****
+
 [TIP]
-A task can only have its start and end DATE (without specific TIME). A task can have any number of tags (including 0).
+A task can have any number of tags (including 0).
 
 [NOTE]
 By default, the tasks are listed by descending order of priority i.e. HIGH, MED, LOW.
 
 Examples:
 
-* `task n/Submit Assignment b/CG2027 Assign2 s/18/10 e/25/10_1400 p/HIGH t/Hardcopy`
-* `task n/Submit Quiz b/MA1508E Quzi11 s/29/10_0000 e/4/11_2200 p/MED t/IVLE`
+* `task n/Submit Assignment b/CG2027 Assign2 s/18/10 e/25/10_14:00 p/HIGH t/Hardcopy`
+* `task n/Submit Quiz b/MA1508E Quzi11 s/29/10_00:00 e/4/11_22:00 p/MED t/IVLE`
 
 === Listing all tasks : `listTask`
 
@@ -445,23 +453,6 @@ Examples:
 Edits the body of the 1st task to be `Need two pens`.
 * `updateTask 2 t/` +
 Edits the 2nd task by clearing all existing tags.
-
-=== Locating tasks by name: `findTask` `[Coming in v1.4]`
-
-Finds tasks whose names or body contain any of the given keywords. +
-Format: `findTask KEYWORD [MORE_KEYWORDS]`
-
-//
-//****
-//* (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-//****
-
-Examples:
-
-* `find Pen` +
-Returns `pen` and `Pen pineapple pen`
-* `find concert meeting cute` +
-Returns any task having names or body `concert`, `meeting`, or `cute`
 
 === Deleting a task : `deleteTask`
 
@@ -601,12 +592,10 @@ e.g. `editExpense 2 c/Travel v/998.00`
 * *MonthlyExpense* : `monthlyExpense MM/YYYY` +
 e.g. `monthlyExpense 11/2018`
 //@@author
-
 //@@author luhan02
 * *AddTask* : `task n/NAME b/BODY s/START_DATETIME e/END_DATETIME [t/TAG]... p/PRIORITY` +
-e.g. `task n/Submit Assignment b/CG2027 Assign2 s/18/10 e/25/10_1400 p/HIGH t/Hardcopy`
+e.g. `task n/Submit Assignment b/CG2027 Assign2 s/18/10 e/25/10_14:00 p/HIGH t/Hardcopy`
 * *ListTask* : `listTask`
-* *FindTask* : `findTask KEYWORD [MORE_KEYWORDS]`
 * *EditTask* : `updateTask INDEX [n/NAME] [b/BODY] [s/START_DATETIME] [e/END_DATETIME] [t/TAG]... [p/PRIORITY]` +
 e.g. `updateTask 2`
 * *DeleteTask* : `deleteTask INDEX` +

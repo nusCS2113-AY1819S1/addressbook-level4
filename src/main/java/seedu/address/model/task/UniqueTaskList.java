@@ -189,10 +189,11 @@ public class UniqueTaskList implements Iterable<Task> {
                 if (p1.equals(p2)) {
                     return 0;
                 }
-                if (p1.equals("HIGH") && (p2.equals("MED") || p2.equals("LOW"))) {
+                if ((p1.equals("HIGH") || p1.equals("high")) && ((p2.equals("MED") || p2.equals("med"))
+                        || (p2.equals("LOW") || p2.equals("low")))) {
                     return -1;
                 }
-                if (p1.equals("MED") && p2.equals("LOW")) {
+                if ((p1.equals("MED") || p1.equals("med")) && (p2.equals("LOW") || p2.equals("low"))) {
                     return -1;
                 }
                 return 2;

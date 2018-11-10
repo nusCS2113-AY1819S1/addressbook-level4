@@ -26,9 +26,6 @@ import seedu.address.model.task.TaskName;
  */
 public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
-    public AddTaskCommandParser() throws ParseException {
-    }
-
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -52,8 +49,8 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         Body body = ParserUtil.parseBody(argMultimap.getValue(PREFIX_BODY).get());
         /*DateTime startDateTime = ParserUtil.parseDateTimeAllowNull(argMultimap.getValue(PREFIX_START).isPresent()
                 ? argMultimap.getValue(PREFIX_START).get() : null);*/
-        DateTime startDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_START).get());
-        DateTime endDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_END).get());
+        DateTime startDateTime = ParserUtil.parseStartDateTime(argMultimap.getValue(PREFIX_START).get());
+        DateTime endDateTime = ParserUtil.parseEndDateTime(argMultimap.getValue(PREFIX_END).get());
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
@@ -62,4 +59,5 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         return new AddTaskCommand(task);
 
     }
+
 }

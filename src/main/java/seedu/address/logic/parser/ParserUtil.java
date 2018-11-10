@@ -180,11 +180,11 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code startDateTime} is invalid.
      */
-    public static DateTime parseDateTime(String startDateTime) throws ParseException {
+    public static DateTime parseStartDateTime(String startDateTime) throws ParseException {
         requireNonNull(startDateTime);
         String trimmedStartDateTime = startDateTime.trim();
-        if (!DateTime.isValidDateTime(trimmedStartDateTime)) {
-            throw new ParseException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        if (!DateTime.isValidStartDateTime(trimmedStartDateTime)) {
+            throw new ParseException(DateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
         }
         return new DateTime(trimmedStartDateTime);
     }
@@ -196,7 +196,7 @@ public class ParserUtil {
         if (startDateTime == null) {
             return null;
         }
-        return ParserUtil.parseDateTime(startDateTime);
+        return ParserUtil.parseStartDateTime(startDateTime);
     }
     /**
      * Parses a {@code String endDateTime} into an {@code DateTime}.
@@ -204,11 +204,11 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code endDateTime} is invalid.
      */
-    public static DateTime parseTagDateTime(String endDateTime) throws ParseException {
+    public static DateTime parseEndDateTime(String endDateTime) throws ParseException {
         requireNonNull(endDateTime);
         String trimmedEndDateTime = endDateTime.trim();
-        if (!DateTime.isValidDateTime(trimmedEndDateTime)) {
-            throw new ParseException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        if (!DateTime.isValidEndDateTime(trimmedEndDateTime)) {
+            throw new ParseException(DateTime.MESSAGE_END_DATETIME_CONSTRAINTS);
         }
         return new DateTime(trimmedEndDateTime);
     }

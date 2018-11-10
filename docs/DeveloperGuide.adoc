@@ -349,7 +349,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 The tasks' CRUD mechanism is facilitated by `AddTaskCommand`,`listTaskCommand`,`findTaskCommand`,`UpdateTaskCommand`,`DeleteTaskCommand`. It extends `Command` and implement the following operation:
 
 * `Command#AddTaskCommand()` -- Create a new task to Student Planner
-* `Command#ListTaskCommand()`,`Command#FindTaskCommand()` -- View/ search existing tasks
+* `Command#ListTaskCommand()` -- View existing task list
 * `Command#UpdateTaskCommand()` -- Update existing tasks from history
 * `Command#DeleteTaskCommand()` -- Remove existing tasks from history
 
@@ -357,21 +357,27 @@ These operations are exposed in the `Model` interface as `Model#hasTask()`,`Mode
 
 Given below is an example usage scenario and how the CRUD mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The Student Planner will be initialized with the initial task planner state.
+Step 1. The user launches the application for the first time. The Student Planner will be initialized with the initial task book state.
 
 image::taskStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `add t/submission ...` command to add a new submission task to the student planner. The `add` command calls `Model#addTask()` which returns a task to be shown in the task list.
+Step 2. The user executes `task t/submission ...` command to add a new submission task to the student planner. The `task` command calls `Model#addTask()` which returns a task to be shown in the task list.
 
 image::taskCommand1StateListDiagram.png[width="700"]
 
-Step 3. The user executes  `find ...` command to search any existing task. The `find` command calls `Model#findTask()` and it does not modify the student planner, the studentPlannerStateList remains unchanged.
+Step 3. The user then decides to executes `updateTask 2 ...` command to update an existing task. The `updateTask` command calls `Model#updateTask()`, causing a modified task to be saved.
 
-Step 4. The user then decides to executes `update ...` command to update an existing task. The `update` command calls `Model#updateTask()`, causing a modified task to be saved.
+The following sequence diagram shows how the `updateTask 2 e/13/11_22:59` operation works:
 
-Step 5. The user executes `list` command to view the existing task list, which calls `Model#listTask()`. The `list` command does not modify the student planner, the studentPlannerStateList remains unchanged.
+image::updateTaskEventHandlingSD.png[width="800"]
 
-Step 6. The user now decides that the task added was a mistake, and decides to remove that task by executing the `delete 6` command to delete the 6th task in the task list of the student planner. The `delete` command will call `Model#deleteTask()`, causing the modified state of the student planner after the `delete 5` command executes to be saved in the studentPlannerStateList.
+Step 4. The user executes `listTask` command to view the existing task list, which calls `Model#listTask()`. The `listTask` command does not modify the task book, the taskBookStateList remains unchanged.
+
+Step 5. The user now decides that the task added was a mistake, and decides to remove that task by executing the `deleteTask 6` command to delete the 6th task in the task list of the student planner. The `deleteTask` command will call `Model#deleteTask()`, causing the modified state of the task book after the `deleteTask 6` command executes to be saved in the taskBookStateList.
+
+The following sequence diagram shows how the deleteTask 6 operation works:
+
+image::deleteTaskEventHandlingSD.png[width="800"]
 // end::tasks[]
 
 //@@author QzSG
@@ -1422,19 +1428,101 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
-=== Deleting a task
+=== Deleting a person
 
-. Deleting a task while all tasks are listed
+. Deleting a person while all persons are listed
 
-.. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 .. Test case: `delete 1` +
-   Expected: First task is deleted from the list. Details of the deleted task shown in the status message. Timestamp in the status bar is updated.
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+//@@author luhan02
+// tag::manualTestTask[]
+=== Creating a task
+
+. Creating a new task to the task book
+
+.. Prerequisites: The task must not already exist in student planner
+.. Test case: `task n/Submission b/CG2027 Assign3 s/17/10_17:00 e/24/10_14:00 p/med` +
+   Expected: A new task is added to the task book panel, and a success message will be shown in the result display panel.
+.. Test case (If a task with name of `submission` and body of `CG2027 Assign3` is already existed in student planner): `task n/Submission b/CG2027 Assign3 s/17/10_17:00 e/24/10_14:00 p/med` +
+   Expected: No task is added, and a duplicate task message is shown in the result display panel.
+.. Test case: `task n/Submission b/CG2027 Assign3 s/17/10 e/24/10 p/med` +
+   Expected: No task is added. Error details shown in the result display panel.
+
+=== Listing all tasks
+
+. Listing all the tasks in the student planner.
+
+.. Prerequisites: User has entered some tasks. Multiple tasks in the list.
+.. Test case: `listTask` +
+   Expected: All tasks are listed according to their deadline (in ascending order) in the task book panel.
+
+=== Updating an existing task
+
+. Updating the name/body of a task
+
+.. Prerequisites: User has entered some tasks. Multiple tasks in the list.
+.. Test case: `updateTask 1 n/Submission b/CG2027 Assign3` +
+   Expected: The body/detail of first task is updated in student planner, and a success message is shown in the result display panel.
+.. Test case (If a task with name of `submission` and body of `CG2027 Assign3` is already existed in student planner): `updateTask 1 n/Submission b/CG2027 Assign3` +
+   Expected: No task is updated, and a duplicate task message is shown in the result display panel.
+.. Test case:`updateTask 1 n/` +
+   Expected: No task is updated. Error details of invalid command is shown in the result display panel.
+.. Other incorrect updateTask commands to try: `updateTask`, `updateTask 1 b/`, `updateTask x ...` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
+. Updating the startDateTime or endDateTime of a task
+
+.. Prerequisites: User has entered some tasks. Multiple tasks in the list.
+.. Test case: `updateTask 1 e/30/11_21:59` +
+   Expected: The endDateTime of first task is updated in the student planner, and a success message is shown in the result display panel.
+.. Test case: `updateTask 1 e/30/11` +
+   Expected: No task is updated. Error detail of invalid endDateTime format is shown in the result display panel.
+.. Test case: `updateTask 1 e/32/11_21:59` +
+   Expected: No task is updated. Error detail of invalid endDateTime format is shown in the result display panel.
+.. Other incorrect updateTask commands to try: `updateTask 1 s/`, `updateTask 1 e/`, `updateTask x ...` (where x is larger than the list size) +
+   Expected: No task is updated. Error details of invalid command is shown in the result display panel.
+
+. Updating the priority of a task
+
+.. Prerequisites: User has entered some tasks. Multiple tasks in the list.
+.. Test case: `updateTask 1 p/low` +
+   Expected: The priority if first task is updated to `low` in the student planner. A success message is shown in the result display panel.
+.. Test case: `updateTask 1 p/h` +
+   Expected: No task is updated. Error detail of invalid priority format is shown in the result display panel.
+.. Test case: `updateTask 1 p/` +
+   Expected: No task is updated. Error details shown in the result display panel.
+
+. Updating the tags of a task
+
+.. Prerequisites: User has entered some tasks. Multiple tasks in the list.
+.. Test case: `updateTask 1 t/hardcopy` +
+   Expected: The tag field of first task is updated in the student planner. A success message is shown in the result display panel.
+.. Test case: `updateTask 1 t/` +
+   Expected: The tag field of first task is cleared in the student planner. A success message is shown in the result display panel.
+
+=== Deleting a task
+
+. Deleting a task while all tasks are listed
+
+.. Prerequisites: User has entered some tasks. Multiple tasks in the list.
+.. Test case: `deleteTask 1` +
+   Expected: First task is deleted from the list, and a success message is shown in the result display panel. Task list is updated.
+.. Test case: `deleteTask 0` +
+   Expected: No task is deleted. Error details shown in the result display panel. Task list remains the same.
+.. Test case (If 5 tasks exist in the student planner, i.e. task list size is 5 ): `deleteTask 6` +
+   Expected: No task is deleted. Error details shown in the result display panel. Task list remains the same.
+.. Other incorrect deleteTask commands to try: `deleteTask`, `deleteTask -1` +
+   Expected: Similar to previous.
+// end::manualTestTask[]
+//@@author
 
 //@@author QzSG
 // tag::manualTestBackupRestore[]

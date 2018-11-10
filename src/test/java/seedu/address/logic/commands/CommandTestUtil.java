@@ -3,12 +3,16 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BODY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE_VALUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -16,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -25,6 +30,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.UpdateTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -92,12 +98,40 @@ public class CommandTestUtil {
     public static final String INVALID_EXPENSE_VALUE_DESC =
             " " + PREFIX_EXPENSE_VALUE; // empty string not allowed for expense value
 
+    public static final String VALID_TASK_NAME_QUIZ = "Quiz Submission";
+    public static final String VALID_TASK_NAME_ASSIGN = "Assignment Submission";
+    public static final String VALID_BODY_QUIZ = "MA1508E Quiz9";
+    public static final String VALID_BODY_ASSIGN = "CG2027 Assign5";
+    public static final String VALID_START_DATETIME_QUIZ = "15/10";
+    public static final String VALID_START_DATETIME_ASSIGN = "30/10";
+    public static final String VALID_END_DATETIME_QUIZ = "21/10_22:00";
+    public static final String VALID_END_DATETIME_ASSIGN = "6/11_14:00";
+    public static final String VALID_PRIORITY_QUIZ = "MED";
+    public static final String VALID_PRIORITY_ASSIGN = "HIGH";
+    public static final String VALID_TAG_IVLE = "IVLE";
+    public static final String VALID_TAG_HARDCOPY = "hardcopy";
+
+    public static final String TASKNAME_DESC_QUIZ = " " + PREFIX_NAME + VALID_TASK_NAME_QUIZ;
+    public static final String TASKNAME_DESC_ASSIGN = " " + PREFIX_NAME + VALID_TASK_NAME_ASSIGN;
+    public static final String BODY_DESC_QUIZ = " " + PREFIX_BODY + VALID_BODY_QUIZ;
+    public static final String BODY_DESC_ASSIGN = " " + PREFIX_BODY + VALID_BODY_ASSIGN;
+    public static final String START_DATETIME_DECS_QUIZ = " " + PREFIX_START + VALID_START_DATETIME_QUIZ;
+    public static final String START_DATETIME_DECS_ASSIGN = " " + PREFIX_START + VALID_START_DATETIME_ASSIGN;
+    public static final String END_DATETIME_DECS_QUIZ = " " + PREFIX_END + VALID_END_DATETIME_QUIZ;
+    public static final String END_DATETIME_DECS_ASSIGN = " " + PREFIX_END + VALID_END_DATETIME_ASSIGN;
+    public static final String PRIORITY_DESC_QUIZ = " " + PREFIX_PRIORITY + VALID_PRIORITY_QUIZ;
+    public static final String PRIORITY_DESC_ASSIGN = " " + PREFIX_PRIORITY + VALID_PRIORITY_ASSIGN;
+    public static final String TAG_DESC_IVLE = " " + PREFIX_TAG + VALID_TAG_IVLE;
+    public static final String TAG_DESC_HARDCOPY = " " + PREFIX_TAG + VALID_TAG_HARDCOPY;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_SHOPPING;
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_MRT;
+
+    public static final UpdateTaskCommand.UpdateTaskDescriptor DESC_QUIZ;
+    public static final UpdateTaskCommand.UpdateTaskDescriptor DESC_ASSIGN;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -112,6 +146,14 @@ public class CommandTestUtil {
         DESC_SHOPPING = new EditExpenseDescriptorBuilder().withExpenseCategory(VALID_EXPENSE_CATEGORY_SHOPPING)
                 .withExpenseDate(VALID_EXPENSE_DATE_SHOPPING).withExpenseValue(VALID_EXPENSE_VALUE_SHOPPING)
                 .withTags(VALID_TAG_TAOBAO, VALID_TAG_HUSBAND).build();
+        DESC_QUIZ = new UpdateTaskDescriptorBuilder().withTaskName(VALID_TASK_NAME_QUIZ)
+                .withBody(VALID_BODY_QUIZ).withStartDateTime(VALID_START_DATETIME_QUIZ)
+                .withEndDateTime(VALID_END_DATETIME_QUIZ).withPriority(VALID_PRIORITY_QUIZ)
+                .withTags(VALID_TAG_IVLE).build();
+        DESC_ASSIGN = new UpdateTaskDescriptorBuilder().withTaskName(VALID_TASK_NAME_ASSIGN)
+                .withBody(VALID_BODY_ASSIGN).withStartDateTime(VALID_START_DATETIME_ASSIGN)
+                .withEndDateTime(VALID_END_DATETIME_ASSIGN).withPriority(VALID_PRIORITY_ASSIGN)
+                .withTags(VALID_TAG_IVLE, VALID_TAG_HARDCOPY).build();
     }
 
     /**
@@ -191,4 +233,15 @@ public class CommandTestUtil {
         model.deleteExpense(firstExpense);
         model.commitExpenseBook();
     }
+
+
+    /**
+     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s expense book.
+     */
+    /*
+    public static void deleteFirstExpense(Model model) {
+        Expense firstExpense = model.getFilteredExpenseList().get(0);
+        model.deleteExpense(firstExpense);
+        model.commitExpenseBook();
+    }*/
 }

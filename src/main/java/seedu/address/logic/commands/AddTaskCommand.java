@@ -32,7 +32,7 @@ public class AddTaskCommand extends Command {
             + PREFIX_NAME + "Submission "
             + PREFIX_BODY + "CG2027 assign2 "
             + PREFIX_START + "09/10 "
-            + PREFIX_END + "16/10_1400 "
+            + PREFIX_END + "16/10_14:00 "
             + PREFIX_PRIORITY + "HIGH "
             + PREFIX_TAG + "IVLE";
 

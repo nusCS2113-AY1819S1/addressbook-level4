@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
+//import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -81,8 +81,8 @@ public class UpdateTaskCommand extends Command {
         Task updatedTask = createUpdatedTask(taskToUpdate, updateTaskDescriptor);
 
         model.updateTask(taskToUpdate, updatedTask);
-        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        model.commitAddressBook();
+        //model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.commitTaskBook();
 
         if (!taskToUpdate.isSameTask(updatedTask) && model.hasTask(updatedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

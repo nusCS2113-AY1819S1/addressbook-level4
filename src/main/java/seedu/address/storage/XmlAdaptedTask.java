@@ -107,8 +107,8 @@ public class XmlAdaptedTask {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     DateTime.class.getSimpleName()));
         }
-        if (!DateTime.isValidDateTime(startDateTime)) {
-            throw new IllegalValueException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        if (!DateTime.isValidStartDateTime(startDateTime)) {
+            throw new IllegalValueException(DateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
         }
         final DateTime modelStartDateTime = new DateTime(startDateTime);
 
@@ -116,8 +116,8 @@ public class XmlAdaptedTask {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     DateTime.class.getSimpleName()));
         }
-        if (!DateTime.isValidDateTime(endDateTime)) {
-            throw new IllegalValueException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        if (!DateTime.isValidEndDateTime(endDateTime)) {
+            throw new IllegalValueException(DateTime.MESSAGE_END_DATETIME_CONSTRAINTS);
         }
         final DateTime modelEndDateTime = new DateTime(endDateTime);
 

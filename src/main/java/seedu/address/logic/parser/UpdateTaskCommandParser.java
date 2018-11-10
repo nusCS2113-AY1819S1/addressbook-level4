@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BODY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -49,10 +48,11 @@ public class UpdateTaskCommandParser implements Parser<UpdateTaskCommand> {
             updateTaskDescriptor.setBody(ParserUtil.parseBody(argMultimap.getValue(PREFIX_BODY).get()));
         }
         if (argMultimap.getValue(PREFIX_START).isPresent()) {
-            updateTaskDescriptor.setStartDateTime(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_START).get()));
+            updateTaskDescriptor.setStartDateTime(ParserUtil.parseStartDateTime
+                    (argMultimap.getValue(PREFIX_START).get()));
         }
         if (argMultimap.getValue(PREFIX_END).isPresent()) {
-            updateTaskDescriptor.setEndDateTime(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            updateTaskDescriptor.setEndDateTime(ParserUtil.parseEndDateTime(argMultimap.getValue(PREFIX_END).get()));
         }
         if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
             updateTaskDescriptor.setPriority(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get()));

@@ -149,14 +149,20 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[] {
             new Task(new TaskName("Submission"), new Body("CG2027 Assign2"),
-                    new DateTime("12/10_1700"), new DateTime("19/10_1400"),
+                    new DateTime("12/10_17:00"), new DateTime("19/10_14:00"),
                     new Priority("HIGH"), getTagSet("IVLE")),
+            new Task(new TaskName("Quiz Submission"), new Body("MA1508E Quiz9"),
+                    new DateTime("15/10"), new DateTime("21/10_22:00"),
+                    new Priority("MED"), getTagSet("IVLE")),
+            new Task(new TaskName("Presentation"), new Body("GER1000 project presentation"),
+                    new DateTime("16/11"), new DateTime("16/11_13:55"),
+                    new Priority("MED"), getTagSet("IVLE")),
             new Task(new TaskName("PracticalExam"), new Body("CS2113 Product release"),
-                    new DateTime("2/11_1600"), new DateTime("2/11_1600"),
+                    new DateTime("2/11_16:00"), new DateTime("2/11_16:00"),
                     new Priority("HIGH"), getTagSet("LT15")),
             new Task(new TaskName("Shopping"), new Body("Buy stationary at Clementi int"),
-                    new DateTime("30/10_1400"), new DateTime("30/10_1400"),
-                    new Priority("MED"), getTagSet("MOM"))
+                    new DateTime("30/10_14:00"), new DateTime("30/10_14:00"),
+                    new Priority("LOW"), getTagSet("MOM"))
         };
     }
 

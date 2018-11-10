@@ -17,6 +17,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddExpenseCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.BackupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearExpenseCommand;
@@ -47,12 +48,15 @@ import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ExpenseBuilder;
 import seedu.address.testutil.ExpenseUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TaskBuilder;
+import seedu.address.testutil.TaskUtil;
 
 public class AddressBookParserTest {
     @Rule
@@ -245,5 +249,13 @@ public class AddressBookParserTest {
     public void parseCommand_undoExpenseCommandWord_returnsUndoExpenseCommand() throws Exception {
         assertTrue(parser.parseCommand(UndoExpenseCommand.COMMAND_WORD) instanceof UndoExpenseCommand);
         assertTrue(parser.parseCommand("undoExpense 3") instanceof UndoExpenseCommand);
+    }
+
+    //============ Task ====================================================
+
+    @Test
+    public void parseCommand_addTask() throws Exception {
+        Task task = new TaskBuilder().build();
+        assertTrue(parser.parseCommand(TaskUtil.getAddTaskCommand(task)) instanceof AddTaskCommand);
     }
 }
