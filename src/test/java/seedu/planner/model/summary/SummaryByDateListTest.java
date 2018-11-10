@@ -1,6 +1,8 @@
 package seedu.planner.model.summary;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.planner.testutil.Assert.assertThrows;
 import static seedu.planner.testutil.TypicalRecords.CAIFAN;
 import static seedu.planner.testutil.TypicalRecords.CHICKENRICE;
@@ -52,6 +54,33 @@ public class SummaryByDateListTest {
 
     private static List<Record> recordListOverlappingDates = Arrays.asList(CAIFAN_JAN, INDO_JAN, RANDOM_MAR,
             WORK_APR, MALA_APR, ZT_JUN, CHICKEN_RICE_JUL);
+
+    @Test
+    public void equals() {
+        SummaryByDateList summaryByDateListOne = new SummaryByDateList(recordListAllUniqueDates);
+        SummaryByDateList summaryByDateListTwo = new SummaryByDateList(recordListOverlappingDates);
+
+        // same object -> returns true
+        assertTrue(summaryByDateListOne.equals(summaryByDateListOne));
+
+        // same values -> returns true
+        SummaryByDateList summaryByDateListOneCopy = new SummaryByDateList(recordListAllUniqueDates);
+        assertTrue(summaryByDateListOne.equals(summaryByDateListOneCopy));
+
+        // different types -> returns false
+        assertFalse(summaryByDateListOne.equals(1));
+
+        // different SummaryList types -> returns false
+        SummaryByCategoryList summaryByByCategoryList =
+                new SummaryByCategoryList(recordListAllUniqueDates);
+        assertFalse(summaryByDateListOne.equals(summaryByByCategoryList));
+
+        // null -> returns false
+        assertFalse(summaryByDateListOne.equals(null));
+
+        // different values -> returns false
+        assertFalse(summaryByDateListOne.equals(summaryByDateListTwo));
+    }
 
     @Test
     public void constructor_nullParam_throwsNullPointerException() {
