@@ -64,37 +64,52 @@ public class FindCommandTest {
         FindCommand findSecondCommand = new IncludeNameFindCommand(secondPredicate);
         FindCommand findThirdCommand = new IncludeTagFindCommand(thirdPredicate);
         FindCommand findFourthCommand = new IncludeTagFindCommand(fourthPredicate);
+        FindCommand findFifthCommand = new ExcludeNameFindCommand(firstPredicate);
+        FindCommand findSixthCommand = new ExcludeNameFindCommand(secondPredicate);
+        FindCommand findSeventhCommand = new ExcludeTagFindCommand(thirdPredicate);
+        FindCommand findEighthCommand = new ExcludeTagFindCommand(fourthPredicate);
+
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
         assertTrue(findThirdCommand.equals(findThirdCommand));
-        // same values -> returns true
+        assertTrue(findFifthCommand.equals(findFifthCommand));
+        assertTrue(findSeventhCommand.equals(findSeventhCommand));
+
+        // same type same predicate -> returns true
         FindCommand findFirstCommandCopy = new IncludeNameFindCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         FindCommand findThirdCommandCopy = new IncludeTagFindCommand(thirdPredicate);
         assertTrue(findThirdCommand.equals(findThirdCommandCopy));
 
-        // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
-        assertFalse(findFourthCommand.equals(4));
+        FindCommand findFifthCommandCopy = new ExcludeNameFindCommand(firstPredicate);
+        assertTrue(findFifthCommand.equals(findFifthCommandCopy));
+
+        FindCommand findSixthCommandCopy = new ExcludeTagFindCommand(thirdPredicate);
+        assertTrue(findSeventhCommand.equals(findSixthCommandCopy));
+
+        // different type same predicate -> returns false
+        assertFalse(findFirstCommand.equals(findFifthCommand));
+        assertFalse(findThirdCommand.equals(findSeventhCommand));
+        assertFalse(findFifthCommand.equals(findFirstCommand));
+        assertFalse(findSeventhCommand.equals(findThirdCommand));
+
+        // same type different predicate -> returns false
+        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(findThirdCommand.equals(findFourthCommand));
+        assertFalse(findFifthCommand.equals(findSixthCommand));
+        assertFalse(findSeventhCommand.equals(findEighthCommand));
 
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
         assertFalse(findThirdCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
-
-        //different tag -> returns false
-        assertFalse(findFourthCommand.equals(findThirdCommand));
-
-        //different object -> returns false
-        assertFalse(findFirstCommand.equals(findThirdCommand));
+        assertFalse(findFifthCommand.equals(null));
+        assertFalse(findSeventhCommand.equals(null));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroIncludeNameKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
                 + KeywordsOutputUtil.getOutputString(null, null, null, null), 0);
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate(" ");
@@ -106,19 +121,45 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_excludeMultipleKeywords_multiplePersonsFound() {
+    public void execute_zeroIncludeTagKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
-                + KeywordsOutputUtil.getOutputString(null, null, null, Arrays.asList("kurz", "elle", "kunz")), 7);
-        NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate("Kurz Elle Kunz");
-        FindCommand command = new ExcludeNameFindCommand(predicate);
-        expectedModel.executeSearch(predicate.negate());
-        expectedModel.recordKeywords(KeywordType.ExcludeNames, Arrays.asList("kurz", "elle", "kunz"));
+                + KeywordsOutputUtil.getOutputString(null, null, null, null), 0);
+        TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(" ");
+        FindCommand command = new IncludeTagFindCommand(predicate);
+        expectedModel.executeSearch(predicate);
+        expectedModel.recordKeywords(KeywordType.IncludeTags, new ArrayList<>());
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL, GEORGE, JOHN, SEGWIT, KHOR), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_zeroExcludeNameKeywords_allPersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(null, null, null, null), 10);
+        NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate(" ");
+        FindCommand command = new ExcludeNameFindCommand(predicate);
+        expectedModel.executeSearch(predicate.negate());
+        expectedModel.recordKeywords(KeywordType.ExcludeNames, new ArrayList<>());
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN, SEGWIT, KHOR),
+                model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_zeroExcludeTagKeywords_allPersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(null, null, null, null), 10);
+        TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(" ");
+        FindCommand command = new ExcludeTagFindCommand(predicate);
+        expectedModel.executeSearch(predicate.negate());
+        expectedModel.recordKeywords(KeywordType.ExcludeTags, new ArrayList<>());
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN, SEGWIT, KHOR),
+                model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleIncludeNameKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
                 + KeywordsOutputUtil.getOutputString(null, Arrays.asList("kurz", "elle", "kunz"), null, null), 3);
         NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate("Kurz Elle Kunz");
@@ -130,42 +171,44 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_searchByTag_multiplePersonsFound() {
+    public void execute_multipleExcludeNameKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
-                + KeywordsOutputUtil.getOutputString(Arrays.asList(VALID_TAG_FRIEND), null, null, null), 2);
-        TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND);
+                + KeywordsOutputUtil.getOutputString(null, null, null, Arrays.asList("kurz", "elle", "kunz")), 7);
+        NameContainsKeywordsPredicate predicate = prepareNameContainsKeywordsPredicate("Kurz Elle Kunz");
+        FindCommand command = new ExcludeNameFindCommand(predicate);
+        expectedModel.executeSearch(predicate.negate());
+        expectedModel.recordKeywords(KeywordType.ExcludeNames, Arrays.asList("kurz", "elle", "kunz"));
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL, GEORGE, JOHN, SEGWIT, KHOR), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleIncludeTagKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
+                + KeywordsOutputUtil.getOutputString(Arrays.asList(VALID_TAG_FRIEND, VALID_TAG_HUSBAND),
+                null, null, null), 2);
+        TagContainsKeywordsPredicate predicate =
+                prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND + " " + VALID_TAG_HUSBAND);
         FindCommand command = new IncludeTagFindCommand(predicate);
         expectedModel.executeSearch(predicate);
-        expectedModel.recordKeywords(KeywordType.IncludeTags, Arrays.asList(VALID_TAG_FRIEND));
+        expectedModel.recordKeywords(KeywordType.IncludeTags, Arrays.asList(VALID_TAG_FRIEND, VALID_TAG_HUSBAND));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT, KHOR), model.getFilteredPersonList());
     }
 
     @Test
-    public void execute_excludeSearchByTag_multiplePersonsFound() {
+    public void execute_multipleExcludeTagKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
                 + KeywordsOutputUtil.getOutputString(null, null,
-                Collections.singletonList(VALID_TAG_HUSBAND), null), 9);
-        TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(VALID_TAG_HUSBAND);
+                Arrays.asList(VALID_TAG_FRIEND, VALID_TAG_HUSBAND), null), 8);
+        TagContainsKeywordsPredicate predicate =
+                prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND + " " + VALID_TAG_HUSBAND);
         FindCommand command = new ExcludeTagFindCommand(predicate);
         expectedModel.executeSearch(predicate.negate());
-        expectedModel.recordKeywords(KeywordType.ExcludeTags, Arrays.asList(VALID_TAG_HUSBAND));
+        expectedModel.recordKeywords(KeywordType.ExcludeTags, Arrays.asList(VALID_TAG_FRIEND, VALID_TAG_HUSBAND));
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN, KHOR),
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN),
                 model.getFilteredPersonList());
-    }
-
-    @Test
-    public void execute_searchByTag_onePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW
-                + KeywordsOutputUtil.getOutputString(Collections.singletonList(VALID_TAG_HUSBAND),
-                null, null, null), 1);
-        TagContainsKeywordsPredicate predicate = prepareTagContainsKeywordsPredicate(VALID_TAG_HUSBAND);
-        FindCommand command = new IncludeTagFindCommand(predicate);
-        expectedModel.executeSearch(predicate);
-        expectedModel.recordKeywords(KeywordType.IncludeTags, Arrays.asList(VALID_TAG_HUSBAND));
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(SEGWIT), model.getFilteredPersonList());
     }
 
     /**
