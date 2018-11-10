@@ -234,8 +234,8 @@ User must choose to either distribute all students equally via Gender or Nationa
 ** `g/0 nat/1` -> Distribution all students randomly into _n_ groups with balanced Nationality.
 ** `g/1 nat/1` -> Distribution all students randomly into _n_ groups with balanced Gender and Nationality. *(Coming in v2.0)*
 ****
-Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
-Shortcut Format: `di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1` +
+Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true [ntf/true]` +
+Shortcut Format: `di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1 [ntf/1]` +
 
 ****
 *Coming in v2.0* +
@@ -292,18 +292,18 @@ Password: password!@#
 // tag::sendmail[]
 === Sending Email to Single, Multiple or Group of Person(s): `sendmail` `sm`
 Sends an email to a single person in list +
-Format: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
-Shortcut Format: `sm [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Format: `sendmail INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+Shortcut Format: `sm INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
 
 Sends an email to multiple persons in list +
-Format: `sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
-Shortcut Format: `sm [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Format: `sendmail INDEX,..,INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+Shortcut Format: `sm INDEX,..,INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
 
 Sends an email to all persons belonging to a group +
-Format: `sendmail g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
-Shortcut Format: `sm g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Format: `sendmail g/GROUP_INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+Shortcut Format: `sm g/GROUP_INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
 
-Examples: +
+Examples:
 
 * sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
 * sm 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
@@ -311,6 +311,53 @@ Examples: +
 * sm 1,4,6 s/Tutorial Cancelled m/Tutorial Class for Friday has been cancelled. +
 * sendmail g/2 s/Announcement m/Please bring your calculator tomorrow. +
 * sm g/2 s/Announcement m/Please bring your calculator tomorrow.
+
+[NOTE]
+Please be informed that there is currently a known bug in the program that if the `Subject` or the `Message` content +
+contains any of their prefixes (s/ or m/), the content after the prefix will be removed.
+We apologize for any inconvenience caused and the developers are looking to resolve this issue as soon as possible!
+
+// tag::distmail[]
+==== Sending Email to Persons after they have been Distributed into Groups (Coming in V2.0!)
+Distribute all students into groups using `distinto` feature and notify them of their groupings.
+[NOTE]
+This feature is an integrated feature that works with the Group Distribution feature `distinto`
+
+Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true [ntf/true]` +
+Shortcut Format: `di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1 [ntf/1]` +
+
+Examples:
+
+* distinto 5 n/CS2113-T13-0 g/true nat/false ntf/true
+* di 3 n/CS2113-T09- g/1 nat/0 ntf/1
+* di 2 n/CS2113-T14- g/true nat/0 ntf/1
+// end::distmail[]
+
+// tag::grademail[]
+==== Sending Email to Students based on grade filters (Coming in V2.0!)
+Send emails to students based on given grading filters specified by grade management feature.
+[NOTE]
+This feature is an integrated feature that works with the Grade Management feature:
+`Generate grade summary for each test`
+
+Send an email to the top 25 percentile students for the test. +
+Format: `sendmail ntf tn/TEST_NAME TTF/ s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+Shortcut Format: `sm ntf tn/TEST_NAME TTF/ s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+
+Examples:
+
+* sendmail ntf tn/CS2113T LTF/ s/Warning m/You are at the lowest 25 percentile, please try harder! +
+* sm ntf tn/CS2113T LTF/ s/Warning m/You are at the lowest 25 percentile, please try harder! +
+
+Send an email to the bottom 25 percentile students for the test. +
+Format: `sendmail warn tn/TEST_NAME LTF/ s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+Shortcut Format: `sm warn tn/TEST_NAME LTF/ s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+
+Examples:
+
+* sendmail ntf tn/CS2113T TTF/ s/Congratulations! m/You are at the highest 25 percentile, keep it up! +
+* sm ntf tn/CS2113T TTF/ s/Congratulations! m/You are at the highest 25 percentile, keep it up! +
+// end::grademail[]
 // end::sendmail[]
 
 === Viewing help : `help` `h`
