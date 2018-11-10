@@ -537,9 +537,7 @@ image::DistributeSequenceDiagram.png[width="800"]
 image::DistributeSequenceDiagram_2.png[width="800"]
 
 ==== UML Class Diagrams
-.(Part 1) UML Class Diagram for the Logic and Model Component for the `Distribute` Command
-image::DistributeComponentClassDiagramPart1.png[width="800"]
-.(Part 2) UML Class Diagram for the Model and Common Component for the `Distribute` Command
+.UML Class Diagram for the Model Component for the `Distribute` Command
 image::DistributeComponentClassDiagramPart2.png[width="800"]
 ==== Algorithm Implementation
 The Distribute Students Equally feature holds 4 different algorithms.
