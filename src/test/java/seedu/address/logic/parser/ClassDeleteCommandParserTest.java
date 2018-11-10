@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.ClassDeleteCommand;
 
+/**
+ * Provides a test for the classroom delete command parser
+ */
 public class ClassDeleteCommandParserTest {
     private ClassDeleteCommandParser parser = new ClassDeleteCommandParser();
 
