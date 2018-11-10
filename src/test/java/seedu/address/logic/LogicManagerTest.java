@@ -16,8 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.request.RequestModel;
-import seedu.address.model.request.RequestModelManager;
+import seedu.address.request.requestmodel.RequestModel;
+import seedu.address.request.requestmodel.RequestModelManager;
 
 
 public class LogicManagerTest {
@@ -50,7 +50,7 @@ public class LogicManagerTest {
     }
 */
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredBookList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         logic.getFilteredBookList().remove(0);
     }

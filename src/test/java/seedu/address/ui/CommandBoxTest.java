@@ -17,8 +17,8 @@ import seedu.address.logic.commands.Role;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.request.RequestModel;
-import seedu.address.model.request.RequestModelManager;
+import seedu.address.request.requestmodel.RequestModel;
+import seedu.address.request.requestmodel.RequestModelManager;
 
 public class CommandBoxTest extends GuiUnitTest {
 

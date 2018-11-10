@@ -11,24 +11,24 @@ import seedu.address.model.book.Book;
 /**
  * Provides a handle for {@code BookListPanel} containing the list of {@code BookCard}.
  */
-public class PersonListPanelHandle extends NodeHandle<ListView<Book>> {
-    public static final String PERSON_LIST_VIEW_ID = "#bookListView";
+public class BookListPanelHandle extends NodeHandle<ListView<Book>> {
+    public static final String BOOK_LIST_VIEW_ID = "#bookListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Book> lastRememberedSelectedPersonCard;
+    private Optional<Book> lastRememberedSelectedBookCard;
 
-    public PersonListPanelHandle(ListView<Book> personListPanelNode) {
+    public BookListPanelHandle(ListView<Book> personListPanelNode) {
         super(personListPanelNode);
     }
 
     /**
-     * Returns a handle to the selected {@code PersonCardHandle}.
+     * Returns a handle to the selected {@code BookCardHandle}.
      * A maximum of 1 item can be selected at any time.
      * @throws AssertionError if no card is selected, or more than 1 card is selected.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getHandleToSelectedCard() {
+    public BookCardHandle getHandleToSelectedCard() {
         List<Book> selectedBookList = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedBookList.size() != 1) {
@@ -36,7 +36,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Book>> {
         }
 
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
+                .map(BookCardHandle::new)
                 .filter(handle -> handle.equals(selectedBookList.get(0)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
@@ -101,9 +101,9 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Book>> {
      * Returns the book card handle of a book associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getPersonCardHandle(int index) {
+    public BookCardHandle getBookCardHandle(int index) {
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
+                .map(BookCardHandle::new)
                 .filter(handle -> handle.equals(getPerson(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
@@ -129,9 +129,9 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Book>> {
         List<Book> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedPersonCard = Optional.empty();
+            lastRememberedSelectedBookCard = Optional.empty();
         } else {
-            lastRememberedSelectedPersonCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedBookCard = Optional.of(selectedItems.get(0));
         }
     }
 
@@ -143,10 +143,10 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Book>> {
         List<Book> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedPersonCard.isPresent();
+            return lastRememberedSelectedBookCard.isPresent();
         } else {
-            return !lastRememberedSelectedPersonCard.isPresent()
-                    || !lastRememberedSelectedPersonCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedBookCard.isPresent()
+                    || !lastRememberedSelectedBookCard.get().equals(selectedItems.get(0));
         }
     }
 

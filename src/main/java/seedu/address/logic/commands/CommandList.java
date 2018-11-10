@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 import java.util.ArrayList;
 
-import seedu.address.model.request.DeleteRequestCommand;
-import seedu.address.model.request.RequestCommand;
-import seedu.address.model.request.ViewRequestCommand;
+import seedu.address.request.requestcommands.DeleteRequestCommand;
+import seedu.address.request.requestcommands.RequestCommand;
+import seedu.address.request.requestcommands.ToggleRequestCommand;
+
 
 
 
@@ -30,11 +31,11 @@ public class CommandList {
         commandList.add(RequestCommand.COMMAND_WORD);
         commandList.add(SelectCommand.COMMAND_WORD);
         commandList.add(SellCommand.COMMAND_WORD);
+        commandList.add(ViewStatisticCommand.COMMAND_WORD);
         commandList.add(StockCommand.COMMAND_WORD);
+        commandList.add(ToggleRequestCommand.COMMAND_WORD);
         commandList.add(UndoCommand.COMMAND_WORD);
         //commandList.add(UndoRequestCommand.COMMAND_WORD);
-        commandList.add(ViewRequestCommand.COMMAND_WORD);
-        commandList.add(ViewStatisticCommand.COMMAND_WORD);
     }
     public ArrayList<String> getAccountantCommands() {
         commandList.remove(AddCommand.COMMAND_WORD);
@@ -46,9 +47,9 @@ public class CommandList {
         commandList.remove(CheckCommand.COMMAND_WORD);
         //commandList.add(RedoRequestCommand.COMMAND_WORD);
         commandList.add(RequestCommand.COMMAND_WORD);
-        //commandList.add(UndoRequestCommand.COMMAND_WORD);
-        commandList.add(ViewRequestCommand.COMMAND_WORD);
         commandList.add(ViewStatisticCommand.COMMAND_WORD);
+        //commandList.add(UndoRequestCommand.COMMAND_WORD);
+        commandList.add(ToggleRequestCommand.COMMAND_WORD);
         return commandList;
     }
 

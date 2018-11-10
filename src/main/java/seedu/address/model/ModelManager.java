@@ -130,13 +130,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void undoAddressBook() {
+    public void undoBookInventory() {
         versionedAddressBook.undo();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void redoAddressBook() {
+    public void redoBookInventory() {
         versionedAddressBook.redo();
         indicateAddressBookChanged();
     }

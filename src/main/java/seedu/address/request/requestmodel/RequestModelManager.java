@@ -1,4 +1,4 @@
-package seedu.address.model.request;
+package seedu.address.request.requestmodel;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -13,6 +13,10 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.RequestListChangedEvent;
 import seedu.address.model.UserPrefs;
+import seedu.address.request.ReadOnlyRequests;
+import seedu.address.request.Request;
+import seedu.address.request.RequestList;
+import seedu.address.request.VersionedRequestList;
 
 /**
  * Represents the in-memory requestModel of the BookInventory data.
