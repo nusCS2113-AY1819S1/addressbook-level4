@@ -10,7 +10,7 @@ import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.UniqueCandidateList;
 
 /**
- * Wraps all data at the CandidateBook level
+ * Wraps all data at the CandidateBook level functions
  * Duplicates are not allowed (by .isSameCandidate comparison)
  */
 public class CandidateBook implements ReadOnlyCandidateBook {
@@ -62,7 +62,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     /**
      * Returns true if a candidate with the same identity as {@code candidate} exists in the recruit book.
      */
-    public boolean hasPerson(Candidate candidate) {
+    public boolean hasCandidate(Candidate candidate) {
         requireNonNull(candidate);
         return candidates.contains(candidate);
     }
@@ -71,7 +71,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
      * Adds a candidate to the recruit book.
      * The candidate must not already exist in the recruit book.
      */
-    public void addPerson(Candidate p) {
+    public void addCandidate(Candidate p) {
         candidates.add(p);
     }
 
@@ -81,7 +81,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
      * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the
      * recruit book.
      */
-    public void updatePerson(Candidate target, Candidate editedCandidate) {
+    public void updateCandidate(Candidate target, Candidate editedCandidate) {
         requireNonNull(editedCandidate);
 
         candidates.setCandidate(target, editedCandidate);

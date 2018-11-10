@@ -23,7 +23,7 @@ import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.Company;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCandidateBookCommand and RedoCandidateBookCommand)
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
  * and unit tests for {@code DeleteCompanyCommand}.
  */
 
@@ -48,7 +48,7 @@ public class DeleteCompanyCommandTest {
 
         ModelManager expectedModel = new ModelManager(new CandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCompany(companyToDelete);
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(deleteCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -75,7 +75,7 @@ public class DeleteCompanyCommandTest {
             expectedModel.deleteCompany(company);
         }
 
-        expectedModel.commitCompanyBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(deleteCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
     }

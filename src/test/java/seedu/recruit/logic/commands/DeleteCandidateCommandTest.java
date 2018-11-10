@@ -26,7 +26,7 @@ import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCandidateBookCommand and RedoCandidateBookCommand)
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
  * and unit tests for {@code DeleteCandidateCommand}.
  */
 public class DeleteCandidateCommandTest {
@@ -46,7 +46,7 @@ public class DeleteCandidateCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(deleteCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -74,7 +74,7 @@ public class DeleteCandidateCommandTest {
             expectedModel.deleteCandidate(candidate);
         }
 
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(deleteCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -100,7 +100,7 @@ public class DeleteCandidateCommandTest {
 
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -126,20 +126,20 @@ public class DeleteCandidateCommandTest {
         DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         // delete -> first candidate deleted
         deleteCandidateCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts Candidatebook back to previous state and filtered candidate list to show all persons
-        expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.undoRecruitBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first candidate deleted again
-        expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.redoRecruitBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -152,10 +152,10 @@ public class DeleteCandidateCommandTest {
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // single recruit book state in model -> undoCommand and redoCommand fail
-        assertCommandFailure(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_FAILURE);
-        assertCommandFailure(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_FAILURE);
     }
 
     /**
@@ -163,7 +163,7 @@ public class DeleteCandidateCommandTest {
      * 2. Undo the deletion.
      * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted candidate in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the deletion. This ensures {@code RedoCandidateBookCommand} deletes the candidate object regardless of
+     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the candidate object regardless of
      * indexing.
      */
     @Test
@@ -175,21 +175,21 @@ public class DeleteCandidateCommandTest {
         showPersonAtIndex(model, INDEX_SECOND);
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
         expectedModel.deleteCandidate(candidateToDelete);
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         // delete -> deletes second candidate in unfiltered candidate list / first candidate in filtered candidate list
         deleteCandidateCommand.execute(model, commandHistory, userPrefs);
 
         // undo -> reverts addressbook back to previous state and filtered candidate list to show all persons
-        expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
-                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.undoRecruitBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory,
+                UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(candidateToDelete, model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second candidate in unfiltered candidate list
-        expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
-                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.redoRecruitBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory,
+                RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test

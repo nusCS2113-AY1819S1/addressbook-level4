@@ -23,7 +23,7 @@ public class ClearCandidateBookCommand extends Command {
         requireNonNull(model);
         EventsCenter.getInstance().post(new FocusOnCandidateBookRequestEvent());
         model.resetCandidateData(new CandidateBook());
-        model.commitCandidateBook();
+        model.commitRecruitBook();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

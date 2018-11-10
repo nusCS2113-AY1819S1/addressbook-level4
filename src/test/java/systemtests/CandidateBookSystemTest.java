@@ -3,6 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.recruit.ui.MainWindow.WELCOME_MESSAGE;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_INITIAL;
 import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_UPDATED;
 import static seedu.recruit.ui.StatusBarFooter.TOTAL_CANDIDATES_STATUS;
@@ -309,8 +310,7 @@ public abstract class CandidateBookSystemTest {
      */
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
-        assertEquals("RecruitBook is password-protected.\n"
-                + "Enter admin password to continue.", getResultDisplay().getText());
+        assertEquals(WELCOME_MESSAGE, getResultDisplay().getText());
         assertListMatching(getCandidateDetailsPanel(), getModel().getFilteredCandidateList());
         assertEquals(Paths.get(".").resolve(testApp.getCandidateStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());

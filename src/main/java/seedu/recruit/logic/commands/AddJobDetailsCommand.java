@@ -47,6 +47,7 @@ public class AddJobDetailsCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "New added job offer: %1$s\n"
+            + "You can undo this action by entering 'undo'\n"
             + "(Enter details of another job offer to add or enter 'cancel' to stop adding.)";;
     public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the Company";
     public static final String MESSAGE_COMPANY_NOT_FOUND = "Company not found in CompanyBook.\n"
@@ -73,7 +74,7 @@ public class AddJobDetailsCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_JOB_OFFER);
         }
         model.addJobOffer(toAdd);
-        model.commitCompanyBook();
+        model.commitRecruitBook();
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(
                 model.getFilteredCompanyJobList().size()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

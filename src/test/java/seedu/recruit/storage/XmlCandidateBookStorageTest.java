@@ -85,14 +85,14 @@ public class XmlCandidateBookStorageTest {
         assertEquals(original, new CandidateBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
+        original.addCandidate(HOON);
         original.removeCandidate(ALICE);
         xmlCandidateBookStorage.saveCandidateBook(original, filePath);
         readBack = xmlCandidateBookStorage.readCandidateBook(filePath).get();
         assertEquals(original, new CandidateBook(readBack));
 
         //Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addCandidate(IDA);
         xmlCandidateBookStorage.saveCandidateBook(original); //file path not specified
         readBack = xmlCandidateBookStorage.readCandidateBook().get(); //file path not specified
         assertEquals(original, new CandidateBook(readBack));

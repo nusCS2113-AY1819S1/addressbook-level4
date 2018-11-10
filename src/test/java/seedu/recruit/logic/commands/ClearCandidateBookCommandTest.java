@@ -20,7 +20,7 @@ public class ClearCandidateBookCommandTest {
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(new ClearCandidateBookCommand(), model, commandHistory,
                 ClearCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
@@ -31,7 +31,7 @@ public class ClearCandidateBookCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
         expectedModel.resetCandidateData(new CandidateBook());
-        expectedModel.commitCandidateBook();
+        expectedModel.commitRecruitBook();
 
         assertCommandSuccess(new ClearCandidateBookCommand(), model, commandHistory,
                 ClearCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);

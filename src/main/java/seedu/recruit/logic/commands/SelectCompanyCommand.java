@@ -7,10 +7,10 @@ import java.util.List;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.FocusOnCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.JumpToCompanyListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -63,7 +63,9 @@ public class SelectCompanyCommand extends Command {
 
         if (ShortlistCandidateInitializationCommand.isShortlisting()) {
             EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
-            LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST);
+            EventsCenter.getInstance()
+                    .post(new ChangeLogicStateEvent(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST));
+
             return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS,
                     targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
                     + SelectJobCommand.MESSAGE_USAGE);
@@ -71,7 +73,8 @@ public class SelectCompanyCommand extends Command {
 
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
             EventsCenter.getInstance().post(new JumpToCompanyListRequestEvent(targetIndex));
-            LogicManager.setLogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE);
+            EventsCenter.getInstance()
+                    .post(new ChangeLogicStateEvent(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST_DELETE));
             return new CommandResult(String.format(MESSAGE_SELECT_COMPANY_SUCCESS,
                     targetIndex.getOneBased()) + MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
                     + SelectJobCommand.MESSAGE_USAGE);

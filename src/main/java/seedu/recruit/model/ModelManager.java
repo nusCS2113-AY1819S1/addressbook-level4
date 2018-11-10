@@ -29,8 +29,7 @@ import seedu.recruit.model.joboffer.JobOffer;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedCandidateBook versionedCandidateBook;
-    private final VersionedCompanyBook versionedCompanyBook;
+    private final VersionedRecruitBook versionedRecruitBook;
     private final FilteredList<Candidate> filteredCandidates;
     private final FilteredList<Company> filteredCompanies;
     private final FilteredList<JobOffer> filteredJobs;
@@ -47,11 +46,10 @@ public class ModelManager extends ComponentManager implements Model {
                 + " and user prefs " + userPrefs);
 
         EmailUtil.setEmailSettings(userPrefs.getEmailSettings());
-        versionedCandidateBook = new VersionedCandidateBook(candidateBook);
-        versionedCompanyBook = new VersionedCompanyBook(companyBook);
-        filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidateList());
-        filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
-        filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
+        versionedRecruitBook = new VersionedRecruitBook(candidateBook, companyBook);
+        filteredCandidates = new FilteredList<>(versionedRecruitBook.getCandidateList());
+        filteredCompanies = new FilteredList<>(versionedRecruitBook.getCompanyList());
+        filteredJobs = new FilteredList<>(versionedRecruitBook.getCompanyJobList());
         emailUtil = new EmailUtil();
         if (userPrefs.getHashedPassword() != null) {
             hideAll();
@@ -93,47 +91,78 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedCandidateBook.equals(other.versionedCandidateBook)
+        return versionedRecruitBook.equals(other.versionedRecruitBook)
                 && filteredCandidates.equals(other.filteredCandidates)
-                && versionedCompanyBook.equals(other.versionedCompanyBook)
+                && versionedRecruitBook.equals(other.versionedRecruitBook)
                 && filteredCompanies.equals(other.filteredCompanies);
+    }
+
+    // =========== RecruitBook-level functions ============================================================ //
+
+    @Override
+    public boolean canUndoRecruitBook() {
+        return versionedRecruitBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoRecruitBook() {
+        return versionedRecruitBook.canRedo();
+    }
+
+    @Override
+    public void undoRecruitBook() {
+        versionedRecruitBook.undo();
+        indicateCandidateBookChanged();
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void redoRecruitBook() {
+        versionedRecruitBook.redo();
+        indicateCandidateBookChanged();
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void commitRecruitBook() {
+        versionedRecruitBook.commit();
     }
 
     // ================================== CandidateBook functions ====================================== //
 
     @Override
     public void resetCandidateData(ReadOnlyCandidateBook newData) {
-        versionedCandidateBook.resetData(newData);
+        versionedRecruitBook.setCandidates(newData.getCandidateList());
         indicateCandidateBookChanged();
     }
 
     @Override
     public ReadOnlyCandidateBook getCandidateBook() {
-        return versionedCandidateBook;
+        return versionedRecruitBook.getCandidateBook();
     }
 
     /**
      * Raises an event to indicate the model has changed
      */
     private void indicateCandidateBookChanged() {
-        raise(new CandidateBookChangedEvent(versionedCandidateBook));
+        raise(new CandidateBookChangedEvent(versionedRecruitBook.getCandidateBook()));
     }
 
     @Override
     public boolean hasCandidate(Candidate candidate) {
         requireNonNull(candidate);
-        return versionedCandidateBook.hasPerson(candidate);
+        return versionedRecruitBook.hasCandidate(candidate);
     }
 
     @Override
     public void deleteCandidate(Candidate target) {
-        versionedCandidateBook.removeCandidate(target);
+        versionedRecruitBook.removeCandidate(target);
         indicateCandidateBookChanged();
     }
 
     @Override
     public void addCandidate(Candidate candidate) {
-        versionedCandidateBook.addPerson(candidate);
+        versionedRecruitBook.addCandidate(candidate);
         updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
         indicateCandidateBookChanged();
     }
@@ -141,28 +170,28 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateCandidate(Candidate target, Candidate editedCandidate) {
         requireAllNonNull(target, editedCandidate);
-        versionedCompanyBook.cascadeJobListWithEditedCandidate(target, editedCandidate);
-        versionedCandidateBook.updatePerson(target, editedCandidate);
+        versionedRecruitBook.cascadeJobListWithEditedCandidate(target, editedCandidate);
+        versionedRecruitBook.updateCandidate(target, editedCandidate);
         indicateCandidateBookChanged();
         indicateCompanyBookChanged();
     }
 
     @Override
     public void sortCandidates(Prefix prefix) {
-        versionedCandidateBook.sortCandidates(prefix);
+        versionedRecruitBook.sortCandidates(prefix);
         indicateCandidateBookChanged();
     }
 
     @Override
     public ObservableList<Candidate> getMasterCandidateList() {
-        return versionedCandidateBook.getCandidateList();
+        return versionedRecruitBook.getCandidateList();
     }
 
     // =========== Filtered Candidate List Accessors =================================================== //
 
     /**
      * Returns an unmodifiable view of the list of {@code Candidate} backed by the internal list of
-     * {@code versionedCandidateBook}
+     * {@code versionedRecruitBook}
      */
     @Override
     public ObservableList<Candidate> getFilteredCandidateList() {
@@ -175,110 +204,84 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCandidates.setPredicate(predicate);
     }
 
-    // =========== Undo/Redo Candidate Book ============================================================ //
 
-    @Override
-    public boolean canUndoCandidateBook() {
-        return versionedCandidateBook.canUndo();
-    }
-
-    @Override
-    public boolean canRedoCandidateBook() {
-        return versionedCandidateBook.canRedo();
-    }
-
-    @Override
-    public void undoCandidateBook() {
-        versionedCandidateBook.undo();
-        indicateCandidateBookChanged();
-    }
-
-    @Override
-    public void redoCandidateBook() {
-        versionedCandidateBook.redo();
-        indicateCandidateBookChanged();
-    }
-
-    @Override
-    public void commitCandidateBook() {
-        versionedCandidateBook.commit();
-    }
 
 
     // ================================== CompanyBook functions ======================================== //
 
     @Override
     public void resetCompanyData(ReadOnlyCompanyBook newData) {
-        versionedCompanyBook.resetData(newData);
+        versionedRecruitBook.setCompanyList(newData.getCompanyList());
+        versionedRecruitBook.setCompanyJobList(newData.getCompanyJobList());
         indicateCompanyBookChanged();
     }
 
     @Override
     public ReadOnlyCompanyBook getCompanyBook() {
-        return versionedCompanyBook;
+        return versionedRecruitBook.getCompanyBook();
     }
 
     /**
      * Raises an event to indicate the model has changed
      */
     private void indicateCompanyBookChanged() {
-        raise(new CompanyBookChangedEvent(versionedCompanyBook));
+        raise(new CompanyBookChangedEvent(versionedRecruitBook.getCompanyBook()));
     }
 
     @Override
     public boolean hasCompany(Company company) {
         requireNonNull(company);
-        return versionedCompanyBook.hasCompany(company);
+        return versionedRecruitBook.hasCompany(company);
     }
 
     @Override
     public void deleteCompany(Company target) {
-        versionedCompanyBook.removeCompany(target);
+        versionedRecruitBook.removeCompany(target);
         indicateCompanyBookChanged();
     }
 
     @Override
     public void addCompany(Company company) {
-        versionedCompanyBook.addCompany(company);
+        versionedRecruitBook.addCompany(company);
         updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
         indicateCompanyBookChanged();
     }
 
     @Override
     public int getCompanyIndexFromName(CompanyName companyName) {
-        return versionedCompanyBook.getCompanyIndexFromName(companyName);
+        return versionedRecruitBook.getCompanyIndexFromName(companyName);
     }
 
     @Override
     public Company getCompanyFromIndex(int index) {
-        return versionedCompanyBook.getCompanyFromIndex(index);
+        return versionedRecruitBook.getCompanyFromIndex(index);
     }
 
     @Override
     public void updateCompany(Company target, Company editedCompany) {
         requireAllNonNull(target, editedCompany);
 
-        versionedCompanyBook.updateCompany(target, editedCompany);
+        versionedRecruitBook.updateCompany(target, editedCompany);
         indicateCompanyBookChanged();
     }
 
     @Override
     public void sortCompanies(Prefix prefix) {
-        versionedCompanyBook.sortCompanies(prefix);
+        versionedRecruitBook.sortCompanies(prefix);
         indicateCompanyBookChanged();
     }
 
     @Override
     public void cascadeToJobOffers(CompanyName targetName, CompanyName editedName) {
-        versionedCompanyBook.cascadeJobListWithEditedCompanyName(targetName, editedName);
+        versionedRecruitBook.cascadeJobListWithEditedCompanyName(targetName, editedName);
         indicateCompanyBookChanged();
     }
 
     // =========== Filtered Company List Accessors ===================================================== //
 
     /**
-     * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
-     * {@code versionedCompanyBook}
+     * Returns an unmodifiable view of the list of {@code Company} backed by the internal companybook list of
+     * {@code versionedRecruitBook}
      */
     @Override
     public ObservableList<Company> getFilteredCompanyList() {
@@ -291,79 +294,51 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCompanies.setPredicate(predicate);
     }
 
-    // ========== Undo/Redo Company Book =============================================================== //
-
-    @Override
-    public boolean canUndoCompanyBook() {
-        return versionedCompanyBook.canUndo();
-    }
-
-    @Override
-    public boolean canRedoCompanyBook() {
-        return versionedCompanyBook.canRedo();
-    }
-
-    @Override
-    public void undoCompanyBook() {
-        versionedCompanyBook.undo();
-        indicateCompanyBookChanged();
-    }
-
-    @Override
-    public void redoCompanyBook() {
-        versionedCompanyBook.redo();
-        indicateCompanyBookChanged();
-    }
-
-    @Override
-    public void commitCompanyBook() {
-        versionedCompanyBook.commit();
-    }
 
     // ================================== Job Offer functions ========================================== //
 
     @Override
     public void addJobOffer(JobOffer jobOffer) {
         requireAllNonNull(jobOffer);
-        versionedCompanyBook.addJobOffer(jobOffer);
+        versionedRecruitBook.addJobOffer(jobOffer);
         indicateCompanyBookChanged();
     }
 
     @Override
     public boolean hasJobOffer(JobOffer jobOffer) {
         requireAllNonNull(jobOffer);
-        return versionedCompanyBook.hasJobOffer(jobOffer);
+        return versionedRecruitBook.hasJobOffer(jobOffer);
     }
 
     @Override
     public void updateJobOfferInCompanyBook(JobOffer target, JobOffer editedJobOffer) {
         requireAllNonNull(target, editedJobOffer);
-        versionedCompanyBook.updateJobOffer(target, editedJobOffer);
+        versionedRecruitBook.updateJobOffer(target, editedJobOffer);
     }
 
     @Override
     public void deleteJobOffer(JobOffer jobOffer) {
         requireNonNull(jobOffer);
-        versionedCompanyBook.removeJobOffer(jobOffer);
+        versionedRecruitBook.removeJobOffer(jobOffer);
         indicateCompanyBookChanged();
     }
 
     @Override
     public void sortJobOffers(Prefix prefix) {
-        versionedCompanyBook.sortJobOffers(prefix);
+        versionedRecruitBook.sortJobOffers(prefix);
         indicateCompanyBookChanged();
     }
 
     @Override
     public ObservableList<JobOffer> getMasterJobList() {
-        return versionedCompanyBook.getCompanyJobList();
+        return versionedRecruitBook.getCompanyJobList();
     }
 
     // =========== Filtered Company Job List Accessors ===================================================== //
 
     /**
-     * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
-     * {@code versionedCompanyBook}
+     * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal
+     * company job list of {@code versionedRecruitBook}
      */
     @Override
     public ObservableList<JobOffer> getFilteredCompanyJobList() {
