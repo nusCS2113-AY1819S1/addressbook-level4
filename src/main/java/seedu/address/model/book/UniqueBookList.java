@@ -18,7 +18,7 @@ import seedu.address.model.book.exceptions.DuplicateBookException;
 /**
  * A list of books that enforces uniqueness between its elements and does not allow nulls.
  * A book is considered unique by comparing using {@code Book#isSameBook(Book)}. As such, adding and updating of
- * persons uses Book#isSameBook(Book) for equality so as to ensure that the book being added or updated is
+ * books uses Book#isSameBook(Book) for equality so as to ensure that the book being added or updated is
  * unique in terms of identity in the UniqueBookList. However, the removal of a book uses Book#equals(Object) so
  * as to ensure that the book with exactly the same fields will be removed.
  *
@@ -125,7 +125,7 @@ public class UniqueBookList implements Iterable<Book> {
     public Queue<String> getIsbnList(String isbnText) {
         for (Book book : internalList) {
             String isbn = book.getIsbn().value;
-            if (isbn.contains(isbnText)) {
+            if (isbn.startsWith(isbnText)) {
                 isbnList.add(isbn);
             }
         }

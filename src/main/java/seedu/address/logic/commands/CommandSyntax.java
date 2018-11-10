@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.request.DeleteRequestCommand;
-import seedu.address.model.request.RequestCommand;
-import seedu.address.model.request.ViewRequestCommand;
+import seedu.address.request.requestcommands.DeleteRequestCommand;
+import seedu.address.request.requestcommands.RequestCommand;
+import seedu.address.request.requestcommands.ToggleRequestCommand;
 
 /**
  * A static class to return syntax and message usage of command words
@@ -43,10 +43,10 @@ public class CommandSyntax {
             return SellCommand.COMMAND_SYNTAX;
         case StockCommand.COMMAND_WORD:
             return StockCommand.COMMAND_SYNTAX;
+        case ToggleRequestCommand.COMMAND_WORD:
+            return ToggleRequestCommand.COMMAND_WORD;
         case UndoCommand.COMMAND_WORD:
             return UndoCommand.COMMAND_WORD;
-        case ViewRequestCommand.COMMAND_WORD:
-            return ViewRequestCommand.COMMAND_WORD;
         case ViewStatisticCommand.COMMAND_WORD:
             return ViewStatisticCommand.COMMAND_WORD;
         default:
@@ -88,9 +88,9 @@ public class CommandSyntax {
             return SellCommand.MESSAGE_USAGE;
         case StockCommand.COMMAND_WORD:
             return StockCommand.MESSAGE_USAGE;
-        case UndoCommand.COMMAND_WORD:
+        case ToggleRequestCommand.COMMAND_WORD:
             return "";
-        case ViewRequestCommand.COMMAND_WORD:
+        case UndoCommand.COMMAND_WORD:
             return "";
         case ViewStatisticCommand.COMMAND_WORD:
             return "";

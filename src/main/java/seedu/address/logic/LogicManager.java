@@ -17,13 +17,13 @@ import seedu.address.logic.parser.DiceCoefficient;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
-import seedu.address.model.request.CommandSecondary;
-import seedu.address.model.request.DeleteRequestCommand;
-import seedu.address.model.request.Request;
-import seedu.address.model.request.RequestCommand;
-import seedu.address.model.request.RequestListParser;
-import seedu.address.model.request.RequestModel;
-import seedu.address.model.request.UndoRequestCommand;
+import seedu.address.request.Request;
+import seedu.address.request.requestcommands.CommandSecondary;
+import seedu.address.request.requestcommands.DeleteRequestCommand;
+import seedu.address.request.requestcommands.RequestCommand;
+import seedu.address.request.requestcommands.UndoRequestCommand;
+import seedu.address.request.requestmodel.RequestModel;
+import seedu.address.request.requestparser.RequestListParser;
 
 /**
  * The main LogicManager of the app.
@@ -58,7 +58,6 @@ public class LogicManager extends ComponentManager implements Logic {
             && (history.getHistory().get(getHistoryList().size() - 1).contains("request")))) {
             CommandSecondary command = requestListParser.parseCommandRequest(commandText);
             history.add(commandText);
-            System.out.println(history.getHistory().get(getHistoryList().size() - 1));
             return command.execute(requestModel, history);
         } else {
             try {

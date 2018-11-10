@@ -143,7 +143,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the book at the given {@code targetIndex} in the
      * {@code model}'s BookInventory.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showBookAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredBookList().size());
 
         Book book = model.getFilteredBookList().get(targetIndex.getZeroBased());
@@ -156,7 +156,7 @@ public class CommandTestUtil {
     /**
      * Deletes the first book in {@code model}'s filtered list from {@code model}'s BookInventory.
      */
-    public static void deleteFirstPerson(Model model) {
+    public static void deleteFirstBook(Model model) {
         Book firstBook = model.getFilteredBookList().get(0);
         model.deleteBook(firstBook);
         model.commitBookInventory();

@@ -1,4 +1,4 @@
-package seedu.address.model.request;
+package seedu.address.request;
 
 import javafx.collections.ObservableList;
 
@@ -8,8 +8,8 @@ import javafx.collections.ObservableList;
 public interface ReadOnlyRequests {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the requests list.
+     * This list will not contain any duplicate requests.
      */
     ObservableList<Request> getRequestList();
 

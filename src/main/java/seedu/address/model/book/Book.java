@@ -89,8 +89,8 @@ public class Book {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both books of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two books.
      */
     public boolean isSameBook(Book otherBook) {
         if (otherBook == this) {
@@ -103,7 +103,7 @@ public class Book {
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two books.
      */
     @Override
     public boolean equals(Object other) {

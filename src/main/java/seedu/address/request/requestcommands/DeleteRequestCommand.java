@@ -1,4 +1,4 @@
-package seedu.address.model.request;
+package seedu.address.request.requestcommands;
 
 import static java.util.Objects.requireNonNull;
 
@@ -9,6 +9,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.request.Request;
+import seedu.address.request.requestmodel.RequestModel;
 
 /**
  * Deletes a book identified using it's displayed index from the BookInventory.

@@ -6,12 +6,12 @@ import seedu.address.model.book.Book;
 /**
  * Represents a selection change in the Book List Panel
  */
-public class PersonPanelSelectionChangedEvent extends BaseEvent {
+public class BookPanelSelectionChangedEvent extends BaseEvent {
 
 
     private final Book newSelection;
 
-    public PersonPanelSelectionChangedEvent(Book newSelection) {
+    public BookPanelSelectionChangedEvent(Book newSelection) {
         this.newSelection = newSelection;
     }
 

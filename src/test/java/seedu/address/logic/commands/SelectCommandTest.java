@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showBookAtIndex;
 import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
@@ -36,11 +36,11 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Index lastPersonIndex = Index.fromOneBased(model.getFilteredBookList().size());
+        Index lastBookIndex = Index.fromOneBased(model.getFilteredBookList().size());
 
         assertExecutionSuccess(INDEX_FIRST_BOOK);
         assertExecutionSuccess(INDEX_THIRD_BOOK);
-        assertExecutionSuccess(lastPersonIndex);
+        assertExecutionSuccess(lastBookIndex);
     }
 
     @Test
@@ -52,16 +52,16 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_BOOK);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_BOOK);
+        showBookAtIndex(model, INDEX_FIRST_BOOK);
+        showBookAtIndex(expectedModel, INDEX_FIRST_BOOK);
 
         assertExecutionSuccess(INDEX_FIRST_BOOK);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_BOOK);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_BOOK);
+        showBookAtIndex(model, INDEX_FIRST_BOOK);
+        showBookAtIndex(expectedModel, INDEX_FIRST_BOOK);
 
         Index outOfBoundsIndex = INDEX_SECOND_BOOK;
         // ensures that outOfBoundIndex is still in bounds of BookInventory list
@@ -98,7 +98,7 @@ public class SelectCommandTest {
      */
     private void assertExecutionSuccess(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);
-        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_BOOK_SUCCESS, index.getOneBased());
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 

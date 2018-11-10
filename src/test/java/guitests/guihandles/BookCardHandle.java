@@ -13,7 +13,7 @@ import seedu.address.model.book.Book;
 /**
  * Provides a handle to a book card in the book list panel.
  */
-public class PersonCardHandle extends NodeHandle<Node> {
+public class BookCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String QUANTITY_FIELD_ID = "#quantity";
@@ -28,7 +28,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private final Label priceLabel;
     private final List<Label> tagLabels;
 
-    public PersonCardHandle(Node cardNode) {
+    public BookCardHandle(Node cardNode) {
         super(cardNode);
 
         idLabel = getChildNode(ID_FIELD_ID);

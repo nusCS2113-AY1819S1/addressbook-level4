@@ -107,6 +107,9 @@ public class CommandBox extends UiPart<Region> {
      */
     private void navigateToNextIsbn() {
         String curr = commandTextField.getText();
+        if (curr.trim().isEmpty() || !curr.contains("i/")) {
+            return;
+        }
         String isbnText = curr.substring(curr.indexOf("i/") + LENGTH_OF_PREFIX);
         String isbn;
         raise(new NewResultAvailableEvent(""));
@@ -121,8 +124,9 @@ public class CommandBox extends UiPart<Region> {
             isbnList = logic.getCompleteIsbn(isbnText);
         }
         isbn = isbnList.peek();
+
         // Adds the isbn found to the end of the original string if user left the field empty
-        // Replaces the substring to the full isbn containing it if complete string is founf
+        // Replaces the substring to a full isbn containing it if complete string is found
         if (isbnText.isEmpty()) {
             replaceText(curr + isbn);
         } else if (isbn != null) {

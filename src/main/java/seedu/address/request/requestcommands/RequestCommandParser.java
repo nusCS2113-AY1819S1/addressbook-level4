@@ -1,4 +1,4 @@
-package seedu.address.model.request;
+package seedu.address.request.requestcommands;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -13,8 +13,10 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Quantity;
-
-
+import seedu.address.request.Email;
+import seedu.address.request.Request;
+import seedu.address.request.requestparser.RequestParser;
+import seedu.address.request.requestparser.RequestParserUtil;
 
 
 /**
