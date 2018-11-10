@@ -37,6 +37,7 @@ public class AddCompanyCommand extends Command {
             + PREFIX_PHONE + "61231232 ";
 
     public static final String MESSAGE_SUCCESS = "New added company: %1$s\n"
+            + "You can undo this action by entering 'undo'\n"
             + "(Enter details of another company to add or enter 'cancel' to stop adding.)";;
     public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the CompanyBook";
 
