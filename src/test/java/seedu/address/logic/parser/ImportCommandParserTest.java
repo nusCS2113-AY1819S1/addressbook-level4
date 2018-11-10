@@ -9,14 +9,13 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.ImportCommand;
 
 //@@author jitwei98
 public class ImportCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE);
     private ImportCommandParser parser = new ImportCommandParser();
 
     @Test
