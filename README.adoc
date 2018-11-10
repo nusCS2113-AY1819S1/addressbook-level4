@@ -26,13 +26,14 @@ endif::[]
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
 * <<AboutUs#, About Us>>
+* <<ContactUs#, Contact Us>>
 
 == Acknowledgements
 
 * This application is built upon https://github.com/se-edu/addressbook-level4[Address Book L4] by https://github.com/se-edu[SE-EDU].
 * Some parts of this application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
-* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
+* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5], https://github.com/jfree/jfreechart[JFreeChart]
 
 == Licence : link:LICENSE[MIT]
 

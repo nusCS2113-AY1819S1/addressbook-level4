@@ -1,0 +1,5 @@
+= Contact Us
+:site-section: ContactUs
+:stylesDir: stylesheets
+
+* *Bug reports, Suggestions* : Post in our https://github.com/CS2113-AY1819S1-T09-2/main/issues[issue tracker] if you noticed any bugs or have suggestions on how we can improve Something Daily.
