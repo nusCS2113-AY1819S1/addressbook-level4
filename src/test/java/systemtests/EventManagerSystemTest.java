@@ -236,10 +236,13 @@ public abstract class EventManagerSystemTest {
                     + selectedCardHandle.getVenue().replaceAll(" ", "%20").replaceAll("#", "%23")
                     + "&dateTime="
                     + PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime).replaceAll(" ", "%20")
+                    + "&status="
+                    + selectedCardHandle.getStatus()
                     + "&tags="
                     + selectedCardHandle.getTagsString().replaceAll(" ", "%20")
                     + "&attendance="
                     + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20")
+                        .replaceAll("<br>", "%3Cbr%3E")
                     + "&comment="
                     + selectedCardHandle.getComment().replaceAll("[{]", "%3C")
                     .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));

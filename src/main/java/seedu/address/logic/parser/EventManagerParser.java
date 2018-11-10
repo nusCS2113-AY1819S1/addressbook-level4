@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddCommentCommand;
+import seedu.address.logic.commands.AttendingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -23,11 +24,13 @@ import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RegisterCommand;
+import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.commands.ReplyCommentCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SignupCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnregisterCommand;
+import seedu.address.logic.commands.UpdateStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -109,6 +112,9 @@ public class EventManagerParser {
         case UnregisterCommand.COMMAND_WORD:
             return new UnregisterCommandParser().parse(arguments);
 
+        case AttendingCommand.COMMAND_WORD:
+            return new AttendingCommand();
+
         case AddCommentCommand.COMMAND_WORD:
             return new AddCommentCommandParser().parse(arguments);
 
@@ -117,6 +123,12 @@ public class EventManagerParser {
 
         case ReplyCommentCommand.COMMAND_WORD:
             return new ReplyCommentCommandParser().parse(arguments);
+
+        case UpdateStatusCommand.COMMAND_WORD:
+            return new UpdateStatusCommand();
+
+        case ReminderCommand.COMMAND_WORD:
+            return new ReminderCommand();
 
         case ExportCalendarCommand.COMMAND_WORD:
             return new ExportCalendarCommandParser().parse(arguments);

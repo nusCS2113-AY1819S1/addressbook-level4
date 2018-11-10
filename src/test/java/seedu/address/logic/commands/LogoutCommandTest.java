@@ -14,6 +14,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.user.User;
 import seedu.address.testutil.UserBuilder;
 
+//@@ jamesyaputra
 public class LogoutCommandTest {
 
     @Rule

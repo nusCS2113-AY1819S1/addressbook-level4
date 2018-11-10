@@ -45,12 +45,12 @@ I am in charge of develop *automatic sort*, *search* and *export calendar* featu
 
 * *Minor enhancement*: Add new attributes: datetime to the event
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tertium3&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Click here]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
+*** Managed releases `v1.4` (1 release) on GitHub
 ** Enhancements to existing features:
 *** Fix current tests that are affected by default sorting and new attributes
 ** Documentation:

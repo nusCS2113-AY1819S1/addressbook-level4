@@ -115,7 +115,7 @@ This enhancement is tedious as it requires a new field to display the comments i
 *** Ported a huge section of Developer Guide from team's Google docs to the repository's Developer guide.
 
 ** Community:
-*** PRs reviewed by Geraldcdx [https://github.com/CS2113-AY1819S1-T12-1/main/pulls?q=is%3Apr+is%3Aclosed[Github closed PRs]]
+*** PRs reviewed by Geraldcdx [https://github.com/CS2113-AY1819S1-T12-1/main/pulls?q=is%3Apr+author%3Ageraldcdx[Github closed PRs]]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-F10-2/main/issues/101[1], https://github.com/CS2113-AY1819S1-F10-2/main/issues/100[2], https://github.com/CS2113-AY1819S1-F10-2/main/issues/98[3], https://github.com/CS2113-AY1819S1-F10-2/main/issues/106[4])
 ** Tools:
 *** Integrated Reposense into the project

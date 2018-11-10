@@ -254,36 +254,46 @@ Additionally, a `JsonUserStorage` class has been created to handle the reading, 
 
 Given below is an example usage scenario and how authentication behaves at each step.
 
-Step 1. The user launches the application for the first time. The `JsonUserStorage` class will create a default JSON file in `data/users.json` that stores the basic `admin` account information.
+|===
+|Step 1. The user launches the application for the first time. The `JsonUserStorage` class will create a default JSON file in `data/users.json` that stores the basic `admin` account information.
 
-Step 2. The user has the option to create a new account using the command `signup u/USERNAME p/PASSWORD`. This will trigger the method `createUser(user)` in the `Model Manager` class, which is linked to `UserAccount`.
+Step 2. The user has the option to create a new account using the command `signup u/USERNAME p/PASSWORD`. This will trigger the method `createUser(user)` in the `Model Manager` class, which is linked to `UserSession`.
 
 Step 3. The user executes the command `login u/USERNAME p/PASSWORD`. This will trigger the method `userExists(user)` in the `ModelManager` class.
 
-Step 4. `UserAccount` will prompt `JsonUserStorage` to read the JSON file and return to it the JSONObject parsed from the file.
+Step 4. `UserSession` will prompt `JsonUserStorage` to read the JSON file and return to it the JSONObject parsed from the file.
 
-Step 5. `UserAccount` will then compare the logged username and password with the ones stored in the JSON file. If the comparisons return true, the `userExists` method will return true.
+Step 5. `UserSession` will then compare the logged username and password with the ones stored in the JSON file. If the comparisons return true, the `userExists` method will return true.
 
 Step 6. The `currentUser` in the `Command` class will then be set and the login flag will be set to true. If the user is an admin, the admin flag will be set to true as well.
 
 Step 7. After authentication, the user can now start using the application.
 
 Step 8. The user can choose to log out of the application as well with the `logout` command. This command sets the login flag to false and clears `currentUser`.
+|===
 
-The sequence diagram below describes the steps elaborated above.
+The sequence diagrams below describes the steps elaborated above.
 
-image::AuthenticationDiagram.png[width="800"]
+image::SignupDiagram.png[width="800"]
+image::LoginDiagram.png[width="800"]
 
 [NOTE]
 If an authentication fails, i.e. credentials are wrong or do not exist in the JSON file, the `login` command will throw a `CommandException`.
 
-[NOTE]
+[IMPORTANT]
 Only one admin account is registered at any given time, with `admin` and `root` being used as username and password respectively.
 
 ==== Password encryption
 Allows passwords to be encrypted instead of being stored as plain text. Password encryption and validating is done through the `PasswordUtil` class using the _PBKDF2WithHmacSHA1_ encryption algorithm. +
 
 The encrypted password consists of a randomly generated salt and a hash generated from the plain text password, both converted to hexadecimal before being stored inside `users.json`.
+
+==== Design Considerations
+* Instead of encrypting each user's password, we initially considered encrypting the entire `users.json` file instead. However, after careful consideration, we decided that it would be sub-optimal due to the
+inefficiency of having to constantly encypt and decrypt the files while the application is running.
+* Instead of having the authentication feature being a part of the `logic` component, we initially considered having `authentication` as a component of its own, which precedes the entire running of the `MainApp`. However,
+we decided that it would introduce redundancies in the codebase as it requires rewriting a handful of functionalities that are already present within the `logic` component, thus we opted for our current implementation.
+
 // end::authentication[]
 
 // tag::undoredo[]
@@ -413,13 +423,15 @@ The Command Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `Re
 
 Given below is an example usage scenario and how the Comments mechanism behaves at each step.
 
-Step 1. The user launches the application, click on an event or types `select INDEX` into the CLI. The comment section will be seen as the LogicManager#execute("select").
+Step 1. The user launches the application, logs in and click on an event or types `select INDEX` into the CLI. The comment section will be seen along with other details in the `BrowserPanel`
 
 Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. `AddCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into `eventmanager.xml`. This is done by `LogicManager#execute("addComment 1 C/May i ask, what is the attire"`
 
 Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply the comment in step 2. `ReplyCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to reply comment with "Athletic attire", into the comment section and stores the comment section into `eventmanager.xml`
 
 Step 4. The admin executes `deleteComment 1 L/1` to delete a comment at index 1, line 1 of comment section. `DeleteCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to delete "Athletic attire" from the comment section and stores the comment section into `eventmanager.xml`
+
+Step 5. If the admin wants to reset or make a new comment section of an event, the valid command of `edit INDEX C/{span}Comment Section{/span}{ol}{/ol}` can be used
 
 [NOTE]
 ====
@@ -446,17 +458,17 @@ If the user uses the `find` command, the following functions will follow the ind
 ===== Aspect: How comment section is stored
 
 * **Alternative 1 (current choice):** Comment section stored in a single field in `eventmanager.xml`
-** Pros: Easy to parse because one field is used for comment section.
+** Pros: Comment section will be easy to parse because only one field is used for comment section.
 ** Cons: If a developer wants to manipulate specific comments through eventmanager.xml file, there is no functions created for it.
 * **Alternative 2:** Store each comment as a seperate field and extract each comment individually.
 ** Pros: No HTML tags will be stored in the field.
-** Cons: New methods will need to be implemented to make many fields for comments.
+** Cons: New methods or data structures will need to be implemented to make many fields for comments.
 
 ===== Aspect: Data structure to support the comment function commands
 
-* **Alternative 1 (current choice):** Vector is used to store the comment section.
-** Pros: A simple data structure that has vector.add() and vector.delete() to help add comments easily.
-** Cons: Additional code is needed to parse the comment section into a vector.
+* **Alternative 1 (current choice):** A vector is used to store the comment section to add, insert or delete relevant comments.
+** Pros: A simple data structure that has vector.add() and vector.delete() methods to help edit the comment section easily.
+** Cons: Additional method is needed to parse the comment section into a vector.
 * **Alternative 2:** An arrayList or List
 ** Pros: Library functions can help parse the comment section into the arrayList.
 ** Cons: More code is needed to simply insert or delete elements inside the data structure.
@@ -515,10 +527,6 @@ image::registerSD.png[width="800"]
 * **Alternative 2:** Attendance stored in sorted order.
 ** Pros: No need to sort each time an event is reloaded.
 ** Cons: More complexity for inserting in correct location.
-
-==== Future Improvements
-===== Adding `attending` command.
-* Allows users to view all events they have registered for.
 // end::rsvp[]
 
 // tag::sorting[]
@@ -560,7 +568,8 @@ Step 4: The event page is reloaded and display the newly added event in the corr
 `find` can search for any data with the default keywords and . If specific prefix is added, find can search for event that must contain that keyword in that specific field
 
 [NOTE]
-If there are more than 1 prefix of the same type, for example, `find n/new n/dark n/meeting`, this will be automatically combined together, which means this command will be assumed to be the same as `find n/new dark meeting`
+If there are more than 1 prefix of the same type, for example, `find n/new n/dark n/meeting`, this will be automatically combined together, which means this command will be assumed to be the same as `find n/new dark meeting` +
+Current version implementation using logic AND operator for different prefixes choice.
 
 ==== Aspect: How to improve search
 * **Alternative 1 (current choice):** Modify the predicate to display the event that date contains one of the keywords
@@ -569,7 +578,7 @@ If there are more than 1 prefix of the same type, for example, `find n/new n/dar
 
 ==== Future enhancement:
 * Search for contained or exact keywords option
-* Search can include option
+* Search with  both `logic AND and OR operator` with different prefixes
 * Search for time range
 //end::findEnhancement[]
 
@@ -1234,20 +1243,26 @@ _{More to be added}_
 
 For all the use cases below, System refers to the EventManager, Actor refers to the admin/user.
 
-*Use Case: Authentication* +
-MSS (main system success): +
-1. EventManager prompts user for username and password. +
-2. User inputs correct username and password. +
-3. EventManager grants access to User and displays welcome message. +
+// tag::authenticationUsecase[]
+[discrete]
+=== Use Case: Authentication
+*MSS*
+
+. User signs up for an account in the Event Manager. +
+. User logs in by entering correct username and password. +
+. Event Manager grants access to User and displays welcome message. +
 Use case ends.
 
 Extensions: +
-     2a. User inputs incorrect password. +
-	2a1. EventManager denies access to user and displays error message. +
+[none]
+* 2a. User inputs incorrect password.
+[none]
+** 2a1. Event Manager denies access to the user and displays error message. +
 Use Case resumes at step 1.
+// end::authenticationUsecase[]
 
 *Use Case: View events, RSVP and Reminders* +
-MSS (main system success): +
+*MSS* +
 1. User requests for list of events. +
 2. EventManager displays list of events. +
 3. User selects event. +

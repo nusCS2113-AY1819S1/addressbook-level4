@@ -3,6 +3,8 @@ package seedu.address;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -15,11 +17,15 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -75,6 +81,9 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+
+        // Start event status update
+        initStatusUpdate();
     }
 
     /**
@@ -176,6 +185,46 @@ public class MainApp extends Application {
 
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
+    }
+
+    //@@author cqinkai
+    /**
+     * Starts performing the following commands for Events listed in event manager:
+     * 1. Status update by calling {@code UpdateStatusCommand} through {@code updateEventStatus}
+     * 2. Reminders for upcoming events by calling {@code ReminderCommand} through {@code checkEventReminders}
+     * Status update occurs every 300,000 milliseconds (5 minutes).
+     * Event reminders are sent every 36,000,000 milliseconds (6 hours).
+     */
+    private void initStatusUpdate() {
+        Timer timer = new Timer();
+        TimerTask updateEventStatus = new TimerTask() {
+
+            @Override
+            public void run() {
+                try {
+                    CommandResult updateCommandResult = logic.execute("update");
+                } catch (CommandException | ParseException pe) {
+                    // Will never happen
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(updateEventStatus, 300000, 300000);
+
+        TimerTask checkEventReminders = new TimerTask() {
+
+            @Override
+            public void run() {
+                try {
+                    CommandResult reminderCommandResult = logic.execute("reminder");
+                } catch (CommandException | ParseException pe) {
+                    logger.info("No upcoming reminders.");
+                    new NewResultAvailableEvent(pe.getMessage());
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(checkEventReminders, 36000000, 36000000);
     }
 
     @Override

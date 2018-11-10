@@ -35,9 +35,9 @@ public class Event {
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Contact contact, Phone phone, Email email, Venue venue, DateTime datetime, Comment comment,
-                 Set<Tag> tags, Set<Attendee> attendees) {
-        requireAllNonNull(name, contact, phone, email, venue, datetime);
+    public Event(Name name, Contact contact, Phone phone, Email email, Venue venue, DateTime datetime, Status status,
+                 Comment comment, Set<Tag> tags, Set<Attendee> attendees) {
+        requireAllNonNull(name, contact, phone, email, venue, datetime, status);
 
         this.name = name;
         this.contact = contact;
@@ -47,7 +47,7 @@ public class Event {
         this.dateTime = datetime;
         this.tags.addAll(tags);
         this.attendees.addAll(attendees);
-        this.status = new Status(datetime);
+        this.status = status;
         this.comment = comment;
     }
 
@@ -166,7 +166,7 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, contact, phone, email, venue, dateTime, comment, tags, attendees);
+        return Objects.hash(name, contact, phone, email, venue, dateTime, status, comment, tags, attendees);
     }
 
     @Override

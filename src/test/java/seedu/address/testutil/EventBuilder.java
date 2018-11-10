@@ -12,6 +12,7 @@ import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Status;
 import seedu.address.model.event.Venue;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -27,6 +28,7 @@ public class EventBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_VENUE = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DATETIME = "31/12/2018 12:00";
+    public static final String DEFAULT_STATUS = "UPCOMING";
     public static final String DEFAULT_COMMENT = "{span}Comment Section{/span}{ol}{/ol}";
 
     private Name name;
@@ -35,6 +37,7 @@ public class EventBuilder {
     private Email email;
     private Venue venue;
     private DateTime datetime;
+    private Status status;
     private Comment comment;
     private Set<Tag> tags;
     private Set<Attendee> attendees;
@@ -46,6 +49,7 @@ public class EventBuilder {
         email = new Email(DEFAULT_EMAIL);
         venue = new Venue(DEFAULT_VENUE);
         datetime = new DateTime(DEFAULT_DATETIME);
+        status = new Status(DEFAULT_STATUS);
         comment = new Comment(DEFAULT_COMMENT);
         tags = new HashSet<>();
         attendees = new HashSet<>();
@@ -61,6 +65,7 @@ public class EventBuilder {
         email = eventToCopy.getEmail();
         venue = eventToCopy.getVenue();
         datetime = eventToCopy.getDateTime();
+        status = eventToCopy.getStatus();
         comment = eventToCopy.getComment();
 
         tags = new HashSet<>(eventToCopy.getTags());
@@ -157,6 +162,14 @@ public class EventBuilder {
     }
 
     /**
+     * Sets the {@code Status} of the {@code Event} that we are building.
+     */
+    public EventBuilder withStatus(String status) {
+        this.status = new Status(status);
+        return this;
+    }
+
+    /**
      * Sets the {@code Comment} of the {@code Event} that we are building.
      */
     public EventBuilder withComment(String comment) {
@@ -165,6 +178,6 @@ public class EventBuilder {
     }
 
     public Event build() {
-        return new Event(name, contact, phone, email, venue, datetime, comment, tags, attendees);
+        return new Event(name, contact, phone, email, venue, datetime, status, comment, tags, attendees);
     }
 }

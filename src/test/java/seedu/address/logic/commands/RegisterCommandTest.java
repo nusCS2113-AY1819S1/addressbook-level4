@@ -26,8 +26,6 @@ import seedu.address.testutil.UserBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code RegisterCommand}.
  */
-
-
 public class RegisterCommandTest {
     private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();

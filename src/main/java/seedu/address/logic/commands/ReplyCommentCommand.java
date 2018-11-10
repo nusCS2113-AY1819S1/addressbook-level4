@@ -68,9 +68,13 @@ public class ReplyCommentCommand extends Command {
         return this.line;
     }
 
-    public Index getIndex() { return this.index; }
+    public Index getIndex() {
+        return this.index;
+    }
 
-    public void setIndex(Index index) { this.index = index; }
+    public void setIndex(Index index) {
+        this.index = index;
+    }
 
     public String getUsername() {
         return this.username;

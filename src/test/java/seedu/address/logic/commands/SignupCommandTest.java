@@ -20,6 +20,7 @@ import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.UserBuilder;
 
+//@@ jamesyaputra
 public class SignupCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
@@ -216,6 +217,11 @@ public class SignupCommandTest {
         @Override
         public boolean getLoginStatus() {
             return isLogged;
+        }
+
+        @Override
+        public Username getUsername() {
+            return new Username("admin");
         }
     }
 }

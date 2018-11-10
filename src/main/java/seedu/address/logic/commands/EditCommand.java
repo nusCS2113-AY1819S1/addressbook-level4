@@ -32,6 +32,7 @@ import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Status;
 import seedu.address.model.event.Venue;
 import seedu.address.model.tag.Tag;
 
@@ -124,12 +125,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editEventDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         DateTime updatedDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
+        Status eventStatus = new Status(Status.setStatus(updatedDateTime));
         Comment updatedComment = editEventDescriptor.getComment().orElse(eventToEdit.getComment());
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
         Set<Attendee> updatedAttendees = editEventDescriptor.getAttendees().orElse(eventToEdit.getAttendance());
 
         return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedDateTime,
-                updatedComment, updatedTags, updatedAttendees);
+                eventStatus, updatedComment, updatedTags, updatedAttendees);
     }
 
     @Override
@@ -161,6 +163,7 @@ public class EditCommand extends Command {
         private Email email;
         private Venue venue;
         private DateTime dateTime;
+        private Status status;
         private Comment comment;
 
         private Set<Tag> tags;
@@ -239,6 +242,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(dateTime);
         }
 
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
+
         public void setComment(Comment comment) {
             this.comment = comment;
         }
@@ -303,6 +314,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getVenue().equals(e.getVenue())
                     && getDateTime().equals(e.getDateTime())
+                    && getStatus().equals(e.getStatus())
                     && getComment().equals(e.getComment())
                     && getTags().equals(e.getTags())
                     && getAttendees().equals(e.getAttendees());

@@ -74,9 +74,8 @@ public class EditCommandParser implements Parser
             String defaultComments = "{span}Comment Section{/span}{ol}{/ol}";
             if (ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get()).equals(defaultComments)) {
                 editEventDescriptor.setComment(new Comment(defaultComments));
-            }
-            else {
-                throw new ParseException("C/ needs to be C/" + defaultComments + " to reset the comment section.");
+            } else {
+                throw new ParseException("C/ needs to be C/" + defaultComments + "to reset the comment section.");
             }
         }
 

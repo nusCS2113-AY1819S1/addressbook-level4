@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -31,7 +30,6 @@ import net.fortuna.ical4j.util.UidGenerator;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.AttendanceContainsUserPredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.Username;
 
@@ -51,12 +49,12 @@ public class ExportCalendarCommand extends Command {
     public static final String MESSAGE_EXPORT_SUCCESS =
             "%1$d event(s) that you registered for has been successfully exported to your %2$s.ics";
 
-    public static final String MESSAGE_FILE_ERROR = "File %1$s.ics has existed in other folder\n"
-            + "or file has errors and cannot be opened";
+    public static final String MESSAGE_FILE_ERROR = "File %1$s.ics has errors and cannot be opened/created\n"
+            + "or filename is not a current system allowed filename\n";
 
     public static final String MESSAGE_ZERO_EVENT_REGISTERED = "User %1$s has not registered for any event";
 
-    private static final String CALENDAR_FILE_PATH = "data/";
+    private static final String CALENDAR_FILE_PATH = "data\\";
 
     private final String fileName;
 
@@ -75,38 +73,19 @@ public class ExportCalendarCommand extends Command {
 
         //Check if no event has been registered
         if (registeredEventList.size() <= 0) {
-            return new CommandResult(String.format(MESSAGE_ZERO_EVENT_REGISTERED, currentUser.value));
+            throw new CommandException(String.format(MESSAGE_ZERO_EVENT_REGISTERED, currentUser.value));
         }
 
         try {
             exportICalenderFile(registeredEventList, fileName);
         } catch (IOException e) {
-            return new CommandResult(String.format(MESSAGE_FILE_ERROR, fileName));
+            throw new CommandException(String.format(MESSAGE_FILE_ERROR, fileName));
         }
 
         return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, model.getFilteredEventList().size(), fileName));
     }
 
     //*****************************Method related to the new export calendar command********************************
-    /**
-     * Get the current list of event that the current user
-     * @param  model current Event Manager model
-     * @param  currentUser current User
-     * @return an user registered event list
-     */
-    public static ObservableList<Event> getAttendingEventList(Model model, Username currentUser)
-            throws CommandException {
-        requireAllNonNull(model, currentUser);
-        model.updateFilteredEventList(new AttendanceContainsUserPredicate(currentUser));
-
-        //No events has benn register
-        if (model.getFilteredEventList().size() <= 0) {
-            throw new CommandException(MESSAGE_ZERO_EVENT_REGISTERED);
-        }
-
-        return model.getFilteredEventList();
-    }
-
     /**
      * Convert the Event in Event Manager to VEvent type in ical4j to add to iCalendar file
      * @param  registeredEventList current user registered event
@@ -205,13 +184,24 @@ public class ExportCalendarCommand extends Command {
      * @throws IOException when file stream have problems
      */
     public void exportICalenderFile(ObservableList<Event> registeredEventList, String fileName) throws IOException {
-        FileOutputStream fileOut = new FileOutputStream(CALENDAR_FILE_PATH
-                + String.format("%1$s.ics", fileName), false);
+        String outputFilename = CALENDAR_FILE_PATH + String.format("%1$s.ics", fileName);
+        File outputFile = new File(outputFilename);
+
+        //FileOutputStream fileOut = new FileOutputStream(outputFilename, false);
+        FileOutputStream fileOut = new FileOutputStream(outputFile, false);
+
         CalendarOutputter outPutter = new CalendarOutputter();
 
         Calendar calendar = writeToUserCalendar(registeredEventList, fileName);
 
         outPutter.output(calendar, fileOut);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ExportCalendarCommand // instanceof handles nulls
+                && fileName.equals(((ExportCalendarCommand) other).fileName)); // state check
     }
 }
 

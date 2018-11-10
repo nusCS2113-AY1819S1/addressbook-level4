@@ -1,3 +1,4 @@
+//@@author cqinkai
 package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
