@@ -13,6 +13,7 @@ import static seedu.recruit.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.Rule;
 import org.junit.Test;
+
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.events.ui.JumpToCompanyListRequestEvent;

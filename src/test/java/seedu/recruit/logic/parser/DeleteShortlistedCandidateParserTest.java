@@ -14,6 +14,7 @@ import static seedu.recruit.logic.parser.CommandParserTestUtil.assertSortJobComm
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.Test;
+
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.DeleteShortlistedCandidateCommand;
 import seedu.recruit.logic.commands.FilterCompanyCommand;

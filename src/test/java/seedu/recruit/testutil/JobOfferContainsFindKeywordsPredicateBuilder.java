@@ -8,7 +8,6 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
-
 import java.util.HashMap;
 import java.util.List;
 
