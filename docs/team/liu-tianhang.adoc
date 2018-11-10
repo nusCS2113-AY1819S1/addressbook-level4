@@ -1,0 +1,66 @@
+= Liu Tianhang - Project Portfolio
+:product_name : Drink I/O
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: AddressBook - Level 4
+
+---
+
+== Overview
+
+[blue]#DRINK I/O# is a desktop inventory application for small enterprises. The product aims to increase the *productivity* and *efficiency* of companies by digitizing the paperwork.
+
+Most of the user interactions are via CLI, while there exists a GUI created with JavaFX. It is written in Java and has about 10kLoC.
+
+
+== Summary of contributions
+
+* *Major enhancement 1*: Partition command into 3 roles (manager, accountant and stock taker)
+** What it does: Allow 3 roles to do explicit command that only related to their roles(more details are in the https://github.com/CS2113-AY1819S1-W12-4/main/blob/master/docs/UserGuide.adoc[user guide])
+** Justification: This prevents one user from misuse or abuse other user commands. Hence, it increases the security of the application.
+** Highlights: The implementation too was challenging as it required changes to existing initiation,model, storage. SOLID principle are followed.
+
+
+* *Major enhancement 2*: User login
+** What it does: Allows different user to login to the system.
+** Justification: This features increase the security of the product significantly because it restrict the application user to account holder.
+** Highlights: The implementation too was challenging as it required changes to existing initiation and UI. It also create a standalone "addressbook" that stores user information using JSON file.
+I have use javax.crypto and other java function to hashed and verify password. Credits: http://www.appsdeveloperblog.com/encrypt-user-password-example-java/[learning material]
+
+
+* *Minor enhancement*: Create command and command parser for the product
+* *Minor enhancement*: Create individual help window for respective roles.
+
+* *Code contributed*: [https://github.com[Reposense(add later)]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases jar file `v1.3` - `v1.5rc` (3 releases) on GitHub
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#6], https://github.com[#32]
+*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/72[#72], https://github.com/nusCS2113-AY1819S1/forum/issues/43[#43])
+** Tools:
+*** Integrated sceneBuilder and JFoenix to the project (https://github.com/nusCS2113-AY1819S1/forum/issues/11[#11])
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=login]
+
+include::../UserGuide.adoc[tag=account]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=login]

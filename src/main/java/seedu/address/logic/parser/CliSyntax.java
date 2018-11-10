@@ -5,10 +5,6 @@ package seedu.address.logic.parser;
  */
 public class CliSyntax {
 
-    /* Prefix definitions */
-    public static final Prefix PREFIX_NAME = new Prefix("n/");
-
-
     /* Common prefix*/
     public static final Prefix PREFIX_DRINK_NAME = new Prefix ("n/");
 

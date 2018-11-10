@@ -22,6 +22,7 @@ import seedu.address.commons.events.ui.InventoryPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.drink.Drink;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -43,6 +44,9 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+
+    // Stores current selection
+    private Drink drinkSelection;
     @FXML
     private StackPane drinkDetailPanePlaceholder;
 
@@ -154,6 +158,7 @@ public class MainWindow extends UiPart<Stage> {
         batchListPanel = new BatchListPanel(
                 event.getNewSelection().getObservableBatchList());
         batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
+        drinkSelection = event.getNewSelection();
     }
 
     @Subscribe
@@ -161,7 +166,12 @@ public class MainWindow extends UiPart<Stage> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         drinkListPanel = new DrinkListPanel(logic.getFilteredDrinkList());
         drinkListPanelPlaceholder.getChildren().add(drinkListPanel.getRoot());
+        batchListPanel = new BatchListPanel(FXCollections.observableArrayList());
+        batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
+        drinkDetailPane = new DrinkDetailPane(new Drink(null));
+        drinkDetailPanePlaceholder.getChildren().add(drinkDetailPane.getRoot());
     }
+
 
     void hide() {
         primaryStage.hide();

@@ -43,6 +43,12 @@ get instructions and learn to improve your workflow with Drink I/O.
 .  Download the latest `DrinkIO.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Refer to <<login>> to login the product.
++
+image::loginPic/login_page_main.PNG[width="800"]
++
+. After login in, the main window will appear as shown below.
+
 +
 image::Ui.png[width="790"]
 +
@@ -64,6 +70,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Getting Started
 
 // tag::login[]
+[[login]]
 === Logging in
 
 Upon entering starting up the application, you will be met by the login page below:
@@ -96,8 +103,27 @@ To login, you can use either the CLI or GUI to input your `USERNAME` and `PASSWO
 ====
 [example-title]#Examples for CLI input:#
 
-* [example]#`tester 123`#
-* [example]#`stocktaker 123`#
+.Table List of user accounts at first launch or upon reset
+|===
+|user name |password |authentication level
+
+|tester
+|123
+|ADMIN
+
+|manager
+|123
+|MANAGER
+
+|stocktaker
+|123
+|STOCKTAKER
+
+|accountant
+|123
+|ACCOUNTANT
+|===
+
 ====
 [NOTE]
 ====
@@ -106,7 +132,9 @@ The example provided is a default login account for admins. This account is crea
 
 After successfully logging in, a confirmation message would be shown indicating your authentication level:
 
-image::loginPic/login_confirmation.PNG[width="300"]
+image::loginPic/login_confirmation.PNG[width=""]
+
+
 === Logging out
 Logging out of the application will bring you back to the login screen.
 
@@ -131,8 +159,11 @@ account, and in a specific role, you can work with functions that are tailored t
 === Stock Taker
 === Accountant
 === Administrator
+
 //tag::account[]
 == Managing Your {product_name} Account
+*[blue]#_Drink I/O_#* has a login feature. This ensure that every user has to have an account before using the application.
+Hence, it would increase the security of the application.
 
 === Changing your password
 When you receive an account from manager, you want to change the password to increase security.
@@ -150,7 +181,7 @@ image::loginPic/password_change_successful.PNG[width="300"]
 === Create additional account
 As a [red]#manager# or [red]#administrator#, you want to create new account for new employee.
 
-Format:`createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
+Format: `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
 
 `AUTHENTICATION_LEVEL` must be one of:
 
@@ -170,7 +201,7 @@ If create account is successful, a message will be shown:
 image::loginPic/create_new_account_successful.PNG[width="300"]
 ====
 === Delete account
-As a [red]#manager#, you want to delete a account when it is no longer used.
+As a [red]#manager# or [red]#administrator#,, you want to delete a account when it is no longer used.
 Format: `deleteAccount u/USER_NAME`
 [.example]
 ====

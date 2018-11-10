@@ -10,7 +10,6 @@ import seedu.address.model.drink.Drink;
  */
 public class DrinkDetailPane extends UiPart<Region> {
     private static final String FXML = "DrinkDetailPane.fxml";
-    private static final String NO_DRINK_MSG = "No Drink Selected";
     public final Drink drink;
 
     @javafx.fxml.FXML
@@ -42,7 +41,7 @@ public class DrinkDetailPane extends UiPart<Region> {
     public DrinkDetailPane(Drink input) {
         super(FXML);
         this.drink = input;
-        if (drink != null) {
+        if (drink != null && drink.getName() != null) {
             name.setText(drink.getName().toString());
             sellingPrice.setText("$ " + drink.getRetailPrice().toString());
             quantity.setText(Integer.toString(drink.getQuantity().getValue()));
@@ -55,7 +54,14 @@ public class DrinkDetailPane extends UiPart<Region> {
                 earliestBatchDate.setText(drink.getEarliestBatchDate().toString());
                 latestBatchDate.setText(drink.getLatestBatchDate().toString());
             }
+        } else {
+            name.setText("Please select a drink");
+            sellingPrice.setText("");
+            quantity.setText("");
+            costPrice.setText("");
+            batchesInStock.setText("");
+            earliestBatchDate.setText("");
+            latestBatchDate.setText("");
         }
-
     }
 }

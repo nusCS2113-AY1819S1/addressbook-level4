@@ -52,10 +52,23 @@ public class Date {
     }
 
     /**
-     * Returns true if a given string is a valid date value.
+     * Returns true if a given string is in a valid date format.
      */
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a real existing date
+     */
+    public static boolean isExistingDate(String test) {
+        LocalDate tester;
+        try {
+            tester = LocalDate.parse(test, FORMAT);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
