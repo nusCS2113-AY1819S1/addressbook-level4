@@ -20,7 +20,11 @@ public class AgeRange {
     public AgeRange(String ageRangeInput) {
         requireNonNull(ageRangeInput);
         checkArgument(isValidAgeRange(ageRangeInput), MESSAGE_AGE_RANGE_CONSTRAINTS);
-        value = ageRangeInput;
+        String [] ageRange = ageRangeInput.split("-");
+
+        //Reverse ageRange if ageRangeInput is a descending range
+        value = Integer.parseInt(ageRange[0]) > Integer.parseInt(ageRange[1])
+                ? ageRange[1] + "-" + ageRange[0] : ageRangeInput;
     }
 
     /**

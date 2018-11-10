@@ -50,7 +50,7 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
 
-    public static Set<Index> parseIndexSet(String[] indexArgs) throws ParseException {
+    public static Set<Index> parseIndexSet(String... indexArgs) throws ParseException {
         Set<Index> orderedIndexSet = new TreeSet<Index> (new LargestToSmallestIndexComparator());
         for (String index : indexArgs) {
             String[] indexRange = index.split("-");
@@ -65,7 +65,7 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      *         or if user enters an invalid format of arguments.
      */
-    private static Set<Index> parseIndexRange (String ...indexRange) throws ParseException {
+    public static Set<Index> parseIndexRange (String ...indexRange) throws ParseException {
         ArrayList<Integer> integerList = new ArrayList<>();
         Set<Index> indexSet = new HashSet<>();
 
@@ -86,7 +86,7 @@ public class ParserUtil {
      * Parses String @param index to an integer and returns it
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    private static Integer parseIndexStringToInteger(String index) throws ParseException {
+    public static Integer parseIndexStringToInteger(String index) throws ParseException {
         String trimmedIndex = index.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
