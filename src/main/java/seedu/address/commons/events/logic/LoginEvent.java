@@ -2,7 +2,7 @@ package seedu.address.commons.events.logic;
 
 import seedu.address.commons.events.BaseEvent;
 
-/** Indicates the TimeTable in the model has changed*/
+/** Logins event that contains username and password for Security Manager*/
 public class LoginEvent extends BaseEvent {
 
     private String username;
