@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
-    <!-- Group with invalid name field -->
+    <!-- Group with invalid groupName field -->
     <groups>
         <groupName>TUT[1]*</groupName>
         <groupLocation isPrivate="false">E1-01-01</groupLocation>
