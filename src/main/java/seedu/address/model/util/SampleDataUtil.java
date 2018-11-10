@@ -70,7 +70,9 @@ public class SampleDataUtil {
                     new Money("135"), new Category("Clothing"))
         };
     }
+    //@@author
 
+    //@@author arty9
     public static Task[] getSampleTasks() {
         return new Task[] {
             new Task(new TaskName("Milestone 3"), new TaskModule("CS2113"), new TaskDate("01-11"),
@@ -87,6 +89,7 @@ public class SampleDataUtil {
                     new TaskPriority("3"), true),
         };
     }
+    //@@author
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();

@@ -1,3 +1,4 @@
+//@@author arty9
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
@@ -98,6 +99,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.setAll(tasks);
     }
 
+    //@@author SHININGGGG
     /**
      * Get the tasks record on a particular day.
      */
@@ -128,6 +130,7 @@ public class UniqueTaskList implements Iterable<Task> {
         records = it.toString();
         return records;
     }
+    //@@author
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
@@ -136,6 +139,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    //@@author XiaoYunhan
     /**
      * Sort the to-do list based on their deadline.
      */
@@ -170,6 +174,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public void sortDefault() {
         internalList.sort(SortComparator.compareName());
     }
+    //@@author
 
     @Override
     public Iterator<Task> iterator() {
