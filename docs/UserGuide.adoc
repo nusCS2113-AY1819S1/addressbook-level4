@@ -232,10 +232,16 @@ User must choose to either distribute all students equally via Gender or Nationa
 ** `g/0 nat/0` -> Distribution all students randomly into _n_ groups.
 ** `g/1 nat/0` -> Distribution all students randomly into _n_ groups with balanced Gender.
 ** `g/0 nat/1` -> Distribution all students randomly into _n_ groups with balanced Nationality.
-** `g/1 nat/1` -> Distribution all students randomly into _n_ groups with balanced Gender and Nationality. (Coming in v2.0)
+** `g/1 nat/1` -> Distribution all students randomly into _n_ groups with balanced Gender and Nationality. *(Coming in v2.0)*
 ****
 Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
 Shortcut Format: `di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1` +
+
+****
+*Coming in v2.0* +
+
+Distribute feature will be integrating with the Email feature. Details will be shown under Email section.
+****
 
 ==== Command Input Guide ====
 ****
