@@ -95,7 +95,7 @@ public class ScriptCommand extends Command {
             } catch (ParseException | CommandException pe) {
                 String lineNumber = Integer.toString(commandArguments.indexOf(fullCommands) + 1);
                 errorMessage = errorMessage + lineNumber + COMMA;
-                scriptLog.write(lineNumber, pe.getMessage());
+                scriptLog.write(lineNumber, fullCommands, pe.getMessage());
             }
         }
         errorMessage = errorMessage.replaceAll(".$", "");

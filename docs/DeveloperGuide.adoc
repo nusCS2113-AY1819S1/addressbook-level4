@@ -441,53 +441,123 @@ can also provide the lecturers a option to choose their own script folder locati
 `preferences.json` contains a parameter called `scriptFileDirectory` which is used to indicate the scripts folder in
 the main program
 
-* Procedure of ScriptSetup
+Procedure of ScriptSetup
 
-** When the `execute` method is called, the program will get the `scriptFolder` from the `getScriptFileDirectory` function
+Step 1: When the `execute` method is called, the program will get the `scriptFolder` from the `getScriptFileDirectory` function
 and it will then check whether `scriptFolder` is a valid Path name
 
-*** If `scriptFolder` is valid, the program will automatically proceed to generate the path of the `scriptFolder`
+* If `scriptFolder` is valid, the program will automatically proceed to generate the path of the `scriptFolder` and
+the `logsPath` which is the logs folder for the scripts
 
+[NOTE]
+`logsPath` contains all the log files that are generated when there are commands that failed to execute due to the script
+Command
+
+* If `scriptFolder` is invalid, the program will instead use the `defaultScriptFolder` to generate the path of the `scriptFolder` and
+the `logsPath` which is the logs folder for the scripts
+
+* Similarly, if the `preferences.json` is not present, a new preferences.json will be automatically generated with the
+`defaultScriptFolder`
+
+[NOTE]
+`defaultScriptFolder` = `"/scripts/"`
+
+Step 2: The program will execute `createFolder(scriptPath)` and `createFolder(logPath)` to create the scripts folder and
+logs folder respectively if the folder is missing
 
 .Sequence Diagram for the `ScriptSetup` Function
 image::ScriptSetupSequenceDiagram.png[width="800"]
 
+Step 3: The program will add some Sample Scripts File into the scripts folder through `addSampleTextFile` function
 
+.Sequence Diagram for the `addSampleTextFile` Function
+image::AddSampleTextFileSequenceDiagram.png[width="800"]
 
-Step 1: ScriptSetup will be executed by `MainApp` when the program is initialized and the `ScriptSetup` will be
-execute with the parameter containing the default `scripts` folder location.
-
-[NOTE]
- The default scripts folder location is
- obtained from the `preferences.json` file in the main directory
-
-Step 2: `ScriptSetup` will obtain the path of the default script folder by calling `getPath` from the `FileUtil`
-
-Step 3: The `createFolder` function will be called to create a new folder if the `path` does not exist.
-A boolean `isScriptFolderPresent` will be return true if the script folder is present in the project folder and false
-if it is not present inside the project folder
-
-Step 4: If `isScriptFolderPresent` is false, `scriptSetup` will call `addSampleTextFile` which will add some Sample
-Text Files into the scripts folder
-
+Future Implementation[Coming in v2.0]:
+****
+* Provide the user with more options of reading other file types such as csv
+* Allow the user to select a folder outside of the project main directory
+****
 // end::ScriptSetup[]
 
 // tag::ScriptCommand[]
 === ScriptCommand feature
 ==== Current Implementation
 The `ScriptCommand` Feature allows the user to run `scripts` that execute the same command multiples time by importing
-all Command arguments from a specific text file.
+all Command arguments from a specific Text File.
 
-Before the `ScriptCommand` can be executed, there are some prerequisites:
+Prerequisites for `ScriptCommand` :
 
-* There must be a default folder for which all the scripts need to be stored
-* The default location of scripts folder is `root program location` + `/scripts/`
-* All scripts must be of `Text File Format/txt`
+* There must be a default folder for which all the scripts need to be stored.
+* All scripts must be of `Text File Format` or `txt` Extension.
 
-Future Implementation:
+Typical ScriptCommand `script txt/addpersons c/add`
+
+* `script` is the `CommandWord` that is used to differentiate between the different command.
+
+[NOTE]
+`scr` is also a valid `CommandWord`.
+
+* `txt/addpersons` consists two components
+** `txt/` represent the `TextFileName` Prefix which is used to parse the parameter
+** `addpersons` represent the `TextFileName` that you want to execute
+*** `TextFileName` does not include the file extensions E.g `addpersons` not `addpersons.txt`
+*** `Text File` must also be in the script folder if a error will be thrown to the user
+* `c/add` represent the `CommandType` that the user want to run with the scripts
+** `c/` represent the `CommandType` Prefix which is indicate the command to run
+** `add` represent any valid commands that the Student Management System have E.g `delete`,`addgroup`
+
+Procedure of ScriptCommand
+
+[NOTE]
+For the following example below we will be using the `script txt/addpersons c/add` to demonstrate the sequence of the
+ScriptCommand.
+
+Step 1: The user input `script txt/addpersons c/add` into the `CommandBox` of the UI.
+
+Step 2: The `LogicManager` will run the `execute(script txt/addpersons c/add)` and then the `AddressBookParser` will run
+the `parseCommand` function to parse the arguments of the Command.
+
+Step 3: After the program have determined that the `ScriptCommand` is
+selected, the `ScriptCommandParser` will then `parse` the remaining
+arguments `txt/addpersons c/add`.
+
+Step 4: The program check whether the `TextFileName` `addpersons` and `CommandType` `add` is valid before
+calling the `ScriptCommand("addpersons","add")`.
+
+Step 5: `ScriptCommand` will run the `execute` function and create a instance of `AddressBookParser` called `scriptParser`
+
+* The scriptParser is created to parse all the commands that are in the `addpersons` Text File
+
+.Sequence Diagram for the `ScriptCommand` Function
+image::ScriptCommandSequenceDiagram.png[width="800"]
+
+Step 6: `FileUtil` extract all the data line by line in the `addpersons` Text File and return a list of String called
+`commandArguments`
+
+Step 7: Lastly, to execute the all the commands, the `executeMutipleCommand` function will be run
+
+Step 8: In the `executeMutipleCommand` function, a `ScriptLog` constructor will be called to create a Text File in the `logs`
+folder
+
+[NOTE]
+The log file name will be generated as `CommandType_TextFileName`. E.g `add_addpersons.txt`
+
+Step 9: The program will loop though the `commandArguments` which contains the list of commands that the program is going to run
+
+Step 10: Within the loop, if there is an error in executing each of the individual commands, the `ScriptLog` will trigger the `write` function
+which will write the `ExceptionMessage` to the log file that we have previously created in `Step 8`. Furthermore, `errorMessage`
+will also be updated to include the line number in which the Text File failed to execute
+
+Step 11: After the loop has been completed, the `errorMessage` will be return
+
+.Sequence Diagram for the `executeMutipleCommand` Function
+image::ExecuteMutipleCommandSequenceDiagram.png[width="800"]
+
+Future Implementation[Coming in v2.0]:
 ****
-* Provide feedback and logging to users on which command has failed to executed
-* Allow the program to change the scripts default location
+* Improve the Undo/Redo function. Currently, the function only works on one command execution E.g if a Text File contains 100 Add Commands, the current implementation only
+allow the user to Undo and Redo one command only
 ****
 // end::ScriptCommand[]
 
