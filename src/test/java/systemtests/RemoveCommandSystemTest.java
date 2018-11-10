@@ -90,7 +90,7 @@ public class RemoveCommandSystemTest extends AddressBookSystemTest {
                         + PREFIX_FROM + invalidIndex,
                 Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
-        /* --------------------------------- Performing invalid remove operation -------------------------------------- */
+        /* ----------------------------- Performing invalid remove operation ---------------------------------- */
 
         showAllPersons();
         showAllEvents();
