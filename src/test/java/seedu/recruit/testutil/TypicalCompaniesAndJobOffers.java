@@ -52,51 +52,51 @@ public class TypicalCompaniesAndJobOffers {
     // ============================== JOB OFFER ================================================ //
 
     public static final JobOffer CASHIER_AUDI = new JobOfferBuilder().withCompanyName("Audi AG")
-            .withAgeRange("20-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
+            .withAgeRange("20-50").withEducation("OLEVELS").withGender("F").withJob("CashierA")
             .withSalary("2000").withCandidateList(ALICE).build();
 
     public static final JobOffer CASHIER_BENTLEY = new JobOfferBuilder().withCompanyName("Bentley Motors Limited")
-            .withAgeRange("20-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
-            .withSalary("1900").withCandidateList(ALICE).build();
+            .withAgeRange("21-50").withEducation("OLEVELS").withGender("F").withJob("CashierB")
+            .withSalary("2100").withCandidateList(ALICE).build();
 
     public static final JobOffer CASHIER_CHEVROLET = new JobOfferBuilder().withCompanyName("Chevrolet Alpine Motors")
-            .withAgeRange("20-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
-            .withSalary("1500").withCandidateList(ALICE).build();
+            .withAgeRange("22-50").withEducation("OLEVELS").withGender("F").withJob("CashierC")
+            .withSalary("2150").withCandidateList(ALICE).build();
 
     public static final JobOffer CASHIER_DODGE = new JobOfferBuilder().withCompanyName("Dodge Brothers Company")
-            .withAgeRange("20-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
+            .withAgeRange("23-50").withEducation("OLEVELS").withGender("F").withJob("CashierD")
             .withSalary("2200").withCandidateList(ALICE).build();
 
     public static final JobOffer SALESPERSON_AUDI = new JobOfferBuilder().withCompanyName("Audi AG")
-            .withAgeRange("20-35").withEducation("ALEVELS").withGender("M").withJob("Salesperson")
+            .withAgeRange("24-35").withEducation("ALEVELS").withGender("M").withJob("SalespersonA")
             .withSalary("2500").withCandidateList(ALICE).build();
 
     public static final JobOffer SALESPERSON_BENTLEY = new JobOfferBuilder().withCompanyName("Bentley Motors Limited")
-            .withAgeRange("20-35").withEducation("ALEVELS").withGender("F").withJob("Salesperson")
-            .withSalary("3000").withCandidateList(ALICE).build();
+            .withAgeRange("25-35").withEducation("ALEVELS").withGender("F").withJob("SalespersonB")
+            .withSalary("2600").withCandidateList(ALICE).build();
 
     public static final JobOffer SALESPERSON_CHEVROLET = new JobOfferBuilder().withCompanyName("Chevrolet Alpine Motors")
-            .withAgeRange("20-35").withEducation("ALEVELS").withGender("F").withJob("Salesperson")
-            .withSalary("2400").withCandidateList(ALICE).build();
+            .withAgeRange("26-35").withEducation("ALEVELS").withGender("F").withJob("SalespersonC")
+            .withSalary("2700").withCandidateList(ALICE).build();
 
     public static final JobOffer SALESPERSON_DODGE = new JobOfferBuilder().withCompanyName("Dodge Brothers Company")
-            .withAgeRange("20-35").withEducation("ALEVELS").withGender("M").withJob("Salesperson")
+            .withAgeRange("27-35").withEducation("ALEVELS").withGender("M").withJob("SalespersonD")
             .withSalary("2800").withCandidateList(ALICE).build();
 
     public static final JobOffer MANAGER_AUDI = new JobOfferBuilder().withCompanyName("Audi AG")
-            .withAgeRange("25-45").withEducation("BACHELOR").withGender("F").withJob("Manager")
+            .withAgeRange("28-45").withEducation("BACHELOR").withGender("F").withJob("ManagerA")
             .withSalary("4000").withCandidateList(ALICE).build();
 
     public static final JobOffer MANAGER_BENTLEY = new JobOfferBuilder().withCompanyName("Bentley Motors Limited")
-            .withAgeRange("25-45").withEducation("BACHELOR").withGender("F").withJob("Manager")
+            .withAgeRange("29-45").withEducation("BACHELOR").withGender("F").withJob("ManagerB")
             .withSalary("4500").withCandidateList(ALICE).build();
 
     public static final JobOffer MANAGER_CHEVROLET = new JobOfferBuilder().withCompanyName("Chevrolet Alpine Motors")
-            .withAgeRange("25-45").withEducation("BACHELOR").withGender("M").withJob("Manager")
+            .withAgeRange("30-45").withEducation("BACHELOR").withGender("M").withJob("ManagerC")
             .withSalary("5000").withCandidateList(ALICE).build();
 
     public static final JobOffer MANAGER_DODGE = new JobOfferBuilder().withCompanyName("Dodge Brothers Company")
-            .withAgeRange("25-45").withEducation("BACHELOR").withGender("M").withJob("Manager")
+            .withAgeRange("31-45").withEducation("BACHELOR").withGender("M").withJob("ManagerD")
             .withSalary("5500").withCandidateList(ALICE).build();
 
     public static final String KEYWORD_MATCHING_CASHIER = "Cashier"; // A keyword that matches AUDI
