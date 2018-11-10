@@ -1,3 +1,4 @@
+//@@author XiaoYunhan
 package seedu.address.commons.util;
 
 import static junit.framework.TestCase.assertTrue;
@@ -34,7 +35,7 @@ public class SortComparatorTest {
 
     @Test
     public void compareModuleEqualsTest() {
-        Task task = new TaskBuilder(ASSIGNMENT).withModule("CG2040").build();
+        Task task = new TaskBuilder(ASSIGNMENT).withModule("CS2040").build();
         int Result = SortComparator.compareModule().compare(task, TUTORIAL);
         assertTrue(Result == 0);
     }
@@ -56,7 +57,7 @@ public class SortComparatorTest {
     @Test
     public void compareModuleLessTest() {
         Task task = new TaskBuilder(ASSIGNMENT).withModule("CG2027").build();
-        int Result = SortComparator.compareModule().compare(TUTORIAL, task);
+        int Result = SortComparator.compareModule().compare(task, TUTORIAL);
         assertTrue(Result < 0);
     }
 
