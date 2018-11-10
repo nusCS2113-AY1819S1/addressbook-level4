@@ -136,7 +136,7 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
         Date endDate = ParserUtil.parseDate(arg2);
         if (!isDateOrderValid(startDate, endDate)) {
             throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SummaryByDateCommand.MESSAGE_USAGE)));
+                    SummaryByCategoryCommand.MESSAGE_USAGE)));
         }
         return new SummaryByCategoryCommand(startDate, endDate);
     }
