@@ -24,7 +24,7 @@ public class DeleteRequestCommand extends CommandSecondary {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_REQUEST_SUCCESS = "Deleted Request: %1$s";
+    public static final String MESSAGE_DELETE_REQUEST_SUCCESS = "Request deleted successfully!";
 
     private final Index targetIndex;
 
