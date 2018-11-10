@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.Role;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.request.RequestModel;
@@ -32,6 +33,7 @@ public class CommandBoxTest extends GuiUnitTest {
         Model model = new ModelManager();
         RequestModel requestModel = new RequestModelManager();
         Logic logic = new LogicManager(model, requestModel);
+        Role role = new Role(Role.ROLE_ADMIN);
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxHandle = new CommandBoxHandle(getChildNode(commandBox.getRoot(),
@@ -43,13 +45,13 @@ public class CommandBoxTest extends GuiUnitTest {
         errorStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);
         errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
     }
-    /*
+
     @Test
     public void commandBox_startingWithSuccessfulCommand() {
         assertBehaviorForSuccessfulCommand();
         assertBehaviorForFailedCommand();
     }
-    *//*
+
     @Test
     public void commandBox_startingWithFailedCommand() {
         assertBehaviorForFailedCommand();
@@ -60,7 +62,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertBehaviorForFailedCommand();
         assertBehaviorForFailedCommand();
     }
-    */
+
     @Test
     public void commandBox_handleKeyPress() {
         commandBoxHandle.run(COMMAND_THAT_FAILS);
@@ -71,7 +73,7 @@ public class CommandBoxTest extends GuiUnitTest {
         guiRobot.push(KeyCode.A);
         assertEquals(defaultStyleOfCommandBox, commandBoxHandle.getStyleClass());
     }
-    /*
+
     @Test
     public void handleKeyPress_startingWithUp() {
         // empty history
@@ -103,7 +105,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.DOWN, thirdCommand);
         assertInputHistory(KeyCode.DOWN, "");
     }
-*//*
+
     @Test
     public void handleKeyPress_startingWithDown() {
         // empty history
@@ -127,7 +129,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.DOWN, "");
         assertInputHistory(KeyCode.UP, thirdCommand);
     }
-*/
+
     /**
      * Runs a command that fails, then verifies that <br>
      *      - the text remains <br>
