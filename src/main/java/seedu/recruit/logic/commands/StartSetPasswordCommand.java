@@ -2,8 +2,10 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -25,8 +27,8 @@ public class StartSetPasswordCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) throws CommandException {
         requireNonNull(model);
+        EventsCenter.getInstance().post(new ChangeLogicStateEvent(SetPasswordCommand.COMMAND_WORD));
 
-        LogicManager.setLogicState(SetPasswordCommand.COMMAND_WORD);
         return new CommandResult(SetPasswordCommand.MESSAGE_USAGE);
     }
 }

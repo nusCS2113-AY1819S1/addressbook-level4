@@ -3,9 +3,10 @@ package seedu.recruit.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.storage.UserPrefsChangedEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -47,7 +48,7 @@ public class SetPasswordCommand extends Command {
             return new CommandResult(MESSAGE_CONFIRM_PASSWORD);
         } else if (enteredPassword.equals(newPassword)) {
             userPrefs.setHashedPassword(newPassword);
-            LogicManager.setLogicState("primary");
+            EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
             EventsCenter.getInstance().post(new UserPrefsChangedEvent(userPrefs));
 
             return new CommandResult(MESSAGE_SUCCESS);

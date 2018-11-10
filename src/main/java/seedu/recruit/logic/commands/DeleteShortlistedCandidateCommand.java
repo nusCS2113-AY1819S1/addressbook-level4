@@ -5,10 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -55,7 +57,8 @@ public class DeleteShortlistedCandidateCommand extends Command {
 
         // If there are no candidates inside the list of shortlisted candidates.
         if (selectedJob.getObservableCandidateList().isEmpty()) {
-            LogicManager.setLogicState("primary");
+            EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
+
             return new CommandResult(MESSAGE_EMPTY_LIST);
         }
 
@@ -75,8 +78,8 @@ public class DeleteShortlistedCandidateCommand extends Command {
         if (DeleteShortlistedCandidateInitializationCommand.isDeleting()) {
             DeleteShortlistedCandidateInitializationCommand.isDoneDeleting();
         }
+        EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
 
-        LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS,
                 removedShortlistedTagFromCandidate.getName().fullName, selectedJob.getJob().value,
                 selectedCompany.getCompanyName().value));

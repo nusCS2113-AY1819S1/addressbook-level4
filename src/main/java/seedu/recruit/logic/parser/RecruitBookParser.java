@@ -8,8 +8,10 @@ import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.util.EmailUtil;
-import seedu.recruit.logic.LogicManager;
+
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.AddCandidateCommand;
 import seedu.recruit.logic.commands.AddCompanyCommand;
@@ -137,7 +139,8 @@ public class RecruitBookParser {
                 return new DeleteShortlistedCandidateParser().parseCommand(commandWord, arguments, state);
 
             default:
-                LogicManager.setLogicState("primary");
+                EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
+
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } else {

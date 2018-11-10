@@ -2,9 +2,10 @@ package seedu.recruit.logic.commands.emailcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
@@ -33,7 +34,7 @@ public class EmailContentsNextCommand extends EmailContentsCommand {
         if (isEmpty) {
             return new CommandResult(NEXT_CONTENTS_ERROR_NO_CONTENTS + EmailContentsCommand.MESSAGE_USAGE);
         } else {
-            LogicManager.setLogicState(EmailSendCommand.COMMAND_LOGIC_STATE);
+            EventsCenter.getInstance().post(new ChangeLogicStateEvent(EmailSendCommand.COMMAND_LOGIC_STATE));
 
             return new CommandResult(EmailSendCommand.MESSAGE_USAGE);
         }
