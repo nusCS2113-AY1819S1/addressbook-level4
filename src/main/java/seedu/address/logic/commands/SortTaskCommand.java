@@ -24,6 +24,15 @@ public class SortTaskCommand extends Command {
     public static final String MESSAGE_SUCCESS_DEFAULT = "Sorted all tasks based on default naming order";
     public static final String MESSAGE_SUCCESS_REVERSE = "Task list reversed";
 
+    public static final String INPUT_DATE = "date";
+    public static final String INPUT_MODULE = "module";
+    public static final String INPUT_DEFAULT = "default";
+    public static final String INPUT_REVERSE = "reverse";
+    public static final String INPUT_PRIORITY = "priority";
+
+    public static final String INPUT_INVALID = "tag";
+    public static final String INPUT_BLANK = "";
+
     private final String filter;
 
     /**
