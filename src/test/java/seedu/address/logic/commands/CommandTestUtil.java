@@ -40,6 +40,17 @@ public class CommandTestUtil {
     public static final String VALID_TAG_SCIENCE = "husband";
     public static final String VALID_TAG_STUDIES = "friend";
 
+    public static final String VALID_REVENUE_JUNE = "1.00";
+    public static final String VALID_REVENUE_MAY = "2.00";
+    public static final String VALID_INVENTORY_JUNE = "3.00";
+    public static final String VALID_INVENTORY_MAY = "4.00";
+    public static final String VALID_EXPENSE_JUNE = "5.00";
+    public static final String VALID_EXPENSE_MAY = "6.00";
+    public static final String VALID_YEAR_JUNE = "2017";
+    public static final String VALID_YEAR_MAY = "2018";
+    public static final String VALID_MONTH_JUNE = "9";
+    public static final String VALID_MONTH_MAY = "5";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_ADD;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BIOLOGY;
     public static final String ISBN_DESC_AMY = " " + PREFIX_ISBN + VALID_ISBN_ADD;
