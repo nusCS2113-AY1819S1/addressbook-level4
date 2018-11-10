@@ -111,7 +111,6 @@ public class EditEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
-        
         Model modelDummy = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
         modelDummy.deleteEvent(eventToEdit);
         Set<String> attendeeSet = editedEvent.getAttendees().getAttendeesSet();
