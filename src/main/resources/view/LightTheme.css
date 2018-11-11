@@ -143,6 +143,12 @@
     -fx-text-fill: #d8510e;
 }
 
+.cell_time_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+    -fx-text-fill: black;
+}
+
 .stack-pane {
      -fx-background-color: derive(#EFF4F8, 20%);
 }
@@ -296,7 +302,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#91ffed, 10%);
+    -fx-background-color: derive(#ff7c35, 10%);
     -fx-background-insets: 3;
 }
 
@@ -371,17 +377,17 @@
 
 #tags .orange {
     -fx-text-fill: black;
-    -fx-background-color: #e8af20;
+    -fx-background-color: #efaf6b;
 }
 
 #tags .yellow {
     -fx-text-fill: black;
-    -fx-background-color: #dbd81c;
+    -fx-background-color: #d6ef6b;
 }
 
 #tags .blue {
-    -fx-text-fill: white;
-    -fx-background-color: #2461f9;
+    -fx-text-fill: black;
+    -fx-background-color: #6ba4ef;
 }
 
 #tags .green {
@@ -391,12 +397,12 @@
 
 #tags .indigo {
     -fx-text-fill: white;
-    -fx-background-color: #d023dd;
+    -fx-background-color: #f06c85;
 }
 
 #tags .purple {
-    -fx-text-fill: white;
-    -fx-background-color: #9c23dd;
+    -fx-text-fill: black;
+    -fx-background-color: #7b6bef;
 }
 
 #tags .pink {
