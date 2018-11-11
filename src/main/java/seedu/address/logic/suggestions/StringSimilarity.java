@@ -9,7 +9,7 @@ public class StringSimilarity {
 
     private static final int DELETION_COST = 1;
     private static final int ADDITION_COST = 1;
-    private static final int SUBSTITUTION_COST = 3;
+    private static final int SUBSTITUTION_COST = 1;
 
     /**
      * Finds the edit distance between two strings.
