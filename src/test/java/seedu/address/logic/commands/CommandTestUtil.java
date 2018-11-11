@@ -2,15 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,7 +69,16 @@ public class CommandTestUtil {
     public static final String TASK_DATE_DESC_TUTORIAL = " " + PREFIX_DATE + VALID_TASK_DATE_TUTORIAL;
     public static final String TASK_PRIORITY_DESC_ASSIGNMENT = " " + PREFIX_PRIORITY + VALID_TASK_PRIORITY_ASSIGNMENT;
     public static final String TASK_PRIORITY_DESC_TUTORIAL = " " + PREFIX_PRIORITY + VALID_TASK_PRIORITY_TUTORIAL;
-
+    public static final String EXPENDITURE_DESCRIPTION_CLOTHES =
+            " " + PREFIX_NAME + VALID_EXPENDITURE_DESCRIPTION_CLOTHES;
+    public static final String EXPENDITURE_DESCRIPTION_IPHONE =
+            " " + PREFIX_NAME + VALID_EXPENDITURE_DESCRIPTION_IPHONE;
+    public static final String EXPENDITURE_CATEGORY_CLOTHES = " " + PREFIX_PHONE + VALID_EXPENDITURE_CATEGORY_CLOTHES;
+    public static final String EXPENDITURE_CATEGORY_IPHONE = " " + PREFIX_PHONE + VALID_EXPENDITURE_CATEGORY_IPHONE;
+    public static final String EXPENDITURE_MONEY_CLOTHES = " " + PREFIX_EMAIL + VALID_EXPENDITURE_MONEY_CLOTHES;
+    public static final String EXPENDITURE_MONEY_IPHONE = " " + PREFIX_EMAIL + VALID_EXPENDITURE_MONEY_IPHONE;
+    public static final String EXPENDITURE_DATE_CLOTHES = " " + PREFIX_ADDRESS + VALID_EXPENDITURE_DATE_CLOTHES;
+    public static final String EXPENDITURE_DATE_IPHONE = " " + PREFIX_ADDRESS + VALID_EXPENDITURE_DATE_IPHONE;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -87,6 +88,12 @@ public class CommandTestUtil {
     public static final String INVALID_TASK_MODULE_DESC = " " + PREFIX_MODULE + "CS23345"; // invalid module code
     public static final String INVALID_TASK_DATE_DESC = " " + PREFIX_DATE + "0912"; // missing '-' symbol
     public static final String INVALID_TASK_PRIORITY_DESC = " " + PREFIX_TASK + "4"; // only 1, 2, or 3 allowed
+    public static final String INVALID_EXPENDITURE_DESCRIPTION_DESC =
+            " " + PREFIX_DESCRIPTION + "chicken*"; // '*' not allowed in descriptions
+    public static final String INVALID_EXPENDITURE_CATEGORY_DESC =
+            " " + PREFIX_CATEGORY + "breakfast"; // invalid category
+    public static final String INVALID_EXPENDITURE_MONEY_DESC = " " + PREFIX_MONEY + "91*"; //  '*' not allowed in money
+    public static final String INVALID_EXPENDITURE_DATE_DESC = " " + PREFIX_DATE + "01012018"; //  missing '-' symbol
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
