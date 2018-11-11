@@ -599,13 +599,13 @@ Aspect: What data is stored in search history stack +
 
 Aspect: How the Predicate at the top of the Stack is retrieved from SearchHistoryManager +
 
-* **Alternative 1(current choice):** `Predicate` object is returned from the method `executeSearch` and `revertLastSearch`
+* **Alternative 1(current choice):** `Predicate` object is returned from the methods `executeSearch()` and `revertLastSearch()`
 ** Pros:
     . No need for an extra method call to retrieve search logic in the form of `Predicate` object from SearchHistoryManager. +
 ** Cons:
     . No clear distinction between Update and Retrieval of search logic. +
 
-* ** Alternative 2: ** `Predicate` object is not returned from the method `executeSearch` and `revertLastSearch`, but is instead retrieved with another method.
+* ** Alternative 2: ** `Predicate` object is not returned from the methods `executeSearch()` and `revertLastSearch()`, but is instead retrieved with another method.
 ** Pros:
     . Clearer distinction between Update and Retrieval of search logic.
 
