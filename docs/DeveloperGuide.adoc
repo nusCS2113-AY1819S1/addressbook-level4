@@ -342,10 +342,10 @@ image::CheckSequenceDiagram.png[width="800"]
 
 * **Alternative 1 (current choice):** Sorts the entire BookInventory.
 ** Pros: Easy to implement.
-** Cons: Unable to retrieve the original order of the BookInventory
-* **Alternative 2:** Only the displayed list is sorted
-** Pros: Original order of the BookInventory is kept
-** Cons:
+** Cons: Unable to retrieve the original order of the BookInventory.
+* **Alternative 2:** Only the displayed list is sorted.
+** Pros: Original order of the BookInventory is kept.
+** Cons: Changes to the original code to display the list is required.
 // end::checkcommand[]
 
 // tag::stockcommand[]
@@ -369,25 +369,29 @@ The stock operation is similar to the sell operation, refer to sell command for 
 
 // tag::sellcommand[]
 === Sell feature
+Since selling of books is the bread and butter of the store owners, we have added a `sell` command to the existing list of commands.
+
 ==== Current Implementation
 The sell command utilises both the `Model` and `Logic` component to fulfil its function.
 
 The following sequence diagram shows how the sell operation is implemented
 
+.Sequence Diagram for Sell Command
 image::SellSequenceDiagram.png[width="800"]
 
-After SoldBook is created, the inventory book will be updated through `Model#updateBook()`, `Model#updateFilteredBookList()` and `Model#commitBookInventory()` to store the latest quantity of books left.
+.Sequence Diagram Reference for Sell Command
+image::SellSequenceDiagramSd.png[width="800"]
 
 ==== Design Considerations
 
 ===== Aspect: How sell command is implemented
 
-* **Alternative 1 (current choice):** Decreases quantity in the Quantity Class.
-** Pros: Code is more cohesive.
-** Cons: Adds more code to Quantity Class
-* **Alternative 2:** Decreases quantity in the Book Class.
-** Pros: Does not need to edit Quantity Class.
-** Cons: Code becomes less cohesive.
+* **Alternative 1 (current choice):** Determines if user input `Isbn` or `Index` in `SellCommandParser`.
+** Pros: Increases the cohesion of the `SellCommand`.
+** Cons: Construction of commands that accepts `Isbn` or `Index` differs from the other commands. Thus, we must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Determines if user input `Isbn` or `Index` in `SellCommand`.
+** Pros: Does not require changes to the code for construction of `SellCommand`.
+** Cons: Decreases the cohesion of `SellCommand`.
 // end::sellcommand[]
 
 // tag::Request[]

@@ -92,7 +92,6 @@ public class StockCommand extends Command {
                 bookToStock.getCost().toString(), stockBookDescriptor.getQuantity().getValue());
 
         model.updateBook(bookToStock, stockedBook);
-        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
         return new CommandResult(MESSAGE_QUANTITY_STOCK + stockBookDescriptor.getQuantity().getValue()
                 + "\n" + String.format(MESSAGE_STOCK_BOOK_SUCCESS, stockedBook));
