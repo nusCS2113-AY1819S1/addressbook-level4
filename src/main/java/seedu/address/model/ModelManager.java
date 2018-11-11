@@ -20,6 +20,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.export.CsvWriter;
 import seedu.address.export.Export;
 import seedu.address.export.ExportManager;
+import seedu.address.export.Import;
 import seedu.address.export.ImportManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -190,7 +191,7 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Import/ Export ==============================================================================
     @Override
     public void importPersonsFromAddressBook(Path importFilePath) throws IOException, DataConversionException {
-        ImportManager importManager = new ImportManager(importFilePath);
+        Import importManager = new ImportManager(importFilePath);
         ReadOnlyAddressBook addressBookImported = importManager.readAddressBook().orElseThrow(IOException::new);
         boolean hasChanged = addPersonsToAddressBook(addressBookImported);
 

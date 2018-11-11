@@ -21,7 +21,7 @@ import seedu.address.storage.XmlSerializableAddressBook;
 /**
  * Manages importing of AddressBook data.
  */
-public class ImportManager {
+public class ImportManager implements Import {
 
     private static final Logger logger = LogsCenter.getLogger(ImportManager.class);
 
@@ -35,17 +35,12 @@ public class ImportManager {
         return importPath;
     }
 
-    // @Override
+    @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(importPath);
     }
 
-    /**
-     * Similar to {@link #readAddressBook()}
-     *
-     * @param filePath location of the data. Cannot be null
-     * @throws DataConversionException if the file is not in the correct format.
-     */
+
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException,
             FileNotFoundException {
         requireNonNull(filePath);
