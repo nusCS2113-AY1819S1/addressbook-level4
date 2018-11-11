@@ -46,7 +46,7 @@ public class SampleDataUtil {
                 getTagSet("CS2113T-W13-1", "CS2101-D"), SampleTimeTableUtil.getTimeTableAlexis(), new HashSet<>()),
             new Person(new Name("test"), new Phone("88888888"), new Email("test@test.com"),
                 new Address("Testy Road"),
-                getTagSet("Test Group"), SampleTimeTableUtil.getTimeTableBensonMeier(), new HashSet<>()),
+                getTagSet("TestGroup"), SampleTimeTableUtil.getTimeTableBensonMeier(), new HashSet<>()),
         };
     }
 
