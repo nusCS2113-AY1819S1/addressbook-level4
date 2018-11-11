@@ -355,7 +355,7 @@ which will then notify the user of the issue.
 The following sequence diagram shows how the create group operation works within both `Model` and `Logic` components where `g` is the `Group` object created:
 
 .Interactions Inside the Logic and Model Component for the `creategroup n/CS1231 l/LT15` Command +
-image::CreateGroupSequenceDiagram.png[width="800"]
+image::CreateGroupSequenceDiagram.png[width="600"]
 
 
 Step 2. The user inputs `addgroup g/1 p/1` to add the first person on the `PersonListPanel` to the first group
@@ -370,7 +370,7 @@ it will not add the person to the group nor will it override the existing person
 The following sequence diagram shows how the add persons to group operation works within both `Model` and `Logic` components where `ag` is the `AddGroup` object created:
 
 .Interactions Inside the Logic and Model Component for the `addgroup g/1 p/1` Command +
-image::AddGroupSequenceDiagram.png[width="800"]
+image::AddGroupSequenceDiagram.png[width="600"]
 
 
 Step 3. The user inputs `deletegroupstudent g/1 p/1` to remove the person at the first index (`GroupPersonListPanel`) from the group at the first index (`GroupListPanel`)
@@ -382,7 +382,7 @@ which will then execute deleting the person from the specified group from the st
 The following sequence diagram shows how the delete group person operation works within both `Model` and `Logic` components:
 
 .Interactions Inside the Logic and Model Component for the `deletegroupstudent g/1 p/1` Command +
-image::DeleteGroupPersonSequenceDiagram.png[width="800"]
+image::DeleteGroupPersonSequenceDiagram.png[width="600"]
 
 
 Step 4. The user inputs `deletegroup 1` to delete the first group on the `GroupListPanel`. The `AddressBookParser` detects `deletegroup` as a command word and will use `DeleteGroupCommandParser`
@@ -393,7 +393,7 @@ which will then execute deleting the specified group from the student management
 The following sequence diagram shows how the delete group operation works within both `Model` and `Logic` components:
 
 .Interactions Inside the Logic and Model Component's for the `deletegroup 1` Command +
-image::DeleteGroupSequenceDiagram.png[width="800"]
+image::DeleteGroupSequenceDiagram.png[width="600"]
 
 Additional Operations:
 
@@ -408,7 +408,7 @@ Step 1. The user inputs `selectgroup 1` to select the first group listed on the 
 The following sequence diagram shows how the select group operation works within both `EventsCenter` and `Logic` components:
 
 .Interactions Inside the Logic and EventsCenter Component's for the `selectgroup 1` Command +
-image::SelectGroupSequenceDiagram.png[width="800"]
+image::SelectGroupSequenceDiagram.png[width="600"]
 
 ==== Design Considerations
 

@@ -51,7 +51,7 @@ Lecturers can further automate some of these processes by importing student data
 *** Update manual testing instructions for developer guide (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/143[#143])
 ** Community:
 *** Contributed to forum discussions (https://github.com/nusCS2113-AY1819S1/forum/issues/104[1])
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-4/main/pull/134[#134], https://github.com/CS2113-AY1819S1-T13-4/main/pull/81[#81], https://github.com/CS2113-AY1819S1-T13-4/main/pull/74[#74], https://github.com/CS2113-AY1819S1-T13-4/main/pull/54[#54], https://github.com/CS2113-AY1819S1-T13-4/main/pull/46[#46], https://github.com/CS2113-AY1819S1-T13-4/main/pull/31[#31]
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-4/main/pull/134[#134], https://github.com/CS2113-AY1819S1-T13-4/main/pull/81[#81]
 *** Reported bugs and suggestions for other teams in the class (https://github.com/CS2113-AY1819S1-W13-3/main/issues/88[1], https://github.com/CS2113-AY1819S1-W13-3/main/issues/81[2], https://github.com/CS2113-AY1819S1-W13-3/main/issues/75[3], https://github.com/CS2113-AY1819S1-W13-3/main/issues/70[4])
 *** Fixed legitimate issues from bugs and suggestions from other teams in the class (https://github.com/CS2113-AY1819S1-T13-4/main/issues/121[1], https://github.com/CS2113-AY1819S1-T13-4/main/issues/118[2])
 
