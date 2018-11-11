@@ -52,6 +52,6 @@ public class TypicalDistributors {
     }
 
     public static List<Distributor> getTypicalDistributors() {
-        return new ArrayList<>(Arrays.asList(AHBENG, AHHUAT, AHLONG, AHTING));
+        return new ArrayList<>(Arrays.asList(AHBENG, AHHUAT, AHLONG, AHTING, AHLEE, AHKUAH));
     }
 }
