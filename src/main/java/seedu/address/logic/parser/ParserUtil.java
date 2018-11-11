@@ -211,7 +211,8 @@ public class ParserUtil {
      * Parses {@code Collection<String> distributorproducts} into a {@code Set<DistributorProduct>}.
      */
 
-    public static Set<DistributorProduct> parseDistProds(Collection<String> distributorproducts) throws ParseException {
+    public static Set<DistributorProduct> parseDistProds(Collection<String> distributorproducts)
+            throws ParseException {
         requireNonNull(distributorproducts);
         final Set<DistributorProduct> prodSet = new HashSet<>();
         for (String prodName : distributorproducts) {

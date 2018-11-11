@@ -9,11 +9,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorProduct;
 import seedu.address.model.product.Product;
 
 /**
@@ -79,8 +81,11 @@ public class AddCommand extends Command {
 
             Distributor originalDist = distList.get(index + 1);
 
+            Set<DistributorProduct> newDistProds = distToAdd.getDistProds();
+            originalDist.getDistProds().addAll(newDistProds);
+
             Distributor prodEditedDist = new Distributor(originalDist.getDistName(), originalDist.getDistPhone(),
-                    distToAdd.getDistProds(), distToAdd.getTags());
+                    originalDist.getDistProds(), distToAdd.getTags());
 
             model.updateDistributor(distToAdd, prodEditedDist);
         } else {

@@ -12,7 +12,7 @@ endif::[]
 
 * Flexible and easy-to-use application that keeps your business running smoothly.
 * This is a desktop Inventory Management application. The user interactions happen using a CLI (Command Line Interface).
-* Our Inventory Management application is tailored for small business owners.
+* Our Inventory Management application is tailored for self-employed small provision shop owners.
 
 == Site Map
 
