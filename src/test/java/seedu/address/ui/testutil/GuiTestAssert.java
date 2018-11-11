@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.TaskCardHandle;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
@@ -36,6 +38,17 @@ public class GuiTestAssert {
         assertEquals(expectedPerson.getAddress().value, actualCard.getAddress());
         assertEquals(expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedPerson}.
+     */
+    public static void assertCardDisplaysTask(Task expectedTask, TaskCardHandle actualCard) {
+        assertEquals(expectedTask.getName().toString(), actualCard.getTaskName());
+        assertEquals(expectedTask.getDate().value, actualCard.getTaskDate());
+        assertEquals(expectedTask.getModule().value, actualCard.getTaskModule());
+        assertEquals("Low priority (" + expectedTask.getPriority().value + ")", actualCard.getTaskPriority());
+        assertEquals(expectedTask.getComplete(), actualCard.getTaskState().equals("Status: Completed") );
     }
 
     /**
