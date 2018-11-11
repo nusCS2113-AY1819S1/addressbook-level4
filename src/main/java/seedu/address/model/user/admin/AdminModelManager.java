@@ -33,7 +33,7 @@ public class AdminModelManager extends ModelManager implements AdminModel {
     /**
      * Raises an event to indicate the model has changed
      */
-    protected void indicateDrinkAttributesChanged(Drink drink) {
+    public void indicateDrinkAttributesChanged(Drink drink) {
         raise(new DrinkAttributeChangedEvent(drink));
     }
 

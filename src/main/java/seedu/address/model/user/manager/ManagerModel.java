@@ -10,11 +10,6 @@ import seedu.address.model.user.UserName;
  * The interface for ManagerModel which control the api for Manager role
  */
 public interface ManagerModel extends Model {
-
-    /**
-     * Raises an event to indicate the model has changed
-     */
-    void indicateDrinkAttributesChanged(Drink drink);
     //=========== Login feature command========================================
 
     /**
