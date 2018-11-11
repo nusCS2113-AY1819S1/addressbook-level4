@@ -74,7 +74,8 @@ public class EditTaskCommandTest {
     @Test
     public void execute_someFieldsSpecified_editSuccessful() {
         Task editedTask = new TaskBuilder().withTitle(VALID_TITLE_3).withPriority(VALID_PRIORITY_LEVEL_HIGH)
-                .withExpectedNumOfHours(Integer.parseInt(VALID_2_HOURS)).withModuleCode(VALID_MODULE_CODE_CS2113).build();
+                .withExpectedNumOfHours(Integer.parseInt(VALID_2_HOURS)).withModuleCode(VALID_MODULE_CODE_CS2113)
+                .build();
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_THIRD_TASK, descriptor);
 

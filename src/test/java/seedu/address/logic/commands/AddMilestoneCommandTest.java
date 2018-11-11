@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_TASK;
 import static seedu.address.testutil.TypicalMilestones.FIRST_MILESTONE;
 import static seedu.address.testutil.TypicalMilestones.SECOND_MILESTONE;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
