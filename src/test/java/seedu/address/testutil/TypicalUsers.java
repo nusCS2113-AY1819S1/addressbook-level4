@@ -15,12 +15,12 @@ import seedu.address.model.login.Username;
  */
 public class TypicalUsers {
 
-    public static final String DEFAULT_AB_PATH = "data/addressbook-user.xml";
-    public static final String AMY_AB_PATH = "data/addressbook-amy.xml";
-    public static final String BOB_AB_PATH = "data/addressbook-bob.xml";
-    public static final String DEFAULT_DB_PATH = "data/distributor-user.xml";
-    public static final String AMY_DB_PATH = "data/distributor-amy.xml";
-    public static final String BOB_DB_PATH = "data/distributor-bob.xml";
+    private static final String DEFAULT_AB_PATH = "data/addressbook-user.xml";
+    private static final String AMY_AB_PATH = "data/addressbook-amy.xml";
+    private static final String BOB_AB_PATH = "data/addressbook-bob.xml";
+    private static final String DEFAULT_DB_PATH = "data/distributor-user.xml";
+    private static final String AMY_DB_PATH = "data/distributor-amy.xml";
+    private static final String BOB_DB_PATH = "data/distributor-bob.xml";
     private static final String DEFAULT_SALESHISTORY_PATH = "data/saleshistory-user.xml";
     private static final String AMY_SALESHISTORY_PATH = "data/saleshistory-amy.xml";
     private static final String BOB_SALESHISTORY_PATH = "data/saleshistory-bob.xml";

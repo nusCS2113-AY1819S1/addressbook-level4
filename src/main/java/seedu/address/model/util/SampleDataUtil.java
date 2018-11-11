@@ -12,6 +12,7 @@ import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.RemainingItems;
 import seedu.address.model.product.SerialNumber;
+import seedu.address.model.product.exceptions.DuplicateProductException;
 import seedu.address.model.saleshistory.ReadOnlySalesHistory;
 import seedu.address.model.saleshistory.SalesHistory;
 import seedu.address.model.tag.Tag;
@@ -52,6 +53,14 @@ public class SampleDataUtil {
             sampleAb.addProduct(sampleProduct);
         }
         return sampleAb;
+    }
+
+    public static ProductDatabase getSampleProductDatabaseForTest() {
+            ProductDatabase sampleAb = new ProductDatabase();
+            for (Product sampleProduct : getSampleProducts()) {
+                sampleAb.addProduct(sampleProduct);
+            }
+            return sampleAb;
     }
 
     public static ReadOnlySalesHistory getSampleSalesHistory() {

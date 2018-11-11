@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static org.junit.Assert.assertEquals;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -11,8 +13,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.UserDatabase;
 import seedu.address.testutil.TypicalUsers;
-
-import static org.junit.Assert.assertEquals;
 
 public class XmlSerializableUserDatabaseTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
