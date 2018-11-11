@@ -37,7 +37,8 @@ public class GradeSummaryCommand extends Command {
     public static final String MESSAGE_ERROR = "ERROR showing List";
     public static final String MESSAGE_ERROR_NOT_FOUND = "ERROR! Test Does not exists";
     public static final String MESSAGE_ERROR_COMMAND = "Invalid Command "
-            + "or invalid test name, correct format is disp tn/cs2113 highest/";
+            + "or invalid test name, correct format is disp tn/cs2113 highest/ or lowest/ or "
+            + "median/ or mean/ or TTF/ OR LTF/";
     private final String commandType;
     private final String testName;
 

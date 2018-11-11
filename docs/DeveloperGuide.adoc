@@ -773,7 +773,8 @@ If a duplicate name keywords are found in the student management system during i
 it will not add the test , it will throw a `DuplicatePersonException` to ask user to indicate the full name
 which will then notify the user of the issue.
 please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
- Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+(To be solved in the coming version 2.0)
 
 The following sequence diagram shows how the add test operation works within both `Model` and `Logic` components:
 
@@ -792,7 +793,7 @@ If a duplicate name keywords are found in the student management system during i
 it will not add the test , it will throw a `DuplicatePersonException` to ask user to indicate the full name
 which will then notify the user of the issue.
 please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
-Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.(To be solved in the coming version 2.0)
 The sequence diagram is similar to the adt command above, just the command name changed.
 
 Step 3. The user inputs `disp tn/cs2113 highest/` or `disp tn/cs2113 lowest/` or `disp tn/cs2113 median/` or `disp tn/cs2113 mean/` or `disp tn/cs2113 TTF/` or `disp tn/cs2113 LTF/` to show grade summary of certain test.
@@ -2294,6 +2295,112 @@ Multiple groups in the group list. Student being added to group must *NOT* alrea
    Expected: No group is selected. Error details shown in the status message. `Students in Selected Group` panel remains the same.
 .. Other incorrect select group commands to try: `sg`, `sg x` (where x is larger than the group list size and not an integer) +
    Expected: Similar to previous.
+
+
+
+=== Add Test Marks
+
+. Add tests(test_name test_marks)
+
+.. Prerequisites: the student you want to add tests to should exist in the system, and for the case two students with the same name please use index to distinguish them(john doe_1,john doe_2)when you adding the person to the system.
+                   Right now we are not accept two student with exactly the same name. (To be solved in the coming version 2.0)
+.. Test case: `adt alex tn/MA1508 tm/88` +
+   Expected: test(MA1508, 88) is added to alex yeoh. Details of the test show on the browser panel when you click on the left side student card of alex yeoh(not the group card, to be integrated in coming version 2.0).
+   The grade column should show "undefined" since you have not enter the command to grading students for this test.
+.. Test case: `adt yu tn/MA1508 tm/66` +
+   Expected: test(MA1508, 66) is added bernice yu. Details of the test show on the browser panel when you click on the left side student card of bernice yu(not the group card, to be integrated in coming version 2.0).
+   The grade column should show "undefined" since you have not enter the command to grading students for this test.
+.. Test case: `adt david tn/MA1508 tm/50` +
+   Expected: test(MA1508, 50) is added david li. Details of the test show on the browser panel when you click on the left side student card of david li(not the group card, to be integrated in coming version 2.0).
+   The grade column should show "undefined" since you have not enter the command to grading students for this test.
+.. Test case: `adt irfan tn/MA1508 tm/99` +
+   Expected: test(MA1508, 99) is added irfan. Details of the test show on the browser panel when you click on the left side student card of irfan(not the group card, to be integrated in coming version 2.0).
+   The grade column should show "undefined" since you have not enter the command to grading students for this test.
+
+. Duplicate name keyword
+.. Prerequisites: The student should be already added in the system before you add test. now let's add another student named Alex Yu.Then try add test for him/her.
+.. Test case: `adt alex tn/MA1508 tm/99` +
+   Expected: Test cannot be added cause there are two students with the name keyword alex. Error message: There are more then one person's name contain the keyword found please indicate the full name.
+
+. Duplicate test name exist
+.. Prerequisites: The student should be already added in the system before you add test. The test you want to add should in the system.
+.. Test case: `adt david tn/MA1508 tm/57` +
+   Expected: Test cannot be added the test name already exist. Error message: This test has been added before, if you want to edit the test marks please use edt command.
+
+=== Edit Test Marks
+
+. Edit test marks for certain test
+
+.. Prerequisites: the student you want to edit test marks should exist in the system and the test should be add before you can edit, and for the case two students with the same name please use index to distinguish them(john doe_1,john doe_2)when you adding the person to the system.
+                  Right now we are not accept two student with exactly the same name. (To be solved in the coming version 2.0)
+.. Test case: `edt alex tn/MA1508 tm/77` +
+  Expected: test marks(for MA1508) should be change to 77. Details of the test show on the browser panel when you click on the left side student card of alex yeoh(not the group card, to be integrated in coming version 2.0).
+  The grade column should show "undefined" since you have not enter the command to grading students for this test.
+.. Test case: `edt yu tn/MA1508 tm/90` +
+  Expected: test marks(for MA1508) should be change to 90. Details of the test show on the browser panel when you click on the left side student card of bernice yu(not the group card, to be integrated in coming version 2.0).
+  The grade column should show "undefined" since you have not enter the command to grading students for this test.
+
+
+. Duplicate name keyword
+.. Prerequisites: The student should be already added in the system before you edit test. now let's add another student named Alex Yu.Then try edit test for him/her.
+.. Test case: `edt alex tn/MA1508 tm/22` +
+  Expected: Test cannot be edit cause there are two students with the name keyword alex. Error message: There are more then one person's name contain the keyword found please indicate the full name.
+
+.  Test name not exist
+.. Prerequisites: The student should be already added in the system before you edit test. Now let's try edit some test that does not exist.
+.. Test case: `edt david tn/hahaha tm/57` +
+  Expected: Test cannot be edit since the test name not exist. Error message: Test Name is not Found please add first._
+
+=== grade summary
+
+. Analyse certain test and give summary.
+
+.. Prerequisites: the test you want to analyse should exist in the system record(means added before).
+.. Test case: `disp tn/MA1508 highest/` +
+  Expected: The highest marks for test(MA1508) should be show below the command input. (You can check and compare with the record in browser panel)
+.. Test case: `disp tn/MA1508 lowest/` +
+  Expected: The lowest marks for test(MA1508) should be show below the command input. (You can check and compare with the record in browser panel)
+.. Test case: `disp tn/MA1508 median/` +
+  Expected: The median marks for test(MA1508) should be show below the command input. (You can check and compare with the record in browser panel)
+.. Test case: `disp tn/MA1508 mean/` +
+  Expected: The mean marks for test(MA1508) should be show below the command input. (You can check and compare with the record in browser panel)
+.. Test case: `disp tn/MA1508 TTF/` +
+  Expected: The top twenty five percent students and their test details show be show on a list.
+.. Test case: `disp tn/MA1508 LTF/` +
+  Expected: The last twenty five percent students and their test details show be show on a list.
+
+.  Test name not exist
+.. Prerequisites: The test should be exist in the system. Now let's try some test that does not exist.
+.. Test case: `disp tn/hohoho highest/` +
+  Expected: Error message show since the test name not exist. Error message: ERROR! Test Does not exists
+
+=== grading students automatically
+
+. Grading students automatically.
+
+.. Prerequisites: the test you want to grade should exist in the system record(means added before).
+.. Test case: `agpt tn/MA1508` +
+  Expected: The grade base on bell curve calculation should be assign to students and recorded in the system automatically.
+  (You can check on browser panel- click the students card on left side, you can check all the test details for each student)
+
+.  Test name not exist
+.. Prerequisites: The test should be exist in the system. Now let's try some test that does not exist.
+.. Test case: `agpt tn/hohoho` +
+  Expected: Error message show since the test name not exist. Error message: Test does not exists in the system
+
+=== delete Test
+
+. Delete certain test from all students.
+
+.. Prerequisites: the test you want to delete should exist in the system record(means added before).
+.. Test case: `dt tn/MA1508` +
+  Expected: test(MA1508) should be removed from all students. Details of the test show on the browser panel when you click on the left side student cards(not the group card, to be integrated in coming version 2.0).
+  The grade column should show "undefined" since you have not enter the command to grading students for this test.
+
+.  Test name not exist
+.. Prerequisites: The test should be exist in the system before you delete it. Now let's try delete some test that does not exist.
+.. Test case: `dt tn/hohoho` +
+  Expected: Test cannot be edit since the test name not exist. Error message: This test is not found in the system please add first, also the test name should not be empty
 
 === Saving data
 

@@ -24,7 +24,7 @@ public class AssignGradeCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD_2 + " " + PREFIX_TEST_NAME + "cs2113quiz1 ";
 
-    public static final String MESSAGE_TEST_NOT_EXISTS = "Test does not exists in all students";
+    public static final String MESSAGE_TEST_NOT_EXISTS = "Test does not exists in the system";
     public static final String MESSAGE_GENERATE_GRADE_LIST = "grade of the test has been assign to student";
 
 
