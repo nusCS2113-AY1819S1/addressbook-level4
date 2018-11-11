@@ -319,23 +319,34 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ==== Current Implementation
 
 Marking of a task as `completed` or `uncompleted` uses both `Logic` and `Model` components.
-Both commands are similiar in most areas, the key differences are in the respective `Command` classes.
-This feature reuses the methods in the `Model` component used by the edit task command.
+Both `TDL_complete` and `TDL_uncomplete` commands are similar in most areas as they are implemented based on the edit task command.
+This feature also reuses the methods in the `Model` component used by the edit task command.
 
 The following sequence diagram shows how the `TDL_complete` operation works:
 
 image::CompleteUncompleteTaskSequenceDiagram.png[width="800"]
+
+Step 1. Upon user's input, `AddressBookParser` determines if the command entered by the user is valid and then calls the appropriate `CommandParser` class. The arguments are also passed to the `CommandParser` class.
+
+Step 2. `CompleteTaskCommandParser` or `UncompleteTaskCommandParser` will use the arguments given to retrieve and check if the index is valid. `CompleteTaskCommand` or `UncompleteTaskCommand` will then be called respectively by the parser class.
+
+Step 3. The `Command` class will check for the validity of the index based on the currently shown to-do list and also the completion status of the specific task to be modified.
+
+[NOTE]
+Completion status of the task needs to be checked as we want to prevent cases where the command does not change the completion status, ie. performing `TDL_complete` on a task already marked as completed.
+
+Step 4. Similar to the edit task command, the task to be modified is updated using `Model#updateTask()` with a new task. The new task object is a copy of the task to be modified with the completion status changed.
 
 ==== Design Considerations
 
 ===== Aspect: Methods to support the completed/uncompleted commands
 
 * **Alternative 1 (current choice):** Reuses the same methods available in `Model`
-** Pros: Easy to implement with no modification to `Model` component.
-** Cons: May have performance issues in terms of memory usage due to an additional `Task` object.
+** Pros: Easy to implement with little to no modifications to the `Model` component.
+** Cons: May cause confusion since the same methods in the `Model` component are used by different commands with similar implementations.
 * **Alternative 2:** Create additional methods in `Model`
-** Pros: Should use less memory.
-** Cons: We must ensure that the implementation of each individual methods are correct.
+** Pros: Should create less confusion as these methods are only used by a unique command.
+** Cons: We must ensure that the implementation of each individual method is correct.
 // end::completeuncomplete[]
 
 // tag::viewtask[]
