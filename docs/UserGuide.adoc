@@ -88,7 +88,7 @@ image::AddMilestoneCommand_before.png[width="790"]
 
 *After*
 
-image::AddMilestoneCommand_after.png[width="600", align="left"]
+image::AddMilestoneCommand_after.png[width="790"]
 
 [NOTE]
 ====
