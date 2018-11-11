@@ -39,7 +39,7 @@ public class VersionedExpenditureTrackerTest {
     }
 
     @Test
-    public void commit_multipleExpenditureTrackerPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
+    public void commit_multipleETPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
         VersionedExpenditureTracker versionedExpenditureTracker = prepareExpenditureTracker(
                 emptyExpenditureTracker, expenditureTrackerWithChicken, expenditureTrackerWithIphone);
         shiftCurrentStatePointerLeftwards(versionedExpenditureTracker, 2);
@@ -201,11 +201,13 @@ public class VersionedExpenditureTrackerTest {
 
     @Test
     public void equals() {
-        VersionedExpenditureTracker versionedExpenditureTracker = prepareExpenditureTracker(expenditureTrackerWithChicken,
+        VersionedExpenditureTracker versionedExpenditureTracker =
+                prepareExpenditureTracker(expenditureTrackerWithChicken,
                 expenditureTrackerWithIphone);
 
         // same values -> returns true
-        VersionedExpenditureTracker copy = prepareExpenditureTracker(expenditureTrackerWithChicken, expenditureTrackerWithIphone);
+        VersionedExpenditureTracker copy = prepareExpenditureTracker(expenditureTrackerWithChicken,
+                expenditureTrackerWithIphone);
         assertTrue(versionedExpenditureTracker.equals(copy));
 
         // same object -> returns true
@@ -226,8 +228,10 @@ public class VersionedExpenditureTrackerTest {
 
     /**
      * Asserts that {@code versionedExpenditureTracker} is currently pointing at {@code expectedCurrentState},
-     * states before {@code versionedExpenditureTracker#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
-     * and states after {@code versionedExpenditureTracker#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * states before {@code versionedExpenditureTracker#currentStatePointer}
+     * is equal to {@code expectedStatesBeforePointer},
+     * and states after {@code versionedExpenditureTracker#currentStatePointer}
+     * is equal to {@code expectedStatesAfterPointer}.
      */
     private void assertExpenditureTrackerStatus(VersionedExpenditureTracker versionedExpenditureTracker,
                                       List<ReadOnlyExpenditureTracker> expectedStatesBeforePointer,
@@ -261,13 +265,16 @@ public class VersionedExpenditureTrackerTest {
     }
 
     /**
-     * Creates and returns a {@code versionedExpenditureTracker} with the {@code expenditureTrackerStates} added into it, and the
+     * Creates and returns a {@code versionedExpenditureTracker}
+     * with the {@code expenditureTrackerStates} added into it, and the
      * {@code versionedExpenditureTracker#currentStatePointer} at the end of list.
      */
-    private VersionedExpenditureTracker prepareExpenditureTracker(ReadOnlyExpenditureTracker... expenditureTrackerStates) {
+    private VersionedExpenditureTracker prepareExpenditureTracker(ReadOnlyExpenditureTracker...
+                                                                          expenditureTrackerStates) {
         assertFalse(expenditureTrackerStates.length == 0);
 
-        VersionedExpenditureTracker versionedExpenditureTracker = new VersionedExpenditureTracker(expenditureTrackerStates[0]);
+        VersionedExpenditureTracker versionedExpenditureTracker =
+                new VersionedExpenditureTracker(expenditureTrackerStates[0]);
         for (int i = 1; i < expenditureTrackerStates.length; i++) {
             versionedExpenditureTracker.resetData(expenditureTrackerStates[i]);
             versionedExpenditureTracker.commit();
@@ -279,7 +286,8 @@ public class VersionedExpenditureTrackerTest {
     /**
      * Shifts the {@code versionedExpenditureTracker#currentStatePointer} by {@code count} to the left of its list.
      */
-    private void shiftCurrentStatePointerLeftwards(VersionedExpenditureTracker versionedExpenditureTracker, int count) {
+    private void shiftCurrentStatePointerLeftwards(VersionedExpenditureTracker versionedExpenditureTracker,
+                                                   int count) {
         for (int i = 0; i < count; i++) {
             versionedExpenditureTracker.undo();
         }
