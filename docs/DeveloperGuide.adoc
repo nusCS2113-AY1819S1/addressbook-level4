@@ -455,6 +455,14 @@ The import and export feature consists of two parts: +
 ===== Frontend implementation
 Similar to the other commands; see <<Events-Driven-Nature,*`Events-Driven nature of the design`*>>.
 
+===== Backend implementation - IcsUtil Class
+
+The `IcsUtil` class implements two public methods for handling _.ics_ files: +
+
+1. `IcsUtil#readTimeTableFromFile()` - to read a `TimeTable` from an _.ics_ file; accepts the `filePath` of the _.ics_ file as parameter +
+2. `IcsUtil#saveTimeTableToFile()` - to write a `TimeTable` to disk; accepts the `TimeTable` and `filePath` of the _.ics_ file as parameter +
+
+
 ===== Backend implementation - Import
 
 The general implementation are as follows: +
@@ -482,15 +490,6 @@ The following sequence diagram shows how the TimeTable is exported: +
 image::ExportSequenceDiagram.png[ ]
 
 {nbsp}
-
-===== Backend implementation - IcsUtil Class
-
-The `IcsUtil` class implements two public methods for handling _.ics_ files: +
-
-1. `IcsUtil#readTimeTableFromFile()` - to read a `TimeTable` from an _.ics_ file; accepts the `filePath` of the _.ics_ file as parameter +
-2. `IcsUtil#saveTimeTableToFile()` - to write a `TimeTable` to disk; accepts the `TimeTable` and `filePath` of the _.ics_ file as parameter +
-
-
 
 ==== Design Considerations
 ===== Aspect: Which Classes (and which system(s)) should parse the ics file format?
