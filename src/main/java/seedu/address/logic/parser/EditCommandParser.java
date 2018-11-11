@@ -49,7 +49,9 @@ public class EditCommandParser implements Parser<EditProductCommand> {
 
         EditProductDescriptor editProductDescriptor = new EditProductDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editProductDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editProductDescriptor.setName(ParserUtil.parseName(
+                    argMultimap.getValue(PREFIX_NAME).get().substring(0, 1).toUpperCase()
+                    + argMultimap.getValue(PREFIX_NAME).get().substring(1)));
         }
         if (argMultimap.getValue(PREFIX_SERIAL_NR).isPresent()) {
             editProductDescriptor.setSerialNumber(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_SERIAL_NR).get()));
