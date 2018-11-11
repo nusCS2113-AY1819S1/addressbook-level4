@@ -1014,6 +1014,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |=======================================================================
 // end::userStories[]
 
+// tag::useCases[]
 [appendix]
 == Use Cases
 
@@ -1224,6 +1225,7 @@ Expenditure Tracker & Calendar
   2a. The list is empty.
   2b. The given index is invalid.
     2b1. To-do list shows an error message
+// end::useCases[]
 
 [appendix]
 == Non Functional Requirements
