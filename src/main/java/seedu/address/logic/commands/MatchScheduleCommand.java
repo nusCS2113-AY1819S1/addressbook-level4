@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
@@ -15,7 +16,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.matchSchedule.MatchSchedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.person.TheDate;
@@ -48,8 +48,6 @@ public class MatchScheduleCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Common time slots found!\n";
     public static final String MESSAGE_FAILURE = "No common time slots Found!";
 
-    private MatchSchedule toSchedule;
-
     private List<Schedule> matchScheduleCompare;
     private List<Time> startTimeList;
     private List<Time> endTimeList;
@@ -62,14 +60,13 @@ public class MatchScheduleCommand extends Command {
     private final Time endTime;
 
 
-    public MatchScheduleCommand(MatchSchedule matchSchedule, TheDate date, Time startTime, Time endTime,
+    public MatchScheduleCommand(TheDate date, Time startTime, Time endTime,
                                 List<Index> matchScheduleList) {
-        requireNonNull(matchSchedule);
+        requireAllNonNull(date, startTime, endTime, matchScheduleList);
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.index = matchScheduleList;
-        this.toSchedule = matchSchedule;
         this.matchScheduleCompare = new ArrayList<>();
     }
 
@@ -145,7 +142,6 @@ public class MatchScheduleCommand extends Command {
                 }
 
             }
-
 
             if (validRangePresent == 1) {
                 return new CommandResult(MESSAGE_SUCCESS + slots);
