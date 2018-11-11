@@ -50,13 +50,17 @@ public class Item {
         this.tags.addAll(tags);
     }
 
-    public Item(Name name, Quantity quantity, Quantity minQuantity, Loststatus loststatus, Set<Tag> tags) {
+    public Item(Name name, Quantity quantity, Quantity minQuantity,
+                Loststatus loststatus, Status status, Set<Tag> tags) {
         requireAllNonNull(name, quantity, minQuantity, tags);
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
         this.loststatus.setLoststatusFound(loststatus.getLoststatusFound());
         this.loststatus.setLoststatusLost(loststatus.getLoststatusLost());
+        this.status.setStatusReady(status.getStatusReady());
+        this.status.setStatusOnLoan(status.getStatusOnLoan());
+        this.status.setStatusFaulty(status.getStatusFaulty());
         this.tags.addAll(tags);
     }
 
