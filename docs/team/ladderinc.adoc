@@ -71,6 +71,7 @@ unwanted results from their search.
 |===
 
 include::../UserGuide.adoc[tag=searchpruningtitle]
+include::../UserGuide.adoc[tag=searchpruningpreface]
 include::../UserGuide.adoc[tag=searchpruningguide]
 
 == Contributions to the Developer Guide

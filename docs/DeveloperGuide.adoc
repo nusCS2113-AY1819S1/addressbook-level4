@@ -495,12 +495,10 @@ image::ViewClubBudgetsCommandSequenceDiagram.png[width="800"]
 
 The Search Pruning mechanism is facilitated by the `SearchHistoryManager` class, and within it is a `searchHistoryStack` that stores `Predicate` objects.
 
-In NUSSU Connect,
-the main `SearchHistoryManger` object is in `ModelManager` and it stores `Predicate<Person>` objects which are then used to filter
-`filteredPersons` list.
+In NUSSU Connect, the main `SearchHistoryManger` object is in `ModelManager` and it stores `Predicate<Person>` objects used for filtering `filteredPersons` list.
 
-IMPORTANT: The `SearchHistoryManger` object in `ModelManager` only stores `Predicate<Person>` objects and is meant only for the filtering of `FilteredList<Person>`.
-If you want to utilize `SearchHistoryManager` for your own use case, you can initialize a new `SearchHistoryManager` object with its generic constructor.
+NOTE: The `SearchHistoryManger` object in `ModelManager` only stores `Predicate<Person>` objects and is meant only for the filtering of `FilteredList<Person>`.
+If you want to utilize `SearchHistoryManager` for your own use case, you should initialize a new `SearchHistoryManager` object with its generic constructor.
 
 ==== Current Implementation
 
@@ -598,6 +596,24 @@ Aspect: What data is stored in search history stack +
 ** Cons:
     . More memory is required as Person objects has to be duplicated multiple times into a new List.
     . Class is not reusable for Search Pruning of other objects other than those from Person classes.
+
+Aspect: How the Predicate at the top of the Stack is retrieved from SearchHistoryManager +
+
+* **Alternative 1(current choice):** `Predicate` object is returned from the method `executeSearch` and `revertLastSearch`
+** Pros:
+    . No need for an extra method call to retrieve search logic in the form of `Predicate` object from SearchHistoryManager. +
+** Cons:
+    . No clear distinction between Update and Retrieval of search logic. +
+
+* ** Alternative 2: ** `Predicate` object is not returned from the method `executeSearch` and `revertLastSearch`, but is instead retrieved with another method.
+** Pros:
+    . Clearer distinction between Update and Retrieval of search logic.
+
+** Cons:
+    . Need to perform 2 method calls separately to retrieve `Predicate` object after an update to search logic.
+    . Need to implement another method specifically for retrieval of `Predicate` object.
+    . Future developers utilizing `SearchHistoryManger` need to remember that they need to retrieve `Predicate` object from `SearchHistoryManager` separately
+      after an update to search logic.
 // end::searchpruning[]
 
 // tag::asl[]
