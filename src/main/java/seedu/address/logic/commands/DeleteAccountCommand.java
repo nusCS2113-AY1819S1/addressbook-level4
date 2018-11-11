@@ -47,12 +47,12 @@ public class DeleteAccountCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_ACCOUNT_DISPLAYED_INDEX);
         }
 
+        Account itemToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        if (lastShownList.size() == 1) {
+        if (itemToDelete.getUsername().toString().equals(model.getLoggedInUser())) {
             throw new CommandException(Messages.MESSAGE_INVALID_ACCOUNT_DELETION);
         }
 
-        Account itemToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteAccount(itemToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_ACCOUNT_SUCCESS, itemToDelete));
     }
