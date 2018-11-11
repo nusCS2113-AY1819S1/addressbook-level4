@@ -37,8 +37,7 @@ public class TheDate {
         try {
             jitHubDateFormat.parse(test);
             return true;
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
             return false;
         }

@@ -28,7 +28,7 @@ public class CalendarPanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private CalendarLayout CalendarLayout;
+    private CalendarLayout calendarLayout;
     private YearMonth currentYearMonth;
 
     @FXML
@@ -39,7 +39,7 @@ public class CalendarPanel extends UiPart<Region> {
     public CalendarPanel() {
         super(FXML);
 
-        CalendarLayout = new CalendarLayout();
+        calendarLayout = new CalendarLayout();
         currentYearMonth = YearMonth.now();
 
         getRoot().setOnKeyPressed(Event::consume);
@@ -51,7 +51,7 @@ public class CalendarPanel extends UiPart<Region> {
      * Creates the view of the calendar
      */
     private void createMainView() {
-        CalendarLayout.getCalendarLayout(currentYearMonth);
+        calendarLayout.getCalendarLayout(currentYearMonth);
         calendar.getChildren().add(CalendarLayout.getRoot());
         loadUpdatedPage();
     }
@@ -79,6 +79,6 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     public CalendarLayout getCalendarLayout() {
-        return CalendarLayout;
+        return calendarLayout;
     }
 }
