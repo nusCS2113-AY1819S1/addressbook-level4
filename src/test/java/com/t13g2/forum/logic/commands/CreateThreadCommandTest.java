@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
+import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Context;
@@ -19,7 +20,6 @@ import com.t13g2.forum.model.UserPrefs;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
-import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.testutil.CommentBuilder;
 import com.t13g2.forum.testutil.ForumThreadBuilder;
