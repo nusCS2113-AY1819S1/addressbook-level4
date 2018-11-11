@@ -377,7 +377,7 @@ Removes the user with username `Peter Parker` from the attendance of the 1st eve
 Removes the user with username `Alice` from the attendance of the 2nd event in the results of the `find` command.
 // end::rsvp[]
 
-//tag::eventState&Reminder[]
+// tag::eventState&Reminder[]
 === Show event reminders : `reminder`
 
 Admin/User: Shows event reminders for all upcoming events that the user has registered for.
@@ -402,7 +402,7 @@ Format: `update`
 ****
 
 TIP: You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load, and if the problem still persists, use the `update` command.
-//end::eventState&Reminder
+// end::eventState&Reminder[]
 
 
 //tag::comment[]
