@@ -290,8 +290,8 @@ When the user is deleted, the following storage files stored in the system manag
 
 ==== Design Considerations
 
-===== Aspect: Implementation of `UserDatabase`
-*   **Alternative 1 (current implementation):** All users are stored collectively in one XML file.
+===== Aspect: Implementation of Users Database
+*   **Alternative 1 (current choice):** All users stored collectively in one XML file.
     (users.xml)
 
 *   **Alternative 2:** SQL/NoSQL Databases.
