@@ -668,7 +668,7 @@ The user enters two dates (or one date) after the one "d/" index.
 
 The following sequence diagram shows how the deleteLimit operation works:
 
-image::deleteLimitSequenceDiagram.png[width:800]
+image::DeleteLimitSequenceDiagram.png[width:800]
 // end::deleteLimit[]
 // tag::editLimit[]
 
@@ -684,7 +684,7 @@ The user enter two dates after the one "d/" index followed by money with m/ inde
 
 The following sequence diagram shows how the limit operation works:
 
-image::editLimitSequenceDiagram.png[width:800]
+image::EditLimitSequenceDiagram.png[width:800]
 // end::editLimit[]
 // tag::addMonthlyLimit[]
 ==== addMonthlyLimit feature
@@ -700,7 +700,7 @@ The user only enter money after the one "m/" index.
 
 The following sequence diagram shows how the limit operation works:
 
-image::addMonthlyLimitSequenceDiagram.png[width:800]
+image::AddMonthlyLimitSequenceDiagram.png[width:800]
 // end::addMonthlyLimit[]
 // tag::editMonthlyLimit[]
 ==== editMonthlyLimit feature
@@ -716,7 +716,7 @@ The user only enter money after the one "m/" index.
 
 The following sequence diagram shows how the limit operation works:
 
-image::editMonthlyLimitSequenceDiagram.png[width:800]
+image::EditMonthlyLimitSequenceDiagram.png[width:800]
 // end::editMonthlyLimit[]
 // tag::deleteMonthlyLimit[]
 ==== deleteMonthlyLimit feature
@@ -732,7 +732,7 @@ The user will only enter the command word.
 
 The following sequence diagram shows how the limit operation works:
 
-image::deleteMonthlyLimitSequenceDiagram.png[width:800]
+image::DeleteMonthlyLimitSequenceDiagram.png[width:800]
 // end::deleteMonthlyLimit[]
 // tag::checkLimit[]
 ==== checkLimit feature
@@ -1746,30 +1746,216 @@ Use case ends.
 ** Use case resumes at step 2
 
 [discrete]
-=== 11. Use case: Create daily limit for expenses [Oscar]
+=== 11. Use case: Create a normal limit for a period of time or a day [Oscar]
 
 *MSS*
 
-1.  User requests to create daily limit for expenses
-2.  FinancialPlanner requests for the maximum amount for the day
-3.  User enters the amount.
-4.  FinancialPlanner confirms amount with user.
-5.  User confirms the amount.
-6.  FinancialPlanner records the amount in the hard drive
+1.  User requests to create a normal limit for expenses different period of time or a day.
+2.  FinancialPlanner requests for the dateStart and dateEnd of that period of time or the date of the day and the maximum amount of spending.
+3.  User enters the dateStart and dateEnd or the date and the amount of spending.
+4.  FinancialPlanner records the limit in the hard drive.
+5.  FinancialPlanner keeps tracking the spending during limit's date period of time or that day.
+6.  FinancialPlanner warns user when the total spend exceeds the limit amount of spending.
+
 +
 Use case ends.
 
 *Extensions*
 
-* 6a. The location for the record is invalid.
-** FinancialPlanner throws invalid location error and prompts for new location.
-** User enters a new location.
-** FinancialPlanner requests for confirmation.
-** User confirms the location
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. The dateStart is later than dateEnd. +
+** System shows date error.
+** Use case ends.
+
+* 3c. There is already a limit for the time period or the day. +
+** System shows redundant limit error.
 ** Use case ends.
 
 [discrete]
-=== 12. Use case: Export expenses into Excel file [Linh Chi]
+=== 12. Use case: Edit an existing normal limit [Oscar]
+
+*MSS*
+
+1.  User requests to edit an existing normal limit.
+2.  FinancialPlanner requests for the new maximum amount of spending for the period of time or the day.
+3.  User enters the dateStart and dateEnd or the date and the new amount of spending.
+4.  FinancialPlanner updates the new limit in the hard drive.
+5.  FinancialPlanner keeps tracking the spending during the limit's date period of time or that day.
+6.  FinancialPlanner warns user when the total spend exceeds the limit amount of spending.
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. The dateStart is later than dateEnd. +
+** System shows date error.
+** Use case ends.
+
+* 3c. There is no existing limit for the time period or the day. +
+** System shows no existing limit error.
+** Use case ends.
+
+* 3d. The edit limit is exactly the same as the original one. +
+** System shows same limit error.
+** Use case ends.
+
+[discrete]
+=== 13. Use case: Delete an existing limit [Oscar]
+
+*MSS*
+
+1.  User requests to delete an existing limit.
+2.  FinancialPlanner requests for the date period of the limit to be deleted.
+3.  User enters the dateStart and dateEnd or the date.
+4.  FinancialPlanner deletes the limit in the hard drive.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. The dateStart is later than dateEnd. +
+** System shows date error.
+** Use case ends.
+
+* 3c. There is no existing limit for the time period or the day. +
+** System shows no existing limit error.
+** Use case ends.
+
+[discrete]
+=== 14. Use case: Add a monthly limit [Oscar]
+
+*MSS*
+
+1.  User requests to add the monthly limit.
+2.  FinancialPlanner requests the monthly maximum amount of spending.
+3.  User enters the maximum amount of spending.
+4.  FinancialPlanner adds the monthly limit.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. There is already a monthly limit. +
+** System shows existing monthly limit error.
+** Use case ends.
+
+[discrete]
+=== 15. Use case: Edit the monthly limit [Oscar]
+
+*MSS*
+
+1.  User requests to edit the monthly limit.
+2.  FinancialPlanner requests the new monthly maximum amount of spending.
+3.  User enters the new maximum amount of spending.
+4.  FinancialPlanner updates the monthly limit.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. There is no monthly limit. +
+** System shows no monthly limit error.
+** Use case ends.
+
+[discrete]
+=== 16. Use case: Delete the monthly limit [Oscar]
+
+*MSS*
+
+1.  User requests to delete the monthly limit.
+2.  FinancialPlanner updates the monthly limit.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 2a. There is no monthly limit. +
+** System shows no monthly limit error.
+** Use case ends.
+
+[discrete]
+=== 17. Use case: Check all the existing limits [Oscar]
+
+*MSS*
+
+1.  User requests to check all the existing limits.
+2.  FinancialPlanner displays all the existing limits.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 2a. There is no limit stored. +
+** System shows no limit error.
+** Use case ends.
+
+[discrete]
+=== 18. Use case: Export expenses into Excel file [Linh Chi]
 
 *MSS*
 
@@ -1789,7 +1975,7 @@ Use case ends.
 ** Use case resumes at step 2.
 
 [discrete]
-==== 14. Use case: Import the Excel file into Financial Planner. [Linh Chi]
+==== 19. Use case: Import the Excel file into Financial Planner. [Linh Chi]
 
 *MSS*
 
@@ -1806,7 +1992,7 @@ Use case ends.
 
 
 [discrete]
-=== 15. Use case: Archive the records data into Excel file. [Linh Chi]
+=== 20. Use case: Archive the records data into Excel file. [Linh Chi]
 
 *MSS*
 
@@ -1826,7 +2012,7 @@ Use case ends.
 ** Use case resumes at step 2.
 
 [discrete]
-=== 16. Use case: Freely edit expenses tags
+=== 21. Use case: Freely edit expenses tags
 
 *MSS*
 
