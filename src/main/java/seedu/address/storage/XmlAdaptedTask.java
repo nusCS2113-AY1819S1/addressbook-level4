@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.core.Messages.MESSAGE_ZERO_HOURS_COMPLETION;
 import static seedu.address.commons.util.StringUtil.isNonZeroUnsignedInteger;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_HOURS;
 
@@ -184,7 +185,7 @@ public class XmlAdaptedTask {
 
         // Check validity of completed num of hours
         final int modelCompletedNumOfHours;
-        if (!completedNumOfHours.equals("-1") || Integer.valueOf(completedNumOfHours) < -1) {
+        if (completedNumOfHours == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     "Number of hours taken to complete"));
         } else {
@@ -194,6 +195,12 @@ public class XmlAdaptedTask {
         // Check validity of isCompleted
         //Boolean cannot be checked for null --> if (isCompleted == null)
         final boolean modelIsCompleted = isCompleted;
+
+        if (isCompleted && modelCompletedNumOfHours <= 0) {
+            throw new IllegalValueException(MESSAGE_ZERO_HOURS_COMPLETION);
+        } else if (!isCompleted && modelCompletedNumOfHours > 0) {
+            throw new IllegalValueException("Task is not completed yet ...");
+        }
 
         // Check validity of Milestones
         final List<Milestone> milestoneEntries = new ArrayList<Milestone>();
