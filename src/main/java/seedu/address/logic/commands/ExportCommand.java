@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -25,6 +26,7 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_EXPORT_SUCCESS = "Exported persons listed to %1$s";
     public static final String MESSAGE_FAILURE = "Export failed!";
+    public static final String MESSAGE_FAILURE_EMPTY_AB = "There is nothing to export!";
 
     private final Path filePath;
 
@@ -42,6 +44,8 @@ public class ExportCommand extends Command {
             model.exportFilteredAddressBook(filePath);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FAILURE);
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_FAILURE_EMPTY_AB);
         }
 
         return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, filePath));

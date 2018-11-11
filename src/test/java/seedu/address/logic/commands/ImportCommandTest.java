@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -38,11 +39,12 @@ public class ImportCommandTest {
     private Path importFilePath;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException, IllegalValueException {
         model = new ModelManager(new AddressBookBuilder().build(), new UserPrefs());
         expectedModel = new ModelManager(new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build(),
                 new UserPrefs());
         importFilePath = Paths.get("src", "test", "data", "sandbox", "testImportCommand.xml");
+        expectedModel.exportFilteredAddressBook(importFilePath);
     }
 
     @Test
@@ -52,8 +54,7 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void execute() throws IOException, CommandException {
-        expectedModel.exportFilteredAddressBook(importFilePath);
+    public void execute() throws CommandException {
         CommandResult commandResult = new ImportCommand(importFilePath).execute(model, new CommandHistory());
         String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_SUCCESS, PERSONS_ADDED);
 

@@ -16,6 +16,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -74,8 +75,17 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void exportFilteredAddressBook_nullExportFilePath_throwsNullPointerException() throws IOException {
+    public void exportFilteredAddressBook_nullExportFilePath_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
+        modelManager.exportFilteredAddressBook(null);
+    }
+
+    @Test
+    public void exportFilteredAddressBook_emptyAddressBook_throwsIllegalValueException() throws Exception {
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs());
+        modelManager.resetData(new AddressBook());
+
+        thrown.expect(IllegalValueException.class);
         modelManager.exportFilteredAddressBook(null);
     }
 

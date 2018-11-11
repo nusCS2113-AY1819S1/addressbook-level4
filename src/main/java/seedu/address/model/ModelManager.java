@@ -16,6 +16,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.export.CsvWriter;
 import seedu.address.export.Export;
 import seedu.address.export.ExportManager;
@@ -216,7 +217,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void exportFilteredAddressBook(Path exportFilePath) throws IOException {
+    public void exportFilteredAddressBook(Path exportFilePath) throws IOException, IllegalValueException {
         Export export = new ExportManager(getFilteredPersonList(), exportFilePath);
         export.saveFilteredPersons();
     }

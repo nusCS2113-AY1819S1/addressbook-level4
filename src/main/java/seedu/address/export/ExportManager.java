@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.person.Person;
 import seedu.address.storage.XmlFileStorage;
@@ -19,6 +20,7 @@ import seedu.address.storage.XmlSerializableAddressBook;
  */
 public class ExportManager implements Export {
 
+    private static final String MESSAGE_NOTHING_TO_EXPORT = "There is nothing to export!";
     private static final Logger logger = LogsCenter.getLogger(seedu.address.export.ExportManager.class);
 
     private ObservableList<Person> filteredPersons;
@@ -38,9 +40,10 @@ public class ExportManager implements Export {
     /**
      * Saves the {@code filteredPersons} to the {@code exportPath}.
      * @throws IOException if there was any problem writing to the file.
+     * @throws IllegalValueException if the current addressbook is empty.
      */
     @Override
-    public void saveFilteredPersons() throws IOException {
+    public void saveFilteredPersons() throws IOException, IllegalValueException {
         saveFilteredPersons(filteredPersons, exportPath);
     }
 
@@ -50,9 +53,14 @@ public class ExportManager implements Export {
      * @param filePath file path of the data. Cannot be null
      */
     @Override
-    public void saveFilteredPersons(ObservableList<Person> filteredPersons, Path filePath) throws IOException {
+    public void saveFilteredPersons(ObservableList<Person> filteredPersons, Path filePath) throws IOException, IllegalValueException {
         requireNonNull(filteredPersons);
         requireNonNull(filePath);
+
+        if (filteredPersons.size() <= 0) {
+            logger.warning("There is nothing to export!");
+            throw new IllegalValueException(MESSAGE_NOTHING_TO_EXPORT);
+        }
 
         if (FileUtil.isFileExists(filePath)) {
             logger.fine("File exists. Overwriting output file: " + filePath.toString());

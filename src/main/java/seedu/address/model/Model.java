@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
@@ -103,7 +104,7 @@ public interface Model {
     /**
      * Exports the current filtered person list to a xml file at {@code exportFilePath}.
      */
-    void exportFilteredAddressBook(Path exportFilePath) throws IOException;
+    void exportFilteredAddressBook(Path exportFilePath) throws IOException, IllegalValueException;
 
     /**
      * Exports the current address book state to a .csv file.
