@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACCOUNTS;
 
 import java.util.List;
 
@@ -53,6 +54,9 @@ public class LoginCommand extends Command {
         if (!model.getLoginStatus()) {
             throw new CommandException(MESSAGE_FAIL);
         }
+
+        model.updateFilteredAccountList(PREDICATE_SHOW_ALL_ACCOUNTS);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, model.getLoggedInUser()));
     }
 
