@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -18,16 +17,12 @@ import javafx.util.Duration;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.model.AddressBookLocalBackupEvent;
 import seedu.address.commons.events.model.AddressBookLocalRestoreEvent;
 import seedu.address.commons.events.model.AddressBookOnlineRestoreEvent;
-//import seedu.address.commons.events.model.BooksLocalBackupEvent;
 import seedu.address.commons.events.model.EventBookChangedEvent;
-import seedu.address.commons.events.model.EventBookLocalBackupEvent;
 import seedu.address.commons.events.model.EventBookLocalRestoreEvent;
 import seedu.address.commons.events.model.EventBookOnlineRestoreEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
-import seedu.address.commons.events.model.ExpenseBookLocalBackupEvent;
 import seedu.address.commons.events.model.ExpenseBookLocalRestoreEvent;
 import seedu.address.commons.events.model.ExpenseBookOnlineRestoreEvent;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
@@ -133,12 +128,6 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(versionedAddressBook));
         raise(new NewResultAvailableEvent(message));
     }
-
-    /** Raises an event to indicate the request to backup model to persistent storage*/
-    private void indicateAddressBookBackupRequest() {
-        raise(new AddressBookLocalBackupEvent(versionedAddressBook, userPrefs.getAddressBookBackupFilePath()));
-    }
-
     //@@author
 
     @Override
@@ -386,11 +375,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskBookChangedEvent(versionedTaskBook));
     }
 
+    //@@author QzSG
     private void indicateTaskBookChanged(String message) {
         raise(new TaskBookChangedEvent(versionedTaskBook));
         raise(new NewResultAvailableEvent(message));
     }
-
+    //@@author
+    //@@author luhan02
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
@@ -500,11 +491,6 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new NewResultAvailableEvent(message));
     }
 
-    /** Raises an event to indicate the request to backup model to persistent storage*/
-    private void indicateEventBookBackupRequest(Path backupPath) {
-        raise(new EventBookLocalBackupEvent(versionedEventBook, userPrefs.getEventBookBackupFilePath()));
-    }
-
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -541,11 +527,6 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateExpenseBookChanged(String message) {
         raise(new ExpenseBookChangedEvent(versionedExpenseBook));
         raise(new NewResultAvailableEvent(message));
-    }
-
-    /** Raises an event to indicate the request to backup model to persistent storage*/
-    private void indicateExpenseBookBackupRequest(Path backupPath) {
-        raise(new ExpenseBookLocalBackupEvent(versionedExpenseBook, userPrefs.getExpenseBookBackupFilePath()));
     }
 
     //@@author ChenSongJian

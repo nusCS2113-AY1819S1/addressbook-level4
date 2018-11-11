@@ -5,10 +5,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalExpenses.getTypicalExpenseBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -18,13 +20,16 @@ import org.junit.rules.TemporaryFolder;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.ExpenseBookChangedEvent;
 import seedu.address.commons.events.model.UserPrefsChangedEvent;
+import seedu.address.commons.events.storage.DataRestoreExceptionEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.OnlineRestoreEvent;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ExpenseBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyExpenseBook;
 import seedu.address.model.ReadOnlyTaskBook;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
@@ -120,6 +125,32 @@ public class StorageManagerTest {
         assertEquals(original.hashCode(), new ExpenseBook(retrieved).hashCode());
     }
 
+    @Test
+    public void taskBookReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link XmlTaskBookStorage} class.
+         * More extensive testing of ExpenseBook saving/reading is done in {@link XmlTaskBookStorage} class.
+         */
+        TaskBook original = getTypicalTaskBook();
+        storageManager.saveTaskBook(original);
+        ReadOnlyTaskBook retrieved = storageManager.readTaskBook().get();
+        assertEquals(original, new TaskBook(retrieved));
+    }
+
+    @Test
+    public void taskBookReadBackup() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link XmlTaskBookStorage} class.
+         * More extensive testing of TaskBook saving/reading is done in {@link XmlTaskBookStorageTest} class.
+         */
+        TaskBook original = getTypicalTaskBook();
+        storageManager.backupTaskBook(original, getTempFilePath("TaskBook.bak"));
+        ReadOnlyTaskBook retrieved = storageManager.readTaskBook(getTempFilePath("TaskBook.bak")).get();
+        assertEquals(original, new TaskBook(retrieved));
+    }
+
     //@@author
     @Test
     public void getAddressBookFilePath() {
@@ -177,6 +208,23 @@ public class StorageManagerTest {
         public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
             throw new IOException("dummy exception");
         }
+    }
+
+    @Test
+    public void handleOnlineRestoreEvent_exceptionThrown_eventRaised() {
+
+        storageManager.handleOnlineRestoreEvent(new OnlineRestoreEvent(OnlineStorage.Type.GITHUB,
+                UserPrefs.TargetBook.AddressBook, "", Optional.empty()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataRestoreExceptionEvent);
+        storageManager.handleOnlineRestoreEvent(new OnlineRestoreEvent(OnlineStorage.Type.GITHUB,
+                UserPrefs.TargetBook.TaskBook, "", Optional.empty()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataRestoreExceptionEvent);
+        storageManager.handleOnlineRestoreEvent(new OnlineRestoreEvent(OnlineStorage.Type.GITHUB,
+                UserPrefs.TargetBook.EventBook, "", Optional.empty()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataRestoreExceptionEvent);
+        storageManager.handleOnlineRestoreEvent(new OnlineRestoreEvent(OnlineStorage.Type.GITHUB,
+                UserPrefs.TargetBook.ExpenseBook, "", Optional.empty()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataRestoreExceptionEvent);
     }
 
     //@@author

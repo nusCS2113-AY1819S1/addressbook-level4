@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.Semaphore;
 
+import javafx.application.Platform;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -51,5 +53,15 @@ public class TestUtil {
      */
     public static Person getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
+    }
+
+    /**
+     * Waits for any code that uses Platform.runLater
+     * @throws InterruptedException
+     */
+    public static void waitForRunLater() throws InterruptedException {
+        Semaphore semaphore = new Semaphore(0);
+        Platform.runLater(() -> semaphore.release());
+        semaphore.acquire();
     }
 }

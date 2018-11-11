@@ -46,6 +46,7 @@ import seedu.address.logic.commands.ListTaskCommand;
 import seedu.address.logic.commands.MonthlyExpenseCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RedoExpenseCommand;
+import seedu.address.logic.commands.RestoreCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoExpenseCommand;
@@ -136,6 +137,9 @@ public class LogicManager extends ComponentManager implements Logic {
                 + PREFIX_PRIORITY + " "
                 + PREFIX_TAG);
         commandList.add(BackupCommand.COMMAND_WORD);
+        commandList.add(BackupCommand.COMMAND_WORD + " [SERVICE AUTHTOKEN]");
+        commandList.add(RestoreCommand.COMMAND_WORD);
+        commandList.add(RestoreCommand.COMMAND_WORD + " [SERVICE]");
         commandList.add(ClearCommand.COMMAND_WORD);
         commandList.add(ClearExpenseCommand.COMMAND_WORD);
         commandList.add(DeleteCommand.COMMAND_WORD);

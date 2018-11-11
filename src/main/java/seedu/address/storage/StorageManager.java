@@ -255,6 +255,9 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleOnlineRestoreEvent(OnlineRestoreEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Restoring data from online storage"));
+        if (event.ref.trim().isEmpty()) {
+            raise(new DataRestoreExceptionEvent( new IllegalValueException("Reference field should not be empty")));
+        }
         restoreOnline(event.target, event.targetBook, event.ref, event.authToken);
     }
 
