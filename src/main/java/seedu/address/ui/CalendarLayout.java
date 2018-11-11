@@ -12,12 +12,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import seedu.address.ui.UiPart;
 
 //@@author linnnruoo
-//inspired by the original @@author guekling
+//Inspired by the original @@author guekling
 /**
- * Supports the display of the month view of the calendar.
+ * Dsplay the layout of calendar view
  */
 public class CalendarLayout extends UiPart<Region> {
 
