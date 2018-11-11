@@ -436,9 +436,9 @@ If a command fails its execution, it will not call `Gradebook#GradebookManager()
 
 Step 4. The user now decides to export graph according to the progress of a student, and that action is done by executing the `gradebook graph student` command. This command will call `GradebookManager#graphStudentProgress()`, which then displays the graph of the students progress.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a user executes grade graph command:
 
-image::dataToGraphActivityDiagram.png[width="650"]
+image::GradeGraphActivityDiagram.png[width="650"]
 
 ==== Design Considerations
 
@@ -2758,6 +2758,7 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+
 // tag::gradebookmanualtesting[]
 === Gradebook List
 
