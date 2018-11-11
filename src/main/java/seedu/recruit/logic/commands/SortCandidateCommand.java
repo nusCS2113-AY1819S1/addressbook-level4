@@ -60,4 +60,21 @@ public class SortCandidateCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCandidateCommand)) {
+            return false;
+        }
+
+        // state check
+        SortCandidateCommand s = (SortCandidateCommand) other;
+        return prefixToSort.equals(s.prefixToSort);
+    }
+
 }

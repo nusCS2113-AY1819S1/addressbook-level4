@@ -12,7 +12,7 @@ public class Age {
     public static final String AGE_VALIDATION_REGEX = "[\\d]{1,2}";
 
     public static final String MESSAGE_AGE_CONSTRAINTS =
-            "Age has to be a number 0 - 99, and it should not be blank ";
+            "Age has to be a number from 16 to 60, and it should not be blank ";
 
     public final String value;
 
@@ -26,7 +26,9 @@ public class Age {
      * Returns true if a given string is a valid age.
      */
     public static boolean isValidAge(String test) {
-        return test.matches(AGE_VALIDATION_REGEX);
+        return ((test.matches(AGE_VALIDATION_REGEX))
+                && (Integer.parseInt(test) >= 16))
+                && (Integer.parseInt(test) <= 60);
     }
 
     @Override

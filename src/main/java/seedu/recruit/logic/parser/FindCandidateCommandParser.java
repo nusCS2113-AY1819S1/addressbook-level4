@@ -26,6 +26,16 @@ import seedu.recruit.model.candidate.CandidateContainsFindKeywordsPredicate;
  */
 public class FindCandidateCommandParser implements Parser<FindCandidateCommand> {
 
+    private static String userInput;
+
+    public FindCandidateCommandParser (String userInput) {
+        this.userInput = userInput;
+    }
+
+    public static String getUserInput() {
+        return userInput;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCandidateCommand
      * and returns an FindCandidateCommand object for execution.

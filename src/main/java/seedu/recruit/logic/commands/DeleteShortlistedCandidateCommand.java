@@ -58,7 +58,6 @@ public class DeleteShortlistedCandidateCommand extends Command {
         // If there are no candidates inside the list of shortlisted candidates.
         if (selectedJob.getObservableCandidateList().isEmpty()) {
             EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
-
             return new CommandResult(MESSAGE_EMPTY_LIST);
         }
 
@@ -79,7 +78,6 @@ public class DeleteShortlistedCandidateCommand extends Command {
             DeleteShortlistedCandidateInitializationCommand.isDoneDeleting();
         }
         EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
-
         return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS,
                 removedShortlistedTagFromCandidate.getName().fullName, selectedJob.getJob().value,
                 selectedCompany.getCompanyName().value));
