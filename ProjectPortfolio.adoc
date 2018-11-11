@@ -39,10 +39,10 @@ The class Product now consists of the attributes:
 
 
 Other contributions:
-I integrated Paras featur "Transaction" with my attribute Remaining items.
+I integrated Paras feature "Transaction" with my attribute Remaining items.
 Now when a transaction is made the program first sees if the products exist then it sees if there is enough products in the inventory and lastly it subtract the number of items that are removed from the inventory.
 
-Minor contirbutions
+Minor contributions
 The use can search for a product with both name and Serialnumber (The primary key)
 
 == Contribution to the User Guide
