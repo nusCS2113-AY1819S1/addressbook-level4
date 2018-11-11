@@ -59,12 +59,6 @@ public class ManagerModelManager extends ModelManager implements ManagerModel {
     }
 
     // ================ EDIT DRINK DETAILS COMMANDS =========================
-    /**
-     * Raises an event to indicate the model has changed
-     */
-    protected void indicateDrinkAttributesChanged(Drink drink) {
-        raise(new DrinkAttributeChangedEvent(drink));
-    }
 
     @Override
     public void updateSellingPrice(Drink drinkToEdit, Price newSellingPrice) {
