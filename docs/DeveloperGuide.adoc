@@ -2204,6 +2204,97 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 
+=== Creating a group
+
+. Creating a new group
+
+.. Prerequisites: Group used in test case not already in the group list.
+.. Test case: `cg n/CS500 l/LT15 t/cpp` +
+   Expected: Group is created. Details of the group shown in the status message. Timestamp in the status bar is updated.
+   Number of groups in status bar updated.
+.. Test case: `cg l/LT15 n/CS501 t/cpp` +
+   Expected: Group is created. Details of the group shown in the status message. Timestamp in the status bar is updated.
+   Number of groups in status bar updated.
+.. Test case: `cg l/LT15 n/CS502 t/cpp t/cpp` +
+   Expected: Group is created with one of its duplicate tags. Details of the group shown in the status message. Timestamp in the status bar is updated.
+   Number of groups in status bar updated.
+.. Test case: `cg l/LT* l/LT15 n/CS50* n/CS503 t/cpp` +
+   Expected: Group is still created. Details of the group shown in the status message. Timestamp in the status bar is updated.
+   Number of groups in status bar updated.
+.. Test case: `cg n/* l/LT15` +
+   Expected: No group is created. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect create  group commands to try: `cg`, `cg n/x l/y` (where x is not alphanumeric, '-', '[' or ']' and y is not alphanumeric or '-') +
+   Expected: Similar to previous.
+
+. Duplicate groups
+
+.. Prerequisites: Group used in test case must already in the group list.
+.. Test case: `cg n/CS500 l/LT15 t/cpp` +
+   Expected: No group is created. Error details shown in the status message. Status bar remains the same.
+
+=== Adding student(s) to a group
+
+. Adding a student to a group while all students are listed.
+
+.. Prerequisites: List all students using the `list` command. Multiple students in the list.
+Multiple groups in the group list. Student being added to group must *NOT* already exist in the group.
+.. Test case: `ag g/1 p/10` +
+   Expected: Student is added to group. Details of the operation shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `ag g/1 p/0 p/5` +
+   Expected: Student is not added. Error details shown in the status message. Status bar remains the same.
+.. Test case: `ag g/2 p/5 g/1 p/5` +
+   Expected: Student of index 5 is added to group of index 1. Details of the operation shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `ag g/2 p/1 p/6` +
+   Expected: Students are added to group. Details of the operation shown in the status message. Timestamp in the status bar is updated.
+.. Other incorrect add group commands to try: `ag`, `ag g/x p/y` (where x or y is larger than the respective list size, 0 or not an integer) +
+   Expected: No student is added. Error details shown in the status message. Status bar remains the same.
+
+. Duplicate students
+
+.. Prerequisites: Student used in test case must already exist in the group.
+.. Test case: `ag g/1 p/10` +
+   Expected: Student is not added. Error details shown in the status message. Status bar remains the same.
+
+=== Deleting a student from a group
+
+. Deleting a student from a group.
+
+.. Prerequisites: Multiple groups in group list. Multiple students in groups. Students used in test case must exist in the group.
+.. Test case: `dgs g/1 p/1` +
+   Expected: First student in group is deleted from group. Details of the operation shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `dgs g/1 g/2 p/1` +
+   Expected: First student in group of index 2 is deleted from group. Details of the operation shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `dgs g/1 p/2 p/1` +
+   Expected: First student in group of index 1 is deleted from group. Details of the operation shown in the status message. Timestamp in the status bar is updated.
+.. Other incorrect delete group student commands to try: `dgs`, `dgs g/x p/y` (where x or y is larger than the respective list size, 0 or not an integer) +
+   Expected: No student is deleted from group. Error details shown in the status message. Status bar remains the same.
+
+=== Deleting a group
+
+. Deleting a group
+
+.. Prerequisites: Multiple groups in the list.
+.. Test case: `dg 1` +
+   Expected: First group is deleted from the list. Details of the deleted group shown in the status message. Timestamp in the status bar is updated.
+   Number of groups in status bar updated.
+.. Test case: `dg 0` +
+   Expected: No group is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete group commands to try: `dg`, `dg x` (where x is larger than the group list size and not an integer) +
+   Expected: Similar to previous.
+
+=== Selecting a group
+
+. Selecting a group
+
+.. Prerequisites: Multiple groups in the list. Multiple student in groups.
+.. Test case: `sg 1` +
+   Expected: First group is selected from the list. Details of the operation shown in the status message.
+   Students of selected group displayed on `Students in Selected Group` panel.
+.. Test case: `sg 0` +
+   Expected: No group is selected. Error details shown in the status message. `Students in Selected Group` panel remains the same.
+.. Other incorrect select group commands to try: `sg`, `sg x` (where x is larger than the group list size and not an integer) +
+   Expected: Similar to previous.
+
 === Saving data
 
 . Dealing with missing/corrupted data files
