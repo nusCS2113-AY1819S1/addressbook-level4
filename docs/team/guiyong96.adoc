@@ -13,7 +13,7 @@ BookInventory is a desktop application to assist store managers in managing thei
 
 == Summary of contributions
 
-* *Major enhancement* Added a command for students to request for books.*
+* *Major enhancement* Added a command for students to request for books.
 ** Functionality: Students may request for any book by typing the command in the format given in the user guide. Students may request for any book, regardless of whether the book exists in the book store.
 ** Justification: This feature brings about convenience for students who can demand a book at the comfort of their homes. This is also advantageous for bookstore owners to track popular books and manage their book supply more efficiently.
 ** Highlights: The implementation of an additional panel requires a separated segment from the original code. During the course of implementation, I have learnt to be well-versed in JavaFX. The design approach and precautions taken required careful analysis and a considerably long period of time. Thorough checking and elaborate lengthy tests were also necessary to minimise undesirable bugs surfacing. ** Credits:
@@ -34,7 +34,7 @@ BookInventory is a desktop application to assist store managers in managing thei
 ** Functionality:
 ** Justification:
 ** Credits:
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=guiyong96[Functional/Test code]] [https://github.com[Test code]]
 
 * Predictive text enabled for users.
 ** Functionality: Display a message to inform user if the system detects a spelling error.
@@ -44,7 +44,7 @@ BookInventory is a desktop application to assist store managers in managing thei
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.0` - `v1.1` (2 releases) on GitHub
+*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
 ** Project morphing:
 *** Morphed model portion of addressbook 4.
 ** Enhancements to existing features:
