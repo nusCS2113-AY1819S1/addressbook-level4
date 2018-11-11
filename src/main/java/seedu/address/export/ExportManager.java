@@ -53,7 +53,8 @@ public class ExportManager implements Export {
      * @param filePath file path of the data. Cannot be null
      */
     @Override
-    public void saveFilteredPersons(ObservableList<Person> filteredPersons, Path filePath) throws IOException, IllegalValueException {
+    public void saveFilteredPersons(ObservableList<Person> filteredPersons, Path filePath)
+            throws IOException, IllegalValueException {
         requireNonNull(filteredPersons);
         requireNonNull(filePath);
 
