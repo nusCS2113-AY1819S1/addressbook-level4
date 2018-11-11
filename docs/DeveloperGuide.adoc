@@ -342,6 +342,10 @@ Step 2. The `save` command calls `Model#saveStockList()`, which initiates a `sav
 
 Step 3. The `handleSaveStockListVersionEvent` handler calls the `saveStockListVersion()` method from the `StorageManager` class.
 
+The following sequence diagram shows how the undo operation works:
+
+image::SaveCommandSequenceDiagram.png[width="800"]
+
 Step 4. The `ReadOnlyStockList` is saved as an xml file.
 
 Step 5. The user executes `open april_18` command to open the saved april_18.xml file.
@@ -537,9 +541,7 @@ Step 2. The `deleteTag` command calls `updateFilteredItemList();` in `model` to 
 // end::addTag[]
 
 // tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
+=== Data Encryption (Coming in V2.0)
 
 // end::dataencryption[]
 
