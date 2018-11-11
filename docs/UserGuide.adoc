@@ -455,12 +455,12 @@ Example: +
 
 [NOTE]
 ====
-Ensure that TOTAL AVAILABLE BUDGET is a positive whole number.
+Ensure that TOTAL AVAILABLE BUDGET is a positive whole number, i.e. it can also be zero.
 ====
 
 [NOTE]
 ====
-Remember to only use the `calculatebudget` command once ALL the clubs' data has been collected since NUSSU-Connect only supports a one-time calculation of budgets in v1.3
+Remember to only use the `calculatebudget` command once ALL the clubs' data has been collected since NUSSU-Connect only supports a one-time calculation of budgets in v1.4
 ====
 
 ==== Viewing the allocated budget for a club : `viewbudget`
@@ -471,11 +471,6 @@ Format: `viewbudget c/CLUB NAME`
 
 Example: +
 `viewbudget c/Computing Club`
-
-[NOTE]
-====
-If the TOTAL AVAILABLE BUDGET specified by the treasurer using the `calculatebudget` command is a very small number, the budget allocated to the clubs may even be 0.
-====
 
 // end::budget[]
 

@@ -41,7 +41,7 @@ public class XmlAdaptedFinalClubBudget {
      */
     public XmlAdaptedFinalClubBudget(FinalClubBudget source) {
         clubName = source.getClubName().toString();
-        allocatedBudget = Integer.toString(source.getAllocatedBudget());
+        allocatedBudget = Double.toString(source.getAllocatedBudget());
     }
 
     /**
@@ -62,7 +62,7 @@ public class XmlAdaptedFinalClubBudget {
         if (allocatedBudget == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
         }
-        final int modelAllocatedBudget = Integer.parseInt(allocatedBudget);
+        final double modelAllocatedBudget = Double.parseDouble(allocatedBudget);
         return new FinalClubBudget(modelClubName, modelAllocatedBudget);
     }
 

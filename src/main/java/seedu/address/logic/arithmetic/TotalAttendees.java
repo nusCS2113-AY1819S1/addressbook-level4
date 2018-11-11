@@ -23,9 +23,9 @@ public class TotalAttendees {
     /**
      * @return the totalAttendees
      */
-    public int calculateTotalAttendees() {
+    public double calculateTotalAttendees() {
 
-        int totalAttendees = 0;
+        double totalAttendees = 0;
 
         for (int i = 0; i < listOfClubs.size(); i++) {
 
