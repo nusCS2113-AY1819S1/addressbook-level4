@@ -1,5 +1,6 @@
 package seedu.address.model.user.manager;
 
+import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventoryList;
@@ -20,6 +21,12 @@ public class ManagerModelManager extends ModelManager implements ManagerModel {
                                TransactionList transactionList) {
         super(inventoryList, userPrefs, loginInfoManager, transactionList);
     }
+    /**
+     * Raises an event to indicate the model has changed
+     */
+    protected void indicateDrinkAttributesChanged(Drink drink) {
+        raise(new DrinkAttributeChangedEvent(drink));
+    }
 
     //===============login command ============================//
     @Override
@@ -37,6 +44,7 @@ public class ManagerModelManager extends ModelManager implements ManagerModel {
     public void deleteDrink(Drink target) {
         inventoryList.removeDrink(target);
         indicateInventoryListChanged();
+        indicateDrinkAttributesChanged(target);
     }
 
     @Override
@@ -44,5 +52,6 @@ public class ManagerModelManager extends ModelManager implements ManagerModel {
         inventoryList.addDrink(drink);
         updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
         indicateInventoryListChanged();
+        indicateDrinkAttributesChanged(drink);
     }
 }
