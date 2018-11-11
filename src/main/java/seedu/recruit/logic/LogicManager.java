@@ -53,6 +53,10 @@ public class LogicManager extends ComponentManager implements Logic {
         }
     }
 
+    public static LogicState getState() {
+        return state;
+    }
+
     @Override
     public CommandResult execute(String commandText)
             throws CommandException, ParseException {

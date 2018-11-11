@@ -30,7 +30,7 @@ public class EmailContentsBackCommand extends EmailContentsCommand {
      * Changes the book when returning to add recipients step
      * @param emailUtil
      */
-    public void changeBook(EmailUtil emailUtil) {
+    private void changeBook(EmailUtil emailUtil) {
         if (emailUtil.getAreRecipientsCandidates()) {
             EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         } else {

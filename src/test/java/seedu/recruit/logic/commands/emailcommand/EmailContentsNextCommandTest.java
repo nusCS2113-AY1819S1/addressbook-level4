@@ -1,7 +1,7 @@
 package seedu.recruit.logic.commands.emailcommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.recruit.logic.commands.emailcommand.EmailRecipientsCommand.NEXT_RECIPIENTS_ERROR_NO_RECIPIENTS;
+import static seedu.recruit.logic.commands.emailcommand.EmailContentsCommand.NEXT_CONTENTS_ERROR_NO_CONTENTS;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,46 +15,44 @@ import seedu.recruit.model.UserPrefs;
 import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.JobOfferBuilder;
 
-class EmailRecipientsNextCommandTest {
+class EmailContentNextCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();
     private JobOfferBuilder jobOfferBuilder = new JobOfferBuilder();
     private CandidateBuilder candidateBuilder = new CandidateBuilder();
-    private EmailRecipientsNextCommand emailRecipientsNextCommand = new EmailRecipientsNextCommand();
+    private EmailContentsNextCommand emailContentsNextCommand = new EmailContentsNextCommand();
 
     @Test
-    void execute_emailRecipientNextCommand_withJobOffer() {
+    void execute_emailContentsNextCommand_withJobOffer() {
         Model model = new ModelManager();
         LogicManager logic = new LogicManager(model, userPrefs);
         model.getEmailUtil().addJobOffer(jobOfferBuilder.build());
-        model.getEmailUtil().setAreRecipientsCandidates(false);
-
-        CommandResult commandResult = emailRecipientsNextCommand.execute(model, commandHistory, userPrefs);
-        assertEquals(EmailContentsCommand.MESSAGE_USAGE, commandResult.feedbackToUser);
-        assertEquals(EmailContentsCommand.COMMAND_LOGIC_STATE, logic.getState().nextCommand);
+        model.getEmailUtil().setAreRecipientsCandidates(true);
+        CommandResult commandResult = emailContentsNextCommand.execute(model, commandHistory, userPrefs);
+        assertEquals(EmailSendCommand.MESSAGE_USAGE, commandResult.feedbackToUser);
+        assertEquals(EmailSendCommand.COMMAND_LOGIC_STATE, logic.getState().nextCommand);
     }
 
     @Test
-    void execute_emailRecipientNextCommand_withCandidate() {
+    void execute_emailContentsNextCommand_withCandidate() {
         Model model = new ModelManager();
         LogicManager logic = new LogicManager(model, userPrefs);
         model.getEmailUtil().addCandidate(candidateBuilder.build());
-        model.getEmailUtil().setAreRecipientsCandidates(true);
-
-        CommandResult commandResult = emailRecipientsNextCommand.execute(model, commandHistory, userPrefs);
-        assertEquals(EmailContentsCommand.MESSAGE_USAGE, commandResult.feedbackToUser);
-        assertEquals(EmailContentsCommand.COMMAND_LOGIC_STATE, logic.getState().nextCommand);
+        model.getEmailUtil().setAreRecipientsCandidates(false);
+        CommandResult commandResult = emailContentsNextCommand.execute(model, commandHistory, userPrefs);
+        assertEquals(EmailSendCommand.MESSAGE_USAGE, commandResult.feedbackToUser);
+        assertEquals(EmailSendCommand.COMMAND_LOGIC_STATE, logic.getState().nextCommand);
     }
 
     @Test
-    void execute_emailRecipientNextCommand_empty() {
+    void execute_emailContentsNextCommand_empty() {
         Model model = new ModelManager();
         model.resetEmailUtil();
         LogicManager logic = new LogicManager(model, userPrefs);
         LogicState beforeCommandState = logic.getState();
-        CommandResult commandResult = emailRecipientsNextCommand.execute(model, commandHistory, userPrefs);
-        assertEquals(NEXT_RECIPIENTS_ERROR_NO_RECIPIENTS + EmailRecipientsCommand.MESSAGE_USAGE,
+        CommandResult commandResult = emailContentsNextCommand.execute(model, commandHistory, userPrefs);
+        assertEquals(NEXT_CONTENTS_ERROR_NO_CONTENTS + EmailContentsCommand.MESSAGE_USAGE,
                 commandResult.feedbackToUser);
         assertEquals(beforeCommandState, logic.getState());
     }

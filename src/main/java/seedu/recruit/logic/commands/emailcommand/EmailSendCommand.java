@@ -99,7 +99,7 @@ public class EmailSendCommand extends Command {
     /**
      * Resets the array lists in this class, to be used when email has been sent or cancelled
      */
-    public static void resetRecipientsAndContents() {
+    protected static void resetRecipientsAndContents() {
         candidateRecipients = new ArrayList<>();
         jobOfferRecipients = new ArrayList<>();
         candidateContents = new ArrayList<>();
@@ -112,7 +112,7 @@ public class EmailSendCommand extends Command {
      * @param model
      * @param emailUtil
      */
-    public void generateRecipients(Set<String> recipientEmails, Model model, EmailUtil emailUtil) {
+    protected void generateRecipients(Set<String> recipientEmails, Model model, EmailUtil emailUtil) {
         if (emailUtil.getAreRecipientsCandidates()) {
             //recipients are candidates
             for (Candidate candidateRecipient : candidateRecipients) {
@@ -138,7 +138,7 @@ public class EmailSendCommand extends Command {
      * @param emailUtil
      * @return bodytext String
      */
-    public String generateContentWhenRecipientsAreCandidates(EmailUtil emailUtil) {
+    protected String generateContentWhenRecipientsAreCandidates(EmailUtil emailUtil) {
         StringBuilder bodyText = new StringBuilder(emailUtil.getEmailSettings().getBodyTextCandidateAsRecipient());
         //contents are companies
         for (JobOffer jobOfferContent : jobOfferContents) {
@@ -154,7 +154,7 @@ public class EmailSendCommand extends Command {
      * Generates candidate details when candidates are contents
      * @return
      */
-    public String generateCandidateContentDetails() {
+    protected String generateCandidateContentDetails() {
         StringBuilder output = new StringBuilder();
         for (Candidate candidateContent : candidateContents) {
             output.append('\n').append("Name: ").append(candidateContent.getName().toString());
@@ -172,7 +172,7 @@ public class EmailSendCommand extends Command {
      * @param emailUtil
      * @return String subject
      */
-    public String generateSubject(EmailUtil emailUtil) {
+    protected String generateSubject(EmailUtil emailUtil) {
         String subject;
         if (emailUtil.getAreRecipientsCandidates()) {
             subject = emailUtil.getEmailSettings().getSubjectCandidateAsRecipient();
@@ -188,7 +188,7 @@ public class EmailSendCommand extends Command {
      * @return An authorized Credential object.
      * @throws IOException If the credentials.json file cannot be found.
      */
-    private static Credential getCredentials(final NetHttpTransport httpTransport) throws IOException {
+    private Credential getCredentials(final NetHttpTransport httpTransport) throws IOException {
         // Load client secrets.
         InputStream in = EmailUtil.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
@@ -206,7 +206,7 @@ public class EmailSendCommand extends Command {
     /**
      * Initialiser for Gmail Service
      */
-    public static Gmail serviceInit() throws IOException, GeneralSecurityException {
+    protected Gmail serviceInit() throws IOException, GeneralSecurityException {
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         // Create a new authorized Gmail API client
         return new Gmail.Builder(httpTransport, JSON_FACTORY, getCredentials(httpTransport))
@@ -224,7 +224,7 @@ public class EmailSendCommand extends Command {
      * @return the MimeMessage to be used to send email
      * @throws MessagingException
      */
-    public static MimeMessage createEmail(String from,
+    protected MimeMessage createEmail(String from,
                                           String to,
                                           String subject,
                                           String bodyText)
@@ -252,7 +252,7 @@ public class EmailSendCommand extends Command {
      * @return the MimeMessage used to send an email
      * @throws MessagingException
      */
-    public static MimeMessage createEmail(String from,
+    protected MimeMessage createEmail(String from,
                                           Set<String> to,
                                           String subject,
                                           String bodyText)
@@ -283,7 +283,7 @@ public class EmailSendCommand extends Command {
      * @throws MessagingException
      * @throws IOException
      */
-    public static void sendMessage(Gmail service, String userId, MimeMessage email)
+    protected void sendMessage(Gmail service, String userId, MimeMessage email)
             throws MessagingException, IOException {
         Message message = createMessageWithEmail(email);
         service.users().messages().send(userId, message).execute();
@@ -297,7 +297,7 @@ public class EmailSendCommand extends Command {
      * @throws IOException
      * @throws MessagingException
      */
-    private static Message createMessageWithEmail(MimeMessage email) throws MessagingException, IOException {
+    private Message createMessageWithEmail(MimeMessage email) throws MessagingException, IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         email.writeTo(baos);
         String encodedEmail = Base64.encodeBase64URLSafeString(baos.toByteArray());
