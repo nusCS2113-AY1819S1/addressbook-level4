@@ -1070,6 +1070,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
+
+|`* * *` |Lab Technician |Control who has access to my inventory |Secure my sensitive data
+
 |`* * *` |Lab Technician |Add new items to the list |Keep track of the new item
 
 |`* * *` |Lab Technician |Update the quantity of an item in the list |Record the quantity change of the item

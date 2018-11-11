@@ -49,7 +49,7 @@ public class FindAccountCommand extends Command {
 
     private String getMessageOutput (int numAccounts, List<Account> accounts) {
         String messageOutput = "";
-        messageOutput += String.format(Messages.MESSAGE_ACCOUNTS_LISTED_OVERVIEW, numAccounts) + "\n";
+        messageOutput += String.format(Messages.MESSAGE_ACCOUNTS_FOUND_OVERVIEW, numAccounts) + "\n";
 
         messageOutput += "Accounts: \n";
         int counter = 0;

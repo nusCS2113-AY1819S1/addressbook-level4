@@ -30,9 +30,24 @@ JalilEnterprises is for those who *prefer to use a desktop app for stock taking*
 image::Ui.png[width="790"]
 +
 .  You should log into this app via the *`login`* command before you start to use it. +
-However, in v1.3, the login function is a stub and the app can still be used without logging in. +
 Example of how to log in:
 * **`login`**`u/admin p/admin`
+
+.  This app comes with a default admin account and it is strongly recommended to:
+* not delete this account,
+* note the changes made to this account to avoid the case of being locked out of StockList.
++
+Credentials of the default account:
+* `u/admin p/admin`
+
+.  When logged out, all commands are locked, except:
+* `login`
+* `listAccounts`
+* `findAccount`
+* `loginStatus`
+* `history`
+* `help`
+* `exit`
 
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -61,22 +76,44 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
+=== List registered accounts: `listAccounts`
+
+Lists all the accounts currently registered in StockList. +
+Format: `listAccounts`
+
+=== Find a registered account: `findAccount`
+
+Finds a registered account whose names contain any of the given keywords. +
+Format: `findAccount KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `admin` will match `Admin`
+* The order of the keywords does not matter. e.g. `admin jalil` will match `jalil admin`
+* Only the name is searched.
+* Partial words will be matched e.g. `ad` will match `admin`
+* Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `admin jalil` will return `admin tan`, `admin lee`
+****
+
+Examples:
+
+* `findAccount admin` +
+Returns `admin` and `Admin Jalil`
+* `findAccount admin tom` +
+Returns any items having names `admin` or `tom`
+
 === Logging in: `login`
 
-Log into Stock List. +
+Logs into Stock List. +
 Format: `login u/USERNAME p/PASSWORD`
 
 Examples:
 
 * `login u/admin p/admin`
-* `login u/user p/password`
 
-Known Bugs:
+=== Checking login status: `loginStatus`
 
-* Login function is currently a stub in v1.3.
-* Can login indefinite times
-* Only successful for `admin` as both username and password
-* Cannot logout
+Checks login status of Stock List. +
+Format: `loginStatus`
 
 === Adding an item: `add`
 
@@ -253,6 +290,8 @@ Examples:
 Shows the number of every lost item that has been lost +
 Format: `lost&found`
 
+
+
 === Undoing previous command : `undo`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
@@ -335,10 +374,65 @@ Examples:
 * `open ForAugust` +
 This would open the saved stock list under /versions/ folder in main at the time when the command is inputted
 
+=== Adding an account: `addAccount`
+
+Adds an account to the database. +
+Format: `addAccount u/USERNAME p/PASSWORD`
+
+Examples:
+
+* `addAccount u/john p/doe`
+* `addAccount u/jalil p/boss123`
+
+=== Deleting an account: `deleteAccount`
+
+Deletes an account from the database. +
+Format: `delete INDEX` +
+
+Index can be found using `listAccounts`
+
+Examples:
+
+* `deleteAccount 2` +
+Deletes the second account in the database, according to the index via `listAccounts`.
+
+NOTE: It is strongly NOT recommended to delete the first account i.e. the admin account.
+
+
+=== Editing an account currently in the database: `editAccount`
+
+Edits a registered account in the database. +
+Format: `edit INDEX u/USERNAME [p/PASSWORD]`
+
+****
+* Edits the account at the specified INDEX. The index refers to the index number shown in the displayed list when 'listAccounts' is used. The index must be a positive integer 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing credentials will be updated to the input credentials.
+****
+Examples:
+
+* `editAccount 2 p/password123!` +
+Changes the password of the second account to `password123!`
+
+NOTE: Exercise caution when editing the admin account.
+
+=== Resetting the account database: `resetAccounts`
+
+Resets the account database. +
+All accounts will be deleted and a default admin account will be created. +
+Credentials of the default account: `u/admin p/admin`
+
+Format: `resetAccounts`
+
+=== Logging out: `logout`
+
+Logs out of Stock List. +
+Format: `logout`
 
 === Exiting the program : `exit`
 
 Exits the program. +
+This automatically logs out of StockList if the user is still logged in. +
 Format: `exit`
 
 === Saving the data
@@ -360,33 +454,37 @@ _{explain how the user can enable/disable data encryption}_
 == Command Summary
 
 * *Help* `help`
-* *Login* `login u/USERNAME p/PASSWORD`
-e.g. `login u/jalil p/dontworrybrother`
+* *List Accounts* `listAccounts`
+* *Find Account* `findAccount` +
+e.g. `findAccount john doe`
+* *Login* `login u/USERNAME p/PASSWORD` +
+e.g. `login u/admin p/admin`
+* *Check login status* `loginStatus`
 * *Add* `add n/NAME q/QUANTITY m/MINIMUM_QUANTITY [t/TAG]...` +
 e.g. `add n/Arduino q/20 m/5 t/Lab1 t/Lab2`
-* *Edit* `edit INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
+* *Edit* `edit INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]` +
 e.g. `edit 1 n/Arduino q/25 t/Lab7 t/Lab8`
-* *Delete* `delete INDEX q/QUANTITY`
+* *Delete* `delete INDEX q/QUANTITY` +
 e.g. `delete 1 q/20`
 * *List* `list`
-* *Select* `select INDEX`
+* *Select* `select INDEX` +
 e.g. `select 1`
 * *Clear* `clear`
-* *Find* `find KEYWORD [MORE_KEYWORDS]`
+* *Find* `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Arduino`
 * *Status* `status`
-* *Change Status*  `changeStatus n/NAME q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS`
+* *Change Status*  `changeStatus n/NAME q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS` +
 e.g. `changeStatus n/Arduino q/20 os/Ready ns/Faulty`
-* *Loan List* `loanList n/NAME q/QUANTITY l/LOANER`
+* *Loan List* `loanList n/NAME q/QUANTITY l/LOANER` +
 e.g. `loanList n/Arduino q/20 l/KinWhye`
 * *View Loan List* `viewLoanList`
-* *Delete Loan List* `deleteLoanList INDEX`
+* *Delete Loan List* `deleteLoanList INDEX` +
 e.g. `deleteLoanList 1`
-* *Tag* `tag KEYWORD [MORE_KEYWORDS]`
+* *Tag* `tag KEYWORD [MORE_KEYWORDS]` +
 e.g. `tag Lab1`
-* *Add Tag* `addTag INDEX t/TAG [MORE_TAGS]`
+* *Add Tag* `addTag INDEX t/TAG [MORE_TAGS]` +
 e.g. `addTag 1 t/Lab2`
-* *Delete Tag* `deleteTag INDEX t/TAG [MORE_TAGS]`
+* *Delete Tag* `deleteTag INDEX t/TAG [MORE_TAGS]` +
 e.g. `deleteTag 1 t/Lab2`
 * *Lost* : `lost INDEX [q/QUANTITY]` +
 e.g. `lost 1 q/25`
@@ -398,6 +496,14 @@ e.g. `found 1 q/25`
 * *History* : `history`
 * *Save* `save NAME` +
 e.g. `save ForAugust`
-* *Open* `open NAME`
+* *Open* `open NAME` +
 e.g. `open forAugust`
+* *Add Account* `addAccount u/USERNAME p/PASSWORD` +
+e.g. `add u/jalil p/boss`
+* *Delete Account* `deleteAccount INDEX` +
+e.g. `deleteAccount 2`
+* *Edit Account* `editAccount INDEX u/USERNAME [p/PASSWORD]` +
+e.g. `edit 2 p/password123!`
+* *Reset Accounts* `resetAccounts`
+* *Logout* `logout`
 * *Exit* `exit`
