@@ -12,7 +12,7 @@ import seedu.address.model.reminder.Reminder;
  */
 public class ReminderCard extends UiPart<Region> {
 
-    private static final String FXML = "ReminderCard.fxml";
+    private static final String FXML = "ReminderListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
