@@ -101,7 +101,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 When you are ready to start coding,
 
 1. Get some sense of the overall design by reading <<Design-Architecture>>.
-2. Take a look at <<GetStartedProgramming>>.
+2. Take a look at <<GetStartedProgramming>>.image::Architecture.png[width="600"]
 
 == Design
 
@@ -303,6 +303,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 image::UndoRedoActivityDiagram.png[width="650"]
 
+// tag::undoallredoall[]
 Step 7. The user executes many `add`, `delete`, and `clear` commands over a couple of hours, but decides at the end of the day that he does not want all the changes. He decides to undo all the changes by executing the `undoAll` command. The 'undoAll' command will call 'Model#undoAllAddressBook(), which will shift the 'currentStatePointer' to the start of the `addressBookStateList`, pointing it to the original address book state, and restores the address book to that state.
 
 image::UndoRedoExecuteUndoAllStateListDiagram.png[width="800"]
@@ -310,6 +311,7 @@ image::UndoRedoExecuteUndoAllStateListDiagram.png[width="800"]
 Step 8. The user decides again that he wants all the changes after all, and decides to execute the `redoAll` command. `Model#redoAllAddressBook()` is called, shifts the currentStatePointer to the end of `addressBookStateList`, pointing to the furthest undone state, and restores the address book to that state.
 
 image::UndoRedoExecuteRedoAllStateListDiagram.png[width="800"]
+// end::undoallredoall[]
 
 ==== Design Considerations
 
@@ -455,6 +457,7 @@ date of the ledgers in the list, comparing them to find one to edit.
 that the member model has.
 * The segmentation of the arguments allow for them to be used individually when needed.
 
+// tag::itemlist[]
 === ItemList
 ==== Current Implementation
 
@@ -481,6 +484,7 @@ Step 5. This will then be put into the `model`, into the `VersionedAddressBook`.
 The `Item` class creates an object that instantiates an `ItemName` object and an `ItemQuantity` object. The multiple `Item` objects created will be stored in a `UniqueItemList`, where the uniqueness of every `Item` is in its `ItemName`.
 
 This uniqueness is attained by comparing the `ItemName` object in the `Item` to be added and the `Item`s already in the `UniqueItemList` using the `getItemName()` method in `Item`.
+// end::itemlist[]
 
 == Documentation
 
