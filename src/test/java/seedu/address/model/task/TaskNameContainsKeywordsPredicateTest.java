@@ -18,17 +18,17 @@ public class TaskNameContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        TaskNameContainsKeywordsPredicate firstPredicate
-                = new TaskNameContainsKeywordsPredicate(firstPredicateKeywordList);
-        TaskNameContainsKeywordsPredicate secondPredicate
-                = new TaskNameContainsKeywordsPredicate(secondPredicateKeywordList);
+        TaskNameContainsKeywordsPredicate firstPredicate =
+                new TaskNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        TaskNameContainsKeywordsPredicate secondPredicate =
+                new TaskNameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        TaskNameContainsKeywordsPredicate firstPredicateCopy
-                = new TaskNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        TaskNameContainsKeywordsPredicate firstPredicateCopy =
+                new TaskNameContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -44,8 +44,8 @@ public class TaskNameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        TaskNameContainsKeywordsPredicate predicate
-                = new TaskNameContainsKeywordsPredicate(Collections.singletonList("Assignment"));
+        TaskNameContainsKeywordsPredicate predicate =
+                new TaskNameContainsKeywordsPredicate(Collections.singletonList("Assignment"));
         assertTrue(predicate.test(new TaskBuilder().withName("Assignment 2").build()));
 
         // Multiple keywords
