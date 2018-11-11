@@ -28,8 +28,8 @@ each milestone specified by the user. Furthermore, this creates a sense of progr
 ** Highlights: Implementing this feature and command required changes to the UI of the application. It required in-depth knowledge of JavaFX and the ability to use SceneBuilder to assist in developing the UI. The implementation of the UI was too challenging and an alternative solution was required to ensure the UI remained presentable.
 
 
-* *Minor enhancement*: Implemented a sort function for each task such that the milestones for each task are
-sorted by their ranks. The list of milestones will be displayed in the order that the user should go about doing, starting with the most important milestone(*Rank 1*) at the top.
+* *Minor enhancement*: Implemented a sort function for each task such that the *milestones for each task are
+sorted by their ranks*. The list of milestones will be displayed in the order that the user should go about doing, starting with the most important milestone(*Rank 1*) at the top.
 
 * *Code contributed*: [https://github.com/CS2113-AY1819S1-W13-3/main/blob/master/collated/functional/JeremyInElysium.md[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
