@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 //@@author linnnruoo
 //Inspired by the original @@author guekling
 /**
- * Dsplay the layout of calendar view
+ * Display the layout of calendar view
  */
 public class CalendarLayout extends UiPart<Region> {
 
@@ -53,14 +53,14 @@ public class CalendarLayout extends UiPart<Region> {
         YearMonth y = YearMonth.now();
         int year = y.getYear();
 
-        getCalendarTitle(year, yearMonth.getMonth().toString());
-        getCalenndarDates(year, yearMonth.getMonthValue());
+        setCalendarTitle(year, yearMonth.getMonth().toString());
+        setCalendarDates(year, yearMonth.getMonthValue());
     }
 
     /**
      * Sets the title of the calendar according to a specific month and year.
      */
-    public void getCalendarTitle(int year, String month) {
+    public void setCalendarTitle(int year, String month) {
         calendarTitle.setText(month + " " + year);
     }
 
@@ -70,7 +70,7 @@ public class CalendarLayout extends UiPart<Region> {
      * @param year Year represented as a 4-digit integer.
      * @param month Month represented by numbers from 1 to 12.
      */
-    private void getCalenndarDates(int year, int month) {
+    private void setCalendarDates(int year, int month) {
         LocalDate startDate = LocalDate.of(year, month, 1);
         int lengthOfMonth = startDate.lengthOfMonth();
         int startDay = getMonthStartDay(startDate);
