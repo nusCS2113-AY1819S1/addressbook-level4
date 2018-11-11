@@ -44,17 +44,15 @@ public class FriendCommand extends Command {
         Person personToEdit = otherList.get(targetIndex.getZeroBased());
         Person editedPerson = personToEdit;
         Person editedUser = model.getUser();
-        addFriendToPerson(editedPerson, model.getUser());
-        addFriendToPerson(editedUser, personToEdit);
+
         editedPerson.getFriends().add(new Friend(model.getUser().getName()));
         editedUser.getFriends().add(new Friend(personToEdit.getName()));
 
+
         model.updatePerson(personToEdit, editedPerson);
         model.updatePerson(model.getUser(), editedUser);
+
         model.commitAddressBook();
         return new CommandResult(MESSAGE_ADD_FRIEND_SUCCESS);
-    }
-
-    private void addFriendToPerson(Person editedPerson, Person person) {
     }
 }
