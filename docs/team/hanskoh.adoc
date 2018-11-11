@@ -55,3 +55,5 @@ include::../UserGuide.adoc[tag=curd]
 |===
 
 include::../DeveloperGuide.adoc[tag=curd]
+
+include::../DeveloperGuide.adoc[tag=user_Stories_And_Cases]
