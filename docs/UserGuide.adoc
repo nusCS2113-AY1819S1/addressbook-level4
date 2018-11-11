@@ -254,6 +254,10 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+=== Checking off completed milestones `[coming in v2.0]`
+
+Users will soon be able to strike off (not delete!) their milestones when they have completed them for easier tracking of what they have or have not done!
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
