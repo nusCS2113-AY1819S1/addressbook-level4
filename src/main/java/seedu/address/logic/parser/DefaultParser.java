@@ -25,10 +25,10 @@ import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SelectEventCommand;
 import seedu.address.logic.commands.ShowMineCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.ViewAttendeesCommand;
 import seedu.address.logic.parser.exceptions.InvalidLogoutException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -94,8 +94,8 @@ public class DefaultParser extends CommandsParser {
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
-        case ViewAttendeesCommand.COMMAND_WORD:
-            return new ViewAttendeesCommandParser().parse(arguments);
+        case SelectEventCommand.COMMAND_WORD:
+            return new SelectEventCommandParser().parse(arguments);
 
         case InviteCommand.COMMAND_WORD:
             return new InviteCommandParser().parse(arguments);
