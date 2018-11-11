@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.JumpToEventListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -53,11 +55,13 @@ public class SelectEventCommand extends Command {
         }
 
         Event eventToShow = lastShownList.get(indexEvent.getZeroBased());
-        eventPredicate = new EventSingleDisplayPredicate(eventToShow);
+        //eventPredicate = new EventSingleDisplayPredicate(eventToShow);
         personPredicate = new PersonAttendingEventPredicate(eventToShow);
 
-        model.updateFilteredEventList(eventPredicate);
+        //model.updateFilteredEventList(eventPredicate);
         model.updateFilteredPersonList(personPredicate);
+
+        EventsCenter.getInstance().post(new JumpToEventListRequestEvent(indexEvent));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, indexEvent.getOneBased()));
     }
