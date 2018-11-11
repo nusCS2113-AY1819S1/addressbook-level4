@@ -1,3 +1,4 @@
+//@@author XiaoYunhan
 package seedu.address.model.expenditureinfo;
 
 import static org.junit.Assert.assertFalse;

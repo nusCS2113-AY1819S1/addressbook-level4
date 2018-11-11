@@ -1,3 +1,4 @@
+//@@author XiaoYunhan
 package seedu.address.model.expenditureinfo;
 
 import java.util.List;
