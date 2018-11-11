@@ -1,13 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_PATH_FORBIDDEN;
 import static seedu.address.commons.core.Messages.MESSAGE_PATH_TOO_LONG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.nio.file.Paths;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.logic.commands.ImportCommand;
@@ -30,7 +30,6 @@ public class ImportCommandParserTest {
         assertParseSuccess(parser, userInput, new ImportCommand(Paths.get(filePath)));
     }
 
-    @Ignore("Ignore because fails travis")
     @Test
     public void parse_validArgsForwardSlash_returnsImportCommand() {
         String applicationPath = System.getProperty("user.dir");
@@ -40,7 +39,7 @@ public class ImportCommandParserTest {
         String filePath =
                 applicationPath + "\\" + ParserUtil.IMPORT_EXPORT_FOLDER + "\\" + parentFolder + "\\" + fullFileName;
 
-        assertParseSuccess(parser, userInput, new ImportCommand(Paths.get(filePath)));
+        assertParseFailure(parser, userInput, String.format(MESSAGE_PATH_FORBIDDEN));
     }
 
     @Test
@@ -52,7 +51,7 @@ public class ImportCommandParserTest {
         String filePath =
                 applicationPath + "\\" + ParserUtil.IMPORT_EXPORT_FOLDER + "\\" + parentFolder + "\\" + fullFileName;
 
-        assertParseSuccess(parser, userInput, new ImportCommand(Paths.get(filePath)));
+        assertParseFailure(parser, userInput, String.format(MESSAGE_PATH_FORBIDDEN));
     }
 
     @Test
