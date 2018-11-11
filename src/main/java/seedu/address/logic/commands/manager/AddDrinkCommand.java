@@ -30,7 +30,7 @@ public class AddDrinkCommand extends Command {
             + PREFIX_DRINK_DEFAULT_SELLING_PRICE + "20.00 "
             + PREFIX_DRINK_COST_PRICE + "10.00";
 
-    public static final String MESSAGE_SUCCESS = "New drink added: %1$s with default price of %2$s";
+    public static final String MESSAGE_SUCCESS = "New drink added: %1$s";
     public static final String MESSAGE_DUPLICATE_DRINK = "This drink already exists in the inventory list";
 
     private final Drink toAdd;
@@ -56,8 +56,7 @@ public class AddDrinkCommand extends Command {
 
         managerModel.addDrink(toAdd);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS,
-                toAdd.getName().toString(), toAdd.getRetailPrice().toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString ()));
     }
 
     @Override

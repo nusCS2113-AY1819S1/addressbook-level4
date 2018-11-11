@@ -26,7 +26,7 @@ public class Drink {
     private Price retailPrice;
     private UniqueBatchList uniqueBatchList;
     private Quantity quantity;
-    private final Set<Tag> tags = new HashSet<>();
+    private Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructs a Drink for the use of adding new drink into inventory.
@@ -124,6 +124,10 @@ public class Drink {
         return Collections.unmodifiableSet(tags);
     }
 
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
     /**
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
@@ -209,12 +213,16 @@ public class Drink {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append ("Drink name: ")
+                .append (getName ())
+                .append ("\nCost price: ")
+                .append (getCostPrice ())
+                .append (" Selling price: ")
+                .append (getRetailPrice ())
                 .append(", Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 
     /**
      * Decreases the quantity of the drink, using {@code quantity} as the value to decrease
