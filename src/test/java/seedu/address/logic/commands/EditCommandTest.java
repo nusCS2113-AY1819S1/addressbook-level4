@@ -140,7 +140,7 @@ public class EditCommandTest {
      * but smaller than size of BookInventory
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidBookIndexFilteredList_failure() {
         showBookAtIndex(model, INDEX_FIRST_BOOK);
         Index outOfBoundIndex = INDEX_SECOND_BOOK;
         // ensures that outOfBoundIndex is still in bounds of BookInventory list

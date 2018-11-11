@@ -71,18 +71,6 @@ public class StockCommandParser implements Parser<StockCommand> {
         }
 
         StockCommand.StockBookDescriptor stockBookDescriptor = new StockBookDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            stockBookDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ISBN).isPresent()) {
-            stockBookDescriptor.setIsbn(ParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
-            stockBookDescriptor.setPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_COST).isPresent()) {
-            stockBookDescriptor.setCost(ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get()));
-        }
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
             stockBookDescriptor.setQuantity(ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
         }
