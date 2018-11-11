@@ -13,6 +13,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -57,6 +58,7 @@ public class IcsUtil {
 
     /**
      * Returns the {@code TimeTable} from the .ics file specified.
+     * The timestamps in the saved .ics file should be in UTC. No timezone allowed (yet).
      *
      * @param filePath                  location of the .ics file.
      *                                  cannot be null.
@@ -65,7 +67,7 @@ public class IcsUtil {
      *
      */
     public TimeTable readTimeTableFromFile(Path filePath, ZoneId zoneId)
-            throws IOException, TimeSlotOverlapException {
+            throws IOException, TimeSlotOverlapException, IllegalArgumentException {
         requireNonNull(filePath);
 
         ICalendar iCalendar;
@@ -81,15 +83,22 @@ public class IcsUtil {
 
     /**
      * Saves {@code TimeTable} data to the .ics file specified.
+     * The timestamps in the saved .ics file will be in UTC.
      *
-     * @param filePath Location to save the file to. Cannot be null.
+     * @param filePath      Location to save the file to.
+     *                      Cannot be null.
+     * @param zoneId        timezone of the Timetable.
+     *                      Cannot be null.
      * @throws IOException  Thrown if there is an error writing to the file.
+     *                      Cannot be null.
      */
-    public void saveTimeTableToFile(TimeTable timeTable, Path filePath)
+    public void saveTimeTableToFile(TimeTable timeTable, ZoneId zoneId, Path filePath)
             throws IOException {
         requireNonNull(filePath);
+        requireNonNull(timeTable);
+        requireNonNull(zoneId);
 
-        ICalendar iCalendar = timeTableToICalendar(timeTable);
+        ICalendar iCalendar = timeTableToICalendar(timeTable, zoneId);
         try {
             writeICalendarToFile(iCalendar, filePath);
         } catch (IOException e) {
@@ -107,7 +116,7 @@ public class IcsUtil {
      * @param zoneId    The TimeZone of the {@code TimeTable}.
      */
     private TimeTable iCalendarToTimeTable(ICalendar iCalendar, ZoneId zoneId)
-            throws TimeSlotOverlapException {
+            throws TimeSlotOverlapException, IllegalArgumentException {
         requireNonNull(iCalendar);
         TimeTable timeTable = new TimeTable();
 
@@ -189,37 +198,47 @@ public class IcsUtil {
 
     /**
      * Converts {@code TimeTable} to {@code ICalendar}.
-     * @param timeTable {@code TimeTable} to convert. Cannot be null.
+     *
+     * @param timeTable     The {@code TimeTable} to convert.
+     *                      Cannot be null.
+     * @param
      */
-    private ICalendar timeTableToICalendar(TimeTable timeTable) {
+    private ICalendar timeTableToICalendar(TimeTable timeTable, ZoneId zoneId) {
         requireNonNull(timeTable);
+        requireNonNull(zoneId);
         Collection<TimeSlot> timeSlots = timeTable.getTimeSlots();
 
         ICalendar iCalendar = new ICalendar();
         for (TimeSlot timeSlot : timeSlots) {
-            VEvent vEvent = timeSlotToWeeklyVEvent(timeSlot, 1);
+            VEvent vEvent = timeSlotToWeeklyVEvent(timeSlot, zoneId, 1);
             iCalendar.addEvent(vEvent);
         }
         return iCalendar;
     }
 
     /**
-     * Converts a {@code TimeSlot} to a {@code VEvent} that recur weekly, for {@code count} times.
+     * Converts a {@code TimeSlot} to a {@code VEvent} that recurs weekly, for {@code count} times.
      *
-     * @param timeSlot {@code TimeSlot} to convert. Cannot be null.
-     * @param count {@code int} number of recurrences.
+     * @param timeSlot  The {@code TimeSlot} to convert.
+     *                  Cannot be null.
+     * @param count     The number of recurrences.
+     * @param zoneId    The timezone of the timeslot
      */
-    private VEvent timeSlotToWeeklyVEvent(TimeSlot timeSlot, int count) {
-        //TODO: protect against people who pass count < 0
+    private VEvent timeSlotToWeeklyVEvent(TimeSlot timeSlot, ZoneId zoneId, int count) {
+        //TODO: protect against people who pass count <= 0
+
+        requireNonNull(timeSlot);
+        requireNonNull(zoneId);
+        requireNonNull(count);
 
         //extract data from {@code TimeSlot}
         LocalTime startTime = timeSlot.getStartTime();
         LocalTime endTime = timeSlot.getEndTime();
         DayOfWeek dayOfWeek = timeSlot.getDayOfWeek();
         String label = timeSlot.getLabel();
+        //TODO: remove getAbbreviationFromDayOfWeek() from TimeSlot
         String abbreviation = timeSlot.getAbbreviationFromDayOfWeek();
 
-        //write data to {@code VEvent}
         VEvent vEvent = new VEvent();
 
         //write data to {@code VEvent}: set the recurrence rule
@@ -228,11 +247,25 @@ public class IcsUtil {
         RecurrenceRule recurrenceRule = new RecurrenceRule(recurrence);
         vEvent.setRecurrenceRule(recurrenceRule);
 
-        //write data to {@code VEvent}: set the DateStart
-        vEvent.setDateStart(DateTimeConversionUtil.getInstance().getNextDateOfDay(startTime, dayOfWeek));
+        //write data to {@code VEvent}: set start-date
+        //startLdt is the start-time of the timeslot in local time.
+        LocalDateTime startLdt = DateTimeConversionUtil.getInstance().getNextLocalDateTime(startTime, dayOfWeek);
+        //get zone offset
+        ZoneOffset zoneOffset = zoneId.getRules().getOffset(Instant.now());
+        //startInstant is an instance; instances are independent of timezones.
+        Instant startInstant = startLdt.toInstant(zoneOffset);
+        //get dateStart (UTC)
+        Date dateStart = Date.from(startInstant);
+        vEvent.setDateStart(dateStart);
 
-        //write data to {@code VEvent}: set the DateEnd
-        vEvent.setDateEnd(DateTimeConversionUtil.getInstance().getNextDateOfDay(endTime, dayOfWeek));
+        //write data to {@code VEvent}: set end-date
+        //endLdt is the end time of the timeslot in local time.
+        LocalDateTime endLdt = DateTimeConversionUtil.getInstance().getNextLocalDateTime(endTime, dayOfWeek);
+        //endInstant is an instance; instances are independent of timezones.
+        Instant endInstant = endLdt.toInstant(zoneOffset);
+        //get dateEnd (UTC)
+        Date dateEnd = Date.from(endInstant);
+        vEvent.setDateEnd(dateEnd);
 
         //write data to {@code VEvent}: set summary (Module Name)
         vEvent.setSummary(label);

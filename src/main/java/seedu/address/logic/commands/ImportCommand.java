@@ -74,6 +74,8 @@ public class ImportCommand extends Command {
             throw new CommandException(String.format(MESSAGE_IO_ERROR, filePath.toString()));
         } catch (TimeSlotOverlapException e) {
             throw new CommandException(String.format(MESSAGE_FILE_OVERLAP_TIMESLOT, filePath.toString()));
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
         }
 
         if (timeTable.isEmpty()) {

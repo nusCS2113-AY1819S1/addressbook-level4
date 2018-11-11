@@ -93,13 +93,28 @@ public class DateTimeConversionUtil {
      * ie: if {@code DayOfWeek} requested is monday, then the return the Date of the next monday from now.
      * if today is monday, then return today's date.
      */
-    public Date getNextDateOfDay(LocalTime startTime, DayOfWeek dayOfWeek) {
+    public Date getNextDateOfDay(LocalTime time, DayOfWeek dayOfWeek) {
         LocalDate nextDay =
                 LocalDate.now(ZoneId.of(DEFAULT_ZONE_ID))
                         .with(TemporalAdjusters.nextOrSame(dayOfWeek));
 
-        LocalDateTime localDateTime = startTime.atDate(nextDay);
-        return DateTimeConversionUtil.getInstance().localDateTimeToDate(localDateTime);
+        LocalDateTime localDateTime = time.atDate(nextDay);
+        return localDateTimeToDate(localDateTime);
+    }
+
+    /**
+     * Gets the the next {@code LocalDateTime} of the {@code DayOfWeek} requested, with reference to now.
+     *
+     * ie: if {@code DayOfWeek} requested is Monday, then the LocalDateTime returned is the next monday from now.
+     * if today is monday, then return is today's date.
+     */
+    public LocalDateTime getNextLocalDateTime(LocalTime time, DayOfWeek dayOfWeek) {
+        LocalDate nextDay =
+                LocalDate.now(ZoneId.of(DEFAULT_ZONE_ID))
+                        .with(TemporalAdjusters.nextOrSame(dayOfWeek));
+
+        LocalDateTime localDateTime = time.atDate(nextDay);
+        return localDateTime;
     }
 
 }
