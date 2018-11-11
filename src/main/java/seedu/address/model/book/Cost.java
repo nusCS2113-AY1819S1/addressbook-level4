@@ -1,3 +1,4 @@
+//@@author kennethcsj
 package seedu.address.model.book;
 
 import static java.util.Objects.requireNonNull;

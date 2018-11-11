@@ -56,6 +56,7 @@ public class BookInventory implements ReadOnlyBookInventory {
         setBooks(newData.getBookList());
     }
 
+    //@@author kennethcsj
     /**
      * Sorts the {@code BookInventory} according to quantity
      */
@@ -69,6 +70,7 @@ public class BookInventory implements ReadOnlyBookInventory {
         return books.getIsbnList(isbnText);
     }
 
+    //@@author
     //// book-level operations
 
     /**

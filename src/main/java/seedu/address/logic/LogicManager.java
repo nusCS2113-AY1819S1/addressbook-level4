@@ -70,11 +70,13 @@ public class LogicManager extends ComponentManager implements Logic {
         }
     }
 
+    //@@author kennethcsj
     @Override
     public Queue<String> getCompleteIsbn(String isbnText) {
         return model.getCompleteIsbn(isbnText);
     }
 
+    //@@author
     @Override
     public ObservableList<Book> getFilteredBookList() {
         return model.getFilteredBookList();
