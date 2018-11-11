@@ -11,36 +11,33 @@ import seedu.address.model.drink.UniqueBatchList;
  * A utility class containing a list of {@code Batch} objects to be used in tests.
  */
 public class TypicalBatches {
-
-    public static final Batch COKE1 = new BatchBuilder().withId("0001").withQuantity("10")
+    // In inventory list
+    public static final Batch COKE1 = new BatchBuilder().withId("100000002").withQuantity("40")
+            .withDate("01/10/2018").build();
+    public static final Batch COKE2 = new BatchBuilder().withId("100000003").withQuantity("20")
+            .withDate("15/10/2018").build();
+    public static final Batch COKE3 = new BatchBuilder().withId("100000004").withQuantity("30")
             .withDate("01/11/2018").build();
-    public static final Batch COKE2 = new BatchBuilder().withId("0002").withQuantity("20")
-            .withDate("02/11/2018").build();
-    public static final Batch COKE3 = new BatchBuilder().withId("0003").withQuantity("30")
-            .withDate("03/11/2018").build();
-    public static final Batch COKE4 = new BatchBuilder().withId("0004").withQuantity("40")
+    public static final Batch COKE4 = new BatchBuilder().withId("100000005").withQuantity("50")
             .withDate("04/11/2018").build();
-    public static final Batch COKE5 = new BatchBuilder().withId("0005").withQuantity("50")
-            .withDate("05/11/2018").build();
-    public static final Batch COKE6 = new BatchBuilder().withId("0006").withQuantity("60")
-            .withDate("30/10/2018").build();
+    public static final Batch COKE5 = new BatchBuilder().withId("100000006").withQuantity("80")
+            .withDate("11/11/2018").build();
+    public static final Batch COKE6 = new BatchBuilder().withId("100000007").withQuantity("90")
+            .withDate("30/09/2018").build();
 
     // Manually added
-    public static final Batch COKE7 = new BatchBuilder().withId("0007").withQuantity("70")
+    // Same id as COKE4 to test for duplicates;
+    public static final Batch COKE7 = new BatchBuilder().withId("100000005").withQuantity("70")
             .withDate("29/10/2018").build();
-    public static final Batch COKE8 = new BatchBuilder().withId("0008").withQuantity("80")
+    public static final Batch COKE8 = new BatchBuilder().withId("100000010").withQuantity("80")
             .withDate("28/10/2018").build();
+    // Same date as COKE4 to test for compiling of batches
+    public static final Batch COKE9 = new BatchBuilder().withId("100000008").withQuantity("70")
+            .withDate("04/11/2018").build();
+    // Batch with no quantity
+    public static final Batch COKE10 = new BatchBuilder().withId("100000009").withQuantity("0")
+            .withDate("05/11/2018").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    /*
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-    */
     private TypicalBatches() {
     } // prevents instantiation
 

@@ -88,7 +88,6 @@ public class UniqueBatchList implements Iterable<Batch> {
             }
         }
         if (counter > 0) {
-            System.out.println(counter);
             internalList.remove(0, counter);
         }
     }
@@ -104,15 +103,17 @@ public class UniqueBatchList implements Iterable<Batch> {
         int toDecrease = quantity.getValue();
 
         try {
-            decreaseTotalQuantity(toDecrease);
-        } catch (InsufficientQuantityException e) {
-            throw e;
-        }
-        try {
             sortBatches();
         } catch (EmptyBatchListException e) {
             throw e;
         }
+
+        try {
+            decreaseTotalQuantity(toDecrease);
+        } catch (InsufficientQuantityException e) {
+            throw e;
+        }
+
         for (Batch b : internalList) {
             int batchQuantity = b.getBatchQuantity().getValue();
             if (toDecrease == 0) {
