@@ -384,6 +384,36 @@ view all events of employee at index 1 in 2018
 view all events of employee at index 1 in August 2018
 // end::select[]
 
+// tag::selectEvent[]
+=== Selecting an event : `selectEvent`
+Priority level: all
+
+Selects the specified event by index and displays all employees attending the event. +
+Format: `selectEvent 1` +
+
+[NOTE]
+====
+If any of the attendees are edited or removed, the filtered employee list will not update. The `selectEvent` command must be input again to view the updated list of attendees. +
+====
+
+****
+* Selects the event at the specified `EVENT_INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Event list will be filtered to show only the specified event.
+****
+
+Examples:
+
+* `selectEvent 2` +
+Selects the 2nd event in the address book and shows its attendees.
+
+* `invite 1 to/1` (adds an attendee) +
+`selectEvent 1` (select the event to show the attendee) +
+`edit 1 n/New Name` (edit the name of the attendee) +
+`selectEvent 1` (re-selects the event to show the updated name of the attendee)
+// end::selectEvent[]
+
 === Locating persons by name: `find`
 Priority level: all
 
@@ -523,6 +553,8 @@ There is no need to save manually.
 * *Remove* : `remove PERSON_INDEX  from/EVENT_INDEX`
 
 * *Select* : `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
+
+* *selectEvent* : `selectEvent EVENT_INDEX`
 
 * *Find* : `find KEYWORD [MORE_KEYWORDS]`
 
