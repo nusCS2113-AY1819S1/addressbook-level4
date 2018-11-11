@@ -64,14 +64,14 @@
           </StackPane>
 
           <VBox fx:id="todoreminderPane">
-            <StackPane fx:id="todoList" minWidth="230" prefWidth="230" SplitPane.resizableWithParent="false">
+            <StackPane fx:id="todoList" minWidth="230" prefWidth="230" SplitPane.resizableWithParent="true">
               <padding>
                 <Insets top="3" right="3" bottom="3" left="3" />
               </padding>
               <StackPane fx:id="todoListPanelPlaceholder"/>
             </StackPane>
 
-            <StackPane fx:id="reminderList" minWidth="230" prefWidth="230" SplitPane.resizableWithParent="false">
+            <StackPane fx:id="reminderList" minWidth="230" prefWidth="230" SplitPane.resizableWithParent="true">
               <padding>
                 <Insets top="3" right="3" bottom="3" left="3" />
               </padding>
@@ -79,7 +79,6 @@
             </StackPane>
           </VBox>
         </SplitPane>
-
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

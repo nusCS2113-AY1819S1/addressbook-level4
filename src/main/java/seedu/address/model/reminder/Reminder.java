@@ -2,10 +2,10 @@ package seedu.address.model.reminder;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 import seedu.address.model.person.Time;
 import seedu.address.model.todo.Title;
-
-import java.util.Objects;
 
 //@@author junweiljw
 /**
