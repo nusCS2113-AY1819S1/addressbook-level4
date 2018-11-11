@@ -13,10 +13,10 @@ import org.junit.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.product.Email;
-import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.Name;
-import seedu.address.model.product.SerialNumber;
+import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.RemainingItems;
+import seedu.address.model.product.SerialNumber;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedProductTest {
