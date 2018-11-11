@@ -180,11 +180,16 @@ public class NoteAddCommandParserTest {
 
     @Test
     public void parse_validArgs_success() throws ParseException {
-        // valid args with only the mandatory field
-        String args = " " + PREFIX_MODULE_CODE + "CS2113";
+        // valid args with no parameters
+        String args = "";
         NoteAddCommand noteAddCommand = parser.parse(args);
 
         assertNotNull(noteAddCommand);
+
+        // valid args with only 1 parameter.
+        args = " " + PREFIX_NOTE_TITLE + "This is a title";
+        noteAddCommand = null;
+        noteAddCommand = parser.parse(args);
 
         // valid args with completely valid input fields provided
         args = " "
