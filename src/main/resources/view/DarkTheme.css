@@ -4,6 +4,11 @@
     background-color: #e4e2e5;
 }
 
+.calendarBackground {
+    -fx-background-color: #B6A6CA;
+    background-color: #B6A6CA;
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Lucida Console";

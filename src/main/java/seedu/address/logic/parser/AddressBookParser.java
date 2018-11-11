@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearScheduleCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -20,6 +21,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MatchScheduleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -27,7 +29,6 @@ import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.suggestions.WrongCommandSuggestion;
-
 
 /**
  * Parses user input.
@@ -114,6 +115,14 @@ public class AddressBookParser {
         case ScheduleCommand.COMMAND_WORD:
         case ScheduleCommand.COMMAND_ALIAS:
             return new ScheduleCommandParser().parse(arguments);
+
+        case ClearScheduleCommand.COMMAND_WORD:
+        case ClearScheduleCommand.COMMAND_ALIAS:
+            return new ClearScheduleCommandParser().parse(arguments);
+
+        case MatchScheduleCommand.COMMAND_WORD:
+        case MatchScheduleCommand.COMMAND_ALIAS:
+            return new MatchScheduleCommandParser().parse(arguments);
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);

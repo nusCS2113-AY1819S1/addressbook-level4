@@ -9,11 +9,12 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Schedule {
+    public static final String MESSAGE_START_END_CONSTRAINTS = "Event end time must be after start time.";
 
     public final String schedulePrint;
 
     // Date fields
-    private final Date date;
+    private final TheDate date;
 
     // Time fields
     private final Time startTime;
@@ -25,7 +26,7 @@ public class Schedule {
     /**
      * Every field must be present and not null.
      */
-    public Schedule(Date date, Time startTime, Time endTime, EventName eventName) {
+    public Schedule(TheDate date, Time startTime, Time endTime, EventName eventName) {
         requireAllNonNull(date, startTime, endTime, eventName);
         this.date = date;
         this.startTime = startTime;
@@ -34,8 +35,16 @@ public class Schedule {
         this.schedulePrint = this.toString();
     }
 
+    /**
+     * Returns true if startTime is before endTime.
+     */
+    public static boolean isValidStartEnd (String startTime, String endTime) {
+        int startT = Integer.parseInt(startTime);
+        int endT = Integer.parseInt(endTime);
+        return (startT < endT);
+    }
 
-    public Date getDate() {
+    public TheDate getDate() {
         return date;
     }
 
@@ -51,16 +60,6 @@ public class Schedule {
         return eventName;
     }
 
-    /**
-     * Returns true if another event has the same start time.
-     * This prevents one person from adding the same event at the same start time.
-     */
-    // TODO TODO TODO TODO TODO
-    //    public boolean isSameStartTime(Object otherStartTime) {
-    //        return otherStartTime == this ||
-    //                (otherStartTime instanceof Schedule && schedulePrint.equals(((Schedule) schedulePrint).value ));
-    //    }
-
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -70,13 +69,13 @@ public class Schedule {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Date: ")
+        builder.append("Date:")
                 .append(getDate())
-                .append(" StartTime: ")
+                .append(" Start:")
                 .append(getStartTime())
-                .append(" EndTime: ")
+                .append(" End:")
                 .append(getEndTime())
-                .append(" EventName: ")
+                .append(" EventName:")
                 .append(getEventName());
         return builder.toString();
     }

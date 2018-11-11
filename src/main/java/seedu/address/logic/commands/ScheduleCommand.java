@@ -57,13 +57,11 @@ public class ScheduleCommand extends Command {
 
     private Schedule toSchedule;
     private final Index index;
-    //private final SchedulePersonDescriptor schedulePersonDescriptor;
 
     public ScheduleCommand(Schedule schedule, Index index) {
         requireNonNull(schedule);
         this.index = index;
         this.toSchedule = schedule;
-        //this.schedulePersonDescriptor = new SchedulePersonDescriptor(schedulePersonDescriptor);
     }
 
     @Override
@@ -76,9 +74,9 @@ public class ScheduleCommand extends Command {
         }
 
         Person personToAddSchedule = lastShownList.get(index.getZeroBased());
-        System.out.println(personToAddSchedule.getSchedules().toString());
+        //        System.out.println(personToAddSchedule.getSchedules().toString());
         Person scheduledPerson = addScheduleToPerson(personToAddSchedule, this.toSchedule);
-        System.out.println(scheduledPerson.getSchedules().toString());
+        //        System.out.println(scheduledPerson.getSchedules().toString());
 
         model.updatePerson(personToAddSchedule, scheduledPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -100,59 +98,9 @@ public class ScheduleCommand extends Command {
         Address updatedAddress = personToAddSchedule.getAddress();
         Set<Tag> updatedTags = personToAddSchedule.getTags();
         Set<Schedule> oldSchedule = personToAddSchedule.getSchedules();
-
         Set<Schedule> updatedSchedule = new HashSet<>(oldSchedule);
         updatedSchedule.add(schedule);
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSchedule);
     }
 
-    //THIS IS CURRENTLY UNUSED
-    //    /**
-    //     * Stores the details to edit the person with. Each non-empty field value will replace the
-    //     * corresponding field value of the person.
-    //     */
-    //    public static class SchedulePersonDescriptor {
-    //        private Set<Schedule> schedules;
-    //
-    //        public SchedulePersonDescriptor() {}
-    //
-    //        /**
-    //         * Copy constructor.
-    //         * A defensive copy of {@code tags} is used internally.
-    //         */
-    //        public SchedulePersonDescriptor (SchedulePersonDescriptor toCopy) {
-    //            setSchedules(toCopy.schedules);
-    //        }
-    //
-    //        /**
-    //         * Sets {@code schedules} to this object's {@code schedules}.
-    //         * A defensive copy of {@code tags} is used internally.
-    //         */
-    //        public void setSchedules(Set<Schedule> schedules) {
-    //            this.schedules = (schedules != null) ? new HashSet<>(schedules) : null;
-    //        }
-    //
-    //        //TODO TODO HOW TO MAKE NOT OPTIONAL
-    //        public Optional<Set<Schedule>> getSchedules() {
-    //            return (schedules != null) ? Optional.of(Collections.unmodifiableSet(schedules)) : Optional.empty();
-    //        }
-    //
-    //        @Override
-    //        public boolean equals(Object other) {
-    //            // short circuit if same object
-    //            if (other == this) {
-    //                return true;
-    //            }
-    //
-    //            // instanceof handles nulls
-    //            if (!(other instanceof ScheduleCommand.SchedulePersonDescriptor)) {
-    //                return false;
-    //            }
-    //
-    //            // state check
-    //            ScheduleCommand.SchedulePersonDescriptor e = (ScheduleCommand.SchedulePersonDescriptor) other;
-    //
-    //            return getSchedules().equals(e.getSchedules());
-    //        }
-    //    }
 }
