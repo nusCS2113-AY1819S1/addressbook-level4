@@ -2884,7 +2884,7 @@ Expected: Similar to previous.
 // tag::notemanualtesting[]
 === Adding a note
 
-. Adding a note in Trajectory while all notes are listed.
+. Adding a note in Trajectory while all notes are listed. +
 *Parameters (prefix):* +
 [optional] MODULE_CODE (mc/), +
 [optional] NOTE_TITLE (tt/), +
@@ -2908,7 +2908,7 @@ Expected: Similar to previous.
 
 === Deleting a note
 
-. Deleting a note in Trajectory while all notes are listed.
+. Deleting a note in Trajectory while all notes are listed. +
 *Parameters (prefix):* +
 INDEX (no prefix), +
 INDEX_RANGE (no prefix)
@@ -2925,7 +2925,7 @@ INDEX_RANGE (no prefix)
 
 === Editing a note
 
-. Editing a note in Trajectory while all notes are listed.
+. Editing a note in Trajectory while all notes are listed. +
 *Parameters (prefix):* +
 INDEX (no prefix), +
 [optional] MODULE_CODE (mc/), +
@@ -2946,7 +2946,7 @@ INDEX (no prefix), +
 
 === Listing notes
 
-. Listing all existing notes in Trajectory.
+. Listing all existing notes in Trajectory. +
 *Parameters (prefix):* +
 [optional] MODULE_CODE (mc/)
 
@@ -2960,7 +2960,7 @@ INDEX (no prefix), +
 
 === Finding notes by keywords
 
-. Finding notes in Trajectory that matches keyword(s).
+. Finding notes in Trajectory that matches keyword(s). +
 *Parameters (prefix):* +
 KEYWORD (k/), +
 [optional] MORE_KEYWORDS (k/)
@@ -2973,7 +2973,7 @@ KEYWORD (k/), +
 
 === Exporting notes to CSV
 
-. Exporting notes in Trajectory.
+. Exporting notes in Trajectory. +
 *Parameters (prefix):* +
 FILE_NAME (fn/)
 
