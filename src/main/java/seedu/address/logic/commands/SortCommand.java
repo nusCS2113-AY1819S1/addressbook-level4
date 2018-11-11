@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.person.Parameter.isValidParameter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,8 @@ import seedu.address.model.person.Person;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_SUCCESS = "Sorted %1$d people";
-    public static final String MESSAGE_FAILURE = "Error: Failed to sort.";
+    public static final String MESSAGE_USAGE = "Error: Failed to sort. Please enter your command in the following"
+            + "format:\nsort st/[PARAMETER]\nValid Parameters: 'name', 'skill', 'sl'";
 
     private final Parameter parameter;
 
@@ -32,7 +35,7 @@ public class SortCommand extends Command {
         try {
             filteredPersonList.sort(Person.getComparator(parameter));
         } catch (IllegalArgumentException ive) {
-            throw new CommandException(MESSAGE_FAILURE);
+            throw new CommandException(MESSAGE_USAGE);
         }
         for (Person person: filteredPersonList) {
             model.deletePerson(person);

@@ -9,12 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Parameter {
 
-    public static final String MESSAGE_PARAMETER_CONSTRAINTS = "Sort Command Parameters must conform to the following "
-            + "values: 'Sort'";
-    public static final String MESSAGE_UNKNOWN_PARAM = "Invalid Parameter. Please enter 'name' or 'skill'";
-    // TODO expand with more parameters
+    public static final String MESSAGE_UNKNOWN_PARAM = "Invalid Parameters. Please enter 'name' or 'skill'";
 
-    private static final String PARAMETERS_REGEX = "skill|name"; // TODO expand with more parameters
+    private static final String PARAMETERS_REGEX = "skill|name|sl"; // TODO expand with more parameters
 
     public final String value;
 
@@ -25,7 +22,6 @@ public class Parameter {
      */
     public Parameter(String parameter) {
         requireNonNull(parameter);
-        checkArgument(isValidParameter(parameter), MESSAGE_PARAMETER_CONSTRAINTS);
         value = parameter;
     }
 
@@ -34,6 +30,10 @@ public class Parameter {
      */
     public static boolean isValidParameter(String test) {
         return test.matches(PARAMETERS_REGEX);
+    }
+
+    public static boolean isValidParameter(Parameter test) {
+        return test.value.matches(PARAMETERS_REGEX);
     }
 
     @Override

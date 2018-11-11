@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.SortingParams.PARAM_NAME;
 import static seedu.address.logic.parser.SortingParams.PARAM_SKILL;
+import static seedu.address.logic.parser.SortingParams.PARAM_SKILLLEVEL;
 import static seedu.address.model.person.Parameter.MESSAGE_UNKNOWN_PARAM;
 
 import java.util.Collections;
@@ -26,6 +27,12 @@ public class Person {
         String name1 = p1.toString();
         String name2 = p2.toString();
         return name1.compareTo(name2);
+    };
+
+    private static Comparator<Person> bySkill = (p1, p2) -> {
+        String s1 = p1.getSkill().value;
+        String s2 = p2.getSkill().value;
+        return s1.compareTo(s2);
     };
 
     // Identity fields
@@ -57,9 +64,11 @@ public class Person {
     public static Comparator<Person> getComparator(Parameter parameter) throws IllegalArgumentException {
         switch(parameter.value) {
         case PARAM_SKILL:
-            return bySkillLevel;
+            return bySkill;
         case PARAM_NAME:
             return byName;
+        case PARAM_SKILLLEVEL:
+            return bySkillLevel;
         default:
             throw new IllegalArgumentException(MESSAGE_UNKNOWN_PARAM);
         }
