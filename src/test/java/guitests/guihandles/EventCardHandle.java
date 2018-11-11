@@ -1,5 +1,6 @@
 package guitests.guihandles;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -124,6 +125,7 @@ public class EventCardHandle extends NodeHandle<Node> {
 
     public String getAttendanceString() {
         List<String> attendanceList = getAttendance();
+        Collections.sort(attendanceList, String.CASE_INSENSITIVE_ORDER);
         String attendanceString = String.join("<br>", attendanceList);
         return attendanceString;
     }

@@ -228,7 +228,7 @@ Admin/User: Selects the event identified by the index number in the displayed ev
 Format: `select INDEX`
 
 ****
-* Selects the event and loads the Browser Panel of the event at the specified `INDEX`.
+* Selects the event and loads the event page of the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -313,6 +313,13 @@ Format: `clear`
 User: Registers for an event by adding the current user's username to the attendance list. +
 Format: `register INDEX`
 
+****
+* Registers for the event at the specified INDEX.
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* User must not be registered for event.
+****
+
 Examples:
 
 * `list` +
@@ -327,6 +334,13 @@ Registers User for the 1st event in the results of the `find` command.
 User: Unregisters for an event by removing the current user's username from the attendance list. +
 Format: `unregister INDEX`
 
+****
+* Unegisters for the event at the specified INDEX.
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* User must be already registered for event.
+****
+
 Examples:
 
 * `list` +
@@ -340,6 +354,27 @@ Unregisters user from the 2nd event in the results of the `find` command.
 
 User: Lists all events that the user has registered for. +
 Format: `attending`
+
+=== Remove user from event : `removeAttendee`
+
+Admin: Removes a user registered for an event. +
+Format: `removeAttendee INDEX u/USERNAME`
+
+****
+* Removes USERNAME from the event at the specified INDEX.
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* User with the specified username must be registered for the event.
+****
+
+Examples:
+
+* `list` +
+`removeAttendee 1 u/Peter Parker` +
+Removes the user with username `Peter Parker` from the attendance of the 1st event of the Event Manager.
+* `find Party` +
+`removeAttendee 2 u/Alice` +
+Removes the user with username `Alice` from the attendance of the 2nd event in the results of the `find` command.
 // end::rsvp[]
 
 //tag::eventState&Reminder[]
@@ -504,6 +539,11 @@ e.g.`select 2`
 e.g. `register 1`
 * *Unregister* : `unregister INDEX` +
 e.g. `unregister 1`
+* *View Attending* : `attending`
+* *Remove Attendee* : `removeAttendee INDEX u/USERNAME` +
+e.g. `removeAttendee 1 u/Peter Parker`
+* *Set reminders* : `setReminder INDEX` +
+e.g. `setReminder 1`
 * *Show reminders* : `reminder`
 * *Update event statuses* : `update`
 * *AddComment* : `addComment INDEX C/STRING` +

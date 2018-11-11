@@ -79,6 +79,7 @@ public class TypicalEvents {
             .withVenue("michegan ave")
             .withDateTime("12/8/2018 17:30")
             .withStatus("COMPLETED")
+            .withAttendees("admin", "Scarlet Witch")
             .withComment("{span}Comment Section{/span}{ol}{/ol}").build();
     public static final Event FIONA = new EventBuilder().withName("Dining In The Dark")
             .withContact("Fiona Kunz")

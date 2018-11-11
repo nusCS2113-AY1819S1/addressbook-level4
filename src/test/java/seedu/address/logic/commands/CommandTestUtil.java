@@ -43,6 +43,7 @@ public class CommandTestUtil {
     public static final String VALID_PASSWORD = "pass@12345";
     public static final String VALID_ATTENDEE_TED = "Ted Bacan";
     public static final String VALID_ATTENDEE_HAN = "Han Christian";
+    public static final String VALID_ATTENDEE_WITCH = "Scarlet Witch";
     public static final String VALID_NAME_AMY = "Night Cycling";
     public static final String VALID_NAME_BOB = "House Movie Screening";
     public static final String VALID_CONTACT_AMY = "Amy Bee";

@@ -58,6 +58,8 @@
         <dateTime>12/8/2018 17:30</dateTime>
         <status>COMPLETED</status>
         <comment>{span}Comment Section{/span}{ol}{/ol}</comment>
+        <attending>admin</attending>
+        <attending>Scarlet Witch</attending>
     </events>
     <events>
         <name>Dining In The Dark</name>
