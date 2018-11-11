@@ -13,42 +13,59 @@ Something Daily is a desktop address book application used for teaching Software
 
 == Summary of contributions
 
-* *Major enhancement*: designed *models for Expenditure Tracker*
-** What it does: the most basic components of this product, execute the commands typed by user in the lowest level.
-** Justification: This enhancement improves the product significantly because the models are the foundation of Expenditure Tracker.
+* *Major enhancement*:
+1. Designed *models for Expenditure Tracker*
+*** What it does: holds the data related to Expenditure Tracker and executes the commands in the lowest level.
+*** Justification: It is the most foundational and core component of Expenditure Tracker in the app.
 
-* *Major enhancement*: designed *storage for Expenditure Tracker*
-** What it does: stores the expenditures that user has recorded and direct it to a particular path.
-** Justification: This enhancement improves the product significantly because the storage keeps the record of expenditures recorded by the user so that he/she will never lose the history records.
+2. Designed *storage for Expenditure Tracker*
+*** What it does: loads and stores the expenditure data via a particular path.
+*** Justification: This component saves Expenditure Tracker's data and hence allows user to keep track on expenditures.
 
-* *Major enhancement*: designed *user interface for Expenditure Tracker*
-** What it does: displays the expenditures recorded in Expenditure Tracker properly.
-** Justification: This enhancement improves the product significantly because the UI is the only place for users to see the expenditures and do commands.
+3. Designed *user interface for Expenditure Tracker*
+*** What it does: displays the history expenditures in the Expenditure Tracker panel properly.
+*** Justification: This design allows user to view the expenditure records.
 
-* *Major enhancement*: added *tests for Expenditure Tracker*
-** What it does: tests that whether everything related to Expenditure Tracker works properly.
-** Justification: This enhancement improves the product significantly because the tests help developers find out the bug to fix.
+4. Designed *model for Calendar*
+*** What it does: generates the current month's data.
+*** Justification: This component provides the data of current month to be displayed to user.
 
-* *Major enhancement*: added *the ability to add an expenditure*
-** What it does: allows the user to add an expenditure to Expenditure Tracker.
-** Justification: This feature improves the product significantly because a user needs to add an expenditure to record.
+5. Designed *user interface for Calendar*
+*** What it does: displays the Calendar properly.
+*** Justification: This design gives user an overview of the whole month.
 
-* *Major enhancement*: added *the ability to get advice from Expenditure Tracker on how to save money*
-** What it does: If the user has no idea on where he/she spent there money and want to get some advice on how to save money in the following period, this command will give the user a summary on those.
-** Justification: This feature improves the product significantly because a user who is not capable of managing money can get advice on how to spend their money properly.
+6. Added *tests for Expenditure Tracker*
+*** What it does: tests whether Expenditure Tracker models work properly.
+*** Justification: This enhancement helps developers find out bug and logic error in model.
 
-* *Major enhancement*: added *the ability to view expenditure on a particular day or of a particular category*
-** What it does: allows the user to see only the expenditures on a specific day or of a specific category.
-** Justification: This feature improves the product significantly because user might not want to see all the expenditures have been made from beginning till now, this enhancement provides user with features that user can view the expenditures only on a particular day or of a particular category, which depends on the user's preference.
+7. Added *the ability to add an expenditure*
+*** What it does: allows the user to add expenditure to Expenditure Tracker.
+*** Justification: This feature is the key to tracking daily expenditures, where user can add expenditures to Expenditure Tracker.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+8. Added *the ability to get advice from Expenditure Tracker on how to spend money*
+*** What it does: shows a popup window containing a summary of expenditure history and gives advice on how to spend money in the following period.
+*** Justification: If the user has no idea on where he/she spent money and want to get some advice on managing money in the following period, this feature helps the users plan how to spend.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-10-30&timeframe=day&reverse=false&repoSort=true[Dashboard]]
+9. Added *the ability to view expenditures by date or category*
+*** What it does: displays the expenditures on a particular day or of a specific category.
+*** Justification: Since user might not want to see all the expenditures from beginning till now, this feature improves the efficiency for user to navigate through expenditure records as user could view by a particular date or category.
+
+10. Added *the ability to check tasks and expenditures on a particular day*
+*** What it does: shows a popup window containing the task information and expenditure records of a particular day.
+*** Justification: This feature implements the interoperability of Todo list and Expenditure Tracker as it provides user with both task information and expenditure records by referring to a specific date.
+
+
+* *Minor enhancement*:
+** added a history command that allows the user to navigate to previous commands using up/down keys.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=shiningggg&sort=displayName&since=2018-09-12&until=&timeframe=day&reverse=false&repoSort=true[RepoSense Dashboard]]
 
 * *Other contributions*:
 
 ** Documentation:
-*** Added expenditure tracker information to User Guide and Developer Guide.
+*** Added partial Expenditure Tracker features description of User Guide.
+*** Added user stories and use cases of Developer Guide.
+
 ** Community:
 *** PRs reviewed (with review comments): https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#80], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#68], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#23], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#20]
 *** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues[#60])
@@ -72,4 +89,6 @@ include::../UserGuide.adoc[tag=ETadvice]
 |_The user stories of Expenditure Tracker given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+include::../DeveloperGuide.adoc[tag=calendar]
+include::../DeveloperGuide.adoc[tag=expenditureViewing]
 include::../DeveloperGuide.adoc[tag=userStories]
