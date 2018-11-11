@@ -16,6 +16,7 @@ import seedu.address.model.InventoryList;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.NameContainsKeywordsPredicate;
+import seedu.address.model.user.manager.ManagerModel;
 
 /**
  * Contains helper methods for testing commands.
@@ -50,7 +51,26 @@ public class CommandTestUtil {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - the result message matches {@code expectedMessage} <br>
+     * - the {@code actualModel} matches {@code expectedModel} <br>
+     * - the {@code actualCommandHistory} remains unchanged.
+     */
+    public static void assertCommandSuccess(Command command, ManagerModel actualModel,
+                                            CommandHistory actualCommandHistory,
+                                            String expectedMessage, ManagerModel expectedModel) {
+        CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
+        try {
+            CommandResult result = command.execute(actualModel, actualCommandHistory);
+            assertEquals(expectedMessage, result.feedbackToUser);
+            assertEquals(expectedModel, actualModel);
+            assertEquals(expectedCommandHistory, actualCommandHistory);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
     /**
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
