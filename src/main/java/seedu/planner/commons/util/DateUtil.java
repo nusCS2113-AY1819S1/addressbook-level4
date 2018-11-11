@@ -104,6 +104,28 @@ public class DateUtil {
     }
 
     /**
+     * Computes today's date using Java library {@link LocalDate} by processing the date in yyyy-mm-dd into dd-mm-yyyy
+     * and returns it as a string form for input.
+     * @return String date
+     */
+    public static String getDateTodayForInput() {
+        String dateToday = LocalDate.now().toString();
+        String[] args = dateToday.split("-");
+        return String.format("%s-%s-%s", args[2], args[1], args[0]);
+    }
+
+    /**
+     * Computes today's date using Java library {@link LocalDate} by processing the date in yyyy-mm-dd into dd-mm-yyyy
+     * and returns it as a string form for input.
+     * @return String date
+     */
+    public static String getDateYesterdayForInput() {
+        String dateYesterday = LocalDate.now().minusDays(1).toString();
+        String[] args = dateYesterday.split("-");
+        return String.format("%s-%s-%s", args[2] , args[1], args[0]);
+    }
+
+    /**
      * Formats a date object into a display complying with
      */
     public static String formatDate(Date date) {

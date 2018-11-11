@@ -1,8 +1,10 @@
-package seedu.planner.model.tag;
+package seedu.planner.model.autocomplete;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.planner.model.tag.Tag;
 
 //@author tztzt
 /**
@@ -36,20 +38,13 @@ public class DefaultTags {
     private static final Tag TAG_CAR = new Tag("car");
 
     private static final Tag TAG_FOOD = new Tag("food");
-    private static final Tag TAG_MACS = new Tag("macs");
-    private static final Tag TAG_KFC = new Tag("kfc");
-    private static final Tag TAG_CAIFAN = new Tag("caifan");
-    private static final Tag TAG_CHICKENRICE = new Tag("jifan");
-    private static final Tag TAG_LAKSA = new Tag("laksa");
-    private static final Tag TAG_PRATA = new Tag("prata");
     private static final Tag TAG_TECHNO = new Tag("techno");
     private static final Tag TAG_DECK = new Tag("deck");
 
     private static Set<Tag> defaultTagSet = new HashSet<>(Arrays.asList(TAG_CLOTHES, TAG_SHOPPING, TAG_GROCERIES,
             TAG_FAMILY, TAG_FURNITURE, TAG_APPLIANCES, TAG_ELECTRONICS, TAG_PHONE, TAG_BILL, TAG_RENT, TAG_SCHOOL,
             TAG_GIRLFRIEND, TAG_BOYFRIEND, TAG_SALARY, TAG_LOTTERY, TAG_ALLOWANCE, TAG_TRAVEL, TAG_CAB, TAG_PETROL,
-            TAG_CAR, TAG_FOOD, TAG_MACS, TAG_KFC, TAG_CAIFAN, TAG_CHICKENRICE, TAG_LAKSA, TAG_PRATA, TAG_TECHNO,
-            TAG_DECK));
+            TAG_CAR, TAG_FOOD, TAG_TECHNO, TAG_DECK));
 
     public static Set<String> getSampleTagsForSuggestion() {
         Set<String> stringTagSet = new HashSet<>();

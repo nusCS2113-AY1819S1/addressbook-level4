@@ -11,6 +11,7 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.NewResultAvailableEvent;
 import seedu.planner.logic.ListElementPointer;
 import seedu.planner.logic.Logic;
+import seedu.planner.logic.autocomplete.NewAutoCompletionBinding;
 import seedu.planner.logic.commands.CommandResult;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.logic.parser.exceptions.ParseException;
@@ -22,10 +23,12 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private static final int MAX_SUGGESTIONS = 5;
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
+
 
     @FXML
     private TextField commandTextField;
@@ -33,7 +36,7 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(Logic logic) {
         super(FXML);
         this.logic = logic;
-        AutoCompleteBox autoCompleteBox = new AutoCompleteBox(commandTextField);
+        new NewAutoCompletionBinding(commandTextField).setVisibleRowCount(MAX_SUGGESTIONS);
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();

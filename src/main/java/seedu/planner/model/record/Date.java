@@ -22,6 +22,9 @@ public class Date {
                     + "parameter is 2.";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
 
+    public static final String DATE_INPUT_TODAY = "today";
+    public static final String DATE_INPUT_YESTERDAY = "ytd";
+
     public final String value;
 
     private int day;
