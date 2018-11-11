@@ -11,14 +11,11 @@
 
 _FreeTime_ is a desktop application targeted at students who have many projects that require meeting many people at different times.
 _FreeTime_ aims to reduce the hassle of find available timeslots in which everyone is mutually available.
-This project is part of the deliverables for the following modules offered by the School of Computing in the National University of Singapore: +
-
-*CS2113T - Software Engineering and Object-Oriented Programming* +
-*CS2101 - Communication for Computing Professionals* +
+This project is part of the deliverables for modules offered by the School of Computing in the National University of Singapore.
 
 The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. It is written in Java, and has about 10 kLoC.
 
-This project portfolio shows my contributions to the project, which includes the learning the Java Programing Language.
+This project portfolio shows my contributions to the project, which includes the learning the Java Programing Language and JavaFX.
 
 == Summary of contributions
 
@@ -43,7 +40,7 @@ This is to enhance the search feature in the case where there are too many users
 *** Designed and updated the existing application icon and title.
 *** Added colors to group tags
 ** Documentation:
-*** Ensured consistency in the UserGuide and DeveloperGuide.
+*** Ensured consistency in the UserGuide.
 
 == Contributions to the User Guide
 
@@ -64,13 +61,4 @@ include::../UserGuide.adoc[tag=unfriendcommand]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=friendfeature]
-
-include::../DeveloperGuide.adoc[tag=tagcommand]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=friend]
