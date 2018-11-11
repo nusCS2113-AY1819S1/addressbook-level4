@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.ItemCommand;
+package seedu.address.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_LOCATION;
@@ -54,7 +54,7 @@ public class AddItemCommand extends Command {
 
         logger.info("Adding item...");
         model.addItem(addItem);
-        logger.info("Added Item");
+        logger.info("Added item");
         model.commitAddressBook();
         logger.info("Committing Club Book");
 

@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Represents an Item in the inventory.
+ * Represents an item in the inventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Item {

@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.ItemCommand;
+package seedu.address.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_LOCATION;
@@ -42,7 +42,7 @@ public class EditItemCommand extends Command {
             + PREFIX_ITEM_QUANTITY + "4"
             + PREFIX_ITEM_LOCATION + "Storeroom";
 
-    public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
+    public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the item list.";
 
@@ -84,7 +84,7 @@ public class EditItemCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Item} with the details of {@code itemToEdit}
+     * Creates and returns a {@code item} with the details of {@code itemToEdit}
      * edited with {@code editItemDescriptor}.
      */
     private static Item createEditedItem(Item itemToEdit, EditItemDescriptor editItemDescriptor) {

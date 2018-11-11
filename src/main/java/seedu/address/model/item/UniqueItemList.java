@@ -13,9 +13,9 @@ import seedu.address.model.item.exceptions.ItemNotFoundException;
 
 /**
  * A list of items that enforces uniqueness between its elements and does not allow nulls.
- * An item is considered unique by comparing using {@code Item#isSameItem(Item)}. As such, adding and updating of
- * items uses Item#isSameItem(Item) for equality so as to ensure that the item being added or updated is
- * unique in terms of identity in the UniqueItemList. However, the removal of an item uses Item#equals(Object) so
+ * An item is considered unique by comparing using {@code item#isSameItem(item)}. As such, adding and updating of
+ * items uses item#isSameItem(item) for equality so as to ensure that the item being added or updated is
+ * unique in terms of identity in the UniqueItemList. However, the removal of an item uses item#equals(Object) so
  * as to ensure that the item with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
