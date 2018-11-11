@@ -97,7 +97,7 @@ public class Person {
     /**
      * Returns true if both persons of the same name
      */
-    public boolean isSamePersonForLogin(Person otherPerson) {
+    public boolean isSamePersonForRegister(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
