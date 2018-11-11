@@ -984,26 +984,26 @@ Use Case resumes at step 1.
  5.  User requests to register for the event.
  6.  EventManager adds user to attendance list and displays confirmation message.
 
- *Extensions:*
- [none]
- * 5a. User is already registered for event.
- [none]
- ** 5a1. EventManager displays error message.
- Use case resumes at step 2.
+*Extensions:*
+[none]
+* 5a. User is already registered for event.
+[none]
+** 5a1. EventManager displays error message.
+Use case resumes at step 2.
 
- [none]
- * 6a. User unregisters from event.
- [none]
- ** 6a1. User requests to unregister for the event.
- ** 6a2. EventManager removes user from attendance list and displays confirmation message.
- Use case ends.
+[none]
+* 6a. User unregisters from event.
+[none]
+** 6a1. User requests to unregister for the event.
+** 6a2. EventManager removes user from attendance list and displays confirmation message.
+Use case ends.
  
- [none]
- * 6b. User is banned from event.
- [none]
- ** 6c1. Admin requests to remove user from event.
- ** 6c2. EventManager removes user from attendance list and displays confirmation message.
- Use case ends.
+[none]
+* 6b. User is banned from event.
+[none]
+** 6c1. Admin requests to remove user from event.
+** 6c2. EventManager removes user from attendance list and displays confirmation message.
+Use case ends.
 // end::rsvpUsecase[]
  
 // tag::reminderUsecase[]
@@ -1052,7 +1052,6 @@ Use case ends
 ** 3a3. “deleteComment INDEX L/LINE”  (only for admin) it will delete the comment at event INDEX and comment at LINE of comment section. +
 Resume use case at step 4.
 
-*Use Case: Export calendar*: +
 [discrete]
  === Use Case: Export calendar:
  *MSS*
@@ -1061,7 +1060,7 @@ Resume use case at step 4.
 2. EventManager execute exportCalendarCommand
 3. A filename with .ics extension create or re-write in src/data/ folder
 
-*Extensions*
+*Extensions:*
  [none]
  0a) User viewing current list of registered events.
 
