@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_2_HOURS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_3;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2113;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_3;
@@ -73,7 +74,7 @@ public class EditTaskCommandTest {
     @Test
     public void execute_someFieldsSpecified_editSuccessful() {
         Task editedTask = new TaskBuilder().withTitle(VALID_TITLE_3).withPriority(VALID_PRIORITY_LEVEL_HIGH)
-                .withExpectedNumOfHours(Integer.parseInt(VALID_2_HOURS)).build();
+                .withExpectedNumOfHours(Integer.parseInt(VALID_2_HOURS)).withModuleCode(VALID_MODULE_CODE_CS2113).build();
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_THIRD_TASK, descriptor);
 

@@ -38,6 +38,7 @@
         <description>Find out more about syntax of new language</description>
         <priorityLevel>High</priorityLevel>
         <expectedNumOfHours>1</expectedNumOfHours>
+        <completedNumOfHours>-1</completedNumOfHours>
         <isCompleted>false</isCompleted>
     </tasks>
 </addressbook>

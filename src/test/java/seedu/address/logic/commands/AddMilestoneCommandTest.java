@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_TASK;
 import static seedu.address.testutil.TypicalMilestones.FIRST_MILESTONE;
@@ -50,7 +51,7 @@ public class AddMilestoneCommandTest {
     public void execute_milestoneWithInvalidIndex_throwsCommandException() throws Exception {
         Milestone validMilestone = new MilestoneBuilder().build();
 
-        AddMilestoneCommand addMilestoneCommand = new AddMilestoneCommand(INDEX_FOURTH_TASK, validMilestone);
+        AddMilestoneCommand addMilestoneCommand = new AddMilestoneCommand(INDEX_FIFTH_TASK, validMilestone);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddMilestoneCommand.MESSAGE_TASK_NOT_FOUND);
