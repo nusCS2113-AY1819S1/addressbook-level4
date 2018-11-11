@@ -7,7 +7,7 @@
 //import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_BOOK_SUCCESS;
 //import static seedu.address.testutil.TestUtil.getLastIndex;
 //import static seedu.address.testutil.TestUtil.getMidIndex;
-//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
+//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_BIOLOGY;
 //import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 //
 //import org.junit.Test;
@@ -21,7 +21,7 @@
 //public class SelectCommandSystemTest extends BookInventorySystemTest {
 //    @Test
 //    public void select() {
-        /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
+//        /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
 //
 //        /* Case: select the first card in the book list, command with leading spaces and trailing spaces
 //         * -> selected
@@ -52,12 +52,12 @@
 //        /* Case: select the current selected card -> selected */
 //        assertCommandSuccess(command, middleIndex);
 //
-        /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
+//        /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 //
 //        /* Case: filtered book list, select index within bounds of BookInventory but out of bounds of book list
 //         * -> rejected
 //         */
-//        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+//        showPersonsWithName(KEYWORD_MATCHING_BIOLOGY);
 //        int invalidIndex = getModel().getBookInventory().getBookList().size();
 //        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
 //
@@ -67,7 +67,7 @@
 //        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
 //        assertCommandSuccess(command, validIndex);
 //
-        /* ----------------------------------- Perform invalid select operations ------------------------------------ */
+//        /* ----------------------------------- Perform invalid select operations ------------------------------------ */
 //
 //        /* Case: invalid index (0) -> rejected */
 //        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + 0,
@@ -116,7 +116,7 @@
 //        Model expectedModel = getModel();
 //        String expectedResultMessage = String.format(
 //                MESSAGE_SELECT_BOOK_SUCCESS, expectedSelectedCardIndex.getOneBased());
-//        int preExecutionSelectedCardIndex = getPersonListPanel().getSelectedCardIndex();
+//        int preExecutionSelectedCardIndex = getBookListPanel().getSelectedCardIndex();
 //
 //        executeCommand(command);
 //        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
@@ -142,7 +142,7 @@
 //     * {@code BookInventorySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
 //     * @see BookInventorySystemTest#assertApplicationDisplaysExpected(String, String, Model)
 //     */
-//    private void assertCommandFailure(String command, String expectedResultMessage) {
+//        private void assertCommandFailure(String command, String expectedResultMessage) {
 //        Model expectedModel = getModel();
 //
 //        executeCommand(command);

@@ -1,7 +1,7 @@
 //package systemtests;
 //
 //import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
+//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_BIOLOGY;
 //
 //import org.junit.Test;
 //
@@ -44,7 +44,7 @@
 //
 //        /* Case: filters the book list before clearing -> entire BookInventory cleared */
 //        executeCommand(UndoCommand.COMMAND_WORD); // restores the original BookInventory
-//        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+//        showPersonsWithName(KEYWORD_MATCHING_BIOLOGY);
 //        assertCommandSuccess(ClearCommand.COMMAND_WORD);
 //        assertSelectedCardUnchanged();
 //

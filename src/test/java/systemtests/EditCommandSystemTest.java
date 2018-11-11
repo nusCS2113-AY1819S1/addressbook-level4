@@ -27,7 +27,7 @@
 //import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 //import static seedu.address.testutil.TypicalBooks.ADD;
 //import static seedu.address.testutil.TypicalBooks.BOB;
-//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
+//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_BIOLOGY;
 //import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 //import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 //
@@ -115,7 +115,7 @@
 // ------------------------ */
 //
 //        /* Case: filtered book list, edit index within bounds of BookInventory and book list -> edited */
-//        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+//        showPersonsWithName(KEYWORD_MATCHING_BIOLOGY);
 //        index = INDEX_FIRST_BOOK;
 //        assertTrue(index.getZeroBased() < getModel().getFilteredBookList().size());
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
@@ -126,7 +126,7 @@
 //        /* Case: filtered book list, edit index within bounds of BookInventory but out of bounds of book list
 //         * -> rejected
 //         */
-//        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+//        showPersonsWithName(KEYWORD_MATCHING_BIOLOGY);
 //        int invalidIndex = getModel().getBookInventory().getBookList().size();
 //        assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
 //                Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);

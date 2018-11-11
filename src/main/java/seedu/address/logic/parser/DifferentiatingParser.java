@@ -24,7 +24,7 @@ public class DifferentiatingParser {
      *  It returns true when the input is meant for requestlistparser.
      */
     public boolean parseInput (String[] string, String prev, CommandHistory history) {
-        if (diceCoefficient(string[0], RequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD
+        if (diceCoefficient(string[0], RequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_ADJUSTED_THRESHOLD
                 || diceCoefficient(string[0], DeleteRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_ADJUSTED_THRESHOLD
                 || diceCoefficient(string[0], ToggleRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_ADJUSTED_THRESHOLD
                 || ((diceCoefficient(string[0], UndoRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD)

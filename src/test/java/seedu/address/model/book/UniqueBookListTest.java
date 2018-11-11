@@ -112,7 +112,7 @@ public class UniqueBookListTest {
     }
 
     @Test
-    public void setBook_editedBookHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setBook_editedBookHasNonUniqueIdentity_throwsDuplicateBookException() {
         uniqueBookList.add(ART);
         uniqueBookList.add(BOB);
         thrown.expect(DuplicateBookException.class);

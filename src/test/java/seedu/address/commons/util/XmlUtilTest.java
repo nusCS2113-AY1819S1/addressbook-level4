@@ -29,9 +29,9 @@ public class XmlUtilTest {
     private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.xml");
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.xml");
     private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validBookInventory.xml");
-    private static final Path MISSING_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingBookField.xml");
-    private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidBookField.xml");
-    private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validBook.xml");
+    private static final Path MISSING_BOOK_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingBookField.xml");
+    private static final Path INVALID_BOOK_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidBookField.xml");
+    private static final Path VALID_BOOK_FILE = TEST_DATA_FOLDER.resolve("validBook.xml");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempBookInventory.xml");
 
     private static final String INVALID_ISBN = "9482asf424";
@@ -78,30 +78,30 @@ public class XmlUtilTest {
     }
 
     @Test
-    public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
-        XmlAdaptedBook actualPerson = XmlUtil.getDataFromFile(
-                MISSING_PERSON_FIELD_FILE, XmlAdaptedBookWithRootElement.class);
-        XmlAdaptedBook expectedPerson = new XmlAdaptedBook(
+    public void xmlAdaptedBookFromFile_fileWithMissingBookField_validResult() throws Exception {
+        XmlAdaptedBook actualBook = XmlUtil.getDataFromFile(
+                MISSING_BOOK_FIELD_FILE, XmlAdaptedBookWithRootElement.class);
+        XmlAdaptedBook expectedBook = new XmlAdaptedBook(
                 null, VALID_ISBN, VALID_PRICE, VALID_COST, VALID_QUANTITY, VALID_TAGS);
-        // assertEquals(expectedPerson, actualPerson);
+        assertEquals(expectedBook, actualBook);
     }
 
     @Test
-    public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
-        XmlAdaptedBook actualPerson = XmlUtil.getDataFromFile(
-                INVALID_PERSON_FIELD_FILE, XmlAdaptedBookWithRootElement.class);
-        XmlAdaptedBook expectedPerson = new XmlAdaptedBook(
+    public void xmlAdaptedBookFromFile_fileWithInvalidBookField_validResult() throws Exception {
+        XmlAdaptedBook actualBook = XmlUtil.getDataFromFile(
+                INVALID_BOOK_FIELD_FILE, XmlAdaptedBookWithRootElement.class);
+        XmlAdaptedBook expectedBook = new XmlAdaptedBook(
                 VALID_NAME, INVALID_ISBN, VALID_PRICE, VALID_COST, VALID_QUANTITY, VALID_TAGS);
-        // assertEquals(expectedPerson, actualPerson);
+        assertEquals(expectedBook, actualBook);
     }
 
     @Test
-    public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
-        XmlAdaptedBook actualPerson = XmlUtil.getDataFromFile(
-                VALID_PERSON_FILE, XmlAdaptedBookWithRootElement.class);
-        XmlAdaptedBook expectedPerson = new XmlAdaptedBook(
+    public void xmlAdaptedBookFromFile_fileWithValidBook_validResult() throws Exception {
+        XmlAdaptedBook actualBook = XmlUtil.getDataFromFile(
+                VALID_BOOK_FILE, XmlAdaptedBookWithRootElement.class);
+        XmlAdaptedBook expectedBook = new XmlAdaptedBook(
                 VALID_NAME, VALID_ISBN, VALID_PRICE, VALID_COST, VALID_QUANTITY, VALID_TAGS);
-        // assertEquals(expectedPerson, actualPerson);
+        assertEquals(expectedBook, actualBook);
     }
 
 
