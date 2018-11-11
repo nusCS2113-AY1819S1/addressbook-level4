@@ -7,8 +7,10 @@ import static seedu.address.model.Filetype.isValidFiletype;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -16,11 +18,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Filetype;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TheDate;
 import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Content;
@@ -207,19 +209,21 @@ public class ParserUtil {
         return new Content(trimmedContent);
     }
 
+    //@author: driedmelon
+
     /**
      * Parses a {@code String date} into a {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseDate(String date) throws ParseException {
+    public static TheDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
+        if (!TheDate.isValidDate(trimmedDate)) {
+            throw new ParseException(TheDate.MESSAGE_DATE_CONSTRAINTS);
         }
-        return new Date(trimmedDate);
+        return new TheDate(trimmedDate);
     }
 
     /**
@@ -266,4 +270,17 @@ public class ParserUtil {
         }
         return new EventName(trimmedEventName);
     }
+
+    /**
+     * Parses {@code Collection<String> matchSchedule} into a {@code List<Index>}.
+     */
+    public static List<Index> parseMatchScheduleIndex(Collection<String> matchScheduleIndex) throws ParseException {
+        requireNonNull(matchScheduleIndex);
+        final List<Index> matchScheduleIndexList = new ArrayList<>();
+        for (String matchSchedulePerson : matchScheduleIndex) {
+            matchScheduleIndexList.add(parseIndex(matchSchedulePerson));
+        }
+        return matchScheduleIndexList;
+    }
+
 }
