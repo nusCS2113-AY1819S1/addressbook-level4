@@ -91,9 +91,8 @@ https://github.com/CS2113-AY1819S1-T09-4/main/pull/17[#17]
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=findtag]
-
-include::../UserGuide.adoc[tag=sort]
+<<../UserGuide#findtag,Find Tag Command>>
+<<../UserGuide#sort, Sort Command>>
 
 == Contributions to the Developer Guide
 
@@ -101,6 +100,6 @@ include::../UserGuide.adoc[tag=sort]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=findtag]
+<<../DeveloperGuide#sort, Sort Command>>
 
 ---

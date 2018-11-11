@@ -31,7 +31,7 @@ Responsibilities: Logic + UI
 
 === Teh Zhi Thon
 image::tztzt.png[width="150", align="left"]
-{empty}[http://github.com/tztzt[github]] [<<tehzhithon#, portfolio>>]
+{empty}[http://github.com/tztzt[github]] [<<tztzt#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data
