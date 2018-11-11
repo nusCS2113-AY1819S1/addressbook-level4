@@ -84,7 +84,7 @@ public class XmlAdaptedSchedule {
             throw new IllegalValueException(Time.MESSAGE_TIME_CONSTRAINTS);
         }
 
-        if (!Schedule.isValidStartEnd(startTime,endTime)) {
+        if (!Schedule.isValidStartEnd(startTime, endTime)) {
             throw new IllegalValueException(Schedule.MESSAGE_START_END_CONSTRAINTS);
         }
 
