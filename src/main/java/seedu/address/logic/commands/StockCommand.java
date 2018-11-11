@@ -4,7 +4,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.Collections;
 import java.util.HashSet;
