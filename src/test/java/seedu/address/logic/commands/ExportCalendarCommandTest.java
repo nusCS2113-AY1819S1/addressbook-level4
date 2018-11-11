@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.ALICE;
+import static seedu.address.testutil.TypicalEvents.ELLE;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
 import java.util.Arrays;
@@ -53,21 +54,21 @@ public class ExportCalendarCommandTest {
     @Test
     public void execute_exportCommand_success() {
         String filename = "mycal";
-        String expectedMessage = String.format(ExportCalendarCommand.MESSAGE_EXPORT_SUCCESS, 1, filename);
+        String expectedMessage = String.format(ExportCalendarCommand.MESSAGE_EXPORT_SUCCESS, 2, filename);
         AttendanceContainsUserPredicate predicate = new AttendanceContainsUserPredicate(user.getUsername());
         ExportCalendarCommand command = new ExportCalendarCommand(filename);
 
         expectedModel.updateFilteredEventList(predicate);
 
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE), model.getFilteredEventList());
+        assertEquals(Arrays.asList(ELLE, ALICE), model.getFilteredEventList());
     }
 
 
     @Test
     public void execute_exportCommandWithFilteredList_success() {
         String filename = "myCal";
-        String expectedMessage = String.format(ExportCalendarCommand.MESSAGE_EXPORT_SUCCESS, 1, filename);
+        String expectedMessage = String.format(ExportCalendarCommand.MESSAGE_EXPORT_SUCCESS, 2, filename);
         AttendanceContainsUserPredicate predicate = new AttendanceContainsUserPredicate(user.getUsername());
         ExportCalendarCommand command = new ExportCalendarCommand(filename);
 
@@ -75,7 +76,7 @@ public class ExportCalendarCommandTest {
         expectedModel.updateFilteredEventList(predicate);
 
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE), model.getFilteredEventList());
+        assertEquals(Arrays.asList(ELLE, ALICE), model.getFilteredEventList());
     }
 
     //**********************************************Fail test case***************************************************

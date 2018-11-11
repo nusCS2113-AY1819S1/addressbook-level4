@@ -9,11 +9,13 @@ import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_EVENT;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,24 +33,28 @@ import seedu.address.testutil.UserBuilder;
 public class RegisterCommandTest {
     private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+    private String currUsername;
 
     @Before
     public void setUp() {
         User user = new UserBuilder().build();
         model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         model.logUser(user);
+        currUsername = model.getUsername().toString();
     }
 
     @Test
     public void execute_unregisteredEventUnfilteredList_success() {
-        Event eventToRegister = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        RegisterCommand registerCommand = new RegisterCommand(INDEX_FIRST_EVENT);
+        Event eventToRegister = model.getFilteredEventList().get(INDEX_SECOND_EVENT.getZeroBased());
+
+        // check current user is not registered for event
+        assertFalse(eventToRegister.getAttendance().contains(new Attendee(currUsername)));
+        RegisterCommand registerCommand = new RegisterCommand(INDEX_SECOND_EVENT);
 
         String expectedMessage =
-                String.format(RegisterCommand.MESSAGE_REGISTER_EVENT_SUCCESS, INDEX_FIRST_EVENT.getOneBased());
+                String.format(RegisterCommand.MESSAGE_REGISTER_EVENT_SUCCESS, INDEX_SECOND_EVENT.getOneBased());
 
         // build new event with added attendee using current user username
-        String currUsername = model.getUsername().toString();
         Event registeredEvent = new EventBuilder(eventToRegister).withAddAttendees(currUsername).build();
 
         ModelManager expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
@@ -61,11 +67,13 @@ public class RegisterCommandTest {
 
     @Test
     public void execute_registeredEventUnfilteredList_throwsCommandException() {
-        Event eventToRegister = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        RegisterCommand registerCommand = new RegisterCommand(INDEX_FIRST_EVENT);
+        Event eventToRegister = model.getFilteredEventList().get(INDEX_THIRD_EVENT.getZeroBased());
+
+        // check current user is registered for event
+        assertTrue(eventToRegister.getAttendance().contains(new Attendee(currUsername)));
+        RegisterCommand registerCommand = new RegisterCommand(INDEX_THIRD_EVENT);
 
         // add attendee using current user username to event, regardless of whether already registered
-        String currUsername = model.getUsername().toString();
         Event registeredEvent = new EventBuilder(eventToRegister).withAddAttendees(currUsername).build();
         model.updateEvent(eventToRegister, registeredEvent);
         model.commitEventManager();
@@ -82,12 +90,13 @@ public class RegisterCommandTest {
      */
     @Test
     public void executeUndoRedo_unregisteredEventFilteredList_sameEventRegistered() throws Exception {
-        RegisterCommand registerCommand = new RegisterCommand(INDEX_FIRST_EVENT);
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        RegisterCommand registerCommand = new RegisterCommand(INDEX_FIRST_EVENT);
 
         showEventAtIndex(model, INDEX_SECOND_EVENT);
         Event eventToRegister = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        String currUsername = model.getUsername().toString();
+        assertFalse(eventToRegister.getAttendance().contains(new Attendee(currUsername)));
+
         Event registeredEvent = new EventBuilder(eventToRegister).withAddAttendees(currUsername).build();
         expectedModel.logUser(new UserBuilder().build());
         expectedModel.updateEvent(eventToRegister, registeredEvent);
