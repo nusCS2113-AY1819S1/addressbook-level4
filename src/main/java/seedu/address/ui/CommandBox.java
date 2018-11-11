@@ -64,12 +64,14 @@ public class CommandBox extends UiPart<Region> {
             keyEvent.consume();
             navigateToNextInput();
             break;
+        //@@author kennethcsj
         case TAB:
             keyEvent.consume();
             navigateToNextIsbn();
             commandTextField.requestFocus();
             commandTextField.positionCaret(commandTextField.getLength());
             break;
+        //@@author
         default:
             // let JavaFx handle the keypress
         }
@@ -101,6 +103,7 @@ public class CommandBox extends UiPart<Region> {
         replaceText(historySnapshot.next());
     }
 
+    //@@author kennethcsj
     /**
      * Updates the text field with the next isbn found in inventory list,
      * if there exists a next isbn in inventory list
@@ -135,6 +138,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author
     /**
      * Sets {@code CommandBox}'s text field with {@code text} and
      * positions the caret to the end of the {@code text}.

@@ -90,12 +90,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    //@@author kennethcsj
     @Override
     public void sortBooksUsingQuantity() {
         versionedBookInventory.sortBooks();
     }
     //=========== Filtered Book List Accessors =============================================================
 
+    //@@author
     /**
      * Returns an unmodifiable view of the list of {@code Book} backed by the internal list of
      * {@code versionedBookInventory}
@@ -112,6 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //=========== Tab Pressed ===============================================================================
 
+    //@@author kennethcsj
     @Override
     public Queue<String> getCompleteIsbn(String isbnText) {
         return versionedBookInventory.getCompleteIsbn(isbnText);
@@ -119,6 +122,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Undo/Redo =================================================================================
 
+    //@author
     @Override
     public boolean canUndoAddressBook() {
         return versionedBookInventory.canUndo();

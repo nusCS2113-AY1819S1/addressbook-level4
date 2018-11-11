@@ -132,6 +132,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.UP, thirdCommand);
     }
 
+    //@@author kennethcsj
     @Test
     public void handleKeyPress_tab () {
         // empty command box
@@ -180,6 +181,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertStoredIsbn(KeyCode.TAB, "stock i/9780748137992");
     }
 
+    //@@author
     /**
      * Runs a command that fails, then verifies that <br>
      *      - the text remains <br>
