@@ -8,6 +8,7 @@ import seedu.address.request.requestmodel.RequestModel;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
+ * ComponentManager is extended as events may be raised.
  */
 public abstract class CommandSecondary extends ComponentManager {
 
