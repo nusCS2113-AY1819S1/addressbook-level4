@@ -173,7 +173,7 @@ Index should be a positive number.
 
 Examples:
 
-* `editdistributor 1 dn/Ben Lok dp/93120000`
+* `editdistributor 1 dn/Apple Farm Lok dp/93120000`
 
 ==== Find a distributor: `finddistributor`
 
@@ -183,7 +183,7 @@ Locates distributors that are related to the DISTRIBUTOR_NAME entered.
 
 Examples:
 
-* `finddistributor Taylor`
+* `finddistributor Farm`
 
 ==== Find a distributor by tag: `findtagdistributor`
 
@@ -194,6 +194,17 @@ Locates distributors that are related to the DISTRIBUTOR_TAG entered.
 Examples:
 
 * `findtagdistributor snack`
+
+==== See a list of products that a distributor can provide: `listdistributorproducts`
+
+Format: `listdistributorproducts index`
+
+Lists products that the indexed distributor from the list of distributors engaged with the store may supply.
+Index should be a positive number.
+
+Examples:
+
+* `listdistributorproducts 2`
 
 ==== Delete a distributor: `deletedistributor`
 
