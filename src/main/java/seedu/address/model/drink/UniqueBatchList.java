@@ -88,7 +88,8 @@ public class UniqueBatchList implements Iterable<Batch> {
             }
         }
         if (counter > 0) {
-            internalList.remove(0, counter - 1);
+            System.out.println(counter);
+            internalList.remove(0, counter);
         }
     }
 
