@@ -127,7 +127,7 @@ public class ManagerParser extends CommandsParser {
             throw new InvalidLoginException(IDENTITY);
 
         case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommandParser().parse(arguments);
+            return new LogoutCommandParser().parse(commandWord);
 
         case ShowMineCommand.COMMAND_WORD:
             return new ShowMineCommandParser().parse(LOGIN_IDENTITY);

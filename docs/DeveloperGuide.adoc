@@ -238,7 +238,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-
+// tag::Sort[]
 === Event Sorting
 
 ==== Current Implementation
@@ -264,7 +264,7 @@ image::SortSequenceDiagram.png[width="650"]
 ** Pros: Will use less memory.
 ** Cons: Unable to use undo function to revert back to the previous view.
 
-// end::Sorting[]
+// end::Sort[]
 
 
 // tag::Invite[]
