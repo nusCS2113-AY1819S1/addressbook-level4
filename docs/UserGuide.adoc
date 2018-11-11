@@ -582,20 +582,21 @@ Format: `clear`
 [[import]]
 === Import Timetable : `import` (`im`)
 
-Imports a timetable for the current user from a specified file. +
+Imports a timetable for the *current user* from a specified file. +
 
 Format: `import FILE_NAME` +
 
 ****
-* See the example further below for a quick start!
+* See the example below for a quick start!
 * Command parameters:
 ** `FILE_NAME` refers to the name of the file that you want to import.
-*** do *not* include the _.ics_ file extension.
+*** Do not include the _.ics_ file extension when typing the command.
 *** In other words, type: `import nusmods_calendar` instead of `import nusmods_calendar.ics`
 * Compatibility:
 ** Only supports _.ics_ files exported from NUSMODS.
 * Location of the import file:
-** The file will be imported from the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file. Please see the image below for a visual description: +
+** The file will be imported from the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file.
+*** Please see the image below: +
 ****
 .Location to put your import files.
 image::UG_import_directory.png[width="500", align="left"]
@@ -605,7 +606,7 @@ Example:
 
 * `import nusmods_calendar` +
 Imports the timetable from `.\import_export\nusmods_calendar.ics` +
-
+(where `.` represents the folder that the application is in.)
 
 .  Download your file from NUDMODS website:
 +
@@ -635,24 +636,54 @@ image::UG_import_step_4.png[width="790"]
 [[export]]
 === Export Timetable : `export` (`ex`)
 
-Exports the currently-displayed timetable to the specified (_.ics_) file.
+Exports the *currently-displayed* timetable to the specified file.
+
+Format: `export FILE_NAME`
 
 ****
-* Your timetable will export as an (_.ics_) file. This file is currently only compatible with FreeTime.
-* Do not include the (_.ics_) file extension when typing the command.
-* Existing file with the same name will be overwritten. Use with care!
-* The file will be imported to the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file. Please see the image below:
+* See the example below for a quick start!
+* Command parameters:
+** `FILE_NAME` refers to the name of the file that you want to export.
+*** Do not include the _.ics_ file extension when typing the command.
+*** In other words, type: `export my_timetable` instead of `export my_timetable.ics`
+* Compatibility:
+** Can be imported back into FreeTime
+* Location of the exported file:
+** The file will be exported to the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file.
+*** Please see the image below: +
 ****
 
-image::UG_importexport.png[width="400", align="left"]
+.Location of your exported files.
+image::UG_export_directory.png[width="500", align="left"]
 
-*Format:* `export [FILE_NAME]`
 
 *Example:*
 
-* `export my_file.ics` +
-Exports the displayed timetable to `(root_folder)\import_export\my_file.ics` +
-(where 'root_folder' is the folder that the application is in.)
+* `export my_timetable` +
+Exports the displayed timetable to `.\import_export\my_timetable.ics` +
+(where `.` represents the folder that the application is in.)
+
+.  Ensure that the timetable you want to export is being shown:
+.. type `select me` to display your own timetable.
+.. type `select INDEX` to display one of your friend's timetable.
++
+.Select the desired timetable.
+image::UG_export_step_1.png[width="790"]
++
+.  Type the command `export my_timetable`:
++
+.Type the command.
+image::UG_export_step_2.png[width="400"]
++
+.  If the export was successful, Your timetable should be waiting for you in the folder  :
++
+.Exported file is in the import_export folder
+image::UG_export_step_3.png[width="400"]
++
+
+
+
+
 
 <<Features,Jump back to _FreeTime_'s feature list>>
 // end::export[]
