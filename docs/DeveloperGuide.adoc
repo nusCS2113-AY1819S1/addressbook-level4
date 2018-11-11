@@ -1031,6 +1031,7 @@ We now have everything set up... but we still can't modify the remarks. Let's fi
 
 See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
 
+// tag::productScope[]
 [appendix]
 == Product Scope
 
@@ -1045,6 +1046,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * Is reasonably comfortable using CLI applications
 
 *Value proposition*: To assist students in managing all of their academic work and spendings which will improve their student life
+// end::productScope[]
 
 // tag::userStories[]
 [appendix]
@@ -1105,7 +1107,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |=======================================================================
 // end::userStories[]
 
-// tag::useCases[]
+// tag::taskUseCases[]
 [appendix]
 == Use Cases
 
@@ -1162,7 +1164,7 @@ To-do list
 
 *MSS*
 
-1. User enters `TDL_sort by mod` command
+1. User enters `TDL_sort module` command
 2. To-do list shows a sorted list of tasks grouped by modules
 
 [discrete]
@@ -1172,7 +1174,7 @@ To-do list
 
 *MSS*
 
-1. User enters `TDL_sort by ddl` command
+1. User enters `TDL_sort date` command
 2. To-do list shows the all uncompleted modules sorted by deadlines, the task with latest deadline is the first task
 
 [discrete]
@@ -1182,7 +1184,7 @@ To-do list
 
 *MSS*
 
-1. User enters `TDL_sort by impt` command
+1. User enters `TDL_sort priority` command
 2. To-do list shows a sorted list of tasks grouped by priority level in descending order
 
 [discrete]
@@ -1246,7 +1248,9 @@ To-do list
    2a. The list is empty.
    2b. The given index is invalid
      2b1. To-do list shows an error message
+// end::taskUseCases[]
 
+// tag::extraTaskUseCases[]
 [discrete]
 === Use case 12: Receiving reminders for a task
 *System:*
@@ -1256,7 +1260,9 @@ To-do list
 
 1. To-do list notifies user of task close to deadline
 2. User receives and acknowledges the reminder
+// end::extraTaskUseCases[]
 
+// tag::expenditureUseCases[]
 [discrete]
 === Use case 13: Add expenditure / income
 *System:*
@@ -1316,7 +1322,7 @@ Expenditure Tracker & Calendar
   2a. The list is empty.
   2b. The given index is invalid.
     2b1. To-do list shows an error message
-// end::useCases[]
+// end::expenditureUseCases[]
 
 [appendix]
 == Non Functional Requirements
@@ -1332,7 +1338,7 @@ Expenditure Tracker & Calendar
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-
+// tag::productSurvey[]
 [appendix]
 == Product Survey
 
@@ -1352,7 +1358,7 @@ Cons:
 1. Not specialized for students
 2. Unable to sort tasks by tags
 3. Lack of a reminder feature
-
+// end::productSurvey[]
 
 [appendix]
 == Instructions for Manual Testing
