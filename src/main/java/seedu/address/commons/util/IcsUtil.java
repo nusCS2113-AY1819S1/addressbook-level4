@@ -58,10 +58,12 @@ public class IcsUtil {
 
     /**
      * Returns the {@code TimeTable} from the .ics file specified.
-     * The timestamps in the saved .ics file should be in UTC. No timezone allowed (yet).
+     * The data in the .ics file should not have timezone-related settings; unsupported for now.
      *
-     * @param filePath                  location of the .ics file.
-     *                                  cannot be null.
+     * @param filePath                  Location of the .ics file.
+     *                                  Cannot be null.
+     * @param zoneId                    The timezone of the timetable.
+     *                                  Cannot be null.
      * @throws IOException              if any IO error occurs, or file is not found.
      * @throws TimeSlotOverlapException if the file to be imported has overlapping {@code TimeSlot}.
      *
@@ -69,6 +71,7 @@ public class IcsUtil {
     public TimeTable readTimeTableFromFile(Path filePath, ZoneId zoneId)
             throws IOException, TimeSlotOverlapException, IllegalArgumentException {
         requireNonNull(filePath);
+        requireNonNull(zoneId);
 
         ICalendar iCalendar;
         try {
@@ -85,6 +88,8 @@ public class IcsUtil {
      * Saves {@code TimeTable} data to the .ics file specified.
      * The timestamps in the saved .ics file will be in UTC.
      *
+     * @param timeTable     The timetable to save.
+     *                      Cannot be null.
      * @param filePath      Location to save the file to.
      *                      Cannot be null.
      * @param zoneId        timezone of the Timetable.
@@ -114,10 +119,12 @@ public class IcsUtil {
      * @param iCalendar The {@code ICalendar} to convert.
      *                  Cannot be null.
      * @param zoneId    The TimeZone of the {@code TimeTable}.
+     *                  Cannot be null.
      */
     private TimeTable iCalendarToTimeTable(ICalendar iCalendar, ZoneId zoneId)
             throws TimeSlotOverlapException, IllegalArgumentException {
         requireNonNull(iCalendar);
+        requireNonNull(zoneId);
         TimeTable timeTable = new TimeTable();
 
         for (VEvent vEvent : iCalendar.getEvents()) {
@@ -154,7 +161,7 @@ public class IcsUtil {
         DateStart dtStart = vEvent.getDateStart();
         //convert to simple Date (UTC)
         Date startDate = dtStart.getValue();
-        //use the simple Date to create an {@code Instant}. Instant objects are independent of timezone (UTC).
+        //use the simple Date to create an Instant. Instant objects are independent of timezone (UTC).
         Instant startInstant = startDate.toInstant();
         //derive the LocalDateTime (+8GMT) from the Instant and ZoneId
         LocalDateTime startLdt = LocalDateTime.ofInstant(startInstant, zoneId);
@@ -201,7 +208,9 @@ public class IcsUtil {
      *
      * @param timeTable     The {@code TimeTable} to convert.
      *                      Cannot be null.
-     * @param
+     * @param zoneId        the timezone of the timetable
+     *                      Cannot be null.
+     *
      */
     private ICalendar timeTableToICalendar(TimeTable timeTable, ZoneId zoneId) {
         requireNonNull(timeTable);
@@ -218,15 +227,17 @@ public class IcsUtil {
 
     /**
      * Converts a {@code TimeSlot} to a {@code VEvent} that recurs weekly, for {@code count} times.
+     * {@code zoneId} is required, because {@code VEvent} are in UTC,
+     *  but {@code TimeSlot} are in the user's timezone,
      *
      * @param timeSlot  The {@code TimeSlot} to convert.
      *                  Cannot be null.
      * @param count     The number of recurrences.
-     * @param zoneId    The timezone of the timeslot
+     * @param zoneId    The timezone of the {@code TimeSlot}
      */
     private VEvent timeSlotToWeeklyVEvent(TimeSlot timeSlot, ZoneId zoneId, int count) {
         //TODO: protect against people who pass count <= 0
-
+        //TODO: make comments/code more human readable.
         requireNonNull(timeSlot);
         requireNonNull(zoneId);
         requireNonNull(count);
@@ -241,27 +252,29 @@ public class IcsUtil {
 
         VEvent vEvent = new VEvent();
 
-        //write data to {@code VEvent}: set the recurrence rule
+        //write data to vEvent: set the recurrence rule
         Recurrence recurrence =
                 new Recurrence.Builder(Frequency.WEEKLY).count(count).byDay(valueOfAbbr(abbreviation)).build();
         RecurrenceRule recurrenceRule = new RecurrenceRule(recurrence);
         vEvent.setRecurrenceRule(recurrenceRule);
 
-        //write data to {@code VEvent}: set start-date
-        //startLdt is the start-time of the timeslot in local time.
+        //write data to vEvent: set start-date
+        //Get the local-datetime of the next time that the TimeSlot starts.
+        // > If my timeslot is Friday 2pm-4pm, the local-datetime I want is the the next Friday's date, at 2pm.
         LocalDateTime startLdt = DateTimeConversionUtil.getInstance().getNextLocalDateTime(startTime, dayOfWeek);
-        //get zone offset
+        //get zone-offset
         ZoneOffset zoneOffset = zoneId.getRules().getOffset(Instant.now());
-        //startInstant is an instance; instances are independent of timezones.
+        //startInstant is an Instant ; Instant is independent of timezones.
         Instant startInstant = startLdt.toInstant(zoneOffset);
-        //get dateStart (UTC)
+        //dateStart (UTC)
         Date dateStart = Date.from(startInstant);
         vEvent.setDateStart(dateStart);
 
-        //write data to {@code VEvent}: set end-date
-        //endLdt is the end time of the timeslot in local time.
+        //write data to vEvent: set end-date
+        //Get the local-datetime of the next time that the TimeSlot ends.
+        // > If my timeslot is Friday 2pm-4pm, the local-datetime I want is the the next Friday's date, at 4pm.
         LocalDateTime endLdt = DateTimeConversionUtil.getInstance().getNextLocalDateTime(endTime, dayOfWeek);
-        //endInstant is an instance; instances are independent of timezones.
+        //endInstant is an Instant; Instant is independent of timezones.
         Instant endInstant = endLdt.toInstant(zoneOffset);
         //get dateEnd (UTC)
         Date dateEnd = Date.from(endInstant);
@@ -276,7 +289,12 @@ public class IcsUtil {
 
     /**
      * Writes {@code ICalendar} object to {@code Path} specified
-     * @throws IOException if any error occurs during write.
+     *
+     * @param filePath      The location to write to.
+     *                      Cannot be null.
+     * @param iCalendar     The ICalendar object to write.
+     *                      Cannot be null.
+     * @throws IOException  If any error occurs during write.
      */
     private void writeICalendarToFile(ICalendar iCalendar, Path filePath) throws IOException {
         requireNonNull(filePath);
@@ -284,8 +302,11 @@ public class IcsUtil {
 
         File file = filePath.toFile();
         try {
-            file.getParentFile().mkdirs(); //create parent folder if it does not exist.
-            file.createNewFile(); //biweekly will throw IOException if the file does not exist already
+            //create parent folder if it does not exist.
+            file.getParentFile().mkdirs();
+            //create file if it does not exist.
+            file.createNewFile();
+            //Write using biweekly.
             Biweekly.write(iCalendar).go(file);
         } catch (IOException e) { //catch IOException thrown by .createNewFile() or .go()
             throw new IOException();
@@ -293,9 +314,10 @@ public class IcsUtil {
     }
 
     /**
-     * Returns the {@code ICalendar} object from reading the .ics file at the {@code Path} specified
+     * Returns the {@code ICalendar} object obtained from reading the .ics file at the {@code Path} specified
      *
-     * @throws IOException if any IO error occurs during read.
+     * @param filePath      the location of the file to read from.
+     * @throws IOException  if any IO error occurs during read.
      */
     private ICalendar readICalendarFromFile(Path filePath) throws IOException {
         requireNonNull(filePath);

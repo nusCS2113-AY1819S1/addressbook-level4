@@ -6,9 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.ZoneId;
-import java.util.Optional;
 import java.util.Set;
-import java.util.TimeZone;
 
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
