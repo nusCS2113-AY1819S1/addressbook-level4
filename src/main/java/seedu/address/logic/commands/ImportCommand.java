@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
+import java.time.ZoneId;
 import java.util.Set;
 
 import seedu.address.commons.util.IcsUtil;
@@ -61,28 +61,30 @@ public class ImportCommand extends Command {
         Person personToEdit = model.getUser();
         requireNonNull(personToEdit);
 
-        Optional<TimeTable> optionalTimeTable;
         TimeTable timeTable;
 
         try {
-            optionalTimeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath);
+            //TODO: remove hardcoding of timezone in import and export command once TimeSlots are in UTC.
+            ZoneId zoneIdSingapore = ZoneId.of("Asia/Shanghai");
+            timeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath, zoneIdSingapore);
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_IO_ERROR, filePath.toString()));
         } catch (TimeSlotOverlapException e) {
             throw new CommandException(String.format(MESSAGE_FILE_OVERLAP_TIMESLOT, filePath.toString()));
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
         }
 
-        if (!optionalTimeTable.isPresent()) {
+        if (timeTable.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_FILE_EMPTY, filePath.toString()));
+        } else {
+            Person modifiedPerson = createModifiedPerson(personToEdit, timeTable);
+
+            model.updatePerson(personToEdit, modifiedPerson);
+            model.commitAddressBook();
+            model.updateTimeTable(modifiedPerson.getTimeTable());
+            return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, filePath.toString()));
         }
-        timeTable = optionalTimeTable.get();
-
-        Person modifiedPerson = createModifiedPerson(personToEdit, timeTable);
-
-        model.updatePerson(personToEdit, modifiedPerson);
-        model.commitAddressBook();
-        model.updateTimeTable(modifiedPerson.getTimeTable());
-        return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, filePath.toString()));
     }
 
     /**

@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.ImportCommand.MESSAGE_IMPORT_SUCCESS;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -58,7 +57,7 @@ public class ImportCommandTest {
         command.execute(actualModelStub, commandHistory);
     }
 
-    //Trying to import file that has overlapping timeslots will fail, for now.
+    //Trying to import file that has overlapping timeslots will fail.
     @Test
     public void execute_overlapFile_showsMessageOverlap() throws Exception {
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
@@ -108,7 +107,6 @@ public class ImportCommandTest {
     /**
      * Tests if an imported timetable is identical to the expected timetable.
      */
-    @Ignore("Ignore because fails travis")
     @Test
     public void execute_validFilePath_successful() throws Exception {
         //TYPICAL_FILE contains the equivalent of TYPICAL_TIMETABLE
@@ -119,7 +117,7 @@ public class ImportCommandTest {
         Command command = new ImportCommand(TYPICAL_FILE);
         CommandResult commandResult = command.execute(actualModelStub, commandHistory);
 
-        //assertEquals(expectedTimeTable, actualModelStub.getTimeTable()); //fails travis but not local
+        assertEquals(expectedTimeTable, actualModelStub.getTimeTable());
         String expectedMessage = String.format(MESSAGE_IMPORT_SUCCESS, TYPICAL_FILE);
         assertEquals(expectedMessage, commandResult.feedbackToUser);
     }
@@ -128,25 +126,24 @@ public class ImportCommandTest {
      * tests if you can export a typical timetable and then immediately import this timetable
      * Immediately then tests that the data is still the same.
      */
-    @Ignore("Ignore because fails travis")
     @Test
     public void execute_exportAndThenImport_successful() throws Exception {
 
         ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
         actualModelStub.updateTimeTable(TYPICAL_TIMETABLE);
 
-        Command exportCommand = new ExportCommand(TEMP_FILE); //export timetable to temp file.
+        Command exportCommand = new ExportCommand(TEMP_FILE);
         CommandResult commandResult = exportCommand.execute(actualModelStub, commandHistory);
 
         //check export was successful
         String expectedMessageExport = String.format(MESSAGE_EXPORT_SUCCESS, TEMP_FILE);
         assertEquals(expectedMessageExport, commandResult.feedbackToUser);
 
-        Command importCommand = new ImportCommand(TEMP_FILE); //import timetable from temp file.
+        Command importCommand = new ImportCommand(TEMP_FILE);
         commandResult = importCommand.execute(actualModelStub, commandHistory);
 
         //check import was successful, and timetable is the same
-        //assertEquals(TYPICAL_TIMETABLE, actualModelStub.getTimeTable()); //fails travis but not local
+        assertEquals(TYPICAL_TIMETABLE, actualModelStub.getTimeTable());
         String expectedMessageImport = String.format(MESSAGE_IMPORT_SUCCESS, TEMP_FILE);
         assertEquals(expectedMessageImport, commandResult.feedbackToUser);
     }

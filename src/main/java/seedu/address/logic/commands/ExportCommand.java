@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.ZoneId;
 
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
@@ -45,13 +46,15 @@ public class ExportCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        TimeTable timeTable;
-        timeTable = model.getTimeTable();
+        //TODO: remove hardcoding of timezone in import and export command once TimeSlots are in UTC.
+        ZoneId zoneIdSingapore = ZoneId.of("Asia/Shanghai");
+
+        TimeTable timeTable = model.getTimeTable();
         if (timeTable.isEmpty()) {
             throw new CommandException(MESSAGE_EMPTY);
         }
         try {
-            IcsUtil.getInstance().saveTimeTableToFile(timeTable, filePath);
+            IcsUtil.getInstance().saveTimeTableToFile(timeTable, zoneIdSingapore, filePath);
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_IO_ERROR + filePath.toString()));
         }

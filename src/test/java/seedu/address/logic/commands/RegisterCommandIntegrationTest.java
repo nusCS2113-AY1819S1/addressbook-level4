@@ -29,7 +29,9 @@ public class RegisterCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        PersonBuilder personBuilder = new PersonBuilder();
+        personBuilder.withName("Test");
+        Person validPerson = personBuilder.build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);

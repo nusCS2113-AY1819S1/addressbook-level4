@@ -5,9 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
+import java.time.ZoneId;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -25,6 +24,8 @@ public class IcsUtilTest {
 
     private static final TimeTable TYPICAL_TIMETABLE = TypicalTimeSlots.getTypicalTimeTable();
 
+    private static final ZoneId ZONE_ID = ZoneId.of("Asia/Shanghai");
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -32,57 +33,55 @@ public class IcsUtilTest {
     @Test
     public void readTimeTableFromFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        IcsUtil.getInstance().readTimeTableFromFile(null);
+        IcsUtil.getInstance().readTimeTableFromFile(null, ZONE_ID);
     }
 
     @Test
     public void readTimeTableFromFile_missingFile_throwsIoException() throws Exception {
         thrown.expect(IOException.class);
-        IcsUtil.getInstance().readTimeTableFromFile(MISSING_FILE);
+        IcsUtil.getInstance().readTimeTableFromFile(MISSING_FILE, ZONE_ID);
     }
 
     @Test
     public void readTimeTableFromFile_emptyFile_successReturnsOptionalIsNotPresent() throws Exception {
-        Optional<TimeTable> dataFromFile = IcsUtil.getInstance().readTimeTableFromFile(EMPTY_FILE);
-        assert (!dataFromFile.isPresent());
+        TimeTable dataFromFile = IcsUtil.getInstance().readTimeTableFromFile(EMPTY_FILE, ZONE_ID);
+        assert (dataFromFile.isEmpty());
     }
 
     //tests able to read.
     @Test
     public void readTimeTableFromFile_validFile_successReturnsOptionalIsPresent() throws Exception {
-        Optional<TimeTable> dataFromFile = IcsUtil.getInstance().readTimeTableFromFile(REAL_FILE);
-        assert (dataFromFile.isPresent());
-        assertEquals(11, dataFromFile.get().getTimeSlots().size());
+        TimeTable dataFromFile = IcsUtil.getInstance().readTimeTableFromFile(REAL_FILE, ZONE_ID);
+        assert (!dataFromFile.isEmpty());
+        assertEquals(11, dataFromFile.getTimeSlots().size());
     }
 
     //save
     @Test
     public void saveTimeTableToFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        IcsUtil.getInstance().saveTimeTableToFile(TYPICAL_TIMETABLE, null);
+        IcsUtil.getInstance().saveTimeTableToFile(TYPICAL_TIMETABLE, ZONE_ID, null);
     }
 
     @Test
     public void saveTimeTableToFile_nullTimeTable_throwsIoException() throws Exception {
         thrown.expect(NullPointerException.class);
-        IcsUtil.getInstance().saveTimeTableToFile(null, TEMP_FILE);
+        IcsUtil.getInstance().saveTimeTableToFile(null, ZONE_ID, TEMP_FILE);
     }
 
     @Test
     public void saveTimeTableToFile_validParams_success() throws Exception {
-        //no exception expected
-        IcsUtil.getInstance().saveTimeTableToFile(TYPICAL_TIMETABLE, TEMP_FILE);
+        //no exception expected; successful
+        IcsUtil.getInstance().saveTimeTableToFile(TYPICAL_TIMETABLE, ZONE_ID, TEMP_FILE);
     }
 
-    @Ignore("Ignore because fails travis")
     //saves the typical timetable, and then reads it again. tests that the timetables are the same.
     @Test
     public void saveThenRead_validParams_success() throws Exception {
-        IcsUtil.getInstance().saveTimeTableToFile(TYPICAL_TIMETABLE, TEMP_FILE);
+        IcsUtil.getInstance().saveTimeTableToFile(TYPICAL_TIMETABLE, ZONE_ID, TEMP_FILE);
 
-        Optional<TimeTable> result = IcsUtil.getInstance().readTimeTableFromFile(TEMP_FILE);
-        TimeTable expected = result.get();
+        TimeTable expected = IcsUtil.getInstance().readTimeTableFromFile(TEMP_FILE, ZONE_ID);
 
-        assertEquals(expected, TYPICAL_TIMETABLE); //fails travis but not local
+        assertEquals(expected, TYPICAL_TIMETABLE);
     }
 }

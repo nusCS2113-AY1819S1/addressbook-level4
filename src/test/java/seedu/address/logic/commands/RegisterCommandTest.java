@@ -93,9 +93,9 @@ public class RegisterCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasPersonToRegister(Person person) {
             requireNonNull(person);
-            return this.person.isSamePerson(person);
+            return this.person.isSamePersonForRegister(person);
         }
     }
 
@@ -106,9 +106,9 @@ public class RegisterCommandTest {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasPersonToRegister(Person person) {
             requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+            return personsAdded.stream().anyMatch(person::isSamePersonForRegister);
         }
 
         @Override

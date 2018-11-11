@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -213,6 +214,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(logic, security);
         commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        Platform.runLater(() -> logic.updateTimeTable(logic.getUser().getTimeTable()));
     }
 
     void hide() {

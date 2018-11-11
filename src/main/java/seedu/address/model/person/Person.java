@@ -95,6 +95,18 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons of the same name
+     */
+    public boolean isSamePersonForRegister(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getName().equals(getName());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -128,13 +140,13 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
+                .append(" ,Phone: ")
                 .append(getPhone())
-                .append(" Email: ")
+                .append(" ,Email: ")
                 .append(getEmail())
-                .append(" Address: ")
+                .append(" ,Address: ")
                 .append(getAddress())
-                .append(" Tags: ");
+                .append(" ,Groups: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
