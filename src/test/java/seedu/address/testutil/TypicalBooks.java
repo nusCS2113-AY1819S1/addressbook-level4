@@ -101,7 +101,7 @@ public class TypicalBooks {
             .withQuantity(VALID_QUANTITY_BIOLOGY)
             .withTags(VALID_TAG_SCIENCE, VALID_TAG_STUDIES).build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_BIOLOGY = "Biology"; // A keyword that matches MEIER
 
     private TypicalBooks() {} // prevents instantiation
 

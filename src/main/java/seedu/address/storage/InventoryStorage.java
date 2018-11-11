@@ -22,7 +22,7 @@ public interface InventoryStorage extends BookInventoryStorage, UserPrefsStorage
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getBookInventoryFilePath();
 
     @Override
     Optional<ReadOnlyBookInventory> readBookInventory() throws DataConversionException, IOException;

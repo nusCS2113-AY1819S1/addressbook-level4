@@ -1,3 +1,4 @@
+//@@author kohjunkiat
 package seedu.address.model.statistic;
 
 import static java.util.Objects.requireNonNull;

@@ -31,7 +31,7 @@ public class XmlBookInventoryStorage implements BookInventoryStorage {
         backupFilePath = Paths.get(filePath.toString() + ".backup");
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getBookInventoryFilePath() {
         return filePath;
     }
 

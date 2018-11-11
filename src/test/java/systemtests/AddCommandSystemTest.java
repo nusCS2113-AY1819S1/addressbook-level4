@@ -28,7 +28,7 @@
 //import static seedu.address.testutil.TypicalBooks.CHEMISTRY;
 //import static seedu.address.testutil.TypicalBooks.HISTORY;
 //import static seedu.address.testutil.TypicalBooks.IT;
-//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
+//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_BIOLOGY;
 //
 //import org.junit.Test;
 //
@@ -104,7 +104,7 @@
 // ------------------------------ */
 //
 //        /* Case: filters the book list before adding -> added */
-//        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+//        showPersonsWithName(KEYWORD_MATCHING_BIOLOGY);
 //        assertCommandSuccess(IT);
 //
 //        /* ------------------------ Perform add operation while a book card is selected --------------------------- */
