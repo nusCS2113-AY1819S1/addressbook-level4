@@ -45,7 +45,7 @@ public class ExportCalendarCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " filename\n"
             + "export current user registered event as an iCalender file\n"
             + "filename should not be empty or longer than 255 character\n"
-            + "filename should only contains alphanumeric characters and some special characters" + "!#$%&'+=~^.@-\n"
+            + "filename should only contain alphanumeric characters and some special characters" + "!#$%&'+=~^.@-\n"
             + "Example: export myCalendar";
 
     public static final String MESSAGE_EXPORT_SUCCESS =
