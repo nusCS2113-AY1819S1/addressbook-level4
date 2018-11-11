@@ -235,19 +235,19 @@ public class ModelManager extends ComponentManager implements Model {
         for (Limit i: limits) {
             if (isExceededLimit(i) && i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
                 output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
-                numExceeded = numExceeded +1;
+                numExceeded = numExceeded + 1;
             }
         }
         for (Limit i: limits) {
             if (isExceededLimit(i) && !i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
                 output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
-                numExceeded = numExceeded +1;
+                numExceeded = numExceeded + 1;
             }
         }
-            if (numExceeded != 0 && numExceeded != 1) {
-                output = String.format("\n%d limits exceeded: ", numExceeded) + output;
-            } else if (numExceeded == 1) {
-                output = "\n1 limit exceeded: " + output;
+        if (numExceeded != 0 && numExceeded != 1) {
+            output = String.format("\n%d limits exceeded: ", numExceeded) + output;
+        } else if (numExceeded == 1) {
+            output = "\n1 limit exceeded: " + output;
         }
         return output;
     }
@@ -258,7 +258,7 @@ public class ModelManager extends ComponentManager implements Model {
         int count = 1;
         for (Limit i: limits) {
             if (i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
-                output +=  "Monthly Limit:\n"
+                output += "Monthly Limit:\n"
                         + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
             }
         }

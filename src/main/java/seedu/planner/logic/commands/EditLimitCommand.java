@@ -34,7 +34,7 @@ public class EditLimitCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "The limit has been edited. \n";
-    public static final String MESSAGE_SAME_LIMIT ="The edited limit has the same moneyFlow as the original limit.\n";
+    public static final String MESSAGE_SAME_LIMIT = "The edited limit has the same moneyFlow as the original limit.\n";
     private Limit originalLimit;
     private String output;
     private Limit limit;
