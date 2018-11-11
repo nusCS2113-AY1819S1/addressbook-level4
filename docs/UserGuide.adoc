@@ -314,7 +314,7 @@ To look for job offers listed by KFC only, include the name of company in the se
 ==== Edits attributes of the candidate at the specified index `INDEX`
 Format: `editc <INDEX>`
 
-Edits the candidate with the specified `INDEX`.
+You can edit candidates with their specified `INDEX`.
 The index must be an index number shown in the displayed candidates list.
 
 Example:
@@ -328,7 +328,7 @@ Example:
 ==== Edits details of a company at the specified index `INDEX`
 Format: `editC <INDEX>`
 
-Edits the company with the specified `INDEX`.
+You can edit companies with their specified `INDEX`.
 The index must be an index number shown in the displayed company list.
 
 Example:
@@ -339,7 +339,7 @@ Example:
 ==== Edits details of a job offer
 Format: `editj <INDEX>`
 
-Edits the job with the specified `INDEX`.
+You can edit job offers with their specified `INDEX`.
 This index must be an index number shown in the displayed job list.
 
 [NOTE]
@@ -501,7 +501,7 @@ Format: `sortc <tag>` +
 Supported tags: `n/`, `x/`, `e/`, `j/`, `h/`, `s/`, `r/`
 
 *   Only one tag/field is included when using the sort command
-*   There must be one tag/field included
+*   You must have one tag/field included
 
 Examples:
 
@@ -515,7 +515,7 @@ Format: `sortC <tag>` +
 Supported tags: `c/`, `e/`, `r/`
 
 *   Only one tag/field is included when using the sort command
-*   There must be one tag/field included
+*   You must have one tag/field included
 
 Examples:
 
@@ -529,10 +529,14 @@ Format: `sortj <tag>` +
 Supported tags: `c/`, `j/`, `xr/`, `h/`, `s/`, `r/`
 
 *   Only one tag/field is included when using the sort command
-*   There must be one tag/field included
+*   You must have one tag/field included
+
+[NOTE]
+You should enter `listC` first to see the full list of job offers for sorting!
 
 Examples:
 
+*   `listC`
 *   `sortj j/` +
 (Sorts all job offers lexicographically by their titles)
 *   `sortj r/` +
@@ -543,12 +547,16 @@ Examples:
 === Blacklisting candidates : `blacklist` `blacklist rm`
 Format: `blacklist` `<INDEX>`
 
-Blacklists the candidate with the specified `INDEX`.
+You can use this command to blacklist candidates with their specified `INDEX`.
 The index must be an index number shown in the displayed candidates list
 
 [NOTE]
-Blacklisting candidates will prevent them from being edited or shortlisted.
+The candidates you blacklisted can no longer be edited or shortlisted.
 Candidates can be unblacklisted by using `blacklist rm`.
+
+Blacklisted Candidates have this tag:
+
+image::BlacklistTag.png[width="390"]
 
 Examples:
 
