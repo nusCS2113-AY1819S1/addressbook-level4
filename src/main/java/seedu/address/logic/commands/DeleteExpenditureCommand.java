@@ -13,8 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.expenditureinfo.Expenditure;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code DeleteExpenditureCommand}.
+ *  Deletes an expenditure identified using it's displayed index from the expenditure tracker.
  */
 
 public class DeleteExpenditureCommand extends Command {
