@@ -223,9 +223,9 @@ Examples:
 // end::distribute[]
 
 // tag::grademanagement[]
-=== Add test and test marks to student: `adt student name tn/ tm/`
+=== Add test and test marks to student: `adt student_name tn/ tm/`
 The system is allowed user to input different test name and test marks for each student by indicate
-the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
+the name of student(name input is case insensitive). Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
 the marks should be 1 digit double numbers or integers within 0-100.
 Each student should not have duplicate test name.
 This command is undoable and redoable.
@@ -235,8 +235,8 @@ Format: `adt student_name tn/ tm/` or  `adt student_name tm/ tn/`
 Example: `adt Alex tn/CS2113Midterm tm/77`
 This will add a test to the student
 
-=== Edit test marks of student: `edt student name tn/ tm/`
-The system is allowed user to edit test marks for each student by indicate the student name and the test name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
+=== Edit test marks of student: `edt student_name tn/ tm/`
+The system is allowed user to edit test marks for each student by indicate the student name and the test name(name input is case insensitive). Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
 the marks should be 1 digit double numbers or integers within 0-100.
 The test to be edited should be exist in the system record, otherwise, the user should add the test first.
 This command is undoable and redoable.
