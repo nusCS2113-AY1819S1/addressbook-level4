@@ -38,7 +38,7 @@ public class EmailUtil {
     /**
      * Getters and Setters
      */
-    public boolean isHasRecipientsAdded() {
+    public boolean getHasRecipientsAdded() {
         return hasRecipientsAdded;
     }
 
@@ -66,7 +66,7 @@ public class EmailUtil {
         this.jobOffers = jobOffers;
     }
 
-    public boolean isAreRecipientsCandidates() {
+    public boolean getAreRecipientsCandidates() {
         return areRecipientsCandidates;
     }
 

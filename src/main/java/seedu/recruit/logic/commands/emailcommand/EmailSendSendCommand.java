@@ -48,7 +48,7 @@ public class EmailSendSendCommand extends EmailSendCommand {
 
         //Generate content (bodyText)
         StringBuilder bodyText = new StringBuilder();
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             bodyText.append(generateContentWhenRecipientsAreCandidates(emailUtil));
             //Sending the email
             try {

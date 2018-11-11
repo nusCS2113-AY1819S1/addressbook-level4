@@ -36,6 +36,9 @@ import seedu.recruit.logic.commands.emailcommand.EmailSendSendCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 
+/**
+ * unit test for email parser .java
+ */
 class EmailParserTest {
 
     @Rule

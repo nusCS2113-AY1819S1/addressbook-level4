@@ -4,6 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit test for emailsettings class
+ */
 class EmailSettingsTest {
 
     private static final String DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT = "New job offers that I have found for you!";
