@@ -973,7 +973,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the login page. The window size may not be optimum.
+   Expected: Shows the login page. The window size may not be optimual.
 
 . Saving window preferences
 
@@ -982,6 +982,11 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The most recent window size and location is retained.
 
 === Register, logging in, and logging out
+
+. Opening the help window
+
+.. Test case: `help` +
+   Expected: The help window opens, showing the User Guide.
 
 . Logging in with a test account
 
@@ -1002,6 +1007,21 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `logout` +
    Expected: The logout is successful and the login screen reappears with the message "Successfully logged out".
 
+[NOTE]
+All following sections assume that the user is currently logged into FreeTime.
+
+=== Basic commands
+
+. Editing your details
+
+.. Test case: `edit p/91234567 e/johndoe@example.com t/CS2101` +
+   Expected: The details of the user in the `Me` panel is updated to specified details.
+
+. Showing command history
+
+.. Test case: `history` +
+   Expected: The list of all previously-entered commands appears below the command box.
+
 === Adding and removing friends
 
 . Adding a friend
@@ -1011,7 +1031,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Removing a friend
 
-.. Prerequisites: Have previously added a friend +
+.. Prerequisites: Have previously added a friend
 .. Test case: `unfriend 1` +
    Expected: The first person in the `Friends` panel moves to the `Others` panel. Hidden fields, namely phone number, address, and email of this person should no longer be visible.
 
@@ -1028,8 +1048,54 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Only people with the group `CS2101-A` in both `Friends` and `Others` panels are shown. The command box reflects the total number of people listed in both panels.
 
 . Listing all people
+.. Prerequisite: Have previously used the `find` or `group` command
 
 .. Test case: `listall` +
    Expected: All people currently registered are shown in their respective panels.
 
-===
+=== Adding and removing timeslots from the user's timetable
+
+. View the user's timetable
+
+.. Test case: `select me` +
+   Expected: If logged in with a newly-registed account, the timetable panel should be empty. Otherwise, the user's timetable is shown on the timetable panel.
+
+. View a friend's timetable
+
+.. Prerequisite: Have previously added a friend
+.. Test case: `select 1` +
+   Expected: The first person in the `Friends` panel is highlighted, with his timetable showing in the timetable panel (should be non-blank for users pre-loaded into FreeTime)
+
+. Adding a timeslot to your timetable
+
+.. Prerequisite: The timeslot from 0800 hrs to 1000 hrs on Monday is empty
+.. Test case: `add mon 8-10` +
+   Expected: A new timeslot, represented by a colored rectangle, appears in the corresponding position on the timetable. The timetable should also automatically resize to begin at 0800 hrs instead of the default 1000 hrs.
+
+. Removing a timeslot from your timetable
+
+.. Prerequisite: The timeslot from 0800 hrs to 1000 hrs on Monday is occupied by a single timeslot
+.. Test case: `delete mon 8-10` +
+   Expected: The timeslot corresponding to Monday, 0800 hrs to 1000 hrs is removed from the timetable panel. If no other timeslots in the timetable begin before 1000 hrs, the timetable should automatically resize to begin at the default 1000 hrs.
+
+=== Showing free timeslots across users
+
+. Showing free timeslots across users
+
+.. Prerequisites: Have previously added a friend
+.. Test case: `free 1` +
+   Expected: A deconflicted timetable should appear in the timetable panel. Timeslots where both the user and the friend at index 1 are available are highlighted in green. All other timeslots are highlighted in red.
+
+=== Importing and exporting the user's timetable
+
+. Exporting a timetable
+
+.. Prerequisite: Has previously added a timeslot to the user's timetable
+.. Test case: `select me`, followed by `export file` +
+   Expected: The user's timetable is exported to `[root]/import_export/file.ics`, where `[root]` represents the directory where FreeTime.jar is located.
+
+. Importing a timetable
+
+.. Prerequisite: Has previously exported a timetable with the file name `file.ics`, or has generated an .ics file using NUSMods, moved said file to the `import_export` directory under the root directory, and renamed the file to `file.ics` +
+.. Test case: `import file` +
+   Expected: The user's timetable is imported from the .ics file and should be shown on the timetable panel.
