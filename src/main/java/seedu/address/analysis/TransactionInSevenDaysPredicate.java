@@ -11,6 +11,6 @@ import seedu.address.model.transaction.Transaction;
 public class TransactionInSevenDaysPredicate implements Predicate<Transaction> {
     @Override
     public boolean test(Transaction transaction) {
-        return transaction.getTransactionDate().isBetween(new Date(), new Date().getDateSixDaysBefore());
+        return transaction.getTransactionDate().isBetween(new Date().getDateSixDaysBefore(), new Date());
     }
 }

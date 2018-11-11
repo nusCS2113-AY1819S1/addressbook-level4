@@ -125,7 +125,7 @@ public class AdminModelManager extends ModelManager implements AdminModel {
 
     @Override
     public Price analyseProfit(AnalysisPeriodType period) {
-        updateFilteredTransactionListToShowAll();
+        updateFilteredTransactionListToShowProfitPeriod(period);
         return analysis.analyseProfit(period);
     }
 
@@ -141,6 +141,14 @@ public class AdminModelManager extends ModelManager implements AdminModel {
      */
     private void updateFilteredTransactionListToShowSales(AnalysisPeriodType period) {
         updateFilteredTransactionList(period.getPeriodFilterPredicate().and(new SaleTransactionPredicate()));
+    }
+
+    /**
+     * Updates the {@code filteredTransactions} with {@code period} predicate.
+     * For use by Profit analysis.
+     */
+    private void updateFilteredTransactionListToShowProfitPeriod(AnalysisPeriodType period) {
+        updateFilteredTransactionList(period.getPeriodFilterPredicate());
     }
 
     private void updateFilteredTransactionListToShowAll() {

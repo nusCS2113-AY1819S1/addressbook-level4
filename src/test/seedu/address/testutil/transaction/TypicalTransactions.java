@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionList;
 
@@ -39,4 +41,9 @@ public class TypicalTransactions {
     public static List<Transaction> getTypicalTransactions() {
         return new ArrayList<>(Arrays.asList(SALE_COKE_1, BUY_PEPSI));
     }
+
+    public static FilteredList<Transaction> getTypicalFilteredTransactions() {
+        return new FilteredList<>(FXCollections.observableArrayList(SALE_COKE_1, BUY_PEPSI));
+    }
+
 }

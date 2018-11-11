@@ -1,4 +1,4 @@
-package model.drink;
+package seedu.address.model.drink;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.model.drink.NameContainsKeywordsPredicate;
 import seedu.address.testutil.drinks.DrinkBuilder;
 
 public class NameContainsKeywordsPredicateTest {
