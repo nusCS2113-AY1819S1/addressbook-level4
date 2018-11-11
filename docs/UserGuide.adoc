@@ -930,7 +930,7 @@ e.g. `edit 2 n/Present d/12-11-2018`
 e.g. `delete 3`
 
 * *Delete by date* : `deletedate DATE` +
-e.g. `delete 31-7-2018`
+e.g. `deletedate 31-7-2018`
 
 * *History* : `history`
 
