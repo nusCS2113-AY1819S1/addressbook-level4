@@ -9,14 +9,28 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
+import seedu.address.model.UserDatabase;
+import seedu.address.testutil.TypicalUsers;
+
+import static org.junit.Assert.assertEquals;
 
 public class XmlSerializableUserDatabaseTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
             "XmlSerializableUserDatabaseTest");
+    private static final Path TYPICAL_USERS_FILE = TEST_DATA_FOLDER.resolve("typicalUsersUserDatabase.xml");
     private static final Path INVALID_USER_FILE = TEST_DATA_FOLDER.resolve("invalidUserUserDatabase.xml");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void toModelType_typicalPersonsFile_success() throws Exception {
+        XmlSerializableUserDatabase dataFromFile = XmlUtil.getDataFromFile(TYPICAL_USERS_FILE,
+                XmlSerializableUserDatabase.class);
+        UserDatabase userDatabaseFromFile = dataFromFile.toModelType();
+        UserDatabase typicalUsersAddressBook = TypicalUsers.getTypicalUserDatabase();
+        assertEquals(userDatabaseFromFile, typicalUsersAddressBook);
+    }
 
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
