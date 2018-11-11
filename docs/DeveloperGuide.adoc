@@ -364,10 +364,10 @@ Certain properties of the application can be controlled (e.g App name, logging l
 === Events
 
 We create an Events package in modle, to combine the event element such as name and venue into an event list. In the Commands package, we create an package named EventCommand, which the commands are stored in. We have totally four commands:
-*`addEventsCommand` -- Add a new event to the event list.
-*`editEvent` -- Change the information of the existing event.
-*`listEvent` -- List all the existing events.
-*`deleteEvent` -- Delete the a certain event.
+* `addEventsCommand` -- Add a new event to the event list.
+* `editEvent` -- Change the information of the existing event.
+* `listEvent` -- List all the existing events.
+* `deleteEvent` -- Delete the a certain event.
 
 The AddEvent/DeleteEvent mechanism is facilitated by `AddressBook`.
 It extends `AddressBook` with the `AddEvent` and `DeleteEvent` methods, and implements the following operations:
@@ -389,9 +389,9 @@ Step 4. This `addEventParser` will parse the arguments of the command line and c
 
 Step 5. This will then be put into the `model`, into the `VersionedAddressBook`.
 
-The `Event` class creates an object that instantiates an `EventName` object, an `EventVenue, an `EventDescription` and an `EventDate` objects. The multiple `Event` objects created will be stored in a `UniqueEventList`, where the uniqueness of every `Event` is in its `EventName`.
+The `Event` class creates an object that instantiates an `EventName` object, an `EventVenue`, an `EventDescription` and an `EventDate` objects. The multiple `Event` objects created will be stored in a `UniqueEventList`, where the uniqueness of every `Event` is in its `EventName`.
 
-This uniqueness is attained by comparing the `EventName` object in the `Event` to be added and the `Event`s already in the `UniqueEventList` using the `getEventName()` method in `Event`.
+This uniqueness is attained by comparing the `EventName` object in the `Event` to be added and the `Event's already in the `UniqueEventList` using the `getEventName()` method in `Event`.
 
 === Ledger
 As of v1.3, the core commands dealing with Ledgers are `addLedger`, `deleteLedger`,
