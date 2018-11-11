@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.planner.commons.core.Messages;
 import seedu.planner.commons.core.index.Index;
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.commons.util.StringUtil;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.DirectoryPath;
@@ -65,7 +66,13 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Date.isValidDateFormat(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
+            if (trimmedDate.equals(Date.DATE_INPUT_TODAY)) {
+                return new Date(DateUtil.getDateTodayForInput());
+            } else if (trimmedDate.equals(Date.DATE_INPUT_YESTERDAY)) {
+                return new Date(DateUtil.getDateYesterdayForInput());
+            } else {
+                throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
+            }
         }
         Date result;
         try {

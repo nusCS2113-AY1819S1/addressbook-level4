@@ -19,6 +19,8 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.planner.model.autocomplete.DateMap;
+import seedu.planner.model.autocomplete.RecordMap;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
@@ -98,7 +100,8 @@ public class FinancialPlannerTest {
     private static class FinancialPlannerStub implements ReadOnlyFinancialPlanner {
         private final ObservableList<Record> records = FXCollections.observableArrayList();
         private final ObservableList<Limit> limits = FXCollections.observableArrayList();
-        private final HashMap<String, Integer> tags = new HashMap();
+        private final RecordMap recordMap = new RecordMap();
+        private final DateMap limitsMap = new DateMap();
 
         FinancialPlannerStub(Collection<Record> records) {
             this.records.setAll(records);
@@ -115,8 +118,13 @@ public class FinancialPlannerTest {
         }
 
         @Override
-        public HashMap<String, Integer> getTagMap() {
-            return tags;
+        public RecordMap getRecordMap() {
+            return recordMap;
+        }
+
+        @Override
+        public HashMap<String, Integer> getLimitMap() {
+            return limitsMap.getAsReadOnlyDateMap();
         }
 
         @Override
