@@ -30,11 +30,11 @@ public class ImportExcelCommandParserTest {
 
         CommandParserTestUtil.assertParseFailure(parser,
                 WHITE_SPACE + PREFIX_DIR + directoryPath,
-                Messages.MESSAGE_UNREALISTIC_DIRECTORY);
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_UNREALISTIC_DIRECTORY));
 
         CommandParserTestUtil.assertParseFailure(parser,
                 WHITE_SPACE + PREFIX_DIR + directoryPath + WHITE_SPACE + nameFile,
-                Messages.MESSAGE_UNREALISTIC_DIRECTORY);
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_UNREALISTIC_DIRECTORY));
 
         CommandParserTestUtil.assertParseFailure(parser,
                 WHITE_SPACE + directoryPath + WHITE_SPACE + PREFIX_NAME + nameFile,
@@ -54,10 +54,10 @@ public class ImportExcelCommandParserTest {
 
         CommandParserTestUtil.assertParseFailure(parser,
                 WHITE_SPACE + PREFIX_DIR + unrealisticDirectory,
-                Messages.MESSAGE_UNREALISTIC_DIRECTORY);
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_UNREALISTIC_DIRECTORY));
 
         CommandParserTestUtil.assertParseFailure(parser,
                 WHITE_SPACE + PREFIX_DIR + directoryPath + WHITE_SPACE + PREFIX_NAME + unrealisticName,
-                Messages.MESSAGE_UNREALISTIC_DIRECTORY);
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_UNREALISTIC_DIRECTORY));
     }
 }

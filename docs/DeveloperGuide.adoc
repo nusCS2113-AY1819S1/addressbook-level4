@@ -1648,34 +1648,30 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
+[discrete]
 === 5.  Use case: Delete expense entry whose date is required. [Linh Chi]
 
 *MSS*
 
-1.  User requests to delete records whose date is required.
-2.  Savee requests for date of entry to be deleted.
-3.  User enters the date entry he/she wants to delete.
-4.  Savee entry confirms date to be deleted.
-5.  User confirms the deletion
-6.  Savee deletes the entry
+1.  User requests to delete records whose date is required. User enters the date entry he/she wants to delete.
+2.  Savee checks whether the day required is valid.
+3.  Savee deletes all records whose date is required.
 +
 Use case ends.
 
 *Extensions*
 
-* 1a. There are no entries to be delete.
-** Savee throws no entry error.
-** Use Case Ends
-* 3a. User’s input is invalid.
-** Savee throws invalid format error and shows format needed.
-** Use case resumes at step 2.
-* 3b. User’s input date has no entries
-** Savee throws no entry error.
-** Use case resumes at step 2.
-* 4a. User’s input is not a valid entry.
-** Savee throws invalid data error and resumes at step 4.
-* 5a. User declines the confirmation.
-** Use case resumes at step 3.
+* 1a. User’s command is of invalid.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
+
+* 1b. The date entered is of incorrect format.
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case resumes at step 1.
+
+* 1c. There is no date entered.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
 
 
 [discrete]
@@ -1800,11 +1796,11 @@ Use case ends.
 *MSS*
 
 1.  User requests to create a normal limit for expenses different period of time or a day.
-2.  FinancialPlanner requests for the dateStart and dateEnd of that period of time or the date of the day and the maximum amount of spending.
+2.  Savee requests for the dateStart and dateEnd of that period of time or the date of the day and the maximum amount of spending.
 3.  User enters the dateStart and dateEnd or the date and the amount of spending.
-4.  FinancialPlanner records the limit in the hard drive.
-5.  FinancialPlanner keeps tracking the spending during limit's date period of time or that day.
-6.  FinancialPlanner warns user when the total spend exceeds the limit amount of spending.
+4.  Savee records the limit in the hard drive.
+5.  Savee keeps tracking the spending during limit's date period of time or that day.
+6.  Savee warns user when the total spend exceeds the limit amount of spending.
 
 +
 Use case ends.
@@ -1834,11 +1830,11 @@ Use case ends.
 *MSS*
 
 1.  User requests to edit an existing normal limit.
-2.  FinancialPlanner requests for the new maximum amount of spending for the period of time or the day.
+2.  Savee requests for the new maximum amount of spending for the period of time or the day.
 3.  User enters the dateStart and dateEnd or the date and the new amount of spending.
-4.  FinancialPlanner updates the new limit in the hard drive.
-5.  FinancialPlanner keeps tracking the spending during the limit's date period of time or that day.
-6.  FinancialPlanner warns user when the total spend exceeds the limit amount of spending.
+4.  Savee updates the new limit in the hard drive.
+5.  Savee keeps tracking the spending during the limit's date period of time or that day.
+6.  Savee warns user when the total spend exceeds the limit amount of spending.
 
 +
 Use case ends.
@@ -1872,9 +1868,9 @@ Use case ends.
 *MSS*
 
 1.  User requests to delete an existing limit.
-2.  FinancialPlanner requests for the date period of the limit to be deleted.
+2.  Savee requests for the date period of the limit to be deleted.
 3.  User enters the dateStart and dateEnd or the date.
-4.  FinancialPlanner deletes the limit in the hard drive.
+4.  Savee deletes the limit in the hard drive.
 
 
 +
@@ -1905,9 +1901,9 @@ Use case ends.
 *MSS*
 
 1.  User requests to add the monthly limit.
-2.  FinancialPlanner requests the monthly maximum amount of spending.
+2.  Savee requests the monthly maximum amount of spending.
 3.  User enters the maximum amount of spending.
-4.  FinancialPlanner adds the monthly limit.
+4.  Savee adds the monthly limit.
 
 
 +
@@ -1934,9 +1930,9 @@ Use case ends.
 *MSS*
 
 1.  User requests to edit the monthly limit.
-2.  FinancialPlanner requests the new monthly maximum amount of spending.
+2.  Savee requests the new monthly maximum amount of spending.
 3.  User enters the new maximum amount of spending.
-4.  FinancialPlanner updates the monthly limit.
+4.  Savee updates the monthly limit.
 
 
 +
@@ -1963,7 +1959,7 @@ Use case ends.
 *MSS*
 
 1.  User requests to delete the monthly limit.
-2.  FinancialPlanner updates the monthly limit.
+2.  Savee updates the monthly limit.
 
 
 +
@@ -1986,66 +1982,111 @@ Use case ends.
 *MSS*
 
 1.  User requests to check all the existing limits.
-2.  FinancialPlanner displays all the existing limits.
+2.  Savee displays all the existing limits.
 +
 Use case ends.
 
 [discrete]
-=== 20. Use case: Export expenses into Excel file [Linh Chi]
+=== 20. Use case: Export record data from Savee to Excel file [Linh Chi]
 
 *MSS*
 
-1.  User requests export format.
-2.  Savee shows list of possible formats for export.
-3.  User enters preferred export format.
-4.  Savee exports the records data in Excel file.
+.  User requests to export the data from Savee to Excel file.
+.  Savee exports the records data in Excel file.
+.  Savee informs the user the directory where the Excel file is saved.
 
 *Extensions*
 
-* 3a User input wrong directory path that the Excel file will be stored
-** Savee throws unsupported format error
-** Use case resumes at step 2.
+* 1a. User’s command is of invalid form.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
 
-* 3b User input wrong date format or unreal date.
-** Savee throws unsupported format error
-** Use case resumes at step 2.
+* 1b. The parameters entered is of incorrect format.
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case resumes at step 1.
+
+* 1c. The directory path parameters entered is non-existent.
+** Savee throws invalid command error and notifies user of the user non-existent directory path.
+** Use case resumes at step 1.
+
+* 1d. The user enters the parameters but does not enter the prefix.
+** Savee throws invalid command error.
+** Use case resumes at the step 1.
+
+* 1e. The user enters the prefix but does not enter the parameters.
+** Savee throws invalid command error.
+** Use case resumes at the step 1.
+
+* 1f. The user enters more than 3 dates.
+** Savee throws invalid command error and notifies user the maximum number of dates enter is 2.
+** Use case resumes at step 1.
+
+* 1g. The user enters exact 2 dates and the first date is later than the second date.
+** Savee throws invalid command error and notifies user the first data should be earlier or equal to the second date.
+** Use case resumes at step 1.
+
+
 
 [discrete]
 ==== 21. Use case: Import the Excel file into Financial Planner. [Linh Chi]
 
 *MSS*
 
-1. User requests import format.
-2. Financial Planner shows list of possible format for import.
-3. User enters preffered import format.
-4. Financial Planner reads the Excel file and transfer all the data in the Excel file into Record object and add them into current Financial Planner.
+. User requests to import the record data from Excel file to Financial Planner.
+. Savee reads the Excel file and transfer all the data in the Excel file into Record object and add them into current Savee.
 
 *Extensions*
 
-* 3a User input wrong file path that the Excel file is stored
-** Savee throws unsupported format error
-** Use case resumes at step 2.
+* 1a. User’s command is of invalid form.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
 
+* 1b. User input wrong file path that the Excel file is stored.
+** Savee throws invalid command error and notifies the user the directory path is not existent.
+** Use case resumes at step 1.
+
+* 1c. User input the parameter but does not enter the prefix.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
 
 [discrete]
 === 22. Use case: Archive the records data into Excel file. [Linh Chi]
 
 *MSS*
 
-1. User requests archive format.
-2. Financial Planner shows a list of possible format to arhive.
-3. User enters the preffered archive format.
-4. Financial Planner archives the record data into Excel file.
+.  User requests to archive the record from Savee to Excel file.
+.  Savee archives the records data in Excel file.
+.  Savee informs the user the directory where the Excel file is saved.
 
-*Extension*
+*Extensions*
 
-* 3a User input wrong directory path that the Excel file will be stored
-** Savee throws unsupported format error
-** Use case resumes at step 2.
+* 1a. User’s command is of invalid form.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
 
-* 3b User input wrong date format or unreal date.
-** Savee throws unsupported format error
-** Use case resumes at step 2.
+* 1b. The parameters entered is of incorrect format.
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case resumes at step 1.
+
+* 1c. The directory path parameters entered is non-existent.
+** Savee throws invalid command error and notifies user of the user non-existent directory path.
+** Use case resumes at step 1.
+
+* 1d. The user enters the parameters but does not enter the prefix.
+** Savee throws invalid command error.
+** Use case resumes at the step 1.
+
+* 1e. The user enters the prefix but does not enter the parameters.
+** Savee throws invalid command error.
+** Use case resumes at the step 1.
+
+* 1f. The user enters more than 3 dates.
+** Savee throws invalid command error and notifies user the maximum number of dates enter is 2.
+** Use case resumes at step 1.
+
+* 1g. The user enters exact 2 dates and the first date is later than the second date.
+** Savee throws invalid command error and notifies user the first data should be earlier or equal to the second date.
+** Use case resumes at step 1.
 
 [discrete]
 === 23. Use case: See monthly financial activity
@@ -2061,28 +2102,28 @@ Use case ends.
 *MSS*
 
 1.  User requests to edit expenses tags.
-2.  FinancialPlanner requests for date of entry to edit tags
+2.  Savee requests for date of entry to edit tags
 3.  User enters date to edit entry for
-4.  FinancialPlanner shows list of entries on specified date
+4.  Savee shows list of entries on specified date
 5.  User enters entry to edit.
-6.  FinancialPlanner shows current tags of selected entry.
+6.  Savee shows current tags of selected entry.
 7.  User enters tag to remove
-8.  FinancialPlanner removes tag entered.
+8.  Savee removes tag entered.
 
 *Extensions*
 
 * 3a User inputs invalid date
-** FinancialPlanner throws invalid date error.
+** Savee throws invalid date error.
 ** Use case resumes at step 2.
 * 3b Date input has no entries to edit
-** FinancialPlanner throws no entry error.
+** Savee throws no entry error.
 ** Use case resumes at step 2.
 * 5a User’s input is not a valid entry.
-** FinancialPlanner throws invalid data error and resumes at step 4.
+** Savee throws invalid data error and resumes at step 4.
 * 5a User’s input entry has no tags.
-** FinancialPlanner displays ‘No tags’ and continues to step 7.
+** Savee displays ‘No tags’ and continues to step 7.
 * 7a User’s input tag does not exist
-** FinancialPlanner adds tag to entry.
+** Savee adds tag to entry.
 
 [discrete]
 === 25. View bank balance
@@ -2102,8 +2143,9 @@ Use case ends.
 ** Savee returns error and asks for authentication again.
 ** Use case resumes at 2.
 
-[Discrete]
+[discrete]
 === 26. Adjust configurations
+
 *MSS*
 
 1.  User requests to change application configurations.
@@ -2323,12 +2365,132 @@ should allow you to navigate to the hidden tags within the legend.
 . Deleting a records while all records are listed
 
 .. Prerequisites: List all records using the `list` command. Multiple persons in the list.
+
 .. Test case: `delete 1` +
    Expected: First record is deleted from the list. Details of the deleted record shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No record is deleted. Error details shown in the status message. Status bar remains the same.
+
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
+
+=== Deleting all records whose date is required.
+
+. Deleting all records whose date is required when all records are listed.
+
+.. Prerequisites: List all records using the `list` command. Multiple records in the list.
+
+.. Test case: `deletedate 31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be deleted. The message of successful deleting records will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record existing will be shown. Status bar remains the same.
+
+.. Incorrect delete commands to try: `delete 30-2-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect delete commands to try: `delete 30-2A-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect delete commands to try: `deletedate`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+.. Incorrect delete commands to try: `deletedate x` (where x is invalid date, meaning that date have alphabetical character or non-existent date) +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+=== Archiving records data from Savee to Excel file and store it in a specific directory.
+
+. Archiving records whose date is required when all records are listed.
+
+.. Prerequisites: List all records using the `list` command. Multiple records in the list.
+.. Test case: `archive` +
+   Expected: All records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `archive d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Test case: `archive d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Test case: `archive dir/C:\` +
+   Expected: All records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `archive dir/C:\ d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Test case: `archive dir/C:\ d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Incorrect archive commands to try: `archive d/30-2-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect archive commands to try: `archive d/30-2A-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect archive commands to try: `archive 31-3-1999`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+.. Incorrect archive commands to try: `archive C:\`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+=== Import all record data from Excel file to Savee
+
+. Import record data from Excel file into Savee.
+
+.. Prerequisites: `archive dir/C:\` +
+
+.. Test case: `import dir/C:\ n/Financial_Planner_ALL.xlsx` +
+   Expected: All record data from the Excel file are shown in Savee.
+
+.. Test case: `import dir/C:\ n/Financial_Planner_ALL` +
+   Expected: All record data from the Excel file are shown in Savee.
+
+.. Test case: `import dir/C:\Financial_Planner_ALL.xlsx` +
+   Expected: All record data from the Excel file are shown in Savee.
+
+.. Incorrect import commands to try: `import` +
+   Expected: Invalid date entered. Error indicating invalid command format. Status bar remains the same.
+
+=== Exporting records data from Savee to Excel file and store it in a specific directory.
+
+. Exporting records whose date is required when all records are listed.
+
+.. Prerequisites: List all records using the `list` command. Multiple records in the list.
+.. Test case: `exportexcel` +
+   Expected: All records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `exportexcel d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Test case: `exportexcel d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Test case: `exportexcel dir/C:\` +
+   Expected: All records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `exportexcel dir/C:\ d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Test case: `exportexcel dir/C:\ d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Incorrect export commands to try: `exportexcel d/30-2-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect export commands to try: `exportexcel d/30-2A-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect export commands to try: `exportexcel 31-3-1999`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+.. Incorrect export commands to try: `exportexcel C:\`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
 
 === Saving data
 

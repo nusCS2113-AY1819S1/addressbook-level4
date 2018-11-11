@@ -308,8 +308,11 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify Savee's stored content (
+* Undoable commands: those commands that modify Savee's stored content (
 `add`, `delete`, `deletedate`, `exportexcel`, `archive`, `import`, `edit`, `addlimit`, `deletelimit`, `editlimit` and `clear`).
+* Please note that the `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `archive` command, the records archived will be added again back to the Financial Planner but the Excel file created will not be deleted.
+* Please note that `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `export` command, the records remains the same and the Excel file created will not be deleted.
+
 ====
 
 Examples:
@@ -664,7 +667,7 @@ Format: +
 
 * *Single argument Date mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
 
-* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Saveer.
+* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
 
 * *Single argument Directory Path mode* will list down all records in Savee and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
 
@@ -679,7 +682,8 @@ Date follow the same configurations as date parameters required when adding reco
 *yyyy* requires exactly 4 digits.
 
 
-The Excel file name will be named based on the command, relating to Date: +
+The Excel file name will be named based on t
+he command, relating to Date: +
 
 * *Default mode*: The Excel file will be named `Financial_Planner_ALL.xlsx`
 * *Single argument Date mode*: The Excel file will be named `Financial_Planner_dd-mm-yyyy.xlsx`
@@ -718,15 +722,13 @@ Automatically uses the the summary data from the `SUMMARY DATA` sheet in the Exc
 
 As you can see the screenshot below, in the `SUMMARY DATA` sheet, next to the summary table:
 
-* The size of the line chart (based on default column width and default row height) is:
-** The width is 15 columns
-** The height is 30 rows.
+image::Export_Capture2_LinhChi.png[width:800]
+
 * On the top left of the chart, the legend shows 3 lines, namely Income, Outcome, and Net.
 ** The first blue line shows the Income based on Date.
 ** The second orange line shows the Outcome based on Date
 ** The third grey line shows the Net (total of income and outcome) based on Date.
 
-image::Export_Capture2_LinhChi.png[width:800]
 
 // end::draw_line_chart[]
 

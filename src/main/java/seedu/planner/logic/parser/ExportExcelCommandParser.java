@@ -88,10 +88,10 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
         Date endDate;
         String directoryPath;
         int dateNum = Arrays.asList(dates).size();
+
         if (dateNum > ExportExcelCommand.DUO_MODE) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT
-                            + Messages.MESSAGE_INVALID_DATE_REQUIRED, ExportExcelCommand.MESSAGE_USAGE));
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_INVALID_DATE_REQUIRED));
         } else if (dateNum == ExportExcelCommand.SINGLE_MODE) {
             startDate = ParserUtil.parseDate(Arrays.asList(dates).get(ExportExcelCommand.FIRST_ELEMENT).trim());
             endDate = ParserUtil.parseDate(Arrays.asList(dates).get(ExportExcelCommand.FIRST_ELEMENT).trim());
@@ -107,7 +107,8 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
                 return new ExportExcelCommand(startDate, endDate, directoryPath);
             }
         } else {
-            throw new ParseException(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE);
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_INVALID_STARTDATE_ENDDATE));
         }
     }
 
@@ -130,6 +131,7 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
         }
         return args.split("\\s+");
     }
+
     /**
      * Check whether the Dates are valid period or not.
      */

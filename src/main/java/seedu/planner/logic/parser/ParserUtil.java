@@ -148,7 +148,8 @@ public class ParserUtil {
     public static String parseDirectoryString(String dirPath) throws ParseException {
         requireNonNull(dirPath);
         if (!DirectoryPath.isValidDirectory(dirPath)) {
-            throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
+            throw new ParseException(String.format(
+                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_UNREALISTIC_DIRECTORY));
         }
         return dirPath;
     }
@@ -160,7 +161,8 @@ public class ParserUtil {
         requireNonNull(dirPath);
         System.out.println(dirPath);
         if (!DirectoryPath.isValidFilePath(dirPath)) {
-            throw new ParseException(Messages.MESSAGE_UNREALISTIC_DIRECTORY);
+            throw new ParseException(String.format(
+                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_UNREALISTIC_DIRECTORY));
         }
         return dirPath;
     }
