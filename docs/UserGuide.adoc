@@ -526,19 +526,19 @@ Undoable commands: those commands that modify the address book's content (`impor
 
 Examples:
 
-* `import me` +
+* `import my_file` +
 `list` +
-`undo` (reverses the `import me` command) +
+`undo` (reverses the `import my_file` command) +
 
 * `select 1` +
 `listall` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `import me` +
+* `import my_file` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `import mes` command) +
+`undo` (reverses the `import my_file` command) +
 
 <<Features,Jump back to _FreeTime_'s feature list>>
 
@@ -582,27 +582,51 @@ Format: `clear`
 [[import]]
 === Import Timetable : `import` (`im`)
 
-Imports a timetable for the current user from a specified (_.ics_) file. +
+Imports a timetable for the current user from a specified file. +
+
+Format: `import FILE_NAME` +
 
 ****
-* Only supports (_.ics_) files exported from NUSMODS.
-* Do *not* include the (_.ics_) file extension when typing the command.
-* The file will be imported from the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file. Please see the image below: +
+* See the example further below for a quick start!
+* Command parameters:
+** `FILE_NAME` refers to the name of the file that you want to import.
+*** do *not* include the _.ics_ file extension.
+*** In other words, type: `import nusmods_calendar` instead of `import nusmods_calendar.ics`
+* Compatibility:
+** Only supports _.ics_ files exported from NUSMODS.
+* Location of the import file:
+** The file will be imported from the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file. Please see the image below for a visual description: +
 ****
+.Location to put your import files.
+image::UG_import_directory.png[width="500", align="left"]
 
-image::UG_importexport.png[width="400", align="left"]
-Format: `import [FILE_NAME]` +
 
 Example:
 
-* `import my_file` +
-Imports the timetable at `(root_folder)\import_export\my_file.ics` +
-(where 'root_folder' is the folder that the application is in.) +
+* `import nusmods_calendar` +
+Imports the timetable from `.\import_export\nusmods_calendar.ics` +
 
-[TIP]
-You can obtain your timetable on NUSMODS as an (_.ics_) file, as shown in the picture below:
 
-image::importics.png[width="250", align="left"]
+.  Download your file from NUDMODS website:
++
+.Download your file from NUDMODS website.
+image::UG_import_step_1.png[width="790"]
++
+.  Copy your desired _.ics_ file to the `import_export` folder:
++
+.Copy your file to the correct folder.
+image::UG_import_step_2.png[width="790"]
++
+.  Go back to FreeTime, and type in the command `import nusmods_calendar`  :
++
+.Type this, then press enter!
+image::UG_import_step_3.png[width="400"]
++
+.  If the import was successful, FreeTime should look similar to this  :
++
+.Import Success! :)
+image::UG_import_step_4.png[width="790"]
++
 
 <<Features,Jump back to _FreeTime_'s feature list>>
 // end::import[]
@@ -681,5 +705,7 @@ e.g. `addtime mon 10-12`
 e.g. `deletetime tue 12-14`
 * *Free time* : `free` +
 e.g. `free 1 2 3`
-* *Import Timetable from a file* : `import [FILE_LOCATION]`
-* *Export Timetable to a file* : `export [FILE_LOCATION]`
+* *Import Timetable* : `import FILE_LOCATION` +
+e.g `import myfilename`
+* *Export Timetable* : `export FILE_LOCATION` +
+e.g `export myfilename`
