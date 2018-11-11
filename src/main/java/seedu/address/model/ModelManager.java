@@ -240,4 +240,9 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void finishTodo(Todo target) {
+        versionedAddressBook.removeTodo(target);
+        indicateAddressBookChanged();
+    }
 }
