@@ -55,7 +55,7 @@ e.g. typing *`help`* or *`h`* and pressing kbd:[Enter] will open the help window
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 * Commands argument can be in any order e.g. 'AddCommand' Format: 'add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]'
-          can also be 'n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL add'
+          can also be 'n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL add' [available in V1.4]
 ====
 
 === Viewing help : `help` / `h`
@@ -225,6 +225,16 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+=== Searching for person's photograph
+Searches for the person's photograph on Google.
+
+* Person must have an online presence eg. Facebook/LinkedIn for the search to work.
+
+Format:
+
+* The selected person will be searched on google. Refer to `select` on how to select a person.
+
+// TODO: update according to the latest features
 // TODO: Add preface
 === Exporting all contacts : `exportall`
 
@@ -269,23 +279,30 @@ Exports the 1st person starting from the 1st person in the results of the `find`
 
 // tag::schedule[]
 === Add personal schedule : `schedule`
+This function enables you to add the scheduled events of a person into the selected person's card.
+
+
 Format:
 
-`schedule INDEX d/DDMMYYYY st/START-TIME et/END_TIME en/EVENT-NAME`
+`schedule IndexOfPerson d/DDMMYYYY st/START-TIME et/END_TIME en/EVENT-NAME`
 
 Examples:
 
 * `schedule 1 d/09092018 st/1200 et/1400 en/CS1231 Exam`
 * `schedule 2 d/08072018 st/1000 et/1900 en/CS2040C Practical Exam`
 
+*To clear the schedules, please restart the program on your end.
+Delete and clear schedules will be coming in version 1.4.*
 
+*Currently, the date validation regex allows for 31 days every month. This issue will be fixed
+in v1.4*
 
 === Add and Delete personal weekly schedule : `schedule` [coming in v1.4]
 
 Format:
 
-`addschedule INDEX d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
-`delschedule INDEX d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+`addschedule IndexOfPerson d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+`delschedule IndexOfPerson d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
 
 Examples:
 
@@ -296,11 +313,11 @@ Examples:
 === List Common Schedule : `commonschedule` [coming in v1.4]
 
 Shows a list of common meeting time for a group of contacts and the user in that given that given period of time. +
-Format: `commonschedule p/PERSON...[PERSON] sd/START-DATE-DDMMYYYY ed/END-DATE-DDMMYYYY t/HOURS`
+Format: `commonschedule i/IndexOfPerson...[INDEX] sd/START-DATE-DDMMYYYY ed/END-DATE-DDMMYYYY t/AVAIL-HOURS-REQUIRED`
 
 Examples:
 
-* `commonschedule p/John Smith p/Jane Doe sd/08092018 ed/01102018 t/1.5`
+* `commonschedule i/1 i/2 i/3 sd/08092018 ed/01102018 t/1.5`
 // end::schedule[]
 
 === Add To-do task: `todo`
@@ -308,13 +325,26 @@ Examples:
 Adds a to-do task, the to-do list panel will display the task's title and its content. +
 Format: `todo tt/TITLE c/CONTENT`
 
-[TIP]
-The user is unable to edit the content of the to-do task
-
 Examples:
 
 * `todo tt/Write tests c/Need to write test for this command`
 * `todo tt/Buy grocery c/Buy tomato and potato on the way back home`
+
+=== Add Reminder: `reminder` [coming in v1.4]
+
+Adds a Reminder for your next meeting, along with details to be displayed
+
+Format: `reminder d/DDMMYY tm/TIME lc/LOCATION tp/TOPIC`
+
+Examples:
+
+* `reminder d/031118 tm/1900 lc/COM2 tp/CS2113T Milestone 1.4`
+
+=== Meeting Minutes: `minutes` [coming in v1.4]
+
+Opens up a text box to take meeting minutes
+
+Format: `minutes`
 
 === Exiting the program : `exit` / `x`
 
@@ -327,8 +357,29 @@ Address book data are saved in the hard disk automatically after any command tha
 There is no need to save manually. +
 The storage file 'addressbook.xml' is located in the project root folder.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+// tag::suggestions[]
+=== Getting Smart Suggestions
+
+Receive smart suggestions while typing in your commands. Press the `TAB` key while typing a command halfway to get
+suggestions on possible commands without having to navigate to the help window. If only one command is available,
+pressing `TAB` will auto-complete the command for you without the need to type it in manually.
+
+Examples:
+
+* While typing `his` to get `history` command, press `TAB`. The `history` command will automatically be filled in for
+you as it is the only suggestion available.
+* While typing `e`, press `TAB`. The system will suggest to you all possible commands that start with `e`, which would
+be `exportall`, `exit`, and `edit`.
+
+=== Getting Wrong Command Suggestions
+
+Should you type in a wrong command, fear not, as our system will automatically suggest to you what you have typed wrongly,
+by giving you a closest approximation of word through the message box after you press enter.
+
+Examples:
+
+* If you wanted to type `select` but you typed `salect` instead, the system will tell you that it is an invalid command,
+and would suggest to you the command `select` instead.
 
 When exporting contacts for the purpose of information transfer to another computer, encryption can be enabled before
 the export command to prevent data misuse.

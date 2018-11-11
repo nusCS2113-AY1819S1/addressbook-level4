@@ -1,8 +1,12 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.FileUtil.isValidPath;
+import static seedu.address.commons.util.FileUtil.isValidXmlFilename;
 import static seedu.address.model.Filetype.isValidFiletype;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +32,8 @@ import seedu.address.model.todo.Title;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_FILENAME = "Filename is invalid.";
+    public static final String MESSAGE_INVALID_EXTENSION = "Filename must end with \".xml\".";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -127,6 +133,26 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    //@@author jitwei98
+    /**
+     * Parses a {@code String filename} into a {@code Path}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filename} is invalid.
+     */
+    public static Path parseFilename(String filename) throws ParseException {
+        requireNonNull(filename);
+
+        String trimmedFilename = filename.trim();
+        if (!isValidPath(trimmedFilename)) {
+            throw new ParseException(MESSAGE_INVALID_FILENAME);
+        }
+        if (!isValidXmlFilename(trimmedFilename)) {
+            throw new ParseException(MESSAGE_INVALID_EXTENSION);
+        }
+        return Paths.get("data", trimmedFilename);
     }
 
     //@@author jitwei98

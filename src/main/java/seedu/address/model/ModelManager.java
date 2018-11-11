@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,7 +14,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.export.CsvWriter;
+import seedu.address.export.Export;
+import seedu.address.export.ExportManager;
+import seedu.address.export.ImportManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
@@ -182,6 +187,33 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Import/ Export ==============================================================================
     @Override
+    public void importPersonsFromAddressBook(Path importFilePath) throws IOException, DataConversionException {
+        ImportManager importManager = new ImportManager(importFilePath);
+
+        // TODO: dont use null in orElse(), use orElseThrow()
+        ReadOnlyAddressBook addressBookImported = importManager.readAddressBook().orElse(null);
+        addPersonsToAddressBook(addressBookImported);
+
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addPersonsToAddressBook(ReadOnlyAddressBook addressBookImported) {
+        ObservableList<Person> persons = addressBookImported.getPersonList();
+        persons.forEach((person) -> {
+            // TODO: explain why this instead of addPerson() above in developer guide (indicate ab changed at the end)
+            versionedAddressBook.addPerson(person);
+        });
+    }
+
+    @Override
+    public void exportFilteredAddressBook(Path exportFilePath) throws IOException {
+        Export export = new ExportManager(filteredPersons, exportFilePath);
+        export.saveFilteredAddressBook();
+    }
+
+    @Override
     public void exportAddressBook() throws IOException {
         CsvWriter csvWriter = new CsvWriter(versionedAddressBook.getPersonList(), userPrefs.getExportCsvFilePath());
         csvWriter.write();
@@ -208,4 +240,9 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void finishTodo(Todo target) {
+        versionedAddressBook.removeTodo(target);
+        indicateAddressBookChanged();
+    }
 }

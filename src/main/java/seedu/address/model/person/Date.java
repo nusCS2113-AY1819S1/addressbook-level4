@@ -15,7 +15,8 @@ public class Date {
      * The first character of the date must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String DATE_VALIDATION_REGEX = "(0[1-9]|[1-2][0-9]|3[0-1])(0[0-9]|1[0-2])(\\d{4})";
+    public static final String DATE_VALIDATION_REGEX = "(0[1-9]|[1-2][0-9]|3[0-1])(0[1-9]|1[0-2])(\\d{4})";
+    //date regex here allows for 31 days every month of a 4 digit year.
 
     public final String value;
 

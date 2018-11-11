@@ -34,6 +34,18 @@ public class CommandBoxHandle extends NodeHandle<TextField> {
     }
 
     /**
+     * Presses tab to get suggestions for given input
+     * @param input input to type
+     */
+    public void pressTab(String input) {
+        click();
+        guiRobot.interact(() -> getRootNode().setText(input));
+        guiRobot.pauseForHuman();
+
+        guiRobot.type(KeyCode.TAB);
+    }
+
+    /**
      * Returns the list of style classes present in the command box.
      */
     public ObservableList<String> getStyleClass() {

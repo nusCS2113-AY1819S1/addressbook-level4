@@ -49,7 +49,7 @@ JitHub is a desktop personal assistant application that allows students to manag
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-W12-1/main/pull/121[#121], https://github.com/CS2113-AY1819S1-W12-1/main/pull/120[#120], https://github.com/CS2113-AY1819S1-W12-1/main/pull/95[#95]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-1/main/issues/77[77], https://github.com/CS2113-AY1819S1-W12-1/main/pull/95[92])
 ** Tools:
-*** Integrated a third party library (CalendarFx) to the project (https://github.com/CS2113-AY1819S1-W12-1/main/issues/77[#77])
+*** Integrate a third party library (CalendarFx) to the project (https://github.com/CS2113-AY1819S1-W12-1/main/issues/77[#77]) (Coming in v1.4)
 
 == Contributions to the User Guide
 

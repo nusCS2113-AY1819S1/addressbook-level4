@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
+    private static final String XML_FILE_EXTENSION = ".xml";
 
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
@@ -29,6 +30,22 @@ public class FileUtil {
             return false;
         }
         return true;
+    }
+
+    //@@author jitwei98
+    /**
+     * Returns true if {@code filename} is a valid filename for xml files,
+     * otherwise returns false.
+     * @param filename A string representing the file path. Cannot be null.
+     */
+    public static boolean isValidXmlFilename(String filename) {
+        if (filename.length() <= XML_FILE_EXTENSION.length()) {
+            return false;
+        }
+
+        // Compares the filename extension with the expected xml file extension
+        String filenameExtension = filename.substring(filename.length() - XML_FILE_EXTENSION.length());
+        return filenameExtension.equals(XML_FILE_EXTENSION);
     }
 
     /**

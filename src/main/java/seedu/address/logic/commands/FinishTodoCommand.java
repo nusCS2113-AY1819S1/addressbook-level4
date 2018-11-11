@@ -9,51 +9,52 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.todo.Todo;
 
+//@@author linnnruoo
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Complete a todo task identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class FinishTodoCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
-    public static final String COMMAND_ALIAS = "d";
+    public static final String COMMAND_WORD = "finishTodo";
+    public static final String COMMAND_ALIAS = "ftd";
 
 
     public static final String COMMAND_PARAMETERS = "Parameters: INDEX (must be a positive integer)\n";
     public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes the person identified by the index number used in the displayed person list.\n"
+        + ": Complete the to-do task identified by the index number used in the displayed to-do task list.\n"
         + COMMAND_PARAMETERS
         + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_FINISH_TODO_SUCCESS = "The selected to-do task is completed: %1$s";
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public FinishTodoCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Todo> lastShownList = model.getFilteredTodoList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
+        Todo todoToFinish = lastShownList.get(targetIndex.getZeroBased());
+        model.finishTodo(todoToFinish);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        return new CommandResult(String.format(MESSAGE_FINISH_TODO_SUCCESS, todoToFinish));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                || (other instanceof FinishTodoCommand // instanceof handles nulls
+                && targetIndex.equals(((FinishTodoCommand) other).targetIndex)); // state check
     }
 }
