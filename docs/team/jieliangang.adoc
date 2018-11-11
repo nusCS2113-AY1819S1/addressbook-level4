@@ -30,16 +30,15 @@ This project portfolio documents my contributions to the development of the CS21
 ** Project management:
 *** Managed releases `v1.1` - `v1.4` (6 releases) on GitHub
 *** Managed the issue tracker and project dashboard on GitHub
-*** In charge of Integration, Deliverable and Deadlines, and PR Reviews
 ** Enhancements to existing features:
 *** Updated the GUI color scheme https://github.com/CS2113-AY1819S1-T16-2/main/pull/134[#134]
-*** Updated the `add` and `edit` command to distinguish different employees by their unique work email address https://github.com/CS2113-AY1819S1-T16-2/main/pull/106[#106]
-*** Updated the `find` command to search for employees via their email address https://github.com/CS2113-AY1819S1-T16-2/main/pull/111[#111]
-*** Updated the `selectEvent` command to highlight selected event in UI https://github.com/CS2113-AY1819S1-T16-2/main/pull/142[#142]
+*** Updated the `add` and `edit` command to distinguish different employees by their unique work email address
+*** Updated the `find` command to search for employees via their email address
+*** Updated the UI for `selectEvent` command to highlight selected event
 *** Wrote additional tests for existing features to increase coverage from 82% to 87% https://github.com/CS2113-AY1819S1-T16-2/main/pull/128[#128] https://github.com/CS2113-AY1819S1-T16-2/main/pull/130[#130] https://github.com/CS2113-AY1819S1-T16-2/main/pull/131[#131]
 ** Documentation:
-*** Updated the User Guide for Practical Exam 1: https://github.com/CS2113-AY1819S1-T16-2/main/pull/84[#84] https://github.com/CS2113-AY1819S1-T16-2/main/pull/85[#85]
-*** Updated the Developer Guide to include `invite` and `select` command: https://github.com/CS2113-AY1819S1-T16-2/main/pull/58[#58] https://github.com/CS2113-AY1819S1-T16-2/main/pull/118[#118]
+*** Updated the User Guide to include `addEvent`, `editEvent`, `invite`, `remove` and `select` command
+*** Updated the Developer Guide to include `invite` and `select` command, use case and user stories.
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T16-2/main/pull/65[#65] https://github.com/CS2113-AY1819S1-T16-2/main/pull/77[#77] https://github.com/CS2113-AY1819S1-T16-2/main/pull/114[#114] https://github.com/CS2113-AY1819S1-T16-2/main/pull/122[#122]
 *** Reported/fixed feature bugs discovered during system testing (Issue: https://github.com/CS2113-AY1819S1-T16-2/main/issues/74[#74] https://github.com/CS2113-AY1819S1-T16-2/main/issues/75[#75] https://github.com/CS2113-AY1819S1-T16-2/main/issues/125[#125] https://github.com/CS2113-AY1819S1-T16-2/main/issues/126[#126])
