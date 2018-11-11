@@ -23,7 +23,7 @@ public class WelcomePanel extends UiPart<Region> implements Switchable {
     private static final Logger logger = LogsCenter.getLogger(WelcomePanel.class);
 
     private static final String FXML = "WelcomePanel.fxml";
-    private static final String defaultWelcomeMessage = "Welcome to Savee!\n"
+    private static final String defaultWelcomeMessage = "Welcome to FinancialPlanner!\n"
             + "To start off, press F1 or type help into the command box above for the help windows! Enjoy!";
 
     private final double prefPieChartWidth = 500.0;

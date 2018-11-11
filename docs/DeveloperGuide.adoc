@@ -397,13 +397,13 @@ image::SortSequenceDiagram.png[width:800]
 === List history feature
 ==== Current Implementation
 The list mechanism is facilitated by `ModelManager`.
-It represents an in-memory model of Savee and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
 ListCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode.
 
 This feature has only one keyword `list` but implements 3 different argument modes to allow users to access multiple versions of the same command.
 The three argument modes are as listed below:
 
-* No Argument mode -- Requires no arguments and returns the entire list of records in Savee.
+* No Argument mode -- Requires no arguments and returns the entire list of records in the FinancialPlanner.
 * Single Argument mode -- Requires a single date and returns all records containing that date
 * Dual Argument mode -- Requires 2 dates, a `start date` and an `end date`. It returns all records containing dates within the time frame of start date and end date, inclusive of both start date and end date
 The mechanism that facilitates these modes can be found in the `ListCommandParser#parse`. Below is a overview of the mechanism:
@@ -446,7 +446,7 @@ This feature allows the user to view a summary table of all their financial acti
 view the summary, one is summary by date which means the summary of each day in the period will be provided, summary by month or summary by category.
 
 The corresponding command required for this feature is `summary` and the user will have to supply 2 dates and a compulsory parameter `mode` which determines whether
-they are viewing *summary by date, by month or by category*. This feature involves most components ofSaveewith the exception of `Storage`. It can also be broadly split into
+they are viewing *summary by date, by month or by category*. This feature involves most components of FinancialPlanner with the exception of `Storage`. It can also be broadly split into
 2 phases, the logic phase which generates the summary and the UI phase which allows users to view the summary in a table.
 
 The sequence diagram below details the sequence of program executions for the logic phase.
@@ -473,7 +473,7 @@ The next phase of the program execution is performed in the UI components.
 ===== Aspect: Method of generating the summary
 
 * **Alternative 1 (current choice):** Generate the summary list whenever the summary command is called.
-** Pros: Easier to implement and maintain. Sufficient for the intended target audience of Savee.
+** Pros: Easier to implement and maintain. Sufficient for the intended target audience of FinancialPlanner.
 ** Cons: This requires looping through each record in the filtered record list obtained from the `Model`.
 To aid in the time complexity, the internal implementation of SummaryList was done using hash maps instead with allowed for
 constant time random access unlike list. However, the initial filtering is close to linear time complexity which could slow down the app if many records are inside.
@@ -526,7 +526,7 @@ within the `StatisticCommandParser#parse` method.
 
 image::StatisticParserActivityDiagram.png[width="790"]
 
-* Once `StatisticCommand#execute` is called, it will then search through the in-memory data of Savee and return a list containing all records within the date range and including
+* Once `StatisticCommand#execute` is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
 both the start dates and end dates. This functionality is facilitated by the `ModelManager` which is the class that manages all interactions between
 `Logic` and `Model` component, by`ModelManager#updateFilteredRecords`. The command then retrieves the filteredList from ModelManager and passes it into
 the constructor of `CategoryStatisticsList`.
@@ -538,7 +538,7 @@ is in the map.
 an event constructor before posting the event `ShowPieChartStatsEvent`.
 
 After the event is posted, the execution proceeds to the `UI phase` where there is a listener in `MainWindow` listening to this event. This is facilitated by
-the event system in Savee.  The sequence diagram below details the program flow of the functions executed in `UI phase`.
+the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in `UI phase`.
 
 image::StatisticUiSequenceDiagram.png[width="790"]
 
@@ -779,7 +779,7 @@ image::checkLimitSequenceDiagram.png[width:800]
 === Delete all the record whose date is required
 ==== Current implementation
 The delete by date entry mechanism is facilitated by `ModelManager`.
-It represents an in-memory model of theSaveeand is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
 
 DeleteByDateEntryCommand calls `ModelManager#getFilteredRecordList` to retrieve the list of all current records in the Financial Planner. Then, it will loop through the list of records and call `ModelManger#deleteRecord(Record record)` to delete the record whose date is required.
 
@@ -800,7 +800,7 @@ image::DeleteByDateEntrySequenceDiagram.png[width:800]
 // tag::exportexcel[]
 === Export the records from Financial Planner into the Excel file.
 ==== Current implementation
-The export into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of theSaveeand is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
+The export into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
 
 ExportExcelCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode. The List<Record> is retrieved by calling `ModelManager#getFilteredRecordList`.
 
@@ -907,7 +907,7 @@ image::ImportExcelSequenceDiagram.png[width:800]
 // tag::archive[]
 === Archive the record data from Financial Planner to the Excel file
 ==== Current implementation
-The archive into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of theSaveeand is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
+The archive into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
 
 ArchiveCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode. The List<Record> is retrieved by calling `ModelManager#getFilteredRecordList`.
 
@@ -1490,9 +1490,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |be able to see the history of my financial activities |Can keep track of my financial activities
 
-|`* * *` |user with many records in Savee |have an ordered list of records |locate records easily
+|`* * *` |user with many records in the FinancialPlanner |have an ordered list of records |locate records easily
 
-|`* * *` |user with many records in Savee |find a record easily by name |access any record I want easily
+|`* * *` |user with many records in the FinancialPlanner |find a record easily by name |access any record I want easily
 
 |`* * *` |user |be able to clear history |to reduce the clutter in the app
 
