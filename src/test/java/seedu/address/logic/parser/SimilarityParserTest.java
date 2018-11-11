@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import org.junit.Rule;
 import org.junit.Test;
+import seedu.address.request.requestcommands.RequestCommand;
+
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class SimilarityParserTest {
     @Rule
@@ -9,7 +12,7 @@ public class SimilarityParserTest {
 
     @Test
     public void performSimilarityCheck_addCommand() {
-
+        assertParseSuccess(parser, "reques", RequestCommand);
     }
 
     @Test
