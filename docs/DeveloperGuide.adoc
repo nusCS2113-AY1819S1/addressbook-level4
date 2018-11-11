@@ -168,7 +168,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EventListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -210,11 +210,11 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the event manager data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `event manager`, which `Person` can reference. This would allow `event manager` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `event manager`, which `Event` can reference. This would allow `event manager` to only require one `Tag` object per unique `Tag`, instead of each `Event` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
@@ -324,7 +324,7 @@ Step 2. The user executes `delete 5` command to delete the 5th event in the even
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/Happy Ben Birthday ...` to add a new event. The `add` command also calls `Model#commitEventManager()`, causing another modified event manager state to be saved into the `eventManagerStateList`.
+Step 3. The user executes `add n/Party ...` to add a new event. The `add` command also calls `Model#commitEventManager()`, causing another modified event manager state to be saved into the `eventManagerStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
@@ -351,7 +351,7 @@ to the right, pointing to the previously undone state, and restores the event ma
 
 [NOTE]
 If the `currentStatePointer` is at index `eventManagerStateList.size() - 1`, pointing to the latest event manager state,
-then there are no undone event manager states to restore. The `redo` command uses `Model#canRedoEventManager()` to check if this is the case.If so, it will return an error to the user rather than attempting to perform the redo.
+then there are no undone event manager states to restore. The `redo` command uses `Model#canRedoEventManager()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the event manager, such as
 `list`, will usually not call `Model#commitEventManager()`, `Model#undoEventManager()` or `Model#redoEventManager()`. Thus, the
@@ -363,7 +363,7 @@ Step 6. The user executes `clear`, which calls `Model#commitEventManager()`. Sin
 pointing at the end of the `eventManagerStateList`, all event manager states after the `currentStatePointer` will be
 purged.
 
-We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior
+We designed it this way because it no longer makes sense to redo the `add n/Party ...` command. This is the behavior
 that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
@@ -409,7 +409,7 @@ The comments feature is facilitated by `Comments` class in the Logic/Comments fo
 
 * `ReplyComment` -- Replies a comment given the line parameter in `replyComment(String comment, int line, String username)`
 
-* `CommentFacade` -- An implementation of the Facade design pattern to interact with `AddCommentCommand`, `DeleteCommentCommand` and `ReplyCommentCommand`. It contains `addComment(String input, String comment, String username)` to be used in the `AddCommentCommand` to add a comment, `deleteComment(String input, int line)` to be used in `DeleteCommentCommand` to delete a comment and `deleteComment(String input, int line)` to be used in `ReplyCommentCommand` to reply comments.
+* `CommentFacade` -- An implementation of the Facade design pattern to interact with AddCommentCommand, DeleteCommentCommand and ReplyCommentCommand. It contains addComment(String input, String comment, String username) to be used in AddCommentCommand to add a comment, deleteComment(String input, int line) to be used in DeleteCommentCommand to delete a comment and replyComment(String input, int line, String comment) to be used in ReplyCommentCommand to reply comments.
 
 The Command Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `ReplyCommentCommand` and `EditCommand` for the user to interact with the comment section. The features of the following classes are as such:
 
@@ -417,7 +417,7 @@ The Command Line Interface uses `AddCommentCommand`, `DeleteCommentCommand`, `Re
 
 * `DeleteCommentCommand` -- Deletes a comment using `CommentFacade` and `DeleteCommentCommandParser`
 
-* `ReplyCommentCommand` -- Replies a comment using `CommentFacade` and `ReplyCommentCommandParser`
+* `ReplyCommentCommand` -- Replies to a comment using `CommentFacade` and `ReplyCommentCommandParser`
 
 * `EditCommand` -- Resets the whole comment section using `editEventDescriptor` and `EditCommandParser`
 
@@ -425,7 +425,7 @@ Given below is an example usage scenario and how the Comments mechanism behaves 
 
 Step 1. The user launches the application, logs in and click on an event or types `select INDEX` into the CLI. The comment section will be seen along with other details in the `BrowserPanel`.
 
-Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. `AddCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into `eventmanager.xml`
+Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the 1st event in the Event Manager. `AddCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to add comment "May I ask, what is the attire for the event", into the comment section and stores the comment section into `eventmanager.xml`
 
 The following sequence diagram shows how the AddCommentCommand operation works:
 
@@ -434,8 +434,7 @@ image::addCommentSequenceDiagram.png[width="800"]
 
 [Note]
 ====
-*Detailed description of diagram*: +
-The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user.
+*Detailed description of diagram*: The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user.
 
 The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 ====
@@ -493,7 +492,7 @@ Step 4: The model is updated and committed, overwriting `eventmanager.xml`. The 
 
 Step 5: If the user decides to unregister from the event, the user executes `unregister 2`, and the `unregister` command gets the username and attendance in the same manner as the `register` command in Step 2.
 
-Step 6: The `unregister` command command tries to remove the username from the current attendance with `remove()`. If the username does not exist in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
+Step 6: The `unregister` command tries to remove the username from the current attendance with `remove()`. If the username does not exist in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
 
 Step 7: The model is updated and committed as in Step 3, and the event page is again reloaded.
 
@@ -530,35 +529,97 @@ image::registerSD.png[width="800"]
 ** Cons: More complexity for inserting in correct location.
 // end::rsvp[]
 
-// tag::sorting[]
+//tag::eventStatus&Reminder[]
+=== Event Status and Reminders
+==== Current Implementation
+The Event Status and Reminder feature consists of two commands periodically executed by `LogicManager`. Specifically, the `UpdateStatusCommand` and the `ReminderCommand`. The automated process is facilitated by the `Timer` and `TimerTask` classes in the `java.util` package. The `TimerTask` `updateEventStatus` has a period of 300,000 ms where it will execute an instance of the `UpdateStatusCommand`, while the `TimerTask` `checkEventReminders` has a period of 36,000,000 ms where it will execute an instance of the `ReminderCommand`.
+
+Both commands initially calls the model#getFilteredEventList() method to obtain the displayed list of events as `lastShownList`. 
+
+The *UpdateStatusCommand* updates the status of each event in the `lastShownList` using `Status#setStatus()` and `model#updateEvent()`. It then refreshes the displayed list by calling `model#updateFilteredEventList()`.
+
+The following sequence diagram shows how the UpdateStatusCommand works:
+
+.Sequence Diagram for UpdateStatusCommand
+image::Update-sequenceDiagram.png[width="800"]
+
+[NOTE]
+The Event Status feature is supported by the `Status` and `DateTime` field in the `Event`. Events with `DateTime` fields before the current `Date` will assume the `COMPLETED Status`, whereas those with `DateTime` fields after the current `Date` will take on the `UPCOMING Status`. 
+
+The *ReminderCommand* checks for the following in each event: 
+. `checkAttendeeKeywordsMatchEventAttendee` -- checks if the current user is registered as an attendee
+. `checkEventIsUpcoming` -- checks if the event is upcoming (happening in the next 24 hours)
+
+If the two conditions are satisfied, a `sendEventReminder` event containing the event's name and starting time is used to communicate with the `UiManager` to show an alert dialog using `Ui#showAlertDialogAndWait()` to display the event's information.
+
+The following sequence diagram shows how the ReminderCommand works:
+
+.Sequence Diagram for ReminderCommand
+image::Reminder-sequenceDiagram.png[width="800"]
+
+==== Design Considerations
+===== Aspect: Automated or user-enabled commands
+* **Alternative 1 (current choice):** Status updates and reminders automated using `Timer`.
+** Pros: Takes the updating and checking tasks off users. Less reliance on users' end also means that updates and reminders are executed more regularly.
+** Cons: Uses up more processing resources.
+* **Alternative 2:** Users have to run status updates and reminders checking.
+** Pros: Ensures that the updated status or reminders are provided to users when they want it.
+** Cons: Users may be looking at very outdated statuses and will not receive reminders if they forget to check for it.
+
+===== Aspect: Where to implement the update and reminder command
+* **Alternative 1 (current choice):** Both features are subclass of the `Command` superclass.
+** Pros: Easier implementation since there are already methods to execute commands. This implementation also allows users to call the commands if necessary.
+** Cons: Both features are not really commands that should be executed by the user and thus should not be subclasses of `Command`.
+* **Alternative 2:** Create a new class in `LogicManager` which is responsible for the execution.
+** Pros: The `TimerTask` could be implemented in the command and the `UpdateStatusCommand` and `ReminderCommand` need only be called once. This also decreases the coupling with `MainApp` and `EventManagerParser`.
+** Cons: A new method for executing the two commands would be required and the user would not be able to call for a status update should the need arise.
+
+===== Aspect: How to implement the status update
+* **Alternative 1 (current choice):** Implemented using pre-existing codes such as `EditEventDescriptor` and `model#updateEvent()`.
+** Pros: No need to add new codes for the implementation and add unnecessary complexities into the project code.
+** Cons: Inefficient method to update only the status since every other field in the event has to be copied over each time the status is updated.
+* **Alternative 2:** Write a `Event#setStatus()` method to update the status.
+** Pros: More efficient way of updating the statuses of events thus reducing the consumption of processing resources.
+** Cons: More lines of codes required and also adds to the complexity of the project code.
+
+===== Aspect: Whether to add implementation to allow users to set reminders
+* **Alternative 1 (current choice):** Reminders are automatically sent to users who registered for an event.
+** Pros: Saves users the trouble of having to set the reminders themselves.
+** Cons: Users cannot unsubscribe to the reminders for events that they have registered for.
+* **Alternative 2:** Allow users to set reminders as they wish.
+** Pros: Users who do not want reminders can refuse to set reminders.
+** Cons: Users would have to set their own reminders. Some users may choose to save themselves the trouble of setting reminders and miss the events they have registered for. 
+//end::eventStatus&Reminder[]
+
+//tag::sorting[]
 === Default sorting
 ==== Current Implementation
 Since our product is an event manager, events should be controlled and view in chronological order.
-To do this, `UniqueEventList` class is modify so as to sort the event list in Date order, follow by Name order. +
+To do this, `UniqueEventList` class was modified so as to sort the event list in Date order, follow by Name order. +
 
 Consider this scenario:
 
-Step 1: User launch application, then log in
+Step 1: User launches application, then logs in
 
-Step 2: User add a new event which will occur earlier than some of the event in the list +
-e.g: `add n/Happy Jack Birthday ... d/10/10/2018 20:30...`
+Step 2: User adds a new event which will occur before some of the other events in the list +
+e.g: `add n/Jack Birthday Party ... d/10/10/2018 20:30...`
 
-Step 3: When add method is called, it performs the intended operation, then sort the list before returning it to other components.
+Step 3: When add method is called, it performs the intended operation, then sorts the list before returning it to other components.
 
-Step 4: The event page is reloaded and display the newly added event in the correct place.
+Step 4: The event list panel is reloaded and displays the newly added event in the correct place.
 
 ==== Aspect: How to sort the list
-* **Alternative 1 (current choice):** Event list will be sort based on sort method implemented in `UniqueEventList` class to modify the internal list which event manager is backed on.
-** Pros: Easy to implement will minimum modification that could affect other components.
-** Cons: Every method that change the internal list (e.g: add, setEvent, delete) will need to be sorted at the end of the method.
+* **Alternative 1 (current choice):** Event list will be sorted based on sort method implemented in `UniqueEventList` class to modify the internal list which event manager is backed on.
+** Pros: Easy to implement with minimum modification that could affect other components.
+** Cons: Every method that changes the internal list (e.g: add, setEvent, delete) will need to implement the sorting method again at the end of the method.
 
 * **Alternative 2:** Sort only when we need to get the list if the list is not sorted.
 ** Pros: The easiest implementation without affecting other components.
-** Cons: The sort operation when called by other components, for example UI component will return operation to main thread, which severely affect testing with JUnit on JavaFX thread
+** Cons: The sort operation when called by other components, for example the UI component, will return operations to the main thread, which will severely affect testing with JUnit on JavaFX thread.
 
 * **Alternative 3:** Only sort the list for displaying on the UI
 ** Pros: Will perform minimal operation while still returning what we need to observe.
-** Cons: Very complicated implementation as UI are updated based on observing internal list. We will need a class to update the UI if we just want to sort the list on displaying.
+** Cons: Very complicated implementation as the UI is updated based on observing internal list. We will need a class to update the UI if we only want to sort the list on display.
 // end::sorting[]
 
 // tag::findEnhancement[]
@@ -566,46 +627,46 @@ Step 4: The event page is reloaded and display the newly added event in the corr
 ==== Current Implementation
 `find` command is used for better navigation. Therefore, it is enhanced to search for more properties in an Event. +
 
-`find` can search for any data with the default keywords and . If specific prefix is added, find can search for event that must contain that keyword in that specific field
+`find` can search for any data with the default keywords and . If specific prefixes are added, find can search for events that must contain that keyword in the specific fields.
 
 [NOTE]
-If there are more than 1 prefix of the same type, for example, `find n/new n/dark n/meeting`, this will be automatically combined together, which means this command will be assumed to be the same as `find n/new dark meeting` +
-Current version implementation using logic AND operator for different prefixes choice.
+If there are more than 1 prefixes of the same type, for example, `find n/new n/dark n/meeting`, they will be automatically combined together, which means that this command will be assumed to be the same as `find n/new dark meeting`. +
+Current version implementation uses logic AND operator for different prefixes.
 
 ==== Aspect: How to improve search
-* **Alternative 1 (current choice):** Modify the predicate to display the event that date contains one of the keywords
-** Pros: Follow the current structure of `find` command, which mean can reuse current resources
-** Cons: With the current implementation of the predicate, scaling will severely affect product performance
+* **Alternative 1 (current choice):** Modify the predicate to display the events that contain one of the keywords.
+** Pros: Follows the current structure of `find` command, which means that current resources can be reused.
+** Cons: With the current implementation of the predicate, scaling will severely affect product performance.
 
-==== Future enhancement: V2.0
-* Search for contained or exact keywords option
-* Search with  both `logic AND and OR operator` with different prefixes
-* Search for time range
+==== Future enhancement:
+* Search options for keywords contained or for the exact keywords. 
+* Search with  both `logic AND and OR operator` with different prefixes.
+* Search for events within a time range.
 //end::findEnhancement[]
 
 // tag::exportcalendar[]
 === Export RVSP-ed events to iCalendar file
 ==== Current implementation
-This feature will increase compatibility of Event Manager will other calendar app for better planning.
+This feature will increase the compatibility of Event Manager with other calendar app for better planning.
 
 Consider the following scenario:
 
-Step 1: User launch application, then log in
+Step 1: User launches the application, then logs in.
 
-Step 2: User execute 'export my event calendar' command. The export command receive argument to accept as filename
+Step 2: User executes `export my event calendar` command. The export command receive argument to accept as filename
 
-Step 3: Current user, who are logging in, will be used to receive an event filtered list that he/she registered for.
+Step 3: Current user, who is logged in, will be used to receive an event filtered list that he/she has registered for.
 
-Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in *data* folder
+Step 4: A FileOutputStream will be created to create new file/re-write if the file exists with the data from the filtered event list converted to iCalendar file format
 
 ==== Aspect: How to export the event list
-* **Alternative 1 (current implementation):** Using ical4j external library to create method to convert event to RFC5545 format, then stream to FileOutputStream with given filename from user. +
+* **Alternative 1 (current implementation):** Using ical4j external library to create methods to convert events to RFC5545 format, then stream to FileOutputStream with given filename from user. +
 All method are written in the `ExportCalendarCommand` class.
-** Pros: Easy to implement, can reuse current resources and easy to match wth the implementation of Attendance list
-** Cons: Violate some of the OOP design as the export method should be in the storage class
-* **Alternative 2:** Create class to write an .ics file with given RFC5545 standard
-** Pros: Have better control of the output file, since the ical4j support API has not been updated for a long time and currently show some lacking
-** Cons: Very complicated and time wasting
+** Pros: Easy to implement, can reuse current resources and easy to match wth the implementation of Attendance list.
+** Cons: Violates some of the OOP design as the export method should be in the storage class.
+* **Alternative 2:** Create a class to write an .ics file with given RFC5545 standard.
+** Pros: Have better control of the output file, since the ical4j support API has not been updated for a long time and currently shows some areas which are lacking.
+** Cons: Very complicated and time consuming.
 
 [NOTE]
 ====
@@ -613,7 +674,7 @@ Calendar will be exported to your src/data folder.
 ====
 
 ==== [Proposed]: Future enhancement
-Export should be able to export the attendance list of an event according to user preference
+Export should be able to export the attendance list of an event according to user preference.
 // end::exportcalendar[]
 
 // tag::dataencryption[]
@@ -830,359 +891,6 @@ A project often depends on third-party libraries. For example, event manager dep
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
-[[GetStartedProgramming]]
-[appendix]
-== Suggested Programming Tasks to Get Started
-
-Suggested path for new programmers:
-
-1. First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <<GetStartedProgramming-EachComponent>>.
-
-2. Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <<GetStartedProgramming-RemarkCommand>> explains how to go about adding such a feature.
-
-[[GetStartedProgramming-EachComponent]]
-=== Improving each component
-
-Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).
-
-[discrete]
-==== `Logic` component
-
-*Scenario:* You are in charge of `logic`. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in order to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.
-
-[TIP]
-Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
-
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all events in the list.
-+
-****
-* Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/address/logic/parser/EventManagerParser.java[`EventManagerParser`] is responsible for
-analyzing
-command
-words.
-* Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/EventManagerParser
-.java[`EventManagerParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute
-the
-
-same
-
-intended command.
-** Add new tests for each of the aliases that you have added.
-** Update the user guide to document the new aliases.
-** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
-****
-
-[discrete]
-==== `Model` component
-
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement
-a command such that the user is able to remove a particular tag from everyone in the event manager, but the model API
-does
-
-not
-
-support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
-
-[TIP]
-Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
-
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the event manager.
-+
-****
-* Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the
-link:{repoURL}/src/main/java/seedu/address/model/EventManager.java[`EventManager`] API need to be updated.
-** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/EventManager
-.java[`EventManager`]
-and
-link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`] classes can be used to implement the tag
-removal logic. link:{repoURL}/src/main/java/seedu/address/model/EventManager.java[`EventManager`] allows you to update a
-event,
-and
-link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`] allows you to update the tags.
-* Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/EventManager.java[`EventManager`]
-.
-Loop
-
-through
-
-each event, and remove the `tag` from each event.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager
-.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should
-call `EventManager#removeTag(Tag)`.
-** Add new tests for each of the new public methods that you have added.
-** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
-****
-
-[discrete]
-==== `Ui` component
-
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your
-event manager
-
-application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last event in the list. Your job is to implement improvements to the UI to solve all these problems.
-
-[TIP]
-Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
-
-. Use different colors for different tags inside event cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
-+
-**Before**
-+
-image::getting-started-ui-tag-before.png[width="300"]
-+
-**After**
-+
-image::getting-started-ui-tag-after.png[width="300"]
-+
-****
-* Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
-** Use the .css attribute `-fx-background-color` to add a color.
-** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
-* Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
-*** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
-****
-
-. Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
-+
-**Before**
-+
-image::getting-started-ui-result-before.png[width="200"]
-+
-**After**
-+
-image::getting-started-ui-result-after.png[width="200"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
-** Refer to link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
-* Solution
-** Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
-** Modify link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
-** You can write two different kinds of tests to ensure that the functionality works:
-*** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/EventManagerSystemTest
-.java[`EventManagerSystemTest#assertCommandBoxShowsDefaultStyle() and EventManagerSystemTest#assertCommandBoxShowsErrorStyle
-()
-`]
-
-to
-include
-verification for `ResultDisplay` as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
-*** Do read the commits one at a time if you feel overwhelmed.
-****
-
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total
-number of people in the event manager.
-+
-**Before**
-+
-image::getting-started-ui-status-before.png[width="500"]
-+
-**After**
-+
-image::getting-started-ui-status-after.png[width="500"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the event manager is updated.
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the event manager is updated.
-* Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of events when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleEventManagerChangedEvent
-(EventManagerChangedEvent)`] to update the number of events whenever there are new changes to the addressbook.
-** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/EventManagerSystemTest.java[`EventManagerSystemTest`]
-to
-also
-
-verify
-the
-new total number of events status bar.
-** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
-****
-
-[discrete]
-==== `Storage` component
-
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the event manager to the cloud. However, the current implementation of the application constantly saves the event manager after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the event manager storage.
-
-[TIP]
-Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
-
-. Add a new method `backupEventManager(ReadOnlyEventManager)`, so that the event manager can be saved in a fixed temporary
-
-location
-.
-+
-****
-* Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/EventManagerStorage.java[`EventManagerStorage`]
-interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and
-link:{repoURL}/src/main/java/seedu/address/storage/XmlEventManagerStorage.java[`XmlEventManagerStorage`] class.
-* Solution
-** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
-****
-
-[[GetStartedProgramming-RemarkCommand]]
-=== Creating a new command: `remark`
-
-By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
-
-*Scenario:* You are a software maintainer for `event manager`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
-
-==== Description
-Edits the remark for a event specified in the `INDEX`. +
-Format: `remark INDEX r/[REMARK]`
-
-Examples:
-
-* `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first event to `Likes to drink coffee.`
-* `remark 1 r/` +
-Removes the remark for the first event.
-
-==== Step-by-step Instructions
-
-===== [Step 1] Logic: Teach the app to accept 'remark' which does nothing
-Let's start by teaching the application how to parse a `remark` command. We will add the logic of `remark` later.
-
-**Main:**
-
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/EventManagerParser.java[`EventManagerParser`] to accept a
-`RemarkCommand`
-.
-
-**Tests:**
-
-. Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/EventManagerParserTest
-.java[`EventManagerParserTest`],
-which
-tests that typing "remark" returns an instance of `RemarkCommand`.
-
-===== [Step 2] Logic: Teach the app to accept 'remark' arguments
-Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
-
-**Main:**
-
-. Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
-. Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/EventManagerParser.java[`EventManagerParser`] to use the
-newly
-implemented
-`RemarkCommandParser`.
-
-**Tests:**
-
-. Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
-. Add `RemarkCommandParserTest` that tests different boundary values
-for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/EventManagerParserTest.java[`EventManagerParserTest`] to
-test
-
-that
-the
-correct command is generated according to the user input.
-
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each event later.
-
-**Main:**
-
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
-
-===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
-
-**Main:**
-
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/event/Address.java[`Address`], remove the regex and change the names accordingly).
-. Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
-
-**Tests:**
-
-. Add test for `Remark`, to test the `Remark#equals()` method.
-
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`].
-
-**Main:**
-
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`].
-. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the event will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `eventManager.xml` so that the application will load the sample data when you launch it.)
-
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
-
-**Main:**
-
-. Add a new Xml field for `Remark`.
-
-**Tests:**
-
-. Fix `invalidAndValidPersonEventManager.xml`, `typicalPersonsEventManager.xml`, `validEventManager.xml` etc., such that the
-
-XML
-
-tests
-
-will
-not fail due to a missing `<remark>` element.
-
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/event/Person.java[`Person`].
-
-**Tests:**
-
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the event that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
-
-===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
-
-**Main:**
-
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
-
-===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
-We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
-
-**Main:**
-
-. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a event.
-
-**Tests:**
-
-. Update `RemarkCommandTest` to test that the `execute()` logic works.
-
-==== Full Solution
-
-See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
-
 [appendix]
 == Product Scope
 
@@ -1204,19 +912,19 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
+|`* * *` |New user |See usage instructions |Refer to them when I forget how to use the App
 
 |`* * *` |New user |Create an account |RSVP for events
 
-|`* * *` |User |View event details | -
+|`* * *` |User |View event details |-
 
-|`* * *` |User |V |Set reminders for events
+|`* * *` |User |Be reminded of events I have registered for |Remember to attend those events
 
 |`* * *` |Busy Student |List Events |View all events to keep track
 
 |`* * *` |Admin |Create new events |Users can RSVP to them
 
-|`* * *` |Admin/User |View all participants | Get overall attendance for event
+|`* * *` |Admin/User |View all participants |Get overall attendance for event
 
 |`* * *` |Admin |Delete a event |Remove entries that I no longer need
 
@@ -1228,7 +936,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |User |Filter events | To list the types of events that are coming up
 
-|`* *` |User |See status of event |-
+|`* *` |User |See Statuses of events |Easily discern completed events from upcoming ones
 
 |`* *` |User | Able to post questions somewhere | I clarify any doubts regarding the event
 
@@ -1262,63 +970,47 @@ Extensions: +
 Use Case resumes at step 1.
 // end::authenticationUsecase[]
 
-
 // tag::rsvpUsecase[]
+// tag::reminderUsercase[]
 [discrete]
-=== Use case: Registration & Reminders
-*MSS*
+ === Use case: Registration & Reminders
+ *MSS*
 
-1.  User requests to list events.
-2.  EventManager displays list of events.
-3.  User selects event.
-4.  EventManager displays details of selected event, including current attendance list.
-5.  User requests to register for the event.
-6.  EventManager adds user to attendance list and displays confirmation message.
-+
-Use case ends
+ 1.  User requests to list events.
+ 2.  EventManager displays list of events.
+ 3.  User selects event that is [UPCOMNG].
+ 4.  EventManager displays details of selected event, including current attendance list.
+ 5.  User requests to register for the event.
+ 6.  EventManager adds user to attendance list and displays confirmation message.
+ 7.  Reminders will be sent out every 6 hours to remind the logged-in user of events that he/she has registered for, that are happening in the next 24 hours.
+ 8.  (Reminder sent) Reminder sends alert dialog and automatically redirects user to the specified event's information panel.
+ 9.  User hits enter to close reminder.
+ +
+// end::reminderUsecase[]
 
-*Extensions:*
-[none]
-* 5a. User is already registered for event.
-[none]
-** 5a1. EventManager displays error message.
-+
-Use case resumes at step 2.
+ *Extensions:*
+ [none]
+ * 5a. User is already registered for event.
+ [none]
+ ** 5a1. EventManager displays error message.
+ +
+ Use case resumes at step 2.
 
-[none]
-* 6a. User unregisters from event.
-[none]
-** 6a1. User requests to unregister for the event.
-** 6a2. EventManager removes user from attendance list and displays confirmation message.
-+
-Use case ends.
-
-* 6b. User sets reminder.
-[none]
-** 6b1. User sets reminder for event.
-** 6b2. EventManager sets reminder, alerting user 1 hour before the commencement of the event if the user is logged in.
-+
-Use case ends.
-
-* 6c. User is banned from event.
-[none]
-** 6c1. Admin requests to remove user from event.
-** 6c2. EventManager removes user from attendance list and displays confirmation message.
-+
-Use case ends.
-// end::rsvpUsecase[]
-
-[discrete]
-=== Use case: View event with reminders and remove reminder +
-*MSS*
-
-1.  User requests for list of events with reminder set. +
-2.  EventManager displays list of events. +
-3.  User selects event. +
-4. EventManager displays details of selected event. +
-5. User removes reminder on event. +
-6. EventManager removes reminder for the event and displays confirmation message. +
-Use case ends
+ [none]
+ * 6a. User unregisters from event.
+ [none]
+ ** 6a1. User requests to unregister for the event.
+ ** 6a2. EventManager removes user from attendance list and displays confirmation message.
+ +
+ Use case ends.
+ 
+ * 6b. User is banned from event.
+ [none]
+ ** 6c1. Admin requests to remove user from event.
+ ** 6c2. EventManager removes user from attendance list and displays confirmation message.
+ +
+ Use case ends.
+ // end::rsvpUsecase[]
 
 [discrete]
 === Use case: Comments
@@ -1343,20 +1035,21 @@ Extensions:
 ** 3a3. “deleteComment INDEX L/LINE”  (only for admin) it will delete the comment at event INDEX and comment at LINE of comment section. +
 Resume use case at step 4.
 
+*Use Case: Export calendar*: +
 [discrete]
-=== Use Case: Export calendar:
-*MSS*
-
+ === Use Case: Export calendar:
+ *MSS*
+ 
 1. User request to export registered event list with given name +
 2. EventManager execute exportCalendarCommand
 3. A filename with .ics extension create or re-write in src/data/ folder
 
 *Extensions*
-[none]
-0a) User viewing current list of registered events.
+ [none]
+ 0a) User viewing current list of registered events.
 
-1a) User modified registered list with command.
-    1a1) The new list is exported in .ics file.
+ 1a) User modified registered list with command.
+     1a1) The new list is exported in .ics file.
 
 (For all use cases below, the *System* is the `EventManager` and the *Actor* is the `user`, unless specified otherwise)
 
@@ -1395,6 +1088,7 @@ _{More to be added}_
 .  Should be able to hold up to 1000 events without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
+_{More to be added}_
 
 [appendix]
 == Glossary
@@ -1405,6 +1099,24 @@ Windows, Linux, Unix, OS-X
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
 
+[appendix]
+== Product Survey
+
+*Product Name*
+
+Author: ...
+
+Pros:
+
+* ...
+* ...
+
+Cons:
+
+* ...
+* ...
+
+[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -1418,7 +1130,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample events. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 . Saving window preferences
 
@@ -1426,37 +1138,26 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-// tag::authenticationTest[]
-=== Authentication
+_{ more test cases ... }_
 
-. Signing up for an account with a taken username
+=== Deleting a event
 
-.. Prerequisites: Signed up for an account with a non-taken username.
-.. Test case: `signup u/TAKENUSERNAME p/VALIDPASSWORD` +
-   Expected: Will display an error saying that account already exists.
-
-. Signing up or logging in to an account while already logged in
-
-.. Prerequisites: Already logged in to an existing account.
-.. Test case: `signup u/NEWUSERNAME p/VALIDPASSWORD` +
-   Expected: Will display an error saying that the current user is logged in.
-.. Test case: `login u/EXISTINGUSER p/VALIDPASSWORD` +
-   Expected: Will display an error saying that the current user is logged in.
-
-. Logging in to a non-existent account
-.. Test case: `login u/NEWUSERNAME p/VALIDPASSWORD` +
-   Expected: Will display an error saying that credentials are incorrect.
-
-// end::authenticationTest[]
-
-=== Deleting an event
-
-. Deleting an event while all events are listed
+. Deleting a event while all events are listed
 
 .. Prerequisites: List all events using the `list` command. Multiple events in the list.
 .. Test case: `delete 1` +
-   Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Timestamp in the status bar is updated.
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size or less than 0)  +
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
+
+_{ more test cases ... }_
+
+=== Saving data
+
+. Dealing with missing/corrupted data files
+
+.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+
+_{ more test cases ... }_
