@@ -138,5 +138,4 @@ public class XmlAdaptedProductTest {
                         invalidTags, VALID_REMAINING_ITEMS);
         Assert.assertThrows(IllegalValueException.class, product::toModelType);
     }
-
 }
