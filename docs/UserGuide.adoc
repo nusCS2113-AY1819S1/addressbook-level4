@@ -563,6 +563,7 @@ Examples:
 
 [IMPORTANT]
 Shortlisting process is a 5-stage process. To exit from this process, enter `cancel` command as explained in <<Exits from any intermediate command: `cancel`>>.
+You cannot shortlist a blacklisted candidate or the same candidate who is already shortlisted for the same job offer.
 
 Format: `shortlist`
 

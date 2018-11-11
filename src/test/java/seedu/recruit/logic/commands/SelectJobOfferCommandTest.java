@@ -39,11 +39,11 @@ public class SelectJobOfferCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Index lastPersonIndex = Index.fromOneBased(model.getFilteredCompanyJobList().size());
+        Index lastJobOfferIndex = Index.fromOneBased(model.getFilteredCompanyJobList().size());
 
         assertExecutionSuccess(INDEX_FIRST);
         assertExecutionSuccess(INDEX_SECOND);
-        assertExecutionSuccess(lastPersonIndex);
+        assertExecutionSuccess(lastJobOfferIndex);
     }
 
     @Test

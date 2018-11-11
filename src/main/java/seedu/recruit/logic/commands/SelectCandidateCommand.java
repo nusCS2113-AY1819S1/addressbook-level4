@@ -37,7 +37,7 @@ public class SelectCandidateCommand extends Command {
 
     public static final String MESSAGE_SELECT_PERSON_FAILURE_DUE_TO_BLACKLIST_TAG =
             "Sorry! You can't shortlist a blacklisted candidate. \n"
-            + "Please select again!";
+            + "Please select again!\n";
 
     public static final String MESSAGE_CONFIRMATION_FOR_SHORTLIST =
             "for job offer: %1$s, for company: %2$s.\n";
