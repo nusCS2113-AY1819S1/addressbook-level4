@@ -14,7 +14,7 @@ public class Messages {
             "The record index provided is invalid.\n";
 
     public static final String MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE =
-            "The record date provided is non-existent.\n";
+            "There is no record whose date is required.\n";
 
     public static final String MESSAGE_RECORDS_LISTED_OVERVIEW =
             "%1$d records listed!\n";
@@ -41,14 +41,11 @@ public class Messages {
     public static final String MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY =
             "The Excel file named %1$s has been written successfully in path: %2$s.\n";
 
-    public static final String MESSAGE_EXPORT_COMMAND_ERRORS = "There is error, "
-            + "it can either be no record found to export or the Excel file you want to write is opened.";
+    public static final String MESSAGE_EXPORT_COMMAND_ERRORS = "There is error to export.\n";
 
-    public static final String MESSAGE_ARCHIVE_COMMAND_ERRORS = "There is error, "
-            + "it can either be no record found to archive or the Excel file you want to write is opened.";
+    public static final String MESSAGE_ARCHIVE_COMMAND_ERRORS = "There is error to archive.\n";
 
-    public static final String MESSAGE_IMPORT_COMMAND_ERRORS = "There is error, "
-            + "it can either be no record found to import or the Excel file you want to read is opened.";
+    public static final String MESSAGE_IMPORT_COMMAND_ERRORS = "There is no record found.\n";
 
     public static final String MESSAGE_ARCHIVE_SUCCESSFULLY =
             " The records in the Excel file will be no longer in the current Financial Planner.\n";

@@ -135,3 +135,5 @@ include::../DeveloperGuide.adoc[tag=list]
 include::../DeveloperGuide.adoc[tag=summary]
 
 include::../DeveloperGuide.adoc[tag=stats]
+
+include::../DeveloperGuide.adoc[tag=welcomepanel]

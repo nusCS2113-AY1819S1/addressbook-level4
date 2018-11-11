@@ -21,6 +21,7 @@ import static seedu.planner.model.record.Date.MESSAGE_DATE_LOGICAL_CONSTRAINTS;
 
 import org.junit.Test;
 
+import seedu.planner.logic.commands.SummaryByCategoryCommand;
 import seedu.planner.logic.commands.SummaryByDateCommand;
 import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
@@ -32,6 +33,64 @@ public class SummaryCommandParserTest {
     private final SummaryCommandParser parser = new SummaryCommandParser();
     private final String invalidKeyword = "mth";
 
+    @Test
+    public void parse_noKeywordFound_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE);
+
+        // Correct argument but missing "date"
+        String test = " " + PREFIX_DATE + " " + VALID_DATE_START + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, expectedMessage);
+
+        // Correct argument but missing "month"
+        test = " " + PREFIX_DATE + " " + VALID_MONTH_START + " " + VALID_MONTH_END;
+        assertParseFailure(parser, test, expectedMessage);
+
+        // Correct argument but missing "category"
+        test = " " + PREFIX_DATE + " " + VALID_DATE_START + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, expectedMessage);
+    }
+
+    @Test
+    public void parse_keywordFoundButInvalidPrefix_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE);
+
+        // empty command argument
+        String test = PREAMBLE_WHITESPACE;
+        assertParseFailure(parser, test, expectedMessage);
+
+        // missing date prefix
+        test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " "
+                + " " + VALID_DATE_START + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, expectedMessage);
+        test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " "
+                + " " + VALID_MONTH_START + " " + VALID_MONTH_END;
+        assertParseFailure(parser, test, expectedMessage);
+        test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " "
+                + " " + VALID_DATE_START + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, expectedMessage);
+
+        // incorrect prefix
+        test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " "
+                + PREFIX_MONEYFLOW + " " + VALID_DATE_START + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, expectedMessage);
+        test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " "
+                + PREFIX_MONEYFLOW + " " + VALID_MONTH_START + " " + VALID_MONTH_END;
+        assertParseFailure(parser, test, expectedMessage);
+        test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " "
+                + PREFIX_MONEYFLOW + " " + VALID_DATE_START + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, expectedMessage);
+
+    }
+
+    @Test
+    public void parse_wrongKeyword_throwsParseException() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE);
+        String test = " " + invalidKeyword + " " + PREFIX_DATE + " "
+                + VALID_DATE_START + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, expectedMessage);
+    }
+
+    /*======================================== Tests for date mode ===================================================*/
     @Test
     public void parse_dateModeValid_success() {
         SummaryCommand expectedCommand = new SummaryByDateCommand(
@@ -49,101 +108,29 @@ public class SummaryCommandParserTest {
     }
 
     @Test
-    public void parse_monthModeValid_success() {
-        SummaryCommand expectedCommand = new SummaryByMonthCommand(
-                new Month(VALID_MONTH_START), new Month(VALID_MONTH_END));
+    public void parse_dateModeValidPrefixNoArgument_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByDateCommand.MESSAGE_USAGE);
 
-        String test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD
-                + " " + PREFIX_DATE + " " + VALID_MONTH_START + " " + VALID_MONTH_END;
-        assertParseSuccess(parser, test, expectedCommand);
-
-        // leading and trailing whitespaces do not affect
-        test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + PREAMBLE_WHITESPACE
-                + " " + PREFIX_DATE + PREAMBLE_WHITESPACE + " " + VALID_MONTH_START
-                + PREAMBLE_WHITESPACE + " " + VALID_MONTH_END + PREAMBLE_WHITESPACE;
-        assertParseSuccess(parser, test, expectedCommand);
-    }
-
-    @Test
-    public void parse_noKeywordFound_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE);
-
-        // Correct argument but missing "date"
-        String test = " " + PREFIX_DATE + " " + VALID_DATE_START + " " + VALID_DATE_END;
-        assertParseFailure(parser, test, expectedMessage);
-
-        // Correct argument but missing "month"
-        test = " " + PREFIX_DATE + " " + VALID_MONTH_START + " " + VALID_MONTH_END;
+        String test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " ";
         assertParseFailure(parser, test, expectedMessage);
     }
 
     @Test
-    public void parse_wrongKeyword_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE);
-        String test = " " + invalidKeyword + " " + PREFIX_DATE + " "
-                + VALID_DATE_START + " " + VALID_DATE_END;
-        assertParseFailure(parser, test, expectedMessage);
-    }
-
-    @Test
-    public void parse_invalidPrefix_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE);
-
-        // empty command argument
-        String test = PREAMBLE_WHITESPACE;
-        assertParseFailure(parser, test, expectedMessage);
-
-        // missing date prefix
-        test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " "
-                + " " + VALID_DATE_START + " " + VALID_DATE_END;
-        assertParseFailure(parser, test, expectedMessage);
-        test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " "
-                + " " + VALID_MONTH_START + " " + VALID_MONTH_END;
-        assertParseFailure(parser, test, expectedMessage);
-
-        // incorrect prefix
-        test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " "
-                + PREFIX_MONEYFLOW + " " + VALID_DATE_START + " " + VALID_DATE_END;
-        assertParseFailure(parser, test, expectedMessage);
-        test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " "
-                + PREFIX_MONEYFLOW + " " + VALID_MONTH_START + " " + VALID_MONTH_END;
-        assertParseFailure(parser, test, expectedMessage);
-    }
-
-    @Test
-    public void parse_invalidArgumentCount_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE);
+    public void parse_dateModeValidPrefixInvalidArgumentCount_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByDateCommand.MESSAGE_USAGE);
 
         // Single argument after prefix (Date mode)
         String test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_DATE_END;
-        assertParseFailure(parser, test, expectedMessage);
-
-        // Single argument after prefix (Month mode)
-        test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_MONTH_END;
         assertParseFailure(parser, test, expectedMessage);
 
         // More than 2 argument after prefix (Date mode)
         test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_DATE_START
                 + " " + VALID_DATE_START + " " + VALID_DATE_END;
         assertParseFailure(parser, test, expectedMessage);
-
-        // More than 2 argument after prefix (Month mode)
-        test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_MONTH_START
-                + " " + VALID_MONTH_START + " " + VALID_MONTH_END;
-        assertParseFailure(parser, test, expectedMessage);
-
-        // No arguments (Date mode)
-        test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " ";
-        assertParseFailure(parser, test, expectedMessage);
-
-        // No arguments (Date mode)
-        test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD
-                + " " + " " + PREFIX_DATE + " ";
-        assertParseFailure(parser, test, expectedMessage);
     }
 
     @Test
-    public void parse_dateModeInvalidArgumentOrder_failure() {
+    public void parse_dateModeValidPrefixInvalidArgumentOrder_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByDateCommand.MESSAGE_USAGE);
         String test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_DATE_END
                 + " " + VALID_DATE_START;
@@ -151,15 +138,7 @@ public class SummaryCommandParserTest {
     }
 
     @Test
-    public void parse_monthModeInvalidArgumentOrder_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByMonthCommand.MESSAGE_USAGE);
-        String test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + " " + PREFIX_DATE + " " + VALID_MONTH_END
-                + " " + VALID_MONTH_START;
-        assertParseFailure(parser, test, expectedMessage);
-    }
-
-    @Test
-    public void parse_dateModeInvalidDate_failure() {
+    public void parse_dateModeValidPrefixValidArgumentCountInvalidDate_failure() {
         // both dates have invalid format
         String test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + INVALID_DATE
                 + " " + INVALID_DATE;
@@ -188,7 +167,65 @@ public class SummaryCommandParserTest {
     }
 
     @Test
-    public void parse_monthModeInvalidMonth_failure() {
+    public void parse_dateModeInvalidDateInvalidFormat_throwsFirstException() {
+        String test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + INVALID_DATE
+                + " " + ILLOGICAL_DATE;
+        assertParseFailure(parser, test, MESSAGE_DATE_CONSTRAINTS);
+        test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + ILLOGICAL_DATE
+                + " " + INVALID_DATE;
+        assertParseFailure(parser, test, MESSAGE_DATE_LOGICAL_CONSTRAINTS);
+    }
+
+    /*======================================== Tests for month mode ==================================================*/
+
+    @Test
+    public void parse_monthModeValid_success() {
+        SummaryCommand expectedCommand = new SummaryByMonthCommand(
+                new Month(VALID_MONTH_START), new Month(VALID_MONTH_END));
+
+        String test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " "
+                + PREFIX_DATE + " " + VALID_MONTH_START + " " + VALID_MONTH_END;
+        assertParseSuccess(parser, test, expectedCommand);
+
+        // leading and trailing whitespaces do not affect
+        test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + PREAMBLE_WHITESPACE
+                + " " + PREFIX_DATE + PREAMBLE_WHITESPACE + " " + VALID_MONTH_START
+                + PREAMBLE_WHITESPACE + " " + VALID_MONTH_END + PREAMBLE_WHITESPACE;
+        assertParseSuccess(parser, test, expectedCommand);
+    }
+
+    @Test
+    public void parse_monthModeValidPrefixNoArgument_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByMonthCommand.MESSAGE_USAGE);
+
+        String test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " ";
+        assertParseFailure(parser, test, expectedMessage);
+    }
+
+    @Test
+    public void parse_monthModeValidPrefixInvalidArgumentCount_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByMonthCommand.MESSAGE_USAGE);
+
+        // Single argument after prefix (Month mode)
+        String test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_MONTH_END;
+        assertParseFailure(parser, test, expectedMessage);
+
+        // More than 2 argument after prefix (Month mode)
+        test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_MONTH_START
+                + " " + VALID_MONTH_START + " " + VALID_MONTH_END;
+        assertParseFailure(parser, test, expectedMessage);
+    }
+
+    @Test
+    public void parse_monthModeValidPrefixInvalidArgumentOrder_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByMonthCommand.MESSAGE_USAGE);
+        String test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + " " + PREFIX_DATE + " " + VALID_MONTH_END
+                + " " + VALID_MONTH_START;
+        assertParseFailure(parser, test, expectedMessage);
+    }
+
+    @Test
+    public void parse_monthModeValidPrefixValidArgumentCountInvalidMonth_failure() {
         // both months have invalid format
         String test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + INVALID_FORMAT_MONTH
                 + " " + INVALID_FORMAT_MONTH;
@@ -217,16 +254,6 @@ public class SummaryCommandParserTest {
     }
 
     @Test
-    public void parse_monthModeInvalidDateInvalidFormat_throwsFirstException() {
-        String test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + INVALID_DATE
-                + " " + ILLOGICAL_DATE;
-        assertParseFailure(parser, test, MESSAGE_DATE_CONSTRAINTS);
-        test = " " + SummaryByDateCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + ILLOGICAL_DATE
-                + " " + INVALID_DATE;
-        assertParseFailure(parser, test, MESSAGE_DATE_LOGICAL_CONSTRAINTS);
-    }
-
-    @Test
     public void parse_monthModeInvalidMonthInvalidFormat_throwsFirstException() {
         String test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + INVALID_FORMAT_MONTH
                 + " " + INVALID_LOGICAL_MONTH;
@@ -234,5 +261,92 @@ public class SummaryCommandParserTest {
         test = " " + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + INVALID_LOGICAL_MONTH
                 + " " + INVALID_FORMAT_MONTH;
         assertParseFailure(parser, test, MESSAGE_MONTH_LOGICAL_CONSTRAINTS);
+    }
+
+    /*======================================== Tests for category mode ===============================================*/
+
+    @Test
+    public void parse_categoryModeValid_success() {
+        SummaryCommand expectedCommand = new SummaryByCategoryCommand(
+                new Date(VALID_DATE_START), new Date(VALID_DATE_END));
+
+        String test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " "
+                + PREFIX_DATE + " " + VALID_DATE_START + " " + VALID_DATE_END;
+        assertParseSuccess(parser, test, expectedCommand);
+
+        // leading and trailing whitespaces do not affect
+        test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + PREAMBLE_WHITESPACE
+                + " " + PREFIX_DATE + PREAMBLE_WHITESPACE + " " + VALID_DATE_START
+                + PREAMBLE_WHITESPACE + " " + VALID_DATE_END + PREAMBLE_WHITESPACE;
+        assertParseSuccess(parser, test, expectedCommand);
+    }
+
+    @Test
+    public void parse_categoryModeValidPrefixNoArgument_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByCategoryCommand.MESSAGE_USAGE);
+
+        String test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " ";
+        assertParseFailure(parser, test, expectedMessage);
+    }
+
+    @Test
+    public void parse_categoryModeValidPrefixInvalidArgumentCount_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByCategoryCommand.MESSAGE_USAGE);
+
+        // Single argument after prefix (Date mode)
+        String test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, expectedMessage);
+
+        // More than 2 argument after prefix (Date mode)
+        test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_DATE_START
+                + " " + VALID_DATE_START + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, expectedMessage);
+    }
+
+    @Test
+    public void parse_categoryModeValidPrefixInvalidArgumentOrder_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByCategoryCommand.MESSAGE_USAGE);
+        String test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_DATE_END
+                + " " + VALID_DATE_START;
+        assertParseFailure(parser, test, expectedMessage);
+    }
+
+    @Test
+    public void parse_categoryModeValidPrefixValidArgumentCountInvalidDate_failure() {
+        // both dates have invalid format
+        String test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + INVALID_DATE
+                + " " + INVALID_DATE;
+        assertParseFailure(parser, test, MESSAGE_DATE_CONSTRAINTS);
+
+        // 1 date has invalid format
+        test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + INVALID_DATE
+                + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, MESSAGE_DATE_CONSTRAINTS);
+        test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_DATE_START
+                + " " + INVALID_DATE;
+        assertParseFailure(parser, test, MESSAGE_DATE_CONSTRAINTS);
+
+        // both dates are invalid
+        test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + ILLOGICAL_DATE
+                + " " + ILLOGICAL_DATE;
+        assertParseFailure(parser, test, MESSAGE_DATE_LOGICAL_CONSTRAINTS);
+
+        // 1 date is invalid
+        test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + ILLOGICAL_DATE
+                + " " + VALID_DATE_END;
+        assertParseFailure(parser, test, MESSAGE_DATE_LOGICAL_CONSTRAINTS);
+        test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + VALID_DATE_START
+                + " " + ILLOGICAL_DATE;
+        assertParseFailure(parser, test, MESSAGE_DATE_LOGICAL_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_categoryModeInvalidDateInvalidFormat_throwsFirstException() {
+        String test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + INVALID_DATE
+                + " " + ILLOGICAL_DATE;
+        assertParseFailure(parser, test, MESSAGE_DATE_CONSTRAINTS);
+        test = " " + SummaryByCategoryCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + ILLOGICAL_DATE
+                + " " + INVALID_DATE;
+        assertParseFailure(parser, test, MESSAGE_DATE_LOGICAL_CONSTRAINTS);
     }
 }

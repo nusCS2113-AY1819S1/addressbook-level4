@@ -191,7 +191,7 @@ link:{repoURL}/src/main/java/seedu/expense/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `FinancialPlannerParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+.  The command execution can affect the `Model` (e.g. adding a record) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -460,12 +460,12 @@ implementation.
 parameters also occur during this stage.
 . After the SummaryCommandObject is created, `SummaryByDateCommand#execute` is called. The responsibility of SummaryByDateCommand is a manager that has retrieves information from model and passes it to other components.
 SummaryByDateCommand gets the filtered list from Model using `Model#getFilteredRecordList` and passes it to the constructor of SummaryByDateList. The creates `SummaryList` object which is then
-passed into a `ShowSummaryTableEvent` before trigger.
+passed into a `ShowSummaryTableEvent` before triggering the event.
 . The entire logic process is the same for SummaryByMonthCommand and SummaryByCategoryCommand but uses different lists.
 
 The next phase of the program execution is performed in the UI components.
 
-. `MainWindow` will listen out of the `ShowSummaryTableEvent` and render all Main UI panels invisible before rendering `StatsDisplayPanel` visible.
+. `MainWindow` will listen for the `ShowSummaryTableEvent` and render all Main UI panels invisible before rendering `StatsDisplayPanel` visible.
 . It then calls the handler function in `StatsDisplayPanel` which will create tabs and call the constructor of `SummaryDisplay`.
 . Within the constructor of `SummaryDisplay`, the table is created and the SummaryList is converted into a Ui friendly list.
 
@@ -524,7 +524,7 @@ parameter to StatisticCommandParser.
 * The StatisticCommandParser will then parse the arguments and create a new StatisticCommand object before returning its reference. The activity diagram below details the mechanism
 within the `StatisticCommandParser#parse` method.
 
-image::StatisticParserActivityDiagram.png[width="500"]
+image::StatisticParserActivityDiagram.png[width="790"]
 
 * Once `StatisticCommand#execute` is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
 both the start dates and end dates. This functionality is facilitated by the `ModelManager` which is the class that manages all interactions between
@@ -540,14 +540,14 @@ an event constructor before posting the event `ShowPieChartStatsEvent`.
 After the event is posted, the execution proceeds to the `UI phase` where there is a listener in `MainWindow` listening to this event. This is facilitated by
 the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in `UI phase`.
 
-image::StatisticUiSequenceDiagram.png[width="800"]
+image::StatisticUiSequenceDiagram.png[width="790"]
 
 * When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
 This will make all children hidden from view in the UI which ensures that the UI is displayed correctly.
 * As shown above, the function `StatsDisplayPanel#handleShowPieChartDataEvent` is called which will call the constructor of `MixedPieChartData`. The detailed execution details within this class is as shown in
 the activity diagram below.
 
-image::StatisticUiActivityDiagram.png[width="800"]
+image::StatisticUiActivityDiagram.png[width="790"]
 
 The program flow is then as shown above where the `CategoryBreakdown` is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
 In the current implementation, whenever `stats` is called, 2 tabs will be created, one for total income and one for total expense. Thus, the same program sequence after construction for
@@ -555,15 +555,41 @@ In the current implementation, whenever `stats` is called, 2 tabs will be create
 
 The sequence diagram below details the program flow after the constructor of CategoryBreakdown class is called.
 
-image::StatisticUiDetailedSequenceDiagram.png[width="800"]
+image::StatisticUiDetailedSequenceDiagram.png[width="790"]
 
 [NOTE]
 Note that the CustomLegend class is located within the CustomPieChart class which inherits from the JavaFX PieChart class. This legend class can
 only be accessed within CustomPieChart for security purposes.
 
 ==== Design Considerations
+===== Aspect: Data structure to support statistic command
+* **Alternative 1 (current choice):** The pie chart breakdown is regenerated from the filtered list every time this command is called.
+** Pros: Reduce overhead during normal operations like adding, deleting and editing if we do not have to update the statistics in real time.
+** Cons: If the command is called multiple times, this process could be repeated many times which may make the app sluggish when there are many records.
+
+* **Alternative 2:** Use a data structure to store the statistic information when there is mutation of data
+** Pros: Since the statistics are constantly updated, whenever the command is called, system can read directly and not have to recompute.
+** Cons: Adds overhead to usual operations. Benefits may not be visible if the command is not called frequently.
 
 //end::stats[]
+
+//tag::welcomepanel[]
+=== View current month's breakdown
+This feature does not require user to type any command into the command box or update manually. It provides information about the category breakdown for
+the current month, presenting income and expense statistics together in one panel. In addition, to improve usability, accelerators were assigned to the menu bar
+and *HOME* key is the corresponding accelerator for this feature.
+
+The current implementation of this feature closely follows the *observer design pattern*. Whenever the system detects changes to the underlying list, like adding, deleting or editing
+records, it updates a listener which is attached to the `FilteredList` recordsInCurrentMonth present in ModelManager. To check if the current month is the same as the cached month,
+the listener will run a check by creating a separate `DateIsWithinIntervalPredicate` and comparing it with the current `Predicate` of the filtered list.
+This listener will then process changes in the list and compute a `CategoryStatisticsList` before passing it into the constructor of `UpdateWelcomePanelEvent`.
+Then the event is triggered, and the corresponding listener on the UI side is called.
+
+The program flow on the UI side is similar to that of viewing category breakdown of a time period with the exception that tabs are not created.
+
+The accelerators and the menu bar is connected to the UI component and will trigger `MainWindow#handleHome` whenever the accelerator *HOME* key or *Home* is selected using the menu.
+
+//end::welcomepanel[]
 
 // tag::findtag[]
 === Find records by tag feature
@@ -668,7 +694,7 @@ The user enters two dates (or one date) after the one "d/" index.
 
 The following sequence diagram shows how the deleteLimit operation works:
 
-image::deleteLimitSequenceDiagram.png[width:800]
+image::DeleteLimitSequenceDiagram.png[width:800]
 // end::deleteLimit[]
 // tag::editLimit[]
 
@@ -684,7 +710,7 @@ The user enter two dates after the one "d/" index followed by money with m/ inde
 
 The following sequence diagram shows how the limit operation works:
 
-image::editLimitSequenceDiagram.png[width:800]
+image::EditLimitSequenceDiagram.png[width:800]
 // end::editLimit[]
 // tag::addMonthlyLimit[]
 ==== addMonthlyLimit feature
@@ -700,7 +726,7 @@ The user only enter money after the one "m/" index.
 
 The following sequence diagram shows how the limit operation works:
 
-image::addMonthlyLimitSequenceDiagram.png[width:800]
+image::AddMonthlyLimitSequenceDiagram.png[width:800]
 // end::addMonthlyLimit[]
 // tag::editMonthlyLimit[]
 ==== editMonthlyLimit feature
@@ -716,7 +742,7 @@ The user only enter money after the one "m/" index.
 
 The following sequence diagram shows how the limit operation works:
 
-image::editMonthlyLimitSequenceDiagram.png[width:800]
+image::EditMonthlyLimitSequenceDiagram.png[width:800]
 // end::editMonthlyLimit[]
 // tag::deleteMonthlyLimit[]
 ==== deleteMonthlyLimit feature
@@ -732,7 +758,7 @@ The user will only enter the command word.
 
 The following sequence diagram shows how the limit operation works:
 
-image::deleteMonthlyLimitSequenceDiagram.png[width:800]
+image::DeleteMonthlyLimitSequenceDiagram.png[width:800]
 // end::deleteMonthlyLimit[]
 // tag::checkLimit[]
 ==== checkLimit feature
@@ -1105,14 +1131,14 @@ We have two types of tests:
 
 .  *GUI Tests* - These are tests involving the GUI. They include,
 .. _System Tests_ that test the entire App by simulating user actions on the GUI. These are in the `systemtests` package.
-.. _Unit tests_ that test the individual components. These are in `seedu.expense.ui` package.
+.. _Unit tests_ that test the individual components. These are in `seedu.planner.ui` package.
 .  *Non-GUI Tests* - These are tests not involving the GUI. They include,
 ..  _Unit tests_ targeting the lowest level methods/classes. +
-e.g. `seedu.expense.commons.StringUtilTest`
+e.g. `seedu.planner.commons.StringUtilTest`
 ..  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
-e.g. `seedu.expense.storage.StorageManagerTest`
+e.g. `seedu.planner.storage.StorageManagerTest`
 ..  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
-e.g. `seedu.expense.logic.LogicManagerTest`
+e.g. `seedu.planner.logic.LogicManagerTest`
 
 
 === Troubleshooting Testing
@@ -1176,14 +1202,14 @@ Each individual exercise in this section is component-based (i.e. you would not 
 [TIP]
 Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
 
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
+. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all records in the list.
 +
 ****
 * Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/expense/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/expense/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] is responsible for analyzing command words.
+** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
+** link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] is responsible for analyzing command words.
 * Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
+** Modify the switch statement in link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
 ** Add new tests for each of the aliases that you have added.
 ** Update the user guide to document the new aliases.
 ** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
@@ -1192,21 +1218,21 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 [discrete]
 ==== `Model` component
 
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the expense book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
+*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the financial planner, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
 
 [TIP]
 Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
 
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the expense book.
+. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the financial planner.
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/expense/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/expense/model/FinancialPlanner.java[`FinancialPlanner`] API need to be updated.
+** The link:{repoURL}/tree/master/src/main/java/seedu/planner/model/Model.java[`Model`] and the link:{repoURL}/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java[`FinancialPlanner`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/expense/model/FinancialPlanner.java[`FinancialPlanner`] and link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/expense/model/FinancialPlanner.java[`FinancialPlanner`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java[`FinancialPlanner`] and link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`] classes can be used to implement the tag removal logic. link:{repoURL}/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java[`FinancialPlanner`] allows you to update a record, and link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/expense/model/FinancialPlanner.java[`FinancialPlanner`]. Loop through each person, and remove the `tag` from each person.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/expense/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/expense/model/ModelManager.java[`ModelManager`] should call `FinancialPlanner#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java[`FinancialPlanner`]. Loop through each record, and remove the `tag` from each record.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}/tree/master/src/main/java/seedu/planner/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/tree/master/src/main/java/seedu/planner/model/ModelManager.java[`ModelManager`] should call `FinancialPlanner#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
 ****
@@ -1214,12 +1240,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your expense book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your financial planner application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
 
-. Use different colors for different tags inside person cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
+. Use different colors for different tags inside record cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
 +
 **Before**
 +
@@ -1231,16 +1257,16 @@ image::getting-started-ui-tag-after.png[width="300"]
 +
 ****
 * Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/expense/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
+** The tag labels are created inside link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/RecordCard.java[the `RecordCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
 ** Use the .css attribute `-fx-background-color` to add a color.
-** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
+** You may wish to modify link:{repoURL}/tree/master/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
 * Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
+** You can modify the existing test methods for `RecordCard` 's to include testing the tag's color as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
 *** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
 ****
 
-. Modify link:{repoURL}/src/main/java/seedu/expense/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/expense/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
+. Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
 +
 **Before**
 +
@@ -1252,19 +1278,19 @@ image::getting-started-ui-result-after.png[width="200"]
 +
 ****
 * Hints
-** link:{repoURL}/src/main/java/seedu/expense/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/expense/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/expense/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
-** Refer to link:{repoURL}/src/main/java/seedu/expense/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
+** link:{repoURL}/tree/master/src/main/java/seedu/planner/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
+** Refer to link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
 * Solution
-** Modify link:{repoURL}/src/main/java/seedu/expense/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
-** Modify link:{repoURL}/src/main/java/seedu/expense/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
+** Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
+** Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
 ** You can write two different kinds of tests to ensure that the functionality works:
 *** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/FinancialPlannerSystemTest.java[`FinancialPlannerSystemTest#assertCommandBoxShowsDefaultStyle() and FinancialPlannerSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
+*** The system tests link:{repoURL}/tree/master/src/test/java/systemtests/FinancialPlannerSystemTest.java[`FinancialPlannerSystemTest#assertCommandBoxShowsDefaultStyle() and FinancialPlannerSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu/expense/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the expense book.
+. Modify the link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the financial planner
 +
 **Before**
 +
@@ -1276,30 +1302,30 @@ image::getting-started-ui-status-after.png[width="500"]
 +
 ****
 * Hints
-** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/expense/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the expense book is updated.
+** link:{repoURL}/tree/master/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
+** link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the financial planner is updated.
 * Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/expense/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of persons when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/expense/ui/StatusBarFooter.java[`StatusBarFooter#handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
-** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/FinancialPlannerSystemTest.java[`FinancialPlannerSystemTest`] to also verify the new total number of persons status bar.
+** Modify the constructor of link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of records when the application just started.
+** Use link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java[`StatusBarFooter#handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent)`] to update the number of records whenever there are new changes to the financial planner.
+** For tests, modify link:{repoURL}/tree/master/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of record status, just like what we did for save location and sync status.
+** For system tests, modify link:{repoURL}/tree/master/src/test/java/systemtests/FinancialPlannerSystemTest.java[`FinancialPlannerSystemTest`] to also verify the new total number of records status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
 ****
 
 [discrete]
 ==== `Storage` component
 
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the expense book to the cloud. However, the current implementation of the application constantly saves the expense book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the expense book storage.
+*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the financial planner to the cloud. However, the current implementation of the application constantly saves the financial planner after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the financial planner storage.
 
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupFinancialPlanner(ReadOnlyFinancialPlanner)`, so that the expense book can be saved in a fixed temporary location.
+. Add a new method `backupFinancialPlanner(ReadOnlyFinancialPlanner)`, so that the financial planner can be saved in a fixed temporary location.
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/expense/storage/FinancialPlannerStorage.java[`FinancialPlannerStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/expense/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/expense/storage/XmlFinancialPlannerStorage.java[`XmlFinancialPlannerStorage`] class.
+** Add the API method in link:{repoURL}/tree/master/src/main/java/seedu/planner/storage/FinancialPlannerStorage.java[`FinancialPlannerStorage`] interface.
+** Implement the logic in link:{repoURL}/tree/master/src/main/java/seedu/planner/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/tree/master/src/main/java/seedu/planner/storage/XmlFinancialPlannerStorage.java[`XmlFinancialPlannerStorage`] class.
 * Solution
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
@@ -1309,18 +1335,18 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 
 By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
+*Scenario:* You are a software maintainer for `financialplanner`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
-Edits the remark for a person specified in the `INDEX`. +
+Edits the remark for a record specified in the `INDEX`. +
 Format: `remark INDEX r/[REMARK]`
 
 Examples:
 
 * `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first person to `Likes to drink coffee.`
+Edits the remark for the first record to `Likes to drink coffee.`
 * `remark 1 r/` +
-Removes the remark for the first person.
+Removes the remark for the first record.
 
 ==== Step-by-step Instructions
 
@@ -1329,13 +1355,13 @@ Let's start by teaching the application how to parse a `remark` command. We will
 
 **Main:**
 
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/expense/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] to accept a `RemarkCommand`.
+. Add a `RemarkCommand` that extends link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
+. Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] to accept a `RemarkCommand`.
 
 **Tests:**
 
 . Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/expense/logic/parser/FinancialPlannerParserTest.java[`FinancialPlannerParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
+. Add new test method to link:{repoURL}/tree/master/src/test/java/seedu/planner/logic/parser/FinancialPlannerParserTest.java[`FinancialPlannerParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
 
 ===== [Step 2] Logic: Teach the app to accept 'remark' arguments
 Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
@@ -1344,50 +1370,50 @@ Let's teach the application to parse arguments that our `remark` command will ac
 
 . Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
 . Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] to use the newly implemented `RemarkCommandParser`.
+. Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] to use the newly implemented `RemarkCommandParser`.
 
 **Tests:**
 
 . Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
 . Add `RemarkCommandParserTest` that tests different boundary values
 for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/expense/logic/parser/FinancialPlannerParserTest.java[`FinancialPlannerParserTest`] to test that the correct command is generated according to the user input.
+. Modify link:{repoURL}/tree/master/src/test/java/seedu/planner/logic/parser/FinancialPlannerParserTest.java[`FinancialPlannerParserTest`] to test that the correct command is generated according to the user input.
 
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/expense/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
+===== [Step 3] Ui: Add a placeholder for remark in `RecordCard`
+Let's add a placeholder on all our link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/RecordCard.java[`RecordCard`] s to display a remark for each record later.
 
 **Main:**
 
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/expense/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
+. Add a `Label` with any random text inside link:{repoURL}/tree/master/src/main/resources/view/RecordListCard.fxml[`RecordListCard.fxml`].
+. Add FXML annotation in link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/RecordCard.java[`RecordCard`] to tie the variable to the actual label.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
+. Modify link:{repoURL}/tree/master/src/test/java/guitests/guihandles/RecordCardHandle.java[`RecordCardHandle`] so that future tests can read the contents of the remark label.
 
 ===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
+We have to properly encapsulate the remark in our link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
 
 **Main:**
 
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/expense/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
+. Add `Remark` to model component (you can copy from link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Name.java[`Name`], remove the regex and change the names accordingly).
 . Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
 
 **Tests:**
 
 . Add test for `Remark`, to test the `Remark#equals()` method.
 
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`].
+===== [Step 5] Model: Modify `Record` to support a `Remark` field
+Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`].
 
 **Main:**
 
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`].
+. Add `getRemark()` in link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`].
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/expense/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `financialPlanner.xml` so that the application will load the sample data when you launch it.)
+. Modify link:{repoURL}/tree/master/src/main/java/seedu/expense/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `financialPlanner.xml` so that the application will load the sample data when you launch it.)
 
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/expense/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
+===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedRecord` class
+We now have `Remark` s for `Record` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/tree/master/src/main/java/seedu/planner/storage/XmlAdaptedRecord.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
 
 **Main:**
 
@@ -1397,24 +1423,24 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 
 . Fix `invalidAndValidPersonFinancialPlanner.xml`, `typicalPersonsFinancialPlanner.xml`, `validFinancialPlanner.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/expense/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`].
+===== [Step 6b] Test: Add withRemark() for `RecordBuilder`
+Since `Record` can now have a `Remark`, we should add a helper method to link:{repoURL}/tree/master/src/test/java/seedu/planner/testutil/PersonBuilder.java[`RecordBuilder`], so that users are able to create remarks when building a link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`].
 
 **Tests:**
 
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/expense/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the person that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/expense/testutil/TypicalPersons.java[`TypicalPersons`].
+. Add a new method `withRemark()` for link:{repoURL}/tree/master/src/test/java/seedu/planner/testutil/RecordBuilder.java[`RecordBuilder`]. This method will create a new `Remark` for the record that it is currently building.
+. Try and use the method on any sample `Record` in link:{repoURL}/tree/master/src/test/java/seedu/planner/testutil/TypicalRecords.java[`TypicalRecords`].
 
 ===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/expense/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
+Our remark label in link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/RecordCard.java[`RecordCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
 
 **Main:**
 
-. Modify link:{repoURL}/src/main/java/seedu/expense/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
+. Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/RecordCard.java[`RecordCard`]'s constructor to bind the `Remark` field to the `Record` 's remark.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/seedu/expense/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
+. Modify link:{repoURL}/tree/master/src/test/java/seedu/planner/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
 
 ===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
 We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
@@ -1436,13 +1462,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* has a need to manage his finances using other means because user is not as good at saving
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: manage income and spending faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -1529,9 +1555,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *MSS*
 
-.  User requests to add record into Savee.
-.  System adds the record into the system.
-.  System displays the record added to the user.
+1.  User requests to add record into Savee.
+2.  System adds the record into the system.
+3.  System displays the record added to the user.
 +
 Use case ends.
 
@@ -1541,42 +1567,65 @@ Use case ends.
 ** Savee throws invalid command error and shows an example command input needed.
 ** Use case ends.
 
-* 1b. User's input parameters are missing or invalid. +
+* 1a. User's input parameters are missing or invalid. +
 ** Savee throws invalid command error and notifies user of the correct format.
 ** Use case ends.
 
-* 1c. The record to be added is a duplicate of existing record in the system.
+* 1a. The record to be added is a duplicate of existing record in the system.
 ** Savee throws duplicated record error.
 ** Use case ends.
 
 [discrete]
-=== 2.  Use case: Delete expense entry whose date is required. [Linh Chi]
+=== 2.  Use case: delete past finance records
 
 *MSS*
 
-.  User requests to delete records whose date is required. User enters the date entry he/she wants to delete.
-.  Savee checks whether the day required is valid.
-.  Savee deletes all records whose date is required.
+1.  User requests to delete record.
+2.  System deletes the record from the system and shows the user the result.
 +
 Use case ends.
 
 *Extensions*
 
-* 1a. User’s command is of invalid form.
-** Savee throws invalid command error.
-** Use case resumes at step 1.
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
 
-* 1b. The date entered is of incorrect format or invalid.
+* 1a. User's input parameters are missing or invalid. +
 ** Savee throws invalid command error and notifies user of the correct format.
-** Use case resumes at step 1.
+** Use case ends.
 
 [discrete]
-=== 3.  Use case: See history of expenses for a certain period [Vincent]
+=== 3.  Use case: update past finance records with information
 
 *MSS*
 
-.  User requests to see history within a certain date period.
-.  Savee returns the history of all expenses within the period.
+1.  User requests to update records and enters the parameters needed.
+2.  System updates the record in the system and shows the user the result.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 1a. The record to be added is a duplicate of existing record in the system.
+** Savee throws duplicated record error.
+** Use case ends.
+
+[discrete]
+=== 4.  Use case: See history of expenses for a certain period
+
+*MSS*
+
+1.  User requests to see history within a certain date period.
+2.  Savee returns the history of all expenses within the period.
 +
 Use case ends.
 
@@ -1586,11 +1635,11 @@ Use case ends.
 ** Savee throws invalid command error.
 ** Use case resumes at step 1.
 
-* 1b. User does not specify any arguments.
+* 1a. User does not specify any arguments.
 ** Savee returns all records in the Savee.
 ** Use case ends.
 
-* 1c. The arguments are of incorrect format
+* 1a. The arguments are of incorrect format
 ** Savee throws invalid command error and notifies user of the correct format.
 ** Use case resumes at step 1.
 
@@ -1599,31 +1648,50 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 4.  Use case: Clear history of expenses
+[discrete]
+=== 5.  Use case: Delete expense entry whose date is required. [Linh Chi]
 
 *MSS*
 
-.  User requests to clear history of expenses.
-.  Savee requests for period of time of expenses to clear.
-.  User enters period of time to clear expenses for.
-.  Savee deletes all entries within specific time period.
+1.  User requests to delete records whose date is required. User enters the date entry he/she wants to delete.
+2.  Savee checks whether the day required is valid.
+3.  Savee deletes all records whose date is required.
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. User’s input is not a valid period of time
-** Savee throws invalid input command
-** Use case continues from step 2
+* 1a. User’s command is of invalid.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
+
+* 1b. The date entered is of incorrect format.
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case resumes at step 1.
+
+* 1c. There is no date entered.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
+
 
 [discrete]
-=== 5.  Use case: View breakdown of financial activity into category [Vincent]
+=== 6.  Use case: Clear history of expenses
 
 *MSS*
 
-.  User requests for category breakdown within a period of time.
-.  System retrieves the category breakdown report.
-.  System shows the report to the user in format of pie charts.
+1.  User requests to clear history of expenses.
+2.  System clears the history
++
+Use case ends.
+
+[discrete]
+=== 7.  Use case: View breakdown of financial activity into category
+
+*MSS*
+
+1.  User requests for category breakdown within a period of time.
+2.  System retrieves the category breakdown report.
+3.  System shows the report to the user in format of pie charts.
 +
 Use case ends.
 
@@ -1633,7 +1701,7 @@ Use case ends.
 ** System throws invalid command error and shows an example command input needed.
 ** Use case ends.
 
-* 1b. User's input parameters are missing or invalid. +
+* 1a. User's input parameters are missing or invalid. +
 ** System throws invalid command error and notifies user of the correct format.
 ** Use case ends.
 
@@ -1642,14 +1710,14 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 6.  Use case: Search expenses based on category [Zhi Thon]
+=== 8.  Use case: Search expenses based on category [Zhi Thon]
 
 *MSS*
 
-.  User requests to search for expenses by category
-.  Savee requests for category of expenditure
-.  User enters category desired
-.  Savee displays each expenditure with name category and the total expenditure.
+1.  User requests to search for expenses by category
+2.  Savee requests for category of expenditure
+3.  User enters category desired
+4.  Savee displays each expenditure with name category and the total expenditure.
 +
 Use case ends.
 
@@ -1659,13 +1727,13 @@ Use case ends.
 ** Savee shows no expenditure for selected category
 
 [discrete]
-=== 7.  Use case: View daily/monthly summary within a period of time [Vincent]
+=== 9.  Use case: View daily/monthly summary within a period of time
 
 *MSS*
 
-.  User requests for summary report within a period of time.
-.  System retrieves the summary report.
-.  System shows the report to the user in format of a table.
+1.  User requests for summary report within a period of time.
+2.  System retrieves the summary report.
+3.  System shows the report to the user in format of a table.
 +
 Use case ends.
 
@@ -1684,83 +1752,242 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 8.  Use case: Usage Instructions guide
+=== 10.  Use case: Usage Instructions guide
 
 *MSS*
 
-.  User requests for usage instructions
-.  Savee displays different commands
-.  User inputs which command he wants to find out about
-.  Financial displays information on selected command
+1.  User requests for usage instructions
+2.  System returns a help window with all the instructions.
 +
 Use case ends.
-
-*Extensions*
-
-* 3a User enter invalid command
-** Savee throws invalid command error.
-** Use case resumes at step 2.
 
 [discrete]
-=== 9.  Use case: Undo expense entry
+=== 11.  Use case: Undo record entry
 
 *MSS*
 
-.  User requests for undo
-.  Savee confirms the undo request
-.  User enter the item they would like to undo
-.  Savee undo the deleted item
+1.  User requests for undo
+2.  Savee undo the last undoable command
 +
 Use case ends.
-
-*Extensions*
-
-* 3a User enter invalid command
-** Savee throws invalid command error.
-** Use case resumes at step 2
 
 [discrete]
-=== 10. Use case: Add notes to each expense
+=== 12. Use case: Add notes to each expense
 
 *MSS*
 
-.  User requests for adding notes
-.  Financial Planner request for the date of entry and confirm the request
-.  User enter the notes
+1.  User requests for adding notes and enters the notes
+2.  Savee adds the notes into the system and notifies the user.
 +
 Use case ends.
 
 *Extensions*
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
 
-* 3a User enter invalid command
-** Savee throws invalid command error.
-** Use case resumes at step 2
-
-[discrete]
-=== 11. Use case: Create daily limit for expenses [Oscar]
-
-*MSS*
-
-.  User requests to create daily limit for expenses
-.  Savee requests for the maximum amount for the day
-.  User enters the amount.
-.  Savee confirms amount with user.
-.  User confirms the amount.
-.  Savee records the amount in the hard drive
-+
-Use case ends.
-
-*Extensions*
-
-* 6a. The location for the record is invalid.
-** Savee throws invalid location error and prompts for new location.
-** User enters a new location.
-** Savee requests for confirmation.
-** User confirms the location
+* 1a. User's input parameters are missing or invalid. +
+** Savee throws invalid command error and notifies user of the correct format.
 ** Use case ends.
 
 [discrete]
-=== 12. Use case: Export record data from Savee to Excel file [Linh Chi]
+=== 13. Use case: Create a normal limit for a period of time or a day [Oscar]
+
+*MSS*
+
+1.  User requests to create a normal limit for expenses different period of time or a day.
+2.  Savee requests for the dateStart and dateEnd of that period of time or the date of the day and the maximum amount of spending.
+3.  User enters the dateStart and dateEnd or the date and the amount of spending.
+4.  Savee records the limit in the hard drive.
+5.  Savee keeps tracking the spending during limit's date period of time or that day.
+6.  Savee warns user when the total spend exceeds the limit amount of spending.
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. The dateStart is later than dateEnd. +
+** System shows date error.
+** Use case ends.
+
+* 3c. There is already a limit for the time period or the day. +
+** System shows redundant limit error.
+** Use case ends.
+
+[discrete]
+=== 14. Use case: Edit an existing normal limit [Oscar]
+
+*MSS*
+
+1.  User requests to edit an existing normal limit.
+2.  Savee requests for the new maximum amount of spending for the period of time or the day.
+3.  User enters the dateStart and dateEnd or the date and the new amount of spending.
+4.  Savee updates the new limit in the hard drive.
+5.  Savee keeps tracking the spending during the limit's date period of time or that day.
+6.  Savee warns user when the total spend exceeds the limit amount of spending.
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. The dateStart is later than dateEnd. +
+** System shows date error.
+** Use case ends.
+
+* 3c. There is no existing limit for the time period or the day. +
+** System shows no existing limit error.
+** Use case ends.
+
+* 3d. The edit limit is exactly the same as the original one. +
+** System shows same limit error.
+** Use case ends.
+
+[discrete]
+=== 15. Use case: Delete an existing limit [Oscar]
+
+*MSS*
+
+1.  User requests to delete an existing limit.
+2.  Savee requests for the date period of the limit to be deleted.
+3.  User enters the dateStart and dateEnd or the date.
+4.  Savee deletes the limit in the hard drive.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. The dateStart is later than dateEnd. +
+** System shows date error.
+** Use case ends.
+
+* 3c. There is no existing limit for the time period or the day. +
+** System shows no existing limit error.
+** Use case ends.
+
+[discrete]
+=== 16. Use case: Add a monthly limit [Oscar]
+
+*MSS*
+
+1.  User requests to add the monthly limit.
+2.  Savee requests the monthly maximum amount of spending.
+3.  User enters the maximum amount of spending.
+4.  Savee adds the monthly limit.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. There is already a monthly limit. +
+** System shows existing monthly limit error.
+** Use case ends.
+
+[discrete]
+=== 17. Use case: Edit the monthly limit [Oscar]
+
+*MSS*
+
+1.  User requests to edit the monthly limit.
+2.  Savee requests the new monthly maximum amount of spending.
+3.  User enters the new maximum amount of spending.
+4.  Savee updates the monthly limit.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. There is no monthly limit. +
+** System shows no monthly limit error.
+** Use case ends.
+
+[discrete]
+=== 18. Use case: Delete the monthly limit [Oscar]
+
+*MSS*
+
+1.  User requests to delete the monthly limit.
+2.  Savee updates the monthly limit.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 2a. There is no monthly limit. +
+** System shows no monthly limit error.
+** Use case ends.
+
+[discrete]
+=== 19. Use case: Check all the existing limits [Oscar]
+
+*MSS*
+
+1.  User requests to check all the existing limits.
+2.  Savee displays all the existing limits.
++
+Use case ends.
+
+[discrete]
+=== 20. Use case: Export record data from Savee to Excel file [Linh Chi]
 
 *MSS*
 
@@ -1801,7 +2028,7 @@ Use case ends.
 
 
 [discrete]
-==== 14. Use case: Import record data from Excel file to Savee. [Linh Chi]
+==== 21. Use case: Import the Excel file into Financial Planner. [Linh Chi]
 
 *MSS*
 
@@ -1823,7 +2050,7 @@ Use case ends.
 ** Use case resumes at step 1.
 
 [discrete]
-=== 15. Use case: Archive the record data from Savee to Excel file. [Linh Chi]
+=== 22. Use case: Archive the records data into Excel file. [Linh Chi]
 
 *MSS*
 
@@ -1861,20 +2088,27 @@ Use case ends.
 ** Savee throws invalid command error and notifies user the first data should be earlier or equal to the second date.
 ** Use case resumes at step 1.
 
-
 [discrete]
-=== 16. Use case: Freely edit expenses tags
+=== 23. Use case: See monthly financial activity
 
 *MSS*
 
-.  User requests to edit expenses tags.
-.  Savee requests for date of entry to edit tags
-.  User enters date to edit entry for
-.  Savee shows list of entries on specified date
-.  User enters entry to edit.
-.  Savee shows current tags of selected entry.
-.  User enters tag to remove
-.  Savee removes tag entered.
+1. User requests to see monthly financial activity.
+2. Savee returns a report on monthly financial activity.
+
+[discrete]
+=== 24. Use case: Freely edit expenses tags
+
+*MSS*
+
+1.  User requests to edit expenses tags.
+2.  Savee requests for date of entry to edit tags
+3.  User enters date to edit entry for
+4.  Savee shows list of entries on specified date
+5.  User enters entry to edit.
+6.  Savee shows current tags of selected entry.
+7.  User enters tag to remove
+8.  Savee removes tag entered.
 
 *Extensions*
 
@@ -1891,13 +2125,49 @@ Use case ends.
 * 7a User’s input tag does not exist
 ** Savee adds tag to entry.
 
+[discrete]
+=== 25. View bank balance
+
+*MSS*
+
+1.  User requests to view bank balance.
+2.  Savee asks for authentication.
+3.  User provides authentication.
+4.  Savee verifies the authentication and shows the bank balance.
+
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's authentication is invalid. +
+** Savee returns error and asks for authentication again.
+** Use case resumes at 2.
+
+[discrete]
+=== 26. Adjust configurations
+
+*MSS*
+
+1.  User requests to change application configurations.
+2.  Savee returns the configuration page.
+3.  User changes configuration.
+4.  Savee confirms the configuration and applies it to the system.
+
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 records without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  Should be able to retain data in the event of app exiting or crashing.
+.  The data is not expected to be secure.
+.  The application can function as per normal in the absence of network.
+.  For best view, the optimal resolution is 1080p (1920 x 1080).
+
 
 [appendix]
 == Glossary
@@ -1910,6 +2180,13 @@ A contact detail that is not meant to be shared with others
 
 [[Finance-activity]] Finance Activity::
 Activity where an individual engage in exchange of money, can comprise of income or spending
+
+[[Resolution]] Resolution:
+Resolution refers to the number of pixels that are available in the screen. It determines how wide or tall a screen will look like.
+
+[[Appname]] App Name: (FinancialPlanner/Savee)
+Both FinancialPlanner and Savee refers to the app. Savee is the official name of the app when it is marketed for the users. FInancialPlanner
+is the name used when referring to the app in the developer guide and code.
 
 [appendix]
 == Product Survey
@@ -1942,7 +2219,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample records. The window size may not be optimum.
 
 . Saving window preferences
 
@@ -1950,15 +2227,150 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+=== Listing by date
+. Listing with no argument
+.. Test case: Enter `list`
+.. Expected: System would list down all the records along with a result saying that it has listed all records.
+
+. Listing with arguments but no prefix
+.. Test case: Enter `list abcd`
+.. Expected: System will throw error saying invalid command and show the correct format
+
+. Listing with arguments but wrong prefix
+.. Test case: Enter `list m/1-1-2018 12-12-2018`
+.. Expected: System will throw error saying invalid command and show the correct format
+
+. Listing with valid prefix but invalid arguments
+.. Test case: Enter `list d/1-1-201`
+.. Expected: System will throw error saying invalid command and show the correct format
+
+. Listing with valid prefix but 1 date
+.. Test case: Enter `list d/1-1-2018`
+.. Expected: System will list only records of that date and show a command result stating the date that the records are listed by
+
+. Listing with valid prefix and 2nd date earlier than 1st date
+.. Test case: Enter `list d/1-1-2018 12-12-2017`
+.. Expected: System will throw error saying invalid command and show the correct format
+
+. Listing with valid prefix and 1st date earlier than 2nd date
+.. Test case: Enter `list d/1-1-2018 12-12-2018`
+.. Expected: System will list all records equal to or between the 2 dates
+
+=== Viewing summary
+. Entering `summary` command without modes
+.. Test case: Enter `summary abcd`
+.. Expected: System would throw an error saying invalid command and provide the error message for the generic summary command
+
+. Entering `summary` command with modes but no arguments
+.. Test case: Enter `summary date` or `summary month` or `summary category`
+.. Expected:
+.. System would throw an error saying invalid command.
+.. System will provide a different error message depending on the mode and provide more information about the format of
+the command in that specific mode.
+.. for e.g. `summary date` will give you an error message specific to viewing summary by date and `summary month` will give you
+and error message specific to viewing summary by month.
+
+. Entering `summary` command with modes and invalid prefixes or no prefix
+.. Test case: Enter `summary date m/` or `summary month m/` or `summary category m/`
+.. Expected: System would throw error saying invalid command and provide the error message for the generic summary command
+
+. Entering `summary` command with modes and date prefix but only 1 argument
+.. Test case: Enter `summary date d/1-1-2018` or `summary month d/1-1` or `summary category d/1-1-1`
+.. Expected:
+.. System would throw an error saying invalid command.
+.. System will provide a different error message depending on the mode and provide more information about the format of
+the command in that specific mode.
+.. for e.g. `summary date` will give you an error message specific to viewing summary by date and `summary month` will give you
+and error message specific to viewing summary by month.
+
+. Entering `summary` command with modes and 2 arguments with either invalid
+.. Test case: Enter `summary date d/1--1 1--1` or `summary month d/1---1 1--1` or summary category d/apr-2018 1--1`
+.. Expected:
+.. System would throw error regarding the constraints of dates/months depending on the mode. If mode is `date` or `category`, the error message is
+about the date. If mode is `month`, the error message will be about the month.
+.. The error message should give reasons why the argument is invalid.
+
+. View summary of range with no records inside
+.. Prerequisite: Choose 2 dates/months such that no records are inside that range and select a record in the list.
+.. Test case: Execute the summary command.
+.. Expected: The table should be empty with just an entry saying total is 0 for all the money columns and record should be unselected.
+
+. View summary of range with some records inside
+.. Prerequisite: Choose 2 dates/months such that records have these characteristics and select a record in the list.
+.. Test case: Execute the summary command.
+.. Expected:
+.. Record should be unselected.
+.. The table would be filled and the total is reflective of all the entries within the table.
+.. If the table is too long, the scrollbars should allow you to view all the entries.
+
+=== Viewing statistics about category breakdown
+. Entering `stats` command without arguments and prefixes
+.. Test case: Enter `stats`
+.. Expected: System would throw an error saying invalid command and show the format the command should have been in.
+
+. Entering `stats` command with valid prefixes but no arguments
+.. Test case: Enter `stats d/`
+.. Expected: System would throw an error saying invalid command and show the format the command should have been in.
+
+. Entering `stats` command with invalid prefixes
+.. Test case: Enter `stats m/`
+.. Expected: System would throw an error saying invalid command and show the format the command should have been in.
+
+. Entering `stats` command with valid prefixes but invalid arguments
+.. Test case: Enter `stats d/1--1`
+.. Expected: System would throw an error regarding the dates entered and give reasons for why the argument is invalid.
+
+. View statistics of a range with no records inside
+.. Prerequisite: Choose 2 dates such that no records are inside that range and select a random record in the list.
+.. Test case: Execute the stats command.
+.. Expected:
+.. The record would be unselected.
+.. The 2 tabs should still be created but have a message that tells user that nothing has been found.
+
+. View statistics of a range with some records inside but all income/expense
+.. Prerequisites: Choose 2 dates such that the records have these characteristics and select a random record in the list.
+.. Test case: Execute the stats command.
+.. Expected:
+.. The record would be unselected.
+.. The 2 tabs should still be created but 1 of the tab would have a message telling user that nothing has been found
+
+. View statistics of a range with records with income and records with expense
+.. Prerequisites: Choose 2 dates such that the records have these characteristics and select a random record in the list
+.. Test case: Execute the stats command.
+.. Expected:
+.. The record would be unselected.
+.. The 2 tabs should be created with pie charts.
+
+. View statistics of a range with too many tags
+.. Prerequisites: Choose 2 dates such that the records have these characteristics and select a random record in the list
+.. Test case: Execute the stats command
+.. Expected:
+.. The record would be unselected.
+.. The 2 tabs should be created with pie charts. The legends should have scrollbars attached if there are too many tags. These scrollbars
+should allow you to navigate to the hidden tags within the legend.
+
+=== Viewing current month's breakdown
+. Navigating to welcome screen from anywhere using keyboard
+.. Prerequisites: Click on any record in the list. Panel should change to display details of the record along with an image.
+.. Test case: Press `HOME` on the keyboard
+.. Expected: Panel should show the welcome screen.
+
+. Navigating to welcome screen from anywhere automatically
+.. Prerequisites: Same as before. Just need to change the panel to see the effect.
+.. Test case: Add any record with date in current month/ Delete any record with date in current month/ Edit any record to a date in current month/ Clear
+.. Expected: Panel should show the welcome screen.
+
 === Deleting a person
 
 . Deleting a records while all records are listed
 
-.. Prerequisites: List all records using the `list` command. Multiple records in the list.
+.. Prerequisites: List all records using the `list` command. Multiple persons in the list.
+
 .. Test case: `delete 1` +
    Expected: First record is deleted from the list. Details of the deleted record shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No record is deleted. Error details shown in the status message. Status bar remains the same.
+
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
 
@@ -1967,19 +2379,127 @@ These instructions only provide a starting point for testers to work on; testers
 . Deleting all records whose date is required when all records are listed.
 
 .. Prerequisites: List all records using the `list` command. Multiple records in the list.
-.. Test case: `add n/Linh Chi birthday gift d/31-03-1999 m/-50 t/friend` +
-   `delete 31-3-1999` +
-   Expected: If there are any record whose . Details of the deleted record shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No record is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
-   Expected: Similar to previous.
 
+.. Test case: `deletedate 31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be deleted. The message of successful deleting records will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record existing will be shown. Status bar remains the same.
+
+.. Incorrect delete commands to try: `delete 30-2-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect delete commands to try: `delete 30-2A-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect delete commands to try: `deletedate`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+.. Incorrect delete commands to try: `deletedate x` (where x is invalid date, meaning that date have alphabetical character or non-existent date) +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+=== Archiving records data from Savee to Excel file and store it in a specific directory.
+
+. Archiving records whose date is required when all records are listed.
+
+.. Prerequisites: List all records using the `list` command. Multiple records in the list.
+.. Test case: `archive` +
+   Expected: All records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `archive d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Test case: `archive d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Test case: `archive dir/C:\` +
+   Expected: All records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `archive dir/C:\ d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Test case: `archive dir/C:\ d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Incorrect archive commands to try: `archive d/30-2-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect archive commands to try: `archive d/30-2A-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect archive commands to try: `archive 31-3-1999`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+.. Incorrect archive commands to try: `archive C:\`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+=== Import all record data from Excel file to Savee
+
+. Import record data from Excel file into Savee.
+
+.. Prerequisites: `archive dir/C:\` +
+
+.. Test case: `import dir/C:\ n/Financial_Planner_ALL.xlsx` +
+   Expected: All record data from the Excel file are shown in Savee.
+
+.. Test case: `import dir/C:\ n/Financial_Planner_ALL` +
+   Expected: All record data from the Excel file are shown in Savee.
+
+.. Test case: `import dir/C:\Financial_Planner_ALL.xlsx` +
+   Expected: All record data from the Excel file are shown in Savee.
+
+.. Incorrect import commands to try: `import` +
+   Expected: Invalid date entered. Error indicating invalid command format. Status bar remains the same.
+
+=== Exporting records data from Savee to Excel file and store it in a specific directory.
+
+. Exporting records whose date is required when all records are listed.
+
+.. Prerequisites: List all records using the `list` command. Multiple records in the list.
+.. Test case: `exportexcel` +
+   Expected: All records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `exportexcel d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Test case: `exportexcel d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Test case: `exportexcel dir/C:\` +
+   Expected: All records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `exportexcel dir/C:\ d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Test case: `exportexcel dir/C:\ d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Incorrect export commands to try: `exportexcel d/30-2-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect export commands to try: `exportexcel d/30-2A-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect export commands to try: `exportexcel 31-3-1999`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+.. Incorrect export commands to try: `exportexcel C:\`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
 
 === Saving data
 
 . Dealing with missing/corrupted data files
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Prerequisites: Have a data file ready. Go to the application and add a record. A data xml file should be created.
+.. Test case: Go to the file and remove 1 of the field tags. It should look like "<name></name>" where name is the name of the field.
+Then, open the app.
+.. Expected: The app should initialise with an empty record list.
 
-_{ more test cases ... }_
+.. Test case: Delete the data file
+.. Expected: The app should initialise with a sample record list.

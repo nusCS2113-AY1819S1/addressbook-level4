@@ -33,12 +33,11 @@ public class ExportCommandParserTest {
 
         CommandParserTestUtil.assertParseFailure(parser,
                 WHITE_SPACE + PREFIX_DATE + " 31-03-1999 31-04-2019 31-12-2020",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT + Messages.MESSAGE_INVALID_DATE_REQUIRED,
-                        ExportExcelCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_INVALID_DATE_REQUIRED));
 
         CommandParserTestUtil.assertParseFailure(parser,
                 WHITE_SPACE + PREFIX_DIR + " unrealistic\\directory",
-                String.format(Messages.MESSAGE_UNREALISTIC_DIRECTORY, ExportExcelCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_UNREALISTIC_DIRECTORY));
 
         CommandParserTestUtil.assertParseFailure(parser, WHITE_SPACE + WORKING_DIRECTORY_STRING,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ExportExcelCommand.MESSAGE_USAGE));
@@ -48,7 +47,7 @@ public class ExportCommandParserTest {
 
         CommandParserTestUtil.assertParseFailure(parser,
                 WHITE_SPACE + PREFIX_DATE + endDate.value + " " + startDate.value,
-                String.format(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE, ExportExcelCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_INVALID_STARTDATE_ENDDATE));
     }
 
     @Test

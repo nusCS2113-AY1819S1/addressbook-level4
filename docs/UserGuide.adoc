@@ -308,8 +308,11 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify Savee's stored content (
+* Undoable commands: those commands that modify Savee's stored content (
 `add`, `delete`, `deletedate`, `exportexcel`, `archive`, `import`, `edit`, `addlimit`, `deletelimit`, `editlimit` and `clear`).
+* Please note that the `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `archive` command, the records archived will be added again back to the Financial Planner but the Excel file created will not be deleted.
+* Please note that `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `export` command, the records remains the same and the Excel file created will not be deleted.
+
 ====
 
 Examples:
@@ -442,6 +445,7 @@ Format: +
 ****
 
 Once the command has been executed, a panel will appear showing the summary table containing data that is relevant in the range. +
+The table entries are sorted according to either date, month or category depending on the mode used in ascending order. +
 At the same time, currently selected record will be unselected to reduce confusion for the user.
 
 [NOTE]
@@ -509,7 +513,7 @@ image::UiPieChartIncome.png[width="790"]
 === Showing a breakdown of total expenses and income into categories of this month: `NO COMMAND REQUIRED TO BE TYPED`
 
 Shows a breakdown of total expenses and income into categories using data of this month. +
-No format is required for this feature as the feature is automatically triggered when there is any changes to the list of records within the application.
+No format is required for this feature as the feature is automatically triggered when there is any mutation of data within the application.
 Another way of returning to the welcome panel from anywhere in the app is to press `HOME` on the keyboard or click `Home` on the menu.
 
 This feature automatically tracks the *current date* and ensures that the data presented is updated regardless regardless of whether the application is *off* or *on for
@@ -520,7 +524,7 @@ the application will update the data whenever it detects any record data modific
 
 [NOTE]
 The data used to represent the pie charts in the welcome panel is *only updated* whenever there are any changes to records within Savee. +
-This includes adding records, deleting records and editing records in Savee.
+This includes adding records, deleting records and editing records in Savee, but not sorting, listing, summary, stats, etc.
 
 Below shows a snapshot of what the user can see when there are records available of the current month
 
@@ -678,7 +682,8 @@ Date follow the same configurations as date parameters required when adding reco
 *yyyy* requires exactly 4 digits.
 
 
-The Excel file name will be named based on the command, relating to Date: +
+The Excel file name will be named based on t
+he command, relating to Date: +
 
 * *Default mode*: The Excel file will be named `Financial_Planner_ALL.xlsx`
 * *Single argument Date mode*: The Excel file will be named `Financial_Planner_dd-mm-yyyy.xlsx`
@@ -962,8 +967,8 @@ e.g. +
 
 * *Add limit* : `addlimit d/DATE [DATE] m/MONEYFLOW` +
 e.g. +
-. `addlimit d/20-12-2017`
-. `addlimit d/20-12-2017 30-09-2018`
+. `addlimit d/20-12-2017 m/100`
+. `addlimit d/20-12-2017 30-09-2018 m/100`
 
 * *Check limit* : `checklimit` +
 
@@ -974,8 +979,8 @@ e.g. +
 
 * *Edit limit* `editlimit d/DATE [DATE] m/MONEYFLOW` +
 e.g. +
-. `editlimit d/20-12-2017 m/100`
-. `editlimit d/20-12-2017 30-09-2018 m/100`
+. `editlimit d/20-12-2017 m/200`
+. `editlimit d/20-12-2017 30-09-2018 m/200`
 
 
 * *Add monthly limit* : `addmonthlylimit m/MONEYFLOW` +
