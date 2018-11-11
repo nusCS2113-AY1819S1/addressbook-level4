@@ -15,8 +15,8 @@ BookInventory is a desktop application to assist store managers in managing thei
 
 * *Major enhancement* Added a command for students to request for books.
 ** Functionality: Students may request for any book by typing the command in the format given in the user guide. Students may request for any book, regardless of whether the book exists in the book store.
-** Justification: This feature brings about convenience for students who can demand a book at the comfort of their homes. This is also advantageous for bookstore owners to track popular books and manage their book supply more efficiently.
-** Highlights: The implementation of an additional panel requires a separated segment from the original code. During the course of implementation, I have learnt to be well-versed in JavaFX. The design approach and precautions taken required careful analysis and a considerably long period of time. Thorough checking and elaborate lengthy tests were also necessary to minimise undesirable bugs surfacing. ** Credits:
+** Justification: This feature brings about convenience for students who can demand a book at the comfort of their homes. This is also advantageous for bookstore owners in gauging which books are popular and hence increase the supply of those books accordingly.
+** Highlights: The implementation of an additional panel requires a separated segment from the original code. Through this process, I have learnt to be well-versed in JavaFX. The design approach and precautions taken required careful analysis and a considerably long period of time. Thorough checking and elaborate lengthy tests were also necessary to minimise undesirable bugs surfacing.
 
 *Minor enhancements*
 
@@ -26,9 +26,8 @@ BookInventory is a desktop application to assist store managers in managing thei
 ** Highlights: This feature requires heavy implementation in coding as we require an additional storage and an additional model which require due amount of time to implement.
 ** Credits:
 
-* Default page is replaced with a command list.
+* Default page is replaced with a welcome page.
 ** Functionality: Users can now refer from the command list and decide what command he/she wishes to start.
-** Justification:
 
 * Command Line now scans for misspelt commands and prompts the user if he or she is using the correct command. Credits: {}
 ** Functionality:
@@ -67,7 +66,7 @@ Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 
 ****
 *   Students may indicate interest by requesting an item of a certain ISBN.
-•	The email given helps bookstore owners confirm order with requester. It is up to the owner's’ preference to decide whether he/she wishes to accept the request.
+•	The email given helps bookstore owners confirm order with the requester. It is up to the owner's preference to decide whether he/she wishes to accept the request.
 •	Possible reasons may include: Item is not a book, item not found in bookstore (Unable to find stock), quantity demanded too high.
 •	Note: This app does not have an automatic email response from owner. Thus, it depends on the owner’s personal preference to decide if he/she wishes to reply.
 ****
@@ -85,10 +84,7 @@ Deletes the 2nd request in the displayed request list.
 * `deleterequest 27` +
 Deletes the 27th request in the displayed request list.
 
-
-Requests for 5 same books with the corresponding iSBN13 with requester’s email eg. johnd@gmail.com
-
-=== Toggle Request Panel : `togglerequests`
+=== Toggle request panel : `togglerequests`
 
 Toggle the request panel. When toggled off, requests are hidden and request panel can be minimized. Strictly for bookstore owners. +
 Format: `togglerequests`
@@ -165,9 +161,9 @@ Formula: Dice's coefficient = (2 * Common Terms) / (Number of terms in String1 +
 
 ===== Aspect: How well does this algorithm predicts?
 
-Our current implementation sets Dice's Coefficient to 0.5. Through our testing, this appears
-fine for most spelling errors. However, it will not predict too ridiculous errors because we
-do not wish to face a scenario where the suggestion offers another command word which is
-unintended by the user.
+Our current implementation sets Dice's Coefficient to 0.5. For some scenarios, we have implemented
+an adjusted value of 0.7. Through our testing, this appears fine for most spelling errors.
+However, it will not predict too ridiculous errors because we do not wish to face a scenario where
+the suggestion offers another command word which is unintended by the user.
 
 // end::commandprediction[]
