@@ -17,6 +17,7 @@ import java.util.List;
 
 import seedu.address.model.ProductDatabase;
 import seedu.address.model.product.Product;
+import seedu.address.model.util.SampleDataUtil;
 
 //@@author Gara
 /**
@@ -66,6 +67,14 @@ public class TypicalProducts {
             ab.addProduct(product);
         }
         return ab;
+    }
+
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons.
+     */
+    public static ProductDatabase getTypicalProductDatabaseForAuthentication() {
+        return SampleDataUtil.getSampleProductDatabaseForTest();
     }
 
     public static List<Product> getTypicalProducts() {
