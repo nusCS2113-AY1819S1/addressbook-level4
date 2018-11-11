@@ -29,7 +29,7 @@ public interface EventModel {
     /**
      * Returns true if an edited event with the same location and time as {@code event} exists in the event list.
      */
-    boolean hasEventAfterEdit(Event eventToEdit, Event editedEvent );
+    boolean hasEventAfterEdit(Event eventToEdit, Event editedEvent);
 
     /**
      * Deletes the given event.
