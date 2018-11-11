@@ -81,6 +81,10 @@ in the Task Book!
 Examples:
 
 * `add_milestone i/1 m/Q1 - 3 r/1`
+* `add_milestone i/1 m/Q4 - 6 r/2`
+* `add_milestone i/1 m/Q7 & 8 r/3`
+* `add_milestone i/1 m/Diagrams r/4`
+* `add_milestone i/1 m/References r/5`
 
 *Before*
 
