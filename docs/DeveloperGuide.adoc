@@ -2881,5 +2881,107 @@ Gradebook component name (cn/).
 Expected: Similar to previous.
 // end::grademanualtesting[]
 
+// tag::notemanualtesting[]
+=== Adding a note
 
+. Adding a note in Trajectory while all notes are listed.
+*Parameters (prefix):* +
+[optional] MODULE_CODE (mc/), +
+[optional] NOTE_TITLE (tt/), +
+[optional] NOTE_START_DATE (sd/), +
+[optional] NOTE_START_TIME (st/), +
+[optional] NOTE_END_DATE (ed/), +
+[optional] NOTE_END_TIME (et/), +
+[optional] NOTE_LOCATION (lc/)
+
+.. Prerequisites: List all notes using `note list` command. The displayed list can have 0 or more notes. MODULE_CODE must already exist in the system (if specified as parameter). Take 'CS2113' as a module that already exists in Trajectory.
+.. Test case: `note add` +
+   Expected: The application will prompt the user to enter note. Upon saving, the notes list should be displayed with the newly created note at the bottom. If cancelled, the note should not be saved.
+.. Test case: `note add tt/First note sd/16-11-2018 lc/NUS` +
+   Expected: Similar to previous, but the new note should contain more information when displayed.
+.. Test case: `note add mc/CS2113` +
+   Expected: Similar to previous. However, this note will be assigned to 'CS2113' module.
+.. Test case: `note add mc/GEQ1000` +
+   Expected: No note is added. An error message will be shown.
+.. Other incorrect add commands to try: `note add tt/x` (where x is a string of characters with character count greater than 30) +
+   Expected: Same as previous.
+
+=== Deleting a note
+
+. Deleting a note in Trajectory while all notes are listed.
+*Parameters (prefix):* +
+INDEX (no prefix), +
+INDEX_RANGE (no prefix)
+
+.. Prerequisites: List all notes using `note list` command. The displayed list contains multiple notes.
+.. Test case: `note delete 1` +
+   Expected: The first note labeled '#1' in the list will be deleted. A message will be displayed upon successful deletion.
+.. Test case: `note delete 1-3` +
+   Expected: The notes #1, #2, and #3 will be deleted from the list. A message will be displayed upon successful deletion.
+.. Test case: `note delete 0` +
+   Expected: No note is deleted. An error message will be shown.
+.. Other incorrect delete commands to try: `note delete -1`, `note delete 3-1`, `note delete x` (where x is larger than the list size) +
+   Expected: Same as previous.
+
+=== Editing a note
+
+. Editing a note in Trajectory while all notes are listed.
+*Parameters (prefix):* +
+INDEX (no prefix), +
+[optional] MODULE_CODE (mc/), +
+[optional] NOTE_TITLE (tt/), +
+[optional] NOTE_START_DATE (sd/), +
+[optional] NOTE_START_TIME (st/), +
+[optional] NOTE_END_DATE (ed/), +
+[optional] NOTE_END_TIME (et/), +
+[optional] NOTE_LOCATION (lc/)
+
+.. Prerequisites: List all notes using `note list` command. The displayed list contains multiple notes. MODULE_CODE must already exist in the system (if specified as parameter). Take 'CS2113' as a module that already exists in Trajectory.
+.. Test case: `note edit 1` +
+   Expected: The application will prompt the user to modify the note. Upon saving, the list will be updated. If cancelled, the modifications are discarded.
+.. Test case: `note edit 1 tt/Modified Title` +
+   Expected: Same as previous but the title of the note will also be edited.
+.. Test case: `note edit x` (where x is larger than the list size) +
+   Expected: No note is edited. An error message will be shown.
+
+=== Listing notes
+
+. Listing all existing notes in Trajectory.
+*Parameters (prefix):* +
+[optional] MODULE_CODE (mc/)
+
+.. Prerequisites: Multiples notes are currently saved in Trajectory. At least one note should be assigned to 'CS2113'. Take 'CS2113' as a module that already exists in Trajectory.
+.. Test case: `note list` +
+   Expected: The list of all notes in Trajectory will be displayed.
+.. Test case: `note list mc/CS2113` +
+   Expected: The list of all notes assigned to 'CS2113' module will be displayed.
+.. Test case: `note list mc/GER1000` +
+   Expected: A message indicating that no notes were found should be displayed. The list will not be updated.
+
+=== Finding notes by keywords
+
+. Finding notes in Trajectory that matches keyword(s).
+*Parameters (prefix):* +
+KEYWORD (k/), +
+[optional] MORE_KEYWORDS (k/)
+
+.. Prerequisites: Multiples notes are currently saved in Trajectory. At least one note should contain the word "hello" in its title or in the text of the note.
+.. Test case: `note find k/hello` +
+   Expected: The list of all notes containing the word "hello" will be displayed.
+.. Test case: `note find k/x` (where x is a word that does not exist in any note) +
+   Expected: A message indicating that no notes were found should be displayed. The list will not be updated.
+
+=== Exporting notes to CSV
+
+. Exporting notes in Trajectory.
+*Parameters (prefix):* +
+FILE_NAME (fn/)
+
+.. Prerequisites: Multiples notes are currently saved in Trajectory. At least one note should have a date & time displayed in its information when `note list` command is used.
+.. Test case: `note export fn/test_case1` +
+   Expected: A message indicating a successful export will be displayed. A file named "test_case1.csv" will be saved in /data/CSVexport/ directory from Trajectory's location.
+.. Test case: `note export fn/test_case@` +
+   Expected: No notes will be exported and no file is created. An error message indicating an invalid filename will be displayed.
+
+// end::notemanualtesting[]
 
