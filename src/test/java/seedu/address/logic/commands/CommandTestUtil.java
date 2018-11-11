@@ -77,7 +77,6 @@ public class CommandTestUtil {
     public static final String EXPENDITURE_MONEY_IPHONE = " " + PREFIX_EMAIL + VALID_EXPENDITURE_MONEY_IPHONE;
     public static final String EXPENDITURE_DATE_CLOTHES = " " + PREFIX_ADDRESS + VALID_EXPENDITURE_DATE_CLOTHES;
     public static final String EXPENDITURE_DATE_IPHONE = " " + PREFIX_ADDRESS + VALID_EXPENDITURE_DATE_IPHONE;
-    
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
