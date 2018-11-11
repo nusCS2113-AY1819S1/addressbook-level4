@@ -10,6 +10,7 @@ import static seedu.planner.testutil.TypicalRecords.INCOME_A;
 import static seedu.planner.testutil.TypicalRecords.JAP;
 import static seedu.planner.testutil.TypicalRecords.KOREAN;
 import static seedu.planner.testutil.TypicalRecords.ZT;
+import static systemtests.SummaryCommandSystemTest.Mode.BY_CATEGORY;
 import static systemtests.SummaryCommandSystemTest.Mode.BY_DATE;
 import static systemtests.SummaryCommandSystemTest.Mode.BY_MONTH;
 
@@ -17,13 +18,16 @@ import org.junit.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.planner.logic.commands.SummaryByCategoryCommand;
 import seedu.planner.logic.commands.SummaryByDateCommand;
 import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.model.Model;
 import seedu.planner.model.Month;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.SummaryByCategoryList;
 import seedu.planner.model.summary.SummaryByDateList;
 import seedu.planner.model.summary.SummaryByMonthList;
 import seedu.planner.testutil.RecordBuilder;
@@ -41,10 +45,13 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         Model model = getModel();
         SummaryByDateList summariesByDate;
         SummaryByMonthList summariesByMonth;
+        SummaryByCategoryList summariesByCategory;
         String defaultSummaryByDateCommand = "   " + SummaryCommand.COMMAND_WORD + "  "
                 + SummaryByDateCommand.COMMAND_MODE_WORD + "  " + PREFIX_DATE + " " + START_DATE + " " + END_DATE;
         String defaultSummaryByMonthCommand = " " + SummaryCommand.COMMAND_WORD + " "
                 + SummaryByMonthCommand.COMMAND_MODE_WORD + " " + PREFIX_DATE + " " + START_MONTH + " " + END_MONTH;
+        String defaultSummaryByCategoryCommand = "   " + SummaryCommand.COMMAND_WORD + "  "
+                + SummaryByCategoryCommand.COMMAND_MODE_WORD + "  " + PREFIX_DATE + " " + START_DATE + " " + END_DATE;
 
         /* ------------------------ Check starting state of program ------------------------------------------------- */
 
@@ -58,12 +65,18 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         summariesByMonth = new SummaryByMonthList(model.getFilteredRecordList());
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
 
+        /* Case: Perform an initialSummaryByCategoryOperation -> Success */
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(new Date(START_DATE), new Date(END_DATE)));
+        summariesByCategory = new SummaryByCategoryList(model.getFilteredRecordList());
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
+
         /* ------------------------ Clear starting state and check state -------------------------------------------- */
 
         /* Case: Clear initial financial planner -> nothing in summary table */
         clearModel(model);
         assertCommandSuccess(defaultSummaryByDateCommand, model, FXCollections.emptyObservableList(), BY_DATE);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, FXCollections.emptyObservableList(), BY_MONTH);
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, FXCollections.emptyObservableList(), BY_CATEGORY);
 
         /* ---------------Add records into the program and check state -----------------------------------------------*/
 
@@ -75,6 +88,8 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
         summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+        summariesByCategory = computeSummaryByCategory(model, START_DATE, END_DATE);
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
 
         /* Case: Add 2 records with same date as ZT, then do summary by date and by month
         -> 2 entries in summary table */
@@ -84,6 +99,8 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
         summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+        summariesByCategory = computeSummaryByCategory(model, START_DATE, END_DATE);
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
 
         /* Case: Add 2 records with a date that is not tracked by summary, then do summary by date and by month
          -> no change */
@@ -94,6 +111,8 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
                 generateLastOfMonth(new Month(END_MONTH))));
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
 
         /* --------------------- Edit existing records and check state -----------------------------------------------*/
 
@@ -107,6 +126,8 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
         summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+        summariesByCategory = computeSummaryByCategory(model, START_DATE, END_DATE);
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
 
         /* Case: Finds the ZT record and edit it with another date that is not tracked by summary,
          then do summary by date and by month -> change is still reflected in summary table
@@ -118,6 +139,9 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
         summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+        summariesByCategory = computeSummaryByCategory(model, START_DATE, END_DATE);
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
+
 
         /* --------------------- Deletes existing records and check state --------------------------------------------*/
 
@@ -129,6 +153,8 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
         summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+        summariesByCategory = computeSummaryByCategory(model, START_DATE, END_DATE);
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
 
         /* Case: Removes records not tracked by summary and then do summary
         -> No change in summary table
@@ -141,6 +167,8 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
                 generateLastOfMonth(new Month(END_MONTH))));
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
 
         findRecord(model, IDA);
         deleteRecord(model, 1);
@@ -150,6 +178,8 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(generateFirstOfMonth(new Month(START_MONTH)),
                 generateLastOfMonth(new Month(END_MONTH))));
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
 
         /* ----------------------------------- Undo, redo and check state --------------------------------------------*/
         undoModel(model);
@@ -157,12 +187,16 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
         summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
 
         redoModel(model);
         summariesByDate = computeSummaryByDate(model, START_DATE, END_DATE);
         assertCommandSuccess(defaultSummaryByDateCommand, model, summariesByDate.getSummaryList(), BY_DATE);
         summariesByMonth = computeSummaryByMonth(model, START_MONTH, END_MONTH);
         assertCommandSuccess(defaultSummaryByMonthCommand, model, summariesByMonth.getSummaryList(), BY_MONTH);
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(START_DATE, END_DATE));
+        assertCommandSuccess(defaultSummaryByCategoryCommand, model, summariesByCategory.getSummaryList(), BY_CATEGORY);
     }
 
     /**
@@ -187,6 +221,16 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
     }
 
     /**
+     * Computes the summary list by date given 2 dates and the model
+     */
+    private SummaryByCategoryList computeSummaryByCategory(Model model, String startDate, String endDate) {
+        SummaryByCategoryList summariesByCategory;
+        model.updateFilteredRecordList(new DateIsWithinIntervalPredicate(startDate, endDate));
+        summariesByCategory = new SummaryByCategoryList(model.getFilteredRecordList());
+        return summariesByCategory;
+    }
+
+    /**
      * Executes the {@code SummaryCommand} that queries the model and asserts that the,<br>
      * 1. Command box displays an empty string.<br>
      * 2. Command box has the default style class.<br>
@@ -206,10 +250,11 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
             expectedResultMessage = String.format(SummaryByDateCommand.MESSAGE_SUCCESS, expectedList.size());
         } else if (mode.equals(BY_MONTH)) {
             expectedResultMessage = String.format(SummaryByMonthCommand.MESSAGE_SUCCESS, expectedList.size());
+        } else if (mode.equals(BY_CATEGORY)) {
+            expectedResultMessage = String.format(SummaryByCategoryCommand.MESSAGE_SUCCESS, expectedList.size());
         } else {
             expectedResultMessage = "";
         }
-
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
@@ -236,6 +281,6 @@ public class SummaryCommandSystemTest extends FinancialPlannerSystemTest {
     }
 
     enum Mode {
-        BY_DATE, BY_MONTH
+        BY_DATE, BY_MONTH, BY_CATEGORY
     }
 }

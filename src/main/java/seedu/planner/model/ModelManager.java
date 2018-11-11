@@ -62,16 +62,21 @@ public class ModelManager extends ComponentManager implements Model {
                 new DateIsWithinIntervalPredicate(DateUtil.generateFirstOfMonth(getCurrentMonth()),
                         DateUtil.generateLastOfMonth(getCurrentMonth())));
         recordsInCurrentMonth.addListener((ListChangeListener<Record>) c -> {
-            Month currentMonth = getCurrentMonth();
-            Predicate<Record> newPredicate = new DateIsWithinIntervalPredicate(
-                    DateUtil.generateFirstOfMonth(currentMonth),
-                    DateUtil.generateLastOfMonth(currentMonth));
-            if (!newPredicate.equals(recordsInCurrentMonth.getPredicate())) {
-                recordsInCurrentMonth.setPredicate(newPredicate);
+            while (c.next()) {
+                if (c.wasPermutated()) {
+                    continue;
+                }
+                Month currentMonth = getCurrentMonth();
+                Predicate<Record> newPredicate = new DateIsWithinIntervalPredicate(
+                        DateUtil.generateFirstOfMonth(currentMonth),
+                        DateUtil.generateLastOfMonth(currentMonth));
+                if (!newPredicate.equals(recordsInCurrentMonth.getPredicate())) {
+                    recordsInCurrentMonth.setPredicate(newPredicate);
+                }
+                CategoryStatisticsList statsList = new CategoryStatisticsList(recordsInCurrentMonth);
+                EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(statsList.getReadOnlyStatsList(),
+                        currentMonth.toString()));
             }
-            CategoryStatisticsList statsList = new CategoryStatisticsList(recordsInCurrentMonth);
-            EventsCenter.getInstance().post(new UpdateWelcomePanelEvent(statsList.getReadOnlyStatsList(),
-                    currentMonth.toString()));
         });
         EventsCenter.getInstance().registerHandler(this);
     }
