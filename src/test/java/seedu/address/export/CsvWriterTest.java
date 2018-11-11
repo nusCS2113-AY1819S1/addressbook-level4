@@ -18,9 +18,6 @@ import seedu.address.model.UserPrefs;
 
 //@@author jitwei98
 public class CsvWriterTest {
-    //  private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    //  model.getFilteredPersonList();
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Path outputFilepath = Paths.get("src", "test", "data", "sandbox", "addressbook.csv");
     private CsvWriter csvWriter = new CsvWriter(model.getFilteredPersonList(), outputFilepath);
@@ -41,11 +38,6 @@ public class CsvWriterTest {
     public void checkOutputFileExists() throws IOException {
         csvWriter.write();
         assertTrue(isFileExists(outputFilepath));
-    }
-
-    @Test
-    public void testWriteToCsv() {
-        // TODO: Implement this after being able to read from csv
     }
 
 }
