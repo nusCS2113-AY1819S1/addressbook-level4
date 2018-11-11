@@ -16,7 +16,7 @@ public interface BookInventoryStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getBookInventoryFilePath();
 
     /**
      * Returns BookInventory data as a {@link ReadOnlyBookInventory}.
@@ -27,7 +27,7 @@ public interface BookInventoryStorage {
     Optional<ReadOnlyBookInventory> readBookInventory() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getBookInventoryFilePath()
      */
     Optional<ReadOnlyBookInventory> readBookInventory(Path filePath) throws DataConversionException, IOException;
 

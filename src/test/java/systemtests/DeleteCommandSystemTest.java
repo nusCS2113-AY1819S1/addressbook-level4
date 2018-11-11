@@ -7,7 +7,7 @@
 //import static seedu.address.testutil.TestUtil.getLastIndex;
 //import static seedu.address.testutil.TestUtil.getMidIndex;
 //import static seedu.address.testutil.TestUtil.getPerson;
-//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
+//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_BIOLOGY;
 //import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
 //
 //import org.junit.Test;
@@ -62,7 +62,7 @@
 // ---------------------- */
 //
 //        /* Case: filtered book list, delete index within bounds of BookInventory and book list -> deleted */
-//        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+//        showPersonsWithName(KEYWORD_MATCHING_BIOLOGY);
 //        Index index = INDEX_FIRST_BOOK;
 //        assertTrue(index.getZeroBased() < getModel().getFilteredBookList().size());
 //        assertCommandSuccess(index);
@@ -70,7 +70,7 @@
 //        /* Case: filtered book list, delete index within bounds of BookInventory but out of bounds of book list
 //         * -> rejected
 //         */
-//        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+//        showPersonsWithName(KEYWORD_MATCHING_BIOLOGY);
 //        int invalidIndex = getModel().getBookInventory().getBookList().size();
 //        command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
 //        assertCommandFailure(command, MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
