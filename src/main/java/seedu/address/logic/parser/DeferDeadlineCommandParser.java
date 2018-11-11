@@ -16,20 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new DeferDeadlineCommand object
  */
 public class DeferDeadlineCommandParser implements Parser<DeferDeadlineCommand> {
-    /*
-    ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(userInput, PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR);
-
-    if (!arePrefixesPresent(argMultimap, PREFIX_DAY, PREFIX_MONTH, PREFIX_YEAR)
-            || !argMultimap.getPreamble().isEmpty()) {
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
-    }
-
-    String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DAY).get());
-    String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_MONTH).get());
-    PriorityLevel priority = ParserUtil.parsePriorityLevel(argMultimap.getValue(PREFIX_YEAR).get());
-    */
-
+    public static final String MESSAGE_INVALID_DEFERRED_DAYS_EXCEEDED = "Deferred Days need to be positive integer and "
+            + "less than 32";
     /**
      * Parses the given {@code String} of arguments in the context of the {@code DeferDeadlineCommand}
      * and returns a {@code DeferDeadlineCommand} object for execution.
@@ -46,6 +34,9 @@ public class DeferDeadlineCommandParser implements Parser<DeferDeadlineCommand> 
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).orElse(""));
         String day = argMultimap.getValue(PREFIX_DAY).orElse("");
         int deferredDay = ParserUtil.parseDefferedDays(day);
+        if (deferredDay < 1 || deferredDay > 31) {
+            throw new ParseException(MESSAGE_INVALID_DEFERRED_DAYS_EXCEEDED);
+        }
         return new DeferDeadlineCommand(index, deferredDay);
     }
 

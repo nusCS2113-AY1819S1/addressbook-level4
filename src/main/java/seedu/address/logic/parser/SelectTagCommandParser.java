@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.tag.Tag.MESSAGE_TAG_CONSTRAINTS;
 
 import java.util.stream.Stream;
 
@@ -16,6 +17,7 @@ import seedu.address.model.tag.Tag;
  */
 
 public class SelectTagCommandParser implements Parser<SelectTagCommand> {
+    public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
     /**
      * Parses the given {@code String} of arguments in the context of the AddTagCommand
      * and returns an AddTagCommand object for execution.
@@ -31,7 +33,10 @@ public class SelectTagCommandParser implements Parser<SelectTagCommand> {
         }
 
         String tag = argMultimap.getValue(PREFIX_TAG).orElse("");
-        Tag tagName = new Tag(tag);
+        if (!isValidTagName(tag)) {
+            throw new ParseException(MESSAGE_TAG_CONSTRAINTS);
+        }
+        Tag tagName = new Tag(tag.toLowerCase());
 
 
         return new SelectTagCommand(tagName);
@@ -43,5 +48,12 @@ public class SelectTagCommandParser implements Parser<SelectTagCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if a given string is a valid tag name.
+     */
+    public static boolean isValidTagName(String test) {
+        return test.matches(TAG_VALIDATION_REGEX);
     }
 }

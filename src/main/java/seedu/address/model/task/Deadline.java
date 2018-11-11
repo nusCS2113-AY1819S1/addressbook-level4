@@ -3,9 +3,13 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Objects;
+
 //@@author emobeany
 
 /**
@@ -60,6 +64,21 @@ public class Deadline {
     public String getYear() {
         return year;
     }
+
+    //@@author ChanChunCheong
+    public Date getDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dateAsString = toString();
+        Date date = null;
+        try {
+            date = dateFormat.parse(dateAsString);
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return date;
+    }
+    //@@author
 
     public void setYear(String year) {
         this.year = year;
@@ -154,13 +173,14 @@ public class Deadline {
         }
 
         newDay = day + deferredDays;
-        System.out.println(newDay);
         updatedDay = newDay % baseDays;
-        System.out.println(updatedDay);
-        // if daystoAdd == 0 then no change to the original day.
-        if (!(updatedDay == 0)) {
+        // if daystoAdd == 0 then day = end of the month.
+        if (updatedDay == 0) {
+            day = baseDays;
+        } else {
             day = updatedDay;
         }
+
         //Count the number of months added
         while (newDay > baseDays) {
             newDay = day - baseDays;

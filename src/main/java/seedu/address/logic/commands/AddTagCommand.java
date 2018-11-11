@@ -68,6 +68,14 @@ public class AddTagCommand extends Command implements CommandParser {
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddTagCommand // instanceof handles nulls
+                && index.equals(((AddTagCommand) other).index)
+                && tag.equals(((AddTagCommand) other).tag));
+    }
+
+    @Override
     public Command parse(String arguments) throws ParseException {
         return new AddTagCommandParser().parse(arguments);
     }

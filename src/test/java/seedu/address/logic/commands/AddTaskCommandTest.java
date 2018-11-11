@@ -220,11 +220,6 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public void deferTaskDeadline(Task task, int deferredDay) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void sortTask(String method) {
             throw new AssertionError("This method should not be called.");
         }

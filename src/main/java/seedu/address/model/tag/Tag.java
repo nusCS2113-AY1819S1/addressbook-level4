@@ -46,6 +46,7 @@ public class Tag implements Comparable<Tag> {
 
     @Override
     public boolean equals(Object other) {
+        System.out.println("YEA");
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
                 && tagName.equals(((Tag) other).tagName)); // state check

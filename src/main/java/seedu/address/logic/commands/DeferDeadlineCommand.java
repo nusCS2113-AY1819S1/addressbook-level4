@@ -32,6 +32,8 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
             + PREFIX_DAY + "04 ";
 
     public static final String MESSAGE_NONEXISTENT_TASK = "This task does not exist in the task book";
+    public static final String MESSAGE_DUPLICATE_TASK = "Deadline for task can't be deferred as "
+            + "a same task already exists in the Task book";
     public static final String MESSAGE_SUCCESS = "Date deferred for task: %1$s";
 
     private final Index taskIndex;
@@ -63,16 +65,24 @@ public class DeferDeadlineCommand extends Command implements CommandParser {
         if (taskIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_NONEXISTENT_TASK);
         }
-        /*
-        else if (!Deadline.isValidDeadline(deadline.toString())) {
-            throw new CommandException(MESSAGE_INVALID_DEADLINE);
-        }
-        */
 
         Task taskToDefer = lastShownList.get(taskIndex.getZeroBased()); // get the task from the filteredtasklist;
-        model.deferTaskDeadline(taskToDefer, deferredDays);
+        Task deferredTask = new Task(taskToDefer);
+        deferredTask = deferredTask.deferred(deferredDays);
+        if (model.hasTask(deferredTask)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+        model.updateTask(taskToDefer, deferredTask);
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToDefer));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeferDeadlineCommand // instanceof handles nulls
+                && taskIndex.equals(((DeferDeadlineCommand) other).taskIndex)
+                && deferredDays == (((DeferDeadlineCommand) other).deferredDays));
     }
 
     @Override

@@ -80,45 +80,12 @@ public class UniqueTaskList implements Iterable<Task> {
         if (index == -1) {
             throw new TaskNotFoundException();
         }
-        /*
-        Set<Tag> newTags = new HashSet<>(target.getTags());
-        if (!newTags.remove(tag)) {
-            return;
-        }
 
-        Task newTask =
-                new (newTask.get(), newTask.getPhone(), newTask.getEmail(), newTask.getAddress(), newTaskTags);
-        updateTask(Task, newTask);
-        */
         Task targetedTask = target.removeTag(tag);
         internalList.set(index, targetedTask);
     }
+    //@@author
 
-
-    /**
-     * Removes {@code tag} from all persons in this {@code AddressBook}.
-     */
-    /*
-    public void removeTag(Tag tag) {
-        Tasks.forEach(Tasks -> removeTagFromPerson(tag, task));
-    }
-    */
-
-    //@@author ChanChunCheong
-    /**
-     * Defer the deadline of the task (@code target) in the list with (@code deadline).
-     * (@code target) must exist in the list.
-     */
-    public void defer(Task target, int deferredDays) {
-        requireNonNull(target);
-        requireNonNull(deferredDays);
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new TaskNotFoundException();
-        }
-        Task deferredTask = target.deferred(deferredDays);
-        internalList.set(index, deferredTask);
-    }
 
     /**
      * Replaces the task {@code target} in the list with {@code editedPerson}.

@@ -31,7 +31,6 @@ public interface Model {
      */
     boolean isTheExactSameTaskAs(Task task);
 
-    void deferTaskDeadline(Task task, int deferredDay);
     /**
      * Deletes the given task.
      * The task must exist in the task book.
@@ -65,6 +64,7 @@ public interface Model {
 
     /** Selects the input tag as Tag.*/
     void selectTag(Tag tag);
+    //@@author
 
     //@@author emobeany
     /** Selects the input date as deadline.*/
@@ -87,6 +87,7 @@ public interface Model {
 
     //@@author ChanChunCheong
     void sortTask(String method);
+    //@@author
 
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();

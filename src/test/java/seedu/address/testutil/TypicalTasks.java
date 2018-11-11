@@ -29,23 +29,23 @@ public class TypicalTasks {
     // Manually added
     public static final Task CS2113_HOMEWORK = new TaskBuilder().withDeadline("1/1/2018").withModuleCode("CS2113")
             .withTitle("Complete code refactoring").withDescription("Refer to notes!")
-            .withPriority("low").build();
+            .withPriority("low").withTags("software", "engineering").build();
 
     public static final Task CS2101_HOMEWORK = new TaskBuilder().withDeadline("9/10/2018").withModuleCode("CS2101")
         .withTitle("Plan a OP2 meeting").withDescription("OP2 is 40% of the grade")
-        .withPriority("high").build();
+        .withPriority("high").withTags("english").build();
 
     public static final Task CS2102_HOMEWORK = new TaskBuilder().withDeadline("11/11/2018").withModuleCode("CS2102")
         .withTitle("Set up the backend framework").withDescription("Using Flask")
-            .withPriority("medium").build();
+            .withPriority("medium").withTags("database").build();
 
     public static final Task CG2271_HOMEWORK = new TaskBuilder().withDeadline("5/6/2018").withModuleCode("CG2271")
         .withTitle("Implement message passing").withDescription("Symmetric & indirect naming scheme")
-            .withDescription("low").build();
+            .withDescription("low").withTags("real").build();
 
     public static final Task CG1112_HOMEWORK = new TaskBuilder().withDeadline("2/5/2018").withModuleCode("CG1112")
         .withTitle("Write buffer class").withDescription("refer to api")
-            .withDescription("high").build();
+            .withDescription("high").withTags("vincent").build();
 
     public static final Task CS2114_HOMEWORK = new TaskBuilder().withDeadline("1/1/2018").withModuleCode("CS2114")
             .withTitle("Start on code").withDescription("Find out more about syntax of new language")
@@ -80,7 +80,20 @@ public class TypicalTasks {
         return ab;
     }
 
+    public static AddressBook getTypicalTaskBook_task1And4DiffDeadlines() {
+        AddressBook ab = new AddressBook();
+        for (Task task : getTypicalTasks_task1And4DiffDeadlines()) {
+            ab.addTask(task);
+        }
+        return ab;
+    }
+
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(Arrays.asList(CS2101_HOMEWORK, CS2102_HOMEWORK, CS2113_HOMEWORK, CS2114_HOMEWORK));
+    }
+
+    public static List<Task> getTypicalTasks_task1And4DiffDeadlines() {
+        Task task = new TaskBuilder(CS2101_HOMEWORK).withDeadline("10/10/2018").build();
+        return new ArrayList<>(Arrays.asList(CS2101_HOMEWORK, CS2102_HOMEWORK, CS2113_HOMEWORK, task));
     }
 }

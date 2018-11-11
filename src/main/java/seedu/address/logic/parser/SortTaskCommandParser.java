@@ -18,23 +18,19 @@ public class SortTaskCommandParser implements Parser<SortTaskCommand> {
     public SortTaskCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SORT);
-        /*
-        try {
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SortTaskCommand.MESSAGE_USAGE), ive);
-        }
-        */
 
         if (!arePrefixesPresent(argMultimap, PREFIX_SORT) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortTaskCommand.MESSAGE_USAGE));
         }
         String method = argMultimap.getValue(PREFIX_SORT).orElse("");
-        //method cannot be null
-        if (method.equals("")) {
+
+        //method entered has to be one of the 4 methods
+        if (method.equals("modules") || method.equals("deadlines") || method.equals("priority")
+                || method.equals("title")) {
+            return new SortTaskCommand(method);
+        } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortTaskCommand.MESSAGE_USAGE));
         }
-        return new SortTaskCommand(method);
     }
 
     /**

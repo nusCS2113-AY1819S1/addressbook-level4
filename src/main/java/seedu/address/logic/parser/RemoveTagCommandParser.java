@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.tag.Tag.MESSAGE_TAG_CONSTRAINTS;
 
 import java.util.stream.Stream;
 
@@ -17,6 +18,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new RemoveTagCommand object
  */
 public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
+    public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
     /**
      * Parses the given {@code String} of arguments in the context of the RemoveTagCommand
      * and returns an RemoveTagCommand object for execution.
@@ -34,8 +36,10 @@ public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
 
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).orElse(""));
         String tag = argMultimap.getValue(PREFIX_TAG).orElse("");
-        Tag tagName = new Tag(tag);
-
+        if (!isValidTagName(tag)) {
+            throw new ParseException(MESSAGE_TAG_CONSTRAINTS);
+        }
+        Tag tagName = new Tag(tag.toLowerCase());
 
         return new RemoveTagCommand(index, tagName);
     }
@@ -47,4 +51,12 @@ public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    /**
+     * Returns true if a given string is a valid tag name.
+     */
+    public static boolean isValidTagName(String test) {
+        return test.matches(TAG_VALIDATION_REGEX);
+    }
+
 }
