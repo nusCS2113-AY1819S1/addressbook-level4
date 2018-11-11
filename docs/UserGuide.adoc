@@ -103,8 +103,8 @@ and there is no other distributor with the default phone number, 00000000. +
 
 Examples:
 
-* `addproduct n/G2 s/08382 d/Pilot Pens i/Use proper stift t/Stationary`
-* `addproduct n/Black Tea s/10041 d/Lim Siang i/175mg t/Beverages`
+* `addproduct n/G2 s/08382 d/Pilot Pens i/Use proper stift t/Stationary inv/12`
+* `addproduct n/Black Tea s/10041 d/Lim Siang i/175mg t/Beverages inv/13`
 
 ==== Search for a product: `findproduct`
 
@@ -320,7 +320,7 @@ Recommended requirements:
 
 *   Operating system: Windows 10 64-bit/ Mac OS X +
 
-Please ensure the latest version of Java is installed on your system.
+Please ensure that Java 9 is installed on your system.
 
 
 Q: Why is the software called `Inventarie Pro`?
