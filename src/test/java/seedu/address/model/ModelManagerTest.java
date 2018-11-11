@@ -15,14 +15,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.FileUtil;
+import seedu.address.export.ExportManager;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.storage.XmlFileStorage;
+import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -39,6 +46,35 @@ public class ModelManagerTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     private ModelManager modelManager = new ModelManager();
+
+    @Before
+    public void exportTypicalPersonsXmlFile() throws IOException, IllegalValueException {
+        ReadOnlyAddressBook addressBook = getTypicalAddressBook();
+
+        ExportManager exportManager = new ExportManager(addressBook.getPersonList(),
+                IMPORT_TYPICAL_ADDRESSBOOK_FILE_PATH);
+        exportManager.saveFilteredPersons();
+    }
+
+    @Before
+    public void exportTwoPersonsXmlFile() throws IOException, IllegalValueException {
+        ReadOnlyAddressBook addressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+
+        ExportManager exportManager = new ExportManager(addressBook.getPersonList(), IMPORT_TWO_PERSONS_FILE_PATH);
+        exportManager.saveFilteredPersons();
+    }
+
+    @Before
+    public void exportEmptyXmlFile() throws IOException {
+        ReadOnlyAddressBook addressBook = new AddressBook();
+
+        ObservableList<Person> filteredPersons = addressBook.getPersonList();
+
+        // Cannot export using ExportManager since the filteredPersons is empty
+        FileUtil.createIfMissing(IMPORT_EMPTY_ADDRESSBOOK_FILE_PATH);
+        XmlFileStorage.saveDataToFile(IMPORT_EMPTY_ADDRESSBOOK_FILE_PATH,
+                new XmlSerializableAddressBook(filteredPersons));
+    }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
