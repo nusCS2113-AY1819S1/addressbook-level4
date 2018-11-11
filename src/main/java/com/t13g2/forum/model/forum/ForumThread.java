@@ -12,9 +12,13 @@ public class ForumThread extends BaseModel {
 
     private int moduleId;
     private String title;
-
     // Identity FieldAddress
     private List<Comment> comments;
+    public ForumThread() {}
+    public ForumThread(int moduleId, String title) {
+        this.moduleId = moduleId;
+        this.title = title;
+    }
 
     public int getModuleId() {
         return moduleId;

@@ -115,6 +115,6 @@ public class ModuleRepository extends BaseRepository implements IModuleRepositor
         if (module.isPresent()) {
             return module.get();
         }
-        throw new EntityDoesNotExistException("Module dose not exist");
+        throw new EntityDoesNotExistException("Module does not exist");
     }
 }
