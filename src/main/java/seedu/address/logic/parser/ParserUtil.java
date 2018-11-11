@@ -13,6 +13,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -234,13 +236,19 @@ public class ParserUtil {
 
 
     /**
-     * Parses a {@code String fileName} into a {@code Path}, for the import and export command.
-     * The returned Path is at .\\import_export\\[fileName].ics, see {@code ImportCommand} and {@code ExportCommand}
+     * Parses a {@code String fileName} into a {@code Path}
+     * The returned Path is at [.\\import_export\\[fileName].ics], see {@code ImportCommand} and {@code ExportCommand}
      */
     public static Path parseImportExportFileName (String fileName) throws ParseException {
         requireNonNull(fileName);
         String trimmedFileName = fileName.trim();
         String fullFileName = trimmedFileName + ".ics";
+
+        //Check if any slash is being used. do not allow user to access folders..
+        String slash = ".*[/\\\\].*"; //very confusing! angery!
+        if (trimmedFileName.matches(slash)) {
+            throw new ParseException (Messages.MESSAGE_PATH_FORBIDDEN);
+        }
 
         // Check destination path length.
         // throw exception if the created file's directory would be greater than 250 char,
@@ -257,7 +265,7 @@ public class ParserUtil {
         try {
             path = Paths.get(filePath);
         } catch (InvalidPathException e) {
-            throw new ParseException(Messages.MESSAGE_INVALID_PATH);
+            throw new ParseException(Messages.MESSAGE_PATH_INVALID);
         }
         return path;
     }

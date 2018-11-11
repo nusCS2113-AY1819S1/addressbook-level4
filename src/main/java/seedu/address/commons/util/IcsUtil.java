@@ -95,7 +95,6 @@ public class IcsUtil {
      * @param zoneId        timezone of the Timetable.
      *                      Cannot be null.
      * @throws IOException  Thrown if there is an error writing to the file.
-     *                      Cannot be null.
      */
     public void saveTimeTableToFile(TimeTable timeTable, ZoneId zoneId, Path filePath)
             throws IOException {
