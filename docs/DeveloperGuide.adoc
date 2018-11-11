@@ -342,7 +342,7 @@ image::WrongIdPasswordRole.PNG[width="200"]
 image::WrongIdOrPasswordOrRoleList.PNG[width="200"]
 
 [NOTE]
-In step 2, if you do not type in anything and give a blank input for the login command instead, the application will throw a new ParseException
+In step 2, if you give a blank input for the login command instead, the application will throw a new ParseException
 and consider the login attempt as unsuccessful and initiate a new pop-up window asking you for input of login
 credentials again, as shown in the image below.
 
@@ -367,7 +367,6 @@ image::LoginExtendedActivityDiagram.png[width="400"]
 
 ==== Design Considerations
 
-===== Preface
 This section touches on the different aspects of design considerations encountered during the project in the implementation of the login feature.
 It will also talk about the different alternatives in different design aspects, and its advantages and disadvantages.
 
