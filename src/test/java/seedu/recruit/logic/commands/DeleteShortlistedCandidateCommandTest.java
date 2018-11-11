@@ -1,5 +1,6 @@
 package seedu.recruit.logic.commands;
 
+import static org.junit.Assert.assertTrue;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.AUDI;
@@ -13,79 +14,69 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.commands.exceptions.CommandException;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
-import seedu.recruit.model.candidate.Candidate;
-import seedu.recruit.model.company.Company;
-import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.joboffer.JobOfferContainsFindKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model, DeleteShortlistedCandidateCommand)
  * and unit tests for {@code DeleteShortlistedCandidateCommand}.
  */
-@Ignore
 public class DeleteShortlistedCandidateCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalCompanyBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+    private CommandHistory expectedCommandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();
 
     @Test
-    @Ignore
     public void execute_validIndexInCandidateList_success() {
-        Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(),
-                new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalCompanyBook(), new UserPrefs());
 
-        DeleteShortlistedCandidateInitializationCommand first = new DeleteShortlistedCandidateInitializationCommand();
-        String expected = DeleteShortlistedCandidateInitializationCommand.MESSAGE_ENTERING_DELETE_PROCESS
-                + DeleteShortlistedCandidateInitializationCommand.MESSAGE_NEXT_STEP
-                + SelectCompanyCommand.MESSAGE_USAGE;
-        assertCommandSuccess(first, model, commandHistory, expected, expectedModel);
+        Command firstStage = new DeleteShortlistedCandidateInitializationCommand();
+        Command secondStage = new SelectCompanyCommand(INDEX_FIRST); // selects AUDI
+        Command thirdStage = new SelectJobCommand(INDEX_FIRST); // selects CASHIER
+        Command lastStage = new DeleteShortlistedCandidateCommand(INDEX_FIRST); // deletes ALICE
 
-        Company selectedCompany = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
-        SelectCompanyCommand selectCompanyCommand = new SelectCompanyCommand(INDEX_FIRST);
-        String expectedMessageForCompany = String.format(SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS,
-                INDEX_FIRST.getOneBased()) + SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
-                + SelectJobCommand.MESSAGE_USAGE;
-        assertCommandSuccess(selectCompanyCommand, model, commandHistory, expectedMessageForCompany, expectedModel);
+        try {
+            firstStage.execute(expectedModel, expectedCommandHistory, userPrefs);
+            secondStage.execute(expectedModel, expectedCommandHistory, userPrefs);
+            thirdStage.execute(expectedModel, expectedCommandHistory, userPrefs);
+            lastStage.execute(expectedModel, expectedCommandHistory, userPrefs);
+        } catch (CommandException | ParseException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
 
-        JobOffer selectedJobOffer = model.getFilteredCompanyJobList().get(INDEX_FIRST.getZeroBased());
-        Candidate candidateToDelete = selectedJobOffer.getObservableCandidateList().get(INDEX_FIRST.getZeroBased());
-
-        SelectJobCommand selectJobCommand = new SelectJobCommand(INDEX_FIRST);
-        String expectedMessageForJob = String.format(SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS,
-                INDEX_FIRST.getOneBased()) + SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST_DELETE
-                + DeleteShortlistedCandidateCommand.MESSAGE_USAGE;
-        assertCommandSuccess(selectJobCommand, model, commandHistory, expectedMessageForJob, expectedModel);
-
-        //Company selectedCompany = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
-        //JobOffer selectedJobOffer = model.getFilteredCompanyJobList().get(INDEX_FIRST.getZeroBased());
-
-        expectedModel.deleteShortlistedCandidateFromJobOffer(candidateToDelete, selectedJobOffer);
-        expectedModel.commitRecruitBook();
+        try {
+            firstStage.execute(model, commandHistory, userPrefs);
+            secondStage.execute(model, commandHistory, userPrefs);
+            thirdStage.execute(model, commandHistory, userPrefs);
+        } catch (CommandException | ParseException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
 
         String expectedMessage = String.format(DeleteShortlistedCandidateCommand.MESSAGE_DELETE_CANDIDATE_SUCCESS,
-                candidateToDelete.getName(), selectedJobOffer.getJob(), selectedCompany.getCompanyName());
-
+                ALICE.getName(), CASHIER_AUDI.getJob(), AUDI.getCompanyName());
 
         assertCommandSuccess(new DeleteShortlistedCandidateCommand(INDEX_FIRST), model, commandHistory,
                 expectedMessage, expectedModel);
     }
-
 
     @Test
     public void execute_invalidIndexInCandidateList_throwsCommandException() {
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyJobList()
                 .get(INDEX_FIRST.getZeroBased()).getObservableCandidateList().size() + 1);
+        // ensures that outOfBoundIndex is still in bounds of candidate list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getCandidateBook().getCandidateList().size());
 
         String expectedMessage = DeleteShortlistedCandidateInitializationCommand.MESSAGE_ENTERING_DELETE_PROCESS
                 + DeleteShortlistedCandidateInitializationCommand.MESSAGE_NEXT_STEP
@@ -107,13 +98,35 @@ public class DeleteShortlistedCandidateCommandTest {
 
         assertCommandFailure(new DeleteShortlistedCandidateCommand(outOfBoundIndex), model, commandHistory,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+        assertCommandSuccess(new CancelCommand(DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD), model,
+                commandHistory, String.format(CancelCommand.MESSAGE_SUCCESS,
+                        DeleteShortlistedCandidateInitializationCommand.COMMAND_WORD), expectedModel);
     }
 
 
     @Test
-    @Ignore
     public void execute_emptyCandidateList_exitsDeleteShortlistProcess() {
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
+
+        // delete ALICE from CASHIER_AUDI -> Candidate List will be emptied
+        Command firstStage = new DeleteShortlistedCandidateInitializationCommand();
+        Command secondStage = new SelectCompanyCommand(INDEX_FIRST); // selects AUDI
+        Command thirdStage = new SelectJobCommand(INDEX_FIRST); // selects CASHIER
+        Command lastStage = new DeleteShortlistedCandidateCommand(INDEX_FIRST); // deletes ALICE
+
+        try {
+            firstStage.execute(expectedModel, expectedCommandHistory, userPrefs);
+            secondStage.execute(expectedModel, expectedCommandHistory, userPrefs);
+            thirdStage.execute(expectedModel, expectedCommandHistory, userPrefs);
+            lastStage.execute(expectedModel, expectedCommandHistory, userPrefs);
+            firstStage.execute(model, commandHistory, userPrefs);
+            secondStage.execute(model, commandHistory, userPrefs);
+            thirdStage.execute(model, commandHistory, userPrefs);
+            lastStage.execute(model, commandHistory, userPrefs);
+        } catch (CommandException | ParseException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
 
         String expectedMessage = DeleteShortlistedCandidateInitializationCommand.MESSAGE_ENTERING_DELETE_PROCESS
                 + DeleteShortlistedCandidateInitializationCommand.MESSAGE_NEXT_STEP
@@ -132,6 +145,7 @@ public class DeleteShortlistedCandidateCommandTest {
         companyName.add(CASHIER_AUDI.getCompanyName().toString());
         keywordsList.put("CompanyName", companyName);
         expectedModel.updateFilteredCompanyJobList(new JobOfferContainsFindKeywordsPredicate(keywordsList));
+
         String expectedMessageForJob = String.format(SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS,
                 INDEX_FIRST.getOneBased()) + SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST_DELETE
                 + DeleteShortlistedCandidateCommand.MESSAGE_USAGE;
@@ -139,13 +153,14 @@ public class DeleteShortlistedCandidateCommandTest {
                 expectedMessageForJob, expectedModel);
 
         model.updateFilteredCompanyJobList(new JobOfferContainsFindKeywordsPredicate(keywordsList));
-        expectedModel.deleteShortlistedCandidateFromJobOffer(ALICE, CASHIER_AUDI);
-        expectedModel.commitRecruitBook();
-        assertCommandSuccess(new DeleteShortlistedCandidateCommand(INDEX_FIRST), model, commandHistory,
-                String.format(DeleteShortlistedCandidateCommand.MESSAGE_DELETE_CANDIDATE_SUCCESS,
-                        ALICE.getName().fullName, CASHIER_AUDI.getJob().value, AUDI.getCompanyName().value),
-                expectedModel);
 
+        /**
+         * Asserts command success because deleting on an empty list is impossible,
+         * so this command exits deleteShortlist process immediately
+         * with no CommandException thrown
+         */
+        assertCommandSuccess(new DeleteShortlistedCandidateCommand(INDEX_FIRST), model, commandHistory,
+                DeleteShortlistedCandidateCommand.MESSAGE_EMPTY_LIST, expectedModel);
     }
 
 }

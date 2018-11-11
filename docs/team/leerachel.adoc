@@ -29,18 +29,14 @@ It is written in Java, and has about 10 kLoC.
 * *Major enhancement: added a Shortlist feature*
 ** What it does: It allows the user to shortlist a candidate for a selected job offer of a selected company.
 ** Justification: This feature improves the product significantly as a user can link up the potential candidates to
-suitable job offers. It makes the recruitment process easier because a user can be easily confused by the high volume of jobs
-and candidates.
-** Highlights: This feature is unlike other 1-step commands as it carries out a series of commands linked together like a shortlisting
-process. Moreover, this enhancement required an in-depth analysis of design alternatives as to how the shortlisted candidates are stored and displayed.
-** Credits: Used Nicholas's idea of LogicState to carry out the multi-staged process of this feature.
+suitable job offers.
+** Highlights: This enhancement required an in-depth analysis of design alternatives as to how the shortlisted candidates are stored and displayed.
 
 * *Major enhancement: redesigned the User Interface(UI) to suit RecruitBook*
 ** What it does: It allows the user to switch view between Candidate Book and Company Book, as well as interact with the items
 displayed on the screen.
 ** Justification: This feature is essential in the product as it manages the data of both candidates and companies.
-In order to benefit the user, the app should organise the way data is displayed to the user. Overall, it emphasises on the selling point
-of RecruitBook as it is built to improve the way data is handled in the recruitment process.
+In order to benefit the user, the app should organise the way data is displayed to the user.
 
 * *Minor enhancement*:
 ** StatusFooterBar at the bottom of the application keeps track of the total number of candidates and companies,
@@ -56,34 +52,18 @@ Under the username of https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined
 
 ** Project management:
 *** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
-** Enhancements to existing features:
-*** Listing feature is enhanced to list candidates, companies and job offers:
-https://github.com/CS2113-AY1819S1-F09-4/main/pull/5[here]
-https://github.com/CS2113-AY1819S1-F09-4/main/pull/59[here]
-*** Morphed test files to suit RecruitBook: https://github.com/CS2113-AY1819S1-F09-4/main/pull/114[here]
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide and reorganised Developer Guide: https://github.com/CS2113-AY1819S1-F09-4/main/pull/109[here]
-** Community:
-*** PRs reviewed (with non-trivial review comments):
-https://github.com/CS2113-AY1819S1-F09-4/main/pull/105[here]
-https://github.com/CS2113-AY1819S1-F09-4/main/pull/97[here]
-https://github.com/CS2113-AY1819S1-F09-4/main/pull/61[here]
 
 == Contributions to the User Guide
 
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
-I have written for `switch`, `select`, `shortlist`, `deleteShortlist`, `list`, but will only omit `list` here due to page limit._
+I have written for `switch`, `select`, `shortlist`, `deleteShortlist`, `list`, but will only include `shortlist` here due to page limit._
 |===
 
-include::../UserGuide.adoc[tag=switch]
-
-include::../UserGuide.adoc[tag=select]
-
 include::../UserGuide.adoc[tag=shortlist]
-
-include::../UserGuide.adoc[tag=deleteShortlist]
 
 == Contributions to the Developer Guide
 
