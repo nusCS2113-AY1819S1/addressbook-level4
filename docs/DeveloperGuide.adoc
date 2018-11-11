@@ -141,18 +141,18 @@ image::LogicClassDiagram.png[width="800"]
 [discrete]
 ==== Events-Driven nature of the design
 
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `TDL_delete 1`.
 
-.Component interactions for `delete 1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+.Component interactions for `TDL_delete 1` command (part 1)
+image::SDforDeleteTask.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `TodoListChangedEvent` when the To-do List data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
-.Component interactions for `delete 1` command (part 2)
-image::SDforDeletePersonEventHandling.png[width="800"]
+.Component interactions for `TDL_delete 1` command (part 2)
+image::SDforDeleteTaskEventHandling.png[width="800"]
 
 [NOTE]
 Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -192,10 +192,10 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("TDL_delete 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+.Interactions Inside the Logic Component for the `TDL_delete 1` Command
+image::DeleteTaskSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
@@ -208,7 +208,7 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Todo List and Expenditure Tracker data.
+* stores the To-do List and Expenditure Tracker data.
 * exposes an unmodifiable `ObservableList<Task>` and `ObservableList<Expenditure>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -223,7 +223,7 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Todo List and Expenditure Tracker data in xml format and read it back.
+* can save the To-do List and Expenditure Tracker data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -236,7 +236,7 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::undoredo[]
 === Undo/Redo feature
-==== Current Implementation
+==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`.
 It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
@@ -297,7 +297,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (proposed choice):** Saves the entire address book.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
@@ -306,7 +306,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+* **Alternative 1 (proposed choice):** Use a list to store the history of address book states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
 ** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
@@ -315,36 +315,73 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // end::undoredo[]
 
 // tag::completeuncomplete[]
-=== Completing/Uncompleting a Task feature
+=== Completing/Uncompleting a task feature
 ==== Current Implementation
 
 Marking of a task as `completed` or `uncompleted` uses both `Logic` and `Model` components.
-Both commands are similiar in most areas, the key differences are in the respective `Command` classes.
-This feature reuses the methods in the `Model` component used by the edit task command.
+Both `TDL_complete` and `TDL_uncomplete` commands are similar in most areas as they are implemented based on the edit task command.
+This feature also reuses the methods in the `Model` component used by the edit task command.
+
+* The parameter of the commands is the index of the to-do list.
 
 The following sequence diagram shows how the `TDL_complete` operation works:
 
 image::CompleteUncompleteTaskSequenceDiagram.png[width="800"]
+
+Step 1. Upon user's input, `AddressBookParser` determines if the command entered by the user is valid and then calls the appropriate `CommandParser` class. The arguments are also passed to the `CommandParser` class.
+
+Step 2. `CompleteTaskCommandParser` or `UncompleteTaskCommandParser` will use the arguments given to retrieve and check if the index is valid. `CompleteTaskCommand` or `UncompleteTaskCommand` will then be called respectively by the parser class.
+
+Step 3. The `Command` class will check for the validity of the index based on the currently shown to-do list and also the completion status of the specific task to be modified.
+
+[NOTE]
+Completion status of the task needs to be checked as we want to prevent cases where the command does not change the completion status, ie. performing `TDL_complete` on a task already marked as completed.
+
+Step 4. Similar to the edit task command, the task to be modified is updated using `Model#updateTask()` with a new task. The new task object is a copy of the task to be modified with the completion status changed.
 
 ==== Design Considerations
 
 ===== Aspect: Methods to support the completed/uncompleted commands
 
 * **Alternative 1 (current choice):** Reuses the same methods available in `Model`
-** Pros: Easy to implement with no modification to `Model` component.
-** Cons: May have performance issues in terms of memory usage due to an additional `Task` object.
+** Pros: Easy to implement with little to no modifications to the `Model` component.
+** Cons: May cause confusion since the same methods in the `Model` component are used by different commands with similar implementations.
 * **Alternative 2:** Create additional methods in `Model`
-** Pros: Should use less memory.
-** Cons: We must ensure that the implementation of each individual methods are correct.
+** Pros: Should create less confusion as these methods are only used by a unique command.
+** Cons: We must ensure that the implementation of each individual method is correct.
 // end::completeuncomplete[]
 
 // tag::viewtask[]
-=== Viewing Tasks feature
+=== Viewing filtered tasks feature
 ==== Current Implementation
+
+Viewing a filtered task list uses both `Logic` and `Model` components.
+This feature reuses the existing `Model#updateFilteredTaskList()` method to update the filter to be used.
+We create two new predicates to either retrieve all completed tasks or all uncompleted tasks.
+
+* Each predicate evaluates to true based on the completion status of the tasks.
+* The parameter of this command is either 'all', 'completed' or 'uncompleted'.
+
+The following sequence diagram shows how the `TDL_view uncompleted` operation works:
+
+image::ViewTaskSequenceDiagram.png[width="800"]
+
+Step 1. Upon user's input, `AddressBookParser` determines if the command entered by the user is valid and then calls the `ViewTaskCommandParser` class. The arguments are also passed to this class.
+
+Step 2. Since the parameter for this command is a string, the argument is trimmed and checked in the `ViewTaskCommandParser` class. The string is then passed to the `ViewTaskCommand` class to be executed.
+
+Step 3. Depending on the filter, `ViewTaskCommand` class will use the `Model#updateFilteredTaskList()` method with the appropriate predicate and update the list of task to be shown.
 
 ==== Design Considerations
 
-===== Aspect:
+===== Aspect: How the feature is implemented
+
+* **Alternative 1 (current choice):** Reuses the same method available in `Model` with new predicates
+** Pros: Easy to implement with little modifications to the `Model` component.
+** Cons: `ViewTaskCommand` class needs to handle three different cases, each with its own result and output.
+* **Alternative 2:** Saves all variation of the filtered task list
+** Pros: Each filtered task list is readily available and easily obtainable.
+** Cons: Whenever there is a change to the task list, we need to ensure that all lists are updated accordingly.
 // end::viewtask[]
 
 // tag::sorttask[]
@@ -504,9 +541,9 @@ image::CheckSequenceDiagram.png[width="800"]
 // end::checkexpenditure[]
 
 // tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
+=== Data Encryption
+==== Proposed Implementation
+_{Implementation of the data encryption feature will be introduced and explained in the near future.}_
 
 // end::dataencryption[]
 
@@ -994,6 +1031,7 @@ We now have everything set up... but we still can't modify the remarks. Let's fi
 
 See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
 
+// tag::productScope[]
 [appendix]
 == Product Scope
 
@@ -1008,6 +1046,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * Is reasonably comfortable using CLI applications
 
 *Value proposition*: To assist students in managing all of their academic work and spendings which will improve their student life
+// end::productScope[]
 
 // tag::userStories[]
 [appendix]
@@ -1068,7 +1107,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |=======================================================================
 // end::userStories[]
 
-// tag::useCases[]
+// tag::taskUseCases[]
 [appendix]
 == Use Cases
 
@@ -1125,7 +1164,7 @@ To-do list
 
 *MSS*
 
-1. User enters `TDL_sort by mod` command
+1. User enters `TDL_sort module` command
 2. To-do list shows a sorted list of tasks grouped by modules
 
 [discrete]
@@ -1135,7 +1174,7 @@ To-do list
 
 *MSS*
 
-1. User enters `TDL_sort by ddl` command
+1. User enters `TDL_sort date` command
 2. To-do list shows the all uncompleted modules sorted by deadlines, the task with latest deadline is the first task
 
 [discrete]
@@ -1145,7 +1184,7 @@ To-do list
 
 *MSS*
 
-1. User enters `TDL_sort by impt` command
+1. User enters `TDL_sort priority` command
 2. To-do list shows a sorted list of tasks grouped by priority level in descending order
 
 [discrete]
@@ -1209,7 +1248,9 @@ To-do list
    2a. The list is empty.
    2b. The given index is invalid
      2b1. To-do list shows an error message
+// end::taskUseCases[]
 
+// tag::extraTaskUseCases[]
 [discrete]
 === Use case 12: Receiving reminders for a task
 *System:*
@@ -1219,7 +1260,9 @@ To-do list
 
 1. To-do list notifies user of task close to deadline
 2. User receives and acknowledges the reminder
+// end::extraTaskUseCases[]
 
+// tag::expenditureUseCases[]
 [discrete]
 === Use case 13: Add expenditure / income
 *System:*
@@ -1279,7 +1322,7 @@ Expenditure Tracker & Calendar
   2a. The list is empty.
   2b. The given index is invalid.
     2b1. To-do list shows an error message
-// end::useCases[]
+// end::expenditureUseCases[]
 
 [appendix]
 == Non Functional Requirements
@@ -1295,7 +1338,7 @@ Expenditure Tracker & Calendar
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-
+// tag::productSurvey[]
 [appendix]
 == Product Survey
 
@@ -1315,7 +1358,7 @@ Cons:
 1. Not specialized for students
 2. Unable to sort tasks by tags
 3. Lack of a reminder feature
-
+// end::productSurvey[]
 
 [appendix]
 == Instructions for Manual Testing
