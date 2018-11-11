@@ -88,10 +88,10 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
         Date endDate;
         String directoryPath;
         int dateNum = Arrays.asList(dates).size();
+
         if (dateNum > ArchiveCommand.DUO_MODE) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT
-                            + Messages.MESSAGE_INVALID_DATE_REQUIRED, ArchiveCommand.MESSAGE_USAGE));
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_INVALID_DATE_REQUIRED));
         } else if (dateNum == ArchiveCommand.SINGLE_MODE) {
             startDate = ParserUtil.parseDate(Arrays.asList(dates).get(ArchiveCommand.FIRST_ELEMENT).trim());
             endDate = ParserUtil.parseDate(Arrays.asList(dates).get(ArchiveCommand.FIRST_ELEMENT).trim());
@@ -107,7 +107,8 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
                 return new ArchiveCommand(startDate, endDate, directoryPath);
             }
         } else {
-            throw new ParseException(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE);
+            throw new ParseException(String.format(
+                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, Messages.MESSAGE_INVALID_STARTDATE_ENDDATE));
         }
     }
 

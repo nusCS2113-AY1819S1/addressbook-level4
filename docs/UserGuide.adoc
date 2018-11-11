@@ -663,7 +663,7 @@ Format: +
 
 * *Single argument Date mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
 
-* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Saveer.
+* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
 
 * *Single argument Directory Path mode* will list down all records in Savee and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
 
