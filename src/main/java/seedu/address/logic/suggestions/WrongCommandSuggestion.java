@@ -16,6 +16,8 @@ import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ReminderCommand;
+import seedu.address.model.reminder.Reminder;
 
 //@@author elstonayx
 /**
@@ -46,7 +48,8 @@ public class WrongCommandSuggestion {
             ScheduleCommand.COMMAND_WORD,
             SelectCommand.COMMAND_WORD,
             UndoCommand.COMMAND_WORD,
-            TodoCommand.COMMAND_WORD
+            TodoCommand.COMMAND_WORD,
+            ReminderCommand.COMMAND_WORD
         };
     }
 

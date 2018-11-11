@@ -19,6 +19,8 @@ import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ReminderCommand;
+import seedu.address.model.reminder.Reminder;
 
 //@@author elstonayx
 //TODO: write test cases
@@ -50,6 +52,7 @@ public class InputCommandSuggestion {
         commandList.insert(SelectCommand.COMMAND_WORD);
         commandList.insert(TodoCommand.COMMAND_WORD);
         commandList.insert(UndoCommand.COMMAND_WORD);
+        commandList.insert(ReminderCommand.COMMAND_WORD);
     }
 
     /**
@@ -154,6 +157,9 @@ public class InputCommandSuggestion {
 
         case TodoCommand.COMMAND_WORD:
             return TodoCommand.COMMAND_PARAMETERS;
+
+        case ReminderCommand.COMMAND_WORD:
+            return ReminderCommand.COMMAND_PARAMETERS;
 
         case ClearCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
