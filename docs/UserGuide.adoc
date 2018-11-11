@@ -608,7 +608,8 @@ the application will update the data whenever it detects any record data modific
 The data used to represent the pie charts in the welcome panel is *only updated* whenever there are any changes to records within Savee. +
 This includes adding records, deleting records and editing records in Savee, but not sorting, listing, summary, stats, etc.
 
-Below shows a snapshot of what the user can see when there are records available of the current month
+Below shows a snapshot of what the user can see when there are records available of the current month. If the screen is too small, the welcome message may be
+truncated to allow more space for the charts.
 
 image::WelcomePanelWithPieCharts.png[width="790"]
 *Screenshot of app on startup when records of current month are available*

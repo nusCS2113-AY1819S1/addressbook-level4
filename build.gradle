@@ -108,7 +108,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'financialplanner.jar'
+    archiveName = 'savee.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
