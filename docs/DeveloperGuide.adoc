@@ -1396,6 +1396,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+// tag::authenticationTest[]
 === Authentication
 
 . Signing up for an account with a taken username
@@ -1415,6 +1416,8 @@ These instructions only provide a starting point for testers to work on; testers
 . Logging in to a non-existent account
 .. Test case: `login u/NEWUSERNAME p/VALIDPASSWORD` +
    Expected: Will display an error saying that credentials are incorrect.
+
+// end::authenticationTest[]
 
 === Deleting an event
 
