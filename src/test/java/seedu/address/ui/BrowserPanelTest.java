@@ -41,29 +41,27 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a event
         postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName()
+        URL expectedPersonUrl = new URL(BrowserPanel.getEventPageUrl()
                 + "?name="
-                + ALICE.getName().fullName.replaceAll(" ", "%20")
+                + browserPanel.encodeString(ALICE.getName().fullName)
                 + "&contact="
-                + ALICE.getContact().fullContactName.replaceAll(" ", "%20")
+                + browserPanel.encodeString(ALICE.getContact().fullContactName)
                 + "&phone="
-                + ALICE.getPhone()
+                + browserPanel.encodeString(ALICE.getPhone().toString())
                 + "&email="
-                + ALICE.getEmail()
+                + browserPanel.encodeString(ALICE.getEmail().toString())
                 + "&venue="
-                + ALICE.getVenue().value.replaceAll(" ", "%20").replaceAll("#", "%23")
+                + browserPanel.encodeString(ALICE.getVenue().value)
                 + "&dateTime="
-                + PAGE_DATE_FORMAT.format(ALICE.getDateTime().dateTime).replaceAll(" ", "%20")
+                + browserPanel.encodeString(PAGE_DATE_FORMAT.format(ALICE.getDateTime().dateTime))
                 + "&status="
-                + ALICE.getStatus()
+                + browserPanel.encodeString(ALICE.getStatus().toString())
                 + "&tags="
-                + ALICE.getTagsString().replaceAll(" ", "%20")
+                + browserPanel.encodeString(ALICE.getTagsString())
                 + "&attendance="
-                + ALICE.getAttendanceString().replaceAll(" ", "%20")
-                    .replaceAll("<br>", "%3Cbr%3E")
+                + browserPanel.encodeString(ALICE.getAttendanceString())
                 + "&comment="
-                + ALICE.getComment().value.replaceAll("[{]", "%3C")
-                .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
+                + browserPanel.encodeString(ALICE.getComment().value.replace("{", "<").replace("}", ">")));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

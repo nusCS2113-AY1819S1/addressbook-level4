@@ -11,7 +11,7 @@ We are a team of Y2 Computer Engineering undergraduate students based in the htt
 
 === Chia Xiang Rong
 image::chiaxr.png[width="150", align="left"]
-{empty}[http://github.com/chiaxr[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/chiaxr[github]] [<<chiaxr#, portfolio>>]
 
 Role: Developer +
 Responsibilities: RSVP/Attendance

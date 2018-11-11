@@ -223,7 +223,7 @@ public abstract class EventManagerSystemTest {
         URL expectedUrl;
         try {
 
-            expectedUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName()
+            expectedUrl = new URL(BrowserPanel.getEventPageUrl()
                     + "?name="
                     + selectedCardHandle.getName().replaceAll(" ", "%20")
                     + "&contact="
@@ -231,21 +231,31 @@ public abstract class EventManagerSystemTest {
                     + "&phone="
                     + selectedCardHandle.getPhone()
                     + "&email="
-                    + selectedCardHandle.getEmail()
+                    + selectedCardHandle.getEmail().replaceAll("@", "%40")
                     + "&venue="
-                    + selectedCardHandle.getVenue().replaceAll(" ", "%20").replaceAll("#", "%23")
+                    + selectedCardHandle.getVenue()
+                            .replaceAll(" ", "%20")
+                            .replaceAll("#", "%23")
+                            .replaceAll(",", "%2C")
                     + "&dateTime="
-                    + PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime).replaceAll(" ", "%20")
+                    + PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime)
+                            .replaceAll(" ", "%20")
+                            .replaceAll(":", "%3A")
                     + "&status="
                     + selectedCardHandle.getStatus()
                     + "&tags="
                     + selectedCardHandle.getTagsString().replaceAll(" ", "%20")
                     + "&attendance="
-                    + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20")
-                        .replaceAll("<br>", "%3Cbr%3E")
+                    + selectedCardHandle.getAttendanceString().replaceAll(" ", "%20").replaceAll("<br>", "%3Cbr%3E")
                     + "&comment="
-                    + selectedCardHandle.getComment().replaceAll("[{]", "%3C")
-                    .replaceAll("[}]", "%3E").replaceAll(" ", "%20"));
+                    + selectedCardHandle.getComment()
+                            .replaceAll("[{]", "%3C")
+                            .replaceAll("[}]", "%3E")
+                            .replaceAll("/", "%2F")
+                            .replaceAll(" ", "%20")
+                            .replaceAll(":", "%3A")
+                            .replaceAll("[(]", "%28")
+                            .replaceAll("[)]", "%29"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }
