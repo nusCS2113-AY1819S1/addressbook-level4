@@ -28,7 +28,8 @@ public class UncompleteTaskCommandParserTest {
 
     @Test
     public void parseInvalidArgsThrowsException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, UncompleteTaskCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                UncompleteTaskCommand.MESSAGE_USAGE));
     }
 
 }
