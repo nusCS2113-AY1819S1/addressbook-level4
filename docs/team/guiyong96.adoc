@@ -15,7 +15,9 @@ This application is optimized for those who prefer to work with Command Line Int
 
 == Summary of contributions
 
-* *Major enhancement* Added a command for students to *request* for books.
+*Major enhancement*
+
+*  Added a command for students to *request* for books.
 ** Functionality: Students may request for any book by typing the command in the format given in the user guide. Students may request for any book, regardless of whether the book exists in the book store.
 ** Justification: This feature brings about convenience for students who can demand a book at the comfort of their homes. This is also advantageous for bookstore owners in gauging which books are popular and hence increase the supply of those books accordingly.
 ** Highlights: The implementation of an additional panel requires a separated segment from the original code. Through this process, I have learnt to be well-versed in JavaFX. The design approach and precautions taken required careful analysis and a considerably long period of time. Thorough checking and elaborate lengthy tests were also necessary to minimise undesirable bugs surfacing.
@@ -42,9 +44,9 @@ This application is optimized for those who prefer to work with Command Line Int
 ** Project management:
 *** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
 ** Project morphing:
-*** Morphed model portion of addressbook 4.
+*** Morphed storage portion of addressbook 4.
 ** Community:
-*** Perform refactoring for various features.
+*** Perform refactoring for the majority of the code.
 *** Several parts of the request feature implemented were adopted by others.
 
 == Contributions to the User Guide
