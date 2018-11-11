@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.authentication.PasswordUtils;
+import seedu.address.commons.core.LoginInfo;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -71,7 +72,8 @@ public class CreateAccountCommand extends Command {
         if (managerModel.isUserNameExist (userName)) {
             throw new CommandException (MESSAGE_DUPLICATE_USERNAME);
         }
-        managerModel.createNewAccount (userName, password, authenticationLevel);
+        LoginInfo loginInfo = new LoginInfo (userName, password, authenticationLevel);
+        managerModel.createNewAccount (loginInfo);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import seedu.address.model.drink.exceptions.DrinkNotFoundException;
 import seedu.address.model.drink.exceptions.DuplicateDrinkException;
 import seedu.address.model.drink.exceptions.DuplicateNameException;
 import seedu.address.model.drink.exceptions.InsufficientQuantityException;
+import seedu.address.model.tag.Tag;
 
 /**
  * A list of drinks that enforces uniqueness between its elements and does not allow nulls.
@@ -191,5 +193,32 @@ public class UniqueDrinkList implements Iterable<Drink> {
         Drink actualDrink = findByName(drink);
         return actualDrink.getCostPrice();
     }
+
+    /**
+     * Replaces the original retail price of {@code drink} with {@code newSellingPrice}
+     */
+    public void updateSellingPrice(Drink drink, Price newSellingPrice) {
+        Drink actualDrink = findByName(drink);
+        actualDrink.setRetailPrice(newSellingPrice);
+    }
+
+    /**
+     * Replaces the original cost price of {@code drink} with {@code newCostPrice}
+     */
+    public void updateCostPrice(Drink drink, Price newCostPrice) {
+        Drink actualDrink = findByName(drink);
+        actualDrink.setCostPrice(newCostPrice);
+    }
+
+    /**
+     * Replaces the original tags of {@code drink} with {@code newTags}
+     */
+    public void updateTags(Drink drink, Set<Tag> newTags) {
+        Drink actualDrink = findByName(drink);
+        actualDrink.setTags(newTags);
+    }
+
+
+
 
 }

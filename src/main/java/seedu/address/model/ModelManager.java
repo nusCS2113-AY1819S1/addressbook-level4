@@ -161,4 +161,6 @@ public class ModelManager extends ComponentManager implements Model {
     public boolean isUserNameExist(UserName userName) {
         return loginInfoManager.isUserNameExist(userName);
     }
+
+
 }

@@ -40,7 +40,7 @@ public class SelectCommand extends Command {
         List<Drink> filteredDrinkList = model.getFilteredDrinkList ();
 
         if (targetIndex.getZeroBased() >= filteredDrinkList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_DRINK_DISPLAYED_INDEX);
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
