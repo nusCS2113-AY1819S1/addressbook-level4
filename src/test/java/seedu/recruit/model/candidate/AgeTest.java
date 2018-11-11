@@ -24,14 +24,16 @@ public class AgeTest {
         // null age
         Assert.assertThrows(NullPointerException.class, () -> Age.isValidAge(null));
 
-        // invalid addresses
+        // invalid age
         assertFalse(Age.isValidAge("")); // empty string
         assertFalse(Age.isValidAge("-2")); // negative age
-        assertFalse(Age.isValidAge("100")); // above age limit
-        assertFalse(Age.isValidAge(" ")); // spaces only
+        assertFalse(Age.isValidAge("99")); // out of range
+        assertFalse(Age.isValidAge("61")); // boundary testing
+        assertFalse(Age.isValidAge(" 15"));
 
-        // valid addresses
-        assertTrue(Age.isValidAge("10"));
-        assertTrue(Age.isValidAge("2")); // one character
+        // valid age
+        assertTrue(Age.isValidAge("45"));
+        assertTrue(Age.isValidAge("16")); // boundary tests
+        assertTrue(Age.isValidAge("60"));
     }
 }

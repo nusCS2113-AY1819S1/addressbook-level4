@@ -30,10 +30,11 @@ public class AgeRangeTest {
         assertFalse(AgeRange.isValidAgeRange(" ")); // spaces only
         assertFalse(AgeRange.isValidAgeRange("12")); //
         assertFalse(AgeRange.isValidAgeRange("12-12-13"));
-        assertFalse(AgeRange.isValidAgeRange("100-1")); // exceed age limit
+        assertFalse(AgeRange.isValidAgeRange("61-30")); // exceed age limit
+        assertFalse(AgeRange.isValidAgeRange("15-30")); // below age limit
 
         // valid age range
-        assertTrue(AgeRange.isValidAgeRange("12-13")); // alphabets only
-        assertTrue(AgeRange.isValidAgeRange("99-12")); // numbers only
+        assertTrue(AgeRange.isValidAgeRange("45-60"));
+        assertTrue(AgeRange.isValidAgeRange("60-16")); // boundary test
     }
 }
