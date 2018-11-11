@@ -36,18 +36,18 @@ public class XmlAdaptedSchedule {
     public XmlAdaptedSchedule() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * Constructs an {@code XmlAdaptedSchedule} with the given schedule details.
      */
     public XmlAdaptedSchedule(String date, String startTime, String endTime, String eventName) {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.eventName = eventName;
-        this.schedulePrint = schedulePrint;
+        this.schedulePrint = this.toString();
     }
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Schedule into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
