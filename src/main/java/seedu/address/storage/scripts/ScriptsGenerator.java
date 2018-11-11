@@ -118,6 +118,31 @@ public class ScriptsGenerator {
             + "n/CS4210 l/LT24 t/ai t/friday t/8am" + NEXT_LINE
             + "n/CS2113T l/LT24 t/java t/friday t/10am" + NEXT_LINE;
 
+    private static final String ADD_TEST_COMMAND = "Alex Yeoh tn/cs2113quiz1 tm/11" + NEXT_LINE
+            + "Alex Yeoh tn/cs2113quiz2 tm/33" + NEXT_LINE
+            + "Alex Yeoh tn/cs2113quiz3 tm/38" + NEXT_LINE
+            + "Alex Yeoh tn/cs2113quiz4 tm/77" + NEXT_LINE
+            + "Bernice Yu tn/cs2113quiz1 tm/77" + NEXT_LINE
+            + "Bernice Yu tn/cs2113quiz2 tm/40" + NEXT_LINE
+            + "Bernice Yu tn/cs2113quiz3 tm/66" + NEXT_LINE
+            + "Bernice Yu tn/cs2113quiz4 tm/18" + NEXT_LINE
+            + "David Li tn/cs2113quiz1 tm/50" + NEXT_LINE
+            + "David Li tn/cs2113quiz2 tm/55" + NEXT_LINE
+            + "David Li tn/cs2113quiz3 tm/45" + NEXT_LINE
+            + "David Li tn/cs2113quiz4 tm/96" + NEXT_LINE
+            + "Irfan Ibrahim tn/cs2113quiz1 tm/88" + NEXT_LINE
+            + "Irfan Ibrahim tn/cs2113quiz2 tm/78" + NEXT_LINE
+            + "Irfan Ibrahim tn/cs2113quiz3 tm/66" + NEXT_LINE
+            + "Irfan Ibrahim tn/cs2113quiz4 tm/90" + NEXT_LINE
+            + "Roy Balakrishnan tn/cs2113quiz1 tm/39" + NEXT_LINE
+            + "Roy Balakrishnan tn/cs2113quiz2 tm/70" + NEXT_LINE
+            + "Roy Balakrishnan tn/cs2113quiz3 tm/22" + NEXT_LINE
+            + "Roy Balakrishnan tn/cs2113quiz4 tm/68" + NEXT_LINE
+            + "Charlotte Oliveiro tn/cs2113quiz1 tm/77" + NEXT_LINE
+            + "Charlotte Oliveiro tn/cs2113quiz2 tm/79" + NEXT_LINE
+            + "Charlotte Oliveiro tn/cs2113quiz3 tm/59" + NEXT_LINE
+            + "Charlotte Oliveiro tn/cs2113quiz4 tm/88" + NEXT_LINE;
+
     public static String getAddCommand() {
         return ADD_COMMAND;
     }
@@ -128,5 +153,9 @@ public class ScriptsGenerator {
 
     public static String getCreateGroupCommand() {
         return CREATE_GROUP_COMMAND;
+    }
+
+    public static String getAddTestCommand() {
+        return ADD_TEST_COMMAND;
     }
 }
