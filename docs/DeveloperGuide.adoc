@@ -1791,7 +1791,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 13. Use case: Create a normal limit for a period of time or a day [Oscar]
+=== 13. Use case: Create a normal limit for a period of time or a day
 
 *MSS*
 
@@ -1825,7 +1825,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 14. Use case: Edit an existing normal limit [Oscar]
+=== 14. Use case: Edit an existing normal limit
 
 *MSS*
 
@@ -1863,7 +1863,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 15. Use case: Delete an existing limit [Oscar]
+=== 15. Use case: Delete an existing limit
 
 *MSS*
 
@@ -1896,7 +1896,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 16. Use case: Add a monthly limit [Oscar]
+=== 16. Use case: Add a monthly limit
 
 *MSS*
 
@@ -1925,7 +1925,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 17. Use case: Edit the monthly limit [Oscar]
+=== 17. Use case: Edit the monthly limit
 
 *MSS*
 
@@ -1954,7 +1954,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 18. Use case: Delete the monthly limit [Oscar]
+=== 18. Use case: Delete the monthly limit
 
 *MSS*
 
@@ -1977,7 +1977,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 19. Use case: Check all the existing limits [Oscar]
+=== 19. Use case: Check all the existing limits
 
 *MSS*
 
@@ -2359,6 +2359,174 @@ should allow you to navigate to the hidden tags within the legend.
 .. Prerequisites: Same as before. Just need to change the panel to see the effect.
 .. Test case: Add any record with date in current month/ Delete any record with date in current month/ Edit any record to a date in current month/ Clear
 .. Expected: Panel should show the welcome screen.
+
+=== Adding a normal limit
+
+. Adding a normal limit to the Financial Planner without the same time period limits inside.
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There is no limit with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
+.. Test case: `addlimit d/11-11-2018 17-11-2018 m/100` +
+   Expected: The information shows that the new limit has been added followed by detailed information about the newly added limit.
+.. Test case: `addlimit d/12-11-2018 m/200` +
+   Expected: The information shows that the new limit has been added followed by detailed information about the newly added limit.
+
+. Trying to add a normal limit to the Financial Planner with command errors.
+
+.. Test case: `addlimit d/17-11-2018 11-11-2018 m/200` +
+   Expected: No limit will be added. Error message about the dateStart must be earlier than dateEnd will be displayed.
+.. Test case: `addlimit d/11-11-2018 17-11-2018 m/+200` +
+   Expected: No limit will be added. Error message about wrong type of limit MoneyFlow will be displayed.
+.. Test case: `addlimit d/11-11-2018 17-11-2018` +
+   Expected: No limit will be added. Error message about wrong addlimit command format will be displayed.
+.. Test case: `addlimit 11-11-2018 17-11-2018 m/100` +
+   Expected: No limit will be added. Error message about wrong addlimit command format will be displayed.
+
+. Trying to add a normal limit to the Financial Planner with the same time period limits inside.
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There are existing limits with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
+.. Test case: `addlimit d/11-11-2018 17-11-2018 m/100` +
+   Expected: No limit will be added.  Error message about already existing limit will be displayed.
+.. Test case: `addlimit d/12-11-2018 m/100` +
+   Expected: No limit will be added.  Error message about already existing limit will be displayed.
+
+.. Other incorrect delete commands to try: `addlimit asd `, `addlimit x` (where x is an integer), `addlimit x/12-11-2018 m/asd` +
+   Expected: No limit will be added, related error information will be displayed.
+
+=== Editing an existing normal limit
+
+. Editing an existing normal limit in the Financial Planner
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There are limits with date period "11-11-2018 -- 17-11-2018" with the limit MoneyFlow isn't "100" and "12-11-2018" with the limit MoneyFlow isn't "200".
+.. Test case: `editlimit d/11-11-2018 17-11-2018 m/100` +
+   Expected: The information shows that the limit has been edited followed by detailed information about both the original limit and the new limit.
+.. Test case: `editlimit d/12-11-2018 m/200` +
+   Expected: The information shows that the limit has been edited followed by detailed information about both the original limit and the new limit.
+
+. Trying to edit a normal limit in the Financial Planner with command errors.
+.. Test case: `editlimit d/17-11-2018 11-11-2018 m/200` +
+   Expected: No limit will be edited. Error message about the dateStart must be earlier than dateEnd will be displayed.
+.. Test case: `editlimit d/11-11-2018 17-11-2018 m/+200` +
+   Expected: No limit will be edited. Error message about wrong type of limit MoneyFlow will be displayed.
+.. Test case: `editlimit d/11-11-2018 17-11-2018` +
+   Expected: No limit will be edited. Error message about wrong editlimit command format will be displayed.
+.. Test case: `editlimit 11-11-2018 17-11-2018 m/200` +
+   Expected: No limit will be edited. Error message about wrong editlimit command format will be displayed.
+
+. Trying to edit a normal limit in the Financial Planner with wrong command format.
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is no existing limit with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
+.. Test case: `editlimit d/11-11-2018 17-11-2018 m/100` +
+   Expected: No limit will be edited. Error message about no existing limit will be displayed.
+.. Test case: `editlimit d/12-11-2018 m/100` +
+   Expected: No limit will be edited. Error message about no existing limit will be displayed.
+
+. Trying to edit a normal limit in the Financial Planner with the same limit inside.
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is no existing limit with date period "11-11-2018 -- 17-11-2018"  with the limit MoneyFlow isn't "100".
+.. Test case: `editlimit d/11-11-2018 17-11-2018 m/100` +
+   Expected: No limit will be edited. Error message about same limit will be displayed.
+
+.. Other incorrect delete commands to try: `editlimit asd `, `editlimit x` (where x is an integer), `editlimit x/12-11-2018 m/asd` +
+   Expected: No limit will be edited, related error information will be displayed.
+
+=== Deleting an existing normal limit
+
+. Deleting an existing normal limit in the Financial Planner
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There are limits with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
+.. Test case: `deletelimit d/11-11-2018 17-11-2018` +
+   Expected: The information shows that the limit has been deleted.
+.. Test case: `deletelimit d/12-11-2018` +
+   Expected: The information shows that the limit has been deleted.
+
+. Trying to delete a normal limit in the Financial Planner with command format error.
+.. Test case: `deletelimit d/17-11-2018 11-11-2018` +
+   Expected: No limit will be edited. Error message about the dateStart must be earlier than dateEnd will be displayed.
+.. Test case: `deletelimit 11-11-2018 17-11-2018 m/100` +
+   Expected: No limit will be edited. Error message about wrong deletelimit command format will be displayed.
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is no existing limit with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
+.. Test case: `deletelimit d/11-11-2018 17-11-2018` +
+   Expected: No limit will be edited. Error message about no existing limit will be displayed.
+.. Test case: `deletelimit d/12-11-2018` +
+   Expected: No limit will be edited. Error message about no existing limit will be displayed.
+
+.. Other incorrect delete commands to try: `deletelimit asd `, `deletelimit x` (where x is an integer), `deletelimit x/12-11-2018 m/asd` +
+   Expected: No limit will be deleted, related error information will be displayed.
+
+=== Adding a monthly limit
+
+. Adding a monthly limit to the Financial Planner
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There is no monthly limit in the FinancialPlanner.
+.. Test case: `addmonthlylimit m/500` +
+   Expected: The monthly limit will be added, detailed monthly limit's information will be displayed.
+
+. Trying to add a monthly limit to the Financial Planner with command format error.
+.. Test case: `addmonthlylimit 500` +
+   Expected: No limit will be edited. Error message about wrong addmonthlylimit command format will be displayed.
+
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is already an existing monthly limit.
+.. Test case: `addmonthlylimit m/200` +
+   Expected: No limit will be edited. Error message about existing monthly limit will be displayed.
+
+.. Other incorrect delete commands to try: `addmonthlylimit asd `, `addmonthlylimit  m/asd` +
+   Expected: The monthly limit will not be added, related error information will be displayed.
+=== Editing the monthly limit
+
+. Editing the monthly limit existing the Financial Planner
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There is already a monthly limit in the FinancialPlanner.
+.. Test case: `editmonthlylimit m/500` +
+   Expected: The monthly limit will be edited, detailed information for both original monthly limit and new monthly limit will be displayed.
+
+. Trying to edit the monthly limit in the Financial Planner with command format error.
+.. Test case: `editmonthlylimit 500` +
+   Expected: No limit will be edited. Error message about wrong editmonthlylimit command format will be displayed.
+
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is no existing monthly limit.
+.. Test case: `editmonthlylimit m/200` +
+   Expected: No limit will be edited. Error message about no monthly limit will be displayed.
+
+.. Other incorrect delete commands to try: `editmonthlylimit asd `, `editmonthlylimit m/asd` +
+   Expected: The monthly limit will not be edited, related error information will be displayed.
+
+=== Deleting the monthly limit
+
+. Deleting the monthly limit existing the Financial Planner
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There is already a monthly limit in the FinancialPlanner.
+.. Test case: `deletemonthlylimit` +
+   Expected: The monthly limit will be deleted.
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is no existing monthly limit.
+.. Test case: `deletemonthlylimit` +
+   Expected: The monthly limit will not be deleted, no monthly limit error message will be displayed.
+
+=== Checking all the limits
+
+. Checking all limits
+
+.. Prerequisites: There are limits inside the LimitList.
+.. Test case: `checklimit` +
+   Expected: The monthly limit will be deleted.
+
+.. Prerequisites: No limits inside the limit list.
+.. Test case: `checklimit` +
+   Expected: The limits' detailed information will not be displayed, no limit in the list error message will be displayed.
 
 === Deleting a person
 

@@ -25,7 +25,7 @@ public class EditMonthlyLimitCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "The monthly limit has been edited. \n";
     public static final String MESSAGE_FAILURE = "There is no monthly limit. \n";
-
+    public static final String MESSAGE_SAME_LIMIT = "The edited monthly is same as the original monthly limit";
 
     private Limit limit;
     private Limit originalLimit;
@@ -47,7 +47,9 @@ public class EditMonthlyLimitCommand extends Command {
         }
         originalLimit = model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd());
         model.updateLimit(originalLimit, limit);
-
+        if (originalLimit.equals(limit)) {
+            throw new CommandException(MESSAGE_SAME_LIMIT);
+        }
         output = MESSAGE_SUCCESS + "Original Limit:\n"
                 + model.generateLimitOutput(model.isExceededLimit(originalLimit),
                 model.getTotalSpend(originalLimit), originalLimit)
