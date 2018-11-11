@@ -7,17 +7,17 @@ import java.util.function.Predicate;
  */
 public class CombinedFriendPredicate implements Predicate<Person> {
 
-    private final Predicate<Person> predicate1;
+    private final Predicate<Person> predicate;
     private final FriendListPredicate friendListPredicate;
 
     public CombinedFriendPredicate(Predicate<Person> predicate, FriendListPredicate friendListPredicate) {
-        this.predicate1 = predicate;
+        this.predicate = predicate;
         this.friendListPredicate = friendListPredicate;
     }
 
     @Override
     public boolean test(Person person) {
-        if (predicate1.test(person) && friendListPredicate.test(person)) {
+        if (predicate.test(person) && friendListPredicate.test(person)) {
             return true;
         }
         return false;

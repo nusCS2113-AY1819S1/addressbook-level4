@@ -557,7 +557,7 @@ On the left side users will now see two panes, one above for friends and one bel
 PersonListPanel is adapted to now have two `Stackpane` instead of one and is nested inside a `Splitpane` in the `VBox`.
 
 .Class diagram of Friend
-image::FriendFeatureFrontEndDiagram.png[width="300"]
+image::FriendFeatureFrontEndDiagramFix.png[width="300"]
 
 ===== Design Considerations
 ===== How to store the friends of the User

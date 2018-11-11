@@ -20,7 +20,7 @@ public class TagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified tags (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Example: " + COMMAND_WORD + " friends";
+            + "Example: " + COMMAND_WORD + " CS2101";
 
     private final TagsContainsKeywords tagsKeywords;
 
@@ -31,11 +31,12 @@ public class TagCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(tagsKeywords);
         model.updateFriendList(tagsKeywords);
         model.updateOtherList(tagsKeywords);
+        model.commitAddressBook();
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                        model.getCurrentFriendList().size() + model.getCurrentOtherList().size()));
     }
 
     @Override

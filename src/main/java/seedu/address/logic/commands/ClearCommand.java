@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -25,7 +24,6 @@ public class ClearCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit);
 
         model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateTimeTable(editedPerson.getTimeTable());
         model.commitAddressBook();
         return new CommandResult(MESSAGE_SUCCESS);
