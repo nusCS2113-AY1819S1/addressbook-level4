@@ -548,7 +548,7 @@ The following diagram illustrates how the Reminder operation works:
 ===== Aspect: Checking for duplications of reminders
 
 * **Alternative 1 (current choice):** `isSameReminder`
-** Pros: Easy to implement and write the test as it checks for both the title and the content of a to-do task
+** Pros: Easy to implement and write the test as it checks for all fields of a reminder
 ** Cons: This implementation may store too many similiar reminders.
 // end::reminder[]
 
