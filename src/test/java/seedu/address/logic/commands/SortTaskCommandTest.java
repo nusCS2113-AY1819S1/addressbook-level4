@@ -19,6 +19,7 @@ import seedu.address.model.UserPrefs;
  * {@code SortTaskCommand}.
  */
 public class SortTaskCommandTest {
+
     /*
     private Model model;
     private Model expectedModel;
