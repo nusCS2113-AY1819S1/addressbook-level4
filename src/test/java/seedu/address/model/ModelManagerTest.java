@@ -86,7 +86,7 @@ public class ModelManagerTest {
         modelManager.resetData(new AddressBook());
 
         thrown.expect(IllegalValueException.class);
-        modelManager.exportFilteredAddressBook(null);
+        modelManager.exportFilteredAddressBook(Paths.get("notGonnaExports.xml"));
     }
 
     @Test
