@@ -220,7 +220,10 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
+* stores the Club Budget Elements Book data.
+* stores the Final Budgets Book data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* similarly exposes an unmodifiable `ObservableList<ClubBudgetElements>` and `ObservableList<FinalClubBudget>` that can be 'observed'.
 * does not depend on any of the other three components.
 
 [NOTE]
