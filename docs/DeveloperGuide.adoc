@@ -430,7 +430,7 @@ Step 4. The user now decides to export graph according to the progress of a stud
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-image::dataToGraphActivityDiagram.png[width="650"]
+image::GradeGraphActivityDiagram.png[width="650"]
 
 ==== Design Considerations
 
