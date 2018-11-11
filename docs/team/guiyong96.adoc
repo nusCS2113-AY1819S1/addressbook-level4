@@ -49,9 +49,7 @@ BookInventory is a desktop application to assist store managers in managing thei
 *** Morphed model portion of addressbook 4.
 ** Enhancements to existing features:
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/58[1])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Perform refactoring for different terms. (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 *** Some parts of the stock feature I added was adopted by several other class mates
 ** Tools:
 
@@ -84,11 +82,16 @@ Examples:
 * `deleterequest 2` +
 Deletes the 2nd request in the displayed request list.
 
-Examples:
+* `deleterequest 27` +
+Deletes the 27th request in the displayed request list.
 
-•	`request` i/978-2-12-345680-3 e/johnd@gmail.com q/5
 
 Requests for 5 same books with the corresponding iSBN13 with requester’s email eg. johnd@gmail.com
+
+=== Toggle Request Panel : `togglerequests`
+
+Toggle the request panel. When toggled off, requests are hidden and request panel can be minimized. Strictly for bookstore owners. +
+Format: `togglerequests`
 
 == Contributions to the Developer Guide
 
