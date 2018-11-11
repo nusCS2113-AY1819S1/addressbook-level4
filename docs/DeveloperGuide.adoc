@@ -2301,6 +2301,22 @@ Multiple groups in the group list. Student being added to group must *NOT* alrea
    Expected: Similar to previous.
 //@@author
 
+=== Run Script Commands
+
+. Run SampleScriptFile
+
+.. Prerequisites: Script Files must be located inside the Script Folder directory and ensure the entire Student Management System is `cleared`
+.. Test case: `script txt/addpersons c/add` +
+   Expected: `addpersons.txt` Script File will be executed and 34 students will be added into the system.
+.. Test case: `script txt/creategroups c/creategroup` +
+   Expected: `creategroups.txt` Script File will be executed and 20 groups are automatically created
+.. Test case: `script txt/addgroups c/addgroup` +
+   Expected: `addgroups.txt` Script File will be executed and students will be assigned to the groups
+.. Test case: `script txt/addtests c/adt` +
+   Expected: `addtests.txt` Script File will be executed and Student Index 1-6 will be assign with some test marks
+.. Test case: `script txt/addnothing c/adt` +
+   Expected: addnothing.txt is not present in the folder
+
 === Saving data
 
 . Dealing with missing/corrupted data files
