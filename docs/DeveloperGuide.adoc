@@ -191,7 +191,7 @@ link:{repoURL}/src/main/java/seedu/expense/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `FinancialPlannerParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+.  The command execution can affect the `Model` (e.g. adding a record) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -460,12 +460,12 @@ implementation.
 parameters also occur during this stage.
 . After the SummaryCommandObject is created, `SummaryByDateCommand#execute` is called. The responsibility of SummaryByDateCommand is a manager that has retrieves information from model and passes it to other components.
 SummaryByDateCommand gets the filtered list from Model using `Model#getFilteredRecordList` and passes it to the constructor of SummaryByDateList. The creates `SummaryList` object which is then
-passed into a `ShowSummaryTableEvent` before trigger.
+passed into a `ShowSummaryTableEvent` before triggering the event.
 . The entire logic process is the same for SummaryByMonthCommand and SummaryByCategoryCommand but uses different lists.
 
 The next phase of the program execution is performed in the UI components.
 
-. `MainWindow` will listen out of the `ShowSummaryTableEvent` and render all Main UI panels invisible before rendering `StatsDisplayPanel` visible.
+. `MainWindow` will listen for the `ShowSummaryTableEvent` and render all Main UI panels invisible before rendering `StatsDisplayPanel` visible.
 . It then calls the handler function in `StatsDisplayPanel` which will create tabs and call the constructor of `SummaryDisplay`.
 . Within the constructor of `SummaryDisplay`, the table is created and the SummaryList is converted into a Ui friendly list.
 
@@ -524,7 +524,7 @@ parameter to StatisticCommandParser.
 * The StatisticCommandParser will then parse the arguments and create a new StatisticCommand object before returning its reference. The activity diagram below details the mechanism
 within the `StatisticCommandParser#parse` method.
 
-image::StatisticParserActivityDiagram.png[width="500"]
+image::StatisticParserActivityDiagram.png[width="790"]
 
 * Once `StatisticCommand#execute` is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
 both the start dates and end dates. This functionality is facilitated by the `ModelManager` which is the class that manages all interactions between
@@ -540,14 +540,14 @@ an event constructor before posting the event `ShowPieChartStatsEvent`.
 After the event is posted, the execution proceeds to the `UI phase` where there is a listener in `MainWindow` listening to this event. This is facilitated by
 the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in `UI phase`.
 
-image::StatisticUiSequenceDiagram.png[width="800"]
+image::StatisticUiSequenceDiagram.png[width="790"]
 
 * When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
 This will make all children hidden from view in the UI which ensures that the UI is displayed correctly.
 * As shown above, the function `StatsDisplayPanel#handleShowPieChartDataEvent` is called which will call the constructor of `MixedPieChartData`. The detailed execution details within this class is as shown in
 the activity diagram below.
 
-image::StatisticUiActivityDiagram.png[width="800"]
+image::StatisticUiActivityDiagram.png[width="790"]
 
 The program flow is then as shown above where the `CategoryBreakdown` is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
 In the current implementation, whenever `stats` is called, 2 tabs will be created, one for total income and one for total expense. Thus, the same program sequence after construction for
@@ -555,15 +555,41 @@ In the current implementation, whenever `stats` is called, 2 tabs will be create
 
 The sequence diagram below details the program flow after the constructor of CategoryBreakdown class is called.
 
-image::StatisticUiDetailedSequenceDiagram.png[width="800"]
+image::StatisticUiDetailedSequenceDiagram.png[width="790"]
 
 [NOTE]
 Note that the CustomLegend class is located within the CustomPieChart class which inherits from the JavaFX PieChart class. This legend class can
 only be accessed within CustomPieChart for security purposes.
 
 ==== Design Considerations
+===== Aspect: Data structure to support statistic command
+* **Alternative 1 (current choice):** The pie chart breakdown is regenerated from the filtered list every time this command is called.
+** Pros: Reduce overhead during normal operations like adding, deleting and editing if we do not have to update the statistics in real time.
+** Cons: If the command is called multiple times, this process could be repeated many times which may make the app sluggish when there are many records.
+
+* **Alternative 2:** Use a data structure to store the statistic information when there is mutation of data
+** Pros: Since the statistics are constantly updated, whenever the command is called, system can read directly and not have to recompute.
+** Cons: Adds overhead to usual operations. Benefits may not be visible if the command is not called frequently.
 
 //end::stats[]
+
+//tag::welcomepanel[]
+=== View current month's breakdown
+This feature does not require user to type any command into the command box or update manually. It provides information about the category breakdown for
+the current month, presenting income and expense statistics together in one panel. In addition, to improve usability, accelerators were assigned to the menu bar
+and *HOME* key is the corresponding accelerator for this feature.
+
+The current implementation of this feature closely follows the *observer design pattern*. Whenever the system detects changes to the underlying list, like adding, deleting or editing
+records, it updates a listener which is attached to the `FilteredList` recordsInCurrentMonth present in ModelManager. To check if the current month is the same as the cached month,
+the listener will run a check by creating a separate `DateIsWithinIntervalPredicate` and comparing it with the current `Predicate` of the filtered list.
+This listener will then process changes in the list and compute a `CategoryStatisticsList` before passing it into the constructor of `UpdateWelcomePanelEvent`.
+Then the event is triggered, and the corresponding listener on the UI side is called.
+
+The program flow on the UI side is similar to that of viewing category breakdown of a time period with the exception that tabs are not created.
+
+The accelerators and the menu bar is connected to the UI component and will trigger `MainWindow#handleHome` whenever the accelerator *HOME* key or *Home* is selected using the menu.
+
+//end::welcomepanel[]
 
 // tag::findtag[]
 === Find records by tag feature
