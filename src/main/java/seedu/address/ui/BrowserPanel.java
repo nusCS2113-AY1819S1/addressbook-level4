@@ -63,7 +63,7 @@ public class BrowserPanel extends UiPart<Region> {
             String encodedString = URLEncoder.encode(arg, StandardCharsets.UTF_8.toString()).replaceAll("\\+", "%20");
             return encodedString;
         } catch (UnsupportedEncodingException uee) {
-            logger.info("Encoding not supported.");
+            logger.warning("Encoding not supported.");
             return "";
         }
     }
@@ -94,6 +94,7 @@ public class BrowserPanel extends UiPart<Region> {
             URL searchPage = new URL(formatEventPageUrl(event));
             loadPage(searchPage.toExternalForm());
         } catch (MalformedURLException mue) {
+            logger.warning("Event page has invalid parameters. Default page will be loaded.");
             loadDefaultPage();
         }
     }
