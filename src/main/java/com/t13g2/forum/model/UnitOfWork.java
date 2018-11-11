@@ -7,7 +7,7 @@ import com.t13g2.forum.storage.forum.IStorage;
 import com.t13g2.forum.storage.forum.JsonFileStorage;
 
 /**
- *
+ * Provides a transaction API to manipulate application database
  */
 public class UnitOfWork implements IUnitOfWork, AutoCloseable {
     private IForumBookStorage forumBookStorage;
@@ -32,31 +32,55 @@ public class UnitOfWork implements IUnitOfWork, AutoCloseable {
         this(new JsonFileStorage());
     }
 
+    /**
+     * Gets {@link IAnnouncementRepository}
+     *
+     * @return {@link IAnnouncementRepository}
+     */
     @Override
     public IAnnouncementRepository getAnnouncementRepository() {
         return announcementRepository;
     }
 
+    /**
+     * Gets {@link ICommentRepository}
+     * @return {@link ICommentRepository}
+     */
     @Override
     public ICommentRepository getCommentRepository() {
         return commentRepository;
     }
 
+    /**
+     * Gets {@link IForumThreadRepository}
+     * @return {@link IForumThreadRepository}
+     */
     @Override
     public IForumThreadRepository getForumThreadRepository() {
         return forumThreadRepository;
     }
 
+    /**
+     * Gets {@link IModuleRepository}
+     * @return {@link IModuleRepository}
+     */
     @Override
     public IModuleRepository getModuleRepository() {
         return moduleRepository;
     }
 
+    /**
+     * Gets {@link IUserRepository}
+     * @return {@link IUserRepository}
+     */
     @Override
     public IUserRepository getUserRepository() {
         return userRepository;
     }
 
+    /**
+     * Saves all changes
+     */
     @Override
     public void commit() {
 
@@ -64,6 +88,9 @@ public class UnitOfWork implements IUnitOfWork, AutoCloseable {
 
     }
 
+    /**
+     * Reverts all changes
+     */
     @Override
     public void rollBack() {
 
@@ -75,7 +102,7 @@ public class UnitOfWork implements IUnitOfWork, AutoCloseable {
     }
 
     /**
-     *
+     * Generates sample data is this is a fresh copy of the application
      */
     public void init() {
         if (this.forumBookStorage.isFresh()) {

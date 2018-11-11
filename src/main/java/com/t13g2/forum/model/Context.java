@@ -14,6 +14,9 @@ public class Context {
     private int currentCommentId = -1;
 
 
+    /**
+     * Creates a new Context instance.
+     */
     private Context() {
 
     }
@@ -25,16 +28,26 @@ public class Context {
         return instance;
     }
 
+    /**
+     * Returns current logged in user
+     *
+     * @return current logged in user
+     */
     public User getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * Sets current logged in user
+     *
+     * @param currentUser
+     */
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
 
     /**
-     * returns current logged in user id
+     * Returns current logged in user id
      *
      * @return user id, if not logged in -1
      */
@@ -43,7 +56,7 @@ public class Context {
     }
 
     /**
-     * checks login status
+     * Checks login status
      * @return true if logged in otherwise false
      */
     public boolean isLoggedIn() {
@@ -51,7 +64,7 @@ public class Context {
     }
 
     /**
-     * checks if current user a admin.
+     * Checks if current user a admin.
      * @return true if current user is admin otherwise false(including not logged in)
      */
     public boolean isCurrentUserAdmin() {
@@ -59,33 +72,57 @@ public class Context {
     }
 
     /**
-     * checks if current user is blocked.
+     * Checks if current user is blocked.
      * @return true if current user is blocked or not logged in otherwise false
      */
     public boolean isCurrentUserBlocked() {
         return currentUser == null || currentUser.isBlock();
     }
 
+    /**
+     * Gets the module id that current user is browsing
+     * @return module id
+     */
     public int getCurrentModuleId() {
         return currentModuleId;
     }
 
+    /**
+     * Sets the module id that current user is browsing
+     * @param currentModuleId
+     */
     public void setCurrentModuleId(int currentModuleId) {
         this.currentModuleId = currentModuleId;
     }
 
+    /**
+     * Gets the thread id that current user is browsing
+     * @return thread id
+     */
     public int getCurrentThreadId() {
         return currentThreadId;
     }
 
+    /**
+     * Sets the thread id that current user is browsing
+     * @param currentThreadId
+     */
     public void setCurrentThreadId(int currentThreadId) {
         this.currentThreadId = currentThreadId;
     }
 
+    /**
+     * Gets the comment id that current user is browsing
+     * @return comment id
+     */
     public int getCurrentCommentId() {
         return currentCommentId;
     }
 
+    /**
+     * Sets the comment id that current user is browsing
+     * @param currentCommentId
+     */
     public void setCurrentCommentId(int currentCommentId) {
         this.currentCommentId = currentCommentId;
     }

@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- *
+ * Provides auto increment integer Ids for entity classes
  */
 public class RunningId {
     private static RunningId ourInstance = new RunningId();
@@ -20,6 +20,7 @@ public class RunningId {
     }
 
     /**
+     * Saves next Id
      * @param currentId
      */
     private void writeToFile(int currentId) {
@@ -32,6 +33,7 @@ public class RunningId {
     }
 
     /**
+     * Reads current Id
      * @return
      */
     private int readFromFile() {
@@ -46,6 +48,9 @@ public class RunningId {
         return -1;
     }
 
+    /**
+     * Checks the existence of id record, if not, creates one with next Id 0
+     */
     private void init() {
         if (!Files.exists(Paths.get(StorageMapping.getInstance().getFileName(RunningId.class)))) {
             writeToFile(0);
@@ -53,7 +58,8 @@ public class RunningId {
     }
 
     /**
-     * @return
+     * Gets Id for an entity
+     * @return next auto incremented id
      */
     public int nextId() {
         int id = readFromFile();
