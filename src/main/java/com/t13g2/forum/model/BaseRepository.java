@@ -27,7 +27,7 @@ public abstract class BaseRepository {
     /**
      * Helper method to get an entity by its id
      *
-     * @param list of type List<T>
+     * @param list
      * @param id   of type int
      * @return T
      * @throws EntityDoesNotExistException when
@@ -43,7 +43,7 @@ public abstract class BaseRepository {
     /**
      * Helper method to remove an entity from a list by id
      *
-     * @param list of type List<T>
+     * @param list
      * @param id of type int
      */
     protected <T extends BaseModel> void removeById(List<T> list, int id) {
