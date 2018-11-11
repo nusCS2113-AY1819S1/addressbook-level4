@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-Recruit Book was developed by the https://CS2113-AY1819S1-F09-4.github.io/docs/Team.html[F09-4] team. +
+Recruit Book was developed by F09-4 team. +
 
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
@@ -30,7 +30,7 @@ Responsibilities: API expert
 
 === Rachel Lee
 image::leerachel.png[width="150", align="left"]
-{empty}[http://github.com/leerachel[github]]
+{empty}[http://github.com/leerachel[github]][https://cs2113-ay1819s1-f09-4.github.io/main/team/leerachel.html[portfolio]]
 
 Role: Developer +
 Responsibilities: Documentation + Code Quality
