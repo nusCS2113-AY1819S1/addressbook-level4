@@ -367,7 +367,8 @@ pressing `TAB` will auto-complete the command for you without the need to type i
 Examples:
 
 * While typing `his` to get `history` command, press `TAB`. The `history` command will automatically be filled in for
-you as it is the only suggestion available.
+you as it is the only suggestion available. The command parameters would then be shown as a prompt to help you with your
+input.
 * While typing `e`, press `TAB`. The system will suggest to you all possible commands that start with `e`, which would
 be `exportall`, `exit`, and `edit`.
 
@@ -380,14 +381,15 @@ Examples:
 
 * If you wanted to type `select` but you typed `salect` instead, the system will tell you that it is an invalid command,
 and would suggest to you the command `select` instead.
+// end::suggestions[]
+
+// tag::dataencryption[]
+=== Encryption [Coming in V2.0]
 
 When exporting contacts for the purpose of information transfer to another computer, encryption can be enabled before
 the export command to prevent data misuse.
 
 Command type: `encrypt for export`
-// end::suggestions[]
-
-// tag::dataencryption[]
 // end::dataencryption[]
 
 == FAQ
