@@ -32,7 +32,7 @@ import seedu.address.testutil.EditProductDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_LOGIN_USERNAME = "slap";
+    public static final String VALID_LOGIN_USERNAME = "john";
     public static final String VALID_LOGIN_PASSWORD = "password";
 
     public static final String LOGIN_VALID_DESC_USERNAME = " " + PREFIX_USERNAME + VALID_LOGIN_USERNAME;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <!-- Distributor with invalid name field -->
+    <products>
+        <name>Appl!!e</name>
+        <serialNumber>001</serialNumber>
+        <distributor>Farm</distributor>
+        <info>fruit</info>
+        <remainingItems>12</remainingItems>
+        <tagged>healthy</tagged>
+    </products>
+</addressbook>
