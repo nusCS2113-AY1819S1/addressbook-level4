@@ -55,6 +55,11 @@ concise instructions at a level that is easy for the end-user to follow._
 
 include::../UserGuide.adoc[tag=add_milestone]
 
+include::../UserGuide.adoc[tag=check_milestone]
+
+include::../UserGuide.adoc[tag=FAQ_milestone]
+
+
 
 == Contributions to the Developer Guide
 
