@@ -63,10 +63,10 @@ image::UiLayout.png[width="800", align="left"]
 * Command Box: Enter your commands here. Results of your commands will be display in the `Command Result` box.
 * Book List: Shows all the books available in BookInventory, you can search/filter books by entering commands in the `Command Box`.
 * Information Panel: This is a welcome panel. When you click on any books, this panel will return a search result of relevant books on amazon.
-* Request Panel: Your past requests are shown here. 
+* Request Panel: Your past requests are shown here.
 [TIP]
 You can send in a request via the `Command Box`.
-* List of Commands: This panels shows the list of commands available. You can click on any commands inside and the `Command Box` will show the relevant fields you need to provide for the command. 
+* List of Commands: This panels shows the list of commands available. You can click on any commands inside and the `Command Box` will show the relevant fields you need to provide for the command.
 
 [[Features]]
 == Features
