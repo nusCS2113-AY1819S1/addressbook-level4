@@ -213,7 +213,7 @@ public class RecruitBookParserTest {
             assertEquals(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
                     + EmailInitialiseCommand.MESSAGE_USAGE, pe.getMessage());
         }
-      
+
     public void parseCommand_editCompanies() throws Exception {
         Company company = new CompanyBuilder().build();
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(company).build();
