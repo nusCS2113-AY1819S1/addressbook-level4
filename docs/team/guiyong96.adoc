@@ -24,7 +24,6 @@ BookInventory is a desktop application to assist store managers in managing thei
 ** Functionality: Owners are able to view a list of requests sent in by students.
 ** Justification: This feature is necessary for owners to view and decide whether to accept or reject a request.
 ** Highlights: This feature requires heavy implementation in coding as we require an additional storage and an additional model which require due amount of time to implement.
-** Credits:
 
 * Default page is replaced with a welcome page.
 
@@ -42,9 +41,8 @@ BookInventory is a desktop application to assist store managers in managing thei
 *** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
 ** Project morphing:
 *** Morphed model portion of addressbook 4.
-** Enhancements to existing features:
 ** Community:
-*** Perform refactoring for various features. (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Perform refactoring for various features.
 *** Several parts of the request feature implemented were adopted by others.
 
 == Contributions to the User Guide
