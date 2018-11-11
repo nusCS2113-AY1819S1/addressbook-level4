@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 
 /**
  * Tests that a {@code Product}'s {@code Tag} matches any of the keywords given.
@@ -17,10 +18,16 @@ public class TagContainsKeywordsPredicate implements Predicate<Product> {
 
     @Override
     public boolean test(Product product) {
+        String tagString = " ";
+        for (Tag tag : product.getTags()) {
+            tagString = tagString + tag.toString();
+        }
+
+        final String finalTagString = tagString.replace("[", "").replace("]", " ");
+
         return keywords.stream()
                 .anyMatch(keyword
-                    -> StringUtil.containsWordIgnoreCase(product.getTags().toString()
-                        .replace("[", "").replace("]", ""), keyword));
+                    -> StringUtil.containsWordIgnoreCase(finalTagString, keyword));
     }
 
     @Override
