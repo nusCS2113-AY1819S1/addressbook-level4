@@ -50,7 +50,7 @@ student management system, that person would also be deleted in all the groups h
 * *Other contributions*:
 
 ** Project management:
-*** Team Leader 
+*** Team Leader
 *** Managed release `v1.4` on GitHub
 ** Enhancements to existing features:
 *** Add command word alias's (shortcut's) to all commands for a local-impact enhancement (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/10[#10])
