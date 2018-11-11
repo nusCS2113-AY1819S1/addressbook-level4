@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class LogoutCommandParser implements Parser<LogoutCommand> {
-    private static final String MESSAGE_INVALID_LOGOUT = "Invalid logout!"
+    public static final String MESSAGE_INVALID_LOGOUT = "Invalid logout!"
             + "\nlogout should not have any params"
             + "\nExample: logout";
 
@@ -22,9 +22,10 @@ public class LogoutCommandParser implements Parser<LogoutCommand> {
      */
     public LogoutCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        switch (trimmedArgs) {
+        case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
-        } else {
+        default:
             throw new ParseException(MESSAGE_INVALID_LOGOUT);
         }
     }
