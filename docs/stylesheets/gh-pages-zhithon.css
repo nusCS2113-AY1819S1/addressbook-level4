@@ -41,7 +41,12 @@ h5,
 h5 > a.link,
 h6,
 h6 > a.link {
-    color: #0006e9;
+    color: #ff5565;
+}
+
+h2 > a.link:hover {
+    text-decoration: underline;
+    color: red;
 }
 
 .subheader,
@@ -63,7 +68,7 @@ table.tableblock > .title,
 .ulist > .title,
 .qlist > .title,
 .hdlist > .title {
-    color: rgb(0, 6, 233);
+    color: rgb(0, 249, 255);
 }
 
 @media screen {
@@ -101,40 +106,42 @@ table.tableblock > .title,
 
 :root {
     --maincolor: #ff706b;
-    --primarycolor: #e90014;
+    --primarycolor: #000000;
     --secondarycolor: #333333;
     --tertiarycolor: #772953;
     --sidebarbackground: #525252;
-    --linkcolor: #b71c1c;
-    --linkcoloralternate: #f44336;
+    --linkcolor: #fff800;
+    --linkcoloralternate: #fff800;
     --white: #FFFFFF;
     --black: #000000;
 }
 
 /* Text styles */
 body {
-    font-family: "Ubuntu", sans-serif;
+    font-family: "Georgia", sans-serif;
+    background-image: linear-gradient(#a6f69f, #9bb0ff);
 }
 
 h1, h2 {
     color: var(--primarycolor) !important;
-    font-family: "Ubuntu", sans-serif;
+    font-family: "Georgia", sans-serif;
 }
 
 h3, h4, h5, h6 {
     color: var(--secondarycolor);
-    font-family: "Ubuntu", sans-serif;
+    font-family: "Georgia", sans-serif;
 }
 
 .title {
     color: var(--primarycolor) !important;
-    font-family: "Ubuntu", sans-serif;
+    font-family: "Georgia", sans-serif;
     font-style: normal;
     font-weight: normal;
 }
 
 p {
-    font-family: "Ubuntu", sans-serif ! important
+    font-family: "Georgia", sans-serif ! important;
+    font-size: 20px !important;
 }
 
 #toc.toc2 a:link {
@@ -142,8 +149,8 @@ p {
 }
 
 code {
-    background-color: var(--secondarycolor) !important;
-    color: var(--white)
+    background-color: #a3a3a3 !important;
+    color: #fbfbfb;
 }
 
 /* Table styles */
@@ -234,7 +241,7 @@ video {
 }
 
 .navbar-light .nav-link.active {
-    border-bottom: 4px #e40019 solid;
+    border-bottom: 4px #ff5565 solid;
 }
 
 .navbar-lg .nav-link.active {

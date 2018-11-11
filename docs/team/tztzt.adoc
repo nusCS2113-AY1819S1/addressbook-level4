@@ -4,35 +4,35 @@
 :stylesDir: ../stylesheets/
 :stylesheet: gh-pages-zhithon.css
 
-== PROJECT: Savee - Financial Planner
+== Project: 'Savee' - A Desktop Financial Planner
 
 == Overview
 
-FinancialPlanner is a desktop financial planner application used for teaching Software Engineering
-principles. The user interacts with it using a command-line interface (CLI), and it has a graphical
-user interface created using JavaFX.
+'Savee' is a desktop financial planner application my team create for our Software Engineering Principles module in
+Semester 1 in our 2nd year as Computer Engineering students. Users interact with its simple command-line interface (CLI),
+as well as its graphical user interface created using JavaFX.
 
-We worked in groups of 4 - 5 members for the project and were each expected to make contributions to the project by a
-dding both minor enhancements and major features to the software. We were initially provided with the base code which
-is written in Java, and has about 10 kLoC. Our task was to morph the existing code into any other software we opted to.
+We worked in groups of 4 members for the project and were each expected to make contributions to the project by adding
+both minor enhancements and major features to the software. We were initially provided with a base code written in
+Java, and had about 10 kLoC. Our task was to morph the existing code into any other software we opted to.
 
-We would be evaluated based on our ability to work with existing base code and the quality of our new enhancements to
+We were evaluated based on our ability to work with existing base code and the quality of our new modifications to
 the existing code. Besides code, we were expected to write a User Guide and Developer Guide as well for the product
-as though we were releasing an official product for public usage to simulate an actual work schedule.
+as though we were releasing an official product to simulate an actual project work schedule.
 
-We choose to create our application FinancialPlanner to allow users keep track of their financial status using a
+We chose to create our application Savee to allow users keep track of their financial status using a
 desktop application and is targeted at users who enjoy typing and are keen on managing their finances responsibly.
 
-The application revolves around usage of the CLI to manage one's finances. Users can store `name`, `moneyflow`, `date`
-and `tags` of any form of financial activity in the application as a `Record`. `Moneyflow` would be the expenditure
+The application revolves around usage of the CLI to manage one's finances. Users can store a `Record` consisting of
+`name`, `moneyflow`, `date` and `tags` of any form of financial activity in the application. `Moneyflow` would be the expenditure
 or income of the financial activity, `date` would be the actual date the activity was performed on and `tags` is a
-system for users to label their data for easy access.
+system for users to categorise their data.
 
 == Summary of Contributions
 
-=== `completed` *Major Enhancement #1*: added the ability to autocomplete text input
+=== *Major Enhancement #1*: added the ability to autocomplete text input `Completed`
 
-** What it does: displays a popup-box of suggested words to autocomplete with when user inputs parts of a word.
+** *Function*: displays a popup-box of suggested words to autocomplete with when user inputs parts of a word.
 ** Justification: this feature improves the product significantly because users who may not be familiar with
 the software commands can save time using the software by keying in parts of a command word they want to use
 and simply complete the command using the list of suggested words. It also helps users to fill in some command
