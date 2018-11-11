@@ -39,7 +39,7 @@ public class VersionedExpenditureTrackerTest {
     }
 
     @Test
-    public void commit_multipleETPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
+    public void commit_multipleEtPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
         VersionedExpenditureTracker versionedExpenditureTracker = prepareExpenditureTracker(
                 emptyExpenditureTracker, expenditureTrackerWithChicken, expenditureTrackerWithIphone);
         shiftCurrentStatePointerLeftwards(versionedExpenditureTracker, 2);
