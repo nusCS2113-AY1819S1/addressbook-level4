@@ -5,7 +5,11 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import guitests.guihandles.*;
+import guitests.guihandles.ExpenditureCardHandle;
+import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.TaskCardHandle;
 import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
@@ -45,14 +49,16 @@ public class GuiTestAssert {
         assertEquals(expectedTask.getName().toString(), actualCard.getTaskName());
         assertEquals(expectedTask.getDate().value, actualCard.getTaskDate());
         assertEquals(expectedTask.getModule().value, actualCard.getTaskModule());
-        assertEquals("Low priority (" + expectedTask.getPriority().value + ")", actualCard.getTaskPriority());
+        assertEquals("Low priority (" + expectedTask.getPriority().value + ")",
+                actualCard.getTaskPriority());
         assertEquals(expectedTask.getComplete(), actualCard.getTaskState().equals("Status: Completed"));
     }
 
     /**
      * Asserts that {@code actualCard} displays the details of {@code expectedExpenditure}.
      */
-    public static void assertCardDisplaysExpenditure(Expenditure expectedExpenditure, ExpenditureCardHandle actualCard) {
+    public static void assertCardDisplaysExpenditure(Expenditure expectedExpenditure,
+                                                     ExpenditureCardHandle actualCard) {
         assertEquals(expectedExpenditure.getDescription().toString(), actualCard.getDescription());
         assertEquals(expectedExpenditure.getDate().toString(), actualCard.getDate());
         assertEquals(expectedExpenditure.getCategory().toString(), actualCard.getCategory());

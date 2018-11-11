@@ -13,7 +13,7 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
-public class TaskCardTest extends GuiUnitTest{
+public class TaskCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
