@@ -25,7 +25,8 @@ public class SortJobOfferCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Sorted all job offers.\n";
 
-    public static final String MESSAGE_TAG_USAGE = "Please sort by using one of the available tags: "
+    public static final String MESSAGE_TAG_USAGE = "NOTE: Enter \"listC\" first to see the full list of job offers!\n"
+            + "Please sort by using one of the available tags: "
             + "Company Name " + PREFIX_COMPANY_NAME
             + ", Job Titles " + PREFIX_JOB
             + ", Age Range " + PREFIX_AGE_RANGE
@@ -64,6 +65,23 @@ public class SortJobOfferCommand extends Command {
 
         EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortJobOfferCommand)) {
+            return false;
+        }
+
+        // state check
+        SortJobOfferCommand s = (SortJobOfferCommand) other;
+        return prefixToSort.equals(s.prefixToSort);
     }
 
 }

@@ -197,7 +197,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the candidate at the given {@code targetIndex} in the
      * {@code model}'s candidate book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showPersonAtIndex(Model model, Index targetIndex) throws ParseException {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCandidateList().size());
         Candidate candidate = model.getFilteredCandidateList().get(targetIndex.getZeroBased());
         final String[] splitName = candidate.getName().fullName.split("\\s+");

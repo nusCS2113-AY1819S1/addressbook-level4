@@ -27,7 +27,7 @@ public class TypicalCompaniesAndJobOffers {
     // ============================== COMPANY ================================================ //
 
     public static final Company AUDI = new CompanyBuilder().withCompanyName("Audi AG")
-            .withAddress("281 Alexandra Rd, Singapore 159938").withEmail("customerservice@myaudiworld.sg")
+            .withAddress("281 Alexandra Rd, Singapore 159938").withEmail("customerservice@audiworld.sg")
             .withPhone("65133674").build();
     public static final Company BENTLEY = new CompanyBuilder().withCompanyName("Bentley Motors Limited")
             .withAddress("45 Leng Kee Rd, Singapore 159103").withEmail("customerservice@bentley.sg")
@@ -51,52 +51,53 @@ public class TypicalCompaniesAndJobOffers {
     // ============================== JOB OFFER ================================================ //
 
     public static final JobOffer CASHIER_AUDI = new JobOfferBuilder().withCompanyName("Audi AG")
-            .withAgeRange("20-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
-            .withSalary("2000").withCandidateList(ALICE).build();
+            .withAgeRange("24-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
+            .withSalary("2400").withCandidateList(ALICE).build();
 
     public static final JobOffer CASHIER_BENTLEY = new JobOfferBuilder().withCompanyName("Bentley Motors Limited")
-            .withAgeRange("20-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
-            .withSalary("1900").withCandidateList(ALICE).build();
+            .withAgeRange("23-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
+            .withSalary("2300").withCandidateList(ALICE).build();
 
     public static final JobOffer CASHIER_CHEVROLET = new JobOfferBuilder().withCompanyName("Chevrolet Alpine Motors")
-            .withAgeRange("20-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
-            .withSalary("1500").withCandidateList(ALICE).build();
-
-    public static final JobOffer CASHIER_DODGE = new JobOfferBuilder().withCompanyName("Dodge Brothers Company")
-            .withAgeRange("20-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
+            .withAgeRange("22-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
             .withSalary("2200").withCandidateList(ALICE).build();
 
-    public static final JobOffer SALESPERSON_AUDI = new JobOfferBuilder().withCompanyName("Audi AG")
-            .withAgeRange("20-35").withEducation("ALEVELS").withGender("M").withJob("Salesperson")
-            .withSalary("2500").withCandidateList(ALICE).build();
+    public static final JobOffer CASHIER_DODGE = new JobOfferBuilder().withCompanyName("Dodge Brothers Company")
+            .withAgeRange("21-50").withEducation("OLEVELS").withGender("F").withJob("Cashier")
+            .withSalary("2100").withCandidateList(ALICE).build();
 
-    public static final JobOffer SALESPERSON_BENTLEY = new JobOfferBuilder().withCompanyName("Bentley Motors Limited")
-            .withAgeRange("20-35").withEducation("ALEVELS").withGender("F").withJob("Salesperson")
+    public static final JobOffer SALESPERSON_AUDI = new JobOfferBuilder().withCompanyName("Audi AG")
+            .withAgeRange("30-35").withEducation("ALEVELS").withGender("M").withJob("Salesperson")
             .withSalary("3000").withCandidateList(ALICE).build();
 
-    public static final JobOffer SALESPERSON_CHEVROLET = new JobOfferBuilder()
-            .withCompanyName("Chevrolet Alpine Motors").withAgeRange("20-35").withEducation("ALEVELS")
-            .withGender("F").withJob("Salesperson").withSalary("2400").withCandidateList(ALICE).build();
+    public static final JobOffer SALESPERSON_BENTLEY = new JobOfferBuilder().withCompanyName("Bentley Motors Limited")
+            .withAgeRange("29-35").withEducation("ALEVELS").withGender("F").withJob("Salesperson")
+            .withSalary("2900").withCandidateList(ALICE).build();
 
-    public static final JobOffer SALESPERSON_DODGE = new JobOfferBuilder().withCompanyName("Dodge Brothers Company")
-            .withAgeRange("20-35").withEducation("ALEVELS").withGender("M").withJob("Salesperson")
+    public static final JobOffer SALESPERSON_CHEVROLET = new JobOfferBuilder().withCompanyName(
+            "Chevrolet Alpine Motors")
+            .withAgeRange("28-35").withEducation("ALEVELS").withGender("F").withJob("Salesperson")
             .withSalary("2800").withCandidateList(ALICE).build();
 
+    public static final JobOffer SALESPERSON_DODGE = new JobOfferBuilder().withCompanyName("Dodge Brothers Company")
+            .withAgeRange("27-35").withEducation("ALEVELS").withGender("M").withJob("Salesperson")
+            .withSalary("2700").withCandidateList(ALICE).build();
+
     public static final JobOffer MANAGER_AUDI = new JobOfferBuilder().withCompanyName("Audi AG")
-            .withAgeRange("25-45").withEducation("BACHELOR").withGender("F").withJob("Manager")
-            .withSalary("4000").withCandidateList(ALICE).build();
+            .withAgeRange("34-45").withEducation("BACHELOR").withGender("F").withJob("Manager")
+            .withSalary("4400").withCandidateList(ALICE).build();
 
     public static final JobOffer MANAGER_BENTLEY = new JobOfferBuilder().withCompanyName("Bentley Motors Limited")
-            .withAgeRange("25-45").withEducation("BACHELOR").withGender("F").withJob("Manager")
-            .withSalary("4500").withCandidateList(ALICE).build();
+            .withAgeRange("33-45").withEducation("BACHELOR").withGender("F").withJob("Manager")
+            .withSalary("4300").withCandidateList(ALICE).build();
 
     public static final JobOffer MANAGER_CHEVROLET = new JobOfferBuilder().withCompanyName("Chevrolet Alpine Motors")
-            .withAgeRange("25-45").withEducation("BACHELOR").withGender("M").withJob("Manager")
-            .withSalary("5000").withCandidateList(ALICE).build();
+            .withAgeRange("32-45").withEducation("BACHELOR").withGender("M").withJob("Manager")
+            .withSalary("4200").withCandidateList(ALICE).build();
 
     public static final JobOffer MANAGER_DODGE = new JobOfferBuilder().withCompanyName("Dodge Brothers Company")
-            .withAgeRange("25-45").withEducation("BACHELOR").withGender("M").withJob("Manager")
-            .withSalary("5500").withCandidateList(ALICE).build();
+            .withAgeRange("31-45").withEducation("BACHELOR").withGender("M").withJob("Manager")
+            .withSalary("4100").withCandidateList(ALICE).build();
 
     public static final String KEYWORD_MATCHING_CASHIER = "Cashier"; // A keyword that matches AUDI
 
@@ -143,4 +144,20 @@ public class TypicalCompaniesAndJobOffers {
     public static List<JobOffer> getTypicalUniqueJobOffers() {
         return new ArrayList<>(Arrays.asList(SALESPERSON_AUDI, CASHIER_BENTLEY, MANAGER_DODGE));
     }
+
+    /**
+     * Returns an {@code CompanyBook} with all the typical companies in a reversed order.
+     */
+    public static CompanyBook getReversedCompanyBook() {
+        CompanyBook cb = new CompanyBook();
+        for (Company company : getReversedCompanies()) {
+            cb.addCompany(company);
+        }
+        return cb;
+    }
+
+    public static List<Company> getReversedCompanies() {
+        return new ArrayList<>(Arrays.asList(DODGE, CHEVROLET, BENTLEY, AUDI));
+    }
+
 }

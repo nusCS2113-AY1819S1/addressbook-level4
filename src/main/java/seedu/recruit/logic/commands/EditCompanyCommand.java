@@ -73,7 +73,7 @@ public class EditCompanyCommand extends Command {
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
         }
 
         Company companyToEdit = lastShownList.get(index.getZeroBased());
