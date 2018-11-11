@@ -37,39 +37,39 @@ public class AttendeesTest {
 
 
     @Test
-    public void hasEmail_presentEmail_success() {
+    public void hasEmail_presentEmail_returnsTrue() {
         // Attendees has emails it contain
         assertTrue(attendeesOne.hasPerson(VALID_EMAIL_AMY));
 
     }
 
     @Test
-    public void hasEmail_absentEmail_success() {
+    public void hasEmail_absentEmail_returnsTrue() {
         // Attendees does not have emails in list
         assertFalse(attendeesOne.hasPerson(VALID_EMAIL_BOB));
     }
 
 
     @Test
-    public void createAttendeesWithAddedEmail() {
+    public void createAttendeesWithAddedEmail_validEmail_success() {
         Attendees attendeesTwoNew = attendeesTwo.createAttendeesWithAddedEmail(VALID_EMAIL_CALVIN);
         assertEquals(attendeesTwoNew, attendeesThree);
     }
 
     @Test
-    public void createAttendeesWithRemovedEmail() {
+    public void createAttendeesWithRemovedEmail_validEmail_success() {
         Attendees attendeesThreeNew = attendeesThree.createAttendeesWithRemovedEmail(VALID_EMAIL_CALVIN);
         assertEquals(attendeesTwo, attendeesThreeNew);
     }
 
     @Test
-    public void isSetEmpty_attendeeIsEmpty_success() {
+    public void isSetEmpty_attendeeIsEmpty_returnsTrue() {
         Attendees attendeesNull = new Attendees();
         assertTrue(attendeesNull.isSetEmpty());
     }
 
     @Test
-    public void isSetEmpty_attendeeIsFilled_success() {
+    public void isSetEmpty_attendeeIsFilled_returnsFalse() {
         assertFalse(attendeesOne.isSetEmpty());
     }
 

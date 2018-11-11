@@ -3,6 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BENSON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CARL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_LYDIA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.TestUtil.getEvent;
 import static seedu.address.testutil.TestUtil.getPerson;
@@ -76,7 +77,7 @@ public class InviteCommandSystemTest extends AddressBookSystemTest {
         assertTrue(indexPerson.getZeroBased() < getModel().getFilteredPersonList().size());
         command = " " + InviteCommand.COMMAND_WORD + "  " + indexPerson.getOneBased() + " "
                 + PREFIX_TO + " " + indexEvent.getOneBased();
-        updatedEvent = new EventBuilder(EVENT_4).withAttendee(VALID_EMAIL_BENSON, "lydia@example.com").build();
+        updatedEvent = new EventBuilder(EVENT_4).withAttendee(VALID_EMAIL_BENSON, VALID_EMAIL_LYDIA).build();
         assertCommandSuccess(command, indexPerson, indexEvent, updatedEvent);
 
         /* Case: filtered person list, event index within bounds of event list
@@ -87,8 +88,7 @@ public class InviteCommandSystemTest extends AddressBookSystemTest {
         showAllEvents();
         int invalidIndex = getModel().getAddressBook().getPersonList().size();
         assertCommandFailure(InviteCommand.COMMAND_WORD + " " + invalidIndex + " "
-                        + PREFIX_TO + indexEvent.getOneBased(),
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                        + PREFIX_TO + indexEvent.getOneBased(), Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: filtered event list, person index within bounds of person list
          * but event index out of bounds of event list
@@ -98,8 +98,7 @@ public class InviteCommandSystemTest extends AddressBookSystemTest {
         showEventsWithName("1");
         invalidIndex = getModel().getEventList().getEventList().size();
         assertCommandFailure(InviteCommand.COMMAND_WORD + " " + indexPerson.getOneBased() + " "
-                        + PREFIX_TO + invalidIndex,
-                Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+                        + PREFIX_TO + invalidIndex, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
         /* ------------------------------ Performing invalid invite operation ----------------------------------- */
 

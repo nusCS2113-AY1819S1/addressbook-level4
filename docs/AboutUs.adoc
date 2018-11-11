@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Lee Ming Liang
 image::icedcoffeeboy.png[width="150", align="left"]
-{empty}[https://github.com/IcedCoffeeBoy[github]] [<<icedcoffeeboy#, portfolio>>]
+{empty}[https://github.com/IcedCoffeeBoy[github]] [<<IcedCoffeeBoy#, portfolio>>]
 
 **Role:** Developer +
 **Responsibilities:** In charge of Storage, Code Quality

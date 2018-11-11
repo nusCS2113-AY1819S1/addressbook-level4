@@ -46,16 +46,14 @@ public class EditEventCommandTest {
 
 
     @Test
-    public void execute_invalidTime_failure() {
+    public void execute_endTimeEarlierThanStartTime_failure() {
 
-        // end time earlier than start time
         Event editedEvent = new EventBuilder().build();
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent)
                 .withStartTime(VALID_TIME_NOON).withEndTime(VALID_TIME_MORNING).build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_THIRD_EVENT, descriptor);
 
         assertCommandFailure(editEventCommand, model, commandHistory, EndTime.MESSAGE_INVALID_END_TIME);
-
     }
 
     @Test
@@ -65,7 +63,6 @@ public class EditEventCommandTest {
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_SECOND_EVENT, descriptor);
 
         assertCommandFailure(editEventCommand, model, commandHistory, EditEventCommand.MESSAGE_DUPLICATE_EVENT);
-
     }
 
     @Test
@@ -90,7 +87,7 @@ public class EditEventCommandTest {
 
     }
 
-
+    // @@author: AB4
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Event editedEvent = new EventBuilder().build();

@@ -127,6 +127,7 @@ public class MainApp extends Application {
         initialEventListData.sortByName();
         return new ModelManager(initialAddressData, initialEventListData, userPrefs);
         //End of modification
+        //@@author:
     }
 
     private void initLogging(Config config) {

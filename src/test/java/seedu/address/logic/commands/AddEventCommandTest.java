@@ -49,7 +49,7 @@ public class AddEventCommandTest {
     }
 
     @Test
-    public void execute_duplicateEvent_throwsCommandException() throws Exception {
+    public void execute_clashingEvent_throwsCommandException() throws Exception {
         Event validEvent = new EventBuilder().build();
         AddEventCommand addEventCommand = new AddEventCommand(validEvent);
         ModelStub modelStub = new ModelStubWithEvent(validEvent);

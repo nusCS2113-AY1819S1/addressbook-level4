@@ -321,7 +321,7 @@ Example:
 * `invite 1 to/3` +
 Invite 1st employee on employee list to 3rd event on event list
 
-image::InviteCommandGuide.png[width="800"]
+image::InviteCommandGuide.png[width="500"]
 
 ****
 * Invites the employee at the specified `PERSON_INDEX` *TO* the event at the specified `EVENT_INDEX`.

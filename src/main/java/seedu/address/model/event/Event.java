@@ -16,10 +16,9 @@ public class Event implements Comparable<Event> {
     public static final String MESSAGE_START_TIME = " Start time: ";
     public static final String MESSAGE_END_TIME = " End time: ";
 
-    // Identity fields
-    private final EventName eventName;
 
     // Data fields
+    private final EventName eventName;
     private final Description description;
     private final EventDate date;
     private final StartTime startTime;
@@ -28,7 +27,7 @@ public class Event implements Comparable<Event> {
     private Attendees attendees;
 
     /**
-     * Every field must be present not null
+     * Every field besides Attendees must be present not null
      */
 
     public Event(EventName eventName, Description description,
@@ -46,7 +45,7 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Overloaded constructor to construct event with existing attendees list
+     * Overloaded constructor to construct event with existing attendees
      */
 
     public Event(EventName eventName, Description description,
@@ -62,7 +61,6 @@ public class Event implements Comparable<Event> {
         this.attendees = attendees;
 
     }
-
 
     public EventName getEventName() {
         return eventName;
@@ -130,7 +128,6 @@ public class Event implements Comparable<Event> {
                 && otherEvent.getAttendees().equals(getAttendees());
     }
 
-
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -160,10 +157,10 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Create a new event with the new email added to the current attendees list.
+     * Create a new event with the new email added to the current Attendee.
      *
-     * @param personEmail The person's email to be added to the attendees list.
-     * @return An updated event with the person's email added to the original attendees list.
+     * @param personEmail The person's email to be added to Attendee.
+     * @return An updated event with the person's email added to the original Attendee.
      */
     public Event createEventWithUpdatedAttendee(String personEmail) {
         assert personEmail != null;
@@ -174,10 +171,10 @@ public class Event implements Comparable<Event> {
 
 
     /**
-     * Create a new event with an existing email removed from the current attendees list.
+     * Create a new event with an existing email removed from the current Attendee.
      *
-     * @param personEmail The person's email to be removed from the attendees list.
-     * @return An updated event with the person's email removed from the attendees list.
+     * @param personEmail The person's email to be removed from Attendee.
+     * @return An updated event with the person's email removed from Attendee.
      */
     public Event removePersonFromAttendee(String personEmail) {
         assert personEmail != null;
@@ -189,7 +186,7 @@ public class Event implements Comparable<Event> {
     /**
      * Check if personEmail is in attendees of Event.
      *
-     * @param personEmail The person's email to be checked from the attendees list.
+     * @param personEmail The person's email to be checked from Attendee.
      */
     public boolean hasAttendee(String personEmail) {
         assert personEmail != null;
@@ -205,7 +202,8 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Returns true if both event time and date clashes
+     * Returns true if {@code event} time and date clashes
+     *
      */
     public boolean hasClash(Event event) {
         if (!event.date.equals(this.date)) {
@@ -231,10 +229,10 @@ public class Event implements Comparable<Event> {
         }
 
         // Two sufficient conditions to prove overlap of intervals
-        boolean event1BeginsEarlierOrSame = startTime1.compareTo(endTime2) <= 0;
-        boolean event2BeginsBeforeEvent1Ends = startTime2.compareTo(endTime1) < 0;
+        boolean doesEvent1BeginEarlierBeforeEvent2Ends = startTime1.compareTo(endTime2) < 0;
+        boolean doesEvent2BeginBeforeEvent1Ends = startTime2.compareTo(endTime1) < 0;
 
-        return event1BeginsEarlierOrSame && event2BeginsBeforeEvent1Ends;
+        return doesEvent1BeginEarlierBeforeEvent2Ends && doesEvent2BeginBeforeEvent1Ends;
     }
 
 
