@@ -33,14 +33,16 @@ _FreeTime_ is optimized for those who prefer to work with a Command Line Interfa
 .Window of FreeTime during first start-up
 image::StartUpScreenFix.png[width="790"]
 +
+. The command line is where the red arrow is pointed to in figure 1. You are to type your command
+here and press the kbd:[Enter] key to execute the command.
 .  If it is the first time you are using the app, follow the on-screen instructions to create your account and press kbd:[Enter] to execute it. +
 +
 ****
 Creating account example: +
 
-`register Paul 123` +
+`register u/Paul pw/12345678` +
 
-Creates an account name _Paul_ with password _123_
+Creates an account name _Paul_ with password _12345678_
 ****
 +
 .  After registering or logging in, you will be brought into _FreeTime_'s main screen
@@ -53,9 +55,10 @@ image::FreeTimeMainScreenFix.png[width="790"]
 // tag::security[]
 == Registering and Logging In
 
-The timetable content is locked, and it requires a user to either login with a pre-existing account, or register a new one.
+Whenever you open the application, the timetable content and commands are locked. You are required to either
+login with a pre-existing account, or register a new one.
 
-NOTE: The application has a default user with username: *test* and password: *test*
+NOTE: _FreeTime_ has a default user with username: *test* and password: *test*
 
 There are five security related commands that can be entered on this command line:
 
@@ -74,44 +77,44 @@ and view your friends' timetable. +
 TIP: Friends are other users that you have "friended", and all users start off without
 having any friends. +
 
-The timetable that belongs to users that are not your friends will not be available to you, till you
+The timetable that belongs to users that are not your friends will not be available for you to see, till you
 add them as friends.
 
 === Logging In: `login`
-Command: `login [username] [password]`
+Command: `login u/[username] pw/[password]`
 
 Examples:
 
-* `login test test` +
+* `login u/test pw/test` +
  Logins with Username: test and Password: test
 
-* `login tim tam` +
+* `login u/tim pw/tam` +
 Logins with Username: tim and Password: tam
 
-CAUTION: Constraints: +
-* Username and Password must not contain any spaces
+CAUTION: You are required to to enter a password that contains more or equal to 8 characters.
+To ensure that your account is well-protected, do use a password that is not common.
+
 
 === Registering: `register`
-Command: `register [Username] [Password] [Email] [MobilePhone] [Address]`
+Command: `register u/[Username] pw/[Password] e/[Email] p/[MobilePhone] a/[Address]`
 
 Examples:
 
-* register tim tam tim@tam.com 88888888 Tammy
+* `register u/tim pw/tam e/tim@tam.com p/88888888 a/Tammy Road`
 
-CAUTION: Constraints: +
-* Currently all fields must not have spaces too +
-* All fields must be entered
+NOTE: Only the `Username` and `Password` fields are necessary, the others are optional and
+you are not required to enter them.
 
 === Showing the UI Interface: `ui`
 Command: `ui`
 
-Entering the command `ui` will have the Login Window to appear as seen from the figure 2.
+Entering the command `ui` will cause the Login Window to appear as seen in figure 4.
 
 .Login UI
 image::LoginUI.png[width="790"]
 
 
-Clicking on the Register button changes the pop up box to the Registration Window
+Clicking on the Register button changes your view to the Registration Window seen in figure 5.
 
 .Registration UI
 image::RegisterUI.png[width="790"]
@@ -119,9 +122,8 @@ image::RegisterUI.png[width="790"]
 === Logging Out : `logout`
 Command: `logout`
 
-To be able to use this command, you would have to be logged in in the first place. Referring to the figure 4, there is
-a logout button on the menu bar at the top of the application. Clicking on that would have the same effect as typing the
-command `logout`.
+To use this command, you would have to be logged in first. Typing `logout` as seen in figure 6
+return you back to the login page.
 
 .Logout Button Highlighted in Blue
 image::Logout.png[width="790"]
