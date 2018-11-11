@@ -11,7 +11,7 @@ image::NUSSU-ConnectPNGBanner.png[width="200", align=center"]
 == Overview
 Welcome to my portfolio page. This document seeks to _highlight_ my role and contributions made to the project.
 
-*_NUSSU-Connect_* is a Java desktop application that *manages* NUS Student Union's HR and club finances. It enables you, as a committee member, to reduce your daily workload. It helps the organisation to potentially minimize manpower and logistics issues during peak periods of activity by providing them a convenient platform to manage recruitment, contacts, budgets and projects efficiently.It can also be used by every organisation with various departments, and a clearly defined hierarchy of roles and responsibilities of each and every member belonging to the organisation.
+*_NUSSU-Connect_* is a Java desktop application that *manages* NUS Student Union's HR and club finances. It enables you, as a committee member, to reduce your daily workload. It helps the organisation to minimize manpower and logistics issues during peak periods of activity by providing them a convenient platform to manage recruitment, contacts, budgets and projects efficiently.It can also be used by every organisation with various departments, and a clearly defined hierarchy of roles and responsibilities of each and every member belonging to the organisation.
 
 *_NUSSU-Connect_* aims to digitise any company’s or organisation’s standard operating procedures, through the process of streamlining workflow, to essentially solve, or at least minimize, any manpower and logistics issues that can happen during any peak periods of business activities.
 
@@ -37,7 +37,7 @@ My contributions to the project are detailed below, covering aspects such as enh
 ** Highlights: This enhancement is first designed, taking into consideration the security and practicality aspects that are highly specific to NUSSU committee members, which is our target user group. Owing to the project time constraints, a simpler encryption algorithm, compared to traditional encryption algorithms which are stronger, is used. The current choice of the encryption methodology of login credentials ensures the security enhancement is still feasibly robust, yet does not demand an excess of time spent working on it.
 
 * *Minor enhancement*: *_Added_* the ability to _create_ new accounts.
-** What it does: _Allows_ you to create a new account with your desired login credentials so that you can log into the application securely.
+** What it does: _Allows_ you to create a new account so that you can log into the application securely.
 ** Justification: This feature allows you to be able to create their own accounts so that you do not need to rely on the accounts of other users in order to log into the application.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=chocological]
@@ -60,7 +60,7 @@ My contributions to the project are detailed below, covering aspects such as enh
 
 == Contributions to the User Guide
 
-In this section, you are introduced to two commands, namely the `login` and `createaccount` command. The `login` command allows you to log into the application securely using your own login credentials. The `createaccount` command allows you to create a new account with your own desired login credentials. You can expect a thorough walk-through detailing the steps to be taken in logging into the application and creating new accounts.
+In this section, you are introduced to two commands, namely the `login` and `createaccount` command. The `login` command allows you to log into the application with your own login credentials. The `createaccount` command allows you to create a new account with your own desired login credentials. You can expect a thorough walk-through detailing the steps to be taken in logging into the application and creating new accounts.
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
