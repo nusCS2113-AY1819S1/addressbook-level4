@@ -198,9 +198,9 @@ public class TimeSlot implements Comparable<TimeSlot> {
     }
 
     /**
-     * converts DayOfWeek object into the corresponding abbreviation.
-     * Possible outputs:
-     * MO, TU, WE, TH, FR, SA, SU
+     * Gets the abbreviation of the DayOfWeek for the timeslot.
+     *
+     * @return      possible outputs: "MO", "TU", "WE", "TH", "FR", "SA", "SU"
      */
     public String getAbbreviationFromDayOfWeek() {
         String dayString = dayOfWeek.getDisplayName(TextStyle.FULL , Locale.ENGLISH);
