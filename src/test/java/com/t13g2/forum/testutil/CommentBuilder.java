@@ -41,10 +41,10 @@ public class CommentBuilder {
         return this;
     }
 
+    /**
+     * @return a comment object with default comment content
+     */
     public Comment build() {
-//        ForumThreadBuilder forumThreadBuilder = new ForumThreadBuilder();
-//        ForumThread forumThread = forumThreadBuilder.build();
-//        this.threadId = forumThread.getId();
         this.commentContent = DEFAULT_COMMENT_CONTENT;
         return new Comment(threadId, commentContent);
     }

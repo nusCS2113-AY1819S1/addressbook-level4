@@ -19,8 +19,8 @@ import com.t13g2.forum.model.UserPrefs;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
-import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.commons.core.Messages;
+import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.testutil.CommentBuilder;
 import com.t13g2.forum.testutil.ForumThreadBuilder;
 import com.t13g2.forum.testutil.TypicalModules;
@@ -56,9 +56,9 @@ public class CreateThreadCommandTest {
 
         Module validModule = TypicalModules.CS1231;
         int moduleId = 0;
-        try(UnitOfWork unitOfWork = new UnitOfWork()) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
             moduleId = unitOfWork.getModuleRepository().getModuleByCode(validModule.getModuleCode()).getId();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         ForumThread forumThread = new ForumThreadBuilder().withModuleId(moduleId).build();
@@ -81,10 +81,10 @@ public class CreateThreadCommandTest {
 
         Module validModule = TypicalModules.CS1231;
         int moduleId = 0;
-        try(UnitOfWork unitOfWork = new UnitOfWork()) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
             moduleId = unitOfWork.getModuleRepository().addModule(validModule);
             unitOfWork.commit();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         ForumThread forumThread = new ForumThreadBuilder().withModuleId(moduleId).build();
