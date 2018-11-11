@@ -6,6 +6,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FinishTodoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+//@@author linnnruoo
 /**
  * Parses input arguments and creates a new FinishTodo object
  */
