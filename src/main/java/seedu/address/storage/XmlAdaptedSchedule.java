@@ -10,7 +10,7 @@ import seedu.address.model.person.Schedule;
  */
 public class XmlAdaptedSchedule {
     @XmlValue
-    private String schedule;
+    //    private String schedule;
 
     /**
      * Constructs an XmlAdaptedTag.
