@@ -28,19 +28,21 @@ using the sort date command.
 ** Created the event class along with its relevant components
 ** Updated the mainapp to load saved xml events or a sample list of events when the app starts
 **
-**
+
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=IcedCoffeeBoy[Functional code]]
 
 * *Other contributions*:
 
 ** Project management:
-***
+*** Helped to Managed releases on GitHub
+*** Managed the issue tracker on GitHub
 ***
 //** Enhancements to existing features:
 //*** Updated the GUI color scheme
 //*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
-***
+*** Updated the User Guide for Practical Exam 1
+*** Updated the Developer Guide to include `sort` command
 ***
 ** Community:
 ***
@@ -70,6 +72,10 @@ include::../UserGuide.adoc[tag=showmine]
 |===
 
 include::../DeveloperGuide.adoc[tag=Sort]
+
+include::../DeveloperGuide.adoc[tag=userstories]
+
+include::../DeveloperGuide.adoc[tag=usecases]
 
 
 

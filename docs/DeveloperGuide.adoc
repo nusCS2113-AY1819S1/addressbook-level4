@@ -764,6 +764,9 @@ relevant people
 
 |`* * *` |Project Manager |Redo command |Redo my previously undo command
 
+|`* * *` |Project Manager |View events related to myself| To avoid looking through the entire event list to find out which events I
+need to attend
+
 |`* * *` |User |Exit command |
 
 |`* * *` |New Employee |See usage instructions |Refer to instructions when I forget how to use the ProManage
@@ -776,7 +779,14 @@ relevant people
 
 |`* * *` |Employee  |Sort the event list by time and date |View what are the more recent events of the event list
 
+|`* * *` |Employee |Undo command |Undo my previously entered command
+
+|`* * *` |Employee |Redo command |Redo my previously undo command
+
 |`* * *` |Employee |View a colleague's events |To check out what have my colleague been up to
+
+|`* * *` |Employee |View events related to myself| To avoid looking through the entire event list to find out which events I
+need to attend
 
 |`* * *` |Employee |Invite my colleagues to events |Add persons to the selected event
 
@@ -1026,11 +1036,50 @@ Use case ends.
 ** 3b1. AddressBook shows an error message.
 ** Use case ends
 
+[discrete]
+=== Use case: Sorting the event list based on the parameter given
+
+*MSS*
+
+1.  User requests to list event in a particular order.
+2.  ProManage request what order to list the event.
+3.  User enters the order he/she wishes to list the event.
+4.  ProManage list the event in that particular order
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Invalid parameters
+** 3a1. ProManage shows an error message.
+** Use case ends
+
+[discrete]
+=== Use case: Finding out events which is associated with user
+
+*MSS*
+
+1.  User login the app
+2.  User request to list event associated with he/she
+3.  ProManage list the event that is associated with the user
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. User did not login
+** 3a1. ProManage shows an error message to prompt user to login before using this function
+** Use case ends
+
 
 _{More to be added}_
 
 [appendix]
 // end::usecases[]
+
+
 // tag::nonfunctionalrequirements[]
 == Non Functional Requirements
 

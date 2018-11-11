@@ -259,11 +259,14 @@ Examples:
 * `deleteEvent 2` +
 Deletes the 2nd event in the address book.
 
+// tag::sort[]
 === Sorting all events: `sort`
 Priority level: all
 
 Sort the event listing based on the key words provided. +
 Able to sort with event's name, event's date, event's starttime, event's endtime.  +
+
+If both event's have the same date then starttime will be compared. +
 *Key word:* +
 1) event's name: `name` +
 2) event's date: `date` +
@@ -274,7 +277,20 @@ Able to sort with event's name, event's date, event's starttime, event's endtime
 Format: sort `key word` +
 Example:
 
-* `sort name`
+* `sort name` +
+Sort the event list alphabetically
+// end::sort[]
+
+// tag::showmine[]
+=== Sorting all events: `showmine`
+Priority level: `manager`, `employee`
+
+This function is only applicable to users who have login with their email. +
+Filter and list out events which they are listed as attendees.
+
+
+Format: `showmine`
+// end::showmine[]
 
 
 === Searching for the events using keywords: `findEvent`
@@ -480,7 +496,9 @@ There is no need to save manually.
 
 * *Help*: `help`
 
-* *Login*: `login IDENTITY` where IDENTITY is either manager or employee or `login existingemail@example.com`
+* *Login*: `login IDENTITY` where IDENTITY is either manager or employee or `login as existingemail@example.com`
+
+* *Logout*: `logout`
 
 * *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
 
