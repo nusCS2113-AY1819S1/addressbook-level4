@@ -21,7 +21,7 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteEditCommandParserTest {
 
-    private static NoteManager noteManager = NoteManager.getInstance();
+    private static NoteManager noteManager;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -31,6 +31,8 @@ public class NoteEditCommandParserTest {
     @Before
     public void setUp() {
         StorageController.enterTestMode();
+        NoteManager.initNoteManager();
+        noteManager = NoteManager.getInstance();
         noteManager.clearNotes();
         noteManager.saveNoteList();
     }

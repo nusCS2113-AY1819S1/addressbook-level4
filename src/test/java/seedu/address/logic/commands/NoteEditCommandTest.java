@@ -27,7 +27,7 @@ import seedu.address.ui.BrowserPanel;
  */
 public class NoteEditCommandTest {
 
-    private static NoteManager noteManager = NoteManager.getInstance();
+    private static NoteManager noteManager;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -39,6 +39,8 @@ public class NoteEditCommandTest {
     @Before
     public void setUp() {
         StorageController.enterTestMode();
+        NoteManager.initNoteManager();
+        noteManager = NoteManager.getInstance();
         noteManager.clearNotes();
         noteManager.saveNoteList();
         BrowserPanel.setNotePageIsLoaded(true);

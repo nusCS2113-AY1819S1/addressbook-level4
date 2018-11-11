@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.NoteDeleteCommand;
+import seedu.address.model.StorageController;
 import seedu.address.testutil.NoteBuilder;
 
 /**
@@ -16,7 +17,7 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteManagerTest {
 
-    private static NoteManager noteManager = NoteManager.getInstance();
+    private static NoteManager noteManager;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -27,6 +28,9 @@ public class NoteManagerTest {
 
     @Before
     public void setUp() {
+        StorageController.enterTestMode();
+        NoteManager.initNoteManager();
+        noteManager = NoteManager.getInstance();
         noteManager.clearNotes();
         noteManager.saveNoteList();
     }
