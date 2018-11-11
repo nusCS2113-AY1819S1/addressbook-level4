@@ -283,53 +283,59 @@ image::SortSequenceDiagram.png[width="650"]
 
 The `invite` command allows users to add attendees to an existing event, which is represented by an `Event` object.
 The command currently only allows users to add a single person to an event, based on the indices on the UI.
-This command adds the invited `Person` 's email, which is unique, to a chosen `Event`, so that the attendees of a particular event is recorded.
-This command only executes successfully if the event does not not clash with the person's schedule.
+This command adds the invited `Person`'s email, which is unique, to a chosen `Event`, so that the attendees of a particular event is recorded.
 
 The adding of attendees is facilitated by the class: `Attendees`, a list of emails of type `String`.
 
-The following is a more detailed description of the class:
+The following is a more detailed description of the `Attendee` class:
 
 *  `Attendees`
 ** Each `Event` object has an `Attendees`, which is a list of the emails of the different `Person` attending the event.
-** This class is a wrapper class around the internal representation of a list of attendees that exposes only a few functions of a `Set` of `String`.
+** This class is a wrapper class around the internal representation of a `Set` of emails.
 ** Only the email of the `Person` is recorded in an `Event`, as the email should be unique and uneditable.
 
 Storing only the *email* of `Person` in the `Attendees` object of `Event` saves memory storage and facilitates the `select` feature. As we select a person, we can simply iterate through the event list and check whether the person's email is in the attendees list.
 
+This command only executes successfully if the event does not not clash with the person's schedule.
+
 Given below is an illustration to describe the detection of whether two events clash, which is facilitated by the method `hasClash` in `Event`:
 
+image::EventClashDiagram.png[width="400"]
 
+The `Event#hasClash` is widely used in other features such as `addEvent` and `editEvent` to ensure that
+
+* Different events are not held at the same location and time.
+
+* An employee do not have two events to attend at the same time.
 
 Implementation of `RemoveCommand` is similar to `InviteCommand`, but removes persons from attendees of events instead.
 
 ==== Execution of Command
 
 Given below is an example usage scenario and how the invite mechanism works.
+For example, the user inputs `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list.
 
-Step 1. The user inputs `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list. The command text is passed to an instance of the `LogicManager` class.
+* The command text is passed to an instance of the `LogicManager` class.
 
-Step 2. The `LogicManager` instance calls `AddressBookParser#parsecommand`, which parses the `invite` command phrase.
+* The `LogicManager` instance calls `ProManageParser#parsecommand`, which parses the `invite` command phrase.
 
-Step 3. `InviteCommandParser#parse` parses the person and event index. An instance of the `InviteCommand` encapsulating the two indices information is then returned.
+* `InviteCommandParser#parse` parses the person and event index. An instance of the `InviteCommand` encapsulating the two indices information is then returned after parsing.
 
-Step 4. `Logic Manager` then executes this `InviteCommand` by calling `InviteCommand#execute`.
+* `Logic Manager` then executes this `InviteCommand` by calling `InviteCommand#execute`.
 
-Step 5. The filtered person list and event list is first obtained by calling `PersonModel#getFilteredPersonList` and `EventModel#getFilteredEventList`. Based on the indices, the `Person` and `Event` is selected.
+* The filtered person list and event list is first obtained by calling `PersonModel#getFilteredPersonList` and `EventModel#getFilteredEventList`. Based on the indices, the `Person` and `Event` is selected. Then, the `Person` object's email is obtained by calling `Person#getEmail`
 
-Step 6. Next, the `Person` object's email is obtained by calling `Person#getEmail`
+* Two steps of verification is required before the person is invited to the event. First, `Event#hasAttendee` checks whether the person is already invited to the event. Secondly, `Model#hasClash` checks whether the event clashes with the person's schedule.
 
-Step 7. Two steps of verification is required before the person is invited to the event. First, `Event#hasAttendee` checks whether the person is already invited to the event. Secondly, `Model#hasClash` checks whether the event clashes with the person's schedule.
+* After successful verification, the person's email is added to the obtained `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
 
-Step 8. After verification, the person's email is added to the obtained `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
+* The new `Event` object is updated to the model by calling `Model#updateEvent`.
 
-Step 9. The new `Event` object is updated to the model by calling `Model#updateEvent`.
-
-Step 10. The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
+* The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
 
 The sequence diagram below illustrates the execution of the `invite` command.
 
-image::InviteSequenceDiagram.png[width="800"]
+image::InviteSequenceDiagram.png[width="700"]
 
 ==== Design Consideration
 
@@ -345,12 +351,12 @@ image::InviteSequenceDiagram.png[width="800"]
 
 ===== Aspect: Data structure to support `invite` command
 
-* **Alternative 1 (current choice):** Use `HashSet` to store persons names.
+* **Alternative 1 (current choice):** Use `HashSet` to store persons emails.
 ** Pros: Easier and faster to retrieve or validate names stored. Able to handle duplicates easily.
 ** Cons: Sequence of persons added is lost. Currently, this feature is not important for the project.
 
-* **Alternative 2:** Use `ArrayList` to store persons names.
-** Pros: Names are stored in order of addition.
+* **Alternative 2:** Use `ArrayList` to store persons emails.
+** Pros: Emails are stored in order of addition.
 ** Cons: Inefficient when handling data.
 
 ==== Future Improvements
@@ -361,13 +367,12 @@ The current `invite` command only invites one person to a chosen event based on 
 One possible way to to implement this is to have the user
 
 * input a certain range (2-5) or
-* multiple indices (1, 3, 6) or
-* a mixture of both (1-3, 4, 6-10)
+* multiple indices (1,3,6,7,8) or
 * input the department name
 
 The same concept can also be applied to events, being able to invite one person to multiple events with one single command.
 
-Implementation of this additional feature would require changes to both `InviteCommandParser` and `InviteCommand#execute`. Additionally, handling of clashing events needs to be considered as it now involves more than one participants.
+Implementation of this additional feature would require changes to both `InviteCommandParser` and `InviteCommand#execute`. Additionally, handling of clashing events needs to be considered as it now involves more than one participant and event.
 // end::Invite[]
 
 // tag::Select[]
@@ -383,32 +388,31 @@ The command is facilitated by the class: `Attendees`, a list of emails of type `
 ==== Execution of Command
 Given below is an example usage scenario and how the `select` mechanism works.
 
-Step 1. The user inputs `select 1 y/2018 m/06` to select the 1st person in the address book and view his/her event schedule on June 2018.
+The user inputs `select 1 y/2018 m/06` to select the 1st person in the address book and view his/her event schedule on June 2018.
 
-Step 2. The command text is passed to an instance of the `LogicManager` class.
+* The command text is passed to an instance of the `LogicManager` class.
 
-Step 3. The `LogicManager` instance calls `AddressBookParser#parsecommand`, which parses the `select` command phrase.
+* The `LogicManager` instance calls `ProManageParser#parsecommand`, which parses the `select` command phrase.
 
-Step 3. `InviteCommandParser#parse` parses the person and date parameter(optional). Depending on whether the date parameter is inputted,  an instance of the `Select` encapsulating the relevant information is then returned.
+* `InviteCommandParser#parse` parses the person and date parameter(optional). Depending on whether the date parameter is inputted,  an instance of the `SelectCommand` encapsulating the relevant information is then returned.
 
-Step 4. `Logic Manager` then executes this `SelectCommand` by calling `SelectCommand#execute`.
+* `Logic Manager` then executes this `SelectCommand` by calling `SelectCommand#execute`.
 
-Step 5. The filtered person list is first obtained by calling `PersonModel#getFilteredPersonList`. Based on the index, the `Person` is selected.
+* The filtered person list is first obtained by calling `PersonModel#getFilteredPersonList`. Based on the index, the `Person` is selected. The `Person` object's email is obtained by calling `Person#getEmail`
 
-Step 6. Next, the `Person` object's email is obtained by calling `Person#getEmail`
+* A `Predicate` will be constructed to generate the filtered event list.
+** If the user chose to view all the events of the person (e.g. `select 1`), an `AttendeeContainsEmailPredicate` object will be instantiated.
+** If the user chose to view the events of the person on a certain time period (e.g. `select 1 y/2018 m/12`), an `EventContainsAttendeeAndDatePredicate` object will be instantiated.
 
-Step 7a. If the user chose to view all the events of the person (e.g. `select 1`), an `AttendeeContainsEmailPredicate` object will be instantiated.
+* The filtered event list is then updated by calling `Model#updateFilteredEventList` with the predicate.
 
-Step 7b. If the user chose to view the events of the person on a certain time period (e.g. `select 1 y/2018 m/12`), an `EventContainsAttendeeAndDatePredicate` object will be instantiated.
+* The filtered event list is then sorted by calling `Model#sortByDate`.
 
-Step 8. The filtered event list is then updated by calling `Model#updateFilteredEventList` with the generated predicate.
-
-Step 9. The filtered event list is then sorted by calling `Model@sortByDate`.
-
-Step 10. The `SelectCommand#execute` finally returns a `CommandResult` with a success message.
+* The `SelectCommand#execute` finally returns a `CommandResult` with a success message.
 
 The sequence diagram below illustrates the execution of the `invite` command.
 
+image::SelectSequenceDiagram.png[width="700"]
 
 // end::Select[]
 
@@ -458,13 +462,6 @@ The sequence diagram below illustrates the execution of the `invite` command.
 
 image::ListSequenceDiagram.png[width="800"]
 // end::List[]
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-
-
-// end::dataencryption[]
 
 === Logging
 
@@ -1179,7 +1176,7 @@ _{ more test cases ... }_
 
 . Deleting a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list all` command. Multiple persons in the list.
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
@@ -1187,7 +1184,34 @@ _{ more test cases ... }_
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+=== Inviting a person
+
+. Inviting a person while all persons are listed
+
+.. Prerequisites: List all persons using the `list all` command. Multiple persons and events in the list.
+.. Test case: `invite 1 to/1` +
+   Expected: First employee is added to first event. Use `select 1` to verify that the fifth event is present in the event list.
+.. Test case: `invite 1 to/1` (continued from test case above) +
+   Expected: Error message as employee is already invited to event.
+.. Test case: `invite 0 to/1` +
+   Expected: No employee is invited. Error details shown in the status message.
+.. Other incorrect invite commands to try: `invite`, `invite x to/1` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
+=== Removing a person
+
+. Inviting a person while all persons are listed
+
+.. Prerequisites: List all persons using the `list all` command. Multiple persons and events in the list.
+.. Test case: `invite 1 to/1` then `remove 1 from/1`+
+   Expected: First employee is added to first event and then removed. Use `select 1` to verify that the person is uninvited from the event.
+.. Test case: `remove 1 to/1` (continued from test case above) +
+   Expected: Error message as employee is currently invited to event.
+.. Test case: `delete 0 to/1` +
+   Expected: No employee is removed. Error details shown in the status message.
+.. Other incorrect invite commands to try: `remove`, `remove x to/1` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
 
 === Saving data
 
