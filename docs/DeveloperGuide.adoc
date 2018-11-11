@@ -378,7 +378,7 @@ The `TimeTable` class implements two key methods: +
 2. `TimeTable#deleteTimeSlot()` - to remove an existing `TimeSlot` from the `TimeTable` +
 
 The class `DeconflictTimeTable`, which inherits from `TimeTable`, is used when the `free` command is executed to store mutually free timeslots among users. +
-When the `free` command is executed, a `DeconflictTimeTable` object is instantiated with all `TimeSlot` objects in the user's `TimeTable`. Subsequently, the `TimeTable` objects of every `Person` that is passed as an argument is added to the `DeconflictTimeTable`.
+When the `free` command is executed, a `DeconflictTimeTable` object is instantiated with all `TimeSlot` objects in the user's `TimeTable`. Subsequently, the `TimeTable` objects of every `Person` that is passed as an argument to the `free` command is added to the `DeconflictTimeTable`.
 
 The following sequence diagram shows the significant method calls for the method `FreeCommand#execute()`:
 

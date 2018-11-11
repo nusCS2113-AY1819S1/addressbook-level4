@@ -27,9 +27,9 @@ This project portfolio documents my contributions to the FreeTime project.
 == Summary of contributions
 
 * *Major enhancement: Added timetables to FreeTime*
-** What it does: Implements timetables for each user and allows the user to add and remove timeslots from their own timetables. Additionally, allows users to determine when they can organise meetings such that every person can be present.
-** Highlights: This enhancement requires changes in almost every component of FreeTime, Thus, it required a thorough understanding of the existing codebase. Through this project, I have put into practice key principles of the object-oriented programming paradigm as well as the skills needed for writing technical documentation.
+** What it does: Implements timetables for each user and allows the user to add and remove timeslots from their own timetables. Additionally, allows users to determine when they can organise meetings such that everyone they want to meet can be present.
 ** Justification: As it is difficult for students with varied and complex timetables to schedule meetings for their many group projects, FreeTime simplifies this process by automatically highlighting mutually free timeslots among different user timetables.
+** Highlights: This enhancement was challenging as it required the development of a completely new portion of the GUI for the displaying of timetables, which required proficiency in JavaFX, the software platform used to build FreeTime's GUI. Moreover, significant additions were made to the Model component to allow the in-app storage of timetables.
 * https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=nianfei97&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[*Code contributed*]
 * *Other contributions*:
 ** Project management:
