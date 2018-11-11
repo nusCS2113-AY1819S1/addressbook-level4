@@ -1592,25 +1592,37 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  Lecturer creates a group
-2.  Student management system confirms that group is created
+1.  Lecturer creates a group.
+2.  Student management system confirms that group is created.
 +
-Use case ends
+Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
+* 1a. Student management system detects incorrect format of lecturer input.
 +
 
 [none]
 ** 1a1. Student management system rejects command entered with relevant error message.
 [none]
-* 1b. Student management system detects duplicate group.
+* 1b. Student management system detects invalid parameters from lecturer input.
 +
 
 [none]
 ** 1b1. Student management system rejects command entered with relevant error message.
+[none]
+* 1c. Student management system detects missing parameters from lecturer input.
++
+
+[none]
+** 1c1. Student management system rejects command entered with relevant error message.
+[none]
+* 1d. Student management system detects duplicate group.
++
+
+[none]
+** 1d1. Student management system rejects command entered with relevant error message.
 +
 
 
@@ -1618,29 +1630,41 @@ Use case ends
 === Use case: Add Students To Groups
 *Precondition*
 
-1.  Student management system has student(s)
+1.  Student management system has student(s).
 
 *MSS*
 
-1.  Lecturer adds student(s) to a group
-2.  AddressBook confirms student(s) are added
+1.  Lecturer adds student(s) to a group.
+2.  AddressBook confirms student(s) are added.
 +
-Use case ends
+Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
+* 1a. Student management system detects incorrect format of lecturer input.
 +
 
 [none]
 ** 1a1. Student management system rejects command entered with relevant error message.
 [none]
-* 1b. Student management system detects student(s) is already in the group.
+* 1b. Student management system detects invalid parameters from lecturer input.
 +
 
 [none]
 ** 1b1. Student management system rejects command entered with relevant error message.
+[none]
+* 1c. Student management system detects missing parameters from lecturer input.
++
+
+[none]
+** 1c1. Student management system rejects command entered with relevant error message.
+[none]
+* 1d. Student management system detects student(s) is already in the group.
++
+
+[none]
+** 1d1. Student management system rejects command entered with relevant error message.
 +
 
 
@@ -1648,29 +1672,41 @@ Use case ends
 === Use case: Delete Students From Groups
 *Precondition*
 
-1.  Student management system has group(s)
+1.  Student management system has group(s).
 
 *MSS*
 
-1.  Lecturer deletes student from a group
-2.  AddressBook confirms student is deleted
+1.  Lecturer deletes student from a group.
+2.  AddressBook confirms student is deleted.
 +
-Use case ends
+Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
+* 1a. Student management system detects incorrect format of lecturer input.
 +
 
 [none]
 ** 1a1. Student management system rejects command entered with relevant error message.
 [none]
-* 1b. Student management system detects student not in the group.
+* 1b. Student management system detects invalid parameters from lecturer input.
 +
 
 [none]
 ** 1b1. Student management system rejects command entered with relevant error message.
+[none]
+* 1c. Student management system detects missing parameters from lecturer input.
++
+
+[none]
+** 1c1. Student management system rejects command entered with relevant error message.
+[none]
+* 1d. Student management system detects student not in the group.
++
+
+[none]
+** 1d1. Student management system rejects command entered with relevant error message.
 +
 
 
@@ -1678,23 +1714,35 @@ Use case ends
 === Use case: Delete Groups
 *Precondition*
 
-1.  Student management system has group(s)
+1.  Student management system has group(s).
 
 *MSS*
 
-1.  Lecturer deletes group
-2.  Student management system confirms group is deleted
+1.  Lecturer deletes group.
+2.  Student management system confirms group is deleted.
 +
-Use case ends
+Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
+* 1a. Student management system detects incorrect format of lecturer input.
 +
 
 [none]
 ** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects invalid parameters from lecturer input.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
+[none]
+* 1c. Student management system detects missing parameters from lecturer input.
++
+
+[none]
+** 1c1. Student management system rejects command entered with relevant error message.
 +
 
 
@@ -1702,24 +1750,36 @@ Use case ends
 === Use case: Select Group
 *Precondition*
 
-1.  Student management system has group(s)
+1.  Student management system has group(s).
 
 *MSS*
 
-1.  Lecturer selects group
-2.  Student management system confirms group is selected
-3.  Student management system displays students in group selected on the *students in group panel*
+1.  Lecturer selects group.
+2.  Student management system confirms group is selected.
+3.  Student management system displays students in group selected on the *students in group panel*.
 +
-Use case ends
+Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
+* 1a. Student management system detects incorrect format of lecturer input.
 +
 
 [none]
 ** 1a1. Student management system rejects command entered with relevant error message.
+[none]
+* 1b. Student management system detects invalid parameters from lecturer input.
++
+
+[none]
+** 1b1. Student management system rejects command entered with relevant error message.
+[none]
+* 1c. Student management system detects missing parameters from lecturer input.
++
+
+[none]
+** 1c1. Student management system rejects command entered with relevant error message.
 +
 
 
