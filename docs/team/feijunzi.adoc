@@ -9,9 +9,11 @@
 
 == Overview
 
-Something Daily is a desktop address book application used for teaching Software
-Engineering principles. The user interacts with it using a CLI, and it has a GUI
-created with JavaFX. It is written in Java, and has about 10 kLoC.
+Something Daily is a desktop application as a combination of to-do list and
+expenditure tracker which is written in Java. The target users are NUS SoC students.
+This application aims to improve students' life efficiency from helping them deal
+with their numerous deadlines and plan their daily expenditures. The user interacts
+with it using a CLI, and it has a GUI created with JavaFX.
 
 == Summary of contributions
 
