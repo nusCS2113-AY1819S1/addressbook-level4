@@ -1,4 +1,4 @@
-== Melvin Tan Jit Chong - Project Portfolio
+= Melvin Tan Jit Chong - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
