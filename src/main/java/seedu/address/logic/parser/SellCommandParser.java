@@ -29,12 +29,11 @@ public class SellCommandParser implements Parser<SellCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ISBN, PREFIX_QUANTITY);
 
-        String findBookBy;
         Index index;
         Isbn isbn;
-        String argsType;
-        argsType = argMultimap.getArgsType();
+        String argsType = argMultimap.getArgsType();
 
+        String findBookBy;
         switch(argsType) {
         case("Isbn"):
             try {
