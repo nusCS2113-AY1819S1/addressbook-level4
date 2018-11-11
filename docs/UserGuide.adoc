@@ -320,7 +320,7 @@ Recommended requirements:
 
 *   Operating system: Windows 10 64-bit/ Mac OS X +
 
-Please ensure the latest version of Java is installed on your system.
+Please ensure that Java 9 is installed on your system.
 
 
 Q: Why is the software called `Inventarie Pro`?
