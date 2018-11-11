@@ -191,7 +191,6 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 Shows a list of all persons in the NUSSU-Connect. +
 Format: `list`
 
-// tag::find[]
 === Locating persons: `find`
 
 Finds persons in the displayed list whose names/tags contain any of the given keywords. +
@@ -235,48 +234,53 @@ Format: `undofind`
 * To be used in Search Pruning feature
 ****
 
+// tag::searchpruningtitle[]
 === Search Pruning Feature with list, find and undofind commands
+// end::searchpruningtitle[]
 
+// tag::searchpruningpreface[]
 Since v1.1, the Search Pruning feature was introduced to NUSSU Connect that helps you
 trim the list of contacts with every successive find command. This lets you search through the list
 of contacts in a much more intuitive manner without the hassle of typing a long single line command that is
 usually error-prone.
 
 The concept of the Search Pruning feature will be illustrated below. +
+// end::searchpruningpreface[]
 
+// tag::searchpruningguide[]
 **1. Search Pruning with Find Commands**
 
 ****
 Assume that the original list of contacts contains the following six persons and you wanted to search for all persons
 with the science tag. You could do this by executing the command `find \tag science`. +
 
-image::SearchPruning1st.png[align="left"]
+image::SearchPruning1st.png[align="left", width = 200]
 
 After executing the command the displayed list will now contain 2 persons,
 both with the science tag.
 
-image::SearchPruning2nd.png[align="left"]
+image::SearchPruning2nd.png[align="left", width = 200]
 
 The following message will be displayed in the Command Result Box to tell you the keywords that you have previously executed.
 The "+" prefix before a keyword is used to denote that you chose to include all persons with the relevant keyword in
 the displayed list. +
 
-image::SearchPruning3rd.png[align="left"]
+image::SearchPruning3rd.png[align="left", width = 350]
 
 Next, you wanted to exclude everyone that has the tag `VPresident` and you could do that by executing the command +
 `find \tag \exclude VPresident`. +
 
-image::SearchPruning4th.png[align="left"]
+image::SearchPruning4th.png[align="left", width = 200]
 
 The command will filter according to the previous displayed list instead of the original contacts list and the
 displayed list now contains only 1 person with the President Tag as everyone with the VPresident tag have been excluded. +
 
-image::SearchPruning5th.png[align="left"]
+image::SearchPruning5th.png[align="left", width = 200]
 
 The Command Result Box will now display an extra vpresident keyword with the "-" prefix, denoting that all persons
 with the vpresident tag has been excluded from the list +
 
-image::SearchPruning6th.png[align="left"]
+image::SearchPruning6th.png[align="left", width = 350]
 ****
 
 **2 . Making a mistake and undoing it with undofind command**
@@ -285,24 +289,26 @@ image::SearchPruning6th.png[align="left"]
 Now assume that you have made a mistake and you want to revert to the list before you execute your most
 recent find command. You can do so with the undofind command +
 
-image::SearchPruning7th.png[align="left"]
+image::SearchPruning7th.png[align="left", width = 200]
 
 After executing the undofind command, the displayed list is reverted to the state before the +
 `find \tag \exclude VPresident` command was executed +
 
-image::SearchPruning8th.png[align="left"]
+image::SearchPruning8th.png[align="left", width = 200]
 ****
+
+// end::searchpruningguide[]
 
 **3 . Reverting to initial state with list command**
 
 ****
 You can revert to the initial state before any find commands are executed with the list command
 
-image::SearchPruning9th.png[align="left"]
+image::SearchPruning9th.png[align="left", width = 200]
 
 After executing the list command, all search history is cleared and the displayed list now contains all six persons.
 
-image::SearchPruning10th.png[align="left"]
+image::SearchPruning10th.png[align="left", width = 200]
 ****
 
 // end::find[]
