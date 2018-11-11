@@ -24,48 +24,48 @@ public class ExpenditureListTest {
     private final ExpenditureList expenditureList = new ExpenditureList();
 
     @Test
-    public void contains_nullExpenditure_throwsNullPointerException() {
+    public void containsnullExpenditurethrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
         expenditureList.contains(null);
     }
 
     @Test
-    public void contains_expenditureNotInList_returnsFalse() {
+    public void containsexpenditureNotInListreturnsFalse() {
         assertFalse(expenditureList.contains(CHICKEN));
     }
 
     @Test
-    public void contains_expenditureInList_returnsTrue() {
+    public void containsexpenditureInListreturnsTrue() {
         expenditureList.add(CHICKEN);
         assertTrue(expenditureList.contains(CHICKEN));
     }
 
     @Test
-    public void add_nullExpenditure_throwsNullPointerException() {
+    public void addnullExpenditurethrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
         expenditureList.add(null);
     }
 
     @Test
-    public void setExpenditures_nullTargetExpenditure_throwsNullPointerException() {
+    public void setExpendituresnullTargetExpenditurethrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
         expenditureList.setExpenditures(null, CHICKEN);
     }
 
     @Test
-    public void setExpenditures_nullEditedPerson_throwsNullPointerException() {
+    public void setExpendituresnullEditedPersonthrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
         expenditureList.setExpenditures(CHICKEN, null);
     }
 
     @Test
-    public void setExpenditures_targetExpenditureNotInList_throwsPersonNotFoundException() {
+    public void setExpenditurestargetExpenditureNotInListthrowsPersonNotFoundException() {
         thrown.expect(ExpenditureNotFoundException.class);
         expenditureList.setExpenditures(CHICKEN, CHICKEN);
     }
 
     @Test
-    public void setExpenditures_editedExpenditureIsSameExpenditure_success() {
+    public void setExpenditureseditedExpenditureIsSameExpendituresuccess() {
         expenditureList.add(CHICKEN);
         expenditureList.setExpenditures(CHICKEN, CHICKEN);
         ExpenditureList expectedExpenditureList = new ExpenditureList();
@@ -74,7 +74,7 @@ public class ExpenditureListTest {
     }
 
     @Test
-    public void setExpenditures_editedExpenditureHasDifferentIdentity_success() {
+    public void setExpenditureseditedExpenditureHasDifferentIdentitysuccess() {
         expenditureList.add(CHICKEN);
         expenditureList.setExpenditures(CHICKEN, IPHONE);
         ExpenditureList expectedExpenditureList = new ExpenditureList();
@@ -83,7 +83,7 @@ public class ExpenditureListTest {
     }
 
     @Test
-    public void setExpenditures_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setExpenditureseditedPersonHasNonUniqueIdentitythrowsDuplicatePersonException() {
         expenditureList.add(CHICKEN);
         expenditureList.add(IPHONE);
         thrown.expect(DuplicateExpenditureException.class);
@@ -91,19 +91,19 @@ public class ExpenditureListTest {
     }
 
     @Test
-    public void remove_nullExpenditure_throwsNullPointerException() {
+    public void removenullExpenditurethrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
         expenditureList.remove(null);
     }
 
     @Test
-    public void remove_expenditureDoesNotExist_throwsExpenditureNotFoundException() {
+    public void removeexpenditureDoesNotExistthrowsExpenditureNotFoundException() {
         thrown.expect(ExpenditureNotFoundException.class);
         expenditureList.remove(CHICKEN);
     }
 
     @Test
-    public void remove_existingExpenditure_removesExpenditure() {
+    public void removeexistingExpenditureremovesExpenditure() {
         expenditureList.add(CHICKEN);
         expenditureList.remove(CHICKEN);
         ExpenditureList expectedExpenditureList = new ExpenditureList();
@@ -111,13 +111,13 @@ public class ExpenditureListTest {
     }
 
     @Test
-    public void setExpenditures_nullExpenditureList_throwsNullPointerException() {
+    public void setExpendituresnullExpenditureListthrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
         expenditureList.setExpenditures((ExpenditureList) null);
     }
 
     @Test
-    public void setExpenditures_expenditureList_replacesOwnListWithProvidedExpenditureList() {
+    public void setExpendituresexpenditureListreplacesOwnListWithProvidedExpenditureList() {
         expenditureList.add(CHICKEN);
         ExpenditureList expectedExpenditureList = new ExpenditureList();
         expectedExpenditureList.add(IPHONE);
@@ -126,13 +126,13 @@ public class ExpenditureListTest {
     }
 
     @Test
-    public void setExpenditures_nullList_throwsNullPointerException() {
+    public void setExpendituresnullListthrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
         expenditureList.setExpenditures((List<Expenditure>) null);
     }
 
     @Test
-    public void setExpenditures_list_replacesOwnListWithProvidedList() {
+    public void setExpenditureslistreplacesOwnListWithProvidedList() {
         expenditureList.add(CHICKEN);
         List<Expenditure> personList = Collections.singletonList(IPHONE);
         expenditureList.setExpenditures(personList);
@@ -142,7 +142,7 @@ public class ExpenditureListTest {
     }
 
     @Test
-    public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void asUnmodifiableObservableListmodifyListthrowsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         expenditureList.asUnmodifiableObservableList().remove(0);
     }
