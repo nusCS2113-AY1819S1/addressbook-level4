@@ -132,7 +132,8 @@ public class AddressBookParserTest {
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(MESSAGE_UNKNOWN_COMMAND + System.lineSeparator()
-                    + WrongCommandSuggestion.NO_SUGGESTION, pe.getMessage());
+                    + String.format(WrongCommandSuggestion.SUGGESTION_HEADER, HistoryCommand.COMMAND_WORD),
+                pe.getMessage());
         }
     }
 

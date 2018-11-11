@@ -21,7 +21,7 @@ import seedu.address.model.person.Time;
  * Parses input arguments and allows MatchScheduleCommand to find common time slots
  */
 
-public class MatchScheduleCommandParser implements Parser<MatchScheduleCommand>{
+public class MatchScheduleCommandParser implements Parser<MatchScheduleCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the MatchScheduleCommand
      * and returns an MatchScheduleCommand object for execution.
