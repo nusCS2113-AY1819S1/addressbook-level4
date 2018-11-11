@@ -2750,6 +2750,7 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+
 // tag::gradebookmanualtesting[]
 === Gradebook List
 
