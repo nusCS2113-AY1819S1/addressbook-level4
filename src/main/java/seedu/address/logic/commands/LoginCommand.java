@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
-    public static final String COMMAND_WORD_ALIAS = "lg";
+    public static final String COMMAND_WORD_ALIAS = "li";
     public static final String MESSAGE_SUCCESS = "Login has been attempted!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Please enter your username and password."
