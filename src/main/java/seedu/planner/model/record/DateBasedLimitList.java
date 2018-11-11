@@ -106,8 +106,7 @@ public class DateBasedLimitList { //implements Iterable<Limit> {
         return true;
     }
 
-
-//@author tztzt
+    //@author tztzt
     /**
      * Creates a hashmap of the limits in the list that keep tracks of the usage of each different date
      */
