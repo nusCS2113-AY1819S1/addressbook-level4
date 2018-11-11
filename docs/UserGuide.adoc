@@ -126,7 +126,7 @@ To start adding candidates in RecruitBook, enter `addc` in the command line to t
 After entering `addc` you will be prompted the following: +
 
 |===
-*`Enter the following details of the candidate in the format:`* +
+|*`Enter the following details of the candidate in the format:`* +
 `Parameters: n/NAME g/GENDER x/AGE p/PHONE_NUMBER e/EMAIL a/ADDRESS j/SEEKING_JOB h/HIGHEST_EDUCATION s/EXPECTED_SALARY_PER_MONTH [t/TAG]...`
 `(Enter 'cancel' to stop adding candidates)` +
 `Example: n/John Doe g/M x/21 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/Waiter h/OLEVELS s/1000 t/diabetic t/excuseHeavyLoad`
@@ -152,8 +152,9 @@ To start adding companies in RecruitBook, enter `addC` in the command line to th
 
 
 After entering `addC` you will be prompted the following: +
+
 |===
-`Enter the following details of the company in the format:` +
+|`Enter the following details of the company in the format:` +
 `Parameters: c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE` +
 `(Enter 'cancel' to stop adding companies)` +
 `Example: c/KFC a/101, Clementi Ave 2, #01-01 e/kfc@gmail.com p/61231232` +
@@ -180,7 +181,7 @@ To start adding job offers in RecruitBook, enter `addj` in the command line to t
 After entering `addj` you will be prompted the following: +
 
 |===
-*`Enter the following details of the job in the format:`* +
+|*`Enter the following details of the job in the format:`* +
 `Parameters: c/COMPANY_NAME j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY` +
 `(Enter 'cancel' to stop adding jobs)` +
 `Example: c/McDonalds j/Cashier g/M xr/20-30 h/OLEVELS s/1200`
@@ -707,7 +708,7 @@ To help protect your data confidentiality and integrity, you can enter `setPW` t
 
 After entering `setPW` you will be prompted the following: +
 |===
-*`Enter your new password (case-sensitive).`* +
+|*`Enter your new password (case-sensitive).`* +
 `Enter 'cancel' to exit this interface.` +
 |===
 

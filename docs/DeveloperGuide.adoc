@@ -1172,6 +1172,7 @@ _{More to be added}_
 (For all use cases below, the *System* is the `RecruitBook` and the *Actor* is the `user`, unless specified otherwise)
 
 |===
+|
 [big]#*Use case: Add Candidate*#
 
 *MSS*
