@@ -1,0 +1,9 @@
+<expenditurelist>
+    <!-- Expenditure with invalid date field -->
+    <expenditures>
+        <description>Nike hoodie</description>
+        <category>Clothing</category>
+        <money>2</money>
+        <date>0-1-18</date>
+    </expenditures>
+</expenditurelist>

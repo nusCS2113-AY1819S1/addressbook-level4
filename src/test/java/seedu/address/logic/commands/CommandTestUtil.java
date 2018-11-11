@@ -50,6 +50,14 @@ public class CommandTestUtil {
     public static final String VALID_TASK_DATE_TUTORIAL = "04-08";
     public static final String VALID_TASK_PRIORITY_ASSIGNMENT = "1";
     public static final String VALID_TASK_PRIORITY_TUTORIAL = "2";
+    public static final String VALID_EXPENDITURE_DESCRIPTION_CLOTHES = "Clothes";
+    public static final String VALID_EXPENDITURE_DESCRIPTION_IPHONE = "iPhoneXS Max";
+    public static final String VALID_EXPENDITURE_CATEGORY_CLOTHES = "Clothing";
+    public static final String VALID_EXPENDITURE_CATEGORY_IPHONE = "Electronics";
+    public static final String VALID_EXPENDITURE_MONEY_CLOTHES = "110";
+    public static final String VALID_EXPENDITURE_MONEY_IPHONE = "1599";
+    public static final String VALID_EXPENDITURE_DATE_CLOTHES = "01-01-2018";
+    public static final String VALID_EXPENDITURE_DATE_IPHONE = "11-07-2018";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
