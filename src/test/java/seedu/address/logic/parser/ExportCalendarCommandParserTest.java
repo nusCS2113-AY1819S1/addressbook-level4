@@ -36,7 +36,7 @@ public class ExportCalendarCommandParserTest {
 
         //invalid special characters
         assertParseFailure(parser, "C/::*?", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ExportCalendarCommand.MESSAGE_USAGE) );
+                ExportCalendarCommand.MESSAGE_USAGE));
     }
 
 }
