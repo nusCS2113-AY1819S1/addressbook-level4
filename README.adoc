@@ -35,6 +35,9 @@ The list shown below details the key features that our application provides, whi
 ** Club Members can submit the budget calculation data for the calculation and allocation of their club's budget
 ** NUSSU Treasurers can calculate and allocate the final budgets to all the clubs based on the total available budget
 ** Users can view the final budget allocated to each club
+* Easy Management of Contact Information:
+** Users can utilize the search pruning feature to search through a large database of contacts efficiently.
+** Advanced search commands gives users extra flexibility when performing their search
 
 == Site Map
 
