@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.FinishTodoCommand;
 
+//@@author linnnruoo
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
  * outside of the FinishTodoCommand code. For example, inputs "1" and "1 abc" take the
