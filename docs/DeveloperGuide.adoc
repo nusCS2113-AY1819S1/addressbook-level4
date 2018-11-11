@@ -421,7 +421,7 @@ Step 4. The user executes the `LoanListCommand` to loan out 20 Arduinos to Davin
 * The `LoanListParser#parseCommand` is called and takes in the input string from the user, parses it into the `LoanerDescription`, and returns a new `LoanListCommand`.
 * The `LoanerDescription` class consists of the `itemName`, `loanerName`, and `quantity`.
 * The `LoanListCommand#execute()` is called. This creates a new `ChangeStatusCommand` and calls the `ChangeStatusCommand#execute()` to change the status from Ready to On_Loan.
-* The `LoanListCommand#updateLoanList()` is called. This creates an XmlAdaptedLoanerDescription object from the LoanerDescription, and is added into the XmlAdaptedLoanList.
+* The `LoanListCommand#updateLoanList()` is called. This creates an `XmlAdaptedLoanerDescription` object and is added into the `XmlAdaptedLoanList`.
 * The `LoanListCommand#updateXmlLoanListFile()` is called to save the changes in storage.
 
 Step 5. The user executes the `ViewLoanListCommand` to view the loan list.
