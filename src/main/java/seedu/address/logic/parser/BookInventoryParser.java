@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.DiceCoefficient;
 
+import seedu.address.logic.Role;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CheckCommand;
 import seedu.address.logic.commands.ClearCommand;

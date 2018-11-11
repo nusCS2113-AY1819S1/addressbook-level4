@@ -4,10 +4,6 @@
 <?import javafx.scene.control.ListView?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-<<<<<<< HEAD
-    <ListView fx:id="commandPanel" onMouseClicked="#mouseClicked" minWidth="300" style="-fx-font-size: 22; -fx-border-color: white; -fx-text-fill: #FFFFFF" >
-=======
     <ListView fx:id="commandPanel" styleClass="command-panel" onMouseClicked="#mouseClicked" minWidth="250" >
->>>>>>> 43735de65e02fc54445d8d8f8ddf12ba867f84a0
     </ListView>
 </AnchorPane>
