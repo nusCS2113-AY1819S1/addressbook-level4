@@ -43,24 +43,28 @@ public class ChangePasswordCommand extends Command {
     @Override
     public CommandResult execute (Model model , CommandHistory history) {
         requireNonNull(model);
-
-        UserName username = CurrentUser.getUserName ();
-        String hashedOldPassword = model.getLoginInfo (username).getPasswordString ();
-        boolean isPasswordCorrect = PasswordUtils.verifyUserPassword (oldPassword.toString (), hashedOldPassword);
-        if (isPasswordCorrect) {
-            Password newHashedPassword = getHashedPassword();
-
-            model.changePassword (username, newHashedPassword);
-
-        } else {
-            return new CommandResult(MESSAGE_WRONG_PASSWORD);
-        }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, newPassword));
+        return resultBaseOnValidityOfPassword(model);
     }
 
     private Password getHashedPassword() {
         String hashedPassword = PasswordUtils.generateSecurePassword (newPassword.toString ());
         return new Password (hashedPassword);
 
+    }
+
+    /**
+     * Returns {@code commandResult} based on the validity of password
+     */
+    private CommandResult resultBaseOnValidityOfPassword(Model model) {
+        UserName username = CurrentUser.getUserName ();
+        String hashedOldPassword = model.getLoginInfo (username).getPasswordString ();
+        boolean isPasswordCorrect = PasswordUtils.verifyUserPassword (oldPassword.toString (), hashedOldPassword);
+        if (isPasswordCorrect) {
+            Password newHashedPassword = getHashedPassword();
+            model.changePassword (username, newHashedPassword);
+        } else {
+            return new CommandResult(MESSAGE_WRONG_PASSWORD);
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, newPassword));
     }
 }

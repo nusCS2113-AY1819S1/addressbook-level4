@@ -11,7 +11,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.drink.Price;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.transaction.TransactionList;
+import seedu.address.model.transaction.ReadOnlyTransactionList;
 import seedu.address.model.user.UserName;
 
 /**
@@ -21,7 +21,7 @@ public class ManagerModelManager extends ModelManager implements ManagerModel {
 
     public ManagerModelManager(ReadOnlyInventoryList inventoryList,
                                UserPrefs userPrefs, LoginInfoManager loginInfoManager,
-                               TransactionList transactionList) {
+                               ReadOnlyTransactionList transactionList) {
         super(inventoryList, userPrefs, loginInfoManager, transactionList);
     }
     /**
@@ -58,8 +58,7 @@ public class ManagerModelManager extends ModelManager implements ManagerModel {
         indicateDrinkAttributesChanged(drink);
     }
 
-    // ================ EDIT DRINK DETAILS COMMANDS =========================
-
+    // ================ EDIT DRINK DETAILS COMMANDS ========================
     @Override
     public void updateSellingPrice(Drink drinkToEdit, Price newSellingPrice) {
         inventoryList.updateSellingPrice(drinkToEdit, newSellingPrice);

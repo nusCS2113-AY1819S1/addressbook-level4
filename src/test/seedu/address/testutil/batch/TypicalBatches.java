@@ -12,8 +12,8 @@ import seedu.address.model.drink.UniqueBatchList;
  */
 public class TypicalBatches {
 
-    public static final Batch COKE1 = new BatchBuilder().withId("0001").withQuantity("10").
-            withDate("01/11/2018").build();
+    public static final Batch COKE1 = new BatchBuilder().withId("0001").withQuantity("10")
+            .withDate("01/11/2018").build();
     public static final Batch COKE2 = new BatchBuilder().withId("0002").withQuantity("20")
             .withDate("02/11/2018").build();
     public static final Batch COKE3 = new BatchBuilder().withId("0003").withQuantity("30")

@@ -64,7 +64,10 @@ public class Drink {
         this.tags.addAll(tags);
     }
 
-
+    /**
+     * Constructs a Drink for the use of buying and selling.
+     * Hence, fields other than name are initialised to default values.
+     */
     public Drink(Name name) {
         this.name = name;
         this.costPrice = new Price("0");

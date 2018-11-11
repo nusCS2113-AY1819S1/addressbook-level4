@@ -34,7 +34,6 @@ public class BatchBuilder {
     public BatchBuilder(Batch batchToCopy) {
         batchId = batchToCopy.getBatchId();
         batchQuantity = batchToCopy.getBatchQuantity();
-        batchPrice = batchToCopy.getBatchPrice();
         batchDate = batchToCopy.getBatchDate();
     }
 
@@ -71,6 +70,6 @@ public class BatchBuilder {
     }
 
     public Batch build() {
-        return new Batch(batchId, batchQuantity, batchPrice, batchDate);
+        return new Batch(batchId, batchQuantity, batchDate);
     }
 }

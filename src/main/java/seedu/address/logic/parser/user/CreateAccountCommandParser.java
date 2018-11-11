@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import java.util.stream.Stream;
 //@@author tianhang
 
+import seedu.address.authentication.PasswordUtils;
+import seedu.address.commons.core.LoginInfo;
 import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -41,10 +43,11 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
 
         UserName userName = ParserUtil.parseUserName (argMultimap.getValue(PREFIX_USERNAME).get());
         Password password = ParserUtil.parsePassword (argMultimap.getValue (PREFIX_PASSWORD).get ());
+        Password hashedPassword = new Password (PasswordUtils.generateSecurePassword (password.toString ()));
         AuthenticationLevel authenticationLevel = ParserUtil.parseAuthenticationLevel(
                                         argMultimap.getValue (PREFIX_AUTHENTICATION_LEVEL).get ());
-
-        return new CreateAccountCommand (userName, password, authenticationLevel);
+        LoginInfo newAccount = new LoginInfo (userName, hashedPassword, authenticationLevel);
+        return new CreateAccountCommand (newAccount);
     }
 
     /**

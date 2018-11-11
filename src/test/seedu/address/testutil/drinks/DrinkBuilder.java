@@ -87,7 +87,7 @@ public class DrinkBuilder {
     }
 
     public Drink build() {
-        return new Drink(name, costPrice, retailPrice, quantity, tags);
+        return new Drink(name, costPrice, retailPrice, tags);
     }
 
 
