@@ -68,7 +68,7 @@ Examples:
 |Have a task that requires a lot of things to be done? Break it up into smaller, more manageable subtasks called milestones!
 |===
 
-Adds a milestone to selected task from the task book +
+Adds a milestone to an existing task in the task book +
 Format: `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK`
 
 [WARNING]
