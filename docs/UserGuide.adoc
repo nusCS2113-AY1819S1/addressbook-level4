@@ -270,7 +270,8 @@ Examples:
 * `deleteTag 1 t/ Lab1 t/ Lab2` +
 Deletes tags "Lab1" and "Lab2" from the item with index 1
 // end::tag[]
-//tag::lostcommand
+
+//tag::lostcommand[]
 === Lost an item: `lost`
 
 Lost an item From the stock list +
@@ -281,8 +282,9 @@ Format: `lost INDEX q/QUANTITY`
 Examples:
 
 * `lost 1 q/25`
-//end::lostcommand
-//tag::foundcommand
+//end::lostcommand[]
+
+//tag::foundcommand[]
 === Found an item: `found`
 
 Found an item From the Lost&Found List +
@@ -293,15 +295,16 @@ Format: `found INDEX q/QUANTITY`
 Examples:
 
 * `found 1 q/25`
-//end::lostcommand
-//tag::lost&found
+//end::foundcommand[]
+
+//tag::lost&found[]
 === Listing Lost&Found List: `lost&found`
 
 Shows the number of every lost item that has been lost +
 Format: `lost&found`
 
 
-//end::lost&found
+//end::lost&found[]
 === Undoing previous command : `undo`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +

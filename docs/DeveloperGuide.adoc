@@ -102,7 +102,7 @@ When you are ready to start coding,
 
 == Design
 
-//tag::2.1
+//tag::2.1[]
 [[Design-Architecture]]
 === Architecture
 
@@ -163,7 +163,7 @@ Note how the event is propagated through the `EventsCenter` to the `Storage` and
 The sections below give more details of each component.
 
 [[Design-Ui]]
-//end::2.1
+//end::2.1[]
 // tag::2.2[]
 === UI component
 
@@ -545,7 +545,7 @@ _{Explain here how the data encryption feature will be implemented}_
 
 // end::dataencryption[]
 
-//tag::lost&foundfeature
+//tag::lost&foundfeature[]
 === Lost and Found feature
 ==== Current Implementation
 The Lost and Found mechanism is facilitated by `LostCommand`, `FoundCommand` and `LostandFoundCommand`. These three commands extend `Command`. And two class: LostDescriptor and Found Descriptor are created as well. The 3 commands implement the following operations:
@@ -611,10 +611,8 @@ Step 5. The lost list will be shown to the user.
 * **Alternative 2** When executing lost or found command, update the quantity of the item in the StockList.
 ** Pros: Easy to handle while only increasing and decreasing the quantity will be used and no need to record all the lost history.
 ** Cons: Unable to list all the lost and found history.
-
+//end::lost&foundfeature[]
 // end::lostcommand[],foundcommand[],lostandfoundcommand[]
-//end::lost&foundfeature
-
 
 === Logging
 
