@@ -377,42 +377,75 @@ Step 9. The `april_18.xml` file is transformed with the `template.xsl` styleshee
 ** Cons: The displayed inventory is in XML format and hard to decipher.
 // end::saveopen[]
 
-// tag::changestatus[]
-=== Change Status command
-For this command, 3 classes were created, ChangeStatusDescriptor, ChangeStatusCommandParser and ChangeStatusCommand.
+// tag::status[]
+=== Status feature
+==== Current Implementation
 
+The status feature is facilitated by the `item class`, which contains the `status class`.
+
+* The status class keeps track of the quantities `Ready`, `OnLoan`, and `Faulty`.
+
+The status feature is further facilitated by the 5 commands, `StatusCommand`, `ChangeStatusCommand`, `LoanListCommand`, `DeleteLoanListCommand` and `ViewLoansListCommand`. The commands extend `Command` and implements the following operations:
+
+* `Command#StatusCommand()` - Lists out the items according to their status.
+* `Command#ChangeStatusCommand()` - Changes the status from `Ready` to `Faulty`, or vice versa.
+* `Command#LoanListCommand()` - Creates and stores a loan list and changes the item status from `Ready` to `OnLoan`.
+* `Command#DeleteLoanListCommand()` - Deletes the loan list and changes the item status from `OnLoan` to `Ready`.
+* `Command#ViewLoanListCommand()` - Lists out the loan lists.
+
+Given below is an example usage scenario and how the command mechanisms behaves at each step.
+
+Step 1. The user executes the `AddCommand` to add 50 Arduinos into the stock list.
+
+* The `Add Command` calls on the `Item Constructor` which creates the item object, and sets the status of all 50 Arduinos to `Ready` by default.
+
+Step 2. The user executes the `ChangeStatusCommand` to change the status of 10 Arduinos from `Ready` to `Faulty`.
+
+* The ChangeStatusCommandParser class is called and takes in the input string from the user, parses it into the ChangeStatusDescriptor, and returns a new ChangeStatusCommand.
 * The ChangeStatusDescriptor class consists of the itemName, quantity, originalStatus, and updatedStatus.
-* The ChangeStatusCommandParser class takes in the input string from the user, parses it into the ChangeStatusDescriptor, and returns a new ChangeStatusCommand.
-* For the ChangeStatusCommand class, the execute method uses the itemName to obtain the item to update from the model class. A copy is created and changes are made to the copy. The copy then replaces the original item.
-
-The updated item list and success message is shown to the user. Updates are committed to the storage.
+* The `ChangeStatusCommand#execute()` is called. This calls the `Model#getFilteredItemList()` to obtain the item to update, and calls `Model#updateItem()` to update the item inside of the stock list with the new status.
+* The `Model#commitStockList()` is called to save the updated stock list.
 
 The following sequence diagram shows how the changeStatus operation works:
 
 image::ChangeStatus.png[width="800"]
 
-// end::changestatus[]
+Step 3. The user executes the `StatusCommand` to list the items by status.
 
-// tag::status[]
-=== Status command
-For this command, 2 classes were created, SimpleItem and StatusCommand.
+* The `StatusCommand#execute` is called. This calls the `Model#getFilteredItemList()` to obtain the item list.
+* The `StatusCommand#sortSimpleItems()` iterates through the item list and sorts them according to the status.
+* The sorted items are stored as `SimpleItem` objects, which stores the just name the and quantity, as these are the only 2 relevant fields.
+* The output is returned to the user.
 
-* The SimpleItem class is a simplified version of the item class, consisting of only the itemName and quantity. These aer the only two fields relevant for the loan list.
-* For the StatusCommand class, the execute method sorts the items into the 3 categories, Ready, OnLoan and Faulty. The items are then shown to the user, sorted by their status.
+The following sequence diagram shows how the Status operation works:
 
 image::Status.png[width="800"]
 
-// tag::loanList[]
-=== LoanList command
-For this command, 5 classes were created, LoanerDescription, LoanListParser, LoanListCommand, XmlAdaptedLoanerDescription, and XmlAdaptedLoanList.
+Step 4. The user executes the `LoanListCommand` to loan out 20 Arduinos to Davind.
 
-* The LoanerDescription class consists of the itemName, loanerName, and quantity.
 * The LoanListParser class takes in the input string from the user, parses it into the LoanerDescription, and returns a new LoanListCommand.
-* For the LoanListCommand, the execute method calls the ChangeStatusCommand to change the status from Ready to On_Loan. A XmlAdaptedLoanerDescription object is then created from the LoanerDescription and is added into the XmlAdaptedLoanList. This is then saved inside the storage.
+* The LoanerDescription class consists of the itemName, loanerName, and quantity.
+* The `LoanListCommand#execute()` is called. This calls the `ChangeStatusCommand#execute()` to change the status from Ready to On_Loan.
+* The `LoanListCommand#updateLoanList()` is called. This creates an XmlAdaptedLoanerDescription object from the LoanerDescription, and is added into the XmlAdaptedLoanList.
+* The `LoanListCommand#updateXmlLoanListFile()` is called to save the changes in storage.
+
+The following sequence diagram shows how the LoanList operation works:
 
 image::LoanList.png[width="800"]
 
-// end::loanList[]
+Step 5. The user executes the `ViewLoanListCommand` to view the loan list.
+
+* The `XmlAdaptedLoanList#getLoanList()` is used to obtain the loan list
+* The `ViewLoanListCommand#getMessageOutput()` iterates through the loan list and returns the result to the user.
+
+Step 6. The user executes the `DeleteLoanListCommand` to delete the loan list when Davind returns the Arduinos.
+
+* The `DeleteLoanListCommand#execute()` is called. This calls the `ChangeStatusCommand#execute()` to change the status from On_Loan to Ready.
+* The `xmlAdaptedLoanList#getLoanList()` is called to obtain the loan list.
+* The `ArrayList#remove()` is called to remove the loan list entry
+* The `LoanListCommand#updateXmlLoanListFile()` is called to save the changes in storage.
+
+/// end:: status[]
 
 // tag::login[]
 === Login feature
