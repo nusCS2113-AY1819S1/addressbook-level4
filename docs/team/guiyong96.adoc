@@ -9,7 +9,7 @@
 
 == Overview
 
-BookInventory is a desktop application to assist store managers in managing their books stock supply and engaging a larger market to customers who do not frequently visit book stores. This 3 in 1 application targets three parties, the bookstore owner, bookstore in-house accountants and potential customers. Bookstore in-house accountants may assist the managers with a separate set of privileges specifically to manage profit margins and make subsequent plans. Lastly, students may access the app to browse the book of their choice and issue requests to the store owners to express interest. This application is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). In this paper, I will elaborate on my ability to illustrate a clear documentation of the thought process as well as the implementation procedure.
+*BookInventory* is a desktop application to assist store managers in managing their books stock supply and engaging netizens who do not frequently visit book stores. This *3 in 1 application* is catered for the bookstore owner, bookstore in-house accountants and students. Bookstore in-house accountants may assist the managers with a separate set of privileges specifically to manage profit margins and make subsequent plans. Lastly, students may access the app to browse the book of their choice and issue requests to the store owners to express interest. This application is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). In this paper, I will elaborate on my ability to illustrate a clear documentation of the thought process as well as the implementation procedure.
 
 == Summary of contributions
 
@@ -142,7 +142,7 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 
 ==== Current Implementation
 To maximize user friendliness, we have implemented predictive text which will appear
-familiar for phone users. BookInventory users may inadvertently misspell command words,
+familiar for phone users. *BookInventory* users may inadvertently misspell command words,
 e.g. lis (Expected command: list). This will now prompt a GUI log stating, "Did you mean,
 list?" To achieve this, we have utilized the Dice Coefficient.
 
@@ -150,7 +150,7 @@ list?" To achieve this, we have utilized the Dice Coefficient.
 
 ===== Aspect: How does Dice Coefficient works?
 
-Dice's coefficient measures the similarity between two sets. In BookInventory, we use it to help measure how
+Dice's coefficient measures the similarity between two sets. In *BookInventory*, we use it to help measure how
 similar two strings are in terms of the number of common bigrams (A bigram is a pair of adjacent
 letters in the string).The Coefficient result of 1 indicates identical vectors (completely equal strings) as
 where a 0 equals orthogonal vectors (completely unequal strings).
