@@ -367,7 +367,7 @@ image::LoginExtendedActivityDiagram.png[width="400"]
 
 ==== Design Considerations
 
-This section touches on the different aspects of design considerations encountered during the project in the implementation of the login feature, different alternatives in different design aspects, and its advantages and disadvantages.
+This section touches on the design considerations encountered during the project in the implementation of the login feature, different alternatives in different design aspects, and its advantages and disadvantages.
 
 ===== Aspect: How login data is stored
 
