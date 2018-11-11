@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.item;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_LOCATION;
@@ -9,7 +9,12 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddItemCommand;
+import seedu.address.logic.commands.item.AddItemCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemLocation;
@@ -43,9 +48,9 @@ public class AddItemCommandParser implements Parser<AddItemCommand> {
         ItemQuantity itemQuantity = ParserUtil.parseItemQuantity(argMultimap.getValue(PREFIX_ITEM_QUANTITY).get());
         ItemLocation itemLocation = ParserUtil.parseItemLocation(argMultimap.getValue(PREFIX_ITEM_LOCATION).get());
 
-        logger.info("Creating new Item");
+        logger.info("Creating new item");
         Item item = new Item(itemName, itemQuantity, itemLocation);
-        logger.info("Created new Item");
+        logger.info("Created new item");
 
         return new AddItemCommand(item);
     }

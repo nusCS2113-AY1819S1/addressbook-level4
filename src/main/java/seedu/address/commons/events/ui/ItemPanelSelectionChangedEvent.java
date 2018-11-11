@@ -4,7 +4,7 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.item.Item;
 
 /**
- * Represents a selection change in the Item List Panel
+ * Represents a selection change in the item List Panel
  */
 public class ItemPanelSelectionChangedEvent extends BaseEvent {
 

@@ -88,7 +88,7 @@ public class EditEventCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Item} with the details of {@code itemToEdit}
+     * Creates and returns a {@code item} with the details of {@code itemToEdit}
      * edited with {@code editItemDescriptor}.
      */
     private static Event createEditedEvent(Event eventToEdit, EditEventDescriptor editEventDescriptor) {
