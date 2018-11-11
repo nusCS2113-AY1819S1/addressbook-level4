@@ -54,7 +54,7 @@ public class EditExpenditureCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parseinvalidValuefailure() {
         assertParseFailure(parser, "1" + INVALID_EXPENDITURE_CATEGORY_DESC, Category.MESSAGE_CATEGORY_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_EXPENDITURE_DATE_DESC, Date.MESSAGE_DATE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EXPENDITURE_MONEY_DESC, Money.MESSAGE_MONEY_CONSTRAINTS); // invalid address
