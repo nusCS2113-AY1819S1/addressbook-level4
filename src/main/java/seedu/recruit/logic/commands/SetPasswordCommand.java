@@ -24,7 +24,7 @@ public class SetPasswordCommand extends Command {
 
     public static final String MESSAGE_CONFIRM_PASSWORD = "Renter your new password to confirm change.";
 
-    public static final String MESSAGE_PASSWORD_NOT_SAME = "Passwords entered not the same. Please try again\n";
+    public static final String MESSAGE_PASSWORD_NOT_SAME = "Passwords entered not the same. Please try again.\n";
 
     public static final String MESSAGE_SUCCESS = "Successfully changed password.";
 

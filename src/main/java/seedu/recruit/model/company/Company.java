@@ -99,7 +99,7 @@ public class Company {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Company Name:")
+        builder.append("Company Name: ")
                 .append(getCompanyName())
                 .append(" Address: ")
                 .append(getAddress())

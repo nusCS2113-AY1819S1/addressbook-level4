@@ -38,7 +38,7 @@ public class EmailUtil {
     /**
      * Getters and Setters
      */
-    public boolean isHasRecipientsAdded() {
+    public boolean getHasRecipientsAdded() {
         return hasRecipientsAdded;
     }
 
@@ -66,7 +66,7 @@ public class EmailUtil {
         this.jobOffers = jobOffers;
     }
 
-    public boolean isAreRecipientsCandidates() {
+    public boolean getAreRecipientsCandidates() {
         return areRecipientsCandidates;
     }
 
@@ -119,7 +119,6 @@ public class EmailUtil {
         output.append(jobOffer.getJob().toString());
         output.append(" at ");
         output.append(jobOffer.getCompanyName().toString());
-        System.out.println(output.toString());
         return output.toString();
     }
 }

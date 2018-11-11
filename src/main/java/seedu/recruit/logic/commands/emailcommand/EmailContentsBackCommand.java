@@ -31,7 +31,7 @@ public class EmailContentsBackCommand extends EmailContentsCommand {
      * @param emailUtil
      */
     public void changeBook(EmailUtil emailUtil) {
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
         } else {
             EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
