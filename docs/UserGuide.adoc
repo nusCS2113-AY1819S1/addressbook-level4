@@ -18,7 +18,7 @@ Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-Task Book is for students who prefer to use a desktop app for managing their daily tasks and ultimately, lead a more productive life. More importantly, Task Book is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Task Book can get your management of tasks done faster than traditional paper notebooks or a mobile application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Task Book is a desktop task manager application that is designed for students to manage their daily tasks and ultimately, lead a more productive life. More importantly, Task Book is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Task Book can get your management of tasks done faster than traditional paper notebooks or a mobile application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
