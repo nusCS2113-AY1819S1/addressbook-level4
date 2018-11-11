@@ -43,7 +43,6 @@ public class UpdateStatusCommand extends Command {
 
             model.updateEvent(updatingEvent, updatedEvent);
         }
-        
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
