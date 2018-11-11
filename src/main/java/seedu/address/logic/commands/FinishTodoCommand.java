@@ -23,11 +23,11 @@ public class FinishTodoCommand extends Command {
     public static final String COMMAND_PARAMETERS = "Parameters: INDEX (must be a positive integer)\n";
     public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Complete the todo task identified by the index number used in the displayed todo task list.\n"
+        + ": Complete the to-do task identified by the index number used in the displayed to-do task list.\n"
         + COMMAND_PARAMETERS
         + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_FINISH_TODO_SUCCESS = "todo task completed: %1$s";
+    public static final String MESSAGE_FINISH_TODO_SUCCESS = "The selected to-do task is completed: %1$s";
 
     private final Index targetIndex;
 
