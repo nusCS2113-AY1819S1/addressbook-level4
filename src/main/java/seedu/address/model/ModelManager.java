@@ -148,17 +148,27 @@ public class ModelManager extends ComponentManager implements Model {
         otherList.setPredicate(combinedOtherPredicate(predicate, othersPredicateFromPerson(user)));
     }
 
-    @Override
-    public ObservableList<Person> getFriendList(Person person) {
-        requireNonNull(person);
-        friendList.setPredicate(friendsPredicateFromPerson(person));
+    public ObservableList<Person> getFriendList() {
+        friendList.setPredicate(friendsPredicateFromPerson(user));
         return FXCollections.unmodifiableObservableList(friendList);
     }
 
-    public ObservableList<Person> getOtherList(Person person) {
-        requireNonNull(person);
-        otherList.setPredicate(othersPredicateFromPerson(person));
+    public ObservableList<Person> getCurrentFriendList() {
+        return FXCollections.unmodifiableObservableList(friendList);
+    }
+
+    public ObservableList<Person> getCurrentOtherList() {
         return FXCollections.unmodifiableObservableList(otherList);
+    }
+
+    public ObservableList<Person> getOtherList() {
+        otherList.setPredicate(othersPredicateFromPerson(user));
+        return FXCollections.unmodifiableObservableList(otherList);
+    }
+
+    public ObservableList<Person> getMeList() {
+        filteredPersons.setPredicate(p -> p.getName().equals(user.getName()));
+        return FXCollections.unmodifiableObservableList(filteredPersons);
     }
 
     //=========== Undo/Redo =================================================================================

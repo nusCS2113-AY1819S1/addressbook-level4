@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -53,7 +52,6 @@ public class DeleteTimeCommand extends Command {
         }
 
         model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateTimeTable(editedPerson.getTimeTable());
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_TIMESLOT_SUCCESS, toDelete));
