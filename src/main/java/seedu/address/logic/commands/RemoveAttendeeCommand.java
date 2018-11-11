@@ -34,7 +34,7 @@ public class RemoveAttendeeCommand extends Command {
             + "USERNAME (must be a valid username registered for the event)\n"
             + "Example: " + COMMAND_WORD + " 1" + " Peter Parker";
 
-    public static final String MESSAGE_REMOVE_ATTENDEE_SUCCESS = "Removed %1$s from event: %2$s";
+    public static final String MESSAGE_REMOVE_ATTENDEE_SUCCESS = "Removed user %1$s from event: %2$s";
     public static final String MESSAGE_INVALID_ATTENDEE = "Attendee is not registered for event.";
 
     private final Index targetIndex;
