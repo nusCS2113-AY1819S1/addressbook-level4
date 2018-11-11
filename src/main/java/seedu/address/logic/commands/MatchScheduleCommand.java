@@ -45,8 +45,8 @@ public class MatchScheduleCommand extends Command {
             + COMMAND_PARAMETERS
             + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_SUCCESS = "Match found!";
-    public static final String MESSAGE_FAILURE = "No Matches Found!";
+    public static final String MESSAGE_SUCCESS = "Common time slots found!\n";
+    public static final String MESSAGE_FAILURE = "No common time slots Found!";
 
     private MatchSchedule toSchedule;
 
@@ -112,28 +112,48 @@ public class MatchScheduleCommand extends Command {
             }
 
             int inValidRange = 0;
+            int validRangePresent = 0;
+            this.availableSlots = new ArrayList<>();
+
             for (int i = this.startTime.timeToMinutesInDay() ; i <= this.endTime.timeToMinutesInDay(); i++) {
                 if (startEndTimeBlock[i] == 0 && inValidRange == 0){
                     String paddedHrs = String.format("%02d", i/60);
                     String paddedMins = String.format("%02d", i%60);
                     String toHrsStart = paddedHrs + paddedMins;
-
+                    this.availableSlots.add(toHrsStart);
                     inValidRange = 1;
+                    validRangePresent = 1;
                 }
                 if (((startEndTimeBlock[i] == 1) || ( this.endTime.timeToMinutesInDay() == i))
                         && inValidRange == 1) {
                     String paddedHrs = String.format("%02d", i/60);
                     String paddedMins = String.format("%02d", i%60);
-                    String toHrsEnd = paddedHrs + paddedMins + "\n";
+                    String toHrsEnd = paddedHrs + paddedMins;
+                    this.availableSlots.add(toHrsEnd);
                     inValidRange = 0;
                 }
             }
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS) + "\n");
-// matchSchedule d/08112018 st/1230 et/1400 i/1 i/2
-        //matchSchedule d/01012018 st/1000 et/1600 i/1
+            //format string slots to print
+            String slots = "";
+            for (int i = 0 ; i < this.availableSlots.size(); i++){
+                if (i%2 == 0) {
+                    slots = slots + ("StartTime: " + this.availableSlots.get(i) + " ");
+                }
+                else{
+                    slots = slots + ("EndTime: " + this.availableSlots.get(i) + "\n");
+                }
+
+            }
+
+
+            if (validRangePresent == 1) {
+                return new CommandResult(MESSAGE_SUCCESS + slots);
+            }
+            else {
+                throw new CommandException(MESSAGE_FAILURE);
+            }
+
     }
-
-
 
 }
