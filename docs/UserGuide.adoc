@@ -584,7 +584,7 @@ Format: `clear`
 [[import]]
 === Import Timetable : `import` (`im`)
 
-Imports a timetable for the *current user* from a specified file. +
+Use this command to import a timetable for the *current user* from a specified file. +
 
 Format: `import FILE_NAME` +
 
@@ -638,7 +638,7 @@ image::UG_import_step_4.png[width="790"]
 [[export]]
 === Export Timetable : `export` (`ex`)
 
-Exports the *currently-displayed* timetable to the specified file.
+Use this command to export the *currently-displayed* timetable as an _.ics_ file.
 
 Format: `export FILE_NAME`
 
@@ -659,7 +659,7 @@ Format: `export FILE_NAME`
 image::UG_export_directory.png[width="500", align="left"]
 
 
-*Example:*
+Example:
 
 * `export my_timetable` +
 Exports the displayed timetable to `.\import_export\my_timetable.ics` +
