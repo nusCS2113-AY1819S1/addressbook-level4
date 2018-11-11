@@ -315,12 +315,14 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // end::undoredo[]
 
 // tag::completeuncomplete[]
-=== Completing/Uncompleting a Task feature
+=== Completing/Uncompleting a task feature
 ==== Current Implementation
 
 Marking of a task as `completed` or `uncompleted` uses both `Logic` and `Model` components.
 Both `TDL_complete` and `TDL_uncomplete` commands are similar in most areas as they are implemented based on the edit task command.
 This feature also reuses the methods in the `Model` component used by the edit task command.
+
+* The parameter of the commands is the index of the to-do list.
 
 The following sequence diagram shows how the `TDL_complete` operation works:
 
@@ -350,12 +352,36 @@ Step 4. Similar to the edit task command, the task to be modified is updated usi
 // end::completeuncomplete[]
 
 // tag::viewtask[]
-=== Viewing Tasks feature
+=== Viewing filtered tasks feature
 ==== Current Implementation
+
+Viewing a filtered task list uses both `Logic` and `Model` components.
+This feature reuses the existing `Model#updateFilteredTaskList()` method to update the filter to be used.
+We create two new predicates to either retrieve all completed tasks or all uncompleted tasks.
+
+* Each predicate evaluates to true based on the completion status of the tasks.
+* The parameter of this command is either 'all', 'completed' or 'uncompleted'.
+
+The following sequence diagram shows how the `TDL_view uncompleted` operation works:
+
+image::ViewTaskSequenceDiagram.png[width="800"]
+
+Step 1. Upon user's input, `AddressBookParser` determines if the command entered by the user is valid and then calls the `ViewTaskCommandParser` class. The arguments are also passed to this class.
+
+Step 2. Since the parameter for this command is a string, the argument is trimmed and checked in the `ViewTaskCommandParser` class. The string is then passed to the `ViewTaskCommand` class to be executed.
+
+Step 3. Depending on the filter, `ViewTaskCommand` class will use the `Model#updateFilteredTaskList()` method with the appropriate predicate and update the list of task to be shown.
 
 ==== Design Considerations
 
-===== Aspect:
+===== Aspect: How the feature is implemented
+
+* **Alternative 1 (current choice):** Reuses the same method available in `Model` with new predicates
+** Pros: Easy to implement with little modifications to the `Model` component.
+** Cons: `ViewTaskCommand` class needs to handle three different cases, each with its own result and output.
+* **Alternative 2:** Saves all variation of the filtered task list
+** Pros: Each filtered task list is readily available and easily obtainable.
+** Cons: Whenever there is a change to the task list, we need to ensure that all lists are updated accordingly.
 // end::viewtask[]
 
 // tag::sorttask[]
