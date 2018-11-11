@@ -9,7 +9,9 @@
 
 == Overview
 
-Book Inventory is a desktop application cater for small and medium bookstore owners. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+BookInventory is a desktop application cater for small and medium bookstore owners. It designed to be primarily used as a stock management tool by book store owner with the added benefit for customers to directly browse through the stocks they have.
+
+Users interacts with BookInventory through the Command-Line Interface (CLI), and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 == Summary of contributions
 
