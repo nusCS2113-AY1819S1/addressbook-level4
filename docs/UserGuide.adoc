@@ -262,9 +262,96 @@ entered into *[blue]#_Drink I/O_#* +
 - The adding of the drink will fail if `SELLING_PRICE` or `COST_PRICE` are negative values. `[To be added in v1.4]`
 ====
 
-=== Searching for an item
-=== Viewing all items in inventory
-=== Viewing item details
+=== Searching for specific drink(s)
+Finds drinks which meet specific criteria depending on the prefix of the input.
+
+[TIP]
+====
+*_Summary_* +
+
+*Command format*: +
+ `find n/` `DRINK NAME` +
+ `find q/` `QUANTITY` +
+ `find d/` `DATE`
+====
+
+==== Searching by drink name
+
+You can search for specific drinks by name using this search function
+
+Finds all drinks which names contain any of the given keywords. +
+Format: `find n/KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `coke` will match `Coke`
+* The order of the keywords does not matter. e.g. `Tea Green` will match `Green Tea`
+* Only the drink name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Drinks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Tea` will return `Green Tea`, `Milk Tea`
+****
+
+Examples:
+
+* `find n/Tea` +
+Returns `Milk Tea` and `Green Tea`
+* `find n/Tea Milk Coke` +
+Returns any drink having `Tea`, `Milk`, or `Coke` in their names
+
+==== Searching by drink quantity
+
+To find out which drinks in your drink company are in need of restocking, you can utilise this search function which will return the drinks with quantity less than the quantity input. +
+
+Finds all drinks which have quantity less than the given quantity. +
+Format: `find q/QUANTITY`
+
+****
+* Only numbers are allowed in the Quantity field
+****
+
+Examples:
+
+* `find q/400` +
+Returns `Coke` and `Green Tea` which have a quantity less than 400
+
+==== Searching by batch import date
+To find out which drinks have been in the warehouse for a long period of time you can utilise this search function which will return the drinks that have batches older than the date input. +
+
+Find drinks which have batches that are older than the given date. +
+Format `find d/DATE`
+
+****
+* Date must be in either of the following formats:
+** DD / MM / YYYY
+** D / MM / YYYY
+* Date must be an existing date in the calendar
+** i.e. 30/02/2018 is a nonexistent date
+* Even if a drink has only 1 batch that meets the requirements, it will be shown
+****
+
+Examples:
+
+* `find d/02/11/2018` +
+Returns all drinks which have batches imported before 2nd November 2018
+* `find d/9/11/2018` +
+Returns all drinks which have batches imported before 9th November 2018
+
+=== Viewing all drinks in inventory
+Shows a list of all drinks in the inventory list. +
+
+Format: `list`
+
+=== Viewing drink details
+To view further details of the drink such as its batches that are not displayed on the drink card panel, you can simply click on the relevant drink card to select it or use the select command.
+
+Selects the drink identified by the index number used in the displayed drink list. +
+Format: `select INDEX`
+
+****
+* Selects the drink and loads the Drink detail page and the batch list page of the drink at the specified `INDEX`.
+* The index refers to the index number shown in the displayed drink list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
 === Updating item details
 ==== Updating item name
 ==== Updating cost price
@@ -541,7 +628,7 @@ When command -d is added, the list will show an decreasing order
 === Manager
 
 ==== Viewing Help: `help`
-Shows available commands with brief description of what can manager do.
+Shows available commands with brief description of what a manager can do.
 Format: `help`
 
 ==== Add new drink into inventory: `add`
@@ -579,7 +666,7 @@ Examples:
 [NOTE]
 ====
 DRINK_NAME is predefined by manager, so an alert message will appear if the drink name is not in the predefined list.
-In addition, drink name is #case-insensitive#.
+In addition, drink name is *case-sensitive*.
 ====
 
 ==== Decrease stock of a drink: `sell`
