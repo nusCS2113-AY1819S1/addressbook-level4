@@ -266,13 +266,6 @@ public class TimeTable {
 
         TimeTable otherTimeTable = (TimeTable) other;
 
-        Collection<TimeSlot> a = this.getTimeSlots();
-        Collection<TimeSlot> b = otherTimeTable.getTimeSlots();
-        for (TimeSlot timeSlot : a) {
-            if (!b.contains(timeSlot)) {
-                return false;
-            }
-        }
-        return true;
+        return this.getTimeSlots().equals(otherTimeTable.getTimeSlots());
     }
 }
