@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_QUANTITY;
@@ -9,14 +9,15 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.ItemLocation;
 import seedu.address.model.item.ItemQuantity;
 
 /**
- * Decreases the quantity of an existing item in the Item List.
+ * Decreases the quantity of an existing item in the item List.
  */
 public class DecreaseItemCommand extends Command {
 
@@ -26,10 +27,10 @@ public class DecreaseItemCommand extends Command {
             + "by the index number used in the displayed item list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ITEM_QUANTITY + "ITEM_QUANTITY...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ITEM_QUANTITY + "4";
+            + "Example: " + COMMAND_WORD + " 2 "
+            + PREFIX_ITEM_QUANTITY + "1";
 
-    public static final String MESSAGE_DECREASE_ITEM_SUCCESS = "Decreased quantity of Item: %1$s";
+    public static final String MESSAGE_DECREASE_ITEM_SUCCESS = "Decreased quantity of item: %1$s";
 
     private final Index index;
     private final ItemQuantity quantityToSubtract;
