@@ -211,9 +211,8 @@ asciidoctor {
         idprefix: '',  // for compatibility with GitHub preview
         idseparator: '-',
         'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
-        'site-name': 'Timetable Deconflicter (TBC)',
+        'site-name': 'FreeTime',
         'site-githuburl': 'https://github.com/CS2113-AY1819S1-W13-1/main',
-        'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
     ]
 
     options['template_dirs'].each {

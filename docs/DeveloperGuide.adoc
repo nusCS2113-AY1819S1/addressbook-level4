@@ -368,23 +368,26 @@ The `TimeTable` object is composed under the `Person` class in `Model`. Each `Ti
 2. Two `LocalTime` objects to indicate the start time and end time of the `TimeSlot` respectively. +
 3. One `Color` object to indicate the color of the `TimeSlot` when displayed on FreeTime's UI.
 
-The following class diagram summarises the relationship between the components of the TimeTable class:
+The following class diagram summarises the relationship between the components of the `TimeTable` class:
 
-.Structure of the TimeTable Class
-image::TimeTableClassDiagram.png[width="400"]
+.Structure of the `TimeTable` Class
+image::TimeTableClassDiagram.png[width="600"]
 
 The `TimeTable` class implements two key methods: +
 1. `TimeTable#addTimeSlot()` - to add a new `TimeSlot` to the `TimeTable` +
 2. `TimeTable#deleteTimeSlot()` - to remove an existing `TimeSlot` from the `TimeTable` +
 
-The class `DeconflictTimeTable`, which inherits from `TimeTable`, is used to display mutually free timeslots among users. +
+The class `DeconflictTimeTable`, which inherits from `TimeTable`, is used when the `free` command is executed to store mutually free timeslots among users. +
+When the `free` command is executed, a `DeconflictTimeTable` object is instantiated with all `TimeSlot` objects in the user's `TimeTable`. Subsequently, the `TimeTable` objects of every `Person` that is passed as an argument to the `free` command is added to the `DeconflictTimeTable`.
 
-The key difference between `TimeTable` and `DeconflictTimeTable` lies in the implementation of the `addTimeSlot()` method. `TimeTable#addTimeSlot()` throws an exception when the `TimeSlot` to be added overlaps with an existing `TimeSlot` in the `TimeTable`. However, `DeconflictTimeTable#addTimeSlot()` merges the `TimeSlot` to be added with all overlapping `TimeSlot` objects in the `TimeTable`.
+The following sequence diagram shows the significant method calls for the method `FreeCommand#execute()`:
 
-The following sequence diagram shows the significant method calls for generating a `DeconflictTimeTable` object from two `TimeTable` objects:
-
-.Sequence Diagram Showing the Generation of a `DeconflictTimeTable`
+.Interactions between the Logic Component and Model Component for the `FreeTime#execute()` Method
 image::DeconflictSequenceDiagram.png[width="800"]
+
+The key difference between `TimeTable` and `DeconflictTimeTable` lies in the implementation of the `addTimeSlot()` method. `TimeTable#addTimeSlot()` throws a `TimeSlotOverlapException` when the `TimeSlot` to be added overlaps with an existing `TimeSlot` in the `TimeTable`. +
+However, `DeconflictTimeTable#addTimeSlot()` merges the `TimeSlot` to be added with all overlapping `TimeSlot` objects in the `DeconflictTimeTable`. Thus, `DeconflictTimeTable#addTimeSlot()` never throws `TimeSlotOverlapException`.
+
 
 ===== Frontend implementation
 
@@ -393,18 +396,22 @@ image::DeconflictSequenceDiagram.png[width="800"]
 2. `TimeTableTimeMarkerGrid` - a `GridPane` on the top of the `TimeTablePanel` to display the time markers +
 3. `TimeTableMainGrid` - a `GridPane` in the center of the `TimeTablePanel`. Composed of any number of `TimeTablePanelTimeSlot` objects. +
 
+The following class diagram summarises the relationship between the components of the TimeTablePanel class:
+
+.Structure of the `TimeTablePanel` Class
+image::TimeTablePanelClassDiagram.png[width="600"]
+
 The following screenshot shows the relative position of all the components in `TimeTablePanel`:
 
 .Layout of the TimeTablePanel
 image::TimeTableScreenshotLabelled.png[width="800"]
 
+FreeTime's UI is updated through the `EventsCenter` every time `Model#updateTimeTable()` is called.
 
-===== Interaction between backend and frontend
+The following sequence diagram shows the significant method calls for the method `Model#updateTimeTable()`.
 
-The following sequence diagram show the significant method calls for the execution of the `addtime` command. The execution of the `deletetime` is implemented in a similar manner.
-
-.Sequence Diagram Showing the Execution of an `addtime` Command
-image::TimeTableSequenceDiagram.png[width="800"]
+.Interactions between the Model, EventsCenter, and UI Components for the `FreeTime#execute()` Method
+image::UpdateTimeTableSequenceDiagram.png[width="1600"]
 
 {nbsp}
 
