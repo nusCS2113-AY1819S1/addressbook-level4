@@ -124,6 +124,7 @@ Examples:
 
 * `createaccount A1234569M zaq1xsw2cde3 member` +
 Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the NUSSU-Connect.
+
 The image below shows the outcome of a successful creation of a new account.
 
 image::CreateAccountSuccess.PNG[width="300"]
@@ -306,6 +307,26 @@ image::SearchPruning10th.png[align="left"]
 ****
 
 // end::find[]
+
+=== Sorting : `sort`
+
+Sorts a list of people in NUSSU Connect. +
+Format: `sort st/[PARAMETER]`
+
+****
+* Sorts a list of people by the specified `PARAMETER` .
+* Currently, the only accepted parameters are `name` and `skill`.
+****
+
+Examples:
+
+* `sort st/name` +
+Sorts the list of people by name, in alphabetical order.
+* `sort st/skill` +
+Sorts the list of people by name, in order of increasing skill level.
+
+WARNING: The sort command currently sorts all data in NUSSU Connect. Interaction between this command and the `find`
+command is coming in `v2.0`.
 
 === Deleting : `delete`
 

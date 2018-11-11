@@ -27,7 +27,8 @@ the best people for a particular role can be quickly identified and selected.
 
 * *Major enhancement*: added the AddSkillLevelCommand (keyword: "asl")
 
-** What it does: Modifies a Person's Skill and SkillLevel.
+** What it does: Data integrity is important, but these days, users expect their data to be highly available.
+The `sort` command
 
 ** Justification: There is a need to track people and their skills, often being their most valuable
 assets, are especially critical to track. A project manager may now easily find any new people that
@@ -36,6 +37,15 @@ the organization tracks, and given adequete talent pool, will be able to identif
 ** Highlights: In order to implement this, all aspects of the application were touched on,
 namely UI, Storage, Logic and Model. The implementation was loosely based on the `remark` command that
 was implemented.
+
+
+* *Major enhancement*: added the SortCommand (keyword: "sort")
+
+** What it does: Sorts a list of people by some criteria.
+
+** Justification: The skills
+
+** Highlights:
 
 
 
