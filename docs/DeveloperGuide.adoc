@@ -399,8 +399,6 @@ of all the clubs' budget calculation data in the address book. Similarly 'filter
 Step 2. The user (a club member) executes `budget c/Computing Club t/200 e/5` command in order to submit the data for the calculation of her club's budget. The 'LogicManager' then calls the 'parseCommand' in the
 'AddressBookParser'.
 
-image::BudgetCommand.png[width="800"]
-
 Step 3. The 'AddressBookParser' then returns a new 'BudgetCommandParser', if the user is of the *member* role. (Else a parse exception is thrown.)
 
 Step 4. The 'BudgetCommandParser' parses the command to be executed and creates a 'ClubBudgetElements' object called 'club' with the club's name, the expected turnout and the number of events, as specified by the user. Finally the 'BudgetCommand' is called with 'club' as the argument.
@@ -414,13 +412,9 @@ adding the required club's data to the club budget elements book.
 
 Step 8. Finally a success message is displayed with the details that have been entered by the user.
 
-image::ExecuteBudgetCommand.png[width="800"]
-
 [NOTE]
 As mentioned in Step 5, had the user entered a club name that already existed in the list of clubs in the address book, then a duplicate club budget elements message would be shown, prompting the user to edit their entered command and try again. Execution of subsequent steps would be stopped until the
 user entered a unique club name.
-
-image::DuplicateBudget.png[width="800"]
 
 The image below is the sequence diagram for the functioning of the `budget` command:
 
@@ -449,6 +443,8 @@ Step 8. Once the budget for every club has been allocated a success message is d
 
 The image below is a sequence diagram for the 'BudgetCalculationCommand'
 
+image::BudgetCalculationCommandSequenceDiagram.png[width="800"]
+
 ===== Viewing the allocated budgets
 
 Given below is an example usage scenario and the behaviour at each step of the `viewbudget` command.
@@ -463,7 +459,9 @@ Step 4. The 'ViewClubBudgetsCommandParser' then creates a 'ClubName' object call
 
 Step 5. 'ViewClubBudgetsCommand' checks whether the budgets have been calculated already. If they have not, an error message is shown to the user. If they have, then the 'filteredClubBudgetsList' is looped through to find a 'FinalClubBudget' object with the same 'ClubName' as the 'clubName' that is specified by the user (in this case 'Computing Club'). If it is found, then the associated 'allocatedBudget' of that 'FinalClubBudget' object is displayed to the user. Else a message saying that the specified club's budget does not exist is shown to the user.
 
-The image below is a sequence diagram for the 'ViewClubBudgetsCommand' :
+The image below is a sequence diagram for the 'ViewClubBudgetsCommand'
+
+image::ViewClubBudgetsCommandSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
