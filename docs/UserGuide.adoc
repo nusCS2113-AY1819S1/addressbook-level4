@@ -18,7 +18,7 @@ By: `Team T09-2`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
 
-Something Daily (SD) is for those who *prefer to use a desktop app to manage a significant number of academic tasks and keep track on expenditures*. More importantly, SD is *optimized for those who prefer to work with a Command Line Interface* while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SD can get your tasks management and expenditure tracking done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Something Daily (SD) is for students who *prefer to use a desktop app to manage a significant number of academic tasks and keep track on expenditures*. More importantly, SD is *optimized for those who prefer to work with a Command Line Interface* while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SD can get your tasks management and expenditure tracking done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
