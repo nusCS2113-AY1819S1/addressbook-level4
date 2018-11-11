@@ -55,7 +55,7 @@ public class ExportCalendarCommand extends Command {
 
     public static final String MESSAGE_ZERO_EVENT_REGISTERED = "User %1$s has not registered for any event";
 
-    private static final String CALENDAR_FILE_PATH = "data\\";
+    private static final String CALENDAR_FILE_PATH = "data";
 
     private final String fileName;
 
@@ -185,7 +185,7 @@ public class ExportCalendarCommand extends Command {
      * @throws IOException when file stream have problems
      */
     public void exportICalenderFile(ObservableList<Event> registeredEventList, String fileName) throws IOException {
-        String outputFilename = Paths.get(CALENDAR_FILE_PATH).toString() + File.separator
+        String outputFilename = Paths.get(CALENDAR_FILE_PATH, "").toString() + File.separator
                 + String.format("%1$s.ics", fileName);
         File outputFile = new File(outputFilename);
 
