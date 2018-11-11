@@ -21,6 +21,12 @@ import seedu.address.model.person.Schedule;
 import seedu.address.model.person.TheDate;
 import seedu.address.model.person.Time;
 
+//@Author: driedmelon
+
+/**
+ * Checks the unavailable timeslots of the selected persons and prints out the common available times.
+ */
+
 public class MatchScheduleCommand extends Command {
     public static final String COMMAND_WORD = "matchSchedule";
     public static final String COMMAND_ALIAS = "ms";
@@ -72,83 +78,83 @@ public class MatchScheduleCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-            requireNonNull(model);
-            List<Person> lastShownList = model.getFilteredPersonList();
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
-            for (Index indexIter : this.index) {
-                if (indexIter.getZeroBased() >= lastShownList.size()) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-                }
+        for (Index indexIter : this.index) {
+            if (indexIter.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+        }
+
+        this.startTimeList = new ArrayList<>();
+        this.endTimeList = new ArrayList<>();
+        this.startEndTimeBlock = new int[1440];
+
+        //to bring up schedules
+        for (Index indexIter : this.index) {
+            Person personToMatchSchedule = lastShownList.get(indexIter.getZeroBased());
+            Set<Schedule> temp = personToMatchSchedule.getSchedules();
+            matchScheduleCompare.addAll(temp);
+        }
+
+        //to store start and end time as Time type
+        for (Schedule matchScheduleIter : this.matchScheduleCompare) {
+            if (matchScheduleIter.getDate().equals(this.date)){
+                this.startTimeList.add(matchScheduleIter.getStartTime());
+                this.endTimeList.add(matchScheduleIter.getEndTime());
+            }
+        }
+
+        //to store busy time slots in array and sets available slots
+        for (int i = 0; i < this.startTimeList.size(); i++) {
+            for (int j = this.startTimeList.get(i).timeToMinutesInDay();
+                 j <= this.endTimeList.get(i).timeToMinutesInDay(); j++) {
+                this.startEndTimeBlock[j] = 1;
+            }
+        }
+
+        int inValidRange = 0;
+        int validRangePresent = 0;
+        this.availableSlots = new ArrayList<>();
+
+        for (int i = this.startTime.timeToMinutesInDay() ; i <= this.endTime.timeToMinutesInDay(); i++) {
+            if (startEndTimeBlock[i] == 0 && inValidRange == 0){
+                String paddedHrs = String.format("%02d", i/60);
+                String paddedMins = String.format("%02d", i%60);
+                String toHrsStart = paddedHrs + paddedMins;
+                this.availableSlots.add(toHrsStart);
+                inValidRange = 1;
+                validRangePresent = 1;
+            }
+            if (((startEndTimeBlock[i] == 1) || ( this.endTime.timeToMinutesInDay() == i))
+                    && inValidRange == 1) {
+                String paddedHrs = String.format("%02d", i/60);
+                String paddedMins = String.format("%02d", i%60);
+                String toHrsEnd = paddedHrs + paddedMins;
+                this.availableSlots.add(toHrsEnd);
+                inValidRange = 0;
+            }
+        }
+
+        slots = "";
+        //format string slots to print
+        for (int i = 0 ; i < this.availableSlots.size(); i++){
+            if (i%2 == 0) {
+                slots = slots + ("Start:" + this.availableSlots.get(i) + " ");
+            }
+            else{
+                slots = slots + ("End:" + this.availableSlots.get(i) + "\n");
             }
 
-            this.startTimeList = new ArrayList<>();
-            this.endTimeList = new ArrayList<>();
-            this.startEndTimeBlock = new int[1440];
+        }
 
-            //to bring up schedules
-            for (Index indexIter : this.index) {
-                Person personToMatchSchedule = lastShownList.get(indexIter.getZeroBased());
-                Set<Schedule> temp = personToMatchSchedule.getSchedules();
-                matchScheduleCompare.addAll(temp);
-            }
-
-            //to store start and end time as Time type
-            for (Schedule matchScheduleIter : this.matchScheduleCompare) {
-                if (matchScheduleIter.getDate().equals(this.date)){
-                    this.startTimeList.add(matchScheduleIter.getStartTime());
-                    this.endTimeList.add(matchScheduleIter.getEndTime());
-                }
-            }
-
-            //to store busy time slots in array and sets available slots
-            for (int i = 0; i < this.startTimeList.size(); i++) {
-                for (int j = this.startTimeList.get(i).timeToMinutesInDay();
-                     j <= this.endTimeList.get(i).timeToMinutesInDay(); j++) {
-                    this.startEndTimeBlock[j] = 1;
-                }
-            }
-
-            int inValidRange = 0;
-            int validRangePresent = 0;
-            this.availableSlots = new ArrayList<>();
-
-            for (int i = this.startTime.timeToMinutesInDay() ; i <= this.endTime.timeToMinutesInDay(); i++) {
-                if (startEndTimeBlock[i] == 0 && inValidRange == 0){
-                    String paddedHrs = String.format("%02d", i/60);
-                    String paddedMins = String.format("%02d", i%60);
-                    String toHrsStart = paddedHrs + paddedMins;
-                    this.availableSlots.add(toHrsStart);
-                    inValidRange = 1;
-                    validRangePresent = 1;
-                }
-                if (((startEndTimeBlock[i] == 1) || ( this.endTime.timeToMinutesInDay() == i))
-                        && inValidRange == 1) {
-                    String paddedHrs = String.format("%02d", i/60);
-                    String paddedMins = String.format("%02d", i%60);
-                    String toHrsEnd = paddedHrs + paddedMins;
-                    this.availableSlots.add(toHrsEnd);
-                    inValidRange = 0;
-                }
-            }
-
-            slots = "";
-            //format string slots to print
-            for (int i = 0 ; i < this.availableSlots.size(); i++){
-                if (i%2 == 0) {
-                    slots = slots + ("Start:" + this.availableSlots.get(i) + " ");
-                }
-                else{
-                    slots = slots + ("End:" + this.availableSlots.get(i) + "\n");
-                }
-
-            }
-
-            if (validRangePresent == 1) {
-                return new CommandResult(MESSAGE_SUCCESS + slots);
-            }
-            else {
-                throw new CommandException(MESSAGE_FAILURE);
-            }
+        if (validRangePresent == 1) {
+            return new CommandResult(MESSAGE_SUCCESS + slots);
+        }
+        else {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
 
     }
 
