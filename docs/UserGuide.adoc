@@ -50,22 +50,8 @@ image::FreeTimeMainScreenFix.png[width="790"]
 +
 .  Refer to <<Features>> for details of each command.
 
-[[Features]]
-== Features
-
-====
-*Command Format*
-
-* Each command has an alias (given in round brackets after the command word) that can be used to replace the full command word. e.g. `find John` is equivaluent to `f John`.
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `register n/NAME`, `NAME` is a parameter which can be used as `register n/John Doe`.
-* Items in square brackets are optional e.g `[p/PHONE_NUMBER][t/TAG]` can be used as `p/12345678 t/CS2101` or as `t/CS2101`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/CS2101`, `t/CS2113T t/W13-1` etc.
-* Parameters can be in any order e.g. if the command specifies `e/EMAIL p/PHONE_NUMBER`, `p/PHONE_NUMBER e/EMAIL` is also acceptable.
-====
-
-
 // tag::security[]
-=== Security
+== Registering and Logging In
 
 The timetable content is locked, and it requires a user to either login with a pre-existing account, or register a new one.
 
@@ -150,6 +136,83 @@ to your timetable might be lost.
 
 // end::security[]
 
+[[Features]]
+== Features
+
+//tag::featureoverview
+.Overview of all the features in FreeTime
+[cols="20%,80%"]
+|===
+|Feature |Function
+
+|help (h)
+|Opens the help window
+
+|listall (l)
+|Lists all the users in the database
+
+|edit (e)
+|Edits your information in the database
+
+|find (f)
+|Filters the database based on the keywords specified
+
+|group (t)
+|Filters the database based on the group tags specified
+
+|addtime (at)
+|Adds a timeslot to your timetable
+
+|deletetime (dt)
+|Removes a timeslot from your timetable
+
+|select (s)
+|Selects a user in your friends list and shows their timetable
+
+|friend (af)
+|Adds a user from the others panel into your friend list
+
+|unfriend (uf)
+|Removes a friend from your friend list
+
+|free
+|Highlights timeslots where you and everyone specified is free
+
+|history (g)
+|Lists all the commands that you have entered in reverse chronological order
+
+|undo (u)
+|Removes a friend from your friend list
+
+|redo (u)
+|Reverses the most recent undo command
+
+|clear (c)
+|Clears all timeslots from your timetable
+
+|import (im)
+|Imports a timetable for the current user from a specified (.ics) file
+
+|export (ex)
+|Exports the currently-displayed timetable to the specified (.ics) file
+
+|exit (x)
+|Closes the _FreeTime_ application
+|===
+
+//end::featureoverview
+
+====
+*Command Format*
+
+* Each command has an alias (given in round brackets after the command word) that can be used to replace the full command word. e.g. `find John` is equivaluent to `f John`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `register n/NAME`, `NAME` is a parameter which can be used as `register n/John Doe`.
+* Items in square brackets are optional e.g `[p/PHONE_NUMBER][t/TAG]` can be used as `p/12345678 t/CS2101` or as `t/CS2101`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/CS2101`, `t/CS2113T t/W13-1` etc.
+* Parameters can be in any order e.g. if the command specifies `e/EMAIL p/PHONE_NUMBER`, `p/PHONE_NUMBER e/EMAIL` is also acceptable.
+====
+
+[[help]]
 === Viewing help : `help` (`h`)
 
 Displays the userguide from within the app.
@@ -158,25 +221,24 @@ Format: `help`
 
 === Listing all persons : `listall` (`l`)
 
-Shows a list of all persons in the address book. +
+Shows a list of all persons in the _FreeTime_ application.
 
 Format: `listall`
 
-****
+[NOTE]
 After filtering your results by executing commands such as `group` or `find`, executing `listall` will revert the list back to it's initial state
+
+=== Editing a person : `edit` (`e`)
+
+Edits your information in the database. +
+
+Format: `edit [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+
 ****
-
-=== Editing a person : `edit` (`e`) (DOES NOT WORK IN V1.3)
-
-Edits your information in the address book. +
-
-Format: `edit  [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-****
-
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* Tags should be alphanumeric (contains letters and numbers) and can contain hyphens "-" and underscores "_"
 ****
 
 === Locating persons by name : `find` (`f`)
@@ -423,24 +485,24 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`import`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the address book's content (`import`, `edit`, `addtime`, `deletetime`, `clear`).
 ====
 
 Examples:
 
-* `delete 1` +
+* `import me` +
 `list` +
-`undo` (reverses the `delete 1` command) +
+`undo` (reverses the `import me` command) +
 
 * `select 1` +
-`list` +
+`listall` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
+* `import me` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+`undo` (reverses the `import mes` command) +
 
 === Redoing the previously undone command : `redo` (`r`) (DOES NOT WORK IN V1.3)
 
@@ -525,8 +587,12 @@ Exports the displayed timetable to `(root_folder)\import_export\my_file.ics` +
 
 === Exiting the program : `exit` (`x`)
 
-Exits the program. +
+Closes the _FreeTime_ application.
+
 Format: `exit`
+
+[NOTE]
+This command closes the application without logging you out. It is recommended to logout before doing this, or the changes to your timetable might be lost.
 
 === Saving the data
 
