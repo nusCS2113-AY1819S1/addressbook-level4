@@ -9,7 +9,8 @@ import seedu.planner.model.record.Record;
 /**
  *  This object represents the in memory model of a HashMap containing integers as values which can be retrieved with
  *  Strings as the key. It keeps track of the number of usage of each unique date in the model.
- *  It supports addition, deletion, updating and finding the size of the Hashmap.
+ *  It supports addition, deletion, updating and finding the size of the Hashmap. It stores dates
+ *  from either records or limits.
  */
 public class DateMap {
 
@@ -33,7 +34,7 @@ public class DateMap {
     }
 
     /**
-     * Removes a record from the date map.
+     * Removes a record's date from the date map.
      * @param record to be removed from the date map
      */
     public void removeRecordFromDateMap(Record record) {

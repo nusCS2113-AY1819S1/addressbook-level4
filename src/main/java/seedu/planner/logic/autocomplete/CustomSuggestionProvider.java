@@ -55,6 +55,7 @@ import seedu.planner.model.record.Date;
  */
 public class CustomSuggestionProvider {
 
+    /** Pattern that checks if a String begins with n/ d/ t/ m/ **/
     private static final String PREFIX_PATTERN = "^([ndtm]/).*$";
 
     private static final Set<String> commandKeywordsSet =
@@ -108,7 +109,7 @@ public class CustomSuggestionProvider {
     /**
      * Clears the set of suggestions
      */
-    private void emptySuggestions() {
+    private void clearSuggestions() {
         suggestionProvider.clearSuggestions();
     }
 
@@ -123,10 +124,8 @@ public class CustomSuggestionProvider {
     }
 
     /**
-     * This method is responsible for deciding which collection of Strings is to be used as the reference collection
-     * for comparison to the input String by the user. It can autocomplete the command word or when a tag is expected
-     * of the user input or when a sort parameter is expected.
-     *
+     * This method parses the user Input to find out which command is being executed
+     * and which word is being completed to provide the appropriate suggestions.
      * @param userInput is the entire input of text in the command box.
      * @param prefix    is the prefix of the word to be completed, if any.
      * @param wordInput is the word to be completed, without the prefix.
@@ -149,6 +148,10 @@ public class CustomSuggestionProvider {
 
             case AddLimitCommand.COMMAND_WORD:
                 addLimitCommandKeyword(inputs, strIndex);
+                return;
+
+            case DeleteByDateCommand.COMMAND_WORD:
+                deleteDateCommandKeyword(inputs);
                 return;
 
             case FindCommand.COMMAND_WORD:
@@ -174,7 +177,7 @@ public class CustomSuggestionProvider {
                 return;
 
             default:
-                emptySuggestions();
+                clearSuggestions();
             }
         }
     }
@@ -186,11 +189,11 @@ public class CustomSuggestionProvider {
      */
     private void expectingCommandWord(String[] inputs, int strIndex) {
         if (inputs[strIndex].matches(PREFIX_PATTERN)) {
-            emptySuggestions();
+            clearSuggestions();
         } else if (!commandKeywordsSet.contains(inputs[strIndex])) {
             updateSuggestions(commandKeywordsSet);
         } else {
-            emptySuggestions();
+            clearSuggestions();
         }
     }
 
@@ -227,7 +230,7 @@ public class CustomSuggestionProvider {
                 } else if (inputs[strIndex].startsWith(PREFIX_NAME.getPrefix())) {
                     updateSuggestions(nameSuggestionSet);
                 } else {
-                    emptySuggestions();
+                    clearSuggestions();
                 }
             } else if (namePrefixPresent) {
                 if (!prefixAfterNamePrefix) {
@@ -236,19 +239,20 @@ public class CustomSuggestionProvider {
                     if (strIndex > indexWithNamePrefix && strIndex < otherPrefixIndex) {
                         updateSuggestions(nameSuggestionSet);
                     } else {
-                        emptySuggestions();
+                        clearSuggestions();
                     }
                 }
             } else {
-                emptySuggestions();
+                clearSuggestions();
             }
         } else {
-            emptySuggestions();
+            clearSuggestions();
         }
     }
 
     /**
-     * Function that handles when the command word is detected to be addlimit.
+     * Function that handles when the command word is detected to be addlimit and requires 2 date inputs
+     * and a moneyflow input.
      * @param inputs is an array of all words found in the user input delimited by whitespaces.
      * @param strIndex is the index of the word to be completed in the entire string of input.
      */
@@ -258,7 +262,7 @@ public class CustomSuggestionProvider {
                 if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
                     updateSuggestions(limitsDateSuggestionSet);
                 } else {
-                    emptySuggestions();
+                    clearSuggestions();
                 }
             }
         } else if (strIndex < inputs.length && (inputs.length == 3 || inputs.length == 4)) {
@@ -268,11 +272,11 @@ public class CustomSuggestionProvider {
                 if (inputs[strIndex - 1].startsWith(PREFIX_DATE.getPrefix())) {
                     updateSuggestions(limitsDateSuggestionSet);
                 } else {
-                    emptySuggestions();
+                    clearSuggestions();
                 }
             }
         } else {
-            emptySuggestions();
+            clearSuggestions();
         }
     }
 
@@ -294,30 +298,44 @@ public class CustomSuggestionProvider {
             if (strIndex == 1 && inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
                 updateSuggestions(suggestions);
             } else {
-                emptySuggestions();
+                clearSuggestions();
             }
         } else if (inputs.length == 3 && (strIndex == 1 || strIndex == 2)) {
             if (strIndex == 1) {
                 if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
                     updateSuggestions(suggestions);
                 } else {
-                    emptySuggestions();
+                    clearSuggestions();
                 }
             } else {
                 if (!inputs[1].startsWith(PREFIX_DATE.getPrefix())) {
-                    emptySuggestions();
+                    clearSuggestions();
                 } else {
                     updateSuggestions(suggestions);
                 }
             }
         } else {
-            emptySuggestions();
+            clearSuggestions();
         }
 
     }
 
     /**
-     * Function that handles when the sort command keyword is found at index 0.
+     * Function that handles when the command word is detected to be deletedate and expects only a single
+     * date input.
+     * @param inputs is an array of all words found in the user input delimited by whitespaces.
+     */
+    private void deleteDateCommandKeyword(String[] inputs) {
+        if (inputs.length == 2) {
+            updateSuggestions(dateSuggestionSet);
+        } else {
+            clearSuggestions();
+        }
+    }
+
+    /**
+     * Function that handles when the command word is detected to be sort and expects either a category
+     * or an order or both.
      * @param inputs is an array of all words found in the user input delimited by whitespaces.
      * @param strIndex is the index of the word to be completed in the entire string of input.
      */
@@ -326,19 +344,19 @@ public class CustomSuggestionProvider {
         if (inputs.length == 2) {
             if (strIndex == 1) {
                 if (inputs[strIndex].matches(PREFIX_PATTERN)) {
-                    emptySuggestions();
+                    clearSuggestions();
                 } else if (sortKeywordsSet.contains(inputs[strIndex])) {
-                    emptySuggestions();
+                    clearSuggestions();
                 } else {
                     updateSuggestions(sortKeywordsSet);
                 }
             } else {
-                emptySuggestions();
+                clearSuggestions();
             }
         } else if (inputs.length == 3 && (strIndex == 1 || strIndex == 2)) {
             if (strIndex == 1) {
                 if (sortKeywordsSet.contains(inputs[strIndex])) {
-                    emptySuggestions();
+                    clearSuggestions();
                 } else {
                     if (SortCommand.ORDER_SET.contains(inputs[2])) {
                         updateSuggestions(SortCommand.CATEGORY_SET);
@@ -350,24 +368,25 @@ public class CustomSuggestionProvider {
                 }
             } else { // strIndex = 2
                 if (sortKeywordsSet.contains(inputs[strIndex])) {
-                    emptySuggestions();
+                    clearSuggestions();
                 } else {
                     if (SortCommand.ORDER_SET.contains(inputs[1])) {
                         updateSuggestions(SortCommand.CATEGORY_SET);
                     } else if (SortCommand.CATEGORY_SET.contains(inputs[1])) {
                         updateSuggestions(SortCommand.ORDER_SET);
                     } else {
-                        emptySuggestions();
+                        clearSuggestions();
                     }
                 }
             }
         } else {
-            emptySuggestions();
+            clearSuggestions();
         }
     }
 
     /**
-     * Function that handles when the command word is detected to be summary
+     * Function that handles when the command word is detected to be summary and expects a secondary keyword
+     * and 2 date inputs or 2 month inputs.
      * @param inputs is an array of all words found in the user input delimited by whitespaces.
      * @param strIndex is the index of the word to be completed in the entire string of input.
      */
@@ -376,33 +395,33 @@ public class CustomSuggestionProvider {
         if (inputs.length == 2) {
             if (strIndex == 1) {
                 if (inputs[strIndex].matches(PREFIX_PATTERN)) {
-                    emptySuggestions();
+                    clearSuggestions();
                 } else {
                     updateSuggestions(summaryKeywordsSet);
                 }
             } else {
-                emptySuggestions();
+                clearSuggestions();
             }
         } else if (inputs.length == 3 || inputs.length == 4) {
             if (!summaryKeywordsSet.contains(inputs[1])) {
-                emptySuggestions();
+                clearSuggestions();
             } else {
                 if (strIndex == 2 || strIndex == 3) {
                     if (!inputs[2].startsWith(PREFIX_DATE.getPrefix())) {
-                        emptySuggestions();
+                        clearSuggestions();
                     } else {
                         if (dateInputSummarySet.contains(inputs[1])) {
                             updateSuggestions(dateSuggestionSet);
                         } else if (inputs[1].equals(SummaryByMonthCommand.COMMAND_MODE_WORD)) {
                             updateSuggestions(defaultMonthSummarySet);
                         } else {
-                            emptySuggestions();
+                            clearSuggestions();
                         }
                     }
                 }
             }
         } else {
-            emptySuggestions();
+            clearSuggestions();
         }
     }
 
