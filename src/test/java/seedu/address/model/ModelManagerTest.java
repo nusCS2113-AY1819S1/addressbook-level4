@@ -7,8 +7,11 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
 import static seedu.address.testutil.TypicalEvents.EVENT_2;
 import static seedu.address.testutil.TypicalEvents.EVENT_3;
+import static seedu.address.testutil.TypicalEvents.EVENT_4;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -17,6 +20,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.exceptions.HistoryStateOutOfBoundsException;
+import seedu.address.model.exceptions.NoRedoableStateException;
+import seedu.address.model.exceptions.NoUndoableStateException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -94,6 +100,112 @@ public class ModelManagerTest {
         modelManager.getFilteredEventList().remove(0);
     }
 
+    // Undo tests
+    @Test
+    public void undo_noUndoableState_throwsNoUndoableStateException() {
+        thrown.expect(NoUndoableStateException.class);
+        modelManager.undo();
+    }
+
+    @Test
+    public void undoAddressBook_noUndoableStateInHistory_throwsHistoryStateOutOfBoundsException() {
+        thrown.expect(HistoryStateOutOfBoundsException.class);
+        modelManager.undoAddressBook();
+    }
+
+    @Test
+    public void undoEventList_noUndoableStateInHistory_throwsHistoryStateOutOfBoundsException() {
+        thrown.expect(HistoryStateOutOfBoundsException.class);
+        modelManager.undoEventList();
+    }
+
+    @Test
+    public void undo_undoneAddEventIsNotInEventList_returnsFalse() {
+        modelManager.addEvent(EVENT_2);
+        modelManager.commitEventList();
+        modelManager.undo();
+        assertFalse(modelManager.hasEvent(EVENT_2));
+    }
+
+    @Test
+    public void undoEventList_undoneAddEventIsNotInEventList_returnsFalse() {
+        modelManager.addEvent(EVENT_2);
+        modelManager.commitEventList();
+        modelManager.undoEventList();
+        assertFalse(modelManager.hasEvent(EVENT_2));
+    }
+
+
+    @Test
+    public void undo_undoneAddPersonIsNotInAddressBook_returnsFalse() {
+        modelManager.addPerson(BOB);
+        modelManager.commitAddressBook();
+        modelManager.undo();
+        assertFalse(modelManager.hasPerson(BOB));
+    }
+
+    @Test
+    public void undoAddressBook_undoneAddPersonIsNotInAddressBook_returnsFalse() {
+        modelManager.addPerson(BOB);
+        modelManager.commitAddressBook();
+        modelManager.undoAddressBook();
+        assertFalse(modelManager.hasPerson(BOB));
+    }
+
+    @Test
+    public void undoAddressBook_changeToEventList_throwsNoUndoableStateException() {
+        thrown.expect(NoUndoableStateException.class);
+        modelManager.addEvent(EVENT_2);
+        modelManager.commitEventList();
+        modelManager.undoAddressBook();
+    }
+
+    @Test
+    public void undoEventList_changeToAddressBook_throwsNoUndoableStateException() {
+        thrown.expect(NoUndoableStateException.class);
+        modelManager.addPerson(BOB);
+        modelManager.commitAddressBook();
+        modelManager.undoEventList();
+    }
+
+    // Redo Tests
+    @Test
+    public void redo_noRedoableState_throwsNoRedoableStateException() {
+        thrown.expect(NoRedoableStateException.class);
+        modelManager.redo();
+    }
+
+    @Test
+    public void redoAddressBook_noRedoableStateInHistory_throwsHistoryStateOutOfBoundsException() {
+        thrown.expect(HistoryStateOutOfBoundsException.class);
+        modelManager.redoAddressBook();
+    }
+
+    @Test
+    public void redoEventList_noRedoableStateInHistory_throwsHistoryStateOutOfBoundsException() {
+        thrown.expect(HistoryStateOutOfBoundsException.class);
+        modelManager.redoEventList();
+    }
+
+    @Test
+    public void redo_redoneAddEventIsInEventList_returnsTrue() {
+        modelManager.addEvent(EVENT_4);
+        modelManager.commitEventList();
+        modelManager.undo();
+        modelManager.redo();
+        assertTrue(modelManager.hasEvent(EVENT_4));
+    }
+
+    @Test
+    public void redo_redoneAddPersonIsInAddressBook_returnsTrue() {
+        modelManager.addPerson(CARL);
+        modelManager.commitAddressBook();
+        modelManager.undo();
+        modelManager.redo();
+        assertTrue(modelManager.hasPerson(CARL));
+    }
+
+    // Object tests
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();

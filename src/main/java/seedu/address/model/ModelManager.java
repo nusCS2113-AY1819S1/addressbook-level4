@@ -18,6 +18,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.EventListChangedEvent;
 import seedu.address.model.event.Event;
+import seedu.address.model.exceptions.NoRedoableStateException;
+import seedu.address.model.exceptions.NoUndoableStateException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
@@ -438,23 +440,5 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && versionedEventList.equals(other.versionedEventList)
                 && filteredEvents.equals(other.filteredEvents);
-    }
-
-    /**
-     * Thrown when trying to {@code undo()} but can't.
-     */
-    public static class NoUndoableStateException extends RuntimeException {
-        private NoUndoableStateException() {
-            super("Current state pointer at start of state history list, unable to undo.");
-        }
-    }
-
-    /**
-     * Thrown when trying to {@code redo()} but can't.
-     */
-    public static class NoRedoableStateException extends RuntimeException {
-        private NoRedoableStateException() {
-            super("Current state pointer at end of state history list, unable to redo.");
-        }
     }
 }
