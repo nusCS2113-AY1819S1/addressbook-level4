@@ -26,7 +26,11 @@ public class AddItemCommand extends Command {
             + "parameters: "
             + PREFIX_ITEM_NAME + "ITEM NAME "
             + PREFIX_ITEM_QUANTITY + "ITEM QUANTITY "
-            + PREFIX_ITEM_LOCATION + "ITEM LOCATION";
+            + PREFIX_ITEM_LOCATION + "ITEM LOCATION\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_ITEM_NAME + "Bastketball "
+            + PREFIX_ITEM_QUANTITY + "1 "
+            + PREFIX_ITEM_LOCATION + "Storeroom ";
 
     public static final String MESSAGE_SUCCESS = "New item added: %1$s";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the item list";

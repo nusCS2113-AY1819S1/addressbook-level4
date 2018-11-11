@@ -27,8 +27,8 @@ public class DecreaseItemCommand extends Command {
             + "by the index number used in the displayed item list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ITEM_QUANTITY + "ITEM_QUANTITY...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ITEM_QUANTITY + "4";
+            + "Example: " + COMMAND_WORD + " 2 "
+            + PREFIX_ITEM_QUANTITY + "1";
 
     public static final String MESSAGE_DECREASE_ITEM_SUCCESS = "Decreased quantity of Item: %1$s";
 
