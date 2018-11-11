@@ -48,8 +48,10 @@ public class FriendCommand extends Command {
         editedPerson.getFriends().add(new Friend(model.getUser().getName()));
         editedUser.getFriends().add(new Friend(personToEdit.getName()));
 
+
         model.updatePerson(personToEdit, editedPerson);
         model.updatePerson(model.getUser(), editedUser);
+
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_ADD_FRIEND_SUCCESS, editedPerson.getName().toString()));
     }
