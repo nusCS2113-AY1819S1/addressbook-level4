@@ -195,7 +195,7 @@ link:{repoURL}/src/main/java/seedu/productInfo/logic/Logic.java[`Logic.java`]
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteproduct 1")` API call.
 
 .Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+image::DeleteProductSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
