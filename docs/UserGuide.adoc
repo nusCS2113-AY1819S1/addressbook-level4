@@ -19,11 +19,11 @@ By: `Team T13-4`      Since: `Aug 2018`      Licence: `MIT`
 == Introduction
 
 *Student Management System (SMS)* is a desktop application which uses a CLI for its interactions.
-SMS is targeted mainly at university lectures as it allows them to easily organise and manage their students and classes with newly implemented group features.
+SMS is targeted mainly at university lectures as it allows them to easily organise and manage their students and classes with a variety of newly implemented group features such as creating of groups, adding students to groups etc.
 SMS removes the task of manually distributing students equally with the ability to distribute students automatically based on a specified criteria.
 SMS allows lecturers to make quick responses by sending emails to groups of students.
 SMS also provides other neat features such as assigning test grades to students.
-Lecturers can further automate some of these processes by importing student data given by their department.
+Lecturers can further automate some of these processes by importing student data given by their departments.
 SMS makes being a university lecturer more convenient! +
 Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
@@ -38,13 +38,6 @@ image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
-
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` :
-adds a contact named `John Doe` to the Student Management System.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
 
 . Please kindly refer to <<ScriptSetup Function>> to understand on how to setup the `Student Management System` to use the `scripts` function properly
 
@@ -90,13 +83,13 @@ Examples:
 
 === Selecting a group : `selectgroup` `sg`
 
-Selects the group identified by the index number used in the displayed group list. +
+Selects the group identified by the index number used in the displayed *Groups* panel. +
 Format: `selectgroup INDEX` +
 Shortcut Format: `sg INDEX`
 
 ****
 * Selects group and loads the *Students in Selected Group* panel with students of the group at specified `INDEX`.
-* The index refers to the index number shown in the displayed group list.
+* The index refers to the index number shown in the displayed *Groups* panel.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * An index of *0* or non-integers will produce an *invalid command format* error message.
 * An index larger than the total number of groups currently in the system will produce an *invalid index* error message.
@@ -118,7 +111,7 @@ Format: `addgroup g/INDEX p/INDEX ...` +
 Shortcut Format: `ag g/INDEX p/INDEX ...` +
 ****
 * Adds student(s) at specified INDEX(s) to group at specified at INDEX.
-* The index refers to the index number shown in the displayed *group* and *student* panels.
+* The index refers to the index number shown in the displayed *Groups* and *Students* panels.
 * If multiple valid/invalid group indexes are given (e.g. _g/1 g/2_), only the *last* group index will be taken and validated. However, *all* person indexes given will be taken and validated.
 * The system detects duplicates and will only add the person to the group once in the event of duplicates in a command (e.g. _p/1 p/1_).
 * The index *must be a positive integer* 1, 2, 3, ...
@@ -127,7 +120,7 @@ Shortcut Format: `ag g/INDEX p/INDEX ...` +
 * The command fields need *not* be in order (e.g. _ag p/1 g/2_ is also accepted).
 However, there can only be one command word (e.g. _addgroup_) and it must always be before any other field else an *unknown command* message will be produced.
 * Leading/trailing spaces between *addgroup*, *ag*, *g/INDEX* and *p/INDEX* will not affect the validity of command and will be trimmed.
-* Adding duplicate persons to a group is *not* allowed (i.e. _if the person already exixts in the group, adding that person to the group again is not allowed_).
+* Adding duplicate persons to a group is *not* allowed (i.e. _if exactly the same person with same fields already exixts in the group, adding that person to the group again is not allowed_).
 * This command *is* undoable.
 ****
 
@@ -142,7 +135,7 @@ Format: `deletegroup INDEX`  +
 Shortcut Format: `dg INDEX` +
 ****
 * Removes the group with the specified INDEX from the student management system.
-* The index refers to the index number shown in the displayed *group* panel.
+* The index refers to the index number shown in the displayed *Groups* panel.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * An index of *0* or non-integers will produce an *invalid command format* error message.
 * An index larger than the total number of groups currently in the system will produce an *invalid index* error message.
@@ -161,7 +154,7 @@ Deletes a student from a group in the student management system. +
 Format: `deletegroupstudent g/INDEX p/INDEX`  +
 Shortcut Format: `dgs g/INDEX p/INDEX` +
 ****
-* Removes studnet at specifed INDEX on the *Students in Group* panel from the group at specified INDEX on the *Groups* panel.
+* Removes studnet at specifed INDEX on the *Students in Selected Group* panel from the group at specified INDEX on the *Groups* panel.
 * If multiple valid/invalid group indexes are given (e.g. _g/1 g/2_), only the *last* group index will be taken and validated.
 * If multiple valid/invalid person indexes are given (e.g. _p/1 p/2_), only the *last* person index will be taken and validated.
 * The index *must be a positive integer* 1, 2, 3, ...
