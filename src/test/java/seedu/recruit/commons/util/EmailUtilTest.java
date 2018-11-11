@@ -1,8 +1,6 @@
 package seedu.recruit.commons.util;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,14 +20,14 @@ class EmailUtilTest {
     void addCandidate() {
         int currentSize = emailUtil.getCandidates().size();
         emailUtil.addCandidate(testCandidate);
-        assertEquals(currentSize+1, emailUtil.getCandidates().size());
+        assertEquals(currentSize + 1, emailUtil.getCandidates().size());
     }
 
     @Test
     void addJobOffer() {
         int currentSize = emailUtil.getJobOffers().size();
         emailUtil.addJobOffer(testJobOffer);
-        assertEquals(currentSize+1, emailUtil.getJobOffers().size());
+        assertEquals(currentSize + 1, emailUtil.getJobOffers().size());
     }
 
     @Test
@@ -39,7 +37,7 @@ class EmailUtilTest {
         actualName.append(testJobOffer.getCompanyName().toString());
         actualName.append(" regarding job offer: ");
         actualName.append(testJobOffer.getJob().toString());
-        assertEquals(testName, actualName);
+        assertEquals(true, actualName.toString().equals(testName));
     }
 
     @Test
@@ -49,6 +47,6 @@ class EmailUtilTest {
         actualName.append(testJobOffer.getJob().toString());
         actualName.append(" at ");
         actualName.append(testJobOffer.getCompanyName().toString());
-        assertEquals(testName, actualName);
+        assertEquals(true, actualName.toString().equals(testName));
     }
 }
