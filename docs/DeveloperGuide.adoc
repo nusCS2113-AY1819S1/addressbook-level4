@@ -997,7 +997,7 @@ Use case resumes at step 2.
 ** 6a1. User requests to unregister for the event.
 ** 6a2. EventManager removes user from attendance list and displays confirmation message.
 Use case ends.
- 
+
 [none]
 * 6b. User is banned from event.
 [none]
@@ -1005,7 +1005,7 @@ Use case ends.
 ** 6c2. EventManager removes user from attendance list and displays confirmation message.
 Use case ends.
 // end::rsvpUsecase[]
- 
+
 // tag::reminderUsecase[]
 [discrete]
 === Use case: Reminder
@@ -1056,7 +1056,7 @@ Resume use case at step 4.
 [discrete]
 === Use Case: Export calendar
 *MSS*
- 
+
 1. User request to export registered event list with given name +
 2. EventManager execute exportCalendarCommand
 3. A filename with .ics extension create or re-write in src/data/ folder
