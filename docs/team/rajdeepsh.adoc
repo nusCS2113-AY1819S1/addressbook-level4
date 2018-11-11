@@ -9,10 +9,12 @@
 
 == Overview
 
-Student Management System is a desktop system used primarily by university lecturers, interacting with it via CLI commands on a GUI created by JavaFX.
-Lecturers are able to manually `add` their students to the management system and also to `groups created` within the system.
-The system also allows for automated processes such as `scripts` to execute any command, removing the need for manual entry when facing large amounts od data.
-Other notable features include sending of `emails`, adding `tests marks`, assigning `grades` and `automatic group distribution` based on gender or nationality.
+*Student Management System (SMS)* is a desktop application which uses a CLI for its interactions.
+SMS is targeted mainly at university lectures as it allows them to easily organise and manage their students and classes with a variety of newly implemented group features such as creating of groups, adding students to groups etc.
+SMS removes the task of manually distributing students equally with the ability to distribute students automatically based on a specified criteria.
+SMS allows lecturers to make quick responses by sending emails to groups of students.
+SMS also provides other neat features such as assigning test grades to students.
+Lecturers can further automate some of these processes by importing student data given by their departments.
 
 == Summary of contributions
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=rajdeepsh[Code]]
@@ -99,162 +101,6 @@ image::ModelClassDiagram.png[width="800"]
 image::StorageClassDiagram.png[width="800"]
 
 include::../DeveloperGuide.adoc[tag=group]
-
-=== User Stories
-
-Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
-
-[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
-|=======================================================================
-|Priority |As a ... |I want to ... |So that I can...
-
-|`* * *` |university lecturer |create groups |have a list of all my modules/tutorial classes
-
-|`* * *` |university lecturer |add students to groups |have a list of all my students in a particular module/group
-
-|`* * *` |university lecturer |delete students from groups |edit my student management system
-
-|`* * *` |university lecturer |delete groups |edit my student management system
-
-|`* * *` |university lecturer |view all students in a group by typing a command to select a group instead of clicking |have flexibility over input methods
-
-|=======================================================================
-
-[discrete]
-=== Use case: Create Groups
-
-
-*MSS*
-
-1.  Lecturer creates a group
-2.  Student management system confirms that group is created
-+
-Use case ends
-
-*Extensions*
-
-[none]
-* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
-+
-
-[none]
-** 1a1. Student management system rejects command entered with relevant error message.
-[none]
-* 1b. Student management system detects duplicate group.
-+
-
-[none]
-** 1b1. Student management system rejects command entered with relevant error message.
-+
-
-
-[discrete]
-=== Use case: Add Students To Groups
-*Precondition*
-
-1.  Student management system has student(s)
-
-*MSS*
-
-1.  Lecturer adds student(s) to a group
-2.  AddressBook confirms student(s) are added
-+
-Use case ends
-
-*Extensions*
-
-[none]
-* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
-+
-
-[none]
-** 1a1. Student management system rejects command entered with relevant error message.
-[none]
-* 1b. Student management system detects student(s) is already in the group.
-+
-
-[none]
-** 1b1. Student management system rejects command entered with relevant error message.
-+
-
-
-[discrete]
-=== Use case: Delete Students From Groups
-*Precondition*
-
-1.  Student management system has group(s)
-
-*MSS*
-
-1.  Lecturer deletes student from a group
-2.  AddressBook confirms student is deleted
-+
-Use case ends
-
-*Extensions*
-
-[none]
-* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
-+
-
-[none]
-** 1a1. Student management system rejects command entered with relevant error message.
-[none]
-* 1b. Student management system detects student not in the group.
-+
-
-[none]
-** 1b1. Student management system rejects command entered with relevant error message.
-+
-
-
-[discrete]
-=== Use case: Delete Groups
-*Precondition*
-
-1.  Student management system has group(s)
-
-*MSS*
-
-1.  Lecturer deletes group
-2.  Student management system confirms group is deleted
-+
-Use case ends
-
-*Extensions*
-
-[none]
-* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
-+
-
-[none]
-** 1a1. Student management system rejects command entered with relevant error message.
-+
-
-
-[discrete]
-=== Use case: Select Group
-*Precondition*
-
-1.  Student management system has group(s)
-
-*MSS*
-
-1.  Lecturer selects group
-2.  Student management system confirms group is selected
-3.  Student management system displays students in group selected on the *students in group panel*
-+
-Use case ends
-
-*Extensions*
-
-[none]
-* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
-+
-
-[none]
-** 1a1. Student management system rejects command entered with relevant error message.
-+
 
 
 
