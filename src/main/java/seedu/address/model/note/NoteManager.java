@@ -51,10 +51,13 @@ public class NoteManager extends ComponentManager {
     }
 
     /**
-     * Creates the singleton instance of NoteManager object.
+     * Creates the singleton instance of NoteManager object
+     * if it is not initialized yet.
      */
     public static void initNoteManager() {
-        noteManager = new NoteManager();
+        if (noteManager == null) {
+            noteManager = new NoteManager();
+        }
     }
 
     /**
