@@ -93,4 +93,3 @@ include::../DeveloperGuide.adoc[tag=calendar]
 
 include::../DeveloperGuide.adoc[tag=expenditureViewing]
 
-include::../DeveloperGuide.adoc[tag=userStories]

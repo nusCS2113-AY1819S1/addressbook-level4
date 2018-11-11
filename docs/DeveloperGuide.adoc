@@ -447,6 +447,32 @@ Viewing expenditures in the Expenditure Tracker uses both `Logic` and `Model` co
 
 // end::expenditureViewing[]
 
+// tag::getAdvice[]
+
+=== Get advice
+
+==== Current Implementation
+
+Get advice uses both `Logic` and `Model` components.
+
+* **In `Logic` part**: The `CommandResult` method of `ExpenditureGetAdviceCommand` class calls `getExpenditureRecords` method of `ModelManager` class and stores the returned map. Afterwards, we use a string builder to create an `advice` to be shown to the user.
+* **In `Model` part**: We use `getExpenditureRecords` method of `ExpenditureList` class to create a map, where the key contains category and value contains total money spent on this category.
+
+The following sequence diagram shows how the `ET_advice` operation works:
+
+image::ExpenditureGetAdviceSequenceDiagram.png[width="800"]
+
+==== Aspect: Methods to support the view feature
+
+* **Alternative 1 (current choice):** We iterate through the entire expenditure list and select the expenditures based on filter.
+** Pros: Easy to implement, there is no need for sorting functions.
+** Cons: Need to check all the expenditures in the list with time complexity O(n) which is relatively slow.
+* **Alternative 2:** We keep two expenditure lists sorted by date or category respectively.
+** Pros: Faster to get the expenditures, we only need to find the first and last appearance of the date or category, all expenditures between start and end will be selected.
+** Cons: Harder to implement, more storage are needed to maintain the two sorted lists.
+
+// end::getAdvice[]
+
 
 // tag::checkexpenditure[]
 === Check Expenditure
