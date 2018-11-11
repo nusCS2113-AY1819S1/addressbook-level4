@@ -31,9 +31,9 @@ public class SelectDeadlineCommand extends Command implements CommandParser {
             + PREFIX_DAY + "01 "
             + PREFIX_MONTH + "01 "
             + PREFIX_YEAR + "2018 "
-            + "or 1/1/{2018]";
+            + "or 1/1/[2018]";
 
-    public static final String MESSAGE_SUCCESS = "List of tasks with Tag [%1$s]";
+    public static final String MESSAGE_SUCCESS = "New date selected: %1$s";
 
     private final Deadline toSelect;
 
