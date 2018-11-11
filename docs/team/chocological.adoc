@@ -1,9 +1,5 @@
 == Melvin Tan Jit Chong - Project Portfolio
 :site-section: AboutUs
-:toc:
-:toc-title:
-:toc-placement: preamble
-:sectnums:
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
@@ -44,7 +40,7 @@ My contributions to the project are detailed below, covering aspects such as enh
 ** What it does: _Allows_ you to create a new account with your desired login credentials so that you can log into the application securely.
 ** Justification: This feature allows you to be able to create their own accounts so that you do not need to rely on the accounts of other users in order to log into the application.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=chocological]
 
 * *Other contributions*:
 

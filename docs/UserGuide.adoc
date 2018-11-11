@@ -503,7 +503,7 @@ _{explain how the user can enable/disable data encryption}_
 == Command Summary
 
 * *Login* : `login USERID PASSWORD ROLE`
-e.g. `login A1234567M zaq1xsw2cde3 member`
+e.g. `login A1234568M zaq1xsw2cde3 member`
 * *Create Account* : `createaccount USERID PASSWORD ROLE` +
 e.g. `createaccount A1234567M zaq1xsw2cde3 member`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
