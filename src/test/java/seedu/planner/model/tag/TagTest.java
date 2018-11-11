@@ -29,7 +29,8 @@ public class TagTest {
         // invalid tag format
         assertFalse(Tag.isValidTagName("")); // empty string not allowed
         assertFalse(Tag.isValidTagName("them num")); // spaces are not allowed in tags
-        assertFalse(Tag.isValidTagName("abcdefghijklmnopqrstu")); // tag names of more than 20 characters are not allowed
+        // tag names of more than 20 characters are not allowed
+        assertFalse(Tag.isValidTagName("abcdefghijklmnopqrstu"));
         assertFalse(Tag.isValidTagName("something!")); // symbols are not allowed
 
         // valid tag format
