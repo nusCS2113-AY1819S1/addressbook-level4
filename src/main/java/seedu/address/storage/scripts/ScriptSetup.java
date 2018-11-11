@@ -16,6 +16,7 @@ public class ScriptSetup {
     public static final String ADD_GROUPS_FILE = "AddGroups.txt";
     public static final String ADD_PERSONS_FILE = "AddPersons.txt";
     public static final String CREATE_GROUPS_FILE = "CreateGroups.txt";
+    public static final String ADD_TEST_FILE = "AddTests.txt";
 
     public static final String DEFAULT_SCRIPT_FOLDER = "/scripts/";
     public static final String DEFAULT_LOGS_FOLDER = "/logs/";
@@ -67,10 +68,12 @@ public class ScriptSetup {
         File file = new File(defaultLocation + scriptFolder + ADD_PERSONS_FILE);
         File file2 = new File(defaultLocation + scriptFolder + ADD_GROUPS_FILE);
         File file3 = new File(defaultLocation + scriptFolder + CREATE_GROUPS_FILE);
+        File file4 = new File(defaultLocation + scriptFolder + ADD_TEST_FILE);
         try {
             FileUtil.writeToTextFile(file, ScriptsGenerator.getAddCommand());
             FileUtil.writeToTextFile(file2, ScriptsGenerator.getGroupCommand());
             FileUtil.writeToTextFile(file3, ScriptsGenerator.getCreateGroupCommand());
+            FileUtil.writeToTextFile(file4, ScriptsGenerator.getAddTestCommand());
         } catch (IOException ioe) {
             logger.info("Sample Text cannot be created");
         }
