@@ -17,10 +17,10 @@ import seedu.address.model.tag.Tag;
 public class Book {
 
     // Identity fields
-    private final Name name;
     private final Isbn isbn;
 
     // Data fields
+    private final Name name;
     private final Price price;
     private final Cost cost;
     private final Quantity quantity;
@@ -63,7 +63,9 @@ public class Book {
      * @return the updated quantity for books
      */
     public Quantity increaseQuantity(Quantity amount) throws CommandException {
-        this.quantity.increase(amount.toInteger());
+        Quantity quantity = new Quantity(this.quantity.toString());
+        quantity.increase(amount.toInteger());
+
         return quantity;
     }
 
@@ -73,7 +75,8 @@ public class Book {
      * @return updated quantity
      */
     public Quantity deductQuantity(Quantity selling) throws CommandException {
-        this.quantity.decrease(selling.toInteger());
+        Quantity quantity = new Quantity(this.quantity.toString());
+        quantity.decrease(selling.toInteger());
         return quantity;
     }
 
@@ -86,8 +89,8 @@ public class Book {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both books of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two books.
      */
     public boolean isSameBook(Book otherBook) {
         if (otherBook == this) {
@@ -100,7 +103,7 @@ public class Book {
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two books.
      */
     @Override
     public boolean equals(Object other) {

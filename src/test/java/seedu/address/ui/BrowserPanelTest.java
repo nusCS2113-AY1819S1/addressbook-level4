@@ -13,17 +13,17 @@ import org.junit.Test;
 
 import guitests.guihandles.BrowserPanelHandle;
 import seedu.address.MainApp;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.BookPanelSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
-    private PersonPanelSelectionChangedEvent selectionChangedEventStub;
+    private BookPanelSelectionChangedEvent selectionChangedEventStub;
 
     private BrowserPanel browserPanel;
     private BrowserPanelHandle browserPanelHandle;
 
     @Before
     public void setUp() {
-        selectionChangedEventStub = new PersonPanelSelectionChangedEvent(ART);
+        selectionChangedEventStub = new BookPanelSelectionChangedEvent(ART);
 
         guiRobot.interact(() -> browserPanel = new BrowserPanel());
         uiPartRule.setUiPart(browserPanel);
@@ -39,9 +39,9 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a book
         postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + ART.getName().fullName.replaceAll(" ", "%20"));
+        URL expectedBookUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + ART.getName().fullName.replaceAll(" ", "%20"));
 
         // waitUntilBrowserLoaded(browserPanelHandle);
-        assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
+        assertEquals(expectedBookUrl, browserPanelHandle.getLoadedUrl());
     }
 }

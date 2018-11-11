@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 
 import java.util.ArrayList;
 
@@ -11,12 +12,13 @@ import guitests.guihandles.CommandBoxHandle;
 import javafx.scene.input.KeyCode;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.Role;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.request.RequestModel;
-import seedu.address.model.request.RequestModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.request.requestmodel.RequestModel;
+import seedu.address.request.requestmodel.RequestModelManager;
 
 public class CommandBoxTest extends GuiUnitTest {
 
@@ -30,7 +32,7 @@ public class CommandBoxTest extends GuiUnitTest {
 
     @Before
     public void setUp() {
-        Model model = new ModelManager();
+        Model model = new ModelManager(getTypicalBookInventory(), new UserPrefs());
         RequestModel requestModel = new RequestModelManager();
         Logic logic = new LogicManager(model, requestModel);
         Role role = new Role(Role.ROLE_ADMIN);
@@ -83,7 +85,7 @@ public class CommandBoxTest extends GuiUnitTest {
         // one command
         commandBoxHandle.run(COMMAND_THAT_SUCCEEDS);
         assertInputHistory(KeyCode.UP, COMMAND_THAT_SUCCEEDS);
-        // assertInputHistory(KeyCode.DOWN, "");
+        assertInputHistory(KeyCode.DOWN, "");
 
         // two commands (latest command is failure)
         commandBoxHandle.run(COMMAND_THAT_FAILS);
@@ -130,6 +132,54 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.UP, thirdCommand);
     }
 
+    @Test
+    public void handleKeyPress_tab () {
+        // empty command box
+        assertStoredIsbn(KeyCode.TAB, "");
+
+        // other prefix present
+        commandBoxHandle.setText("n/");
+        assertStoredIsbn(KeyCode.TAB, "n/");
+        commandBoxHandle.setText("q/");
+        assertStoredIsbn(KeyCode.TAB, "q/");
+
+        // invalid prefix present
+        commandBoxHandle.setText("z/");
+        assertStoredIsbn(KeyCode.TAB, "z/");
+
+        // valid prefix with no input, with multiple press
+        commandBoxHandle.setText("i/");
+        assertStoredIsbn(KeyCode.TAB, "i/9780748137992");
+        assertStoredIsbn(KeyCode.TAB, "i/9781401309572");
+        assertStoredIsbn(KeyCode.TAB, "i/9780062294432");
+        assertStoredIsbn(KeyCode.TAB, "i/9780062472601");
+        assertStoredIsbn(KeyCode.TAB, "i/9780767905923");
+        assertStoredIsbn(KeyCode.TAB, "i/9781401310462");
+        assertStoredIsbn(KeyCode.TAB, "i/9781401312855");
+        assertStoredIsbn(KeyCode.TAB, "i/9780748137992"); // restarts when reach end of list
+
+        // valid prefix with half input isbn, with multiple presses
+        commandBoxHandle.setText("i/97814");
+        assertStoredIsbn(KeyCode.TAB, "i/9781401309572");
+        assertStoredIsbn(KeyCode.TAB, "i/9781401310462");
+        assertStoredIsbn(KeyCode.TAB, "i/9781401312855");
+        assertStoredIsbn(KeyCode.TAB, "i/9781401309572"); // restarts when reach end of list
+
+        // valid prefix with half input isbn not in list
+        commandBoxHandle.setText("i/77");
+        assertStoredIsbn(KeyCode.TAB, "i/77");
+
+        // valid prefix with invalid input
+        commandBoxHandle.setText("i/ab");
+        assertStoredIsbn(KeyCode.TAB, "i/ab");
+
+        // commands  with isbn prefix
+        commandBoxHandle.setText("sell i/");
+        assertStoredIsbn(KeyCode.TAB, "sell i/9780748137992");
+        commandBoxHandle.setText("stock i/");
+        assertStoredIsbn(KeyCode.TAB, "stock i/9780748137992");
+    }
+
     /**
      * Runs a command that fails, then verifies that <br>
      *      - the text remains <br>
@@ -158,5 +208,10 @@ public class CommandBoxTest extends GuiUnitTest {
     private void assertInputHistory(KeyCode keycode, String expectedCommand) {
         guiRobot.push(keycode);
         assertEquals(expectedCommand, commandBoxHandle.getInput());
+    }
+
+    private void assertStoredIsbn(KeyCode keycode, String expectedIsbn) {
+        guiRobot.push(keycode);
+        assertEquals(expectedIsbn, commandBoxHandle.getInput());
     }
 }

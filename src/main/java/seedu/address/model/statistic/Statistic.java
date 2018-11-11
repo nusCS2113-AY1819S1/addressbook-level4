@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Statistic {
-    public static final String STARTING_FIGURE = "0.0";
+    public static final String STARTING_FIGURE = "0.00";
     // Data fields
     private volatile Revenue revenue;
     private volatile Inventory inventory;
@@ -31,6 +31,14 @@ public class Statistic {
         this.revenue = new Revenue(STARTING_FIGURE);
         this.inventory = new Inventory(STARTING_FIGURE);
         this.expense = new Expense((STARTING_FIGURE));
+        this.month = month;
+        this.year = year;
+    }
+
+    public Statistic(Inventory inventory, Expense expense, Revenue revenue, int month, int year) {
+        this.revenue = revenue;
+        this.inventory = inventory;
+        this.expense = expense;
         this.month = month;
         this.year = year;
     }
@@ -69,9 +77,9 @@ public class Statistic {
     }
 
     /**
-     * compares statistic made with existing statistic
-     * @param otherStatistic request made by the user
-     * @return boolean by comparing results
+     * Returns true if both statistic of the same month and year
+     * have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameStatistic(Statistic otherStatistic) {
         if (otherStatistic == this) {
@@ -79,14 +87,16 @@ public class Statistic {
         }
 
         return otherStatistic != null
-                && otherStatistic.getMonth() == getMonth()
-                && otherStatistic.getYear() == getYear()
-                || otherStatistic.getRevenue().equals(getRevenue());
+                && otherStatistic.getMonth().equals(getMonth())
+                && otherStatistic.getYear().equals(getYear())
+                && (otherStatistic.getRevenue().equals(getRevenue())
+                || otherStatistic.getInventory().equals(getInventory())
+                || otherStatistic.getExpense().equals(getExpense()));
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both stats have the same identity and data fields.
+     * This defines a stronger notion of equality between two stats.
      */
     @Override
     public boolean equals(Object other) {
@@ -99,8 +109,10 @@ public class Statistic {
         }
 
         Statistic otherStatistic = (Statistic) other;
-        return otherStatistic.getMonth() == getMonth()
-                && otherStatistic.getYear() == getYear()
+        return otherStatistic.getMonth().equals(getMonth())
+                && otherStatistic.getYear().equals(getYear())
+                && otherStatistic.getExpense().equals(getExpense())
+                && otherStatistic.getInventory().equals(getInventory())
                 && otherStatistic.getRevenue().equals(getRevenue());
     }
 

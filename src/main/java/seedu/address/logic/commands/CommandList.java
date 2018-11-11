@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import seedu.address.model.request.DeleteRequestCommand;
-import seedu.address.model.request.RequestCommand;
-import seedu.address.model.request.ToggleRequestCommand;
+import seedu.address.request.requestcommands.DeleteRequestCommand;
+import seedu.address.request.requestcommands.RequestCommand;
+import seedu.address.request.requestcommands.ToggleRequestCommand;
 
 
 

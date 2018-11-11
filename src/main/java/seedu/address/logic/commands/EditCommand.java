@@ -85,7 +85,7 @@ public class EditCommand extends Command {
         }
 
         Book bookToEdit = lastShownList.get(index.getZeroBased());
-        Book editedBook = createEditedPerson(bookToEdit, editBookDescriptor);
+        Book editedBook = createEditedBook(bookToEdit, editBookDescriptor);
 
         StatisticCenter.getInstance().getStatistic().getInventory().decrease(
                 Float.toString(Float.parseFloat(bookToEdit.getCost().toString())
@@ -107,7 +107,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Book} with the details of {@code bookToEdit}
      * edited with {@code editBookDescriptor}.
      */
-    private static Book createEditedPerson(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
+    private static Book createEditedBook(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
         assert bookToEdit != null;
 
         Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());

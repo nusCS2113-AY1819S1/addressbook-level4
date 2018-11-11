@@ -1,10 +1,12 @@
 package seedu.address.ui;
 
+import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalBooks.getTypicalBooks;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
+import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysBook;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
 import java.nio.file.Path;
@@ -12,8 +14,8 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.BookCardHandle;
+import guitests.guihandles.BookListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
@@ -32,18 +34,18 @@ public class BookListPanelTest extends GuiUnitTest {
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
-    private PersonListPanelHandle personListPanelHandle;
+    private BookListPanelHandle bookListPanelHandle;
 
     @Test
     public void display() {
         initUi(TYPICAL_BOOKS);
 
         for (int i = 0; i < TYPICAL_BOOKS.size(); i++) {
-            personListPanelHandle.navigateToCard(TYPICAL_BOOKS.get(i));
+            bookListPanelHandle.navigateToCard(TYPICAL_BOOKS.get(i));
             Book expectedBook = TYPICAL_BOOKS.get(i);
-            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+            BookCardHandle actualCard = bookListPanelHandle.getBookCardHandle(i);
 
-            assertCardDisplaysPerson(expectedBook, actualCard);
+            assertCardDisplaysBook(expectedBook, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
         }
     }
@@ -54,70 +56,92 @@ public class BookListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_BOOK.getZeroBased());
-        PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
-        assertCardEquals(expectedPerson, selectedPerson);
+        BookCardHandle expectedBook = bookListPanelHandle.getBookCardHandle(INDEX_SECOND_BOOK.getZeroBased());
+        BookCardHandle selectedBook = bookListPanelHandle.getHandleToSelectedCard();
+        assertCardEquals(expectedBook, selectedBook);
     }
 
     /**
-     * Verifies that creating and deleting large number of persons in {@code BookListPanel} requires lesser than
+     * Verifies that creating and deleting large number of books in {@code BookListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
-    /*
+
     @Test
     public void performanceTest() throws Exception {
-        ObservableList<Book> backingList = createBackingList(10000);
+        ObservableList<Book> backingList = createBackingList(20000);
 
         assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
             initUi(backingList);
             guiRobot.interact(backingList::clear);
         }, "Creation and deletion of book cards exceeded time limit");
     }
-    */
+
     /**
-     * Returns a list of persons containing {@code personCount} persons that is used to populate the
+     * Returns a list of books containing {@code bookCount} books that is used to populate the
      * {@code BookListPanel}.
      */
-    private ObservableList<Book> createBackingList(int personCount) throws Exception {
-        Path xmlFile = createXmlFileWithPersons(personCount);
-        XmlSerializableBookInventory xmlAddressBook =
+    private ObservableList<Book> createBackingList(int bookCount) throws Exception {
+        Path xmlFile = createXmlFileWithBooks(bookCount);
+        XmlSerializableBookInventory xmlBookInventory =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableBookInventory.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getBookList());
+        return FXCollections.observableArrayList(xmlBookInventory.toModelType().getBookList());
     }
 
     /**
-     * Returns a .xml file containing {@code personCount} persons. This file will be deleted when the JVM terminates.
+     * Returns a .xml file containing {@code bookCount} books. This file will be deleted when the JVM terminates.
      */
-    private Path createXmlFileWithPersons(int personCount) throws Exception {
+    private Path createXmlFileWithBooks(int bookCount) throws Exception {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
-        builder.append("<addressbook>\n");
-        for (int i = 0; i < personCount; i++) {
-            builder.append("<persons>\n");
-            builder.append("<name>").append(i).append("a</name>\n");
-            builder.append("<phone>000</phone>\n");
-            builder.append("<email>a@aa</email>\n");
-            builder.append("<address>a</address>\n");
-            builder.append("</persons>\n");
-        }
-        builder.append("</addressbook>\n");
+        builder.append("<bookinventory>\n");
 
-        Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");
-        FileUtil.createFile(manyPersonsFile);
-        FileUtil.writeToFile(manyPersonsFile, builder.toString());
-        manyPersonsFile.toFile().deleteOnExit();
-        return manyPersonsFile;
+        String partialIsbn = "9780000";
+        for (int i = 10000; i < bookCount; i++) {
+            String completeIsbn = partialIsbn + Integer.toString(i);
+            completeIsbn = createValidIsbn13(completeIsbn);
+            builder.append("<books>\n");
+            builder.append("<name>").append("hello</name>\n");
+            builder.append("<isbn>").append(completeIsbn).append("</isbn>\n");
+            builder.append("<price>1</price>\n");
+            builder.append("<cost>1</cost>\n");
+            builder.append("<quantity>1</quantity>\n");
+            builder.append("</books>\n");
+        }
+        builder.append("</bookinventory>\n");
+
+        Path manyBooksFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");
+        FileUtil.createFile(manyBooksFile);
+        FileUtil.writeToFile(manyBooksFile, builder.toString());
+        manyBooksFile.toFile().deleteOnExit();
+        return manyBooksFile;
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code BookListPanel} backed by {@code backingList}.
+     * Initializes {@code bookListPanelHandle} with a {@code BookListPanel} backed by {@code backingList}.
      * Also shows the {@code Stage} that displays only {@code BookListPanel}.
      */
     private void initUi(ObservableList<Book> backingList) {
         BookListPanel bookListPanel = new BookListPanel(backingList);
         uiPartRule.setUiPart(bookListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(bookListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        bookListPanelHandle = new BookListPanelHandle(getChildNode(bookListPanel.getRoot(),
+                BookListPanelHandle.BOOK_LIST_VIEW_ID));
+    }
+
+    /**
+     * Returns a valid 13 digit isbn
+     */
+    public static String createValidIsbn13(String str) {
+        int[] arr = {1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3};
+        int sum = 0;
+        for (int i = 0; i < 12; i++) {
+            sum += arr[i] * (str.charAt(i) - '0');
+        }
+        sum %= 10;
+        if (sum != 0) {
+            sum = 10 - sum;
+        }
+
+        return str + Integer.toString(sum);
     }
 }

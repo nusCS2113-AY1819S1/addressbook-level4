@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Book's phone number in the BookInventory.
+ * Represents a Book's isbn in the BookInventory.
  * Guarantees: immutable; is valid as declared in {@link #isValidIsbn(String)}
  */
 public class Isbn {
@@ -50,6 +50,7 @@ public class Isbn {
         }
         return isCorrect;
     }
+
     /**
      * Returns true if the last digit (check digit) of a 13-digit ISBN is correct
      */
@@ -69,6 +70,7 @@ public class Isbn {
         }
         return isCorrect;
     }
+
     /**
      * Returns true if a given string is a valid isbn number.
      */

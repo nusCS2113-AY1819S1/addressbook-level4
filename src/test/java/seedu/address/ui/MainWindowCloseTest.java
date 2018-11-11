@@ -15,7 +15,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.request.RequestModelManager;
+import seedu.address.request.requestmodel.RequestModelManager;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**

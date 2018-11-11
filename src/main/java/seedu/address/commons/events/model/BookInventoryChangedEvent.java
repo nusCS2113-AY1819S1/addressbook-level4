@@ -2,7 +2,7 @@ package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyBookInventory;
-// import seedu.address.model.request.ReadOnlyRequests;
+// import seedu.address.request.ReadOnlyRequests;
 
 /** Indicates the BookInventory in the model has changed*/
 public class BookInventoryChangedEvent extends BaseEvent {

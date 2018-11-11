@@ -3,7 +3,7 @@
 //import static org.junit.Assert.assertTrue;
 //import static seedu.address.commons.core.Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX;
 //import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-//import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+//import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_BOOK_SUCCESS;
 //import static seedu.address.testutil.TestUtil.getLastIndex;
 //import static seedu.address.testutil.TestUtil.getMidIndex;
 //import static seedu.address.testutil.TestUtil.getPerson;
@@ -35,7 +35,7 @@
 //        String command = "     " + DeleteCommand.COMMAND_WORD + "      " +
 // INDEX_FIRST_BOOK.getOneBased() + "       ";
 //        Book deletedBook = removeBook(expectedModel, INDEX_FIRST_BOOK);
-//        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedBook);
+//        String expectedResultMessage = String.format(MESSAGE_DELETE_BOOK_SUCCESS, deletedBook);
 //        // assertCommandSuccess(command, expectedModel, expectedResultMessage);
 //
 //        /* Case: delete the last book in the list -> deleted */
@@ -85,7 +85,7 @@
 //        selectPerson(selectedIndex);
 //        command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
 //        deletedBook = removeBook(expectedModel, selectedIndex);
-//        expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedBook);
+//        expectedResultMessage = String.format(MESSAGE_DELETE_BOOK_SUCCESS, deletedBook);
 //        assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 //
 //        /* --------------------------------- Performing invalid delete operation
@@ -133,7 +133,7 @@
 //    private void assertCommandSuccess(Index toDelete) {
 //        Model expectedModel = getModel();
 //        Book deletedBook = removeBook(expectedModel, toDelete);
-//        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedBook);
+//        String expectedResultMessage = String.format(MESSAGE_DELETE_BOOK_SUCCESS, deletedBook);
 //
 //        assertCommandSuccess(
 //                DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);

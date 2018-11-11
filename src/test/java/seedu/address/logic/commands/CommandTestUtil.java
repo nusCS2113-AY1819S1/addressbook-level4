@@ -29,7 +29,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_ADD = "Amy Bee";
     public static final String VALID_NAME_BIOLOGY = "Bob Choo";
-    public static final String VALID_ISBN_ADD = "978-3-16-148410-0";
+    public static final String VALID_ISBN_ADD = "9780748137992";
     public static final String VALID_ISBN_BIOLOGY = "978-1-56619-909-4";
     public static final String VALID_PRICE_ADD = "19.97";
     public static final String VALID_PRICE_BIOLOGY = "98.21";
@@ -39,6 +39,17 @@ public class CommandTestUtil {
     public static final String VALID_QUANTITY_BIOLOGY = "8";
     public static final String VALID_TAG_SCIENCE = "husband";
     public static final String VALID_TAG_STUDIES = "friend";
+
+    public static final String VALID_REVENUE_JUNE = "1.00";
+    public static final String VALID_REVENUE_MAY = "2.00";
+    public static final String VALID_INVENTORY_JUNE = "3.00";
+    public static final String VALID_INVENTORY_MAY = "4.00";
+    public static final String VALID_EXPENSE_JUNE = "5.00";
+    public static final String VALID_EXPENSE_MAY = "6.00";
+    public static final String VALID_YEAR_JUNE = "2017";
+    public static final String VALID_YEAR_MAY = "2018";
+    public static final String VALID_MONTH_JUNE = "9";
+    public static final String VALID_MONTH_MAY = "5";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_ADD;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BIOLOGY;
@@ -132,7 +143,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the book at the given {@code targetIndex} in the
      * {@code model}'s BookInventory.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showBookAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredBookList().size());
 
         Book book = model.getFilteredBookList().get(targetIndex.getZeroBased());
@@ -145,7 +156,7 @@ public class CommandTestUtil {
     /**
      * Deletes the first book in {@code model}'s filtered list from {@code model}'s BookInventory.
      */
-    public static void deleteFirstPerson(Model model) {
+    public static void deleteFirstBook(Model model) {
         Book firstBook = model.getFilteredBookList().get(0);
         model.deleteBook(firstBook);
         model.commitBookInventory();
