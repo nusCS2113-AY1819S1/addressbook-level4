@@ -78,10 +78,11 @@ public class CreateThreadCommandTest {
         //set the current logged in user as null.
         Context.getInstance().setCurrentUser(null);
 
-        Module validModule = TypicalModules.CS2113;
+        Module validModule = TypicalModules.CS1231;
         int moduleId = 0;
         try(UnitOfWork unitOfWork = new UnitOfWork()) {
-            moduleId = unitOfWork.getModuleRepository().getModuleByCode(validModule.getModuleCode()).getId();
+            moduleId = unitOfWork.getModuleRepository().addModule(validModule);
+            unitOfWork.commit();
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,10 +92,10 @@ public class CreateThreadCommandTest {
                 new CreateThreadCommand(validModule.getModuleCode(), forumThread, comment);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(User.MESSAGE_NOT_LOGIN);
+        thrown.expectMessage(Messages.MESSAGE_NOT_LOGIN);
 
         CommandResult commandResult = createThreadCommand.execute(model, commandHistory);
-        assertEquals(User.MESSAGE_NOT_LOGIN, commandResult.feedbackToUser);
+        assertEquals(Messages.MESSAGE_NOT_LOGIN, commandResult.feedbackToUser);
     }
 
     @Test
@@ -103,23 +104,16 @@ public class CreateThreadCommandTest {
         User validUser = TypicalUsers.JANEDOE;
         Context.getInstance().setCurrentUser(validUser);
 
-        Module validModule = TypicalModules.CS2113;
-        int moduleId = 0;
-        try(UnitOfWork unitOfWork = new UnitOfWork()) {
-            moduleId = unitOfWork.getModuleRepository().getModuleByCode(validModule.getModuleCode()).getId();
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        ForumThread forumThread = new ForumThreadBuilder().withModuleId(moduleId).build();
-        Comment comment = new CommentBuilder().withThreadId(forumThread.getId()).build();
+        String inValidModuleCode = "AB1234";
+        ForumThread forumThread = new ForumThread();
+        Comment comment = new Comment();
         CreateThreadCommand createThreadCommand =
-                new CreateThreadCommand(validModule.getModuleCode(), forumThread, comment);
+                new CreateThreadCommand(inValidModuleCode, forumThread, comment);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(Messages.MESSAGE_INVALID_MODULE_CODE);
 
         CommandResult commandResult = createThreadCommand.execute(model, commandHistory);
         assertEquals(Messages.MESSAGE_INVALID_MODULE_CODE, commandResult.feedbackToUser);
-
     }
 }
