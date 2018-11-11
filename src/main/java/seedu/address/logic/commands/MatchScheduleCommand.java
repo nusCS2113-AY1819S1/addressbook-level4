@@ -25,7 +25,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
-public class MatchSchedule extends Command {
+public class MatchScheduleCommand extends Command {
     public static final String COMMAND_WORD = "matchSchedule";
     public static final String COMMAND_ALIAS = "ms";
 
@@ -55,7 +55,7 @@ public class MatchSchedule extends Command {
 
     private final Index index;
 
-    public ScheduleCommand(Schedule schedule, Index index) {
+    public MatchScheduleCommand(Schedule schedule, Index index) {
         requireNonNull(schedule);
         this.index = index;
         this.toSchedule = schedule;
