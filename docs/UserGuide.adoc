@@ -256,7 +256,7 @@ Example:
 
 * `sort name`
 
-
+// tag::findEvent[]
 === Searching for the events using keywords: `findEvent`
 Priority level: all
 
@@ -269,6 +269,7 @@ Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched
 * Events matching at least one keyword will be returned
 ****
+// end::findEvent[]
 
 
 // tag::invite[]

@@ -404,6 +404,24 @@ The sequence diagram below illustrates the execution of the `invite` command.
 // end::Select[]
 
 
+// tag::FindEvent[]
+=== Find Event feature
+
+==== Current Implementation
+The `findEvent` allows the user to search for an event using some keywords. It searches for such events which contain at least
+one of keywords in their names or description.
+
+
+==== Execution of Command
+Given below is an example usage scenario and how the `findEvent` mechanism works.
+
+Step 1. The user inputs `findEvent meeting` to find the event containing the word meeting in its name or description.
+
+Step 2. The command is parsed and the result is shown.
+
+
+// end::FindEvent[]
+
 === List Feature
 
 ==== Current Implementation
