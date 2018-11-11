@@ -104,6 +104,7 @@ When you are ready to start coding,
 === Architecture
 
 .Architecture Diagram
+// TODO: modify architecture diagram to display current implementations
 image::Architecture.png[width="600"]
 
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
@@ -429,16 +430,102 @@ image::TodoSequenceDiagram.png[width="1000"]
 
 //tag::suggestion[]
 === Suggestions Feature
-Gives helpful suggestions to users on commands to type.
+The suggestions feature gives users helpful suggestions on what command to type, and corrections for commands when incorrect
+commands are being entered.
 
 ==== Current Implementation
 There are two instances when suggestions are given.
 
-Firstly, when a user completes entering a command (after pressing ENTER key), if the command typed is invalid, the system
-will suggest a similar command based on the edit distance.
+Firstly, when a user completes entering a command (after pressing `ENTER` key), if the command typed is invalid, such as
+commands being misspelt, the system will suggest a similar command based on the edit distance (which will be explained later).
 
 The second instance would be when the user presses tab while typing the command halfway. The system will suggest commands
-based on the current prefix string.
+based on the current prefix string. If only a single command is available, the command would be completed for the user,
+and the system would show the parameters required for that command.
+
+===== Wrong Command Suggestion
+Given below is an example usage of how the WrongCommandSuggestion behaves at each step.
+
+Step 1: The user would type in a misspelt command string into the Command Box pane.
+
+Step 2: The command would be parsed into the AddressBookParser class. Since no commands match the word exactly, it would
+fall into the default case.
+
+Step 3: The default case would extract out only the command portion of the user input, and input it into the
+WrongCommandSuggestion class.
+
+Step 4: WrongCommandSuggestion would then instantiate the StringSimilarity class to find the nearest match of a word.
+
+Step 5: editDistance in StringSimliarity class would be called to find out the edit distance between two words. These two
+words would be the wrong command the user has input, and the list of available commands in the whole application.
+
+Step 6: WrongCommandSuggestion would then compare if the edit distance of the current command is shorter than the current
+shortest edit distance command (which is initialised to 5 edits). If it is shorter, it would then suggest the current command.
+
+Step 7: WrongCommandSuggestion would then return the suggestion in a string, which would then be inputted into the CommandException,
+to be thrown to the LogicManager class.
+
+The following sequence diagram shows an example of how the WrongCommandSuggestion operation works with
+misspelt command "histary" (closest command is `history`):
+
+image::WrongCommandSuggestionSequenceDiagram.png[width="1000"]
+
+//TODO: explain implementation of Levenshtein Distance
+
+===== Input Command Suggestion
+Given below is an example of how the InputCommandSuggestion behaves at each step.
+
+Step 1: Upon instantiation of CommandBox during the program instantiation phase, CommandBox will create an instance of
+InputCommandSuggestion, which will create a Trie containing all the commands available in the application.
+
+Step 2: When the user presses `TAB` after entering a command, CommandBox will call method `handleTabPressed()` to fetch
+the current input that the user has typed.
+
+Step 3: `handleTabPressed()` method will then call the `getSuggestedCommands()` method in InputCommandSuggestion, while
+inputting the user's input into the parameters.
+
+Step 4: The InputCommandSuggestion would then find available commands using the Trie class and determine whether there
+are any other possible combinations of commands with the current string of words.
+
+Step 5: The Trie class would then return a list of commands available, which would then pass back to CommandBox.
+
+Step 6a: If there is only one command available, CommandBox would auto-complete the current input with the valid command,
+then request for the Command Parameters through the InputCommandSuggestion class. It would then pass the string to be
+posted on EventsCenter, so that the Command Parameters would be displayed on the results panel.
+
+Step 6b: If there are multiple commands available, CommandBox will pass all the possible commands to EventsCenter, to
+output all possible commands available with the current string.
+
+The following sequence diagram shows an example of how the InputCommandSuggestion class works:
+
+image::InputCommandSuggestionSequenceDiagram.png[width="1000"]
+
+==== Design Considerations
+
+For the WrongCommandSuggestion implementation, there were multiple design considerations while implementing the feature.
+
+* **Alternative 1:** Compare the input command and the actual command character by character and see
+which command has the most matches.
+** Pros: Easy to implement.
+** Cons: Not as accurate or reliable in terms of giving a correct match of command.
+* **Alternative 2 (current choice):** Use a string matching algorithm to implement the matching and difference
+calculation between the command and the user input.
+** Pros: Accurate prediction or suggestions from actual commands.
+** Cons: Difficult to implement, and might require more processing overhead.
+
+For the InputCommandSuggestion implementation, there were multiple design considerations while implementing the feature.
+
+* **Alternative 1:** While the user types, command suggestions would be given continuously with regards
+to the user's input.
+** Pros: Makes it more convenient for typing in commands as there is immediate response of the correctness of the command.
+** Cons: May have performance issues in terms of memory usage, complicated to implement, and requires a lot of work on
+the UI for the application.
+* **Alternative 2 (current choice):** When the user requires corrections to the command or requires feedback, press `TAB`
+key to receive suggestions given by the system.
+** Pros: Less overhead to the system as the system does not have to constantly run the algorithm to check for valid and
+available commands.
+** Cons: Feedback is less responsive, and requires additional keys for users to press.
+
 //end::suggestion[]
 
 // tag::dataencryption[]
