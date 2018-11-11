@@ -33,8 +33,9 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_WORD_ALIAS = "e";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits your details "
-            + "Existing values will be overwritten by the input values.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits your details - "
+            + "Existing values will be overwritten by the input values. "
+            + "NOTE: Not all fields have to present\n"
             + "Parameters: "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "

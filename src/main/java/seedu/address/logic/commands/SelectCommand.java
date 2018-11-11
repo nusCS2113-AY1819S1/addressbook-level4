@@ -25,7 +25,7 @@ public class SelectCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Selects yourself or the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1"
+            + "Example: " + COMMAND_WORD + " 1 OR "
             + "Example: " + COMMAND_WORD + " " + ARGS_ME;
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected %1$s";

@@ -19,7 +19,7 @@ public class UnfriendCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "uf";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes the person with the index to from the friends list.\n"
+            + ": Removes the person with the index from the friends list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
