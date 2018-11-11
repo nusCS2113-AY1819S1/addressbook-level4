@@ -90,5 +90,7 @@ include::../UserGuide.adoc[tag=ETadvice]
 |===
 
 include::../DeveloperGuide.adoc[tag=calendar]
+
 include::../DeveloperGuide.adoc[tag=expenditureViewing]
+
 include::../DeveloperGuide.adoc[tag=userStories]
