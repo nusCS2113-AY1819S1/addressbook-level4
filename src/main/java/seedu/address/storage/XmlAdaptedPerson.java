@@ -151,7 +151,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
-                && tagged.equals(otherPerson.tagged)
-                && schedules.equals(otherPerson.schedules);
+                && tagged.equals(otherPerson.tagged);
+                //&& schedules.equals(otherPerson.schedules);
     }
 }

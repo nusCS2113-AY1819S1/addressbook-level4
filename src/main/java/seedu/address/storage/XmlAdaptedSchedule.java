@@ -122,4 +122,5 @@ public class XmlAdaptedSchedule {
                 && Objects.equals(endTime, otherSchedule.endTime)
                 && Objects.equals(eventName, otherSchedule.eventName);
     }
+
 }
