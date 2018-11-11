@@ -18,7 +18,7 @@ import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
+ * Contains integration tests (interaction with the Model)
  * and unit tests for the SortCompanyCommand.
  */
 @SuppressWarnings("Duplicates")

@@ -97,7 +97,7 @@ public class EditCompanyCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() throws ParseException{
+    public void execute_filteredList_success() throws ParseException {
         showCompanyAtIndex(model, INDEX_FIRST);
 
         Company companyInFilteredList = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
