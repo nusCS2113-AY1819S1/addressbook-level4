@@ -6,13 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.stream.Stream;
 
-import com.google.common.eventbus.Subscribe;
-
-import seedu.address.commons.events.security.GetAuthenticationEvent;
-import seedu.address.commons.events.security.SendsAuthenticationStateEvent;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.security.SecurityAuthenticationException;
 
 
 /**
@@ -20,18 +15,12 @@ import seedu.address.security.SecurityAuthenticationException;
  */
 public class LoginCommandParser extends ParserClass implements Parser<LoginCommand> {
 
-    private boolean isAuthenticated;
-
     /**
      * Parses the given {@code String} of arguments in the context of the TagCommand
      * and returns an TagCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public LoginCommand parse(String args) throws ParseException, SecurityAuthenticationException {
-        raise(new GetAuthenticationEvent());
-        if (isAuthenticated) {
-            throw new SecurityAuthenticationException("Please logout if you would like login to another account");
-        }
+    public LoginCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PASSWORD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_USERNAME, PREFIX_PASSWORD)
@@ -52,10 +41,4 @@ public class LoginCommandParser extends ParserClass implements Parser<LoginComma
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
-    @Subscribe
-    public void handleAuthenticationStateEvent(SendsAuthenticationStateEvent e) {
-        isAuthenticated = e.isAuthenticated();
-    }
-
 }

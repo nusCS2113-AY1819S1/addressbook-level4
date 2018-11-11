@@ -6,7 +6,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Reverts the {@code model}'s address book to its previously undone state.
@@ -20,12 +19,8 @@ public class RedoCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history)
-            throws CommandException, SecurityAuthenticationException {
+            throws CommandException {
         requireNonNull(model);
-
-        if (model.getUser() == null) {
-            throw new SecurityAuthenticationException();
-        }
 
         if (!model.canRedoAddressBook()) {
             throw new CommandException(MESSAGE_FAILURE);

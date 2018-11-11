@@ -13,35 +13,24 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import com.google.common.eventbus.Subscribe;
-
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.security.GetAuthenticationEvent;
-import seedu.address.commons.events.security.SendsAuthenticationStateEvent;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
-import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser extends ParserClass implements Parser<EditCommand> {
 
-    private boolean isAuthenticated;
-
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException, SecurityAuthenticationException {
+    public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        raise(new GetAuthenticationEvent());
-        if (!isAuthenticated) {
-            throw new SecurityAuthenticationException("User is not authenticated");
-        }
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PHONE, PREFIX_EMAIL,
@@ -91,11 +80,6 @@ public class EditCommandParser extends ParserClass implements Parser<EditCommand
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
-    }
-
-    @Subscribe
-    public void handleAuthenticationStateEvent(SendsAuthenticationStateEvent e) {
-        isAuthenticated = e.isAuthenticated();
     }
 
 }

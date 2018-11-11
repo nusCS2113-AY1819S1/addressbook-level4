@@ -10,8 +10,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.security.SecurityAuthenticationException;
-
 /**
  * Adds a user from the frined list to the others list
  */
@@ -34,12 +32,8 @@ public class UnfriendCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history)
-            throws CommandException, SecurityAuthenticationException {
+            throws CommandException {
         requireNonNull(model);
-
-        if (model.getUser() == null) {
-            throw new SecurityAuthenticationException();
-        }
 
         List<Person> friendList = model.getFriendList(model.getUser());
 

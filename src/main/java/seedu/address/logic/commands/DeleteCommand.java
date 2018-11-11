@@ -10,7 +10,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -35,12 +34,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history)
-            throws CommandException, SecurityAuthenticationException {
+            throws CommandException {
         requireNonNull(model);
-
-        if (model.getUser() == null) {
-            throw new SecurityAuthenticationException();
-        }
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
