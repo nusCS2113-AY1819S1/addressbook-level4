@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -195,13 +194,13 @@ public class MainWindow extends UiPart<Stage> {
         timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
-        mePanel = new MePanel(FXCollections.observableArrayList(security.getUser()));
+        mePanel = new MePanel(logic.getMeList());
         mePanelPlaceholder.getChildren().add(mePanel.getRoot());
 
-        friendListPanel = new FriendListPanel(logic.getFriendList(security.getUser()));
+        friendListPanel = new FriendListPanel(logic.getFriendList());
         personListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
-        otherListPanel = new OtherListPanel(logic.getOtherList(security.getUser()));
+        otherListPanel = new OtherListPanel(logic.getOtherList());
         otherListPanelPlaceholder.getChildren().add(otherListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();

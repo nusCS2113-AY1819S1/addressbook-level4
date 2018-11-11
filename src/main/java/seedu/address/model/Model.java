@@ -73,15 +73,28 @@ public interface Model {
 
     /**
      * Return the friends list of the current user
-     * @param person
      */
-    ObservableList<Person> getFriendList(Person person);
+    ObservableList<Person> getFriendList();
+
+    /**
+     * Return the current friend list with the predicates still set
+     */
+    ObservableList<Person> getCurrentFriendList();
+
+    /**
+     * Return the current other list with the predicate still set
+     */
+    ObservableList<Person> getCurrentOtherList();
 
     /**
      * Return the non-friends list of the current user
-     * @param person
      */
-    ObservableList<Person> getOtherList(Person person);
+    ObservableList<Person> getOtherList();
+
+    /**
+     * Returns a list with just the current user
+     */
+    ObservableList<Person> getMeList();
 
     /**
      * Instantiates the user with a Person in database

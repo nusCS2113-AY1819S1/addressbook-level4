@@ -18,11 +18,11 @@ public class UnfriendCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "uf";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes the person with the index to from the friends list.\n"
+            + ": Removes the person with the index from the friends list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_REMOVE_FRIEND_SUCCESS = "Person removed from the friend list!";
+    public static final String MESSAGE_REMOVE_FRIEND_SUCCESS = "%s removed from the friend list!";
 
     private final Index targetIndex;
 
@@ -35,12 +35,13 @@ public class UnfriendCommand extends Command {
             throws CommandException {
         requireNonNull(model);
 
-        List<Person> friendList = model.getFriendList(model.getUser());
+        List<Person> friendList = model.getCurrentFriendList();
 
         if (targetIndex.getZeroBased() >= friendList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = friendList.get(targetIndex.getZeroBased());
+
         Person editedPerson = personToEdit;
         Person editedUser = model.getUser();
         editedPerson.getFriends().removeIf(p -> p.friendName.equals(model.getUser().getName()));
@@ -48,7 +49,6 @@ public class UnfriendCommand extends Command {
 
         model.updatePerson(personToEdit, editedPerson);
         model.updatePerson(model.getUser(), editedUser);
-        model.commitAddressBook();
-        return new CommandResult(MESSAGE_REMOVE_FRIEND_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_REMOVE_FRIEND_SUCCESS, editedPerson.getName().toString()));
     }
 }

@@ -21,11 +21,6 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws SecurityAuthenticationException {
         requireNonNull(model);
 
-        if (model.getUser() == null) {
-            throw new SecurityAuthenticationException();
-        }
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFriendList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateOtherList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);

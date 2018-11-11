@@ -25,7 +25,7 @@ public class SelectCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Selects yourself or the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1"
+            + "Example: " + COMMAND_WORD + " 1 OR "
             + "Example: " + COMMAND_WORD + " " + ARGS_ME;
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected %1$s";
@@ -48,7 +48,7 @@ public class SelectCommand extends Command {
             model.updateTimeTable(model.getUser().getTimeTable());
             return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, ARGS_ME));
         } else {
-            List<Person> friendList = model.getFriendList(model.getUser());
+            List<Person> friendList = model.getCurrentFriendList();
 
             if (targetIndex.getZeroBased() >= friendList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -56,7 +56,7 @@ public class SelectCommand extends Command {
 
             model.updateTimeTable(friendList.get(targetIndex.getZeroBased()).getTimeTable());
             EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-            String namePerson = model.getFriendList(model.getUser())
+            String namePerson = model.getCurrentFriendList()
                     .get(targetIndex.getZeroBased()).getName().toString();
 
             return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, namePerson));

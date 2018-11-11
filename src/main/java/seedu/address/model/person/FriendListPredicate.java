@@ -8,7 +8,7 @@ import java.util.function.Predicate;
  */
 public class FriendListPredicate implements Predicate<Person> {
 
-    private final Person currentUser;
+    private Person currentUser;
 
     public FriendListPredicate(Person currentUser) {
         this.currentUser = currentUser;
