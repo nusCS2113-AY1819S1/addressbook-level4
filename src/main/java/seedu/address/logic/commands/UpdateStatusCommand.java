@@ -8,9 +8,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.List;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -32,14 +29,12 @@ public class UpdateStatusCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
-        int index = 0;
 
         if (lastShownList.isEmpty()) {
             return new CommandResult(MESSAGE_MISSING_EVENTS);
         }
 
         for (Event updatingEvent : lastShownList) {
-            Index targetIndex = Index.fromZeroBased(index++);
             EditEventDescriptor updatedStatusDescriptor = new EditEventDescriptor();
 
             Status updatedStatus = new Status(Status.setStatus(updatingEvent.getDateTime()));
@@ -47,16 +42,8 @@ public class UpdateStatusCommand extends Command {
             Event updatedEvent = createEditedEvent(updatingEvent, updatedStatusDescriptor);
 
             model.updateEvent(updatingEvent, updatedEvent);
-            model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-
-            // added delay to prevent UI from lagging
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

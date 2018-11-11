@@ -1,3 +1,4 @@
+//@@author cqinkai
 package seedu.address.model.attendee;
 
 import org.junit.Test;

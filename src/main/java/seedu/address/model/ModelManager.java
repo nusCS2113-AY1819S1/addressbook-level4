@@ -154,6 +154,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEvents.setPredicate(predicate);
     }
 
+    //@@ tertium3
     @Override
     public ObservableList<Event> getAttendingEventList(Username currentUser) {
         requireNonNull(currentUser);
