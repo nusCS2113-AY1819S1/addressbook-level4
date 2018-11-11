@@ -20,32 +20,19 @@ Lecturers can further automate some of these processes by importing student data
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=rajdeepsh[Code]]
 * *Main Feature*: *Groups*
 ** *Functionality*: Added *the ability to create groups*
-*** What it does: Allows the lecturer to create a groups in the student management system and displays the groups created on a separate panel.
-*** Justification: This feature is necessary as it allows the lecturer to have a list of all his modules/tutorial groups.
-*** Highlights: This feature required an in-depth analysis of storage alternatives as storing group data in a separate xml file would be more modular but difficult to implement, given our time constraints.
+*** Allows the lecturer to create a group in the student management system and displays the groups created on a separate panel. This feature was implemented as it allows the lecturer to have a list of all his/her modules/tutorial groups.
 
 ** *Functionality*: Added *the ability to select groups*
-*** What it does: Allows the lecturer to select groups in the student management system via a CLI command and displays the students in the group selected on a separate panel.
-*** Justification: This feature was implemented to allow for some flexibility when it comes to inputs as some lecturers may prefer typing over clicking.
-*** Highlights: This feature was to be paired later on with a find group feature, but due to time constraints find group was not implemented.
+*** Allows the lecturer to select groups in the student management system via a CLI command and displays the students in the group selected on a separate panel. This feature was implemented to allow for some flexibility when it comes to inputs.
 
 ** *Functionality*: Added *the ability to add students to groups*
-*** What it does: Allows the lecturer to add students to existing groups in the student management system.
-*** Justification: This feature is necessary as it allows the lecturer to have a list of students in a particular module/tutorial group.
-*** Highlights: This feature was to be further improved by synchronizing it with the edit command - e.g. if a person is edited in the
-student management system, that person would also be edited in all the groups he/she is in by simply removing the old person and adding the updated person. However,
- due to time constraints, it was not further improved.
+*** Allows the lecturer to add students to existing groups in the student management system. This feature was implemented as it allows the lecturer to have a list of students in a particular module/tutorial group.
 
 ** *Functionality*: Added *the ability to delete groups*
-*** What it does: Allows the lecturer to remove groups from the student management system.
-*** Justification: This feature is necessary as it allows the lecturer to organize/edit the management system.
+*** Allows the lecturer to remove groups from the student management system. This feature was implemented as it allows the lecturer to organize/edit the management system.
 
 ** *Functionality*: Added *the ability to delete students from groups*
-*** What it does: Allows the lecturer to remove students from groups in the student management system.
-*** Justification: This feature is necessary as it allows the lecturer to organize/edit the management system.
-*** Highlights: This feature was to be further improved by synchronizing it with the delete command - e.g. if a person is deleted in the
-student management system, that person would also be deleted in all the groups he/she is in. However,
- due to time constraints, it was not further improved.
+*** Allows the lecturer to remove students from groups in the student management system. This feature was implemented as it allows the lecturer to organize/edit the management system.
 
 * *Other contributions*:
 
