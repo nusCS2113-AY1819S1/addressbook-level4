@@ -436,7 +436,7 @@ Step 6. The user executes the `DeleteLoanListCommand` to delete the loan list wh
 * The `ArrayList#remove()` is called to remove the loan list entry
 * The `LoanListCommand#updateXmlLoanListFile()` is called to save the changes in storage.
 
-// end:: status[]
+// end::status[]
 
 // tag::login[]
 === Login feature
