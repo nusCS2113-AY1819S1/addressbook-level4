@@ -27,7 +27,7 @@ ClubHub (CH) is for those who *prefer to use a desktop app for managing members,
 .  Copy the file to the folder you want to use as the home folder for your ClubHub.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png   [width="790"]
+image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -522,6 +522,35 @@ Returns any item having names `White`, `Soccer`, or `Balls`
 Shows a list of all items in the ClubHub. +
 Format: `listItems`
 // end::itemlist[]
+
+== Record feature `[coming in v2.0]`
+
+Record feature allows the user to update many new club information all at once.
+
+For Example:
+
+ `Bernice` pays `$100` membership fee, attends `Basketball training on 01/11` and borrows`1 chair`.
+
+In order to record this information on Clubhub, the user just has to enter the following command:
+
+`AddRecord M/Bernice d/10/10 b/100 D/01/11 n/chair q/-1`
+
+This command will do the following:
+
+* Look for the name Bernice to see whether it already exists in Clubhub
+(It will inform the user that the input is invalid if the name does not already exist in Clubhub)
+
+*  Add a ledger in `Club Account` panel and update the balance accordingly
+
+*  Add a basketball event on 01/11 in `Club Calendar`
+
+*  Take away 1 chair from the inventory from `Club Inventory`
+
+Furthermore, there will a panel at the bottom of Clubhub to show history of all the `Records` added
+
+.Sample New UI
+image::AddRecordUI.PNG[width="790"]
+
 
 
 == FAQ

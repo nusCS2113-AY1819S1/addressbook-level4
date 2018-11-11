@@ -101,7 +101,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 When you are ready to start coding,
 
 1. Get some sense of the overall design by reading <<Design-Architecture>>.
-2. Take a look at <<GetStartedProgramming>>.
+2. Take a look at <<GetStartedProgramming>>.image::Architecture.png[width="600"]
 
 == Design
 
