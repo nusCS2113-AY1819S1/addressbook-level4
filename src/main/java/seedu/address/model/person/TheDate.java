@@ -1,9 +1,11 @@
 package seedu.address.model.person;
 
-//import java.text.SimpleDateFormat;
-//import java.util.Date;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Represents the date of the event in JitHub.
@@ -11,14 +13,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TheDate {
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Dates should only contain numbers in DDMMYYYY format, and it should not be blank";
-
-    /*
-     * The first character of the date must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String DATE_VALIDATION_REGEX = "(0[1-9]|[1-2][0-9]|3[0-1])(0[1-9]|1[0-2])(\\d{4})";
-    //date regex here allows for 31 days every month of a 4 digit year.
+            "Dates should only contain numbers in DDMMYYYY format, and it should not be blank\n" +
+            "Only calendar dates are accepted.";
 
     public final String value;
 
@@ -37,10 +33,17 @@ public class TheDate {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidDate(String test) {
-        //        SimpleDateFormat jitHubDateFormat = new SimpleDateFormat("ddMMyyyy");
-        //        Date validator = jitHubDateFormat.parse(test);
-
-        return test.matches(DATE_VALIDATION_REGEX);
+        SimpleDateFormat jitHubDateFormat = new SimpleDateFormat("ddMMyyyy");
+        jitHubDateFormat.setLenient(false);
+        try {
+            Date validator = jitHubDateFormat.parse(test);
+            System.out.println(validator.toString());
+            return true;
+        }
+        catch (ParseException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
