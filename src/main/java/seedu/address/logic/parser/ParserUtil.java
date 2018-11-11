@@ -161,11 +161,8 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
-        }
         if (!Date.isExistingDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_NON_EXISTING_DATE);
+            throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
     }

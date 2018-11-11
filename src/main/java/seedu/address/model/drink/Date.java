@@ -15,7 +15,7 @@ import java.time.format.ResolverStyle;
  */
 public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Date should be in this format DD/MM/YYYY or D/MM/YYYY or DD/M/YYYY";
+            "Date should be in this format DD/MM/YYYY or D/MM/YYYY";
     public static final String MESSAGE_NON_EXISTING_DATE =
             "Please enter a date that exists";
     public static final String DATE_VALIDATION_REGEX =

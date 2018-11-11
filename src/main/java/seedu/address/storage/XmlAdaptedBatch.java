@@ -75,7 +75,7 @@ public class XmlAdaptedBatch {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     BatchDate.class.getSimpleName()));
         }
-        if (!BatchDate.isValidDate(batchDate)) {
+        if (!BatchDate.isExistingDate(batchDate)) {
             throw new IllegalValueException(BatchDate.MESSAGE_DATE_CONSTRAINTS);
         }
         final BatchDate modelDate = new BatchDate(batchDate);
