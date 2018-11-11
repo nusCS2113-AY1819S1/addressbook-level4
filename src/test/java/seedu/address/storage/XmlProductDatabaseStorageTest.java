@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalProducts.APPLE;
 import static seedu.address.testutil.TypicalProducts.BANANA;
-import static seedu.address.testutil.TypicalProducts.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProducts.GRAPE;
+import static seedu.address.testutil.TypicalProducts.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -69,7 +69,8 @@ public class XmlProductDatabaseStorageTest {
     }
 
     @Test
-    public void readProductDatabase_invalidAndValidProductProductDatabase_throwDataConversionException() throws Exception {
+    public void readProductDatabase_invalidAndValidProductProductDatabase_throwDataConversionException()
+            throws Exception {
         thrown.expect(DataConversionException.class);
         readProductDatabase("invalidAndValidProductProductDatabase.xml");
     }
@@ -123,5 +124,4 @@ public class XmlProductDatabaseStorageTest {
         thrown.expect(NullPointerException.class);
         saveProductDatabase(new ProductDatabase(), null);
     }
-    
 }
