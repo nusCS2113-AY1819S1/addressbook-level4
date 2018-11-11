@@ -5,8 +5,8 @@ import java.time.YearMonth;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import seedu.address.ui.calendar.MonthView;
 
+//@@author linnnruo
 /**
  * The Calendar Panel of the App.
  */
@@ -14,7 +14,7 @@ public class CalendarPanel extends UiPart<Region> {
 
     private static final String FXML = "CalendarPanel.fxml";
 
-    private MonthView monthView;
+    private CalendarLayout CalendarLayout;
     private YearMonth currentYearMonth;
 
     @FXML
@@ -23,7 +23,7 @@ public class CalendarPanel extends UiPart<Region> {
     public CalendarPanel() {
         super(FXML);
 
-        monthView = new MonthView();
+        CalendarLayout = new CalendarLayout();
         currentYearMonth = YearMonth.now();
         createMainView();
     }
@@ -32,11 +32,11 @@ public class CalendarPanel extends UiPart<Region> {
      * Creates the view of the calendar
      */
     private void createMainView() {
-        monthView.getMonthView(currentYearMonth);
-        calendar.getChildren().add(monthView.getRoot());
+        CalendarLayout.getCalendarLayout(currentYearMonth);
+        calendar.getChildren().add(CalendarLayout.getRoot());
     }
 
-    public MonthView getMonthView() {
-        return monthView;
+    public CalendarLayout getCalendarLayout() {
+        return CalendarLayout;
     }
 }

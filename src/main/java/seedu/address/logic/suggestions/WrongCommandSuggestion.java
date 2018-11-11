@@ -7,6 +7,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportAllCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FinishTodoCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -37,6 +38,7 @@ public class WrongCommandSuggestion {
             ExitCommand.COMMAND_WORD,
             ExportAllCommand.COMMAND_WORD,
             FindCommand.COMMAND_WORD,
+            FinishTodoCommand.COMMAND_WORD,
             HelpCommand.COMMAND_WORD,
             HistoryCommand.COMMAND_WORD,
             ListCommand.COMMAND_WORD,

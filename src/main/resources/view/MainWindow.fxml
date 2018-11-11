@@ -54,13 +54,13 @@
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <StackPane fx:id="browserPlaceholder" minWidth="230" prefWidth="230" >
+          <StackPane fx:id="browserPlaceholder" prefWidth="230" >
             <padding>
               <Insets top="3" right="3" bottom="3" left="3" />
             </padding>
           </StackPane>
 
-          <StackPane fx:id="calendarPlaceholder" minWidth="480" prefWidth="480" >
+          <StackPane fx:id="calendarPlaceholder" minWidth="340" prefWidth="340" >
           </StackPane>
 
           <VBox fx:id="todoList" minWidth="230" prefWidth="230" maxWidth="240" SplitPane.resizableWithParent="false">

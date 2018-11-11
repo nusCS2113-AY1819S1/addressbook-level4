@@ -10,6 +10,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportAllCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FinishTodoCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -40,6 +41,7 @@ public class InputCommandSuggestion {
         commandList.insert(ExitCommand.COMMAND_WORD);
         commandList.insert(ExportAllCommand.COMMAND_WORD);
         commandList.insert(FindCommand.COMMAND_WORD);
+        commandList.insert(FinishTodoCommand.COMMAND_WORD);
         commandList.insert(HelpCommand.COMMAND_WORD);
         commandList.insert(HistoryCommand.COMMAND_WORD);
         commandList.insert(ListCommand.COMMAND_WORD);
@@ -139,6 +141,9 @@ public class InputCommandSuggestion {
             return ExportCommand.COMMAND_PARAMETERS;
 
         case FindCommand.COMMAND_WORD:
+            return FindCommand.COMMAND_PARAMETERS;
+
+        case FinishTodoCommand.COMMAND_WORD:
             return FindCommand.COMMAND_PARAMETERS;
 
         case ScheduleCommand.COMMAND_WORD:
