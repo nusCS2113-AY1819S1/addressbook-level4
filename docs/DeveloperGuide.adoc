@@ -534,7 +534,7 @@ image::registerSD.png[width="800"]
 ==== Current Implementation
 The Event Status and Reminder feature consists of two commands periodically executed by `LogicManager`. Specifically, the `UpdateStatusCommand` and the `ReminderCommand`. The automated process is facilitated by the `Timer` and `TimerTask` classes in the `java.util` package. The `TimerTask` `updateEventStatus` has a period of 300,000 ms where it will execute an instance of the `UpdateStatusCommand`, while the `TimerTask` `checkEventReminders` has a period of 36,000,000 ms where it will execute an instance of the `ReminderCommand`.
 
-Both commands initially calls the model#getFilteredEventList() method to obtain the displayed list of events as `lastShownList`. 
+Both commands initially calls the model#getFilteredEventList() method to obtain the displayed list of events as `lastShownList`.
 
 The *UpdateStatusCommand* updates the status of each event in the `lastShownList` using `Status#setStatus()` and `model#updateEvent()`. It then refreshes the displayed list by calling `model#updateFilteredEventList()`.
 
@@ -544,7 +544,7 @@ The following sequence diagram shows how the UpdateStatusCommand works:
 image::Update-sequenceDiagram.png[width="800"]
 
 [NOTE]
-The Event Status feature is supported by the `Status` and `DateTime` field in the `Event`. Events with `DateTime` fields before the current `Date` will assume the `COMPLETED Status`, whereas those with `DateTime` fields after the current `Date` will take on the `UPCOMING Status`. 
+The Event Status feature is supported by the `Status` and `DateTime` field in the `Event`. Events with `DateTime` fields before the current `Date` will assume the `COMPLETED Status`, whereas those with `DateTime` fields after the current `Date` will take on the `UPCOMING Status`.
 
 The *ReminderCommand* checks for the following in each event:
 =====
@@ -590,7 +590,7 @@ image::Reminder-sequenceDiagram.png[width="800"]
 ** Cons: Users cannot unsubscribe to the reminders for events that they have registered for.
 * **Alternative 2:** Allow users to set reminders as they wish.
 ** Pros: Users who do not want reminders can refuse to set reminders.
-** Cons: Users would have to set their own reminders. Some users may choose to save themselves the trouble of setting reminders and miss the events they have registered for. 
+** Cons: Users would have to set their own reminders. Some users may choose to save themselves the trouble of setting reminders and miss the events they have registered for.
 //end::eventStatus&Reminder[]
 
 //tag::sorting[]
@@ -641,7 +641,7 @@ Current version implementation uses logic AND operator for different prefixes.
 ** Cons: With the current implementation of the predicate, scaling will severely affect product performance.
 
 ==== Future enhancement:
-* Search options for keywords contained or for the exact keywords. 
+* Search options for keywords contained or for the exact keywords.
 * Search with  both `logic AND and OR operator` with different prefixes.
 * Search for events within a time range.
 //end::findEnhancement[]
@@ -1006,6 +1006,7 @@ Use Case resumes at step 1.
  +
  Use case ends.
  
+ [none]
  * 6b. User is banned from event.
  [none]
  ** 6c1. Admin requests to remove user from event.
