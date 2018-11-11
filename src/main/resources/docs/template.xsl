@@ -11,6 +11,7 @@
 <th style="text-align:left">Status-Ready</th>
 <th style="text-align:left">Status-On Loan</th>
 <th style="text-align:left">Status-Faulty</th>
+<th style="text-align:left">Lost</th>
     </tr>
     <xsl:for-each select="stocklist/items">
     <tr>
@@ -22,6 +23,7 @@
   <td><xsl:value-of select="statusOnLoan"/></td>
   <td><xsl:value-of select="statusFaulty"/></td>
 </xsl:for-each>
+<td><xsl:value-of select="loststatus/loststatusLost"/></td>
     </tr>
     </xsl:for-each>
   </table>
