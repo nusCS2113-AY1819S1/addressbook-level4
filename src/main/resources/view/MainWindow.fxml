@@ -69,6 +69,13 @@
             </padding>
             <StackPane fx:id="todoListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
+
+          <VBox fx:id="reminderList" minWidth="230" prefWidth="230" maxWidth="240" SplitPane.resizableWithParent="false">
+            <padding>
+              <Insets top="3" right="3" bottom="3" left="3" />
+            </padding>
+            <StackPane fx:id="reminderListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
         </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
