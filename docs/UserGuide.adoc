@@ -17,6 +17,7 @@ endif::[]
 By: `W13-1`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
+Welcome to _FreeTime_!
 
 _FreeTime_ is a desktop app that allows you to *find free timeslots to meet team members for projects*. More specifically, it helps you identify the times during which everyone you want to meet is free.
 _FreeTime_ is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Interested? Jump to the <<Quick Start>> to get started. Enjoy!
@@ -32,7 +33,7 @@ _FreeTime_ is optimized for those who prefer to work with a Command Line Interfa
 .Window of FreeTime during first start-up
 image::StartUpScreenFix.png[width="790"]
 +
-.  If it is the first time you are using the app, follow the instructions on-screen to create your account and press kbd:[Enter] to execute it. +
+.  If it is the first time you are using the app, follow the on-screen instructions to create your account and press kbd:[Enter] to execute it. +
 +
 ****
 Creating account example: +
@@ -56,10 +57,10 @@ image::FreeTimeMainScreenFix.png[width="790"]
 *Command Format*
 
 * Each command has an alias (given in round brackets after the command word) that can be used to replace the full command word. e.g. `find John` is equivaluent to `f John`.
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `register n/NAME`, `NAME` is a parameter which can be used as `register n/John Doe`.
+* Items in square brackets are optional e.g `[p/PHONE_NUMBER][t/TAG]` can be used as `p/12345678 t/CS2101` or as `t/CS2101`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/CS2101`, `t/CS2113T t/W13-1` etc.
+* Parameters can be in any order e.g. if the command specifies `e/EMAIL p/PHONE_NUMBER`, `p/PHONE_NUMBER e/EMAIL` is also acceptable.
 ====
 
 
@@ -140,10 +141,13 @@ command `logout`.
 image::Logout.png[width="790"]
 
 ==== Closing the Application : `exit`
-Command: `exit`
+Closes the _FreeTime_ application.
 
+Command: `exit`
+[NOTE]
 This command closes the application without logging you out. It is recommended to logout before doing this, or the changes
 to your timetable might be lost.
+
 // end::security[]
 
 === Viewing help : `help` (`h`)
@@ -203,6 +207,12 @@ Find persons whose group tags match the specified group tags.
 
 Format: `group TAGNAME [MORE_TAGNAMES]`
 
+****
+* The search is case sensitive. e.g `CS2101` will not match `cs2101`
+* The order of the tagname does not matter. e.g. `CS2101 CS2113T` will match `CS2113T CS2101`
+* Persons matching at least one group tag will be returned (i.e. `OR` search). e.g. `CS2113T CS2101` will return persons with either `CS2101` or `CS2113T` tags
+****
+
 Example:
 
 * `group CS2101` +
@@ -216,7 +226,7 @@ Filters both the others list and the friends list to show only users with both g
 .FreeTime before executing group command
 image::TagCommandDefaultFix.png[width="790"]
 +
-.  After executing `group CS2113T` all the users with the tag `CS2113T` will be filtered and shown on the respective panels.
+.  After executing `group CS2113T`, all the users with the tag `CS2113T` will be filtered and shown on the respective panels.
 +
 .FreeTime after executing group command
 image::TagCommandExecutedPS.png[width="790"]
@@ -336,7 +346,7 @@ image::BeforeAddingFriendsPS.png[width="600"]
 .After adding friend to your friend list.
 image::AfterAddingFriendsPS.png[width="600"]
 +
-. More information about the user is now shown and commands such as `free` can now be used.
+. More information about the user is now shown and commands such as `free` and `select` can now be used.
 // end::friendcommand[]
 
 // tag::unfriendcommand[]
@@ -405,7 +415,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo` (`u`) (DOES NOT WORK IN V1.3)
+=== Undoing previous command : `undo` (`u`)
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
 
@@ -413,7 +423,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the address book's content (`import`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
