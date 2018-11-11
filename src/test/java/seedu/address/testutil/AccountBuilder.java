@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import seedu.address.model.account.Account;
-import seedu.address.model.account.Username;
 import seedu.address.model.account.Password;
+import seedu.address.model.account.Username;
 
 /**
  * A utility class to help with building Item objects.
