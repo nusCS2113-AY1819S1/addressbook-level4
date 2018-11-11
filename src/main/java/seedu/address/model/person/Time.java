@@ -33,12 +33,14 @@ public class Time {
         return test.matches(TIME_VALIDATION_REGEX);
     }
 
-    public int timeToMinutesInDay(){
+    /**
+     * Returns a value of time in minutes passed in the day, with a range of 0 to 1440.
+     */
+    public int timeToMinutesInDay() {
         int convTime = Integer.parseInt(this.value);
-        int hrsToMins = (convTime / 100 )* 60;
+        int hrsToMins = (convTime / 100) * 60;
         int minsToMins = convTime % 100;
         int timeMinsInDay = hrsToMins + minsToMins;
-//        System.out.println(Integer.toString(timeMinsInDay) + " This is the converted time of " + Integer.parseInt(this.value));
         return (timeMinsInDay);
     }
 

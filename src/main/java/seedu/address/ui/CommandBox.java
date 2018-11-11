@@ -50,23 +50,6 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
-        // TODO: figure out how to fix on demand type checking
-        /*
-        String keyInput = keyEvent.getText();
-
-        System.out.println(keyEvent.getCode());
-        if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
-            boolean isCurSubstringValid = ics.removeSearchCharacter();
-            if (isCurSubstringValid) {
-                //setStyleToDefault();
-            }
-        } else if (!keyInput.isEmpty()) {
-            if (!ics.checkValidCharacter(keyInput.charAt(0)))  {
-                //setStyleToIndicateCommandFailure();
-            } else {
-                //setStyleToDefault();
-            }
-        }*/
 
         switch (keyEvent.getCode()) {
         case UP:
@@ -136,8 +119,6 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
-            // setStyleToDefault();
-            // ics.resetSearchCrawler();
 
         } catch (CommandException | ParseException e) {
             initHistory();
@@ -154,7 +135,6 @@ public class CommandBox extends UiPart<Region> {
      */
     private void handleTabPressed() {
         commandTextField.requestFocus();
-        // String prefix = commandTextField.getText();
         String textFieldInput = commandTextField.getText();
         ArrayList<String> listOfCommands = ics.getSuggestedCommands(textFieldInput);
 

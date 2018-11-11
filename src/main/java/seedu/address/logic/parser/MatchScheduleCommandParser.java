@@ -21,7 +21,7 @@ import seedu.address.model.person.Time;
  * Parses input arguments and allows MatchScheduleCommand to find common time slots
  */
 
-public class MatchScheduleCommandParser implements Parser<MatchScheduleCommand>{
+public class MatchScheduleCommandParser implements Parser<MatchScheduleCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the MatchScheduleCommand
      * and returns an MatchScheduleCommand object for execution.
@@ -39,7 +39,7 @@ public class MatchScheduleCommandParser implements Parser<MatchScheduleCommand>{
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchScheduleCommand.MESSAGE_USAGE));
         }
 
-        TheDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        TheDate date = ParserUtil.parseTheDate(argMultimap.getValue(PREFIX_DATE).get());
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
         List<Index> matchScheduleList = ParserUtil.parseMatchScheduleIndex(argMultimap.getAllValues(PREFIX_INDEX));

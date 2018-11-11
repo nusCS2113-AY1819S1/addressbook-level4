@@ -6,4 +6,11 @@
     <email>hans@example</email>
     <address>4th street</address>
     <tagged>friends</tagged>
+    <schedules>
+        <date>09092018</date>
+        <startTime>1230</startTime>
+        <endTime>1430</endTime>
+        <eventName>CS1231 Exam</eventName>
+        <schedulePrint>Date: 09092018 StartTime: 1230 EndTime: 1430 EventName: CS1231 Exam</schedulePrint>
+    </schedules>
 </person>

@@ -110,7 +110,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND
-                + "\n" + WrongCommandSuggestion.NO_SUGGESTION);
+                + "\n" + String.format(WrongCommandSuggestion.SUGGESTION_HEADER, DeleteCommand.COMMAND_WORD));
     }
 
     /**
