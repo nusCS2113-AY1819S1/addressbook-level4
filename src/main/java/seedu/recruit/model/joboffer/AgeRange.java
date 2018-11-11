@@ -22,25 +22,39 @@ public class AgeRange {
 
     public AgeRange(String ageRangeInput) {
         requireNonNull(ageRangeInput);
-        int[] minAndMaxAge = getMinAndMaxAgeFromAgeRange(ageRangeInput);
+        checkArgument(isValidAgeRange(ageRangeInput), MESSAGE_AGE_RANGE_CONSTRAINTS);
+        int [] minAndMaxAge = getMinAndMaxAgeFromAgeRange(ageRangeInput);
         minAge = minAndMaxAge[0];
         maxAge = minAndMaxAge[1];
-        checkArgument(isValidAgeRange(ageRangeInput, minAge, maxAge), MESSAGE_AGE_RANGE_CONSTRAINTS);
         value = ageRangeInput;
     }
 
     /**
      * Returns true if a given string is a valid ageRange.
      */
-    public static boolean isValidAgeRange(String test, int minAge, int maxAge) {
-        return (test.matches(AGE_RANGE_VALIDATION_REGEX) && ((minAge >= 16) || (maxAge <= 60)));
+    public static boolean isValidAgeRange(String test) {
+        //Checks whether input matches the regex to prevent adverse input 19-
+        if (test.matches(AGE_RANGE_VALIDATION_REGEX)) {
+            int[] minAndMaxAge = getMinAndMaxAgeFromAgeRange(test);
+            int minEnteredAge = minAndMaxAge[0];
+            int maxEnteredAge = minAndMaxAge[1];
+
+            return minEnteredAge >= 16 && maxEnteredAge <= 60;
+        }
+        return false;
     }
 
     public static int[] getMinAndMaxAgeFromAgeRange (String test) {
         String[] minAndMaxAgeString = test.split("-");
         int[] minAndMaxAgeInt = new int[2];
-        minAndMaxAgeInt[0] = Integer.parseInt(minAndMaxAgeString[0]);
-        minAndMaxAgeInt[1] = Integer.parseInt(minAndMaxAgeString[1]);
+        if (Integer.parseInt(minAndMaxAgeString[0]) > Integer.parseInt(minAndMaxAgeString[1])) {
+            minAndMaxAgeInt[0] = Integer.parseInt(minAndMaxAgeString[1]);
+            minAndMaxAgeInt[1] = Integer.parseInt(minAndMaxAgeString[0]);
+        }
+        else {
+            minAndMaxAgeInt[0] = Integer.parseInt(minAndMaxAgeString[0]);
+            minAndMaxAgeInt[1] = Integer.parseInt(minAndMaxAgeString[1]);
+        }
 
         return minAndMaxAgeInt;
     }

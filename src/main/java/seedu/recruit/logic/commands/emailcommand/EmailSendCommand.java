@@ -87,7 +87,7 @@ public class EmailSendCommand extends Command {
      * @param emailUtil
      */
     protected void updateRecipientsAndContents(EmailUtil emailUtil) {
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             candidateRecipients = new ArrayList<>(emailUtil.getCandidates());
             jobOfferContents = new ArrayList<>(emailUtil.getJobOffers());
         } else {
@@ -113,7 +113,7 @@ public class EmailSendCommand extends Command {
      * @param emailUtil
      */
     public void generateRecipients(Set<String> recipientEmails, Model model, EmailUtil emailUtil) {
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             //recipients are candidates
             for (Candidate candidateRecipient : candidateRecipients) {
                 recipientEmails.add(candidateRecipient.getEmail().toString());
@@ -174,7 +174,7 @@ public class EmailSendCommand extends Command {
      */
     public String generateSubject(EmailUtil emailUtil) {
         String subject;
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             subject = emailUtil.getEmailSettings().getSubjectCandidateAsRecipient();
         } else {
             subject = emailUtil.getEmailSettings().getSubjectCompanyAsRecipient();

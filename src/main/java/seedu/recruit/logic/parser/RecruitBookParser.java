@@ -78,12 +78,12 @@ public class RecruitBookParser {
      *
      * @param userInput full user input string
      * @param state current Logic State, used for multi step commands
-     * @param emailUtil emailUtil variable passed from model manager to access boolean value isAreRecipientsCandidates
+     * @param emailUtil emailUtil variable passed from model manager to access boolean value getAreRecipientsCandidates
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput, LogicState state, EmailUtil emailUtil, UserPrefs userPref
-    ) throws ParseException {
+    public Command parseCommand(String userInput, LogicState state, EmailUtil emailUtil, UserPrefs userPref)
+            throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (!matcher.matches()) {
