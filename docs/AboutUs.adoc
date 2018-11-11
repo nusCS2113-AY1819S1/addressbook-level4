@@ -23,7 +23,7 @@ Responsibilities:
 * ScriptSetup Feature - Allows user to set their preferred scripts location
 
 '''
-
+//@@author rajdeepsh
 === Rajdeep Singh Hundal
 image::rajdeepsh.png[width="150", align="left"]
 {empty}[https://github.com/rajdeepsh[github]] [<<rajdeepsh#, portfolio>>]
@@ -37,6 +37,7 @@ Responsibilities:
 * Group Feature - Delete Student(s) from Group(s) +
 * Group Feature - Select Group +
 * Development of features and ensuring document correctness
+//@@author
 
 '''
 

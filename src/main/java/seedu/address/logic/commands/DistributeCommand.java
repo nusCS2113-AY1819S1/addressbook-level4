@@ -25,10 +25,10 @@ public class DistributeCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Distribution Success";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Distribute students equally into N groups.\n"
-            + "Parameters: NUMBER OF GROUPS "
-            + PREFIX_NAME + "GROUP NAME "
-            + PREFIX_GENDER + "BALANCED GENDER? "
-            + PREFIX_NATIONALITY + "BALANCED NATIONALITY?\n"
+            + "Parameters: NUMBER_OF_GROUPS "
+            + PREFIX_NAME + "GROUP_NAME "
+            + PREFIX_GENDER + "BALANCED_GENDER? "
+            + PREFIX_NATIONALITY + "BALANCED_NATIONALITY?\n"
             + "Example: " + COMMAND_WORD + " "
             + "5 "
             + PREFIX_NAME + "E1-06- "

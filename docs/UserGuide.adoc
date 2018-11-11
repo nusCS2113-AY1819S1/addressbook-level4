@@ -54,7 +54,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 * There can only be one command word at any time (_i.e. creategroup_) and it must be before all fields else *unknown command* error will be displayed.
 ====
-
+//@@author rajdeepsh
 // tag::group[]
 === Creating a group: `creategroup` `cg`
 Creates a group in the student management system. +
@@ -159,6 +159,7 @@ Examples:
 * `deletegroupstudent g/1 p/1`
 * `dgs g/1 p/1`
 // end::group[]
+//@@author
 
 // tag::distribute[]
 === Distributed all students into _n_ groups with balanced number of Nationality or Gender: `distinto` `di`
