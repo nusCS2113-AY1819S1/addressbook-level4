@@ -358,8 +358,8 @@ The following sequence diagram shows how the create group operation works within
 image::CreateGroupSequenceDiagram.png[width="800"]
 
 
-Step 2. The user inputs `addgroup g/1 p/1` to add the first person in the student management system to the first group
-in the student management system. The `AddressBookParser` detects `addgroup` as a command word will use `AddGroupCommandParser`
+Step 2. The user inputs `addgroup g/1 p/1` to add the first person on the `PersonListPanel` to the first group
+on the `GroupListPanel`. The `AddressBookParser` detects `addgroup` as a command word will use `AddGroupCommandParser`
 to parse the input given. `AddGroupCommandParser` will then create an `AddGroup` object containing all relevant group and person indexes after parsing and pass it to `AddGroupCommand`
 which will then execute adding persons to the specified group in the student management system.
  +
@@ -385,7 +385,7 @@ The following sequence diagram shows how the delete group person operation works
 image::DeleteGroupPersonSequenceDiagram.png[width="800"]
 
 
-Step 4. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word and will use `DeleteGroupCommandParser`
+Step 4. The user inputs `deletegroup 1` to delete the first group on the `GroupListPanel`. The `AddressBookParser` detects `deletegroup` as a command word and will use `DeleteGroupCommandParser`
 to parse the input given. `DeleteGroupCommandParser` will then create an `Index` object after parsing and pass it to `DeleteGroupCommand`
 which will then execute deleting the specified group from the student management system.
  +
