@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//import seedu.address.model.AccountList;
-
 import seedu.address.model.StockList;
-//import seedu.address.model.account.Account;
-
 import seedu.address.model.item.Item;
 
 /**
@@ -33,7 +29,8 @@ public class TypicalItems {
 
     public static final String KEYWORD_MATCHING_AR = "ar"; // A keyword that matches "ar"
 
-    private TypicalItems() {} // prevents instantiation
+    private TypicalItems() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code StockList} with all the typical items.
@@ -51,24 +48,4 @@ public class TypicalItems {
         return new ArrayList<>(Arrays.asList(ARDUINO, RPLIDAR, MOTOR));
     }
 
-
-    /**
-     * Returns an {@code StockList} with all the typical items.
-     * NEEDS WORK
-     */
-
-    /*
-    public static AccountList getTypicalAccountList() {
-        AccountList ab = new AccountList();
-        for (Account account : getTypicalAccounts()) {
-            ab.addAccount(account);
-        }
-        return ab;
-    }
-
-    public static List<Account> getTypicalAccounts() {
-        return new ArrayList<>(Arrays.asList(ARDUINO, RPLIDAR, MOTOR));
-    }
-
-*/
 }

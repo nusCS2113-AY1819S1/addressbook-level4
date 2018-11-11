@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-/*
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -7,7 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_ITEMS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalItems.ARDUINO;
 import static seedu.address.testutil.TypicalItems.RPLIDAR;
-import static seedu.address.testutil.TypicalItems.getTypicalAccountList;
+import static seedu.address.testutil.TypicalAccounts.getTypicalAccountList;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
 
 import java.util.Arrays;
@@ -19,15 +19,18 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.account.Account;
+import seedu.address.model.account.Password;
+import seedu.address.model.account.Username;
+import seedu.address.model.account.UsernameMatchPredicate;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 
-
 public class FindCommandTest {
-/*
+
     private Model model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
     private Model expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
     private CommandHistory commandHistory = new CommandHistory();
@@ -72,7 +75,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleItemsFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz ar Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Ar Rp");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredItemList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -83,8 +86,8 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
 
-  /*  private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
-*/
+
 }
