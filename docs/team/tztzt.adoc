@@ -3,8 +3,6 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets/
 :stylesheet: ../stylesheets/material-blue.css
-include::../UserGuide.adoc[]
-include::../DeveloperGuide.adoc[]
 
 == PROJECT: FinancialPlanner
 
@@ -32,7 +30,7 @@ system for users to label their data for easy access.
 
 == Summary of Contributions
 
-=== `ongoing` *Major Enhancement #1*: added the ability to autocomplete text input
+=== `completed` *Major Enhancement #1*: added the ability to autocomplete text input
 
 ** What it does: displays a popup-box of suggested words to autocomplete with when user inputs parts of a word.
 ** Justification: this feature improves the product significantly because users who may not be familiar with
