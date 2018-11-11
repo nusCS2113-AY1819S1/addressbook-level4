@@ -21,7 +21,6 @@ import seedu.address.model.person.Schedule;
 import seedu.address.model.person.TheDate;
 import seedu.address.model.person.Time;
 
-
 public class MatchScheduleCommand extends Command {
     public static final String COMMAND_WORD = "matchSchedule";
     public static final String COMMAND_ALIAS = "ms";
@@ -53,6 +52,7 @@ public class MatchScheduleCommand extends Command {
     private List<Time> endTimeList;
     private int[] startEndTimeBlock;
     private List<String> availableSlots;
+    private String slots;
 
     private final List<Index> index;
     private final TheDate date;
@@ -131,14 +131,14 @@ public class MatchScheduleCommand extends Command {
                 }
             }
 
+            slots = "";
             //format string slots to print
-            String slots = "";
             for (int i = 0 ; i < this.availableSlots.size(); i++){
                 if (i%2 == 0) {
-                    slots = slots + ("StartTime: " + this.availableSlots.get(i) + " ");
+                    slots = slots + ("Start:" + this.availableSlots.get(i) + " ");
                 }
                 else{
-                    slots = slots + ("EndTime: " + this.availableSlots.get(i) + "\n");
+                    slots = slots + ("End:" + this.availableSlots.get(i) + "\n");
                 }
 
             }

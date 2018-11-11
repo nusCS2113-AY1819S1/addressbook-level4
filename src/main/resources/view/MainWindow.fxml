@@ -47,18 +47,18 @@
         </StackPane>
 
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+          <VBox fx:id="personList" minWidth="340" prefWidth="750" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="3" right="3" bottom="3" left="3" />
             </padding>
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <StackPane fx:id="browserPlaceholder" prefWidth="230" >
-            <padding>
-              <Insets top="3" right="3" bottom="3" left="3" />
-            </padding>
-          </StackPane>
+          <!--<StackPane fx:id="browserPlaceholder" prefWidth="0" >-->
+            <!--<padding>-->
+              <!--<Insets top="3" right="3" bottom="3" left="3" />-->
+            <!--</padding>-->
+          <!--</StackPane>-->
 
           <StackPane fx:id="calendarPlaceholder" minWidth="340" prefWidth="340" >
           </StackPane>
