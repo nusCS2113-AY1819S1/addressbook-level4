@@ -41,7 +41,7 @@ public class ScriptLog {
      * @ errorMessage is the error message that return for not being able to execute the message
      */
     public void write(String lineNumber, String fullCommand, String errorMessage) throws IOException {
-        lineNumber = LINE + lineNumber + COLON + fullCommand + NEXT_LINE;
+        lineNumber = LINE + lineNumber + COLON + fullCommand;
         FileUtil.appendToTextFile(logFile, lineNumber + NEXT_LINE);
         FileUtil.appendToTextFile(logFile, errorMessage + NEXT_LINE + NEXT_LINE);
     }
