@@ -11,7 +11,7 @@
 
 *BookInventory* is a desktop application to assist store managers in managing their books stock supply and engaging netizens who do not frequently visit book stores. This *3 in 1 application* is catered for the bookstore owner, bookstore in-house accountants and students. Bookstore in-house accountants may assist the managers with a separate set of privileges specifically to manage profit margins and make subsequent plans. Lastly, students may access the app to browse the book of their choice and issue requests to the store owners to express interest.
 
-This application is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). In this paper, I will bring you through my thought process for each implementation as well as the implementation procedure.
+This application is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). In this paper, I will bring you through my thought process for each implementation as well as elaborating on how each implementation is done.
 
 == Summary of contributions
 
