@@ -31,7 +31,7 @@ public class ExportManager implements Export {
         this.exportPath = filePath;
     }
 
-    public Path getExportPath() {
+    public Path getExportFilePath() {
         return exportPath;
     }
 
