@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<summarymap>
+    <summaryMap>
+        <entry>
+            <key>18-9-2018</key>
+            <value>
+                <date>18-9-2018</date>
+                <totalExpense>-63.80</totalExpense>
+                <totalIncome>+0</totalIncome>
+                <total>-63.80</total>
+            </value>
+        </entry>
+        <entry>
+            <key>18-9-2008</key>
+            <value>
+                <date>18-9-2008</date>
+                <totalExpense>-7.05</totalExpense>
+                <totalIncome>+0</totalIncome>
+                <total>-7.05</total>
+            </value>
+        </entry>
+    </summaryMap>
+</summarymap>

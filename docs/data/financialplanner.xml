@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<financialplanner>
+    <records>
+        <name>Part Time Model Income</name>
+        <date>05-11-2018</date>
+        <moneyFlow>+500.0</moneyFlow>
+        <tagged>income</tagged>
+    </records>
+    <records>
+        <name>Breakfast Prata</name>
+        <date>05-11-2018</date>
+        <moneyFlow>-5.0</moneyFlow>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Lunch Ramen</name>
+        <date>05-11-2018</date>
+        <moneyFlow>-7.0</moneyFlow>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Dinner Mala</name>
+        <date>05-11-2018</date>
+        <moneyFlow>-10.0</moneyFlow>
+        <tagged>mala</tagged>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Sell old phone</name>
+        <date>06-11-2018</date>
+        <moneyFlow>+300.0</moneyFlow>
+        <tagged>sell</tagged>
+    </records>
+    <records>
+        <name>Breakfast Macs</name>
+        <date>06-11-2018</date>
+        <moneyFlow>-6.0</moneyFlow>
+        <tagged>macs</tagged>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Lunch Jifan</name>
+        <date>06-11-2018</date>
+        <moneyFlow>-6.0</moneyFlow>
+        <tagged>techno</tagged>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Dinner Techno</name>
+        <date>05-11-2018</date>
+        <moneyFlow>-6.0</moneyFlow>
+        <tagged>techno</tagged>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Income from tuition</name>
+        <date>07-11-2018</date>
+        <moneyFlow>+50.0</moneyFlow>
+        <tagged>income</tagged>
+        <tagged>tuition</tagged>
+    </records>
+    <records>
+        <name>Lunch Mala</name>
+        <date>07-11-2018</date>
+        <moneyFlow>-8.0</moneyFlow>
+        <tagged>mala</tagged>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Dinner Mala</name>
+        <date>07-11-2018</date>
+        <moneyFlow>-9.0</moneyFlow>
+        <tagged>mala</tagged>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>New iPhone</name>
+        <date>07-11-2018</date>
+        <moneyFlow>-900.0</moneyFlow>
+        <tagged>phone</tagged>
+    </records>
+    <records>
+        <name>Breakfast Chicken Noodle</name>
+        <date>08-11-2018</date>
+        <moneyFlow>-2.0</moneyFlow>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Lunch Mala</name>
+        <date>08-11-2018</date>
+        <moneyFlow>-10.0</moneyFlow>
+        <tagged>mala</tagged>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Dinner Terrace</name>
+        <date>08-11-2018</date>
+        <moneyFlow>-5.0</moneyFlow>
+        <tagged>terrace</tagged>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Strike 4D</name>
+        <date>08-11-2018</date>
+        <moneyFlow>+128.0</moneyFlow>
+        <tagged>lottery</tagged>
+    </records>
+    <records>
+        <name>Allowance from Mum</name>
+        <date>29-10-2018</date>
+        <moneyFlow>+1200.0</moneyFlow>
+        <tagged>allowance</tagged>
+    </records>
+    <records>
+        <name>Present for girlfriend</name>
+        <date>30-10-2018</date>
+        <moneyFlow>-500.0</moneyFlow>
+        <tagged>girlfriend</tagged>
+    </records>
+    <records>
+        <name>Buffet Dinner with Mum</name>
+        <date>01-11-2018</date>
+        <moneyFlow>-90.0</moneyFlow>
+        <tagged>food</tagged>
+    </records>
+    <records>
+        <name>Parttime Super Snack</name>
+        <date>10-11-2018</date>
+        <moneyFlow>+103</moneyFlow>
+        <tagged>job</tagged>
+    </records>
+</financialplanner>
