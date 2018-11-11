@@ -1,21 +1,26 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.AddressBookBuilder;
 
 //@@author jitwei98
 /**
@@ -23,25 +28,38 @@ import seedu.address.model.UserPrefs;
  */
 public class ImportCommandTest {
 
+    private static final int PERSONS_ADDED = 2;
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private Model model;
     private Model expectedModel;
     private Path importFilePath;
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(new AddressBookBuilder().build(), new UserPrefs());
+        expectedModel = new ModelManager(new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build(),
+                new UserPrefs());
         importFilePath = Paths.get("src", "test", "data", "sandbox", "testImportCommand.xml");
     }
 
     @Test
-    public void execute() throws IOException {
-        model.exportFilteredAddressBook(importFilePath);
+    public void constructor_nullImportFilePath_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        new ImportCommand(null);
+    }
 
-        String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_SUCCESS, importFilePath);
-        ImportCommand expectedCommand = new ImportCommand(importFilePath);
+    @Test
+    public void execute() throws IOException, CommandException {
+        expectedModel.exportFilteredAddressBook(importFilePath);
+        CommandResult commandResult = new ImportCommand(importFilePath).execute(model, new CommandHistory());
+        String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_SUCCESS, PERSONS_ADDED);
 
-        assertCommandSuccess(expectedCommand, model, new CommandHistory(), expectedMessage, expectedModel);
+        assertEquals(expectedMessage, commandResult.feedbackToUser);
+        // TODO: Compare the whole addressbook instead of just the filteredPersonList()
+        // assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
     }
 
     @Test
