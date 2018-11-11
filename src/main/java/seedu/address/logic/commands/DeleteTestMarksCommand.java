@@ -32,7 +32,10 @@ public class DeleteTestMarksCommand extends Command {
             + "Example: " + COMMAND_WORD_2 + " " + PREFIX_TEST_NAME + "cs2113quiz1 ";
 
 
-    public static final String MESSAGE_NOT_FOUND_TEST = "%1$s is not Found please add first.";
+    public static final String MESSAGE_NOT_FOUND_TEST = "this test is not found in the system please add first,"
+            + " also the test name"
+            + " should not be empty";
+    public static final String MESSAGE_EMPTY_TEST = "The test name cannot be empty.";
     public static final String MESSAGE_SUCCESSFUL_DELETE_TEST = "%1$s have been successfully delete from all students";
     public static final String MESSAGE_NO_STUDENT = "No student in list to delete tests from";
     private final String testName;

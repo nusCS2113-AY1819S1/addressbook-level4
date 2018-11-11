@@ -99,11 +99,15 @@ public class AddTestMarksCommand extends Command {
                 } else if (checked && !duplicate) {
                     model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                     throw new CommandException(MESSAGE_PERSONNAME_NOT_FOUND);
+                } else if(checked && duplicate) {
+                    model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                    throw new CommandException(MESSAGE_PERSON_DUPLICATE_FOUND);
                 }
             } else {
                 return insertIntoPerson(personListName.get(0), model);
             }
         }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(
                 String.format(MESSAGE_PERSONNAME_NOT_FOUND, model.getFilteredPersonList().size()));
