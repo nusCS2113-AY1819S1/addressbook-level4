@@ -447,12 +447,12 @@ image::statisticSequenceDiagram.png[width="800"]
 
 ===== Aspect: How stock command is implemented
 
-* **Alternative 1 (current choice):** Increases quantity in the Quantity Class.
-** Pros: Code is more cohesive.
-** Cons: Adds more code to Quantity Class.
-* **Alternative 2:** Replace quantity in the Book Class.
-** Pros: Does not need to edit Quantity Class.
-** Cons: Code becomes less cohesive.
+* **Alternative 1 (current choice):** Singleton Class
+** Pros: Easy to implement.
+** Cons: Hard to test.
+* **Alternative 2:** Dependency Injection.
+** Pros: Decouples dependencies but hard to implement.
+** Cons: Easier to test.
 // end::statistic[]
 
 // tag::dataencryption[]

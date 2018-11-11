@@ -91,6 +91,27 @@ Increase the quantity available for the book with the corresponding ISBN13 by 5.
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+// tag::statistic[]
+=== Statistic feature
+==== Current Implementation
+The statistic feature is facilitated by a singleton class StatisticCenter. It is called directly from many existing commands and is stored in Json format.
+
+The following sequence diagram shows how the StatisticCenter interact with sell command:
+
+image::statisticSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How stock command is implemented
+
+* **Alternative 1 (current choice):** Singleton Class
+** Pros: Easy to implement.
+** Cons: Hard to test.
+* **Alternative 2:** Dependency Injection.
+** Pros: Decouples dependencies but hard to implement.
+** Cons: Easier to test.
+// end::statistic[]
+
 // tag::stockcommand[]
 === Stock feature
 ==== Current implementation
