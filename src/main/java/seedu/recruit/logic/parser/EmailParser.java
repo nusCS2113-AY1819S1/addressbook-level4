@@ -42,7 +42,7 @@ public class EmailParser {
      * @param commandWord name of the command taken from RecruitBookParser
      * @param arguments arguments of the command taken from RecruitBookParser
      * @param state logic state
-     * @param emailUtil emailUtil to get boolean value of isAreRecipientsCandidates.
+     * @param emailUtil emailUtil to get boolean value of getAreRecipientsCandidates.
      * @return the email command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -93,7 +93,7 @@ public class EmailParser {
         //Email command set contents step. Allow certain commands depending whether
         //recipients are candidates or job offers.
         } else if (state.nextCommand.equals(EmailContentsCommand.COMMAND_LOGIC_STATE)
-                && emailUtil.isAreRecipientsCandidates()) {
+                && emailUtil.getAreRecipientsCandidates()) {
             switch (commandWord) {
 
             case ListCompanyCommand.COMMAND_WORD:
@@ -124,7 +124,7 @@ public class EmailParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } else if (state.nextCommand.equals(EmailContentsCommand.COMMAND_LOGIC_STATE)
-                        && !emailUtil.isAreRecipientsCandidates()) {
+                        && !emailUtil.getAreRecipientsCandidates()) {
             switch (commandWord) {
 
             case ListCandidateCommand.COMMAND_WORD:

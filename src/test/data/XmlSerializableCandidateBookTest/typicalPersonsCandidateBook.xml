@@ -8,8 +8,8 @@
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
-        <job>Waiter</job>
-        <education>OLEVELS</education>
+        <job>Accountant</job>
+        <education>PhD</education>
         <salary>1000</salary>
         <tagged>friends</tagged>
     </candidates>
@@ -18,11 +18,11 @@
         <gender>M</gender>
         <age>32</age>
         <phone>98765432</phone>
-        <email>johnd@example.com</email>
+        <email>benson@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
-        <job>Waiter</job>
-        <education>OLEVELS</education>
-        <salary>1000</salary>
+        <job>Bartender</job>
+        <education>MASTER</education>
+        <salary>2000</salary>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </candidates>
@@ -31,22 +31,22 @@
         <gender>M</gender>
         <age>33</age>
         <phone>95352563</phone>
-        <email>heinz@example.com</email>
+        <email>carl@example.com</email>
         <address>wall street</address>
-        <job>Waiter</job>
-        <education>OLEVELS</education>
-        <salary>1000</salary>
+        <job>Cashier</job>
+        <education>BACHELOR</education>
+        <salary>3000</salary>
     </candidates>
     <candidates>
         <name>Daniel Meier</name>
         <gender>M</gender>
         <age>34</age>
         <phone>87652533</phone>
-        <email>cornelia@example.com</email>
+        <email>daniel@example.com</email>
         <address>10th street</address>
-        <job>Waiter</job>
-        <education>OLEVELS</education>
-        <salary>1000</salary>
+        <job>Dancer</job>
+        <education>DIPLOMA</education>
+        <salary>4000</salary>
         <tagged>friends</tagged>
     </candidates>
     <candidates>
@@ -54,32 +54,32 @@
         <gender>F</gender>
         <age>35</age>
         <phone>9482224</phone>
-        <email>werner@example.com</email>
+        <email>elle@example.com</email>
         <address>michegan ave</address>
-        <job>Waiter</job>
-        <education>OLEVELS</education>
-        <salary>1000</salary>
+        <job>Engineer</job>
+        <education>ALEVELS</education>
+        <salary>5000</salary>
     </candidates>
     <candidates>
         <name>Fiona Kunz</name>
         <gender>F</gender>
         <age>36</age>
         <phone>9482427</phone>
-        <email>lydia@example.com</email>
+        <email>fiona@example.com</email>
         <address>little tokyo</address>
-        <job>Waiter</job>
-        <education>OLEVELS</education>
-        <salary>1000</salary>
+        <job>Florist</job>
+        <education>NLEVELS</education>
+        <salary>6000</salary>
     </candidates>
     <candidates>
         <name>George Best</name>
         <gender>M</gender>
         <age>37</age>
         <phone>9482442</phone>
-        <email>anna@example.com</email>
+        <email>george@example.com</email>
         <address>4th street</address>
-        <job>Waiter</job>
+        <job>Gardener</job>
         <education>OLEVELS</education>
-        <salary>1000</salary>
+        <salary>7000</salary>
     </candidates>
 </candidatebook>

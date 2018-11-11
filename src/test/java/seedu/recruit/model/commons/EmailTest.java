@@ -1,11 +1,10 @@
-package seedu.recruit.model.candidate;
+package seedu.recruit.model.commons;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.recruit.model.commons.Email;
 import seedu.recruit.testutil.Assert;
 
 public class EmailTest {

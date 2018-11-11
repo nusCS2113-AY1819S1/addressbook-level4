@@ -100,7 +100,7 @@ public class BlacklistCommand extends Command {
     /**
      * Returns the original candidate but the tags have been changed to "BLACKLISTED"
      */
-    Candidate insertBlacklistTag(Candidate blacklistee) {
+    public static Candidate insertBlacklistTag(Candidate blacklistee) {
         assert blacklistee != null;
 
         Set<Tag> tags = new HashSet<Tag>();
@@ -114,7 +114,7 @@ public class BlacklistCommand extends Command {
     /**
      * Returns the candidate but the "BLACKLISTED" tag has been removed
      */
-    Candidate removeBlacklistTag(Candidate blacklistee) {
+    public static Candidate removeBlacklistTag(Candidate blacklistee) {
         assert blacklistee != null;
 
         Set<Tag> tags = new HashSet<Tag>();

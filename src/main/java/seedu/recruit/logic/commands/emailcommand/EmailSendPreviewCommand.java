@@ -34,7 +34,7 @@ public class EmailSendPreviewCommand extends EmailSendCommand {
 
         //Generate content (bodyText)
         StringBuilder bodyText = new StringBuilder();
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             bodyText.append(generateContentWhenRecipientsAreCandidates(emailUtil));
             emailPreview.append("To: " + recipientEmails.toString() + "\n");
             emailPreview.append("Subject: " + subject + "\n");

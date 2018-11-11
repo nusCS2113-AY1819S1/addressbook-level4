@@ -136,7 +136,7 @@ public class XmlAdaptedJobOffer {
                     AgeRange.class.getSimpleName()));
         }
 
-        if (!AgeRange.isValidAgeRange(ageRange, minAge, maxAge)) {
+        if (!AgeRange.isValidAgeRange(ageRange)) {
             throw new IllegalValueException(AgeRange.MESSAGE_AGE_RANGE_CONSTRAINTS);
         }
 

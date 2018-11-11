@@ -164,7 +164,7 @@ public class EditJobDetailsCommand extends Command {
         /**
          * Copy constructor.
          */
-        public EditJobOfferDescriptor(EditJobDetailsCommand.EditJobOfferDescriptor toCopy) {
+        public EditJobOfferDescriptor(EditJobOfferDescriptor toCopy) {
             setCompanyName(toCopy.companyName);
             setJob(toCopy.job);
             setGender(toCopy.gender);
