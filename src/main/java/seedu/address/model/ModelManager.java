@@ -36,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private StateHistoryList stateHistoryList;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, eventList and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyEventList eventList, UserPrefs userPrefs) {
         super();
