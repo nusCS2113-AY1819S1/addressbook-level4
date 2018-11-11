@@ -6,47 +6,44 @@
 == PROJECT: NUSSU Connect
 
 
-== Introduction
+== Introduction and Overview
+NUSSU Connect is a CLI application created by a team of four and this Portfolio is a documentation
+of the contributions that I have made during the design of this application.
 
-This Portfolio is a documentation of the contributions that I have made for this project, titled NUSSU Connect.
+It is an application that mainly caters to executive committee members of the NUS Student Union (NUSSU).
+Being a part of many projects and initiatives, this application aims to let the exco members manage their
+budgets, expenses, human resource allocation and contacts all in a single application so that they could complete
+their tasks with high efficiency.
 
-NUSSU Connect is a CLI application mainly targeted towards executive committee (exco) members of the NUS Student Union (NUSSU).
-Being representatives of the NUS student body, the exco members has a part in many projects and initiatives.
-This application therefore aims to help them perform some of these miscellaneous tasks that often comes from these projects much more easily.
-
-To do so, the application comes with several features. This includes budgets/expenses management, human resource allocation and managing of important contacts.
-The original source code of this project is the https://github.com/se-edu/[AddressBook-Level4] project created by SE-EDU initiative, and hence,
-it also comes with some features from the AB4 project.
 
 == Summary of contributions
 
-In this project, my main contribution is the Search Pruning feature. The main purpose of this feature is to
+In this project, my main contribution is in the Search Pruning feature and the main purpose of this feature is to
 ease the process of managing a large list of contacts.
 Further details about my contributions will be explained in this section.
 
-* *Major enhancement*: added *the ability to prune the list of contacts with find and undosearch commands*
+* *Major enhancement*: Added the ability to prune the list of contacts with `find` and `undofind` commands.
 
-** What it does: allows users to search and reduce the size of the list of contacts in discrete steps.
+** What it does: Allows users to search and reduce the size of the displayed list of contacts in discrete steps.
 
-** Justification: When managing several large scale projects/events, users will find themselves in a situation
-where they have to manage numerous of contacts. This includes student volunteers, sponsors, key organizers etc. Hence, a search pruning feature
-allows the users to filter the list of contacts intuitively and help them retrieve the relevant results more easily. In the event that users
-made a mistake in their search, users can utilize the `undosearch` command to rectify their mistake.
+** Justification: Being a large organization that is in charge of many events and projects, NUSSU exco will most likely be required to keep track of
+a large list of important contacts, and it will be time-consuming to locate specific contact information from the list.
+Hence, a search pruning feature allows the users to narrow the search space in discrete steps and help them
+retrieve the relevant contact information much more efficiently.
 
 ** Highlights: This enhancement is mainly created from scratch with some help from documentations on how the `Predicate` class works.
-This enhancement was also created with re-usability in mind and any form of filtering done with `Predicate` will be able to
+This enhancement was also created with re-usability in mind and any form of filtering done with `Predicate` class will be able to
 utilize this feature.
 
-* *Minor enhancement*: added the feature that allows users to see a history of keywords they used in their search when utilizing the Search Pruning feature.
+* *Minor enhancement*: Added the feature that allows users to see a history of keywords they used in their search when utilizing the Search Pruning feature.
 
-** What it does: Every time when the user performs a search, the command result box will display the list of keywords describing how the current displayed list is being filtered.
+** What it does: Every time a user performs a search, the command result box will display the list of keywords describing how the current displayed list is being filtered.
 
-** Justification: When utilizing the search pruning feature, the users might forget the keywords that they have specified in the past. Therefore, this feature simply shows
-the keywords that were previously executed by the user.
+** Justification: The users might forget keywords used previously during Search Pruning.
 
 * *Minor enhancement*: Improved find command by introducing searching by tags and exclude functionality
 
-** What it does: Searching by tags allows users to filter the contacts according to the tags (extra description). Exclude functionality allows users to remove
+** What it does: Searching by tags allows users to filter the contacts according to the tagged description of each contact. Exclude functionality allows users to remove
 unwanted results from their search.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=ladderinc[Overview]]
@@ -54,28 +51,27 @@ unwanted results from their search.
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.1`, `v1.2` and `v1.2.1` (3 releases) on GitHub
+*** Managed releases `v1.1`, `v1.2`, `v1.2.1` and `v1.3` (4 releases) on GitHub.
 *** Managed Milestones and Deadlines of the project.
 
 ** Documentation:
-*** Changing site-wide documentation settings in several files.
-*** Minor tweaks to ReadMe, UserGuide and DeveloperGuide to meet the module requirements. (Pull Requests https://github.com[#12], https://github.com[#14], https://github.com[#23])
-*** Provided teammates with non-trivial PR reviews (Pull Requests https://github.com[#25], https://github.com[#76])
+*** Minor tweaks to ReadMe, UserGuide and DeveloperGuide to meet the module requirements.
+*** Provided teammates with non-trivial PR reviews (Pull Requests https://github.com/CS2113-AY1819S1-F09-1/main/pull/25[#25], https://github.com/CS2113-AY1819S1-F09-1/main/pull/80[#80], https://github.com/CS2113-AY1819S1-F09-1/main/pull/81[#81])
 
 ** Tools:
 *** Integrated Coveralls to the team repository
 
 **  Others:
-*** Search Pruning Feature reused in Login/Logout feature of the application.
+*** Search Pruning Feature reused in Login/Logout feature of this application. https://github.com/CS2113-AY1819S1-F09-1/main/blob/master/src/main/java/seedu/address/logic/commands/LoginCommand.java[LoginCommand.java]
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=find]
+include::../UserGuide.adoc[tag=searchpruningtitle]
+include::../UserGuide.adoc[tag=searchpruningguide]
 
 == Contributions to the Developer Guide
 
