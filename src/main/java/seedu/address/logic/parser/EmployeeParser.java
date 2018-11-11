@@ -32,8 +32,6 @@ import seedu.address.logic.parser.exceptions.InvalidPrivilegeException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
-//@@author: IcedCoffeeBoy
-
 /**
  * Parses user input.
  */
