@@ -1829,7 +1829,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 12. Use case: Edit an existing normal limit [Oscar]
+=== 14. Use case: Edit an existing normal limit [Oscar]
 
 *MSS*
 
@@ -1867,7 +1867,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 14. Use case: Delete an existing limit [Oscar]
+=== 15. Use case: Delete an existing limit [Oscar]
 
 *MSS*
 
@@ -1900,7 +1900,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 15. Use case: Add a monthly limit [Oscar]
+=== 16. Use case: Add a monthly limit [Oscar]
 
 *MSS*
 
@@ -1929,7 +1929,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 16. Use case: Edit the monthly limit [Oscar]
+=== 17. Use case: Edit the monthly limit [Oscar]
 
 *MSS*
 
@@ -1958,7 +1958,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 17. Use case: Delete the monthly limit [Oscar]
+=== 18. Use case: Delete the monthly limit [Oscar]
 
 *MSS*
 
@@ -1981,7 +1981,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 18. Use case: Check all the existing limits [Oscar]
+=== 19. Use case: Check all the existing limits [Oscar]
 
 *MSS*
 
@@ -1991,7 +1991,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== 19. Use case: Export expenses into Excel file [Linh Chi]
+=== 20. Use case: Export expenses into Excel file [Linh Chi]
 
 *MSS*
 
@@ -2011,7 +2011,7 @@ Use case ends.
 ** Use case resumes at step 2.
 
 [discrete]
-==== 20. Use case: Import the Excel file into Financial Planner. [Linh Chi]
+==== 21. Use case: Import the Excel file into Financial Planner. [Linh Chi]
 
 *MSS*
 
@@ -2028,7 +2028,7 @@ Use case ends.
 
 
 [discrete]
-=== 21. Use case: Archive the records data into Excel file. [Linh Chi]
+=== 22. Use case: Archive the records data into Excel file. [Linh Chi]
 
 *MSS*
 
@@ -2048,14 +2048,15 @@ Use case ends.
 ** Use case resumes at step 2.
 
 [discrete]
-=== 22. Use case: See monthly financial activity
+=== 23. Use case: See monthly financial activity
 
 *MSS*
 
 1. User requests to see monthly financial activity.
 2. Savee returns a report on monthly financial activity.
+
 [discrete]
-=== 23. Use case: Freely edit expenses tags
+=== 24. Use case: Freely edit expenses tags
 
 *MSS*
 
@@ -2084,7 +2085,7 @@ Use case ends.
 ** FinancialPlanner adds tag to entry.
 
 [discrete]
-=== 24. View bank balance
+=== 25. View bank balance
 
 *MSS*
 
@@ -2102,7 +2103,7 @@ Use case ends.
 ** Use case resumes at 2.
 
 [Discrete]
-=== 25. Adjust configurations
+=== 26. Adjust configurations
 *MSS*
 
 1.  User requests to change application configurations.
