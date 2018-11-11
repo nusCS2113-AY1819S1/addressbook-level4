@@ -15,7 +15,7 @@ import seedu.address.security.SecurityAuthenticationException;
 public class HistoryCommand extends Command {
 
     public static final String COMMAND_WORD = "history";
-    public static final String COMMAND_WORD_ALIAS = "g";
+    public static final String COMMAND_WORD_ALIAS = "hi";
     public static final String MESSAGE_SUCCESS = "Entered commands (from most recent to earliest):\n%1$s";
     public static final String MESSAGE_NO_HISTORY = "You have not yet entered any commands.";
 

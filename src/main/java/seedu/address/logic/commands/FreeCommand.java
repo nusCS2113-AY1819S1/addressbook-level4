@@ -19,6 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class FreeCommand extends Command {
     public static final String COMMAND_WORD = "free";
+    public static final String COMMAND_WORD_ALIAS = "fr";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays all common free timeslots between your timetable and the timetables of all selected people.\n"
