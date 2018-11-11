@@ -14,7 +14,6 @@ import guitests.guihandles.HelpWindowHandle;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.StatusBarFooter;
 
 /**
@@ -42,11 +41,6 @@ public class HelpCommandSystemTest extends AddressBookSystemTest {
         getPersonListPanel().click();
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowOpen();
-
-        //Temporarily removed this because it has always failed on @linnnruoo's laptop
-        //getBrowserPanel().click();
-        //getMainMenu().openHelpWindowUsingAccelerator();
-        //assertHelpWindowNotOpen();
 
         //use menu button
         getMainMenu().openHelpWindowUsingMenu();
