@@ -5,7 +5,7 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Date;
+import seedu.address.model.person.TheDate;
 import seedu.address.model.person.EventName;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Time;
@@ -62,12 +62,12 @@ public class XmlAdaptedSchedule {
      */
     public Schedule toModelType() throws IllegalValueException {
         if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TheDate.class.getSimpleName()));
         }
-        if (!Date.isValidDate(date)) {
-            throw new IllegalValueException(Date.MESSAGE_DATE_CONSTRAINTS);
+        if (!TheDate.isValidDate(date)) {
+            throw new IllegalValueException(TheDate.MESSAGE_DATE_CONSTRAINTS);
         }
-        final Date modelDate = new Date(date);
+        final TheDate modelDate = new TheDate(date);
 
         if (startTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));

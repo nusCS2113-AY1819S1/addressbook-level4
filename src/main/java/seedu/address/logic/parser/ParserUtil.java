@@ -16,7 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Filetype;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
+import seedu.address.model.person.TheDate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EventName;
 import seedu.address.model.person.Name;
@@ -212,13 +212,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseDate(String date) throws ParseException {
+    public static TheDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
+        if (!TheDate.isValidDate(trimmedDate)) {
+            throw new ParseException(TheDate.MESSAGE_DATE_CONSTRAINTS);
         }
-        return new Date(trimmedDate);
+        return new TheDate(trimmedDate);
     }
 
     /**

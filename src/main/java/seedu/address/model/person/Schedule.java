@@ -14,7 +14,7 @@ public class Schedule {
     public final String schedulePrint;
 
     // Date fields
-    private final Date date;
+    private final TheDate date;
 
     // Time fields
     private final Time startTime;
@@ -26,7 +26,7 @@ public class Schedule {
     /**
      * Every field must be present and not null.
      */
-    public Schedule(Date date, Time startTime, Time endTime, EventName eventName){
+    public Schedule(TheDate date, Time startTime, Time endTime, EventName eventName){
         requireAllNonNull(date, startTime, endTime, eventName);
         this.date = date;
         this.startTime = startTime;
@@ -47,7 +47,7 @@ public class Schedule {
         return true;
     }
 
-    public Date getDate() {
+    public TheDate getDate() {
         return date;
     }
 
