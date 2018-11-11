@@ -15,12 +15,12 @@ public class FinalClubBudget {
     private final ClubName clubname;
 
     // Data fields
-    private final int allocatedBudget;
+    private final double allocatedBudget;
 
     /**
      * Every field must be present and not null.
      */
-    public FinalClubBudget(ClubName clubname, int allocatedBudget) {
+    public FinalClubBudget(ClubName clubname, double allocatedBudget) {
         requireAllNonNull(clubname, allocatedBudget);
         this.clubname = clubname;
         this.allocatedBudget = allocatedBudget;
@@ -30,7 +30,7 @@ public class FinalClubBudget {
         return clubname;
     }
 
-    public int getAllocatedBudget() {
+    public double getAllocatedBudget() {
         return allocatedBudget;
     }
 

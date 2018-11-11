@@ -4,6 +4,7 @@ import java.util.List;
 
 import seedu.address.model.Model;
 
+import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
 
 /**
@@ -26,7 +27,7 @@ public class BudgetCalculationManager {
      * @return true if ClubBudgetElementsBook is empty
      */
     public boolean isClubBudgetElementsBookEmpty(Model model) {
-        List<FinalClubBudget> listOfBudgets = model.getFilteredClubBudgetsList();
-        return (listOfBudgets.size() == 0);
+        List<ClubBudgetElements> listOfClubs = model.getFilteredClubsList();
+        return (listOfClubs.size() == 0);
     }
 }

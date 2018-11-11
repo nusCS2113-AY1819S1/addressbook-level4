@@ -289,17 +289,17 @@ Given below is an example usage scenario and how the login mechanism behaves at 
 demonstrates the flow of operation and interaction between the `Logic` and `Model` component in the login mechanism.
 Specifically, the diagram shows what happens when the user inputs the correct login credentials.
 
-image::LoginSequenceDiagram.png[width="800"]
+image::LoginSequenceDiagram.png[width="700"]
 
-Step 1. The user launches the application for the first time. The `filteredLoginDetails` object will be initialized with
+Step 1. You launch the application for the first time. The `filteredLoginDetails` object will be initialized with
 a list of all the accounts in `LoginBook`.
 
 image::InitialLoginBookList.PNG[width="240"]
 
-Step 2. The user executes `login A1234568M zaq1xsw2cde3 member` command in the input box that matches an account in
+Step 2. You execute `login A1234568M zaq1xsw2cde3 member` command in the input box that matches an account in
 `LoginBook`. `LogicManager` then calls `ParseCommand(login A1234568M zaq1xsw2cde3 member)` in `AddressBookParser`.
 
-image::CorrectIdPasswordRole.PNG[width="300"]
+image::CorrectIdPasswordRole.PNG[width="200"]
 
 Step 3. `AddressBookParser` instantiates the `LoginUserIdPasswordRoleCommandParser` object and simultaneously calls the `parse(args)` method, returning
 an `LoginUserIdPasswordRoleCommand` object with the user input, parsed, to `AddressBookParser` and `LogicManager`.
@@ -310,7 +310,7 @@ calls `updateFilteredLoginDetailsList(updatedIdPredicate)` in `Model` with the c
 Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, which then filters out accounts whose user Id is a
 mismatch with updatedIdPredicate. `filteredLoginDetails` is updated as shown below.
 
-image::ParseCorrectLoginDetailList.PNG[width="300"]
+image::ParseCorrectLoginDetailList.PNG[width="200"]
 
 Step 6. `LoginUserIdPasswordRoleCommand` calls `updateFilteredLoginDetailsList(updatedPassPredicate)` in `Model` with the
 computed predicate from user password field input.
@@ -318,7 +318,7 @@ computed predicate from user password field input.
 Step 7. `Model` calls `setPredicate(updatedPasswordPredicate)` in `FilteredList`, which then further filters out accounts
 whose password is a mismatch with updatedPasswordPredicate. `filteredLoginDetails` is further updated as shown below.
 
-image::ParseCorrectLoginDetailList.PNG[width="300"]
+image::ParseCorrectLoginDetailList.PNG[width="200"]
 
 Step 8. `LoginUserIdPasswordRoleCommand` calls `updateFilteredLoginDetailsList(updatedRolePredicate)` in `Model` with the
 computed predicate from user role field input.
@@ -326,7 +326,7 @@ computed predicate from user role field input.
 Step 9. `Model` calls `setPredicate(updatedRolePredicate)` in `FilteredList`, which then further filters out accounts
 whose role is a mismatch with updatedRolePredicate. `filteredLoginDetails` is further updated as shown below.
 
-image::ParseCorrectLoginDetailList.PNG[width="300"]
+image::ParseCorrectLoginDetailList.PNG[width="200"]
 
 [NOTE]
 After step 9 is done, there should only be one account left in the list, assuming that the user input the correct login
@@ -334,27 +334,27 @@ details. As the loginbook does not allow duplicate accounts with the same user I
 not be two or more accounts left in the list.
 
 [NOTE]
-In step 2, if the user executes `login A1234566M zaq1xsw2cde janitor` command instead, the application will continue with steps
+In step 2, if you execute `login A1234566M zaq1xsw2cde janitor` command instead, the application will continue with steps
 2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
 list as shown in the image below.
 
-image::WrongIdPasswordRole.PNG[width="300"]
-image::WrongIdOrPasswordOrRoleList.PNG[width="300"]
+image::WrongIdPasswordRole.PNG[width="200"]
+image::WrongIdOrPasswordOrRoleList.PNG[width="200"]
 
 [NOTE]
-In step 2, if the user does not type in anything and gives a blank input for the login command instead, the application will throw a new ParseException
-and consider the login attempt as unsuccessful and initiate a new pop-up window asking the user for input of login
+In step 2, if you give a blank input for the login command instead, the application will throw a new ParseException
+and consider the login attempt as unsuccessful and initiate a new pop-up window asking you for input of login
 credentials again, as shown in the image below.
 
-image::BlankLoginInput.PNG[width="300"]
+image::BlankLoginInput.PNG[width="200"]
 
 [NOTE]
-In step 2, if the user types in a string of login input that has either the id, password or role missing instead, the application will
-throw ParseException, consider the login attempt as unsuccessful and initiate a new pop-up window asking the user for input of login credentials again, as shown in the image below.
+In step 2, if the input has either the id, password or role missing instead, the application will
+throw ParseException, consider the login attempt as unsuccessful and initiate a new pop-up window asking you for input of login credentials again, as shown in the image below.
 
-image::MissingLoginInput.PNG[width="300"]
+image::MissingLoginInput.PNG[width="200"]
 
-In all cases where the user inputs either the wrong ID, password, or role, there will be no account left in the account list when `getFilteredLoginDetailsList` method in `Model` is called. The `isLoginSuccessful` boolean in `LoginManager` will be set to false via the setter method, `setIsLoginSuccessful` in `LoginManager`. This is done by the `checkUpdatedAccountListSetLoginCondition` method in `LoginUserIdPasswordRoleCommand`. The `initializeLoginProcess` method in `MainWindow` will be called repeatedly until `isLoginSuccessful` is set to true. The sequence diagram below shows the high level workflow of the login mechanism in the event of log-in failure.
+In all cases where you input either the wrong ID, password, or role, there will be no account left in the account list when `getFilteredLoginDetailsList` method in `Model` is called. The `isLoginSuccessful` boolean in `LoginManager` will be set to false via the setter method, `setIsLoginSuccessful` in `LoginManager`. This is done by the `checkUpdatedAccountListSetLoginCondition` method in `LoginUserIdPasswordRoleCommand`. The `initializeLoginProcess` method in `MainWindow` will be called repeatedly until `isLoginSuccessful` is set to true. The sequence diagram below shows the high level workflow of the login mechanism in the event of log-in failure.
 
 image::RepeatLoginSequenceDiagram.png[width="200"]
 
@@ -367,9 +367,7 @@ image::LoginExtendedActivityDiagram.png[width="400"]
 
 ==== Design Considerations
 
-===== Preface
-This section touches on the different aspects of design considerations encountered during the project in the implementation of the login feature.
-It will also talk about the different alternatives in different design aspects, and its advantages and disadvantages.
+This section touches on the design considerations encountered during the project in the implementation of the login feature, different alternatives in different design aspects, and its advantages and disadvantages.
 
 ===== Aspect: How login data is stored
 
@@ -387,49 +385,108 @@ It will also talk about the different alternatives in different design aspects, 
 
 This feature has been implemented through 3 separate commands, each dealing with a separate stage in the calculation and
 subsequent allocation of budgets by the NUSSU Executive Committee to all the clubs that submit the data required to
-calculate the budget. The three commands are: `budget` - which handles the submission of data by the club treasurer required to calculate the
+calculate the budget. The three commands are: `budget` - which handles the submission of data by the club treasurer required to
 calculate the budget for that club, `calculatebudget` - which is to be used only by the NUSSU Executive Committee members
 in order to calculate the budgets for each club and `viewbudget` - which lists the final budgets of all the clubs.
 
-==== Submission of Data
+===== Submission of Data
 
 Given below is an example usage scenario and the behaviour at each step of the `budget` command.
 
-Step 1. The user launches the application for the first time. 'filteredClubBudgets' will be initialised with an empty list
-of all the club budgets in the address book.
+Step 1. The user launches the application for the first time. 'filteredClubsList' will be initialised with an empty list
+of all the clubs' budget calculation data in the address book. Similarly 'filteredClubBudgets' will be initialised with an empty list of all the club budgets in the address book.
 
-Step 2. The user (a club's treasurer) executes `budget c/Computing Club t/200 e/5` command in order to
-submit the data for the calculation of her club's budget. The 'LogicManager' then calls the 'parseCommand' in the
+Step 2. The user (a club member) executes `budget c/Computing Club t/200 e/5` command in order to submit the data for the calculation of her club's budget. The 'LogicManager' then calls the 'parseCommand' in the
 'AddressBookParser'.
 
-image::BudgetCommand.png[width="800"]
+Step 3. The 'AddressBookParser' then returns a new 'BudgetCommandParser', if the user is of the *member* role. (Else a parse exception is thrown.)
 
-Step 3. The 'AddressBookParser' then returns a new 'BudgetCommandParser', which then parses the command to be executed and
-creates a 'ClubBudgetElements' object called 'club' with the club's name, the expected turnout and the number of events.
-Finally the 'BudgetCommand' is called with 'club' as the parameter.
+Step 4. The 'BudgetCommandParser' parses the command to be executed and creates a 'ClubBudgetElements' object called 'club' with the club's name, the expected turnout and the number of events, as specified by the user. Finally the 'BudgetCommand' is called with 'club' as the argument.
 
-Step 4. The 'BudgetCommand' checks whether the 'club' is a duplicate and it is not, the 'BudgetCommand' calls the 'addClub'
-command in 'Model' with 'club' as the parameter.
+Step 5. The 'BudgetCommand' checks whether the 'club' is a duplicate and if it is not, the 'BudgetCommand' calls the 'addClub' method in 'Model' with 'club' as the argument.
 
-Step 5. 'Model' calls 'addClub' in 'ReadOnlyAddressBook' and indicates that the address book's status has changed.
+Step 6. 'Model' calls 'addClub' in 'ReadOnlyClubBudgetElementsBook' and indicates that the club budget elements book's status has changed.
 
-Step 6. 'ReadOnlyAddressBook' calls the 'addClubBudget' command on an object 'clubs' of the 'UniqueClubsList' class, thus
-adding the required club's data to the address book.
+Step 7. 'ReadOnlyClubBudgetElementsBook' calls the 'addClub' command on an object 'clubs' of the 'UniqueClubsList' class, thus
+adding the required club's data to the club budget elements book.
 
-Step 7. Finally a success message is displayed with the details that have been entered by the user.
-
-image::ExecuteBudgetCommand.png[width="800"]
+Step 8. Finally a success message is displayed with the details that have been entered by the user.
 
 [NOTE]
-In Step 4, had the user entered a club name that already existed in the list of clubs in the address book, then a duplicate
-message would be shown, prompting the user to edit their entered command and try again. Execution of subsequent steps would be stopped until the
-user entered a unique club name
-
-image::DuplicateBudget.png[width="800"]
+As mentioned in Step 5, had the user entered a club name that already existed in the list of clubs in the address book, then a duplicate club budget elements message would be shown, prompting the user to edit their entered command and try again. Execution of subsequent steps would be stopped until the
+user entered a unique club name.
 
 The image below is the sequence diagram for the functioning of the `budget` command:
 
 image::BudgetCommandSequenceDiagram.png[width="800"]
+
+===== Calculation and allocation of budgets
+
+Given below is an example usage scenario and the behaviour at each step of the `calculatebudget` command.
+
+Step 1. 'filteredClubsList' will no longer be an empty list, and will now contain the budget calculation data of the clubs that have been added using the `budget` command.
+
+Step 2. The user (a NUSSU treasurer) executes the `calculatebudget b/50000` command with '50000' as the total available budget, in order to calulate and allocate all the clubs' budgets. The 'LogicManager' then calls the 'parseCommand' in the
+'AddressBookParser'.
+
+Step 3. The 'AddressBookParser' then returns a new 'BudgetCalculationCommandParser', if the user is of the role *treasurer*. (Else a parse exception is thrown.)
+
+Step 4.'BudgetCalculationCommandParser' parses the command and creates a 'TotalBudget' object called 'totalBudget' with the total available budget specified by the user. Finally the 'BudgetCalculationCommand' is called with 'totalBudget' as the argument.
+
+Step 5. The 'BudgetCalculationCommand' checks whether the 'totalBudget' is a negative number. It also checks whether the budgets have already been calculated before using the getHaveBudgetsBeenCalculated method of the 'BudgetCalculationManager'. It also checks whether the clubBudgetElementsBook is empty. If none of this are true, then the 'filteredClubsList' is iterated through to calculate the budget, an object 'toAdd' of the 'FinalClubBudget' class, of each club in the list. When the budget for a club has been calculated, the 'BudgetCalculationCommand' calls the 'addClubBudget' method in Model with 'toAdd' as the parameter.
+
+Step 6. 'Model' calls 'addClubBudget' in 'ReadOnlyFinalBudgetBook' and indicates that the finalBudgetsBook's status has changed.
+
+Step 7. 'ReadOnlyFinalBudgetBook' calls the 'addClubBudget' command on an object 'clubBudgets' of the 'UniqueClubBudgetsList' class, thus adding the required club's allocated budget to the finalClubBudgetsBook. The process repeats until the budget for every club in the 'filteredClubsList' has been calculated and allocated.
+
+Step 8. Once the budget for every club has been allocated a success message is displayed, telling the user that the budgets have been calculated.
+
+The image below is a sequence diagram for the 'BudgetCalculationCommand'
+
+image::BudgetCalculationCommandSequenceDiagram.png[width="800"]
+
+===== Viewing the allocated budgets
+
+Given below is an example usage scenario and the behaviour at each step of the `viewbudget` command.
+
+Step 1. 'filteredClubBudgetsList' will no longer be an empty list, and will now contain the final budgets that have been allocated to each of the clubs in the 'filteredClubsList'.
+
+Step 2. The user (a NUSSU treasurer, a club member or even a club's President) executes the `viewbudget c/Computing Club` command to view the budget allocated to the club that she has specified (in this case the Computing Club). The 'LogicManager' then calls the 'AddressBookParser'.
+
+Step 3. The 'AddressBookParser' then returns a new ViewClubBudgetsCommandParser' if the user role is set to either *member*, *treasurer* or *president*.
+
+Step 4. The 'ViewClubBudgetsCommandParser' then creates a 'ClubName' object called clubName. Finally the 'ViewClubBudgetsCommand' is called with 'clubName' as the argument.
+
+Step 5. 'ViewClubBudgetsCommand' checks whether the budgets have been calculated already. If they have not, an error message is shown to the user. If they have, then the 'filteredClubBudgetsList' is looped through to find a 'FinalClubBudget' object with the same 'ClubName' as the 'clubName' that is specified by the user (in this case 'Computing Club'). If it is found, then the associated 'allocatedBudget' of that 'FinalClubBudget' object is displayed to the user. Else a message saying that the specified club's budget does not exist is shown to the user.
+
+The image below is a sequence diagram for the 'ViewClubBudgetsCommand'
+
+image::ViewClubBudgetsCommandSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How club budget elements data and final club budgets data is stored
+
+* **Alternative 1 (current choice):** Saving club budget elements data and final club budgets in budgetelements.xml and budgets.xml respectively in XML format.
+** Pros: It is easy to read.
+** Cons: XML data files takes up more storage space, also more verbose.
+* **Alternative 2:** Saving club budget elements data and final club budgets using JSON.
+** Pros: Faster and takes less storage space
+** Cons: Less intuitive or readable since items are presented in a manner that is more similar to the code.
+
+===== Aspect: How the final club budgets are stored
+
+* **Alternative 1 (current choice):** Currently the final club budgets are stored in a list (which is accessed when using the `viewbudget` command).
+** Pros: Easier to implement, with respect to the project's time constraints
+** Cons: Not a good choice with respect to time complexity. If the list of final club budgets is very large, then looping through it in worst case time complexity of O(N) to find the desired club's budget, is very slow. Thus not allowing the NFR of speed to be achieved.
+* **Alternative 2:** Using a map to store the final club budgets
+** Pros: Far faster to search for the desired club's final budget given that Club Names must be unique.
+** Cons: Would take longer to implement.
+
+==== Possible Extensions
+
+* Implementing an `editbudget` command to allow the club members to edit the budget calculation data until the treasurers have calculated and allocated the budgets.
+* Allowing the NUSSU treasurers to calculate and allocate the budgets multiple times. This will allow them to change the total budget as and when needed and also allow club members to keep submitting their budget calculation data.
 
 //end::budget[]
 
@@ -1409,6 +1466,87 @@ Use case ends.
 +
 [none]
 ** 1b1. System shows error message to user and and shows user role constraints message
++
+Use case ends.
+
+=== Use Case: Submitting the budget calculation data for a club
+
+System: NUSSU-Connect Application +
+Actor: Club Member +
+*MSS*
+
+1. User types in command to submit new budget calculation data with the club name, expected turnout and number of events.
+2. System creates a new club budget elements object with the specified details and shows a successful execution message.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User tries to submit budget calculation data for a club that already exists
++
+[none]
+** 1a1. System shows an error message to user and does not create a new club budget elements object until the user specifies a unique club name.
++
+* 1b. User types in invalid club name/ expected turnout/ number of events
+*
+[none]
+** 1b1. System shows error message to the user and shows the appropriate constraints message.
++
+Use case ends.
+
+=== Use Case: Calculating and allocating the final budgets to all the clubs
+
+System: NUSSU-Connect Application +
+Actor: NUSSU Treasurer +
+*MSS*
+
+1. User types in command to calculate and allocate the budgets to all the clubs, with a total available budget.
+2. System calculates and allocates the final budgets to all the clubs and shows a successful execution message.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User tries to calculate budgets when no club members have yet submitted the budget calculation data
++
+[none]
+** 1a1. System shows an error message to user and does not calculate and allocate the final budgets until some budget calculation data has been submitted.
++
+* 1b. User types in invalid total budget
+*
+[none]
+** 1b1. System shows error message to the user and shows the appropriate constraints message.
++
+* 1c. User tries to use the budget calculation command after having already used it once before
+*
+[none]
+** 1c1. System shows error message to the user and does not calculate and allocate the budgets again.
++
+Use case ends.
+
+=== Use Case: Viewing the final budget allocated to a club
+
+System: NUSSU-Connect Application +
+Actor: Club Member, NUSSU Treasurer or Club President +
+*MSS*
+
+1. User types in command to view the budget for a club, with the name of the club.
+2. System displays the final budget of the specified club.
+
+*Extensions*
+
+[none]
+* 1a. User tries to view the final budget allocated to a club before the budgets have even been allocated.
++
+[none]
+** 1a1. System shows an error message to user.
++
+* 1b. User types in in an invalid club name.
+*
+[none]
+** 1b1. System shows error message to the user that the club entered does not exist in NUSSU-Connect's memory.
 +
 Use case ends.
 
