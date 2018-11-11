@@ -19,7 +19,7 @@ endif::[]
 * It is specially designed just for Store Owners to keep track of their items and revenue for their shop.
 * Customers can also check the availability of the items they are looking for before heading down to the store.
 * So what are you waiting for?
-** Download it NOW!!
+** Download it NOW!
 
 == Site Map (Unrelated Links will be remove later nearing the end of the project)
 
