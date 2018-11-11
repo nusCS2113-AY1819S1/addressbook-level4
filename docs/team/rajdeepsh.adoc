@@ -72,20 +72,6 @@ student management system, that person would also be deleted in all the groups h
 
 include::../UserGuide.adoc[tag=group]
 
-=== Command Summary
-
-* *Create Group* : `creategroup n/NAME l/LOCATION [t/TAG] ...` +
-e.g. `creategroup n/CS2040C l/LT15 t/cpp`
-
-* *Select Group* : `selectgroup INDEX` +
-e.g. `selectgroup 1`
-* *Add to Group* : `addgroup g/INDEX p/INDEX ...` +
-e.g. `addgroup g/1 p/1 p/2`
-* *Delete Group* : `deletegroup INDEX` +
-e.g. `deletegroup 1`
-* *Delete Student from Group* : `deletegroupstudent g/INDEX p/INDEX` +
-e.g. `deletegroupstudent g/1 p/1`
-
 == Contributions to the Developer Guide
 
 |===
