@@ -67,4 +67,6 @@ include::../UserGuide.adoc[tag=authentication]
 
 include::../DeveloperGuide.adoc[tag=authentication]
 
+include::../DeveloperGuide.adoc[tag=authenticationTest]
+
 include::../DeveloperGuide.adoc[tag=authenticationUsecase]

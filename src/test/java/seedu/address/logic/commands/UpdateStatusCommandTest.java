@@ -1,6 +1,7 @@
 //@@author cqinkai
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
@@ -14,6 +15,11 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.user.User;
 import seedu.address.testutil.UserBuilder;
 
+/**
+ * Tests for execution of {@code UpdateStatusCommand}
+ * with integration of {@code UndoCommand} and {@code RedoCommand}
+ * which should not work with {@code UpdateStatusCommand}.
+ */
 public class UpdateStatusCommandTest {
 
     private Model model;
@@ -27,6 +33,14 @@ public class UpdateStatusCommandTest {
 
         assertCommandSuccess(new UpdateStatusCommand(), model, commandHistory, UpdateStatusCommand.MESSAGE_SUCCESS,
                 expectedModel);
+
+        // login to execute undo/redo commands
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
+        // undo/redo stack does not record UpdateStatusCommand
+        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 
     @Test
@@ -39,6 +53,10 @@ public class UpdateStatusCommandTest {
 
         assertCommandSuccess(new UpdateStatusCommand(), model, commandHistory, UpdateStatusCommand.MESSAGE_SUCCESS,
                 expectedModel);
+
+        // undo/redo stack does not record UpdateStatusCommand
+        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 
     @Test
@@ -48,6 +66,14 @@ public class UpdateStatusCommandTest {
 
         assertCommandSuccess(new UpdateStatusCommand(), model, commandHistory,
                 UpdateStatusCommand.MESSAGE_MISSING_EVENTS, expectedModel);
+
+        // login to execute undo/redo commands
+        User user = new UserBuilder().build();
+        model.logUser(user);
+
+        // undo/redo stack does not record UpdateStatusCommand
+        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 
     @Test
@@ -60,5 +86,9 @@ public class UpdateStatusCommandTest {
 
         assertCommandSuccess(new UpdateStatusCommand(), model, commandHistory,
                 UpdateStatusCommand.MESSAGE_MISSING_EVENTS, expectedModel);
+
+        // undo/redo stack does not record UpdateStatusCommand
+        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 }

@@ -34,28 +34,28 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullEvent_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().build();
 
         CommandResult commandResult = new AddCommand(validEvent).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validEvent), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validEvent), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
+    public void execute_duplicateEvent_throwsCommandException() throws Exception {
         Event validEvent = new EventBuilder().build();
         AddCommand addCommand = new AddCommand(validEvent);
-        ModelStub modelStub = new ModelStubWithPerson(validEvent);
+        ModelStub modelStub = new ModelStubWithEvent(validEvent);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_EVENT);
@@ -199,10 +199,10 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single event.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithEvent extends ModelStub {
         private final Event event;
 
-        ModelStubWithPerson(Event event) {
+        ModelStubWithEvent(Event event) {
             requireNonNull(event);
             this.event = event;
         }
@@ -227,8 +227,8 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the event being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Event> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingEventAdded extends ModelStub {
+        final ArrayList<Event> eventsAdded = new ArrayList<>();
 
         @Override
         public boolean getLoginStatus() {
@@ -243,13 +243,13 @@ public class AddCommandTest {
         @Override
         public boolean hasEvent(Event event) {
             requireNonNull(event);
-            return personsAdded.stream().anyMatch(event::isSameEvent);
+            return eventsAdded.stream().anyMatch(event::isSameEvent);
         }
 
         @Override
         public void addEvent(Event event) {
             requireNonNull(event);
-            personsAdded.add(event);
+            eventsAdded.add(event);
         }
 
         @Override

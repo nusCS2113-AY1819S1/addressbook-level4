@@ -28,7 +28,7 @@ public class ReminderCommand extends Command {
 
     public static final String COMMAND_WORD = "reminder";
 
-    public static final String MESSAGE_REMINDER = "Reminder(s) sent.";
+    public static final String MESSAGE_REMINDER_SENT = "Reminder(s) sent.";
     public static final String MESSAGE_NO_UPCOMING_EVENTS = "You do not have any upcoming events.";
     public static final String MESSAGE_NOT_LOGGED_IN = "You are not logged in!";
 
@@ -65,7 +65,7 @@ public class ReminderCommand extends Command {
             return new CommandResult(MESSAGE_NO_UPCOMING_EVENTS);
         }
 
-        return new CommandResult(MESSAGE_REMINDER);
+        return new CommandResult(MESSAGE_REMINDER_SENT);
     }
 
     /**
