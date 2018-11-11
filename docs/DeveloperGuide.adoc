@@ -964,7 +964,7 @@ For all the use cases below, System refers to the EventManager, Actor refers to 
 . Event Manager grants access to User and displays welcome message. +
 Use case ends.
 
-Extensions: +
+*Extensions:* +
 [none]
 * 2a. User inputs incorrect password.
 [none]
@@ -973,9 +973,8 @@ Use Case resumes at step 1.
 // end::authenticationUsecase[]
 
 // tag::rsvpUsecase[]
-// tag::reminderUsercase[]
 [discrete]
- === Use case: Registration & Reminders
+ === Use case: Registration
  *MSS*
 
  1.  User requests to list events.
@@ -984,18 +983,12 @@ Use Case resumes at step 1.
  4.  EventManager displays details of selected event, including current attendance list.
  5.  User requests to register for the event.
  6.  EventManager adds user to attendance list and displays confirmation message.
- 7.  Reminders will be sent out every 6 hours to remind the logged-in user of events that he/she has registered for, that are happening in the next 24 hours.
- 8.  (Reminder sent) Reminder sends alert dialog and automatically redirects user to the specified event's information panel.
- 9.  User hits enter to close reminder.
- +
-// end::reminderUsecase[]
 
  *Extensions:*
  [none]
  * 5a. User is already registered for event.
  [none]
  ** 5a1. EventManager displays error message.
- +
  Use case resumes at step 2.
 
  [none]
@@ -1003,7 +996,6 @@ Use Case resumes at step 1.
  [none]
  ** 6a1. User requests to unregister for the event.
  ** 6a2. EventManager removes user from attendance list and displays confirmation message.
- +
  Use case ends.
  
  [none]
@@ -1011,9 +1003,32 @@ Use Case resumes at step 1.
  [none]
  ** 6c1. Admin requests to remove user from event.
  ** 6c2. EventManager removes user from attendance list and displays confirmation message.
- +
  Use case ends.
- // end::rsvpUsecase[]
+// end::rsvpUsecase[]
+ 
+// tag::reminderUsecase[]
+[discrete]
+=== Use case: Reminder
+*MSS*
+
+. User registers for an event "House Dinner".
+. (a few days passes) A reminder is sent to the user for the event "House Dinner", 24 hours before the event time.
+. User is redirected to the event's Browser Panel.
+. User hits enter to close the alert dialog.
+. User reads the information about the event.
+Use case ends.
+// end::reminderUsecase[]
+
+// tag::updateStatusUsecase[]
+[discrete]
+=== Use case: Update Event Status
+*MSS*
+
+. User views list of events.
+. User requests to update the statuses of events.
+. Event Manager updates the statuses of events and refreshes the displayed list of events.
+Use case ends
+// end::updateStatusUsecase[]
 
 [discrete]
 === Use case: Comments
@@ -1026,8 +1041,7 @@ Use Case resumes at step 1.
 . Repeat 3 and 4 until User types “exit”. +
 Use case ends
 
-Extensions:
-
+*Extensions:*
 [none]
 
 * 3a. The comment commands are as such:
