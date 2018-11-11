@@ -39,7 +39,7 @@ Given below are sections I contributed to the code.
 ** What it does: Provide users a way to sort tasks in the To-do List by certain task attribution (name, module code, deadline) and users can also reverse the rank of sorting
 ** Justification: This enhancement make users easier to check their tasks recorded in the To-do list based on a certain standard.
 
-* *Major enhancement #4*: deigned *deadline notification*
+* *Major enhancement #4*: designed *deadline notification*
 ** What it does: Notify users the deadline is approaching or have due by changing the font color.
 ** Justification: This enhancement is one of key components of manging the to-do list
 
@@ -47,7 +47,8 @@ Given below are sections I contributed to the code.
 
 * *Minor enhancement #2*: add a few tests to increase coverage.
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/[Dashboard]]
+* *Code contributed*:
+https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[codes]
 
 * *Other contributions*:
 

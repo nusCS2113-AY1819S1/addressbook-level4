@@ -359,7 +359,7 @@ No click-event related examples available now.
 // end::Calendar[]
 
 // tag::check[]
-=== View daily summary : `check`
+=== Viewing daily summary : `check`
 
 View a summary of all due tasks and all expenses on a particular day. +
 Format: `check d/DATE`
