@@ -77,7 +77,7 @@ having any friends. +
 The timetable that belongs to users that are not your friends will not be available to you, till you
 add them as friends.
 
-==== Logging In: `login`
+=== Logging In: `login`
 Command: `login [username] [password]`
 
 Examples:
@@ -91,7 +91,7 @@ Logins with Username: tim and Password: tam
 CAUTION: Constraints: +
 * Username and Password must not contain any spaces
 
-==== Registering: `register`
+=== Registering: `register`
 Command: `register [Username] [Password] [Email] [MobilePhone] [Address]`
 
 Examples:
@@ -102,7 +102,7 @@ CAUTION: Constraints: +
 * Currently all fields must not have spaces too +
 * All fields must be entered
 
-==== Showing the UI Interface: `ui`
+=== Showing the UI Interface: `ui`
 Command: `ui`
 
 Entering the command `ui` will have the Login Window to appear as seen from the figure 2.
@@ -116,7 +116,7 @@ Clicking on the Register button changes the pop up box to the Registration Windo
 .Registration UI
 image::RegisterUI.png[width="790"]
 
-==== Logging Out : `logout`
+=== Logging Out : `logout`
 Command: `logout`
 
 To be able to use this command, you would have to be logged in in the first place. Referring to the figure 4, there is
@@ -126,7 +126,7 @@ command `logout`.
 .Logout Button Highlighted in Blue
 image::Logout.png[width="790"]
 
-==== Closing the Application : `exit`
+=== Closing the Application : `exit`
 Closes the _FreeTime_ application.
 
 Command: `exit`
@@ -141,62 +141,62 @@ to your timetable might be lost.
 
 //tag::featureoverview
 .Overview of all the features in FreeTime
-[cols="20%,80%"]
+[cols="20%,60%"]
 |===
 |Feature |Function
 
-|help (h)
+|<<help,help>>
 |Opens the help window
 
-|listall (l)
+|<<list,listall>>
 |Lists all the users in the database
 
-|edit (e)
+|<<edit,edit>>
 |Edits your information in the database
 
-|find (f)
+|<<find,find>>
 |Filters the database based on the keywords specified
 
-|group (t)
+|<<group,group>>
 |Filters the database based on the group tags specified
 
-|addtime (at)
+|<<addtime,addtime>>
 |Adds a timeslot to your timetable
 
-|deletetime (dt)
+|<<deletetime,deletetime>>
 |Removes a timeslot from your timetable
 
-|select (s)
+|<<select,select>>
 |Selects a user in your friends list and shows their timetable
 
-|friend (af)
+|<<friend,friend>>
 |Adds a user from the others panel into your friend list
 
-|unfriend (uf)
+|<<unfriend,unfriend>>
 |Removes a friend from your friend list
 
-|free
+|<<free,free>>
 |Highlights timeslots where you and everyone specified is free
 
-|history (g)
+|<<history,history>>
 |Lists all the commands that you have entered in reverse chronological order
 
-|undo (u)
-|Removes a friend from your friend list
+|<<undo,undo>>
+|Restores the address book to the state before the previous undoable command was executed.
 
-|redo (u)
+|<<redo,redo>>
 |Reverses the most recent undo command
 
-|clear (c)
+|<<clear,clear>>
 |Clears all timeslots from your timetable
 
-|import (im)
+|<<import,import>>
 |Imports a timetable for the current user from a specified (.ics) file
 
-|export (ex)
+|<<export,export>>
 |Exports the currently-displayed timetable to the specified (.ics) file
 
-|exit (x)
+|<<exit,exit>>
 |Closes the _FreeTime_ application
 |===
 
@@ -219,6 +219,7 @@ Displays the userguide from within the app.
 
 Format: `help`
 
+[[list]]
 === Listing all persons : `listall` (`l`)
 
 Shows a list of all persons in the _FreeTime_ application.
@@ -228,6 +229,7 @@ Format: `listall`
 [NOTE]
 After filtering your results by executing commands such as `group` or `find`, executing `listall` will revert the list back to it's initial state
 
+[[edit]]
 === Editing a person : `edit` (`e`)
 
 Edits your information in the database. +
@@ -241,6 +243,7 @@ Format: `edit [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 * Tags should be alphanumeric (contains letters and numbers) and can contain hyphens "-" and underscores "_"
 ****
 
+[[find]]
 === Locating persons by name : `find` (`f`)
 
 Finds persons whose names contain any of the given keywords. +
@@ -263,6 +266,7 @@ Returns `john` and `John Doe`
 Returns any person having names `Betsy`, `Tim`, or `John`
 
 // tag::tagcommand[]
+[[group]]
 === Locating persons by group : `group` (`t`)
 
 Find persons whose group tags match the specified group tags.
@@ -299,6 +303,7 @@ Use the command `listall` to revert the panels back to its original state.
 // end::tagcommand[]
 
 // tag::timeslot[]
+[[addtime]]
 === Add a timeslot to your timetable: `addtime` (`at`)
 
 Adds a timeslot to your timetable.
@@ -328,6 +333,7 @@ After adding a timeslot, you should see the following:
 .Timeslot added to your timetable
 image::AddTimeSuccess.png[width="600"]
 
+[[deletetime]]
 === Delete a timeslot from your timetable: `deletetime` (`dt`)
 
 Delete a timeslot from your timetable.
@@ -352,6 +358,7 @@ Deletes the timeslot from 13:30 to 14:00 on Friday from your timetable.
 Deletes the timeslot from 17:00 to 18:00 on Wednesday from your timetable.
 // end::timeslot[]
 
+[[select]]
 === Selecting a person : `select` (`s`)
 
 Selects your friend with the specified index, showing you their timetable. +
@@ -376,6 +383,7 @@ Selects the 2nd person listed in your friend list.
 Selects the 1st person in the results of the `find` command.
 
 // tag::friendcommand[]
+[[friend]]
 === Adding a person to your friend list : `friend` (`af`)
 
 Adds a person from the others list to your friend list.
@@ -412,6 +420,7 @@ image::AfterAddingFriendsPS.png[width="600"]
 // end::friendcommand[]
 
 // tag::unfriendcommand[]
+[[unfriend]]
 === Removing a person from your friend list : `unfriend` (`uf`)
 
 Removes a person from your friend list.
@@ -442,6 +451,7 @@ image::AfterRemovingFriendsPS.png[width="600"]
 // end::unfriendcommand[]
 
 // tag::freecommand[]
+[[free]]
 === Show free slots among selected people: `free`
 
 Highlights timeslots where you and everyone specified is free.
@@ -465,6 +475,7 @@ After executing the command, you should see the following:
 image::FreeTimeSuccess.png[width="600"]
 // end::freecommand[]
 
+[[history]]
 === Listing entered commands : `history` (`g`)
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -477,6 +488,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
+[[undo]]
 === Undoing previous command : `undo` (`u`)
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
@@ -504,7 +516,8 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `import mes` command) +
 
-=== Redoing the previously undone command : `redo` (`r`) (DOES NOT WORK IN V1.3)
+[[redo]]
+=== Redoing the previously undone command : `redo` (`r`)
 
 Reverses the most recent `undo` command. +
 
@@ -528,6 +541,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+[[clear]]
 === Clears your timetable : `clear` (`c`)
 
 Clears all timeslots from your timetable. +
@@ -535,6 +549,7 @@ Clears all timeslots from your timetable. +
 Format: `clear`
 
 // tag::import[]
+[[import]]
 === Import Timetable : `import` (`im`)
 
 Imports a timetable for the current user from a specified (_.ics_) file. +
@@ -561,6 +576,7 @@ image::importics.png[width="250", align="left"]
 // end::import[]
 
 // tag::export[]
+[[export]]
 === Export Timetable : `export` (`ex`)
 
 Exports the currently-displayed timetable to the specified (_.ics_) file.
@@ -584,7 +600,7 @@ Exports the displayed timetable to `(root_folder)\import_export\my_file.ics` +
 
 // end::export[]
 
-
+[[exit]]
 === Exiting the program : `exit` (`x`)
 
 Closes the _FreeTime_ application.
