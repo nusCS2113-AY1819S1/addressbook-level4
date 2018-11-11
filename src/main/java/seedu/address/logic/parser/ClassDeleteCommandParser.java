@@ -33,7 +33,7 @@ public class ClassDeleteCommandParser implements Parser<ClassDeleteCommand> {
         }
 
         String className = argMultimap.getValue(PREFIX_CLASS_NAME).get();
-        ClassroomParserUtil.parseClassName(className);
+        ParserUtil.parseClassName(className);
         String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         ParserUtil.parseModuleCode(moduleCode);
 

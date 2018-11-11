@@ -37,13 +37,13 @@ public class ClassEditCommand extends Command {
             + PREFIX_MAXENROLLMENT + "69";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    private static final String MESSAGE_EDIT_CLASSROOM_SUCCESS = "Edited Class: %1$s, %2$s";
-    private static final String MESSAGE_FAIL = "Class belonging to module not found!";
-    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
+    public static final String MESSAGE_EDIT_CLASSROOM_SUCCESS = "Edited Class: %1$s, %2$s";
+    public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
+    public static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
     private final String className;
     private final String moduleCode;
-    private final EditClassDescriptor editModuleDescriptor;
+    private final EditClassDescriptor editClassDescriptor;
 
     public ClassEditCommand(String className, String moduleCode, EditClassDescriptor editClassroomDescriptor) {
         requireNonNull(className, moduleCode);
@@ -51,7 +51,7 @@ public class ClassEditCommand extends Command {
 
         this.className = className;
         this.moduleCode = moduleCode;
-        this.editModuleDescriptor = new EditClassDescriptor(editClassroomDescriptor);
+        this.editClassDescriptor = new EditClassDescriptor(editClassroomDescriptor);
     }
 
     @Override
@@ -69,12 +69,31 @@ public class ClassEditCommand extends Command {
             throw new CommandException(MESSAGE_FAIL);
         }
 
-        Classroom editedClass = createEditedClassroom(classtoEdit, editModuleDescriptor);
+        Classroom editedClass = createEditedClassroom(classtoEdit, editClassDescriptor);
         classroomManager.updateClassroom(classtoEdit, editedClass);
         classroomManager.saveClassroomList();
         return new CommandResult(String.format(MESSAGE_EDIT_CLASSROOM_SUCCESS,
                 classtoEdit.getClassName(), classtoEdit.getModuleCode()),
                 classroomManager.getClassroomHtmlRepresentation());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ClassEditCommand)) {
+            return false;
+        }
+
+        // state check
+        ClassEditCommand e = (ClassEditCommand) other;
+        return className.equals(e.className)
+                && moduleCode.equals(e.moduleCode)
+                && editClassDescriptor.equals(e.editClassDescriptor);
     }
 
     /**
@@ -145,5 +164,24 @@ public class ClassEditCommand extends Command {
             this.maxEnrollment = enrollment;
         }
 
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof EditClassDescriptor)) {
+                return false;
+            }
+
+            // state check
+            EditClassDescriptor e = (EditClassDescriptor) other;
+
+            return getClassName().equals(e.getClassName())
+                    && getModuleCode().equals(e.getModuleCode())
+                    && getMaxEnrollment().equals(e.getMaxEnrollment());
+        }
     }
 }

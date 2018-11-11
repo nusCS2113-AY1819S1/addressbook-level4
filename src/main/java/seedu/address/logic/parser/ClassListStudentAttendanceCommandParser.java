@@ -33,7 +33,7 @@ public class ClassListStudentAttendanceCommandParser implements Parser<ClassList
         }
 
         String className = argMultimap.getValue(PREFIX_CLASS_NAME).get().toUpperCase();
-        ClassroomParserUtil.parseClassName(className);
+        ParserUtil.parseClassName(className);
         String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get().toUpperCase();
         ParserUtil.parseModuleCode(moduleCode);
 
