@@ -58,6 +58,7 @@ student management system, that person would also be deleted in all the groups h
 *** Add panel order description to status bar footer for a local-impact enhancement (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/89[#89])
 ** Documentation:
 *** Add all initial user stories and use cases for all functions  (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/7[#7])
+*** Update UiClassDiagram, ModelClassDiagram and StorageClassDiagram (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/93[#93], https://github.com/CS2113-AY1819S1-T13-4/main/pull/96[#96])
 *** Add the `ContactUs` page (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/143[#143])
 *** Add user guide introduction  (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/143[#143])
 *** Update manual testing instructions for developer guide (Pull requests https://github.com/CS2113-AY1819S1-T13-4/main/pull/143[#143])
@@ -81,15 +82,6 @@ include::../UserGuide.adoc[tag=group]
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-
-.Structure of the UI Component
-image::UiClassDiagram.png[width="800"]
-
-.Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
-
-.Structure of the Storage Component
-image::StorageClassDiagram.png[width="800"]
 
 include::../DeveloperGuide.adoc[tag=group]
 
