@@ -50,13 +50,13 @@
 }
 
 .table-view .column-header-background {
-    -fx-background-color: transparent;
+    -fx-background-color: #EFF4F8;
 }
 
 .table-view .column-header, .table-view .filler {
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
+    -fx-background-color: #EFF4F8;
     -fx-border-color:
         transparent
         transparent
@@ -235,7 +235,7 @@
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: #EFF4F8;
 }
 
 .button:pressed, .button:default:hover:pressed {
