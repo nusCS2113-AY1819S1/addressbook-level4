@@ -54,14 +54,14 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public static Comparator<Person> getComparator(Parameter parameter) throws ParseException {
+    public static Comparator<Person> getComparator(Parameter parameter) throws IllegalArgumentException {
         switch(parameter.value) {
         case PARAM_SKILL:
             return bySkillLevel;
         case PARAM_NAME:
             return byName;
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_PARAM);
+            throw new IllegalArgumentException(MESSAGE_UNKNOWN_PARAM);
         }
     }
 
