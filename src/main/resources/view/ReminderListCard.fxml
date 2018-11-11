@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -25,13 +24,11 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="title" text="\$first" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-            <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-            <Label fx:id="email" styleClass="cell_small_label" text="\$email\n" />
-            <Label fx:id="scheduleHeader" styleClass="cell_big_label"/>
-            <FlowPane fx:id="schedules"/>
+            <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
+            <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
+            <Label fx:id="agenda" styleClass="cell_small_label" text="\$agenda\n" />
         </VBox>
     </GridPane>
 </HBox>
