@@ -1,13 +1,16 @@
 package seedu.address.logic.parser.Member;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.Arrays;
 
 import seedu.address.logic.commands.MemberCommand.FindMajorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.member.MajorContainsKeywordsPredicate;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+/**
+ * find major command parser
+ */
 public class FindMajorCommandParser {
 
     /**

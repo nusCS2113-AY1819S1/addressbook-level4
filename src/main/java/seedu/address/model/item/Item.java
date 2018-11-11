@@ -15,16 +15,18 @@ public class Item {
     // Identity fields
     private final ItemName itemName;
     private final ItemQuantity itemQuantity;
+    private final ItemLocation itemLocation;
 
     private final Logger logger = LogsCenter.getLogger(Item.class);
 
     /**
      * Every field must be present and not null.
      */
-    public Item(ItemName itemName, ItemQuantity itemQuantity) {
+    public Item(ItemName itemName, ItemQuantity itemQuantity, ItemLocation itemLocation) {
         requireAllNonNull(itemName);
         this.itemName = itemName;
         this.itemQuantity = itemQuantity;
+        this.itemLocation = itemLocation;
     }
 
     public ItemName getItemName() {
@@ -33,6 +35,10 @@ public class Item {
 
     public ItemQuantity getItemQuantity() {
         return itemQuantity;
+    }
+
+    public ItemLocation getItemLocation() {
+        return itemLocation;
     }
 
     /**
@@ -71,7 +77,9 @@ public class Item {
         final StringBuilder builder = new StringBuilder();
         builder.append(getItemName())
                 .append(" ItemQuantity: ")
-                .append(getItemQuantity());
+                .append(getItemQuantity())
+                .append(" ItemLocation: ")
+                .append(getItemLocation());;
         return builder.toString();
     }
 }

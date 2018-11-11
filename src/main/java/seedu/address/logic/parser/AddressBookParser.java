@@ -96,8 +96,8 @@ public class AddressBookParser {
         case ListEventCommand.COMMAND_WORD: case ListEventCommand.COMMAND_ALIAS:
             return new ListEventCommand();
 
-            case EditEventCommand.COMMAND_WORD: case EditEventCommand.COMMAND_ALIAS:
-                return new EditEventCommandParser().parse(arguments);
+        case EditEventCommand.COMMAND_WORD: case EditEventCommand.COMMAND_ALIAS:
+            return new EditEventCommandParser().parse(arguments);
 
         case AddMemberCommand.COMMAND_WORD: case AddMemberCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);

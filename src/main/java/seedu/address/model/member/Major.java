@@ -1,10 +1,11 @@
 package seedu.address.model.member;
 
-import javax.swing.plaf.ColorUIResource;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Major
+ */
 public class Major {
 
     public static final String MESSAGE_MAJOR_CONSTRAINTS =
@@ -17,7 +18,6 @@ public class Major {
     public static final String MAJOR_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String Course;
-    public String value;
 
     /**
      * Constructs a {@code Major}.
