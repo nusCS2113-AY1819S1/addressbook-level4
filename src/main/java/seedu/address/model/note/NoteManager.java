@@ -46,17 +46,10 @@ public class NoteManager {
     }
 
     public static NoteManager getInstance() {
-        return noteManager;
-    }
-
-    /**
-     * Creates the singleton instance of NoteManager object
-     * if it is not initialized yet.
-     */
-    public static void initNoteManager() {
         if (noteManager == null) {
             noteManager = new NoteManager();
         }
+        return noteManager;
     }
 
     /**

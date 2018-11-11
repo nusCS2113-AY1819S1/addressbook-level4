@@ -19,15 +19,13 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteExportCommandTest {
 
-    private static NoteManager noteManager;
+    private static NoteManager noteManager = NoteManager.getInstance();
 
     private NoteBuilder note1 = new NoteBuilder();
 
     @Before
     public void setUp() {
         StorageController.enterTestMode();
-        NoteManager.initNoteManager();
-        noteManager = NoteManager.getInstance();
         noteManager.clearNotes();
         noteManager.saveNoteList();
     }
