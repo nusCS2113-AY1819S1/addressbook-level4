@@ -185,6 +185,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         todos.add(td);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTodo(Todo key) {
+        todos.remove(key);
+    }
+
     @Override
     public ObservableList<Todo> getTodoList() {
         return todos.asUnmodifiableObservableList();

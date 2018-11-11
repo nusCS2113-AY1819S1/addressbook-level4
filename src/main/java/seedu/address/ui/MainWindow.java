@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private TodoListPanel todoListPanel;
+    private CalendarPanel calendarPanel;
     private ReminderListPanel reminderListPanel;
     private Config config;
     private UserPrefs prefs;
@@ -47,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private StackPane calendarPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -129,6 +133,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
+
+        calendarPanel = new CalendarPanel();
+        calendarPlaceholder.getChildren().add(calendarPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
