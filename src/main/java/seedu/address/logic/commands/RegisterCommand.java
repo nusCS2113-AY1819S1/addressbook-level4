@@ -74,4 +74,11 @@ public class RegisterCommand extends Command {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_REGISTER_EVENT_SUCCESS, targetIndex.getOneBased()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RegisterCommand // instanceof handles nulls
+                && targetIndex.equals(((RegisterCommand) other).targetIndex)); // state check
+    }
 }
