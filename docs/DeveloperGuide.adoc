@@ -2333,6 +2333,151 @@ Multiple groups in the group list. Student being added to group must *NOT* alrea
 .. Other incorrect distribute commands to try: `di 0 n/CS2113-T05-`, `di -3 n/CS2113-T04-` (where _n_ is less than total number of students int the Management system) +
    Expected: Returns a Invalid Command Format, followed by instructions.
 
+=== Entering Email Credentials For Sending Email
+
+.  Entering email credentials
+
+.. Prerequisites: Valid email address.
+.. Test case: `login e/Tsurajovin@hotmail.com pw/password!@#` +
+   Expected: Status message displays following success message:
+
+    Login credentials entered
+
+.. Test case: `login e/Tsurajovin pw/password!@#` +
+   Expected: Status message displays following error message:
+
+   Emails should be of the format local-part@domain and adhere to the following constraints:
+   1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (!#$%&'*+/=?`{|}~^.-) .
+   2. This is followed by a '@' and then a domain name. The domain name must:
+       - be at least 2 characters long
+       - start and end with alphanumeric characters
+       - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
+
+.. Test case: `login tsurajovin@gmail.com password!@#` +
+   Expected: Status message displays following error message:
+
+   Invalid command format!
+   login: Enters your email credentials into the system
+   Parameters: e/EMAIL pw/PASSWORD
+   Example: login e/abc@hotmail.com pw/password123
+
+
+=== Sending Email
+.  Sending email to a single index of person
+
+.. Prerequisites: +
+   ... Have already entered email credentials using `login` command. +
+   ... Email address belongs to one of the supported email domains +
+
+.. Test case: `sm 1 s/Solution for Assignment m/Hi Bob, solution has been attached.` +
+   Assumes: Target index '1' has valid email address. +
+   Expected: Status message displays the following success message and email is sent to target index.
+
+   Email sent
+
+.. Test case: `sm 1 s/Solution for Assignment m/Hi Bob, solution has been attached.` +
+   Assumes: Target index '1' has an invalid email address. +
+   Expected: Status message displays the following error message and email is not sent to the target index.
+
+   Send failed: Invalid address found: example@example.com (Recipient address reserved by RFC 2606)
+
+.. Test case: `sm 1 s/wlmzLyR7zNFBcke2RAArq2axRYFi09CSsuekKbC0TrJobTdLz3KNx4LxBZz3hvR0xEbPSTpgTG3GhwI m/Hi Bob, solution has been attached.`
+   Assumes: Target index '1' has valid email address. +
+   Expected: Status message displays the following error message and email is not sent to the target index.
+
+   Email subject has no character limit (RFC 2822), however to prevent folding of subject, 78 characters is enforced.
+
+.. Test case: `sm 1 s/Valid subject m/(message of large size... omitted e.g. 25MB)` +
+   Assumes: Target index '1' has valid email address. +
+   Expected: Status message displays the following error message and email is not sent to the target index.
+
+   Message content has exceeded permissible size limit.
+
+.. Test case: `sm 1 s/Solution for Assignment m/Hi Bob, solution has been attached.` +
+   Assumes: Email address has been blocked due to spam and requires verification. +
+   Expected: Status message displays the following error message and email is not sent to the target index.
+
+   Account unable to send any more emails due to spam
+
+
+.  Sending email to a multiple indexes of persons
+
+.. Prerequisites: +
+   ... Have already entered email credentials using `login` command. +
+   ... Email address belongs to one of the supported email domains +
+
+.. Test case: `sm 1,2,3 s/Solution for Assignment m/Hi Bob, solution has been attached.` +
+   Assumes: Target index '1,2,3' has valid email address. +
+   Expected: Status message displays the following success message and email is sent to target index.
+
+   Email sent
+
+.. Test case: `sm 1,2,5 s/Solution for Assignment m/Hi Bob, solution has been attached.` +
+   Assumes: Target index '5' has an invalid email address. +
+   Expected: Status message displays the following error message and email is not sent to the target index.
+
+   Send failed: Invalid address found: example@example.com (Recipient address reserved by RFC 2606)
+
+.. Test case: `sm 1 s/wlmzLyR7zNFBcke2RAArq2axRYFi09CSsuekKbC0TrJobTdLz3KNx4LxBZz3hvR0xEbPSTpgTG3GhwI m/Hi Bob, solution has been attached.`
+   Assumes: Target index '1' has valid email address. +
+   Expected: Status message displays the following error message and email is not sent to the target index.
+
+   Email subject has no character limit (RFC 2822), however to prevent folding of subject, 78 characters is enforced.
+
+.. Test case: `sm 1,2,3 s/Valid subject m/(message of large size... omitted e.g. 25MB)` +
+   Assumes: Target index '1,2,3' has valid email address. +
+   Expected: Status message displays the following error message and email is not sent to the target index.
+
+   Message content has exceeded permissible size limit.
+
+.. Test case: `sm 1,2,3 s/Solution for Assignment m/Hi Bob, solution has been attached.` +
+   Assumes: Email address has been blocked due to spam and requires verification. +
+   Expected: Status message displays the following error message and email is not sent to the target index.
+
+   Account unable to send any more emails due to spam
+
+.  Sending email to persons belonging to a group
+
+.. Prerequisites: +
+   ... Have already entered email credentials using `login` command. +
+   ... Email address belongs to one of the supported email domains +
+
+.. Test case: `sm g/1 s/Solution for Assignment m/Hi Bob, solution has been attached.` +
+   Assumes: Target group index 'g/1' has valid email address. +
+   Expected: Status message displays the following success message and email is sent to target index.
+
+   Email sent
+
+.. Test case: `sm g/1 s/Solution for Assignment m/Hi Bob, solution has been attached.` +
+   Assumes: Target group index 'g/1' contains recipient with an invalid email address. +
+   Expected: Status message displays the following error message and email is not sent to the target group index.
+
+   Send failed: Invalid address found: example@example.com (Recipient address reserved by RFC 2606)
+
+.. Test case: `sm g/1 s/wlmzLyR7zNFBcke2RAArq2axRYFi09CSsuekKbC0TrJobTdLz3KNx4LxBZz3hvR0xEbPSTpgTG3GhwI m/Hi Bob, solution has been attached.` +
+   Assumes: Target group index 'g/1' has valid email address. +
+   Expected: Status message displays the following error message and email is not sent to the target group index.
+
+   Email subject has no character limit (RFC 2822), however to prevent folding of subject, 78 characters is enforced.
+
+.. Test case: `sm g/1 s/Valid subject m/(message of large size... omitted e.g. 25MB)` +
+   Assumes: Target group index 'g/1' has valid email address. +
+   Expected: Status message displays the following error message and email is not sent to the target group index.
+
+   Message content has exceeded permissible size limit.
+
+.. Test case: `sm g/1 s/Solution for Assignment m/Hi Bob, solution has been attached.` +
+   Assumes: Email address has been blocked due to spam and requires verification. +
+   Expected: Status message displays the following error message and email is not sent to the target group index.
+
+   Account unable to send any more emails due to spam
+
+.. Test case: `sm g/1 s/Solution for Assignment m/Hi Bob, solution has been attached.` +
+   Assumes: Group contains no persons +
+   Expected: Status message displays the following error message and email is not sent to the target group index.
+
+   Group contains no recipient
+
 === Run Script Commands
 
 . Run SampleScriptFile
