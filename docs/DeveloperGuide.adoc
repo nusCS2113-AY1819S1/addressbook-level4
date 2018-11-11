@@ -331,7 +331,7 @@ To do so, we have added a `check` command to the existing list of commands.
 ==== Current Implementation
 The implementation of this command utilises both `Model` and `Logic` component to fulfil its function.
 
-The following sequence diagram shows how the check command operation is implemented.
+The following sequence diagram shows how the check command operation is implemented:
 
 .Sequence Diagram for Check Command
 image::CheckSequenceDiagram.png[width="800"]
@@ -374,7 +374,7 @@ Since selling of books is the bread and butter of the store owners, we have adde
 ==== Current Implementation
 The sell command utilises both the `Model` and `Logic` component to fulfil its function.
 
-The following sequence diagram shows how the sell operation is implemented
+The following sequence diagrams show how the sell operation is implemented:
 
 .Sequence Diagram for Sell Command
 image::SellSequenceDiagram.png[width="800"]
@@ -512,10 +512,28 @@ unintended by the user.
 
 // tag::tabfeature[]
 === Tab feature
-==== Current Implementation
-For *convenience*, we have implemented this feature for users to easily cycle through existing `ISBN` in the inventory without the need to manually type them out.
+For users' *convenience*, we have implemented this feature for them to easily cycle through existing `ISBN` in the inventory without the need to manually type them out.
 
-The tab feature
+==== Current Implementation
+The tab mechanism utilises `Ui`, `Model` and `Logic` component to complete its function.
+
+The following sequence diagram shows how the tab operation works:
+
+.Sequence Diagram for Tab Operation
+image::TabSequenceDiagram.png[width="800"]
+
+After the function `navigateToNextIsbn()` is completed, `commandTextField.requestFocus()` and `commandTextField.positionCaret(commandTextField.getLength())` are called to bring the caret to the end of the line for users to finish typing their command.
+
+==== Design Considerations
+
+===== Aspect: How tab executes
+
+* **Alternative 1 (current choice):** Accessing data in `BookInventory` using `Logic`.
+** Pros: Reuses current imports of `CommandBox` to function.
+** Cons: Increases coupling as it does not uphold the Law of Demeter.
+* **Alternative 2:** Accessing data in `BookInventory` directly in `CommandBox`.
+** Pros: Easy to access.
+** Cons: Increases coupling as `CommandBox` now imports both `Logic` and `Model.
 // end::tabfeature[]
 
 
