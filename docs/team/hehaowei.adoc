@@ -63,11 +63,9 @@ Some key features of the Jalil Enterprises application are storing quantities an
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=lostcommand]
-
-include::../UserGuide.adoc[tag=foundcommand]
-
-include::../UserGuide.adoc[tag=lostandfoundcommand]
+include::../UserGuide.adoc:275
+include::../UserGuide.adoc:285
+include::../UserGuide.adoc:298
 
 == Contributions to the Developer Guide
 
@@ -75,6 +73,7 @@ include::../UserGuide.adoc[tag=lostandfoundcommand]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=lost&found]
+include::../DeveloperGuide.adoc:155
+include::../DeveloperGuide.adoc:611
 
 
