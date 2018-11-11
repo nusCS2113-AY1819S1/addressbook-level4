@@ -18,8 +18,8 @@ public class BookListPanelHandle extends NodeHandle<ListView<Book>> {
 
     private Optional<Book> lastRememberedSelectedBookCard;
 
-    public BookListPanelHandle(ListView<Book> personListPanelNode) {
-        super(personListPanelNode);
+    public BookListPanelHandle(ListView<Book> bookListPanelNode) {
+        super(bookListPanelNode);
     }
 
     /**
@@ -104,12 +104,12 @@ public class BookListPanelHandle extends NodeHandle<ListView<Book>> {
     public BookCardHandle getBookCardHandle(int index) {
         return getAllCardNodes().stream()
                 .map(BookCardHandle::new)
-                .filter(handle -> handle.equals(getPerson(index)))
+                .filter(handle -> handle.equals(getBook(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
-    private Book getPerson(int index) {
+    private Book getBook(int index) {
         return getRootNode().getItems().get(index);
     }
 

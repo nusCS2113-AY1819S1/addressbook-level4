@@ -71,7 +71,7 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the BookInventory data stored inside the storage file.
      */
-    public BookInventory readStorageAddressBook() {
+    public BookInventory readStorageBookInventory() {
         try {
             return new BookInventory(storage.readBookInventory().get());
         } catch (DataConversionException dce) {
@@ -85,7 +85,7 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public Path getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getBookInventoryFilePath();
     }
 
     /**

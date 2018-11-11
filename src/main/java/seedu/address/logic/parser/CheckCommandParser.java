@@ -14,30 +14,35 @@ import seedu.address.model.book.QuantityContainsNumberPredicate;
  */
 public class CheckCommandParser implements Parser<CheckCommand> {
 
+    private List<String> quantities = new ArrayList<>();
+
     /**
-     * Parse the given {@code String} of arguments in the context of the CheckCommand
-     * @param args
-     * @return
-     * @throws ParseException
+     * Parses the given {@code String} of arguments in the context of the CheckCommand
      */
     public CheckCommand parse(String args) throws ParseException {
+        quantities.clear();
+
         String trimmedArgs = args.trim();
         if (isNotNumeric(trimmedArgs) || trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
         }
 
-        List<String> quantities = new ArrayList<>();
         Integer number = Integer.parseInt(trimmedArgs);
-        if (Integer.parseInt(trimmedArgs) > 999) {
+        if (number > 999) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_EXCEEDED_QUANTITY));
         }
+
+        createsListOfNumbers(number);
+
+        return new CheckCommand(new QuantityContainsNumberPredicate(quantities));
+    }
+
+    private void createsListOfNumbers(Integer number) {
         for (Integer i = number; i >= 0; i--) {
             quantities.add(Integer.toString(i));
         }
-
-        return new CheckCommand(new QuantityContainsNumberPredicate(quantities));
     }
 
     public boolean isNotNumeric(String trimmedArgs) {

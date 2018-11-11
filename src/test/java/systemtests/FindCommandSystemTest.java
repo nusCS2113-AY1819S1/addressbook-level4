@@ -6,7 +6,7 @@
 //import static seedu.address.testutil.TypicalBooks.BIOLOGY;
 //import static seedu.address.testutil.TypicalBooks.CHEMISTRY;
 //import static seedu.address.testutil.TypicalBooks.DARWIN;
-//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_MEIER;
+//import static seedu.address.testutil.TypicalBooks.KEYWORD_MATCHING_BIOLOGY;
 //
 //import java.util.ArrayList;
 //import java.util.List;
@@ -28,16 +28,16 @@
 //        /* Case: find multiple persons in BookInventory, command with leading spaces and trailing spaces
 //         * -> 2 persons found
 //         */
-//        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
+//        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_BIOLOGY + "   ";
 //        Model expectedModel = getModel();
-//        ModelHelper.setFilteredList(expectedModel, BIOLOGY, DARWIN); // first names of Benson and Daniel are "Meier"
+//        ModelHelper.setFilteredList(expectedModel, BIOLOGY); // Find for biology
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
 //        /* Case: repeat previous find command where book list is displaying the persons we are finding
 //         * -> 2 persons found
 //         */
-//        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+//        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_BIOLOGY;
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
@@ -83,7 +83,7 @@
 //        /* Case: find same persons in BookInventory after deleting 1 of them -> 1 book found */
 //        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
 //        assertFalse(getModel().getBookInventory().getBookList().contains(BIOLOGY));
-//        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+//        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_BIOLOGY;
 //        expectedModel = getModel();
 //        ModelHelper.setFilteredList(expectedModel, DARWIN);
 //        assertCommandSuccess(command, expectedModel);
@@ -135,7 +135,7 @@
 //        /* Case: find while a book is selected -> selected card deselected */
 //        showAllPersons();
 //        selectPerson(Index.fromOneBased(1));
-//        assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DARWIN.getName().fullName));
+//        assertFalse(getBookListPanel().getHandleToSelectedCard().getName().equals(DARWIN.getName().fullName));
 //        command = FindCommand.COMMAND_WORD + " Daniel";
 //        ModelHelper.setFilteredList(expectedModel, DARWIN);
 //        assertCommandSuccess(command, expectedModel);
@@ -143,7 +143,7 @@
 //
 //        /* Case: find book in empty BookInventory -> 0 persons found */
 //        deleteAllPersons();
-//        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+//        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_BIOLOGY;
 //        expectedModel = getModel();
 //        ModelHelper.setFilteredList(expectedModel, DARWIN);
 //        assertCommandSuccess(command, expectedModel);
@@ -167,7 +167,7 @@
 //    private void assertCommandSuccess(String command, Model expectedModel) {
 //        String expectedResultMessage = String.format(
 //                MESSAGE_BOOKS_LISTED_OVERVIEW, expectedModel.getFilteredBookList().size());
-//
+//        System.out.println(expectedResultMessage);
 //        executeCommand(command);
 //        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
 //        assertCommandBoxShowsDefaultStyle();

@@ -21,7 +21,7 @@ import seedu.address.model.book.Book;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedBookInventory versionedAddressBook;
+    private final VersionedBookInventory versionedBookInventory;
     private final FilteredList<Book> filteredBooks;
 
     /**
@@ -33,8 +33,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + bookInventory + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedBookInventory(bookInventory);
-        filteredBooks = new FilteredList<>(versionedAddressBook.getBookList());
+        versionedBookInventory = new VersionedBookInventory(bookInventory);
+        filteredBooks = new FilteredList<>(versionedBookInventory.getBookList());
     }
 
     public ModelManager() {
@@ -43,41 +43,41 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyBookInventory newData) {
-        versionedAddressBook.resetData(newData);
+        versionedBookInventory.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
     public ReadOnlyBookInventory getBookInventory() {
-        return versionedAddressBook;
+        return versionedBookInventory;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new BookInventoryChangedEvent(versionedAddressBook));
+        raise(new BookInventoryChangedEvent(versionedBookInventory));
     }
 
     @Override
     public boolean hasBook(Book book) {
         requireNonNull(book);
-        return versionedAddressBook.hasBook(book);
+        return versionedBookInventory.hasBook(book);
     }
 
     @Override
     public Book getBook(String isbn) {
         requireNonNull(isbn);
-        return versionedAddressBook.getBook(isbn);
+        return versionedBookInventory.getBook(isbn);
     }
 
     @Override
     public void deleteBook(Book target) {
-        versionedAddressBook.removeBook(target);
+        versionedBookInventory.removeBook(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public void addBook(Book book) {
-        versionedAddressBook.addBook(book);
+        versionedBookInventory.addBook(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         indicateAddressBookChanged();
     }
@@ -86,19 +86,19 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
 
-        versionedAddressBook.updateBook(target, editedBook);
+        versionedBookInventory.updateBook(target, editedBook);
         indicateAddressBookChanged();
     }
 
     @Override
     public void sortBooksUsingQuantity() {
-        versionedAddressBook.sortBooks();
+        versionedBookInventory.sortBooks();
     }
     //=========== Filtered Book List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Book} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedBookInventory}
      */
     @Override
     public ObservableList<Book> getFilteredBookList() {
@@ -114,36 +114,36 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public Queue<String> getCompleteIsbn(String isbnText) {
-        return versionedAddressBook.getCompleteIsbn(isbnText);
+        return versionedBookInventory.getCompleteIsbn(isbnText);
     }
 
     //=========== Undo/Redo =================================================================================
 
     @Override
     public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+        return versionedBookInventory.canUndo();
     }
 
     @Override
     public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+        return versionedBookInventory.canRedo();
     }
 
     @Override
     public void undoBookInventory() {
-        versionedAddressBook.undo();
+        versionedBookInventory.undo();
         indicateAddressBookChanged();
     }
 
     @Override
     public void redoBookInventory() {
-        versionedAddressBook.redo();
+        versionedBookInventory.redo();
         indicateAddressBookChanged();
     }
 
     @Override
     public void commitBookInventory() {
-        versionedAddressBook.commit();
+        versionedBookInventory.commit();
     }
 
     @Override
@@ -160,7 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedBookInventory.equals(other.versionedBookInventory)
                 && filteredBooks.equals(other.filteredBooks);
     }
 
