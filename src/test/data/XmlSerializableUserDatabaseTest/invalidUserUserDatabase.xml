@@ -5,6 +5,7 @@
         <username>John!</username>
         <password>pass</password>
         <addressBookFilePath>data/addressbook-John!.xml</addressBookFilePath>
+        <distributorBookFilePath>data/distributor-John!.xml</distributorBookFilePath>
         <salesHistoryFilePath>data/saleshistory-John!.xml</salesHistoryFilePath>
     </users>
 </userdatabase>

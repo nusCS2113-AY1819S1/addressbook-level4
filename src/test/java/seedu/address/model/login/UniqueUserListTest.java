@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalUsers.AMY;
 import static seedu.address.testutil.TypicalUsers.BOB;
 
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
+import seedu.address.testutil.TypicalUsers;
 
 public class UniqueUserListTest {
 
@@ -43,7 +45,9 @@ public class UniqueUserListTest {
     @Test
     public void contains_userWithSameIdentityFieldsInList_returnsTrue() {
         uniqueUserList.add(AMY);
-        User editedAmy = new User(new Username("amy"), new Password("pass"));
+        User editedAmy = new User(new Username("amy"), new Password("pass"),
+                Paths.get(TypicalUsers.AMY_AB_PATH), Paths.get(TypicalUsers.AMY_DB_PATH),
+                Paths.get(TypicalUsers.AMY_SALESHISTORY_PATH));
         assertTrue(uniqueUserList.contains(editedAmy));
     }
 
