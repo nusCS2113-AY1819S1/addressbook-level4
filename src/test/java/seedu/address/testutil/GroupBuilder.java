@@ -24,6 +24,9 @@ public class GroupBuilder {
     private Set<Tag> tags;
     private Set<Person> persons;
 
+    /**
+     * Initializes the GroupBuilder with default values.
+     */
     public GroupBuilder() {
         groupName = new GroupName(DEFAULT_GROUP_NAME);
         groupLocation = new GroupLocation(DEFAULT_GROUP_LOCATION);
@@ -33,6 +36,8 @@ public class GroupBuilder {
 
     /**
      * Initializes the GroupBuilder with the data of {@code groupToCopy}.
+     *
+     * @param groupToCopy Group to initialize GroupBuilder with.
      */
     public GroupBuilder(Group groupToCopy) {
         groupName = groupToCopy.getGroupName();
@@ -42,6 +47,9 @@ public class GroupBuilder {
 
     /**
      * Sets the {@code GroupName} of the {@code Group} that we are building.
+     *
+     * @param groupName Group name to set.
+     * @return Group builder built.
      */
     public GroupBuilder withGroupName(String groupName) {
         this.groupName = new GroupName(groupName);
@@ -50,6 +58,9 @@ public class GroupBuilder {
 
     /**
      * Sets the {@code GroupLocation} of the {@code Group} that we are building.
+     *
+     * @param groupLocation Group location to set.
+     * @return Group builder built.
      */
     public GroupBuilder withGroupLocation(String groupLocation) {
         this.groupLocation = new GroupLocation(groupLocation);
@@ -58,12 +69,20 @@ public class GroupBuilder {
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Group} that we are building.
+     *
+     * @param tags Group tags to set.
+     * @return Group builder built.
      */
     public GroupBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
+    /**
+     * Returns group built by group builder.
+     *
+     * @return Group built.
+     */
     public Group build() {
         return new Group(groupName, groupLocation, tags);
     }

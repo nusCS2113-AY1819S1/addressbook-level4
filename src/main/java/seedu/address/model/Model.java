@@ -98,41 +98,59 @@ public interface Model {
     //@@author rajdeepsh
 
     /**
-     * Creates the given group.
-     * {@code group} must not already exist in the system.
+     * Adds a group to the address book.
+     * The group must not already exist in the address book.
+     *
+     * @param group Group to add.
      */
     void createGroup(Group group);
 
     /**
-     * Returns true if a group with the same identity fields and tag as {@code group} exists in the address book.
+     * Returns true if a group with the same identity fields
+     * as {@code group} exists in the address book.
+     *
+     * @param group Group to check for.
+     * @return Check result.
      */
     boolean hasGroup(Group group);
 
     /**
-     * Adds persons to the given group.
-     * {@code addGroup} persons must not already exist in the group.
+     * Adds persons to a group in the address book.
+     * The persons must not already exist in the group.
+     * The group must exist in the address book.
+     *
+     * @param addGroup Contains group and persons to add to group.
      */
     void addGroup(AddGroup addGroup);
 
     /**
-     * Return true if a person  with the same identity fields exist in the group.
+     * Return true if a person is already in the specified group.
+     *
+     * @param addGroup Contains group and person to check with.
+     * @return Check result.
      */
     boolean hasPersonInGroup(AddGroup addGroup);
 
     /**
-     * Deletes the given group.
-     * The group must exist in the address book.
+     * Deletes {@code target} from the AddressBook.
+     * {@code target} must exist in the address book.
+     *
+     * @param target Group to delete.
      */
     void deleteGroup(Group target);
 
     /**
-     * Deletes person from the given group.
-     * The person/group must exist in the address book.
+     * Removes person from a group.
+     *
+     * @param group Group to remove person from.
+     * @param targetPerson Person to be removed.
      */
     void deleteGroupPerson(Group group, Person targetPerson);
 
     /**
-     * Returns an unmodifiable view of the filtered group list
+     * Returns an unmodifiable view of the filtered group list.
+     *
+     * @return Unmodifiable group list.
      */
     ObservableList<Group> getFilteredGroupList();
 
@@ -142,6 +160,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
+
+    //@@author
 
     /**
      * Get the default scripts location from the model

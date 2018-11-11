@@ -24,6 +24,9 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 
+/**
+ * Contains unit tests for {@code Group}.
+ */
 public class GroupTest {
 
     @Rule

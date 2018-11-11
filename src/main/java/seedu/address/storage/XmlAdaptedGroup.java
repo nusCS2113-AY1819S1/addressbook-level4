@@ -47,6 +47,11 @@ public class XmlAdaptedGroup {
 
     /**
      * Constructs an {@code XmlAdaptedGroup} with the given group details.
+     *
+     * @param groupName Group name.
+     * @param groupLocation Group location.
+     * @param tagged Group tags.
+     * @param persons Group persons.
      */
     public XmlAdaptedGroup(String groupName, String groupLocation,
                            List<XmlAdaptedTag> tagged, List<XmlAdaptedPerson> persons) {
@@ -63,7 +68,7 @@ public class XmlAdaptedGroup {
     /**
      * Converts a given group into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedGroup
+     * @param source Future changes to this will not affect the created XmlAdaptedGroup.
      */
     public XmlAdaptedGroup(Group source) {
         groupName = source.getGroupName().groupName;
@@ -79,7 +84,8 @@ public class XmlAdaptedGroup {
     /**
      * Converts this jaxb-friendly adapted group object into the model's Group object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted group
+     * @return Model group object.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted group.
      */
     public Group toModelType() throws IllegalValueException {
         final List<Tag> groupTags = new ArrayList<>();
@@ -119,6 +125,12 @@ public class XmlAdaptedGroup {
         return group;
     }
 
+    /**
+     * Returns true if both objects have the same fields.
+     *
+     * @param other Object to compare with.
+     * @return Comparison result.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

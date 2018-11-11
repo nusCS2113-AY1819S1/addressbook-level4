@@ -214,30 +214,64 @@ public class SampleDataUtil {
         return new Group[] {
 
             new Group(new GroupName("CS2113"), new GroupLocation("LT15"),
-                    getTagSet("java", "friday", "4pm", "afternoon")),
+                    getTagSet("java", "friday", "4pm")),
 
-            new Group(new GroupName("CS2040C"), new GroupLocation("LT15"), getTagSet("cpp", "tuesday", "5pm")),
+            new Group(new GroupName("CS2040C"), new GroupLocation("LT15"),
+                    getTagSet("cpp", "tuesday", "5pm")),
 
             new Group(new GroupName("MA1508"), new GroupLocation("E1-01-01"),
-                    getTagSet("maths", "linear", "wednesday", "2pm")),
+                    getTagSet("maths", "wednesday", "2pm")),
 
             new Group(new GroupName("CG2027"), new GroupLocation("E2-02-02"),
                     getTagSet("circuits", "monday", "12pm")),
 
             new Group(new GroupName("TUT[01]"), new GroupLocation("E3-03-03"),
-                    getTagSet("MA1501", "monday", "6pm", "night")),
+                    getTagSet("pc1222", "monday", "6pm")),
 
             new Group(new GroupName("TUT[02]"), new GroupLocation("LT12"),
-                    getTagSet("physics", "thursday", "8am", "morning")),
+                    getTagSet("pc1222", "thursday", "8am")),
 
             new Group(new GroupName("TUT[03]"), new GroupLocation("LT12"),
-                    getTagSet("physics", "thursday", "10am")),
+                    getTagSet("pc1222", "thursday", "10am")),
 
             new Group(new GroupName("TUT[04]"), new GroupLocation("LT12"),
-                    getTagSet("physics", "thursday", "12pm")),
+                    getTagSet("pc1222", "thursday", "12pm")),
 
             new Group(new GroupName("TUT[05]"), new GroupLocation("LT12"),
-                    getTagSet("physics", "thursday", "4pm")),
+                    getTagSet("pc1222", "thursday", "4pm")),
+
+            new Group(new GroupName("TUT[06]"), new GroupLocation("LT12"),
+                    getTagSet("pc1222", "thursday", "5pm")),
+
+            new Group(new GroupName("CG2028"), new GroupLocation("LT16"),
+                    getTagSet("cpu", "monday", "8am")),
+
+            new Group(new GroupName("EE2028"), new GroupLocation("LT15"),
+                    getTagSet("fsm", "monday", "10am")),
+
+            new Group(new GroupName("IS3261"), new GroupLocation("E1-01-01"),
+                    getTagSet("android", "monday", "2pm")),
+
+            new Group(new GroupName("MA1501"), new GroupLocation("E2-02-02"),
+                    getTagSet("maths", "tuesday", "8am")),
+
+            new Group(new GroupName("TUT[07]"), new GroupLocation("E3-03-03"),
+                    getTagSet("pc1222", "tuesday", "10am")),
+
+            new Group(new GroupName("TUT[08]"), new GroupLocation("LT12"),
+                    getTagSet("pc1222", "tuesday", "12pm")),
+
+            new Group(new GroupName("TUT[09]"), new GroupLocation("LT08"),
+                    getTagSet("pc1222", "tuesday", "2pm")),
+
+            new Group(new GroupName("CS1010"), new GroupLocation("LT15"),
+                    getTagSet("c", "tuesday", "4pm")),
+
+            new Group(new GroupName("CS4210"), new GroupLocation("LT24"),
+                    getTagSet("ai", "friday", "8am")),
+
+            new Group(new GroupName("CS2113T"), new GroupLocation("LT24"),
+                    getTagSet("java", "friday", "10am")),
         };
     }
 
@@ -262,7 +296,7 @@ public class SampleDataUtil {
         int count = 0;
         for (Group abGroup : sampleAb.getGroupList()) {
             for (Person abPerson : sampleAb.getPersonList()) {
-                if (++count == 4) {
+                if (++count == 5) {
                     count = 0;
                     continue;
                 }

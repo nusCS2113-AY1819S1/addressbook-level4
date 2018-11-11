@@ -11,6 +11,9 @@ import org.junit.Test;
 
 import seedu.address.testutil.GroupBuilder;
 
+/**
+ * Contains unit tests for {@code GroupNameContainsKeywordsPredicate}.
+ */
 public class GroupNameContainsKeywordsPredicateTest {
     @Test
     public void equals() {

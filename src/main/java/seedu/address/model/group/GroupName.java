@@ -5,9 +5,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Group's Name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidGroupName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidGroupName(String)}.
  */
 public class GroupName {
+
     public static final String MESSAGE_GROUP_NAME_CONSTRAINTS =
             "Group names should only contain alphanumeric characters, '-', '[' and ']', "
                     + "and it should not be blank";
@@ -15,7 +16,7 @@ public class GroupName {
     /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
-     * Allows user to input alphanumeric, '-', '[' and ']' characters
+     * Allows user to input alphanumeric, '-', '[' and ']' characters.
      */
     public static final String GROUP_NAME_VALIDATION_REGEX = "[\\p{Alnum}\\-\\[\\]][\\p{Alnum}\\-\\[\\]]*";
 

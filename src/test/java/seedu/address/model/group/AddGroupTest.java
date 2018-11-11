@@ -25,6 +25,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.Assert;
 
+/**
+ * Contains unit tests for {@code AddGroup}.
+ */
 public class AddGroupTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

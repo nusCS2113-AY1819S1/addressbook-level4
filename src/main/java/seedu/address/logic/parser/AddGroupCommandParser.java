@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.AddGroup;
 
 /**
- * Parses input arguments and creates a new AddGroupCommand object
+ * Parses input arguments and creates a new AddGroupCommand object.
  */
 public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
@@ -21,7 +21,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
      * Parses the given {@code String} of arguments in the context of the AddGroupCommand
      * and returns an AddGroupCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public AddGroupCommand parse(String args) throws ParseException {
 

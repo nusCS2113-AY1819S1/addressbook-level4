@@ -13,7 +13,7 @@ import seedu.address.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSamePerson and .isSameGroup comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -53,6 +53,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the contents of the group list with {@code groups}.
      * {@code groups} must not contain duplicate groups.
+     *
+     * @param groups Groups to replace list with.
      */
     public void setGroups(List<Group> groups) {
         this.groups.setGroups(groups);
@@ -68,7 +70,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setGroups(newData.getGroupList());
     }
 
-    //// person and group - level operations
+    // person - level operations
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -105,9 +107,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    // group - level operations
+
     /**
-     * Returns true if a group with the same fields except its persons
+     * Returns true if a group with the same identity fields
      * as {@code group} exists in the address book.
+     *
+     * @param group Group to check for.
+     * @return Check result.
      */
     public boolean hasGroup(Group group) {
         requireNonNull(group);
@@ -115,8 +122,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Creates a group in the address book.
+     * Adds a group to the address book.
      * The group must not already exist in the address book.
+     *
+     * @param g Group to add.
      */
     public void createGroup(Group g) {
         groups.createGroup(g);
@@ -125,6 +134,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds persons to a group in the address book.
      * The persons must not already exist in the group.
+     * The group must exist in the address book.
+     *
+     * @param aG Contains group and persons to add to group.
      */
     public void addGroup(AddGroup aG) {
         groups.addGroup(aG);
@@ -133,23 +145,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
+     *
+     * @param key Group to remove.
      */
     public void removeGroup(Group key) {
         groups.remove(key);
     }
 
     /**
-     * Return true if a person with the same identity is already in the
-     * specified group.
+     * Return true if a person is already in the specified group.
+     *
+     * @param aG Contains group and person to check with.
+     * @return Check result.
      */
     public boolean hasPersonInGroup(AddGroup aG) {
         return groups.contains(aG);
     }
 
     /**
-     * Removes person from group
-     * @param g group to remove person from
-     * @param p person to be removed
+     * Removes person from a group.
+     *
+     * @param g Group to remove person from.
+     * @param p Person to be removed.
      */
     public void removeGroupPerson(Group g, Person p) {
         groups.removeGroupPerson(g, p);
@@ -157,6 +174,11 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// util methods
 
+    /**
+     * Returns the size of persons and groups.
+     *
+     * @return String containing size of persons and group.
+     */
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons "
@@ -168,11 +190,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns the group list as {@code UnmodifiableObservableList}.
+     *
+     * @return Unmodifiable list.
+     */
     @Override
     public ObservableList<Group> getGroupList() {
         return groups.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns true if both objects have the same fields.
+     *
+     * @param other Object to compare with.
+     * @return Comparison result.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -24,13 +24,13 @@ import seedu.address.model.tag.Tag;
  * A list of groups that enforces uniqueness between its elements and does not allow nulls.
  * A group is considered unique by comparing using {@code Group#isSameGroup(Group)}. As such, adding and updating of
  * groups uses Group#isSameGroup(Group) for equality so as to ensure that the group being added or updated is
- * unique in terms of all fields except its persons in the UniqueGroupList.
+ * unique in terms of identity fields.
  * However, the removal of a Group uses Group#equals(Object) so
  * as to ensure that the group with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Group#isSameGroup(Group)
+ * @see Group#isSameGroup(Group).
  */
 public class UniqueGroupList implements Iterable<Group> {
 
@@ -38,6 +38,9 @@ public class UniqueGroupList implements Iterable<Group> {
 
     /**
      * Returns true if the internal list contains an equivalent group as the given argument.
+     *
+     * @param toCheck Group to compare with.
+     * @return Match result.
      */
     public boolean contains(Group toCheck) {
         requireNonNull(toCheck);
@@ -47,6 +50,9 @@ public class UniqueGroupList implements Iterable<Group> {
     /**
      * Returns true if a specific group in the internal list contains at least one same person as the persons in the
      * given argument.
+     *
+     * @param toCheck Contains persons to compare with.
+     * @return Person match result.
      */
     public boolean contains(AddGroup toCheck) {
         requireNonNull(toCheck);
@@ -61,6 +67,10 @@ public class UniqueGroupList implements Iterable<Group> {
     /**
      * Returns true if the group in the given argument contains least one
      * same person as the persons in the given argument.
+     *
+     * @param group Contains persons to compare with.
+     * @param toCheck Contains persons to compare with.
+     * @return Person match result.
      */
     public boolean contains(Group group, AddGroup toCheck) {
         requireAllNonNull(group, toCheck);
@@ -75,8 +85,10 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Creates a group in the list.
+     * Adds a group to the internal list.
      * The group must not already exist in the list.
+     *
+     * @param toCreate Group to be added.
      */
     public void createGroup(Group toCreate) {
         requireNonNull(toCreate);
@@ -89,6 +101,8 @@ public class UniqueGroupList implements Iterable<Group> {
     /**
      * Removes the equivalent group from the list.
      * The group must exist in the list.
+     *
+     * @param toRemove Group to be removed.
      */
     public void remove(Group toRemove) {
         requireNonNull(toRemove);
@@ -101,6 +115,9 @@ public class UniqueGroupList implements Iterable<Group> {
      * Removes a person from a group in the list.
      * The group must exist in the list.
      * The person must exist in the group.
+     *
+     * @param group Group to remove person from.
+     * @param toRemove Person to be removed.
      */
     public void removeGroupPerson(Group group, Person toRemove) {
         requireAllNonNull(group, toRemove);
@@ -126,6 +143,8 @@ public class UniqueGroupList implements Iterable<Group> {
     /**
      * Adds persons to a group in the list.
      * The person must not already exist in the list.
+     *
+     * @param toAdd Contains group and persons needed for this operation.
      */
     public void addGroup(AddGroup toAdd) {
         requireNonNull(toAdd);
@@ -136,7 +155,11 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Adds persons to group in list
+     * Adds persons to group in list.
+     * The group must exist in the list.
+     * The person must not already exist in the list.
+     *
+     * @param toAdd Contains group and persons needed for this operation.
      */
     public void addPersons(AddGroup toAdd) {
         requireNonNull(toAdd);
@@ -151,10 +174,12 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Creates a new group object to replace existing group
-     * @param target Group object to be replaced
-     * @param personSet
-     * @return
+     * Creates a new edited group object to replace existing group.
+     *
+     * @param target Group to be replaced.
+     * @param personSet Persons to be added to edited group based on {@code addPerson}.
+     * @param addPerson Flag to add {@code personSet}.
+     * @return Edited group.
      */
     public Group createEditedGroup(Group target, Set<Person> personSet, Boolean addPerson) {
         requireAllNonNull(target, personSet, addPerson);
@@ -171,8 +196,10 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Replaces the contents of this list with {@code groups}.
+     * Replaces the contents of the internal list with {@code groups}.
      * {@code groups} must not contain duplicate groups.
+     *
+     * @param groups Groups to replace internal list with.
      */
     public void setGroups(List<Group> groups) {
         requireAllNonNull(groups);
@@ -185,16 +212,29 @@ public class UniqueGroupList implements Iterable<Group> {
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
+     *
+     * @return Unmodifiable list.
      */
     public ObservableList<Group> asUnmodifiableObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    /**
+     * Returns iterator to internal list.
+     *
+     * @return Internal list iterator.
+     */
     @Override
     public Iterator<Group> iterator() {
         return internalList.iterator();
     }
 
+    /**
+     * Returns true if both objects have the same fields.
+     *
+     * @param other Object to compare with.
+     * @return Comparison result.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -204,6 +244,9 @@ public class UniqueGroupList implements Iterable<Group> {
 
     /**
      * Returns true if {@code groups} contains only unique groups.
+     *
+     * @param groups Groups to check for uniqueness.
+     * @return Comparison result.
      */
     private boolean groupsAreUnique(List<Group> groups) {
         for (int i = 0; i < groups.size() - 1; i++) {

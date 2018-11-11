@@ -24,6 +24,11 @@ public class GroupCardHandle extends NodeHandle<Node> {
     private final Label groupLocationLabel;
     private final List<Label> tagLabels;
 
+    /**
+     * Initializes GroupCardHandel.
+     *
+     * @param cardNode Set as root node.
+     */
     public GroupCardHandle(Node cardNode) {
         super(cardNode);
 
@@ -39,18 +44,38 @@ public class GroupCardHandle extends NodeHandle<Node> {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Returns card id.
+     *
+     * @return Card id.
+     */
     public String getId() {
         return idLabel.getText();
     }
 
+    /**
+     * Returns card group name.
+     *
+     * @return Card group name.
+     */
     public String getGroupName() {
         return groupNameLabel.getText();
     }
 
+    /**
+     * Returns card group location.
+     *
+     * @return Card group location.
+     */
     public String getGroupLocation() {
         return groupLocationLabel.getText();
     }
 
+    /**
+     * Returns card group tags.
+     *
+     * @return Card group tags.
+     */
     public List<String> getTags() {
         return tagLabels
                 .stream()
@@ -58,6 +83,11 @@ public class GroupCardHandle extends NodeHandle<Node> {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Returns card tag style classes.
+     *
+     * @return Card tag style classes.
+     */
     public List<String> getTagStyleClasses(String tag) {
         return tagLabels
                 .stream()
@@ -69,6 +99,9 @@ public class GroupCardHandle extends NodeHandle<Node> {
 
     /**
      * Returns true if this handle contains {@code group}.
+     *
+     * @param group Group to check.
+     * @return Comparison result.
      */
     public boolean equals(Group group) {
         return getGroupName().equals(group.getGroupName().groupName)

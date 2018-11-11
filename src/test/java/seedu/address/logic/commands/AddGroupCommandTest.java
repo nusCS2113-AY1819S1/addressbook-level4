@@ -29,7 +29,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for AddGroupCommand.
+ * Contains integration tests (interaction with the Model stub) and unit tests for AddGroupCommand.
  */
 public class AddGroupCommandTest {
 

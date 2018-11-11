@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Group's location in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidGroupLocation(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidGroupLocation(String)}.
  */
 public class GroupLocation {
 
@@ -16,7 +16,7 @@ public class GroupLocation {
     /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
-     * Allow user to input '-' and alphanumeric characters
+     * Allows user to input '-' and alphanumeric characters.
      */
     public static final String LOCATION_VALIDATION_REGEX = "[\\p{Alnum}\\-][\\p{Alnum}\\-]*";
 
