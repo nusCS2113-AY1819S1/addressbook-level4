@@ -14,9 +14,10 @@ import seedu.address.model.expenditureinfo.Date;
  * Parses input arguments and creates a new CheckExpenditureCommand object
  */
 public class CheckExpenditureCommandParser implements Parser<CheckExpenditureCommand> {
+
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the CheckExpenditureCommand
+     * and returns an CheckExpenditure object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public CheckExpenditureCommand parse(String args) throws ParseException {

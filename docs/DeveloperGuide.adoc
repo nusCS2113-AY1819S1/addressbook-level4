@@ -442,6 +442,22 @@ image::CheckSequenceDiagram.png[width="800"]
 ==== Design Consideration
 ===== Aspect: Methods to support the check commands
 
+* **Alternative 1 (current choice):** Use list to get each money in expenditures.
+** Pros: Easy to implement using the exist list for expenditures.
+** Cons: Can not get the expenditures which are not shown in the list.
+* **Alternative 2:** Create additional structure for expenditures.
+** Pros: May use less memory.
+** Cons: Another data structure may cause some errors.
+
+===== Aspect: Methods to generate the graph
+
+* **Alternative 1 (current choice):** Use a pie chart.
+** Pros: Can show users the percentage of each expenditure directly.
+** Cons: Do not show the change of their expense during this period.
+* **Alternative 2:** Use a line chart.
+** Pros: Can show users the trend of their expenditures according to the date.
+** Cons: Can not let users know how much each expenditure occupies total expenditures.
+
 // end::checkexpenditure[]
 
 // tag::dataencryption[]
