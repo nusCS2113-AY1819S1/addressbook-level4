@@ -1418,8 +1418,8 @@ _{More to be added}_
 == Non Functional Requirements
 
 .  Must be able to accommodate the contact details of everyone in NUSSU + 1000 extra contact details.
-.  All exco members of NUSSU should be able to create an account.
-.  Passwords must be salted and hashed with md5.
+.  Only the president of NUSSU should be able to create an account.
+.  Passwords must be encrypted.
 .  All commands must be completed within 1 second.
 .  The single and multi-input commands phrases should be easy to remember and intuitive to understand what they mean.
 
@@ -1473,7 +1473,17 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+=== Creating an account
+
+. Creating a new account with the createaccount command
+
+.. Prerequisites: Need to be logged in as president role.
+.. Test case: `createaccount A1234566M zaq1xsw2cde3 member` +
+   Expected: A new account containing login details matching user input is created. A successful creation of account message is shown in the results display.
+.. Test case: `createaccount A1234567M zaq1xsw2cde3 member` +
+   Expected: Account is not created. Error details shown in results display.
+.. Other incorrect delete commands to try: `createaccount`, `createaccount a1234566m zaq1xsw2cde3 member`, `createaccount A1234566M zaq1xsw2cde3 janitor`, `createaccount zaq1xsw2cde3 member`, `createaccount A1234566Mzaq1xsw2cde3member`
+   Expected: Similar to previous.
 
 === Deleting a person
 
@@ -1487,12 +1497,8 @@ _{ more test cases ... }_
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
-
 === Saving data
 
 . Dealing with missing/corrupted data files
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
