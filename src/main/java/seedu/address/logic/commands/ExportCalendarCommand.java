@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URI;
 import java.net.UnknownHostException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,6 +45,7 @@ public class ExportCalendarCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " filename\n"
             + "export current user registered event as an iCalender file\n"
             + "filename should not be empty or longer than 255 character\n"
+            + "filename should only contain alphanumeric characters and some special characters" + "!#$%&'+=~^.@-\n"
             + "Example: export myCalendar";
 
     public static final String MESSAGE_EXPORT_SUCCESS =
@@ -54,7 +56,7 @@ public class ExportCalendarCommand extends Command {
 
     public static final String MESSAGE_ZERO_EVENT_REGISTERED = "User %1$s has not registered for any event";
 
-    private static final String CALENDAR_FILE_PATH = "data\\";
+    private static final String CALENDAR_FILE_PATH = "data\\%1$s.ics";
 
     private final String fileName;
 
@@ -184,10 +186,9 @@ public class ExportCalendarCommand extends Command {
      * @throws IOException when file stream have problems
      */
     public void exportICalenderFile(ObservableList<Event> registeredEventList, String fileName) throws IOException {
-        String outputFilename = CALENDAR_FILE_PATH + String.format("%1$s.ics", fileName);
+        String outputFilename = Paths.get(String.format(CALENDAR_FILE_PATH, fileName)).toString();
         File outputFile = new File(outputFilename);
 
-        //FileOutputStream fileOut = new FileOutputStream(outputFilename, false);
         FileOutputStream fileOut = new FileOutputStream(outputFile, false);
 
         CalendarOutputter outPutter = new CalendarOutputter();

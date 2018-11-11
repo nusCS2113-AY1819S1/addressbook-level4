@@ -577,7 +577,7 @@ Current version implementation using logic AND operator for different prefixes c
 ** Pros: Follow the current structure of `find` command, which mean can reuse current resources
 ** Cons: With the current implementation of the predicate, scaling will severely affect product performance
 
-==== Future enhancement:
+==== Future enhancement: V2.0
 * Search for contained or exact keywords option
 * Search with  both `logic AND and OR operator` with different prefixes
 * Search for time range
@@ -596,7 +596,7 @@ Step 2: User execute 'export my event calendar' command. The export command rece
 
 Step 3: Current user, who are logging in, will be used to receive an event filtered list that he/she registered for.
 
-Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format
+Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in *data* folder
 
 ==== Aspect: How to export the event list
 * **Alternative 1 (current implementation):** Using ical4j external library to create method to convert event to RFC5545 format, then stream to FileOutputStream with given filename from user. +

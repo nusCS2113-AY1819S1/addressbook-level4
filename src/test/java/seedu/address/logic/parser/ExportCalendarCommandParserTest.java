@@ -23,6 +23,7 @@ public class ExportCalendarCommandParserTest {
 
     @Test
     public void parse_invalidArgument_failure() {
+        //empty file name
         assertParseFailure(parser, "      ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ExportCalendarCommand.MESSAGE_USAGE));
 
@@ -31,6 +32,10 @@ public class ExportCalendarCommandParserTest {
                 + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                 + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                 + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ExportCalendarCommand.MESSAGE_USAGE));
+
+        //invalid special characters
+        assertParseFailure(parser, "C/::*?", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ExportCalendarCommand.MESSAGE_USAGE));
     }
 

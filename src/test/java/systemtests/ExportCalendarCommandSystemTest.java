@@ -93,11 +93,22 @@ public class ExportCalendarCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, expectedModel, registeredEvent, index,
                 String.format(RegisterCommand.MESSAGE_REGISTER_EVENT_SUCCESS, index.getOneBased()));
 
-        filename = "C:/mycal";
+        //This test should only be used on Windows system
+        /*
+        filename = "COM1";
         command = "   " + ExportCalendarCommand.COMMAND_WORD + " " + filename;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel);
         assertCommandFailure(command, String.format(ExportCalendarCommand.MESSAGE_FILE_ERROR, filename), expectedModel);
+        */
+
+        //invalid filename
+        filename = "C\\*`?|";
+        command = "   " + ExportCalendarCommand.COMMAND_WORD + " " + filename;
+        expectedModel = getModel();
+        ModelHelper.setFilteredList(expectedModel);
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ExportCalendarCommand.MESSAGE_USAGE), expectedModel);
 
         //filename is too long -> rejected
         filename = "myCalendarFileNameIsTooLongggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
