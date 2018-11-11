@@ -36,15 +36,14 @@ sorted by their ranks*. The list of milestones will be displayed in the order th
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
 *** Modified the GUI for each task to include a list of the milestones for that particular task (Pull requests https://github.com/CS2113-AY1819S1-W13-3/main/pull/54[#54], https://github.com/CS2113-AY1819S1-W13-3/main/pull/97[#97])
-*** Wrote additional tests for existing features to increase coverage from XX% to XX% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Wrote tests for milestone feature to ensure adequate code coverage(Pull requests https://github.com/CS2113-AY1819S1-W13-3/main/pull/100[#100], https://github.com/CS2113-AY1819S1-W13-3/main/pull/102[#102], https://github.com/CS2113-AY1819S1-W13-3/main/pull/108[#108], https://github.com/CS2113-AY1819S1-W13-3/main/pull/109[#109])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks and revised existing contents of the User Guide(Pull requests https://github.com/CS2113-AY1819S1-W13-3/main/pull/109[#109])
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-W13-3/main/pull/18[#18]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-F09-2/main/issues/146[1], https://github.com/CS2113-AY1819S1-F09-2/main/issues/151[2], https://github.com/CS2113-AY1819S1-F09-2/main/issues/154[3], https://github.com/CS2113-AY1819S1-F09-2/main/issues/164[4])
 
 == Contributions to the User Guide
 
