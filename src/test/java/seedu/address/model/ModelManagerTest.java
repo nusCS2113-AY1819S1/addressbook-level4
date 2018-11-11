@@ -1,12 +1,17 @@
 package seedu.address.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
@@ -21,6 +26,13 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
+    private static final Path IMPORT_TYPICAL_ADDRESSBOOK_FILE_PATH = Paths.get("src", "test", "data",
+            "sandbox", "importTypicalAddressbook.xml");
+    private static final Path IMPORT_TWO_PERSONS_FILE_PATH = Paths.get("src", "test", "data",
+            "sandbox", "importTwoPersons.xml");
+    private static final Path IMPORT_EMPTY_ADDRESSBOOK_FILE_PATH = Paths.get("src", "test", "data",
+            "sandbox", "importEmptyAddressbook.xml");
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     @Rule
@@ -49,6 +61,49 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
+    }
+
+    @Test
+    public void importPersonsFromAddressBook_addTwoPersons_success() throws IOException, DataConversionException {
+        modelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.addPerson(AMY);
+        expectedModel.addPerson(BOB);
+
+        modelManager.importPersonsFromAddressBook(IMPORT_TWO_PERSONS_FILE_PATH);
+
+        assertEquals(modelManager, expectedModel);
+    }
+
+    @Test
+    public void importPersonsFromAddressBook_noPersonAdded_success() throws IOException, DataConversionException {
+        modelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelManager.importPersonsFromAddressBook(IMPORT_TYPICAL_ADDRESSBOOK_FILE_PATH);
+
+        assertEquals(modelManager, expectedModel);
+    }
+
+    @Test
+    public void importPersonsFromAddressBook_addTypicalPersons_success()
+            throws IOException, DataConversionException {
+        modelManager = new ModelManager(new AddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        modelManager.importPersonsFromAddressBook(IMPORT_TYPICAL_ADDRESSBOOK_FILE_PATH);
+
+        // Cannot compare the whole modelManager since todos are not transferred
+        assertEquals(modelManager.getFilteredPersonList(), expectedModel.getFilteredPersonList());
+    }
+
+    @Test
+    public void importPersonsFromAddressBook_addEmptyAddressBook_success() throws IOException, DataConversionException {
+        ModelManager expectedModel = modelManager;
+        modelManager.importPersonsFromAddressBook(IMPORT_EMPTY_ADDRESSBOOK_FILE_PATH);
+
+        assertEquals(modelManager, expectedModel);
     }
 
     @Test
