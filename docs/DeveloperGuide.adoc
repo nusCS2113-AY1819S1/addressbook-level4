@@ -464,8 +464,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |busy student |defer deadlines |allow for a more flexible schedule when workload becomes too heavy
 
-|`* *` |flexible student |remove self imposed deadlines |shift my priorities to other tasks
-
 |`* * *` |unorganised student |select a date |add/delete/complete tasks for that particular day
 
 |`* * *` |objective student |break up my task into smaller tasks |manage them more effectively
@@ -479,6 +477,26 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 == Use Cases
 
 (For all use cases below, the *System* is the `TaskBook` and the *Actor* is the `student`, unless specified otherwise)
+
+// tag::select[]
+[discrete]
+
+=== Use case: Select a date
+
+*MSS*
+
+1. Student requests to select date required
+2. TB checks for its validity and changes to the required date
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Date entered by the student is not valid e.g. dd/29 mm/2 yyyy/2018
+** 1a1. TB prompts student to enter a correct date
++
+Use case resumes at step 2.
+// end::select[]
 
 [discrete]
 === Use case: Add new task
@@ -502,33 +520,6 @@ Use case ends.
 ** 3b1. TB outputs an error message
 +
 Use case ends.
-
-[discrete]
-=== Use case: Add milestone
-
-*MSS*
-
-1. Student requests to add a new milestone
-2. TB returns a list of tasks entered previously
-3. Student selects the task to add the milestone to
-4. TB asks for the milestone description and rank
-5. Student provides the milestone description and rank
-6. TB adds the milestone to the selected task
-+
-Use case ends.
-
-*Extensions*
-
-* 2a. Task Book is currently empty as no tasks has been added yet.
-** 2a1. TB outputs error message
-+
-Use case ends.
-
-* 5a. Student enters an milestone description and rank with invalid format
-** 5a1. TB requests for milestone description and rank with valid format
-** 5a2. Student enters milestone description and rank with valid format
-+
-Use case resumes at step 6.
 
 [discrete]
 === Use case: Complete task
@@ -556,36 +547,19 @@ Use case ends.
 Use case ends.
 
 [discrete]
-
-// tag::editTask[]
-=== Use case: Edit task
+=== Use case: Delete task
 
 *MSS*
 
-1.  Student requests to edit a selected task by providing its index and the fields with the values to be updated.
-2.  TB checks for validity of the index and updates the fields with the values provided.
+1. Student requests to delete a task by providing its index
+2. TB removes deadline from the task
 +
 Use case ends.
 
 *Extensions*
 
-* 1a. Student provided an invalid index
-** 1a1. TB outputs error message
-** 1a2. Student enters a new Edit command
-+
-Use case ends.
-
-* 1b. Student did not provide any field or values to update selected task
-** 1b1. TB returns an error message
-** 1b2. Student enters a new Edit command
-+
-Use case ends.
-
-* 1b. Values provided by student results in an edited task exactly the same as another existing task
-** 1b1. TB returns duplicate task info message
-+
-Use case ends.
-// end::editTask[]
+* 1a. Student provides an invalid index of the task
+** 1a1. TB outputs an error message
 
 [discrete]
 === Use case: Sort tasks
@@ -630,39 +604,69 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Delete task
+// tag::editTask[]
+=== Use case: Edit task
 
 *MSS*
 
-1. Student requests to delete a task by providing its index
-2. TB removes deadline from the task
+1.  Student requests to edit a selected task by providing its index and the fields with the values to be updated.
+2.  TB checks for validity of the index and updates the fields with the values provided.
 +
 Use case ends.
 
 *Extensions*
 
-* 1a. Student provides an invalid index of the task
-** 1a1. TB outputs an error message
+* 1a. Student provided an invalid index
+** 1a1. TB outputs error message
+** 1a2. Student enters a new Edit command
++
+Use case ends.
 
-// tag::select[]
+* 1b. Student did not provide any field or values to update selected task
+** 1b1. TB returns an error message
+** 1b2. Student enters a new Edit command
++
+Use case ends.
+
+* 1c. Values provided by student results in the exact same task as before it was edited
+** 1c1. TB returns no field edited error message
+** 1c2. Student enters a new Edit command
++
+Use case ends.
+
+* 1d. Values provided by student results in an edited task exactly the same as another existing task
+** 1d1. TB returns duplicate task info message
+** 1d2. Student enters a new Edit command
++
+Use case ends.
+// end::editTask[]
+
 [discrete]
-
-=== Use case: Select a date
+=== Use case: Add milestone
 
 *MSS*
 
-1. Student requests to select date required
-2. TB checks for its validity and changes to the required date
+1. Student requests to add a new milestone
+2. TB returns a list of tasks entered previously
+3. Student selects the task to add the milestone to
+4. TB asks for the milestone description and rank
+5. Student provides the milestone description and rank
+6. TB adds the milestone to the selected task
 +
 Use case ends.
 
 *Extensions*
 
-* 1a. Date entered by the student is not valid e.g. dd/29 mm/2 yyyy/2018
-** 1a1. TB prompts student to enter a correct date
+* 2a. Task Book is currently empty as no tasks has been added yet.
+** 2a1. TB outputs error message
 +
-Use case resumes at step 2.
-// end::select[]
+Use case ends.
+
+* 5a. Student enters an milestone description and rank with invalid format
+** 5a1. TB requests for milestone description and rank with valid format
+** 5a2. Student enters milestone description and rank with valid format
++
+Use case resumes at step 6.
 
 [appendix]
 == Non Functional Requirements

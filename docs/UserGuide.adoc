@@ -52,14 +52,95 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
+// tag::selectDeadline[]
+=== Selecting a date: `select`
+
+Chooses a particular date to be set as the deadline for tasks to be added. +
+Format: `select dd/DAY mm/MONTH [yyyy/YEAR]` or
+`select DAY/MONTH[/YEAR]`
+
+[NOTE]
+====
+A valid year *must* be between 2018 and 9999 (inclusive)
+====
+
+Examples:
+
+* `select dd/1 mm/1`
+* `select 1/1`
+* `select dd/1 mm/1 yyyy/2018`
+* `select 1/1/2018`
+// end::selectDeadline[]
+
 === Adding a task: `add`
 
 Adds a task with its module code, title, description, priority level (low, medium, high) and the number of hours (integers only) expected to complete this task, to the task book +
 Format: `add c/MODULE_CODE t/TITLE d/DESCRIPTION p/PRIORITY h/HOURS`
+>>>>>>> Stashed changes
 
 Examples:
 
 * `add c/CS2113 t/Complete 2113 Tutorial d/with code done p/high h/1`
+
+=== Complete a task: `complete`
+
+Complete a task in the task book by providing its index and the actual number of hours taken to complete the task +
+Format: `complete i/INDEX h/HOURS_TO_COMPLETE`
+
+Examples:
+
+* `complete i/1 h/2`
+
+=== Delete a task : `delete`
+
+Removes a task from the task book
+Format: `delete [INDEX]`
+
+Examples:
+
+* `delete 1`
+
+=== Sort the taskbook: `sort`
+
+Sort the tasks in the task book via `priority`, `deadlines`, `modules`, or `title` +
+Format: `sort s/METHOD`
+
+Examples:
+
+* `sort s/priority`
+
+=== Deferring a deadline: `defer`
+
+Defers a deadline for a task +
+Format: `defer i/INDEX dd/DAY mm/MONTH yyyy/YEAR`
+
+[NOTE]
+====
+A valid year _must_ be between 2018 and 9999 (inclusive)
+====
+
+Examples:
+
+* `defer i/1 dd/04 mm/01 yyyy/2018`
+
+// tag::editTask[]
+=== Editing a task: `edit`
+
+Edits one or more fields in a selected task. +
+Format: `edit i/INDEX [t/TITLE] [d/DESCRIPTION] [c/MODULE CODE] [p/PRIORITY] [h/HOURS]`
+
+[NOTE]
+====
+* Index must be present and must be a non-zero positive integer
+* At least one optional field to be edited must be provided
+====
+
+Examples:
+
+* `edit i/1 t/Complete CS2113 tutorial`
+* `edit i/1 d/Edit editTask to fit TaskBook h/4`
+* `edit i/1 t/Complete CS2271 tutorial d/Edit editTask to fit TaskBook c/CS2113 p/high h/4`
+// end::editTask[]
 
 // tag::add_milestone[]
 === Adding a milestone: `add_milestone`
@@ -101,83 +182,15 @@ Rank is the level of importance assigned to that particular milestone by the use
 
 // end::add_milestone[]
 
-=== Complete a task: `complete`
-
-Complete a task in the task book by providing its index and the actual number of hours taken to complete the task +
-Format: `complete i/INDEX h/HOURS_TO_COMPLETE`
-
-Examples:
-
-* `complete i/1 h/2`
-
-=== Sort the taskbook: `sort`
-
-Sort the tasks in the task book via `priority`, `deadlines`, `modules`, or `title` +
-Format: `sort s/METHOD`
-
-Examples:
-
-* `sort s/priority`
-
-=== Deferring a deadline: `defer`
-
-Defers a deadline for a task +
-Format: `defer i/INDEX dd/DAY mm/MONTH yyyy/YEAR`
-
-[NOTE]
-====
-A valid year _must_ be between 2018 and 9999 (inclusive)
-====
-
-Examples:
-
-* `defer i/1 dd/04 mm/01 yyyy/2018`
-
-=== Delete a task : `delete`
-
-Removes a task from the task book
-Format: `delete [INDEX]`
-
-Examples:
-
-* `delete 1`
-
-// tag::selectDeadline[]
-=== Selecting a date: `select`
-
-Chooses a particular date. +
-//Format: `select dd/DAY [mm/MONTH] [yyyy/YEAR]`
-Format: `select dd/DAY mm/MONTH yyyy/YEAR` or
-`select DAY/MONTH/YEAR`
-
-[NOTE]
-====
-A valid year _must_ be between 2018 and 9999 (inclusive)
-====
-
-Examples:
-
-//* `select dd/1`
-//* `select dd/1 mm/1`
-* `select dd/1 mm/1 yyyy/2018`
-// end::selectDeadline[]
-
-// tag::editTask[]
-=== Editing a task: `edit`
-
-Edits one or more fields in a selected task. +
-Format: `edit i/INDEX [t/TITLE] [d/DESCRIPTION] [c/MODULE CODE] [p/PRIORITY] [h/HOURS]`
-
-Examples:
-
-* `edit i/1 t/Complete CS2113 tutorial`
-* `edit i/1 d/Edit editTask to fit TaskBook h/4`
-* `edit i/1 t/Complete CS2271 tutorial d/Edit editTask to fit TaskBook c/CS2113 p/high h/4`
-// end::editTask[]
-
 === Tracking productivity : `track`
+
 Tracks your productivity for all completed tasks, by returning an average productivity (in percentage). +
 Format: `track`
+
+=== Listing all existing Tasks : `list`
+
+Lists all the existing tasks in task book. +
+Format: `list`
 
 === Listing entered commands : `history`
 
@@ -280,27 +293,27 @@ image::AddMilestoneCommand_invalidIndex.png[width="790"]
 // end::FAQ_milestone[]
 
 == Command Summary
-
-* *Add task* : `add c/MODULE_CODE t/ACTION d/DESCRIPTION p/PRIORITY_LEVEL h/HOURS_TO_COMPLETE` +
-e.g. `add c/CS2113 t/Complete 2113 Tutorial d/with code done p/high h/2`
-* *Add milestone* : `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK...` +
-e.g. `add_milestone i/1 m/Q1 - 3 r/1`
-* *Clear* : `clear`
-* *Complete* : `complete i/INDEX h/HOURS_COMPLETED` +
-e.g. `complete i/1 h/2`
-* *Defer deadline* : `defer i/INDEX dd/DAY mm/MONTH yyyy/YEAR` +
-e.g. `defer i/1 dd/01 mm/01 yyyy/2018`
-* *Delete* : `delete INDEX`
-e.g. `delete 1`
-* *Edit* : 'edit edit i/INDEX [t/TITLE] [d/DESCRIPTION] [c/MODULE CODE] [p/PRIORITY] [h/HOURS]` +
-e.g. `edit i/1 t/Complete CS2271 tutorial d/Edit editTask to fit TaskBook c/CS2113 p/high h/4`
-* *List* : `list`
 * *Help* : `help`
-* *History* : `history`
 * *Select* : `select dd/DAY mm/MONTH yyyy/YEAR` or `select DAY/MONTH/YEAR` +
 e.g. `select dd/1 mm/1 yyyy/2018`
-* *Sort* : `sort s/METHOD`
-e.g. `sort s/priority` +
+* *Add task* : `add c/MODULE_CODE t/ACTION d/DESCRIPTION p/PRIORITY_LEVEL h/HOURS_TO_COMPLETE` +
+e.g. `add c/CS2113 t/Complete 2113 Tutorial d/with code done p/high h/2`
+* *Complete* : `complete i/INDEX h/HOURS_COMPLETED` +
+e.g. `complete i/1 h/2`
+* *Delete* : `delete INDEX`
+e.g. `delete 1`
+* *Sort* : `sort s/METHOD` +
+e.g. `sort s/priority`
+* *Defer deadline* : `defer i/INDEX dd/DAY mm/MONTH yyyy/YEAR` +
+e.g. `defer i/1 dd/01 mm/01 yyyy/2018`
+* *Edit* : `edit i/INDEX [t/TITLE] [d/DESCRIPTION] [c/MODULE CODE] [p/PRIORITY] [h/HOURS]` +
+e.g. `edit i/1 t/Complete CS2271 tutorial d/Edit editTask to fit TaskBook c/CS2113 p/high h/4`
+* *Add milestone* : `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK...` +
+e.g. `add_milestone i/1 m/Q1 - 3 r/1`
 * *Track* : `track`
+* *List* : `list`
+* *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Clear* : `clear`
+* *Exit* : `exit`
