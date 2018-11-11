@@ -13,7 +13,7 @@ BookInventory is a desktop application to assist store managers in managing thei
 
 == Summary of contributions
 
-* *Major enhancement* Added a command for students to request for books.
+* *Major enhancement* Added a command for students to *request* for books.
 ** Functionality: Students may request for any book by typing the command in the format given in the user guide. Students may request for any book, regardless of whether the book exists in the book store.
 ** Justification: This feature brings about convenience for students who can demand a book at the comfort of their homes. This is also advantageous for bookstore owners in gauging which books are popular and hence increase the supply of those books accordingly.
 ** Highlights: The implementation of an additional panel requires a separated segment from the original code. Through this process, I have learnt to be well-versed in JavaFX. The design approach and precautions taken required careful analysis and a considerably long period of time. Thorough checking and elaborate lengthy tests were also necessary to minimise undesirable bugs surfacing.
@@ -27,17 +27,12 @@ BookInventory is a desktop application to assist store managers in managing thei
 ** Credits:
 
 * Default page is replaced with a welcome page.
-** Functionality: Users can now refer from the command list and decide what command he/she wishes to start.
 
-* Command Line now scans for misspelt commands and prompts the user if he or she is using the correct command. Credits: {}
-** Functionality:
-** Justification:
-** Credits:
+* Command Line now scans for misspelt commands and prompts the user if he or she is using the correct command.
+** Credits: Algorithm adapted from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Dice%27s_coefficient
 
 * Predictive text enabled for users.
 ** Functionality: Display a message to inform user if the system detects a spelling error.
-** Justification:
-** Credits:
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=guiyong96[Functional/Test code]]
 
@@ -49,7 +44,7 @@ BookInventory is a desktop application to assist store managers in managing thei
 *** Morphed model portion of addressbook 4.
 ** Enhancements to existing features:
 ** Community:
-*** Perform refactoring for different terms. (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Perform refactoring for various features. (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 *** Several parts of the request feature implemented were adopted by others.
 
 == Contributions to the User Guide
@@ -136,6 +131,12 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 ** The bookstore owner may decide whether to accept or reject a request offer.
 ** After deciding, he or she can type deleterequest to remove Request from the RequestList.
 
+===== Aspect: How ToggleRequests command functions
+
+* **Similar to Delete Command**
+** The bookstore owner may decide whether to accept or reject a request offer.
+** After deciding, he or she can type deleterequest to remove Request from the RequestList.
+
 // end::Request[]
 
 // tag::commandprediction[]
@@ -151,8 +152,8 @@ list?" To achieve this, we have utilized the Dice Coefficient.
 
 ===== Aspect: How does Dice Coefficient works?
 
-Dice's coefficient measures the similarity between two sets. It can also be used to help measure how
-similar two strings are in terms of the number of common bigrams (a bigram is a pair of adjacent
+Dice's coefficient measures the similarity between two sets. In BookInventory, we use it to help measure how
+similar two strings are in terms of the number of common bigrams (A bigram is a pair of adjacent
 letters in the string).The Coefficient result of 1 indicates identical vectors (completely equal strings) as
 where a 0 equals orthogonal vectors (completely unequal strings).
 
