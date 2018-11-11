@@ -974,8 +974,8 @@ Use Case resumes at step 1.
 
 // tag::rsvpUsecase[]
 [discrete]
- === Use case: Registration
- *MSS*
+=== Use case: Registration
+*MSS*
 
  1.  User requests to list events.
  2.  EventManager displays list of events.
@@ -1053,8 +1053,8 @@ Use case ends
 Resume use case at step 4.
 
 [discrete]
- === Use Case: Export calendar:
- *MSS*
+=== Use Case: Export calendar:
+*MSS*
  
 1. User request to export registered event list with given name +
 2. EventManager execute exportCalendarCommand
