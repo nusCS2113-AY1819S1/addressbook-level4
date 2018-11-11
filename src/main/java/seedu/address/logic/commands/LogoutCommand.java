@@ -12,7 +12,7 @@ import seedu.address.security.SecurityAuthenticationException;
 public class LogoutCommand extends Command {
 
     public static final String COMMAND_WORD = "logout";
-    public static final String COMMAND_WORD_ALIAS = "lg";
+    public static final String COMMAND_WORD_ALIAS = "lo";
 
     public static final String MESSAGE_SUCCESS = "Successfully Logged Out";
 

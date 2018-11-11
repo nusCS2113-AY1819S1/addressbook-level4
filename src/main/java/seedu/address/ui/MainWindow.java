@@ -295,16 +295,6 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    /***
-     * Logs out of the application
-     */
-    @FXML
-    public void handleLogout() {
-        security.logout();
-        removeInnerParts();
-        fillSecurityCommandBox();
-    }
-
     public OtherListPanel getOtherListPanel() {
         return otherListPanel;
     }

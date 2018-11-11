@@ -47,7 +47,7 @@ public enum CommandsEnum {
     SELECT(SelectCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD_ALIAS),
     ADD(AddTimeCommand.COMMAND_WORD, AddTimeCommand.COMMAND_WORD_ALIAS),
     DELETE(DeleteTimeCommand.COMMAND_WORD, DeleteTimeCommand.COMMAND_WORD_ALIAS),
-    FREE(FreeCommand.COMMAND_WORD),
+    FREE(FreeCommand.COMMAND_WORD, FreeCommand.COMMAND_WORD_ALIAS),
     CLEAR(ClearCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD_ALIAS),
     FRIEND(FriendCommand.COMMAND_WORD, FriendCommand.COMMAND_WORD_ALIAS),
     UNFRIEND(UnfriendCommand.COMMAND_WORD, UnfriendCommand.COMMAND_WORD_ALIAS),

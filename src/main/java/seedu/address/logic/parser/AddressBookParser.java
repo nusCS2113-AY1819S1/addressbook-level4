@@ -160,9 +160,11 @@ public class AddressBookParser {
             return new DeleteTimeCommandParser().parse(arguments);
 
         case FreeCommand.COMMAND_WORD:
+        case FreeCommand.COMMAND_WORD_ALIAS:
             return new FreeCommandParser().parse(arguments);
 
         case LoginCommand.COMMAND_WORD:
+        case LoginCommand.COMMAND_WORD_ALIAS:
             return new LoginCommandParser().parse(arguments);
 
         case UiCommand.COMMAND_WORD:
