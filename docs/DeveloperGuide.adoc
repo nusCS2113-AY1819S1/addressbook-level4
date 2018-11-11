@@ -1588,6 +1588,8 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+//@@author rajdeepsh
+
 [discrete]
 === Use case: Create Groups
 
@@ -1783,7 +1785,7 @@ Use case ends.
 [none]
 ** 1c1. Student management system rejects command entered with relevant error message.
 +
-
+//@@author
 
 [discrete]
 === Use case: Add test marks to student
@@ -2205,6 +2207,7 @@ _{ more test cases ... }_
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+//@@author rajdeepsh
 
 === Creating a group
 
@@ -2296,6 +2299,7 @@ Multiple groups in the group list. Student being added to group must *NOT* alrea
    Expected: No group is selected. Error details shown in the status message. `Students in Selected Group` panel remains the same.
 .. Other incorrect select group commands to try: `sg`, `sg x` (where x is larger than the group list size and not an integer) +
    Expected: Similar to previous.
+//@@author
 
 === Saving data
 
