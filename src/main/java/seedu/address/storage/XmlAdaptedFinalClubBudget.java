@@ -41,7 +41,7 @@ public class XmlAdaptedFinalClubBudget {
      */
     public XmlAdaptedFinalClubBudget(FinalClubBudget source) {
         clubName = source.getClubName().toString();
-        allocatedBudget = Integer.toString(source.getAllocatedBudget());
+        allocatedBudget = Double.toString(source.getAllocatedBudget());
     }
 
     /**
