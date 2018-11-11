@@ -1365,7 +1365,6 @@ _{More to be added}_
 .  Should be able to hold up to 1000 events without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-_{More to be added}_
 
 [appendix]
 == Glossary
@@ -1376,24 +1375,6 @@ Windows, Linux, Unix, OS-X
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
 
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
-
-[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -1407,7 +1388,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample events. The window size may not be optimum.
 
 . Saving window preferences
 
@@ -1415,26 +1396,37 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+// tag::authenticationTest[]
+=== Authentication
 
-=== Deleting a event
+. Signing up for an account with a taken username
 
-. Deleting a event while all events are listed
+.. Prerequisites: Signed up for an account with a non-taken username.
+.. Test case: `signup u/TAKENUSERNAME p/VALIDPASSWORD` +
+   Expected: Will display an error saying that account already exists.
+
+. Signing up or logging in to an account while already logged in
+
+.. Prerequisites: Already logged in to an existing account.
+.. Test case: `signup u/NEWUSERNAME p/VALIDPASSWORD` +
+   Expected: Will display an error saying that the current user is logged in.
+.. Test case: `login u/EXISTINGUSER p/VALIDPASSWORD` +
+   Expected: Will display an error saying that the current user is logged in.
+
+. Logging in to a non-existent account
+.. Test case: `login u/NEWUSERNAME p/VALIDPASSWORD` +
+   Expected: Will display an error saying that credentials are incorrect.
+
+// end::authenticationTest[]
+
+=== Deleting an event
+
+. Deleting an event while all events are listed
 
 .. Prerequisites: List all events using the `list` command. Multiple events in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size or less than 0)  +
    Expected: Similar to previous.
-
-_{ more test cases ... }_
-
-=== Saving data
-
-. Dealing with missing/corrupted data files
-
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
