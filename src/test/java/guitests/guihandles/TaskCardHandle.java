@@ -9,7 +9,6 @@ import seedu.address.model.task.Task;
  * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends NodeHandle<Node>{
-    
     private static final String ID_FIELD_ID = "#id";
     private static final String TASK_NAME_FIELD_ID = "#taskname";
     private static final String TASK_MODULE_FIELD_ID = "#taskmodule";
