@@ -19,7 +19,7 @@ created with JavaFX. It is written in Java, and has about 10 kLoC.
 ** What it does: allows the user to check how much money they have spent in a specific period.
 ** Justification: This feature improves the product significantly because if a user want to know how much money they have spent in a period, they can easily get the value.
 
-* *Major enhancement*: added *a chart to show the expenditure*
+* *Major enhancement*: added *a pie-chart to show the expenditure*
 ** What it does: allows the user to see where and how much they have spent when they want to use the check command.
 ** Justification: This feature improves the product significantly because users can see their each expense in a period directly.
 ** Highlights: This enhancement will appear a new window to show the chart.
@@ -33,14 +33,20 @@ created with JavaFX. It is written in Java, and has about 10 kLoC.
 ** What it does: allows the user to edit an expenditure by index.
 ** Justification: This feature improves the product significantly because users may want to change some parts of an expenditure.
 
-* *Minor enhancement*: change GUI for expenditure tracker part
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test
-code]] _{give links to collated code files}_
+* *Minor enhancement*: change GUI for expenditure description
+* *Minor enhancement*: some test files for expenditure tracker
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=feijunzi[RepoSense Dashboard]]
 
 * *Other contributions*:
 
+** Documentation:
+*** Add implementation of ET_check command in the Developer Guide.
+*** Add some command of Expenditure tracker in the Users Guide.
+*** Update use cases in the Developer Guide.
+
 ** Community:
-*** PRs reviewed (with review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** PRs reviewed (with review comments): https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#18], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#20], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#53], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#65], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#91], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#117], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#120]
+
 ** Tools:
 *** Integrated a third party library (jFreeChart) to the project
 
@@ -53,7 +59,8 @@ to write documentation targeting end-users._
 |===
 
 include::../UserGuide.adoc[tag=ETcheck]
-
+include::../UserGuide.adoc[tag=ETdelete]
+include::../UserGuide.adoc[tag=ETedit]
 
 == Contributions to the Developer Guide
 
@@ -64,6 +71,7 @@ to the project._
 |===
 
 include::../DeveloperGuide.adoc[tag=checkexpenditure]
+include::../DeveloperGuide.adoc[tag=useCases]
 
 
 
