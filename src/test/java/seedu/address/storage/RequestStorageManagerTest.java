@@ -72,7 +72,7 @@ public class RequestStorageManagerTest {
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getBookInventoryFilePath());
     }
 
     @Test

@@ -18,8 +18,8 @@ public class BookListPanelHandle extends NodeHandle<ListView<Book>> {
 
     private Optional<Book> lastRememberedSelectedBookCard;
 
-    public BookListPanelHandle(ListView<Book> personListPanelNode) {
-        super(personListPanelNode);
+    public BookListPanelHandle(ListView<Book> bookListPanelNode) {
+        super(bookListPanelNode);
     }
 
     /**
