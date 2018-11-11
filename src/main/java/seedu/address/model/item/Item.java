@@ -42,7 +42,7 @@ public class Item {
     }
 
     /**
-     * Returns true if both items have the same ItemName
+     * Returns true if both items have the same ItemName and ItemLocation
      */
     public boolean isSameItem(Item otherItem) {
         if (otherItem.getItemName() == itemName) {
@@ -51,7 +51,8 @@ public class Item {
         }
 
         return otherItem.getItemName() != null
-                && otherItem.getItemName().equals(getItemName());
+                && otherItem.getItemName().equals(getItemName())
+                && otherItem.getItemLocation().equals(getItemLocation());
     }
 
     /**
