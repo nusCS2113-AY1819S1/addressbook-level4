@@ -110,6 +110,12 @@ public class MainWindow extends UiPart<Stage> {
         setTitle(config.getAppTitle());
         setWindowDefaultSize(prefs);
 
+        //Auto loads master candidate/job list if no user authentication is required
+        if (prefs.getHashedPassword() == null) {
+            masterCandidateList = logic.getMasterCandidateList();
+            masterJobList = logic.getMasterJobList();
+        }
+
         setAccelerators();
         registerAsAnEventHandler(this);
 

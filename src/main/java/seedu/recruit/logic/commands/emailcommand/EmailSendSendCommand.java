@@ -26,6 +26,7 @@ import seedu.recruit.model.joboffer.JobOffer;
 public class EmailSendSendCommand extends EmailSendCommand {
 
     @Override
+    @SuppressWarnings("Duplicates")
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         EmailUtil emailUtil = model.getEmailUtil();
         updateRecipientsAndContents(emailUtil);
@@ -47,7 +48,7 @@ public class EmailSendSendCommand extends EmailSendCommand {
 
         //Generate content (bodyText)
         StringBuilder bodyText = new StringBuilder();
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             bodyText.append(generateContentWhenRecipientsAreCandidates(emailUtil));
             //Sending the email
             try {

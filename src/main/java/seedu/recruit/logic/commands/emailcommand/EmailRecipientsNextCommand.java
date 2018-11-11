@@ -37,10 +37,10 @@ public class EmailRecipientsNextCommand extends EmailRecipientsCommand {
      * @return boolean value to see if recipients array is empty
      */
     private boolean isEmpty(EmailUtil emailUtil) {
-        if (emailUtil.isAreRecipientsCandidates() && emailUtil.getCandidates().size() == 0) {
+        if (emailUtil.getAreRecipientsCandidates() && emailUtil.getCandidates().size() == 0) {
             return true;
         }
-        if (!emailUtil.isAreRecipientsCandidates() && emailUtil.getJobOffers().size() == 0) {
+        if (!emailUtil.getAreRecipientsCandidates() && emailUtil.getJobOffers().size() == 0) {
             return true;
         }
         return false;
@@ -51,7 +51,7 @@ public class EmailRecipientsNextCommand extends EmailRecipientsCommand {
      * @param emailUtil
      */
     private void changeBook(EmailUtil emailUtil) {
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             EventsCenter.getInstance().post(new ShowCompanyBookRequestEvent());
         } else {
             EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());

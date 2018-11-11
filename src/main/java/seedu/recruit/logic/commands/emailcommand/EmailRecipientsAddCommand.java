@@ -31,7 +31,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
         EmailUtil emailUtil = model.getEmailUtil();
 
         //Check if there are already recipients added
-        if (!emailUtil.isHasRecipientsAdded()) {
+        if (!emailUtil.getHasRecipientsAdded()) {
             if (MainWindow.getDisplayedBook().equals("candidateBook")) {
                 if (addCandidates(model, emailUtil)) {
                     emailUtil.setAreRecipientsCandidates(true);
@@ -44,7 +44,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
             emailUtil.setHasRecipientsAdded(true);
         //else check if objects being added are the same as the initial added objects
         } else {
-            if (emailUtil.isAreRecipientsCandidates()) {
+            if (emailUtil.getAreRecipientsCandidates()) {
                 if (MainWindow.getDisplayedBook().equals("candidateBook")) {
                     addCandidates(model, emailUtil);
                 } else {
@@ -108,7 +108,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
      */
     @SuppressWarnings("Duplicates")
     private void generateRecipients(EmailUtil emailUtil, StringBuilder recipients) {
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             for (Candidate addedCandidate : addedCandidates) {
                 recipients.append(addedCandidate.getName().toString());
                 recipients.append("\n");
@@ -131,7 +131,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
     private boolean generateDuplicate(EmailUtil emailUtil, StringBuilder duplicates) {
         boolean hasDuplicates = false;
         if (duplicateCandidates.size() != 0 || duplicateJobOffers.size() != 0) {
-            if (emailUtil.isAreRecipientsCandidates()) {
+            if (emailUtil.getAreRecipientsCandidates()) {
                 for (Candidate duplicateCandidate : duplicateCandidates) {
                     duplicates.append(duplicateCandidate.getName().toString());
                     duplicates.append("\n");

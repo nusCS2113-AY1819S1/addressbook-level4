@@ -31,13 +31,17 @@ RecruitBook contains many features that is designed specifically to aid job agen
 
 ** Automated email feature
 
+* Companies:
+
+** Add companies and their details
+
+** Filter and sort companies
+
 * Job Offers:
 
-** Add jobs offers with customisable tags
+** Add jobs offers and their details
 
 ** Filter and sort job offers based on expected salary, minimum education level etc.
-
-** List jobs based on urgency
 
 == Site Map
 
