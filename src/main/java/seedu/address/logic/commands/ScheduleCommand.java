@@ -53,7 +53,7 @@ public class ScheduleCommand extends Command {
         + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "Schedule Added!";
-    public static final String MESSAGE_FAILURE = "Unable to add schedule";
+    public static final String MESSAGE_DUPLICATE_SCHEDULE = "Event already exists in person's schedule";
 
     private Schedule toSchedule;
     private final Index index;
@@ -74,9 +74,7 @@ public class ScheduleCommand extends Command {
         }
 
         Person personToAddSchedule = lastShownList.get(index.getZeroBased());
-        //        System.out.println(personToAddSchedule.getSchedules().toString());
         Person scheduledPerson = addScheduleToPerson(personToAddSchedule, this.toSchedule);
-        //        System.out.println(scheduledPerson.getSchedules().toString());
 
         model.updatePerson(personToAddSchedule, scheduledPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
