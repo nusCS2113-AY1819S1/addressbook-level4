@@ -30,7 +30,7 @@ public class EmailContentsAddCommand extends EmailContentsCommand {
         EmailUtil emailUtil = model.getEmailUtil();
 
         //check if objects being added are the same as the initial added objects
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             addJobOffers(model, emailUtil);
         } else {
             addCandidates(model, emailUtil);
@@ -86,7 +86,7 @@ public class EmailContentsAddCommand extends EmailContentsCommand {
      */
     @SuppressWarnings("Duplicates")
     private void generateContents(EmailUtil emailUtil, StringBuilder contents) {
-        if (emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.getAreRecipientsCandidates()) {
             for (JobOffer addedJobOffer : addedJobOffers) {
                 contents.append(emailUtil.getContentJobOfferName(addedJobOffer));
                 contents.append("\n");
@@ -109,7 +109,7 @@ public class EmailContentsAddCommand extends EmailContentsCommand {
     private boolean generateDuplicate(EmailUtil emailUtil, StringBuilder duplicates) {
         boolean hasDuplicates = false;
         if (duplicateCandidates.size() != 0 || duplicateJobOffers.size() != 0) {
-            if (!emailUtil.isAreRecipientsCandidates()) {
+            if (!emailUtil.getAreRecipientsCandidates()) {
                 for (Candidate duplicateCandidate : duplicateCandidates) {
                     duplicates.append(duplicateCandidate.getName().toString());
                     duplicates.append("\n");

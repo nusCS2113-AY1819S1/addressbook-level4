@@ -59,6 +59,7 @@ import seedu.recruit.logic.commands.StartAddCandidateCommand;
 import seedu.recruit.logic.commands.StartAddCompanyCommand;
 import seedu.recruit.logic.commands.StartAddJobCommand;
 import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailInitialiseCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
@@ -86,7 +87,6 @@ public class RecruitBookParserTest {
     private final RecruitBookParser parser = new RecruitBookParser();
 
     // ============================================== Primary Commands ============================================== //
-
 
     @Test
     public void parseCommand_start_addcandidates() throws Exception {
@@ -200,6 +200,19 @@ public class RecruitBookParserTest {
                 + INDEX_FIRST.getOneBased() + " " + ModelUtil.getEditCandidateDescriptorDetails(descriptor),
                 new LogicState("primary"), emailUtil, userPrefs);
         assertEquals(new EditCandidateCommand(INDEX_FIRST, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_email() throws Exception {
+        assertTrue(parser.parseCommand(EmailInitialiseCommand.COMMAND_WORD, state, emailUtil, userPrefs)
+                instanceof EmailInitialiseCommand);
+        try {
+            parser.parseCommand(EmailInitialiseCommand.COMMAND_WORD + " test", state, emailUtil, userPrefs);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
+                    + EmailInitialiseCommand.MESSAGE_USAGE, pe.getMessage());
+        }
     }
 
     @Test

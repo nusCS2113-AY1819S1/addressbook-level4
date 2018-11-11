@@ -634,7 +634,7 @@ program. +
 _This also means that if RecruitBook never receives the authentication response, (by closing the authorisation page, or
 not having an internet connection), RecruitBook will stay unresponsive, and the only way out of this is by force closing
 it and reopening RecruitBook._ +
-This is part of Google's API and is intended.**
+This is part of Google's API**
 
 Format: `email`
 
@@ -649,7 +649,7 @@ Email process is a 4-stage process. To exit from this process, enter `cancel` co
 .. Type `next` and press kbd:[Enter] to move on to the next step.
 
 [start=3]
-. *Choose your contents.* On the RecruitBook application, what's shown on the main window
+. *Choose your contents.* On the RecruitBook application, what is shown on the main window
    will be taken in as contents.
 .. Depending on what what were the recipients, contents can only be the contrasting +
    eg. If recipients were candidates, only job offers can be the contents and vice versa.
@@ -666,6 +666,8 @@ Other notes
 . `back` can be used to go back to the previous step.
 . `cancel` can be used to cancel the email command entirely.
 . Adding duplicate candidate/job offers will be caught and will not be double counted.
+. If recipients are candidates, emails are sent via BCC to protect the privacy of your candidates.
+. If recipients are companies, emails are sent individually to each company.
 
 You can also change the email subject and email body text in `preference.json`. +
 Restart RecruitBook for changes to take effect.
