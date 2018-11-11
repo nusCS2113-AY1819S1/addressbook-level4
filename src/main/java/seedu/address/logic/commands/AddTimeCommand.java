@@ -52,7 +52,6 @@ public class AddTimeCommand extends Command {
         }
 
         model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateTimeTable(editedPerson.getTimeTable());
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_ADD_TIMESLOT_SUCCESS, toAdd));
