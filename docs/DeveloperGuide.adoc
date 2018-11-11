@@ -1021,12 +1021,13 @@ Use case ends.
 
 // tag::updateStatusUsecase[]
 [discrete]
-=== Use case: Update Event Status
+=== Use case: Event Status
 *MSS*
 
 . User views list of events.
 . User requests to update the statuses of events.
 . Event Manager updates the statuses of events and refreshes the displayed list of events.
+. User can easily locate "UPCOMING" events.
 Use case ends
 // end::updateStatusUsecase[]
 
@@ -1053,7 +1054,7 @@ Use case ends
 Resume use case at step 4.
 
 [discrete]
-=== Use Case: Export calendar:
+=== Use Case: Export calendar
 *MSS*
  
 1. User request to export registered event list with given name +
