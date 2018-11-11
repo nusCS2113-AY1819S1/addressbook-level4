@@ -134,6 +134,9 @@ public class BookInventoryParser {
             break;
         default:
         {
+            /*
+             * This segment finds out if a typo error is noticed by the Dice Algorithm.
+             */
             String similarCommandFound = similarityParser
                     .performSimilarityCheck(commandWord, commandList.getCommandList());
             if (!similarCommandFound.isEmpty()) {
@@ -148,10 +151,93 @@ public class BookInventoryParser {
                 Role.checkAccess(finalCommandWord);
             } catch (IllegalAccessException e) {
                 throw new ParseException(MESSAGE_ACCESS_DENIED + finalCommandWord + ".");
-
             }
-            return finalCommand;
         }
-        return null;
+        return finalCommand;
+    }
+    /**
+     * This segment accepts command similar to the above method, but no authentication required.
+     * Necessary for test.
+     */
+    public Command parseCommand_withoutAuthentication(String userInput) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        SimilarityParser similarityParser = new SimilarityParser();
+        CommandList commandList = new CommandList();
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+        Command finalCommand;
+        final String finalCommandWord;
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+
+        switch (commandWord) {
+
+        case AddCommand.COMMAND_ALIAS:
+
+        case AddCommand.COMMAND_WORD:
+            finalCommand = new AddCommandParser().parse(arguments);
+            break;
+        case EditCommand.COMMAND_WORD:
+            finalCommand = new EditCommandParser().parse(arguments);
+            break;
+        case SellCommand.COMMAND_WORD:
+            finalCommand = new SellCommandParser().parse(arguments);
+            break;
+        case SelectCommand.COMMAND_WORD:
+            finalCommand = new SelectCommandParser().parse(arguments);
+            break;
+        case DeleteCommand.COMMAND_WORD:
+            finalCommand = new DeleteCommandParser().parse(arguments);
+            break;
+        case StockCommand.COMMAND_WORD:
+            finalCommand = new StockCommandParser().parse(arguments);
+            break;
+        case ClearCommand.COMMAND_ALIAS:
+        case ClearCommand.COMMAND_WORD:
+            finalCommand = new ClearCommand();
+            break;
+        case FindCommand.COMMAND_WORD:
+            finalCommand = new FindCommandParser().parse(arguments);
+            break;
+        case CheckCommand.COMMAND_WORD:
+            finalCommand = new CheckCommandParser().parse(arguments);
+            break;
+        case ListCommand.COMMAND_WORD:
+            finalCommand = new ListCommand();
+            break;
+        case HistoryCommand.COMMAND_WORD:
+            finalCommand = new HistoryCommand();
+            break;
+        case ExitCommand.COMMAND_WORD:
+            finalCommand = new ExitCommand();
+            break;
+        case HelpCommand.COMMAND_WORD:
+            finalCommand = new HelpCommand();
+            break;
+        case UndoCommand.COMMAND_WORD:
+            finalCommand = new UndoCommand();
+            break;
+        case RedoCommand.COMMAND_WORD:
+            finalCommand = new RedoCommand();
+            break;
+        case ViewStatisticCommand.COMMAND_WORD:
+            finalCommand = new ViewStatisticCommand();
+            break;
+        default:
+        {
+            /*
+             * This segment finds out if a typo error is noticed by the Dice Algorithm.
+             */
+            String similarCommandFound = similarityParser
+                   .performSimilarityCheck(commandWord, commandList.getCommandList());
+            if (!similarCommandFound.isEmpty()) {
+                throw new ParseException(MESSAGE_SIMILARITY_FOUND + similarCommandFound + "?");
+            }
+        }
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+
+        return finalCommand;
     }
 }

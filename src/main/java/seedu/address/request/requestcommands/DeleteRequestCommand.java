@@ -13,7 +13,7 @@ import seedu.address.request.Request;
 import seedu.address.request.requestmodel.RequestModel;
 
 /**
- * Deletes a book identified using it's displayed index from the BookInventory.
+ * Deletes a request identified using its displayed index from the RequestList.
  */
 public class DeleteRequestCommand extends CommandSecondary {
 
@@ -24,7 +24,7 @@ public class DeleteRequestCommand extends CommandSecondary {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_REQUEST_SUCCESS = "Deleted Request: %1$s";
+    public static final String MESSAGE_DELETE_REQUEST_SUCCESS = "Request deleted successfully!";
 
     private final Index targetIndex;
 
