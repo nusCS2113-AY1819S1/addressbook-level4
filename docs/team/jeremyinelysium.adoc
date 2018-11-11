@@ -3,15 +3,15 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: TaskBook
+== PROJECT: Task Book
 
 ---
 
 == Overview
 
-*TaskBook* is a desktop task manager application that is designed for students. It allows users to keep track of the
-progress of their active tasks and manage their workload accordingly. The goal of *TaskBook* is to improve the
-user’s productivity through efficient task management. *TaskBook* is optimized for students who prefer to work with
+*Task Book* is a desktop task manager application that is designed for students. It allows users to keep track of the
+progress of their active tasks and manage their workload accordingly. The goal of *Task Book* is to improve the
+user’s productivity through efficient task management. *Task Book* is optimized for students who prefer to work with
 a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 == Summary of contributions
@@ -23,13 +23,13 @@ to complex, major enhancements._
 
 * *Major enhancement*: Implemented the option to *add multiple milestones a selected task*.
 ** What it does: It allows the user to split up a huge task into smaller, manageable subtasks called milestones.
-** Justification: This feature will allow the user to ensure that he/she is on track to complete the task by hitting
-each milestone specified by the user. It enables the user to better manage his time and resources by splitting a task up.
-** Highlights:
+** Justification: This feature enables the user to better manage his time and resources by splitting a task up. It will allow the user to ensure that he/she is on track to complete the task by hitting
+each milestone specified by the user. Furthermore, this creates a sense of progress as the user clears each milestone and serves as a form of motivation for the user to not give up until the task is completed.
+** Highlights: Implementing this feature and command required changes to the UI of the application. It required in-depth knowledge of JavaFX and the ability to use SceneBuilder to assist in developing the UI. The implementation of the UI was too challenging and an alternative solution was required to ensure the UI remained presentable.
 
 
 * *Minor enhancement*: Implemented a sort function for each task such that the milestones for each task are
-sorted by their ranks.
+sorted by their ranks. The list of milestones will be displayed in the order that the user should go about doing, starting with the most important milestone(*Rank 1*) at the top.
 
 * *Code contributed*: [https://github.com/CS2113-AY1819S1-W13-3/main/blob/master/collated/functional/JeremyInElysium.md[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 

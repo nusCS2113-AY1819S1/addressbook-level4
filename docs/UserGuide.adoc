@@ -18,7 +18,7 @@ Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-Task Book is for students who prefer to use a desktop app for managing their daily tasks and ultimately, lead a more productive life. More importantly, AB is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB can get your management of tasks done faster than traditional paper notebooks or a mobile application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Task Book is for students who prefer to use a desktop app for managing their daily tasks and ultimately, lead a more productive life. More importantly, Task Book is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Task Book can get your management of tasks done faster than traditional paper notebooks or a mobile application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -64,14 +64,41 @@ Examples:
 // tag::add_milestone[]
 === Adding a milestone: `add_milestone`
 
+|===
+|Have a task that requires a lot of things to be done? Break it up into smaller, more manageable subtasks called milestones!
+|===
+
 Adds a milestone to selected task from the task book +
-Format: `add_milestone i/INDEX m/MILESTONE r/RANK`
+Format: `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK`
+
+[WARNING]
+====
+Milestone description cannot be longer than 40 characters!
+====
+
+[WARNING]
+====
+Index must be a non-zero, positive integer not greater than the number of tasks currently available
+in the Task Book!
+====
 
 Examples:
 
-* `add_milestone i/1 m/Complete Sections 8.1 to 8.5 r/1`
+* `add_milestone i/1 m/Q1 - 3 r/1`
+
+*Before*
+image::AddMilestoneCommand_before.png[width="600", align="left"]
+
+*After*
+image::AddMilestoneCommand_after.png[width="600", align="left"]
+
+[NOTE]
+====
+Rank is the level of importance assigned to that particular milestone by the user. Milestones are automatically sorted by rank with the most important one at the top (*Rank 1*).
+====
 
 // end::add_milestone[]
+
 === Complete a task: `complete`
 
 Complete a task in the task book by providing its index and the actual number of hours taken to complete the task +
@@ -234,8 +261,8 @@ There is no need to save manually.
 
 * *Add task* : `add c/MODULE_CODE t/ACTION d/DESCRIPTION p/PRIORITY_LEVEL h/HOURS_TO_COMPLETE` +
 e.g. `add c/CS2113 t/Complete 2113 Tutorial d/with code done p/high h/2`
-* *Add milestone* : `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...` +
-e.g. `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
+* *Add milestone* : `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK...` +
+e.g. `add_milestone i/1 m/Q1 - 3 r/1`
 * *Clear* : `clear`
 * *Complete* : `complete i/INDEX h/HOURS_COMPLETED` +
 e.g. `complete i/1 h/2`
