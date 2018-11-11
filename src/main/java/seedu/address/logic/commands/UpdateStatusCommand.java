@@ -42,14 +42,8 @@ public class UpdateStatusCommand extends Command {
             Event updatedEvent = createEditedEvent(updatingEvent, updatedStatusDescriptor);
 
             model.updateEvent(updatingEvent, updatedEvent);
-
-            // added delay to prevent UI from lagging
-            /*try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
         }
+        
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
