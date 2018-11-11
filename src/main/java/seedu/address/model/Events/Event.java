@@ -45,7 +45,7 @@ public class Event {
      * @return to check whether the given event is the same as existing one.
      */
     public boolean isSameEvent(Event otherEvent) {
-        if ( name.equals(otherEvent.name)) {
+        if ( name.equals(otherEvent.name)&&date.equals(otherEvent.date)) {
             return true;
         }
         return false;

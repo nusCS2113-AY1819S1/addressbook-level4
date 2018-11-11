@@ -361,7 +361,8 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 === Events
 
-We create an Events package in modle, to combine the event element such as name and venue into an event list. In the Commands package, we create an package named EventCommand, which the commands are stored in. We have totally four commands:
+We create an Events package in model, to combine the event element such as name and venue into an event list. In the Commands package, we create an package named EventCommand, which the commands are stored in. We have totally four commands:
+
 * `addEventsCommand` -- Add a new event to the event list.
 * `editEvent` -- Change the information of the existing event.
 * `listEvent` -- List all the existing events.
