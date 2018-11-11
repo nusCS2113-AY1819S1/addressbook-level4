@@ -57,11 +57,19 @@ public class DateMap {
         addRecordToDateMap(editedRecord);
     }
 
-    public void setLimitMap(HashMap<String, Integer> limitMap) {
+    /**
+     * Replaces the HashMap in the DateMap with a new HashMap created from limits
+     * @param limitMap is the HashMap to replace the old HashMap
+     */
+    public void setDateMap(HashMap<String, Integer> limitMap) {
         this.dateMap = limitMap;
     }
 
-    public void addLimitToLimitMap(Limit limit) {
+    /**
+     * Adds the dates of a limit object to the DateMap
+     * @param limit which dates are to be added to the DateMap
+     */
+    public void addLimitToDateMap(Limit limit) {
         String date = limit.getDateStart().getStandardValue();
         if (dateMap.containsKey(date)) {
             dateMap.replace(date, dateMap.get(date) + 1);
@@ -76,7 +84,11 @@ public class DateMap {
         }
     }
 
-    public void removeLimitFromLimitMap(Limit target) {
+    /**
+     * Removes the dates of a limit object from the DateMap
+     * @param target which dates are to be removed from the DateMap
+     */
+    public void removeLimitFromDateMap(Limit target) {
         String date = target.getDateStart().getStandardValue();
         if (dateMap.containsKey(date)) {
             dateMap.replace(date, dateMap.get(date) - 1);
@@ -93,9 +105,15 @@ public class DateMap {
         }
     }
 
-    public void updateLimitInLimitMap(Limit target, Limit editedLimit) {
-        removeLimitFromLimitMap(target);
-        addLimitToLimitMap(editedLimit);
+    /**
+     * Updates a limit object in the DateMap by removing its previous date entries and entering
+     * new limit object dates in the DateMap
+     * @param target initial limit object whose dates are to be removed
+     * @param editedLimit final limit object whose dates are to be added
+     */
+    public void updateLimitInDateMap(Limit target, Limit editedLimit) {
+        removeLimitFromDateMap(target);
+        addLimitToDateMap(editedLimit);
     }
 
     public HashMap<String, Integer> getAsReadOnlyDateMap() {

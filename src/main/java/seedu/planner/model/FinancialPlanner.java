@@ -3,7 +3,6 @@ package seedu.planner.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -76,8 +75,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     }
 
     public void setLimitMap(HashMap<String, Integer> limitMap) {
-        this.limitsMap.setLimitMap(limitMap);
-        CustomSuggestionProvider.updateLimitMap(limitMap);
+        this.limitsMap.setDateMap(limitMap);
+        CustomSuggestionProvider.updateLimitDateMap(limitMap);
     }
 
     /**
@@ -243,15 +242,15 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      * Methods for modifying Limits Map                                 *
      ********************************************************************/
     public void addLimitToLimitMap(Limit limit) {
-        limitsMap.addLimitToLimitMap(limit);
+        limitsMap.addLimitToDateMap(limit);
     }
 
     public void removeLimitFromLimitMap(Limit target) {
-        limitsMap.removeLimitFromLimitMap(target);
+        limitsMap.removeLimitFromDateMap(target);
     }
 
     public void updateInLimitMap(Limit target, Limit editedLimit) {
-        limitsMap.updateLimitInLimitMap(target, editedLimit);
+        limitsMap.updateLimitInDateMap(target, editedLimit);
     }
 
     /********************************************************************

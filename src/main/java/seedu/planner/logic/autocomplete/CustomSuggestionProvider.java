@@ -1,7 +1,6 @@
 package seedu.planner.logic.autocomplete;
 
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.planner.model.autocomplete.DefaultTags.getSampleTagsForSuggestion;
@@ -10,7 +9,6 @@ import static seedu.planner.ui.SuggestionClass.newCreate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -50,11 +48,14 @@ import seedu.planner.model.autocomplete.RecordMap;
 import seedu.planner.model.record.Date;
 
 //@author tztzt
+
 /**
- *  This object is responsible for the logic behind the {@code AutoCompleteBox} that decides the range of possible
- *  suggested texts that are to appear whenever a user enters a new word.
+ * This object is responsible for the logic behind the {@code AutoCompleteBox} that decides the range of possible
+ * suggested texts that are to appear whenever a user enters a new word.
  */
 public class CustomSuggestionProvider {
+
+    private static final String PREFIX_PATTERN = "^([ndtm]/).*$";
 
     private static final Set<String> commandKeywordsSet =
             new HashSet<>(Arrays.asList(
@@ -76,8 +77,10 @@ public class CustomSuggestionProvider {
     private static final Set<String> summaryKeywordsSet = new HashSet<>(Arrays.asList(
             SummaryByMonthCommand.COMMAND_MODE_WORD, SummaryByDateCommand.COMMAND_MODE_WORD,
             SummaryByCategoryCommand.COMMAND_MODE_WORD));
-    private static final Set<String> possibleTagKeywordsSet = new HashSet<>(
-            Arrays.asList(AddCommand.COMMAND_WORD, EditCommand.COMMAND_WORD));
+    private static final Set<String> dateInputSummarySet = Set.of(SummaryByCategoryCommand.COMMAND_MODE_WORD,
+            SummaryByDateCommand.COMMAND_MODE_WORD);
+    private static final Set<String> defaultMonthSummarySet = new HashSet<>(Arrays.asList(
+            "jun-2018", "jul-2018", "aug-2018", "sep-2018", "oct-2018", "nov-2018", "dec-2018"));
 
     private static final Set<String> sortKeywordsSet = Stream.concat(SortCommand.ORDER_SET.stream(),
             SortCommand.CATEGORY_SET.stream()).collect(Collectors.toSet());
@@ -96,11 +99,7 @@ public class CustomSuggestionProvider {
     private static HashMap<String, Integer> limitsDateMap = new HashMap<>();
     private static Set<String> limitsDateSuggestionSet = new HashSet<>();
 
-    private SuggestionProvider<String> suggestionProvider;
-
-    public CustomSuggestionProvider() {
-        suggestionProvider = newCreate(emptySet);
-    }
+    private SuggestionProvider<String> suggestionProvider = newCreate(emptySet);
 
     public SuggestionProvider<String> getSuggestions() {
         return suggestionProvider;
@@ -115,6 +114,7 @@ public class CustomSuggestionProvider {
 
     /**
      * Clears the current set of suggestions and insert the new set of suggestions
+     *
      * @param suggestions is the complete list of strings that can be suggested to the user
      */
     private void updateSuggestions(Set<String> suggestions) {
@@ -126,23 +126,29 @@ public class CustomSuggestionProvider {
      * This method is responsible for deciding which collection of Strings is to be used as the reference collection
      * for comparison to the input String by the user. It can autocomplete the command word or when a tag is expected
      * of the user input or when a sort parameter is expected.
+     *
      * @param userInput is the entire input of text in the command box.
-     * @param prefix is the prefix of the word to be completed, if any.
-     * @param wordInput is the word to be completed.
+     * @param prefix    is the prefix of the word to be completed, if any.
+     * @param wordInput is the word to be completed, without the prefix.
      */
     public void updateSuggestions(String userInput, String prefix, String wordInput) {
         String[] inputs = userInput.trim().split("\\s+");
         wordInput = prefix + wordInput;
         int strIndex = 0;
-        for (; strIndex < inputs.length && !inputs[strIndex].equals(wordInput); strIndex++);
+        for (; strIndex < inputs.length && !inputs[strIndex].equals(wordInput); strIndex++) ;
 
         if (strIndex == 0) {
-            expectingCommandWord(prefix, inputs, strIndex);
+            expectingCommandWord(inputs, strIndex);
         } else {
             switch (inputs[0]) {
 
-            case AddCommand.COMMAND_WORD: case EditCommand.COMMAND_WORD:
+            case AddCommand.COMMAND_WORD:
+            case EditCommand.COMMAND_WORD:
                 addEditCommandKeyword(inputs, wordInput);
+                return;
+
+            case AddLimitCommand.COMMAND_WORD:
+                addLimitCommandKeyword(inputs, strIndex);
                 return;
 
             case FindCommand.COMMAND_WORD:
@@ -153,9 +159,10 @@ public class CustomSuggestionProvider {
                 updateSuggestions(tagsSuggestionSet);
                 return;
 
-            case ListCommand.COMMAND_WORD: case AddLimitCommand.COMMAND_WORD:
-                case DeleteLimitCommand.COMMAND_WORD: case EditLimitCommand.COMMAND_WORD:
-                datesCommandKeyword(inputs, wordInput, strIndex);
+            case ListCommand.COMMAND_WORD:
+            case DeleteLimitCommand.COMMAND_WORD:
+            case EditLimitCommand.COMMAND_WORD:
+                datesCommandKeyword(inputs, strIndex);
                 return;
 
             case SortCommand.COMMAND_WORD:
@@ -163,11 +170,7 @@ public class CustomSuggestionProvider {
                 return;
 
             case SummaryCommand.COMMAND_WORD:
-                if (strIndex == 1) {
-                    updateSuggestions(summaryKeywordsSet);
-                } else {
-                    emptySuggestions();
-                }
+                summaryCommandKeyword(inputs, strIndex);
                 return;
 
             default:
@@ -177,13 +180,12 @@ public class CustomSuggestionProvider {
     }
 
     /**
-     * Function that handles when the word to be completed is found to be at index 0.
-     * @param prefix is the prefix of the word to be completed, if any.
-     * @param inputs is an array of all the non-whitespace words found in the user input.
+     * Function that handles when the word to be completed is found to be at index 0 and expects only commands.
+     * @param inputs is an array of all words found in the user input delimited by whitespaces.
      * @param strIndex is the index of the word to be completed in the entire string of input.
      */
-    private void expectingCommandWord(String prefix, String[] inputs, int strIndex) {
-        if (prefix != "") {
+    private void expectingCommandWord(String[] inputs, int strIndex) {
+        if (inputs[strIndex].matches(PREFIX_PATTERN)) {
             emptySuggestions();
         } else if (!commandKeywordsSet.contains(inputs[strIndex])) {
             updateSuggestions(commandKeywordsSet);
@@ -195,7 +197,7 @@ public class CustomSuggestionProvider {
     /**
      * Function that handles when the command word is found to be either add or edit and there
      * is a possibility of completion for names, dates and tags.
-     * @param inputs is the delimited user input, by whitespaces.
+     * @param inputs is an array of all words found in the user input delimited by whitespaces.
      * @param wordInput is the word to be completed.
      */
     private void addEditCommandKeyword(String[] inputs, String wordInput) {
@@ -206,9 +208,7 @@ public class CustomSuggestionProvider {
         Boolean prefixAfterNamePrefix = false;
 
         for (; strIndex < inputs.length && !inputs[strIndex].equals(wordInput); strIndex++) {
-            if (namePrefixPresent && !prefixAfterNamePrefix && (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())
-                    || inputs[strIndex].startsWith(PREFIX_TAG.getPrefix())
-                    || inputs[strIndex].startsWith(PREFIX_MONEYFLOW.getPrefix()))) {
+            if (namePrefixPresent && !prefixAfterNamePrefix && (inputs[strIndex].matches(PREFIX_PATTERN))) {
                 otherPrefixIndex = strIndex;
                 prefixAfterNamePrefix = true;
             }
@@ -218,20 +218,55 @@ public class CustomSuggestionProvider {
             }
         }
 
-        if (wordInput.startsWith(PREFIX_TAG.getPrefix())) {
-            updateSuggestions(tagsSuggestionSet);
-        } else if (wordInput.startsWith(PREFIX_DATE.getPrefix())) {
-            updateSuggestions(dateSuggestionSet);
-        } else if (wordInput.startsWith(PREFIX_NAME.getPrefix())) {
-            updateSuggestions(nameSuggestionSet);
-        } else if (wordInput.startsWith(PREFIX_MONEYFLOW.getPrefix())) {
-            emptySuggestions();
-        } else if (namePrefixPresent) {
-            if (!prefixAfterNamePrefix) {
-                updateSuggestions(nameSuggestionSet);
-            } else {
-                if (strIndex > indexWithNamePrefix && strIndex < otherPrefixIndex) {
+        if (inputs.length > 1 && strIndex < inputs.length) {
+            if (inputs[strIndex].matches(PREFIX_PATTERN)) {
+                if (inputs[strIndex].startsWith(PREFIX_TAG.getPrefix())) {
+                    updateSuggestions(tagsSuggestionSet);
+                } else if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
+                    updateSuggestions(dateSuggestionSet);
+                } else if (inputs[strIndex].startsWith(PREFIX_NAME.getPrefix())) {
                     updateSuggestions(nameSuggestionSet);
+                } else {
+                    emptySuggestions();
+                }
+            } else if (namePrefixPresent) {
+                if (!prefixAfterNamePrefix) {
+                    updateSuggestions(nameSuggestionSet);
+                } else {
+                    if (strIndex > indexWithNamePrefix && strIndex < otherPrefixIndex) {
+                        updateSuggestions(nameSuggestionSet);
+                    } else {
+                        emptySuggestions();
+                    }
+                }
+            } else {
+                emptySuggestions();
+            }
+        } else {
+            emptySuggestions();
+        }
+    }
+
+    /**
+     * Function that handles when the command word is detected to be addlimit.
+     * @param inputs is an array of all words found in the user input delimited by whitespaces.
+     * @param strIndex is the index of the word to be completed in the entire string of input.
+     */
+    private void addLimitCommandKeyword(String[] inputs, int strIndex) {
+        if (inputs.length == 2) {
+            if (strIndex == 1) {
+                if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
+                    updateSuggestions(limitsDateSuggestionSet);
+                } else {
+                    emptySuggestions();
+                }
+            }
+        } else if (strIndex < inputs.length && (inputs.length == 3 || inputs.length == 4)) {
+            if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
+                updateSuggestions(limitsDateSuggestionSet);
+            } else if (strIndex > 1) {
+                if (inputs[strIndex - 1].startsWith(PREFIX_DATE.getPrefix())) {
+                    updateSuggestions(limitsDateSuggestionSet);
                 } else {
                     emptySuggestions();
                 }
@@ -242,12 +277,12 @@ public class CustomSuggestionProvider {
     }
 
     /**
-     * Function that handles when the word to be completed is found to be at index 0.
-     * @param inputs is an array of all the non-whitespace words found in the user input.
-     * @param wordInput is word to be completed.
+     * Function that handles when the arguments to be completed are only date parameters, for commands
+     * ListCommand, DeleteLimitCommand, EditLimitCommand
+     * @param inputs is an array of all words found in the user input delimited by whitespaces.
      * @param strIndex is the index of the word to be completed in the entire string of input.
      */
-    private void datesCommandKeyword(String[] inputs, String wordInput, int strIndex) {
+    private void datesCommandKeyword(String[] inputs, int strIndex) {
         Set<String> suggestions;
         if (inputs[0].equals(ListCommand.COMMAND_WORD) || inputs[0].equals(AddLimitCommand.COMMAND_WORD)) {
             suggestions = dateSuggestionSet;
@@ -255,36 +290,52 @@ public class CustomSuggestionProvider {
             suggestions = limitsDateSuggestionSet;
         }
 
-        if (strIndex == 1) {
-            if (wordInput.startsWith(PREFIX_DATE.getPrefix())) {
+        if (inputs.length == 2) {
+            if (strIndex == 1 && inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
                 updateSuggestions(suggestions);
             } else {
                 emptySuggestions();
             }
-        } else if (strIndex == 2) {
-            if (!inputs[1].startsWith(PREFIX_DATE.getPrefix())) {
-                emptySuggestions();
+        } else if (inputs.length == 3 && (strIndex == 1 || strIndex == 2)) {
+            if (strIndex == 1) {
+                if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
+                    updateSuggestions(suggestions);
+                } else {
+                    emptySuggestions();
+                }
             } else {
-                updateSuggestions(suggestions);
+                if (!inputs[1].startsWith(PREFIX_DATE.getPrefix())) {
+                    emptySuggestions();
+                } else {
+                    updateSuggestions(suggestions);
+                }
             }
         } else {
             emptySuggestions();
         }
+
     }
 
     /**
      * Function that handles when the sort command keyword is found at index 0.
-     * @param inputs is the word to be completed.
+     * @param inputs is an array of all words found in the user input delimited by whitespaces.
      * @param strIndex is the index of the word to be completed in the entire string of input.
      */
     private void sortCommandKeyword(String[] inputs, int strIndex) {
+
         if (inputs.length == 2) {
-            if (sortKeywordsSet.contains(inputs[strIndex])) {
-                emptySuggestions();
+            if (strIndex == 1) {
+                if (inputs[strIndex].matches(PREFIX_PATTERN)) {
+                    emptySuggestions();
+                } else if (sortKeywordsSet.contains(inputs[strIndex])) {
+                    emptySuggestions();
+                } else {
+                    updateSuggestions(sortKeywordsSet);
+                }
             } else {
-                updateSuggestions(sortKeywordsSet);
+                emptySuggestions();
             }
-        } else if (inputs.length == 3) {
+        } else if (inputs.length == 3 && (strIndex == 1 || strIndex == 2)) {
             if (strIndex == 1) {
                 if (sortKeywordsSet.contains(inputs[strIndex])) {
                     emptySuggestions();
@@ -298,12 +349,56 @@ public class CustomSuggestionProvider {
                     }
                 }
             } else { // strIndex = 2
-                if (SortCommand.ORDER_SET.contains(inputs[1])) {
-                    updateSuggestions(SortCommand.CATEGORY_SET);
-                } else if (SortCommand.CATEGORY_SET.contains(inputs[1])) {
-                    updateSuggestions(SortCommand.ORDER_SET);
-                } else {
+                if (sortKeywordsSet.contains(inputs[strIndex])) {
                     emptySuggestions();
+                } else {
+                    if (SortCommand.ORDER_SET.contains(inputs[1])) {
+                        updateSuggestions(SortCommand.CATEGORY_SET);
+                    } else if (SortCommand.CATEGORY_SET.contains(inputs[1])) {
+                        updateSuggestions(SortCommand.ORDER_SET);
+                    } else {
+                        emptySuggestions();
+                    }
+                }
+            }
+        } else {
+            emptySuggestions();
+        }
+    }
+
+    /**
+     * Function that handles when the command word is detected to be summary
+     * @param inputs is an array of all words found in the user input delimited by whitespaces.
+     * @param strIndex is the index of the word to be completed in the entire string of input.
+     */
+    private void summaryCommandKeyword(String[] inputs, int strIndex) {
+
+        if (inputs.length == 2) {
+            if (strIndex == 1) {
+                if (inputs[strIndex].matches(PREFIX_PATTERN)) {
+                    emptySuggestions();
+                } else {
+                    updateSuggestions(summaryKeywordsSet);
+                }
+            } else {
+                emptySuggestions();
+            }
+        } else if (inputs.length == 3 || inputs.length == 4) {
+            if (!summaryKeywordsSet.contains(inputs[1])) {
+                emptySuggestions();
+            } else {
+                if (strIndex == 2 || strIndex == 3) {
+                    if (!inputs[2].startsWith(PREFIX_DATE.getPrefix())) {
+                        emptySuggestions();
+                    } else {
+                        if (dateInputSummarySet.contains(inputs[1])) {
+                            updateSuggestions(dateSuggestionSet);
+                        } else if (inputs[1].equals(SummaryByMonthCommand.COMMAND_MODE_WORD)) {
+                            updateSuggestions(defaultMonthSummarySet);
+                        } else {
+                            emptySuggestions();
+                        }
+                    }
                 }
             }
         } else {
@@ -313,6 +408,7 @@ public class CustomSuggestionProvider {
 
     /**
      * Updates the RecordMap in this class whenever the RecordMap in the Model is updated.
+     *
      * @param newRecordMap is the new TagMap object that is to replace the old TagMap
      */
     public static void updateRecordMap(RecordMap newRecordMap) {
@@ -320,14 +416,14 @@ public class CustomSuggestionProvider {
         updateRecordSets();
     }
 
-    public static void updateLimitMap(HashMap<String, Integer> dataBasedLimitList) {
+    /**
+     * Updates the RecordMap in this class whenever the RecordMap in the Model is updated.
+     *
+     * @param dataBasedLimitList is the new HashMap object that is to replace the old LimitDateMap
+     */
+    public static void updateLimitDateMap(HashMap<String, Integer> dataBasedLimitList) {
         limitsDateMap = dataBasedLimitList;
-        updateLimitDateMap();
-    }
-
-    private static void updateLimitDateMap() {
-        limitsDateSuggestionSet = defaultDateSet;
-        limitsDateSuggestionSet.addAll(limitsDateMap.keySet());
+        updateLimitDateSet();
     }
 
     /**
@@ -340,4 +436,13 @@ public class CustomSuggestionProvider {
         tagsSuggestionSet = defaultTagsSet;
         tagsSuggestionSet.addAll(recordsMap.getAsReadOnlyTagMap().getAsReadOnlyTagMap().keySet());
     }
+
+    /**
+     * Updates the Map of dates that are tied to limits
+     */
+    private static void updateLimitDateSet() {
+        limitsDateSuggestionSet = defaultDateSet;
+        limitsDateSuggestionSet.addAll(limitsDateMap.keySet());
+    }
+
 }

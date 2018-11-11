@@ -112,7 +112,7 @@ public class DateBasedLimitList { //implements Iterable<Limit> {
     public DateMap makeLimitDateMap() {
         DateMap dateMap = new DateMap();
         for (Limit limit : internalList) {
-            dateMap.addLimitToLimitMap(limit);
+            dateMap.addLimitToDateMap(limit);
         }
         return dateMap;
     }

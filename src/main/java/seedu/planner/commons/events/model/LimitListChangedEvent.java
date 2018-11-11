@@ -1,7 +1,6 @@
 package seedu.planner.commons.events.model;
 
 import seedu.planner.commons.events.BaseEvent;
-import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 //@@Author OscarZeng
 
