@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.NoteDeleteCommand;
 import seedu.address.model.StorageController;
@@ -18,7 +17,7 @@ import seedu.address.ui.HtmlCardProcessor;
 /**
  * Represents the in-memory model of the Note data.
  */
-public class NoteManager extends ComponentManager {
+public class NoteManager {
 
     public static final String NOTE_PAGE_IDENTIFIER = "<!-- NOTE -->";
 
