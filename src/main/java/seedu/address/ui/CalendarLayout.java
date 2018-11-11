@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
 import seedu.address.ui.UiPart;
 
 //@@author linnnruoo
-//inspired by the original @@author guekling 
+//inspired by the original @@author guekling
 /**
  * Supports the display of the month view of the calendar.
  */
