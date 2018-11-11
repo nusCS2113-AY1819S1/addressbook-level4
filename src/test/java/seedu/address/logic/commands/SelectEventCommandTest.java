@@ -103,7 +103,7 @@ public class SelectEventCommandTest {
 
         EventSingleDisplayPredicate eventPredicate = new EventSingleDisplayPredicate(eventChosen);
         PersonAttendingEventPredicate personPredicate = new PersonAttendingEventPredicate(eventChosen);
-        expectedModel.updateFilteredEventList(eventPredicate);
+        //expectedModel.updateFilteredEventList(eventPredicate);
         expectedModel.updateFilteredPersonList(personPredicate);
 
         SelectEventCommand selectEventCommand = new SelectEventCommand(INDEX_FIRST_EVENT);
@@ -119,7 +119,7 @@ public class SelectEventCommandTest {
 
         EventSingleDisplayPredicate eventPredicate = new EventSingleDisplayPredicate(eventChosen);
         PersonAttendingEventPredicate personPredicate = new PersonAttendingEventPredicate(eventChosen);
-        expectedModel.updateFilteredEventList(eventPredicate);
+        //expectedModel.updateFilteredEventList(eventPredicate);
         expectedModel.updateFilteredPersonList(personPredicate);
 
         SelectEventCommand selectEventCommand = new SelectEventCommand(INDEX_SECOND_EVENT);
@@ -135,7 +135,7 @@ public class SelectEventCommandTest {
 
         EventSingleDisplayPredicate eventPredicate = new EventSingleDisplayPredicate(eventChosen);
         PersonAttendingEventPredicate personPredicate = new PersonAttendingEventPredicate(eventChosen);
-        expectedModel.updateFilteredEventList(eventPredicate);
+        //expectedModel.updateFilteredEventList(eventPredicate);
         expectedModel.updateFilteredPersonList(personPredicate);
 
         SelectEventCommand selectEventCommand = new SelectEventCommand(INDEX_THIRD_EVENT);
