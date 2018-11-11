@@ -213,10 +213,6 @@ public class MainWindow extends UiPart<Stage> {
     public ReminderListPanel getReminderListPanel() {
         return reminderListPanel; }
 
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
