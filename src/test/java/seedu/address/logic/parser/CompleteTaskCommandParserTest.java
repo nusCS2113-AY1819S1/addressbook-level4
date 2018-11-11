@@ -22,12 +22,12 @@ public class CompleteTaskCommandParserTest {
     private CompleteTaskCommandParser parser = new CompleteTaskCommandParser();
 
     @Test
-    public void parse_validArgs_returnsCompleteCommand() {
+    public void parseValidArgsReturnsCompleteCommand() {
         assertParseSuccess(parser, "1", new CompleteTaskCommand(INDEX_FIRST_TASK));
     }
 
     @Test
-    public void parse_invalidArgs_throwsException() {
+    public void parseInvalidArgsThrowsException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteTaskCommand.MESSAGE_USAGE));
     }
 
