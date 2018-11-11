@@ -1,15 +1,12 @@
-//@@author SHININGGGG
+//@@author feijunzi
 package seedu.address.model.expenditureinfo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENDITURE_MONEY_CLOTHES;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalExpenditures.CHICKEN;
 import static seedu.address.testutil.TypicalExpenditures.IPHONE;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +16,6 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.expenditureinfo.exceptions.DuplicateExpenditureException;
 import seedu.address.model.expenditureinfo.exceptions.ExpenditureNotFoundException;
-import seedu.address.testutil.PersonBuilder;
 
 public class ExpenditureListTest {
     @Rule
@@ -95,19 +91,19 @@ public class ExpenditureListTest {
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
+    public void remove_nullExpenditure_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         expenditureList.remove(null);
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
+    public void remove_expenditureDoesNotExist_throwsExpenditureNotFoundException() {
         thrown.expect(ExpenditureNotFoundException.class);
         expenditureList.remove(CHICKEN);
     }
 
     @Test
-    public void remove_existingPerson_removesPerson() {
+    public void remove_existingExpenditure_removesExpenditure() {
         expenditureList.add(CHICKEN);
         expenditureList.remove(CHICKEN);
         ExpenditureList expectedExpenditureList = new ExpenditureList();
