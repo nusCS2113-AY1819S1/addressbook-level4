@@ -229,12 +229,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    @Override
-    public void updatePersonAttendanceChanged() {
-        System.out.println("Testing");
-        indicateAddressBookChanged();
-    }
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
