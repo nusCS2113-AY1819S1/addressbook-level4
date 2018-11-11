@@ -1106,7 +1106,6 @@ Use case ends.
 
 // end::usecases_inviteremoveselect[]
 
-
 // tag::nonfunctionalrequirements[]
 == Non Functional Requirements
 

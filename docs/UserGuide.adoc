@@ -496,9 +496,11 @@ There is no need to save manually.
 
 * *Help*: `help`
 
+
 * *Login*: `login IDENTITY` where IDENTITY is either manager or employee or `login as existingemail@example.com`
 
 * *Logout*: `logout`
+
 
 * *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
 
