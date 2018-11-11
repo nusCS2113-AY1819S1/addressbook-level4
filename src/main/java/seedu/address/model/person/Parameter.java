@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Used for Sort command.
@@ -9,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Parameter {
 
-    public static final String MESSAGE_UNKNOWN_PARAM = "Invalid Parameters. Please enter 'name' or 'skill'";
+    public static final String MESSAGE_UNKNOWN_PARAM = "Invalid Parameters. Please enter 'name', 'skill', or 'sl'.";
 
     private static final String PARAMETERS_REGEX = "skill|name|sl"; // TODO expand with more parameters
 

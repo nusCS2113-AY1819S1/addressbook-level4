@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.model.person.Parameter.isValidParameter;
 
 import java.util.ArrayList;
 import java.util.List;
