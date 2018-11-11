@@ -81,7 +81,6 @@ public class ImportCommand extends Command {
         Person modifiedPerson = createModifiedPerson(personToEdit, timeTable);
 
         model.updatePerson(personToEdit, modifiedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         model.updateTimeTable(modifiedPerson.getTimeTable());
         return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, filePath.toString()));
