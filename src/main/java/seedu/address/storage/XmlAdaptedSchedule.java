@@ -10,7 +10,7 @@ import seedu.address.model.person.Schedule;
  */
 public class XmlAdaptedSchedule {
     @XmlValue
-    //    private String schedule;
+    private String schedule;
 
     /**
      * Constructs an XmlAdaptedTag.
@@ -34,17 +34,14 @@ public class XmlAdaptedSchedule {
         schedule = source.schedulePrint;
     }
 
-    //    /**
-    //     * Converts this jaxb-friendly adapted tag object into the model's Tag object.
-    //     *
-    //     * @throws IllegalValueException if there were any data constraints violated in the adapted person
-    //     */
-    //    public Schedule toModelType() throws IllegalValueException {
-    //        if (!Schedule.isValidStartEnd()) {
-    //            throw new IllegalValueException(Schedule.MESSAGE_START_END_CONSTRAINTS);
-    //        }
-    //        return new Schedule(schedule);
-    //    }
+    /**
+     * Converts this jaxb-friendly adapted tag object into the model's Tag object.
+     *
+    //* @throws IllegalValueException if there were any data constraints violated in the adapted person
+     */
+    public String toModelType() {
+        return new String(schedule);
+    }
 
     //    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule %s field is missing!";
     //
