@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 
 /**
@@ -13,11 +16,17 @@ import java.util.ArrayList;
  */
 public class CsvUtil {
 
-    // private static final String BASE_DIRECTORY = "data/CSVexport/";
-    private static final String BASE_DIRECTORY = System.getProperty("user.home") + "/";
+    public static final String MESSAGE_ERROR = "Error! could not write to %s.csv";
+    public static final String BASE_DIRECTORY = "data/CSVexport/";
+
+    private static final Logger logger = LogsCenter.getLogger(CsvUtil.class);
+
     private static final String COMMA_DELIM = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
-    private static final String MESSAGE_ERROR = "Error! could not write to %s.";
+    private static final String MESSAGE_CREATE_DIRECTORY_ERROR =
+            "Error: directory cannot be created.";
+    private static final String MESSAGE_FLUSH_CLOSE_ERROR =
+            "An error has occurred while flushing/closing the FileWriter.";
 
 
     /**
@@ -41,7 +50,7 @@ public class CsvUtil {
     }
 
     /**
-     * This method creates a CSV file from a CSV-adapted Java object.
+     * This method creates a CSV file from a list of CSV-friendly String.
      *
      * @return true if writing to file is successful, false otherwise
      */
@@ -64,6 +73,7 @@ public class CsvUtil {
                 file.getParentFile().mkdir();
             }
         } catch (SecurityException e) {
+            logger.info(MESSAGE_CREATE_DIRECTORY_ERROR);
             e.printStackTrace();
             return false;
         }
@@ -73,7 +83,7 @@ public class CsvUtil {
         try {
             fileWriter = new FileWriter(fileName);
 
-            fileWriter.append(headers.toString());
+            fileWriter.append(headers);
             fileWriter.append(NEW_LINE_SEPARATOR);
 
             for (String obj : data) {
@@ -82,6 +92,7 @@ public class CsvUtil {
             }
 
         } catch (IOException e) {
+            logger.info(String.format(MESSAGE_ERROR, fileNameParam));
             e.printStackTrace();
             return false;
         } finally {
@@ -89,7 +100,7 @@ public class CsvUtil {
                 fileWriter.flush();
                 fileWriter.close();
             } catch (IOException | NullPointerException e) {
-                System.out.println("An error has occurred while flushing/closing the FileWriter.");
+                logger.info(MESSAGE_FLUSH_CLOSE_ERROR);
                 e.printStackTrace();
             }
         }
