@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Message {
 
     public static final String MESSAGE_MESSAGE_CONSTRAINTS =
-            "Message can only be 25MB in size (Gmail).";
+            "Message content has exceeded permissible size limit.";
     public static final String MESSAGE_VALIDATION_REGEX = "^.{0,25000000}$";
     public final String value;
 
