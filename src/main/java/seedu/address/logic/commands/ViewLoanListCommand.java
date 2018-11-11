@@ -24,6 +24,11 @@ public class ViewLoanListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         if (!MainApp.getLoanListFile().exists()) {
             throw new CommandException(MESSAGE_EMPTY);
         }

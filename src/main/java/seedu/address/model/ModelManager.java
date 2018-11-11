@@ -16,6 +16,8 @@ import seedu.address.commons.events.model.OpenStockListVersionEvent;
 import seedu.address.commons.events.model.SaveStockListVersionEvent;
 import seedu.address.commons.events.model.StockListChangedEvent;
 import seedu.address.model.account.Account;
+import seedu.address.model.account.LoggedInAccount;
+import seedu.address.model.account.Username;
 import seedu.address.model.item.Item;
 
 /**
@@ -28,6 +30,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Item> filteredItems;
     private final VersionedAccountList versionedAccountList;
     private final FilteredList<Account> filteredAccounts;
+    private final LoggedInAccount loggedInAccount;
 
     /**
      * Initializes a ModelManager with the given stockList and userPrefs.
@@ -45,6 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAccountList = new VersionedAccountList(accountList);
         filteredAccounts = new FilteredList<>(versionedAccountList.getAccountList());
+        loggedInAccount = new LoggedInAccount();
     }
 
     public ModelManager() {
@@ -233,6 +237,27 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAccountList.updateAccount(target, editedAccount);
         indicateAccountListChanged();
     }
+
+    @Override
+    public boolean getLoginStatus() {
+        return loggedInAccount.getLoginStatus();
+    }
+
+    @Override
+    public String getLoggedInUser() {
+        return loggedInAccount.getUsername().toString();
+    }
+
+    @Override
+    public void setLoggedInUser(Username username) {
+        loggedInAccount.setLoggedInUser(username);
+    }
+
+    @Override
+    public void setLoggedOutStatus() {
+        loggedInAccount.setLoggedOutStatus();
+    }
+
 
     //=========== Filtered Account List Accessors =============================================================
 

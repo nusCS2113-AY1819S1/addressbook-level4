@@ -2,9 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
+import seedu.address.model.account.Account;
 import seedu.address.model.account.UsernameContainsKeywordsPredicate;
 
 /**
@@ -29,9 +32,11 @@ public class FindAccountCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+
         model.updateFilteredAccountList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_ACCOUNTS_LISTED_OVERVIEW, model.getFilteredAccountList().size()));
+        List<Account> foundAccounts = model.getFilteredAccountList();
+        String messageOutput = getMessageOutput(model.getFilteredAccountList().size(), foundAccounts);
+        return new CommandResult(messageOutput);
 
     }
 
@@ -40,5 +45,22 @@ public class FindAccountCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof FindAccountCommand // instanceof handles nulls
                 && predicate.equals(((FindAccountCommand) other).predicate)); // state check
+    }
+
+    private String getMessageOutput (int numAccounts, List<Account> accounts) {
+        String messageOutput = "";
+        messageOutput += String.format(Messages.MESSAGE_ACCOUNTS_FOUND_OVERVIEW, numAccounts) + "\n";
+
+        messageOutput += "Accounts: \n";
+        int counter = 0;
+        for (Account account : accounts) {
+            counter++;
+            messageOutput += counter + ". "
+                    +
+                    account.getUsername()
+                    + "\n";
+        }
+
+        return messageOutput;
     }
 }

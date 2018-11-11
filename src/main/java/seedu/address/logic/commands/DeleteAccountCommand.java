@@ -13,6 +13,7 @@ import seedu.address.model.account.Account;
 
 /**
  * Deletes an account identified using it's displayed index from the account list.
+ * Raises an exception if last account in the list.
  */
 public class DeleteAccountCommand extends Command {
 
@@ -34,6 +35,11 @@ public class DeleteAccountCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Account> lastShownList = model.getFilteredAccountList();
 
 
@@ -42,6 +48,11 @@ public class DeleteAccountCommand extends Command {
         }
 
         Account itemToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        if (itemToDelete.getUsername().toString().equals(model.getLoggedInUser())) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ACCOUNT_DELETION);
+        }
+
         model.deleteAccount(itemToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_ACCOUNT_SUCCESS, itemToDelete));
     }

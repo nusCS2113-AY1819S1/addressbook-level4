@@ -70,7 +70,7 @@ public class ItemBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Item} that we are building.
+     * Sets the {@code MinQuantity} of the {@code Item} that we are building.
      */
     public ItemBuilder withMinQuantity(String minQuantity) {
         this.minQuantity = new Quantity(minQuantity);
@@ -78,7 +78,7 @@ public class ItemBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Item} that we are building.
+     * Sets the {@code Status} of the {@code Item} that we are building.
      */
     public ItemBuilder withStatus(Status status) {
         this.status = status;
