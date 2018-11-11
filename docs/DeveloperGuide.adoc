@@ -104,6 +104,7 @@ When you are ready to start coding,
 === Architecture
 
 .Architecture Diagram
+// TODO: modify architecture diagram to display current implementations
 image::Architecture.png[width="600"]
 
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
@@ -429,16 +430,59 @@ image::TodoSequenceDiagram.png[width="1000"]
 
 //tag::suggestion[]
 === Suggestions Feature
-Gives helpful suggestions to users on commands to type.
+The suggestions feature gives users helpful suggestions on what command to type, and corrections for commands when incorrect
+commands are being entered.
 
 ==== Current Implementation
 There are two instances when suggestions are given.
 
-Firstly, when a user completes entering a command (after pressing ENTER key), if the command typed is invalid, the system
-will suggest a similar command based on the edit distance.
+Firstly, when a user completes entering a command (after pressing `ENTER` key), if the command typed is invalid, such as
+commands being misspelt, the system will suggest a similar command based on the edit distance (which will be explained later).
 
 The second instance would be when the user presses tab while typing the command halfway. The system will suggest commands
-based on the current prefix string.
+based on the current prefix string. If only a single command is available, the command would be completed for the user,
+and the system would show the parameters required for that command.
+
+===== Wrong Command Suggestion
+Given below is an example usage of how the WrongCommandSuggestion behaves at each step.
+
+Step 1: The user would type in a misspelt command string into the Command Box pane.
+
+Step 2: The command would be parsed into the AddressBookParser class. Since no commands match the word exactly, it would
+fall into the default case.
+
+Step 3: The default case would extract out only the command portion of the user input, and input it into the
+WrongCommandSuggestion class.
+
+Step 4: WrongCommandSuggestion would then instantiate the StringSimilarity class to find the nearest match of a word.
+
+Step 5: editDistance in StringSimliarity class would be called to find out the edit distance between two words. These two
+words would be the wrong command the user has input, and the list of available commands in the whole application.
+
+Step 6: WrongCommandSuggestion would then compare if the edit distance of the current command is shorter than the current
+shortest edit distance command (which is initialised to 5 edits). If it is shorter, it would then suggest the current command.
+
+Step 7: WrongCommandSuggestion would then return the suggestion in a string, which would then be inputted into the CommandException,
+to be thrown to the LogicManager class.
+
+The following sequence diagram shows an example of how the WrongCommandSuggestion operation works with
+misspelt command "histary" (closest command is `history`):
+
+image::WrongCommandSuggestionSequenceDiagram.png[width="1000"]
+
+//TODO: explain implementation of Levenshtein Distance
+
+===== Input Command Suggestion
+Given below is an example of how the InputCommandSuggestion behaves at each step.
+
+
+The following sequence diagram shows an example of how the InputCommandSuggestion operation works with the typed command
+"s":
+
+image::InputCommandSuggestionSequenceDiagram.png[width="1000"]
+
+==== Design Considerations
+
 //end::suggestion[]
 
 // tag::dataencryption[]

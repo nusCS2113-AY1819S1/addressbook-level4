@@ -33,13 +33,20 @@ JitHub is a Java application that you can run on any machine with Java Runtime E
 ** Justification:  a user can make mistakes in commands and the app should provide a convenient way to rectify them.
 // saves time and helps making it convenient etc
 ** Highlights: write technical skills i acquired like new algorithm etc
-** Credits: geekforgeeks.com for their explanation on Trie data structure which was heavily used to implement this feature.
+** Credits:
+*** [https://www.geeksforgeeks.org/trie-insert-and-search/[GeeksforGeeks]] for their explanation on Trie data structure which was heavily used to implement this feature.
 
 * *Minor enhancement*: Added a wrong command suggestion when the user types in a wrong command and presses enter.
+** What it does:
+** Justification:
+** Highlights
+** Credits:
+*** [https://github.com/trekhleb/javascript-algorithms/tree/master/src/algorithms/string/levenshtein-distance[trekhleb/javascript-algorithms]]
+    for their explanation on Levenshtein distance (edit distance)
 //elaborate
 //justify
 //learning points
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=elstonayx[Code]]
 
 
 == Contributions to the User Guide

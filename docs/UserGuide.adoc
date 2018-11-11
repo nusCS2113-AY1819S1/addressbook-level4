@@ -385,6 +385,9 @@ When exporting contacts for the purpose of information transfer to another compu
 the export command to prevent data misuse.
 
 Command type: `encrypt for export`
+// end::suggestions[]
+
+// tag::dataencryption[]
 // end::dataencryption[]
 
 == FAQ
