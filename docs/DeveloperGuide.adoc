@@ -255,14 +255,47 @@ This section describes some noteworthy details on how certain features are imple
 // tag::authentication[]
 === Authentication
 ==== Current Implementation
+===== Multiple Users
+Each storage file is now stored in separate XML files. They are identified in the following format:
+
+.   `addressbook-[USERNAME].xml`
+.   `distributorbook-[USERNAME].xml`
+.   `saleshistory-[USERNAME].xml`
+
 ===== Login
 The following sequence diagram shows how the user authentication process works: +
 
 image::AuthenticationSequenceDiagram.png[width="800]
 
 ===== Logout
+This feature allows the user to log out from the application, securing data.
+When the user is logged out, some of the user commands are limited. This is handled by `LogicManager`.
+
+The user will be unable to logout if not logged in.
+
+===== Deregistration
+When the user is deleted, the following storage files stored in the system managed by the user will be deleted.
+
+.   `addressbook-[USERNAME].xml`
+.   `distributorbook-[USERNAME].xml`
+.   `saleshistory-[USERNAME].xml`
+
+
+
+==== Proposed Enhancements
+.   Hiding/showing of panels when logged in/out for confidentiality.
+.   2-FA
+.   Login Status Identifier
+
 
 ==== Design Considerations
+
+===== Aspect: Implementation of `UserDatabase`
+*   **Alternative 1 (current implementation):** All users are stored collectively in one XML file.
+    (users.xml)
+
+*   **Alternative 2:** SQL/NoSQL Databases.
+
 // end::authentication[]
 // tag::undoredo[]
 === Undo/Redo feature
@@ -388,7 +421,7 @@ the code.
 === [Proposed] Data Encryption
 
 ==== Proposed Implementation
-Data is to be encrypted to protect from unauthorized access.
+Data needs to be encrypted to protect from unauthorized access.
 The process to transform data stored in the databases is to be facilitated by `DataEncryptionUtil` class. +
 It is a class containing utility methods to encrypt and decrypt files for Storage. +
 Additionally, it implements the following operations:
@@ -399,20 +432,21 @@ Additionally, it implements the following operations:
 
 
 ==== Design Considerations
-*Aspect:* Encryption/decryption Algorithm
+===== Aspect: Possible schemes
 
-*   *Alternative 1 (proposed choice):* AES/CBC/PKCS5Padding
+*   **Alternative 1 (proposed choice):** AES/CBC/PKCS5Padding
 
-*   *Alternative 2:* AES/ECB/PKCS5Padding
+*   **Alternative 2:** AES/ECB/PKCS5Padding
 
-*Aspect:* Technique
+===== Aspect: How encryption and decryption executes
 
-*   *Alternative 1 (proposed choice):* Intercept `XMLUtil` class.
+*   *Alternative 1 (proposed choice):* Intercept `XMLUtil` when reading and saving XML Storage files.
+*   **Aleternative 2:** Individual encrypt and decrypt command.
 
 // end::dataencryption[]
 
 // tag::threadreminders[]
-=== [Proposed] Thread Reminders
+=== [Proposed] Thread Due Reminders
 // end::threadreminders[]
 == Documentation
 
