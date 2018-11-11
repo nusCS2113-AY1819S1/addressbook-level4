@@ -7,7 +7,7 @@ https://coveralls.io/github/CS2113-AY1819S1-T13-3/main?branch=master[image:https
 https://www.codacy.com/app/amirulmaricar/main?utm_source=github.com&utm_medium=referral&utm_content=CS2113-AY1819S1-T13-3/main&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/d186291aa9c24d799f29d962d4d7212b[Codacy code quality]]
 
 ifdef::env-github[]
-image::docs/images/UI2.png[width="600"]
+image::docs/images/Ui.png[width="600"]
 endif::[]
 
 * Flexible and easy-to-use application that keeps your business running smoothly.
