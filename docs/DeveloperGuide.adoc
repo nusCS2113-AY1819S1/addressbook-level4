@@ -323,9 +323,53 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::checkcommand[]
+=== Check feature
+One of the *important* features for BookInventory is for users, especially store owners, to be able to check the remaining stocks for the books.
+To do so, we have added a `check` command to the existing list of commands.
+
+==== Current Implementation
+The implementation of this command utilises both `Model` and `Logic` component to fulfil its function.
+
+The following sequence diagram shows how the check command operation is implemented.
+
+.Sequence Diagram for Check Command
+image::CheckSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How check executes
+
+* **Alternative 1 (current choice):** Sorts the entire BookInventory.
+** Pros: Easy to implement.
+** Cons: Unable to retrieve the original order of the BookInventory
+* **Alternative 2:** Only the displayed list is sorted
+** Pros: Original order of the BookInventory is kept
+** Cons:
+// end::checkcommand[]
+
+// tag::stockcommand[]
+=== Stock feature
+==== Current Implementation
+The sell command utilises both the `Model` and `Logic` component to fulfil its function.
+
+The stock operation is similar to the sell operation, refer to sell command for sequence diagram:
+
+==== Design Considerations
+
+===== Aspect: How stock command is implemented
+
+* **Alternative 1 (current choice):** Increases quantity in the Quantity Class.
+** Pros: Code is more cohesive.
+** Cons: Adds more code to Quantity Class.
+* **Alternative 2:** Replace quantity in the Book Class.
+** Pros: Does not need to edit Quantity Class.
+** Cons: Code becomes less cohesive.
+// end::stockcommand[]
+
 // tag::sellcommand[]
 === Sell feature
-==== Current implementation
+==== Current Implementation
 The sell command utilises both the `Model` and `Logic` component to fulfil its function.
 
 The following sequence diagram shows how the sell operation is implemented
@@ -348,7 +392,7 @@ After SoldBook is created, the inventory book will be updated through `Model#upd
 
 // tag::Request[]
 === Request feature
-==== Current implementation
+==== Current Implementation
 The Request command utilises both the `RequestModel` and `Logic` component to fulfil its function.
 This is accessible for all users.
 
@@ -390,29 +434,9 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 
 // end::Request[]
 
-
-// tag::stockcommand[]
-=== Stock feature
-==== Current implementation
-The sell command utilises both the `Model` and `Logic` component to fulfil its function.
-
-The stock operation is similar to the sell operation, refer to sell command for sequence diagram:
-
-==== Design Considerations
-
-===== Aspect: How stock command is implemented
-
-* **Alternative 1 (current choice):** Increases quantity in the Quantity Class.
-** Pros: Code is more cohesive.
-** Cons: Adds more code to Quantity Class.
-* **Alternative 2:** Replace quantity in the Book Class.
-** Pros: Does not need to edit Quantity Class.
-** Cons: Code becomes less cohesive.
-// end::stockcommand[]
-
 // tag::statistic[]
 === Statistic feature
-==== Current implementation
+==== Current Implementation
 The statistic feature is facilitated by a singleton class StatisticCenter. It is called directly from many existing commands and is stored in Json format.
 
 The following sequence diagram shows how the StatisticCenter interact with sell command:
@@ -433,7 +457,6 @@ image::statisticSequenceDiagram.png[width="800"]
 
 // tag::dataencryption[]
 === Password Protection
-
 ==== Current Implementation
 A password is required by the user for him/her to be able to use BookInventory.
 
@@ -482,6 +505,16 @@ do not wish to face a scenario where the suggestion offers another command word 
 unintended by the user.
 
 // end::commandprediction[]
+
+// tag::tabfeature[]
+=== Tab feature
+==== Current Implementation
+For *convenience*, we have implemented this feature for users to easily cycle through existing `ISBN` in the inventory without the need to manually type them out.
+
+The tab feature
+// end::tabfeature[]
+
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
