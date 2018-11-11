@@ -64,31 +64,29 @@ public class ImportCommand extends Command {
         Person personToEdit = model.getUser();
         requireNonNull(personToEdit);
 
-        Optional<TimeTable> optionalTimeTable;
         TimeTable timeTable;
 
         try {
             //TODO: remove hardcoding of timezone in import and export command once TimeSlots are in UTC.
             ZoneId zoneIdSingapore = ZoneId.of("Asia/Shanghai");
-            optionalTimeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath, zoneIdSingapore);
+            timeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath, zoneIdSingapore);
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_IO_ERROR, filePath.toString()));
         } catch (TimeSlotOverlapException e) {
             throw new CommandException(String.format(MESSAGE_FILE_OVERLAP_TIMESLOT, filePath.toString()));
         }
 
-        if (!optionalTimeTable.isPresent()) {
+        if (timeTable.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_FILE_EMPTY, filePath.toString()));
+        } else {
+            Person modifiedPerson = createModifiedPerson(personToEdit, timeTable);
+
+            model.updatePerson(personToEdit, modifiedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.commitAddressBook();
+            model.updateTimeTable(modifiedPerson.getTimeTable());
+            return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, filePath.toString()));
         }
-        timeTable = optionalTimeTable.get();
-
-        Person modifiedPerson = createModifiedPerson(personToEdit, timeTable);
-
-        model.updatePerson(personToEdit, modifiedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
-        model.updateTimeTable(modifiedPerson.getTimeTable());
-        return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, filePath.toString()));
     }
 
     /**

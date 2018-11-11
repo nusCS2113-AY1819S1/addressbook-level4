@@ -13,11 +13,9 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
-import java.util.TimeZone;
 import java.util.logging.Logger;
 
 import biweekly.Biweekly;
@@ -44,7 +42,6 @@ import seedu.address.model.person.exceptions.TimeSlotOverlapException;
  */
 public class IcsUtil {
     private static final Logger logger = LogsCenter.getLogger(IcsUtil.class);
-    private static final String DEFAULT_ZONE_ID = "Asia/Shanghai";
     private static IcsUtil instance;
 
     private IcsUtil(){
@@ -59,29 +56,27 @@ public class IcsUtil {
     }
 
     /**
-     * Obtains the {@code Optional<TimeTable>} from the .ics file specified.
-     * @returns {@code Optional.empty()} object if the file did not contain any {@code TimeTable} data.
+     * Returns the {@code TimeTable} from the .ics file specified.
      *
-     * @param filePath cannot be null.
-     * @throws IOException if any IO error occurs, or file is not found.
-     * @throws TimeSlotOverlapException if the file to be imported has overlapping timeslots.
+     * @param filePath                  location of the .ics file.
+     *                                  cannot be null.
+     * @throws IOException              if any IO error occurs, or file is not found.
+     * @throws TimeSlotOverlapException if the file to be imported has overlapping {@code TimeSlot}.
      *
      */
-    public Optional<TimeTable> readTimeTableFromFile(Path filePath, ZoneId zoneId)
+    public TimeTable readTimeTableFromFile(Path filePath, ZoneId zoneId)
             throws IOException, TimeSlotOverlapException {
         requireNonNull(filePath);
 
-        ICalendar iCalendar = new ICalendar();
+        ICalendar iCalendar;
         try {
-            iCalendar = readICalendarFromFile(filePath); //does not return null.
+            iCalendar = readICalendarFromFile(filePath);
         } catch (IOException e) {
             logger.info("Failed to read: " + filePath.toString());
             throw new IOException(e);
         }
 
-        Optional<TimeTable> optionalTimeTable = iCalendarToTimeTable(iCalendar, zoneId);
-
-        return optionalTimeTable;
+        return iCalendarToTimeTable(iCalendar, zoneId);
     }
 
     /**
@@ -104,21 +99,20 @@ public class IcsUtil {
     }
 
     /**
-     * Converts {@code ICalendar} to {@code TimeTable}
-     * @param iCalendar {@code ICalendar} to convert. Cannot be null.
+     * Converts {@code ICalendar} to {@code TimeTable}.
+     * Non-recurring {@code VEvent} are ignored.
+     *
+     * @param iCalendar The {@code ICalendar} to convert.
+     *                  Cannot be null.
+     * @param zoneId    The TimeZone of the {@code TimeTable}.
      */
-    private Optional<TimeTable> iCalendarToTimeTable(ICalendar iCalendar, ZoneId zoneId)
+    private TimeTable iCalendarToTimeTable(ICalendar iCalendar, ZoneId zoneId)
             throws TimeSlotOverlapException {
         requireNonNull(iCalendar);
         TimeTable timeTable = new TimeTable();
-        /*
-        In the forloop, we go through all the VEvents (logically equivalent to TimeSlots)
-        in the iCalendar (logically equivalent to TimeTable)
 
-        Then we get all the properties of each VEvent, and Instantiate a TimeSlot using these properties as parameters.
-        Then we add this TimeSlot to the TimeTable.
-         */
-        for (VEvent vEvent : iCalendar.getEvents()) { //foreach TimeSlot in TimeTable
+        for (VEvent vEvent : iCalendar.getEvents()) {
+            //convert VEvent to TimeSlot
             Optional<TimeSlot> optionalTimeSlot = vEventToTimeSlot(vEvent, zoneId);
             if (optionalTimeSlot.isPresent()) {
                 timeTable.addTimeSlot(optionalTimeSlot.get());
@@ -126,20 +120,23 @@ public class IcsUtil {
         }
         if (timeTable.isEmpty()) {
             logger.info("No timeslots found in file.");
-            return Optional.empty();
         } else {
             logger.info("At least 1 timeslot has been read from file.");
-            return Optional.of(timeTable);
         }
+        return timeTable;
     }
 
     /**
      * Converts {@code VEvent} to {@code Optional<TimeSlot>}.
-     * Only allow VEvents that are recurring to be added.
-     * @param vEvent {@code VEvent} to convert. Cannot be null.
+     * Non-recurring VEvents are ignored.
+     *
+     * @param vEvent        The {@code VEvent} to convert.
+     *                      Cannot be null.
+     * @param zoneId        The TimeZone of the {@code Optional<TimeSlot>}.
      */
     private Optional<TimeSlot> vEventToTimeSlot(VEvent vEvent, ZoneId zoneId) {
         requireNonNull(vEvent);
+        requireNonNull(zoneId);
 
         //each of these chunks extract/filter the vital information:
 
@@ -168,12 +165,13 @@ public class IcsUtil {
         Summary summary = vEvent.getSummary();
         String summaryStr = (summary == null) ? null : summary.getValue();
 
-        RecurrenceRule recurrenceRule = vEvent.getRecurrenceRule(); //is the event recurring every X-weeks/X-days?
+        //ignore non-recurring events
+        RecurrenceRule recurrenceRule = vEvent.getRecurrenceRule();
         if (recurrenceRule == null) {
             return Optional.empty();
         }
 
-        //if any of out essential TimeSlot variables are missing, ignore the VEvent and do not add it.
+        //ignore events that are missing essential information.
         if ((dtStart == null) || (dtEnd == null)) {
             return Optional.empty();
         }
@@ -182,9 +180,9 @@ public class IcsUtil {
         LocalTime timeSlotStartTime = startLdt.toLocalTime();
         LocalTime timeSlotEndTime = endLdt.toLocalTime();
         DayOfWeek timeSlotDay = startLdt.getDayOfWeek();
+        //TODO: Add (summary/label) to timetable object.
 
         //Add timeslot to timetable
-        //TODO: Add (summary/label) to timetable object.
         TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime);
         return Optional.of(timeSlot);
     }
@@ -262,13 +260,12 @@ public class IcsUtil {
     }
 
     /**
-     * @return {@code ICalendar} object from reading the {@code Path} specified
-     * Will return an empty {@code ICalendar} if the file has no iCalendar information.
+     * Returns the {@code ICalendar} object from reading the .ics file at the {@code Path} specified
+     *
      * @throws IOException if any IO error occurs during read.
      */
     private ICalendar readICalendarFromFile(Path filePath) throws IOException {
         requireNonNull(filePath);
-
         ICalendar iCalendar = new ICalendar();
 
         File file = filePath.toFile();
@@ -293,7 +290,6 @@ public class IcsUtil {
         } finally {
             reader.close();
         }
-
         return iCalendar;
     }
 }
