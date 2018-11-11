@@ -1,3 +1,4 @@
+//@@author kohjunkiat
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.StockCommand;
