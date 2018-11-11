@@ -1,0 +1,60 @@
+= Daryl Lim - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ClubHub
+
+---
+
+== Overview
+
+ClubHub is a desktop address book application used for managing Co-Curricular Activities (CCAs). The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added the Item List which stores entries of Items and their respective quantities and locations.
+** What it does: allows the user to add entries of Items into the Item List. Entries can then be deleted and/or edited using their respective commands.
+** Justification: This feature improves the product significantly because a user can manage Items in the Item List.
+** Highlights:
+
+* *Minor enhancement*: added the undoAll/redoAll commands that allow the user to undo/redo all changes made to ClubHub.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=darylnigel]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3`, `v1.3.1` and `v1.4` (3 releases) on GitHub
+** Enhancements to existing features:
+*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T09-3/main/pull/28
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-1/main/issues/171, https://github.com/CS2113-AY1819S1-W12-1/main/issues/163)
+** Tools:
+*** Integrated a new Github plugin (Travis CI) to the team repo
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=itemlist]
+
+include::../UserGuide.adoc[tag=undoallredoall]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=itemlist]
+
+=== UndoAll/RedoAll feature
+include::../DeveloperGuide.adoc[tag=undoallredoall]
+
+
