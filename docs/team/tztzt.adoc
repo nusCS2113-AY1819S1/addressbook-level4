@@ -2,7 +2,7 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets/
-:stylesheet: ../stylesheets/material-blue.css
+:stylesheet: gh-pages-zhithon.css
 
 == PROJECT: FinancialPlanner
 
