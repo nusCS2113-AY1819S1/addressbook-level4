@@ -58,9 +58,12 @@ public class FreeCommand extends Command {
         StringBuilder resultString = new StringBuilder(MESSAGE_FREE_SUCCESS);
 
         for (Index index : targetIndices) {
-            resultString.append(index.getOneBased());
-            resultString.append(' ');
+            resultString.append(friendList.get(index.getZeroBased()).getName());
+            resultString.append(", ");
         }
+
+        resultString.deleteCharAt(resultString.length() - 1);
+        resultString.deleteCharAt(resultString.length() - 1);
 
         return new CommandResult(resultString.toString().trim());
     }

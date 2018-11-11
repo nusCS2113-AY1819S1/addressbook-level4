@@ -13,5 +13,6 @@ public class Messages {
     //messages thrown by {@code ParserUtil#parseImportExportFileName}
     public static final String MESSAGE_PATH_TOO_LONG = "Destination file path is too long, consider making your "
             + "FILENAME shorter, or moving your application to a shorter directory, such as C:\\files\\";
-    public static final String MESSAGE_INVALID_PATH = "The path of the file was invalid.";
+    public static final String MESSAGE_PATH_INVALID = "The path of the file was invalid.";
+    public static final String MESSAGE_PATH_FORBIDDEN = "The FILENAME contained these forbidden characters: \\ or /";
 }

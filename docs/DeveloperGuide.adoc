@@ -368,23 +368,26 @@ The `TimeTable` object is composed under the `Person` class in `Model`. Each `Ti
 2. Two `LocalTime` objects to indicate the start time and end time of the `TimeSlot` respectively. +
 3. One `Color` object to indicate the color of the `TimeSlot` when displayed on FreeTime's UI.
 
-The following class diagram summarises the relationship between the components of the TimeTable class:
+The following class diagram summarises the relationship between the components of the `TimeTable` class:
 
-.Structure of the TimeTable Class
-image::TimeTableClassDiagram.png[width="400"]
+.Structure of the `TimeTable` Class
+image::TimeTableClassDiagram.png[width="600"]
 
 The `TimeTable` class implements two key methods: +
 1. `TimeTable#addTimeSlot()` - to add a new `TimeSlot` to the `TimeTable` +
 2. `TimeTable#deleteTimeSlot()` - to remove an existing `TimeSlot` from the `TimeTable` +
 
-The class `DeconflictTimeTable`, which inherits from `TimeTable`, is used to display mutually free timeslots among users. +
+The class `DeconflictTimeTable`, which inherits from `TimeTable`, is used when the `free` command is executed to store mutually free timeslots among users. +
+When the `free` command is executed, a `DeconflictTimeTable` object is instantiated with all `TimeSlot` objects in the user's `TimeTable`. Subsequently, the `TimeTable` objects of every `Person` that is passed as an argument to the `free` command is added to the `DeconflictTimeTable`.
 
-The key difference between `TimeTable` and `DeconflictTimeTable` lies in the implementation of the `addTimeSlot()` method. `TimeTable#addTimeSlot()` throws an exception when the `TimeSlot` to be added overlaps with an existing `TimeSlot` in the `TimeTable`. However, `DeconflictTimeTable#addTimeSlot()` merges the `TimeSlot` to be added with all overlapping `TimeSlot` objects in the `TimeTable`.
+The following sequence diagram shows the significant method calls for the method `FreeCommand#execute()`:
 
-The following sequence diagram shows the significant method calls for generating a `DeconflictTimeTable` object from two `TimeTable` objects:
-
-.Sequence Diagram Showing the Generation of a `DeconflictTimeTable`
+.Interactions between the Logic Component and Model Component for the `FreeTime#execute()` Method
 image::DeconflictSequenceDiagram.png[width="800"]
+
+The key difference between `TimeTable` and `DeconflictTimeTable` lies in the implementation of the `addTimeSlot()` method. `TimeTable#addTimeSlot()` throws a `TimeSlotOverlapException` when the `TimeSlot` to be added overlaps with an existing `TimeSlot` in the `TimeTable`. +
+However, `DeconflictTimeTable#addTimeSlot()` merges the `TimeSlot` to be added with all overlapping `TimeSlot` objects in the `DeconflictTimeTable`. Thus, `DeconflictTimeTable#addTimeSlot()` never throws `TimeSlotOverlapException`.
+
 
 ===== Frontend implementation
 
@@ -393,18 +396,22 @@ image::DeconflictSequenceDiagram.png[width="800"]
 2. `TimeTableTimeMarkerGrid` - a `GridPane` on the top of the `TimeTablePanel` to display the time markers +
 3. `TimeTableMainGrid` - a `GridPane` in the center of the `TimeTablePanel`. Composed of any number of `TimeTablePanelTimeSlot` objects. +
 
+The following class diagram summarises the relationship between the components of the TimeTablePanel class:
+
+.Structure of the `TimeTablePanel` Class
+image::TimeTablePanelClassDiagram.png[width="600"]
+
 The following screenshot shows the relative position of all the components in `TimeTablePanel`:
 
 .Layout of the TimeTablePanel
 image::TimeTableScreenshotLabelled.png[width="800"]
 
+FreeTime's UI is updated through the `EventsCenter` every time `Model#updateTimeTable()` is called.
 
-===== Interaction between backend and frontend
+The following sequence diagram shows the significant method calls for the method `Model#updateTimeTable()`.
 
-The following sequence diagram show the significant method calls for the execution of the `addtime` command. The execution of the `deletetime` is implemented in a similar manner.
-
-.Sequence Diagram Showing the Execution of an `addtime` Command
-image::TimeTableSequenceDiagram.png[width="800"]
+.Interactions between the Model, EventsCenter, and UI Components for the `FreeTime#execute()` Method
+image::UpdateTimeTableSequenceDiagram.png[width="1600"]
 
 {nbsp}
 
@@ -960,13 +967,13 @@ Given below are instructions to test the app manually.
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
-=== Launch and Shutdown
+=== Launch and shutdown
 
 . Initial launch
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the login page. The window size may not be optimual.
 
 . Saving window preferences
 
@@ -974,26 +981,121 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+=== Register, logging in, and logging out
 
-=== Deleting a person
+. Opening the help window
 
-. Deleting a person while all persons are listed
+.. Test case: `help` +
+   Expected: The help window opens, showing the User Guide.
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+. Logging in with a test account
 
-_{ more test cases ... }_
+.. Test case: `login u\test pw\test` +
+   Expected: The login is successful and the main GUI appears. The `Me` panel should show a person card panel with `test` in the name field.
 
-=== Saving data
+. Registering a new account
 
-. Dealing with missing/corrupted data files
+.. Test case: `register u/John Goe pw/testpassword p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/CS2113T` +
+   Expected: The registration is successful and the main GUI appears. The `Me` panel should show a person card panel with `John Goe` in the name field.
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+. Trying to register a new account with an existing username
+.. Test case: `register u/test pw/testpassword p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/CS2113T` +
+   Expected: An error message appears indicating that the user already exists.
 
-_{ more test cases ... }_
+. Logging out
+.. Prerequisites: Have logged in to a user account
+.. Test case: `logout` +
+   Expected: The logout is successful and the login screen reappears with the message "Successfully logged out".
+
+[NOTE]
+All following sections assume that the user is currently logged into FreeTime.
+
+=== Basic commands
+
+. Editing your details
+
+.. Test case: `edit p/91234567 e/johndoe@example.com t/CS2101` +
+   Expected: The details of the user in the `Me` panel is updated to specified details.
+
+. Showing command history
+
+.. Test case: `history` +
+   Expected: The list of all previously-entered commands appears below the command box.
+
+=== Adding and removing friends
+
+. Adding a friend
+
+.. Test case: `friend 1` +
+   Expected: The first person in the `Others` panel moves to the `Friends` panel. Hidden fields, namely phone number, address, and email of this person should now be visible.
+
+. Removing a friend
+
+.. Prerequisites: Have previously added a friend
+.. Test case: `unfriend 1` +
+   Expected: The first person in the `Friends` panel moves to the `Others` panel. Hidden fields, namely phone number, address, and email of this person should no longer be visible.
+
+=== Finding a person by name and by group
+
+. Finding a person by name
+
+.. Test case: `find John` +
+   Expected: Only people with the word `John` in their names in both `Friends` and `Others` panels are shown. The command box reflects the total number of people listed in both panels.
+
+. Finding a person by group
+
+.. Test case: `group CS2101-A` +
+   Expected: Only people with the group `CS2101-A` in both `Friends` and `Others` panels are shown. The command box reflects the total number of people listed in both panels.
+
+. Listing all people
+.. Prerequisite: Have previously used the `find` or `group` command
+
+.. Test case: `listall` +
+   Expected: All people currently registered are shown in their respective panels.
+
+=== Adding and removing timeslots from the user's timetable
+
+. View the user's timetable
+
+.. Test case: `select me` +
+   Expected: If logged in with a newly-registed account, the timetable panel should be empty. Otherwise, the user's timetable is shown on the timetable panel.
+
+. View a friend's timetable
+
+.. Prerequisite: Have previously added a friend
+.. Test case: `select 1` +
+   Expected: The first person in the `Friends` panel is highlighted, with his timetable showing in the timetable panel (should be non-blank for users pre-loaded into FreeTime)
+
+. Adding a timeslot to your timetable
+
+.. Prerequisite: The timeslot from 0800 hrs to 1000 hrs on Monday is empty
+.. Test case: `add mon 8-10` +
+   Expected: A new timeslot, represented by a colored rectangle, appears in the corresponding position on the timetable. The timetable should also automatically resize to begin at 0800 hrs instead of the default 1000 hrs.
+
+. Removing a timeslot from your timetable
+
+.. Prerequisite: The timeslot from 0800 hrs to 1000 hrs on Monday is occupied by a single timeslot
+.. Test case: `delete mon 8-10` +
+   Expected: The timeslot corresponding to Monday, 0800 hrs to 1000 hrs is removed from the timetable panel. If no other timeslots in the timetable begin before 1000 hrs, the timetable should automatically resize to begin at the default 1000 hrs.
+
+=== Showing free timeslots across users
+
+. Showing free timeslots across users
+
+.. Prerequisites: Have previously added a friend
+.. Test case: `free 1` +
+   Expected: A deconflicted timetable should appear in the timetable panel. Timeslots where both the user and the friend at index 1 are available are highlighted in green. All other timeslots are highlighted in red.
+
+=== Importing and exporting the user's timetable
+
+. Exporting a timetable
+
+.. Prerequisite: Has previously added a timeslot to the user's timetable
+.. Test case: `select me`, followed by `export file` +
+   Expected: The user's timetable is exported to `[root]/import_export/file.ics`, where `[root]` represents the directory where FreeTime.jar is located.
+
+. Importing a timetable
+
+.. Prerequisite: Has previously exported a timetable with the file name `file.ics`, or has generated an .ics file using NUSMods, moved said file to the `import_export` directory under the root directory, and renamed the file to `file.ics` +
+.. Test case: `import file` +
+   Expected: The user's timetable is imported from the .ics file and should be shown on the timetable panel.

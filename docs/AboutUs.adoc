@@ -14,7 +14,7 @@ This project is a deliverable for the module "Software Engineering & Object-Orie
 
 === Teh Nian Fei
 image::nianfei97.png[width="150", align="left"]
-{empty}[https://github.com/nianfei97[github]]
+{empty}[https://github.com/nianfei97[github]][<<nianfei97#, portfolio>>]
 
 Role: Team Lead, Code Quality +
 Responsibilities: Managing Logic
@@ -23,7 +23,7 @@ Responsibilities: Managing Logic
 
 === Benjamin Chong Zhi Yi
 image::bennchong.png[width="150", align="left"]
-{empty}[http://github.com/bennchong[github]]
+{empty}[http://github.com/bennchong[github]][<<benchong#, portfolio>>]
 
 Role: +
 Responsibilities: Managing Model
@@ -32,7 +32,7 @@ Responsibilities: Managing Model
 
 === Cheng Jin Ting
 image::cjinting-nus.png[width="150", align="left"]
-{empty}[http://github.com/cjinting-nus[github]]
+{empty}[http://github.com/cjinting-nus[github]][<<cjinting-nus#, portfolio>>]
 
 Role: Deliverables +
 Responsibilities: Managing Users
@@ -41,7 +41,7 @@ Responsibilities: Managing Users
 
 === Khoo Yuan Hui
 image::alexiscatnip.png[width="150", align="left"]
-{empty}[http://github.com/alexiscatnip[github]]
+{empty}[http://github.com/alexiscatnip[github]][<<alexiscatnip#, portfolio>>]
 
 Role:  +
 Responsibilities: Managing UI
