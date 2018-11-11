@@ -20,6 +20,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -58,9 +59,12 @@ public class ImportCommandTest {
         CommandResult commandResult = new ImportCommand(importFilePath).execute(model, new CommandHistory());
         String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_SUCCESS, PERSONS_ADDED);
 
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        ReadOnlyAddressBook expectedAddressBook = expectedModel.getAddressBook();
+
         assertEquals(expectedMessage, commandResult.feedbackToUser);
-        // TODO: Compare the whole addressbook instead of just the filteredPersonList()
-        // assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        // Cannot compare model since todos are not imported
+        assertEquals(expectedAddressBook.getPersonList(), addressBook.getPersonList());
     }
 
     @Test
