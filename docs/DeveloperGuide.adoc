@@ -411,7 +411,7 @@ FreeTime's UI is updated through the `EventsCenter` every time `Model#updateTime
 The following sequence diagram shows the significant method calls for the method `Model#updateTimeTable()`.
 
 .Interactions between the Model, EventsCenter, and UI Components for the `FreeTime#execute()` Method
-image::UpdateTimeTableSequenceDiagram.png[width="800"]
+image::UpdateTimeTableSequenceDiagram.png[width="1600"]
 
 {nbsp}
 
