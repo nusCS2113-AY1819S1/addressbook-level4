@@ -41,7 +41,12 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE)) {
             return checkWhatErrorMessageToThrow(mode);
         }
-        String[] argList = getArguments(argMultimap.getValue(PREFIX_DATE).get());
+        String[] argList;
+        try {
+            argList = getArguments(argMultimap.getValue(PREFIX_DATE).get());
+        } catch (ParseException pe) {
+            return checkWhatErrorMessageToThrow(mode);
+        }
         return createSummaryCommand(mode, argList[0], argList[1]);
     }
 
@@ -131,7 +136,7 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
         Date endDate = ParserUtil.parseDate(arg2);
         if (!isDateOrderValid(startDate, endDate)) {
             throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SummaryByDateCommand.MESSAGE_USAGE)));
+                    SummaryByCategoryCommand.MESSAGE_USAGE)));
         }
         return new SummaryByCategoryCommand(startDate, endDate);
     }

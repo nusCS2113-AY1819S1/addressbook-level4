@@ -1,4 +1,4 @@
-﻿= Financial Planner - User Guide
+﻿= Savee - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -19,10 +19,13 @@ By: `T09-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-FinancialPlanner (FP) is for those who *prefer to use a desktop app for managing their finances*. More
+Savee is a financial planner application for those who *prefer to use a desktop app for managing their finances*. More
 importantly, FP is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
-having the benefits of a Graphical User Interface (GUI). If you can type fast, FP can get your finance management
-tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+having the benefits of a Graphical User Interface (GUI). To enjoy the *full* benefits of the GUI of this app,
+the best screen resolution to use would be `1920 x 1080 (1080p)` with the app in fullscreen. Other screen resolutions are also
+supported, but the GUI display would be slightly different from the ones shown in the picture.
+If you can type fast, FP can get your finance management tasks done faster than traditional GUI apps.
+Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -30,8 +33,8 @@ Before a user is able to use our software, he/she is required to do the followin
 that is required.
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `financialplanner.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Financial Planner.
+.  Download the latest `Savee.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your copy of Savee.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -41,7 +44,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all records
-* **`add`**`n/Grocery shopping m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to the Financial Planner.
+* **`add`**`n/Grocery shopping m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to Savee.
 * **`delete`**`3` : deletes the 3rd record shown in the current list
 * *`exit`* : exits the app
 
@@ -50,7 +53,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 [[Features]]
 == Basic Features
 
-This section describes the basic features essential to using our Financial Planner.
+This section describes the basic features essential to using Savee.
 
 ====
 *Command Format*
@@ -65,7 +68,8 @@ which can be used as `add n/Grocery shopping`.
 ====
 
 ====
-*Parameter Constraints* [[constraints]]
+[[constraints]]
+*Parameter Constraints*
 
 * `NAME` can be any word, phrase or sentence.
 * `MONEYFLOW` must be made up of only digits, a single "+" or "-" and at most one decimal point. Also, note that the maximum number of
@@ -75,7 +79,7 @@ digits the whole number part of this parameter can have is 12 digits.
 * `DATE` entered must also be a valid date, no fake dates e.g. *60-11-2018*, *30-02-2018*. Leap years are also accounted for, meaning that you
 can enter *29-2-2016* and it will still be accepted.
 * `TAG` is completely optional and can be any alphanumerical word, but limited to only 1 whole word, no whitespaces are allowed. Also,
-the maximum character length of the tag is 50 characters long. The maximum allowed tags is 2 as these tags will be used to categorise each
+the maximum character length of the tag is 20 characters long. The maximum allowed tags is 2 as these tags will be used to categorise each
 record, to reduce effort on user's part in specifying another field.
 * `INDEX` *must be a positive integer* `1, 2, 3, ...`
 
@@ -83,13 +87,13 @@ record, to reduce effort on user's part in specifying another field.
 
 === Viewing help : `help`
 
-Displays a help page with information on all commands in FinancialPlanner.
+Displays a help page with information on all commands in Savee.
 
 Format: `help`
 
 === Adding a record: `add`
 
-Adds a record of a financial activity to the FinancialPlanner with the given name, date, money earned or spent and tags. +
+Adds a record of a financial activity to Savee with the given name, date, money earned or spent and tags. +
 Format: `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
 
 Name denotes the name of the financial activity, moneyflow denotes the money spent or gained in the financial activity
@@ -111,17 +115,18 @@ Examples:
 // tag::list[]
 === Listing all records within a date range : `list`
 
-Shows a list of all records in the financial planner which is within a certain date range. +
-There are 3 modes, default mode, single argument mode and dual argument mode. +
+Shows a list of all records in Savee which is within a certain date range. +
+There are 3 modes, *default* mode, *single argument* mode and *dual argument* mode. +
 Format: +
 Default mode: `list` +
 Single argument mode: `list d/DATE` +
 Dual argument mode: `list d/START_DATE END_DATE`
 
 ****
-* Default mode will list down all records in the Financial Planner. +
+* Default mode will list down all records in Savee. +
 * Single argument mode will list down all records with the date specified. +
 * Dual argument mode will list down all records with the date that fall on either dates or between both dates.
+* Refer to <<constraints>> for the more information on the parameters.
 ****
 
 Examples:
@@ -231,7 +236,7 @@ Sorts the list of records by moneyflow in descending order.
 
 === Editing a record : `edit`
 
-Edits an existing record in the financial planner. +
+Edits an existing record in the application. +
 Format: `edit INDEX [n/NAME] [m/MONEYFLOW] [d/DATE] [t/TAG]...`
 
 ****
@@ -268,8 +273,8 @@ Deletes the 2nd record in the expense book.
 `delete 1` +
 Deletes the 1st record in the results of the `find` command.
 
-// tag::delete_by_date_entry[]
-=== Deleting records by date. `deletedate`
+// tag::deletedate[]
+=== Delete all the record whose date is required: `deletedate`
 
 Deletes the records with a specified date from the expense book. +
 Format: `deletedate DATE`
@@ -284,7 +289,7 @@ Examples:
 * `deletedate 31-7-2018` +
 Deletes the records with date 31-7-2018.
 
-// end::delete_by_date_entry[]
+// end::deletedate[]
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -298,12 +303,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the FinancialPlanner to the state before the previous _undoable_ command was executed. +
+Restores Savee to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the FinancialPlanner's stored content (
+Undoable commands: those commands that modify Savee's stored content (
 `add`, `delete`, `deletedate`, `exportexcel`, `archive`, `import`, `edit`, `addlimit`, `deletelimit`, `editlimit` and `clear`).
 ====
 
@@ -343,7 +348,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all records : `clear`
 
-Clears all records from the FinancialPlanner. +
+Clears all records from Savee. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -353,8 +358,9 @@ Format: `exit`
 
 === Saving the data
 
-All Financial Planner data is saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+All data in Savee is saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually. In the event that the storage data cannot be read successfully due to parsing error,
+the system would initiate Savee with a blank state.
 
 == Auto Complete Feature
 
@@ -382,7 +388,7 @@ Refer to <<Features>> and <<morefeatures>> for all possible commands.
 === Auto Complete for Tags
 
 When the command word `findtag` has been entered, suggestions will display based on
-tags that currently exist in the FinancialPlanner data as tags of other existing records.
+tags that currently exist in Savee's data as tags of other existing records.
 
 Refer to <<findtag>> for
 more information on how the `findtag` works.
@@ -428,11 +434,20 @@ Format: +
 ****
 * Note that there are specific formats required for the dates and months entered.
 * For the commands *"summary date"* and *"summary category"*, START_DATE/END_DATE must be in the format of
-`dd-mm-yyyy` where `dd` represents day, `mm` represents month, `yyyy` represents year. All parameters should be specified in numerical form.
+`dd-mm-yyyy` where `dd` represents day, `mm` represents month, `yyyy` represents year.
 * For command *"summary month"*, START_MONTH/END_MONTH must in the format of `mmm-yyyy`, `mmm` represents the month with its three letter representations, and
 `yyyy` represents the year in its numerical form.
-* Note that for mmm, it is case-insensitive, meaning both *"APR"* and *"apr"* are accepted
+* Refer to <<constraints>> for the more information on the parameters.
+* Note that for mmm, it is case-insensitive, meaning both *"APR"* and *"apr"* are accepted.
 ****
+
+Once the command has been executed, a panel will appear showing the summary table containing data that is relevant in the range. +
+The table entries are sorted according to either date, month or category depending on the mode used in ascending order. +
+At the same time, currently selected record will be unselected to reduce confusion for the user.
+
+[NOTE]
+The table listing is currently non-resizable. If either the date, month or category is too long, the default behaviour of this app is to truncate
+those words and replace the parts truncated with ellipses("...").
 
 Examples:
 
@@ -442,7 +457,7 @@ Examples:
 * `summary category d/1-1-2018 12-12-2018`
 
 The screenshots below are examples of what you can see once the command has been accepted. The commands entered have been left
-in for visualisation purposes.
+in for visualisation purposes. These screenshots are taken in *fullscreen mode*  at 1080p resolution.
 
 image::UiSummaryByDateTable.png[width="790"]
 *Screenshot of app when `summary date d/1-1-2018 12-12-2018` is run*
@@ -464,9 +479,12 @@ Format:`stats d/START_DATE END_DATE`
 * START_DATE/END_DATE follow the same configurations as date parameters required when adding records. It is in the form of
 *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
 *yyyy* requires exactly 4 digits.
+* Refer to <<constraints>> for the more information on the parameters.
 ****
 
 Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range. +
+At the same time, currently selected record will be unselected to reduce confusion for the user. If there are many categories shown and
+the box is not large enough, you can use the scroll bar at the side of each legend to view the other categories which are not in view.
 
 [NOTE]
 Due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
@@ -479,7 +497,7 @@ Examples:
 * `stats d/1-1-2018 12-12-2018`
 
 Below are some screenshots of what you can see when the command has been accepted. The commands entered have been left
-in for visualisation purposes.
+in for visualisation purposes. These screenshots are taken in *fullscreen mode* at 1080p resolution.
 
 image::UiPieChartExpense.png[width="790"]
 *Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018` is run*
@@ -489,20 +507,21 @@ image::UiPieChartIncome.png[width="790"]
 
 // end::stats[]
 // tag::welcomepanel[]
-=== Showing a breakdown of total expenses and income into categories of this month: `NO COMMAND REQUIRED`
+=== Showing a breakdown of total expenses and income into categories of this month: `NO COMMAND REQUIRED TO BE TYPED`
 
 Shows a breakdown of total expenses and income into categories using data of this month. +
-No format is required for this feature as the feature is automatically triggered when there is any changes to the list of records within the application.
+No format is required for this feature as the feature is automatically triggered when there is any mutation of data within the application.
+Another way of returning to the welcome panel from anywhere in the app is to press `HOME` on the keyboard or click `Home` on the menu.
 
-This feature automatically tracks the current date and ensures that the data presented is updated regardless regardless of whether the application is off or on for
-prolonged periods of time. +
+This feature automatically tracks the *current date* and ensures that the data presented is updated regardless regardless of whether the application is *off* or *on for
+prolonged periods of time*. This feature also works offline and retrieves information from the system clock to determine the current date. +
 
 Even in the event where the user is using the application at close to 12 midnight of the last day of a particular month and the clocks strikes 12,
 the application will update the data whenever it detects any record data modifications in the app to reflect the next month.
 
 [NOTE]
-The data used to represent the pie charts in the welcome panel is *only updated* whenever there are any changes to records within the FinancialPlanner. +
-This includes adding records, deleting records and editing records in the FinancialPlanner.
+The data used to represent the pie charts in the welcome panel is *only updated* whenever there are any changes to records within Savee. +
+This includes adding records, deleting records and editing records in Savee, but not sorting, listing, summary, stats, etc.
 
 Below shows a snapshot of what the user can see when there are records available of the current month
 
@@ -513,33 +532,32 @@ image::WelcomePanelWithPieCharts.png[width="790"]
 
 == Data management features:
 
-This section describe features for the user to manage his/her records data in the Financial Planner, with the help of Excel.
+This section describe features for the user to manage his/her records data in Savee, with the help of Excel.
 
 // tag::exportexcel[]
 
-=== Export the records into the Excel file. `exportexcel`
+=== Export the record data from Financial Planner to the Excel file: `exportexcel`
 
 Exports the records into an Excel file. +
-
 
 There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
 Format: +
 
-* Default mode: `exportexcel` +
-* Single argument Date mode: `exportexcel d/DATE` +
-* Dual argument Date mode: `exportexcel d/START_DATE END_DATE`
-* Single argument Directory Path mode: `exportexcel dir/DIRECTORY_PATH`
-* Single argument Directory Path + Single argument Date mode: `exportexcel d/DATE dir/DIRECTORY_PATH`
-* Single argument Directory Path + Dual argument Date mode: `exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH`
+. Default mode: `exportexcel`
+. Single argument Date mode: `exportexcel d/DATE`
+. Dual argument Date mode: `exportexcel d/START_DATE END_DATE`
+. Single argument Directory Path mode: `exportexcel dir/DIRECTORY_PATH`
+. Single argument Directory Path + Single argument Date mode: `exportexcel d/DATE dir/DIRECTORY_PATH`
+. Single argument Directory Path + Dual argument Date mode: `exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH`
 
 ****
-* *Default mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
+* *Default mode* will list down all records in Savee and exports all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
 
 * *Single argument Date mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.
 
 * *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *Working DIRECTORY*, it will *detect automatically user's Working Directory*.
 
-* *Single argument Directory Path mode* will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.
+* *Single argument Directory Path mode* will list down all records in Savee and exports all of them to an Excel file and store the file in the chosen Directory Path.
 
 * *Single argument Date mode + Single argument Directory path mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
 
@@ -547,12 +565,9 @@ Format: +
 +
 ****
 
-Please note that
-
-****
-* Date follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
+[NOTE]
+Date follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
 *yyyy* requires exactly 4 digits.
-****
 
 Examples:
 
@@ -577,33 +592,29 @@ There will be two sheets in the Excel file, namely `RECORD DATA` and `SUMMARY DA
 image::Export_Capture1_LinhChi.png[width:800]
 
 * `SUMMARY DATA` stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw a line chart automatically inside the Excel sheet` part for more information].
-** As you can see in the picture, there are 3 series shown:
-*** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
-*** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
-*** The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).
 
 image::Export_Capture2_LinhChi.png[width:800]
 
+[NOTE]
 As the size of the Chart is fixed initially. Sometimes, when user exports too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
-
 
 // end::exportexcel[]
 
 // tag::import[]
 
-=== Import the records stored from the Excel file into the App. `import`
+=== Import the record data from the Excel file to the Financial Planner: `import`
 
 There are 2 modes, single argument File Path mode and (single argument Directory Path + single argument File Name) mode +
 
 Format: +
 
-* Single argument File Path mode: `import dir/FILE_PATH` +
-* Single argument File Path + single argument File name mode: `import dir/DIRECTORY_PATH  n/NAME_FILE` +
+. Single argument File Path mode: `import dir/FILE_PATH` +
+. Single argument File Path + single argument File name mode: `import dir/DIRECTORY_PATH  n/NAME_FILE` +
 
 ****
-* *Single argument File Path mode* will open the Excel file using the given File Path, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.
+* *Single argument File Path mode* will open the Excel file using the given File Path, import all records in Savee and check if these records exist in the Savee, then exports all of non-existent records to Savee.
 
-* *Single argument File Path + single argument File name mode* will open the Excel file using the given Directory path and given file name, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.
+* *Single argument File Path + single argument File name mode* will open the Excel file using the given Directory path and given file name, import all records in Savee and check if these records exist in Savee, then exports all of non-existent records to Savee.
 
 +
 ****
@@ -611,12 +622,13 @@ Format: +
 Examples:
 
 * `import dir/C:\Financial_Planner_ALL.xlsx`
-* `import dir/C:\ n/Financial_Planner_ALL`
 * `import dir/C:\ n/Financial_Planner_All.xlsx`
+* `import dir/C:\ n/Financial_Planner_ALL`
 
-Please note that User have to add the post-fix `.xlsx` at the end to indicate this is a Excel file.
+[NOTE]
+Please note that User have to add the post-fix `.xlsx` at the end to indicate this is a Excel file (in first and second example).
 
-When performing `import` command to import all the records data from the Excel file to the Financial Planner, user should take note that there are some constraints which may help the `import` command performs smoothly.
+When performing `import` command to import all the records data from the Excel file to Savee, user should take note that there are some constraints which may help the `import` command performs smoothly.
 
 * The excel file can have multiple sheets, containing records data. The starting row of the table does not have to be first row of the sheet. This also applies to the column.
 * There can be blank row blending in the table, but there must be *no* blank column.
@@ -633,41 +645,39 @@ image::Export_Capture1_LinhChi.png[width:800]
 
 // tag::archive[]
 
-=== Archive the records into the Excel file. `archive`
+=== Archive the record data from Financial Planner to the Excel file: `archive`
 
 Archives the records into an Excel file. +
 
-There are 5 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
+There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
 Format: +
 
-* Default mode: `archive` +
-* Single argument Date mode: `archive d/DATE` +
-* Dual argument Date mode: `archive d/START_DATE END_DATE`
-* Single argument Directory Path mode: `archive dir/DIRECTORY_PATH`
-* Single argument Directory Path + Single argument Date mode: `archive d/DATE dir/DIRECTORY_PATH`
-* Single argument Directory Path + Dual argument Date mode: `archive d/START_DATE END_DATE dir/DIRECTORY_PATH`
+. Default mode: `archive` +
+. Single argument Date mode: `archive d/DATE` +
+. Dual argument Date mode: `archive d/START_DATE END_DATE`
+. Single argument Directory Path mode: `archive dir/DIRECTORY_PATH`
+. Single argument Directory Path + Single argument Date mode: `archive d/DATE dir/DIRECTORY_PATH`
+. Single argument Directory Path + Dual argument Date mode: `archive d/START_DATE END_DATE dir/DIRECTORY_PATH`
 
 ****
-* *Default mode* will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*. Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Default mode* will list down all records in Savee and archives all of them to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*. Then, the records stored in the Excel file will be deleted automatically in Savee.
 
-* *Single argument Date mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Single argument Date mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
 
-* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *WORKING DIRECTORY*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Saveer.
 
-* *Single argument Directory Path mode* will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Single argument Directory Path mode* will list down all records in Savee and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
 
-* *Single argument Date mode + Single argument Directory path mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Single argument Date mode + Single argument Directory path mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
 
-* *Dual argument Date mode + Single argument Directory path mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in the Financial Planner.
+* *Dual argument Date mode + Single argument Directory path mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
 +
 ****
 
-Please note that
-
-****
-* Date follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
+[NOTE]
+Date follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
 *yyyy* requires exactly 4 digits.
-****
+
 
 The Excel file name will be named based on the command, relating to Date: +
 
@@ -692,11 +702,8 @@ There will be two sheets in the Excel file, namely `RECORD DATA` and `SUMMARY DA
 image::Export_Capture1_LinhChi.png[width:800]
 
 * `SUMMARY DATA` stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to `Draw a line chart automatically inside the Excel sheet` part for more information].
-** As you can see in the picture, there are 3 series shown:
-*** The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).
-*** The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).
-*** The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).
 
+[NOTE]
 As the size of the Chart is fixed initially. Sometimes, when user archive too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
 
 image::Export_Capture2_LinhChi.png[width:800]
@@ -705,7 +712,7 @@ image::Export_Capture2_LinhChi.png[width:800]
 
 // tag::draw_line_chart[]
 
-=== Draw a line chart automatically inside the Excel sheet
+=== Draw a line chart automatically inside the Excel sheet : `NO COMMAND REQUIRED`
 
 Automatically uses the the summary data from the `SUMMARY DATA` sheet in the Excel sheet after the command `archive` or `exportexcel` is called.
 
@@ -734,16 +741,16 @@ Constraints that apply to records also apply to each limit. Refer to <<constrain
 [[addlimit]]
 === Adding a limit: `addlimit`
 
-Adds a spending limit for a time period or a particular day to the FinancialPlanner. +
+Adds a spending limit for a time period or a particular day to Savee. +
 Format: `addlimit d/START_DATE END_DATE m/MONEYFLOW` (`limit d/DATE m/MONEYFLOW`)+
 
 When inputting two days, START_DATE and END_DATE indicates the starting date and ending date for the limit.
 If there is only one date, that day will be the time period.
 MONEYFLOW denotes the money spending limit for that period of time.
 
-* After the limits have been added, Financial Planner will keep checking the latest condition of these limits.
+* After the limits have been added, Savee will keep checking the latest condition of these limits.
 Once the total amount of money spent during this time period exceeds the spending limit,
-FinancialPlanner will warn the user by sending the warning message.
+Savee will warn the user by sending the warning message.
 ****
 * DATE_START must be earlier or equal than DATE_END. When DATE_START and DATE_END are the same, this will be equivalent to single DATE.
 * Moneyflow for limit features can only be a positive integer, and does not require a "+" or "-".
@@ -759,7 +766,7 @@ Example:
 [[checklimit]]
 === Viewing all limits: `checkLimit`
 
-Displays all limits information stored in FinancialPlanner +
+Displays all limits information stored in Savee +
 Format: `checklimit`
 Example:
 * `checklimit`
@@ -768,7 +775,7 @@ Example:
 [[deletelimit]]
 === Deleting a limit: `deleteLimit`
 
-Deletes an existing spending limit from the FinancialPlanner +
+Deletes an existing spending limit from Savee +
 Format: `deleteLimit d/START_DATE END_DATE` (`deleteLimit d/START_DATE`) +
 
 The deleting command is based on the date period, since there will be at most one limit
@@ -791,7 +798,7 @@ Examples:
 
 === Editing a limit: `editLimit`
 
-Edit a limit to the FinancialPlanner +
+Edit a limit to Savee +
 Format: `editLimit d/START_DATE END_DATE m/MONEYFLOW` (`editLimit d/START_DATE END_DATE m/MONEYFLOW`)+
 
 Editlimit is similar to <<deletelimit>> command, it is also based on the date period.
@@ -876,7 +883,7 @@ Examples:
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Financial Planner folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Savee folder.
 
 == Command Summary
 
@@ -958,8 +965,8 @@ e.g. +
 
 * *Add limit* : `addlimit d/DATE [DATE] m/MONEYFLOW` +
 e.g. +
-. `addlimit d/20-12-2017`
-. `addlimit d/20-12-2017 30-09-2018`
+. `addlimit d/20-12-2017 m/100`
+. `addlimit d/20-12-2017 30-09-2018 m/100`
 
 * *Check limit* : `checklimit` +
 
@@ -970,8 +977,8 @@ e.g. +
 
 * *Edit limit* `editlimit d/DATE [DATE] m/MONEYFLOW` +
 e.g. +
-. `editlimit d/20-12-2017 m/100`
-. `editlimit d/20-12-2017 30-09-2018 m/100`
+. `editlimit d/20-12-2017 m/200`
+. `editlimit d/20-12-2017 30-09-2018 m/200`
 
 
 * *Add monthly limit* : `addmonthlylimit m/MONEYFLOW` +

@@ -4,6 +4,7 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.planner.logic.commands.EditLimitCommand.MESSAGE_SAME_LIMIT;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Test;
@@ -80,6 +81,17 @@ public class EditLimitCommandTest {
 
         EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
         String expectedMessage = Messages.MESSAGE_LIMITS_DO_NOT_EXIST;
+        model.addLimit(originalLimit);
+
+        assertCommandFailure(editLimitCommand, model, commandHistory, expectedMessage);
+    }
+
+    @Test
+    public void execute_sameMoneyFlowToEdit_fail() {
+        Limit editedLimit = new LimitBuilder(TypicalLimits.LIMIT_100).build();
+        Limit originalLimit = new LimitBuilder(TypicalLimits.LIMIT_100).build();
+        EditLimitCommand editLimitCommand = new EditLimitCommand(editedLimit);
+        String expectedMessage = MESSAGE_SAME_LIMIT;
         model.addLimit(originalLimit);
 
         assertCommandFailure(editLimitCommand, model, commandHistory, expectedMessage);

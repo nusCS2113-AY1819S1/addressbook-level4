@@ -21,7 +21,7 @@
 /* Overrides for asciidoctor.css */
 
 a {
-    color: #b30047;
+    color: #006666;
 }
 
 h1,
@@ -40,7 +40,7 @@ h5,
 h5 > a.link,
 h6,
 h6 > a.link {
-    color: #ff0066;
+    color: #006666;
 }
 
 .subheader,
@@ -74,7 +74,7 @@ table.tableblock > .title,
     }
 
     #footer-text {
-        color: #4d0026;
+        color: #ff0066;
         line-height: 1;
     }
 }
@@ -123,7 +123,7 @@ table.tableblock > .title,
 }
 
 .navbar-light a {
-    color: #4d0026;
+    color: #ff0066;
 }
 
 .navbar-light a:hover,
