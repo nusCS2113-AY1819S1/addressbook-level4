@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.ImportCommand.MESSAGE_IMPORT_SUCCESS;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -71,7 +70,6 @@ public class ExportCommandTest {
      * then attempts to import back the timetable (to a fresh ModelStub that has no TimeTable)
      * Tests if the imported timetable data is same as the exported timetable's data
      */
-    @Ignore("Ignore because fails travis")
     @Test
     public void execute_exportAndThenImport_successful() throws Exception {
         //attempt export

@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.ImportCommand.MESSAGE_IMPORT_SUCCESS;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -108,7 +107,6 @@ public class ImportCommandTest {
     /**
      * Tests if an imported timetable is identical to the expected timetable.
      */
-    @Ignore("Ignore because fails travis")
     @Test
     public void execute_validFilePath_successful() throws Exception {
         //TYPICAL_FILE contains the equivalent of TYPICAL_TIMETABLE
@@ -128,7 +126,6 @@ public class ImportCommandTest {
      * tests if you can export a typical timetable and then immediately import this timetable
      * Immediately then tests that the data is still the same.
      */
-    @Ignore("Ignore because fails travis")
     @Test
     public void execute_exportAndThenImport_successful() throws Exception {
 
