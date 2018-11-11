@@ -69,4 +69,81 @@ public class SampleTimeTableUtil {
 
         return toReturn;
     }
+
+    public static TimeTable getTimeTableNf() {
+        TimeTable toReturn = new TimeTable();
+
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("08:00"), LocalTime.parse("10:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("10:00"), LocalTime.parse("12:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("16:00"), LocalTime.parse("19:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("08:00"), LocalTime.parse("09:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("09:00"), LocalTime.parse("12:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("12:00"), LocalTime.parse("14:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("18:00"), LocalTime.parse("20:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.WEDNESDAY, LocalTime.parse("13:00"), LocalTime.parse("14:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("09:00"), LocalTime.parse("12:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("16:00"), LocalTime.parse("18:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.FRIDAY, LocalTime.parse("12:00"), LocalTime.parse("14:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.FRIDAY, LocalTime.parse("16:00"), LocalTime.parse("18:00")));
+
+        return toReturn;
+    }
+
+    public static TimeTable getTimeTableBen() {
+        TimeTable toReturn = new TimeTable();
+
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("08:00"), LocalTime.parse("10:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("08:00"), LocalTime.parse("09:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("09:00"), LocalTime.parse("12:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.WEDNESDAY, LocalTime.parse("13:00"), LocalTime.parse("14:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.WEDNESDAY, LocalTime.parse("16:00"), LocalTime.parse("18:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("09:00"), LocalTime.parse("12:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("16:00"), LocalTime.parse("17:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.FRIDAY, LocalTime.parse("16:00"), LocalTime.parse("18:00")));
+
+        return toReturn;
+    }
+
+    public static TimeTable getTimeTableJasper() {
+        TimeTable toReturn = new TimeTable();
+
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("08:00"), LocalTime.parse("10:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("18:00"), LocalTime.parse("20:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("10:00"), LocalTime.parse("12:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("16:00"), LocalTime.parse("18:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.WEDNESDAY, LocalTime.parse("08:00"), LocalTime.parse("10:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.WEDNESDAY, LocalTime.parse("13:00"), LocalTime.parse("14:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("11:00"), LocalTime.parse("12:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("12:00"), LocalTime.parse("14:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.FRIDAY, LocalTime.parse("16:00"), LocalTime.parse("18:00")));
+
+        return toReturn;
+    }
+
+    public static TimeTable getTimeTableAlexis() {
+        TimeTable toReturn = new TimeTable();
+
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("08:00"), LocalTime.parse("10:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.MONDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("12:00"), LocalTime.parse("14:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.TUESDAY, LocalTime.parse("18:00"), LocalTime.parse("21:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.WEDNESDAY, LocalTime.parse("09:00"), LocalTime.parse("12:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.WEDNESDAY, LocalTime.parse("13:00"), LocalTime.parse("14:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("14:00"), LocalTime.parse("16:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.THURSDAY, LocalTime.parse("16:00"), LocalTime.parse("18:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.FRIDAY, LocalTime.parse("14:00"), LocalTime.parse("15:00")));
+        toReturn.addTimeSlot(new TimeSlot(DayOfWeek.FRIDAY, LocalTime.parse("16:00"), LocalTime.parse("18:00")));
+
+        return toReturn;
+    }
 }
