@@ -105,8 +105,8 @@ public class EditTestMarksCommand extends Command {
                     model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                     throw new CommandException(MESSAGE_PERSONNAME_NOT_FOUND);
                 } else if (checked && duplicate) {
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-                throw new CommandException(MESSAGE_PERSON_DUPLICATE_FOUND);
+                    model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                    throw new CommandException(MESSAGE_PERSON_DUPLICATE_FOUND);
                 }
             } else {
                 return editPersonMarks(personListName.get(0), model);
