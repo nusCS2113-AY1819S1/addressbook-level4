@@ -194,7 +194,7 @@ link:{repoURL}/src/main/java/seedu/productInfo/logic/Logic.java[`Logic.java`]
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteproduct 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
+.Interactions Inside the Logic Component for the `deleteproduct 1` Command
 image::DeleteProductSdForLogic.png[width="800"]
 
 [[Design-Model]]
@@ -933,15 +933,29 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |self-employed provision shop owner |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new product |
+|`* * *` |self-employed provision shop owner |add a new product to my record of products | keep track of all the products that my shop owns
 
-|`* * *` |user |delete a product |remove entries that I no longer need
+|`* * *` |self-employed provision shop owner |delete a product from my record of products | stop tracking products I no longer want to sell in my store
 
-|`* * *` |user |find a product by name |locate details of products without having to go through the entire list
+|`* * *` |self-employed provision shop owner |find a product by name | locate details of products without having to go through the entire list
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |self-employed provision shop owner |find a product by relevant tags | retrieve a list of products that are of a certain type
+
+|`* * *` |self-employed provision shop owner |add a distributor to my record of distributors | keep track of who supplies my products to me
+
+|`* * *` |self-employed provision shop owner |delete a distributor from my record of distributors | declutter the distributors I keep in contact with if I choose to stop business with a certain distributor
+
+|`* * *` |self-employed provision shop owner |edit a distributor in my record of distributors | change the name or phone number of a distributor in case their details change, and keep up to date with their contacts
+
+|`* * *` |self-employed provision shop owner |find a distributor by name | retrieve contact details of distributors without having to go through the entire list
+
+|`* * *` |self-employed provision shop owner |find a distributor by relevant tags | retrieve a list of distributors who supply a certain type of products
+
+|`* * *` |self-employed provision shop owner |view what products a distributor supplies | retrieve a list of all the products that a distributor supplies at one go, in case I need to make an order
+
+|`* *` |self-employed provision shop owner |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many products in the productInfo book |sort products by name |locate a product easily
 |=======================================================================
@@ -962,6 +976,70 @@ _{More to be added}_
 2.  Inventarie PRO shows a list of products
 3.  User requests to delete a specific product in the list
 4.  Inventarie PRO deletes the product
++
+Use case ends.
+
+[discrete]
+=== Use case: Add distributor
+
+*MSS*
+
+1.  User requests to add distributors
+2.  Inventarie PRO adds the distributor into the list of distributors
++
+Use case ends.
+
+[discrete]
+=== Use case: List distributor
+
+*MSS*
+
+1.  User requests to list all distributors
+2.  Inventarie PRO shows the entire list of distributors
++
+Use case ends.
+
+[discrete]
+=== Use case: Edit distributor
+
+*MSS*
+
+1.  User requests to list all distributors
+2.  Inventarie PRO shows the entire list of distributors
+3.  User requests to edit a specific distributor by index
+4.  Inventarie PRO edits the specific distributor in the list of distributors
++
+Use case ends.
+
+[discrete]
+=== Use case: Find distributor by name
+
+*MSS*
+
+1.  User requests to find the distributor or distributors that have a certain name
+2.  Inventarie PRO shows the list of distributors with names that match the keyword given
++
+Use case ends.
+
+[discrete]
+=== Use case: Find distributor by tag
+
+*MSS*
+
+1.  User requests to find the distributor or distributors that have a certain tag
+2.  Inventarie PRO shows the list of distributors with tags that match the keyword given
++
+Use case ends.
+
+[discrete]
+=== Use case: List products supplied by a distributor
+
+*MSS*
+
+1.  User requests to list all distributors
+2.  Inventarie PRO shows the entire list of distributors
+3.  User requests to view the products supplied by a specific distributor by index
+4.  Inventarie PRO lists the products supplied by the specific distributor in the list of distributors
 +
 Use case ends.
 
