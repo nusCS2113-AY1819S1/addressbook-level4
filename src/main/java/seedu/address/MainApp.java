@@ -26,6 +26,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.StorageController;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.note.NoteManager;
 import seedu.address.model.student.StudentManager;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -73,6 +74,8 @@ public class MainApp extends Application {
         model = initModelManager(storage, userPrefs);
         StudentManager sm = StudentManager.getInstance();
         sm.initializeModel(model);
+
+        NoteManager.initNoteManager();
 
         logic = new LogicManager(model);
 

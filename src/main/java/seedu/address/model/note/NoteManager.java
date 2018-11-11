@@ -5,8 +5,11 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.NoteDeleteCommand;
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedNote;
@@ -15,9 +18,11 @@ import seedu.address.ui.HtmlCardProcessor;
 /**
  * Represents the in-memory model of the Note data.
  */
-public class NoteManager {
+public class NoteManager extends ComponentManager {
 
     public static final String NOTE_PAGE_IDENTIFIER = "<!-- NOTE -->";
+
+    private static final Logger logger = LogsCenter.getLogger(NoteManager.class);
 
     private static final ArrayList<String> NOTE_CSV_HEADERS =
             new ArrayList<>(Arrays.asList(
@@ -34,7 +39,7 @@ public class NoteManager {
     private List<Note> filteredNotes;
 
     private String currentFilter = "";
-    private int currentFilterState = 0; // 0 = all, 1 = by moduleCode, 2 = by keywords
+    private int currentFilterState = NO_FILTER;
 
     private NoteManager() {
         readNoteList();
@@ -42,10 +47,14 @@ public class NoteManager {
     }
 
     public static NoteManager getInstance() {
-        if (noteManager == null) {
-            noteManager = new NoteManager();
-        }
         return noteManager;
+    }
+
+    /**
+     * Creates the singleton instance of NoteManager object.
+     */
+    public static void initNoteManager() {
+        noteManager = new NoteManager();
     }
 
     /**
@@ -92,7 +101,10 @@ public class NoteManager {
             }
 
             sb.append(HtmlCardProcessor.getCardBodyStart());
-            sb.append(HtmlCardProcessor.renderCardTitle(note.getModuleCode().toString()));
+            if (note.getModuleCode() != null) {
+                sb.append(HtmlCardProcessor.renderCardTitle(note.getModuleCode().toString()));
+            }
+
             if (note.getStartDate() != null) {
                 sb.append(HtmlCardProcessor.renderCardSubtitle(
                         "From " + note.getStartDate() + " " + note.getStartTime()
@@ -135,8 +147,17 @@ public class NoteManager {
      */
     private void readNoteList() {
         ArrayList<XmlAdaptedNote> xmlNoteList = StorageController.getNoteStorage();
+        Note noteToRead;
         for (XmlAdaptedNote xmlNote : xmlNoteList) {
-            notes.add(xmlNote.toModelType());
+            noteToRead = xmlNote.toModelType();
+            if (noteToRead != null) {
+                notes.add(xmlNote.toModelType());
+            }
+        }
+
+        if (xmlNoteList.size() != this.notes.size()) {
+            logger.info("Invalid value(s) found in notes XML data. "
+                    + this.notes.size() + " / " + xmlNoteList.size() + " note(s) loaded to Trajectory.");
         }
     }
 
@@ -171,7 +192,8 @@ public class NoteManager {
 
         if (!trimmedModuleCode.isEmpty()) {
             filteredNotes = notes.stream()
-                    .filter(n -> n.getModuleCode().toString().equalsIgnoreCase(trimmedModuleCode))
+                    .filter(n -> n.getModuleCode() != null
+                            && n.getModuleCode().toString().equalsIgnoreCase(trimmedModuleCode))
                     .collect(Collectors.toList());
 
             if (filteredNotes.size() > 0) {
@@ -212,7 +234,7 @@ public class NoteManager {
     public void refreshFilteredNotes() {
         switch (currentFilterState) {
         case NO_FILTER:
-            setFilteredNotesByModuleCode("");
+            setFilteredNotesNoFilter();
             break;
         case FILTERED_BY_MODULE_CODE:
             setFilteredNotesByModuleCode(currentFilter);
@@ -221,7 +243,7 @@ public class NoteManager {
             setFilteredNotesByKeyword(currentFilter);
             break;
         default:
-            setFilteredNotesByModuleCode("");
+            setFilteredNotesNoFilter();
         }
     }
 
@@ -255,7 +277,8 @@ public class NoteManager {
      * Deletes all notes that contains the {@code moduleCode}.
      */
     public void deleteNotesByModuleCode(String moduleCode) {
-        notes.removeIf(n -> n.getModuleCode().toString().equalsIgnoreCase(moduleCode));
+        notes.removeIf(n -> n.getModuleCode() != null
+                && n.getModuleCode().toString().equalsIgnoreCase(moduleCode));
         refreshFilteredNotes();
     }
 }

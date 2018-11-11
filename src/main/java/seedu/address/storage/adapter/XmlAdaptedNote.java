@@ -76,7 +76,7 @@ public class XmlAdaptedNote {
      * Converts a Note into an {@code XmlAdaptedNote} for JAXB use
      */
     public XmlAdaptedNote(Note note) {
-        this.moduleCode = note.getModuleCode().toString();
+        this.moduleCode = (note.getModuleCode() == null) ? "" : note.getModuleCode().toString();
         this.title = note.getTitle().toString();
         this.startDate = (note.getStartDate() == null) ? "" : note.getStartDate().toString();
         this.startTime = note.getStartTime().toString();
@@ -88,17 +88,103 @@ public class XmlAdaptedNote {
 
     /**
      * Converts this XmlAdaptedNote into the model's Note object
+     *
+     * If illegal values are found in the xml data, the Note object
+     * will not be created.
+     *
+     * @return Note object, otherwise null
      */
     public Note toModelType() {
+        if (this.moduleCode == null
+            || this.title == null
+            || this.startDate == null
+            || this.startTime == null
+            || this.endDate == null
+            || this.endTime == null
+            || this.location == null) {
+
+            return null;
+        }
+
+        ModuleCode moduleCode = null;
+        if (!this.moduleCode.trim().isEmpty()) {
+            try {
+                moduleCode = new ModuleCode(this.moduleCode);
+            } catch (IllegalArgumentException | NullPointerException e) {
+                return null;
+            }
+        }
+
+        NoteTitle title;
+        if (NoteTitle.isValidTitle(this.title)) {
+            title = new NoteTitle(this.title);
+        } else {
+            return null;
+        }
+
+        NoteDate startDate = null;
+        if (!this.startDate.trim().isEmpty()) {
+            try {
+                startDate = new NoteDate(this.startDate);
+            } catch (IllegalArgumentException | NullPointerException e) {
+                return null;
+            }
+        }
+
+        NoteTime startTime = new NoteTime(NoteTime.DEFAULT_START_TIME.format(NoteTime.TIME_FORMAT));
+        if (!this.startTime.trim().isEmpty()) {
+            try {
+                startTime = new NoteTime(this.startTime.trim());
+            } catch (IllegalArgumentException | NullPointerException e) {
+                return null;
+            }
+        }
+
+        NoteDate endDate = null;
+        if (startDate != null) {
+            if (this.endDate.trim().isEmpty()) {
+                endDate = new NoteDate(startDate.getDate().format(NoteDate.DATE_FORMAT));
+            } else {
+                try {
+                    endDate = new NoteDate(startDate.getDate().format(NoteDate.DATE_FORMAT));
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    return null;
+                }
+            }
+        }
+
+        NoteTime endTime = new NoteTime(NoteTime.DEFAULT_END_TIME.format(NoteTime.TIME_FORMAT));
+        if (!this.endTime.trim().isEmpty()) {
+            try {
+                endTime = new NoteTime(this.endTime.trim());
+            } catch (IllegalArgumentException | NullPointerException e) {
+                return null;
+            }
+        }
+
+        NoteLocation location;
+        if (NoteLocation.isValidLocation(this.location)) {
+            location = new NoteLocation(this.title);
+        } else {
+            return null;
+        }
+
+        NoteText noteText;
+        if (NoteText.isValidNoteText(this.noteText)) {
+            noteText = new NoteText(this.noteText);
+        } else {
+            return null;
+        }
+
         return new Note(
-                new ModuleCode(moduleCode),
-                new NoteTitle(title), (!startDate.trim().isEmpty())
-                ? new NoteDate(startDate) : null,
-                new NoteTime(startTime), (!endDate.trim().isEmpty())
-                ? new NoteDate(endDate) : null,
-                new NoteTime(endTime),
-                new NoteLocation(location),
-                new NoteText(noteText)
+                moduleCode,
+                title,
+                startDate,
+                startTime,
+                endDate,
+                endTime,
+                location,
+                noteText
         );
     }
 
