@@ -1,5 +1,7 @@
 package seedu.recruit.commons.util;
 
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -21,12 +23,16 @@ class EmailUtilTest {
         int currentSize = emailUtil.getCandidates().size();
         emailUtil.addCandidate(testCandidate);
         assertEquals(currentSize + 1, emailUtil.getCandidates().size());
+        assertFalse(emailUtil.addCandidate(testCandidate));
+        assertEquals(currentSize + 1, emailUtil.getCandidates().size());
     }
 
     @Test
     void addJobOffer() {
         int currentSize = emailUtil.getJobOffers().size();
         emailUtil.addJobOffer(testJobOffer);
+        assertEquals(currentSize + 1, emailUtil.getJobOffers().size());
+        assertFalse(emailUtil.addJobOffer(testJobOffer));
         assertEquals(currentSize + 1, emailUtil.getJobOffers().size());
     }
 
@@ -37,7 +43,8 @@ class EmailUtilTest {
         actualName.append(testJobOffer.getCompanyName().toString());
         actualName.append(" regarding job offer: ");
         actualName.append(testJobOffer.getJob().toString());
-        assertEquals(true, actualName.toString().equals(testName));
+        assertTrue(actualName.toString().equals(testName));
+        assertFalse(testName.equals(testCandidate.toString()));
     }
 
     @Test
@@ -47,6 +54,7 @@ class EmailUtilTest {
         actualName.append(testJobOffer.getJob().toString());
         actualName.append(" at ");
         actualName.append(testJobOffer.getCompanyName().toString());
-        assertEquals(true, actualName.toString().equals(testName));
+        assertTrue(actualName.toString().equals(testName));
+        assertFalse(testName.equals(testJobOffer.toString()));
     }
 }
