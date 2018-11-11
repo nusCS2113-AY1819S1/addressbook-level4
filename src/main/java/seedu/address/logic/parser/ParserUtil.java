@@ -7,8 +7,10 @@ import static seedu.address.model.Filetype.isValidFiletype;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -22,6 +24,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TheDate;
 import seedu.address.model.person.Time;
+import seedu.address.model.matchSchedule.MatchSchedule;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Content;
 import seedu.address.model.todo.Title;
@@ -248,6 +251,18 @@ public class ParserUtil {
             throw new ParseException(EventName.MESSAGE_EVENT_NAME_CONSTRAINTS);
         }
         return new EventName(trimmedEventName);
+    }
+
+    /**
+     * Parses {@code Collection<String> matchSchedule} into a {@code List<Index>}.
+     */
+    public static List<Index> parseMatchScheduleIndex(Collection<String> matchScheduleIndex) throws ParseException {
+        requireNonNull(matchScheduleIndex);
+        final List<Index> matchScheduleIndexList = new ArrayList<>();
+        for (String matchSchedulePerson : matchScheduleIndex) {
+            matchScheduleIndexList.add(parseIndex(matchSchedulePerson));
+        }
+        return matchScheduleIndexList;
     }
 
 }

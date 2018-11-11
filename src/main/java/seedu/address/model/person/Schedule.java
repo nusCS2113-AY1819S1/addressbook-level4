@@ -41,7 +41,7 @@ public class Schedule {
     public static boolean isValidStartEnd (String startTime, String endTime) {
         int startT = Integer.parseInt(startTime);
         int endT = Integer.parseInt(endTime);
-        return (startT >= endT);
+        return (startT < endT);
     }
 
     public TheDate getDate() {

@@ -36,8 +36,7 @@ public class TheDate {
         SimpleDateFormat jitHubDateFormat = new SimpleDateFormat("ddMMyyyy");
         jitHubDateFormat.setLenient(false);
         try {
-            Date validator = jitHubDateFormat.parse(test);
-            System.out.println(validator.toString());
+            jitHubDateFormat.parse(test);
             return true;
         }
         catch (ParseException e){
