@@ -17,7 +17,7 @@ class EmailInitialiseCommandTest {
     private UserPrefs userPrefs = new UserPrefs();
 
     @Test
-    public void execute_InitialiseCommand_success() {
+    public void execute_initialiseCommand_success() {
         String expectedMessage = EmailRecipientsCommand.MESSAGE_USAGE;
         CommandResult commandResult = new EmailInitialiseCommand().execute(model, commandHistory, userPrefs);
         assertEquals(commandResult.feedbackToUser, expectedMessage);
