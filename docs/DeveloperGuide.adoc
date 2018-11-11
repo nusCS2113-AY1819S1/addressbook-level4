@@ -409,16 +409,70 @@ and deadline for distinguishing uncompleted tasks with different deadline.
 
 ==== Current Implementation
 
+Calendar uses both `Model` and `UI` components.
+
+* **In `Model` part**: The `CalendarInfo` class initializes a calendar for the current month and generates the index of the first day of the whole week.
+* **In `UI` part**: We create a gridpane as the template of the calendar and use `setCalendar` method of `CalendarInfo` class to set and fill components of the calendar user interface.
+
 ==== Aspect: Methods to support the calendar feature
 
-* **Alternative 1 (current choice):**
-** Pros:
-** Cons:
-* **Alternative 2:**
-** Pros:
-** Cons:
+* **Alternative 1 (current choice):** Use the `Calendar` class in Java library to implement a calendar panel.
+** Pros: Easy to create, no external library or API is needed and pulling data from to-do list and expenditure tracker will be feasible as well.
+** Cons: The appearance of calendar may not be that good.
+* **Alternative 2:** Use calendar API (Google Calendar)
+** Pros: The appearance will be better and the calendar will provide more dynamic features.
+** Cons: Need more effort to integrate with our application and pull task and expenditure data from storage.
 
 // end::calendar[]
+
+// tag::expenditureViewing[]
+
+=== Viewing expenditures feature
+
+==== Current Implementation
+
+Viewing expenditures in the Expenditure Tracker uses both `Logic` and `Model` components.
+
+* **In `Logic` part**: We use `getPredicateShowExpendituresOnDate` method of `ViewExpenditureCommand` class to get the predicate for a particular date, afterwards it is passed to `updateFilteredExpenditureList` method which will update the expenditure list shown to user. We use `predicateShowExpendituresOfCategory` method to get the predicate for a specific category, afterwards it is passed to `updateFilteredExpenditureList` method which will update the expenditure list shown to user.
+* **In `Model` part**: We use `setPredicate` method of FilteredList in `ModelManager` class to change the content of current expenditure list.
+
+==== Aspect: Methods to support the view feature
+
+* **Alternative 1 (current choice):** We iterate through the entire expenditure list and select the expenditures based on filter.
+** Pros: Easy to implement, there is no need for sorting functions.
+** Cons: Need to check all the expenditures in the list with time complexity O(n) which is relatively slow.
+* **Alternative 2:** We keep two expenditure lists sorted by date or category respectively.
+** Pros: Faster to get the expenditures, we only need to find the first and last appearance of the date or category, all expenditures between start and end will be selected.
+** Cons: Harder to implement, more storage are needed to maintain the two sorted lists.
+
+// end::expenditureViewing[]
+
+// tag::getAdvice[]
+
+=== Get advice
+
+==== Current Implementation
+
+Get advice uses both `Logic` and `Model` components.
+
+* **In `Logic` part**: The `CommandResult` method of `ExpenditureGetAdviceCommand` class calls `getExpenditureRecords` method of `ModelManager` class and stores the returned map. Afterwards, we use a string builder to create an `advice` to be shown to the user.
+* **In `Model` part**: We use `getExpenditureRecords` method of `ExpenditureList` class to create a map, where the key contains category and value contains total money spent on this category.
+
+The following sequence diagram shows how the `ET_advice` operation works:
+
+image::ExpenditureGetAdviceSequenceDiagram.png[width="800"]
+
+==== Aspect: Methods to support the view feature
+
+* **Alternative 1 (current choice):** We iterate through the entire expenditure list and select the expenditures based on filter.
+** Pros: Easy to implement, there is no need for sorting functions.
+** Cons: Need to check all the expenditures in the list with time complexity O(n) which is relatively slow.
+* **Alternative 2:** We keep two expenditure lists sorted by date or category respectively.
+** Pros: Faster to get the expenditures, we only need to find the first and last appearance of the date or category, all expenditures between start and end will be selected.
+** Cons: Harder to implement, more storage are needed to maintain the two sorted lists.
+
+// end::getAdvice[]
+
 
 // tag::checkexpenditure[]
 === Check Expenditure
