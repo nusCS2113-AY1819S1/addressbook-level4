@@ -1,0 +1,76 @@
+= Zhao Mingda - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ForumBook
+
+---
+
+== Overview
+
+ForumBook is a desktop forum application which allows students to exchange information of the courses offered by their school. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in OOP fashion.
+
+== Summary of contributions
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=meowzz95[Functional code]]
+
+* *Main feature implemented:*: A underlying storage system that powers the application and manager
+classes that provide APIs for other developers to manipulate application database in a robust way.
+** What it does: Takes care of data storage, data encryption, and provide APIs for accessing the data.
+*** `IStorage`: A interface that defines a storage that handles read/write to storage device/service
+*** `IEncryptor`: A interface that defines a encryptor who knows an algorithm to encrypt/decrypt data
+*** `SimpleEncryptor`: A concrete implementation of `IEncryptor`, it uses a simple and insecure 'OR' encryption for demoing the ability of data encryption in this application
+*** `JsonFileStorage`: A concrete implementation of `IStorage`, it takes an `IEntryptor`(or by default it uses `SimpleEncryptor`) and use it to write encrypted json data to hard disk / read encrypted json data from hard disk
+*** `BaseEntityStorage`: A base class for all types of entity storage, it uses generics to define the underlying `List` and a flag to keep track of whether this storage has been modified.
+*** `[Entity]Storage`: Storage classes who extend `BaseEntityStorage` eg: `UserStorage`
+*** `RunningId`: Singleton that handles Id generating, this mimics an auto-increment primary key field in a relational database, but a much simplified implementation.
+*** `StorageMapping`: Singleton that maps class to file path, avoid magic numbers(strings).
+*** `IForumBookStorage`: A interface, it defines a manager class that controls the loading/committing/accessing of data.
+*** `I[Entity]Repository`: Entity repository interfaces that define the APIs of manipulating application data
+*** `[Entity]Repository`: Concrete implementations of `I[Entity]Repository`
+*** `IUnitOfWork`: A interface, it defines a wrapper that groups one or more operations into a single transaction, ensure data consistency
+*** `UnitOfWork`: A concrete implementation of `IUnitOfWork`
+*** `SampleDataGenerator`: A helper class to generate sample data after a fresh copy of this application is started
+
+
+** Justification: This structure enables the application to manage multiple entities in a robust way.
+** Highlights: This design takes data consistency and potential future storage possibilities(eg:store everything in a server) into account. Unit of work pattern ensures that even if one of a series of operation fails, the whole set of operation will not be saved, our data is always in a good shape.
+
+
+* *Minor feature implemented*: Added a `Context` class that manages user login status and provide API for other commands to check login status.
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.2` (2 releases) on GitHub
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/168[#168]
+*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/5[#5], https://github.com/CS2113-AY1819S1-T13-2/main/pull/9[#9], https://github.com/CS2113-AY1819S1-T13-2/main/pull/17[#17], https://github.com/CS2113-AY1819S1-T13-2/main/pull/20[#20], https://github.com/CS2113-AY1819S1-T13-2/main/pull/64[#64], https://github.com/CS2113-AY1819S1-T13-2/main/pull/109[#109], https://github.com/CS2113-AY1819S1-T13-2/main/pull/121[#121], https://github.com/CS2113-AY1819S1-T13-2/main/pull/167[#167]，https://github.com/CS2113-AY1819S1-T13-2/main/pull/169[#169]
+*** Documented most(~95%) of new java code written.
+** Community:
+*** PRs reviewed : https://github.com/CS2113-AY1819S1-T13-2/main/pull/76[#76], https://github.com/CS2113-AY1819S1-T13-2/main/pull/77[#77], https://github.com/CS2113-AY1819S1-T13-2/main/pull/78[#78]
+*** Reported bugs and suggestions for other teams in the class
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=encryption]
+
+include::../UserGuide.adoc[tag=faq]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=storage_component]
+
+include::../DeveloperGuide.adoc[tag=storage]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]
