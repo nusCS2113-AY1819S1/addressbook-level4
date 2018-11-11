@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
@@ -76,6 +77,19 @@ public class ExportCalendarCommandTest {
 
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE), model.getFilteredEventList());
+    }
+
+    //**********************************************Fail test case***************************************************
+    @Test
+    public void execute_exportCommand_invalidIoinput() {
+        String filename = "COM1";
+        String expectedMessage = String.format(ExportCalendarCommand.MESSAGE_FILE_ERROR, filename);
+        AttendanceContainsUserPredicate predicate = new AttendanceContainsUserPredicate(user.getUsername());
+        ExportCalendarCommand command = new ExportCalendarCommand(filename);
+
+        model.updateFilteredEventList(predicate);
+
+        assertCommandFailure(command, model, commandHistory, expectedMessage);
     }
 }
 
