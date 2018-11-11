@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.text.Text?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -28,9 +29,11 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="isbn" styleClass="cell_small_label" text="\$isbn" />
-      <Label fx:id="quantity" styleClass="cell_small_label" text="\$quantity" />
-      <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
+      <GridPane>
+      <Label GridPane.columnIndex="0" GridPane.rowIndex="0" text="ISBN: " /><Label GridPane.columnIndex="1" textAlignment="RIGHT" fx:id="isbn" styleClass="cell_small_label" text="isbn: \$isbn" />
+        <Label GridPane.columnIndex="0" GridPane.rowIndex="1" text="Quantity:   " /><Label GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="quantity" styleClass="cell_small_label" text="\$quantity" />
+      <Label GridPane.columnIndex="0" GridPane.rowIndex="2" text="Price:           $" /><Label GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="price" styleClass="cell_small_label" text="\$price"/>
+      </GridPane>
     </VBox>
   </GridPane>
 </HBox>

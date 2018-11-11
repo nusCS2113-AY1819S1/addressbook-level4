@@ -10,8 +10,9 @@ import javafx.scene.layout.Region;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.logic.Role;
 import seedu.address.logic.commands.CommandSyntax;
-import seedu.address.logic.commands.Role;
+
 
 
 /**

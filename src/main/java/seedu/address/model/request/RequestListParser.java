@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.Role;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.Role;
 import seedu.address.logic.parser.DiceCoefficient;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * Parses user input.

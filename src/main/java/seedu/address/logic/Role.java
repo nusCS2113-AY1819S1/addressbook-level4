@@ -1,6 +1,9 @@
-package seedu.address.logic.commands;
+package seedu.address.logic;
 
 import java.util.ArrayList;
+
+import seedu.address.logic.commands.CommandList;
+
 /**
  * Determines the role for the user
  */
