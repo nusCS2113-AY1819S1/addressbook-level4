@@ -56,7 +56,8 @@ public class ExportCalendarCommandSystemTest extends EventManagerSystemTest {
 
 
         command = "   " + ExportCalendarCommand.COMMAND_WORD + " " + filename;
-        ModelHelper.setFilteredList(expectedModel, ALICE, CARL, ELLE); // event names of Benson and Daniel include "Tryouts"
+        // event names of Benson and Daniel include "Tryouts"
+        ModelHelper.setFilteredList(expectedModel, ALICE, CARL, ELLE);
         assertCommandSuccess(command, expectedModel, filename);
 
         //unregister for an event then export -> accepted
@@ -84,7 +85,7 @@ public class ExportCalendarCommandSystemTest extends EventManagerSystemTest {
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel);
         //assertCommandFailure(command, String.format(ExportCalendarCommand.MESSAGE_ZERO_EVENT_REGISTERED,
-                //VALID_ADMIN_USERNAME), expectedModel);
+        //VALID_ADMIN_USERNAME), expectedModel);
 
         //invalid system filename input with exportable event list -> rejected
         index = INDEX_FIRST_EVENT;
