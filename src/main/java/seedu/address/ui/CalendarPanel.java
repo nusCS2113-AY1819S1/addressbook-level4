@@ -52,7 +52,7 @@ public class CalendarPanel extends UiPart<Region> {
      */
     private void createMainView() {
         calendarLayout.getCalendarLayout(currentYearMonth);
-        calendar.getChildren().add(CalendarLayout.getRoot());
+        calendar.getChildren().add(calendarLayout.getRoot());
         loadUpdatedPage();
     }
 
