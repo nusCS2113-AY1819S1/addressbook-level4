@@ -365,7 +365,7 @@ which will then execute adding persons to the specified group in the student man
  +
 [NOTE]
 If a duplicate persons are found in the group of the student management system during its execution,
-it will not create a group nor will it override the existing group but instead, it will throw a `DuplicatePersonException` which will notify the user of the issue.
+it will not add the person to the group nor will it override the existing person in the group but instead, it will throw a `DuplicatePersonException` which will notify the user of the issue.
 
 The following sequence diagram shows how the add persons to group operation works within both `Model` and `Logic` components where `ag` is the `AddGroup` object created:
 
@@ -419,7 +419,7 @@ image::SelectGroupSequenceDiagram.png[width="800"]
 ** Cons: Share same database as persons, not modular in terms of future expansions.
 * **Alternative 2:** Stores groups in a different file `addressbookgroups.xml`.
 ** Pros: Modular as groups are stored in a different file, makes data extraction easier.
-** Cons: Harder to implement.
+** Cons: Harder to implement and additional time required.
 
 ===== Aspect: Data
 
