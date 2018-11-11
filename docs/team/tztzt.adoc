@@ -4,7 +4,7 @@
 :stylesDir: ../stylesheets/
 :stylesheet: gh-pages-zhithon.css
 
-== PROJECT: FinancialPlanner
+== PROJECT: Savee - Financial Planner
 
 == Overview
 
