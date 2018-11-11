@@ -7,6 +7,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input index and creates a new empty hashset for a cleared schedule
+ */
 public class ClearScheduleCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -23,7 +26,8 @@ public class ClearScheduleCommandParser {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearScheduleCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ClearScheduleCommand.MESSAGE_USAGE), pe);
         }
 
         return new ClearScheduleCommand(index);

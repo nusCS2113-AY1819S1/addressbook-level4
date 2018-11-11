@@ -26,7 +26,7 @@ public class Schedule {
     /**
      * Every field must be present and not null.
      */
-    public Schedule(TheDate date, Time startTime, Time endTime, EventName eventName){
+    public Schedule(TheDate date, Time startTime, Time endTime, EventName eventName) {
         requireAllNonNull(date, startTime, endTime, eventName);
         this.date = date;
         this.startTime = startTime;
@@ -38,10 +38,10 @@ public class Schedule {
     /**
      * Returns true if startTime is before endTime.
      */
-    public static boolean isValidStartEnd (String startTime, String endTime){
+    public static boolean isValidStartEnd (String startTime, String endTime) {
         int startT = Integer.parseInt(startTime);
         int endT = Integer.parseInt(endTime);
-        if (startT >= endT){
+        if (startT >= endT) {
             return false;
         }
         return true;

@@ -24,7 +24,7 @@ import seedu.address.model.tag.Tag;
  * Clears the schedule of an existing person in the address book.
  */
 
-public class ClearScheduleCommand extends Command{
+public class ClearScheduleCommand extends Command {
     public static final String COMMAND_WORD = "clearSchedule";
     public static final String COMMAND_ALIAS = "cs";
 

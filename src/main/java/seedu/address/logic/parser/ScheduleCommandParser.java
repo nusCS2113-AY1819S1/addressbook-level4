@@ -12,9 +12,9 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TheDate;
 import seedu.address.model.person.EventName;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.TheDate;
 import seedu.address.model.person.Time;
 
 /**
@@ -57,7 +57,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         //checks if startTime is before endTime
         int startT = Integer.parseInt(startTime.toString());
         int endT = Integer.parseInt(endTime.toString());
-        if (startT >= endT){
+        if (startT >= endT) {
             throw new ParseException(schedule.MESSAGE_START_END_CONSTRAINTS);
         }
 

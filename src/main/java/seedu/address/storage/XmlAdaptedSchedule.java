@@ -5,9 +5,9 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.TheDate;
 import seedu.address.model.person.EventName;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.TheDate;
 import seedu.address.model.person.Time;
 
 //@@author: driedmelon

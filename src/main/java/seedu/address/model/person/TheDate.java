@@ -1,7 +1,7 @@
 package seedu.address.model.person;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -37,8 +37,8 @@ public class TheDate {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidDate(String test) {
-    //        SimpleDateFormat jitHubDateFormat = new SimpleDateFormat("ddMMyyyy");
-    //        Date validator = jitHubDateFormat.parse(test);
+        //        SimpleDateFormat jitHubDateFormat = new SimpleDateFormat("ddMMyyyy");
+        //        Date validator = jitHubDateFormat.parse(test);
 
         return test.matches(DATE_VALIDATION_REGEX);
     }
