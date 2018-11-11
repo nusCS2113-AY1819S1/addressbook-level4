@@ -169,7 +169,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported) {
+        public boolean addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported) {
             throw new AssertionError("This method should not be called.");
         }
 

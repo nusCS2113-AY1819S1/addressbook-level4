@@ -96,8 +96,9 @@ public interface Model {
 
     /**
      * Adds all the persons in {@code addressBookImported} to the current address book.
+     * @return hasChanged is true if the addressBook is modified, returns false otherwise.
      */
-    void addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported);
+    boolean addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported);
 
     /**
      * Exports the current filtered person list to a xml file at {@code exportFilePath}.

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -192,21 +193,26 @@ public class ModelManager extends ComponentManager implements Model {
 
         // TODO: dont use null in orElse(), use orElseThrow()
         ReadOnlyAddressBook addressBookImported = importManager.readAddressBook().orElse(null);
-        addPersonsToAddressBook(addressBookImported);
+        boolean hasChanged = addPersonsToAddressBook(addressBookImported);
 
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+        if (hasChanged) {
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            indicateAddressBookChanged();
+        }
     }
 
     @Override
-    public void addPersonsToAddressBook(ReadOnlyAddressBook addressBookImported) {
+    public boolean addPersonsToAddressBook(ReadOnlyAddressBook addressBookImported) {
         ObservableList<Person> persons = addressBookImported.getPersonList();
+        AtomicBoolean hasChanged = new AtomicBoolean(false);
         persons.forEach((person) -> {
             // TODO: explain why this instead of addPerson() above in developer guide (indicate ab changed at the end)
             if (!hasPerson(person)) {
+                hasChanged.set(true);
                 versionedAddressBook.addPerson(person);
             }
         });
+        return hasChanged.get();
     }
 
     @Override
