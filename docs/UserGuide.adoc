@@ -320,12 +320,12 @@ E.g. `sell i/9782123456803`
 
 * `sell i/777` +
 kbd:[Tab] (does not complete the `Isbn` field as inventory does not contains books with Isbn starting with `777`)
+// end::tabfeature[]
 
 === Saving the data
 
 BookInventory data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
-// end::tabfeature[]
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`

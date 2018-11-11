@@ -62,6 +62,8 @@ include::../UserGuide.adoc[tag=check]
 
 include::../UserGuide.adoc[tag=sell]
 
+include::../UserGuide.adoc[tag=tabfeature]
+
 == Contributions to the Developer Guide
 
 _This part shows the sections that I contributed to the Developer Guide. My ability to write technical documentation and the technical depth of my contributions are showcased here._
