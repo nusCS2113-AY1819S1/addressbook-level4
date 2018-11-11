@@ -68,8 +68,8 @@ There are five security related commands that can be entered on this command lin
 4. `logout` (Only when you have logged in)
 5. `exit`
 
-.Login Page with Command Prompts
-image::LoginPage.png[width="790"]
+.Login Page with Red Arrow pointing to where you should enter your commands
+image::StartUpScreenFix.png[width="790"]
 
 At this page you will have to enter your credentials to log in. Only then would you be able to edit and view your own timetable,
 and view your friends' timetable. +
@@ -302,7 +302,7 @@ Filters both the others list and the friends list to show only users with both g
 .FreeTime before executing group command
 image::TagCommandDefaultFix.png[width="790"]
 +
-.  After executing `group CS2113T`, all the users with the tag `CS2113T` will be filtered and shown on the respective panels.
+.  After executing `group CS2113T-W13-1`, all the users with the tag `CS2113T` will be filtered and shown on the respective panels.
 +
 .FreeTime after executing group command
 image::TagCommandExecutedPS.png[width="790"]
@@ -429,7 +429,7 @@ Adds the first user in the others list to your list of friends.
 .Before adding friend to your friend list.
 image::BeforeAddingFriendsPS.png[width="600"]
 +
-.  After executing `friend 1`, there will be a success message and the first person should be added to the friend's list, as follows:
+.  After executing `friend 6`, there will be a success message and the first person should be added to the friend's list, as follows:
 +
 .After adding friend to your friend list.
 image::AfterAddingFriendsPS.png[width="600"]
