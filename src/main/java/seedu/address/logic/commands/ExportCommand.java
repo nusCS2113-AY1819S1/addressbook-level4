@@ -21,9 +21,9 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "ex";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exports your timetable to the file (.\\import_export\\[FILENAME].ics). "
+            + ": Exports the currently shown timetable to the file (.\\import_export\\FILENAME.ics). "
             + "Parameters: "
-            + "FILE_NAME (without .ics extension) \n"
+            + "FILENAME (without .ics extension) \n"
             + "Example: " + COMMAND_WORD
             + " my_export_file_name";
 
