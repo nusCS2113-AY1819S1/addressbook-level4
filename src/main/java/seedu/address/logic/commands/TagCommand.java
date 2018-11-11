@@ -16,7 +16,7 @@ import seedu.address.model.tag.TagsContainsKeywords;
 public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "group";
-    public static final String COMMAND_WORD_ALIAS = "t";
+    public static final String COMMAND_WORD_ALIAS = "g";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified tags (case-sensitive) and displays them as a list with index numbers.\n"

@@ -17,7 +17,7 @@
                         <Insets bottom="5.0" top="10.0" />
                     </VBox.margin>
                 </Label>
-                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Command:&#10;  login &lt;Username&gt; &lt;Password&gt;">
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Command:&#10;  login u/&lt;Username&gt; pw/&lt;Password&gt;">
                     <VBox.margin>
                         <Insets left="10.0" />
                     </VBox.margin>
@@ -27,7 +27,7 @@
                         <Insets bottom="5.0" top="10.0" />
                     </VBox.margin>
                 </Label>
-                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Command:&#10;  register &lt;Username&gt; &lt;Password&gt; &lt;Email&gt; &lt;HandPhone&gt; &lt;Address&gt; ">
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Command:&#10;  register u/&lt;Username&gt; pw/&lt;Password&gt; e/[Email] p/[HandPhone] a/[Address] ">
                     <VBox.margin>
                         <Insets left="10.0" />
                     </VBox.margin>
@@ -42,7 +42,7 @@
                         <Insets left="10.0" />
                     </VBox.margin>
                 </Text>
-                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="*Note*&#10;The fields between &lt;&gt; are compulsory">
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="*Note*&#10;The fields between &lt;&gt; are compulsory&#10;But [ ] are optional">
                     <VBox.margin>
                         <Insets top="30.0" />
                     </VBox.margin>

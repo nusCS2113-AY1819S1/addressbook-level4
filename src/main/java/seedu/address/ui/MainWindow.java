@@ -105,8 +105,8 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
-        loginWindow = new LoginWindow(logic);
-        registrationWindow = new RegistrationWindow(logic);
+        loginWindow = new LoginWindow(security);
+        registrationWindow = new RegistrationWindow(security);
     }
 
     public Stage getPrimaryStage() {
@@ -293,16 +293,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
-    }
-
-    /***
-     * Logs out of the application
-     */
-    @FXML
-    public void handleLogout() {
-        security.logout();
-        removeInnerParts();
-        fillSecurityCommandBox();
     }
 
     public OtherListPanel getOtherListPanel() {
