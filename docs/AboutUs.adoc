@@ -46,6 +46,6 @@ image::sanjukta99.png[width="150", align="left"]
 {empty}[http://github.com/sanjukta99[github]][<<sanjukta99#, portfolio>>]
 
 Role: Code Quality +
-Responsibilities: Budgeting functionality for NUSSU and club treasurers
+Responsibilities: Budgeting functionality
 
 '''

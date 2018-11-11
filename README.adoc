@@ -31,6 +31,10 @@ The list shown below details the key features that our application provides, whi
 ** Log into the application with a set of login credentials
 *** Gives a specific level of access to the application according to role of user account defined during account creation
 ** Creation of a new account with desired login credentials for logging into the application
+* Financial Logistics Management:
+** Club Members can submit the budget calculation data for the calculation and allocation of their club's budget
+** NUSSU Treasurers can calculate and allocate the final budgets to all the clubs based on the total available budget
+** Users can view the final budget allocated to each club
 
 == Site Map
 
