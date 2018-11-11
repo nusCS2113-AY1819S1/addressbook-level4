@@ -262,15 +262,16 @@ entered into *[blue]#_Drink I/O_#* +
 - The adding of the drink will fail if `SELLING_PRICE` or `COST_PRICE` are negative values. `[To be added in v1.4]`
 ====
 
+// tag::find[]
 === Searching for specific drink(s)
-Finds drinks which meet specific criteria depending on the prefix of the input.
+Finds drinks which meet specific criteria depending on the input prefix.
 
 [TIP]
 ====
 *_Summary_* +
 
 *Command format*: +
- `find n/` `DRINK NAME` +
+ `find n/` `KEYWORD [MORE_KEYWORDS]` +
  `find q/` `QUANTITY` +
  `find d/` `DATE`
 ====
@@ -286,7 +287,7 @@ Format: `find n/KEYWORD [MORE_KEYWORDS]`
 * The search is case insensitive. e.g `coke` will match `Coke`
 * The order of the keywords does not matter. e.g. `Tea Green` will match `Green Tea`
 * Only the drink name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Cok` will not match `Coke`
 * Drinks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Tea` will return `Green Tea`, `Milk Tea`
 ****
 
@@ -321,8 +322,8 @@ Format `find d/DATE`
 
 ****
 * Date must be in either of the following formats:
-** DD / MM / YYYY
-** D / MM / YYYY
+** `DD/MM/YYYY`
+** `D/MM/YYYY`
 * Date must be an existing date in the calendar
 ** i.e. 30/02/2018 is a nonexistent date
 * Even if a drink has only 1 batch that meets the requirements, it will be shown
@@ -334,12 +335,16 @@ Examples:
 Returns all drinks which have batches imported before 2nd November 2018
 * `find d/9/11/2018` +
 Returns all drinks which have batches imported before 9th November 2018
+// end::find[]
 
+// tag::list[]
 === Viewing all drinks in inventory
 Shows a list of all drinks in the inventory list. +
 
 Format: `list`
+// end::list[]
 
+// tag::viewDrinkDetails[]
 === Viewing drink details
 To view further details of the drink such as its batches that are not displayed on the drink card panel, you can simply click on the relevant drink card to select it or use the select command.
 
@@ -351,6 +356,7 @@ Format: `select INDEX`
 * The index refers to the index number shown in the displayed drink list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
+// end::viewDrinkDetails[]
 
 === Updating item details
 ==== Updating item name
@@ -545,19 +551,6 @@ You should see a value displayed in the results panel.
 === Filtering popular items `[Coming in v1.4]`
 === Viewing an item's transactions `[Coming in v1.4]`
 === Viewing an item's cost, revenue and profit `[Coming in v1.4]`
-
-== Setting Reminders `[Coming in v1.4]`
-
-
-
-
-
-
-
-
-
-
-
 
 == Overview of Role-Specific Commands
 
@@ -799,12 +792,6 @@ Creates a new Drink I/O account.
 DrinkIO data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
 == Upcoming Features in Future Releases
 
 
@@ -820,6 +807,11 @@ with the file that contains the data of your previous *[blue]#_Drink I/O_#* fold
 * *exit* : `exit`
 * *help* : `help`
 * *change password* : `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
+* *find* : `find n/KEYWORD [MORE_KEYWORDS]` , `find q/QUANTITY` , `find d/DATE` +
+e.g. `find n/Coke` , `find q/300` , `find 01/11/2018`
+* *List* : `list`
+* *Select* : `select INDEX` +
+e.g. `select 2`
 ////
 * *view stock by Name* : `view [-d] [n/Drink_NAME] [-b]`
 * *view stock by quantity* : `quantity [-d] [n/Drink_NAME] [-b] [t/tag]`
