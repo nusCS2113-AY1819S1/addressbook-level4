@@ -27,7 +27,7 @@ public class EditExpenditureCommandParserTest {
     private EditExpenditureCommandParser parser = new EditExpenditureCommandParser();
 
     @Test
-    public void parse_missingParts_failure() {
+    public void parsemissingPartsfailure() {
         // no index specified
         assertParseFailure(parser, VALID_EXPENDITURE_DATE_CLOTHES, MESSAGE_INVALID_FORMAT);
 
@@ -39,7 +39,7 @@ public class EditExpenditureCommandParserTest {
     }
 
     @Test
-    public void parse_invalidPreamble_failure() {
+    public void parseinvalidPreamblefailure() {
         // negative index
         assertParseFailure(parser, "-5" + EXPENDITURE_CATEGORY_CLOTHES, MESSAGE_INVALID_FORMAT);
 
