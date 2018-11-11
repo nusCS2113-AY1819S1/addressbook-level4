@@ -321,6 +321,7 @@ Adds a timeslot to your timetable.
 Format: `add Monday 10:00-12:30`
 
 ****
+* _FreeTime_ uses the 24-hour clock, so 01:00 means 1 am, not 1 pm!
 * Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of `Monday`.
 * If you type a single number, like `10` for either the start or end time, FreeTime will assume that you mean `10:00`
 * You cannot add a timeslot that clashes with your current timetable.
@@ -341,7 +342,7 @@ Adds the timeslot from 17:00 to 18:00 on Wednesday to your timetable.
 After adding a timeslot, you should see the following:
 
 .Timeslot added to your timetable
-image::AddTimeSuccess.png[width="600"]
+image::AddTimeSuccess.png[width="800"]
 
 <<Features,Jump back to _FreeTime_'s feature list>>
 
@@ -353,6 +354,7 @@ Deletes a timeslot from your timetable.
 Format: `delete Monday 10:00-12:30`
 
 ****
+* _FreeTime_ uses the 24-hour clock, so 01:00 means 1 am, not 1 pm!
 * Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of `Monday`.
 * If you type a single number, like `10` for either the start or end time, FreeTime will assume that you mean `10:00`
 * You cannot delete a timeslot that is not already in your timetable.
@@ -491,8 +493,8 @@ Highlights timeslots where you, friend 1, and friend 2, are all free to meet up.
 
 After executing the command, you should see the following:
 
-.Timeslots highlighted in red are unavailable.
-image::FreeTimeSuccess.png[width="600"]
+.Timeslots highlighted in green are available while timeslots highlighted in red are unavailable.
+image::FreeTimeSuccess.png[width="800"]
 
 <<Features,Jump back to _FreeTime_'s feature list>>
 // end::freecommand[]
