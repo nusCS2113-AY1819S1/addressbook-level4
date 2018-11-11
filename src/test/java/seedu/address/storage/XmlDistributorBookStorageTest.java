@@ -1,11 +1,12 @@
 package seedu.address.storage;
 
-//import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-//import static seedu.address.testutil.TypicalDistributors.AHHUAT;
-//import static seedu.address.testutil.TypicalDistributors.AHLONG;
-//import static seedu.address.testutil.TypicalDistributors.AHTING;
-//import static seedu.address.testutil.TypicalDistributors.getTypicalDistributorBook;
+import static seedu.address.testutil.TypicalDistributors.AHBENG;
+
+import static seedu.address.testutil.TypicalDistributors.AHMEI;
+import static seedu.address.testutil.TypicalDistributors.AHSENG;
+import static seedu.address.testutil.TypicalDistributors.getTypicalDistributorBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -56,7 +57,7 @@ public class XmlDistributorBookStorageTest {
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readDistributorBook("NotXmlFormatProductDatabase.xml");
+        readDistributorBook("NotXmlFormatDistributorBook.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
@@ -64,19 +65,19 @@ public class XmlDistributorBookStorageTest {
     }
 
     @Test
-    public void readDistributorBook_invalidPersonDistributorBook_throwDataConversionException() throws Exception {
+    public void readDistributorBook_invalidDistributorBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readDistributorBook("invalidProductProductDatabase.xml");
+        readDistributorBook("invalidDistributorDistributorBook.xml");
     }
 
     @Test
     public void readDistributorBook_invalidAndValidDistributorDistributorBook_throwDataConversionException()
             throws Exception {
         thrown.expect(DataConversionException.class);
-        readDistributorBook("invalidAndValidProductProductDatabase.xml");
+        readDistributorBook("invalidAndValidDistributorDistributorBook.xml");
     }
 
-    /*@Test
+    @Test
     public void readAndSaveDistributorBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempDistributorBook.xml");
         DistributorBook original = getTypicalDistributorBook();
@@ -88,20 +89,20 @@ public class XmlDistributorBookStorageTest {
         assertEquals(original, new DistributorBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addDistributor(AHLONG);
-        original.removeDistributor(AHHUAT);
+        original.addDistributor(AHMEI);
+        original.removeDistributor(AHBENG);
         xmlDistributorBookStorage.saveDistributorBook(original, filePath);
         readBack = xmlDistributorBookStorage.readDistributorBook(filePath).get();
         assertEquals(original, new DistributorBook(readBack));
 
         //Save and read without specifying file path
-        original.addDistributor(AHTING);
+        original.addDistributor(AHSENG);
         xmlDistributorBookStorage.saveDistributorBook(original); //file path not specified
         readBack = xmlDistributorBookStorage.readDistributorBook().get(); //file path not specified
         assertEquals(original, new DistributorBook(readBack));
 
     }
-    */
+
     @Test
     public void saveDistributorBook_nullDistributorBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);

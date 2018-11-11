@@ -422,8 +422,8 @@ the code.
 
 ==== Proposed Implementation
 Data needs to be encrypted to protect from unauthorized access.
-The process to transform data stored in the databases is to be facilitated by `DataEncryptionUtil` class. +
-It is a class containing utility methods to encrypt and decrypt files for Storage. +
+The process to transform data stored in the databases is to be facilitated by `DataEncryptionUtil` class.
+It is a class containing utility methods to encrypt and decrypt files for Storage.
 Additionally, it implements the following operations:
 
 *   `DataEncryptionUtil#encrypt()` - Encrypts file using a secret key.
