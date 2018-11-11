@@ -529,7 +529,7 @@ Record feature allows the user to update many new club information all at once.
 
 For Example:
 
- `Bernice` pays `$100` membership fee, attends `Basketball training on 01/11` and borrows`1 chair`.
+ `Bernice` pays `$100` membership fee, attends `Basketball training on 01/11` and borrows `1 chair`.
 
 In order to record this information on Clubhub, the user just has to enter the following command:
 
