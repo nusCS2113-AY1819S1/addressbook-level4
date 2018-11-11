@@ -35,6 +35,7 @@ public class ShortlistParser {
      */
     public Command parseCommand(String commandWord, String arguments, LogicState state)
             throws ParseException {
+        String userInput = commandWord + arguments;
         if (state.nextCommand.equals(ShortlistCandidateCommand.COMMAND_LOGIC_STATE)) {
             switch (commandWord) {
 
@@ -58,10 +59,10 @@ public class ShortlistParser {
                 return new SortCompanyCommandParser().parse(arguments);
 
             case FindCompanyCommand.COMMAND_WORD:
-                return new FindCompanyCommandParser().parse(arguments);
+                return new FindCompanyCommandParser(userInput).parse(arguments);
 
             case FilterCompanyCommand.COMMAND_WORD:
-                return new FilterCompanyCommandParser().parse(arguments);
+                return new FilterCompanyCommandParser(userInput).parse(arguments);
 
             case SelectCompanyCommand.COMMAND_WORD:
                 Index index = ParserUtil.parseIndex(arguments);
@@ -96,10 +97,10 @@ public class ShortlistParser {
                 return new SortCandidateCommandParser().parse(arguments);
 
             case FindCandidateCommand.COMMAND_WORD:
-                return new FindCandidateCommandParser().parse(arguments);
+                return new FindCandidateCommandParser(userInput).parse(arguments);
 
             case FilterCandidateCommand.COMMAND_WORD:
-                return new FilterCandidateCommandParser().parse(arguments);
+                return new FilterCandidateCommandParser(userInput).parse(arguments);
 
             case SelectCandidateCommand.COMMAND_WORD:
                 Index index = ParserUtil.parseIndex(arguments);

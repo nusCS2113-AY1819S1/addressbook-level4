@@ -10,29 +10,49 @@ import static seedu.recruit.commons.util.AppUtil.checkArgument;
 public class AgeRange {
 
     public static final String MESSAGE_AGE_RANGE_CONSTRAINTS =
-            "Age range should only contain numeric characters and only one dash\n"
+            "Age range should only contain numbers within the range of 16 to 60 (inclusive) and only one dash\n"
             + "Example: 18-30";
 
     public static final String AGE_RANGE_VALIDATION_REGEX = "[\\d]{1,2}[-][\\d]{1,2}";
 
     public final String value;
 
+    private int minAge;
+    private int maxAge;
+
     public AgeRange(String ageRangeInput) {
         requireNonNull(ageRangeInput);
-        checkArgument(isValidAgeRange(ageRangeInput), MESSAGE_AGE_RANGE_CONSTRAINTS);
-        String [] ageRange = ageRangeInput.split("-");
-
-        //Reverse ageRange if ageRangeInput is a descending range
-        value = Integer.parseInt(ageRange[0]) > Integer.parseInt(ageRange[1])
-                ? ageRange[1] + "-" + ageRange[0] : ageRangeInput;
+        int[] minAndMaxAge = getMinAndMaxAgeFromAgeRange(ageRangeInput);
+        minAge = minAndMaxAge[0];
+        maxAge = minAndMaxAge[1];
+        checkArgument(isValidAgeRange(ageRangeInput, minAge, maxAge), MESSAGE_AGE_RANGE_CONSTRAINTS);
+        value = ageRangeInput;
     }
 
     /**
      * Returns true if a given string is a valid ageRange.
      */
-    public static boolean isValidAgeRange(String test) {
-        return test.matches(AGE_RANGE_VALIDATION_REGEX);
+    public static boolean isValidAgeRange(String test, int minAge, int maxAge) {
+        return (test.matches(AGE_RANGE_VALIDATION_REGEX) && ((minAge >= 16) || (maxAge <= 60)));
     }
+
+    public static int[] getMinAndMaxAgeFromAgeRange (String test) {
+        String[] minAndMaxAgeString = test.split("-");
+        int[] minAndMaxAgeInt = new int[2];
+        minAndMaxAgeInt[0] = Integer.parseInt(minAndMaxAgeString[0]);
+        minAndMaxAgeInt[1] = Integer.parseInt(minAndMaxAgeString[1]);
+
+        return minAndMaxAgeInt;
+    }
+
+    public int getMinAge() {
+        return minAge;
+    }
+
+    public int getMaxAge() {
+        return maxAge;
+    }
+
 
     @Override
     public String toString() {

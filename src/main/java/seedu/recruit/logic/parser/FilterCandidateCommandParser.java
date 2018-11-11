@@ -26,6 +26,16 @@ import seedu.recruit.model.candidate.CandidateContainsFilterKeywordsPredicate;
  */
 public class FilterCandidateCommandParser implements Parser<FilterCandidateCommand> {
 
+    private static String userInput;
+
+    public FilterCandidateCommandParser (String userInput) {
+        this.userInput = userInput;
+    }
+
+    public static String getUserInput() {
+        return userInput;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCandidateCommand
      * and returns an FilterCandidateCommand object for execution.
@@ -71,6 +81,6 @@ public class FilterCandidateCommandParser implements Parser<FilterCandidateComma
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + FilterCandidateCommand.MESSAGE_USAGE);
         }
 
-        return new FilterCandidateCommand(new CandidateContainsFilterKeywordsPredicate(keywordsMap));
+        return new FilterCandidateCommand(new CandidateContainsFilterKeywordsPredicate(keywordsMap), args);
     }
 }

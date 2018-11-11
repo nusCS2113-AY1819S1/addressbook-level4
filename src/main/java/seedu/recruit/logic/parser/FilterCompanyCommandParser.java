@@ -19,6 +19,16 @@ import seedu.recruit.model.company.CompanyContainsFilterKeywordsPredicate;
  */
 public class FilterCompanyCommandParser implements Parser<FilterCompanyCommand> {
 
+    private static String userInput;
+
+    public FilterCompanyCommandParser (String userInput) {
+        this.userInput = userInput;
+    }
+
+    public static String getUserInput() {
+        return userInput;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCompanyCommand
      * and returns an FilterCompanyCommand object for execution.

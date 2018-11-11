@@ -48,6 +48,7 @@ public class EmailParser {
      */
     public Command parseCommand(String commandWord, String arguments, LogicState state, EmailUtil emailUtil)
             throws ParseException {
+        String userInput = commandWord + arguments;
         //Email command set recipients step
         if (state.nextCommand.equals(EmailRecipientsCommand.COMMAND_LOGIC_STATE)) {
             switch (commandWord) {
@@ -59,22 +60,22 @@ public class EmailParser {
                 return new ListCompanyCommand();
 
             case FindCandidateCommand.COMMAND_WORD:
-                return new FindCandidateCommandParser().parse(arguments);
+                return new FindCandidateCommandParser(userInput).parse(arguments);
 
             case FindCompanyCommand.COMMAND_WORD:
-                return new FindCompanyCommandParser().parse(arguments);
+                return new FindCompanyCommandParser(userInput).parse(arguments);
 
             case FindJobOfferCommand.COMMAND_WORD:
-                return new FindJobOfferCommandParser().parse(arguments);
+                return new FindJobOfferCommandParser(userInput).parse(arguments);
 
             case FilterCandidateCommand.COMMAND_WORD:
-                return new FilterCandidateCommandParser().parse(arguments);
+                return new FilterCandidateCommandParser(userInput).parse(arguments);
 
             case FilterCompanyCommand.COMMAND_WORD:
-                return new FilterCompanyCommandParser().parse(arguments);
+                return new FilterCompanyCommandParser(userInput).parse(arguments);
 
             case FilterJobOfferCommand.COMMAND_WORD:
-                return new FilterJobOfferCommandParser().parse(arguments);
+                return new FilterJobOfferCommandParser(userInput).parse(arguments);
 
             case SwitchBookCommand.COMMAND_WORD:
                 return new SwitchBookCommand();
@@ -99,16 +100,16 @@ public class EmailParser {
                 return new ListCompanyCommand();
 
             case FindCompanyCommand.COMMAND_WORD:
-                return new FindCompanyCommandParser().parse(arguments);
+                return new FindCompanyCommandParser(userInput).parse(arguments);
 
             case FindJobOfferCommand.COMMAND_WORD:
-                return new FindJobOfferCommandParser().parse(arguments);
+                return new FindJobOfferCommandParser(userInput).parse(arguments);
 
             case FilterCompanyCommand.COMMAND_WORD:
-                return new FilterCompanyCommandParser().parse(arguments);
+                return new FilterCompanyCommandParser(userInput).parse(arguments);
 
             case FilterJobOfferCommand.COMMAND_WORD:
-                return new FilterJobOfferCommandParser().parse(arguments);
+                return new FilterJobOfferCommandParser(userInput).parse(arguments);
 
             case EMAIL_NEXT_COMMAND:
                 return new EmailContentsNextCommand();
@@ -130,10 +131,10 @@ public class EmailParser {
                 return new ListCandidateCommand();
 
             case FindCandidateCommand.COMMAND_WORD:
-                return new FindCandidateCommandParser().parse(arguments);
+                return new FindCandidateCommandParser(userInput).parse(arguments);
 
             case FilterCandidateCommand.COMMAND_WORD:
-                return new FilterCandidateCommandParser().parse(arguments);
+                return new FilterCandidateCommandParser(userInput).parse(arguments);
 
             case EMAIL_NEXT_COMMAND:
                 return new EmailContentsNextCommand();
