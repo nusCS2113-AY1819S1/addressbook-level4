@@ -159,10 +159,15 @@ public class ModelManagerTestUserStub extends ComponentManager implements Model 
     }
 
     @Override
-    public ObservableList<Person> getFriendList(Person person) {
-        requireNonNull(person);
-        friendList.setPredicate(friendsPredicateFromPerson(person));
-        return FXCollections.unmodifiableObservableList(friendList);
+    public ObservableList<Person> getMeList() {
+        filteredPersons.setPredicate(p -> p.getName().equals(user.getName()));
+        return FXCollections.unmodifiableObservableList(filteredPersons);
+    }
+
+    @Override
+    public ObservableList<Person> getOtherList() {
+        otherList.setPredicate(othersPredicateFromPerson(user));
+        return FXCollections.unmodifiableObservableList(otherList);
     }
 
     public ObservableList<Person> getOtherList(Person person) {
@@ -170,6 +175,23 @@ public class ModelManagerTestUserStub extends ComponentManager implements Model 
         otherList.setPredicate(othersPredicateFromPerson(person));
         return FXCollections.unmodifiableObservableList(otherList);
     }
+
+    @Override
+    public ObservableList<Person> getCurrentOtherList() {
+        return FXCollections.unmodifiableObservableList(otherList);
+    }
+
+    @Override
+    public ObservableList<Person> getCurrentFriendList() {
+        return FXCollections.unmodifiableObservableList(friendList);
+    }
+
+    @Override
+    public ObservableList<Person> getFriendList() {
+        friendList.setPredicate(friendsPredicateFromPerson(user));
+        return FXCollections.unmodifiableObservableList(friendList);
+    }
+
 
     //=========== Undo/Redo =================================================================================
 
