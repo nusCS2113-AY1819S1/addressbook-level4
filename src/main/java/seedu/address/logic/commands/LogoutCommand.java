@@ -13,7 +13,7 @@ import seedu.address.model.Model;
  */
 public class LogoutCommand extends Command {
     public static final String COMMAND_WORD = "logout";
-    private static final String MESSAGE_SUCCESS = "Successfully logout, priority now is default";
+    public static final String MESSAGE_SUCCESS = "Successfully logout, priority now is default";
 
 
     public LogoutCommand() {
@@ -26,5 +26,12 @@ public class LogoutCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         return new CommandResult(String.format(MESSAGE_SUCCESS));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof LogoutCommand);
+
     }
 }

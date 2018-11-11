@@ -20,12 +20,13 @@ public class LoginCommand extends Command {
             + "\nmanager\nemployee\nas EMAIL"
             + "\nExample: login manager"
             + "\nExample: login as hello@gmail.com";
+
+    public static final String MESSAGE_SUCCESS = "Successfully login as %s";
+
     public static final String MESSAGE_INVALID_DESIGNATION = "Designation of input email is neither 'manager'"
             + "nor 'employee'";
     private static final String KEY_MANAGER = "manager";
     private static final String KEY_EMPLOYEE = "employee";
-
-    private static final String MESSAGE_SUCCESS = "Successfully login as %s";
 
     private String loginIdentity;
     /**

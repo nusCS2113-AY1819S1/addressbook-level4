@@ -15,6 +15,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.InviteCommand;
@@ -31,8 +32,6 @@ import seedu.address.logic.parser.exceptions.InvalidLoginException;
 import seedu.address.logic.parser.exceptions.InvalidPrivilegeException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
-//@@author: IcedCoffeeBoy
 
 /**
  * Parses user input.
@@ -77,6 +76,9 @@ public class EmployeeParser extends CommandsParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindEventCommand.COMMAND_WORD:
+            return new FindEventCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
@@ -105,7 +107,7 @@ public class EmployeeParser extends CommandsParser {
             throw new InvalidLoginException(IDENTITY);
 
         case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommandParser().parse(arguments);
+            return new LogoutCommandParser().parse(commandWord);
 
         case AddCommand.COMMAND_WORD:
             throw new InvalidPrivilegeException(IDENTITY);

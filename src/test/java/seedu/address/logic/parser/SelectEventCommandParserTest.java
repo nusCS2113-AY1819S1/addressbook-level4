@@ -7,7 +7,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.ViewAttendeesCommand;
+import seedu.address.logic.commands.SelectEventCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -16,18 +16,18 @@ import seedu.address.logic.commands.ViewAttendeesCommand;
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
-public class ViewAttendeesCommandParserTest {
+public class SelectEventCommandParserTest {
 
-    private ViewAttendeesCommandParser parser = new ViewAttendeesCommandParser();
+    private SelectEventCommandParser parser = new SelectEventCommandParser();
 
     @Test
     public void parse_validArgs_returnsViewAttendeesCommand() {
-        assertParseSuccess(parser, "1", new ViewAttendeesCommand(INDEX_FIRST_EVENT));
+        assertParseSuccess(parser, "1", new SelectEventCommand(INDEX_FIRST_EVENT));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewAttendeesCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectEventCommand.MESSAGE_USAGE));
     }
 }

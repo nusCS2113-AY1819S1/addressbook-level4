@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -36,7 +37,6 @@ public class LoginCommandTest {
         LoginCommand loginFirstCommand = new LoginCommand(firstInput, 2);
         LoginCommand loginSecondCommand = new LoginCommand(secondInput, 3);
         LoginCommand loginThirdCommand = new LoginCommand(thirdInput, 1);
-
 
 
         // same object -> returns true
@@ -82,6 +82,24 @@ public class LoginCommandTest {
         assertEquals(loginThirdCommand, loginThirdCommandCopy);
     }
 
+    @Test
+    public void execute_validManagerLogin_success() {
+        String loginAsManager = "manager";
+        String expectedMessage = String.format(LoginCommand.MESSAGE_SUCCESS, "manager");
 
+        LoginCommand loginAsManagerCommand = new LoginCommand(loginAsManager, 2);
+
+        assertCommandSuccess(loginAsManagerCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validEmployeeLogin_success() {
+        String loginAsManager = "employee";
+        String expectedMessage = String.format(LoginCommand.MESSAGE_SUCCESS, "employee");
+
+        LoginCommand loginAsManagerCommand = new LoginCommand(loginAsManager, 3);
+
+        assertCommandSuccess(loginAsManagerCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
 
 }
