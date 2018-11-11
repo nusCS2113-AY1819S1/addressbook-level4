@@ -14,6 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.User;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TimeTable;
 import seedu.address.security.SecurityAuthenticationException;
 
 /**
@@ -84,5 +85,10 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public User getUser() {
         return model.getUser();
+    }
+
+    @Override
+    public void updateTimeTable(TimeTable timeTable) {
+        model.updateTimeTable(timeTable);
     }
 }

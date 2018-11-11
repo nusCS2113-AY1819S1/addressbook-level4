@@ -7,6 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.User;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TimeTable;
 import seedu.address.security.SecurityAuthenticationException;
 
 /**
@@ -59,4 +60,10 @@ public interface Logic {
      * @return the current authenticated User
      */
     User getUser();
+
+    /**
+     * Replaces the timetable shown with a new timetable
+     * @param timeTable Timetable to replace
+     */
+    void updateTimeTable(TimeTable timeTable);
 }
