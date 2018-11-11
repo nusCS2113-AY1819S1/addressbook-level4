@@ -274,7 +274,6 @@ Auto-Completion: +
 * Keywords
 ** Input words can be completed with words that are used in existing records' tags in Savee.
 ** All words that are entered after the `findtag` command can suggest words from existing records.
-
 // end::findtag[]
 
 === Selecting a record : `select`

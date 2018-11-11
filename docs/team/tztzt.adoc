@@ -3,6 +3,8 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets/
 :stylesheet: ../stylesheets/material-blue.css
+include::../UserGuide.adoc[]
+include::../DeveloperGuide.adoc[]
 
 == PROJECT: FinancialPlanner
 
@@ -64,14 +66,12 @@ of the different ways to implement sorting as some structures used were not suit
 
 * *Code contributed*:
 
-** [https://github.com[Functional Code]] +
+** [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tztzt&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Functional Code]] +
 ** [https://github.com[Test Code]] +
 
 * *Other contributions*:
 
 ** Project management:
-*** Helped to morph existing base code to new financial planner product
-(Pull Request https://github.com/CS2113-AY1819S1-T09-4/main/pull/38[#38])
 
 ** Enhancements to existing features:
 *** Added and improved utility methods for comparison and sorting

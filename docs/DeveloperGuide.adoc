@@ -1556,6 +1556,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 *MSS*
 
 1.  User requests to add record into Savee.
+2.  Save requests for record information to be added.
+3.  User inputs record information.
 2.  System adds the record into the system.
 3.  System displays the record added to the user.
 +
@@ -1710,20 +1712,20 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 8.  Use case: Search expenses based on category [Zhi Thon]
+=== 8.  Use case: Search expenses based on tags [Zhi Thon]
 
 *MSS*
 
-1.  User requests to search for expenses by category
-2.  Savee requests for category of expenditure
-3.  User enters category desired
-4.  Savee displays each expenditure with name category and the total expenditure.
+1.  User requests to search for expenses by tags
+2.  Savee requests for tag of expenditure
+3.  User enters tag desired
+4.  Savee displays each expenditure tagged with specified word.
 +
 Use case ends.
 
 *Extensions*
 
-* 3a User’s input category cannot be found.
+* 3a User’s input tag cannot be found.
 ** Savee shows no expenditure for selected category
 
 [discrete]
