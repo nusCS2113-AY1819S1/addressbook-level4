@@ -15,10 +15,11 @@ import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
-import seedu.address.logic.Logic;
+
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.security.Security;
 import seedu.address.security.SecurityAuthenticationException;
 
 /***
@@ -27,7 +28,7 @@ import seedu.address.security.SecurityAuthenticationException;
 public class LoginWindow extends UiPart<Stage> {
 
     private static final String FXML = "LoginWindow.fxml";
-    private Logic logic;
+    private Security security;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -53,9 +54,9 @@ public class LoginWindow extends UiPart<Stage> {
     /**
      * Creates a new LoginWindow.
      */
-    public LoginWindow(Logic logic) {
+    public LoginWindow(Security security) {
         this(new Stage());
-        this.logic = logic;
+        this.security = security;
         //Links with eventsCenter I believe
         registerAsAnEventHandler(this);
     }
@@ -110,7 +111,7 @@ public class LoginWindow extends UiPart<Stage> {
      */
     public void handleLoginClick() {
         try {
-            logic.execute(LoginCommand.COMMAND_WORD + " " + PREFIX_USERNAME + usernameTextField.getText()
+            security.execute(LoginCommand.COMMAND_WORD + " " + PREFIX_USERNAME + usernameTextField.getText()
                     + " " + PREFIX_PASSWORD + passwordTextField.getText());
         } catch (CommandException | ParseException | SecurityAuthenticationException e) {
             label.setText(e.getMessage());

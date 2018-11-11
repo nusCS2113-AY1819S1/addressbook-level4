@@ -13,10 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.events.ui.ExitRegisterEvent;
-import seedu.address.logic.Logic;
+
 import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.security.Security;
 import seedu.address.security.SecurityAuthenticationException;
 
 /***
@@ -25,7 +26,7 @@ import seedu.address.security.SecurityAuthenticationException;
 public class RegistrationWindow extends UiPart<Stage> {
 
     private static final String FXML = "RegistrationWindow.fxml";
-    private Logic logic;
+    private Security security;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -57,9 +58,9 @@ public class RegistrationWindow extends UiPart<Stage> {
     /**
      * Creates a new Registration Window.
      */
-    public RegistrationWindow(Logic logic) {
+    public RegistrationWindow(Security security) {
         this(new Stage());
-        this.logic = logic;
+        this.security = security;
         //Links with eventsCenter I believe
         registerAsAnEventHandler(this);
         label.setText(" ");
@@ -115,7 +116,7 @@ public class RegistrationWindow extends UiPart<Stage> {
      */
     public void handleRegister() {
         try {
-            logic.execute(RegisterCommand.COMMAND_WORD + " " + PREFIX_USERNAME + usernameTextField.getText()
+            security.execute(RegisterCommand.COMMAND_WORD + " " + PREFIX_USERNAME + usernameTextField.getText()
                     + " " + PREFIX_PASSWORD + passwordTextField.getText() + " " + PREFIX_EMAIL
                     + emailTextField.getText() + " " + PREFIX_PHONE + phoneTextField.getText() + " "
                     + PREFIX_ADDRESS + addressTextField.getText());
