@@ -35,12 +35,13 @@ The implementation too was challenging as it required changes to the main logic 
 * *Minor enhancement*: added a tag command that allows the user to search for persons by module code.
 This is to enhance the search feature in the case where there are too many users in the database.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=cjinting-nus&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[*Code contributed*]
 
 * *Other contributions*:
 
 ** Enhancements to existing features:
 *** Designed and updated the existing application icon and title.
+*** Added colors to group tags
 ** Documentation:
 *** Ensured consistency in the UserGuide and DeveloperGuide.
 
@@ -63,9 +64,9 @@ include::../UserGuide.adoc[tag=unfriendcommand]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=friendfeature]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=tagcommand]
 
 
 == PROJECT: PowerPointLabs
