@@ -63,7 +63,8 @@ public class ExpenditureNameContainsKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        ExpenditureNameContainsKeywordsPredicate predicate = new ExpenditureNameContainsKeywordsPredicate(Collections.emptyList());
+        ExpenditureNameContainsKeywordsPredicate predicate =
+                new ExpenditureNameContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new ExpenditureBuilder().withDescription("Chicken rice").build()));
 
         // Non-matching keyword
