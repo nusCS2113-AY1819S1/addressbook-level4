@@ -23,6 +23,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Provides a test for AddressBook
+ */
 public class AddressBookTest {
 
     @Rule

@@ -8,6 +8,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
+/**
+ * Provides a test for HistoryCommand
+ */
 public class HistoryCommandTest {
     private CommandHistory history = new CommandHistory();
     private Model model = new ModelManager();

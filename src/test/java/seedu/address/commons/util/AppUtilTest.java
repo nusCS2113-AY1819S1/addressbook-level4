@@ -6,6 +6,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * Provides a test for AppUtil
+ */
 public class AppUtilTest {
 
     @Rule

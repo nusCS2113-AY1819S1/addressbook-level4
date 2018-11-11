@@ -15,6 +15,9 @@ import org.testfx.api.FxToolkit;
 import guitests.guihandles.HelpWindowHandle;
 import javafx.stage.Stage;
 
+/**
+ * Provides a test for HelpWindow
+ */
 public class HelpWindowTest extends GuiUnitTest {
 
     private HelpWindow helpWindow;

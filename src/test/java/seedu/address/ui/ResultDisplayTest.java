@@ -9,6 +9,9 @@ import org.junit.Test;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 
+/**
+ * Provides a test for ResultDisplay
+ */
 public class ResultDisplayTest extends GuiUnitTest {
 
     private static final NewResultAvailableEvent NEW_RESULT_EVENT_STUB = new NewResultAvailableEvent("Stub");

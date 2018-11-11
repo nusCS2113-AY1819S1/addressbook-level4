@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -16,20 +18,16 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.ClassAddCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.StudentEditCommand;
-import seedu.address.logic.commands.StudentEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.StudentFindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.StudentListCommand;
-import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.StudentEditCommand;
+import seedu.address.logic.commands.StudentEditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.StudentFindCommand;
+import seedu.address.logic.commands.StudentListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
@@ -40,6 +38,9 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
+/**
+ * Provides a test for AddressBookParser
+ */
 public class AddressBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

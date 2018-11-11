@@ -16,13 +16,16 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.AddressBook;
+import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.storage.adapter.XmlAdaptedPerson;
 import seedu.address.storage.adapter.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestUtil;
 
+/**
+ * Provides a test for XmlUtil
+ */
 public class XmlUtilTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlUtilTest");

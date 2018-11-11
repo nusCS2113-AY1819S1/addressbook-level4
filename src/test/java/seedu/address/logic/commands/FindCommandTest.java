@@ -76,7 +76,8 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG"), new CourseName("Computer Engineering"), new FacultyName("Faculty of Engineering")));
+        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG"), new CourseName("Computer Engineering"),
+                new FacultyName("Faculty of Engineering")));
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         StudentFindCommand command = new StudentFindCommand(predicate);

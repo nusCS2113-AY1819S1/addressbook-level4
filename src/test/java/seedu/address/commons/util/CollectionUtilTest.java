@@ -11,6 +11,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+/**
+ * Provides a test for CollectionUtil
+ */
 public class CollectionUtilTest {
     @Test
     public void requireAllNonNullVarargs() {

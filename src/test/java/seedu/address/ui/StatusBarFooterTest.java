@@ -21,6 +21,9 @@ import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.AddressBook;
 
+/**
+ * Provides a test for StatusBarFooter
+ */
 public class StatusBarFooterTest extends GuiUnitTest {
 
     private static final Path STUB_SAVE_LOCATION = Paths.get("Stub");

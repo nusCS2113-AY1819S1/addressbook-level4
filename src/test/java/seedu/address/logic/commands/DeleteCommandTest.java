@@ -38,7 +38,8 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         StudentManager.getInstance().initializeModel(model);
-        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG"), new CourseName("Computer Engineering"), new FacultyName("Faculty of Engineering")));
+        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG"), new CourseName("Computer Engineering"),
+                new FacultyName("Faculty of Engineering")));
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
@@ -142,7 +143,8 @@ public class DeleteCommandTest {
         StudentManager.getInstance().initializeModel(model);
 
         StudentManager.getInstance().initializeModel(model);
-        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG"), new CourseName("Computer Engineering"), new FacultyName("Faculty of Engineering")));
+        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG"), new CourseName("Computer Engineering"),
+                new FacultyName("Faculty of Engineering")));
 
         // delete -> deletes second person in unfiltered person list / first person in filtered person list
         deleteCommand.execute(model, commandHistory);

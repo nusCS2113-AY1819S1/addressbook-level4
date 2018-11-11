@@ -1,20 +1,21 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.GradebookFindCommand.MESSAGE_FIND_FAIL;
+import static seedu.address.logic.commands.GradebookFindCommand.MESSAGE_FIND_SUCCESS;
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.testutil.GradebookBuilder;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.GradebookFindCommand.MESSAGE_FIND_FAIL;
-import static seedu.address.logic.commands.GradebookFindCommand.MESSAGE_FIND_SUCCESS;
 
 public class GradebookFindCommandTest {
     private static GradebookManager gradebookManager = new GradebookManager();

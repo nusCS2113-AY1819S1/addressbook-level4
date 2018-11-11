@@ -15,6 +15,9 @@ import org.junit.Test;
 import seedu.address.logic.commands.StudentEditCommand.EditPersonDescriptor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
+/**
+ * Provides a test for EditPersonDescriptor
+ */
 public class EditPersonDescriptorTest {
 
     @Test
