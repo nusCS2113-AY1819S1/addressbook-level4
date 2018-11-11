@@ -44,7 +44,7 @@ public class UnregisterCommandTest {
     }
 
     @Test
-    public void execute_RegisteredEventUnfilteredList_success() {
+    public void execute_registeredEventUnfilteredList_success() {
         Event eventToUnregister = model.getFilteredEventList().get(INDEX_THIRD_EVENT.getZeroBased());
 
         // check current user is registered for event
@@ -52,7 +52,7 @@ public class UnregisterCommandTest {
         UnregisterCommand unregisterCommand = new UnregisterCommand(INDEX_THIRD_EVENT);
 
         String expectedMessage =
-                String.format(UnregisterCommand.MESSAGE_UNREGISTER_EVENT_SUCCESS,INDEX_THIRD_EVENT.getOneBased());
+                String.format(UnregisterCommand.MESSAGE_UNREGISTER_EVENT_SUCCESS, INDEX_THIRD_EVENT.getOneBased());
 
         Event unregisteredEvent = new EventBuilder(eventToUnregister)
                 .withRemoveAttendees(currUsername).build();
@@ -65,7 +65,7 @@ public class UnregisterCommandTest {
     }
 
     @Test
-    public void execute_UnregisteredEventUnfilteredList_failure() {
+    public void execute_unregisteredEventUnfilteredList_failure() {
         Event eventToUnregister = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
 
         // check current user is not registered for event
