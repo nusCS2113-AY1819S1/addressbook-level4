@@ -69,8 +69,10 @@ public class CommandTestUtil {
     public static final String TASK_DATE_DESC_TUTORIAL = " " + PREFIX_DATE + VALID_TASK_DATE_TUTORIAL;
     public static final String TASK_PRIORITY_DESC_ASSIGNMENT = " " + PREFIX_PRIORITY + VALID_TASK_PRIORITY_ASSIGNMENT;
     public static final String TASK_PRIORITY_DESC_TUTORIAL = " " + PREFIX_PRIORITY + VALID_TASK_PRIORITY_TUTORIAL;
-    public static final String EXPENDITURE_DESCRIPTION_CLOTHES = " " + PREFIX_NAME + VALID_EXPENDITURE_DESCRIPTION_CLOTHES;
-    public static final String EXPENDITURE_DESCRIPTION_IPHONE = " " + PREFIX_NAME + VALID_EXPENDITURE_DESCRIPTION_IPHONE;
+    public static final String EXPENDITURE_DESCRIPTION_CLOTHES =
+            " " + PREFIX_NAME + VALID_EXPENDITURE_DESCRIPTION_CLOTHES;
+    public static final String EXPENDITURE_DESCRIPTION_IPHONE =
+            " " + PREFIX_NAME + VALID_EXPENDITURE_DESCRIPTION_IPHONE;
     public static final String EXPENDITURE_CATEGORY_CLOTHES = " " + PREFIX_PHONE + VALID_EXPENDITURE_CATEGORY_CLOTHES;
     public static final String EXPENDITURE_CATEGORY_IPHONE = " " + PREFIX_PHONE + VALID_EXPENDITURE_CATEGORY_IPHONE;
     public static final String EXPENDITURE_MONEY_CLOTHES = " " + PREFIX_EMAIL + VALID_EXPENDITURE_MONEY_CLOTHES;
@@ -86,8 +88,10 @@ public class CommandTestUtil {
     public static final String INVALID_TASK_MODULE_DESC = " " + PREFIX_MODULE + "CS23345"; // invalid module code
     public static final String INVALID_TASK_DATE_DESC = " " + PREFIX_DATE + "0912"; // missing '-' symbol
     public static final String INVALID_TASK_PRIORITY_DESC = " " + PREFIX_TASK + "4"; // only 1, 2, or 3 allowed
-    public static final String INVALID_EXPENDITURE_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "chicken*"; // '*' not allowed in descriptions
-    public static final String INVALID_EXPENDITURE_CATEGORY_DESC = " " + PREFIX_CATEGORY + "breakfast"; // invalid category
+    public static final String INVALID_EXPENDITURE_DESCRIPTION_DESC =
+            " " + PREFIX_DESCRIPTION + "chicken*"; // '*' not allowed in descriptions
+    public static final String INVALID_EXPENDITURE_CATEGORY_DESC =
+            " " + PREFIX_CATEGORY + "breakfast"; // invalid category
     public static final String INVALID_EXPENDITURE_MONEY_DESC = " " + PREFIX_MONEY + "91*"; //  '*' not allowed in money
     public static final String INVALID_EXPENDITURE_DATE_DESC = " " + PREFIX_DATE + "01012018"; //  missing '-' symbol
 

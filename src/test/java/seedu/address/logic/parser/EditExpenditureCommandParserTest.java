@@ -55,12 +55,16 @@ public class EditExpenditureCommandParserTest {
 
     @Test
     public void parseinvalidValuefailure() {
-        assertParseFailure(parser, "1" + INVALID_EXPENDITURE_CATEGORY_DESC, Category.MESSAGE_CATEGORY_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_EXPENDITURE_DATE_DESC, Date.MESSAGE_DATE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EXPENDITURE_MONEY_DESC, Money.MESSAGE_MONEY_CONSTRAINTS); // invalid address
+        assertParseFailure(parser, "1" + INVALID_EXPENDITURE_CATEGORY_DESC,
+                Category.MESSAGE_CATEGORY_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_EXPENDITURE_DATE_DESC,
+                Date.MESSAGE_DATE_CONSTRAINTS); // invalid phone
+        assertParseFailure(parser, "1" + INVALID_EXPENDITURE_MONEY_DESC,
+                Money.MESSAGE_MONEY_CONSTRAINTS); // invalid address
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_EXPENDITURE_MONEY_DESC + EXPENDITURE_CATEGORY_CLOTHES, Money.MESSAGE_MONEY_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_EXPENDITURE_MONEY_DESC
+                + EXPENDITURE_CATEGORY_CLOTHES, Money.MESSAGE_MONEY_CONSTRAINTS);
 
     }
 
@@ -70,8 +74,10 @@ public class EditExpenditureCommandParserTest {
         String userInput = targetIndex.getOneBased() + EXPENDITURE_DESCRIPTION_CLOTHES +
                 EXPENDITURE_CATEGORY_IPHONE + EXPENDITURE_DATE_CLOTHES + EXPENDITURE_MONEY_CLOTHES;
 
-        EditExpenditureDescriptor descriptor = new EditExpenditureDescriptorBuilder().withDescription(VALID_EXPENDITURE_DESCRIPTION_CLOTHES)
-                .withCategory(VALID_EXPENDITURE_CATEGORY_IPHONE).withDate(VALID_EXPENDITURE_DATE_CLOTHES).withMoney(VALID_EXPENDITURE_MONEY_CLOTHES).build();
+        EditExpenditureDescriptor descriptor = new EditExpenditureDescriptorBuilder().
+        withDescription(VALID_EXPENDITURE_DESCRIPTION_CLOTHES)
+                .withCategory(VALID_EXPENDITURE_CATEGORY_IPHONE).withDate(VALID_EXPENDITURE_DATE_CLOTHES).
+                withMoney(VALID_EXPENDITURE_MONEY_CLOTHES).build();
         EditExpenditureCommand expectedExpenditureCommand = new EditExpenditureCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedExpenditureCommand);
@@ -82,7 +88,8 @@ public class EditExpenditureCommandParserTest {
         Index targetIndex = INDEX_FIRST_EXPENDITURE;
         String userInput = targetIndex.getOneBased() + EXPENDITURE_DATE_CLOTHES + EXPENDITURE_CATEGORY_IPHONE;
 
-        EditExpenditureDescriptor descriptor = new EditExpenditureDescriptorBuilder().withDate(VALID_EXPENDITURE_DATE_CLOTHES)
+        EditExpenditureDescriptor descriptor = new EditExpenditureDescriptorBuilder().
+        withDate(VALID_EXPENDITURE_DATE_CLOTHES)
                 .withCategory(VALID_EXPENDITURE_CATEGORY_IPHONE).build();
         EditExpenditureCommand expectedCommand = new EditExpenditureCommand(targetIndex, descriptor);
 
@@ -94,7 +101,8 @@ public class EditExpenditureCommandParserTest {
         // Description
         Index targetIndex = INDEX_THIRD_EXPENDITURE;
         String userInput = targetIndex.getOneBased() + EXPENDITURE_DESCRIPTION_CLOTHES;
-        EditExpenditureDescriptor descriptor = new EditExpenditureDescriptorBuilder().withDescription(VALID_EXPENDITURE_DESCRIPTION_CLOTHES).build();
+        EditExpenditureDescriptor descriptor = new EditExpenditureDescriptorBuilder().
+        withDescription(VALID_EXPENDITURE_DESCRIPTION_CLOTHES).build();
         EditExpenditureCommand expectedCommand = new EditExpenditureCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -124,14 +132,17 @@ public class EditExpenditureCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_EXPENDITURE;
         String userInput = targetIndex.getOneBased() + INVALID_EXPENDITURE_MONEY_DESC + EXPENDITURE_MONEY_CLOTHES;
-        EditExpenditureDescriptor descriptor = new EditExpenditureDescriptorBuilder().withMoney(VALID_EXPENDITURE_MONEY_CLOTHES).build();
+        EditExpenditureDescriptor descriptor = new EditExpenditureDescriptorBuilder().
+        withMoney(VALID_EXPENDITURE_MONEY_CLOTHES).build();
         EditExpenditureCommand expectedCommand = new EditExpenditureCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + EXPENDITURE_DATE_CLOTHES + INVALID_EXPENDITURE_MONEY_DESC + EXPENDITURE_CATEGORY_CLOTHES
+        userInput = targetIndex.getOneBased() + EXPENDITURE_DATE_CLOTHES + INVALID_EXPENDITURE_MONEY_DESC
+        + EXPENDITURE_CATEGORY_CLOTHES
                 + EXPENDITURE_DESCRIPTION_CLOTHES;
-        descriptor = new EditExpenditureDescriptorBuilder().withMoney(VALID_EXPENDITURE_MONEY_CLOTHES).withCategory(VALID_EXPENDITURE_CATEGORY_CLOTHES)
+        descriptor = new EditExpenditureDescriptorBuilder().withMoney(VALID_EXPENDITURE_MONEY_CLOTHES).
+        withCategory(VALID_EXPENDITURE_CATEGORY_CLOTHES)
                 .withDescription(VALID_EXPENDITURE_DESCRIPTION_CLOTHES).build();
         expectedCommand = new EditExpenditureCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
