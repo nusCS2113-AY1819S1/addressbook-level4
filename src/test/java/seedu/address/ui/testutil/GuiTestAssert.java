@@ -48,7 +48,7 @@ public class GuiTestAssert {
         assertEquals(expectedTask.getDate().value, actualCard.getTaskDate());
         assertEquals(expectedTask.getModule().value, actualCard.getTaskModule());
         assertEquals("Low priority (" + expectedTask.getPriority().value + ")", actualCard.getTaskPriority());
-        assertEquals(expectedTask.getComplete(), actualCard.getTaskState().equals("Status: Completed") );
+        assertEquals(expectedTask.getComplete(), actualCard.getTaskState().equals("Status: Completed"));
     }
 
     /**

@@ -1,3 +1,4 @@
+//@@author XiaoYunhan
 package guitests.guihandles;
 
 import javafx.scene.Node;
@@ -67,7 +68,7 @@ public class TaskCardHandle extends NodeHandle<Node>{
                 && getTaskDate().equals(task.getDate().toString())
                 && getTaskModule().equals(task.getModule().toString())
                 && getTaskPriority().equals(task.getPriority().toString())
-                && getTaskState().equals(task.getComplete()? "Status: Completed":"Status: Uncompleted");
+                && getTaskState().equals(task.getComplete() ? "Status: Completed" : "Status: Uncompleted");
     }
 
 }

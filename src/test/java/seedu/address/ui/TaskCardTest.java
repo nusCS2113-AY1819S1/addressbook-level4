@@ -1,3 +1,4 @@
+//@@author XiaoYunhan
 package seedu.address.ui;
 
 import static org.junit.Assert.assertEquals;
@@ -35,7 +36,7 @@ public class TaskCardTest extends GuiUnitTest{
         assertEquals(Integer.toString(expectedId) + ". ", taskCardHandle.getId());
 
         //verify task details are displayed correctly
-        assertCardDisplaysTask(expectedTask,taskCardHandle);
+        assertCardDisplaysTask(expectedTask, taskCardHandle);
     }
 
     /*
