@@ -146,7 +146,7 @@ public class XmlAdaptedNote {
                 endDate = new NoteDate(startDate.getDate().format(NoteDate.DATE_FORMAT));
             } else {
                 try {
-                    endDate = new NoteDate(startDate.getDate().format(NoteDate.DATE_FORMAT));
+                    endDate = new NoteDate(this.endDate.trim());
                 } catch (IllegalArgumentException | NullPointerException e) {
                     return null;
                 }
