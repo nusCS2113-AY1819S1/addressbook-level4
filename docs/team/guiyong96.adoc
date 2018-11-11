@@ -39,7 +39,7 @@ BookInventory is a desktop application to assist store managers in managing thei
 ** Justification:
 ** Credits:
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=guiyong96[Functional/Test code]] [https://github.com[Test code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=guiyong96[Functional/Test code]]
 
 * *Other contributions*:
 
@@ -50,9 +50,7 @@ BookInventory is a desktop application to assist store managers in managing thei
 ** Enhancements to existing features:
 ** Community:
 *** Perform refactoring for different terms. (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the stock feature I added was adopted by several other class mates
-** Tools:
-
+*** Several parts of the request feature implemented were adopted by others.
 
 == Contributions to the User Guide
 
