@@ -14,23 +14,22 @@ public class KeywordsHistoryStack {
     protected Stack<KeywordsBundle> keywordsBundlesStack = new Stack<>();
 
     /**
-     * Creates a new KeywordsBundle object according to the parameter and add it
-     * to the top of the stack
+     * Creates a new KeywordsBundle object and adds it to the stack
      */
     public void push(KeywordType type, List<String> keywords) {
         if (type == null || keywords == null) {
-            return;
+            throw new NullPointerException();
         }
         KeywordsBundle bundle = new KeywordsBundle(type, keywords);
         keywordsBundlesStack.push(bundle);
     }
 
     /**
-     * Adds a new KeywordsBundle object to the top of the stack
+     * Adds a new KeywordsBundle object adds it to the stack
      */
     public void push(KeywordsBundle bundle) {
         if (bundle == null) {
-            return;
+            throw new NullPointerException();
         }
         keywordsBundlesStack.push(bundle);
     }

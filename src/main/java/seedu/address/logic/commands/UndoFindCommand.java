@@ -14,14 +14,15 @@ public class UndoFindCommand extends Command {
     public static final String COMMAND_WORD = "undofind";
     public static final String MESSAGE_SUCCESS = "Undo success!";
     public static final String MESSAGE_FAILURE = "Search History is empty";
-    private KeywordsOutputFormatter formatter = new KeywordsOutputFormatter();
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         try {
             model.revertLastSearch();
-            return new CommandResult(MESSAGE_SUCCESS + formatter.getOutputString(model.getReadOnlyKeywordsRecord()));
+            KeywordsOutputFormatter formatter = new KeywordsOutputFormatter();
+            String keywordHistoryString = formatter.getOutputString(model.getReadOnlyKeywordsRecord());
+            return new CommandResult(MESSAGE_SUCCESS + keywordHistoryString);
         } catch (EmptyHistoryException e) {
             model.resetSearchHistoryToInitialState();
             return new CommandResult(MESSAGE_FAILURE);

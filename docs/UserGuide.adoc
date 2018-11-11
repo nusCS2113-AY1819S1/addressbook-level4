@@ -66,15 +66,9 @@ Logs into application using relevant credentials. +
 Format: `login USERID PASSWORD ROLE`
 
 ****
-* USERID refers to student matriculation number
-* PASSWORD refers to the password associated with the existing account
-* ROLE refers to the role in NUSSU associated with the existing account
 * The USERID must be in the `X1234567X` format, where X can only be upper case letter alphabets, and there must be exactly 7 digits between the two `X`
-* USERID must belong to an existing account
-* ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
-* There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
-* There must be at least 1 space between `login` keyword and USERID
-* The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the login process
+* ROLE must be lower-case letter alphabets, and be only `member`, `president` or `treasurer`
+* The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during login
 * There must not be any additional unnecessary parameters in user input during the login process
 * There must not be any spaces in USERID, PASSWORD and ROLE
 ****
@@ -82,27 +76,25 @@ Format: `login USERID PASSWORD ROLE`
 Examples:
 
 * `login A1234567M zaq1xsw2cde3 president` +
-Logs into NUSSU-Connect with user ID as A1234567M, password as zaq1xsw2cde3 and role as president.
-
-image::DefaultAccountDetails.PNG[width="300"]
+Logs in with user ID as A1234567M, password as zaq1xsw2cde3 and role as president.
 
 [NOTE]
 ====
 The default account login details for logging in when the application is launched for the very first time, can be illustrated in the picture below. You must enter the login details shown in the picture exactly, as all the login parameters are case-sensitive. Thus, any difference in casing between the actual and expected input characters will lead to failure in logging into the application.
 ====
-image::DefaultAccountDetails.PNG[width="300"]
+image::DefaultAccountDetails.PNG[width="250"]
 
 [NOTE]
 ====
-After you log in successfully, you should expect to see the main window of the application as shown below.
+You should expect to see the main window of the application as shown below.
 ====
-image::LoginSuccess.PNG[width="300"]
+image::LoginSuccess.PNG[width="250"]
 
 [NOTE]
 ====
 If you are unable to log in successfully, you should expect to see the login input field in a pop-up box again, asking you to input your login credentials again.
 ====
-image::BlankLoginInput.PNG[width="300"]
+image::BlankLoginInput.PNG[width="250"]
 
 [NOTE]
 ====
@@ -111,16 +103,9 @@ User Id, Password and Role inputs are all case-sensitive!
 
 [NOTE]
 ====
-If you attempt to minimize the application before logging in to do other things, only to come back to the application later, and you want to close the application, you should not click on the cross button on the top right hand corner of the application, as shown in the image below. Look at the next note below to see the correct step to safely close the application.
+If you attempt to minimize the application before logging in to do other things, only to come back to the application later, and you want to close the application, you should not click on the cross button on the top right hand corner of the application, as shown in the image below. It is not recommended to close the application as shown in the image below, as this would cause the application to become unresponsive. You should switch windows repeatedly with the Alt + Tab keys on your keyboard until you can see the login dialog box shown in the image below. Once that is done, you can then safely click on the cross button found on the top right hand corner of the dialog box, circled in red, to close the application.
 ====
-image::WrongCloseApplication.PNG[width="300"]
-
-[NOTE]
-====
-It is not recommended to close the application as shown in the image above, as this would cause the application to become unresponsive. You should switch windows repeatedly with the Alt + Tab keys on your keyboard until you can see the login dialog box shown in the image below. Once that is done, you can then safely click on the cross button found on the top right hand corner of the dialog box to close the application.
-====
-image::CorrectCloseApplication.PNG[width="300"]
-
+image::CorrectCloseApplication.PNG[width="250"]
 
 === Creating a new user account: `createaccount`
 
@@ -128,16 +113,10 @@ Creates a new user account in the NUSSU-Connect. +
 Format: `createaccount USERID PASSWORD ROLE`
 
 ****
-* USERID refers to student matriculation number
-* PASSWORD refers to any desired passphrases the new user wishes to have
-* ROLE refers to the role in NUSSU associated with the existing account
 * The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabets, and there must be exactly 7 digits between the two `X`
-* USERID must not belong to an existing account
-* ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
-* There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
-* There must be at least 1 space between `createaccount` keyword and USERID
-* The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the account creation process
-* There must not be any additional unnecessary parameters in user input during the account creation process
+* ROLE must be lower-case letter alphabets, and be only `member`, `president` or `treasurer`
+* USERID, PASSWORD and ROLE must be present in user input during the account creation process
+* There must not be any unnecessary parameters in user input during the account creation process
 * There must not be any spaces in USERID, PASSWORD and ROLE
 ****
 
@@ -147,11 +126,11 @@ Examples:
 Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the NUSSU-Connect.
 The image below shows the outcome of a successful creation of a new account.
 
-image::CreateAccountSuccess.PNG[width="300"]
+image::CreateAccountSuccess.PNG[width="250"]
 
-The image below shows the outcome of an unsuccessful creation of a new account due to an account already existing.
+The image below shows an unsuccessful creation of a new account due to an account already existing.
 
-image::CreateAccountFailure.PNG[width="300"]
+image::CreateAccountFailure.PNG[width="250"]
 // end::logincreateaccount[]
 
 === Viewing help : `help`
@@ -519,7 +498,7 @@ _{explain how the user can enable/disable data encryption}_
 == Command Summary
 
 * *Login* : `login USERID PASSWORD ROLE`
-e.g. `login A1234567M zaq1xsw2cde3 member`
+e.g. `login A1234568M zaq1xsw2cde3 member`
 * *Create Account* : `createaccount USERID PASSWORD ROLE` +
 e.g. `createaccount A1234567M zaq1xsw2cde3 member`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +

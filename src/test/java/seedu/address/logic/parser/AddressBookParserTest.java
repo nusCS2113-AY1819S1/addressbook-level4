@@ -28,10 +28,10 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindNameSubCommand;
-import seedu.address.logic.commands.FindTagSubCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.IncludeNameFindCommand;
+import seedu.address.logic.commands.IncludeTagFindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoginUserIdPasswordRoleCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -119,7 +119,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindNameSubCommand(new NameContainsKeywordsPredicate(keywords), false), command);
+        assertEquals(new IncludeNameFindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -127,7 +127,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + "\\tag " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindTagSubCommand(new TagContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new IncludeTagFindCommand(new TagContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

@@ -3,14 +3,16 @@ package seedu.address.model.searchhistory;
 import java.util.EmptyStackException;
 import java.util.Stack;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 
 /**
  * Represents in-memory model for Predicates containing system search logic.
  */
 public class SearchHistoryManager<T> {
-
+    private static final Logger logger = LogsCenter.getLogger(SearchHistoryManager.class);
     protected Stack<Predicate<T>> searchHistoryStack = new Stack<>();
     private final Predicate<T> emptyStackPredicate = predicate -> true;
 
@@ -31,7 +33,7 @@ public class SearchHistoryManager<T> {
      **/
     private void addNewPredicateToStack(Predicate<T> newPredicate) {
         if (newPredicate == null) {
-            return;
+            throw new NullPointerException();
         }
         if (searchHistoryStack.isEmpty()) {
             searchHistoryStack.push(newPredicate);
@@ -52,6 +54,7 @@ public class SearchHistoryManager<T> {
      * @throws EmptyHistoryException If search history is empty before revert.
      */
     public Predicate<T> revertLastSearch() throws EmptyHistoryException {
+        logger.info("SearchHistoryManager: Reverting last search.");
         try {
             removeLastPredicateFromStack();
         } catch (EmptyStackException e) {
@@ -64,7 +67,8 @@ public class SearchHistoryManager<T> {
      * @param predicate a Predicate containing the user-defined search logic.
      * @return a Predicate containing the system search logic.
      **/
-    public Predicate<T> executeNewSearch(Predicate<T> predicate) {
+    public Predicate<T> executeNewSearch(Predicate<T> predicate) throws NullPointerException {
+        logger.info("SearchHistoryManager: Executing new search.");
         addNewPredicateToStack(predicate);
         return retrievePredicateAtTopOfStack();
     }
@@ -91,6 +95,11 @@ public class SearchHistoryManager<T> {
         }
 
         SearchHistoryManager other = (SearchHistoryManager) obj;
+        /*
+        size of searchHistoryStack will be used for equality checking since
+        we could not compare 2 Predicate objects without creating a subclass
+        of Predicate and overriding the equals() method in the subclass
+        */
         return searchHistoryStack.size() == other.searchHistoryStack.size();
     }
 }

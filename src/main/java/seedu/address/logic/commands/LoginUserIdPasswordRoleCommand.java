@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_LOGIN_LISTED_OVERVIEW;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACCOUNTS;
 
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.LoginManager;
 import seedu.address.model.Model;
@@ -20,6 +24,8 @@ import seedu.address.model.login.UserRoleContainsKeywordsPredicate;
  */
 public class LoginUserIdPasswordRoleCommand extends LoginCommand {
 
+    private static final Logger logger = LogsCenter.getLogger(LoginUserIdPasswordRoleCommand.class);
+
     private final UserIdContainsKeywordsPredicate idPredicate;
     private final UserPasswordContainsKeywordsPredicate passwordPredicate;
     private final UserRoleContainsKeywordsPredicate rolePredicate;
@@ -28,13 +34,21 @@ public class LoginUserIdPasswordRoleCommand extends LoginCommand {
                                           UserPasswordContainsKeywordsPredicate passwordPredicate,
                                           UserRoleContainsKeywordsPredicate rolePredicate) {
         super();
+        if (isNull(idPredicate)) {
+            logger.log(Level.WARNING, "idPredicate is null!");
+        }
+        if (isNull(passwordPredicate)) {
+            logger.log(Level.WARNING, "passwordPredicate is null!");
+        }
+        if (isNull(rolePredicate)) {
+            logger.log(Level.WARNING, "rolePredicate is null!");
+        }
         requireNonNull(idPredicate);
         requireNonNull(passwordPredicate);
         requireNonNull(rolePredicate);
         this.idPredicate = idPredicate;
         this.passwordPredicate = passwordPredicate;
         this.rolePredicate = rolePredicate;
-
     }
 
     @Override
@@ -77,9 +91,16 @@ public class LoginUserIdPasswordRoleCommand extends LoginCommand {
     private void checkUpdatedAccountListSetLoginCondition(Model model) {
         if (model.getFilteredLoginDetailsList().size() != 0) {
             LoginManager.setIsLoginSuccessful(true);
+            logger.log(Level.INFO, "Login successful");
+            assert LoginManager.getIsLoginSuccessful() : "LoginManager.getIsLoginSuccessful() should be true";
         } else {
             LoginManager.setAllRolesFalse();
+            assert !LoginManager.getIsPresident() : "LoginManager.getIsPresident() should be false";
+            assert !LoginManager.getIsTreasurer() : "LoginManager.getIsTreasurer() should be false";
+            assert !LoginManager.getIsMember() : "LoginManager.getIsMember() should be false";
             LoginManager.setIsLoginSuccessful(false);
+            logger.log(Level.INFO, "Login failed");
+            assert !LoginManager.getIsLoginSuccessful() : "LoginManager.getIsLoginSuccessful() should be false";
         }
     }
 

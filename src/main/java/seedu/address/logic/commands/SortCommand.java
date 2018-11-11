@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Parameter;
 import seedu.address.model.person.Person;
@@ -16,8 +16,9 @@ import seedu.address.model.person.Person;
  */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_ARGUMENTS = "Parameter: %1$s";
     public static final String MESSAGE_SUCCESS = "Sorted %1$d people";
+    public static final String MESSAGE_USAGE = "Error: Failed to sort. Please enter your command in the following"
+            + "format:\nsort st/[PARAMETER]\nValid Parameters: 'name', 'skill', 'sl'";
 
     private final Parameter parameter;
 
@@ -26,13 +27,13 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> filteredPersonList = new ArrayList<>(model.getFilteredPersonList());
         try {
             filteredPersonList.sort(Person.getComparator(parameter));
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (IllegalArgumentException ive) {
+            throw new CommandException(MESSAGE_USAGE);
         }
         for (Person person: filteredPersonList) {
             model.deletePerson(person);

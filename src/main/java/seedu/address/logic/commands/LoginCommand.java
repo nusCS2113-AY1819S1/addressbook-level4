@@ -19,7 +19,8 @@ public abstract class LoginCommand extends Command {
             + "Parameters: USERID PASSWORD ROLE\n"
             + "Example: " + COMMAND_WORD + " A3583758X 1qaxcdwd2w member";
 
-    private SearchHistoryManager searchHistoryManager = new SearchHistoryManager();
+    private SearchHistoryManager<seedu.address.model.login.LoginDetails> searchHistoryManager =
+            new SearchHistoryManager<>();
 
     /**
      * Clears the current searchHistoryManager object of previous login input details in preparation for another
@@ -28,7 +29,8 @@ public abstract class LoginCommand extends Command {
      * @param idPredicate the predicate generated from user input login id
      * @return a new predicate generated from user input login id
      */
-    Predicate getMostUpdatedIdPredicate(Predicate idPredicate) {
+    Predicate<seedu.address.model.login.LoginDetails> getMostUpdatedIdPredicate(
+            Predicate<seedu.address.model.login.LoginDetails> idPredicate) {
         searchHistoryManager.clearSearchHistory();
         return searchHistoryManager.executeNewSearch(idPredicate);
     }
@@ -39,7 +41,8 @@ public abstract class LoginCommand extends Command {
      * @param passwordPredicate the predicate generated from user input login password
      * @return a new predicate generated from user input login password
      */
-    Predicate getMostUpdatedPasswordPredicate(Predicate passwordPredicate) {
+    Predicate<seedu.address.model.login.LoginDetails> getMostUpdatedPasswordPredicate(
+            Predicate<seedu.address.model.login.LoginDetails> passwordPredicate) {
         return searchHistoryManager.executeNewSearch(passwordPredicate);
     }
 
@@ -49,7 +52,8 @@ public abstract class LoginCommand extends Command {
      * @param rolePredicate the predicate generated from user input login role
      * @return a new predicate generated from user input login role
      */
-    Predicate getMostUpdatedRolePredicate(Predicate rolePredicate) {
+    Predicate<seedu.address.model.login.LoginDetails> getMostUpdatedRolePredicate(
+            Predicate<seedu.address.model.login.LoginDetails> rolePredicate) {
         return searchHistoryManager.executeNewSearch(rolePredicate);
     }
 }

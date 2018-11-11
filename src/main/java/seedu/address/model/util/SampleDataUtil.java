@@ -80,10 +80,10 @@ public class SampleDataUtil {
             encryptedLoginRoleOne = Base64.getEncoder().encodeToString("president".getBytes("utf-8"));
             encryptedLoginIdTwo = Base64.getEncoder().encodeToString("A1234568M".getBytes("utf-8"));
             encryptedLoginPasswordTwo = Base64.getEncoder().encodeToString("zaq1xsw2cde3".getBytes("utf-8"));
-            encryptedLoginRoleTwo = Base64.getEncoder().encodeToString("treasurer".getBytes("utf-8"));
+            encryptedLoginRoleTwo = Base64.getEncoder().encodeToString("member".getBytes("utf-8"));
             encryptedLoginIdThree = Base64.getEncoder().encodeToString("A1234569M".getBytes("utf-8"));
             encryptedLoginPasswordThree = Base64.getEncoder().encodeToString("zaq1xsw2cde3".getBytes("utf-8"));
-            encryptedLoginRoleThree = Base64.getEncoder().encodeToString("member".getBytes("utf-8"));
+            encryptedLoginRoleThree = Base64.getEncoder().encodeToString("treasurer".getBytes("utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
