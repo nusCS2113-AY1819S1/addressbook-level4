@@ -77,6 +77,25 @@ public class ClassEditCommand extends Command {
                 classroomManager.getClassroomHtmlRepresentation());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ClassEditCommand)) {
+            return false;
+        }
+
+        // state check
+        ClassEditCommand e = (ClassEditCommand) other;
+        return className.equals(e.className)
+                && moduleCode.equals(e.moduleCode)
+                && editClassDescriptor.equals(e.editClassDescriptor);
+    }
+
     /**
      * Creates and returns a {@code Classroom} with the details of {@code classToEdit}
      * edited with {@code EditClassDescriptor}.
@@ -108,7 +127,7 @@ public class ClassEditCommand extends Command {
         /**
          * Copy constructor
          */
-        EditClassDescriptor(EditClassDescriptor toCopy) {
+        public EditClassDescriptor(EditClassDescriptor toCopy) {
             setClassName(toCopy.className);
             setModuleCode(toCopy.moduleCode);
             setEnrollment(toCopy.maxEnrollment);
@@ -145,5 +164,24 @@ public class ClassEditCommand extends Command {
             this.maxEnrollment = enrollment;
         }
 
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof EditClassDescriptor)) {
+                return false;
+            }
+
+            // state check
+            EditClassDescriptor e = (EditClassDescriptor) other;
+
+            return getClassName().equals(e.getClassName())
+                    && getModuleCode().equals(e.getModuleCode())
+                    && getMaxEnrollment().equals(e.getMaxEnrollment());
+        }
     }
 }

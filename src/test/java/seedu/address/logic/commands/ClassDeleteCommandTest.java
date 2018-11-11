@@ -4,7 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.ClassDeleteCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_T16;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CG1111;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -32,14 +32,17 @@ import seedu.address.testutil.ModuleBuilder;
  * Provides a test for the class delete command
  */
 public class ClassDeleteCommandTest {
+    private static ClassroomManager classroomManager;
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
-    private ClassroomManager classroomManager;
+
 
     @Before
-    public void setup() {
+    public void setUp() {
         StorageController.enterTestMode();
         ModuleManager moduleManager = ModuleManager.getInstance();
         Module module = new ModuleBuilder().withModuleCode("CG1111").build();
@@ -89,7 +92,7 @@ public class ClassDeleteCommandTest {
         final ClassDeleteCommand standardCommand = new ClassDeleteCommand(className, moduleCode);
 
         // same values -> returns true
-        ClassDeleteCommand commandWithSameValues = new ClassDeleteCommand(VALID_CLASS_T16, VALID_MODULE_CODE);
+        ClassDeleteCommand commandWithSameValues = new ClassDeleteCommand(VALID_CLASS_T16, VALID_MODULE_CODE_CG1111);
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -101,7 +104,7 @@ public class ClassDeleteCommandTest {
 
     @AfterClass
     public static void tearDown() {
-        ClassroomManager.getInstance().clearClassrooms();
-        ClassroomManager.getInstance().saveClassroomList();
+        classroomManager.clearClassrooms();
+        classroomManager.saveClassroomList();
     }
 }

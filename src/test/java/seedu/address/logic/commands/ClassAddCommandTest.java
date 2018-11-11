@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.ClassAddCommand.MESSAGE_SUCCESS;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_T16;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MAX_ENROLLMENT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MAX_ENROLLMENT_20;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CG1111;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -39,6 +39,8 @@ import seedu.address.testutil.ModuleBuilder;
  * Provides a test for the class add command
  */
 public class ClassAddCommandTest {
+    private static ClassroomManager classroomManager;
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -46,9 +48,10 @@ public class ClassAddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Before
-    public void setup() {
+    public void setUp() {
         StorageController.enterTestMode();
         ModuleManager moduleManager = ModuleManager.getInstance();
+        classroomManager = ClassroomManager.getInstance();
         Module module = new ModuleBuilder().withModuleCode("CG1111").build();
         try {
             moduleManager.addModule(module);
@@ -99,13 +102,13 @@ public class ClassAddCommandTest {
     public void equals() {
         final ClassAddCommand standardCommand = new ClassAddCommand(new Classroom(
                 new ClassName(VALID_CLASS_T16),
-                        new ModuleCode(VALID_MODULE_CODE),
-                        new Enrollment(VALID_MAX_ENROLLMENT)));
+                new ModuleCode(VALID_MODULE_CODE_CG1111),
+                new Enrollment(VALID_MAX_ENROLLMENT_20)));
         // same values -> returns true
         ClassAddCommand commandWithSameValues = new ClassAddCommand(
                 new Classroom(new ClassName(VALID_CLASS_T16),
-                        new ModuleCode(VALID_MODULE_CODE),
-                        new Enrollment(VALID_MAX_ENROLLMENT)));
+                        new ModuleCode(VALID_MODULE_CODE_CG1111),
+                        new Enrollment(VALID_MAX_ENROLLMENT_20)));
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -117,7 +120,7 @@ public class ClassAddCommandTest {
 
     @AfterClass
     public static void tearDown() {
-        ClassroomManager.getInstance().clearClassrooms();
-        ClassroomManager.getInstance().saveClassroomList();
+        classroomManager.clearClassrooms();
+        classroomManager.saveClassroomList();
     }
 }

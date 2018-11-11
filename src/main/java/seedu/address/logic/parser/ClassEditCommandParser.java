@@ -38,13 +38,13 @@ public class ClassEditCommandParser implements Parser<ClassEditCommand> {
 
         EditClassDescriptor editClassroomDescriptor = new EditClassDescriptor();
         if (argMultimap.getValue(PREFIX_CLASS_NAME).isPresent()) {
-            editClassroomDescriptor.setClassName(ClassroomParserUtil.parseClassName(className));
+            editClassroomDescriptor.setClassName(ParserUtil.parseClassName(className));
         }
         if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
             editClassroomDescriptor.setModuleCode(ParserUtil.parseModuleCode(moduleCode));
         }
         if (argMultimap.getValue(PREFIX_MAXENROLLMENT).isPresent()) {
-            editClassroomDescriptor.setEnrollment(ClassroomParserUtil.parseEnrollment(maxEnrollment));
+            editClassroomDescriptor.setEnrollment(ParserUtil.parseEnrollment(maxEnrollment));
         }
 
         if (!editClassroomDescriptor.isAnyFieldEdited()) {

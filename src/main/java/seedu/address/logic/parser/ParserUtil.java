@@ -11,6 +11,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.classroom.ClassName;
+import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.course.CourseCode;
 import seedu.address.model.course.CourseName;
 import seedu.address.model.course.FacultyName;
@@ -235,6 +237,35 @@ public class ParserUtil {
             throw new ParseException(ModuleName.MESSAGE_MODULE_NAME_CONSTRAINTS);
         }
         return new ModuleName(trimmedModuleName);
+    }
+
+    /**
+     * Parses a {@code String className} into a {@code ClassName}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code className} is invalid.
+     */
+    public static ClassName parseClassName(String className) throws ParseException {
+        requireNonNull(className);
+        String trimmedClassName = className.trim();
+        if (!ClassName.isValidClassName(className)) {
+            throw new ParseException(ClassName.MESSAGE_CLASSNAME_CONSTRAINTS);
+        }
+        return new ClassName(trimmedClassName);
+    }
+
+    /**
+     *
+     * Parses a {@code String maxEnrollment} into a {@code parseEnrollment}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code className} is invalid.
+     */
+    public static Enrollment parseEnrollment(String maxEnrollment) throws ParseException {
+        requireNonNull(maxEnrollment);
+        String trimmedMaxEnrollment = maxEnrollment.trim();
+        if (!Enrollment.isValidEnrollment(maxEnrollment)) {
+            throw new ParseException(Enrollment.MESSAGE_ENROLLMENT_CONSTRAINTS);
+        }
+        return new Enrollment(trimmedMaxEnrollment);
     }
 
     /**

@@ -4,7 +4,6 @@ import static seedu.address.logic.commands.ClassEditCommand.MESSAGE_EDIT_CLASSRO
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
@@ -30,15 +29,17 @@ import seedu.address.testutil.ModuleBuilder;
  * Provides a test for the class edit command
  */
 public class ClassEditCommandTest {
+    private static ClassroomManager classroomManager;
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
-    private ClassroomManager classroomManager;
-    ModuleManager moduleManager;
+    private ModuleManager moduleManager;
 
     @Before
-    public void setup() {
+    public void setUp() {
         StorageController.enterTestMode();
         moduleManager = ModuleManager.getInstance();
         Module module = new ModuleBuilder().withModuleCode("CG1111").build();
@@ -107,8 +108,8 @@ public class ClassEditCommandTest {
 
     @AfterClass
     public static void tearDown() {
-        ClassroomManager.getInstance().clearClassrooms();
-        ClassroomManager.getInstance().saveClassroomList();
+        classroomManager.clearClassrooms();
+        classroomManager.saveClassroomList();
     }
 
 }
