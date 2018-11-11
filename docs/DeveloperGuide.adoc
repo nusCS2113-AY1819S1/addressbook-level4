@@ -652,11 +652,11 @@ You can access this list by calling `selectedJob.getUniqueCandidateList()`.
 
 The following sequence diagram shows how the shortlist operation works:
 
-image::shortlistSequenceDiagram.png[width="800"]
+image::shortlistSequenceDiagram.png[width="400"]
 
 The following activity diagram summarizes what happens when a user executes `shortlist` command:
 
-image::shortlistActivityDiagram.png[width="650"]
+image::shortlistActivityDiagram.png[width="400"]
 
 ===== Deleting a Shortlisted Candidate
 
@@ -722,7 +722,7 @@ this command returns a message to be displayed to inform the user.
 
 The following activity diagram summarizes what happens when a user executes `deleteShortlist` command:
 
-image::deleteShortlistActivityDiagram.png[width="650"]
+image::deleteShortlistActivityDiagram.png[width="400"]
 
 ==== Design Considerations
 
