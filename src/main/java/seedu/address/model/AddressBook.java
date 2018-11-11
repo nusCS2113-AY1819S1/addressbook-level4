@@ -9,11 +9,11 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.UniqueReminderList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
 import seedu.address.model.todo.UniqueTodoList;
-import seedu.address.model.reminder.Reminder;
-import seedu.address.model.reminder.UniqueReminderList;
 
 /**
  * Wraps all data at the address-book level
@@ -221,7 +221,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a reminder to the address book.
      * The reminder must not already exist in the address book.
      */
-    public void addReminder(Reminder rm) { reminders.add(rm);
+    public void addReminder(Reminder rm) {
+        reminders.add(rm);
     }
 
     @Override

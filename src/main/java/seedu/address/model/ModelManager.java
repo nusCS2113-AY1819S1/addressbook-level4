@@ -20,9 +20,9 @@ import seedu.address.export.Export;
 import seedu.address.export.ExportManager;
 import seedu.address.export.ImportManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
-import seedu.address.model.reminder.Reminder;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -263,7 +263,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void UpdateFilteredReminderList(Predicate<Reminder> predicate) {
+    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
         requireNonNull(predicate);
         filteredReminders.setPredicate(predicate);
     }
@@ -278,7 +278,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addReminder(Reminder reminder) {
         versionedAddressBook.addReminder(reminder);
-        UpdateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
+        updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
         indicateAddressBookChanged();
     }
 }

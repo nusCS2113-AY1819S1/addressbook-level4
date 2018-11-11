@@ -7,9 +7,9 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
-import seedu.address.model.reminder.Reminder;
 
 /**
  * The API of the Model component.
@@ -161,6 +161,6 @@ public interface Model {
      * Updates the filter of the filtered reminder list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void UpdateFilteredReminderList(Predicate<Reminder> predicate);
+    void updateFilteredReminderList(Predicate<Reminder> predicate);
 
 }
