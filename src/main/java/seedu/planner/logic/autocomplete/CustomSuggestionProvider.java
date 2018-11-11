@@ -89,12 +89,12 @@ public class CustomSuggestionProvider {
     private static final Set<String> emptySet = new HashSet<>();
     private static RecordMap recordsMap = new RecordMap();
 
-    private static Set<String> nameSuggestionSet = new HashSet<>();
-    private static Set<String> defaultDateSet = new HashSet<>(Arrays.asList(Date.DATE_INPUT_TODAY,
+    private static final Set<String> defaultDateSet = new HashSet<>(Arrays.asList(Date.DATE_INPUT_TODAY,
             Date.DATE_INPUT_YESTERDAY));
-    private static Set<String> dateSuggestionSet = new HashSet<>();
-
     private static final Set<String> defaultTagsSet = getSampleTagsForSuggestion();
+
+    private static Set<String> nameSuggestionSet = new HashSet<>();
+    private static Set<String> dateSuggestionSet = new HashSet<>();
     private static Set<String> tagsSuggestionSet = new HashSet<>();
 
     private static HashMap<String, Integer> limitsDateMap = new HashMap<>();
@@ -147,7 +147,9 @@ public class CustomSuggestionProvider {
                 return;
 
             case AddLimitCommand.COMMAND_WORD:
-                addLimitCommandKeyword(inputs, strIndex);
+            case ArchiveCommand.COMMAND_WORD:
+            case ExportExcelCommand.COMMAND_WORD:
+                dateParametersCommand(inputs, strIndex);
                 return;
 
             case DeleteByDateCommand.COMMAND_WORD:
@@ -167,7 +169,7 @@ public class CustomSuggestionProvider {
             case EditLimitCommand.COMMAND_WORD:
                 datesCommandKeyword(inputs, strIndex);
                 return;
-
+                
             case SortCommand.COMMAND_WORD:
                 sortCommandKeyword(inputs, strIndex);
                 return;
@@ -251,26 +253,34 @@ public class CustomSuggestionProvider {
     }
 
     /**
-     * Function that handles when the command word is detected to be addlimit and requires 2 date inputs
-     * and a moneyflow input.
+     * Function that handles when the command word is detected to be addlimit, exportexcel or archive and
+     * there expected at most 3 arguments with 2 dates and 1 directory or moneyflow.
      * @param inputs is an array of all words found in the user input delimited by whitespaces.
      * @param strIndex is the index of the word to be completed in the entire string of input.
      */
-    private void addLimitCommandKeyword(String[] inputs, int strIndex) {
+    private void dateParametersCommand(String[] inputs, int strIndex) {
+        Set<String> suggestions;
+
+        if (inputs[0].equals(AddLimitCommand.COMMAND_WORD)) {
+            suggestions = limitsDateSuggestionSet;
+        } else {
+            suggestions = dateSuggestionSet;
+        }
+
         if (inputs.length == 2) {
             if (strIndex == 1) {
                 if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
-                    updateSuggestions(limitsDateSuggestionSet);
+                    updateSuggestions(suggestions);
                 } else {
                     clearSuggestions();
                 }
             }
         } else if (strIndex < inputs.length && (inputs.length == 3 || inputs.length == 4)) {
             if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
-                updateSuggestions(limitsDateSuggestionSet);
+                updateSuggestions(suggestions);
             } else if (strIndex > 1) {
                 if (inputs[strIndex - 1].startsWith(PREFIX_DATE.getPrefix())) {
-                    updateSuggestions(limitsDateSuggestionSet);
+                    updateSuggestions(suggestions);
                 } else {
                     clearSuggestions();
                 }
@@ -450,18 +460,22 @@ public class CustomSuggestionProvider {
      */
     private static void updateRecordSets() {
         nameSuggestionSet = recordsMap.getAsReadOnlyNameMap().getAsReadOnlyNameMap().keySet();
-        dateSuggestionSet = defaultDateSet;
-        dateSuggestionSet.addAll(recordsMap.getAsReadOnlyDateMap().getAsReadOnlyDateMap().keySet());
-        tagsSuggestionSet = defaultTagsSet;
-        tagsSuggestionSet.addAll(recordsMap.getAsReadOnlyTagMap().getAsReadOnlyTagMap().keySet());
+        Set<String> tempDateSuggestionSet = new HashSet<>(defaultDateSet);
+        tempDateSuggestionSet.addAll(recordsMap.getAsReadOnlyDateMap().getAsReadOnlyDateMap().keySet());
+        dateSuggestionSet = tempDateSuggestionSet;
+
+        Set<String> tempTagsSuggestionSet = new HashSet<>(defaultTagsSet);
+        tempTagsSuggestionSet.addAll(recordsMap.getAsReadOnlyTagMap().getAsReadOnlyTagMap().keySet());
+        tagsSuggestionSet = tempTagsSuggestionSet;
     }
 
     /**
      * Updates the Map of dates that are tied to limits
      */
     private static void updateLimitDateSet() {
-        limitsDateSuggestionSet = defaultDateSet;
-        limitsDateSuggestionSet.addAll(limitsDateMap.keySet());
+        Set<String> tempLimitsDateSuggestionSet = new HashSet<>(defaultDateSet);
+        tempLimitsDateSuggestionSet.addAll(limitsDateMap.keySet());
+        limitsDateSuggestionSet = tempLimitsDateSuggestionSet;
     }
 
 }
