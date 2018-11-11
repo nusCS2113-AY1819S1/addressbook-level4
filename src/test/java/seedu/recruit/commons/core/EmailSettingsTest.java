@@ -20,27 +20,27 @@ class EmailSettingsTest {
     private EmailSettings defaultEmailSettings = new EmailSettings();
 
     @Test
-    void getSubjectCandidateAsRecipient_customObject() {
+    void getSubjectCandidateAsRecipient_emailSettings_customObject() {
         assertTrue(customEmailSettings.getSubjectCandidateAsRecipient().equals("test1"));
     }
 
     @Test
-    void getSubjectCompanyAsRecipient_customObject() {
+    void getSubjectCompanyAsRecipient_emailSettings_customObject() {
         assertTrue(customEmailSettings.getSubjectCompanyAsRecipient().equals("test2"));
     }
 
     @Test
-    void getBodyTextCandidateAsRecipient_customObject() {
+    void getBodyTextCandidateAsRecipient_emailSettings_customObject() {
         assertTrue(customEmailSettings.getBodyTextCandidateAsRecipient().equals("test3"));
     }
 
     @Test
-    void getBodyTextCompanyAsRecipient_customObject() {
+    void getBodyTextCompanyAsRecipient_emailSettings_customObject() {
         assertTrue(customEmailSettings.getBodyTextCompanyAsRecipient().equals("test4"));
     }
 
     @Test
-    void toString_customObject() {
+    void toString_emailSettings_customObject() {
         String correctString = "Subject for Candidates as recipients : test1\n"
                 + "Subject for Companies as recipients : test2\n"
                 + "Body text for Candidates as recipients : test3\n"
@@ -49,29 +49,29 @@ class EmailSettingsTest {
     }
 
     @Test
-    void getSubjectCandidateAsRecipient_defaultObject() {
+    void getSubjectCandidateAsRecipient_emailSettings_defaultObject() {
         assertTrue(defaultEmailSettings.getSubjectCandidateAsRecipient()
                 .equals(DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT));
     }
 
     @Test
-    void getSubjectCompanyAsRecipient_defaultObject() {
+    void getSubjectCompanyAsRecipient_emailSettings_defaultObject() {
         assertTrue(defaultEmailSettings.getSubjectCompanyAsRecipient().equals(DEFAULT_SUBJECT_COMPANY_AS_RECIPIENT));
     }
 
     @Test
-    void getBodyTextCandidateAsRecipient_defaultObject() {
+    void getBodyTextCandidateAsRecipient_emailSettings_defaultObject() {
         assertTrue(defaultEmailSettings.getBodyTextCandidateAsRecipient()
                 .equals(DEFAULT_BODYTEXT_CANDIDATE_AS_RECIPIENT));
     }
 
     @Test
-    void getBodyTextCompanyAsRecipient_defaultObject() {
+    void getBodyTextCompanyAsRecipient_emailSettings_defaultObject() {
         assertTrue(defaultEmailSettings.getBodyTextCompanyAsRecipient().equals(DEFAULT_BODYTEXT_COMPANY_AS_RECIPIENT));
     }
 
     @Test
-    void toString_defaultObject() {
+    void toString_emailSettings_defaultObject() {
         String correctString = "Subject for Candidates as recipients : "
                 + DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT + '\n'
                 + "Subject for Companies as recipients : "
