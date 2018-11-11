@@ -11,11 +11,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.todo.Title;
-//import seedu.address.model.person.Date;
 import seedu.address.model.person.Time;
-//import seedu.address.model.reminder.Title;
 import seedu.address.model.reminder.Date;
-//import seedu.address.model.reminder.Time;
 import seedu.address.model.reminder.Agenda;
 import seedu.address.model.reminder.Reminder;
 

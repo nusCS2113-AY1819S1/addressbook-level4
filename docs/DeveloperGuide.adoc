@@ -441,6 +441,30 @@ The second instance would be when the user presses tab while typing the command 
 based on the current prefix string.
 //end::suggestion[]
 
+// tag::reminder[]
+=== Reminder Feature
+Add a reminder to notify users of an upcoming meeting.
+
+==== Current Implementation
+
+The reminder mechanism is facilitated by the `ReminderComand` from the `Logic` component. A `Reminder` object is instantiated to add a reminder and each `Reminder` object consists of `Title`, `Date`, `Time` and `Agenda` objects.
+
+The following diagram illustrates the Reminder class:
+
+image::TodoClassDiagram.png[width="200"]
+
+The following diagram illustrates how the Todo operation works:
+
+image::TodoSequenceDiagram.png[width="1000"]
+
+==== Design Considerations
+===== Aspect: Checking for duplications of to-do tasks
+
+* **Alternative 1 (current choice):** `isSameTodo`
+** Pros: Easy to implement and write the test as it checks for both the title and the content of a to-do task
+** Cons: This implementation may store too many similiar to-do tasks.
+// end::reminder[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 

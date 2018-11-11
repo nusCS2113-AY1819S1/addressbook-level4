@@ -13,6 +13,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.todo.Todo;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -22,12 +23,16 @@ public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_TODO = "Todo tasks list contains duplicate todo task(s).";
+    public static final String MESSAGE_DUPLICATE_REMINDER = "Reminders list contains duplicate reminder(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
 
     @XmlElement
     private List<XmlAdaptedTodo> todoTasks;
+
+    @XmlElement
+    private List<XmlAdaptedReminder> reminders;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -36,6 +41,7 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
         todoTasks = new ArrayList<>();
+        reminders = new ArrayList<>();
     }
 
     /**
@@ -45,6 +51,7 @@ public class XmlSerializableAddressBook {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         todoTasks.addAll(src.getTodoList().stream().map(XmlAdaptedTodo::new).collect(Collectors.toList()));
+        reminders.addAll(src.getReminderList().stream().map(XmlAdaptedReminder::new).collect(Collectors.toList()));
     }
 
     /**
@@ -79,6 +86,13 @@ public class XmlSerializableAddressBook {
             addressBook.addTodo(todoTask);
         }
 
+        for (XmlAdaptedReminder rm : reminders) {
+            Reminder reminder = rm.toModelType();
+            if (addressBook.hasReminder(reminder)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_REMINDER);
+            }
+        }
+
         return addressBook;
     }
 
@@ -92,6 +106,7 @@ public class XmlSerializableAddressBook {
             return false;
         }
         return persons.equals(((XmlSerializableAddressBook) other).persons)
-                && todoTasks.equals(((XmlSerializableAddressBook) other).todoTasks);
+                && todoTasks.equals(((XmlSerializableAddressBook) other).todoTasks)
+                && reminders.equals(((XmlSerializableAddressBook) other).reminders);
     }
 }
