@@ -35,13 +35,12 @@ public class ClassAddStudentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New student assigned to class: %1$s"
             + ", Class: %2$s"
             + ", Module code: %3$s";
-    private static final String MESSAGE_FAIL = "Class belonging to module not found!";
-
-    private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT = "This student already exists in class: %1$s";
-    private static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
-    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
-    private static final String MESSAGE_CLASSROOM_FULL = "The classroom is full!";
-    private static final String MESSAGE_INVALID_STUDENT_MODULE = "Student is not enrolled in module!";
+    public static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT = "This student already exists in class: %1$s";
+    public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
+    public static final String MESSAGE_FAIL = "Class belonging to module not found!";
+    public static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
+    public static final String MESSAGE_CLASSROOM_FULL = "The classroom is full!";
+    public static final String MESSAGE_INVALID_STUDENT_MODULE = "Student is not enrolled in module!";
 
     private Classroom classToAssignStudent;
     private final String className;
@@ -108,7 +107,9 @@ public class ClassAddStudentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ClassAddStudentCommand // instanceof handles nulls
-                && classToAssignStudent.equals(((ClassAddStudentCommand) other).classToAssignStudent));
+                && className.equals(((ClassAddStudentCommand) other).className)
+                && moduleCode.equals(((ClassAddStudentCommand) other).moduleCode)
+                && matricNo.equals(((ClassAddStudentCommand) other).matricNo));
 
     }
 }
