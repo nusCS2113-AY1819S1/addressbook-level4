@@ -87,14 +87,14 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     /**
-     * Loads a HTML file with variables passed into it
+     * Loads a HTML file with data from event passed into it
      */
     private void loadEventPage(Event event) {
         try {
             URL searchPage = new URL(formatEventPageUrl(event));
             loadPage(searchPage.toExternalForm());
         } catch (MalformedURLException mue) {
-
+            loadDefaultPage();
         }
     }
 
