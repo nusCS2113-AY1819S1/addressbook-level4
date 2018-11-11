@@ -72,12 +72,12 @@ public interface Model {
     /**
      * Returns true if the model has previous BookInventory states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoBookInventory();
 
     /**
      * Returns true if the model has undone BookInventory states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoBookInventory();
 
     /**
      * Restores the model's BookInventory to its previous state.

@@ -81,20 +81,20 @@ public class XmlBookInventoryStorageTest {
         XmlBookInventoryStorage xmlAddressBookStorage = new XmlBookInventoryStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
+        xmlAddressBookStorage.saveBookInventory(original, filePath);
         ReadOnlyBookInventory readBack = xmlAddressBookStorage.readBookInventory(filePath).get();
         assertEquals(original.toString(), new BookInventory(readBack).toString());
 
         //Modify data, overwrite exiting file, and read back
         original.addBook(HISTORY);
         original.removeBook(ART);
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
+        xmlAddressBookStorage.saveBookInventory(original, filePath);
         readBack = xmlAddressBookStorage.readBookInventory(filePath).get();
         assertEquals(original.toString(), new BookInventory(readBack).toString());
 
         //Save and read without specifying file path
         original.addBook(IT);
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
+        xmlAddressBookStorage.saveBookInventory(original); //file path not specified
         readBack = xmlAddressBookStorage.readBookInventory().get(); //file path not specified
         assertEquals(original.toString(), new BookInventory(readBack).toString());
     }
@@ -102,25 +102,25 @@ public class XmlBookInventoryStorageTest {
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(null, "SomeFile.xml");
+        saveBookInventory(null, "SomeFile.xml");
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code bookInventory} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyBookInventory addressBook, String filePath) {
+    private void saveBookInventory(ReadOnlyBookInventory bookInventory, String filePath) {
         try {
             new XmlBookInventoryStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveBookInventory(bookInventory, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveBookInventory_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(new BookInventory(), null);
+        saveBookInventory(new BookInventory(), null);
     }
 
 

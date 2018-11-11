@@ -64,23 +64,23 @@ public class XmlBookInventoryStorage implements BookInventoryStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyBookInventory addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveBookInventory(ReadOnlyBookInventory bookInventory) throws IOException {
+        saveBookInventory(bookInventory, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyBookInventory)}
+     * Similar to {@link #saveBookInventory(ReadOnlyBookInventory)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyBookInventory addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveBookInventory(ReadOnlyBookInventory bookInventory, Path filePath) throws IOException {
+        requireNonNull(bookInventory);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableBookInventory(addressBook));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableBookInventory(bookInventory));
     }
 
     public void backupInventoryBook(ReadOnlyBookInventory addressBook) throws IOException {
-        saveAddressBook(addressBook, backupFilePath);
+        saveBookInventory(addressBook, backupFilePath);
     }
 }
