@@ -31,14 +31,14 @@ each milestone specified by the user. Furthermore, this creates a sense of progr
 * *Minor enhancement*: Implemented a sort function for each task such that the *milestones for each task are
 sorted by their ranks*. The list of milestones will be displayed in the order that the user should go about doing, starting with the most important milestone(*Rank 1*) at the top.
 
-* *Code contributed*: [https://github.com/CS2113-AY1819S1-W13-3/main/blob/master/collated/functional/JeremyInElysium.md[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jeremyinelysium[Functional/Test code]]
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Modified the GUI for each task to include a list of the milestones for that particular task (Pull requests https://github.com[#33], https://github.com[#34])
+*** Modified the GUI for each task to include a list of the milestones for that particular task (Pull requests https://github.com/CS2113-AY1819S1-W13-3/main/pull/54[#54], https://github.com/CS2113-AY1819S1-W13-3/main/pull/97[#97])
 *** Wrote additional tests for existing features to increase coverage from XX% to XX% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
