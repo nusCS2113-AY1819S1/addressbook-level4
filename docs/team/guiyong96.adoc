@@ -33,12 +33,13 @@ BookInventory is a desktop application to assist store managers in managing thei
 ** Functionality:
 ** Justification:
 ** Credits:
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=guiyong96[Functional/Test code]] [https://github.com[Test code]]
 
 * Predictive text enabled for users.
 ** Functionality: Display a message to inform user if the system detects a spelling error.
 ** Justification:
 ** Credits:
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=guiyong96[Functional/Test code]] [https://github.com[Test code]]
 
 * *Other contributions*:
 
@@ -146,7 +147,7 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 To maximize user friendliness, we have implemented predictive text which will appear
 familiar for phone users. BookInventory users may inadvertently misspell command words,
 e.g. lis (Expected command: list). This will now prompt a GUI log stating, "Did you mean,
-list?". To achieve this, we have utilized the Dice Coefficient.
+list?" To achieve this, we have utilized the Dice Coefficient.
 
 ==== Design Considerations
 
