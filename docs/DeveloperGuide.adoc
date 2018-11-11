@@ -1956,6 +1956,10 @@ Activity where an individual engage in exchange of money, can comprise of income
 [[Resolution]] Resolution:
 Resolution refers to the number of pixels that are available in the screen. It determines how wide or tall a screen will look like.
 
+[[Appname]] App Name: (FinancialPlanner/Savee)
+Both FinancialPlanner and Savee refers to the app. Savee is the official name of the app when it is marketed for the users. FInancialPlanner
+is the name used when referring to the app in the developer guide and code.
+
 [appendix]
 == Product Survey
 
