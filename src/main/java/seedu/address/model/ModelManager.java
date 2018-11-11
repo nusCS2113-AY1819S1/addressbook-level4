@@ -191,9 +191,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void importPersonsFromAddressBook(Path importFilePath) throws IOException, DataConversionException {
         ImportManager importManager = new ImportManager(importFilePath);
-
-        // TODO: dont use null in orElse(), use orElseThrow()
-        ReadOnlyAddressBook addressBookImported = importManager.readAddressBook().orElse(null);
+        
+        ReadOnlyAddressBook addressBookImported = importManager.readAddressBook().orElseThrow(IOException::new);
         boolean hasChanged = addPersonsToAddressBook(addressBookImported);
 
         if (hasChanged) {
