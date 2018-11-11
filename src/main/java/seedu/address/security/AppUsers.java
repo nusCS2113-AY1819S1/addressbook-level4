@@ -13,7 +13,12 @@ public class AppUsers {
 
     public AppUsers() {
         this.accountCredentials = new ArrayList<>();
+        //Adding accounts when users.json is not found
         accountCredentials.add(new AccountCredential());
+        accountCredentials.add(new AccountCredential("NF", "test"));
+        accountCredentials.add(new AccountCredential("Ben", "test"));
+        accountCredentials.add(new AccountCredential("Jasper", "test"));
+        accountCredentials.add(new AccountCredential("Alexis", "test"));
     }
 
     public ArrayList<AccountCredential> getAccountCredentials() {
