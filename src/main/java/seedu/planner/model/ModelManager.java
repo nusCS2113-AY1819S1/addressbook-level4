@@ -64,7 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
         recordsInCurrentMonth.addListener((ListChangeListener<Record>) c -> {
             while (c.next()) {
                 if (c.wasPermutated()) {
-                    return;
+                    continue;
                 }
                 Month currentMonth = getCurrentMonth();
                 Predicate<Record> newPredicate = new DateIsWithinIntervalPredicate(
