@@ -16,13 +16,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
+import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -66,7 +66,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing DRINK I/O ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -96,6 +96,7 @@ public class MainApp extends Application {
     @Override
     public void stop() {
         saveUserPrefs ();
+        saveLoginInfo();
         Platform.exit();
         System.exit(0);
     }
@@ -263,14 +264,14 @@ public class MainApp extends Application {
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        stop();
+        stop ();
     }
     @Subscribe
     public void handleLogoutEvent(LogoutEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         hideCurrentWindow();
-        saveUserPrefs ();
         saveLoginInfo();
+        saveUserPrefs ();
         showLoginWindow();
     }
 
@@ -281,8 +282,7 @@ public class MainApp extends Application {
      *  Hide the current stage that is showing
      */
     private void hideCurrentWindow() {
-        Window currentStage = Stage.getWindows().filtered(window -> window.isShowing()).get (0);
-        currentStage.hide ();
+        EventsCenter.getInstance ().post (new StopUiEvent ());
     }
     /**
      *  Save UserPref into storage

@@ -12,7 +12,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.ViewTransactionsCommand;
@@ -73,6 +72,17 @@ public class AdminParser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        // ========== manager login related command===============//
+        case CreateAccountCommand.COMMAND_WORD:
+            return new CreateAccountCommandParser().parse(arguments);
+
+        case DeleteAccountCommand.COMMAND_WORD:
+            return new DeleteAccountCommandParser().parse(arguments);
+
         // ========= stock taker commands ==================
         case SellDrinkCommand.COMMAND_WORD:
             return new SellDrinkCommandParser().parse(arguments);
@@ -96,14 +106,6 @@ public class AdminParser {
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser().parse(arguments);
 
-
-        case CreateAccountCommand.COMMAND_WORD:
-            return new CreateAccountCommandParser().parse(arguments);
-
-
-        case DeleteAccountCommand.COMMAND_WORD:
-            return new DeleteAccountCommandParser().parse(arguments);
-
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
 
@@ -111,10 +113,6 @@ public class AdminParser {
         //=============general command==================//
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
-
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -124,9 +122,6 @@ public class AdminParser {
 
         case ViewTransactionsCommand.COMMAND_WORD:
             return new ViewTransactionsCommand();
-
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -138,5 +133,4 @@ public class AdminParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

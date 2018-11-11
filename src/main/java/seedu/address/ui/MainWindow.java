@@ -20,6 +20,7 @@ import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.InventoryPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.drink.Drink;
@@ -228,6 +229,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
+        raise (new StopUiEvent ());
         raise(new ExitAppRequestEvent());
     }
 

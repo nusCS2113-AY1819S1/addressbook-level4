@@ -1,0 +1,261 @@
+:product_name : Drink I/O
+= AddressBook Level 4 - User Guide
+:site-section: UserGuide
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:xrefstyle: ../full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: https://github.com/CS2113-AY1819S1-W12-4/main
+
+By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
+
+// Use sentence case for long titles e.g. "Updating item details". capitalise first letter if it is a short title ////
+
+
+== Introduction
+
+*[blue]#_Drink I/O_#* is a desktop application that helps you to manage your drink distribution company.
+You can use *[blue]#_Drink I/O_#* to keep track of your inventory, analyse your company�s sales performance and
+set reminders to help you purchase more goods should their stocks fall low.
+*[blue]#_Drink I/O_#* is optimised for Command Line Interface (CLI), allowing you to manage your store
+faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI
+
+This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the features you can
+access and the commands you can use. Choose a topic from the Table of Contents above to find answers,
+get instructions and learn to improve your workflow with Drink I/O.
+
+=== How to use this guide
+
+=== How to navigate Drink I/O's interface
+
+
+== Quick Start
+
+.  Ensure you have Java version `9` or later installed in your Computer.
+.  Download the latest `DrinkIO.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Refer to <<login>> to login the product.
++
+image::loginPic/login_page_main.PNG[width="800"]
++
+. After login in, the main window will appear as shown below.
+
++
+image::Ui.png[width="790"]
++
+.  Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Some example commands you can try: +
+<to be added>
+
+////
+* *`viewall`* : Shows a list of all the drinks stocked in the inventory, together with their prices.
+* **`add` **`Coca Cola, Green Tea [2]` : Adds a transaction of 1 Coca Cola and 2 Green Tea.
+* **`stock` **`Coca Cola 10` : Increases the stock quantity Coca Cola by 10 cans
+* *`exit`* : Exits the app
+////
+
+.  Refer to <<Features>> for details of each command.
+
+[[Features]]
+== Getting Started
+
+// tag::login[]
+[[login]]
+=== Logging in
+
+Upon entering starting up the application, you will be met by the login page below:
+
+image::loginPic/login_page_main.PNG[width="800"]
+
+To login, you can use either the CLI or GUI to input your `USERNAME` and `PASSWORD`.
+
+*GUI Login*
+
+. Enter your `USERNAME` and `PASSWORD` into the respective username and password fields
+
+. Click on the kbd:[LOGIN] button
+
+*CLI Login*
+
+. Enter your `USERNAME` and `PASSWORD` into the terminal in this format
+
+.. Format: `USERNAME` `PASSWORD`
+
+. Press the kbd:[ENTER] key
+
+
+[NOTE]
+====
+* User name and password are seperated with a single space when using CLI input
+* Both username and password are single words. No spaces are allowed in username or password.
+====
+[.example]
+====
+[example-title]#Examples for CLI input:#
+
+.Table List of user accounts at first launch or upon reset
+|===
+|user name |password |authentication level
+
+|accountant
+|123
+|ACCOUNTANT
+|===
+
+====
+[NOTE]
+====
+The example provided is a default login account for admins. This account is created only for testing purposes.
+====
+
+After successfully logging in, a confirmation message would be shown indicating your authentication level:
+
+image::loginPic/login_confirmation.PNG[width=""]
+
+
+=== Logging out
+Logging out of the application will bring you back to the login screen.
+
+. To log out, enter the following command into the command bar
+
+.. Command format: `logout`
+
+. Press the kbd:[ENTER] key
+
+//end::login[]
+//tag::account[]
+== Help
+Shows available commands with brief description of what can accountant do. +
+    Format: `help`
+== Managing Your {product_name} Account
+*[blue]#_Drink I/O_#* has a login feature. This ensure that every user has to have an account before using the application.
+Hence, it would increase the security of the application.
+
+=== Changing your password
+When you receive an account from manager, you want to change the password to increase security.
+Format: `changePassword o/[OLD_PASSWORD] n/[NEW_PASSWORD]`
+[.example]
+====
+[example-title]#Examples for changePassword:#
+
+* [example]#`changePassword o/123 n/1234`#
+
+If password changes is successful, a message will be shown:
+
+image::loginPic/password_change_successful.PNG[width="300"]
+====
+
+
+
+== Managing Transactions
+Buying and selling likely occurs frequently in your company. To manage the ins and outs of your drinks,
+you can record your sales and purchases of drinks into *[blue]#_Drink I/O_#*, and let *[blue]#_Drink I/O_#*
+handle the updating of the inventory for you in real-time.
+
+
+=== Viewing transactions
+You can view the transactions entered into *[blue]#_Drink I/O_#* to verify their accuracy.
+
+[TIP]
+====
+*_Summary_* +
+
+*Command format*:
+`viewTrans`
+====
+
+*Step by Step Instructions* +
+To view all transactions entered,
+
+. Enter `viewTrans` into the command box
+. Press kbd:[enter]
+
+You will see a list of transactions displayed in the results panel.
+
+
+== Analysing Sales Performance
+Having up-to-date figures on how much you are making is definitely an important statistic to
+gauge the health of your company. *[blue]#_Drink I/O_#* can crunch the numbers from your
+transactions for you, and present overall cost, revenue and profit, and
+individual drink's sales figures.
+// Add about bestselling drink
+
+=== Viewing overall cost, revenue and profit
+You can view the overall sales figures aggregated across all drinks.
+
+==== Viewing overall cost
+You can check the total costs incurred by your company. Let *[blue]#_Drink I/O_#*
+calculate the costs since the beginning of using *[blue]#_Drink I/O_#* for you.
+
+[TIP]
+====
+*_Summary_* +
+
+*Command format*:
+`analyseCosts`
+====
+
+*Step by Step Instructions* +
+To view the total costs incurred,
+
+. Enter `analyseCosts` into the command box
+
+. Press kbd:[enter]
+
+You should see a value displayed in the results panel.
+
+// insert picture
+
+==== Viewing overall revenue `[Coming in v1.4]`
+*[blue]#_Drink I/O_#* can calculate the total revenue your company has earned
+since the beginning of using *[blue]#_Drink I/O_#* for you.
+
+[TIP]
+====
+*_Summary_* +
+
+*Command format*:
+`analyseRevenue`
+====
+
+*Step by Step Instructions* +
+To view the total revenue earned,
+
+. Enter `analyseRevenue` into the command box
+
+. Press kbd:[enter]
+
+You should see a value displayed in the results panel.
+
+// insert picture
+
+==== Viewing overall profit `[Coming in v1.4]`
+*[blue]#_Drink I/O_#* can calculate the total profit your company has earned
+since the beginning of using *[blue]#_Drink I/O_#* for you.
+
+[TIP]
+====
+*_Summary_* +
+
+*Command format*:
+`analyseProfits`
+====
+
+*Step by Step Instructions* +
+To view the total profit earned,
+
+. Enter `analyseProfits` into the command box
+
+. Press kbd:[enter]
+
+You should see a value displayed in the results panel.

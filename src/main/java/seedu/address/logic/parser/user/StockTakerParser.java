@@ -51,10 +51,9 @@ public class StockTakerParser {
 
         switch (commandWord) {
 
-
+        //===========login command========================//
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser().parse(arguments);
-
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand ();
@@ -66,19 +65,20 @@ public class StockTakerParser {
         case BuyDrinkCommand.COMMAND_WORD:
             return new BuyDrinkCommandParser ().parse(arguments);
 
-        case ViewTransactionsCommand.COMMAND_WORD:
-            return new ViewTransactionsCommand();
 
         //============general commands==========================
 
         case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
+            return new SelectCommandParser ().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            return new FindCommandParser ().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ViewTransactionsCommand.COMMAND_WORD:
+            return new ViewTransactionsCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
