@@ -546,9 +546,11 @@ image::Update-sequenceDiagram.png[width="800"]
 [NOTE]
 The Event Status feature is supported by the `Status` and `DateTime` field in the `Event`. Events with `DateTime` fields before the current `Date` will assume the `COMPLETED Status`, whereas those with `DateTime` fields after the current `Date` will take on the `UPCOMING Status`. 
 
-The *ReminderCommand* checks for the following in each event: 
+The *ReminderCommand* checks for the following in each event:
+=====
 . `checkAttendeeKeywordsMatchEventAttendee` -- checks if the current user is registered as an attendee
 . `checkEventIsUpcoming` -- checks if the event is upcoming (happening in the next 24 hours)
+=====
 
 If the two conditions are satisfied, a `sendEventReminder` event containing the event's name and starting time is used to communicate with the `UiManager` to show an alert dialog using `Ui#showAlertDialogAndWait()` to display the event's information.
 
@@ -623,7 +625,7 @@ Step 4: The event list panel is reloaded and displays the newly added event in t
 // end::sorting[]
 
 // tag::findEnhancement[]
-=== Enhance current `find` command
+=== Enhance current find command
 ==== Current Implementation
 `find` command is used for better navigation. Therefore, it is enhanced to search for more properties in an Event. +
 
