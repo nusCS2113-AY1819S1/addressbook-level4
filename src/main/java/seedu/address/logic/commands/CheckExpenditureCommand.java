@@ -20,7 +20,8 @@ import seedu.address.model.expenditureinfo.Expenditure;
 
 
 /**
- * Lists all persons in the address book to the user.
+ * Check the total amount the user has spent in a specific period and
+ * generate a pie-chart to show all expenditures in this period.
  */
 public class CheckExpenditureCommand extends Command {
 
@@ -40,6 +41,9 @@ public class CheckExpenditureCommand extends Command {
     private final String date1;
     private final String date2;
 
+    /**
+     * Creates an CheckExpenditureCommand
+     */
 
     public CheckExpenditureCommand(String d1, String d2) {
         requireNonNull(d1);
@@ -125,6 +129,7 @@ public class CheckExpenditureCommand extends Command {
         }
 
 
+        //Generate the graph.
         JFreeChart chart = ChartFactory.createPieChart("My Expense During" + date1 + "to" + date2, dpd, true, true,
                 false);
         ChartFrame chartFrame = new ChartFrame("My Expense During" + date1 + "to" + date2, chart);

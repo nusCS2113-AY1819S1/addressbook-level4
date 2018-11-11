@@ -46,6 +46,7 @@ public class ExpenditureCard extends UiPart<Region> {
         date.setText(expenditure.getDate().addingDate);
         money.setText(expenditure.getMoney().addingMoney);
 
+        // change the color of each description
         description.setStyle("-fx-text-fill: #BC8F8F");
 
     }
