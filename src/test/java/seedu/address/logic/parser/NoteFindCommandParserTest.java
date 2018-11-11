@@ -22,7 +22,7 @@ import seedu.address.model.note.NoteManager;
  */
 public class NoteFindCommandParserTest {
 
-    private static NoteManager noteManager;
+    private static NoteManager noteManager = NoteManager.getInstance();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -32,8 +32,6 @@ public class NoteFindCommandParserTest {
     @Before
     public void setUp() {
         StorageController.enterTestMode();
-        NoteManager.initNoteManager();
-        noteManager = NoteManager.getInstance();
         noteManager.clearNotes();
         noteManager.saveNoteList();
     }

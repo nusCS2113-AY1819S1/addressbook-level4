@@ -77,8 +77,6 @@ public class MainApp extends Application {
         StudentManager sm = StudentManager.getInstance();
         sm.initializeModel(model);
 
-        NoteManager.initNoteManager();
-
         logic = new LogicManager(model);
 
         ui = new UiManager(logic, config, userPrefs);
