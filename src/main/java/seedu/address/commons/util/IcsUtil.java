@@ -36,10 +36,7 @@ import seedu.address.model.person.TimeTable;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
- * Utility functions for the reading and writing of {@code TimeTable} objects to disk as .ics file. (and vice versa)
- * Classes available for public access:
- * 1) readTimeTableFromFile (Path filePath)
- * 2) saveTimeTableToFile (TimeTable timeTable, Path filePath)
+ * Utility functions for the reading and writing of {@code TimeTable} objects from/to disk as .ics file.
  */
 public class IcsUtil {
     private static final Logger logger = LogsCenter.getLogger(IcsUtil.class);

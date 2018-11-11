@@ -82,6 +82,6 @@ public class IcsUtilTest {
 
         TimeTable expected = IcsUtil.getInstance().readTimeTableFromFile(TEMP_FILE, ZONE_ID);
 
-        assertEquals(expected, TYPICAL_TIMETABLE); //fails travis but not local
+        assertEquals(expected, TYPICAL_TIMETABLE);
     }
 }

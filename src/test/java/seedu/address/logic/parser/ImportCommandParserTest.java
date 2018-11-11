@@ -31,7 +31,7 @@ public class ImportCommandParserTest {
     }
 
     @Test
-    public void parse_validArgsForwardSlash_returnsImportCommand() {
+    public void parse_validArgsForwardSlash_failure() {
         String applicationPath = System.getProperty("user.dir");
         String userInput = "parent_folder/filename";
         String parentFolder = "parent_folder";
@@ -43,7 +43,7 @@ public class ImportCommandParserTest {
     }
 
     @Test
-    public void parse_validArgsBackwardSlash_returnsImportCommand() {
+    public void parse_validArgsBackwardSlash_failure() {
         String applicationPath = System.getProperty("user.dir");
         String userInput = "parent_folder\\filename";
         String parentFolder = "parent_folder";
