@@ -594,6 +594,7 @@ Aspect: What data is stored in search history stack +
     . Class is inextensible to store other objects other than those from a Person classes.
 // end::searchpruning[]
 // tag::asl[]
+
 === Add Skill Level Command
 
 ==== Current Implementation
@@ -650,6 +651,14 @@ information during addition of personal information.
 * Another is to enhance the edit command, possibly depreciating the use of the add skill level command.
 * Another is to enhance the storage such that multiple skills can be added per person.
 // end::asl[]
+
+=== Sort feature
+
+This feature was implemented by implementing custom comparators in
+`Person` class. They compare the values in each person and are used
+as arguments to `Collections.Sort`. 
+
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
