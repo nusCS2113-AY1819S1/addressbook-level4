@@ -27,7 +27,7 @@ public class EventContainsAttendeeAndDatePredicateTest {
     }
 
     @Test
-    public void test_attendeesContainNameAndEventMatchesDate_returnsTrue() {
+    public void test_attendeesContainEmailAndEventMatchesDate_returnsTrue() {
         EventContainsAttendeeAndDatePredicate predicate = new EventContainsAttendeeAndDatePredicate(
                 "alice@example.com", "2018-09-18", TimeType.DAY);
         //event with attendee size one
@@ -35,14 +35,14 @@ public class EventContainsAttendeeAndDatePredicateTest {
     }
 
     @Test
-    public void test_attendeesContainNameAndEventMatchesMonth_returnsTrue() {
+    public void test_attendeesContainEmailAndEventMatchesMonth_returnsTrue() {
         EventContainsAttendeeAndDatePredicate predicate = new EventContainsAttendeeAndDatePredicate(
                 "alice@example.com", "09", TimeType.MONTH);
         //event with attendee size one
         assertTrue(predicate.test(eventOne));
     }
     @Test
-    public void test_attendeesContainNameAndEventMatchesYear_returnsTrue() {
+    public void test_attendeesContainEmailAndEventMatchesYear_returnsTrue() {
         EventContainsAttendeeAndDatePredicate predicate = new EventContainsAttendeeAndDatePredicate(
                 "alice@example.com", "2018", TimeType.YEAR);
         //event with attendee size one
@@ -50,7 +50,7 @@ public class EventContainsAttendeeAndDatePredicateTest {
     }
 
     @Test
-    public void test_attendeesContainNameAndEventMatchesMonthAndYear_returnsTrue() {
+    public void test_attendeesContainEmailAndEventMatchesMonthAndYear_returnsTrue() {
         EventContainsAttendeeAndDatePredicate predicate = new EventContainsAttendeeAndDatePredicate(
                 "alice@example.com", "2018-09", TimeType.MONTH_AND_YEAR);
         //event with attendee size one

@@ -45,19 +45,15 @@ public class InviteCommandTest {
 
     private Event event1;
     private Event event2;
-    private Event event3;
 
     @Before
     public void setup() {
-        Set<String> set = new HashSet<>();
-        set.add(VALID_EMAIL_ALICE);
-
         event1 = new EventBuilder().build();
-        event2 = new EventBuilder().withAttendee(set).build();
+        event2 = new EventBuilder().withAttendee(VALID_EMAIL_ALICE).build();
     }
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIndicesUnfilteredList_success() {
         Person personChosen = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Event eventChosen = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
 
@@ -105,7 +101,7 @@ public class InviteCommandTest {
     }
 
     @Test
-    public void execute_personEventClashesWithEventList_throwsCommandException() {
+    public void execute_personScheduleClashesWithEventList_throwsCommandException() {
 
         Person personChosen = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Event eventChosen = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());

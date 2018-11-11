@@ -158,6 +158,7 @@ Note how the event is propagated through the `EventsCenter` to the `Storage` and
 
 The sections below give more details of each component.
 
+// tag::Ui[]
 [[Design-Ui]]
 === UI component
 
@@ -166,7 +167,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `EventListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -175,6 +176,7 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+// end::Ui[]
 
 [[Design-Logic]]
 === Logic component
@@ -186,7 +188,7 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `ProMangeParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -196,6 +198,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
+// tag::Model[]
 [[Design-Model]]
 === Model component
 
@@ -207,15 +210,17 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Address Book and Event List data.
+* exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
+// end::Model[]
 [NOTE]
 As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
+// tag::Storage[]
 [[Design-Storage]]
 === Storage component
 
@@ -227,8 +232,9 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Address Book and Event List data in xml format and read it back.
 
+// end::Storage[]
 [[Design-Commons]]
 === Common classes
 
@@ -239,6 +245,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 
+// tag::Sorting[]
 === Event Sorting
 
 ==== Current Implementation
@@ -264,7 +271,7 @@ image::SortSequenceDiagram.png[width="650"]
 ** Pros: Will use less memory.
 ** Cons: Unable to use undo function to revert back to the previous view.
 
-// end::Sorting[]
+
 
 
 // tag::Invite[]
@@ -959,82 +966,6 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-[discrete]
-=== Use case: Invite employees to events
-
-*MSS*
-
-1.  User requests to add employee to events.
-2.  ProManage request employee details and event details.
-3.  User enters employee and event information.
-4.  ProManage adds employee to events
-
-+
-Use case ends.
-
-*Extensions*
-
-* 3a. Invalid employee.
-** 3a1. AddressBook shows an error message.
-** Use case ends
-+
-* 3b. Employee is not originally invited to event.
-** 3b1. AddressBook shows an error message.
-** Use case ends
-+
-* 3c. Event has no attendees
-** 3c1. AddressBook shows an error message.
-** Use case ends
-
-[discrete]
-=== Use case: Remove employees from events
-
-*MSS*
-
-1.  User requests to remove employee from an event.
-2.  ProManage request employee details and event details.
-3.  User enters employee and event information.
-4.  ProManage remove employee from events
-
-+
-Use case ends.
-
-*Extensions*
-
-* 3a. Invalid employee.
-** 3a1. AddressBook shows an error message.
-** Use case ends
-+
-* 3b. Employee is already invited to event.
-** 3b1. AddressBook shows an error message.
-** Use case ends
-+
-* 3c. Event conflicts with employee's schedule
-** 3c1. AddressBook shows an error message.
-** Use case ends
-
-[discrete]
-=== Use case: View an employee's schedule on a date/month/year
-
-*MSS*
-
-1.  User requests to view an employee's schedule.
-2.  ProManage request employee details and date details.
-3.  User enters employee and date information.
-4.  ProManage remove employee from events
-
-+
-Use case ends.
-
-*Extensions*
-
-* 3a. Invalid employee.
-** 3a1. AddressBook shows an error message.
-** Use case ends
-+
-* 3b. Invalid date format
-** 3b1. AddressBook shows an error message.
-** Use case ends
 
 [discrete]
 === Use case: Sorting the event list based on the parameter given
@@ -1078,6 +1009,103 @@ _{More to be added}_
 
 [appendix]
 // end::usecases[]
+
+// tag::usecases_inviteremoveselect[]
+[discrete]
+=== Use case: Invite employees to events
+
+*Guarantee*:
+
+* The invite will not result in clash of events in the employee schedule
+
+*MSS*
+
+1.  User requests to add employee to events.
+2.  ProManage request employee details and event details.
+3.  User enters employee and event information.
+4.  ProManage adds employee to events
+
++
+Use case ends.
+
+
+*Extensions*
+
+* 3a. Invalid employee.
+** 3a1. AddressBook shows an error message.
+** Use case ends
++
+* 3b. Invalid event.
+** 3b1. ProManage shows an error message.
+** Use case ends
++
+* 3c. Employee is already invited to event.
+** 3c1. AddressBook shows an error message.
+** Use case ends
++
+* 3d. Event conflicts with employee's schedule
+** 3d1. AddressBook shows an error message.
+** Use case ends
+
+
+[discrete]
+=== Use case: Remove employees from events
+
+*Precondition*: User must be of manager or default privilege
+
+*MSS*
+
+1.  User requests to remove employee from an event.
+2.  ProManage request employee details and event details.
+3.  User enters employee and event information.
+4.  ProManage remove employee from events
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Invalid employee.
+** 3a1. ProManage shows an error message.
+** Use case ends
++
+* 3b. Invalid event.
+** 3b1. ProManage shows an error message.
+** Use case ends
++
+* 3c. Event has no attendees
+** 3c1. ProManage shows an error message.
+** Use case ends
++
+* 3d. Employee is not originally invited to event.
+** 3d1. ProManage shows an error message.
+** Use case ends
+
+
+[discrete]
+=== Use case: View an employee's schedule on a date/month/year
+
+*MSS*
+
+1.  User requests to view an employee's schedule.
+2.  ProManage request employee details and date details.
+3.  User enters employee and date information.
+4.  ProManage remove employee from events
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Invalid employee.
+** 3a1. AddressBook shows an error message.
+** Use case ends
++
+* 3b. Invalid date format
+** 3b1. AddressBook shows an error message.
+** Use case ends
+
+// end::usecases_inviteremoveselect[]
 
 
 // tag::nonfunctionalrequirements[]

@@ -28,7 +28,7 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.testutil.EventBuilder;
 
 /**
- * Based on UniquePersonListTest with minor modification and refactoring
+ * Based on UniquePersonListTest with refactoring and additional tests for created Event methods
  */
 public class UniqueEventListTest {
     @Rule
@@ -270,6 +270,24 @@ public class UniqueEventListTest {
         uniqueEventList.add(EVENT_1);
         uniqueEventList.add(EVENT_3);
         assertFalse(uniqueEventList.hasClash(EVENT_4, VALID_EMAIL_ALICE));
+    }
+
+    @Test
+    public void hasClashAfterEdit_nullFirstEvent_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueEventList.hasClashAfterEdit(null, EVENT_1, VALID_EMAIL_ALICE);
+    }
+
+    @Test
+    public void hasClashAfterEdit_nullSecondEvent_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueEventList.hasClashAfterEdit(EVENT_1, null, VALID_EMAIL_ALICE);
+    }
+
+    @Test
+    public void hasClashAfterEdit_nullEmail_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueEventList.hasClashAfterEdit(EVENT_1, EVENT_2, null);
     }
 
     @Test

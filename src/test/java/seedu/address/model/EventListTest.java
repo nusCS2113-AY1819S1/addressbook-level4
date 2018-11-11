@@ -117,7 +117,7 @@ public class EventListTest {
     }
 
     @Test
-    public void hasClash_nullPersonName_throwsNullPointerException() {
+    public void hasClash_nullPersonEmail_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         eventList.hasClash(EVENT_1, null);
     }
