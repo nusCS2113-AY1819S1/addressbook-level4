@@ -12,7 +12,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-T16-1/main/tree/master
 
 By: `T16-1`      Since: `Aug 2018`      Licence: `MIT`
 
@@ -205,19 +205,27 @@ image::GradebookDeleteSDForLogic.png[width="800"]
 .Structure of the Model Component
 image::ModelClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+*API* : +
+link:{repoURL}/src/main/java/seedu/address/model/course/CourseManager.java[`CourseManager.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/module/ModuleManager.java[`ModuleManager.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/classroom/ClassroomManager.java[`ClassroomManager.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/gradebook/GradebookManager.java[`GradebookManager.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/grades/GradesManager.java[`GradesManager.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/note/NoteManager.java[`NoteManager.java`]
 
-The `Model`,
+The `Model` component is the memory of Trajectory.
 
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+It consists of several Manager classes which handles their respective dataset.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
+The responsibilities of the `Model` component are as follows:
+
+* temporarily holds the user's data for the duration that the application is running.
+* manages in-memory data changes due to user commands.
+* interacts with the `Storage` component for permanent storage of data to a local storage (e.g. PC's hard drive).
+* exposes a viewable list of data that can be 'observed' by the user. e.g. the UI can render an HTML page that displays the desired information through this list.
+
+Within the `Model` component, there are some information dependencies among the different Model Manager classes as shown in Figure 8. Hence, it should be noted that it is not possible to create a data before its parent data due to its hierarchical structure.
 
 [[Design-Storage]]
 === Storage component
