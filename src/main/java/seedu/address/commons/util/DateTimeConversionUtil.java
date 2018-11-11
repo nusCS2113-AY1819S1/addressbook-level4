@@ -18,15 +18,13 @@ import java.util.Date;
  * 1) convert from {@code LocalDateTime} to {@code Date} (and vice versa)
  * 2) convert from ics-formatted-date-String to {@code DayOfWeek}.
  * 3) convert from ics-formatted-time-String to a {@code LocalTime}.
- *
- * Currently timezone for all conversions is assumed to be at +8GMT (Singapore) for simple implementation;
  */
 public class DateTimeConversionUtil {
     private static DateTimeConversionUtil instance;
     private static ZoneId localZoneId;
 
     private DateTimeConversionUtil() {
-        localZoneId = ZoneId.of("Asia/Shanghai");
+        localZoneId = ZoneId.systemDefault();
     }
 
     public static DateTimeConversionUtil getInstance() {
