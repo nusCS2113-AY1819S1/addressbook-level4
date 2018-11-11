@@ -2295,6 +2295,38 @@ Multiple groups in the group list. Student being added to group must *NOT* alrea
 .. Other incorrect select group commands to try: `sg`, `sg x` (where x is larger than the group list size and not an integer) +
    Expected: Similar to previous.
 
+=== Distributing all students into _n_ Groups
+
+. Distributing all students into _n_ Groups
+
+.. Prerequisites:
+... Multiple Students in the Management System.
+... _n_ Groups specified to be created must be less than total number of Students in the Management System.
+
+.. Test case: `distinto 3 n/CS2113-T01- g/0 nat/0` +
+   Expected: The Group list panel will shown an addition of 3 Groups. Students will be allocated into the Groups and will be shown when User clicks onto the
+   selected group. All Students in the management system will be randomly distributed into these 3 groups.
+
+.. Test case: `distinto 3 n/CS2113-T01- g/1 nat/0` +
+   Expected: Results will be similar to Test Case b. However, each group is observed to have a balanced number of gender now.
+   Running this command with the default data will result in 1 group having 7 Female students and 2 groups having 6 Female students.
+
+.. Test case: `distinto 3 n/CS2113-T02- g/0 nat/1` +
+   Expected: Results will be similar to Test Case b. However, each group is observed to have a balanced number of different nationalities now.
+   Running this command with the default data will result in 1 group having 8 Singaporean students and 2 groups having 7 Singaporean student.
+
+.. Test case: `distinto 3 n/CS2113-T03- g/1 nat/1` +
+   Expected: An error message will be shown. `Currently under development. Stay tuned in v2.0`
+
+.. Test case: `distinto 3 n/CS2113-T04- g/false nat/false` +
+   Expected: Results will be the same as Test Case b. +
+   The Group list panel will shown an addition of 3 Groups. Students will be allocated into the Groups and will be shown when User clicks onto the
+   selected group. All Students in the management system will be randomly distributed into these 3 groups.
+
+
+.. Other incorrect distribute commands to try: `di 0 n/CS2113-T05-`, `di -3 n/CS2113-T04-` (where _n_ is less than total number of students int the Management system) +
+   Expected: Returns a Invalid Command Format, followed by instructions.
+
 === Run Script Commands
 
 . Run SampleScriptFile
