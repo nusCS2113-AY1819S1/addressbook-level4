@@ -560,13 +560,21 @@ The following sequence diagram shows how the ReminderCommand works:
 image::Reminder-sequenceDiagram.png[width="800"]
 
 ==== Design Considerations
-===== Aspect: Automated or user-enabled commands
+===== Aspect: To automate the commands or make them user-enabled
 * **Alternative 1 (current choice):** Status updates and reminders automated using `Timer`.
 ** Pros: Takes the updating and checking tasks off users. Less reliance on users' end also means that updates and reminders are executed more regularly.
 ** Cons: Uses up more processing resources.
 * **Alternative 2:** Users have to run status updates and reminders checking.
 ** Pros: Ensures that the updated status or reminders are provided to users when they want it.
 ** Cons: Users may be looking at very outdated statuses and will not receive reminders if they forget to check for it.
+
+===== Aspect: How to automate the updates/checks
+* **Alternative 1 (current choice):** Status updates and reminder checks called using `Timer`.
+** Pros: A more reliable way to update the status and check for reminders.
+** Cons: More complexity added to the codes and timers use up more processing resources.
+* **Alternative 2:** Status updates and reminders called after each command given by the user.
+** Pros: Easier implementation by calling the status update or reminder check after every user command.
+** Cons: Less reliable and less effective method of updating since the statuses will not be updated if the user does not execute any commands.
 
 ===== Aspect: Where to implement the update and reminder command
 * **Alternative 1 (current choice):** Both features are subclass of the `Command` superclass.
