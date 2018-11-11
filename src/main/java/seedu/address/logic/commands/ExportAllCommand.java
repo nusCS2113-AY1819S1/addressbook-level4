@@ -17,9 +17,11 @@ public class ExportAllCommand extends Command {
 
     public static final String COMMAND_WORD = "exportall";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports all the persons in the address book"
-            + "\nParameters: FILETYPE (must be either \"csv\" or \"vcf\") "
-            + "\nExample: " + COMMAND_WORD + " csv ";
+    public static final String COMMAND_PARAMETERS = "Parameters: FILETYPE (must be either \"csv\" or \"vcf\")\n";
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " csv";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports all the persons in the address book.\n"
+        + COMMAND_PARAMETERS
+        + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_ARGUMENTS = "Filetype: %1$s";
     public static final String MESSAGE_SUCCESS = "Exported all contacts.";

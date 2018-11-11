@@ -17,6 +17,8 @@ public class AddressBookChangedEvent extends BaseEvent {
         return "number of persons "
                 + data.getPersonList().size()
                 + ", number of your todo tasks "
-                + data.getTodoList().size();
+                + data.getTodoList().size()
+                + ", number of your reminders "
+                + data.getReminderList().size();
     }
 }

@@ -8,6 +8,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportAllCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
@@ -24,6 +25,9 @@ import seedu.address.logic.commands.UndoCommand;
  * Checks whether input is valid in the commands after each key press
  */
 public class InputCommandSuggestion {
+    public static final String NO_REQUIRED_PARAMETERS = "This command does not require any parameters.\n";
+    public static final String INVALID_COMMAND_PARAMETERS = "There are no available parameters!\n";
+
     private static Trie commandList;
     private static int wrongCharOverflow = 0;
 
@@ -104,12 +108,59 @@ public class InputCommandSuggestion {
 
     /**
      * Gets a list of suggested commands
-     * TODO: chop off input after whitespace
      * @param userInput the current string to check for suggested commands
      * @return ArrayList of possible commands
      */
     public ArrayList<String> getSuggestedCommands(String userInput) {
         String command = userInput.split(" ")[0];
         return commandList.getListOfWords(command);
+    }
+
+    /**
+     * Gets the respective command parameters from input command.
+     * @param command the command to get parameters
+     * @return command parameters
+     */
+    public String getCommandParameters(String command) {
+        switch (command) {
+        case AddCommand.COMMAND_WORD:
+            return AddCommand.COMMAND_PARAMETERS;
+
+        case DeleteCommand.COMMAND_WORD:
+            return DeleteCommand.COMMAND_PARAMETERS;
+
+        case EditCommand.COMMAND_WORD:
+            return EditCommand.COMMAND_PARAMETERS;
+
+        case ExportAllCommand.COMMAND_WORD:
+            return ExportAllCommand.COMMAND_PARAMETERS;
+
+        case ExportCommand.COMMAND_WORD:
+            return ExportCommand.COMMAND_PARAMETERS;
+
+        case FindCommand.COMMAND_WORD:
+            return FindCommand.COMMAND_PARAMETERS;
+
+        case ScheduleCommand.COMMAND_WORD:
+            return ScheduleCommand.COMMAND_PARAMETERS;
+
+        case SelectCommand.COMMAND_WORD:
+            return SelectCommand.COMMAND_PARAMETERS;
+
+        case TodoCommand.COMMAND_WORD:
+            return TodoCommand.COMMAND_PARAMETERS;
+
+        case ClearCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_WORD:
+        case HistoryCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD:
+        case RedoCommand.COMMAND_WORD:
+        case UndoCommand.COMMAND_WORD:
+            return NO_REQUIRED_PARAMETERS;
+
+        default:
+            return INVALID_COMMAND_PARAMETERS;
+        }
     }
 }

@@ -1,0 +1,112 @@
+
+= Lim Jit Wei - Project Portfolio
+
+:site-section: AboutUs
+:imagesDir: ../images/jitwei98.png
+:stylesDir: ../stylesheets
+
+// image::../jitwei98.png[width="150", align="left"]
+
+// TODO: one line description of the product
+== PROJECT: https://github.com/CS2113-AY1819S1-W12-1/main[JitHub]
+
+// TODO: include UI screenshot here
+image::../Ui.png[width="600"]
+---
+
+== Introduction
+
+This portfolio documents my contribution to this group project for the module https://nusmods.com/modules/CS2113T/software-engineering-object-oriented-programming[*CS2113T Software Engineering & Object-Oriented Programming*]
+ taught in the National University of Singapore and showcases my ability to *contribute production quality software engineering work to a small/medium software project*, and the ability to *work in a team of 5*.
+
+
+We are required to enhance https://github.com/se-edu/addressbook-level4[a Java sample AddressBook application] with
+6kLoc(lines of code) while following software engineering principles taught in the module.
+
+=== Product Overview
+Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_interface[CLI (Command Line Interface)] desktop application that *helps students manage group project meetings* through cross-checking the timetables of their group mates.
+
+*JitHub* can:
+
+** Suggest available timeslot for  group project meetings
+** Import/Export data between group members
+** Keep track of meeting minutes
+** Keep track of tasks assigned to group members
+
+// TODO: add more stuff here
+
+
+== Summary of contributions
+
+// TODO: add file format supported in appendix?
+// TODO: add preface?
+// TODO: how many LOC?
+* *Major enhancement*: added the ability to *import/export data of different project groups*
+
+** What it does: allows students to share data specific to different projects among his/her group members.
+
+** Justification: This feature improves the product significantly because only one member from the group is required to key in all the details, in contrast to requiring everyone in the team to type in the exact same details, which is tedious and inefficient.
+// TODO: edit this part
+** Highlights: This enhancement required an in-depth analysis of design alternatives regarding reading and writing data. The implementation too was challenging as it required thorough understanding of all the components related to data storage in the application.
+** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+// TODO: end
+// TODO: add screenshot here
+* *Minor enhancement*: added an UI enhancement that *displays the total number of persons* in the application and the ability for the application to *backup the storage file* locally.
+
+// TODO: edit this part
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed milestones `v1.1` - `v1.4` (3 milestones) on GitHub
+** Enhancements to existing features:
+// TODO: edit the following line
+*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+// end edit
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-W12-1/main/pull/4[#4], https://github.com/CS2113-AY1819S1-W12-1/main/pull/27[#27], https://github.com/CS2113-AY1819S1-W12-1/main/pull/29[#29], https://github.com/CS2113-AY1819S1-W12-1/main/pull/73[#73]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W13-2/main[1], https://github.com/CS2113-AY1819S1-W12-4/main[2], https://github.com/CS2113-AY1819S1-T12-3/main[3])
+
+** Tools:
+*** Integrated a third party library (OpenCSV) to the project (https://github.com/CS2113-AY1819S1-W12-1/main/pull/62[#62])
+*** Integrated Github plugins (TravisCI and Coveralls) to the team repo
+
+== Contributions to the User Guide
+
+
+|===
+|Given below are sections I contributed to the User Guide.
+
+ _They showcase my ability to **write documentation targeting end-users.**_
+|===
+
+//include::../UserGuide.adoc[tag=undoredo]
+//
+//include::../UserGuide.adoc[tag=dataencryption]
+
+== Contributions to the Developer Guide
+
+|===
+|Given below are sections I contributed to the Developer Guide.
+
+_They showcase my ability to **write technical documentation and the technical depth of my contributions to the
+project.**_
+|===
+
+//include::../DeveloperGuide.adoc[tag=undoredo]
+//
+//include::../DeveloperGuide.adoc[tag=dataencryption]
+//TODO: end edit
+
+// TODO: include links
+== PROJECT: AnimatedEpp
+// TODO: include descriptions here
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_
+

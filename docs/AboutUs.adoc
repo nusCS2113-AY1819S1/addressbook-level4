@@ -22,7 +22,7 @@ Responsibilities: Deliverables and deadlines +
 === Bao Linruo
 image::linnnruoo.png[width="150", align="left"]
 {empty}[https://github.com/linnnruoo[github]]
-[<<baolinruo#, portfolio>>]
+[<<linruo#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Integration + Testing +
@@ -52,7 +52,7 @@ Responsibilities: Scheduling and tracking +
 === Low Jun Wei
 image::junweiljw.png[width="150", align="left"]
 {empty}[https://github.com/junweiljw[github]]
-[<<lowjunwei#, portfolio>>]
+{empty}[https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/docs/team/JunWei.adoc[portfolio]]
 
 Role: Developer +
 Responsibilities: Documentation +

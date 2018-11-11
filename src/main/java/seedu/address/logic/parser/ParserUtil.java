@@ -21,6 +21,10 @@ import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Content;
 import seedu.address.model.todo.Title;
+//import seedu.address.model.reminder.Title;
+import seedu.address.model.reminder.Date;
+//import seedu.address.model.reminder.Time;
+import seedu.address.model.reminder.Agenda;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -205,6 +209,21 @@ public class ParserUtil {
             throw new ParseException(Time.MESSAGE_TIME_CONSTRAINTS);
         }
         return new Time(trimmedTime);
+    }
+
+    /**
+     * Parses a {@code String agenda} into a {@code Agenda}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code agenda} is invalid.
+     */
+    public static Agenda parseAgenda(String agenda) throws ParseException {
+        requireNonNull(agenda);
+        String trimmedAgenda = agenda.trim();
+        if (!Agenda.isValidAgenda(trimmedAgenda)) {
+            throw new ParseException(Agenda.MESSAGE_AGENDA_CONSTRAINTS);
+        }
+        return new Agenda(trimmedAgenda);
     }
 
     /**

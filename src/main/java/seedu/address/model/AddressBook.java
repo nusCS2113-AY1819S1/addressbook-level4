@@ -12,6 +12,8 @@ import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
 import seedu.address.model.todo.UniqueTodoList;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.UniqueReminderList;
 
 /**
  * Wraps all data at the address-book level
@@ -21,6 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueTodoList todos;
+    private final UniqueReminderList reminders;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -32,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         todos = new UniqueTodoList();
+        reminders = new UniqueReminderList();
     }
 
     public AddressBook() {}
@@ -62,6 +66,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setTodos(newData.getTodoList());
+        setReminders(newData.getReminderList());
     }
 
     //// person-level operations
@@ -185,5 +190,34 @@ public class AddressBook implements ReadOnlyAddressBook {
         return todos.asUnmodifiableObservableList();
     }
 
+    //=========== Reminders =============================================================
 
+    //@@author junweiljw
+    /**
+     * Replaces the contents of the reminder list with {@code reminders}.
+     * {@code reminders} must not contain duplicate reminders.
+     */
+    public void setReminders(List<Reminder> reminders) {
+        this.reminders.setReminders(reminders);
+    }
+
+    /**
+     * Returns true if a reminder with the same identity as {@code reminder} exists in the address book.
+     */
+    public boolean hasReminder(Reminder reminder) {
+        requireNonNull(reminder);
+        return reminders.contains(reminder);
+    }
+
+    /**
+     * Adds a reminder to the address book.
+     * The reminder must not already exist in the address book.
+     */
+    public void addReminder(Reminder rm) { reminders.add(rm);
+    }
+
+    @Override
+    public ObservableList<Reminder> getReminderList() {
+        return reminders.asUnmodifiableObservableList();
+    }
 }

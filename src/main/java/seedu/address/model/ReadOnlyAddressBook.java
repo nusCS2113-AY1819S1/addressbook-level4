@@ -3,6 +3,7 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.todo.Todo;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Unmodifiable view of an address book
@@ -20,4 +21,10 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate todo tasks.
      */
     ObservableList<Todo> getTodoList();
+
+    /**
+     * Returns an unmodifiable view of the reminders list.
+     * This list will not contain any duplicate reminders.
+     */
+    ObservableList<Reminder> getReminderList();
 }

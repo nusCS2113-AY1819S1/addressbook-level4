@@ -9,6 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.todo.Todo;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * A utility class for test cases.
@@ -60,5 +61,12 @@ public class TestUtil {
      */
     public static Todo getTodo(Model model, Index index) {
         return model.getFilteredTodoList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns the reminder in the {@code model}'s reminder list at {@code index}.
+     */
+    public static Reminder getReminder(Model model, Index index) {
+        return model.getFilteredReminderList().get(index.getZeroBased());
     }
 }
