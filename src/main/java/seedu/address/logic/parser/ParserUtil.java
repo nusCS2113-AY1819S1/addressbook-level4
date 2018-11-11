@@ -86,7 +86,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> indices} into a {@code Set<Index>}.
+     * Parses {@code indices} into a {@code indexSet} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param indices Indexes to be parsed.
+     * @return Indexes parsed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Set<Index> parseIndices(Collection<String> indices) throws ParseException {
         requireNonNull(indices);
@@ -199,10 +204,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String groupName} into a {@code GroupName}.
+     * Parses a {@code groupName} into a {@code GroupName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code GroupName} is invalid.
+     * @param groupName Name of group.
+     * @return GroupName.
+     * @throws ParseException if the given {@code groupName} is invalid.
      */
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
@@ -214,10 +221,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String groupLocation} into a {@code GroupLocation}.
+     * Parses a {@code groupLocation} into a {@code GroupLocation}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code GroupLocation} is invalid.
+     * @param groupLocation Location of group.
+     * @return GroupLocation.
+     * @throws ParseException if the given {@code groupLocation} is invalid.
      */
     public static GroupLocation parseGroupLocation(String groupLocation) throws ParseException {
         requireNonNull(groupLocation);

@@ -10,11 +10,15 @@ import seedu.address.model.person.Person;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons and groups list.
-     * This list will not contain any duplicate persons or groups.
+     * Returns an unmodifiable view of the persons.
+     * This list will not contain any duplicate persons.
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns an unmodifiable view of the groups.
+     * This list will not contain any duplicate groups.
+     */
     ObservableList<Group> getGroupList();
 
 }

@@ -42,8 +42,8 @@ public class EmailCommandParser implements Parser<EmailCommand> {
         }
         boolean isGroupCommand = isGroup(args);
         boolean isMultipleIndex = isMultipleIndex(argMultimap.getPreamble());
-        Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
-        Message message = ParserUtil.parseMessage(argMultimap.getValue(PREFIX_MESSAGE).get());
+        Subject subject = ParserUtil.parseSubject(argMultimap.getFirstValue(PREFIX_SUBJECT).get());
+        Message message = ParserUtil.parseMessage(argMultimap.getFirstValue(PREFIX_MESSAGE).get());
 
         if (!isMultipleIndex && !isGroupCommand) {
             Index index;

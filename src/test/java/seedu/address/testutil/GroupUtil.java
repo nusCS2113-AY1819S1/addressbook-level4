@@ -8,11 +8,14 @@ import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.model.group.Group;
 
 /**
- * A utility class for Person.
+ * A utility class for Group.
  */
 public class GroupUtil {
     /**
-     * Returns an sreate group command string for adding the {@code group}.
+     * Returns an create group command string for adding the {@code group}.
+     *
+     * @param group Group to add.
+     * @return Create group command string.
      */
     public static String getCreateGroupCommand(Group group) {
         return CreateGroupCommand.COMMAND_WORD + " " + getGroupDetails(group);
@@ -20,6 +23,9 @@ public class GroupUtil {
 
     /**
      * Returns the part of command string for the given {@code group}'s details.
+     *
+     * @param group Group to get details from.
+     * @return Command string with group details.
      */
     public static String getGroupDetails(Group group) {
         StringBuilder sb = new StringBuilder();

@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.PersonTest;
 import seedu.address.model.grade.Test;
@@ -16,7 +17,8 @@ public class StandardDeviation {
     /**
      * calculate the Standard Deviation values of student's scores.
      */
-    public static double calculateStandardDeviation(ObservableList<Person> personList, String testName) {
+    public static double calculateStandardDeviation(ObservableList<Person> personList,
+                                                    String testName) throws CommandException {
         PersonTest student;
         String name1;
         String testName1;

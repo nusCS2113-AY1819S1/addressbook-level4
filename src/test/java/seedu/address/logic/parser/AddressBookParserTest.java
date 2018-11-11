@@ -72,10 +72,6 @@ public class AddressBookParserTest {
         assertEquals(new AddCommand(person), command);
     }
 
-    /**
-     * Command to create a group
-     * @throws Exception
-     */
     @Test
     public void parseCommand_group() throws Exception {
         Group group = new GroupBuilder().build();
@@ -83,10 +79,6 @@ public class AddressBookParserTest {
         assertEquals(new CreateGroupCommand(group), command);
     }
 
-    /**
-     * Command to add persons to a group
-     * @throws Exception
-     */
     @Test
     public void parseCommand_addGroup() throws Exception {
         AddGroupCommand command = (AddGroupCommand) parser.parseCommand(AddGroupCommand.COMMAND_WORD + " "
@@ -97,10 +89,6 @@ public class AddressBookParserTest {
         assertEquals(new AddGroupCommand(getAddGroup1()), command);
     }
 
-    /**
-     * Command to delete a group
-     * @throws Exception
-     */
     @Test
     public void parseCommand_deleteGroup() throws Exception {
         DeleteGroupCommand command = (DeleteGroupCommand) parser.parseCommand(
@@ -108,10 +96,6 @@ public class AddressBookParserTest {
         assertEquals(new DeleteGroupCommand(INDEX_FIRST_GROUP), command);
     }
 
-    /**
-     * Command to delete a person from a group
-     * @throws Exception
-     */
     @Test
     public void parseCommand_deleteGroupPerson() throws Exception {
         DeleteGroupPersonCommand command = (DeleteGroupPersonCommand) parser.parseCommand(
@@ -123,10 +107,6 @@ public class AddressBookParserTest {
         assertEquals(new DeleteGroupPersonCommand(INDEX_FIRST_GROUP, INDEX_FIRST_PERSON), command);
     }
 
-    /**
-     * Command to list all groups
-     * @throws Exception
-     */
     @Test
     public void parseCommand_listGroup() throws Exception {
         assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD) instanceof ListGroupCommand);

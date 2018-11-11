@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.grade.PersonTest;
 import seedu.address.model.person.Person;
 /**
@@ -12,7 +13,7 @@ public class Lowest {
     /**
      * this is the method to find lowest scores in certain test in GradeSummaryCommand
      */
-    public double findLowest(ObservableList<Person> personList, String testName) {
+    public double findLowest(ObservableList<Person> personList, String testName) throws CommandException {
         double minimum = 0;
         ArrayList<PersonTest> list = SortMarks.sortingFromLowestToHighest(personList, testName);
 

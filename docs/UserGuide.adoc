@@ -18,29 +18,26 @@ By: `Team T13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-*Student Management System (SMS)* is a desktop application which uses CLI for its interactions.
-SMS allows university lectures to easily organise and manage their students and classes by allowing the lectures to easily import student lists given by their department.
-SMS also provides neat features such as distributing students into groups, sending emails to them and assigning test grades,
-SMS makes being a university lecturer more convenient!
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+*Student Management System (SMS)* is a desktop application which uses a CLI for its interactions.
+SMS is targeted mainly at university lectures as it allows them to easily organise and manage their students and classes with a variety of newly implemented group features such as creating of groups, adding students to groups etc.
+SMS removes the task of manually distributing students equally with the ability to distribute students automatically based on a specified criteria.
+SMS allows lecturers to make quick responses by sending emails to groups of students.
+SMS also provides other neat features such as assigning test grades to students.
+Lecturers can further automate some of these processes by importing student data given by their departments.
+SMS makes being a university lecturer more convenient! +
+Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `Student.Management.System.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Copy the file to the folder you want to use as the home folder for your SMS.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
-
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
 
 . Please kindly refer to <<ScriptSetup Function>> to understand on how to setup the `Student Management System` to use the `scripts` function properly
 
@@ -59,16 +56,24 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 // tag::group[]
 === Creating a group: `creategroup` `cg`
-Creates a group in the student management system +
+Creates a group in the student management system. +
 Format: `creategroup n/NAME l/LOCATION [t/TAG] ...`  +
 Shortcut Format: `cg n/NAME l/LOCATION [t/TAG] ...` +
 ****
-* Creates a group with the specified NAME, LOCATION and TAG(s)
-* NAME *should only contain alphanumeric characters, '-', '[' and ']', and should not be blank*
-* LOCATION *should only contain alphanumeric characters and '-', and should not be blank*
-* TAG(s) are optional and *should only contain alphanumeric characters* if used
-* TAG(s) *should not be blank* if used
-* This command is undoable
+* Creates a group with the specified *NAME*, *LOCATION* and *TAG(s)*.
+* *NAME* should only contain *alphanumeric characters*, *'-'*, *'['* and *']'*, and should *not* be blank.
+* If multiple valid/invalid group names are given (e.g. _n/TUT[1] n/TUT[2]_), only the *last* group name will be taken and validated.
+* *LOCATION* should only contain *alphanumeric characters* and *'-'*, and should *not* be blank.
+* If multiple valid/invalid group locations are given (e.g. _l/LT15 l/LT27_), only the *last* group location will be taken and validated.
+* *TAG(s)* are optional and should only contain *alphanumeric characters* if used.
+* *TAG(s)* should *not* be blank if used.
+* All *TAG(s)* given will be taken and validated.
+* The system detects duplicates and will only add the tag to the group once in the event of duplicates in a command (e.g. _t/maths t/maths_).
+* The group identity fields need *not* be in order (e.g. _cg l/LOCATION n/NAME [t/TAG] ..._ is also accepted).
+However, there can only be one command word (e.g. _creategroup_) and it must always be before any other field else an *unknown command* message will be produced.
+* Groups created must be unique (i.e. there cannot be 2 groups with exactly the same *NAME*, *LOCATION* and *TAG(s)*).
+* Leading/trailing spaces between *creategroup*, *cg*, *n/NAME*, *l/LOCATION* and *[t/TAG]* will not affect the validity of command and will be trimmed.
+* This command *is* undoable.
 ****
 
 Examples:
@@ -78,16 +83,19 @@ Examples:
 
 === Selecting a group : `selectgroup` `sg`
 
-Selects the group identified by the index number used in the displayed group list. +
+Selects the group identified by the index number used in the displayed *Groups* panel. +
 Format: `selectgroup INDEX` +
 Shortcut Format: `sg INDEX`
 
 ****
-* Selects group and loads the *students in selected group panel* with students of the group at specified `INDEX`.
-* Selects the group and loads the Google search page of the group at the specified `INDEX`.
-* The index refers to the index number shown in the displayed group list.
+* Selects group and loads the *Students in Selected Group* panel with students of the group at specified `INDEX`.
+* The index refers to the index number shown in the displayed *Groups* panel.
 * The index *must be a positive integer* `1, 2, 3, ...`
-* This command is *NOT* undoable
+* An index of *0* or non-integers will produce an *invalid command format* error message.
+* An index larger than the total number of groups currently in the system will produce an *invalid index* error message.
+* There can only be one command word (e.g. _selectgroup_) and it must always be before any other field else an *unknown command* message will be produced.
+* Leading/trailing spaces between *selectgroup*, *sg*, *INDEX* will not affect the validity of command and will be trimmed.
+* This command is *not* undoable.
 ****
 
 Examples:
@@ -97,15 +105,23 @@ Selects the 2nd group in the student management system.
 * `sg 1` +
 Selects the 1st group in the student management system.
 
-=== Add students to a group: `addgroup` `ag`
-Adds student(s) to a group in the student management system +
+=== Add student(s) to a group: `addgroup` `ag`
+Adds student(s) to a group in the student management system. +
 Format: `addgroup g/INDEX p/INDEX ...` +
 Shortcut Format: `ag g/INDEX p/INDEX ...` +
 ****
 * Adds student(s) at specified INDEX(s) to group at specified at INDEX.
-* The index refers to the index number shown in the displayed group/student list.
+* The index refers to the index number shown in the displayed *Groups* and *Students* panels.
+* If multiple valid/invalid group indexes are given (e.g. _g/1 g/2_), only the *last* group index will be taken and validated. However, *all* person indexes given will be taken and validated.
+* The system detects duplicates and will only add the person to the group once in the event of duplicates in a command (e.g. _p/1 p/1_).
 * The index *must be a positive integer* 1, 2, 3, ...
-* This command is undoable
+* An index of *0* or non-integers will produce an *index is not a non-zero unsigned integer* error message.
+* An index larger than the total number of groups or persons (_depending on prefix_) currently in the system will produce an *invalid index* error message.
+* The command fields need *not* be in order (e.g. _ag p/1 g/2_ is also accepted).
+However, there can only be one command word (e.g. _addgroup_) and it must always be before any other field else an *unknown command* message will be produced.
+* Leading/trailing spaces between *addgroup*, *ag*, *g/INDEX* and *p/INDEX* will not affect the validity of command and will be trimmed.
+* Adding duplicate persons to a group is *not* allowed (i.e. _if exactly the same person with same fields already exixts in the group, adding that person to the group again is not allowed_).
+* This command *is* undoable.
 ****
 
 Examples:
@@ -118,9 +134,14 @@ Deletes a group in the student management system +
 Format: `deletegroup INDEX`  +
 Shortcut Format: `dg INDEX` +
 ****
-* Removes the group with the specified INDEX from the student management systsm
-* The index *must be a positive integer* 1, 2, 3, ...
-* This command is undoable
+* Removes the group with the specified INDEX from the student management system.
+* The index refers to the index number shown in the displayed *Groups* panel.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* An index of *0* or non-integers will produce an *invalid command format* error message.
+* An index larger than the total number of groups currently in the system will produce an *invalid index* error message.
+* There can only be one command word (e.g. _deletegroup_) and it must always be before any other field else an *unknown command* message will be produced.
+* Leading/trailing spaces between *deletegroup*, *dg*, *INDEX* will not affect the validity of command and will be trimmed.
+* This command *is* undoable.
 ****
 
 Examples:
@@ -128,16 +149,21 @@ Examples:
 * `deletegroup 1`
 * `dg 1`
 
-=== Deleting student(s) from a group: `deletegroupstudent` `dgs`
-Deletes a student from a group in the student management system +
-Format: `deletegroupstudent g/INDEX p/NDEX`  +
+=== Deleting a student from a group: `deletegroupstudent` `dgs`
+Deletes a student from a group in the student management system. +
+Format: `deletegroupstudent g/INDEX p/INDEX`  +
 Shortcut Format: `dgs g/INDEX p/INDEX` +
 ****
-* Removes studnet at specifed INDEX from the group at specified INDEX in the student management systsm
-* The index refers to the index number shown in the displayed group/student in group list
+* Removes studnet at specifed INDEX on the *Students in Selected Group* panel from the group at specified INDEX on the *Groups* panel.
+* If multiple valid/invalid group indexes are given (e.g. _g/1 g/2_), only the *last* group index will be taken and validated.
+* If multiple valid/invalid person indexes are given (e.g. _p/1 p/2_), only the *last* person index will be taken and validated.
 * The index *must be a positive integer* 1, 2, 3, ...
-* If **multiple** student INDEX's are given, _i.e._ _p/1 p/2_, only the last INDEX will be read and validated
-* This command is undoable
+* An index of *0* or non-integers will produce an *index is not a non-zero unsigned integer* error message.
+* An index larger than the total number of groups or persons (_depending on prefix_) currently in the system will produce an *invalid index* error message.
+* The command fields need *not* be in order (e.g. _dgs p/1 g/2_ is also accepted).
+However, there can only be one command word (e.g. _deletegroupstudent_) and it must always be before any other field else an *unknown command* message will be produced.
+* Leading/trailing spaces between *deletegroupstudent*, *dgs*, *g/INDEX* and *p/INDEX* will not affect the validity of command and will be trimmed.
+* This command *is* undoable.
 ****
 
 Examples:
@@ -145,81 +171,6 @@ Examples:
 * `deletegroupstudent g/1 p/1`
 * `dgs g/1 p/1`
 // end::group[]
-
-=== Add test and test marks to student: `adt student name tn/ tm/`
-The system is allowed user to input different test name and test marks for each student by indicate
-the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
-the marks should be 1 digit double numbers or integers within 0-100.
-Each student should not have duplicate test name.
-Format: `adt student name tn/ tm/` or  `adt student name tm/ tn/`
-Example: `adt Alex tn/CS2113Midterm tm/77`
-This will add a test to the student
-
-=== Edit test marks of student: `edt student name tn/ tm/`
-The system is allowed user to input different test name and test marks for each student by indicate
-the student name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
-the marks should be 1 digit double numbers or integers within 0-100.
-The test to be edited should be exist in the system record, otherwise, the user should add the test first.
-Format: `edt student name tn/ tm/` or `edt student name tm/ tn/`
-Example: `edt Alex tn/CS2113Midterm tm/66`
-This will edit the student marks for test CS2113Midterm
-
-=== Generate grade summary for each test: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
-The system is allowed user to check any summary he want of each test (highest mark/ lowest mark / median mark / mean mark / generate top/last 25 percen students list)
-
-Format: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
-Example: `disp tn/CS2113Midterm highest/` gives the highest mark for all student taken the test CS2113Midterm
-         `disp tn/CS2113Midterm LTF/` will show a list of students who has fall into the last 25 percentage of this test
-
-=== Assign grade to each student taken certain test(Bell_curve): `agpt tn/`
-The system is allowed user to enter a command to assign grade for all students who has taken certain test base on the bell_curve calculation
-The user can check student's test and grade on the browser panel after you click on each student's name card.
-The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
-click the person to see the grade .
-Format: `agpt tn/`
-Example: `agpt tn/CS2113Midterm`
-
-=== Add test and test marks to student: `adt student name tn/ tm/`
-The system is allowed user to input different test name and test marks for each student by indicate
-the name of student. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
-the marks should be 1 digit double numbers or integers within 0-100.
-Each student should not have duplicate test name.
-This command is undoable and redoable.
-Format: `adt student name tn/ tm/` or  `adt student name tm/ tn/`
-Example: `adt Alex tn/CS2113Midterm tm/77`
-This will add a test to the student
-
-=== Edit test marks of student: `edt student name tn/ tm/`
-The system is allowed user to edit test marks for each student by indicate the student name and the test name. Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
-the marks should be 1 digit double numbers or integers within 0-100.
-The test to be edited should be exist in the system record, otherwise, the user should add the test first.
-This command is undoable and redoable.
-Format: `edt student name tn/ tm/` or `edt student name tm/ tn/`
-Example: `edt Alex tn/CS2113Midterm tm/66`
-This will edit the student marks for test CS2113Midterm
-
-=== Generate grade summary for each test: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
-The system is allowed user to check any summary he want of each test (highest mark/ lowest mark / median mark / mean mark / generate top/last 25 percen students list)
-
-Format: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
-Example: `disp tn/CS2113Midterm highest/` gives the highest mark for all student taken the test CS2113Midterm
-         `disp tn/CS2113Midterm LTF/` will show a list of students who has fall into the last 25 percentage of this test
-
-=== Assign grade to each student taken certain test(Bell_curve): `agpt tn/`
-The system is allowed user to enter a command to assign grade for all students who has taken certain test base on the bell_curve calculation
-The user can check student's test and grade on the browser panel after you click on each student's name card.
-The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
-click the person to see the grade.
-This command is undoable and redoable.
-Format: `agpt tn/`
-Example: `agpt tn/CS2113Midterm`
-
-=== delete certain test from students who has taken it: `dt tn/`
-The system is allowed user to enter a command to delete certain test from all students who has taken it.
-The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
-click the student to see the result after delete. This command is undoable and redoable.
-Format: `dt tn/`
-Example: `dt tn/CS2113Midterm`
 
 // tag::distribute[]
 === Distributed all students into _n_ groups with balanced number of Nationality or Gender: `distinto` `di`
@@ -231,10 +182,16 @@ User must choose to either distribute all students equally via Gender or Nationa
 ** `g/0 nat/0` -> Distribution all students randomly into _n_ groups.
 ** `g/1 nat/0` -> Distribution all students randomly into _n_ groups with balanced Gender.
 ** `g/0 nat/1` -> Distribution all students randomly into _n_ groups with balanced Nationality.
-** `g/1 nat/1` -> Distribution all students randomly into _n_ groups with balanced Gender and Nationality. (Coming in v2.0)
+** `g/1 nat/1` -> Distribution all students randomly into _n_ groups with balanced Gender and Nationality. *(Coming in v2.0)*
 ****
-Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
-Shortcut Format: `di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1` +
+Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true [ntf/true]` +
+Shortcut Format: `di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1 [ntf/1]` +
+
+****
+*Coming in v2.0* +
+
+Distribute feature will be integrating with the Email feature. Details will be shown under Email section.
+****
 
 ==== Command Input Guide ====
 ****
@@ -265,6 +222,57 @@ Examples:
 * `di 2 n/CS2113-T14- g/true nat/0`
 // end::distribute[]
 
+// tag::grademanagement[]
+=== Add test and test marks to student: `adt student_name tn/ tm/`
+The system is allowed user to input different test name and test marks for each student by indicate
+the name of student(name input is case insensitive). Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate keyword then need to indicate the full name, otherwise if no duplicate it will just add to the student ),
+the marks should be 1 digit double numbers or integers within 0-100.
+Each student should not have duplicate test name.
+This command is undoable and redoable.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+Format: `adt student_name tn/ tm/` or  `adt student_name tm/ tn/`
+Example: `adt Alex tn/CS2113Midterm tm/77`
+This will add a test to the student
+
+=== Edit test marks of student: `edt student_name tn/ tm/`
+The system is allowed user to edit test marks for each student by indicate the student name and the test name(name input is case insensitive). Name can be search by keywords (for Alex Crowe can search for Alex if got duplicate then need to indicate the full name, otherwise if no duplicate it will just edit the student's mark),
+the marks should be 1 digit double numbers or integers within 0-100.
+The test to be edited should be exist in the system record, otherwise, the user should add the test first.
+This command is undoable and redoable.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+Format: `edt student_name tn/ tm/` or `edt student_name tm/ tn/`
+Example: `edt Alex tn/CS2113Midterm tm/66`
+This will edit the student marks for test CS2113Midterm
+
+=== Generate grade summary for each test: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
+The system is allowed user to check any summary he want of each test (highest mark/ lowest mark / median mark / mean mark / generate top/last 25 percen students list)
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+ Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+Format: `disp tn/ highest/` or `disp tn/ lowest/` or `disp tn/ median/` or `disp tn/ mean/` or `disp tn/ TTF/` or `disp tn/ LTF/`
+Example: `disp tn/CS2113Midterm highest/` gives the highest mark for all student taken the test CS2113Midterm
+         `disp tn/CS2113Midterm LTF/` will show a list of students who has fall into the last 25 percentage of this test
+
+=== Assign grade to each student taken certain test(Bell_curve): `agpt tn/`
+The system is allowed user to enter a command to assign grade for all students who has taken certain test base on the bell_curve calculation
+The user can check student's test and grade on the browser panel after you click on each student's name card.
+The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the students you use to test for the feature should have distinct full name.
+This command is undoable and redoable.
+Format: `agpt tn/`
+Example: `agpt tn/CS2113Midterm`
+
+=== delete certain test from students who has taken it: `dt tn/`
+The system is allowed user to enter a command to delete certain test from all students who has taken it.
+The test to be assign grade should be exist in the system record, otherwise, the user should add the test first.
+click the student to see the result after delete. This command is undoable and redoable.
+please note that when you want to check in UI after you enter the command, please click the students card in the left most(not the group card) and you can check the results on the browser panel.
+Also right now we are not support two students with the same full name but different other information. All the student you use to test for the feature should have distinct full name.
+Format: `dt tn/`
+Example: `dt tn/CS2113Midterm`
+// end::grademanagement[]
 
 // tag::login[]
 === Entering email credential into the Student Management System: `login`
@@ -285,18 +293,18 @@ Password: password!@#
 // tag::sendmail[]
 === Sending Email to Single, Multiple or Group of Person(s): `sendmail` `sm`
 Sends an email to a single person in list +
-Format: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
-Shortcut Format: `sm [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Format: `sendmail INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+Shortcut Format: `sm INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
 
 Sends an email to multiple persons in list +
-Format: `sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
-Shortcut Format: `sm [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Format: `sendmail INDEX,..,INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+Shortcut Format: `sm INDEX,..,INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
 
 Sends an email to all persons belonging to a group +
-Format: `sendmail g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
-Shortcut Format: `sm g/[Group_Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+Format: `sendmail g/GROUP_INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+Shortcut Format: `sm g/GROUP_INDEX s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
 
-Examples: +
+Examples:
 
 * sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
 * sm 1 s/Solution for Assignment m/Hi Bob, solution has been attached. +
@@ -304,6 +312,53 @@ Examples: +
 * sm 1,4,6 s/Tutorial Cancelled m/Tutorial Class for Friday has been cancelled. +
 * sendmail g/2 s/Announcement m/Please bring your calculator tomorrow. +
 * sm g/2 s/Announcement m/Please bring your calculator tomorrow.
+
+[NOTE]
+Please be informed that there is currently a known bug in the program that if the `Subject` or the `Message` content +
+contains any of their prefixes (s/ or m/), the content after the prefix will be removed.
+We apologize for any inconvenience caused and the developers are looking to resolve this issue as soon as possible!
+
+// tag::distmail[]
+==== Sending Email to Persons after they have been Distributed into Groups (Coming in V2.0!)
+Distribute all students into groups using `distinto` feature and notify them of their groupings.
+[NOTE]
+This feature is an integrated feature that works with the Group Distribution feature `distinto`
+
+Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true [ntf/true]` +
+Shortcut Format: `di NUM_OF_GROUPS n/GROUP_NAME g/1 nat/1 [ntf/1]` +
+
+Examples:
+
+* distinto 5 n/CS2113-T13-0 g/true nat/false ntf/true
+* di 3 n/CS2113-T09- g/1 nat/0 ntf/1
+* di 2 n/CS2113-T14- g/true nat/0 ntf/1
+// end::distmail[]
+
+// tag::grademail[]
+==== Sending Email to Students based on grade filters (Coming in V2.0!)
+Send emails to students based on given grading filters specified by grade management feature.
+[NOTE]
+This feature is an integrated feature that works with the Grade Management feature:
+`Generate grade summary for each test`
+
+Send an email to the top 25 percentile students for the test. +
+Format: `sendmail ntf tn/TEST_NAME TTF/ s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+Shortcut Format: `sm ntf tn/TEST_NAME TTF/ s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+
+Examples:
+
+* sendmail ntf tn/CS2113T LTF/ s/Warning m/You are at the lowest 25 percentile, please try harder! +
+* sm ntf tn/CS2113T LTF/ s/Warning m/You are at the lowest 25 percentile, please try harder! +
+
+Send an email to the bottom 25 percentile students for the test. +
+Format: `sendmail warn tn/TEST_NAME LTF/ s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+Shortcut Format: `sm warn tn/TEST_NAME LTF/ s/EMAIL_SUBJECT m/EMAIL_MESSAGE` +
+
+Examples:
+
+* sendmail ntf tn/CS2113T TTF/ s/Congratulations! m/You are at the highest 25 percentile, keep it up! +
+* sm ntf tn/CS2113T TTF/ s/Congratulations! m/You are at the highest 25 percentile, keep it up! +
+// end::grademail[]
 // end::sendmail[]
 
 === Viewing help : `help` `h`
@@ -375,10 +430,10 @@ for StudentList.txt in the script folder
 ** CommandType is the command that you want to execute E.g add, delete, creategroup, etc
 ****
 
-image::SampleScriptFile.png[width="800"]
 .Example of a ScriptFile for executing the `add` Command
-Please refer to <<Adding a person: `add` `a`>> for more information about `add` command
+image::SampleScriptFile.png[width="800"]
 
+Please refer to <<Adding a person: `add` `a`>> for more information about `add` command
 
 Examples:
 
@@ -498,7 +553,12 @@ Shortcut Format: `u`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the management system's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the management system's content (`add`, `delete`, `edit`, `clear`, `creategroup`, `deletegroup`, `addgroup` and `deletegroupstudent`).
+====
+[NOTE]
+====
+All selections on GUI will be *unselected* however, the `Studentd in Group` and `Browser` panels will *not* refresh and will still hold the data of the previously selected
+person/group.
 ====
 
 Examples:
@@ -523,6 +583,12 @@ Reverses the most recent `undo` command. +
 Format: `redo` +
 Shortcut Format: `r`
 
+[NOTE]
+====
+All selections on GUI will be *unselected* however, the `Studentd in Group` and `Browser` panels will *not* refresh and will still hold the data of the previously selected
+person/group.
+====
+
 Examples:
 
 * `delete 1` +
@@ -546,6 +612,12 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the management system. +
 Format: `clear` +
 Shortcut Format: `c`
+
+[NOTE]
+====
+The `Studentd in Group` and `Browser` panels will *not* refresh and will still hold the data of the previously selected
+person/group.
+====
 
 === Exiting the program : `exit` `ex`
 
@@ -616,7 +688,7 @@ e.g. `script txt/addpersons c/add`
 * *add test marks* : `adt tn/TESTNAME tm/MARKS` +
 e.g. `adt tn/cs2113 tm/16`
 * *edit test marks* : `edt tn/TESTNAME tm/MARKS` +
-e.g. `edt tn/cs2113 tm/16`
+e.g. `edt tn/cs2113 tm/17`
 * *display test summary* : `disp tn/TESTNAME INSTRUCTION/` +
 e.g. disp tn/CS2113 highest/` or `disp tn/CS2113 lowest/` or `disp tn/CS2113 median/` or `disp tn/CS2113 mean/` or `disp tn/CS2113 TTF/` or `disp tn/ LTF/`
 * *assign grade per test* : `agpt tn/TESTNAME ` +

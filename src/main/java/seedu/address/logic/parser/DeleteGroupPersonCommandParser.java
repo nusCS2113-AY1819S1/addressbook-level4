@@ -11,14 +11,14 @@ import seedu.address.logic.commands.DeleteGroupPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteGroupPersonCommand object
+ * Parses input arguments and creates a new DeleteGroupPersonCommand object.
  */
 public class DeleteGroupPersonCommandParser implements Parser<DeleteGroupPersonCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteGroupPersonCommand
      * and returns an DeleteGroupPersonCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public DeleteGroupPersonCommand parse(String args) throws ParseException {
 

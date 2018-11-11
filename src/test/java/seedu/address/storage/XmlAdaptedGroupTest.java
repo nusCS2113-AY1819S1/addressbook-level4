@@ -18,6 +18,9 @@ import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
 import seedu.address.testutil.Assert;
 
+/**
+ * Contains unit tests for {@code XmlAdaptedGroup}.
+ */
 public class XmlAdaptedGroupTest {
     private static final String INVALID_GROUP_NAME = "M@ths";
     private static final String INVALID_GROUP_LOCATION = " ";

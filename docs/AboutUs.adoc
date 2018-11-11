@@ -11,10 +11,16 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Novin Tong Yong Kang
 image::novin997.png[width="150", align="left"]
-{empty}[https://github.com/novin997[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/novin997[github]] [<<novin997#, portfolio>>]
 
 Role: Developer + Moderator +
-Responsibilities: Development of features, scheduling and tracking of tasks
+Responsibilities:
+
+* Development of features, scheduling and tracking of tasks
+* ScriptCommand Feature - Execute scripts based on Text File
+* ScriptCommand Feature - Provide logs to the user if the scripts files cannot be executed
+* ScriptSetup Feature - Create script folder if missing
+* ScriptSetup Feature - Allows user to set their preferred scripts location
 
 '''
 
@@ -23,13 +29,14 @@ image::rajdeepsh.png[width="150", align="left"]
 {empty}[https://github.com/rajdeepsh[github]] [<<rajdeepsh#, portfolio>>]
 
 Role: Team Leader + Documentation +
-Responsibilities: +
-Group Feature - Create Group(s) +
-Group Feature - Add Student(s) to Group(s) +
-Group Feature - Delete Group(s) +
-Group Feature - Delete Student(s) from Group(s) +
-Group Feature - Select Group +
-Development of features and ensuring document correctness
+Responsibilities:
+
+* Group Feature - Create Group(s) +
+* Group Feature - Add Student(s) to Group(s) +
+* Group Feature - Delete Group(s) +
+* Group Feature - Delete Student(s) from Group(s) +
+* Group Feature - Select Group +
+* Development of features and ensuring document correctness
 
 '''
 
@@ -57,10 +64,16 @@ Responsibilities: Development of features, maintainance of github site and other
 
 === Yang Shuang
 image::clara1234566.png[width="150", align="left"]
-{empty}[https://github.com/clara1234566[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/clara1234566[github]] [<<clara1234566#, portfolio>>]
 
 Role: Developer + Tester +
-Responsibilities: Development of features and rigorous testing of application
+Responsibilities: +
+grade management - add tests and test marks +
+grade management - edit test marks +
+grade management - delete tests and test marks +
+grade management - give summary of certain test +
+grade management - grading students automatically +
+Development of features and ensuring document correctness
 
 '''
 

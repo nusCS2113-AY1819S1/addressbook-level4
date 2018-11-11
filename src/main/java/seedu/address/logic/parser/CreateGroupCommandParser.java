@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Parses input arguments and creates a new CreateGroupCommand object
+ * Parses input arguments and creates a new CreateGroupCommand object.
  */
 public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
 
@@ -27,7 +27,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
      * Parses the given {@code String} of arguments in the context of the CreateGroupCommand
      * and returns an CreateGroupCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public CreateGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

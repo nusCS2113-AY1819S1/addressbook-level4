@@ -11,6 +11,9 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
+/**
+ * Contains unit tests for {@code GroupLocation}.
+ */
 public class GroupLocationTest {
 
     @Test

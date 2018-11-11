@@ -14,7 +14,7 @@ public class ScriptLog {
     public static final String NEXT_LINE = System.lineSeparator();
 
     private static final String UNDERSCORE = "_";
-    private static final String COLON = ":";
+    private static final String COLON = ": ";
     private static final String LINE = "Line ";
 
 
@@ -40,10 +40,10 @@ public class ScriptLog {
      * @ lineNumber is the line number that cannot be executed
      * @ errorMessage is the error message that return for not being able to execute the message
      */
-    public void write(String lineNumber, String errorMessage) throws IOException {
-        lineNumber = LINE + lineNumber + COLON;
+    public void write(String lineNumber, String fullCommand, String errorMessage) throws IOException {
+        lineNumber = LINE + lineNumber + COLON + fullCommand;
         FileUtil.appendToTextFile(logFile, lineNumber + NEXT_LINE);
-        FileUtil.appendToTextFile(logFile, errorMessage + NEXT_LINE);
+        FileUtil.appendToTextFile(logFile, errorMessage + NEXT_LINE + NEXT_LINE);
     }
 
 

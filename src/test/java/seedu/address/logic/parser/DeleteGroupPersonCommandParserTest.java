@@ -11,7 +11,7 @@ import org.junit.Test;
 import seedu.address.logic.commands.DeleteGroupPersonCommand;
 
 /**
- * Test different boundary values of DeleteGroupPersonCommandParser
+ * Test different boundary values of DeleteGroupPersonCommandParser.
  */
 public class DeleteGroupPersonCommandParserTest {
 

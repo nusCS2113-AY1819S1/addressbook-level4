@@ -25,18 +25,33 @@ public class GroupListPanel extends UiPart<Region> {
     @FXML
     private ListView<Group> groupListView;
 
+    /**
+     * Registers event handler.
+     * Displays groups on GroupListPanel.
+     *
+     * @param groupList Groups to be displayed on GroupListPanel.
+     */
     public GroupListPanel(ObservableList<Group> groupList) {
         super(FXML);
         setConnections(groupList);
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Displays groups on GroupListPanel.
+     * Sets event handler for selection changed.
+     *
+     * @param groupList Groups to be displayed on GroupListPanel.
+     */
     private void setConnections(ObservableList<Group> groupList) {
         groupListView.setItems(groupList);
         groupListView.setCellFactory(listView -> new GroupListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
+    /**
+     * Raises group panel selection changed event when group card value differs.
+     */
     private void setEventHandlerForSelectionChangeEvent() {
         groupListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
@@ -49,6 +64,8 @@ public class GroupListPanel extends UiPart<Region> {
 
     /**
      * Scrolls to the {@code GroupCard} at the {@code index} and selects it.
+     *
+     * @param index Index of group card to be selected.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
@@ -57,6 +74,11 @@ public class GroupListPanel extends UiPart<Region> {
         });
     }
 
+    /**
+     * Scrolls to and selects group card on the GroupListPanel when a new selection is requested.
+     *
+     * @param event Event which triggers the update.
+     */
     @Subscribe
     private void handleJumpToGroupListRequestEvent(JumpToGroupListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

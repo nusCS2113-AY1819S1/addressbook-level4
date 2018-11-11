@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.grade.PersonTest;
 import seedu.address.model.person.Person;
 /**
@@ -12,7 +13,7 @@ public class Mean {
     /**
      * Calculate the mean score of a test, the mean value should be double type
      */
-    public static double calculateMean(ObservableList<Person> personList, String testName) {
+    public static double calculateMean(ObservableList<Person> personList, String testName) throws CommandException {
         double sum = 0;
 
         ArrayList<PersonTest> list = SortMarks.sortingFromLowestToHighest(personList, testName);

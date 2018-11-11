@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Represents persons to be added to a group in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: Details are present and not null, field values are validated.
  */
 public class AddGroup {
 
@@ -27,7 +27,10 @@ public class AddGroup {
     private final Set<Person> personSet = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Receives indexes of group and persons.
+     *
+     * @param groupIndex Group index.
+     * @param personIndices Person indexes.
      */
     public AddGroup(Index groupIndex, Set<Index>personIndices) {
         requireAllNonNull(groupIndex, personIndices);
@@ -35,6 +38,11 @@ public class AddGroup {
         this.personIndices.addAll(personIndices);
     }
 
+    /**
+     * Returns the group which persons are to be added to.
+     *
+     * @return First group.
+     */
     public Group getGroup() {
         return groupSet.iterator().next();
     }
@@ -43,11 +51,21 @@ public class AddGroup {
         return personSet;
     }
 
+    /**
+     * Sets the group which persons are to be added to.
+     *
+     * @param group List of all groups in the address book.
+     */
     public void setGroupSet(List<Group> group) {
         requireNonNull(group);
         groupSet.add(group.get(groupIndex.getZeroBased()));
     }
 
+    /**
+     * Sets the persons to be added to group.
+     *
+     * @param person List of all persons in teh address book.
+     */
     public void setPersonSet(List<Person> person) {
         requireNonNull(person);
         for (Index i : personIndices) {
@@ -56,10 +74,11 @@ public class AddGroup {
     }
 
     /**
-     * Check if person index input by user is in range of what
-     * is displayed on the person list panel.
-     * @param size
-     * @return
+     * Returns true if person index given by user is in range of what
+     * is displayed on the PersonListPanel.
+     *
+     * @param size Number of persons in the address book.
+     * @return Validation result.
      */
     public boolean validPersonIndexSet(int size) {
         for (Index i : personIndices) {
@@ -71,10 +90,11 @@ public class AddGroup {
     }
 
     /**
-     * Check if group index input by user is in range of what
-     * is displayed on the group list panel.
-     * @param size
-     * @return
+     * Returns true if group index given by user is in range of what
+     * is displayed on the GroupListPanel.
+     *
+     * @param size Number of groups in the address book.
+     * @return Validation result.
      */
     public boolean validGroupIndex(int size) {
         if (groupIndex.getZeroBased() >= size) {
@@ -83,6 +103,13 @@ public class AddGroup {
         return true;
     }
 
+    /**
+     * Returns true if both objects have the same identity and data fields.
+     * This defines a stronger notion of equality between two AddGroups.
+     *
+     * @param other AddGroup to compare with.
+     * @return Comparison result.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -92,6 +119,11 @@ public class AddGroup {
                 && personSet.equals(((AddGroup) other).personSet));
     }
 
+    /**
+     * Returns string with AddGroup identity field details.
+     *
+     * @return AddGroup details.
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

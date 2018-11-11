@@ -12,6 +12,9 @@ import org.junit.Test;
 import seedu.address.model.person.Name;
 import seedu.address.testutil.Assert;
 
+/**
+ * Contains unit tests for {@code GroupName}.
+ */
 public class GroupNameTest {
     @Test
     public void constructor_null_throwsNullPointerException() {

@@ -14,7 +14,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.testutil.TypicalGroups;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListGroupCommand.
  */
 public class ListGroupCommandTest {
     private Model model;

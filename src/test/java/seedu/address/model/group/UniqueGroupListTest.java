@@ -28,6 +28,9 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.GroupBuilder;
 
+/**
+ * Contains unit tests for {@code UniqueGroupList}.
+ */
 public class UniqueGroupListTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

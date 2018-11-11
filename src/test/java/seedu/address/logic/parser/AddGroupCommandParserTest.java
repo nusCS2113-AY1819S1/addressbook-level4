@@ -22,6 +22,9 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.AddGroupCommand;
 
+/**
+ * Test different boundary values of AddGroupCommandParser.
+ */
 public class AddGroupCommandParserTest {
 
     private AddGroupCommandParser parser = new AddGroupCommandParser();
