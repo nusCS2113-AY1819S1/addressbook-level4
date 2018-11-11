@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new SelectCommand object
  */
-public class SelectCommandParser implements Parser<SelectCommand> {
+public class SelectCommandParser extends ParserClass implements Parser<SelectCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand

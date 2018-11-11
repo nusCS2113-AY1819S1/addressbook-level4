@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses arguments and creates a new FriendCommand
  */
-public class FriendCommandParser implements Parser<FriendCommand> {
+public class FriendCommandParser extends ParserClass implements Parser<FriendCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FriendCommand
@@ -25,5 +25,4 @@ public class FriendCommandParser implements Parser<FriendCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FriendCommand.MESSAGE_USAGE), pe);
         }
     }
-
 }

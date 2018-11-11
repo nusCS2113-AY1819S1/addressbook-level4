@@ -130,7 +130,7 @@ public class ModelStub implements Model {
 
     @Override
     public User getUser() {
-        throw new AssertionError("This method should not be called.");
+        return null;
     }
 
     @Override

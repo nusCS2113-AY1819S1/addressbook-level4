@@ -14,6 +14,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.security.Security;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -25,14 +27,16 @@ public class CommandBox extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
+    private final Security security;
     private ListElementPointer historySnapshot;
 
     @FXML
     private TextField commandTextField;
 
-    public CommandBox(Logic logic) {
+    public CommandBox(Logic logic, Security security) {
         super(FXML);
         this.logic = logic;
+        this.security = security;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
@@ -101,15 +105,17 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         try {
-            CommandResult commandResult = logic.execute(commandTextField.getText());
+            CommandResult commandResult = security.execute(commandTextField.getText());
             initHistory();
             historySnapshot.next();
             // process result of the command
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            if (!commandResult.feedbackToUser.equals("Login Attempted")) {
+                raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            }
 
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | SecurityAuthenticationException e) {
             initHistory();
             // handle command failure
             setStyleToIndicateCommandFailure();

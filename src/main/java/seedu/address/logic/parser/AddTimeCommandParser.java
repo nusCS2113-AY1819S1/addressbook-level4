@@ -9,7 +9,7 @@ import seedu.address.model.person.TimeSlot;
 /**
  * Parses input arguments and creates a new {@code AddTimeCommand} object
  */
-public class AddTimeCommandParser implements Parser<AddTimeCommand> {
+public class AddTimeCommandParser extends ParserClass implements Parser<AddTimeCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddTimeCommand

@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.commons.CommandsEnum;
 import seedu.address.logic.commands.AddTimeCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -22,13 +22,17 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UiCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnfriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Parses user input.
@@ -38,27 +42,46 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private String commandWord;
+    private String arguments;
 
     /**
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
-     * @return the command based on the user input
+     * @return the CommandsEnum constants which represents a command
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public CommandsEnum parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+        commandWord = matcher.group("commandWord");
+        arguments = matcher.group("arguments");
 
-        case AddCommand.COMMAND_WORD:
-        case AddCommand.COMMAND_WORD_ALIAS:
-            return new AddCommandParser().parse(arguments);
+        //Returns the correct command enum constant
+        CommandsEnum commandtype = CommandsEnum.find(commandWord);
+        if (commandtype == null) {
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+
+        return commandtype;
+    }
+
+    /**
+     * //TODO
+     * @return
+     * @throws ParseException
+     * @throws SecurityAuthenticationException
+     */
+    public Command parseCommandArguments() throws ParseException, SecurityAuthenticationException {
+
+        switch (commandWord) {
+        case RegisterCommand.COMMAND_WORD:
+        case RegisterCommand.COMMAND_WORD_ALIAS:
+            return new RegisterCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD_ALIAS:
@@ -138,6 +161,12 @@ public class AddressBookParser {
 
         case FreeCommand.COMMAND_WORD:
             return new FreeCommandParser().parse(arguments);
+
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
+
+        case UiCommand.COMMAND_WORD:
+            return new UiCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

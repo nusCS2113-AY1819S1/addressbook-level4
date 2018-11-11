@@ -50,6 +50,12 @@ public class SampleDataUtil {
         };
     }
 
+    public static Person getSamplePerson() {
+        return new Person(new Name("John Doe"), new Phone("87438807"), new Email("john_doe@example.com"),
+                        new Address("Blk 30 Geylang Street 29, #06-40"),
+                        getTagSet("friends"), SampleTimeTableUtil.getTimeTableJohnDoe(), new HashSet<>());
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {

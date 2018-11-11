@@ -105,8 +105,8 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
-        loginWindow = new LoginWindow(security);
-        registrationWindow = new RegistrationWindow(security);
+        loginWindow = new LoginWindow(logic);
+        registrationWindow = new RegistrationWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -151,7 +151,7 @@ public class MainWindow extends UiPart<Stage> {
      * Enables Security CLI
      */
     public void fillSecurityCommandBox() {
-        SecurityBox commandBox = new SecurityBox(security);
+        CommandBox commandBox = new CommandBox(logic, security);
         commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
@@ -210,7 +210,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(logic);
+        CommandBox commandBox = new CommandBox(logic, security);
         commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }

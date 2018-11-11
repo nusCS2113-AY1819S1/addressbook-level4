@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.CommandsEnum;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -13,6 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.User;
 import seedu.address.model.person.Person;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * The main LogicManager of the app.
@@ -31,14 +33,19 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandsEnum parseCommandWord(String commandText) throws ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        try {
-            Command command = addressBookParser.parseCommand(commandText);
-            return command.execute(model, history);
-        } finally {
-            history.add(commandText);
-        }
+        history.add(commandText);
+        return addressBookParser.parseCommand(commandText);
+    }
+
+    @Override
+    public CommandResult execute(String commandText)
+            throws CommandException, ParseException, SecurityAuthenticationException {
+        logger.info("Parsing Arguments");
+
+        Command command = addressBookParser.parseCommandArguments();
+        return command.execute(model, history);
     }
 
     @Override

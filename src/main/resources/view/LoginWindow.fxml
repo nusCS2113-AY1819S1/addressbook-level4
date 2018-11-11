@@ -12,6 +12,7 @@
 
 <!-- TODO: set a more appropriate initial size -->
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.PasswordField?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/login.png" />
@@ -38,11 +39,11 @@
                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                         </GridPane.margin>
                     </TextField>
-                    <TextField id="password" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="passwordTextField" onAction="#handleLoginClick" >
+                    <PasswordField id="password" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="passwordTextField" onAction="#handleLoginClick" >
                         <padding>
                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                         </padding>
-                    </TextField>
+                    </PasswordField>
                     <Label text="Username:" />
                     <Button mnemonicParsing="false" text="Register" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" onAction="#handleRegisterClick" />
                     <Button mnemonicParsing="false" text="Log In" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#handleLoginClick" />

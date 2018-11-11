@@ -4,14 +4,14 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.Test;
 
+import seedu.address.commons.ModelManagerTestUserStub;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 
 public class HistoryCommandTest {
     private CommandHistory history = new CommandHistory();
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
+    private Model model = new ModelManagerTestUserStub();
+    private Model expectedModel = new ModelManagerTestUserStub();
 
     @Test
     public void execute() {

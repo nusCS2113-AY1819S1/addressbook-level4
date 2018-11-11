@@ -30,6 +30,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+
         model.updateFriendList(predicate);
         model.updateOtherList(predicate);
         return new CommandResult(

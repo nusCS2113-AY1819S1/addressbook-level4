@@ -11,6 +11,7 @@ import seedu.address.testutil.TypicalTimeSlots;
 
 public class AddTimeCommandParserTest {
 
+    private ParserClassTest test = new ParserClassTest();
     private AddTimeCommandParser parser = new AddTimeCommandParser();
 
     @Test

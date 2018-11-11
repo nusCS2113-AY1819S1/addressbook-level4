@@ -10,7 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new ImportCommand object
  */
-public class ImportCommandParser implements Parser<ImportCommand> {
+public class ImportCommandParser extends ParserClass implements Parser<ImportCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ImportCommand

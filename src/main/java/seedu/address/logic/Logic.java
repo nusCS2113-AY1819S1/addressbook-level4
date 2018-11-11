@@ -1,16 +1,25 @@
 package seedu.address.logic;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.CommandsEnum;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.User;
 import seedu.address.model.person.Person;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * API of the Logic component
  */
 public interface Logic {
+    /**
+     * Parses the command to obtain command word and arguments
+     * @param commandText The command entered in the CLI
+     * @return The specific Command Word
+     */
+    CommandsEnum parseCommandWord(String commandText) throws ParseException;
+
     /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
@@ -18,7 +27,7 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText) throws CommandException, ParseException, SecurityAuthenticationException;
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -47,7 +56,6 @@ public interface Logic {
     void clearUser();
 
     /**
-     *
      * @return the current authenticated User
      */
     User getUser();

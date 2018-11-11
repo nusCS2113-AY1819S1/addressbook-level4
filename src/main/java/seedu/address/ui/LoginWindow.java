@@ -1,16 +1,25 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+
 import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
-import seedu.address.security.Security;
+import seedu.address.logic.Logic;
+import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.security.SecurityAuthenticationException;
 
 /***
  * Controller for the login
@@ -18,11 +27,11 @@ import seedu.address.security.Security;
 public class LoginWindow extends UiPart<Stage> {
 
     private static final String FXML = "LoginWindow.fxml";
-    private Security user;
+    private Logic logic;
     @FXML
     private TextField usernameTextField;
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
     @FXML
     private Label label;
 
@@ -44,9 +53,9 @@ public class LoginWindow extends UiPart<Stage> {
     /**
      * Creates a new LoginWindow.
      */
-    public LoginWindow(Security user) {
+    public LoginWindow(Logic logic) {
         this(new Stage());
-        this.user = user;
+        this.logic = logic;
         //Links with eventsCenter I believe
         registerAsAnEventHandler(this);
     }
@@ -100,7 +109,12 @@ public class LoginWindow extends UiPart<Stage> {
      * Runs whenever the login button is clicked
      */
     public void handleLoginClick() {
-        user.login(usernameTextField.getText(), passwordTextField.getText());
+        try {
+            logic.execute(LoginCommand.COMMAND_WORD + " " + PREFIX_USERNAME + usernameTextField.getText()
+                    + " " + PREFIX_PASSWORD + passwordTextField.getText());
+        } catch (CommandException | ParseException | SecurityAuthenticationException e) {
+            label.setText(e.getMessage());
+        }
     }
 
 
@@ -120,5 +134,13 @@ public class LoginWindow extends UiPart<Stage> {
     @Subscribe
     public void handleUnsuccessfulLoginEvent(UnsuccessfulLoginEvent loginFailure) {
         label.setText("Incorrect Username/Password");
+    }
+
+    @Subscribe
+    public void handleNewResultAvailableEvent(NewResultAvailableEvent e) {
+        //Prevents this message from showing on login box, but only on ResultDisplay
+        if (!e.message.equals("Successfully Displayed UI")) {
+            label.setText(e.message);
+        }
     }
 }

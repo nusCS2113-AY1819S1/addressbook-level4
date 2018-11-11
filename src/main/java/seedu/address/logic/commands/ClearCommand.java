@@ -7,6 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeTable;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
+import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Clears the user's {@code TimeTable}.
@@ -17,7 +18,7 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Your timetable has been cleared!";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws SecurityAuthenticationException {
         requireNonNull(model);
 
         Person personToEdit = model.getUser();

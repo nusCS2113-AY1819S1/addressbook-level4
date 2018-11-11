@@ -28,7 +28,7 @@ import seedu.address.testutil.TypicalTimeSlots;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_ADDRESS = "  ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TIMESLOT = "something";
     private static final String INVALID_DAY = "someday";
@@ -132,11 +132,6 @@ public class ParserUtilTest {
     @Test
     public void parseAddress_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-    }
-
-    @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
     }
 
     @Test

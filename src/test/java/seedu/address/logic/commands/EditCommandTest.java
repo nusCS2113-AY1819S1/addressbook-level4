@@ -15,11 +15,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
 
+import seedu.address.commons.ModelManagerTestUserStub;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -31,7 +31,7 @@ import seedu.address.testutil.TypicalTimeSlots;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManagerTestUserStub(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -44,7 +44,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManagerTestUserStub(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.matchUserToPerson("Alice Pauline");
         expectedModel.updatePerson(model.getUser(), editedPerson);
         expectedModel.commitAddressBook();
@@ -68,7 +68,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManagerTestUserStub(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.matchUserToPerson("George Best");
         expectedModel.updatePerson(lastPerson, editedPerson);
         expectedModel.commitAddressBook();
@@ -84,7 +84,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManagerTestUserStub(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.matchUserToPerson("Alice Pauline");
         expectedModel.commitAddressBook();
 
@@ -120,13 +120,16 @@ public class EditCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
+
         model.matchUserToPerson("Alice Pauline");
 
         Person editedPerson = new PersonBuilder().withTimeTable(TypicalTimeSlots.getTypicalTimeTable()).build();
         Person personToEdit = model.getUser();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+
         EditCommand editCommand = new EditCommand(descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManagerTestUserStub(new AddressBook(model.getAddressBook()), new UserPrefs());
+
         expectedModel.updatePerson(personToEdit, editedPerson);
         expectedModel.commitAddressBook();
 

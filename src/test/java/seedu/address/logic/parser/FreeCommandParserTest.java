@@ -20,6 +20,7 @@ import seedu.address.logic.commands.FreeCommand;
  */
 public class FreeCommandParserTest {
 
+    private ParserClassTest test = new ParserClassTest();
     private FreeCommandParser parser = new FreeCommandParser();
 
     @Test

@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input and creates a new UnfriendCommand
  */
-public class UnfriendCommandParser implements Parser<UnfriendCommand> {
+public class UnfriendCommandParser extends ParserClass implements Parser<UnfriendCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the UnfriendCommand

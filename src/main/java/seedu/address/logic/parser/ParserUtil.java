@@ -73,6 +73,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String password} into a {@code password}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static String parsePassword(String pw) throws ParseException {
+        requireNonNull(pw);
+        String trimmedName = pw.trim();
+        if (pw.length() < 8) {
+            throw new ParseException("Password has to be of at least 8 characters");
+        }
+        return new String(pw);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *

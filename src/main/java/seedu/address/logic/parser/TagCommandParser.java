@@ -9,11 +9,10 @@ import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.TagsContainsKeywords;
 
-
 /**
  * Parses the arguments of tag command and returns as a Tag object
  */
-public class TagCommandParser implements Parser<TagCommand> {
+public class TagCommandParser extends ParserClass implements Parser<TagCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the TagCommand

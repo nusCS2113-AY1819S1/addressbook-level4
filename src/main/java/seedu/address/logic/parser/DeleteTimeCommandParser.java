@@ -9,7 +9,7 @@ import seedu.address.model.person.TimeSlot;
 /**
  * Parses input arguments and creates a new {@code DeleteTimeCommand} object
  */
-public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand> {
+public class DeleteTimeCommandParser extends ParserClass implements Parser<DeleteTimeCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTimeCommand
