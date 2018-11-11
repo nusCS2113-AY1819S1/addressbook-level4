@@ -1,0 +1,52 @@
+= Gara Tahir - Project Portfolio
+:site-section: UserGuide
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:imagesDir: images
+:stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: https://github.com/CS2113-AY1819S1-T13-3/main
+
+By: `Gara Tahir`
+Project: `Iventarei Pro`
+
+
+
+== Overview
+
+Inventarie Pro is for self employed business owners who *prefer to use a desktop app for managing inventory*. More importantly, Inventarie Pro is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Inventarie Pro can get your inventory management tasks done faster than traditional GUI apps.
+
+== Summary of contribution
+
+LINK TO CODE CONTTIBUTION
+
+Main feature implemented:
+I have changed the whole foundation of the code. I changed the class person to product. The attributes and their constrains where changed accordingly.
+
+The class Product now consists of the attributes:
+* Name
+* SerialNumber
+* Product information
+* Remaining items
+*
+
+
+Other contributions:
+I integrated Paras feature "Transaction" with my attribute Remaining items.
+Now when a transaction is made the program first sees if the products exist then it sees if there is enough products in the inventory and lastly it subtract the number of items that are removed from the inventory.
+
+Minor contributions
+The use can search for a product with both name and Serialnumber (The primary key)
+
+== Contribution to the User Guide
+
+I did the first design of the UI so the team could visualize our endproduct.
+
+=== Contribution to the Developper guide

@@ -47,7 +47,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get().substring(0, 1).toUpperCase()
+                + argMultimap.getValue(PREFIX_NAME).get().substring(1));
         SerialNumber serialNumber = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_SERIAL_NR).get());
         DistributorName distname = ParserUtil.parseDistName(argMultimap.getValue(PREFIX_DISTRIBUTOR).get());
         ProductInfo productInfo = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_PRODUCT_INFO).get());
