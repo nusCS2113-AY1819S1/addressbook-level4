@@ -52,7 +52,6 @@ public class EditDistributorCommandParser implements Parser<EditDistributorComma
             editDistributorDescriptor.setDistPhone(ParserUtil.parseDistPhone(argMultimap.getValue(PREFIX_DIST_PHONE)
                     .get()));
         }
-
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editDistributorDescriptor::setTags);
 
         return new EditDistributorCommand(index, editDistributorDescriptor);

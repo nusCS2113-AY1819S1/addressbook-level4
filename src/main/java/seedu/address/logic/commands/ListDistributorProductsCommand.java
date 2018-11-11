@@ -49,7 +49,6 @@ public class ListDistributorProductsCommand extends Command {
         }
 
         Distributor distributorToShow = lastShownList.get(index.getZeroBased());
-
         Set<DistributorProduct> distProdsSet = distributorToShow.getDistProds();
 
         ArrayList<DistributorProduct> distprodsList = new ArrayList<>(distProdsSet);
@@ -63,7 +62,7 @@ public class ListDistributorProductsCommand extends Command {
         allDistProds.append("Products that " + distributorToShow.getDistName().toString() + " carries:");
 
         for (DistributorProduct distributorProduct : distprodsList) {
-            allDistProds.append(distributorProduct.toString() + "\n");
+            allDistProds.append(distributorProduct.toString());
         }
 
         return new CommandResult(allDistProds.toString());

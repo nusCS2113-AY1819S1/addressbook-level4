@@ -28,7 +28,7 @@ public class XmlAdaptedDistributor {
     @XmlElement(required = true)
     private String phone;
     @XmlElement
-    private List<XmlAdaptedDistProd> prods = new ArrayList<>();
+    private List<XmlAdaptedDistProd> distprods = new ArrayList<>();
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class XmlAdaptedDistributor {
                                  List<XmlAdaptedDistProd> prods, List<XmlAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
-        this.prods = prods;
+        this.distprods = prods;
         this.tagged = tags;
     }
 
@@ -57,7 +57,7 @@ public class XmlAdaptedDistributor {
     public XmlAdaptedDistributor(Distributor source) {
         name = source.getDistName().fullDistName;
         phone = source.getDistPhone().value;
-        prods = source.getDistProds().stream()
+        distprods = source.getDistProds().stream()
                 .map(XmlAdaptedDistProd::new)
                 .collect(Collectors.toList());
         tagged = source.getTags().stream()
@@ -73,6 +73,10 @@ public class XmlAdaptedDistributor {
     public Distributor toModelType() throws IllegalValueException {
         final List<DistributorProduct> distributorProds = new ArrayList<>();
         final List<Tag> distributorTags = new ArrayList<>();
+
+        for (XmlAdaptedDistProd prod : distprods) {
+            distributorProds.add(prod.toModelType());
+        }
         for (XmlAdaptedTag tag : tagged) {
             distributorTags.add(tag.toModelType());
         }
