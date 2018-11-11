@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
+import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
@@ -12,7 +13,7 @@ class EmailContentsBackCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();
-    private ModelManager model = new ModelManager();
+    private Model model = new ModelManager();
 
     @Test
     void execute_emailContentsBackCommand() {
