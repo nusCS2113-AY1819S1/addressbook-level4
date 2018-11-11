@@ -22,7 +22,7 @@ public class TransactionList implements ReadOnlyTransactionList {
     /**
      * Creates a TransactionList using the transactions in the {@code toBeCopied}
      */
-    public TransactionList(TransactionList toBeCopied) {
+    public TransactionList(ReadOnlyTransactionList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -30,7 +30,7 @@ public class TransactionList implements ReadOnlyTransactionList {
     /**
      * Resets the existing data of this {@code TransactionList} with {@code newData}.
      */
-    public void resetData(TransactionList newData) {
+    public void resetData(ReadOnlyTransactionList newData) {
         requireNonNull(newData);
 
         setTransactions(newData.getTransactionList());

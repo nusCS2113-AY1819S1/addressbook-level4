@@ -10,7 +10,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.drink.Price;
-import seedu.address.model.transaction.TransactionList;
+import seedu.address.model.transaction.ReadOnlyTransactionList;
 
 /**
  * Represents the in-memory model of the accountant command
@@ -20,7 +20,7 @@ public class AccountantModelManager extends ModelManager implements AccountantMo
 
     public AccountantModelManager(ReadOnlyInventoryList inventoryList,
                                   UserPrefs userPrefs, LoginInfoManager loginInfoManager,
-                                  TransactionList transactionList) {
+                                  ReadOnlyTransactionList transactionList) {
         super(inventoryList, userPrefs, loginInfoManager, transactionList);
     }
 

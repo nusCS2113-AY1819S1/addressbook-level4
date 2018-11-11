@@ -13,6 +13,7 @@ public class UserPrefs {
 
     private GuiSettings guiSettings;
     private Path inventoryListFilePath = Paths.get("data" , "inventorylist.xml");
+    private Path transactionListFilePath = Paths.get("data", "transactionlist.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -36,6 +37,14 @@ public class UserPrefs {
 
     public void setInventoryListFilePath(Path inventoryListFilePath) {
         this.inventoryListFilePath = inventoryListFilePath;
+    }
+
+    public Path getTransactionListFilePath() {
+        return transactionListFilePath;
+    }
+
+    public void setTransactionListFilePath(Path transactionListFilePath) {
+        this.transactionListFilePath = transactionListFilePath;
     }
 
     @Override

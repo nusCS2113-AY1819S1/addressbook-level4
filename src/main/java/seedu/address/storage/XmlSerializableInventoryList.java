@@ -22,7 +22,7 @@ public class XmlSerializableInventoryList {
     private List<XmlAdaptedDrink> drinks;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableInventoryList.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableInventoryList() {

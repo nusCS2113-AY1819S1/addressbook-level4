@@ -1,0 +1,62 @@
+{
+  "transactions" : [ {
+    "transactionType" : "PURCHASE",
+    "transactionDate" : {
+      "date" : "2018-11-11"
+    },
+    "drinkTransacted" : {
+      "name" : {
+        "name" : "Coke"
+      },
+      "costPrice" : {
+        "value" : 0.0
+      },
+      "retailPrice" : {
+        "value" : 0.0
+      },
+      "uniqueBatchList" : null,
+      "quantity" : {
+        "value" : 0
+      },
+      "tags" : [ ]
+    },
+    "quantityTransacted" : {
+      "value" : 15
+    },
+    "amountMoney" : {
+      "value" : 22.5
+    },
+    "id" : 1541928745301
+  }, {
+    "transactionType" : "PURCHASE",
+    "transactionDate" : {
+      "date" : "2018-11-11"
+    },
+    "drinkTransacted" : {
+      "name" : {
+        "name" : "Green Tea"
+      },
+      "costPrice" : {
+        "value" : 0.0
+      },
+      "retailPrice" : {
+        "value" : 0.0
+      },
+      "uniqueBatchList" : null,
+      "quantity" : {
+        "value" : 0
+      },
+      "tags" : [ ]
+    },
+    "quantityTransacted" : {
+      "value" : 10
+    },
+    "amountMoney" : {
+      "value" : 15.0
+    },
+    "id" : 1541928895751
+  } ],
+  "lastUpdateDate" : {
+    "date" : "2018-11-11"
+  }
+}
