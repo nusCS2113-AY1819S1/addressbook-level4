@@ -5,8 +5,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.ZoneId;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TimeZone;
 
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
@@ -66,7 +68,9 @@ public class ImportCommand extends Command {
         TimeTable timeTable;
 
         try {
-            optionalTimeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath);
+            //TODO: remove hardcoding of timezone in import and export command once TimeSlots are in UTC.
+            ZoneId zoneIdSingapore = ZoneId.of("Asia/Shanghai");
+            optionalTimeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath, zoneIdSingapore);
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_IO_ERROR, filePath.toString()));
         } catch (TimeSlotOverlapException e) {

@@ -7,13 +7,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 import biweekly.Biweekly;
@@ -40,6 +44,7 @@ import seedu.address.model.person.exceptions.TimeSlotOverlapException;
  */
 public class IcsUtil {
     private static final Logger logger = LogsCenter.getLogger(IcsUtil.class);
+    private static final String DEFAULT_ZONE_ID = "Asia/Shanghai";
     private static IcsUtil instance;
 
     private IcsUtil(){
@@ -62,7 +67,7 @@ public class IcsUtil {
      * @throws TimeSlotOverlapException if the file to be imported has overlapping timeslots.
      *
      */
-    public Optional<TimeTable> readTimeTableFromFile(Path filePath)
+    public Optional<TimeTable> readTimeTableFromFile(Path filePath, ZoneId zoneId)
             throws IOException, TimeSlotOverlapException {
         requireNonNull(filePath);
 
@@ -74,7 +79,7 @@ public class IcsUtil {
             throw new IOException(e);
         }
 
-        Optional<TimeTable> optionalTimeTable = iCalendarToTimeTable(iCalendar);
+        Optional<TimeTable> optionalTimeTable = iCalendarToTimeTable(iCalendar, zoneId);
 
         return optionalTimeTable;
     }
@@ -102,7 +107,8 @@ public class IcsUtil {
      * Converts {@code ICalendar} to {@code TimeTable}
      * @param iCalendar {@code ICalendar} to convert. Cannot be null.
      */
-    private Optional<TimeTable> iCalendarToTimeTable(ICalendar iCalendar) throws TimeSlotOverlapException {
+    private Optional<TimeTable> iCalendarToTimeTable(ICalendar iCalendar, ZoneId zoneId)
+            throws TimeSlotOverlapException {
         requireNonNull(iCalendar);
         TimeTable timeTable = new TimeTable();
         /*
@@ -113,7 +119,7 @@ public class IcsUtil {
         Then we add this TimeSlot to the TimeTable.
          */
         for (VEvent vEvent : iCalendar.getEvents()) { //foreach TimeSlot in TimeTable
-            Optional<TimeSlot> optionalTimeSlot = vEventToTimeSlot(vEvent);
+            Optional<TimeSlot> optionalTimeSlot = vEventToTimeSlot(vEvent, zoneId);
             if (optionalTimeSlot.isPresent()) {
                 timeTable.addTimeSlot(optionalTimeSlot.get());
             }
@@ -132,21 +138,33 @@ public class IcsUtil {
      * Only allow VEvents that are recurring to be added.
      * @param vEvent {@code VEvent} to convert. Cannot be null.
      */
-    private Optional<TimeSlot> vEventToTimeSlot(VEvent vEvent) {
+    private Optional<TimeSlot> vEventToTimeSlot(VEvent vEvent, ZoneId zoneId) {
         requireNonNull(vEvent);
-        //formatter
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        DateFormat timeFormat = new SimpleDateFormat("HHmmss");
 
-        // this part extracts the vital information
-        DateStart dateStart = vEvent.getDateStart();
-        String dateStartStr = (dateStart == null) ? null : dateFormat.format(dateStart.getValue());
-        String timeStartStr = (dateStart == null) ? null : timeFormat.format(dateStart.getValue());
+        //each of these chunks extract/filter the vital information:
 
-        DateEnd dateEnd = vEvent.getDateEnd();
-        //dateEndStr omitted; we assume event ends on the same day.
-        String timeEndStr = (dateEnd == null) ? null : timeFormat.format(dateEnd.getValue());
+        //Event's Start:
+        //get the starting date and time (UTC)
+        DateStart dtStart = vEvent.getDateStart();
+        //convert to simple Date (UTC)
+        Date startDate = dtStart.getValue();
+        //use the simple Date to create an {@code Instant}. Instant objects are independent of timezone (UTC).
+        Instant startInstant = startDate.toInstant();
+        //derive the LocalDateTime (+8GMT) from the Instant and ZoneId
+        LocalDateTime startLdt = LocalDateTime.ofInstant(startInstant, zoneId);
 
+        //Event's End:
+        //get the ending date and time (UTC)
+        DateEnd dtEnd = vEvent.getDateEnd();
+        //convert to simple Date (UTC)
+        Date endDate = dtEnd.getValue();
+        //use the simple Date to create an {@code Instant}. Instant objects are independent of timezone (UTC).
+        Instant endInstant = endDate.toInstant();
+        //derive the LocalDateTime (+8GMT) from the Instant and ZoneId
+        LocalDateTime endLdt = LocalDateTime.ofInstant(endInstant, zoneId);
+
+
+        //get summary (TimeSlot's Label)
         Summary summary = vEvent.getSummary();
         String summaryStr = (summary == null) ? null : summary.getValue();
 
@@ -156,14 +174,14 @@ public class IcsUtil {
         }
 
         //if any of out essential TimeSlot variables are missing, ignore the VEvent and do not add it.
-        if ((dateStartStr == null) || (timeStartStr == null) || (timeEndStr == null)) {
+        if ((dtStart == null) || (dtEnd == null)) {
             return Optional.empty();
         }
 
         //after the above information extraction, we instantiate a TimeSlot with these info.
-        LocalTime timeSlotStartTime = DateTimeConversionUtil.getInstance().timeStringToLocalTime(timeStartStr);
-        LocalTime timeSlotEndTime = DateTimeConversionUtil.getInstance().timeStringToLocalTime(timeEndStr);
-        DayOfWeek timeSlotDay = DateTimeConversionUtil.getInstance().dateStringToDayOfWeek(dateStartStr);
+        LocalTime timeSlotStartTime = startLdt.toLocalTime();
+        LocalTime timeSlotEndTime = endLdt.toLocalTime();
+        DayOfWeek timeSlotDay = startLdt.getDayOfWeek();
 
         //Add timeslot to timetable
         //TODO: Add (summary/label) to timetable object.
