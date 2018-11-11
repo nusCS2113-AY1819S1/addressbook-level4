@@ -381,10 +381,11 @@ Examples:
 This would save the stock list at the time when the command is inputted, and the name for this xml file is
 `ForAugust.xml`, under a /versions/ folder in main.
 // end::savecommand[]
-// tag::opencommand[]
-=== Open a saved stock list : `open`
 
-An xml file recording current stocks will be opened. +
+// tag::opencommand[]
+=== Open and view a saved stock list : `open`
+
+The .xml file specified will be opened and displayed in table format on the Browser Panel. +
 Format: `open NAME`
 
 Examples:
