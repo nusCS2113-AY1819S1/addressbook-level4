@@ -11,7 +11,8 @@ public class Designation {
 
     public static final String MESSAGE_DESIGNATION_CONSTRAINTS =
             "Designation can only be either 'manager' or 'employee'";
-    public static final String DESIGNATION_VALIDATION_REGEX = "^[A-Za-z]+$";
+    public static final String DESIGNATION_EMPLOYEE = "employee";
+    public static final String DESIGNATION_MANAGER = "manager";
     public final String value;
 
     /**
@@ -26,10 +27,11 @@ public class Designation {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid designation.
      */
     public static boolean isValidDesignation(String test) {
-        return test.matches(DESIGNATION_VALIDATION_REGEX);
+        return test.equalsIgnoreCase(DESIGNATION_EMPLOYEE)
+            || test.equalsIgnoreCase(DESIGNATION_MANAGER);
     }
 
     @Override

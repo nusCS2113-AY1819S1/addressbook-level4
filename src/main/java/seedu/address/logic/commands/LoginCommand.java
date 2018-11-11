@@ -20,7 +20,8 @@ public class LoginCommand extends Command {
             + "\nmanager\nemployee\nas EMAIL"
             + "\nExample: login manager"
             + "\nExample: login as hello@gmail.com";
-
+    public static final String MESSAGE_INVALID_DESIGNATION = "Designation of input email is neither 'manager'"
+            + "nor 'employee'";
     private static final String KEY_MANAGER = "manager";
     private static final String KEY_EMPLOYEE = "employee";
 
@@ -55,7 +56,7 @@ public class LoginCommand extends Command {
                 loginIdentity = KEY_EMPLOYEE;
                 return new EmployeeParser(loginEmail);
             } else {
-                throw new CommandException(MESSAGE_INVALID_LOGIN);
+                throw new CommandException(MESSAGE_INVALID_DESIGNATION);
             }
         }
         switch (loginIdentity) {

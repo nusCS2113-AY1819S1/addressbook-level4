@@ -1,0 +1,77 @@
+= Jeevan Neralakere Somashekhar - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ProManage
+
+---
+
+== Overview
+
+This project portfolio documents my contributions to the development of the CS2113 project, as part of my team T16-2.
+
+== Summary of contributions
+
+* *Major enhancement*: added *`department` attribute for each person added into ProManage*. In addition, added *the ability to `list` all people and events, with the option to view people based on their departments* via the `list` command.
+** What it does: allows the user to `list people` and events. In addition, the user has the option to `list` people based on their departments.
+** Justification: This feature facilitates personal information collection for users. Users can easily view all the personal information of the relevant people he/she is looking for. Similarly, the user can view all information of all events.
+** Highlights: This feature considers which `department` the person is in. The user can also view the personal information of people from multiple departments.
+
+
+* *Minor enhancement*:
+** added a 'designation' attribute to each person added into ProManage. Essentially, for v1.4, each person is either a manager or an employee
+** improved the `login` command, allowing existing users of ProManage to login with their email. This helps to increases user friendliness.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jeevz10&sort=displayName&since=2018-09-12&until=2018-11-03&timeframe=day&reverse=false&repoSort=true]
+
+* *Other contributions*:
+
+** Project management:
+*** Helped to Managed releases on GitHub
+*** Help raised issues project dashboard on GitHub
+*** Wrote additional tests
+** Documentation:
+*** Contributed to the updates on the User Guide: https://github.com/CS2113-AY1819S1-T16-2/main/pull/25 https://github.com/CS2113-AY1819S1-T16-2/main/pull/57 https://github.com/CS2113-AY1819S1-T16-2/main/pull/82
+*** Updated the Developer Guide to include introduction, project scope, uses stories, use cases and non-functional requirements and `list` feature: https://github.com/CS2113-AY1819S1-T16-2/main/pull/6 https://github.com/CS2113-AY1819S1-T16-2/main/pull/57 https://github.com/CS2113-AY1819S1-T16-2/main/pull/82
+** Community:
+
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=introduction]
+
+include::../UserGuide.adoc[tag=login]
+
+include::../UserGuide.adoc[tag=list]
+
+include::../UserGuide.adoc[tag=commandSummary]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=List]
+
+include::../DeveloperGuide.adoc[tag=productscope]
+
+include::../DeveloperGuide.adoc[tag=userstories]
+
+include::../DeveloperGuide.adoc[tag=usecases]
+
+include::../DeveloperGuide.adoc[tag=nonfunctionalrequirements]
+
+
+
+
+
+
