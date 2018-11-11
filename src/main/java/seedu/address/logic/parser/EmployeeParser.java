@@ -107,7 +107,7 @@ public class EmployeeParser extends CommandsParser {
             throw new InvalidLoginException(IDENTITY);
 
         case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommandParser().parse(arguments);
+            return new LogoutCommandParser().parse(commandWord);
 
         case AddCommand.COMMAND_WORD:
             throw new InvalidPrivilegeException(IDENTITY);
