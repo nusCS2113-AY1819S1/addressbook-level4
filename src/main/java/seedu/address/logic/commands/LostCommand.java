@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Loststatus;
 import seedu.address.model.item.Quantity;
+import seedu.address.model.item.Status;
 
 
 //@@author HeHaowei
@@ -36,6 +37,8 @@ public class LostCommand extends Command {
 
     public static final String MESSAGE_LOST_ITEM_SUCCESS = "Lost Item: %1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "The lost quantity input is invalid";
+    public static final String MESSAGE_LOST_LARGER_THAN_READY = "The lost quantity much be larger than "
+            + "or equal to the quantity of Ready items";
 
     private final Index targetIndex;
     private final LostDescriptor lostDescriptor;
@@ -88,19 +91,21 @@ public class LostCommand extends Command {
 
         Integer updatedValue = lostDescriptor.getLostQuantity();
         Integer initialValue = itemToLost.getQuantity().toInteger();
-        if (initialValue - updatedValue < 0) {
-            throw new CommandException(MESSAGE_INVALID_QUANTITY);
+        Integer initialReadyValue = itemToLost.getStatus().getStatusReady();
+        if (initialReadyValue - updatedValue < 0) {
+            throw new CommandException(MESSAGE_LOST_LARGER_THAN_READY);
         }
         updatedLost += updatedValue;
         updatedFound -= updatedValue;
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue - updatedValue));
-
+        Status updatedStatus = new Status(initialReadyValue - updatedValue,
+                itemToLost.getStatus().getStatusOnLoan(), itemToLost.getStatus().getStatusFaulty());
 
 
         return new Item(itemToLost.getName(), updatedQuantity,
-                itemToLost.getMinQuantity(), updatedLoststatus, itemToLost.getTags());
+                itemToLost.getMinQuantity(), updatedLoststatus, updatedStatus, itemToLost.getTags());
     }
 
     /**

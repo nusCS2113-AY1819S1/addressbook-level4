@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//import seedu.address.model.AccountList;
+
 import seedu.address.model.StockList;
+//import seedu.address.model.account.Account;
+
 import seedu.address.model.item.Item;
 
 /**
@@ -52,6 +56,7 @@ public class TypicalItems {
      * Returns an {@code StockList} with all the typical items.
      * NEEDS WORK
      */
+
     /*
     public static AccountList getTypicalAccountList() {
         AccountList ab = new AccountList();
@@ -64,6 +69,6 @@ public class TypicalItems {
     public static List<Account> getTypicalAccounts() {
         return new ArrayList<>(Arrays.asList(ARDUINO, RPLIDAR, MOTOR));
     }
-    */
 
+*/
 }

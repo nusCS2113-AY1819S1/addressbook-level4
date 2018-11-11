@@ -21,8 +21,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Loststatus;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
+import seedu.address.model.item.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -102,10 +104,17 @@ public class EditCommand extends Command {
 
         Name updatedName = editItemDescriptor.getName().orElse(itemToEdit.getName());
         Quantity updatedQuantity = editItemDescriptor.getQuantity().orElse(itemToEdit.getQuantity());
+        Loststatus updatedLoststatus = new Loststatus(itemToEdit.getLoststatus().getLoststatusLost(),
+                updatedQuantity.toInteger() - itemToEdit.getLoststatus().getLoststatusLost());
         Quantity updatedMinQuantity = editItemDescriptor.getMinQuantity().orElse(itemToEdit.getMinQuantity());
         Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
-
-        return new Item(updatedName, updatedQuantity, updatedMinQuantity, updatedTags);
+        Status updatedStatus = new Status(updatedQuantity.toInteger()
+                - itemToEdit.getStatus().getStatusFaulty()
+                - itemToEdit.getStatus().getStatusOnLoan(),
+                itemToEdit.getStatus().getStatusOnLoan(),
+                itemToEdit.getStatus().getStatusFaulty());
+        return new Item(updatedName, updatedQuantity, updatedMinQuantity, updatedLoststatus,
+                updatedStatus, updatedTags);
     }
 
     @Override
@@ -134,6 +143,7 @@ public class EditCommand extends Command {
         private Name name;
         private Quantity quantity;
         private Quantity minQuantity;
+        //private Loststatus loststatus;
         private List<Integer> status;
         private Set<Tag> tags;
 

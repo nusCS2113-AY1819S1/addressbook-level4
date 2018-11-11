@@ -54,8 +54,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all items
-* **`add`**`n/Arduino q/20 m/5 t/Lab1 t/Lab2` : adds 20 `Arduino` item to the StockList, with a minimum quantity of 5 and tags `Lab1` and `Lab2`.
-* **`delete`**`1 q/20` : decreases the quantity of the `1st item by 20`.
+* **`add`**`n/Arduino q/20 m/5 t/Lab1 t/Lab2` : adds 20 `Arduino` item to the StockList, with a minimum quantity of 5 and tags `Lab1` and `Lab2`
+* **`delete`**`1` : deletes the item with index 1
 * *`status`* : Shows the number of every item in each status category (Ready, On_Loan, Faulty)
 
 .  Refer to <<Features>> for details of each command.
@@ -130,11 +130,11 @@ Examples:
 === Editing an item : `edit`
 
 Edits an existing item in the stock list +
-Format: `edit INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
+Format: `edit INDEX [n/NAME] [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
 
 ****
 * Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* At least one of the fields (name, quantity, minimum quantity or tag) must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the item will be removed i.e adding of tags is not cumulative.
 * You can remove all the item’s tags by typing t/ without specifying any tags after it.
@@ -147,12 +147,12 @@ Edits the name, quantity and tags of the 1st item to be `Arduino`, `25` and `Lab
 === Deleting an item : `delete`
 
 Deletes an item from the stock list +
-Format: `delete INDEX q/QUANTITY`
+Format: `delete INDEX
 
 Examples:
 
-* `delete 1 q/20` +
-Decreases the quantity of the 1st item by 20
+* `delete 1` +
+Deletes the item with index 1
 
 === Listing all items : `list`
 
@@ -183,7 +183,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case insensitive. e.g `arduino` will match `Arduino`
 * The order of the keywords does not matter. e.g. `ESP8226 Chip` will match `Chip ESP8266`
 * Only the name is searched.
-* Only full words will be matched e.g. `Arduino` will not match `Arduinos`
+* Partial words will be matched e.g. `Ard` will match `Arduino`
 * Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `Arduino Uno` will return `Arduino Mega`, `Arduino Leonardo`
 ****
 
@@ -233,10 +233,17 @@ Examples:
 * `deleteLoanList 1` +
 The first entry as shown on the viewLoanList command will be deleted. The status of the item will be automatically changed back to ready
 
+// tag::tag[]
 === Listing items under specific tags: `tag`
 
-Finds and lists items whose tags contain any of the given keywords. This command is case insensitive +
+Finds and lists items whose tags contain any of the given keywords. +
 Format: `tag KEYWORD [MORE_KEYWORDS]
+
+****
+* The search is case insensitive. e.g `lab1` will match `Lab1`
+* Only the tag is searched.
+* Partial words are recognized. e.g. `Lab` will match `Lab1`
+****
 
 Examples:
 
@@ -262,11 +269,12 @@ Examples:
 
 * `deleteTag 1 t/ Lab1 t/ Lab2` +
 Deletes tags "Lab1" and "Lab2" from the item with index 1
+// end::tag[]
 
 === Lost an item: `lost`
 
 Lost an item From the stock list +
-Format: `lost INDEX [q/QUANTITY]`
+Format: `lost INDEX q/QUANTITY`
 
 
 
@@ -277,13 +285,13 @@ Examples:
 === Found an item: `found`
 
 Found an item From the Lost&Found List +
-Format: `found INDEX [q/QUANTITY]`
+Format: `found INDEX q/QUANTITY`
 
 
 
 Examples:
 
-* `found index q/25`
+* `found 1 q/25`
 
 === Listing Lost&Found List: `lost&found`
 
@@ -340,8 +348,6 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
 
-// tag::savecommand[]
-
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -352,6 +358,7 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
+// tag::savecommand[]
 === Save current version of stock list : `save`
 
 An xml file recording current stocks will be created and named. +
@@ -363,7 +370,7 @@ Examples:
 This would save the stock list at the time when the command is inputted, and the name for this xml file is
 `ForAugust.xml`, under a /versions/ folder in main.
 // end::savecommand[]
-
+// tag::opencommand[]
 === Open a saved stock list : `open`
 
 An xml file recording current stocks will be opened. +
@@ -373,6 +380,7 @@ Examples:
 
 * `open ForAugust` +
 This would open the saved stock list under /versions/ folder in main at the time when the command is inputted
+// end::opencommand[]
 
 === Adding an account: `addAccount`
 
@@ -486,9 +494,9 @@ e.g. `tag Lab1`
 e.g. `addTag 1 t/Lab2`
 * *Delete Tag* `deleteTag INDEX t/TAG [MORE_TAGS]` +
 e.g. `deleteTag 1 t/Lab2`
-* *Lost* : `lost INDEX [q/QUANTITY]` +
+* *Lost* : `lost INDEX q/QUANTITY` +
 e.g. `lost 1 q/25`
-* *Found* : `found INDEX [q/QUANTITY]` +
+* *Found* : `found INDEX q/QUANTITY` +
 e.g. `found 1 q/25`
 * *Lost&Found List* : `lost&found`
 * *Undo* : `undo`

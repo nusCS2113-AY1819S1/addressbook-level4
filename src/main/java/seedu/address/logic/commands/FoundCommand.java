@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Loststatus;
 import seedu.address.model.item.Quantity;
+import seedu.address.model.item.Status;
 
 
 //@@author HeHaowei
@@ -36,6 +37,8 @@ public class FoundCommand extends Command {
 
     public static final String MESSAGE_FOUND_ITEM_SUCCESS = "Found Item: %1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "The found quantity input is invalid";
+    public static final String MESSAGE_FOUND_LARGER_THAN_LOST = "The quantity of found items "
+            + "must be less than or equal to quantity of lost items";
 
     private final Index targetIndex;
     private final FoundDescriptor foundDescriptor;
@@ -86,22 +89,27 @@ public class FoundCommand extends Command {
         Integer updatedLost = currentLoststatus.getLoststatusLost();
         Integer updatedFound = currentLoststatus.getLoststatusFound();
 
+        Integer initialReadyValue = itemToFound.getStatus().getStatusReady();
+
         Integer updatedValue = foundDescriptor.getFoundQuantity();
         Integer initialValue = itemToFound.getQuantity().toInteger();
 
         updatedLost -= updatedValue;
         updatedFound += updatedValue;
         if (updatedLost < 0) {
-            throw new CommandException(MESSAGE_INVALID_QUANTITY);
+            throw new CommandException(MESSAGE_FOUND_LARGER_THAN_LOST);
         }
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue + updatedValue));
+        Status updatedStatus = new Status(initialReadyValue + updatedValue,
+                itemToFound.getStatus().getStatusOnLoan(), itemToFound.getStatus().getStatusFaulty());
+
 
 
 
         return new Item(itemToFound.getName(), updatedQuantity,
-                itemToFound.getMinQuantity(), updatedLoststatus, itemToFound.getTags());
+                itemToFound.getMinQuantity(), updatedLoststatus, updatedStatus, itemToFound.getTags());
     }
 
     /**
