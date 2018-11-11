@@ -53,9 +53,9 @@ public class UpdateModuleCommandTest {
         Module validModule = TypicalModules.CS1111;
         int moduleId = 0;
         String updatedTitle = "CS module";
-        try (UnitOfWork unitoOfWork = new UnitOfWork()) {
-            moduleId = unitoOfWork.getModuleRepository().addModule(validModule);
-            unitoOfWork.commit();
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            moduleId = unitOfWork.getModuleRepository().addModule(validModule);
+            unitOfWork.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
