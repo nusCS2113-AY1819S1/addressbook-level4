@@ -66,10 +66,6 @@ public class AddMilestoneCommand extends Command implements CommandParser {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
         }
 
-        //else if (!Rank.isValidRank(toAdd.getRank().toString())) {
-        //    throw new CommandException(Rank.MESSAGE_RANK_CONSTRAINTS);
-        //}
-
         Task taskToEdit = lastShownList.get(index.getZeroBased());
 
         for (Milestone temp: taskToEdit.getMilestoneList()) {
