@@ -88,7 +88,7 @@ public class ExportCommandTest {
         Command importCommand = new ImportCommand(TEMP_FILE);
         commandResult = importCommand.execute(importModelStub, commandHistory);
 
-        //assertEquals(importModelStub.getTimeTable(), exportModelStub.getTimeTable()); //fails travis but not local
+        assertEquals(importModelStub.getTimeTable(), exportModelStub.getTimeTable());
         String expectedMessageImport = String.format(MESSAGE_IMPORT_SUCCESS, TEMP_FILE);
         assertEquals(expectedMessageImport, commandResult.feedbackToUser);
         //import is successful
