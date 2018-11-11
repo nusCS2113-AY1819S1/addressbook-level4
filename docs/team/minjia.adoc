@@ -1,0 +1,69 @@
+= Jin Minjia - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Drink I/O
+
+---
+
+== Overview
+In the CS2113T Software Engineering and Object-Oriented Programming module,
+I collaborated with three other students for a group project to enhance
+an existing Address Book application. My group decided to morph the
+given existing application into a *one-stop, comprehensive inventory
+management application* - *<DrinkIO>*.
+
+<DrinkIO> is a desktop application specially tailored to
+*small-scale drink distribution companies*. Such companies
+may rely on Microsoft Excel or paper to manage their inventory and
+their book-keeping. <DrinkIO> seeks to improve this workflow and
+digitise the process. Besides managing the imports and sales of
+drinks, <DrinkIO> can help these companies analyse a their sales
+performance and set reminders to help their employees import more
+drinks should their stocks fall low. <DrinkIO> is optimised for
+Command Line Interface (CLI), where users can simply type commands
+to go about their work, but there is a Graphic User Interface (GUI)
+created with JavaFX to make it easier for users to interact with
+the app. Overall, <DrinkIO> is written in Java, and has about 10kLoC.
+
+This project portfolio documents my contributions to the project;
+you will find how the major enhancements I worked on in <DrinkIO>,
+the transaction and analysis features, can be used and the
+implementation details for the enhancement.
+
+== Summary of contributions
+
+* *Major enhancement 1*: added the ability to automatically
+increase stock counts when transactions are entered
+** _What it does_: updates the stock counts for specified
+drinks when a user enters a sale or import transaction.
+** _Justification_: Typically, a user would record a transaction,
+and following that, update the stock counts manually. This feature improves the workflow of the company by reducing the double-work needed to update the stock counts.
+** _Highlights_: +
+
+* *Major enhancement 2*: added the ability to compute and
+display the sales performance figures on demand
+** _What it does_: calculates the overall cost, revenue and
+profit of the company using the transactions, when the user enters the relevant commands
+** _Justification_:
+** _Highlights_:
+
+== Contributions to the User Guide
+|===
+| Shown below are the sections I contributed to the User Guide that pertain to the transactions and analysis
+features in <Drink I/O>.
+|===
+
+*Major enhancement 1:*
+include::../UserGuide.adoc[tag=transactions]
+
+*Major enhancement 2:*
+include::../UserGuide.adoc[tag=analysis]
+
+== Contributions to the Developer Guide
+|===
+| Below are the sections I contributed to the Developer Guide.
+|===
+
+<to be added>

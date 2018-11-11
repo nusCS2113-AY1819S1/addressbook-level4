@@ -1,5 +1,5 @@
 :product_name : Drink I/O
-= AddressBook Level 4 - User Guide
+= Drink I/O -  User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -21,11 +21,11 @@ By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 
 
 == Introduction
+image::drink_io_logo.png[width="790"]
 
 *[blue]#_Drink I/O_#* is a desktop application that helps you to manage your drink distribution company.
-You can use *[blue]#_Drink I/O_#* to keep track of your inventory, analyse your company�s sales performance and
-set reminders to help you purchase more goods should their stocks fall low.
-*[blue]#_Drink I/O_#* is optimised for Command Line Interface (CLI), allowing you to manage your store
+You can use *[blue]#_Drink I/O_#* to keep track of your inventory and analyse your company's sales performance.
+*[blue]#_Drink I/O_#* is optimised for Command Line Interface (CLI), allowing you to manage your company
 faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI
 
 This user guide provides comprehensive documentation on the *[blue]#_Drink I/O_#* setup process, the features you can
@@ -34,7 +34,24 @@ get instructions and learn to improve your workflow with Drink I/O.
 
 === How to use this guide
 
+
+
+====
+*General Command Format*
+
+* Words in UPPER_CASE are the parameters supplied by users
+* Use underscore for spaces for fields other than `NAME`
+* Parameters can be supplied in any order as tags are specified
+** *e.g.* `p/' for selling price, `n/` for name
+* Parameters in square brackets are optional
+====
+
+
+
 === How to navigate Drink I/O's interface
+
+
+image::Ui.png[width="790"]
 
 
 == Quick Start
@@ -105,7 +122,7 @@ To login, you can use either the CLI or GUI to input your `USERNAME` and `PASSWO
 
 .Table List of user accounts at first launch or upon reset
 |===
-|user name |password |authentication level
+|User Name |Password |Authentication Level
 
 |tester
 |123
@@ -157,8 +174,19 @@ This is taken into account in *[blue]#_Drink I/O_#*. Each role has a different t
 account, and in a specific role, you can work with functions that are tailored to your role.
 
 === Stock Taker
+As the stock taker is primarily in charge of updating inventory, the *Stock Taker* account has tailored
+access to the inventory manager. See <<stocktaker-commandSummary>> for a summary of the commands that you can use
+as a stock taker.
+
 === Accountant
-=== Administrator
+The accountant has access to *[blue]#_Drink I/O_#*'s financial analysis tools in the *Accountant* account.
+See <<accountant-commandSummary>> for a summary of the commands that you can use
+as an accountant.
+
+=== Manager
+A manager has access to all of *[blue]#_Drink I/O_#*'s features and commands by using the *Manager* account.
+See <<manager-commandSummary>> for a summary of the commands that you can use
+as a manager.
 
 //tag::account[]
 == Managing Your {product_name} Account
@@ -201,7 +229,7 @@ If create account is successful, a message will be shown:
 image::loginPic/create_new_account_successful.PNG[width="300"]
 ====
 === Delete account
-As a [red]#manager# or [red]#administrator#,, you want to delete a account when it is no longer used.
+As a [red]#manager# or [red]#administrator#, you might want to delete a account when it is no longer used.
 Format: `deleteAccount u/USER_NAME`
 [.example]
 ====
@@ -214,6 +242,8 @@ If delete account is successful, a message will be shown:
 image::loginPic/deleteAccount_successful.PNG[width="300"]
 ====
 //end::account[]
+
+
 == Managing Your Inventory
 The core feature of *[blue]#_Drink I/O_#* is to manage your company's inventory.
 This includes the adding of drinks into the inventory, deleting, viewing their details
@@ -223,23 +253,23 @@ In *[blue]#_Drink I/O_#*, each drink has a _unique_ name, a selling price, a cos
 stock count and tags that allow you to classify the drink (e.g. soft drink, tea) and enter
 any other information.
 
-=== Adding new items
-When you decide to bring in new drinks into your company, you can add these drinks into
-your inventory to let *[blue]#_Drink I/O_#* track them.
+=== Adding new drinks
+You can add new drinks into your inventory to let *[blue]#_Drink I/O_#* track them.
 
 [TIP]
 ====
 *_Summary_* +
-
 *Command format*:
-`add n/NAME p/SELLING_PRICE cp/COST_PRICE`
+`add n/NAME p/SELLING_PRICE cp/COST_PRICE [t/TAG]...`
 
 * `NAME` is the name of the drink you wish to record
 ** This name must be unique among the drinks recorded in *[blue]#_Drink I/O_#*
-** Names are case-sensitive
+** Names are case-sensitive, and must contain only alphanumeric characters and spaces
 * `SELLING_PRICE` is the default selling price of 1 carton of the drink
 * `COST_PRICE` is the default cost price of 1 carton of the drink
-** Prices must not be negative values `[Coming in v1.4]`
+** Prices must not be negative values, and should have at most 2 decimal places
+* `TAG` is optional, and must contain only alphanumeric characters
+** You can add any number of tags, including 0
 ====
 
 
@@ -252,14 +282,16 @@ To enter a new drink into *[blue]#_Drink I/O_#*,
 . Key in `cp/`, followed by default cost price of 1 carton of the drink (`COST_PRICE`)
 . Press kbd:[enter]
 . Check whether the drink has been recorded successfully in the system
--  If you see the message "new drink added!", the drink has been successfully
-entered into *[blue]#_Drink I/O_#* +
--  If not, follow the instructions displayed in the message display pane, and re-enter the command +
+*  If you see the message "New drink added", followed by the drink's details that you entered,
+ the drink has been successfully entered into *[blue]#_Drink I/O_#* +
+** The drink will also appear at the bottom of the inventory list panel
+
+*  If not, follow the instructions displayed in the message display pane, and re-enter the command +
 
 [WARNING]
 ====
 - The new drink you want to add must be have a unique name among the drinks in *[blue]#_Drink I/O_#*.
-- The adding of the drink will fail if `SELLING_PRICE` or `COST_PRICE` are negative values. `[To be added in v1.4]`
+- The adding of the drink will fail if `SELLING_PRICE` or `COST_PRICE` are negative values.
 ====
 
 === Searching for specific drink(s)
@@ -268,7 +300,6 @@ Finds drinks which meet specific criteria depending on the prefix of the input.
 [TIP]
 ====
 *_Summary_* +
-
 *Command format*: +
  `find n/` `DRINK NAME` +
  `find q/` `QUANTITY` +
@@ -336,9 +367,22 @@ Returns all drinks which have batches imported before 2nd November 2018
 Returns all drinks which have batches imported before 9th November 2018
 
 === Viewing all drinks in inventory
-Shows a list of all drinks in the inventory list. +
+To show the full list of drinks in the inventory list, use `list`.
+This is especially useful after using a `find` command. +
 
-Format: `list`
+[TIP]
+====
+*_Summary_* +
+*Command format*: `list`
+====
+
+*Step-by-Step Instructions* +
+To view all drinks in *[blue]#_Drink I/O_#*,
+
+. Enter `list` into the command box
+. Press kbd:[enter]
+. You will see alll the drinks listed in the inventory panel on the left of the interface.
+
 
 === Viewing drink details
 To view further details of the drink such as its batches that are not displayed on the drink card panel, you can simply click on the relevant drink card to select it or use the select command.
@@ -348,33 +392,113 @@ Format: `select INDEX`
 
 ****
 * Selects the drink and loads the Drink detail page and the batch list page of the drink at the specified `INDEX`.
-* The index refers to the index number shown in the displayed drink list.
+* The index refers to the numbered bullet shown in the displayed drink list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
-=== Updating item details
-==== Updating item name
+=== Updating drink details
+You can change the cost price, selling price and tags of a drink. +
+For even greater efficiency, *[blue]#_Drink I/O_#* allows you to edit the above fields simultaneously.
+You can do this by specifying multiple fields to edit in a single command.
+
+[TIP]
+====
+*_For power users_* +
+You can update multiple fields at once by indicating multiple fields to edit in one command. +
+*Command format*: `edit INDEX [cp/COST_PRICE] [p/SELLING_PRICE] [t/TAG]...`
+
+You must specify at least one of the fields.
+====
+
 ==== Updating cost price
-==== Updating sales price
-
-== Managing Transactions
-Buying and selling likely occurs frequently in your company. To manage the ins and outs of your drinks,
-you can record your sales and purchases of drinks into *[blue]#_Drink I/O_#*, and let *[blue]#_Drink I/O_#*
-handle the updating of the inventory for you in real-time.
-
-
-=== Creating a purchase transaction
-When you buy and receive new goods, and want to update your stocks, you can enter a purchase transaction to do so.
+*[blue]#_Drink I/O_#* allows you to change the cost price of a drink after adding it.
 
 [TIP]
 ====
 *_Summary_* +
+*Command format*: `edit INDEX cp/COST_PRICE`
+====
 
+*Step-by-Step Instructions* +
+To edit the cost price of a drink in *[blue]#_Drink I/O_#*,
+
+. Enter `edit` into the command box
+. Enter the inventory list bullet number corresponding to the desired drink (`INDEX`)
+. Key in `cp/`, followed by new cost price (`COST_PRICE`)
+. Press kbd:[enter]
+. Check whether the drink details have been edited successfully in the system
+*  If you see the message "Edited drink", followed by the updated drink details,
+ the drink's cost price has been successfully edited into *[blue]#_Drink I/O_#* +
+** The drink's updated details will also be updated in the inventory list panel
+*  If not, follow the instructions displayed in the message display pane, and re-enter the command +
+
+
+==== Updating selling price
+*[blue]#_Drink I/O_#* allows you to change the selling price of a drink after adding it.
+
+[TIP]
+====
+*_Summary_* +
+*Command format*: `edit INDEX p/SELLING_PRICE`
+====
+
+*Step-by-Step Instructions* +
+To edit the selling price of a drink in *[blue]#_Drink I/O_#*,
+
+. Enter `edit` into the command box
+. Enter the inventory list bullet number corresponding to the desired drink (`INDEX`)
+. Key in `p/`, followed by new selling price (`SELLING_PRICE`)
+. Press kbd:[enter]
+. Check whether the drink details have been edited successfully in the system
+*  If you see the message "Edited drink", followed by the updated drink details,
+ the drink's cost price has been successfully edited into *[blue]#_Drink I/O_#* +
+** The drink's updated details will also be updated in the inventory list panel
+*  If not, follow the instructions displayed in the message display pane, and re-enter the command +
+
+==== Updating tags
+*[blue]#_Drink I/O_#* allows you to change the optional tags of a drink after adding it.
+
+[TIP]
+====
+*_Summary_* +
+*Command format*: `edit INDEX t/TAG...` +
+You may enter any number of tags, including 0. To clear tags, enter `t/`.
+====
+
+*Step-by-Step Instructions* +
+To edit the tags of a drink in *[blue]#_Drink I/O_#*,
+
+. Enter `edit` into the command box
+. Enter the inventory list bullet number corresponding to the desired drink (`INDEX`)
+. Key in `t/`, followed by new tag (`TAG`)
+* If you wish to clear tags, enter only `t/`
+* You may enter multiple tags. An example to do so: `t/TAG_1 t/TAG_2`
+. Press kbd:[enter]
+. Check whether the drink details have been edited successfully in the system
+*  If you see the message "Edited drink", followed by the updated drink details,
+ the drink's cost price has been successfully edited into *[blue]#_Drink I/O_#* +
+** The drink's updated details will also be updated in the inventory list panel
+*  If not, follow the instructions displayed in the message display pane, and re-enter the command +
+
+// tag::transactions[]
+== Managing Transactions
+To manage the purchases and sales of drinks, you can record them into *[blue]#_Drink I/O_#*,
+and let *[blue]#_Drink I/O_#* handle the updating of the inventory for you in real-time.
+These transactions also facilitate financial analyses (see <<>> #TOBE ADDED#).
+
+
+=== Creating a purchase transaction
+When you make a purchase, you can increase your stocks by entering a purchase transaction.
+
+[TIP]
+====
+*_Summary_* +
 *Command format*:
 `buy n/NAME q/QUANTITY`
 
 * `NAME` is the name of the drink you are entering a transaction for
 ** The desired drink must be recorded in *[blue]#_Drink I/O_#*
+** The name entered is case-sensitive
 * `QUANTITY` is the number of cartons of drink that you are transacting
 
 ====
@@ -385,42 +509,36 @@ To record a purchase transaction,
 . Key in `n/`, followed by name of drink (`NAME`)
 . Key in `q/`, followed by quantity purchased (`QUANTITY`)
 . Press kbd:[enter]
+. Confirm the command by entering `y` or `Y`
+. Press kbd:[enter]
 . Check whether the transaction has been recorded successfully
--  If you see the message "Purchase transaction recorded!", the transaction had been successfully
-entered into *[blue]#_Drink I/O_#* +
+-  If you see the message "Purchase transaction recorded!", followed by the transaction details,
+ the transaction had been successfully entered into *[blue]#_Drink I/O_#* +
+ ** The transaction will also appear at the bottom of the transaction list panel
 -  If not, follow the instructions displayed in the message display pane, and re-enter the command +
 
 [WARNING]
 ====
-The drink you want to transact must be recorded in *[blue]#_Drink I/O_#*.
-Otherwise,
-// you will see the message "The drink entered does not exist in the inventory list", and
+The drink you want to transact must be recorded in *[blue]#_Drink I/O_#*. The drink name is _case-sensitive_.
+Otherwise, you will see the message "The drink entered does not exist in the inventory list", and
 the transaction will not be entered into the system.
 ====
 
-[NOTE]
-====
-*More about batches* +
-<to be added>
-
-====
-
-
-
 
 === Creating a sale transaction
-When you make a sale to your customers, recording the sale in *[blue]#_Drink I/O_#* allows you
-to update your transactions as well as the current stock.
+When you make a sale, you can decrease your stocks by entering a sale transaction.
 
 [TIP]
 ====
 *_Summary_* +
-
 *Command format*:
 `sell n/NAME q/QUANTITY` +
 
-* Desired drink must be recorded in *[blue]#_Drink I/O_#* +
-* Quantity must not exceed current stock
+* `NAME` is the name of the drink you are entering a transaction for
+** The desired drink must be recorded in *[blue]#_Drink I/O_#*
+** The name entered is case-sensitive
+* `QUANTITY` is the number of cartons of drink that you are transacting
+** Quantity must not exceed current stock
 
 ====
 *Step-by-Step Instructions* +
@@ -430,25 +548,28 @@ To record a sale transaction,
 . Key in `n/`, followed by name of drink (`NAME`)
 . Key in `q/`, followed by quantity transacted in sale (`QUANTITY`)
 . Press kbd:[enter]
+. Confirm the command by entering `y` or `Y`
+. Press kbd:[enter]
 . Check whether the transaction has been recorded successfully,
-* If you see the message "Sale transaction recorded!", the transaction had been
-successfully entered into *[blue]#_Drink I/O_#*
+* If you see the message "Sale transaction recorded!", followed by the transaction details,
+ the transaction had been successfully entered into *[blue]#_Drink I/O_#*
+** The transaction will also appear at the bottom of the transaction list panel
 * If not, follow the instructions displayed in the message display pane, and re-enter the command +
 
 [WARNING]
 ====
-- The drink you want to transact must be recorded in *[blue]#_Drink I/O_#*.
+- The drink you want to transact must be recorded in *[blue]#_Drink I/O_#*. The drink name is _case-sensitive_.
+Otherwise, you will see the message "The drink entered does not exist in the inventory list", and
+the transaction will not be entered into the system.
 - The recording will fail if `QUANTITY` is more than the available stock in *[blue]#_Drink I/O_#*.
-  Do check if your stock counts in *[blue]#_Drink I/O_#* are updated.
 ====
 
 === Viewing transactions
-You can view the transactions entered into *[blue]#_Drink I/O_#* to verify their accuracy.
+You can view all the transactions entered into *[blue]#_Drink I/O_#* to verify their accuracy.
 
 [TIP]
 ====
 *_Summary_* +
-
 *Command format*:
 `viewTrans`
 ====
@@ -459,94 +580,127 @@ To view all transactions entered,
 . Enter `viewTrans` into the command box
 . Press kbd:[enter]
 
-You will see a list of transactions displayed in the results panel.
+You will see a list of all transactions displayed in the transactions panel.
 
 
+// tag::analysis[]
 == Analysing Sales Performance
-Having up-to-date figures on how much you are making is definitely an important statistic to
-gauge the health of your company. *[blue]#_Drink I/O_#* can crunch the numbers from your
-transactions for you, and present overall cost, revenue and profit, and
-individual drink's sales figures.
-// Add about bestselling drink
+*[blue]#_Drink I/O_#* can calculate the overall cost, revenue and profit aggregated across all drinks,
+for various periods based on your list of transactions.
 
-=== Viewing overall cost, revenue and profit
-You can view the overall sales figures aggregated across all drinks.
 
-==== Viewing overall cost
-You can check the total costs incurred by your company. Let *[blue]#_Drink I/O_#*
-calculate the costs since the beginning of using *[blue]#_Drink I/O_#* for you.
+=== Indicating time period for analysis
+You can indicate the time period for the analysis of overall sales figures.
 
 [TIP]
 ====
 *_Summary_* +
+*Time period parameters*:
 
+* Current day: (none)
+* Past 7 days (including current day): `-w`
+* Past 30 days (including current day): `-m`
+====
+
+The time periods available are:
+
+* within the current day
+* within the week (including current day)
+* within 30 days (including current day)
+
+To indicate the time periods desired in your analysis, append one of the following period parameters to the end of the command:
+
+* `-w` for a period of a week
+* `-m` for a period of 30 days
+
+No parameter is required for analysis in the period of a day.
+See <<Viewing overall cost>> for concrete usage examples and step-by-step instructions.
+
+=== Viewing overall cost
+You can check the total costs incurred by your company, over a specified period.
+
+[TIP]
+====
+*_Summary_* +
 *Command format*:
-`analyseCosts`
+`costs [PERIOD_PARAMETER]`
 ====
 
 *Step by Step Instructions* +
-To view the total costs incurred,
 
-. Enter `analyseCosts` into the command box
-
+* To view the total costs incurred within the *current day*:
+. Enter `costs` into the command box
 . Press kbd:[enter]
 
-You should see a value displayed in the results panel.
+You should see the value of the total costs displayed in the results panel.
+
+* To view the total costs incurred within the *past 7 days* (inclusive of current day):
+. Enter `costs -w` into the command box
+. Press kbd:[enter]
+
+You should see the value of the total costs incurred over the week displayed in the results panel.
+
+* To view the total costs incurred within the *past 30 days* (inclusive of current day):
+. Enter `costs -m` into the command box
+. Press kbd:[enter]
+
+You should see the value of the total costs incurred over the past 30 days displayed in the results panel.
+The transactions list will also show the relevant transactions included in the analysis.
 
 // insert picture
 
-==== Viewing overall revenue `[Coming in v1.4]`
-*[blue]#_Drink I/O_#* can calculate the total revenue your company has earned
-since the beginning of using *[blue]#_Drink I/O_#* for you.
+=== Viewing overall revenue
+You can check the total revenue earned by your company, over a specified period.
 
 [TIP]
 ====
 *_Summary_* +
-
 *Command format*:
-`analyseRevenue`
+`revenue [PERIOD_PARAMETER]`
 ====
 
 *Step by Step Instructions* +
 To view the total revenue earned,
 
-. Enter `analyseRevenue` into the command box
-
+. Enter `revenue` into the command box
+. Append a desired period parameter
+ * e.g. `-w`, `-m` (see <<Indicating time period for analysis>>)
 . Press kbd:[enter]
 
-You should see a value displayed in the results panel.
+You should see the value of the total revenue earned in the specified period displayed in the results panel.
+The transactions list will also show the relevant transactions included in the analysis.
 
 // insert picture
 
-==== Viewing overall profit `[Coming in v1.4]`
-*[blue]#_Drink I/O_#* can calculate the total profit your company has earned
-since the beginning of using *[blue]#_Drink I/O_#* for you.
+=== Viewing overall profit
+You can check the total profit earned by your company, over a specified period.
 
 [TIP]
 ====
 *_Summary_* +
-
 *Command format*:
-`analyseProfits`
+`proft [PERIOD_PARAMETER]`
 ====
 
 *Step by Step Instructions* +
 To view the total profit earned,
 
-. Enter `analyseProfits` into the command box
-
+. Enter `profit` into the command box
+. Append a desired period parameter
+ * e.g. `-w`, `-m` (see <<Indicating time period for analysis>>)
 . Press kbd:[enter]
 
-You should see a value displayed in the results panel.
+You should see the value of the total profit earned displayed in the results panel.
+The transactions list will also show the relevant transactions included in the analysis.
 
 // insert picture
 
 
-=== Filtering popular items `[Coming in v1.4]`
-=== Viewing an item's transactions `[Coming in v1.4]`
-=== Viewing an item's cost, revenue and profit `[Coming in v1.4]`
+=== Filtering popular drinks `[Coming in v2.0]`
+=== Viewing a drink's transactions `[Coming in v2.0]`
+=== Viewing a drink's cost, revenue and profit `[Coming in v2.0]`
 
-== Setting Reminders `[Coming in v1.4]`
+== Setting Reminders `[Coming in v2.0]`
 
 
 
@@ -565,11 +719,12 @@ You should see a value displayed in the results panel.
 *General Command Format*
 
 * Words in UPPER_CASE are the parameters supplied by users
-* Use underscore for spaces
+* Use underscore for spaces for fields other than `NAME`
 * Parameters can be supplied in any order as tags are specified
-** *e.g.* t/ for item, c/ for characteristic
+** *e.g.* `p/` for selling price, `n/` for name
 * Parameters in square brackets are optional
 ====
+
 === Global Commands
 
 ==== Exiting Program: `exit`
@@ -585,47 +740,12 @@ Change password of the current account
 Format: `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
 [NOTE]
 ====
-This enable user to change their password after manager create a default account.
+This enables the user to change their password after manager create a default account.
 ====
 
-////
-==== View stock numbers of an drink based on name: `view` `[Coming in v1.4]`
 
-Format: `view [-d] [n/Drink_NAME] [-b]`
-
-[NOTE]
-====
-The default view is for a type of drink.
-The default order will be a alphabetical order.
-When command -d is added, the list will show an decreasing alphabetical order.
-When command -b is added, the list will show a list based on individually batch.
-====
-
-==== View stock numbers of an drink based on quantity: `quantity` `[Coming in v1.4]`
-Displays specifically the quantities left of the ingredient desired.
-	Format: `quantity [-d] [n/Drink_NAME] [-b] [t/tag]`
-[NOTE]
-====
-The default view is for a type of drink.
-The default order will be a increasing order whereby the least number of drink will be showed first
-When command -d is added, the list will show an decreasing order.
-When n/Drink Name is added, the list will only show the quantity related to the name.
-When command -b is added, the list will show a list based on individually batch.
-When t/tag is added, it will show a list that has all the drinks with that particular tag.
-====
-
-==== View import dates for a batch of drinks: `importDate` `[Coming in v1.4]`
-Displays the import dates of batches of the drink desired.
-	Format: `importDate [-d] INGREDIENT_NAME`
-
-[NOTE]
-====
-The default order will be a increasing order whereby the earliest importing date will be showed first
-When command -d is added, the list will show an decreasing order
-====
-////
-
-=== Manager
+[#manager-commandSummary]
+=== Manager Commands
 
 ==== Viewing Help: `help`
 Shows available commands with brief description of what a manager can do.
@@ -640,17 +760,8 @@ All the drinks added will be in a predefined list. As such, stock taker only abl
 ====
 
 
-////
-==== View history of actions: `history`
-Displays list of actions done by user over a specified time frame.
-	Format: `history START_DATE END_DATE`
-[NOTE]
-====
-Start date must be earlier than end date
-====
-////
-
-=== Stock Taker
+[#stocktaker-commandSummary]
+=== Stock Taker Commands
 
 ==== Viewing Help: `help`
 Shows available commands with brief description of what a stock taker can do.
@@ -683,7 +794,8 @@ not in the inventory list
 * Quantity sold cannot be more than stock. Otherwise, a warning message will be shown.
 ====
 
-=== Accountant
+[#accountant-commandSummary]
+=== Accountant Commands
 
 ==== Viewing Help: `help`
 Shows available commands with brief description of what can accountant do. +
@@ -715,69 +827,8 @@ View the variation tendency of the cost of every ingredient in a period specifie
 Update the cost of ingredients every time they change to keep track.
 	Format: `editcost INGREDIENT_NAME UNIT_COST`
 
-==== Listing entered commands : `history`
 
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
-
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
-
-// tag::undoredo[]
 ////
-==== Undoing previous command : `undo`
-
-<TO BE EDITED FURTHER> +
-Restores the FrozenBook to the state before the previous _undoable_ command was executed. +
-Format: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the FrozenBook's content (`add`, `delete`, `edit` and `clear`).
-====
-
-Examples:
-
-* `delete 1` +
-`viewall` +
-`undo` (reverses the `delete 1` command) +
-
-* `select 1` +
-`viewall` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-
-==== Redoing the previously undone command : `redo`
-
-<TO BE EDITED FURTHER> +
-Reverses the most recent `undo` command. +
-Format: `redo`
-
-Examples:
-
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-
-* `delete 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
-
 ==== Clearing all entries : `clear`
 
 Clears all data from the inventory. +
@@ -788,22 +839,18 @@ Format: `clear`
 Exits the program. +
 Format: `exit`
 
-=== Administrator
+=== Administrator Commands
 ==== Creating an account: `createAccount`
 Creates a new Drink I/O account.
     Format: `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
 
 
-=== Saving the data `[Coming in v1.4]`
+=== Saving the data
 
-DrinkIO data is saved in the hard disk automatically after any command that changes the data. +
+*[blue]#_Drink I/O_#* data is saved in the hard disk automatically after any command that changes the drinks data
+or updates the transactions. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
 
 == Upcoming Features in Future Releases
 
@@ -816,31 +863,31 @@ with the file that contains the data of your previous *[blue]#_Drink I/O_#* fold
 
 == Command Summary
 === Common Commands
-* *logout* : `logout`
-* *exit* : `exit`
-* *help* : `help`
-* *change password* : `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
+* *logout*: `logout`
+* *exit*: `exit`
+* *help*: `help`
+* *change password*: `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
 ////
 * *view stock by Name* : `view [-d] [n/Drink_NAME] [-b]`
 * *view stock by quantity* : `quantity [-d] [n/Drink_NAME] [-b] [t/tag]`
 * *view stock by import date* : `importDate [-d] INGREDIENT_NAME`
 ////
 
-=== Manager
+=== Manager Commands
 
 * *add new item* : `add n/DRINK_NAME p/DEFAULT_SELLING_PRICE cp/DEFAULT_COST_PRICE`
 //* *view history* : `history START_DATE END_DATE`
 * *create account* : `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
 * *delete account* : `deleteAccount u/USER_NAME`
 
-=== Stock Taker
+=== Stock Taker Commands
 
 * *increase quantity of stock* : `buy n/DRINK_NAME q/QUANTITY`
 * *decrease quantity of stock* : `sell n/DRINK_NAME q/QUANTITY`
 
-=== Accountant
+=== Accountant Commands
 
-* *get total profit* : `profit` `[coming in v1.4]`
+* *get total profit* : `profit`
 * *get total costs* : `analyseCosts`
 * *view transactions* : `viewTrans`
 //* *sale of item* : `sales`
@@ -848,5 +895,5 @@ with the file that contains the data of your previous *[blue]#_Drink I/O_#* fold
 //* *view cost trend* : `viewcost`
 //* *edit current cost* : `editcost`
 
-=== Administrator
+=== Administrator Commands
 * *create account* : `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
