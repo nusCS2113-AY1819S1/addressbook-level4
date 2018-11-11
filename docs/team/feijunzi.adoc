@@ -73,7 +73,7 @@ to the project._
 |===
 
 include::../DeveloperGuide.adoc[tag=checkexpenditure]
-include::../DeveloperGuide.adoc[tag=useCases]
+include::../DeveloperGuide.adoc[tag=expenditureuseCases]
 
 
 
