@@ -3,8 +3,8 @@
 <book>
     <name>Hans Muster</name>
     <isbn>9482asf424</isbn>
-    <price>5.90</price>
-    <cost>4.90</cost>
+    <price>29.99</price>
+    <cost>19.99</cost>
     <quantity>4</quantity>
     <tagged>friends</tagged>
 </book>

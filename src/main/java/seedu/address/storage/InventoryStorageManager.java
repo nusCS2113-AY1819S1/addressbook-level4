@@ -52,13 +52,13 @@ public class InventoryStorageManager extends ComponentManager implements Invento
     // ================ BookInventory methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return bookInventoryStorage.getAddressBookFilePath();
+    public Path getBookInventoryFilePath() {
+        return bookInventoryStorage.getBookInventoryFilePath();
     }
 
     @Override
     public Optional<ReadOnlyBookInventory> readBookInventory() throws DataConversionException, IOException {
-        return readBookInventory(bookInventoryStorage.getAddressBookFilePath());
+        return readBookInventory(bookInventoryStorage.getBookInventoryFilePath());
     }
 
     @Override
@@ -70,7 +70,7 @@ public class InventoryStorageManager extends ComponentManager implements Invento
 
     @Override
     public void saveAddressBook(ReadOnlyBookInventory addressBook) throws IOException {
-        saveAddressBook(addressBook, bookInventoryStorage.getAddressBookFilePath());
+        saveAddressBook(addressBook, bookInventoryStorage.getBookInventoryFilePath());
     }
 
     @Override
