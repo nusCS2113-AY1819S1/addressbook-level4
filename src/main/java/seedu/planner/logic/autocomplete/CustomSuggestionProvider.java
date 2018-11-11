@@ -169,7 +169,7 @@ public class CustomSuggestionProvider {
             case EditLimitCommand.COMMAND_WORD:
                 datesCommandKeyword(inputs, strIndex);
                 return;
-                
+
             case SortCommand.COMMAND_WORD:
                 sortCommandKeyword(inputs, strIndex);
                 return;
