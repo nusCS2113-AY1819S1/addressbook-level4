@@ -28,4 +28,13 @@
         <expectedNumOfHours>1</expectedNumOfHours>
         <isCompleted>false</isCompleted>
     </tasks>
+    <tasks>
+        <deadline>1/1/2018</deadline>
+        <moduleCode>CS2114</moduleCode>
+        <title>Start on code</title>
+        <description>Find out more about syntax of new language</description>
+        <priorityLevel>High</priorityLevel>
+        <expectedNumOfHours>1</expectedNumOfHours>
+        <isCompleted>false</isCompleted>
+    </tasks>
 </addressbook>

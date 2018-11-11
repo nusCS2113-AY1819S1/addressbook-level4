@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_1ST_JAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_2_HOURS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_3;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2101;
@@ -14,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_3;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_TASK;
 import static seedu.address.testutil.TypicalTasks.CS2101_HOMEWORK;
@@ -32,7 +32,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-//import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 import seedu.address.testutil.TaskBuilder;
@@ -97,18 +97,16 @@ public class EditTaskCommandTest {
         assertCommandFailure(editTaskCommand, model, commandHistory, expectedMessage);
     }
 
-    /*buggy Test Check with chels if I can change one of the TypicalTask deadline
+    //buggy Test Check with chels if I can change one of the TypicalTask deadline
     @Test
     public void execute_editCommandResultingInDuplicateTasks_editFailure() {
-        Task firstTaskInList = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
-        // Set first task deadline to be equal to that of third task since editTaskCommand does not alter date
-        // For duplicate task exception, deadline of both tasks have to be equal
-        firstTaskInList.setDeadline(new Deadline(VALID_DEADLINE_1ST_JAN));
-        EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_THIRD_TASK,
-                new EditTaskDescriptorBuilder(firstTaskInList).build());
+        // since editTaskCommand does not alter deadline, two tasks wth the same deadline are chosen
+        Task thirdTaskInList = model.getFilteredTaskList().get(INDEX_THIRD_TASK.getZeroBased());
+        EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FOURTH_TASK,
+                new EditTaskDescriptorBuilder(thirdTaskInList).build());
 
         assertCommandFailure(editTaskCommand, model, commandHistory, EditTaskCommand.MESSAGE_DUPLICATE_TASK);
-    } */
+    }
 
     @Test
     public void execute_invalidTaskIndex_editFailure() {
