@@ -1,4 +1,4 @@
-package seedu.address.ui.calendar;
+package seedu.address.ui;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -7,7 +7,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -15,12 +14,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import seedu.address.ui.UiPart;
 
+//@@author linnnruoo
+//inspired by the original @@author guekling 
 /**
  * Supports the display of the month view of the calendar.
  */
-public class MonthView extends UiPart<Region> {
+public class CalendarLayout extends UiPart<Region> {
 
-    private static final String FXML = "MonthView.fxml";
+    private static final String FXML = "CalendarLayout.fxml";
 
     private static final int SUNDAY = 7;
     private static final int MAX_COLUMN = 6;
@@ -36,12 +37,11 @@ public class MonthView extends UiPart<Region> {
     @FXML
     private GridPane gridCalendar;
 
-    public MonthView() {
+    public CalendarLayout() {
         super(FXML);
 
         currentYearMonth = YearMonth.now();
         viewYearMonth = currentYearMonth;
-
     }
 
     /**
@@ -49,29 +49,29 @@ public class MonthView extends UiPart<Region> {
      *
      * @param yearMonth Year and month in the YearMonth format.
      */
-    public void getMonthView(YearMonth yearMonth) {
+    public void getCalendarLayout(YearMonth yearMonth) {
         viewYearMonth = yearMonth;
         YearMonth y = YearMonth.now();
         int year = y.getYear();
 
-        setMonthCalendarTitle(year, yearMonth.getMonth().toString());
-        setMonthCalendarDatesAndEntries(year, yearMonth.getMonthValue());
+        getCalendarTitle(year, yearMonth.getMonth().toString());
+        getCalenndarDates(year, yearMonth.getMonthValue());
     }
 
     /**
      * Sets the title of the calendar according to a specific month and year.
      */
-    public void setMonthCalendarTitle(int year, String month) {
+    public void getCalendarTitle(int year, String month) {
         calendarTitle.setText(month + " " + year);
     }
 
     /**
-     * Sets the dates and entries of a month-view calendar according to the specific month and year.
+     * Sets the dates  of the calendar according to the specific month and year.
      *
      * @param year Year represented as a 4-digit integer.
      * @param month Month represented by numbers from 1 to 12.
      */
-    private void setMonthCalendarDatesAndEntries(int year, int month) {
+    private void getCalenndarDates(int year, int month) {
         LocalDate startDate = LocalDate.of(year, month, 1);
         int lengthOfMonth = startDate.lengthOfMonth();
         int startDay = getMonthStartDay(startDate);
@@ -80,11 +80,11 @@ public class MonthView extends UiPart<Region> {
         datesToBePrinted = new String[36];
         storeMonthDatesToBePrinted(lengthOfMonth);
 
-        setFiveWeeksMonthCalendar(startDay);
+        setFiveWeeksCalendar(startDay);
 
         // If month has more than 5 weeks
         if (dateCount != lengthOfMonth) {
-            setSixWeeksMonthCalendar(lengthOfMonth);
+            setSixWeeksCalendar(lengthOfMonth);
         }
     }
 
@@ -94,7 +94,7 @@ public class MonthView extends UiPart<Region> {
      * @param startDay Integer value of the day of week of the start day  of the month. Values ranges from 1 - 7,
      *                 representing the different days of the week.
      */
-    private void setFiveWeeksMonthCalendar(int startDay) {
+    private void setFiveWeeksCalendar(int startDay) {
         dateCount = 1;
         for (int row = 0; row <= MAX_ROW; row++) {
             if (row == 0) {
@@ -118,7 +118,7 @@ public class MonthView extends UiPart<Region> {
      *
      * @param lengthOfMonth Integer value of the number of days in a month.
      */
-    private void setSixWeeksMonthCalendar(int lengthOfMonth) {
+    private void setSixWeeksCalendar(int lengthOfMonth) {
         int remainingDays = lengthOfMonth - dateCount;
 
         for (int column = 0; column <= remainingDays; column++) {
@@ -180,26 +180,5 @@ public class MonthView extends UiPart<Region> {
                 datesToBePrinted[date] = "  " + String.valueOf(date);
             }
         }
-    }
-
-    /**
-     * Checks if the dates are printed in the same row and column.
-     */
-    public boolean dateIsEqual(Object other) {
-        MonthView monthView = (MonthView) other;
-
-        for (int date = 1; date <= viewYearMonth.lengthOfMonth(); date++) {
-            Node expectedText = gridCalendar.lookup("#date" + String.valueOf(date));
-            int expectedRow = gridCalendar.getRowIndex(expectedText);
-            int expectedColumn = gridCalendar.getColumnIndex(expectedText);
-
-            Node actualText = monthView.gridCalendar.lookup("#date" + String.valueOf(date));
-            int actualRow = monthView.gridCalendar.getRowIndex(actualText);
-            int actualColumn = monthView.gridCalendar.getColumnIndex(actualText);
-
-            return (expectedRow == actualRow) && (expectedColumn == actualColumn);
-        }
-
-        return false;
     }
 }
