@@ -95,6 +95,18 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons of the same name
+     */
+    public boolean isSamePersonForRegister(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getName().equals(getName());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
