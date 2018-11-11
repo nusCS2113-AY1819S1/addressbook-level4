@@ -5,18 +5,16 @@
 :stylesDir: stylesheets
 
 Inventarie Pro was developed by the CS2113-AY1819S1-T13-3 team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
-{empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== Yeo Su Yia, Denise
-image::dyeosy98.png[width="150", align="left"]
-{empty}[https://github.com/dyeosy98[github]]
+=== Amirul Maricar
+image::amirulmaricar.png[width="150", align="left"]
+{empty}[https://github.com/amirulmaricar[github]]
 
-Role: Developer Marketing Lead +
-Responsibilities: Documentation + Communication
+Role: Project Manager +
+Responsibilities: Security + Tester
 
 '''
 
@@ -29,20 +27,20 @@ Responsibilities: Integrator + Threading
 
 '''
 
+=== Yeo Su Yia, Denise
+image::dyeosy98.png[width="150", align="left"]
+{empty}[https://github.com/dyeosy98[github]]
+
+Role: Developer Marketing Lead +
+Responsibilities: Documentation + Communication
+
+'''
+
 === Tahir Gara
 image::garagaristahir.png[width="150", align="left"]
 {empty}[https://github.com/garagaristahir[github]]
 
 Role: Core Developer +
 Responsibilities: Product Data
-
-'''
-
-=== Amirul Maricar
-image::amirulmaricar.png[width="150", align="left"]
-{empty}[https://github.com/amirulmaricar[github]]
-
-Role: Project Manager +
-Responsibilities: Security + Tester
 
 '''
