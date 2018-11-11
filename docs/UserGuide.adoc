@@ -115,17 +115,22 @@ image::switchBook.png[width="390"]
 // tag::add[]
 === Adding a candidate / company / job  : `addc` `addC` `addj`
 
+image::addingRB.gif[width="500"]
+
 ==== Adds a candidate to the RecruitBook
 Format: `addc` +
-Supported tags: `n/`, `p/`, `e/`, `a/`, `g/`, `x/`, `j/`, `h/`, `s/`, `y/`, `c/`
+Supported tags: `n/`, `g/`, `x/` `p/`, `e/`, `j/`, `h/`, `s/`, `t/`
 
 To start adding candidates in RecruitBook, enter `addc` in the command line to the start the Add Candidate Interface. +
 
-After entering `addc` you will be prompted the following +
-*`Enter the following details of the candidate in the format:`* +
+After entering `addc` you will be prompted the following: +
+
+|===
+|*`Enter the following details of the candidate in the format:`* +
 `Parameters: n/NAME g/GENDER x/AGE p/PHONE_NUMBER e/EMAIL a/ADDRESS j/SEEKING_JOB h/HIGHEST_EDUCATION s/EXPECTED_SALARY_PER_MONTH [t/TAG]...`
 `(Enter 'cancel' to stop adding candidates)` +
 `Example: n/John Doe g/M x/21 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/Waiter h/OLEVELS s/1000 t/diabetic t/excuseHeavyLoad`
+|===
 
 You are now inside the Add Candidate Interface!
 You can now keep adding candidates by specifying the required fields `n/NAME g/GENDER x/AGE p/PHONE_NUMBER e/EMAIL a/ADDRESS j/SEEKING_JOB h/HIGHEST_EDUCATION s/EXPECTED_SALARY_PER_MONTH`.
@@ -135,20 +140,25 @@ To stop adding candidates and exit from the Add Candidate Interface, enter `canc
 
 Examples:
 
-* `n/Susy Roe g/M x/18 p/91238123 e/susyroe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/ALEVELS s/1200 t/dyslexic` +
-* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/OLEVELS s/1000` +
+* `n/Susy Roe g/M x/18 p/91238123 e/susyroe@example.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/ALEVELS s/1200 t/dyslexic` +
+* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@example.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/OLEVELS s/1000 t/student` +
 
 
 ==== Adds a company to the RecruitBook
-Format: `addC c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE` +
+Format: `addC` +
+Supported tags: `c/`, `a/`, `e/`, `p/`
 
 To start adding companies in RecruitBook, enter `addC` in the command line to the start the Add Company Interface. +
 
-After entering `addC` you will be prompted the following +
-`Enter the following details of the company in the format:` +
+
+After entering `addC` you will be prompted the following: +
+
+|===
+|`Enter the following details of the company in the format:` +
 `Parameters: c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE` +
 `(Enter 'cancel' to stop adding companies)` +
 `Example: c/KFC a/101, Clementi Ave 2, #01-01 e/kfc@gmail.com p/61231232` +
+|===
 
 You are now inside the Add Company Interface!
 You can now keep adding companies by specifying the required fields `c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE`.
@@ -158,20 +168,24 @@ To stop adding companies and exit from the Add Company Interface, enter `cancel`
 
 Examples:
 
-*	`c/KFC a/101, Clementi Ave 2, #01-01 e/kfc@gmail.com p/61231232`
-*	`c/McDonalds a/101, Bukit Merah Lane 2, #01-01 e/macs@gmail.com p/61117111`
+*	`c/Aviva a/101, Clementi Ave 2, #01-01 e/aviva@example.com p/61231232`
+*	`c/Subway a/1 Create Way #01-02, NUS University Town e/subway@example.com p/61117111`
 
 ==== Adds a job offer to the RecruitBook
 Format: `addj`
+Supported tags: `c/`, `j/`, `g/`, `xr/`, `h/`, `s/`
 
 To start adding job offers in RecruitBook, enter `addj` in the command line to the start the Add Job Interface. +
 
 
-After entering `addj` you will be prompted the following +
-*`Enter the following details of the job in the format:`* +
+After entering `addj` you will be prompted the following: +
+
+|===
+|*`Enter the following details of the job in the format:`* +
 `Parameters: c/COMPANY_NAME j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY` +
 `(Enter 'cancel' to stop adding jobs)` +
-`Example: c/McDonalds j/cashier g/M xr/20-30 h/OLEVELS s/1200`
+`Example: c/McDonalds j/Cashier g/M xr/20-30 h/OLEVELS s/1200`
+|===
 
 [NOTE]
 Company with specified `c/COMPANY_NAME` has to be added to RecruitBook first!
@@ -360,23 +374,33 @@ Examples:
 Format: `deletec <INDEX>,<INDEX>-<INDEX> ...`
 
 *	Deletes the candidate(s) with the specified `INDEX`(s)
+*   You can use `<INDEX>-<INDEX>` to specify a range of indexes. For example, `1-3` specifies the indexes 1, 2 and 3.
 *	This index must be an index number shown in the displayed candidate list.
-*	The full name can be found using the find function when a partial keyword is entered
+
+[TIP]
+Use the `findc` and `filterc` command to quickly search the candidates you want to delete!
 
 
 Example to delete candidate(s):
 
-Step 1. `find Betsy` +
-(Shows all saved candidates named Betsy)
+Step 1. `findc n/John` +
+(Shows all saved candidates named John)
 
-Step 2. `deletec 1,2-3` +
-(Deletes the 1st, 2nd and 3rd candidate on most recent list)
+Step 2. `deletec 1,2-3,8` +
+(Deletes the 1st, 2nd, 3rd and 8th candidate on most recent candidate list)
 
 ==== Deleting company(s)
 Format: `deleteC <INDEX>,<INDEX>-<INDEX> ...`
 
-* Deletes the company(s) with the specified `INDEX`(s)
-* The index must be an index number shown in the displayed company list.
+*   Deletes the company(s) with the specified `INDEX`(s)
+*   You can use `<INDEX>-<INDEX>` to specify a range of indexes. For example, `1-3` specifies the indexes 1, 2 and 3.
+*   The index must be an index number shown in the displayed company list.
+
+[TIP]
+Use the `findC` and `filterC` command to quickly search the candidates you want to delete!
+
+[NOTE]
+Deleting a company will delete its respective job offers in the CompanyBook!
 
 Example to delete company(s):
 
@@ -384,14 +408,18 @@ Step 1. `listC` +
 (Shows all available companies)
 
 Step 2. `deleteC 1,6,2-3` +
-(Deletes the 1st, 2nd, 3rd and 6th job in the job list)
+(Deletes the 1st, 2nd, 3rd and 6th company in the most recent company list)
 
 
 ==== Deleting job offer(s)
 Format: `deletej <INDEX>,<INDEX>-<INDEX> ...`
 
 * Deletes the job(s) with the specified `INDEX`(s)
+* You can use `<INDEX>-<INDEX>` to specify a range of indexes. For example, `1-3` specifies the indexes 1, 2 and 3.
 * The index must be an index number shown in the displayed job list.
+
+[TIP]
+Use the `findj` and `filterJ` command to quickly search the candidates you want to delete!
 
 Example to delete job(s):
 
@@ -399,7 +427,7 @@ Step 1. `listj` +
 (Shows all available jobs)
 
 Step 2. `deletej 5-4,6` +
-(Deletes the 4th, 5th and 6th job in the job list)
+(Deletes the 4th, 5th and 6th job in the most recent job list)
 
 // end::delete[]
 
@@ -667,9 +695,59 @@ Examples:
 
 // end::email[]
 
-=== Exiting from any intermediate command: `cancel`
+// tag::setPW[]
+=== Setting a password : `setPW`
+Format: `setPW`
 
-Format : `cancel`
+You might have seen the below welcome message on your very first login.
+
+.GUI of Welcome Message
+image::SetPasswordWelcomeMessage.png[width="600"]
+
+To help protect your data confidentiality and integrity, you can enter `setPW` to set/change your password!
+
+After entering `setPW` you will be prompted the following: +
+|===
+|*`Enter your new password (case-sensitive).`* +
+`Enter 'cancel' to exit this interface.` +
+|===
+
+Enter your new password, reenter your new password when prompted to confirm and you will have successfully set a new password!
+Now whenever you start RecruitBook, your new password is required to verify the user's access to your data.
+
+// end::setPW[]
+
+// tag::undoredo[]
+=== Undo/Redo changes to entries : `undo` `redo`
+
+Undo the last change to RecruitBook +
+Format: `undo` +
+
+You can use `undo` the previous change to entries RecruitBook such as adding/deletion of candidates,
+
+Example:
+
+Step 1. `deletec 1-9` +
+(Delete candidates at specified indexes 1 to 9)
+
+Step 2. `undo` +
+(Undo the previous change to RecruitBook, the deletion of candidates from Step 1. )
+
+Redo the last undone change to RecruitBook +
+Format: `redo`
+
+You can use `redo` to quickly redo the last undone step.
+
+Step 1. `deleteC 1-2` +
+(Delete companies at specified indexes 1 and 2)
+
+Step 2. `undo` +
+(Undo the previous change to RecruitBook, the deletion of companies from Step 1.)
+
+Step 2. `redo` +
+(Redo the previous undone change to RecruitBook, the deletion of companies from Step 1.)
+
+// end::undoredo[]
 
 // tag::clear[]
 === Clearing all entries : `clearc` `clearC`
@@ -681,6 +759,10 @@ Clears all entries from the Company Book. +
 Format: `clearC`
 
 // end::clear[]
+
+=== Exiting from any intermediate command: `cancel`
+
+Format : `cancel`
 
 === Exiting the program : `exit`
 
@@ -723,12 +805,15 @@ _{explain how the user can enable/disable data encryption}_
 |	*Edit* | `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `editC <INDEX>` +
 
             e.g. `editc 2 e/jameslee@example.com`, `editC 5`
-|	*Delete Candidates* | `deletec <INDEX>,<INDEX>-<INDEX>` +
-            e.g. `deletec 1 `, `deletec 1,3-5`
-|	*Delete Companies* | `deleteC <INDEX>,<INDEX>-<INDEX>` +
-            e.g. `deleteC 1 `, `deleteC 1,3-5`
-|	*Delete Job Offers* | `deletej <INDEX>,<INDEX>-<INDEX>` +
-            e.g. `deletej 1 `, `deletej 1,3-5`
+|	*Delete Candidates* | `deletec <INDEX>,<INDEX>-<INDEX> ...` +
+
+            e.g. `deletec 1`
+|	*Delete Companies* | `deleteC <INDEX>,<INDEX>-<INDEX> ...` +
+
+            e.g. `deleteC 1-3`
+|	*Delete Job Offers* | `deletej <INDEX>,<INDEX>-<INDEX> ...` +
+
+            e.g. `deletej 1` , `deletej 1,3-5`
 |   *Delete Shortlisted Candidate* | `deleteShortlist`
 |	*List all Candidates* | `listc`
 |   *List all Companies and all Job Offers* | `listC`

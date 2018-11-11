@@ -55,6 +55,8 @@ include::../UserGuide.adoc[tag=add]
 
 include::../UserGuide.adoc[tag=delete]
 
+include::../UserGuide.adoc[tag=undoredo]
+
 include::../UserGuide.adoc[tag=clear]
 
 == Contributions to the Developer Guide
