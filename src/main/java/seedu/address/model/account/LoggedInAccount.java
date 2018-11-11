@@ -1,37 +1,33 @@
 package seedu.address.model.account;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Objects;
 
 /**
- * Represents an Account in the stock list.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a logged in Account in the model.
  */
-public class Account {
+public class LoggedInAccount {
 
-    private final Username username;
-    private final Password password;
+    private Username username;
+    private boolean loginStatus;
 
-    public Account(Username username, Password password) {
-        requireAllNonNull(username, password);
-        this.username = username;
-        this.password = password;
+    public LoggedInAccount() {
+        this.username = null;
+        this.loginStatus = false;
     }
 
     public Username getUsername() {
         return username;
     }
 
-    public Password getPassword() {
-        return password;
+    public boolean getLoginStatus() {
+        return loginStatus;
     }
 
     /**
      * Returns true if both items of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two items.
      */
-    public boolean isSameAccount(Account otherAccount) {
+    public boolean isSameAccount(LoggedInAccount otherAccount) {
         if (otherAccount == this) {
             return true;
         }
@@ -51,18 +47,18 @@ public class Account {
             return true;
         }
 
-        if (!(other instanceof Account)) {
+        if (!(other instanceof LoggedInAccount)) {
             return false;
         }
 
-        Account otherAccount = (Account) other;
+        LoggedInAccount otherAccount = (LoggedInAccount) other;
         return (otherAccount.getUsername().fullUsername.toLowerCase()).equals(getUsername().fullUsername.toLowerCase());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(username, password);
+        return Objects.hash(username);
     }
 
     @Override
@@ -72,4 +68,13 @@ public class Account {
         return builder.toString();
     }
 
+    public void setLoggedInUser(Username username) {
+        this.username = username;
+        this.loginStatus = true;
+    }
+
+    public void setLoggedOutStatus() {
+        this.username = null;
+        this.loginStatus = false;
+    }
 }
