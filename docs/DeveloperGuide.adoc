@@ -344,13 +344,6 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
-
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -391,6 +384,36 @@ Currently, the `Transaction` objects are stored on a `TreeMap` to maintain their
 should this prove non-essential, this will be redone on a `HashMap` to facilitate quicker access and easier handling in
 the code.
 
+// tag::dataencryption[]
+=== [Proposed] Data Encryption
+
+==== Proposed Implementation
+Data is to be encrypted to protect from unauthorized access.
+The process to transform data stored in the databases is to be facilitated by `DataEncryptionUtil` class. +
+It is a class containing utility methods to encrypt and decrypt files for Storage. +
+Additionally, it implements the following operations:
+
+*   `DataEncryptionUtil#encrypt()` - Encrypts file using a secret key.
+*   `DataEncryptionUtil#decrypt()` - Decrypts file using a secret key.
+*   `DataEncryptionUtil#processFile()` - Encrypts or decrypts a given file using a cipher.
+
+
+==== Design Considerations
+*Aspect:* Encryption/decryption Algorithm
+
+*   *Alternative 1 (proposed choice):* AES/CBC/PKCS5Padding
+
+*   *Alternative 2:* AES/ECB/PKCS5Padding
+
+*Aspect:* Technique
+
+*   *Alternative 1 (proposed choice):* Intercept `XMLUtil` class.
+
+// end::dataencryption[]
+
+// tag::threadreminders[]
+=== [Proposed] Thread Reminders
+// end::threadreminders[]
 == Documentation
 
 We use asciidoc for writing documentation.
@@ -858,7 +881,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-*Target user profile*:
+*Target user profile*: Small business owners
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
@@ -866,7 +889,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: tracks inventory faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories

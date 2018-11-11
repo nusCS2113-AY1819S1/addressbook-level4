@@ -15,7 +15,8 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::dyeosy98.png[width="150", align="left"]
 {empty}[https://github.com/dyeosy98[github]]
 
-Role: Project Advisor
+Role: Developer Marketing Lead +
+Responsibilities: Documentation + Communication
 
 '''
 
@@ -23,8 +24,8 @@ Role: Project Advisor
 image::parask26.png[width="150", align="left"]
 {empty}[https://github.com/ParasK26[github]]
 
-Role: Team Lead +
-Responsibilities: UI
+Role: Chief Programmer +
+Responsibilities: Integrator + Threading
 
 '''
 
@@ -32,8 +33,8 @@ Responsibilities: UI
 image::garagaristahir.png[width="150", align="left"]
 {empty}[https://github.com/garagaristahir[github]]
 
-Role: Developer +
-Responsibilities: Data
+Role: Core Developer +
+Responsibilities: Product Data
 
 '''
 
@@ -41,7 +42,7 @@ Responsibilities: Data
 image::amirulmaricar.png[width="150", align="left"]
 {empty}[https://github.com/amirulmaricar[github]]
 
-Role: Developer/MVP +
-Responsibilities: Dev Ops + Threading
+Role: Project Manager +
+Responsibilities: Security + Tester
 
 '''
