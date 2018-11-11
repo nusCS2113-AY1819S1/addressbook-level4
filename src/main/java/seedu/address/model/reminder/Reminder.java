@@ -2,9 +2,9 @@ package seedu.address.model.reminder;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.model.todo.Title;
-//import seedu.address.model.person.Date;
 import seedu.address.model.person.Time;
+import seedu.address.model.todo.Title;
+
 import java.util.Objects;
 
 //@@author junweiljw

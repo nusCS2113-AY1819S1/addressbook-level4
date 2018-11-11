@@ -217,7 +217,8 @@ public class MainWindow extends UiPart<Stage> {
         return todoListPanel;
     }
 
-    public ReminderListPanel getReminderListPanel() { return reminderListPanel; }
+    public ReminderListPanel getReminderListPanel() {
+        return reminderListPanel; }
 
     void releaseResources() {
         browserPanel.freeResources();

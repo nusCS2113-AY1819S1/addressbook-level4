@@ -1,20 +1,20 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGENDA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AGENDA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.todo.Title;
 import seedu.address.model.person.Time;
-import seedu.address.model.reminder.Date;
 import seedu.address.model.reminder.Agenda;
+import seedu.address.model.reminder.Date;
 import seedu.address.model.reminder.Reminder;
+import seedu.address.model.todo.Title;
 
 //@@author junweiljw
 /**

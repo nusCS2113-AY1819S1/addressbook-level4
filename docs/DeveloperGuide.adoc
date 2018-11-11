@@ -451,18 +451,18 @@ The reminder mechanism is facilitated by the `ReminderComand` from the `Logic` c
 
 The following diagram illustrates the Reminder class:
 
-image::TodoClassDiagram.png[width="200"]
 
-The following diagram illustrates how the Todo operation works:
 
-image::TodoSequenceDiagram.png[width="1000"]
+The following diagram illustrates how the Reminder operation works:
+
+
 
 ==== Design Considerations
-===== Aspect: Checking for duplications of to-do tasks
+===== Aspect: Checking for duplications of reminders
 
-* **Alternative 1 (current choice):** `isSameTodo`
+* **Alternative 1 (current choice):** `isSameReminder`
 ** Pros: Easy to implement and write the test as it checks for both the title and the content of a to-do task
-** Cons: This implementation may store too many similiar to-do tasks.
+** Cons: This implementation may store too many similiar reminders.
 // end::reminder[]
 
 // tag::dataencryption[]
