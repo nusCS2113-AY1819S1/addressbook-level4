@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javafx.scene.control.OverrunStyle;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -23,6 +24,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.todo.Todo;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.testutil.ReminderBuilder;
 
 public class AddressBookTest {
 
@@ -112,6 +116,9 @@ public class AddressBookTest {
         public ObservableList<Todo> getTodoList() {
             return null;
         }
+
+        @Override
+        public ObservableList<Reminder> getReminderList() { return null; }
     }
 
 }

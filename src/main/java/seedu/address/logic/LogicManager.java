@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.todo.Todo;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * The main LogicManager of the app.
@@ -50,6 +51,9 @@ public class LogicManager extends ComponentManager implements Logic {
     public ObservableList<Todo> getFilteredTodoList() {
         return model.getFilteredTodoList();
     }
+
+    @Override
+    public ObservableList<Reminder> getFilteredReminderList() { return model.getFilteredReminderList(); }
 
     @Override
     public ListElementPointer getHistorySnapshot() {
