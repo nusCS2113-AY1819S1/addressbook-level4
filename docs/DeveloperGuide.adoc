@@ -967,13 +967,13 @@ Given below are instructions to test the app manually.
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
-=== Launch and Shutdown
+=== Launch and shutdown
 
 . Initial launch
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the login page. The window size may not be optimum.
 
 . Saving window preferences
 
@@ -981,26 +981,55 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+=== Register, logging in, and logging out
 
-=== Deleting a person
+. Logging in with a test account
 
-. Deleting a person while all persons are listed
+.. Test case: `login u\test pw\test` +
+   Expected: The login is successful and the main GUI appears. The `Me` panel should show a person card panel with `test` in the name field.
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+. Registering a new account
 
-_{ more test cases ... }_
+.. Test case: `register u/John Goe pw/testpassword p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/CS2113T` +
+   Expected: The registration is successful and the main GUI appears. The `Me` panel should show a person card panel with `John Goe` in the name field.
 
-=== Saving data
+. Trying to register a new account with an existing username
+.. Test case: `register u/test pw/testpassword p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/CS2113T` +
+   Expected: An error message appears indicating that the user already exists.
 
-. Dealing with missing/corrupted data files
+. Logging out
+.. Prerequisites: Have logged in to a user account
+.. Test case: `logout` +
+   Expected: The logout is successful and the login screen reappears with the message "Successfully logged out".
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+=== Adding and removing friends
 
-_{ more test cases ... }_
+. Adding a friend
+
+.. Test case: `friend 1` +
+   Expected: The first person in the `Others` panel moves to the `Friends` panel. Hidden fields, namely phone number, address, and email of this person should now be visible.
+
+. Removing a friend
+
+.. Prerequisites: Have previously added a friend +
+.. Test case: `unfriend 1` +
+   Expected: The first person in the `Friends` panel moves to the `Others` panel. Hidden fields, namely phone number, address, and email of this person should no longer be visible.
+
+=== Finding a person by name and by group
+
+. Finding a person by name
+
+.. Test case: `find John` +
+   Expected: Only people with the word `John` in their names in both `Friends` and `Others` panels are shown. The command box reflects the total number of people listed in both panels.
+
+. Finding a person by group
+
+.. Test case: `group CS2101-A` +
+   Expected: Only people with the group `CS2101-A` in both `Friends` and `Others` panels are shown. The command box reflects the total number of people listed in both panels.
+
+. Listing all people
+
+.. Test case: `listall` +
+   Expected: All people currently registered are shown in their respective panels.
+
+===
