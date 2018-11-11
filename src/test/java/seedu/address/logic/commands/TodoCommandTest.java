@@ -205,6 +205,11 @@ public class TodoCommandTest {
         }
 
         @Override
+        public void finishTodo(Todo todo) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void updateFilteredTodoList(Predicate<Todo> predicate) {
             throw new AssertionError("This method should not be called");
         }

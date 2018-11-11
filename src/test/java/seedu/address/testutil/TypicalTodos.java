@@ -19,8 +19,8 @@ import seedu.address.model.todo.Todo;
 public class TypicalTodos {
     public static final Todo TASKA = new TodoBuilder().withTitle("Buy dog food")
             .withContent("EAT you own dog food please").build();
-    public static final Todo TASKB = new TodoBuilder().withTitle("Buy dog food")
-            .withContent("EAT you own dog food please").build();
+    public static final Todo TASKB = new TodoBuilder().withTitle("Buy kitty food")
+            .withContent("I will buy it otw back to school").build();
 
     // Manually added - todo task's details found in {@code CommandTestUtil}
     public static final Todo TASK1 = new TodoBuilder().withTitle(VALID_TITLE_TASK1)
