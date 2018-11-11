@@ -18,9 +18,12 @@ By: `Team T13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-*Student Management System (SMS)* is a desktop application which uses CLI for its interactions.
-SMS allows university lectures to easily organise and manage their students and classes by allowing the lectures to easily import student lists given by their department.
-SMS also provides neat features such as distributing students into groups, sending emails to them and assigning test grades,
+*Student Management System (SMS)* is a desktop application which uses a CLI for its interactions.
+SMS is targeted mainly at university lectures as it allows them to easily organise and manage their students and classes with newly implemented group features.
+SMS removes the task of manually distributing students equally with the ability to distribute students automatically based on a specified criteria.
+SMS allows lecturers to make quick responses by sending emails to groups of students.
+SMS also provides other neat features such as assigning test grades to students.
+Lecturers can further automate some of these processes by importing student data given by their department.
 SMS makes being a university lecturer more convenient! +
 Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
@@ -60,16 +63,24 @@ adds a contact named `John Doe` to the Student Management System.
 
 // tag::group[]
 === Creating a group: `creategroup` `cg`
-Creates a group in the student management system +
+Creates a group in the student management system. +
 Format: `creategroup n/NAME l/LOCATION [t/TAG] ...`  +
 Shortcut Format: `cg n/NAME l/LOCATION [t/TAG] ...` +
 ****
-* Creates a group with the specified NAME, LOCATION and TAG(s)
-* NAME *should only contain alphanumeric characters, '-', '[' and ']', and should not be blank*
-* LOCATION *should only contain alphanumeric characters and '-', and should not be blank*
-* TAG(s) are optional and *should only contain alphanumeric characters* if used
-* TAG(s) *should not be blank* if used
-* This command is undoable
+* Creates a group with the specified *NAME*, *LOCATION* and *TAG(s)*.
+* *NAME* should only contain *alphanumeric characters*, *'-'*, *'['* and *']'*, and should *not* be blank.
+* If multiple valid/invalid group names are given (e.g. _n/TUT[1] n/TUT[2]_), only the *last* group name will be taken and validated.
+* *LOCATION* should only contain *alphanumeric characters* and *'-'*, and should *not* be blank.
+* If multiple valid/invalid group locations are given (e.g. _l/LT15 l/LT27_), only the *last* group location will be taken and validated.
+* *TAG(s)* are optional and should only contain *alphanumeric characters* if used.
+* *TAG(s)* should *not* be blank if used.
+* All *TAG(s)* given will be taken and validated.
+* The system detects duplicates and will only add the tag to the group once in the event of duplicates in a command (e.g. _t/maths t/maths_).
+* The group identity fields need *not* be in order (e.g. _cg l/LOCATION n/NAME [t/TAG] ..._ is also accepted).
+However, there can only be one command word (e.g. _creategroup_) and it must always be before any other field else an *unknown command* message will be produced.
+* Groups created must be unique (i.e. there cannot be 2 groups with exactly the same *NAME*, *LOCATION* and *TAG(s)*).
+* Leading/trailing spaces between *creategroup*, *cg*, *n/NAME*, *l/LOCATION* and *[t/TAG]* will not affect the validity of command and will be trimmed.
+* This command *is* undoable.
 ****
 
 Examples:
@@ -84,11 +95,14 @@ Format: `selectgroup INDEX` +
 Shortcut Format: `sg INDEX`
 
 ****
-* Selects group and loads the *students in selected group panel* with students of the group at specified `INDEX`.
-* Selects the group and loads the Google search page of the group at the specified `INDEX`.
+* Selects group and loads the *Students in Selected Group* panel with students of the group at specified `INDEX`.
 * The index refers to the index number shown in the displayed group list.
 * The index *must be a positive integer* `1, 2, 3, ...`
-* This command is *NOT* undoable
+* An index of *0* or non-integers will produce an *invalid command format* error message.
+* An index larger than the total number of groups currently in the system will produce an *invalid index* error message.
+* There can only be one command word (e.g. _selectgroup_) and it must always be before any other field else an *unknown command* message will be produced.
+* Leading/trailing spaces between *selectgroup*, *sg*, *INDEX* will not affect the validity of command and will be trimmed.
+* This command is *not* undoable.
 ****
 
 Examples:
@@ -98,15 +112,23 @@ Selects the 2nd group in the student management system.
 * `sg 1` +
 Selects the 1st group in the student management system.
 
-=== Add students to a group: `addgroup` `ag`
-Adds student(s) to a group in the student management system +
+=== Add student(s) to a group: `addgroup` `ag`
+Adds student(s) to a group in the student management system. +
 Format: `addgroup g/INDEX p/INDEX ...` +
 Shortcut Format: `ag g/INDEX p/INDEX ...` +
 ****
 * Adds student(s) at specified INDEX(s) to group at specified at INDEX.
-* The index refers to the index number shown in the displayed group/student list.
+* The index refers to the index number shown in the displayed *group* and *student* panels.
+* If multiple valid/invalid group indexes are given (e.g. _g/1 g/2_), only the *last* group index will be taken and validated. However, *all* person indexes given will be taken and validated.
+* The system detects duplicates and will only add the person to the group once in the event of duplicates in a command (e.g. _p/1 p/1_).
 * The index *must be a positive integer* 1, 2, 3, ...
-* This command is undoable
+* An index of *0* or non-integers will produce an *index is not a non-zero unsigned integer* error message.
+* An index larger than the total number of groups or persons (_depending on prefix_) currently in the system will produce an *invalid index* error message.
+* The command fields need *not* be in order (e.g. _ag p/1 g/2_ is also accepted).
+However, there can only be one command word (e.g. _addgroup_) and it must always be before any other field else an *unknown command* message will be produced.
+* Leading/trailing spaces between *addgroup*, *ag*, *g/INDEX* and *p/INDEX* will not affect the validity of command and will be trimmed.
+* Adding duplicate persons to a group is *not* allowed (i.e. _if the person already exixts in the group, adding that person to the group again is not allowed_).
+* This command *is* undoable.
 ****
 
 Examples:
@@ -119,9 +141,14 @@ Deletes a group in the student management system +
 Format: `deletegroup INDEX`  +
 Shortcut Format: `dg INDEX` +
 ****
-* Removes the group with the specified INDEX from the student management systsm
-* The index *must be a positive integer* 1, 2, 3, ...
-* This command is undoable
+* Removes the group with the specified INDEX from the student management system.
+* The index refers to the index number shown in the displayed *group* panel.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* An index of *0* or non-integers will produce an *invalid command format* error message.
+* An index larger than the total number of groups currently in the system will produce an *invalid index* error message.
+* There can only be one command word (e.g. _deletegroup_) and it must always be before any other field else an *unknown command* message will be produced.
+* Leading/trailing spaces between *deletegroup*, *dg*, *INDEX* will not affect the validity of command and will be trimmed.
+* This command *is* undoable.
 ****
 
 Examples:
@@ -129,16 +156,21 @@ Examples:
 * `deletegroup 1`
 * `dg 1`
 
-=== Deleting student(s) from a group: `deletegroupstudent` `dgs`
-Deletes a student from a group in the student management system +
-Format: `deletegroupstudent g/INDEX p/NDEX`  +
+=== Deleting a student from a group: `deletegroupstudent` `dgs`
+Deletes a student from a group in the student management system. +
+Format: `deletegroupstudent g/INDEX p/INDEX`  +
 Shortcut Format: `dgs g/INDEX p/INDEX` +
 ****
-* Removes studnet at specifed INDEX from the group at specified INDEX in the student management systsm
-* The index refers to the index number shown in the displayed group/student in group list
+* Removes studnet at specifed INDEX on the *Students in Group* panel from the group at specified INDEX on the *Groups* panel.
+* If multiple valid/invalid group indexes are given (e.g. _g/1 g/2_), only the *last* group index will be taken and validated.
+* If multiple valid/invalid person indexes are given (e.g. _p/1 p/2_), only the *last* person index will be taken and validated.
 * The index *must be a positive integer* 1, 2, 3, ...
-* If **multiple** student INDEX's are given, _i.e._ _p/1 p/2_, only the last INDEX will be read and validated
-* This command is undoable
+* An index of *0* or non-integers will produce an *index is not a non-zero unsigned integer* error message.
+* An index larger than the total number of groups or persons (_depending on prefix_) currently in the system will produce an *invalid index* error message.
+* The command fields need *not* be in order (e.g. _dgs p/1 g/2_ is also accepted).
+However, there can only be one command word (e.g. _deletegroupstudent_) and it must always be before any other field else an *unknown command* message will be produced.
+* Leading/trailing spaces between *deletegroupstudent*, *dgs*, *g/INDEX* and *p/INDEX* will not affect the validity of command and will be trimmed.
+* This command *is* undoable.
 ****
 
 Examples:
@@ -528,7 +560,12 @@ Shortcut Format: `u`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the management system's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the management system's content (`add`, `delete`, `edit`, `clear`, `creategroup`, `deletegroup`, `addgroup` and `deletegroupstudent`).
+====
+[NOTE]
+====
+All selections on GUI will be *unselected* however, the `Studentd in Group` and `Browser` panels will *not* refresh and will still hold the data of the previously selected
+person/group.
 ====
 
 Examples:
@@ -553,6 +590,12 @@ Reverses the most recent `undo` command. +
 Format: `redo` +
 Shortcut Format: `r`
 
+[NOTE]
+====
+All selections on GUI will be *unselected* however, the `Studentd in Group` and `Browser` panels will *not* refresh and will still hold the data of the previously selected
+person/group.
+====
+
 Examples:
 
 * `delete 1` +
@@ -576,6 +619,12 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the management system. +
 Format: `clear` +
 Shortcut Format: `c`
+
+[NOTE]
+====
+The `Studentd in Group` and `Browser` panels will *not* refresh and will still hold the data of the previously selected
+person/group.
+====
 
 === Exiting the program : `exit` `ex`
 
