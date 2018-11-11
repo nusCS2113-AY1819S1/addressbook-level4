@@ -37,11 +37,11 @@ public class SelectCompanyCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Index lastPersonIndex = Index.fromOneBased(model.getFilteredCompanyList().size());
+        Index lastCompanyIndex = Index.fromOneBased(model.getFilteredCompanyList().size());
 
         assertExecutionSuccess(INDEX_FIRST);
         assertExecutionSuccess(INDEX_THIRD);
-        assertExecutionSuccess(lastPersonIndex);
+        assertExecutionSuccess(lastCompanyIndex);
     }
 
     @Test

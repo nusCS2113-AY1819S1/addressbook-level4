@@ -36,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private EmailUtil emailUtil;
 
     /**
-     * Initializes a ModelManager with the given candidateBook and userPrefs.
+     * Initializes a ModelManager with the given candidateBook, companyBook and userPrefs.
      */
     public ModelManager(ReadOnlyCandidateBook candidateBook, ReadOnlyCompanyBook companyBook, UserPrefs userPrefs) {
         super();

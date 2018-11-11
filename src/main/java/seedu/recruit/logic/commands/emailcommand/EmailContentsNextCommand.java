@@ -35,10 +35,10 @@ public class EmailContentsNextCommand extends EmailContentsCommand {
      * @return boolean value to see if contents array is empty
      */
     private boolean isEmpty(EmailUtil emailUtil) {
-        if (emailUtil.isAreRecipientsCandidates() && emailUtil.getJobOffers().size() == 0) {
+        if (emailUtil.getAreRecipientsCandidates() && emailUtil.getJobOffers().size() == 0) {
             return true;
         }
-        if (!emailUtil.isAreRecipientsCandidates() && emailUtil.getCandidates().size() == 0) {
+        if (!emailUtil.getAreRecipientsCandidates() && emailUtil.getCandidates().size() == 0) {
             return true;
         }
         return false;

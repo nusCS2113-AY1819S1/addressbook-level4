@@ -5,11 +5,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.recruit.logic.commands.EditCandidateCommand.EditPersonDescriptor;
+import seedu.recruit.model.candidate.Age;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.candidate.Education;
+import seedu.recruit.model.candidate.Gender;
 import seedu.recruit.model.candidate.Name;
 import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
+import seedu.recruit.model.joboffer.Job;
+import seedu.recruit.model.joboffer.Salary;
 import seedu.recruit.model.tag.Tag;
 
 /**
@@ -35,7 +40,12 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(candidate.getName());
         descriptor.setPhone(candidate.getPhone());
         descriptor.setEmail(candidate.getEmail());
+        descriptor.setGender(candidate.getGender());
+        descriptor.setAge(candidate.getAge());
         descriptor.setAddress(candidate.getAddress());
+        descriptor.setJob(candidate.getJob());
+        descriptor.setEducation(candidate.getEducation());
+        descriptor.setSalary(candidate.getSalary());
         descriptor.setTags(candidate.getTags());
     }
 
@@ -64,10 +74,50 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Gender} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withGender(String gender) {
+        descriptor.setGender(new Gender(gender));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Age} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAge(String age) {
+        descriptor.setAge(new Age(age));
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Job} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withJob(String job) {
+        descriptor.setJob(new Job(job));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Education} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEducation(String education) {
+        descriptor.setEducation(new Education(education));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Salary} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSalary(String salary) {
+        descriptor.setSalary(new Salary(salary));
         return this;
     }
 

@@ -3,6 +3,7 @@ package seedu.recruit.logic.parser;
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT;
+import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND_DUE_TO_INTERFACE;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertFilterCandidateCommandParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertFilterCompanyCommandParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertFindCandidateCommandParseFailure;
@@ -17,6 +18,10 @@ import static seedu.recruit.logic.parser.CommandParserTestUtil.assertShortlistCa
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertSortCandidateCommandParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertSortCompanyCommandParseFailure;
 import static seedu.recruit.logic.parser.CommandParserTestUtil.assertSortJobCommandParseFailure;
+import static seedu.recruit.logic.parser.CommandParserTestUtil.assertUnknownCommandInFourthStageShortlistParseFailure;
+import static seedu.recruit.logic.parser.CommandParserTestUtil.assertUnknownCommandInLastStageShortlistParseFailure;
+import static seedu.recruit.logic.parser.CommandParserTestUtil.assertUnknownCommandInSecondStageShortlistParseFailure;
+import static seedu.recruit.logic.parser.CommandParserTestUtil.assertUnknownCommandInThirdStageShortlistParseFailure;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.Test;
@@ -30,6 +35,7 @@ import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.SelectCompanyCommand;
 import seedu.recruit.logic.commands.SelectJobCommand;
 import seedu.recruit.logic.commands.ShortlistCandidateCommand;
+import seedu.recruit.logic.commands.ShortlistCandidateInitializationCommand;
 import seedu.recruit.logic.commands.SortCandidateCommand;
 import seedu.recruit.logic.commands.SortCompanyCommand;
 import seedu.recruit.logic.commands.SortJobOfferCommand;
@@ -169,8 +175,8 @@ public class ShortlistCommandParserTest {
 
     @Test
     public void parse_invalidArgsForFilterCandidateCommand_throwsParseException() {
-        assertFilterCandidateCommandParseFailure(parser, " N/abc", MESSAGE_INVALID_COMMAND_FORMAT
-                + FilterCandidateCommand.MESSAGE_USAGE);
+        assertFilterCandidateCommandParseFailure(parser, " N/abc",
+                MESSAGE_INVALID_COMMAND_FORMAT + FilterCandidateCommand.MESSAGE_USAGE);
     }
 
     // ================================ LAST STAGE: CONFIRMATION ===================================== //
@@ -194,4 +200,38 @@ public class ShortlistCommandParserTest {
                 MESSAGE_INVALID_COMMAND_FORMAT_DUE_TO_INVALID_ARGUMENT
                 + ShortlistCandidateCommand.MESSAGE_USAGE);
     }
+
+    // ================================ DISALLOWED COMMANDS ===================================== //
+
+    @Test
+    public void parse_deleteCandidateCommandUnknownCommandInSecondStageOfInterface_throwsParseException() {
+        assertUnknownCommandInSecondStageShortlistParseFailure(parser, "1",
+                MESSAGE_UNKNOWN_COMMAND_DUE_TO_INTERFACE
+                        + ShortlistCandidateInitializationCommand.MESSAGE_NEXT_STEP
+                        + SelectCompanyCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parse_deleteCandidateCommandUnknownCommandInThirdStageOfInterface_throwsParseException() {
+        assertUnknownCommandInThirdStageShortlistParseFailure(parser, "1",
+                MESSAGE_UNKNOWN_COMMAND_DUE_TO_INTERFACE
+                        + SelectCompanyCommand.MESSAGE_SELECT_COMPANY_SUCCESS_NEXT_STEP
+                        + SelectJobCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parse_deleteCandidateCommandUnknownCommandInFourthStageOfInterface_throwsParseException() {
+        assertUnknownCommandInFourthStageShortlistParseFailure(parser, "1",
+                MESSAGE_UNKNOWN_COMMAND_DUE_TO_INTERFACE
+                        + SelectJobCommand.MESSAGE_SELECT_JOB_SUCCESS_NEXT_STEP_IN_SHORTLIST
+                        + SelectCandidateCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parse_deleteCandidateCommandUnknownCommandInLastStageOfInterface_throwsParseException() {
+        assertUnknownCommandInLastStageShortlistParseFailure(parser, "1",
+                MESSAGE_UNKNOWN_COMMAND_DUE_TO_INTERFACE
+                        + ShortlistCandidateCommand.MESSAGE_USAGE);
+    }
+
 }

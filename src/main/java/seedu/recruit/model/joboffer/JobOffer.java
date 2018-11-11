@@ -101,8 +101,7 @@ public class JobOffer {
         return otherJobOffer != null
                 && otherJobOffer.getCompanyName().equals(getCompanyName())
                 && otherJobOffer.getJob().equals(getJob())
-                && otherJobOffer.getGender().equals(getGender())
-                && otherJobOffer.getSalary().equals(getSalary());
+                && otherJobOffer.getGender().equals(getGender());
     }
 
     /**

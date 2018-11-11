@@ -6,6 +6,7 @@ import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
 import seedu.recruit.logic.commands.Command;
+import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.DeleteShortlistedCandidateCommand;
 import seedu.recruit.logic.commands.DeleteShortlistedCandidateInitializationCommand;
 import seedu.recruit.logic.commands.FilterCandidateCommand;
@@ -262,6 +263,66 @@ public class CommandParserTestUtil {
                                                                 String expectedMessage) {
         try {
             parser.parseCommand(ShortlistCandidateCommand.COMMAND_WORD, userInput,
+                    new LogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE));
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(expectedMessage, pe.getMessage());
+        }
+    }
+
+    /**
+     * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful and the error message
+     * equals to {@code expectedMessage}.
+     */
+    public static void assertUnknownCommandInSecondStageShortlistParseFailure(ShortlistParser parser, String userInput,
+                                                                              String expectedMessage) {
+        try {
+            parser.parseCommand(DeleteCandidateCommand.COMMAND_WORD, userInput,
+                    new LogicState(SelectCompanyCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST));
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(expectedMessage, pe.getMessage());
+        }
+    }
+
+    /**
+     * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful and the error message
+     * equals to {@code expectedMessage}.
+     */
+    public static void assertUnknownCommandInThirdStageShortlistParseFailure(ShortlistParser parser, String userInput,
+                                                                             String expectedMessage) {
+        try {
+            parser.parseCommand(DeleteCandidateCommand.COMMAND_WORD, userInput,
+                    new LogicState(SelectJobCommand.COMMAND_LOGIC_STATE_FOR_SHORTLIST));
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(expectedMessage, pe.getMessage());
+        }
+    }
+
+    /**
+     * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful and the error message
+     * equals to {@code expectedMessage}.
+     */
+    public static void assertUnknownCommandInFourthStageShortlistParseFailure(ShortlistParser parser, String userInput,
+                                                                              String expectedMessage) {
+        try {
+            parser.parseCommand(DeleteCandidateCommand.COMMAND_WORD, userInput,
+                    new LogicState(SelectCandidateCommand.COMMAND_LOGIC_STATE));
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(expectedMessage, pe.getMessage());
+        }
+    }
+
+    /**
+     * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful and the error message
+     * equals to {@code expectedMessage}.
+     */
+    public static void assertUnknownCommandInLastStageShortlistParseFailure(ShortlistParser parser, String userInput,
+                                                                             String expectedMessage) {
+        try {
+            parser.parseCommand(DeleteCandidateCommand.COMMAND_WORD, userInput,
                     new LogicState(ShortlistCandidateCommand.COMMAND_LOGIC_STATE));
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {

@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class EmailSettings implements Serializable {
 
     private static final String DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT = "New job offers that I have found for you!";
-    private static final String DEFAULT_SUBJECT_COMPANY_AS_RECIPEINT = "New candidates found for your company!";
+    private static final String DEFAULT_SUBJECT_COMPANY_AS_RECIPIENT = "New candidates found for your company!";
     private static final String DEFAULT_BODYTEXT_CANDIDATE_AS_RECIPIENT = "Dear candidate,\n"
             + "I think you will be interested in these job offers!";
     private static final String DEFAULT_BODYTEXT_COMPANY_AS_RECIPIENT = "Dear Sir/Madam,\n"
@@ -21,7 +21,7 @@ public class EmailSettings implements Serializable {
 
     public EmailSettings() {
         subjectCandidateAsRecipient = DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT;
-        subjectCompanyAsRecipient = DEFAULT_SUBJECT_COMPANY_AS_RECIPEINT;
+        subjectCompanyAsRecipient = DEFAULT_SUBJECT_COMPANY_AS_RECIPIENT;
         bodyTextCandidateAsRecipient = DEFAULT_BODYTEXT_CANDIDATE_AS_RECIPIENT;
         bodyTextCompanyAsRecipient = DEFAULT_BODYTEXT_COMPANY_AS_RECIPIENT;
     }

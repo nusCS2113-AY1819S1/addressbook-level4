@@ -89,7 +89,7 @@ public class CandidateTest {
         editedAlice = new CandidateBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different recruit -> returns false
+        // different address -> returns false
         editedAlice = new CandidateBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 

@@ -38,7 +38,7 @@ public class AddJobDetailsCommand extends Command {
             + "(Enter 'cancel' to stop adding jobs)\n"
             + "Example: "
             + PREFIX_COMPANY_NAME + "McDonalds "
-            + PREFIX_JOB + "cashier "
+            + PREFIX_JOB + "Cashier "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE_RANGE + "20-30 "
             + PREFIX_EDUCATION + "OLEVELS "
