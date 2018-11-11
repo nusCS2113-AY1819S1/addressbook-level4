@@ -5,7 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Represents the date of the event in JitHub.
@@ -13,8 +12,8 @@ import java.util.Date;
  */
 public class TheDate {
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Dates should only contain numbers in DDMMYYYY format, and it should not be blank\n" +
-            "Only calendar dates are accepted.";
+            "Dates should only contain numbers in DDMMYYYY format, and it should not be blank\n"
+                    + "Only calendar dates are accepted.";
 
     public final String value;
 
@@ -39,7 +38,7 @@ public class TheDate {
             jitHubDateFormat.parse(test);
             return true;
         }
-        catch (ParseException e){
+        catch (ParseException e) {
             e.printStackTrace();
             return false;
         }

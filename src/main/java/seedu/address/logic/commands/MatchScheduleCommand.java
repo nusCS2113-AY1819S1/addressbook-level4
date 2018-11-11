@@ -100,7 +100,7 @@ public class MatchScheduleCommand extends Command {
 
         //to store start and end time as Time type
         for (Schedule matchScheduleIter : this.matchScheduleCompare) {
-            if (matchScheduleIter.getDate().equals(this.date)){
+            if (matchScheduleIter.getDate().equals(this.date)) {
                 this.startTimeList.add(matchScheduleIter.getStartTime());
                 this.endTimeList.add(matchScheduleIter.getEndTime());
             }
@@ -118,19 +118,19 @@ public class MatchScheduleCommand extends Command {
         int validRangePresent = 0;
         this.availableSlots = new ArrayList<>();
 
-        for (int i = this.startTime.timeToMinutesInDay() ; i <= this.endTime.timeToMinutesInDay(); i++) {
-            if (startEndTimeBlock[i] == 0 && inValidRange == 0){
-                String paddedHrs = String.format("%02d", i/60);
-                String paddedMins = String.format("%02d", i%60);
+        for (int i = this.startTime.timeToMinutesInDay(); i <= this.endTime.timeToMinutesInDay(); i++) {
+            if (startEndTimeBlock[i] == 0 && inValidRange == 0) {
+                String paddedHrs = String.format("%02d", i / 60);
+                String paddedMins = String.format("%02d", i % 60);
                 String toHrsStart = paddedHrs + paddedMins;
                 this.availableSlots.add(toHrsStart);
                 inValidRange = 1;
                 validRangePresent = 1;
             }
-            if (((startEndTimeBlock[i] == 1) || ( this.endTime.timeToMinutesInDay() == i))
+            if (((startEndTimeBlock[i] == 1) || (this.endTime.timeToMinutesInDay() == i))
                     && inValidRange == 1) {
-                String paddedHrs = String.format("%02d", i/60);
-                String paddedMins = String.format("%02d", i%60);
+                String paddedHrs = String.format("%02d", i / 60);
+                String paddedMins = String.format("%02d", i % 60);
                 String toHrsEnd = paddedHrs + paddedMins;
                 this.availableSlots.add(toHrsEnd);
                 inValidRange = 0;
@@ -139,20 +139,17 @@ public class MatchScheduleCommand extends Command {
 
         slots = "";
         //format string slots to print
-        for (int i = 0 ; i < this.availableSlots.size(); i++){
-            if (i%2 == 0) {
+        for (int i = 0; i < this.availableSlots.size(); i++) {
+            if (i % 2 == 0) {
                 slots = slots + ("Start:" + this.availableSlots.get(i) + " ");
-            }
-            else{
+            } else {
                 slots = slots + ("End:" + this.availableSlots.get(i) + "\n");
             }
-
         }
 
         if (validRangePresent == 1) {
             return new CommandResult(MESSAGE_SUCCESS + slots);
-        }
-        else {
+        } else {
             throw new CommandException(MESSAGE_FAILURE);
         }
 

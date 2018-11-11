@@ -22,9 +22,10 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
  */
 public class CalendarPanel extends UiPart<Region> {
 
-    private static final String FXML = "CalendarPanel.fxml";
-    public static final String DEFAULT_PAGE = "default.html";
     public static final String BLANK_COLOR_PAGE = "CalendarBackground.html";
+    public static final String DEFAULT_PAGE = "default.html";
+    private static final String FXML = "CalendarPanel.fxml";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private CalendarLayout CalendarLayout;
@@ -66,7 +67,7 @@ public class CalendarPanel extends UiPart<Region> {
         URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         loadPage(defaultPage.toExternalForm());
     }
-    private void loadUpdatedPage(){
+    private void loadUpdatedPage() {
         URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + BLANK_COLOR_PAGE);
         loadPage(defaultPage.toExternalForm());
     }
