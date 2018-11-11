@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 
 /**
- *
+ * Provides mapping of Java entity class and data file path
  */
 public class StorageMapping {
     private static StorageMapping ourInstance;
@@ -32,16 +32,29 @@ public class StorageMapping {
         return ourInstance;
     }
 
+    /**
+     * Gets data file path based given Java class
+     *
+     * @param clazz of type Class
+     * @return String
+     */
     public String getFileName(Class clazz) {
         return classMapFileName.get(clazz);
     }
 
+    /**
+     * Adds mapping infomation
+     *
+     * @param clazz of type Class
+     * @param path  of type String
+     */
     public void addMapping(Class clazz, String path) {
         classMapFileName.put(clazz, path);
     }
 
+
     /**
-     *
+     * Checks the existence of data folder and creates it if not exist
      */
     private void initDataFolder() {
         dataFolder = Paths.get(Paths.get("").toString(), "forumData").toString();

@@ -5,9 +5,10 @@ import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
+//@@author Meowzz95
 
 /**
- *
+ * Helps to generate some sample data
  */
 public class SampleDataGenerator {
     private UnitOfWork uow;
@@ -20,7 +21,7 @@ public class SampleDataGenerator {
     }
 
     /**
-     *
+     * Generates sample data
      */
     public void generate() {
         this.generateUser();
@@ -31,7 +32,7 @@ public class SampleDataGenerator {
     }
 
     /**
-     *
+     * Generates sample user data
      */
     private void generateUser() {
         User admin = new User();
@@ -52,6 +53,9 @@ public class SampleDataGenerator {
         uow.getUserRepository().addUser(user1);
     }
 
+    /**
+     * Generates sample module data
+     */
     private void generateModule() {
         Module module = new Module("Software Eng", "CS2113");
         uow.getModuleRepository().addModule(module);
@@ -59,7 +63,7 @@ public class SampleDataGenerator {
     }
 
     /**
-     *
+     * Generates sample thread data
      */
     private void generateThread() {
         ForumThread forumThread = new ForumThread();
@@ -71,7 +75,7 @@ public class SampleDataGenerator {
     }
 
     /**
-     *
+     * Generates sample comment data
      */
     private void generateComment() {
         Comment comment = new Comment();
@@ -82,6 +86,9 @@ public class SampleDataGenerator {
         uow.getCommentRepository().addComment(comment);
     }
 
+    /**
+     * Generates sample announcement data
+     */
     private void generateAnnouncement() {
         Announcement announcement = new Announcement("Welcome!", "Welcome to ForumBook");
         uow.getAnnouncementRepository().addAnnouncement(announcement);

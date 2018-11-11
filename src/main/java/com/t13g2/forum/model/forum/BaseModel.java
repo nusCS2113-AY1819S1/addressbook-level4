@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.t13g2.forum.storage.forum.RunningId;
-
+//@@author Meowzz95
 /**
  * Metadata for the other classes
  */

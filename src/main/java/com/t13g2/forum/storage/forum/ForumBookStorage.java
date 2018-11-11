@@ -1,8 +1,10 @@
 //@@author Meowzz95
 package com.t13g2.forum.storage.forum;
 
+import com.t13g2.forum.model.forum.Announcement;
+
 /**
- *
+ * Provides APIs to access entity repositories and handle load/save operation
  */
 public class ForumBookStorage implements IForumBookStorage {
     protected IStorage underlyingStorage;
@@ -22,7 +24,7 @@ public class ForumBookStorage implements IForumBookStorage {
     }
 
     /**
-     *
+     * Initializes forum book storage
      */
     private void init() {
         loadAnnouncement();
@@ -32,6 +34,9 @@ public class ForumBookStorage implements IForumBookStorage {
         loadModule();
     }
 
+    /**
+     * Saves all changes
+     */
     @Override
     public void commit() {
         saveAnnouncement();
@@ -41,16 +46,29 @@ public class ForumBookStorage implements IForumBookStorage {
         saveModule();
     }
 
+    /**
+     * Saves changes for the class
+     *
+     * @param clazz
+     */
     @Override
     public void save(Class clazz) {
 
     }
 
+    /**
+     * Loads data for the class
+     * @param clazz
+     */
     @Override
     public void load(Class clazz) {
 
     }
 
+    /**
+     * Executes save on entity {@link Announcement}
+     * Dirty check is done before saving
+     */
     @Override
     public void saveAnnouncement() {
         if (announcements.isDirty()) {
@@ -60,6 +78,10 @@ public class ForumBookStorage implements IForumBookStorage {
 
     }
 
+    /**
+     * Executes load on entity {@link Announcement}
+     * Dirty check is done before saving
+     */
     @Override
     public void loadAnnouncement() {
         announcements = underlyingStorage.read(AnnouncementStorage.class);
@@ -70,6 +92,10 @@ public class ForumBookStorage implements IForumBookStorage {
         }
     }
 
+    /**
+     * Executes save on entity {@link com.t13g2.forum.model.forum.Comment}
+     * Dirty check is done before saving
+     */
     @Override
     public void saveComment() {
         if (comments.isDirty()) {
@@ -78,6 +104,10 @@ public class ForumBookStorage implements IForumBookStorage {
         }
     }
 
+    /**
+     * Executes load on entity {@link com.t13g2.forum.model.forum.Comment}
+     * Dirty check is done before saving
+     */
     @Override
     public void loadComment() {
         comments = underlyingStorage.read(CommentStorage.class);
@@ -88,6 +118,10 @@ public class ForumBookStorage implements IForumBookStorage {
         }
     }
 
+    /**
+     * Executes save on entity {@link com.t13g2.forum.model.forum.ForumThread}
+     * Dirty check is done before saving
+     */
     @Override
     public void saveForumThread() {
         if (forumThreads.isDirty()) {
@@ -97,6 +131,10 @@ public class ForumBookStorage implements IForumBookStorage {
 
     }
 
+    /**
+     * Executes load on entity {@link com.t13g2.forum.model.forum.ForumThread}
+     * Dirty check is done before saving
+     */
     @Override
     public void loadForumThread() {
         forumThreads = underlyingStorage.read(ForumThreadStorage.class);
@@ -108,6 +146,10 @@ public class ForumBookStorage implements IForumBookStorage {
     }
 
 
+    /**
+     * Executes save on entity {@link com.t13g2.forum.model.forum.User}
+     * Dirty check is done before saving
+     */
     @Override
     public void saveUser() {
         if (users.isDirty()) {
@@ -117,6 +159,10 @@ public class ForumBookStorage implements IForumBookStorage {
         }
     }
 
+    /**
+     * Executes load on entity {@link com.t13g2.forum.model.forum.User}
+     * Dirty check is done before saving
+     */
     @Override
     public void loadUser() {
         users = underlyingStorage.read(UserStorage.class);
@@ -128,6 +174,10 @@ public class ForumBookStorage implements IForumBookStorage {
         }
     }
 
+    /**
+     * Executes save on entity {@link com.t13g2.forum.model.forum.Module}
+     * Dirty check is done before saving
+     */
     @Override
     public void saveModule() {
         if (modules.isDirty()) {
@@ -136,6 +186,10 @@ public class ForumBookStorage implements IForumBookStorage {
         }
     }
 
+    /**
+     * Executes load on entity {@link com.t13g2.forum.model.forum.Module}
+     * Dirty check is done before saving
+     */
     @Override
     public void loadModule() {
         modules = underlyingStorage.read(ModuleStorage.class);
@@ -146,31 +200,55 @@ public class ForumBookStorage implements IForumBookStorage {
         }
     }
 
+    /**
+     * Gets announcement storage
+     * @return {@link AnnouncementStorage}
+     */
     @Override
     public AnnouncementStorage getAnnouncements() {
         return announcements;
     }
 
+    /**
+     * Gets threads storage
+     * @return {@link ForumThreadStorage}
+     */
     @Override
     public ForumThreadStorage getForumThreads() {
         return forumThreads;
     }
 
+    /**
+     * Gets user storage
+     * @return {@link UserStorage}
+     */
     @Override
     public UserStorage getUsers() {
         return users;
     }
 
+    /**
+     * Gets module storage
+     * @return {@link ModuleStorage}
+     */
     @Override
     public ModuleStorage getModules() {
         return modules;
     }
 
+    /**
+     * Gets comment storage
+     * @return {@link CommentStorage}
+     */
     @Override
     public CommentStorage getComments() {
         return comments;
     }
 
+    /**
+     * Checks if this is a fresh copy of the application
+     * @return
+     */
     public boolean isFresh() {
         return this.isFresh;
     }

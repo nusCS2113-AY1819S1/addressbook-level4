@@ -317,7 +317,8 @@ By default, we have `JsonFileStorage` which stores and reads data from local har
 
 `IEncryptor` defines interface to encrypt application data, it should be injected to `IStorage` providing a encryption/
 decryption layer just before data writes and just after data reads. By default, `JsonFileStorage` uses `SimpleEncryptor`
-which is a simple 'OR' encryptor.
+which is a simple 'OR' encryptor. A more secure encryption algorithm can be achieved by implementing `IEncryptor`
+interface.
 
 `IForumBookStorage` defines interface to access data entities
 
