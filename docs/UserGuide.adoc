@@ -207,8 +207,8 @@ to your timetable might be lost.
 
 * Each command has an alias (given in round brackets after the command word) that can be used to replace the full command word. e.g. `find John` is equivaluent to `f John`.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `register n/NAME`, `NAME` is a parameter which can be used as `register n/John Doe`.
-* Items in square brackets are optional e.g `[p/PHONE_NUMBER][t/TAG]` can be used as `p/12345678 t/CS2101` or as `t/CS2101`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/CS2101`, `t/CS2113T t/W13-1` etc.
+* Items in square brackets are optional e.g `[p/PHONE_NUMBER][g/GROUP]` can be used as `p/12345678 g/CS2101` or as `g/CS2101`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[g/GROUP]...` can be used as `{nbsp}` (i.e. 0 times), `g/CS2101`, `g/CS2113T g/W13-1` etc.
 * Parameters can be in any order e.g. if the command specifies `e/EMAIL p/PHONE_NUMBER`, `p/PHONE_NUMBER e/EMAIL` is also acceptable.
 ====
 
@@ -238,13 +238,13 @@ After filtering your results by executing commands such as `group` or `find`, ex
 
 Edits your information in the database. +
 
-Format: `edit [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GROUP]...`
 
 ****
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-* Tags should be alphanumeric (contains letters and numbers) and can contain hyphens "-" and underscores "_"
+* When editing groups, your existing groups will be removed i.e adding groups is not cumulative.
+* You can remove all your groups by typing `g/` without specifying any groups after it.
+* Groups should be alphanumeric (contains letters and numbers) and can contain hyphens "-" and underscores "_"
 ****
 
 <<Features,Jump back to _FreeTime_'s feature list>>
@@ -277,30 +277,30 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 [[group]]
 === Locating persons by group : `group` (`t`)
 
-Find persons whose group tags match the specified group tags.
+Find persons whose groups match the specified groups.
 
-Format: `group TAGNAME [MORE_TAGNAMES]`
+Format: `group GROUPNAME [MORE_GROUPNAMES]`
 
 ****
 * The search is case sensitive. e.g `CS2101` will not match `cs2101`
-* The order of the tagname does not matter. e.g. `CS2101 CS2113T` will match `CS2113T CS2101`
-* Persons matching at least one group tag will be returned (i.e. `OR` search). e.g. `CS2113T CS2101` will return persons with either `CS2101` or `CS2113T` tags
+* The order of the groups do not matter. e.g. `CS2101 CS2113T` will match `CS2113T CS2101`
+* Persons matching at least one group will be returned (i.e. `OR` search). e.g. `CS2113T CS2101` will return persons with in either `CS2101` or `CS2113T` groups
 ****
 
 Example:
 
 * `group CS2101` +
-Filters both the others list and the friends list to show only users with the group tag "CS2101".
+Filters both the others list and the friends list to show only users with the group "CS2101".
 
 * `group CS2101 CS2113T` +
-Filters both the others list and the friends list to show only users with both group tags "CS2101" and "CS2113T".
+Filters both the others list and the friends list to show only users with both group "CS2101" and "CS2113T".
 
 .  By default, FreeTime shows all the users that are using the application, on both the Friends and Others panel.
 +
 .FreeTime before executing group command
 image::TagCommandDefaultFix.png[width="790"]
 +
-.  After executing `group CS2113T`, all the users with the tag `CS2113T` will be filtered and shown on the respective panels.
+.  After executing `group CS2113T`, all the users with the group `CS2113T` will be filtered and shown on the respective panels.
 +
 .FreeTime after executing group command
 image::TagCommandExecutedPS.png[width="790"]
@@ -321,6 +321,7 @@ Adds a timeslot to your timetable.
 Format: `add Monday 10:00-12:30`
 
 ****
+* _FreeTime_ uses the 24-hour clock, so 01:00 means 1 am, not 1 pm!
 * Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of `Monday`.
 * If you type a single number, like `10` for either the start or end time, FreeTime will assume that you mean `10:00`
 * You cannot add a timeslot that clashes with your current timetable.
@@ -341,7 +342,7 @@ Adds the timeslot from 17:00 to 18:00 on Wednesday to your timetable.
 After adding a timeslot, you should see the following:
 
 .Timeslot added to your timetable
-image::AddTimeSuccess.png[width="600"]
+image::AddTimeSuccess.png[width="800"]
 
 <<Features,Jump back to _FreeTime_'s feature list>>
 
@@ -353,6 +354,7 @@ Deletes a timeslot from your timetable.
 Format: `delete Monday 10:00-12:30`
 
 ****
+* _FreeTime_ uses the 24-hour clock, so 01:00 means 1 am, not 1 pm!
 * Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of `Monday`.
 * If you type a single number, like `10` for either the start or end time, FreeTime will assume that you mean `10:00`
 * You cannot delete a timeslot that is not already in your timetable.
@@ -491,8 +493,8 @@ Highlights timeslots where you, friend 1, and friend 2, are all free to meet up.
 
 After executing the command, you should see the following:
 
-.Timeslots highlighted in red are unavailable.
-image::FreeTimeSuccess.png[width="600"]
+.Timeslots highlighted in green are available while timeslots highlighted in red are unavailable.
+image::FreeTimeSuccess.png[width="800"]
 
 <<Features,Jump back to _FreeTime_'s feature list>>
 // end::freecommand[]
@@ -526,19 +528,19 @@ Undoable commands: those commands that modify the address book's content (`impor
 
 Examples:
 
-* `import my_file` +
+* `import me` +
 `list` +
-`undo` (reverses the `import my_file` command) +
+`undo` (reverses the `import me` command) +
 
 * `select 1` +
 `listall` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `import my_file` +
+* `import me` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `import my_file` command) +
+`undo` (reverses the `import mes` command) +
 
 <<Features,Jump back to _FreeTime_'s feature list>>
 
@@ -582,52 +584,27 @@ Format: `clear`
 [[import]]
 === Import Timetable : `import` (`im`)
 
-Use this command to import a timetable for the *current user* from a specified file. +
-
-Format: `import FILE_NAME` +
+Imports a timetable for the current user from a specified (_.ics_) file. +
 
 ****
-* See the example below for a quick start!
-* Command parameters:
-** `FILE_NAME` refers to the name of the file that you want to import.
-*** Do not include the _.ics_ file extension when typing the command.
-*** In other words, type: `import nusmods_calendar` instead of `import nusmods_calendar.ics`
-* Compatibility:
-** Only supports _.ics_ files exported from NUSMODS.
-* Location of the import file:
-** The file will be imported from the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file.
-*** Please see the image below: +
+* Only supports (_.ics_) files exported from NUSMODS.
+* Do *not* include the (_.ics_) file extension when typing the command.
+* The file will be imported from the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file. Please see the image below: +
 ****
-.Location to put your import files.
-image::UG_import_directory.png[width="500", align="left"]
 
+image::UG_importexport.png[width="400", align="left"]
+Format: `import [FILE_NAME]` +
 
 Example:
 
-* `import nusmods_calendar` +
-Imports the timetable from `.\import_export\nusmods_calendar.ics` +
-(where `.` represents the folder that the application is in.)
+* `import my_file` +
+Imports the timetable at `(root_folder)\import_export\my_file.ics` +
+(where 'root_folder' is the folder that the application is in.) +
 
-.  Download your file from NUDMODS website:
-+
-.Download your file from NUDMODS website.
-image::UG_import_step_1.png[width="790"]
-+
-.  Copy your desired _.ics_ file to the `import_export` folder:
-+
-.Copy your file to the correct folder.
-image::UG_import_step_2.png[width="790"]
-+
-.  Go back to FreeTime, and type in the command `import nusmods_calendar`  :
-+
-.Type this, then press enter!
-image::UG_import_step_3.png[width="400"]
-+
-.  If the import was successful, FreeTime should look similar to this  :
-+
-.Import Success! :)
-image::UG_import_step_4.png[width="790"]
-+
+[TIP]
+You can obtain your timetable on NUSMODS as an (_.ics_) file, as shown in the picture below:
+
+image::importics.png[width="250", align="left"]
 
 <<Features,Jump back to _FreeTime_'s feature list>>
 // end::import[]
@@ -636,54 +613,24 @@ image::UG_import_step_4.png[width="790"]
 [[export]]
 === Export Timetable : `export` (`ex`)
 
-Use this command to export the *currently-displayed* timetable as an _.ics_ file.
-
-Format: `export FILE_NAME`
+Exports the currently-displayed timetable to the specified (_.ics_) file.
 
 ****
-* See the example below for a quick start!
-* Command parameters:
-** `FILE_NAME` refers to the name of the file that you want to export.
-*** Do not include the _.ics_ file extension when typing the command.
-*** In other words, type: `export my_timetable` instead of `export my_timetable.ics`
-* Compatibility:
-** Can be imported back into FreeTime
-* Location of the exported file:
-** The file will be exported to the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file.
-*** Please see the image below: +
+* Your timetable will export as an (_.ics_) file. This file is currently only compatible with FreeTime.
+* Do not include the (_.ics_) file extension when typing the command.
+* Existing file with the same name will be overwritten. Use with care!
+* The file will be imported to the folder `import_export`, which is located in the same folder as the `FreeTime.jar` file. Please see the image below:
 ****
 
-.Location of your exported files.
-image::UG_export_directory.png[width="500", align="left"]
+image::UG_importexport.png[width="400", align="left"]
 
+*Format:* `export [FILE_NAME]`
 
-Example:
+*Example:*
 
-* `export my_timetable` +
-Exports the displayed timetable to `.\import_export\my_timetable.ics` +
-(where `.` represents the folder that the application is in.)
-
-.  Ensure that the timetable you want to export is being shown:
-.. type `select me` to display your own timetable.
-.. type `select INDEX` to display one of your friend's timetable.
-+
-.Select the desired timetable.
-image::UG_export_step_1.png[width="790"]
-+
-.  Type the command `export my_timetable`:
-+
-.Type the command.
-image::UG_export_step_2.png[width="400"]
-+
-.  If the export was successful, Your timetable should be waiting for you in the folder  :
-+
-.Exported file is in the import_export folder
-image::UG_export_step_3.png[width="400"]
-+
-
-
-
-
+* `export my_file.ics` +
+Exports the displayed timetable to `(root_folder)\import_export\my_file.ics` +
+(where 'root_folder' is the folder that the application is in.)
 
 <<Features,Jump back to _FreeTime_'s feature list>>
 // end::export[]
@@ -709,34 +656,3 @@ There is no need to save manually.
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
-
-== Command Summary
-
-* *Clear* : `clear`
-* *Edit* : `edit [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
-* *Tag* : `tag TAGNAME [MORE_TAGNAMES]` +
-e.g `tag CS2101`
-* *Friend* : `friend INDEX` +
-e.g.`friend 2`
-* *Unfriend* : `unfriend INDEX` +
-e.g.`unfriend 2`
-* *Add timeslot* : `addtime` +
-e.g. `addtime mon 10-12`
-* *Delete timeslot* : `deletetime` +
-e.g. `deletetime tue 12-14`
-* *Free time* : `free` +
-e.g. `free 1 2 3`
-* *Import Timetable* : `import FILE_LOCATION` +
-e.g `import myfilename`
-* *Export Timetable* : `export FILE_LOCATION` +
-e.g `export myfilename`

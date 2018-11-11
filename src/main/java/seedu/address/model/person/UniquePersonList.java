@@ -35,6 +35,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent person's name
+     */
+    public boolean containsToRegister(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSamePersonForRegister);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
