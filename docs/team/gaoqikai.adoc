@@ -1,9 +1,19 @@
 = Gao Qikai - Project Portfolio
 :site-section: AboutUs
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:xrefstyle: full
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:warning-caption: :warning:
+endif::[]
 
-== PROJECT: Jalil Enterprises Stock List
+Project: Jalil Enterprises Stock List
 
 ---
 
