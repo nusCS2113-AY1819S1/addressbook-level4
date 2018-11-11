@@ -227,7 +227,8 @@ public class VersionedEventListTest {
         assertFalse(versionedEventList.equals(1));
 
         // different state list -> returns false
-        VersionedEventList differentEventListList = prepareEventListList(eventListWithEventTwo, eventListWithEventThree);
+        VersionedEventList differentEventListList = prepareEventListList(
+                eventListWithEventTwo, eventListWithEventThree);
         assertFalse(versionedEventList.equals(differentEventListList));
 
         // different current pointer index -> returns false
@@ -243,9 +244,9 @@ public class VersionedEventListTest {
      * and states after {@code versionedEventList#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
      */
     private void assertEventListListStatus(VersionedEventList versionedEventList,
-                                             List<ReadOnlyEventList> expectedStatesBeforePointer,
-                                             ReadOnlyEventList expectedCurrentState,
-                                             List<ReadOnlyEventList> expectedStatesAfterPointer) {
+                                           List<ReadOnlyEventList> expectedStatesBeforePointer,
+                                           ReadOnlyEventList expectedCurrentState,
+                                           List<ReadOnlyEventList> expectedStatesAfterPointer) {
         // check state currently pointing at is correct
         assertEquals(new EventList(versionedEventList), expectedCurrentState);
 
