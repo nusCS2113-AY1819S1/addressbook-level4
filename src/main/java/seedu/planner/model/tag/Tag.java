@@ -10,7 +10,7 @@ import static seedu.planner.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric,"
-            + " less than 20 characters long.";
+            + " less than 20 characters long. \nIt should consist only 1 word. Whitespace is not allowed.";
     public static final String MESSAGE_TAG_NUM_CONSTRAINTS = "Number of tags should not exceed %d.";
     public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}{1,20}";
     public static final int NUM_MAX_TAGS = 2;
