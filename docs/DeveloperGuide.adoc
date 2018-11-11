@@ -1157,6 +1157,93 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+[discrete]
+=== Use case: Login
+
+*MSS*
+
+1.  User requests to list accounts
+2.  StockList shows the list of accounts
+3.  User requests to login using his account credentials
+4.  StockList shows that the user has successfully logged in
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list does not contain user's account.
++
+Use case ends.
+
+* 3a. The given account credentials are invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Delete account
+
+*MSS*
+
+1.  User requests to list accounts
+2.  StockList shows a list of accounts
+3.  User requests to delete a specific account in the list
+4.  StockList deletes the account
++
+Use case ends.
+
+*Extensions*
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Add account
+
+*MSS*
+
+1.  User requests to add an account
+2.  StockList adds the account to the database.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. The given account is already in the database.
++
+[none]
+** 1a1. StockList shows an error message.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Edit account
+
+*MSS*
+
+1.  User requests to list accounts
+2.  StockList shows a list of accounts
+3.  User requests to edit a specific account in the list
+4.  StockList edits the account
++
+Use case ends.
+
+*Extensions*
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
 _{More to be added}_
 
 [appendix]
@@ -1231,6 +1318,50 @@ _{ more test cases ... }_
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+=== Logging in
+
+. Logging in while all accounts are listed
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Only default account 'admin' in the list, with the default credentials. Login status is currently logged out.
+.. Test case: `login u/admin p/lol` +
+   Expected: Account is not logged in. Error details shown in the status message. Status bar remains the same.
+.. Test case: `login u/admin p/admin` +
+   Expected: Account is logged in. Details of the logged in account shown in the status message. Timestamp in the status bar is updated.
+.. Other incorrect login commands to try: `login`, `login u/x p/y` (where x and y differ from the registered account data) +
+   Expected: Similar to the first test case.
+
+=== Account management
+
+. Adding an account
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Only default account 'admin' in the list, with the default credentials. Login status is currently logged in as 'admin'.
+.. Test case: `addAccount u/admin p/lol` +
+   Expected: Account is not added. Error details shown in the status message. Status bar remains the same.
+.. Test case: `addAccount u/john p/doe` +
+   Expected: Account is added. Details of the added account shown in the status message. Timestamp in the status bar is updated.
+.. Other incorrect delete commands to try: `addAccount`, `addAccount u/x p/y` (where x matches an account already in the database) +
+   Expected: Similar to first test case.
+
+. Editing an account while all accounts are listed
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Accounts 'admin' and 'john' are in the list. Login status is currently logged in as 'admin'.
+.. Test case: `editAccount 2 u/john p/password123!` +
+   Expected: Account is edited. Details of the edited account shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `editAccount 0 u/chew p/lol` +
+   Expected: Account is not edited. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect edit commands to try: `editAccount`, `editAccount x u/y p/z` (where x is larger than the account list size) +
+
+. Deleting an account while all accounts are listed
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Accounts 'admin' and 'john' are in the list. Login status is currently logged in as 'admin'.
+.. Test case: `deleteAccount 2` +
+   Expected: Account is deleted. Details of the deleted account shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `deleteAccount 0` +
+   Expected: No account is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect edit commands to try: `deleteAccount`, `deleteAccount x` (where x is larger than the account list size) +
+   Expected: Similar to previous.
+
 
 === Saving data
 
