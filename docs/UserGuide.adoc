@@ -510,7 +510,7 @@ image::UiPieChartIncome.png[width="790"]
 === Showing a breakdown of total expenses and income into categories of this month: `NO COMMAND REQUIRED TO BE TYPED`
 
 Shows a breakdown of total expenses and income into categories using data of this month. +
-No format is required for this feature as the feature is automatically triggered when there is any changes to the list of records within the application.
+No format is required for this feature as the feature is automatically triggered when there is any mutation of data within the application.
 Another way of returning to the welcome panel from anywhere in the app is to press `HOME` on the keyboard or click `Home` on the menu.
 
 This feature automatically tracks the *current date* and ensures that the data presented is updated regardless regardless of whether the application is *off* or *on for
@@ -521,7 +521,7 @@ the application will update the data whenever it detects any record data modific
 
 [NOTE]
 The data used to represent the pie charts in the welcome panel is *only updated* whenever there are any changes to records within Savee. +
-This includes adding records, deleting records and editing records in Savee.
+This includes adding records, deleting records and editing records in Savee, but not sorting, listing, summary, stats, etc.
 
 Below shows a snapshot of what the user can see when there are records available of the current month
 
