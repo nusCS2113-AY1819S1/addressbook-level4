@@ -72,7 +72,7 @@ public class AddCommand extends Command {
 
         model.addProduct(toAdd);
 
-        if (model.hasDistributor(distToAdd)) {
+        if (model.hasDistributorName(distToAdd)) {
 
             List<Distributor> distList = model.getFilteredDistributorList();
             Integer index = distList.indexOf(distToAdd);

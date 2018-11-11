@@ -212,6 +212,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasDistributorName(Distributor distributor) {
+        return versionedDistributorBook.hasDistributorName(distributor);
+    }
+
+    @Override
+    public boolean hasDistributorPhone(Distributor distributor) {
+        return versionedDistributorBook.hasDistributorPhone(distributor);
+    }
+
+    @Override
     public void deleteDistributor(Distributor target) {
         versionedDistributorBook.removeDistributor(target);
         indicateDistributorBookChanged();

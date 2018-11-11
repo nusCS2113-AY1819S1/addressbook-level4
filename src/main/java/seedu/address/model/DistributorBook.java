@@ -67,6 +67,22 @@ public class DistributorBook implements ReadOnlyDistributorBook {
     }
 
     /**
+     * Returns true if a distributor with the same name as {@code distributor} exists in the distributor book.
+     */
+    public boolean hasDistributorName(Distributor distributor) {
+        requireNonNull(distributor);
+        return distributors.containsName(distributor);
+    }
+
+    /**
+     * Returns true if a distributor with the same phone as {@code distributor} exists in the distributor book.
+     */
+    public boolean hasDistributorPhone(Distributor distributor) {
+        requireNonNull(distributor);
+        return distributors.containsPhone(distributor);
+    }
+
+    /**
      * Adds a distributor to the address book.
      * The distributor must not already exist in the distributor book.
      */

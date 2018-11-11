@@ -41,9 +41,12 @@ public class XmlAdaptedDistributor {
     /**
      * Constructs an {@code XmlAdaptedDistributor} with the given distributor details.
      */
-    public XmlAdaptedDistributor(String name, String phone) {
+    public XmlAdaptedDistributor(String name, String phone,
+                                 List<XmlAdaptedDistProd> prods, List<XmlAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
+        this.prods = prods;
+        this.tagged = tags;
     }
 
     /**

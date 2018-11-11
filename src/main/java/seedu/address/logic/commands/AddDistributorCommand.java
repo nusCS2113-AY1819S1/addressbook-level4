@@ -31,6 +31,10 @@ public class AddDistributorCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New distributor added: %1$s";
     public static final String MESSAGE_DUPLICATE_DISTRIBUTOR =
             "This distributor already exists in the distributor book";
+    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR_NAME =
+            "A distirbutor with this name already exists in the distributor book.";
+    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR_PHONE =
+            "A distirbutor with this phone already exists in the distributor book.";
 
     private final Distributor toAdd;
 
@@ -45,8 +49,12 @@ public class AddDistributorCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (model.hasDistributor(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_DISTRIBUTOR);
+        if (model.hasDistributorName(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_DISTRIBUTOR_NAME);
+        }
+
+        if (model.hasDistributorPhone(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_DISTRIBUTOR_PHONE);
         }
 
         model.addDistributor(toAdd);

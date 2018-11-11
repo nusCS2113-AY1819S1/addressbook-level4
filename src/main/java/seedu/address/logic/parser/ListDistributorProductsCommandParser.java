@@ -8,13 +8,13 @@ import seedu.address.logic.commands.ListDistributorProductsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditProductCommand object
+ * Parses input arguments and creates a new ListDistributorProductsCommand object
  */
 public class ListDistributorProductsCommandParser implements Parser<ListDistributorProductsCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditProductCommand
-     * and returns an EditProductCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ListDistributorProductsCommand
+     * and returns an ListDistributorProductsCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */

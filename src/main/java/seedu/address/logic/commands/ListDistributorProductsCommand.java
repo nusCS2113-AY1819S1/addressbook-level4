@@ -52,7 +52,7 @@ public class ListDistributorProductsCommand extends Command {
 
         Set<DistributorProduct> distProdsSet = distributorToShow.getDistProds();
 
-        ArrayList<DistributorProduct> distprodsList = new ArrayList<DistributorProduct>(distProdsSet);
+        ArrayList<DistributorProduct> distprodsList = new ArrayList<>(distProdsSet);
 
         if (distprodsList.size() == 0) {
             return new CommandResult(NO_DIST_PRODS_MESSAGE);
