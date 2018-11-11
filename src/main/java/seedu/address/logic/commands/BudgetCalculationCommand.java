@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_BUDGETS_ALREADY_CALCULATED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOTAL_BUDGET;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import seedu.address.logic.BudgetCalculationManager;
@@ -31,9 +32,10 @@ public class BudgetCalculationCommand extends Command {
 
     public static final String MESSAGE_CALCULATE_BUDGET_SUCCESS = "The budgets have been calculated.";
     public static final String MESSAGE_INVALID_TOTAL_BUDGET =
-            "Please enter a valid total budget! Total Budget can only be positive numbers, even zero.";
-    public static final String MESSAGE_DUPLICATE_CLUB = "This is a duplicate club";
-    public static final String MESSAGE_BUDGETS_NOT_CALCULATED = "You have not added budgets for any clubs!";
+            "Please enter a valid total budget! Total Budget can only be positive whole numbers,i.e. even zero.";
+    public static final String MESSAGE_DUPLICATE_CLUB = "This is a duplicate club.";
+    public static final String MESSAGE_BUDGETS_NOT_CALCULATED =
+            "No clubs have submitted their budget calculation data yet, so 'calculatebudget' command can't be used yet";
 
     private final TotalBudget totalBudget;
 
@@ -61,11 +63,11 @@ public class BudgetCalculationCommand extends Command {
         } else {
             int i;
 
-            int budgetPerPerson;
+            double budgetPerPerson;
 
             TotalAttendees totalAttendees = new TotalAttendees(listOfClubs);
 
-            budgetPerPerson = Integer.parseInt(totalBudget.toString()) / totalAttendees.calculateTotalAttendees();
+            budgetPerPerson = Double.parseDouble(totalBudget.toString()) / (totalAttendees.calculateTotalAttendees());
 
             for (i = 0; i < listOfClubs.size(); i++) {
 
@@ -77,9 +79,14 @@ public class BudgetCalculationCommand extends Command {
 
                 int totalClubMembers = currentEo * currentNoe;
 
-                int currentClubsBudget = budgetPerPerson * totalClubMembers;
+                double currentClubsBudget = budgetPerPerson * totalClubMembers;
 
-                FinalClubBudget toAdd = new FinalClubBudget(currentClubForBudget.getClubName(), currentClubsBudget);
+                DecimalFormat decim = new DecimalFormat("0.00");
+
+                double currentClubsBudgetDouble = Double.parseDouble(decim.format(currentClubsBudget));
+
+                FinalClubBudget toAdd = new FinalClubBudget(currentClubForBudget.getClubName(),
+                        currentClubsBudgetDouble);
 
                 if (model.hasClubBudget(toAdd)) {
                     throw new CommandException(MESSAGE_DUPLICATE_CLUB);

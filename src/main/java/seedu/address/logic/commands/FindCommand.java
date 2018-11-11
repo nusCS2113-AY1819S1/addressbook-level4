@@ -1,12 +1,17 @@
 package seedu.address.logic.commands;
 
+import java.util.List;
+import java.util.function.Predicate;
+
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.formatter.KeywordsOutputFormatter;
 import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.model.searchhistory.ReadOnlyKeywordsRecord;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.searchhistory.KeywordType;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * The base class for all find commands on Person class.
  */
 public abstract class FindCommand extends Command {
 
@@ -19,9 +24,19 @@ public abstract class FindCommand extends Command {
             + "Example2: " + COMMAND_WORD + " " + FindCommandParser.EXCLUDE_OPTION_STRING + " alice\n"
             + "Example3: " + COMMAND_WORD + " " + FindCommandParser.TAG_OPTION_STRING + " President";
 
-    private KeywordsOutputFormatter formatter = new KeywordsOutputFormatter();
+    protected void executeSearch(Model model, Predicate<Person> predicate, KeywordType type, List<String> keywords) {
+        model.recordKeywords(type, keywords);
+        model.executeSearch(predicate);
+    }
 
-    String getKeywordHistoryString(ReadOnlyKeywordsRecord record) {
-        return formatter.getOutputString(record);
+    /**
+     * Returns a CommandResult object that stores the formatted keywords history string.
+     */
+    protected CommandResult getCommandResultWithKeywordsHistory(Model model) {
+        KeywordsOutputFormatter formatter = new KeywordsOutputFormatter();
+        String keywordHistoryString = formatter.getOutputString(model.getReadOnlyKeywordsRecord());
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
+                        + keywordHistoryString);
     }
 }

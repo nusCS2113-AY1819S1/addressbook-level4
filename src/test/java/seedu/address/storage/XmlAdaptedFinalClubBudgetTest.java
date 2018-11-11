@@ -14,7 +14,7 @@ public class XmlAdaptedFinalClubBudgetTest {
     private static final String INVALID_CLUB_NAME = "Comput!ing";
 
     private static final String VALID_CLUB_NAME = COMPUTING_CLUB.getClubName().toString();
-    private static final String VALID_ALLOCATED_BUDGET = Integer.toString(COMPUTING_CLUB.getAllocatedBudget());
+    private static final String VALID_ALLOCATED_BUDGET = Double.toString(COMPUTING_CLUB.getAllocatedBudget());
 
     @Test
     public void toModelType_validFinalClubBudgetDetails_returnsFinalClubBudget() throws Exception {
