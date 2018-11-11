@@ -2,12 +2,18 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.ClassDeleteStudentCommand.MESSAGE_CLASSROOM_STUDENT_NOT_FOUND;
+import static seedu.address.logic.commands.ClassDeleteStudentCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_T16;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MATRIC_NO_MEGAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CG1111;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +35,7 @@ import seedu.address.model.course.CourseManager;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleManager;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
+import seedu.address.model.person.MatricNo;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.StudentManager;
 import seedu.address.testutil.ClassroomBuilder;
@@ -79,11 +86,20 @@ public class ClassDeleteStudentCommandTest {
         try {
             moduleManager.addModule(module);
         } catch (DuplicateModuleException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
-        moduleManager.enrolStudentInModule(module, student);
-        moduleManager.enrolStudentInModule(module, student3);
-        moduleManager.saveModuleList();
+        Set<MatricNo> studentMatricNo = new HashSet<>();
+        studentMatricNo.add(student.getMatricNo());
+        studentMatricNo.add(student3.getMatricNo());
+        ModuleEnrolCommand moduleEnrolCommand = new ModuleEnrolCommand(module.getModuleCode(),
+                studentMatricNo);
+
+        try {
+            moduleEnrolCommand.execute(model, commandHistory);
+        } catch (CommandException e) {
+            e.getMessage();
+        }
+
         classroom = new ClassroomBuilder().build();
         classroom.getStudents().add(student.getMatricNo().matricNo);
         classroomManager.addClassroom(classroom);
@@ -95,17 +111,17 @@ public class ClassDeleteStudentCommandTest {
         new ClassDeleteStudentCommand(null, null, null);
     }
 
-//    @Test
-//    public void execute_classroomUnassignStudentAccepted_deleteSuccessful() {
-//        String expectedMessage = String.format(MESSAGE_SUCCESS, student.getMatricNo().matricNo,
-//                classroom.getClassName(), classroom.getModuleCode());
-//        ClassDeleteStudentCommand classDeleteStudentCommand = new ClassDeleteStudentCommand(
-//                classroom.getClassName().getValue(),
-//                classroom.getModuleCode().moduleCode, student.getMatricNo().matricNo);
-//        assertCommandSuccess(classDeleteStudentCommand, model,
-//                commandHistory, expectedMessage,
-//                model);
-//    }
+    @Test
+    public void execute_classroomUnassignStudentAccepted_deleteSuccessful() {
+        String expectedMessage = String.format(MESSAGE_SUCCESS, student.getMatricNo().matricNo,
+                classroom.getClassName(), classroom.getModuleCode());
+        ClassDeleteStudentCommand classDeleteStudentCommand = new ClassDeleteStudentCommand(
+                classroom.getClassName().getValue(),
+                classroom.getModuleCode().moduleCode, student.getMatricNo().matricNo);
+        assertCommandSuccess(classDeleteStudentCommand, model,
+                commandHistory, expectedMessage,
+                model);
+    }
 
     @Test
     public void execute_classroomInvalidModule_throwsCommandException() throws CommandException {
@@ -140,27 +156,27 @@ public class ClassDeleteStudentCommandTest {
         classDeleteStudentCommand.execute(model, commandHistory);
     }
 
-//    @Test
-//    public void execute_invalidClassroom_throwsCommandException() throws CommandException {
-//        ClassDeleteStudentCommand classDeleteStudentCommand = new ClassDeleteStudentCommand(
-//                "Invalid Classroom",
-//                classroom.getModuleCode().moduleCode, student.getMatricNo().matricNo);
-//
-//        thrown.expect(CommandException.class);
-//        thrown.expectMessage(ClassDeleteStudentCommand.MESSAGE_FAIL);
-//        classDeleteStudentCommand.execute(model, commandHistory);
-//    }
+    @Test
+    public void execute_invalidClassroom_throwsCommandException() throws CommandException {
+        ClassDeleteStudentCommand classDeleteStudentCommand = new ClassDeleteStudentCommand(
+                "Invalid Classroom",
+                classroom.getModuleCode().moduleCode, student.getMatricNo().matricNo);
 
-//    @Test
-//    public void execute_studentNotAssignedClassroom_throwsCommandException() throws CommandException {
-//        String expectedMessage = String.format(MESSAGE_CLASSROOM_STUDENT_NOT_FOUND, student3.getMatricNo().matricNo);
-//        thrown.expect(CommandException.class);
-//        thrown.expectMessage(expectedMessage);
-//        ClassDeleteStudentCommand classDeleteStudentCommand = new ClassDeleteStudentCommand(
-//                classroom.getClassName().getValue(),
-//                classroom.getModuleCode().moduleCode, student3.getMatricNo().matricNo);
-//        classDeleteStudentCommand.execute(model, commandHistory);
-//    }
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(ClassDeleteStudentCommand.MESSAGE_FAIL);
+        classDeleteStudentCommand.execute(model, commandHistory);
+    }
+
+    @Test
+    public void execute_studentNotAssignedClassroom_throwsCommandException() throws CommandException {
+        String expectedMessage = String.format(MESSAGE_CLASSROOM_STUDENT_NOT_FOUND, student3.getMatricNo().matricNo);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(expectedMessage);
+        ClassDeleteStudentCommand classDeleteStudentCommand = new ClassDeleteStudentCommand(
+                classroom.getClassName().getValue(),
+                classroom.getModuleCode().moduleCode, student3.getMatricNo().matricNo);
+        classDeleteStudentCommand.execute(model, commandHistory);
+    }
 
     @Test
     public void equals() {
