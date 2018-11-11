@@ -46,7 +46,7 @@ Milestones were set every fortnight. Each member was expected to contribute to t
 ** `Reason for enhancement`: To enable users to import data back into Savee. There will be unlimited number of sheets that can be imported.
 ** `Overview`: The feature allows user to import the record data from the Excel file.
 ** `Highlights`: Similar to the archive feature, a significant effort and time was spent to read and utilize the required documentation. The existence of the directory path of the Excel file was also examined.
-** `My contributions`: This feature takes in *2 different input modes*. I have set up the pre-conditions for the Excel file to be successfully imported [refer to the User guide].
+** `My contributions`: This feature takes in *2 different input modes*. I have set up the pre-conditions for the Excel file to be successfully imported [refer to the *User guide*].
 ** `Credits`: Apache Poi Library and its inner class were used and modified to fit into the feature.
 
 
