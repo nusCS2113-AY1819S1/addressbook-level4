@@ -64,6 +64,7 @@ public class ImportCommand extends Command {
         int finalNumberOfPersons = personList.size();
         int personsImported = calculateImportedEntries(initialNumberOfPersons, finalNumberOfPersons);
 
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, personsImported));
     }
 
