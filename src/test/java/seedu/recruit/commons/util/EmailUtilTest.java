@@ -19,7 +19,7 @@ class EmailUtilTest {
     private EmailUtil emailUtil = new EmailUtil();
 
     @Test
-    void addCandidate() {
+    void addCandidate_addTestObject() {
         int currentSize = emailUtil.getCandidates().size();
         emailUtil.addCandidate(testCandidate);
         assertEquals(currentSize + 1, emailUtil.getCandidates().size());
@@ -28,7 +28,7 @@ class EmailUtilTest {
     }
 
     @Test
-    void addJobOffer() {
+    void addJobOffer_addTestObject() {
         int currentSize = emailUtil.getJobOffers().size();
         emailUtil.addJobOffer(testJobOffer);
         assertEquals(currentSize + 1, emailUtil.getJobOffers().size());
@@ -37,7 +37,7 @@ class EmailUtilTest {
     }
 
     @Test
-    void getRecipientJobOfferName() {
+    void getRecipientJobOfferName_fromTestObject() {
         String testName = emailUtil.getRecipientJobOfferName(testJobOffer);
         StringBuilder actualName = new StringBuilder();
         actualName.append(testJobOffer.getCompanyName().toString());
@@ -48,7 +48,7 @@ class EmailUtilTest {
     }
 
     @Test
-    void getContentJobOfferName() {
+    void getContentJobOfferName_fromTestObject() {
         String testName = emailUtil.getContentJobOfferName(testJobOffer);
         StringBuilder actualName = new StringBuilder();
         actualName.append(testJobOffer.getJob().toString());
