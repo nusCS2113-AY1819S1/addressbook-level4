@@ -9,7 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.request.requestmodel.RequestModel;
 
 /**
- * Reverts the {@code model}'s BookInventory to its previously undone state.
+ * Reverts the {@code model}'s RequestList to its previously undone state.
  */
 public class RedoRequestCommand extends CommandSecondary {
 

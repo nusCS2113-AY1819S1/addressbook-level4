@@ -1,7 +1,8 @@
-package seedu.address.logic;
+package seedu.address.logic.parser;
 
 import static seedu.address.logic.DiceCoefficient.diceCoefficient;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.request.requestcommands.DeleteRequestCommand;
 import seedu.address.request.requestcommands.RequestCommand;
 import seedu.address.request.requestcommands.UndoRequestCommand;

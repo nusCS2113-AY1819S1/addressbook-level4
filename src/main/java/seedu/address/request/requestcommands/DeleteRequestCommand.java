@@ -13,7 +13,7 @@ import seedu.address.request.Request;
 import seedu.address.request.requestmodel.RequestModel;
 
 /**
- * Deletes a book identified using it's displayed index from the BookInventory.
+ * Deletes a request identified using its displayed index from the RequestList.
  */
 public class DeleteRequestCommand extends CommandSecondary {
 
