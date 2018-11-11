@@ -82,7 +82,7 @@ public class ExportCalendarCommandTest {
     //**********************************************Fail test case***************************************************
     @Test
     public void execute_exportCommand_invalidIoinput() {
-        String filename = "C:/myCal";
+        String filename = "C/\\myCal";
         String expectedMessage = String.format(ExportCalendarCommand.MESSAGE_FILE_ERROR, filename);
         AttendanceContainsUserPredicate predicate = new AttendanceContainsUserPredicate(user.getUsername());
         ExportCalendarCommand command = new ExportCalendarCommand(filename);
