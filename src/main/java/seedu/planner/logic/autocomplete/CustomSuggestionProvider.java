@@ -81,7 +81,8 @@ public class CustomSuggestionProvider {
     private static final Set<String> dateInputSummarySet = Set.of(SummaryByCategoryCommand.COMMAND_MODE_WORD,
             SummaryByDateCommand.COMMAND_MODE_WORD);
     private static final Set<String> defaultMonthSummarySet = new HashSet<>(Arrays.asList(
-            "jun-2018", "jul-2018", "aug-2018", "sep-2018", "oct-2018", "nov-2018", "dec-2018"));
+            "jan-2018", "feb-2018", "mar-2018", "apr-2018", "may-2018", "jun-2018",
+            "jul-2018", "aug-2018", "sep-2018", "oct-2018", "nov-2018", "dec-2018"));
 
     private static final Set<String> sortKeywordsSet = Stream.concat(SortCommand.ORDER_SET.stream(),
             SortCommand.CATEGORY_SET.stream()).collect(Collectors.toSet());

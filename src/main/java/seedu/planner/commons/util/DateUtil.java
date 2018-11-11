@@ -38,7 +38,7 @@ public class DateUtil {
         }
     }
 
-    //@author tztzt
+    //@@author tztzt
     /**
      * Checks if the year is Leap Year or not.
      * @param year
@@ -53,7 +53,7 @@ public class DateUtil {
             return year % 4 == 0;
         }
     }
-    //@author
+    //@@author
 
     /**
      * Checks whether a {@code Date} is earlier than another given {@code Date}
@@ -104,6 +104,16 @@ public class DateUtil {
     }
 
     /**
+     * Formats a date object into a display complying with
+     */
+    public static String formatDate(Date date) {
+        LocalDate localDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        return localDate.format(formatter);
+    }
+
+    //@@author tztzt
+    /**
      * Computes today's date using Java library {@link LocalDate} by processing the date in yyyy-mm-dd into dd-mm-yyyy
      * and returns it as a string form for input.
      * @return String date
@@ -123,14 +133,5 @@ public class DateUtil {
         String dateYesterday = LocalDate.now().minusDays(1).toString();
         String[] args = dateYesterday.split("-");
         return String.format("%s-%s-%s", args[2] , args[1], args[0]);
-    }
-
-    /**
-     * Formats a date object into a display complying with
-     */
-    public static String formatDate(Date date) {
-        LocalDate localDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
-        return localDate.format(formatter);
     }
 }
