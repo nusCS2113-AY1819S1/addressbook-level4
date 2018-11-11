@@ -1991,7 +1991,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample records. The window size may not be optimum.
 
 . Saving window preferences
 
@@ -2141,15 +2141,17 @@ should allow you to navigate to the hidden tags within the legend.
    Expected: First record is deleted from the list. Details of the deleted record shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No record is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
-
-_{ more test cases ... }_
 
 === Saving data
 
 . Dealing with missing/corrupted data files
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Prerequisites: Have a data file ready. Go to the application and add a record. A data xml file should be created.
+.. Test case: Go to the file and remove 1 of the field tags. It should look like "<name></name>" where name is the name of the field.
+Then, open the app.
+.. Expected: The app should initialise with an empty record list.
 
-_{ more test cases ... }_
+.. Test case: Delete the data file
+.. Expected: The app should initialise with a sample record list.
