@@ -44,11 +44,12 @@ public class BookInventoryParserTest {
 
     private final BookInventoryParser parser = new BookInventoryParser();
 
+
     @Test
     public void parseCommand_add() throws Exception {
         Book book = new BookBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(BookUtil.getAddCommand(book));
-        // assertEquals(new AddCommand(book), command);
+        assertEquals(new AddCommand(book), command);
     }
 
     @Test

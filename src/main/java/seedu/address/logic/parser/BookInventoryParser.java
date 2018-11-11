@@ -134,6 +134,9 @@ public class BookInventoryParser {
             break;
         default:
         {
+            /*
+             * This segment finds out if a typo error is noticed by the Dice Algorithm.
+             */
             String similarCommandFound = similarityParser
                     .performSimilarityCheck(commandWord, commandList.getCommandList());
             if (!similarCommandFound.isEmpty()) {
@@ -150,8 +153,7 @@ public class BookInventoryParser {
                 throw new ParseException(MESSAGE_ACCESS_DENIED + finalCommandWord + ".");
 
             }
-            return finalCommand;
         }
-        return null;
+        return finalCommand;
     }
 }

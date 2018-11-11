@@ -5,6 +5,7 @@ import static seedu.address.logic.DiceCoefficient.diceCoefficient;
 import seedu.address.logic.CommandHistory;
 import seedu.address.request.requestcommands.DeleteRequestCommand;
 import seedu.address.request.requestcommands.RequestCommand;
+import seedu.address.request.requestcommands.ToggleRequestCommand;
 import seedu.address.request.requestcommands.UndoRequestCommand;
 
 /**
@@ -25,6 +26,7 @@ public class DifferentiatingParser {
     public boolean parseInput (String[] string, String prev, CommandHistory history) {
         if (diceCoefficient(string[0], RequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD
                 || diceCoefficient(string[0], DeleteRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_ADJUSTED_THRESHOLD
+                || diceCoefficient(string[0], ToggleRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_ADJUSTED_THRESHOLD
                 || ((diceCoefficient(string[0], UndoRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD)
                 && prev.equals(requestCommand))) {
             return true;
