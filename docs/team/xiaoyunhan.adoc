@@ -45,7 +45,7 @@ Given below are sections I contributed to the code.
 
 * *Minor enhancement #1*: add "undoable_command" class related methods to fix "undo" command on both To-do List side and Expenditure Tracker side.
 
-* *Minor enhancement #2*: add a few tests to increase coverage.
+* *Minor enhancement #2*: add test cases to increase coverage.
 
 * *Code contributed*:
 https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[codes]
@@ -59,7 +59,7 @@ https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayN
 *** Update Q&A in the user guide
 
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#20], https://github.com[#24], https://github.com[#47], https://github.com[#48], https://github.com[#74], https://github.com[#78], https://github.com[#82], https://github.com[#122]
+*** PRs reviewed: https://github.com[#20], https://github.com[#24], https://github.com[#47], https://github.com[#48], https://github.com[#74], https://github.com[#78], https://github.com[#82], https://github.com[#122]
 *** Participating in group discussion on WhatsApp
 
 
