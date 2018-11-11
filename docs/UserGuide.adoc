@@ -207,8 +207,8 @@ to your timetable might be lost.
 
 * Each command has an alias (given in round brackets after the command word) that can be used to replace the full command word. e.g. `find John` is equivaluent to `f John`.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `register n/NAME`, `NAME` is a parameter which can be used as `register n/John Doe`.
-* Items in square brackets are optional e.g `[p/PHONE_NUMBER][t/TAG]` can be used as `p/12345678 t/CS2101` or as `t/CS2101`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/CS2101`, `t/CS2113T t/W13-1` etc.
+* Items in square brackets are optional e.g `[p/PHONE_NUMBER][g/GROUP]` can be used as `p/12345678 g/CS2101` or as `g/CS2101`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[g/GROUP]...` can be used as `{nbsp}` (i.e. 0 times), `g/CS2101`, `g/CS2113T g/W13-1` etc.
 * Parameters can be in any order e.g. if the command specifies `e/EMAIL p/PHONE_NUMBER`, `p/PHONE_NUMBER e/EMAIL` is also acceptable.
 ====
 
@@ -238,13 +238,13 @@ After filtering your results by executing commands such as `group` or `find`, ex
 
 Edits your information in the database. +
 
-Format: `edit [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GROUP]...`
 
 ****
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-* Tags should be alphanumeric (contains letters and numbers) and can contain hyphens "-" and underscores "_"
+* When editing groups, your existing groups will be removed i.e adding groups is not cumulative.
+* You can remove all your groups by typing `g/` without specifying any groups after it.
+* Groups should be alphanumeric (contains letters and numbers) and can contain hyphens "-" and underscores "_"
 ****
 
 <<Features,Jump back to _FreeTime_'s feature list>>
@@ -277,30 +277,30 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 [[group]]
 === Locating persons by group : `group` (`t`)
 
-Find persons whose group tags match the specified group tags.
+Find persons whose groups match the specified groups.
 
-Format: `group TAGNAME [MORE_TAGNAMES]`
+Format: `group GROUPNAME [MORE_GROUPNAMES]`
 
 ****
 * The search is case sensitive. e.g `CS2101` will not match `cs2101`
-* The order of the tagname does not matter. e.g. `CS2101 CS2113T` will match `CS2113T CS2101`
-* Persons matching at least one group tag will be returned (i.e. `OR` search). e.g. `CS2113T CS2101` will return persons with either `CS2101` or `CS2113T` tags
+* The order of the groups do not matter. e.g. `CS2101 CS2113T` will match `CS2113T CS2101`
+* Persons matching at least one group will be returned (i.e. `OR` search). e.g. `CS2113T CS2101` will return persons with in either `CS2101` or `CS2113T` groups
 ****
 
 Example:
 
 * `group CS2101` +
-Filters both the others list and the friends list to show only users with the group tag "CS2101".
+Filters both the others list and the friends list to show only users with the group "CS2101".
 
 * `group CS2101 CS2113T` +
-Filters both the others list and the friends list to show only users with both group tags "CS2101" and "CS2113T".
+Filters both the others list and the friends list to show only users with both group "CS2101" and "CS2113T".
 
 .  By default, FreeTime shows all the users that are using the application, on both the Friends and Others panel.
 +
 .FreeTime before executing group command
 image::TagCommandDefaultFix.png[width="790"]
 +
-.  After executing `group CS2113T`, all the users with the tag `CS2113T` will be filtered and shown on the respective panels.
+.  After executing `group CS2113T`, all the users with the group `CS2113T` will be filtered and shown on the respective panels.
 +
 .FreeTime after executing group command
 image::TagCommandExecutedPS.png[width="790"]
@@ -654,32 +654,3 @@ There is no need to save manually.
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
-
-== Command Summary
-
-* *Clear* : `clear`
-* *Edit* : `edit [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
-* *Tag* : `tag TAGNAME [MORE_TAGNAMES]` +
-e.g `tag CS2101`
-* *Friend* : `friend INDEX` +
-e.g.`friend 2`
-* *Unfriend* : `unfriend INDEX` +
-e.g.`unfriend 2`
-* *Add timeslot* : `addtime` +
-e.g. `addtime mon 10-12`
-* *Delete timeslot* : `deletetime` +
-e.g. `deletetime tue 12-14`
-* *Free time* : `free` +
-e.g. `free 1 2 3`
-* *Import Timetable from a file* : `import [FILE_LOCATION]`
-* *Export Timetable to a file* : `export [FILE_LOCATION]`
