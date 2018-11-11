@@ -102,6 +102,7 @@ When you are ready to start coding,
 
 == Design
 
+//tag::2.1[]
 [[Design-Architecture]]
 === Architecture
 
@@ -162,6 +163,7 @@ Note how the event is propagated through the `EventsCenter` to the `Storage` and
 The sections below give more details of each component.
 
 [[Design-Ui]]
+//end::2.1[]
 // tag::2.2[]
 === UI component
 
@@ -342,6 +344,10 @@ Step 2. The `save` command calls `Model#saveStockList()`, which initiates a `sav
 
 Step 3. The `handleSaveStockListVersionEvent` handler calls the `saveStockListVersion()` method from the `StorageManager` class.
 
+The following sequence diagram shows how the undo operation works:
+
+image::SaveCommandSequenceDiagram.png[width="800"]
+
 Step 4. The `ReadOnlyStockList` is saved as an xml file.
 
 Step 5. The user executes `open april_18` command to open the saved april_18.xml file.
@@ -377,7 +383,7 @@ Step 9. The `april_18.xml` file is transformed with the `template.xsl` styleshee
 ** Cons: The displayed inventory is in XML format and hard to decipher.
 // end::saveopen[]
 
-// tag::status[]
+// tag::statusfeature[]
 === Status feature
 ==== Current Implementation
 
@@ -436,7 +442,7 @@ Step 6. The user executes the `DeleteLoanListCommand` to delete the loan list wh
 * The `ArrayList#remove()` is called to remove the loan list entry
 * The `LoanListCommand#updateXmlLoanListFile()` is called to save the changes in storage.
 
-// end:: status[]
+// end::statusfeature[]
 
 // tag::login[]
 === Login feature
@@ -537,12 +543,11 @@ Step 2. The `deleteTag` command calls `updateFilteredItemList();` in `model` to 
 // end::addTag[]
 
 // tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
+=== Data Encryption (Coming in V2.0)
 
 // end::dataencryption[]
 
+//tag::lost&foundfeature[]
 === Lost and Found feature
 ==== Current Implementation
 The Lost and Found mechanism is facilitated by `LostCommand`, `FoundCommand` and `LostandFoundCommand`. These three commands extend `Command`. And two class: LostDescriptor and Found Descriptor are created as well. The 3 commands implement the following operations:
@@ -608,9 +613,8 @@ Step 5. The lost list will be shown to the user.
 * **Alternative 2** When executing lost or found command, update the quantity of the item in the StockList.
 ** Pros: Easy to handle while only increasing and decreasing the quantity will be used and no need to record all the lost history.
 ** Cons: Unable to list all the lost and found history.
-
+//end::lost&foundfeature[]
 // end::lostcommand[],foundcommand[],lostandfoundcommand[]
-
 
 === Logging
 
@@ -1204,6 +1208,93 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+[discrete]
+=== Use case: Login
+
+*MSS*
+
+1.  User requests to list accounts
+2.  StockList shows the list of accounts
+3.  User requests to login using his account credentials
+4.  StockList shows that the user has successfully logged in
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list does not contain user's account.
++
+Use case ends.
+
+* 3a. The given account credentials are invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Delete account
+
+*MSS*
+
+1.  User requests to list accounts
+2.  StockList shows a list of accounts
+3.  User requests to delete a specific account in the list
+4.  StockList deletes the account
++
+Use case ends.
+
+*Extensions*
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Add account
+
+*MSS*
+
+1.  User requests to add an account
+2.  StockList adds the account to the database.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. The given account is already in the database.
++
+[none]
+** 1a1. StockList shows an error message.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Edit account
+
+*MSS*
+
+1.  User requests to list accounts
+2.  StockList shows a list of accounts
+3.  User requests to edit a specific account in the list
+4.  StockList edits the account
++
+Use case ends.
+
+*Extensions*
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
 _{More to be added}_
 
 [appendix]
@@ -1278,6 +1369,50 @@ _{ more test cases ... }_
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+=== Logging in
+
+. Logging in while all accounts are listed
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Only default account 'admin' in the list, with the default credentials. Login status is currently logged out.
+.. Test case: `login u/admin p/lol` +
+   Expected: Account is not logged in. Error details shown in the status message. Status bar remains the same.
+.. Test case: `login u/admin p/admin` +
+   Expected: Account is logged in. Details of the logged in account shown in the status message. Timestamp in the status bar is updated.
+.. Other incorrect login commands to try: `login`, `login u/x p/y` (where x and y differ from the registered account data) +
+   Expected: Similar to the first test case.
+
+=== Account management
+
+. Adding an account
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Only default account 'admin' in the list, with the default credentials. Login status is currently logged in as 'admin'.
+.. Test case: `addAccount u/admin p/lol` +
+   Expected: Account is not added. Error details shown in the status message. Status bar remains the same.
+.. Test case: `addAccount u/john p/doe` +
+   Expected: Account is added. Details of the added account shown in the status message. Timestamp in the status bar is updated.
+.. Other incorrect delete commands to try: `addAccount`, `addAccount u/x p/y` (where x matches an account already in the database) +
+   Expected: Similar to first test case.
+
+. Editing an account while all accounts are listed
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Accounts 'admin' and 'john' are in the list. Login status is currently logged in as 'admin'.
+.. Test case: `editAccount 2 u/john p/password123!` +
+   Expected: Account is edited. Details of the edited account shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `editAccount 0 u/chew p/lol` +
+   Expected: Account is not edited. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect edit commands to try: `editAccount`, `editAccount x u/y p/z` (where x is larger than the account list size) +
+
+. Deleting an account while all accounts are listed
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Accounts 'admin' and 'john' are in the list. Login status is currently logged in as 'admin'.
+.. Test case: `deleteAccount 2` +
+   Expected: Account is deleted. Details of the deleted account shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `deleteAccount 0` +
+   Expected: No account is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect edit commands to try: `deleteAccount`, `deleteAccount x` (where x is larger than the account list size) +
+   Expected: Similar to previous.
+
 
 === Saving data
 

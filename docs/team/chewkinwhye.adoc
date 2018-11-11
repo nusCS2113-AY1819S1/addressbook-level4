@@ -22,32 +22,31 @@ Project: Jalil Enterprises Stock List
 
 === Project Overview
 
-This project was a part of the CS2113T (Software Engineering & Object-Oriented Programming) module, and our team was tasked to enhance the existing AddressBook application for a specific target audience group of our choice.
-We decided to morph it into Jalil Enterprises, a stock list application for Computer Engineering lab technicians.
-This project was inspired by our observations of the work of the lab technician when we were taking our Computer Engineering modules, and ideas on how it could be made more efficient and convenient.
+This project was a part of the CS2113T (Software Engineering & Object-Oriented Programming) module, and our team was tasked to enhance the existing AddressBook application for a specific target audience group of our choice. +
+We decided to morph it into Jalil Enterprises, a stock list application for Computer Engineering lab technicians. +
+This project was inspired by our observations of the work of the lab technician when we were taking our Computer Engineering modules, and ideas on how it could be made more efficient and convenient. +
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java and has ~10 kLoC.
 
 === Project Portfolio Overview
 
-This Project Portfolio is to illustrate the contribution of me,Chew Kin Whye (GitHub: ChewKinWhye) to the JalilEnterprises project. +
+This Project Portfolio is to illustrate the contribution of me, Chew Kin Whye (GitHub: ChewKinWhye) to the JalilEnterprises project. +
 This includes my feature added, my role in the team, and my contributions to the User Guide and Developer Guide.
-For this project, I was assigned to be the team leader, helping to set goals and deadlines, facilitate discussions, allocate tasks among group members, listen to feedback, solve conflicts, boost team morale, and ensure team cohesiveness. Besides that, I contributed significantly to the code and the documentation.
 
 == Features added
-For the project, I was responsible for the logic component of the application as well as the implementation of the “status” feature.
-The status feature is a vital component of our application. As a lab technician, it is not enough to store just the quantity of the items. Additional information regarding the status of the items is required.
+For the project, I was responsible for the logic component of the application as well as the implementation of the “status” feature. +
+The status feature is a vital component of our application. This is be cause as a lab technician, it is not enough to store just the quantity of the items. Additional information regarding the status of the items is required.
 
-* Code contributed: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=chewkinwhye&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true
+* Code contributed: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=chewkinwhye&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Project Code Dashboard]
 * *Major enhancement*: : *status* command.
 ** What it does: Allows the user to view the inventory according to the status.
-** Justification: Very often, the lab technician is only concerned with the items of a certain status. For example, he might only be concerned with the items that are *Ready*.
+** Justification: Very often, the lab technician is only concerned with the items of a certain status. For example, he might only be concerned with the items that are Ready.
 
 * *Major enhancement*: : *changeStatus* command.
 ** What it does: Allows the user change the status of the items.
-** Justification: The status of the items are constantly changing, like when an item becomes faulty. The lab technician needs to be able to update the stock list.
+** Justification: The status of the items are constantly changing, like when an item becomes faulty. The lab technician needs this command to be able to update the stock list.
 
-* *Major enhancement*: : *loanList*, *viewLoanList* and deleteLoanList* command.
-** What it does: Allows the user to create loan lists when students borrow out items.
+* *Major enhancement*: : *loanList*, *viewLoanList* and *deleteLoanList* command.
+** What it does: Allows the user to manage loan lists when students borrow out items.
 ** Justification: The lab technicians are constantly loaning out items to students. Thus, this feature is required to replicate what is done with the previous manual system, and help to digitize it.
 ** Highlights: This enhancement required changes in the logic and storage component of the application. Much self directed learning was required to use JAXB and store the data inside an XML file.
 
@@ -60,7 +59,7 @@ For this project, I was assigned to be the team leader, helping to set goals and
 *** Contribute to the morphing of the application from Address Book to Stock List.
 *** Ensuring that the milestones are completed before every deadline.
 *** Checking other PRs and features to ensure that the commands are all working and the main code is always functional.
-*** Wrote tests for all of the commands implemented.
+*** Wrote tests for all of my commands implemented.
 
 == Contributions to the User Guide
 
@@ -69,9 +68,15 @@ For this project, I was assigned to be the team leader, helping to set goals and
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=savecommand]
+include::../UserGuide.adoc[tag=statuscommand]
 
-include::../UserGuide.adoc[tag=opencommand]
+include::../UserGuide.adoc[tag=changestatuscommand]
+
+include::../UserGuide.adoc[tag=loanlistcommand]
+
+include::../UserGuide.adoc[tag=viewloanlistcommand]
+
+include::../UserGuide.adoc[tag=deleteloanlistcommand]
 
 == Contributions to the Developer Guide
 
@@ -79,6 +84,6 @@ include::../UserGuide.adoc[tag=opencommand]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=saveopen]
+include::../DeveloperGuide.adoc[tag=statusfeature]
 
 

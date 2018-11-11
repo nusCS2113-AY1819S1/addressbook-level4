@@ -16,6 +16,6 @@ preferences.json
 classes/
 /data/
 /bin/
-src/main/resources/docs/
 out/
 /versions/
+/src/main/resources/docs/
