@@ -91,7 +91,7 @@ public class RemoveAttendeeCommandTest {
      * regardless of indexing.
      */
     @Test
-    public void executeUndoRedo_unregisteredEventFilteredList_sameEventRegistered() throws Exception {
+    public void executeUndoRedo_registeredEventFilteredList_sameEventAttendeeRemoved() throws Exception {
         Username testUsername = new Username(VALID_ATTENDEE_WITCH);
         RemoveAttendeeCommand removeAttendeeCommand = new RemoveAttendeeCommand(INDEX_FIRST_EVENT, testUsername);
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
