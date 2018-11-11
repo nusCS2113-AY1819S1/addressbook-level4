@@ -21,7 +21,7 @@ Responsibilities: Task features
 
 === Aw Meng Shen
 image::jeremyinelysium.png[width="150", align="left"]
-{empty}[http://github.com/jeremyinelysium[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/jeremyinelysium[github]] [https://cs2113-ay1819s1-w13-3.github.io/main/team/jeremyinelysium.html[portfolio]]
 
 Role: Developer +
 Responsibilities: Milestone features

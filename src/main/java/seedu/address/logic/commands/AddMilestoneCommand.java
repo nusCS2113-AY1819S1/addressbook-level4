@@ -29,11 +29,11 @@ public class AddMilestoneCommand extends Command implements CommandParser {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds milestone(s) to selected task. "
             + "Parameters: "
             + PREFIX_INDEX + "INDEX "
-            + PREFIX_MILESTONE + "MILESTONE "
+            + PREFIX_MILESTONE + "MILESTONE DESCRIPTION "
             + PREFIX_RANK + "RANK \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_INDEX + "1 "
-            + PREFIX_MILESTONE + "Complete Sections 8.1 to 8.5 "
+            + PREFIX_MILESTONE + "Complete Q1 - 3 "
             + PREFIX_RANK + "1";
 
     private final Index index;
@@ -65,10 +65,6 @@ public class AddMilestoneCommand extends Command implements CommandParser {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
         }
-
-        //else if (!Rank.isValidRank(toAdd.getRank().toString())) {
-        //    throw new CommandException(Rank.MESSAGE_RANK_CONSTRAINTS);
-        //}
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
 

@@ -28,23 +28,22 @@ each milestone specified by the user. Furthermore, this creates a sense of progr
 ** Highlights: Implementing this feature and command required changes to the UI of the application. It required in-depth knowledge of JavaFX and the ability to use SceneBuilder to assist in developing the UI. The implementation of the UI was too challenging and an alternative solution was required to ensure the UI remained presentable.
 
 
-* *Minor enhancement*: Implemented a sort function for each task such that the milestones for each task are
-sorted by their ranks. The list of milestones will be displayed in the order that the user should go about doing, starting with the most important milestone(*Rank 1*) at the top.
+* *Minor enhancement*: Implemented a sort function for each task such that the *milestones for each task are
+sorted by their ranks*. The list of milestones will be displayed in the order that the user should go about doing, starting with the most important milestone(*Rank 1*) at the top.
 
-* *Code contributed*: [https://github.com/CS2113-AY1819S1-W13-3/main/blob/master/collated/functional/JeremyInElysium.md[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jeremyinelysium[Functional/Test code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Modified the GUI for each task to include a list of the milestones for that particular task (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from XX% to XX% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Modified the GUI for each task to include a list of the milestones for that particular task (Pull requests https://github.com/CS2113-AY1819S1-W13-3/main/pull/54[#54], https://github.com/CS2113-AY1819S1-W13-3/main/pull/97[#97])
+*** Wrote tests for milestone feature to ensure adequate code coverage(Pull requests https://github.com/CS2113-AY1819S1-W13-3/main/pull/100[#100], https://github.com/CS2113-AY1819S1-W13-3/main/pull/102[#102], https://github.com/CS2113-AY1819S1-W13-3/main/pull/108[#108], https://github.com/CS2113-AY1819S1-W13-3/main/pull/109[#109])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks and revised existing contents of the User Guide(Pull requests https://github.com/CS2113-AY1819S1-W13-3/main/pull/109[#109])
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-W13-3/main/pull/18[#18]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-F09-2/main/issues/146[1], https://github.com/CS2113-AY1819S1-F09-2/main/issues/151[2], https://github.com/CS2113-AY1819S1-F09-2/main/issues/154[3], https://github.com/CS2113-AY1819S1-F09-2/main/issues/164[4])
 
 == Contributions to the User Guide
 
@@ -55,6 +54,11 @@ concise instructions at a level that is easy for the end-user to follow._
 |===
 
 include::../UserGuide.adoc[tag=add_milestone]
+
+include::../UserGuide.adoc[tag=check_milestone]
+
+include::../UserGuide.adoc[tag=FAQ_milestone]
+
 
 
 == Contributions to the Developer Guide

@@ -18,7 +18,7 @@ Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-Task Book is for students who prefer to use a desktop app for managing their daily tasks and ultimately, lead a more productive life. More importantly, Task Book is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Task Book can get your management of tasks done faster than traditional paper notebooks or a mobile application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Task Book is a desktop task manager application that is designed for students to manage their daily tasks and ultimately, lead a more productive life. More importantly, Task Book is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Task Book can get your management of tasks done faster than traditional paper notebooks or a mobile application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -68,29 +68,31 @@ Examples:
 |Have a task that requires a lot of things to be done? Break it up into smaller, more manageable subtasks called milestones!
 |===
 
-Adds a milestone to selected task from the task book +
+Adds a milestone to an existing task in the task book +
 Format: `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK`
 
 [WARNING]
-====
 Milestone description cannot be longer than 40 characters!
-====
 
 [WARNING]
-====
 Index must be a non-zero, positive integer not greater than the number of tasks currently available
 in the Task Book!
-====
 
 Examples:
 
 * `add_milestone i/1 m/Q1 - 3 r/1`
+* `add_milestone i/1 m/Q4 - 6 r/2`
+* `add_milestone i/1 m/Q7 & 8 r/3`
+* `add_milestone i/1 m/Diagrams r/4`
+* `add_milestone i/1 m/References r/5`
 
 *Before*
-image::AddMilestoneCommand_before.png[width="600", align="left"]
+
+image::AddMilestoneCommand_before.png[width="790"]
 
 *After*
-image::AddMilestoneCommand_after.png[width="600", align="left"]
+
+image::AddMilestoneCommand_after.png[width="790"]
 
 [NOTE]
 ====
@@ -252,10 +254,30 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+// tag::check_milestone[]
+=== Checking off completed milestones `[coming in v2.0]`
+
+Users will soon be able to strike off (not delete!) their milestones when they have completed them for easier tracking of what they have or have not done!
+// end::check_milestone[]
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+
+// tag::FAQ_milestone[]
+*Q*: Why do I get this error when I tried to add milestones with a rank of "0" or "-1"?
+
+image::AddMilestoneCommand_rankZero.png[width="790"]
+
+*A*: You can only enter *non-zero*, *positive* integers for rank!
+
+*Q*: Why do I get this error when I tried to add a milestone?
+
+image::AddMilestoneCommand_invalidIndex.png[width="790"]
+
+*A*: You can only add milestones to existing tasks! In this case, there is only 1 task entered into the Task Book, hence attempting to add a milestone to index 2 of the Task Book will result in an error!
+// end::FAQ_milestone[]
 
 == Command Summary
 
