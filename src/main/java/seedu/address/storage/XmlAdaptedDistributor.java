@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.distributor.DistributorProduct;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,7 +27,8 @@ public class XmlAdaptedDistributor {
     private String name;
     @XmlElement(required = true)
     private String phone;
-
+    @XmlElement
+    private List<XmlAdaptedDistProd> prods = new ArrayList<>();
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -39,9 +41,12 @@ public class XmlAdaptedDistributor {
     /**
      * Constructs an {@code XmlAdaptedDistributor} with the given distributor details.
      */
-    public XmlAdaptedDistributor(String name, String phone) {
+    public XmlAdaptedDistributor(String name, String phone,
+                                 List<XmlAdaptedDistProd> prods, List<XmlAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
+        this.prods = prods;
+        this.tagged = tags;
     }
 
     /**
@@ -52,6 +57,9 @@ public class XmlAdaptedDistributor {
     public XmlAdaptedDistributor(Distributor source) {
         name = source.getDistName().fullDistName;
         phone = source.getDistPhone().value;
+        prods = source.getDistProds().stream()
+                .map(XmlAdaptedDistProd::new)
+                .collect(Collectors.toList());
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -63,6 +71,7 @@ public class XmlAdaptedDistributor {
      * @throws IllegalValueException if there were any data constraints violated in the adapted distributor
      */
     public Distributor toModelType() throws IllegalValueException {
+        final List<DistributorProduct> distributorProds = new ArrayList<>();
         final List<Tag> distributorTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             distributorTags.add(tag.toModelType());
@@ -85,9 +94,10 @@ public class XmlAdaptedDistributor {
             throw new IllegalValueException(DistributorPhone.MESSAGE_PHONE_CONSTRAINTS);
         }
         final DistributorPhone modelPhone = new DistributorPhone(phone);
+        final Set<DistributorProduct> modelProds = new HashSet<>(distributorProds);
         final Set<Tag> modelTags = new HashSet<>(distributorTags);
 
-        return new Distributor(modelName, modelPhone, modelTags);
+        return new Distributor(modelName, modelPhone, modelProds, modelTags);
     }
 
     @Override

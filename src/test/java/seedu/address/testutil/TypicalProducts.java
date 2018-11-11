@@ -32,9 +32,9 @@ public class TypicalProducts {
             .withInfo("fruit").withDistributor("Ah Beng").withSerialNumber("002").withRemainingItems("2")
             .withTags("sweet").build();
     public static final Product CHOCOLATE = new ProductBuilder().withName("Chocolate").withSerialNumber("003")
-            .withDistributor("Ahmad").withRemainingItems("22").withInfo("snack").build();
+            .withDistributor("Ah Long").withRemainingItems("22").withInfo("snack").build();
     public static final Product DORITOS = new ProductBuilder().withName("Doritos").withSerialNumber("004")
-            .withDistributor("Snack Shack").withInfo("snack").withRemainingItems("10").withTags("unhealthy").build();
+            .withDistributor("Ah Ting").withInfo("snack").withRemainingItems("10").withTags("unhealthy").build();
 
     // Manually added
     public static final Product MILO = new ProductBuilder().withName("Milo").withSerialNumber("005")

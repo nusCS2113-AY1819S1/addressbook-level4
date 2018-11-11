@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.distributor.DistributorProduct;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,9 +43,15 @@ public class EditDistributorCommand extends Command {
 
     public static final String MESSAGE_EDIT_DISTRIBUTOR_SUCCESS = "Edited Distributor: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR = "This distributor already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR =
+            "This distirbutor already exists in the distributor book.";
+    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR_NAME =
+            "A distirbutor with this name already exists in the distributor book.";
+    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR_PHONE =
+            "A distirbutor with this phone already exists in the distributor book.";
     private final Index index;
     private final EditDistributorDescriptor editDistributorDescriptor;
+
     /**
      * @param index of the product in the filtered distributor list to edit
      * @param editDistributorDescriptor details to edit the distributor with
@@ -69,7 +76,7 @@ public class EditDistributorCommand extends Command {
         Distributor distributorToEdit = lastShownList.get(index.getZeroBased());
         Distributor editedDistributor = createEditedDistributor(distributorToEdit, editDistributorDescriptor);
 
-        if (!distributorToEdit.isSameDistributor(editedDistributor) && model.hasDistributor(editedDistributor)) {
+        if (model.hasDistributorName(editedDistributor) && model.hasDistributorPhone(editedDistributor)) {
             throw new CommandException(MESSAGE_DUPLICATE_DISTRIBUTOR);
         }
 
@@ -91,8 +98,10 @@ public class EditDistributorCommand extends Command {
         DistributorPhone updatedPhone =
                 editDistributorDescriptor.getDistPhone().orElse(distributorToEdit.getDistPhone());
         Set<Tag> updatedTags = editDistributorDescriptor.getTags().orElse(distributorToEdit.getTags());
+        Set<DistributorProduct> updatedProds = editDistributorDescriptor.getProds()
+                .orElse(distributorToEdit.getDistProds());
 
-        return new Distributor(updatedName, updatedPhone, updatedTags);
+        return new Distributor(updatedName, updatedPhone, updatedProds, updatedTags);
     }
 
     @Override
@@ -121,6 +130,7 @@ public class EditDistributorCommand extends Command {
         private DistributorName name;
         private DistributorPhone phone;
         private Set<Tag> tags;
+        private Set<DistributorProduct> prods;
 
         public EditDistributorDescriptor() {}
 
@@ -132,6 +142,7 @@ public class EditDistributorCommand extends Command {
             setDistName(toCopy.name);
             setDistPhone(toCopy.phone);
             setTags(toCopy.tags);
+            setProds(toCopy.prods);
         }
 
         /**
@@ -155,6 +166,23 @@ public class EditDistributorCommand extends Command {
 
         public Optional<DistributorPhone> getDistPhone() {
             return Optional.ofNullable(phone);
+        }
+
+        /**
+         * Sets {@code prods} to this object's {@code prods}.
+         * A defensive copy of {@code prods} is used internally.
+         */
+        public void setProds(Set<DistributorProduct> prods) {
+            this.prods = (prods != null) ? new HashSet<>(prods) : null;
+        }
+
+        /**
+         * Returns an unmodifiable distributorproduct set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<DistributorProduct>> getProds() {
+            return (prods != null) ? Optional.of(Collections.unmodifiableSet(prods)) : Optional.empty();
         }
 
         /**
@@ -191,6 +219,7 @@ public class EditDistributorCommand extends Command {
 
             return getDistName().equals(e.getDistName())
                     && getDistPhone().equals(e.getDistPhone())
+                    && getProds().equals(e.getProds())
                     && getTags().equals(e.getTags());
         }
     }

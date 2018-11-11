@@ -18,7 +18,7 @@ public class UserPrefs {
     private Path salesHistoryFilePath = Paths.get("data", "saleshistory.xml");
 
     public UserPrefs() {
-        setGuiSettings(750, 500, 0, 0);
+        setGuiSettings(400, 600, 0, 0);
     }
 
     public GuiSettings getGuiSettings() {

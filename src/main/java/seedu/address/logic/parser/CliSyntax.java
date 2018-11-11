@@ -11,6 +11,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_DIST_PHONE = new Prefix("dp/");
     public static final Prefix PREFIX_SERIAL_NR = new Prefix("s/");
     public static final Prefix PREFIX_DISTRIBUTOR = new Prefix("d/");
+    public static final Prefix PREFIX_DIST_PROD = new Prefix("pr/");
     public static final Prefix PREFIX_PRODUCT_INFO = new Prefix("i/");
     public static final Prefix PREFIX_REMAINING_ITEMS = new Prefix("inv/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");

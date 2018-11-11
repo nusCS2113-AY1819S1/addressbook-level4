@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         minWidth="450" minHeight="700" onCloseRequest="#handleExit">
+         minWidth="400" minHeight="700" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -47,25 +47,19 @@
         </StackPane>
 
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-          <VBox fx:id="productList" minWidth="250" prefWidth="250" SplitPane.resizableWithParent="false">
+          <VBox fx:id="productList" minWidth="200" prefWidth="200" SplitPane.resizableWithParent="false">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
           <StackPane fx:id="productListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+          </VBox>
 
-          <VBox fx:id="distributorList" minWidth="250" prefWidth="250" SplitPane.resizableWithParent="false">
+          <VBox fx:id="distributorList" minWidth="200" prefWidth="200" SplitPane.resizableWithParent="false">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
             <StackPane fx:id="distributorListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
-
-          <StackPane fx:id="browserPlaceholder" prefWidth="250" >
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-          </StackPane>
         </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

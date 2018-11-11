@@ -20,17 +20,23 @@ public class Distributor {
     private final DistributorPhone distphone;
 
     // Data fields
+    private final Set<DistributorProduct> distprods = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
+
+    private final DistributorPhone defaultdistphone = new DistributorPhone("00000000");
 
     /**
      * Only name must be present and not null.
      */
-    public Distributor(DistributorName distname, DistributorPhone distphone, Set<Tag> tags) {
+    public Distributor(DistributorName distname, DistributorPhone distphone,
+                       Set<DistributorProduct> distprods, Set<Tag> tags) {
         requireAllNonNull(distname);
         this.distname = distname;
         this.distphone = distphone;
+        this.distprods.addAll(distprods);
         this.tags.addAll(tags);
     }
+
 
     public DistributorName getDistName() {
         return distname;
@@ -39,6 +45,9 @@ public class Distributor {
     public DistributorPhone getDistPhone() {
         return distphone;
     }
+
+    public Set<DistributorProduct> getDistProds() {
+        return distprods; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -49,22 +58,48 @@ public class Distributor {
     }
 
     /**
-     * Returns true if both distirubtors of the same name have at least one other identity field that is the same.
+     * Returns true if both distirubtors have the same name.
      * This defines a weaker notion of equality between two distributors.
      */
     public boolean isSameDistributor(seedu.address.model.distributor.Distributor otherDistributor) {
-        if (otherDistributor.getDistName() == this.getDistName()
-                || otherDistributor.getDistPhone() == this.getDistPhone()) {
+
+        if (this.isSameDistributorName(otherDistributor) && this.isSameDistributorPhone(otherDistributor)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if both distributors have the same name.
+     * This defines a weaker notion of equality between two distributors.
+     */
+    public boolean isSameDistributorName(seedu.address.model.distributor.Distributor otherDistributor) {
+
+        if (otherDistributor.getDistName() == this.getDistName()) {
             return true;
         }
 
         return otherDistributor != null
-                && otherDistributor.getDistPhone().equals(getDistPhone())
-                || otherDistributor.getDistName().equals(getDistName());
+                && otherDistributor.getDistName().equals(getDistName());
     }
 
     /**
-     * Returns true if both distribuors have the same identity and data fields.
+     * Returns true if both distributors have the same phone, and the phone numbers are not the default 00000000.
+     * This defines a weaker notion of equality between two distributors.
+     */
+    public boolean isSameDistributorPhone(seedu.address.model.distributor.Distributor otherDistributor) {
+
+        if (otherDistributor.getDistPhone() == this.getDistPhone()) {
+            return true;
+        }
+
+        return otherDistributor != null
+                && otherDistributor.getDistPhone().equals(getDistPhone());
+    }
+
+    /**
+     * Returns true if both distributors have the same identity and data fields.
      * This defines a stronger notion of equality between two distributors.
      */
     @Override
@@ -81,13 +116,14 @@ public class Distributor {
                 (seedu.address.model.distributor.Distributor) other;
         return otherDistributor.getDistName().equals(getDistName())
                 && otherDistributor.getDistPhone().equals(getDistPhone())
+                && otherDistributor.getDistProds().equals(getDistProds())
                 && otherDistributor.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(distname, distphone, tags);
+        return Objects.hash(distname, distphone, distprods, tags);
     }
 
     @Override
@@ -98,6 +134,8 @@ public class Distributor {
                 .append(getDistPhone())
                 .append("\nTags: ");
         getTags().forEach(builder::append);
+        builder.append("\nProducts: ");
+        getDistProds().forEach(builder::append);
         return builder.toString();
     }
 

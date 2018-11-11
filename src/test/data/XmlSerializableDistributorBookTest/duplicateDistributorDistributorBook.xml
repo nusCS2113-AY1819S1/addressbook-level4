@@ -4,12 +4,14 @@
     <distributors>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
+        <prods>Apple</prods>
     </distributors>
 
     <!-- Distributor with same identity as Alice Pauline -->
     <distributors>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
+        <prods>Apple</prods>
     </distributors>
 
 </distributorbook>
