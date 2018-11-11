@@ -219,7 +219,7 @@ Displays the userguide from within the app.
 
 Format: `help`
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 [[list]]
 === Listing all persons : `listall` (`l`)
@@ -231,7 +231,7 @@ Format: `listall`
 [NOTE]
 After filtering your results by executing commands such as `group` or `find`, executing `listall` will revert the list back to it's initial state
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 [[edit]]
 === Editing a person : `edit` (`e`)
@@ -247,7 +247,7 @@ Format: `edit [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 * Tags should be alphanumeric (contains letters and numbers) and can contain hyphens "-" and underscores "_"
 ****
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 [[find]]
 === Locating persons by name : `find` (`f`)
@@ -271,7 +271,7 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 // tag::tagcommand[]
 [[group]]
@@ -308,7 +308,7 @@ image::TagCommandExecutedPS.png[width="790"]
 [NOTE]
 Use the command `listall` to revert the panels back to its original state.
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 // end::tagcommand[]
 
@@ -343,7 +343,7 @@ After adding a timeslot, you should see the following:
 .Timeslot added to your timetable
 image::AddTimeSuccess.png[width="600"]
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 [[deletetime]]
 === Delete a timeslot from your timetable: `deletetime` (`dt`)
@@ -370,7 +370,7 @@ Deletes the timeslot from 13:30 to 14:00 on Friday from your timetable.
 Deletes the timeslot from 17:00 to 18:00 on Wednesday from your timetable.
 // end::timeslot[]
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 [[select]]
 === Selecting a person : `select` (`s`)
@@ -396,7 +396,7 @@ Selects the 2nd person listed in your friend list.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 // tag::friendcommand[]
 [[friend]]
@@ -434,7 +434,7 @@ image::AfterAddingFriendsPS.png[width="600"]
 +
 . More information about the user is now shown and commands such as `free` and `select` can now be used.
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 // end::friendcommand[]
 
 // tag::unfriendcommand[]
@@ -467,7 +467,7 @@ image::AfterRemovingFriendsPS.png[width="600"]
 +
 . More information about the user is now shown and commands such as `free` can now be used.
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 // end::unfriendcommand[]
 
 // tag::freecommand[]
@@ -494,7 +494,7 @@ After executing the command, you should see the following:
 .Timeslots highlighted in red are unavailable.
 image::FreeTimeSuccess.png[width="600"]
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 // end::freecommand[]
 
 [[history]]
@@ -509,7 +509,7 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 // tag::undoredo[]
 [[undo]]
@@ -540,7 +540,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `import mes` command) +
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 [[redo]]
 === Redoing the previously undone command : `redo` (`r`)
@@ -566,7 +566,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 // end::undoredo[]
 
 [[clear]]
@@ -576,7 +576,7 @@ Clears all timeslots from your timetable. +
 
 Format: `clear`
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 // tag::import[]
 [[import]]
@@ -604,7 +604,7 @@ You can obtain your timetable on NUSMODS as an (_.ics_) file, as shown in the pi
 
 image::importics.png[width="250", align="left"]
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 // end::import[]
 
 // tag::export[]
@@ -630,7 +630,7 @@ image::UG_importexport.png[width="400", align="left"]
 Exports the displayed timetable to `(root_folder)\import_export\my_file.ics` +
 (where 'root_folder' is the folder that the application is in.)
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 // end::export[]
 
 [[exit]]
@@ -643,7 +643,7 @@ Format: `exit`
 [NOTE]
 This command closes the application without logging you out. It is recommended to logout before doing this, or the changes to your timetable might be lost.
 
-<<Features,Not the feature you are looking for? Check out _FreeTime_'s other features>>
+<<Features,Jump back to _FreeTime_'s feature list>>
 
 === Saving the data
 
