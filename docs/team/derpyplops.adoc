@@ -35,28 +35,33 @@ assets, are especially critical to track. A project manager may now easily find 
 the organization tracks, and given adequete talent pool, will be able to identify what they want.
 
 ** Highlights: In order to implement this, all aspects of the application were touched on,
-namely UI, Storage, Logic and Model. The implementation was loosely based on the `remark` command that
-was implemented.
+namely UI, Storage, Logic and Model.
 
 
 * *Major enhancement*: added the SortCommand (keyword: "sort")
 
 ** What it does: Sorts a list of people by some criteria.
 
-** Justification: The skills
-
-** Highlights:
-
+** Justification: Data integrity is useful, but nowadays people expect data to be
+have high availability (in a quick and accessible format). A project manager,
+with the sort command, is now able to, at a glance, review potential candidates for
+the role.
 
 
 == Contributions to the User Guide
-include::../UserGuide.adoc[tag=aslUser]
+
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=aslUser]
+
+include::../UserGuide.adoc[tag=sort]
+
 == Contributions to the Developer Guide
-include::../DeveloperGuide.adoc[tag=asl]
+
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
+
+include::../DeveloperGuide.adoc[tag=asl]
