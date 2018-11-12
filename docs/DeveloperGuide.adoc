@@ -520,6 +520,9 @@ Step 1. The user executes `tag Lab1` command to list all items with the tag `Lab
 
 Step 2. The `tag` command calls `updateFilteredItemListByTag()`, which shows the search result to the user.
 
+The following sequence diagram shows how the tag operation works:
+
+image::TagComponentSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
@@ -1166,11 +1169,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |Lab Technician |Find a specific item |Easily check the quantity available
 
+|`* * *` |Lab Technician |List all materials required for a lab session |Prepare and account for them easily
+
 |`* *` |Lab Technician |Search for an item with just a partial keyword |Find items more efficiently
 
 |`* *` |Lab Technician |Check which items are understocked |Easily restock them
 
-|`* *` |Lab Technician |List all materials required for a lab session |Prepare and account for them easily
+|`* *` |Lab Technician |Add one item to use in some labs |Easily schedule labs
+
+|`* *` |Lab Technician |Delete one item to use in some labs |Easily schedule labs and correct my mistakes
 
 |`* *` |Lab Technician |Record statuses of individual materials (Free, Loan, Faulty) |Account for the state of items in the lab
 
@@ -1563,7 +1570,7 @@ Use case ends.
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
+.  Should work on any mainstream OS as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 items without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
