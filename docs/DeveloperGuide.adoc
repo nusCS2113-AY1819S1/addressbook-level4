@@ -450,29 +450,41 @@ Step 6. The user executes the `DeleteLoanListCommand` to delete the loan list wh
 
 The login mechanism is facilitated by `LoginCommand`. It extends `Command` and implements the following operations:
 
-* `LoginCommand#execute()` -- checks if the username and password match the predefined account details. Displays a login success message if match and displays a failure message otherwise.
+
+* `LoginCommand#modifyLoginStatus()` -- checks if the password matches the account in the database, if it exists. If true, updates the logged in account status in `Model` accordingly.
+
+* `LoginCommand#execute()` -- calls `LoginCommand#modifyLoginStatus()`. Then, checks login status in `Model` and displays a login success message if true and displays a failure message otherwise.
+
+These operations are exposed in the `Model` interface as `Model#setLoggedInUser()` and `Model#getLoginStatus()` respectively.
+
 
 Given below is an example usage scenario and how the LoginCommand mechanism behaves at each step.
 
-Step 1. The user executes `login u/admin p/password` command to log into StockList with 'admin' and 'password' being the username and password credentials respectively.
+Step 1. The user executes `login u/admin p/admin` command to log into StockList with *admin* and *admin* being the username and password credentials respectively.
 
-Step 2. The `execute` command calls `Account#getUsername()` and `Account#getPassword()` methods, which parses the user input and stores the credentials as `username` and `password` variables.
+Step 2. The `execute` command calls `Model#getLoginStatus()` and checks if the user is already logged in. If true, `execute` throws a `CommandException` notifying the user that he is already logged in.
 
-Step 3. The `execute` command then checks if the username and password strings match the predefined username and password strings.
+Step 3. The `execute` command then calls `LoginCommand#modifyLoginStatus()`, which checks if the username *admin* exists in the account list, and if it does, checks if the given password *admin* matches the password associated with the username *admin*.
 
-Step 4. If the username and password strings match, a success message is printed; otherwise a failure message is printed.
+Step 4. If the *admin* password matches, `LoginCommand#modifyLoginStatus()` calls `Model#setLoggedInUser()` which updates the logged in account status in `model` with the logged in account set to *admin* and logged in status set to true.
+
+Step 5. The `execute` command then checks the log in status via `Model#getLoginStatus()`. A success message is printed if true; otherwise a failure message is printed.
+
+The following sequence diagram shows how the login operation works:
+
+image::LoginSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
-===== Aspect: How 'execute' executes
+===== Aspect: How login executes
 
-* **Alternative 1** (current choice) Check if the username and passwords match the predefined strings.
-** Pros: Very simple, minimal memory usage, allows for only one access account.
-** Cons: Does not allow access for multiple accounts.
+* **Alternative 1** (current choice) Check against various accounts stored in a file and allow access if match.
+** Pros: Allows for multiple accounts with access to StockList.
+** Cons: More memory usage.
 
-* **Alternative 2** Save multiple account credentials in a file, check against the file.
-** Pros: Allows for multiple accounts with different levels of access to StockList.
-** Cons: More memory usage
+* **Alternative 2** Checks against a single account that can be modified.
+** Pros: Simple to implement, minimal memory usage, allows for only one access account.
+** Cons: Does not allow access for multiple accounts, locked out of app if credentials lost.
 // end::login[]
 
 // tag::tag[]

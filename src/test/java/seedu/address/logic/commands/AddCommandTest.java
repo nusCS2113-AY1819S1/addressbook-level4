@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-/*
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -16,7 +15,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAccountList;
 import seedu.address.model.ReadOnlyStockList;
@@ -25,11 +23,10 @@ import seedu.address.model.account.Account;
 import seedu.address.model.account.Username;
 import seedu.address.model.item.Item;
 import seedu.address.testutil.ItemBuilder;
-*/
 
 public class AddCommandTest {
 
-/*
+
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
@@ -56,6 +53,7 @@ public class AddCommandTest {
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
+    /*
     @Test
     public void execute_duplicateItem_throwsCommandException() throws Exception {
         Item validItem = new ItemBuilder().build();
@@ -66,6 +64,7 @@ public class AddCommandTest {
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_ITEM);
         addCommand.execute(modelStub, commandHistory);
     }
+*/
 
     @Test
     public void equals() {
@@ -96,7 +95,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
 
-/*
+
     private class ModelStub implements Model {
         @Override
         public void addItem(Item item) {
@@ -246,7 +245,7 @@ public class AddCommandTest {
      * A Model stub that contains a single item.
      */
 
-/*
+
     private class ModelStubWithItem extends ModelStub {
         private final Item item;
 
@@ -266,7 +265,7 @@ public class AddCommandTest {
      * A Model stub that always accept the item being added.
      */
 
-/*
+
     private class ModelStubAcceptingItemAdded extends ModelStub {
         final ArrayList<Item> itemsAdded = new ArrayList<>();
 
@@ -297,5 +296,5 @@ public class AddCommandTest {
             return true;
         }
     }
-*/
+
 }

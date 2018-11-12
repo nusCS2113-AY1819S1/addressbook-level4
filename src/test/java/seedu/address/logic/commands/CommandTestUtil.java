@@ -16,6 +16,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.StockList;
+import seedu.address.model.account.Account;
+import seedu.address.model.account.UsernameContainsKeywordsPredicate;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditItemDescriptorBuilder;
@@ -126,6 +128,21 @@ public class CommandTestUtil {
         model.updateFilteredItemList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredItemList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered account list to show only the account at the given {@code targetIndex} in the
+     * {@code model}'s account list.
+     */
+    public static void showAccountAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAccountList().size());
+
+        Account account = model.getFilteredAccountList().get(targetIndex.getZeroBased());
+        final String[] splitUsername = account.getUsername().fullUsername.split("\\s+");
+
+        model.updateFilteredAccountList(new UsernameContainsKeywordsPredicate(Arrays.asList(splitUsername[0])));
+
+        assertEquals(1, model.getFilteredAccountList().size());
     }
 
     /**

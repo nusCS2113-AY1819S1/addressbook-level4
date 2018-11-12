@@ -1,11 +1,8 @@
 package seedu.address.logic.commands;
 
-/*
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
 import static seedu.address.testutil.TypicalAccounts.getTypicalAccountList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -22,7 +19,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.account.Username;
-import seedu.address.model.item.Item;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -32,7 +28,7 @@ import seedu.address.model.item.Item;
 
 public class DeleteCommandTest {
 
-    /*
+
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -43,6 +39,7 @@ public class DeleteCommandTest {
         model.setLoggedInUser(admin);
     }
 
+    /*
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
@@ -56,6 +53,7 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
+*/
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
@@ -65,6 +63,7 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
 
+    /*
     @Test
     public void execute_validIndexFilteredList_success() {
         showItemAtIndex(model, INDEX_FIRST_ITEM);
@@ -81,6 +80,7 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
+*/
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
@@ -95,6 +95,7 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
 
+    /*
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
@@ -114,7 +115,7 @@ public class DeleteCommandTest {
         expectedModel.redoStockList();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
-
+*/
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
@@ -128,6 +129,7 @@ public class DeleteCommandTest {
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 
+
     /**
      * 1. Deletes a {@code Item} from a filtered list.
      * 2. Undo the deletion.
@@ -136,7 +138,8 @@ public class DeleteCommandTest {
      * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the item object regardless of indexing.
      */
 
-/*
+
+    /*
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameItemDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ITEM);
@@ -159,7 +162,7 @@ public class DeleteCommandTest {
         expectedModel.redoStockList();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
-
+*/
     @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_ITEM);
@@ -186,12 +189,12 @@ public class DeleteCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
 
-/*
+
     private void showNoItem(Model model) {
         model.updateFilteredItemList(p -> false);
 
         assertTrue(model.getFilteredItemList().isEmpty());
     }
-*/
+
 }
 

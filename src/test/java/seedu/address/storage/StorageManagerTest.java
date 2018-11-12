@@ -16,6 +16,7 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.events.model.StockListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.model.ReadOnlyAccountList;
 import seedu.address.model.ReadOnlyStockList;
 import seedu.address.model.StockList;
 import seedu.address.model.UserPrefs;
@@ -34,7 +35,7 @@ public class StorageManagerTest {
     public void setUp() {
         XmlStockListStorage stockListStorage = new XmlStockListStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        XmlAccountListStorage accountListStorage = new XmlAccountListStorage(getTempFilePath("ac"));
+        XmlAccountListStorage accountListStorage = new XmlAccountListStorage(getTempFilePath("al"));
         storageManager = new StorageManager(stockListStorage, userPrefsStorage, accountListStorage);
     }
 
@@ -103,13 +104,18 @@ public class StorageManagerTest {
 
     /**
      * A Stub class to throw an exception when the save method is called for the account list
-     * NEEDS WORK
      */
     class XmlAccountListStorageExceptionThrowingStub extends XmlAccountListStorage {
 
         public XmlAccountListStorageExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
+
+        @Override
+        public void saveAccountList(ReadOnlyAccountList accountList, Path filePath) throws IOException {
+            throw new IOException("dummy exception");
+        }
+
     }
 
 
