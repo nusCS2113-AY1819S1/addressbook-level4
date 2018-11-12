@@ -132,7 +132,7 @@ Note how the `Model` simply raises a `CompanyBookChangedEvent` when the data in 
 
 The diagram in Figure 4 shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
-.Component interactions for `delete 1` command (part 2)
+.Component interactions for `deleteC 1` command (part 2)
 image::SDforDeleteCompanyEventHandling.png[width="800"]
 
 [NOTE]
@@ -181,7 +181,7 @@ The `UI` component,
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
-image::LogicComponentClassDiagram.png[width="800"]
+image::LogicComponentClassDiagram.png[width="1000"]
 
 *API* :
 link:{repoURL}/src/main/java/seedu/recruit/logic/Logic.java[`Logic.java`]
@@ -191,14 +191,17 @@ As illustrated in Figure 6,
 .  `Logic` uses the `RecruitBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a candidate) and/or raise events.
+.  The command execution can also affect the LogicState of the LogicManager (e.g. StartAddCandidateCommand, ShortlistCandidateCommand) and raises a ChangeLogicStateEvent.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below in Figure 7 is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below in Figure 7 is the Sequence Diagram for interactions within the `Logic` component for the `execute("deletec 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+.Interactions Inside the Logic Component for the `deletec 1` Command
+image::DeleteCandidateSdForLogic.png[width="800"]
 
 // end::logicComponent[]
+
+// tag::modelComponent[]
 [[Design-Model]]
 === Model component
 
@@ -210,15 +213,12 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Recruit Book data.
-* exposes an unmodifiable `ObservableList<Candidate>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the RecruitBook data in `VersionedRecruitBook`.
+* exposes an unmodifiable lists `ObservableList<Candidate>`, `ObservableList<JobOffer>`, `ObservableList<Company>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+// end::modelComponent[]
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Recruit Book`, which `Candidate` can reference. This would allow `Recruit Book` to only require one `Tag` object per unique `Tag`, instead of each `Candidate` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
-
+// tag::storageComponent[]
 [[Design-Storage]]
 === Storage component
 
@@ -230,8 +230,9 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Recruit Book data in xml format and read it back.
+* can save all of RecruitBook data in xml format and read it back.
 
+// end::storageComponent[]
 [[Design-Commons]]
 === Common classes
 
@@ -309,11 +310,20 @@ Step 4. The user executes ...
         .. `deleteC 1,3-4` to delete multiple companies. `DeleteCompanyCommand` calls `Model#removeCompany(Company company)` for the companies listed at index 1, and 4.
         .. `deletej 1,3-4` to delete multiple job offers. `DeleteJobOfferCommand` calls `Model#deleteJobOffer(JobOffer jobOffer)` for the job offers listed at index 1, and 4.
 
+Below in Figure 9. is a sequence diagram of how adding a candidate works in RecruitBook and also serves to depict the adding mechanism for job offers and companies due to their similarity.
+
+.Sequence Diagram of adding a candidate
+image::AddSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
 ===== Aspect: How add/delete feature executes
-
+* **Alternative 1 (current choice):** Start an adding interface. Users can continually add entries for the same object until they enter 'cancel'
+** Pros: User can keep adding multiple entries of the same object without having to entering the `addc`, `addC` or `addj.
+** Cons: Not very convenient for user if he/she just needs to add one entry.
+* **Alternative 2:** Enter command_word and argument
+** Pros: Adding entries of specific objects is straightforward. Enter the respective command word and the respective details
+** Cons: Entering the command word becomes a hassle when adding a large number of entries
 ===== Aspect: Data structure to support the add/delete feature
 * **Alternative 1 (current choice):** Create a new list object to store objects e.g. `UniqueCompanyList`
 ** Pros: Easy to implement, allows for manipulation of data within the data structure (e.g) sorting.
@@ -932,55 +942,64 @@ The email command is facilitated by `EmailInitialiseCommand`, `EmailRecipientsCo
 classes which extends the `Command` class, and `EmailUtil` attribute in `Model` which stores variables and methods pertaining to the email command
 and the `EmailSettings` class which stores email subject and email body text settings.
 
-._Some of these classes also contain children classes which act as sub-commands:_
-. `EmailRecipientsAddCommand`, `EmailRecipientsNextCommand` extends `EmailRecipientsCommand`.
-. `EmailContentsAddCommand`, `EmailContentsBackCommand` and `EmailContentsNextCommand` extends `EmailContentsCommand`.
-. `EmailSendBackCommand`, `EmailSendPreviewCommand` and `EmailSendSendCommand` extends `EmailSendCommand`.
-
 The email command is a 4-stage process supported by `LogicManager` by keeping track of the `LogicState`.
 
-. `EmailInitialiseCommand`
-. `EmailRecipientsCommand`
-. `EmailContentsCommand`
-. `EmailSendCommand`
+.The 4 stages are as follows:
+. *Initialisation*, facilitated by `EmailInitialiseCommand`.
+. *Choosing your recipients*, facilitated by `EmailRecipientsCommand`. Within which exists the following sub-stages:
+.. *Adding recipients*, facilitated by `EmailRecipientsAddCommand`.
+.. *Moving to the next step*, facilitated by `EmailRecipientsNextCommand`.
+. *Choosing your contents*, facilitated by `EmailContentsCommand`. Within which exists the following sub-stages:
+.. *Adding contents*, facilitated by `EmailContentsAddCommand`.
+.. *Moving back to the previous step*, facilitated by `EmailContentsBackCommand`.
+.. *Moving to the next step*, facilitated by `EmailContentsNextCommand`.
+. *Sending your email*, facilitated by `EmailSendCommand`. Within which exists the following sub-stages:
+.. *Moving back to the previous step*, facilitated by `EmailSendBackCommand`.
+.. *Previewing your email*, facilitated by `EmailSendPreviewCommand`.
+.. *Sending the email*, facilitated by `EmailSendSendCommand`.
 
-Given below is an example usage scenario of how the email command behaves at each step.
+As you can see, the email command is quite complicated, so in order to explain how it works, given below is an example usage scenario of how the email command behaves at each step.
 
-. The user launches the application. The application loads email settings from `preferences.json` which is stored in `Model#EmailUtil`.
+. You launch the application. The application loads email settings from `preferences.json` which is stored in `Model#EmailUtil`.
 
-. The user executes the `email` command. A new `EmailUtil` object is constructed and replaces the `EmailUtil` object in `Model`
-  using model#resetEmailUtil. `LogicState` is changed to reflect initialisation of the email command and to move it into recipients selection stage
-. The user executes the `add` command for the first time. This calls `EmailRecipientsAddCommand`.
-.. In `EmailRecipientsAddCommand`, `EmailUtil#hasRecipientsAdded` boolean value will be changed to true.
-.. `MainWindow#getCurrentBook()` is called to determine the current book that the user is on and
-   `EmailUtil#areRecipientsCandidates` boolean value will be changed accordingly
+. You execute the `email` command. A new `EmailUtil` object is constructed and replaces the `EmailUtil` object in `Model`
+  using `model#resetEmailUtil`. `LogicState` is changed to reflect initialisation of the email command, moving the `LogicState` to recipients selection state.
+. You use `listc`, `findc`, `filterc`, `listC`, `findC`, `findj`, `filterC` and `filterj` to filter out who you wish to send the email to.
+. You execute the `add` command for the first time. This calls `EmailRecipientsAddCommand`.
+.. The add command first checks if there are recipients to add with `EmailRecipientsAddCommand#addCandidates or #addJobOffers`. If there is nothing to add, an error message will be displayed. If there are objects to add, then the following steps will be executed.
+.. `EmailUtil#hasRecipientsAdded` boolean value is changed to true to indicate that there are recipients added.
+.. `MainWindow#getCurrentBook()` is called to return which book you are on and `EmailUtil#areRecipientsCandidates` boolean value is changed accordingly:
 ... If recipients are candidates, `EmailUtil#areRecipientsCandidates` will be true.
 ... If recipients are companies, `EmailUtil#areRecipientsCandidates` will be false.
-.. Depending on `EmailUtil#areRecipientsCandidates`, the recipient objects are called with `Model#getFilteredCandidateList`
-   or `Model#getFilteredJobList` and are stored in a linked hash set within `EmailUtil`. +
-   Using `LinkedHashSet#add()` boolean return value, it is possible to determine if object added is a duplicate.
-   Duplicates are not added and are noted down inside an `ArrayList` within `EmailRecipientsAddCommand` which will be
-   reflected back to the user.
-. The user executes another `add` command to add more recipients. This calls `EmailRecipientsAddCommand`
-.. If `MainWindow#getCurrentBook()` and `EmailUtil#areRecipientsCandidates` do not match, user will be notified and nothing will be done.
-   This is to prevent adding different objects into the recipients linked hash set.
-.. If `MainWindow#getCurrentBook()` and `EmailUtil#areRecipientsCandidates` match, then adds recipients as seen above.
-. The user executes `next` command. This calls `EmailRecipientsNextCommand` which based on
-  `EmailUtil#areRecipientsCandidates`, switches the current book and changes `LogicState` to select contents phase.
+.. Depending on `EmailUtil#areRecipientsCandidates`, the recipient objects are called with `Model#getFilteredCandidateList` or `Model#getFilteredJobList` and are stored in a linked hash set within `EmailUtil` to prevent duplicates and to preserve insertion order. +
+   Using the `LinkedHashSet#add()` boolean return value, it is possible to determine if object added is a duplicate. Duplicates are not added and are noted down inside an `ArrayList` within `EmailRecipientsAddCommand` which will be reflected back to the user.
+. You then use `listc`, `findc` and `filterc` or `listC`, `findC`, `findj`, `filterC` and `filterj` to filter out more recipients.
+. You execute another `add` command to add more recipients. This calls `EmailRecipientsAddCommand`
+.. If `MainWindow#getCurrentBook()` and `EmailUtil#areRecipientsCandidates` do not match, for example, if `MainWindow#getCurrentBook()` returns `companyBook`, and `emailUtil#areRecipientsCandidates` is `true`, you will be notified with an error message because you have already added candidates as recipients, and you should not be allowed to add job offers.
+.. If `MainWindow#getCurrentBook()` and `EmailUtil#areRecipientsCandidates` match, recipients are added as per normal, as seen above.
+.. If there are duplicate recipients, RecruitBook will inform you about them and they will not be added.
+. You have added your recipients. So now you wish to move on to the next step, so you execute the `next` command. This calls `EmailRecipientsNextCommand` which based on `EmailUtil#areRecipientsCandidates`, which switches the current book and changes `LogicState` to select contents phase.
 [NOTE]
 In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCandidates`, the book displayed will be locked and only
-commands pertaining to the current book can be used. This is to enforce that recipients and contents are either candidates and job offers or
-job offers and candidates.
-. The user executes `add` command. This calls `EmailContentsAddCommand` which adds contents similarly to `EmailRecipientsAddCommand` as seen above.
-. The user executes `next` command. This calls `EmailContentsNextCommand` which changes `LogicState` to the send phase.
-. The user executes `preview` command. This calls `EmailSendPreviewCommand`.
-.. This generates a string of the email based on recipients and contents in `EmailUtil` which calls `EventCenter` to post `ShowEmailPreviewEvent`
-   with the email String and shows the string in a new window, `EmailPreview`.
-. The user is satisfied with the preview and executes the `send` command. This generates the email as a `MimeMessage`
-  which is the Java format used for emails and is sent via `EmailUtil#sendMessage`. `LogicState` is reset back to orignal and this marks the end of the email command.
+commands pertaining to the current book can be used. This is to enforce that recipients and contents are either candidates and job offers or job offers and candidates.
 
-This is the simplified action diagram and sequence diagram when the user executes the email command, assuming the user is only executing the `add`
-command once per `selectRecipients` and `selectContents` step.
+. You use `listc`, `findc` and `filterc` or `listC`, `findC`, `findj`, `filterC` and `filterj` to filter out the contents of the email.
+. You then execute the `add` command. This calls `EmailContentsAddCommand` which adds contents in the same manner as `EmailRecipientsAddCommand` as seen above. Having no contents to be added and duplicates will be caught and reflected back to you in the form of an error.
+. You execute `next` command to move on to the confirmation step. This calls `EmailContentsNextCommand` which changes `LogicState` to the send phase.
+. In order to double check if you have picked the correct recipients and contents, you execute the `preview` command. This calls `EmailSendPreviewCommand`.
+.. This generates a string of the email based on recipients and contents in `EmailUtil` which calls `EventCenter` to post `ShowEmailPreviewEvent` with the email String and shows the string in a new window, `EmailPreview`.
+.. The string is generated differently, depending if your recipients are candidates or companies.
+... If your recipients are candidates, then the `To` field of the email will contain all the recipients.
+... If your recipients are job offers, then the job offers are paired with its company, and each company will have its own `To` field, to show that an email will be sent individually to each company. +
+ For example, if I am sending an email to `Apple` regarding a job offer on `Cashier` and `Cleaner`, and `DBS` regarding a job offer on `Cafe Waiter`, there will be 2 `To` fields that look like this:
+.... `To: Apple(apple@example.com) regarding job offers: [Cashier, Cleaner]`
+.... `To: DBS(dbs@example.com) regarding job offer: [Cafe Waiter]`
+. You are satisfied with the preview and execute the `send` command to send the email. This generates the email as a `MimeMessage` which is the Java format used for emails and is sent via `EmailUtil#sendMessage`.
+.. If recipients are candidates, one email will be sent to all candidates with their emails sent under the `BCC` field to prevent recipients from seeing each other's emails, which preserves privacy of the candidates.
+.. If recipients are companies, one email will be sent per company detailing the specific job offer(s) that you have added during the selection of recipients.
+. `LogicState` is then reset back to original and this marks the end of the email command.
+
+This is the simplified action diagram and sequence diagram when one executes the email command, assuming that the `add` command is used once per `selectRecipients` and `selectContents` step.
 
 .Action Diagram
 image::EmailActivityDiagram.png[width="1000", align="center"]
@@ -988,7 +1007,7 @@ image::EmailActivityDiagram.png[width="1000", align="center"]
 image::EmailSequenceDiagram.png[width="1000", align="center"]
 
 ==== Design Considerations
-===== Aspect: Data structure to store recipients and candidates
+===== Aspect: Data structure to store recipients and contents
 
 * **Alternative 1:** Array List
 ** Pros: General purpose data structure that will work for this use case
@@ -1001,7 +1020,7 @@ image::EmailSequenceDiagram.png[width="1000", align="center"]
 * **Alternative 3 (current choice):** Linked Hash Set
 ** Pros: Does not allow duplicates, indicates if an object being added is successful or not,
    and maintains order in which objects were added in.
-** Cons: Not as fast as a hash set, but speed can be sacrificed for the pros.
+** Cons: Not as fast as a hash set, but speed can be sacrificed for the benefits.
 
 ===== Aspect: The design choice of the Email command
 
@@ -1031,36 +1050,36 @@ These operations are exposed in the `Model` interface as `Model#commitRecruitBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedRecruitBook` will be initialized with the initial candidate book state, and the `currentStatePointer` pointing to that single candidate book state.
+Step 1. The user launches the application for the first time. The `VersionedRecruitBook` will be initialized with the initial RecruitBook state, and the `currentStatePointer` pointing to that single RecruitBook state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `deletec 5` command to delete the 5th candidate in the candidate book. The `deletec` command calls `Model#commitRecruitBook()`, causing the modified state of the candidate book after the `deletec 5` command executes to be saved in the `candidateBookStateList`, and the `currentStatePointer` is shifted to the newly inserted candidate book state.
+Step 2. The user executes `deletec 5` command to delete the 5th candidate in RecruitBook. The `deletec` command calls `Model#commitRecruitBook()`, causing the modified state of the RecruitBook after the `deletec 5` command executes to be saved in the `recruitBookStateList`, and the `currentStatePointer` is shifted to the newly inserted RecruitBook state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `addc` then `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitRecruitBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
+Step 3. The user executes `addc` then `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitRecruitBook()`, causing another modified RecruitBook state to be saved into the `recruitBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitRecruitBook()`, so the candidate book state will not be saved into the `candidateBookStateList`.
+If a command fails its execution, it will not call `Model#commitRecruitBook()`, so the RecruitBook state will not be saved into the `recruitBookStateList`.
 
-Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoRecruitBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
+Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoRecruitBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous RecruitBook state, and restores the RecruitBook to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial candidate book state, then there are no previous candidate book states to restore. The `undo` command uses `Model#canUndoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial RecruitBook state, then there are no previous RecruitBook states to restore. The `undo` command uses `Model#canUndoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoRecruitBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the candidate book to that state.
+The `redo` command does the opposite -- it calls `Model#redoRecruitBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the RecruitBook to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `recruitBookStateList.size() - 1`, pointing to the latest RecruitBook state, then there are no undone candidate book states to restore. The `redo` command uses `Model#canRedoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `recruitBookStateList.size() - 1`, pointing to the latest RecruitBook state, then there are no undone RecruitBook states to restore. The `redo` command uses `Model#canRedoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 Step 5. The user then decides to execute the command `listc`. Commands that do not modify RecruitBook state, such as `listc` or `listC`, will usually not call `Model#commitRecruitBook()`, `Model#undoRecruitBook()` or `Model#redoRecruitBook()`. Thus, the `recruitBookStateList` remains unchanged.
 
@@ -1734,9 +1753,9 @@ _{ more test cases ... }_
 . Deleting a candidate while all candidates are listed
 
 .. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
-.. Test case: `delete 1` +
+.. Test case: `deletec 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
+.. Test case: `deletec 0` +
    Expected: No candidate is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.

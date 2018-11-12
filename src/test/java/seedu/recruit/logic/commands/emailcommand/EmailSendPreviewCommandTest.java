@@ -103,7 +103,7 @@ public class EmailSendPreviewCommandTest {
         command.execute(model, commandHistory, userPrefs);
 
         String expectedEmailPreview = "To: "
-                + testCompany.getCompanyName().toString()
+                + testCompany.getName().toString()
                 + '(' + testCompany.getEmail().toString() + ')'
                 + " regarding job offers: "
                 + '[' + testJobOffer.getJob().toString() + "]\n"
@@ -130,7 +130,7 @@ public class EmailSendPreviewCommandTest {
         command.execute(model, commandHistory, userPrefs);
 
         String expectedEmailPreview = "To: "
-                + testCompany.getCompanyName().toString()
+                + testCompany.getName().toString()
                 + '(' + testCompany.getEmail().toString() + ')'
                 + " regarding job offers: "
                 + '[' + testJobOffer.getJob().toString() + "]\n"
@@ -163,7 +163,7 @@ public class EmailSendPreviewCommandTest {
         command.execute(model, commandHistory, userPrefs);
 
         String expectedEmailPreview = "To: "
-                + testCompany.getCompanyName().toString()
+                + testCompany.getName().toString()
                 + '(' + testCompany.getEmail().toString() + ')'
                 + " regarding job offers: "
                 + '[' + testJobOffer.getJob().toString() + ", " + secondJobOffer.getJob().toString() + "]\n"
@@ -192,12 +192,12 @@ public class EmailSendPreviewCommandTest {
         command.execute(model, commandHistory, userPrefs);
 
         String expectedEmailPreview = "To: "
-                + testCompany.getCompanyName().toString()
+                + testCompany.getName().toString()
                 + '(' + testCompany.getEmail().toString() + ')'
                 + " regarding job offers: "
                 + '[' + testJobOffer.getJob().toString() + "]\n"
                 + "To: "
-                + secondCompany.getCompanyName().toString()
+                + secondCompany.getName().toString()
                 + '(' + secondCompany.getEmail().toString() + ')'
                 + " regarding job offers: "
                 + '[' + secondJobOffer.getJob().toString() + "]\n"

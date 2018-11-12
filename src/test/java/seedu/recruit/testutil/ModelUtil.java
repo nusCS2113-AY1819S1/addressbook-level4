@@ -54,9 +54,9 @@ public class ModelUtil {
         sb.append(PREFIX_PHONE + candidate.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + candidate.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + candidate.getAddress().value + " ");
-        sb.append(PREFIX_JOB + candidate.getJob().value + " ");
+        sb.append(PREFIX_JOB + candidate.getDesiredJob().value + " ");
         sb.append(PREFIX_EDUCATION + candidate.getEducation().value + " ");
-        sb.append(PREFIX_SALARY + candidate.getSalary().value + " ");
+        sb.append(PREFIX_SALARY + candidate.getExpectedSalary().value + " ");
         candidate.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -68,7 +68,7 @@ public class ModelUtil {
      */
     public static String getCompanyDetails(Company company) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_COMPANY_NAME + company.getCompanyName().value + " ");
+        sb.append(PREFIX_COMPANY_NAME + company.getName().value + " ");
         sb.append(PREFIX_PHONE + company.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + company.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + company.getAddress().value + " ");

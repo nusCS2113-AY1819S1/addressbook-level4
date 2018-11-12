@@ -54,7 +54,7 @@ public class CompanyCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code company}.
      */
     public boolean equals(Company company) {
-        return getName().equals(company.getCompanyName().value)
+        return getName().equals(company.getName().value)
                 && getPhoneId().equals(company.getPhone().value)
                 && getEmailId().equals(company.getEmail().value)
                 && getAddressId().equals(company.getAddress().value);

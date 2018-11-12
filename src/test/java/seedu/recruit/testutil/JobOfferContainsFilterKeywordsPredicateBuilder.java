@@ -16,6 +16,7 @@ import seedu.recruit.logic.commands.FilterCandidateCommand;
 import seedu.recruit.logic.parser.ArgumentMultimap;
 import seedu.recruit.logic.parser.ArgumentTokenizer;
 import seedu.recruit.logic.parser.exceptions.ParseException;
+
 import seedu.recruit.model.joboffer.JobOfferContainsFilterKeywordsPredicate;
 
 /**
@@ -33,10 +34,9 @@ public class JobOfferContainsFilterKeywordsPredicateBuilder {
     public static final String KEY_EDUCATION = "Education";
 
 
-
     private HashMap<String, List<String>> keywordsList = new HashMap<>();
     private JobOfferContainsFilterKeywordsPredicate jobOfferPredicate;
-
+    
     public JobOfferContainsFilterKeywordsPredicateBuilder(String userInput) throws ParseException {
         this.jobOfferPredicate = preparePredicate(userInput);
     }

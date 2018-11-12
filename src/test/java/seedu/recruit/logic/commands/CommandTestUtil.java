@@ -40,7 +40,7 @@ import seedu.recruit.testutil.CompanyContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
 import seedu.recruit.testutil.EditJobOfferDescriptorBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
-import seedu.recruit.testutil.JobOfferContainsFindKeywordsPredicateBuilder;
+import seedu.recruit.testutil.JobOfferContainsFilterKeywordsPredicateBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -443,7 +443,7 @@ public class CommandTestUtil {
     public static void showCompanyAtIndex(Model model, Index targetIndex) throws ParseException {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyList().size());
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
-        final String[] splitName = company.getCompanyName().value.split("\\s+");
+        final String[] splitName = company.getName().value.split("\\s+");
         model.updateFilteredCompanyList(new CompanyContainsFindKeywordsPredicateBuilder(
                 " c/" + splitName[0]).getCompanyPredicate());
         assertEquals(1, model.getFilteredCompanyList().size());
@@ -457,8 +457,9 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyJobList().size());
         JobOffer jobOffer = model.getFilteredCompanyJobList().get(targetIndex.getZeroBased());
         final String[] splitName = jobOffer.getJob().value.split("\\s+");
-        model.updateFilteredCompanyJobList(new JobOfferContainsFindKeywordsPredicateBuilder(
-                " j/" + splitName[0]).getJobOfferPredicate());
+        final String[] splitCompanyName = jobOffer.getCompanyName().value.split("\\s+");
+        model.updateFilteredCompanyJobList(new JobOfferContainsFilterKeywordsPredicateBuilder(
+                " j/" + splitName[0] + " c/" + splitCompanyName[0]).getJobOfferPredicate());
         assertEquals(1, model.getFilteredCompanyJobList().size());
     }
 }

@@ -80,7 +80,7 @@ public class DeleteShortlistedCandidateCommand extends Command {
         EventsCenter.getInstance().post(new ChangeLogicStateEvent("primary"));
         return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS,
                 removedShortlistedTagFromCandidate.getName().fullName, selectedJob.getJob().value,
-                selectedCompany.getCompanyName().value));
+                selectedCompany.getName().value));
     }
 
     /**
@@ -91,8 +91,8 @@ public class DeleteShortlistedCandidateCommand extends Command {
 
         Set<Tag> tags = new HashSet<Tag>();
         return new Candidate(shortlistee.getName(), shortlistee.getGender(), shortlistee.getAge(),
-                shortlistee.getPhone(), shortlistee.getEmail(), shortlistee.getAddress(), shortlistee.getJob(),
-                shortlistee.getEducation(), shortlistee.getSalary(), tags);
+                shortlistee.getPhone(), shortlistee.getEmail(), shortlistee.getAddress(), shortlistee.getDesiredJob(),
+                shortlistee.getEducation(), shortlistee.getExpectedSalary(), tags);
     }
 
 }

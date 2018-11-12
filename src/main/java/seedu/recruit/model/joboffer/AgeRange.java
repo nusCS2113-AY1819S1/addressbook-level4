@@ -50,8 +50,7 @@ public class AgeRange {
         if (Integer.parseInt(minAndMaxAgeString[0]) > Integer.parseInt(minAndMaxAgeString[1])) {
             minAndMaxAgeInt[0] = Integer.parseInt(minAndMaxAgeString[1]);
             minAndMaxAgeInt[1] = Integer.parseInt(minAndMaxAgeString[0]);
-        }
-        else {
+        } else {
             minAndMaxAgeInt[0] = Integer.parseInt(minAndMaxAgeString[0]);
             minAndMaxAgeInt[1] = Integer.parseInt(minAndMaxAgeString[1]);
         }

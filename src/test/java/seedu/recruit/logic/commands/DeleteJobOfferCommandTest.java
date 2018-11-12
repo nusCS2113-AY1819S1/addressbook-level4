@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.recruit.logic.commands.CommandTestUtil.showCompanyAtIndex;
+import static seedu.recruit.logic.commands.CommandTestUtil.showJobOfferAtIndex;
 import static seedu.recruit.testutil.TestUtil.getIndexSet;
 import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.getTypicalCompanyBook;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
@@ -24,18 +24,19 @@ import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
-import seedu.recruit.model.company.Company;
+import seedu.recruit.model.joboffer.JobOffer;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
- * and unit tests for {@code DeleteCompanyCommand}.
+ * and unit tests for {@code DeleteJobOfferCommand}.
  */
 
-public class DeleteCompanyCommandTest {
+public class DeleteJobOfferCommandTest {
 
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();
+
 
     @Before
     public void setUp() {
@@ -45,72 +46,71 @@ public class DeleteCompanyCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Company companyToDelete = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
-        DeleteCompanyCommand deleteCompanyCommand = new DeleteCompanyCommand(getIndexSet(INDEX_FIRST));
+        JobOffer jobOfferToDelete = model.getFilteredCompanyJobList().get(INDEX_FIRST.getZeroBased());
+        DeleteJobOfferCommand deleteJobOfferCommand = new DeleteJobOfferCommand(getIndexSet(INDEX_FIRST));
 
-        String expectedMessage = String.format(DeleteCompanyCommand.MESSAGE_DELETE_COMPANY_SUCCESS,
-                companyToDelete + "\n");
+        String expectedMessage = String.format(DeleteJobOfferCommand.MESSAGE_DELETE_JOB_OFFER_SUCCESS,
+                jobOfferToDelete + "\n");
 
         ModelManager expectedModel = new ModelManager(new CandidateBook(), model.getCompanyBook(), new UserPrefs());
-        expectedModel.deleteCompany(companyToDelete);
+        expectedModel.deleteJobOffer(jobOfferToDelete);
         expectedModel.commitRecruitBook();
 
-        assertCommandSuccess(deleteCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteJobOfferCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validMultipleIndexesUnfilteredList_success() {
-        //Set up deleted companies
-        ArrayList<Company> companiesToDelete = new ArrayList<Company>();
-        companiesToDelete.add(model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased()));
-        companiesToDelete.add(model.getFilteredCompanyList().get(INDEX_SECOND.getZeroBased()));
-        companiesToDelete.add(model.getFilteredCompanyList().get(INDEX_THIRD.getZeroBased()));
+        //Set up deleted job offers
+        ArrayList<JobOffer> jobOffersToDelete = new ArrayList<JobOffer>();
+        jobOffersToDelete.add(model.getFilteredCompanyJobList().get(INDEX_FIRST.getZeroBased()));
+        jobOffersToDelete.add(model.getFilteredCompanyJobList().get(INDEX_SECOND.getZeroBased()));
+        jobOffersToDelete.add(model.getFilteredCompanyJobList().get(INDEX_THIRD.getZeroBased()));
 
-        DeleteCompanyCommand deleteCompanyCommand = new DeleteCompanyCommand(getIndexSet(INDEX_FIRST, INDEX_SECOND,
-                                                        INDEX_THIRD));
+        DeleteJobOfferCommand deleteJobOfferCommand = new DeleteJobOfferCommand(getIndexSet(INDEX_FIRST, INDEX_SECOND,
+                INDEX_THIRD));
 
-        String expectedMessage = String.format(DeleteCompanyCommand.MESSAGE_DELETE_COMPANY_SUCCESS,
-                companiesToDelete.get(2) + "\n"
-                + companiesToDelete.get(1) + "\n"
-                + companiesToDelete.get(0) + "\n");
+        String expectedMessage = String.format(DeleteJobOfferCommand.MESSAGE_DELETE_JOB_OFFER_SUCCESS,
+                jobOffersToDelete.get(2) + "\n"
+                        + jobOffersToDelete.get(1) + "\n"
+                        + jobOffersToDelete.get(0) + "\n");
 
         ModelManager expectedModel = new ModelManager(new CandidateBook(), model.getCompanyBook(), new UserPrefs());
 
-        for (Company company : companiesToDelete) {
-            expectedModel.deleteCompany(company);
+        for (JobOffer jobOffer : jobOffersToDelete) {
+            expectedModel.deleteJobOffer(jobOffer);
         }
-
         expectedModel.commitRecruitBook();
 
-        assertCommandSuccess(deleteCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteJobOfferCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
-        DeleteCompanyCommand deleteCompanyCommand = new DeleteCompanyCommand(getIndexSet(outOfBoundIndex));
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyJobList().size() + 1);
+        DeleteJobOfferCommand deleteJobOfferCommand = new DeleteJobOfferCommand(getIndexSet(outOfBoundIndex));
 
-        assertCommandFailure(deleteCompanyCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        assertCommandFailure(deleteJobOfferCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_JOB_OFFER_DISPLAYED_INDEX);
     }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Company companyToDelete = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
-        DeleteCompanyCommand deleteCompanyCommand = new DeleteCompanyCommand(getIndexSet(INDEX_FIRST));
+        JobOffer jobOfferToDelete = model.getFilteredCompanyJobList().get(INDEX_FIRST.getZeroBased());
+        DeleteJobOfferCommand deleteJobOfferCommand = new DeleteJobOfferCommand(getIndexSet(INDEX_FIRST));
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
-        expectedModel.deleteCompany(companyToDelete);
+        expectedModel.deleteJobOffer(jobOfferToDelete);
         expectedModel.commitRecruitBook();
 
         // delete -> first company deleted
-        deleteCompanyCommand.execute(model, commandHistory, userPrefs);
+        deleteJobOfferCommand.execute(model, commandHistory, userPrefs);
 
-        // undo -> reverts Companybook back to previous state and filtered company list to show all companies
+        // undo -> reverts Companybook back to previous state and filtered job list to show all companies
         expectedModel.undoRecruitBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory,
                 UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // redo -> same first company deleted again
+        // redo -> same first job deleted again
         expectedModel.redoRecruitBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory,
                 RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -118,12 +118,12 @@ public class DeleteCompanyCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
-        DeleteCompanyCommand deleteCompanyCommand = new DeleteCompanyCommand(getIndexSet(outOfBoundIndex));
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyJobList().size() + 1);
+        DeleteJobOfferCommand deleteJobOfferCommand = new DeleteJobOfferCommand(getIndexSet(outOfBoundIndex));
 
         // execution failed -> recruit book state not added into model
-        assertCommandFailure(deleteCompanyCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        assertCommandFailure(deleteJobOfferCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_JOB_OFFER_DISPLAYED_INDEX);
 
         // single recruit book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory,
@@ -133,34 +133,34 @@ public class DeleteCompanyCommandTest {
     }
 
     /**
-     * 1. Deletes a {@code Company} from a filtered list.
+     * 1. Deletes a {@code Job} from a filtered list.
      * 2. Undo the deletion.
-     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted company in the
+     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted job offer in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the company object regardless of
+     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the JobOffer object regardless of
      * indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
-        DeleteCompanyCommand deleteCompanyCommand = new DeleteCompanyCommand(getIndexSet(INDEX_FIRST));
+        DeleteJobOfferCommand deleteJobOfferCommand = new DeleteJobOfferCommand(getIndexSet(INDEX_FIRST));
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
 
 
-        showCompanyAtIndex(model, INDEX_SECOND);
-        Company companyToDelete = model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased());
-        expectedModel.deleteCompany(companyToDelete);
+        showJobOfferAtIndex(model, INDEX_FIRST);
+        JobOffer jobOfferToDelete = model.getFilteredCompanyJobList().get(INDEX_FIRST.getZeroBased());
+        expectedModel.deleteJobOffer(jobOfferToDelete);
         expectedModel.commitRecruitBook();
 
-        // delete -> deletes second company in unfiltered company list / first company in filtered company list
-        deleteCompanyCommand.execute(model, commandHistory, userPrefs);
+        // delete -> deletes second job in unfiltered job offer list / first job offer in filtered job list
+        deleteJobOfferCommand.execute(model, commandHistory, userPrefs);
 
-        // undo -> reverts RecruitBook back to previous state and filtered company list to show all persons
+        // undo -> reverts RecruitBook back to previous state and filtered job list to show all persons
         expectedModel.undoRecruitBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory,
                 UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(companyToDelete, model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased()));
-        // redo -> deletes same second company in unfiltered company list
+        assertNotEquals(jobOfferToDelete, model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased()));
+        // redo -> deletes same second job in unfiltered job list
         expectedModel.redoRecruitBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory,
                 RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -168,14 +168,14 @@ public class DeleteCompanyCommandTest {
 
     @Test
     public void equals() {
-        DeleteCompanyCommand deleteFirstCommand = new DeleteCompanyCommand(getIndexSet(INDEX_FIRST));
-        DeleteCompanyCommand deleteSecondCommand = new DeleteCompanyCommand(getIndexSet(INDEX_SECOND));
+        DeleteJobOfferCommand deleteFirstCommand = new DeleteJobOfferCommand(getIndexSet(INDEX_FIRST));
+        DeleteJobOfferCommand deleteSecondCommand = new DeleteJobOfferCommand(getIndexSet(INDEX_SECOND));
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCompanyCommand deleteFirstCommandCopy = new DeleteCompanyCommand(getIndexSet(INDEX_FIRST));
+        DeleteJobOfferCommand deleteFirstCommandCopy = new DeleteJobOfferCommand(getIndexSet(INDEX_FIRST));
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -184,8 +184,7 @@ public class DeleteCompanyCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different company -> returns false
+        // different job offer -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
-
 }
