@@ -62,9 +62,9 @@ JitHub is developed throughout the summer in a team of 5 members as our first st
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-* include::../UserGuide.adoc[tag=todo]
-* include::../UserGuide.adoc[tag=finishTodo]
-* include::../UserGuide.adoc[tag=calendar]
+include::../UserGuide.adoc[tag=todo]
+include::../UserGuide.adoc[tag=finishTodo]
+include::../UserGuide.adoc[tag=calendar]
 
 == Contributions to the Developer Guide
 
@@ -72,9 +72,9 @@ JitHub is developed throughout the summer in a team of 5 members as our first st
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-* include::../DeveloperGuide.adoc[tag=todo]
-* include::../DeveloperGuide.adoc[tag=finishTodo]
-* include::../DeveloperGuide.adoc[tag=calendar]
+include::../DeveloperGuide.adoc[tag=todo]
+include::../DeveloperGuide.adoc[tag=finishTodo]
+include::../DeveloperGuide.adoc[tag=calendar]
 
 
 == PROJECT: EE2026 FPGA Design Project
