@@ -84,7 +84,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'jithub.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
