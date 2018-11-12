@@ -288,8 +288,10 @@ Examples: +
 
 [NOTE]
 ====
-1.  The file will be located in `/data/FILENAME.xml`
-2.  This command overwrites any files with the same name at `/data/`
+1.  The file will be located in +
+`<DIRECTORY OF YOUR JAR FILE>/data/FILENAME.xml`
+2.  This command overwrites any files with the same name at +
+`<DIRECTORY OF YOUR JAR FILE>/data/`
 ====
 // end::export[]
 
@@ -311,12 +313,12 @@ Examples:
 
 // tag::import[]
 === Import contacts: `import`
-// TODO: find first, then export csv
-// preface
 You can save the hassle of typing in the exact same contact details of your group members if one of your group members
  have already save them into his/her JitHub.
 
-To do so, simply place the file your teammate exported in `/data/` and *import* it into your JitHub. +
+To do so, politely ask them to *export* the contact details and place the file your teammate exported into the
+`/data/` of your JitHub
+and *import* it into your JitHub. +
 ====
 Format: `import FILENAME.xml`
 ====
@@ -327,13 +329,14 @@ Examples: +
 
 [NOTE]
 ====
-1.  The file to import must be placed in `/data/`
+1.  The file to import must be placed in `<DIRECTORY OF YOUR JAR FILE>/data/`
 2.  Persons that already exist in your JitHub won't be imported.
 To import an existing person in JitHub with different contact details, please `delete` them first.
 3.  The `undo` command works with the `import` command.
 ====
 // TODO: screenshot of success message
 // endtag::import[]
+
 // TODO: Add preface
 === Exporting contact details of a selected person: `export`
 
