@@ -26,6 +26,7 @@ import seedu.address.model.account.Username;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.SimpleItem;
 
+//@@author ChewKinWhye
 
 public class StatusCommandTest {
     private Model model = new ModelManager(getStockList(), new UserPrefs(), getTypicalAccountList());

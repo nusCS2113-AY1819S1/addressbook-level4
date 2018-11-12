@@ -15,6 +15,8 @@ import seedu.address.model.item.Name;
 import seedu.address.storage.XmlAdaptedLoanList;
 import seedu.address.storage.XmlAdaptedLoanerDescription;
 
+//@@author ChewKinWhye
+
 /**
  * Deletes an entry in the loan list base on the Index
  */

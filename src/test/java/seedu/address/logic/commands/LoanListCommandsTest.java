@@ -24,6 +24,8 @@ import seedu.address.model.UserPrefs;
 //import seedu.address.model.account.Username;
 //import seedu.address.model.item.Item;
 
+//@@author ChewKinWhye
+
 public class LoanListCommandsTest {
     private Model model = new ModelManager(getStockList(), new UserPrefs(), getTypicalAccountList());
     private CommandHistory commandHistory = new CommandHistory();

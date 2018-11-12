@@ -6,6 +6,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteLoanListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+//@@author ChewKinWhye
+
 /**
  * Parses input arguments and creates a new DeleteLoanListCommand object
  */
