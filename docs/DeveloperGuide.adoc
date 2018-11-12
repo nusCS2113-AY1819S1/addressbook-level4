@@ -556,7 +556,10 @@ PersonListPanel is adapted to now have two `Stackpane` instead of one and is nes
 .Class diagram of Friend
 image::FriendFeatureFrontEndDiagramFix.png[width="300"]
 
-The two panels will be filtered based on predicate
+The two panels will be filtered based on two predicates, `FriendListPredicate` and `OtherListPredicate`.
+They decide what is shown on the panels at any given moment.
+The friends of the current user is iterated through and those that belong to the friend will be shown on the FriendListPanel. The rest of the users will be shown on PersonListPanel.
+Both predicates will filter out the current user.
 
 ===== Backend implementation
 The `User` is associated with a specific `Person`. Each person can have any number of `Friend` objects.
@@ -583,6 +586,13 @@ image::FriendCommandSequenceDiagram.png[width="300"]
 ** Pros: Every friend only includes essential information about the specific person
 ** Cons: Takes longer to match the person in the friends list to a person in the database
 * **Alternative 2:** Allowing every Friend to compose a Person object
+** Pros: Friend contains more information that can be used
+** Cons: Duplicated entries of the same Person
+===== How to display the friends and others of the current user
+* **Alternative 1 (current choice):** Use of predicates to set the list to reflect only the desired people.
+** Pros: Allow different predicates to be nested when more filtering commands are called.
+** Cons: The list internally contains all the users of the database, extra information is being loaded.
+* **Alternative 2:**
 ** Pros: Friend contains more information that can be used
 ** Cons: Duplicated entries of the same Person
 // end::friend[]
