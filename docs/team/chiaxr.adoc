@@ -2,22 +2,55 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:site-section: chiaxr
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:xrefstyle: full
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:warning-caption: :warning:
+endif::[]
+:repoURL: https://github.com/CS2113-AY1819S1-T12-1/main
 
-== PROJECT: Event Manager
-
----
+[big]#PROJECT: Event Manager#
 
 == Overview
+This document provides a summary of my contributions as a developer of the Event Manager project. It showcases both my proficiency in software engineering and clarity in technical writing.
 
-Event Manager is a desktop address book application used for managing events in the Halls and Residential Colleges of NUS. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Event Manager is a cross-platform desktop application that manages events, targeted at the Halls and Residential Colleges of NUS. These residences tend to host many events for their students, and it can be difficult to keep track of events amidst the students' daily lives. Our application aims to consolidate these events and present them in a clear manner, allowing the residents to easily sieve through upcoming events that they are interested in.
+
+Other main features include:
+
+* Authentication
+* Registration
+* Reminders
+* Comments
+* Searching & Sorting
+* Export of calendar file
+
+
+The user interacts with the application using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. All features can be used by typing commands in the CLI, but the GUI provides important information as well as some ease of use to the user. It is written in Java, and has about 10 kLoC.
 
 == Summary of contributions
-* *Major enhancement*: Added *the ability to register/unregister for events and view event attendance*
-** What it does: Allows users to indicate their attendance for events, and view the usernames of other attendees.
-** Justification: This feature allows event ICs to have an idea of the number of attendees for planning purposes, as well as users to see who else is attending the event so they might connect with people they know.
-** Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+My contributions to the project are described below.
 
-* *Minor enhancement*: Formatting and display of event page in BrowserPanel
+* *Major enhancement*: Added *the ability to register/unregister for events and view attending events*
+** *What it does*:
++
+Users can indicate their attendance for events, and view the usernames of other attendees. Events that the user are attending can be filtered out and displayed.
+
+** *Justification*:
++
+This feature encourages users to attend events and connect with other users they know who are attending the same event, promoting social engagement in the community. It also provides event coordinators with a rough estimate of the turnout, allowing them to plan accordingly and make suitable preparations.
+
+** *Highlights*:
++
+This enhancement required an in-depth analysis of design alternatives. The implementation too was moderately difficult as it required modification to the existing storage format.
+
+* *Minor enhancement*: Formatting and display of event details in event page
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
 
@@ -25,7 +58,7 @@ Event Manager is a desktop address book application used for managing events in 
 
 ** Project management:
 *** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
-*** Wrote additional tests for RSVP features to increase coverage (Pull request https://github.com/CS2113-AY1819S1-T12-1/main/pull/99[#99])
+*** Wrote additional integration tests for registration features to increase coverage (Pull request https://github.com/CS2113-AY1819S1-T12-1/main/pull/99[#99])
 ** Documentation:
 *** Updated User and Developer Guides to describe new features: https://github.com/CS2113-AY1819S1-T12-1/main/pull/81[#81]
 ** Community:
@@ -39,7 +72,6 @@ Event Manager is a desktop address book application used for managing events in 
 |===
 
 include::../UserGuide.adoc[tag=rsvp]
-
 
 == Contributions to the Developer Guide
 
