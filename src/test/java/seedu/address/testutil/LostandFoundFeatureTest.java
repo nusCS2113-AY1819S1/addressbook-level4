@@ -76,9 +76,10 @@ public class LostandFoundFeatureTest {
 
     public static String getExpectedMessageOutput() {
         return ("Lost items listed\n"
-                + "Lost: 1.Arduino:80\n"
-                + "2.Lidar:50\n"
-                + "3.Motor:80");
+                + "Lost: 1. Arduino: 80\n"
+                + "        2. Lidar: 50\n"
+                + "        3. Motor: 80\n"
+                + "        ");
 
     }
     public static Index getTestIndex() {
@@ -120,16 +121,18 @@ public class LostandFoundFeatureTest {
 
     public static String getExpectedLostListone() {
         return ("Lost items listed\n"
-                + "Lost: 1.Arduino:80\n"
-                + "2.Lidar:70\n"
-                + "3.Motor:80");
+                + "Lost: 1. Arduino: 80\n"
+                + "        2. Lidar: 70\n"
+                + "        3. Motor: 80\n"
+                + "        ");
     }
 
     public static String getExpectedLostListtwo() {
         return ("Lost items listed\n"
-                + "Lost: 1.Arduino:80\n"
-                + "2.Lidar:70\n"
-                + "3.Motor:65");
+                + "Lost: 1. Arduino: 80\n"
+                + "        2. Lidar: 70\n"
+                + "        3. Motor: 65\n"
+                + "        ");
     }
 
 
