@@ -6,7 +6,7 @@ import java.util.Set;
 
 import seedu.planner.model.tag.Tag;
 
-//@author tztzt
+//@@author tztzt
 /**
  * Contains a set of pre-defined tags that the user may use to their convenience and will
  * always be in the suggested list of tags.

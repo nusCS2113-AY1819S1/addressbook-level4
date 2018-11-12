@@ -341,54 +341,78 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag:list[]
-
-=== Sort records feature
+//tag::autocomplete[]
+=== Auto Complete Feature
 ==== Current Implementation
-The sort mechanism is facilitated by `ModelManager`. It extends `FinancialPlanner` with a component that sorts the
-internal list of records. SortCommand calls `ModelManager#sortFilteredRecordList` and passes in the category to be
-sorted by and the sort order.
+The autocomplete mechanism is facilitated by the `NewAutoCompletionBinding` class. It represents the binding of the
+autocomplete window to the `CommandBox` and is the component that manages the interactions between the text input and
+the contents of the autocomplete list that is displayed in the window. This feature observes the text input in the
+CommandBox and displays a list of words in another window under the
+CommandBox for the user to select and complete his current focus text - the word he is currently typing.
 
-This feature has one keyword `sort` and takes in arguments of either category or order of sort. Keywords are not
-case sensitive.
+The key components in this class are the `autoCompletionPopup` and the `caretChangedListener` that perform the key
+functionalities.
 
-Category can be either of the following keywords:
+`caretChangedListener` is an observer that checks the caret in the command box and is triggered whenever the caret
+changes its position, whether a character is typed or the caret is moved using the arrow keys. When triggered, it reads
+the text in the command box and checks the position of the caret, then extracts the current word of target to be
+completed as well as the current input text and the prefix of the current word if any. Extraction is done by tracing back from the caret
+position and as well as tracing forward. Any characters that are not a whitespace and are not separated by a whitespace
+are considered to be the same word as the current word to be completed. The text before and after the word to completed
+are also saved so they will not be lost upon completion.
 
-* `name` - To sort in lexicographical order by the name attribute of the record
-* `date` - To sort by the date attribute of the record
-* `money`/`moneyflow` - To sort by the expenditure or income of the record
+This listener passes the extracted String input to the `CustomSuggestionProvider` through `updateSuggestions`.
 
-Order can be either of the following keywords:
+`CustomSuggestionProvider` reads the word to be competed and the input text. It trims and splits the input text and
+find the index of the word to completed. It reads the first input first as it is the key command word and performs a
+different operation on the input string depending on the command word as well as any possible following parameters.
 
-* `desc` - To sort in descending order
-* `asc` - To sort in ascending order
+Functions which are supported by autocomplete will parse the input individually through the different private methods
+available in `CustomSuggestionProvider`. Once it has decided which set of texts to be the new word suggestion bank,
+it calls the `CustomSuggestionProvider#updateSuggestions` overloaded method to update the `SuggestionProvider`.
 
-This feature has 2 different kind of modes as follows:
+After updating the `SuggestionProvider`, `NewAutoCompletionBinding#SetUserInput` calls `onUserInputChanged` which
+is responsible for updating the suggestions list according to what the word to be completed is. As this class was
+tweaked from the library implementation, the threading involved in this method will not be detailed. It updates
+the list of suggestions
+by comparing the user input word to the list of suggestions and passes the resultant list to the `autoCompletionPopup`
+which will proceed to display the list of text in the popup below the command box.
 
-. Single Argument Mode - Input argument can be either the category or the order of sort
-* If category specified, records are sorted in ascending order of that category
-* If order specified, records will be sorted by name in the specified order
+Now back to the `autoCompletionPopup`, whenever the user highlights a selected word input and selects it, the
+`autoCompletionPopup#setOnSuggestion` is triggered and will try to complete the word with the selected text and once
+completed, it hides the popup and sets the caret to the end of the newly completed word.
 
-. Duo Argument Mode - Input arguments must contain only 1 category and only 1 order, and can be input in no particular order
+The following sequence diagram shows how the auto completion operation works:
 
-The input given by the useris passed to `SortCommandParser` to split the input separated by whitespaces to ensure
-there is either only one or two arguments input by the user. These arguments are stored in an array of strings and
-the size of the array determines the mode of the command.
+image::AutoCompleteSequenceDiagram.png[width="800"]
 
-The strings are compared to two sets of strings containing the supported categories and orders of the function.
-The string of the category and a boolean representing whether the records are to be reversed will then be passed to
-`ModelManager` to sort the records.
+==== Design Considerations
+===== Aspect: Method to Update Suggestion Bank to use for comparison to input word
+* **Alternative 1 (current choice):** Use listeners to the caret in the command box
+** Pros: Accurate parsing of input and able to detect which word is currently in focus.
+** Cons: Difficult to correctly parse text, as need to avoid whitespaces. Also led to many index array exceptions that
+can occur when checking the input.
 
-Since the displayed list in the UI is a `FilteredList` which is a wrapper for the underlying list `UniqueRecordList` structure,
-sorting the internal list of records in `versionedFinancialPlanner` will post an event that notifies the UI to update
-the displayed list.
+* **Alternative 2:** Use text listeners in the command box
+** Pros: Simple to implement, similar to library implementation. Safe and minimal room for errors.
+** Cons: Cannot autocomplete by word, can only complete the last word input in the command box. Unable to perform
+completion for texts before the last word.
 
-The following sequence diagram shows how the sort operation works:
+===== Aspect: Method to compare input word to Suggestion Bank to obtain displayed list of words
+* **Alternative 1 (current choice):** Check if suggestion bank word *begins* with input word
+** Pros: Simple, straightforward autocomplete for users. Users that are already good at typing and spelling
+will have a breeze using this implementation.
+** Cons: Smaller range of completion texts as users need to accurately type the first few letters before getting a
+an expected completion suggestion.
 
-image::SortSequenceDiagram.png[width:800]
+* **Alternative 2:** Check if suggestion bank word *contains* input word e.g type `tag` -> suggests `findtag`
+** Pros: User can type whichever word is convenient to them to obtain a suggestion they desire. Users who may not know
+the full spelling of a word and only partially will enjoy this.
+** Cons: Range of texts displayed may be excessive and not appealing to all users.
+
+//end::autocomplete[]
 
 //tag::list[]
-
 === List history feature
 ==== Current Implementation
 The list mechanism is facilitated by `ModelManager`.
@@ -429,6 +453,59 @@ listener is present in `RecordListPanel` and will update the UI list automatical
 ** Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.
 ** Cons: Current UI implementation relies on `FilteredList`. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to `ObservableMap` instead. Alternatively, one can utilise a `HashMap` to first generate the list and pass the list reference into `FilteredList`. However, there is a need to code a filter function.
 //end::list[]
+
+// tag::sort[]
+=== Sort records feature
+==== Current Implementation
+The sort mechanism is facilitated by `ModelManager`. It extends `FinancialPlanner` with a component that sorts the
+internal list of records. SortCommand calls `ModelManager#sortFilteredRecordList` and passes in the category to be
+sorted by and the sort order.
+
+This feature has one keyword `sort` and takes in arguments of either category or order of sort. Keywords are not
+case sensitive.
+
+Category can be either of the following keywords: `name`, `date`, `money`, `moneyflow`
+
+Order can be either of the following keywords: `desc` - descending, `asc` - ascending
+
+This feature has 2 different kind of modes as follows:
+
+. Single Argument Mode - Input argument can be either the category or the order of sort
+* If category specified, records are sorted in ascending order of that category
+* If order specified, records will be sorted by name in the specified order
+
+. Duo Argument Mode - Input arguments must contain only 1 category and only 1 order, and can be input in no particular order
+
+The input given by the user is passed to `SortCommandParser` to split the input separated by whitespaces to ensure
+there is either only one or two arguments input by the user. These arguments are stored in an array of strings and
+the size of the array determines the mode of the command.
+
+The strings are compared to two sets of strings containing the supported categories and orders of the function.
+The string of the category and a boolean representing whether the records are to be reversed will then be passed to
+`ModelManager` to sort the records.
+
+Since the displayed list in the UI is a `FilteredList` which is a wrapper for the underlying list `UniqueRecordList` structure,
+sorting the internal list of records in `versionedFinancialPlanner` will post an event that notifies the UI to update
+the displayed list.
+
+The following sequence diagram shows how the sort operation works:
+
+image::SortSequenceDiagram.png[width:800]
+
+==== Design Considerations
+===== Aspect: Method of sorting data
+
+* **Alternative 1 (current choice):** Sort the observable array list in the underlying data structure in `UniqueRecordList`
+** Pros: Easy to implement, sorting will be permanent, user need not sort again with every following command
+** Cons: Not very intuitive, user may not have intended to modify the underlying data arrangement instead only want to
+sort the data just this once for viewing
+
+* **Alternative 2:** Sort the FilteredList of records obtained after filtering the underlying array list
+** Pros: Does not allow the user to alter the arrangement of the underlying data, and only obtains a sorted version of
+the read only data.
+** Cons: Unable to sort a FilteredList as it does not support it, implementations could instead use SortedList but it
+will not be able to perform the filtering function
+// end::sort[]
 
 //tag::summary[]
 === View summary feature
@@ -1502,9 +1579,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *MSS*
 
-1.  User requests to add record into Savee.
-2.  System adds the record into the system.
-3.  System displays the record added to the user.
+.  User requests to add record into Savee.
+.  Save requests for record information to be added.
+.  User inputs record information.
+.  System adds the record into the system.
+.  System displays the record added to the user.
 +
 Use case ends.
 
@@ -1657,20 +1736,20 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-=== 8.  Use case: Search expenses based on category [Zhi Thon]
+=== 8.  Use case: Search expenses based on tags [Zhi Thon]
 
 *MSS*
 
-1.  User requests to search for expenses by category
-2.  Savee requests for category of expenditure
-3.  User enters category desired
-4.  Savee displays each expenditure with name category and the total expenditure.
+1.  User requests to search for expenses by tags
+2.  Savee requests for tag of expenditure
+3.  User enters tag desired
+4.  Savee displays each expenditure tagged with specified word.
 +
 Use case ends.
 
 *Extensions*
 
-* 3a User’s input category cannot be found.
+* 3a User’s input tag cannot be found.
 ** Savee shows no expenditure for selected category
 
 [discrete]
@@ -2204,6 +2283,8 @@ These instructions only provide a starting point for testers to work on; testers
 . Listing with valid prefix and 1st date earlier than 2nd date
 .. Test case: Enter `list d/1-1-2018 12-12-2018`
 .. Expected: System will list all records equal to or between the 2 dates
+
+
 
 === Viewing summary
 . Entering `summary` command without modes

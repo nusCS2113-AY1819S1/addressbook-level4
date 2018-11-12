@@ -1,7 +1,6 @@
 package seedu.planner.commons.events.model;
 
 import seedu.planner.commons.events.BaseEvent;
-import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 
 //@author tztzt
@@ -12,7 +11,6 @@ public class RecordMapChangedEvent extends BaseEvent {
 
     public RecordMapChangedEvent(ReadOnlyFinancialPlanner newData) {
         this.data = newData;
-        CustomSuggestionProvider.updateRecordMap(newData.getRecordMap());
     }
 
     @Override

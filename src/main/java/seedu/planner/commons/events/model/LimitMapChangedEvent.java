@@ -1,7 +1,6 @@
 package seedu.planner.commons.events.model;
 
 import seedu.planner.commons.events.BaseEvent;
-import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 
 /**
@@ -13,7 +12,6 @@ public class LimitMapChangedEvent extends BaseEvent {
 
     public LimitMapChangedEvent(ReadOnlyFinancialPlanner newData) {
         this.data = newData;
-        CustomSuggestionProvider.updateLimitDateMap(newData.getLimitMap());
     }
 
     @Override

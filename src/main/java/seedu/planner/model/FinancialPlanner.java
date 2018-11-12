@@ -7,7 +7,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 
-import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
 import seedu.planner.model.autocomplete.DateMap;
 import seedu.planner.model.autocomplete.RecordMap;
 import seedu.planner.model.record.Date;
@@ -67,7 +66,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public void setRecordMap(RecordMap recordMap) {
         this.recordMap.setRecordMap(recordMap);
-        CustomSuggestionProvider.updateRecordMap(recordMap);
     }
 
     public void setLimits(List<Limit> limits) {
@@ -76,7 +74,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     public void setLimitMap(HashMap<String, Integer> limitMap) {
         this.limitsMap.setDateMap(limitMap);
-        CustomSuggestionProvider.updateLimitDateMap(limitMap);
     }
 
     /**

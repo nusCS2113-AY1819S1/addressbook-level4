@@ -1,0 +1,312 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+@import "asciidoctor.css"; /* Default asciidoc style framework - important */
+
+/* Custom block: details */
+
+.sidebarblock.details > .content {
+    border-left: .25rem solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebarblock.details > .content {
+    padding-left: .5rem
+}
+
+.sidebarblock.details {
+    background-color: rgba(255, 0, 0, 0.3);
+    border: none;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+/* Overrides for asciidoctor.css */
+
+a {
+    color: #0074c7;
+}
+
+h1,
+#content h1 > a.link,
+h2,
+h2 > a.link,
+h3,
+h3 > a.link,
+#toctitle,
+#toctitle > a.link,
+.sidebarblock > .content > .title,
+.sidebarblock > .content > .title > a.link,
+h4,
+h4 > a.link,
+h5,
+h5 > a.link,
+h6,
+h6 > a.link {
+    color: #ff2d65;
+}
+
+h2 > a.link:hover {
+    text-decoration: underline;
+    color: red;
+}
+
+h5 > a.link {
+    font-size: 20px;
+    color: red;
+}
+
+.subheader,
+.admonitionblock td.content > .title,
+.audioblock > .title,
+.exampleblock > .title,
+.imageblock > .title,
+.listingblock > .title,
+.literalblock > .title,
+.stemblock > .title,
+.openblock > .title,
+.paragraph > .title,
+.quoteblock > .title,
+table.tableblock > .title,
+.verseblock > .title,
+.videoblock > .title,
+.dlist > .title,
+.olist > .title,
+.ulist > .title,
+.qlist > .title,
+.hdlist > .title {
+    color: rgb(0, 249, 255);
+}
+
+@media screen {
+    #footer {
+        background-color: #919191;
+        border-top: 1px #afafaf solid;
+        border-bottom: 1px #aeaeae solid;
+        font-family: "Open Sans", "DejaVu Sans", sans-serif;
+    }
+
+    #footer-text {
+        color: #000000;
+        line-height: 1;
+    }
+}
+
+/* Utilities */
+
+.container {
+    width: 100%;
+    max-width: 62.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Colors */
+
+.bg-light {
+    background-color: #cececf;
+}
+
+.bg-lighter {
+    background-color: #ebebeb;
+}
+
+:root {
+    --maincolor: #ff706b;
+    --primarycolor: #000000;
+    --secondarycolor: #333333;
+    --tertiarycolor: #772953;
+    --sidebarbackground: #525252;
+    --linkcolor: #fff800;
+    --linkcoloralternate: #fff800;
+    --white: #FFFFFF;
+    --black: #000000;
+}
+
+/* Text styles */
+body {
+    font-family: "Georgia", sans-serif;
+}
+
+h1, h2 {
+    color: var(--primarycolor) !important;
+    font-family: "Georgia", sans-serif;
+}
+
+h3, h4, h5, h6 {
+    color: var(--secondarycolor);
+    font-family: "Georgia", sans-serif;
+}
+
+.title {
+    color: var(--primarycolor) !important;
+    font-family: "Georgia", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+p {
+    font-family: "Georgia", sans-serif ! important;
+    font-size: 20px !important;
+}
+
+#toc.toc2 a:link {
+    color: white;
+}
+
+code {
+    background-color: #d2d2d2 !important;
+    color: #000000;
+}
+
+/* Table styles */
+th {
+    background-color: var(--tertiarycolor);
+    color: var(--white) !important;
+}
+
+#toc.toc2 {
+    background-color: #2C001E;
+    color: white;
+}
+
+#toc.toc2.a {
+    color: white;
+}
+
+#toctitle {
+    color: #0006e9;
+}
+
+/* Responsiveness fixes */
+video {
+    max-width: 100%;
+}
+
+@media all and (max-width: 600px) {
+    table {
+        width: 55vw !important;
+        font-size: 3vw;
+    }
+}
+
+/* Navbar */
+
+.navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    font-family: "Open Sans", "DejaVu Sans", sans-serif;
+    font-size: 1rem;
+    padding: 0px 1rem;
+}
+
+.navbar-lg {
+    font-size: 1.3rem;
+}
+
+.navbar-light {
+    border-bottom: 1px #d2d2d2 solid;
+}
+
+.navbar a {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+}
+
+.navbar-light a {
+    color: #3f3f3f;
+}
+
+.navbar-light a:hover,
+.navbar-light a:focus {
+    border-radius: 12px;
+    background-color: #2c2d2c;
+    color: white;
+}
+
+.navbar a.active,
+.navbar a.active:hover,
+.navbar a.active:focus {
+    font-weight: bold;
+}
+
+.navbar-light a.active {
+    color: #000000;
+}
+.navbar-light a.active:hover,
+.navbar-light a.active:focus {
+    border-radius: 12px;
+    background-color: #2c2d2c;
+    color: white;
+}
+
+.navbar-light .nav-link {
+    border-bottom: 2px transparent solid;
+}
+
+.navbar-light .nav-link.active {
+    border-bottom: 4px #ff2d65 solid;
+}
+
+.navbar-lg .nav-link.active {
+    border-bottom: 0;
+}
+
+.navbar > .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.navbar-brand {
+    display: inline-block;
+    margin-right: 1rem;
+    padding: 0.8rem 0.8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1.25rem;
+}
+
+.navbar-brand img {
+    height: 1.4rem;
+    margin: 0rem 0.4rem;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.navbar-lg .navbar-brand {
+    font-size: 1.7rem;
+}
+
+.navbar-lg .navbar-brand img {
+    height: 2.3rem;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    line-height: inherit;
+}
+
+.nav-link {
+    display: block;
+    margin: 0px;
+    border: 0px;
+    padding: 1rem 1rem;
+}
+
+/* Do not display site header on print mediums */
+@media print {
+    #seedu-header {
+        display: none;
+    }
+
+    #site-header {
+        display: none;
+    }
+}
