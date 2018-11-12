@@ -445,7 +445,7 @@ image::TodoSequenceDiagram.png[width="1000"]
 This feature allows users to complete the to-do task he/she has created.
 
 ==== Current Implementation
-The finishTodo mechanism is facilitated by the `FinishTodoCommand` from the `Logic` component. Upon pressing executing the `finishTodo` command, the to-do task chosen by users will be removed from the `addressbook.xml` in the data folder. 
+The finishTodo mechanism is facilitated by the `FinishTodoCommand` from the `Logic` component. Upon pressing executing the `finishTodo` command, the to-do task chosen by users will be removed from the `addressbook.xml` in the data folder.
 
 Given below is an example usage scenario and how the finishTodo mechanism behaves at each step.
 
