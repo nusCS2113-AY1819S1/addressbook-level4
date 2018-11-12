@@ -1,9 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGENDA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
+
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.model.reminder.Reminder;
-
-import static seedu.address.logic.parser.CliSyntax.*;
 
 //@@author junweiljw
 /**

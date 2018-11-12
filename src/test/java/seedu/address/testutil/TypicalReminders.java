@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_TITLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_AGENDA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_TIME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_AGENDA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_TITLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_TITLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_AGENDA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_TIME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_AGENDA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_TITLE;
 
 import java.util.ArrayList;
 import java.util.Arrays;

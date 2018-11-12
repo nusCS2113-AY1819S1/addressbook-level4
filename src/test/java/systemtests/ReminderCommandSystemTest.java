@@ -1,11 +1,28 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.AGENDA_DESC_REMINDER1;
+import static seedu.address.logic.commands.CommandTestUtil.AGENDA_DESC_REMINDER2;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_REMINDER1;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_REMINDER2;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AGENDA_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TITLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_REMINDER1;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_REMINDER2;
+import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_REMINDER1;
+import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_REMINDER2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_AGENDA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_TITLE;
+import static seedu.address.testutil.TypicalReminders.KEYWORD_MATCHING_REMINDER;
 import static seedu.address.testutil.TypicalReminders.REMINDER1;
 import static seedu.address.testutil.TypicalReminders.REMINDER2;
 import static seedu.address.testutil.TypicalReminders.REMINDER_A;
-import static seedu.address.testutil.TypicalReminders.KEYWORD_MATCHING_REMINDER;
 
 import org.junit.Test;
 
@@ -13,14 +30,11 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.suggestions.WrongCommandSuggestion;
 import seedu.address.model.Model;
-import seedu.address.model.todo.Title;
-//import seedu.address.model.person.Date;
 import seedu.address.model.person.Time;
-//import seedu.address.model.reminder.Title;
 import seedu.address.model.reminder.Date;
-//import seedu.address.model.reminder.Time;
 import seedu.address.model.reminder.Agenda;
 import seedu.address.model.reminder.Reminder;
+import seedu.address.model.todo.Title;
 import seedu.address.testutil.ReminderBuilder;
 import seedu.address.testutil.ReminderUtil;
 
@@ -29,7 +43,7 @@ public class ReminderCommandSystemTest extends AddressBookSystemTest {
 
     @Test
     public void add() {
-        /* ------------------------ Perform reminder operations on the shown unfiltered list --------------------------- */
+        /* ---------------------- Perform reminder operations on the shown unfiltered list ------------------------- */
 
         /* Case: add a reminder
          * -> added
@@ -65,13 +79,13 @@ public class ReminderCommandSystemTest extends AddressBookSystemTest {
                 + AGENDA_DESC_REMINDER1;
         assertCommandSuccess(command, toAdd);
 
-        /* -------------------------- Perform reminder operation on the shown filtered list ---------------------------- */
+        /* ------------------------ Perform reminder operation on the shown filtered list -------------------------- */
 
         /* Case: filters the reminder list before adding -> added */
         showPersonsWithName(KEYWORD_MATCHING_REMINDER);
         assertCommandSuccess(REMINDER_A);
 
-        /* ----------------------------------- Perform invalid reminder operations ------------------------------------- */
+        /* --------------------------------- Perform invalid reminder operations ----------------------------------- */
 
         /* Case: add a duplicate reminder -> rejected */
         command = ReminderUtil.getReminderCommand(REMINDER_A);

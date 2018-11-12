@@ -35,7 +35,7 @@ public class AgendaTest {
         // valid date
         assertTrue(Agenda.isValidAgenda("To discuss milestone 1.4")); // correct
         assertTrue(Agenda.isValidAgenda("-")); // one character
-        assertTrue(Agenda.isValidAgenda("To discuss the importance of " +
-                "having the meeting minutes feature")); // long input
+        assertTrue(Agenda.isValidAgenda("To discuss the importance of "
+                + "having the meeting minutes feature")); // long input
     }
 }

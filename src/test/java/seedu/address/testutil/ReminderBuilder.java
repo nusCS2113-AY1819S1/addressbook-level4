@@ -1,13 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.model.todo.Title;
-//import seedu.address.model.person.Date;
 import seedu.address.model.person.Time;
-//import seedu.address.model.reminder.Title;
-import seedu.address.model.reminder.Date;
-//import seedu.address.model.reminder.Time;
 import seedu.address.model.reminder.Agenda;
+import seedu.address.model.reminder.Date;
 import seedu.address.model.reminder.Reminder;
+import seedu.address.model.todo.Title;
 
 //@@author junweiljw
 /**
