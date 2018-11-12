@@ -19,6 +19,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.student.StudentManager;
+import seedu.address.model.user.User;
+import seedu.address.model.user.UserManager;
 import seedu.address.ui.HtmlTableProcessor;
 
 
@@ -37,6 +39,9 @@ public class DebugCommand extends Command {
         StudentManager.getInstance().initializeModel(model);
         model.resetData(new AddressBook());
         model.commitAddressBook();
+
+        UserManager.getInstance().addUser(new User("defaultUser", "password", 1));
+        UserManager.getInstance().saveUserList();
 
         CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG"),
                 new CourseName("Computer Engineering"), new FacultyName("Faculty of Engineering")));

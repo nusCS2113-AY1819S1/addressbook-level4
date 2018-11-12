@@ -42,7 +42,7 @@ public class HtmlTableProcessor {
 
     public static String getTableHeadStart() {
         return "<table class=\"table table-hover\">\n"
-                + "  <thead>\n"
+                + "  <thead class=\"table-dark\">\n"
                 + "    <tr>\n";
     }
 
