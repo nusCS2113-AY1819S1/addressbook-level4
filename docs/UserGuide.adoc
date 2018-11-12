@@ -251,7 +251,8 @@ image::EditCommandBefore.PNG[width="800"]
 .GUI after using edit command to change the title
 image::EditCommandAfter.PNG[width="800"]
 
-* You have successfully edited the title of the task. Well done!
+ You have successfully edited the title of the task. Well done!
+
 // end::editTask[]
 
 // tag::add_milestone[]

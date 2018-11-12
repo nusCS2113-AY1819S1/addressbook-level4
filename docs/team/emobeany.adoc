@@ -18,7 +18,7 @@ TB is managed by a dedicated team of 4 members and we were tasked to morph an ex
 
 == Summary of contributions
 |===
-|_This section summarises my contributions to the project, including a range of enhancements, from simple and minor ones to major and more complex enhancements._
+|_This section summarises my contributions to the project, including major and minor enhancements to features in TB as well as other contributions made._
 |===
 
 * *Major enhancement*:
@@ -59,9 +59,7 @@ include::../UserGuide.adoc[tag=selectDeadline]
 
 include::../UserGuide.adoc[tag=editTask]
 
-|===
-Future releases v2.0
-|===
+=== Future releases v2.0
 
 include::../UserGuide.adoc[tag=calendar_synchronisation]
 
@@ -80,4 +78,10 @@ include::../DeveloperGuide.adoc[tag=selectDeadlineImplementation]
 include::../DeveloperGuide.adoc[tag=editTask]
 
 include::../DeveloperGuide.adoc[tag=editTaskImplementation]
+
+=== Manual testing instructions
+
+include::../DeveloperGuide.adoc[tag=selectDeadlineTest]
+
+include::../DeveloperGuide.adoc[tag=editTaskTest]
 
