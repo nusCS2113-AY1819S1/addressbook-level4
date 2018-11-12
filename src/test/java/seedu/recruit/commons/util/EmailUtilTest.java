@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-
 import org.junit.rules.ExpectedException;
+
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.testutil.CandidateBuilder;
