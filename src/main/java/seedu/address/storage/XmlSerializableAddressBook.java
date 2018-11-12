@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Events.Event;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.item.Item;
 import seedu.address.model.ledger.Ledger;
@@ -19,7 +20,7 @@ import seedu.address.model.member.Person;
  */
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
-
+    public static final String MESSAGE_DUPLICATE_EVENT = "Evens list contains duplicate event(s).";
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate member(s).";
     public static final String MESSAGE_DUPLICATE_ITEM = "Items list contains duplicate item(s).";
     public static final String MESSAGE_DUPLICATE_LEDGER = "Ledgers list contains duplicate ledger(s).";
@@ -33,6 +34,10 @@ public class XmlSerializableAddressBook {
     @XmlElement
     private List<XmlAdaptedLedger> ledgers;
 
+    @XmlElement
+    private List<XmlAdaptedEvent> events;
+
+
     /**
      * Creates an empty XmlSerializableAddressBook.
      * This empty constructor is required for marshalling.
@@ -41,6 +46,7 @@ public class XmlSerializableAddressBook {
         persons = new ArrayList<>();
         items = new ArrayList<>();
         ledgers = new ArrayList<>();
+        events = new ArrayList<>();
     }
 
     /**
@@ -51,6 +57,7 @@ public class XmlSerializableAddressBook {
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         items.addAll(src.getItemList().stream().map(XmlAdaptedItem::new).collect(Collectors.toList()));
         ledgers.addAll(src.getLedgerList().stream().map(XmlAdaptedLedger::new).collect(Collectors.toList()));
+        events.addAll(src.getEventList().stream().map(XmlAdaptedEvent::new).collect(Collectors.toList()));
     }
 
     /**
@@ -82,6 +89,13 @@ public class XmlSerializableAddressBook {
             }
             addressBook.addLedger(ledger);
         }
+        for (XmlAdaptedEvent e : events) {
+            Event event = e.toModelType();
+            if (addressBook.hasEvent(event)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
+            }
+            addressBook.addEvent(event);
+        }
         return addressBook;
     }
 
@@ -96,6 +110,7 @@ public class XmlSerializableAddressBook {
         }
         return persons.equals(((XmlSerializableAddressBook) other).persons)
                 && items.equals(((XmlSerializableAddressBook) other).items)
-                && ledgers.equals(((XmlSerializableAddressBook) other).ledgers);
+                && ledgers.equals(((XmlSerializableAddressBook) other).ledgers)
+                && events.equals(((XmlSerializableAddressBook) other).events);
     }
 }

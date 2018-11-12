@@ -1,13 +1,19 @@
 package seedu.address.logic.parser.Member;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.Arrays;
+
 import seedu.address.logic.commands.MemberCommand.FindPhoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.member.PhoneContainsKeywordsPredicate;
 
-import java.util.Arrays;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+
+/**
+ * find phone command parser
+ */
 public class FindPhoneCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the FindMajorCommand

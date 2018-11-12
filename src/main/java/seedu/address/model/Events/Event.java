@@ -2,13 +2,16 @@ package seedu.address.model.Events;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.model.tag.Tag;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.tag.Tag;
+
+/**
+ * Presents the event.
+ */
 public class Event {
     private final EventName name;
     private final Venue venue;
@@ -17,7 +20,7 @@ public class Event {
     private final Set<Tag> tags = new HashSet<>();
 
     public Event(EventName name, Venue venue, Description description, EventDate date) {
-        requireAllNonNull(name,venue,description,date);
+        requireAllNonNull(name, venue, description, date);
         this.name = name;
         this.venue = venue;
         this.description = description;
@@ -32,31 +35,38 @@ public class Event {
         return Collections.unmodifiableSet(tags);
     }
 
-    public EventName getEventName(){return name;}
-    public Venue getVenue(){return venue;}
-    public Description getDescription() {return description; }
-    public EventDate getEventDate() {return date;}
+    public EventName getEventName() { return name; }
+    public Venue getVenue() { return venue; }
+    public Description getDescription() { return description; }
+    public EventDate getEventDate() { return date; }
 
+    /**
+     * @param otherEvent
+     * @return to check whether the given event is the same as existing one.
+     */
     public boolean isSameEvent(Event otherEvent) {
-        if(name.equals(otherEvent.name))
+        if ( name.equals(otherEvent.name)) {
             return true;
+        }
         return false;
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, venue, description, date, tags);
     }
 
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getEventName())
+                .append(" Venue: ")
+                .append(getVenue())
+                .append(", Description: ")
+                .append(getDescription())
+                .append(", Date: ")
+                .append(getEventDate());
+        return builder.toString();
+    }
 }
+

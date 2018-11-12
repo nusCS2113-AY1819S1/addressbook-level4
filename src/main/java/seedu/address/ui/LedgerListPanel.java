@@ -1,22 +1,21 @@
 package seedu.address.ui;
 
-import com.google.common.collect.Sets;
+import java.util.logging.Logger;
+
 import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
-import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.LedgerPanelSelectionChangedEvent;
 import seedu.address.model.ledger.Ledger;
 
-import java.util.ArrayList;
-import java.util.logging.Logger;
 
 /**
  * Panel containing the list of ledgers.
@@ -31,12 +30,6 @@ public class LedgerListPanel extends UiPart<Region> {
     @FXML
     private ListView<Ledger> ledgerListView2;
 
-//    public LedgerListPanel(ObservableList<Ledger> ledgerList) {
-//        super(FXML);
-//        setConnections(ledgerList);
-//        registerAsAnEventHandler(this);
-//    }
-
     public LedgerListPanel (ObservableList<Ledger> ledgerList) {
         super(FXML);
         setConnections(ledgerList);
@@ -49,18 +42,6 @@ public class LedgerListPanel extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent();
     }
 
-//    private void setConnections(ObservableSet<Ledger> ledgerList) {
-//        ledgerList.addListener((SetChangeListener.Change<? extends Ledger> c) -> {
-//            if (c.wasAdded()) {
-//                ledgerListView2.getItems().add(c.getElementAdded());
-//            }
-//            if (c.wasRemoved()) {
-//                ledgerListView2.getItems().remove(c.getElementRemoved());
-//            }
-//        });
-//        ledgerListView2.setCellFactory(listView -> new LedgerListViewCell());
-//        setEventHandlerForSelectionChangeEvent();
-//    }
 
     private void setEventHandlerForSelectionChangeEvent() {
         ledgerListView.getSelectionModel().selectedItemProperty()

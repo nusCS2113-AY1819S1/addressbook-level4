@@ -1,16 +1,17 @@
 package seedu.address.model.ledger;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
-import seedu.address.model.ledger.exceptions.DuplicateLedgerException;
-import seedu.address.model.ledger.exceptions.LedgerNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+
+import seedu.address.model.ledger.exceptions.DuplicateLedgerException;
+import seedu.address.model.ledger.exceptions.LedgerNotFoundException;
 
 /**
  * A list of ledgers that enforces uniqueness between its elements and does not allow nulls.

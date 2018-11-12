@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.item.Item;
 
 /**
- * An UI component that displays information of a {@code Item}.
+ * An UI component that displays information of a {@code item}.
  */
 public class ItemCard extends UiPart<Region> {
 
@@ -33,6 +33,8 @@ public class ItemCard extends UiPart<Region> {
     @FXML
     private Label itemQuantity;
     @FXML
+    private Label itemLocation;
+    @FXML
     private FlowPane tags;
 
     public ItemCard(Item item, int displayedIndex) {
@@ -41,6 +43,7 @@ public class ItemCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         itemName.setText(item.getItemName().fullItemName);
         itemQuantity.setText("Quantity: " + String.valueOf(item.getItemQuantity().itemQuantity));
+        itemLocation.setText("Location: " + String.valueOf(item.getItemLocation().fullItemLocation));
     }
 
     @Override

@@ -1,8 +1,8 @@
 package seedu.address.model.ledger;
 
-import java.util.logging.Logger;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 

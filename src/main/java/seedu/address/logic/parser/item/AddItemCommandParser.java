@@ -1,6 +1,7 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.item;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_QUANTITY;
 
@@ -8,9 +9,15 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddItemCommand;
+import seedu.address.logic.commands.item.AddItemCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemLocation;
 import seedu.address.model.item.ItemName;
 import seedu.address.model.item.ItemQuantity;
 
@@ -28,9 +35,10 @@ public class AddItemCommandParser implements Parser<AddItemCommand> {
      */
     public AddItemCommand parse(String args) throws ParseException {
         logger.info("Still parsing...");
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM_NAME, PREFIX_ITEM_QUANTITY);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM_NAME, PREFIX_ITEM_QUANTITY,
+                PREFIX_ITEM_LOCATION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM_NAME, PREFIX_ITEM_QUANTITY)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM_NAME, PREFIX_ITEM_QUANTITY, PREFIX_ITEM_LOCATION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddItemCommand.MESSAGE_USAGE));
         }
@@ -38,10 +46,11 @@ public class AddItemCommandParser implements Parser<AddItemCommand> {
         logger.info("Parsed");
         ItemName itemName = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_ITEM_NAME).get());
         ItemQuantity itemQuantity = ParserUtil.parseItemQuantity(argMultimap.getValue(PREFIX_ITEM_QUANTITY).get());
+        ItemLocation itemLocation = ParserUtil.parseItemLocation(argMultimap.getValue(PREFIX_ITEM_LOCATION).get());
 
-        logger.info("Creating new Item");
-        Item item = new Item(itemName, itemQuantity);
-        logger.info("Created new Item");
+        logger.info("Creating new item");
+        Item item = new Item(itemName, itemQuantity, itemLocation);
+        logger.info("Created new item");
 
         return new AddItemCommand(item);
     }

@@ -20,6 +20,7 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
     ObservableList<Ledger> getLedgerList();
+
     ObservableList<Item> getItemList();
 
     ObservableList<Event> getEventList();

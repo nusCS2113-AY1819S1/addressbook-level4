@@ -1,25 +1,30 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.ItemName;
-import seedu.address.model.item.ItemQuantity;
-import seedu.address.model.ledger.Account;
-import seedu.address.model.ledger.DateLedger;
-import seedu.address.model.member.*;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.Events.Venue;
-import seedu.address.model.Events.Description;
-import seedu.address.model.Events.EventName;
-import seedu.address.model.Events.EventDate;
+import static java.util.Objects.requireNonNull;
 
-import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Events.Description;
+import seedu.address.model.Events.EventDate;
+import seedu.address.model.Events.EventName;
+import seedu.address.model.Events.Venue;
+import seedu.address.model.item.ItemLocation;
+import seedu.address.model.item.ItemName;
+import seedu.address.model.item.ItemQuantity;
+import seedu.address.model.ledger.Account;
+import seedu.address.model.ledger.DateLedger;
+import seedu.address.model.member.Address;
+import seedu.address.model.member.Email;
+import seedu.address.model.member.Major;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
+import seedu.address.model.member.Postalcode;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -64,7 +69,7 @@ public class ParserUtil {
     public static EventName parseEventName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!EventName.CheckValid(trimmedName)) {
+        if (!EventName.checkValid(trimmedName)) {
             throw new ParseException(EventName.MESSAGE_EVENTNAME_CONSTRAINTS);
         }
         return new EventName(trimmedName);
@@ -76,10 +81,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code description} is invalid.
      */
-    public static  Description parseDescription(String description) throws ParseException {
+    public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        if (!Venue.CheckValid(trimmedDescription)) {
+        if (!Venue.checkValid(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_DESCRIPTION_CCONSTRAINT);
         }
         return new Description(trimmedDescription);
@@ -94,8 +99,8 @@ public class ParserUtil {
     public static EventDate parserEventDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if(!EventDate.CheckValid(trimmedDate)) {
-            throw new  ParseException(EventDate.MESSAGE_EVENTDATE_CONSTRAINTS);
+        if (!EventDate.checkValid(trimmedDate)) {
+            throw new ParseException(EventDate.MESSAGE_EVENTDATE_CONSTRAINTS);
         }
         return new EventDate(trimmedDate);
     }
@@ -105,10 +110,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code venue} is invalid.
      */
-    public static  Venue parseVenue(String venue) throws ParseException {
+    public static Venue parseVenue(String venue) throws ParseException {
         requireNonNull(venue);
         String trimmedVenue = venue.trim();
-        if (!Venue.CheckValid(trimmedVenue)) {
+        if (!Venue.checkValid(trimmedVenue)) {
             throw new ParseException(Venue.MESSAGE_VENUE_CONSTRAINT);
         }
         return new Venue(trimmedVenue);
@@ -158,15 +163,31 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     *
+     * @param postalcode
+     * @return
+     * @throws ParseException
+     */
     public static Postalcode parsePostalcode(String postalcode) throws ParseException {
         requireNonNull(postalcode);
         String trimmedPostalcode = postalcode.trim();
+        /**
+         *
+          */
         if (!Postalcode.isValidPostalcode(trimmedPostalcode)) {
             throw new ParseException(Postalcode.MESSAGE_POSTALCODE_CONSTRAINTS);
         }
         return new Postalcode(trimmedPostalcode);
     }
 
+    /**
+     *
+     *
+     * @param major
+     * @return
+     * @throws ParseException
+     */
     public static Major parseMajor(String major) throws ParseException {
         requireNonNull(major);
         String trimmedMajor = major.trim();
@@ -231,6 +252,21 @@ public class ParserUtil {
             throw new ParseException(ItemQuantity.MESSAGE_ITEM_QUANTITY_CONSTRAINTS);
         }
         return new ItemQuantity(trimmedItemQuantity);
+    }
+
+    /**
+     * Parses a {@code String ItemLocation} into a {@code ItemLocation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code itemLocation} is invalid.
+     */
+    public static ItemLocation parseItemLocation(String itemLocation) throws ParseException {
+        requireNonNull(itemLocation);
+        String trimmedItemLocation = itemLocation.trim();
+        if (!ItemLocation.isValidItemLocation(trimmedItemLocation)) {
+            throw new ParseException(ItemLocation.MESSAGE_ITEM_LOCATION_CONSTRAINTS);
+        }
+        return new ItemLocation(trimmedItemLocation);
     }
 
     /**

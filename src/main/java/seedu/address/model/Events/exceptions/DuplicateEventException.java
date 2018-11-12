@@ -6,7 +6,7 @@ package seedu.address.model.Events.exceptions;
  * name).
  */
 
-public class DuplicateEventException extends RuntimeException{
+public class DuplicateEventException extends RuntimeException {
     public DuplicateEventException() {
         super("Operation would result in duplicate event");
     }

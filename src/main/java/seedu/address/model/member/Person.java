@@ -30,7 +30,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Postalcode postalcode, Major major, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Postalcode postalcode, Major major, Set<Tag>
+            tags) {
         requireAllNonNull(name, phone, email, address, postalcode, major, tags);
         this.name = name;
         this.phone = phone;
@@ -57,9 +58,9 @@ public class Person {
         return address;
     }
 
-    public Postalcode getPostalcode() {return postalcode; }
+    public Postalcode getPostalcode() { return postalcode; }
 
-    public Major getMajor() {return major; }
+    public Major getMajor() { return major; }
 
 
 

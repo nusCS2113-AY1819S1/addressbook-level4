@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Represents an Item in the inventory.
+ * Represents an item in the inventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Item {
@@ -15,16 +15,18 @@ public class Item {
     // Identity fields
     private final ItemName itemName;
     private final ItemQuantity itemQuantity;
+    private final ItemLocation itemLocation;
 
     private final Logger logger = LogsCenter.getLogger(Item.class);
 
     /**
      * Every field must be present and not null.
      */
-    public Item(ItemName itemName, ItemQuantity itemQuantity) {
+    public Item(ItemName itemName, ItemQuantity itemQuantity, ItemLocation itemLocation) {
         requireAllNonNull(itemName);
         this.itemName = itemName;
         this.itemQuantity = itemQuantity;
+        this.itemLocation = itemLocation;
     }
 
     public ItemName getItemName() {
@@ -35,8 +37,12 @@ public class Item {
         return itemQuantity;
     }
 
+    public ItemLocation getItemLocation() {
+        return itemLocation;
+    }
+
     /**
-     * Returns true if both items have the same ItemName
+     * Returns true if both items have the same ItemName and ItemLocation
      */
     public boolean isSameItem(Item otherItem) {
         if (otherItem.getItemName() == itemName) {
@@ -45,7 +51,8 @@ public class Item {
         }
 
         return otherItem.getItemName() != null
-                && otherItem.getItemName().equals(getItemName());
+                && otherItem.getItemName().equals(getItemName())
+                && otherItem.getItemLocation().equals(getItemLocation());
     }
 
     /**
@@ -71,7 +78,9 @@ public class Item {
         final StringBuilder builder = new StringBuilder();
         builder.append(getItemName())
                 .append(" ItemQuantity: ")
-                .append(getItemQuantity());
+                .append(getItemQuantity())
+                .append(" ItemLocation: ")
+                .append(getItemLocation());;
         return builder.toString();
     }
 }

@@ -6,13 +6,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.commons.util.StringUtil;
 
 /**
- *  Represents a Item's quantity in the inventory.
+ *  Represents a item's quantity in the inventory.
  *  Guarantees: immutable; is valid as declared in {@link #isValidItemQuantity(String)}
  */
 public class ItemQuantity {
 
     public static final String MESSAGE_ITEM_QUANTITY_CONSTRAINTS =
-            "Item Quantities should only be non-zero unsigned integers, and it should not be blank";
+            "item Quantities should only be non-zero unsigned integers, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,

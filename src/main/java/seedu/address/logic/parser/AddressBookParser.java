@@ -8,17 +8,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddItemCommand;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DecreaseItemCommand;
-import seedu.address.logic.commands.DeleteItemCommand;
-import seedu.address.logic.commands.EditItemCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.IncreaseItemCommand;
 import seedu.address.logic.commands.MemberCommand.AddMemberCommand;
 import seedu.address.logic.commands.MemberCommand.DeleteMemberCommand;
 import seedu.address.logic.commands.MemberCommand.EditMemberCommand;
@@ -34,7 +29,15 @@ import seedu.address.logic.commands.UndoAllCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.eventCommand.AddEventCommand;
 import seedu.address.logic.commands.eventCommand.DeleteEventCommand;
+import seedu.address.logic.commands.eventCommand.EditEventCommand;
 import seedu.address.logic.commands.eventCommand.ListEventCommand;
+import seedu.address.logic.commands.item.AddItemCommand;
+import seedu.address.logic.commands.item.DecreaseItemCommand;
+import seedu.address.logic.commands.item.DeleteItemCommand;
+import seedu.address.logic.commands.item.EditItemCommand;
+import seedu.address.logic.commands.item.FindItemCommand;
+import seedu.address.logic.commands.item.IncreaseItemCommand;
+import seedu.address.logic.commands.item.ListItemCommand;
 import seedu.address.logic.commands.ledger.AddLedgerCommand;
 import seedu.address.logic.commands.ledger.CreditCommand;
 import seedu.address.logic.commands.ledger.DebitCommand;
@@ -49,12 +52,18 @@ import seedu.address.logic.parser.Member.FindPhoneCommandParser;
 import seedu.address.logic.parser.Member.FindPostalcodeCommandParser;
 import seedu.address.logic.parser.event.AddEventCommandParser;
 import seedu.address.logic.parser.event.DeleteEventCommandParser;
+import seedu.address.logic.parser.event.EditEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.item.AddItemCommandParser;
+import seedu.address.logic.parser.item.DecreaseItemCommandParser;
+import seedu.address.logic.parser.item.DeleteItemCommandParser;
+import seedu.address.logic.parser.item.EditItemCommandParser;
+import seedu.address.logic.parser.item.FindItemCommandParser;
+import seedu.address.logic.parser.item.IncreaseItemCommandParser;
 import seedu.address.logic.parser.ledger.AddLedgerCommandParser;
 import seedu.address.logic.parser.ledger.CreditCommandParser;
 import seedu.address.logic.parser.ledger.DebitCommandParser;
 import seedu.address.logic.parser.ledger.DeleteLedgerCommandParser;
-
 /**
  * Parses user input.
  */
@@ -86,10 +95,15 @@ public class AddressBookParser {
         switch(commandWord) {
         case AddEventCommand.COMMAND_WORD: case AddEventCommand.COMMAND_ALIAS:
             return new AddEventCommandParser().parse(arguments);
+
         case DeleteEventCommand.COMMAND_WORD: case DeleteEventCommand.COMMAND_ALIAS:
             return new DeleteEventCommandParser().parse(arguments);
+
         case ListEventCommand.COMMAND_WORD: case ListEventCommand.COMMAND_ALIAS:
             return new ListEventCommand();
+
+        case EditEventCommand.COMMAND_WORD: case EditEventCommand.COMMAND_ALIAS:
+            return new EditEventCommandParser().parse(arguments);
 
         case AddMemberCommand.COMMAND_WORD: case AddMemberCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);
@@ -157,6 +171,12 @@ public class AddressBookParser {
 
         case DecreaseItemCommand.COMMAND_WORD:
             return new DecreaseItemCommandParser().parse(arguments);
+
+        case FindItemCommand.COMMAND_WORD: case FindItemCommand.COMMAND_ALIAS:
+            return new FindItemCommandParser().parse(arguments);
+
+        case ListItemCommand.COMMAND_WORD: case ListItemCommand.COMMAND_ALIAS:
+            return new ListItemCommand();
 
         case UndoAllCommand.COMMAND_WORD:
             return new UndoAllCommand();
