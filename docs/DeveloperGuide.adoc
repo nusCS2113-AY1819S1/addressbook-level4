@@ -491,9 +491,6 @@ Step 7. In the `UniqueBatchList` , the `Batch` that was passed down would be che
 
 Step 8. The `totalQuantity` attribute of the `UniqueBatchList` is then updated by looping through the batches in the list, and is handed up to the `Drink` object which updates its `Quantity` attribute with the value of the `totalQuantity` attribute.
 
-.Sequence Diagram of BuyCommand to StockTakerModelManager
-image::BuyCommandSequenceDiagram1.png[width="400"]
-
 ==== Selling a drink
 
 To facilitate sales of drinks from the stock of the company, sales of drinks from the inventory are conducted with the command `sell` `n/DRINK_NAME` `q/QUANTITY`
