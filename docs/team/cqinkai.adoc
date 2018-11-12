@@ -35,12 +35,11 @@ The following is a list of the main features in Event Manager:
 ** What it does: Sends a reminder to users for any upcoming events (those happening in the next 24 hours) that they have registered for.
 ** Justification: This 
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
 * *Minor enhancement*: added new information fields for the events.
-** a contact field for the name of the person in-charge of the event. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/14[#14]
-** a comment field for the comment section. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/91[#91]
-** an attendee field for the event's attendees. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58]
+** a contact field for the name of the person in-charge of the event. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/14[#14])
+** a comment field for the comment section. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/91[#91])
+** an attendee field for the event's attendees. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58])
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
@@ -49,10 +48,10 @@ The following is a list of the main features in Event Manager:
 ** Project management:
 *** Set up milestones and issue labels for the project on GitHub
 ** Enhancements to existing features:
-*** Morphed the address field into a venue field (https://github.com/CS2113-AY1819S1-T12-1/main/pull/53[#53]
+*** Morphed the address field into a venue field (https://github.com/CS2113-AY1819S1-T12-1/main/pull/53[#53])
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14])
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T09-4/main/issues/132[1], https://github.com/CS2113-AY1819S1-T09-4/main/issues/135[2], https://github.com/CS2113-AY1819S1-T09-4/main/issues/146[3])
 
