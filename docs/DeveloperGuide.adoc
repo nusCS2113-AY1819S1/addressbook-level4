@@ -920,11 +920,59 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 ////
+=== Add a drink
+. Adding a drink into the inventory, using the `Manager` or `Admin` account
+
+.. Test case: `add n/Coca Cola Original2 p/20.00 cp/10.00 t/SoftDrink` +
+   Expected:  Message displayed - "New drink added: Drink name: Coca Cola Original2 Cost price: 10.00 Selling price: 20.00, Tags: [SoftDrink]"
+
+.. Test case: `add n/Coca Cola Original2 p/20.00 cp/10.00 t/SoftDrink`  (repetitive test) +
+   Expected:  Message displayed - "This drink already exists in the inventory list"
+
+=== Delete a drink
+. Deleting a drink from the inventory, using the `Manager` or `Admin` account
+
+.. Prerequisites: There must be at least one drink in the inventory
+.. Test case: `delete 1` +
+   Expected: Message displayed - "Deleted Drink:", followed by deleted drink's details (name, cost price, selling price and tags)
+
+.. Test case: `delete 100000` +
+   Expected: Message displayed - "The drink index provided is invalid"
+
+.. Test case: `delete 0` +
+   Expected: Message displayed - "Invalid command format!"
+
+=== Edit details of a drink
+. Editing a drink's selling price, cost price or tags, using the `Manager` or `Admin` account
+
+.. Prerequisites: There must be at least one drink in the inventory
+.. Test case: `edit 1 cp/400` +
+   Expected: Message displayed - "Edited Drink:", followed by edited drink's details (name, cost price, selling price and tags)
+
+.. Test case: `edit 1 p/1` +
+   Expected: Message displayed - "Edited Drink:", followed by edited drink's details (name, cost price, selling price and tags)
+
+.. Test case: `edit 1 t/PROMO` +
+   Expected: Message displayed - "Edited Drink:", followed by edited drink's details (name, cost price, selling price and tags)
+
+.. Test case: `edit 1 cp/40 p/80` +
+   Expected: Message displayed - "Edited Drink:", followed by edited drink's details (name, cost price, selling price and tags)
+
+.. Test case: `edit 1 cp/40 t/TAG1 t/TAG2` +
+   Expected: Message displayed - "Edited Drink:", followed by edited drink's details (name, cost price, selling price and tags)
+
+.. Test case: `edit 1 cp/bla` +
+   Expected: Message displayed - "Price should contain only numbers and at most 1 decimal point. It must be least 1 digit long with a maximum of 2 digits after the decimal point"
+
+.. Test case: `edit 1 t/PROMO_TOO`
+   Expected: Message displayed - "Tags names should be alphanumeric"
+
+
 
 === Buying a drink
 . Buy a certain quantity of a  drink using the `buy` command, using a `Stock Taker` or `Admin` account
 
-.. Prerequisites: There must be at least one drink in the inventory.
+.. Prerequisites: There must be at least one drink in the inventory, with one drink by the name of NAME.
 .. Test case: `buy n/NAME q/12` +
    Expected: The drink by the name of NAME (case-sensitive) has its quantity increased by 12. The message that "Purchase transaction recorded!" is shown in the results panel.
 .. Test case: `buy n/NAME q/12`, where NAME is the name of a drink that is not in the inventory +
@@ -933,7 +981,7 @@ _{ more test cases ... }_
 === Selling a drink
 . Sell a certain quantity of a drink using the `sell` command, using a `Stock Taker` or `Admin` account
 
-.. Prerequisites: There must be at least one drink in the inventory.
+.. Prerequisites: There must be at least one drink in the inventory, with one drink by the name of NAME.
 .. Test case: `sell n/NAME q/12`, where NAME is the name of a drink that is in the inventory, and its quantity is 12 or more. +
    Expected: The drink by the name of NAME (case-sensitive) has its quantity decreased by 12. The message that "Sale transaction recorded!" is shown in the results panel.
 .. Test case: `sell n/NAME q/12`, where NAME is the name of a drink that is not in the inventory +
@@ -961,7 +1009,7 @@ _{ more test cases ... }_
    Expected: The total cost incurred *in 30 days* is calculated and shown. The `PURCHASE` transactions are listed in the transaction list.
 
 === Analysing revenue
-. Analyse revenue over a period of a day
+. Analyse revenue over a period of a day, using an `Accountant` or `Admin` account
 
 .. Prerequisites: There must be at least one transaction in the transaction list.
 .. Test case: `revenue` +
@@ -980,7 +1028,7 @@ _{ more test cases ... }_
    Expected: The total revenue earned *in 30 days* is calculated and shown. The `SALE` transactions are listed in the transaction list.
 
 === Analysing profit
-. Analyse profit over a period of a day
+. Analyse profit over a period of a day, using an `Accountant` or `Admin` account
 
 .. Prerequisites: There must be at least one transaction in the transaction list.
 .. Test case: `profit` +
@@ -997,4 +1045,28 @@ _{ more test cases ... }_
 .. Prerequisites: There must be at least one transaction in the transaction list.
 .. Test case: `profit -m` +
    Expected: The total profit earned *in 30 days* is calculated and shown. The `SALE` and `PURCHASE` transactions within the time period are listed in the transaction list.
+
+=== Changing password
+. Changing the password using `changePassword`
+
+.. Test case: `changePassword o/123 n/1234` (assuming 123 is the default old password) +
+   Expected:  Password has successfully changed to: 1234
+
+.. Test case: `changePassword o/123xyz n/1234` (assuming 123 is the default old password) +
+   Expected:  The old password is wrong
+
+=== Deleting account
+. Deleting an account, using the `Manager` or `Admin` account
+
+.. Test case: `deleteAccount u/manager` +
+   Expected:The account has been deleted
+
+.. Test case: `deleteAccount u/unknownAccount` +
+   Expected:  This account does not exist
+
+
+
+
+
+
 
