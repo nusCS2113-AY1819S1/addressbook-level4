@@ -2,9 +2,9 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
+import static seedu.address.testutil.TypicalBooks.ART;
+import static seedu.address.testutil.TypicalBooks.BIOLOGY;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -13,8 +13,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.model.book.NameContainsKeywordsPredicate;
+import seedu.address.testutil.BookInventoryBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -23,37 +23,37 @@ public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasBook_nullBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.hasPerson(null);
+        modelManager.hasBook(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasBook_bookNotInBookInventory_returnsFalse() {
+        assertFalse(modelManager.hasBook(ART));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasBook_bookInBookInventory_returnsTrue() {
+        modelManager.addBook(ART);
+        assertTrue(modelManager.hasBook(ART));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredBookList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        modelManager.getFilteredPersonList().remove(0);
+        modelManager.getFilteredBookList().remove(0);
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        BookInventory bookInventory = new BookInventoryBuilder().withBook(ART).withBook(BIOLOGY).build();
+        BookInventory differentBookInventory = new BookInventory();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(bookInventory, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(bookInventory, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -65,20 +65,20 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different bookInventory -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentBookInventory, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        String[] keywords = ART.getName().fullName.split("\\s+");
+        modelManager.updateFilteredBookList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(bookInventory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setBookInventoryFilePath(Paths.get("differentFilePath"));
+        assertTrue(modelManager.equals(new ModelManager(bookInventory, differentUserPrefs)));
     }
 }

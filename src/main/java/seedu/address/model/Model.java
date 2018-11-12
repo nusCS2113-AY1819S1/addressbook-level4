@@ -1,78 +1,96 @@
 package seedu.address.model;
 
+import java.util.Queue;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.model.book.Book;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Book> PREDICATE_SHOW_ALL_BOOKS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyBookInventory newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the BookInventory */
+    ReadOnlyBookInventory getBookInventory();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a book with the same identity as {@code book} exists in the BookInventory.
      */
-    boolean hasPerson(Person person);
+    boolean hasBook(Book book);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Returns book if a book has the corresponding isbn
      */
-    void deletePerson(Person target);
+    Book getBook(String isbn);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Deletes the given book.
+     * The book must exist in the BookInventory.
      */
-    void addPerson(Person person);
+    void deleteBook(Book target);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Adds the given book.
+     * {@code book} must not already exist in the BookInventory.
      */
-    void updatePerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    void addBook(Book book);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Replaces the given book {@code target} with {@code editedBook}.
+     * {@code target} must exist in the BookInventory.
+     * The book identity of {@code editedBook} must not be the same as another existing book in the BookInventory.
+     */
+    void updateBook(Book target, Book editedBook);
+
+    /** Returns an unmodifiable view of the filtered book list */
+    ObservableList<Book> getFilteredBookList();
+
+    /**
+     * Updates the filter of the filtered book list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredBookList(Predicate<Book> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Sorts the books according the their quantity
      */
-    boolean canUndoAddressBook();
+    void sortBooksUsingQuantity();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Completes substring of isbn with isbn from the inventory book list
+     * @param isbnText substring of isbn as entered by user
+     * @return completed string of isbn
      */
-    boolean canRedoAddressBook();
+    Queue<String> getCompleteIsbn(String isbnText);
 
     /**
-     * Restores the model's address book to its previous state.
+     * Returns true if the model has previous BookInventory states to restore.
      */
-    void undoAddressBook();
+    boolean canUndoBookInventory();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Returns true if the model has undone BookInventory states to restore.
      */
-    void redoAddressBook();
+    boolean canRedoBookInventory();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Restores the model's BookInventory to its previous state.
      */
-    void commitAddressBook();
+    void undoBookInventory();
+
+    /**
+     * Restores the model's BookInventory to its previously undone state.
+     */
+    void redoBookInventory();
+
+    /**
+     * Saves the current BookInventory state for undo/redo.
+     */
+    void commitBookInventory();
 }

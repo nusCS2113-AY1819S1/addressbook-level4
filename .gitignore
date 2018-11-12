@@ -18,3 +18,5 @@ classes/
 /bin/
 src/main/resources/docs/
 out/
+main.ipr
+main.iws

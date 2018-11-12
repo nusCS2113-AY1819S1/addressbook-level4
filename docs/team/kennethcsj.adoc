@@ -1,0 +1,62 @@
+= Kenneth Chua Song Jye - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+
+== PROJECT: Book Inventory
+
+---
+
+== Overview
+
+This Project Portfolio summarises my overall contributions to _BookInventory_. It is a *multi-platform* desktop application catered *primarily* for store owners to manage their book supplies - adding, deleting, requesting of books, etc.. Users interact with _BookInventory_ using *Command Line Interface (CLI)*, and has a *Graphic User Interface (GUI)* created with JavaFX. This application was developed by a *team of four* students over a semester with the original source code adapted from the Address Book (Level 4) project by SE-EDU.
+
+== Summary of contributions
+
+This section records my contributions for _BookInventory_.
+
+* *Major enhancement*: added *the ability to conveniently stock, sell and delete books* from the inventory
+** What it does: to execute `stock`/`sell`/`delete` commands, one can select a book's unique ISBN using a shortcut that can scan through all available ISBN - kbd:[Tab] .
+** Justification: As sales are performed *daily*, commands should be executed conveniently.
+** Highlights: This enhancement not only affects existing commands, but also future commands.
+
+* *Minor enhancement*: added *the ability to display a list of books less than or equal to a given quantity* using the `check` command.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kennethcsj[Functional/Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.4` (5 releases) on GitHub.
+** Additional enhancement to existing features:
+*** Added a new cost field to the `add` command.
+*** Enhanced `delete` command to allow delete by Isbn.
+** Documentation:
+*** Updated the initial User Guide to be a representation of _BookInventory_.
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T12-3/main/issues/174[1], https://github.com/CS2113-AY1819S1-T12-3/main/issues/176[2], https://github.com/CS2113-AY1819S1-T12-3/main/issues/182[3], https://github.com/CS2113-AY1819S1-T12-3/main/issues/196[4])
+
+== Contributions to the User Guide
+
+_This part shows the sections that I contributed to the User Guide. My ability to write documentation targeting end-users are showcased here._
+
+include::../UserGuide.adoc[tag=check]
+
+include::../UserGuide.adoc[tag=sell]
+
+include::../UserGuide.adoc[tag=tabfeature]
+
+== Contributions to the Developer Guide
+
+_This part shows the sections that I contributed to the Developer Guide. My ability to write technical documentation and the technical depth of my contributions are showcased here._
+
+include::../DeveloperGuide.adoc[tag=checkcommand]
+
+include::../DeveloperGuide.adoc[tag=sellcommand]
+
+include::../DeveloperGuide.adoc[tag=tabfeature]

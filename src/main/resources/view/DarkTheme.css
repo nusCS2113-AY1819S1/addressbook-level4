@@ -24,6 +24,12 @@
     -fx-opacity: 1;
 }
 
+.command-panel {
+    -fx-font-size: 24;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -327,7 +333,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #bookListPanel, #bookWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

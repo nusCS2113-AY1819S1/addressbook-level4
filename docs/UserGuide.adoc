@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= BookInventory - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,147 +12,186 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: http://github.com/CS2113-AY1819S1-W13-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+image::BookInventoryLogo.png[width="800", align="center"]
+
+_BookInventory_ is catered for students as well as other managerial roles such as bookstore owners and in-house accountants.
+In _BookInventory_, bookstore owners can manage and adjust their book supply.
+In house accountants can check the total revenue and profits for individual books to make better decisions to improve the sales.
+Lastly, students may access available materials as showcased by the bookstore owners.
+
+_BookInventory_ is optimized for those who prefer to work with *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*.
+Hope you enjoy!
+
+== Getting Started
+
+.  Ensure you have Java version `9` or later installed in your Computer.
+.  Downloading the program.
+* You can download the latest `bookinventory.jar` https://github.com/CS2113-AY1819S1-W13-4/main/releases[here]
+* Copy the file to the folder you want to use as the home folder for your BookInventory.
+* Double-click the file to start the app.
 
 == Quick Start
 
-.  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+* Upon opening the application, you should see the GUI (Graphical User Interface) with the following 'Enter Password' prompt as shown in Figure 1 below, in a few seconds.
 +
-image::Ui.png[width="790"]
+.Password Prompt
+image::FirstAppPopUp.png[width="800", align="left"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
++
+.Key-in password
+* A password will be required by the application to use it.
+* If you do not know the password, please contact us using github directly.
+* For the sake of this early development of the program, the password for the admin: "owner"; student: "password"; accountant: "accountant".
+* You will have different access to the features, i.e. commands, depending on your role.
+* If you have entered your password correctly, you should see the following prompts:
++
+.Prompt for Owner if password is correct
+image::OwnerAccess.png[width="300", align="center"]
++
 
-.  Refer to <<Features>> for details of each command.
++
+.Prompt for Accountant if password is correct
+image::AccountantAccess.png[width="300", align="center"]
++
+
++
+.Prompt for Other Users if password is correct
+image::OtherAccess.png[width="300", align="center"]
++
+
++
+* Now you are ready to explore _BookInventory_!
+
 
 [[Features]]
 == Features
 
-====
-*Command Format*
+In this segment, you will be briefed on what each user interface does.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+=== Command Box
+
+Input Commands
+
+* You can simply type the command in the command box as shown in Figure 5. Hit kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
++
+.Command Box shown in red box
+image::CommandBox.png[width="800", align="left"]
++
+* You may try out the following sample commands:
+
+** *`help`* : view all commands available
+** *`list`* : list all books
+** **`add`**`n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/30.90` : adds a book named `Harry Potter` to the Inventory List.
+** *`clear`* : clears the entire list
+** *`exit`* : exits the app
+
+==== Command Format
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Harry Potter`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Harry Potter t/cs2113t` or as `n/Harry Potter`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-====
+* Items in brackets are *required* and always *private* e.g. `q/QUANTITY (c/COST)`
+* Items in arrow brackets are commands that are commands available depending on the user e.g. <Owner> means command only usable by Owner.
+
+=== Book List
+
+Beginning from the left, you should find a panel of books, each with 4 parameters.
+They are `TAGS`, books `ISBN`, `QUANTITY` of books and `COST` of book respectively.
+These are the available books which the bookstore owners have placed up for display.
+.  If you are an owner, refer to <<Commands for Bookstore Owners>> to begin managing your book inventory.
+
+.Command Panel
+image::BookList.png[width="400", align="left"]
+
+=== Request List
+
+The middle panel is designed to show Bookstore Owners the requests made by students.
+
+If you are a student, you may minimize this panel as this panel will appear empty to you.
+Refer to <<Commands for Students>> to find out what you can do in _BookInventory_.
+
+=== Command Panel
+
+This design will come in handy if you are new to _BookInventory_ or a non-tech savvy individual.
+Simply click on a command and the Command Box will display the command.
+
+.Command Panel
+image::CommandPanel.png[width="250", align="left"]
+
+* A command panel is located at the right side of the application. This is suited for beginner users.
+* To select a command, click on any command.
+* A message will pop up on the result display, showing you information and the syntax of the command. A command template will also be given in the command box. You are then required to fill in the remaining fields by following the example given. A screenshot of an example is shown below for your reference.
++
+image::command_panel_result.png[align="left"]
++
+Note: For advanced users, you are still able to press kbd:[tab] to cycle through the ISBN.
+
+// tag::tabfeature[]
+==== Cycling through existing Isbn: kbd:[Tab]
+
+You can auto-fill the Isbn field with existing ones in the Inventory to save the hassle of having to type the entire Isbn of a book. +
+Format: kbd:[Tab]
+
+Examples:
+
+* `sell i/` +
+kbd:[Tab] (completes the `Isbn` field for `sell i/` with the Isbn of the first book in the inventory) +
+ E.g. `sell i/9782123456803`
+
+* `sell i/978` +
+kbd:[Tab] (completes the `Isbn` field for `sell i/978` with the first Isbn of a book that contains `978` in the inventory) +
+E.g. `sell i/9782123456803`
+
+* `sell i/777` +
+kbd:[Tab] (does not complete the `Isbn` field as inventory does not contains books with Isbn starting with `777`) +
+E.g. `sell i/777`
+// end::tabfeature[]
+
+=== Full Screen Mode
+
+Hit F11 to toggle between full-screen mode and windowed mode. A full-screen toggle button can also be found under the drop-down menu of the top bar under “Window”.
+
+== Commands for Students
+
+In this segment, you may find out what commands you can perform in _BookInventory_.
+As a student, you are not granted administrative rights.
 
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Exiting the program : `exit`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Exits the program. +
+Format: `exit`
 
-[TIP]
-A person can have any number of tags (including 0)
+=== Locating book by Name: `find`
 
-Examples:
-
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-=== Listing all persons : `list`
-
-Shows a list of all persons in the address book. +
-Format: `list`
-
-=== Editing a person : `edit`
-
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Finds books which names contain any of the given keywords from the inventory. +
+Format: `find KEYWORD [MORE KEYWORDS]`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
-
-Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-=== Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case insensitive. e.g `biology` will match `Biology`
+* The order of the keywords does not matter. e.g. `Chemistry Biology` will match `Biology Chemistry`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Substrings of names will be matched e.g. `Chem` will match `Chemistry`
+* Books matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
-Examples:
+Example:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
-
-=== Deleting a person : `delete`
-
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
-
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
-
-=== Selecting a person : `select`
-
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
-
-****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+* `find Biology` +
+Returns `biology`
+* `find Biology Chemistry` +
+Returns any books having names `Biology` or `Chemistry`
 
 === Listing entered commands : `history`
 
@@ -164,32 +203,10 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]
-=== Undoing previous command : `undo`
+=== Listing all books : `list`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
-====
-
-Examples:
-
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
-
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+Shows a list of all books in the inventory list. +
+Format: `list`
 
 === Redoing the previously undone command : `redo`
 
@@ -198,35 +215,230 @@ Format: `redo`
 
 Examples:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+* `delete i/978-2-12-345680-3` +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
+`redo` (reapplies the `delete i/978-2-12-345680-3` command) +
 
-* `delete 1` +
+* `delete i/978-2-12-345680-3` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
+* `delete i/978-2-12-345680-3` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
+`redo` (reapplies the `delete i/978-2-12-345680-3` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+=== Requesting for a book : `request`
+
+Requests to buy a book in the inventory. +
+Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
+
+****
+*   Students may indicate interest by requesting an item of a certain ISBN.
+•	The email given helps bookstore owners confirm order with the requester. It is up to the owner's preference to decide whether he/she wishes to accept the request.
+•	Possible reasons may include: Item is not a book, item not found in bookstore (Unable to find stock), quantity demanded too high.
+•	Note: This app does not have an automatic email response from owner. Thus, it depends on the owner’s personal preference to decide if he/she wishes to reply.
+****
+
+Examples:
+
+* `request i/9780321693624 e/lxh1996@gmail.com q/2` +
+Request for 2 books of book ISBN 9780321693624, with email provided.
+
+* `request i/9780205677207 e/krw1998@gmail.com q/21` +
+Request for 21 books of book ISBN 9780205677207, with email provided.
+
+[NOTE]
+====
+* ISBN input must be valid. Please refer to an online website to search for the book ISBN.
+* It is necessary for you to provide an email so that the owner can contact you.
+* Quantity input is capped at 999. You are unable to request beyond this amount.
+====
+
+// tag::undoredo[]
+=== Undoing previous command : `undo`
+
+Restores the inventory book to the state before the previous _undoable_ command was executed. +
+Format: `undo`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the inventory book's content (`add`, `delete`, `stock`, `sell` and `clear`).
+====
+
+Examples:
+
+* `delete i/978-2-12-345680-3` +
+`list` +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
+
+* `check 4` +
+`list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
+
+* `delete i/978-2-12-345680-3` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
+
+
+== Commands for Bookstore In-house Accountants
+
+If you are an accountant, you can access the aforementioned commands as well as the following.
+
+=== Display account data : `stats`
+
+Displays the total revenue made. +
+Format: `stats`
+
+== Commands for Bookstore Owners
+
+If you are a bookstore owner, you are granted access to all available commands in _BookInventory_.
+Additional commands below are catered for your convenience.
+
+=== Adding a book: `add`
+
+Adds a book to the inventory list +
+Format: `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...`
+
+[TIP]
+A book can have any number of tags (including 0) +
+
+****
+* ISBNs are calculated using a specific mathematical formula and include a check digit to validate the number. Random invalid 10 to 13 digit values will produce an error
+* ISBN field allows input with and without dashes
+* PRICE field is the selling price of the book
+* COST field is the cost price of the book
+****
+
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the BookInventory. +
 Format: `clear`
 
-=== Exiting the program : `exit`
+// tag::check[]
+=== Check Inventory: `check`
 
-Exits the program. +
-Format: `exit`
+Finds books with quantity less than or equal to the given input value. List of books displayed in ascending order based on quantity left +
+Format: `check QUANTITY`
+
+****
+* QUANTITY only accepts input between 0 and 999, inclusive
+****
+
+Example:
+
+* `check 4` +
+Displays list of all books with quantity less than or equal to 4.
+// end::check[]
+
+=== Deleting a book : `delete`
+
+Deletes the specified book from the inventory list. +
+Format: `delete INDEX` OR `delete i/ISBN13`
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd book in the displayed list.
+* `delete i/978-2-12-345680-3` +
+Deletes the book with the corresponding iSBN13 from the inventory list.
+
+
+=== Deleting a request : `deleterequest`
+
+Deletes the specified request from the request list. Strictly for bookstore owners. +
+Format: `deleterequest INDEX`
+
+Examples:
+
+* `deleterequest 2` +
+Deletes the 2nd request in the displayed request list.
+
+* `deleterequest 27` +
+Deletes the 27th request in the displayed request list.
+
+
+=== Editing a book : `edit`
+
+Edits an existing book in the inventory book. +
+Format: `edit INDEX [n/NAME] [i/ISBN] [p/PRICE] [c/COST] [t/TAG]...`
+
+****
+* Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* Quantity Field cannot be an input values. Use `stock` and `sell` to change Quantity Field
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 p/20 n/Chemistry` +
+Edits the price and name of the 1st book to be `20` and `Chemistry` respectively.
+* `edit 2 c/30 t/` +
+Edits the cost of the 2nd book to be `30` and clears all existing tags.
+
+// tag::sell[]
+=== Decrease Quantity of Book (Number of Books Sold) : `sell`
+
+Decrease the quantity of an existing book in the inventory list. +
+Format: `sell INDEX q/QUANTITY` OR `sell i/ISBN13 q/QUANTITY`
+
+****
+* Decrease the quantity at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
+* Decrease the quantity of the book with the respective ISBN. ISBN is *unique* to each book
+* Existing quantity will decrease by the input value.
+****
+
+Examples:
+
+* `list` +
+`sell 1 q/5` +
+Decrease the quantity available of the 1st book by 5.
+* `sell i/978-2-12-345680-3 q/4` +
+Decrease the quantity available for the book with the corresponding ISBN13 by 4.
+// end::sell[]
+
+=== Increase Quantity of Book (Number of Books Ordered): `stock`
+
+Increase the quantity of an existing book in the inventory list. +
+Format: `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY`
+
+****
+* Increase the stock at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
+* Increase the quantity of the book with the respective ISBN. ISBN is *unique* to each book. Quantity *must be a positive integer* 1, 2, 3, ...
+* Existing quantity will be increase by the input value.
+****
+
+Examples:
+
+* `list` +
+`stock 2 q/6` +
+Increase the quantity available of the 2nd book by 6.
+* `stock i/978-2-12-345680-3 q/5` +
+Increase the quantity available for the book with the corresponding ISBN13 by 5.
+Examples:
+
+* `add n/Harry Potter i/9781408855713 p/60.70 q/100 c/30.90 t/difficult`
+* `add n/Lord of the Rings i/9789655171990 p/59.90 q/271 c/20.99`
+
+=== Toggle request panel : `togglerequests`
+
+Toggle the request panel. When toggled off, requests are hidden and request panel can be minimized. Strictly for bookstore owners. +
+Format: `togglerequests`
+
+== Data Storage
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+BookInventory data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -238,23 +450,49 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your          previous Inventory Book folder. +
+
+*Q*: How to install Java? +
+*A*: Visit https://docs.oracle.com/javase/10/install/overview-jdk-10-and-jre-10-installation.html for more information +
+
+*Q*: How do I get the latest version? +
+*A*: Watch us on github [https://github.com/CS2113-AY1819S1-W13-4] to get the latest updates
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
+=== Commands for Students
 * *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
+* *Exit* : `exit`
+* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `find biology chemistry`
+* *List* : `list`
 * *History* : `history`
-* *Undo* : `undo`
 * *Redo* : `redo`
+* *Request* : `request i/ISBN13 e/EMAIL q/QUANTITY` +
+e.g. `request i/978-2-12-345680-3 e/johnd@gmail.com q/5`
+* *Undo* : `undo`
+
+=== Additional Commands for Accountants
+* *Display Statistics* : `stats`
+
+=== Additional Commands for Owners
+* *Add* : `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...` +
+e.g. `add n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/90 t/difficult`
+* *Check* : `check QUANTITY` +
+e.g. `check 4`
+* *Clear* : `clear`
+* *Delete* : `delete INDEX` OR `delete i/ISBN13` +
+e.g. `delete 1` OR `delete i/978-2-12-345680-3`
+* *DeleteRequest* : `deleterequest INDEX` +
+e.g. `deleterequest 1`
+* *Edit* : `edit INDEX n/NAME i/ISBN13 p/PRICE c/COST [t/TAG]...` +
+e.g. `edit INDEX n/Chemistry p/30.00`
+* *Sell* : `sell INDEX q/QUANTITY` OR `sell i/ISBN13 q/QUANTITY` +
+e.g. `sell 1 q/8` OR `sell i/978-2-12-345680-3 q/8`
+* *Stock* : `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY` +
+e.g. `stock 1 q/8` OR `stock i/978-2-12-345680-3 q/8`
+
+
+
+
+

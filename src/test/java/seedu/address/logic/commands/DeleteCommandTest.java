@@ -5,10 +5,13 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showBookAtIndex;
+import static seedu.address.testutil.TypicalArgTypes.ARGS_INDEX;
+import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BOOK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ONE_BASED_FIRST_BOOK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ONE_BASED_SECOND_BOOK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BOOK;
 
 import org.junit.Test;
 
@@ -18,7 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.book.Book;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -26,134 +29,134 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalBookInventory(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Book bookToDelete = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        expectedModel.commitAddressBook();
+        ModelManager expectedModel = new ModelManager(model.getBookInventory(), new UserPrefs());
+        expectedModel.deleteBook(bookToDelete);
+        expectedModel.commitBookInventory();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBookList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(Integer.toString(outOfBoundIndex.getOneBased()) , ARGS_INDEX);
 
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showBookAtIndex(model, INDEX_FIRST_BOOK);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Book bookToDelete = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BOOK_SUCCESS, bookToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        expectedModel.commitAddressBook();
-        showNoPerson(expectedModel);
+        Model expectedModel = new ModelManager(model.getBookInventory(), new UserPrefs());
+        expectedModel.deleteBook(bookToDelete);
+        expectedModel.commitBookInventory();
+        showNoBook(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showBookAtIndex(model, INDEX_FIRST_BOOK);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        Index outOfBoundIndex = INDEX_SECOND_BOOK;
+        // ensures that outOfBoundIndex is still in bounds of BookInventory list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getBookInventory().getBookList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(Integer.toString(outOfBoundIndex.getOneBased()) , ARGS_INDEX);
 
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
     }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        expectedModel.commitAddressBook();
+        Book bookToDelete = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX);
+        Model expectedModel = new ModelManager(model.getBookInventory(), new UserPrefs());
+        expectedModel.deleteBook(bookToDelete);
+        expectedModel.commitBookInventory();
 
-        // delete -> first person deleted
+        // delete -> first book deleted
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        // undo -> reverts addressbook back to previous state and filtered book list to show all persons
+        expectedModel.undoBookInventory();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // redo -> same first person deleted again
-        expectedModel.redoAddressBook();
+        // redo -> same first book deleted again
+        expectedModel.redoBookInventory();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBookList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(Integer.toString(outOfBoundIndex.getOneBased()) , ARGS_INDEX);
 
-        // execution failed -> address book state not added into model
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        // execution failed -> BookInventory state not added into model
+        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
 
-        // single address book state in model -> undoCommand and redoCommand fail
+        // single BookInventory state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 
     /**
-     * 1. Deletes a {@code Person} from a filtered list.
+     * 1. Deletes a {@code Book} from a filtered list.
      * 2. Undo the deletion.
-     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted person in the
+     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted book in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the person object regardless of indexing.
+     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the book object regardless of indexing.
      */
     @Test
-    public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    public void executeUndoRedo_validIndexFilteredList_sameBookDeleted() throws Exception {
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX);
+        Model expectedModel = new ModelManager(model.getBookInventory(), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        expectedModel.deletePerson(personToDelete);
-        expectedModel.commitAddressBook();
+        showBookAtIndex(model, INDEX_SECOND_BOOK);
+        Book bookToDelete = model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased());
+        expectedModel.deleteBook(bookToDelete);
+        expectedModel.commitBookInventory();
 
-        // delete -> deletes second person in unfiltered person list / first person in filtered person list
+        // delete -> deletes second book in unfiltered book list / first book in filtered book list
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        // undo -> reverts inventory book back to previous state and filtered book list to show all books
+        expectedModel.undoBookInventory();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(personToDelete, model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
-        // redo -> deletes same second person in unfiltered person list
-        expectedModel.redoAddressBook();
+        assertNotEquals(bookToDelete, model.getFilteredBookList().get(INDEX_FIRST_BOOK.getZeroBased()));
+        // redo -> deletes same second book in unfiltered book list
+        expectedModel.redoBookInventory();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_ONE_BASED_SECOND_BOOK, ARGS_INDEX);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_ONE_BASED_FIRST_BOOK, ARGS_INDEX);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -162,16 +165,16 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different book -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+    private void showNoBook(Model model) {
+        model.updateFilteredBookList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredBookList().isEmpty());
     }
 }

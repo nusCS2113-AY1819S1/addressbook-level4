@@ -13,92 +13,142 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.StatisticCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
+import seedu.address.commons.util.JsonUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.model.BookInventory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.statistic.Statistic;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
+import seedu.address.request.ReadOnlyRequests;
+import seedu.address.request.RequestList;
+import seedu.address.request.requestmodel.RequestModel;
+import seedu.address.request.requestmodel.RequestModelManager;
+import seedu.address.request.requeststorage.RequestListStorage;
+import seedu.address.request.requeststorage.RequestListStorageManager;
+import seedu.address.request.requeststorage.RequestStorage;
+import seedu.address.request.requeststorage.XmlRequestListStorage;
+import seedu.address.storage.BookInventoryStorage;
+import seedu.address.storage.InventoryStorage;
+import seedu.address.storage.InventoryStorageManager;
+import seedu.address.storage.JsonStatisticStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
+import seedu.address.storage.StatisticsStorage;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.XmlBookInventoryStorage;
+import seedu.address.ui.SubmitBox;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
+
 
 /**
  * The main entry point to the application.
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
     protected Logic logic;
-    protected Storage storage;
+    protected InventoryStorage storage;
+    protected RequestStorage requestStorage;
+    protected StatisticsStorage statisticsStorage;
     protected Model model;
+    protected RequestModel requestModel;
     protected Config config;
     protected UserPrefs userPrefs;
-
+    protected SubmitBox submitBox;
+    protected StatisticCenter statisticCenter = StatisticCenter.getInstance();
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing BookInventory ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
-
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
+        BookInventoryStorage bookInventoryStorage = new XmlBookInventoryStorage(userPrefs.getBookInventoryFilePath());
+        storage = new InventoryStorageManager(bookInventoryStorage, userPrefsStorage);
+        RequestListStorage requestListStorage = new XmlRequestListStorage(userPrefs.getRequestListFilePath());
+        requestStorage = new RequestListStorageManager(requestListStorage, userPrefsStorage);
+        statisticsStorage = new JsonStatisticStorage(userPrefs.getStatisticFilePath());
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model);
+        requestModel = initModelManager(requestStorage, userPrefs);
+
+
+        logic = new LogicManager(model, requestModel);
 
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+        initStatisticCenter();
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s BookInventory and {@code userPrefs}. <br>
+     * The data from the sample inventory book will be used instead if {@code storage}'s inventory book is not found,
+     * or an empty inventory book will be used instead if errors occur when reading {@code storage}'s inventory book.
      */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+    private Model initModelManager(InventoryStorage storage, UserPrefs userPrefs) {
+        Optional<ReadOnlyBookInventory> bookInventoryOptional;
+        ReadOnlyBookInventory initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            bookInventoryOptional = storage.readBookInventory();
+            if (!bookInventoryOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample BookInventory");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = bookInventoryOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty BookInventory");
+            initialData = new BookInventory();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty BookInventory");
+            initialData = new BookInventory();
         }
 
         return new ModelManager(initialData, userPrefs);
+    }
+
+    /**
+     * Returns a {@code RequestModelManager} with the data from
+     * {@code requestStorage}'s request list and {@code userPrefs}. <br>
+     * The data from the sample request list will be used instead if {@code requestStorage}'s request list is not found,
+     * or an empty request list will be used instead if errors occur when reading {@code storage}'s request list.
+     */
+    private RequestModel initModelManager(RequestListStorage requestStorage, UserPrefs userPrefs) {
+        Optional<ReadOnlyRequests> requestListOptional;
+        ReadOnlyRequests initialData;
+        try {
+            requestListOptional = requestStorage.readRequestList();
+            if (!requestListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample RequestList");
+            }
+            initialData = requestListOptional.orElseGet(SampleDataUtil::getSampleRequestList);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty RequestList");
+            initialData = new RequestList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty RequestList");
+            initialData = new RequestList();
+        }
+
+        return new RequestModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -159,7 +209,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty BookInventory");
             initializedPrefs = new UserPrefs();
         }
 
@@ -177,20 +227,60 @@ public class MainApp extends Application {
         EventsCenter.getInstance().registerHandler(this);
     }
 
+    /**
+     * Loads copy of statistic from json
+     **/
+    private void initStatisticCenter() {
+        Path statisticFilePath = statisticsStorage.getStatisticFilePath();
+        logger.info("Using statistic file : " + statisticFilePath);
+
+        try {
+            Optional<Statistic> statisticOptional = statisticsStorage.readStatistic();
+            StatisticCenter.getInstance().loadStatistic(statisticOptional.orElse(new Statistic(11, 2018)));
+        } catch (DataConversionException e) {
+            logger.warning("Statistic file at " + statisticFilePath + " is not in the correct format. "
+                    + "Using default statistics");
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty statistic");
+        }
+
+        if (StatisticCenter.getInstance().getStatistic().getInventory().toString().equals(Statistic.STARTING_FIGURE)) {
+            StatisticCenter.getInstance().calibrateInventory(model.getBookInventory());
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting BookInventory " + MainApp.VERSION);
         ui.start(primaryStage);
+        primaryStage.setOnCloseRequest(e -> {
+            final boolean exited = SubmitBox.display("Exit BookInventory",
+                    "Are you sure you want to exit BookInventory?");
+            if (!exited) {
+                e.consume();
+            } else {
+                stop();
+            }
+        });
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping BookInventory ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
+            requestStorage.saveUserPrefs(userPrefs);
+
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+        }
+
+        try {
+            JsonUtil.saveJsonFile(
+                    StatisticCenter.getInstance().getStatistic(), statisticsStorage.getStatisticFilePath());
+        } catch (IOException e) {
+            logger.warning("Failed to save statistic file : " + StringUtil.getDetails(e));
         }
         Platform.exit();
         System.exit(0);
@@ -205,4 +295,5 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

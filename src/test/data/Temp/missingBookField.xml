@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Book with missing name field -->
+<book>
+    <isbn>9482424</isbn>
+    <price>4.90</price>
+    <cost>3.90</cost>
+    <quantity>4</quantity>
+    <tagged>friends</tagged>
+</book>

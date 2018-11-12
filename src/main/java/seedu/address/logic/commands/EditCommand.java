@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,93 +15,109 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.StatisticCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.book.Book;
+import seedu.address.model.book.Cost;
+import seedu.address.model.book.Isbn;
+import seedu.address.model.book.Name;
+import seedu.address.model.book.Price;
+import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing book in the inventory book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the book identified "
+            + "by the index number used in the displayed book list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_ISBN + "ISBN] "
+            + "[" + PREFIX_PRICE + "PRICE] "
+            + "[" + PREFIX_COST + "COST] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_ISBN + "978-3-16-148410-0 "
+            + PREFIX_PRICE + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_QUANTITY_PRESENT = "Quantity Field Present.\n" + "Unable to edit Book";
+    public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the BookInventory.";
+    public static final String COMMAND_SYNTAX = COMMAND_WORD
+            + " " + PREFIX_NAME
+            + " " + PREFIX_COST
+            + " " + PREFIX_PRICE
+            + " " + PREFIX_TAG
+            + " " + PREFIX_ISBN;
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditBookDescriptor editBookDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the book in the filtered book list to edit
+     * @param editBookDescriptor details to edit the book with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditBookDescriptor editBookDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editBookDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editBookDescriptor = new EditBookDescriptor(editBookDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Book> lastShownList = model.getFilteredBookList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Book bookToEdit = lastShownList.get(index.getZeroBased());
+        Book editedBook = createEditedBook(bookToEdit, editBookDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        StatisticCenter.getInstance().getStatistic().getInventory().decrease(
+                Float.toString(Float.parseFloat(bookToEdit.getCost().toString())
+                        - Float.parseFloat(editedBook.getCost().toString())),
+                bookToEdit.getQuantity().toString()
+        );
+
+        if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
+            throw new CommandException(MESSAGE_DUPLICATE_BOOK);
         }
 
-        model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        model.updateBook(bookToEdit, editedBook);
+        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
+        model.commitBookInventory();
+        return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Book} with the details of {@code bookToEdit}
+     * edited with {@code editBookDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Book createEditedBook(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
+        assert bookToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());
+        Isbn updatedIsbn = editBookDescriptor.getIsbn().orElse(bookToEdit.getIsbn());
+        Price updatedPrice = editBookDescriptor.getPrice().orElse(bookToEdit.getPrice());
+        Cost updatedCost = editBookDescriptor.getCost().orElse(bookToEdit.getCost());
+        Quantity updatedQuantity = editBookDescriptor.getQuantity().orElse(bookToEdit.getQuantity());
+        Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Book(updatedName, updatedIsbn, updatedPrice, updatedCost, updatedQuantity, updatedTags);
     }
 
     @Override
@@ -119,31 +135,33 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editBookDescriptor.equals(e.editBookDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the book with. Each non-empty field value will replace the
+     * corresponding field value of the book.
      */
-    public static class EditPersonDescriptor {
+    public static class EditBookDescriptor {
         private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
+        private Isbn isbn;
+        private Price price;
+        private Cost cost;
+        private Quantity quantity;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditBookDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditBookDescriptor(EditBookDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setIsbn(toCopy.isbn);
+            setPrice(toCopy.price);
+            setCost(toCopy.cost);
+            setQuantity(toCopy.quantity);
             setTags(toCopy.tags);
         }
 
@@ -151,7 +169,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, isbn, price, cost, quantity, tags);
         }
 
         public void setName(Name name) {
@@ -162,28 +180,37 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setIsbn(Isbn isbn) {
+            this.isbn = isbn;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Isbn> getIsbn() {
+            return Optional.ofNullable(isbn);
+
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setPrice(Price price) {
+            this.price = price;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Price> getPrice() {
+            return Optional.ofNullable(price);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setCost(Cost cost) {
+            this.cost = cost;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Cost> getCost() {
+            return Optional.ofNullable(cost);
+        }
+
+        public void setQuantity(Quantity quantity) {
+            this.quantity = quantity;
+        }
+
+        public Optional<Quantity> getQuantity() {
+            return Optional.ofNullable(quantity);
         }
 
         /**
@@ -211,17 +238,18 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditBookDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditBookDescriptor e = (EditBookDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getIsbn().equals(e.getIsbn())
+                    && getPrice().equals(e.getPrice())
+                    && getCost().equals(e.getCost())
+                    && getQuantity().equals(e.getQuantity())
                     && getTags().equals(e.getTags());
         }
     }

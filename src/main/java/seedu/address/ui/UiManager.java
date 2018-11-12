@@ -53,9 +53,12 @@ public class UiManager extends ComponentManager implements Ui {
 
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
-            mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts();
-
+            boolean []isAdmin = {false};
+            if (mainWindow.show(isAdmin)) {
+                mainWindow.fillInnerPartsAdmin(); //This should be called before creating other UI parts
+            } else {
+                mainWindow.fillInnerPartsStudent();
+            }
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
@@ -117,4 +120,5 @@ public class UiManager extends ComponentManager implements Ui {
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
     }
+
 }

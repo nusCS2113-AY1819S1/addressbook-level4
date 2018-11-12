@@ -5,16 +5,20 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.RequestPanelChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
@@ -32,10 +36,15 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private CheckPassword checkPassword;
 
+    //Check status of panel;
+    private boolean panelIsShowing;
     // Independent Ui parts residing in this Ui container
+    private CommandPanel commandPanel;
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private BookListPanel bookListPanel;
+    private RequestListPanel requestListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -44,13 +53,25 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane browserPlaceholder;
 
     @FXML
+    private HBox commandPanelPlaceholder;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private MenuItem fullScreenMenuItem;
+
+    @FXML
+    private StackPane bookListPanelPlaceholder;
+
+    @FXML
+    private VBox requestList;
+
+    @FXML
+    private StackPane requestListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -73,8 +94,8 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
         registerAsAnEventHandler(this);
-
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -83,6 +104,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(fullScreenMenuItem, KeyCombination.valueOf("F11"));
     }
 
     /**
@@ -116,23 +138,71 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Fills up all the
+     * placeholders of this window for Admin.
      */
-    void fillInnerParts() {
+    void fillInnerPartsAdmin() {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        bookListPanel = new BookListPanel(logic.getFilteredBookList());
+        bookListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
+
+        requestListPanel = new RequestListPanel(logic.getFilteredRequestList());
+        requestListPanelPlaceholder.getChildren().addAll(requestListPanel.getRoot());
+
+        panelIsShowing = true;
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getBookInventoryFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        StatusBarFooter requestStatusBarFooter = new StatusBarFooter(prefs.getRequestListFilePath());
+        statusbarPlaceholder.getChildren().add(requestStatusBarFooter.getRoot());
+
+        CommandBox commandBox = new CommandBox(logic);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        commandPanel = new CommandPanel(commandBox);
+        commandPanelPlaceholder.getChildren().add(commandPanel.getRoot());
+    }
+    /**
+     *  * * Fills up all the
+     * placeholders of this window for Students.
+     */
+    void fillInnerPartsStudent() {
+        browserPanel = new BrowserPanel();
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+
+        bookListPanel = new BookListPanel(logic.getFilteredBookList());
+        bookListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
+
+        ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getBookInventoryFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        commandPanel = new CommandPanel(commandBox);
+        commandPanelPlaceholder.getChildren().add(commandPanel.getRoot());
+    }
+
+    @Subscribe
+    public void handleRequestPanelChangedEvent(RequestPanelChangedEvent rpce) {
+        if (panelIsShowing) {
+            requestListPanelPlaceholder.setVisible(false);
+            requestList.setManaged(false);
+            panelIsShowing = false;
+        } else {
+            requestListPanelPlaceholder.setVisible(true);
+            requestList.setManaged(true);
+            panelIsShowing = true;
+        }
     }
 
     void hide() {
@@ -174,9 +244,29 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.focus();
         }
     }
+    /**
+     * Toggles fullscreen in MainWindow
+     */
+    public void handleFullScreen() {
+        if (primaryStage.isFullScreen()) {
+            primaryStage.setFullScreen(false);
+        } else {
+            primaryStage.setFullScreen(true);
+        }
+    }
 
-    void show() {
+    /**
+     * Introduce boolean isAdmin.
+     * Returns true if isAdmin, false if not.
+     */
+    boolean show(boolean []isAdmin) {
         primaryStage.show();
+        checkPassword.display(isAdmin);
+        if (isAdmin[0]) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -187,8 +277,12 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public BookListPanel getBookListPanel() {
+        return bookListPanel;
+    }
+
+    public RequestListPanel getRequestListPanel() {
+        return requestListPanel;
     }
 
     void releaseResources() {

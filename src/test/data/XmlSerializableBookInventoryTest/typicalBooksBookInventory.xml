@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- BookInventory save file which contains the same Book values as in TypicalPersons#getTypicalAddressBook() -->
+<bookinventory>
+    <books>
+        <name>Alice Pauline</name>
+        <isbn>978-1-86197-876-9</isbn>
+        <price>19.50</price>
+        <cost>1.50</cost>
+        <quantity>123</quantity>
+        <tagged>friends</tagged>
+    </books>
+    <books>
+        <name>Benson Meier</name>
+        <isbn>978-3-16-148410-0</isbn>
+        <price>2.50</price>
+        <cost>2.50</cost>
+        <quantity>311</quantity>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
+    </books>
+    <books>
+        <name>Carl Kurz</name>
+        <isbn>978-602-8328-22-7</isbn>
+        <price>19</price>
+        <cost>1.50</cost>
+        <quantity>9</quantity>
+    </books>
+    <books>
+        <name>Daniel Meier</name>
+        <isbn>978-603-500-045-1</isbn>
+        <price>99.50</price>
+        <cost>0.50</cost>
+        <quantity>10</quantity>
+        <tagged>friends</tagged>
+    </books>
+    <books>
+        <name>Elle Meyer</name>
+        <isbn>978-607-455-035-1</isbn>
+        <price>191.50</price>
+        <cost>111.50</cost>
+        <quantity>3</quantity>
+    </books>
+    <books>
+        <name>Fiona Kunz</name>
+        <isbn>978-608-203-023-4</isbn>
+        <price>19.50</price>
+        <cost>1.50</cost>
+        <quantity>1</quantity>
+    </books>
+    <books>
+        <name>George Best</name>
+        <isbn>978-612-45165-9-7</isbn>
+        <price>19.50</price>
+        <cost>1.50</cost>
+        <quantity>4</quantity>
+    </books>
+</bookinventory>

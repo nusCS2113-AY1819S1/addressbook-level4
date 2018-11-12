@@ -9,10 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.book.Cost;
+import seedu.address.model.book.Isbn;
+import seedu.address.model.book.Name;
+import seedu.address.model.book.Price;
+import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -51,48 +52,63 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String phone} into a {@code Isbn}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code isbn} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_PHONE_CONSTRAINTS);
+    public static Isbn parseIsbn(String isbn) throws ParseException {
+        requireNonNull(isbn);
+        String trimmedIsbn = isbn.trim();
+        if (!Isbn.isValidIsbn(trimmedIsbn)) {
+            throw new ParseException(Isbn.MESSAGE_ISBN_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new Isbn(trimmedIsbn);
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String quantity} into an {@code Quantity}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code quantity} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+    public static Quantity parseQuantity(String quantity) throws ParseException {
+        requireNonNull(quantity);
+        String trimmedQuantity = quantity.trim();
+        if (!Quantity.isValidQuantity(trimmedQuantity)) {
+            throw new ParseException(Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Quantity(trimmedQuantity);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String price} into an {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code price} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_EMAIL_CONSTRAINTS);
+    public static Price parsePrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!Price.isValidPrice(trimmedPrice)) {
+            throw new ParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Price(trimmedPrice);
+    }
+
+    /**
+     * Parses a {@code String cost} into an {@code Cost}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cost} is invalid.
+     */
+    public static Cost parseCost(String cost) throws ParseException {
+        requireNonNull(cost);
+        String trimmedCost = cost.trim();
+        if (!Cost.isValidCost(trimmedCost)) {
+            throw new ParseException(Cost.MESSAGE_COST_CONSTRAINTS);
+        }
+        return new Cost(trimmedCost);
     }
 
     /**

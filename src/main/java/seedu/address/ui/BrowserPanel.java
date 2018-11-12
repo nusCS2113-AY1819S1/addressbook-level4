@@ -12,8 +12,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.commons.events.ui.BookPanelSelectionChangedEvent;
+import seedu.address.model.book.Book;
 
 /**
  * The Browser Panel of the App.
@@ -21,9 +21,10 @@ import seedu.address.model.person.Person;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
+    /*public static final String SEARCH_PAGE_URL =
+            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";*/
     public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
-
+            "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=";
     private static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -41,8 +42,8 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    private void loadPersonPage(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+    private void loadBookPage(Book book) {
+        loadPage(SEARCH_PAGE_URL + book.getName().fullName);
     }
 
     public void loadPage(String url) {
@@ -65,8 +66,8 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleBookPanelSelectionChangedEvent(BookPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection());
+        loadBookPage(event.getNewSelection());
     }
 }

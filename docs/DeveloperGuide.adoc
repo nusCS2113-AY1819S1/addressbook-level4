@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= BookInventory Level 4 - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,9 +12,13 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: http://github.com/CS2113-AY1819S1-W13-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
+
+== Introduction
+
+_BookInventory_ is catered solely for students as well as other managerial roles such as store managers and accountant. _BookInventory_ allows store managers to increase/decrease stocks for each book. Accountants will be able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, _BookInventory_ is optimized for those who prefer to work with *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*.
 
 == Setting up
 
@@ -111,7 +115,7 @@ The *_Architecture Diagram_* given above explains the high-level design of the A
 [TIP]
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has only one class called link:{repoURL}/src/main/java/seedu.address/MainApp.java[`MainApp`]. It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -147,7 +151,7 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `BookInventoryChangedEvent` when the Book Inventory data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
@@ -165,11 +169,11 @@ The sections below give more details of each component.
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
+*API* : link:{repoURL}/src/main/java/seedu.address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `BookListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu.address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
@@ -185,11 +189,11 @@ The `UI` component,
 image::LogicClassDiagram.png[width="800"]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+link:{repoURL}/src/main/java/seedu.address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `BookInventoryParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+.  The command execution can affect the `Model` (e.g. adding a book) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -203,17 +207,17 @@ image::DeletePersonSdForLogic.png[width="800"]
 .Structure of the Model Component
 image::ModelClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+*API* : link:{repoURL}/src/main/java/seedu.address/model/Model.java[`Model.java`]
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the `Book Inventory` data.
+* exposes an unmodifiable `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `Book Inventory`, which `Book` can reference. This would allow `Book Inventory` to only require one `Tag` object per unique `Tag`, instead of each `Book` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
@@ -223,17 +227,17 @@ image:ModelClassBetterOopDiagram.png[width="800"]
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/src/main/java/seedu.address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the `Book Inventory` data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
@@ -243,54 +247,54 @@ This section describes some noteworthy details on how certain features are imple
 === Undo/Redo feature
 ==== Current Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+The undo/redo mechanism is facilitated by `VersionedBookInventory`.
+It extends `BookInventory` with an undo/redo history, stored internally as an `bookInventoryStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
+* `VersionedBookInventory#commit()` -- Saves the current BookInventory state in its history.
+* `VersionedBookInventory#undo()` -- Restores the previous BookInventory state from its history.
+* `VersionedBookInventory#redo()` -- Restores a previously undone BookInventory state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitBookInventory()`, `Model#undoBookInventory()` and `Model#redoBookInventory()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedBookInventory` will be initialized with the initial BookInventory state, and the `currentStatePointer` pointing to that single BookInventory state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th book in the BookInventory. The `delete` command calls `Model#commitBookInventory()`, causing the modified state of the BookInventory after the `delete 5` command executes to be saved in the `bookInventoryStateList`, and the `currentStatePointer` is shifted to the newly inserted BookInventory state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new book. The `add` command also calls `Model#commitBookInventory()`, causing another modified BookInventory state to be saved into the `bookInventoryStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+If a command fails its execution, it will not call `Model#commitBookInventory()`, so the BookInventory state will not be saved into the `bookInventoryStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the book was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoBookInventory()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous BookInventory state, and restores the BookInventory to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial BookInventory state, then there are no previous BookInventory states to restore. The `undo` command uses `Model#canUndoBookInventory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite -- it calls `Model#redoBookInventory()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the BookInventory to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `bookInventoryStateList.size() - 1`, pointing to the latest BookInventory state, then there are no undone BookInventory states to restore. The `redo` command uses `Model#canRedoBookInventory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the BookInventory, such as `list`, will usually not call `Model#commitBookInventory()`, `Model#undoBookInventory()` or `Model#redoBookInventory()`. Thus, the `BookInventoryStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitBookInventory()`. Since the `currentStatePointer` is not pointing at the end of the `BookInventoryStateList`, all BookInventory states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -302,29 +306,346 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire BookInventory.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the book being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+* **Alternative 1 (current choice):** Use a list to store the history of BookInventory states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedBookInventory`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
+// tag::checkcommand[]
+=== Check feature
+One of the *important* features for BookInventory is for users, especially store owners, to be able to check the remaining stocks of the books in the inventory.
+To do so, we have added a `check` command to the existing list of commands.
 
-_{Explain here how the data encryption feature will be implemented}_
+==== Current Implementation
+The implementation of this command utilises both `Model` and `Logic` component to fulfil its function.
 
-// end::dataencryption[]
+The following sequence diagram shows how the check command operation is implemented:
+
+.Sequence Diagram for Check Command
+image::CheckSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How check executes
+
+* **Alternative 1 (current choice):** Sorts the entire BookInventory.
+** Pros: Easy to implement.
+** Cons: Unable to retrieve the original order of the BookInventory.
+* **Alternative 2:** Only the displayed list is sorted.
+** Pros: Original order of the BookInventory is kept.
+** Cons: Changes in the original code to display the list is required.
+// end::checkcommand[]
+
+// tag::stockcommand[]
+=== Stock feature
+==== Current Implementation
+The sell command utilises both the `Model` and `Logic` component to fulfil its function.
+
+The stock operation is similar to the sell operation, refer to sell command for sequence diagram.
+
+==== Design Considerations
+
+===== Aspect: How stock command is implemented
+
+* **Alternative 1 (current choice):** Increases quantity in the Quantity Class.
+** Pros: Code is more cohesive.
+** Cons: Adds more code to Quantity Class.
+* **Alternative 2:** Replace quantity in the Book Class.
+** Pros: Does not need to edit Quantity Class.
+** Cons: Code becomes less cohesive.
+// end::stockcommand[]
+
+// tag::sellcommand[]
+=== Sell feature
+Since selling of books is the bread and butter of the store owners, we have added a `sell` command to the existing list of commands.
+
+==== Current Implementation
+The sell command utilises both the `Model` and `Logic` component to fulfil its function.
+
+The following sequence diagrams show how the sell operation is implemented:
+
+.Sequence Diagram for Sell Command
+image::SellSequenceDiagram.png[width="800"]
+
+.Sequence Diagram Reference for Sell Command
+image::SellSequenceDiagramSd.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How sell command is implemented
+
+* **Alternative 1 (current choice):** Determines if user input `Isbn` or `Index` in `SellCommandParser`.
+** Pros: Increases the cohesion of the `SellCommand`.
+** Cons: Construction of commands that accepts `Isbn` or `Index` differs from the other commands. Thus, we must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Determines if user input `Isbn` or `Index` in `SellCommand`.
+** Pros: Does not require changes to the code for construction of `SellCommand`.
+** Cons: Decreases the cohesion of `SellCommand`.
+// end::sellcommand[]
+
+// tag::Request[]
+=== Request feature
+==== Current implementation
+The `Request` command utilises both the `RequestModel` and `Logic` component to fulfil its function.
+This is accessible for all users.
+
+==== Design Considerations
+===== Aspect: Request command is implemented in a different category
+As mentioned above, `Request` is called in `RequestModel` and `RequestStorage`.
+A request object consists of three objects, `Isbn`, `Email`, and `Quantity`.
+
+===== RequestModel component
+
+.Structure of the `RequestModel` Component
+image::RequestModelClassDiagram.jpg[width="800"]
+
+The implementation is similar to 2.4. Model component.
+Note that `XmlAdaptedTag` class is removed as request has no tags.
+
+===== RequestStorage component
+
+.Structure of the `RequestStorage` Component
+image::RequestStorageClassDiagram.jpg[width="800"]
+
+Likewise, this implementation is similar to 2.5. Storage Component.
+
+===== Aspect: How Request command is implemented
+
+.Structure of `Request` (High Level Sequence Diagram)
+image::HighLevelRequestSequenceDiagram.png[width="800"]
+
+* **Similar to `Add` Command**
+** After request command is called by the user, it gets parsed through a `RequestListParser`.
+** The UI also prompts to `EventCenter` and shows that the `RequestList` has changed.
+** `Request` object is created and added to the model.
+** The storage then receives the request and returns message to model, which is then transferred to the UI.
+** This notifies the user that the request is successfully submitted.
+
+* **Similar to `Delete` Command**
+** The bookstore owner may decide whether to accept or reject a request offer.
+** After deciding, he or she can type `deleterequest` to remove `Request` from the `RequestList`.
+
+===== Aspect: How ToggleRequests command functions
+
+.Sequence Diagram of the `ToggleRequests` Component
+image::ToggleRequestSequenceDiagram.png[width="800"]
+
+** When the user types `togglerequests`, a `RequestPanelChangedEvent` exception is raised.
+** A function in the UI page, `MainWindow`, handles this event by toggling the display.
+** A message will then be sent to the user, indicating that the request panel is toggled.
+
+// end::Request[]
+
+// tag::statistic[]
+=== Statistic feature
+==== Current Implementation
+The statistic feature is facilitated by a singleton class StatisticCenter. It is called directly from many existing commands and is stored in Json format.
+
+[NOTE]
+Currently this feature isn't integrated with the undo/redo feature. It is planned for v2.0.
+
+The following sequence diagram shows how the StatisticCenter interact with sell command:
+
+image::statisticSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How stock command is implemented
+
+* **Alternative 1 (current choice):** Singleton Class
+** Pros: Easy to implement.
+** Cons: Hard to test.
+* **Alternative 2:** Dependency Injection.
+** Pros: Decouples dependencies but hard to implement.
+** Cons: Easier to test.
+// end::statistic[]
+
+// tag::passwordprotection[]
+=== Password Protection
+==== Current Implementation
+A password is required by the user upon start-up of the application.
+
+The password must be secured. A secured password must consist of uppercase, lowercase, numbers and other special characters. For example, “$%GA2dg#” is a good password.
+
+image::password_activity_diagram.png[width="300"]
+
+In order to prevent attackers from using easy brute force methods, the application will shut down after 3 consecutive tries.
+
+The password will be generated from our team’s side and will only be passed to users discreetly, conveniently through the means of an email.
+
+In this stage of development, the default passwords will be as follows:
+.  Administrator: owner
+.  Accountant: accountant
+.  Student: password
+*Format: [ROLE OF USER: PASSWORD]
+The passwords can and are set by developers under CheckPassword.java.
+The following sequence diagram shows how the password interacts with the user.
+
+image::password_protection_diagram.png[width="800"]
+
+After UiManager is created, it will automatically construct a MainWindow. The MainWindow will also create an instance of a CheckPassword window.
+If password is valid, a role class will be created. Else, application will close after 3 wrong tries.
+
+==== Design Considerations
+
+===== Aspect: Required fields for password protection
+
+* **Alternative 1 (current choice): Use a password-only login UI.**
+** Pros: It tricks attackers to think there is only a single password to enter the application.
+Commands such as “add”, “edit”, “clear” etc will be unknown to the basic user i.e. students.
+** Cons: Password is difficult to remember, users will spend the extra time to refer to his/her allocated passwords.
+Passwords will be issued by us (the developer team) and must be secured.
+* **Alternative 2: Use a username/password login interface.**
+** Pros: Users can customize their usernames and passwords.
+** Cons: Users can forget their passwords. Developers need to spend extra time to implement changing passwords for users. A user can create multiple account and can take up too much storage.
+Difficult to handle sensitive data like passwords in plain text files, another implementation for encryption would be needed.
+
+===== Aspect: Usable commands
+
+* **Alternative 1 (current choice): Populate usable commands into role after entering password.**
+** Pros: : If attackers bypass the password UI, they will not be able to perform any commands. Commands are only enabled if the password entered matches the appropriate role.
+** Cons: Doing so might cause the application to lag a little, if the command list is extensive.
+Passwords will be issued by us (the developer team) and must be secured.
+* **Alternative 2: Assign commands based on passwords. (Role class is omitted in this case)**
+** Pros: Easier to implement.
+** Cons: Poor readability in code. If the password UI is bypassed, attackers will be able to have access to commands.
+
+// end::passwordprotection[]
+
+// tag::commandpanel[]
+=== Command List Panel UI
+==== Current Implementation
+
+A command list panel UI is made available for all user, to assist him/her better in the application.
+It is a quick access panel located at the side of the application. The command list is sorted alphabetically.
+
+This feature is geared towards beginner users.
+
+image::command_panel.png[width="240"]
+
+Selecting on any of the commands in the panel above, will show a brief message of the command in the result display.
+
+In addition, the text in the command box will be replaced with a template of the command selected.
+
+==== Design Considerations
+
+===== Aspect: UI design
+
+* **Alternative 1 (current choice): Use a table view (JavaFX).**
+** Pros: All commands are displayed on-screen without having to click double.
+** Cons: Takes up more space in the overall UI.
+* **Alternative 2: Use a drop-down menu.**
+** Pros: Slightly neater and aesthetically more pleasing.
+** Cons: Not the most functional option, users must click twice and scroll through the menu.
+
+===== Aspect: Selection Result
+
+* **Alternative 1 (current choice): Displays a message on-screen and replaces text in command box.**
+** Pros: : Allow users (especially beginners) to edit the command field when given the template of the command. They will be guided via a message on-screen.
+** Cons: Users need to spend the extra time clicking on and editing the command text provided instead of typing the command fluently.
+* **Alternative 2: : Pops a new window indicating the required fields for command.**
+** Pros: Highly sophisticated GUI handling.
+** Cons: Application is meant for CLI for faster execution. Pressing on the wrong command may induce user frustration.
+
+// end::commandpanel[]
+
+// tag::commandprediction[]
+=== Command Prediction
+
+==== Rationale
+To maximize user friendliness, we have implemented predictive text which will appear
+familiar for phone users. *[yellow]#_BookInventory_#* users may inadvertently misspell command words,
+e.g. lis (Expected command: list). This will now prompt a GUI log stating, "Did you mean,
+list?" To achieve this, we have utilized the Dice Coefficient.
+
+==== Current Implementation
+
+.Logic Sequence Diagram (Command "Togglereq" called)
+image::CommandPredictionSequenceDiagram.png[width="800"]
+
+Here is a step-by-step walk-through on how this algorithm works.
+
+Step 1: When the user types "togglereq" in the command box and hits enter, the command is accepted by the UI
+and passed to the `LogicManager`.
+
+Step 2: It first gets the `previousCommand` keyed in by the user. This is necessary
+as the commands undo/redo are only accepted in `RequestList` if the previous command keyed in
+belongs to `RequestList`.
+
+Step 3: `parseInput` is then called, which returns true as `DifferentiatingParser` detects that the command should
+ belong to `RequestListParser`. `LogicManager` then calls `parseCommandRequest`.
+
+Step 4: `RequestListParser` calls `performSimilarityCheck` in `SimilarityParser`. Dice Coefficient detects that the
+command is similar to the command `togglerequests`, and return it in the form of a String, in `predictedCommand`.
+
+Step 5: `ParseException` is eventually thrown in `RequestListParser`, signalling to the user that
+a spelling error is detected.
+
+==== Design Considerations
+
+===== Aspect: How does Dice Coefficient works?
+
+Dice's coefficient measures the similarity between two sets. In *[yellow]#_BookInventory_#*, we use it to help measure how
+similar two strings are in terms of the number of common bigrams (A bigram is a pair of adjacent
+letters in the string).The Coefficient result of 1 indicates identical vectors (completely equal strings) as
+where a 0 equals orthogonal vectors (completely unequal strings).
+
+Formula: Dice's coefficient = (2 * Common Terms) / (Number of terms in String1 + Number of terms in String2)
+
+===== Aspect: How well does this algorithm predicts?
+
+Our current implementation sets Dice's Coefficient to 0.5. For some scenarios, we have implemented
+an adjusted value of 0.7. Through our testing, this appears fine for most spelling errors.
+However, it will not predict too ridiculous errors because we do not wish to face a scenario where
+the suggestion offers another command word which is unintended by the user.
+
+// end::commandprediction[]
+
+// tag::tabfeature[]
+=== Tab feature
+For users' *convenience*, we have implemented this feature to easily cycle through existing `ISBN` in the inventory without the need to manually type them out.
+
+==== Current Implementation
+The tab mechanism utilises `Ui`, `Model` and `Logic` components. It stores the list of Isbn in a Queue Data Structure.
+
+Given below is an example usage scenario and how the tab mechanism works
+
+Step 1: The user enters `sell i/978` in the `CommandBox` to sell a book with the Isbn starting with '978'.
+
+Step 2: The user now feels that keying the whole 13 digit of the Isbn is a hassle, and decides to complete the Isbn using pressing `tab`. The `tab` feature will take in `sell i/978` in the `CommandBox` and retrieve `978` from the Isbn field.
+
+The following sequence diagram shows how the tab operation works:
+
+.Sequence Diagram for Tab Operation
+image::TabSequenceDiagram.png[width="800"]
+
+After the function `navigateToNextIsbn()` is completed, `commandTextField.requestFocus()` and `commandTextField.positionCaret(commandTextField.getLength())` are called to bring the caret to the end of the line for users to continue typing the command.
+
+Step 3: The user presses `tab` again as the Isbn is not correct. The `tab` feature will then check if the Isbn matches the first Isbn in the Queue. If it matches, the first Isbn in the Queue will be removed and added to the end of the Queue. The next Isbn in the Queue will be displayed.
+
+==== Design Considerations
+
+===== Aspect: How tab executes
+
+* **Alternative 1 (current choice):** Accessing data in `BookInventory` using `Logic`.
+** Pros: Does not change current imports of `CommandBox` for it to function.
+** Cons: Increases coupling as it violates the Law of Demeter.
+* **Alternative 2:** Accessing data in `BookInventory` directly in `CommandBox`.
+** Pros: Easy to access.
+** Cons: Increases coupling as `CommandBox` now imports both `Logic` and `Model`.
+// end::tabfeature[]
+
 
 === Logging
 
@@ -521,14 +842,14 @@ When a pull request has changes to asciidoc files, you can use https://www.netli
 
 Here are the steps to create a new release.
 
-.  Update the version number in link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp.java`].
+.  Update the version number in link:{repoURL}/src/main/java/seedu.address/MainApp.java[`MainApp.java`].
 .  Generate a JAR file <<UsingGradle#creating-the-jar-file, using Gradle>>.
 .  Tag the repo with the version number. e.g. `v0.1`
 .  https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
 
 === Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
+A project often depends on third-party libraries. For example, Book Inventory depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
@@ -555,14 +876,14 @@ Each individual exercise in this section is component-based (i.e. you would not 
 [TIP]
 Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
 
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
+. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all books in the list.
 +
 ****
 * Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
+** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu.address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu.address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
+** link:{repoURL}/src/main/java/seedu.address/logic/parser/BookInventoryParser.java[`BookInventoryParser`] is responsible for analyzing command words.
 * Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
+** Modify the switch statement in link:{repoURL}/src/main/java/seedu.address/logic/parser/BookInventoryParser.java[`BookInventoryParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
 ** Add new tests for each of the aliases that you have added.
 ** Update the user guide to document the new aliases.
 ** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
@@ -571,21 +892,21 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 [discrete]
 ==== `Model` component
 
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
+*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the BookInventory, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
 
 [TIP]
 Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
 
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
+. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the BookInventory.
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] API need to be updated.
+** The link:{repoURL}/src/main/java/seedu.address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu.address/model/BookInventory.java[`BookInventory`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu.address/model/BookInventory.java[`BookInventory`] and link:{repoURL}/src/main/java/seedu.address/model/book/Book.java[`Book`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu.address/model/BookInventory.java[`BookInventory`] allows you to update a book, and link:{repoURL}/src/main/java/seedu.address/model/book/Book.java[`Book`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each person, and remove the `tag` from each person.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu.address/model/BookInventory.java[`BookInventory`]. Loop through each book, and remove the `tag` from each book.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu.address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu.address/model/ModelManager.java[`ModelManager`] should call `BookInventory#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
 ****
@@ -593,12 +914,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your BookInventory application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last book in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
 
-. Use different colors for different tags inside person cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
+. Use different colors for different tags inside book cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
 +
 **Before**
 +
@@ -610,16 +931,16 @@ image::getting-started-ui-tag-after.png[width="300"]
 +
 ****
 * Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
+** The tag labels are created inside link:{repoURL}/src/main/java/seedu.address/ui/BookCard.java[the `BookCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
 ** Use the .css attribute `-fx-background-color` to add a color.
 ** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
 * Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
+** You can modify the existing test methods for `BookCard` 's to include testing the tag's color as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
 *** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
 ****
 
-. Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
+. Modify link:{repoURL}/src/main/java/seedu.address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu.address/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
 +
 **Before**
 +
@@ -631,19 +952,19 @@ image::getting-started-ui-result-after.png[width="200"]
 +
 ****
 * Hints
-** link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
-** Refer to link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
+** link:{repoURL}/src/main/java/seedu.address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu.address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu.address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
+** Refer to link:{repoURL}/src/main/java/seedu.address/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
 * Solution
-** Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
-** Modify link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
+** Modify link:{repoURL}/src/main/java/seedu.address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
+** Modify link:{repoURL}/src/main/java/seedu.address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
 ** You can write two different kinds of tests to ensure that the functionality works:
 *** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
+*** The system tests link:{repoURL}/src/test/java/systemtests/BookInventorySystemTest.java[`BookInventorySystemTest#assertCommandBoxShowsDefaultStyle() and BookInventorySystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
+. Modify the link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the BookInventory.
 +
 **Before**
 +
@@ -656,29 +977,29 @@ image::getting-started-ui-status-after.png[width="500"]
 ****
 * Hints
 ** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
+** link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the BookInventory is updated.
 * Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of persons when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
+** Modify the constructor of link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of books when the application just started.
+** Use link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter#handleBookInventoryChangedEvent(BookInventoryChangedEvent)`] to update the number of books whenever there are new changes to the BookInventory.
 ** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of persons status bar.
+** For system tests, modify link:{repoURL}/src/test/java/systemtests/BookInventorySystemTest.java[`BookInventorySystemTest`] to also verify the new total number of books status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
 ****
 
 [discrete]
 ==== `Storage` component
 
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.
+*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the BookInventory to the cloud. However, the current implementation of the application constantly saves the BookInventory after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the BookInventory storage.
 
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the address book can be saved in a fixed temporary location.
+. Add a new method `backupBookInventory(ReadOnlyBookInventory)`, so that the BookInventory can be saved in a fixed temporary location.
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/XmlAddressBookStorage.java[`XmlAddressBookStorage`] class.
+** Add the API method in link:{repoURL}/src/main/java/seedu.address/storage/BookInventoryStorage.java[`BookInventoryStorage`] interface.
+** Implement the logic in link:{repoURL}/src/main/java/seedu.address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu.address/storage/XmlBookInventoryStorage.java[`XmlBookInventoryStorage`] class.
 * Solution
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
@@ -688,18 +1009,18 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 
 By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
+*Scenario:* You are a software maintainer for `BookInventory`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
-Edits the remark for a person specified in the `INDEX`. +
+Edits the remark for a book specified in the `INDEX`. +
 Format: `remark INDEX r/[REMARK]`
 
 Examples:
 
 * `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first person to `Likes to drink coffee.`
+Edits the remark for the first book to `Likes to drink coffee.`
 * `remark 1 r/` +
-Removes the remark for the first person.
+Removes the remark for the first book.
 
 ==== Step-by-step Instructions
 
@@ -708,13 +1029,13 @@ Let's start by teaching the application how to parse a `remark` command. We will
 
 **Main:**
 
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
+. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu.address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
+. Modify link:{repoURL}/src/main/java/seedu.address/logic/parser/BookInventoryParser.java[`BookInventoryParser`] to accept a `RemarkCommand`.
 
 **Tests:**
 
 . Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
+. Add new test method to link:{repoURL}/src/test/java/seedu.address/logic/parser/BookInventoryParserTest.java[`BookInventoryParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
 
 ===== [Step 2] Logic: Teach the app to accept 'remark' arguments
 Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
@@ -723,50 +1044,50 @@ Let's teach the application to parse arguments that our `remark` command will ac
 
 . Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
 . Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
+. Modify link:{repoURL}/src/main/java/seedu.address/logic/parser/BookInventoryParser.java[`BookInventoryParser`] to use the newly implemented `RemarkCommandParser`.
 
 **Tests:**
 
 . Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
 . Add `RemarkCommandParserTest` that tests different boundary values
 for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
+. Modify link:{repoURL}/src/test/java/seedu.address/logic/parser/BookInventoryParserTest.java[`BookInventoryParserTest`] to test that the correct command is generated according to the user input.
 
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
+===== [Step 3] Ui: Add a placeholder for remark in `BookCard`
+Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu.address/ui/BookCard.java[`BookCard`] s to display a remark for each book later.
 
 **Main:**
 
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
+. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/BookListCard.fxml[`BookListCard.fxml`].
+. Add FXML annotation in link:{repoURL}/src/main/java/seedu.address/ui/BookCard.java[`BookCard`] to tie the variable to the actual label.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
+. Modify link:{repoURL}/src/test/java/guitests/guihandles/BookCardHandle.java[`BookCardHandle`] so that future tests can read the contents of the remark label.
 
 ===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
+We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu.address/model/book/Quantity.java[`Quantity`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
 
 **Main:**
 
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
+. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu.address/model/book/Quantity.java[`Quantity`], remove the regex and change the names accordingly).
 . Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
 
 **Tests:**
 
 . Add test for `Remark`, to test the `Remark#equals()` method.
 
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
+===== [Step 5] Model: Modify `Book` to support a `Remark` field
+Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu.address/model/book/Book.java[`Book`].
 
 **Main:**
 
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `addressBook.xml` so that the application will load the sample data when you launch it.)
+. Add `getRemark()` in link:{repoURL}/src/main/java/seedu.address/model/book/Book.java[`Book`].
+. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the book will be created without a remark).
+. Modify link:{repoURL}/src/main/java/seedu.address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `bookInventory.xml` so that the application will load the sample data when you launch it.)
 
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
+===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedBook` class
+We now have `Remark` s for `Book` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu.address/storage/XmlAdaptedBook.java[`XmlAdaptedBook`] to include a `Remark` field so that it will be saved.
 
 **Main:**
 
@@ -774,33 +1095,33 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 
 **Tests:**
 
-. Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsAddressBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidBookBookInventory.xml`, `typicalBooksBookInventory.xml`, `validBookInventory.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
+===== [Step 6b] Test: Add withRemark() for `BookBuilder`
+Since `Book` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu.address/testutil/BookBuilder.java[`BookBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu.address/model/book/Book.java[`Book`].
 
 **Tests:**
 
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the person that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
+. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu.address/testutil/BookBuilder.java[`BookBuilder`]. This method will create a new `Remark` for the book that it is currently building.
+. Try and use the method on any sample `Book` in link:{repoURL}/src/test/java/seedu.address/testutil/TypicalBooks.java[`TypicalBooks`].
 
-===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
+===== [Step 7] Ui: Connect `Remark` field to `BookCard`
+Our remark label in link:{repoURL}/src/main/java/seedu.address/ui/BookCard.java[`BookCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
 
 **Main:**
 
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
+. Modify link:{repoURL}/src/main/java/seedu.address/ui/BookCard.java[`BookCard`]'s constructor to bind the `Remark` field to the `Book` 's remark.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
+. Modify link:{repoURL}/src/test/java/seedu.address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysBook(...)`] so that it will compare the now-functioning remark label.
 
 ===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
 We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
 
 **Main:**
 
-. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a person.
+. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a book.
 
 **Tests:**
 
@@ -815,7 +1136,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of books
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
@@ -831,35 +1152,70 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |Store Owner |Add/remove books |Manage my stocks.
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |Store Owner |Check the quantity of each book |Stock up of the books that are low in quantity.
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |Store Owner |Stock/sell books |Easily increase and decrease the quantity of my books.
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |Store Owner |Have security features |Keep my stocks safe from edits.
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |Student |Check if the bookstore have the book I want |Save on a trip down to the book store.
+
+|`* *` |Store Owner with many books in the BookInventory |Delete my books by Isbn |Locate the book easily.
+
+|`* *` |Accountant |View the revenue statistics |Analyse the selling trend for each book.
+
+|`* *` |Student |Find books |Check if the book store has the book that I need.
+
+|`* *` |Student |Use the program as and when |Easily sieve out the books that i want to buy.
+
+|`* *` |Non-Tech Savvy User|Have a straightforward easy-to-understand help page |Search on the books i would like to find with.
+
+|`* *` |Careless user |Undo/Redo my command |Easily remove/get back to the current/next state.
+
+|`* *` |User |Have an application with minimal downtime |Use the application at any point of time.
+
+|`* *` |Lazy User |Be able to enter my commands faster |Save the energy of moving my fingers.
+
+|`*` |Unmotivated student |Have a colorful GUI |Have a better mood to study.
+
+|`*` |New User |Have a user-friendly application |Use the catalogue easily.
+
+|`*` |Exchange student |Use the program in my native language |Understand the program easily.
+
+|`*` |Store Owner |View requests |Know which books are in demand.
+
+|`*` |Accountant |Have stats for total revenue and cost |make correct analysis.
+
+|`*` |Resourceful |Delete my request |Prevent myself from getting duplicate books.
+
+|`*` |Store Owner |Be able to edit the details of my book |Sell the books at discounted price.
+
+|`*` |Thrifty User |Be able to compare prices of the book |Get the cheaper alternatives.
+
+|`*` |Store Owner |Have a means to contact the requester |Confirm his/her orders.
+
+|`*` |Store Owner |Hide <<private-request-detail,private request details>> by default |Minimize chance of someone else seeing them by accident
+
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `BookInventory` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Delete book
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list books
+2.  BookInventory shows a list of books
+3.  User requests to delete a specific book in the list
+4.  BookInventory deletes the book
 +
 Use case ends.
 
@@ -873,17 +1229,48 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. BookInventory shows an error message.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+[discrete]
+=== Use case: Sell book
+
+*MSS*
+
+1.  User requests to list books
+2.  BookInventory shows a list of books
+3.  User requests to sell a specific book in the list
+4.  BookInventory decrease the quantity of the book
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. BookInventory shows an error message.
++
+Use case resumes at step 2.
+
+* 3b. The given quantity cause book to have negative quantity.
++
+[none]
+** 3b1. BookInventory shows an error message.
++
+Use case resumes at step 2.
 
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 books without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
@@ -894,7 +1281,7 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
+[[private-request-detail]] Private request detail::
 A contact detail that is not meant to be shared with others
 
 [appendix]
@@ -938,19 +1325,77 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
-=== Deleting a person
+=== Deleting a book
 
-. Deleting a person while all persons are listed
+. Deleting a book while all books are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all books using the `list` command. Multiple books in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First book is deleted from the list. Details of the deleted book shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No book is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+=== Checking quantity of books
+
+. Checks inventory for books less than or equal to the quantity
+
+.. Prerequisites: None.
+.. Test case: `check 1` +
+   Expected: Displays the list of books ordered in ascending order with quantity less than 1. Timestamp in the status bar is updated.
+.. Test case: `check -1` +
+   Expected: Error details shown in the status message. Status bar remains the same.
+.. Other incorrect sell commands to try: `check x`(where x is lesser than 0 or larger than 999), +
+   Expected: Similar to previous.
+
+=== Selling a book
+
+. Selling a book while all books are listed
+
+.. Prerequisites: List all books using the `list` command. Multiple books in the list.
+.. Test case: `sell 1 q/1` +
+   Expected: Quantity of first book is decreased by one. Number of books sold and details of the sold book shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `sell 0 q/1` +
+   Expected: No book is sold. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect sell commands to try: `sell`, `sell 1`, `sell x q/1` (where x is larger than the list size), +
+   Expected: Similar to previous.
+
+. Selling a book using Isbn
+
+.. Prerequisites: None.
+.. Test case: `sell i/9780321775658 q/1` +
+   Expected: Quantity of book with the isbn is decreased by one. Number of books sold and details of the sold book shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `sell i/1234567890 q/1` +
+   Expected: No book is sold. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect sell commands to try: `sell i/ q/1`, `sell i/9780321775658`, `sell i/x q/1` (where x is any invalid Isbn), +
+   Expected: Similar to previous.
+
+=== Using Tab
+
+. Complete empty Isbn field
+
+.. Prerequisites: Type `i/` in the `CommandBox`.
+.. Test case: Press `TAB` +
+   Expected: Isbn of first book in the list is displayed in the CommandBox.
+.. Test case: Press `TAB` twice +
+   Expected: Isbn of first book is displayed followed by the second book in the list in the CommandBox.
+
+. Complete half inputted Isbn field
+
+.. Prerequisites: Type `i/978` in the `CommandBox`.
+.. Test case: Press `TAB` +
+   Expected: Isbn of first book containing `978` in the list is displayed in the CommandBox.
+.. Test case: Press `TAB` twice +
+   Expected: Isbn of first book containing `978` is displayed followed by the second book containing `978` in the list in the CommandBox.
+
+. Complete invalid half inputted Isbn field
+
+.. Prerequisites: Type `i/777` in the `CommandBox`.
+.. Test case: Press `TAB` +
+   Expected: Nothing happens.
 
 === Saving data
 
