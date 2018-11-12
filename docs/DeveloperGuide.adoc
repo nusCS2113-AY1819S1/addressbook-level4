@@ -2284,7 +2284,57 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: Enter `list d/1-1-2018 12-12-2018`
 .. Expected: System will list all records equal to or between the 2 dates
 
+=== Sorting records
+. Sorting with no argument +
+Test case: Enter `sort` +
+Expected: System will throw error saying invalid command and show the correct format
 
+. Sorting with invalid argument +
+ Test case: Enter `sort invalidargument` +
+ Expected: System will throw error saying invalid command and show the correct format
+
+. Sorting with valid and invalid argument +
+ Test case: Enter `sort money haha` +
+ Expected: System will throw error saying invalid command and show the correct format
+
+. Sorting with name only +
+ Test case: Enter `sort` +
+ Expected: System will sort all records by date in ascending order.
+
+. Sorting with date only +
+ Test case: Enter `sort date` +
+ Expected: System will sort all records by date in ascending order.
+
+. Sorting with money only +
+ Test case: Enter `sort money` +
+ Expected: System will sort all records by money in ascending order.
+
+. Sorting with ascending order only +
+ Test case: Enter `sort asc` +
+ Expected: System will sort all records by name in ascending order.
+
+. Sorting with descending order only +
+ Test case: Enter `sort desc` +
+ Expected: System will sort all records by name in ascending order.
+
+. Sorting with no argument +
+ Test case: Enter `sort money desc` +
+ Expected: System will sort all records by money in descending order.
+
+=== Finding Records by Tag
+. Sorting with no argument +
+Test case: Enter `findtag` +
+Expected: System will throw error saying invalid command and show the correct format
+
+. Sorting with single argument +
+.est case: Enter `findtag anystring` +
+Expected: System will display all records with the tag `anystring` and display message showing
+how many records were found and the tag searched.
+
+. Sorting with multiple arguments +
+Test case: Enter `findtag anystring haha funny` +
+Expected: System will display all records with the tag `anystring` `haha` `funny` and display message showing
+how many records were found and the tags searched.
 
 === Viewing summary
 . Entering `summary` command without modes
@@ -2691,6 +2741,99 @@ should allow you to navigate to the hidden tags within the legend.
 
 .. Incorrect export commands to try: `exportexcel C:\`+
    Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+=== Auto Complete Feature
+. Typing part of a command word +
+Test case: Enter `ad`. +
+Expected: Suggestions pop up with the words "add", "addlimit", "addmonthlylimit".
+
+. Typing a complete command word +
+Test case: Enter `add`. +
+Expected: No Suggestions appear.
+
+. Typing a complete command word with extra text +
+Test case: Enter `addm`. +
+Expected: Suggestions pop up with the word "addmonthlylimit" only.
+
+. Typing name arguments for add command word
+Test case: Enter `add n/s`. +
+Expected: Suggestions pop up with the words that begin with "s", only if there are record names that have words that
+begin with 's'.
+
+. Typing name arguments for add command word
+Test case: Enter `add n/Buying it`. +
+Expected: Suggestions pop up with the words that begin with "it", only if there are record names that have words that
+begin with 'it'.
+
+. Typing date arguments for add command word
+Test case: Enter `add d/1`. +
+Expected: Suggestions pop up with the dates that begin with "1", only if there are record dates that have words that
+begin with '1'. Does not show dates that begin with '01'.
+
+. Typing date arguments for add command word
+Test case: Enter `add d/t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing moneyflow arguments for add command word
+Test case: Enter `add m/1`. +
+Expected: No suggestions popup no matter what records are in the data. No suggestion expected for moneyflow at all.
+
+. Typing tag arguments for add command word
+Test case: Enter `add t/f`. +
+Expected: Suggestions pop up with the words that begin with "f", only if there are record tags that have words that
+          begin with 'f', such as food and family, which are some default words for tags.
+
+. Typing name arguments for add command word with a 'n/' prefix
+Test case: Enter `add n/Buying m/-50 it`. +
+Expected: No suggestions pop up for 'it' no matter what. No suggestions are expected for this invalid input.
+
+. Typing date arguments for list command word
+Test case: Enter `list t`. +
+Expected: no suggestions pop up as prefix is required.
+
+. Typing date arguments for list command word with a 'd/' prefix
+Test case: Enter `list d/t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing date arguments for list command word after a date with 'd/' prefix
+Test case: Enter `list d/ytd t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing date arguments for list command word after a date with 'd/' prefix
+Test case: Enter `list d/ytd t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing arguments for sort command word
+Test case: Enter `sort d`. +
+Expected: Suggestions pop up with the words "date" and "desc" only. Any category or order can be suggested.
+
+. Typing arguments for sort command word with a category specified
+Test case: Enter `sort money d`. +
+Expected: Suggestions pop up with the word "desc" only. Only order can be suggested.
+
+. Typing arguments for sort command word with a order specified
+Test case: Enter `sort asc m`. +
+Expected: Suggestions pop up with the words "money" and "moneyflow" only. Only category can be suggested.
+
+. Typing arguments for sort command word with a order specified
+Test case: Enter `sort asc m`. +
+Expected: Suggestions pop up with the words "money" and "moneyflow" only. Only category can be suggested.
+
+. Typing date arguments for addlimit command word
+Test case: Enter `addlimit d/t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing secondary date arguments for addlimit command word
+Test case: Enter `addlimit d/ytd t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing date arguments for addlimit command word with money included
+Test case: Enter `addlimit m/999 d/ytd t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing date arguments for addlimit command word with money included
+Test case: Enter `addlimit d/ytd t m/999`. Move the caret in the command box back to right after the 't'.
+Expected: Caret will be stopped right after 't' and suggestions pop up with the word "today" only.
 
 === Saving data
 
