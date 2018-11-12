@@ -70,13 +70,69 @@ Examples:
 * `select 1/1`
 * `select dd/1 mm/1 yyyy/2018`
 * `select 1/1/2018`
+
+|===
+A. Using select command
+|===
+
+How it should look like:
+
+Step 1. Entering `select 1/1/2018` will select a date as the deadline for tasks to be added. Type the command into the command box as shown below.
+
+.GUI before using the select command to select a date
+image::BeforeSelectDeadlineGUI.PNG[width="800"]
+
+Step 2. If you have chosen a valid date, you should be able to see a success message as shown below, highlighted with a red box.
+
+.GUI after using the select command to select a date
+image::AfterSelectDeadlineGUI.PNG[width="800"]
+
+ You have successfully selected a date.
+
+|===
+B. Using Date Picker
+|===
+
+How it should look like:
+
+Step 1. Alternatively, to make things even simpler, you can choose to use the Date Picker as highlighted below.
+
+.Date Picker beside the command box
+image::DatePickerPosition.PNG[width="800"]
+
+Step 2. To use the Date Picker, click on the calender icon.
+
+.Calander icon on Date Picker
+image::DatePickerWhereToPress.PNG[width="800"]
+
+Step 3.  you should be able to see a calendar.
+
+.Calendar view of Date Picker after clicking on Calendar iocn
+image::DatePickerSelectDate.PNG[width="800"]
+
+Step 4. Use the left and right arrows to navigate to different months and years.
+
+.Left and right arrow keys in Date Picker
+image::DatePickerLeftRightArrows.PNG[width="800"]
+
+Step 5. Click on the date you want to select.
+
+.GUI after using Date Picker to select a date
+image::DatePickerSelectDate.PNG[width="800"]
+
+Step 6. A success message will be shown as highlighted below.
+
+.GUI after using Date Picker to select a date
+image::DatePickerSelectDate.PNG[width="800"]
+
+ You have successfully selected a date. Good job!
+
 // end::selectDeadline[]
 
 === Adding a task: `add`
 
 Adds a task with its module code, title, description, priority level (low, medium, high) and the number of hours (integers only) expected to complete this task, to the task book +
 Format: `add c/MODULE_CODE t/TITLE d/DESCRIPTION p/PRIORITY h/HOURS`
->>>>>>> Stashed changes
 
 Examples:
 
@@ -141,7 +197,7 @@ Format: `defer i/INDEX dd/DAY`
 
 [NOTE]
 ====
-* Deadline of the selected task will be automatically updated by the number of days deferred from the deadline
+A valid year *must* be between 2018 and 9999 (inclusive)
 ====
 
 [WARNING]
@@ -170,6 +226,7 @@ Format: `edit i/INDEX [t/TITLE] [d/DESCRIPTION] [c/MODULE CODE] [p/PRIORITY] [h/
 [NOTE]
 ====
 * Index must be present and must be a non-zero positive integer
+* Index selected must exist in the Task Display Panel
 * At least one optional field to be edited must be provided
 ====
 
@@ -178,6 +235,23 @@ Examples:
 * `edit i/1 t/Complete CS2113 tutorial`
 * `edit i/1 d/Edit editTask to fit TaskBook h/4`
 * `edit i/1 t/Complete CS2271 tutorial d/Edit editTask to fit TaskBook c/CS2113 p/high h/4`
+
+How it should look like:
+
+* Entering the `edit i/1 t/Complete CS2113 tutorial` command will edit the title of the first task on the Task Display Panel to 'Complete CS2113 tutorial'. Type the command into the Command Box as shown below.
+
+ As you can see, the current title of the first task (highlighted with a red box) is 'COMPLETE CODE REFACTORING'.
+
+
+.GUI before using edit command to change the title_
+image::EditCommandBefore.PNG[width="800"]
+
+* After entering a valid command, you should see that the title of the first task has been edited to 'Complete CS2113 tutorial' and also a success message as highlighted below.
+
+.GUI after using edit command to change the title
+image::EditCommandAfter.PNG[width="800"]
+
+* You have successfully edited the title of the task. Well done!
 // end::editTask[]
 
 // tag::add_milestone[]
@@ -394,6 +468,20 @@ Format: `exit`
 
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
+
+// tag::calendar_synchronisation[]
+=== Real time synchronisation with calendar `[coming in v2.0]`
+
+TaskBook will be able to synchronise with the calendar in real time so that functionalities
+that require real time date tracking can be introduced.
+// end::calendar_synchronisation[]
+
+// tag::reminder_setting[]
+=== Setting reminders `[coming in v2.0]`
+
+Users will be able to set reminders that can be triggered a few days before the actual deadline
+to remind them that a task has to be completed.
+// end::reminder_setting[]
 
 // tag::check_milestone[]
 === Checking off completed milestones `[coming in v2.0]`

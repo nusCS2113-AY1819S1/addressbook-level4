@@ -247,6 +247,101 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::selectDeadlineImplementation[]
+=== Select Deadline feature
+==== Current Implementation
+
+The `select` mechanism is facilitated by `VersionedTaskBook`. The `edit` command takes in a date either in the `String` dd/mm/yyyy format or prefixes with the corresponding values. Input by the user is checked to ensure it conforms to the expected format as it goes through the `SelectDeadlineCommandParser.java` and `TaskBookParser.java`. A new `SelectDeadlineCommand` object is returned and the `execute` method will run. The date specified will be set as the deadline through `model.selectDeadline` before a success message is generated to indicate that the `select` command has been successfully executed and the deadline has been selected.
+Additionally, it implements the following operations:
+
+* `VersionedTaskBook#selectDeadline()` - Selects date to be set as deadline
+* `Model#updateFilteredTaskList()` — Updates the current list of Tasks that is being displayed to the user to show only tasks with the same deadline
+* `indicateTaskBookChanged()` — Event raised to indicate that the TaskBook in the model has changed.
+
+These operations are exposed in the `Model` interface as `Model#selectDeadline()`, `Model#updateFilteredTaskList()` and `Model#commitTaskBook()` respectively.
+
+Given below is an example usage scenario and how the `select` mechanism behaves are each step.
+
+Step 1. The user launches the application. If it is the first time he/she is launching it, the `VersionedTaskBook` will be initialized with a sample task book data. If the user has already launched it previously and made changes to it, the `VersionedTaskBook` launched will contain the data that he/she has entered in the previous launch.
+
+Step 2. The user executes `select 1/1/2018` or `select dd/1 mm/1 yyyy/2018` to select the deadline.
+
+Step 3. The `select` command will call `Model#selectDeadline()` and select the deadline as 1/1/2018. `Model#updateFilteredTaskList()` will be called to update the list that is being shown to the user with only show tasks with 1/1/2018 as the deadline.
+
+Step 4. Lastly, `Model#commitTaskBook()` will be called to update the `TaskBookStateList` and `currentStatePointer`.
+
+The following sequence diagram illustrates how the `select` command is implemented.
+
+.Sequence diagram for `select` command
+image::SelectDeadline.PNG[width=”800”]
+
+==== Design considerations
+===== Aspect: Format for selection of date
+
+* **Alternative 1 (current choice):** Allows users to use string dd/mm/yyyy format
+** Pros: Easy for users to type command as it is more intuitive without the need to type in all the prefixes.
+** Cons: A separate method of parsing has to be created to handle such a format.
+* **Alternative 2:** Only allow format with prefixes.
+** Pros: No need for a separate method to handle another format by limiting users to only the format with prefixes.
+** Cons: Users may find it difficult to enter the date since it is less intuitive which might result in multiple failed attempts to do so.
+
+===== Aspect: Method to set deadline
+
+* **Alternative 1 (current choice):** Deadline is selected by a separate `Select` deadline function.
+** Pros: Allows users to add multiple tasks to the same deadline without having to type the deadline over and over again. Also allows a `filteredTaskList` based on deadline to be shown to users for them to see how many tasks are currently added to the current deadline.
+** Cons: A separate function has to be created to select the date.
+* **Alternative 2: **Deadline is selected as a field in the `add` command.
+** Pros: Separate `select` function is not required since deadline is set with every `add` command.
+** Cons: Users have to type the deadline repeatedly if multiple tasks are added to the same deadline. A separate function has to be created to view only tasks that are added to a specific deadline.
+// end::selectDeadlineImplementation[]
+
+// tag::editTaskImplementation[]
+=== Edit Task feature
+==== Current Implementation
+
+The `edit` mechanism is facilitated by `VersionedTaskBook`. The `edit` command takes in the index of the task to be edited, followed by prefixes and its corresponding new values which will replace existing values in the task to be edited. Input by the user is checked to ensure it conforms to the expected format as it goes through `EditTaskCommandParser.java` and `TaskBookParser.java`. A `EditTaskCommand` object is returned and the `execute` method will run. The validity of the index given by the user is checked and the task to be edited is retrieved from `model.getFilteredTaskList()`. A new task `editedTask` is created with the values to be edited and the task to be edit is updated with the details of the `editedTask’ through `model.updateTask` and `model.updateFilteredTaskList` before finally generating a edit task success message to indicate that the command has been successfully executed.
+Additionally, it implements the following operations:
+
+* `Model#getFilteredTaskList()` — Obtains the current list of Tasks that is being displayed to the user
+* `VersionedTaskBook#updateTask()` — Edits and updates the specified task with the new values.
+* `indicateTaskBookChanged()` — Event raised to indicate that the TaskBook in the model has changed.
+
+These operations are exposed in the `Model` interface as `Model#updateTask()`, `Model#updateFilteredTaskList()` and `Model#commitTaskBook()` respectively.
+Given below is an example usage scenario and how the `edit` mechanism behaves at each step.
+
+Step 1. The user launches the application. If it is the first time he/she is launching it, the `VersionedTaskBook` will be initialized with a sample task book data. If the user has already launched it previously and made changes to it, the `VersionedTaskBook` launched will contain the data that he/she has entered in the previous launch.
+
+Step 2. The user executes `edit i/1 t/Complete CS2113 tutorial` to edit the title of the existing task at index 1 in the list. The `edit` command obtains the data of the task that the user wants to change based on the input index.
+
+Step 3. The `edit` command will retrieve and copy the details of the task at index 1 to a new task `editedTask` and edit the title to `Complete CS2113 tutorial`.
+
+Step 4. The `edit` command will call `Model#updateTask()` and update the task at index 1 with the details of `editedTask`. Also, `Model#updateFilteredTaskList()` will be called to update the list that is being shown to the user with the updated task.
+
+Step 5. Lastly, `Model#commitTaskBook()` will be called to update the `TaskBookStateList` and `currentStatePointer`.
+
+The following sequence diagram illustrates how the `edit` command is implemented.
+
+.Sequence diagram for `edit` command
+image::EditTaskSequenceDiagram.PNG[width=”800”]
+
+==== Design considerations
+===== Aspect: How to edit different fields of a task
+* **Alternative 1 (current choice):** Allows users to specify which fields they want to change using `Prefix`
+** Pros: Users can change more than one fields at a time.
+** Cons: Command might be longer and harder for users to type.
+* **Alternative 2:** Have individual functions for editing every field
+** Pros: Easy to implement.
+** Cons: Too many different commands for the users to handle.
+
+===== Aspect: Choosing a task to edit
+* **Alternative 1 (current choice):** Choose a `Task` based on `Index` from the `filteredTaskList`.
+** Pros: Easy to implement since Index is already implemented in TaskBook.
+** Cons: Users have to scroll through the entire list of tasks to find the `Task` they want to edit. If the current `filteredTaskList` shown to them does not contain the task they want to edit, they have to use the ‘List’ command first, resulting in a even longer list of tasks to filter.
+* **Alternative 2:** Choose a `Task` by a find command
+** Pros: Users do not have to scroll through long task lists to find the task they want to edit.
+** Cons: A separate find command has to be implemented. Since there may be task titles that are similar or even the same, the find command will have to show a `filteredTaskList` for users to select the task to be edited by index which is similar to the first implementation.
+// end::editTaskImplementation[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation

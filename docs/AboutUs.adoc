@@ -30,7 +30,7 @@ Responsibilities: Milestone features
 
 === Beh Kha Sim
 image::emobeany.png[width="150", align="left"]
-{empty}[https://github.com/emobeany[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/emobeany[github]] [https://cs2113-ay1819s1-w13-3.github.io/main/team/emobeany.html[portfolio]]
 
 Role: Developer +
 Responsibilities: Deadline features

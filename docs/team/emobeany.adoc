@@ -9,21 +9,24 @@
 
 == Introduction
 
-This portfolio documents my role and contributions to the CS2113 Software Engineering project.
+This portfolio documents my role and contributions to the CS2113 Software Engineering project in terms of my ability to write functional code, test code and using various platforms such as github effectively.
 
-TASK BOOK (TB) is a desktop schedule-managing application for busy students who prefer to use a desktop application to manage and better plan their daily tasks to ultimately lead a more productive life. More importantly, TB is optimized for those who prefer to work with a Command Line Interface (CLI) while still including the benefits of a Graphical User Interface (GUI). TB can help you manage your tasks faster than traditional paper notebooks or mobile calendar applications.
+*TASK BOOK* (TB) is a desktop schedule-managing application for busy students who prefer to use a desktop application to manage and better plan their daily tasks to ultimately lead a more productive life. More importantly, TB is optimized for those who prefer to work with a Command Line Interface (CLI) while still including the benefits of a Graphical User Interface (GUI). TB can help you manage your tasks faster than traditional paper notebooks or mobile calendar applications.
 
-TB is managed by a dedicated team of 4 members. *Some background info about the project scope and the team?*
+TB is managed by a dedicated team of 4 members and we were tasked to morph an existing application into one that fits our defined users and cater to their needs. We worked hard and came up with the *TaskBook* that we are very proud of.
 
 
 == Summary of contributions
+|===
+|_This section summarises my contributions to the project, including a range of enhancements, from simple and minor ones to major and more complex enhancements._
+|===
 
 * *Major enhancement*:
 
 ** Added the ability for users to select a specific date for tasks to be added to.
 *** What it does: This feature allows the user to choose a date to be set as the deadline for tasks to be added. It filters out invalid dates such as 29 February on common, non-leap years, so that users will not be able to add tasks to non-existing dates.
-*** Justification: This allows the user to add multiple tasks with the same deadline to the selected date without having to repeatedly type in the same date.
-*** Highlights: This enhancement is further improved with the addition of a date picker in the GUI where users can click on the mini calendar to select date without having to use the CLI. This caters to users who prefer to use the GUI to select a date.
+*** Justification: Users may have many tasks that they want to be added to the same deadline. This enhancement allows the user to add multiple tasks to the selected deadline without having to repeatedly type in the same date.
+*** Highlights: To be implemented properly, this enhancement requires the understanding of how different components work together in TaskBook. This enhancement is further improved with the addition of a date picker in the GUI where users can click on the mini calendar to select date without having to use the CLI. This caters to users who prefer to use the GUI to select a date.
 
 * *Minor enhancement*:
 
@@ -32,32 +35,49 @@ TB is managed by a dedicated team of 4 members. *Some background info about the 
 *** Justification: This allows users to view how many tasks with the same deadline have already been added and possibly defer the deadline of some less important tasks.
 ** 2)	Modified the edit command to fit the use of TB where task details can be edited by the user.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=emobeany[Functional code/Test code]]
 
 * *Other contributions*:
 
+** Documentation:
+
+*** Adjusted existing contents of the User Guide to make the flow smoother: (Pull request https://github.com/CS2113-AY1819S1-W13-3/main/pull/115[#115])
+*** Added in sections that are relevant to my enhancements: (Pull request https://github.com/CS2113-AY1819S1-W13-3/main/pull/117[#117])
+
 ** Community:
 
-*** Reported bugs and suggestions for other teams in the class (examples:)
+*** Reported bugs and suggestions for other teams in the class: (Issues https://github.com/CS2113-AY1819S1-T12-3/main/issues/184[#184], https://github.com/CS2113-AY1819S1-T12-3/main/issues/187[#187], https://github.com/CS2113-AY1819S1-T12-3/main/issues/190[#190], https://github.com/CS2113-AY1819S1-T12-3/main/issues/201[#201])
 
 == Contributions to the User Guide
 
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_This section highlights the documentation I have contributed to the User Guide. They showcase my ability to write documentation targeting end-users to provide simple and effective instructions to help them when using TB._
 |===
 
 include::../UserGuide.adoc[tag=selectDeadline]
 
 include::../UserGuide.adoc[tag=editTask]
 
+|===
+Future releases v2.0
+|===
+
+include::../UserGuide.adoc[tag=calendar_synchronisation]
+
+include::../UserGuide.adoc[tag=reminder_setting]
+
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_This section highlights the technical documentation I have contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project as well as provide sufficient details for future developers to maintain TaskBook._
 |===
 
 include::../DeveloperGuide.adoc[tag=select]
 
+include::../DeveloperGuide.adoc[tag=selectDeadlineImplementation]
+
 include::../DeveloperGuide.adoc[tag=editTask]
+
+include::../DeveloperGuide.adoc[tag=editTaskImplementation]
 
