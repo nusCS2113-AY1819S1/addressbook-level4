@@ -8,6 +8,9 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
+/**
+ * Provides test cases for {@code ModuleName}
+ */
 public class ModuleNameTest {
 
     @Test
