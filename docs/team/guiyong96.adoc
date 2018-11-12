@@ -135,11 +135,8 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 
 ===== Aspect: How ToggleRequests command functions
 
-**Process Flow**
-
 .Sequence Diagram of the ToggleRequests Component
 image::ToggleRequestSequenceDiagram.png[width="800"]
-
 
 // end::Request[]
 
