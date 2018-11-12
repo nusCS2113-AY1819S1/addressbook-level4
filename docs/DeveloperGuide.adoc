@@ -240,6 +240,11 @@ image::LoginModelObjectDiagram.PNG[width="800"]
 .  Whether or not the login is a success or a failure, will depend on if there is an account left in the list after the list is filtered.
 .  The existing user id, user password and user role fields in the `filteredLoginDetails` accounts list will not be edited in any way.
 
+Given below is the Object Diagram for the various associations between objects in the Model Component for the `budget` command, which is the first step of th Budgeting feature
+
+image::BudgetCommandObjectDiagram.png[width="800"]
+
+
 [[Design-Storage]]
 === Storage component
 
