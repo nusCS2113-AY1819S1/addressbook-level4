@@ -5,11 +5,10 @@
 
 == About me
 
-I am a team member of the JitHub developer team, in-charge of managing the documentations and implementing Reminder and Meeting Minutes features (Major enhancement). I also worked on natural language processing and Remark command (Minor enhancement)
+I am a team member of the JitHub developer team, in-charge of managing the documentations and implementing the Reminder feature (Major enhancement). I also attempted to work on natural language processing and Remark command (Minor enhancement)
 
 == PROJECT: JitHub - Schedule Management Software
 
----
 
 == Project Overview
 

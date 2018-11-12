@@ -330,9 +330,21 @@ Examples:
 // tag::reminder[]
 === Add Reminder: `reminder`
 
-Adds a reminder for your next meeting, containing details like the title, date, time and agenda of the meeting.
+Adds a reminder for your next meeting, containing details like the title, date, time and agenda of the meeting. +
+Format: `reminder tt/TITLE d/DATE st/TIME ag/AGENDA`
 
-Format: `reminder tt/TITLE d/DDMMYYYY st/TIME ag/AGENDA`
+[NOTE]
+====
+Reminders with the same `TITLE` are allowed but not with the same `DATE` *and* `TIME`
+====
+
+****
+* Only 1 of each field is allowed.
+* `TITLE`, `DATE`, `TIME` `AGENDA` all cannot be blank fields.
+* `TITLE` and `AGENDA` accepts any alphanumerical input of any length.
+* `DATE` must be in DDMMYYYY format, and only numbers will be accepted.
+* `TIME` must be in 24 hours format, cannot exceed 2359 and only numbers will be accepted.
+****
 
 Examples:
 
