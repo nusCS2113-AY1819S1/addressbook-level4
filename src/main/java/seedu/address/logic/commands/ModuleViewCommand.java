@@ -2,15 +2,12 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
-import java.util.Iterator;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleManager;
-import seedu.address.model.person.Person;
 
 /**
  * Views the details of a module in Trajectory.
@@ -43,27 +40,7 @@ public class ModuleViewCommand extends Command {
 
         Module module = ModuleManager.getInstance().getModuleByModuleCode(moduleCode.moduleCode);
 
-        int index = 0;
-        StringBuilder sb = new StringBuilder();
-        sb.append("Module Code: ").append(module.getModuleCode()).append("\n");
-        sb.append("Module Name: ").append(module.getModuleName()).append("\n");
-
-        if (module.getEnrolledStudents().isEmpty()) {
-            sb.append("There are no students enrolled in this module.");
-        } else {
-            sb.append("Students enrolled in this module:\n");
-            for (Iterator<Person> iterator = module.getEnrolledStudents().iterator(); iterator.hasNext();) {
-                Person student = iterator.next();
-                sb.append(String.format(ENROLLED_STUDENT_LIST_FORMAT,
-                        ++index, student.getName().fullName, student.getMatricNo().matricNo));
-
-                if (iterator.hasNext()) {
-                    sb.append("\n");
-                }
-            }
-        }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, moduleCode.moduleCode)
-                + "\n" + sb.toString());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, moduleCode.moduleCode),
+                ModuleManager.getInstance().getModuleAsHtmlRepresentation(module));
     }
 }
