@@ -42,8 +42,6 @@ public class TypicalItems {
         }
         return ab;
     }
-
-
     public static List<Item> getTypicalItems() {
         return new ArrayList<>(Arrays.asList(ARDUINO, RPLIDAR, MOTOR));
     }
