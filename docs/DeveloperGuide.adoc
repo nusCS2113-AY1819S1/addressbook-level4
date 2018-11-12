@@ -2765,6 +2765,49 @@ Expected: The student will have her course code changed to EEE.
 .. Test case: `student delete 1` +
 Expected: The student at INDEX 1 will be deleted from the system.
 
+// tag::modulemanualtest[]
+=== Module Management
+. Adding a module
+.. Prerequisites: The module must not already exist.
+.. Test case: `module add mc/NM2212 mn/Visual Design` +
+Expected: This module will be added into the system.
+.. Test case: `module add mc/NNNNNN mn/Visual Design` +
+Expected: The module code is not valid. You will not be able to add the module.
+.. Test case: `module add mc/NM2212 mn/Visual!@@$%#` +
+Expected: The module name contains special characters that are not allowed. You will not be able to add the module.
+
+. Editing a module
+.. Prerequisites: There must be a module with code NM2212.
+.. Test case: `module edit mc/NM2212 mn/VD` +
+Expected: The module name will be changed to VD.
+
+. Deleting a module
+.. Prerequisites: There must be a module with code NM2212.
+.. Test case: `module delete mc/NM2212` +
+Expected: The module name will be changed to VD.
+.. Test case: `module delete mc/NE1000 mn/Non-existent module` +
+Expected: The module with code NE1000 cannot be found. You won't be able to delete it.
+
+. Listing modules
+.. Prerequisites: NONE.
+.. Test case: `module list` +
+Expected: The list of modules in the system will be displayed. If there are no modules, the output should be blank.
+
+. Finding a module
+.. Prerequisites: There should be a module with the word `Design`, either in the module code or module name.
+.. Test case: `module find design` +
+Expected: The list of modules with the word `Design` in the name will be displayed.
+
+. Enrolling a student into a module
+.. Prerequisites: There should be a student with matric no. A0168000B, and a module with module code NM2212.
+.. Test case: `module enrol mc/NM2212 i/A0168000B` +
+Expected: The student with matric no. A0168000B will be enrolled in the module. The module details will be displayed.
+
+. Viewing a module's details
+.. Prerequisites: There should be a module with module code NM2212.
+.. Test case: `module view mc/NM2212` +
+Expected: The module details for NM2212 will be displayed, including the list of students enrolled in the module.
+// end::modulemanualtest[]
 
 // tag::classmanualtest[]
 === Creating a class
@@ -2797,6 +2840,8 @@ e/MAX_ENROLLMENT
 .. Prerequisites: Class(es) must exist in order to be listed.
 .. Test case: `class list` +
    Expected: The class information is display on the system.
+
+
 
 === Update Class Enrollment Limits
 . Modifies the max enrollment size for a class for the system.

@@ -52,3 +52,5 @@ include::../UserGuide.adoc[tag=modulemanagementsummary]
 include::../DeveloperGuide.adoc[tag=modulebiddingimplementation]
 
 include::../DeveloperGuide.adoc[tag=moduleusecases]
+
+include::../DeveloperGuide.adoc[tag=modulemanualtest]
