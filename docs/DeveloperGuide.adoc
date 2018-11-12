@@ -1056,9 +1056,9 @@ Use case ends
 * 3a. The comment commands are as such:
 +
 [none]
-** 3a1. “replyComment INDEX L/LINE C/STRING ” will reply to the comment at event INDEX at LINE of comment section.
-** 3a2. “addComment INDEX C/STRING “ will adds the STRING to the bottom of the comment section at event INDEX.
-** 3a3. “deleteComment INDEX L/LINE”  (only for admin) it will delete the comment at event INDEX and comment at LINE of comment section. +
+** 3a1. `replyComment INDEX L/LINE C/STRING` will reply to the comment at event INDEX at LINE of comment section.
+** 3a2. `addComment INDEX C/STRING` will adds the STRING to the bottom of the comment section at event INDEX.
+** 3a3. `deleteComment INDEX L/LINE`  (only for admin) it will delete the comment at event INDEX and comment at LINE of comment section. +
 Resume use case at step 4.
 
 [discrete]
