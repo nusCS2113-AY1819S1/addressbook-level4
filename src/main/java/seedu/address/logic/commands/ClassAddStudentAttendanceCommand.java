@@ -85,6 +85,9 @@ public class ClassAddStudentAttendanceCommand extends Command {
         }
 
         Attendance attendance = classroomManager.findAttendanceForClass(classToMarkAttendance, date);
+        if (attendance == null) {
+            attendance = new Attendance();
+        }
 
         if (classroomManager.isDuplicateClassroomStudentAttendance(classToMarkAttendance, matricNo, date)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE, matricNo));
