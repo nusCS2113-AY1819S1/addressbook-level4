@@ -12,9 +12,8 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
-    private Path exportCsvFilePath = Paths.get("data", "addressbook.csv");
-    private Path exportFilePath = Paths.get("data", "export.xml");
+    private Path addressBookFilePath = Paths.get("data" , "jithub.xml");
+    private Path exportCsvFilePath = Paths.get("data", "jithub.csv");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -42,10 +41,6 @@ public class UserPrefs {
 
     public Path getExportCsvFilePath() {
         return exportCsvFilePath;
-    }
-
-    public Path getExportFilePath() {
-        return exportFilePath;
     }
 
     @Override
