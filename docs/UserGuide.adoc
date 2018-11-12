@@ -126,6 +126,7 @@ Format: `TDL_complete INDEX`
 * Mark the task at the specified `INDEX` as `completed`.
 * The index refers to the index number shown in the displayed tasks list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Marking a completed task as `completed` is not allowed.
 ****
 
 Examples:
@@ -144,6 +145,7 @@ Format: `TDL_uncomplete INDEX`
 * Mark the task at the specified `INDEX` as `uncompleted`.
 * The index refers to the index number shown in the displayed tasks list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Marking an uncompleted task as `uncompleted` is not allowed.
 ****
 
 Examples:
@@ -367,7 +369,7 @@ Format: `check d/DATE`
 ****
 * The format for `d/DATE` must be DD-MM-YYYY, where DD refers to the date, MM refers to the month and YYYY refers to the year in numbers.
 * The summary uses user's data from both the to-do list and the expenditure tracker. It will be empty if no data can be retrieved.
-* The command can also be executed by clicking on a particular day in the calendar GUI. [Coming v2.0]
+* The command can also be executed by clicking on a particular day in the calendar GUI. [Coming in v2.0]
 ****
 
 Examples:
