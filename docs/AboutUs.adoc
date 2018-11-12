@@ -13,7 +13,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Oscar Zeng Hao
 image::oscarzeng.png[width="150", align="left"]
-{empty}[http://github.com/oscarzeng[github]] [<<oscarzeng#, portfolio>>]
+{empty}[http://github.com/oscarzeng[github]] [<<OscarZeng#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Future Planning features
