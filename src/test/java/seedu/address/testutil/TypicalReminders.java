@@ -23,11 +23,11 @@ import seedu.address.model.reminder.Reminder;
 public class TypicalReminders {
     public static final Reminder REMINDER_A = new ReminderBuilder().withTitle("Typical mundane meeting")
             .withDate("08022018")
-            .withTime("2359HRS")
+            .withTime("2359")
             .withAgenda("Just to fulfill mandatory project requirements").build();
     public static final Reminder REMINDER_B = new ReminderBuilder().withTitle("Final mundane meeting")
             .withDate("05122018")
-            .withTime("2300HRS")
+            .withTime("2300")
             .withAgenda("To say goodbye and thank you to members").build();
 
     // Manually added - reminder's details found in {@code CommandTestUtil}

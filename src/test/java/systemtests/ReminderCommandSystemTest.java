@@ -28,6 +28,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.ReminderCommand;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.suggestions.WrongCommandSuggestion;
 import seedu.address.model.Model;
 import seedu.address.model.person.Time;
@@ -69,14 +70,12 @@ public class ReminderCommandSystemTest extends AddressBookSystemTest {
          * -> added
          */
         toAdd = new ReminderBuilder(REMINDER1).withDate(VALID_REMINDER2_DATE).withTime(VALID_REMINDER2_TIME).build();
-        command = ReminderCommand.COMMAND_WORD + TITLE_DESC_REMINDER1 + DATE_DESC_REMINDER2 + TITLE_DESC_REMINDER2
-                + AGENDA_DESC_REMINDER1;
+        command = ReminderUtil.getReminderCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a reminder with content the same as another reminder in the address book except time -> added */
         toAdd = new ReminderBuilder(REMINDER1).withTime(VALID_REMINDER2_TIME).build();
-        command = ReminderCommand.COMMAND_WORD + TITLE_DESC_REMINDER1 + DATE_DESC_REMINDER1 + TIME_DESC_REMINDER2
-                + AGENDA_DESC_REMINDER1;
+        command = ReminderUtil.getReminderCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
         /* ------------------------ Perform reminder operation on the shown filtered list -------------------------- */
@@ -94,7 +93,7 @@ public class ReminderCommandSystemTest extends AddressBookSystemTest {
         /* Case: add a different reminder with same date and time -> rejected */
         toAdd = new ReminderBuilder(REMINDER2).withDate(VALID_REMINDER1_DATE).withTime(VALID_REMINDER1_TIME).build();
         command = ReminderUtil.getReminderCommand(toAdd);
-        assertCommandFailure(command, ReminderCommand.MESSAGE_SAME_TIME);
+        assertCommandFailure(command, ReminderCommand.MESSAGE_DUPLICATE_REMINDER);
 
         /* Case: missing title -> rejected */
         command = ReminderCommand.COMMAND_WORD + DATE_DESC_REMINDER2 + TIME_DESC_REMINDER2 + AGENDA_DESC_REMINDER2;
@@ -118,22 +117,22 @@ public class ReminderCommandSystemTest extends AddressBookSystemTest {
                 + "\n" + String.format(WrongCommandSuggestion.SUGGESTION_HEADER, ReminderCommand.COMMAND_WORD));
 
         /* Case: invalid title -> rejected */
-        command = ReminderCommand.COMMAND_WORD + INVALID_TITLE_DESC + VALID_REMINDER2_DATE + VALID_REMINDER2_TIME
-                + VALID_REMINDER2_AGENDA;
+        command = ReminderCommand.COMMAND_WORD + INVALID_TITLE_DESC + DATE_DESC_REMINDER2 + TIME_DESC_REMINDER2
+                + AGENDA_DESC_REMINDER2;
         assertCommandFailure(command, Title.MESSAGE_TITLE_CONSTRAINTS);
 
         /* Case: invalid date -> rejected */
-        command = ReminderCommand.COMMAND_WORD + VALID_REMINDER2_TITLE + INVALID_DATE_DESC + VALID_REMINDER2_TIME
-                + VALID_REMINDER2_AGENDA;
+        command = ReminderCommand.COMMAND_WORD + TITLE_DESC_REMINDER2 + INVALID_DATE_DESC + TIME_DESC_REMINDER2
+                + AGENDA_DESC_REMINDER2;
         assertCommandFailure(command, Date.MESSAGE_DATE_CONSTRAINTS);
 
         /* Case: invalid time -> rejected */
-        command = ReminderCommand.COMMAND_WORD + VALID_REMINDER2_TITLE + VALID_REMINDER2_DATE + INVALID_TIME_DESC
-                + VALID_REMINDER2_AGENDA;
+        command = ReminderCommand.COMMAND_WORD + TITLE_DESC_REMINDER2 + DATE_DESC_REMINDER2 + INVALID_TIME_DESC
+                + AGENDA_DESC_REMINDER2;
         assertCommandFailure(command, Time.MESSAGE_TIME_CONSTRAINTS);
 
         /* Case: invalid agenda  -> rejected */
-        command = ReminderCommand.COMMAND_WORD + VALID_REMINDER2_TITLE + VALID_REMINDER2_DATE + VALID_REMINDER2_TIME
+        command = ReminderCommand.COMMAND_WORD + TITLE_DESC_REMINDER2 + DATE_DESC_REMINDER2 + TIME_DESC_REMINDER2
                 + INVALID_AGENDA_DESC;
         assertCommandFailure(command, Agenda.MESSAGE_AGENDA_CONSTRAINTS);
     }

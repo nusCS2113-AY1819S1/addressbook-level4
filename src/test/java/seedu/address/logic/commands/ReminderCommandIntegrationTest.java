@@ -39,12 +39,4 @@ public class ReminderCommandIntegrationTest {
         assertCommandSuccess(new ReminderCommand(validReminder), model, commandHistory,
                 String.format(ReminderCommand.MESSAGE_SUCCESS, validReminder), expectedModel);
     }
-
-    @Test
-    public void execute_duplicateReminder_throwsCommandException() {
-        Reminder reminderInList = model.getAddressBook().getReminderList().get(0);
-        assertCommandFailure(new ReminderCommand(reminderInList), model, commandHistory,
-                ReminderCommand.MESSAGE_DUPLICATE_REMINDER);
-    }
-
 }

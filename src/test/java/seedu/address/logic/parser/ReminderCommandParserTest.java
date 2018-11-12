@@ -42,7 +42,7 @@ public class ReminderCommandParserTest {
         Reminder expectedReminder = new ReminderBuilder(REMINDER1).withTitle(VALID_REMINDER1_TITLE).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TIME_DESC_REMINDER1 + DATE_DESC_REMINDER1
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TITLE_DESC_REMINDER1 + DATE_DESC_REMINDER1
                 + TIME_DESC_REMINDER1 + AGENDA_DESC_REMINDER1, new ReminderCommand(expectedReminder));
 
         // multiple titles - last title accepted
