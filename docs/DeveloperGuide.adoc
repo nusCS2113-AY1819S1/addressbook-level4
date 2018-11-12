@@ -199,7 +199,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
-Given below is the Object Diagram that shows the associations between various objects within the `Logic` component for the Login functionality. +
+Given below is the Object Diagram that shows the associations between various objects within the `Logic` component for the Login functionality.
+[[fig-LoginLogicObjectDiagram]]
 .Associations between objects in the Logic Component for Login feature
 image::LoginLogicObjectDiagram.png[width="800"]
 
@@ -231,7 +232,8 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
-Given below is the Object Diagram that shows the associations between various objects within the `Model` component for the Login functionality. +
+Given below is the Object Diagram that shows the associations between various objects within the `Model` component for the Login functionality.
+[[fig-LoginModelObjectDiagram]]
 .Associations between objects in the Model Component for Login feature
 image::LoginModelObjectDiagram.png[width="800"]
 
@@ -253,7 +255,8 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
 
-Given below is the Object Diagram that shows the associations between various objects within the `Storage` component for the new account creation functionality. +
+Given below is the Object Diagram that shows the associations between various objects within the `Storage` component for the new account creation functionality.
+[[fig-LoginStorageObjectDiagram]]
 .Associations between objects in the Storage Component for account creation feature
 image::LoginStorageObjectDiagram.png[width="800"]
 
