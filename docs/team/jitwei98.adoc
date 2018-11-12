@@ -51,11 +51,10 @@ Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_inter
 * *Other contributions*:
 
 ** Project management:
-*** Managed milestones `v1.1` - `v1.4` (3 milestones) on GitHub
+*** Managed milestones `v1.1` - `v1.4` (4 milestones) on GitHub
 ** Enhancements to existing features:
 *** Updated the GUI to reflect persons and todos (Pull requests https://github.com[#117])
-*** Wrote additional tests for existing features to increase coverage from 77% to 80% (Pull requests https://github
-.com[#200])
+*** Wrote additional tests for existing features to increase coverage from 77% to 80% (Pull requests https://github.com[#200])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 // end edit
