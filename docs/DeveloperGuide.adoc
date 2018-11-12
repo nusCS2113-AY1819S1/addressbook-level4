@@ -246,6 +246,12 @@ Given below is the Object Diagram for the various associations between objects i
 
 image::BudgetCommandObjectDiagram.png[width="800"]
 
+Given below is the Object Diagram for the various associations between objects in the Model Component for the `calculatebudget` command, which is the second step of the Budgeting feature.
+
+image::BudgetCalculationCommandObjectDiagram.png[width="800"]
+
+. `filteredClubsList` and `filteredClubBudgetsList` are empty when `ModelManager` is first initialised.
+. The details of the attributes of the ClubBudgetElements and FinalClubBudget objects stored respectively in the `filteredClubsList` and `filteredClubBudgetsList` cannot be edited in any way.
 
 [[Design-Storage]]
 === Storage component
