@@ -344,9 +344,10 @@ Step 2. The `save` command calls `Model#saveStockList()`, which initiates a `sav
 
 Step 3. The `handleSaveStockListVersionEvent` handler calls the `saveStockListVersion()` method from the `StorageManager` class.
 
-The following sequence diagram shows how the undo operation works:
+The following sequence diagram shows how the save operation works:
 
 image::SaveCommandSequenceDiagram.png[width="800"]
+.Figure 10. How save/open operation works
 
 Step 4. The `ReadOnlyStockList` is saved as an xml file.
 
