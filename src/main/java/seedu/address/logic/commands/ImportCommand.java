@@ -24,9 +24,7 @@ public class ImportCommand extends Command {
     public static final String COMMAND_PARAMETERS = "Parameters: FILENAME (must end with .xml)\n";
     public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " import.xml";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import the persons in the file specified to the "
-            + "address book.\n"
-            + "Parameters: FILENAME (required)\n"
-            + "Example: " + COMMAND_WORD + " import.xml ";
+            + "address book.\n" + COMMAND_PARAMETERS + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported %1$s persons.";
 
