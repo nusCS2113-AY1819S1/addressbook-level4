@@ -14,9 +14,11 @@ endif::[]
 
 == Overview
 
-This Project Portfolio documents my contributions to _BookInventory_. _BookInventory_ is a *multi-platform* desktop application catered *primarily* for store owners to manage their book supplies. It includes features such as adding, deleting and requesting of books. Users interact with _BookInventory_ using *Command Line Interface (CLI)*, and has a *Graphic User Interface (GUI)* created with JavaFX. This application was developed by a *team of four* students over a semester with the original source code adapted from the Address Book (Level 4) project by SE-EDU.
+This Project Portfolio summarises my overall contributions to _BookInventory_. _BookInventory_ is a *multi-platform* desktop application catered *primarily* for store owners to manage their book supplies - adding, deleting, requesting of books, etc.. Users interact with _BookInventory_ using *Command Line Interface (CLI)*, and has a *Graphic User Interface (GUI)* created with JavaFX. This application was developed by a *team of four* students over a semester with the original source code adapted from the Address Book (Level 4) project by SE-EDU.
 
 == Summary of contributions
+
+This section records my contributions for _BookInventory_.
 
 * *Major enhancement*: added *the ability to conveniently stock, sell and delete books* from the inventory
 ** What it does: users can execute `stock`/`sell`/`delete` commands by selecting books' unique ISBN. To facilitate typing, users can also cycle through existing ISBNs by pressing kbd:[Tab].
