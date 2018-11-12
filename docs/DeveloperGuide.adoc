@@ -199,6 +199,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `gradebook delete mc/CS2113 cn/Assignment 1` Command
 image::GradebookDeleteSDForLogic.png[width="800"]
 // end::logiccomponent[]
+
+// start::modelcomponent[]
 [[Design-Model]]
 === Model component
 
@@ -226,6 +228,7 @@ The responsibilities of the `Model` component are as follows:
 * exposes a viewable list of data that can be 'observed' by the user. e.g. the UI can render an HTML page that displays the desired information through this list.
 
 Within the `Model` component, there are some information dependencies among the different Model Manager classes as shown in Figure 8. Hence, it should be noted that it is not possible to create a data before its parent data due to its hierarchical structure.
+// end::modelcomponent[]
 
 [[Design-Storage]]
 === Storage component
@@ -522,11 +525,12 @@ to the students.
 ** Cons: More difficult to implement; Handling date objects is tricky because there are many popular date formats.
 // end::modulebidding[]
 
-// tag::notesmanagementbrief[]
+// tag::notesexportimplementation[]
 === Notes data to Google Calendar feature
 ==== Feature Description:
-*EXPORT :* +
-The user is able to export notes from this application to a CSV file that follows the formatting required for importing calendar files to Google Calendar. The exporting process can be invoked by the user by entering the command below.
+*EXPORTING NOTES TO CSV :* +
+The user is able to export notes from this application to a CSV file that follows the formatting required for importing calendar files to Google Calendar. +
+The exporting process can be invoked by the user with the following command:
 
 *Command: `note export fn/FILE_NAME`*
 
@@ -538,10 +542,15 @@ The user is able to export notes from this application to a CSV file that follow
  The following command allows the user to export notes from a specific date range.
 
 Implementation of exporting to CSV is provided below. +
-1. Assuming that notes data are currently present in Trajectory, the user can invoke the `note export` command to begin exporting. +
+1. Assuming that exportable notes data are currently present in Trajectory, the user can invoke the `note export` command to begin exporting. +
 2. For each Note object to be exported, a corresponding CsvAdaptedNote object will be created. It is used to generate the correct formatting for the Google Calendar. +
 3. A CSV utility class will then be used to handle the writing to CSV. The file is saved to "/data/CSVexport" folder in the application's directory. +
-// end::notesmanagementbrief[]
+
+The following sequence diagrams shows the note exporting process:
+
+image::NoteExportSequenceDiagram.png[width="700"]
+
+// end::notesexportimplementation[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -2449,7 +2458,7 @@ Use case ends.
 Use case resumes at step 1.
 // end::classmanagementdepth[]
 
-// tag::notesmanagementdepth[]
+// tag::notesmanagementusecases[]
 [discrete]
 === Use case: Add Note
 
@@ -2463,7 +2472,7 @@ Use case resumes at step 1.
 
 *MSS* :
 
-1.  Teacher requests to add a note to a module.
+1.  Teacher requests to add a note.
 2.  System prompts the teacher to enter his/her note.
 3.  Teacher types the note.
 4.  System adds the note to the module and displays a message that it is successfully added.
@@ -2475,6 +2484,11 @@ Use case ends.
 * 1a. Teacher enters an invalid command.
 +
 ** 1a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+* 1b. The module code specified does not exist in Trajectory.
++
+** 1b1. System informs user that module does not exist.
 +
 Use case resumes at step 1.
 
@@ -2522,6 +2536,7 @@ Use case ends.
 *Precondition(s)* :
 
 * Note must exist in data file.
+* Module must exist in data file.
 
 *Guarantees* :
 
@@ -2558,6 +2573,12 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+* 3b. The module code specified does not exist in Trajectory.
++
+** 3b1. System informs user that module does not exist.
++
+Use case resumes at step 3.
+
 * 5a. The teacher decides to cancel.
 +
 ** 5a1. System cancels the editing process.
@@ -2576,8 +2597,8 @@ Use case ends.
 
 1.  Teacher requests to list all notes.
 2.  System displays the complete numbered list of notes.
-3.  Teacher requests to delete a specific note in the list.
-4.  System deletes the note and displays a message that it is successfully deleted.
+3.  Teacher requests to delete one or more notes in the list.
+4.  System deletes the note(s) and displays a message for successful deletion.
 +
 Use case ends.
 
@@ -2634,7 +2655,7 @@ Use case ends.
 +
 Use case resumes at step 1.
 
-* 2b. There are no entries found with the entered keyword(s).
+* 2b. There are no entries found that contains the keyword(s).
 +
 ** 2b1. System displays a message that no entries are found.
 +
@@ -2646,6 +2667,7 @@ Use case ends.
 *Precondition(s)* :
 
 * Notes must exist in data file.
+* Notes must contain a start date and end date.
 
 *Guarantees* :
 
@@ -2671,7 +2693,7 @@ Use case resumes at step 1.
 ** 2b1. System displays a message that no entries are found.
 +
 Use case ends.
-// end::notesmanagementdepth[]
+// end::notesmanagementusecases[]
 
 [appendix]
 == Non Functional Requirements
@@ -2915,9 +2937,9 @@ Expected: Similar to previous.
 .. Other incorrect add commands to try: `note add tt/x` (where x is a string of characters with character count greater than 30) +
    Expected: Same as previous.
 
-=== Deleting a note
+=== Deleting notes
 
-. Deleting a note in Trajectory while all notes are listed. +
+. Deleting notes in Trajectory while all notes are listed. +
 *Parameters (prefix):* +
 INDEX (no prefix), +
 INDEX_RANGE (no prefix)

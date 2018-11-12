@@ -15,24 +15,28 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 * *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jomcruz93[Link to Project Code Dashboard]
 * *Main feature implemented*: Notes Management
 ** What it does: It allows the user to manage notes within the application.
-** Justification: This feature improves the product's utility as users would sometimes need to take notes about important things. It serves to make Trajectory a step closer to becoming a one-stop app for users so that they would not need to rely on several other applications to accomplish their needs.
+** Justification: This feature improves the product's utility as users would sometimes need to take notes about important things. It serves to make Trajectory a step closer to becoming a one-stop app for target users so that they would not need to rely on several other applications to accomplish their needs.
 ** Highlights: Notes saved in Trajectory can be of two types: a plain sticky note or a calendar event. Those of the latter type are exportable to CSV, which may then be imported to Google Calendar.
 ** Credits: https://cs2113-ay1819s1-t16-1.github.io/main/AboutUs.html and https://github.com/nusCS2113-AY1819S1/addressbook-level4
 
 * *Other contributions*:
+** Enhancement to User-Experience:
+*** Implemented Auto-complete when typing commands from the command text field (Pull request https://github.com/CS2113-AY1819S1-T16-1/main/pull/313[#313])
 
 == Contributions to the User Guide
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=notesmanagementdepth]
+include::../UserGuide.adoc[tag=notesmanagementfeatures]
+
+include::../UserGuide.adoc[tag=notescommandsummary]
 
 == Contributions to the Developer Guide
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=notesmanagementbrief]
+include::../DeveloperGuide.adoc[tag=notesexportimplementation]
 
-include::../DeveloperGuide.adoc[tag=notesmanagementdepth]
+include::../DeveloperGuide.adoc[tag=notesmanagementusecases]
