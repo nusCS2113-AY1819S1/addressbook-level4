@@ -58,7 +58,7 @@ This enhancement changes the current model and greatly boosts the productivity o
 *** A *Comment field* for the comment section. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/91[#91])
 *** An *Attendee field* for the event's attendees. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58])
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Functional code]]
 
 * *Other contributions*:
 
