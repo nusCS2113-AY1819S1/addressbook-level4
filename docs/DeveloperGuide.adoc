@@ -581,7 +581,7 @@ When the selected person logs in, he or she will see the user as a friend as wel
 The following sequence diagram shows the execution of the Friend command:
 
 .Sequence diagram of friend command
-image::FriendCommandSequenceDiagram.png[width="300"]
+image::FriendCommandSequenceDiagram.png[width="500"]
 
 
 {nbsp}
