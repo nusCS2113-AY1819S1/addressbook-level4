@@ -256,6 +256,40 @@ Format:
 
 // TODO: update according to the latest features
 // TODO: Add preface
+// tag::export[]
+=== Export all contacts displayed: `export`
+
+// preface
+You can save the hassle of typing in the exact same contact details of your group members if one of them have already
+ done that.
+
+To do so, simply ask him/her to export the contact details of all persons listed in JitHub to a file and share it
+with the group. +
+====
+Format: `export FILENAME.xml`
+====
+
+Examples: +
+
+// TODO: add screenshots
+* Find the person(s) you want to export. +
+=====
+`find alex`
+=====
+image::findAlex.png[width="790"]
+* Export to a xml file with specific filename. +
+====
+`export alex.xml`
+====
+image::exportAlex.png[width="790"]
+
+[NOTE]
+====
+1.  The file will be located in `/data/FILENAME.xml`
+2.  This command overwrites any files with the same name at `/data/`
+====
+// end::export[]
+
 === Exporting all contacts : `exportall`
 
 Export the name, phone, address and email of all persons in the addressbook under the specified filetype. +
@@ -379,7 +413,7 @@ Format: `exit`
 
 JitHub data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually. +
-The storage file 'addressbook.xml' is located in the project root folder.
+The storage file 'jithub.xml' is located in the project root folder.
 
 // tag::suggestions[]
 === Getting Smart Suggestions
@@ -433,7 +467,7 @@ Command type: `encrypt for export`
 data of your previous JitHub folder.
 
 *Q*: How do I export my contacts to my phone? +
-*A*: Use the exportall command to generate a csv file and transfer that file to your phone. Use your phone contacts
+*A*: Use the `exportall` command to generate a csv file and transfer that file to your phone. Use your phone contacts
 app to import that file.
 
 == Command Summary
