@@ -1381,9 +1381,9 @@ _{ more test cases ... }_
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
-=== Inviting a person
+=== Inviting a person to an event
 
-. Inviting a person while all persons are listed
+. Inviting a person while all persons and events are listed
 
 .. Prerequisites: List all persons using the `list all` command. Multiple persons and events in the list.
 .. Test case: `invite 1 to/1` +
@@ -1392,12 +1392,12 @@ _{ more test cases ... }_
    Expected: Error message as employee is already invited to event.
 .. Test case: `invite 0 to/1` +
    Expected: No employee is invited. Error details shown in the status message.
-.. Other incorrect invite commands to try: `invite`, `invite x to/1` (where x is larger than the list size) +
-   Expected: Similar to previous.
+.. Other incorrect invite commands to try: `invite`, `invite x to/1` (where x is larger than the person list size), `invite 1 to/y` (where y is larger than the event list size) +
+   Expected: Error message.
 
-=== Removing a person
+=== Removing a person from an event
 
-. Inviting a person while all persons are listed
+. Removing a person while all persons and events are listed
 
 .. Prerequisites: List all persons using the `list all` command. Multiple persons and events in the list.
 .. Test case: `invite 1 to/1` then `remove 1 from/1`+
@@ -1406,8 +1406,8 @@ _{ more test cases ... }_
    Expected: Error message as employee is currently not invited to event.
 .. Test case: `delete 0 to/1` +
    Expected: No employee is removed. Error details shown in the status message.
-.. Other incorrect invite commands to try: `remove`, `remove x to/1` (where x is larger than the list size) +
-   Expected: Similar to previous.
+.. Other incorrect invite commands to try: `remove`, `remove x to/1` (where x is larger than the person list size), `remove 1 to/y` (where y is larger than the event list size) +
+   Expected: Similar to error message.
 
 
 === Listing people and events
