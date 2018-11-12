@@ -47,12 +47,13 @@ My contributions to the project are detailed below, covering aspects such as enh
 ** Project management:
 *** Set up issue tracker for the team repository
 *** Set up organization directory and team repository on GitHub
+*** Managed integration testing before every version release of product
 ** Documentation:
-*** Added value proposition and notable features sections in README
+*** Added value proposition and notable features sections in README. (https://github.com/CS2113-AY1819S1-F09-1/main/pull/88[#88])
 ** Community:
-*** Made non-trivial comments on team members' Pull Requests: https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Reported bugs and suggestions for other teams in the class
-*** Multi-user access level feature was utilized by the budgeting feature of NUSSU-Connect
+*** Made non-trivial comments on team members' Pull Requests: https://github.com/CS2113-AY1819S1-F09-1/main/pull/29[#29], https://github.com/CS2113-AY1819S1-F09-1/main/pull/80[#80]
+*** Reported bugs and follow-ups in another team's product. (https://github.com/CS2113-AY1819S1-T16-3/main/issues/112[#112],https://github.com/CS2113-AY1819S1-T16-3/main/issues/123[#123],https://github.com/CS2113-AY1819S1-T16-3/main/issues/127[#127])
+*** Multi-user access level feature was utilized by the budgeting feature of NUSSU-Connect. (https://github.com/CS2113-AY1819S1-F09-1/main/blob/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java[AddressBookParser.java])
 *** Renamed the product to "NUSSU-Connect"
 *** Introduced a tool to enable team members to convert Asciidoc files to PDF format
 ** Tools:
