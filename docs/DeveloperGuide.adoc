@@ -2473,7 +2473,7 @@ should allow you to navigate to the hidden tags within the legend.
 .. Test case: `addlimit d/12-11-2018 m/100` +
    Expected: No limit will be added.  Error message about already existing limit will be displayed.
 
-.. Other incorrect delete commands to try: `addlimit asd `, `addlimit x` (where x is an integer), `addlimit x/12-11-2018 m/asd` +
+.. Other incorrect addlimit commands to try: `addlimit asd `, `addlimit x` (where x is an integer), `addlimit x/12-11-2018 m/asd` +
    Expected: No limit will be added, related error information will be displayed.
 
 === Editing an existing normal limit
@@ -2511,7 +2511,7 @@ should allow you to navigate to the hidden tags within the legend.
 .. Test case: `editlimit d/11-11-2018 17-11-2018 m/100` +
    Expected: No limit will be edited. Error message about same limit will be displayed.
 
-.. Other incorrect delete commands to try: `editlimit asd `, `editlimit x` (where x is an integer), `editlimit x/12-11-2018 m/asd` +
+.. Other incorrect editlimit commands to try: `editlimit asd `, `editlimit x` (where x is an integer), `editlimit x/12-11-2018 m/asd` +
    Expected: No limit will be edited, related error information will be displayed.
 
 === Deleting an existing normal limit
@@ -2527,16 +2527,16 @@ should allow you to navigate to the hidden tags within the legend.
 
 . Trying to delete a normal limit in the Financial Planner with command format error.
 .. Test case: `deletelimit d/17-11-2018 11-11-2018` +
-   Expected: No limit will be edited. Error message about the dateStart must be earlier than dateEnd will be displayed.
+   Expected: No limit will be deleted. Error message about the dateStart must be earlier than dateEnd will be displayed.
 .. Test case: `deletelimit 11-11-2018 17-11-2018 m/100` +
-   Expected: No limit will be edited. Error message about wrong deletelimit command format will be displayed.
+   Expected: No limit will be deleted. Error message about wrong deletelimit command format will be displayed.
 
 .. Prerequisites: Check all the existing limit using the `checklimit` command.
   There is no existing limit with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
 .. Test case: `deletelimit d/11-11-2018 17-11-2018` +
-   Expected: No limit will be edited. Error message about no existing limit will be displayed.
+   Expected: No limit will be deleted. Error message about no existing limit will be displayed.
 .. Test case: `deletelimit d/12-11-2018` +
-   Expected: No limit will be edited. Error message about no existing limit will be displayed.
+   Expected: No limit will be deleted. Error message about no existing limit will be displayed.
 
 .. Other incorrect delete commands to try: `deletelimit asd `, `deletelimit x` (where x is an integer), `deletelimit x/12-11-2018 m/asd` +
    Expected: No limit will be deleted, related error information will be displayed.
@@ -2552,15 +2552,15 @@ should allow you to navigate to the hidden tags within the legend.
 
 . Trying to add a monthly limit to the Financial Planner with command format error.
 .. Test case: `addmonthlylimit 500` +
-   Expected: No limit will be edited. Error message about wrong addmonthlylimit command format will be displayed.
+   Expected: No limit will be added. Error message about wrong addmonthlylimit command format will be displayed.
 
 
 .. Prerequisites: Check all the existing limit using the `checklimit` command.
   There is already an existing monthly limit.
 .. Test case: `addmonthlylimit m/200` +
-   Expected: No limit will be edited. Error message about existing monthly limit will be displayed.
+   Expected: No limit will be added. Error message about existing monthly limit will be displayed.
 
-.. Other incorrect delete commands to try: `addmonthlylimit asd `, `addmonthlylimit  m/asd` +
+.. Other incorrect addmonthlylimit commands to try: `addmonthlylimit asd `, `addmonthlylimit  m/asd` +
    Expected: The monthly limit will not be added, related error information will be displayed.
 === Editing the monthly limit
 
@@ -2581,7 +2581,7 @@ should allow you to navigate to the hidden tags within the legend.
 .. Test case: `editmonthlylimit m/200` +
    Expected: No limit will be edited. Error message about no monthly limit will be displayed.
 
-.. Other incorrect delete commands to try: `editmonthlylimit asd `, `editmonthlylimit m/asd` +
+.. Other incorrect editmonthlylimit commands to try: `editmonthlylimit asd `, `editmonthlylimit m/asd` +
    Expected: The monthly limit will not be edited, related error information will be displayed.
 
 === Deleting the monthly limit
@@ -2604,7 +2604,7 @@ should allow you to navigate to the hidden tags within the legend.
 
 .. Prerequisites: There are limits inside the LimitList.
 .. Test case: `checklimit` +
-   Expected: The monthly limit will be deleted.
+   Expected: All the detailed limits' information will be displayed.
 
 .. Prerequisites: No limits inside the limit list.
 .. Test case: `checklimit` +

@@ -20,6 +20,28 @@
 
 /* Overrides for asciidoctor.css */
 
+p {
+   font-size:12px;
+}
+
+
+div {
+    margin:3px;
+}
+
+h1 {
+    font-size:24px;
+}
+
+h2 {
+   font-size:18px;
+}
+
+h3 {
+    font-size:15px;
+}
+
+
 a {
     color: #0074c7;
 }
