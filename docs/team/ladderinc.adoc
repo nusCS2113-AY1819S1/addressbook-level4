@@ -38,9 +38,10 @@ utilize this feature.
 * *Minor enhancement*: Added an enhancement to Search Pruning Feature that allows users to see a history of keywords
 that they have executed previously.
 
-** What it does: Every time a user performs a search, the command result box will display the list of keywords describing how the current displayed list is being filtered.
+** What it does: Every time a user performs a search, the command result box will display the list of keywords previously executed by the user and
+it describes how the current displayed list is being filtered.
 
-* *Minor enhancement*: Improved find command by introducing searching by tags and exclude functionality
+* *Minor enhancement*: Improved find command by introducing searching by tags and exclude functionality.
 
 ** What it does: Searching by tags allows users to filter the contacts according to the tagged description of each contact.
 Exclude functionality allows users to remove unwanted results from their search.
@@ -53,15 +54,22 @@ Exclude functionality allows users to remove unwanted results from their search.
 *** Managed releases `v1.1`, `v1.2`, `v1.2.1` and `v1.3` (4 releases) on GitHub.
 *** Managed milestones and deadlines of the project.
 
+** Documentatations:
+*** Updating Class Diagrams of Model in developer guide to reflect the changes in implementation. (Pull Requests https://github.com/CS2113-AY1819S1-F09-1/main/pull/144[#144]).
+*** Minor Tweaks to ReadMe, User Guide and Developer Guide to meet module requirements.
+
+** Tools:
+*** Setting up of Coveralls in team repository
+
 **  Community:
-*** Provided teammates with non-trivial PR reviews (Pull Requests https://github.com/CS2113-AY1819S1-F09-1/main/pull/25[#25], https://github.com/CS2113-AY1819S1-F09-1/main/pull/80[#80], https://github.com/CS2113-AY1819S1-F09-1/main/pull/81[#81])
+*** Provided teammates with non-trivial PR reviews and comments. (Pull Requests https://github.com/CS2113-AY1819S1-F09-1/main/pull/25[#25], https://github.com/CS2113-AY1819S1-F09-1/main/pull/80[#80], https://github.com/CS2113-AY1819S1-F09-1/main/pull/81[#81])
 *** Search Pruning Feature reused in Login/Logout feature of this application. (https://github.com/CS2113-AY1819S1-F09-1/main/blob/master/src/main/java/seedu/address/logic/commands/LoginCommand.java[LoginCommand.java])
-*** Identified bugs and provided follow-ups in another team’s product(Issue https://github.com/CS2113-AY1819S1-T13-1/main/issues/116[#116], https://github.com/CS2113-AY1819S1-T13-1/main/issues/124[#124])
+*** Identified bugs and provided follow-ups in another team’s product. (Issue https://github.com/CS2113-AY1819S1-T13-1/main/issues/109[#109], https://github.com/CS2113-AY1819S1-T13-1/main/issues/112[#112], https://github.com/CS2113-AY1819S1-T13-1/main/issues/116[#116], https://github.com/CS2113-AY1819S1-T13-1/main/issues/124[#124])
 
 == Contributions to the User Guide
 
 |===
-|_This section shows part of my contributions in the User Guide to explain to end-users about how they
+|_This section shows part of my contributions in the User Guide that explains to end-users about how they
 can utilize the Search Pruning Feature._
 |===
 
