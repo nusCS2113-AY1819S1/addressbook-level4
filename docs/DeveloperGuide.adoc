@@ -1292,7 +1292,41 @@ Use case ends.
 ** 3b1. ProManage shows an error message.
 ** Use case ends
 
+// tag::usecases_undo[]
+=== Use case: Undo the previously entered command.
+*MSS*
 
+1.  User requests to undo previous command
+4.  ProManage undos the command, restoring the previous state.
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. No commands left to undo.
+** 3a1. ProManage shows an error message.
+** Use case ends
++
+// end::usecases_undo[]
+
+// tag::usecases_redo[]
+=== Use case: Redo the previously undone command.
+*MSS*
+
+1.  User requests to redo the previously undone command
+4.  ProManage redos the command, restoring the address book or event list state.
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. No commands left to redo.
+** 3a1. ProManage shows an error message.
+** Use case ends
++
+// end::usecases_undo[]
 
 // tag::nonfunctionalrequirements[]
 == Non Functional Requirements

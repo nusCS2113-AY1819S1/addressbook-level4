@@ -243,6 +243,7 @@ Examples:
 * `editEvent 10 n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
 // end::editevent[]
 
+// tag::deleteEvent[]
 === Deleting an event : `deleteEvent`
 Priority level: `default`,`manager`
 
@@ -260,6 +261,7 @@ Examples:
 
 * `deleteEvent 2` +
 Deletes the 2nd event in the address book.
+// end::deleteEvent[]
 
 // tag::sort[]
 === Sorting all events: `sort`
@@ -395,14 +397,14 @@ Format: `selectEvent 1` +
 
 [NOTE]
 ====
-If any of the attendees are edited or removed, the filtered employee list will not update. The `selectEvent` command must be input again to view the updated list of attendees. +
+If any of the attendees are edited or removed, the filtered employee list will not update. The `selectEvent`
+command must be input again to view the updated list of attendees. +
 ====
 
 ****
 * Selects the event at the specified `EVENT_INDEX`.
 * The index refers to the index number shown in the displayed event list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* Event list will be filtered to show only the specified event.
 ****
 
 Examples:
@@ -410,7 +412,7 @@ Examples:
 * `selectEvent 2` +
 Selects the 2nd event in the address book and shows its attendees.
 
-* `invite 1 to/1` (adds an attendee) +
+* `invite 1 to/1` (invites an attendee to an event) +
 `selectEvent 1` (select the event to show the attendee) +
 `edit 1 n/New Name` (edit the name of the attendee) +
 `selectEvent 1` (re-selects the event to show the updated name of the attendee)
