@@ -24,7 +24,7 @@ public class EmailRecipientsCommand extends Command {
     public static final String ADD_RECIPIENTS_RECIPIENTS_ADDED = "Recipients added:\n";
     public static final String ADD_RECIPIENTS_ERROR_ONLY_CANDIDATES = "ERROR: You can only add candidates!\n";
     public static final String ADD_RECIPIENTS_ERROR_ONLY_JOB_OFFERS = "ERROR: You can only add job offers!\n";
-    public static final String ADD_RECIPIENTS_NOTHING_SELECTED = "ERROR: Nothing was selected!";
+    public static final String ADD_RECIPIENTS_NOTHING_SELECTED = "ERROR: Nothing was selected!\n";
     public static final String NEXT_RECIPIENTS_ERROR_NO_RECIPIENTS = "ERROR: There are no recipients selected!\n";
 
     @Override

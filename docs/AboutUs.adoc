@@ -39,7 +39,7 @@ Responsibilities: Documentation + Code Quality
 
 === Seah Ming Xun
 image::mingxunseah.png[width="150", align="left"]
-{empty}[http://github.com/MingXunSeah[github]]
+{empty}[http://github.com/MingXunSeah[github]][https://cs2113-ay1819s1-f09-4.github.io/main/team/mingxunseah.html[portfolio]]
 
 Role: Developer +
 Responsibilities: Integration

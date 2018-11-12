@@ -131,6 +131,19 @@ public class TypicalCompaniesAndJobOffers {
         return companyBook;
     }
 
+    /**
+     * returns companybook with typical companies but without job offers
+     * @return
+     */
+    public static CompanyBook getTypicalCompanyBookWithoutJobOffers() {
+        CompanyBook companyBook = new CompanyBook();
+        for (Company company : getTypicalCompanies()) {
+            companyBook.addCompany(company);
+        }
+
+        return companyBook;
+    }
+
     public static List<Company> getTypicalCompanies() {
         return new ArrayList<>(Arrays.asList(AUDI, BENTLEY, CHEVROLET, DODGE));
     }

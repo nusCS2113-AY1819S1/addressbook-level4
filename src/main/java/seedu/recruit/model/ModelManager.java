@@ -45,12 +45,13 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with recruit book: " + candidateBook + companyBook
                 + " and user prefs " + userPrefs);
 
-        EmailUtil.setEmailSettings(userPrefs.getEmailSettings());
         versionedRecruitBook = new VersionedRecruitBook(candidateBook, companyBook);
         filteredCandidates = new FilteredList<>(versionedRecruitBook.getCandidateList());
         filteredCompanies = new FilteredList<>(versionedRecruitBook.getCompanyList());
         filteredJobs = new FilteredList<>(versionedRecruitBook.getCompanyJobList());
         emailUtil = new EmailUtil();
+        EmailUtil.setEmailSettings(userPrefs.getEmailSettings());
+
         if (userPrefs.getHashedPassword() != null) {
             hideAll();
         }

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.recruit.commons.util.EmailUtil;
@@ -39,8 +39,7 @@ import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 /**
  * unit test for email parser .java
  */
-class EmailParserTest {
-
+public class EmailParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -49,35 +48,35 @@ class EmailParserTest {
 
     // ------------------------------- Recipient Stage ------------------------------- //
     @Test
-    void parseCommand_listCandidateRecipientState() throws Exception {
+    public void parseCommand_listCandidateRecipientState() throws Exception {
         LogicState state = new LogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
         assertTrue(parser.parseCommand(ListCandidateCommand.COMMAND_WORD, "", state, emailUtil)
                 instanceof ListCandidateCommand);
     }
 
     @Test
-    void parseCommand_listCompanyRecipientState() throws Exception {
+    public void parseCommand_listCompanyRecipientState() throws Exception {
         LogicState state = new LogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
         assertTrue(parser.parseCommand(ListCompanyCommand.COMMAND_WORD, "", state, emailUtil)
                 instanceof ListCompanyCommand);
     }
 
     @Test
-    void parseCommand_nextCommandRecipientState() throws Exception {
+    public void parseCommand_nextCommandRecipientState() throws Exception {
         LogicState state = new LogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
         assertTrue(parser.parseCommand(EMAIL_NEXT_COMMAND, "", state, emailUtil)
                 instanceof EmailRecipientsNextCommand);
     }
 
     @Test
-    void parseCommand_addCommandRecipientState() throws Exception {
+    public void parseCommand_addCommandRecipientState() throws Exception {
         LogicState state = new LogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
         assertTrue(parser.parseCommand(EMAIL_ADD_COMMAND, "", state, emailUtil)
                 instanceof EmailRecipientsAddCommand);
     }
 
     @Test
-    void parseCommand_findCandidateRecipientState() throws Exception {
+    public void parseCommand_findCandidateRecipientState() throws Exception {
         LogicState state = new LogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
         List<String> keywordsList = Arrays.asList(" n/foo", "p/bar", "e/baz");
         String keywords = keywordsList.stream().collect(Collectors.joining(" "));
@@ -88,7 +87,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_unknownCommandRecipientState() throws Exception {
+    public void parseCommand_unknownCommandRecipientState() throws Exception {
         LogicState state = new LogicState(EmailRecipientsCommand.COMMAND_LOGIC_STATE);
         try {
             parser.parseCommand("unknownCommand", "", state, emailUtil);
@@ -101,7 +100,7 @@ class EmailParserTest {
     // ------------------------------- EmailUtil.areCandidatesRecipients TRUE ------------------------------- //
 
     @Test
-    void parseCommand_listCandidateContentStateEmailUtilTrue() throws Exception {
+    public void parseCommand_listCandidateContentStateEmailUtilTrue() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(true);
         try {
@@ -113,7 +112,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_listCompanyContentStateEmailUtilTrue() throws Exception {
+    public void parseCommand_listCompanyContentStateEmailUtilTrue() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(true);
         assertTrue(parser.parseCommand(ListCompanyCommand.COMMAND_WORD, "", state, emailUtil)
@@ -121,7 +120,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_nextCommandContentsStateUtilTrue() throws Exception {
+    public void parseCommand_nextCommandContentsStateUtilTrue() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(true);
         assertTrue(parser.parseCommand(EMAIL_NEXT_COMMAND, "", state, emailUtil)
@@ -129,7 +128,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_addCommandContentsStateUtilTrue() throws Exception {
+    public void parseCommand_addCommandContentsStateUtilTrue() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(true);
         assertTrue(parser.parseCommand(EMAIL_ADD_COMMAND, "", state, emailUtil)
@@ -137,7 +136,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_backCommandContentsStateUtilTrue() throws Exception {
+    public void parseCommand_backCommandContentsStateUtilTrue() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(true);
         assertTrue(parser.parseCommand(EMAIL_BACK_COMMAND, "", state, emailUtil)
@@ -145,7 +144,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_unknownCommandContentStateEmailUtilTrue() throws Exception {
+    public void parseCommand_unknownCommandContentStateEmailUtilTrue() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(true);
         try {
@@ -159,7 +158,7 @@ class EmailParserTest {
     // ------------------------------- EmailUtil.areCandidatesRecipients FALSE ------------------------------- //
 
     @Test
-    void parseCommand_listCandidateContentStateEmailUtilFalse() throws Exception {
+    public void parseCommand_listCandidateContentStateEmailUtilFalse() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(false);
         assertTrue(parser.parseCommand(ListCandidateCommand.COMMAND_WORD, "", state, emailUtil)
@@ -167,7 +166,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_listCompanyContentStateEmailUtilFalse() throws Exception {
+    public void parseCommand_listCompanyContentStateEmailUtilFalse() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(false);
         try {
@@ -179,7 +178,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_findCandidateContentStateEmailUtilFalse() throws Exception {
+    public void parseCommand_findCandidateContentStateEmailUtilFalse() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(false);
         List<String> keywordsList = Arrays.asList(" n/foo", "p/bar", "e/baz");
@@ -191,7 +190,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_nextCommandContentStateEmailUtilFalse() throws Exception {
+    public  void parseCommand_nextCommandContentStateEmailUtilFalse() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(false);
         assertTrue(parser.parseCommand(EMAIL_NEXT_COMMAND, "", state, emailUtil)
@@ -199,7 +198,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_addCommandContentStateEmailUtilFalse() throws Exception {
+    public void parseCommand_addCommandContentStateEmailUtilFalse() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(false);
         assertTrue(parser.parseCommand(EMAIL_ADD_COMMAND, "", state, emailUtil)
@@ -207,7 +206,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_backCommandContentStateEmailUtilFalse() throws Exception {
+    public void parseCommand_backCommandContentStateEmailUtilFalse() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(false);
         assertTrue(parser.parseCommand(EMAIL_BACK_COMMAND, "", state, emailUtil)
@@ -215,7 +214,7 @@ class EmailParserTest {
     }
 
     @Test
-    void parseCommand_unknownCommandContentStateEmailUtilFalse() throws Exception {
+    public void parseCommand_unknownCommandContentStateEmailUtilFalse() throws Exception {
         LogicState state = new LogicState(EmailContentsCommand.COMMAND_LOGIC_STATE);
         emailUtil.setAreRecipientsCandidates(false);
         try {
@@ -229,28 +228,28 @@ class EmailParserTest {
     // ------------------------------- Email Send Stage ------------------------------- //
 
     @Test
-    void parseCommand_sendCommandSendState() throws Exception {
+    public void parseCommand_sendCommandSendState() throws Exception {
         LogicState state = new LogicState(EmailSendCommand.COMMAND_LOGIC_STATE);
         assertTrue(parser.parseCommand(EMAIL_SEND_COMMAND, "", state, emailUtil)
                 instanceof EmailSendSendCommand);
     }
 
     @Test
-    void parseCommand_backCommandSendState() throws Exception {
+    public void parseCommand_backCommandSendState() throws Exception {
         LogicState state = new LogicState(EmailSendCommand.COMMAND_LOGIC_STATE);
         assertTrue(parser.parseCommand(EMAIL_BACK_COMMAND, "", state, emailUtil)
                 instanceof EmailSendBackCommand);
     }
 
     @Test
-    void parseCommand_previewCommandSendState() throws Exception {
+    public void parseCommand_previewCommandSendState() throws Exception {
         LogicState state = new LogicState(EmailSendCommand.COMMAND_LOGIC_STATE);
         assertTrue(parser.parseCommand(EMAIL_PREVIEW_COMMAND, "", state, emailUtil)
                 instanceof EmailSendPreviewCommand);
     }
 
     @Test
-    void parseCommand_unknownSendState() throws Exception {
+    public void parseCommand_unknownSendState() throws Exception {
         LogicState state = new LogicState(EmailSendCommand.COMMAND_LOGIC_STATE);
         try {
             parser.parseCommand("unknownCommand", "", state, emailUtil);
