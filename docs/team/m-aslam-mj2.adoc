@@ -9,19 +9,22 @@
 
 == Overview
 
-Trajectory is a lightweight management system for those who need a no-frills solution for managing students, modules, grades, classes and notes. It is built for users who prefer typing (CLI) over GUI interaction and has a GUI created with JavaFX.
+Trajectory is a lightweight learning management system for those who need a
+no-frills solution for managing students, modules, grades, classes and notes.
+It is built for users who prefer typing (CLI) over GUI interaction and has a GUI created with JavaFX.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the capability for faculty members to manage courses and students.*
-** What it does: allows a faculty member to manage courses and students.
-** Justification: This feature improves the product significantly because it is specially built for users of an educational institution.
+* *Major enhancement*: implemented Student and Course Management
+** What it does: allows a faculty member to manage students, and courses within an institution.
+** Justification: Unlike AB4 which has a generalized target audience, the feature I implemented are written for the context of an LMS.
+Built specifically for the needs of teachers, and by extension -- the needs of an educational institution.
 ** Highlights: Cohesiveness with other features as they make use of the student/course APIs for their own use.
 
+* *Minor enhancement*: added the ability for the user to lock/unlock the system to prevent unauthorized use.
 * *Minor enhancement*: wrote a custom implementation of the storage-level layer for the team to use.
 * *Minor enhancement*: built an utility class for the rendering of data into HTML (Bootstrap).
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 * *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=m-aslam-mj2[Project Code Dashboard]
 
 * *Other contributions*:
@@ -33,15 +36,13 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 *** Managed milestones for the project, and ensured that required deliverables are ready.
 *** Managed releases `v1.2` - `v1.3.2` (5 releases) on GitHub
 ** Enhancements to existing features:
-*** WIP
+*** revamped existing AB4's commands to fit the theme of the product (e.g. add to student add)
 ** Documentation:
 *** Updated project-wide sections for both the UG and the DG.
 ** Community:
 *** PRs reviewed and approved.
 ** Tools:
 *** WIP
-
-_{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 
