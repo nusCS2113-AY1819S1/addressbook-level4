@@ -1204,7 +1204,7 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to list items
+1.  User requests to list all items
 2.  StockList shows a list of items
 3.  User requests to show items with a specific tag
 4.  StockList finds and shows the items
