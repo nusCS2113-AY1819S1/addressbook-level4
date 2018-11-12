@@ -168,5 +168,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Subscribe
     private void handleRestartUiEvent(RestartUiEvent event) {
         updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
+        updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
     }
 }
