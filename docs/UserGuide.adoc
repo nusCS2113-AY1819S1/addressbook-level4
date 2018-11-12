@@ -32,6 +32,8 @@ _BookInventory_ is catered solely for students as well as other managerial roles
 .Password Prompt
 image::FirstAppPopUp.png[width="800", align="left"]
 +
+
++
 . Key-in password
 * A password will be required by the application to use it.
 * If you do not know the password, please contact us using github directly.
@@ -42,11 +44,17 @@ image::FirstAppPopUp.png[width="800", align="left"]
 .Prompt for Owner if password is correct
 image::OwnerAccess.png[width="450", align="left"]
 +
+
++
 .Prompt for Accountant if password is correct
 image::AccountantAccess.png[width="450", align="left"]
 +
+
++
 .Prompt for Other Users if password is correct
 image::OtherAccess.png[width="450", align="left"]
++
+
 +
 * Now you are ready to explore _BookInventory_!
 . Input Commands
