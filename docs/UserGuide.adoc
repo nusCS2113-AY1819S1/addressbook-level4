@@ -362,7 +362,7 @@ Step 1: Submitting the data for budget allocation which is to be done by *club m
 
 Step 2: Calculating the budgets to be allocated which is to be done by *NUSSU treasurers*. +
 
-Step 3: Viewing the allocated budget of a club which can be done by either *club members* or *NUSSU treasurers*.
+Step 3: Viewing the allocated budget of a club which can be done by either *club members*, *NUSSU treasurers* or *club Presidents*.
 
 ==== Submitting data for budget allocation: `budget`
 This is the first step in the budgeting process!
