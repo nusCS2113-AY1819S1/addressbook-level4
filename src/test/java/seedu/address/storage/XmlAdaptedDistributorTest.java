@@ -56,14 +56,15 @@ public class XmlAdaptedDistributorTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         XmlAdaptedDistributor distributor =
-                new XmlAdaptedDistributor(VALID_NAME, INVALID_PHONE,VALID_DIST_PROD, VALID_TAGS);
+                new XmlAdaptedDistributor(VALID_NAME, INVALID_PHONE, VALID_DIST_PROD, VALID_TAGS);
         String expectedMessage = DistributorPhone.MESSAGE_PHONE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, distributor::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        XmlAdaptedDistributor distributor = new XmlAdaptedDistributor(VALID_NAME, null, VALID_DIST_PROD, VALID_TAGS);
+        XmlAdaptedDistributor distributor = new XmlAdaptedDistributor(VALID_NAME, null, VALID_DIST_PROD,
+                VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DistributorPhone.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, distributor::toModelType);
     }
@@ -86,5 +87,4 @@ public class XmlAdaptedDistributorTest {
                 new XmlAdaptedDistributor(VALID_NAME, VALID_PHONE, VALID_DIST_PROD, invalidTags);
         Assert.assertThrows(IllegalValueException.class, distributor::toModelType);
     }
-
 }
