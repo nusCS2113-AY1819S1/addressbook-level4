@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input index to clear schedule
  */
-public class ClearScheduleCommandParser implements Parser<ClearScheduleCommand>{
+public class ClearScheduleCommandParser implements Parser<ClearScheduleCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand

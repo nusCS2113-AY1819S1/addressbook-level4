@@ -29,6 +29,12 @@ public class MatchScheduleCommandParser implements Parser<MatchScheduleCommand> 
      */
     public static final String MESSAGE_MATCH_SCHEDULE_TIME_CONSTRAINTS = "Selected end time must be after start time.";
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the MatchScheduleCommand
+     * and returns the common schedules as a string.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+
     public MatchScheduleCommand parse(String args) throws ParseException {
 
         requireNonNull(args);
