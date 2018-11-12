@@ -294,7 +294,7 @@ Filter and list out events which they are listed as attendees.
 Format: `showmine`
 // end::showmine[]
 
-
+// tag::findEvent[]
 === Searching for the events using keywords: `findEvent`
 Priority level: all
 
@@ -310,6 +310,7 @@ Example:
 * Only full words will be matched
 * Events matching at least one keyword will be returned
 ****
+// end::findEvent[]
 
 
 // tag::invite[]
