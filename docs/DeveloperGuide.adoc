@@ -186,7 +186,7 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `ProManageParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -409,9 +409,9 @@ The sequence diagram below illustrates the execution of the `invite` command.
 ==== Current Implementation
 
 The `list` feature allows users to filter through all the individual people in ProManage and understand which department
-they are from. The command currently has 2 sub-features; `list all` and `list dep DEPARTMENT`. The user can list all the
-people in ProManage by simply typing `list all`. Alternatively, the user can filter through ProManage and get the
-relevant Person's information by listing those of the relevant department. The user can list multiple departments such
+they are from. The command currently has 4 sub-features; `list all`. `list all people`, `list all events` and `list dep DEPARTMENT`. The user can list all the
+people and events in ProManage by simply typing `list all`. Alternatively, the user can filter through ProManage and get the
+relevant Person's information by listing those of the specified department. The user can list multiple departments such
 as `list dep Admin Finance`. As of now, each person can only be inside one department.
 
 The listing of people from the respective departments is facilitated by the class: `Departments`,
@@ -445,9 +445,24 @@ Step 5. The filtered person list is first obtained by calling `PersonModel#updat
 
 Step 9. The `ListCommand#execute` finally returns a `CommandResult` with a success message.
 
-The sequence diagram below illustrates the execution of the `invite` command.
+The sequence diagram below illustrates the execution of the `list` command.
 
 image::ListSequenceDiagram.png[width="800"]
+
+==== Future Improvements
+
+===== Listing people who stay in the same town
+
+The current `list` command does not utilize the address of each person. Thus, to make data more easily accessible, ProManage can implement Google Maps API and mark out where each employee stays on the map.
+
+* Utilize Google Maps API and store the map - `list map`
+
+===== Listing people's birthdays
+
+The current person has no date of birth attribute. Thus, a date of birth attribute could be implemented. On top of that, ProManage can display the current date and time. Along with this,
+it can list out the upcoming birthdays of the personnel in the company.
+
+* Implement date of birth attribute and display current date and time the moment the application is launched. List out upcoming birthdays - `list birthdays`
 // end::List[]
 
 // tag::dataencryption[]
@@ -682,17 +697,9 @@ b. Require developers to download those libraries manually (this creates extra w
 * In charge of overall project.
 * He/She has the autonomy to add/edit/view/delete all of the events and tasks of his/her employees.
 
-**Department Head:**
-
-* In charge of his/her department .
-* He/she has the autonomy to communicate with
-  other department heads within the system.
-* He/she has the autonomy to add/edit/view/delete all of
-  the events of his/her employees within the department.
-
 **Employees:**
 
-  * He/she is only entitled to add/edit/view/delete all of the events of himself/herself within
+  * He/she is only entitled to view all of the events of himself/herself within
     the department.
 
 *Value proposition*:
@@ -732,13 +739,9 @@ relevant people
 
 |`* * *` |Project Manager |Edit the information of an event |Update the relevant information
 
-|`* * *` |Project Manager |View an employee's events |To monitor my employee's event schedule
-
 |`* * *` |Project Manager |View a colleague's events |To monitor my colleague's event schedule before I plan an event
 
 |`* * *` |Project Manager |View an employee's events on a certain date, month or year |To view the employee's events on a certain date, month or year
-
-|`* * *` |Project Manager |View an underling's events on a certain date, month or year |To check what have my underlings have been busy with
 
 |`* * *` |Project Manager |View a colleague's events on a certain date, month or year |To check if he/she is free for an important meeting
 
@@ -764,7 +767,7 @@ relevant people
 
 |`* * *` |Project Manager |Redo command |Redo my previously undo command
 
-|`* * *` |User |Exit command |
+|`* * *` |Project Manager |Exit command |
 
 |`* * *` |New Employee |See usage instructions |Refer to instructions when I forget how to use the ProManage
 
@@ -813,7 +816,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
@@ -825,7 +828,7 @@ Use case resumes at step 2.
 1.  User requests to edit information of person
 2.  ProManage shows a list of persons
 3.  User requests to edit a specific person in the list
-4.  AddressBook edits the person
+4.  ProManage edits the person
 +
 Use case ends.
 
@@ -839,7 +842,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
@@ -849,9 +852,9 @@ Use case resumes at step 2.
 *MSS*
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  ProManage shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  ProManage deletes the person
 +
 Use case ends.
 
@@ -865,7 +868,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
@@ -901,7 +904,7 @@ Use case resumes at step 2.
 1.  User requests to delete an event
 2.  ProManage shows a list of events
 3.  User requests to delete a specific event in the list
-4.  AddressBook deletes the event
+4.  ProManage deletes the event
 +
 Use case ends.
 
@@ -915,7 +918,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
@@ -945,7 +948,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
@@ -965,15 +968,15 @@ Use case ends.
 *Extensions*
 
 * 3a. Invalid employee.
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 ** Use case ends
 +
 * 3b. Employee is not originally invited to event.
-** 3b1. AddressBook shows an error message.
+** 3b1. ProManage shows an error message.
 ** Use case ends
 +
 * 3c. Event has no attendees
-** 3c1. AddressBook shows an error message.
+** 3c1. ProManage shows an error message.
 ** Use case ends
 
 [discrete]
@@ -992,15 +995,15 @@ Use case ends.
 *Extensions*
 
 * 3a. Invalid employee.
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 ** Use case ends
 +
 * 3b. Employee is already invited to event.
-** 3b1. AddressBook shows an error message.
+** 3b1. ProManage shows an error message.
 ** Use case ends
 +
 * 3c. Event conflicts with employee's schedule
-** 3c1. AddressBook shows an error message.
+** 3c1. ProManage shows an error message.
 ** Use case ends
 
 [discrete]
@@ -1019,11 +1022,11 @@ Use case ends.
 *Extensions*
 
 * 3a. Invalid employee.
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 ** Use case ends
 +
 * 3b. Invalid date format
-** 3b1. AddressBook shows an error message.
+** 3b1. ProManage shows an error message.
 ** Use case ends
 
 
@@ -1100,13 +1103,41 @@ _{ more test cases ... }_
 
 . Deleting a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list all people` command. Multiple persons in the list.
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
+
+_{ more test cases ... }_
+
+=== Listing people and events
+
+. Listing personnel of specific departments
+
+.. Prerequisites: Add personnel of different departments into ProManage using the `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN des/Manager`
+and `add n/Mark p/93455678 e/mark@example.com a/Mark street, block 12, #05-01 dep/Marketing des/Manager` and `add n/Tracy p/98213456 e/tracy@example.com a/Tracy Street, WaterWorks Condo, block J1, #01-01 dep/Finance des/Employee`
+.. Test case: `list dep Marketing` +
+   Expected: The details of Mark or any personnel who is in the Marketing department will appear. Details of the listed personnel will be listed.
+.. Test case: `list dep Admin Finance` +
+   Expected: The details of John and Tracy or any personnel who is in the Admin and Finance department will appear. Details of the listed personnel will be listed.
+.. Test case: `list all people` +
+   Expected: The details of all personnel will be listed.
+.. Other incorrect delete commands to try: `list admn`, `list al people` (where the input is not of correct spelling form)+
+   Expected: Error thrown.
+
+. Listing all personnel and events
+
+.. Prerequisites: Add personnel of different departments such as the example above. Add different events into ProManage using the `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` and
+`addEvent n/Financial Review d/Review the financial quarter l/Conference Room 4 date/2018-10-23 s/14:00 e/16:30`.
+
+.. Test case: `list all events` +
+   Expected: The details of all events will be listed.
+
+.. Test case: `list dep Admin Finance` or any DEPARTMENT -> `list all`
+   Expected: The details of all personnel and events will be listed.
 
 _{ more test cases ... }_
 

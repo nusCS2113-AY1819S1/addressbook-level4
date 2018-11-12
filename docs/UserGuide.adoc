@@ -101,7 +101,7 @@ Priority level: `default`,`manager`
 
 
 Adds an employee to ProManage +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT des/DESIGNATION [t/TAG]...`
 
 [NOTE]
 ====
@@ -117,7 +117,7 @@ An employee can have any number of tags (including 0)
 
 Example:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN des/Manager`
 
 
 === Editing an employee : `edit`
