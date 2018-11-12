@@ -71,6 +71,7 @@ Format: `login USERID PASSWORD ROLE`
 * The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during login
 * There must not be any additional unnecessary parameters in user input during the login process
 * There must not be any spaces in USERID, PASSWORD and ROLE
+* Order of parameters, USERID, PASSWORD and ROLE matters
 ****
 
 Examples:
@@ -118,12 +119,13 @@ Format: `createaccount USERID PASSWORD ROLE`
 * USERID, PASSWORD and ROLE must be present in user input during the account creation process
 * There must not be any unnecessary parameters in user input during the account creation process
 * There must not be any spaces in USERID, PASSWORD and ROLE
+* Order of parameters, USERID, PASSWORD and ROLE matters
 ****
 
 Examples:
 
 * `createaccount A1234569M zaq1xsw2cde3 member` +
-Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the NUSSU-Connect.
+Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member.
 
 The image below shows the outcome of a successful creation of a new account.
 
