@@ -21,6 +21,13 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleManager;
 import seedu.address.model.module.ModuleName;
+import seedu.address.model.note.Note;
+import seedu.address.model.note.NoteDate;
+import seedu.address.model.note.NoteLocation;
+import seedu.address.model.note.NoteManager;
+import seedu.address.model.note.NoteText;
+import seedu.address.model.note.NoteTime;
+import seedu.address.model.note.NoteTitle;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNo;
@@ -44,6 +51,7 @@ public class DebugCommand extends Command {
 
         ModuleManager moduleManager = ModuleManager.getInstance();
         ClassroomManager classroomManager = ClassroomManager.getInstance();
+        NoteManager noteManager = NoteManager.getInstance();
 
         StorageController.wipeAllProductionData();
         StorageController.createFiles();
@@ -52,6 +60,7 @@ public class DebugCommand extends Command {
         moduleManager.clearModules();
         model.resetData(new AddressBook());
         model.commitAddressBook();
+        noteManager.clearNotes();
 
         UserManager.getInstance().addUser(new User("defaultUser", "password", 1));
         UserManager.getInstance().saveUserList();
@@ -158,6 +167,74 @@ public class DebugCommand extends Command {
 
         classroomManager.saveClassroomList();
 
+        noteManager.addNote(new Note(
+                        null,
+                        new NoteTitle("My first note"),
+                        new NoteDate("12-11-2018"),
+                        new NoteTime("11:00 PM"),
+                        new NoteDate("13-11-2018"),
+                        new NoteTime("11:59 PM"),
+                        new NoteLocation("House"),
+                        new NoteText("Hello World!")
+                )
+        );
+        noteManager.addNote(new Note(
+                        new ModuleCode("CS2113"),
+                        new NoteTitle("My second note"),
+                        new NoteDate("15-11-2018"),
+                        new NoteTime("1:00 AM"),
+                        new NoteDate("20-11-2018"),
+                        new NoteTime("6:30 PM"),
+                        new NoteLocation("NUS"),
+                        new NoteText("This is the second note.")
+                )
+        );
+        noteManager.addNote(new Note(
+                        null,
+                        new NoteTitle("Exam schedules"),
+                        null,
+                        new NoteTime("12:00 AM"),
+                        null,
+                        new NoteTime("11:59 PM"),
+                        new NoteLocation(""),
+                        new NoteText("CS2113: 28-12-2018\nCS2040C: 29-12-2018\nCS1010: Tomorrow")
+                )
+        );
+        noteManager.addNote(new Note(
+                        new ModuleCode("CS1010"),
+                        new NoteTitle("note"),
+                        new NoteDate("12-11-2018"),
+                        new NoteTime("11:00 PM"),
+                        new NoteDate("13-11-2018"),
+                        new NoteTime("11:59 PM"),
+                        new NoteLocation("NUS"),
+                        new NoteText("C")
+                )
+        );
+        noteManager.addNote(new Note(
+                        null,
+                        new NoteTitle(""),
+                        null,
+                        new NoteTime("11:00 PM"),
+                        null,
+                        new NoteTime("11:59 PM"),
+                        new NoteLocation(""),
+                        new NoteText("Hello World!")
+                )
+        );
+        noteManager.addNote(new Note(
+                        null,
+                        new NoteTitle("Staff meeting"),
+                        new NoteDate("12-11-2018"),
+                        new NoteTime("11:00 PM"),
+                        new NoteDate("13-11-2018"),
+                        new NoteTime("11:59 PM"),
+                        new NoteLocation("NUS Techno Edge"),
+                        new NoteText("Discuss final exam questions.")
+                )
+        );
+
+        noteManager.saveNoteList();
 
         return new CommandResult("DEBUG COMMAND EXECUTED. ",
                 HtmlTableProcessor.getH1Representation("Populated data set."));
