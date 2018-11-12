@@ -169,7 +169,6 @@ public class NoteEditCommandTest {
         noteManager.setFilteredNotesNoFilter();
 
         int index = 5; // arraylist size: 3, accessed index = 4 (zero-based) -> out of bounds
-        ModuleCode newModuleCode = new ModuleCode("CS5000");
         NoteTitle newTitle = new NoteTitle("My new title");
         NoteDate newStartDate = new NoteDate("1-1-2019");
         NoteTime newStartTime = new NoteTime("11:00 AM");
@@ -181,7 +180,7 @@ public class NoteEditCommandTest {
         NoteEditCommand noteEditCommand =
                 new NoteEditCommand(
                         index,
-                        newModuleCode,
+                        null,
                         newTitle,
                         newStartDate,
                         newStartTime,
