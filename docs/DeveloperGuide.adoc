@@ -948,4 +948,60 @@ _{ more test cases ... }_
 .. Test case: 'sell n/NAME q/12', where NAME is the name of a drink that is in the inventory, and its quantity is less than 12. +
    Expected: The message "Insufficient quantity in stock to perform operation" is displayed.
 
-=== 
+=== Analysing costs
+. Analyse costs over a period of a day
+
+.. Prerequisites: There must be at least one transaction in the transaction list.
+.. Test case: `costs` +
+   Expected: The total cost incurred *in a day* is calculated and shown. The `PURCHASE` transactions are listed in the transaction list.
+
+. Analyse costs over a period of 7 days (including current day)
+
+.. Prerequisites: There must be at least one transaction in the transaction list.
+.. Test case: `costs -w` +
+   Expected: The total cost incurred *in 7 days* is calculated and shown. The `PURCHASE` transactions are listed in the transaction list.
+
+. Analyse costs over a period of 30 days (including current day)
+
+.. Prerequisites: There must be at least one transaction in the transaction list.
+.. Test case: `costs -m` +
+   Expected: The total cost incurred *in 30 days* is calculated and shown. The `PURCHASE` transactions are listed in the transaction list.
+
+=== Analysing revenue
+. Analyse revenue over a period of a day
+
+.. Prerequisites: There must be at least one transaction in the transaction list.
+.. Test case: `revenue` +
+   Expected: The total revenue earned *in a day* is calculated and shown. The `SALE` transactions are listed in the transaction list.
+
+. Analyse revenue over a period of 7 days (including current day)
+
+.. Prerequisites: There must be at least one transaction in the transaction list.
+.. Test case: `revenue -w` +
+   Expected: The total revenue earned *in 7 days* is calculated and shown. The `SALE` transactions are listed in the transaction list.
+
+. Analyse revenue over a period of 30 days (including current day)
+
+.. Prerequisites: There must be at least one transaction in the transaction list.
+.. Test case: `revenue -m` +
+   Expected: The total revenue earned *in 30 days* is calculated and shown. The `SALE` transactions are listed in the transaction list.
+
+=== Analysing profit
+. Analyse profit over a period of a day
+
+.. Prerequisites: There must be at least one transaction in the transaction list.
+.. Test case: `profit` +
+   Expected: The total profit earned *in a day* is calculated and shown. The `SALE` and `PURCHASE` transactions within the time period are listed in the transaction list.
+
+. Analyse profit over a period of 7 days (including current day)
+
+.. Prerequisites: There must be at least one transaction in the transaction list.
+.. Test case: `profit -w` +
+   Expected: The total profit earned *in 7 days* is calculated and shown. The `SALE` and `PURCHASE` transactions within the time period are listed in the transaction list.
+
+. Analyse profit over a period of 30 days (including current day)
+
+.. Prerequisites: There must be at least one transaction in the transaction list.
+.. Test case: `profit -m` +
+   Expected: The total profit earned *in 30 days* is calculated and shown. The `SALE` and `PURCHASE` transactions within the time period are listed in the transaction list.
+
