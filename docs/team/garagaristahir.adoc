@@ -1,6 +1,6 @@
 = Gara Tahir - Project Portfolio
 :site-section: AboutUs
-:imagesDir: ../images
+:imagesDir: images
 :stylesDir: ../stylesheets
 
 By: `Gara Tahir`
