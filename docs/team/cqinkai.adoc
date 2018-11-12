@@ -3,46 +3,63 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-This portfolio summarizes my contributions to the https://github.com/CS2113-AY1819S1-T12-1/main/releases/download/v1.3/eventmanager.jar[Event Manager] Application, whereby our team of 5 (http://github.com/chiaxr[Xiang Rong], https://github.com/Geraldcdx[Gerald], http://github.com/jamesyaputra[James], http://github.com/tertium3[Long], http://github.com/cqinkai[Qin Kai]) worked on it as part of our module on software engineering, over a period of 8 weeks. I was the developer in charge of the Event Status feature and the Event Reminder feature in Event Manager.
+This portfolio summarizes my contributions to the https://github.com/CS2113-AY1819S1-T12-1/main/releases/download/v1.3/eventmanager.jar[Event Manager] Application, whereby our team of 5 (http://github.com/chiaxr[Xiang Rong], https://github.com/Geraldcdx[Gerald], http://github.com/jamesyaputra[James], http://github.com/tertium3[Long], http://github.com/cqinkai[Qin Kai]) worked on it as part of our module on software engineering in the National University of Singapore (NUS), over a period of 8 weeks. I was the developer in charge of the Event Status feature and the Event Reminder feature in Event Manager.
 
-== PROJECT: Event Manager
+== Project: Event Manager
 
-Event Manager is an enhanced version of the https://github.com/se-edu/addressbook-level4/releases/download/v0.8/addressbook.jar[Address Book] Application
----
+Event Manager is a morphed and enhanced version of the https://github.com/se-edu/addressbook-level4/releases/download/v0.8/addressbook.jar[Address Book] Application. It is a desktop application for students living in Residential Colleges to manage all the activities happening throughout the college. The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. It is written in Java, and has about 10k lines of code (LoC).
 
 == Overview
 
-Event Manager is a desktop application for students living in Residential Colleges to manage all the activities happening throughout the college. The user interacts with it using a Command Line Interface (CLI), and it has a GUI created with JavaFX. It is written in Java, and has about 10k lines of code (LoC).
+This section presents the purpose of developing the Event Manager Application and the scope of our project.
 
-The following is a list of the main features in Event Manager:
+Students living in Residential Colleges are presented with a myraid of activities on a daily basis. These activities vary from Interest Group (IG) activities, House events and Master's Tea (where the college invites a notable guest speaker for a sharing session with the students) among many others. With so many events going on in the colleges while meeting the academic requirements of the university life, many students often find it a struggle to balance the conflicting demands. +
+
+Thus, Event Manager offers a pragmatic solution to the students' problem of managing events in colleges, by allowing them to view and register for any event in one setting. Additionally, it is supported by other features to enhance the user's experience, such as the Comment feature and the Reminder feature. +
+
 ====
-.  *Authentication* -- Admin accounts to manage events and user accounts to identify users.
-.  *Find* -- A search feature to filter events based on keywords in the events' data fields.
-.  *Registration* -- Users can indicate their attendance for events. Attendance is displayed to all other users.
-.  *Reminder* -- Automated reminders are sent to users who have registered for events that are happening in the next 24 hours.
-.  *Comment* -- A comment section to facilitate interactions amongst the users for an event.
-.  *Status* -- Displays the status of an event to users. Statuses can be 'Completed' or 'Upcoming'.
+*The following is a list of the main features in Event Manager:* +
+
+.  *Authentication:* Admin accounts to manage events and user accounts to register for events.
+.  *Find:* A search feature to filter events based on keywords in the events' data fields.
+.  *Registration:* Users can indicate their attendance for events. Attendance is displayed to all other users.
+.  *Reminder:* Automated reminders are sent to users who have registered for events that are happening in the next 24 hours.
+.  *Comment:* A comment section to facilitate interactions amongst the users for an event.
+.  *Status:* Displays the status of an event to users. Statuses can either be 'Completed' or 'Upcoming'.
+.  *Export:* Allows users to export their registered events as a calendar file, compatible with other calendar applications. 
+.  *Undo/Redo:* Allows users to undo/redo previous commands one at a time.
+.  *Basic features:* Allows admin users to create, update, edit and delete events.
 ====
 
 == Summary of contributions
-* *Major enhancement #1*: +
-** added *a new self-updating status field for events*
-** What it does: allows the user to easily discern completed events from upcoming ones. Completed events are events that have taken place while the upcoming events are those that have yet to occur.
-** Justification: This feature is important and enhances the product because a user would have to strain his/her eyes to look through each event's details to ascertain which events have occurred and which ones are coming up.
-** Highlights: This enhancement changes the current model and increases the list of commands available to users. It required an in-depth analysis of design alternatives.
 
-* *Major enhancement #2*: +
-** added *a reminder mechanism for user-registered events*
-** What it does: Sends a reminder to users for any upcoming events (those happening in the next 24 hours) that they have registered for.
-** Justification: This
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+This section outlines the breadth of my contributions in order of magnitude, starting with my biggest contributions. 
 
-* *Minor enhancement*: added new information fields for the events.
-** a contact field for the name of the person in-charge of the event. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/14[#14])
-** a comment field for the comment section. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/91[#91])
-** an attendee field for the event's attendees. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58])
+* *Major enhancement #1:* +
+** Added *a reminder mechanism for user-registered events*
+** *What it does* +
+Sends a reminder to users for any upcoming events (those happening in the next 24 hours) that they have registered for.
+** *Justification* +
+This feature significantly increases the capacity of Event Manager, by maximizing its potential to create meaningful interactions with the user, apart from the user's interactions with the CLI.
+** *Highlights* +
+This enhancement is the first software-driven feature in Event Manager, whereby the feature runs without any user/operator interactions. This feature required a good understanding of the overall system architecture to implement, in particular the event-driven nature of interactions between components in the Event Manager.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Major enhancement #2:* +
+** Added *a new self-updating status field for events*
+** *What it does* +
+Allows the user to easily discern completed events from upcoming ones. Completed events are events that have taken place while upcoming events are those that have yet to occur.
+** *Justification* +
+This feature enhances the product remarkably because before its implementation, a user would have to strain his/her eyes to look through each event's details to ascertain which events have occurred and which ones are coming up.
+** *Highlights* +
+This enhancement changes the current model and greatly boosts the productivity of Event Manager's users. Its implementation was the result of thorough analysis of several design alternatives, based on their efficiency and effectiveness. 
+
+* *Minor enhancement:* +
+** Added *new information fields for events*
+*** A *Contact field* for the organiser/person-in-charge of the event. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/14[#14])
+*** A *Comment field* for the comment section. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/91[#91])
+*** An *Attendee field* for the event's attendees. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58])
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Functional code]]
 
 * *Other contributions*:
 
@@ -50,9 +67,8 @@ The following is a list of the main features in Event Manager:
 *** Set up milestones and issue labels for the project on GitHub
 ** Enhancements to existing features:
 *** Morphed the address field into a venue field (https://github.com/CS2113-AY1819S1-T12-1/main/pull/53[#53])
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14])
+*** Tweaked existing contents of the Developer Guide as well as checked for grammatical errors (view changes https://github.com/CS2113-AY1819S1-T12-1/main/commit/87e7879549630f0d7cee12d5855eb63bb4501698#diff-d23c8091515dc18149f4f2e759e1e288[here])
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T09-4/main/issues/132[1], https://github.com/CS2113-AY1819S1-T09-4/main/issues/135[2], https://github.com/CS2113-AY1819S1-T09-4/main/issues/146[3])
 
@@ -79,8 +95,4 @@ include::../DeveloperGuide.adoc[tag=reminderUsecase]
 
 include::../DeveloperGuide.adoc[tag=updateStatusUsecase]
 
-== PROJECT: PowerPointLabs
-
 ---
-
-_{Optionally, you may include other projects in your portfolio.}_
