@@ -447,11 +447,15 @@ Add a reminder to notify users of an upcoming meeting.
 
 ==== Current Implementation
 
-The reminder mechanism is facilitated by the `ReminderCommand` from the `Logic` component. A `Reminder` object is instantiated to add a reminder and each `Reminder` object consists of `Title`, `Date`, `Time` and `Agenda` objects.
+The reminder mechanism is facilitated by the `ReminderCommand`, which extends `Command`, from the `Logic` component. A `Reminder` object is instantiated and each `Reminder` object consists of `Title`, `Date`, `Time` and `Agenda` objects.
 
 The following diagram illustrates the Reminder class:
 
 image::ReminderClassDiagram.png[width="200"]
+
+Given below is an example usage scenario of how the reminder mechanism behaves at each step.
+
+Step 1. A student launches the application for the first time
 
 The following diagram illustrates how the Reminder operation works:
 
