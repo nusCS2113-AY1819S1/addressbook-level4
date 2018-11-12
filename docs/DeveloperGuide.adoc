@@ -295,8 +295,8 @@ account that is associated with an instance of a successful login. An object bel
 contains a complete list of all existing accounts stored in `LoginBook`. There is one crucial operation in `FilteredList`,
 which is often used:
 
-* `FilteredList#setPredicate(predicate)` -- Filters the list of accounts in `filteredLoginDetails` according to the
-predicates determined after the user inputs their login credentials.
+* `FilteredList#setPredicate(predicate)` -- Filters accounts in `filteredLoginDetails` according to the
+predicates determined after the user inputs their login details.
 
 `ModelManager` implements `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)` and
 `getFilteredLoginDetailsList()` found in the `Model` interface. `getFilteredLoginDetailsList()` is called when the
@@ -324,7 +324,7 @@ an `LoginUserIdPasswordRoleCommand` object with the user input, parsed, to `Addr
 Step 4. `LogicManager` calls the `execute()` method in `LoginUserIdPasswordRoleCommand`. Next, `LoginUserIdPasswordRoleCommand`
 calls `updateFilteredLoginDetailsList(updatedIdPredicate)` in `Model` with the computed predicate from user ID field input.
 
-Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, and filters out accounts whose user Id is a
+Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, filtering accounts whose user Id is a
 mismatch with updatedIdPredicate. `filteredLoginDetails` is updated as shown below.
 
 image::ParseCorrectLoginDetailList.PNG[width="200"]
