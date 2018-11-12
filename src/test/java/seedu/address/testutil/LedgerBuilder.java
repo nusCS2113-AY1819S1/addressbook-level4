@@ -33,7 +33,7 @@ public class LedgerBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * nBuilder with the data of {@code personToCopy}.
      */
     public LedgerBuilder(Ledger ledgerToCopy) {
         dateLedger = ledgerToCopy.getDateLedger();

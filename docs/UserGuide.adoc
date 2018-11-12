@@ -370,9 +370,9 @@ Example: `debit d/ 10/10 b/ 100`
 
 === Calendar
 
-==== List events: `listEvents`
+==== List events: `listEvent`
 Lists all the events sorted by date. +
-Format: `listEvents`
+Format: `listEvent`
 
 Example:
 * `listEvent`
@@ -380,7 +380,7 @@ List all the events in the ClubHub.
 
 ==== Adding an event: `addEvent`
 Adds an event to the calendar. +
-Format: `addEvent n/EVENT_NAME v/VENUE d/DESCRIPTION D/EVENT_DATE`
+Format: `addEvent n/EVENT_NAME v/VENUE D/DESCRIPTION d/EVENT_DATE`
 
 [TIP]
 The Event name cannot be the same as an existing one (Two events are regarded as the same when they have the same name and date).
