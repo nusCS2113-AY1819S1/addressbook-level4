@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.recruit.logic.CommandHistory;

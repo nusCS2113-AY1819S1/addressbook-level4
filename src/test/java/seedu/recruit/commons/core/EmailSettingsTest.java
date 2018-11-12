@@ -3,7 +3,7 @@ package seedu.recruit.commons.core;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
@@ -70,7 +70,7 @@ public class EmailSettingsTest {
     }
 
     @Test
-    void getBodyTextCompanyAsRecipient_emailSettings_defaultObject() {
+    public void getBodyTextCompanyAsRecipient_emailSettings_defaultObject() {
         assertTrue(defaultEmailSettings.getBodyTextCompanyAsRecipient().equals(DEFAULT_BODYTEXT_COMPANY_AS_RECIPIENT));
     }
 

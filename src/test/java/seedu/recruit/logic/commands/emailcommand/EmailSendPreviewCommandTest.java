@@ -6,7 +6,6 @@ import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.AUDI;
 import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.BENTLEY;
 import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.CASHIER_AUDI;
 import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.CASHIER_BENTLEY;
-import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.CASHIER_CHEVROLET;
 import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.SALESPERSON_AUDI;
 import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.SALESPERSON_BENTLEY;
 import static seedu.recruit.testutil.TypicalCompaniesAndJobOffers.getTypicalCompanyBookWithoutJobOffers;
@@ -16,7 +15,7 @@ import static seedu.recruit.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.recruit.logic.CommandHistory;

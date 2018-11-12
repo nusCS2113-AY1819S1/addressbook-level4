@@ -1,8 +1,9 @@
 package seedu.recruit.logic.commands.emailcommand;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Rule;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.recruit.logic.CommandHistory;
@@ -22,6 +23,6 @@ public class EmailSendBackCommandTest {
     public void execute_emailSendBackCommand() {
         LogicManager logic = new LogicManager(model, userPrefs);
         new EmailSendBackCommand().execute(model, commandHistory, userPrefs);
-        Assertions.assertEquals(EmailContentsCommand.COMMAND_LOGIC_STATE, logic.getState().nextCommand);
+        assertEquals(EmailContentsCommand.COMMAND_LOGIC_STATE, logic.getState().nextCommand);
     }
 }

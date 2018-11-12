@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.recruit.commons.util.EmailUtil;
