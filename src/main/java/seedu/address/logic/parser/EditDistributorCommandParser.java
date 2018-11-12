@@ -18,7 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditProductCommand object
+ * Parses input arguments and creates a new Command object
  */
 public class EditDistributorCommandParser implements Parser<EditDistributorCommand> {
 

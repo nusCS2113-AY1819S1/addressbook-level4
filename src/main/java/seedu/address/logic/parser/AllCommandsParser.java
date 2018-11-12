@@ -107,7 +107,7 @@ public class AllCommandsParser {
             return new FindTagDistributorsCommandParser().parse(arguments);
 
         case FindProductCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            return new FindProductCommandParser().parse(arguments);
 
         case FindTagProductCommand.COMMAND_WORD:
             return new FindTagCommandParser().parse(arguments);

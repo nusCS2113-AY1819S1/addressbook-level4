@@ -47,8 +47,8 @@ public class AddTransactionCommand extends Command {
 
 
     @Override
+    // @@ garagaristahir
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-
         Map<String, Integer> transactionRecord = toAdd.getTransactionRecord();
         List<String> listWithProductsToAdd = new ArrayList<>(transactionRecord.keySet());
         List<Integer> values = transactionRecord.values().stream().collect(Collectors.toList());
@@ -82,7 +82,7 @@ public class AddTransactionCommand extends Command {
                 }
             }
         }
-
+        // @@ParasK26
         try {
             model.addTransaction(toAdd);
         } catch (InvalidTimeFormatException e) {
