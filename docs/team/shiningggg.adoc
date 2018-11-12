@@ -54,10 +54,6 @@ Something Daily is a desktop address book application used for teaching Software
 *** What it does: shows a popup window containing the task information and expenditure records of a particular day.
 *** Justification: This feature implements the interoperability of Todo list and Expenditure Tracker as it provides user with both task information and expenditure records by referring to a specific date.
 
-
-* *Minor enhancement*:
-** added a history command that allows the user to navigate to previous commands using up/down keys.
-
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=shiningggg&sort=displayName&since=2018-09-12&until=&timeframe=day&reverse=false&repoSort=true[RepoSense Dashboard]]
 
 * *Other contributions*:
@@ -65,6 +61,7 @@ Something Daily is a desktop address book application used for teaching Software
 ** Documentation:
 *** Added partial Expenditure Tracker features description of User Guide.
 *** Added user stories and use cases of Developer Guide.
+*** Added implementations for Calendar, Viewing expenditures and Get advice to Developer Guide.
 
 ** Community:
 *** PRs reviewed (with review comments): https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#80], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#68], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#23], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#20]
@@ -92,4 +89,6 @@ include::../UserGuide.adoc[tag=ETadvice]
 include::../DeveloperGuide.adoc[tag=calendar]
 
 include::../DeveloperGuide.adoc[tag=expenditureViewing]
+
+include::../DeveloperGuide.adoc[tag=getAdvice]
 
