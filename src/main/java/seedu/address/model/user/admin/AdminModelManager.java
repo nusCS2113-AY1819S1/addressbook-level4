@@ -4,9 +4,9 @@ import java.util.Set;
 
 import seedu.address.analysis.Analysis;
 import seedu.address.analysis.AnalysisManager;
-import seedu.address.analysis.AnalysisPeriodType;
 import seedu.address.analysis.PurchaseTransactionPredicate;
 import seedu.address.analysis.SaleTransactionPredicate;
+import seedu.address.analysis.TransactionPeriodPredicate;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
 import seedu.address.model.LoginInfoModel;
@@ -112,43 +112,43 @@ public class AdminModelManager extends ModelManager implements AdminModel {
 
     //===================== Accountant commands ======================
     @Override
-    public Price analyseCosts(AnalysisPeriodType period) {
+    public Price analyseCosts(TransactionPeriodPredicate period) {
         updateFilteredTransactionListToShowPurchases(period);
-        return analysis.analyseCost(period);
+        return analysis.analyseCost();
     }
 
     @Override
-    public Price analyseRevenue(AnalysisPeriodType period) {
+    public Price analyseRevenue(TransactionPeriodPredicate period) {
         updateFilteredTransactionListToShowSales(period);
-        return analysis.analyseRevenue(period);
+        return analysis.analyseRevenue();
     }
 
     @Override
-    public Price analyseProfit(AnalysisPeriodType period) {
+    public Price analyseProfit(TransactionPeriodPredicate period) {
         updateFilteredTransactionListToShowProfitPeriod(period);
-        return analysis.analyseProfit(period);
+        return analysis.analyseProfit();
     }
 
     /**
      * Updates the {@code filteredTransactions} with Purchase predicate and {@code period} predicate.
      */
-    private void updateFilteredTransactionListToShowPurchases(AnalysisPeriodType period) {
-        updateFilteredTransactionList(period.getPeriodFilterPredicate().and(new PurchaseTransactionPredicate()));
+    private void updateFilteredTransactionListToShowPurchases(TransactionPeriodPredicate period) {
+        updateFilteredTransactionList(period.and(new PurchaseTransactionPredicate()));
     }
 
     /**
      * Updates the {@code filteredTransactions} with Sale predicate and {@code period} predicate.
      */
-    private void updateFilteredTransactionListToShowSales(AnalysisPeriodType period) {
-        updateFilteredTransactionList(period.getPeriodFilterPredicate().and(new SaleTransactionPredicate()));
+    private void updateFilteredTransactionListToShowSales(TransactionPeriodPredicate period) {
+        updateFilteredTransactionList(period.and(new SaleTransactionPredicate()));
     }
 
     /**
      * Updates the {@code filteredTransactions} with {@code period} predicate.
      * For use by Profit analysis.
      */
-    private void updateFilteredTransactionListToShowProfitPeriod(AnalysisPeriodType period) {
-        updateFilteredTransactionList(period.getPeriodFilterPredicate());
+    private void updateFilteredTransactionListToShowProfitPeriod(TransactionPeriodPredicate period) {
+        updateFilteredTransactionList(period);
     }
 
     private void updateFilteredTransactionListToShowAll() {
