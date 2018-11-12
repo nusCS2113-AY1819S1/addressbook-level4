@@ -678,7 +678,7 @@ Command: `logout`
 To use this command, you would have to be logged in first. Typing `logout` as seen in the figure below
 return you back to the login page.
 
-.Logout Button Highlighted in Blue
+.Logout Command entered into command line
 image::Logout.png[width="790"]
 
 // end::securityP2[]

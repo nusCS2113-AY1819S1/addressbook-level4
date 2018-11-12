@@ -2,6 +2,8 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:mainRepoPRURL: https://github.com/CS2113-AY1819S1-W13-1/main/pull
+:mainRepoIssueURL: https://github.com/CS2113-AY1819S1-W13-1/main/issue
 
 == PROJECT: FreeTime
 
@@ -45,31 +47,35 @@ GIVE THE REASON WHY. USE LONGER SENTENCE BELOW
 ** What it does: Allows the users to have unique access and control to his own timetable
 ** Justification: To be able to prevent others from editing your own timetable, and to facilitate different privacy levels.
 Privacy levels are given to users to have control over what they feel comfortable sharing between strangers and friends.
-** Highlights: Not only have I learnt how to implement features, I have to also consider the implications of having some
-of them implemented. For example, to have an extra level of security such as 2FA(Factor Authorization) step might seem beneficial,
-but does this application warrants the extra steps to log in? Not so in my opinion.
+** Highlights: Implementing the above is not trivial as I had to rewrite how the commands are parsed and executed, which are
+then handled in SecurityManager. This is done on top of having to deal with new commands such as login, and restructuring
+old command into register. I had to understand and improve on all modules to make them to work together in this new sytem.
 
 
 * *Minor enhancement*: Used a hashing feature together with a salt to store user's password in json format. This is to improve security by
 not storing users' password in plaintext, but encrypted securely.
 
+* https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=bennchong[*Code contributed*]
+* link:https://github.com/CS2113-AY1819S1-W13-1/main/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Aclosed+author%3Abennchong[*Pull Requests Made*]
+
 * *Project Overheads*
 
+
+
 ** Project management:
-*** Contributed to releases `v1.0` - `v1.4` (4 releases) on GitHub
+*** Contributed to releases `v1.1` - `v1.4` (4 releases) on GitHub
+*** link:https://github.com/CS2113-AY1819S1-W13-1/main/issues/24[Milestone issue tracker]
 
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Updated Storage Module to include AppUsersJson {mainRepoPRURL}/63[#63]
+*** Changed AddressBookParser to accommodate Security Implementation {mainRepoPRURL}/153[#153]
 
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Updated Screenshots in User Guide {mainRepoPRURL}/192[#192]
 
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** PRs reviewed (with non-trivial review comments): {mainRepoPRURL}/64[#64], {mainRepoPRURL}/173[#173],
+*** Fixed bugs in program {mainRepoPRURL}/75[#75], {mainRepoPRURL}/185[#185], {mainRepoPRURL}/186[#186]
 
 
 == My User Guide Contributions
