@@ -467,29 +467,41 @@ Step 6. The user executes the `DeleteLoanListCommand` to delete the loan list wh
 
 The login mechanism is facilitated by `LoginCommand`. It extends `Command` and implements the following operations:
 
-* `LoginCommand#execute()` -- checks if the username and password match the predefined account details. Displays a login success message if match and displays a failure message otherwise.
+
+* `LoginCommand#modifyLoginStatus()` -- checks if the password matches the account in the database, if it exists. If true, updates the logged in account status in `Model` accordingly.
+
+* `LoginCommand#execute()` -- calls `LoginCommand#modifyLoginStatus()`. Then, checks login status in `Model` and displays a login success message if true and displays a failure message otherwise.
+
+These operations are exposed in the `Model` interface as `Model#setLoggedInUser()` and `Model#getLoginStatus()` respectively.
+
 
 Given below is an example usage scenario and how the LoginCommand mechanism behaves at each step.
 
-Step 1. The user executes `login u/admin p/password` command to log into StockList with 'admin' and 'password' being the username and password credentials respectively.
+Step 1. The user executes `login u/admin p/admin` command to log into StockList with *admin* and *admin* being the username and password credentials respectively.
 
-Step 2. The `execute` command calls `Account#getUsername()` and `Account#getPassword()` methods, which parses the user input and stores the credentials as `username` and `password` variables.
+Step 2. The `execute` command calls `Model#getLoginStatus()` and checks if the user is already logged in. If true, `execute` throws a `CommandException` notifying the user that he is already logged in.
 
-Step 3. The `execute` command then checks if the username and password strings match the predefined username and password strings.
+Step 3. The `execute` command then calls `LoginCommand#modifyLoginStatus()`, which checks if the username *admin* exists in the account list, and if it does, checks if the given password *admin* matches the password associated with the username *admin*.
 
-Step 4. If the username and password strings match, a success message is printed; otherwise a failure message is printed.
+Step 4. If the *admin* password matches, `LoginCommand#modifyLoginStatus()` calls `Model#setLoggedInUser()` which updates the logged in account status in `model` with the logged in account set to *admin* and logged in status set to true.
+
+Step 5. The `execute` command then checks the log in status via `Model#getLoginStatus()`. A success message is printed if true; otherwise a failure message is printed.
+
+The following sequence diagram shows how the login operation works:
+
+image::LoginSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
-===== Aspect: How 'execute' executes
+===== Aspect: How login executes
 
-* **Alternative 1** (current choice) Check if the username and passwords match the predefined strings.
-** Pros: Very simple, minimal memory usage, allows for only one access account.
-** Cons: Does not allow access for multiple accounts.
+* **Alternative 1** (current choice) Check against various accounts stored in a file and allow access if match.
+** Pros: Allows for multiple accounts with access to StockList.
+** Cons: More memory usage.
 
-* **Alternative 2** Save multiple account credentials in a file, check against the file.
-** Pros: Allows for multiple accounts with different levels of access to StockList.
-** Cons: More memory usage
+* **Alternative 2** Checks against a single account that can be modified.
+** Pros: Simple to implement, minimal memory usage, allows for only one access account.
+** Cons: Does not allow access for multiple accounts, locked out of app if credentials lost.
 // end::login[]
 
 // tag::tag[]
@@ -1128,7 +1140,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage stocks faster than a typical mouse/GUI driven app
+*Value proposition*: manage stocks faster than a the current method, which is by physical stock taking, or using a spreadsheet.
 
 [appendix]
 == User Stories
@@ -1144,6 +1156,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |Lab Technician |Add new items to the list |Keep track of the new item
 
 |`* * *` |Lab Technician |Update the quantity of an item in the list |Record the quantity change of the item
+
+|`* * *` |Lab Technician |Update the status of an item in the list |Record the change in status of the item
 
 |`* * *` |Lab Technician |Delete an item from the list |Remove all information regarding to the item
 
@@ -1171,7 +1185,7 @@ _{More to be added}_
 [appendix]
 == Use Cases:
 
-(For all use cases below, the *System* is `JalilEnterprises` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is `StockList` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Delete item
@@ -1200,11 +1214,11 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Tag item
+=== Use case: List items by tag
 
 *MSS*
 
-1.  User requests to list items
+1.  User requests to list all items
 2.  StockList shows a list of items
 3.  User requests to show items with a specific tag
 4.  StockList finds and shows the items
@@ -1214,16 +1228,77 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 2a. The item list is empty
++
+[none]
+** 2a1. StockList shows an error message.
 +
 Use case ends.
+
+* 3a. The given tag is invalid
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Add tags to item
+
+*MSS*
+
+1. User requests to list all items
+2. StockList shows a list of items
+3. User requests to add tags to an item
+4. Stock list adds the inputted tags to the item
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The index of item is wrong.
++
+[none]
+** 2a1. StockList shows an error message.
++
+Use case resumes at step 2.
 
 * 3a. The given tag is invalid.
 +
 [none]
 ** 3a1. StockList shows an error message.
 +
+Use case ends.
+
+[discrete]
+=== Use case: Delete some tags of item
+
+*MSS*
+
+1. User requests to list all items
+2. StockList shows a list of items
+3. User requests to delete some tags of an item
+4. Stock list deletes the inputted tags of the item
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The index of item is wrong.
++
+[none]
+** 2a1. StockList shows an error message.
++
 Use case resumes at step 2.
+
+* 3a. The given tag does not exist.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case ends.
 
 [discrete]
 === Use case: Lost item
@@ -1374,7 +1449,112 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+// tag::saveopen[]
+
+[discrete]
+=== Use case: Save stocklist
+
+*MSS*
+
+1.  User requests to save stocklist
+2.  StockList saves current inventory as .xml file with specified file name.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The file name is invalid.
+* 1b. Stocklist shows an error message.
++
+Use case ends.
+
+
+[discrete]
+=== Use case: Open stocklist version
+
+*MSS*
+
+1.  User requests to open stocklist version
+2.  StockList opens specified .xml file and displays as table.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The file name is invalid.
+* 1b. Stocklist shows an error message.
++
+Use case ends.
+// end::saveopen[]
+
+[discrete]
+=== Use case: List items by status
+
+*MSS*
+
+1. User requests to list items according to status
+2. StockList lists out the item according to the status
++
+Use case ends.
+
+[discrete]
+=== Use case: Change Status
+
+*MSS*
+
+1.  User requests to list all items
+2.  StockList shows a list the list of all items
+3.  User requests to change the status of an item.
+4.  StockList changes the status of the item.
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Any of the inputs are invalid.
++
+[none]
+** 3a1. StockList shows an error message.
+
+[discrete]
+=== Use case: Creating loan list entry
+
+*MSS*
+
+1.  User requests create a loan list entry
+2.  StockList creates the loan list entry
+3.  User requests to view the loan list
+4.  StockList shows the updated loan list
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Any of the inputs are invalid.
++
+[none]
+** 1a1. StockList shows an error message.
+
+[discrete]
+=== Use case: Deleting loan list entry
+
+*MSS*
+
+1.  User requests delete a loan list entry
+2.  StockList deletes the loan list entry
+3.  User requests to view the loan list
+4.  StockList shows the updated loan list
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Any of the inputs are invalid.
++
+[none]
+** 1a1. StockList shows an error message.
 
 [appendix]
 == Non Functional Requirements
@@ -1382,34 +1562,6 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 items without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
-
-[appendix]
-== Glossary
-
-[[mainstream-os]] Mainstream OS::
-Windows, Linux, Unix, OS-X
-
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
-
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing
@@ -1433,8 +1585,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
-
 === Deleting a item
 
 . Deleting a item while all items are listed
@@ -1446,8 +1596,6 @@ _{ more test cases ... }_
    Expected: No item is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
-
-_{ more test cases ... }_
 
 === Logging in
 
@@ -1492,11 +1640,3 @@ _{ more test cases ... }_
 .. Other incorrect deleteAccount commands to try: `deleteAccount`, `deleteAccount x` (where x is larger than the account list size) +
    Expected: Similar to previous.
 
-
-=== Saving data
-
-. Dealing with missing/corrupted data files
-
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
