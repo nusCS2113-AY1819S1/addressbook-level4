@@ -432,10 +432,12 @@ The following sequence diagram shows how the AddCommentCommand operation works:
 .Sequence Diagram for AddCommentCommand
 image::addCommentSequenceDiagram.png[width="800"]
 
-[NOTE]
-*Detailed description of diagram*: The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. +
-Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user. The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
+[Note]
+====
+*Detailed description of diagram*: The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user.
 
+The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
+====
 
 Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply the comment in step 2. `ReplyCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to reply comment with "Athletic attire", into the comment section and stores the comment section into `eventmanager.xml`
 
@@ -481,7 +483,7 @@ The RSVP feature consists of the `register`, `unregister`, and `attending` comma
 Below is an example usage scenario and how the RSVP mechanism behaves during a `register` operation:
 
 |===
-|Step 1: The user launches the application, and logs in.
+Step 1: The user launches the application, and logs in.
 
 Step 2: The user clicks on an event or types `select 2` into the CLI. Details of the 2nd event including event attendance are displayed.
 
@@ -490,12 +492,13 @@ Step 3: The user executes `register 2` to register for the 2nd event. With the `
 Step 4: The `register` command tries to add the username into the current attendance with `HashSet#add`. If the username already exists in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
 
 Step 5: The model is updated with the edited event and committed. The event page is reloaded to display the new event attendance.
+
 |===
 
 Below is another example usage scenario illustrating how the RSVP mechanism behaves during an `unregister` operation, with the use of `attending`.
 
 |===
-|Step 1: The user launches the application, and logs in.
+Step 1: The user launches the application, and logs in.
 
 Step 2: The user types `attending` into the CLI. `AttendingCommand#execute` retrieves the current user's username from `Model` and creates a `AttendanceContainsUsernamePredicate` predicate. The predicate is used with `Model#updateFilteredEventList` to filter out events without the user's username in their attendance. Events that the user has registered for are displayed.
 
@@ -552,12 +555,12 @@ image::removeAttendeeSD.png[width="800"]
 
 //tag::eventStatus&Reminder[]
 === Event Status and Reminders
+The Event Status feature displays the status of events based on their `DateTime` field. Events whose `DateTime` has passed the `DateTime` at the time of updating will adopt the *COMPLETED* status while events whose `DateTime` has yet to pass will take on the *UPCOMING* status. The Event Reminders feature sends reminders to the logged-in user for upcoming events which the user has registered for.
+
 ==== Current Implementation
-The Event Status and Reminder feature consists of two commands periodically executed by `LogicManager`. Specifically, the `UpdateStatusCommand` and the `ReminderCommand`. The automated process is facilitated by the `Timer` and `TimerTask` classes in the `java.util` package. The `TimerTask` `updateEventStatus` has a period of 300,000 ms where it will execute an instance of the `UpdateStatusCommand`, while the `TimerTask` `checkEventReminders` has a period of 36,000,000 ms where it will execute an instance of the `ReminderCommand`.
+The Event Status and Reminder feature consists of two commands periodically executed by `LogicManager`. Specifically, the `UpdateStatusCommand` and the `ReminderCommand`. The automated process is facilitated by the `Timer` and `TimerTask` classes in the `java.util` package. Both commands initially calls the model#getFilteredEventList() method to obtain the displayed list of events as `lastShownList`.
 
-Both commands initially calls the model#getFilteredEventList() method to obtain the displayed list of events as `lastShownList`.
-
-The *UpdateStatusCommand* updates the status of each event in the `lastShownList` using `Status#setStatus()` and `model#updateEvent()`. It then refreshes the displayed list by calling `model#updateFilteredEventList()`.
+The *UpdateStatusCommand* is periodically called in `TimerTask` `updateEventStatus` every 5 minutes and it loops through every event in `lastShownList` to update the event's status using `Status#setStatus()` and `model#updateEvent()`. It then refreshes the displayed list by calling `model#updateFilteredEventList()`.
 
 The following sequence diagram shows how the UpdateStatusCommand works:
 
@@ -567,7 +570,7 @@ image::Update-sequenceDiagram.png[width="800"]
 [NOTE]
 The Event Status feature is supported by the `Status` and `DateTime` field in the `Event`. Events with `DateTime` fields before the current `Date` will assume the `COMPLETED Status`, whereas those with `DateTime` fields after the current `Date` will take on the `UPCOMING Status`.
 
-The *ReminderCommand* checks for the following in each event:
+The *ReminderCommand* is periodically called in `TimerTask` `checkEventReminders` every 6 hours and it loops through every event in the `lastShownList` to check for the following:
 =====
 . `checkAttendeeKeywordsMatchEventAttendee` -- checks if the current user is registered as an attendee
 . `checkEventIsUpcoming` -- checks if the event is upcoming (happening in the next 24 hours)
@@ -1187,44 +1190,45 @@ These instructions only provide a starting point for testers to work on; testers
 
 // tag::authenticationTest[]
 === Authentication
-
-. Signing up for an account with a taken username
-
+ . Signing up for an account with a taken username
+ === Deleting a event
 .. Prerequisites: Signed up for an account with a non-taken username.
 .. Test case: `signup u/TAKENUSERNAME p/VALIDPASSWORD` +
    Expected: Will display an error saying that account already exists.
-
+ . Deleting a event while all events are listed
 . Signing up or logging in to an account while already logged in
-
-.. Prerequisites: Already logged in to an existing account.
+ .. Prerequisites: Already logged in to an existing account.
 .. Test case: `signup u/NEWUSERNAME p/VALIDPASSWORD` +
    Expected: Will display an error saying that the current user is logged in.
 .. Test case: `login u/EXISTINGUSER p/VALIDPASSWORD` +
    Expected: Will display an error saying that the current user is logged in.
-
-.  Logging in to a non-existent account
-
-.. Test case: `login u/NEWUSERNAME p/VALIDPASSWORD` +
+ .  Logging in to a non-existent account
+ .. Test case: `login u/NEWUSERNAME p/VALIDPASSWORD` +
    Expected: Will display an error saying that credentials are incorrect.
-
-. Using admin commands while logged in as a normal user
-
-.. Prerequisites: Signed up and logged in to a user account.
+ . Using admin commands while logged in as a normal user
+ .. Prerequisites: Signed up and logged in to a user account.
 .. Test case: A valid add, edit, or delete command. +
    Expected: Will display an error saying that user is not authorized to do the command.
 // end::authenticationTest[]
-
-=== Deleting an event
-
-. Deleting an event while all events are listed
-
-.. Prerequisites: List all events using the `list` command. Multiple events in the list.
+ === Deleting an event
+ . Deleting an event while all events are listed
+ .. Prerequisites: List all events using the `list` command. Multiple events in the list.
 .. Test case: `delete 1` +
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
    Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size or smaller than 0) +
    Expected: Similar to previous.
+
+_{ more test cases ... }_
+
+=== Saving data
+
+. Dealing with missing/corrupted data files
+
+.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
 
@@ -1305,56 +1309,50 @@ Username of target attendee `Charlotte Oliveiro` is not in the attendance of the
 
 // tag::commentsMT[]
 === Adding a Comment
-
-. Adding a comment in the comment section of an event
-
-.. Prerequisite: User/Admin has to be logged in and event 1 has to exist.
-
+ . Adding a comment in the comment section of an event
+ .. Prerequisite: User/Admin has to be logged in and event 1 has to exist.
+ .. Test case: `addComment 1 C/Hello`
 .. Test case: `addComment 1 C/Hello` + 
  Expected: Adds to event at index 1 the comment "Hello". The new comment will be displayed under last comment available or if not below the comment section.
-
+ .. Test case: `addComment 0 C/Hello`
 .. Test case: `addComment 0 C/Hello` + 
 Expected: The Command Result box will return an invalid format and no changes will occur.
-
+ .. Test case: `addComment x C/STRING`, when x<0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1` 
 .. Test case: `addComment x C/STRING`, when x < 0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1` + 
 Expected: Similar to previous because x has to be a signed integer that exists within the index of events.
-
-=== Replying a Comment
-
-. Replying a comment in the comment section of an event
-
-.. Prerequisite: User/Admin has to be logged in, event 1 has to have one valid comment.
-
+ === Replying a Comment
+ 
+ . Replying a comment in the comment section of an event
+ .. Prerequisite: User/Admin has to be logged in, event 1 has to have one valid comment.
+ .. Test case: `replyComment 1 C/Hello L/1`
 .. Test case: `replyComment 1 C/Hello L/1` + 
 Expected: Adds to event at index 1 and replies a comment "Hello" to line 1 of the comments section.
-
+ .. Test case: `replyComment 0 C/Hello L/1`
 .. Test case: `replyComment 0 C/Hello L/1` + 
 Expected: The Command Result box will return an invalid format and no changes will occur.
-
+ .. Test case: `replyComment x C/Hello L/1`, x<0 or x>event list size
 .. Test case: `replyComment x C/Hello L/1`, x < 0 or x > event list size. + 
 Expected: Similar to previous
-
+ .. Test case: `replyComment 1 C/Hello L/x`, x<=0 or x>number of comments in the comment section
 .. Test case: `replyComment 1 C/Hello L/x`, where x < = 0 or x > number of comments in the comment section. + 
 Expected: Similar to previous
-
+ .. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. 
 .. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. + 
 Expected: Invalid command will be displayed in the result box. No changes will occur.
-
-=== Deleting a Comment
-
-. Deleting a comment in the comment section 
-
-.. Prerequisites: Admin and logged in, event 1 has to have at least 1 valid comment.
-
+ === Deleting a Comment
+ 
+ . Deleting a comment in the comment section 
+ .. Prerequisites: Admin and logged in, event 1 has to have at least 1 valid comment.
+ .. Test case: `deleteComment 1 L/1`
 .. Test case: `deleteComment 1 L/1` +
 Expected: Deletes a comment into the comment section at the given line parameter.
-
+ .. Test case: `deleteComment x L/1`, where x <= 0 or x > event list size
 .. Test case: `deleteComment x L/1`, where x < = 0 or x > event list size. +
 Expected: The Command Result box will return an invalid format and no changes will occur.
-
+ .. Test case: `deleteComment 1 L/x`, where x <=0 or x> number of comments in the comment section.
 .. Test case: `deleteComment 1 L/x`, where x < = 0 or x > number of comments in the comment section. +
 Expected: Similar to previous
-
+ .. Test case: `deleteComment x L/y`, where x or y does not exist.
 .. Test case: `deleteComment x L/y`, where x or y does not exist. +
 Expected:  Invalid command will be displayed in the result box. No changes will occur.
 // end::commentsMT[]
