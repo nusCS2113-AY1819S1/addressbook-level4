@@ -16,12 +16,6 @@ public class Category {
                     + "Communications, Travels, Study, Office, Pets, Gifts, Entertainment, Traffic, Shopping, "
                     + "Beauty, Furniture.";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    //public static final String CATEGORY_VALIDATION_REGEX = "[^\\s].*";
-
     public final String categoryName;
 
     /**
