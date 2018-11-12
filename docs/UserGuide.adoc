@@ -369,7 +369,7 @@ Format: `debit d/[DD/MM] b/[NUM]`
 Example: `debit d/ 10/10 b/ 100`
 
 
-
+// tag::Calendar[]
 === Calendar
 
 ==== List events: `listEvent`
@@ -415,7 +415,7 @@ Example:
 
 * `deleteEvent 1`
 Delete the event who's index is 1.
-
+// end::Calendar[]
 // tag::itemlist[]
 === ItemList
 
