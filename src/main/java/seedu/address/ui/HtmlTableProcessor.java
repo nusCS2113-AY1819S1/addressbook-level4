@@ -71,6 +71,13 @@ public class HtmlTableProcessor {
                 + "</div></div></div></div>";
     }
 
+    public static String getBanner(String text) {
+        return "<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n"
+                + "  <h3>" + text + "</h3>\n"
+                + "\n"
+                + "</nav>";
+    }
+
     public static String getH3Representation(String text) {
         return "<h3>" + text + "</h3>\n";
     }

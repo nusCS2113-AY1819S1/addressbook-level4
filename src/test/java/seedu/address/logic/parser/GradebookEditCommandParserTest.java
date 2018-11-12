@@ -1,14 +1,21 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.GradebookEditCommand.MESSAGE_USAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_MAXMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_WEIGHTAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.GradebookEditCommandParser.MESSAGE_MAX_MARKS_ERROR;
+import static seedu.address.logic.parser.GradebookEditCommandParser.MESSAGE_MAX_MARKS_INVALID;
+import static seedu.address.logic.parser.GradebookEditCommandParser.MESSAGE_WEIGHTAGE_ERROR;
+import static seedu.address.logic.parser.GradebookEditCommandParser.MESSAGE_WEIGHTAGE_INVALID;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import seedu.address.logic.parser.exceptions.ParseException;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.GradebookEditCommand.MESSAGE_USAGE;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.GradebookEditCommandParser.*;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class GradebookEditCommandParserTest {
     private GradebookEditCommandParser parser = new GradebookEditCommandParser();

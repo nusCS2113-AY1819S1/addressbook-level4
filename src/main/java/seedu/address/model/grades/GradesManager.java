@@ -1,6 +1,7 @@
 package seedu.address.model.grades;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleManager;
 import seedu.address.model.person.Person;
 import seedu.address.storage.adapter.XmlAdaptedGrades;
+import seedu.address.ui.HtmlTableProcessor;
 
 /**
  * The API of the GradesManager component.
@@ -48,6 +50,39 @@ public class GradesManager {
 
     public void clearGrade() {
         grades.clear();
+    }
+
+    /**
+     This method adds grade of student in Trajectory.
+     */
+    public String listGrade () {
+        StringBuilder sb = new StringBuilder();
+        int index = 1;
+
+        sb.append(HtmlTableProcessor.getH3Representation("Grades List"));
+        sb.append(HtmlTableProcessor.renderTableStart(new ArrayList<String>(
+                Arrays.asList("Index", "Module Code", "Component Name", "Admin Number", "Marks"))));
+
+        sb.append(HtmlTableProcessor.getTableItemStart());
+        for (Grades grade: getGrades()) {
+            sb.append(HtmlTableProcessor
+                    .renderTableItem(new ArrayList<String>(Arrays
+                            .asList(Integer.toString(index++),
+                                    grade.getModuleCode(),
+                                    grade.getGradeComponentName(),
+                                    grade.getAdminNo(),
+                                    Float.toString(grade.getMarks())))));
+        }
+        sb.append(HtmlTableProcessor.getTableItemEnd());
+        return sb.toString();
+    }
+
+    /**
+     This method gets size of grade.
+     */
+    public int getGradeSize () {
+        int count = getGrades().size();
+        return count;
     }
 
     /**

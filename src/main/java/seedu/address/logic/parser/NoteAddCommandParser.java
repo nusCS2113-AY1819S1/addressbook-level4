@@ -55,13 +55,11 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
                         PREFIX_NOTE_END_TIME,
                         PREFIX_NOTE_LOCATION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteAddCommand.MESSAGE_USAGE));
         }
 
         ModuleCode moduleCode = null;
-
         NoteTitle title = new NoteTitle("");
         NoteDate startDate = null;
         NoteTime startTime = new NoteTime(NoteTime.DEFAULT_START_TIME.format(NoteTime.TIME_FORMAT));
@@ -77,8 +75,13 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
 
         // ModuleManager moduleManager = ModuleManager.getInstance();
 
-        try {
-            moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+        if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
+            if (argMultimap.getValue(PREFIX_MODULE_CODE).get().trim().isEmpty()) {
+                throw new ParseException(MESSAGE_BLANK_FIELD);
+            }
+
+            try {
+                moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
 
             /* Disabled for standalone testing
             if (!moduleManager.doesModuleExist(moduleCode.toString())) {
@@ -87,9 +90,10 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
                 messageErrors.append("\n");
             }
             */
-        } catch (ParseException e) {
-            messageErrors.append(e.getMessage());
-            messageErrors.append(DOUBLE_NEW_LINE_SEPARATOR);
+            } catch (ParseException e) {
+                messageErrors.append(e.getMessage());
+                messageErrors.append(DOUBLE_NEW_LINE_SEPARATOR);
+            }
         }
 
         if (argMultimap.getValue(PREFIX_NOTE_TITLE).isPresent()) {

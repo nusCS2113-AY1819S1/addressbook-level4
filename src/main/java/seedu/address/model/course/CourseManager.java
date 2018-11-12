@@ -58,11 +58,17 @@ public class CourseManager {
         return false;
     }
 
+    /**
+     * Removes all courses.
+     */
+    public void clearAll() {
+        courseList = new ArrayList<Course>();
+    }
 
     public String getTableRepresentation() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(HtmlTableProcessor.getH3Representation("Course List"));
+        sb.append(HtmlTableProcessor.getBanner("Course List"));
         sb.append(HtmlTableProcessor.renderTableStart(new ArrayList<String>(
                 Arrays.asList("Course Name", "Course Code", "School/Faculty"))));
 

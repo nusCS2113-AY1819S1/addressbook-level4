@@ -93,6 +93,18 @@ public class StorageController {
         }
 
     }
+
+    /**
+     * This method wipes all production files.
+     */
+    public static void wipeAllProductionData() {
+        for (File file: new File(BASE_DIRECTORY).listFiles()) {
+            if (!file.isDirectory()) {
+                file.delete();
+            }
+        }
+
+    }
     /**
      * This method retrieves all datasets saved locally.
      */
@@ -143,7 +155,7 @@ public class StorageController {
     /**
      * This method creates files for all datasets if they do not exist on the local filesystem.
      */
-    private static void createFiles() {
+    public static void createFiles() {
         new File(BASE_DIRECTORY).mkdirs();
         File classes = new File(storageClasses);
         File courses = new File(storageCourses);

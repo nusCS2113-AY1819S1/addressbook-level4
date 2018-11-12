@@ -10,6 +10,9 @@ import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Provides a test for CommandHistory
+ */
 public class CommandHistoryTest {
     private CommandHistory history;
 

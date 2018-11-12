@@ -22,6 +22,7 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 * *Minor enhancement*: built an utility class for the rendering of data into HTML (Bootstrap).
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=m-aslam-mj2[Project Code Dashboard]
 
 * *Other contributions*:
 

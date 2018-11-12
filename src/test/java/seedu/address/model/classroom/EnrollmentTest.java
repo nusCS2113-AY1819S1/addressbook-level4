@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
+/**
+ * Provides a test for the classroom enrollment size
+ */
 public class EnrollmentTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -20,7 +23,7 @@ public class EnrollmentTest {
     }
 
     @Test
-    public void isValidEnrollment(){
+    public void isValidEnrollment() {
         // null maxEnrollment
         Assert.assertThrows(NullPointerException.class, () -> Enrollment.isValidEnrollment(null));
 

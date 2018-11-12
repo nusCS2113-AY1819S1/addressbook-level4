@@ -20,7 +20,7 @@ public class CsvAdaptedNote {
     private String noteText;
 
     public CsvAdaptedNote(Note note) {
-        this.moduleCode = note.getModuleCode().toString();
+        this.moduleCode = note.getModuleCode() == null ? "" : note.getModuleCode().toString();
         this.title = note.getTitle().toString();
         this.startDate = note.getStartDate().toString();
         this.startTime = note.getStartTime().toString();
@@ -51,9 +51,13 @@ public class CsvAdaptedNote {
         StringBuilder sb = new StringBuilder();
 
         sb.append(DOUBLE_QUOTE);
-        sb.append(moduleCode);
+        if (!moduleCode.isEmpty()) {
+            sb.append(moduleCode);
+        }
         if (!title.isEmpty()) {
-            sb.append(": ");
+            if (!moduleCode.isEmpty()) {
+                sb.append(": ");
+            }
             sb.append(title);
         }
         sb.append(DOUBLE_QUOTE);

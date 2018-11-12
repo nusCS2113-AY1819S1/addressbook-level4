@@ -16,6 +16,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalModules.CS2040C;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.ModuleAddCommand;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;

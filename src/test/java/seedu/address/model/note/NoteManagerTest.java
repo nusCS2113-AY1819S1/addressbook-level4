@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.NoteDeleteCommand;
+import seedu.address.model.StorageController;
 import seedu.address.testutil.NoteBuilder;
 
 /**
@@ -27,6 +28,7 @@ public class NoteManagerTest {
 
     @Before
     public void setUp() {
+        StorageController.enterTestMode();
         noteManager.clearNotes();
         noteManager.saveNoteList();
     }

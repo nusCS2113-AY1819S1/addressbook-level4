@@ -33,8 +33,8 @@ public class ClassAddCommand extends Command {
             + " Module code: %2$s,"
             + " Enrollment size: %3$s";
 
-    private static final String MESSAGE_DUPLICATE_CLASSROOM = "This classroom already exists in Trajectory";
-    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
+    public static final String MESSAGE_DUPLICATE_CLASSROOM = "This classroom already exists in Trajectory";
+    public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
 
     private final Classroom classToCreate;
 
