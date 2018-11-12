@@ -2,7 +2,7 @@ package seedu.address.commons.util;
 
 import static org.junit.Assert.assertTrue;
 
-import java.nio.file.Files;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class CsvUtilTest {
+
+    private static String fileName = "test_file";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -32,7 +34,7 @@ public class CsvUtilTest {
 
         thrown.expect(NullPointerException.class);
         CsvUtil.writeToCsv(
-                "filename",
+                fileName,
                 null,
                 new ArrayList<>(Arrays.asList("unused,unused", "unused,unused"))
         );
@@ -43,7 +45,7 @@ public class CsvUtilTest {
 
         thrown.expect(NullPointerException.class);
         CsvUtil.writeToCsv(
-                "filename",
+                fileName,
                 new ArrayList<>(Arrays.asList("unused", "unused")),
                 null
         );
@@ -52,7 +54,7 @@ public class CsvUtilTest {
     @Test
     public void writeToCsv_validParams_returnsTrue() throws Exception {
         assertTrue(CsvUtil.writeToCsv(
-                "test_file",
+                fileName,
                 new ArrayList<>(Arrays.asList("unused", "unused")),
                 new ArrayList<>(Arrays.asList("unused,unused", "unused,unused"))
         ));
@@ -60,6 +62,7 @@ public class CsvUtilTest {
 
     @AfterClass
     public static void tearDown() {
-        // TODO
+        File testFile = new File(CsvUtil.BASE_DIRECTORY, fileName + ".csv");
+        testFile.delete();
     }
 }
