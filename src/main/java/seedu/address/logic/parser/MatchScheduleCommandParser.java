@@ -27,6 +27,14 @@ public class MatchScheduleCommandParser implements Parser<MatchScheduleCommand> 
      * and returns an MatchScheduleCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    public static final String MESSAGE_MATCH_SCHEDULE_TIME_CONSTRAINTS = "Selected end time must be after start time.";
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the MatchScheduleCommand
+     * and returns the common schedules as a string.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+
     public MatchScheduleCommand parse(String args) throws ParseException {
 
         requireNonNull(args);
@@ -43,6 +51,13 @@ public class MatchScheduleCommandParser implements Parser<MatchScheduleCommand> 
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
         List<Index> matchScheduleList = ParserUtil.parseMatchScheduleIndex(argMultimap.getAllValues(PREFIX_INDEX));
+
+        //checks if startTime is before endTime
+        int startT = Integer.parseInt(startTime.toString());
+        int endT = Integer.parseInt(endTime.toString());
+        if (startT >= endT) {
+            throw new ParseException(MESSAGE_MATCH_SCHEDULE_TIME_CONSTRAINTS);
+        }
 
         return new MatchScheduleCommand(date, startTime, endTime, matchScheduleList);
     }
