@@ -106,14 +106,14 @@ public class MainApp extends Application {
      * or an empty inventory book will be used instead if errors occur when reading {@code storage}'s inventory book.
      */
     private Model initModelManager(InventoryStorage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyBookInventory> addressBookOptional;
+        Optional<ReadOnlyBookInventory> bookInventoryOptional;
         ReadOnlyBookInventory initialData;
         try {
-            addressBookOptional = storage.readBookInventory();
-            if (!addressBookOptional.isPresent()) {
+            bookInventoryOptional = storage.readBookInventory();
+            if (!bookInventoryOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample BookInventory");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = bookInventoryOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty BookInventory");
             initialData = new BookInventory();

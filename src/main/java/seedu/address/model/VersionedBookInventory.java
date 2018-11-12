@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedBookInventory extends BookInventory {
 
-    private final List<ReadOnlyBookInventory> addressBookStateList;
+    private final List<ReadOnlyBookInventory> bookInventoryStateList;
     private int currentStatePointer;
 
     public VersionedBookInventory(ReadOnlyBookInventory initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new BookInventory(initialState));
+        bookInventoryStateList = new ArrayList<>();
+        bookInventoryStateList.add(new BookInventory(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,12 +25,12 @@ public class VersionedBookInventory extends BookInventory {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new BookInventory(this));
+        bookInventoryStateList.add(new BookInventory(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        bookInventoryStateList.subList(currentStatePointer + 1, bookInventoryStateList.size()).clear();
     }
 
     /**
@@ -41,7 +41,7 @@ public class VersionedBookInventory extends BookInventory {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(bookInventoryStateList.get(currentStatePointer));
     }
 
     /**
@@ -52,7 +52,7 @@ public class VersionedBookInventory extends BookInventory {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(bookInventoryStateList.get(currentStatePointer));
     }
 
     /**
@@ -66,7 +66,7 @@ public class VersionedBookInventory extends BookInventory {
      * Returns true if {@code redo()} has BookInventory states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < bookInventoryStateList.size() - 1;
     }
 
     @Override
@@ -81,12 +81,12 @@ public class VersionedBookInventory extends BookInventory {
             return false;
         }
 
-        VersionedBookInventory otherVersionedAddressBook = (VersionedBookInventory) other;
+        VersionedBookInventory otherVersionedBookInventory = (VersionedBookInventory) other;
 
         // state check
-        return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
-                && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
+        return super.equals(otherVersionedBookInventory)
+                && bookInventoryStateList.equals(otherVersionedBookInventory.bookInventoryStateList)
+                && currentStatePointer == otherVersionedBookInventory.currentStatePointer;
     }
 
     /**
@@ -94,7 +94,7 @@ public class VersionedBookInventory extends BookInventory {
      */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
-            super("Current state pointer at start of addressBookState list, unable to undo.");
+            super("Current state pointer at start of bookInventoryState list, unable to undo.");
         }
     }
 
@@ -103,7 +103,7 @@ public class VersionedBookInventory extends BookInventory {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of addressBookState list, unable to redo.");
+            super("Current state pointer at end of bookInventoryState list, unable to redo.");
         }
     }
 }

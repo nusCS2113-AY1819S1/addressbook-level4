@@ -33,18 +33,18 @@ public interface BookInventoryStorage {
 
     /**
      * Saves the given {@link ReadOnlyBookInventory} to the storage.
-     * @param addressBook cannot be null.
+     * @param bookInventory cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyBookInventory addressBook) throws IOException;
+    void saveBookInventory(ReadOnlyBookInventory bookInventory) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyBookInventory)
+     * @see #saveBookInventory(ReadOnlyBookInventory)
      */
-    void saveAddressBook(ReadOnlyBookInventory addressBook, Path filePath) throws IOException;
+    void saveBookInventory(ReadOnlyBookInventory bookInventory, Path filePath) throws IOException;
 
     /**
      * BookInventory can be saved in a fixed temporary place
      */
-    void backupInventoryBook(ReadOnlyBookInventory addressBook) throws IOException;
+    void backupInventoryBook(ReadOnlyBookInventory bookInventory) throws IOException;
 }
