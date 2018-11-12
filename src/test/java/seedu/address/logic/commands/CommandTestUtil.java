@@ -108,6 +108,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditEventDescriptor DESC_AMY;
     public static final EditCommand.EditEventDescriptor DESC_BOB;
 
+    public static final Integer NUM_EVENTS_ATTENDING_ADMIN = 2;
+
     static {
         DESC_AMY = new EditEventDescriptorBuilder().withName(VALID_NAME_AMY).withContact(VALID_CONTACT_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withVenue(VALID_VENUE_AMY)

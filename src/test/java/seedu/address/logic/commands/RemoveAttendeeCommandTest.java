@@ -35,10 +35,11 @@ import seedu.address.testutil.UserBuilder;
 public class RemoveAttendeeCommandTest {
     private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+    private User user;
 
     @Before
     public void setUp() {
-        User user = new UserBuilder().build();
+        user = new UserBuilder().build();
         model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         model.logUser(user);
     }
@@ -58,9 +59,33 @@ public class RemoveAttendeeCommandTest {
         Event eventAttendeeRemoved = new EventBuilder(eventToRemoveAttendee)
                 .withRemoveAttendees(testUsername.toString()).build();
         ModelManager expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
-        expectedModel.logUser(new UserBuilder().build());
+        expectedModel.logUser(user);
         expectedModel.updateEvent(eventToRemoveAttendee, eventAttendeeRemoved);
         expectedModel.commitEventManager();
+
+        assertCommandSuccess(removeAttendeeCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_registeredEventFilteredList_success() {
+        Username testUsername = new Username(VALID_ATTENDEE_WITCH);
+        showEventAtIndex(model, INDEX_FIRST_EVENT);
+        Event eventToRemoveAttendee = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        assertTrue(eventToRemoveAttendee.getAttendance().contains(new Attendee(testUsername.toString())));
+        RemoveAttendeeCommand removeAttendeeCommand =
+                new RemoveAttendeeCommand(INDEX_FIRST_EVENT, testUsername);
+
+        String expectedMessage =
+                String.format(RemoveAttendeeCommand.MESSAGE_REMOVE_ATTENDEE_SUCCESS,
+                        testUsername.toString(), INDEX_FIRST_EVENT.getOneBased());
+
+        Event eventAttendeeRemoved = new EventBuilder(eventToRemoveAttendee)
+                .withRemoveAttendees(testUsername.toString()).build();
+        ModelManager expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
+        expectedModel.logUser(user);
+        expectedModel.updateEvent(eventToRemoveAttendee, eventAttendeeRemoved);
+        expectedModel.commitEventManager();
+        showEventAtIndex(expectedModel, INDEX_FIRST_EVENT);
 
         assertCommandSuccess(removeAttendeeCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -100,7 +125,7 @@ public class RemoveAttendeeCommandTest {
         Event eventToRemoveAttendee = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         Event eventAttendeeRemoved =
                 new EventBuilder(eventToRemoveAttendee).withRemoveAttendees(testUsername.toString()).build();
-        expectedModel.logUser(new UserBuilder().build());
+        expectedModel.logUser(user);
         expectedModel.updateEvent(eventToRemoveAttendee, eventAttendeeRemoved);
         expectedModel.commitEventManager();
 

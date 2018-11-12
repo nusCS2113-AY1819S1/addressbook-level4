@@ -34,6 +34,8 @@ Other main features include:
 
 The user interacts with the application using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. All features can be used by typing commands in the CLI, but the GUI provides important information as well as some ease of use to the user. It is written in Java, and has about 10 kLoC.
 
+This project was developed as part of CS2113T (Software Engineering & Object-Oriented Programming) by a team of 5 students, over a period of 8 weeks.
+
 == Summary of contributions
 My contributions to the project are described below.
 
@@ -44,25 +46,29 @@ Users can indicate their attendance for events, and view the usernames of other 
 
 ** *Justification*:
 +
-This feature encourages users to attend events and connect with other users they know who are attending the same event, promoting social engagement in the community. It also provides event coordinators with a rough estimate of the turnout, allowing them to plan accordingly and make suitable preparations.
+This feature encourages users to attend events and connect with other users they know who are attending the same event, promoting social engagement in the community. It also provides event coordinators with a rough estimate of the turnout, allowing them to make suitable preparations for the event, e.g. ensuring ample logistics and manpower.
 
 ** *Highlights*:
 +
 This enhancement required an in-depth analysis of design alternatives. The implementation too was moderately difficult as it required modification to the existing storage format.
 
-* *Minor enhancement*: Formatting and display of event details in event page
+* *Minor enhancement*:
+** Formatting and display of event details in event page, with proper URL encoding
+** Assisted morphing of product to fit context of project
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=chiaxr&sort=displayName&since=2018-09-12&until=2018-10-23&timeframe=day&reverse=false&repoSort=true[RepoSense link]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
-*** Wrote additional integration tests for registration features to increase coverage (Pull request https://github.com/CS2113-AY1819S1-T12-1/main/pull/99[#99])
+*** Ensure milestones are met and assist teammates in debugging
+*** Wrote additional tests for registration features to increase coverage (Pull request https://github.com/CS2113-AY1819S1-T12-1/main/pull/109[#109], https://github.com/CS2113-AY1819S1-T12-1/main/pull/182[#182])
+** Enhancements to existing features:
+*** Implemented URL encoding for display of event page (https://github.com/CS2113-AY1819S1-T12-1/main/pull/182[#182])
 ** Documentation:
-*** Updated User and Developer Guides to describe new features: https://github.com/CS2113-AY1819S1-T12-1/main/pull/81[#81]
+*** Updated User and Developer Guides to describe new features: https://github.com/CS2113-AY1819S1-T12-1/main/pull/103[#103], https://github.com/CS2113-AY1819S1-T12-1/main/pull/186[#186], https://github.com/CS2113-AY1819S1-T12-1/main/pull/188[#188]
 ** Community:
-*** PRs reviewed: https://github.com/CS2113-AY1819S1-T12-1/main/pull/22[#22], https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58], https://github.com/CS2113-AY1819S1-T12-1/main/pull/59[#59]
+*** PRs merged: https://github.com/CS2113-AY1819S1-T12-1/main/pull/90[#90], https://github.com/CS2113-AY1819S1-T12-1/main/pull/97[#97]
 
 == Contributions to the User Guide
 
@@ -80,5 +86,8 @@ include::../UserGuide.adoc[tag=rsvp]
 |===
 
 include::../DeveloperGuide.adoc[tag=rsvp]
+
+=== Use Cases
 include::../DeveloperGuide.adoc[tag=rsvpUsecase]
 
+include::../DeveloperGuide.adoc[tag=rsvpTestingInstructions]

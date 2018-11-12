@@ -34,10 +34,11 @@ public class UnregisterCommandTest {
     private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
     private String currUsername;
+    private User user;
 
     @Before
     public void setUp() {
-        User user = new UserBuilder().build();
+        user = new UserBuilder().build();
         model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         model.logUser(user);
         currUsername = model.getUsername().toString();
@@ -57,7 +58,7 @@ public class UnregisterCommandTest {
         Event unregisteredEvent = new EventBuilder(eventToUnregister)
                 .withRemoveAttendees(currUsername).build();
         ModelManager expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
-        expectedModel.logUser(new UserBuilder().build());
+        expectedModel.logUser(user);
         expectedModel.updateEvent(eventToUnregister, unregisteredEvent);
         expectedModel.commitEventManager();
 
@@ -65,7 +66,30 @@ public class UnregisterCommandTest {
     }
 
     @Test
-    public void execute_unregisteredEventUnfilteredList_failure() {
+    public void execute_registeredEventFilteredList_success() {
+        showEventAtIndex(model, INDEX_THIRD_EVENT);
+        Event eventToUnregister = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+
+        // check current user is registered for event
+        assertTrue(eventToUnregister.getAttendance().contains(new Attendee(currUsername)));
+        UnregisterCommand unregisterCommand = new UnregisterCommand(INDEX_FIRST_EVENT);
+
+        String expectedMessage =
+                String.format(UnregisterCommand.MESSAGE_UNREGISTER_EVENT_SUCCESS, INDEX_FIRST_EVENT.getOneBased());
+
+        Event unregisteredEvent = new EventBuilder(eventToUnregister)
+                .withRemoveAttendees(currUsername).build();
+        ModelManager expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        expectedModel.logUser(user);
+        expectedModel.updateEvent(eventToUnregister, unregisteredEvent);
+        expectedModel.commitEventManager();
+        showEventAtIndex(expectedModel, INDEX_THIRD_EVENT);
+
+        assertCommandSuccess(unregisterCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_unregisteredEventUnfilteredList_throwsCommandException() {
         Event eventToUnregister = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
 
         // check current user is not registered for event
@@ -97,7 +121,7 @@ public class UnregisterCommandTest {
         assertTrue(eventToUnregister.getAttendance().contains(new Attendee(currUsername)));
 
         Event unregisteredEvent = new EventBuilder(eventToUnregister).withRemoveAttendees(currUsername).build();
-        expectedModel.logUser(new UserBuilder().build());
+        expectedModel.logUser(user);
         expectedModel.updateEvent(eventToUnregister, unregisteredEvent);
         expectedModel.commitEventManager();
 

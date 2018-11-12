@@ -134,6 +134,8 @@ include::../UserGuide.adoc[tag=comment]
 |===
 
 include::../DeveloperGuide.adoc[tag=comments]
+include::../DeveloperGuide.adoc[tag=commentsUC]
+include::../DeveloperGuide.adoc[tag=commentsMT]
 
 == Other Projects
 ---

@@ -47,7 +47,7 @@ public class SampleDataUtil {
             new Event(new Name("Migrant Workers Rights Sharing Session"), new Contact("Irfan Ibrahim"),
                     new Phone("92492021"), new Email("irfan@example.com"),
                     new Venue("Blk 47 Tampines Street 20, #17-35"), new DateTime(new String("5/7/2018 16:30")),
-                    new Status("COMPLETED"), new Comment("{span}This is a comment{/span}"),
+                    new Status("COMPLETED"), new Comment("{span}Comment Section{/span}" + "{ol}{/ol}"),
                     getTagSet("classmates"), getAttendeeSet("Irfan Ibrahim")),
             new Event(new Name("Ultimate Frisbee Session"), new Contact("Roy Balakrishnan"), new Phone("92624417"),
                     new Email("royb@example.com"), new Venue("Blk 45 Aljunied Street 85, #11-31"),

@@ -478,26 +478,35 @@ Step 5. If the admin wants to reset or make a new comment section of an event, t
 // tag::rsvp[]
 === RSVP
 ==== Current Implementation
-The RSVP feature consists of the `register` & `unregister` command. A `removeAttendee` command is included for admin use to remove users forcibly if required. The implementations of the commands use the `EditEventDescriptor` class and `createEditedEvent` method from `EditCommand` to aid in updating event attendance. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
+The RSVP feature consists of the `register`, `unregister`, and `attending` command. A `removeAttendee` command is included for admin use to remove users forcibly if required. The implementations of the commands use the `EditEventDescriptor` class and `createEditedEvent` method from `EditCommand` to aid in updating event attendance. The `AttendanceContainsUserPredicate` class is used to filter events that the user has registered for. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
 
-Below is an example usage scenario and how the RSVP mechanism behaves:
+Below is an example usage scenario and how the RSVP mechanism behaves during a `register` operation:
 
 |===
 Step 1: The user launches the application, and logs in.
 
 Step 2: The user clicks on an event or types `select 2` into the CLI. Details of the 2nd event including event attendance are displayed.
 
-Step 3: The user executes `register 2` to register for the 2nd event. The `register` command takes in the current model and event at index 2, getting the username of the current user via `Model#getUsername`, and the current attendance of the event as a `HashSet` with `Event#getAttendance`.
+Step 3: The user executes `register 2` to register for the 2nd event. With the `Model`, the `RegisterCommand#execute` method gets the event at index 2, the username of the current user, and the current attendance of the event as a `HashSet` with `Event#getAttendance`.
 
 Step 4: The `register` command tries to add the username into the current attendance with `HashSet#add`. If the username already exists in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
 
-Step 5: The model is updated and committed, overwriting `eventmanager.xml`. The event page is reloaded to display the new event attendance.
+Step 5: The model is updated with the edited event and committed. The event page is reloaded to display the new event attendance.
 
-Step 6: If the user decides to unregister from the event, the user executes `unregister 2`, and the `unregister` command gets the username and attendance in the same manner as the `register` command in Step 3.
+|===
 
-Step 7: The `unregister` command command tries to remove the username from the current attendance with `HashSet#remove`. If the username does not exist in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
+Below is another example usage scenario illustrating how the RSVP mechanism behaves during an `unregister` operation, with the use of `attending`.
 
-Step 8: The model is updated and committed as in Step 4, and the event page is again reloaded.
+|===
+Step 1: The user launches the application, and logs in.
+
+Step 2: The user types `attending` into the CLI. `AttendingCommand#execute` retrieves the current user's username from `Model` and creates a `AttendanceContainsUsernamePredicate` predicate. The predicate is used with `Model#updateFilteredEventList` to filter out events without the user's username in their attendance. Events that the user has registered for are displayed.
+
+Step 3: The user executes `unregister 2` to unregister from the 2nd event. With the `Model`, the `UnregisterCommand#execute` method gets the event at index 2, the username of the current user, and the current attendance of the event as a `HashSet` with `Event#getAttendance`.
+
+Step 4: The `unregister` command command tries to remove the username from the current attendance with `HashSet#remove`. If the username does not exist in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
+
+Step 5: The model is updated with the edited event and committed. The event page is reloaded to display the new event attendance..
 |===
 
 [NOTE]
@@ -629,9 +638,15 @@ Step 1: User launches application, then logs in
 Step 2: User adds a new event which will occur before some of the other events in the list +
 e.g: `add n/Jack Birthday Party ... d/10/10/2018 20:30...`
 
+.Add new event that need to be sorted
+image::autoSortingBefore.png[]
+
 Step 3: When add method is called, it performs the intended operation, then sorts the list before returning it to other components.
 
 Step 4: The event list panel is reloaded and displays the newly added event in the correct place.
+
+.Auto sorting results
+image::autoSortingAfter.png[width=350]
 
 ==== Aspect: How to sort the list
 * **Alternative 1 (current choice):** Event list will be sorted based on sort method implemented in `UniqueEventList` class to modify the internal list which event manager is backed on.
@@ -663,7 +678,7 @@ Current version implementation uses logic AND operator for different prefixes.
 ** Pros: Follows the current structure of `find` command, which means that current resources can be reused.
 ** Cons: With the current implementation of the predicate, scaling will severely affect product performance.
 
-==== Future enhancement:
+==== Future enhancement: [V2.0]
 * Search options for keywords contained or for the exact keywords.
 * Search with  both `logic AND and OR operator` with different prefixes.
 * Search for events within a time range.
@@ -678,11 +693,22 @@ Consider the following scenario:
 
 Step 1: User launches the application, then logs in.
 
-Step 2: User executes `export my event calendar` command. The export command receive argument to accept as filename
+Step 2: User executes `export mycal` command. The export command receive argument to accept as filename
 
 Step 3: Current user, who is logged in, will be used to receive an event filtered list that he/she has registered for.
 
-Step 4: A FileOutputStream will be created to create new file/re-write if the file exists with the data from the filtered event list converted to iCalendar file format
+Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in *folder that you store EventManager.jar*
+
+.Command result show in the UI
+image::exportCommandResultUI.png[width=350]
+
+.Command result show in file folder
+image::exportCommandResultFile.png[width=350]
+
+The process is illustrated in the following diagram:
+
+.ExportCalendarCommand sequence diagram
+image::exportCalendarCommandSequencesDiagram.png[]
 
 ==== Aspect: How to export the event list
 * **Alternative 1 (current implementation):** Using ical4j external library to create methods to convert events to RFC5545 format, then stream to FileOutputStream with given filename from user. +
@@ -695,10 +721,10 @@ All method are written in the `ExportCalendarCommand` class.
 
 [NOTE]
 ====
-Calendar will be exported to your src/data folder.
+Calendar will be exported to your source folder.
 ====
 
-==== [Proposed]: Future enhancement
+==== [Proposed]: Future enhancement [V2.0]
 Export should be able to export the attendance list of an event according to user preference.
 // end::exportcalendar[]
 
@@ -1054,6 +1080,7 @@ Use case ends.
 Use case ends
 // end::updateStatusUsecase[]
 
+// tag::commentsUC[]
 [discrete]
 === Use case: Comments
 *MSS*
@@ -1075,6 +1102,7 @@ Use case ends
 ** 3a2. `addComment INDEX C/STRING` will adds the STRING to the bottom of the comment section at event INDEX.
 ** 3a3. `deleteComment INDEX L/LINE`  (only for admin) it will delete the comment at event INDEX and comment at LINE of comment section. +
 Resume use case at step 4.
+// end::commentsUC[]
 
 [discrete]
 === Use Case: Export calendar
@@ -1200,3 +1228,136 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size or smaller than 0) +
    Expected: Similar to previous.
+
+_{ more test cases ... }_
+
+// tag::rsvpTestingInstructions[]
+=== Displaying event details
+
+. Viewing event details with special characters
+
+.. Prerequisites: +
+First event in list contains special characters in details, e.g. `?`, `#`, `&`, `=`, `/`, `@`, `:`.
+.. Test case: `select 1` +
+   Expected: Event page displays all special characters. Status bar remains the same.
+
+=== Registering for an event
+
+. Registering for an event while all events are listed/filtered
+
+.. Prerequisites: +
+Username is not in attendance of first event. +
+Username is in attendance of second event.
+.. Test case: `register 1` +
+   Expected: Username is added to attendance of first event. Index of the event is shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `register 2` +
+   Expected: No duplicate username in attendance of second event. Error details shown in the status message. Status bar remains the same.
+.. Test case: `register x` (where x is non-positive, larger than the list size or not an integer)+
+   Expected: Username is not added to attendance of any event. Error details shown in the status message. Status bar remains the same.
+
+=== Unregistering for an event
+
+. Unregistering for an event while all events are listed/filtered
+
+.. Prerequisites: +
+Username is in attendance of first event. +
+Username is not in attendance of second event.
+
+.. Test case: `unregister 1` +
+   Expected: Username is removed from attendance of first event. Index of the event is shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `unregister 2` +
+   Expected: Error details shown in the status message. Status bar remains the same.
+.. Test case: `unregister x` (where x is non-positive, larger than the list size or not an integer)+
+   Expected: Username is not removed from attendance of any event. Error details shown in the status message. Status bar remains the same.
+
+=== Viewing all attending events
+
+. Viewing attending events while all events are listed
+
+.. Prerequisites: +
+List all events using the `list` command. Multiple events in the list. +
+User has registered for some events using the `register` command.
+.. Test case: `attending` +
+   Expected: Only events which the user has registered for are shown. Number of events the user has registered for are shown in the status message. Timestamp in the status bar remains the same.
+
+. Viewing attending events while events are filtered
+
+.. Prerequisites: +
+Filter events with the `find` command. +
+User has registered for some events using the `register` command.
+.. Test case: `attending` +
+   Expected: Only events which the user has registered for are shown, including events not in the filtered list. Number of events the user has registered for are shown in the status message. Timestamp in the status bar remains the same.
+
+=== Removing an attendee from event
+
+. Removing an attendee by username from an event while all events are listed/filtered
+
+.. Prerequisites: +
+Logged in as admin. +
+Username of target attendee `Charlotte Oliveiro` is in the attendance of the first event.
+Username of target attendee `Charlotte Oliveiro` is not in the attendance of the second event.
+.. Test case: `removeAttendee 1 u/Charlotte Oliveiro` +
+   Expected: Target attendee is removed from attendance of first event. Username of target attendee and index of the event is shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `removeAttendee 1 u/charlotte oliveiro` +
+   Expected: Target attendee username is case-sensitive. Error details shown in the status message. Status bar remains the same.
+.. Test case: `removeAttendee 2 u/Charlotte Oliveiro` +
+   Expected: Target attendee does not exist in second event. Error details shown in the status message. Status bar remains the same.
+.. Test case: `removeAttendee x u/Charlotte Oliveiro` (where x is non-positive, larger than the list size or not an integer) +
+   Expected: Target user is not removed from attendance of any event. Error details shown in the status message. Status bar remains the same.
+// end::rsvpTestingInstructions[]
+
+// tag::commentsMT[]
+=== Adding a Comment
+
+. Adding a comment in the comment section of an event
+
+.. Prerequisite: User/Admin has to be logged in and event 1 has to exist.
+
+.. Test case: `addComment 1 C/Hello`
+ Expected: Adds to event at index 1 the comment "Hello". The new comment will be displayed under last comment available or if not below the comment section.
+
+.. Test case: `addComment 0 C/Hello`
+Expected: The Command Result box will return an invalid format and no changes will occur.
+
+.. Test case: `addComment x C/STRING`, when x < 0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1` 
+Expected: Similar to previous because x has to be a signed integer that exists within the index of events.
+
+=== Replying a Comment
+
+. Replying a comment in the comment section of an event
+
+.. Prerequisite: User/Admin has to be logged in, event 1 has to have one valid comment.
+
+.. Test case: `replyComment 1 C/Hello L/1`
+Expected: Adds to event at index 1 and replies a comment "Hello" to line 1 of the comments section.
+
+.. Test case: `replyComment 0 C/Hello L/1`
+Expected: The Command Result box will return an invalid format and no changes will occur.
+
+.. Test case: `replyComment x C/Hello L/1`, x < 0 or x > event list size
+Expected: Similar to previous
+
+.. Test case: `replyComment 1 C/Hello L/x`, where x < = 0 or x > number of comments in the comment section
+Expected: Similar to previous
+
+.. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. 
+Expected: Invalid command will be displayed in the result box. No changes will occur.
+
+=== Deleting a Comment
+
+. Deleting a comment in the comment section 
+
+.. Prerequisites: Admin and logged in, event 1 has to have at least 1 valid comment.
+
+.. Test case: `deleteComment 1 L/1`
+Expected: Deletes a comment into the comment section at the given line parameter.
+
+.. Test case: `deleteComment x L/1`, where x < = 0 or x > event list size
+Expected: The Command Result box will return an invalid format and no changes will occur.
+
+.. Test case: `deleteComment 1 L/x`, where x < = 0 or x > number of comments in the comment section.
+Expected: Similar to previous
+
+.. Test case: `deleteComment x L/y`, where x or y does not exist.
+Expected:  Invalid command will be displayed in the result box. No changes will occur.
+// end::commentsMT[]

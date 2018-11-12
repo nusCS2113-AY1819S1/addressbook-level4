@@ -124,7 +124,7 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleSendEventReminder(SendEventReminder ser) {
         String title = "Reminder for " + ser.eventName;
         String header = "You registered for " + ser.eventName + "\non " + ser.eventDate;
-        String content = "\t\t" + ser.timeTillEvent + " hours to event.";
+        String content = ser.timeTillEvent + " hours to event.";
 
         showAlertDialogAndWait(AlertType.INFORMATION, title, header, content);
         logger.info(LogsCenter.getEventHandlingLogMessage(ser, "Reminder sent"));
