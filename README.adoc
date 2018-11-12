@@ -17,7 +17,7 @@ endif::[]
 
 * This is a multi-platform _BookInventory_ desktop application. It has a Graphic User Interface (GUI) but most of the user interactions happen using a Command Line Interface (CLI).
 * It is specially designed just for Store Owners to manage their books and revenue for their store.
-* As customers, you can also check the availability of the items they are looking for before heading down to the store.
+* As customers, you can also check the availability of the books that you are looking for before heading down to the store.
 * So what are you waiting for?
 ** Download it NOW!
 
