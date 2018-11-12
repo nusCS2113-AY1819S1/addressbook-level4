@@ -25,11 +25,12 @@ Inventarie Pro is for self employed business owners who prefer to use a desktop 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.1` - `v1.3.2` (6 releases) on GitHub
+*** Managed releases `v1.1` - `v1.4` (7 releases) on GitHub
 ** Enhancements to existing features:
 *** Wrote additional tests for existing features to increase converage from 21% to 25% (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main/pull/111[#111])
 *** Wrote additional tests for existing features to increase coverage from 30% to 42% (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main/pull/179[#179], https://github.com/CS2113-AY1819S1-T13-3/main/pull/186[#186])
 *** Wrote additional tests for existing features to increase coverage from 49% to 53% (Pull request https://github.com/CS2113-AY1819S1-T13-3/main/pull/207[#207])
+*** Proposed data encryption for v2.0 (Pull request https://github.com/CS2113-AY1819S1-T13-3/main/pull/177[#177])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T13-3/main/pull/186[#186]
 ** Community:
@@ -40,6 +41,7 @@ Inventarie Pro is for self employed business owners who prefer to use a desktop 
 *** Integrated a continuous integration service (AppVeyor) to the team repo (https://github.com[#42])
 *** Integrated a coverage reporting service (Coveralls) to the team repo
 *** Integrated an automated code quality tool (Codacy) to the team repo
+
 
 == Contributions to the User Guide
 
