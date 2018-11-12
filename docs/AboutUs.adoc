@@ -41,7 +41,7 @@ image::cqinkai.png[width="150", align="left"]
 {empty}[http://github.com/cqinkai[github]] [<<cqinkai#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Event Reminders
+Responsibilities: Event Status & Reminders
 
 '''
 
