@@ -514,13 +514,32 @@ image::ExpenditureGetAdviceSequenceDiagram.png[width="800"]
 
 * **Alternative 1 (current choice):** We generate the advice message using string builder and afterwards the message will be shown to user in a pop-up window.
 ** Pros: It is user friendly. The content of advice will be shown clearly, which is easy for user to see.
-** Cons: It needs effort to implement a `PopUpString` class (in our cases, a self-implemented pop-up window will be easier than using the one in Java library since only a string needs to be shown) and corresponding methods for UI activating in the `ExpenditureGetAdviceCommand` class.
+** Cons: It needs effort to implement a `PopUpString` class (in our cases, a self-implemented pop-up window will be easy to implement since only a string needs to be shown) and corresponding methods for UI activating in the `ExpenditureGetAdviceCommand` class.
 * **Alternative 2:** We show the advice message in the command result box.
 ** Pros: It is easy to be implemented.
 ** Cons: It is not user friendly and harder for user to view in the command result box which is relatively small.
 
 // end::getAdvice[]
 
+// tag::popup[]
+=== Pop-up window
+
+==== Current Implementation
+
+A `PopUpString` class was implemented to trigger the pop-up process.
+
+* **In `PopUpString` class**: The `popup` method creates a new stage with a scene containing one label to hold the advice string. Afterwards, by using `stage.show()` method, a new window will appear.
+
+==== Aspect: Styles of the pop-up window to be shown
+
+* **Alternative 1 (current choice):** A new normal window is shown
+** Pros: The style of window is normal which provides user with necessary information.
+** Cons: It needs effort to implement a `PopUpString` class.
+* **Alternative 2:** A dialog window is shown
+** Pros: It is easy to be implemented using JOptionPane class in Java library.
+** Cons: The style of window is dialog which might be a bit awkward and might mislead user to consider the content of this window as error message.
+
+// end::popup[]
 
 // tag::checkexpenditure[]
 === Check Expenditure
