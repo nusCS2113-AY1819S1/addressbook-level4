@@ -55,7 +55,7 @@ Format: `help`
 Adds a student to the system. +
 Format: `course_add n/COURSE_NAME c/COURSE_CODE f/FACULTY_NAME`
 ****
-* Course code must be unique.
+* Course code must be unique. Capped to 10 letters.
 * Course code may contain letters only.
 ****
 Examples:
@@ -75,7 +75,7 @@ Format: `course liststudents`
 Edits an existing course in the system (by course code). +
 Format: `course edit c/COURSE_CODE [f/FACULTY_NAME] [n/COURSE NAME]`
 ****
-* Edits the student at the specified course code. A course code must be provided to make changes.
+* Edits the course at the specified course code. A course code must be provided to make changes.
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
 ****
@@ -149,6 +149,21 @@ Deletes the 2nd person in the system
 ==== List Students : `student list`
 Shows a list of all students in the system. +
 Format: `student list`
+
+==== Find Student : `student find`
+Finds students whose name contain any of the given keywords. +
+Format: `name find KEYWORD [MORE_KEYWORDS]`
+
+****
+* At least one keyword must be provided.
+* The search is case-insensitive.
+* The search will only match whole words i.e. `Meg` will not return `Megan`.
+****
+
+Examples:
+
+* `student find Megan` +
+Returns students with the name `Megan`.
 
 ==== Export Student : `student export [coming in v2.0]`
 Exports students to a .csv file +
@@ -723,7 +738,7 @@ e.g. `course edit c/CEG n/Comp Eng`
 e.g. `student add n/Megan Nicole c/CEG e/E0169113@u.nus.edu a/14 Changi South i/A0177897E p/92667921`
 * *Update student* : `student edit INDEX [n/NAME] [i/ADMIN_NUMBER] [c/CLASS] [p/MOBILE_NUMBER] [e/EMAIL a/ADDRESS] ` +
 e.g. `student edit 1 p/99887890 a/14 Simei Avenue 1`
-* *Finding a student by name/matric no* : `student find STUDENT_NAME` +
+* *Finding a student by name* : `student find STUDENT_NAME` +
 e.g. `student find Megan Nicole`
 * *List all students* : `student list` +
 * *Delete student by INDEX* : `student delete` +

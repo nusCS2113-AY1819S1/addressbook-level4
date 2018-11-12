@@ -925,7 +925,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 === Use case: Unlock system
 *Precondition(s)* :
 
-* NIL
+* The system must be locked.
 
 *Guarantees* :
 
@@ -1464,12 +1464,6 @@ Use case resumes at step 1.
 * 2b. Teacher enters improperly formatted command.
 +
 ** 2b1. System displays the proper format for usage of the command.
-+
-Use case resumes at step 1.
-
-* 2c. There are no courses in the system.
-+
-** 2c1. System shows 'no courses in system' message.
 +
 Use case resumes at step 1.
 
@@ -2775,7 +2769,7 @@ Expected: The list of students with the name "Megan" will be displayed.
 .. Test case: `student edit n/Megan Nicole c/EEE` +
 Expected: The student will have her course code changed to EEE.
 . Removing a student
-.. Prerequisites: There should be at least one student in the system.
+.. Prerequisites: There should be at least one student in the system. Run 'student list' first.
 .. Test case: `student delete 1` +
 Expected: The student at INDEX 1 will be deleted from the system.
 

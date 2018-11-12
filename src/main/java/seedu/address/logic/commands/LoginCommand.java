@@ -28,7 +28,7 @@ public class LoginCommand extends Command {
 
     public static final String MESSAGE_AUTH_SUCCESS = "You has successfully unlocked the system.";
     public static final String MESSAGE_AUTH_FAILURE = "Your unlock attempt has failed. Please try again.";
-    public static final String MESSAGE_ALR_UNLOCKED = "THe system is already unlocked.";
+    public static final String MESSAGE_ALR_UNLOCKED = "The system is already unlocked.";
 
     private User internalUser;
     /**
