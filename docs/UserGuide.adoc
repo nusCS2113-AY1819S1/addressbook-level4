@@ -115,6 +115,7 @@ image::switchBook.png[width="390"]
 // tag::add[]
 === Adding a candidate / company / job  : `addc` `addC` `addj`
 
+.GUI of Adding entries in RecruitBook
 image::addingRB.gif[width="500"]
 
 ==== Adds a candidate to the RecruitBook
