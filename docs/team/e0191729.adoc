@@ -18,17 +18,12 @@ ForumBook is a desktop forum application which allows students to exchange infor
 * *Main feature implemented:*: added *various commands to enable admin to manage ForumBook*
 ** What it does: allows admin to better manage ForumBook by providing the following commands:
 <Edit from here to the end>
-*** `AnnounceCommand`: admin is able to create new announcement.
-*** `CheckAnnouncementCommand`: both user and admin are able to check for latest announcement, which is shown in a pop up window.
-*** `BlockUserFromPostingCommand`: admin is able to block a given user.
-*** `SetAdminCommand`: admin is able to set a user as admin or revert an admin to user.
-*** `CreateModuleCommand`: admin is able to create modules.
-*** `DeleteModuleCommand`: admin is able to delete modules.
-*** `AdminUpdatePasswordCommand`: admin is able to update a user's password.
-*** `DeleteUserCommand`: admin is able to delete a certain user.
-** Justification: This admin management feature improves the product significantly as a new user type, admin, is introduced. These admin commands provide a convenient way for admin to better manage the ForumBook.
-** Highlights: This admin management feature provides a more efficient way for admin to manage ForumBook, admin could easily block a certain user, help a user to update his/her password, etc. It also made ForumBook more user-friendly as it provides a better way of viewing data by showing the login status of the current user in the label at the top right corner, as well as showing the latest announcement in a pop up window.
-
+*** `AddUser`: add user to the ForumBook database.
+*** `Login`: allow user to login to the ForumBook to Read and Share comments.
+*** `Logout`: allow user to logout of the ForumBook safely
+*** `SelfDeleteUser`: user is able to delete himself from the ForumBook database.
+** Justification: This user management feature provides the users the most basic commands required for the user to use the ForumBook. These user commands provide a convenient way for users to better manage the ForumBook.
+** Highlights: This user management feature provides the most simplest and efficient way for users to use/manage ForumBook. User could easily add themselves to the ForumBook, login to use the other features, logout of the ForumBook and if there is a need to, delete himself from the ForumBook. It also made ForumBook more user-friendly as it provides a better way of viewing data by showing the login status of the current user in the label at the top right corner, as well as showing the latest announcement in a pop up window.
 * *Other contributions*:
 
 ** Project management:
@@ -47,7 +42,8 @@ ForumBook is a desktop forum application which allows students to exchange infor
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=adminManagement]
+include::../UserGuide.adoc[tag=UserManagement1]
+include::../UserGuide.adoc[tag=UserManagement2]
 
 == Contributions to the Developer Guide
 
@@ -55,4 +51,6 @@ include::../UserGuide.adoc[tag=adminManagement]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=adminManagement]
+include::../DeveloperGuide.adoc[tag=UserManagement1]
+include::../DeveloperGuide.adoc[tag=UserManagement2]
+include::../DeveloperGuide.adoc[tag=UserManagement3]

@@ -47,8 +47,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 9. Update a thread created by you using `updateThread tId/1 tTitle/Is there any midterm?`
 10. Delete a thread created by you using `deleteThread tId/1`
 11. Check for latest announcement using `checkAnnounce`
-12. Logout from ForumBook using `logout`
-13. Exits the app using `exit`
+12. Delete himself from the ForumBook using 'deleteMe'
+13. Logout from ForumBook using `logout`
+14. Exits the app using `exit`
 
 * As an admin, you could do anything that an ordinary user could do and the following: +
 1. Post new announcement using `announce aTitle/Urgent! aContent/System maintenance from 3pm to 5pm`
@@ -85,7 +86,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Viewing help : `help`
 
 Format: `help`
-
+// tag::UserManagement1[]
 === Register a new User : `addUser`
 
 Register a New User to the Forum. User Name is unique and case sensitive. +
@@ -106,6 +107,7 @@ Format: `login uName/USER NAME uPass/USER PASSWORD`
 Examples:
 
 * `login uName/user1 uPass/user1`
+// end::UserManagement1[]
 
 // tag::curd[]
 === Listing all the modules : `listModule`
@@ -281,7 +283,7 @@ Example:
 
 * `updatePass uName/john uPass/098`
 
-=== Delete a user : `deleteUser`
+=== Delete a user(Admin) : `deleteUser`
 
 Delete a given user by admin. +
 Format: `deleteUser uName/USER_NAME`
@@ -291,11 +293,21 @@ Example:
 * `deleteUser uName/john`
 // end::adminManagement[]
 
+// tag::UserManagement2[]
+=== Delete a user(User) : `deleteMe`
+
+User deletes himself from the ForumBook. +
+Format: `deleteMe`
+
+Example:
+
+* `deleteMe`
+
 === Logout from the forum : `logout`
 
 Logout from the Forum. +
 Format: `logout`
-
+// end::UserManagement2[]
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -369,6 +381,7 @@ e.g `updateModule mId/3 mCode/CS1221 mTitle/Random CS module`
 e.g `deleteModule mCode/CS2113`
 * *UpdatePass* : `updatePass uName/USER_NAME uPass/USER_PASSWORD` +
 e.g `updatePass uName/john uPass/098`
-* *DeleteUser* : `deleteUser uName/USER_NAME` +
+* *DeleteUser(Admin)* : `deleteUser uName/USER_NAME` +
 e.g `deleteUser uName/john`
+* *DeleteUser(User)* : `deleteMe`
 * *Logout* : `logout`

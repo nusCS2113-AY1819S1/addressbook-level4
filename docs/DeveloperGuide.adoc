@@ -332,7 +332,7 @@ Data are saved in encrypted Json format, the encryption algorithm is provided by
 
 `RunningId` does not work as the other entities do, it has its own logic to make sure IDs are not repeated.
 // end::storage[]
-
+// tag::UserManagement1[]
 === User management
 
 ==== Current Implementation
@@ -344,7 +344,7 @@ The user management is facilitated by various commands. It extends `ForumBook` w
 
 * `LogoutCommand`: logout from the forum book.
 
-* `UpdateCommand`: Update a certain user's password, email and/or phone.
+* `UserDeleteCommand`: Self delete a user from the forum book.
 
 Given below is an example usage scenario and how the user management behaves at each step.
 
@@ -358,10 +358,10 @@ Step 2. The user executes `login uName/UserName uPass/password` to login to the 
 Step 3. The user executes `logout` to exit the forum or to switch user, logout command calls 'EventsCenter.getInstance().post(new UserLoginEvent("", false, false))' to close the instance created by the user. Next/ another user is able to login after a successful logout.
 
 ToDo:
-Step 4. The user executes `updateUserComment ` to update the uPass.
+Step 4. The user executes `UserDeleteComment ` to remove himself/herself from the forum book. User data will be removed from the storage.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------- +
-
+// end::UserManagement1[]
 // tag::adminManagement[]
 === Admin management
 
@@ -684,6 +684,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |ForumBook admin |announce |show some important information to users
 
+|`* * *` |User |add myself as a user | register and use the forum book
+
+|`* * *` |User |login and logout |share my comments in the forum book and exit when i want to
+
+|`* * *` |User |delete myself from being a user |
+
 |`* * *` |ForumBook admin |block users |prevent users from creating and updating threads and comments
 
 |`* *` |ForumBook admin |change user password |help the user to reset the password once they forget their password
@@ -883,7 +889,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-
+// tag::UserManagement2[]
 === Registering and logging in
 
 . Registering a new user
@@ -901,7 +907,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `login uName/john uPass/123`
    Expected: Log in with a registered username and correct password, a success message will be shown in the result display panel.
 
-
+// end::UserManagement2[]
 === Announcing new announcement
 
 . Announcing a new announcement by admin.
@@ -1084,7 +1090,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `updatePass uName/abcd uPass/123` +
    Expected: Since the given user `abcd` has not been added to the UserStorage, an error message will be shown in the result display panel.
 
-=== Deleting a user
+=== Deleting a user(Admin)
 
 . Deleting a given user by admin.
 .. Prerequisites: Current user must login as an admin. The given user must be in the UserStorage.
@@ -1092,7 +1098,16 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The user `john` will be deleted from the UserStorage and a success message will be shown in the result display panel.
 .. Test case: `deleteUser uName/abcd`
    Expected: Since the given user `abcd` does not exist in the UserStorage, an error message will be shown in the result display panel.
+// end::UserManagement3[]
+=== Deleting a user(User)
 
+. Self Deleting a user.
+.. Prerequisites: User who is interested in removing himself from the forum must login to his account. The given user must be in the UserStorage.
+.. Test case: `deleteMe` -user logged in
+   Expected Success: The current user will be deleted from the UserStorage and a success message will be shown in the result display panel.
+.. Test case: `deleteMe` -user not logged in
+   Expected Fail: Since the given user is not logged in, an error message will be shown in the result display panel.
+// end::UserManagement3[]
 === Saving data
 
 . Dealing with missing/corrupted data files
