@@ -8,10 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMAINING_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorProduct;
 import seedu.address.model.product.Product;
 
 /**
@@ -39,7 +43,7 @@ public class AddCommand extends Command {
             + PREFIX_REMAINING_ITEMS + "12";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s \n\nRemember to edit the added distributor's"
-            + "phone number instead of leaving it as the default 00000000!";
+            + " phone number instead of leaving it as the default 00000000!";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the product database";
     public static final String MESSAGE_EDIT_DIST_PHONE = "The product was successfully added!\n\n"
             + "The distributor has not been added because"
@@ -70,11 +74,23 @@ public class AddCommand extends Command {
 
         model.addProduct(toAdd);
 
-        if (model.hasDistributor(distToAdd)) {
-            throw new CommandException(MESSAGE_EDIT_DIST_PHONE);
-        }
+        if (model.hasDistributorName(distToAdd)) {
 
-        model.addDistributor(distToAdd);
+            List<Distributor> distList = model.getFilteredDistributorList();
+            Integer index = distList.indexOf(distToAdd);
+
+            Distributor originalDist = distList.get(index + 1);
+
+            Set<DistributorProduct> newDistProds = distToAdd.getDistProds();
+            originalDist.getDistProds().addAll(newDistProds);
+
+            Distributor prodEditedDist = new Distributor(originalDist.getDistName(), originalDist.getDistPhone(),
+                    originalDist.getDistProds(), distToAdd.getTags());
+
+            model.updateDistributor(distToAdd, prodEditedDist);
+        } else {
+            model.addDistributor(distToAdd);
+        }
 
         model.commitProductDatabase();
         model.commitDistributorBook();

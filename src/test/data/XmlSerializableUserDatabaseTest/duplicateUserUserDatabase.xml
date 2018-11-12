@@ -10,12 +10,14 @@
         <username>amy</username>
         <password>pass</password>
         <addressBookFilePath>data/addressbook-amy.xml</addressBookFilePath>
+        <distributorBookFilePath>data/distributor-amy.xml</distributorBookFilePath>
         <salesHistoryFilePath>data/saleshistory-amy.xml</salesHistoryFilePath>
     </users>
     <users>
         <username>amy</username>
         <password>pass</password>
         <addressBookFilePath>data/addressbook-amy.xml</addressBookFilePath>
+        <distributorBookFilePath>data/distributor-amy.xml</distributorBookFilePath>
         <salesHistoryFilePath>data/saleshistory-amy.xml</salesHistoryFilePath>
     </users>
 </userdatabase>

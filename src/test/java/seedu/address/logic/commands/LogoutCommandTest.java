@@ -154,6 +154,19 @@ public class LogoutCommandTest {
         }
 
         @Override
+        public boolean hasDistributorName(Distributor distributor) {
+            fail("This method should not be called.");
+            return false;
+        }
+
+        @Override
+        public boolean hasDistributorPhone(Distributor distributor) {
+            fail("This method should not be called.");
+            return false;
+        }
+
+
+        @Override
         public boolean hasProduct(Product product) {
             fail("This method should not be called.");
             return false;

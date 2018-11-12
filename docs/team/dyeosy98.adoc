@@ -1,21 +1,21 @@
-= John Doe - Project Portfolio
+= Yeo Su Yia, Denise - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: Inventarie PRO
 
 ---
 
 == Overview
 
-AddressBook - Level 4 is a desktop productInfo book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Inventarie PRO is a desktop inventory application intended for use by self-employed provision shop owners who wish to digitise their inventory records. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
+* *Major enhancement*: Added *the ability to manage distributors engaged with a provision shop*
+** What it does: Allows the user to add, edit, delete and find distributors that the user would like a record of. It also allows the user to see which distributor provides what products for the shop.
+** Justification: This feature is an essential part of a digitised inventory management system, given that a self-employed provision shop owner would want
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
