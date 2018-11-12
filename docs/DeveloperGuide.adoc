@@ -2210,7 +2210,7 @@ Expected: Similar to previous.
 === Modifying an employee's pay
 
 . Modifying an employee's pay
-.. Prerequisites: Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value). +
+.. Prerequisites: There must be at least 1 employee in the list. Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value). +
 Allocated Bonus should not be more than 24 months of Salary.
 
 .. Test case: modifyPay 1 s/1000 +
@@ -2242,7 +2242,7 @@ Else, error details shown in the status message. Status bar remains the same.
 === Modifying the pay of all the employees in the list
 
 . Modifying an employee's pay
-.. Prerequisites: Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value). +
+.. Prerequisites: There must be at least 1 employee in the list. Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value). +
 Allocated Bonus should not be more than 24 months of Salary.
 
 .. Test case: modifyAllPay s/1000 +
