@@ -516,7 +516,7 @@ Format: +
 * Refer to <<constraints>> for the more information on the parameters.
 * Note that for mmm, it is case-insensitive, meaning both *"APR"* and *"apr"* are accepted.
 ****
-
+// end::summary[]
 Once the command has been executed, a panel will appear showing the summary table containing data that is relevant in the range. +
 The table entries are sorted according to either date, month or category depending on the mode used in ascending order. +
 At the same time, currently selected record will be unselected to reduce confusion for the user.
@@ -525,6 +525,7 @@ At the same time, currently selected record will be unselected to reduce confusi
 The table listing is currently non-resizable. If either the date, month or category is too long, the default behaviour of this app is to truncate
 those words and replace the parts truncated with ellipses("...").
 
+// tag::summary[]
 Examples:
 
 * `summary date d/1-1-2018 12-12-2018`
@@ -580,17 +581,18 @@ Format:`stats d/START_DATE END_DATE`
 Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range. +
 At the same time, currently selected record will be unselected to reduce confusion for the user. If there are many categories shown and
 the box is not large enough, you can use the scroll bar at the side of each legend to view the other categories which are not in view.
+// end::stats[]
 
 [NOTE]
 Due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
 is too small. To improve readability, we have decided to hide some labels in such scenarios. Also, when the label is too long, since the pie charts
 need to fit the labels, the pie chart may become small as a result. To prevent such situations, please keep your labels short. This will be improved in
 later versions of the product to remove the labels completely and use a mouse over input instead.
-
+// tag::stats[]
 Examples:
 
 * `stats d/1-1-2018 12-12-2018`
-
+// end::stats[]
 Below are some screenshots of what you can see when the command has been accepted. The commands entered have been left
 in for visualisation purposes. These screenshots are taken in *fullscreen mode* at 1080p resolution.
 
@@ -612,7 +614,6 @@ Auto-Completion: +
 ** Text can also be completed to `today` or `ytd`.
 * There will be no suggestions on parameters that come after the third.
 // end::autocomplete-j[]
-
 // tag::welcomepanel[]
 === Showing a breakdown of total expenses and income into categories of this month: `NO COMMAND REQUIRED TO BE TYPED`
 
@@ -988,7 +989,9 @@ will check the total spend of May until the last second of May.
 ****
 * `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
 ****
+
 Examples:
+
 * `addmonthlylimit m/200`
 
 === Editing the monthly limit: `editmonthlylimit`
@@ -1001,7 +1004,9 @@ The monthly limit will be replaced by the new monthly limit.
 * `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
 * There must be an existing monthly limit.
 ****
+
 Examples:
+
 * `editmonthlylimit m/200`
 
 === Deleting the monthly limit: `deletemonthlylimit`
@@ -1013,7 +1018,9 @@ The monthly limit will be deleted and no longer check the spend of the current m
 ****
 * There must be an existing monthly limit.
 ****
+
 Examples:
+
 * `deletemonthlylimit`
 // end::limitfeatures[]
 
