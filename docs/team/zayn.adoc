@@ -1,0 +1,291 @@
+Zhuang Yuan +
+project portfolio
+
+Project: Club Hub
+
+== Overview
+
+=== 1.    Project Background and Description
+
+[width="100%",cols="50%,50%",]
+|=======================================================================
+|image:Project%20Portfolio%20Page_files/image001.png[Tip
+icon,width=15,height=15] |Club Hub is a desktop address book application
+designed for University interest group/club leaders as its primary
+users. This application aims to help these leaders better manage their
+members, finances, calendar, and inventory. The user interacts with the
+program using a Command Line Interface (CLI), and it has a Graphic User
+Interface (GUI) created with JavaFX. It is written in Java and has about
+10 thousand lines of codes.
+|=======================================================================
+
+ 
+
+=== 2.    Summary of Contributions
+
+[width="100%",cols="50%,50%",]
+|=======================================================================
+|image:Project%20Portfolio%20Page_files/image002.png[Tip
+icon,width=15,height=15] a|
+Major enhancements: implemented the Club Account feature
+
+-        Function 1: adding or removing a ledger record.
+
+o   What it does: allows the user to easily add and remove ledgers
+according to the date in the format [DD/MM].
+
+o   Justification: This function improves the management of finances in
+the club by allowing records to be add and removed via the date, to
+ensure maximum clarity and unambiguity when it comes to recording
+finances.
+
+-        Function 2: crediting or debiting balance from a ledger record.
+
+o   What it does: allows the user to credit or debit the amount on a
+specific date.
+
+o   Justification: This function improves the product significantly
+because a user can easily update their spending on a specific date or
+their contributions to the club with just one line of command. In
+addition, working directly with dates instead of indexes ensures maximum
+clarity in managing the finances.
+
+-        Highlights: This enhancement affects and manipulates existing
+data stored in the memory. It required an in-depth analysis of design
+considerations to allow mathematical operations to be performed on data
+stored in memory. The implementation too was challenging as it required
+comparison of string to find matching dates instead of simply extracting
+indexes as mentioned in the description for function 2.
+
+|=======================================================================
+
+ 
+
+=== 3.    Code Contributed
+
+[width="100%",cols="50%,50%",]
+|=======================================================================
+|image:Project%20Portfolio%20Page_files/image001.png[Tip
+icon,width=15,height=15] a|
+Code:
+[https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-10-18&timeframe=day&reverse=false&repoSort=true[Functional
+Code]]
+
+To see more details of the code, extracts from the project?s developer
+and user guide are included below:
+
+=== 1.     The User Guide shown here provides details on how the commands are used on the client?s side.
+
+ 
+
+4.2. Accounts:
+
+The Club Account features a ledger column to record the spending of the
+club on any date in the form of DD/MM. There are 4 basic commands
+allowing the user to add or delete a ledger, and to credit or debit
+money from any date in the list of records.
+
+ 
+
+4.2.1. Adding a ledger: addLedger
+
+Adds a ledger to the ledger column.
+
+Format: addLedger d/[DD/MM]
+
+ 
+
+Example: addLedger d/ 10/10
+
+ 
+
+4.2.2. Deleting a ledger: deleteLedger
+
+Deletes a ledger from the log.
+
+Format: deleteLedger d/[DD/MM]
+
+ 
+
+Example: deleteLedger d/ 10/10
+
+ 
+
+4.2.3. Crediting a ledger: credit
+
+Increase the balance of a ledger on a date indicated.
+
+Format: credit d/[DD/MM] b/[NUM]
+
+ 
+
+Example: credit d/ 10/10 b/ 100
+
+ 
+
+4.2.4. Debiting a ledger: credit
+
+Decrease the balance of a ledger on a date indicated.
+
+Format: debit d/[DD/MM] b/[NUM]
+
+ 
+
+Example: debit d/ 10/10 b/ 100
+
+=== 2.     The Developer Guide shown here provides details on how the commands are implemented on the developers? side.
+
+ 
+
+3.6. Ledger
+
+As of v1.3, the core commands dealing with Ledgers are addLedger,
+deleteLedger, credit and debit. In addition, the common commands such as
+undo and redo apply to manipulating the data in the Ledger.
+
+ 
+
+Bugs:
+
+{empty}1. Wrong exception thrown when not entering the correct value for
+balance fir credit and debit
+
+{empty}2. Balance in ledgers not displaying '$' symbol and 2 decimal
+places for cents at the front of the amount of money.
+
+ 
+
+3.6.1. Add/Remove Ledger feature
+
+Current Implementation
+
+The add/remove mechanism is facilitated by VersionedAddressBook. It
+extends AddressBook with an AddLedger and RemoveLedger method.
+
+ 
+
+AddressBook#addLedger() ? Adds a ledger object to the UniqueLedgerList.
+
+ 
+
+AddressBook#removeLedger() ? Removes a ledger object from the
+UniqueLedgerList.
+
+ 
+
+These operations are exposed in the Model interface as Model#addLedger
+and Model#deleteLedger respectively.
+
+ 
+
+Below is a scenario of how a user adds a ledger into the club book.
+
+ 
+
+Step 1. The user inputs the command addLedger /d [date] /b [balance]
+into the command box.
+
+ 
+
+Step 2. The commandBox ui will then create a Logic object which parses
+the command to ascertain that it is an addLedger command.
+
+ 
+
+Step 3. The AddressBookParser will then parse the command to create a
+new addLedgerParser object.
+
+ 
+
+Step 4. This addLedgerParser will parser the arguments of the command
+line and create a new AddLedger object.
+
+ 
+
+Step 5. This will then be put into the model, into the versioned address
+book.
+
+ 
+
+The Ledger class creates an object that instantiates a DateLedger object
+and an Account object. The multiple Ledger objects created will be
+stored in a UniqueLedgerList, where the uniqueness of every ledger is in
+its date.
+
+ 
+
+This uniqueness is attained by comparing the DateLedger object in the
+ledger to be added and the ledgers already in the UniqueLedgerList using
+the getDateLedger() method in Ledger.
+
+ 
+
+Perhaps instead of using a for loop to loop through the entire
+UniqueLedgerList, one could implement a more efficient method of finding
+duplicates while maintaining the function of searching using objects
+instead of index.
+
+ 
+
+Remove Ledger uses the same concept ut instead starts with looking for
+the Ledger in the UniqueLedgerList instead.
+
+ 
+
+3.6.2. Credit/Debit feature
+
+The Credit/Debit mechanism is facilitated by CreditCommand and
+DebitCommand. They extend Command by overriding and implementing the
+execute method.
+
+ 
+
+The unique way of implementing this feature is that instead of crediting
+or debiting the ledgers in the list using the index, we can directly
+perform these operations on the dates themselves.
+
+ 
+
+This is done by implementing a for loop to loop through the
+UniqueLedgerList to get the date of the ledgers in the list, comparing
+them to find one to edit.
+
+|=======================================================================
+
+ 
+
+=== 3.    Known Bugs
+
+[width="100%",cols="50%,50%",]
+|=======================================================================
+|image:Project%20Portfolio%20Page_files/image001.png[Tip
+icon,width=15,height=15] |Some of the bugs identified a
+|=======================================================================
+
+ 
+
+=== 4.    Design Considerations
+
+[width="100%",cols="50%,50%",]
+|=======================================================================
+|image:Project%20Portfolio%20Page_files/image003.png[Tip
+icon,width=15,height=15] a|
+
+ 
+
+|=======================================================================
+
+ 
+
+=== 5.    Future Implementation
+
+[width="100%",cols="50%,50%",]
+|=======================================================================
+|image:Project%20Portfolio%20Page_files/image004.png[Tip
+icon,width=15,height=15] a|
+
+ 
+
+|=======================================================================
+
+ 
