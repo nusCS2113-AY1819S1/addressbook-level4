@@ -133,7 +133,7 @@ public interface Model {
     /**
      * Returns true if the model has undone address book states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoProductDatabase();
 
     /**
      * Returns true if the model has undone address book states to restore.

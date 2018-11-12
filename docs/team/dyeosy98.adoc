@@ -27,11 +27,11 @@ Inventarie PRO is a desktop inventory application intended for use by self-emplo
 ** Project management:
 *** Managed releases `v1.2.1`, `v1.3.1` and `v1.3.2` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Increased functionality of find commands - finding products / distributors by their tag and not just by name (Pull request https://github.com/CS2113-AY1819S1-T13-3/main[#182])
-*** Updated the GUI to fit new features (distributor, transaction, reminder) (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main[#101] and https://github.com/CS2113-AY1819S1-T13-3/main[#148]) and removed the unnecessary browser panel (Pull request https://github.com/CS2113-AY1819S1-T13-3/main[#]
+*** Increased functionality of find commands - finding products / distributors by their tag and not just by name (Pull request https://github.com/CS2113-AY1819S1-T13-3/main/pull/182[#182])
+*** Updated the GUI to fit new features (distributor, transaction, reminder) (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main/pull/101[#101] and https://github.com/CS2113-AY1819S1-T13-3/main/pull/148[#148]) and removed the unnecessary browser panel (Pull request https://github.com/CS2113-AY1819S1-T13-3/main/pull/180[#180]
 *** Adapted existing tests to incorporate new features
 ** Documentation:
-*** Updated class diagrams for UI and Logic in the Developer Guide (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main[#187] and https://github.com/CS2113-AY1819S1-T13-3/main[#189])
+*** Updated class diagrams for UI and Logic in the Developer Guide (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main[#187] and https://github.com/CS2113-AY1819S1-T13-3/main/pull/189[#189])
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-F09-2/main/issues/155[1], https://github.com/CS2113-AY1819S1-F09-2/main/issues/163[2], https://https://github.com/CS2113-AY1819S1-F09-2/main/issues/162.com[3], https://github.com/CS2113-AY1819S1-F09-2/main/issues/160[4], and more)
 
@@ -54,7 +54,7 @@ include::../UserGuide.adoc[tag=distributormanagement]
 I updated:
 the Logic class diagram:
 
-include::../DeveloperGuide.adoc[tag=logicclassdiagram]
+include::../DeveloperGuide.adoc[tag=logiccomponent]
 
 and the UI class diagram:
 

@@ -259,7 +259,7 @@ public class RegisterCommandTest {
             return false;
         }
 
-        public boolean canRedoAddressBook() {
+        public boolean canRedoProductDatabase() {
             fail("This method should not be called.");
             return false;
         }

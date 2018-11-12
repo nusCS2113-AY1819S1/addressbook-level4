@@ -410,7 +410,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean canRedoAddressBook() {
+    public boolean canRedoProductDatabase() {
         return versionedAddressBook.canRedo();
     }
 

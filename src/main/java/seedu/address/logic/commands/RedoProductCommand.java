@@ -21,7 +21,7 @@ public class RedoProductCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canRedoAddressBook()) {
+        if (!model.canRedoProductDatabase()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
