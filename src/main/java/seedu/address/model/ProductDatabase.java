@@ -68,6 +68,7 @@ public class ProductDatabase implements ReadOnlyProductDatabase {
         return products.contains(product);
     }
 
+    // @@garagaristahir
     /**
      * Returns true if a product with the same name as {@code product} exists in the Product database.
      */

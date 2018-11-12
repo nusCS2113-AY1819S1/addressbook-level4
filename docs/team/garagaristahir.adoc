@@ -37,6 +37,7 @@ The use can search for a product with both name and Serialnumber (The primary ke
 
 I changed transaction so that it is made with serialnumber and not name. (Becuase serialNumber is the primary key).
 
+I have adapted existing tests to work with the new program.
 Community:
 Reported bugs and suggestions to team W13-1.
 

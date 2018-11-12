@@ -11,7 +11,7 @@ import seedu.address.model.product.NameContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new FindProductCommand object
  */
-public class FindCommandParser implements Parser<FindProductCommand> {
+public class FindProductCommandParser implements Parser<FindProductCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindProductCommand
