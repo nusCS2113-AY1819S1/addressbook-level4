@@ -48,7 +48,8 @@ public class AddApptCommand extends Command {
     public static final String MESSAGE_ADD_APPT_SUCCESS = "Added appt to Person: %1$s";
     public static final String MESSAGE_APPT_CLASH = "The appt you are adding clashes with the timing of another appt "
             + "for the specified patient.";
-    public static final String MESSAGE_INVALID_TIME = "The end time of an appt must be after the start time.";
+    public static final String MESSAGE_INVALID_TIME = "The end date and time of an appt must be after the start date "
+            + "and time.";
 
     private final Index index;
     private final Appt appt;

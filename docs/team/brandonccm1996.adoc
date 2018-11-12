@@ -31,7 +31,7 @@ Health Book is primarily written in Java. CSS is used to design the GUI for impr
 
 Our team developing Health Book comprised of a Project Manager, Development Lead, Quality Assurance Lead, Design Lead, and Subject Matter Expert for documentation and application workflow. For this project, I took up the role of Development Lead, and was in charge of setting the technical direction of the team.
 
-== Summary of contributions
+== Summary of Contributions
 
 |===
 |_This section documents my main contributions to the Health Book application. This showcases my ability to write functional and test code to enhance an application, manage a project and perform in a team setting._
