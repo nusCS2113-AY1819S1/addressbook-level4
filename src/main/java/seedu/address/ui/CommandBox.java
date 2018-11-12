@@ -136,7 +136,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleTabPressed() {
         commandTextField.requestFocus();
         String textFieldInput = commandTextField.getText();
-        ArrayList<String> listOfCommands = ics.getSuggestedCommands(textFieldInput);
+        ArrayList<String> listOfCommands = ics.getSuggestions(textFieldInput);
 
         if (listOfCommands.size() == 0) {
             raise(new NewResultAvailableEvent("Invalid command! No suggestions available."));
