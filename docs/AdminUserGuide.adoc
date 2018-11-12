@@ -51,7 +51,7 @@ get instructions and learn to improve your workflow with Drink I/O.
 === How to navigate Drink I/O's interface
 
 
-image::Ui.png[width="790"]
+image::uiguide.png[width="790"]
 
 
 == Quick Start
