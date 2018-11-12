@@ -19,7 +19,7 @@ By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
 
-NUSSU-Connect is an application designed and created for all members of the NUS Student Union (NUSSU). It allows you to reduce your workload and your organisation to potentially minimize manpower and logistics issues during peak periods of activity by providing you a convenient platform to manage contacts, recruitment and budgeting efficiently. This application can also be used by any organisation with a clearly defined hierarchy of roles and responsibilities amongst its members.
+NUSSU-Connect is a CLI application designed and created for all members of the NUS Student Union (NUSSU). It allows you to reduce your workload and your organisation to potentially minimize manpower and logistics issues during peak periods of activity by providing you a convenient platform to manage contacts, recruitment and budgeting efficiently. This application can also be used by any organisation with a clearly defined hierarchy of roles and responsibilities amongst its members.
 The aim of this application is to digitise an organisation’s standard operations, while streamlining workflow to minimize and potentially solve, some key manpower and logistics issues that can arise especially during peak periods of the organisation's activities.
 
 == Quick Start
@@ -411,7 +411,7 @@ Step 1: Submitting the data for budget allocation which is to be done by *club m
 
 Step 2: Calculating the budgets to be allocated which is to be done by *NUSSU treasurers*. +
 
-Step 3: Viewing the allocated budget of a club which can be done by either *club members* or *NUSSU treasurers*.
+Step 3: Viewing the allocated budget of a club which can be done by either *club members*, *NUSSU treasurers* or *club Presidents*.
 
 ==== Submitting data for budget allocation: `budget`
 This is the first step in the budgeting process!
