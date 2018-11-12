@@ -34,22 +34,18 @@ Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_inter
 
 == Summary of contributions
 
-// TODO: add preface?
 * *Major enhancement*: added the ability to *import/export contacts details of different project groups*
 
 ** What it does: allows students to share contact details specific to different projects among his/her group members.
 
 ** Justification: This feature improves the product significantly because only one member from the group is required to key in all the details, in contrast to requiring everyone in the team to type in the exact same details, which is tedious and inefficient.
-// TODO: edit this part
 ** Highlights: This enhancement required an in-depth analysis of design alternatives regarding reading and writing data. The implementation too was challenging as it required thorough understanding of all the components related to data storage in the application.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
-// TODO: end
+** Credits: http://opencsv.sourceforge.net/[OpenCSV]
 // TODO: add screenshot here
 
 // Excluded for 2113T
 //* *Minor enhancement*: added an UI enhancement that *displays the total number of persons* in the application and the ability for the application to *backup the storage file* locally.
 
-// TODO: edit this part
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jitwei98[Functional code]] -
  about 2K LoC(Lines of Code) including tests.
 
@@ -59,8 +55,9 @@ Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_inter
 *** Managed milestones `v1.1` - `v1.4` (3 milestones) on GitHub
 ** Enhancements to existing features:
 // TODO: edit the following line
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Updated the GUI to reflect persons and todos (Pull requests https://github.com[#117])
+*** Wrote additional tests for existing features to increase coverage from 77% to 80% (Pull requests https://github
+.com[#200])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 // end edit
