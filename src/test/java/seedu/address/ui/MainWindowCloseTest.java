@@ -58,7 +58,7 @@ public class MainWindowCloseTest extends GuiUnitTest {
     /**
      * A handle for an empty {@code MainWindow}. The components in {@code MainWindow} are not initialized.
      */
-    private class EmptyMainWindowHandle extends StageHandle {
+    public class EmptyMainWindowHandle extends StageHandle {
 
         private EmptyMainWindowHandle(Stage stage) {
             super(stage);

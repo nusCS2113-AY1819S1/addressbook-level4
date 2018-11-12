@@ -1,8 +1,11 @@
 package guitests.guihandles;
 
+import static seedu.address.commons.core.Messages.MESSAGE_STATUS_BAR_BOTTOM_RIGHT;
+
 import org.controlsfx.control.StatusBar;
 
 import javafx.scene.Node;
+
 
 /**
  * A handle for the {@code StatusBarFooter} at the footer of the application.
@@ -59,7 +62,8 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
      * Remembers the content of the 'save location' portion of the status bar.
      */
     public void rememberSaveLocation() {
-        lastRememberedSaveLocation = getSaveLocation();
+        //lastRememberedSaveLocation = getSaveLocation();
+        lastRememberedSaveLocation = MESSAGE_STATUS_BAR_BOTTOM_RIGHT;
     }
 
     /**
@@ -67,6 +71,7 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
      * recent {@code rememberSaveLocation()} call.
      */
     public boolean isSaveLocationChanged() {
-        return !lastRememberedSaveLocation.equals(getSaveLocation());
+        //return !lastRememberedSaveLocation.equals(getSaveLocation());
+        return !lastRememberedSaveLocation.equals(MESSAGE_STATUS_BAR_BOTTOM_RIGHT);
     }
 }

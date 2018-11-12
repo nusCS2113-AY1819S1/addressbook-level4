@@ -27,6 +27,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label employeeId;
+    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -37,6 +39,34 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label dateOfBirth;
+    @FXML
+    private Label department;
+    @FXML
+    private Label position;
+    @FXML
+    private Label salary;
+    @FXML
+    private Label bonus;
+    @FXML
+    private Label employeeIdLabel;
+    @FXML
+    private Label phoneLabel;
+    @FXML
+    private Label addressLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label dateOfBirthLabel;
+    @FXML
+    private Label departmentLabel;
+    @FXML
+    private Label positionLabel;
+    @FXML
+    private Label salaryLabel;
+    @FXML
+    private Label bonusLabel;
+    @FXML
     private FlowPane tags;
 
     public PersonCard(Person person, int displayedIndex) {
@@ -44,9 +74,24 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        employeeIdLabel.setText("Employee ID: ");
+        employeeId.setText(person.getEmployeeId().value);
+        phoneLabel.setText("Phone: ");
         phone.setText(person.getPhone().value);
+        addressLabel.setText("Address: ");
         address.setText(person.getAddress().value);
+        emailLabel.setText("Email: ");
         email.setText(person.getEmail().value);
+        dateOfBirthLabel.setText("Date Of Birth: ");
+        dateOfBirth.setText(person.getDateOfBirth().value);
+        departmentLabel.setText("Department: ");
+        department.setText(person.getDepartment().value);
+        positionLabel.setText("Position: ");
+        position.setText(person.getPosition().value);
+        salaryLabel.setText("Salary: ");
+        salary.setText(person.getSalary().value);
+        bonusLabel.setText("Bonus: ");
+        bonus.setText(person.getBonus().value);
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

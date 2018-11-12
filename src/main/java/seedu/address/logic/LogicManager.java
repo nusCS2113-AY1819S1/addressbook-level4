@@ -11,7 +11,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.expenses.Expenses;
 import seedu.address.model.person.Person;
+import seedu.address.model.recruitment.Recruitment;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * The main LogicManager of the app.
@@ -39,11 +42,24 @@ public class LogicManager extends ComponentManager implements Logic {
             history.add(commandText);
         }
     }
+    @Override
+    public ObservableList<Expenses> getFilteredExpensesList() {
+        return model.getFilteredExpensesList();
+    }
 
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
+
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return model.getFilteredScheduleList();
+    }
+
+    @Override
+    public ObservableList<Recruitment> getFilteredRecruitmentList() {
+        return model.getFilteredRecruitmentList(); }
 
     @Override
     public ListElementPointer getHistorySnapshot() {

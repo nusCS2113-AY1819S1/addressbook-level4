@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<schedulelist>
+    <!-- Schedule with invalid date field -->
+    <schedules>
+        <employeeId  isPrivate="false">000001</employeeId>
+        <type  isPrivate="false">LEAVE</type>
+        <date  isPrivate="false">02/13/2018</date>
+    </schedules>
+</schedulelist>

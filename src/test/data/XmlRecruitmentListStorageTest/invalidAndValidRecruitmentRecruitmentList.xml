@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <!-- Valid Recruitment -->
+    <recruitments>
+        <post  isPrivate="false">Network Engineer</post>
+        <workExp  isPrivate="false">3</workExp>
+        <jobDescription  isPrivate="false">Ensure all the networking devices are in working condition</jobDescription>
+    </recruitments>
+    <!-- Recruitment with invalid post field -->
+    <recruitments>
+        <post  isPrivate="false">Manager1</post>
+        <workExp  isPrivate="false">3</workExp>
+        <jobDescription  isPrivate="false">Ensure all the networking devices are in working condition</jobDescription>
+    </recruitments>
+</addressbook>

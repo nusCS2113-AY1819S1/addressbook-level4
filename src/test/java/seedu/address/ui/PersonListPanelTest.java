@@ -11,6 +11,8 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.Test;
 
@@ -22,7 +24,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.person.Person;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.addressbook.XmlSerializableAddressBook;
 
 public class PersonListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =
@@ -91,14 +93,45 @@ public class PersonListPanelTest extends GuiUnitTest {
      */
     private Path createXmlFileWithPersons(int personCount) throws Exception {
         StringBuilder builder = new StringBuilder();
+        // Solution for character array below adapted from
+        // https://stackoverflow.com/questions/17575840/better-way-to-generate-array-of-all-letters-in-the-alphabet
+        char[] alphabets = IntStream.rangeClosed('a', 'z')
+                .mapToObj(c -> "" + (char) c).collect(Collectors.joining()).toCharArray();
+        int j = 0;
+        int k = 3;
+        int l = 0;
+        int year = 1900;
+        String[] nameStr = new String[]{"aaa", "aba", "aca", "ada"};
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
         builder.append("<addressbook>\n");
         for (int i = 0; i < personCount; i++) {
             builder.append("<persons>\n");
-            builder.append("<name>").append(i).append("a</name>\n");
-            builder.append("<phone>000</phone>\n");
-            builder.append("<email>a@aa</email>\n");
+            String employeeIdFormatted = String.format("%06d", i);
+            builder.append("<employeeId>" + employeeIdFormatted + "</employeeId>\n");
+            builder.append("<name>" + nameStr[l] + "</name>\n");
+            if ((i + 1) % 100 == 0) {
+                j++;
+                nameStr[l] = nameStr[l].substring(0, k - 1);
+                nameStr[l] += alphabets[j];
+            }
+            if ((i + 1) % 2500 == 0) {
+                j = 0;
+                l++;
+            }
+            builder.append("<dateOfBirth>12/12/" + year + "</dateOfBirth>\n");
+            if (year == 2000) {
+                year = 1900;
+            }
+            year++;
+            String phoneFormatted = String.format("00%d", i);
+            builder.append("<phone>" + phoneFormatted + "</phone>\n");
+            String emailFormatted = String.format("a%d@aa", i);
+            builder.append("<email>" + emailFormatted + "</email>\n");
+            builder.append("<department>Human Resource</department>\n");
+            builder.append("<position>Staff</position>\n");
             builder.append("<address>a</address>\n");
+            builder.append("<salary>1000.00</salary>\n");
+            builder.append("<bonus>0.0</bonus>\n");
             builder.append("</persons>\n");
         }
         builder.append("</addressbook>\n");

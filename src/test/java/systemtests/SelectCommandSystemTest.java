@@ -1,6 +1,7 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.address.commons.core.Messages.GREETING_MESSAGE_NONEWLINE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -17,6 +18,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+import seedu.address.model.addressbook.DayHourGreeting;
 
 public class SelectCommandSystemTest extends AddressBookSystemTest {
     @Test
@@ -90,7 +92,9 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
 
         /* Case: mixed case command word -> rejected */
-        assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
+        DayHourGreeting greeting = new DayHourGreeting();
+        assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND
+                + greeting.getGreeting() + GREETING_MESSAGE_NONEWLINE);
 
         /* Case: select from empty address book -> rejected */
         deleteAllPersons();

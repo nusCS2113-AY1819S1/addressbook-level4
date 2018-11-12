@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<expenseslist>
+    <multiExpenses>
+        <id>000001</id>
+        <expensesAmount>1231</expensesAmount>
+        <travelExpenses>1231</travelExpenses>
+        <medicalExpenses>1231</medicalExpenses>
+        <miscellaneousExpenses>3693</miscellaneousExpenses>
+    </multiExpenses>
+
+    <!-- Schedule with same schedule -->
+    <multiExpenses>
+        <id>000001</id>
+        <expensesAmount>123</expensesAmount>
+        <travelExpenses>123</travelExpenses>
+        <medicalExpenses>123</medicalExpenses>
+        <miscellaneousExpenses>369</miscellaneousExpenses>
+    </multiExpenses>
+</expenseslist>

@@ -1,0 +1,104 @@
+= William Ng Zhi Hong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Centralised Human Resource System (CHRS)
+
+---
+
+== Overview
+
+Centralised Human Resource System (CHRS) is an application for managing employees within the company.
+The application is created to assist the Human Resource Department of the company to better manage the employees' information.
+CHRS is capable of checking work schedule, creating recruitment posts, checking of expenses claims and storage of various information of each employee such as salary, department, position, etc.
+
+== Summary of contributions
+* *Project Management*:
+** Assists in approving, reviewing and merging pull requests.
+
+* *Major enhancement*: Implements Schedule feature with the following commands:
+`addSchedule`, `deleteSchedule`, `addWorks`, `deleteWorks`, `addLeaves`,  `deleteLeaves`, `calculateLeaves`,
+ `clearSchedules`,  `selectSchedule`.
+** What it does: Allows the user to perform scheduling for the company.
+** Justification: This feature improves the product significantly because HR admin requires to schedule employees very often.
+** Highlights: User is able to schedule work/leave for multiple employees and multiple dates within a single command.
+
+* *Minor enhancement*: Enhanced `undo/redo` by implementing VersionedModelList
+to save and keep track of which storage has been committed changes, which is essential for undo/redo
+to work properly with multiple storages.
+(https://github.com/CS2113-AY1819S1-T16-4/main/pull/123[#123]). Enhanced `list` command to lists schedules as well
+(https://github.com/CS2113-AY1819S1-T16-4/main/pull/73[#73]).
+Enhanced `delete` command such that when an employee is deleted and all schedules linked to the person.
+(https://github.com/CS2113-AY1819S1-T16-4/main/pull/73[#73])
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=zhihong8888&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[Reposense Dashboard]]
+
+* *Other contributions*:
+
+** GUI:
+*** Updated the GUI color scheme, background, Menu Bar, Status bar, App icon and greeting when
+ program is lunched. (https://github.com/CS2113-AY1819S1-T16-4/main/pull/145[#145],
+  https://github.com/CS2113-AY1819S1-T16-4/main/pull/168[#168],
+  https://github.com/CS2113-AY1819S1-T16-4/main/pull/182[#182])
+*** Upgraded the Menu bar, when menu items clicked, edit text sets the command word, cursor points to the end of the word. Command ready to be entered.
+(https://github.com/CS2113-AY1819S1-T16-4/main/pull/168[#168])
+** Test cases:
+*** Wrote additional tests for existing features to increase coverage from 70.2% to 80.6% (https://github.com/CS2113-AY1819S1-T16-4/main/pull/222[#222]),
+73.7% to 78.7% (https://github.com/CS2113-AY1819S1-T16-4/main/pull/73[#73]), 68.8% to 74.4% (https://github.com/CS2113-AY1819S1-T16-4/main/pull/70[#70]).
+** Documentation:
+*** Update user guide
+(https://github.com/CS2113-AY1819S1-T16-4/main/pull/182[#182],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/164[#164],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/159[#159],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/115[#115])
+and developer guide
+(https://github.com/CS2113-AY1819S1-T16-4/main/pull/242[#242]) for schedule feature.
+
+
+** Community:
+*** PRs reviewed (with non-trivial review comments): (
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/134[#134],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/130[#130],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/139[#139],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/108[108],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/101[#101])
+
+** Tools:
+*** Coveralls (https://github.com/CS2113-AY1819S1-T16-4/main/pull/45[#45]) and Codacy (https://github.com/CS2113-AY1819S1-T16-4/main/pull/46[#46])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=addScheduleCommand]
+
+include::../UserGuide.adoc[tag=deleteScheduleCommand]
+
+include::../UserGuide.adoc[tag=addWorksCommand]
+
+include::../UserGuide.adoc[tag=deleteWorksCommand]
+
+include::../UserGuide.adoc[tag=addLeavesCommand]
+
+include::../UserGuide.adoc[tag=deleteLeavesCommand]
+
+include::../UserGuide.adoc[tag=calculateLeavesCommand]
+
+include::../UserGuide.adoc[tag=selectScheduleCommand]
+
+include::../UserGuide.adoc[tag=clearSchedulesCommand]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=schedule1]
+
+include::../DeveloperGuide.adoc[tag=schedule2]
+

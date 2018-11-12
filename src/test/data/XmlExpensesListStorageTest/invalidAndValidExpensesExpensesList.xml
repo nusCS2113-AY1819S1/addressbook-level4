@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<expenseslist>
+    <!-- Valid Expenses -->
+    <multiExpenses>
+        <id>000001</id>
+        <expensesAmount>123123</expensesAmount>
+        <travelExpenses>123123</travelExpenses>
+        <medicalExpenses>123123</medicalExpenses>
+        <miscellaneousExpenses>369369</miscellaneousExpenses>
+    </multiExpenses>
+    <!-- Expenses with invalid TravelExpenses field -->
+    <multiExpenses>
+        <id>000001</id>
+        <expensesAmount>12312311111123</expensesAmount>
+        <travelExpenses>123123</travelExpenses>
+        <medicalExpenses>123123</medicalExpenses>
+        <miscellaneousExpenses>999999999</miscellaneousExpenses>
+    </multiExpenses>
+</expenseslist>

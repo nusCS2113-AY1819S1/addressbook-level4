@@ -16,8 +16,9 @@ public class ArgumentTokenizerTest {
 
     @Test
     public void tokenize_emptyArgsString_noValues() {
+        ArgumentTokenizer argumentTokenizer = new ArgumentTokenizer();
         String argsString = "  ";
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
+        ArgumentMultimap argMultimap = argumentTokenizer.tokenize(argsString, pSlash);
 
         assertPreambleEmpty(argMultimap);
         assertArgumentAbsent(argMultimap, pSlash);

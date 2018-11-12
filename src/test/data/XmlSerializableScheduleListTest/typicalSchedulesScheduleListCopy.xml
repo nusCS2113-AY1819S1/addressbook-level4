@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<schedulelist>
+    <schedules>
+        <employeeId>000001</employeeId>
+        <type>WORK</type>
+        <date>01/01/2099</date>
+    </schedules>
+    <schedules>
+        <employeeId>000002</employeeId>
+        <type>WORK</type>
+        <date>10/10/2050</date>
+    </schedules>
+    <schedules>
+        <employeeId>000003</employeeId>
+        <type>WORK</type>
+        <date>20/03/2099</date>
+    </schedules>
+    <schedules>
+        <employeeId>000004</employeeId>
+        <type>LEAVE</type>
+        <date>04/04/2099</date>
+    </schedules>
+    <schedules>
+        <employeeId>000005</employeeId>
+        <type>LEAVE</type>
+        <date>05/05/2099</date>
+    </schedules>
+    <schedules>
+        <employeeId>000006</employeeId>
+        <type>LEAVE</type>
+        <date>06/06/2059</date>
+    </schedules>
+    <schedules>
+        <employeeId>000007</employeeId>
+        <type>LEAVE</type>
+        <date>07/07/2059</date>
+    </schedules>
+</schedulelist>

@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Centralised Human Resource System - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,19 +12,19 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T16-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2113-T16-4`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Centralised Human Resource System (CHRS) is for the human resource personnel who use a desktop to manage the employee’s information. More importantly, CHRS is optimized for personnel with the preference of working with a Command Line Interface while still having the benefits of a Graphical User Interface (GUI). After familiarizing with the CLI functions, CHRS can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
-.  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Ensure you have Java version `9` or newer installed in your Computer.
+.  Download the latest `CHRS.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Centralised Human Resource System.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -33,12 +33,112 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list`* : lists all employee details
+* **`add`**`id/000001 n/John Doe dob/21-01-1993 p/98765432 e/johnd@example.com d/Finance r/Intern a/John street, block 123, #01-01 s/600`: adds an employee named `John Doe` to CHRS.
+* **`delete`**`3` : deletes the employee with the index '3' in CHRS
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
+
+[[Fields]]
+== Fields
+
+*An employee can have the following fields associated:*
+
+[width="90%",cols="25%,<15%,50%",options="header",]
+|=======================================================================
+|Field Name |Prefix |Limitations
+|EMPLOYEEID  |id/ |Employee Id should only contain exactly 6 numbers
+|NAME |n/ |Name should only contain alphabets and spaces and it should be at least 3 characters long
+|DATE_OF_BIRTH  |dob/ |Date Of Birth should be in the format of DD/MM/YYYY and it only allows dates from 01/01/1900 to 31/12/2002
+|PHONE_NUMBER |p/ |Phone numbers should only contain numbers and it should be at least 3 digits long
+|EMAIL  |e/ |Email should be in the format of local-part@domain. +
+The local-part should only contain alphanumeric characters and these special characters except the quotations("): "!#$%&'*+/=?`{\|}~^.-". +
+The domain name part must start and end with alphanumeric characters, be at least 2 characters long and it should only contain alphanumeric characters and these special characters except the quotations("): ".-"
+|DEPARTMENT  |d/ |Department should only contain alphabets and spaces and it should be within 2 to 30 characters long
+|RANK_POSITION |r/ |Rank/Position should only contain alphabets and spaces and it should be within 2 to 30 characters long
+|ADDRESS  |a/ |Address can take in any values without limitations
+|SALARY  |s/ |Takes in a maximum of 6 whole numbers and 2 decimal place. (Max. value in total = 999999.99) +
+A "%" is allowed to be place before value for modification of Salary using percentage. +
+Input value can be in negative to deduct salary, but the Salary should not be 0 or below +
+Input value should not be blank
+|BONUS |b/ |Only take in positive numbers with maximum of 2 decimal places from 0 to 24
+|=======================================================================
+
+*A schedule post should include things below*
+// tag::addScheduleCommandField[]
+[width="90%",cols="25%,<15%,50%",options="header",]
+|=======================================================================
+|Field Name
+|Prefix
+|Limitations
+
+|EMPLOYEEID
+|id/
+|Employee Id should only contain exactly 6 numbers.
+
+|DATE
+|d/
+|Date must be a valid date in the calendar DD/MM/YYYY]. Year must also fall into the range
+ of 2000-2099. Leading 0s can be omitted in day and month field.
+ You are not allowed to schedule for dates that have past today's date.
+
+|TYPE
+|t/
+|Type can be either WORK or LEAVE only, case not sensitive.
+
+|=======================================================================
+// end::addScheduleCommandField[]
+
+*An employee can incur the following expenses*
+
+[width="90%",cols="25%,<15%,50%",options="header",]
+|=======================================================================
+|Field Name
+|Prefix
+|Limitations
+
+|EMPLOYEEID
+|id/
+|Employee Id should only contain exactly 6 numbers
+
+|TRAVELEXPENSES
+|tra/
+|Maximum of 6 whole numbers and 2 decimal points +
+Allow negative values +
+Minimum 1 digit
+
+
+|MEDICALEXPENSES
+|med/
+|Maximum of 6 whole numbers and 2 decimal points +
+Allow negative values +
+Minimum 1 digit
+
+|MISCELLANEOUS
+|misc/
+|Maximum of 6 whole numbers and 2 decimal points +
+Allow negative values +
+Minimum 1 digit
+
+|Total Expenses
+|-
+|Maximum of 7 whole numbers and 2 decimal points
+|=======================================================================
+
+*A recruitment post should include things below*
+
+[width="90%",cols="25%,<15%,50%",options="header",]
+|=======================================================================
+|Field Name |Prefix |Limitations
+|JOB_POSITION |jp/ | Job position accepts only characters. It must not be blank and should not include numbers and
+punctuation mark. And users are not allowed to exceed the character limit which is from 1 to 20
+|MINIMAL_YEARS_OF_WORKING_EXPERIENCE |me/ | Minimal years of working experience must be integers and should not be blank
+. And It is limited from 0 to 30
+|JOB_DESCRIPTION |jd/ | Job description accepts only characters and punctuation marks including only comma,
+full stop and single right quote. It must not be blank and should not include numbers. And users are not
+allowed to exceed the character limit which is from 1 to 200
+|=======================================================================
 
 [[Features]]
 == Features
@@ -46,134 +146,548 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the parameters field Name to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`. Refer to <<Fields>> for details of each field constraints.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Commands which specified INDEX as part of the input requires a positive integer within the range of INT_MAX.
+* All prefixes to each field such as `d/`, `r/`, `n/`, etc, are to be preceded with a space.
 ====
 
-=== Viewing help : `help`
+// tag::addCommand[]
+=== Add employee's data : `add`
 
-Format: `help`
+Adds employee's data to the database
 
-=== Adding a person: `add`
-
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-[TIP]
-A person can have any number of tags (including 0)
+Format: `add id/EMPLOYEEID n/NAME dob/DATE_OF_BIRTH p/PHONE_NUMBER e/EMAIL d/DEPARTMENT r/RANK_POSITION a/ADDRESS s/SALARY t/[TAGS]...`
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add id/000001 n/John Doe dob/13/12/2000 p/98765432 e/johnd@example.com d/IT r/Assistant a/John street, block 123, #01-01 s/3000.00 t/FlyKite` +
+Adds an employee with the fields listed above
+* `add id/888888 n/Betsy dob/23/05/1987 p/95544332 e/betsy@example.com d/Account r/Manager a/Betsy street, block 3, #11-01 s/5000.00` +
+Adds an employee with the fields listed above
 
-=== Listing all persons : `list`
+[NOTE]
+Any usage of `add` command that will result in duplicated employeeId or phone number or email will be rejected. Additionally, duplicated name alongside date of birth will also be rejected.
+// end::addCommand[]
 
-Shows a list of all persons in the address book. +
-Format: `list`
+// tag::editCommand[]
+=== Edit an existing employee’s data : `edit`
 
-=== Editing a person : `edit`
+Edit an existing employee’s data in CHRS.
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [d/DEPARTMENT] [r/RANK_POSITION]`
 
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
+[NOTE]
+Include at least one field alongside the INDEX. The existing values of the employee will be updated to the input values.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 p/98765432 d/HR r/Manager` +
+Edits employee at index 1 to have the new input of phone, department and rank/position
 
-=== Locating persons by name: `find`
+[NOTE]
+Any usage of `edit` command that will result in duplicated phone number or email will be rejected. Additionally, usage of this command to edit an employee's name to be the same as another employee who has the same date of birth will be rejected.
+// end::editCommand[]
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+// tag::findCommand[]
+=== Locating persons by name or employee ID : `find`
 
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
+Find the employee's name that contains the input or find the employee id that matches the input.
+The expenses and schedule list will also be updated accordingly to show only the matched employee(s)' expenses and schedule.
+
+Format: `find [NAME] [EMPLOYEEID]`
+
+[NOTE]
+Include only one of the fields, either Name or Employee Id. +
+The NAME parameter is case-insensitive, i.e. The command `find john` will find the instances of JoHn, joHN, etc.
 
 Examples:
 
 * `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+Find all instances of John, and his associated expenses and schedule
+* `find 000001` +
+Find the employee with employee ID `000001`, and his/her associated expenses and schedule
 
-=== Deleting a person : `delete`
+[NOTE]
+Any usage of `find` command will be rejected if it contains special characters or alphanumeric input. It accepts only either alphabets or numbers in a single input, not both.
+// end::findCommand[]
 
-Deletes the specified person from the address book. +
+// tag::filterCommand[]
+=== Filter and list of specific employee's data : `filter`
+Filters out the employees whose department and/or rank/position contains the keyword(s) input from the user and list them in ascending or descending name order.
+The expenses and schedule list will also be updated accordingly to show only the matched employees' expenses and schedule.
+
+Format: `filter SORT_ORDER [d/DEPARTMENT] [r/POSITION]`
+
+[NOTE]
+The SORT_ORDER parameter should either be asc for ascending or dsc for descending. The SORT_ORDER parameter is case-insensitive. +
+Include either department or rank/position or both, at least one of the field must be included alongside the sort order. The keywords are delimited by a space, i.e filter asc d/human resource would mean the keywords are "human" and "resource". The keywords matching is case-insensitive.
+
+Examples:
+
+* `filter asc d/Human Resource r/Manager` +
+List all employees whose department contains the keyword of either human or resource and rank/position contains the keyword of manager in ascending name order.
+Expenses and schedule list will also be updated to show only matched employee(s)' expenses and schedule(s).
+* `filter dsc d/Finance` +
+List all employees whose department contains the keyword of finance in descending name order.
+Expenses and schedule list will also be updated to show only matched employee(s)' expenses and schedule(s).
+
+[NOTE]
+Any usage of `filter` command that results in the same prefix appearing more than once will be rejected. Example: filter asc d/Human d/Finance will be rejected.
+// end::filterCommand[]
+
+// tag::deleteCommand[]
+=== Delete an employee’s data : `delete`
+
+Deletes the specified employee from the CHRS.
+All existing schedules or expenses with the same employee id will be
+deleted as well.
+
 Format: `delete INDEX`
 
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+Examples:
+
+* `delete 4` +
+Deletes the employee with the index of '4' in the list.
+// end::deleteCommand[]
+
+// tag::selectPersonCommand[]
+=== Select an employee : `selectPerson`
+Select an employee based on employee list's index ID.
+
+Format: `selectPerson INDEX` or `sp INDEX`
 
 Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+* `selectPerson 1` +
+Select the employee with the index of '1' in the list.
+// end::selectPersonCommand[]
 
-=== Selecting a person : `select`
+// tag::modifyPayCommand[]
+=== Modify the Salary and/or Bonus of an employee : `modifyPay`
 
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
+Modify the Salary and/or Bonus of the employee identified by the index.
 
-****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
+Format: `modifyPay INDEX [s/SALARY] [b/BONUS]` or `mp INDEX [s/SALARY] [b/BONUS]`
+
+[NOTE]
+At least one of either Salary or Bonus must be included +
+Bonus will be replaced by new values with every modification
 
 Examples:
 
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+* `modifyPay 1 s/300` +
+Modify the Salary of employee with index '1' with 300 increment
+* `modifyPay 2 b/2` +
+Modify the Bonus of employee with index '2' to 2 months of the salary
+* `modifyPay 3 s/%5 b/1` +
+Modify the Salary of employee with index '3' by 5% increment and Bonus to 1 month of salary
 
+[NOTE]
+Modification to Salary and/or Bonus that causes negative values will be rejected +
+Modification to Salary that goes higher than 999999.99 will be rejected since Salary can only hold a maximum
+of 6 whole numbers and 2 decimal places.
+// end::modifyPayCommand[]
+
+// tag::modifyAllPayCommand[]
+=== Modify the Salary and/or Bonus all listed employee(s) : `modifyAllPay`
+
+Modify the Salary and/or Bonus of all the employee(s) shown on the display list.
+
+Format: `modifyAllPay [s/SALARY] [b/BONUS]` or `map [s/SALARY] [b/BONUS]`
+
+[NOTE]
+At least one of either Salary or Bonus must be included +
+Bonus will be replaced by new values with every modification
+
+Examples:
+
+* `modifyAllPay s/300` +
+Modify the Salary of all the listed employee(s) by increment of 300
+* `modifyAllPay  b/2` +
+Modify the Bonus of all the listed employee(s) to 1 month of their salary
+* `modifyAllPay s/%5 b/1` +
+Modify the Salary of all the listed employee(s) by 5% increment and Bonus to 1 month of salary
+
+[NOTE]
+Modification to Salary and/or Bonus that causes negative values to any employee(s) on the list will be rejected +
+Modification to Salary that goes higher than 999999.99 will be rejected since Salary can only hold a maximum
+of 6 whole numbers and 2 decimal places.
+// end::modifyAllPayCommand[]
+
+// tag::addExpensesCommand[]
+=== Add expenses claims under a specific employee : `addExpenses`
+Add new expenses for employee or modify expenses if there already exists an expenses
+
+Format: `addExpenses id/EMPLOYEEID [tra/TRAVELEXPENSES] [med/MEDICALEXPENSES] [misc/MISCELLANEOUS]` +
+Or `ae id/EMPLOYEEID [tra/TRAVELEXPENSES] [med/MEDICALEXPENSES] [misc/MISCELLANEOUS]`
+
+At least one of the fields, Travel Expenses, Medical Expenses, Miscellaneous Expenses must be included.
+
+Examples:
+
+* `ae id/000001 tra/111 med/222 misc/333` +
+Creates a new expenses that contain 111.00, 222.00 and 333.00 for the above fields for employee with employee id
+'000001'. +
+Total Expenses will reflect 666.00.
+
+* `addExpenses id/000002 med/111 misc/222` +
+Creates a new expenses that contain 111.00, 222.00 for the above fields for employee with employee id
+'000002'. Expenses will contain 0.00 for fields not included in command. +
+Total Expenses will reflect 333.00.
++
+`addExpenses id/000002 tra/111 med/222 misc/-111` +
+Add 111.00, 222.00 and minus 111.00 for the above fields for employee with
+employee id '000002'. +
+Total Expenses will reflect 555.00.
+
+[NOTE]
+Any usage of `addExpenses` Command that will result in negative value for any fields will be rejected.
+// end::addExpensesCommand[]
+
+// tag::deleteExpensesCommand[]
+=== Delete expenses claims of a specific employee : `deleteExpenses`
+
+Deletes expenses claim from an employee.
+
+Format: `deleteExpenses INDEX`  or `de INDEX`
+
+Examples:
+
+* `deleteExpenses 1` +
+Deletes expenses claim from employee with Index '1' in the list.
+// end::deleteExpensesCommand[]
+
+// tag::selectExpensesCommand[]
+=== Select an expenses claim : `selectExpenses`
+Select an expenses based on expenses list index ID. User could use command_alias: 'se'.
+
+Format: `selectExpenses INDEX` or `se INDEX`
+
+Examples:
+
+* `selectExpenses 1` +
+Select the expenses with the index of '1' in the list
+// end::selectExpensesCommand[]
+
+// tag::clearExpensesCommand[]
+=== Clear expenses list : `clearExpenses`
+Clear all expenses at one go. User could use command_alias: 'ce'.
+
+Format: `clearExpenses` or `ce`
+// end::clearExpensesCommand[]
+
+// tag::addScheduleCommand[]
+=== Add a new schedule : `addSchedule`
+
+Add a new schedule for an employee.
+
+Format: `addSchedule id/EMPLOYEEID d/DATE t/TYPE` or `as id/EMPLOYEEID d/DATE t/TYPE`
+
+Examples:
+
+* `addSchedule id/000001 d/02/02/2019 t/WORK` +
+Adds a new schedule for employee id 000001, date 02/02/2019, to work on that day.
+* `as id/000001 d/03/03/2019 t/LEAVE`
+Adds a new schedule for employee id 000001, date 03/03/2019, to be on leave for that day.
+
+[NOTE]
+Scheduling with an employee id that doesn't exist in the address book will be rejected. +
+You are not allowed to schedule for dates that have past today's date. +
+Exact duplicate schedules will be rejected.
+// end::addScheduleCommand[]
+
+// tag::deleteScheduleCommand[]
+=== Delete an existing schedule : `deleteSchedule`
+Deletes the specified schedule from the schedule list panel.
+
+Format: `deleteSchedule INDEX` or `ds INDEX`
+
+Examples:
+
+* `deleteSchedule 1` +
+Deletes the schedule with the index of '1' in the list.
+* `ds 2` +
+Deletes the schedule with the index of '2' in the list.
+// end::deleteScheduleCommand[]
+
+// tag::addWorksCommand[]
+=== Add multiple work schedules : `addWorks`
+
+Add work schedules for all the observable employees in the employees list pane. +
+Use `find` / `filter` / `list` to get the desired employees you wish to schedule. +
+All observable employees in the employees list pane will be scheduled work schedule
+with the date specified by the user.
+
+Format: `addWorks d/DATE [d/DATE]...` or `aw d/DATE [d/DATE]...`
+
+Examples:
+
+* `addWorks d/02/02/2019` +
+Adds a new schedule for all observable employees in the employees list panel with
+date 02/02/2019, to work on that day.
+* `aw d/02/02/2019 d/03/03/2019` +
+Adds new schedules for all observable employees in the employees list panel with
+date 02/02/2019 and 03/03/2019, to work on that day.
+
+[NOTE]
+For those employees whom are not scheduled with the date, the command will
+create a new schedule. +
+When all employees are scheduled with the date,
+the command will tell the user that every observable employee in the list
+have been scheduled with the specified date. +
+You are not allowed to schedule for dates that have past today's date.
+// end::addWorksCommand[]
+
+// tag::deleteWorksCommand[]
+=== Delete multiple work schedules : `deleteWorks`
+Delete work schedules for all the observable employees in the employees list pane. +
+Use `find` / `filter` / `list` to get the desired employees you wish to schedule. +
+All observable employees in the employees list pane will be deleted work schedules
+with date specified by the user.
+
+Format: `deleteWorks d/DATE [d/DATE]...` or `dw d/DATE [d/DATE]...`
+
+Examples:
+
+* `deleteWorks d/02/02/2019` +
+Deletes a schedule for all observable employees in the employees list panel with
+date 02/02/2019, with work on that day.
+* `dw d/02/02/2019 d/03/03/2019` +
+Deletes schedules for all observable employees in the employees list panel with
+date 02/02/2019 and 03/03/2019, with work on that day.
+
+[NOTE]
+For those employees whom are scheduled with the date, the command will
+delete the work schedule. +
+When all employees are deleted with the scheduled date,
+the command will tell the user every observable employees in the list does not have work schedule
+on the specified date.
+// end::deleteWorksCommand[]
+
+// tag::addLeavesCommand[]
+=== Add multiple leave schedules : `addLeaves`
+Add leave schedules for all the observable employees in the employees list pane. +
+Use `find` / `filter` / `list` to get the desired employees you wish to schedule. +
+All observable employees in the employees list pane will be scheduled
+with leave and date specified by the user.
+
+Format: `addLeaves d/DATE [d/DATE]...` or `al d/DATE [d/DATE]...`
+
+Examples:
+
+* `addLeaves d/02/02/2019` +
+Adds a new schedule for all observable employees in the employees list panel with
+date 02/02/2019, to be on leave on that day.
+* `al d/02/02/2019 d/03/03/2019` +
+Adds new schedules for all observable employees in the employees list panel with
+date 02/02/2019 and 03/03/2019, to be on leave on that day.
+
+[NOTE]
+For those employees whom are not scheduled with the date, the command will
+create a new leave schedule. +
+When all employees are scheduled with the date,
+the command will tell the user that every observable employees in the list
+have been scheduled with the specified date. +
+You are not allowed to schedule for dates that have past today's date.
+// end::addLeavesCommand[]
+
+// tag::deleteLeavesCommand[]
+=== Delete multiple leave schedules : `deleteLeaves`
+Delete leave schedules for all the observable employees in the employees list pane.
+Use `find` / `filter` / `list` to get the desired employees you wish to schedule.
+All observable employees in the employees list pane will be deleted leave schedules
+with date specified by the user.
+
+Format: `deleteLeaves d/DATE [d/DATE]...` or `dl d/DATE [d/DATE]...`
+
+Examples:
+
+* `deleteLeaves d/02/02/2019` +
+Deletes a schedule for all observable employees in the employees list panel with.
+date 02/02/2019, with leave on that day.
+* `dl d/02/02/2019 d/03/03/2019` +
+Deletes schedules for all observable employees in the employees list panel with.
+date 02/02/2019 and 03/03/2019, with leave on that day.
+
+[NOTE]
+For those employees whom are scheduled with the date, the command will
+delete the schedule. +
+When all employees are deleted with the scheduled date,
+the command will tell the user every observable employee in the list does not have leave schedule
+on the specified date.
+// end::deleteLeavesCommand[]
+
+// tag::calculateLeavesCommand[]
+=== Calculate total leaves in a year : `calculateLeaves`
+Calculates total number of leaves scheduled for an employee for the entire specified year
+in the schedule list.
+
+Format: `calculateLeaves id/EMPLOYEEID y/YYYY` or `cl id/EMPLOYEEID y/YYYY`
+
+Examples:
+
+* `calculateLeaves id/000001 date/2019` +
+Calculates total number of leave scheduled for an employee id 000001 in whole of year 2019.
+* `cl id/000002 date/2020` +
+Calculates total number of leave scheduled for an employee id 000002 in whole of year 2020.
+// end::calculateLeavesCommand[]
+
+// tag::selectScheduleCommand[]
+=== Select schedule in the schedule list : `selectSchedule`
+Select a schedule based on schedule index ID.
+
+Format: `selectSchedule INDEX` or `ss INDEX`.
+
+Examples:
+
+* `selectSchedule 1` +
+Select the schedule with the index of '1'
+* `ss 1` +
+Select the schedule with the index of '1'
+// end::selectScheduleCommand[]
+
+// tag::clearSchedulesCommand[]
+=== Clear the entire schedule list : `clearSchedules`
+
+Clear the entire schedule list.
+
+Format: `clearSchedules`. or `cs`.
+
+Examples:
+
+* `clearSchedules` +
+Clear the entire Schedule List.
+// end::clearSchedulesCommand[]
+
+// tag::addRecruitmentPostCommand[]
+=== Add new recruitment post : `addRecruitmentPost`
+Add a recruitment post based on job position, minimal years of working experience and job description.
+
+Format: `addRecruitmentPost jp/JOB_POSITION me/MINIMAL_YEARS_OF_WORKING_EXPERIENCE jd/JOB_DESCRIPTION` or
+`arp jp/JOB_POSITION me/MINIMAL_YEARS_OF_WORKING EXPERIENCE jd/JOB_DESCRIPTION`
+
+Examples:
+
+* `addRecruitmentPost jp/IT Manager me/3 jd/maintain the functionality of company server` +
+Add an recruitment post with the available position called IT Manager, and the job requires minimal 3 years of
+working experience in similar field. The job position requires the candidates' ability to maintain the
+functionality of company server
+
+
+* `arp jp/IT Manager me/3 jd/maintain the functionality of company server` +
+Add an recruitment post with the available position called IT Manager, and the job requires minimal 3 years of
+working experience in similar field. The job position requires the candidates' ability to maintain the
+functionality of company server
+
+[NOTE]
+Duplicate recruitment posts are not allowed. Minimal one field should be different.
+// end::addRecruitmentPostCommand[]
+
+// tag::editRecruitmentPostCommand[]
+=== Edit an existing recruitment post : `editRecruitmentPost`
+Edit a recruitment post based on its index no.
+
+Format: `editRecruitmentPost [Index] jp/JOB POSITION me/MINIMAL YEARS OF WORKING EXPERIENCE jd/JOB DESCRIPTION`
+or `erp [Index] jp/JOB POSITION me/MINIMAL YEARS OF WORKING EXPERIENCE jd/JOB DESCRIPTION`
+
+Examples:
+
+* `editRecruitmentPost 1 jp/IT Manager me/3 jd/To maintain the company server` +
+Edit the recruitment post with index 1. And the post information from job position, minimal
+working experience to job description respectively changes to IT manager, minimal working
+experience of 3 years in relevant field and the job description is to maintain the company
+server.
+
+* `erp 1 jp/IT Manager me/3 jd/To maintain the company server` +
+Edit the recruitment post with index 1. And the post information from job position, minimal
+working experience to job description respectively changes to IT manager, minimal working
+experience of 3 years in relevant field and the job description is to maintain the company
+server.
+
+[NOTE]
+Minimal one field should be changed in order to make the editing recruitment post function work.
+// end::editRecruitmentPostCommand[]
+
+// tag::selectRecruitmentPostCommand[]
+=== Select an existing recruitment post : `selectRecruitmentPost`
+Select a recruitment post based on post index ID.
+
+Format: `selectRecruitmentPost INDEX` or `srp INDEX`
+
+Examples:
+
+* `selectRecruitmentPost 1` +
+Select the recruitment post with the index of '1'
+
+[NOTE]
+At least one recruitment post should be added in the recruitment post list panel before performing this function.
+// end::selectRecruitmentPostCommand[]
+
+// tag::deleteRecruitmentPostCommand[]
+=== Delete an existing recruitment post : `deleteRecruitmentPost`
+Delete a recruitment post based on post index ID.
+
+Format: `deleteRecruitmentPost INDEX` or `drp INDEX`
+
+Examples:
+
+* `deleteRecruitmentPost 1` +
+Deletes the recruitment post with the index of '1'
+
+[NOTE]
+At least one recruitment post should be added in the recruitment post list panel before performing this function.
+// end::deleteRecruitmentPostCommand[]
+
+// tag::clearRecruitmentPostCommand[]
+=== Clear recruitment posts : `clearRecruitmentPost`
+Clear all recruitment posts at one go.
+
+Format: `clearRecruitmentPost` or `crp`
+// end::clearRecruitmentPostCommand[]
+
+// tag::listCommand[]
+=== Listing all employees : `list`
+
+Shows a list of all employees, schedules, recruitment posts and expenses claims in CHRS.
+
+Format: `list`
+// end::listCommand[]
+
+// tag::helpCommand[]
+=== View all available functions or commands : `help`
+
+Views all the functions and commands that the CHRS have.
+
+Format: 'help'
+
+[NOTE]
+A UserGuide popup window will appear for the user.
+// end::helpCommand[]
+
+// tag::historyCommand[]
 === Listing entered commands : `history`
 
-Lists all the commands that you have entered in reverse chronological order. +
+Lists all the commands that you have entered in reverse chronological order.
+
 Format: `history`
 
 [NOTE]
 ====
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
+// end::historyCommand[]
 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+Restores CHRS to the state before the previous _undoable_ command was executed.
+If a _undoable_ command is executed after undo, then the command that was undone
+will not be undoable anymore as it is already undone.
 
-[NOTE]
-====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
-====
+Format: `undo`
 
 Examples:
 
@@ -181,19 +695,34 @@ Examples:
 `list` +
 `undo` (reverses the `delete 1` command) +
 
-* `select 1` +
+* `selectEmployee 1` +
 `list` +
 `undo` +
-The `undo` command fails as there are no undoable commands executed previously.
+The `undo` command fails as there are no undoable commands executed previously
 
 * `delete 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
+* `delete 1` +
+`undo` (reverses the `delete 1` command) +
+`clear`(`delete 1` commmand will no longer be undoable as it is already undone) +
+`undo` (reverses the `clear` command) +
+`undo` (no more commands to undo) +
+
+[NOTE]
+====
+Undoable commands: those commands that modify CHRS content.
+For commands similar functions to +
+(list*, find*, filter*, select*, calculate*)
+the command will not be able to undo or redo).
+====
+
 === Redoing the previously undone command : `redo`
 
-Reverses the most recent `undo` command. +
+Reverses the most recent `undo` command.
+
 Format: `redo`
 
 Examples:
@@ -204,7 +733,7 @@ Examples:
 
 * `delete 1` +
 `redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
+The `redo` command fails as there are no `undo` commands executed previously
 
 * `delete 1` +
 `clear` +
@@ -212,16 +741,26 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
+
+[NOTE]
+====
+Redoable commands: those commands that modify CHRS content.
+For commands similar functions to +
+(list*, find*, filter*, select*, calculate*)
+the command will not be able to undo or redo.
+====
 // end::undoredo[]
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from CHRS.
+
 Format: `clear`
 
 === Exiting the program : `exit`
 
-Exits the program. +
+Exits the program.
+
 Format: `exit`
 
 === Saving the data
@@ -229,32 +768,189 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
+// tag::yisheng2.0Feature[]
+=== Keyword suggestion and auto complete feature _[Upcoming in 2.0]_
+This feature will suggest keywords when filtering or finding employee and the keyword will be auto-completed by pressing `TAB` key. _[Upcoming in 2.0]_
+// end::yisheng2.0Feature[]
+
+// tag::casper2.0Feature[]
+=== Employees' income report generation feature _[Upcoming in 2.0]_
+This feature will generate an employee payout report to show the break down of the Salary and Bonus in term of Base Salary, Bonus, Overtime Pay and CPF Contribution. _[Upcoming in 2.0]_
+// end::casper2.0Feature[]
+
+// tag::william2.0Feature[]
+=== Send Calendar: `sendCalendar` _[Upcoming in 2.0]_
+Send calendar to the employee for employee to import schedule, sent using the Employee's email address. _[Upcoming in 2.0]_
+// end::william2.0Feature[]
+
+// tag::recruitment2.0Feature[]
+=== Publish recruitment posts to job portal: `publishRecruitmentPost` _[Upcoming in 2.0]_
+`publishRecruitmentPost` command allows users to publish an existing recruitment post to job portal such as job street
+website. _[Upcoming in 2.0]_
+// end::recruitment2.0Feature[]
+
+// tag::expenses2.0Feature[]
+=== Expenses Report: `expensesReport` _[Upcoming in 2.0]_
+Generates an expenses report with the total expenses amount claimed and have not been claimed for a year _[Upcoming in 2.0]_
+// end::expenses2.0Feature[]
+
 === Encrypting data files `[coming in v2.0]`
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+Upcoming in 2.0! Stay Tune!
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*Q1*: How do I transfer my data to another Computer? +
+*A1*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+
+*Q2*: What is the purpose of this app? +
+*A2*: To provide a centralized and low-budget platform for personnel working in the Human Resource field to complete their work in a faster and more dynamic ways.
+
+*Q3*: Can I run it with Java version 8 and below? +
+*A3*: It will be best to run it with Java version 9 and above. This is to prevent errors in running the application and ensure the functions are running as intended.
+
+*Q4*: How do I know what functions are there in the application? +
+*A4*: The list of functions can be viewed by typing “help” in the command. This will direct the user to User Guide which have further elaborations and guide of how the functions are being used.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+[%header,cols=3*]
+|===
+|Command Features
+|Command Word
+|Command Alias
+
+|Add employee’s data
+|add
+|-
+
+|Edit an existing employee's data
+|edit
+|-
+
+|Locating employee(s) by name or employee ID
+|find
+|-
+
+|Filter and list of specific employee's data
+|filter
+|-
+
+|Delete an employee's data
+|delete
+|-
+
+|Select an employee
+|selectPerson
+|sp
+
+|Modify the Salary and/or Bonus of an employee
+|modifyPay
+|mp
+
+|Modify the Salary and/or Bonus all listed employee(s)
+|modifyAllPay
+|map
+
+|Add expenses claims under a specific employee
+|addExpenses
+|ae
+
+|Delete expenses claims of a specific employee
+|deleteExpenses
+|de
+
+|Select an expenses claim
+|selectExpenses
+|se
+
+|Clear expenses list
+|clearExpenses
+|ce
+
+|Add a new schedule
+|addSchedule
+|as
+
+|Delete an existing schedule
+|deleteSchedule
+|ds
+
+|Add multiple work schedules
+|addWorks
+|aw
+
+|Delete multiple work schedules
+|deleteWorks
+|dw
+
+|Add multiple leave schedules
+|addLeaves
+|al
+
+|Delete multiple leave schedules
+|deleteLeaves
+|dl
+
+|Calculate total leaves in a year
+|calculateLeaves
+|cl
+
+|Select schedule in the schedule list
+|selectSchedule
+|ss
+
+|Clear the entire schedule list
+|clearSchedules
+|cs
+
+|Add new recruitment post
+|addRecruitmentPost
+|arp
+
+|Edit an existing recruitment post
+|editRecruitmentPost
+|erp
+
+|Select recruitment post
+|selectRecruitmentPost
+|srp
+
+|Delete recruitment post
+|deleteRecruitmentPost
+|drp
+
+|Clear recruitment posts
+|clearRecruitmentPost
+|crp
+
+|Listing all employees'
+|list
+|-
+
+|View all available functions or commands
+|help
+|-
+
+|Listing entered commands
+|history
+|-
+
+|Undoing previous command
+|undo
+|-
+
+|Redoing the previously undone command
+|redo
+|-
+
+|Clearing all entries
+|clear
+|-
+
+|Exiting the program
+|exit
+|-
+
+|===
+=======

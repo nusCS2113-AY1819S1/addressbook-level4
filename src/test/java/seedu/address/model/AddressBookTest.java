@@ -19,6 +19,8 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.addressbook.AddressBook;
+import seedu.address.model.addressbook.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -89,6 +91,12 @@ public class AddressBookTest {
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getPersonList().remove(0);
+    }
+
+    @Test
+    public void hashCodeSameObject_equals() {
+        AddressBook addressBookCopy = addressBook;
+        assertEquals(addressBook.hashCode(), addressBookCopy.hashCode());
     }
 
     /**

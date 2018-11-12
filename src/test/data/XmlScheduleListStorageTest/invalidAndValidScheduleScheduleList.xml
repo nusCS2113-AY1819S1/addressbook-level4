@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <!-- Valid Schedule -->
+    <schedules>
+        <employeeId>000001</employeeId>
+        <type>WORK</type>
+        <date>01/01/2019</date>
+    </schedules>
+    <!-- Schedule with invalid date field -->
+    <schedules>
+        <employeeId>000001</employeeId>
+        <type>WORK</type>
+        <date>01/13/2019</date>
+    </schedules>
+</addressbook>

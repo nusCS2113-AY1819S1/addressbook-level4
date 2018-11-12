@@ -82,7 +82,8 @@ public class ConfigUtilTest {
 
     private Optional<Config> read(String configFileInTestDataFolder) throws DataConversionException {
         Path configFilePath = addToTestDataPathIfNotNull(configFileInTestDataFolder);
-        return ConfigUtil.readConfig(configFilePath);
+        ConfigUtil configUtil = new ConfigUtil();
+        return configUtil.readConfig(configFilePath);
     }
 
     @Test

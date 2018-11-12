@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<recruitmentlist>
+    <recruitments>
+        <post>Network Engineer</post>
+        <workExp>3</workExp>
+        <jobDescription>Ensure all the networking devices are in working condition</jobDescription>
+    </recruitments>
+    <!-- Recruitment with same recruitment -->
+	<recruitments>
+        <post>Network Engineer</post>
+        <workExp>3</workExp>
+        <jobDescription>Ensure all the networking devices are in working condition</jobDescription>
+    </recruitments>
+</recruitmentlist>

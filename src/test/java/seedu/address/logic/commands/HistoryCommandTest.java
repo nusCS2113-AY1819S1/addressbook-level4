@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
@@ -15,12 +16,21 @@ public class HistoryCommandTest {
 
     @Test
     public void execute() {
-        assertCommandSuccess(new HistoryCommand(), model, history, HistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
+        try {
+            assertCommandSuccess(new HistoryCommand(), model,
+                    history, HistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
 
         String command1 = "clear";
         history.add(command1);
-        assertCommandSuccess(new HistoryCommand(), model, history,
-                String.format(HistoryCommand.MESSAGE_SUCCESS, command1), expectedModel);
+        try {
+            assertCommandSuccess(new HistoryCommand(), model, history,
+                    String.format(HistoryCommand.MESSAGE_SUCCESS, command1), expectedModel);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
 
         String command2 = "randomCommand";
         String command3 = "select 1";
@@ -29,7 +39,10 @@ public class HistoryCommandTest {
 
         String expectedMessage = String.format(HistoryCommand.MESSAGE_SUCCESS,
                 String.join("\n", command3, command2, command1));
-        assertCommandSuccess(new HistoryCommand(), model, history, expectedMessage, expectedModel);
+        try {
+            assertCommandSuccess(new HistoryCommand(), model, history, expectedMessage, expectedModel);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
     }
-
 }

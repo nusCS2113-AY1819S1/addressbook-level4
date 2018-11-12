@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<recruitmentlist>
+    <recruitments>
+        <post>Network Engineer</post>
+        <workExp>3</workExp>
+        <jobDescription>Ensure all networking devices are in working condition</jobDescription>
+    </recruitments>
+    <recruitments>
+        <post>Accountants</post>
+        <workExp>5</workExp>
+        <jobDescription>To perform audits and financial statement analysis</jobDescription>
+    </recruitments>
+    <recruitments>
+        <post>Purchaser</post>
+        <workExp>2</workExp>
+        <jobDescription>To handle company's purchase orders</jobDescription>
+    </recruitments>
+</recruitmentlist>

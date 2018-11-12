@@ -3,11 +3,14 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -33,6 +36,25 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
+
+    /**
+     * Returns true if the list contains an equivalent person as the given argument.
+     * However, it does not check itself, it checks the rest of the address book (for edit command).
+     */
+    public boolean contains(Person toCheck, ObservableList<Person> filteredPersonList) {
+        requireNonNull(toCheck);
+        requireNonNull(filteredPersonList);
+        return filteredPersonList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent employeeId as the given person's employeeId.
+     */
+    public boolean containsEmployeeId(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameEmployeeId);
+    }
+
 
     /**
      * Adds a person to the list.
@@ -93,6 +115,31 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    //Reused from https://github.com/CS2103JAN2018-F14-B1/main/pull/57 with minor modifications
+    /**
+     * Sorts PersonList by name in either ascending or descending order.
+     * @param order The sort order input by the user (either ascending or descending)
+     */
+    public void sortByName(String order) {
+        Comparator <Person> nameComparator = new Comparator<Person>() {
+            @Override
+            public int compare(Person personA, Person personB) {
+                return personA.getName().fullName.compareToIgnoreCase(personB.getName().fullName);
+            }
+        };
+
+        switch (order) {
+        case FilterCommand.ASCENDING:
+            Collections.sort(internalList, nameComparator);
+            break;
+        case FilterCommand.DESCENDING:
+            Collections.sort(internalList, Collections.reverseOrder(nameComparator));
+            break;
+        default:
+            throw new AssertionError("Invalid parameter for order entered");
+        }
     }
 
     /**

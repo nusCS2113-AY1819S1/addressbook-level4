@@ -21,9 +21,9 @@ public class StringUtilTest {
 
     @Test
     public void isUnsignedPositiveInteger() {
-
+        StringUtil stringUtil = new StringUtil();
         // EP: empty strings
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("")); // Boundary value
+        assertFalse(stringUtil.isNonZeroUnsignedInteger("")); // Boundary value
         assertFalse(StringUtil.isNonZeroUnsignedInteger("  "));
 
         // EP: not a number

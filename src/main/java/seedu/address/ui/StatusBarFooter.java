@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.core.Messages.MESSAGE_STATUS_BAR_BOTTOM_RIGHT;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Clock;
@@ -13,8 +15,11 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ExpensesListChangedEvent;
+import seedu.address.commons.events.model.ScheduleListChangedEvent;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -66,7 +71,7 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     private void setSaveLocation(String location) {
-        Platform.runLater(() -> saveLocationStatus.setText(location));
+        Platform.runLater(() -> saveLocationStatus.setText(MESSAGE_STATUS_BAR_BOTTOM_RIGHT));
     }
 
     private void setSyncStatus(String status) {
@@ -78,6 +83,23 @@ public class StatusBarFooter extends UiPart<Region> {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
+    }
+
+    @Subscribe
+    public void handleScheduleListChangedEvent(ScheduleListChangedEvent abce) {
+        long now = clock.millis();
+        String lastUpdated = new Date(now).toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
+    }
+
+    @Subscribe
+    public void handleExpensesListChangedEvent(ExpensesListChangedEvent elce) {
+        long now = clock.millis();
+        String lastUpdated = new Date(now).toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(elce, "Setting last updated status to "
+                + lastUpdated));
         setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
     }
 }

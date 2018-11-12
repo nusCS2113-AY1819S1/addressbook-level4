@@ -1,6 +1,7 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.address.commons.core.Messages.GREETING_MESSAGE_NONEWLINE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+import seedu.address.model.addressbook.DayHourGreeting;
 import seedu.address.model.person.Person;
 
 public class DeleteCommandSystemTest extends AddressBookSystemTest {
@@ -108,7 +110,9 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(DeleteCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
         /* Case: mixed case command word -> rejected */
-        assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND);
+        DayHourGreeting greeting = new DayHourGreeting();
+        assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND
+                + greeting.getGreeting() + GREETING_MESSAGE_NONEWLINE);
     }
 
     /**
