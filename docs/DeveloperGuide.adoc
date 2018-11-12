@@ -1173,6 +1173,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |Lab Technician |Record statuses of individual materials (Free, Loan, Faulty) |Account for the state of items in the lab
 
+|`* *` |Lab Technician |Report all the lost items |Record the lost status for all the items and check the lost list whenever I want
+
 |`*` |Lab Technician |Withdraw my operation sometime |Go back to my previous edition anytime
 
 |`*` |Lab Technician |Create loan lists for each project group |Account for items loaned when they are returned
@@ -1595,6 +1597,31 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `delete 0` +
    Expected: No item is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+   Expected: Similar to previous.
+
+=== Lost an item
+
+. Lost an item while all items are listed
+
+.. Prerequisites: List all items using the `list` command. Multiple items in the list.
+.. Test case: `lost 1 q/15` +
+   Expected: First item is decreased by 15 from the list. Details of the lost item shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `lost 0 q/15` +
+   Expected: No item is lost. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect lost commands to try: `lost 1 q/x` (where x is larger than the Ready quantity of the first item)  +
+   Expected: Similar to previous.
+
+=== Found a lost item
+
+. Found a lost item while all items are listed
+
+.. Prerequisites: List all lost items using the `lost&found` command. Multiple items in the list.
+.. Prerequisites: List all items using the `list` command. Multiple items in the list.
+.. Test case: `found 1 q/15` +
+   Expected: First item is increased by 15 from the list. The corresponding lost quantity of this item will be decreased. Details of the found item shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `found 0 q/15` +
+   Expected: No item is lost. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect found commands to try: `found 1 q/x` (where x is larger than the lost quantity of the first item)  +
    Expected: Similar to previous.
 
 === Logging in
