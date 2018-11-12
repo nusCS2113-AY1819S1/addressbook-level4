@@ -299,20 +299,6 @@ Filters both the others list and the friends list to show only users with the gr
 * `group CS2101 CS2113T` +
 Filters both the others list and the friends list to show only users with both group "CS2101" and "CS2113T".
 
-<<<<<<< HEAD
-=======
-.  By default, FreeTime shows all the users that are using the application, on both the Friends and Others panel.
-+
-.FreeTime before executing group command
-image::TagCommandDefaultFix.png[width="790"]
-+
-
-.  After executing `group CS2113T`, all the users with the group `CS2113T` will be filtered and shown on the respective panels.
-+
-.FreeTime after executing group command
-image::TagCommandExecutedPS.png[width="790"]
-.  Commands such as `friend`, `unfriend`, `free`, `select` can now be used on the filtered list.
->>>>>>> ed9a2d24c8e27c52e866b995ec9096717f96152a
 [NOTE]
 Use the command `listall` to revert the panels back to its original state.
 
