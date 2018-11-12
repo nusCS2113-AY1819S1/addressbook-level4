@@ -54,7 +54,7 @@ include::../UserGuide.adoc[tag=distributormanagement]
 I updated:
 the Logic class diagram:
 
-include::../DeveloperGuide.adoc[tag=logicclassdiagram]
+include::../DeveloperGuide.adoc[tag=logiccomponent]
 
 and the UI class diagram:
 
