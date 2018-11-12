@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearScheduleCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -14,6 +15,7 @@ import seedu.address.logic.commands.FinishTodoCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MatchScheduleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -35,15 +37,18 @@ public class InputCommandSuggestion {
         commandList = new Trie();
         commandList.insert(AddCommand.COMMAND_WORD);
         commandList.insert(ClearCommand.COMMAND_WORD);
+        commandList.insert(ClearScheduleCommand.COMMAND_WORD);
         commandList.insert(DeleteCommand.COMMAND_WORD);
         commandList.insert(EditCommand.COMMAND_WORD);
         commandList.insert(ExitCommand.COMMAND_WORD);
+        commandList.insert(ExportCommand.COMMAND_WORD);
         commandList.insert(ExportAllCommand.COMMAND_WORD);
         commandList.insert(FindCommand.COMMAND_WORD);
         commandList.insert(FinishTodoCommand.COMMAND_WORD);
         commandList.insert(HelpCommand.COMMAND_WORD);
         commandList.insert(HistoryCommand.COMMAND_WORD);
         commandList.insert(ListCommand.COMMAND_WORD);
+        commandList.insert(MatchScheduleCommand.COMMAND_WORD);
         commandList.insert(RedoCommand.COMMAND_WORD);
         commandList.insert(ScheduleCommand.COMMAND_WORD);
         commandList.insert(SelectCommand.COMMAND_WORD);
@@ -127,6 +132,9 @@ public class InputCommandSuggestion {
         case AddCommand.COMMAND_WORD:
             return AddCommand.COMMAND_PARAMETERS;
 
+        case ClearScheduleCommand.COMMAND_WORD:
+            return ClearScheduleCommand.COMMAND_PARAMETERS;
+
         case DeleteCommand.COMMAND_WORD:
             return DeleteCommand.COMMAND_PARAMETERS;
 
@@ -144,6 +152,9 @@ public class InputCommandSuggestion {
 
         case FinishTodoCommand.COMMAND_WORD:
             return FindCommand.COMMAND_PARAMETERS;
+
+        case MatchScheduleCommand.COMMAND_WORD:
+            return MatchScheduleCommand.COMMAND_PARAMETERS;
 
         case ScheduleCommand.COMMAND_WORD:
             return ScheduleCommand.COMMAND_PARAMETERS;

@@ -2,15 +2,18 @@ package seedu.address.logic.suggestions;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearScheduleCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportAllCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FinishTodoCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MatchScheduleCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -33,20 +36,24 @@ public class WrongCommandSuggestion {
         CommandList = new String[] {
             AddCommand.COMMAND_WORD,
             ClearCommand.COMMAND_WORD,
+            ClearScheduleCommand.COMMAND_WORD,
             DeleteCommand.COMMAND_WORD,
             EditCommand.COMMAND_WORD,
             ExitCommand.COMMAND_WORD,
+            ExportCommand.COMMAND_WORD,
             ExportAllCommand.COMMAND_WORD,
             FindCommand.COMMAND_WORD,
             FinishTodoCommand.COMMAND_WORD,
             HelpCommand.COMMAND_WORD,
             HistoryCommand.COMMAND_WORD,
             ListCommand.COMMAND_WORD,
+            MatchScheduleCommand.COMMAND_WORD,
             RedoCommand.COMMAND_WORD,
             ScheduleCommand.COMMAND_WORD,
             SelectCommand.COMMAND_WORD,
-            UndoCommand.COMMAND_WORD,
-            TodoCommand.COMMAND_WORD
+            TodoCommand.COMMAND_WORD,
+            UndoCommand.COMMAND_WORD
+
         };
     }
 
