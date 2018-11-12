@@ -686,9 +686,6 @@ Step 1: User launches the application, then logs in.
 
 Step 2: User executes `export mycal` command. The export command receive argument to accept as filename
 
-.User execute export command
-image::exportCalendarCommand.png[]
-
 Step 3: Current user, who is logged in, will be used to receive an event filtered list that he/she has registered for.
 
 Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in *folder that you store EventManager.jar*
