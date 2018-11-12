@@ -3,15 +3,15 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-Project: Club Hub
+== Project: Club Hub
 
 == Overview
 
 === 1.    Project Background and Description
 
-[width="100%",cols="50%,50%",]
+[width="100%",cols="100%",]
 |=======================================================================
-|image:image004.png[Tip icon,width=15,height=15] |Club Hub is
+a|Club Hub is
 a desktop address book application designed for University interest
 group/club leaders as its primary users. This application aims to help
 these leaders better manage their members, finances, calendar, and
@@ -24,33 +24,33 @@ JavaFX. It is written in Java and has about 10 thousand lines of codes.
 
 === 2.    Summary of Contributions
 
-[width="100%",cols="50%,50%",]
+[width="100%",cols="100%",]
 |=======================================================================
-|image:image004.png[Tip icon,width=15,height=15] a|
-Major enhancements: implemented the Club Account feature
+a|
+=== Major enhancements: implemented the Club Account feature
 
--        Function 1: adding or removing a ledger record.
+=== Function 1: adding or removing a ledger record.
 
-o   What it does: allows the user to easily add and remove ledgers
+    What it does: allows the user to easily add and remove ledgers
 according to the date in the format [DD/MM].
 
-o   Justification: This function improves the management of finances in
+    Justification: This function improves the management of finances in
 the club by allowing records to be add and removed via the date, to
 ensure maximum clarity and unambiguity when it comes to recording
 finances.
 
--        Function 2: crediting or debiting balance from a ledger record.
+=== Function 2: crediting or debiting balance from a ledger record.
 
-o   What it does: allows the user to credit or debit the amount on a
+    What it does: allows the user to credit or debit the amount on a
 specific date.
 
-o   Justification: This function improves the product significantly
+    Justification: This function improves the product significantly
 because a user can easily update their spending on a specific date or
 their contributions to the club with just one line of command. In
 addition, working directly with dates instead of indexes ensures maximum
 clarity in managing the finances.
 
--        Highlights: This enhancement affects and manipulates existing
+    Highlights: This enhancement affects and manipulates existing
 data stored in the memory. It required an in-depth analysis of design
 considerations to allow mathematical operations to be performed on data
 stored in memory. The implementation too was challenging as it required
@@ -63,9 +63,9 @@ indexes as mentioned in the description for function 2.
 
 === 3.    Code Contributed
 
-[width="100%",cols="50%,50%",]
+[width="100%",cols="100%",]
 |=======================================================================
-|image:image004.png[Tip icon,width=15,height=15] a|
+a|
 Code:
 [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-10-18&timeframe=day&reverse=false&repoSort=true[Functional
 Code]]
@@ -73,32 +73,32 @@ Code]]
 To see more details of the code, extracts from the project’s developer
 and user guide are included below:
 
-==== 1.     The User Guide shown here provides details on how the commands are used on the client’s side.
+==== 3.1 The User Guide shown here provides details on how the commands are used on the client’s side.
 
  
 
-==== 1.1 Accounts:
+===== 3.1.1 Accounts:
 
-The Club Account features a ledger column to record the spending of the
+    The Club Account features a ledger column to record the spending of the
 club on any date in the form of DD/MM. There are 4 basic commands
 allowing the user to add or delete a ledger, and to credit or debit
 money from any date in the list of records.
 
  
 
-===== 1.1.1 Adding a ledger: addLedger
+====== 3.1.2 Adding a ledger: addLedger
 
 Adds a ledger to the ledger column.
 
-Format: addLedger d/[DD/MM]
+Format: `addLedger d/[DD/MM]`
 
  
 
-Example: addLedger d/ 10/10
+Example: `addLedger d/ 10/10`
 
  
 
-===== 1.1.2 Deleting a ledger: deleteLedger
+===== 3.1.3 Deleting a ledger: deleteLedger
 
 Deletes a ledger from the log.
 
@@ -110,7 +110,7 @@ Example: `deleteLedger d/ 10/10`
 
  
 
-===== 1.1.3 Crediting a ledger: credit
+===== 3.1.4 Crediting a ledger: credit
 
 Increase the balance of a ledger on a date indicated.
 
@@ -122,7 +122,7 @@ Example: `credit d/ 10/10 b/ 100`
 
  
 
-===== 1.1.4 Debiting a ledger: credit
+===== 3.1.5 Debiting a ledger: credit
 
 Decrease the balance of a ledger on a date indicated.
 
@@ -132,11 +132,11 @@ Format: `debit d/[DD/MM] b/[NUM]`
 
 Example: `debit d/ 10/10 b/ 100`
 
-==== 2.     The Developer Guide shown here provides details on how the commands are implemented on the developers’ side.
+==== 3.2 The Developer Guide shown here provides details on how the commands are implemented on the developers’ side.
 
  
 
-==== 2.1 Ledger
+===== 3.2.1 Ledger
 
 As of v1.3, the core commands dealing with Ledgers are addLedger,
 deleteLedger, credit and debit. In addition, the common commands such as
@@ -154,7 +154,7 @@ places for cents at the front of the amount of money.
 
  
 
-3.6.1. Add/Remove Ledger feature
+===== 3.2.2 Add/Remove Ledger feature
 
 Current Implementation
 
@@ -231,7 +231,7 @@ the Ledger in the UniqueLedgerList instead.
 
  
 
-3.6.2. Credit/Debit feature
+===== 3.2.3 Credit/Debit feature
 
 The Credit/Debit mechanism is facilitated by CreditCommand and
 DebitCommand. They extend Command by overriding and implementing the
@@ -253,7 +253,7 @@ them to find one to edit.
 
  
 
-=== 3.    Known Bugs
+=== 4.    Known Bugs
 
 [width="100%",cols="50%,50%",]
 |=======================================================================
@@ -263,7 +263,7 @@ bugs identified a
 
  
 
-=== 4.    Design Considerations
+=== 5.    Design Considerations
 
 [width="100%",cols="50%,50%",]
 |============================================================
@@ -275,7 +275,7 @@ bugs identified a
 
  
 
-=== 5.    Future Implementation
+=== 6.    Future Implementation
 
 [width="100%",cols="50%,50%",]
 |============================================================
