@@ -23,17 +23,17 @@ Thus, Event Manager offers a pragmatic solution to the students' problem of mana
 .  *Authentication:* Admin accounts to manage events and user accounts to register for events.
 .  *Find:* A search feature to filter events based on keywords in the events' data fields.
 .  *Registration:* Users can indicate their attendance for events. Attendance is displayed to all other users.
-.  *Reminder:* Automated reminders are sent to users who have registered for events that are happening in the next 24 hours.
+.  *Reminder*:* Automated reminders are sent to users who have registered for events that are happening in the next 24 hours.
 .  *Comment:* A comment section to facilitate interactions amongst the users for an event.
-.  *Status:* Displays the status of an event to users. Statuses can either be 'Completed' or 'Upcoming'.
-.  *Export:* Allows users to export their registered events as a calendar file, compatible with other calendar applications. 
+.  *Status*:* Displays the status of an event to users. Statuses can either be 'Completed' or 'Upcoming'.
+.  *Export:* Allows users to export their registered events as a calendar file, compatible with other calendar applications.
 .  *Undo/Redo:* Allows users to undo/redo previous commands one at a time.
 .  *Basic features:* Allows admin users to create, update, edit and delete events.
 ====
 
 == Summary of contributions
 
-This section outlines the breadth of my contributions in order of magnitude, starting with my biggest contributions. 
+This section outlines the breadth of my contributions in order of magnitude, starting with my biggest contributions.
 
 * *Major enhancement #1:* +
 ** Added *a reminder mechanism for user-registered events*
@@ -51,7 +51,7 @@ Allows the user to easily discern completed events from upcoming ones. Completed
 ** *Justification* +
 This feature enhances the product remarkably because before its implementation, a user would have to strain his/her eyes to look through each event's details to ascertain which events have occurred and which ones are coming up.
 ** *Highlights* +
-This enhancement changes the current model and greatly boosts the productivity of Event Manager's users. Its implementation was the result of thorough analysis of several design alternatives, based on their efficiency and effectiveness. 
+This enhancement changes the current model and greatly boosts the productivity of Event Manager's users. Its implementation was the result of thorough analysis of several design alternatives, based on their efficiency and effectiveness.
 
 * *Minor enhancement:* +
 ** Added *new information fields for events*
@@ -94,5 +94,9 @@ include::../DeveloperGuide.adoc[tag=eventStatus&Reminder]
 include::../DeveloperGuide.adoc[tag=reminderUsecase]
 
 include::../DeveloperGuide.adoc[tag=updateStatusUsecase]
+
+include::../DeveloperGuide.adoc[tag=reminderMT]
+
+include::../DeveloperGuide.adoc[tag=statusMT]
 
 ---

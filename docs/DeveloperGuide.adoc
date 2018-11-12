@@ -567,10 +567,9 @@ The following sequence diagram shows how the UpdateStatusCommand works:
 .Sequence Diagram for UpdateStatusCommand
 image::Update-sequenceDiagram.png[width="800"]
 
+
 [NOTE]
-====
 The Event Status feature is supported by the `Status` and `DateTime` field in the `Event`. Events with `DateTime` fields before the current `Date` will assume the `COMPLETED Status`, whereas those with `DateTime` fields after the current `Date` will take on the `UPCOMING Status`.
-====
 
 The *ReminderCommand* is periodically called in `TimerTask` `checkEventReminders` every 6 hours and it loops through every event in the `lastShownList` to check for the following:
 =====
@@ -1314,38 +1313,38 @@ Username of target attendee `Charlotte Oliveiro` is not in the attendance of the
  . Adding a comment in the comment section of an event
  .. Prerequisite: User/Admin has to be logged in and event 1 has to exist.
  .. Test case: `addComment 1 C/Hello`
-.. Test case: `addComment 1 C/Hello` + 
+.. Test case: `addComment 1 C/Hello` +
  Expected: Adds to event at index 1 the comment "Hello". The new comment will be displayed under last comment available or if not below the comment section.
  .. Test case: `addComment 0 C/Hello`
-.. Test case: `addComment 0 C/Hello` + 
+.. Test case: `addComment 0 C/Hello` +
 Expected: The Command Result box will return an invalid format and no changes will occur.
- .. Test case: `addComment x C/STRING`, when x<0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1` 
-.. Test case: `addComment x C/STRING`, when x < 0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1` + 
+ .. Test case: `addComment x C/STRING`, when x<0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1`
+.. Test case: `addComment x C/STRING`, when x < 0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1` +
 Expected: Similar to previous because x has to be a signed integer that exists within the index of events.
 
 === Replying a Comment
- 
+
  . Replying a comment in the comment section of an event
  .. Prerequisite: User/Admin has to be logged in, event 1 has to have one valid comment.
  .. Test case: `replyComment 1 C/Hello L/1`
-.. Test case: `replyComment 1 C/Hello L/1` + 
+.. Test case: `replyComment 1 C/Hello L/1` +
 Expected: Adds to event at index 1 and replies a comment "Hello" to line 1 of the comments section.
  .. Test case: `replyComment 0 C/Hello L/1`
-.. Test case: `replyComment 0 C/Hello L/1` + 
+.. Test case: `replyComment 0 C/Hello L/1` +
 Expected: The Command Result box will return an invalid format and no changes will occur.
  .. Test case: `replyComment x C/Hello L/1`, x<0 or x>event list size
-.. Test case: `replyComment x C/Hello L/1`, x < 0 or x > event list size. + 
+.. Test case: `replyComment x C/Hello L/1`, x < 0 or x > event list size. +
 Expected: Similar to previous
  .. Test case: `replyComment 1 C/Hello L/x`, x<=0 or x>number of comments in the comment section
-.. Test case: `replyComment 1 C/Hello L/x`, where x < = 0 or x > number of comments in the comment section. + 
+.. Test case: `replyComment 1 C/Hello L/x`, where x < = 0 or x > number of comments in the comment section. +
 Expected: Similar to previous
- .. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. 
-.. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. + 
+ .. Test case: `replyComment x C/y L/z`, where x, y or z does not exist.
+.. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. +
 Expected: Invalid command will be displayed in the result box. No changes will occur.
 
 === Deleting a Comment
- 
- . Deleting a comment in the comment section 
+
+ . Deleting a comment in the comment section
  .. Prerequisites: Admin and logged in, event 1 has to have at least 1 valid comment.
  .. Test case: `deleteComment 1 L/1`
 .. Test case: `deleteComment 1 L/1` +
@@ -1361,14 +1360,53 @@ Expected: Similar to previous
 Expected:  Invalid command will be displayed in the result box. No changes will occur.
 // end::commentsMT[]
 
-// tag::exportManualTest
+// tag::reminderMT[]
+=== Requesting a reminder
+
+. Requesting for reminders as a user registered for an upcoming event
+.. Prerequisites: +
+Added an event that is happening in the next 24 hours +
+Logged in as user +
+Registered to upcoming event
+.. Testcase: `reminder` +
+Expected: An alert dialog shows up for the relevant event, showing the name of the event and the event's start time. Hitting 'enter' should close the alert dialog.
+
+. Requesting for reminders as a user not registered for an upcoming event
+.. Prerequisites: +
+Added an event that is happening in the next 24 hours +
+Logged in as user
+.. Testcase: `reminder` +
+Expected: Event Manager shows message that there are no upcoming events for you in the logger.
+
+. Requesting for reminders as a user not logged in
+.. Prerequisites: +
+Not logged in
+.. Testcase: `reminder` +
+Expected: Event Manager shows message that you have to be logged in in the logger.
+// end::reminderMT[]
+
+// tag::statusMT[]
+=== Updating event statuses
+
+. Updating event status for an event that has just passed
+.. Prerequisites: +
+Added an event that will happen in 1-2 minutes' time
+.. Testcase: `update` +
+Expected: The event's status should change from UPCOMING to COMPLETED
+
+. Updating event status without any events
+.. Prerequisites: +
+Event Manager is empty of events (Use the `clear` command)
+.. Testcase: `update` +
+Expected: Event Manager shows message that there are no events to be updated in the logger.
+// end::statusMT[]
+
 === Exporting a file
 . Prerequisites: Must be logged in and have registered for 1 event
+ .. Test case: `export file` +
+Expected: A iCalendar file called file will be exported to the source folder
 
-.. Test case: `export file` +
-Expected: A iCalendar file with name file.ics will be exported to the source folder
-
-.. Test case: `export` +
+ .. Test case: `export` +
 Expected: Command Result box will notify that no file name is given and no changes will occur
 
 .. Test case: `export COM1` on Windows system
