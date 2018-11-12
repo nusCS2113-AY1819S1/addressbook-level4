@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Dive with missing startTime field -->
+
+<dives>
+    <safetyStop>0945</safetyStop>
+    <endTime>1000</endTime>
+    <pressureGroupAtBeginning>A</pressureGroupAtBeginning>
+    <pressureGroupAtEnd>R</pressureGroupAtEnd>
+    <location>Bali</location>
+    <depthProfile>10.0</depthProfile>
+</dives>
+

@@ -1,6 +1,6 @@
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #FFFFFF; /* Used in the default.html file */
 }
 
 .label {
@@ -327,7 +327,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #diveSessionListPanel, #diveSessionWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -348,4 +348,112 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+/**
+     * The colour changing generator parameters
+     */
+
+.thisIsA{
+    -fx-text-fill: #0FFF0F;
+}
+
+.thisIsB{
+    -fx-text-fill: #21FF0E;
+}
+
+.thisIsC{
+    -fx-text-fill: #34FF0D;
+}
+
+.thisIsD{
+    -fx-text-fill: #47FF0D;
+}
+
+.thisIsE{
+    -fx-text-fill: #5AFF0C;
+}
+
+.thisIsF{
+    -fx-text-fill: #6DFF0C;
+}
+
+.thisIsG{
+    -fx-text-fill: #80FF0B;
+}
+
+.thisIsH{
+    -fx-text-fill: #93FF0A;
+}
+
+.thisIsI{
+    -fx-text-fill: #A6FF0A;
+}
+
+.thisIsJ{
+    -fx-text-fill: #BAFF09;
+}
+
+.thisIsK{
+    -fx-text-fill: #CDFF08;
+}
+
+.thisIsL{
+    -fx-text-fill: #E1FF08;
+}
+
+.thisIsM{
+    -fx-text-fill: #F5FF07;
+}
+
+.thisIsN{
+    -fx-text-fill: #FFF507;
+}
+
+.thisIsO{
+    -fx-text-fill: #FFE106;
+}
+
+.thisIsP{
+    -fx-text-fill: #FFCD06;
+}
+
+.thisIsQ{
+    -fx-text-fill: #FFB905;
+}
+
+.thisIsR{
+    -fx-text-fill: #FFA404;
+}
+
+.thisIsS{
+    -fx-text-fill: #FF9004;
+}
+
+.thisIsT{
+    -fx-text-fill: #FF7C03;
+}
+
+.thisIsU{
+    -fx-text-fill: #FF6702;
+}
+
+.thisIsV{
+    -fx-text-fill: #FF5302;
+}
+
+.thisIsW{
+    -fx-text-fill: #FF3E01;
+}
+
+.thisIsX{
+    -fx-text-fill: #FF2901;
+}
+
+.thisIsY{
+    -fx-text-fill: #FF1400;
+}
+
+.thisIsZ{
+    -fx-text-fill: #FF0000;
 }

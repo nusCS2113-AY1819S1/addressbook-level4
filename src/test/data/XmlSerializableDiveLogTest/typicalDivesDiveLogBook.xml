@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<divelog>
+    <dives>
+        <dateStart>01012019</dateStart>
+        <startTime>0700</startTime>
+        <safetyStop>0745</safetyStop>
+        <dateEnd>01012019</dateEnd>
+        <endTime>0800</endTime>
+        <pressureGroupAtBeginning>A</pressureGroupAtBeginning>
+        <pressureGroupAtEnd>L</pressureGroupAtEnd>
+        <location>Bali</location>
+        <depthProfile>5.0</depthProfile>
+        <timezone>+8</timezone>
+    </dives>
+    <dives>
+        <dateStart>01012019</dateStart>
+        <startTime>1000</startTime>
+        <safetyStop>1025</safetyStop>
+        <dateEnd>01012019</dateEnd>
+        <endTime>1030</endTime>
+        <pressureGroupAtBeginning>B</pressureGroupAtBeginning>
+        <pressureGroupAtEnd>I</pressureGroupAtEnd>
+        <location>Tioman</location>
+        <depthProfile>5.0</depthProfile>
+        <timezone>+8</timezone>
+    </dives>
+</divelog>

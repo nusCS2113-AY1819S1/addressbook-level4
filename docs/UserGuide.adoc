@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= DiveLog - User Guide v1.4
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,33 +12,47 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-W13-2/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team CS2113-AY1819S1-W13-2`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Divelog is a digital dive log for planning and tracking recreational (no decompression) dives that aims to simplify safe dive planning, logging and calculations.
+Divelog provides a simple way for underwater recreational divers to input details of their dives such as the time they spent at a particular depth, and Divelog will keep track of their nitrogen levels.
+This allows divers to plan their next trip safely. +
+
+We have adopted the <<PADI>> dive tables standards to calculate pressure groups for individual recreational dives. In addition, we are also able to determine if the dive is the first dive or a repetitive dive. Do not attempt to use Divelog for planning decompression dives.
+
+Pressure groups are made up of an alphabet, between A to Z, which marks the nitrogen concentration within a diver ("A" corresponds to a scenario where the diver is almost free of nitrogen, whilst "Z" corresponds to a scenario where the diver has dangerously excess of Nitrogen).
+As of v1.4, the pressure groups are automatically calculated across all dives. You only need to enter the location, depth and the time of the the dive. Following which, the pressure groups of all dives are automatically calculated and updated.
+The system will also verify that the dives are safe before allowing you to add and/or edit the dives. This is to ensure your safety.
+We are still working on the sortby
+`<<sortby>>` feature coming in the upcoming release v2.0. +
+
+For more information on pressure groups and the definitions of common diving terms used, you can find out more over at `<<pressure_groups>>`, `<<definitions_review>>` and in  `<<FAQ>>`.
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+http://www.methods.co.nz/asciidoc/[Here's how^]
+.  Download the latest `divelog.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Dive Log.
+.  Double-click the *divelog.jar* file to start the app. The Graphical User Interface (GUI), as seen in Diagram 1 below, should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::UGSS_gui.png[width="790"]
+Diagram 1: screenshot of GUI
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+.  Type the command in the command box (as seen in Diagram 2 below) and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
++++ <details><summary> +++
+Click to view screenshot for location of command box
++++ </summary><div> +++
 
-.  Refer to <<Features>> for details of each command.
+image::UGSS_Ui_command.png[width="800"]
+Diagram 2: Command Box location
++++ </div></details> +++
 
 [[Features]]
 == Features
@@ -46,82 +60,200 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+Confused by our User Guide? Our guide is written following the below few guidelines.
+
+* Some commands have an alias, which you can also use to execute the command
+** e.g. to find out about your current pressure group status and safe flight recommendation information, you can type either `currentpg` or `cpg`.
+* Words in `UPPER_CASE` are the parameters to be supplied by you, the user.
+** e.g. in `add l/LOCATION`, `LOCATION` is a parameter which can be used as `add l/Sentosa`.
+* Items in square brackets are optional
+** e.g `l/LOCATION [tz/TIMEZONE]` can be used as `l/Bali tz/+8` or as `l/Bali`.
+* Parameters can be entered in any order
+** e.g. if the command specifies `l/Sentosa, Singapore d/10`, `d/10 l/Sentosa, Singapore` is also acceptable.
+* A vertical bar `a|b` means either `a` or `b` will work as inputs.
 ====
 
 === Viewing help : `help`
 
+Use this command to help window to see the user guide. Upon entering the command, a separate window with the user guide will open.
+
 Format: `help`
 
-=== Adding a person: `add`
++++ <details><summary> +++
+Click here to view the screenshots to open help within the application
++++ </summary><div> +++
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+image::UGSS_help1.png[width="800"]
+Diagram 3: Enter the help command in the command box
 
-[TIP]
-A person can have any number of tags (including 0)
+image::UGSS_help2.png[width="800"]
+Diagram 4: The help guide will open up
 
-Examples:
++++ </div></details> +++
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+TIP: You can close the guide by closing it. This can be done by clicking on the X on the top right corner.
 
-=== Listing all persons : `list`
++++ <details><summary> +++
+Click here to view the screenshot on how to close the help window when open within the application
++++ </summary><div> +++
 
-Shows a list of all persons in the address book. +
+image::UGSS_help3.png[width="800"]
+Diagram 5: Click the X to close
+
++++ </div></details> +++
+
+
+// tag::add[]
+[[add]]
+=== Adding a dive session: `add`
+
+Use this command to adds your new dive session to the Dive Log.
+
+Format: `add ds/DATE_STARTED ts/TIME_DIVE_STARTED de/DATE_ENDED te/TIME_DIVE_ENDED ss/SAFETY_STOP  d/DEPTH  l/LOCATION`
+
+TIP: Words in UPPER_CASE are the parameters, items in SQUARE_BRACKETS are optional. Order of parameters are fixed as per the format above, meaning if you entered the ts/TIME_DIVE_STARTED before the ds/DATE_STARTED,
+the program will not be able to add your dive.
+
+Put a `ts/` before the time started(24 hours format - HHMM), te/time ended (24 hours format - HHMM), d/depth (in metres), l/ location (location name).
+
+_Example:_ `add ds/04082018 ts/0900 de/04082018 te/1020 ss/1015 d/15 l/Bukit Lagoon tz/+8`
+
+A list of possible command flags is shown below.
+
+.Table of Prefix and Data
+[options="header"]
+|=========================================
+|Data                                           |Prefix         |Example
+|Date started / Ended (DDMMYYYY)                |ds or de       |ds/04082018 or de/05082018
+|Time Started / Ended (HHMM)                    |ts or te       |ts/0800 or te/0900
+|Location                                       |l              |l/Sentosa
+|Depth (integer value). Depending on whether the app is set to use meters or feet, the value used will change. |d              |d/18
+|Timezone (in UTC)                              |tz             |tz/+12 or tz/-5
+|=========================================
+
+Adding a command may fail for a variety of reasons. This is to ensure your safety during dives. As a rule of thumb some reasons why a dive may not be added include:
+
+* The dive puts you outside the safety guidelines given by padi (i.e. its too deep or long).
+* The dive makes future dives too risky.
+* The dive timing overlaps with another dive.
+* Issues with the way you entered the command.
+
+An important thing to note is that your safety stop time must be between your start and end time.
+
+If for instance you enter an invalid dive, the system will tell you that you have dived to deep. Some common error messages are shown below:
+
+.Common error messages (non-exhaustive list)
+[options="header"]
+|=========================================
+|Error Messages                                                           |Cause
+|The dive overlaps with another dive. Not updating the divelog.           | There is another dive which is occuring at the same time.
+|Dive is too deep and too long!!                                          | The dive you added is too long/deep given your current plans. This message is often accompanied by advice about how you can stay safe. Please follow it.
+|Invalid date format! (Not DDMMYYYY)                                      | Date you entered is invalid. Make sure the date is in the form of DDMMYYYY
+|Invalid time format! (Not HHMM)  | Time entered is in invalid format.
+|Start and End date or time or Safety Stop Time are not in chronological order! Start Date should be earlier than End Date! Safety Stop should be between Start and End time" | You need to make sure that your start time is before your end time and safety stop comes inbetween.
+|=========================================
+// end::add[]
+
+// tag::List[]
+[[List]]
+=== Listing all dives : `list`
+
+To display all the dives that you have previously recorded, `list` shows a list of all dives in the dive log. +
+To change the manner in which your dives are ordered, view `<<sortby>>`
+
 Format: `list`
 
-=== Editing a person : `edit`
++++ <details><summary> +++
+Click here to see the screenshot for list
++++ </summary><div> +++
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+image::UGSS_list.png[width="800"]
+Diagram 6: List command
+
++++ </div></details> +++
+// end::List[]
+
+// tag::edit[]
+=== Editing a dive : `edit` [[edit]]
+
+If you made a mistake while adding a new dive, `edit` will come in handy.
+`edits` edits an existing dive session in the Dive Log. +
+The only parameters you have to input are the data of that specific dive session at `INDEX`
+
+Format: `edit INDEX [ts/TIME_START] [te/TIME_END] [ss/SAFETY_STOP_TIME] [d/DEPTH] [l/LOCATION]...`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the dive at the specified `INDEX`. The index refers to the index number shown in the displayed dive list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
+`edit 1 l/Tioman d/10`
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+NOTE: All data provided must comply to chronological order, meaning to say Date/Time Started has to be earlier than Date/Time Ended.
 
-=== Locating persons by name: `find`
+.Table of Prefix and Data
+[options="header"]
+|=========================================
+|Data                                           |Prefix         |Example
+|Date started / Ended (DDMMYYYY)                |ds or de       |ds/04082018 or de/05082018
+|Time Started / Ended (HHMM)                    |ts or te       |ts/0800 or te/0900
+|Location                                       |l              |l/Sentosa
+|Depth (integer value)                          |d              |d/18
+|Timezone (in UTC)                              |tz             |tz/+12 or tz/-5
+|=========================================
 
-Finds persons whose names contain any of the given keywords. +
+Like the `add` command, edit may fail for a variety of reasons. The same rules which apply for add apply for edit.
+For a set of reasons why an edit may fail please take a look at <<add>>.
+// end::edit[]
+
+// tag::set_units[]
+=== Setting display units `set_units` [[set_units]]
+If you're not used to the metric or imperial system, `set_units`
+switches between meters and feet. (App defaults to meters) All data displayed will be automatically and accurately converted  +
+Format: `set_units meters|feet` +
+****
+* As of v1.4 it updates both the DISPLAY units and the actual entered units.
+* The settings are not saved upon application restart.
+* Internally, we store everything in meters, as a result the xml file produced will always be in meters.
+****
+Example usage: `set_units feet`
+// end::set_units[]
+
+// tag::Find[]
+=== Locating dives by location: `find` [[find]]
+Looking for a specific dive? Use `find` to find dives whose location contain any of the given keywords that you input. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* The search is case insensitive. e.g `tioman` will match `Tioman`
+* Only the location is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find Bali` +
+Returns `Dive at Bali`
 
-=== Deleting a person : `delete`
++++ <details><summary> +++
+Click here to view the screenshot for an example of a successful find
++++ </summary><div> +++
 
-Deletes the specified person from the address book. +
+image::UGSS_find.png[width="800"]
+Diagram 7: Find command
++++ </div></details> +++
+// end::Find[]
+// tag::Delete[]
+[[Delete]]
+=== Deleting a dive : `delete`
+Deletes the specified dive from the Dive Log. +
 Format: `delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the dive at the specified `INDEX`.
+* The index refers to the index number shown in the displayed dive list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
@@ -129,19 +261,22 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
+Deletes the 2nd dive in the Dive Log.
+* `find Bali` +
 `delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st dive in the results of the `find` command.
+// end::Delete[]
 
-=== Selecting a person : `select`
-
-Selects the person identified by the index number used in the displayed person list. +
+// tag::Select[]
+=== Selecting a diveSession : `select` [[Select]]
+Selects the dive identified by the index number used in the displayed dive list. +
 Format: `select INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Selects the dive and loads the details of the dive at the specified `INDEX`.
+* The current pressure group of the start of the dive and end of the dive will be displayed.
+* The pressure group is colour-coded based on its severity for easier reference. (Green being ok, orange in danger zone and red means critical)
+* The index refers to the index number shown in the displayed diveSession list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
@@ -149,14 +284,27 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
+Selects the 2nd dive in the Dive Log.
+* `find Bali` +
 `select 1` +
-Selects the 1st person in the results of the `find` command.
+Selects the 1st dive in the results of the `find` command.
 
++++ <details><summary> +++
+Click here to view the screenshot for a successful select
++++ </summary><div> +++
+
+image::UGSS_select.png[width="800"]
+Diagram 8: Select command
+
++++ </div></details> +++
+
+// end::Select[]
+// tag::history[]
 === Listing entered commands : `history`
 
-Lists all the commands that you have entered in reverse chronological order. +
+Forgot what command you did just now and corrupted your data? Find our what command exactly did you execute
+ before you correct your data! +
+
 Format: `history`
 
 [NOTE]
@@ -164,15 +312,25 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]
-=== Undoing previous command : `undo`
++++ <details><summary> +++
+Click here to view the screenshot for a successful history command
++++ </summary><div> +++
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+image::UGSS_history.png[width="800"]
+Diagram 9: History command
+
++++ </div></details> +++
+// end::history
+// tag::undoredo[]
+
+=== Undoing previous command : `undo` [[undo]]
+The perfect solution to a slip of the finger. `undo` restores the Dive Log to the state before the previous _undoable_ command was executed. +
+
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the Dive Log's content (`add`, `delete`, `edit` and `clear` only).
 ====
 
 Examples:
@@ -192,8 +350,8 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `delete 1` command) +
 
 === Redoing the previously undone command : `redo`
-
-Reverses the most recent `undo` command. +
+Ever thought of undo-ing a `undo` command? `Redo`
+reverses the most recent `undo` command. +
 Format: `redo`
 
 Examples:
@@ -214,47 +372,267 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+// tag::clear[]
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+This command, as the name suggests, clears Dive Log of *all* your previous dive logs and
+gives you a clean start to use Dive Log again! +
+
 Format: `clear`
 
+TIP: Performed an accidental `clear` of your precious data? Use `undo` to, _you've guessed it_, undo your mistaken `clear` command to restore all your deleted dive sessions.
+    +
+     <<undo>>
+
+// end::clear[]
+// tag::currentpg[]
+=== Getting the current pressure group status and safe flight recommendation information : `currentpg`
+
+Knowing your current pressure group, the time needed to reach the next pressure group as well as to the minimum pressure group "A" is vital for divers for them to plan their dives safely. Divelog even knows if you've completed a single or repetitive dive and advises you accordingly on the time and date you can start taking a flight safely. +
+
+Format: `currentpg` +
+ Alias: `cpg` +
+
+TIP: _You'll probably know this_, but you cannot get information of your current pressure group and safe flight recommendations on dives that hasn't occurred yet - like in <<newplan>> when you're planning for future dives! Divelog takes your latest dive that you have completed into consideration automatically.
+
+// end::currentpg[]
+
+// tag::sortby[]
+=== Setting parameters to sort dives : `sortby` [[sortby]] [coming in V2.0]
+
+In V1.4, all dives are sorted automatically according to time and date by default.
+
+Want to view your dives in ranked order by different options? Simply type `sortby` followed by a `KEYWORD`,
+ your following `list`, `find` commands will return you all your dive sessions in that particular order. +
+
+Format: `sortby KEYWORD`
+WARNING: You can only use the specific keywords below.
+
+.Table of parameters available to sort by
+[options="header"]
+|=========================================
+|Parameter Type                                 |Keyword
+|Time                                           |time
+|Location (lexicographical)                     |location
+|Duration of Dive                               |duration
+|=========================================
+
+// end::sortby[]
+// tag::newplan[]
+
+=== Planning Mode : `newplan` [[newplan]] or `normalmode`
+
+The planning mode is a temporary space for you to plan trips and to simulate dives. This is especially important if you
+ are planning on a multiple day diving trip! +
+ When you enter the planning mode, simply enter simulation dives as per how you would use the other commands normally.
+
+When you exit, all your simulation files will be deleted automatically. In the Current V1.4,
+planning mode only supports `add`, `delete` and `edit` commands +
+
+Format: `newplan` to enter Planning Mode, `normalmode` to exit planning mode.
+
+TIP: When you exit the planning mode, you will return to the state before you entered.
+
+=== Port files from Planning Mode to normal mode : `portover`
+When you have finished your plan and found the perfect set of dives, simply input the `portover` command and
+the app will port all planning data into data in the normal mode.
+
+TIP: You cannot use this command in `normalmode` as there are no planning data to port over.
+// end::newplan[]
+
+// tag::exit[]
 === Exiting the program : `exit`
 
-Exits the program. +
+Finished using Dive Log? This command shuts down Dive Log, and saves your new dive session data for your next use. +
+
 Format: `exit`
+// end::exit[]
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+Worry not! Dive Log  saves all your data in the hard disk *automatically* after any command that changes the data. +
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+There is absolutely no need to save manually.
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+== About Pressure Groups and calculation in recreational diving [[pressure_groups]]
 
-== FAQ
+New to diving and to our product? Pressure groups are a crucial part of diving, as it limits the amount of time you can spend underwater. In this section, we will explain how diving and pressure groups are related.
+
+image::PADI_TableOneAndTwo.png[width="790"]
+[[Diagram_10]]Diagram 10: PADI Recreational Dive Planner, Table 1 (No Decompression Limits and Group Designation Table)
+and Table 2 (Surface Interval Credit Table) +
+ +
+ +
+
+image::PADI_TableThree.png[width="790"]
+[[Diagram_11]]Diagram 11: PADI Recreational Dive Planner, Table 3 (Repetitive Dive Timetable)
+
+The three PADI tables as shown in the above two diagrams (<<Diagram_10>> and <<Diagram_11>>) are normally physically carried along by recreational divers for them to calculate their pressure group manually.
+
+Workflow of a recreational diver who wants to check out his/her pressure group:
+
+.  For the diver's first dive of the day, the diver dives to a depth of 19 metres for 29 minutes. Referring to <<Diagram_10>>, Table 1 (No Decompression Limits and Group Designation Table),
+the diver would find the depth (19) at the top row. There is no 19 metres in the table, so the closest rounded-up value is 20 metres. He would then go down that 20m column until he finds 29 minutes,
+or the closest rounded up value which is 30 minutes. The diver will then draw his finger along the row to the left to match a character, which is "M". His new pressure group is now "M".
+|===
+|*_Try the example above_* by adding the following command into Divelog! Diver starts diving at 7am  at 19 metres depth and ends at 7:29am with a safety stop of 5 minutes. If your add is successful, you will see the following diagram 12 below in Divelog, where the diver's ending pressure group of "M" is prominently displayed.
+|add ds/12112018 ts/0700 de/12112018 te/0729 ss/0724 d/19 l/Sentosa, Singapore tz/+8
+|===
++++ <details><summary> +++
+Click here to view the screenshot for a successful add
++++ </summary><div> +++
+
+image::egDive.JPG[width="790"]
+[[Diagram_12]]Diagram 12: A successful first dive add
++++ </div></details> +++
+ +
+ +
+2.   For the diver's second and subsequent repetitive dives of the day, he would have to refer to table 3 in <<Diagram_11>> (Repetitive Dive Timetable) to find out his total bottom time. The diver wants to dive to 10 metres for 15 minutes for his second dive.
+The diver has already surfaced for three hours, which is the minimum time for any pressure group to reach the minimum "A" pressure group, as per Table 2 in <<Diagram_10>> (Surface Interval Credit Table). However, there will still be residual nitrogen in his body after three hours as long as the diver makes a dive within six hours of his previous dive, and thus he has to find out his residual nitrogen time from the previous dive.
+Finding his current pressure group "A" on the top row of Table 3, he would match the depth he wants to dive to (10m), and get the values 10 at the top (in the white area) and 209 at the bottom (in the blue area).
+10 minutes refer the Residual Nitrogen Time (RNT) and 209 minutes refer to the adjusted no decompression limits. The diver has to add the RNT value (10) to his intended/Actual Bottom Time (ABT) (15 minutes), giving a total of 25 minutes
+Total Bottom Time (TBT). Do pay special attention to this: He will only be diving for 15 minutes, however he has to account for the residual nitrogen time in his body, so his TBT is 25 minutes. Going back to Table 1 in <<Diagram_10>>, for a depth of 10 metres and 25 minutes TBT, his new pressure group would be "C".
+|===
+|*_Try the example above_* by adding the following command into Divelog! Diver ends his first dive at 7:29am and starts his second repetitive dive three hours later at 10:29am. He dives to a depth of 10 metres and ends his dive 15 minutes later, at 10:44am after a safety stop at 10:40am. If your add is successful, you will see the following diagram 13 below in Divelog, where the diver's starting pressure group after resting for three hours of "A" and his ending pressure group after the dive of "C" is prominently displayed.
+|add ds/12112018 ts/1029 de/12112018 te/1044 ss/1040 d/10 l/Sentosa, Singapore tz/+8
+|===
++++ <details><summary> +++
+Click here to view the screenshot for a successful repetitive dive add
++++ </summary><div> +++
+
+image::egDive2.JPG[width="790"]
+[[Diagram_13]]Diagram 13: A successful repetitive dive add
++++ </div></details> +++
+ +
+ +
+
+== Dive Tables Definitions Review [[definitions_review]]
+
+You may have encountered the following terms when reading this document or when using Divelog, or when learning how to use the PADI recreational dive planner. This table provides a quick reference on the definitions on the common diving terminologies used.
+
+|===
+|Diving terminologies |Definitions
+
+|Actual Bottom Time (ABT)
+|In repetitive dives, the total time actually spent under water (in minutes) from the beginning of the descent until the time the diver leaves the depth for a continuous ascent to the safety stop or the surface.
+
+|Adjusted No Decompression Limit
+|The time limit for a repetitive dive that accounts for residual nitrogen, for a particular depth. Found in <<Diagram_11>> Table 3 of the PADI dive tables, in blue. Actual Bottom Time should never exceed the adjusted no decompression limit.
+
+|Decompression Diving
+|Diving that requires planning stops during ascent to prevent decompression sickness. In recreational diving (also called no decompression diving), a decompression stop is considered an emergency procedure and is never an intentional part of the dive plan.
+
+|No Decompression Limit (NDL)
+|The maximum time that can be spent at a particular depth before decompression stops are required. Can be found in <<Diagram_10>> in Table 1, at the end of each column, in black. For instance, the NDL at 10 metres is 219 minutes.
+
+|Pressure Group
+|A letter used in the PADI Recreational Dive Planner to label the amount of theoretical residual nitrogen left in your body.
+
+|Repetitive Dive
+|A dive that is made within six hours of a previous dive. There is still a significant amount of residual nitrogen in your body. Dives that are made six hours or more after the previous dive are classified as clean (new) dives.
+
+|Residual Nitrogen
+|The difference between the normal levels of nitrogen in your body and the elevated levels of nitrogen remaining in your body after a dive.
+
+|Residual Nitrogen Time (RNT)
+|An amount of nitrogen, represented in minutes, found in <<Diagram_11>> Table 3 with a pressure group letter and a specific depth (in the white area) to be added to the actual bottom time of a dive to account for the residual nitrogen from the previous dive. For instance, if the diver's pressure group at the end of the surface interval is "B" and he intends to dive to 10 metres, his RNT is 20 minutes.
+
+|Safety Stop
+|While ascending at the end of a dive, a stop is made between 3 and 6 metres - usually 5 metres for at least three minutes, for additional safety to allow more nitrogen to leave the body. The safety stop is recommended after all dives.
+
+|Surface Interval
+|The amount of time spent on the surface (land) between two dives, usually recorded in hours:minutes (E.g. 1:05 represents 1 hour, 5 minutes.) Used in <<Diagram_10>> Table 2, to determine the diver's pressure group status after a certain time on the surface. For instance, if the diver has a pressure group of "H" after a dive, and he spends 30 minutes resting on land before his next dive, his pressure group after his rest would be "D".
+
+|Total Bottom Time (TBT)
+|The sum of Residual Nitrogen Time and Actual Bottom Time after a repetitive dive, used in <<Diagram_10>> Table 1 to determine the pressure group after a repetitive dive.
+|===
+
+
+== FAQ [[FAQ]]
+
+Below are a few Frequently Asked Questions (FAQs). If your doubts are not addressed below, please feel free to post your doubts directly on our product https://github.com/CS2113-AY1819S1-W13-2/main[Git Page^].
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Dive Log folder.
+
+*Q*: What is the purpose of having a recreational dive planner in the first place? Can't I just dive to whatever depth for as long as I want? +
+*A*: The purpose of the Recreational Dive Planner is to make all dives no decompression dives. Proper planning assures that all dives, single or repetitive, are within the no decompression limits by controlling the length of the dive, the depth of the dive, and the sur- face interval between dives.
+The Recreational Dive Planner Table is actually three tables linked together. Each of the three tables provides information for planning dives within accepted nitrogen levels.
+
+*Q*: Where can I find out more about PADI dive tables? [[PADI]] +
+*A*: The 36-page long Instructions for Use official document can be found at https://elearning.padi.com/company0/tools/RDP%20InsforUseMet.pdf[Padi's Website].
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+|===
+|Command |Command format and example
+
+|Help
+|`help`
+
+|Add
+|`add ds/DATE_STARTED ts/TIME_DIVE_STARTED de/DATE_ENDED te/TIME_DIVE_ENDED ss/SAFETY_STOP d/DEPTH l/LOCATION`
+ +
+ +
+ e.g. `add ds/04082018 ts/0900 de/04082018 te/1020 ss/1015 d/15 l/Bukit Lagoon tz/+8`
+
+|List
+| `list`
+
+|Edit
+|`edit INDEX [ds/DATE_STARTED] [ts/TIME_DIVE_STARTED] [de/DATE_ENDED] [te/TIME_DIVE_ENDED] [ss/SAFETY_STOP] [d/DEPTH] [l/LOCATION]`
+ +
+ +
+ e.g. `edit 1 d/8 l/Tioman`
+
+|Set display units
+|`set_units`
+ +
+ +
+ e.g. `set_units meters`
+
+|Find
+|`find KEYWORD [MORE_KEYWORDS]`
+ +
+ +
+ e.g.  `find Bali`
+
+|Delete
+|`delete INDEX`
+ +
+ +
+ e.g. `delete 2`
+
+|Select
+|`select INDEX`
+ +
+ +
+ e.g. `select 2`
+
+|History
+|`history`
+
+|Undo
+|`undo`
+
+|Redo
+|`redo`
+
+|Clear
+|`clear`
+
+|Current Pressure Group
+|`currentpg`
+ +
+ +
+ Alias: `cpg`
+
+|Planning mode
+|`newplan`
+
+|Normal mode
+|`normalmode`
+
+|Port planning mode to normal mode
+|`portover`
+|===

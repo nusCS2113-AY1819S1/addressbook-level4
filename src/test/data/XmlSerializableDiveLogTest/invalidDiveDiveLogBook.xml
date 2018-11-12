@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<divelog>
+    <dives>
+        <startTime>0700</startTime>
+        <safetyStop>0745</safetyStop>
+        <endTime>0800</endTime>
+        <pressureGroupAtBeginning>Otototo</pressureGroupAtBeginning>
+        <pressureGroupAtEnd>T</pressureGroupAtEnd>
+        <location>Bali</location>
+        <depthProfile>16.0</depthProfile>
+    </dives>
+</divelog>

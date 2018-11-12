@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- DiveSession with an invalid depth field -->
+<dives>
+    <startTime>0700</startTime>
+    <safetyStop>0945</safetyStop>
+    <endTime>1000</endTime>
+    <pressureGroupAtBeginning>A</pressureGroupAtBeginning>
+    <pressureGroupAtEnd>R</pressureGroupAtEnd>
+    <location>Bali</location>
+    <depthProfile>ABCF</depthProfile>
+</dives>

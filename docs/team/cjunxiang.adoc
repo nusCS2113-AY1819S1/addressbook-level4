@@ -1,0 +1,74 @@
+= Jun Xiang - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== CS2113T Project: DiveLog
+== Overview
+
+*DiveLog* is a desktop application that mainly uses CLI as a user interface. Dive Log provides a simple way for underwater divers to input details of their dives such as the time they spent at a particular depth, and the application will keep track of their nitrogen levels.
+This allows divers to plan their next trip safely.
+
+Dive Log is able to calculate accurately the diver’s current Blood Nitrogen Composition, which is used to evaluate when it will be safe to dive again, and for how long.
+
+Dive Log is based on https://github.com/nusCS2113-AY1819S1/addressbook-level4[Addressbook level 4] and is developed as part of CS2113T project requirements.
+
+== Summary of contributions
+* *Code Contributed* [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=cjunxiang&sort=displayName&since=2018-09-12&until=2018-11-02&timeframe=day&reverse=false&repoSort=true[Cjunx]]
+
+* *Major enhancement*: Implemented a *Planning Mode*
+** What it does: This feature allows users to be able to plan for future dives without the fear of corrupting their current data.
+When the users exit planning mode, the data is restored to before when entered planning mode.
+If the user wants to transfer planning data to normal mode, the user can use the `portover` command.
+** Justification: This is a major feature of the app as divers often want to plan their dives ahead of their trips. This
+also helps to prevent the instance where divers cannot board a plane ride due to too high of a Nitrogen composition in the body.
+https://www.leisurepro.com/blog/scuba-guides/flying-after-diving-how-long-should-you-wait/[<Reference>]
+** Highlights: This enhancement works across the different commands and will require understanding of every command class file
+in order to properly implement.
+* *Minor enhancement*: Created Time, OurDate parameters in a `DiveSession` and improved helper class `CompareUtils` and `parserUtil` which contain methods to handle OurDate and Time. The two parameters
+are crucial in logging a dive, and methods in CompareUtils are also crucial in calculations of Pressure Groups which is the main feature of our app. `CompareUtils`
+contain methods that are used to help calculate Pressure Group.
+
+* *Other contributions*:
+** Enhancements to existing features:
+*** Wrote tests for helper method to ensure adequate code coverage (Pull requests https://github.com/cjunxiang/main/commit/ac50bdd38ca56d40b402fc1b6b31300496bcab3b[#58], https://github.com/CS2113-AY1819S1-W13-2/main/pull/154[#154])
+
+** Documentation:
+*** [UG] Introduced tables to organise information (Cosmetics)
+    https://github.com/CS2113-AY1819S1-W13-2/main/commit/f7199ced6950cfd8d16ae3ac5a61f0ad9fd48253[#3]
+*** [UG] Tweaked the whole User Guide's tone to a more interactive and friendly guide
+    https://github.com/CS2113-AY1819S1-W13-2/main/commit/9f8e2a3e41224a95130cb3692ed1c914f9239fb7[#66] https://github.com/CS2113-AY1819S1-W13-2/main/pull/135[#135]
+
+*** [UG] Documented new commands/features
+    https://github.com/CS2113-AY1819S1-W13-2/main/commit/1a618379326d09eb35ebcbbc7deedaa75db0f4e8[#39]
+
+*** [DG] Added components pertaining to Sorting, Planning Mode & New parameters in a Dive:
+    https://github.com/CS2113-AY1819S1-W13-2/main/commit/eada8f01b85ee8827d916dc2e4fa38ed49926a38[#41]
+    https://github.com/CS2113-AY1819S1-W13-2/main/pull/139/[#139]
+    https://github.com/CS2113-AY1819S1-W13-2/main/pull/146[#146]
+
+
+** Community:
+*** PRs reviewed (examples: https://github.com/CS2113-AY1819S1-W13-2/main/pull/47[#47])
+*** Suggestions & discussions through comments on Issue trackers (examples:  https://github.com/CS2113-AY1819S1-W13-2/main/issues/17[#17])
+
+== Contributions to the User Guide
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=sortby]
+
+include::../UserGuide.adoc[tag=newplan]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=newparam]
+
+include::../DeveloperGuide.adoc[tag=sorting]
+
+include::../DeveloperGuide.adoc[tag=planning]

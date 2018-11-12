@@ -1,0 +1,24 @@
+{
+  "authors":
+  [ {
+      "githubId": "shuanang",
+      "displayName": "ANG...UAN",
+      "authorNames": ["shuanang", "Ang Yi Shuan"]
+    },
+    {
+      "githubId": "arjo129",
+      "displayName": "ARJ...RTY",
+      "authorNames": ["arjo129", "Arjo Chakravarty"]
+    },
+    {
+      "githubId": "cjunxiang",
+      "displayName": "CHE...ANG",
+      "authorNames": ["cjunxiang", "C.Junxiang", "Cjunx"]
+    },
+    {
+      "githubId": "tttaus",
+      "displayName": "TAN...NCE",
+      "authorNames": ["tttaus", "Terrence", "Unknown"]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+= Arjo - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: DiveLog
+
+== Overview
+
+DiveLog is a command line driven desktop dive log application for divers to calculate their blood nitrogen levels prior to conducting dives.
+It was built to help divers plan so as to minimise the risk of decompression sickness. The app was originally based on https://github.com/nusCS2113-AY1819S1/addressbook-level4[Addressbook level 4] and
+written as part of the requirements for NUS CS2113T in semester 1 of AY2018/2019.
+
+== Summary of contributions
+
+* *Major enhancement*: added *consistency check between dives*
+** What it does: When a dive is added or edited, one must always check whether the dive is safe to attempt or not given previous diving history.
+** Justification: If a user enters a dive that is too long, deep or makes subsequent dives unsafe he or she must be warned.
+** Highlights: This enhancement affects both the `add` and `edit` command.
+
+* *Minor enhancements*: Added a `set_units` command which makes the app switch between feet and meters,
+integrated timezones into calculations, morphed the model.
+
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=arjo129&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[RepoSense Dashboard]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
+** Enhancements to existing features:
+*** Performed initial morph of model and UI. Added the `DiveSession` object. (Pull requests https://github.com/CS2113-AY1819S1-W13-2/main/pull/1[#1], https://github.com/CS2113-AY1819S1-W13-2/main/pull/2[#2], https://github.com/CS2113-AY1819S1-W13-2/main/pull/3[#3], https://github.com/CS2113-AY1819S1-W13-2/main/pull/6[#6])
+*** Adapted old tests to make them work for the divelog. Including rewriting handles for GUI tests. (Pull request https://github.com/CS2113-AY1819S1-W13-2/main/pull/28[#28])
+*** Initial implementation of look up tables for pressuregroup calculations (Pull request https://github.com/CS2113-AY1819S1-W13-2/main/pull/38[#38])
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-W13-2/main/pull/119[#119], https://github.com/CS2113-AY1819S1-W13-2/main/pull/66[#66], https://github.com/CS2113-AY1819S1-W13-2/main/pull/125[#125], https://github.com/CS2113-AY1819S1-W13-2/main/pull/68[#68],
+*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/58[#58], https://github.com/nusCS2113-AY1819S1/forum/issues/62[#62], https://github.com/nusCS2113-AY1819S1/forum/issues/29[#29])
+*** Reported bugs and suggestions for other teams in the class (examples: https://github.com/CS2113-AY1819S1-W12-3/main/issues/152[1] , https://github.com/CS2113-AY1819S1-W12-3/main/issues/149[2], https://github.com/CS2113-AY1819S1-W12-3/main/issues/142[3])
+** Documentation:
+*** Documented a product survey in the appendix of the developer guide.
+
+== Contributions to the User Guide
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../UserGuide.adoc[tag=add]
+
+include::../UserGuide.adoc[tag=set_units]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=Design-Model]
+
+include::../DeveloperGuide.adoc[tag=lookuptable]
+
+include::../DeveloperGuide.adoc[tag=local_units]
+
+include::../DeveloperGuide.adoc[tag=CRUD]
+
+
+

@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= DiveLog - Developer Guide v.1.4
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,9 +12,16 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-W13-2/main/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team CS2113-AY1819S1-W13-2`      Since: `Aug 2018`      Licence: `MIT`
+
+//tag::intro[]
+[[intro]]
+== Context
+When a diver goes on a dive, the pressure underwater causes nitrogen to build up in the blood stream. When the diver returns to the surface, he or she has that level of nitrogen in his or her blood. However, due to the atmospheric pressure being lower than underwater, the partial pressure of nitrogen is different. Having too much nitrogen build up can be dangerous particularly if you are planning a second dive or going on a flight as the nitrogen can form bubbles inside one’s bloodstream. In order to solve this problem, divers manually calculate their “pressure groups”. The pressure groups are on a range from A, B, C all the way to Z. Depending on your pressure group you can attempt your next dive. It is generally advised to avoid ending a dive with a pressure group of "W", "X", "Y", and "Z" or you would need to have a minimum surface interval of one hour if you end with "W" or "X", and three hours if you end with "Y" or "Z".
+Before attempting your next dive, you have to plan your dive first! You want to dive to 15 metres for half an hour after your pressure group from your first dive is D. Are you sure it's safe to do so? Use our Divelog to find out!
+//end::intro[]
 
 == Setting up
 
@@ -28,11 +35,15 @@ Windows developers are highly recommended to use JDK `9`.
 
 . *IntelliJ* IDE
 +
+// tag::javafx[]
+[[JavaFXTip]]
 [NOTE]
 IntelliJ by default has Gradle and JavaFx plugins installed. +
 Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plugins` to re-enable them.
+If there is still error after enabling them, you will need to go to `File` > `Settings` > `Build, Execution, Deployment` > `Compiler` > `Java Compiler` > `Javac options` and add the following: `--add-modules=javafx.fxml`. This is illustrated by the diagram below.
 
-
+image::commandlineparameters.png[width="800"]
+// end::javafx[]
 === Setting up the project in your computer
 
 . Fork this repo, and clone the fork to your computer
@@ -49,7 +60,7 @@ This will generate all resources required by the application and tests.
 
 === Verifying the setup
 
-. Run the `seedu.address.MainApp` and try a few commands
+. Run the `seedu.divelog.MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
 
 === Configurations to do before writing code
@@ -144,15 +155,15 @@ image::LogicClassDiagram.png[width="800"]
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
 
 .Component interactions for `delete 1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+image::SDforDeleteDiveSession.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `DiveLogChangedEvent` when the Dive Session data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
 .Component interactions for `delete 1` command (part 2)
-image::SDforDeletePersonEventHandling.png[width="800"]
+image::SDforDeleteDiveSessionEventHandling.png[width="800"]
 
 [NOTE]
 Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -167,16 +178,17 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `DiveListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
 * Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* Binds itself to the data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
+Some of the choices here was choosing the type of placeholders to use like `labels` etc to store the data. Eventually it boiled down to the nature of the data and how it was to be displayed at the end of the day.
 [[Design-Logic]]
 === Logic component
 
@@ -187,16 +199,17 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `DiveLogParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+.  The command execution can affect the `Model` (e.g. adding a diveSession) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 .Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+image::DeleteDiveSessionSdForLogic.png[width="800"]
 
+//tag::Design-Model[]
 [[Design-Model]]
 === Model component
 
@@ -208,14 +221,27 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* stores the DiveLog data.
+* enforces relational rules between dive sessions (i.e Dives may not overlap). For more information on this take a look at the section on <<CRUD>>.
+* exposes an unmodifiable `ObservableList<DiveSession>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
+Some choices made here include the encapsulation of even simple values such as depth which is stored as a `DepthProfile` object.
+By doing so suppose we want to extend Depth to support complex dives with multiple depths or different units, we can simply update
+`DepthProfile` without breaking existing code. Similarly, we also decided to have `DiveSession` implement java's `Comparable` interface
+as it makes sorting the dives easier. Sorting the dives is an essential part of making sure that the dives retain their integrity.
+
+
+A rough summary of what each class does is as follows:
+[options="header"]
+|=========================================
+|Class(es)                                      | Role
+|`DiveSession`                                  | Holds data about the dives. Provides a few getters and setters.
+|`Time`, `OurDate`, `PressureGroup`, `DepthProfile`, `Location` | Encapsulates simple properties of the dives
+|`DiveSessionList`                              | Stores a list of `DiveSessions` and provides properties of the list.
+|`DiveLog`                                      | Handles updating the DiveSessionList.
+|`VersionedDiveLog`                             | Handles undo/redo feature and versioning.
+|=========================================
+//end::Design-Model[]
 
 [[Design-Storage]]
 === Storage component
@@ -228,12 +254,20 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Dive Log data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
+
+//tag::application-state[]
+==== Application State [[application-state]]
+As of now certain things that are planned in the future require global data.
+For instance, the `set_units` command. These are stored in the `ApplicationState` singleton.
+Any other temporary information that is global and stored within the run
+should be added as a property to {repoURL}/src/main/java/seedu/divelog/commons/core/ApplicationState.java[`ApplicationState.java`]
+//end::application-state[]
 
 == Implementation
 
@@ -259,23 +293,23 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th diveSession in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new diveSession. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the diveSession was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial Dive Log state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
@@ -302,11 +336,11 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire Dive Log.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the diveSession being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -319,13 +353,297 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
+// tag::lookuptable[]
+[[lookuptable]]
+=== Looking Up Dive Tables For Pressure Groups
 
-_{Explain here how the data encryption feature will be implemented}_
+At the heart of the divelog app is the ability to automatically calculate nitrogen pressure groups.
+To do so we adhere to PADI's dive charts, available here https://elearning.padi.com/company0/tools/RDP_Table%20Met.pdf. These charts provide a lookup table for divers through which they can determine
+their current pressure group. The underlying implementation for these charts can be found in the `PadiDiveTable` class.
+A such the dive tales are stored in the `resources` folder as JSON files. They are loaded using the `DiveTableUtil` class
+via the FASTXML Jackson library. The `PadiDiveTable` itself is a singleton class. This choice was made as it makes sense to
+load the Dive Tables only once at the stat into memory (although in its current form it is not the case).
 
-// end::dataencryption[]
+==== Design Considerations
 
+===== Aspect: Retrieving Dive Tables
+* **Alternative 1 (current choice):** Use JSON files
+** Pros: Easy to change data within tables.
+** Cons: May have performance issues if the tables are too large as it reads from disk.
+* **Alternative 2:** Hard code the tables
+** Pros: Have mildly smaller impact on performance as data is loaded into memory at start up.
+** Cons: Very tedious to implement, results in unreadable code.
+
+===== Aspect: Minimising File Reads And Data Duplication
+* **Alternative 1 (current choice)**: Use a singleton class
+** Pros: It is possible to read the file only once and the memory used by the objects will only exist in one place.
+This saves both memory and disc writes.
+** Cons: Can be troublesome to implement.
+* **Alternative 2: ** Just use `PADIDiveTable` standard classes
+** Pros: Easy to implement
+** Cons: Wastes memory and performs unnecessary IO.
+// end::lookuptable[]
+
+
+// tag::CRUD[]
+=== Consistency checks for `DiveSession` objects during Creation/Update
+
+At its heart, the application is a dive log. The source code for this application was adopted from an addressbook application.
+The addressbook has a relatively simple set of rules, DiveLog on the other hand has a more complicated set of rules which have to be followed.
+This is because the starting pressure group on each dive is dependent on the previous dive's end time and ending pressure group. In turn,
+the ending pressure group is dependent on the starting pressure group and depth of a dive. This poses a lot of problems as a single update
+to the system requires recalculating all subsequent dive's pressure groups. Furthermore, it is only after
+all calculations are complete that the system can make sure that the update is valid. Some possible sources of inconsistency include:
+
+* Dives with overlapping time periods - these cause problems in the chain as the PADI tables are only meant to be used by a single diver doing one dive at a time.
+* Dives that are deemed too deep and too long by PADI - we have no way of determining their nitrogen level apart from the tables.
+* Dives which cause other dives to become too dangerous. Lets say you add a dive in between two dives. This may cause the later dive to be deemed as too dangerous.
+
+At the end we have incorporated most of the code into our model. For `add` and `edit` we required atomicity thus the general flow is as follows:
+
+. Create a temporary copy of the `DiveSessionList`.
+. Perform the update/addition on this list and sort it to make calculations easier.
+. Check if there are any overlapping dives
+.. If there are overlapping dives throw `DiveOverlapsException`.
+. Recalculate pressure groups and check for consistency
+.. If not consistent throw `LimitExceededException` error.
+. Commit new `DiveSessionList` to divelog. Update `VersionedDivelog` 's current pointer.
+
+The flow can be seen in the sequence diagram below:
+
+image::ConsistencyCheckSequenceDiagram.png[width: 650px]
+
+In terms of calculations, the pressure group properties of the `DiveSession` objects themselves will mutate.
+
+==== Design Considerations
+
+Upon failure of calculations it is important that the divelog remains in a consistent state. For instance, when updating the dive log if after adding a dive we see that
+it is causing issues in the dive log, or if we edit a dive to have overlapping time periods with another dive, the divelog should roll back the latest transaction and throw an error.
+This calls for atomicity in our Create, Update and Delete. Fortunately, in our case, deleting the dive cannot actually cause a violation as it only makes the
+dives safer. Thus our design considerations could be summed up as follows:
+
+* Ensure consistency in the divelog
+* Ensure creating and Updating the divelog are atomic
+
+===== Aspect: Ensure consistency in the divelog
+* *Alternative 1*: implementing rules for consistency in `logic` module.
+** Pros: Stronger Separation of Concerns.
+** Cons: Will require duplicating code accross `AddCommand` and `EditCommand`. This will lead to inconsistent behaviour between the two and more lines of code to debug.
+
+* *Alternative 2*: implementing rules for consistency in `model` module.
+** Pros: Only one code base to debug. System will remain consistent.
+** Cons: Weaker separation of concerns than if implemented separately. Can also mean a bug effects both add and edit making the system unreliable.
+
+===== Aspect: Ensure creating and updating the divelog are atomic
+* *Alternative 1*: Creating a temporary copy of the list and mutating the copy
+** Pros: Simple to implement and fast.
+** Cons: Inefficient
+* *Alternative 2*: Having a separate data structure that only handles mutation after the edited dive.
+** Pros: Will be more efficient.
+** Cons: More code will need to be written. Since `VersionedDiveLog` already maintains copies, it is just a matter of passing the reference of the temporary dive list to the system.
+Furthermore, most divers will not have more than 100 dives. +
+// end::CRUD[]
+// tag::calculatingpg[]
+
+=== Calculating Pressure Groups
+
+The main purpose of this Divelog application is to relieve divers from the tedious task of manually calculating their pressure groups using the PADI recreational dive planners when planning for / upon completing a dive.
+
+==== Calculating a new (first) dive end pressure group
+
+As described in the activity diagram shown below, calculating the end pressure group of a new (first) dive only requires the depth and the time of the dive, and Table 1 of the PADI recreational dive planner. In the case of a new dive, the actual bottom time is equals to the total bottom time since there is no residual nitrogen in the body, and hence there is no need to know the starting pressure group since it will be "A" naturally.
+
+Two exceptions will be thrown along the way if - 1. If the depth given is beyond the scope of the recreational dive planner (i.e. 43 metres and beyond) as a dive beyond 42 metres will be a decompression dive. 2. For a valid depth, if the no decompression limit is exceeded, the dive will become a decompression dive and is out of scope of planning recreational dives.
+
+.First Dive Pressure Group Calculation Activity Diagram
+image::firstDivePgCalc.png[width="600"]
+
+==== Calculating pressure group after surface interval
+
+After finishing a dive, divers may want to go for a repetitive dive, and so they have to check for their pressure group after a certain amount of time spent on land. The activity diagram shown below shows that calculating the pressure group after a surface interval requires the end pressure group of their last dive, and the time they spent on land. If they had spent more than three hours on land, their current pressure group would reach the minimum "A". If not, then they would have to refer to Table 2 of the recreational dive planner.
+
+.Pressure Group after Surface Interval Activity Diagram
+image::surfaceIntervalPgCalc.png[width="600"]
+
+==== Calculating a repetitive dive end pressure group
+
+For a repetitive dive, the divers would need to take note of the Adjusted no decompression limit (ANDL) at the depth they intend to dive at, by taking into account their residual nitrogen time (RNT) and adding it to their total bottom time - such that the dive remains a no decompression (recreational) dive. They would then run their new total bottom time with the intended depth through the first dive pressure group calculation, to get their new pressure group.
+
+.Repetitive Dive Pressure Group Calculation Activity Diagram
+image::repetitiveDivePgCalc.png[width="600"]
+
+// end::calculatingpg[]
+// tag::planning[]
+=== New Feature: Planning Mode (with `portover` capability) [[portover]]
+From our verbal surveys with test users and from our user stories, we have decided to implement a Planning mode in order for users to plan their
+dives ahead of their trips safely without worrying about corrupting their current data. Below shows the activity diagram
+of the planning mode.
+
+.Activity Diagram for planning mode
+image::planningAD.PNG[width="600"]
+
+
+==== Design Considerations
+* **Alternative 1 (current choice)**:
+When in planning mode, a counter increments every time a command is called. In addition, there is now a state called planning mode, which shows true if in planning mode and false if in normal mode. +
+
+*** When the user chooses to exit and enter `normalmode`,
+the underlying method calls for a `undo` method and decreases the counter. This will repeat until the counter is zero, whereby then the state of the machine will change back to normal mode. +
+
+*** If the user decides to call `portover`, the counter is simply reset to 0 and the state of the machine is changed back to normal mode.
+
+*** *Pros:* Uses a method that is already present, `undo`. This means there won't be two implementations of the same method.
+*** *Cons:* The limitations of this method lie in its sole ability to handle `add`, `delete` and `edit` commands in planning mode. Any other commands are not accepted.
+
+* **Alternative 2**: Create a temporary Stack to store commands instead of just a counter. The stack is created when
+user enters planning mode, and is destroyed after exiting planning mode.
+** Pros: All types of commands can now be used in planning mode, and not just `add`, `delete` and `edit`
+** Cons: Extra implementations and considerations have to be taken into account. This might increase coupling between classes.
+// end::planning[]
+
+// tag::sorting[]
+
+=== Sorting of data
+We have considered that once a user has a considerable number of dives registered in the app, the user would potentially have difficulty finding dives,
+even with the `find` function. (as many dives can have the same parameters such as location) To simplify the app usage, this command allows for users to decide the way
+that the data shown to them is organised.
+
+==== Design Considerations
+* **Current implementation**: A sort method with a time/date comparator is called every time a new dive is added, deleted
+or edited.
+
+* **Potential improvement to the feature 1**: Add a `sortby` CLI command, which decides how to sort the data by. Potential
+additional methods are sorting by Name (alphabetical) or Duration of Dive.
+** Method to implement: +
+*Step 1:* Create a new Command[[GetStartedProgramming-RemarkCommand]] with a Command Parser that reads in the Command Prefix and a
+[KEYWORD], which will dictate the parameter to sort by. The Command and Parser file should look like below:
+
+.Command Parser File Sample
+image::sortbyparser.png[width="600"]
+
+.Command Class File Sample
+image::sortbyclass.png[width="600"]
+
+
+Optional: Create a enum with the parameters you want to sort the data by (E.g Time, Location and Duration)
+
+*_Sample Enum_* +
+_public enum SortCategory { +
+TIME, LOCATION, DURATION +
+}_
+
+*Step 2:* Create a sort method preferably in a separate utils class. This method should take in the parameter to sort by. (It will be easier and
+less prone to mistakes if Step 2 was used) The corresponding comparators should be created. The sort method should look something like b
+
+.Sort method Sample
+image::sortmethod.png[width="500"]
+
+*Step 3:* Ensure that the divelog refreshes / reflects the newly sorted. You can do this by calling for the sort
+method after every add or edit command. You can also create a new event in commons.events.
+
+** Pros: Once implemented, to increase the number of parameters / methods to sort the data by, simply create a new corresponding comparator, add the respective prefixes the parse for, and to increase the number of parameters included in the Enum file.
+** Cons: Can be troublesome to implement in the beginning.
+
+
+**Potential improvement to the feature 2**: Reverse the current order by calling `reverseorder`
+
+** Method to implement: Simply reverse the comparator in the sorting methods, where comparators are stored in
+a sample method shown in Figure 12. (above)
+** Pros: Improved usability and thus better UX.
+** Cons: Increased difficulty to maintain as the
+// end::sorting[]
+
+// tag::newparam[]
+=== New Parameters & conditions in a DiveSession
+
+==== Timezone
+Considering that users would dive in many different parts of the world, we have taken the effort to implement a Timezone parameter to ease users in adding new dives into the Dive Log without the need to convert any time to Local time. +
+We have decided to utilise the format of UTC, given its universal usage around the world. The UTC timezones range from -12 to +12, including 0. Singapore lies in the timezone of UTC+8.
+
+* **Alternative 1 (current choice)**: When calculating Pressure Groups using TimeZone, all time is converted
+to UTC time before calculating duration, and subsequently pressure groups and its resultant results.
+** Pros: There is no confusion of timezones when doing complex calculations.
+** Cons: There is a need to convert time from UTC time back to local time. If not taken care of,
+inaccurate times may be shown.
+
+* **Alternative 2: ** Adopt Java SE 9's java.time library
+** Pros: There are pre-built algorithms and methods in the library.
+** Cons: Takes time to learn and to adopt the methods, which might not be efficient for our light usage.
+
+==== Time and OurDate
+Time and OurDate are 2 of the new parameters in the Dive Log. In order to be able to calculate the Pressure Groups automatically,
+there has to be a time and date parameter. We have decided to create our own class.
+
+* **Alternative 1 (current choice)**: Use a 4 length String to contain time and 8 length String to contain date.
+** Pros: When reading in data from the `ArgumentMultimap`, it requires very little effort in parsing. Also, the use of String allows for versatile typecasting into long, int, or Java SE 7's SimpleDateFormat. Similarly, the use of String and long as main type allows for better versatility among different methods.
+** Cons: Data needs to be parsed into Java SE 8's java.date and Java SE 7's SimpleDateFormat in order to
+ calculate time differences. This means that there can potentially be many type conflicts. However, this
+  problem is contained in a helper class `CompareUtils` which handles methods like `checkTimeDifference` (returns the difference between 2 given time and date),
+   `getLocalDate`(gets the local date and time), `convertTimeToUtc`(converts given date into UTC timing) and `convertTimeToLocal`(converts a date into Local time and date).
+
+* **Alternative 2: ** Adopt Java SE 9's java.time library
+** Pros: More volatile as the library contains many ready-made solutions. Also, java.time also allows for the easy implementation of *local time*, which is one of our improvements made to AB4.
+** Cons: Takes time to learn and to adopt the methods, which might not be efficient for our light usage. Also, it will only be
+compatible with Java SE 9.
+
+// end::newparam[]
+
+
+// tag::local_units[]
+=== Localized Units
+
+As of `v1.3`, a `set_units` command was added. This allows the user to switch between meters and feet.
+As shown in the diagram below, the implementation of this command involves altering the `ApplicationState` singleton. Once the `ApplicationState`
+is updated a `UnitsChangedEvent` is posted to the `EventsCenter`. The `EventsCenter` issues a
+call to the UI. The relevant parts of the UI will be forced to re-render themselves to match
+the new units.
+
+image::setunitsSequenceDiagram.png[width=450]
+
+As of `v1.4` the `ParserUtil#parseDepthProfile(String depth)` also reads this state, and converts the units to meters.
+Internally all the units are stored as meters. This choice was largely made to keep things simple. The
+`ApplicationState` also exposes a function to get the current units setting.
+// end::local_units[]
+
+// tag::colourCode[]
+=== Colour coding of the Pressure Groups
+
+Through engagement with our test users and from our user stories, the pressure group needed to be obvious and easy to reference to
+our users, which meant that it had to stand out on the display. These pressure group would let the divers know if their dives was
+safe and how much leeway they might have in the water. As such, the `BrowserPanel` takes into the account the pressure groups that
+are supposed to be returned and adds colour to it.
+
+==== Design Considerations
+* **Current implementation**: When the pressure group returned the the `BrowserPanel` for display to the user, the colour is changed by
+changing its CSS style. The colour is chosen from green [`#0FFF0F`] to yellow [`#F5FF07`] to red [`#FF0000`]. The colour are in order
+of normal to moderate and finally, dangerous amount of nitrogen in the blood of the user or their pressure group. The colours are seen
+in the Figure 14 below.
+As seen in the implementation below (Figure 15), once the `Application State` is updated, a `selectChangedEvent` is posted to the `EventsCenter`. The
+`EventsCenter` then issues a call to check the `checkPressureGrp()` to the `BrowserPanel` and updates the CSS of the pressure group. It will
+then re-render the UI to reflect the new CSS through `getStyleClass()`.
+
+** Pros: The pressure group is clearly distinguished by its severity at one glance.
+** Cons: Not all may be able to use it. For example, users who may be colour-blind.
+
+.Colour Gradient Chart
+image::Colour_gradient.png[width="600"]
+
+.Set Colour Implementation Diagram
+image::setColourDiagram.png[width="600"]
+
+* **Alternative implementation**: Instead of changing the colour, the text font maybe increased in proportion to the severity of the pressure
+group.
+** Pros: Most people would be able to see it. If the text is very big, the warning regarding its severity will be obvious.
+** Cons: May make the UI and screen messy. Will need to have a comparision chart to compare the size to.
+
+* **Potential Improvements**: The current implementation could be combined with the alternative implementation, to make the emphasis on the
+pressure group being severe. For example, the pressure group could be in the red zone (dangerous/severe zone) and the text font would be
+increased.
+** Pros: Makes it even clearer, especially if the pressure group is at dangerous levels. Allows more users to potentially benefit from it.
+** Cons: If not properly implemented, it might end up making the UI messy.
+// end::colourCode[]
+
+// tag::Logging[]
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -344,7 +662,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 [[Implementation-Configuration]]
 === Configuration
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+Certain properties of the application can be controlled (e.g. App name, logging level) through the configuration file (default: `config.json`).
 
 == Documentation
 
@@ -484,14 +802,14 @@ We have two types of tests:
 
 .  *GUI Tests* - These are tests involving the GUI. They include,
 .. _System Tests_ that test the entire App by simulating user actions on the GUI. These are in the `systemtests` package.
-.. _Unit tests_ that test the individual components. These are in `seedu.address.ui` package.
+.. _Unit tests_ that test the individual components. These are in `seedu.divelog.ui` package.
 .  *Non-GUI Tests* - These are tests not involving the GUI. They include,
 ..  _Unit tests_ targeting the lowest level methods/classes. +
-e.g. `seedu.address.commons.StringUtilTest`
+e.g. `seedu.divelog.commons.StringUtilTest`
 ..  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
-e.g. `seedu.address.storage.StorageManagerTest`
+e.g. `seedu.divelog.storage.StorageManagerTest`
 ..  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
-e.g. `seedu.address.logic.LogicManagerTest`
+e.g. `seedu.divelog.logic.LogicManagerTest`
 
 
 === Troubleshooting Testing
@@ -508,14 +826,7 @@ See <<UsingGradle#, UsingGradle.adoc>> to learn how to use Gradle for build auto
 
 === Continuous Integration
 
-We use https://travis-ci.org/[Travis CI] and https://www.appveyor.com/[AppVeyor] to perform _Continuous Integration_ on our projects. See <<UsingTravis#, UsingTravis.adoc>> and <<UsingAppVeyor#, UsingAppVeyor.adoc>> for more details.
-
-=== Coverage Reporting
-
-We use https://coveralls.io/[Coveralls] to track the code coverage of our projects. See <<UsingCoveralls#, UsingCoveralls.adoc>> for more details.
-
-=== Documentation Previews
-When a pull request has changes to asciidoc files, you can use https://www.netlify.com/[Netlify] to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged. See <<UsingNetlify#, UsingNetlify.adoc>> for more details.
+We use https://travis-ci.org/[Travis CI] to perform _Continuous Integration_ on our projects. See <<UsingTravis#, UsingTravis.adoc>> and <<UsingAppVeyor#, UsingAppVeyor.adoc>> for more details.
 
 === Making a Release
 
@@ -532,361 +843,144 @@ A project often depends on third-party libraries. For example, Address Book depe
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
-[[GetStartedProgramming]]
-[appendix]
-== Suggested Programming Tasks to Get Started
-
-Suggested path for new programmers:
-
-1. First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <<GetStartedProgramming-EachComponent>>.
-
-2. Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <<GetStartedProgramming-RemarkCommand>> explains how to go about adding such a feature.
-
-[[GetStartedProgramming-EachComponent]]
-=== Improving each component
-
-Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).
-
-[discrete]
-==== `Logic` component
-
-*Scenario:* You are in charge of `logic`. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in order to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.
-
-[TIP]
-Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
-
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
-+
-****
-* Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
-* Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
-** Add new tests for each of the aliases that you have added.
-** Update the user guide to document the new aliases.
-** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
-****
-
-[discrete]
-==== `Model` component
-
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
-
-[TIP]
-Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
-
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
-+
-****
-* Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] API need to be updated.
-** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
-* Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each person, and remove the `tag` from each person.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
-** Add new tests for each of the new public methods that you have added.
-** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
-****
-
-[discrete]
-==== `Ui` component
-
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
-
-[TIP]
-Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
-
-. Use different colors for different tags inside person cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
-+
-**Before**
-+
-image::getting-started-ui-tag-before.png[width="300"]
-+
-**After**
-+
-image::getting-started-ui-tag-after.png[width="300"]
-+
-****
-* Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
-** Use the .css attribute `-fx-background-color` to add a color.
-** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
-* Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
-*** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
-****
-
-. Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
-+
-**Before**
-+
-image::getting-started-ui-result-before.png[width="200"]
-+
-**After**
-+
-image::getting-started-ui-result-after.png[width="200"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
-** Refer to link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
-* Solution
-** Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
-** Modify link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
-** You can write two different kinds of tests to ensure that the functionality works:
-*** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
-*** Do read the commits one at a time if you feel overwhelmed.
-****
-
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
-+
-**Before**
-+
-image::getting-started-ui-status-before.png[width="500"]
-+
-**After**
-+
-image::getting-started-ui-status-after.png[width="500"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
-* Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of persons when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
-** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of persons status bar.
-** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
-****
-
-[discrete]
-==== `Storage` component
-
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.
-
-[TIP]
-Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
-
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the address book can be saved in a fixed temporary location.
-+
-****
-* Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/XmlAddressBookStorage.java[`XmlAddressBookStorage`] class.
-* Solution
-** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
-****
-
-[[GetStartedProgramming-RemarkCommand]]
-=== Creating a new command: `remark`
-
-By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
-
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
-
-==== Description
-Edits the remark for a person specified in the `INDEX`. +
-Format: `remark INDEX r/[REMARK]`
-
-Examples:
-
-* `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first person to `Likes to drink coffee.`
-* `remark 1 r/` +
-Removes the remark for the first person.
-
-==== Step-by-step Instructions
-
-===== [Step 1] Logic: Teach the app to accept 'remark' which does nothing
-Let's start by teaching the application how to parse a `remark` command. We will add the logic of `remark` later.
-
-**Main:**
-
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
-
-**Tests:**
-
-. Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
-
-===== [Step 2] Logic: Teach the app to accept 'remark' arguments
-Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
-
-**Main:**
-
-. Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
-. Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
-
-**Tests:**
-
-. Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
-. Add `RemarkCommandParserTest` that tests different boundary values
-for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
-
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
-
-**Main:**
-
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
-
-===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
-
-**Main:**
-
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
-. Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
-
-**Tests:**
-
-. Add test for `Remark`, to test the `Remark#equals()` method.
-
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-
-**Main:**
-
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `addressBook.xml` so that the application will load the sample data when you launch it.)
-
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
-
-**Main:**
-
-. Add a new Xml field for `Remark`.
-
-**Tests:**
-
-. Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsAddressBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
-
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-
-**Tests:**
-
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the person that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
-
-===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
-
-**Main:**
-
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
-
-===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
-We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
-
-**Main:**
-
-. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a person.
-
-**Tests:**
-
-. Update `RemarkCommandTest` to test that the `execute()` logic works.
-
-==== Full Solution
-
-See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
 
 [appendix]
 == Product Scope
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing over mouse input
-* is reasonably comfortable using CLI apps
+* Is a beginner Diver
+* Goes diving frequently.
+* Has the need to keep track of Nitrogen Levels so that he/she does not end up needing to undergo decompression.
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: An automated desktop app to keep track of nitrogen levels for divers.
 
 [appendix]
 == User Stories
 
-Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`, Null (Not Implementing) - `-`
 
-[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
-|=======================================================================
-|Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
-
-|`* * *` |user |add a new person |
-
-|`* * *` |user |delete a person |remove entries that I no longer need
-
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
-
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
-
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
-|=======================================================================
-
-_{More to be added}_
-
+[cols="2,2,2,2", options="header"]
+.List of user stories
+|=========================================
+|Priority |As a... |I want to... | So that I can...
+|`* * *` |Diver |Know my current pressure group |Plan my next dive safely
+|`* * *` |Diver |Add dive entries |So that I can know my pressure group.
+|`**` |Diver |Be able to enter data in local time |Save time when calculating my pressure groups.
+|`**` |Diver |Plan my dives ahead of performing them |So that I know what a safe limit is.
+|`*` |Diver |to see where I have been |Reminisce
+|`-` |Dive master |Check my dive buddy’s logs |Make sure all of us have a safe trip
+|=========================================
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `Dive Log Application` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Add dive session
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+. Diver opens system
+. System shows him a list of dive sessions
+. Diver chooses to add a new dive session
+. System returns and requests for data from Diver
+. Diver adds time spent at different depths, marine species diver has seen
+. System confirms the details
+. Diver confirms the details
+. System adds the dive session and shows it is successful
+. Diver confirms
+. System shows recommended time to next dive or flight
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
-+
-Use case ends.
-
-* 3a. The given index is invalid.
+* 3a. The data entered is invalid. (i.e. The diver enters text instead of numeric values for depth.)
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. System points to the invalid data and asks user to clarify data.
 +
-Use case resumes at step 2.
+Use case resumes at step 3.
 
-_{More to be added}_
+[discrete]
+=== Use case: View details of a dive session
+
+*MSS*
+
+. Diver opens system
+. System shows him a list of dive sessions
+. Diver selects dive session to view details of the dive session
+. System returns the dive session details
+
+[discrete]
+=== Use case: Edit a dive session
+
+*MSS*
+
+. Diver opens system
+. System shows him a list of dive sessions
+. Diver selects dive session to edit
+. System returns the parameters of the specific dive session
+. Diver enters the new information of that dive session
+. System confirms the edit of that dive session.
+
+*Extensions*
+
+[none]
+* 5a. The data entered is invalid. (i.e. The diver enters text instead of numeric values for depth.)
++
+[none]
+** 5a1. System points to the invalid data entered and asks user to clarify data.
++
+Use case resumes at step 5.
+[none]
+* 7b. The user realizes the input is invalid. He enters undo.
++
+[none]
+** 7b1. System rolls back the last edit.
+
+=== Use case: Remove a dive session
+
+*MSS*
+
+. Diver opens system
+. System shows him a list of dive sessions
+. Diver selects the dive session to remove
+. System confirms the deletion
+. Diver confirms.
+. System removes dive session.
+
+*Extensions*
+
+[none]
+* 5a. Diver cancels.
++
+[none]
+** 5a1. System does not make any changes to current state.
++
+Use case ends here.
+
+=== Use case: Check current pressure group
+
+*MSS*
+
+. Diver opens system
+. System shows him a list of dive sessions
+. Diver requests system for his current pressure group
+. System displays his current pressure group, the time needed to the next pressure group, and the time needed for him to reach his desired pressure group as well as the recommended time to his next dive or flight.
+
 
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should be able to hold up to 1000 dive sessions without a noticeable sluggishness in performance for typical usage.
+.  Should allow users to select and view dives in addition to the command line.
+.  Should be able to calculate the pressure groups as specified by PADI’s dive table.
+.  Should have a simple tutorial walk through to orientate the users if it is their first time running the application
 
-_{More to be added}_
 
 [appendix]
 == Glossary
@@ -898,21 +992,20 @@ Windows, Linux, Unix, OS-X
 A contact detail that is not meant to be shared with others
 
 [appendix]
+//tag::product-survey[]
 == Product Survey
+A few similar products exist out there.
+Firstly, one of the team members (Arjo) uses a paper equivalent of such a dive log. This dive log records all the necessary information and provides a user with the basic safety information of the PG being provided as fields. However, the pressure group information must be hand calculated leading to error or negligence.
 
-*Product Name*
+image::paper_notebook.jpg[width="300"]
+Linus Torvalds, the benevolent dictator of the linux kernel and mastermind behind git has also created a dive log program. Linus’s program, known as Subsurface, is written in C++ and uses the Qt library allowing for cross-platform usage.
 
-Author: ...
+image::subsurface_1.png[width="300"]
+Subsurface has a comprehensive interface for entering a lot of details. It allows the user to enter things such as the depth, who the dive master was, dive buddy’s name and equipment. It also has a nice satellite map to show where you are planning the dive. The plot on the right hand side illustrates the depth. This includes the so called “safety stop” where the diver allows some of the nitrogen to be released from his bloodstream before surfacing. The plot also is capable of showing a nitrogen profile and a rough estimate of how much oxygen should be kept in reserve for each part of the dive. All of this make it a very complete product with the exception that its initial learning curve is fairly steep.
 
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
+image::subsurface_2.png[width="300"]
+When the user first opens the dive log he or she is greeted with this screen, which is not very indicative of what exactly is going on. It takes the user a few attempts to figure out how to add a dive as the add dive is nested very deep inside the menu. It also does not display the pressure group anywhere. This can be confusing for beginner divers as they rely on pressure groups to ensure their own safety.
+//end::product-survey[]
 
 [appendix]
 == Instructions for Manual Testing
@@ -928,34 +1021,30 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample dives. The window size may not be optimum.
 
-. Saving window preferences
+=== A few things to note about dives
 
-.. Resize the window to an optimum size. Move the window to a different location. Close the window.
-.. Re-launch the app by double-clicking the jar file. +
-   Expected: The most recent window size and location is retained.
+The aim of this app is to make nitrogen level calculations of a diver very natural. As such testing the app requires
+certain understanding about dives. The https://github.com/CS2113-AY1819S1-W13-2/main/blob/master/docs/UserGuide.adoc[user guide] outlines the conditions under which dives may be
+rejected from being added to the system.
 
-_{ more test cases ... }_
+=== Deleting a diveSession
 
-=== Deleting a person
+. Deleting a diveSession while all dives are listed
 
-. Deleting a person while all persons are listed
-
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all dives using the `list` command. Multiple dives in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First dive session is deleted from the list. Details of the deleted dive session shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No diveSession is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
 
 === Saving data
 
 . Dealing with missing/corrupted data files
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
+.. Data is stored in the `data/` subdirectory of the current working directory.
+.. Corrupted data will cause the application to overwrite the file.

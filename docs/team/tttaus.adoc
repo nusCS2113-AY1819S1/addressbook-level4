@@ -1,0 +1,54 @@
+= Terrence Tan - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== CS2113T Project: DiveLog
+== Overview
+
+The *DiveLog* application is a Java-based desktop application that uses the command-line interface (CLI) as its main user interface. The *DiveLog* application seeks to provide divers a simple dive log to keep track of and plan their dives. Divers are able to input details of their dives such as the duration they spent at a particular depth and location of their dives. The application will help to calculate and keep track of the pressure group that their body is in right now, so that they are more aware of themselves and plan their future dives sessions safely.
+
+The DiveLog application can accurately calculate the diver’s current pressure group, which is used to calculate when it will be safe to dive again or to go on a plane.
+
+== Summary of contributions
+* *Major enhancement*: added *the ability to display the Pressure Group in Color*
+** What it does: This allows the user to view their pressure group (starting and ending of each dive session when selected) in colour.
+** Justification: This feature improves the product significantly because a user can make a quick reference of their pressure group(s) when diving to make faster decisions for their dive planning.
+** Highlights: This enhancement has 26 different colours based on the severity of the pressure group. For example, A being the best pressure group is coloured in green, Z being the worst is coloured in red. The pressure group(s) are coloured from Green to Orange to Red.
+
+* *Minor enhancement*: Created the team's new logo and updated the names to divelog. Also, added the date time and the dive distance onto the `BrowserPanel`.
+
+* *Code Contributed* [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tttaus&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[TTTaus]]
+
+* *Other contributions*:
+
+** Documentation:
+*** [UG] Added the screenshots and introduced the hidden details to make screenshots optional for users to see.
+Pull Request https://github.com/CS2113-AY1819S1-W13-2/main/pull/78[#78]
+*** [UG] Amended the tone and grammar issues in the User Guide
+Pull Request https://github.com/CS2113-AY1819S1-W13-2/main/pull/116[#116] | https://github.com/CS2113-AY1819S1-W13-2/main/pull/145[#145]
+*** [UG] Documented the colour code of the Pressure Groups
+*** [DG] Added and updated the diagrams, architecture, logic flows:
+Pull Request https://github.com/CS2113-AY1819S1-W13-2/main/pull/56[#56]
+*** [DG] Added additional debug for Javafx for developers. Made Developer guide into using proper adoc listing format.
+Pull Request https://github.com/CS2113-AY1819S1-W13-2/main/pull/46[#46]
+
+** Community:
+*** PRs reviewed (Examples: https://github.com/CS2113-AY1819S1-W13-2/main/pull/66[#66])
+*** Suggestions & discussions through comments on Issue trackers (Examples: https://github.com/CS2113-AY1819S1-W13-2/main/pull/58[#58])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T12-2/main/issues/160[#160 for T12-2])
+
+== Contributions to the User Guide
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=Select]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=colourCode]

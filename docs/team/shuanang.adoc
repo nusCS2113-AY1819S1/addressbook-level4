@@ -1,0 +1,181 @@
+= Yi Shuan - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: DiveLor
+
+---
+
+== Overview
+
+Divelog is a command line driven desktop dive log application for divers to calculate their blood nitrogen levels prior to conducting dives, without the need of a physical PADI recreational dive planner.
+It was built to help divers plan so as to minimise the risk of decompression sickness. The app was originally based on https://github.com/nusCS2113-AY1819S1/addressbook-level4[Addressbook level 4] and
+written as part of the requirements for NUS CS2113T in semester 1 of AY2018/2019.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the logic to calculate pressure groups automatically*
+** What it does: allows the diver to relieve himself/herself of the PADI recreational diving planner by automating the calculation of his/her pressure group at any time.
+** Justification: This feature improves the product significantly because a recreational diver traditionally physically carries along the PADI recreational dive planner with him/her on dive trips. Calculating pressure groups is also error-prone as it is done manually, under the constant pressure from the sea surroundings. By automating the calculation of the pressure group for new and repetitive dives, the diver will be safer when planning for other dives than when he/she calculates it by himself/herself.
+** Highlights: This enhancement is the heart of the Divelog application, which affects the safety of the divers directly. In order to complete this function, I had to thoroughly read and understand a 36-page long document from PADI to get a complex understanding on what pressure groups are, how tedious the calculation is behind the scene, and how pressure groups affects the safety of recreational divers.  It required an in-depth analysis of the three tables in the PADI recreational diving planner, as all three of them are needed especially for repetitive dives.
+** Credits: PADI
+
+* *Minor enhancement*: added a currentpg command that allows the diver to be aware of his/her current pressure group at any time, based on his/her latest dive. The command also tells them the time needed to the next pressure group and to the minimum pressure group "A" so they can plan their next dive accordingly, as well as a safe time for them such that they can start taking a flight.
+
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=shuanang&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[RepoSense Dashboard]
+
+* *Other contributions*:
+
+** Enhancements to existing features:
+*** Did cosmetic tweaks to fully morph the existing code base to the divelog: https://github.com/CS2113-AY1819S1-W13-2/main/pull/106[#106]
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples: https://github.com/CS2113-AY1819S1-W12-3/main/issues/137[1] , https://github.com/CS2113-AY1819S1-W12-3/main/issues/114[2], https://github.com/CS2113-AY1819S1-W12-3/main/issues/108[3])
+*** Fixed a bug for a team member, which critically affected the previous releases: https://github.com/CS2113-AY1819S1-W13-2/main/pull/107[#107]
+** Documentation:
+*** Documented the definitions of the common diving terminologies used, so that people working on the project would understand the terms
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+=== Getting the current pressure group status and safe flight recommendation information : `currentpg`
+
+Knowing your current pressure group, the time needed to reach the next pressure group as well as to the minimum pressure group "A" is vital for divers for them to plan their dives safely. Divelog even knows if you've completed a single or repetitive dive and advises you accordingly on the time and date you can start taking a flight safely. +
+
+Format: `currentpg` +
+ Alias: `cpg` +
+
+TIP: _You'll probably know this_, but you cannot get information of your current pressure group and safe flight recommendations on dives that hasn't occurred yet - like in <<newplan>> when you're planning for future dives! Divelog takes your latest dive that you have completed into consideration automatically.
+
+== About Pressure Groups and calculation in recreational diving [[pressure_groups]]
+
+New to diving and to our product? Pressure groups are a crucial part of diving, as it limits the amount of time you can spend underwater. In this section, we will explain how diving and pressure groups are related.
+
+image::PADI_TableOneAndTwo.png[width="790"]
+[[Diagram_10]]Diagram 10: PADI Recreational Dive Planner, Table 1 (No Decompression Limits and Group Designation Table)
+and Table 2 (Surface Interval Credit Table) +
+ +
+ +
+
+image::PADI_TableThree.png[width="790"]
+[[Diagram_11]]Diagram 11: PADI Recreational Dive Planner, Table 3 (Repetitive Dive Timetable)
+
+The three PADI tables as shown in the above two diagrams (<<Diagram_10>> and <<Diagram_11>>) are normally physically carried along by recreational divers for them to calculate their pressure group manually.
+
+Workflow of a recreational diver who wants to check out his/her pressure group:
+
+.  For the diver's first dive of the day, the diver dives to a depth of 19 metres for 29 minutes. Referring to <<Diagram_10>>, Table 1 (No Decompression Limits and Group Designation Table),
+the diver would find the depth (19) at the top row. There is no 19 metres in the table, so the closest rounded-up value is 20 metres. He would then go down that 20m column until he finds 29 minutes,
+or the closest rounded up value which is 30 minutes. The diver will then draw his finger along the row to the left to match a character, which is "M". His new pressure group is now "M".
+|===
+|*_Try the example above_* by adding the following command into Divelog! Diver starts diving at 7am  at 19 metres depth and ends at 7:29am with a safety stop of 5 minutes. If your add is successful, you will see the following diagram 12 below in Divelog, where the diver's ending pressure group of "M" is prominently displayed.
+|add ds/12112018 ts/0700 de/12112018 te/0729 ss/0724 d/19 l/Sentosa, Singapore tz/+8
+|===
++++ <details><summary> +++
+Click here to view the screenshot for a successful add
++++ </summary><div> +++
+
+image::egDive.JPG[width="790"]
+[[Diagram_12]]Diagram 12: A successful first dive add
++++ </div></details> +++
+ +
+ +
+2.   For the diver's second and subsequent repetitive dives of the day, he would have to refer to table 3 in <<Diagram_11>> (Repetitive Dive Timetable) to find out his total bottom time. The diver wants to dive to 10 metres for 15 minutes for his second dive.
+The diver has already surfaced for three hours, which is the minimum time for any pressure group to reach the minimum "A" pressure group, as per Table 2 in <<Diagram_10>> (Surface Interval Credit Table). However, there will still be residual nitrogen in his body after three hours as long as the diver makes a dive within six hours of his previous dive, and thus he has to find out his residual nitrogen time from the previous dive.
+Finding his current pressure group "A" on the top row of Table 3, he would match the depth he wants to dive to (10m), and get the values 10 at the top (in the white area) and 209 at the bottom (in the blue area).
+10 minutes refer the Residual Nitrogen Time (RNT) and 209 minutes refer to the adjusted no decompression limits. The diver has to add the RNT value (10) to his intended/Actual Bottom Time (ABT) (15 minutes), giving a total of 25 minutes
+Total Bottom Time (TBT). Do pay special attention to this: He will only be diving for 15 minutes, however he has to account for the residual nitrogen time in his body, so his TBT is 25 minutes. Going back to Table 1 in <<Diagram_10>>, for a depth of 10 metres and 25 minutes TBT, his new pressure group would be "C".
+|===
+|*_Try the example above_* by adding the following command into Divelog! Diver ends his first dive at 7:29am and starts his second repetitive dive three hours later at 10:29am. He dives to a depth of 10 metres and ends his dive 15 minutes later, at 10:44am after a safety stop at 10:40am. If your add is successful, you will see the following diagram 13 below in Divelog, where the diver's starting pressure group after resting for three hours of "A" and his ending pressure group after the dive of "C" is prominently displayed.
+|add ds/12112018 ts/1029 de/12112018 te/1044 ss/1040 d/10 l/Sentosa, Singapore tz/+8
+|===
++++ <details><summary> +++
+Click here to view the screenshot for a successful repetitive dive add
++++ </summary><div> +++
+
+image::egDive2.JPG[width="790"]
+[[Diagram_13]]Diagram 13: A successful repetitive dive add
++++ </div></details> +++
+ +
+ +
+
+== Dive Tables Definitions Review [[definitions_review]]
+
+You may have encountered the following terms when reading this document or when using Divelog, or when learning how to use the PADI recreational dive planner. This table provides a quick reference on the definitions on the common diving terminologies used.
+
+|===
+|Diving terminologies |Definitions
+
+|Actual Bottom Time (ABT)
+|In repetitive dives, the total time actually spent under water (in minutes) from the beginning of the descent until the time the diver leaves the depth for a continuous ascent to the safety stop or the surface.
+
+|Adjusted No Decompression Limit
+|The time limit for a repetitive dive that accounts for residual nitrogen, for a particular depth. Found in <<Diagram_11>> Table 3 of the PADI dive tables, in blue. Actual Bottom Time should never exceed the adjusted no decompression limit.
+
+|Decompression Diving
+|Diving that requires planning stops during ascent to prevent decompression sickness. In recreational diving (also called no decompression diving), a decompression stop is considered an emergency procedure and is never an intentional part of the dive plan.
+
+|No Decompression Limit (NDL)
+|The maximum time that can be spent at a particular depth before decompression stops are required. Can be found in <<Diagram_10>> in Table 1, at the end of each column, in black. For instance, the NDL at 10 metres is 219 minutes.
+
+|Pressure Group
+|A letter used in the PADI Recreational Dive Planner to label the amount of theoretical residual nitrogen left in your body.
+
+|Repetitive Dive
+|A dive that is made within six hours of a previous dive. There is still a significant amount of residual nitrogen in your body. Dives that are made six hours or more after the previous dive are classified as clean (new) dives.
+
+|Residual Nitrogen
+|The difference between the normal levels of nitrogen in your body and the elevated levels of nitrogen remaining in your body after a dive.
+
+|Residual Nitrogen Time (RNT)
+|An amount of nitrogen, represented in minutes, found in <<Diagram_11>> Table 3 with a pressure group letter and a specific depth (in the white area) to be added to the actual bottom time of a dive to account for the residual nitrogen from the previous dive. For instance, if the diver's pressure group at the end of the surface interval is "B" and he intends to dive to 10 metres, his RNT is 20 minutes.
+
+|Safety Stop
+|While ascending at the end of a dive, a stop is made between 3 and 6 metres - usually 5 metres for at least three minutes, for additional safety to allow more nitrogen to leave the body. The safety stop is recommended after all dives.
+
+|Surface Interval
+|The amount of time spent on the surface (land) between two dives, usually recorded in hours:minutes (E.g. 1:05 represents 1 hour, 5 minutes.) Used in <<Diagram_10>> Table 2, to determine the diver's pressure group status after a certain time on the surface. For instance, if the diver has a pressure group of "H" after a dive, and he spends 30 minutes resting on land before his next dive, his pressure group after his rest would be "D".
+
+|Total Bottom Time (TBT)
+|The sum of Residual Nitrogen Time and Actual Bottom Time after a repetitive dive, used in <<Diagram_10>> Table 1 to determine the pressure group after a repetitive dive.
+|===
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+=== Calculating Pressure Groups
+
+The main purpose of this Divelog application is to relieve divers from the tedious task of manually calculating their pressure groups using the PADI recreational dive planners when planning for / upon completing a dive.
+
+==== Calculating a new (first) dive end pressure group
+
+As described in the activity diagram shown below, calculating the end pressure group of a new (first) dive only requires the depth and the time of the dive, and Table 1 of the PADI recreational dive planner. In the case of a new dive, the actual bottom time is equals to the total bottom time since there is no residual nitrogen in the body, and hence there is no need to know the starting pressure group since it will be "A" naturally.
+
+Two exceptions will be thrown along the way if - 1. If the depth given is beyond the scope of the recreational dive planner (i.e. 43 metres and beyond) as a dive beyond 42 metres will be a decompression dive. 2. For a valid depth, if the no decompression limit is exceeded, the dive will become a decompression dive and is out of scope of planning recreational dives.
+
+.First Dive Pressure Group Calculation Activity Diagram
+image::firstDivePgCalc.png[width="600"]
+
+==== Calculating pressure group after surface interval
+
+After finishing a dive, divers may want to go for a repetitive dive, and so they have to check for their pressure group after a certain amount of time spent on land. The activity diagram shown below shows that calculating the pressure group after a surface interval requires the end pressure group of their last dive, and the time they spent on land. If they had spent more than three hours on land, their current pressure group would reach the minimum "A". If not, then they would have to refer to Table 2 of the recreational dive planner.
+
+.Pressure Group after Surface Interval Activity Diagram
+image::surfaceIntervalPgCalc.png[width="600"]
+
+==== Calculating a repetitive dive end pressure group
+
+For a repetitive dive, the divers would need to take note of the Adjusted no decompression limit (ANDL) at the depth they intend to dive at, by taking into account their residual nitrogen time (RNT) and adding it to their total bottom time - such that the dive remains a no decompression (recreational) dive. They would then run their new total bottom time with the intended depth through the first dive pressure group calculation, to get their new pressure group.
+
+.Repetitive Dive Pressure Group Calculation Activity Diagram
+image::repetitiveDivePgCalc.png[width="600"]
