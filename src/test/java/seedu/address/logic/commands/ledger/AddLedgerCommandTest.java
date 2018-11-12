@@ -25,10 +25,10 @@ import seedu.address.model.ledger.Ledger;
 import seedu.address.model.member.Person;
 import seedu.address.model.tag.Tag;
 
-import seedu.address.testutil.LedgerBuilder;
-
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+
+import seedu.address.testutil.LedgerBuilder;
 
 
 public class AddLedgerCommandTest {
