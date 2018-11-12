@@ -40,9 +40,6 @@ Thus you are freed from the pains of finding a common free slot in huge groups.
 == Summary of contributions
 In this section, I would be briefly telling you about my contributions to this project, and any interesting points that you could find useful.
 
-
-GIVE THE REASON WHY. USE LONGER SENTENCE BELOW
-
 * *Major enhancement*: Added *the ability to authenticate users* within _FreeTime_
 ** What it does: Allows the users to have unique access and control to his own timetable
 ** Justification: To be able to prevent others from editing your own timetable, and to facilitate different privacy levels.

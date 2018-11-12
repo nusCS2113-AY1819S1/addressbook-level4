@@ -551,7 +551,7 @@ thrown with the relevant message to the user.
 .Interactions between the UI Component and Security Component for the login Command
 image::SecurityLoginSequenceDiagram.png[width="800"]
 
-The figure above shows the steps when login is called after Figure 19 has completed (since login is a command too).
+The figure above shows the steps when login is called after parsing the command (since login is a command too).
 
 AppUsers contains an array of
 AccountCredentials, which has the attribute of Username and Password, and methods such isPasswordValid(). Here it also
@@ -1052,7 +1052,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Logging in with a test account
 
-.. Test case: `login u\test pw\test` +
+.. Test case: `login u/test pw/test` +
    Expected: The login is successful and the main GUI appears. The `Me` panel should show a person card panel with `test` in the name field.
 
 . Registering a new account
