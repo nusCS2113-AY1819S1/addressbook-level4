@@ -164,15 +164,17 @@ Note how the event is propagated through the `EventsCenter` to the `Storage` and
 
 The sections below give more details of each component.
 
+// tag::ui[]
 [[Design-Ui]]
 === UI component
 
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
+// end::ui[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `LedgerListPanel`, `EventListPanel`, `ItemListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -222,11 +224,13 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
+// tag::storage[]
 [[Design-Storage]]
 === Storage component
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
+// end::storage[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
@@ -303,16 +307,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 image::UndoRedoActivityDiagram.png[width="650"]
 
-// tag::undoallredoall[]
-Step 7. The user executes many `add`, `delete`, and `clear` commands over a couple of hours, but decides at the end of the day that he does not want all the changes. He decides to undo all the changes by executing the `undoAll` command. The 'undoAll' command will call 'Model#undoAllAddressBook(), which will shift the 'currentStatePointer' to the start of the `addressBookStateList`, pointing it to the original address book state, and restores the address book to that state.
-
-image::UndoRedoExecuteUndoAllStateListDiagram.png[width="800"]
-
-Step 8. The user decides again that he wants all the changes after all, and decides to execute the `redoAll` command. `Model#redoAllAddressBook()` is called, shifts the currentStatePointer to the end of `addressBookStateList`, pointing to the furthest undone state, and restores the address book to that state.
-
-image::UndoRedoExecuteRedoAllStateListDiagram.png[width="800"]
-// end::undoallredoall[]
-
 ==== Design Considerations
 
 ===== Aspect: How undo & redo executes
@@ -333,6 +327,19 @@ image::UndoRedoExecuteRedoAllStateListDiagram.png[width="800"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
+
+// tag::undoallredoall[]
+=== UndoAll/RedoAll feature
+==== Extension of Undo/Redo feature
+
+Step 1. The user executes many `add`, `delete`, and `clear` commands over a couple of hours, but decides at the end of the day that he does not want all the changes. He decides to undo all the changes by executing the `undoAll` command. The 'undoAll' command will call 'Model#undoAllAddressBook(), which will shift the 'currentStatePointer' to the start of the `addressBookStateList`, pointing it to the original address book state, and restores the address book to that state.
+
+image::UndoRedoExecuteUndoAllStateListDiagram.png[width="800"]
+
+Step 2. The user decides again that he wants all the changes after all, and decides to execute the `redoAll` command. `Model#redoAllAddressBook()` is called, shifts the currentStatePointer to the end of `addressBookStateList`, pointing to the furthest undone state, and restores the address book to that state.
+
+image::UndoRedoExecuteRedoAllStateListDiagram.png[width="800"]
+// end::undoallredoall[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -360,6 +367,48 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+
+===  Member
+* As of V1.4, the commands related to the member component that are fully functional are:
+addmember, editmember, find, findmajor, findphone, findpostalcode and delete.
+
+==== Add/Remove member feature
+
+The add/remove mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` model with an Addmember
+and Delete method.
+
+* `AddressBook#addPerson()` -- Adds a member object to the UniquePersonList.
+* `AddressBook#removePerson()` -- Removes a member object from the UniquePersonList.
+
+These operations are exposed in the `Model` interface as `Model#addPerson` and `Model#deletePerson` respectively.
+
+Below is a scenario of how a user adds a member into Clubhub.
+
+Step 1. The user inputs the command addmember n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/POSTALCODE m/MAJOR [t/TAG]
+into the command box.
+
+Step 2. The commandBox ui will then create a Logic object which parses the command to ascertain that it is an addmember
+command.
+
+Step 3. The AddressBookParser will then parse the command to create a new addmemberParser object.
+
+Step 4. This AddCommandParser will parse the arguments of the command line and create a new AddPerson object.
+
+Step 5. This will then be put into the model, into the versioned address book.
+
+The Member class creates an object that instantiates name, phone, email, postalcode, major, email and tag objects.
+These multiple member objects created will be stored in a UniquePersonList, where the uniqueness of every member depends
+on their names, phone number and email address. It will detect the entry as unique if it has different name or
+different phone number or email address.
+
+This uniqueness check is obtained through the use of the object `getName()`, `getPhone()` and `getEmail()`
+method in `Person`
+
+Remove and edit member uses the similar concept and procedure but starts with looking for the Member in the
+UniquePersonList instead.
+
+==== Find by name, major, phone and postalcode feature
+
 
 === Events
 
@@ -447,18 +496,6 @@ themselves. +
 This is done by implementing a `for` loop to loop through the `UniqueLedgerList` to get the
 date of the ledgers in the list, comparing them to find one to edit.
 
-===  Member
-* As of V1.2, member adding and deleting functionality have been added.
-* Under logic -> commands, there is a new package named "MemberCommand".
-* AddMember : adds member from storage
-* DeleteMember: delete member storage
-* EditMember: edit member details present in storage
-* Also, Member model now contains 6 arguments: name, phonenumber, email, address and major.
-* There is a separate parser package for member functions which helps to segment the different arguments
-that the member model has.
-* The segmentation of the arguments allow for them to be used individually when needed.
-
-// tag::itemlist[]
 === ItemList
 ==== Current Implementation
 

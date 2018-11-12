@@ -158,6 +158,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removePerson(Person key) {
+        persons.remove(key);
+    }
+    /**
      * remove an event.
      * @param event
      */
@@ -235,14 +242,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void updateItem(Item target, Item editedItem) {
         requireNonNull(editedItem);
         items.setItem(target, editedItem);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removePerson(Person key) {
-        persons.remove(key);
     }
 
     /**
