@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.Command.MESSAGE_LOGIN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 
 import static seedu.address.testutil.LostandFoundFeatureTest.getExpectedCommandResult;
-import static seedu.address.testutil.LostandFoundFeatureTest.getExpectedFoundItems;
 import static seedu.address.testutil.LostandFoundFeatureTest.getExpectedLostItems;
 import static seedu.address.testutil.LostandFoundFeatureTest.getExpectedMessageOutput;
 import static seedu.address.testutil.LostandFoundFeatureTest.getStockList;
