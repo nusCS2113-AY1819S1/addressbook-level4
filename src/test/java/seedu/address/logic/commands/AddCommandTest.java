@@ -264,6 +264,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateEvent(Event target, Event editedEvent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void commitEventBook() {
             throw new AssertionError("This method should not be called.");
         }

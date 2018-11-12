@@ -1,0 +1,49 @@
+= Ian Tjahjono - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Role: Developer
+
+Responsibilities: Developing, testing, events
+
+== PROJECT: Student Planner
+
+---
+
+== Overview
+
+Student Planner is a all-in-one desktop manager application that allows students to manage their contacts, tasks, events and expenses. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: Added *Events management*
+** What it does: Allows the user to manage their events.
+** Justification: This feature allows the user to keep track of new and existing events. Being a student with a busy schedule, he/she may not be able to keep track of all of his/her events, hence this feature will
+help them access their event schedule with just a few commands.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=ian-tjahjono[Overview]]
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=events]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=events]
+
+
+**************************************************
+* Note: Manual Testing portion below
+**************************************************
+include::../DeveloperGuide.adoc[tag=manualTestEvents]
+

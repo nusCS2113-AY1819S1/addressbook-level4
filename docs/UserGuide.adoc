@@ -1,4 +1,4 @@
-= Student Planner - User Guide
+﻿= Student Planner - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -473,6 +473,71 @@ Deletes the 2nd task from the task book.
 // end::tasks[]
 //@@author
 
+//@@author ian-tjahjono
+// tag::events[]
+=== Adding an event : `addEvent`
+
+Adds an event to the event book +
+Format: `addEvent n/NAME s/EVENT DATE t/EVENT TIME [c/CONTACT]...`
+
+****
+* `NAME` can contain any number of alphanumeric characters and spaces.
+* `DATE` must be of the format DD/MM/YYYY.
+* `TIME` must be 4 digits long in the 24-Hour format, eg. 1030.
+* A new event will be added to the bottom of the event book, and displayed at the bottom of the events panel.
+****
+
+[TIP]
+An event can have any number of contacts (including 0).
+
+Examples:
+* `addEvent n/Dinner s/11/11/2018 t/1900 c/Alex`
+* `addEvent n/Secondary school meetup s/24/10/2018 t/1200 `
+
+=== Deleting an event : `deleteEvent`
+
+Deletes an event from the event book +
+Format: `deleteEvent INDEX`
+
+****
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+* `deleteEvent 1`
+
+=== Clearing the event book : `clearEvent`
+
+Clears the entire event book +
+Format: `clearEvent`
+
+****
+* Clears the entire event book and creates a new instance of event book with no entries
+****
+
+=== Editing an event : `editEvent`
+
+Edits specific details of the event +
+Format: `editEvent INDEX [n/EVENT NAME] [s/EVENT DATE] [t/EVENT TIME] [c/EVENT CONTACTS]...`
+
+****
+* Edits an event at the specified `INDEX`
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+[TIP]
+An edit must consist of at least 1 parameter to edit.
+
+Examples:
+* `editEvent 2 t/1900`
+* `editEvent 1 n/Watch The Incredibles t/1800`
+
+// end::events[]
+//@@author
+
 === Saving the data
 
 Schedule planner data are saved in the hard disk automatically after any command that changes the data. +
@@ -601,4 +666,13 @@ e.g. `updateTask 2`
 * *DeleteTask* : `deleteTask INDEX` +
 e.g. `deleteTask 2 `
 //@@author
-
+//@@author ian-tjahjono
+* *AddEvent* : `addEvent n/NAME s/EVENT DATE t/EVENT TIME [c/EVENT CONTACTS]...` +
+e.g. `addEvent n/Movie s/18/10/2018 t/1800 c/John`
+* *DeleteEvent* : `deleteEvent`
+e.g. `deleteEvent 1`
+* *EditEvent* : `editEvent INDEX [n/NAME] [s/EVENT DATE] [t/EVENT TIME] [c/EVENT CONTACTS]...` +
+e.g. `editEvent 1 t/1800`
+* *ClearEvent* : `clearEvent` +
+e.g. `clearEvent`
+//@@author

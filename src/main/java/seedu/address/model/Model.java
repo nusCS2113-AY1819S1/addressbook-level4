@@ -21,6 +21,7 @@ public interface Model {
     //@@author luhan02
     /** {@code Predicate} that always evaluate to true */
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+    //@@author
 
     //@@author ian-tjahjono
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
@@ -186,6 +187,12 @@ public interface Model {
      */
     void addEvent(Event event);
 
+    /**
+     * Replaces the given expense {@code target} with {@code editedExpense}.
+     * {@code target} must exist in the expense book.
+     */
+    void updateEvent(Event target, Event editedEvent);
+
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 
@@ -202,9 +209,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+    //@@author
 
     //@@author ChenSongJian
-
     /** Returns the ExpenseBook */
     ReadOnlyExpenseBook getExpenseBook();
 

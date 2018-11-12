@@ -434,8 +434,6 @@ public class ModelManager extends ComponentManager implements Model {
         versionedTaskBook.commit();
     }
 
-    //@@author
-
     //@@author ian-tjahjono
     //==================Events=====================================================
     @Override
@@ -465,6 +463,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteEvent(Event target) {
         versionedEventBook.removeEvent(target);
+        indicateEventBookChanged();
+    }
+
+    @Override
+    public void updateEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        versionedEventBook.updateEvent(target, editedEvent);
         indicateEventBookChanged();
     }
 
@@ -508,6 +514,7 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
+    //@@author
 
     //@@author ChenSongJian
     //=========== Expense =================================================================================

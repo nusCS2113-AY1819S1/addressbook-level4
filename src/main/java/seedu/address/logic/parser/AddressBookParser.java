@@ -20,6 +20,7 @@ import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.DeleteExpenseCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditExpenseCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExpenseTrendCommand;
@@ -144,6 +145,11 @@ public class AddressBookParser {
 
         case DeleteEventCommand.COMMAND_WORD:
             return new DeleteEventCommandParser().parse(arguments);
+
+        case EditEventCommand.COMMAND_WORD:
+            return new EditEventCommandParser().parse(arguments);
+
+        //@@author
 
         //@@author ChenSongJian
         case AddExpenseCommand.COMMAND_WORD:

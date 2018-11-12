@@ -1293,6 +1293,32 @@ Use case ends.
 +
 Use case ends.
 
+//@@author ian-tjahjono
+// tag::events[]
+=== Use case: Add Event (UC10)
+
+*MSS*
+
+1.  User requests to add an event
+2.  StudentPlanner adds new event with given details
++
+Use case ends.
+
+*Extensions*
+
+* 2a. A similar event exists
+[none]
+** 2a1. StudentPlanner prompts user that a similar event exists. Event is not added.
++
+Use case ends.
+* 2b. Insufficient or Invalid details provided.
+[none]
+** 2b1. StudentPlanner shows required command format to user. Event is not added.
++
+Use case ends.
+// end::events[]
+//@@author
+
 //@@author ChenSongJian
 [discrete]
 === Use case: Add Expense(UC11)
@@ -1315,50 +1341,6 @@ Use case ends.
 //@@
 
 [discrete]
-=== Use case: Add Event (UC10)
-
-*MSS*
-
-1.  User requests to add an event
-2.  StudentPlanner adds new event with given details
-+
-Use case ends.
-
-*Extensions*
-
-* 2a. A similar event exists
-[none]
-** 2a1. StudentPlanner prompts user that a similar event exists. Event is not added.
-+
-Use case ends.
-* 2b. Insufficient or Invalid details provided.
-[none]
-** 2b1. StudentPlanner shows required command format to user. Event is not added.
-+
-Use case ends.
-
-[discrete]
-=== Use case: Add Event (UC10)
-
-*MSS*
-
-1.  User requests to add an event
-2.  StudentPlanner adds new event with given details
-+
-Use case ends.
-
-*Extensions*
-
-* 2a. A similar event exists
-[none]
-** 2a1. StudentPlanner prompts user that a similar event exists. Event is not added.
-+
-Use case ends.
-* 2b. Insufficient or Invalid details provided.
-[none]
-** 2b1. StudentPlanner shows required command format to user. Event is not added.
-+
-Use case ends.
 
 _{More to be added}_
 
@@ -1625,3 +1607,48 @@ _{ more test cases ... }_
 .. Test case: Other incorrect monthly expense commands to try: `monthlyExpense`, `monthlyExpense 5/2018` +
    Expected: same as the previous test case
 // end::manualTestMonthlyExpense[]
+
+//@@author ian-tjahjono
+// tag::manualTestEvents[]
+
+=== Adding a new event
+
+. Adding a new event to the event book
+
+.. Prerequisites: The event must not already exist in student planner
+.. Test case: `addEvent n/Watch Avengers 4 movie s/26/05/2018 t/1700 c/John` +
+   Expected: A new event is added to the event book panel, and a success message will show on the results display panel.
+.. Test case: `addEvent n/Watch Avengers 4 movie t/1700 c/John ` +
+   Expected: No event is added and error details will be shown on the result display panel.
+
+=== Deleting an event
+
+. Deletes an event from the event book
+
+.. Prerequisites: The event book must not be empty
+.. Test case: `deleteEvent 1` +
+   Expected: The first event in the event book will be deleted and the first entry on the events panel will disappear.
+.. Test case: `deleteEvent 0` +
+   Expected: No event is deleted and an error message will be displayed on the results display panel.
+.. Test case: (If event book has only 1 event) `deleteEvent 2` +
+   Expected: No event is deleted and an error message will be displayed on the results display panel.
+
+=== Editing an event
+
+. Edits certain parameters of an event
+
+.. Prerequisites: The event book must not be empty
+.. Test case: `editEvent 1 t/1900` +
+   Expected: The time of the first event in the event book will be changed to "1900" and the time of the first event entry in the events panel will be changed to 1900.
+.. Test case: `editEvent 2` +
+   Expected: No event is edited and an error message will be displayed on the results display panel.
+
+=== Clearing an event
+
+. Clears the entire event book
+
+.. Test case: `clearEvent` +
+   Expected: The event book will be cleared and the events panel will not show any entries
+
+// end::manualTestEvents[]
+//@@author

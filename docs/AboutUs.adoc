@@ -31,7 +31,7 @@ Responsibilities: UI
 
 === Ian Tjahjono
 image::ian-tjahjono.png[width="150", align="left"]
-{empty}[http://github.com/ian-tjahjono[github]]
+{empty}[http://github.com/ian-tjahjono[github]][<<ian-tjahjono#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data

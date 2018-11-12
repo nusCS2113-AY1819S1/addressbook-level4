@@ -4,6 +4,10 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * Represents an event's date in the Student Planner.
  * Guarantees: immutable;
@@ -12,8 +16,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Date {
 
     public static final String MESSAGE_EVENT_DATE_CONSTRAINTS =
-            "Event date should only contain numbers, and it should be 8 digits long in DDMMYYYY format";
-    public static final String DATE_VALIDATION_REGEX = "\\d{8}";
+            "Event date should be in the DD/MM/YYYY format";
     public final String value;
 
     /**
@@ -31,7 +34,18 @@ public class Date {
      * Returns true if a given string is a valid event date.
      */
     public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
+        String pattern = "dd/MM/yyyy";
+        if (test.length() != pattern.length()) {
+            return false;
+        }
+        DateFormat eventDate = new SimpleDateFormat(pattern);
+        eventDate.setLenient(false);
+        try {
+            eventDate.parse(test);
+            return true;
+        } catch (ParseException pe) {
+            return false;
+        }
     }
 
     @Override

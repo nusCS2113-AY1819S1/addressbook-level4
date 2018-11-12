@@ -26,9 +26,9 @@ public class AddEventCommand extends Command {
             + "[" + PREFIX_CONTACT + "CONTACT]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Watch Avengers 4 movie "
-            + PREFIX_START + "26052019 "
+            + PREFIX_START + "26/05/2018 "
             + PREFIX_TIME + "1700 "
-            + PREFIX_CONTACT + "John";
+            + PREFIX_CONTACT + "John ";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the task list";

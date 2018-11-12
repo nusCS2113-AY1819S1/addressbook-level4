@@ -113,18 +113,14 @@ public class SampleDataUtil {
     //================Events===============================
     public static Event[] getSampleEvent() {
         return new Event[] {
-            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
-                    getEventContactSet("John")),
-            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
-                    getEventContactSet("John")),
-            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
-                    getEventContactSet("John")),
-            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
-                    getEventContactSet("John")),
-            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
-                    getEventContactSet("John")),
-            new Event(new EventName("Watch Movie"), new Date("10022008"), new Time("1111"),
-                    getEventContactSet("John"))
+            new Event(new EventName("Watch Movie"), new Date("10/02/2018"), new Time("1500"),
+                    getEventContactSet("John ")),
+            new Event(new EventName("Dinner with class"), new Date("22/05/2018"), new Time("1900"),
+                    getEventContactSet("S421 ")),
+            new Event(new EventName("Carnival"), new Date("24/06/2018"), new Time("1830"),
+                    getEventContactSet("Mike ")),
+            new Event(new EventName("Concert"), new Date("10/08/2018"), new Time("1430"),
+                    getEventContactSet("John "))
         };
     }
 
@@ -144,7 +140,7 @@ public class SampleDataUtil {
                 .map(EventContacts::new)
                 .collect(Collectors.toSet());
     }
-
+    //@@author
     //@@author luhan02
     public static Task[] getSampleTasks() {
         return new Task[] {
