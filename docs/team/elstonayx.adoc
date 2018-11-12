@@ -62,4 +62,5 @@ include::../UserGuide.adoc[tag=suggestions]
 |===
 
 include::../DeveloperGuide.adoc[tag=suggestion]
-
+include::../DeveloperGuide.adoc[tag=useCaseSuggestions]
+include::../DeveloperGuide.adoc[tag=testCaseSuggestions]

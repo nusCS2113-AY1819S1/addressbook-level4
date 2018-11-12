@@ -1005,6 +1005,7 @@ Use case resumes at step 2.
 +
 Use case resumes at step 4.
 
+// tag::useCaseSuggestions[]
 [discrete]
 === Use case: Get Suggestions
 
@@ -1037,6 +1038,8 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
+
+//end::useCaseSuggestions[]
 
 [appendix]
 == Non Functional Requirements
@@ -1082,8 +1085,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-//TODO: _{ more test cases ... }_
-
 === Deleting a person
 
 . Deleting a person while all persons are listed
@@ -1096,7 +1097,32 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+// _{ more test cases ... }_
+
+// tag::testCaseSuggestions[]
+=== Getting an Wrong Command Suggestion
+
+. Getting a nearest command suggestion after entering the keyed input.
+
+.. Test case: `delet` followed by `ENTER` key +
+   Expected: Result bar would show that the current input is an unknown command. It would then suggest
+    command `delete` in the next line. +
+    Expected: Result bar might show multiple commands to suggest if available.
+.. Other suggestions to try: `schedulee`, `expart`, etc +
+   Expected: Similar to previous.
+
+=== Getting an Input Command Suggestion
+
+. Getting a command suggestion while typing the desired command.
+
+.. Test case: `a` followed by `TAB` key +
+  Expected: Command bar would complete the only command starting with `a` available, which is `add`.
+   It would then show the parameters of `add` command. in the results bar. +
+   Expected: Result bar might show multiple commands if available, and not complete the command when so.
+.. Other suggestions to try: `ex`, `s`, etc +
+  Expected: Similar to previous.
+
+//end::testCaseSuggestions[]
 
 === Saving data
 
