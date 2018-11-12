@@ -4,11 +4,11 @@
 :stylesDir: ../stylesheets/
 :stylesheet: gh-pages-oscar.css
 
-== PROJECT: FinancialPlanner
+== PROJECT: Savee
 
 == Financial Planner Overview
 
-FinancialPlanner is a PC software specially designed for students who love typing.
+Savee is a PC software specially designed for students who love typing.
 This purpose of this product is to help users better manage their finances, including their daily spend and income.
 
 Users are able to record their finances and modify these records, set and modify limits, summarize their financial status and export their records into excel file.
@@ -122,7 +122,6 @@ include::../DeveloperGuide.adoc[tag=limitfeatures]
 
 https://github.com/CS2113-AY1819S1-T09-4/main/blob/Latest_UGDG_Update/docs/DeveloperGuide.adoc#13-use-case-create-a-normal-limit-for-a-period-of-time-or-a-day[LimitUserCase]
 
-include::../DeveloperGuide.adoc[tag=limitsManualTest]
-
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/Latest_UGDG_Update/docs/DeveloperGuide.adoc#h5-viewing-current-months-breakdown[LimitManualTest]
 ---
 
