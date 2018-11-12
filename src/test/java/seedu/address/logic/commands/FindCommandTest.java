@@ -1,5 +1,5 @@
 /*package seedu.address.logic.commands;
-
+package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -28,6 +28,7 @@ import seedu.address.model.item.NameContainsKeywordsPredicate;
  */
 /*
 public class FindCommandTest {
+    /*
 
     Username admin = new Username("admin");
     private Model model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
@@ -87,8 +88,9 @@ public class FindCommandTest {
 
 /*
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
-    }
+    }*/
 
 }
 */
