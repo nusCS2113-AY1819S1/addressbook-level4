@@ -48,7 +48,7 @@ Responsibilities: Integration
 
 === Tan Kian Meng
 image::kianmengtan.png[width="150", align="left"]
-{empty}[http://github.com/kianmengtan[github]]
+{empty}[http://github.com/kianmengtan[github]][https://cs2113-ay1819s1-f09-4.github.io/main/team/kianmengtan.html[portfolio]]
 
 Role: Developer +
 Responsibilities: Testing

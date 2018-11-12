@@ -7,21 +7,67 @@
 
 === What is RecruitBook?
 
-RecruitBook is a useful Java desktop application for job agents to better organise the list of available job offers and prospective job candidates.
-RecruitBook mainly uses a Command Line Interface(CLI) that allows you to interact with specific commands.
-It also has a Graphical User Interface created with JavaFX and has a codebase of about 10000 lines of code.
+Without the help of technology, managing huge amount of data can be a really tedious and cumbersome task.
+As such, RecruitBook v1.4 is created as a offline Java desktop application for job agents to better organise the list of available job offers and prospective job candidates.
+By keeping in mind the aim of easing the recruitment process, it is specifically designed for job agents to perform both simple commands such as add, delete, edit, find, filter and more complicated ones such as shortlist, email.
+Adding on, security comes as a top priority when managing highly confidential details of all our candidates.
+To prevent any loss or leakage of data, our group has come up with a password-protection mechanism so that only authorised users are able to access it.
+
+RecruitBook mainly uses a Command Line Interface(CLI) that allows you to interact with specific commands while it also has a Graphical User Interface created with JavaFX.
+All in all, it has a codebase of about 10,000 lines of code and we definitely welcome future collaborations with any developer.
 
 === RecruitBook features:
 * Add Feature
+* Locating Feature
 * Edit Feature
-* Find Feature
-* List Feature
+* Sort Feature
+* Blacklist Feature
+* Shortlist Feature
 * Email Feature
-
 
 == Summary of contributions
 * *Major enhancement*: enhanced *the find command such that it becomes more extensive*
-** What it does: allows user to find candidates
+** What it does: It allows the user to find candidates, companies and job offers based on multiple fields. Entries that satisfies any of the searched parameters will be returned.
+** Justification: The previous version of the `find` command only allows for the `name` field to be searched, making it not very user-friendly as the user should want to be able to search based on all fields.
+** Highlights: This enhancement improves the product significantly because a user can not only search for multiple prefixes but also multiple fields of the same prefix e.g. `findc n/Alex n/Bob p/91234567`.
+This fundamental feature proved to be extremely important for other features implemented by my colleagues as it allows the user to easily locate or access targeted entries based on a certain criteria.
+
+* *Major enhancement*: tweaked *the `find` command and implemented another `filter` command* so that *locating of entries become more specific and accurate*
+** What it does: It allows the user to filter candidates, companies and job offers based on multiple fields. It differs from the `find` command as only entries that satisfies all of the searched parameters will be returned.
+** Justification: `Find` command returns a very general list of entries based on the searched criteria and might still be a broad list based on the number of entries in the database.
+As such, having a `filter` command to locate the specific entries makes it more convenient and user-friendly for the user.
+** Highlights: This enhancement allows the user to look locate the entry easily if he/she already knows what to look for
+e.g. `filterj c/Google j/Software Engineer s/4000` will return only `Software Engineer` jobs from `Google` that has a starting pay of at least $`4000`.
+
+* *Minor enhancement*: automatically switches the user interface to the correct book when a command belonging to the other book is entered.
+** What it does: RecruitBook contains two books namely the CandidateBook and CompanyBook which allows user to find and filter entries based on the books that they are on.
+Entering a `findC [prefix][keyword]` command to find companies in the CandidateBook automatically switches the user's view to the CompanyBook and displays the correct intended results. Doing so otherwise yields the opposite result.
+** Credits: used methods `ShowCandidateBookRequestEvent()` and `ShowCompanyBookRequestEvent()` that were implemented by my colleague https://github.com/orgs/CS2113-AY1819S1-F09-4/people/leerachel[leerachel] to switch the current view to the respective views.
+
+* **Code contributed**:
+Under the username of https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kianmengtan[kianmengtan].
+. https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/main[Functional Code]
+. https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/test[Test Code]
+
+* **Other contributions**:
+** Project Management:
+*** Managed release `v1.3.1` on GitHub
+
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide and Developer Guide:
+https://github.com/CS2113-AY1819S1-F09-4/main/issues/24[#24],
+https://github.com/CS2113-AY1819S1-F09-4/main/pull/130[#130]
+
+** Community:
+*** PRs reviewed (with non-trivial comments): https://github.com/CS2113-AY1819S1-F09-4/main/pull/66[#66]
+*** Reported bugs and suggestions for other teams in the class:
+https://github.com/CS2113-AY1819S1-W12-2/main/issues/115[#115],
+https://github.com/CS2113-AY1819S1-W12-2/main/issues/118[#118],
+https://github.com/CS2113-AY1819S1-W12-2/main/issues/126[#126],
+https://github.com/nusCS2113-AY1819S1/pe-1/issues/169[#169]
+*** Some parts of the find and filter feature I added was adopted by several other classmates:
+https://github.com/CS2113-AY1819S1-F09-4/main/issues/192[#192]
+
 
 == Contributions to the User Guide
 |===
@@ -29,9 +75,21 @@ It also has a Graphical User Interface created with JavaFX and has a codebase of
 |===
 
 include::../UserGuide.adoc[tag=find]
+include::../UserGuide.adoc[tag=filter]
 
 == Contributions to the Developer Guide
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 include::../DeveloperGuide.adoc[tag=find]
+include::../DeveloperGuide.adoc[tag=filter]
+
+== [Proposed] Find / Filter pruning feature
+* Proposed enhancement: Find / Filter pruning feature
+** Current implementation: `Find` or `Filter` command only returns an updated `filteredList` based on the `UniqueList` and the `filteredList` is not being committed thus the user is not able to view his/her previous searches.
+** What it does: The new proposed feature shall allow the user to perform a pruning search through which the results from the previous searches are also shown on the GUI.
+** Highlights: The new proposed `find` or `filter` has an interface which allows the user to start the `find` or `filter` feature, repeat it multiple times based on his/her needs and end it when the user is done.
+This interface contains various panels that starts from the `MasterList` at the extreme left. Following the first `find` or `filter` command, it updates the `FilteredList` and shows the result on the second panel.
+The user can carry on searching until he/she is done and exit the interface by using the `cancel` command.
+** How to implement it: By performing another `find` or `filter` command, it should only find or filter the entries from the previous `FilteredList`.
+This way, a pruning search can be done and this allows the user to take note of the results from his/her previous searches.
