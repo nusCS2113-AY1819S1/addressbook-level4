@@ -493,7 +493,7 @@ This modify feature only affects the `ProfileWindow.html` file and *will not* af
 === Traversing and remark feature
 //tag::traversing[]
 ==== Current Implementation
-The traversing mechanism is facilitated by `VersionedAddressBook`. It extends `WorkoutBook`.
+The traversing mechanism is facilitated by `VersionedWorkoutBook`. It extends `WorkoutBook`.
 It implements following commands: +
 
 * `SortCommand()` -Sorts the current workout book
