@@ -25,7 +25,7 @@ public class DeleteCommentCommandParser implements Parser<DeleteCommentCommand> 
         return this.index;
     }
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
+     * Parses the given {@code String} of arguments in the context of the DeleteCommentCommand
      * and returns an EditCommand object for execution.
      * @param args arguments to work with
      * @throws ParseException if the user input does not conform the expected format

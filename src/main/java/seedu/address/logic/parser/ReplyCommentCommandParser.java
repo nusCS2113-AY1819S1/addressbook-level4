@@ -34,7 +34,7 @@ public class ReplyCommentCommandParser implements Parser<ReplyCommentCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
+     * Parses the given {@code String} of arguments in the context of the ReplyCommentCommand object
      * and returns an EditCommand object for execution.
      * @param args arguments to work with
      * @throws ParseException if the user input does not conform the expected format

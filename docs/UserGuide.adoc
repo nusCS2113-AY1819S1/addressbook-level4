@@ -377,7 +377,7 @@ Removes the user with username `Peter Parker` from the attendance of the 1st eve
 Removes the user with username `Alice` from the attendance of the 2nd event in the results of the `find` command.
 // end::rsvp[]
 
-//tag::eventState&Reminder[]
+// tag::eventState&Reminder[]
 === Show event reminders : `reminder`
 
 Admin/User: Shows event reminders for all upcoming events that the user has registered for.
@@ -402,7 +402,7 @@ Format: `update`
 ****
 
 TIP: You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load, and if the problem still persists, use the `update` command.
-//end::eventState&Reminder
+// end::eventState&Reminder[]
 
 
 //tag::comment[]
@@ -503,9 +503,9 @@ Event Manager's data are saved in the hard disk automatically after any command 
 There is no need to save manually.
 
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+//=== Encrypting data files `[coming in v2.0]`
 
-_{explain how the user can enable/disable data encryption}_
+//_{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
 == FAQ
