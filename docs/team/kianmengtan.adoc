@@ -42,9 +42,12 @@ e.g. `filterj c/Google j/Software Engineer s/4000` will return only `Software En
 * *Minor enhancement*: automatically switches the user interface to the correct book when a command belonging to the other book is entered.
 ** What it does: RecruitBook contains two books namely the CandidateBook and CompanyBook which allows user to find and filter entries based on the books that they are on.
 Entering a `findC [prefix][keyword]` command to find companies in the CandidateBook automatically switches the user's view to the CompanyBook and displays the correct intended results. Doing so otherwise yields the opposite result.
-** Credits: used methods `ShowCandidateBookRequestEvent()` and `ShowCompanyBookRequestEvent()` that were implemented by my colleague https://github.com/orgs/CS2113-AY1819S1-F09-4/people/leerachel[Rachel] to switch the current view to the respective views.
+** Credits: used methods `ShowCandidateBookRequestEvent()` and `ShowCompanyBookRequestEvent()` that were implemented by my colleague https://github.com/orgs/CS2113-AY1819S1-F09-4/people/leerachel[leerachel] to switch the current view to the respective views.
 
-* **Code Contributed**:
+* **Code contributed**:
+Under the username of https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kianmengtan[kianmengtan].
+. https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/main[Functional Code]
+. https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/test[Test Code]
 
 * **Other contributions**:
 ** Project Management:
