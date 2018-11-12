@@ -370,9 +370,9 @@ Example: `debit d/ 10/10 b/ 100`
 
 === Calendar
 
-==== List events: `listEvents`
+==== List events: `listEvent`
 Lists all the events sorted by date. +
-Format: `listEvents`
+Format: `listEvent`
 
 Example:
 * `listEvent`
@@ -380,10 +380,10 @@ List all the events in the ClubHub.
 
 ==== Adding an event: `addEvent`
 Adds an event to the calendar. +
-Format: `addEvent n/EVENT_NAME v/VENUE d/DESCRIPTION D/EVENT_DATE`
+Format: `addEvent n/EVENT_NAME v/VENUE D/DESCRIPTION d/EVENT_DATE`
 
 [TIP]
-The Event name cannot be the same as an existing one.
+The Event name cannot be the same as an existing one (Two events are regarded as the same when they have the same name and date).
 
 Example:
 
@@ -407,15 +407,12 @@ Edit the venue and the date of the 1st event to `Sports Center` and `12/12` resp
 
 ==== Deleting event: `deleteEvent`
 Deletes an existing event from the ClubHub. +
-Format: `deleteEvent n/EVENT_NAME`.
-
-[TIP]
-The event name must be exactly the same as the one you want to delete.
+Format: `deleteEvent [INDEX]`.
 
 Example:
 
-* `deleteEvent n/Basketball training`
-Delete the event named `Basketball training`.
+* `deleteEvent 1`
+Delete the event who's index is 1.
 
 // tag::itemlist[]
 === ItemList

@@ -5,16 +5,15 @@
 :stylesDir: stylesheets
 
 ClubHub was developed by the https://github.com/CS2113-AY1819S1-T09-3/main/blob/master/docs/AboutUs.adoc[T09-3] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
-{empty} +
-We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
+We are a team based in the School of Computing, National University of Singapore.
+At the time of writing, all 4 of us are Computer Engineering undergraduates in our Sophomore year.
 
 == Project Team
 
 
 === Zhuang Yuan
-image::za-yn.png[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+image::za-yn.jpg[width="150", align="left"]
+{empty}[http://github.com/za-yn[github]] [<<za-yn#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: UI, Docs, Finance feature
@@ -23,7 +22,7 @@ Responsibilities: UI, Docs, Finance feature
 
 === Daryl Nigel
 image::darylnigel.png[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/yijinl[github]] [<<darylnigel#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data, Inventory feature
@@ -32,7 +31,7 @@ Responsibilities: Data, Inventory feature
 
 === Park Junhyuk
 image::hyukiejun.png[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/m133225[github]] [<<hyukiejun#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Code clean-up, Member feature

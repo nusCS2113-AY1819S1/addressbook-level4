@@ -18,10 +18,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.MemberCommand.EditMemberCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.item.EditItemCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemNameContainsKeywordsPredicate;
 import seedu.address.model.member.NameContainsKeywordsPredicate;
 import seedu.address.model.member.Person;
+import seedu.address.testutil.EditItemDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -44,6 +48,12 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_UNUSED = "unused";
+    public static final String VALID_ITEM_NAME_APPLE = "Apple";
+    public static final String VALID_ITEM_NAME_BANANA = "Banana";
+    public static final String VALID_ITEM_QUANTITY_APPLE = "2";
+    public static final String VALID_ITEM_QUANTITY_BANANA = "1";
+    public static final String VALID_ITEM_LOCATION_APPLE = "Basket";
+    public static final String VALID_ITEM_LOCATION_BANANA = "Table";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -75,6 +85,8 @@ public class CommandTestUtil {
 
     public static final EditMemberCommand.EditPersonDescriptor DESC_AMY;
     public static final EditMemberCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditItemCommand.EditItemDescriptor DESC_APPLE;
+    public static final EditItemCommand.EditItemDescriptor DESC_BANANA;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -85,6 +97,10 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withPostalcode(VALID_POSTALCODE_BOB).withMajor(VALID_MAJOR_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_APPLE = new EditItemDescriptorBuilder().withItemName(VALID_ITEM_NAME_APPLE)
+                .withItemQuantity(VALID_ITEM_QUANTITY_APPLE).withItemLocation(VALID_ITEM_LOCATION_APPLE).build();
+        DESC_BANANA = new EditItemDescriptorBuilder().withItemName(VALID_ITEM_NAME_BANANA)
+                .withItemQuantity(VALID_ITEM_QUANTITY_BANANA).withItemLocation(VALID_ITEM_LOCATION_BANANA).build();
     }
 
     /**
@@ -145,6 +161,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the item at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showItemAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredItemList().size());
+
+        Item item = model.getFilteredItemList().get(targetIndex.getZeroBased());
+        final String[] splitItemName = item.getItemName().fullItemName.split("\\s+");
+        model.updateFilteredItemList(new ItemNameContainsKeywordsPredicate(Arrays.asList(splitItemName[0])));
+
+        assertEquals(1, model.getFilteredItemList().size());
     }
 
     /**

@@ -27,7 +27,6 @@ import seedu.address.model.member.Person;
 import seedu.address.model.member.Phone;
 import seedu.address.model.member.Postalcode;
 import seedu.address.model.tag.Tag;
-import seedu.address.logic.commands.MemberCommand.AddMemberCommand;
 
 /**
  * Parses input arguments and creates a new AddMemberCommand object

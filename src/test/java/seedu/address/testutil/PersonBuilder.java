@@ -7,6 +7,7 @@ import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
 import seedu.address.model.member.Major;
 import seedu.address.model.member.Name;
+import seedu.address.model.member.Person;
 import seedu.address.model.member.Phone;
 import seedu.address.model.member.Postalcode;
 import seedu.address.model.tag.Tag;
