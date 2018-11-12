@@ -31,7 +31,7 @@ public class ModuleFindCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         List<Module> foundModules = ModuleManager.getInstance().searchModulesWithKeywords(keywords);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, foundModules.size())
-                + "\n" + ModuleListCommand.getPrintableModuleList(foundModules));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, foundModules.size()),
+                ModuleManager.getInstance().convertModulesToTableRepresentation(foundModules));
     }
 }

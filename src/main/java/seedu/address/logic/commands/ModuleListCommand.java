@@ -19,10 +19,8 @@ public class ModuleListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        List<Module> moduleList = ModuleManager.getInstance().getModules();
-        return new CommandResult(
-                String.format(MESSAGE_SUCCESS, ModuleManager.getInstance().getModules().size())
-                + "\n" + getPrintableModuleList(moduleList));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, ModuleManager.getInstance().getModules().size()),
+                ModuleManager.getInstance().getModuleTableRepresentation());
     }
 
     /**

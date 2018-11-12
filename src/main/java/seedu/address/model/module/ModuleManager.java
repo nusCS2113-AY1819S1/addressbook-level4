@@ -3,6 +3,7 @@ package seedu.address.model.module;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -17,6 +18,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.student.StudentManager;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 import seedu.address.storage.adapter.XmlAdaptedStudentModule;
+import seedu.address.ui.HtmlTableProcessor;
 
 /**
  * This module manager stores modules for Trajectory.
@@ -82,6 +84,28 @@ public class ModuleManager {
 
     public boolean isStudentEnrolledInModule(Module module, Person student) {
         return module.getEnrolledStudents().stream().anyMatch(s -> s.equals(student));
+    }
+
+    /**
+     * Overload for {@link #isStudentEnrolledInModule(Module, Person)} to accept {@code String} inputs.
+     * The module code and matric no. must be validated before calling this method, otherwise
+     * there is a risk of a {@code NullPointerException} being thrown.
+     */
+    public boolean isStudentEnrolledInModule(String moduleCode, String matricNo) {
+        Module module = getModuleByModuleCode(moduleCode);
+        Person student = StudentManager.getInstance().retrieveStudentByMatricNo(matricNo);
+        return isStudentEnrolledInModule(module, student);
+    }
+
+    /**
+     * Removes a deleted student from the modules that student was previously enrolled in.
+     */
+    public void handleStudentDeleted(Person student) {
+        for (Module module : modules) {
+            if (isStudentEnrolledInModule(module, student)) {
+                removeStudentFromModule(module, student);
+            }
+        }
     }
 
     /**
@@ -186,6 +210,42 @@ public class ModuleManager {
             return doesModuleExist(module);
         }
         return false;
+    }
+
+    /**
+     * Converts the given list of modules to a HTML table representation.
+     * @param moduleList
+     * @return
+     */
+    public String convertModulesToTableRepresentation(List<Module> moduleList) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(HtmlTableProcessor.getBanner("Module List"));
+        sb.append(HtmlTableProcessor.renderTableStart(new ArrayList<>(
+                Arrays.asList("Module Code", "Module Name"))));
+
+        sb.append(HtmlTableProcessor.getTableItemStart());
+        for (Module m : moduleList) {
+            ArrayList<String> dataRow = new ArrayList<>(Arrays.asList(
+                    m.getModuleCode().toString(),
+                    m.getModuleName().toString()
+            ));
+
+            sb.append(HtmlTableProcessor.renderTableItem(dataRow));
+        }
+        sb.append(HtmlTableProcessor.getTableItemEnd());
+
+        return sb.toString();
+    }
+
+    /**
+     * Converts the list of modules into a HTML table representation.
+     * Internally calls {@link #convertModulesToTableRepresentation(List)} to generate the HTML string
+     * to enforce DRY.
+     * @return
+     */
+    public String getModuleTableRepresentation() {
+        return convertModulesToTableRepresentation(modules);
     }
 
     public ArrayList<Module> getModules() {
