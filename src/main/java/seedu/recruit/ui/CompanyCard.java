@@ -43,7 +43,7 @@ public class CompanyCard extends UiPart<Region> {
         super(FXML);
         this.company = company;
         id.setText(displayedIndex + ". ");
-        name.setText(company.getCompanyName().value);
+        name.setText(company.getName().value);
         phone.setText(company.getPhone().value);
         email.setText(company.getEmail().value);
         address.setText(company.getAddress().value);

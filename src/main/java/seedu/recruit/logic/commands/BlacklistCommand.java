@@ -107,8 +107,8 @@ public class BlacklistCommand extends Command {
         Tag blacklistedTag = new Tag("BLACKLISTED");
         tags.add(blacklistedTag);
         return new Candidate(blacklistee.getName(), blacklistee.getGender(), blacklistee.getAge(),
-                blacklistee.getPhone(), blacklistee.getEmail(), blacklistee.getAddress(), blacklistee.getJob(),
-                blacklistee.getEducation(), blacklistee.getSalary(), tags);
+                blacklistee.getPhone(), blacklistee.getEmail(), blacklistee.getAddress(), blacklistee.getDesiredJob(),
+                blacklistee.getEducation(), blacklistee.getExpectedSalary(), tags);
     }
 
     /**
@@ -119,8 +119,8 @@ public class BlacklistCommand extends Command {
 
         Set<Tag> tags = new HashSet<Tag>();
         return new Candidate(blacklistee.getName(), blacklistee.getGender(), blacklistee.getAge(),
-                blacklistee.getPhone(), blacklistee.getEmail(), blacklistee.getAddress(), blacklistee.getJob(),
-                blacklistee.getEducation(), blacklistee.getSalary(), tags);
+                blacklistee.getPhone(), blacklistee.getEmail(), blacklistee.getAddress(), blacklistee.getDesiredJob(),
+                blacklistee.getEducation(), blacklistee.getExpectedSalary(), tags);
     }
 
     @Override

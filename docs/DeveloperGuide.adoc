@@ -117,23 +117,23 @@ Each of the four components
 For example, the `Logic` component in Figure 2 defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
-image::LogicClassDiagram.png[width="800"]
+image::LogicComponentClassDiagram.png[width="800"]
 
 [discrete]
 ==== Events-Driven nature of the design
 
 The _Sequence Diagram_ in Figure 3 shows how the components interact for the scenario where the user issues the command `delete 1`.
 
-.Component interactions for `delete 1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+.Component interactions for `deleteC 1` command (part 1)
+image::SDforDeleteCompany.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `CandidateBookChangedEvent` when the Recruit Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `CompanyBookChangedEvent` when the data in the CompanyBook is changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram in Figure 4 shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
 .Component interactions for `delete 1` command (part 2)
-image::SDforDeletePersonEventHandling.png[width="800"]
+image::SDforDeleteCompanyEventHandling.png[width="800"]
 
 [NOTE]
 Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -175,12 +175,13 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
+// tag::logicComponent[]
 [[Design-Logic]]
 === Logic component
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
-image::LogicClassDiagram.png[width="800"]
+image::LogicComponentClassDiagram.png[width="1000"]
 
 *API* :
 link:{repoURL}/src/main/java/seedu/recruit/logic/Logic.java[`Logic.java`]
@@ -190,13 +191,17 @@ As illustrated in Figure 6,
 .  `Logic` uses the `RecruitBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a candidate) and/or raise events.
+.  The command execution can also affect the LogicState of the LogicManager (e.g. StartAddCandidateCommand, ShortlistCandidateCommand) and raises a ChangeLogicStateEvent.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below in Figure 7 is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below in Figure 7 is the Sequence Diagram for interactions within the `Logic` component for the `execute("deletec 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+.Interactions Inside the Logic Component for the `deletec 1` Command
+image::DeleteCandidateSdForLogic.png[width="800"]
 
+// end::logicComponent[]
+
+// tag::modelComponent[]
 [[Design-Model]]
 === Model component
 
@@ -208,15 +213,13 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Recruit Book data.
-* exposes an unmodifiable `ObservableList<Candidate>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the RecruitBook data in `VersionedRecruitBook`.
+* exposes an unmodifiable lists `ObservableList<Candidate>`, `ObservableList<JobOffer>`, `ObservableList<Company>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Recruit Book`, which `Candidate` can reference. This would allow `Recruit Book` to only require one `Tag` object per unique `Tag`, instead of each `Candidate` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
-image:ModelClassBetterOopDiagram.png[width="800"]
+// end::modelComponent[]
 
+// tag::storageComponent[]
 [[Design-Storage]]
 === Storage component
 
@@ -230,6 +233,7 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Recruit Book data in xml format and read it back.
 
+// end::storageComponent[]
 [[Design-Commons]]
 === Common classes
 
@@ -291,21 +295,35 @@ Step 1. The user launches the application for the first time.
 
 Step 2. The user executes ...
 
-        .. `addc n/John Doe ...` to add a new candidate. `AddCandidateCommand` calls `Model#hasCandidate(Candidate candidate)` to check if a duplicate entry exists. Then `Model#addCandidate(Candidate candidate)` and adds the candidate to the CandidateBook.
-        .. `addC c/McDonalds ...` to add a new company. `AddCompanyCommand` calls `Model#hasCompany(Company company)` to check if a duplicate entry exists. Then `Model#addCompany(Company company)` and adds the company to the CompanyBook.
-        .. `addj c/McDonalds ...` to add a new job offer. `AddJobDetailsCommand` calls `Model#hasJobOffer(JobOffer jobOffer)` to check if a duplicate entry exists. Then `Model#addJobOffer(JobOffer jobOffer)` and adds the job offer to the CompanyBook.
+        .. `addc` to start the Add Candidate Interface
+        .. `addC` to start the Add Company Interface
+        .. `addj` to start the Add Job Interface
 
-Step 3. The user executes ...
+Step 2. The user executes ...
+
+        .. `n/John Doe g/M ...` to add a new candidate. `AddCandidateCommand` calls `Model#hasCandidate(Candidate candidate)` to check if a duplicate entry exists. Then `Model#addCandidate(Candidate candidate)` and adds the candidate to the CandidateBook.
+        .. `c/McDonalds a/101, Teban Gardens, #01-01 ...` to add a new company. `AddCompanyCommand` calls `Model#hasCompany(Company company)` to check if a duplicate entry exists. Then `Model#addCompany(Company company)` and adds the company to the CompanyBook.
+        .. `c/McDonalds j/Cashier ...` to add a new job offer. `AddJobDetailsCommand` calls `Model#hasJobOffer(JobOffer jobOffer)` to check if a duplicate entry exists. Then `Model#addJobOffer(JobOffer jobOffer)` and adds the job offer to the CompanyBook.
+
+Step 4. The user executes ...
 
         .. `deletec 1,3-4` to delete multiple candidates. `DeleteCandidateCommand` calls `Model#removeCandidate(Candidate candidate)` for the candidates listed at index 1, and 4.
         .. `deleteC 1,3-4` to delete multiple companies. `DeleteCompanyCommand` calls `Model#removeCompany(Company company)` for the companies listed at index 1, and 4.
         .. `deletej 1,3-4` to delete multiple job offers. `DeleteJobOfferCommand` calls `Model#deleteJobOffer(JobOffer jobOffer)` for the job offers listed at index 1, and 4.
 
+Here is a sequence Diagram to help illustrate the flow of adding an entries.
+
+image::AddSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
 ===== Aspect: How add/delete feature executes
-
+* **Alternative 1 (current choice):** Start an adding interface. Users can continually add entries for the same object until they enter 'cancel'
+** Pros: User can keep adding multiple entries of the same object without having to entering the `addc`, `addC` or `addj.
+** Cons: Not very convenient for user if he/she just needs to add one entry.
+* **Alternative 2:** Enter command_word and argument
+** Pros: Adding entries of specific objects is straightforward. Enter the respective command word and the respective details
+** Cons: Entering the command word becomes a hassle when adding a large number of entries
 ===== Aspect: Data structure to support the add/delete feature
 * **Alternative 1 (current choice):** Create a new list object to store objects e.g. `UniqueCompanyList`
 ** Pros: Easy to implement, allows for manipulation of data within the data structure (e.g) sorting.
@@ -321,23 +339,32 @@ Also allows us to define a stricter form duplicity between objects.
 === Find Feature
 ==== Current Implementation
 
-The find mechanism is facilitated by `keywordsMap` which stores the searched keywords in a `Map`.
-It implements the following operations to support the checking of keywords with the data stored in the RecruitBook:
-
-* `keywordsMap#add(String arg)` - Adds a keyword into the `keywordMap` based on the preceding prefix
+The `find` mechanism is implemented by creating a `keywordsMap` which stores the searched keywords in a `HashMap`.
+Based on the preceding prefixes of the user input, the tokenized argument is being stored as the `value` of the respective prefix `key`.
 
 ===== Candidates
 The `findCandidateCommand` is facilitated by the `CandidateContainsFindKeywordsPredicate` which implements `Predicate<Candidate>`
-and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
 
 ===== Companies
 The `findCompanyCommand` is facilitated by the `CompanyContainsFindKeywordsPredicate` which implements `Predicate<Company>`
-and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
 
 ===== Job Offers
 The `findJobOfferCommand` is facilitated by the `JobOfferContainsFindKeywordsPredicate` which implements `Predicate<JobOffer>`
-and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
 
+Through the `test` method, it compares every value in the `keywordsMap` with the respective field of each entry and returns `true` if the any part of the searched value can be found in the entry's field.
+
+The `test` method is facilitated by the following operations:
+
+* StringUtil#isWithinRange - checks whether the the job offer has an `AgeRange` that satisfies the `Age` of the `candidate`.
+* StringUtil#isMoreThanOrEqualTo - checks whether the job offer has a `salary` offer that is higher than the `candidate` 's expected `salary`.
+
+After which, the mechanism updates either of the respective list which is exposed in the `Model` interface as either `Model#updateFilteredCandidateList`, `Model#updateFilteredCompanyList` or `Model#updateCompanyJobList`.
+
+[NOTE]
+Entering a prefix that is not recognized will throw a command exception.
 [NOTE]
 The finding of all three entities (Candidate, Company, JobOffer) follow the same mechanism.
 
@@ -349,13 +376,86 @@ Step 1. The user launched the application for the first time.
 .. `UniqueCompanyList` will be initialised with the list of saved companies in `CompanyBook`.
 .. `UniqueCompanyJobList` will be initialised with the list of saved job offers in `CompanyBook`.
 
-Step 2. The user executes `findc n/Alex p/91234567 e/michelleyeoh@gmail.com` command to find the candidates who either have the name `Alex`,
-with phone number `91234567`,  or with email address `michelleyeoh@gmail.com`.
+Step 2. The user executes `findc n/Alex p/91234567` command to find the candidates who is named `Alex` or candidates who has the phone number `91234567`.
 
 The following sequence diagram shows how the find operation works:
 
 image::FindSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How find feature executes
+* **Alternative 1 (current choice):** Having three variations of find feature for different entities.
+** Pros:
+*** Greater distinction between the entities.
+*** More direct and intuitive for users as candidate and company objects contain same prefixes such as phone, address and email address etc.
+
+** Cons:
+*** More commands to deal with, same changes have to be made across all three commands.
+*** It might not be that user-friendly for users who prefer an all-in-one `find` command.
+
+* **Alternative 2:** Have a central `findManager` that handles all finds.
+** Pros: Lesser commands to handle, makes application easier for user to use
+** Cons: Some fields are found in both `candidate` and `company`, making it difficult to distinguish between the two if the same prefix is entered.
+
+===== Aspect: Data structure to support the find feature
+* ** Alternative 1 (current choice):** Parses the user's input into various arguments and compares each argument with each value in the object to test if it is contained in the object.
+** Pros:
+*** Putting to and getting from a `HashMap` is O(1), making it quick to add value or retrieve value for each comparison.
+*** User can input more than one field of the same prefix as a `HashMap` is used here.
+** Cons: It is messy to implement, especially when different checks have to be made for different fields.
+
+* ** Alternative 2:** Creates a `List` for each prefix instead.
+*** Pros: Easier to manage, `test` method should look neater.
+*** Cons: Takes O(N) to iterate through the `List`, and does not check for duplicates.
 // end::find[]
+
+// tag::filter[]
+=== Filter Feature
+==== Current Implementation
+
+The `filter` feature differs from the `find` feature based on the fact that if any of the searched parameter is fulfilled, the overridden `test` method for the `find` feature returns `true`.
+However, the overridden `test` method for `filter` is only asserted if all of the searched parameters are fulfilled.
+
+Similar to the `find` mechanism, `filter` is implemented by creating a `keywordsMap` which stores the searched keywords in a `HashMap`.
+Based on the preceding prefixes of the user input, the tokenized argument is being stored as the `value` of the respective prefix `key`.
+
+Through the `test` method, it compares every value in the `keywordsMap` with the respective field of each entry and returns `true` if the object contains all the searched fields.
+
+The `test` method is facilitated by the following operations (similar to `find` feature):
+
+* StringUtil#isWithinRange
+* StringUtil#isMoreThanOrEqualTo
+
+After which, the respective list which is exposed in the `Model` interface is being updated.
+
+[NOTE]
+Entering a prefix that is not recognized will throw a command exception.
+[NOTE]
+The filtering of all three entities (Candidate, Company, JobOffer) follow the same mechanism.
+
+An example usage scenario and how the filter mechanism behaves at each step is shown below.
+
+Step 1. The user launched the application for the first time.
+
+.. `UniqueCandidateList` will be initialised with the list of candidates in RecruitBook
+.. `UniqueCompanyList` will be initialised with the list of saved companies in `CompanyBook`.
+.. `UniqueCompanyJobList` will be initialised with the list of saved job offers in `CompanyBook`.
+
+Step 2. The user executes `filterc n/Alex e/alexyeoh@example.com` command to filter the candidates who is named `Alex` and has the email `alexyeoh@example.com`.
+
+The following sequence diagram shows how the find operation works:
+
+image::FilterSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How filter feature executes
+
+===== Aspect: Data structure to support the filter feature
+
+Design considerations for `filter` command is largely similar to `find` command as they both use similar mechanism.
+// end::filter[]
 
 // tag::edit[]
 === Edit Feature
@@ -937,46 +1037,35 @@ image::EmailSequenceDiagram.png[width="1000", align="center"]
 === Undo/Redo feature
 ==== Current Implementation
 ===== CandidateBook
-The undo/redo mechanism for changes made to CandidateBook is facilitated by `VersionedCandidateBook`.
-It extends `CandidateBook` with an undo/redo history, stored internally as an `candidateBookStateList` and `currentStatePointer`.
+The undo/redo mechanism for changes made to RecruitBook is facilitated by `VersionedRecruitBook`.
+It extends `RecruitBook` with an undo/redo history, stored internally as a `recruitBookStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedCandidateBook#commit()` -- Saves the current candidate book state in its history.
-* `VersionedCandidateBook#undo()` -- Restores the previous candidate book state from its history.
-* `VersionedCandidateBook#redo()` -- Restores a previously undone candidate book state from its history.
+* `VersionedRecruitBook#commit()` -- Saves the current RecruitBook state in its history.
+* `VersionedRecruitBook#undo()` -- Restores the previous RecruitBook state from its history.
+* `VersionedRecruiteBook#redo()` -- Restores a previously undone RecruitBook state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitCandidateBook()`, `Model#UndoRecruitBook()` and `Model#redoCandidateBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitRecruitBook()`, `Model#UndoRecruitBook()` and `Model#redoRecruitBook()` respectively.
 
-===== CompanyBook
-
-The undo/redo mechanism for changes made to CompanyBook is facilitated by `VersionedCompanyBook`.
-It extends `CompanyBook` with an undo/redo history, stored internally as an `companyBookStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
-
-* `VersionedCompanyBook#commit()` -- Saves the current company book state in its history.
-* `VersionedCompanyBook#undo()` -- Restores the previous company book state from its history.
-* `VersionedCompanyBook#redo()` -- Restores a previously undone company book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitRecruitBook()`, `Model#undoCompanyBook()`
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedCandidateBook` will be initialized with the initial candidate book state, and the `currentStatePointer` pointing to that single candidate book state.
+Step 1. The user launches the application for the first time. The `VersionedRecruitBook` will be initialized with the initial candidate book state, and the `currentStatePointer` pointing to that single candidate book state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `deletec 5` command to delete the 5th candidate in the candidate book. The `deletec` command calls `Model#commitCandidateBook()`, causing the modified state of the candidate book after the `deletec 5` command executes to be saved in the `candidateBookStateList`, and the `currentStatePointer` is shifted to the newly inserted candidate book state.
+Step 2. The user executes `deletec 5` command to delete the 5th candidate in the candidate book. The `deletec` command calls `Model#commitRecruitBook()`, causing the modified state of the candidate book after the `deletec 5` command executes to be saved in the `candidateBookStateList`, and the `currentStatePointer` is shifted to the newly inserted candidate book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `addc`, `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitCandidateBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
+Step 3. The user executes `addc` then `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitRecruitBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitCandidateBook()`, so the candidate book state will not be saved into the `candidateBookStateList`.
+If a command fails its execution, it will not call `Model#commitRecruitBook()`, so the candidate book state will not be saved into the `candidateBookStateList`.
 
-Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undoc` command. The `undoc` command will call `Model#UndoRecruitBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
+Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoRecruitBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
@@ -987,28 +1076,28 @@ The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redoc` command does the opposite -- it calls `Model#redoCandidateBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the candidate book to that state.
+The `redo` command does the opposite -- it calls `Model#redoRecruitBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the candidate book to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `candidateBookStateList.size() - 1`, pointing to the latest candidate book state, then there are no undone candidate book states to restore. The `redoc` command uses `Model#canRedoCandidateBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `recruitBookStateList.size() - 1`, pointing to the latest RecruitBook state, then there are no undone candidate book states to restore. The `redo` command uses `Model#canRedoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `listc`. Commands that do not modify the candidate book, such as `listc`, will usually not call `Model#commitCandidateBook()`, `Model#UndoRecruitBook()` or `Model#redoCandidateBook()`. Thus, the `candidateBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `listc`. Commands that do not modify RecruitBook state, such as `listc` or `listC`, will usually not call `Model#commitRecruitBook()`, `Model#undoRecruitBook()` or `Model#redoRecruitBook()`. Thus, the `recruitBookStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clearc`, which calls `Model#commitCandidateBook()`. Since the `currentStatePointer` is not pointing at the end of the `candidateBookStateList`, all candidate book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clearc`, which calls `Model#commitRecruitBook()`. Since the `currentStatePointer` is not pointing at the end of the `recruitBookStateList`, all RecruitBook states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-image::UndoRedoActivityDiagram.png[width="650"]
+image::UndoRedoActivityDiagram.png[width="800"]
 
 ==== Design Considerations
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire candidate book.
+* **Alternative 1 (current choice):** Saves the entire RecruitBook.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
@@ -1017,20 +1106,13 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of candidate book states.
+* **Alternative 1 (current choice):** Use a list to store the history of RecruitBook states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedCandidateBook`.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedRecruitBook`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
 
 === Logging
 
@@ -1157,11 +1239,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |User |Add a new candidate
+|`* * *` |User |Add a new candidate|
 
-|`* * *` |User |Add a new company
+|`* * *` |User |Add a new company|
 
-|`* * *` |User |Add a new job offer to a company
+|`* * *` |User |Add a new job offer to a company|
 
 |`* * *` |User |Delete a candidate |Remove entries that I no longer need
 

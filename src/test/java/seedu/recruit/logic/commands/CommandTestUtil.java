@@ -38,6 +38,7 @@ import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.CompanyContainsFindKeywordsPredicateBuilder;
 import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
+import seedu.recruit.testutil.EditJobOfferDescriptorBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
 import seedu.recruit.testutil.JobOfferContainsFindKeywordsPredicateBuilder;
 
@@ -110,6 +111,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BMW = "bmw@example.com";
     public static final String VALID_ADDRESS_ALFA = "Block 312, Alfa Romeo Street 1";
     public static final String VALID_ADDRESS_BMW = "Block 123, Bmw Street 3";
+    public static final String VALID_AGE_RANGE_ALFA = "20-30";
+    public static final String VALID_AGE_RANGE_BMW = "30-40";
 
     public static final String NAME_DESC_ALFA = " " + PREFIX_COMPANY_NAME + VALID_NAME_ALFA;
     public static final String NAME_DESC_BMW = " " + PREFIX_COMPANY_NAME + VALID_NAME_BMW;
@@ -122,6 +125,9 @@ public class CommandTestUtil {
 
     public static final EditCompanyCommand.EditCompanyDescriptor DESC_ALFA;
     public static final EditCompanyCommand.EditCompanyDescriptor DESC_BMW;
+
+    public static final EditJobDetailsCommand.EditJobOfferDescriptor DESC_ALFA_JOB;
+    public static final EditJobDetailsCommand.EditJobOfferDescriptor DESC_BMW_JOB;
 
     private static UserPrefs userPrefs = new UserPrefs();
 
@@ -138,6 +144,12 @@ public class CommandTestUtil {
                 .withEmail(VALID_EMAIL_ALFA).withAddress(VALID_ADDRESS_ALFA).build();
         DESC_BMW = new EditCompanyDescriptorBuilder().withCompanyName(VALID_NAME_BMW).withPhone(VALID_PHONE_BMW)
                 .withEmail(VALID_EMAIL_BMW).withAddress(VALID_ADDRESS_BMW).build();
+        DESC_ALFA_JOB = new EditJobOfferDescriptorBuilder().withCompanyName(VALID_NAME_ALFA).withJob(VALID_JOB_AMY)
+                .withAgeRange(VALID_AGE_RANGE_ALFA).withEducation(VALID_EDUCATION_AMY).withGender(VALID_GENDER_AMY)
+                .withSalary(VALID_SALARY_AMY).build();
+        DESC_BMW_JOB = new EditJobOfferDescriptorBuilder().withCompanyName(VALID_NAME_BMW).withJob(VALID_JOB_BOB)
+                .withAgeRange(VALID_AGE_RANGE_BMW).withEducation(VALID_EDUCATION_BOB).withGender(VALID_GENDER_BOB)
+                .withSalary(VALID_SALARY_BOB).build();
     }
 
     /**
@@ -431,7 +443,7 @@ public class CommandTestUtil {
     public static void showCompanyAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyList().size());
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
-        final String[] splitName = company.getCompanyName().value.split("\\s+");
+        final String[] splitName = company.getName().value.split("\\s+");
         model.updateFilteredCompanyList(new CompanyContainsFindKeywordsPredicateBuilder(
                 " c/" + splitName[0]).getCompanyPredicate());
         assertEquals(1, model.getFilteredCompanyList().size());

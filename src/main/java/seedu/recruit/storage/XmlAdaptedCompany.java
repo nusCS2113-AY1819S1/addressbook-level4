@@ -52,7 +52,7 @@ public class XmlAdaptedCompany {
      */
 
     public XmlAdaptedCompany(Company source) {
-        companyName = source.getCompanyName().value;
+        companyName = source.getName().value;
         address = source.getAddress().value;
         email = source.getEmail().value;
         phone = source.getPhone().value;

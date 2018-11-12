@@ -65,9 +65,9 @@ public class CandidateBuilder {
         phone = candidateToCopy.getPhone();
         email = candidateToCopy.getEmail();
         address = candidateToCopy.getAddress();
-        job = candidateToCopy.getJob();
+        job = candidateToCopy.getDesiredJob();
         education = candidateToCopy.getEducation();
-        salary = candidateToCopy.getSalary();
+        salary = candidateToCopy.getExpectedSalary();
         tags = new HashSet<>(candidateToCopy.getTags());
     }
 

@@ -84,8 +84,8 @@ public class EditCompanyCommand extends Command {
         }
 
         model.updateCompany(companyToEdit, editedCompany);
-        if (companyToEdit.getCompanyName() != editedCompany.getCompanyName()) {
-            model.cascadeToJobOffers(companyToEdit.getCompanyName(), editedCompany.getCompanyName());
+        if (companyToEdit.getName() != editedCompany.getName()) {
+            model.cascadeToJobOffers(companyToEdit.getName(), editedCompany.getName());
         }
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
         model.commitRecruitBook();
@@ -99,7 +99,7 @@ public class EditCompanyCommand extends Command {
     private static Company createEditedCompany(Company companyToEdit, EditCompanyDescriptor editCompanyDescriptor) {
         assert companyToEdit != null;
 
-        CompanyName updatedName = editCompanyDescriptor.getName().orElse(companyToEdit.getCompanyName());
+        CompanyName updatedName = editCompanyDescriptor.getName().orElse(companyToEdit.getName());
         Phone updatedPhone = editCompanyDescriptor.getPhone().orElse(companyToEdit.getPhone());
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());

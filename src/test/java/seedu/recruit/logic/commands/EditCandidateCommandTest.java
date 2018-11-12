@@ -15,7 +15,6 @@ import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.recruit.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.Messages;
@@ -36,7 +35,7 @@ import seedu.recruit.testutil.EditPersonDescriptorBuilder;
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
  * and unit tests for EditCandidateCommand.
  */
-@Ignore
+
 public class EditCandidateCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());

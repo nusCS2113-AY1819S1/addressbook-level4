@@ -19,7 +19,7 @@ public class CompanyContainsFilterKeywordsPredicate implements Predicate<Company
     @Override
     public boolean test(Company company) {
         return ((!keywords.containsKey("CompanyName")) || (keywords.get("CompanyName").stream().anyMatch(keyword ->
-                StringUtil.containsWordIgnoreCase(company.getCompanyName().value, keyword))))
+                StringUtil.containsWordIgnoreCase(company.getName().value, keyword))))
                 && ((!keywords.containsKey("Phone")) || (keywords.get("Phone").stream().anyMatch(keyword ->
                 StringUtil.containsWordIgnoreCase(company.getPhone().value, keyword))))
                 && ((!keywords.containsKey("Email")) || (keywords.get("Email").stream().anyMatch(keyword ->

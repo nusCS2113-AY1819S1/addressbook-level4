@@ -78,8 +78,8 @@ public class CandidateCardHandle extends NodeHandle<Node> {
     public boolean equals(Candidate candidate) {
         return getName().equals(candidate.getName().fullName)
                 && getEducation().equals(candidate.getEducation().value)
-                && getSalary().equals(candidate.getSalary().value)
-                && getJob().equals(candidate.getJob().value)
+                && getSalary().equals(candidate.getExpectedSalary().value)
+                && getJob().equals(candidate.getDesiredJob().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(candidate.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));

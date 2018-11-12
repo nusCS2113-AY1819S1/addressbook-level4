@@ -7,17 +7,16 @@
 
 === What is RecruitBook?
 
+RecruitBook is an open-source project born out of a programming module I took in National University of Singapore.
+It was created in conjunction with my teammates https://github.com/andrewome[Andrew], https://github.com/kianmengtan[Kian Meng], https://github.com/leerachel[Rachel] and https://github.com/MingXunSeah[Ming Xun].
+
+In this project, I served the role as the team leader by steering the project direction and coordinating the implementation of features in RecruitBook.
+
 RecruitBook is a useful Java desktop application for job agents to better organise the list of available job offers and prospective job candidates.
 RecruitBook mainly uses a Command Line Interface(CLI) that allows you to interact with specific commands.
 It also has a Graphical User Interface created with JavaFX and has a codebase of about 10000 lines of code.
 
-=== RecruitBook features:
-* Add Feature
-* Edit Feature
-* Find Feature
-* List Feature
-* Email Feature
-
+*Link to GitHub*: [https://github.com/CS2113-AY1819S1-F09-4/main[RecruitBook]]
 
 == Summary of contributions
 
@@ -34,15 +33,24 @@ It also has a Graphical User Interface created with JavaFX and has a codebase of
    Enables job agents to record and access required information of companies in RecruitBook efficiently.
 
 * *Major enhancement #3*: added *the ability to add/delete job offers*
-** What it does:
-   + It allows job agents to save relevant information of job offers such as the hiring company, type of job etc.
-** Justification:
-   + Enables job agents to record and access required information of job offers in RecruitBook efficiently.
+** What it does: +
+   It allows job agents to save relevant information of job offers such as the hiring company, type of job etc.
+** Justification: +
+   Enables job agents to record and access required information of job offers in RecruitBook efficiently.
 
-* *Minor enhancement #1*: +
-   Added a functionality that allows job agents to delete multiple entries in a single delete command
+* *Minor enhancement #4*: added a functionality that changes the logic state of LogicManager +
+** What it does +
+    Changes the logic state of LogicManager. Depending on the logic state of LogicManager, RecruitBook executes different commands.
+** Justification +
+    Some commands require specific steps to be taken by the user before being able to execute.
+    Having a state helps keep track of the users' actions and execute the correct command accordingly.
+* *Minor enhancement #5*: Added a functionality that allows job agents to delete multiple entries in a single delete command +
+** What it does: +
+   It allows job agents to specify multiple indexes of candidates/job offers/ companies to delete.
+** Justification: +
+   Enables job agents to conveniently delete multiple entries with ease
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com/CS2113-AY1819S1-F09-4/main/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Aclosed+assignee%3Asxqnicholas96+[Pull Requests]]
 
 == Contributions to the User Guide
 
@@ -57,6 +65,8 @@ include::../UserGuide.adoc[tag=delete]
 
 include::../UserGuide.adoc[tag=undoredo]
 
+include::../UserGuide.adoc[tag=setPW]
+
 include::../UserGuide.adoc[tag=clear]
 
 == Contributions to the Developer Guide
@@ -65,7 +75,14 @@ include::../UserGuide.adoc[tag=clear]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+include::../DeveloperGuide.adoc[tag=logicComponent]
+
+include::../DeveloperGuide.adoc[tag=modelComponent]
+
+include::../DeveloperGuide.adoc[tag=storageComponent]
+
 include::../DeveloperGuide.adoc[tag=add/delete]
+
 include::../DeveloperGuide.adoc[tag=undoredo]
 
 

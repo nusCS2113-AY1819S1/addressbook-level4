@@ -61,7 +61,7 @@ public class ShortlistCandidateCommandTest {
         }
 
         String expectedMessage = String.format(ShortlistCandidateCommand.MESSAGE_SUCCESS,
-                BENSON.getName().fullName, CASHIER_AUDI.getJob().value, AUDI.getCompanyName().value);
+                BENSON.getName().fullName, CASHIER_AUDI.getJob().value, AUDI.getName().value);
 
         try {
             firstStage.execute(model, commandHistory, userPrefs);
@@ -86,7 +86,7 @@ public class ShortlistCandidateCommandTest {
         Command fourthStage = new SelectCandidateCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(ShortlistCandidateCommand.MESSAGE_DUPLICATE_CANDIDATE_SHORTLISTED,
-                CASHIER_AUDI.getJob().value, AUDI.getCompanyName().value)
+                CASHIER_AUDI.getJob().value, AUDI.getName().value)
                 + ShortlistCandidateCommand.MESSAGE_USAGE;
 
         try {
@@ -160,7 +160,7 @@ public class ShortlistCandidateCommandTest {
         showCompanyAtIndex(expectedModel, INDEX_FIRST);
         HashMap<String, List<String>> keywordsList = new HashMap<>();
         List<String> companyName = new ArrayList<>();
-        companyName.add(AUDI.getCompanyName().toString());
+        companyName.add(AUDI.getName().toString());
         keywordsList.put("CompanyName", companyName);
         assertCommandSuccess(new FindCompanyCommand(new CompanyContainsFindKeywordsPredicate(keywordsList)),
                 model, commandHistory, String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW,
