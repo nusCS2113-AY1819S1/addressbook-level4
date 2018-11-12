@@ -20,6 +20,16 @@ The target audiences of our product are NUS SoC students and this product can he
 manage their academic tasks and spending which can increase their efficiency in management of
 their student life.
 
+Main features of `Something Daily` +
+
+****
+* Record and track user's module related tasks
+* Notify user when deadline of uncompleted tasks are coming or have passed
+* Record and track user's spending
+* Give advice and summary based on user's expenditure history
+* Simply and clear GUI to show all data stored
+****
+
 == Summary of contributions
 
 ****
@@ -45,17 +55,17 @@ Given below are sections I contributed to the code.
 
 * *Minor enhancement #1*: add "undoable_command" class related methods to fix "undo" command on both To-do List side and Expenditure Tracker side.
 
-* *Minor enhancement #2*: add test cases to increase coverage.
+* *Minor enhancement #2*: write test files in command, parser and ui parts to make sure every class related can work..
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=XiaoYunhan[RepoSense Dashboard]]
 
 * *Other contributions*:
 
 ** Documentation:
-*** Add implementation of TDL_sort command in the Developer Guide and update To-do List-related logic part in both User guide and Developer guide.
-*** Add implementation of deadline notification in the Developer Guide
+*** Write implementation of TDL_sort command in the Developer Guide and update To-do List-related logic part in both User guide and Developer guide.
+*** Write implementation of deadline notification in the Developer Guide
 *** Update deadline notification and calendar in the User Guide.
-*** Update Q&A in the user guide
+*** Write Q&A in the user guide
 *** Update use cases in the user guide
 
 ** Community:
