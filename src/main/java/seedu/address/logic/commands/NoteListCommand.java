@@ -49,8 +49,6 @@ public class NoteListCommand extends Command {
         int size = noteManager.getFilteredNotes().size();
         String noteList = noteManager.getHtmlNoteList();
 
-        System.out.println(noteList);
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, size), noteList);
     }
 }
