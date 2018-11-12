@@ -5,7 +5,11 @@
 
 == PROJECT: ProManage
 
----
+ProManage is a *professional desktop application* for companies that specialises in executing projects that undergoes a
+long and tedious planning phase. ProManage allow *Manager* and *Employees* of project teams to manage their team members and events easily.
+ProManage is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+image::Ui.png[width="800"]
 
 == Overview
 
@@ -72,6 +76,8 @@ include::../UserGuide.adoc[tag=showmine]
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
+
+include::../DeveloperGuide.adoc[tag=Parser]
 
 include::../DeveloperGuide.adoc[tag=Sort]
 

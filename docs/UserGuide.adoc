@@ -22,7 +22,7 @@ By: `T16-2`      Since: `Sept 2018`      Licence: `MIT`
 ProManage is a *professional desktop application* for companies that specialises in executing projects that undergoes a
 long and tedious planning phase. This is particularly useful for companies that have a distinct structure
 and chain of command. For each project, there is a project team, which is usually led by a *Manager*. The company would usually
-consist of various departments such as *Admin, Logistics, Programmes, Finance, Publicity, Marketing and Safety*.
+consist of a flexible number of departments such as *Admin, Logistics, Programmes, Finance, Publicity, Marketing and Safety*.
 ProManage targets these respective project teams, and allow *Manager* and *Employees* to manage their teams and events.
 
 Our application aims to ease the mode of task, event allocation and management by providing an all-in-one platform for
@@ -45,7 +45,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN des/Manager` : adds an employee named
- `John Doe` to the Employee List.
+ `John Doe` to the Manager List.
 * **`addEvent`**`n/Annual General Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` : creates
 a new event `Annual General Meeting`
 * **  `delete`**`3` : deletes the 3rd person shown in the contact list list
@@ -87,7 +87,7 @@ Priority level: `default`
 
 Login to the app as one of the following identity: `manager` or `employee` or `as EMAIL`. +
 The user can only login into ProManage if his/her email has been registered in the ProManage system before. +
-Once login, you will not be able to login again unless the user chooses to logout
+Once login, you will not be able to login again unless the user chooses to logout.
 
 Format: login `identity`
 

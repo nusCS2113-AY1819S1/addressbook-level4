@@ -52,15 +52,10 @@ public class ListCommandParserTest {
                 preparePredicate(firstExample)));
         assertParseSuccess(parser, " DeP Admin ", new ListCommand("dep",
                 preparePredicate(firstExample)));
-        /*assertParseSuccess(parser, "dep aDmin", new ListCommand("dep",
-                preparePredicate(firstExample)));*/
         assertParseSuccess(parser, "dep Admin Finance", new ListCommand("dep",
                 preparePredicate(secondExample)));
         assertParseSuccess(parser, "dep Admin Finance ", new ListCommand("dep",
                 preparePredicate(secondExample)));
-        /*assertParseSuccess(parser, "dep adMiN   fInancE", new ListCommand("dep",
-                preparePredicate(secondExample)));*/
-
 
     }
 

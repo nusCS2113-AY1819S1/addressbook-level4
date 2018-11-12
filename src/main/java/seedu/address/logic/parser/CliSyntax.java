@@ -23,6 +23,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TO = new Prefix("to/");
     public static final Prefix PREFIX_ALL_PEOPLE = new Prefix("all people");
     public static final Prefix PREFIX_ALL_EVENTS = new Prefix("all events");
+    public static final Prefix PREFIX_ALL = new Prefix("all");
     public static final Prefix PREFIX_FROM = new Prefix("from/");
     public static final Prefix PREFIX_DESIGNATION = new Prefix("des/");
 

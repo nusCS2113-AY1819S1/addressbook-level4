@@ -199,6 +199,26 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
+// tag::Parser[]
+[[Design-Parser]]
+=== Parser component
+[[fig-ParserClassDiagram]]
+.Structure of the Parser Component
+image::ParserClassDiagram.png[width="800"]
+
+*API* :
+link:{repoURL}/src/main/java/seedu/address/logic/parser/ProManageParser.java[`ProManageParser.java`]
+
+. `ProManageParser` use children class of `CommandParser` (eg. ManagerParser) to parse the user command.
+.  When login/logout command is executed, the CommandParser object within ProManageParser is changed accordingly to DefaultParser,
+ManagerParser or EmployeeParser.
+.  DefaultParser, ManagerParser or EmployeeParser are subclass of the abstract class CommandParser
+.  This display the behaviour of polymorphism as ProManageParser will always pass the input into CommandParser
+but its behaviour depends on implementation of its subclass.
+.  Each of it subclass will only know commands that is according to the privilege level.
+// end::Parser[]
+
+
 // tag::Model[]
 [[Design-Model]]
 === Model component
@@ -457,7 +477,7 @@ Step 2. The command is parsed and the result is shown.
 ==== Current Implementation
 
 The `list` feature allows users to filter through all the individual people in ProManage and understand which department
-they are from. The command currently has 4 sub-features; `list all`. `list all people`, `list all events` and `list dep DEPARTMENT`. The user can list all the
+they are from. The command currently has 4 sub-features; `list all` , `list all people`, `list all events` and `list dep DEPARTMENT`. The user can list all the
 people and events in ProManage by simply typing `list all`. Alternatively, the user can filter through ProManage and get the
 relevant Person's information by listing those of the specified department. The user can list multiple departments such
 as `list dep Admin Finance`. As of now, each person can only be inside one department.
@@ -483,7 +503,7 @@ Step 2. The `LogicManager` instance calls `AddressBookParser#parsecommand`, whic
 "list".
 
 Step 3. `ListCommandParser#parse` parses the type of command that is called upon and if applicable, the departments
-listed. The list command can take in either `all` or `dep`. `all` means that are no predicates and 'dep' means specific
+listed. The list command can take in either `all`, `all people` , `all events` or `dep`. `all` means that are no predicates and 'dep' means specific
 departments are about to be listed. An instance of the `ListCommand` encapsulating the type of `ListCommand` and if
 applicable, the predicates involved, is then returned to `Logic Manager`.
 
@@ -512,6 +532,146 @@ it can list out the upcoming birthdays of the personnel in the company.
 
 * Implement date of birth attribute and display current date and time the moment the application is launched. List out upcoming birthdays - `list birthdays`
 // end::List[]
+
+// tag::UndoRedo[]
+=== Undo/Redo Feature
+
+==== Current Implementation
+
+The `undo` and `redo` feature allows users to undo and redo their previous commands. The commands that can
+be undone are only those that modify the contents of the address book or event list, such as adding a person
+or event within the app. This is managed within `ModelManager`.
+
+The undo/redo mechanism is implemented separately for the address book and event list by the
+`VersionedAddressBook` and `VersionedEventList`. They are extensions of the superclass `AddressBook` and
+`EventList` respectively with a history of states stored internally as an `addressBookStateList`
+for the address book, `eventListStateList` for the event list, and a `currentStatePointer` in each of them.
+To ensure that the address book and event list are undone/redone correctly, a `StateHistoryList` (sub-class
+of `LinkedList`) is kept in the `ModelManager` to keep track of the list that was modified.
+
+The following operations were implemented:
+
+* `VersionedAddressBook#commit()` — Saves the current address book state in its internal history.
+
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its internal history.
+
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its internal history.
+
+* `VersionedEventList#commit()` — Saves the current event list in its internal history.
+
+* `VersionedEventList#undo()` — Restores the previous event list state from its internal history.
+
+* `VersionedEventList#redo()` — Restores a previously undone event list state from its internal history.
+
+These operations are exposed in the Model interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
+and `Model#redoAddressBook()` for the address book, and `Model#commitEventList()`, `Model#undoEventList()`
+and `Model#redoEventList()` for the event list. Two wrapper methods, `Model#undo()` and `Model#redo()`
+are also implemented. These will be the methods called by the commands `undo` and `redo`.
+
+The `StateHistoryList` implements the following operations for the `Model` to decide whether to
+undo/redo the address book or event list:
+
+* `StateHistoryList#getCurrentState()` - Retrieves the latest record state.
+
+* `StateHistoryList#getNextState()` - Retrieves the next (previously undone) record state.
+
+* `StateHistoryList#decrementPointer()` - Shifts record state pointer back. Called during `undo`.
+
+* `StateHistoryList#incrementPointer()` - Shifts record state pointer forward. Called during `redo`.
+
+A command can either modify the address book, event list, or both. Within the model, the `StateHistoryList`
+keeps track of all model methods which modify the address book or event list, and stores a history
+record value within itself for each method called.
+
+When undoing a command, the `ModelManager` requests for the latest record by `StateHistoryList#getCurrentState()`
+and calls the corresponding `VersionedAddressBook#undo()` and/or `VersionedEventList#undo()`. The ModelManager
+also informs the `StateHistoryList` that an undo command was issued to shift the pointer back.
+
+When redoing a command,the `ModelManager` requests for the next record from `StateHistoryList` and
+calls the corresponding `VersionedAddressBook#redo()` and/or `VersionedEventList#redo()`. The ModelManager
+also informs the `StateHistoryList` that an undo command was issued to shift the pointer forward.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The VersionedAddressBook and VersionedEventList
+will be initialized with the initial address book and event list states, and the currentStatePointers will
+point to their single state respectively. The StateHistoryList is instantiated as an empty list.
+
+image::UndoRedoModelInitializationStateListDiagram.png[width="800"]
+
+Step 2. The user executes `add` (with valid input arguments) to add a person to the address book. The `add` command calls
+`Model#addPerson()`, which will add a state record index integer `STATE_ADDRESSBOOK` to the `StateHistoryList`.
+This command is the last entered command, therefore the `pointer` in `StateHistoryList` shifts forward.
+The `add` command also calls `Model#commitAddressBook()`, causing the modified state of the address book after
+the `add` command executes to be saved in the `addressBookStateList`, and the address book `currentStatePointer`
+is shifted to the newly inserted address book state. The `currentStatePointer` for `VersionedEventList` remains unchanged
+as only the `VersionedAddressBook` was modified..
+
+image::UndoRedoNewCommandAB1StateListDiagram.png[width="800"]
+
+[NOTE]
+If a command fails its execution, it will not call `Model#commitAddressBook()` or `Model#commitEventList()`,
+so the address book or event list state will not be saved into `addressBookStateList` or `eventListStateList`.
+The `StateHistoryList` will also not save a record state.
+
+Step 3. The user realises that they have accidentally added the wrong person, and decides to undo the action by
+executing the `undo` command. The `undo` command calls `Model#undo()`, which gets the latest record state
+from `StateHistoryList` and recognises that the `VersionedAddressBook` was modified in the previous command.
+The `Model#undoAddressBook()` is then called, which shift the currentStatePointer once to the left, pointing it to
+the previous address book state, and restores the address book to that state. Also, the `pointer` in `StateHistoryList`
+is shifted to the left by `StateHistoryList#decrementPointer`.
+
+image::UndoRedoNewCommandAB2StateListDiagram.png[width="800"]
+
+[NOTE]
+If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous
+address book states to restore. The undo command uses `Model#canUndo()` to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the undo. +
+
+The following sequence diagram shows how the undo operation works:
+
+image::UndoRedoSequenceDiagram.png[width="800"]
+
+Step 4.
+The redo command does the opposite — it calls `Model#redo()`, which shifts the `currentStatePointer` in either
+the `VersionedAddressBook` and/or `VersionedEventList` once to the right, pointing to the previously
+undone state, and restores it to that state.
+
+[NOTE]
+If the `pointer` is at index `stateHistoryList.size() - 1`, pointing to the latest memory state, then
+there are no undone states to restore. The redo command uses `Model#canRedo()` to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the redo.
+
+image::UndoRedoNewCommandAB3StateListDiagram.png[width="800"]
+
+Step 5.
+The user then decides to add a new event to the event list, by the `addEvent` command. The `addEvent` command calls
+`Model#addEvent()`, which will add a state record index integer `STATE_EVENTLIST` to the `StateHistoryList`.
+This command is the last entered command, therefore the `pointer` in `StateHistoryList` shifts forward.
+The `addEvent` command also calls `Model#commitEventList()`, causing the modified state of the event list after
+the `addEvent` command executes to be saved in the `eventListStateList`, and the event list `currentStatePointer`
+is shifted to the newly inserted address book state. The `currentStatePointer` for `VersionedAddressBook` remains unchanged
+as only the `VersionedEventList` was modified.
+
+image::UndoRedoNewCommandELStateListDiagram.png[width="800"]
+
+Step 6.
+The user then decides to execute `clear`. Since this command must clear both the address book and event list,
+the `clear` command calls both `Model#commitAddressBook()` and `Model#commitEventList()`. It adds a state
+record index integer `STATE_BOTH` to the `StateHistoryList`. The `currentStatePointer` in both
+`VersionedAddressBook` and `VersionedEventList` shifts to point to the newly added states respectively.
+
+image::UndoRedoNewCommandBothStateListDiagram.png[width="800"]
+
+==== Future Improvements
+
+===== Façade Class for VersionedAddressBook and VersionedEventList
+
+To improve abstraction and shift the responsibility of deciding which list to undo or redo away from the
+`Model`, a façade class can be created, e.g. `VersionedProManage`, to hold the `StateHistoryList`,
+`VersionedAddressBook` and `VersionedEventList`. The model will then only have to call the `VersionedProManage#undo()`
+or `VersionedProManage#redo()` methods.
+// end::UndoRedo[]
 
 === Logging
 
@@ -812,7 +972,7 @@ relevant people
 need to attend
 
 |`* * *` |User |Exit command |
-
+// end::userstories[]
 |`* * *` |New Employee |See usage instructions |Refer to instructions when I forget how to use the ProManage
 
 |`* * *` |Employee |Find a person by name |Locate details of people without having to go through the entire list
@@ -840,7 +1000,7 @@ need to attend
 _{More to be added}_
 
 [appendix]
-// end::userstories[]
+
 // tag::usecases[]
 == Use Cases
 
@@ -922,7 +1082,7 @@ Use case ends.
 ** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
-
+// end::usecases[]
 [discrete]
 === Use case: Add Event
 
@@ -1042,7 +1202,7 @@ Use case ends.
 ** Use case ends
 
 [appendix]
-// end::usecases[]
+
 
 // tag::usecases_invite[]
 [discrete]
@@ -1157,8 +1317,6 @@ be able to accomplish most of the tasks faster using commands than using the mou
 .  User cannot be in multiple departments.
 .  The program should respond within 2 seconds after creation, editing, and deletion of events.
 
-_{More to be added}_
-
 [appendix]
 // end::nonfunctionalrequirements[]
 == Glossary
@@ -1264,7 +1422,7 @@ and `add n/Mark p/93455678 e/mark@example.com a/Mark street, block 12, #05-01 de
    Expected: The details of John and Tracy or any personnel who is in the Admin and Finance department will appear. Details of the listed personnel will be listed.
 .. Test case: `list all people` +
    Expected: The details of all personnel will be listed.
-.. Other incorrect delete commands to try: `list admn`, `list al people` (where the input is not of correct spelling form)+
+.. Other incorrect delete commands to try: `list admn`, `list al people` (where the input is not of correct spelling form) +
    Expected: Error thrown.
 
 . Listing all personnel and events
@@ -1272,13 +1430,13 @@ and `add n/Mark p/93455678 e/mark@example.com a/Mark street, block 12, #05-01 de
 .. Prerequisites: Add personnel of different departments such as the example above. Add different events into ProManage using the `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` and
 `addEvent n/Financial Review d/Review the financial quarter l/Conference Room 4 date/2018-10-23 s/14:00 e/16:30`.
 
-.. Test case: `list all events` +
+.. Test case: `list all events`
    Expected: The details of all events will be listed.
 
 .. Test case: `list dep Admin Finance` or any DEPARTMENT -> `list all`
    Expected: The details of all personnel and events will be listed.
 
-_{ more test cases ... }_
+
 
 === Saving data
 
