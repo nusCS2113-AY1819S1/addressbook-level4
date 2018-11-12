@@ -19,6 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Skin;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
+import seedu.planner.model.Model;
 
 //@author tztzt
 /**
@@ -32,8 +33,9 @@ public class NewAutoCompletionBinding<T> {
     private final Object suggestionsTaskLock = new Object();
 
     private FetchSuggestionsTask suggestionsTask = null;
-    private CustomSuggestionProvider suggestionProvider = new CustomSuggestionProvider();
+    private CustomSuggestionProvider suggestionProvider;
     private boolean ignoreInputChanges = false;
+    private Model model;
 
     private String prefixText = "";
     private String suffixText = "";
@@ -62,11 +64,13 @@ public class NewAutoCompletionBinding<T> {
      * @param completionTarget The target node to which auto-completion shall be added
      */
 
-    public NewAutoCompletionBinding(Node completionTarget) {
+    public NewAutoCompletionBinding(Node completionTarget, Model model) {
 
         this.completionTarget = completionTarget;
         this.autoCompletionPopup = new AutoCompletePopup<>();
         this.autoCompletionPopup.setConverter(converter);
+        this.suggestionProvider = new CustomSuggestionProvider(model);
+        this.model = model;
 
         autoCompletionPopup.setStyle("-fx-control-inner-background:black;"
                 + "-fx-accent: #f7f7c3;"

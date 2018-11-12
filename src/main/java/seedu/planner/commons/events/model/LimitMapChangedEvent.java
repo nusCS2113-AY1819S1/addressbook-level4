@@ -13,7 +13,6 @@ public class LimitMapChangedEvent extends BaseEvent {
 
     public LimitMapChangedEvent(ReadOnlyFinancialPlanner newData) {
         this.data = newData;
-        CustomSuggestionProvider.updateLimitDateMap(newData.getLimitMap());
     }
 
     @Override

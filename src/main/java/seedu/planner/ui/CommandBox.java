@@ -15,6 +15,7 @@ import seedu.planner.logic.autocomplete.NewAutoCompletionBinding;
 import seedu.planner.logic.commands.CommandResult;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.logic.parser.exceptions.ParseException;
+import seedu.planner.model.Model;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -33,10 +34,10 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private TextField commandTextField;
 
-    public CommandBox(Logic logic) {
+    public CommandBox(Logic logic, Model model) {
         super(FXML);
         this.logic = logic;
-        new NewAutoCompletionBinding(commandTextField).setVisibleRowCount(MAX_SUGGESTIONS);
+        new NewAutoCompletionBinding(commandTextField, model).setVisibleRowCount(MAX_SUGGESTIONS);
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();

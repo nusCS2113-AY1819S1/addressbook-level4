@@ -12,7 +12,6 @@ public class RecordMapChangedEvent extends BaseEvent {
 
     public RecordMapChangedEvent(ReadOnlyFinancialPlanner newData) {
         this.data = newData;
-        CustomSuggestionProvider.updateRecordMap(newData.getRecordMap());
     }
 
     @Override

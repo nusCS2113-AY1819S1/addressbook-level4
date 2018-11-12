@@ -67,7 +67,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public void setRecordMap(RecordMap recordMap) {
         this.recordMap.setRecordMap(recordMap);
-        CustomSuggestionProvider.updateRecordMap(recordMap);
     }
 
     public void setLimits(List<Limit> limits) {
@@ -76,7 +75,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     public void setLimitMap(HashMap<String, Integer> limitMap) {
         this.limitsMap.setDateMap(limitMap);
-        CustomSuggestionProvider.updateLimitDateMap(limitMap);
     }
 
     /**

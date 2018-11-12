@@ -152,7 +152,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getFinancialPlannerFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(logic);
+        CommandBox commandBox = new CommandBox(logic, model);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 

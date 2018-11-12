@@ -44,6 +44,7 @@ import seedu.planner.logic.commands.SummaryByDateCommand;
 import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
+import seedu.planner.model.Model;
 import seedu.planner.model.autocomplete.RecordMap;
 import seedu.planner.model.record.Date;
 
@@ -88,20 +89,24 @@ public class CustomSuggestionProvider {
             SortCommand.CATEGORY_SET.stream()).collect(Collectors.toSet());
 
     private static final Set<String> emptySet = new HashSet<>();
-    private static RecordMap recordsMap = new RecordMap();
 
     private static final Set<String> defaultDateSet = new HashSet<>(Arrays.asList(Date.DATE_INPUT_TODAY,
             Date.DATE_INPUT_YESTERDAY));
     private static final Set<String> defaultTagsSet = getSampleTagsForSuggestion();
 
-    private static Set<String> nameSuggestionSet = new HashSet<>();
-    private static Set<String> dateSuggestionSet = new HashSet<>();
-    private static Set<String> tagsSuggestionSet = new HashSet<>();
+    private Set<String> nameSuggestionSet = new HashSet<>();
+    private Set<String> dateSuggestionSet = new HashSet<>();
+    private Set<String> tagsSuggestionSet = new HashSet<>();
 
-    private static HashMap<String, Integer> limitsDateMap = new HashMap<>();
-    private static Set<String> limitsDateSuggestionSet = new HashSet<>();
+    private Set<String> limitsDateSuggestionSet = new HashSet<>();
 
     private SuggestionProvider<String> suggestionProvider = newCreate(emptySet);
+
+    private Model model;
+
+    public CustomSuggestionProvider(Model model) {
+        this.model = model;
+    }
 
     public SuggestionProvider<String> getSuggestions() {
         return suggestionProvider;
@@ -227,20 +232,25 @@ public class CustomSuggestionProvider {
 
         if (inputs.length > 1 && strIndex < inputs.length) {
             if (inputs[strIndex].matches(PREFIX_PATTERN)) {
-                if (inputs[strIndex].startsWith(PREFIX_TAG.getPrefix())) {
-                    updateSuggestions(tagsSuggestionSet);
-                } else if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
-                    updateSuggestions(dateSuggestionSet);
-                } else if (inputs[strIndex].startsWith(PREFIX_NAME.getPrefix())) {
+                if (inputs[strIndex].startsWith(PREFIX_NAME.getPrefix())) {
+                    updateRecordNameSuggestionSets();
                     updateSuggestions(nameSuggestionSet);
-                } else {
+                } else if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
+                    updateRecordDateSuggestionSets();
+                    updateSuggestions(dateSuggestionSet);
+                } else if (inputs[strIndex].startsWith(PREFIX_TAG.getPrefix())) {
+                    updateRecordTagsSuggestionSets();
+                    updateSuggestions(tagsSuggestionSet);
+                }  else {
                     clearSuggestions();
                 }
             } else if (namePrefixPresent) {
                 if (!prefixAfterNamePrefix) {
+                    updateRecordNameSuggestionSets();
                     updateSuggestions(nameSuggestionSet);
                 } else {
                     if (strIndex > indexWithNamePrefix && strIndex < otherPrefixIndex) {
+                        updateRecordNameSuggestionSets();
                         updateSuggestions(nameSuggestionSet);
                     } else {
                         clearSuggestions();
@@ -261,28 +271,22 @@ public class CustomSuggestionProvider {
      * @param strIndex is the index of the word to be completed in the entire string of input.
      */
     private void dateParametersCommand(String[] inputs, int strIndex) {
-        Set<String> suggestions;
-
-        if (inputs[0].equals(AddLimitCommand.COMMAND_WORD)) {
-            suggestions = limitsDateSuggestionSet;
-        } else {
-            suggestions = dateSuggestionSet;
-        }
+        updateRecordDateSuggestionSets();
 
         if (inputs.length == 2) {
             if (strIndex == 1) {
                 if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
-                    updateSuggestions(suggestions);
+                    updateSuggestions(dateSuggestionSet);
                 } else {
                     clearSuggestions();
                 }
             }
         } else if (strIndex < inputs.length && (inputs.length == 3 || inputs.length == 4)) {
             if (inputs[strIndex].startsWith(PREFIX_DATE.getPrefix())) {
-                updateSuggestions(suggestions);
+                updateSuggestions(dateSuggestionSet);
             } else if (strIndex > 1) {
                 if (inputs[strIndex - 1].startsWith(PREFIX_DATE.getPrefix())) {
-                    updateSuggestions(suggestions);
+                    updateSuggestions(dateSuggestionSet);
                 } else {
                     clearSuggestions();
                 }
@@ -301,8 +305,10 @@ public class CustomSuggestionProvider {
     private void datesCommandKeyword(String[] inputs, int strIndex) {
         Set<String> suggestions;
         if (inputs[0].equals(ListCommand.COMMAND_WORD) || inputs[0].equals(StatisticCommand.COMMAND_WORD)) {
+            updateRecordDateSuggestionSets();
             suggestions = dateSuggestionSet;
         } else {
+            updateLimitSet();
             suggestions = limitsDateSuggestionSet;
         }
 
@@ -339,6 +345,7 @@ public class CustomSuggestionProvider {
      */
     private void deleteDateCommandKeyword(String[] inputs) {
         if (inputs.length == 2) {
+            updateRecordDateSuggestionSets();
             updateSuggestions(dateSuggestionSet);
         } else {
             clearSuggestions();
@@ -423,6 +430,7 @@ public class CustomSuggestionProvider {
                         clearSuggestions();
                     } else {
                         if (dateInputSummarySet.contains(inputs[1])) {
+                            updateRecordDateSuggestionSets();
                             updateSuggestions(dateSuggestionSet);
                         } else if (inputs[1].equals(SummaryByMonthCommand.COMMAND_MODE_WORD)) {
                             updateSuggestions(defaultMonthSummarySet);
@@ -438,46 +446,37 @@ public class CustomSuggestionProvider {
     }
 
     /**
-     * Updates the RecordMap in this class whenever the RecordMap in the Model is updated.
-     *
-     * @param newRecordMap is the new TagMap object that is to replace the old TagMap
+     * Updates the Set of dates that are tied to limits
      */
-    public static void updateRecordMap(RecordMap newRecordMap) {
-        recordsMap = newRecordMap;
-        updateRecordSets();
-    }
-
-    /**
-     * Updates the RecordMap in this class whenever the RecordMap in the Model is updated.
-     *
-     * @param dataBasedLimitList is the new HashMap object that is to replace the old LimitDateMap
-     */
-    public static void updateLimitDateMap(HashMap<String, Integer> dataBasedLimitList) {
-        limitsDateMap = dataBasedLimitList;
-        updateLimitDateSet();
-    }
-
-    /**
-     * Updates the Sets of names, dates and tags that are obtained from the Record Map
-     */
-    private static void updateRecordSets() {
-        nameSuggestionSet = recordsMap.getAsReadOnlyNameMap().getAsReadOnlyNameMap().keySet();
-        Set<String> tempDateSuggestionSet = new HashSet<>(defaultDateSet);
-        tempDateSuggestionSet.addAll(recordsMap.getAsReadOnlyDateMap().getAsReadOnlyDateMap().keySet());
-        dateSuggestionSet = tempDateSuggestionSet;
-
-        Set<String> tempTagsSuggestionSet = new HashSet<>(defaultTagsSet);
-        tempTagsSuggestionSet.addAll(recordsMap.getAsReadOnlyTagMap().getAsReadOnlyTagMap().keySet());
-        tagsSuggestionSet = tempTagsSuggestionSet;
-    }
-
-    /**
-     * Updates the Map of dates that are tied to limits
-     */
-    private static void updateLimitDateSet() {
+    private void updateLimitSet() {
         Set<String> tempLimitsDateSuggestionSet = new HashSet<>(defaultDateSet);
-        tempLimitsDateSuggestionSet.addAll(limitsDateMap.keySet());
+        tempLimitsDateSuggestionSet.addAll(model
+                .getFinancialPlanner().getLimitMap().keySet());
         limitsDateSuggestionSet = tempLimitsDateSuggestionSet;
     }
 
+    /**
+     * Updates the Sets of dates that are obtained from the Record Map
+     */
+    private void updateRecordDateSuggestionSets() {
+        Set<String> tempDateSuggestionSet = new HashSet<>(defaultDateSet);
+        tempDateSuggestionSet.addAll(model.getFinancialPlanner().getRecordMap().getAsReadOnlyDateMap().getAsReadOnlyDateMap().keySet());
+        dateSuggestionSet = tempDateSuggestionSet;
+    }
+
+    /**
+     * Updates the Sets of names that are obtained from the Record Map
+     */
+    private void updateRecordNameSuggestionSets() {
+        nameSuggestionSet = model.getFinancialPlanner().getRecordMap().getAsReadOnlyNameMap().getAsReadOnlyNameMap().keySet();
+    }
+
+    /**
+     * Updates the Sets of tags that are obtained from the Record Map
+     */
+    private void updateRecordTagsSuggestionSets() {
+        Set<String> tempTagsSuggestionSet = new HashSet<>(defaultTagsSet);
+        tempTagsSuggestionSet.addAll(model.getFinancialPlanner().getRecordMap().getAsReadOnlyTagMap().getAsReadOnlyTagMap().keySet());
+        tagsSuggestionSet = tempTagsSuggestionSet;
+    }
 }
