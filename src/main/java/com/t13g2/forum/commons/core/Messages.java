@@ -25,5 +25,5 @@ public class Messages {
             + "\nPlease go to the corresponding thread list.";
     public static final String MESSAGE_INVALID_COMMENT =
             "Sorry! The entity you requested is not under the current scope."
-            + "\nPlease go to rhe corresponding comment list.";
+            + "\nPlease go to the corresponding comment list.";
 }
