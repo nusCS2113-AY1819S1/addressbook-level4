@@ -23,7 +23,7 @@ Responsibilities: Managing Logic
 
 === Benjamin Chong Zhi Yi
 image::bennchong.png[width="150", align="left"]
-{empty}[http://github.com/bennchong[github]][<<benchong#, portfolio>>]
+{empty}[http://github.com/bennchong[github]][<<bennchong#, portfolio>>]
 
 Role: +
 Responsibilities: Managing Model
