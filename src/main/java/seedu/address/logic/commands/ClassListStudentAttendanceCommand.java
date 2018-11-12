@@ -29,8 +29,8 @@ public class ClassListStudentAttendanceCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Attendance is listed for"
             + " Class: %1$s"
             + ", Module code: %2$s";
-    private static final String MESSAGE_FAIL = "Class belonging to module not found!";
-    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
+    public static final String MESSAGE_FAIL = "Class belonging to module not found!";
+    public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
 
     private final String className;
     private final String moduleCode;
@@ -65,5 +65,14 @@ public class ClassListStudentAttendanceCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS + "\n", className, moduleCode),
                 classroomManager.getClassroomAttendanceHtmlRepresentation(classToListAttendance));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ClassListStudentAttendanceCommand // instanceof handles nulls
+                && className.equals(((ClassListStudentAttendanceCommand) other).className)
+                && moduleCode.equals(((ClassListStudentAttendanceCommand) other).moduleCode));
+
     }
 }

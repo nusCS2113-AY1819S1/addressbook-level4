@@ -180,9 +180,12 @@ public class ClassDeleteStudentCommandTest {
 
     @Test
     public void equals() {
-        final ClassDeleteStudentCommand standardCommand = new ClassDeleteStudentCommand(VALID_CLASS_T16,
-                VALID_MODULE_CODE_CG1111,
-                VALID_MATRIC_NO_MEGAN);
+        final String className = "T16";
+        final String moduleCode = "CG1111";
+        final String matricNo = "A0168412C";
+        final ClassDeleteStudentCommand standardCommand = new ClassDeleteStudentCommand(className,
+                moduleCode,
+                matricNo);
         // same values -> retDeletes true
         ClassDeleteStudentCommand commandWithSameValues = new ClassDeleteStudentCommand(VALID_CLASS_T16,
                 VALID_MODULE_CODE_CG1111,
