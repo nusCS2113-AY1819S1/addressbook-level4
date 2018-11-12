@@ -19,6 +19,7 @@ public abstract class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names/tags contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "If the \\exclude option is enabled, the matched person will be excluded from the list instead.\n"
             + "Parameters: [\\tag] [\\exclude] KEYWORD [MORE_KEYWORDS]...\n"
             + "Example1: " + COMMAND_WORD + " alice bob charlie\n"
             + "Example2: " + COMMAND_WORD + " " + FindCommandParser.EXCLUDE_OPTION_STRING + " alice\n"
