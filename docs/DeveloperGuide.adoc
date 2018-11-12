@@ -460,17 +460,22 @@ Calendar uses both `Model` and `UI` components.
 ==== Aspect: Methods to support the calendar feature
 
 * **Alternative 1 (current choice):** Use the `Calendar` class in Java library to implement a calendar panel.
-** Pros: Easy to create, no external library or API is needed and pulling data from to-do list and expenditure tracker will be feasible as well.
+** Pros: It is easy to create, no external library or API is needed and pulling data from to-do list and expenditure tracker will be feasible as well.
 ** Cons: The appearance of calendar may not be that good.
 * **Alternative 2:** Use calendar API (Google Calendar)
 ** Pros: The appearance will be better and the calendar will provide more dynamic features.
-** Cons: Need more effort to integrate with our application and pull task and expenditure data from storage.
+** Cons: It needs more effort to integrate with our application and pull task and expenditure data from storage.
 
+Here is an image of Google Calendar with other dynamic features provided. For example, user could click on a date and add an event, which is not supported by Java `Calendar` class by default.
+
+image::GoogleCalendarImage.png[width="800"]
+
+More dynamic features with mouse clicking for the calendar in Something Daily will be implemented in Version 2.0.
 // end::calendar[]
 
 // tag::expenditureViewing[]
 
-=== Viewing expenditures feature
+=== Viewing filtered expenditures feature
 
 ==== Current Implementation
 
@@ -479,14 +484,14 @@ Viewing expenditures in the Expenditure Tracker uses both `Logic` and `Model` co
 * **In `Logic` part**: We use `getPredicateShowExpendituresOnDate` method of `ViewExpenditureCommand` class to get the predicate for a particular date, afterwards it is passed to `updateFilteredExpenditureList` method which will update the expenditure list shown to user. We use `predicateShowExpendituresOfCategory` method to get the predicate for a specific category, afterwards it is passed to `updateFilteredExpenditureList` method which will update the expenditure list shown to user.
 * **In `Model` part**: We use `setPredicate` method of FilteredList in `ModelManager` class to change the content of current expenditure list.
 
-==== Aspect: Methods to support the view feature
+==== Aspect: Methods to support the viewing filtered expenditures feature
 
 * **Alternative 1 (current choice):** We iterate through the entire expenditure list and select the expenditures based on filter.
-** Pros: Easy to implement, there is no need for sorting functions.
-** Cons: Need to check all the expenditures in the list with time complexity O(n) which is relatively slow.
+** Pros: It is easy to implement, there is no need for sorting functions.
+** Cons: It needs to check all the expenditures in the list with time complexity O(n) which is relatively slow.
 * **Alternative 2:** We keep two expenditure lists sorted by date or category respectively.
-** Pros: Faster to get the expenditures, we only need to find the first and last appearance of the date or category, all expenditures between start and end will be selected.
-** Cons: Harder to implement, more storage are needed to maintain the two sorted lists.
+** Pros: It is faster to get the expenditures. We only need to find the first and last appearance of the date or category, all expenditures between start and end will be selected.
+** Cons: It is harder to implement and more storage are needed to maintain the two sorted lists.
 
 // end::expenditureViewing[]
 
@@ -505,14 +510,14 @@ The following sequence diagram shows how the `ET_advice` operation works:
 
 image::ExpenditureGetAdviceSequenceDiagram.png[width="800"]
 
-==== Aspect: Methods to support the view feature
+==== Aspect: Methods to show the advice message
 
-* **Alternative 1 (current choice):** We iterate through the entire expenditure list and select the expenditures based on filter.
-** Pros: Easy to implement, there is no need for sorting functions.
-** Cons: Need to check all the expenditures in the list with time complexity O(n) which is relatively slow.
-* **Alternative 2:** We keep two expenditure lists sorted by date or category respectively.
-** Pros: Faster to get the expenditures, we only need to find the first and last appearance of the date or category, all expenditures between start and end will be selected.
-** Cons: Harder to implement, more storage are needed to maintain the two sorted lists.
+* **Alternative 1 (current choice):** We generate the advice message using string builder and afterwards the message will be shown to user in a pop-up window.
+** Pros: It is user friendly. The content of advice will be shown clearly, which is easy for user to see.
+** Cons: It needs effort to implement a `PopUpString` class (in our cases, a self-implemented pop-up window will be easier than using the one in Java library since only a string needs to be shown) and corresponding methods for UI activating in the `ExpenditureGetAdviceCommand` class.
+* **Alternative 2:** We show the advice message in the command result box.
+** Pros: It is easy to be implemented.
+** Cons: It is not user friendly and harder for user to view in the command result box which is relatively small.
 
 // end::getAdvice[]
 
