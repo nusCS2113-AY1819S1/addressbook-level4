@@ -46,7 +46,8 @@ public class ModuleDeleteCommand extends Command {
         moduleManager.deleteModule(moduleToDelete);
         moduleManager.saveModuleList();
 
-        return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete),
+                ModuleManager.getInstance().getModuleTableRepresentation());
     }
 
     @Override
