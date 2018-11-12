@@ -1272,9 +1272,32 @@ To-do list
 2. User receives and acknowledges the reminder
 // end::extraTaskUseCases[]
 
+// tag::otherTaskUseCases[]
+[discrete]
+=== Use case 13: Get deadline notification
+*System:*
+To-do list
+
+*MSS*
+
+1.The color of one task turns red which mean this task is uncompleted and the deadline has passed already
+2.The color of one task turns yellow which mean this task is uncompleted and the deadline will come within 7 days
+
+[discrete]
+=== Use case 14: Sort Uncompleted tasks by deadline
+*System:*
+To-do list
+
+*MSS*
+
+1. User enter `TDL_view uncompleted` to list uncompleted tasks
+2. User enter `TDL_sort date` to sort all uncompleted tasks by deadline date
+
+// end::otherTaskUseCases[]
+
 // tag::expenditureUseCases[]
 [discrete]
-=== Use case 13: Add expenditure / income
+=== Use case 15: Add expenditure / income
 *System:*
 Expenditure Tracker & Calendar
 
@@ -1288,7 +1311,7 @@ Expenditure Tracker & Calendar
 6. Expenditure Tracker record and display the income / outcome on calendar
 
 [discrete]
-=== Use case 14: Check expenditure / income status
+=== Use case 16: Check expenditure / income status
 *System:*
 Expenditure Tracker & Calendar
 
@@ -1300,7 +1323,7 @@ Expenditure Tracker & Calendar
 4. Calendar shows the expenditure / income for each day visually or Expenditure Tracker shows the expenditure / income status by displaying the amount of money.
 
 [discrete]
-=== Use case 15: Delete expenditure / income
+=== Use case 17: Delete expenditure / income
 *System:*
 Expenditure Tracker & Calendar
 
@@ -1316,7 +1339,7 @@ Expenditure Tracker & Calendar
      2b1. Expenditure list shows an error message
 
 [discrete]
-=== Use case 16: Edit or Update expenditure
+=== Use case 18: Edit or Update expenditure
 *System:*
 Expenditure Tracker & Calendar
 

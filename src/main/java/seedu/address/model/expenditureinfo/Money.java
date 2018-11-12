@@ -5,7 +5,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- *
+ *  Represents a Expenditure's category in the expenditure tracker.
+ *  Guarantees: immutable; is valid as declared in {@link #isValidMoney(String)}
  */
 public class Money {
     public static final String MESSAGE_MONEY_CONSTRAINTS =

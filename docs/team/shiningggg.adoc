@@ -5,13 +5,14 @@
 
 == Overview: Something Daily
 
-Something Daily is a desktop application using command-line interface. It allows user to add, delete or edit the task and expenditure. It also provides advanced features such as getting spending advice for following days and checking the tasks information and expenditure records of a particular day.
+Something Daily is a desktop application using command-line interface. It is built up by three core components: To-do List, Expenditure Tracker and Calendar. This application allows user to add, delete or edit the task and expenditure. It also provides user with advanced features such as getting spending advice for following days and checking the tasks information and expenditure records of a particular day.
 
 Something Daily is designed to help NUS SoC students to manage the significant number of academic tasks and keep track on daily expenditures. Moreover, it helps alleviate the inconvenience caused by switching between apps for example between `Google Calendar` and `ExpensePoint` as user could manage daily stuffs such as expenditures and tasks in one application.
 
-This product was developed by a team of four, for more information about the rest developers, you may find it in the `About Us` page. Given below are my contributions to the whole project.
+This product was developed by a team of four, for more information about the rest developers, you may find it in the `About Us` page.
 
 == Summary of contributions
+Given below are my contributions to this project.
 
 * *Major enhancement*:
 1. Designed *models for Expenditure Tracker*
@@ -39,7 +40,7 @@ This product was developed by a team of four, for more information about the res
 *** Justification: If the user has no idea on where he/she spent money and want to get some advice on managing money in the following period, this feature helps the users plan how to spend.
 
 7. Added *the ability to view expenditures by date or category*
-*** What it does: Displays the expenditures on a particular day or of a specific category.
+*** What it does: Displays the expenditures on a particular day or of a specific category in the Expenditure Tracker panel.
 *** Justification: Since user might not want to see all the expenditures from beginning till now, this feature improves the efficiency for user to navigate through expenditure records as user could view by a particular date or category.
 
 8. Added *the ability to check tasks and expenditures on a particular day*
@@ -49,8 +50,9 @@ This product was developed by a team of four, for more information about the res
 * *Minor enhancement*:
 1. Added a `PopUpString` class and corresponding methods to pop up a window showing a particular string.
 2. Designed model class for Calendar, which generates the current month's data and provides the data to be displayed to user.
-3. Written test files to check whether Expenditure Tracker models work properly, which helps developers find out the bugs and logic error in models.
+3. Wrote test files to check whether Expenditure Tracker models work properly, which helps developers find out the bugs and logic error in models.
 4. Set separate path for Expenditure Tracker storage.
+5. Modified improper Javadoc comment.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=shiningggg&sort=displayName&since=2018-09-12&until=&timeframe=day&reverse=false&repoSort=true[RepoSense Dashboard]]
 
@@ -58,7 +60,7 @@ This product was developed by a team of four, for more information about the res
 
 ** Documentation:
 *** Added Expenditure Tracker features description to User Guide.
-*** Added user stories and use cases of Developer Guide.
+*** Updated user stories and use cases of Developer Guide.
 *** Added implementations for Calendar, Viewing expenditures and Get advice to Developer Guide.
 
 ** Project Management:

@@ -21,7 +21,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.CalendarInfo;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the calendar.
  */
 public class CalendarPanel extends UiPart<Region> {
     private static final String FXML = "CalendarPanel.fxml";
