@@ -2,6 +2,7 @@ package seedu.address.model.module;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +19,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.student.StudentManager;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 import seedu.address.storage.adapter.XmlAdaptedStudentModule;
+import seedu.address.ui.HtmlProcessor;
 import seedu.address.ui.HtmlTableProcessor;
 
 /**
@@ -246,6 +248,36 @@ public class ModuleManager {
      */
     public String getModuleTableRepresentation() {
         return convertModulesToTableRepresentation(modules);
+    }
+
+    /**
+     * Converts the given module into a HTML String for display in the {@code BrowserPanel}
+     */
+    public String getModuleAsHtmlRepresentation(Module module) {
+        final String listItemFormat = "%1$s (%2$s)";
+        StringBuilder sb = new StringBuilder();
+        StringBuilder studentEntries = new StringBuilder();
+
+        if (module.getEnrolledStudents().isEmpty()) {
+            studentEntries.append("There are no students enrolled in this module.");
+        } else {
+            studentEntries.append(HtmlProcessor.getOrderedListStart());
+            for (Person s : module.getEnrolledStudents()) {
+                studentEntries.append(HtmlProcessor.getListItem(
+                        String.format(listItemFormat, s.getName().toString(), s.getMatricNo())
+                ));
+            }
+            studentEntries.append(HtmlProcessor.getOrderedListEnd());
+        }
+
+        List<AbstractMap.SimpleEntry<String, String>> details = new ArrayList<>();
+        details.add(new AbstractMap.SimpleEntry<>("Module Code: ", module.getModuleCode().toString()));
+        details.add(new AbstractMap.SimpleEntry<>("Module Name: ", module.getModuleName().toString()));
+        details.add(new AbstractMap.SimpleEntry<>("Enrolled Students: ", studentEntries.toString()));
+
+        sb.append(HtmlProcessor.constructDetailedView(details));
+
+        return sb.toString();
     }
 
     public ArrayList<Module> getModules() {

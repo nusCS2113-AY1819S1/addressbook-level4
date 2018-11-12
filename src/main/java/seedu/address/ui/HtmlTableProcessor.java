@@ -107,4 +107,28 @@ public class HtmlTableProcessor {
         return " </tbody>"
                 + "</table>";
     }
+
+    public static String getTableWithoutBorderStart() {
+        return "<table class=\"table table-hover table-borderless\">";
+    }
+
+    public static String getTableBodyStart() {
+        return "<tbody>";
+    }
+
+    public static String getTableRowStart() {
+        return "<tr>";
+    }
+
+    public static String getTableRowEnd() {
+        return "</tr>";
+    }
+
+    public static String getTableBodyEnd() {
+        return "</tbody>";
+    }
+
+    public static String getTableWithoutBorderEnd() {
+        return "</table>";
+    }
 }
