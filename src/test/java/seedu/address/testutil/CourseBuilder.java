@@ -5,6 +5,9 @@ import seedu.address.model.course.CourseCode;
 import seedu.address.model.course.CourseName;
 import seedu.address.model.course.FacultyName;
 
+/**
+ * This is a course builder to assist in building course objects for testing.
+ */
 public class CourseBuilder {
     public static final String DEFAULT_COURSE_NAME = "Computer Science";
     public static final String DEFAULT_COURSE_CODE = "CS";
@@ -24,6 +27,11 @@ public class CourseBuilder {
         return new Course(courseCode, courseName, facultyName);
     }
 
+    /**
+     * assign a different course name for a predefined course
+     * @param courseName
+     * @return
+     */
     public CourseBuilder withCourseName(String courseName) {
         this.courseName = new CourseName(courseName);
         return this;

@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE_FACULTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
@@ -46,6 +48,8 @@ public class CommandTestUtil {
     public static final String VALID_COURSE_CODE_CS = "CS";
     public static final String VALID_COURSE_NAME_CEG = "Computer Engineering";
     public static final String VALID_COURSE_NAME_CS = "Computer Science";
+    public static final String VALID_COURSE_FACULTY_CEG = "Faculty of Engineering";
+    public static final String VALID_COURSE_FACULTY_SOC = "School of Computing";
     public static final String VALID_MATRIC_NO_MEGAN = "A0168412C";
     public static final String VALID_MATRIC_NO_TAYLOR = "A0168412D";
     public static final String VALID_CLASS_T16 = "T16";
@@ -71,6 +75,11 @@ public class CommandTestUtil {
     public static final String MATRIC_DESC_MEGAN = " " + PREFIX_MATRIC + VALID_MATRIC_NO_MEGAN;
     public static final String MATRIC_DESC_BOB = " " + PREFIX_MATRIC + VALID_MATRIC_NO_TAYLOR;
     public static final String COURSE_CODE_DESC_CEG = " " + PREFIX_COURSE_CODE + VALID_COURSE_CODE_CEG;
+    public static final String COURSE_NAME_DESC_CEG = " " + PREFIX_COURSE_NAME + VALID_COURSE_NAME_CEG;
+    public static final String COURSE_FACULTY_DESC_FOE = " " + PREFIX_COURSE_FACULTY + VALID_COURSE_FACULTY_CEG;
+    public static final String COURSE_CODE_DESC_CS = " " + PREFIX_COURSE_CODE + VALID_COURSE_CODE_CS;
+    public static final String COURSE_NAME_DESC_CS = " " + PREFIX_COURSE_NAME + VALID_COURSE_NAME_CS;
+    public static final String COURSE_FACULTY_DESC_SOC = " " + PREFIX_COURSE_FACULTY + VALID_COURSE_FACULTY_SOC;
 
     public static final String MODULE_CODE_DESC_CG1111 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CG1111;
     public static final String MODULE_CODE_DESC_CS2040C = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2040C;
@@ -94,6 +103,8 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_MATRIC_NO = " " + PREFIX_MATRIC + "00000000V"; // missing prefix letter
     public static final String INVALID_COURSE_CODE = " " + PREFIX_COURSE_CODE + "ACE"; // course doesn't exist
+    public static final String INVALID_COURSE_CODE_NUMBERS = " "
+            + PREFIX_COURSE_CODE + "123"; // course code has numbers
 
     public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "CG2271&"; // '&' not allowed
     public static final String INVALID_MODULE_NAME_DESC = " " + PREFIX_MODULE_NAME + "RTOS@"; // '@' not allowed
