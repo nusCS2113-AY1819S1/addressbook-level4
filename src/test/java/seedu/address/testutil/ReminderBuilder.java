@@ -14,7 +14,7 @@ public class ReminderBuilder {
 
     public static final String DEFAULT_TITLE = "Typical mundane meetings";
     public static final String DEFAULT_DATE = "08022018";
-    public static final String DEFAULT_TIME = "2369HRS";
+    public static final String DEFAULT_TIME = "2359";
     public static final String DEFAULT_AGENDA = "To discuss the next EASY presentation";
 
     private Title title;
