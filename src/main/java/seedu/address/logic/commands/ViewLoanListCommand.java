@@ -36,7 +36,7 @@ public class ViewLoanListCommand extends Command {
         return new CommandResult(messageOutput);
     }
 
-    private String getMessageOutput(File loanListFile) throws CommandException {
+    public String getMessageOutput(File loanListFile) throws CommandException {
         try {
             Integer counter = 1;
             String messageOutput = new String();

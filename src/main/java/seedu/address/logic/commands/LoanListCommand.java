@@ -4,6 +4,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOANER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
+import java.io.File;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -45,12 +47,13 @@ public class LoanListCommand extends Command {
      * Updates the XmlLoanListFile
      */
 
-    public static void updateXmlLoanListFile(XmlAdaptedLoanList xmlAdaptedLoanList) throws JAXBException {
+    public static void updateXmlLoanListFile(XmlAdaptedLoanList xmlAdaptedLoanList, File loanListFile)
+            throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(XmlAdaptedLoanList.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         jaxbMarshaller.marshal(xmlAdaptedLoanList, System.out);
-        jaxbMarshaller.marshal(xmlAdaptedLoanList, MainApp.getLoanListFile());
+        jaxbMarshaller.marshal(xmlAdaptedLoanList, loanListFile);
     }
 
     @Override
@@ -62,7 +65,7 @@ public class LoanListCommand extends Command {
 
         updateStatus(model, history);
         try {
-            updateLoanList();
+            updateLoanList(MainApp.getLoanListFile(), loaner);
         } catch (JAXBException e) {
             System.out.println(e.toString());
         }
@@ -72,22 +75,22 @@ public class LoanListCommand extends Command {
     /**
      * Updates the XmlAdaptedLoanList, then updates the XmlLoanListFile
      */
-    private void updateLoanList() throws JAXBException {
+    public void updateLoanList(File loanListFile, LoanerDescription loaner) throws JAXBException {
         XmlAdaptedLoanerDescription toAdd = new XmlAdaptedLoanerDescription(loaner);
         JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
         XmlAdaptedLoanList xmlAdaptedLoanList = new XmlAdaptedLoanList();
-        if (MainApp.getLoanListFile().exists()) {
+        if (loanListFile.exists()) {
             Unmarshaller unmarshaller = context.createUnmarshaller();
             xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
-                    .unmarshal(MainApp.getLoanListFile());
+                    .unmarshal(loanListFile);
         }
         xmlAdaptedLoanList.addLoaner(toAdd);
-        updateXmlLoanListFile(xmlAdaptedLoanList);
+        updateXmlLoanListFile(xmlAdaptedLoanList, loanListFile);
     }
     /**
      * Changes the status from On_Loan to Ready
      */
-    private void updateStatus(Model model, CommandHistory history) throws CommandException {
+    public void updateStatus(Model model, CommandHistory history) throws CommandException {
         ChangeStatusCommand.ChangeStatusDescriptor changeStatusDescriptor =
                 new ChangeStatusCommand.ChangeStatusDescriptor(loaner.getItemName(),
                         loaner.getQuantity().toInteger(), "Ready", "On_Loan");

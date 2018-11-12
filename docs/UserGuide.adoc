@@ -194,11 +194,13 @@ Returns `Arduino` and `Arduino Uno`
 * `find Arduino Pi` +
 Returns any items having names `Arduino` or `Pi`
 
+// tag::statuscommand[]
 === Listing item according to status: `status`
 
 Shows the quantity of every item in each status category (Ready, On_Loan, Faulty) +
 Format: `status`
-
+// end::statuscommand[]
+// tag::changestatuscommand[]
 === Changing status of item: `changeStatus`
 
 The status of the items can be changed from Ready to Faulty, and vice-versa +
@@ -208,7 +210,8 @@ Examples:
 
 * `changeStatus n/Arduino q/20 os/Ready ns/Faulty` +
 The status of 20 Arduinos would be changed from Ready to Faulty
-
+// end::changestatuscommand[]
+// tag::loanlistcommand[]
 === Creating a loan list: `loanList`
 A loan list can be created whenever a list of items loaned out needs to be kept tracked on +
 Format: `loanList n/NAME q/QUANTITY l/LOANER`
@@ -217,12 +220,14 @@ Examples:
 
 * `loanList n/Arduino q/20 l/KinWhye` +
 This would update the status of the 20 arduinos to On_Loan, and add the entry into the loan list
-
+// end::loanlistcommand[]
+// tag::viewloanlistcommand[]
 === Viewing the loan list: `viewLoanList`
 
 Shows every loan list entry +
 Format: `viewLoanList`
-
+// end::viewloanlistcommand[]
+// tag::deleteloanlistcommand[]
 === Deleting a loan list entry: `deleteLoanList`
 
 An entry in the loan list can be deleted when the loaner returns the items +
@@ -232,6 +237,7 @@ Examples:
 
 * `deleteLoanList 1` +
 The first entry as shown on the viewLoanList command will be deleted. The status of the item will be automatically changed back to ready
+// end::deleteloanlistcommand[]
 
 // tag::tag[]
 === Listing items under specific tags: `tag`
@@ -271,6 +277,7 @@ Examples:
 Deletes tags "Lab1" and "Lab2" from the item with index 1
 // end::tag[]
 
+//tag::lostcommand[]
 === Lost an item: `lost`
 
 Lost an item From the stock list +
@@ -281,7 +288,9 @@ Format: `lost INDEX q/QUANTITY`
 Examples:
 
 * `lost 1 q/25`
+//end::lostcommand[]
 
+//tag::foundcommand[]
 === Found an item: `found`
 
 Found an item From the Lost&Found List +
@@ -292,14 +301,16 @@ Format: `found INDEX q/QUANTITY`
 Examples:
 
 * `found 1 q/25`
+//end::foundcommand[]
 
+//tag::lost&found[]
 === Listing Lost&Found List: `lost&found`
 
 Shows the number of every lost item that has been lost +
 Format: `lost&found`
 
 
-
+//end::lost&found[]
 === Undoing previous command : `undo`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
@@ -370,10 +381,11 @@ Examples:
 This would save the stock list at the time when the command is inputted, and the name for this xml file is
 `ForAugust.xml`, under a /versions/ folder in main.
 // end::savecommand[]
-// tag::opencommand[]
-=== Open a saved stock list : `open`
 
-An xml file recording current stocks will be opened. +
+// tag::opencommand[]
+=== Open and view a saved stock list : `open`
+
+The .xml file specified will be opened and displayed in table format on the Browser Panel. +
 Format: `open NAME`
 
 Examples:

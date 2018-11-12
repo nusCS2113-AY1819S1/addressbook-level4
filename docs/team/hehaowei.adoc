@@ -1,0 +1,80 @@
+= He Haowei - Project Portfolio
+:site-section: AboutUs
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:xrefstyle: full
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:warning-caption: :warning:
+endif::[]
+
+:repoURL: https://github.com/CS2113-AY1819S1-T12-3/main/tree/master
+
+
+Project: Jalil Enterprises Stock List
+
+== Overview
+
+This Project Portfolio is to illustrate the contribution of me, He Haowei (GitHub: HeHaowei) to the JalilEnterprises project. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java. +
+This project is completed by team T12-3 of module CS2113T in National University of Singapore, in the first semester of academic year 2018/2019.
+
+=== Project Overview
+
+This project was a part of the CS2113T (Software Engineering & Object-Oriented Programming) module, and our team was tasked to enhance the existing AddressBook application for a specific target audience group of our choice.
+
+=== Product Overview
+
+Morphed from AddressBook – Level 4 [link to AB4], Jalil Enterprises is a desktop inventory list application used for recording stocks in NUS Computer Engineering laboratories. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java and has ~10 kLoC.
+
+Some key features of the Jalil Enterprises application are storing quantities and statuses of stocks, creating loan lists for loaning of equipment, and saving and viewing archives of the inventory on command.
+
+== Summary of contributions
+
+* Code contributed: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=hehaowei[Project Code Dashboard]
+* *Major enhancement*:  added the ability to do *lost and found features*.
+** What it does: allows the user to save the current inventory as a .xml file and open it anytime in a table format.
+** Justification: This feature improves the product significantly because it can help the lab technicians to report the lost items in a quite convenient way and can handle the lost and found problem easily.
+** Highlights: This enhancement affects existing commands and commands to be added in the future. It is challenging as it requires to make some user interface changes and be coordinate with some existing commands.
+
+* *Other contributions*:
+** Modify the logic class in the test folder.
+** Modify the editCommand and changeStatusCommand thus editCommand, changeStatusCommand, lostCommand and foundCommand can cooperate with each other.
+
+** Project management:
+*** Managed project releases `V1.0` on GitHub
+*** Responsible for milestone completion on GitHub
+*** Responsible for Readme file on GitHub
+** Enhancements to existing features:
+*** Modify the logic class in the test folder.
+
+
+*** Wrote tests for LostCommand to increase coverage
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=lostcommand]
+include::../UserGuide.adoc[tag=foundcommand]
+include::../UserGuide.adoc[tag=lost&found]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=2.1]
+include::../DeveloperGuide.adoc[tag=lost&foundfeature]
+
+
+

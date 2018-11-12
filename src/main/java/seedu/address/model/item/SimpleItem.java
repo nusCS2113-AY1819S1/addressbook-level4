@@ -25,4 +25,18 @@ public class SimpleItem {
         return quantity;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof SimpleItem)) {
+            return false;
+        }
+
+        SimpleItem otherItem = (SimpleItem) other;
+        return (otherItem.getName().toString().equals(getName().toString())
+                && otherItem.getQuantity().toString().equals(getQuantity().toString()));
+    }
 }
