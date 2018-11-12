@@ -470,7 +470,7 @@ There is no need to save manually.
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
-In v2.0, your account data can be encrypted for added security. You can choose to enable/disable encryption via the `setEncryption` command.
+In v2.0, your account and inventory data can be encrypted for added security. You can choose to enable/disable encryption via the `setEncryption` command.
 
 // end::dataencryption[]
 

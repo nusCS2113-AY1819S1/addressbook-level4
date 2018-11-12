@@ -573,7 +573,7 @@ Step 2. The `deleteTag` command calls `updateFilteredItemList();` in `model` to 
 
 // tag::dataencryption[]
 === Data Encryption (Coming in V2.0)
-In v2.0, account data will be encrypted using AES encryption for added security.
+In v2.0, app data will be encrypted using AES encryption for added security.
 
 // end::dataencryption[]
 
