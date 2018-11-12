@@ -459,27 +459,90 @@ image::statisticSequenceDiagram.png[width="800"]
 ** Cons: Code becomes less cohesive.
 // end::statistic[]
 
-// tag::dataencryption[]
+// tag::passwordprotection[]
 === Password Protection
 ==== Current Implementation
-A password is required by the user for him/her to be able to use BookInventory.
+A password is required by the user upon start-up of the application.
 
-A password must be secured and kept using a hashing algorithm. In other words, the password must not be in plain text in the code.
+The password must be secured. A secured password must consist of uppercase, lowercase, numbers and other special characters. For example, “$%GA2dg#” is a good password.
++
+image::password_activity_diagram.png[width="450"]
++
+In order to prevent attackers from using easy brute force methods, the application will shut down after 3 consecutive tries.
 
-In order to prevent brute force, a user has up to 3 tries to key in the correct password. Failure to do so will end the application.
+The password will be generated from our team’s side and will only be passed to users discreetly, conveniently through the means of an email.
+
+In this stage of development, the default passwords will be as follows:
+.  Administrator: owner
+.  Accountant: accountant
+.  Student: password
+*Format: [ROLE OF USER: PASSWORD]
+The passwords can and are set by developers under CheckPassword.java.
+The following sequence diagram shows how the password interacts with the user.
++
+image::password_protection_diagram.png[width="450"]
++
+After UiManager is created, it will automatically construct a MainWindow. The MainWindow will also create an instance of a CheckPassword window.
+If password is valid, a role class will be created. Else, application will close after 3 wrong tries.
 
 ==== Design Considerations
 
-===== Aspect: How hashing is done
+===== Aspect: Required fields for password protection
 
-* **Alternative 1: Use existing hashing algorithms in java libraries such as `java.security'.**
-** Pros: Easy and fast to implement.
-** Cons: If the algorithm in the source code is easy to decrypt , can be easily brute-forced.
-* **Alternative 2: Implement own hashing algorithm.**
-** Pros: Encryption is foreign to interventions, harder to decrypt.
-** Cons: Can be tedious and time-consuming, might risk having similar keys.
+* **Alternative 1 (current choice): Use a password-only login UI.**
+** Pros: It tricks attackers to think there is only a single password to enter the application.
+Commands such as “add”, “edit”, “clear” etc will be unknown to the basic user i.e. students.
+** Cons: Password is difficult to remember, users will spend the extra time to refer to his/her allocated passwords.
+Passwords will be issued by us (the developer team) and must be secured.
+* **Alternative 2: Use a username/password login interface.**
+** Pros: Users can customize their usernames and passwords.
+** Cons: Users can forget their passwords. Developers need to spend extra time to implement changing passwords for users. A user can create multiple account and can take up too much storage.
+Difficult to handle sensitive data like passwords in plain text files, another implementation for encryption would be needed.
 
-// end::dataencryption[]
+===== Aspect: Usable commands
+
+* **Alternative 1 (current choice): Populate usable commands into role after entering password.**
+** Pros: : If attackers bypass the password UI, they will not be able to perform any commands. Commands are only enabled if the password entered matches the appropriate role.
+** Cons: Doing so might cause the application to lag a little, if the command list is extensive.
+Passwords will be issued by us (the developer team) and must be secured.
+* **Alternative 2: Assign commands based on passwords. (Role class is omitted in this case)**
+** Pros: Easier to implement.
+** Cons: Poor readability in code. If the password UI is bypassed, attackers will be able to have access to commands.
+
+// end::passwordprotection[]
+
+// tag::commandpanel[]
+=== Command List Panel UI
+==== Current Implementation
+A command list panel UI is made available for all user, to assist him/her better in the application.
+It is a quick access panel located at the side of the application. The command list is sorted alphabetically. This feature is geared towards beginner users.
++
+image::command_panel.png[width="240"]
++
+Selecting on any of the commands in the panel above, will show a brief message of the command in the result display.
+In addition, the text in the command box will be replaced with a template of the command selected.
+
+==== Design Considerations
+
+===== Aspect: UI design
+
+* **Alternative 1 (current choice): Use a table view (JavaFX).**
+** Pros: All commands are displayed on-screen without having to click double.
+** Cons: Takes up more space in the overall UI.
+* **Alternative 2: Use a drop-down menu.**
+** Pros: Slightly neater and aesthetically more pleasing.
+** Cons: Not the most functional option, users must click twice and scroll through the menu.
+
+===== Aspect: Selection Result
+
+* **Alternative 1 (current choice): Displays a message on-screen and replaces text in command box.**
+** Pros: : Allow users (especially beginners) to edit the command field when given the template of the command. They will be guided via a message on-screen.
+** Cons: Users need to spend the extra time clicking on and editing the command text provided instead of typing the command fluently.
+* **Alternative 2: : Pops a new window indicating the required fields for command.**
+** Pros: Highly sophisticated GUI handling.
+** Cons: Application is meant for CLI for faster execution. Pressing on the wrong command may induce user frustration.
+
+// end::commandpanel[]
 
 // tag::commandprediction[]
 === Command Prediction
