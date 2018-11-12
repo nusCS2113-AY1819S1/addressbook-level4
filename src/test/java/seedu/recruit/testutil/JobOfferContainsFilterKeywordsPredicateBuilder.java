@@ -36,7 +36,7 @@ public class JobOfferContainsFilterKeywordsPredicateBuilder {
 
     private HashMap<String, List<String>> keywordsList = new HashMap<>();
     private JobOfferContainsFilterKeywordsPredicate jobOfferPredicate;
-  
+    
     public JobOfferContainsFilterKeywordsPredicateBuilder(String userInput) throws ParseException {
         this.jobOfferPredicate = preparePredicate(userInput);
     }
