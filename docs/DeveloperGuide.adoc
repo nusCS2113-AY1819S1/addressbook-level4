@@ -916,7 +916,7 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
 
-[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
+[width="125%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |New Project Manager|See usage instructions |Refer to instructions when I forget how to use the ProManage
@@ -1303,7 +1303,41 @@ Use case ends.
 ** 3b1. ProManage shows an error message.
 ** Use case ends
 
+// tag::usecases_undo[]
+=== Use case: Undo the previously entered command.
+*MSS*
 
+1.  User requests to undo previous command
+2.  ProManage undos the command, restoring the previous state.
+
++
+Use case ends.
+
+*Extensions*
+
+* 1a. No commands left to undo.
+** 1a1. ProManage shows an error message.
+** Use case ends
++
+// end::usecases_undo[]
+
+// tag::usecases_redo[]
+=== Use case: Redo the previously undone command.
+*MSS*
+
+1.  User requests to redo the previously undone command
+2.  ProManage redos the command, restoring the address book or event list state.
+
++
+Use case ends.
+
+*Extensions*
+
+* 1a. No previously undone commands available.
+** 1a1. ProManage shows an error message.
+** Use case ends
++
+// end::usecases_undo[]
 
 // tag::nonfunctionalrequirements[]
 == Non Functional Requirements
@@ -1367,6 +1401,29 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The most recent window size and location is retained.
 
 _{ more test cases ... }_
+
+=== Logging into the app
+. Logging without email
+
+.. Prerequisites: App is not login yet. Privilege is default
+
+.. Test Case: `login manager` +
+   Expected: login successfully as manager
+
+.. Test Case: `login employee` +
+   Expected: login successfully as manager
+
+.. Other incorrect login commands to try: `login`,`login ceo` (login without email only accepts manager and employee)
+
+. Logging with email
+
+.. Prerequisites: App is not login yet. Privilege is default. Email of an existing person in addressbook
+
+
+.. Test Case: `login as lol@example.com` +
+   Expected: login successfully as the designation of the person
+
+.. Other incorrect login commands to try: `login as` `login as invalidemail`
 
 === Deleting a person
 
@@ -1435,6 +1492,39 @@ and `add n/Mark p/93455678 e/mark@example.com a/Mark street, block 12, #05-01 de
 
 .. Test case: `list dep Admin Finance` or any DEPARTMENT -> `list all`
    Expected: The details of all personnel and events will be listed.
+
+=== Selecting an Event
+
+. Selecting event while all events are listed
+
+.. Prerequisites: List all persons using the `list all` command. There must be at least one person and one event in the list.
+
+.. Test case: `invite 1 to/1` then `selectEvent 1` +
+   Expected: First event in the list is highlighted. Employee list is filtered to only show the first person.
+
+.. Test case: `selectEvent 2` (continued from test case above) +
+   Expected: Second event in the list is highlighted. Employee list is empty.
+
+.. Test case: `selectEvent 0` +
+   Expected: Error thrown.
+
+.. Other incorrect selectEvent commands to try: `selectevent` (command is case-sensitive),
+   `selectEvent a`, `selectEvent x` (where x is larger than the event list shown).
+
+=== Sorting of events
+. Sorting of the event list based on the given params
+
+.. Prerequisites: No prerequisites
+
+.. Test case: `sort name` +
+   Expected: Event list to be sorted according their name.
+
+.. Test case: `sort date` +
+   Expected: Event list to be sorted according to the date from the earliest to the latest
+
+.. Other incorrect sort command to try: `sort` , `sort random`
+
+_{ more test cases ... }_
 
 
 
