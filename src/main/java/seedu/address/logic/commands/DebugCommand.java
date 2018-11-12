@@ -7,11 +7,20 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.StorageController;
+import seedu.address.model.classroom.Attendance;
+import seedu.address.model.classroom.ClassName;
+import seedu.address.model.classroom.Classroom;
+import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseCode;
 import seedu.address.model.course.CourseManager;
 import seedu.address.model.course.CourseName;
 import seedu.address.model.course.FacultyName;
+import seedu.address.model.gradebook.Gradebook;
+import seedu.address.model.gradebook.GradebookManager;
+import seedu.address.model.grades.Grades;
+import seedu.address.model.grades.GradesManager;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleManager;
@@ -38,6 +47,9 @@ public class DebugCommand extends Command {
         StringBuilder sb = new StringBuilder();
 
         ModuleManager moduleManager = ModuleManager.getInstance();
+        ClassroomManager classroomManager = ClassroomManager.getInstance();
+        GradebookManager gradebookManager = new GradebookManager();
+        GradesManager gradesManager = new GradesManager();
 
         StorageController.wipeAllProductionData();
         StorageController.createFiles();
@@ -100,6 +112,84 @@ public class DebugCommand extends Command {
         moduleManager.addModule(new Module(new ModuleCode("MA1511"),
                 new ModuleName("Engineering Calculus")));
         moduleManager.saveModuleList();
+
+        Module module = moduleManager.getModuleByModuleCode("MA1508E");
+        module.addStudent(StudentManager.getInstance().retrieveStudentByMatricNo("A0168372L"));
+        module.addStudent(StudentManager.getInstance().retrieveStudentByMatricNo("A0166371K"));
+        module.addStudent(StudentManager.getInstance().retrieveStudentByMatricNo("A0196361C"));
+        Module module2 = moduleManager.getModuleByModuleCode("CS2113");
+        module2.addStudent(StudentManager.getInstance().retrieveStudentByMatricNo("A0168372L"));
+        module2.addStudent(StudentManager.getInstance().retrieveStudentByMatricNo("A0166371K"));
+        Module module3 = moduleManager.getModuleByModuleCode("GEQ1000");
+        module3.addStudent(StudentManager.getInstance().retrieveStudentByMatricNo("A0166371K"));
+        Module module4 = moduleManager.getModuleByModuleCode("CS1010");
+        module4.addStudent(StudentManager.getInstance().retrieveStudentByMatricNo("A0196361C"));
+
+        classroomManager.clearClassrooms();
+        Classroom classroom1 = new Classroom(new ClassName("ALL"),
+                new ModuleCode("MA1508E"), new Enrollment("400"));
+        Classroom classroom2 = new Classroom(new ClassName("T16"),
+                new ModuleCode("CS2113"), new Enrollment("20"));
+        Classroom classroom3 = new Classroom(new ClassName("D11"),
+                new ModuleCode("GEQ1000"), new Enrollment("15"));
+        Classroom classroom4 = new Classroom(new ClassName("F01"),
+                new ModuleCode("CS1010"), new Enrollment("1"));
+        classroomManager.addClassroom(classroom1);
+        classroomManager.addClassroom(classroom2);
+        classroomManager.addClassroom(classroom3);
+        classroomManager.addClassroom(classroom4);
+        classroomManager.assignStudent(classroom1, "A0168372L"); //MA1508E
+        classroomManager.assignStudent(classroom1, "A0166371K"); //MA1508E
+        classroomManager.assignStudent(classroom1, "A0196361C"); //MA1508E
+        classroomManager.assignStudent(classroom2, "A0168372L"); //CS2113
+        classroomManager.assignStudent(classroom2, "A0166371K"); //CS2113
+        classroomManager.assignStudent(classroom3, "A0168372K"); //GEQ1000
+        classroomManager.assignStudent(classroom4, "A0196361C"); //CS1010
+
+        classroomManager.markStudentAttendance(classroom1, new Attendance("12-11-2018"), "A0168372L");
+        classroomManager.markStudentAttendance(classroom1, new Attendance("12-11-2018"), "A0166371K");
+        classroomManager.markStudentAttendance(classroom1, new Attendance("12-11-2018"), "A0196361C");
+        classroomManager.markStudentAttendance(classroom1, new Attendance("14-11-2018"), "A0168372L");
+        classroomManager.markStudentAttendance(classroom1, new Attendance("14-11-2018"), "A0166371K");
+        classroomManager.markStudentAttendance(classroom1, new Attendance("14-11-2018"), "A0196361C");
+
+        classroomManager.markStudentAttendance(classroom2, new Attendance("09-11-2018"), "A0168372L");
+        classroomManager.markStudentAttendance(classroom3, new Attendance("11-11-2018"), "A0168372K");
+
+        //Nat will be absent for class
+        Attendance specialAttendance = new Attendance();
+        classroomManager.markStudentAttendance(classroom4, specialAttendance, "A0168372L");
+        classroomManager.modifyStudentAttendance(classroom4, specialAttendance, "A0168372L");
+
+
+        classroomManager.saveClassroomList();
+
+        //populated data for Gradebook
+        gradebookManager.clearGradebook();
+        Gradebook gradebook = new Gradebook("CS2113", "Assignment 1", 100, 50);
+        Gradebook gradebook1 = new Gradebook("GEQ1000", "Finals", 50, 20);
+        Gradebook gradebook2 = new Gradebook("MA1508E", "Mid Term", 30, 10);
+        Gradebook gradebook3 = new Gradebook("CS1010", "Practical Exam", 60, 30);
+
+        gradebookManager.addGradebookComponent(gradebook);
+        gradebookManager.addGradebookComponent(gradebook1);
+        gradebookManager.addGradebookComponent(gradebook2);
+        gradebookManager.addGradebookComponent(gradebook3);
+        gradebookManager.saveGradebookList();
+
+        //populated data for Gradebook
+        gradesManager.clearGrade();
+        Grades grades = new Grades("CS2113", "Assignment 1", "A0168372L", 50);
+        Grades grades1 = new Grades("CS2113", "Assignment 1", "A0166371K", 20);
+
+        gradesManager.addGrade(grades);
+        gradesManager.addGrade(grades1);
+        gradesManager.saveGradeList();
+
+
+
+
+
 
         return new CommandResult("DEBUG COMMAND EXECUTED. ",
                 HtmlTableProcessor.getH1Representation("Populated data set."));
