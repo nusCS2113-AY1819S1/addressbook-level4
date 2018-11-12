@@ -115,7 +115,8 @@ public class ExpenditureList implements Iterable<Expenditure> {
         String theDate;
         int index = 0;
         StringBuilder it = new StringBuilder();
-        it.append("Here's the expenditure record:\n");
+        StringBuilder builder = new StringBuilder();
+        boolean hasExpenditure = false;
         while (index < internalList.size()) {
             theDate = internalList.get(index).getDate().addingDate;
             if (theDate.equals(particularDate)) {
@@ -125,10 +126,17 @@ public class ExpenditureList implements Iterable<Expenditure> {
                         .append("Money: " + internalList.get(index).getMoney().addingMoney + ", ")
                         .append("Date: " + internalList.get(index).getDate().addingDate)
                         .append("\n");
+                hasExpenditure = true;
             }
             index++;
         }
-        records = it.toString();
+        if (hasExpenditure) {
+            builder.append("Here's the expenditure record:\n")
+                    .append(it.toString());
+        } else {
+            builder.append("There is no expenditure record on this day.\n");
+        }
+        records = builder.toString();
         return records;
     }
 
