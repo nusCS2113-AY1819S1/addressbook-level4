@@ -74,7 +74,7 @@ public class AddTagCommand extends Command {
         model.updateItem(itemToEdit, editedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
-        if(itemToEdit.getTags().size() == lastShownList.get(index.getZeroBased()).getTags().size()) {
+        if (itemToEdit.getTags().size() == lastShownList.get(index.getZeroBased()).getTags().size()) {
             return new CommandResult(MESSAGE_DUPLICATE);
         }
         return new CommandResult(MESSAGE_SUCCESS);
