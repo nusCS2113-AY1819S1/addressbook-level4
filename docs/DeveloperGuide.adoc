@@ -1528,7 +1528,7 @@ Use case ends.
 * 1a. User uses the wrong format to add appointment i.e. missing fields or having invalid data for fields
 +
 [none]
-** 1a1. System shows an error message that the format is wrong and gives user an example on the correct format of adding appointment.
+** 1a1. System shows an error message that the format is wrong and gives user an example on the correct format of adding appointment or the correct format of the respective invalid data.
 +
 Use case ends.
 
@@ -1572,7 +1572,7 @@ Use case ends.
 * 1a. User uses the wrong format to edit appointment i.e. missing all fields or having invalid data for fields
 +
 [none]
-** 1a1. System shows an error message that the format is wrong and gives user an example on the correct format of editing appointment.
+** 1a1. System shows an error message that the format is wrong and gives user an example on the correct format of editing appointment or the correct format of the respective invalid data..
 +
 Use case ends.
 
@@ -1624,7 +1624,7 @@ Use case ends.
 * 1a. User uses the wrong format to delete appointment i.e. missing fields or having invalid data for fields.
 +
 [none]
-** 1a1. System shows an error message that the format is wrong and gives user an example on the correct format of deleting appointment.
+** 1a1. System shows an error message that the format is wrong and gives user an example on the correct format of deleting appointment or the correct format of the respective invalid data..
 +
 Use case ends.
 
@@ -1659,7 +1659,7 @@ Use case ends.
 * 1a. User uses the wrong format to clear appointments i.e. missing field or having invalid data for field.
 +
 [none]
-** 1a1. System shows an error message that the format is wrong and gives user an example on the correct format of clearing appointments.
+** 1a1. System shows an error message that the format is wrong and gives user an example on the correct format of clearing appointments or the correct format of the respective invalid data.
 +
 Use case ends.
 
