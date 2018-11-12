@@ -24,6 +24,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.expenditureinfo.Expenditure;
+import seedu.address.model.expenditureinfo.ExpenditureNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
@@ -194,6 +196,20 @@ public class CommandTestUtil {
         model.updateFilteredTaskList(new TaskNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredTaskList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the task at the given {@code targetIndex} in the
+     * {@code model}'s expenditure tracker.
+     */
+    public static void showExpenditureAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredExpenditureList().size());
+
+        Expenditure expenditure = model.getFilteredExpenditureList().get(targetIndex.getZeroBased());
+        final String[] splitName = expenditure.getDescription().descriptionName.split("\\s+");
+        model.updateFilteredExpenditureList(new ExpenditureNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredExpenditureList().size());
     }
 
     /**
