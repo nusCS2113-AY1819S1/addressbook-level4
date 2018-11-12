@@ -15,7 +15,8 @@ import seedu.address.request.requestmodel.RequestModel;
 public class ToggleRequestCommand extends CommandSecondary {
 
     public static final String COMMAND_WORD = "togglerequests";
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " : Toggles the request panel.";
     public static final String MESSAGE_SUCCESS = "Request panel toggled.";
 
     @Override
