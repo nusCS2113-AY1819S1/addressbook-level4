@@ -287,7 +287,7 @@ To ensure that the entire model's state is preserved, `Model#commitModel()` ensu
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitModel()`, causing another modified state to be saved into every `...StateList`.
+Step 3. The user executes `add name/David ...` to add a new person. The `add` command also calls `Model#commitModel()`, causing another modified state to be saved into every `...StateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
@@ -301,7 +301,7 @@ image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 [NOTE]
 If the `currentStatePointer` is at index 0, pointing to the initial state, then there are no previous states to restore. The `undo` command uses `Model#canUndo()` to check if this is the case.
 If so, it will return an error to the user rather than attempting to perform the undo.
-`Model#canUndo()` functions by checking whether the `currentStatePointer` of all 3 `Versioned` classes.
+`Model#canUndo()` functions by checking whether the `currentStatePointer` of all 3 `Versioned` classes are at index 0.
 
 The following sequence diagram shows how the undo operation works:
 
@@ -316,7 +316,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitModel()`. Since the `currentStatePointer` is not pointing at the end of the `...StateList`, all states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitModel()`. Since the `currentStatePointer` is not pointing at the end of the `...StateList`, all states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add name/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -332,7 +332,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the workout being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -563,7 +563,7 @@ image::CompleteCommandLogicComponentSequenceDiagram.png[width="800"]
 
 === Tracking Feature
 ==== Current Implementation
-The user input is parsed into `_TrackCommandParser_` to generate a `Parameter` object, which is then passed on to `_TrackCommand_`.
+The user input is parsed into `TrackCommandParser` to generate a `Parameter` object, which is then passed on to `TrackCommand`.
 Upon execution of the command, the `Parameter` is then stored in/removed from the `TrackedDataList`.
 This `TrackedDataList` stores all the `Parameter` objects currently being tracked.
 
@@ -601,17 +601,17 @@ In a macroscopic view, the following activity diagram shows how the tracking fea
 
 [[fig-TrackCommandActivityDiagram]]
 .Activity diagram for the tracking feature
-image::TrackFeatureActivityDiagram.png[width="800"]
+image::TrackFeatureActivityDiagram.png[width="950"]
 
 ==== Design Considerations
 ===== Aspect 1: How the workouts that match tracked parameters are stored
 
-* **Alternative 1 (current choice):** All tracked workouts are stored in one file, `_trackeddata.xml_`
-** Pros: Easy to implement storage of the desired workouts.
-** Cons: Filtering has to be done when finding workouts in the file that have a particular parameter present.
+* **Alternative 1 (current choice):** All tracked workouts are stored in one file, `trackeddata.xml`
+** Pros: Easy to implement storage of the tracked workouts.
+** Cons: We have to implement a filtered list to allow for viewing of workouts containing the selected parameters after select INDEX is executed
 * **Alternative 2:** Tracked workouts are stored in separate files, with one file for each parameter being tracked.
 ** Pros: Viewing of tracked workouts is easy, with each file containing the workouts specific to the tracked parameter.
-** Cons: Difficult to specify the `Path` for each individual file, especially when the parameters in the `TrackedDataList` can vary widely during app usage.
+** Cons: Difficult to specify the `Path` for each individual file, especially when the parameters in the `TrackedDataList` can vary widely during app usage. If one workout contains multiple parameters that are being tracked, it has to be stored multiple times across different files, reducing the effeciency of the program.
 
 // end::trackfeature[]
 
@@ -1373,6 +1373,30 @@ _{ more test cases ... }_
     Expected: A message saying "Invalid Height format! Height should only be in x.xx form where x is an integer."
 
 // end::appendixsj[]
+
+// tag::appendixgh[]
+
+==== Tracking completed workouts
+. Setting up parameters for the program to track
+* Steps:
+** The parameter to be tracked should not exist in the Tracked Parameters list.
+** The value of the parameter to be tracked should be one word/string with no spaces, and match the restrictions of the prefix, e.g. if the prefix is `name/`, the value has to meet the restrictions for `Name`.
+** Test Case: `track start muscle/quadriceps`
+** Expected: `muscle/quadriceps` should appear on the Tracked Parameters list on the right-hand side of the program window.
+
+. Stop tracking a parameter currently being tracked
+* Steps:
+** The parameter for which tracking is to be stopped should already exist in the Tracked Parameters list.
+** Test Case: `track stop muscle/bicep`
+** Expected: `muscle/bicep` should be removed from the Tracked Parameters list on the right-hand side of the program window.
+
+. Viewing completed workouts containing a tracked parameter.
+* Steps:
+** There must be completed workouts that contain the desired parameter to be viewed. If not, no workouts will show up.
+** Test Case: `select INDEX` (`INDEX` here refers to the index of the desired parameter)
+** Expected: Completed workouts containing the parameter at `INDEX` will show up in the Tracked Workouts panel in the program.
+
+// end::appendixgh[]
 
 // tag::appendixtr[]
 ==== Traversing the workouts

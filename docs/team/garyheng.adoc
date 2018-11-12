@@ -33,7 +33,7 @@ WorkoutBook is a desktop address book application used for anyone who does worko
 *** Facilitated the management of project milestones `v1.3` - `v1.4`
 ** Enhancements to existing features:
 *** Improved the searching function of WorkoutBook's `find` command (Pull request: https://github.com/CS2113-AY1819S1-T13-5/main/pull/53[#53])
-*** Wrote additional tests for existing features to increase coverage from 84% to 98% (https://github.com/CS2113-AY1819S1-T13-5/main/pull/250[#250])
+*** Wrote additional tests for existing features to increase coverage from 84% to 88% (https://github.com/CS2113-AY1819S1-T13-5/main/pull/250[#250])
 ** Documentation:
 *** Improved the content of the User Guide and the Developer Guide to reflect new functions of the WorkoutBook (https://github.com/CS2113-AY1819S1-T13-5/main/pull/172[#172], https://github.com/CS2113-AY1819S1-T13-5/main/pull/250[#250])
 ** Tools:
@@ -60,5 +60,6 @@ The undo/redo section in the Developer Guide was originally written by the afore
 
 include::../DeveloperGuide.adoc[tag=undoredo]
 include::../DeveloperGuide.adoc[tag=trackfeature]
+include::../DeveloperGuide.adoc[tag=appendixgh]
 
 
