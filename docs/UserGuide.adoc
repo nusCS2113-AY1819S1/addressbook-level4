@@ -363,18 +363,28 @@ Receive smart suggestions while typing in your commands. Press the `TAB` key whi
 suggestions on possible commands without having to navigate to the help window. If only one command is available,
 pressing `TAB` will auto-complete the command for you without the need to type it in manually.
 
+This is particularly helpful when you are new to the commands and require time to get used to it. Pressing `TAB` would
+show all helpful and useful information needed, and this would definitely benefit you as the learning curve to using our
+application would not be steep.
+
 Examples:
 
 * While typing `his` to get `history` command, press `TAB`. The `history` command will automatically be filled in for
 you as it is the only suggestion available. The command parameters would then be shown as a prompt to help you with your
 input.
 * While typing `e`, press `TAB`. The system will suggest to you all possible commands that start with `e`, which would
-be `exportall`, `exit`, and `edit`.
+be `exportall`, `export`, `exit`, and `edit`.
 
 === Getting Wrong Command Suggestions
 
 Should you type in a wrong command, fear not, as our system will automatically suggest to you what you have typed wrongly,
 by giving you a closest approximation of word through the message box after you press enter.
+
+The input is not case sensitive when looking for suggestions, hence it would increase the chance of getting a closer approximation of your
+desired command!
+
+This is particularly useful when you are typing very quickly, as sometimes you might make minor mistakes which can be
+easily correctable from our application.
 
 Examples:
 
