@@ -124,6 +124,7 @@ Examples:
 
 * `createaccount A1234569M zaq1xsw2cde3 member` +
 Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the NUSSU-Connect.
+
 The image below shows the outcome of a successful creation of a new account.
 
 image::CreateAccountSuccess.PNG[width="250"]
@@ -149,7 +150,8 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-// tag:aslUser[]
+
+// tag::aslUser[]
 
 === Adding person's skill: `asl`
 
@@ -164,7 +166,16 @@ Examples:
 
 * `asl 2 s/Photography l/30`
 * `asl 4 s/Java l/40`
-// end:aslUser[]
+
+Before executing the command:
+
+image::aslbefore.png[width="300"]
+After executing the command:
+
+image::aslafter.png[width="300"]
+
+
+// end::aslUser[]
 
 === Editing a person : `edit`
 
@@ -313,6 +324,45 @@ image::SearchPruning10th.png[align="left", width = 200]
 ****
 
 // end::find[]
+
+// tag::sort[]
+
+=== Sorting : `sort`
+
+Sorts a list of people in NUSSU Connect. +
+Format: `sort st/[PARAMETER]`
+
+****
+* Sorts a list of people by the specified `PARAMETER` .
+* Currently, the only valid parameters are `name`, `skill`, and `sl` (Skill Level)].
+****
+
+WARNING: The sort command currently sorts and displays all data in NUSSU Connect. Interaction between this command
+and the `find` command is coming in `v2.0`.
+
+Examples:
+
+* `sort st/name` +
+Sorts the list of people by name, in alphabetical order.
+* `sort st/skill` +
+Sorts the list of people by skill, in alphabetical order.
+* `sort st/sl` +
+Sorts the list of people by skill level, in order of increasing skill.
+
+Before executing the command:
+
+image::sort1.png[width="500"]
+
+After sorting by `skill`:
+
+image::sort2.png[width="500"]
+
+After sorting by `sl` (skillLevel):
+
+image::sort3.png[width="500"]
+
+
+// end::sort[]
 
 === Deleting : `delete`
 
@@ -516,6 +566,7 @@ e.g. `login A1234568M zaq1xsw2cde3 member`
 * *Create Account* : `createaccount USERID PASSWORD ROLE` +
 e.g. `createaccount A1234566M zaq1xsw2cde3 member`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+* *Add Skill*: `asl [INDEX] s/{SKILL} l/[SKILLLEVEL]` +
 * *Clear* : `clear`
 * *Delete* : `delete [INDEX]` +
 e.g. `delete 3`
@@ -525,6 +576,8 @@ e.g. `edit 2 n/James Lee e/jameslee@example.com`
 e.g. `find James Jake` +
 e.g `find \tag President`
 * *Undo Find* : `undofind`
+* *Sort* : `sort st/[parameter]` +
+e.g. `sort st/skill`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
@@ -538,5 +591,3 @@ e.g. `budget c/Computing Club t/200 e/5`
 e.g. `calculatebudget b/50000`
 * *Viewing the budget for a club* : `viewbudget c/CLUB NAME` +
 e.g. `viewbudget c/Computing Club`
-
-

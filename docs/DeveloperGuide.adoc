@@ -9,7 +9,7 @@
 :xrefstyle: full
 ifdef::env-github[]
 :tip-caption: :bulb:
-:note-caption: :information_source:
+:note-caption: :idnformation_source:
 :warning-caption: :warning:
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-F09-1/main/
@@ -632,6 +632,7 @@ image::UndoFindSequenceDiagram.png[]
 // end::searchpruning[]
 
 // tag::asl[]
+
 === Add Skill Level Command
 
 ==== Current Implementation
@@ -640,7 +641,8 @@ The add skill mechanism builds on the `addressBookParser`. This as well
 as it's subclass `addSkillCommandParser` ensures that the correct number of arguments
 is given to the command.
 
-The following shows how the application Logic handles the request to change a skill in one particular scenario.
+You can observe how the application Logic handles the request to change a skill
+in one particular scenario in the following steps:
 
 Step 1. The user launches the application. The application boots up and lists all members.
 
@@ -688,6 +690,23 @@ information during addition of personal information.
 * Another is to enhance the edit command, possibly depreciating the use of the add skill level command.
 * Another is to enhance the storage such that multiple skills can be added per person.
 // end::asl[]
+
+=== Sort feature
+
+This feature was implemented by implementing custom comparators in
+`Person` class. You will be able to compare the values in each person which are used
+as arguments to the `Sort`, which is a method of all instances of `List`.
+
+1. A `FilteredList` (unmodifiable) is obtained from the `model` and is placed into an `ArrayList`,
+which is modifiable.
+2. `Sort` is called on the list, using custom comparators which can be found in the Person Class.
+3. The items are deleted from the model and are replaced in the order of the `ArrayList`.
+
+==== Possible extensions
+
+* Currently, the `find` command doesn't work with the Sort Command. The two commands used together
+would be quite powerful, so making them work together would be top priority for `v2.0`.
+* It should also be possible to sort by reverse, and sort by multiple criteria at once.
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -1368,9 +1387,9 @@ Use case resumes at step 2.
 *MSS*
 
 1.  User indicates he wants to sort by skills
-2.  NUSSU-Connect lists available skills, asks the user what he wants to sort by.
-3.  User indicates what he wants by selecting
-4.  NUSSU-Connect all skills.
+2.  NUSSU-Connect lists available users.
+3.  User indicates that he wants to sort by skill.
+4.  NUSSU-Connect sorts all Persons in the application.
 +
 Use case ends.
 
