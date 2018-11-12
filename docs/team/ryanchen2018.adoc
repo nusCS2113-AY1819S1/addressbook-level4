@@ -24,7 +24,7 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 ** Justification: This feature improves the product significantly because managing recruitment is one of the main responsibilities for HR admin.
 ** Highlights: This enhancement provides an integrated function for HR admin to manage internal recruitment posts easily before publish to the public.
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=ryanchen2018&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[Reposense Dashboard]}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=ryanchen2018&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[Reposense Dashboard]]
 
 * *Other contributions*:
 

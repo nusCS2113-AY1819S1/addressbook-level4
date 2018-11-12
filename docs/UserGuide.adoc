@@ -789,6 +789,11 @@ Send calendar to the employee for employee to import schedule, sent using the Em
 website. _[Upcoming in 2.0]_
 // end::recruitment2.0Feature[]
 
+// tag::expenses2.0Feature[]
+=== Expenses Report: `expensesReport` _[Upcoming in 2.0]_
+Generates an expenses report with the total expenses amount claimed and have not been claimed for a year _[Upcoming in 2.0]_
+// end::expenses2.0Feature[]
+
 === Encrypting data files `[coming in v2.0]`
 
 Upcoming in 2.0! Stay Tune!

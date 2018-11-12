@@ -512,7 +512,7 @@ Aspect implementation of `modifyPay` command:
 
 * Alternative 2: One command to handle all the modifications
 ** Pros: Lesser Class to handle different fields
-** Cons: User may accidentally touched on sensitive data and ended up editing them
+** Cons: User may accidentally touch on sensitive data and ended up editing them
 
 // end::modifyPay[]
 
@@ -899,17 +899,31 @@ fields to describe the schedule.
 // end::schedule2[]
 
 // tag::Expenses[]
-=== Expenses Feature
+=== Add Expenses
 The expenses feature contains to two commands.
 
-* The command `addex` allows the user to add expenses for each employee.
-* The command `removeex` allows the user to remove expenses for each employee.
+* The command `addExpenses` allows the user to add expenses for each employee.
 
-==== Current Implementation for `addex` command
-The `addex` mechanism is facilitated by `AddExpensesCommandParser`.
-The `AddExpensesCommandParser` implements the `Parser` interface, parses the arguments parameter, which is the input from the user, and creates a new `AddExpensesCommand` object.
-Checks on whether the input complies with the required format is handled by other classes.
-This checking of input compliance is facilitated by two helper methods, namely `isValidEmployeeId` from `EmployeeId` class and `isValidExpensesAmount` from `ExpensesAmount` class.
+==== Current Implementation for `addExpenses` command
+
+===== Phase 1
+The `addExpenses` command is handled by `AddExpensesCommandParser`.
+The `AddExpensesCommandParser` implements the `Parser` interface, takes in input from the user as a form of argument,
+The `AddExpensesCommandParser` will then check if user input contains too many prefixes or check for multiple entries of
+same prefix.
+
+Next, the `AddExpensesCommandParser` will compute the value of `expensesAmount` to be added by summing the
+the values of `travelExpenses`, `medicalExpenses` and `miscellaneousExpenses`. The `AddExpensesCommandParser` will then
+create the `Expenses` and `EditExpensesDescriptor` objects. Other classes will handle validation of the input, check if
+it has the correct input format.
+
+The five methods that helps to valid the input are:
+
+* `isValidEmployeeId` from `EmployeeId` class
+* `isValidExpensesAmount` from `ExpensesAmount` class
+* `isValidTravelExpenses` from `TravelExpenses` class
+* `isValidMedicalExpenses` from `MedicalExpenses` class
+* `isValidMiscellaneousExpenses` from `MiscellaneousExpenses` class
 
 [NOTE]
 If the input does not comply with the required format, an error message will be shown to the user.
@@ -932,7 +946,7 @@ Code snippet of `isValidExpensesAmount` that shows the checking of the input com
 
 [source, java]
 ----
-public static final String EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = "\\d{1,}";
+public static final String EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = "[-]?[0-9]+(.[0-9]{0,2})?";
 
 /**
      * Returns true if a given string is a valid Expenses Amount.
@@ -942,37 +956,183 @@ public static final String EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = "\\d{1,}";
     }
 ----
 
-==== Current Implementation for `removeex` command
+===== Phase 2
+The `AddExpensesCommand` will take in the `Expenses` and `EditExpensesDescriptor` objects.
 
-The `removeex` mechanism is facilitated by `RemoveExpensesCommandParser`.
-The `RemoveExpensesCommandParser` implements the `Parser` interface, parses the arguments parameter, which is the input from the user, and creates a new `RemoveExpensesCommand` object.
-Only Index will be required as input.
-Removing of expenses is to delete selected expenses from the list based on the input Index.
-Checking of whether Index is within list is facilitated by a method, `CommandResult` of the `RemoveExpensesCommand` class.
-The `CommandResult` method also calls the `deleteExpenses` method and `commitExpenses` method from `model` interface to delete the expenses and commit the changes into the xml storage.
+The `AddExpensesCommand` will first check if there exists a person in the person list that has the same employeeId  as
+`Expenses` object using the condition `(!model.hasEmployeeId(toCheckEmployeeId)`.
+The `AddExpensesCommand` will next check if there exists an expenses in the expenses list that has the same employeeId
+as `Expenses` object using the condition `(!model.hasExpenses(toAddExpenses)`.
 
-[NOTE]
-If the input Index isn't found in the list, an error message will be shown to the user.
-
-Code snippet of `CommandResult` from `RemoveExpensesCommand` class that checks the input Index and calling the `deleteExpenses` method and `commitExpenses` to delete the expenses and commit the changes:
+Code snippet of condition that checks the person and expenses list for person and expenses with same employeeId:
 
 [source, java]
 ----
-@Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
-        List<Expenses> lastShownList = model.getFilteredExpensesList();
+if (!model.hasEmployeeId(toCheckEmployeeId)) {
+            throw new CommandException(MESSAGE_EMPLOYEE_ID_NOT_FOUND);
+        } else if (!model.hasExpenses(toAddExpenses)) {
+----
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EXPENSES_DISPLAYED_INDEX);
-        }
+** If Expenses List don't have expenses with same EmployeeId,
+*** The `AddExpensesCommand` will then check if any of the fields will contains negative value or exceed the limit. An exception will be
+thrown if at least one of the fields contains negative value or exceed the limit.
+*** The `AddExpensesCommand` will then add the expenses into CHRS.
 
-        Expenses expensesToRemove = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteExpenses(expensesToRemove);
+Code snippet of `If Expenses List don't have expenses with same EmployeeId`
+[source, java]
+----
+else if (!model.hasExpenses(toAddExpenses)) {
+    if (Double.parseDouble(toAddExpenses.getExpensesAmount().toString()) < 0
+        || Double.parseDouble(toAddExpenses.getTravelExpenses().toString()) < 0
+        || Double.parseDouble(toAddExpenses.getMedicalExpenses().toString()) < 0
+        || Double.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) < 0) {
+        throw new CommandException(MESSAGE_NEGATIVE_LEFTOVER);
+    } else if (Double.parseDouble(toAddExpenses.getExpensesAmount().toString()) > MAX_TOTAL_EXPENSES
+        || Double.parseDouble(toAddExpenses.getTravelExpenses().toString()) > MAX_EXPENSES_AMOUNT
+        || Double.parseDouble(toAddExpenses.getMedicalExpenses().toString()) > MAX_EXPENSES_AMOUNT
+        || Double.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) > MAX_EXPENSES_AMOUNT
+    ) {
+        throw new CommandException(MESSAGE_VALUE_OVER_LIMIT);
+    } else if (Double.parseDouble(toAddExpenses.getExpensesAmount().toString()) >= 0
+            && Double.parseDouble(toAddExpenses.getTravelExpenses().toString()) >= 0
+            && Double.parseDouble(toAddExpenses.getMedicalExpenses().toString()) >= 0
+            && Double.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) >= 0
+            && Double.parseDouble(toAddExpenses.getExpensesAmount().toString()) <= MAX_TOTAL_EXPENSES
+            && Double.parseDouble(toAddExpenses.getTravelExpenses().toString()) <= MAX_EXPENSES_AMOUNT
+            && Double.parseDouble(toAddExpenses.getMedicalExpenses().toString()) <= MAX_EXPENSES_AMOUNT
+            && Double.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) <= MAX_EXPENSES_AMOUNT
+    ) {
+        model.addExpenses(toAddExpenses);
         model.commitExpensesList();
-        return new CommandResult(String.format(MESSAGE_REMOVE_EXPENSES_SUCCESS, expensesToRemove));
+        messageToShow = MESSAGE_SUCCESS;
     }
 ----
+
+** If Expenses List have expenses with same EmployeeId,
+*** The `AddExpensesCommand` will create an `expensesToEdit` object The `AddExpensesCommand` will then call
+`createEditedExpenses` method with `expensesToEdit` and `EditExpensesDescriptor` object as parameters.
+
+Code snippet creating `expensesToEdit` object and calling `createdEditedExpenses` method
+[source, java]
+----
+else if (model.hasExpenses(toAddExpenses)) {
+    EmployeeIdExpensesContainsKeywordsPredicate predicatEmployeeId;
+    List<String> employeeIdList = new ArrayList<>();
+    List<Expenses> lastShownListExpenses;
+
+    employeeIdList.add(toCheckEmployeeId.getEmployeeId().value);
+    predicatEmployeeId = new EmployeeIdExpensesContainsKeywordsPredicate(employeeIdList);
+
+    model.updateFilteredExpensesList(predicatEmployeeId);
+    lastShownListExpenses = model.getFilteredExpensesList();
+
+    Expenses expensesToEdit = lastShownListExpenses.get(0);
+    Expenses editedExpenses = createEditedExpenses(expensesToEdit, editExpensesDescriptor);
+----
+
+*** The `createEditedExpenses` method will call `modifyExpensesAmount`, `modifyTravelExpenses`, `modifyMedicalExpenses`,
+`modifyMiscellaneousExpenses`, methods with `expensesToEdit` and `EditExpensesDescriptor` object as parameter.
+
+Code snippet `createdEditedExpenses` method
+[source, java]
+----
+    private Expenses createEditedExpenses(Expenses expensesToEdit, EditExpensesDescriptor
+            editExpensesDescriptor) {
+        assert expensesToEdit != null;
+        ExpensesAmount updatedExpensesAmount = null;
+        TravelExpenses updatedTravelExpenses = null;
+        MedicalExpenses updatedMedicalExpenses = null;
+        MiscellaneousExpenses updatedMiscellaneousExpenses = null;
+
+        EmployeeId updatedEmployeeId = expensesToEdit.getEmployeeId();
+        try {
+            updatedExpensesAmount = ParserUtil.parseExpensesAmount(modifyExpensesAmount(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedTravelExpenses = ParserUtil.parseTravelExpenses(modifyTravelExpenses(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedMedicalExpenses = ParserUtil.parseMedicalExpenses(modifyMedicalExpenses(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedMiscellaneousExpenses = ParserUtil.parseMiscellaneousExpenses(modifyMiscellaneousExpenses(
+                    expensesToEdit, editExpensesDescriptor));
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+
+        return new Expenses(updatedEmployeeId, updatedExpensesAmount, updatedTravelExpenses, updatedMedicalExpenses,
+                updatedMiscellaneousExpenses);
+    }
+----
+
+*** Each method will edit their respective field from `expensesToEdit` with the same field from `EditExpensesDescriptor`.
+The method will set isNegativeLeftover to be true and set isOverLimit to be true if the values is below 0 or exceed max
+value.
+
+Code snippet `modifyExpensesAmount` method, one of the methods being called
+[source, java]
+----
+private String modifyExpensesAmount (Expenses expensesToEdit, EditExpensesDescriptor
+        editExpensesDescriptor) {
+    NumberFormat formatter = new DecimalFormat("#0.00");
+    String newExpensesAmount = expensesToEdit.getExpensesAmount().toString();
+    double updateExpensesAmount = Double.parseDouble(newExpensesAmount);
+    String change = editExpensesDescriptor.getExpensesAmount().toString().replaceAll("[^0-9.-]",
+            "");
+    updateExpensesAmount += Double.parseDouble(change);
+    if (updateExpensesAmount < 0) {
+        setIsNegativeLeftover(true);
+    } else if (updateExpensesAmount > MAX_TOTAL_EXPENSES) {
+        setIsOverLimit(true);
+    } else if (updateExpensesAmount >= 0) {
+        newExpensesAmount = String.valueOf(formatter.format(updateExpensesAmount));
+    }
+    return newExpensesAmount;
+}
+----
+*** The `AddExpensesCommand` will check for isNegativeLeftover and isOverLimit. If both are false, the
+`AddExpensesCommand` will then update the updated expenses into CHRS.
+
+Code snippet of isNegativeLeftover and isOverLimit check
+[source, java]
+----
+if (getIsNegativeLeftover()) {
+        throw new CommandException(MESSAGE_NEGATIVE_LEFTOVER);
+    } else if (getIsOverLimit()) {
+        throw new CommandException(MESSAGE_VALUE_OVER_LIMIT);
+    } else if (!getIsNegativeLeftover() && !getIsOverLimit()) {
+        messageToShow = MESSAGE_SUCCESS;
+        model.updateExpenses(expensesToEdit, editedExpenses);
+        model.commitExpensesList();
+    }
+    model.updateFilteredExpensesList(PREDICATE_SHOW_ALL_EXPENSES);
+}
+----
+
+The sequence diagram below illustrates the operation of the `AddExpensesCommand`:
+
+image::Add_ExpensesCommandSequenceDiagram.png[width="900"]
+
+==== Design Considerations
+Aspect implementation of `AddExpenses` command:
+
+* **Alternative 1 (current choice):** Have a single command to add and modify expenses.
+** Pros: User isn't require to ensure that there exist an expenses for the employee before modifying the expenses
+** Cons: Have to handle more conditions and possibly more prone to bugs.
+* **Alternative 2:** Have separate commands to add or modify expenses.
+** Pros: User won't have the possibly of mixing up if they want to add new expenses or modify old expenses.
+** Cons: Requires user to know more commands.
+
+Aspect: `Expenses List` Storage
+
+* **Alternative 1 (current choice):** Have expenses stored in XML format.
+** Pros: Easier to read, code and test XML files.
+** Cons: Can't compute or tabulate data from file.
+* **Alternative 2:** Have schedules stored in CSV format.
+** Pros: More efficient way of storing tabular data like expenses
+** Cons: Harder to read as compared to XML file.
+
+==== Expenses Report: `expensesReport` _[Upcoming in 2.0]_
+
+Generates an expenses report with the total expenses amount claimed and have not been claimed for a year _[Upcoming in 2.0]_
 
 // end::Expenses[]
 
@@ -1934,7 +2094,7 @@ Use case ends.
 ** 1a1. CHRS informs user that the employee does not exist.
 +
 Use case resumes at step 1.
-* 1b. CHRS detects invalid input format or missing details.
+* 1b. CHRS detects invalid input format or expenses exceed limit or result in negative value.
 [none]
 ** 1b1. CHRS shows an error message containing either the details of the command usage or parameters constraints.
 +
@@ -2254,7 +2414,7 @@ Expected: Similar to previous.
 === Modifying an employee's pay
 
 . Modifying an employee's pay
-.. Prerequisites: Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value). +
+.. Prerequisites: There must be at least 1 employee in the list. Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value). +
 Allocated Bonus should not be more than 24 months of Salary.
 
 .. Test case: modifyPay 1 s/1000 +
@@ -2286,7 +2446,7 @@ Else, error details shown in the status message. Status bar remains the same.
 === Modifying the pay of all the employees in the list
 
 . Modifying an employee's pay
-.. Prerequisites: Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value). +
+.. Prerequisites: There must be at least 1 employee in the list. Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value). +
 Allocated Bonus should not be more than 24 months of Salary.
 
 .. Test case: modifyAllPay s/1000 +
@@ -2322,8 +2482,8 @@ Else, error details shown in the status message. Status bar remains the same.
 // tag::william[]
 === Add Schedule
 . Add a single leave schedule
-.. Prerequisites: There must be at least 3 valid employees in the observable employee list panel
-and employee id 000001 as one of the employees.
+.. Prerequisites: There must be at least 3 valid employees in the observable employee list panel,
+ employee id 000001 among one of the employees and a empty schedule list.
 .. Test case: addSchedule id/000001 d/02/02/2019 t/LEAVE +
 Expected: New schedule added: Employee Id:000001 Date: 02/02/2019 Type: LEAVE
 
@@ -2333,8 +2493,7 @@ Expected: New schedule added: Employee Id:000001 Date: 04/02/2019 Type: WORK
 
 === Add Works
 . Add multiple work schedules for multiple employees.
-.. Prerequisites: There must be at least 3 employees in the observable employee list panel
-and completed `addSchedule` manual test above.
+.. Prerequisites: Completed `addSchedule` manual test above.
 ... Test case: addWorks d/02/02/2019 d/03/03/2019 +
 Expected: New working schedules added for SOME of the observable employees whom are not yet added date: [02/02/2019, 03/03/2019]
               Unable to schedule work for the following employees below whom are on leave:
@@ -2342,8 +2501,7 @@ Expected: New working schedules added for SOME of the observable employees whom 
 
 === Add Leaves
 . Add multiple leave schedules for multiple employees.
-.. Prerequisites: There must be at least 3 employees in the observable employee list panel
-and completed `addWorks` manual test above.
+.. Prerequisites: Completed `addWorks` manual test above.
 
 .. Test case: addLeaves d/04/02/2019 d/05/02/2019 +
 Expected: New leave schedules added for SOME of the observable employees whom are not yet added date: [04/02/2019, 05/02/2019]
@@ -2352,37 +2510,32 @@ Expected: New leave schedules added for SOME of the observable employees whom ar
 
 === Calculate Leaves
 . Calculate leaves taken by an employee in a year.
-.. Prerequisites: There must be at least 3 employees in the observable employee list panel
-and completed `addLeaves` manual test above.
+.. Prerequisites: Completed `addLeaves` manual test above.
 
 .. Test case: calculateLeaves id/000001 y/2019 +
 Expected: Number of leaves scheduled for Employee 000001 year 2019 is: 2.
 
 === Select Schedule
 . Select a schedule
-.. Prerequisites: There must be at least 3 employees in the observable employee list panel
-and completed `calculateLeaves` manual test above.
+.. Prerequisites: Completed `calculateLeaves` manual test above.
 .. Test case: selectSchedule 1 +
 Expected: Selected Schedule: 1
 
 === Delete Schedule
 . Delete a schedule
-.. Prerequisites: There must be at least 3 employees in the observable employee list panel
-and completed `selectSchedule` manual test above.
+.. Prerequisites: Completed `selectSchedule` manual test above.
 ... Test Case: deleteSchedule 1 +
 Expected: Deleted Schedule: Date: 02/02/2019 Type: LEAVE
 
 === Delete Works
 . Delete multiple work schedules
-.. Prerequisites: There must be at least 3 employees in the observable employee list panel
-and completed `deleteSchedule` manual test above.
+.. Prerequisites: Completed `deleteSchedule` manual test above.
 .. Test Case: deleteWorks d/02/02/2019 d/03/03/2019 +
 Expected: Working schedule deleted for all observable employees that contain date : [02/02/2019, 03/03/2019]
 
 === Delete Leaves
 . Delete multiple leave schedules
-.. Prerequisites: There must be at least 3 employees in the observable employee list panel
-and completed `deleteWorks` manual test above.
+.. Prerequisites: Completed `deleteWorks` manual test above.
 .. Test Case: deleteLeaves d/04/02/2019 d/05/02/2019 +
 Expected: Leaves deleted for all observable employees that contain date : [04/02/2019, 05/02/2019]
 
@@ -2390,6 +2543,34 @@ Expected: Leaves deleted for all observable employees that contain date : [04/02
 // end::william[]
 
 // tag::vernon[]
+
+=== Add Expenses
+. Add an expenses or modify existing expenses
+.. Prerequisites: Employee with employeeId "000001" must exist in person list and doesn't have an expenses in the expenses list +
+.. Test Case: addExpenses id/000001 tra/50 med/100 misc/150 +
+Expected: Travel Expenses has value of 50.00. Medical Expenses has value of 100.00. Miscellaneous Expenses has value of 150.00. Total Expenses has value of 300.00. Timestamp in the status bar is updated. +
++
+Test Case: addExpenses id/000001 tra/100 med/50 misc/25 +
+Expected: Travel expenses is increased to 150.00, medical expenses is increased to 150.00 and miscellaneous expenses is increased to 175.00, total expenses is increased to 475.00. Timestamp in the status bar is updated.
+.. Test Case: addExpenses id/000001 tra/50 med/100 misc/150 +
+Expected: Travel Expenses has value of 50.00. Medical Expenses has value of 100.00. Miscellaneous Expenses has value of 150.00. Total Expenses has value of 300.00. Timestamp in the status bar is updated. +
++
+Test Case: addExpenses id/000001 tra/-20 med/-30 misc/-50 +
+Expected: Travel expenses is decreased to 30.00, medical expenses is decreased to 70.00 and miscellaneous expenses is decreased to 100.00, total expenses is decreased to 200.00. Timestamp in the status bar is updated.
+
+
+=== Delete Expenses
+. Delete an expenses
+.. There must be at least 1 employee in the observable expenses list panel
+.. Test Case: deleteExpenses 1 +
+Expected: Deletes expenses claim from expenses list with Index '1' in the expenses list.
+
+=== Select Expenses
+. Select an expenses
+.. There must be at least 1 employee in the observable expenses list panel
+.. Test Case: selectExpenses 1 +
+Expected: Select an expenses claim from expenses list with Index '1' in the expenses list.
+
 
 // end::vernon[]
 
@@ -2403,29 +2584,29 @@ including only comma, full stop and single right quote. At least one field shoul
 than 1 post added.
 
 
-.. Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server, and company's IT framework.
+.. Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server, and company's IT framework. +
 Expected: New recruitment post is added:
           Job Position: IT Manager
           Minimal years of working experience: 5
           Job Description: To maintain the network server, and company's IT framework.
 
-.. Test case: addRecruitmentPost jp/IT Manager1 me/5 jd/To maintain the network server in company
+.. Test case: addRecruitmentPost jp/IT Manager1 me/5 jd/To maintain the network server in company +
 Expected: Job Position accepts only characters. It should not include numbers or should not be blank.
 And the maximum length of the job position is 20 characters
 
-.. Test case: addRecruitmentPost jp/IT Manager me/31 jd/To maintain the network server in company
+.. Test case: addRecruitmentPost jp/IT Manager me/31 jd/To maintain the network server in company +
 Expected: Working Experience should only contain integers with length of at least 1 digit longAnd the range of the
 working experience is from 0 to 30
 
-.. Test case: addRecruitmentPost jp/IT Manager me/-1 jd/To maintain the network server in company
+.. Test case: addRecruitmentPost jp/IT Manager me/-1 jd/To maintain the network server in company +
 Expected: Working Experience should only contain integers with length of at least 1 digit longAnd the range of the
 working experience is from 0 to 30
 
-.. Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server in company
+.. Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server in company +
 Expected: Working Experience should only contain integers with length of at least 1 digit longAnd the range of the
 working experience is from 0 to 30
 
-.. Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server in company!
+.. Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server in company! +
 Expected: Job description accepts only characters. It should not include numbers or should not be blank.
 For the purpose of using punctuation marks, it only allows comma, full stop and single right quote.
 The length of job description is from 1 to 200 characters.
@@ -2435,16 +2616,16 @@ The length of job description is from 1 to 200 characters.
 .. Prerequisites: at least one recruitment post has been added to the recruitmentPost list panel. Minimal one field
 should be different from the existing recruitment post that is about to be edited.
 
-.. Test case: editRecruitmentPost 1 jp/Accountants me/5 jd/To maintain the network server, and company's IT framework.
+.. Test case: editRecruitmentPost 1 jp/Accountants me/5 jd/To maintain the network server, and company's IT framework. +
 Expected: Edited Recruitment Post:
           Job Position: Accountants
           Minimal years of working experience: 5
           Job Description: To maintain the network server, and company's IT framework.
 
-.. Test case: editRecruitmentPost 1 jp/Accountants me/5 jd/To maintain the network server, and company's IT framework.
+.. Test case: editRecruitmentPost 1 jp/Accountants me/5 jd/To maintain the network server, and company's IT framework. +
   Expected: This job position already exists in the address book
 
-.. Test case: editRecruitmentPost 0 jp/Accountants me/5 jd/To maintain the network server, and company's IT framework.
+.. Test case: editRecruitmentPost 0 jp/Accountants me/5 jd/To maintain the network server, and company's IT framework. +
    Expected: Invalid command format!
              editRecruitmentPost: Edits the details of the recruitment post identified by the index number used in the
              displayed recruitment list. Existing values will be overwritten by the input values. Parameters:
@@ -2454,13 +2635,13 @@ Expected: Edited Recruitment Post:
 === Select A Recruitment Post
 . Select a recruitment post
 .. Prerequisites: at least one recruitment post should be added before performing selectRecruitPostCommand.
-.. Test case: selectRecruitmentPost 1
+.. Test case: selectRecruitmentPost 1 +
 Expected: Selected Recruitment Post: 1
 
 === Delete A Recruitment Post
 . Delete a recruitment post
 .. Prerequisites: at least one recruitment post should be added before performing deleteRecruitmentPostCommand.
-... Test Case: deleteRecruitmentPost 1
+... Test Case: deleteRecruitmentPost 1 +
 Expected: Deleted Recruitment Post:
           Job Position: Accountants
           Minimal years of working experience: 5

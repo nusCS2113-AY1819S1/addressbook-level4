@@ -164,7 +164,7 @@ public class AddExpensesCommand extends Command {
      * edited with {@code editExpensesDescriptor}.
      */
     private Expenses createEditedExpenses(Expenses expensesToEdit, EditExpensesDescriptor
-            editExpensesDescriptor) {
+                editExpensesDescriptor) {
         assert expensesToEdit != null;
         ExpensesAmount updatedExpensesAmount = null;
         TravelExpenses updatedTravelExpenses = null;

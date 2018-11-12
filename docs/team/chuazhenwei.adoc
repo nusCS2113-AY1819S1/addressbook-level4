@@ -33,7 +33,7 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 ** Documentation:
 *** Updated Developer Guide on `modifyPay` feature, UI component diagram and instruction for manual testing. (Pull requests: https://github.com/CS2113-AY1819S1-T16-4/main/pull/105[#105], https://github.com/CS2113-AY1819S1-T16-4/main/pull/231/files[#231], https://github.com/CS2113-AY1819S1-T16-4/main/pull/241[#241])
 *** Updated User Guide to ensure information are up to date. (Pull requests: https://github.com/CS2113-AY1819S1-T16-4/main/pull/2[#2], https://github.com/CS2113-AY1819S1-T16-4/main/pull/4/files[#4], https://github.com/CS2113-AY1819S1-T16-4/main/pull/17/files[#17], https://github.com/CS2113-AY1819S1-T16-4/main/pull/19[#19],
- https://github.com/CS2113-AY1819S1-T16-4/main/pull/112[#112], https://github.com/CS2113-AY1819S1-T16-4/main/pull/170[#170], https://github.com/CS2113-AY1819S1-T16-4/main/pull/173[#173], https://github.com/CS2113-AY1819S1-T16-4/main/pull/187[#187], )
+ https://github.com/CS2113-AY1819S1-T16-4/main/pull/112[#112], https://github.com/CS2113-AY1819S1-T16-4/main/pull/170[#170], https://github.com/CS2113-AY1819S1-T16-4/main/pull/173[#173], https://github.com/CS2113-AY1819S1-T16-4/main/pull/187[#187])
 
 ** Community:
 *** PRs reviewed (With non-trivial comments) (Pull requests: https://github.com/CS2113-AY1819S1-T16-4/main/pull/73[#73], https://github.com/CS2113-AY1819S1-T16-4/main/pull/74[#74], https://github.com/CS2113-AY1819S1-T16-4/main/pull/76[#76], https://github.com/CS2113-AY1819S1-T16-4/main/pull/120[#120], https://github.com/CS2113-AY1819S1-T16-4/main/pull/133[#133], https://github.com/CS2113-AY1819S1-T16-4/main/pull/136[#136],
