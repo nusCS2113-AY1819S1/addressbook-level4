@@ -146,7 +146,7 @@ Format: `delete [INDEX]`
 Examples:
 
 * `delete 1`
-
+// tag::sort_task[]
 === Sort the taskbook: `sort`
 |===
 |Need to view the tasks in a specific order you prefer? For example, you would like the tasks to be displayed from the
@@ -169,15 +169,18 @@ Format: `sort s/METHOD`
 
 Examples:
 
-* `sort s/priority`
+* `sort s/deadlines`
 
-*Before*
+*Before: "sort s/deadlines" is entered*
 
 image::SortTaskCommand_before.png[width="790"]
 
-*After*
+*After: The list of tasks is sorted based on ascending order of the deadline*
 
 image::SortTaskCommand_after.png[width="790"]
+// end::sort_task[]
+// tag::defer_deadline[]
+
 === Deferring a deadline: `defer`
 |===
 |Need a way to quickly extend your deadline by a few days or up to a month? You can easily defer the deadline of your
@@ -188,25 +191,31 @@ Format: `defer i/INDEX dd/DAY`
 
 [NOTE]
 ====
-A valid year *must* be between 2018 and 9999 (inclusive)
+* Deadline of the selected task will be automatically updated by the number of days deferred from the deadline
 ====
+
+
 
 [WARNING]
 ====
 * Selected task must exist in the TaskBook
 * A task cannot be deferred by the number of days if it will result in two similar tasks with the same deadlines.
 ====
+
+
+
 Examples:
 
 * `defer i/1 dd/04`
 
-*Before*
+*Before: "defer i/1 dd/1" is entered*
 
 image::DeferDeadlineCommand_before.png[width="790"]
 
-*After*
+*After: deadline for the first task is deferred by 1 day*
 
 image::DeferDeadlineCommand_after.png[width="790"]
+// end::defer_deadline[]
 
 // tag::editTask[]
 === Editing a task: `edit`
@@ -291,6 +300,7 @@ Rank is the level of importance assigned to that particular milestone by the use
 
 // end::add_milestone[]
 
+// tag::add_tag[]
 === Adding a tag: `add_tag`
 |===
 |Want a way to better mark your tasks, or to quickly tell what a task is about? Adding tags to your tasks will make it
@@ -304,23 +314,32 @@ Format: `add_tag i/INDEX t/TAG`
 * Tag names are all in lower case.
 * Duplicate tags are ignored and the tag list for the selected task will remain unchanged
 ====
+
+
+
 [WARNING]
 ====
 * Tag names has to be alphanumeric
 * Selected task must exist in the TaskBook
 ====
+
+
+
 Examples:
 
 * `add_tag i/1 t/homework`
 
-*Before*
+*Before: "add_tag i/1 t/homework" is entered*
 
 image::AddTagCommand_before.png[width="790"]
 
-*After*
+*After: The tag "homework" is added to the first task*
 
 image::AddTagCommand_after.png[width="790"]
 
+// end::add_tag[]
+
+// tag::remove_tag[]
 === Removing a tag: `remove_tag`
 |===
 |Found the tags added previously to your tasks not suitable? You can remove the tags easily and conveniently!
@@ -333,24 +352,30 @@ Format: `remove_tag i/INDEX t/TAG`
 * Selected tag to be removed from the task is case-insensitive.
 ====
 
+
+
 [WARNING]
 ====
 * Tag names has to be alphanumeric
 * Selected task must exist in the TaskBook
 ====
 
+
+
 Examples:
 
 * `remove_tag i/1 t/homework`
 
-*Before*
+*Before: "remove_tag i/1 t/homework" is entered*
 
 image::RemoveTagCommand_before.png[width="790"]
 
-*After*
+*After: The tag "homework" is removed from the first task*
 
 image::RemoveTagCommand_after.png[width="790"]
+// end::remove_tag[]
 
+// tag::select_tag[]
 === Selecting a tag: `select_tag`
 |===
 |Need to view your tasks with the specific tag? For example, viewing all the tasks which are tagged with "homework"?
@@ -373,14 +398,14 @@ Examples:
 
 * `select_tag t/homework`
 
-*Before*
+*Before: "select_tag t/homework" is entered*
 
 image::SelectTagCommand_before.png[width="790"]
 
-*After*
+*After: A list of tasks with tag "homework" is shown*
 
 image::SelectTagCommand_after.png[width="790"]
-
+// end::select_tag[]
 === Tracking productivity : `track`
 
 Tracks your productivity for all completed tasks, by returning an average productivity (in percentage). +
