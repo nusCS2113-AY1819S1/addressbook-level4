@@ -229,7 +229,7 @@ Deletes all distributors from the distributor book.
 
 // end::distributormanagement[]
 
-// tag::journal[]
+// tag::saleshistoy[]
 
 === Sales History
 
@@ -304,7 +304,7 @@ space between "dd" and "HH" in the command format.
 Examples:
 
 * `removereminder time/ 2018/10/26 12:30:00`
-// end::journal[]
+// end::saleshistory[]
 
 === Clearing all entries : `clear`
 Format: `clear` +

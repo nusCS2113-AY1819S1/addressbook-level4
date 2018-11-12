@@ -10,7 +10,7 @@ Project: `Iventarei Pro`
 
 == Overview
 
-Inventarie Pro is for self employed business owners who *prefer to use a desktop app for managing inventory*. More importantly, Inventarie Pro is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Inventarie Pro can get your inventory management tasks done faster than traditional GUI apps.
+se a desktop app for managing inventory*. More importantly, Inventarie Pro is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Inventarie Pro can get your inventory management tasks done faster than traditional GUI apps.
 
 == Summary of contribution
 
