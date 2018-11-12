@@ -150,21 +150,21 @@ public class Trie {
      * DFS to find child. Adds substring into the result when is at the end of word.
      * Else, it continues traversing down the tree to find the end of the word, and appends
      * the current substring with the child key.
-     * @param subString current substring formed.
+     * @param curSubString current substring formed.
      * @param parent current parent node
      * @param result result of a list of words from current substring and node.
      */
-    private void findChildName(String subString, Node parent, List<String> result) {
+    private void findChildName(String curSubString, Node parent, List<String> result) {
         if (parent == null) {
             return;
         }
 
         if (parent.getIsEndOfWord()) {
-            result.add(subString);
-        } else {
-            for (char child: parent.getChildren()) {
-                findChildName(subString + child, parent.getChild(child), result);
-            }
+            result.add(curSubString);
+        }
+
+        for (char child: parent.getChildren()) {
+            findChildName(curSubString + child, parent.getChild(child), result);
         }
     }
 

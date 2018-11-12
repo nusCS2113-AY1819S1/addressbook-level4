@@ -24,5 +24,11 @@ public class StringSimilarityTest {
 
         // "lister" -> "list", has edit distance of 2
         assertEquals(stringsimilarity.editDistance("lister", "list"), 2);
+
+        // "schadule" -> "schedule" has edit distance of 1
+        assertEquals(stringsimilarity.editDistance("schadule", "schedule"), 1);
+
+        // "asdf" -> "add" has edit distance of 2
+        assertEquals(stringsimilarity.editDistance("asdf", "add"), 2);
     }
 }

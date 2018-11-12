@@ -23,6 +23,7 @@ import seedu.address.export.ExportManager;
 import seedu.address.export.Import;
 import seedu.address.export.ImportManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
 
@@ -35,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Todo> filteredTodos;
+    private final FilteredList<Reminder> filteredReminders;
 
     private final UserPrefs userPrefs;
 
@@ -50,6 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredTodos = new FilteredList<>(versionedAddressBook.getTodoList());
+        filteredReminders = new FilteredList<>(versionedAddressBook.getReminderList());
 
         this.userPrefs = userPrefs;
     }
@@ -69,7 +72,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
@@ -133,6 +138,23 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTodoList(Predicate<Todo> predicate) {
         requireNonNull(predicate);
         filteredTodos.setPredicate(predicate);
+    }
+
+    //=========== Filtered Reminder List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Reminder> getFilteredReminderList() {
+        return FXCollections.unmodifiableObservableList(filteredReminders);
+    }
+
+    @Override
+    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+        requireNonNull(predicate);
+        filteredReminders.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
@@ -251,6 +273,20 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void finishTodo(Todo target) {
         versionedAddressBook.removeTodo(target);
+        indicateAddressBookChanged();
+    }
+
+    //=========== Reminder ====================================================================================
+    @Override
+    public boolean hasReminder(Reminder reminder) {
+        requireNonNull(reminder);
+        return versionedAddressBook.hasReminder(reminder);
+    }
+
+    @Override
+    public void addReminder(Reminder reminder) {
+        versionedAddressBook.addReminder(reminder);
+        updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
         indicateAddressBookChanged();
     }
 }
