@@ -21,7 +21,7 @@ public class TypicalItems {
     public static final Item RPLIDAR = new ItemBuilder().withName("RPLidar")
             .withQuantity("25")
             .withMinQuantity("10")
-            .withTags("Lab1").build();
+            .withTags("Lab2").build();
 
     public static final Item MOTOR = new ItemBuilder().withName("Motor")
             .withQuantity("100")

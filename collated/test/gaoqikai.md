@@ -1,3 +1,6 @@
+# gaoqikai
+\java\seedu\address\logic\commands\TagCommandTest.java
+``` java
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
@@ -21,12 +24,13 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.account.Username;
-import seedu.address.model.item.NameContainsKeywordsPredicate;
+import seedu.address.model.item.TagContainsKeywordsPredicate;
+
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code TagCommand}.
  */
 
-public class FindCommandTest {
+public class TagCommandTest {
     private Model model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
     private Model expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
     private CommandHistory commandHistory = new CommandHistory();
@@ -38,39 +42,36 @@ public class FindCommandTest {
     }
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        TagContainsKeywordsPredicate firstPredicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("first"));
+        TagContainsKeywordsPredicate secondPredicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("second"));
+        TagCommand tagFirstCommand = new TagCommand(firstPredicate);
+        TagCommand tagSecondCommand = new TagCommand(secondPredicate);
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
-        // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        assertTrue(tagFirstCommand.equals(tagFirstCommand));
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(tagFirstCommand.equals(1));
         // null -> returns false
-        assertFalse(findFirstCommand == (null));
+        assertFalse(tagFirstCommand == (null));
         // different item -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(tagFirstCommand.equals(tagSecondCommand));
     }
     @Test
     public void execute_zeroKeywords_noItemFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(predicate);
+        TagContainsKeywordsPredicate predicate = preparePredicate(" ");
+        TagCommand command = new TagCommand(predicate);
+        expectedModel.updateFilteredItemListByTag(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
     @Test
     public void execute_multipleKeywords_multipleItemsFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Ar Rp");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(predicate);
+        TagContainsKeywordsPredicate predicate = preparePredicate("Lab1 Lab2");
+        TagCommand command = new TagCommand(predicate);
+        expectedModel.updateFilteredItemListByTag(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ARDUINO, RPLIDAR), model.getFilteredItemList());
     }
@@ -79,8 +80,9 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
 
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private TagContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
 }
+```

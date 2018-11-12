@@ -27,6 +27,8 @@ public class ChangeStatusCommand extends Command {
     public static final String COMMAND_WORD = "changeStatus";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status of the item identified "
             + "by the name of the item.\n"
+            + "The status field can only take the values Ready or Faulty\n"
+            + "Changing the status to On_Loan is not allowed\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_QUANTITY + "QUANTITY "
