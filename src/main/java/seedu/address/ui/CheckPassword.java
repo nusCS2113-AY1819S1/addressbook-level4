@@ -44,7 +44,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import seedu.address.logic.commands.Role;
+import seedu.address.logic.Role;
 
 /**
  * Checks if password is correct

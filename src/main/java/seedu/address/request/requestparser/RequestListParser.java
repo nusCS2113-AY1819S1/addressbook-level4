@@ -8,9 +8,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.Role;
+
 import seedu.address.logic.commands.CommandList;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.Role;
 import seedu.address.logic.parser.SimilarityParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.request.requestcommands.CommandSecondary;
@@ -21,6 +22,7 @@ import seedu.address.request.requestcommands.RequestCommand;
 import seedu.address.request.requestcommands.RequestCommandParser;
 import seedu.address.request.requestcommands.ToggleRequestCommand;
 import seedu.address.request.requestcommands.UndoRequestCommand;
+
 
 
 
