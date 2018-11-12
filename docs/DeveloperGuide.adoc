@@ -567,10 +567,9 @@ The following sequence diagram shows how the UpdateStatusCommand works:
 .Sequence Diagram for UpdateStatusCommand
 image::Update-sequenceDiagram.png[width="800"]
 
+
 [NOTE]
-====
 The Event Status feature is supported by the `Status` and `DateTime` field in the `Event`. Events with `DateTime` fields before the current `Date` will assume the `COMPLETED Status`, whereas those with `DateTime` fields after the current `Date` will take on the `UPCOMING Status`.
-====
 
 The *ReminderCommand* is periodically called in `TimerTask` `checkEventReminders` every 6 hours and it loops through every event in the `lastShownList` to check for the following:
 =====
@@ -1361,11 +1360,50 @@ Expected: Similar to previous
 Expected:  Invalid command will be displayed in the result box. No changes will occur.
 // end::commentsMT[]
 
+// tag::reminderMT[]
+=== Requesting a reminder
+
+. Requesting for reminders as a user registered for an upcoming event
+.. Prerequisites: +
+Added an event that is happening in the next 24 hours +
+Logged in as user +
+Registered to upcoming event 
+.. Testcase: `reminder` +
+Expected: An alert dialog shows up for the relevant event, showing the name of the event and the event's start time. Hitting 'enter' should close the alert dialog.
+
+. Requesting for reminders as a user not registered for an upcoming event
+.. Prerequisites: +
+Added an event that is happening in the next 24 hours +
+Logged in as user 
+.. Testcase: `reminder` +
+Expected: Event Manager shows message that there are no upcoming events for you in the logger.
+
+. Requesting for reminders as a user not logged in
+.. Prerequisites: +
+Not logged in
+.. Testcase: `reminder` +
+Expected: Event Manager shows message that you have to be logged in in the logger.
+// end::reminderMT[]
+
+// tag::statusMT[]
+=== Updating event statuses
+
+. Updating event status for an event that has just passed
+.. Prerequisites: +
+Added an event that will happen in 1-2 minutes' time
+.. Testcase: `update` +
+Expected: The event's status should change from UPCOMING to COMPLETED
+
+. Updating event status without any events
+.. Prerequisites: +
+Event Manager is empty of events (Use the `clear` command)
+.. Testcase: `update` +
+Expected: Event Manager shows message that there are no events to be updated in the logger.
+// end::statusMT[]
+
 === Exporting a file
 . Prerequisites: Must be logged in and have registered for 1 event
-
-.. Test case: `export file` +
+ .. Test case: `export file` +
 Expected: A iCalendar file called file will be exported to the source folder
-
-.. Test case: `export` +
+ .. Test case: `export` +
 Expected: Command Result box will notify that no file name is given and no changes will occur
