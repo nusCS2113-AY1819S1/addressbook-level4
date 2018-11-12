@@ -397,7 +397,8 @@ different phone number or email address.
 This uniqueness check is obtained through the use of the object `getName()`, `getPhone()` and `getEmail()`
 method in `Person`
 
-Remove and edit member uses the same concept but starts with looking for the Member in the UniquePersonList instead.
+Remove and edit member uses the similar concept and procedure but starts with looking for the Member in the
+UniquePersonList instead.
 
 ==== Find by name, major, phone and postalcode feature
 

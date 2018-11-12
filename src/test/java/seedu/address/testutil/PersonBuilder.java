@@ -3,7 +3,12 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.member.*;
+import seedu.address.model.member.Address;
+import seedu.address.model.member.Email;
+import seedu.address.model.member.Major;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
+import seedu.address.model.member.Postalcode;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -90,10 +95,21 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withPostalcode (String postalcode) {
+    /**
+     *
+     * @param postalcode
+     * @return
+     */
+    PersonBuilder withPostalcode (String postalcode) {
         this.postalcode = new Postalcode(postalcode);
         return this;
     }
+
+    /**
+     *
+     * @param major
+     * @return
+     */
     public PersonBuilder withMajor (String major) {
         this.major = new Major(major);
         return this;
