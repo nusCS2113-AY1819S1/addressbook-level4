@@ -27,8 +27,8 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.model.person.Time;
-import seedu.address.model.reminder.Date;
 import seedu.address.model.reminder.Agenda;
+import seedu.address.model.reminder.Date;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.todo.Title;
 import seedu.address.testutil.ReminderBuilder;
