@@ -42,7 +42,7 @@ public class NricContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testNricContainsKeywordsreturnsTrue() {
+    public void test_nricContainsKeywords_returnsTrue() {
 
         // One keyword
         NricContainsKeywordsPredicate predicate =
@@ -60,7 +60,7 @@ public class NricContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testInfoDoesNotContainKeywordsreturnsFalse() {
+    public void test_nricDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         NricContainsKeywordsPredicate predicate =
                 new NricContainsKeywordsPredicate(Collections.emptyList());

@@ -1,8 +1,8 @@
 package seedu.address.model.medhistory;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.util.DateTimeUtil.DATE_VALIDATION_REGEX;
-//import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 
@@ -15,6 +15,8 @@ import seedu.address.model.util.DateTimeUtil;
  */
 
 public class MedHistDate {
+    public static final String MESSAGE_MEDHISTDATE_CONSTRAINTS =
+            "MedHistDate must comply with dd-MM-yyyy format";
     public final LocalDate value;
 
     /**
@@ -25,7 +27,7 @@ public class MedHistDate {
     public MedHistDate(String medHistDate) {
         requireNonNull(medHistDate);
         // isValidDate will is found in test file.
-        //checkArgument(isValidDate(date), MESSAGE_DATE_CONSTRAINTS);
+        checkArgument(isValidMedHistDate(medHistDate), MESSAGE_MEDHISTDATE_CONSTRAINTS);
         value = DateTimeUtil.parseDate(medHistDate);
     }
 

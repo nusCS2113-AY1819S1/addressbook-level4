@@ -13,7 +13,7 @@
 == Overview
 
 * *Abstract* +
-HealthBook is an address book application that is catered for healthcare professionals who seek to retrieve their patients’ personal information and health-related information all in one place. Command Line Interface is utilized mainly for the input, while GUI is used mainly to display the output. By combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
+HealthBook is an address book application that is catered for healthcare professionals who seek to retrieve their patients’ personal information and health-related information all in one place. Command Line Interface (CLI) is utilized mainly for the input, while the Graphical User Interface (GUI) is used mainly to display the output. By combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
 
 * *The Problem* +
 Every member in the team has faced long queues in a clinic or hospital before. Our aim is to speed up this process by tackling the admin process. +
@@ -23,8 +23,28 @@ Personal Experience: Doctor visits were prolonged unnecessarily where doctors sp
 We decided to use an existing addressbook application that has the basic functionalities to store people and their personal information and upgrade it to be used in the medical field. +
 HealthBook would be considered an all-in-one application that allows doctors to view medical reports, medical histories, medical appointments and enhanced details of each patient. All of this while maintaining a minimalistic user interface for the aims of making the application user-friendly.
 
+* *The Features* +
+1. Additional Information: Allows healthcare professionals to enter and edit optional details of the patients such as nric and blood type for easier classification.
+
+2. Medical History: Allows healthcare professionals to enter and edit patient's medical history with parameters such as allergy and discharge status which helps identify past health concerns and predict future health trends.
+
+3. Medical Appointment: Allows healthcare professionals to enter and edit patient's appointments and can be accessed easily.
+
+4. Medical Reports: Allows healthcare professionals to enter and edit multiple detailed medical reports of past visits with a title to make it easier to locate key illnesses and aids the prescription process.
+
+5. Find and Sort: Allows healthcare professionals to not only sort and find patients by name, but also by medical parameters such as blood type and allergy. This quickens the administrative process by locating the patient faster.
+
+HealthBook prides itself in being a minimalistic application with reduced clutter such that healthcare professionals are able to view key details of patients without unnecessary visual noise.
+
+The development of HealthBook is led by a 5-man team consisting of a Project Manager, Design Lead, Development Lead, Quality Assurance Lead and Subject Matter Expert.
+My role in this project is the Project Manager, overseeing the weekly progress of the team and constant communication among members.
 
 == Summary of contributions
+
+|===
+|_This section below lists my contributions in this project which includes both code contributions and team contributions.
+The following portrays my ability to code and enhance an application while still being a team player and leader._
+|===
 
 * *Major enhancement*: added *the ability to add and edit medical history entries for a patient.*
 ** What it does: allows the user to key in major medical changes and events of a patient on a certain date.
@@ -38,12 +58,15 @@ HealthBook would be considered an all-in-one application that allows doctors to 
 * *Other contributions*:
 
 ** Project Management:
+*** Role: Project Manager
 *** Managed weekly deadlines and handled distribution of workload throughout the project timeline.
 *** Acted as team's secretary, scheduling meetings and agenda while taking down meeting minutes and notes during these sessions.
+*** Acted as team mediator and middleman, facilitated smooth flow and exchange of ideas. Also helped resolve conflicts within team for better productivity.
 
 ** Documentation:
-*** Helped with facilitating ideas for user stories in the initial stage.
+*** Helped with introducing of ideas for user stories in the initial stage.
 *** Helped with listing non-functional requirements in the initial stage.
+*** Helped proofread documentation to ensure readability and relevance with the HealthBook application.
 
 == Contributions to the User Guide
 

@@ -19,33 +19,33 @@ public class DateTimeUtilTest {
 
 
     @Test
-    public void parseNullLocalDateReturnNull() {
+    public void parse_nullLocalDate_returnNull() {
         assertEquals(DateTimeUtil.format((LocalDate) null), null);
     }
 
     @Test
-    public void parseNullLocalDateTimeReturnNull() {
+    public void parse_nullLocalDateTime_returnNull() {
         assertEquals(DateTimeUtil.format((LocalDateTime) null),
                 null);
     }
 
     @Test
-    public void parseIncorrectDateThrowsDateTimeParseException() {
+    public void parse_incorrectDate_throwsDateTimeParseException() {
         Assert.assertThrows(DateTimeParseException.class, () -> DateTimeUtil.isCorrectDate(INCORRECT_DATE));
     }
 
     @Test
-    public void parseIncorrectDareTimeThrowsDateTimeParseException() {
+    public void parse_incorrectDateTime_throwsDateTimeParseException() {
         Assert.assertThrows(DateTimeParseException.class, () -> DateTimeUtil.isCorrectDateTime(INCORRECT_DATE_TIME));
     }
 
     @Test
-    public void parseInvalidDateThrowsDateTimeParseException() {
+    public void parse_invalidDate_throwsDateTimeParseException() {
         Assert.assertThrows(DateTimeParseException.class, () -> DateTimeUtil.isCorrectDate(INVALID_DATE));
     }
 
     @Test
-    public void parseInvalidDateTimeThrowsDateTimeParseException() {
+    public void parse_invalidDateTime_throwsDateTimeParseException() {
         Assert.assertThrows(DateTimeParseException.class, () -> DateTimeUtil.isCorrectDateTime(INVALID_DATE_TIME));
     }
 

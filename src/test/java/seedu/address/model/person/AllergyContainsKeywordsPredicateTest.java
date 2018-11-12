@@ -43,7 +43,7 @@ public class AllergyContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testAllergyContainsKeywordsreturnsTrue() {
+    public void test_allergyContainsKeywords_returnsTrue() {
 
         // One keyword
         AllergyContainsKeywordsPredicate predicate =
@@ -77,7 +77,7 @@ public class AllergyContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testInfoDoesNotContainKeywordsreturnsFalse() {
+    public void test_allergyDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         AllergyContainsKeywordsPredicate predicate =
                 new AllergyContainsKeywordsPredicate(Collections.emptyList());

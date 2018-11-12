@@ -2,6 +2,8 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:toc:
+:sectnums:
 
 == Health Book
 === Overview
@@ -13,6 +15,37 @@ Currently, most health care professionals rely on paper documents that contain s
 Health Book is aimed at solving such administrative woes of health care professionals. By digitizing such data into an application, health care professionals can easily retrieve the required patient data.
 
 The application provides both a Command Line Interface (CLI) for input of data and a Graphical User Interface (GUI) for displaying of patient's personal details and health-related information. The application is fully written in Java, allowing cross-platform compatibility.
+
+=== Team Composition:
+[cols="1,2,3", options="header"]
+|============================
+|Name |Feature |Description
+
+|Hovan Tan |Project Manager |Oversee the project deadline and deliverable
+
+|Brandon Cheong |Development Lead |Oversee the overall development of features
+
+|Chew Kah Meng |Quality Assurance Lead |Oversee the overall testing of system
+
+|Chok Xin Yan |Design Lead |Oversee the look and feel of the system
+
+|Cheng Xianhao |Subject Matter Expert |Oversee the requirements of the project
+|============================
+
+=== Features
+[cols="1,2", options="header"]
+|============================
+|Feature|Description
+
+|Manage Patient |Create, edit or delete a patient profile
+|Manage Additional Information| Add or edit additional information such as patient's bio-data
+|Manage Medical History| Create, edit or delete a patient's medical history
+|Manage Medical Appointment| Create, edit or delete a patient's medical appointment
+|Manage Medical Report| Create, edit or delete a patient's medical report
+|Find/Sort Patient | Filter or arrange patient list based on parameters
+|Encryption| Encrypt patient's data so that the saved data is not human-readable.
+
+|============================
 
 == Summary of Contributions
 

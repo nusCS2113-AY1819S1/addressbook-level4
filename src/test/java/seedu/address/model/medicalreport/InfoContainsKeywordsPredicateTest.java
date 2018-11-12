@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.medicalreport;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import seedu.address.model.person.InfoContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.ReportBuilder;
 
@@ -43,7 +44,7 @@ public class InfoContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testInfoContainsKeywordsreturnsTrue() {
+    public void test_infoContainsKeywords_returnsTrue() {
         // One keyword
         InfoContainsKeywordsPredicate predicate =
                 new InfoContainsKeywordsPredicate(Collections.singletonList("Sars"));
@@ -72,7 +73,7 @@ public class InfoContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testInfoDoesNotContainKeywordsreturnsFalse() {
+    public void test_infoDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         InfoContainsKeywordsPredicate predicate =
                 new InfoContainsKeywordsPredicate(Collections.emptyList());

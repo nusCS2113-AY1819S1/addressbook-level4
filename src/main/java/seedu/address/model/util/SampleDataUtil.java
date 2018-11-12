@@ -9,6 +9,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.appt.Appt;
 import seedu.address.model.appt.ApptComparator;
+import seedu.address.model.appt.ApptDateTime;
+import seedu.address.model.appt.ApptDrName;
+import seedu.address.model.appt.ApptInfo;
+import seedu.address.model.appt.ApptVenue;
 import seedu.address.model.medhistory.MedHistory;
 import seedu.address.model.medhistory.MedHistoryComparator;
 import seedu.address.model.medicalreport.MedicalReport;
@@ -42,21 +46,71 @@ public class SampleDataUtil {
     public static final Occupation EMPTY_OCCUPATION = new Occupation("");
     public static final MaritalStatus EMPTY_MARITAL_STATUS = new MaritalStatus("");
 
+    // Appts
+    public static final String VALID_START_APPT1 = "01-01-2018 14:00";
+    public static final String VALID_START_APPT2 = "02-02-2018 15:00";
+    public static final String VALID_START_APPT3 = "03-03-2018 16:00";
+    public static final String VALID_START_APPT4 = "17-03-2017 15:30";
+    public static final String VALID_START_APPT5 = "11-04-2017 15:30";
+    public static final String VALID_START_APPT6 = "11-04-2014 11:30";
+    public static final String VALID_END_APPT1 = "01-01-2018 15:00";
+    public static final String VALID_END_APPT2 = "02-02-2018 16:00";
+    public static final String VALID_END_APPT3 = "03-03-2018 17:00";
+    public static final String VALID_END_APPT4 = "17-03-2017 16:30";
+    public static final String VALID_END_APPT5 = "11-04-2017 16:30";
+    public static final String VALID_END_APPT6 = "11-04-2014 12:30";
+    public static final String VALID_VENUE_APPT1 = "Consultation Room 1";
+    public static final String VALID_VENUE_APPT2 = "Consultation Room 2";
+    public static final String VALID_VENUE_APPT3 = "Consultation Room 3";
+    public static final String VALID_VENUE_APPT4 = "Consultation Room 4";
+    public static final String VALID_VENUE_APPT5 = "Consultation Room 5";
+    public static final String VALID_VENUE_APPT6 = "Consultation Room 6";
+    public static final String VALID_INFO_APPT1 = "Diabetes Checkup";
+    public static final String VALID_INFO_APPT2 = "Asthma Checkup";
+    public static final String VALID_INFO_APPT3 = "Eye Checkup";
+    public static final String VALID_DRNAME_APPT1 = "Dr Tan";
+    public static final String VALID_DRNAME_APPT2 = "Dr Lim";
+    public static final String VALID_DRNAME_APPT3 = "Dr Chan";
+    public static final String VALID_DRNAME_APPT4 = "Dr Wong";
+    public static final String VALID_DRNAME_APPT5 = "Dr Ali";
+    public static final String VALID_DRNAME_APPT6 = "Dr Bala";
+
+    public static final Appt APPT_EXAMPLE1 = new Appt(new ApptDateTime(VALID_START_APPT1),
+            new ApptDateTime(VALID_END_APPT1), new ApptVenue(VALID_VENUE_APPT1), new ApptInfo(VALID_INFO_APPT1),
+            new ApptDrName(VALID_DRNAME_APPT1));
+    public static final Appt APPT_EXAMPLE2 = new Appt(new ApptDateTime(VALID_START_APPT2),
+            new ApptDateTime(VALID_END_APPT2), new ApptVenue(VALID_VENUE_APPT2), new ApptInfo(VALID_INFO_APPT2),
+            new ApptDrName(VALID_DRNAME_APPT2));
+    public static final Appt APPT_EXAMPLE3 = new Appt(new ApptDateTime(VALID_START_APPT3),
+            new ApptDateTime(VALID_END_APPT3), new ApptVenue(VALID_VENUE_APPT3), new ApptInfo(VALID_INFO_APPT3),
+            new ApptDrName(VALID_DRNAME_APPT3));
+    public static final Appt APPT_EXAMPLE4 = new Appt(new ApptDateTime(VALID_START_APPT4),
+            new ApptDateTime(VALID_END_APPT4), new ApptVenue(VALID_VENUE_APPT4), new ApptInfo(VALID_INFO_APPT3),
+            new ApptDrName(VALID_DRNAME_APPT4));
+    public static final Appt APPT_EXAMPLE5 = new Appt(new ApptDateTime(VALID_START_APPT5),
+            new ApptDateTime(VALID_END_APPT5), new ApptVenue(VALID_VENUE_APPT5), new ApptInfo(VALID_INFO_APPT2),
+            new ApptDrName(VALID_DRNAME_APPT5));
+    public static final Appt APPT_EXAMPLE6 = new Appt(new ApptDateTime(VALID_START_APPT6),
+            new ApptDateTime(VALID_END_APPT6), new ApptVenue(VALID_VENUE_APPT6), new ApptInfo(VALID_INFO_APPT1),
+            new ApptDrName(VALID_DRNAME_APPT6));
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), getReportSet(), getMedHistorySet(),
-                    getApptSet(), EMPTY_NRIC, EMPTY_DATE_OF_BIRTH, new Height("180"), EMPTY_WEIGHT, EMPTY_GENDER,
-                    EMPTY_BLOODTYPE, EMPTY_OCCUPATION, EMPTY_MARITAL_STATUS, getTagSet("asthma")),
+                    getApptSet(APPT_EXAMPLE1, APPT_EXAMPLE4), EMPTY_NRIC, EMPTY_DATE_OF_BIRTH, new Height("180"),
+                    EMPTY_WEIGHT, EMPTY_GENDER, EMPTY_BLOODTYPE, EMPTY_OCCUPATION, EMPTY_MARITAL_STATUS,
+                    getTagSet("asthma")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), getReportSet(),
-                    getMedHistorySet(), getApptSet(), EMPTY_NRIC, EMPTY_DATE_OF_BIRTH, EMPTY_HEIGHT, EMPTY_WEIGHT,
-                    EMPTY_GENDER, EMPTY_BLOODTYPE, EMPTY_OCCUPATION, EMPTY_MARITAL_STATUS,
-                    getTagSet("asthma", "diabetes")),
+                    getMedHistorySet(), getApptSet(APPT_EXAMPLE2, APPT_EXAMPLE5),
+                    EMPTY_NRIC, EMPTY_DATE_OF_BIRTH, EMPTY_HEIGHT, EMPTY_WEIGHT, EMPTY_GENDER, EMPTY_BLOODTYPE,
+                    EMPTY_OCCUPATION, EMPTY_MARITAL_STATUS, getTagSet("asthma", "diabetes")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), getReportSet(), getMedHistorySet(),
-                    getApptSet(), EMPTY_NRIC, EMPTY_DATE_OF_BIRTH, EMPTY_HEIGHT, EMPTY_WEIGHT, EMPTY_GENDER,
-                    EMPTY_BLOODTYPE, EMPTY_OCCUPATION, EMPTY_MARITAL_STATUS, getTagSet("cancer")),
+                    getApptSet(APPT_EXAMPLE3, APPT_EXAMPLE6), EMPTY_NRIC, EMPTY_DATE_OF_BIRTH, EMPTY_HEIGHT,
+                    EMPTY_WEIGHT, EMPTY_GENDER, EMPTY_BLOODTYPE, EMPTY_OCCUPATION, EMPTY_MARITAL_STATUS,
+                    getTagSet("cancer")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), getReportSet(),
                     getMedHistorySet(), getApptSet(), EMPTY_NRIC, EMPTY_DATE_OF_BIRTH, EMPTY_HEIGHT, EMPTY_WEIGHT,

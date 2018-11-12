@@ -21,15 +21,16 @@ By: `Team T12-2`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-Health Book is an address book application that is *catered for healthcare professionals who seek to retrieve their patients’ personal information and health-related information* all in one place. *Command Line Interface is utilized mainly for the input*, while GUI is used mainly to display the output. By combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
+Health Book is an address book application that is *catered for healthcare professionals who seek to retrieve their patients’ personal information and health-related information* all in one place. *Command Line Interface (CLI) is utilized mainly for the input*, while *Graphical User Interface (GUI) is used mainly to display the output*. By combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
 
-== Quick Start (to be edited in the future)
+== Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `healthbook.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Health Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Double-click the file to start the app. The GUI should appear in a few seconds with sample data being loaded by default.
 +
+.User interface of Health Book
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -73,12 +74,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 ====
 
-=== Viewing of available commands : `help`
+=== Viewing of Available Commands : `help`
 
 Displays the list of commands available. +
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a Patient: `add`
 
 Create a new patient entry into the health book +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
@@ -91,12 +92,12 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/Diabetes e/betsycrowe@example.com a/Newgate Street p/1234567 t/Asthma`
 
-=== Listing all patients : `list`
+=== Listing all Patients : `list`
 
 Shows a list of all persons in the health book. +
 Format: `list`
 
-=== Editing basic information of patient person : `edit`
+=== Editing Basic Information of Patient: `edit`
 
 Edits an existing patient in the health book. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
@@ -116,47 +117,7 @@ Edits the phone number and email address of the 1st patient to be `91234567` and
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
-// tag::findcommand[]
-=== Finding patients by specific category: `find`
-
-Filters patients by their personal (name, phone, email, address, tags and NRIC) or medical (medical Information, blood type, last country of visit and allergy) details.
-Format: `find PREFIX/ KEYWORD [MORE_KEYWORDS]`
-
-TIP: Patients can be found by any number of keywords (except 0)
-
-[WARNING]
-Don't forget to include the space between `PREFIX/` and `KEYWORD`
-
-****
-* The search is case insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the specified detail is searched.
-* Only one category per find is allowed.
-* Only full words will be matched. e.g. `Han` will not match `Hans`
-* Only above-mentioned details can be utilised. e.g. Date of Birth is not applicable.
-* Patients matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-[NOTE]
-====
-.Available Prefixes
-- Personal detail prefixes: n/ (Name) p/ (Phone) e/ (Email) a/ (Address) t/ (tag) ic/ (NRIC)
-- Medical detail prefixes: i/ (MedInfo) hsa/ (Allergy) hsb/ (BloodType) hsc/ (LastCountry)
-====
-
-Examples:
-
-* `find n/ John` +
-Returns `john` and `John Doe`
-* `find n/ BeTsY Tim John` +
-Returns any patient having names `Betsy`, `Tim`, or `John`
-* `find ic/ S9876543T`
-Returns any patient whose NRIC is S9876543T.
-* `find t/ asthma`
-Returns any patient who is tagged with asthma.
-// end::findcommand[]
-
-=== Deleting a patient : `delete`
+=== Deleting a Patient : `delete`
 
 Deletes the specified patient from the health book. +
 Format: `delete INDEX`
@@ -176,132 +137,22 @@ Deletes the 2nd person in the Health Book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
-// tag::addhist[]
-=== Adding patient's medical history: `addhist`
+=== Selecting a Patient: `select`
 
-Adds a medical history entry for a patient. +
-Format: `addhist INDEX hsd/MEDICAL_HISTORY_DATE hsa/ALLERGY hsc/PREVIOUS_COUNTRY_VISITED hsds/DISCHARGE_STATUS`
+Selects the patient identified by the index number used in the displayed person list and displays the selected patient's information. +
+Format: `select INDEX`
 
 ****
-* Adds an entry in the medical history of the patient for the patient at the specified INDEX.
+* Selects the patient and displays the information for the patient at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* Date entries must be after 01-01-1900.
-* Note: Discharge Status  code only accepts *d*, *a*, *e* as inputs to represent discharged, admitted or expired.
-* ALLERGY and PREVIOUS_COUNTRY inputs can be omitted if there are no changes since the last entry.
-****
-
-image::addhist.png[width="790"]
-
-Examples:
-
-* `addhist 1 hsd/10-10-2010 hsa/Alcohol hsc/Kuwait hsds/d`
-Adds a medical history entry for the 1st person in the list on 10-10-2010 with an alcohol allergy and Kuwait as previous country visited.
-The patient is discharged and allowed to return home.
-// end::addhist[]
-
-// tag::edithist[]
-=== Editing patient's medical history: `edithist`
-
-Edits an existing medical history entry of a patient. +
-Format: `edithist INDEX hsod/OLD_MEDICAL_HISTORY_DATE hsd/MEDICAL_HISTORY_DATE hsa/ALLERGY hsc/PREVIOUS_COUNTRY_VISITED hsds/DISCHARGE_STATUS`
-
-****
-* Edits an existing entry in the medical history of the patient for the patient at the specified INDEX.
-* The index refers to the index number shown in the displayed person list.
-* Date entries must be after 01-01-1900.
-* OLD_MEDICAL_HISTORY_DATE specified must already exist for the patient for command to work.
-* Note: Discharge Status  code only accepts *d*, *a*, *e* as inputs to represent discharged, admitted or expired.
-* ALLERGY and PREVIOUS_COUNTRY inputs can be omitted if there are no changes since the last entry.
-****
-
-image::edithist.png[width="790"]
-
-Examples:
-
-* `edithist 1 hsod/10-10-2010 hsd/10-10-2015 hsa/Chocolate hsc/Russia hsds/a`
-Edits a medical history entry for the 1st person in the list with existing date of 10-10-2010 to the correct date of
-10-10-2015 with a chocolate allergy and Russia as previous country visited.
-The patient has been admitted to a hospital.
-// end::edithist[]
-
-// tag::apptcommands[]
-=== Adding an appointment for a patient: `addappt`
-
-Adds an appointment into the specified patient's schedule. +
-Format: `addappt INDEX s/START e/END v/VENUE i/INFO d/DOCTOR_NAME`
-
-****
-* Adds an appointment for the patient at the specified INDEX.
-* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
 Example:
 
-* `addappt 1 s/16-09-2018 15:00 e/16-09-2018 15:30 v/Consultation Room 12 i/Diabetes Checkup d/Dr Tan` +
-Adds an appointment for the 1st person in the list on 16-09-2018 from 15:00-15:30 at Consultation Room 12
-for a diabetes checkup by Dr Tan.
-** Entering the command above will add an appointment for the first patient in the displayed person list. If the first patient did not previously have any appointments, the GUI will look as follows:
-
-.GUI after adding an appointment to a patient with no existing appointments
-image::AddApptUGPic.png[width="600"]
-
-** If the first patient previously had appointments, the new appointment will be added to his schedule and shown on the GUI together with his other appointments in order of start time (from earliest to latest). The GUI will look as follows:
-
-.GUI after adding an appointment to a patient with existing appointments
-image::AddApptUGPic2.png[width="600"]
-
-=== Editing an appointment for a patient: `editappt`
-
-Edits a specified appointment in the specified patient's schedule. +
-Format: `editappt INDEX os/ORIGINAL_START [s/START] [e/END] [v/VENUE] [i/INFO] [d/DOCTOR_NAME]`
-
-****
-* Edits an appointment with the specified start time for the patient at the specified index.
-* The index refers to the index number shown in the displayed person list.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-****
-
-Example:
-
-* `editappt 2 os/16-09-2018 15:00 s/16-09-2018 14:00 e/16-09-2018 14:30 v/Consultation Room 13` +
-Edits the appointment that starts on 16-09-2018 at 15:00, to now run from 16-09-2018 14:00-14:30 instead
-and be at Consultation Room 13 for the 2nd person in the list.
-
-[NOTE]
-`addappt` and `editappt` commands will display an error message if the user adds in an appointment with the end date and time before the start date and time, or if the patient has multiple appointments that have timing clashes.
-
-[WARNING]
-`addappt` and `editappt` commands will only check if there are appointment timing clashes for a patient. There is currently no check for appointment timing clashes for a venue or for a doctor in charge i.e. if the same venue or same doctor is booked for multiple appointments at the same time. These features will be coming in the v2.0 release of Health Book.
-
-=== Deleting an appointment for a patient: `deleteappt`
-
-Deletes a specified appointment in the specified patient’s schedule. +
-Format: `deleteappt INDEX s/START`
-
-****
-* Deletes an appointment with the specified start time for the patient at the specified index.
-* The index refers to the index number shown in the displayed person list.
-****
-
-Example:
-
-* `deleteappt 2 s/16-09-2018 15:00` +
-Deletes the appointment that starts on 16-09-2018 at 15:00 for the 2nd person in the list.
-// end::apptcommands[]
-
-=== Clearing appointments for all patients: `clearappts`
-
-Deletes all appointments that end on or before the specified date for all patients in the health book. +
-Format: `clearappts d/DATE`
-
-Example:
-
-* `clearappts d/16-09-2018` +
-  Clears all appointments that end on 16-09-2018 or earlier for all patients in the health book.
-
-[NOTE]
-The `clearappts` command will delete appointments based on their end date, not their start date. Thus, the command `clearappts d/16-09-2018` will not delete an appointment that starts on 16-09-2018 and ends on 17-09-2018.
+* `list` +
+`select 2` +
+Selects the 2nd person in the health book.
 
 // tag::addinfocommands[]
 === Adding Additional Information of Patient: `addinfo`
@@ -312,6 +163,8 @@ gender, occupation, and marital status. +
 [NOTE]
 `age` field will be auto-calculated once Date Of Birth is populated. It will be displayed on the UI in parenthesis under Date of Birth field.+
 
+.Using the addinfo command. Notice that the age is displayed beside the date of birth in parenthesis.
+image::addinfo.png[width="600"]
 Format: `addinfo INDEX [i/NRIC] [d/DOB] [h/HEIGHT] [w/WEIGHT] [g/GENDER] [b/BLOOD TYPE] [o/OCCUPATION] [m/MARITAL_STATUS]`
 
 ****
@@ -355,9 +208,129 @@ Examples:
 * `addinfo 2 i/S9696531A d/01-01-1990 h/154 g/M` +
 For patient at index 2, populate NRIC field with S91234567A, date of birth field
 with 01-01-1990, height field with 154, gender field with Male.
-// end::addinfocommands[]
 * `addinfo 1 d/31-12-2001 o/Doctor b/AB+ m/M` +
 For patient at index 1 populate the date of birth field with 31-12-2001, occupation with doctor, blood type with AB+ and marital status as married.
+// end::addinfocommands[]
+
+// tag::addhist[]
+=== Adding Patient's Medical History: `addhist`
+
+Adds a medical history entry for a patient. +
+Format: `addhist INDEX hsd/MEDICAL_HISTORY_DATE hsa/ALLERGY hsc/PREVIOUS_COUNTRY_VISITED hsds/DISCHARGE_STATUS`
+
+****
+* Adds an entry in the medical history of the patient for the patient at the specified INDEX.
+* The index refers to the index number shown in the displayed person list.
+* Date entries must be after 01-01-1900.
+* Note: Discharge Status  code only accepts *d*, *a*, *e* as inputs to represent discharged, admitted or expired.
+* ALLERGY and PREVIOUS_COUNTRY inputs can be omitted if there are no changes since the last entry.
+****
+
+.Example of addhist command
+image::addhist.png[width="790"]
+
+Examples:
+
+* `addhist 1 hsd/10-10-2010 hsa/Alcohol hsc/Kuwait hsds/d`
+Adds a medical history entry for the 1st person in the list on 10-10-2010 with an alcohol allergy and Kuwait as previous country visited.
+The patient is discharged and allowed to return home.
+// end::addhist[]
+
+// tag::edithist[]
+=== Editing Patient's Medical History: `edithist`
+
+Edits an existing medical history entry of a patient. +
+Format: `edithist INDEX hsod/OLD_MEDICAL_HISTORY_DATE hsd/MEDICAL_HISTORY_DATE hsa/ALLERGY hsc/PREVIOUS_COUNTRY_VISITED hsds/DISCHARGE_STATUS`
+
+****
+* Edits an existing entry in the medical history of the patient for the patient at the specified INDEX.
+* The index refers to the index number shown in the displayed person list.
+* Date entries must be after 01-01-1900.
+* OLD_MEDICAL_HISTORY_DATE specified must already exist for the patient for command to work.
+* Note: Discharge Status  code only accepts *d*, *a*, *e* as inputs to represent discharged, admitted or expired.
+* ALLERGY and PREVIOUS_COUNTRY inputs can be omitted if there are no changes since the last entry.
+****
+
+.Example of edithist command
+image::edithist.png[width="790"]
+
+Examples:
+
+* `edithist 1 hsod/10-10-2010 hsd/10-10-2015 hsa/Chocolate hsc/Russia hsds/a`
+Edits a medical history entry for the 1st person in the list with existing date of 10-10-2010 to the correct date of
+10-10-2015 with a chocolate allergy and Russia as previous country visited.
+The patient has been admitted to a hospital.
+// end::edithist[]
+
+// tag::apptcommands[]
+=== Adding Appointment for Patient: `addappt`
+
+Adds an appointment into the specified patient's schedule. +
+Format: `addappt INDEX s/START e/END v/VENUE i/INFO d/DOCTOR_NAME`
+
+****
+* Adds an appointment for the patient at the specified INDEX.
+* The index refers to the index number shown in the displayed person list.
+****
+
+Example:
+
+* `addappt 1 s/16-09-2018 15:00 e/16-09-2018 15:30 v/Consultation Room 12 i/Diabetes Checkup d/Dr Tan` +
+Adds an appointment for the 1st person in the list on 16-09-2018 from 15:00-15:30 at Consultation Room 12
+for a diabetes checkup by Dr Tan.
+** Entering the command above will add an appointment for the first patient in the displayed person list. If the first patient did not previously have any appointments, the GUI will look as follows:
+
+.GUI after adding an appointment to a patient with no existing appointments
+image::AddApptUGPic.png[width="600"]
+
+** If the first patient previously had appointments, the new appointment will be added to his schedule and shown on the GUI together with his other appointments in order of start time (from earliest to latest).
+
+=== Editing Appointment for Patient: `editappt`
+
+Edits a specified appointment in the specified patient's schedule. +
+Format: `editappt INDEX os/ORIGINAL_START [s/START] [e/END] [v/VENUE] [i/INFO] [d/DOCTOR_NAME]`
+
+****
+* Edits an appointment with the specified start time for the patient at the specified index.
+* The index refers to the index number shown in the displayed person list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+****
+
+Example:
+
+* `editappt 2 os/16-09-2018 15:00 s/16-09-2018 14:00 e/16-09-2018 14:30 v/Consultation Room 13` +
+Edits the appointment that starts on 16-09-2018 at 15:00, to now run from 16-09-2018 14:00-14:30 instead
+and be at Consultation Room 13 for the 2nd person in the list.
+
+=== Deleting Appointment for Patient: `deleteappt`
+
+Deletes a specified appointment in the specified patient’s schedule. +
+Format: `deleteappt INDEX s/START`
+
+****
+* Deletes an appointment with the specified start time for the patient at the specified index.
+* The index refers to the index number shown in the displayed person list.
+****
+
+Example:
+
+* `deleteappt 2 s/16-09-2018 15:00` +
+Deletes the appointment that starts on 16-09-2018 at 15:00 for the 2nd person in the list.
+// end::apptcommands[]
+
+=== Clearing Appointments for All Patients: `clearappts`
+
+Deletes all appointments that end on or before the specified date for all patients in the health book. +
+Format: `clearappts d/DATE`
+
+Example:
+
+* `clearappts d/16-09-2018` +
+  Clears all appointments that end on 16-09-2018 or earlier for all patients in the health book.
+
+[NOTE]
+The `clearappts` command will delete appointments based on their end date, not their start date. Thus, the command `clearappts d/16-09-2018` will not delete an appointment that starts on 16-09-2018 and ends on 17-09-2018.
 
 // tag::reportcommands[]
 === Adding of Medical Report: `addreport`
@@ -403,8 +376,49 @@ Edits title, date and information of existing medical report titled Asthma and d
 image::EditReport.png[width="600"]
 // end::reportcommands[]
 
+// tag::findcommand[]
+=== Finding Patients by Specific Category: `find`
+
+Finds patients by their personal (name, phone, email, address, tags and NRIC) or medical (medical Information, blood type, last country of visit and allergy) details.
+Format: `find PREFIX/ KEYWORD [MORE_KEYWORDS]`
+
+TIP: Patients can be found by any number of keywords (except 0)
+
+[WARNING]
+Don't forget to include the space between `PREFIX/` and `KEYWORD`
+
+****
+* The search is case insensitive. e.g. `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the specified detail is searched.
+* Only one category per find is allowed.
+* Only full words will be matched. e.g. `Han` will not match `Hans`
+* Only above-mentioned details can be utilised. e.g. Date of Birth is not applicable.
+* Patients matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+[NOTE]
+====
+.Available Prefixes
+- Personal detail prefixes: n/ (Name) p/ (Phone) e/ (Email) a/ (Address) t/ (tag) ic/ (NRIC)
+- Medical detail prefixes: i/ (MedInfo) hsa/ (Allergy) hsb/ (BloodType) hsc/ (LastCountry)
+====
+
+Examples:
+
+* `find n/ John` +
+Returns `john` and `John Doe`
+* `find n/ BeTsY Tim John` +
+Returns any patient having names `Betsy`, `Tim`, or `John`
+* `find ic/ S9876543T`
+Returns any patient whose NRIC is S9876543T.
+* `find t/ asthma`
+Returns any patient who is tagged with asthma.
+// end::findcommand[]
+
 // tag::sortcommand[]
-=== Sorting patients list: `sort`
+
+=== Sorting Patients List: `sort`
 
 Sorts the list of patients according to a specific prefix category in ascending or descending order. +
 Format: `sort PREFIX/ ORDER_INDEX`
@@ -436,24 +450,6 @@ Sort the patient list by their names in reverse order (Z → A).
 Sort the patient list by their emails in alphabetical order (A → Z).
 // end::sortcommand[]
 
-=== Selecting a patient: `select`
-
-Selects the patient identified by the index number used in the displayed person list and displays the selected patient's information. +
-Format: `select INDEX`
-
-****
-* Selects the patient and displays the information for the patient at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
-Example:
-
-* `list` +
-`select 2` +
-Selects the 2nd person in the health book.
-
-
 // tag::dataencryption[]
 === Encrypting Patient Data: `encrypt`
 
@@ -474,13 +470,13 @@ Example:
 * `encrypt` +
 Depending on the current setting of encryption, this will toggle on or off the encryption. Refer message box to understand if encryption has been toggled on or off.
 
-image::encryption.png[width="800"]
+.Using the encrypt command. Notice that the encryption setting is displayed in the message box after executing the command.
+image::encryption.png[width="600"]
 // end::dataencryption[]
-
 
 == Future Enhancements in v2.0
 
-=== Disease/Injury tags can have spaces, commas and periods
+=== Disease/Injury Tags can Have Spaces, Commas and Periods
 
 Users would be able to include more descriptive diseases and injuries without the constraint of it being one word. +
 This enhancement would be found in the `add` and `edit` command.
@@ -492,13 +488,22 @@ Adds a person with name Kenneth Tay with Punctured Lungs and Heart Attack.
 * `edit 1 t/Broken Pelvis, Hairline Fracture` +
 Edits person at index 1 with a hairline fracture on the Pelvis.
 
-=== Restrict adding medical history after patient expires
+=== Restrict Adding Medical History After Patient Expires
 
 After a patient expires, there would be a check in the system for future `addhist` and `edithist` commands to prevent any
 medical history entries to exist after the medical history entry which contains the patient's expired discharge status.
 
 .Current Implementation which allows medical history entries after patient's expiry
 image::medhistoryV2.png[width="500"]
+
+=== Integration of Medical Report and Medical History
+
+For medical reports and medical history entries that share the same date, users will be able to link their medical reports to their medical history. +
+In the case of multiple health checkups in a single day (e.g. X-ray, Cardiogram), multiple medical reports will be generated.
+The medical history entry of the same date will allow those medical reports to be attached to it.
+
+=== Further Checks for Clashes in Appointment Timing
+`addappt` and `editappt` commands currently will only check if there are appointment timing clashes for a patient. There is currently no check for appointment timing clashes for a venue or for a doctor in charge i.e. if the same venue or same doctor is booked for multiple appointments at the same time. These features will be coming in the v2.0 release of Health Book.
 
 == Command Summary
 
@@ -507,13 +512,12 @@ e.g. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #0
 * *List* : `list`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]` +
 e.g. `edit 1 p/91234567 e/johndoe@example.com`
-* *Find* : `find PREFIX/ KEYWORD [MORE_KEYWORDS]` +
-e.g. `find n/ john` +
-e.g. `find n/ BeTsY Tim John` +
-e.g. `find ic/ S9876543T` +
-e.g. `find t/ asthma`
 * *Delete* : `delete INDEX` +
 e.g. `delete 2`
+* *Select* : `select INDEX` +
+e.g. select 1
+* *Add Information* : `addinfo INDEX [n/NRIC] [d/DOB] [h/HEIGHT] [w/WEIGHT] [g/GENDER] [o/OCCUPATION] [m/MARITAL_STATUS] [f/FAMILY_MEMBER_INDEX]` +
+e.g. `addinfo 2 i/S9696531A d/01-01-1990 h/154 g/M``
 * *Add Medical History* : `addhist INDEX hsd/MEDICAL_HISTORY_DATE hsa/ALLERGY hsc/PREVIOUS_COUNTRY_VISITED hsds/DISCHARGE_STATUS` +
 `addhist 1 hsd/10-10-2010 hsa/Alcohol hsc/Kuwait hsds/d`
 * *Edit Medical History* : `edithist INDEX hsod/OLD_MEDICAL_HISTORY_DATE hsd/MEDICAL_HISTORY_DATE hsa/ALLERGY hsc/PREVIOUS_COUNTRY_VISITED hsds/DISCHARGE_STATUS` +
@@ -524,14 +528,18 @@ e.g. `addappt 1 s/16-09-2018 15:00 e/16-09-2018 15:30 v/Consultation Room 12 i/D
 e.g.`editappt 2 os/16-09-2018 15:00 s/16-09-2018 14:00 e/16-09-2018 14:30 v/Consultation Room 13`
 * *Delete Appt* : `deleteappt INDEX s/START` +
 e.g. `deleteappt 2 s/16-09-2018 15:00`
-* *Add Information* : `addinfo INDEX [n/NRIC] [d/DOB] [h/HEIGHT] [w/WEIGHT] [g/GENDER] [o/OCCUPATION] [m/MARITAL_STATUS] [f/FAMILY_MEMBER_INDEX]` +
-e.g. `addinfo 2 i/S9696531A d/01-01-1990 h/154 g/M``
+* *Clear Appts* : `clearappts d/DATE` +
+e.g. `clearappts d/16-09-2018`
 * *Add Medical Report* : `addreport INDEX [t/TITLE] [d/DATE] [i/INFORMATION]` +
 e.g. `addreport 1 t/Asthma d/01-01-2018 i/Prescribed XXX medicine, next appointment on 02-02-2018.`
 * *Edit Medical Report* : `editreport INDEX ot/Title od/ORIGINAL DATE [t/TITLE] [d/DATE] [i/INFORMATION]` +
 e.g. `editreport 1 ot/Asthma od/01-01-2018 t/Depression d/02-02-2018 i/Prescribed AAA medicine, next appointment is on 03-03-2018.`
+* *Find* : `find PREFIX/ KEYWORD [MORE_KEYWORDS]` +
+e.g. `find n/ john` +
+e.g. `find n/ BeTsY Tim John` +
+e.g. `find ic/ S9876543T` +
+e.g. `find t/ asthma`
 * *Sort* : `sort PREFIX/ ORDER_INDEX` +
 e.g. `sort n/ 2`
 e.g. `sort e/ 1`
-* *Select* : `select INDEX` +
-e.g. select 1
+* *Encrypt*: `encrypt`

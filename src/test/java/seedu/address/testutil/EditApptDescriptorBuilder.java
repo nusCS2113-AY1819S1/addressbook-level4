@@ -6,6 +6,7 @@ import seedu.address.model.appt.ApptDrName;
 import seedu.address.model.appt.ApptInfo;
 import seedu.address.model.appt.ApptVenue;
 
+//@@author brandonccm1996
 /**
  * A utility class to help with building EditApptDescriptor objects
  */

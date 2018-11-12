@@ -17,15 +17,15 @@ This portfolio serves to document my technical and non-technical contributions f
 .User interface of Health Book
 image::../images/Ui.png[width="600"]
 
-Health Book is an application that is catered for healthcare professionals who seek to retrieve their patients’ personal information and health-related information all in one place. A Command Line Interface (CLI) is utilized mainly for the input, while a Graphical User Interface (GUI) is used to display the output. By combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
+Health Book is an application that is catered for healthcare professionals who seek to store and retrieve their patients’ personal information and health-related information all in one place. A Command Line Interface (CLI) is utilized mainly for the input, while a Graphical User Interface (GUI) is used to display the output. By combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI, thus easing the administrative burden on them and allowing them to focus on caring for their patients.
 
 Health Book includes a variety of features to make administrative tasks easier for healthcare professionals. These include:
 
-* a *finding and sorting feature* to allow healthcare professionals to easily find patients by their personal and medical details
 * an *additional information feature* to allow healthcare professionals to store and update patients' additional information like nric, blood type, height and weight for easy reference
 * a *medical history feature* to allow healthcare professionals to store and update patients' medical history like allergies, previous country visited and discharge status
 * an *appointments feature* to allow healthcare professionals to store and update patients' medical appointments to make it easy for them to track and schedule appointments for patients
 * a *medical reports feature* to allow healthcare professionals to store and update patients' medical reports for easy reference, and to allow for detailed analysis of the patient's condition
+* a *finding and sorting feature* to allow healthcare professionals to easily find patients by their personal and medical details
 
 Health Book is primarily written in Java. CSS is used to design the GUI for improved user experience, and all data is stored in an XML format.
 

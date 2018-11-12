@@ -12,12 +12,12 @@ public class SecretKeyUtilTest {
     private SecretKey secretKey = SecretKeyUtil.getSecretKey("AES");
 
     @Test
-    public void parseInvalidAlgorithmThrowsNullPointerException() {
+    public void parse_invalidAlgorithm_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> SecretKeyUtil.getSecretKey("MY ALGORITHM"));
     }
 
     @Test
-    public void parseInvalidFileNameSaveSecretKeyThrowsFileNotFoundException() {
+    public void parse_invalidFileNameSaveSecretKey_throwsFileNotFoundException() {
         Assert.assertThrows(FileNotFoundException.class, () -> SecretKeyUtil.saveSecretKey(secretKey, "///"));
     }
 }

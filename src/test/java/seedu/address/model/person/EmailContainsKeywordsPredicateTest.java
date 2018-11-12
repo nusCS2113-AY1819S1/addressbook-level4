@@ -43,7 +43,7 @@ public class EmailContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testEmailContainsKeywordsreturnsTrue() {
+    public void test_emailContainsKeywords_returnsTrue() {
         // One keyword
         EmailContainsKeywordsPredicate predicate =
                 new EmailContainsKeywordsPredicate(Collections.singletonList("Alice@email.com"));
@@ -70,7 +70,7 @@ public class EmailContainsKeywordsPredicateTest {
 
 
     @Test
-    public void testEmailDoesNotContainKeywordsreturnsFalse() {
+    public void test_emailDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withEmail("alice@email.com").build()));

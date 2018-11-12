@@ -43,7 +43,7 @@ public class CountryContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testCountryContainsKeywordsreturnsTrue() {
+    public void test_countryContainsKeywords_returnsTrue() {
 
         // One keyword
         CountryContainsKeywordsPredicate predicate =
@@ -73,7 +73,7 @@ public class CountryContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void testInfoDoesNotContainKeywordsreturnsFalse() {
+    public void test_countryDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         CountryContainsKeywordsPredicate predicate =
                 new CountryContainsKeywordsPredicate(Collections.emptyList());

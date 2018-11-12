@@ -23,11 +23,32 @@ The purpose of this portfolio is to document my contributions towards the Health
 
 == Overview
 
-Health Book is an application written in Java catered to healthcare professionals in retrieving patients’ personal information and health-related information all in one place. Command Line Interface (CLI) is utilized mainly for user input, while Graphical User Interface (GUI) is used mainly to display the output. Combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
-The main features of HealthBook and their usages can be found in the user guide https://cs2113-ay1819s1-t12-2.github.io/main/UserGuide.html[Click Here]
+Health Book is an application written in Java catered to *healthcare professionals* in _retrieving patients’ personal information and health-related information all in one place_. Command Line Interface (CLI) is utilized mainly for user input, while Graphical User Interface (GUI) is used mainly to display the output. Combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
 
 .Start up page of Health Book
 image::../images/Ui.png[width="800"]
+
+.List of Health Book's main features
+|===
+|Feature |Description
+
+|Additional Information
+|To store extra patient details such as NRIC, date of birth, height, weight etc.
+
+|Medical History
+|To store multiple entries of medical history of a patient which each record includes allergy, previous visited country etc.
+
+|Medical Report
+|To store multiple entries of medical reports of a patient which each record includes title, information etc.
+
+|Medical Appointment
+|To store appointments in a patient's schedule.
+
+|Sort and Find
+|To filter patients by specified categories efficiently and systematically
+|===
+
+For more features and their usages, please refer to the user guide: https://cs2113-ay1819s1-t12-2.github.io/main/UserGuide.html[Click Here]
 
 == Summary of contributions
 
@@ -35,7 +56,6 @@ image::../images/Ui.png[width="800"]
 ** What it does: allows the user to filter patients by desired patient detail.
 ** Justification: This feature allows user to find specific types of patients (to administer drugs or quarantine patients) and expedite patient registration especially in an environment (hospital or clinics) where time is precious.
 ** Highlights: This enhancement affects the existing find command. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: The predicates are lightly adapted from the NameContainsKeywordsPredicate
 
 * *Minor enhancement*: added *the ability to sort patients by certain details (name, phone, email, NRIC).*
 ** What it does: allows the user to sort patients by alphabetical or reversed order according to specified detail.
@@ -49,7 +69,7 @@ image::../images/Ui.png[width="800"]
 *** Role of UI Lead: Managed the presentation and layout of the Health Book application to ensure the user interface can be easily utilized by healthcare professionals regardless of their technical background.
 *** Wrote tests to increase coverage by 1.6%: https://github.com/CS2113-AY1819S1-T12-2/main/pull/142[#142]
 ** Enhancements to existing features:
-*** Created a java class for Blood Type: https://github.com/CS2113-AY1819S1-T12-2/main/blob/master/src/main/java/seedu/address/model/person/addinfo/BloodType.java[Blood Type class]
+*** Created a java class for Blood Type: https://github.com/CS2113-AY1819S1-T12-2/main/blob/master/src/main/java/seedu/address/model/person/addinfo/BloodType.java[Blood Type]
 ** Documentation:
 *** Updated User Guide and Developer Guide: https://github.com/CS2113-AY1819S1-T12-2/main/pull/114[#114], https://github.com/CS2113-AY1819S1-T12-2/main/pull/135[#135]
 ** Community:
@@ -64,6 +84,7 @@ image::../images/Ui.png[width="800"]
 |===
 
 include::../UserGuide.adoc[tag=findcommand]
+
 include::../UserGuide.adoc[tag=sortcommand]
 
 == Contributions to the Developer Guide
@@ -73,7 +94,9 @@ include::../UserGuide.adoc[tag=sortcommand]
 |===
 
 include::../DeveloperGuide.adoc[tag=find]
+
 include::../DeveloperGuide.adoc[tag=sort]
 
 include::../DeveloperGuide.adoc[tag=findusecase]
+
 include::../DeveloperGuide.adoc[tag=sortusecase]

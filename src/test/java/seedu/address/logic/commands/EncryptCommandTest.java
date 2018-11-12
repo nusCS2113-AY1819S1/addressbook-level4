@@ -18,7 +18,7 @@ public class EncryptCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void executeEncryptionSuccess() {
+    public void executeEncryption_success() {
         assertCommandSuccess(new EncryptCommand(), model, commandHistory, SHOWING_ENCRYPTION_TOGGLED, expectedModel);
         assertTrue(model.getUserPrefs().getEncryption());
         assertCommandSuccess(new EncryptCommand(), model, commandHistory, SHOWING_ENCRYPTION_UNTOGGLED, expectedModel);

@@ -25,6 +25,7 @@ import seedu.address.logic.commands.EditApptCommand.EditApptDescriptor;
 import seedu.address.model.appt.ApptDateTime;
 import seedu.address.testutil.EditApptDescriptorBuilder;
 
+//@@author brandonccm1996
 public class EditApptCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             EditApptCommand.MESSAGE_USAGE);
@@ -33,18 +34,18 @@ public class EditApptCommandParserTest {
     private EditApptCommandParser parser = new EditApptCommandParser();
 
     @Test
-    public void parseMissingPartsFailure() {
+    public void parse_missingParts_failure() {
         assertParseFailure(parser, VALID_START_APPT1, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
-    public void parseInvalidPreambleFailure() {
+    public void parse_invalidPreamble_failure() {
         assertParseFailure(parser, INVALID_INDEX + " " + PREFIX_APPT_ORIGINAL_START + VALID_START_APPT1,
                 MESSAGE_INVALID_FORMAT);
     }
 
     @Test
-    public void parseAllFieldsSpecifiedSuccess() {
+    public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPT_ORIGINAL_START + VALID_START_APPT1 + " "
                 + PREFIX_APPT_START + VALID_START_APPT2 + " " + PREFIX_APPT_END + VALID_END_APPT2 + " "
