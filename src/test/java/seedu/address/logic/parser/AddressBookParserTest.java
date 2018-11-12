@@ -11,10 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import guitests.guihandles.HelpWindowHandle;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import org.testfx.api.FxToolkit;
 import seedu.address.logic.commands.ClassAddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -36,9 +39,12 @@ import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.user.User;
+import seedu.address.model.user.UserManager;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.ui.HelpWindow;
 
 public class AddressBookParserTest {
     @Rule
@@ -54,8 +60,14 @@ public class AddressBookParserTest {
         // TBC
     }
 
+    @Before
+    public void setUp() throws Exception {
+        UserManager.getInstance().setAuthenticated(true);
+    }
+
     @Test
     public void parseCommand_delete() throws Exception {
+        UserManager.getInstance().authenticate(new User("defaultUser", "password", 1));
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);

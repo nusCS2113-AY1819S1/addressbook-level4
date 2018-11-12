@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTH_PASSWORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 
 import java.util.stream.Stream;
 
@@ -23,17 +22,16 @@ public class LoginCommandParser implements Parser<LoginCommand> {
      */
     public LoginCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_EMAIL, PREFIX_AUTH_PASSWORD);
+                ArgumentTokenizer.tokenize(args, PREFIX_AUTH_PASSWORD);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_EMAIL, PREFIX_AUTH_PASSWORD)
+        if (!arePrefixesPresent(argMultimap, PREFIX_AUTH_PASSWORD)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
         }
 
-        String email = argMultimap.getValue(PREFIX_EMAIL).get();
         String authPassword = argMultimap.getValue(PREFIX_AUTH_PASSWORD).get();
 
-        return new LoginCommand(new User(email, authPassword, 0));
+        return new LoginCommand(new User("defaultUser", authPassword, 0));
     }
 
     /**
