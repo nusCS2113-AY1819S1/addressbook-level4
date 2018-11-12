@@ -1128,7 +1128,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage stocks faster than a typical mouse/GUI driven app
+*Value proposition*: manage stocks faster than a the current method, which is by physical stock taking, or using a spreadsheet.
 
 [appendix]
 == User Stories
@@ -1144,6 +1144,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |Lab Technician |Add new items to the list |Keep track of the new item
 
 |`* * *` |Lab Technician |Update the quantity of an item in the list |Record the quantity change of the item
+
+|`* * *` |Lab Technician |Update the status of an item in the list |Record the change in status of the item
 
 |`* * *` |Lab Technician |Delete an item from the list |Remove all information regarding to the item
 
@@ -1312,7 +1314,75 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+[discrete]
+=== Use case: List items by status
+
+*MSS*
+
+1. User requests to list items according to status
+2. StockList lists out the item according to the status
++
+Use case ends.
+
+[discrete]
+=== Use case: Change Status
+
+*MSS*
+
+1.  User requests to list all items
+2.  StockList shows a list the list of all items
+3.  User requests to change the status of an item.
+4.  StockList changes the status of the item.
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Any of the inputs are invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Creating loan list entry
+
+*MSS*
+
+1.  User requests create a loan list entry
+2.  StockList creates the loan list entry
+3.  User requests to view the loan list
+4.  StockList shows the updated loan list
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Any of the inputs are invalid.
++
+[none]
+** 3a1. StockList shows an error message.
+
+[discrete]
+=== Use case: Deleting loan list entry
+
+*MSS*
+
+1.  User requests delete a loan list entry
+2.  StockList deletes the loan list entry
+3.  User requests to view the loan list
+4.  StockList shows the updated loan list
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Any of the inputs are invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
 
 [appendix]
 == Non Functional Requirements
@@ -1322,32 +1392,6 @@ _{More to be added}_
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
-
-[appendix]
-== Glossary
-
-[[mainstream-os]] Mainstream OS::
-Windows, Linux, Unix, OS-X
-
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
-
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing
