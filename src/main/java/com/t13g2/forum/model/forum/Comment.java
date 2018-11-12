@@ -10,6 +10,11 @@ public class Comment extends BaseModel {
 
     private int threadId;
     private String content;
+    public Comment(){}
+    public Comment(int threadId, String content) {
+        this.threadId = threadId;
+        this.content = content;
+    }
 
     public int getThreadId() {
         return threadId;

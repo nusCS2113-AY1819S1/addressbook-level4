@@ -657,6 +657,7 @@ b. Require developers to download those libraries manually (this creates extra w
 
 *Value proposition*: Read a share comments faster than a typical mouse/GUI driven app
 
+// tag::user_Stories_And_Cases[]
 [appendix]
 == User Stories
 
@@ -667,17 +668,28 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new forumThread |
+|`* * *` |student who is taking a certain module in current semester |create a new forumThread |share the exam information with others
 
-|`* * *` |user |delete his own forumThread |remove forumThread that I no longer relevant
+|`* * *` |student who is going to take a certain module in future semesters |select that module and corresponding threads and comments under the module |learn more about the module in advance
 
-|`* * *` |user |find a forumThread under a target module by keyword |locate the desired threat without having to go through the entire list of forumThread under a given module
+|`* * *` |student |list all existing modules |check what modules are available to interact with other students
 
-|`* *` |user |like a forumThread under a target module | indicate the usefulness of a forumThread under a given module
+|`* * *` |forum thread owner |update my thread title |correct my typing error in this thread title
 
-|`* *` |user |dislike a forumThread under a target module | express my change in opinion on a forumThread which I previously indicated as useful
+|`* * *` |forum thread owner |delete my thread |close down the thread for further discussion under this thread
 
-|`*` |user whom prefer to read the most liked threads |sort threads by the number of likes |locate threads which are liked the most by other users for a given module
+|`* * *` |comment owner |update my comment content |correct my typing error or my thoughts in this comment
+
+|`* * *` |comment owner |delete my comment |
+
+|`* * *` |ForumBook admin |announce |show some important information to users
+
+|`* * *` |ForumBook admin |block users |prevent users from creating and updating threads and comments
+
+|`* *` |ForumBook admin |change user password |help the user to reset the password once they forget their password
+
+|`* *` |ForumBook admin |set admin |have more admins to manage the ForumBook better
+
 |=======================================================================
 
 _{More to be added}_
@@ -685,17 +697,17 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `ForumBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: List all threads under CS2113
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list all modules
+2.  ForumBook shows a list of modules
+3.  User requests to list all threads under module CS2113
+4.  ForumBook shows a list of threads under module CS2113
 +
 Use case ends.
 
@@ -706,15 +718,129 @@ Use case ends.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given module code is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ForumBook shows an error message.
 +
-Use case resumes at step 2.
+Use case ends.
+
+=== Use case: Create new thread under CS2113
+
+*MSS*
+
+1.  User requests to list all modules
+2.  ForumBook shows a list of modules
+3.  User requests to create new thread under module CS2113
+4.  ForumBook adds the new thread and shows a success message
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+[none]
+** 2a1. ForumBook shows empty list of module
++
+Use case ends.
+
+* 3a. The given module code is invalid.
++
+[none]
+** 3a1. ForumBook shows an error message.
++
+Use case ends.
+
+=== Use case: Create new comment
+
+*MSS*
+
+1.  User requests to list all modules
+2.  ForumBook shows a list of modules
+3.  User requests to create new comment
+4.  ForumBook adds the new comment and shows a success message
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+[none]
+** 2a1. ForumBook shows empty list of module
++
+Use case ends.
+
+* 3a. The given thread id is invalid.
++
+[none]
+** 3a1. ForumBook shows an error message.
++
+Use case ends.
+
+=== Use case: Delete thread and comment
+
+*MSS*
+
+1.  User requests to delete a thread
+2.  ForumBook deletes the thread and shows success message
+3.  User requests to delete a comment
+4.  ForumBook deletes the comment and shows success message
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. current user is not the thread owner.
++
+[none]
+** 2a1. ForumBook shows error message
++
+Use case ends.
+
+* 3a. current user is not the comment owner.
++
+[none]
+** 3a1. ForumBook shows an error message.
++
+Use case ends.
+
+=== Use case: Update thread and comment
+
+*MSS*
+
+1.  User requests to update a thread
+2.  ForumBook updates the thread and shows success message
+3.  User requests to update a comment
+4.  ForumBook updates the comment and shows success message
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. current user is not the thread owner.
++
+[none]
+** 2a1. ForumBook shows error message
++
+Use case ends.
+
+* 3a. current user is not the comment owner.
++
+[none]
+** 3a1. ForumBook shows an error message.
++
+Use case ends.
 
 _{More to be added}_
+// end::user_Stories_And_Cases[]
 
+// tag::others[]
 [appendix]
 == Non Functional Requirements
 
@@ -972,4 +1098,4 @@ These instructions only provide a starting point for testers to work on; testers
 . Dealing with missing/corrupted data files
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
+// end::others[]
