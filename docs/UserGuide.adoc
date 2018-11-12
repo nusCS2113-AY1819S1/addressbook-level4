@@ -76,6 +76,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
+// tag::login[]
 === List registered accounts: `listAccounts`
 
 Lists all the accounts currently registered in StockList. +
@@ -114,6 +115,7 @@ Examples:
 
 Checks login status of Stock List. +
 Format: `loginStatus`
+// end::login[]
 
 === Adding an item: `add`
 
@@ -398,6 +400,7 @@ Examples:
 This would open the saved stock list under /versions/ folder in main at the time when the command is inputted
 // end::opencommand[]
 
+// tag::accountManagement[]
 === Adding an account: `addAccount`
 
 Adds an account to the database. +
@@ -452,6 +455,7 @@ Format: `resetAccounts`
 
 Logs out of Stock List. +
 Format: `logout`
+// end::accountManagement[]
 
 === Exiting the program : `exit`
 

@@ -54,6 +54,7 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 */
+
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
@@ -61,6 +62,7 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
+
     /*
     @Test
     public void execute_validIndexFilteredList_success() {
@@ -78,7 +80,8 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
-    */
+*/
+
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showItemAtIndex(model, INDEX_FIRST_ITEM);
@@ -91,6 +94,7 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
+
     /*
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
@@ -125,6 +129,7 @@ public class DeleteCommandTest {
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 
+
     /**
      * 1. Deletes a {@code Item} from a filtered list.
      * 2. Undo the deletion.
@@ -132,6 +137,7 @@ public class DeleteCommandTest {
      * unfiltered list is different from the index at the filtered list.
      * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the item object regardless of indexing.
      */
+
 
     /*
     @Test
@@ -191,4 +197,3 @@ public class DeleteCommandTest {
     }
 
 }
-

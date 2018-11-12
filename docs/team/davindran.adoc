@@ -1,0 +1,68 @@
+= Davindran - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: AddressBook - Level 4
+
+---
+
+== Overview
+
+JalilEnterprises StockList is a stock managing application used for accounting for the equipment in the Computer Engineering labs in NUS. The app was developed by my team, JalilEnterprises. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 11 kLoC. My role in the team was to improve the app’s security, and I accomplished this by creating a login feature with account management. This portfolio serves to document my role and contributions to the project.
+
+== Summary of contributions
+
+* *Major enhancement*: added a *login/logout feature*
+** What it does: allows the user to log in and log out with an account registered on the app.
+** Justification: This feature improves the product significantly with regards to security, because sensitive information will be stored with regards to the equipment in the labs and the authorised user should be able to control who has access to this app.
+** Highlights: This enhancement affects the usability of the app as a whole. Users are not allowed to modify the inventory until they have logged in. This required an in-depth analysis of how the app processes the commands and storage files. The implementation was also challenging as it required changes that touched a lot of aspects of the app.
+** Credits: _AddressBook-Level4 by se-edu for the base app which we could morph and improve on._
+
+* *Minor enhancement*: added an *account management feature*, which allows for:
+** Adding accounts
+** Editing accounts
+** Deleting accounts
+** Listing registered accounts
+** Finding a registered account
+** Resetting the registered accounts to default
+** Checking current login status of the account
+
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=davindran[Project Code Dashboard]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.4rc` (4 releases) on GitHub
+** Enhancements to existing features:
+***	Contributed in morphing the AddressBook across the board to StockList
+***	Contributed in morphing test cases from that of AddressBook to StockList
+** Documentation:
+*** Morphed the Developer Guide from AddressBook into one tailored for our StockList: https://github.com[#13]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#96], https://github.com[#97]
+*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+*** Reported bugs and suggestions for other teams in the class
+** Tools:
+*** Integrated a new Github plugin (TravisCI) to the team repo
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=login]
+
+include::../UserGuide.adoc[tag=accountManagement]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=login]
+
