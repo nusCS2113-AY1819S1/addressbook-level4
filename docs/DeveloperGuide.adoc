@@ -584,7 +584,45 @@ to keep track of events and allow for searching of common available time slots l
 
 Given below is an example of a usage scenario and how the schedule mechanism behaves at each step.
 
-/ This part is to be done later /
+Step 1. The user calls the schedule command with `schedule index date startTime endTime eventName`.
+
+Step 2. The LogicManager calls parseCommand with the user input.
+
+Step 3. The AddressBookParser is called and it returns a ScheduleCommand object to LogicManager.
+
+Step 4. The LogicManager calls execute() on the ScheduleCommand object.
+
+Step 5. The ScheduleCommand object creates a person object for model.
+
+Step 6. The Logic component then interacts with the Model component by calling UpdatePerson("target, editedPersonWithSchedule")
+
+Step 7. The Model component updates the address book.
+
+.Schedule sequence diagram
+image::ScheduleSequenceDiagram.png[width="1000"]
+
+==== Match schedule
+
+Given below is the algorithm behind the matchSchedule command.
+
+Step 1. The user calls the matchSchedule command with `matchSchedule date startTime endTime index...`
+
+Step 2. The LogicManager calls parseCommand with the user input.
+
+Step 3. The AddressBookParser is called and it returns a MatchScheduleCommand object to LogicManager.
+
+Step 4. The LogicManager calls execute on the MatchScheduleCommand object.
+
+Step 5. The MatchScheduleCommand object finds common time slots in the date and time range given by startTime and endTime
+by generating an array, and updates the UI part of address book.
+
+    // Generates an int array (startEndTimeBlock) of size 1440 which stores whether each minute of the day is busy
+    for (int i = 0; i < this.startTimeList.size(); i++) {
+                for (int j = this.startTimeList.get(i).timeToMinutesInDay();
+                     j <= this.endTimeList.get(i).timeToMinutesInDay(); j++) {
+                    this.startEndTimeBlock[j] = 1;
+           }
+    }
 
 ==== Design considerations
 Aspect: How schedule is stored
@@ -644,7 +682,7 @@ The string of common time slots printed on the resultCommandWindow should be dis
 correct date.
 
 .Calendar UI Component
-image::FutureCalendarUI.png[width="800"]
+image::FutureCalendarUI.png[width="380"]
 
 // end::displayScheduleOnCalendar[]
 
