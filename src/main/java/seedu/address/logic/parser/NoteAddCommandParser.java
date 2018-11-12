@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleManager;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteDate;
 import seedu.address.model.note.NoteDateTime;
@@ -73,7 +74,7 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
         boolean timeErrorFound = false;
         boolean startDateMissingErrorFound = false;
 
-        // ModuleManager moduleManager = ModuleManager.getInstance();
+        ModuleManager moduleManager = ModuleManager.getInstance();
 
         if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
             if (argMultimap.getValue(PREFIX_MODULE_CODE).get().trim().isEmpty()) {
@@ -83,13 +84,11 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
             try {
                 moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
 
-            /* Disabled for standalone testing
-            if (!moduleManager.doesModuleExist(moduleCode.toString())) {
-                messageErrors.append(
-                        String.format(NoteAddCommand.MESSAGE_MODULE_CODE_DOES_NOT_EXIST, moduleCode.toString()));
-                messageErrors.append("\n");
-            }
-            */
+                if (moduleManager.getModuleByModuleCode(moduleCode.toString()) == null) {
+                    messageErrors.append(
+                            String.format(NoteAddCommand.MESSAGE_MODULE_CODE_DOES_NOT_EXIST, moduleCode.toString()));
+                    messageErrors.append("\n");
+                }
             } catch (ParseException e) {
                 messageErrors.append(e.getMessage());
                 messageErrors.append(DOUBLE_NEW_LINE_SEPARATOR);
