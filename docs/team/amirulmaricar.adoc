@@ -28,19 +28,19 @@ Inventarie Pro is for self employed business owners who prefer to use a desktop 
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Wrote additional tests for existing features to increase converage from 21% to 25% (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main/pull/111[#111])
+*** Wrote additional tests for existing features to increase coverage from 30% to 42% (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main/pull/179[#179], https://github.com/CS2113-AY1819S1-T13-3/main/pull/186[#186])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T13-3/main/pull/186[#186]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-3/main/pull/56[#56], https://github.com/CS2113-AY1819S1-T13-3/main/pull/151[#156]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** Resolved issues found in PE1: https://github.com/CS2113-AY1819S1-T13-3/main/issues/142[#142] 
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Integrated a continuous integration service (Travis CI) to the team repo (https://github.com[#42])
+*** Integrated a continuous integration service (AppVeyor) to the team repo (https://github.com[#42])
+*** Integrated a coverage reporting service (Coveralls) to the team repo
+*** Integrated an automated code quality tool (Codacy) to the team repo
 
 == Contributions to the User Guide
 
