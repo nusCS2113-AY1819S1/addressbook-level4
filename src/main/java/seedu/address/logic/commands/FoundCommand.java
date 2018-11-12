@@ -121,6 +121,12 @@ public class FoundCommand extends Command {
 
         public FoundDescriptor() {}
 
+        public FoundDescriptor(Integer foundQuantity)
+        {
+            this.foundQuantity = foundQuantity;
+        }
+
+
         public FoundDescriptor(FoundDescriptor toCopy) {
             setFoundQuantity(toCopy.foundQuantity);
 
