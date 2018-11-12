@@ -18,7 +18,7 @@ By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-_BookInventory_ is catered solely for students as well as other managerial roles such as store managers and accountant. _BookInventory_ allows store managers to increase/decrease stocks for each book. Accountants will be able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, _BookInventory_ is optimized for those who prefer to work with *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. Enjoy!
+_BookInventory_ is catered for students as well as other managerial roles such as store managers and accountant. _BookInventory_ allows store managers to increase/decrease stocks for each book. Accountants will be able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, _BookInventory_ is optimized for those who prefer to work with *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. Enjoy!
 
 == Getting Started
 
@@ -27,7 +27,10 @@ _BookInventory_ is catered solely for students as well as other managerial roles
 * You can download the latest `bookinventory.jar` link:{https://github.com/CS2113-AY1819S1-W13-4/main/releases}[here]
 * Copy the file to the folder you want to use as the home folder for your BookInventory.
 * Double-click the file to start the app.
-* You should be able to see the GUI with the following 'Enter Password' prompt as shown in Figure 1 below, in a few seconds.
+
+== Quick Start
+
+* Upon opening the application, you should see the GUI (Graphical User Interface) with the following 'Enter Password' prompt as shown in Figure 1 below, in a few seconds.
 +
 .Password Prompt
 image::FirstAppPopUp.png[width="800", align="left"]
@@ -42,17 +45,17 @@ image::FirstAppPopUp.png[width="800", align="left"]
 * If you have entered your password correctly, you should see the following prompts:
 +
 .Prompt for Owner if password is correct
-image::OwnerAccess.png[width="450", align="left"]
+image::OwnerAccess.png[width="300", align="center"]
 +
 
 +
 .Prompt for Accountant if password is correct
-image::AccountantAccess.png[width="450", align="left"]
+image::AccountantAccess.png[width="300", align="center"]
 +
 
 +
 .Prompt for Other Users if password is correct
-image::OtherAccess.png[width="450", align="left"]
+image::OtherAccess.png[width="300", align="center"]
 +
 
 +
@@ -101,50 +104,39 @@ Hit F11 to toggle between full-screen mode and windowed mode. A full-screen togg
 * Items in arrow brackets are commands that are commands available depending on the user e.g. <Owner> means command only usable by Owner.
 ===
 
+// tag::tabfeature[]
+=== Cycling through existing Isbn: kbd:[Tab]
+
+You can auto-fill the Isbn field with existing ones in the Inventory to save the hassle having to type the entire Isbn of a book. +
+Format: kbd:[Tab]
+
+Examples:
+
+* `sell i/` +
+kbd:[Tab] (completes the `Isbn` field for `sell i/` with the Isbn of the first book in the inventory) +
+ E.g. `sell i/9782123456803`
+
+* `sell i/978` +
+kbd:[Tab] (completes the `Isbn` field for `sell i/978` with the first Isbn of a book that contains `978` in the inventory) +
+E.g. `sell i/9782123456803`
+
+* `sell i/777` +
+kbd:[Tab] (does not complete the `Isbn` field as inventory does not contains books with Isbn starting with `777`)
+// end::tabfeature[]
+
+== Commands for Students
+
+In this segment, you may find out what commands you can perform in _BookInventory_.
+As a student, you are not granted administrative rights.
+
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a book: `add`
+=== Exiting the program : `exit`
 
-Adds a book to the inventory list +
-Format: `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...`
-
-[TIP]
-A book can have any number of tags (including 0) +
-
-****
-* ISBNs are calculated using a specific mathematical formula and include a check digit to validate the number. Random invalid 10 to 13 digit values will produce an error
-* ISBN field allows input with and without dashes
-* PRICE field is the selling price of the book
-* COST field is the cost price of the book
-****
-
-Examples:
-
-* `add n/Harry Potter i/9781408855713 p/60.70 q/100 c/30.90 t/difficult`
-* `add n/Lord of the Rings i/9789655171990 p/59.90 q/271 c/20.99`
-
-// tag::check[]
-=== Check Inventory: `check`
-
-Finds books with quantity less than or equal to the given input value. List of books displayed in ascending order based on quantity left +
-Format: `check QUANTITY`
-
-****
-* QUANTITY only accepts input between 0 and 999, inclusive
-****
-
-Example:
-
-* `check 4` +
-Displays list of all books with quantity less than or equal to 4.
-// end::check[]
-
-=== Listing all books : `list`
-
-Shows a list of all books in the inventory list. +
-Format: `list`
+Exits the program. +
+Format: `exit`
 
 === Locating book by Name: `find`
 
@@ -166,89 +158,43 @@ Returns `biology`
 * `find Biology Chemistry` +
 Returns any books having names `Biology` or `Chemistry`
 
-=== Increase Book Quantity (Ordered more books): `stock`
+=== Listing entered commands : `history`
 
-Increase an existing book quantity in the inventory list. +
-Format: `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY`
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
 
-****
-* Increase the stock at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
-* Increase the quantity of the book with the respective ISBN. ISBN is *unique* to each book. Quantity *must be a positive integer* 1, 2, 3, ...
-* Existing quantity will be increase by the input value.
-****
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
 
-Examples:
+=== Listing all books : `list`
 
-* `list` +
-`stock 2 q/6` +
-Increase the quantity available of the 2nd book by 6.
-* `stock i/978-2-12-345680-3 q/5` +
-Increase the quantity available for the book with the corresponding ISBN13 by 5.
+Shows a list of all books in the inventory list. +
+Format: `list`
 
-// tag::sell[]
-=== Decrease Book Quantity (Books Sold) : `sell`
+=== Redoing the previously undone command : `redo`
 
-Decrease an existing book quantity in the inventory list. +
-Format: `sell INDEX q/QUANTITY` OR `sell i/ISBN13 q/QUANTITY`
-
-****
-* Decrease the quantity at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
-* Decrease the quantity of the book with the respective ISBN. ISBN is *unique* to each book
-* Existing quantity will decrease by the input value.
-****
+Reverses the most recent `undo` command. +
+Format: `redo`
 
 Examples:
 
-* `list` +
-`sell 1 q/5` +
-Decrease the quantity available of the 1st book by 5.
-* `sell i/978-2-12-345680-3 q/4` +
-Decrease the quantity available for the book with the corresponding ISBN13 by 4.
-// end::sell[]
-
-=== Deleting a book : `delete`
-
-Deletes the specified book from the inventory list. +
-Format: `delete INDEX` OR `delete i/ISBN13`
-
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd book in the displayed list.
 * `delete i/978-2-12-345680-3` +
-Deletes the book with the corresponding iSBN13 from the inventory list.
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
+`redo` (reapplies the `delete i/978-2-12-345680-3` command) +
 
-=== Editing a book : `edit`
+* `delete i/978-2-12-345680-3` +
+`redo` +
+The `redo` command fails as there are no `undo` commands executed previously.
 
-Edits an existing book in the inventory book. +
-Format: `edit INDEX [n/NAME] [i/ISBN] [p/PRICE] [c/COST] [t/TAG]...`
-
-****
-* Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* Quantity Field cannot be an input values. Use `stock` and `sell` to change Quantity Field
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
-
-Examples:
-
-* `edit 1 p/20 n/Chemistry` +
-Edits the price and name of the 1st book to be `20` and `Chemistry` respectively.
-* `edit 2 c/30 t/` +
-Edits the cost of the 2nd book to be `30` and clears all existing tags.
-
-=== Deleting a request : `deleterequest`
-
-Deletes the specified request from the request list. Strictly for bookstore owners. +
-Format: `deleterequest INDEX`
-
-Examples:
-
-* `deleterequest 2` +
-Deletes the 2nd request in the displayed request list.
+* `delete i/978-2-12-345680-3` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
+`redo` (reapplies the `delete i/978-2-12-345680-3` command) +
+`redo` (reapplies the `clear` command) +
+// end::undoredo[]
 
 === Requesting for a book : `request`
 
@@ -259,26 +205,6 @@ Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 * The email is for owner to confirm the order with requester.
 * Isbn does not need to exist in the inventory but needs to be valid for owners to get the book
 ****
-
-Examples:
-
-* `request i/978-2-12-345680-3 e/johnd@gmail.com q/5` +
-Requests for 5 same books with the corresponding iSBN13 with requester's email johnd@gmail.com
-
-=== Toggle request panel : `togglerequests`
-
-Toggle the request panel. When toggled off, requests are hidden and request panel can be minimized. Strictly for bookstore owners. +
-Format: `togglerequests`
-
-=== Listing entered commands : `history`
-
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
-
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
 
 // tag::undoredo[]
 === Undoing previous command : `undo`
@@ -307,63 +233,157 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete i/978-2-12-345680-3` command) +
 
-=== Redoing the previously undone command : `redo`
 
-Reverses the most recent `undo` command. +
-Format: `redo`
+== Commands for Bookstore In-house Accountants
 
-Examples:
-
-* `delete i/978-2-12-345680-3` +
-`undo` (reverses the `delete i/978-2-12-345680-3` command) +
-`redo` (reapplies the `delete i/978-2-12-345680-3` command) +
-
-* `delete i/978-2-12-345680-3` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `delete i/978-2-12-345680-3` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete i/978-2-12-345680-3` command) +
-`redo` (reapplies the `delete i/978-2-12-345680-3` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
+If you are an accountant, you can access the aforementioned commands as well as the following.
 
 === Display account data : `stats`
 
 Displays the total revenue made. +
 Format: `stats`
 
+== Commands for Bookstore Owners
+
+If you are a bookstore owner, you are granted access to all available commands in _BookInventory_.
+Additional commands below are catered for your convenience.
+
+=== Adding a book: `add`
+
+Adds a book to the inventory list +
+Format: `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...`
+
+[TIP]
+A book can have any number of tags (including 0) +
+
+****
+* ISBNs are calculated using a specific mathematical formula and include a check digit to validate the number. Random invalid 10 to 13 digit values will produce an error
+* ISBN field allows input with and without dashes
+* PRICE field is the selling price of the book
+* COST field is the cost price of the book
+****
+
 === Clearing all entries : `clear`
 
 Clears all entries from the BookInventory. +
 Format: `clear`
 
-=== Exiting the program : `exit`
+// tag::check[]
+=== Check Inventory: `check`
 
-Exits the program. +
-Format: `exit`
+Finds books with quantity less than or equal to the given input value. List of books displayed in ascending order based on quantity left +
+Format: `check QUANTITY`
 
-// tag::tabfeature[]
-=== Cycling through existing Isbn: kbd:[Tab]
+****
+* QUANTITY only accepts input between 0 and 999, inclusive
+****
 
-You can auto-fill the Isbn field with existing ones in the Inventory to save the hassle having to type the entire Isbn of a book. +
-Format: kbd:[Tab]
+Example:
+
+* `check 4` +
+Displays list of all books with quantity less than or equal to 4.
+// end::check[]
+
+=== Deleting a book : `delete`
+
+Deletes the specified book from the inventory list. +
+Format: `delete INDEX` OR `delete i/ISBN13`
 
 Examples:
 
-* `sell i/` +
-kbd:[Tab] (completes the `Isbn` field for `sell i/` with the Isbn of the first book in the inventory) +
- E.g. `sell i/9782123456803`
+* `list` +
+`delete 2` +
+Deletes the 2nd book in the displayed list.
+* `delete i/978-2-12-345680-3` +
+Deletes the book with the corresponding iSBN13 from the inventory list.
 
-* `sell i/978` +
-kbd:[Tab] (completes the `Isbn` field for `sell i/978` with the first Isbn of a book that contains `978` in the inventory) +
-E.g. `sell i/9782123456803`
+=== Deleting a request : `deleterequest`
 
-* `sell i/777` +
-kbd:[Tab] (does not complete the `Isbn` field as inventory does not contains books with Isbn starting with `777`)
-// end::tabfeature[]
+Deletes the specified request from the request list. Strictly for bookstore owners. +
+Format: `deleterequest INDEX`
+
+Examples:
+
+* `deleterequest 2` +
+Deletes the 2nd request in the displayed request list.
+
+
+Examples:
+
+* `request i/978-2-12-345680-3 e/johnd@gmail.com q/5` +
+Requests for 5 same books with the corresponding iSBN13 with requester's email johnd@gmail.com
+
+=== Editing a book : `edit`
+
+Edits an existing book in the inventory book. +
+Format: `edit INDEX [n/NAME] [i/ISBN] [p/PRICE] [c/COST] [t/TAG]...`
+
+****
+* Edits the book at the specified `INDEX`. The index refers to the index number shown in the displayed book list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* Quantity Field cannot be an input values. Use `stock` and `sell` to change Quantity Field
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 p/20 n/Chemistry` +
+Edits the price and name of the 1st book to be `20` and `Chemistry` respectively.
+* `edit 2 c/30 t/` +
+Edits the cost of the 2nd book to be `30` and clears all existing tags.
+
+=== Toggle request panel : `togglerequests`
+
+Toggle the request panel. When toggled off, requests are hidden and request panel can be minimized. Strictly for bookstore owners. +
+Format: `togglerequests`
+
+// tag::sell[]
+=== Decrease Book Quantity (Books Sold) : `sell`
+
+Decrease an existing book quantity in the inventory list. +
+Format: `sell INDEX q/QUANTITY` OR `sell i/ISBN13 q/QUANTITY`
+
+****
+* Decrease the quantity at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
+* Decrease the quantity of the book with the respective ISBN. ISBN is *unique* to each book
+* Existing quantity will decrease by the input value.
+****
+
+Examples:
+
+* `list` +
+`sell 1 q/5` +
+Decrease the quantity available of the 1st book by 5.
+* `sell i/978-2-12-345680-3 q/4` +
+Decrease the quantity available for the book with the corresponding ISBN13 by 4.
+// end::sell[]
+
+=== Increase Book Quantity (Ordered more books): `stock`
+
+Increase an existing book quantity in the inventory list. +
+Format: `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY`
+
+****
+* Increase the stock at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
+* Increase the quantity of the book with the respective ISBN. ISBN is *unique* to each book. Quantity *must be a positive integer* 1, 2, 3, ...
+* Existing quantity will be increase by the input value.
+****
+
+Examples:
+
+* `list` +
+`stock 2 q/6` +
+Increase the quantity available of the 2nd book by 6.
+* `stock i/978-2-12-345680-3 q/5` +
+Increase the quantity available for the book with the corresponding ISBN13 by 5.
+Examples:
+
+* `add n/Harry Potter i/9781408855713 p/60.70 q/100 c/30.90 t/difficult`
+* `add n/Lord of the Rings i/9789655171990 p/59.90 q/271 c/20.99`
+
+== Data Storage
 
 === Saving the data
 
@@ -389,29 +409,39 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* : `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...` +
-e.g. `add n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/90 t/difficult`
+=== Commands for Students
+* *Help* : `help`
+* *Exit* : `exit`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find biology chemistry`
-* *Edit* : `edit INDEX n/NAME i/ISBN13 p/PRICE c/COST [t/TAG]...` +
-e.g. `edit INDEX n/Chemistry p/30.00`
-* *Stock* : `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY` +
-e.g. `stock 1 q/8` OR `stock i/978-2-12-345680-3 q/8`
-* *Sell* : `sell INDEX q/QUANTITY` OR `sell i/ISBN13 q/QUANTITY` +
-e.g. `sell 1 q/8` OR `sell i/978-2-12-345680-3 q/8`
-* *Check* : `check QUANTITY` +
-e.g. `check 4`
+* *List* : `list`
+* *History* : `history`
+* *Redo* : `redo`
 * *Request* : `request i/ISBN13 e/EMAIL q/QUANTITY` +
 e.g. `request i/978-2-12-345680-3 e/johnd@gmail.com q/5`
+* *Undo* : `undo`
+
+=== Additional Commands for Accountants
 * *Display Statistics* : `stats`
+
+=== Additional Commands for Owners
+* *Add* : `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...` +
+e.g. `add n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/90 t/difficult`
+* *Check* : `check QUANTITY` +
+e.g. `check 4`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` OR `delete i/ISBN13` +
 e.g. `delete 1` OR `delete i/978-2-12-345680-3`
 * *DeleteRequest* : `deleterequest INDEX` +
 e.g. `deleterequest 1`
-* *List* : `list`
-* *Help* : `help`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
-* *Exit* : `exit`
+* *Edit* : `edit INDEX n/NAME i/ISBN13 p/PRICE c/COST [t/TAG]...` +
+e.g. `edit INDEX n/Chemistry p/30.00`
+* *Sell* : `sell INDEX q/QUANTITY` OR `sell i/ISBN13 q/QUANTITY` +
+e.g. `sell 1 q/8` OR `sell i/978-2-12-345680-3 q/8`
+* *Stock* : `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY` +
+e.g. `stock 1 q/8` OR `stock i/978-2-12-345680-3 q/8`
+
+
+
+
+
