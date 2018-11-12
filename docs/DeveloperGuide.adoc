@@ -2304,7 +2304,9 @@ should allow you to navigate to the hidden tags within the legend.
 .. Prerequisites: Same as before. Just need to change the panel to see the effect.
 .. Test case: Add any record with date in current month/ Delete any record with date in current month/ Edit any record to a date in current month/ Clear
 .. Expected: Panel should show the welcome screen.
+
 //tag::limitsManualTest[]
+
 === Adding a normal limit
 
 . Adding a normal limit to the Financial Planner without the same time period limits inside.
