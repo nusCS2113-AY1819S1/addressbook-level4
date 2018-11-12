@@ -45,7 +45,9 @@ to their date and find events that are occurring at earlier dates.
 
 ** Documentation:
 *** Updated the User Guide for Practical Exam 1
-*** Updated the Developer Guide to include `sort` command, user stories for sort, login and use case for showmine
+*** Updated the Developer Guide to include `sort` command, user stories for sort, login and use case for showmine,
+class diagram for parser. Include new test case for `login` and `sort` command for Appendix F.
+
 
 ** Community:
 *** PRs reviewed and merged
