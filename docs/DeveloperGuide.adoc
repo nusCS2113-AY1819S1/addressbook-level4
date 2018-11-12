@@ -216,7 +216,6 @@ The `Model`,
 * stores the RecruitBook data in `VersionedRecruitBook`.
 * exposes an unmodifiable lists `ObservableList<Candidate>`, `ObservableList<JobOffer>`, `ObservableList<Company>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
- +
 // end::modelComponent[]
 
 // tag::storageComponent[]
@@ -231,7 +230,7 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Recruit Book data in xml format and read it back.
+* can save all of RecruitBook data in xml format and read it back.
 
 // end::storageComponent[]
 [[Design-Commons]]
@@ -311,8 +310,9 @@ Step 4. The user executes ...
         .. `deleteC 1,3-4` to delete multiple companies. `DeleteCompanyCommand` calls `Model#removeCompany(Company company)` for the companies listed at index 1, and 4.
         .. `deletej 1,3-4` to delete multiple job offers. `DeleteJobOfferCommand` calls `Model#deleteJobOffer(JobOffer jobOffer)` for the job offers listed at index 1, and 4.
 
-Here is a sequence Diagram to help illustrate the flow of adding an entries.
+Below in Figure 9. is a sequence diagram of how adding a candidate works in RecruitBook and also serves to depict the adding mechanism for job offers and companies due to their similarity.
 
+.Sequence Diagram of adding a candidate
 image::AddSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
@@ -1050,36 +1050,36 @@ These operations are exposed in the `Model` interface as `Model#commitRecruitBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedRecruitBook` will be initialized with the initial candidate book state, and the `currentStatePointer` pointing to that single candidate book state.
+Step 1. The user launches the application for the first time. The `VersionedRecruitBook` will be initialized with the initial RecruitBook state, and the `currentStatePointer` pointing to that single RecruitBook state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `deletec 5` command to delete the 5th candidate in the candidate book. The `deletec` command calls `Model#commitRecruitBook()`, causing the modified state of the candidate book after the `deletec 5` command executes to be saved in the `candidateBookStateList`, and the `currentStatePointer` is shifted to the newly inserted candidate book state.
+Step 2. The user executes `deletec 5` command to delete the 5th candidate in RecruitBook. The `deletec` command calls `Model#commitRecruitBook()`, causing the modified state of the RecruitBook after the `deletec 5` command executes to be saved in the `recruitBookStateList`, and the `currentStatePointer` is shifted to the newly inserted RecruitBook state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `addc` then `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitRecruitBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
+Step 3. The user executes `addc` then `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitRecruitBook()`, causing another modified RecruitBook state to be saved into the `recruitBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitRecruitBook()`, so the candidate book state will not be saved into the `candidateBookStateList`.
+If a command fails its execution, it will not call `Model#commitRecruitBook()`, so the RecruitBook state will not be saved into the `recruitBookStateList`.
 
-Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoRecruitBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
+Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoRecruitBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous RecruitBook state, and restores the RecruitBook to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial candidate book state, then there are no previous candidate book states to restore. The `undo` command uses `Model#canUndoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial RecruitBook state, then there are no previous RecruitBook states to restore. The `undo` command uses `Model#canUndoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoRecruitBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the candidate book to that state.
+The `redo` command does the opposite -- it calls `Model#redoRecruitBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the RecruitBook to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `recruitBookStateList.size() - 1`, pointing to the latest RecruitBook state, then there are no undone candidate book states to restore. The `redo` command uses `Model#canRedoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `recruitBookStateList.size() - 1`, pointing to the latest RecruitBook state, then there are no undone RecruitBook states to restore. The `redo` command uses `Model#canRedoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 Step 5. The user then decides to execute the command `listc`. Commands that do not modify RecruitBook state, such as `listc` or `listC`, will usually not call `Model#commitRecruitBook()`, `Model#undoRecruitBook()` or `Model#redoRecruitBook()`. Thus, the `recruitBookStateList` remains unchanged.
 

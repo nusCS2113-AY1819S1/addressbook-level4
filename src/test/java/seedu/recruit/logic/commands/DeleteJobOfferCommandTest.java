@@ -100,12 +100,12 @@ public class DeleteJobOfferCommandTest {
         // delete -> first company deleted
         deleteJobOfferCommand.execute(model, commandHistory, userPrefs);
 
-        // undo -> reverts Companybook back to previous state and filtered company list to show all companies
+        // undo -> reverts Companybook back to previous state and filtered job list to show all companies
         expectedModel.undoRecruitBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory,
                 UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // redo -> same first company deleted again
+        // redo -> same first job deleted again
         expectedModel.redoRecruitBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory,
                 RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -118,7 +118,7 @@ public class DeleteJobOfferCommandTest {
 
         // execution failed -> recruit book state not added into model
         assertCommandFailure(deleteJobOfferCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_JOB_OFFER_DISPLAYED_INDEX);
 
         // single recruit book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory,
@@ -128,11 +128,11 @@ public class DeleteJobOfferCommandTest {
     }
 
     /**
-     * 1. Deletes a {@code Company} from a filtered list.
+     * 1. Deletes a {@code Job} from a filtered list.
      * 2. Undo the deletion.
-     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted company in the
+     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted job offer in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the company object regardless of
+     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the JobOffer object regardless of
      * indexing.
      */
     @Test
@@ -146,16 +146,16 @@ public class DeleteJobOfferCommandTest {
         expectedModel.deleteJobOffer(jobOfferToDelete);
         expectedModel.commitRecruitBook();
 
-        // delete -> deletes second company in unfiltered company list / first company in filtered company list
+        // delete -> deletes second job in unfiltered job offer list / first job offer in filtered job list
         deleteJobOfferCommand.execute(model, commandHistory, userPrefs);
 
-        // undo -> reverts RecruitBook back to previous state and filtered company list to show all persons
+        // undo -> reverts RecruitBook back to previous state and filtered job list to show all persons
         expectedModel.undoRecruitBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory,
                 UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(jobOfferToDelete, model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased()));
-        // redo -> deletes same second company in unfiltered company list
+        // redo -> deletes same second job in unfiltered job list
         expectedModel.redoRecruitBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory,
                 RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -179,7 +179,7 @@ public class DeleteJobOfferCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different company -> returns false
+        // different job offer -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 }
