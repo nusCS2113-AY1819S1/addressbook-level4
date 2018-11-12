@@ -289,7 +289,7 @@ Sort the event list alphabetically
 // end::sort[]
 
 // tag::showmine[]
-=== Sorting all events: `showmine`
+=== Showing events associated with user: `showmine`
 Priority level: `manager`, `employee`
 
 This function is only applicable to users who have login with their email. +
