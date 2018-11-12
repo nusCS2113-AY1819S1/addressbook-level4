@@ -399,7 +399,7 @@ NOTE: Upcoming events are those that are occurring within the next 24 hours.
 ****
 
 .Event Reminder Alert Dialog
-image::AlertDialog.png[width="400"] +
+image::AlertDialog.png[width="400"]
 
 // end::eventReminders[]
 
