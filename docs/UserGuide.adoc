@@ -256,6 +256,8 @@ image::EditCommandAfter.PNG[width="600"]
 Adds a milestone to an existing task in the task book +
 Format: `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK`
 
+
+
 [WARNING]
 ====
 * Milestone description cannot be longer than 40 characters!
@@ -263,6 +265,8 @@ Format: `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK`
 * Index must be a non-zero, positive integer not greater than the number of tasks currently available
 in the Task Book!
 ====
+
+
 
 Examples:
 
@@ -517,7 +521,7 @@ e.g. `sort s/priority`
 e.g. `defer i/1 dd/01 mm/01 yyyy/2018`
 * *Edit* : `edit i/INDEX [t/TITLE] [d/DESCRIPTION] [c/MODULE CODE] [p/PRIORITY] [h/HOURS]` +
 e.g. `edit i/1 t/Complete CS2271 tutorial d/Edit editTask to fit TaskBook c/CS2113 p/high h/4`
-* *Add milestone* : `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK...` +
+* *Add milestone* : `add_milestone i/INDEX m/MILESTONE DESCRIPTION r/RANK` +
 e.g. `add_milestone i/1 m/Q1 - 3 r/1`
 * *Track* : `track`
 * *List* : `list`
