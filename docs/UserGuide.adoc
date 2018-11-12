@@ -296,6 +296,7 @@ Format: `select INDEX`
 * `INDEX` refers to the index number shown in the displayed tracked parameters list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * The index cannot be larger than the last index number shown in the displayed tracked parameters list.
+* If workouts added before a parameter is tracked already contain the parameter, they will show up when the parameter is added.
 ****
 
 Examples:
