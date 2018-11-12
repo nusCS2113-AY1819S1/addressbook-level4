@@ -198,6 +198,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 image::DeleteProductSdForLogic.png[width="800"]
 
 [[Design-Model]]
+// tag::modelcomponent[]
 === Model component
 
 .Structure of the Model Component
@@ -227,8 +228,9 @@ As a more OOP model, we can store a `Tag` list in both `Product Database` and `D
 can reference. This would allow `Product Database` and `Distributor Book` to only require one `Tag` object per unique `Tag`, instead of each `Product`/`Distributor` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
-
+// end::modelcomponent[]
 [[Design-Storage]]
+// tag::storagecomponent[]
 === Storage component
 
 .Structure of the Storage Component
@@ -243,6 +245,7 @@ The `Storage` component,
 * can save the User Database data in xml format and read it back.
 * can save the Product Database data in xml format and read it back.
 
+// end::storagecomponent[]
 [[Design-Commons]]
 === Common classes
 
