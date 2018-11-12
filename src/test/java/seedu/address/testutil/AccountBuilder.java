@@ -5,7 +5,7 @@ import seedu.address.model.account.Password;
 import seedu.address.model.account.Username;
 
 /**
- * A utility class to help with building Item objects.
+ * A utility class to help with building Account objects.
  */
 public class AccountBuilder {
 
@@ -43,7 +43,6 @@ public class AccountBuilder {
         this.password = new Password(password);
         return this;
     }
-
 
     public Account build() {
         return new Account(username, password);

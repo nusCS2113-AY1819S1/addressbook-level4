@@ -1,12 +1,12 @@
 package seedu.address.model;
 
-/*
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
+import static seedu.address.testutil.TypicalAccounts.ADMIN;
+import static seedu.address.testutil.TypicalAccounts.JOHN;
 import static seedu.address.testutil.TypicalItems.ARDUINO;
 import static seedu.address.testutil.TypicalItems.RPLIDAR;
-import static seedu.address.testutil.TypicalItems.getTypicalAccountList;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -16,10 +16,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.item.NameContainsKeywordsPredicate;
+import seedu.address.testutil.AccountListBuilder;
 import seedu.address.testutil.StockListBuilder;
-*/
+
 public class ModelManagerTest {
-    /*
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -52,11 +53,12 @@ public class ModelManagerTest {
     public void equals() {
         StockList stockList = new StockListBuilder().withItem(ARDUINO).withItem(RPLIDAR).build();
         StockList differentStockList = new StockList();
+        AccountList accountList = new AccountListBuilder().withAccount(ADMIN).withAccount(JOHN).build();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(stockList, userPrefs, getTypicalAccountList());
-        ModelManager modelManagerCopy = new ModelManager(stockList, userPrefs, model.Acc);
+        modelManager = new ModelManager(stockList, userPrefs, accountList);
+        ModelManager modelManagerCopy = new ModelManager(stockList, userPrefs, accountList);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -69,12 +71,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different stockList -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentStockList, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentStockList, userPrefs, accountList)));
 
         // different filteredList -> returns false
         String[] keywords = ARDUINO.getName().fullName.split("\\s+");
         modelManager.updateFilteredItemList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(stockList, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(stockList, userPrefs, accountList)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
@@ -82,7 +84,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setStockListFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(stockList, differentUserPrefs)));
+        assertTrue(modelManager.equals(new ModelManager(stockList, differentUserPrefs, accountList)));
     }
-    */
+
 }
