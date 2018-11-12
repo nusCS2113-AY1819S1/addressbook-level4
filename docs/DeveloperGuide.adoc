@@ -433,6 +433,10 @@ We new a `Date` variable which initialized with the system date and compare it w
 and deadline for distinguishing uncompleted tasks with different deadline.
 * **In `commons` part**: We store all `Date` type related methods in the `TimeUtil` class.
 
+The following sequence diagram shows how the `DeadlineNotification` operation works:
+
+image::DeadlineNotification.png[width="800"]
+
 ==== Design Considerations
 
 ==== Aspect: Methods to support the deadline notification feature
@@ -1304,8 +1308,8 @@ To-do list
 
 *MSS*
 
-1.The color of one task turns red which mean this task is uncompleted and the deadline has passed already
-2.The color of one task turns yellow which mean this task is uncompleted and the deadline will come within 7 days
+1.The color of one task turns red which means this task is uncompleted and the deadline has passed already
+2.The color of one task turns yellow which means this task is uncompleted and the deadline will come within 7 days
 
 [discrete]
 === Use case 14: Sort Uncompleted tasks by deadline
