@@ -117,8 +117,7 @@ public class LostCommand extends Command {
 
         public LostDescriptor(){}
 
-        public LostDescriptor(Integer lostQuantity)
-        {
+        public LostDescriptor(Integer lostQuantity) {
             this.lostQuantity = lostQuantity;
         }
 

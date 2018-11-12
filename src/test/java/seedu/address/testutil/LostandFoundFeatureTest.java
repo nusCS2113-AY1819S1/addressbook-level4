@@ -26,11 +26,11 @@ import seedu.address.model.item.Status;
  */
 public class LostandFoundFeatureTest {
     private static final Item ARDUINO = new Item(new Name("Arduino"), new Quantity("100"),
-            new Quantity("20"), new Loststatus(80,100), new Status(70, 20, 10), new HashSet<>());
+            new Quantity("20"), new Loststatus(80, 100), new Status(70, 20, 10), new HashSet<>());
     private static final Item Lidar = new Item(new Name("Lidar"), new Quantity("200"),
-            new Quantity("80"), new Loststatus(50,200), new Status(150, 20, 30), new HashSet<>());
+            new Quantity("80"), new Loststatus(50, 200), new Status(150, 20, 30), new HashSet<>());
     private static final Item Motor = new Item(new Name("Motor"), new Quantity("500"),
-            new Quantity("100"), new Loststatus(80,500), new Status(300, 120, 80), new HashSet<>());
+            new Quantity("100"), new Loststatus(80, 500), new Status(300, 120, 80), new HashSet<>());
 
     private static File userDirectory = new File(System.getProperty("user.dir"));
     private static String lostandfoundDirectory = userDirectory.getAbsolutePath().replace("\\", "/");
@@ -91,7 +91,7 @@ public class LostandFoundFeatureTest {
     public static LostCommand.LostDescriptor getLostDescriptor() {
         return new LostCommand.LostDescriptor(20);
     }
-    public static FoundCommand.FoundDescriptor getFoundDescriptor(){
+    public static FoundCommand.FoundDescriptor getFoundDescriptor() {
         return new FoundCommand.FoundDescriptor(15);
     }
 
@@ -103,7 +103,7 @@ public class LostandFoundFeatureTest {
     }
     public static Item getExpectedUpdatedItemone() {
         return new Item(new Name("Lidar"), new Quantity("180"),
-                new Quantity("80"), new Loststatus(70,110), new Status(130, 20, 30), new HashSet<>());
+                new Quantity("80"), new Loststatus(70, 110), new Status(130, 20, 30), new HashSet<>());
     }
 
     public static Index getExpectedIndextwo() {
@@ -114,7 +114,7 @@ public class LostandFoundFeatureTest {
     }
     public static Item getExpectedUpdatedItemtwo() {
         return new Item(new Name("Motor"), new Quantity("515"),
-                new Quantity("100"), new Loststatus(65,515), new Status(315, 120, 80), new HashSet<>());
+                new Quantity("100"), new Loststatus(65, 515), new Status(315, 120, 80), new HashSet<>());
     }
 
 

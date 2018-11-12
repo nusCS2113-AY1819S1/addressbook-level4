@@ -121,8 +121,7 @@ public class FoundCommand extends Command {
 
         public FoundDescriptor() {}
 
-        public FoundDescriptor(Integer foundQuantity)
-        {
+        public FoundDescriptor(Integer foundQuantity) {
             this.foundQuantity = foundQuantity;
         }
 
