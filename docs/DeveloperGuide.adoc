@@ -448,6 +448,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 image::classaddlist.PNG[width="800"]
 
+The following sequence diagram summarizes what happens when a user executes a new command:
+
+image::classaddsequencediagram.PNG[width="800"]
+
 // end::classmanagementbrief[]
 
 // tag::graph[]
