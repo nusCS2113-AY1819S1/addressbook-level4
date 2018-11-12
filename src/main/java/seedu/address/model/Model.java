@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
 
@@ -18,6 +19,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Todo> PREDICATE_SHOW_ALL_TODOS = unused -> true;
+    Predicate<Reminder> PREDICATE_SHOW_ALL_REMINDERS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
@@ -141,5 +143,26 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTodoList(Predicate<Todo> predicate);
+
+    /**
+     * Returns true if a reminder with the same fields as {@code reminder} exists in the address book.
+     */
+
+    /** Returns an unmodifiable view of the filtered reminder list */
+    ObservableList<Reminder> getFilteredReminderList();
+
+    boolean hasReminder(Reminder reminder);
+
+    /**
+     * Adds the reminder.
+     * {@code reminder} must not already exist in the address book.
+     */
+    void addReminder(Reminder reminder);
+
+    /**
+     * Updates the filter of the filtered reminder list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredReminderList(Predicate<Reminder> predicate);
 
 }

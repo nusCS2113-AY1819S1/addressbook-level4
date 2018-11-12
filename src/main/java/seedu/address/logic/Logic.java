@@ -5,6 +5,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.todo.Todo;
 
 /**
@@ -25,6 +26,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of todo tasks */
     ObservableList<Todo> getFilteredTodoList();
+
+    /** Returns an unmodifiable view of the filtered list of reminders */
+    ObservableList<Reminder> getFilteredReminderList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();

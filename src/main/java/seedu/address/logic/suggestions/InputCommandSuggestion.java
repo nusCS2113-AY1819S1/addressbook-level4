@@ -17,6 +17,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatchScheduleCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TodoCommand;
@@ -54,6 +55,7 @@ public class InputCommandSuggestion implements Suggestion {
         commandList.insert(SelectCommand.COMMAND_WORD);
         commandList.insert(TodoCommand.COMMAND_WORD);
         commandList.insert(UndoCommand.COMMAND_WORD);
+        commandList.insert(ReminderCommand.COMMAND_WORD);
     }
 
     /**
@@ -156,6 +158,9 @@ public class InputCommandSuggestion implements Suggestion {
 
         case TodoCommand.COMMAND_WORD:
             return TodoCommand.COMMAND_PARAMETERS;
+
+        case ReminderCommand.COMMAND_WORD:
+            return ReminderCommand.COMMAND_PARAMETERS;
 
         case ClearCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
