@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_EVENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_PEOPLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LIST_DEPARTMENT;
 import static seedu.address.model.EventModel.PREDICATE_SHOW_ALL_EVENTS;
@@ -21,7 +23,9 @@ public class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all persons by the given parameter\n"
             + "Parameters: "
             + PREFIX_LIST_DEPARTMENT + " DEPARTMENT "
-            + "or " + PREFIX_ALL_PEOPLE + "\n"
+            + "or " + PREFIX_ALL_PEOPLE + " "
+            + "or " + PREFIX_ALL_EVENTS + " "
+            + "or " + PREFIX_ALL + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_LIST_DEPARTMENT + " Admin Finance, "
             + COMMAND_WORD + " all people";
 
