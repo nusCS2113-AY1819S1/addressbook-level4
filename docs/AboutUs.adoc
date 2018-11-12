@@ -34,7 +34,7 @@ image::hyukiejun.png[width="150", align="left"]
 {empty}[http://github.com/m133225[github]] [<<hyukiejun#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Code clean-up, Member feature
+Responsibilities: Code clean-up, Member feature, Docs
 
 '''
 
