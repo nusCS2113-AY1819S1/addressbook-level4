@@ -31,26 +31,26 @@ a|
 
 === Function 1: adding or removing a ledger record.
 
-    What it does: allows the user to easily add and remove ledgers
+What it does: allows the user to easily add and remove ledgers
 according to the date in the format [DD/MM].
 
-    Justification: This function improves the management of finances in
+Justification: This function improves the management of finances in
 the club by allowing records to be add and removed via the date, to
 ensure maximum clarity and unambiguity when it comes to recording
 finances.
 
 === Function 2: crediting or debiting balance from a ledger record.
 
-    What it does: allows the user to credit or debit the amount on a
+What it does: allows the user to credit or debit the amount on a
 specific date.
 
-    Justification: This function improves the product significantly
+Justification: This function improves the product significantly
 because a user can easily update their spending on a specific date or
 their contributions to the club with just one line of command. In
 addition, working directly with dates instead of indexes ensures maximum
 clarity in managing the finances.
 
-    Highlights: This enhancement affects and manipulates existing
+Highlights: This enhancement affects and manipulates existing
 data stored in the memory. It required an in-depth analysis of design
 considerations to allow mathematical operations to be performed on data
 stored in memory. The implementation too was challenging as it required
@@ -67,7 +67,7 @@ indexes as mentioned in the description for function 2.
 |=======================================================================
 a|
 Code:
-[https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-10-18&timeframe=day&reverse=false&repoSort=true[Functional
+[https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=za-yn[Functional
 Code]]
 
 To see more details of the code, extracts from the project’s developer
@@ -79,7 +79,7 @@ and user guide are included below:
 
 ===== 3.1.1 Accounts:
 
-    The Club Account features a ledger column to record the spending of the
+The Club Account features a ledger column to record the spending of the
 club on any date in the form of DD/MM. There are 4 basic commands
 allowing the user to add or delete a ledger, and to credit or debit
 money from any date in the list of records.
@@ -250,24 +250,20 @@ UniqueLedgerList to get the date of the ledgers in the list, comparing
 them to find one to edit.
 
 |=======================================================================
-
  
 
-=== 4.    Known Bugs
+=== 4.    Other Contributions
 
-[width="100%",cols="50%,50%",]
-|=======================================================================
-|image:ppp_files/image001.png[Tip icon,width=15,height=15] |Some of the
-bugs identified a
-|=======================================================================
-
- 
-
-=== 5.    Design Considerations
-
-[width="100%",cols="50%,50%",]
+[width="100%",cols="100%",]
 |============================================================
-|image:image003.png[Tip icon,width=15,height=15] a|
+a|
+
+=== Technical Leadership
+Provided technical guidance for the team, including debugging and implementing larger features.
+
+=== Project Management
+1. Delegating of workflow amongst team members.
+2. Provided and organized team meetings.
 
  
 
@@ -275,11 +271,11 @@ bugs identified a
 
  
 
-=== 6.    Future Implementation
+=== 5.    Future Implementation
 
-[width="100%",cols="50%,50%",]
+[width="100%",cols="100%",]
 |============================================================
-|image:image004.png[Tip icon,width=15,height=15] a|
+a| Future implementation includes
 
  
 
