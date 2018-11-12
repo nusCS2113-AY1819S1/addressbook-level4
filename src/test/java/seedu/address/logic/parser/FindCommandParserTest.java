@@ -10,14 +10,17 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.StudentFindCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-
+/**
+ * This is a test class for FindCommandParserTest
+ */
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, StudentFindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, StudentFindCommand.MESSAGE_USAGE));
     }
 
     @Test

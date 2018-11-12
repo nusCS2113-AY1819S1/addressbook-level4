@@ -27,7 +27,9 @@ import seedu.address.model.course.CourseName;
 import seedu.address.model.course.FacultyName;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-
+/**
+ * This is a test class for StudentAddCommandTest
+ */
 public class StudentAddCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();

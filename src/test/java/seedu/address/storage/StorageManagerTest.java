@@ -21,6 +21,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
+/**
+ * This is a test class for StorageManagerTest
+ */
 public class StorageManagerTest {
 
     @Rule

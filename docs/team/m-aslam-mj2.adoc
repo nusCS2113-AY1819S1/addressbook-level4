@@ -41,8 +41,6 @@ Built specifically for the needs of teachers, and by extension -- the needs of a
 *** Updated project-wide sections for both the UG and the DG.
 ** Community:
 *** PRs reviewed and approved.
-** Tools:
-*** WIP
 
 == Contributions to the User Guide
 

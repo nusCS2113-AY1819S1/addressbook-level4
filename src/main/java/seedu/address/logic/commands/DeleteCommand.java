@@ -10,6 +10,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.module.ModuleManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.StudentManager;
 
@@ -45,6 +46,7 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         ClassroomManager.getInstance().handleStudentDeletedByMatricNo(personToDelete.getMatricNo().matricNo);
+        ModuleManager.getInstance().handleStudentDeleted(personToDelete);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete),
                 StudentManager.getInstance().getTableRepresentation());

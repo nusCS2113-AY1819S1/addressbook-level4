@@ -12,7 +12,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.StorageController;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteDate;
 import seedu.address.model.note.NoteLocation;
