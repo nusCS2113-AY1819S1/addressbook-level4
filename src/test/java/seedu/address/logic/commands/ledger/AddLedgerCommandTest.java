@@ -12,11 +12,11 @@ import org.junit.Test;
 
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.CommandResult;
-
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Events.Event;
