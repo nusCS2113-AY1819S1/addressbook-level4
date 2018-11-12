@@ -475,7 +475,6 @@ These `Batch` objects contain a `BatchId` , a `BatchQuantity` and a `BatchDate` 
 A user may enter a buy command with the above parameters to record a purchase of drinks.
 
 The following is the sequence of steps when the user enters an buy command with specified name and quantity:
-
 Step 1. User enters a buy command (i.e. `buy` `n/Coca cola` `q/400`).
 
 Step 2. The appropriate parser parses the name and quantity parameters and assigns the `name` and `quantity` variables to the `buy` command.
@@ -493,10 +492,10 @@ Step 7. In the `UniqueBatchList` , the `Batch` that was passed down would be che
 Step 8. The `totalQuantity` attribute of the `UniqueBatchList` is then updated by looping through the batches in the list, and is handed up to the `Drink` object which updates its `Quantity` attribute with the value of the `totalQuantity` attribute.
 
 .Sequence Diagram of BuyCommand to StockTakerModelManager
-image::BuyCommandSequenceDiagram1.png[width="600"]
+image::BuyCommandSequenceDiagram1.png[width="400"]
 
 .Sequence Diagram of StockTakerModelManager to Batch
-image::BuyCommandSequenceDiagram2.png[width="800"]
+image::BuyCommandSequenceDiagram2.png[width="600"]
 
 ==== Selling a drink
 
@@ -523,10 +522,10 @@ Step 7. In the `UniqueBatchList` , `quantity` passed down will be checked agains
 Step 8. The `totalQuantity` attribute of the `UniqueBatchList` is then updated by looping through the batches in the list, and is handed up to the `Drink` object which updates its `Quantity` attribute with the value of the `totalQuantity` attribute.
 
 .Sequence Diagram of SellCommand to StockTakerModelManager
-image::SellCommandSequenceDiagram1.png[width="600"]
+image::SellCommandSequenceDiagram1.png[width="400"]
 
 .Sequence Diagram of StockTakerModelManager to Batch
-image::SellCommandSequenceDiagram2.png[width="800"]
+image::SellCommandSequenceDiagram2.png[width="600"]
 
 ==== Design Considerations
 Aspect: Facilitating the Buy and Sell Commands
