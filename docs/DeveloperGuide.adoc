@@ -762,7 +762,7 @@ image::getting-started-ui-status-after.png[width="500"]
 ** link:{repoURL}/src/main/java/seedu/productInfo/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the productInfo book is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu/productInfo/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of products when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/productInfo/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of products whenever there are new changes to the addressbook.
+** Use link:{repoURL}/src/main/java/seedu/productInfo/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of products whenever there are new changes to the Product Database.
 ** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
 ** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of products status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
@@ -791,7 +791,7 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 
 By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
+*Scenario:* You are a software maintainer for `Product Database`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
 Edits the remark for a product specified in the `INDEX`. +
@@ -1150,12 +1150,12 @@ _{ more test cases ... }
 
 . Deleting a product while all products are listed
 
-.. Prerequisites: List all products using the `list` command. Multiple products in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
+.. Prerequisites: There should be multiple products in the list.
+.. Test case: `deleteproduct 1` +
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+.. Test case: `deleteproduct 0` +
    Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `deleteproduct`, `deleteproduct x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
 _{ more test cases ... }_
@@ -1164,19 +1164,19 @@ _{ more test cases ... }_
 
 . Deleting a distributor while all distributors are listed
 
-.. Prerequisites: There should be a atleast 2 products to edit. The second one has Serial Number = 123.
-.. Test case: `Editproduct 1 inv/12` +
+.. Prerequisites: There should be a at least 2 products to edit. The second one has Serial Number = 123.
+.. Test case: `editproduct 1 inv/12` +
    Expected: First product from the list is edited. The current inventory should now be 12, and a success message is shown in the result display panel.
 .. Test case: `editproduct 1 s/123` +
    Expected: No product is updated. Error details of invalid serialnumber because a product with serial number = 123 already exists  is shown in the result display panel. Status bar remains the same.
-.. Other incorrect edit commands to try: `delete x n/y` (where x is larger than the list size and y does not exist) +
-   Expected: Error details of invalid index is shown in the result display panel.
+.. Other incorrect edit commands to try: `deleteproduct x n/y` (where x is larger than the list size and y does not exist) +
+   Expected: Error details of invalid command format is shown in the result display panel.
 
 _{ more test cases ... }_
 
 === Listing all products
 
-.
+. Listing all products
 
 .. Prerequisites: There is more then two products and the user has filtred the list by searching for a product.
 .. Test case: `listproducts` +
