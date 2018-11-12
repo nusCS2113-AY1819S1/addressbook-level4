@@ -2,6 +2,8 @@ package seedu.address.model.item;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+//@@author ChewKinWhye
+
 /**
  * Represents a loaner in the loan list.
  */

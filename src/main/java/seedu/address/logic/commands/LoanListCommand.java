@@ -19,6 +19,8 @@ import seedu.address.model.item.LoanerDescription;
 import seedu.address.storage.XmlAdaptedLoanList;
 import seedu.address.storage.XmlAdaptedLoanerDescription;
 
+//@@author ChewKinWhye
+
 /**
  * Creates a loan list, and updates the status from Ready to On_Loan
  */

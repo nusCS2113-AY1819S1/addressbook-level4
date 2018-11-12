@@ -17,6 +17,8 @@ import seedu.address.model.item.Quantity;
 import seedu.address.model.item.SimpleItem;
 import seedu.address.model.item.Status;
 
+//@@author ChewKinWhye
+
 /**
  * A utility class containing a list of {@code Item} objects to be used in tests, specifically
  * designed for the status feature test cases.

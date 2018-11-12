@@ -13,6 +13,8 @@ import seedu.address.model.Model;
 import seedu.address.storage.XmlAdaptedLoanList;
 import seedu.address.storage.XmlAdaptedLoanerDescription;
 
+//@@author ChewKinWhye
+
 /**
  * Lists all the entries in the loan list to the user.
  */
