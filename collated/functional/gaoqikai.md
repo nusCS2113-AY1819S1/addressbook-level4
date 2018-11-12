@@ -34,6 +34,8 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Added tags to the selected item.";
 
+    public static final String MESSAGE_DUPLICATE = "This item already has the inputted tags. Please try again.";
+
     public static final String MESSAGE_NO_TAG = "Please include the tags you want to add.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add the inputted tags to the selected item "
@@ -56,6 +58,11 @@ public class AddTagCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Item> lastShownList = model.getFilteredItemList();
 
 
@@ -69,6 +76,9 @@ public class AddTagCommand extends Command {
         model.updateItem(itemToEdit, editedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
+        if(itemToEdit.getTags().size() == lastShownList.get(index.getZeroBased()).getTags().size()) {
+            return new CommandResult(MESSAGE_DUPLICATE);
+        }
         return new CommandResult(MESSAGE_SUCCESS);
 
     }
@@ -203,6 +213,11 @@ public class DeleteTagCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Item> lastShownList = model.getFilteredItemList();
 
 
@@ -299,6 +314,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.TagContainsKeywordsPredicate;
 
@@ -324,8 +340,13 @@ public class TagCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         model.updateFilteredItemListByTag(predicate);
         return new CommandResult(
              String.format(Messages.MESSAGE_ITEMS_LISTED_OVERVIEW, model.getFilteredItemList().size()));
