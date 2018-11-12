@@ -28,6 +28,10 @@ public class WrongCommandSuggestionTest {
         // "exportalll" input is similar to "exportall" command
         assertEquals(wrongCommandSuggestion.getSuggestion("exportalll"),
             String.format(WrongCommandSuggestion.SUGGESTION_HEADER, ExportAllCommand.COMMAND_WORD));
+
+        // "shadule" input is similar to "schedule" command
+        assertEquals(wrongCommandSuggestion.getSuggestion("shadule"),
+            String.format(WrongCommandSuggestion.SUGGESTION_HEADER, ScheduleCommand.COMMAND_WORD));
     }
 
 }
