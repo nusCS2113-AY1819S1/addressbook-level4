@@ -32,7 +32,7 @@ This project portfolio documents my contributions to the BookInventory project.
 
 * *Minor enhancement*: added a stock command that allow admin users to stock books.
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kohjunkiat [code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kohjunkiat[Functional/Test code]]
 
 * *Other contributions*:
 
