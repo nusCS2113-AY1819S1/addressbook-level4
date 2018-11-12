@@ -1076,7 +1076,7 @@ All following sections assume that the user is currently logged into FreeTime.
 
 . Editing your details
 
-.. Test case: `edit p/91234567 e/johndoe@example.com t/CS2101` +
+.. Test case: `edit p/91234567 e/johndoe@example.com g/CS2101` +
    Expected: The details of the user in the `Me` panel is updated to specified details.
 
 . Showing command history
