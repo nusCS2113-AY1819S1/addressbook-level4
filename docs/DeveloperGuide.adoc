@@ -704,7 +704,16 @@ image::CalendarSequenceDiagram.png[width="800"]
 // end::calendar[]
 
 // tag::displayScheduleOnCalendar[]
-=== [Proposed] Display Schedule on Calendar [V2.0]
+=== Schedule Display Calendar Selected Person
+This feature allows the calendar of a person to be displayed upon being selected.
+==== Current Implementation
+This makes use of the calendar feature, which activates the rendering of the calendar upon an event of a person being selected.
+
+Upon the selection of a person, the calendar will overwrite the welcome message view, showing the calendar of the current month.
+
+*It is unable to show the schedules added into the person.*
+
+=== [Proposed] Schedule Display Calendar Selected Person [V2.0]
 
 When a person is selected, the person's schedule should be displayed on the calendar panel.
 
@@ -715,6 +724,54 @@ correct date.
 image::FutureCalendarUI.png[width="380"]
 
 // end::displayScheduleOnCalendar[]
+
+// tag::reminder[]
+=== Reminder Feature
+Add a reminder to notify users of an upcoming meeting.
+
+==== Current Implementation
+
+The reminder mechanism is facilitated by the `ReminderCommand`, which extends `Command`, from the `Logic` component. A `Reminder` object is instantiated and each `Reminder` object consists of `Title`, `Date`, `Time` and `Agenda` objects.
+
+The following diagram illustrates the Reminder class:
+
+image::ReminderClassDiagram.png[width="200"]
+
+Given below is an example usage scenario of how the reminder mechanism behaves at each step.
+
+Step 1. A student launches the application for the first time and types in a valid reminder command into the CommandBox Pane.
+
+Step 2. The command will be parsed into the `AddressBookParser` class.
+
+Step 3. AddressBookParser recognises the command word `reminder` and parses the remaining arguments into `ReminderCommandParser`.
+
+Step 4. `ReminderCommandParser` checks for the validity of the `title`, `date`, `time` and `agenda` parameters.
+
+Step 5. If the parameters are valid, `addReminder()` in the `Model` component updates the `VersionedAddressBook` with the new `Reminder`.
+
+Step 6. This exposes an unmodifiable `ObservableList<Reminder>` that the `ReminderListPane` in the `UI` is bound to, automatically updating itself upon the addition of the new `Reminder`.
+
+The following diagram illustrates how the `ReminderCommand` operation interactions with the `Logic` and `Model` components:
+
+image::ReminderSequenceDiagram.png[width="1000"]
+
+==== Design Considerations
+===== Aspect: Checking for duplications of reminders
+
+* **Alternative 1 (current choice):** `isSameReminder`
+** Pros: Easy to implement and write the test as it checks for all the parameters of a reminder.
+** Cons: This implementation may store too many similiar reminders.
+
+===== Aspect: Too many UI Windows
+
+* **Alternative 1 (current choice):** Implementing a `VBox` to split the `Todo` and `Reminder`
+** Pros: This makes the 2 panes take up only half the size of normal panes, reducing the clutter on the screen. Since there isn't a need for too many `Todo` and `Reminder` to be displayed concurrently, a small pane is useable. Furthermore, the individual panes are also scrollable and resizeable.
+** Cons: This results in a smaller pane for each component, which may cause them to be overlooked.
+
+* **Alternative 2:** A command to switch between the `Todo` and `Reminder` panes
+** Pros: More space is catered towards both panes, allowing for the display of more information.
+** Cons: Concurrent viewing of `Todo` and `Reminder` will not be possible.
+// end::reminder[]
 
 === Logging
 
@@ -991,7 +1048,7 @@ details manually
 (For all use cases below, the *System* is the `JitHub` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Add schedule
+=== Use case: Add and Match schedule
 
 *MSS*
 
@@ -1071,6 +1128,42 @@ Use case ends.
 Use case resumes at step 3.
 // end::exportusecase[]
 
+// tag::useCaseSuggestions[]
+[discrete]
+=== Use case: Get Suggestions
+
+*MSS*
+
+1.  User types a command and presses TAB to get suggestions.
+2.  Jithub shows a list of possible commands.
+3.  User continues typing the command to completion and presses TAB.
+4.  Jithub shows the parameters required for the command.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. There are no commands available to suggest.
++
+Use case resumes at step 1.
+
+* 2b. There is only one command available to suggest.
++
+[none]
+** 2b1. JitHub completes the command input and shows the parameters required.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
+
+//end::useCaseSuggestions[]
+
 [appendix]
 == Non Functional Requirements
 
@@ -1116,8 +1209,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-//TODO: _{ more test cases ... }_
-
 === Deleting a person
 
 . Deleting a person while all persons are listed
@@ -1130,7 +1221,32 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+// _{ more test cases ... }_
+
+// tag::testCaseSuggestions[]
+=== Getting an Wrong Command Suggestion
+
+. Getting a nearest command suggestion after entering the keyed input.
+
+.. Test case: `delet` followed by `ENTER` key +
+   Expected: Result bar would show that the current input is an unknown command. It would then suggest
+    command `delete` in the next line. +
+    Expected: Result bar might show multiple commands to suggest if available.
+.. Other suggestions to try: `schedulee`, `expart`, etc +
+   Expected: Similar to previous.
+
+=== Getting an Input Command Suggestion
+
+. Getting a command suggestion while typing the desired command.
+
+.. Test case: `a` followed by `TAB` key +
+  Expected: Command bar would complete the only command starting with `a` available, which is `add`.
+   It would then show the parameters of `add` command. in the results bar. +
+   Expected: Result bar might show multiple commands if available, and not complete the command when so.
+.. Other suggestions to try: `ex`, `s`, etc +
+  Expected: Similar to previous.
+
+//end::testCaseSuggestions[]
 
 // tag::testimportexport[]
 === Exporting and importing data
