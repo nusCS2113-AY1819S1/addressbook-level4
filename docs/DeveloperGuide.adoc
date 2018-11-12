@@ -531,7 +531,7 @@ image::HighLevelRemarkSequenceDiagrams.png[width="800"]
 === Memory feature
 // tag::memory[]
 ==== Current Implementation
-The memory mechanism is facilitated by `VersionedAddressBook`. It extends `WorkoutBook`.
+The memory mechanism is facilitated by `VersionedWorkoutBook`. It extends `WorkoutBook`.
 It implements following commands: +
 
 * `CurrentCommand()` - Changes the state tag of a workout by index number to current
