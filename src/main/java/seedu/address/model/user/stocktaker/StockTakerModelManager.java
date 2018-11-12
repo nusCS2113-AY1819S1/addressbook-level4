@@ -36,7 +36,7 @@ public class StockTakerModelManager extends ModelManager implements StockTakerMo
                 * transaction.getQuantityTransacted().getValue()));
         transaction.setAmountMoney(defaultAmountTransacted);
         recordTransaction(transaction);
-
+        indicateTransactionListChanged ();
         indicateDrinkAttributesChanged(transaction.getDrinkTransacted());
     }
 
@@ -49,7 +49,7 @@ public class StockTakerModelManager extends ModelManager implements StockTakerMo
                 * transaction.getQuantityTransacted().getValue()));
         transaction.setAmountMoney(defaultAmountTransacted);
         recordTransaction(transaction);
-
+        indicateTransactionListChanged ();
         indicateDrinkAttributesChanged(transaction.getDrinkTransacted());
     }
 
