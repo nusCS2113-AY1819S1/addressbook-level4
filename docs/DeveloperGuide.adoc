@@ -596,7 +596,7 @@ Step 2: User execute 'export my event calendar' command. The export command rece
 
 Step 3: Current user, who are logging in, will be used to receive an event filtered list that he/she registered for.
 
-Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in *data* folder
+Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in *folder that you store EventManager*
 
 ==== Aspect: How to export the event list
 * **Alternative 1 (current implementation):** Using ical4j external library to create method to convert event to RFC5545 format, then stream to FileOutputStream with given filename from user. +
