@@ -20,7 +20,7 @@ By: `T09-4`      Since: `Aug 2018`      Licence: `MIT`
 == Introduction
 
 Savee is a financial planner application for those who *prefer to use a desktop app for managing their finances*. More
-importantly, FP is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
+importantly, Savee is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
 having the benefits of a Graphical User Interface (GUI). To enjoy the *full* benefits of the GUI of this app,
 the best screen resolution to use would be `1920 x 1080 (1080p)` with the app in fullscreen. Other screen resolutions are also
 supported, but the GUI display would be slightly different from the ones shown in the picture.
