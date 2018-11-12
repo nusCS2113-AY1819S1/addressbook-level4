@@ -1358,3 +1358,12 @@ Expected: Similar to previous
 .. Test case: `deleteComment x L/y`, where x or y does not exist. +
 Expected:  Invalid command will be displayed in the result box. No changes will occur.
 // end::commentsMT[]
+
+=== Exporting a file
+. Prerequisites: Must be logged in and have registered for 1 event
+
+.. Test case: `export file` +
+Expected: A iCalendar file called file will be exported to the source folder
+
+.. Test case: `export` +
+Expected: Command Result box will notify that no file name is given and no changes will occur
