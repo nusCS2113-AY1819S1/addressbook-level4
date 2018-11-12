@@ -1,14 +1,18 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.FileUtil.isFileExists;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 //@@author jitwei98
 /**
@@ -26,6 +30,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported %1$s persons.";
     private static final String MESSAGE_FAILURE = "Import failed! Error: %1$s";
     private static final String MESSAGE_INVALID_LIST_SIZE = "Invalid list size.";
+    private static final String MESSAGE_FILE_NOT_FOUND = "File not found!";
 
     private final Path filePath;
 
@@ -39,7 +44,13 @@ public class ImportCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        int initialNumberOfPersons = model.getFilteredPersonList().size();
+        ReadOnlyAddressBook readOnlyAddressBook = model.getAddressBook();
+        ObservableList<Person> personList = readOnlyAddressBook.getPersonList();
+        int initialNumberOfPersons = personList.size();
+
+        if (!isFileExists(filePath)) {
+            throw new CommandException(MESSAGE_FILE_NOT_FOUND);
+        }
 
         // TODO: Write better Exception messages
         try {
@@ -50,9 +61,10 @@ public class ImportCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FAILURE, dce));
         }
 
-        int finalNumberOfPersons = model.getFilteredPersonList().size();
+        int finalNumberOfPersons = personList.size();
         int personsImported = calculateImportedEntries(initialNumberOfPersons, finalNumberOfPersons);
 
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, personsImported));
     }
 

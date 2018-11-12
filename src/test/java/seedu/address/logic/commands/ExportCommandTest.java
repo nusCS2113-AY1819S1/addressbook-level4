@@ -9,9 +9,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Filetype;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -22,6 +26,9 @@ import seedu.address.model.UserPrefs;
  * Contains integration tests (interaction with the Model) and unit tests for ExportCommand.
  */
 public class ExportCommandTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private Model model;
     private Model expectedModel;
@@ -40,6 +47,16 @@ public class ExportCommandTest {
         ExportCommand expectedCommand = new ExportCommand(exportFilePath);
 
         assertCommandSuccess(expectedCommand, model, new CommandHistory(), expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyAddressbook_throwsCommandException() throws Exception {
+        ExportCommand exportCommand = new ExportCommand(exportFilePath);
+        model.resetData(new AddressBook());
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(ExportCommand.MESSAGE_FAILURE_EMPTY_AB);
+        exportCommand.execute(model, new CommandHistory());
     }
 
     @Test
