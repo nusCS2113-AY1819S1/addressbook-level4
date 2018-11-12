@@ -64,6 +64,11 @@ public class CommandTestUtil {
     public static final String VALID_DIST_PHONE_AHLONG = "55555555";
     public static final String VALID_DIST_PHONE_AHSENG = "44444444";
 
+    public static final String VALID_SERIAL_NUMBER_APPLE = "123123";
+    public static final String VALID_SERIAL_NUMBER_BANANA = "11111";
+    public static final String VALID_PRODUCT_INFO_APPLE = "Contains vitamin C";
+
+
     public static final String NAME_DESC_APPLE = " " + PREFIX_NAME + VALID_NAME_APPLE;
     public static final String NAME_DESC_BANANA = " " + PREFIX_NAME + VALID_NAME_BANANA;
     public static final String SN_DESC_AMY = " " + PREFIX_SERIAL_NR + VALID_SN_APPLE;
@@ -84,17 +89,17 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditProductCommand.EditProductDescriptor DESC_AMY;
-    public static final EditProductCommand.EditProductDescriptor DESC_BOB;
+    public static final EditProductCommand.EditProductDescriptor DESC_APPLE;
+    public static final EditProductCommand.EditProductDescriptor DESC_BANANA;
 
     public static final EditDistributorCommand.EditDistributorDescriptor DESC_AHSENG;
     public static final EditDistributorCommand.EditDistributorDescriptor DESC_AHLEE;
 
     static {
-        DESC_AMY = new EditProductDescriptorBuilder().withName(VALID_NAME_APPLE)
+        DESC_APPLE = new EditProductDescriptorBuilder().withName(VALID_NAME_APPLE)
                 .withPhone(VALID_SN_APPLE).withEmail(VALID_DIST_APPLE).withAddress(VALID_INFO_APPLE)
                 .withTags(VALID_TAG_HEALTHY).build();
-        DESC_BOB = new EditProductDescriptorBuilder().withName(VALID_NAME_BANANA)
+        DESC_BANANA = new EditProductDescriptorBuilder().withName(VALID_NAME_BANANA)
                 .withPhone(VALID_SN_BANANA).withEmail(VALID_DIST_BANANA).withAddress(VALID_INFO_BANANA)
                 .withTags(VALID_TAG_HEALTHY, VALID_TAG_SWEET).build();
         DESC_AHSENG = new EditDistributorDescriptorBuilder().withName(VALID_DIST_NAME_AHSENG)

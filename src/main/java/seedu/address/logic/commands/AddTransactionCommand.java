@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
-// TODO: To add transaction items with quantity.
+// TODO: To add transaction items with quantity. [v2.0]
 // import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import java.util.ArrayList;
@@ -36,8 +36,7 @@ public class AddTransactionCommand extends Command {
             + PREFIX_PRODUCT + "Milk "
             + PREFIX_PRODUCT + "Milk";
 
-
-    private static final String MESSAGE_SUCCESS = "Transaction successfully recorded for time ";
+    private static final String MESSAGE_SUCCESS = "Transaction successfully recorded for time %s";
     private final Transaction toAdd;
 
     public AddTransactionCommand(Transaction transaction) {
@@ -47,7 +46,7 @@ public class AddTransactionCommand extends Command {
 
 
     @Override
-    // @@ garagaristahir
+    //@@garagaristahir
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         Map<String, Integer> transactionRecord = toAdd.getTransactionRecord();
         List<String> listWithProductsToAdd = new ArrayList<>(transactionRecord.keySet());
@@ -82,7 +81,7 @@ public class AddTransactionCommand extends Command {
                 }
             }
         }
-        // @@ParasK26
+        //@@ParasK26
         try {
             model.addTransaction(toAdd);
         } catch (InvalidTimeFormatException e) {
@@ -90,13 +89,14 @@ public class AddTransactionCommand extends Command {
         } catch (DuplicateTransactionException e) {
             return new CommandResult(e.getLocalizedMessage() + ". Upon adding this transaction");
         }
-        model.commitProductDatabase();
 
+        model.commitSalesHistory();
+        model.commitProductDatabase();
         if (invalidInventory) {
             return new CommandResult("FYI: The inventory does not seem to be uptodate. You have less"
                     + " products then what you just sold\n" + MESSAGE_SUCCESS + toAdd.getTransactionTime());
         } else {
-            return new CommandResult(MESSAGE_SUCCESS + toAdd.getTransactionTime());
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getTransactionTime()));
         }
     }
 }
