@@ -31,7 +31,7 @@ public class RegisterCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_USERNAME + "John Doe "
+            + PREFIX_USERNAME + "John Goe "
             + PREFIX_PASSWORD + "testpassword "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
