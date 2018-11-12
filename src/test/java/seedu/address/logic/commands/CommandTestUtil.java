@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRIBUTOR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
@@ -56,27 +58,19 @@ public class CommandTestUtil {
     public static final String VALID_DIST_NAME_AHBENG = "Ah Beng";
     public static final String VALID_DIST_NAME_AHHUAT = "Ah Huat";
     public static final String VALID_DIST_NAME_AHLEE = "Ah Lee";
-    public static final String VALID_DIST_NAME_AHLONG = "Ah Long";
     public static final String VALID_DIST_NAME_AHSENG = "Ah Seng";
     public static final String VALID_DIST_PHONE_AHBENG = "11111111";
     public static final String VALID_DIST_PHONE_AHHUAT = "22222222";
     public static final String VALID_DIST_PHONE_AHLEE = "33333333";
-    public static final String VALID_DIST_PHONE_AHLONG = "55555555";
     public static final String VALID_DIST_PHONE_AHSENG = "44444444";
 
     public static final String VALID_SERIAL_NUMBER_APPLE = "123123";
-    public static final String VALID_SERIAL_NUMBER_BANANA = "11111";
     public static final String VALID_PRODUCT_INFO_APPLE = "Contains vitamin C";
 
-
-    public static final String NAME_DESC_APPLE = " " + PREFIX_NAME + VALID_NAME_APPLE;
-    public static final String NAME_DESC_BANANA = " " + PREFIX_NAME + VALID_NAME_BANANA;
-    public static final String SN_DESC_AMY = " " + PREFIX_SERIAL_NR + VALID_SN_APPLE;
-    public static final String SN_DESC_BOB = " " + PREFIX_SERIAL_NR + VALID_SN_BANANA;
-    public static final String DIST_DESC_AMY = " " + PREFIX_DISTRIBUTOR + VALID_DIST_APPLE;
-    public static final String DIST_DESC_BOB = " " + PREFIX_DISTRIBUTOR + VALID_DIST_BANANA;
-    public static final String INFO_DESC_AMY = " " + PREFIX_PRODUCT_INFO + VALID_INFO_APPLE;
-    public static final String INFO_DESC_BOB = " " + PREFIX_PRODUCT_INFO + VALID_INFO_BANANA;
+    public static final String DIST_NAME_DESC_AHBENG = " " + PREFIX_DIST_NAME + VALID_DIST_NAME_AHBENG;
+    public static final String DIST_NAME_DESC_AHHUAT = " " + PREFIX_DIST_NAME + VALID_DIST_NAME_AHHUAT;
+    public static final String DIST_PHONE_DESC_AHBENG = " " + PREFIX_DIST_PHONE + VALID_DIST_PHONE_AHBENG;
+    public static final String DIST_PHONE_DESC_AHHUAT = " " + PREFIX_DIST_PHONE + VALID_DIST_PHONE_AHHUAT;
     public static final String TAG_DESC_HEALTHY = " " + PREFIX_TAG + VALID_TAG_HEALTHY;
     public static final String TAG_DESC_SWEET = " " + PREFIX_TAG + VALID_TAG_SWEET;
 
@@ -84,7 +78,11 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_SERIAL_NR + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_DISTRIBUTOR + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_PRODUCT_INFO; //null string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "-p0m*"; // '*' not allowed in tags
+
+    public static final String INVALID_DIST_NAME_DESC = " " + PREFIX_DIST_NAME + "James&";
+    // '&' not allowed in disributor names
+    public static final String INVALID_DIST_PHONE_DESC = " " + PREFIX_DIST_PHONE + "911a"; // 'a' not allowed in phones
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

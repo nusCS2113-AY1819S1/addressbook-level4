@@ -33,7 +33,6 @@ public class EditDistributorCommandParser implements Parser<EditDistributorComma
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DIST_NAME, PREFIX_DIST_PHONE, PREFIX_TAG);
 
-
         Index index;
 
         try {
@@ -52,7 +51,12 @@ public class EditDistributorCommandParser implements Parser<EditDistributorComma
             editDistributorDescriptor.setDistPhone(ParserUtil.parseDistPhone(argMultimap.getValue(PREFIX_DIST_PHONE)
                     .get()));
         }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editDistributorDescriptor::setTags);
+
+        if (!editDistributorDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditDistributorCommand.MESSAGE_NOT_EDITED);
+        }
 
         return new EditDistributorCommand(index, editDistributorDescriptor);
     }
