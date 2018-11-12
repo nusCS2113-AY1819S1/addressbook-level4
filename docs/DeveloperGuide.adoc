@@ -251,11 +251,10 @@ This section describes some noteworthy details on how certain features are imple
 === Select Deadline feature
 ==== Current Implementation
 
-The `select` mechanism is facilitated by `VersionedTaskBook`. The `edit` command takes in a date either in the `String` dd/mm/yyyy format or prefixes with the corresponding values. Input by the user is checked to ensure it conforms to the expected format as it goes through the `SelectDeadlineCommandParser.java` and `TaskBookParser.java`. A new `SelectDeadlineCommand` object is returned and the `execute` method will run. The date specified will be set as the deadline through `model.selectDeadline` before a success message is generated to indicate that the `select` command has been successfully executed and the deadline has been selected.
+The `select` mechanism is facilitated by `VersionedTaskBook`. The `select` command takes in a date either in the `String` dd/mm/yyyy format or prefixes with the corresponding values. Input format validation is done as the input goes through the `SelectDeadlineCommandParser` and `TaskBookParser`. A new `SelectDeadlineCommand` object is returned and the `execute` method will run. The date specified will be set as the deadline through `model.selectDeadline` before a success message is generated to indicate that the `select` command has been successfully executed and the deadline has been selected.
 Additionally, it implements the following operations:
 
 * `VersionedTaskBook#selectDeadline()` - Selects date to be set as deadline
-* `Model#updateFilteredTaskList()` — Updates the current list of Tasks that is being displayed to the user to show only tasks with the same deadline
 * `indicateTaskBookChanged()` — Event raised to indicate that the TaskBook in the model has changed.
 
 These operations are exposed in the `Model` interface as `Model#selectDeadline()`, `Model#updateFilteredTaskList()` and `Model#commitTaskBook()` respectively.
@@ -266,7 +265,7 @@ Step 1. The user launches the application. If it is the first time he/she is lau
 
 Step 2. The user executes `select 1/1/2018` or `select dd/1 mm/1 yyyy/2018` to select the deadline.
 
-Step 3. The `select` command will call `Model#selectDeadline()` and select the deadline as 1/1/2018. `Model#updateFilteredTaskList()` will be called to update the list that is being shown to the user with only show tasks with 1/1/2018 as the deadline.
+Step 3. The `select` command will call `Model#selectDeadline()` and select the deadline as 1/1/2018. `Model#updateFilteredTaskList()` will be called within `Model#selectDeadline()` to update the list that is being shown to the user with only show tasks with 1/1/2018 as the deadline.
 
 Step 4. Lastly, `Model#commitTaskBook()` will be called to update the `TaskBookStateList` and `currentStatePointer`.
 
@@ -299,7 +298,7 @@ image::SelectDeadline.PNG[width=”800”]
 === Edit Task feature
 ==== Current Implementation
 
-The `edit` mechanism is facilitated by `VersionedTaskBook`. The `edit` command takes in the index of the task to be edited, followed by prefixes and its corresponding new values which will replace existing values in the task to be edited. Input by the user is checked to ensure it conforms to the expected format as it goes through `EditTaskCommandParser.java` and `TaskBookParser.java`. A `EditTaskCommand` object is returned and the `execute` method will run. The validity of the index given by the user is checked and the task to be edited is retrieved from `model.getFilteredTaskList()`. A new task `editedTask` is created with the values to be edited and the task to be edit is updated with the details of the `editedTask’ through `model.updateTask` and `model.updateFilteredTaskList` before finally generating a edit task success message to indicate that the command has been successfully executed.
+The `edit` mechanism is facilitated by `VersionedTaskBook`. The `edit` command takes in the index of the task to be edited, followed by prefixes and its corresponding new values which will replace existing values in the task specified to be edited. Input format validation is done as the user inupt goes through `EditTaskCommandParser` and `TaskBookParser`. A new `EditTaskCommand` object is returned and the `execute` method will run. The validity of the index given by the user is checked and the task to be edited is retrieved from `model.getFilteredTaskList()`. A new task `editedTask` is created containing the new values and the task to be edited is updated with the details of the `editedTask’ through `model.updateTask` and `model.updateFilteredTaskList`. Finally, an updated `filteredTaskList` is shown and an edit task success message is generated to indicate that the command has been successfully executed.
 Additionally, it implements the following operations:
 
 * `Model#getFilteredTaskList()` — Obtains the current list of Tasks that is being displayed to the user
@@ -849,6 +848,50 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
+// tag::selectDeadlineTest[]
+=== Selecting a date as a deadline
+. Select a deadline
+
+.. Test case: `select 1` +
+   Expected: No deadline selected. Message of invalid command format error is shown.
+.. Test case: `select dd/1` +
+   Expected: No deadline selected. Message of invalid command format error is shown.
+.. Prerequisite: Select command has not been called before. +
+   Test case: `select 1/1` +
+   Expected: Deadline of 1/1/2018 is selected. Message of select success is shown.
+.. Prerequisite: Select command has not been called before. +
+   Test case: `select dd/1 mm/1` +
+   Expected: Deadline of 1/1/2018 is selected. Message of select success is shown.
+.. Prerequisite: Latest select command selected a deadline with 2020 as year (e.g.1/1/2020) +
+   Test case: 'select 1/1` +
+   Expected: Deadline of 1/1/2020 is selected. Message of select success is shown.
+.. Prerequisite: Latest select command selected a deadline with 2020 as year (e.g.1/1/2020) +
+   Test case: 'select dd/1 mm/1` +
+   Expected: Deadline of 1/1/2020 is selected. Message of select success is shown.
+.. Test case: `select 1/1/2018` +
+   Expected: Deadline of 1/1/2018 is selected. Message of select success is shown.
+.. Test case: `select dd/1 mm/1 yyyy/2018` +
+   Expected: Deadline of 1/1/2018 is selected. Message of select success is shown.
+.. Test case: `select 29/2/2018` +
+   Expected: No deadline selected. Message of invalid date error is shown.
+.. Test case: `select 1/13/2018` +
+   Expected: No deadline selected. Message of invalid date error is shown.
+.. Test case: `select 1/1/201` +
+   Expected: No deadline selected. Message of invalid date error is shown.
+.. Test case: `select a29/2/2018` +
+   Expected: No deadline selected. Message of deadline contains illegal characters error is shown.
+.. Test case: `select 01/01/02018` +
+   Expected: Deadline of 1/1/2018 is selected. Message of select success is shown.
+
+. Updated filteredTaskList shown after selecting deadline
+
+.. Prerequisites: Multiple tasks in the list with different deadlines. At least one task has the deadline of 1/1/2018.
+.. Test case: `select 1/1/2018` +
+   Expected: Deadline of 1/1/2018 is selected. Filtered task list only shows tasks with deadline of 1/1/2018.
+.. Test case: `select 29/2/2018` +
+   Expected: No deadline selected. Filtered task list will not be updated and will show what is was showing previously.
+// end::selectDeadlineTest[]
+
 === Deleting a task
 
 . Deleting a task while all tasks are listed
@@ -862,6 +905,45 @@ _{ more test cases ... }_
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+// tag::editTaskTest[]
+=== Editing a task
+
+. Editing a task while all tasks are listed
+
+.. Prerequisites: List all tasks using `list` command. Only 3 tasks are in the list.
+.. Test case: `edit` +
+   Expected: Task is not edited. Message of invalid command format is shown.
+.. Test case: `edit 1` +
+   Expected: Task is not edited. Message of invalid command format is shown.
+.. Test case: `edit t/Do CS2113 tutorial` +
+   Expected: Task is not edited. Message of invalid command format is shown.
+.. Test case: `edit i/` +
+   Expected: Task is not edited. Message of empty index is shown.
+.. Test case: `edit i/1 t/` +
+   Expected: Task is not edited. Message of empty title is shown.
+.. Test case: `edit i/1 d/` +
+   Expected: Task is not edited. Message of empty description is shown.
+.. Test case: `edit i/1 c/` +
+   Expected: Task is not edited. Message of empty module code is shown.
+.. Test case: `edit i/1 p/` +
+   Expected: Task is not edited. Message of empty priority level is shown.
+.. Test case: `edit i/1 h/` +
+   Expected: Task is not edited. Message of empty hours is shown.
+.. Test case: `edit i/0 t/Do CS2113 tutorial` +
+   Expected: Task is not edited. Message of invalid index (index must be a non-zero unsigned integer) is shown.
+.. Test case: `edit i/4 t/Do CS2113 tutorial` +
+   Expected: Task is not edited. Message of invalid task displayed index (the task index provided is invalid) is shown.
+.. Prerequisites: Tasks in list do not have the exact same fields. +
+   Test case: `edit i/1 t/Do CS2113 tutorial` +
+   Expected: Task at index 1 is edited and the original title is replaced by "Do CS2113 tutorial". Message of edit success is shown.
+.. Prerequisites: Task at i/1 is exactly the same another existing task, existingTask, except for the title. The title of existingTask is "Do CS2113 tutorial". +
+   Test case: `edit i/1 t/Do CS2113 tutorial` +
+   Expected: Task is not edited. Message of duplicate task error is shown.
+.. Prerequisites: Task at i/1 has a title of "Do CS2113 tutorial". +
+   Test case: `edit i/1 t/Do CS2113 tutorial` +
+   Expected: Task is not edited. Message of task not edited error is shown.
+// end::editTaskTest[]
 
 === Saving data
 
