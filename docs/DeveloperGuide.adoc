@@ -406,11 +406,24 @@ Step 6. Close the OpenCSV writer.
 
 // tag::todo[]
 === Todo Feature
-Add a to-do task.
+This feature allows users to add a to-do task.
 
 ==== Current Implementation
-
 The todo mechanism is facilitated by the `TodoComand` from the `Logic` component. A `Todo` object is instantiated to add a to-do task and each `Todo` object consists of  a `Title` and `Content` object.
+
+Given below is an example usage scenario and how the todo mechanism behaves at each step.
+
+Step 1. The user calls the todo command with its relevant parameters. e.g `todo tt/Buy tomato c/Buy tomato at NTUC otw back to school`.
+
+Step 2. The LogicManager calls parseCommand with the user input.
+
+Step 3. The AddressBookParser is called and it returns a TodoCommand object to the LogicManager.
+
+Step 4. The LogicManager will call execute() on the TodoCommand object. If the to-do task of the same title and content is found, it would return a string of message `MESSAGE_DUPLICATE_TODO`.
+
+Step 5. The Logic component then interacts with the Model component which calls `addTodo(todo)` to add the to-do task
+
+Step 6. The command result would then return the message `MESSAGE_SUCCESS` in a string and the to-do task added will be displayed on the to-do list panel.
 
 The following diagram illustrates the Todo class:
 
@@ -422,13 +435,48 @@ image::TodoSequenceDiagram.png[width="1000"]
 
 ==== Design Considerations
 ===== Aspect: Checking for duplications of to-do tasks
-
 * **Alternative 1 (current choice):** `isSameTodo`
 ** Pros: Easy to implement and write the test as it checks for both the title and the content of a to-do task
 ** Cons: This implementation may store too many similiar to-do tasks.
 // end::todo[]
 
-//tag::suggestion[]
+// tag::finishTodo[]
+=== FinishTodo Feature
+This feature allows users to complete the to-do task he/she has created.
+
+==== Current Implementation
+The finishTodo mechanism is facilitated by the `FinishTodoCommand` from the `Logic` component. Upon pressing executing the `finishTodo` command, the to-do task chosen by users will be removed from the `addressbook.xml` in the data folder.
+
+Given below is an example usage scenario and how the finishTodo mechanism behaves at each step.
+
+Step 1. The user calls the finishTodo command with the to-do task's displayed index. e.g `finishTodo 1`.
+
+Step 2. The LogicManager calls parseCommand with the user input.
+
+Step 3. The AddressBookParser is called and it returns a FinishTodoCommand object to the LogicManager.
+
+Step 4. The LogicManager will call execute() on the FinishTodoCommand object. If no to-do of the corresponding index is found, it would return a string of message `MESSAGE_INVALID_TODO_DISPLAYED_INDEX`.
+
+Step 5. The Logic component then interacts with the AddressBook component to execute `removeTodo(target)` to remove the to-do task.
+
+Step 6. The command result would then return the message `MESSAGE_FINISH_TODO_SUCCESS` in a string.
+
+The following diagram illustrates how the FinishTodo operation works:
+
+image::FinishTodoSequenceDiagram.png[width="1000"]
+
+==== Design Considerations
+===== Aspect: How finishTodo feature handles the to-do task
+* **Alternative 1 (current choice):** `removeTodo`
+** Pros: Easy to implement and write the test as it simply removes the to-do entry from the storage.
+** Cons: Users cannot view the previously completed to-do tasks.
+
+* **Alternative 2:** `markTodoAsCompleted`
+** Pros: Better user experience as users simply mark it as completed and the completed to-do tasks will thus be displayed on another panel.
+** Cons: More tedious to write the tests.
+// end::finishTodo[]
+
+// tag::suggestion[]
 === Suggestions Feature
 The suggestions feature gives users helpful suggestions on what command to type, and corrections for commands when incorrect
 commands are being entered.
@@ -536,7 +584,45 @@ to keep track of events and allow for searching of common available time slots l
 
 Given below is an example of a usage scenario and how the schedule mechanism behaves at each step.
 
-/ This part is to be done later /
+Step 1. The user calls the schedule command with `schedule index date startTime endTime eventName`.
+
+Step 2. The LogicManager calls parseCommand with the user input.
+
+Step 3. The AddressBookParser is called and it returns a ScheduleCommand object to LogicManager.
+
+Step 4. The LogicManager calls execute() on the ScheduleCommand object.
+
+Step 5. The ScheduleCommand object creates a person object for model.
+
+Step 6. The Logic component then interacts with the Model component by calling UpdatePerson("target, editedPersonWithSchedule")
+
+Step 7. The Model component updates the address book.
+
+.Schedule sequence diagram
+image::ScheduleSequenceDiagram.png[width="1000"]
+
+==== Match schedule
+
+Given below is the algorithm behind the matchSchedule command.
+
+Step 1. The user calls the matchSchedule command with `matchSchedule date startTime endTime index...`
+
+Step 2. The LogicManager calls parseCommand with the user input.
+
+Step 3. The AddressBookParser is called and it returns a MatchScheduleCommand object to LogicManager.
+
+Step 4. The LogicManager calls execute on the MatchScheduleCommand object.
+
+Step 5. The MatchScheduleCommand object finds common time slots in the date and time range given by startTime and endTime
+by generating an array, and updates the UI part of address book.
+
+    // Generates an int array (startEndTimeBlock) of size 1440 which stores whether each minute of the day is busy
+    for (int i = 0; i < this.startTimeList.size(); i++) {
+                for (int j = this.startTimeList.get(i).timeToMinutesInDay();
+                     j <= this.endTimeList.get(i).timeToMinutesInDay(); j++) {
+                    this.startEndTimeBlock[j] = 1;
+           }
+    }
 
 ==== Design considerations
 Aspect: How schedule is stored
@@ -565,7 +651,30 @@ Aspect: How match schedule executes
 //end::schedule[]
 
 // tag::calendar[]
-=== [Proposed] Calendar UI [V2.0]
+=== Calendar Feature
+This feature allows users to complete the to-do task he/she has created.
+
+==== Current Implementation
+The calendar feature resides in the `UI` component to render the view of a monthly calendar at the current locale time.
+The calendar feature itself is at v0.1 since it only displays the dates of the month.
+
+The following diagram illustrates how the Calendar view is rendered:
+
+image::CalendarSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+===== Aspect: Implementation of the calendar
+* **Alternative 1 (current choice):** `JavaFx Scence`
+** Pros: Gives a responsible layout on the calendar panel and allows the user to view the calendar with different screen size.
+** Cons: Most of the code is hardcoded and thus less maintainable.
+
+* **Alternative 2:** `CalendarFx`
+** Pros: Cleaner code since it will be imported from external libraries and better UI. It could potentially speed up the development process.
+** Cons: CalendarFx so far has version 8, 10 and 11. It does not support Travis which complies most of the packages using jdk9, which potentially hinder the debugging process done by Travis.
+// end::calendar[]
+
+// tag::displayScheduleOnCalendar[]
+=== [Proposed] Display Schedule on Calendar [V2.0]
 
 When a person is selected, the person's schedule should be displayed on the calendar panel.
 
@@ -573,9 +682,9 @@ The string of common time slots printed on the resultCommandWindow should be dis
 correct date.
 
 .Calendar UI Component
-image::FutureCalendarUI.png[width="800"]
+image::FutureCalendarUI.png[width="380"]
 
-// end::calendar[]
+// end::displayScheduleOnCalendar[]
 
 // tag::reminder[]
 === Reminder Feature

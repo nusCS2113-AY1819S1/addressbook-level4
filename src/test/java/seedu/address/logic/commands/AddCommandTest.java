@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.CommandHistory;
@@ -23,10 +27,6 @@ import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
 import seedu.address.testutil.PersonBuilder;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class AddCommandTest {
 

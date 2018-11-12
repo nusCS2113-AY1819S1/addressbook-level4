@@ -34,7 +34,5 @@ public class DateTest {
 
         // valid date
         assertTrue(Date.isValidDate("08021996")); // DDMMYYYYformat
-        assertTrue(Date.isValidDate("08 02 1996")); // space after each field
-        assertTrue(Date.isValidDate("-")); // one character
     }
 }

@@ -327,6 +327,30 @@ Examples:
 * `todo tt/Write tests c/Need to write test for this command`
 * `todo tt/Buy grocery c/Buy tomato and potato on the way back home`
 
+The following diagram illustrates how the `todo` is being used on the JitHub CLI-GUI app:
+
+image::TodoUsage1.png[width="1000"]
+
+image::TodoUsage2.png[width="200"]
+
+=== Finish To-do task: `finishTodo`
+
+Complete a to-do task, and the to-do list panel will re-render the remaining unfinished to-do tasks. +
+Format: `finishTodo INDEX`
+
+Examples:
+
+* `finishTodo 1`
+
+[NOTE]
+====
+1.  The completed to-do task will be removed from your JitHub.
+====
+
+The following diagram illustrates how the `finishTodo` is being used on the JitHub CLI-GUI app:
+
+image::FinishTodoUsage.png[width="1000"]
+
 // tag::reminder[]
 === Add Reminder: `reminder`
 
@@ -388,6 +412,14 @@ Examples:
 and would suggest to you the command `select` instead.
 // end::suggestions[]
 
+=== Monthly Calendar View
+
+Once you start running the application and select a person from the person list panel, the calendar of the current month will be displayed on the calendar panel.
+
+The following diagram shows how the calendar looks like for November 2018.
+
+image::CalendarView.png[width="500"]
+
 // tag::calendarViewSchedule[]
 === Calendar to view schedule [Coming in V2.0]
 
@@ -439,6 +471,7 @@ e.g.`select 2`
 * *Export* : `export INDEX FILETYPE`
 * *Mail* : `mail [i/INDEX]` (to be added)
 * *Todo* : `todo tt/TITLE c/CONTENT`
+* *FinishTodo* : `finishTodo INDEX`
 * *Schedule* : `schedule INDEX-OF-PERSON d/DATE(DDMMYYYY) st/START-TIME et/END_TIME en/EVENT-NAME`
 * *Clear Schedule* : `clearSchedule IndexOfPerson`
 * *Match Schedule* : `matchSchedule d/SELECTED-DATE st/START-TIME et/END-TIME i/INDEX-OF-PERSON...[INDEX]`
