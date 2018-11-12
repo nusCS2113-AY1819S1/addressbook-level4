@@ -61,7 +61,7 @@ public class CommandSyntax {
         case CheckCommand.COMMAND_WORD:
             return CheckCommand.MESSAGE_USAGE;
         case ClearCommand.COMMAND_WORD:
-            return "";
+            return ClearCommand.MESSAGE_USAGE;
         case DeleteCommand.COMMAND_WORD:
             return DeleteCommand.MESSAGE_USAGE;
         case DeleteRequestCommand.COMMAND_WORD:
@@ -69,17 +69,17 @@ public class CommandSyntax {
         case EditCommand.COMMAND_WORD:
             return EditCommand.MESSAGE_USAGE;
         case ExitCommand.COMMAND_WORD:
-            return "";
+            return ExitCommand.MESSAGE_USAGE;
         case FindCommand.COMMAND_WORD:
             return FindCommand.MESSAGE_USAGE;
         case HelpCommand.COMMAND_WORD:
-            return "";
+            return HelpCommand.MESSAGE_USAGE;
         case HistoryCommand.COMMAND_WORD:
-            return "";
+            return HistoryCommand.MESSAGE_USAGE;
         case ListCommand.COMMAND_WORD:
-            return "";
+            return ListCommand.MESSAGE_USAGE;
         case RedoCommand.COMMAND_WORD:
-            return "";
+            return RedoCommand.MESSAGE_USAGE;
         case RequestCommand.COMMAND_WORD:
             return RequestCommand.MESSAGE_USAGE;
         case SelectCommand.COMMAND_WORD:
@@ -89,13 +89,13 @@ public class CommandSyntax {
         case StockCommand.COMMAND_WORD:
             return StockCommand.MESSAGE_USAGE;
         case ToggleRequestCommand.COMMAND_WORD:
-            return "";
+            return ToggleRequestCommand.MESSAGE_USAGE;
         case UndoCommand.COMMAND_WORD:
-            return "";
+            return UndoCommand.MESSAGE_USAGE;
         case ViewStatisticCommand.COMMAND_WORD:
-            return "";
+            return ViewStatisticCommand.MESSAGE_USAGE;
         default:
-            return "";
+            return "ToolTip Error, Contact Us for this error!";
         }
     }
 }
