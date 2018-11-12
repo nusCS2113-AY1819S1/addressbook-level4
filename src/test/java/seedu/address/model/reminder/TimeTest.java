@@ -34,6 +34,5 @@ public class TimeTest {
 
         // valid content
         assertTrue(Time.isValidTime("2359"));
-        assertTrue(Time.isValidTime("-")); // one character
     }
 }

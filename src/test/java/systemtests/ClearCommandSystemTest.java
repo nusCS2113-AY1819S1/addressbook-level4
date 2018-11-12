@@ -55,7 +55,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("ClEaR", MESSAGE_UNKNOWN_COMMAND
-                + "\n" + WrongCommandSuggestion.NO_SUGGESTION);
+                + "\n" + String.format(WrongCommandSuggestion.SUGGESTION_HEADER, ClearCommand.COMMAND_WORD));
     }
 
     /**

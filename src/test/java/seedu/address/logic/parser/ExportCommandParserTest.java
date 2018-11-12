@@ -25,16 +25,10 @@ public class ExportCommandParserTest {
     }
 
     @Test
-    public void parse_missingFilename_failure() {
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
-    }
-
-    @Test
     public void parse_validArgs_success() {
         Path filePath;
         ExportCommand expectedCommand;
 
-        // parse csv filetype
         filePath = Paths.get("data", "testExportFile.xml");
         expectedCommand = new ExportCommand(filePath);
 
@@ -46,15 +40,12 @@ public class ExportCommandParserTest {
     }
 
     @Test
-    public void parse_invalidIndex_throwsParseException() {
-        assertParseFailure(parser, "a csv", MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "0 csv", MESSAGE_INVALID_FORMAT);
-    }
+    public void parse_invalidFilename_throwsParseException() {
+        // wrong filetype
+        assertParseFailure(parser, "testExportFile.pdf", MESSAGE_INVALID_FORMAT);
 
-    @Test
-    public void parse_invalidFiletype_throwsParseException() {
-        assertParseFailure(parser, "1 CSV", MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "1 aaaaa", MESSAGE_INVALID_FORMAT);
+        // no extension
+        assertParseFailure(parser, "testExportFile", MESSAGE_INVALID_FORMAT);
     }
 
 }

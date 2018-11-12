@@ -38,8 +38,8 @@ public class ReminderCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
     public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists!";
-    public static final String MESSAGE_SAME_TIME
-            = "A reminder has already been scheduled for a meeting at this timing!";
+    public static final String MESSAGE_SAME_TIME =
+            "A reminder has already been scheduled for a meeting at this timing!";
 
     private final Reminder reminder;
 

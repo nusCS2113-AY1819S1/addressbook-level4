@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.CommandHistory;
@@ -27,6 +23,10 @@ import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
 import seedu.address.testutil.PersonBuilder;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class AddCommandTest {
 
@@ -170,7 +170,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported) {
+        public boolean addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -230,7 +230,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void UpdateFilteredReminderList(Predicate<Reminder> predicate) {
+        public void updateFilteredReminderList(Predicate<Reminder> predicate) {
             throw new AssertionError("This method should not be called");
         }
     }

@@ -69,14 +69,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code schedules} into a {@code Set<Schedules>} and set it to the {@code Person} that we are building.
-     */
-    //    public PersonBuilder withSchedules(String ... tags) {
-    //        this.schedules = SampleDataUtil.getSchedulesSet(Schedule);
-    //        return this;
-    //    }
-
-    /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PersonBuilder withAddress(String address) {

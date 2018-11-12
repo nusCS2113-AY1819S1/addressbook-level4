@@ -158,6 +158,11 @@ Selects the 2nd person in the address book.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
+Upon selecting a person, the calendar of the current month will be displayed, instead of the
+welcome message.
+For additional calendar features, please view `calendar to view schedule`.
+//todo link the link to calendar view schedule below
+
 === Listing entered commands : `history` / `hs`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -276,23 +281,23 @@ Exports the 2nd person in the address book as a csv file.
 Exports the 1st person starting from the 1st person in the results of the `find` command as a csv file.
 
 // tag::schedule[]
-=== Add personal schedule : `schedule`
+=== Add personal schedule : `schedule` / `sc`
 This function enables you to add the scheduled events of a person into the selected person's card.
 
 
 Format:
 
-`schedule IndexOfPerson d/DDMMYYYY st/START-TIME et/END_TIME en/EVENT-NAME`
+`schedule INDEX-OF-PERSON d/DATE(DDMMYYYY) st/START-TIME et/END_TIME en/EVENT-NAME`
 
 Examples:
 
 * `schedule 1 d/09092018 st/1200 et/1400 en/CS1231 Exam`
 * `schedule 2 d/08072018 st/1000 et/1900 en/CS2040C Practical Exam`
 
-*Currently, the date validation regex allows for 31 days every month. This issue will be fixed
-in v1.4*
+*Currently, the adding of scheduled events allows for events of the same name to be added, at the same time slot.
+This issue will be fixed in V2.0.*
 
-=== Clear personal weekly schedule : `clearSchedule`
+=== Clear personal weekly schedule : `clearSchedule` / `cs`
 
 Format:
 
@@ -302,14 +307,14 @@ Examples:
 
 * `clearSchedule 1`
 
-=== List Common Schedule : `commonschedule` [coming in v1.4]
+=== List Common Schedule : `matchSchedule` / `ms`
 
 Shows a list of common meeting time for a group of contacts and the user in that given that given period of time. +
-Format: `commonschedule i/IndexOfPerson...[INDEX] sd/START-DATE-DDMMYYYY ed/END-DATE-DDMMYYYY t/AVAIL-HOURS-REQUIRED`
+Format: `matchSchedule d/SELECTED-DATE st/START-TIME et/END-TIME i/INDEX-OF-PERSON...[INDEX]`
 
 Examples:
 
-* `commonschedule i/1 i/2 i/3 sd/08092018 ed/01102018 t/1.5`
+* `matchSchedule d/01012018 st/0800 et/1800 i/1 i/2 i/3`
 // end::schedule[]
 
 === Add To-do task: `todo`
@@ -355,7 +360,8 @@ pressing `TAB` will auto-complete the command for you without the need to type i
 Examples:
 
 * While typing `his` to get `history` command, press `TAB`. The `history` command will automatically be filled in for
-you as it is the only suggestion available.
+you as it is the only suggestion available. The command parameters would then be shown as a prompt to help you with your
+input.
 * While typing `e`, press `TAB`. The system will suggest to you all possible commands that start with `e`, which would
 be `exportall`, `exit`, and `edit`.
 
@@ -368,6 +374,20 @@ Examples:
 
 * If you wanted to type `select` but you typed `salect` instead, the system will tell you that it is an invalid command,
 and would suggest to you the command `select` instead.
+// end::suggestions[]
+
+// tag::calendarViewSchedule[]
+=== Calendar to view schedule [Coming in V2.0]
+
+When selecting a person, the scheduled events are to be displayed on the calendar panel.
+Command type: `select INDEX`
+
+When matching schedules, the common time slots found are to be displayed on the calendar panel.
+Command type: `matchSchedule d/SELECTED-DATE st/START-TIME et/END-TIME i/INDEX-OF-PERSON...[INDEX]`
+// end::calendarViewSchedule[]
+
+// tag::dataencryption[]
+=== Encryption [Coming in V2.0]
 
 When exporting contacts for the purpose of information transfer to another computer, encryption can be enabled before
 the export command to prevent data misuse.
@@ -407,8 +427,9 @@ e.g.`select 2`
 * *Export* : `export INDEX FILETYPE`
 * *Mail* : `mail [i/INDEX]` (to be added)
 * *Todo* : `todo tt/TITLE c/CONTENT`
-* *List Schedule* : `commonschedule p/PERSON…[PERSON] sd/START-DATE-DDMMYYYY` * *Mail* : `mail [i/INDEX]` +
-(to be added)
-* *Add Schedule* : `addschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME` * *Mail* : `mail [i/INDEX]` +
-(to be added)
+* *Schedule* : `schedule INDEX-OF-PERSON d/DATE(DDMMYYYY) st/START-TIME et/END_TIME en/EVENT-NAME`
+* *Clear Schedule* : `clearSchedule IndexOfPerson`
+* *Match Schedule* : `matchSchedule d/SELECTED-DATE st/START-TIME et/END-TIME i/INDEX-OF-PERSON...[INDEX]`
+* *Mail* : `mail [i/INDEX]`
+
 

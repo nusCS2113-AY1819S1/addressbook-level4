@@ -1,7 +1,24 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.AGENDA_DESC_REMINDER1;
+import static seedu.address.logic.commands.CommandTestUtil.AGENDA_DESC_REMINDER2;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_REMINDER1;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_REMINDER2;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AGENDA_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TITLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_REMINDER1;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_REMINDER2;
+import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_REMINDER1;
+import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_REMINDER2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_AGENDA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER1_TITLE;
+
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalReminders.REMINDER1;
@@ -9,14 +26,11 @@ import static seedu.address.testutil.TypicalReminders.REMINDER1;
 import org.junit.Test;
 
 import seedu.address.logic.commands.ReminderCommand;
-import seedu.address.model.todo.Title;
-//import seedu.address.model.person.Date;
 import seedu.address.model.person.Time;
-//import seedu.address.model.reminder.Title;
 import seedu.address.model.reminder.Date;
-//import seedu.address.model.reminder.Time;
 import seedu.address.model.reminder.Agenda;
 import seedu.address.model.reminder.Reminder;
+import seedu.address.model.todo.Title;
 import seedu.address.testutil.ReminderBuilder;
 
 //@@author junweiljw
@@ -28,7 +42,7 @@ public class ReminderCommandParserTest {
         Reminder expectedReminder = new ReminderBuilder(REMINDER1).withTitle(VALID_REMINDER1_TITLE).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TIME_DESC_REMINDER1 + DATE_DESC_REMINDER1
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TITLE_DESC_REMINDER1 + DATE_DESC_REMINDER1
                 + TIME_DESC_REMINDER1 + AGENDA_DESC_REMINDER1, new ReminderCommand(expectedReminder));
 
         // multiple titles - last title accepted

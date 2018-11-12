@@ -171,7 +171,7 @@ public class TodoCommandTest {
         }
 
         @Override
-        public void addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported) {
+        public boolean addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -231,7 +231,7 @@ public class TodoCommandTest {
         }
 
         @Override
-        public void UpdateFilteredReminderList(Predicate<Reminder> predicate) {
+        public void updateFilteredReminderList(Predicate<Reminder> predicate) {
             throw new AssertionError("This method should not be called");
         }
     }

@@ -131,8 +131,9 @@ public class AddressBookParserTest {
             parser.parseCommand("histories");
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
-            assertEquals(MESSAGE_UNKNOWN_COMMAND + System.lineSeparator()
-                    + WrongCommandSuggestion.NO_SUGGESTION, pe.getMessage());
+            assertEquals(MESSAGE_UNKNOWN_COMMAND + "\n"
+                    + WrongCommandSuggestion.NO_SUGGESTION,
+                pe.getMessage());
         }
     }
 
@@ -154,11 +155,17 @@ public class AddressBookParserTest {
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
     }
 
-    //    @Test
-    //    public void parseCommand_schedule() throws Exception {
-    //        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD) instanceof ScheduleCommand);
-    //        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_ALIAS) instanceof ScheduleCommand);
-    //    }
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
 
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {

@@ -29,13 +29,11 @@ public class AgendaTest {
         // invalid agenda
         assertFalse(Agenda.isValidAgenda("")); // empty string
         assertFalse(Agenda.isValidAgenda(" ")); // spaces only
-        assertFalse(Agenda.isValidAgenda("2321323241")); // contains only numbers
-        assertFalse(Agenda.isValidAgenda("#$@!#@!")); // contains only characters
 
         // valid date
         assertTrue(Agenda.isValidAgenda("To discuss milestone 1.4")); // correct
         assertTrue(Agenda.isValidAgenda("-")); // one character
-        assertTrue(Agenda.isValidAgenda("To discuss the importance of " +
-                "having the meeting minutes feature")); // long input
+        assertTrue(Agenda.isValidAgenda("To discuss the importance of "
+                + "having the meeting minutes feature")); // long input
     }
 }
