@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 
 
-=== Mohd Aslam
+=== Mohamad Aslam Bin Mohamed Johan
 image::m-aslam-mj2.png[width="150", align="left"]
 {empty}[http://github.com/m-aslam-mj2[github]] [<<m-aslam-mj2#, portfolio>>]
 
@@ -39,7 +39,7 @@ Responsibilities: Help out with Testing and CI for Git, making sure the test are
 
 '''
 
-=== Nur Tristy Erna
+=== Nur Tristy Erna Binte Mohammed Harlan
 image::tristyxxnana.png[width="150", align="left"]
 {empty}[https://github.com/tristyxxnana[github]] [<<tristyxxnana#, portfolio>>]
 
@@ -48,7 +48,7 @@ Responsibilities: Ensures all documentations are filled appropriately without an
 
 '''
 
-=== Jomari Cruz
+=== Jomari Evangelista Cruz
 image::jomcruz93.png[width="150", align="left"]
 {empty}[http://github.com/jomcruz93[github]] [<<jomcruz93#, portfolio>>]
 

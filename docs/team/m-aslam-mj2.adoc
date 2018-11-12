@@ -1,4 +1,4 @@
-= Mohd Aslam - Project Portfolio
+= Mohamad Aslam Bin Mohamed Johan - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
