@@ -13,7 +13,8 @@ Something Daily is a desktop application as a combination of to-do list and
 expenditure tracker which is written in Java. The target users are NUS SoC students.
 This application aims to improve students' life efficiency from helping them deal
 with their numerous deadlines and plan their daily expenditures. The user interacts
-with it using a CLI, and it has a GUI created with JavaFX.
+with it using a CLI, and it has a GUI created with JavaFX. This project portfolio is
+aimed to show my contribution to our project.
 
 == Summary of contributions
 
@@ -74,11 +75,3 @@ to the project._
 
 include::../DeveloperGuide.adoc[tag=checkexpenditure]
 include::../DeveloperGuide.adoc[tag=expenditureuseCases]
-
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

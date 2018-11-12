@@ -104,6 +104,7 @@ public class Task {
                 && otherTask.getModule().equals(getModule());
     }
 
+    //@@author XiaoYunhan
     /**
      * return -1 for deadline has passed
      * return 0 for deadline is not urgent (not in the following 7 days)
@@ -114,14 +115,13 @@ public class Task {
         int interval = timeUtil.getDayInterval(timeUtil.getCurrentDate(), getDayInTypeDate());
         if (interval < 0) {
             return -1;
-        }
-        else if (interval > 7) {
+        } else if (interval > 7) {
             return 0;
-        }
-        else {
+        } else {
             return 1;
         }
     }
+    //@@author
 
     /**
      * Returns true if both tasks have the same identity and data fields.

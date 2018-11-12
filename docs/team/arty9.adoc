@@ -24,7 +24,7 @@ Main features of Something Daily includes:
 * tracks and view all added academic tasks
 * provides easy-to-read deadline reminder for tasks
 * records all added expenses
-* provides expenditure advices based on your expenses history
+* provides expenditure advices based on user's expenses history
 * provides daily summary on all due tasks and expenses
 
 The project is developed by 4 NUS students and it is our goal that Something Daily can be a product that all students use on a daily basis.
@@ -37,8 +37,8 @@ This section highlights all of my contributions to the project and the applicati
 * *Major enhancement*:
 
 1. Designed *model component for To-do List*
-** What it does: It is the component that holds all to-do list related data of the app in-memory.
-** Justification: This component is a core building block of the to-do list in the app.
+** What it does: It is the component that holds all to-do list related data of the application in-memory.
+** Justification: This component is a core building block of the to-do list in the application.
 
 2. Designed *storage component for To-do List*
 ** What it does: It is the component that reads and writes to-do list data to the hard disk.
@@ -50,13 +50,14 @@ This section highlights all of my contributions to the project and the applicati
 ** Highlights: This enhancement enables commands like viewing a filtered list based on task's status.
 
 4. Added *the ability to view a filtered list of tasks*
-** What it does: The command allows the user to view a list of tasks based on task's status.
+** What it does: The command allows the user to view a list of tasks based on the task's completion status.
 ** Justification: This feature improves the user experience and efficiency as it helps the user in navigating through all of the tasks in the to-do list. Users can now easily separate out uncompleted tasks from completed task.
 
 * *Minor enhancement*:
 
 1. Updated application icon and application name to reflect accurately on our product
 2. Modified and polished console messages in the application to enhance user experience
+3. Wrote various test files to test different components of the application. This is to ensure the application is functional per component.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=arty9[RepoSense Dashboard]]
 
@@ -73,6 +74,9 @@ This section highlights all of my contributions to the project and the applicati
 *** Updated the About Us page
 *** Restructured commands listing in section 3 & 5 of the User Guide
 *** Updated class diagrams for model, storage and UI components in the Developer Guide
+*** Updated various sequence diagrams in the Developer Guide
+*** Wrote the user stories and use cases for the to-do list under the Appendix section of the Developer Guide
+*** Wrote the manual testing instructions for the to-do list under the Appendix section of the Developer Guide
 
 ** Tools:
 *** Set up Travis CI for the team repository
@@ -109,11 +113,3 @@ include::../UserGuide.adoc[tag=check]
 include::../DeveloperGuide.adoc[tag=completeuncomplete]
 
 include::../DeveloperGuide.adoc[tag=viewtask]
-
-include::../DeveloperGuide.adoc[tag=productScope]
-
-include::../DeveloperGuide.adoc[tag=userStories]
-
-include::../DeveloperGuide.adoc[tag=taskUseCases]
-
-include::../DeveloperGuide.adoc[tag=productSurvey]

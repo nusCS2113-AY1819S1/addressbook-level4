@@ -48,8 +48,7 @@ public class TaskCard extends UiPart<Region> {
 
         if (task.getComplete()) { //set color for task status: red for uncompleted, green for completed
             taskstate.setStyle("-fx-text-fill: #7fce92");
-        }
-        else {
+        } else {
             taskstate.setStyle("-fx-text-fill: #c05d61");
         }
 
@@ -67,9 +66,7 @@ public class TaskCard extends UiPart<Region> {
                     taskmodule.setStyle("-fx-text-fill: #c05d61");
                     taskpriority.setStyle("-fx-text-fill: #c05d61");
                 }
-            }
-            //task will come within 7 days
-            else {
+            } else { //task will come within 7 days
                 //task is marked as uncompleted
                 if (!task.getComplete()) {
                     id.setStyle("-fx-text-fill: #fbf8af");

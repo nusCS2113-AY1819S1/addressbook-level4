@@ -391,23 +391,29 @@ Step 3. Depending on the filter, `ViewTaskCommand` class will use the `Model#upd
 
 Sorting tasks in the to-do list uses both `Logic` and `Model` components.
 Generally, the implementation of `TDL_sort date`, `TDL_sort priority` and `TDL_sort module` are quite similar,
-and they use different comparators. These features sort ObservableList<Task> and use the method sort()
-from List<>.
+and they use different comparators which are stored in `SortComparator`.
+
+Firstly, after getting the input from user, `SortCommandParser` split command to get the parameter
+and choose the corresponding sorting method. Then, we use `Collection.sort()` in `UniqueTaskList` to sort
+ObservableList<Task> versionedTodoList
 
 `TDL_sort reverse` use the method `Collection.reverse()` to reverse the sequence of tasks in to-do list.
 
 To avoid the sequential order of upper case and lower case, we use `TaskName a -> a.toString().toLowerCase()` transfer all upper case into lower case.
 
+The following sequence diagram shows how the `TDL_complete` operation works:
+
+image::SortTaskSequenceDiagram.png[width="800"]
+
 ==== Design Considerations
 
 ===== Aspect: Methods to support the sort commands
 
-* **Alternative 1 (current choice):**
-** Pros:
-** Cons:
-* **Alternative 2:**
-** Pros:
-** Cons:
+* **Alternative 1 (current choice):** write methods for each sort parameter separately
+** Pros: easily to implement and have already gathered all comparators in `SortComparator`
+** Cons: hard to read and debug
+* **Alternative 2:** In `Model` part, write only one methods and use if sentence to execute corresponding one.
+** Pros: Easy to read and debug
 
 
 // end::sorttask[]
@@ -431,12 +437,12 @@ and deadline for distinguishing uncompleted tasks with different deadline.
 
 ==== Aspect: Methods to support the deadline notification feature
 
-* **Alternative 1 (current choice):**
-** Pros:
-** Cons:
-* **Alternative 2:**
-** Pros:
-** Cons:
+* **Alternative 1 (current choice):** Add related methods to `Task` class and `Model` class directly
+** Pros: Easy to implement
+** Cons: Hard to read and debug
+* **Alternative 2:** build a new class for Deadline notification
+** Pros: Easy to debug and increase new features like notify deadline with CLI output
+** Cons: Hard to implement
 
 // end::deadlinenotification[]
 
@@ -1271,9 +1277,32 @@ To-do list
 2. User receives and acknowledges the reminder
 // end::extraTaskUseCases[]
 
+// tag::otherTaskUseCases[]
+[discrete]
+=== Use case 13: Get deadline notification
+*System:*
+To-do list
+
+*MSS*
+
+1.The color of one task turns red which mean this task is uncompleted and the deadline has passed already
+2.The color of one task turns yellow which mean this task is uncompleted and the deadline will come within 7 days
+
+[discrete]
+=== Use case 14: Sort Uncompleted tasks by deadline
+*System:*
+To-do list
+
+*MSS*
+
+1. User enter `TDL_view uncompleted` to list uncompleted tasks
+2. User enter `TDL_sort date` to sort all uncompleted tasks by deadline date
+
+// end::otherTaskUseCases[]
+
 // tag::expenditureUseCases[]
 [discrete]
-=== Use case 13: Add expenditure / income
+=== Use case 15: Add expenditure / income
 *System:*
 Expenditure Tracker & Calendar
 
@@ -1287,7 +1316,7 @@ Expenditure Tracker & Calendar
 6. Expenditure Tracker record and display the income / outcome on calendar
 
 [discrete]
-=== Use case 14: Check expenditure / income status
+=== Use case 16: Check expenditure / income status
 *System:*
 Expenditure Tracker & Calendar
 
@@ -1299,7 +1328,7 @@ Expenditure Tracker & Calendar
 4. Calendar shows the expenditure / income for each day visually or Expenditure Tracker shows the expenditure / income status by displaying the amount of money.
 
 [discrete]
-=== Use case 15: Delete expenditure / income
+=== Use case 17: Delete expenditure / income
 *System:*
 Expenditure Tracker & Calendar
 
@@ -1315,7 +1344,7 @@ Expenditure Tracker & Calendar
      2b1. Expenditure list shows an error message
 
 [discrete]
-=== Use case 16: Edit or Update expenditure
+=== Use case 18: Edit or Update expenditure
 *System:*
 Expenditure Tracker & Calendar
 
@@ -1384,34 +1413,188 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample tasks and expenses.
 
-. Saving window preferences
+. Shutdown
 
-.. Resize the window to an optimum size. Move the window to a different location. Close the window.
-.. Re-launch the app by double-clicking the jar file. +
-   Expected: The most recent window size and location is retained.
+.. Enter the `exit` command or close the application directly
 
-_{ more test cases ... }_
+. Re-launch
+.. Double-click the jar file. +
+   Expected: Any previous changes to to-do list and/or expenditure tracker are automatically saved and will appear as per normal.
 
-=== Deleting a person
+=== Adding a task
 
-. Deleting a person while all persons are listed
+. Adding a task to the to-do list
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+.. Prerequisites: No modifications are done to the sample tasks list.
+.. Test case: `TDL_add t/Milestone 3 m/CS2113 d/02-11 p/2` +
+   Expected: Task is not added. Error details are shown in the status message.
+.. Test case: `TDL_add t/Tutorial 5 m/CS2101 d/12-09 p/1` +
+   Expected: New task is added to the to-do list. Details of the added task is shown in the status message.
+.. Other incorrect add commands to try: `TDL_add` (with any missing parameters)
 
-_{ more test cases ... }_
+=== Editing a task
+
+. Editing a task in the to-do list
+
+.. Prerequisites: Must have at least 1 task in the list shown
+.. Test case: `TDL_edit 1` +
+   Expected: First task shown in the list is edited with no changes to any parameters. Details of the task is shown in the status message.
+.. Test case: `TDL_edit 1 m/CS1231` +
+   Expected: First task shown in the list is edited with the new module code of `CS1231`. Details of the edited task is shown in the status message.
+.. Test case: `TDL_edit 0 m/CS1231` +
+   Expected: No task is edited. Error details are shown in the status message.
+.. Other incorrect edit commands to try: `TDL_edit`, `TDL_edit x` (where x is larger than the list size shown)
+
+=== Deleting a task
+
+. Deleting a task in the to-do list
+
+.. Prerequisites: Must have at least 1 task in the list shown
+.. Test case: `TDL_delete 1` +
+   Expected: First task shown in the list is deleted. Details of the deleted task is shown in the status message.
+.. Test case: `TDL_delete 0` +
+   Expected: No task is deleted. Error details shown in the status message.
+.. Other incorrect delete commands to try: `TDL_delete`, `TDL_delete x` (where x is larger than the list size shown)
+
+=== Marking a task as completed
+
+. Marking a task in the to-do list as completed
+
+.. Prerequisites: Task to be marked must have completion status of `uncompleted`. Must have at least 1 task in the list shown.
+.. Test case: `TDL_complete 1` +
+   Expected: Uncompleted task in index 1 shown in the list is marked as completed. Details of the task is shown in the status message.
+.. Test case: `TDL_complete 0` +
+   Expected: No task is marked as completed. Error details shown in the status message.
+.. Other incorrect commands to try: `TDL_complete`, `TDL_complete x` (where x is larger than the list size shown)
+
+=== Marking a task as uncompleted
+
+. Marking a task in the to-do list as uncompleted
+
+.. Prerequisites: Task to be marked must have completion status of `completed`. Must have at least 1 task in the list shown.
+.. Test case: `TDL_uncomplete 1` +
+   Expected: Completed task in index 1 shown in the list is marked as uncompleted. Details of the task is shown in the status message.
+.. Test case: `TDL_uncomplete 0` +
+   Expected: No task is marked as uncompleted. Error details shown in the status message.
+.. Other incorrect commands to try: `TDL_uncomplete`, `TDL_uncomplete x` (where x is larger than the list size shown)
+
+=== Viewing filtered task list
+
+. Viewing a filtered task list by completion status
+
+.. Prerequisites: Should have at least 1 task of each completion statuses
+.. Test case: `TDL_view all` +
+   Expected: All tasks are displayed in the to-do list regardless of completion status.
+.. Test case: `TDL_view uncompleted` +
+   Expected: All uncompleted tasks are displayed in the to-do list.
+.. Test case: `TDL_view completed` +
+   Expected: All completed tasks are displayed in the to-do list.
+.. Incorrect commands to try: `TDL_view`, `TDL_view complete`, `TDL_view uncomplete`, `TDL_view xxx` (where xxx is any string of words not mentioned above) +
+   Expected: No change in the to-do list. Error detail is shown in the status message.
+
+=== Sorting task list
+
+. Sorting the task list of the to-do list
+
+.. Prerequisites: Should have at least 3 tasks with different parameters
+.. Test case: `TDL_sort default` +
+   Expected: Tasks are now sorted alphabetically by its name.
+.. Test case: `TDL_sort module` +
+   Expected: Module code of the tasks are sorted alphabetically.
+.. Test case: `TDL_sort date` +
+   Expected: Tasks are now sorted by its date, where oldest date comes first.
+.. Test case: `TDL_sort priority` +
+   Expected: Tasks are now sorted by its priority level, where highest priority comes first.
+.. Test case: `TDL_sort reverse` +
+   Expected: Tasks list shown is now in reversed order.
+.. Incorrect commands to try: `TDL_sort`, `TDL_sort xxx` (where xxx is any string of words not mentioned above) +
+   Expected: No change in the to-do list. Error detail is shown in the status message.
+
+=== Adding an expenditure
+
+. Adding an expenditure to the expenditure tracker
+
+.. Prerequisites: No prerequisites are needed
+.. Test case: `ET_add e/iPhone7 Plus d/25-12-2017 m/1000 c/Electronics` +
+   Expected: New expenditure is added to the expenditure tracker. Details of the added expenditure is shown in the status message.
+.. Incorrect add commands to try: `ET_add` (with any missing parameters) +
+   Expected: Expenditure is not added. Error details are shown in the status message.
+
+=== Editing an expenditure
+
+. Editing an expenditure in the expenditure tracker
+
+.. Prerequisites: Must have at least 1 expenditure in the list shown
+.. Test case: `ET_edit 1` +
+   Expected: No expenditure is edited. Error details are shown in the status message.
+.. Test case: `ET_edit 1 m/10.50` +
+   Expected: First expenditure shown in the list is edited with the new spending of `10.50` SGD. Details of the edited expenditure is shown in the status message.
+.. Test case: `ET_edit 0 m/10.50` +
+   Expected: No expenditure is edited. Error details are shown in the status message.
+.. Other incorrect edit commands to try: `ET_edit`, `ET_edit x` (where x is larger than the list size shown)
+
+=== Deleting an expenditure
+
+. Deleting an expenditure in the expenditure tracker
+
+.. Prerequisites: Must have at least 1 expenditure in the list shown
+.. Test case: `ET_delete 1` +
+   Expected: First expenditure shown in the list is deleted. Details of the deleted expenditure is shown in the status message.
+.. Test case: `ET_delete 0` +
+   Expected: No expenditure is deleted. Error details are shown in the status message.
+.. Other incorrect delete commands to try: `ET_delete`, `ET_delete x` (where x is larger than the list size shown)
+
+=== Viewing filtered expenditure list
+
+. Viewing a filtered expenditure list by various parameters
+
+.. Prerequisites: Should have at least 1 task
+.. Test case: `ET_view all` +
+   Expected: All expenditures are displayed in the expenditure tracker.
+.. Test case: `ET_view 01-01-2018` +
+   Expected: All expenditures on `01-01-2018` are displayed in the expenditure tracker.
+.. Test case: `ET_view Electronics` +
+   Expected: All expenditures are displayed in the expenditure tracker.
+.. Incorrect commands to try: `ET_view`, `ET_view xxx` (where xxx is any string of words not mentioned in the User Guide) +
+   Expected: No change in the expenditure tracker. Error detail is shown in the status message.
+
+=== Checking expenditures
+
+. Checking of all expenditures in a particular time frame
+
+.. Prerequisites: No prerequisites are needed
+.. Test case: `ET_check start/01-01-2018 end/01-12-2018` +
+   Expected: A pop-up window with a pie-chart of all recorded expenditures in this time frame will be shown.
+.. Test case: `ET_check start/01-01-2018 end/1-12-2018` +
+   Expected: No pop-up window will appear. Error detail is shown in the status message.
+.. Other incorrect commands to try: `ET_check`
+
+=== Obtaining expenditure advices
+
+. Obtaining expenditure advices based on expenditure history
+
+.. Prerequisites: No prerequisites are needed
+.. Test case: `ET_advice m/1000 numofdays/30` +
+   Expected: A pop-up window with full instructions and details will be shown.
+.. Test case: `ET_advice m/1000 numofdays/0` +
+   Expected: No pop-up window will appear. Error detail is shown in the status message.
+.. Other incorrect commands to try: `ET_advice`
+
+=== Viewing of daily summary
+
+. Viewing a daily summary of all due tasks and expenditures on a particular day
+
+.. Prerequisites: No prerequisites are needed
+.. Test case: `check d/01-01-2018` +
+   Expected: A pop-up window with the summary for the day `01-01-2018` will be shown.
+.. Test case: `check d/01-1-2018` +
+   Expected: No pop-up window will appear. Error detail is shown in the status message.
+.. Other incorrect commands to try: `check`
 
 === Saving data
 
 . Dealing with missing/corrupted data files
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
