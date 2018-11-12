@@ -579,6 +579,8 @@ There is no need to save manually.
 
 * *Select Event* : `selectEvent EVENT_INDEX`
 
+* *Show Mine*: `showmine`
+
 * *History* : `history`
 
 * *Undo* : `undo`
