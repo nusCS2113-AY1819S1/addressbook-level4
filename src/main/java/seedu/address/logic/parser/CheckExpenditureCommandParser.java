@@ -1,3 +1,4 @@
+//@@author feijunzi
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -36,12 +37,10 @@ public class CheckExpenditureCommandParser implements Parser<CheckExpenditureCom
 
         if (Integer.parseInt(d1.substring(6)) > Integer.parseInt(d2.substring(6))) {
             throw new ParseException("date2 should larger than date 1");
-        }
-        else if (Integer.parseInt(d1.substring(6)) == Integer.parseInt(d2.substring(6))) {
+        } else if (Integer.parseInt(d1.substring(6)) == Integer.parseInt(d2.substring(6))) {
             if (Integer.parseInt(d1.substring(3, 5)) > Integer.parseInt(d2.substring(3, 5))) {
                 throw new ParseException("date2 should larger than date 1");
-            }
-            else if ((Integer.parseInt(d1.substring(3, 5)) == Integer.parseInt(d2.substring(3, 5)))
+            } else if ((Integer.parseInt(d1.substring(3, 5)) == Integer.parseInt(d2.substring(3, 5)))
                     && (Integer.parseInt(d1.substring(0, 2)) > Integer.parseInt(d2.substring(0, 2)))) {
                 throw new ParseException("date2 should larger than date 1");
             }
