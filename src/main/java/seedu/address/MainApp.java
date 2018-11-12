@@ -83,7 +83,7 @@ public class MainApp extends Application {
         initEventsCenter();
 
         // Start event status update
-        initStatusUpdate();
+        initStatusUpdateAndReminders();
     }
 
     /**
@@ -195,7 +195,7 @@ public class MainApp extends Application {
      * Status update occurs every 300,000 milliseconds (5 minutes).
      * Event reminders are sent every 36,000,000 milliseconds (6 hours).
      */
-    private void initStatusUpdate() {
+    private void initStatusUpdateAndReminders() {
         Timer timer = new Timer();
         TimerTask updateEventStatus = new TimerTask() {
 
