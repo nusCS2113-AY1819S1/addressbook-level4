@@ -434,7 +434,7 @@ Step 3: Viewing the allocated budget of a club which can be done by either *club
 ==== Submitting data for budget allocation: `budget`
 This is the first step in the budgeting process!
 
-This command allows club members to submit budget calculation data - the name of their club, number of events the club is planning to hold and the expected turnout of the events  +
+This command allows you to submit the budget calculation data for your club - the name of your club, number of events your club is planning to host and the expected turnout of the events. Remember to be logged in with member credentials to gain access to this command! +
 Format: `budget c/CLUB NAME t/EXPECTED TURNOUT e/NUMBER OF EVENTS`
 
 Example: +
@@ -450,10 +450,16 @@ CLUB NAME is case sensitive. Hence `c/Computing Club` and `c/computing club` wil
 EXPECTED TURNOUT and NUMBER OF EVENTS must be postive whole numbers.
 ====
 
+[NOTE]
+====
+In the v1.4 `budgetcommand` does not undergo undoing and redoing as explained in the `undo` and `redo` commands. To make up for this an
+`editbudget` command is in works for *v2.0* to allow users to edit the budget calculation data as required.
+====
+
 ==== Calculating the budgets : `calculatebudget`
 This is the second step in the budgeting process!
 
-After all the clubs' budget calculation data has been submitted by the club members, NUSSU treasurers must use this command to calculate and allocate budgets to all the clubs based on the total available budget +
+After all the clubs' budget calculation data has been submitted by the club members, you can log in with treasurer credentials and use this command to calculate and allocate budgets to all the clubs based on the total available budget you have specified +
 Format: `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD`
 
 Example: +
@@ -466,13 +472,14 @@ Ensure that TOTAL AVAILABLE BUDGET is a positive whole number, i.e. it can also 
 
 [NOTE]
 ====
-Remember to only use the `calculatebudget` command once ALL the clubs' data has been collected since NUSSU-Connect only supports a one-time calculation of budgets in v1.4
+Remember to only use the `calculatebudget` command once ALL the clubs' data has been collected since NUSSU-Connect only supports a one-time calculation of budgets in v1.4.
+In *v2.0* users will be able to use the `calculatebudget` multiple times, as required.
 ====
 
 ==== Viewing the allocated budget for a club : `viewbudget`
 This is the third and final step in the budgeting process!
 
-This command shows the budget allocated to that particular club to the user. Both club members and NUSSU treasurers have access to this command.
+This command shows you the budget allocated to the club that you have specified. Remember to be logged in with either member, treasurer or president credentials to have access to this command!
 Format: `viewbudget c/CLUB NAME`
 
 Example: +
