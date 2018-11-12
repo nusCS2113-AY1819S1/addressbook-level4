@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 //@@author: jieliangang
 /**
- * Represents a the attendees with emails in a event.
+ * Represents the attendees by a list of emails.
  */
 public class Attendees {
     private Set<String> attendeesSet;
