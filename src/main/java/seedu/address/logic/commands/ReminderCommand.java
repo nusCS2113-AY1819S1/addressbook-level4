@@ -22,7 +22,7 @@ public class ReminderCommand extends Command {
 
     public static final String COMMAND_PARAMETERS = "Parameters: "
             + PREFIX_TITLE + "TITLE "
-            + PREFIX_DATE + "DATE(DDMMMYYYY) "
+            + PREFIX_DATE + "DATE(DDMMYYYY) "
             + PREFIX_START_TIME + "TIME(24HRS) "
             + PREFIX_AGENDA + "AGENDA \n";
 
