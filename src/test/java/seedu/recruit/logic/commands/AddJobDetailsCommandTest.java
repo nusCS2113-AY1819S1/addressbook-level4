@@ -134,7 +134,7 @@ public class AddJobDetailsCommandTest {
         @Override
         public int getCompanyIndexFromName(CompanyName companyName) {
             for (int index = 0; index < companyList.size(); index++) {
-                if (companyList.get(index).getCompanyName().equals(companyName)) {
+                if (companyList.get(index).getName().equals(companyName)) {
                     return index;
                 }
             }
@@ -166,7 +166,7 @@ public class AddJobDetailsCommandTest {
         @Override
         public int getCompanyIndexFromName(CompanyName companyName) {
             for (int index = 0; index < companyList.size(); index++) {
-                if (companyList.get(index).getCompanyName().equals(companyName)) {
+                if (companyList.get(index).getName().equals(companyName)) {
                     return index;
                 }
             }

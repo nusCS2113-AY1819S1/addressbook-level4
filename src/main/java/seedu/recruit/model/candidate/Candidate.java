@@ -29,9 +29,9 @@ public class Candidate {
     // Data fields
     private final Age age;
     private final Address address;
-    private final Job job;
+    private final Job desiredJob;
     private final Education education;
-    private final Salary salary;
+    private final Salary expectedSalary;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -39,17 +39,17 @@ public class Candidate {
      */
 
     public Candidate(Name name, Gender gender, Age age, Phone phone, Email email, Address address,
-                     Job job, Education education, Salary salary, Set<Tag> tags) {
-        requireAllNonNull(name, gender, phone, email, address, job, education, salary, tags);
+                     Job desiredJob, Education education, Salary expectedSalary, Set<Tag> tags) {
+        requireAllNonNull(name, gender, phone, email, address, desiredJob, education, expectedSalary, tags);
         this.name = name;
         this.gender = gender;
         this.age = age;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.job = job;
+        this.desiredJob = desiredJob;
         this.education = education;
-        this.salary = salary;
+        this.expectedSalary = expectedSalary;
         this.tags.addAll(tags);
     }
 
@@ -77,16 +77,16 @@ public class Candidate {
         return address;
     }
 
-    public Job getJob() {
-        return job;
+    public Job getDesiredJob() {
+        return desiredJob;
     }
 
     public Education getEducation() {
         return education;
     }
 
-    public Salary getSalary() {
-        return salary;
+    public Salary getExpectedSalary() {
+        return expectedSalary;
     }
 
     /**
@@ -134,16 +134,16 @@ public class Candidate {
                 && otherCandidate.getPhone().equals(getPhone())
                 && otherCandidate.getEmail().equals(getEmail())
                 && otherCandidate.getAddress().equals(getAddress())
-                && otherCandidate.getJob().equals(getJob())
+                && otherCandidate.getDesiredJob().equals(getDesiredJob())
                 && otherCandidate.getEducation().equals(getEducation())
-                && otherCandidate.getSalary().equals(getSalary())
+                && otherCandidate.getExpectedSalary().equals(getExpectedSalary())
                 && otherCandidate.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, age, phone, email, address, job, education, salary, tags);
+        return Objects.hash(name, gender, age, phone, email, address, desiredJob, education, expectedSalary, tags);
     }
 
     @Override
@@ -161,11 +161,11 @@ public class Candidate {
                 .append(" Address: ")
                 .append(getAddress())
                 .append(" Job: ")
-                .append(getJob())
+                .append(getDesiredJob())
                 .append(" Education: ")
                 .append(getEducation())
                 .append(" Salary: ")
-                .append(getSalary())
+                .append(getExpectedSalary())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

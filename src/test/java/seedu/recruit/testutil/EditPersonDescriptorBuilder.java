@@ -43,9 +43,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setGender(candidate.getGender());
         descriptor.setAge(candidate.getAge());
         descriptor.setAddress(candidate.getAddress());
-        descriptor.setJob(candidate.getJob());
+        descriptor.setJob(candidate.getDesiredJob());
         descriptor.setEducation(candidate.getEducation());
-        descriptor.setSalary(candidate.getSalary());
+        descriptor.setSalary(candidate.getExpectedSalary());
         descriptor.setTags(candidate.getTags());
     }
 

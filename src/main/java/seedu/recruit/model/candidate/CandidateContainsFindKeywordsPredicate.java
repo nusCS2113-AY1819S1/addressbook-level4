@@ -31,11 +31,11 @@ public class CandidateContainsFindKeywordsPredicate implements Predicate<Candida
                 || ((keywords.containsKey("Address")) && (keywords.get("Address").stream().anyMatch(keyword ->
                     StringUtil.containsWordIgnoreCase(candidate.getAddress().value, keyword))))
                 || ((keywords.containsKey("Job")) && (keywords.get("Job").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(candidate.getJob().value, keyword))))
+                    StringUtil.containsWordIgnoreCase(candidate.getDesiredJob().value, keyword))))
                 || ((keywords.containsKey("Education")) && (keywords.get("Education").stream().anyMatch(keyword ->
                     StringUtil.containsWordIgnoreCase(candidate.getEducation().value, keyword))))
                 || ((keywords.containsKey("Salary")) && (keywords.get("Salary").stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(candidate.getSalary().value, keyword))));
+                    StringUtil.containsWordIgnoreCase(candidate.getExpectedSalary().value, keyword))));
     }
 
     @Override

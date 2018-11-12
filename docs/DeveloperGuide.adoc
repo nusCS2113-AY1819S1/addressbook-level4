@@ -181,7 +181,7 @@ The `UI` component,
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
-image::LogicComponentClassDiagram.png[width="800"]
+image::LogicComponentClassDiagram.png[width="1000"]
 
 *API* :
 link:{repoURL}/src/main/java/seedu/recruit/logic/Logic.java[`Logic.java`]
@@ -191,14 +191,17 @@ As illustrated in Figure 6,
 .  `Logic` uses the `RecruitBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a candidate) and/or raise events.
+.  The command execution can also affect the LogicState of the LogicManager (e.g. StartAddCandidateCommand, ShortlistCandidateCommand) and raises a ChangeLogicStateEvent.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below in Figure 7 is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below in Figure 7 is the Sequence Diagram for interactions within the `Logic` component for the `execute("deletec 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+.Interactions Inside the Logic Component for the `deletec 1` Command
+image::DeleteCandidateSdForLogic.png[width="800"]
 
 // end::logicComponent[]
+
+// tag::modelComponent[]
 [[Design-Model]]
 === Model component
 
@@ -210,15 +213,13 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Recruit Book data.
-* exposes an unmodifiable `ObservableList<Candidate>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the RecruitBook data in `VersionedRecruitBook`.
+* exposes an unmodifiable lists `ObservableList<Candidate>`, `ObservableList<JobOffer>`, `ObservableList<Company>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Recruit Book`, which `Candidate` can reference. This would allow `Recruit Book` to only require one `Tag` object per unique `Tag`, instead of each `Candidate` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
-image:ModelClassBetterOopDiagram.png[width="800"]
+// end::modelComponent[]
 
+// tag::storageComponent[]
 [[Design-Storage]]
 === Storage component
 
@@ -232,6 +233,7 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Recruit Book data in xml format and read it back.
 
+// end::storageComponent[]
 [[Design-Commons]]
 === Common classes
 

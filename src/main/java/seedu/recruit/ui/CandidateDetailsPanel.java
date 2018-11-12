@@ -81,9 +81,9 @@ public class CandidateDetailsPanel extends UiPart<Region> {
         phone.setText(selectedCandidate.getPhone().value);
         email.setText(selectedCandidate.getEmail().value);
         address.setText(selectedCandidate.getAddress().value);
-        job.setText(selectedCandidate.getJob().value);
+        job.setText(selectedCandidate.getDesiredJob().value);
         education.setText(selectedCandidate.getEducation().value);
-        salary.setText(selectedCandidate.getSalary().value);
+        salary.setText(selectedCandidate.getExpectedSalary().value);
     }
 
     /**

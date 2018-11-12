@@ -76,7 +76,7 @@ public class EmailSendPreviewCommand extends EmailSendCommand {
         }
 
         if (actualCompany != null) {
-            bodyText.append("To: ").append(actualCompany.getCompanyName().toString()).append("(")
+            bodyText.append("To: ").append(actualCompany.getName().toString()).append("(")
                     .append(actualCompany.getEmail().toString()).append(")").append(" regarding job offers: ")
                     .append(jobNames.toString()).append('\n');
         }

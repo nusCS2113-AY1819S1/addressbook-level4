@@ -92,9 +92,9 @@ public class XmlAdaptedCandidate {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        job = source.getJob().value;
+        job = source.getDesiredJob().value;
         education = source.getEducation().value;
-        salary = source.getSalary().value;
+        salary = source.getExpectedSalary().value;
 
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)

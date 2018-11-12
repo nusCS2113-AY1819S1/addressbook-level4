@@ -66,6 +66,8 @@ include::../UserGuide.adoc[tag=clear]
 |===
 
 include::../DeveloperGuide.adoc[tag=logicComponent]
+include::../DeveloperGuide.adoc[tag=modelComponent]
+include::../DeveloperGuide.adoc[tag=storageComponent]
 include::../DeveloperGuide.adoc[tag=add/delete]
 include::../DeveloperGuide.adoc[tag=undoredo]
 

@@ -107,10 +107,10 @@ public class LogicManager extends ComponentManager implements Logic {
     private void handleCompanyListDetailsPanelSelectionChangedEvent(CompanyListDetailsPanelSelectionChangedEvent
                                                                             event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
-                "Selection Changed to " + event.getNewSelection().getCompanyName().value));
+                "Selection Changed to " + event.getNewSelection().getName().value));
         HashMap<String, List<String>> keywordsList = new HashMap<>();
         List<String> companyName = new ArrayList<>();
-        companyName.add(event.getNewSelection().getCompanyName().toString());
+        companyName.add(event.getNewSelection().getName().toString());
         keywordsList.put("CompanyName", companyName);
         model.updateFilteredCompanyJobList(new JobOfferContainsFindKeywordsPredicate(keywordsList));
         EventsCenter.getInstance().post(new ShowUpdatedCompanyJobListRequestEvent(

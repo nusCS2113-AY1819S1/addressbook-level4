@@ -126,7 +126,8 @@ public class UniqueCandidateList implements Iterable<Candidate> {
         Collections.sort(internalList, new Comparator<Candidate>() {
             @Override
             public int compare(Candidate o1, Candidate o2) {
-                return ((o1.getJob().toString()).toLowerCase()).compareTo((o2.getJob().toString()).toLowerCase());
+                return ((o1.getDesiredJob().toString()).toLowerCase()).compareTo((o2.getDesiredJob().toString())
+                        .toLowerCase());
             }
         });
     }
@@ -152,7 +153,8 @@ public class UniqueCandidateList implements Iterable<Candidate> {
         Collections.sort(internalList, new Comparator<Candidate>() {
             @Override
             public int compare(Candidate o1, Candidate o2) {
-                return (Integer.parseInt(o1.getSalary().toString()) - Integer.parseInt(o2.getSalary().toString()));
+                return (Integer.parseInt(o1.getExpectedSalary().toString()) - Integer.parseInt(o2.getExpectedSalary()
+                        .toString()));
             }
         });
     }

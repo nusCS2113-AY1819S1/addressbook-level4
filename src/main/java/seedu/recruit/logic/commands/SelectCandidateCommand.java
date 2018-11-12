@@ -83,7 +83,7 @@ public class SelectCandidateCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS,
                     targetIndex.getOneBased())
                     + String.format(MESSAGE_CONFIRMATION_FOR_SHORTLIST,
-                    selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value)
+                    selectedJobOffer.getJob().value, selectedCompany.getName().value)
                     + ShortlistCandidateCommand.MESSAGE_USAGE);
         }
 
