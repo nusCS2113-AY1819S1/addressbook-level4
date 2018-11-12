@@ -76,10 +76,23 @@ image::CommandBox.png[width="800", align="left"]
 ** *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
+.  Command Panel
 
+* A command panel is located at the right side of the application. This is suited for beginner users.
+* To select a command, click on any command.
+* A message will pop up on the result display, showing you information and the syntax of the command. A command template will also be given in the command box. You are then required to fill in the remaining fields by following the example given. A screenshot of an example is shown below for your reference.
++
+image::command_panel_result.png[align="left"]
++
+Note: For advanced users, you are still able to press kbd:[tab] to cycle through the ISBN.
 
 [[Features]]
 == Features
+
+====
+*Full Screen Mode*
+
+Hit F11 to toggle between full-screen mode and windowed mode. A full-screen toggle button can also be found under the drop-down menu of the top bar under “Window”.
 
 ====
 *Command Format*
@@ -89,7 +102,7 @@ image::CommandBox.png[width="800", align="left"]
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Items in brackets are *required* and always *private* e.g. `q/QUANTITY (c/COST)`
 * Items in arrow brackets are commands that are commands available depending on the user e.g. <Owner> means command only usable by Owner.
-====
+===
 
 // tag::tabfeature[]
 === Cycling through existing Isbn: kbd:[Tab]

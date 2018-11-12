@@ -55,10 +55,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the BookInventory.";
     public static final String COMMAND_SYNTAX = COMMAND_WORD
             + " " + PREFIX_NAME
-            + " " + PREFIX_ISBN
-            + " " + PREFIX_PRICE
             + " " + PREFIX_COST
-            + " " + PREFIX_TAG;
+            + " " + PREFIX_PRICE
+            + " " + PREFIX_TAG
+            + " " + PREFIX_ISBN;
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;
