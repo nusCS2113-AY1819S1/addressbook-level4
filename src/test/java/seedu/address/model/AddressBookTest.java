@@ -32,6 +32,7 @@ import seedu.address.model.member.Person;
 import seedu.address.model.member.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 
 public class AddressBookTest {
