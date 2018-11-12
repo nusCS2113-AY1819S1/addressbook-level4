@@ -117,23 +117,23 @@ Each of the four components
 For example, the `Logic` component in Figure 2 defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
-image::LogicClassDiagram.png[width="800"]
+image::LogicComponentClassDiagram.png[width="800"]
 
 [discrete]
 ==== Events-Driven nature of the design
 
 The _Sequence Diagram_ in Figure 3 shows how the components interact for the scenario where the user issues the command `delete 1`.
 
-.Component interactions for `delete 1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+.Component interactions for `deleteC 1` command (part 1)
+image::SDforDeleteCompany.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `CandidateBookChangedEvent` when the Recruit Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `CompanyBookChangedEvent` when the data in the CompanyBook is changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram in Figure 4 shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
 .Component interactions for `delete 1` command (part 2)
-image::SDforDeletePersonEventHandling.png[width="800"]
+image::SDforDeleteCompanyEventHandling.png[width="800"]
 
 [NOTE]
 Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -175,12 +175,13 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
+// tag::logicComponent[]
 [[Design-Logic]]
 === Logic component
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
-image::LogicClassDiagram.png[width="800"]
+image::LogicComponentClassDiagram.png[width="800"]
 
 *API* :
 link:{repoURL}/src/main/java/seedu/recruit/logic/Logic.java[`Logic.java`]
@@ -197,6 +198,7 @@ Given below in Figure 7 is the Sequence Diagram for interactions within the `Log
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
+// end::logicComponent[]
 [[Design-Model]]
 === Model component
 
@@ -955,14 +957,14 @@ Step 2. The user executes `deletec 5` command to delete the 5th candidate in the
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `addc`, `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitRecruitBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
+Step 3. The user executes `addc` then `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitRecruitBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitRecruitBook()`, so the candidate book state will not be saved into the `candidateBookStateList`.
 
-Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undoc` command. The `undoc` command will call `Model#UndoRecruitBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
+Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoRecruitBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
@@ -973,22 +975,22 @@ The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redoc` command does the opposite -- it calls `Model#redoCandidateBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the candidate book to that state.
+The `redo` command does the opposite -- it calls `Model#redoRecruitBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the candidate book to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `candidateBookStateList.size() - 1`, pointing to the latest candidate book state, then there are no undone candidate book states to restore. The `redoc` command uses `Model#canRedoCandidateBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `recruitBookStateList.size() - 1`, pointing to the latest RecruitBook state, then there are no undone candidate book states to restore. The `redo` command uses `Model#canRedoRecruitBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `listc`. Commands that do not modify the candidate book, such as `listc`, will usually not call `Model#commitRecruitBook()`, `Model#UndoRecruitBook()` or `Model#redoCandidateBook()`. Thus, the `candidateBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `listc`. Commands that do not modify RecruitBook state, such as `listc` or `listC`, will usually not call `Model#commitRecruitBook()`, `Model#undoRecruitBook()` or `Model#redoRecruitBook()`. Thus, the `recruitBookStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clearc`, which calls `Model#commitRecruitBook()`. Since the `currentStatePointer` is not pointing at the end of the `candidateBookStateList`, all candidate book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clearc`, which calls `Model#commitRecruitBook()`. Since the `currentStatePointer` is not pointing at the end of the `recruitBookStateList`, all RecruitBook states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-image::UndoRedoActivityDiagram.png[width="650"]
+image::UndoRedoActivityDiagram.png[width="800"]
 
 ==== Design Considerations
 
