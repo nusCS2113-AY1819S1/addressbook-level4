@@ -1682,6 +1682,36 @@ _{ more test cases ... }_
    Expected: same as the previous test case
 // end::manualTestMonthlyExpense[]
 
+//@@author T0roloco
+// tag::manualTestFindCommands[]
+=== Finding persons by name, address and phone number
+
+. Finding persons by name
+
+.. Prerequisites: User has added some persons
+
+.. Test case, assuming a contact name1 has been added:
+   `findname name1` +
+   Expected: Message "1 persons listed!" and listing name1
+
+.. Test case, assuming two different persons named name1 and name2 has been added:
+   `findname name1 name2` +
+   Expected: Message "2 persons listed!" and listing name1 and name2
+
+.. Test case, assuming one person with name1 has been added and no person with name2:
+   `findname name1 name2` +
+   Expected: Message "1 persons listed!" and listing name1
+
+.. Test case, assuming there is no person with address that include NUS:
+   `findaddress NUS` +
+   Expected: Message "0 persons listed!" and not listing any person
+
+.. Test case:
+   `findphone` +
+   Expected: An error message explaining how the to use the command correctly
+// end::manualTestFindCommands[]
+//@@author
+
 //@@author ian-tjahjono
 // tag::manualTestEvents[]
 
