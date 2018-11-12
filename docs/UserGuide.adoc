@@ -248,8 +248,10 @@ If delete account is successful, a message will be shown:
 
 image::deleteAccount_successful.PNG[width="300"]
 ====
+
 //end::account[]
 
+//tag::manage[]
 
 == Managing Your Inventory
 The core feature of *[blue]#_Drink I/O_#* is to manage your company's inventory.
@@ -302,6 +304,8 @@ To enter a new drink into *[blue]#_Drink I/O_#*,
 - The new drink you want to add must be have a unique name among the drinks in *[blue]#_Drink I/O_#*.
 - The adding of the drink will fail if `SELLING_PRICE` or `COST_PRICE` are negative values.
 ====
+//end::manage[]
+
 
 // tag::find[]
 === Searching for specific drink(s)

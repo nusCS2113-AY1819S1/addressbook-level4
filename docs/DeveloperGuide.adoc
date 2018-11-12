@@ -213,7 +213,7 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Transaction>` that can be observed
 * does not depend on any of the other three components.
 
-
+// tag::storage[]
 [[Design-Storage]]
 === Storage component
 
@@ -228,6 +228,8 @@ The `Storage` component,
 * can save the `LoginInfo` objects in json format and read them back.
 * can save the Inventory List data in xml format and read it back.
 * can save the Transaction List data in xml format and read it back.
+
+// end::storage[]
 
 [[Design-Commons]]
 === Common classes
@@ -814,7 +816,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |=======================================================================
 
-_{More to be added}_
 
 [appendix]
 == Use Cases
@@ -865,7 +866,6 @@ Use case resumes from 1.
 +
 ** Use case ends.
 
-_{More to be added}_
 
 [appendix]
 == Non Functional Requirements
@@ -874,16 +874,12 @@ _{More to be added}_
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-_{More to be added}_
 
 [appendix]
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
-
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
 
 
 [appendix]
@@ -900,7 +896,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample drinks and transactions. The window size may not be optimum.
 
 . Saving window preferences
 
@@ -908,8 +904,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
-
+////
 === Deleting a person
 
 . Deleting a person while all persons are listed
@@ -931,3 +926,26 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+////
+
+=== Buying a drink
+. Buy a certain quantity of a  drink using the `buy` command
+
+.. Prerequisites: There must be at least one drink in the inventory.
+.. Test case: `buy n/NAME q/12` +
+   Expected: The drink by the name of NAME (case-sensitive) has its quantity increased by 12. The message that "Purchase transaction recorded!" is shown in the results panel.
+.. Test case: 'buy n/NAME q/12', where NAME is the name of a drink that is not in the inventory +
+   Expected: The message "The drink entered does not exist in the inventory list" is displayed.
+
+=== Selling a drink
+. Sell a certain quantity of a drink using the `sell` command
+
+.. Prerequisites: There must be at least one drink in the inventory.
+.. Test case: `sell n/NAME q/12`, where NAME is the name of a drink that is in the inventory, and its quantity is 12 or more. +
+   Expected: The drink by the name of NAME (case-sensitive) has its quantity decreased by 12. The message that "Sale transaction recorded!" is shown in the results panel.
+.. Test case: 'sell n/NAME q/12', where NAME is the name of a drink that is not in the inventory +
+   Expected: The message "The drink entered does not exist in the inventory list" is displayed.
+.. Test case: 'sell n/NAME q/12', where NAME is the name of a drink that is in the inventory, and its quantity is less than 12. +
+   Expected: The message "Insufficient quantity in stock to perform operation" is displayed.
+
+=== 

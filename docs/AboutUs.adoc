@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Jin Minjia
 image::bluein-green.png[width="150", align="left"]
-{empty}[http://github.com/bluein-green[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/bluein-green[github]] [<<bluein-green#, portfolio>>]
 
 Role: Developer
 
@@ -22,7 +22,7 @@ Responsibilities: Model
 
 === Li Jiawei
 image::scottljw.png[width="150", align="left"]
-{empty}[http://github.com/scottljw[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/scottljw[github]] [<<scottljw#, portfolio>>]
 
 Role: Developer
 
