@@ -11,7 +11,7 @@
 
 This project portfolio documents my role in the CS2113T module project. My main role was in handling documentation and the scheduling and tracking of tasks.
 
-As part of the module, my teammates and I collaborated to develop a drink management application - Drink I/O. Drink I/O is targeted at small drink distribution companies and provides inventory management and financial tools. Users interact with the app using CLI, and it has a GUI created with JavaFX. This project is written in Java and has approximately <To be filled> kLoC.
+As part of the module, my teammates and I collaborated to develop a drink management application - Drink I/O. Drink I/O is targeted at small drink distribution companies and provides inventory management and financial tools. Users interact with the app using CLI, and it has a GUI created with JavaFX. This project is written in Java and has approximately 30 kLoC.
 
 
 == Summary of contributions
@@ -37,26 +37,17 @@ Enhanced the Search function allowing users to search through the inventory base
 
 * *Minor enhancement*: Morphed the existing storage to store the drinks and their respective batch lists. Required knowledge of XML to wrap the batch lists in a wrapper such that they would be stored properly.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
 
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#55], https://github.com[#34])
+*** Updated the GUI color scheme (Pull requests https://github.com[#155])
+*** Designed the Drink I/O logo (Featured on 1st page of UG)
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Edited User Guide for formatting and language (Pull requests https://github.com[#160], https://github.com[#170])
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Resolved bugs (Pull requests https://github.com[#181], https://github.com[#175], https://github.com[#169], https://github.com[#103])
 
 == Contributions to the User Guide
 
