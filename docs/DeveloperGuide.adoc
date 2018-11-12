@@ -929,7 +929,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -968,7 +968,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -992,7 +992,7 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 [discrete]
-
+// end::studcourseusecases[]
 === Use case: Add Student
 *Precondition(s)* :
 
@@ -1000,7 +1000,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1039,7 +1039,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1077,7 +1077,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1115,7 +1115,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1154,7 +1154,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1192,7 +1192,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1238,7 +1238,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1284,7 +1284,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1324,7 +1324,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1358,7 +1358,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1403,7 +1403,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1444,7 +1444,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1472,7 +1472,7 @@ Use case resumes at step 1.
 ** 2c1. System shows 'no courses in system' message.
 +
 Use case resumes at step 1.
-// end::studcourseusecases[]
+
 
 [discrete]
 === Use case: Add module
@@ -2093,7 +2093,7 @@ Use case resumes from step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2120,7 +2120,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2148,7 +2148,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2176,7 +2176,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2212,7 +2212,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2248,7 +2248,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2290,7 +2290,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2325,7 +2325,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2353,7 +2353,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2372,7 +2372,7 @@ Use case ends.
 Use case resumes at step 1.
 // end::classmanagementdepth[]
 
-// tag::notesmanagementusecases[]
+// tag::jomcruz93pppusecases1[]
 [discrete]
 === Use case: Add Note
 
@@ -2382,7 +2382,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2409,7 +2409,7 @@ Use case resumes at step 1.
 * 3a. The teacher decides to cancel.
 +
 Use case ends.
-
+// end::jomcruz93pppusecases1[]
 
 [discrete]
 === Use case: List Notes
@@ -2420,7 +2420,7 @@ Use case ends.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2443,7 +2443,7 @@ Use case resumes at step 1.
 +
 Use case ends.
 
-
+// tag::jomcruz93pppusecases2[]
 [discrete]
 === Use case: Edit Note
 
@@ -2454,7 +2454,7 @@ Use case ends.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2501,11 +2501,15 @@ Use case ends.
 
 
 [discrete]
-=== Use case: Delete Note
+=== Use case: Delete Notes
 
 *Precondition(s)* :
 
 * Note must exist in data file.
+
+*Guarantees* :
+
+* NIL
 
 *MSS* :
 
@@ -2544,7 +2548,7 @@ Use case resumes at step 2.
 
 
 [discrete]
-=== Use case: Find Note
+=== Use case: Find Notes
 
 *Precondition(s)* :
 
@@ -2552,7 +2556,7 @@ Use case resumes at step 2.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2585,7 +2589,7 @@ Use case ends.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2607,7 +2611,8 @@ Use case resumes at step 1.
 ** 2b1. System displays a message that no entries are found.
 +
 Use case ends.
-// end::notesmanagementusecases[]
+// end::jomcruz93pppusecases2[]
+
 
 [appendix]
 == Non Functional Requirements
