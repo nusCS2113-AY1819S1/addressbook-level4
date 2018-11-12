@@ -568,7 +568,9 @@ The following sequence diagram shows how the UpdateStatusCommand works:
 image::Update-sequenceDiagram.png[width="800"]
 
 [NOTE]
+====
 The Event Status feature is supported by the `Status` and `DateTime` field in the `Event`. Events with `DateTime` fields before the current `Date` will assume the `COMPLETED Status`, whereas those with `DateTime` fields after the current `Date` will take on the `UPCOMING Status`.
+====
 
 The *ReminderCommand* is periodically called in `TimerTask` `checkEventReminders` every 6 hours and it loops through every event in the `lastShownList` to check for the following:
 =====
@@ -584,7 +586,7 @@ The following sequence diagram shows how the ReminderCommand works:
 image::Reminder-sequenceDiagram.png[width="800"]
 
 ==== Design Considerations
-===== Aspect: To automate the commands or make them user-enabled
+===== Aspect: Whether to automate the commands or make them user-enabled
 * **Alternative 1 (current choice):** Status updates and reminders automated using `Timer`.
 ** Pros: Takes the updating and checking tasks off users. Less reliance on users' end also means that updates and reminders are executed more regularly.
 ** Cons: Uses up more processing resources.
