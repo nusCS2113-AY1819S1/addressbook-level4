@@ -3,7 +3,9 @@ package seedu.recruit.logic.commands.emailcommand;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.CommandResult;
@@ -11,8 +13,9 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
-class EmailInitialiseCommandTest {
-
+public class EmailInitialiseCommandTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();

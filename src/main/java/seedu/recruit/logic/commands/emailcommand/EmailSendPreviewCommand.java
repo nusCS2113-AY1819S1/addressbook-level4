@@ -1,7 +1,7 @@
 package seedu.recruit.logic.commands.emailcommand;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import seedu.recruit.commons.core.EventsCenter;
@@ -19,14 +19,23 @@ import seedu.recruit.model.joboffer.JobOffer;
  */
 public class EmailSendPreviewCommand extends EmailSendCommand {
 
+    private StringBuilder emailPreview;
+
+    public EmailSendPreviewCommand() {
+        emailPreview = new StringBuilder();
+    }
+
+    public String getEmailPreviewToString() {
+        return emailPreview.toString();
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history, UserPrefs userPrefs) {
         EmailUtil emailUtil = model.getEmailUtil();
         updateRecipientsAndContents(emailUtil);
-        StringBuilder emailPreview = new StringBuilder();
 
         //Generating recipients
-        Set<String> recipientEmails = new HashSet<>();
+        Set<String> recipientEmails = new LinkedHashSet<>();
         generateRecipients(recipientEmails, model, emailUtil);
 
         //Generate subject
@@ -45,7 +54,9 @@ public class EmailSendPreviewCommand extends EmailSendCommand {
             }
             emailPreview.append(bodyText);
             emailPreview.append("Subject: " + subject + "\n");
-            emailPreview.append("Contents of the email:\n" + generateCandidateContentDetails());
+            emailPreview.append("Contents of the email:\n\n")
+                .append(emailUtil.getEmailSettings().getBodyTextCompanyAsRecipient()).append('\n')
+                .append(generateCandidateContentDetails());
         }
 
         EventsCenter.getInstance().post(new ShowEmailPreviewEvent(emailPreview.toString()));
