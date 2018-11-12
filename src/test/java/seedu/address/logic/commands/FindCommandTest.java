@@ -31,7 +31,7 @@ public class FindCommandTest {
     private Model expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
     private CommandHistory commandHistory = new CommandHistory();
     @Before
-    public void setup() {
+    public void setUp() {
         Username admin = new Username("admin");
         model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
         model.setLoggedInUser(admin);
@@ -52,12 +52,12 @@ public class FindCommandTest {
         // different types -> returns false
         assertFalse(findFirstCommand.equals(1));
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(findFirstCommand == (null));
         // different item -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
     @Test
-    public void execute_zeroKeywords_noItemFound() {
+    public void executeZeroKeywordsNoItemFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -66,7 +66,7 @@ public class FindCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
     @Test
-    public void execute_multipleKeywords_multipleItemsFound() {
+    public void executeMultipleKeywordsMultipleItemsFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
         NameContainsKeywordsPredicate predicate = preparePredicate("Ar Rp");
         FindCommand command = new FindCommand(predicate);
