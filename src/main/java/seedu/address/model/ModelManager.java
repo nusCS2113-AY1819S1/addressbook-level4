@@ -137,6 +137,23 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTodos.setPredicate(predicate);
     }
 
+    //=========== Filtered Reminder List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Reminder> getFilteredReminderList() {
+        return FXCollections.unmodifiableObservableList(filteredReminders);
+    }
+
+    @Override
+    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+        requireNonNull(predicate);
+        filteredReminders.setPredicate(predicate);
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -249,23 +266,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void finishTodo(Todo target) {
         versionedAddressBook.removeTodo(target);
         indicateAddressBookChanged();
-    }
-
-    //=========== Filtered Reminder List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Reminder> getFilteredReminderList() {
-        return FXCollections.unmodifiableObservableList(filteredReminders);
-    }
-
-    @Override
-    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
-        requireNonNull(predicate);
-        filteredReminders.setPredicate(predicate);
     }
 
     //=========== Reminder ====================================================================================
