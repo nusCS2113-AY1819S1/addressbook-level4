@@ -1641,7 +1641,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Finding a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list` command.
 .. Test case: `find \tag friends` +
    Expected: All contacts with the tag friends is shown in the displayed list. Other contacts without the
    tag friends will be removed from the displayed list.
@@ -1653,39 +1653,47 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Excluding a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list` command.
 .. Test case: `find \exclude Alex` +
-   Expected: All contacts with the name Alex is removed from the displayed list.
+   Expected: All contacts with the name Alex(case-insensitive) is removed from the displayed list.
    Name Keywords History with '-alex' message is shown in the results display
 .. Test case: `find \exclude` +
    Expected: Invalid Command Format. Error details shown in results display.
 
 === Excluding a Person with a certain tag from displayed list
 
-. Excluding a person while all persons are listed
+. First variation of excluding a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list` command.
 .. Test case: `find \tag \exclude neighbours` +
    Expected: All contacts with the tag neighbours is removed from the displayed list.
    Tag Keywords History with '-neighbours' message is shown in the results display
+.. Test case: `find \tag \exclude` +
+   Expected: Invalid Command Format. Error details shown in results display.
+
+. Second variation of excluding a person while all persons are listed
+.. Prerequisites: List all persons using the `list` command.
+
 .. Test case: `find \exclude \tag classmates` +
    Expected: All contacts with the tag classmates is removed from the displayed list.
    Tag Keywords History with '-classmates' message is shown in the results display
-.. Test case: `find \tag \exclude` +
+.. Test case: `find \exclude \tag` +
    Expected: Invalid Command Format. Error details shown in results display.
-.. Other incorrect delete commands to try: `find \exclude \tag`
 
 === UndoFind command
 
-. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+. UndoFind Command with an Empty Search History.
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list. This should clear the
+   Search History stored internally within the application at the same time.
 .. Test case: `undofind` +
-   Expected: "SearchHistory is Empty" message in result display.
-.. Test case: `find \exclude Alex` and then `undofind` +
+   Expected:  Result Display shows "SearchHistory is Empty" message.
+
+. UndoFind Command with an Non-Empty Search History.
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list, and then `find \exclude Alex` to
+    execute the first search.
+.. Test case: `undofind` +
    Expected: +
-        *After execution of first command* +
-        All contacts with the name Alex is removed from the displayed list. +
-        *After execution of second command* +
-        All contacts with the name Alex will be added back to the displayed list after the second command and
+        All persons with the name Alex(case-insensitive) will be added back to the displayed list
         "Undo success!" message should shown in result display.
 
 === Search Pruning Feature
