@@ -60,8 +60,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
-            editPersonDescriptor.setDepartment(ParserUtil.parseDepartment(
-                    argMultimap.getValue(PREFIX_DEPARTMENT).get()));
+            String newDepartment = rewordDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get());
+            editPersonDescriptor.setDepartment(ParserUtil.parseDepartment(newDepartment));
         }
         if (argMultimap.getValue(PREFIX_DESIGNATION).isPresent()) {
             editPersonDescriptor.setDesignation(ParserUtil.parseDesignation(
@@ -90,5 +90,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
+
+    /**
+     *
+     * @param input contains a department word that may be of varying cases
+     * @return a string whose first letter is capital letter and the rest is lower case
+     */
+    private static String rewordDepartment(String input) {
+        String lowercase = input.toLowerCase();
+        String output = lowercase.substring(0,1).toUpperCase() + lowercase.substring(1);
+        return output;
+    }
+
 
 }
