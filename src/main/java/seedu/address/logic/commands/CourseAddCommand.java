@@ -56,4 +56,11 @@ public class CourseAddCommand extends Command {
                 internalCourse.getCourseName()), cm.getTableRepresentation());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CourseAddCommand // instanceof handles nulls
+                && internalCourse.equals(((CourseAddCommand) other).internalCourse));
+    }
+
 }

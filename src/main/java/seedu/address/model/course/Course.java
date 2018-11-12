@@ -38,4 +38,19 @@ public class Course {
     public void setFacultyName(FacultyName facultyName) {
         this.facultyName = facultyName;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Course)) {
+            return false;
+        }
+
+        Course otherCourse = (Course) other;
+        return otherCourse.getCourseCode().equals(getCourseCode()) && otherCourse.getFacultyName()
+                .equals(getFacultyName()) && otherCourse.getCourseName().equals(getCourseName());
+    }
 }
