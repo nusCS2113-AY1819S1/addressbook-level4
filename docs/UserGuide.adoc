@@ -630,7 +630,7 @@ Index must be an index number shown in the displayed list.
 // tag::email[]
 === Sending emails : `email`
 
-Sends an email to specified candidates about specified job offers OR
+Allows you to send an email to specified candidates about specified job offers OR
 to specified companies about specified candidates that are suitable for specified job offers. +
 
 [NOTE]
@@ -641,7 +641,7 @@ To use another Gmail account, delete `tokens` folder which is in the same direct
 program. +
 **While the authorisation page is open, RecruitBook will be unresponsive while waiting for an authentication response. +
 _This also means that if RecruitBook never receives the authentication response, (by closing the authorisation page, or
-not having an internet connection), RecruitBook will stay unresponsive, and the only way out of this is by force closing
+not having an internet connection), RecruitBook will remain to be unresponsive, and the only way out of this is by force closing
 it and reopening RecruitBook._ +
 This is part of Google's API**
 
@@ -651,35 +651,34 @@ Format: `email`
 Email process is a 4-stage process. To exit from this process, enter `cancel` command as explained in <<Exits from any intermediate command: `cancel`>>.
 
 . *Initialisation.* Type `email` and press kbd:[Enter] to initialise the email command.
-. *Choose your recipients.* On the RecruitBook application, what's shown on the main window
-   will be taken in as the recipients. +
-.. You can use commands such as `listc`, `filterc` and `findc` to change the candidate shown.
-.. You can also use commands such as `listC`, `findC`, `filterC`, `filterj` and `findj` to change the job offer or company shown.
-.. Type `next` and press kbd:[Enter] to move on to the next step.
+. *Choose your recipients.* On the RecruitBook application, what is shown on the main window will be taken in as recipients.
+.. You can use `switch` to switch between candidates and company view.
+.. You can also use commands such as `listc`, `filterc` and `findc` to change the candidates shown.
+.. You can also use commands such as `listC`, `findC`, `findj`, `filterC` and `filterj` to change the job offers or companies shown.
+.. Type `add` to add the recipients. You will be informed of what has been added, and the `add` command can be used as many times as you want.
+.. Once done, you can type `next` and press kbd:[Enter] to move on to the next step.
 
-[start=3]
-. *Choose your contents.* On the RecruitBook application, what is shown on the main window
-   will be taken in as contents.
-.. Depending on what what were the recipients, contents can only be the contrasting +
-   eg. If recipients were candidates, only job offers can be the contents and vice versa.
-.. This is enforced by the program by limiting commands available in contents selection.
-.. Type `next` and press kbd:[Enter] to move on to the next step.
+. *Choose your contents.*
+.. Depending on what what the recipients are, contents must be contrasting. +
+   eg. If you picked candidates as the recipients, you can only pick contents to be job offers and vice versa.
+.. This is enforced by limiting commands available in contents selection. +
+   eg. If you have picked candidates as the recipients, you are restricted to `listC`, `findC`, `findj`, `filterC` and `filterj`. `switch` is now disabled by default as well.
+.. Type `add` to add the contents. You will be informed of what has been added, and the `add` command can be used as many times as you want.
+.. Once done, you can type `next` and press kbd:[Enter] to move on to the next step.
 
-[start=4]
-. *Sending your email.*  This step is a confirmation step before you actually send the email.
-.. Type `preview` and press kbd:[Enter] to preview your email.
-.. Type `send` and press kbd:[Enter] to send the email.
+. *Sending your email.*  This step is a confirmation step before you send the email.
+.. You can type `preview` and press kbd:[Enter] to preview your email. A window will pop up showing the contents of the email.
+.. Type `send` and press kbd:[Enter] to send the email. There might be a slight lag while RecruitBook is sending the email(s)! Do not be alarmed.
 
 Other notes
 
-. `back` can be used to go back to the previous step.
-. `cancel` can be used to cancel the email command entirely.
+. You can type in `back` to go back to the previous step should you forget to add a certain recipient or content.
 . Adding duplicate candidate/job offers will be caught and will not be double counted.
 . If recipients are candidates, emails are sent via BCC to protect the privacy of your candidates.
 . If recipients are companies, emails are sent individually to each company.
 
-You can also change the email subject and email body text in `preference.json`. +
-Restart RecruitBook for changes to take effect.
+You can also change the default email subject and email body text in `preference.json`. +
+*Restart RecruitBook for changes to take effect.*
 
 . `subjectCandidateAsRecipient` -> Email subject if recipients of the email are candidates and contents of the email are job offers
 . `subjectCompanyAsRecipient` -> Email subject if recipients of the email are companies and contents of the email are candidates.
