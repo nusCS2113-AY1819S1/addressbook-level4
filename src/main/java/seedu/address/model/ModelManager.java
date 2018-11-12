@@ -172,7 +172,6 @@ public class ModelManager extends ComponentManager implements Model {
     public String checkRecords(String date) {
         String records;
         StringBuilder builder = new StringBuilder();
-        //builder.append("hahahah");
         builder.append(versionedExpenditureTracker.checkExpenditureRecordsOnParticularDay(date))
                 .append("\n\n")
                 .append(versionedTodoList.checkTasksRecordsOnParticularDay(date));

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.CheckCommand;
+import seedu.address.model.expenditureinfo.Date;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -29,7 +30,8 @@ public class CheckCommandParser implements Parser<CheckCommand> {
                     CheckCommand.MESSAGE_USAGE));
         }
 
-        String particularDate = argMultimap.getValue(PREFIX_DATE).get();
+        Date theDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        String particularDate = theDate.addingDate;
         return new CheckCommand(particularDate);
     }
 

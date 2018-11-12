@@ -110,8 +110,9 @@ public class UniqueTaskList implements Iterable<Task> {
         String theDate;
         int index = 0;
         StringBuilder it = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
+        boolean hasTask = false;
         castedDate = particularDate.substring(0, 5);
-        it.append("Here's all the task due on this day:\n");
         while (index < internalList.size()) {
             theDate = internalList.get(index).getDate().value;
             if (theDate.equals(castedDate)) {
@@ -124,10 +125,17 @@ public class UniqueTaskList implements Iterable<Task> {
                 } else {
                     it.append("Status: " + "Uncompleted\n");
                 }
+                hasTask = true;
             }
             index++;
         }
-        records = it.toString();
+        if (hasTask) {
+            builder.append("Here's all the task due on this day:\n")
+                    .append(it.toString());
+        } else {
+            builder.append("There is no task due on this day.\n");
+        }
+        records = builder.toString();
         return records;
     }
     //@@author
