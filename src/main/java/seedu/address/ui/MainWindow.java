@@ -190,8 +190,7 @@ public class MainWindow extends UiPart<Stage> {
         drinkDetailPane = new DrinkDetailPane(new Drink(null));
         drinkDetailPanePlaceholder.getChildren().add(drinkDetailPane.getRoot());
     }
-
-
+    
     void hide() {
         primaryStage.hide();
     }
