@@ -2229,8 +2229,6 @@ edited with new date 05-05-2015, new allergy of grass and new previous country v
    Expected: No medical report is edited. Message of invalid title will be shown.
 .. Test case: `editreport 1 ot/Asthma od/01012018 t/Depression d/02-02-2018 i/Prescribed AAA medicine, next appointment is on 03-03-2018.` +
    Expected: No medical report is edited. Message of invalid date will be shown.
-.. Test case: `editreport 1 ot/Asthma od/01-01-2018 t/Depression d/02-02-2018 i/ .` +
-   Expected: No medical report is edited. Message of invalid information will be shown.
 .. Test case: `editreport 1 ot/Flu od/03-03-2018 t/Cough d/03-03-2018 i/Prescribed AAA medicine, next appointment is on 04-04-2018.` +
    Expected: No medical report is edited. Message of medical report not found will be shown.
 
