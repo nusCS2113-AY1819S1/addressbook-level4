@@ -2297,23 +2297,7 @@ Index::
 An increasing integer used to label employees’ ID.
 
 [appendix]
-== Product Survey
 
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
-
-[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -2552,11 +2536,6 @@ Expected: Travel Expenses has value of 50.00. Medical Expenses has value of 100.
 +
 Test Case: addExpenses id/000001 tra/100 med/50 misc/25 +
 Expected: Travel expenses is increased to 150.00, medical expenses is increased to 150.00 and miscellaneous expenses is increased to 175.00, total expenses is increased to 475.00. Timestamp in the status bar is updated.
-.. Test Case: addExpenses id/000001 tra/50 med/100 misc/150 +
-Expected: Travel Expenses has value of 50.00. Medical Expenses has value of 100.00. Miscellaneous Expenses has value of 150.00. Total Expenses has value of 300.00. Timestamp in the status bar is updated. +
-+
-Test Case: addExpenses id/000001 tra/-20 med/-30 misc/-50 +
-Expected: Travel expenses is decreased to 30.00, medical expenses is decreased to 70.00 and miscellaneous expenses is decreased to 100.00, total expenses is decreased to 200.00. Timestamp in the status bar is updated.
 
 
 === Delete Expenses
