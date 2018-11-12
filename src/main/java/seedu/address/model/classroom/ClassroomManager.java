@@ -227,7 +227,7 @@ public class ClassroomManager {
                 return attendance;
             }
         }
-        return new Attendance();
+        return null;
     }
 
     /**

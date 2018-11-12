@@ -49,8 +49,6 @@ public class ClassEditCommandTest {
         } catch (DuplicateModuleException e) {
             e.printStackTrace();
         }
-
-        moduleManager.saveModuleList();
         classroomManager = ClassroomManager.getInstance();
 
     }
