@@ -52,9 +52,9 @@ public class XmlRequestListStorage implements RequestListStorage {
             return Optional.empty();
         }
 
-        XmlSerializableRequestList xmlAddressBook = XmlFileStorage.loadRequestsFromSaveFile(filePath);
+        XmlSerializableRequestList xmlBookInventory = XmlFileStorage.loadRequestsFromSaveFile(filePath);
         try {
-            return Optional.of(xmlAddressBook.toModelType());
+            return Optional.of(xmlBookInventory.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<bookinventory>
     <books>
         <name>Hans Muster</name>
         <isbn isPrivate="false">978-1-56619-909-4</isbn>
@@ -63,4 +63,4 @@
         <cost isPrivate="false">7.90</cost>
         <quantity isPrivate="false">chicago ave</quantity>
     </books>
-</addressbook>
+</bookinventory>

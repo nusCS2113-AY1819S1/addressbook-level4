@@ -57,7 +57,7 @@ public class RequestStorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void bookInventoryReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the InventoryStorageManager is properly wired to the
          * {@link XmlBookInventoryStorage} class.
@@ -65,7 +65,7 @@ public class RequestStorageManagerTest {
          * {@link XmlBookInventoryStorageTest} class.
          */
         BookInventory original = getTypicalBookInventory();
-        storageManager.saveAddressBook(original);
+        storageManager.saveBookInventory(original);
         ReadOnlyBookInventory retrieved = storageManager.readBookInventory().get();
         assertEquals(original.toString(), new BookInventory(retrieved).toString());
     }
@@ -97,7 +97,7 @@ public class RequestStorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyBookInventory addressBook, Path filePath) throws IOException {
+        public void saveBookInventory(ReadOnlyBookInventory bookInventory, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
