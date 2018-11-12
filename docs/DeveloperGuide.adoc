@@ -200,8 +200,9 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 image::DeletePersonSdForLogic.png[width="800"]
 
 Given below is the Object Diagram that shows the associations between various objects within the `Logic` component for the Login functionality.
+[[fig-LoginLogicObjectDiagram]]
 .Associations between objects in the Logic Component for Login feature
-image::LoginLogicObjectDiagram.PNG[width="800"]
+image::LoginLogicObjectDiagram.png[width="800"]
 
 .  `LogicManager` creates a new instance of `AddressBookParser`, which takes in the user login input details.
 .  This results in the simultaneous instantiation of `LoginUserIdPasswordRoleCommandParser` object and the calling of parse() method on the object.
@@ -232,8 +233,9 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
 image:ModelClassBetterOopDiagram.png[width="800"]
 
 Given below is the Object Diagram that shows the associations between various objects within the `Model` component for the Login functionality.
+[[fig-LoginModelObjectDiagram]]
 .Associations between objects in the Model Component for Login feature
-image::LoginModelObjectDiagram.PNG[width="800"]
+image::LoginModelObjectDiagram.png[width="800"]
 
 .  `filteredLoginDetails` will always show all accounts when `ModelManager` is first instantiated.
 .  Depending on the user input during login, `filteredLoginDetails` will be gradually filtered according to matching user id first, followed by user password and then, user role.
@@ -265,8 +267,9 @@ The `Storage` component,
 * can save the Address Book data in xml format and read it back.
 
 Given below is the Object Diagram that shows the associations between various objects within the `Storage` component for the new account creation functionality.
+[[fig-LoginStorageObjectDiagram]]
 .Associations between objects in the Storage Component for account creation feature
-image::LoginStorageObjectDiagram.PNG[width="800"]
+image::LoginStorageObjectDiagram.png[width="800"]
 
 .  `XmlAccount` is instantiated, with the appropriate account details as parameters for the new `XmlAccount` object.
 .  An `List<XmlAccount>` object is instantiated, with the previous `XmlAccount` object containing the new account's details to be added into the `List<XmlAccount>` object in `XmlSerializableLoginBook`.
@@ -292,8 +295,8 @@ account that is associated with an instance of a successful login. An object bel
 contains a complete list of all existing accounts stored in `LoginBook`. There is one crucial operation in `FilteredList`,
 which is often used:
 
-* `FilteredList#setPredicate(predicate)` -- Filters the list of accounts in `filteredLoginDetails` according to the
-predicates determined after the user inputs their login credentials.
+* `FilteredList#setPredicate(predicate)` -- Filters accounts in `filteredLoginDetails` according to the
+predicates determined after the user inputs their login details.
 
 `ModelManager` implements `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)` and
 `getFilteredLoginDetailsList()` found in the `Model` interface. `getFilteredLoginDetailsList()` is called when the
@@ -301,7 +304,7 @@ list of accounts in `LoginBook` is filtered to the extent where only one or no a
 
 Given below is an example usage scenario and how the login mechanism behaves at each step. The sequence diagram below
 demonstrates the flow of operation and interaction between the `Logic` and `Model` component in the login mechanism.
-Specifically, the diagram shows what happens when the user inputs the correct login credentials.
+The diagram shows what happens when the user inputs the correct login details.
 
 image::LoginSequenceDiagram.png[width="700"]
 
@@ -321,7 +324,7 @@ an `LoginUserIdPasswordRoleCommand` object with the user input, parsed, to `Addr
 Step 4. `LogicManager` calls the `execute()` method in `LoginUserIdPasswordRoleCommand`. Next, `LoginUserIdPasswordRoleCommand`
 calls `updateFilteredLoginDetailsList(updatedIdPredicate)` in `Model` with the computed predicate from user ID field input.
 
-Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, which then filters out accounts whose user Id is a
+Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, filtering accounts whose user Id is a
 mismatch with updatedIdPredicate. `filteredLoginDetails` is updated as shown below.
 
 image::ParseCorrectLoginDetailList.PNG[width="200"]
@@ -509,7 +512,7 @@ image::ViewClubBudgetsCommandSequenceDiagram.png[width="800"]
 
 The Search Pruning mechanism is facilitated by the `SearchHistoryManager` class, and within it is a `searchHistoryStack` that stores `Predicate` objects.
 `Predicate` objects are used to filter `FilteredList` objects by calling the `setPredicate()` method of `FilteredList`. By storing `Predicate` objects
-in SearchHistoryManager, it stores the search logic that was previously used on the `FilteredList` object, and hence, simulates the effect of storing Search History
+in SearchHistoryManager, it stores the search logic that was previously used by the `FilteredList` object, and hence, simulates the storing Search History
 without storing the actual data.
 
 In NUSSU Connect, the main `SearchHistoryManger` object is in `ModelManager` and it stores `Predicate<Person>` objects used for the filtering of `filteredPersons` list.
@@ -530,28 +533,28 @@ clears all system search logic from in-app memory. +
 * `isEmpty()` +
 returns true if `searchHistoryStack` is empty. +
 
-Given below are illustrations to help you understand how the first three method works internally
+Given below are illustrations to help you understand how the first three method works internally.
+But before carrying on, you need to take note of the following.
 
- In the diagrams, 'UP' is the short-form for User Predicate and 'SP' is the short-form for System Predicate.
- . User Predicate stores the logic specified by the user. This will not be used to filter FilteredList objects.
- . System Predicate stores the search logic for the system which will be used to filter FilteredList objects.
+NOTE: In the diagrams, 'UP' is the short-form for User Predicate and 'SP' is the short-form for System Predicate.
+ User Predicate stores the logic specified by the user and it is not the actual search logic used for filtering of FilteredList objects.
+ On the other hand, System Predicate stores the search logic for the system and it will be used to filter FilteredList objects.
 
-NOTE: User Predicate and System Predicate are not actual Classes, they are simply there to help simplify the explanation.
-In the actual implementation, there is no way to differentiate one `Predicate` from the other.
+NOTE: User Predicate and System Predicate are not actual Classes and they are simply there to help simplify the explanation.
+In the actual implementation, there is no way to differentiate one from the other.
 
 '''
-
-`executeNewSearch(Predicate<T> predicate)` +
+**executeNewSearch(Predicate<T> predicate)** +
 
 Upon calling this method, there will be two different situations +
 
-* Situation 1: `searchHistoryStack` is empty +
+* *Situation 1*: `searchHistoryStack` is empty +
 Upon receiving a new User Predicate, SearchHistoryManager will simply push the new User Predicate into `searchHistoryStack`
 as a System Predicate.
 
 image::executeNewSearchEmptyStack.png[width="550"]
 
-* Situation 2: `searchHistoryStack` is not empty +
+* *Situation 2*: `searchHistoryStack` is not empty +
 Before pushing the new `Predicate` into the stack, `SearchHistoryManager` will first retrieve the System Predicate object at the top of the stack.
 After retrieving it, it will call the `and()` method with the User Predicate, creating a new System Predicate which will then be pushed into the top
 of the stack.
@@ -560,7 +563,7 @@ image::executeNewSearchNonEmptyStack.png[width="700"]
 This method will return the new System Predicate at the top of the stack.
 
 '''
-`revertLastSearch()` +
+**revertLastSearch()** +
 
 This method will pop the System Predicate at the top of the stack.
 In the event that the stack is already empty, this method will throw `EmptyHistoryException`.
@@ -570,17 +573,18 @@ If the stack is not empty after the pop, this method will return the System Pred
 it will return a `Predicate` object with a search logic that always defaults to true.
 
 '''
-`clearSearchHistory()` +
+**clearSearchHistory()** +
 
 This method will simply empty the stack.
 
 image::clearSearchHistoryStack.png[width="350"]
 
 '''
+
+===== How SearchHistory
 The following sequence diagrams shows you how the `IncludeNameFindCommand` and `UndoFind` commands
 utilize `SearchHistoryManager` to perform Search Pruning. Other variations of `FindCommand` works similarly to
 `IncludeNameFindCommand` and the sequence diagram for `IncludeNameFindCommand` is also relevant to them.
-
 
  - `IncludeNameFind` command +
 
@@ -595,44 +599,45 @@ image::UndoFindSequenceDiagram.png[]
 
 ===== Aspect: What data is stored in search history stack +
 
-* **Alternative 1(current choice):**  Save a Stack of Predicates
+* **Alternative 1(current choice):**  Save a Stack of `Predicate` objects
 ** Pros:
     . Does not need to store the data in search history explicitly which saves memory +
-    . Any form of Search Pruning done with Predicates can reuse `SearchHistoryManager` class +
+    . `SearchHistoryManager` class is reusable for any Search Pruning done with `Predicate` +
 
 ** Cons:
-. Need to understand how `Predicate` works before utilizing this Class.
-. `Predicate` objects by itself does not perform the Search Pruning. We have to call the `setPredicate()` method
-   of the `FilteredList` class with the `Predicate` object as one of the parameters to do the Search Pruning.
+. Developers need to understand how `Predicate` works before utilizing `SearchHistoryManager` to perform Search Pruning.
+. `Predicate` objects by itself does not perform the Search Pruning. We have to make an additional call to the
+  `setPredicate()` method of the `FilteredList` class with the `Predicate` object.
 
-* ** Alternative 2: ** Save a Stack of Lists containing Person objects in search history
+* ** Alternative 2: ** Save a Stack of Lists containing `Person` objects in search history
 ** Pros:
-    . It is easy to understand that we are filtering according to Person objects from `SearchHistoryManager` class
+    . It is easy to understand from the code that we are filtering according to `Person` objects.
 
 ** Cons:
-    . More memory is required as Person objects has to be duplicated multiple times into a new List.
-    . Class is not reusable for Search Pruning of other objects other than those from Person classes.
+    . More memory is required as `Person` objects has to be duplicated multiple times into a new Lists.
+    . `SearchHistoryManager` can only be used for Search Pruning on objects that is a `Person`.
 
 ===== Aspect: How the Predicate at the top of the Stack is retrieved from SearchHistoryManager +
 
-* **Alternative 1(current choice):** `Predicate` object is returned from the methods `executeSearch()` and `revertLastSearch()`
+* **Alternative 1(current choice):** `Predicate` is returned from the methods `executeSearch()` and `revertLastSearch()`
 ** Pros:
-    . No need for an extra method call to retrieve search logic in the form of `Predicate` object from SearchHistoryManager. +
+    . No need for an extra method call to retrieve system search logic in the form of `Predicate` from `SearchHistoryManager`. +
 ** Cons:
-    . No clear distinction between Update and Retrieval of search logic. +
+    . No clear distinction between Update and Retrieval of system search logic. +
 
-* ** Alternative 2: ** `Predicate` object is not returned from the methods `executeSearch()` and `revertLastSearch()`, but is instead retrieved with another method.
+* ** Alternative 2: ** `Predicate` is not returned from the methods `executeSearch()` and `revertLastSearch()`, but is instead retrieved with another method.
 ** Pros:
-    . Clearer distinction between Update and Retrieval of search logic.
+    . Clearer distinction between Update and Retrieval of system search logic.
 
 ** Cons:
-    . Need to perform 2 method calls separately to retrieve `Predicate` object after an update to search logic.
+    . Need to perform 2 method calls separately to retrieve `Predicate` object from `SearchHistoryManager` after an update to search logic.
     . Need to implement another method specifically for retrieval of `Predicate` object.
-    . Future developers utilizing `SearchHistoryManger` need to remember that they need to retrieve `Predicate` object from `SearchHistoryManager` separately
+    . Other developers utilizing `SearchHistoryManger` need to remember that they need to retrieve `Predicate` object from `SearchHistoryManager` separately
       after an update to search logic.
 // end::searchpruning[]
 
 // tag::asl[]
+
 === Add Skill Level Command
 
 ==== Current Implementation
@@ -641,7 +646,8 @@ The add skill mechanism builds on the `addressBookParser`. This as well
 as it's subclass `addSkillCommandParser` ensures that the correct number of arguments
 is given to the command.
 
-The following shows how the application Logic handles the request to change a skill in one particular scenario.
+You can observe how the application Logic handles the request to change a skill
+in one particular scenario in the following steps:
 
 Step 1. The user launches the application. The application boots up and lists all members.
 
@@ -689,6 +695,23 @@ information during addition of personal information.
 * Another is to enhance the edit command, possibly depreciating the use of the add skill level command.
 * Another is to enhance the storage such that multiple skills can be added per person.
 // end::asl[]
+
+=== Sort feature
+
+This feature was implemented by implementing custom comparators in
+`Person` class. You will be able to compare the values in each person which are used
+as arguments to the `Sort`, which is a method of all instances of `List`.
+
+1. A `FilteredList` (unmodifiable) is obtained from the `model` and is placed into an `ArrayList`,
+which is modifiable.
+2. `Sort` is called on the list, using custom comparators which can be found in the Person Class.
+3. The items are deleted from the model and are replaced in the order of the `ArrayList`.
+
+==== Possible extensions
+
+* Currently, the `find` command doesn't work with the Sort Command. The two commands used together
+would be quite powerful, so making them work together would be top priority for `v2.0`.
+* It should also be possible to sort by reverse, and sort by multiple criteria at once.
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -1369,9 +1392,9 @@ Use case resumes at step 2.
 *MSS*
 
 1.  User indicates he wants to sort by skills
-2.  NUSSU-Connect lists available skills, asks the user what he wants to sort by.
-3.  User indicates what he wants by selecting
-4.  NUSSU-Connect all skills.
+2.  NUSSU-Connect lists available users.
+3.  User indicates that he wants to sort by skill.
+4.  NUSSU-Connect sorts all Persons in the application.
 +
 Use case ends.
 
@@ -1652,7 +1675,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Finding a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list` command.
 .. Test case: `find \tag friends` +
    Expected: All contacts with the tag friends is shown in the displayed list. Other contacts without the
    tag friends will be removed from the displayed list.
@@ -1664,39 +1687,47 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Excluding a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list` command.
 .. Test case: `find \exclude Alex` +
-   Expected: All contacts with the name Alex is removed from the displayed list.
+   Expected: All contacts with the name Alex(case-insensitive) is removed from the displayed list.
    Name Keywords History with '-alex' message is shown in the results display
 .. Test case: `find \exclude` +
    Expected: Invalid Command Format. Error details shown in results display.
 
 === Excluding a Person with a certain tag from displayed list
 
-. Excluding a person while all persons are listed
+. First variation of excluding a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list` command.
 .. Test case: `find \tag \exclude neighbours` +
    Expected: All contacts with the tag neighbours is removed from the displayed list.
    Tag Keywords History with '-neighbours' message is shown in the results display
+.. Test case: `find \tag \exclude` +
+   Expected: Invalid Command Format. Error details shown in results display.
+
+. Second variation of excluding a person while all persons are listed
+.. Prerequisites: List all persons using the `list` command.
+
 .. Test case: `find \exclude \tag classmates` +
    Expected: All contacts with the tag classmates is removed from the displayed list.
    Tag Keywords History with '-classmates' message is shown in the results display
-.. Test case: `find \tag \exclude` +
+.. Test case: `find \exclude \tag` +
    Expected: Invalid Command Format. Error details shown in results display.
-.. Other incorrect delete commands to try: `find \exclude \tag`
 
 === UndoFind command
 
-. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+. UndoFind Command with an Empty Search History.
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list. This should clear the
+   Search History stored internally within the application at the same time.
 .. Test case: `undofind` +
-   Expected: "SearchHistory is Empty" message in result display.
-.. Test case: `find \exclude Alex` and then `undofind` +
+   Expected:  Result Display shows "SearchHistory is Empty" message.
+
+. UndoFind Command with an Non-Empty Search History.
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list, and then `find \exclude Alex` to
+    execute the first search.
+.. Test case: `undofind` +
    Expected: +
-        *After execution of first command* +
-        All contacts with the name Alex is removed from the displayed list. +
-        *After execution of second command* +
-        All contacts with the name Alex will be added back to the displayed list after the second command and
+        All persons with the name Alex(case-insensitive) will be added back to the displayed list
         "Undo success!" message should shown in result display.
 
 === Search Pruning Feature
