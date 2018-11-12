@@ -232,6 +232,35 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
 
+// tag::export[]
+[[Design-Export]]
+=== Export component
+
+.Structure of the Export Component
+image::ExportClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/export/Export.java[`Export.java`]
+
+The `Export` component can save the filtered persons to the specified file in xml format.
+// end::export[]
+
+// tag::import[]
+[[Design-Import]]
+=== Import component
+
+.Structure of the Import Component
+image::ImportClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/export/Import.java[`Import.java`]
+
+The `Import` component can read the Address Book data from the specified file in xml format.
+
+[NOTE]
+====
+The import component (Import.java and ImportManager.java) is packaged under the export package.
+====
+// end::import[]
+
 [[Design-Commons]]
 === Common classes
 
