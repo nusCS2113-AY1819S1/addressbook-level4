@@ -353,7 +353,7 @@ image::CheckSequenceDiagram.png[width="800"]
 ==== Current Implementation
 The sell command utilises both the `Model` and `Logic` component to fulfil its function.
 
-The stock operation is similar to the sell operation, refer to sell command for sequence diagram:
+The stock operation is similar to the sell operation, refer to sell command for sequence diagram 
 
 ==== Design Considerations
 
