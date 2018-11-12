@@ -32,7 +32,7 @@ Hope you enjoy!
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Downloading the program.
-* You can download the latest `bookinventory.jar` link:{https://github.com/CS2113-AY1819S1-W13-4/main/releases}[here]
+* You can download the latest `bookinventory.jar` https://github.com/CS2113-AY1819S1-W13-4/main/releases[here]
 * Copy the file to the folder you want to use as the home folder for your BookInventory.
 * Double-click the file to start the app.
 
@@ -385,9 +385,9 @@ Edits the price and name of the 1st book to be `20` and `Chemistry` respectively
 Edits the cost of the 2nd book to be `30` and clears all existing tags.
 
 // tag::sell[]
-=== Decrease Book Quantity (Books Sold) : `sell`
+=== Decrease Quantity of Book (Number of Books Sold) : `sell`
 
-Decrease an existing book quantity in the inventory list. +
+Decrease the quantity of an existing book in the inventory list. +
 Format: `sell INDEX q/QUANTITY` OR `sell i/ISBN13 q/QUANTITY`
 
 ****
@@ -405,9 +405,9 @@ Decrease the quantity available of the 1st book by 5.
 Decrease the quantity available for the book with the corresponding ISBN13 by 4.
 // end::sell[]
 
-=== Increase Book Quantity (Ordered more books): `stock`
+=== Increase Quantity of Book (Number of Books Ordered): `stock`
 
-Increase an existing book quantity in the inventory list. +
+Increase the quantity of an existing book in the inventory list. +
 Format: `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY`
 
 ****
