@@ -32,7 +32,7 @@ RecruitBook is a desktop application created for job agents. The user interacts 
 ** Justification: It is imperative for a job agent to be able to inform candidates about job offers or inform companies about candidates. This feature allows emails to be sent quickly and automatically without any hassles.
 ** Highlights: The email will be automatically generated, all the user needs to do is select the recipients and contents of the email. There is a preview feature built into the command to allow the user to double check the recipients and contents of the email. Subject text and body text of the email is also customisable.
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=andrewome[Functional code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=andrewome[Functional code/Test Code]]
 
 * *Other contributions*:
 
@@ -96,7 +96,7 @@ PartyCards is a web application that allows up to 4 users play card games. Card 
 ** Project management:
 *** Managed releases `Milestone 1` - `Milestone 3` (3 releases) on GitHub
 ** Documentation:
-*** Updated README.md with documentation on PartyCards
+*** Updated https://github.com/andrewome/PartyCards/blob/master/README.md[README.md] with documentation on PartyCards
 ** Tools:
-*** Integrated Socket.io into the project to handle game instances.
+*** Integrated Socket.io into the project to handle easy client to client communication
 
