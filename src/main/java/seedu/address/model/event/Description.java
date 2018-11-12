@@ -3,7 +3,7 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-
+//@@author: IcedCoffeeBoy
 /**
  * Represents an Event's description.
  * Guarantees: details are present and not null, field values are validated, immutable.

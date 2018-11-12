@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import java.util.LinkedList;
 
+import seedu.address.model.exceptions.HistoryStateOutOfBoundsException;
+
 
 /**
  * {@code LinkedList} subclass to keep track of AddressBook and EventList changes for undo and redo commands
@@ -91,7 +93,7 @@ public class StateHistoryList extends LinkedList<Integer> {
      */
     public void incrementPointer() {
         if (pointer >= size() - 1) {
-            throw new IndexOutOfBoundsException("No more states to redo!");
+            throw new HistoryStateOutOfBoundsException("No more states to redo!");
         }
         pointer++;
     }
@@ -101,7 +103,7 @@ public class StateHistoryList extends LinkedList<Integer> {
      */
     public void decrementPointer() {
         if (pointer < 0) {
-            throw new IndexOutOfBoundsException("No more states to undo!");
+            throw new HistoryStateOutOfBoundsException("No more states to undo!");
         }
         pointer--;
     }

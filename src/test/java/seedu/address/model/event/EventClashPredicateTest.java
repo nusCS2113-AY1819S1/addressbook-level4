@@ -6,13 +6,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
 import static seedu.address.testutil.TypicalEvents.EVENT_2;
+import static seedu.address.testutil.TypicalEvents.EVENT_3;
 import static seedu.address.testutil.TypicalEvents.EVENT_4;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import seedu.address.testutil.TypicalEvents;
-
 
 public class EventClashPredicateTest {
 
@@ -20,7 +18,7 @@ public class EventClashPredicateTest {
 
     @Before
     public void setup() {
-        eventWithAlice = TypicalEvents.eventwithAttendee();
+        eventWithAlice = EVENT_3;
     }
 
     @Test

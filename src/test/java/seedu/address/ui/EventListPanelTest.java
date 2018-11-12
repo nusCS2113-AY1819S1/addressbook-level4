@@ -24,6 +24,9 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.event.Event;
 import seedu.address.storage.XmlSerializableEventList;
 
+/**
+ * Based on PersonListPanelTest with minor modification and refactoring
+ */
 public class EventListPanelTest extends GuiUnitTest {
     private static final ObservableList<Event> TYPICAL_EVENTS =
             FXCollections.observableList(getTypicalEvents());

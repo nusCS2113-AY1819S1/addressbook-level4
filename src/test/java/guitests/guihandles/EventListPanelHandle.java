@@ -9,7 +9,8 @@ import javafx.scene.control.ListView;
 import seedu.address.model.event.Event;
 
 /**
- * Provides a handle for {@code PersonListPanel} containing the list of {@code PersonCard}.
+ * Provides a handle for {@code EventListPanel} containing the list of {@code EventCard}.
+ * Based on PersonListPanel with minor modification and refactoring
  */
 public class EventListPanelHandle extends NodeHandle<ListView<Event>> {
     public static final String EVENT_LIST_VIEW_ID = "#eventListView";

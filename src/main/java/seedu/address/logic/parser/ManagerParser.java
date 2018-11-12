@@ -15,6 +15,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.InviteCommand;
@@ -24,13 +25,12 @@ import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SelectEventCommand;
+import seedu.address.logic.commands.ShowMineCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.ViewAttendeesCommand;
 import seedu.address.logic.parser.exceptions.InvalidLoginException;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-//@@author: IcedCoffeeBoy
 
 /**
  * Parses user input.
@@ -38,6 +38,17 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class ManagerParser extends CommandsParser {
 
     public static final String IDENTITY = "Manager";
+
+    private static String LOGIN_IDENTITY;
+
+    public ManagerParser() {
+        LOGIN_IDENTITY = null;
+    }
+
+    public ManagerParser(String loginidentity) {
+        this.LOGIN_IDENTITY = loginidentity;
+    }
+
 
     /**
      * Parses user input into command for execution.
@@ -83,14 +94,17 @@ public class ManagerParser extends CommandsParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindEventCommand.COMMAND_WORD:
+            return new FindEventCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
-        case ViewAttendeesCommand.COMMAND_WORD:
-            return new ViewAttendeesCommandParser().parse(arguments);
+        case SelectEventCommand.COMMAND_WORD:
+            return new SelectEventCommandParser().parse(arguments);
 
         case InviteCommand.COMMAND_WORD:
             return new InviteCommandParser().parse(arguments);
@@ -117,7 +131,10 @@ public class ManagerParser extends CommandsParser {
             throw new InvalidLoginException(IDENTITY);
 
         case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommandParser().parse(arguments);
+            return new LogoutCommandParser().parse(commandWord);
+
+        case ShowMineCommand.COMMAND_WORD:
+            return new ShowMineCommandParser().parse(LOGIN_IDENTITY);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -132,6 +132,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasEventAfterEdit(Event event, Event editedEvent) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void deleteEvent(Event event) {
         throw new AssertionError("This method should not be called.");
     }
@@ -153,6 +158,11 @@ public class ModelStub implements Model {
 
     @Override
     public boolean hasClash(Event event, String personName) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasClashAfterEdit(Event event, Event editedEvent, String personName) {
         throw new AssertionError("This method should not be called.");
     }
 

@@ -74,7 +74,7 @@ public class EventBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Event} that we are building.
+     * Sets the {@code Date} of the {@code Event} that we are building.
      */
     public EventBuilder withDate(String date) {
         this.date = new EventDate(date);
@@ -114,7 +114,7 @@ public class EventBuilder {
     }
 
     /**
-     * Sets the {@code Attendees} of the {@code Event} that we are building.
+     * Sets the {@code Attendees} of the {@code Event} that we are building with emails.
      */
     public EventBuilder withAttendee(String... strings) {
         Set<String> set = SampleDataUtil.getAttendeeSet(strings);
