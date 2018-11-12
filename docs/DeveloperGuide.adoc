@@ -381,7 +381,7 @@ image::deleteTaskEventHandlingSD.png[width="800"]
 // end::tasks[]
 
 //@@author QzSG
-// tag::backuprestore[]
+// tag::backupsnippet[]
 === Backup Feature
 ==== Backups Types
 The application supports both local and online backups
@@ -483,6 +483,8 @@ In this example, `GithubStorage#saveContentToStorage` is called for the respecti
 . A `NewNotificationAvailableEvent` is also fired. This event is handled by the `UiManager` which calls `showNotification` that creates a new notification and shows
  it to the user.
 
+// end::backupsnippet[]
+// tag::restoresnippet[]
 === Restore Feature
 ==== Restore Types
 The application supports both local and online restore of backup made using the `backup` feature
@@ -498,7 +500,7 @@ the `model` and `storage` components.
 Restore commands sends either a `LocalRestoreEvent` or a `OnlineRestoreEvent` event
 The raised event is observed and handled by the storage manager which performs the reading of the local or online files into the appropriate data book objects such as `ReadOnlyAddressBook`
 An event is then triggered by `storage` on successful restore which informs `model` that an update to the in memory state is required.
-
+// end::restoresnippet[]
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the local restore command `restore` and valid local backup exists.
 
 image::SDforRestoreLocalwithEventHandlingPart1.png[width="800"]
@@ -511,7 +513,6 @@ The event is propagated through the `EventsCenter` to the `Storage` component
 
 Online Restoration is similar to Local Restore but utilising the same `ExecutorService` used in `backup` to retrieve the online backup data books concurrently.
 
-// end::backuprestore[]
 //@@author
 
 // tag::dataencryption[]
@@ -1581,7 +1582,7 @@ _{ more test cases ... }_
 //@@author
 
 //@@author QzSG
-// tag::manualTestBackupRestore[]
+// tag::manualTestBackup[]
 === Backup of data
 
 . Backup of data to local storage
@@ -1618,7 +1619,10 @@ _{ more test cases ... }_
 
 .. Test case: `backup service invalid invalid` +
    Expected: No backup is performed. Invalid command details shown in status message with command usage.
+// end::manualTestBackup[]
 
+// tag::manualTestRestore[]
+=== Restore of data
 . Restore of data from local backup
 
 .. Prerequisites: `backup` command has been run before and all files are valid and exists in `preferences.json` +
@@ -1658,7 +1662,7 @@ _{ more test cases ... }_
 .. Prerequisites: Online backup command has been run before and all gist ids in `preferences.json` are valid +
    Test case: `restore GITHUB VALID_AUTH_TOKEN` +
    Expected: No restore is performed. Invalid command status message is shown to user with correct usage.
-// end::manualTestBackupRestore[]
+// end::manualTestRestore[]
 //@@author
 
 //@@author chensongjian
