@@ -60,7 +60,8 @@ Given below are my contributions to this project.
 
 ** Documentation:
 *** Added Expenditure Tracker features description to User Guide.
-*** Updated user stories and use cases of Developer Guide.
+*** Wrote the user stories for the expenditure tracker under the Appendix section of the Developer Guide
+*** Wrote the manual testing instructions for the expenditure tracker under the Appendix section of the Developer Guide
 *** Added implementations for Calendar, Viewing expenditures and Get advice to Developer Guide.
 
 ** Project Management:
