@@ -74,6 +74,7 @@ This section highlights all of my contributions to the project and the applicati
 *** Restructured commands listing in section 3 & 5 of the User Guide
 *** Updated class diagrams for model, storage and UI components in the Developer Guide
 *** Updated various sequence diagrams in the Developer Guide
+*** Wrote the user stories and use cases for the to-do list under the Appendix section of the Developer Guide
 
 ** Tools:
 *** Set up Travis CI for the team repository
