@@ -50,8 +50,6 @@ This Project Portfolio documents my contributions and demonstrates my ability to
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T12-3/main/issues/174[1], https://github.com/CS2113-AY1819S1-T12-3/main/issues/176[2], https://github.com/CS2113-AY1819S1-T12-3/main/issues/182[3], https://github.com/CS2113-AY1819S1-T12-3/main/issues/196[4])
 *** Some parts of the kbd:[Tab] feature I added was adopted by several other classmates
 
-<<<
-
 == Contributions to the User Guide
 
 _This part shows the sections that I contributed to the User Guide. My ability to write documentation targeting end-users are showcased here._
