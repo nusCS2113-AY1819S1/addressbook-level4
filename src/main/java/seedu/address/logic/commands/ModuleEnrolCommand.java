@@ -37,7 +37,7 @@ public class ModuleEnrolCommand extends Command {
     private static final String MESSAGE_ALREADY_ENROLLED = "%1$s (%2$s) is already enrolled in %3$s %4$s.";
     private static final String MESSAGE_ENROL_SUCCESS = "Enrolled %1$s (%2$s) in %3$s %4$s.";
     private static final String MESSAGE_COMMAND_SUMMARY =
-            "%1$s student%2$s enrolled, %3$s student%4$s already enrolled, %5$s invalid matric number%6$s.";
+            "%1$s student%2$s enrolled, %3$s student%4$s already enrolled, %5$s student%6$s do%7$s not exist.";
 
     private final ModuleCode moduleCode;
     private final Set<MatricNo> matricNoSet;
@@ -95,14 +95,25 @@ public class ModuleEnrolCommand extends Command {
 
         moduleManager.saveModuleList();
         sb.append(String.format(MESSAGE_COMMAND_SUMMARY,
-                numEnrolled, determinePluralOrSingular(numEnrolled),
-                numDuplicates, determinePluralOrSingular(numDuplicates),
-                numInvalid, determinePluralOrSingular(numInvalid)));
+                numEnrolled, determinePluralOrSingularForStudent(numEnrolled),
+                numDuplicates, determinePluralOrSingularForStudent(numDuplicates),
+                numInvalid, determinePluralOrSingularForStudent(numInvalid),
+                determinePluralOrSingularForDo(numInvalid)));
 
         return new CommandResult(sb.toString());
     }
 
-    private char determinePluralOrSingular(int number) {
+    /**
+     * Determines if the noun "student" should be in singular or plural form.
+     */
+    private char determinePluralOrSingularForStudent(int number) {
         return number == 0 || number > 1 ? 's' : Character.MIN_VALUE;
+    }
+
+    /**
+     * Determines if the verb "do" should be in singular or plural form.
+     */
+    private String determinePluralOrSingularForDo(int number) {
+        return number == 1 ? "es" : "";
     }
 }
