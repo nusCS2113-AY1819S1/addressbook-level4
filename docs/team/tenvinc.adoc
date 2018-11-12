@@ -10,23 +10,19 @@
 == What Savee is about:
 
 Savee is an application my team has created for the NUS module CS2113T on Software Engineering Principles and Object Oriented Programming.
-This project lasted for 10 weeks and we were tasked to develop a desktop application for a particular group of users.
 Savee's main target audience are students who need help managing their finances and likes typing. In Savee,
-there is a text box located at the topmost part of the application which users can use to type commands into the system. Graphic user interface(GUI)
+there is a command box for inputting commands and graphic user interface(GUI)
 created using JavaFX was also used to display the output of the system to create a more intuitive and engaging user experience.
 
 == Summary of contributions
-Savee was adapted from https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4], a sample codebase given by the module.
 Throughout this development cycle, I have made much contributions to the team and below shows a summary of my
 contributions.
 
 === Application Code related contributions
 
 * *Major Enhancements*: Facilitated the morph from AddressBook Level 4 to Savee
-** `Reason for the enhancement` Savee is mainly targeted at users who wants to store and keep track of their daily financial activity. This is significantly
-different from the original AddressBook Level 4.
-** `My contributions` I adapted all model and storage components. I also fixed
-all the tests that broke as a result of the morph.
+** `Reason for the enhancement` Savee is mainly targeted at users who wants to store and keep track of their daily financial activity, which is not the same as AB4.
+** `My contributions` I adapted all model and storage components. I also fixed all the tests that broke as a result of the morph.
 
 * *Major Enhancements*: Added a feature that allows users to display a summary of their expenses and income by day, month and categories in a table
 ** `Reason for the enhancement` Users want to have a way to track daily or monthly financial activities without having to go through the list.
@@ -42,19 +38,12 @@ activity within a given period.
 ** `My contributions` For this feature, there were 3 main parts, logic for the command, model to support statistics and the GUI. I created all the components necessary for this feature, with the most noteworthy implementation being user interface. Similar to summary,
 the Ui panel in this feature can be switched out for other panels. The pie charts used were generated using JavaFX pie chart library. However, I overwrote some parts of the in to allow for greater functionality using Java's overriding feature.
 
-* *Major Enhancements*: Added a welcome panel that displays breakdown for current month
+* *Minor Enhancements*: Added a welcome panel that displays breakdown for current month
 ** `Reason for the enhancement`  Users may want to get a sense of their current financial status without having
 to type a single command.
-** `Overview` This feature serves as the front page of the application. It displays the category breakdown of current month and is automatically
-updated whenever the data in the application is changed.
-** `My contributions` Since this feature is automatic and should not require any user input, I created new methods that can track the current date and cached a list in `ModelManager` to store
-the record list for the current month. I also hooked up this cached list to main model to listen to any changes to the underlying list and update itself. Furthermore,
-I created the welcome panel UI layout and logic to read from this list whenever it updates and refresh the UI panel.
+** `My contributions` I created a system to track the current date and refresh the UI panel whenever it detects changes to the underlying list.
 
 * *Minor Enhancements*: Added an extension to list command
-** `Reason for the enhancement` Originally, the list command would list all records in the application. This may not be very convenient when the
-number of records become very large.
-** `Overview` This list command allows users to specify the date range and will only show records in that range.
 ** `My contributions` ListCommandParser of the original implementation was tweaked slightly to allow additional functionality.
 
 * *Code contributed* can be found here:
@@ -70,9 +59,6 @@ https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tenvinc
 ** Set up Continuous Integration, coverage tools and github website deployment
 ** PRs reviewed(with non trivial comments)
 
-* Debugging team members code
-** Helped debug other team member's code and offer suggestions when they are stuck
-
 * Testing
 ** Wrote extensive tests to increase coverage of the project
 
@@ -82,16 +68,12 @@ https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tenvinc
 
 == Contributions to the User Guide
 |===
-|_Below are some of my contributions to the User Guide. These show that I am able to write comprehensive User Guides._
+|Below are some of my contributions to the User Guide. These show that I am able to write comprehensive User Guides.
 |===
-
-include::../UserGuide.adoc[tag=list]
 
 include::../UserGuide.adoc[tag=summary]
 
 include::../UserGuide.adoc[tag=stats]
-
-include::../UserGuide.adoc[tag=welcomepanel]
 
 == Contributions to the Developer Guide
 |===
@@ -100,10 +82,7 @@ UML diagrams, sequence diagrams, activity flow which are crucial to Software Eng
 developers the architecture of my product._
 |===
 
-include::../DeveloperGuide.adoc[tag=list]
-
 include::../DeveloperGuide.adoc[tag=summary]
 
 include::../DeveloperGuide.adoc[tag=stats]
 
-include::../DeveloperGuide.adoc[tag=welcomepanel]

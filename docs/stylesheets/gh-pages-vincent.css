@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat|Open+Sans);
-@import "ubuntu.css"; /* Default asciidoc style framework - important */
+@import "asciidoctor.css"; /* Default asciidoc style framework - important */
 
 /* Custom block: details */
 
@@ -40,7 +40,7 @@ h5,
 h5 > a.link,
 h6,
 h6 > a.link {
-    color: #e46c0a;
+    color: #53e42d;
 }
 
 .subheader,
