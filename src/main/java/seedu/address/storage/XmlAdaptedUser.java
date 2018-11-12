@@ -88,11 +88,11 @@ public class XmlAdaptedUser {
         }
 
         if (distributorbookfilepath == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "DistributorBook file path"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Distributor Book file path"));
         }
 
         if (salesHistoryFilePath == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "SalesHistory file path"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Sales History file path"));
         }
 
         if (!User.isValidAddressBookFilePath(Paths.get(addressbookfilepath), this.username)) {

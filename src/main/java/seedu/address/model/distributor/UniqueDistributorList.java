@@ -13,8 +13,8 @@ import seedu.address.model.distributor.exceptions.DuplicateDistributorException;
 
 /**
  * A list of distributors that enforces uniqueness between its elements and does not allow nulls.
- * A distributor is considered unique by comparing using {@code Distributor#isSameDistributor(Distributor)}.
- * As such, adding and updating of distributors uses Distributor#isSameDistributor(Distributor)
+ * A distributor is considered unique by comparing using {@code Distributor#isSameDistributorName(Distributor)}.
+ * As such, adding and updating of distributors uses Distributor#isSameDistributorName(Distributor)
  * for equality so as to ensure that the distributor being added or updated is unique in terms of identity in the
  * UniqueDistributorList. However, the removal of a distributor uses Distributor#equals(Object) so
  * as to ensure that the distributor with exactly the same fields will be removed.
@@ -33,6 +33,22 @@ public class UniqueDistributorList implements Iterable<Distributor> {
     public boolean contains(Distributor toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameDistributor);
+    }
+
+    /**
+     * Returns true if the list contains a distributor with the same name as the given argument.
+     */
+    public boolean containsName(Distributor toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameDistributorName);
+    }
+
+    /**
+     * Returns true if the list contains a distributor with the same phone as the given argument.
+     */
+    public boolean containsPhone(Distributor toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameDistributorPhone);
     }
 
     /**

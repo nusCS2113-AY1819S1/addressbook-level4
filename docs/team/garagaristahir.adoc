@@ -1,18 +1,7 @@
 = Gara Tahir - Project Portfolio
-:site-section: UserGuide
-:toc:
-:toc-title:
-:toc-placement: preamble
-:sectnums:
-:imagesDir: images
-:stylesDir: stylesheets
-:xrefstyle: full
-:experimental:
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-endif::[]
-:repoURL: https://github.com/CS2113-AY1819S1-T13-3/main
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
 
 By: `Gara Tahir`
 Project: `Iventarei Pro`

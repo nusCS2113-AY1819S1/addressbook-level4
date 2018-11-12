@@ -54,6 +54,14 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
+    public static ProductDatabase getSampleProductDatabaseForTest() {
+        ProductDatabase sampleAb = new ProductDatabase();
+        for (Product sampleProduct : getSampleProducts()) {
+            sampleAb.addProduct(sampleProduct);
+        }
+        return sampleAb;
+    }
+
     public static ReadOnlySalesHistory getSampleSalesHistory() {
         return new SalesHistory();
     }

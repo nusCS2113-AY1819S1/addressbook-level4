@@ -4,5 +4,6 @@
     <distributors>
         <name>Hans Muster</name>
         <phone isPrivate="false">111</phone>
+        <prods>Apple</prods>
     </distributors>
 </distributorbook>

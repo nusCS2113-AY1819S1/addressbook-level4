@@ -5,7 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AHLEE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AHSENG;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIST_NAME_AHBENG;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIST_PHONE_AHBENG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIST_NAME_AHSENG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIST_PHONE_AHSENG;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showDistributorAtIndex;
@@ -61,33 +62,16 @@ public class EditDistributorCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditDistributorCommand editDistributorCommand = new EditDistributorCommand(INDEX_FIRST,
-                new EditDistributorDescriptor());
-        Distributor editedDistributor =
-                model.getFilteredDistributorList().get(INDEX_FIRST.getZeroBased());
-
-        String expectedMessage = String.format(EditDistributorCommand.MESSAGE_EDIT_DISTRIBUTOR_SUCCESS,
-                editedDistributor);
-
-        Model expectedModel = new ModelManager(new ProductDatabase(model.getProductInfoBook()),
-                new DistributorBook(model.getDistributorInfoBook()), new UserPrefs(),
-                new UserDatabase(), new TestStorage());
-        expectedModel.commitDistributorBook();
-
-        assertCommandSuccess(editDistributorCommand, model, commandHistory, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_filteredList_success() {
         showDistributorAtIndex(model, INDEX_FIRST);
 
         Distributor distributorInFilteredList = model.getFilteredDistributorList()
                 .get(INDEX_FIRST.getZeroBased());
         Distributor editedDistributor = new DistributorBuilder(distributorInFilteredList)
-                .withName(VALID_DIST_NAME_AHBENG).build();
+                .withName(VALID_DIST_NAME_AHSENG).withPhone(VALID_DIST_PHONE_AHSENG).build();
         EditDistributorCommand editDistributorCommand = new EditDistributorCommand(INDEX_FIRST,
-                new EditDistributorDescriptorBuilder().withPhone(VALID_DIST_PHONE_AHBENG).build());
+                new EditDistributorDescriptorBuilder()
+                .withName(VALID_DIST_NAME_AHSENG).withPhone(VALID_DIST_PHONE_AHSENG).build());
 
         String expectedMessage =
                 String.format(EditDistributorCommand.MESSAGE_EDIT_DISTRIBUTOR_SUCCESS, editedDistributor);
@@ -96,6 +80,7 @@ public class EditDistributorCommandTest {
                 new DistributorBook(model.getDistributorInfoBook()), new UserPrefs(),
                 new UserDatabase(), new TestStorage());
         expectedModel.updateDistributor(model.getFilteredDistributorList().get(0), editedDistributor);
+        expectedModel.commitDistributorBook();
 
         assertCommandSuccess(editDistributorCommand, model, commandHistory, expectedMessage, expectedModel);
     }

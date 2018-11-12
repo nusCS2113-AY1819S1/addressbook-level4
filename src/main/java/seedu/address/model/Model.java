@@ -47,6 +47,16 @@ public interface Model {
     boolean hasDistributor(Distributor distributor);
 
     /**
+     * Returns true if a distributor with the same name as {@code distributor} exists in the Inventarie.
+     */
+    boolean hasDistributorName(Distributor distributor);
+
+    /**
+     * Returns true if a distributor with the same phone as {@code distributor} exists in the Inventarie.
+     */
+    boolean hasDistributorPhone(Distributor distributor);
+
+    /**
      * Returns true if a product with the same identity as {@code product} exists in the address book.
      */
     boolean hasProduct(Product product);
