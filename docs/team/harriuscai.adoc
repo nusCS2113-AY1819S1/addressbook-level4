@@ -26,9 +26,10 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 
 ** Documentation:
 *** Did cosmetic tweaks to enable 3 levels of depth in the User Guide: https://github.com/CS2113-AY1819S1-T16-1/main/pull/36[#36]
-*** Rearranged the `Gradebook` and `Class` sections of the use cases in the Developer Guide to be consistent with the user stories https://github.com/CS2113-AY1819S1-T16-1/main/pull/36[#36]
-*** Updated some project-specific sections in the Developer Guide and User Guide https://github.com/CS2113-AY1819S1-T16-1/main/pull/36[#36]
-*** ** Community:
+*** Rearranged the `Gradebook` and `Class` sections of the use cases in the Developer Guide to be consistent with the user stories. https://github.com/CS2113-AY1819S1-T16-1/main/pull/36[#36]
+*** Updated some project-specific sections in the Developer Guide and User Guide. https://github.com/CS2113-AY1819S1-T16-1/main/pull/36[#36]
+
+** Community:
 *** Reviewed the majority of the PRs opened by my team members
 
 == Contributions to the User Guide
