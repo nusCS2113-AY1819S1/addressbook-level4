@@ -7,7 +7,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 
-import seedu.planner.logic.autocomplete.CustomSuggestionProvider;
 import seedu.planner.model.autocomplete.DateMap;
 import seedu.planner.model.autocomplete.RecordMap;
 import seedu.planner.model.record.Date;

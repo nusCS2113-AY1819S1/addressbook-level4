@@ -7,7 +7,6 @@ import static seedu.planner.model.autocomplete.DefaultTags.getSampleTagsForSugge
 import static seedu.planner.ui.SuggestionClass.newCreate;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -45,7 +44,6 @@ import seedu.planner.logic.commands.SummaryByMonthCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
 import seedu.planner.model.Model;
-import seedu.planner.model.autocomplete.RecordMap;
 import seedu.planner.model.record.Date;
 
 //@author tztzt
@@ -241,7 +239,7 @@ public class CustomSuggestionProvider {
                 } else if (inputs[strIndex].startsWith(PREFIX_TAG.getPrefix())) {
                     updateRecordTagsSuggestionSets();
                     updateSuggestions(tagsSuggestionSet);
-                }  else {
+                } else {
                     clearSuggestions();
                 }
             } else if (namePrefixPresent) {
@@ -422,23 +420,27 @@ public class CustomSuggestionProvider {
                 clearSuggestions();
             }
         } else if (inputs.length == 3 || inputs.length == 4) {
-            if (!summaryKeywordsSet.contains(inputs[1])) {
-                clearSuggestions();
-            } else {
-                if (strIndex == 2 || strIndex == 3) {
-                    if (!inputs[2].startsWith(PREFIX_DATE.getPrefix())) {
-                        clearSuggestions();
+            if (strIndex == 1) {
+                if (inputs[strIndex].matches(PREFIX_PATTERN)) {
+                    clearSuggestions();
+                } else {
+                    updateSuggestions(summaryKeywordsSet);
+                }
+            } else if (strIndex == 2 || strIndex == 3) {
+                if (!inputs[2].startsWith(PREFIX_DATE.getPrefix())) {
+                    clearSuggestions();
+                } else {
+                    if (dateInputSummarySet.contains(inputs[1])) {
+                        updateRecordDateSuggestionSets();
+                        updateSuggestions(dateSuggestionSet);
+                    } else if (inputs[1].equals(SummaryByMonthCommand.COMMAND_MODE_WORD)) {
+                        updateSuggestions(defaultMonthSummarySet);
                     } else {
-                        if (dateInputSummarySet.contains(inputs[1])) {
-                            updateRecordDateSuggestionSets();
-                            updateSuggestions(dateSuggestionSet);
-                        } else if (inputs[1].equals(SummaryByMonthCommand.COMMAND_MODE_WORD)) {
-                            updateSuggestions(defaultMonthSummarySet);
-                        } else {
-                            clearSuggestions();
-                        }
+                        clearSuggestions();
                     }
                 }
+            } else {
+                clearSuggestions();
             }
         } else {
             clearSuggestions();
@@ -460,7 +462,8 @@ public class CustomSuggestionProvider {
      */
     private void updateRecordDateSuggestionSets() {
         Set<String> tempDateSuggestionSet = new HashSet<>(defaultDateSet);
-        tempDateSuggestionSet.addAll(model.getFinancialPlanner().getRecordMap().getAsReadOnlyDateMap().getAsReadOnlyDateMap().keySet());
+        tempDateSuggestionSet.addAll(model.getFinancialPlanner().getRecordMap()
+                .getAsReadOnlyDateMap().getAsReadOnlyDateMap().keySet());
         dateSuggestionSet = tempDateSuggestionSet;
     }
 
@@ -468,7 +471,8 @@ public class CustomSuggestionProvider {
      * Updates the Sets of names that are obtained from the Record Map
      */
     private void updateRecordNameSuggestionSets() {
-        nameSuggestionSet = model.getFinancialPlanner().getRecordMap().getAsReadOnlyNameMap().getAsReadOnlyNameMap().keySet();
+        nameSuggestionSet = model.getFinancialPlanner().getRecordMap()
+                .getAsReadOnlyNameMap().getAsReadOnlyNameMap().keySet();
     }
 
     /**
@@ -476,7 +480,8 @@ public class CustomSuggestionProvider {
      */
     private void updateRecordTagsSuggestionSets() {
         Set<String> tempTagsSuggestionSet = new HashSet<>(defaultTagsSet);
-        tempTagsSuggestionSet.addAll(model.getFinancialPlanner().getRecordMap().getAsReadOnlyTagMap().getAsReadOnlyTagMap().keySet());
+        tempTagsSuggestionSet.addAll(model.getFinancialPlanner().getRecordMap()
+                .getAsReadOnlyTagMap().getAsReadOnlyTagMap().keySet());
         tagsSuggestionSet = tempTagsSuggestionSet;
     }
 }
