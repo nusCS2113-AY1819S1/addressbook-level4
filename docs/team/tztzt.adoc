@@ -2,7 +2,7 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets/
-:stylesheet: gh-pages.css
+:stylesheet: gh-pages-zhithon.css
 :sectnums:
 
 == Project: 'Savee' - A Desktop Financial Planner
