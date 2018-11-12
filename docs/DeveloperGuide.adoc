@@ -544,7 +544,7 @@ then salted and hashed (SHA-512), and finally compared to the stored hashed pass
 === Friend feature
 ==== Feature description
 The friend feature allows users to befriend and add other users to their friend list.
-Timetables are only viewable for users in your friend list and timetables can only be deconflicted within your friends.
+Timetables and personal information is only viewable for users in your friend list and timetables can only be deconflicted within your friends.
 
 ==== Current implementation
 The feature is implemented with two main parts. The frontend and the backend, which will be explained below.
@@ -557,8 +557,8 @@ PersonListPanel is adapted to now have two `Stackpane` instead of one and is nes
 image::FriendFeatureFrontEndDiagramFix.png[width="300"]
 
 The two panels will be filtered based on two predicates, `FriendListPredicate` and `OtherListPredicate`.
-They decide what is shown on the panels at any given moment.
-The friends of the current user is iterated through and those that belong to the friend will be shown on the FriendListPanel. The rest of the users will be shown on PersonListPanel.
+The friends of the current user is iterated through and those that belong to the friend will be shown on the FriendListPanel.
+The rest of the users will be shown on PersonListPanel.
 Both predicates will filter out the current user.
 
 ===== Backend implementation
@@ -588,13 +588,14 @@ image::FriendCommandSequenceDiagram.png[width="300"]
 * **Alternative 2:** Allowing every Friend to compose a Person object
 ** Pros: Friend contains more information that can be used
 ** Cons: Duplicated entries of the same Person
-===== How to display the friends and others of the current user
+
+===== How to display the friends and others of the current User
 * **Alternative 1 (current choice):** Use of predicates to set the list to reflect only the desired people.
-** Pros: Allow different predicates to be nested when more filtering commands are called.
+** Pros: Allow different predicates to be nested when more filtering commands are called. More dynamic filtering can be done.
 ** Cons: The list internally contains all the users of the database, extra information is being loaded.
-* **Alternative 2:**
-** Pros: Friend contains more information that can be used
-** Cons: Duplicated entries of the same Person
+* **Alternative 2:** Send a list of all friends and non-friends at the start of the application to individual panels.
+** Pros: Correct users will be loaded at the start for each panel.
+** Cons: Friends panel and others panel have to be repopulated again after every friend/unfriend
 // end::friend[]
 
 {nbsp}
