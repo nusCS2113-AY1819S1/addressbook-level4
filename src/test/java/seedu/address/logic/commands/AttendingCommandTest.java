@@ -7,9 +7,11 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.AttendanceContainsUserPredicate;
 import seedu.address.model.user.User;
 import seedu.address.testutil.UserBuilder;
 
+import static seedu.address.logic.commands.CommandTestUtil.NUM_EVENTS_ATTENDING_ADMIN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
@@ -20,29 +22,31 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
  * Contains integration tests (interaction with the Model) and unit tests for {@code AttendingCommand}.
  */
 public class AttendingCommandTest {
-    private Model model = new ModelManager(getTypicalEventManager(), new UserPrefs());
+    private Model model;
+    private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
-    private String currUsername;
+    private User user;
+    private String expectedMessage;
 
     @Before
     public void setUp() {
-        User user = new UserBuilder().build();
+        user = new UserBuilder().build();
         model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         model.logUser(user);
-        currUsername = model.getUsername().toString();
+        expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        expectedModel.logUser(user);
+        expectedModel.updateFilteredEventList(new AttendanceContainsUserPredicate(user.getUsername()));
+        expectedMessage = String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, NUM_EVENTS_ATTENDING_ADMIN);
     }
 
     @Test
     public void execute_unfilteredList_showsEventsAttending() {
-        Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
-        assertCommandSuccess(new AttendingCommand(), model, commandHistory,
-                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()), expectedModel);
+        assertCommandSuccess(new AttendingCommand(), model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_listIsFiltered_showsEverything() {
+    public void execute_filteredList_showsEventsAttending() {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
-        Model expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
-        assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new AttendingCommand(), model, commandHistory, expectedMessage, expectedModel);
     }
 }
