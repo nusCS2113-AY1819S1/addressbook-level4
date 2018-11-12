@@ -27,7 +27,7 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
+     * Parses the given {@code String} of arguments in the context of the AddCommentCommand object
      * and returns an EditCommand object for execution.
      * @param args arguments to work wit
      * @throws ParseException if the user input does not conform the expected format
