@@ -51,7 +51,7 @@ public class SummaryByCategoryCommand extends SummaryCommand {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException{
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         try {
             model.updateFilteredRecordList(predicate);

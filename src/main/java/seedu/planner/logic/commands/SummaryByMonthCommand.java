@@ -48,7 +48,7 @@ public class SummaryByMonthCommand extends SummaryCommand {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException{
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         SummaryList summaryList;
         try {

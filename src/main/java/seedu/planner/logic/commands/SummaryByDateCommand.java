@@ -12,7 +12,6 @@ import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
-import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
@@ -48,7 +47,7 @@ public class SummaryByDateCommand extends SummaryCommand {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException{
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         SummaryList summaryList;
         try {

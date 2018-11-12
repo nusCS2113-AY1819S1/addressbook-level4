@@ -1,7 +1,6 @@
 package seedu.planner.model.summary;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.planner.commons.util.AppUtil.checkArgument;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.planner.commons.util.MoneyUtil;

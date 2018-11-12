@@ -33,9 +33,9 @@ public class StatisticCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "1-1-2018 " + "12-12-2018";
 
     public static final String MESSAGE_SUCCESS = "Stats generated for data from %s to %s!";
-    public static final String MESSAGE_FAILURE = "An error has occurred and your statistics cannot be generated!\n " +
-            "Please ensure that the total expenses and total income do not exceed the constraints of moneyflow. \n" +
-            "Error handled : %s";
+    public static final String MESSAGE_FAILURE = "An error has occurred and your statistics cannot be generated!\n "
+            + "Please ensure that the total expenses and total income do not exceed the constraints of moneyflow. \n"
+            + "Error handled : %s";
 
     private final Predicate<Record> predicate;
     private final Date startDate;
@@ -51,7 +51,7 @@ public class StatisticCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException{
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         String startDateFormatted;
         String endDateFormatted;
         try {
