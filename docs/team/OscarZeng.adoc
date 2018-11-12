@@ -1,4 +1,4 @@
-= (Oscar)Zeng Hao - Project Portfolio
+= Oscar Zeng Hao - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets/
@@ -15,8 +15,6 @@ Users are able to record their finances and modify these records, set and modify
 The product is based on Command Line Interface (CLI), users are able input their commands and related information at the TextBox.
 Graphic User Interface is used for displaying statistic and other information, which will provide user with a clear and direct understanding about their financial status.
 This product is user-friendly, the command can be automatically completed, limits will check automatically and report any exceeded limits' details.
-It is also an effective and helpful product, users are able to find check their records and limits, generate summary for any period of time and export the record
-to excel file to further manage these data and import excel file back.
 
 This project is under the NUS CS2113 (Software Engineering & Object-Oriented Programming) module.
 This module provides students with basic knowledge about Object-Oriented Programming and necessary software engineering training.
@@ -25,7 +23,7 @@ As a group we decided to morph the original product into FinancialPlanner.
 
 == Summary of contributions
 
-To better develop the product, each group member was assigned a main feature to develop. I made significant contribution to the product by constructing the limit functions.
+I made significant contribution to the product by constructing the spending limit functions.
 Detailed information about my contributions is listed below.
 
 === `completed` *Major enhancement #1*: added the ability to set limits for multiple periods of time.
@@ -33,72 +31,76 @@ Detailed information about my contributions is listed below.
 ** What it does: allows the user to set multiple limits for different periods of time or a single day to better manage their spend.
 All the limits will be stored and automatically checked whenever the records were updated.
 The user will be reminded if any of the limits have been exceeded.
-** Justification:This feature improves the product significantly because the user no longer .
+
+** Justification:This feature improves the product significantly because the user will be able to better manage their finances by setting limits.
 This feature is challenging because it requires me to build a storage for limits to store limits' details and read from the storage.
 Besides that, I also need to keep limits' information updated whenever there is a change of records and generate output if any limit has been exceeded.
-** Highlights: This enhancement is the foundation of the three minot features below. It affects existing commands, commands to be added in future, and storage. A new xml file will be created to store all the limits. It required an in-depth analysis of design alternatives.
+
+** Highlights: This enhancement is the foundation of the three major features below. It affects existing commands, commands to be added in future, and storage.
+A new xml file will be created to store all the limits. It required an in-depth analysis of design alternatives and storage workflow.
 
 
-=== `completed` *Minor enhancement #1.1*: added the ability to delete limits.
+=== `completed` *Major enhancement #1.1*: added the ability to delete limits.
 
-** What it does: allows the user to delete existing limits. Users are able to delete certain limits by according to the
-two dates.
-** Justification: This feature improves the product significantly because the user need to delete the limits that will be no longer used in the future.
+** What it does: allows the user to delete existing limits. Users are able to delete certain limits by according to the input dates.
+** Justification: This feature improves the product significantly because the user need to delete outdated limits and the limits that will be no longer used in the future.
 
-=== `completed` *Minor enhancement #1.2*: added the ability to edit limits.
+=== `completed` *Major enhancement #1.2*: added the ability to edit limits.
 
 ** What it does: allows the user to change the limit money of existing limits. Users are able to edit certain limits by according to the two dates they.
-** Justification: This feature improves the product significantly because the user may need to adjust their plan accordingly.
+** Justification: This feature improves the product significantly because the user may need to adjust their plan accordingly whenever there are accidents.
 
-=== `completed` *Minor enhancement #1.3*: added the ability to check all limits' condition.
-
-** What it does: allows the user to check all the existing limits' condition.
-** Justification: This feature improves the product significantly because the user is able to check all the limit he/she had set.
 
 === `completed` *Major enhancement #2*: added the ability to set the monthly limit.
 
 ** What it does: allows the user to set the continuous monthly limit which will always check the total spending for the
-current month. For example, if the limit was set to be 200 at April, the limit will check the total spend for April in April.
-When the time comes to May, the limit will no longer check April, instead, the limit
-will check the total spend of May until the last second of May.
-The user will be reminded if the monthly limits have been exceeded and the monthly limit will always be placed at the top of limits' information.
+current month. The user will be reminded if the monthly limits have been exceeded and the monthly limit will always be placed at the top of limits' information.
 ** Justification:This feature improves the product significantly because the user will be able to make continuous limit for every month. Since user may not
 want to set the limit for every month, this function will provide the user with a convenient method to manage their monthly spend without entering
 similar commands every month.
 This feature is challenging because it requires me to get the current time and generate a special limit that will change according to different time.
 ** Highlights: This enhancement is the foundation of the two minor features below. It affects existing commands, commands to be added in future, and storage. A new xml file will be created to store all the limits. It required an in-depth analysis of design alternatives.
 
-=== `completed` *Minor enhancement #2.1*: added the ability to edit monthly limits.
+=== `completed` *Major enhancement #2.1*: added the ability to edit monthly limits.
 
 ** What it does: allows the user to change the existing monthly limit.
 ** Justification: This feature improves the product significantly because the user need to adjust the monthly limit in the future.
 
-=== `completed` *Minor enhancement #2.2*: added the ability to delete the monthly limit.
+=== `completed` *Major enhancement #2.2*: added the ability to delete the monthly limit.
 
 ** What it does: allows the user to delete existing monthly limits.
 ** Justification: This feature improves the product significantly because the user need to delete the monthly limit in the future.
 
+=== `completed` *Major enhancement #3*: added the ability to check all limits' condition.
 
-* *Code contributed*:
+** What it does: allows the user to check all the existing limits' condition.
+** Justification: This feature improves the product significantly because the user is able to check all the limit he/she had set
+and have a better understanding about limits' conditions.
+
+* *Code contributed(including tests)*:
 Example:
-https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[codes]
+https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=oscarzeng[oscarzeng]
 
 === *Other contributions*:
 
 ** Project management:
-*** Provide teammates with suggestions about their features.
+*** Provide teammates with valid suggestions about their features error.
+(Examples: https://github.com/CS2113-AY1819S1-T09-4/main/issues/167[1], https://github.com/CS2113-AY1819S1-T09-4/main/issues/149[2])
 *** Arrange team meetings and discussion.
+
 ** Enhancements to existing features:
 *** Helped combine the storage of the FinancialPlanner.
-*** Fix bugs of tests.
+*** Fix some bugs of tests.
+
 ** Documentation:
 *** Update limit related content and some other content of the User Guide and some other contents.
 *** Update limit related content and of Developer Guide.
 
 ** Community:
-*** PRs reviewed.
-*** Contributed to forum discussions in Whatsapp group.
-*** Reported bugs and suggestions for other teams in the class both in Whatsapp and Github.(examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** PRs reviewed. [Examples: https://github.com/CS2113-AY1819S1-T09-4/main/pull/199[1], https://github.com/CS2113-AY1819S1-T09-4/main/pull/195[2]]
+*** Contributed to discussions in Whatsapp group.
+*** Reported bugs and suggestions for other teams in the class both in Whatsapp and Github.
+(Examples: https://github.com/CS2113-AY1819S1-T16-1/main/issues/267[1], https://github.com/CS2113-AY1819S1-T16-1/main/issues/272#event-1952348734[2])
 
 
 == Contributions to the User Guide
@@ -117,7 +119,9 @@ include::../UserGuide.adoc[tag=limitfeatures]
 |===
 
 include::../DeveloperGuide.adoc[tag=limitfeatures]
-include::../DeveloperGuide.adoc[tag=limitUserCase]
+
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/Latest_UGDG_Update/docs/DeveloperGuide.adoc#13-use-case-create-a-normal-limit-for-a-period-of-time-or-a-day[LimitUserCase]
+
 include::../DeveloperGuide.adoc[tag=limitsManualTest]
 
 ---

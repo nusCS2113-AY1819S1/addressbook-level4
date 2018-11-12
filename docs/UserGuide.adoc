@@ -820,7 +820,9 @@ will check the total spend of May until the last second of May.
 ****
 * `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
 ****
+
 Examples:
+
 * `addmonthlylimit m/200`
 
 === Editing the monthly limit: `editmonthlylimit`
@@ -833,7 +835,9 @@ The monthly limit will be replaced by the new monthly limit.
 * `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
 * There must be an existing monthly limit.
 ****
+
 Examples:
+
 * `editmonthlylimit m/200`
 
 === Deleting the monthly limit: `deletemonthlylimit`
@@ -845,7 +849,9 @@ The monthly limit will be deleted and no longer check the spend of the current m
 ****
 * There must be an existing monthly limit.
 ****
+
 Examples:
+
 * `deletemonthlylimit`
 //end::limitfeatures[]
 
