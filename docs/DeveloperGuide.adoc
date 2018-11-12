@@ -18,7 +18,7 @@ By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-BookInventory™ is catered solely for students as well as other managerial roles such as store managers and accountant. BookInventory™ allows store managers to increase/decrease stocks for each book. Accountants will be able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, BookInventory™ is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+_BookInventory_ is catered solely for students as well as other managerial roles such as store managers and accountant. _BookInventory_ allows store managers to increase/decrease stocks for each book. Accountants will be able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, _BookInventory_ is optimized for those who prefer to work with *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*.
 
 == Setting up
 
@@ -212,7 +212,7 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Book Inventory data.
+* stores the `Book Inventory` data.
 * exposes an unmodifiable `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -232,12 +232,12 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Book Inventory data in xml format and read it back.
+* can save the `Book Inventory` data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.bookinventory.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
@@ -325,7 +325,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 // tag::checkcommand[]
 === Check feature
-One of the *important* features for BookInventory is for users, especially store owners, to be able to check the remaining stocks for the books.
+One of the *important* features for BookInventory is for users, especially store owners, to be able to check the remaining stocks of the books in the inventory.
 To do so, we have added a `check` command to the existing list of commands.
 
 ==== Current Implementation
@@ -345,7 +345,7 @@ image::CheckSequenceDiagram.png[width="800"]
 ** Cons: Unable to retrieve the original order of the BookInventory.
 * **Alternative 2:** Only the displayed list is sorted.
 ** Pros: Original order of the BookInventory is kept.
-** Cons: Changes to the original code to display the list is required.
+** Cons: Changes in the original code to display the list is required.
 // end::checkcommand[]
 
 // tag::stockcommand[]
@@ -435,6 +435,11 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 * **Similar to Delete Command**
 ** The bookstore owner may decide whether to accept or reject a request offer.
 ** After deciding, he or she can type deleterequest to remove Request from the RequestList.
+
+===== Aspect: How ToggleRequests command functions
+
+.Sequence Diagram of the ToggleRequests Component
+image::ToggleRequestSequenceDiagram.png[width="800"]
 
 // end::Request[]
 
@@ -579,17 +584,25 @@ unintended by the user.
 
 // tag::tabfeature[]
 === Tab feature
-For users' *convenience*, we have implemented this feature for them to easily cycle through existing `ISBN` in the inventory without the need to manually type them out.
+For users' *convenience*, we have implemented this feature to easily cycle through existing `ISBN` in the inventory without the need to manually type them out.
 
 ==== Current Implementation
-The tab mechanism utilises `Ui`, `Model` and `Logic` component to complete its function.
+The tab mechanism utilises `Ui`, `Model` and `Logic` components. It stores the list of Isbn in a Queue Data Structure.
+
+Given below is an example usage scenario and how the tab mechanism works
+
+Step 1: The user enters `sell i/978` in the `CommandBox` to sell a book with the Isbn starting with '978'.
+
+Step 2: The user now feels that keying the whole 13 digit of the Isbn is a hassle, and decides to complete the Isbn using pressing `tab`. The `tab` feature will take in `sell i/978` in the `CommandBox` and retrieve `978` from the Isbn field.
 
 The following sequence diagram shows how the tab operation works:
 
 .Sequence Diagram for Tab Operation
 image::TabSequenceDiagram.png[width="800"]
 
-After the function `navigateToNextIsbn()` is completed, `commandTextField.requestFocus()` and `commandTextField.positionCaret(commandTextField.getLength())` are called to bring the caret to the end of the line for users to finish typing their command.
+After the function `navigateToNextIsbn()` is completed, `commandTextField.requestFocus()` and `commandTextField.positionCaret(commandTextField.getLength())` are called to bring the caret to the end of the line for users to continue typing the command.
+
+Step 3: The user presses `tab` again as the Isbn is not correct. The `tab` feature will then check if the Isbn matches the first Isbn in the Queue. If it matches, the first Isbn in the Queue will be removed and added to the end of the Queue. The next Isbn in the Queue will be displayed.
 
 ==== Design Considerations
 
@@ -1093,7 +1106,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of books
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
@@ -1111,50 +1124,53 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |Helpful user |Add/remove books |Share my knowledge with others
+|`* * *` |Store Owner |Add/remove books |Manage my stocks.
 
-|`* * *` |Student |Find for books related to my module |Easily access the correct materials
+|`* * *` |Store Owner |Check the quantity of each book |Stock up of the books that are low in quantity.
 
-|`* * *` |Overachiever |See peer reviews for books related to my module |Get access to helpful materials
+|`* * *` |Store Owner |Stock/sell books |Easily increase and decrease the quantity of my books.
 
-|`* *` |NSF |Find out which books are relevant to the modules I'm about to take in university |Read the books during my free time
+|`* * *` |Store Owner |Have security features |Keep my stocks safe from edits.
 
-|`* *` |Professor |Add rating/review to books |Recommend this book to others
+|`* * *` |Student |Check if the bookstore have the book I want |Save on a trip down to the book store.
 
-|`* *` |NUS Staff |Use the program as and when |Easily sieve out the books that i want to read
+|`* *` |Store Owner with many books in the BookInventory |Delete my books by Isbn |Locate the book easily.
 
-|`* *` |Non-Tech Savvy User|Have a straightforward easy-to-understand help page |Search on the books i would like to find with
+|`* *` |Accountant |View the revenue statistics |Analyse the selling trend for each book.
 
-|`* *` |Careless user |Undo/Redo my command |Easily remove/get back to the current/next state
+|`* *` |Student |Find books |Check if the book store has the book that I need.
+
+|`* *` |Student |Use the program as and when |Easily sieve out the books that i want to buy.
+
+|`* *` |Non-Tech Savvy User|Have a straightforward easy-to-understand help page |Search on the books i would like to find with.
+
+|`* *` |Careless user |Undo/Redo my command |Easily remove/get back to the current/next state.
 
 |`* *` |User |Have an application with minimal downtime |Use the application at any point of time.
 
-|`*` |Unmotivated student |Have a colorful GUI |Have a better mood to study
+|`* *` |Lazy User |Be able to enter my commands faster |Save the energy of moving my fingers.
 
-|`*` |New User |Have a user-friendly application |Use the catalogue easily
+|`*` |Unmotivated student |Have a colorful GUI |Have a better mood to study.
 
-|`*` |Exchange student |Use the program in my native language |Understand the program easily
+|`*` |New User |Have a user-friendly application |Use the catalogue easily.
 
-|`*` |Bookshop owner |Sell the books that people want |Know which books are in demand
+|`*` |Exchange student |Use the program in my native language |Understand the program easily.
 
-|`*` |Underachiever |Have reviews for books which are easy to understand |Grasp on concepts quickly
+|`*` |Store Owner |View requests |Know which books are in demand.
 
-|`*` |Student nearing the exams |Have reviews for books which summarises the module |Recap on concepts quickly
+|`*` |Accountant |Have stats for total revenue and cost |make correct analysis.
 
-|`*` |Teaching assistant |Have a list of recommended books |Help underachieving students learn better
+|`*` |Resourceful |Delete my request |Prevent myself from getting duplicate books.
 
-|`*` |Author |Have the books listed neatly and visibly under users' module selection |Help students in their studies and also help them gain an appreciation to the module
+|`*` |Store Owner |Be able to edit the details of my book |Sell the books at discounted price.
 
-|`*` |Passionate student willing to help others |Have a moderately long word limit for the review |Share my personal experience with this book and how this book is recommended
+|`*` |Thrifty User |Be able to compare prices of the book |Get the cheaper alternatives.
 
-|`*` |Book enthusiast |Have a review for all the books I read |Allow people to acquire knowledge.
+|`*` |Store Owner |Have a means to contact the requester |Confirm his/her orders.
 
-|`*` |user |Hide <<private-contact-detail,private contact details>> by default |Minimize chance of someone else seeing them by accident
+|`*` |Store Owner |Hide <<private-request-detail,private request details>> by default |Minimize chance of someone else seeing them by accident
 
-|`*` |user with many books in the BookInventory |Sort books by name |Locate a book easily
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
@@ -1187,7 +1203,38 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+[discrete]
+=== Use case: Sell book
+
+*MSS*
+
+1.  User requests to list books
+2.  BookInventory shows a list of books
+3.  User requests to sell a specific book in the list
+4.  BookInventory decrease the quantity of the book
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. BookInventory shows an error message.
++
+Use case resumes at step 2.
+
+* 3b. The given quantity cause book to have negative quantity.
++
+[none]
+** 3b1. BookInventory shows an error message.
++
+Use case resumes at step 2.
 
 [appendix]
 == Non Functional Requirements
@@ -1204,7 +1251,7 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
+[[private-request-detail]] Private request detail::
 A contact detail that is not meant to be shared with others
 
 [appendix]
