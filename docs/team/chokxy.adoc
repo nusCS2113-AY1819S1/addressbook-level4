@@ -1,7 +1,5 @@
 = Chok Xin Yan - Project Portfolio
 :site-section: AboutUs
-:toc:
-:sectnums:
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 ifdef::env-github[]
