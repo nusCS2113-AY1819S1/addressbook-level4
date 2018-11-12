@@ -3,6 +3,7 @@ package seedu.planner.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static seedu.planner.commons.util.DateUtil.generateFirstOfMonth;
 import static seedu.planner.commons.util.DateUtil.generateLastOfMonth;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -83,51 +84,59 @@ public class SummaryByMonthCommandTest {
     public void execute_inputMonthRangeNotOverlappingWithDataMonthRange_noSummaryList() {
         // sampleFutureStartMonth > sampleEndMonth & sampleFutureEndMonth > sampleFutureStartMonth
         // -> no summaryList found
-        SummaryByMonthCommand command =
-                new SummaryByMonthCommand(sampleFutureStartMonth, sampleFutureEndMonth);
+        try {
+            SummaryByMonthCommand command =
+                    new SummaryByMonthCommand(sampleFutureStartMonth, sampleFutureEndMonth);
 
-        command.execute(model, commandHistory);
-        expectedModel.updateFilteredRecordList(
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(sampleFutureStartMonth),
-                        generateLastOfMonth(sampleFutureEndMonth)));
-        SummaryList summaryList = new SummaryByMonthList(expectedModel.getFilteredRecordList());
-        String expectedMessage = String.format(SummaryByMonthCommand.MESSAGE_SUCCESS, summaryList.size());
+            command.execute(model, commandHistory);
+            expectedModel.updateFilteredRecordList(
+                    new DateIsWithinIntervalPredicate(generateFirstOfMonth(sampleFutureStartMonth),
+                            generateLastOfMonth(sampleFutureEndMonth)));
+            SummaryList summaryList = new SummaryByMonthList(expectedModel.getFilteredRecordList());
+            String expectedMessage = String.format(SummaryByMonthCommand.MESSAGE_SUCCESS, summaryList.size());
 
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredRecordList());
-        assertEquals(summaryList, eventListenerStub.getSummaryList());
+            assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+            assertEquals(Collections.emptyList(), model.getFilteredRecordList());
+            assertEquals(summaryList, eventListenerStub.getSummaryList());
 
-        // samplePastEndMonth < sampleStartMonth & samplePastStartMonth < samplePastEndMonth
-        // -> no summaryList found
-        command = new SummaryByMonthCommand(samplePastStartMonth, samplePastEndMonth);
+            // samplePastEndMonth < sampleStartMonth & samplePastStartMonth < samplePastEndMonth
+            // -> no summaryList found
+            command = new SummaryByMonthCommand(samplePastStartMonth, samplePastEndMonth);
 
-        command.execute(model, commandHistory);
-        expectedModel.updateFilteredRecordList(
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(samplePastStartMonth),
-                        generateLastOfMonth(samplePastEndMonth)));
-        summaryList = new SummaryByMonthList(expectedModel.getFilteredRecordList());
-        expectedMessage = String.format(SummaryByMonthCommand.MESSAGE_SUCCESS, summaryList.size());
+            command.execute(model, commandHistory);
+            expectedModel.updateFilteredRecordList(
+                    new DateIsWithinIntervalPredicate(generateFirstOfMonth(samplePastStartMonth),
+                            generateLastOfMonth(samplePastEndMonth)));
+            summaryList = new SummaryByMonthList(expectedModel.getFilteredRecordList());
+            expectedMessage = String.format(SummaryByMonthCommand.MESSAGE_SUCCESS, summaryList.size());
 
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredRecordList());
-        assertEquals(summaryList, eventListenerStub.getSummaryList());
+            assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+            assertEquals(Collections.emptyList(), model.getFilteredRecordList());
+            assertEquals(summaryList, eventListenerStub.getSummaryList());
+        } catch (Exception e) {
+            fail("This should not happen");
+        }
     }
 
     @Test
     public void execute_inputMonthRangeOverlappingWithDataMonthRange_summaryList() {
         // Start date and end date are both within date range -> summaryList of all records in range
-        SummaryByMonthCommand command = new SummaryByMonthCommand(sampleStartMonth, sampleEndMonth);
+        try {
+            SummaryByMonthCommand command = new SummaryByMonthCommand(sampleStartMonth, sampleEndMonth);
 
-        command.execute(model, commandHistory);
-        expectedModel.updateFilteredRecordList(
-                new DateIsWithinIntervalPredicate(generateFirstOfMonth(sampleStartMonth),
-                        generateLastOfMonth(sampleEndMonth)));
-        SummaryList summaryList = new SummaryByMonthList(expectedModel.getFilteredRecordList());
-        String expectedMessage = String.format(SummaryByMonthCommand.MESSAGE_SUCCESS, summaryList.size());
+            command.execute(model, commandHistory);
+            expectedModel.updateFilteredRecordList(
+                    new DateIsWithinIntervalPredicate(generateFirstOfMonth(sampleStartMonth),
+                            generateLastOfMonth(sampleEndMonth)));
+            SummaryList summaryList = new SummaryByMonthList(expectedModel.getFilteredRecordList());
+            String expectedMessage = String.format(SummaryByMonthCommand.MESSAGE_SUCCESS, summaryList.size());
 
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(expectedModel.getFilteredRecordList(), model.getFilteredRecordList());
-        assertEquals(summaryList, eventListenerStub.getSummaryList());
+            assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+            assertEquals(expectedModel.getFilteredRecordList(), model.getFilteredRecordList());
+            assertEquals(summaryList, eventListenerStub.getSummaryList());
+        } catch (Exception e) {
+            fail("This should not happen");
+        }
     }
 
     public class EventListenerStub {
