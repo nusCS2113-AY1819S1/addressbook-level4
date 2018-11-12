@@ -25,11 +25,6 @@ This project portfolio documents my contributions to the development of the CS21
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=fr3ddy4[Functional code]]
 
-** Documentation:
-*** Updated the User Guide for Practical Exam 1: https://github.com/CS2113-AY1819S1-T16-2/main/pull/84[#84] https://github.com/CS2113-AY1819S1-T16-2/main/pull/85[#85]
-*** Updated the Developer Guide to include `invite` command: https://github.com/CS2113-AY1819S1-T16-2/main/pull/58[#58]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T16-2/main/pull/65[#65] https://github.com/CS2113-AY1819S1-T16-2/main/pull/77[#77] https://github.com/CS2113-AY1819S1-T16-2/main/pull/114[#114]
 ** Tools:
 *** Integrated GitHub Plugins (Coveralls, Travis CI, AppVeyor)
 *** Automated team documentation build on GitHub pages
