@@ -31,6 +31,11 @@ The list shown below details the key features that our application provides, whi
 ** Log into the application with a set of login credentials
 *** Gives a specific level of access to the application according to role of user account defined during account creation
 ** Creation of a new account with desired login credentials for logging into the application
+* Recruitment / HR
+** Attach skills to the people in your organization and order them
+by various criteria.
+
+
 
 == Site Map
 
