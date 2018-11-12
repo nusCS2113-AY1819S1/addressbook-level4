@@ -26,6 +26,15 @@ During our Software Engineering project, my teammates and I developed an invento
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=manage]
+
 == Contributions to the Developer Guide
 
 |===
