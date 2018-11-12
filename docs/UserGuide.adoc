@@ -200,6 +200,7 @@ Returns any items having names `Arduino` or `Pi`
 Shows the quantity of every item in each status category (Ready, On_Loan, Faulty) +
 Format: `status`
 // end::statuscommand[]
+
 // tag::changestatuscommand[]
 === Changing status of item: `changeStatus`
 
@@ -211,6 +212,7 @@ Examples:
 * `changeStatus n/Arduino q/20 os/Ready ns/Faulty` +
 The status of 20 Arduinos would be changed from Ready to Faulty
 // end::changestatuscommand[]
+
 // tag::loanlistcommand[]
 === Creating a loan list: `loanList`
 A loan list can be created whenever a list of items loaned out needs to be kept tracked on +
@@ -221,12 +223,14 @@ Examples:
 * `loanList n/Arduino q/20 l/KinWhye` +
 This would update the status of the 20 arduinos to On_Loan, and add the entry into the loan list
 // end::loanlistcommand[]
+
 // tag::viewloanlistcommand[]
 === Viewing the loan list: `viewLoanList`
 
 Shows every loan list entry +
 Format: `viewLoanList`
 // end::viewloanlistcommand[]
+
 // tag::deleteloanlistcommand[]
 === Deleting a loan list entry: `deleteLoanList`
 
@@ -463,7 +467,6 @@ There is no need to save manually.
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
 
-_{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
 == FAQ
