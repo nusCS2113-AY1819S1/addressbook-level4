@@ -11,8 +11,6 @@ import static seedu.address.testutil.LostandFoundFeatureTest.getLostDescriptor;
 import static seedu.address.testutil.LostandFoundFeatureTest.getStockList;
 import static seedu.address.testutil.TypicalAccounts.getTypicalAccountList;
 
-import java.util.List;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
