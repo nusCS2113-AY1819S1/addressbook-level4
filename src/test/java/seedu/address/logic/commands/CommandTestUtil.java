@@ -30,6 +30,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskNameContainsKeywordsPredicate;
+import seedu.address.testutil.EditExpenditureDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 
@@ -119,6 +120,9 @@ public class CommandTestUtil {
     public static final EditTaskCommand.EditTaskDescriptor DESC_ASSIGNMENT;
     public static final EditTaskCommand.EditTaskDescriptor DESC_TUTORIAL;
 
+    public static final EditExpenditureCommand.EditExpenditureDescriptor DESC_IPHONE;
+    public static final EditExpenditureCommand.EditExpenditureDescriptor DESC_CLOTHES;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -133,6 +137,13 @@ public class CommandTestUtil {
         DESC_TUTORIAL = new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_ASSIGNMENT)
                 .withDate(VALID_TASK_DATE_TUTORIAL).withModule(VALID_TASK_MODULE_TUTORIAL)
                 .withPriority(VALID_TASK_PRIORITY_TUTORIAL).build();
+
+        DESC_IPHONE = new EditExpenditureDescriptorBuilder().withDescription(VALID_EXPENDITURE_DESCRIPTION_IPHONE)
+                .withDate(VALID_EXPENDITURE_DATE_IPHONE).withCategory(VALID_EXPENDITURE_CATEGORY_IPHONE)
+                .withMoney(VALID_EXPENDITURE_MONEY_IPHONE).build();
+        DESC_CLOTHES = new EditExpenditureDescriptorBuilder().withDescription(VALID_EXPENDITURE_DESCRIPTION_CLOTHES)
+                .withDate(VALID_EXPENDITURE_DATE_CLOTHES).withCategory(VALID_EXPENDITURE_CATEGORY_CLOTHES)
+                .withMoney(VALID_EXPENDITURE_MONEY_CLOTHES).build();
     }
 
     /**
