@@ -46,6 +46,11 @@ person list on the UI to show only the attendees.
 ** Project management:
 *** Helped to manage releases on GitHub
 *** Managed the issue tracker on GitHub by creating new issues and closed existing issues that have been resolved.
+*** Wrote test cases to increase coverage by 1.2% in total +
+ [https://github.com/CS2113-AY1819S1-T16-2/main/pull/147[PR 1]]
+ [https://github.com/CS2113-AY1819S1-T16-2/main/pull/148[PR 2]]
+ [https://github.com/CS2113-AY1819S1-T16-2/main/pull/150[PR 3]]
+
 
 ** Documentation:
 *** Updated the User Guide for `deleteEvent`, `selectEvent`, `undo`, and `redo` commands.
