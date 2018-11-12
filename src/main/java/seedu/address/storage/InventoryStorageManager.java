@@ -69,14 +69,14 @@ public class InventoryStorageManager extends ComponentManager implements Invento
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyBookInventory addressBook) throws IOException {
-        saveAddressBook(addressBook, bookInventoryStorage.getBookInventoryFilePath());
+    public void saveBookInventory(ReadOnlyBookInventory bookInventory) throws IOException {
+        saveBookInventory(bookInventory, bookInventoryStorage.getBookInventoryFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyBookInventory addressBook, Path filePath) throws IOException {
+    public void saveBookInventory(ReadOnlyBookInventory bookInventory, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        bookInventoryStorage.saveAddressBook(addressBook, filePath);
+        bookInventoryStorage.saveBookInventory(bookInventory, filePath);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class InventoryStorageManager extends ComponentManager implements Invento
     public void handleBookInventoryChangedEvent(BookInventoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveBookInventory(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

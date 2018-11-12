@@ -22,7 +22,7 @@ Responsibilities: Dispatching jobs
 
 === Lee Gui Yong
 image::guiyong96.png[width="150", align="left"]
-{empty}[https://github.com/guiyong96[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/guiyong96[github]] [<<guiyong96#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: UI
@@ -31,7 +31,7 @@ Responsibilities: UI
 
 === Ashley Teo
 image::20170610_111528.jpg[width="150", align="left"]
-{empty}[http://github.com/iashcole[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/iashcole[github]] [<<iashcole#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading
@@ -40,7 +40,7 @@ Responsibilities: Dev Ops + Threading
 
 === Kenneth Chua
 image::kennethcsj.png[width="150", align="left"]
-{empty}[http://github.com/kennethcsj[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/kennethcsj[github]] [<<kennethcsj#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Documentation

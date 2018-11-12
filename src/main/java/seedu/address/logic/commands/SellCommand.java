@@ -1,9 +1,9 @@
+//@@author kennethcsj
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.List;
 import java.util.Set;
@@ -80,7 +80,6 @@ public class SellCommand extends Command {
 
 
         model.updateBook(bookToSell, sellBook);
-        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
         return new CommandResult(MESSAGE_QUANTITY_SOLD + sellBookDescriptor.getQuantity().getValue()
                 + "\n" + String.format(MESSAGE_SELL_BOOK_SUCCESS, sellBook));
