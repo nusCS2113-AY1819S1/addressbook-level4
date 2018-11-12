@@ -161,7 +161,6 @@ Selects the 1st person in the results of the `find` command.
 Upon selecting a person, the calendar of the current month will be displayed, instead of the
 welcome message.
 For additional calendar features, please view `calendar to view schedule`.
-//todo link the link to calendar view schedule below
 
 === Listing entered commands : `history` / `hs`
 

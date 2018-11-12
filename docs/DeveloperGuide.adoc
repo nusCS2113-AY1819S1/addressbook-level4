@@ -674,7 +674,16 @@ image::CalendarSequenceDiagram.png[width="800"]
 // end::calendar[]
 
 // tag::displayScheduleOnCalendar[]
-=== [Proposed] Display Schedule on Calendar [V2.0]
+=== Schedule Display Calendar Selected Person
+This feature allows the calendar of a person to be displayed upon being selected.
+==== Current Implementation
+This makes use of the calendar feature, which activates the rendering of the calendar upon an event of a person being selected.
+
+Upon the selection of a person, the calendar will overwrite the welcome message view, showing the calendar of the current month.
+
+*It is unable to show the schedules added into the person.*
+
+=== [Proposed] Schedule Display Calendar Selected Person [V2.0]
 
 When a person is selected, the person's schedule should be displayed on the calendar panel.
 
@@ -1006,7 +1015,7 @@ details manually
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Add schedule
+=== Use case: Add and Match schedule
 
 *MSS*
 
