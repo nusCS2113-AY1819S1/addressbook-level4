@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -220,6 +221,8 @@ public class ModuleManager {
      * @return
      */
     public String convertModulesToTableRepresentation(List<Module> moduleList) {
+        moduleList.sort(Comparator.comparing(m -> m.getModuleCode().toString()));
+
         StringBuilder sb = new StringBuilder();
 
         sb.append(HtmlTableProcessor.getBanner("Module List"));
@@ -258,11 +261,15 @@ public class ModuleManager {
         StringBuilder sb = new StringBuilder();
         StringBuilder studentEntries = new StringBuilder();
 
+        // Sort the students by name in alphabetical order
+        List<Person> enrolledStudents = new ArrayList<>(module.getEnrolledStudents());
+        enrolledStudents.sort(Comparator.comparing(s -> s.getName().fullName));
+
         if (module.getEnrolledStudents().isEmpty()) {
             studentEntries.append("There are no students enrolled in this module.");
         } else {
             studentEntries.append(HtmlProcessor.getOrderedListStart());
-            for (Person s : module.getEnrolledStudents()) {
+            for (Person s : enrolledStudents) {
                 studentEntries.append(HtmlProcessor.getListItem(
                         String.format(listItemFormat, s.getName().toString(), s.getMatricNo())
                 ));
@@ -278,6 +285,10 @@ public class ModuleManager {
         sb.append(HtmlProcessor.constructDetailedView(details));
 
         return sb.toString();
+    }
+
+    public void clearModules() {
+        modules = new ArrayList<>();
     }
 
     public ArrayList<Module> getModules() {
