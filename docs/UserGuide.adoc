@@ -676,6 +676,8 @@ The Excel file name will be named based on the command, relating to Date: +
 
 If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it *must* be closed before we enter the command.
 
+After you enter the `exportexcel` command, you should *wait for few minutes* for the Excel file to be written.
+
 Please note that `undo` and `redo` command can only affect Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `export` command, the Savee will inform the user that *No more command to undo*, the records remain the same and the Excel file created will *not* be deleted.
 
 Examples:
@@ -749,7 +751,7 @@ When performing `import` command to import all the records data from the Excel f
 
 The picture below shows a good example for the Excel Sheet.
 
-image::Export_Capture1_LinhChi.png[width="350"]
+image::Export_Capture1_LinhChi.png[width="270"]
 
 // end::import[]
 
@@ -791,6 +793,8 @@ The Excel file name will be named based on the command, relating to Date: +
 +
 
 If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it *must* be closed before we enter the command.
+
+After you enter the `archive` command, you should *wait for few minutes* for the Excel file to be written.
 
 Please note that the `undo` and `redo` command can only affect the Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `archive` command, the records archived will be added again back to Savee but the Excel file created will *not* be deleted.
 
@@ -836,7 +840,7 @@ Automatically uses the the summary data from the *SUMMARY DATA* sheet in the Exc
 
 As you can see the screenshot below, in the *SUMMARY DATA* sheet, next to the summary table:
 
-image::Export_Capture2_LinhChi.png[width="800]
+image::Export_Capture2_LinhChi.png[width="500"]
 
 * On the top left of the chart, the legend shows 3 lines, namely Income, Outcome, and Net.
 ** The first blue line shows the Income based on Date.
