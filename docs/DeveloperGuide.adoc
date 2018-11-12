@@ -431,6 +431,8 @@ Step 5. By making use of the PersonContainsKeywordsPredicate, the members that h
 Step 5. This will then be put into the model, into the versioned address book.
 
 // end::member[]
+
+// tag::Calendar[]
 === Events
 
 We create an Events package in model, to combine the event element such as name and venue into an event list. In the Commands package, we create an package named EventCommand, which the commands are stored in. We have totally four commands:
@@ -463,6 +465,7 @@ Step 5. This will then be put into the `model`, into the `VersionedAddressBook`.
 The `Event` class creates an object that instantiates an `EventName` object, an `EventVenue`, an `EventDescription` and an `EventDate` objects. The multiple `Event` objects created will be stored in a `UniqueEventList`, where the uniqueness of every `Event` is in its `EventName`.
 
 This uniqueness is attained by comparing the `EventName` object in the `Event` to be added and the `Event's already in the `UniqueEventList` using the `getEventName()` method in `Event`.
+//end::Calendar[]
 
 === Ledger
 As of v1.3, the core commands dealing with Ledgers are `addLedger`, `deleteLedger`,
