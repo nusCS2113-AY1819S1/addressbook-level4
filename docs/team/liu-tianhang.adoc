@@ -33,7 +33,7 @@ I have use javax.crypto and other java function to hashed and verify password. C
 * *Minor enhancement*: Create command and command parser for the product
 * *Minor enhancement*: Create individual help window for respective roles.
 
-* *Code contributed*: [https://github.com[Reposense(add later)]] [https://github.com[Test code]] _{give links to collated code files}_
+* Code contributed: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=liu-tianhang&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Reposense]]
 
 * *Other contributions*:
 

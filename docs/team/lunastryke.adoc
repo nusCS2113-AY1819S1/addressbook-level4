@@ -37,7 +37,7 @@ Enhanced the Search function allowing users to search through the inventory base
 
 * *Minor enhancement*: Morphed the existing storage to store the drinks and their respective batch lists. Required knowledge of XML to wrap the batch lists in a wrapper such that they would be stored properly.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=lunastryke&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Functional and Test code]]
 
 * *Other contributions*:
 

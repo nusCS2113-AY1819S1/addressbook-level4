@@ -922,27 +922,27 @@ _{ more test cases ... }_
 ////
 
 === Buying a drink
-. Buy a certain quantity of a  drink using the `buy` command
+. Buy a certain quantity of a  drink using the `buy` command, using a `Stock Taker` or `Admin` account
 
 .. Prerequisites: There must be at least one drink in the inventory.
 .. Test case: `buy n/NAME q/12` +
    Expected: The drink by the name of NAME (case-sensitive) has its quantity increased by 12. The message that "Purchase transaction recorded!" is shown in the results panel.
-.. Test case: 'buy n/NAME q/12', where NAME is the name of a drink that is not in the inventory +
+.. Test case: `buy n/NAME q/12`, where NAME is the name of a drink that is not in the inventory +
    Expected: The message "The drink entered does not exist in the inventory list" is displayed.
 
 === Selling a drink
-. Sell a certain quantity of a drink using the `sell` command
+. Sell a certain quantity of a drink using the `sell` command, using a `Stock Taker` or `Admin` account
 
 .. Prerequisites: There must be at least one drink in the inventory.
 .. Test case: `sell n/NAME q/12`, where NAME is the name of a drink that is in the inventory, and its quantity is 12 or more. +
    Expected: The drink by the name of NAME (case-sensitive) has its quantity decreased by 12. The message that "Sale transaction recorded!" is shown in the results panel.
-.. Test case: 'sell n/NAME q/12', where NAME is the name of a drink that is not in the inventory +
+.. Test case: `sell n/NAME q/12`, where NAME is the name of a drink that is not in the inventory +
    Expected: The message "The drink entered does not exist in the inventory list" is displayed.
-.. Test case: 'sell n/NAME q/12', where NAME is the name of a drink that is in the inventory, and its quantity is less than 12. +
+.. Test case: `sell n/NAME q/12`, where NAME is the name of a drink that is in the inventory, and its quantity is less than 12. +
    Expected: The message "Insufficient quantity in stock to perform operation" is displayed.
 
 === Analysing costs
-. Analyse costs over a period of a day
+. Analyse costs over a period of a day, using an `Accountant` or `Admin` account
 
 .. Prerequisites: There must be at least one transaction in the transaction list.
 .. Test case: `costs` +

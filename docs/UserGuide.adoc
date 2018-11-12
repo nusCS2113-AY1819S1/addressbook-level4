@@ -175,18 +175,14 @@ account, and in a specific role, you can work with functions that are tailored t
 
 === Stock Taker
 As the stock taker is primarily in charge of updating inventory, the *Stock Taker* account has tailored
-access to the inventory manager. See <<stocktaker-commandSummary>> for a summary of the commands that you can use
-as a stock taker.
+access to the inventory manager.
 
 === Accountant
 The accountant has access to *[blue]#_Drink I/O_#*'s financial analysis tools in the *Accountant* account.
-See <<accountant-commandSummary>> for a summary of the commands that you can use
-as an accountant.
+
 
 === Manager
-A manager has access to all of *[blue]#_Drink I/O_#*'s features and commands by using the *Manager* account.
-See <<manager-commandSummary>> for a summary of the commands that you can use
-as a manager.
+A manager has access to adding, deleting and editing drinks, as well as creating accounts for other employees using the *Manager* account.
 
 //tag::account[]
 == Managing Your {product_name} Account
