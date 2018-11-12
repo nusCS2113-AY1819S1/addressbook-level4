@@ -56,7 +56,7 @@ public class WrongCommandSuggestion implements Suggestion {
             ScheduleCommand.COMMAND_WORD,
             SelectCommand.COMMAND_WORD,
             TodoCommand.COMMAND_WORD,
-            UndoCommand.COMMAND_WORD
+            UndoCommand.COMMAND_WORD,
             ReminderCommand.COMMAND_WORD
         };
     }
