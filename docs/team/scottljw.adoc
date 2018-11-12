@@ -1,0 +1,35 @@
+= Li Jiawei (Scott) - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: AddressBook - Level 4
+
+---
+
+== Overview
+
+During our Software Engineering project, my teammates and I developed an inventory management application named Drink I/O for the usage inside a typical small drink store. Adopted from an Address Book application, Drink I/O is a desktop application written in Java with a CLI, and it has a GUI created with JavaFX. The product aims to increase the productivity and efficiency in the drink store as it provides a simpler way to manage the stocks, and thus resolves many difficulties the manager and employees may face when using traditional inventory manipulation strategies.
+
+== Summary of contributions
+
+* *Major enhancement*: Proposed to added *the Calendar System*
+** What it does: offer the users a clear view of the batches of drinks with corresponding number left in stock, shown in a calendar form.
+** Justification: This feature improves the efficiency because the manager and staffs in the drink store can share the same view of the calendar and everyone will be able to have real-time updates on the situation in the stocks.
+** Highlights: This enhancement uses JavaFX to show the calendar view in the GUI.
+** Credits: [https://github.com/dlemmermann/CalendarFX[CalendarFX API]]
+
+* *Minor enhancement*: Morphed the storage for the Address Book towards the storage for drink inventory. XML files are used as the storage file.
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=storage]
