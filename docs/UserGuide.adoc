@@ -247,6 +247,8 @@ Examples:
 
 * `transaction pr/Apple pr/Banana pr/Cherries`
 
+==== Making a transaction while there is multiple products with the same name `[coming in v2.0]`
+
 ==== View the latest transaction: `latest`
 
 Format: `latest`
