@@ -373,6 +373,17 @@ Reminders with the same `TITLE` are allowed but not with the same `DATE` *and* `
 Examples:
 
 * `reminder tt/CS2113T Meeting d/03112018 st/1900 ag/Milestone 1.4`
+
+* The following sequence of images illustrate how the example `ReminderCommand` is executed in JitHub.
+** Step 1: User inputs command in Jithub's command box.
+
+image::ReminderExample.png[width="1000"]
+** Step 2: On successful addition, the results box will display this message.
+
+image::ReminderSuccess.png[width="1000"]
+** Step 3: The newly added `Reminder` will be displayed on the `Reminder` pane of the `UI` sidebar, below the `Todo` pane.
+
+image::ReminderPane.png[width="200"]
 // end::reminder[]
 
 === Exiting the program : `exit` / `x`

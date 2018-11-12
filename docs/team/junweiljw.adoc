@@ -9,6 +9,7 @@ I am a team member of the JitHub developer team, in-charge of managing the docum
 
 == PROJECT: JitHub - Schedule Management Software
 
+image::Ui.png[width="1000"]
 
 == Overview
 
