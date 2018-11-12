@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.ModuleEditCommand;
 import seedu.address.logic.commands.ModuleEditCommand.EditModuleDescriptor;
 import seedu.address.model.module.ModuleName;

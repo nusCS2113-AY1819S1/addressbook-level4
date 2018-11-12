@@ -1,18 +1,18 @@
 package seedu.address.logic.parser;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import seedu.address.logic.commands.GradeAddCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_MARKS;
-import static seedu.address.logic.parser.GradeAddCommandParser.MESSAGE_MISSING_PARAMS;
 import static seedu.address.logic.parser.GradeAddCommandParser.MESSAGE_MODULE_CODE_INVALID;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import seedu.address.logic.commands.GradeAddCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 
 public class GradeAddCommandParserTest {

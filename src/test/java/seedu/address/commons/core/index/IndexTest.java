@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+/**
+ * Provides a test for Index
+ */
 public class IndexTest {
 
     @Test

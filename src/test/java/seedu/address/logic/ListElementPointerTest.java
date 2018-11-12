@@ -12,6 +12,9 @@ import java.util.NoSuchElementException;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Provides a test for ListElementPointer
+ */
 public class ListElementPointerTest {
     private static final String FIRST_ELEMENT = "first";
     private static final String SECOND_ELEMENT = "second";
