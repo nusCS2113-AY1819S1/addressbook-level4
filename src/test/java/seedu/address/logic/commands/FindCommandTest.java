@@ -57,7 +57,7 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
     @Test
-    public void executeZeroKeywordsNoItemFound() {
+    public void execute_zeroKeywords_noItemFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -66,7 +66,7 @@ public class FindCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
     @Test
-    public void executeMultipleKeywordsMultipleItemsFound() {
+    public void execute_multipleKeywords_multipleItemsFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
         NameContainsKeywordsPredicate predicate = preparePredicate("Ar Rp");
         FindCommand command = new FindCommand(predicate);

@@ -55,7 +55,7 @@ public class TagCommandTest {
         assertFalse(tagFirstCommand.equals(tagSecondCommand));
     }
     @Test
-    public void executeZeroKeywordsNoItemFound() {
+    public void execute_zeroKeywords_noItemFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
         TagContainsKeywordsPredicate predicate = preparePredicate(" ");
         TagCommand command = new TagCommand(predicate);
@@ -64,7 +64,7 @@ public class TagCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
     @Test
-    public void executeMultipleKeywordsMultipleItemsFound() {
+    public void execute_multipleKeywords_multipleItemsFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
         TagContainsKeywordsPredicate predicate = preparePredicate("Lab1 Lab2");
         TagCommand command = new TagCommand(predicate);
