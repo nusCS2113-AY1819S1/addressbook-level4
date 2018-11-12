@@ -28,7 +28,7 @@ public interface InventoryStorage extends BookInventoryStorage, UserPrefsStorage
     Optional<ReadOnlyBookInventory> readBookInventory() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyBookInventory addressBook) throws IOException;
+    void saveBookInventory(ReadOnlyBookInventory bookInventory) throws IOException;
 
     /**
      * Saves the current version of the BookInventory to the hard disk.

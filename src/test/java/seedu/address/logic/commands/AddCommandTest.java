@@ -145,12 +145,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoBookInventory() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoBookInventory() {
             throw new AssertionError("This method should not be called.");
         }
 
