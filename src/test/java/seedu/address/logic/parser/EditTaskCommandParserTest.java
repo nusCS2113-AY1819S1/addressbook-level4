@@ -141,7 +141,6 @@ public class EditTaskCommandParserTest {
         descriptor = new EditTaskDescriptorBuilder().withPriority(VALID_TASK_PRIORITY_ASSIGNMENT).build();
         expectedCommand = new EditTaskCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
-        
     }
 
     /*
@@ -180,5 +179,4 @@ public class EditTaskCommandParserTest {
         expectedCommand = new EditTaskCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-
 }
