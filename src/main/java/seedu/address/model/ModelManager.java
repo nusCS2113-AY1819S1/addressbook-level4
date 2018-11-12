@@ -27,7 +27,7 @@ import seedu.address.model.user.UserName;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    protected LoginInfoManager loginInfoManager;
+    protected LoginInfoModel loginInfoModel;
     protected final FilteredList<Drink> filteredDrinks;
     protected final InventoryList inventoryList;
     protected final FilteredList<Transaction> filteredTransactions;
@@ -37,7 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
      * Initializes a ModelManager with the given inventoryList, userPrefs and transactionList
      */
     public ModelManager(ReadOnlyInventoryList readOnlyInventoryList, UserPrefs userPrefs,
-                        LoginInfoManager loginInfoManager, ReadOnlyTransactionList transactionList) {
+                        LoginInfoModel loginInfoModel , ReadOnlyTransactionList transactionList) {
 
         super();
         requireAllNonNull(readOnlyInventoryList, userPrefs);
@@ -45,7 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         inventoryList = new InventoryList(readOnlyInventoryList);
         filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
-        this.loginInfoManager = loginInfoManager;
+        this.loginInfoModel = loginInfoModel;
         this.transactionList = new TransactionList(transactionList);
         filteredTransactions = new FilteredList<>(this.transactionList.getTransactionList());
     }
@@ -147,17 +147,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void changePassword(UserName userName, Password newHashedPassword) {
-        loginInfoManager.changePassword(userName, newHashedPassword);
+        loginInfoModel.changePassword(userName, newHashedPassword);
     }
 
     @Override
     public LoginInfo getLoginInfo(UserName userName) {
-        return loginInfoManager.getLoginInfo(userName);
+        return loginInfoModel.getLoginInfo(userName);
     }
 
     @Override
     public boolean isUserNameExist(UserName userName) {
-        return loginInfoManager.isUserNameExist(userName);
+        return loginInfoModel.isUserNameExist(userName);
     }
 
 

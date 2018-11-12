@@ -9,7 +9,7 @@ import seedu.address.analysis.PurchaseTransactionPredicate;
 import seedu.address.analysis.SaleTransactionPredicate;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
-import seedu.address.model.LoginInfoManager;
+import seedu.address.model.LoginInfoModel;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.UserPrefs;
@@ -28,8 +28,8 @@ public class AdminModelManager extends ModelManager implements AdminModel {
     private final Analysis analysis = new AnalysisManager(transactionList, filteredTransactions);
 
     public AdminModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs,
-                             LoginInfoManager loginInfoManager, ReadOnlyTransactionList transactionList) {
-        super(inventoryList, userPrefs, loginInfoManager, transactionList);
+                             LoginInfoModel loginInfoModel, ReadOnlyTransactionList transactionList) {
+        super(inventoryList, userPrefs, loginInfoModel, transactionList);
     }
 
     /**
@@ -102,12 +102,12 @@ public class AdminModelManager extends ModelManager implements AdminModel {
     //=====================Manager command=========================
     @Override
     public void createNewAccount(LoginInfo loginInfo) {
-        loginInfoManager.createNewAccount(loginInfo);
+        loginInfoModel.createNewAccount(loginInfo);
     }
 
     @Override
     public void deleteAccount(UserName userName) {
-        loginInfoManager.deleteAccount(userName);
+        loginInfoModel.deleteAccount(userName);
     }
 
     //===================== Accountant commands ======================

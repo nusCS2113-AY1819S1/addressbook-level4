@@ -32,7 +32,7 @@ import seedu.address.commons.events.model.ChangeModelEvent;
 import seedu.address.commons.events.model.InitInventoryListEvent;
 import seedu.address.commons.events.ui.RestartUiEvent;
 import seedu.address.commons.events.ui.StartUiEvent;
-import seedu.address.model.LoginInfoManager;
+import seedu.address.model.LoginInfoModel;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 import seedu.address.ui.LoginHelpWindow;
@@ -43,7 +43,7 @@ import seedu.address.ui.LoginHelpWindow;
  */
 public class LoginController {
 
-    protected static LoginInfoManager loginInfoManager;
+    protected static LoginInfoModel loginInfoModel;
     private static boolean firstTimeLogin;
     private String username;
     private String password;
@@ -162,7 +162,7 @@ public class LoginController {
     private boolean isLoginInfoCorrect () {
         UserName userName = new UserName (this.username);
         Password password = new Password (this.password);
-        LoginUtils loginUtils = new LoginUtils (userName, password, loginInfoManager);
+        LoginUtils loginUtils = new LoginUtils (userName, password, loginInfoModel);
 
         return loginUtils.isPasswordAndUserNameValid ();
     }
@@ -263,8 +263,8 @@ public class LoginController {
     /**
      * pass in {@code LoginInfo} list from main app
      */
-    public void getLoginInfoList (LoginInfoManager loginInfoManager) {
-        this.loginInfoManager = loginInfoManager;
+    public void getLoginInfoList (LoginInfoModel loginInfoModel) {
+        this.loginInfoModel = loginInfoModel;
     }
 
     private void openHelpWindow() {

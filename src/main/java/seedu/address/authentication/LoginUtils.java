@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.LoginInfoManager;
+import seedu.address.model.LoginInfoModel;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.UserName;
 
@@ -15,16 +15,16 @@ import seedu.address.model.user.UserName;
  * Contains utility methods used for login check
  */
 public class LoginUtils {
-    private LoginInfoManager loginInfoManager;
+    private LoginInfoModel loginInfoModel;
     private LoginInfo userInfoInStorage;
     private UserName username;
     private Password password;
     private final Logger logger = LogsCenter.getLogger(LoginUtils.class);
 
-    public LoginUtils(UserName username, Password password, LoginInfoManager loginInfoManager) {
+    public LoginUtils(UserName username, Password password, LoginInfoModel loginInfoModel) {
         this.username = username;
         this.password = password;
-        this.loginInfoManager = loginInfoManager;
+        this.loginInfoModel = loginInfoModel;
     }
     /**
      * Check the password and username with logininfo list
@@ -46,7 +46,7 @@ public class LoginUtils {
      * Returns true if able to find same username in storage
      */
     private Optional<LoginInfo> getLoginInfoFromStorage() {
-        LoginInfo userInfoInStorage = loginInfoManager.getLoginInfo (username);
+        LoginInfo userInfoInStorage = loginInfoModel.getLoginInfo (username);
         if (userInfoInStorage == null) {
             return Optional.empty ();
         }

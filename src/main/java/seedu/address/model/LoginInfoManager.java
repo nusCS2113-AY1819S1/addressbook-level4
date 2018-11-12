@@ -12,7 +12,7 @@ import seedu.address.model.user.UserName;
 /**
  * Represents the facade of loginInfo
  */
-public class LoginInfoManager {
+public class LoginInfoManager implements LoginInfoModel {
     private ArrayList< LoginInfo > loginInfoList;
 
     public LoginInfoManager () {
@@ -31,11 +31,7 @@ public class LoginInfoManager {
         return null;
     }
 
-    /**
-     * Returns true if {@code String userName} is equal to Username in storage
-     * @param userName
-     * @return
-     */
+    @Override
     public boolean isUserNameExist(UserName userName) {
         LoginInfo user = getLoginInfo (userName);
         if (user == null) {
@@ -43,9 +39,7 @@ public class LoginInfoManager {
         }
         return true;
     }
-    /**
-     * Change password in the list with {@code userName} and {@code newHashedPassword}
-     */
+    @Override
     public void changePassword(UserName userName, Password newHashedPassword) {
         for (int i = 0; i < loginInfoList.size (); i++) {
             if (loginInfoList.get (i).isUserNameMatched(userName)) {
@@ -53,9 +47,7 @@ public class LoginInfoManager {
             }
         }
     }
-    /**
-     * Delete according in the list contains{@code userName}
-     */
+    @Override
     public void deleteAccount(UserName userName) {
         for (int i = 0; i < loginInfoList.size (); i++) {
             if (loginInfoList.get (i).isUserNameMatched(userName)) {
@@ -64,13 +56,12 @@ public class LoginInfoManager {
         }
     }
 
-    /**
-     * Add in a {@code newAccount} to the list
-     */
+    @Override
     public void createNewAccount(LoginInfo newAccount) {
         loginInfoList.add (newAccount);
     }
 
+    @Override
     public ArrayList< LoginInfo > getLoginInfoList() {
         return loginInfoList;
     }
