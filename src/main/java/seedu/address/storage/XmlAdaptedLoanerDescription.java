@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.model.item.LoanerDescription;
 
+//@@author ChewKinWhye
+
 /**
  * JAXB-friendly version of the LoanerDescription.
  */

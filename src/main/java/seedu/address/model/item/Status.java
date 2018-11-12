@@ -3,10 +3,11 @@ package seedu.address.model.item;
 import java.util.ArrayList;
 import java.util.List;
 
+//@@author ChewKinWhye
+
 /**
  * Represents an Item's status in the stock list.
  */
-//@@author ChewKinWhye
 public class Status {
     public static final int STATUS_READY = 0;
     public static final int STATUS_ON_LOAN = 1;
