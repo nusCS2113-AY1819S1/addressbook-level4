@@ -250,24 +250,20 @@ UniqueLedgerList to get the date of the ledgers in the list, comparing
 them to find one to edit.
 
 |=======================================================================
-
  
 
-=== 4.    Known Bugs
+=== 4.    Other Contributions
 
-[width="100%",cols="50%,50%",]
-|=======================================================================
-|image:ppp_files/image001.png[Tip icon,width=15,height=15] |Some of the
-bugs identified a
-|=======================================================================
-
- 
-
-=== 5.    Design Considerations
-
-[width="100%",cols="50%,50%",]
+[width="100%",cols="100%",]
 |============================================================
-|image:image003.png[Tip icon,width=15,height=15] a|
+a|
+
+=== Technical Leadership
+Provided technical guidance for the team, including debugging and implementing larger features.
+
+=== Project Management
+1. Delegating of workflow amongst team members.
+2. Provided and organized team meetings.
 
  
 
@@ -275,7 +271,7 @@ bugs identified a
 
  
 
-=== 6.    Future Implementation
+=== 5.    Future Implementation
 
 [width="100%",cols="100%",]
 |============================================================
