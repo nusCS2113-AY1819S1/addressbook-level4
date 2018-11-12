@@ -236,8 +236,8 @@ Requests to buy a book in the inventory. +
 Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 
 ****
-*   *Students* may indicate interest by requesting an item of a certain ISBN.
-•	The email given helps *bookstore owners* confirm order with the requester. It is up to the owner's preference to decide whether he/she wishes to accept the request.
+*   Students may indicate interest by requesting an item of a certain ISBN.
+•	The email given helps bookstore owners confirm order with the requester. It is up to the owner's preference to decide whether he/she wishes to accept the request.
 •	Possible reasons may include: Item is not a book, item not found in bookstore (Unable to find stock), quantity demanded too high.
 •	Note: This app does not have an automatic email response from owner. Thus, it depends on the owner’s personal preference to decide if he/she wishes to reply.
 ****
@@ -351,7 +351,7 @@ Deletes the book with the corresponding iSBN13 from the inventory list.
 
 === Deleting a request : `deleterequest`
 
-Deletes the specified request from the request list. Strictly for *bookstore owners*. +
+Deletes the specified request from the request list. Strictly for bookstore owners. +
 Format: `deleterequest INDEX`
 
 Examples:
