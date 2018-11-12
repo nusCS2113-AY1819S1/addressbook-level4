@@ -11,7 +11,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Amirul Maricar
 image::amirulmaricar.png[width="150", align="left"]
-{empty}[https://github.com/amirulmaricar[github]]
+{empty}[https://github.com/amirulmaricar[github]][<<amirulmaricar#, portfolio>>]
 
 Role: Project Manager +
 Responsibilities: Security + Tester
@@ -29,7 +29,7 @@ Responsibilities: Integrator + Threading
 
 === Yeo Su Yia, Denise
 image::dyeosy98.png[width="150", align="left"]
-{empty}[https://github.com/dyeosy98[github]]
+{empty}[https://github.com/dyeosy98[github]][<<dyeosy98#, portfolio>>]
 
 Role: Developer Marketing Lead +
 Responsibilities: Documentation + Communication
@@ -38,7 +38,7 @@ Responsibilities: Documentation + Communication
 
 === Tahir Gara
 image::garagaristahir.png[width="150", align="left"]
-{empty}[https://github.com/garagaristahir[github]]
+{empty}[https://github.com/garagaristahir[github]][<<garagaristahir#, portfolio>>]
 
 Role: Core Developer +
 Responsibilities: Product Data

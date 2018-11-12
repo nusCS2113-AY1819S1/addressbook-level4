@@ -55,7 +55,8 @@ Reported bugs and suggestions to team W13-1.
 
 I created and added the first design of the UI to the User Guide so the team could visualize our end-product.
 
-image::orgUI.png[width="790"]
+image::orgUI.png[width="730"]
+
 
 == Contribution to the Developper guide
 
