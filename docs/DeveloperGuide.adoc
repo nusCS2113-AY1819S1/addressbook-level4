@@ -410,26 +410,14 @@ However, the overridden `test` method for `filter` is only asserted if all of th
 Similar to the `find` mechanism, `filter` is implemented by creating a `keywordsMap` which stores the searched keywords in a `HashMap`.
 Based on the preceding prefixes of the user input, the tokenized argument is being stored as the `value` of the respective prefix `key`.
 
-===== Candidates
-The `filterCandidateCommand` is facilitated by the `CandidateContainsFilterKeywordsPredicate` which implements `Predicate<Candidate>`
-and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
-
-===== Companies
-The `filterCompanyCommand` is facilitated by the `CompanyContainsFilterKeywordsPredicate` which implements `Predicate<Company>`
-and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
-
-===== Job Offers
-The `filterJobOfferCommand` is facilitated by the `JobOfferContainsFilterKeywordsPredicate` which implements `Predicate<JobOffer>`
-and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
-
 Through the `test` method, it compares every value in the `keywordsMap` with the respective field of each entry and returns `true` if the object contains all the searched fields.
 
-The `test` method is facilitated by the following operations:
+The `test` method is facilitated by the following operations (similar to `find` feature):
 
-* StringUtil#isWithinRange - checks whether the the job offer has an `ageRange` that satisfies the `age` of the `candidate`.
-* StringUtil#isMoreThanOrEqualTo - checks whether the job offer has a `salary` offer that is higher than the `candidate` 's expected `salary`.
+* StringUtil#isWithinRange
+* StringUtil#isMoreThanOrEqualTo
 
-After which, the respective list which is exposed in the `Model` interface as either `Model#updateFilteredCandidateList`, `Model#updateFilteredCompanyList` or `Model#updateCompanyJobList` is being updated.
+After which, the respective list which is exposed in the `Model` interface is being updated.
 
 [NOTE]
 Entering a prefix that is not recognized will throw a command exception.

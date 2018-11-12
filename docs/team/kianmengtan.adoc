@@ -16,15 +16,6 @@ To prevent any loss or leakage of data, our group has come up with a password-pr
 RecruitBook mainly uses a Command Line Interface(CLI) that allows you to interact with specific commands while it also has a Graphical User Interface created with JavaFX.
 All in all, it has a codebase of about 10,000 lines of code and we definitely welcome future collaborations with any developer.
 
-=== RecruitBook features:
-* Add Feature
-* Locating Feature
-* Edit Feature
-* Sort Feature
-* Blacklist Feature
-* Shortlist Feature
-* Email Feature
-
 == Summary of contributions
 * *Major enhancement*: enhanced *the find command such that it becomes more extensive*
 ** What it does: It allows the user to find candidates, companies and job offers based on multiple fields. Entries that satisfies any of the searched parameters will be returned.
