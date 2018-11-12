@@ -9,7 +9,6 @@ ProManage is a *professional desktop application* for companies that specialises
 long and tedious planning phase. ProManage allow *Manager* and *Employees* of project teams to manage their team members and events easily.
 ProManage is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-image::Ui.png[width="800"]
 
 == Overview
 
@@ -30,10 +29,10 @@ This is useful in helping users to differentiate between incorrect input command
 ** Created `sort` command which allows user to sort the event list according to the parameters they entered.
 This create convenient for users to find event in the event list. For example, they are able to sort events according
 to their date and find events that are occurring at earlier dates.
-** Created the storage components for events.
-** Created the event class and its relevant components
+** Created the storage components for events so that the event created could be save as XML format.
+** Created the event class and it relevant components to transform the addressbook app to an event planner app.
 ** Updated the mainapp to load eventlist xml or a sample of events when the app launches.
-
+** Implemented ProManageParser which parser all commands
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=IcedCoffeeBoy[Functional code]]
 
@@ -42,11 +41,18 @@ to their date and find events that are occurring at earlier dates.
 ** Project management:
 *** Helped to Managed releases on GitHub
 *** Managed the issue tracker on GitHub by creating new issues and closed existing issues that already resolved.
+*** Wrote test cases to increase coverage
+   [https://github.com/CS2113-AY1819S1-T16-2/main/pull/36[PR1]]
+   [https://github.com/CS2113-AY1819S1-T16-2/main/pull/56[PR2]]
+   [https://github.com/CS2113-AY1819S1-T16-2/main/pull/116[PR3]]
+   [https://github.com/CS2113-AY1819S1-T16-2/main/pull/144[PR4]]
+   [https://github.com/CS2113-AY1819S1-T16-2/main/pull/138[PR5]]
 
 ** Documentation:
 *** Updated the User Guide for Practical Exam 1
 *** Updated the Developer Guide to include `sort` command, user stories for sort, login and use case for showmine,
-class diagram for parser. Include new test case for `login` and `sort` command for Appendix F.
+class diagram for parser.
+*** Include new test case for `login` and `sort` command for Appendix F under developer guide.
 
 
 ** Community:
