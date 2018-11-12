@@ -64,7 +64,7 @@ public class ItemListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Item} using a {@code ItemCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code item} using a {@code ItemCard}.
      */
     class ItemListViewCell extends ListCell<Item> {
         @Override

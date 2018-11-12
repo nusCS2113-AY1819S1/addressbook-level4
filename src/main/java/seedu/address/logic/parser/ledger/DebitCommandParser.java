@@ -1,5 +1,6 @@
 package seedu.address.logic.parser.ledger;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BALANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -34,6 +35,9 @@ public class DebitCommandParser {
 
         DateLedger dateLedger = ParserUtil.parseDateLedger(argumentMultimap.getValue(PREFIX_DATE).get());
         Double amount = ParserUtil.parseBalance(argumentMultimap.getValue(PREFIX_BALANCE).get());
+        if (amount <= 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_AMOUNT));
+        }
 
         return new DebitCommand(dateLedger, amount);
     }

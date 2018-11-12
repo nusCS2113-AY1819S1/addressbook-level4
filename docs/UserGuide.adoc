@@ -27,7 +27,7 @@ ClubHub (CH) is for those who *prefer to use a desktop app for managing members,
 .  Copy the file to the folder you want to use as the home folder for your ClubHub.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png   [width="790"]
+image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -144,15 +144,38 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+// tag::undoallredoall[]
 === Undoing all previous commands
 
 Restores ClubHub to the state before all previous undoable commands were executed. +
 Format: `undoAll`
 
+Examples:
+
+* `deleteItem 1` +
+`deleteItem 2` +
+`undoAll` (reverses both the `deleteItem 1` and `deleteItem 2` commands) +
+
 === Redoing all previously undone commands
 
 Reverses all undo commands. +
 Format: `redoAll`
+
+* `deleteItem 1` +
+`deleteItem 2` +
+`undo` (reverses the `deleteItem 2` command) +
+`undo` (reverses the `deleteItem 1` command) +
+`redoAll` (reapplies both the `deleteItem 1` and `deleteItem 2` commands) +
+
+* `deleteItem 1` +
+`redoAll` +
+The `redoAll` command fails as there are no `undo` commands executed previously.
+
+* `deleteItem 1` +
+`addItem n/Ball q/1 l/Storeroom` +
+`undoAll` (reverses the `deleteItem 1` and `addItem n/Ball q/1 l/Storeroom` commands) +
+`redoAll` (reapplies the `deleteItem 1` and `addItem n/Ball q/1 l/Storeroom` commands) +
+// end::undoallredoall[]
 
 === Clearing all entries
 
@@ -394,17 +417,18 @@ Example:
 * `deleteEvent n/Basketball training`
 Delete the event named `Basketball training`.
 
+// tag::itemlist[]
 === ItemList
 
 ==== Adding an item: `addItem`
 
 Adds a item to the ItemList +
-Format: `addItem n/ITEM_NAME q/ITEM_QUANTITY`
+Format: `addItem n/ITEM_NAME q/ITEM_QUANTITY l/ITEM_LOCATION`
 
 Examples:
 
-* `addItem n/Basketball q/7`
-* `addItem n/Chairs q/2`
+* `addItem n/Basketball q/7 l/Storeroom`
+* `addItem n/Chairs q/2 l/Clubroom`
 
 ==== Deleting an item: `deleteItem`
 
@@ -427,7 +451,7 @@ Deletes the 13th item in ItemList.
 ==== Edit an item: `editItem`
 
 Edits an existing item in the ItemList.
-Format: `editItem INDEX [n/ITEM_NAME] [q/ITEM_QUANTITY]...`
+Format: `editItem INDEX [n/ITEM_NAME] [q/ITEM_QUANTITY] [l/ITEM_LOCATION]`
 
 ****
 * Edits the item at the specified `INDEX`. The index refers to the index number shown in the displayed item list. The index *must be a positive integer* 1, 2, 3, ...
@@ -437,15 +461,15 @@ Format: `editItem INDEX [n/ITEM_NAME] [q/ITEM_QUANTITY]...`
 
 Examples:
 
-* `editItem 2 q/1` +
-Edits the quantity of the 2nd item to be `1`.
+* `editItem 2 l/Cabinet` +
+Edits the location of the 2nd item to be `Cabinet`.
 * `editItem 1 n/Soccer Balls q/4` +
 Edits the name and quantity of the 1st item to be `Soccer Balls` and `6` respectively.
 
 ==== Increase quantity of an item: `increaseItem`
 
 Increases the quantity of existing item in the ItemList.
-Format: `increaseItem INDEX [q/ITEM_QUANTITY]`
+Format: `increaseItem INDEX q/ITEM_QUANTITY`
 
 ****
 * Increases the quantity of the item at the specified `INDEX`. The index refers to the index number shown in the displayed item list. The index *must be a positive integer* 1, 2, 3, ...
@@ -460,7 +484,7 @@ Increases the quantity of the 2nd item by `1`.
 ==== Decrease quantity of an item: `decreaseItem`
 
 Decreases the quantity of existing item in the ItemList.
-Format: `decreaseItem INDEX [q/ITEM_QUANTITY]`
+Format: `decreaseItem INDEX q/ITEM_QUANTITY`
 
 ****
 * Decreases the quantity of the item at the specified `INDEX`. The index refers to the index number shown in the displayed item list. The index *must be a positive integer* 1, 2, 3, ...
@@ -479,7 +503,7 @@ Finds items whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `balls` will match `Balls`
+* The search is case insensitive. e.g `Balls` will match `balls`
 * The order of the keywords does not matter. e.g. `Soccer Balls` will match `Balls Soccer`
 * Only the name is searched.
 * Only full words will be matched e.g. `Ball` will not match `Balls`
@@ -493,10 +517,40 @@ Returns `balls` and `Soccer Balls`
 * `find White Soccer Balls` +
 Returns any item having names `White`, `Soccer`, or `Balls`
 
-=== Listing all items : `listItems`
+==== Listing all items : `listItems`
 
 Shows a list of all items in the ClubHub. +
 Format: `listItems`
+// end::itemlist[]
+
+== Record feature `[coming in v2.0]`
+
+Record feature allows the user to update many new club information all at once.
+
+For Example:
+
+ `Bernice` pays `$100` membership fee, attends `Basketball training on 01/11` and borrows `1 chair`.
+
+In order to record this information on Clubhub, the user just has to enter the following command:
+
+`AddRecord M/Bernice d/10/10 b/100 D/01/11 n/chair q/-1`
+
+This command will do the following:
+
+* Look for the name Bernice to see whether it already exists in Clubhub
+(It will inform the user that the input is invalid if the name does not already exist in Clubhub)
+
+*  Add a ledger in `Club Account` panel and update the balance accordingly
+
+*  Add a basketball event on 01/11 in `Club Calendar`
+
+*  Take away 1 chair from the inventory from `Club Inventory`
+
+Furthermore, there will a panel at the bottom of Clubhub to show history of all the `Records` added
+
+.Sample New UI
+image::AddRecordUI.PNG[width="790"]
+
 
 
 == FAQ
@@ -529,9 +583,9 @@ e.g.`select 2`
 * *AddEvent* : `addEvent n/EVENT_NAME v/VENUE d/DESCRIPTION D/EVENT_DATE`
 * *EditEvent* : `editEvent EVENT_NAME to EVENT_NAME EVENT_DATE EVENT_LOCATION EVENT_DESCRIPTION`
 * *DeleteEvent* : `deleteEvent n/EVENT_NAME`
-* *AddItem* : `addItem n/ITEM_NAME q/ITEM_QUANTITY`
+* *AddItem* : `addItem n/ITEM_NAME q/ITEM_QUANTITY l/ITEM_LOCATION`
 * *DeleteItem* : `deleteItem INDEX`
-* *EditItem* : `editItem INDEX [n/ITEM_NAME] [q/ITEM_QUANTITY]…​`
+* *EditItem* : `editItem INDEX [n/ITEM_NAME] [q/ITEM_QUANTITY] [l/ITEM_LOCATION]`
 * *IncreaseItem* : `increaseItem INDEX q/ITEM_QUANTITY`
 * *DecreaseItem* : `decreaseItem INDEX q/ITEM_QUANTITY`
 * *FindItem* : `findItem KEYWORD [MORE_KEYWORDS]`
