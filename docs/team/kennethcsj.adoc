@@ -22,7 +22,7 @@ _BookInventory_ was developed by a team of four students over a period of one se
 
 * *CS2113* - Software Engineering & Object-Oriented Programming
 
-This Project Portfolio demonstrates my contributions and ability to write documentation for both User Guide and Developer Guide for _BookInventory_.
+This Project Portfolio documents my contributions and demonstrates my ability to write documentation for both User Guide and Developer Guide for _BookInventory_.
 
 == Summary of contributions
 
