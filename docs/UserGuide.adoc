@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= JitHub - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,31 +12,36 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-W12-1/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2113-AY1819S1-W12-1`      Since: `Aug 2018`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+JitHub is for students who *prefer to use a desktop app for managing contacts, email, and calendar*. More importantly,
+JitHub is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits
+of a Graphical User Interface (GUI). If you can type fast, JitHub can get your daily tasks such as checking schedule done faster than traditional GUI apps.
+Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `jithub.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your JitHub.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
+// TODO: Update Ui screenshot
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+e.g. typing *`help`* or *`h`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
+* *`h`* : access the help document
 
 .  Refer to <<Features>> for details of each command.
 
@@ -52,11 +57,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`
+=== Viewing help : `help` / `h`
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a person: `add` / `a`
 
 Adds a person to the address book +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
@@ -69,12 +74,12 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all persons : `list`
+=== Listing all persons : `list` / `ls`
 
 Shows a list of all persons in the address book. +
 Format: `list`
 
-=== Editing a person : `edit`
+=== Editing a person : `edit` / `e`
 
 Edits an existing person in the address book. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
@@ -94,7 +99,7 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Locating persons by name: `find` / `f`
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -114,10 +119,12 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Deleting a person : `delete`
+=== Deleting a person : `delete` / `d`
 
 Deletes the specified person from the address book. +
+====
 Format: `delete INDEX`
+====
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -134,10 +141,12 @@ Deletes the 2nd person in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
-=== Selecting a person : `select`
+=== Selecting a person : `select` / `s`
 
 Selects the person identified by the index number used in the displayed person list. +
+====
 Format: `select INDEX`
+====
 
 ****
 * Selects the person and loads the Google search page the person at the specified `INDEX`.
@@ -154,10 +163,16 @@ Selects the 2nd person in the address book.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
-=== Listing entered commands : `history`
+Upon selecting a person, the calendar of the current month will be displayed, instead of the
+welcome message.
+For additional calendar features, please view `calendar to view schedule`.
+
+=== Listing entered commands : `history` / `hs`
 
 Lists all the commands that you have entered in reverse chronological order. +
+====
 Format: `history`
+====
 
 [NOTE]
 ====
@@ -165,10 +180,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo`
+=== Undoing previous command : `undo` / `z`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
+====
 Format: `undo`
+====
 
 [NOTE]
 ====
@@ -191,10 +208,12 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo`
+=== Redoing the previously undone command : `redo` / `y`
 
 Reverses the most recent `undo` command. +
+====
 Format: `redo`
+====
 
 Examples:
 
@@ -214,31 +233,321 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+=== Clearing all entries : `clear` / `c`
 
 Clears all entries from the address book. +
+====
 Format: `clear`
+====
 
-=== Exiting the program : `exit`
+=== Searching for person's photograph
+Searches for the person's photograph on Google.
+
+* Person must have an online presence eg. Facebook/LinkedIn for the search to work.
+
+====
+Format:
+====
+
+* The selected person will be searched on google. Refer to `select` on how to select a person.
+
+// TODO: update according to the latest features
+// tag::export[]
+[[export]]
+=== Export contacts displayed: `export`
+You can save the hassle of your group mates typing in the exact same contact details of your group members if you
+ have already save them into your JitHub.
+
+To do so, simply *find* the person(s) and *export* the contact details in JitHub to a
+file and share it with your group mates. +
+====
+Format: `export FILENAME.xml`
+====
+
+Examples: +
+
+* `find Alex` +
+* `export alex.xml`
+//1) `find Alex`
+
+//Find the person(s) you want to export. +
+
+//image::findAlex.png[width="360"]
+
+//2) `export alex.xml`
+
+//Export to a xml file with specific filename. +
+
+//image::exportAlex.png[width="360"]
+
+[NOTE]
+====
+1.  The file will be located in `<DIRECTORY OF YOUR JAR FILE>/data/FILENAME.xml`
+2.  This command overwrites any files with the same name at `<DIRECTORY OF YOUR JAR FILE>/data/`
+====
+
+[TIP]
+====
+Your team members can import the contact details to their JitHub. Please refer to <<import>>.
+====
+// TODO: screenshot of success message
+// end::export[]
+
+// tag::exportall[]
+[[exportall]]
+=== Exporting all contacts : `exportall`
+
+Export the name, phone, address and email of all persons in the addressbook under the specified filetype. +
+Format: `exportall FILETYPE`
+
+Examples:
+
+* `exportall csv`
+* `exportall vcf` [coming in v2.0]
+
+[NOTE]
+====
+1.  The file will be located in `<DIRECTORY OF YOUR JAR FILE>/data/jithub.csv`.
+2.  This command overwrites the previous `<DIRECTORY OF YOUR JAR FILE>/data/jithub.csv`.
+====
+// TODO: screenshot of success message
+// end::exportall[]
+
+// tag::import[]
+[[import]]
+=== Import contacts: `import`
+You can save the hassle of typing in the exact same contact details of your group members if one of your group members
+ have already save them into his/her JitHub.
+
+To do so, politely ask them to *export* the contact details and place the file your teammate exported into the
+`/data/` of your JitHub
+and *import* it into your JitHub. +
+====
+Format: `import FILENAME.xml`
+====
+
+Examples: +
+
+* `import alex.xml`
+
+[NOTE]
+====
+1.  The file to import must be placed in `<DIRECTORY OF YOUR JAR FILE>/data/`
+2.  Persons that already exist in your JitHub won't be imported.
+To import an existing person in JitHub with different contact details, please `delete` them first.
+3.  The `undo` command works with the `import` command.
+====
+[TIP]
+====
+You can refer to <<export>> for instructions on how to export contact details.
+====
+// TODO: screenshot of success message
+// end::import[]
+
+// tag::schedule[]
+=== Add personal schedule : `schedule` / `sc`
+This function enables you to add the scheduled events of a person into the selected person's card.
+
+====
+Format: `schedule INDEX-OF-PERSON d/DATE(DDMMYYYY) st/START-TIME et/END_TIME en/EVENT-NAME`
+====
+
+Examples:
+
+* `schedule 1 d/09092018 st/1200 et/1400 en/CS1231 Exam`
+* `schedule 2 d/08072018 st/1000 et/1900 en/CS2040C Practical Exam`
+
+*Currently, the adding of scheduled events allows for events of the same name to be added, at the same time slot.
+This issue will be fixed in V2.0.*
+
+=== Clear personal weekly schedule : `clearSchedule` / `cs`
+
+====
+Format:
+`clearSchedule IndexOfPerson`
+====
+
+Examples:
+
+* `clearSchedule 1`
+
+=== List Common Schedule : `matchSchedule` / `ms`
+
+Shows a list of common meeting time for a group of contacts and the user in that given that given period of time. +
+====
+Format: `matchSchedule d/SELECTED-DATE st/START-TIME et/END-TIME i/INDEX-OF-PERSON...[INDEX]`
+====
+
+Examples:
+
+* `matchSchedule d/01012018 st/0800 et/1800 i/1 i/2 i/3`
+// end::schedule[]
+
+// tag::todo[]
+=== Add To-do task: `todo`
+
+Adds a to-do task, the to-do list panel will display the task's title and its content. +
+====
+Format: `todo tt/TITLE c/CONTENT`
+====
+
+Examples:
+
+* `todo tt/Write tests c/Need to write test for this command`
+* `todo tt/Buy grocery c/Buy tomato and potato on the way back home`
+
+The following diagram illustrates how the `todo` is being used on the JitHub CLI-GUI app:
+
+image::TodoUsage1.png[width="1000"]
+
+image::TodoUsage2.png[width="200"]
+
+// end::todo[]
+
+// tag::finishTodo[]
+=== Finish To-do task: `finishTodo`
+
+Complete a to-do task, and the to-do list panel will re-render the remaining unfinished to-do tasks. +
+Format: `finishTodo INDEX`
+
+Examples:
+
+* `finishTodo 1`
+
+[NOTE]
+====
+1.  The completed to-do task will be removed from your JitHub.
+====
+
+The following diagram illustrates how the `finishTodo` is being used on the JitHub CLI-GUI app:
+
+image::FinishTodoUsage.png[width="1000"]
+
+// end::finishTodo[]
+
+// tag::reminder[]
+=== Add Reminder: `reminder`
+
+Adds a reminder for your next meeting, containing details like the title, date, time and agenda of the meeting. +
+Format: `reminder tt/TITLE d/DATE(DDMMYYYY) st/START_TIME ag/AGENDA`
+
+[NOTE]
+====
+Reminders with the same `TITLE` are allowed but not with the same `DATE` *and* `START_TIME`
+====
+
+****
+* Only 1 of each field is allowed.
+* `TITLE`, `DATE`, `START_TIME` `AGENDA` all cannot be blank fields.
+* `TITLE` and `AGENDA` accepts any alphanumerical input of any length.
+* `DATE` must be in DDMMYYYY format, and only numbers will be accepted.
+* `START_TIME` must be in 24 hours format, cannot exceed 2359 and only numbers will be accepted.
+****
+
+Examples:
+
+* `reminder tt/CS2113T Meeting d/03112018 st/1900 ag/Milestone 1.4`
+
+* The following sequence of images illustrate how the example `ReminderCommand` is executed in JitHub.
+** Step 1: User inputs command in Jithub's command box.
+
+image::ReminderExample.png[width="1000"]
+** Step 2: On successful addition, the results box will display this message.
+
+image::ReminderSuccess.png[width="1000"]
+** Step 3: The newly added `Reminder` will be displayed on the `Reminder` pane of the `UI` sidebar, below the `Todo` pane.
+
+image::ReminderPane.png[width="200"]
+// end::reminder[]
+
+=== Exiting the program : `exit` / `x`
 
 Exits the program. +
+====
 Format: `exit`
+====
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+JitHub data are saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually. +
+The storage file 'jithub.xml' is located in the project root folder.
+
+// tag::suggestions[]
+=== Getting Smart Suggestions
+
+Receive smart suggestions while typing in your commands. Press the `TAB` key while typing a command halfway to get
+suggestions on possible commands without having to navigate to the help window. If only one command is available,
+pressing `TAB` will auto-complete the command for you without the need to type it in manually.
+
+This is particularly helpful when you are new to the commands and require time to get used to it. Pressing `TAB` would
+show all helpful and useful information needed, and this would definitely benefit you as the learning curve to using our
+application would not be steep.
+
+Examples:
+
+* While typing `his` to get `history` command, press `TAB`. The `history` command will automatically be filled in for
+you as it is the only suggestion available. The command parameters would then be shown as a prompt to help you with your
+input.
+* While typing `e`, press `TAB`. The system will suggest to you all possible commands that start with `e`, which would
+be `exportall`, `export`, `exit`, and `edit`.
+
+=== Getting Wrong Command Suggestions
+
+Should you type in a wrong command, fear not, as our system will automatically suggest to you what you have typed wrongly,
+by giving you a closest approximation of word through the message box after you press enter.
+
+The input is not case sensitive when looking for suggestions, hence it would increase the chance of getting a closer approximation of your
+desired command!
+
+This is particularly useful when you are typing very quickly, as sometimes you might make minor mistakes which can be
+easily correctable from our application.
+
+Examples:
+
+* If you wanted to type `select` but you typed `salect` instead, the system will tell you that it is an invalid command,
+and would suggest to you the command `select` instead.
+// end::suggestions[]
+
+// tag::calendar[]
+=== Monthly Calendar View
+
+Once you start running the application and select a person from the person list panel, the calendar of the current month will be displayed on the calendar panel.
+
+The following diagram shows how the calendar looks like for November 2018.
+
+image::CalendarView.png[width="500"]
+
+// end::calendar[]
+
+// tag::calendarViewSchedule[]
+=== Calendar to view schedule [Coming in V2.0]
+
+When selecting a person, the scheduled events are to be displayed on the calendar panel.
+Command type: `select INDEX`
+
+When matching schedules, the common time slots found are to be displayed on the calendar panel.
+Command type: `matchSchedule d/SELECTED-DATE st/START-TIME et/END-TIME i/INDEX-OF-PERSON...[INDEX]`
+// end::calendarViewSchedule[]
 
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== Encryption [Coming in V2.0]
 
-_{explain how the user can enable/disable data encryption}_
+When exporting contacts for the purpose of information transfer to another computer, encryption can be enabled before
+the export command to prevent data misuse.
+
+Command type: `encrypt for export`
 // end::dataencryption[]
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the
+data of your previous JitHub folder.
+
+*Q*: How do I export my contacts to my phone? +
+*A*: Use the `exportall` command to generate a csv file and transfer that file to your phone. Use your phone contacts
+app to import that file.
 
 == Command Summary
 
@@ -258,3 +567,17 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Export* : `export FILENAME.xml`
+* *Import* : `import FILENAME.xml`
+* *ExportAll* : `exportall FILETYPE` +
+e.g. `exportall csv`
+* *Mail* : `mail [i/INDEX]` (to be added)
+* *Todo* : `todo tt/TITLE c/CONTENT`
+* *Reminder* : `reminder tt/TITLE d/DATE(DDMMYYYY) st/START_TIME ag/AGENDA`
+* *FinishTodo* : `finishTodo INDEX`
+* *Schedule* : `schedule INDEX-OF-PERSON d/DATE(DDMMYYYY) st/START-TIME et/END_TIME en/EVENT-NAME`
+* *Clear Schedule* : `clearSchedule IndexOfPerson`
+* *Match Schedule* : `matchSchedule d/SELECTED-DATE st/START-TIME et/END-TIME i/INDEX-OF-PERSON...[INDEX]`
+* *Mail* : `mail [i/INDEX]`
+
+

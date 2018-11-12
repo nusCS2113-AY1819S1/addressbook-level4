@@ -1,6 +1,9 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
+
+import org.apache.commons.lang3.StringUtils;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.suggestions.InputCommandSuggestion;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -23,9 +27,12 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private static InputCommandSuggestion ics = new InputCommandSuggestion();
+
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
+
 
     @FXML
     private TextField commandTextField;
@@ -43,17 +50,21 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
+
         switch (keyEvent.getCode()) {
         case UP:
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
             keyEvent.consume();
             navigateToNextInput();
+            break;
+        case TAB:
+            keyEvent.consume();
+            handleTabPressed();
             break;
         default:
             // let JavaFx handle the keypress
@@ -116,6 +127,39 @@ public class CommandBox extends UiPart<Region> {
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
+    }
+
+    //@@author elstonayx
+    /**
+     * Handles when the tab button is pressed
+     */
+    private void handleTabPressed() {
+        commandTextField.requestFocus();
+        String textFieldInput = commandTextField.getText();
+        ArrayList<String> listOfCommands = ics.getSuggestions(textFieldInput);
+
+        if (listOfCommands.size() == 0) {
+            raise(new NewResultAvailableEvent("Invalid command! No suggestions available."));
+
+        } else if (listOfCommands.size() == 1) {
+            String commandSuggested = listOfCommands.get(0);
+            String substringInput = "";
+
+            if (textFieldInput.indexOf(' ') != -1) {
+                substringInput = textFieldInput.substring(textFieldInput.indexOf(' '));
+            }
+
+            textFieldInput = commandSuggested + substringInput;
+            raise(new NewResultAvailableEvent(ics.getCommandParameters(commandSuggested)));
+
+        } else {
+            String suggestions = StringUtils.join(listOfCommands, ", ");
+            logger.info("Tab Pressed. Suggestions: " + suggestions);
+            raise(new NewResultAvailableEvent("Suggested Commands: " + suggestions));
+        }
+
+        commandTextField.setText(textFieldInput);
+        commandTextField.positionCaret(textFieldInput.length());
     }
 
     /**

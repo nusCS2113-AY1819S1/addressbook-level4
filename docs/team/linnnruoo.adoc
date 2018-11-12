@@ -1,0 +1,92 @@
+= Bao Lin Ruo - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Role: Developer
+
+Code contribution and add extra features on existing addressbook level 4
+
+== Responsibility: Integration and Testing
+
+Overlook version control of the project and ensure that individual software modules are combined and tested as a group.
+
+---
+
+== PROJECT: JitHub
+
+== Overview
+
+JitHub is a desktop personal assistant application that allows students to manage their contacts, schedule and to-do tasks. The user interacts with it using a CLI, and it has a GUI created with JavaFX. Hence it is catered to both the users who are wither comfortable with command line interface or graphical interface. It is written in Java, and has about 15 kLoC.
+
+JitHub is developed throughout the summer in a team of 5 members as our first step into software engineering in the School of Computing, National University of Singapore.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to create a to-do task* and *the ability to complete a to-do task*
+** What it does: allows the user to create to-do tasks and complete the to-do tasks.
+** Justification: This feature improves the usability of the product significantly because a user can create a to-do task to remind them the to-dos of the day. As our target users, students, may be caught up with many meetings and forget the trivial tasks they have to accomplish by the end of the day.
+** Highlights: This enhancement does not affect the existing commands and commands to be added in future. These features aim to help students to better manage their daily schedules.
+** Credits: Ms Anita, Mr Akshay, all the team members, various seniors.
+
+* *Minor enhancement*: added a calendar view so that users can view their calendar at the current month, enhancing the overall user interface.
+
+* *Sample Code contributed*: [https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/src/main/java/seedu/address/logic/commands/TodoCommand.java[Functional code]] [https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/src/test/java/seedu/address/logic/commands/TodoCommandTest.java[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed release `v1.3`, `1.3.4` (2 release) on GitHub
+** Enhancements to existing features:
+*** Updated the GUI theme (Pull requests https://github.com/CS2113-AY1819S1-W12-1/main/pull/50/[#50], https://github.com/CS2113-AY1819S1-W12-1/main/pull/115/[#115])
+*** Wrote both additional tests and new tests for existing features to increase coverage from 82.51% to 90.16% (Pull request https://github.com/CS2113-AY1819S1-W12-1/main/pull/119/[#119])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-W12-1/main/pull/118/[#118]
+*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-W12-1/main/pull/130/[#130]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-W12-1/main/pull/121/[#121], https://github.com/CS2113-AY1819S1-W12-1/main/pull/120[#120], https://github.com/CS2113-AY1819S1-W12-1/main/pull/95/[#95]
+*** Reported bugs and suggestions for other teams in the class (examples: https://github.com/CS2113-AY1819S1-W12-1/main/pull/92/[92], https://github.com/CS2113-AY1819S1-W12-1/main/issues/171/[#171])
+** Tools:
+*** Integrate a calendar view to the project (https://github.com/CS2113-AY1819S1-W12-1/main/pull/189/[189])
+
+== Problems Encountered
+
+* For the calendar view, I wanted to implement it using CalendarFx package. However, JitHub is built upon packages mostly in Java 9 while CalendarFx has releases on Java 8, 10 and 11. I tried to build JitHub with these CalendarFx versions but to no avail. Its version 8 is not compatible with the project folder as there is no CSS loader. Its version 10 works perfectly and passes all the tests locally but the current Travis runs on Java 9 (open jdk 9) and thus CalendarFx has failed the test to start the tests on headless mode in Travis. For version 10, I upgraded Travis to run on Java 10 (oracle jdk 10), but again Travis failed to allocate JavaFx which runs on Java 9. The problems can be found on this issue https://github.com/CS2113-AY1819S1-W12-1/main/issues/77/[#77]. Eventually, the problem is solved by 'hardcoding' the calendar using JavaFx in this pr https://github.com/CS2113-AY1819S1-W12-1/main/pull/189/[189].
+
+* Some teammembers use Mac and the rest use Windows for coding. It had resulted in the failures in comparison tests on Windows because System.lineSeparator() detects CRLF instead LF on Windows, while the actual output gives LF. Thus it is solved by changing System.lineSeparator() to "\n" for new line character in issue https://github.com/CS2113-AY1819S1-W12-1/main/issues/92/[92].
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=todo]
+include::../UserGuide.adoc[tag=finishTodo]
+include::../UserGuide.adoc[tag=calendar]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=todo]
+include::../DeveloperGuide.adoc[tag=finishTodo]
+include::../DeveloperGuide.adoc[tag=calendar]
+
+
+== PROJECT: EE2026 FPGA Design Project
+
+A project done by my partner Adrian Tan and me on the Basys 3 FPGA board. We implemented a real-time audio system, paino instrumet, 7-segment display and a mini pong game with the board. Check out more at https://github.com/linnnruoo/EE2026-FPGA-Project[EE2026 FPGA Project].
+
+== PROJECT: MeowBook
+
+This is a mini PWA project, done by my teammates Adrian Tan, Andrew Tan and me, which only allows users to upload photos of cats. Werid error messages will pop up if the user tries to submit a non-cat photo. Check out the app at https://hack-meowbook.firebaseapp.com/[MeowBook]. It is better on mobile.
+
+== PROJECT: Wripple
+
+This is a PWA project done by my partner Kevin Chan and me. It is an online platform that allows students to post their project ideas and collaborate in the projects they would like to start on. Other students with the relevant skills can request to join too. Check out the webapp at https://wripple.herokuapp.com[wripple].
+
+---

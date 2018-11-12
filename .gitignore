@@ -8,9 +8,10 @@ lib/*
 *.log
 *.log.*
 *.csv
-config.json
+./config.json
 src/test/data/sandbox/
 preferences.json
+config.json
 .DS_Store
 ./screenshot*.png
 classes/
@@ -18,3 +19,15 @@ classes/
 /bin/
 src/main/resources/docs/
 out/
+
+# Generated project files
+.project
+
+# Generated setting files
+.settings
+
+# Generated class files
+.classpath
+
+# Generated vscode files
+.vscode

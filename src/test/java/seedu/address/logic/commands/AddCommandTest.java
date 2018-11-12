@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -14,12 +16,16 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.todo.Todo;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -119,6 +125,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -151,6 +162,76 @@ public class AddCommandTest {
         @Override
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void importPersonsFromAddressBook(Path importFilePath) throws IOException, DataConversionException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean addPersonsToAddressBook(ReadOnlyAddressBook addressBookToImported) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void exportFilteredAddressBook(Path exportFilePath) throws IOException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void exportAddressBook() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void exportPerson(Person person) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Todo> getFilteredTodoList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasTodo(Todo todo) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addTodo(Todo todo) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void finishTodo(Todo todo) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTodoList(Predicate<Todo> predicate) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Reminder> getFilteredReminderList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasReminder(Reminder reminder) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addReminder(Reminder reminder) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+            throw new AssertionError("This method should not be called");
         }
     }
 

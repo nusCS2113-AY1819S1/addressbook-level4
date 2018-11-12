@@ -18,6 +18,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.suggestions.WrongCommandSuggestion;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
@@ -151,7 +152,8 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: mixed case command word -> rejected */
         command = "FiNd Meier";
-        assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
+        assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND
+            + "\n" + String.format(WrongCommandSuggestion.SUGGESTION_HEADER, FindCommand.COMMAND_WORD));
     }
 
     /**

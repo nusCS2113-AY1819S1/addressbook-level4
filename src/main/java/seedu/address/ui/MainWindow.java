@@ -34,17 +34,19 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    private TodoListPanel todoListPanel;
+    private CalendarPanel calendarPanel;
+    private ReminderListPanel reminderListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
 
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane commandBoxPlaceholder;
 
     @FXML
-    private StackPane commandBoxPlaceholder;
+    private StackPane calendarPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -57,6 +59,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane todoListPanelPlaceholder;
+
+    @FXML
+    private StackPane reminderListPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -119,16 +127,23 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        calendarPanel = new CalendarPanel();
+        calendarPlaceholder.getChildren().add(calendarPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        todoListPanel = new TodoListPanel(logic.getFilteredTodoList());
+        todoListPanelPlaceholder.getChildren().add(todoListPanel.getRoot());
+
+        reminderListPanel = new ReminderListPanel(logic.getFilteredReminderList());
+        reminderListPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
+
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath(),
+                logic.getFilteredPersonList().size());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
@@ -191,9 +206,12 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    void releaseResources() {
-        browserPanel.freeResources();
+    public TodoListPanel getTodoListPanel() {
+        return todoListPanel;
     }
+
+    public ReminderListPanel getReminderListPanel() {
+        return reminderListPanel; }
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {

@@ -22,18 +22,20 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Set<Schedule> schedules = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Schedule> schedules) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.schedules.addAll(schedules);
     }
 
     public Name getName() {
@@ -58,6 +60,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable schedule set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Schedule> getSchedules() {
+        return Collections.unmodifiableSet(schedules);
     }
 
     /**
@@ -93,7 +103,8 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getSchedules().equals(getSchedules());
     }
 
     @Override
