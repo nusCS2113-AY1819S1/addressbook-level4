@@ -73,11 +73,11 @@ Code]]
 To see more details of the code, extracts from the project’s developer
 and user guide are included below:
 
-=== 1.     The User Guide shown here provides details on how the commands are used on the client’s side.
+==== 1.     The User Guide shown here provides details on how the commands are used on the client’s side.
 
  
 
-4.2. Accounts:
+==== 1.1 Accounts:
 
 The Club Account features a ledger column to record the spending of the
 club on any date in the form of DD/MM. There are 4 basic commands
@@ -86,7 +86,7 @@ money from any date in the list of records.
 
  
 
-4.2.1. Adding a ledger: addLedger
+===== 1.1.1 Adding a ledger: addLedger
 
 Adds a ledger to the ledger column.
 
@@ -98,45 +98,45 @@ Example: addLedger d/ 10/10
 
  
 
-4.2.2. Deleting a ledger: deleteLedger
+===== 1.1.2 Deleting a ledger: deleteLedger
 
 Deletes a ledger from the log.
 
-Format: deleteLedger d/[DD/MM]
+Format: `deleteLedger d/[DD/MM]`
 
  
 
-Example: deleteLedger d/ 10/10
+Example: `deleteLedger d/ 10/10`
 
  
 
-4.2.3. Crediting a ledger: credit
+===== 1.1.3 Crediting a ledger: credit
 
 Increase the balance of a ledger on a date indicated.
 
-Format: credit d/[DD/MM] b/[NUM]
+Format: `credit d/[DD/MM] b/[NUM]`
 
  
 
-Example: credit d/ 10/10 b/ 100
+Example: `credit d/ 10/10 b/ 100`
 
  
 
-4.2.4. Debiting a ledger: credit
+===== 1.1.4 Debiting a ledger: credit
 
 Decrease the balance of a ledger on a date indicated.
 
-Format: debit d/[DD/MM] b/[NUM]
+Format: `debit d/[DD/MM] b/[NUM]`
 
  
 
-Example: debit d/ 10/10 b/ 100
+Example: `debit d/ 10/10 b/ 100`
 
-=== 2.     The Developer Guide shown here provides details on how the commands are implemented on the developers’ side.
+==== 2.     The Developer Guide shown here provides details on how the commands are implemented on the developers’ side.
 
  
 
-3.6. Ledger
+==== 2.1 Ledger
 
 As of v1.3, the core commands dealing with Ledgers are addLedger,
 deleteLedger, credit and debit. In addition, the common commands such as
