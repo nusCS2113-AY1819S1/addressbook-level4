@@ -8,10 +8,25 @@ public class HtmlCardProcessor {
     public static final String CARD_NO_TITLE = "(No Title)";
 
     /**
+     * This tag organizes HTML cards in columns.
+     */
+    public static String getCardColumnsStart() {
+        return "<div class=\"card-columns\">\n";
+    }
+
+    public static String getCardColumnsEnd() {
+        return "</div>\n";
+    }
+
+    /**
      * The top-most tag required to render a card in HTML.
      */
     public static String getCardStart() {
-        return "<div class=\"card text-white bg-primary mb-3\">";
+        return "  <div class=\"card text-white bg-primary mb-3\">\n";
+    }
+
+    public static String getCardEnd() {
+        return "  </div>\n";
     }
 
     /**
@@ -26,7 +41,7 @@ public class HtmlCardProcessor {
     public static String renderCardHeader(String headingType, String header) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("  <" + headingType + " class=\"card-header\">");
+        sb.append("    <" + headingType + " class=\"card-header\">");
         sb.append(header);
         sb.append("</" + headingType + ">\n");
 
@@ -42,9 +57,9 @@ public class HtmlCardProcessor {
     public static String renderCardTitle(String title) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("    <h4 class=\"card-title\">");
+        sb.append("      <h5 class=\"card-title\">");
         sb.append(title);
-        sb.append("</h4>");
+        sb.append("</h5>\n");
 
         return sb.toString();
     }
@@ -52,15 +67,15 @@ public class HtmlCardProcessor {
     /**
      * Constructs a card subtitle section in the card.
      *
-     * @param subtitle
+     * @param subtitle text to be displayed as subtitle
      * @return string containing the HTML card subtitle tag
      */
     public static String renderCardSubtitle(String subtitle) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("    <h6 class=\"card-subtitle mb-2 text-muted\">");
+        sb.append("      <h6 class=\"card-subtitle mb-2 text-muted\">");
         sb.append(subtitle);
-        sb.append("</h6>");
+        sb.append("</h6>\n");
 
         return sb.toString();
     }
@@ -68,13 +83,13 @@ public class HtmlCardProcessor {
     /**
      * Constructs a card text section in the card.
      *
-     * @param text
+     * @param text text to be displayed
      * @return string containing the HTML card text tag
      */
     public static String renderCardText(String text) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("    <p class=\"card-text\">");
+        sb.append("      <p class=\"card-text\">");
         sb.append(text);
         sb.append("</p>\n");
 
@@ -87,19 +102,19 @@ public class HtmlCardProcessor {
     public static String renderCardFooter(String footer) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<div class=\"card-footer text-muted\">\n");
-        sb.append("  " + footer + "\n");
-        sb.append(getDivEndTag());
+        sb.append("    <div class=\"card-footer text-muted\">\n");
+        sb.append("      " + footer + "\n");
+        sb.append("    </div>\n");
 
         return sb.toString();
     }
 
     public static String getCardBodyStart() {
-        return "<div class=\"card-body\">\n";
+        return "    <div class=\"card-body\">\n";
     }
 
-    public static String getDivEndTag() {
-        return "</div>\n";
+    public static String getCardBodyEnd() {
+        return "    </div>\n";
     }
 
     /**
