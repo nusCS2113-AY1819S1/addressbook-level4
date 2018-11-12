@@ -87,6 +87,7 @@ include::../UserGuide.adoc[tag=rsvp]
 
 include::../DeveloperGuide.adoc[tag=rsvp]
 
+=== Use Cases
 include::../DeveloperGuide.adoc[tag=rsvpUsecase]
 
 include::../DeveloperGuide.adoc[tag=rsvpTestingInstructions]
