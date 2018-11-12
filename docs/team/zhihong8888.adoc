@@ -14,6 +14,8 @@ The application is created to assist the Human Resource Department of the compan
 CHRS is capable of checking work schedule, creating recruitment posts, checking of expenses claims and storage of various information of each employee such as salary, department, position, etc.
 
 == Summary of contributions
+* *Project Management*:
+** Assists in approving, reviewing and merging pull requests.
 
 * *Major enhancement*: Implements Schedule feature with the following commands:
 `addSchedule`, `deleteSchedule`, `addWorks`, `deleteWorks`, `addLeaves`,  `deleteLeaves`, `calculateLeaves`,

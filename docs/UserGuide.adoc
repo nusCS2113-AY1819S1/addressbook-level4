@@ -194,7 +194,8 @@ Any usage of `edit` command that will result in duplicated phone number or email
 // tag::findCommand[]
 === Locating persons by name or employee ID : `find`
 
-Find the employee's Name whose name contains the input or find the Employee Id that matches the input.
+Find the employee's name that contains the input or find the employee id that matches the input.
+The expenses and schedule list will also be updated accordingly to show only the matched employee(s)' expenses and schedule.
 
 Format: `find [NAME] [EMPLOYEEID]`
 
@@ -205,9 +206,9 @@ The NAME parameter is case-insensitive, i.e. The command `find john` will find t
 Examples:
 
 * `find John` +
-Find all instances of John
+Find all instances of John, and his associated expenses and schedule
 * `find 000001` +
-Find the employee with employee ID `000001`
+Find the employee with employee ID `000001`, and his/her associated expenses and schedule
 
 [NOTE]
 Any usage of `find` command will be rejected if it contains special characters or alphanumeric input. It accepts only either alphabets or numbers in a single input, not both.
@@ -215,7 +216,8 @@ Any usage of `find` command will be rejected if it contains special characters o
 
 // tag::filterCommand[]
 === Filter and list of specific employee's data : `filter`
-Filters the employee list by their department and/or rank/position and list the employees whose department and/or rank/position contains the keyword(s) input from the user in ascending or descending name order.
+Filters out the employees whose department and/or rank/position contains the keyword(s) input from the user and list them in ascending or descending name order.
+The expenses and schedule list will also be updated accordingly to show only the matched employees' expenses and schedule.
 
 Format: `filter SORT_ORDER [d/DEPARTMENT] [r/POSITION]`
 
@@ -226,9 +228,11 @@ Include either department or rank/position or both, at least one of the field mu
 Examples:
 
 * `filter asc d/Human Resource r/Manager` +
-List all employees whose department contains the keyword of either human or resource and rank/position contains the keyword of manager
+List all employees whose department contains the keyword of either human or resource and rank/position contains the keyword of manager in ascending name order.
+Expenses and schedule list will also be updated to show only matched employee(s)' expenses and schedule(s).
 * `filter dsc d/Finance` +
-List all employees whose department contains the keyword of finance
+List all employees whose department contains the keyword of finance in descending name order.
+Expenses and schedule list will also be updated to show only matched employee(s)' expenses and schedule(s).
 
 [NOTE]
 Any usage of `filter` command that results in the same prefix appearing more than once will be rejected. Example: filter asc d/Human d/Finance will be rejected.
