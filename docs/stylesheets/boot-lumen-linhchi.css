@@ -1,6 +1,10 @@
 /* Based on Lumen from Bootswatch (http://bootswatch.com/lumen/) */
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic");
-@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
+@import url("https://fonts.googleapis.com/css?family=Cookie");
+@import url("https://fonts.googleapis.com/css?family=Enriqueta");
+@import url("https://fonts.googleapis.com/css?family=Kumar+One+Outline");
+
 
 /* document body (contains all content) */
 body {
@@ -24,13 +28,18 @@ body {
 
 
 /* headings */
-h1,
+h1 {
+  font-family: 'Cookie', cursive;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #333333;
+}
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "Ubuntu",sans-serif;
+  font-family: 'Enriqueta', serif;;
   font-weight: 400;
   line-height: 1.1;
   color: #333333;
@@ -48,23 +57,23 @@ h6 {
   margin-bottom: 3px;
 }
 h1 {
-  font-size: 28px;
+  font-size: 40px;
 /*   font-size: 36/3 * 2.5px;  */
 }
 h2 {
-  font-size: 23px;
+  font-size: 20px;
 }
 h3 {
-  font-size: 18px;
+  font-size: 17px;
 }
 h4 {
   font-size: 13px;
 }
 h5 {
-  font-size: 11px;
+  font-size: 10px;
 }
 h6 {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 /* plain paragraph text */
@@ -243,7 +252,7 @@ samp {
   font-size: 1em;
 }
 code {
-  padding: 1px 1px;
+  padding: 2px 2px;
   font-size: 90%;
   color: #ffffff;
   background-color: #006666;
