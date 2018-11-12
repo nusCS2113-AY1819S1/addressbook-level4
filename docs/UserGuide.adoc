@@ -127,7 +127,8 @@ Format: `createaccount USERID PASSWORD ROLE`
 Examples:
 
 * `createaccount A1234569M zaq1xsw2cde3 member` +
-Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member in the NUSSU-Connect.
+Creates a new account with user ID as A1234569M, password as zaq1xsw2cde3 and role as member.
+
 The image below shows the outcome of a successful creation of a new account.
 
 image::CreateAccountSuccess.PNG[width="250"]
@@ -149,7 +150,8 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-// tag:aslUser[]
+
+// tag::aslUser[]
 
 === Adding person's skill: `asl`
 
@@ -164,7 +166,54 @@ Examples:
 
 * `asl 2 s/Photography l/30`
 * `asl 4 s/Java l/40`
-// end:aslUser[]
+
+Before executing the command:
+
+image::aslbefore.png[width="300"]
+After executing the command:
+
+image::aslafter.png[width="300"]
+
+
+// end::aslUser[]
+
+// tag::sort[]
+
+=== Sorting : `sort`
+
+Sorts a list of people in NUSSU Connect. +
+Format: `sort st/[PARAMETER]`
+
+****
+* Sorts a list of people by the specified `PARAMETER` .
+* Currently, the only valid parameters are `name`, `skill`, and `sl` (Skill Level)].
+****
+
+WARNING: The sort command currently sorts and displays all data in NUSSU Connect. Interaction between this command
+and the `find` command is coming in `v2.0`.
+
+Examples:
+
+* `sort st/name` +
+Sorts the list of people by name, in alphabetical order.
+* `sort st/skill` +
+Sorts the list of people by skill, in alphabetical order.
+* `sort st/sl` +
+Sorts the list of people by skill level, in order of increasing skill.
+
+Before executing the command:
+
+image::sort1.png[width="500"]
+
+After sorting by `skill`:
+
+image::sort2.png[width="500"]
+
+After sorting by `sl` (skillLevel):
+
+image::sort3.png[width="500"]
+
+// end::sort[]
 
 === Editing a person : `edit`
 
@@ -239,12 +288,13 @@ Format: `undofind`
 // end::searchpruningtitle[]
 
 // tag::searchpruningpreface[]
-Since v1.1, the Search Pruning feature was introduced to NUSSU Connect that helps you
-trim the list of contacts with every successive find command. This lets you search through the list
+The Search Pruning feature was introduced to NUSSU Connect in v1.1 and it lets you
+trim the list of contacts with every successive find command. This feature will you to search through a large list
 of contacts in a much more intuitive manner without the hassle of typing a long single line command that is
 usually error-prone.
 
-The concept of the Search Pruning feature will be illustrated below. +
+To provide you with an idea on how you can utilize the Search Pruning feature, the concept of the Search Pruning
+feature will be further illustrated with the example below +
 // end::searchpruningpreface[]
 
 // tag::searchpruningguide[]
@@ -514,6 +564,9 @@ e.g. `login A1234568M zaq1xsw2cde3 member`
 * *Create Account* : `createaccount USERID PASSWORD ROLE` +
 e.g. `createaccount A1234566M zaq1xsw2cde3 member`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+* *Add Skill*: `asl [INDEX] s/{SKILL} l/[SKILLLEVEL]` +
+* *Sort* : `sort st/[parameter]` +
+e.g. `sort st/skill`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *List* : `list`
@@ -536,5 +589,4 @@ e.g. `viewbudget c/Computing Club`
 * *Redo* : `redo`
 * *Clear* : `clear`
 * *Exit* : `exit`
-
 
