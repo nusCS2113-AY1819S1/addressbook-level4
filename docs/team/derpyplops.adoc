@@ -15,7 +15,11 @@ Being representatives of the NUS student body, the exco members has a part in ma
 This application therefore aims to help them perform some of these miscellaneous tasks that often comes from these projects much more easily,
 and to deliver value by requiring less manhours from each NUSSU members to perform a given task, saving on costs.
 
-To do so, the application comes with several features. This includes budgets/expenses management, human resource allocation and managing of important contacts.
+The application was developed on Windows and was tested on Windows and macOS. It accepts mainly text-based input,
+which aims to offer a faster and more responsive experience compared to
+a graphical user interface (GUI), for experienced users.
+
+Additionally, it comes with several features. This includes budgets/expenses management, human resource allocation and managing of important contacts.
 The original source code of this project is the https://github.com/se-edu/[AddressBook-Level4] project created by SE-EDU initiative, and hence,
 it also comes with some features from the AB4 project.
 
@@ -23,7 +27,7 @@ it also comes with some features from the AB4 project.
 
 In this project, my main contribution is the Add Skill Command, which augments the main Person class with two additional
 properties: the Skill and SkillLevel. This aids in Human Resource Management and committee recruitment as
-the best people for a particular role can be quickly identified and selected.
+the best people for a particular role can be quickly identified and selected. I also developed the Sort Command.
 
 * *Major enhancement*: added the AddSkillLevelCommand (keyword: "asl")
 

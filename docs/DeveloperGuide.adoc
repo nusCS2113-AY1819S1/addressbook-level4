@@ -656,7 +656,18 @@ information during addition of personal information.
 
 This feature was implemented by implementing custom comparators in
 `Person` class. They compare the values in each person and are used
-as arguments to `Collections.Sort`. 
+as arguments to `Collections.Sort`.
+
+1. A FilteredList (unmodifiable) is obtained from the `model` and is placed into an ArrayList,
+which is modifiable.
+2. Sort is called on the list, using custom comparators which can be found in the Person Class.
+3. The items are deleted from the model and are replaced in the order of the ArrayList.
+
+==== Possible extensions
+
+* Currently, the `find` command doesn't work with the Sort Command. The two commands used together
+would be quite powerful, so making them work together would be top priority for `v2.0`.
+* It should also be possible to sort by reverse, and sort by multiple criteria at once.
 
 
 // tag::undoredo[]

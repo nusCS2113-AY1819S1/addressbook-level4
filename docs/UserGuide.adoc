@@ -167,6 +167,14 @@ Examples:
 * `asl 2 s/Photography l/30`
 * `asl 4 s/Java l/40`
 
+Before executing the command:
+
+image::aslbefore.png[width="300"]
+After executing the command:
+
+image::aslafter.png[width="300"]
+
+
 // end::aslUser[]
 
 === Editing a person : `edit`
@@ -322,6 +330,9 @@ Format: `sort st/[PARAMETER]`
 * Currently, the only valid parameters are `name`, `skill`, and `sl` (Skill Level)].
 ****
 
+WARNING: The sort command currently sorts and displays all data in NUSSU Connect. Interaction between this command
+and the `find` command is coming in `v2.0`.
+
 Examples:
 
 * `sort st/name` +
@@ -331,8 +342,18 @@ Sorts the list of people by skill, in alphabetical order.
 * `sort st/sl` +
 Sorts the list of people by skill level, in order of increasing skill.
 
-WARNING: The sort command currently sorts and displays all data in NUSSU Connect. Interaction between this command
-and the `find` command is coming in `v2.0`.
+Before executing the command:
+
+image::sort1.png[width="500"]
+
+After sorting by `skill`:
+
+image::sort2.png[width="500"]
+
+After sorting by `sl` (skillLevel):
+
+image::sort3.png[width="500"]
+
 
 // end::sort[]
 
