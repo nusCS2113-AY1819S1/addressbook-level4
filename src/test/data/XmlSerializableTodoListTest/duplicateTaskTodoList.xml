@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<todolist>
+
+    <tasks>
+        <name>Milestone v9.9</name>
+        <module>CS2113</module>
+        <date>10-02</date>
+        <priority>3</priority>
+        <status>false</status>
+    </tasks>
+
+    <!-- Task with same identity as Milestone v9.9 -->
+    <tasks>
+        <name>Milestone v9.9</name>
+        <module>CS2113</module>
+        <date>31-10</date>
+        <priority>2</priority>
+        <status>true</status>
+    </tasks>
+
+</todolist>

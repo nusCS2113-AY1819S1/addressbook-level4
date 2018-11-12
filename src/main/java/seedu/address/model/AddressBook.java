@@ -2,11 +2,14 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -47,6 +50,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -66,6 +70,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -73,6 +78,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Person p) {
         persons.add(p);
     }
+
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
@@ -85,12 +91,33 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+
+    /**
+     * Removes {@code tag} from this {@code Person}
+     */
+    private void removeTagFromPerson(Tag tag, Person person) {
+        Set<Tag> newTags = new HashSet<>(person.getTags());
+        if (!newTags.remove(tag)) {
+            return;
+        }
+        Person newPerson =
+                new Person(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), newTags);
+        updatePerson(person, newPerson);
+    }
+    /**
+     * Removes {@code tag} from all persons in this {@code AddressBook}.
+     */
+    public void removeTag(Tag tag) {
+        persons.forEach(person -> removeTagFromPerson(tag, person));
     }
 
     //// util methods

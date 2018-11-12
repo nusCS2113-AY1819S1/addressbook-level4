@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+﻿= Something Daily - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,19 +12,19 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T09-2/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T09-2`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Something Daily (SD) is for students who *prefer to use a desktop app to manage a significant number of academic tasks and keep track on expenditures*. More importantly, SD is *optimized for those who prefer to work with a Command Line Interface* while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SD can get your tasks management and expenditure tracking done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `somethingdaily.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your application.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -33,9 +33,8 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* **`TDL_add`**`t/Tutorial 5 m/CS2101 d/12-09 p/1` : adds a task named `Tutorial 5` to the To-do List.
+* **`TDL_delete`**`3` : deletes the 3rd task in the To-do List
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -46,113 +45,338 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Our product will be divided to two sub-parts which are called `To-do List` and `Expenditure Tracker`. For each part, do remember to add the domain command `TDL` (which represents To-do List) or `ET` (which represents Expenditure Tracker). E.g. in `ET check status`, `ET` is the domain command that leads you to Expenditure Tracker.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `TDL_add t/TASK`, `TASK` is a parameter which can be used as `add t/Homework`.
+* Items in square brackets are optional e.g. `t/TASK [d/DATE]` can be used as `t/Homework d/12-09` or as `t/Homework`.
+* Parameters can be in any order e.g. if the command specifies `t/TASK m/MODULE`, `m/MODULE t/TASK` is also acceptable.
 ====
 
 === Viewing help : `help`
 
+Shows a list of commands +
 Format: `help`
 
-=== Adding a person: `add`
+// tag::TDLadd[]
+=== Adding a task: `TDL_add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a task to the to-do list +
+Format: `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
 
-[TIP]
-A person can have any number of tags (including 0)
+****
+* The format for `m/MODULE` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed. [Coming in v2.0]
+* Currently, the format for `m/MODULE` tag is strictly 2 alphabetic characters (upper or lower case) followed by 4 numbers. For module codes with an additional character at the end that denotes a variant of a module, do remember to drop this character.
+* The format for `d/DATE` tag must be `DD-MM`, where `DD` refers to the date and `MM` refers to the month in numbers.
+* The `p/PRIORITY` tag only accepts integer 1, 2 or 3, where `1` refers to highest importance and `3` refers to lowest importance.
+* Duplicated tasks with the same name and module code are not allowed.
+****
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `TDL_add t/Tutorial 5 m/CS2101 d/12-09 p/1`
+// end::TDLadd[]
 
-=== Listing all persons : `list`
+// tag::TDLedit[]
+=== Editing a task : `TDL_edit`
 
-Shows a list of all persons in the address book. +
-Format: `list`
-
-=== Editing a person : `edit`
-
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing task in the to-do list. +
+Format: `TDL_edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
+* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed tasks list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields should be provided. There will not be any changes made if no optional fields are provided and the edit will still be considered as successful.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* You can remove any task’s date or priority by typing `d/` or `p/` without specifying any fields after it. [Coming in v2.0]
 ****
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `TDL_edit 1 t/Tutorial 2 m/CS2113` +
+Edits the task name and module code of the 1st task to be `Tutorial 2` and `CS2113` respectively.
+* `TDL_edit 2 t/Tutorial 2 d/ p/` +
+[Coming in v2.0] Edits the task name of the 2nd task to be `Tutorial 2` and clears all existing deadlines and priority tags associated with this task.
+// end::TDLedit[]
 
-=== Locating persons by name: `find`
+// tag::TDLdelete[]
+=== Deleting a task : `TDL_delete`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
-
-=== Deleting a person : `delete`
-
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+Deletes the specified task from the to-do list. +
+Format: `TDL_delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed tasks list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+* `TDL_delete 2` +
+Deletes the 2nd task in the to-do list.
+* `TDL_delete 1` +
+Deletes the 1st task in the to-do list.
+// end::TDLdelete[]
 
-=== Selecting a person : `select`
+// tag::TDLcomplete[]
+=== Marking a task as completed: `TDL_complete`
 
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
+Marks the specified task in the to-do list as completed. +
+Format: `TDL_complete INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
+* Mark the task at the specified `INDEX` as `completed`.
+* The index refers to the index number shown in the displayed tasks list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Marking a completed task as `completed` is not allowed.
 ****
 
 Examples:
 
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+* `TDL_complete 3` +
+The 3rd task in the to-do list is now marked as completed.
+// end::TDLcomplete[]
+
+// tag::TDLuncomplete[]
+=== Marking a task as uncompleted: `TDL_uncomplete`
+
+Marks the specific task in the to-do list as uncompleted. +
+Format: `TDL_uncomplete INDEX`
+
+****
+* Mark the task at the specified `INDEX` as `uncompleted`.
+* The index refers to the index number shown in the displayed tasks list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Marking an uncompleted task as `uncompleted` is not allowed.
+****
+
+Examples:
+
+* `TDL_uncomplete 3` +
+The 3rd task in the to-do list is now marked as uncompleted.
+// end::TDLuncomplete[]
+
+// tag::TDLview[]
+=== Viewing tasks : `TDL_view`
+
+Shows a filtered list of tasks in the to-do list. +
+Format: `TDL_view PARAMETER`
+
+****
+* PARAMETER is either `completed`, `uncompleted` or `all`.
+* The default view for the to-do list upon starting up is _all tasks_.
+* Performing `TDL_view uncompleted` with the to-do list displaying _uncompleted tasks_ will not result in any changes. The same is applied to _completed tasks_ list with `TDL_view completed` command.
+* The GUI should allow the user to understand which list they are currently looking at. [Coming in v2.0]
+****
+
+Examples:
+
+* `TDL_view completed` +
+The list is now populated with tasks marked as completed.
+
+* `TDL_view all` +
+The list is now populated with all tasks regardless of their completion status.
+// end::TDLview[]
+
+// tag::TDLsort[]
+=== Sorting tasks : `TDL_sort`
+
+Sorts and displays the to-do list by a certain task parameter. +
+Format: `TDL_sort PARAMETER`
+
+****
+* PARAMETER is either `module`, `date` or `priority`.
+* PARAMETER can be set as `default` and tasks will be sorted alphabetically by their names regardless of upper/lower cases.
+* PARAMETER can also be set as `reverse` and the former order of tasks will be reversed.
+* Users can use `TDL_sort` after `TDL_view` for sorting certain tasks (completed/uncompleted).
+****
+
+Examples:
+
+* `TDL_sort date` +
+The tasks are now sorted by its due date.
+* `TDL_view uncompleted` and then followed by `TDL_sort priority` +
+All uncompleted tasks will be sorted by their priority level.
+// end::TDLsort[]
+
+// tag::TDLNotification[]
+=== Deadline GUI notification
+
+Notify when the uncompleted tasks is due within the following seven days from the current time or when the deadline of uncompleted tasks have passed. +
+No command inputs are required.
+
+****
+* If one task is uncompleted and its deadline has passed, the colour of index, task name, module code, deadline date and priority will turn into red.
+* If one task is uncompleted and its deadline comes within seven days, the colour of index, task name, module code, due date and priority will turn into yellow.
+* The _current time_ in the application is the same as system time.
+* All tasks are currently assumed to be in the same year of 2018.
+* Only the year 2018 is supported for now, future releases will support future years. [Coming in v2.0]
+****
+
+Example:
+
+image::deadline_notification.png[width="300"]
+
+As shown above (current date: 9th Nov 2018)
+
+No command related examples are available.
+// end::TDLNotification[]
+
+// tag::ETadd[]
+=== Adding an expenditure : `ET_add`
+
+Adds an expenditure to Expenditure Tracker +
+Format: `ET_add e/DESCRIPTION d/DATE m/MONEY c/CATEGORY`
+
+****
+* The format for `e/DESCRIPTION` must be of String format, it cannot be null or spaces.
+* The format for `d/DATE` must be DD-MM-YYYY, where DD refers to the date, MM refers to the month and YYYY refers to the year in numbers.
+* The m/MONEY field accepts both integer and floating point numbers.
+* The format for `c/CATEGORY` must be one of the following: Food, Drink, Clothing, Electronics, DailyNecessities, Sports, Communications, Travels, Study, Office, Pets, Gifts, Entertainment, Traffic, Shopping, Beauty, Furniture.
+* Duplicated expenses are allowed.
+****
+
+Examples:
+
+* `ET_add e/Chicken rice d/12-09-2018 m/4.2 c/Food`
+// end::ETadd[]
+
+// tag::ETedit[]
+=== Editing an expenditure : `ET_edit`
+
+Edits an existing expenditure in the Expenditure Tracker. +
+Format: `ET_edit INDEX [e/DESCRIPTION] [d/DATE] [m/MONEY] [c/CATEGORY]`
+
+****
+* Edits the expenditure at the specified `INDEX`. The index refers to the index number shown in the displayed expenditures list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields should be provided. There will not be any changes made if no optional fields are provided.
+* Existing values will be updated to the input values.
+****
+
+Examples:
+
+* `ET_edit 1 e/Beef rice m/12.5` +
+Edits the expenditure description and money detail of the 1st expenditure in the Expenditure Tracker list to be `Beef rice` and `12.5` respectively.
+* `ET_edit 2 d/09-12-2018 c/Electronics` +
+Edits the expenditure date and category of the 2nd expenditure to be `09-12-2018` and `Electronics` respectively.
+// end::ETedit[]
+
+// tag::ETdelete[]
+=== Deleting an expenditure : `ET_delete`
+
+Deletes the specified expenditure from the Expenditure Tracker. +
+Format: `ET_delete INDEX`
+
+****
+* Deletes the expenditure at the specified `INDEX`.
+* The index refers to the index number shown in the displayed expenditures list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `ET_delete 2` +
+Deletes the 2nd expenditure in the Expenditure Tracker.
+* `ET_delete 1` +
+Deletes the 1st expenditure in the Expenditure Tracker.
+// end::ETdelete[]
+
+// tag::ETview[]
+=== Viewing expenditures : `ET_view`
+
+Shows a filtered list of expenditures in the expenditure tracker. +
+Format: `ET_view PARAMETER`
+
+****
+* PARAMETER is either `DATE`, `CATEGORY` or `all`.
+* The default view for the expenditure tracker upon starting up is _all expenditures_.
+* If `DATE` is used, the input must be in DD-MM-YYYY, where DD refers to the date, MM refers to the month and YYYY refers to the year in numbers.
+* If `CATEGORY` is used, the input must only be one of the following: Food, Drink, Clothing, Electronics, DailyNecessities, Sports, Communications, Travels, Study, Office, Pets, Gifts, Entertainment, Traffic, Shopping, Beauty, Furniture.
+****
+
+Examples:
+
+* `ET_view 01-01-2018` +
+The list is now populated with expenditures of date `01-01-2018`.
+
+* `ET_view Electronics` +
+The list is now populated with expenditures of `Electronics` category.
+
+* `ET_view all` +
+The list is now populated with all expenditures regardless of their date or category.
+// end::ETview[]
+
+// tag::ETcheck[]
+=== Checking expenditures : `ET_check`
+
+Checks the status of the expenditures in a particular period and generates a pie-chart to demonstrate how much money was spent on each unit period. +
+Format: `ET_check start/STARTDATE end/ENDDATE`
+
+****
+* `start/STARTDATE` and `end/ENDDATE` must be in the format of DD-MM-YYYY, where DD refers the date, MM refers the month and YYYY refers the year in numbers.
+* `end/ENDDATE` must be of a later date than `start/STARTDATE`.
+****
+
+Examples:
+
+* `ET_check start/01-01-2017 end/01-01-2018` +
+Checks the status of the expenditures from 01-01-2017 to 01-01-2018 and generates a pie-chart to illustrate how much money was spent on each expenditure.
+// end::ETcheck[]
+
+// tag::ETadvice[]
+=== Getting advice for spending money : `ET_advice`
+
+Gives a short summary of the expenditures made so far and provides advice on how to spend a particular amount of money in a given period of time. +
+Format: `ET_advice m/MONEY numofdays/NUMBEROFDAYS`
+
+****
+* `m/MONEY` accepts both integer and floating point numbers.
+* `numofdays/NUMBEROFDAYS` only accepts integer which represents the number of days
+****
+
+Examples:
+
+* `ET_advice m/1000 numofdays/25` +
+Gives a short summary of the expenditures made so far and provides advice on how to spend 1000 SGD in the following 25 days.
+* `ET_advice m/240 numofdays/14` +
+Gives a short summary of the expenditures made so far and provides advice on how to spend 240 SGD in the following 14 days.
+// end::ETadvice[]
+
+// tag::Calendar[]
+=== Calendar GUI
+
+A GUI related feature, the calendar will automatically show the full calendar for this current month and the current date.
+
+****
+* The current month shown follows the system time.
+* A summary of all tasks due and spendings on a certain day will be shown by clicking on the calendar GUI. [Coming in v2.0]
+* User can switch the calendar view from the current month to the next or previous months. [Coming in v2.0]
+****
+
+Example:
+
+image::Calendar.png[width="450"]
+
+As shown above (screenshot from GUI)
+
+No click-event related examples available now.
+// end::Calendar[]
+
+// tag::check[]
+=== Viewing daily summary : `check`
+
+View a summary of all due tasks and all expenses on a particular day. +
+Format: `check d/DATE`
+
+****
+* The format for `d/DATE` must be DD-MM-YYYY, where DD refers to the date, MM refers to the month and YYYY refers to the year in numbers.
+* The summary uses user's data from both the to-do list and the expenditure tracker. It will be empty if no data can be retrieved.
+* The command can also be executed by clicking on a particular day in the calendar GUI. [Coming in v2.0]
+****
+
+Examples:
+
+* `check d/10-11-2018` +
+A summary of all due tasks and all expenses on `10-11-2018` is shown.
+// end::check[]
 
 === Listing entered commands : `history`
 
@@ -164,97 +388,101 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]
-=== Undoing previous command : `undo`
+=== Undoing previous command : `undo` [Coming in v2.0]
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the application to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the application's content (`add`, `delete`, `edit` and `complete`).
 ====
 
 Examples:
 
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
+* `TDL_complete 3` +
+`TDL_view completed` +
+`undo` (reverses the `TDL_complete 3` command) +
 
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-
-=== Redoing the previously undone command : `redo`
+=== Redoing the previously undone command : `redo` [Coming in v2.0]
 
 Reverses the most recent `undo` command. +
 Format: `redo`
 
 Examples:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-
-* `delete 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
-
-=== Clearing all entries : `clear`
-
-Clears all entries from the address book. +
-Format: `clear`
+* `TDL_complete 3` +
+`undo` (reverses the `TDL_complete 3` command) +
+`redo` (reapplies the `TDL_complete 3` command) +
 
 === Exiting the program : `exit`
 
-Exits the program. +
+Exits the program +
 Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+All to-do list data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
+// tag::FAQ[]
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*Q*: How do I transfer my data to another computer? +
+*A*: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data in your previous data folder.
+
+*Q*: How can I run this product in Linux terminal/Dos terminal? +
+*A*: After installing/updating the java package, you can run `java -jar somethingdaily.jar` in terminal.
+
+*Q*: Can I import my to-do list related or expenditure tracker related data into your application? +
+*A*: At current release, you cannot import any related data from other sources. However, our team is considering to add a feature in future release to help users in importing data from other sources by CSV files.
+
+*Q*: When I run this application, it shows `java.lang.NoClassDefFoundError: javafx/application/Application error`. +
+*A*: You are missing JavaFX, you can run our application after installing it with `sudo apt install openjfx`.
+
+*Q*: How can I read the User Guide in the interface of your product? +
+*A*: You can simply use the `help` command to read this User Guide.
+
+*Q*: How can I update the application if you release a new version? +
+*A*: Unfortunately, we do not support incremental updates right now, so users can only obtain the latest release from our GitHub directly. We are considering to use API from Google to implement over-the-air updating in future release.
+
+*Q*: Since it's a CLI based product, can I use terminal to run it locally or SSH remotely? +
+*A*: Although it's a CLI based product, we have not adapted it to CLI yet, so you can only run commands by opening the jar file.
+
+*Q*: How big is this software? +
+*A*: It is a light product. The jar file is only 20+ MB and the source code is only 70+ MB.
+
+*Q*: I cannot add CS2113T to the to-do list. +
+*A*: Do refer to the user guide. We currently do not support module codes with an additional character at the end that denotes a variant of a module. In future release, we will include support for it.
+// end::FAQ[]
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
+*General:*
+
 * *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
+* *Check* : `check d/DATE`
 * *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+* *Undo* : `undo` [Coming in v2.0]
+* *Redo* : `redo` [Coming in v2.0]
+* *Exit* : `exit`
+
+*To-do List:*
+
+* *Add* : `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
+* *Edit* : `TDL_edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]`
+* *Delete* : `TDL_delete INDEX`
+* *Complete* : `TDL_complete INDEX`
+* *Uncomplete* : `TDL_uncomplete INDEX`
+* *View* : `TDL_view PARAMETER`
+* *Sort* : `TDL_sort PARAMETER`
+
+*Expenditure Tracker:*
+
+* *Add* : `ET_add e/DESCRIPTION d/DATE m/MONEY c/CATEGORY`
+* *Edit* : `ET_edit INDEX [e/DESCRIPTION] [d/DATE] [m/MONEY] [c/CATEGORY]`
+* *Delete* : `ET_delete INDEX`
+* *View* : `ET_view PARAMETER`
+* *Check* : `ET_check start/STARTDATE end/ENDDATE`
+* *Advice* : `ET_advice m/MONEY numofdays/NUMBEROFDAYS`

@@ -6,7 +6,7 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
+    -fx-text-fill: #737373;
     -fx-opacity: 0.9;
 }
 
@@ -328,6 +328,10 @@
 }
 
 #filterField, #personListPanel, #personWebpage {
+    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+}
+
+#filterField, #taskListPanel, #taskWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

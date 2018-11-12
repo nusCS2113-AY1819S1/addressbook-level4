@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Something Daily - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T09-2`      Since: `Sep 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -141,18 +141,18 @@ image::LogicClassDiagram.png[width="800"]
 [discrete]
 ==== Events-Driven nature of the design
 
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `TDL_delete 1`.
 
-.Component interactions for `delete 1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+.Component interactions for `TDL_delete 1` command (part 1)
+image::SDforDeleteTask.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `TodoListChangedEvent` when the To-do List data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
-.Component interactions for `delete 1` command (part 2)
-image::SDforDeletePersonEventHandling.png[width="800"]
+.Component interactions for `TDL_delete 1` command (part 2)
+image::SDforDeleteTaskEventHandling.png[width="800"]
 
 [NOTE]
 Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -167,7 +167,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`, `ExpenditureListPanel`, `StatusBarFooter`, `CalendarPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -192,10 +192,10 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("TDL_delete 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+.Interactions Inside the Logic Component for the `TDL_delete 1` Command
+image::DeleteTaskSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
@@ -208,14 +208,9 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the To-do List and Expenditure Tracker data.
+* exposes an unmodifiable `ObservableList<Task>` and `ObservableList<Expenditure>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
@@ -228,7 +223,7 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the To-do List and Expenditure Tracker data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -241,7 +236,7 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::undoredo[]
 === Undo/Redo feature
-==== Current Implementation
+==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`.
 It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
@@ -302,7 +297,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (proposed choice):** Saves the entire address book.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
@@ -311,7 +306,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+* **Alternative 1 (proposed choice):** Use a list to store the history of address book states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
 ** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
@@ -319,10 +314,273 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
+// tag::completeuncomplete[]
+=== Completing/Uncompleting a task feature
+==== Current Implementation
 
-_{Explain here how the data encryption feature will be implemented}_
+Marking of a task as `completed` or `uncompleted` uses both `Logic` and `Model` components.
+Both `TDL_complete` and `TDL_uncomplete` commands are similar in most areas as they are implemented based on the edit task command.
+This feature also reuses the methods in the `Model` component used by the edit task command.
+
+* The parameter of the commands is the index of the to-do list.
+
+The following sequence diagram shows how the `TDL_complete` operation works:
+
+image::CompleteUncompleteTaskSequenceDiagram.png[width="800"]
+
+Step 1. Upon user's input, `AddressBookParser` determines if the command entered by the user is valid and then calls the appropriate `CommandParser` class. The arguments are also passed to the `CommandParser` class.
+
+Step 2. `CompleteTaskCommandParser` or `UncompleteTaskCommandParser` will use the arguments given to retrieve and check if the index is valid. `CompleteTaskCommand` or `UncompleteTaskCommand` will then be called respectively by the parser class.
+
+Step 3. The `Command` class will check for the validity of the index based on the currently shown to-do list and also the completion status of the specific task to be modified.
+
+[NOTE]
+Completion status of the task needs to be checked as we want to prevent cases where the command does not change the completion status, ie. performing `TDL_complete` on a task already marked as completed.
+
+Step 4. Similar to the edit task command, the task to be modified is updated using `Model#updateTask()` with a new task. The new task object is a copy of the task to be modified with the completion status changed.
+
+==== Design Considerations
+
+===== Aspect: Methods to support the completed/uncompleted commands
+
+* **Alternative 1 (current choice):** Reuses the same methods available in `Model`
+** Pros: Easy to implement with little to no modifications to the `Model` component.
+** Cons: May cause confusion since the same methods in the `Model` component are used by different commands with similar implementations.
+* **Alternative 2:** Create additional methods in `Model`
+** Pros: Should create less confusion as these methods are only used by a unique command.
+** Cons: We must ensure that the implementation of each individual method is correct.
+// end::completeuncomplete[]
+
+// tag::viewtask[]
+=== Viewing filtered tasks feature
+==== Current Implementation
+
+Viewing a filtered task list uses both `Logic` and `Model` components.
+This feature reuses the existing `Model#updateFilteredTaskList()` method to update the filter to be used.
+We create two new predicates to either retrieve all completed tasks or all uncompleted tasks.
+
+* Each predicate evaluates to true based on the completion status of the tasks.
+* The parameter of this command is either 'all', 'completed' or 'uncompleted'.
+
+The following sequence diagram shows how the `TDL_view uncompleted` operation works:
+
+image::ViewTaskSequenceDiagram.png[width="800"]
+
+Step 1. Upon user's input, `AddressBookParser` determines if the command entered by the user is valid and then calls the `ViewTaskCommandParser` class. The arguments are also passed to this class.
+
+Step 2. Since the parameter for this command is a string, the argument is trimmed and checked in the `ViewTaskCommandParser` class. The string is then passed to the `ViewTaskCommand` class to be executed.
+
+Step 3. Depending on the filter, `ViewTaskCommand` class will use the `Model#updateFilteredTaskList()` method with the appropriate predicate and update the list of task to be shown.
+
+==== Design Considerations
+
+===== Aspect: Methods to support the feature
+
+* **Alternative 1 (current choice):** Reuses the same method available in `Model` with new predicates
+** Pros: Easy to implement with little modifications to the `Model` component.
+** Cons: Need to iterate through the to-do list to check for all tasks' completion status which might be slow given a large number of tasks.
+* **Alternative 2:** Saves and stores all variation of the filtered task list
+** Pros: Each filtered task list is readily available and easily obtainable.
+** Cons: Whenever there is a change to the task list, we need to ensure that all lists are updated accordingly.
+// end::viewtask[]
+
+// tag::sorttask[]
+=== Sort To-do list
+
+==== Current Implementation
+
+Sorting tasks in the to-do list uses both `Logic` and `Model` components.
+Generally, the implementation of `TDL_sort date`, `TDL_sort priority` and `TDL_sort module` are quite similar,
+and they use different comparators which are stored in `SortComparator`.
+
+Firstly, after getting the input from user, `SortCommandParser` split command to get the parameter
+and choose the corresponding sorting method. Then, we use `Collection.sort()` in `UniqueTaskList` to sort
+ObservableList<Task> versionedTodoList
+
+`TDL_sort reverse` use the method `Collection.reverse()` to reverse the sequence of tasks in to-do list.
+
+To avoid the sequential order of upper case and lower case, we use `TaskName a -> a.toString().toLowerCase()` transfer all upper case into lower case.
+
+The following sequence diagram shows how the `TDL_complete` operation works:
+
+image::SortTaskSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: Methods to support the sort commands
+
+* **Alternative 1 (current choice):** write methods for each sort parameter separately
+** Pros: easily to implement and have already gathered all comparators in `SortComparator`
+** Cons: hard to read and debug
+* **Alternative 2:** In `Model` part, write only one methods and use if sentence to execute corresponding one.
+** Pros: Easy to read and debug
+
+
+// end::sorttask[]
+
+// tag::deadlinenotification[]
+
+=== Deadline Notification
+
+==== Current Implementation
+
+Deadline Notification in the to-do list uses both `Model` and `UI` components.
+
+* **In `Model` part**: We convert all deadline of task from `TaskDate` into `Date` type which can easily be processed with Java library.
+Besides that, we set all deadline to 0am and assume all tasks listed in the to-do list are in the same year as the date in system.
+We new a `Date` variable which initialized with the system date and compare it with the deadline of tasks.
+* **In `UI` part**: We use `setStyle` method of `Label` class to change the font color of id, task name, module code
+and deadline for distinguishing uncompleted tasks with different deadline.
+* **In `commons` part**: We store all `Date` type related methods in the `TimeUtil` class.
+
+The following sequence diagram shows how the `DeadlineNotification` operation works:
+
+image::DeadlineNotification.png[width="800"]
+
+==== Design Considerations
+
+==== Aspect: Methods to support the deadline notification feature
+
+* **Alternative 1 (current choice):** Add related methods to `Task` class and `Model` class directly
+** Pros: Easy to implement
+** Cons: Hard to read and debug
+* **Alternative 2:** build a new class for Deadline notification
+** Pros: Easy to debug and increase new features like notify deadline with CLI output
+** Cons: Hard to implement
+
+// end::deadlinenotification[]
+
+// tag::calendar[]
+
+=== Calendar
+
+==== Current Implementation
+
+Calendar uses both `Model` and `UI` components.
+
+* **In `Model` part**: The `CalendarInfo` class initializes a calendar for the current month and generates the index of the first day of the whole week.
+* **In `UI` part**: We create a gridpane as the template of the calendar and use `setCalendar` method of `CalendarInfo` class to set and fill components of the calendar user interface.
+
+==== Aspect: Methods to support the calendar feature
+
+* **Alternative 1 (current choice):** Use the `Calendar` class in Java library to implement a calendar panel.
+** Pros: It is easy to create, no external library or API is needed and pulling data from to-do list and expenditure tracker will be feasible as well.
+** Cons: The appearance of calendar may not be that good.
+* **Alternative 2:** Use calendar API (Google Calendar)
+** Pros: The appearance will be better and the calendar will provide more dynamic features.
+** Cons: It needs more effort to integrate with our application and pull task and expenditure data from storage.
+
+Here is an image of Google Calendar with other dynamic features provided. For example, user could click on a date and add an event, which is not supported by Java `Calendar` class by default.
+
+image::GoogleCalendarImage.png[width="800"]
+
+More dynamic features with mouse clicking for the calendar in Something Daily will be implemented in Version 2.0.
+// end::calendar[]
+
+// tag::expenditureViewing[]
+
+=== Viewing filtered expenditures feature
+
+==== Current Implementation
+
+Viewing expenditures in the Expenditure Tracker uses both `Logic` and `Model` components.
+
+* **In `Logic` part**: We use `getPredicateShowExpendituresOnDate` method of `ViewExpenditureCommand` class to get the predicate for a particular date, afterwards it is passed to `updateFilteredExpenditureList` method which will update the expenditure list shown to user. We use `predicateShowExpendituresOfCategory` method to get the predicate for a specific category, afterwards it is passed to `updateFilteredExpenditureList` method which will update the expenditure list shown to user.
+* **In `Model` part**: We use `setPredicate` method of FilteredList in `ModelManager` class to change the content of current expenditure list.
+
+==== Aspect: Methods to support the viewing filtered expenditures feature
+
+* **Alternative 1 (current choice):** We iterate through the entire expenditure list and select the expenditures based on filter.
+** Pros: It is easy to implement, there is no need for sorting functions.
+** Cons: It needs to check all the expenditures in the list with time complexity O(n) which is relatively slow.
+* **Alternative 2:** We keep two expenditure lists sorted by date or category respectively.
+** Pros: It is faster to get the expenditures. We only need to find the first and last appearance of the date or category, all expenditures between start and end will be selected.
+** Cons: It is harder to implement and more storage are needed to maintain the two sorted lists.
+
+// end::expenditureViewing[]
+
+// tag::getAdvice[]
+
+=== Get advice
+
+==== Current Implementation
+
+Get advice uses both `Logic` and `Model` components.
+
+* **In `Logic` part**: The `CommandResult` method of `ExpenditureGetAdviceCommand` class calls `getExpenditureRecords` method of `ModelManager` class and stores the returned map. Afterwards, we use a string builder to create an `advice` to be shown to the user.
+* **In `Model` part**: We use `getExpenditureRecords` method of `ExpenditureList` class to create a map, where the key contains category and value contains total money spent on this category.
+
+The following sequence diagram shows how the `ET_advice` operation works:
+
+image::ExpenditureGetAdviceSequenceDiagram.png[width="800"]
+
+==== Aspect: Methods to show the advice message
+
+* **Alternative 1 (current choice):** We generate the advice message using string builder and afterwards the message will be shown to user in a pop-up window.
+** Pros: It is user friendly. The content of advice will be shown clearly, which is easy for user to see.
+** Cons: It needs effort to implement a `PopUpString` class (in our cases, a self-implemented pop-up window will be easy to implement since only a string needs to be shown) and corresponding methods for UI activating in the `ExpenditureGetAdviceCommand` class.
+* **Alternative 2:** We show the advice message in the command result box.
+** Pros: It is easy to be implemented.
+** Cons: It is not user friendly and harder for user to view in the command result box which is relatively small.
+
+// end::getAdvice[]
+
+// tag::popup[]
+=== Pop-up window
+
+==== Current Implementation
+
+A `PopUpString` class was implemented to trigger the pop-up process.
+
+* **In `PopUpString` class**: The `popup` method creates a new stage with a scene containing one label to hold the advice string. Afterwards, by using `stage.show()` method, a new window will appear.
+
+==== Aspect: Styles of the pop-up window to be shown
+
+* **Alternative 1 (current choice):** A new normal window is shown
+** Pros: The style of window is normal which provides user with necessary information.
+** Cons: It needs effort to implement a `PopUpString` class.
+* **Alternative 2:** A dialog window is shown
+** Pros: It is easy to be implemented using JOptionPane class in Java library.
+** Cons: The style of window is dialog which might be a bit awkward and might mislead user to consider the content of this window as error message.
+
+// end::popup[]
+
+// tag::checkexpenditure[]
+=== Check Expenditure
+==== Current Implementation
+
+Check the total money spent in a specific period uses both Logic and Model components.
+It also generate a chart to show each expenditure in this period on each date.
+
+The following sequence diagram shows how the `ET_advice` operation works:
+
+image::CheckSequenceDiagram.png[width="800"]
+
+==== Design Consideration
+===== Aspect: Methods to support the check commands
+
+* **Alternative 1 (current choice):** Use list to get each money in expenditures.
+** Pros: Easy to implement using the exist list for expenditures.
+** Cons: Can not get the expenditures which are not shown in the list.
+* **Alternative 2:** Create additional structure for expenditures.
+** Pros: May use less memory.
+** Cons: Another data structure may cause some errors.
+
+===== Aspect: Methods to generate the graph
+
+* **Alternative 1 (current choice):** Use a pie chart.
+** Pros: Can show users the percentage of each expenditure directly.
+** Cons: Do not show the change of their expense during this period.
+* **Alternative 2:** Use a line chart.
+** Pros: Can show users the trend of their expenditures according to the date.
+** Cons: Can not let users know how much each expenditure occupies total expenditures.
+
+// end::checkexpenditure[]
+
+// tag::dataencryption[]
+=== Data Encryption
+==== Proposed Implementation
+_{Implementation of the data encryption feature will be introduced and explained in the near future.}_
 
 // end::dataencryption[]
 
@@ -810,19 +1068,24 @@ We now have everything set up... but we still can't modify the remarks. Let's fi
 
 See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
 
+// tag::productScope[]
 [appendix]
 == Product Scope
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing over mouse input
-* is reasonably comfortable using CLI apps
+* NUS SoC students
+* Is busy and has a need to better manage his/her student life
+* Has a need to manage a significant number of academic tasks
+* Has a need to keep track on expenditures
+* Prefer desktop applications over mobile platforms
+* Prefers typing over mouse input
+* Is reasonably comfortable using CLI applications
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: To assist students in managing all of their academic work and spendings which will improve their student life
+// end::productScope[]
 
+// tag::userStories[]
 [appendix]
 == User Stories
 
@@ -831,62 +1094,305 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the application
 
-|`* * *` |user |add a new person |
+|`* * *` |student |add a new task to the to-do list |
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |student |edit a task on the to-do list |keep my tasks updated and correct
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |student |delete a task on the to-do list |remove any entries that I no longer need
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |student |archive completed tasks |have a history of all tasks completed earlier throughout the school semester
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |student with multiple modules |tag each task with a module code |identify all tasks specific to a particular module
+
+|`* * *` |student with multiple tasks |tag each task with a deadline |identify all tasks that are time sensitive
+
+|`* * *` |student with multiple tasks |tag each task with different levels of importance/priority |identify all tasks that requires more attention
+
+|`* * *` |student with multiple tasks |filter the todo list by completion status |obtain a list of tasks based on their completion status
+
+|`* * *` |student |add a new expenditure to the expenditure tracker |
+
+|`* * *` |student |edit an expenditure in the expenditure tracker |keep my expenditures updated and correct
+
+|`* * *` |student |delete an expenditure in the expenditure tracker |remove any entries that I typed wrongly
+
+|`* * *` |student who is not capable of managing expenditure |see and check where did I spend my money and how much did I spend for each expenditure with the corresponding date |better understand my spending habits
+
+|`* * *` |student who wants to know how much money did I spend and how much income did I get for a certain period |see the amount of spendings and income respectively by keying in the starting date and end date of a particular period |
+
+|`* *` |student with multiple tasks |sort the todo list by module |view all tasks specific to a particular module
+
+|`* *` |student with multiple tasks |sort the todo list by deadline |view which task is due the earliest
+
+|`* *` |student with multiple tasks |sort the todo list by importance/priority |view which tasks are more important than the other
+
+|`* *` |student with tasks that may last for a long time |easily record and view my progress with progress bar |
+
+|`* *` |student |delete all archived completed tasks after the semester is done | get ready for the next semester
+
+|`* *` |student with difficulty in remembering all deadlines |get notified at a certain time before deadline based on my choice |submit my work on time
+
+|`* *` |student who wants to know how to save my money |obtain advices from the Expenditure Tracker by checking the categories which I mainly spent my money on |control my spendings in a particular category
+
+|`*` |student with multiple projects |have a separate project window |view all tasks specific only to projects
+
+|`*` |student with multiple tasks to complete in a day |let the system automatically generate the order of tasks based on priority |start working on the tasks
+
+|`*` |student who does not record their money spending regularly |notified by the Expenditure Tracker to note down the amount of money spent on food, snacks or other categories respectively everyday |
 |=======================================================================
+// end::userStories[]
 
-_{More to be added}_
-
+// tag::taskUseCases[]
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case 1: Add task
+*System:*
+To-do list
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-+
-Use case ends.
+1.  User enters `TDL_add` command and keys in the task
+2.  To-do list shows the task entered in the list
+
+[discrete]
+=== Use case 2: Edit or Update task
+*System:*
+To-do list
+
+*MSS*
+
+1.  User enters `TDL_edit` command followed by index number
+2.  To-do list confirms task is present in the list
+3.  User enter relevant contents
+4.  To-do list shows the updated task in the list
 
 *Extensions*
 
-[none]
-* 2a. The list is empty.
-+
-Use case ends.
+  2a. The list is empty.
+  2b. The given index is invalid.
+    2b1. To-do list shows an error message
 
-* 3a. The given index is invalid.
-+
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
+[discrete]
+=== Use case 3: Delete task
+*System:*
+To-do list
 
-_{More to be added}_
+*MSS*
+
+1. User enters `TDL_delete` command followed by index number
+2. To-do list confirms task is present and deletes the task
+
+*Extensions*
+
+   2a. The list is empty.
+   2b. The given index is invalid
+     2b1. To-do list shows an error message
+
+[discrete]
+=== Use case 4: Check tasks for a module
+*System:*
+To-do list
+
+*MSS*
+
+1. User enters `TDL_sort module` command
+2. To-do list shows a sorted list of tasks grouped by modules
+
+[discrete]
+=== Use case 5: Check for urgent tasks
+*System:*
+To-do list
+
+*MSS*
+
+1. User enters `TDL_sort date` command
+2. To-do list shows the all uncompleted modules sorted by deadlines, the task with latest deadline is the first task
+
+[discrete]
+=== Use case 6: Checking tasks with high importance
+*System:*
+To-do list
+
+*MSS*
+
+1. User enters `TDL_sort priority` command
+2. To-do list shows a sorted list of tasks grouped by priority level in descending order
+
+[discrete]
+=== Use case 7: View all completed tasks
+*System:*
+To-do list
+
+*MSS*
+
+1. User enters `TDL_view completed` command
+2. To-do list shows a list of tasks that has been marked as completed
+
+[discrete]
+=== Use case 8: View all uncompleted tasks
+*System:*
+To-do list
+
+*MSS*
+
+1. User enters `TDL_view uncompleted` command
+2. To-do list shows a list of tasks that have not been marked as completed
+
+[discrete]
+=== Use case 9: View all tasks
+*System:*
+To-do list
+
+*MSS*
+
+1. User enters `TDL_view all` command
+2. To-do list shows a list of tasks regardless of its completion status
+
+[discrete]
+=== Use case 10: Marking a task as completed
+*System:*
+To-do list
+
+*MSS*
+
+1. User enters `TDL_complete` command followed by index number
+2. To-do list marks task as completed
+
+*Extensions*
+
+   2a. The list is empty.
+   2b. The given index is invalid
+     2b1. To-do list shows an error message
+
+[discrete]
+=== Use case 11: Marking a task as uncompleted
+*System:*
+To-do list
+
+*MSS*
+
+1. User enters `TDL_uncomplete` command followed by index number
+2. To-do list marks task as uncompleted
+
+*Extensions*
+
+   2a. The list is empty.
+   2b. The given index is invalid
+     2b1. To-do list shows an error message
+
+// end::taskUseCases[]
+
+// tag::extraTaskUseCases[]
+[discrete]
+=== Use case 12: Receiving reminders for a task
+*System:*
+To-do list
+
+*MSS*
+
+1. To-do list notifies user of task close to deadline
+2. User receives and acknowledges the reminder
+// end::extraTaskUseCases[]
+
+// tag::otherTaskUseCases[]
+[discrete]
+=== Use case 13: Get deadline notification
+*System:*
+To-do list
+
+*MSS*
+
+1.The color of one task turns red which means this task is uncompleted and the deadline has passed already
+2.The color of one task turns yellow which means this task is uncompleted and the deadline will come within 7 days
+
+[discrete]
+=== Use case 14: Sort Uncompleted tasks by deadline
+*System:*
+To-do list
+
+*MSS*
+
+1. User enter `TDL_view uncompleted` to list uncompleted tasks
+2. User enter `TDL_sort date` to sort all uncompleted tasks by deadline date
+
+// end::otherTaskUseCases[]
+
+// tag::expenditureUseCases[]
+[discrete]
+=== Use case 15: Add expenditure / income
+*System:*
+Expenditure Tracker & Calendar
+
+*MSS*
+
+1. User enter `add` command followed by the amount of money
+2. Expenditure tracker receives information and shows the dates to be added
+3. User choose the date
+4. Expenditure tracker notifies user to pick category
+5. User choose the category to be added
+6. Expenditure Tracker record and display the income / outcome on calendar
+
+[discrete]
+=== Use case 16: Check expenditure / income status
+*System:*
+Expenditure Tracker & Calendar
+
+*MSS*
+
+1. User enter `check status` command
+2. Expenditure tracker asks user to choose whether to check in the visual calendar or key in the starting date and closing date of a particular period
+3. User keys in `visual` command or `manual` command
+4. Calendar shows the expenditure / income for each day visually or Expenditure Tracker shows the expenditure / income status by displaying the amount of money.
+
+[discrete]
+=== Use case 17: Delete expenditure / income
+*System:*
+Expenditure Tracker & Calendar
+
+*MSS*
+
+1. User enters `ET_delete` command followed by index number
+2. Expenditure tracker confirms expenditure is present and deletes the expenditure
+
+*Extensions*
+
+   2a. The list is empty.
+   2b. The given index is invalid
+     2b1. Expenditure list shows an error message
+
+[discrete]
+=== Use case 18: Edit or Update expenditure
+*System:*
+Expenditure Tracker & Calendar
+
+*MSS*
+
+1.  User enters `ET_edit` command followed by index number
+2.  Expenditure tracker confirms expenditure is present in the list
+3.  User enter relevant contents
+4.  Expenditure tracker shows the updated expenditure in the list
+
+*Extensions*
+
+  2a. The list is empty.
+  2b. The given index is invalid.
+    2b1. To-do list shows an error message
+
+// end::expenditureUseCases[]
 
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should be able to hold up to 500 tasks without a noticeable sluggishness in performance for typical usage.
+.  Command-line commands should be simple and easy to remember.
 
-_{More to be added}_
 
 [appendix]
 == Glossary
@@ -894,25 +1400,27 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
-
+// tag::productSurvey[]
 [appendix]
 == Product Survey
 
-*Product Name*
+*Things* +
+A to-do list mobile application
 
-Author: ...
+Author: Ran Tian
 
 Pros:
 
-* ...
-* ...
+1. Clean UI that is user friendly
+2. Able to add deadlines for every tasks at hand
+3. Able to create custom tags for tagging tasks
 
 Cons:
 
-* ...
-* ...
+1. Not specialized for students
+2. Unable to sort tasks by tags
+3. Lack of a reminder feature
+// end::productSurvey[]
 
 [appendix]
 == Instructions for Manual Testing
@@ -928,34 +1436,188 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample tasks and expenses.
 
-. Saving window preferences
+. Shutdown
 
-.. Resize the window to an optimum size. Move the window to a different location. Close the window.
-.. Re-launch the app by double-clicking the jar file. +
-   Expected: The most recent window size and location is retained.
+.. Enter the `exit` command or close the application directly
 
-_{ more test cases ... }_
+. Re-launch
+.. Double-click the jar file. +
+   Expected: Any previous changes to to-do list and/or expenditure tracker are automatically saved and will appear as per normal.
 
-=== Deleting a person
+=== Adding a task
 
-. Deleting a person while all persons are listed
+. Adding a task to the to-do list
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+.. Prerequisites: No modifications are done to the sample tasks list.
+.. Test case: `TDL_add t/Milestone 3 m/CS2113 d/02-11 p/2` +
+   Expected: Task is not added. Error details are shown in the status message.
+.. Test case: `TDL_add t/Tutorial 5 m/CS2101 d/12-09 p/1` +
+   Expected: New task is added to the to-do list. Details of the added task is shown in the status message.
+.. Other incorrect add commands to try: `TDL_add` (with any missing parameters)
 
-_{ more test cases ... }_
+=== Editing a task
+
+. Editing a task in the to-do list
+
+.. Prerequisites: Must have at least 1 task in the list shown
+.. Test case: `TDL_edit 1` +
+   Expected: First task shown in the list is edited with no changes to any parameters. Details of the task is shown in the status message.
+.. Test case: `TDL_edit 1 m/CS1231` +
+   Expected: First task shown in the list is edited with the new module code of `CS1231`. Details of the edited task is shown in the status message.
+.. Test case: `TDL_edit 0 m/CS1231` +
+   Expected: No task is edited. Error details are shown in the status message.
+.. Other incorrect edit commands to try: `TDL_edit`, `TDL_edit x` (where x is larger than the list size shown)
+
+=== Deleting a task
+
+. Deleting a task in the to-do list
+
+.. Prerequisites: Must have at least 1 task in the list shown
+.. Test case: `TDL_delete 1` +
+   Expected: First task shown in the list is deleted. Details of the deleted task is shown in the status message.
+.. Test case: `TDL_delete 0` +
+   Expected: No task is deleted. Error details shown in the status message.
+.. Other incorrect delete commands to try: `TDL_delete`, `TDL_delete x` (where x is larger than the list size shown)
+
+=== Marking a task as completed
+
+. Marking a task in the to-do list as completed
+
+.. Prerequisites: Task to be marked must have completion status of `uncompleted`. Must have at least 1 task in the list shown.
+.. Test case: `TDL_complete 1` +
+   Expected: Uncompleted task in index 1 shown in the list is marked as completed. Details of the task is shown in the status message.
+.. Test case: `TDL_complete 0` +
+   Expected: No task is marked as completed. Error details shown in the status message.
+.. Other incorrect commands to try: `TDL_complete`, `TDL_complete x` (where x is larger than the list size shown)
+
+=== Marking a task as uncompleted
+
+. Marking a task in the to-do list as uncompleted
+
+.. Prerequisites: Task to be marked must have completion status of `completed`. Must have at least 1 task in the list shown.
+.. Test case: `TDL_uncomplete 1` +
+   Expected: Completed task in index 1 shown in the list is marked as uncompleted. Details of the task is shown in the status message.
+.. Test case: `TDL_uncomplete 0` +
+   Expected: No task is marked as uncompleted. Error details shown in the status message.
+.. Other incorrect commands to try: `TDL_uncomplete`, `TDL_uncomplete x` (where x is larger than the list size shown)
+
+=== Viewing filtered task list
+
+. Viewing a filtered task list by completion status
+
+.. Prerequisites: Should have at least 1 task of each completion statuses
+.. Test case: `TDL_view all` +
+   Expected: All tasks are displayed in the to-do list regardless of completion status.
+.. Test case: `TDL_view uncompleted` +
+   Expected: All uncompleted tasks are displayed in the to-do list.
+.. Test case: `TDL_view completed` +
+   Expected: All completed tasks are displayed in the to-do list.
+.. Incorrect commands to try: `TDL_view`, `TDL_view complete`, `TDL_view uncomplete`, `TDL_view xxx` (where xxx is any string of words not mentioned above) +
+   Expected: No change in the to-do list. Error detail is shown in the status message.
+
+=== Sorting task list
+
+. Sorting the task list of the to-do list
+
+.. Prerequisites: Should have at least 3 tasks with different parameters
+.. Test case: `TDL_sort default` +
+   Expected: Tasks are now sorted alphabetically by its name.
+.. Test case: `TDL_sort module` +
+   Expected: Module code of the tasks are sorted alphabetically.
+.. Test case: `TDL_sort date` +
+   Expected: Tasks are now sorted by its date, where oldest date comes first.
+.. Test case: `TDL_sort priority` +
+   Expected: Tasks are now sorted by its priority level, where highest priority comes first.
+.. Test case: `TDL_sort reverse` +
+   Expected: Tasks list shown is now in reversed order.
+.. Incorrect commands to try: `TDL_sort`, `TDL_sort xxx` (where xxx is any string of words not mentioned above) +
+   Expected: No change in the to-do list. Error detail is shown in the status message.
+
+=== Adding an expenditure
+
+. Adding an expenditure to the expenditure tracker
+
+.. Prerequisites: No prerequisites are needed
+.. Test case: `ET_add e/iPhone7 Plus d/25-12-2017 m/1000 c/Electronics` +
+   Expected: New expenditure is added to the expenditure tracker. Details of the added expenditure is shown in the status message.
+.. Incorrect add commands to try: `ET_add` (with any missing parameters) +
+   Expected: Expenditure is not added. Error details are shown in the status message.
+
+=== Editing an expenditure
+
+. Editing an expenditure in the expenditure tracker
+
+.. Prerequisites: Must have at least 1 expenditure in the list shown
+.. Test case: `ET_edit 1` +
+   Expected: No expenditure is edited. Error details are shown in the status message.
+.. Test case: `ET_edit 1 m/10.50` +
+   Expected: First expenditure shown in the list is edited with the new spending of `10.50` SGD. Details of the edited expenditure is shown in the status message.
+.. Test case: `ET_edit 0 m/10.50` +
+   Expected: No expenditure is edited. Error details are shown in the status message.
+.. Other incorrect edit commands to try: `ET_edit`, `ET_edit x` (where x is larger than the list size shown)
+
+=== Deleting an expenditure
+
+. Deleting an expenditure in the expenditure tracker
+
+.. Prerequisites: Must have at least 1 expenditure in the list shown
+.. Test case: `ET_delete 1` +
+   Expected: First expenditure shown in the list is deleted. Details of the deleted expenditure is shown in the status message.
+.. Test case: `ET_delete 0` +
+   Expected: No expenditure is deleted. Error details are shown in the status message.
+.. Other incorrect delete commands to try: `ET_delete`, `ET_delete x` (where x is larger than the list size shown)
+
+=== Viewing filtered expenditure list
+
+. Viewing a filtered expenditure list by various parameters
+
+.. Prerequisites: Should have at least 1 task
+.. Test case: `ET_view all` +
+   Expected: All expenditures are displayed in the expenditure tracker.
+.. Test case: `ET_view 01-01-2018` +
+   Expected: All expenditures on `01-01-2018` are displayed in the expenditure tracker.
+.. Test case: `ET_view Electronics` +
+   Expected: All expenditures are displayed in the expenditure tracker.
+.. Incorrect commands to try: `ET_view`, `ET_view xxx` (where xxx is any string of words not mentioned in the User Guide) +
+   Expected: No change in the expenditure tracker. Error detail is shown in the status message.
+
+=== Checking expenditures
+
+. Checking of all expenditures in a particular time frame
+
+.. Prerequisites: No prerequisites are needed
+.. Test case: `ET_check start/01-01-2018 end/01-12-2018` +
+   Expected: A pop-up window with a pie-chart of all recorded expenditures in this time frame will be shown.
+.. Test case: `ET_check start/01-01-2018 end/1-12-2018` +
+   Expected: No pop-up window will appear. Error detail is shown in the status message.
+.. Other incorrect commands to try: `ET_check`
+
+=== Obtaining expenditure advices
+
+. Obtaining expenditure advices based on expenditure history
+
+.. Prerequisites: No prerequisites are needed
+.. Test case: `ET_advice m/1000 numofdays/30` +
+   Expected: A pop-up window with full instructions and details will be shown.
+.. Test case: `ET_advice m/1000 numofdays/0` +
+   Expected: No pop-up window will appear. Error detail is shown in the status message.
+.. Other incorrect commands to try: `ET_advice`
+
+=== Viewing of daily summary
+
+. Viewing a daily summary of all due tasks and expenditures on a particular day
+
+.. Prerequisites: No prerequisites are needed
+.. Test case: `check d/01-01-2018` +
+   Expected: A pop-up window with the summary for the day `01-01-2018` will be shown.
+.. Test case: `check d/01-1-2018` +
+   Expected: No pop-up window will appear. Error detail is shown in the status message.
+.. Other incorrect commands to try: `check`
 
 === Saving data
 
 . Dealing with missing/corrupted data files
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_

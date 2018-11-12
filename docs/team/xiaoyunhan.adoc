@@ -1,0 +1,103 @@
+= Xiao Yunhan - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Something Daily
+
+---
+
+== Overview
+
+`Something Daily` is a desktop application which is written in Java. We build this application based on the
+Address Book (Level 4) which is used for teaching software engineering course.
+We morph the Address Book into To-do list and Expenditure tracker. After that, we enhance its
+ability with modifying Model, Logic, Storage and UI part and import new api from other sources.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+Generally, our product is a combination of to-do list and expenditure tracker.
+It has 5 key components: to-do list, calendar, expenditure tracker, command box and result box.
+The target audiences of our product are NUS SoC students and this product can help them
+manage their academic tasks and spending which can increase their efficiency in management of
+their student life.
+
+Main features of `Something Daily` +
+
+****
+* Record and track user's module related tasks
+* Notify user when deadline of uncompleted tasks are coming or have passed
+* Record and track user's spending
+* Give advice and summary based on user's expenditure history
+* Simply and clear GUI to show all data stored
+****
+
+== Summary of contributions
+
+****
+Given below are sections I contributed to the code.
+****
+
+* *Major enhancement #1*: designed *the logic (commands/ parser) for To-do List*
+** What it does: the most basic components of To-do List, parser will judge which "command" function to execute and "commands" will run corresponding methods in "model".
+** Justification: This enhancement is the foundation of To-do List, it provides users the way to use certain features by keying in certain commands.
+** Specific features: (include add/ delete/ edit) Users can add, delete and edit certain tasks in the To-do List.
+
+* *Major enhancement #2*: designed *user interface for To-do List*
+** What it does: display tasks recorded in To-do List
+** Justification: This enhancement make it possible for user checking tasks more visually and easier.
+
+* *Major enhancement #3*: designed *the ability to sort tasks in To-do List*
+** What it does: Provide users a way to sort tasks in the To-do List by certain task attribution (name, module code, deadline) and users can also reverse the rank of sorting
+** Justification: This enhancement make users easier to check their tasks recorded in the To-do list based on a certain standard.
+
+* *Major enhancement #4*: designed *deadline notification*
+** What it does: Notify users the deadline is approaching or have due by changing the font color.
+** Justification: This enhancement is one of key components of manging the to-do list
+
+* *Minor enhancement #1*: add "undoable_command" class related methods to fix "undo" command on both To-do List side and Expenditure Tracker side.
+
+* *Minor enhancement #2*: write test files in command, parser and ui parts to make sure every class related can work..
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=XiaoYunhan[RepoSense Dashboard]]
+
+* *Other contributions*:
+
+** Documentation:
+*** Write implementation of TDL_sort command in the Developer Guide and update To-do List-related logic part in both User guide and Developer guide.
+*** Write implementation of deadline notification in the Developer Guide
+*** Update deadline notification and calendar in the User Guide.
+*** Write Q&A in the user guide
+*** Update use cases in the user guide
+
+** Community:
+*** PRs reviewed: [https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3AXiaoYunhan[PRs]]
+*** Participating in group discussion on WhatsApp
+*** Helped debug and provide suggestion for other group: [https://github.com/CS2113-AY1819S1-W12-4/main/issues?q=mentions%3AXiaoYunhan+is%3Aclosed[Bug report & suggestions]]
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=TDLsort]
+
+include::../UserGuide.adoc[tag=TDLNotification]
+
+include::../UserGuide.adoc[tag=Calendar]
+
+include::../UserGuide.adoc[tag=FAQ]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=sorttask]
+
+include::../DeveloperGuide.adoc[tag=deadlinenotification]
+
+include::../DeveloperGuide.adoc[tag=otherTaskUseCases]
+
