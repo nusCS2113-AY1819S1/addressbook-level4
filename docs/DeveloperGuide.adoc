@@ -296,8 +296,12 @@ When the user is deleted, the following storage files stored in the system manag
 ===== Aspect: Implementation of Users Database
 *   **Alternative 1 (current choice):** All users stored collectively in one XML file.
     (users.xml)
+    ** Pros: Inexpensive and adapts well to existing codebase
+    ** Cons: Maintenance
 
 *   **Alternative 2:** SQL/NoSQL Databases.
+    ** Pros: Powerful and stable
+    ** Cons: Complexity
 
 // end::authentication[]
 // tag::undoredo[]
@@ -444,8 +448,13 @@ Additionally, it implements the following operations:
 ===== Aspect: How encryption and decryption executes
 
 *   *Alternative 1 (proposed choice):* Intercept `XMLUtil` when reading and saving XML Storage files.
-*   **Aleternative 2:** Individual encrypt and decrypt command.
-
+        ** Pros:    Best practice
+        ** Cons:    Require remodeling of application
+*   **Alternative 2:** Individual encrypt and decrypt command.
+*   **Alternative 3:** Create temporary file to contain decrypted data
+        ** Pros:    This will work with current architecture style.
+        ** Cons:    Bad information security practice as there is a momentary
+                    vulnerability.
 // end::dataencryption[]
 
 // tag::threadreminders[]
