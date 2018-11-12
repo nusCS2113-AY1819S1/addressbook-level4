@@ -1,0 +1,30 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "speezy37",
+      "displayName": "CHU... YU",
+      "authorNames": ["Chong Yu", "Chua Chong Yu"]
+    },
+    {
+      "githubId": "jylee-git",
+      "displayName": "LEE...YAO",
+      "authorNames": ["Jin Yao", "Lee Jin Yao"]
+    },
+    {
+      "githubId": "pinjuen",
+      "displayName": "LIM...UEN",
+      "authorNames": ["Pin Juen", "Lim Pin Juen"]
+    },
+	{
+	  "githubId": "Woonhian",
+      "displayName": "LIM...IAN",
+      "authorNames": ["Woonhian", "Lim Woon Hian"]
+	},
+    {
+      "githubId": "Hafizuddin-NUS",
+      "displayName": "NUR...DIN",
+      "authorNames": ["Hafiz", "Nur Hafizuddin Kamaruddin"]
+    }
+  ]
+}

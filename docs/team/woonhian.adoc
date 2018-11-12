@@ -1,0 +1,71 @@
+= Lim Woon Hian - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Bank Address Book
+
+---
+
+== Overview
+
+Bank Address Book (BankAB) is a business process management and workflow application platform, whereby its users are all the employees in a banking environment.
+This platform supports the basic daily routine of each employee such as:
+
+*  Checking working schedule
+*  Applying for leave application
+*  Checking in and out during working hours
+
+The managers and administrators will have higher priority access level of BankAB such as changing the
+priority level of the employee and approve or reject leave requests.
+
+== Summary of contributions
+
+* *Major enhancement*: Added commands and enhancements related to `Department` and `Sort Command`.
+** What it does: It provides the end user to be able to perform *Department* related functions such as list and filter departments, changing an employee's department, and sorting the list based on employee's name or department.
+** Justification: This feature caters to users who wants to have their employee's list sorted, the ability to list out the available departments, filtering out the employee's list based on their departments and changing an employee's department.
+** Highlights: This enhancement enhances the user experience to use the commands that are related to `Department`. It required an understanding on the user profile in order to create the commands that will benefit the users. The implementation is challenging as it requires an understanding on the regular expressions in Java to allow the commands to work as how it is and to minimise bugs from happening due to incorrect regular expressions.
+
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=woonhian[RepoSense Dashboard]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.4` (5 releases) on GitHub.
+**** Managed the release of .jar files and the descriptions of the release.
+*** Setting up of issue tracker, milestones and tags.
+*** Managed vetting through and approving of pull requests.
+*** Ensures the team are able to complete the requirements for every milestones.
+** Enhancements to existing features:
+*** Made modifications to the existing implementation after the feedback received from the first practical exam: https://github.com/CS2113-AY1819S1-T16-3/main/pull/129[#129]
+** Documentation:
+*** Updated About Us page with team member's pictures, roles and responsibilities, GitHub and portfolio link: https://github.com/CS2113-AY1819S1-T16-3/main/pull/2[#2], https://github.com/CS2113-AY1819S1-T16-3/main/pull/3[#3]
+*** Updated the User Guide and Developer Guide as we are building our product: https://github.com/CS2113-AY1819S1-T16-3/main/pull/62[#62], https://github.com/CS2113-AY1819S1-T16-3/main/pull/66[#66], https://github.com/CS2113-AY1819S1-T16-3/main/pull/86[#86], https://github.com/CS2113-AY1819S1-T16-3/main/pull/95[#95], https://github.com/CS2113-AY1819S1-T16-3/main/pull/104[#104], https://github.com/CS2113-AY1819S1-T16-3/main/pull/139[#139]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T16-3/main/pull/25[#25], https://github.com/CS2113-AY1819S1-T16-3/main/pull/81[#81], https://github.com/CS2113-AY1819S1-T16-3/main/pull/89[#89], https://github.com/CS2113-AY1819S1-T16-3/main/pull/93[#93], https://github.com/CS2113-AY1819S1-T16-3/main/pull/94[#94], https://github.com/CS2113-AY1819S1-T16-3/main/pull/135[#135]
+*** Reported bugs and suggestions for other teams in the class (Examples:  https://github.com/CS2113-AY1819S1-W12-4/main/issues/126[1], https://github.com/CS2113-AY1819S1-W12-4/main/issues/130[2], https://github.com/CS2113-AY1819S1-W12-4/main/issues/137[3])
+** Tools:
+*** Integrated GitHub plugins (Travis-CI, AppVeyor, Coveralls and Codacy) to the team repository
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=setdepartment]
+
+include::../UserGuide.adoc[tag=sort]
+
+include::../UserGuide.adoc[tag=listdepartment]
+
+include::../UserGuide.adoc[tag=filterdepartment]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=filterdepartment]

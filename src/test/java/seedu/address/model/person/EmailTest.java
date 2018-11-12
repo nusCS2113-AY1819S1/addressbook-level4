@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -58,5 +60,28 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("a1+be!@example1.com")); // mixture of alphanumeric and special characters
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
+    }
+
+    @Test
+    public void hashCode_sameObject_equals() {
+        Email email = new Email("alex@abbank-sg.com");
+        int expectedHash = email.hashCode();
+        assertEquals(email.hashCode(), expectedHash);
+    }
+
+    @Test
+    public void hashCode_differentObject_equals() {
+        Email email = new Email("alex@abbank-sg.com");
+        int expectedHash = email.hashCode();
+        Email sameEmail = new Email("alex@abbank-sg.com");
+        assertEquals(sameEmail.hashCode(), expectedHash);
+    }
+
+    @Test
+    public void hashCode_differentValues_notEquals() {
+        Email email = new Email("alex@abbank-sg.com");
+        int expectedHash = email.hashCode();
+        Email differentEmail = new Email("alice@abbank-sg.com");
+        assertNotEquals(differentEmail.hashCode(), expectedHash);
     }
 }

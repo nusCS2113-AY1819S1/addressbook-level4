@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -37,5 +39,28 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+    }
+
+    @Test
+    public void hashCode_sameObject_equals() {
+        Name name = new Name("Alex");
+        int expectedHash = name.hashCode();
+        assertEquals(name.hashCode(), expectedHash);
+    }
+
+    @Test
+    public void hashCode_differentObject_equals() {
+        Name name = new Name("Alex");
+        int expectedHash = name.hashCode();
+        Name sameName = new Name("Alex");
+        assertEquals(sameName.hashCode(), expectedHash);
+    }
+
+    @Test
+    public void hashCode_differentValues_notEquals() {
+        Name name = new Name("Alex");
+        int expectedHash = name.hashCode();
+        Name differentName = new Name("Alice");
+        assertNotEquals(differentName.hashCode(), expectedHash);
     }
 }

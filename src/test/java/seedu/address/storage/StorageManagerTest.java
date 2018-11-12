@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalLeave.getTypicalLeaveList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
@@ -15,9 +16,12 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.LeaveListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LeaveList;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLeaveList;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
@@ -33,8 +37,9 @@ public class StorageManagerTest {
     @Before
     public void setUp() {
         XmlAddressBookStorage addressBookStorage = new XmlAddressBookStorage(getTempFilePath("ab"));
+        XmlLeaveListStorage leaveListStorage = new XmlLeaveListStorage(getTempFilePath("ll"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(addressBookStorage, leaveListStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -70,19 +75,47 @@ public class StorageManagerTest {
     }
 
     @Test
+    public void leaveListReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link XmlLeaveListStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlLeaveListStorageTest} class.
+         */
+        LeaveList original = getTypicalLeaveList();
+        storageManager.saveLeaveList(original);
+        ReadOnlyLeaveList retrieved = storageManager.readLeaveList().get();
+        assertEquals(original, new LeaveList(retrieved));
+    }
+
+    @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
+    }
+
+    @Test
+    public void getLeaveListFilePath() {
+        assertNotNull(storageManager.getLeaveListFilePath());
     }
 
     @Test
     public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
-                                             new JsonUserPrefsStorage(Paths.get("dummy")));
+                new XmlLeaveListStorageExceptionThrowingStub (Paths.get("dummy")),
+                new JsonUserPrefsStorage(Paths.get("dummy")));
         storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
+    @Test
+    public void handleLeaveListChangedEvent_exceptionThrown_eventRaised() {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlLeaveListStorageExceptionThrowingStub (Paths.get("dummy")),
+                new JsonUserPrefsStorage(Paths.get("dummy")));
+        storage.handleLeaveListChangedEvent(new LeaveListChangedEvent(new LeaveList()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
+    }
 
     /**
      * A Stub class to throw an exception when the save method is called
@@ -95,6 +128,21 @@ public class StorageManagerTest {
 
         @Override
         public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+            throw new IOException("dummy exception");
+        }
+    }
+
+    /**
+     * A Stub class to throw an exception when the save method is called
+     */
+    class XmlLeaveListStorageExceptionThrowingStub extends XmlLeaveListStorage {
+
+        public XmlLeaveListStorageExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveLeaveList(ReadOnlyLeaveList leaveList, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

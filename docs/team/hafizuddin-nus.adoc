@@ -1,0 +1,76 @@
+= Hafizuddin - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Bank Address Book
+
+---
+
+== Overview
+
+Bank Address Book (BankAB) is a business process management and workflow application platform, whereby its users are
+all the employees in a banking environment.
+This platform supports the basic daily routine of each employee such as:
+
+*  Checking working schedule
+*  Applying for leave application
+*  Checking in and out during working hours
+
+The managers and administrators will have higher priority access level of BankAB such as changing the
+priority level of the employee and approve or reject leave requests.
+
+== Summary of contributions
+
+* *Major enhancement* : added *leave application function* for employees.
+** What it does: Allows the user to request leave application. This leave application is subjected for approval from their boss. Only a higher level priority user can approve/ reject or delete a low priority user's leave application. Also, it allows the user to filter or list all existing leave applications in the system.
+** Justification: This feature is a core component to the product as it gives users the capability to request/ approve/ reject/ delete leave application in the system easily.
+** Highlights:  The implementation requires new classes and commands to be created and also affects current existing `delete` and `setplvl` commands.
+The implementation was challenging due to the different privileges each priority level have which affects commands such as `approve`, `reject` and `deleteleave`.
+
+* *Minor enhancement*: UI changes such as color theme changes, removal of browser panel, addition of leave application tab and image view.
+
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=hafizuddin-nus[RepoSense Dashboard]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed vetting through and approving individual pull requests
+** Enhancements to existing features:
+*** Updated the GUI color scheme, removal of browser panel, added leave application tab and image view : https://github.com/CS2113-AY1819S1-T16-3/main/pull/25[#25], https://github.com/CS2113-AY1819S1-T16-3/main/pull/108[#108]
+*** Added functionality for `delete` command that simultaneously deletes leave applications under the person that is being deleted : https://github.com/CS2113-AY1819S1-T16-3/main/pull/25[#25]
+*** Made modifications to the existing implementation after the feedback received from the first practical exam: https://github.com/CS2113-AY1819S1-T16-3/main/pull/132[#132]
+** Documentation:
+*** Update of Ui.png : https://github.com/CS2113-AY1819S1-T16-3/main/pull/109[#109], https://github.com/CS2113-AY1819S1-T16-3/main/pull/148[#148]
+*** Update of README : https://github.com/CS2113-AY1819S1-T16-3/main/pull/93[#93]
+*** Update developer guide on `leave` feature, user stories, user cases, diagrams for storage, model and UI : https://github.com/CS2113-AY1819S1-T16-3/main/pull/67[#67], https://github.com/CS2113-AY1819S1-T16-3/main/pull/148[#148]
+*** Update of User Guide on all *leave application* related commands such as: `leave`, `listleave`, `filterleave`, `deleteleave`, `approve`, `reject`. https://github.com/CS2113-AY1819S1-T16-3/main/pull/67[#67], https://github.com/CS2113-AY1819S1-T16-3/main/pull/90[#90], https://github.com/CS2113-AY1819S1-T16-3/main/pull/93[#93], https://github.com/CS2113-AY1819S1-T16-3/main/pull/109[#109], https://github.com/CS2113-AY1819S1-T16-3/main/pull/148[#148]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T16-3/main/pull/59[#59], https://github.com/CS2113-AY1819S1-T16-3/main/pull/65[#65], https://github.com/CS2113-AY1819S1-T16-3/main/pull/147[#147]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W13-3/main/issues/82[1], https://github.com/CS2113-AY1819S1-W13-3/main/issues/85[2], https://github.com/CS2113-AY1819S1-W13-3/main/issues/79[3], https://github.com/CS2113-AY1819S1-W13-3/main/issues/87[4])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+include::../UserGuide.adoc[tag=leavecommand]
+
+include::../UserGuide.adoc[tag=listleave]
+
+include::../UserGuide.adoc[tag=filterleave]
+
+include::../UserGuide.adoc[tag=deleteleave]
+
+include::../UserGuide.adoc[tag=approveleave]
+
+include::../UserGuide.adoc[tag=rejectleave]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=addleave]

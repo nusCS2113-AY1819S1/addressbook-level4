@@ -3,48 +3,97 @@
 <addressbook>
     <persons>
         <name>Alice Pauline</name>
+        <nric>T2457888E</nric>
+        <password>ASd654</password>
         <phone>94351253</phone>
         <email>alice@example.com</email>
+        <department>Junior Management</department>
+		<priorityLevel>0</priorityLevel>
         <address>123, Jurong West Ave 6, #08-111</address>
+        <mode>out</mode>
+        <workingRate>7.5</workingRate>
+        <checkedInTime></checkedInTime>
         <tagged>friends</tagged>
     </persons>
     <persons>
         <name>Benson Meier</name>
+        <nric>T2457846E</nric>
+        <password>ASd654</password>
         <phone>98765432</phone>
         <email>johnd@example.com</email>
+        <department>Junior Management</department>
+		<priorityLevel>0</priorityLevel>
         <address>311, Clementi Ave 2, #02-25</address>
+        <mode>out</mode>
+        <workingRate>7.5</workingRate>
+        <checkedInTime></checkedInTime>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </persons>
     <persons>
         <name>Carl Kurz</name>
+        <nric>T2456699E</nric>
+        <password>ASd654</password>
         <phone>95352563</phone>
         <email>heinz@example.com</email>
+        <department>Junior Management</department>
+		<priorityLevel>0</priorityLevel>
         <address>wall street</address>
+        <mode>out</mode>
+        <workingRate>7.5</workingRate>
+        <checkedInTime></checkedInTime>
     </persons>
     <persons>
         <name>Daniel Meier</name>
+        <nric>S2457855E</nric>
+        <password>ASd654</password>
         <phone>87652533</phone>
         <email>cornelia@example.com</email>
+        <department>Junior Management</department>
+		<priorityLevel>0</priorityLevel>
         <address>10th street</address>
+        <mode>out</mode>
+        <workingRate>7.5</workingRate>
+        <checkedInTime></checkedInTime>
         <tagged>friends</tagged>
     </persons>
     <persons>
         <name>Elle Meyer</name>
+        <nric>T0257855E</nric>
+        <password>ASd654</password>
         <phone>9482224</phone>
         <email>werner@example.com</email>
+        <department>Junior Management</department>
+		<priorityLevel>0</priorityLevel>
         <address>michegan ave</address>
+        <mode>out</mode>
+        <workingRate>7.5</workingRate>
+        <checkedInTime></checkedInTime>
     </persons>
     <persons>
         <name>Fiona Kunz</name>
+        <nric>T2457005E</nric>
+        <password>ASd654</password>
         <phone>9482427</phone>
         <email>lydia@example.com</email>
+        <department>Junior Management</department>
+		<priorityLevel>0</priorityLevel>
         <address>little tokyo</address>
+        <mode>out</mode>
+        <workingRate>7.5</workingRate>
+        <checkedInTime></checkedInTime>
     </persons>
     <persons>
         <name>George Best</name>
+        <nric>T2457775E</nric>
+        <password>ASd654</password>
         <phone>9482442</phone>
         <email>anna@example.com</email>
+        <department>Junior Management</department>
+		<priorityLevel>0</priorityLevel>
         <address>4th street</address>
+        <mode>in</mode>
+        <workingRate>7.5</workingRate>
+        <checkedInTime>9:00:00</checkedInTime>
     </persons>
 </addressbook>

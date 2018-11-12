@@ -6,10 +6,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.password.Password;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,8 +37,11 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
+        descriptor.setNric(person.getNric());
+        descriptor.setPassword(person.getPassword());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setPriorityLevel(person.getPriorityLevel());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
     }
@@ -44,6 +51,22 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Password} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPassword(String password) {
+        descriptor.setPassword(new Password(password));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmployeeId} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNric(String nric) {
+        descriptor.setNric(new Nric(nric));
         return this;
     }
 
@@ -64,6 +87,14 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Department} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDepartment(String department) {
+        descriptor.setDepartment(new Department(department));
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
@@ -78,6 +109,15 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code scheduleInput} into a {@code Set<Schedule>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withSchedule(Schedule scheduleInput) {
+        descriptor.setSchedule(scheduleInput);
         return this;
     }
 

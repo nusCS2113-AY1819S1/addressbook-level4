@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Bank Address Book - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -11,10 +11,11 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 :warning-caption: :warning:
+:sourcedir: src/main/java
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-T16-3/main/tree/master/
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `T16-3`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -121,14 +122,15 @@ The `.pptx` files used to create diagrams in this document can be found in the l
 * `EventsCenter` : This class (written using https://github.com/google/guava/wiki/EventBusExplained[Google's Event Bus library]) is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
-The rest of the App consists of four components.
+The rest of the App consists of five components.
 
 * <<Design-Ui,*`UI`*>>: The UI of the App.
 * <<Design-Logic,*`Logic`*>>: The command executor.
 * <<Design-Model,*`Model`*>>: Holds the data of the App in-memory.
 * <<Design-Storage,*`Storage`*>>: Reads data from, and writes data to, the hard disk.
+* <<Design-Session, *`Session`*>>: Stores the data of the user who is logged in to the application during runtime.
 
-Each of the four components
+Each of the five components
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
@@ -167,7 +169,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `ImageView` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -195,7 +197,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 .Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+image::ImplementPlvlRestrictionSequenceDiagram.png[width=900]
 
 [[Design-Model]]
 === Model component
@@ -230,6 +232,28 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
 
+//tag::jylee-git_SessionDesign[]
+
+[[Design-Session]]
+=== Session component
+
+.Structure of the Session Component
+image::SessionComponentClassDiagram.png[width="600"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/session/SessionManager.java[`SessionManager.java`]
+
+The `Session` component,
+
+* stores the identity of the user who is logged in to the app during runtime.
+* provides the necessary APIs for functions that require elevated user status, to inquire from `SessionManager` as to
+ whether the user is logged in, and also to inquire if the user has sufficient level of access to execute that
+ particular function.
+
+`AllPersonsHashMap` is a hash map that stores all the persons from the AddressBook into the varialbe. This improves the efficiency
+ of logging in, and also for functions that require the details of the logged in person.
+
+//end::jylee-git_SessionDesign[]
+
 [[Design-Commons]]
 === Common classes
 
@@ -239,92 +263,326 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
-=== Undo/Redo feature
-==== Current Implementation
+// tag::addleave[]
+=== Add Leave command
+The `leave` is a command that allows the user to request leave applications. This command is only available after the user has logged in successfully.
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
+The format of the command is: `leave date/DATE`
 
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
+It takes in the parameter DATE in a valid format (DD/MM/YYYY).
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+==== Implementation
+The implementation is divided in two phases.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+In the first phase, parsing of the input arguments is handled by `AddLeaveParser`, which will create a new object `AddLeaveCommand`.
+`AddLeaveParser` which implements `Parser` interface, parses the inputted arguments from the CLI and also checks if it conforms the expected input format.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Code snippet from `AddLeaveParser` that shows the above:
+[source, java]
+----
+ public AddLeaveCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_DATE);
+        String employeeNric = "S1234591A";
 
-image::UndoRedoStartingStateListDiagram.png[width="800"]
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
+        }
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+        if (SessionManager.isLoggedIn()) {
+            employeeNric = SessionManager.getLoggedInEmployeeNric();
+        }
 
-image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
+        EmployeeId employeeId = ParserUtil.parseEmployeeId(employeeNric);
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Approval status = ParserUtil.parseApproval("PENDING");
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+        Leave leave = new Leave (employeeId, date, status);
 
-image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
+        return new AddLeaveCommand(leave);
+    }
+----
+In the second phase, `AddLeaveCommand` is being executed. The `AddLeaveCommand`
+adds a `Leave` to the `LeaveList`.
+If the leave being added already exists in the LeaveList or when user is not logged in, executing the `leave`
+command raises a `DuplicateLeaveException` or `UserNotLoggedInException`:
+[source, java]
+----
+public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        if (isLogin && !SessionManager.isLoggedIn()) {
+            throw new CommandException(STATUS_NOT_LOGGED_IN);
+        } else if (model.hasLeave(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_LEAVE);
+        } else {
+            model.addLeave(toAdd);
+            model.commitLeaveList();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        }
+    }
+----
 
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+The result of `AddLeaveCommand` execution is encapsulated as a `CommandResult` object which is passed back to the UI
+and display the added leave application in the leave list.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+The sequence diagram below demonstrates the interaction within the `Logic` component of `AddLeaveCommand`:
 
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
+.Sequence diagram of AddLeaveCommand
+image::AddLeaveCommandSequenceDiagram.png[width="800"]
 
-[NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-
-The following sequence diagram shows how the undo operation works:
-
-image::UndoRedoSequenceDiagram.png[width="800"]
-
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-[NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
-
-image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-image::UndoRedoActivityDiagram.png[width="650"]
 
 ==== Design Considerations
 
-===== Aspect: How undo & redo executes
+===== Aspect: Storage for leave
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 1 (current choice):** Store in a different XML file.
+** Pros: Easy to implement by duplicating existing storage, parser and XML related classes to cater for new XML file.
+** Cons: Need to spend extra time on deleting of leaves when a particular person is deleted.
+* **Alternative 2:** Store in a existing XML file.
+** Pros: Easier to implement, as it only requires to add onto existing parser.
+** Cons: May require extra parameters to create a Person object.
+* **Alternative 3:** Store in a different file format.
+** Pros: Easier to understand.
+** Cons: Consumes extra time to implement different parser from scratch.
 
-===== Aspect: Data structure to support the undo/redo commands
+// end::addleave[]
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-// end::undoredo[]
+// tag::filterdepartment[]
+=== FilterDepartment feature
+==== Implementation
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
+The `filterdepartment` is a command that filters out department to list a particular department employee's list.
+The `filterdepartment` mechanism is facilitated by the `FilterDepartmentCommandParser`, which parses input arguments and creates a new `FilterDepartmentCommand` object.
+The `FilterDepartmentCommandParser`, which implements the `Parser` interface, parses the arguments inputted in to the CLI, and checks if the user input conforms the expected format.
 
-_{Explain here how the data encryption feature will be implemented}_
+Code snippet from `FilterDepartmentCommandParser.java` that shows the parsing of arguments and checking for invalid arguments:
 
-// end::dataencryption[]
+[source, java]
+----
+public FilterDepartmentCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        trimmedArgs = trimmedArgs.toLowerCase();
+        if (trimmedArgs.isEmpty() || trimmedArgs.contains("management")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterDepartmentCommand.MESSAGE_USAGE));
+        }
+        ...
+        ...
+}
+----
+
+In the second phase, the command is being executed in `FilterDepartmentCommand`. The updateFilteredPersonList updates the filteredPersonList with the departments that matches the keywords use as the argument in `FilterDepartmentCommand`.
+The result of `FilterDepartmentCommand` execution is encapsulated as a `CommandResult` object and returns it to the `LogicManager` and subsequently to the UI and display the filtered department employee's list.
+
+Code snippet from `FilterDepartmentCommand.java`:
+
+[source, java]
+----
+public class FilterDepartmentCommand extends Command {
+
+    ...
+    ...
+
+    private final DepartmentContainsKeywordsPredicate predicate;
+
+    public FilterDepartmentCommand(DepartmentContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
+    }
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) {
+        requireNonNull(model);
+        model.updateFilteredPersonList(predicate);
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
+    ...
+    ...
+}
+----
+
+The sequence diagram below demonstrates the interaction within the `Logic` component of `FilterDepartmentCommand`:
+
+.Sequence diagram of FilterDepartmentCommand
+image::FilterDepartmentCommandSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+===== Aspect: Implementation of `FilterDepartment` command
+
+* **Alternative 1 (current choice):** A separate command for filter department.
+** Pros: Command works more accurately and efficiently as it focuses on the keywords related to `Department`.
+** Cons: The implementation of another command may be unnecessary as we can integrate `find` command to find for departments.
+* **Alternative 2:** Using `find` command to filter department name.
+** Pros: One command works for finding name and to filter department names.
+** Cons: The command may not work properly. For example, there is an employee whose name is `Junior` from `Senior Management`. But if we only want to filter employees who are in `Junior Management`, the command will output people who are in `Junior Management` and the employee `Junior`.
+// end::filterdepartment[]
+
+// tag::checkinout[]
+=== Check in/out feature
+==== Current implementation
+
+The `checkCommand` is a command that allows employees to check in and out to work so that their working hours will be recorded according to the time they checked in/out and calculate their pay accordingly.
+
+The `checkCommand` mechanism is facilitated by the `AddressBookParser`, which parses the user input to identify the requested command and calls the particular command parser to deal with the input arguments.
+
+The `checkCommandParser`, which implements the `Parser` interface, parses the arguments inputted in to the CLI, and checks if the user input conforms the expected format.
+
+- Code snippet from `checkCommandParser.java` that shows the parsing of arguments，checking for invalid arguments and returning a checkCommand object:
+
+[source, java]
+----
+public CheckCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODE);
+
+            if (!arePrefixesPresent(argMultimap, PREFIX_MODE)
+            || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+            }
+
+            if (!didPrefixAppearOnlyOnce(args, PREFIX_MODE.toString())) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+            }
+
+            Mode mode = ParserUtil.parseMode(argMultimap.getValue(PREFIX_MODE).get());
+
+            return new CheckCommand(mode);
+    }
+----
+
+In the second phase, the command is being executed in `checkCommand`.
+The result of `checkCommand` execution is encapsulated as a `CommandResult` object and returns it to the `LogicManager` and subsequently to the UI and display check in/out mode as one of the fields.
+
+The sequence diagram below demonstrates the interaction within the `Logic` component of `CheckCommand`:
+
+.Sequence diagram of CheckCommand
+image::CheckCommandSequenceDiagram.png[width="800"]
+// end::checkinout[]
+
+// tag::schedule[]
+=== Schedule Feature
+==== Implementation
+The `setschedule` is a command that set a particular department employee's schedule.
+The `setschedule` mechanism is facilitated by the `SetScheduleCommandParser`, which parses input arguments and creates a new `SetScheduleCommand` object.
+The `SetScheduleCommandParser`, which implements the `Parser` interface, parses the arguments inputted in to the CLI, and checks if the user input conforms the expected format.
+
+Code snippet from `SetScheduleCommandParser.java` that shows the parsing of arguments and checking for invalid arguments:
+
+[source, java]
+----
+public SetScheduleCommand parse(String args) throws ParseException {
+
+    ...
+    ...
+
+    EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+    if (argMultimap.getValue(PREFIX_TIME_START).isPresent()
+            && argMultimap.getValue(PREFIX_TIME_END).isPresent()
+            && argMultimap.getValue(PREFIX_VENUE).isPresent()) {
+        Schedule schedule = ParserUtil.parseSchedule(
+                argMultimap.getValue(PREFIX_TIME_START).get(),
+                argMultimap.getValue(PREFIX_TIME_END).get(),
+                argMultimap.getValue(PREFIX_VENUE).get());
+
+        Set<Schedule> scheduleList = new HashSet<>();
+        scheduleList.add(schedule);
+
+        editPersonDescriptor.setSchedule(scheduleList);
+    }
+
+    ...
+    ...
+
+}
+----
+
+The sequence diagram below demonstrates `parse()` function of `SetScheduleCommandParser`:
+
+.Sequence diagram of SetScheduleCommandParser
+image::SetScheduleCommandParserSequenceDiagram.png[]
+
+The sequence diagram below demonstrates `execute()` function of `SetScheduleCommand`:
+
+.Sequence diagram of SetScheduleCommand
+image::SetScheduleCommandSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: Storage for schedule
+
+* **Alternative 1 (current choice):** Store with AddressBook XML.
+** Pros: Easier to implement (able to add onto existing parser).
+** Cons: May require extra parameters to create a Person object.
+* **Alternative 2:** Store in a different XML file.
+** Pros: Easy to implement (duplicate existing parser but for different XML file).
+** Cons: Consumes extra time to delete schedule when a particular person is deleted.
+* **Alternative 3:** Store in a different file format.
+** Pros: Easier to understand.
+** Cons: Consumes extra time to implement different parser from scratch.
+
+// end::schedule[]
+
+//tag::jylee-git_dg_plvlDesign[]
+=== Priority level restriction feature
+All employee accounts contain a priority level field. Depending on the priority level that they are given, administrative
+operations may be executed if they have sufficient priority level required to do so.
+
+==== Implementation
+Here is a code snippet of executing the AddCommand function. In this example, adding a person requires a person to be
+logged in with a priority level of ADMINISTRATOR or above, in order to execute this function:
+
+.AddCommand.java
+[source,java]
+----
+@Override
+public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+        SessionManager sessionManager = SessionManager.getInstance(model);
+        /**
+         * Throws exception if user is not logged in.
+         */
+        if (!sessionManager.isLoggedIn()) {
+            throw new CommandException(SessionManager.NOT_LOGGED_IN);
+        }
+        /**
+         * Throws exception if user does not have the required access level.
+         */
+        if (!sessionManager.hasSufficientPriorityLevelForThisSession(PriorityLevelEnum.ADMINISTRATOR)) {
+            throw new CommandException(String.format(PriorityLevel.INSUFFICIENT_PRIORITY_LEVEL,
+                    PriorityLevelEnum.ADMINISTRATOR));
+        }
+
+        // ... Complete the execution, now that user is verified to be an admin.
+    }
+----
+
+In the above code, adding a person requires the user that is logged in to the application to have priority level of ADMINISTRATOR.
+    Hence, a method in SessionManager will be called to ascertain if the logged in user does indeed have sufficient priority level
+    of an ADMINISTRATOR.
+
+The following sequence diagram below shows the flow of how the feature works:
+
+.Sequence diagram of priority level restriction feature
+image::ImplementPlvlRestrictionSequenceDiagram.png[width=750]
+
+==== Design Considerations
+
+===== Aspect: Implementation of elevated user rights
+As this is a CLI-driven application, we prioritized on the speed and efficiency of getting things done over security,
+    which will result in users having to execute multiple commands just to get an administrative command executed.
+
+* *Alternative 1 (current choice)*: Able to perform administrative rights the moment a user with elevated priority level is logged in.
+    ** Pros: Able to immediately perform administrative functions the moment user is logged in, such as adding or deleting employees.
+    ** Cons: Potential security issue; user with admin rights may accidentally forget to logout, resulting in other people
+                with ill intentions to execute administrative functions without the permission of the actual user.
+* *Alternative 2*: Users with elevated priority level will need to type in a command to enable "super user" status prior to executing
+                       any administrative functions.
+   ** Pros: Better security; company resources will be less-prone to abuse by employees with ill intentions.
+   ** Cons: Less efficient in getting things done. Reason being, this is a CLI-driven application. Hence, implementing
+                this alternative means that users will need to key in multiple commands just to get administrative functions done
+                as a trade-off to beefing up security.
+
+//end::jylee-git_dg_plvlDesign[]
 
 === Logging
 
@@ -683,6 +941,19 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
 
+[discrete]
+==== `Session` component
+
+*Scenario:* You are in charge of `session`, whereby it is used to manage users logging in/out. Currently, there is a
+ `allPersonsHashMap` variable that stores the data of all employees of the company in the app. This improves the efficiency of
+  logging into the application with a time complexity of O(1). One issue with this current implementation right now is that
+   whenever one's particulars are updated, `updatePersonHashMap` will be called as well, which *re-uploads every single enployee
+   into the variable*, which is not efficient in this case, with a time complexity of O(N).
+
+Hence, your task is to modify the `updatePersonHashMap` such that whenever one's particulars is edited, only the affected
+ person object will be re-uploaded to the `allPersonsHashMap` variable, hence improving the efficiency.
+
+
 [[GetStartedProgramming-RemarkCommand]]
 === Creating a new command: `remark`
 
@@ -831,20 +1102,37 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
-
-|`* * *` |user |add a new person |
-
-|`* * *` |user |delete a person |remove entries that I no longer need
-
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
-
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
-
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |User	|Access my payroll	|Calculate my incoming pay according to the number of hours I have worked easily
+|`* * *` |User	|Check my schedule	|Know where I am deployed for the day
+|`* * *` |User	|Check my notifications via CLI	|View my notifications
+|`* * *` |Elevated user	|Set employees’ access levels	|Ensure that employees have the appropriate level of access to classified items/areas
+|`* * *` |Elevated user	|Add/Delete/Edit employees into the database	|Ensure that the company manpower list is updated
+|`* * *` |Elevated user	|Set schedule for employee 	|Deploy employees to their designated location.
+|`* * *` |User	|Edit my personal particulars	|Update them as required (Edit function)
+|`* * *` |Elevated user	|Access employees leave applications	|Approve/Reject leaves for employees
+|`* * *` |User	|Search for a specific contact	|Obtain the particulars of the contact easily
+|`* * *` |User	|List the manpower for the day	|Allocate my manpower accordingly
+|`* * *` |User	|Sort my address book by name and department	|Look for contacts that I want easily
+|`* * *` |User	|List out the departments that are available	|Know what departments I can filter
+|`* * *` |User	|Filter out and view my relevant colleague’s department	|Spend less time searching for their contact details and contact them
+|`* * *` |Elevated User	|Change the department of the employees	|They are allocated at the correct department
+|`* * *` |User	|Set password to my address book	|Prevent unauthorized access to my address book
+|`* * *` |User	|Apply for leave application	|I can go on leave
+|`* * *` |User	|Filter out leave application by NRIC	|I can list out leave applications under me
+|`* * *` |User	|I have access to my leave applications	|I can delete them
+|`* * *` |User	|I can list out all leave applications	|I can gauge which day for me to apply leave without the company lacking of manpower
+|`* * *` |Elevated User	|I have access to all employee's leave applications	|I can delete them
+|`* * *` |User	|Check in and out during my work days	|I will be able to view the number of hours I have worked for
+|`* * *` |Elevated user	|Check my employees’ working hours	|Pay them accordingly
+|`* * *` |Administrator	|Restrict employee access to the address book application	|Perform maintenance or upgrades
+|`* *`	|User	|Check the staff’s direct superior	|Feedback to the particular superior
+|`* *`	|User	|Set my availability status (available, busy, away)	|Let colleagues decide their best course of action according to my status
+|`* *`	|Elevated User	|Send out alerts to an individual/group	|Ensure that everyone is caught up with the latest developments
+|`* *`	|User	|Notified via email/sms	|Get the latest updates at the earliest possible time
+|`* *`	|User	|Upload profile picture	|I can be identified easily by others
+|`* *`	|User	|Use keyboard shortcuts	|Quickly navigate around the address book
+|`*`|User	|Deploy available cleaners	|Get the place cleaned up as soon as possible.
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
@@ -852,32 +1140,520 @@ _{More to be added}_
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
-
+=== Use case: Login to the application
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+. User types `login` command, followed by the appropriate parameters.
+. AddressBook shows welcome message upon successful login.
 +
 Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. The list is empty.
+* 2a. Format of login command is wrong.
+** 2a1. AddressBook shows an error message.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. Format of login command is correct, but invalid NRIC and/or password.
+** 2b1. AddressBook shows an error message.
 +
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
+Use case ends.
 
-_{More to be added}_
+* 2c. Attempts to login when someone (whether the user himself or someone else) is already logged in.
+** 2c1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Check login status
+*MSS*
+
+. User enters command `checkloginstatus`.
+. AddressBook shows whether the user is logged in or out.
++
+Use case ends.
+
+[discrete]
+=== Use case: Logout of the application
+*MSS*
+
+. User enters command `logout`.
+. AddressBook logs the user out of the application and shows a success message.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. User is not logged in when executing that command.
+** 2a1. AddressBook shows an error message that the user is not logged in.
+
+[discrete]
+=== Use case: Edit personal particulars
+*MSS*
+
+. User enters `edit` command, followed by appropriate parameters.
+. AddressBook shows a success message followed by the logged in person's particulars.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. The edited format is wrong
+** 2a1. AddressBook shows an error message, followed by command usage guide.
++
+Use case ends.
+
+* 2b. User is not logged in
+** 2b1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Add Employee
+*MSS*
+
+.	User enters add command, followed by the details of the person to be added.
+.	AddressBook shows a success message followed by the details of the newly added person.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. Person already exists (identical NRIC number) in the AddressBook.
+** 2a1. AddressBook shows person already exists message.
++
+Use case ends.
+
+* 2b. The added person has missing details.
+** 2b1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2c. The added person has wrong entry format.
+** 2c1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2d. User is not logged in prior to executing this command.
+** 2d1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2e. User does not have sufficient priority level prior to executing this command.
+** 2e1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Delete Employee
+*MSS*
+
+. User enters delete command followed by the `INDEX` of the person in the AddressBook list to delete.
+. AddressBook shows success message followed by the details of the person that has been deleted.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. User entered command in wrong format.
+** 2a1. AddressBook shows an error message followed by the command usage guide.
++
+Use case ends.
+
+* 2b. User is not logged in prior to executing this command.
+** 2b1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2c. User does not have sufficient priority level prior to executing this command.
+** 2c1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2d. User attempts to delete him/herself
+** 2d1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2e. User entered a value `INDEX` that is out of range of the list of persons that is currently shown on the
+ list of People tab.
+** 2e1. Address shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Change priority level of user
+*MSS*
+
+. User enters `setplvl` command, followed by the appropriate parameters.
+. AddressBook updates the priority level of the person at stated index.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. User is not logged in
+** 2a1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2b. User entered inappropriate parameters.
+** 2b1. AddressBook shows an error message with the details of the error.
++
+Use case ends.
+
+* 2c. User logged in, but insufficient priority level
+** 2c1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2d. User logged in, sufficient priority level, but tries to edit his/her own priority level
+** 2d1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Change department of user
+*MSS*
+
+. User enters `setdepartment` command, followed by the appropriate parameters.
+. AddressBook updates the department of the user at the stated index.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. User is not logged in.
+** 2a1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2b. User does not have the correct priority level.
+** 2b1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2c. User enters invalid parameters.
+** 2c1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2d. User tries to edit his/her own department.
+** 2d1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Apply leave application
+*MSS*
+
+.	User enters `leave` command with the desired leave application date.
+.	AddressBook adds the leave application to the database for approval.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. User not logged in
+** 2a1. AddressBook shows an error message.
++
+User case ends.
+
+* 2b. The given date is an invalid calendar date.
+** 2b1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+* 2c. The given date has passed.
+** 2c1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+* 2d. Today's date is given.
+** 2d1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+* 2e. The given date is an existing leave application.
+** 2e1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+[discrete]
+=== Use case: List leave application
+
+*MSS*
+
+.	User enters `listleave` command.
+.	AddressBook list all leave applications.
++
+Use case ends.
+
+[discrete]
+=== Use case: Filter leave application
+
+*MSS*
+
+.	User enters `filterleave` command with the desired NRIC he wants to filter.
+.	AddressBook list all leave applications under that NRIC.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. Leave application under the NRIC given does not exist
+** 2a1. AddressBook shows an error message.
++
+User case ends.
+
+[discrete]
+=== Use case: Delete leave application
+*MSS*
+
+.	User enters `deleteleave` command with the index of the leave application he wants to delete.
+.	AddressBook deletes the leave application from the database.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. User not logged in
+** 2a1. AddressBook shows an error message.
++
+User case ends.
+
+* 2b. Invalid index given.
+** 2b1. AddressBook shows an error message.
++
+Use case resumes at step 1.
+
+* 2c. Not authorized to delete other user's leave application due to insufficient priority level.
+** 2c1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Approve/reject leave application
+*MSS*
+
+.	User enters `approve` / `reject` command with the index of the leave application he wants to approve.
+.	AddressBook approves the leave application.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. User not logged in
+** 2a1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2b. Invalid index given.
+** 2b1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+* 2c. Not authorized to approve/reject your own leave application.
+** 2c1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2d. Not authorized to approve/reject other user's leave application due to insufficient priority level.
+** 2d1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2e. The leave application was already been approved/rejected.
+** 2e1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Check schedule
+*MSS*
+
+. User enters `schedule` command followed by appropriate parameters.
+. AddressBook display user’s schedule.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. User is not logged in
+** 2a1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2b. No user schedule found.
+** 2b1. Address book displays message showing there are no schedule allocated.
++
+Use case ends.
+
+* 2c. Inappropriate parameters.
+** 2c1. AddressBook shows an error message.
++
+Use case ends.
+
++
+Use case ends.
+
+[discrete]
+=== Use case: Set schedule
+*MSS*
+
+. User enters `setschedule` command followed by appropriate parameters.
+. AddressBook sets the schedule of the target employee.
+
++
+Use case ends.
+
+*Extensions*
+
+* 2a. User is not logged in
+** 2a1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2b. Target is not user and user is not ADMINISTRATOR priority level.
+** 2b1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2c. Inappropriate parameters.
+** 2c1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Find person
+*MSS*
+
+. User keys in the keyword to search in find command.
+. AddressBook displays the list of names which contains the keyword given.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. AddressBook does not contain the keyword entered.
+** 2a1. AddressBook displays entered keyword not found.
++
+Use case ends.
+
+[discrete]
+=== Use case: Sort contact
+*MSS*
+
+. User enters `sort` command, followed by the appropriate parameters.
+. AddressBook shows a sorted list by the field and order.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. The given parameter is invalid.
+** 2a1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+[discrete]
+=== Use case: List department
+*MSS*
+
+. User enters `listdepartment` command.
+. AddressBook shows a list of available departments.
++
+Use case ends.
+
+[discrete]
+=== Use case: Filter department
+*MSS*
+
+. User enters `filterdepartment` command, followed by the department names to filter.
+. AddressBook shows the list of filtered department.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. The keyword `management` is entered.
+** 2a1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+* 2b. The keyword entered is not found.
+** 2b1. AddressBook shows an empty list.
++
+Use case ends.
+
+[discrete]
+=== Use case: Check in to work
+*MSS*
+
+. User enters `check` command followed by `in` mode to check in.
+. AddressBook shows checked in message and updates checked in/out status of the employee.
+
+*Extension*
+
+* 2a. User not logged in.
+** 2a1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2b. User enters invalid parameter.
+** 2b1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+* 2c. User already checked in.
+** 2c1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+[discrete]
+=== Use case: Check out from work
+*MSS*
+
+. User enters `check` command followed by `out` mode to check out.
+. AddressBook shows checked out message and updates checked in/out status of the employee.
+
+*Extension*
+
+* 2a. User not logged in.
+** 2a1. AddressBook shows an error message.
++
+Use case ends.
+
+* 2b. User enters invalid parameter.
+** 2b1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+* 2c. User already checked out.
+** 2c1. AddressBook shows an error message.
++
+Use case resumes to step 1.
+
+[discrete]
+=== Use case: Reset application
+*MSS*
+
+. User enters command `reset`.
+. AddressBook deletes `data/AddressBook.xml` and `data/leave.xml` and exits the program.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. User logged in but is not holding a priority level of "I.T. UNIT".
+** 2a1. AddressBook shows an error message.
++
+Use case ends.
+* 2b. User is not logged in
+** 2b1. AddressBook shows an error message.
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
@@ -885,8 +1661,6 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
 
 [appendix]
 == Glossary
@@ -898,29 +1672,24 @@ Windows, Linux, Unix, OS-X
 A contact detail that is not meant to be shared with others
 
 [appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
-
-[appendix]
 == Instructions for Manual Testing
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the app manually. *Read the following note and warning messages before
+proceeding to conduct the tests*.
 
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+
+[WARNING]
+====
+The following prerequisites apply to *ALL* test cases: - +
+
+. The following test cases assume a *default state* when the app is first launched or reset, *without any prior
+    modifications to the employees list and its' corresponding accounts*. Modify your test case according to whatever
+    changes that were made prior to executing each individual test cases.
+. The following test cases assume that the employee list is *neither sorted nor filtered* prior to executing the
+    test cases. Modify your test cases accordingly if you have sorted or filtered the list.
+====
 
 === Launch and Shutdown
 
@@ -928,7 +1697,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample employees and leave applications. The window size may not be optimum.
 
 . Saving window preferences
 
@@ -936,26 +1705,331 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+=== Personal User Account
 
-=== Deleting a person
+//tag::jylee-git_dg_login[]
+==== Login to the application
+. Logs in to the application using a registered NRIC and associating password when *not logged in prior to executing the command*.
+..  Prerequisites: -
+...     Login NRIC has to be registered in the application, either through the sample data or added manually by an administrator.
+...     You are *not logged in* prior to testing this function.
+..  Test case: `login ic/S1234567E pwd/Password` +
+    Expected: Status message box states that you are logged in successfully, with your name, and your schedule (if any).
+                Status bar will now show that you are logged in with the corresponding name of the user who logged in.
+..  Test case: `login ic/S12345678 pwd/Password` +
+    Expected: Not logged in. Format of NRIC is incorrect and Status message box shows the NRIC constraints. Status bar remains unchanged.
+..  Test case: `login ic/S1234567E pwd/high-five` +
+    Expected: Not logged in. Password format is incorrect and Status message box shows password constraints. Status bar remains unchanged.
+..  Test case: `login ic/S1234567E` +
+    Expected: Not logged in. Command format is invalid and Status message box shows the command usage. Status bar remains unchanged.
+..  Test case: `login ic/S1234567E pwd/SomeRandomPwd` +
+    Expected: Not logged in. Password does not match the one that's registered with the app; Status message box shows error.
+                Status bar remains unchanged.
+. Logs in to the application using a registered NRIC and associating password when *already logged in prior to executing the command*.
+..  Prerequisites: You are *already logged in* prior to testing this function.
+..  Test case: `login ic/T1234567E pwd/Password` +
+    Expected: Status message box shows the message: - +
+                `You are already logged in. Logout first before logging in again`. +
+                Login status remain unchanged; status bar remain unchanged.
 
-. Deleting a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+==== Checks the login status of the application
+. Checks the login status of this app. For this case, someone is logged in to the app.
+..  Prerequisites: Someone is logged in to the app.
+..  Test case: `checkloginstatus` +
+    Expected: Status message box shows the NRIC of the user who is logged in to the app.
+. Checks the login status of this app. For this case, user is not logged in prior to executing this command.
+..  Prerequisites: User is not logged in prior to executing this command.
+..  Test case: `checkloginstatus` +
+    Expected: Status message box shows that you are not logged in.
+
+
+==== Logout of the application
+. Logs out of the application.
+..  Prerequisites: User is logged into the app prior to executing this command.
+..  Test case: `logout` +
+    Expected: Status message box shows that you have successfully logged out. Status bar footer now shows: `Not logged in`.
+//end::jylee-git_dg_login[]
+
+==== Editing personal particulars of the person who is logged in
+[NOTE]
+====
+Refer to <<UserGuide.adoc#editing-personal-particulars-code-edit-code,EditCommand section of the User Guide>> for the
+list of editable parameters.
+====
+. Edits the editable particulars of the person who is logged in.
+..  Prerequisites: User must be logged in to the application.
+..  Test case: `edit n/Stacy Mak e/stacym@banksy.com` +
+    Expected: Particular of the logged in person gets updated with name of `Stacy Mak` and email of `stacym@banksy.com`.
+                Status message box shows the details of the updated person. Status bar footer now shows that the new name of the person who is logged in.
+..  Test case: `edit a/Yishun, Singapore p/91234567` +
+    Expected: Particular of the logged in person gets updated with address now at `Yishun, Singapore`, and phone number of `91234567`.
+                    Status message box shows the details of the updated person. Status bar footer remains unchanged.
+..  Test case: `edit p/string p/96289700` +
+    Expected: Particular of the logged in person gets updated with phone number of `96289700`. The previous invalid phone input of
+                `string` gets ignored as it is superseded with the valid phone input of `96289700`.
+                Status message box shows the details of the updated person. Status bar footer remains unchanged.
+..  Test case: `edit p/96289700 p/string` +
+    Expected: Details of the person not edited. Status message box shows error message with the constraints of a phone number.
+    The phone input of `96289700` gets ignored as it is superseded by the phone input of `string`, and hence led to the error message.
+
+
+=== Employee Management Database
+
+==== Adding an employee
+
+. Adding an employee in to the address book.
+
+.. Prerequisites: User must be logged in as an administrator.
+.. Test case: `add n/Carol Crowe ic/S1947829E pwd/Password p/94724372 e/carol@abbank-sg.com d/Junior Management a/Block 123 Jurong Street 123, #12-345 wr/7.5` +
+Expected: `Carol Crowe` is added in to the list. Details of the added contact is shown in the status message.
+.. Test case: `add n/Carol Crowe ic/F1234567E pwd/Password p/94724372 e/carol@abbank-sg.com d/Junior Management a/Block 123 Jurong Street 123, #12-345 wr/7.5` +
+Expected: No employee is added. The NRIC of `Carol Crowe` is the same as `Charlotte Oliveiro`. Error detail shown in the status message.
+
+==== Deleting an employee
+
+. Deleting an employee while all employees are listed.
+
+.. Prerequisites: - +
+...     List all employees using the `list` command. Multiple employees in the list.
+...     User must be logged in as an administrator.
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+   Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+//tag::jylee-git_dg_setplvl[]
 
-=== Saving data
+==== Change priority level of employee
+[NOTE]
+====
+Refer to <<UserGuide.adoc#appendix-b-privileges-in-accordance-to-priority-level, Appendix B of User Guide>> for the list of priority level.
+====
+. Change the priority level of an employee with one logged in as ADMINISTRATOR.
+..  Prerequisites: -
+...     You must be logged in as an administrator.
+...     The following test cases assume that you are logged in as Alex Yeoh, an administrator with NRIC of `S1234567E` and
+            password of `Password`. Modify the test cases accordingly if you have made any modifications to the employee list
+            prior to executing the following test cases.
+..  Test case: `setplvl 1 plvl/3` +
+    Expected: Priority level of the employee at index 1 gets updated to a priority level of BASIC.
+                Status message box shows that the priority level of the name of employee at index 1 has been changed to BASIC.
+..  Test case: Attempting to change your own priority level `setplvl 2 plvl/3` +
+    Expected: Priority level of the logged in user does not get changed. Status message box shows error that you are not allowed
+                to update your own priority level.
+..  Test case: `setplvl 1 plvl/999` +
+    Expected: Priority level of the employee at index 1 is not updated. Input priority level is out of the range of valid
+                priority level values. Status message bar shows error message.
 
-. Dealing with missing/corrupted data files
+. Attempt to change the priority level of an employee with one logged in without admin rights.
+..  Prerequisites: You must be logged in with an account that is not of ADMINISTRATOR priority level.
+..  Test case: `setplvl 2 plvl/3` +
+    Expected: Priority level of the employee at index 2 is not updated. The user who is attempting to change the priority level
+                does not have the rights to do so. Status message box shows an error message.
+//end::jylee-git_dg_setplvl[]
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+// tag::Woonhian_setdepartment_test[]
+==== Change the department of an employee
 
-_{ more test cases ... }_
+. Change the department of an employee from the given index.
+
+.. Prerequisites: Have to be logged in as an administrator and have multiple employees in the list.
+
+.. Test case: `setdepartment 1 d/Top Management` +
+Expected: The employee's department at index 1 will be changed to `Top Management`.
+Details of the employee name and the changed department name will be shown in the status message.
+If the employee at index 1 is the logged in employee himself/herself, the department will not be changed. Error details is shown in the status message.
+.. Test case: `setdepartment 1 d/Top Department` +
+Expected: Department name is of the wrong format. Error details is shown in the status message.
+.. Test case: `setdepartment 0 d/Top Management` +
+Expected: No employee at index 0. Error details is shown in the status message.
+// end::Woonhian_setdepartment_test[]
+
+=== Leave Application
+
+==== Leave application
+
+. Requesting leave application
+
+.. Prerequisites: User must be logged in.
+.. Test case: `leave date/01/01/2019` +
+   Expected: Leave application requested. Details of the leave application will be reflected in the leave panel.
+.. Test case: `leave date/01/02/2018` +
+   Expected: No leave application created as the given date has passed. Error details shown in the status message.
+.. Test case: `leave date/29/02/2019` +
+   Expected: No leave application created as invalid calendar date is given. Error details shown in the status message.
+
+==== Filter leave application
+
+. Filter leave application
+
+.. Test case: `filterleave S8570520Q` +
+   Expected: List all leave application under the user with NRIC, S8570520Q.
+.. Test case: `filterleave S1212121A` , `filterleave S1313131A` +
+   Expected: 0 leaves listed. This is due to no such leave application under S1212121A and S1313131A.
+.. If NRIC is not valid such as: `filterleave S8570520`, `filterleave 8570520Q`, `filterleave 8570520` +
+   Expected: 0 leaves listed. This is due to invalid NRIC.
+
+==== Delete leave application
+
+. Delete leave application
+
+.. Prerequisites: User must be logged in as Administrator. List all leave applications using the `listleave` command. Multiple leave applications in the list.
+.. Test case: `deleteleave 1` where 1 is the index of the leave application under the list +
+   Expected: First leave application is deleted from the list. Details of the deleted leave application shown in the status message.
+.. Test case: `deleteleave 0` +
+   Expected: No leave is deleted. Error details shown in the status message.
+.. Other incorrect deleteleave commands to try: `deleteleave`, `deleteleave x` (where x is larger than the list leave size) +
+   Expected: Similar to previous.
+
+==== Approve leave application
+
+. Approve leave application
+
+.. Prerequisites: User must be logged in as Administrator. List all leave applications using the `listleave` command. Multiple leave applications in the list. Leave application under index 1 is not requested by the logged in user.
+.. Test case: `approve 1` where 1 is the index of the leave application under the list. +
+   Expected: Leave application approved. Details of the approved leave application shown in the status message.
+.. Test case: `approve 0` +
+   Expected: No leave application is approved. Error details shown in the status message.
+.. Other incorrect approve commands to try: `approve`, `approve x` (where x is larger than the list leave size) +
+   Expected: Similar to previous.
+
+==== Reject leave application
+
+. Reject leave application
+
+.. Prerequisites: User must be logged in as Administrator. List all leave applications using the `listleave` command. Multiple leave applications in the list. Leave application under index 1 is not requested by the logged in user.
+.. Test case: `reject 1` where 1 is the index of the leave application under the list. +
+   Expected: Leave application rejected. Details of the rejected leave application shown in the status message.
+.. Test case: `reject 0` +
+   Expected: No leave application is rejected. Error details shown in the status message.
+.. Other incorrect reject commands to try: `reject`, `reject x` (where x is larger than the list leave size) +
+   Expected: Similar to previous.
+
+// tag::schedule_test[]
+=== Scheduling
+
+==== List schedule
+. Lists the schedule of an employee in address book as a non-administrator.
+
+.. Prerequisites: Logged in as any non-administrator user and is listed at index 4. +
+.. Test case: `schedule 4` +
+Expected: Displays own schedule. Details of schedule shown in status message.
+.. Test case: `schedule 3` +
+Expected: User has invalid priority level. Error details shown in status message.
+.. Test case: `schedule 0` +
+Expected: Index 0 is invalid. Error details shown in status message.
+
+. Lists the schedule of an employee in address book as an administrator.
+.. Prerequisites: Logged in as any administrator and is listed at index 1. +
+.. Test case: `schedule 1` +
+Expected: Displays own schedule. Details of schedule shown in status message.
+.. Test case: `schedule 3` +
+Expected: Displays schedule of employee at index 3. Details of schedule shown in status message.
+.. Test case: `schedule 0` +
+Expected: Index 0 is invalid. Error details shown in status message.
+
+==== Set schedule
+. Sets the schedule of an employee in address book as a non-administrator.
+
+.. Prerequisites: Logged in as any non-administrator user and is listed at index 4. +
+.. Test case: `setschedule 4 ts/0900 te/1700 v/Level 5` +
+Expected: Successfully set own schedule. Message is shown in the status message.
+.. Test case: `setschedule 3 ts/0900 te/1700 v/Level 5` +
+Expected: User has invalid priority level. Error detail shown in the status message.
+.. Test case: `setschedule 4 ts/0900 te/0900 v/Level 5` +
+Expected: Time start and time end are the same. Error detail shown in the status message.
+
+. Sets the schedule of an employee in address book as an administrator.
+
+.. Prerequisites: Logged in as any administrator and is listed at index 1. +
+.. Test case: `setschedule 1 ts/0900 te/1700 v/Level 5` +
+Expected: Successfully set own schedule. Message is shown in the status message.
+.. Test case: `setschedule 3 ts/0900 te/1700 v/Level 5` +
+Expected: Successfully set schedule for employee at index 3. Message is shown in the status message.
+.. Test case: `setschedule 4 ts/0900 te/0900 v/Level 5` +
+Expected: Time start and time end are the same. Error detail shown in the status message.
+// end::schedule_test[]
+
+// tag::Woonhian_filtering/sorting_test[]
+=== Filtering/Sorting
+
+==== Locating employees by name
+
+. Finds the employees whose name contains any of the given keywords.
+
+.. Test case: `find alex` +
+Expected: Employees whose name matches with `alex` is listed. Details of the number of employees listed is shown in the status message.
+.. Test case: `find alex bernice` +
+Expected: Employees whose name matches with `alex` or `bernice` is listed. Details of the number of employees listed is shown in the status message.
+.. Test case: `find` +
+Expected: Invalid command format. Error details is shown in the status message.
+
+==== Sort address book contacts
+
+. Sorts the name list either in ascending or descending order.
+
+.. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
+.. Test case: `sort name asc` +
+Expected: The list will be sorted in ascending order by names. Details of the address book has been sorted is shown in the status message.
+.. Test case: `sort department desc` +
+Expected: The list will be sorted in descending order by department names. Details of the address book has been sorted is shown in the status message.
+.. Test case: `sort invalid asc` +
+Expected: Invalid command format. Error details is shown in the status message.
+.. Test case: `sort name invalid` +
+Expected: Invalid command format. Error details is shown in the status message.
+
+==== Filtering department
+
+. Filters the list with employees who are in the department from the provided keywords.
+
+.. Test case: `filterdepartment junior` +
+Expected: Employees whose department matches with `junior` is listed. Details of the number of employees listed is shown in the status message.
+.. Test case: `filterdepartment junior senior` +
+Expected: Employees whose department matches with `junior` or `senior` is listed. Details of the number of employees listed is shown in the status message.
+.. Test case: `filterdepartment` +
+Expected: Invalid command format. Error details is shown in the status message.
+// end::Woonhian_filtering/sorting_test[]
+
+=== Miscellaneous
+
+==== Selecting an employee
+
+. Selects an employee while all employee are listed.
+
+.. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
+.. Test case: `select 1` +
+   Expected: First contact is selected from the list. Details of the index of the selected employee is shown in the status message.
+.. Test case: `select 0` +
+   Expected: No employee is selected. Error details shown in the status message.
+.. Other incorrect select commands to try: `select`, `select x` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
+==== Check in/out working hours
+
+. Checking in or out for a person.
+
+.. Prerequisites: Log in for the person using the `login` command.
+.. Test case: `check m/in` +
+   Expected: The person has checked in to work. Details of the checked in person shown in the status message. The checked in/out status is updated.
+.. Test case: `check m/IN` +
+   Expected: No person checked in. Error details shown in the status message. Checked in/out status remains the same.
+.. Test case: `check m/10` +
+   Expected: No person checked in. Error details shown in the status message. Checked in/out status remains the same.
+.. Other incorrect check commands to try: `check`, `check in`, `check mode/in` +
+   Expected: Similar to previous.
+
+//tag::jylee-git_dg_reset[]
+==== Reset the application
+. Resets the application, by deleting `data/AddressBook.xml` and `data/leave.xml`, provided that any of the files exist.
+
+..  Prerequisites: - +
+    ... User must be logged in with a priority level of `I.T. UNIT`.
+    ... In order for the test to be efficient, you may ensure that the files `data/AddressBook.xml` and `data/leave.xml`
+        exist in the folder `data`.
+..  Test case: type command `reset` +
+    Expected: Application will exit. The two files will be deleted upon application exit.
+                When you *manually* re-open the app, a sample list of employee and leave will be shown.
+//end::jylee-git_dg_reset[]

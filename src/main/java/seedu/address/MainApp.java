@@ -10,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
@@ -21,17 +22,21 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LeaveList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLeaveList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.LeaveListStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.XmlLeaveListStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -40,7 +45,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(4, 0, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -50,7 +55,6 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
 
     @Override
     public void init() throws Exception {
@@ -63,7 +67,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        LeaveListStorage leaveListStorage = new XmlLeaveListStorage(userPrefs.getLeaveListFilePathFilePath());
+        storage = new StorageManager(addressBookStorage, leaveListStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -83,7 +88,9 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyLeaveList> leaveListOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyLeaveList initialRequest;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -91,14 +98,31 @@ public class MainApp extends Application {
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will delete data/AddressBook.xml and start with"
+                    + " a sample AddressBook.");
+            storage.deleteAddressBook();
+            initialData = SampleDataUtil.getSampleAddressBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        try {
+            leaveListOptional = storage.readLeaveList();
+            if (!leaveListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                //initialRequest = new LeaveList();
+            }
+            initialRequest = leaveListOptional.orElseGet(SampleDataUtil::getSampleLeaveList);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            initialRequest = new LeaveList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            initialRequest = new LeaveList();
+        }
+
+        return new ModelManager(initialData, initialRequest, userPrefs);
     }
 
     private void initLogging(Config config) {

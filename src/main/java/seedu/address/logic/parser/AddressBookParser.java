@@ -7,18 +7,32 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.AddLeaveCommand;
+import seedu.address.logic.commands.CheckCommand;
+import seedu.address.logic.commands.CheckLoginStatusCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditLeaveCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterDepartmentCommand;
+import seedu.address.logic.commands.FilterLeaveCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ListDepartmentCommand;
+import seedu.address.logic.commands.ListLeaveCommand;
+import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LogoutCommand;
+import seedu.address.logic.commands.ResetCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.SetDepartmentCommand;
+import seedu.address.logic.commands.SetPriorityLevelCommand;
+import seedu.address.logic.commands.SetScheduleCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -60,14 +74,19 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FilterDepartmentCommand.COMMAND_WORD:
+        case FilterDepartmentCommand.COMMAND_ALIAS:
+            return new FilterDepartmentCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ListDepartmentCommand.COMMAND_WORD:
+        case ListDepartmentCommand.COMMAND_ALIAS:
+            return new ListDepartmentCommand();
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
@@ -78,15 +97,58 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommandParser().parse(arguments);
 
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+        case SetScheduleCommand.COMMAND_WORD:
+            return new SetScheduleCommandParser().parse(arguments);
 
+        case SetDepartmentCommand.COMMAND_WORD:
+        case SetDepartmentCommand.COMMAND_ALIAS:
+            return new SetDepartmentCommandParser().parse(arguments);
+
+        case AddLeaveCommand.COMMAND_WORD:
+            return new AddLeaveParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
+
+        case CheckLoginStatusCommand.COMMAND_WORD:
+            return new CheckLoginStatusCommand();
+
+        case CheckCommand.COMMAND_WORD:
+            return new CheckCommandParser().parse(arguments);
+
+        case DeleteLeaveCommand.COMMAND_WORD:
+        case DeleteLeaveCommand.COMMAND_ALIAS:
+            return new DeleteLeaveCommandParser().parse(arguments);
+
+        case FilterLeaveCommand.COMMAND_WORD:
+        case FilterLeaveCommand.COMMAND_ALIAS:
+            return new FilterLeaveCommandParser().parse(arguments);
+
+        case ListLeaveCommand.COMMAND_WORD:
+            return new ListLeaveCommand();
+
+        case EditLeaveCommand.COMMAND_APPROVE:
+            return new ApproveLeaveCommandParser().parse(arguments);
+
+        case EditLeaveCommand.COMMAND_REJECT:
+            return new RejectLeaveCommandParser().parse(arguments);
+
+        case SetPriorityLevelCommand.COMMAND_WORD:
+            return new SetPriorityLevelCommandParser().parse(arguments);
+
+        case ResetCommand.COMMAND_WORD:
+            return new ResetCommand();
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

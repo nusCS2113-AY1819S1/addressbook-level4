@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -8,7 +10,6 @@ import org.junit.Test;
 import seedu.address.testutil.Assert;
 
 public class PhoneTest {
-
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Phone(null));
@@ -37,5 +38,28 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+    }
+
+    @Test
+    public void hashCode_sameObject_equals() {
+        Phone phone = new Phone("93121534");
+        int expectedHash = phone.hashCode();
+        assertEquals(phone.hashCode(), expectedHash);
+    }
+
+    @Test
+    public void hashCode_differentObject_equals() {
+        Phone phone = new Phone("93121534");
+        int expectedHash = phone.hashCode();
+        Phone samePhone = new Phone("93121534");
+        assertEquals(samePhone.hashCode(), expectedHash);
+    }
+
+    @Test
+    public void hashCode_differentValues_notEquals() {
+        Phone phone = new Phone("93121534");
+        int expectedHash = phone.hashCode();
+        Phone differentPhone = new Phone("12345678");
+        assertNotEquals(differentPhone.hashCode(), expectedHash);
     }
 }

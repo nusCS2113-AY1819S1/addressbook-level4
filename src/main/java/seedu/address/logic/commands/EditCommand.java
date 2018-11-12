@@ -6,26 +6,30 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.password.Password;
+import seedu.address.model.prioritylevel.PriorityLevel;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.tag.Tag;
+import seedu.address.session.SessionManager;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -34,57 +38,52 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person "
+        + "who is currently logged in to the session. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: "
+        + "[" + PREFIX_NAME + "NAME] "
+        + "[" + PREFIX_PHONE + "PHONE] "
+        + "[" + PREFIX_EMAIL + "EMAIL] "
+        + "[" + PREFIX_ADDRESS + "ADDRESS] "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_PHONE + "91234567 "
+        + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_NOT_EDITED = "At least one personal editable field to edit must be provided.";
 
-    private final Index index;
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
+
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditCommand(EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
-
-        this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        SessionManager sessionManager = SessionManager.getInstance(model);
+        if (!sessionManager.isLoggedIn()) {
+            throw new CommandException(SessionManager.NOT_LOGGED_IN);
         }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = sessionManager.getLoggedInPersonDetails();
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        logger.info("Editing person: " + personToEdit.getName() + "(" + personToEdit.getNric() + ")...");
 
         model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
+
+        //Calling this method to update the changed name (if so), in the UI's status bar.
+        sessionManager.raiseSessionModifiedEvent();
+
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
@@ -101,7 +100,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, personToEdit.getNric(), personToEdit.getPassword(), updatedPhone,
+                updatedEmail, personToEdit.getDepartment(), personToEdit.getPriorityLevel(), updatedAddress,
+                personToEdit.getMode(), personToEdit.getWorkingRate(), personToEdit.getCheckedInTime(),
+                updatedTags, personToEdit.getSchedule());
     }
 
     @Override
@@ -118,8 +120,7 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+        return editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
     /**
@@ -128,12 +129,18 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private Nric nric;
+        private Password password;
         private Phone phone;
         private Email email;
+        private Department department;
+        private PriorityLevel priorityLevel;
         private Address address;
+        private Schedule schedule;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -141,17 +148,22 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setNric(toCopy.nric);
+            setPassword(toCopy.password);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setDepartment(toCopy.department);
+            setPriorityLevel(toCopy.priorityLevel);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setSchedule(toCopy.schedule);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, schedule);
         }
 
         public void setName(Name name) {
@@ -160,6 +172,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setNric(Nric nric) {
+            this.nric = nric;
+        }
+
+        public void setPassword(Password password) {
+            this.password = password;
         }
 
         public void setPhone(Phone phone) {
@@ -178,12 +198,32 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
+        public void setDepartment(Department department) {
+            this.department = department;
+        }
+
+        public Optional<Department> getDepartment() {
+            return Optional.ofNullable(department);
+        }
+
+        public void setPriorityLevel(PriorityLevel priorityLevel) {
+            this.priorityLevel = priorityLevel;
+        }
+
         public void setAddress(Address address) {
             this.address = address;
         }
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setSchedule(Schedule schedule) {
+            this.schedule = schedule;
+        }
+
+        public Optional<Schedule> getSchedule() {
+            return Optional.ofNullable(schedule);
         }
 
         /**
@@ -219,10 +259,12 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                && getPhone().equals(e.getPhone())
+                && getEmail().equals(e.getEmail())
+                && getDepartment().equals(e.getDepartment())
+                && getAddress().equals(e.getAddress())
+                && getSchedule().equals(e.getSchedule())
+                && getTags().equals(e.getTags());
         }
     }
 }

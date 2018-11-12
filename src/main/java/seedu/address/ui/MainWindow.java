@@ -34,14 +34,15 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    //private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    private LeaveListPanel leaveListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
 
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane imagePlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -53,10 +54,14 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane leaveListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -119,11 +124,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        //browserPanel = new BrowserPanel();
+        //browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        leaveListPanel = new LeaveListPanel(logic.getFilteredLeaveList());
+        leaveListPanelPlaceholder.getChildren().add(leaveListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -191,13 +199,14 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    void releaseResources() {
+    /*void releaseResources() {
         browserPanel.freeResources();
-    }
+    }*/
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
+
 }

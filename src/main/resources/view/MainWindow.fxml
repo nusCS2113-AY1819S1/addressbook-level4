@@ -4,6 +4,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Menu?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
@@ -11,6 +13,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -40,24 +44,36 @@
         </StackPane>
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+                   minHeight="150" prefHeight="150" maxHeight="200">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
 
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <VBox fx:id="personList" minWidth="270" prefWidth="260" SplitPane.resizableWithParent="false">
+            <TabPane fx:id="tabPane" VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="addressBookTab" text="People">
+                  <StackPane fx:id="personListPanelPlaceholder" minWidth="257" maxWidth="257" VBox.vgrow="ALWAYS"/>
+                </Tab>
+              </tabs>
+            </TabPane>
+          </VBox>
+          <VBox fx:id="leaveList" minWidth="270" prefWidth="260" SplitPane.resizableWithParent="false">
+            <TabPane fx:id="tabPane2" VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+              <Tab fx:id="leaveBookTab" text="Leaves">
+                <StackPane fx:id="leaveListPanelPlaceholder" minWidth="257" maxWidth="257" VBox.vgrow="ALWAYS"/>
+              </Tab>
+            </TabPane>
           </VBox>
 
-          <StackPane fx:id="browserPlaceholder" prefWidth="340" >
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
+          <StackPane prefWidth="340" >
+            <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+              <image>
+                <Image url="@../../../../docs/images/bankAB.png" />
+              </image>
+            </ImageView>
           </StackPane>
         </SplitPane>
 

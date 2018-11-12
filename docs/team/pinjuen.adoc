@@ -1,0 +1,65 @@
+= Lim Pin Juen - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Bank Address Book
+
+---
+
+== Overview
+
+Bank Address Book (BankAB) is a business process management and workflow application platform, whereby its users are all the employees in a banking environment.
+This platform supports the basic daily routine of each employee such as:
+
+*  Checking working schedule
+*  Applying for leave application
+*  Checking in and out during working hours
+
+The managers and administrators will have higher priority access level of BankAB such as changing the
+priority level of the employee and approve or reject leave requests.
+
+== Summary of contributions
+
+* *Major enhancement*: Added the command to *check in/out to/from work* and *calculates the salary per day according to the hours worked.*
+** What it does: It allows users to check in to work or check out from work and based on the time they checked in and out, their salary per day will be calculated accordingly and displayed once they checked out from work.
+** Justification: This is a basic and crucial command required by a workflow management product as checking in/out to/from work is a daily process for employees to prove that they came to work and how long they have worked.
+** Highlights: This enhancement provides the product the checking in/out system. The implementation was challenging as it required creating a new command from scratch.
+
+* *Minor enhancement*:
+- added `Working Rate` field to specify each employee's working rate per hour. +
+- added `Checked In Time` field to specify the time that each employee's checked in. +
+- added checked in/out status display on UI.
+
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=pinjuen[RepoSense Dashboard]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed vetting through and approving of pull requests.
+** Enhancements to existing features:
+*** Added `Working Rate` and  `Checked In Time` fields. (Pull request https://github.com/CS2113-AY1819S1-T16-3/main/pull/92[#92])
+*** Updated checked in/out status colors on UI. (Pull requests https://github.com/CS2113-AY1819S1-T16-3/main/pull/102[#102])
+** Documentation:
+*** Updated README.doc for the product. (Pull request https://github.com/CS2113-AY1819S1-T16-3/main/pull/22[#22])
+*** Updated Developer Guide on checking in/out to/from work feature. Updated use cases and user stories as we refined our product through the weeks: https://github.com/CS2113-AY1819S1-T16-3/main/pull/71[#71]
+*** Ensuring the User Guide is up to date and details are correct for the listed commands as we refined our product through the weeks: https://github.com/CS2113-AY1819S1-T16-3/main/pull/71[#71], https://github.com/CS2113-AY1819S1-T16-3/main/pull/94[#94]
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-1/main/issues/158[1], https://github.com/CS2113-AY1819S1-W12-1/main/issues/169[2], https://github.com/CS2113-AY1819S1-W12-1/main/issues/161[3])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=check]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=checkinout]

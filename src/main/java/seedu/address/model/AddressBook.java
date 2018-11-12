@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.exceptions.NoEmployeeException;
 
 /**
  * Wraps all data at the address-book level
@@ -91,6 +92,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Sorts employees in the address book by name or department.
+     * Sorting can be done in ascending or descending order.
+     */
+    public void sortEmployeeBy(String field, String order) throws NoEmployeeException {
+        persons.sortBy(field, order);
     }
 
     //// util methods

@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -77,4 +78,10 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(addressBook));
     }
 
+    @Override
+    public void deleteAddressBook() {
+        File addressBookFile = new File(filePath.toUri());
+        addressBookFile.delete();
+        logger.info("data/AddressBook.xml has been deleted.");
+    }
 }

@@ -20,6 +20,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.TimeEnd;
+import seedu.address.model.schedule.TimeStart;
+import seedu.address.model.schedule.Venue;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
@@ -29,6 +33,10 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TIME_START = "eleven";
+    private static final String INVALID_TIME_END = "nine";
+    private static final String INVALID_VENUE = " ";
+    private static final String INVALID_APPROVAL = "approve ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -36,6 +44,9 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TIME_START = "1100";
+    private static final String VALID_TIME_END = "1500";
+    private static final String VALID_VENUE = "Level2";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -66,7 +77,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -89,7 +100,7 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -112,7 +123,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseAddress_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress(null));
     }
 
     @Test
@@ -135,7 +146,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -204,5 +215,70 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseSchedule_nullValues_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseSchedule(null, null, null);
+    }
+
+    @Test
+    public void parseSchedule_nullTimeStart_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseSchedule(null, "1500", "Level2");
+    }
+
+    @Test
+    public void parseSchedule_nullTimeEnd_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseSchedule("1100", null, "Level2");
+    }
+
+    @Test
+    public void parseSchedule_nullVenue_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseSchedule("1100", "1500", null);
+    }
+
+    @Test
+    public void parseSchedule_invalidTimeStart_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseSchedule(INVALID_TIME_START, VALID_TIME_END, VALID_VENUE);
+    }
+
+    @Test
+    public void parseSchedule_invalidTimeEnd_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseSchedule(VALID_TIME_START, INVALID_TIME_END, VALID_VENUE);
+    }
+
+    @Test
+    public void parseSchedule_invalidVenue_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseSchedule(VALID_TIME_START, VALID_TIME_END, INVALID_VENUE);
+    }
+
+    @Test
+    public void parseSchedule_invalidValues_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseSchedule(INVALID_TIME_START, INVALID_TIME_END, INVALID_VENUE);
+    }
+
+    @Test
+    public void parseSchedule_validValueWithoutWhitespace_returnsSchedule() throws Exception {
+        Schedule expectedSchedule = new Schedule(new TimeStart(VALID_TIME_START),
+                new TimeEnd(VALID_TIME_END), new Venue(VALID_VENUE));
+        assertEquals(expectedSchedule, ParserUtil.parseSchedule(VALID_TIME_START, VALID_TIME_END, VALID_VENUE));
+    }
+
+    @Test
+    public void parseApproval_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseApproval(null));
+    }
+
+    @Test
+    public void parseApproval_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseApproval(INVALID_APPROVAL));
     }
 }

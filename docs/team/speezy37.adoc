@@ -1,0 +1,64 @@
+= Chua Chong Yu - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Bank Address Book
+
+---
+
+== Overview
+
+Bank Address Book (BankAB) is a business process management and workflow application platform, whereby its users are all the employees in a banking environment.
+This platform supports the basic daily routine of each employee such as:
+
+*  Checking working schedule
+*  Applying for leave application
+*  Checking in and out during working hours
+
+The managers and administrators will have higher priority access level of BankAB such as changing the
+priority level of the employee and approve or reject leave requests.
+
+== Summary of contributions
+
+* *Major enhancement*: implemented *scheduling system.*
+** What it does: This allows all users to have a unique schedule to be updated on where and when to work for the day.
+** Justification: This feature is a core component of the product as certain functions (such as leave application),
+require user authentication. Both command can be executed by any user to view and set their own schedule.
+However, a user with priority level of `ADMINISTRATOR` is needed to view and set schedule for others.
+** Highlights: This is the only variable within a `Person` object that is more OOP oriented as `Schedule` is an object
+that contains 3 variables: `TimeStart`, `TimeEnd` and `Venue`. When a `Person` object is first created, the `Schedule`
+object can be null if not defined. Calling the `toString()` method will return either the details of the `Schedule` in
+string format or the `nullPointerException` will return `'No schedule is allocated'`.
+
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=speezy37[Code Dashboard]
+
+* Other contributions:
+** Code quality: +
+*** Ensure Coverage is above 90 percent: https://github.com/CS2113-AY1819S1-T16-3/main/pull/106[#106]
+** Community: +
+*** Setup Reposense config file: https://github.com/CS2113-AY1819S1-T16-3/main/pull/76[#76]
+*** PRs reviewed: https://github.com/CS2113-AY1819S1-T16-3/main/pull/716[#71],
+https://github.com/CS2113-AY1819S1-T16-3/main/pull/77[#77],
+https://github.com/CS2113-AY1819S1-T16-3/main/pull/84[#84],
+https://github.com/CS2113-AY1819S1-T16-3/main/pull/102[#102],
+https://github.com/CS2113-AY1819S1-T16-3/main/pull/104[#104],
+https://github.com/CS2113-AY1819S1-T16-3/main/pull/105[#105]
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=schedule]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=schedule]
+
+include::../DeveloperGuide.adoc[tag=schedule_test]

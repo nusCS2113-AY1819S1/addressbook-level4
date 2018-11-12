@@ -12,7 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.prioritylevel.PriorityLevelEnum;
 import seedu.address.testutil.PersonBuilder;
+import systemtests.SessionHelper;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -25,6 +27,7 @@ public class AddCommandIntegrationTest {
     @Before
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        SessionHelper.forceLoginWithPriorityLevelOf(PriorityLevelEnum.ADMINISTRATOR.getPriorityLevelCode());
     }
 
     @Test
@@ -44,6 +47,7 @@ public class AddCommandIntegrationTest {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
+
     }
 
 }

@@ -42,4 +42,8 @@ public interface AddressBookStorage {
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
+    /**
+     * Deletes the AddressBook as specified in the UserPrefs
+     */
+    void deleteAddressBook();
 }

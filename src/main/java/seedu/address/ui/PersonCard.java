@@ -31,11 +31,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label mode;
+    @FXML
     private Label phone;
     @FXML
     private Label address;
     @FXML
     private Label email;
+    @FXML
+    private Label department;
     @FXML
     private FlowPane tags;
 
@@ -47,6 +51,13 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        department.setText(person.getDepartment().fullDepartment);
+        mode.setText(person.getMode().value);
+        if (person.getMode().value.equals("in")) {
+            mode.setStyle("-fx-background-color: #0fc425");
+        } else {
+            mode.setStyle("-fx-background-color: #c40f0f");
+        }
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

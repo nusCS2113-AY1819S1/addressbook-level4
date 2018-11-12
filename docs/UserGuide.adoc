@@ -1,7 +1,8 @@
-= AddressBook Level 4 - User Guide
+= Bank Address Book - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
+:toclevels: 3
 :toc-placement: preamble
 :sectnums:
 :imagesDir: images
@@ -12,35 +13,74 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T16-3/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `T16-3`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
+Bank Address Book (BankAB) is a business process management and workflow application platform, whereby its users are all the employees in a banking environment.
+This platform supports the basic daily routine of each employee such as:
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+*  Checking working schedule
+*  Applying for leave application
+*  Checking in and out during working hours
 
-== Quick Start
+The managers and administrators will have higher priority access level of BankAB such as changing the
+priority level of the employee and approve or reject leave requests. +
+This user guide will give you step by step instruction on how you can use the features of BankAB.
 
+==  Getting Started with BankAB
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+    https://www.oracle.com/technetwork/java/javase/downloads/index.html[Download]
+.  Create a folder named `BankAB` in the desired location.
+.  Download the latest `BankAddressBook.jar` link:{repoURL}/releases[here] into the folder `BankAB`.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
+.  If the app does not contain any sample data (refer to <<List of sample user accounts at first launch or upon reset, Table 1>>), something went wrong during the download process. Delete the folder `BankAB` and repeat step 1 to 4.
+.  The following table contains a sample list of employees with the respective account details when the application
+runs for the first time or when ResetCommand was executed in the previous runtime:
+
+.List of sample user accounts at first launch or upon reset
+[[defaultcontacts]]
+|===
+|*Name* |*NRIC* |*Password* |*Priority Level*
+|Alex Yeoh
+|S1234567E
+|Password
+|ADMINISTRATOR (Highest Priority level)
+
+|Leonard Tan
+|S1230000E
+|Password
+|I.T. UNIT
+
+|Bernice Yu
+|T1234567E
+|Password
+|MANAGER
+
+|Charlotte Oliveiro
+|F1234567E
+|Password
+|BASIC (Lowest Priority Level)
+|===
+
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
+* `login ic/S1234567E pwd/Password` : Log in as Alex Yeoh, with a priority level of ADMINISTRATOR.
+* `list` : lists all contacts
+* `add n/John Doe ic/S9458861T pwd/Password p/98765432 e/johnd@example.com d/Junior Management
+a/311, Clementi Ave 2, #02-25 wr/7.5 t/friends t/owesMoney` : adds a contact named `John Doe` to the Address Book.
+* `schedule 2` : list the schedule of the 2nd employee in the address book
+* `exit` : exits the app
 
-.  Refer to <<Features>> for details of each command.
+.  Refer to <<Features, Features>> for details of each command.
 
-[[Features]]
 == Features
 
 ====
@@ -49,99 +89,554 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Using items without `…` after them multiple times will cause the app to either accept the last acceptable item or prompt an error message.
+* Parameters can be in any order.
+    e.g.: Specifying parameters in the order ic/NRIC n/NAME is identical to n/NAME ic/NRIC.
+* All the commands listed below requires user to login unless specified.
+
 ====
 
-=== Viewing help : `help`
+//tag::jylee-git_login[]
+=== Personal User Account
 
-Format: `help`
+==== Login to the application: `login`
+Logs in to the application using a registered NRIC and password. +
+Format: `login ic/NRIC pwd/PASSWORD` +
+Example: `login ic/S1234567E pwd/Password`
 
-=== Adding a person: `add`
+====
+A successful login will show the NRIC and name which you have used to login, followed by the schedule of the day (if any).
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+image::loginTextBox.png[]
 
-[TIP]
-A person can have any number of tags (including 0)
+image::login_success_screenShot.png[]
+====
 
-Examples:
+==== Checks the login status of the application: `checkloginstatus`
+Prints whether this application is logged in. +
+Also prints the logged in NRIC if logged in.
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+==== Logout of the application: `logout`
+Logs out of the application, allowing for other users to log in again.
 
-=== Listing all persons : `list`
+//end::jylee-git_login[]
 
-Shows a list of all persons in the address book. +
-Format: `list`
+==== Editing personal particulars : `edit`
 
-=== Editing a person : `edit`
-
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits the existing particulars of the logged in user. +
+Format : `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the personal details of the user who is logged in.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
+* You can remove all the employee's tags by typing `t/` without specifying any tags after it.
+* You are able to edit the following fields for this command:
+** Name: n/NAME
+** Address: a/ADDRESS
+** Phone: p/PHONE_NUMBER
+** Email: e/EMAIL
+** Tag(s): t/TAG1 t/TAG2 ...
 ****
+
+[NOTE]
+====
+This command will NOT be able to edit the following:
+
+* `Department`
+* `Leave`
+* `NRIC`
+* `Password`
+* `Priority Level`
+* `Schedule`
+* `Mode`
+* `Working Rate`
+
+====
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit p/91234567 e/johndoe@example.com` +
+Sets the logged in employee's details to the aforementioned email and phone number. +
+* `edit t/friend t/lecturer n/John Doe` +
+Sets the logged in employee's details to the name of John Doe; clears all tag and sets the two aforementioned tags. +
 
-=== Locating persons by name: `find`
+=== Employee Management Database
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+==== Adding an employee: `add`
 
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
+[NOTE]
+====
+* Refer to <<Appendix A: List of prefixes in the application, Appendix A>> for the list of prefixes and its' constraints.
+* Refer to <<Appendix B: Privileges in accordance to priority level, Appendix B>> for the different privileges in each priority level.
+* This operation requires administrator privilege to perform.
+====
+
+Adds an employee to the address book +
+Format: `add n/NAME ic/NRIC pwd/PASSWORD p/PHONE_NUMBER e/EMAIL d/DEPARTMENT a/ADDRESS wr/WORKING_RATE [plvl/PRIORITY_LEVEL] [t/TAG]...`
+
+[TIP]
+====
+* An employee can have any number of tags (including 0)
+* Priority level will be set to BASIC if left empty
+* A recently added employee will have no schedule allocated
+* More than 2 decimal places for working rate is acceptable
+====
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 wr/7.5 d/Junior Management ic/T0249855I
+pwd/9EwciT plvl/1`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Tower p/1234567 d/Senior Management
+t/Creditor ic/S1875858E pwd/Fed528F wr/10`
 
-=== Deleting a person : `delete`
+==== Deleting an employee : `delete`
+[NOTE]
+====
+This operation requires administrator privilege to perform.
+====
 
-Deletes the specified person from the address book. +
+Deletes the specified employee from the address book. +
 Format: `delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the employee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed employee list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+* `delete 1`
+====
+Deletes the employee with index 1 in the address book.
+====
 
-=== Selecting a person : `select`
+//tag::jylee-git_login[]
+==== Change priority level of employee: `setplvl`
+[NOTE]
+====
+* This operations requires administrator privilege to perform.
+* Refer to the Priority level section in <<Appendix A: List of prefixes in the application, Appendix A>> for the appropriate input value.
+* Refer to <<Appendix B: Privileges in accordance to priority level, Appendix B>> for the different privileges in each priority level.
+* You are not able to edit your own priority level.
+====
+Sets the priority level of an employee at the specified index. +
+Format: `setplvl INDEX plvl/PRIORITY_LEVEL` +
+Example: `setplvl 1 plvl/0`
 
-Selects the person identified by the index number used in the displayed person list. +
+====
+- A successful change of priority level should show the following message:
+
+image::setPlvl_success_screenShot.png[width=800]
+
+- Users of insufficient priority level (below administrator priority level) will get the following
+error message when attempting to execute this command:
+
+image::setPlvl_failed_screenShot.png[width=800]
+
+- Users (with sufficient priority level), that attempts to change their own priority level will not be allowed to do so:
+
+image::setOwnPlvl_failed_screenShot.png[width=800]
+====
+//end::jylee-git_login[]
+
+// tag::setdepartment[]
+==== Change the department of an employee : `setdepartment`
+[NOTE]
+====
+* This operation requires administrator privilege to perform.
+* Administrator can only change the departments of other employees but not himself/herself.
+* Department names should start with a name, and ends with 'Management'.
+====
+Changes the department of an employee. +
+Format: `setdepartment INDEX d/DEPARTMENT` +
+Alias: `sd`
+****
+* Changes the employee's department at the specified `INDEX`.
+* The index refers to the index number shown in the displayed employee list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Refer to the *Department* section at <<Appendix A: List of prefixes in the application, Appendix A>> for the appropriate input for the department name.
+****
+
+Example: `setdepartment 3 d/Junior Management`
+
+====
+Changes the employee department with ID 3 in the address book to `Junior Management`.
+
+image::SetDepartmentAfter.png[width="500"]
+====
+// end::setdepartment[]
+
+// tag::leavecommand[]
+=== Leave Application
+
+==== Leave application : `leave`
+Request leave application of the user for approval. +
+Format: `leave date/DATE`
+[NOTE]
+====
+* DATE must be in the format DD/MM/YYYY
+* DATE must not be today's date or past dates
+* DATE must be a valid calendar date
+====
+
+Example: `leave date/20/11/2019`
+
+image:leave.png[width=""]
+
+Requested leave application on 20/11/2019.
+
+image:acceptedleave.png[width=""]
+// end::leavecommand[]
+
+// tag::listleave[]
+==== List leave application : `listleave`
+[NOTE]
+====
+* Does not require the user to log in before using the command.
+====
+List out all leave application in the leave list. +
+Format: `listleave`
+
+image:listleave.png[width=""]
+
+Returns all the leave application in the system.
+
+image:listedleave.png[width=""]
+// end::listleave[]
+
+// tag::filterleave[]
+==== Filter leave application : `filterleave`
+[NOTE]
+====
+* Does not require the user to log in before using the command.
+====
+Filter leave applications based on NRIC. +
+Format: `filterleave NRIC` +
+Alias: `fl`
+
+[NOTE]
+====
+* Filter is case insensitive eg. `s1234567a` matches `S1234567A`
+====
+Example:
+`filterleave F2058730E`
+
+image:filterleavecmd.png[width=""]
+
+List all leave application requested by the user with NRIC, 'F2058730E'.
+
+image:filteredleave.png[width=""]
+// end::filterleave[]
+
+// tag::deleteleave[]
+==== Delete leave application : `deleteleave`
+Delete the specified leave from leave list.
+
+[NOTE]
+====
+* User can only delete leave application he/she requested.
+* To delete other user's application, requires higher privilege to perform.
+Example, MANAGER can delete BASIC user's leave application.
+* ADMINISTRATOR can delete any leave application.
+====
+
+Format: `deleteleave INDEX` +
+Alias: `dl`
+
+****
+* Deletes the leave at the specified `INDEX`.
+* The index refers to the index number shown in the displayed leave list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Example:
+`deleteleave 1`
+
+image:deleteleavecmd.png[width=""]
+
+image:deletingleave.png[width=""]
+
+Deletes the leave application with INDEX 1 in the leave list.
+
+image:deleteresult.png[width=""]
+// end::deleteleave[]
+
+// tag::approveleave[]
+==== Approve leave application  : `approve`
+Approve the specified leave application from leave list.
+
+[NOTE]
+====
+* Only higher priority users can approve leave application.
+Example, MANAGER can approve BASIC user's leave application.
+* ADMINISTRATOR cannot approve his own leave application, only another ADMINISTRATOR can approve his leave application.
+====
+
+Format: `approve INDEX`
+****
+* Approve the leave at the specified `INDEX`.
+* The index refers to the index number shown in the displayed leave list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Example:
+`approve 2`
+
+image:approvecmd.png[width=""]
+
+Approve the leave application with INDEX 2 in the leave list.
+
+image:approved.png[width=""]
+// end::approveleave[]
+
+// tag::rejectleave[]
+==== Reject leave application  : `reject`
+Reject the specified leave application from leave list.
+
+[NOTE]
+====
+* Only higher priority users can reject leave application.
+Example, MANAGER can reject BASIC user's leave application.
+* ADMINISTRATOR cannot reject his own leave application, only another ADMINISTRATOR can reject his leave application.
+====
+
+Format: `reject INDEX`
+****
+* Reject the leave at the specified `INDEX`.
+* The index refers to the index number shown in the displayed leave list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Example:
+`reject 2`
+
+image:rejectcmd.png[width=""]
+
+Reject the leave application with INDEX 2 in the leave list.
+
+image:reject.png[width=""]
+// end::rejectleave[]
+
+// tag::schedule[]
+=== Scheduling
+
+==== List schedule: `schedule`
+
+List schedule for the employee. +
+
+Format: `schedule INDEX` +
+
+****
+* Shows schedule at the specified `INDEX`.
+* The index refers to the index number shown in the displayed leave list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+[NOTE]
+====
+* `ADMINISTRATOR` priority level is required to view schedule of other employees
+====
+
+Example: `schedule 1`
+
+****
+* Shows the schedule of employee with ID 1 in the list.
+****
+
+Sample output: +
+image:schedule_cmd.png[]
+
+==== Set schedule: `setschedule`
+Set schedule of the employee. +
+
+Format: `setschedule INDEX ts/TIME_START te/TIME_END v/VENUE` +
+
+****
+* Set the schedule at the specified `INDEX`.
+* The index refers to the index number shown in the displayed leave list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* `TIME_START` and `TIME_END` must be in HHMM 24 hour format
+****
+
+[NOTE]
+====
+* If `TIME_START` is later than `TIME_END`, `TIME_END` refers to the following day.
+* `TIME_START` cannot be the same as `TIME_END`.
+* `ADMINISTRATOR` priority level is required to set schedule of other employees
+====
+
+Examples: +
+
+* `setschedule 1 ts/1100 te/1600 v/Toilet` +
+****
+Sets a schedule for 1st user to work in `Toilet` from 1100 hours to 1600 hours
+****
+
+* `setschedule 2 ts/2200 te/0800 v/Main Door` +
+****
+Sets a schedule for 2nd user to work at `Main Door` from 2200 hours to 0800 hours of the following day
+****
+
+
+
+// end::schedule[]
+
+=== Filtering/Sorting
+
+==== Listing all employees : `list`
+[NOTE]
+====
+* Does not require the user to log in before using the command.
+====
+
+Shows a list of all employees in the address book. +
+Format: `list`
+
+==== Locating employees by name: `find`
+[NOTE]
+====
+* Does not require the user to log in before using the command.
+====
+
+Finds employees whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g *hans* will match *Hans*
+* The order of the keywords does not matter. e.g. *Hans Bo* will match *Bo Hans*
+* Only the name is searched.
+* Only full words will be matched e.g. *Han* will not match *Hans*
+* Employees matching at least one keyword will be returned (i.e. `OR` search). e.g. *Hans Bo* will return *Hans Gruber*, *Bo Yang*
+****
+
+Examples:
+
+* `find John` +
+====
+Returns `john` and `John Doe`
+====
+* `find Betsy Tim John` +
+====
+Returns any employee having names `Betsy`, `Tim`, or `John`
+====
+
+// tag::sort[]
+==== Sort address book contacts: `sort`
+[NOTE]
+====
+* Does not require the user to log in before using the command.
+====
+Sorts the employees or departments of the current list in sorted order.
+The list can be sorted in ascending or descending order. +
+Format: `sort FIELD ORDER`
+
+[NOTE]
+====
+This operation only supports the following fields and orders
+
+* `FIELD`: `name` and `department`
+* `ORDER`: `asc` and `desc`
+====
+
+Examples:
+
+* `sort name asc`
+
+====
+Sorts the employee names in the list in ascending order
+
+image::SortAfter1.png[width="200"]
+====
+* `sort department desc`
+
+====
+Sorts the department names in the list in descending order
+
+image::SortAfter2.png[width="200"]
+====
+// end::sort[]
+
+// tag::listdepartment[]
+==== List department : `listdepartment`
+[NOTE]
+====
+* Does not require the user to log in before using the command.
+====
+Shows a list of departments available in the addressbook. +
+Format: `listdepartment` +
+Alias: `ld` +
+Example: `listdepartment`
+
+====
+Returns a list of departments available in the addressbook currently.
+Listing of department names are in ascending order.
+
+image::ListDepartmentAfter.png[width="500"]
+====
+// end::listdepartment[]
+
+// tag::filterdepartment[]
+==== Filtering department : `filterdepartment`
+[NOTE]
+====
+* Does not require the user to log in before using the command.
+* The keyword `Management` will not be accepted to prevent listing of all departments.
+====
+Filter departments and list out the employees who are in the department. +
+Format: `filterdepartment KEYWORD [MORE KEYWORDS]` +
+Alias: `fd`
+
+* The search is case insensitive. e.g. `junior` will match employees in `Junior Management`
+* Only full words will be matched. e.g. `junio` will not match `Junior Management`
+* Filtering of more than one department will list out the employees in the departments.
+
+Examples:
+
+* `filterdepartment junior`
+
+====
+Returns a list of employees who are in `Junior Management`.
+
+image::FilterDepartmentAfter1.png[width="200"]
+====
+* `filterdepartment junior senior`
+
+====
+Returns a list of employees who are in `Junior Management` and `Senior Management`.
+
+image::FilterDepartmentAfter2.png[width="200"]
+====
+// end::filterdepartment[]
+
+=== Miscellaneous
+
+==== Viewing help : `help`
+
+Format: `help`
+[NOTE]
+====
+* Does not require the user to log in before using the command.
+====
+
+User Guide will open in a separate window shown below:
+
+image:UserGuide.png[width="500"]
+
+==== Selecting an employee : `select`
+[NOTE]
+====
+* Does not require the user to log in before using the command.
+====
+
+Selects the employee identified by the index number used in the displayed employee list. +
 Format: `select INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Selects the employee at the specified `INDEX` and loads the homepage of BankAB.
+* The index refers to the index number shown in the displayed employee list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
@@ -149,12 +644,16 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
+Selects the 2nd employee in the address book.
 * `find Betsy` +
 `select 1` +
-Selects the 1st person in the results of the `find` command.
+Selects the 1st employee in the results of the `find` command.
 
-=== Listing entered commands : `history`
+==== Listing entered commands : `history`
+[NOTE]
+====
+* Does not require the user to log in before using the command.
+====
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
@@ -164,62 +663,61 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]
-=== Undoing previous command : `undo`
+// tag::check[]
+==== Check in/out working hours: `check`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+Updates check in/out status for employees. +
+Format: `check m/MODE` +
+Examples: +
 
+* `check m/in`
+====
+User checked in:
+
+image::checkedInStatus.png[width="270"]
+
+Checked in shows: +
+
+- Checked in date
+- Checked in time
+
+image::checkedIn.PNG[width="700"]
+
+====
+
+* `check m/out`
+
+====
+
+User checked out:
+
+image::checkedOutStatus.png[width="270"]
+
+Checked out shows: +
+
+- Checked out date
+- Checked out time
+- Hours worked
+- Salary per day according to employees' working rate per hour, both rounded off to 2 decimal places.
+
+image::checkedOut.PNG[width="700"]
+====
+// end::check[]
+
+==== Reset the application : `reset`
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+This operation requires user to be logged in with a privilege level of `I.T. Unit` to perform.
 ====
+Resets the application into a default state, by deleting data/AddressBook.xml and data/leave.xml. The application will
+also close upon
+deleting the two files.
 
-Examples:
+Refer to the <<defaultcontacts, List of Default Contacts>> upon app reset on the contacts available.
 
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
+Format: `reset`
 
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-
-=== Redoing the previously undone command : `redo`
-
-Reverses the most recent `undo` command. +
-Format: `redo`
-
-Examples:
-
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-
-* `delete 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
-
-=== Clearing all entries : `clear`
-
-Clears all entries from the address book. +
-Format: `clear`
-
-=== Exiting the program : `exit`
+==== Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
@@ -229,32 +727,200 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
+//tag::Command_Summary[]
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+=== Personal User Account
+•	*<<Login to the application: `login`, Login>>*: `login ic/NRIC pwd/PASSWORD`
+•	*<<Checks the login status of the application: `checkloginstatus`, Check login status>>*: `checkloginstatus`
+•	*<<Logout of the application: `logout`, Logout>>*: `logout`
+•	*<<Editing personal particulars : `edit`, Edit personal particulars>>*: `edit [n/NAME] [p/PHONE] [e/EMAIL]
+        [a/ADDRESS] [t/TAG]...`
+
+=== Employee Management Database
+•	*<<Adding an employee: `add`, Add employee>>*: `add n/NAME ic/NRIC pwd/PASSWORD p/PHONE_NUMBER e/EMAIL d/DEPARTMENT
+        a/ADDRESS wr/WORKING_RATE [plvl/PRIORITY_LEVEL] [t/TAG]...`
+•	*<<Deleting an employee : `delete`, Deleting employee>>*: `delete INDEX`
+•	*<<Change priority level of employee: `setplvl`, Set priority level of an employee>>*: `setplvl INDEX plvl/PRIORITY_LEVEL`
+•	*<<Change the department of an employee : `setdepartment`, Change department of an employee>>*: `setdepartment INDEX d/DEPARTMENT`
+
+=== Leave Application
+•	*<<Leave application : `leave`, Add leave application>>*: `leave date/DATE`
+•	*<<List leave application : `listleave`, List all leave applications>>*: `listleave`
+•	*<<Filter leave application : `filterleave`, Filter leave applications>>*: `filterleave NRIC`
+•	*<<Delete leave application : `deleteleave`, Delete leave application>>*: `deleteleave INDEX`
+•	*<<Approve leave application  : `approve`, Approve leave application>>*: `approve INDEX`
+•	*<<Reject leave application  : `reject`, Reject leave application>>*: `reject INDEX`
+
+=== Scheduling
+•	*<<List schedule: `schedule`, List schedule>>*: `schedule INDEX`
+•	*<<Set schedule: `setschedule`, Set schedule>>*: `setschedule INDEX ts/TIME_START te/TIME_END v/VENUE`
+
+=== Filtering/Sorting
+•	*<<Listing all employees : `list`, List employee list>>*: `list`
+•	*<<Locating employees by name: `find`, Find employee>>*: `find KEYWORD [MORE_KEYWORDS]`
+•	*<<Sort address book contacts: `sort`, Sort address book contacts>>*: `sort FIELD ORDER`
+•	*<<List department : `listdepartment`, List available departments>>*: `listdepartment`
+•	*<<Filtering department : `filterdepartment`, Filter departments>>*: `filterdepartment KEYWORD [MORE KEYWORDS]`
+
+=== Miscellaneous
+•	*<<Viewing help : `help`, Help>>*: `help`
+•	*<<Selecting an employee : `select`, Select the employee>>*: `select INDEX`
+•	*<<Listing entered commands : `history`, History of commands>>*: `history`
+•	*<<Check in/out working hours: `check`, Check in/out working hours>>*: `check m/MODE`
+•	*<<Reset the application : `reset`, Reset the application>>*: `reset`
+•	*<<Exiting the program : `exit`, Exit application>>*: `exit`
+//end::Command_Summary[]
+
+//tag::jylee-git_appendixA[]
+== Appendix A: List of prefixes in the application
+.List of prefixes used for employee
+|===
+|*Parameter name* |*Prefix* |*Constraints* |*Example*
+
+| Name
+| n/NAME
+| Name must be alphabetical
+| n/Lewis Hamilton
+
+| NRIC Number
+| ic/NRIC
+| NRIC should start with an upper-case character [S, T, F, G], followed by a seven-digit number, and ending with a upper-case
+alphabet. NRIC for every single individuals must be unique.
+| ic/S9203948E
+
+| Password
+| pwd/PASSWORD
+| Password should be alphanumeric and should contain at least five characters
+| pwd/NeUeR2018
+
+| Phone
+| p/PHONE
+| Phone numbers should contain only numbers, and should have at least three digits.
+| p/81667800
+
+| Email
+| e/EMAIL
+| Emails should be of the format local-part@domain, and also satisfy the following requirements: +
+    1) "local-part" should contain only alphanumeric characters and an underscore '_' +
+    2) "domain" can consist of alphanumeric characters, a period, or hyphen, but should start and end with only
+    alphanumeric characters.
+| e/jarvin@eltech.com
+
+| Department
+| d/DEPARTMENT
+| Department should contain alphabetic characters and spaces, and it should not be blank.
+Department names should start with a name, and ends with 'Management'.
+| d/Junior Management
+
+| Address
+| a/ADDRESS
+| N/A
+| a/Blk 25, Ang Mo Kio Street 23 #04-21, s(630025)
+
+| Mode
+| m/MODE
+| Mode should only contains "in" or "out".
+| m/in
+
+| Working Rate
+| wr/WORKING_RATE
+| Working rate should only contains whole or decimal numbers.
+| wr/7.5
+
+| Priority Level
+| plvl/PRIORITY_LEVEL
+| Priority Level should be a number respective to the following classification: +
+[0] Administrator (HIGHEST) +
+[1] I.T. Unit +
+[2] Manager +
+[3] Basic (LOWEST)
+| plvl/2
+
+| Tag(s)
+| t/TAG1 t/TAG2 ...
+| Tag names should be alphanumeric
+| t/Admin t/Boss t/OweMeMoney
+|===
+//end::jylee-git_appendixA[]
+
+.List of prefixes used for schedule
+|===
+|Parameter |Prefix |Constraints |Example
+
+| Start Time
+| ts/TIME_START
+| Start Time should only be in numeric HHMM 24 hour format, and it should not be blank
+| ts/0900
+
+| End Time
+| te/TIME_END
+| End Time should only be in numeric HHMM 24 hour format, and it should not be blank
+| te/1800
+
+| Venue
+| v/VENUE
+| Venue should only contain alphanumeric characters and spaces, and it should not be blank
+| v/Level 5
+
+|===
+
+.List of prefixes used for leave
+|===
+|Parameter |Prefix |Constraints |Example
+
+| Date
+| date/DATE
+| Date must be in DD/MM/YYYY format
+| date/20/11/2019
+
+|===
+
+//tag::jylee-git_appendixB[]
+== Appendix B: Privileges in accordance to priority level
+.Priority level and its' privileges
+|===
+|*Priority Level* | *Typical Roles* | *Privileges*
+
+|BASIC (3)
+|
+- Intern +
+- Security Guard +
+- Receptionist
+|
+- Edit your own particulars +
+- Apply for leave +
+- Check in/out to/from work for their own +
+- Set and view your own schedule
+
+|MANAGER (2)
+|
+- Head of Departments
+|
+- All privileges of a BASIC Priority Level +
+- Approve/Reject/Delete leave of users with lower priority level +
+
+|I.T. UNIT (1)
+|
+- I.T. Department
+|
+- All privileges of a MANAGER Priority level +
+- Reset the entire AddressBook into the default address book. (*exclusive to users holding this priority level*)
+
+|ADMINISTRATOR (0)
+|
+- Branch Manager +
+- Bank Executive +
+|
+- All privileges of a MANAGER Priority level +
+- Add and delete employees from the AddressBook +
+- Set the priority level of all employees +
+- Set Department of all employees +
+- Set and view other employee's schedules
+|===
+//end::jylee-git_appendixB[]

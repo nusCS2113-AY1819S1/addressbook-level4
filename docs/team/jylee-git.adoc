@@ -1,0 +1,103 @@
+= Lee Jin Yao - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Bank Address Book
+
+---
+
+== Overview
+
+Bank Address Book (BankAB) is a business process management and workflow application platform, whereby its users are
+all the employees in a banking environment.
+This platform supports the basic daily routine of each employee such as:
+
+*  Checking working schedule
+*  Applying for leave application
+*  Checking in and out during working hours
+
+The managers and administrators will have higher priority access level of BankAB such as changing the
+priority level of the employee and approve or reject leave requests.
+
+== Summary of contributions
+
+* *Major enhancement 1*: implemented *user account with corresponding APIs and commands.*
+** What it does: This allows all users to have a unique account to login and perform functions that are essential for
+ work purpose.
+** Justification: This feature is a core component of the product as certain functions (such as leave application),
+require user authentication.
+** Highlights: This enhancement is challenging as we need to modify a major portion of existing source codes and test
+ codes, owing to the fact that the newly added NRIC parameter is unique and other existing fields, which are initially
+ unique, are now not. In addition, many functions that are developed by my team is dependent on this feature. This
+ results in the pressure on me to deliver this feature at the shortest time possible.
+
+ * *Major enhancement 2*: implemented *priority access level with corresponding APIs and commands.*
+ ** What it does: All user accounts will have a priority level, which will allow/restrict them to functions that
+ require an elevated user to do so.
+ ** Justification: This feature is also a core component and complements the implementation of user accounts, as some
+  features (e.g.: Approving of leaves), require someone of a senior rank to do so. This will prevent users from
+  potentially abusing company resources and product functions.
+
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jylee-git[Code Dashboard]
+* *Minor enhancement*: added a reset command to reset the Bank Address Book to the original state at first start
+
+* *Other contributions*:
+
+** Project management:
+*** Set up the organization and project repo on Github
+*** Managed vetting through and approving individual pull requests
+*** Deployed website for our project: https://cs2113-t16-3.netlify.com/[Website]
+
+** Enhancements to existing features:
+*** Added a field that shows the user who is logged in at the status footer of the UI
+*** Made significant changes to priority level ranking following the feedback received from the first practical exam: https://github.com/CS2113-AY1819S1-T16-3/main/pull/134[#134]
+
+** Documentation:
+*** Re-arranged summary of commands in the user guide to make them more organized: https://github.com/CS2113-AY1819S1-T16-3/main/pull/89[#89]
+*** Added appendices A and B in the user guide that summarizes the prefixes and corresponding data types, and also various priority levels and its corresponding privileges:
+https://github.com/CS2113-AY1819S1-T16-3/main/pull/60[#60], https://github.com/CS2113-AY1819S1-T16-3/main/pull/89[#89]
+*** Updated documentations as the project progresses:
+    https://github.com/CS2113-AY1819S1-T16-3/main/pull/60[#60],
+    https://github.com/CS2113-AY1819S1-T16-3/main/pull/68[#68],
+    https://github.com/CS2113-AY1819S1-T16-3/main/pull/89[#89],
+    https://github.com/CS2113-AY1819S1-T16-3/main/pull/96[#96],
+    https://github.com/CS2113-AY1819S1-T16-3/main/pull/136[#136],
+    https://github.com/CS2113-AY1819S1-T16-3/main/pull/144[#144]
+
+** Community:
+*** PRs reviewed (with non-trivial review comments):
+    https://github.com/CS2113-AY1819S1-T16-3/main/pull/26[#26], https://github.com/CS2113-AY1819S1-T16-3/main/pull/92[#92]
+*** Reported bugs and suggestions for other teams in the class:
+    https://github.com/CS2113-AY1819S1-F09-2/main/issues/152[1], https://github.com/CS2113-AY1819S1-F09-2/main/issues/157[2],
+    https://github.com/CS2113-AY1819S1-F09-2/main/issues/167[3]
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+//include whatever you did here
+include::../UserGuide.adoc[tag=jylee-git_login]
+
+include::../UserGuide.adoc[tag=jylee-git_appendixB]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+//include whatever you did here
+include::../DeveloperGuide.adoc[tag=jylee-git_SessionDesign]
+
+include::../DeveloperGuide.adoc[tag=jylee-git_dg_plvlDesign]
+
+include::../DeveloperGuide.adoc[tag=jylee-git_dg_login]
+
+include::../DeveloperGuide.adoc[tag=jylee-git_dg_setplvl]
+
+include::../DeveloperGuide.adoc[tag=jylee-git_dg_reset]

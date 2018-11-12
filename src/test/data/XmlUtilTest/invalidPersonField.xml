@@ -2,8 +2,17 @@
 <!-- Person with an invalid phone field -->
 <person>
     <name>Hans Muster</name>
+    <nric>S9758025T</nric>
+    <password>Q65wer</password>
     <phone>9482asf424</phone>
     <email>hans@example</email>
+    <department>Junior Management</department>
+	<priorityLevel>0</priorityLevel>
     <address>4th street</address>
+	<schedule>
+        <venue>Level2</venue>
+        <startTime>1100</startTime>
+        <endTime>1500</endTime>
+    </schedule>
     <tagged>friends</tagged>
 </person>

@@ -3,12 +3,15 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.NoEmployeeException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -102,6 +105,76 @@ public class UniquePersonList implements Iterable<Person> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    //Reused from https://github.com/CS2103JAN2018-F14-B1/main/pull/57/files with minor modifications
+    //@@author Woonhian
+    /**
+     * Sorts employees by name or department in ascending or descending order.
+     */
+    public void sortBy(String field, String order) throws NoEmployeeException {
+        if (internalList.size() < 1) {
+            throw new NoEmployeeException();
+        }
+
+        Comparator<Person> comparator;
+
+        /**
+         * Used to sort by name
+         */
+        Comparator<Person> nameComparator = new Comparator<Person>() {
+            @Override
+            public int compare(Person p1, Person p2) {
+                return p1.getName().fullName.compareToIgnoreCase(p2.getName().fullName);
+            }
+        };
+
+        /**
+         * Used to sort by department
+         */
+        Comparator<Person> departmentComparator = new Comparator<Person>() {
+            @Override
+            public int compare(Person p1, Person p2) {
+                String x1 = p1.getDepartment().fullDepartment;
+                String x2 = p2.getDepartment().fullDepartment;
+                int sComp = x1.compareToIgnoreCase(x2);
+
+                if (sComp != 0) {
+                    return sComp;
+                }
+
+                String x3 = p1.getName().fullName;
+                String x4 = p2.getName().fullName;
+                return x3.compareToIgnoreCase(x4);
+            }
+        };
+
+        switch (field) {
+        case "name":
+            comparator = nameComparator;
+            break;
+
+        case "department":
+            comparator = departmentComparator;
+            break;
+
+        default:
+            throw new AssertionError("Invalid field parameter entered...\n");
+        }
+
+        switch (order) {
+        case "asc":
+            internalList.sort(comparator);
+            break;
+
+        case "desc":
+            internalList.sort(Collections.reverseOrder(comparator));
+            break;
+
+        default:
+            throw new AssertionError("Invalid order parameter entered...\n");
+        }
+    }
+
+    //@@author
     @Override
     public Iterator<Person> iterator() {
         return internalList.iterator();

@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.SessionChangedEvent;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -23,6 +24,8 @@ public class StatusBarFooter extends UiPart<Region> {
 
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
+
+    public static final String SESSION_STATUS_NOTLOGGEDIN = "Not logged in";
 
     /**
      * Used to generate time stamps.
@@ -42,12 +45,15 @@ public class StatusBarFooter extends UiPart<Region> {
     private StatusBar syncStatus;
     @FXML
     private StatusBar saveLocationStatus;
+    @FXML
+    private StatusBar sessionStatus;
 
 
     public StatusBarFooter(Path saveLocation) {
         super(FXML);
         setSyncStatus(SYNC_STATUS_INITIAL);
         setSaveLocation(Paths.get(".").resolve(saveLocation).toString());
+        setSessionStatus(SESSION_STATUS_NOTLOGGEDIN);
         registerAsAnEventHandler(this);
     }
 
@@ -73,11 +79,20 @@ public class StatusBarFooter extends UiPart<Region> {
         Platform.runLater(() -> syncStatus.setText(status));
     }
 
+    private void setSessionStatus(String sessionStatus) {
+        Platform.runLater(() -> this.sessionStatus.setText(sessionStatus));
+    }
+
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
+    }
+
+    @Subscribe
+    public void handleSessionChangedEvent(SessionChangedEvent sce) {
+        setSessionStatus(sce.toString());
     }
 }
