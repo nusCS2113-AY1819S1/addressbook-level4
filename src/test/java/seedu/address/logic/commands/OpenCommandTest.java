@@ -36,7 +36,7 @@ public class OpenCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Before
-    public void setup() {
+    public void setUp() {
         Username admin = new Username("admin");
         model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
         expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
@@ -66,7 +66,7 @@ public class OpenCommandTest {
         assertFalse(saveFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(saveFirstCommand.equals(null));
+        assertFalse(saveFirstCommand == null);
 
         // different item -> returns false
         assertFalse(saveFirstCommand.equals(saveSecondCommand));
