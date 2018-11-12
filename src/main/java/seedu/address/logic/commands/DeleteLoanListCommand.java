@@ -56,7 +56,7 @@ public class DeleteLoanListCommand extends Command {
     /**
      * Deletes an entry in the loan list base on the Index
      */
-    void deleteLoanList(Model model, CommandHistory history, File loanListFile) throws Exception {
+    public void deleteLoanList(Model model, CommandHistory history, File loanListFile) throws Exception {
 
         JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();

@@ -75,7 +75,7 @@ public class LoanListCommand extends Command {
     /**
      * Updates the XmlAdaptedLoanList, then updates the XmlLoanListFile
      */
-    void updateLoanList(File loanListFile, LoanerDescription loaner) throws JAXBException {
+    public void updateLoanList(File loanListFile, LoanerDescription loaner) throws JAXBException {
         XmlAdaptedLoanerDescription toAdd = new XmlAdaptedLoanerDescription(loaner);
         JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
         XmlAdaptedLoanList xmlAdaptedLoanList = new XmlAdaptedLoanList();
@@ -90,7 +90,7 @@ public class LoanListCommand extends Command {
     /**
      * Changes the status from On_Loan to Ready
      */
-    void updateStatus(Model model, CommandHistory history) throws CommandException {
+    public void updateStatus(Model model, CommandHistory history) throws CommandException {
         ChangeStatusCommand.ChangeStatusDescriptor changeStatusDescriptor =
                 new ChangeStatusCommand.ChangeStatusDescriptor(loaner.getItemName(),
                         loaner.getQuantity().toInteger(), "Ready", "On_Loan");

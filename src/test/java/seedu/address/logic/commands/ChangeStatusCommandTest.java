@@ -38,7 +38,7 @@ public class ChangeStatusCommandTest {
     private ChangeStatusCommand changeStatusCommand = new ChangeStatusCommand(getChangeStatusDescriptor());
 
     @Test
-    public void constructor_nullChangeStatusDescriptor_throwsNullPointerException() {
+    public void constructorNullChangeStatusDescriptorThrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new ChangeStatusCommand(null);
     }
