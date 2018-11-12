@@ -34,7 +34,6 @@ public class LostandFoundCommandTest {
     private List<Item> lastShownList = model.getFilteredItemList();
     private LostandFoundCommand lostandfoundCommand = new LostandFoundCommand();
     private ArrayList<SimpleItem> actualLostItems = new ArrayList<>();
-    private ArrayList<SimpleItem> actualFoundItems = new ArrayList<>();
 
     @Test
     public void checkSortSimpleItems() {
