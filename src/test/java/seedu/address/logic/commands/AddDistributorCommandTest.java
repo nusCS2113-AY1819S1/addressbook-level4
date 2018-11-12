@@ -194,7 +194,7 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoProductDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -204,7 +204,7 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoProductDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 

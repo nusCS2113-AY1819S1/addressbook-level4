@@ -123,7 +123,7 @@ public interface Model {
     /**
      * Returns true if the model has previous address book states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoProductDatabase();
 
     /**
      * Returns true if the model has previous address book states to restore.
@@ -143,7 +143,7 @@ public interface Model {
     /**
      * Restores the model's address book to its previous state.
      */
-    void undoAddressBook();
+    void undoProductDatabase();
 
     /**
      * Restores the model's address book to its previous state.

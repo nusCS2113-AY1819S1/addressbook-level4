@@ -8,14 +8,14 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Reverts the {@code model}'s address book to its previous state.
+ * Reverts the {@code model}'s productdatabase to its previous state.
 */
+
 public class UndoDistributorCommand extends Command {
 
     public static final String COMMAND_WORD = "undodistributor";
     public static final String MESSAGE_SUCCESS = "Undo success!";
     public static final String MESSAGE_FAILURE = "No more commands to undo!";
-
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {

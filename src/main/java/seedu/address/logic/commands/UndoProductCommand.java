@@ -21,11 +21,11 @@ public class UndoProductCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoAddressBook()) {
+        if (!model.canUndoProductDatabase()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoAddressBook();
+        model.undoProductDatabase();
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
