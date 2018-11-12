@@ -43,7 +43,6 @@ public class AddUserCommandTest {
 
     @Test
     public void execute_validUserNameAndValidUserPassword_loginSuccess() {
-        //set the current logged in user as an admin.
         Context.getInstance().setCurrentUser(null);
         User validUser = TypicalUsers.JOSH;
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
