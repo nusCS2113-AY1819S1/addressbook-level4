@@ -303,15 +303,14 @@ To enter a new drink into *[blue]#_Drink I/O_#*,
 - The adding of the drink will fail if `SELLING_PRICE` or `COST_PRICE` are negative values.
 ====
 
-// tag::find[]
 === Searching for specific drink(s)
-Finds drinks which meet specific criteria depending on the input prefix.
+Finds drinks which meet specific criteria depending on the prefix of the input.
 
 [TIP]
 ====
 *_Summary_* +
 *Command format*: +
- `find n/` `KEYWORD [MORE_KEYWORDS]` +
+ `find n/` `DRINK NAME` +
  `find q/` `QUANTITY` +
  `find d/` `DATE`
 ====
@@ -327,7 +326,7 @@ Format: `find n/KEYWORD [MORE_KEYWORDS]`
 * The search is case insensitive. e.g `coke` will match `Coke`
 * The order of the keywords does not matter. e.g. `Tea Green` will match `Green Tea`
 * Only the drink name is searched.
-* Only full words will be matched e.g. `Cok` will not match `Coke`
+* Only full words will be matched e.g. `Han` will not match `Hans`
 * Drinks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Tea` will return `Green Tea`, `Milk Tea`
 ****
 
@@ -340,9 +339,9 @@ Returns any drink having `Tea`, `Milk`, or `Coke` in their names
 
 ==== Searching by drink quantity
 
-To find out which drinks in your drink company are in need of restocking, you can utilise this search function which will return the drinks with quantity less than or equal to the quantity input. +
+To find out which drinks in your drink company are in need of restocking, you can utilise this search function which will return the drinks with quantity less than the quantity input. +
 
-Finds all drinks which have quantity less than or equal to the given quantity. +
+Finds all drinks which have quantity less than the given quantity. +
 Format: `find q/QUANTITY`
 
 ****
@@ -355,15 +354,15 @@ Examples:
 Returns `Coke` and `Green Tea` which have a quantity less than 400
 
 ==== Searching by batch import date
-To find out which drinks have been in the warehouse for a long period of time you can utilise this search function which will return the drinks that have batches older than or have the same date as the date input. +
+To find out which drinks have been in the warehouse for a long period of time you can utilise this search function which will return the drinks that have batches older than the date input. +
 
-Find drinks which have batches that are older or have the same date as the given date. +
+Find drinks which have batches that are older than the given date. +
 Format `find d/DATE`
 
 ****
 * Date must be in either of the following formats:
-** `DD/MM/YYYY`
-** `D/MM/YYYY`
+** DD / MM / YYYY
+** D / MM / YYYY
 * Date must be an existing date in the calendar
 ** i.e. 30/02/2018 is a nonexistent date
 * Even if a drink has only 1 batch that meets the requirements, it will be shown
@@ -372,12 +371,10 @@ Format `find d/DATE`
 Examples:
 
 * `find d/02/11/2018` +
-Returns all drinks which have batches imported on or before 2nd November 2018
+Returns all drinks which have batches imported before 2nd November 2018
 * `find d/9/11/2018` +
-Returns all drinks which have batches imported on or before 9th November 2018
-// end::find[]
+Returns all drinks which have batches imported before 9th November 2018
 
-// tag::list[]
 === Viewing all drinks in inventory
 To show the full list of drinks in the inventory list, use `list`.
 This is especially useful after using a `find` command. +
@@ -393,12 +390,9 @@ To view all drinks in *[blue]#_Drink I/O_#*,
 
 . Enter `list` into the command box
 . Press kbd:[enter]
-. You will see all the drinks listed in the inventory panel on the left of the interface.
+. You will see alll the drinks listed in the inventory panel on the left of the interface.
 
-Format: `list`
-// end::list[]
 
-// tag::viewDrinkDetails[]
 === Viewing drink details
 To view further details of the drink such as its batches that are not displayed on the drink card panel, you can simply click on the relevant drink card to select it or use the select command.
 
@@ -410,7 +404,6 @@ Format: `select INDEX`
 * The index refers to the numbered bullet shown in the displayed drink list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
-// end::viewDrinkDetails[]
 
 === Updating drink details
 You can change the cost price, selling price and tags of a drink. +
@@ -743,6 +736,18 @@ The transactions list will also show the relevant transactions included in the a
 === Viewing a drink's transactions `[Coming in v2.0]`
 === Viewing a drink's cost, revenue and profit `[Coming in v2.0]`
 
+== Setting Reminders `[Coming in v2.0]`
+
+
+
+
+
+
+
+
+
+
+
 
 == Overview of Role-Specific Commands
 
@@ -902,10 +907,6 @@ Creates a new Drink I/O account.
 or updates the transactions. +
 There is no need to save manually.
 
-
-== Upcoming Features in Future Releases
-
-
 == FAQ
 
 *Q*: How do I transfer my data to another computer? +
@@ -914,17 +915,10 @@ with the file that contains the data of your previous *[blue]#_Drink I/O_#* fold
 
 == Command Summary
 === Common Commands
-
-* *logout* : `logout`
-* *exit* : `exit`
-* *help* : `help`
-* *change password* : `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
-* *find* : `find n/KEYWORD [MORE_KEYWORDS]` , `find q/QUANTITY` , `find d/DATE` +
-e.g. `find n/Coke` , `find q/300` , `find 01/11/2018`
-* *List* : `list`
-* *Select* : `select INDEX` +
-e.g. `select 2`
-
+* *logout*: `logout`
+* *exit*: `exit`
+* *help*: `help`
+* *change password*: `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
 ////
 * *view stock by Name* : `view [-d] [n/Drink_NAME] [-b]`
 * *view stock by quantity* : `quantity [-d] [n/Drink_NAME] [-b] [t/tag]`
@@ -955,3 +949,4 @@ e.g. `select 2`
 
 === Administrator Commands
 * *create account* : `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
+
