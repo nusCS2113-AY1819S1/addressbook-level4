@@ -60,14 +60,24 @@ image::OtherAccess.png[width="300", align="center"]
 
 +
 * Now you are ready to explore _BookInventory_!
-. Input Commands
-* You can simply type the command in the command box as shown in Figure 5, and press kbd:[Enter] to execute it. +
+
+
+[[Features]]
+== Features
+
+In this segment, you will be briefed on what each user interface does.
+
+=== Command Box
+
+Input Commands
+
+* You can simply type the command in the command box as shown in Figure 5. Hit kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 +
 .Command Box shown in red box
 image::CommandBox.png[width="800", align="left"]
 +
-* Some example commands you can try:
+* You may try out the following sample commands:
 
 ** *`help`* : view all commands available
 ** *`list`* : list all books
@@ -75,8 +85,37 @@ image::CommandBox.png[width="800", align="left"]
 ** *`clear`* : clears the entire list
 ** *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
-.  Command Panel
+==== Command Format
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Harry Potter`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Harry Potter t/cs2113t` or as `n/Harry Potter`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items in brackets are *required* and always *private* e.g. `q/QUANTITY (c/COST)`
+* Items in arrow brackets are commands that are commands available depending on the user e.g. <Owner> means command only usable by Owner.
+
+=== Book List
+
+Beginning from the left, you should see a panel of books arranged. These are the available books
+which the bookstore owners have placed up for display.
+.  If you are an owner, refer to <<Commands for Bookstore Owners>> to begin managing your book inventory.
+
+.Command Panel
+image::BookList.png[width="400", align="left"]
+
+=== Request List
+
+The middle panel is designed to show Bookstore Owners the requests made by students.
+
+If you are a student, you may minimize this panel as this panel will appear empty to you.
+Refer to <<Commands for Students>> to find out what you can do in _BookInventory_.
+
+=== Command Panel
+
+This design will come in handy if you are new to _BookInventory_ or a non-tech savvy individual.
+Simply click on a command and the Command Box will display the command.
+
+.Command Panel
+image::CommandPanel.png[width="400", align="left"]
 
 * A command panel is located at the right side of the application. This is suited for beginner users.
 * To select a command, click on any command.
@@ -86,26 +125,8 @@ image::command_panel_result.png[align="left"]
 +
 Note: For advanced users, you are still able to press kbd:[tab] to cycle through the ISBN.
 
-[[Features]]
-== Features
-
-====
-*Full Screen Mode*
-
-Hit F11 to toggle between full-screen mode and windowed mode. A full-screen toggle button can also be found under the drop-down menu of the top bar under “Window”.
-
-====
-*Command Format*
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Harry Potter`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Harry Potter t/cs2113t` or as `n/Harry Potter`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Items in brackets are *required* and always *private* e.g. `q/QUANTITY (c/COST)`
-* Items in arrow brackets are commands that are commands available depending on the user e.g. <Owner> means command only usable by Owner.
-===
-
 // tag::tabfeature[]
-=== Cycling through existing Isbn: kbd:[Tab]
+==== Cycling through existing Isbn: kbd:[Tab]
 
 You can auto-fill the Isbn field with existing ones in the Inventory to save the hassle having to type the entire Isbn of a book. +
 Format: kbd:[Tab]
@@ -123,6 +144,10 @@ E.g. `sell i/9782123456803`
 * `sell i/777` +
 kbd:[Tab] (does not complete the `Isbn` field as inventory does not contains books with Isbn starting with `777`)
 // end::tabfeature[]
+
+=== Full Screen Mode
+
+Hit F11 to toggle between full-screen mode and windowed mode. A full-screen toggle button can also be found under the drop-down menu of the top bar under “Window”.
 
 == Commands for Students
 
