@@ -9,13 +9,16 @@
 public class ChangeStatusCommand extends Command {
     public static final String COMMAND_WORD = "changeStatus";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status of the item identified "
-            + "by the name of the item. "
+            + "by the name of the item.\n"
+            + "The status field can only take the values Ready or Faulty\n"
+            + "Changing the status to On_Loan is not allowed\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME  "
+            + PREFIX_NAME + "NAME "
             + PREFIX_QUANTITY + "QUANTITY "
             + PREFIX_ORIGINAL_STATUS + "ORIGINAL STATUS "
-            + PREFIX_NEW_STATUS + "NEW STATUS "
+            + PREFIX_NEW_STATUS + "NEW STATUS \n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Arduino "
             + PREFIX_QUANTITY + "5 "
             + PREFIX_ORIGINAL_STATUS + "Ready "
             + PREFIX_NEW_STATUS + "Faulty";
@@ -35,6 +38,11 @@ public class ChangeStatusCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Item> lastShownList = model.getFilteredItemList();
 
         index = getIndex(lastShownList, changeStatusDescriptor);
@@ -51,7 +59,7 @@ public class ChangeStatusCommand extends Command {
 
     }
 
-    private static Index getIndex(List<Item> lastShownList, ChangeStatusDescriptor changeStatusDescriptor)
+    public Index getIndex(List<Item> lastShownList, ChangeStatusDescriptor changeStatusDescriptor)
             throws CommandException {
         Index index;
         int counter = 0;
@@ -68,8 +76,8 @@ public class ChangeStatusCommand extends Command {
      * Creates and returns a {@code Item} with the details of {@code itemToUpdate}
      * edited with {@code changeStatusDescriptor}.
      */
-    private static Item createUpdatedItem(Item itemToUpdate,
-                                          ChangeStatusDescriptor changeStatusDescriptor) throws CommandException {
+    public Item createUpdatedItem(Item itemToUpdate,
+                                   ChangeStatusDescriptor changeStatusDescriptor) throws CommandException {
         assert itemToUpdate != null;
         Status currentStatus = itemToUpdate.getStatus();
         Status updatedStatus;
@@ -111,7 +119,7 @@ public class ChangeStatusCommand extends Command {
         updatedStatus = new Status(updatedReady, updatedOnLoan, updatedFaulty);
 
         return new Item(itemToUpdate.getName(), itemToUpdate.getQuantity(), itemToUpdate.getMinQuantity(),
-                updatedStatus, itemToUpdate.getTags());
+                itemToUpdate.getLoststatus(), updatedStatus, itemToUpdate.getTags());
     }
     /**
      * Stores the details to update the item with.
@@ -168,6 +176,181 @@ public class ChangeStatusCommand extends Command {
             return updatedStatus;
         }
 
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            if (!(other instanceof ChangeStatusDescriptor)) {
+                return false;
+            }
+
+            ChangeStatusDescriptor otherItem = (ChangeStatusDescriptor) other;
+            return (otherItem.getName().equals(this.getName())
+                    && otherItem.getQuantity().equals(this.getQuantity())
+                    && otherItem.getInitialStatus().equals(this.getInitialStatus())
+                    && otherItem.getUpdatedStatus().equals(this.getUpdatedStatus()));
+        }
+
+    }
+}
+```
+###### \java\seedu\address\logic\commands\DeleteLoanListCommand.java
+``` java
+
+/**
+ * Deletes an entry in the loan list base on the Index
+ */
+
+public class DeleteLoanListCommand extends Command {
+    public static final String COMMAND_WORD = "deleteLoanList";
+    public static final String MESSAGE_SUCCESS = "Loan list entry has been deleted";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the loan list entry identified "
+            + "by the index number used in the display of the loan list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_EMPTY = "Loan list is currently empty";
+    public static final String MESSAGE_INVALID_INDEX = "The input index is invalid";
+
+    private final Index index;
+
+    public DeleteLoanListCommand(Index index) {
+        this.index = index;
+    }
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
+        if (!MainApp.getLoanListFile().exists()) {
+            throw new CommandException(MESSAGE_EMPTY);
+        }
+        File loanListFile = MainApp.getLoanListFile();
+        try {
+            deleteLoanList(model, history, loanListFile);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
+    }
+    /**
+     * Deletes an entry in the loan list base on the Index
+     */
+    public void deleteLoanList(Model model, CommandHistory history, File loanListFile) throws Exception {
+
+        JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        XmlAdaptedLoanList xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
+                .unmarshal(loanListFile);
+        ArrayList<XmlAdaptedLoanerDescription> loanList = xmlAdaptedLoanList.getLoanList();
+
+        if (index.getOneBased() > loanList.size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX);
+        }
+
+        updateStatus(model, history, loanList.get(index.getZeroBased()));
+
+        loanList.remove(index.getZeroBased());
+
+        LoanListCommand.updateXmlLoanListFile(new XmlAdaptedLoanList(loanList), loanListFile);
+    }
+    /**
+     * Changes the status from Ready to On_Loan
+     */
+    private void updateStatus(Model model, CommandHistory history, XmlAdaptedLoanerDescription loanerDescription)
+            throws CommandException {
+        ChangeStatusCommand.ChangeStatusDescriptor changeStatusDescriptor =
+                new ChangeStatusCommand.ChangeStatusDescriptor(new Name(loanerDescription.getItemName()),
+                        loanerDescription.getQuantity(), "On_Loan", "Ready");
+        ChangeStatusCommand changeStatusCommand = new ChangeStatusCommand(changeStatusDescriptor);
+        changeStatusCommand.execute(model, history);
+    }
+}
+```
+###### \java\seedu\address\logic\commands\LoanListCommand.java
+``` java
+
+/**
+ * Creates a loan list, and updates the status from Ready to On_Loan
+ */
+
+public class LoanListCommand extends Command {
+    public static final String COMMAND_WORD = "loanList";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a loan list. \n"
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_QUANTITY + "QUANTITY "
+            + PREFIX_LOANER + "LOANER\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Arduino "
+            + PREFIX_QUANTITY + "20 "
+            + PREFIX_LOANER + "KinWhye";
+
+    public static final String MESSAGE_SUCCESS = "Loan list created";
+
+    private final LoanerDescription loaner;
+
+    public LoanListCommand(LoanerDescription loaner) {
+        this.loaner = loaner;
+    }
+    /**
+     * Updates the XmlLoanListFile
+     */
+
+    public static void updateXmlLoanListFile(XmlAdaptedLoanList xmlAdaptedLoanList, File loanListFile)
+            throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(XmlAdaptedLoanList.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        jaxbMarshaller.marshal(xmlAdaptedLoanList, System.out);
+        jaxbMarshaller.marshal(xmlAdaptedLoanList, loanListFile);
+    }
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
+        updateStatus(model, history);
+        try {
+            updateLoanList(MainApp.getLoanListFile(), loaner);
+        } catch (JAXBException e) {
+            System.out.println(e.toString());
+        }
+
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+    /**
+     * Updates the XmlAdaptedLoanList, then updates the XmlLoanListFile
+     */
+    public void updateLoanList(File loanListFile, LoanerDescription loaner) throws JAXBException {
+        XmlAdaptedLoanerDescription toAdd = new XmlAdaptedLoanerDescription(loaner);
+        JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
+        XmlAdaptedLoanList xmlAdaptedLoanList = new XmlAdaptedLoanList();
+        if (loanListFile.exists()) {
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
+                    .unmarshal(loanListFile);
+        }
+        xmlAdaptedLoanList.addLoaner(toAdd);
+        updateXmlLoanListFile(xmlAdaptedLoanList, loanListFile);
+    }
+    /**
+     * Changes the status from On_Loan to Ready
+     */
+    public void updateStatus(Model model, CommandHistory history) throws CommandException {
+        ChangeStatusCommand.ChangeStatusDescriptor changeStatusDescriptor =
+                new ChangeStatusCommand.ChangeStatusDescriptor(loaner.getItemName(),
+                        loaner.getQuantity().toInteger(), "Ready", "On_Loan");
+        ChangeStatusCommand changeStatusCommand = new ChangeStatusCommand(changeStatusDescriptor);
+        changeStatusCommand.execute(model, history);
     }
 }
 ```
@@ -182,8 +365,13 @@ public class StatusCommand extends Command {
     public static final String COMMAND_WORD = "status";
     public static final String MESSAGE_SUCCESS = "Items listed according to status";
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         ArrayList<SimpleItem> readyItems = new ArrayList<>();
         ArrayList<SimpleItem> onLoanItems = new ArrayList<>();
         ArrayList<SimpleItem> faultyItems = new ArrayList<>();
@@ -261,8 +449,62 @@ public class StatusCommand extends Command {
 
 }
 ```
+###### \java\seedu\address\logic\commands\ViewLoanListCommand.java
+``` java
+
+/**
+ * Lists all the entries in the loan list to the user.
+ */
+
+public class ViewLoanListCommand extends Command {
+    public static final String COMMAND_WORD = "viewLoanList";
+    public static final String MESSAGE_SUCCESS = "Loan list displayed";
+    public static final String MESSAGE_EMPTY = "Loan list is currently empty";
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
+        if (!MainApp.getLoanListFile().exists()) {
+            throw new CommandException(MESSAGE_EMPTY);
+        }
+        String messageOutput = getMessageOutput(MainApp.getLoanListFile());
+        return new CommandResult(messageOutput);
+    }
+
+    public String getMessageOutput(File loanListFile) throws CommandException {
+        try {
+            Integer counter = 1;
+            String messageOutput = new String();
+            messageOutput += MESSAGE_SUCCESS + "\n";
+            JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            XmlAdaptedLoanList xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
+                    .unmarshal(loanListFile);
+            if (xmlAdaptedLoanList.getLoanList().size() == 0) {
+                throw new CommandException(MESSAGE_EMPTY);
+            }
+            for (XmlAdaptedLoanerDescription loanerDescription : xmlAdaptedLoanList.getLoanList()) {
+                messageOutput += counter + ". ";
+                messageOutput += loanerDescription.getLoanerName() + ": ";
+                messageOutput += loanerDescription.getItemName() + " ";
+                messageOutput += loanerDescription.getQuantity() + "\n";
+                counter++;
+            }
+            return messageOutput;
+        } catch (JAXBException e) {
+            System.out.println(e.toString());
+        }
+        return null;
+    }
+}
+```
 ###### \java\seedu\address\logic\parser\ChangeStatusCommandParser.java
 ``` java
+
 /**
  * Parses input arguments and creates a new ChangeStatusCommand object
  */
@@ -306,6 +548,110 @@ public class ChangeStatusCommandParser implements Parser<ChangeStatusCommand> {
     }
 }
 ```
+###### \java\seedu\address\logic\parser\DeleteLoanListCommandParser.java
+``` java
+
+/**
+ * Parses input arguments and creates a new DeleteLoanListCommand object
+ */
+public class DeleteLoanListCommandParser implements Parser<DeleteLoanListCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the DeleteLoanListCommand
+     * and returns an DeleteLoanListCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+
+    public DeleteLoanListCommand parse(String args) throws ParseException {
+        try {
+            Index index = ParserUtil.parseIndex(args);
+            return new DeleteLoanListCommand(index);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLoanListCommand.MESSAGE_USAGE), pe);
+        }
+    }
+}
+```
+###### \java\seedu\address\logic\parser\LoanListCommandParser.java
+``` java
+
+/**
+ * Parses input arguments and creates a new LoanListCommand object
+ */
+public class LoanListCommandParser implements Parser<LoanListCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the LoanListCommand
+     * and returns an LoanListCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+
+    public LoanListCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_LOANER);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_LOANER)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoanListCommand.MESSAGE_USAGE));
+        }
+        Name itemName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name loanerName = ParserUtil.parseName(argMultimap.getValue(PREFIX_LOANER).get());
+        Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
+        return new LoanListCommand(new LoanerDescription(itemName, loanerName, quantity));
+    }
+
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+}
+```
+###### \java\seedu\address\model\item\LoanerDescription.java
+``` java
+
+/**
+ * Represents a loaner in the loan list.
+ */
+
+public class LoanerDescription {
+    private final Name itemName;
+    private final Name loanerName;
+    private final Quantity quantity;
+
+    public LoanerDescription(Name itemName, Name loanerName, Quantity quantity) {
+        requireAllNonNull(itemName, loanerName, quantity);
+        this.itemName = itemName;
+        this.loanerName = loanerName;
+        this.quantity = quantity;
+    }
+    public LoanerDescription(LoanerDescription loaner) {
+        itemName = loaner.getItemName();
+        loanerName = loaner.getLoanerName();
+        quantity = loaner.getQuantity();
+    }
+    public Name getItemName() {
+        return itemName;
+    }
+
+    public Quantity getQuantity() {
+        return quantity;
+    }
+    public Name getLoanerName() {
+        return loanerName;
+    }
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getLoanerName())
+                .append(" loanerName: ")
+                .append(getLoanerName())
+                .append(" itemName: ")
+                .append(getItemName())
+                .append(" Quantity: ")
+                .append(getQuantity());
+        return builder.toString();
+    }
+}
+```
 ###### \java\seedu\address\model\item\SimpleItem.java
 ``` java
 
@@ -330,10 +676,28 @@ public class SimpleItem {
         return quantity;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof SimpleItem)) {
+            return false;
+        }
+
+        SimpleItem otherItem = (SimpleItem) other;
+        return (otherItem.getName().toString().equals(getName().toString())
+                && otherItem.getQuantity().toString().equals(getQuantity().toString()));
+    }
 }
 ```
 ###### \java\seedu\address\model\item\Status.java
 ``` java
+
+/**
+ * Represents an Item's status in the stock list.
+ */
 public class Status {
     public static final int STATUS_READY = 0;
     public static final int STATUS_ON_LOAN = 1;
@@ -374,4 +738,87 @@ public class Status {
     }
 }
 
+```
+###### \java\seedu\address\storage\XmlAdaptedLoanerDescription.java
+``` java
+
+/**
+ * JAXB-friendly version of the LoanerDescription.
+ */
+@XmlRootElement(name = "Loaner")
+@XmlAccessorType(XmlAccessType.FIELD)
+
+public class XmlAdaptedLoanerDescription {
+    private String itemName;
+    private String loanerName;
+    private Integer quantity;
+
+    public XmlAdaptedLoanerDescription() {
+
+    }
+    public XmlAdaptedLoanerDescription(String itemName, String loanerName, Integer quantity) {
+        this.itemName = itemName;
+        this.loanerName = loanerName;
+        this.quantity = quantity;
+    }
+    public XmlAdaptedLoanerDescription(LoanerDescription loaner) {
+        itemName = loaner.getItemName().toString();
+        loanerName = loaner.getLoanerName().toString();
+        quantity = loaner.getQuantity().toInteger();
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getLoanerName() {
+        return loanerName;
+    }
+
+    public void setLoanerName(String loanerName) {
+        this.loanerName = loanerName;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+}
+```
+###### \java\seedu\address\storage\XmlAdaptedLoanList.java
+``` java
+
+/**
+ * JAXB-friendly loan list.
+ */
+
+@XmlRootElement(name = "LoanList")
+@XmlAccessorType(XmlAccessType.FIELD)
+
+public class XmlAdaptedLoanList {
+    @XmlElement(name = "Loaner")
+    private ArrayList<XmlAdaptedLoanerDescription> xmlAdaptedLoanList = null;
+
+    public XmlAdaptedLoanList() {
+        xmlAdaptedLoanList = new ArrayList<>();
+    }
+    public XmlAdaptedLoanList(ArrayList<XmlAdaptedLoanerDescription> xmlAdaptedLoanList) {
+        this.xmlAdaptedLoanList = xmlAdaptedLoanList;
+    }
+    public ArrayList<XmlAdaptedLoanerDescription> getLoanList() {
+        return xmlAdaptedLoanList;
+    }
+
+    public void addLoaner(XmlAdaptedLoanerDescription toAdd) {
+        xmlAdaptedLoanList.add(toAdd);
+    }
+
+}
 ```

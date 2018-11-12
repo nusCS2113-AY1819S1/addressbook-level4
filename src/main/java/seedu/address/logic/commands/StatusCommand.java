@@ -97,7 +97,7 @@ public class StatusCommand extends Command {
         for (SimpleItem simpleItem : faultyItems) {
             counter++;
             messageOutput += simpleItem.getName() + ": " + simpleItem.getQuantity().toString();
-            if (counter != onLoanItems.size()) {
+            if (counter != faultyItems.size()) {
                 messageOutput += ", ";
             }
         }

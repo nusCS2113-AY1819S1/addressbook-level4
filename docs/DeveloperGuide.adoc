@@ -344,9 +344,10 @@ Step 2. The `save` command calls `Model#saveStockList()`, which initiates a `sav
 
 Step 3. The `handleSaveStockListVersionEvent` handler calls the `saveStockListVersion()` method from the `StorageManager` class.
 
-The following sequence diagram shows how the undo operation works:
+The following sequence diagram shows how the save operation works:
 
 image::SaveCommandSequenceDiagram.png[width="800"]
+.Figure 10. How save/open operation works
 
 Step 4. The `ReadOnlyStockList` is saved as an xml file.
 
@@ -1215,7 +1216,7 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Tag item
+=== Use case: List items by tag
 
 *MSS*
 
@@ -1229,18 +1230,79 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 2a. The item list is empty
++
+[none]
+** 2a1. StockList shows an error message.
 +
 Use case ends.
 
-* 3a. The given tag is invalid.
+* 3a. The given tag is invalid
 +
 [none]
 ** 3a1. StockList shows an error message.
 +
 Use case resumes at step 2.
 
-// tag::accountUseCase[]
+[discrete]
+=== Use case: Add tags to item
+
+*MSS*
+
+1. User requests to list all items
+2. StockList shows a list of items
+3. User requests to add tags to an item
+4. Stock list adds the inputted tags to the item
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The index of item is wrong.
++
+[none]
+** 2a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+* 3a. The given tag is invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Delete some tags of item
+
+*MSS*
+
+1. User requests to list all items
+2. StockList shows a list of items
+3. User requests to delete some tags of an item
+4. Stock list deletes the inputted tags of the item
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The index of item is wrong.
++
+[none]
+** 2a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+=======
+* 3a. The given tag does not exist.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case ends.
+
 [discrete]
 === Use case: Lost item
 
@@ -1303,6 +1365,7 @@ Use case resumes at step 2.
 +
 Use case ends.
 
+// tag::accountUseCase[]
 [discrete]
 === Use case: Login
 
