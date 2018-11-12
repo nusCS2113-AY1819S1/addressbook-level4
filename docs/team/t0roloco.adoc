@@ -63,4 +63,4 @@ https://github.com/CS2113-AY1819S1-T13-1/main/blob/master/docs/UserGuide.adoc#lo
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-
+https://github.com/T0roloco/main/blob/master/docs/DeveloperGuide.adoc#finding-persons-by-name-address-and-phone-number[Contributed to the manual testing]
