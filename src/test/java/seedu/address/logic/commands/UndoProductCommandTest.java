@@ -36,12 +36,12 @@ public class UndoProductCommandTest {
     @Test
     public void execute() {
         // multiple undoable states in model
-        expectedModel.undoAddressBook();
+        expectedModel.undoProductDatabase();
         assertCommandSuccess(new UndoProductCommand(), model, commandHistory,
                 UndoProductCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single undoable state in model
-        expectedModel.undoAddressBook();
+        expectedModel.undoProductDatabase();
         assertCommandSuccess(new UndoProductCommand(), model, commandHistory,
                 UndoProductCommand.MESSAGE_SUCCESS, expectedModel);
 
