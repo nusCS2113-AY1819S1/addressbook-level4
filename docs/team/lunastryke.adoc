@@ -14,8 +14,6 @@ This project portfolio documents my role in the CS2113T module project. My main 
 As part of the module, my teammates and I collaborated to develop a drink management application - Drink I/O. Drink I/O is targeted at small drink distribution companies and provides inventory management and financial tools. Users interact with the app using CLI, and it has a GUI created with JavaFX. This project is written in Java and has approximately <To be filled> kLoC.
 
 
-*TO BE CHANGED*
-
 == Summary of contributions
 
 * *Major enhancement*: *Added Batch List and Batch Handling functionality* +
@@ -79,57 +77,10 @@ include::../UserGuide.adoc[tag=viewDrinkDetails]
 |===
 
 
+include::../DeveloperGuide.adoc[tag=ui]
 
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=inventory]
 
 
-[underline]#testing#
 
-[white]#DRINK I/O#
-
-[silver]#DRINK I/O#
-
-[gray]#DRINK I/O#
-
-[black]#DRINK I/O#
-
-[red]#DRINK I/O#
-
-[maroon]#DRINK I/O#
-
-[yellow]#DRINK I/O#
-
-[olive]#DRINK I/O#
-
-[lime]#DRINK I/O#
-
-[green]#DRINK I/O#
-
-[aqua]#DRINK I/O#
-
-[teal]#DRINK I/O#
-
-[blue]#DRINK I/O#
-
-[navy]#DRINK I/O#
-
-[fuchsia]#DRINK I/O#
-
-[purple]#DRINK I/O#
-
-<<DRINK I/O>>
-
-Bold:
-
-[Blue]*DRINK I/O*
-
-Even a mixture of bold italic colour
-
-[blue]#DRINK [red]*I*/[yellow]*O*#
-
-Chars: n__i__**b**++m++[red]##r##
 

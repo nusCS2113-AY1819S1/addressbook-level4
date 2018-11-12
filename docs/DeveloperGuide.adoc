@@ -159,6 +159,7 @@ Note how the event is propagated through the `EventsCenter` to the `Storage` and
 
 The sections below give more details of each component.
 
+// tag::ui[]
 [[Design-Ui]]
 === UI component
 
@@ -167,7 +168,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `InventoryListPanel`, `BatchListPanel`, `StatusBarFooter`, `DrinkDetailPane` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -176,6 +177,8 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+
+// end::ui[]
 
 [[Design-Logic]]
 === Logic component
@@ -460,8 +463,84 @@ image::LoginUMLDiagram/Logic-UML-design-ReadLoginInfoList.png[width="800" height
 ** Cons: It has many rules to set before implementation.
 //end::login[]
 
+// tag::inventory[]
+=== Inventory Management
 
+In Drink I/O, inventory is managed in the model, through the use of Drink Objects with the attributes `name` , `price` , `quantity` , `tags` , `UniqueBatchList` . In Drink I/O, drink purchases are stored in `Batch` objects which are made unique by their `BatchDate` attribute.
+These `Batch` objects contain a `BatchId` , a `BatchQuantity` and a `BatchDate` attribute and are stored in the `UniqueBatchList` of the relevant drink.
 
+==== Buying a drink with `buy n/DRINK_NAME q/QUANTITY`
+A user may enter a buy command with the above parameters to record a purchase of drinks.
+
+The following is the sequence of steps when the user enters an buy command with specified name and quantity:
+
+Step 1. User enters a buy command (i.e. `buy` `n/Coca cola` `q/400`).
+
+Step 2. The appropriate parser parses the name and quantity parameters and assigns the `name` and `quantity` variables to the `buy` command.
+
+Step 3. The buy command is executed, and a new `Transaction` object is created with the `name` , `quantity` and a `transactionType` variable. This `Transaction` object is then passed to the StockTakerModelManager.
+
+Step 4. In the StockTakerModelManager, `recordTransaction(Transaction)` is used to record the transaction and  `increaseDrinkQuantity(Name, Quantity)` is called to update the change in quantity in the inventory list.
+
+Step 5. The inventory list then passes the `name` and `quantity` variables down to the `UniqueDrinkList` which calls the `increaseQuantity(Quantity)` method in the relevant `Drink` object.
+
+Step 6. In the `Drink` object, a new `Batch` object is created with the `name` and `quantity` variables and passed to the Drink's  `UniqueBatchList` through the `addBatch` method.
+
+Step 7. In the `UniqueBatchList` , the `Batch` that was passed down would be checked against the other `Batch` objects in the list for uniqueness based on its date. If it has a unique date, a new `Batch` would be created and stored in the `UniqueBatchList`, else the currently existing `Batch` object in the `UniqueBatchList` with the same date will have its `Quantity` attribute incremented by the `quantity` value of the `Batch` object added.
+
+Step 8. The `totalQuantity` attribute of the `UniqueBatchList` is then updated by looping through the batches in the list, and is handed up to the `Drink` object which updates its `Quantity` attribute with the value of the `totalQuantity` attribute.
+
+.Sequence Diagram of BuyCommand to StockTakerModelManager
+image::BuyCommandSequenceDiagram1.png[width="600"]
+
+.Sequence Diagram of StockTakerModelManager to Batch
+image::BuyCommandSequenceDiagram2.png[width="800"]
+
+==== Selling a drink
+
+To facilitate sales of drinks from the stock of the company, sales of drinks from the inventory are conducted with the command `sell` `n/DRINK_NAME` `q/QUANTITY`
+
+A user may enter a buy command with the above parameters to record a purchase of drinks.
+
+The following is the sequence of steps when the user enters an buy command with specified name and quantity:
+
+Step 1. User enters a sell command (i.e. `sell` `n/Coca cola` `q/400`).
+
+Step 2. The appropriate parser parses the name and quantity parameters and assigns the `name` and `quantity` variables to the `sell` command.
+
+Step 3. The sell command is executed, and a new `Transaction` object is created with the `name` , `quantity` and a `transactionType` variable. This `Transaction` object is then passed to the StockTakerModelManager.
+
+Step 4. In the StockTakerModelManager, `recordTransaction(Transaction)` is used to record the transaction and  `decreaseQuantity(Name, Quantity)` is called to update the change in quantity in the inventory list.
+
+Step 5. The inventory list then passes the `name` and `quantity` variables down to the `UniqueDrinkList` which calls the `decreaseQuantity(Quantity)` method in the relevant `Drink` object.
+
+Step 6. In the `Drink` object, `updateBatchTransaction(Quantity)` is called and the `quantity` variable is passed down to the `UniqueBatchList`.
+
+Step 7. In the `UniqueBatchList` , `quantity` passed down will be checked against the `totalQuantity` variable. If `quantity` is more than `totalQuantity`, a InsufficientQuantityException will be thrown which would be handled in the `SellDrinkCommand` class. Else, the `updateBatchTransaction` would loop through the `UniqueBatchList` and decrement the quantity of the individual batches starting from the one with the oldest date.
+
+Step 8. The `totalQuantity` attribute of the `UniqueBatchList` is then updated by looping through the batches in the list, and is handed up to the `Drink` object which updates its `Quantity` attribute with the value of the `totalQuantity` attribute.
+
+.Sequence Diagram of SellCommand to StockTakerModelManager
+image::SellCommandSequenceDiagram1.png[width="600"]
+
+.Sequence Diagram of StockTakerModelManager to Batch
+image::SellCommandSequenceDiagram2.png[width="800"]
+
+==== Design Considerations
+Aspect: Facilitating the Buy and Sell Commands
+
+* Current Implementation: Sorting the `UniqueBatchList` by `BatchDate` using a Custom Comparator.
+** Pros:
+*** Makes implementation of methods such as `addBatch` , `updateBatchTransaction` , `getEarliestBatchDate` , `getOldestBatchDate` much easier as `Batch` objects are already in `date` order.
+*** Easy to modify, allowing users to sort batches based on `quantity` by just editing the Custom Comparator.
+*** Allows batches shown in the BatchListPanel to be easily ordered based on date.
+** Cons:
+*** When users replace the Custom Comparator with another comparator, methods such as `getEarliestBatchDate` will have to be edited as they  depend on the `UniqueBatchList` being in date-sorted order.
+* Alternative: Loop through all batches in the `UniqueBatchList` for all methods.
+** Pros: When the `UniqueBatchList` is sorted differently, methods do not have to be rewritten.
+** Cons: May have time performance issues if there are many batches.
+
+// end::inventory[]
 
 === Logging
 
