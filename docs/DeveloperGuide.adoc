@@ -620,7 +620,7 @@ image::ReminderSequenceDiagram.png[width="1000"]
 ** Pros: This makes the 2 panes take up only half the size of normal panes, reducing the clutter on the screen. Since there isn't a need for too many `Todo` and `Reminder` to be displayed concurrently, a small pane is useable. Furthermore, the individual panes are also scrollable and resizeable.
 ** Cons: This results in a smaller pane for each component, which may cause them to be overlooked.
 
-* **Alternative 2: A command to switch between the `Todo` and `Reminder` panes
+* **Alternative 2:** A command to switch between the `Todo` and `Reminder` panes
 ** Pros: More space is catered towards both panes, allowing for the display of more information.
 ** Cons: Concurrent viewing of `Todo` and `Reminder` will not be possible.
 // end::reminder[]
