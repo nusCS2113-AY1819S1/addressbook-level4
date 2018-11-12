@@ -271,7 +271,6 @@ Examples: +
 
 * `find Alex` +
 * `export alex.xml`
-// TODO: add screenshots
 //1) `find Alex`
 
 //Find the person(s) you want to export. +
@@ -296,8 +295,11 @@ Examples: +
 ====
 Your team members can import the contact details to their JitHub. Please refer to <<import>>.
 ====
+// TODO: screenshot of success message
 // end::export[]
 
+// tag::exportall[]
+[[exportall]]
 === Exporting all contacts : `exportall`
 
 Export the name, phone, address and email of all persons in the addressbook under the specified filetype. +
@@ -306,13 +308,15 @@ Format: `exportall FILETYPE`
 Examples:
 
 * `exportall csv`
-* `exportall vcf` [coming in v1.4]
+* `exportall vcf` [coming in v2.0]
 
 [NOTE]
 ====
-1.  The file will be located in `/data/addressbook.csv`.
-2.  This command overwrites the previous `/data/addressbook.csv`.
+1.  The file will be located in `<DIRECTORY OF YOUR JAR FILE>/data/jithub.csv`.
+2.  This command overwrites the previous `<DIRECTORY OF YOUR JAR FILE>/data/jithub.csv`.
 ====
+// TODO: screenshot of success message
+// end::exportall[]
 
 // tag::import[]
 [[import]]
