@@ -150,7 +150,8 @@ public class ShortlistCandidateCommandTest {
 
 
     @Test
-    public void execute_invalidIndexOfJobOfferInFilteredJobListAfterSelectingCompany_throwsCommandException() {
+    public void execute_invalidIndexOfJobOfferInFilteredJobListAfterSelectingCompany_throwsCommandException()
+            throws ParseException {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalCompanyBook(), new UserPrefs());
         assertCommandSuccess(new ShortlistCandidateInitializationCommand(), model, commandHistory,
                 ShortlistCandidateInitializationCommand.MESSAGE_ENTERING_SHORTLIST_PROCESS

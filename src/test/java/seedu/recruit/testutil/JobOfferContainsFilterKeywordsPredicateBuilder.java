@@ -12,18 +12,18 @@ import java.util.HashMap;
 import java.util.List;
 
 import seedu.recruit.commons.core.Messages;
-import seedu.recruit.logic.commands.FindCandidateCommand;
+import seedu.recruit.logic.commands.FilterCandidateCommand;
 import seedu.recruit.logic.parser.ArgumentMultimap;
 import seedu.recruit.logic.parser.ArgumentTokenizer;
 import seedu.recruit.logic.parser.exceptions.ParseException;
-import seedu.recruit.model.joboffer.JobOfferContainsFindKeywordsPredicate;
+import seedu.recruit.model.joboffer.JobOfferContainsFilterKeywordsPredicate;
 
 /**
- * A utility class that helps with building predicate for {@Code JobOfferContainsFindKeywordsPredicate}
+ * A utility class that helps with building predicate for {@Code JobOfferContainsFilterKeywordsPredicate}
  * from a string of input arguments
  */
 
-public class JobOfferContainsFindKeywordsPredicateBuilder {
+public class JobOfferContainsFilterKeywordsPredicateBuilder {
 
     public static final String KEY_NAME = "CompanyName";
     public static final String KEY_JOB = "Job";
@@ -35,13 +35,13 @@ public class JobOfferContainsFindKeywordsPredicateBuilder {
 
 
     private HashMap<String, List<String>> keywordsList = new HashMap<>();
-    private JobOfferContainsFindKeywordsPredicate jobOfferPredicate;
+    private JobOfferContainsFilterKeywordsPredicate jobOfferPredicate;
 
-    public JobOfferContainsFindKeywordsPredicateBuilder(String userInput) throws ParseException {
+    public JobOfferContainsFilterKeywordsPredicateBuilder(String userInput) throws ParseException {
         this.jobOfferPredicate = preparePredicate(userInput);
     }
 
-    public JobOfferContainsFindKeywordsPredicate getJobOfferPredicate() {
+    public JobOfferContainsFilterKeywordsPredicate getJobOfferPredicate() {
         return jobOfferPredicate;
     }
 
@@ -51,9 +51,9 @@ public class JobOfferContainsFindKeywordsPredicateBuilder {
 
     /**
      * Parses the @param userInput and
-     * @return CompanyContainsFindKeywordsPredicate as a predicate
+     * @return CompanyContainsFilterKeywordsPredicate as a predicate
      */
-    public JobOfferContainsFindKeywordsPredicate preparePredicate (String userInput) throws ParseException {
+    public JobOfferContainsFilterKeywordsPredicate preparePredicate (String userInput) throws ParseException {
         requireNonNull(userInput);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_COMPANY_NAME, PREFIX_JOB, PREFIX_GENDER, PREFIX_SALARY,
@@ -80,9 +80,9 @@ public class JobOfferContainsFindKeywordsPredicateBuilder {
 
         if (keywordsList.isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindCandidateCommand.MESSAGE_USAGE));
+                    FilterCandidateCommand.MESSAGE_USAGE));
         }
 
-        return new JobOfferContainsFindKeywordsPredicate(keywordsList);
+        return new JobOfferContainsFilterKeywordsPredicate(keywordsList);
     }
 }

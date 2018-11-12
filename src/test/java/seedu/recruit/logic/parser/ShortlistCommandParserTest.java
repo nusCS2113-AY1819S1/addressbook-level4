@@ -81,8 +81,8 @@ public class ShortlistCommandParserTest {
 
     @Test
     public void parse_invalidArgsForFindCompanyCommand_throwsParseException() {
-        assertFindCompanyCommandParseFailure(parser, " C/", MESSAGE_INVALID_COMMAND_FORMAT
-                + FindCompanyCommand.MESSAGE_USAGE);
+        assertFindCompanyCommandParseFailure(parser, " C/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                 FindCompanyCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -94,8 +94,8 @@ public class ShortlistCommandParserTest {
 
     @Test
     public void parse_invalidArgsForFilterCompanyCommand_throwsParseException() {
-        assertFilterCompanyCommandParseFailure(parser, " C/", MESSAGE_INVALID_COMMAND_FORMAT
-                + FilterCompanyCommand.MESSAGE_USAGE);
+        assertFilterCompanyCommandParseFailure(parser, " C/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                 FilterCompanyCommand.MESSAGE_USAGE));
     }
 
     // ================================ 3RD STAGE: SELECT JOB ===================================== //
@@ -162,8 +162,8 @@ public class ShortlistCommandParserTest {
 
     @Test
     public void parse_invalidArgsForFindCandidateCommand_throwsParseException() {
-        assertFindCandidateCommandParseFailure(parser, " N/abc", MESSAGE_INVALID_COMMAND_FORMAT
-                + FindCandidateCommand.MESSAGE_USAGE);
+        assertFindCandidateCommandParseFailure(parser, " N/abc", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                 FindCandidateCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -176,7 +176,7 @@ public class ShortlistCommandParserTest {
     @Test
     public void parse_invalidArgsForFilterCandidateCommand_throwsParseException() {
         assertFilterCandidateCommandParseFailure(parser, " N/abc",
-                MESSAGE_INVALID_COMMAND_FORMAT + FilterCandidateCommand.MESSAGE_USAGE);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCandidateCommand.MESSAGE_USAGE));
     }
 
     // ================================ LAST STAGE: CONFIRMATION ===================================== //

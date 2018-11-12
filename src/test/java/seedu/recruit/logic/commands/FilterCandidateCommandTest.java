@@ -23,13 +23,13 @@ import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
-import seedu.recruit.model.candidate.CandidateContainsFindKeywordsPredicate;
-import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
+import seedu.recruit.model.candidate.CandidateContainsFilterKeywordsPredicate;
+import seedu.recruit.testutil.CandidateContainsFilterKeywordsPredicateBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCandidateCommand}.
  */
-public class FindCandidateCommandTest {
+public class FilterCandidateCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -37,39 +37,41 @@ public class FindCandidateCommandTest {
     @Test
     @Ignore
     public void equals() throws ParseException {
-        CandidateContainsFindKeywordsPredicate firstPredicate =
-                new CandidateContainsFindKeywordsPredicateBuilder("n/first").getCandidatePredicate();
-        CandidateContainsFindKeywordsPredicate secondPredicate =
-                new CandidateContainsFindKeywordsPredicateBuilder("n/second").getCandidatePredicate();
+        CandidateContainsFilterKeywordsPredicate firstPredicate =
+                new CandidateContainsFilterKeywordsPredicateBuilder("n/first").getCandidatePredicate();
+        CandidateContainsFilterKeywordsPredicate secondPredicate =
+                new CandidateContainsFilterKeywordsPredicateBuilder("n/second").getCandidatePredicate();
 
-        FindCandidateCommand findFirstCommand = new FindCandidateCommand(firstPredicate);
-        FindCandidateCommand findSecondCommand = new FindCandidateCommand(secondPredicate);
+        FilterCandidateCommand filterFirstCommand = new FilterCandidateCommand(firstPredicate);
+        FilterCandidateCommand filterSecondCommand = new FilterCandidateCommand(secondPredicate);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(filterFirstCommand.equals(filterFirstCommand));
 
         // same values -> returns true
-        FindCandidateCommand findFirstCommandCopy = new FindCandidateCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        FilterCandidateCommand filterFirstCommandCopy = new FilterCandidateCommand(firstPredicate);
+        assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(filterFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(filterFirstCommand.equals(null));
 
         //different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(filterFirstCommand.equals(filterSecondCommand));
     }
 
     @Test
     @Ignore
     public void execute_zeroKeywords_noPersonFound() throws ParseException {
+        //String expectedMessage = "Candidate Book showing: filterc  \n"
+        //  + String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                FindCandidateCommand.MESSAGE_USAGE);
-        CandidateContainsFindKeywordsPredicate predicate =
-                new CandidateContainsFindKeywordsPredicateBuilder(" ").getCandidatePredicate();
-        FindCandidateCommand command = new FindCandidateCommand(predicate);
+                FilterCandidateCommand.MESSAGE_USAGE);
+        CandidateContainsFilterKeywordsPredicate predicate =
+                new CandidateContainsFilterKeywordsPredicateBuilder(" ").getCandidatePredicate();
+        FilterCandidateCommand command = new FilterCandidateCommand(predicate);
         expectedModel.updateFilteredCandidateList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredCandidateList());
@@ -80,9 +82,9 @@ public class FindCandidateCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() throws ParseException {
         String expectedMessage = "Candidate Book showing: findc n/Kurz n/Elle n/Kunz"
                 + String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        CandidateContainsFindKeywordsPredicate predicate = new CandidateContainsFindKeywordsPredicateBuilder(
+        CandidateContainsFilterKeywordsPredicate predicate = new CandidateContainsFilterKeywordsPredicateBuilder(
                 "n/Kurz n/Elle n/Kunz").getCandidatePredicate();
-        FindCandidateCommand command = new FindCandidateCommand(predicate);
+        FilterCandidateCommand command = new FilterCandidateCommand(predicate);
         expectedModel.updateFilteredCandidateList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredCandidateList());

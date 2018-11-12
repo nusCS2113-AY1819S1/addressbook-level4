@@ -18,6 +18,7 @@ import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.events.ui.JumpToCompanyJobListRequestEvent;
 import seedu.recruit.logic.CommandHistory;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
@@ -53,7 +54,7 @@ public class SelectJobOfferCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validIndexFilteredList_success() throws ParseException {
         showJobOfferAtIndex(model, INDEX_FIRST);
         showJobOfferAtIndex(expectedModel, INDEX_FIRST);
 
@@ -61,7 +62,7 @@ public class SelectJobOfferCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_failure() {
+    public void execute_invalidIndexFilteredList_failure() throws ParseException {
         showJobOfferAtIndex(model, INDEX_FIRST);
         showJobOfferAtIndex(expectedModel, INDEX_FIRST);
 

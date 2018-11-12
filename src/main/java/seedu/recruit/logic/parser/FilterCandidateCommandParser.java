@@ -78,9 +78,10 @@ public class FilterCandidateCommandParser implements Parser<FilterCandidateComma
         }
 
         if (keywordsMap.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + FilterCandidateCommand.MESSAGE_USAGE);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FilterCandidateCommand.MESSAGE_USAGE));
         }
 
-        return new FilterCandidateCommand(new CandidateContainsFilterKeywordsPredicate(keywordsMap), args);
+        return new FilterCandidateCommand(new CandidateContainsFilterKeywordsPredicate(keywordsMap));
     }
 }
