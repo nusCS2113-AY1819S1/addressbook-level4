@@ -16,10 +16,9 @@ Inventarie PRO is a desktop inventory application intended for use by self-emplo
 * *Major enhancement*: Added *the ability to manage distributors engaged with a provision shop*
 ** What it does: Allows the user to add, edit, delete and find distributors that the user would like a record of. It also allows the user to see which distributor provides what products for the shop.
 ** Justification: This feature is an essential part of a digitised inventory management system, given that products which a self-employed provision shop owner wants to sell must have a source of supply (a distributor).
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands which other members were working on too.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands which other members were concurrently working on too.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: Refactored some of the previous 'person' classes, methods and objects to a suitable 'product' name throughout the course of the project
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
@@ -42,9 +41,7 @@ Inventarie PRO is a desktop inventory application intended for use by self-emplo
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=distributormanagement]
 
 == Contributions to the Developer Guide
 
@@ -52,9 +49,7 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=distributorusecases]
 
 
 == PROJECT: PowerPointLabs

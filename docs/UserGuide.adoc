@@ -120,7 +120,7 @@ Examples:
 * `findproduct Cap`
 * `findproduct 1021`
 
-==== Find a product by tag: `findtag`
+==== Find a product by tag: `findtagproduct`
 
 Format: `findtagproduct PRODUCT_TAG`
 
