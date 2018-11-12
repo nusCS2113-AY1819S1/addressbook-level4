@@ -232,7 +232,7 @@ Deletes all distributors from the distributor book.
 
 // end::distributormanagement[]
 
-// tag::saleshistoy[]
+// tag::saleshistory[]
 
 === Sales History
 
