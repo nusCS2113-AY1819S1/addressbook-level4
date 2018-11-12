@@ -285,10 +285,8 @@ Examples: +
 
 [NOTE]
 ====
-1.  The file will be located in +
-`<DIRECTORY OF YOUR JAR FILE>/data/FILENAME.xml`
-2.  This command overwrites any files with the same name at +
-`<DIRECTORY OF YOUR JAR FILE>/data/`
+1.  The file will be located in `<DIRECTORY OF YOUR JAR FILE>/data/FILENAME.xml`
+2.  This command overwrites any files with the same name at `<DIRECTORY OF YOUR JAR FILE>/data/`
 ====
 
 [TIP]
