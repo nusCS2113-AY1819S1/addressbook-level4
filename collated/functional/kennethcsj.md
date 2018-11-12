@@ -507,25 +507,25 @@ public class QuantityContainsNumberPredicate implements Predicate<Book> {
 
     //@author
     @Override
-    public boolean canUndoAddressBook() {
+    public boolean canUndoBookInventory() {
         return versionedBookInventory.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
+    public boolean canRedoBookInventory() {
         return versionedBookInventory.canRedo();
     }
 
     @Override
     public void undoBookInventory() {
         versionedBookInventory.undo();
-        indicateAddressBookChanged();
+        indicateBookInventoryChanged();
     }
 
     @Override
     public void redoBookInventory() {
         versionedBookInventory.redo();
-        indicateAddressBookChanged();
+        indicateBookInventoryChanged();
     }
 
     @Override
