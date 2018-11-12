@@ -8,11 +8,10 @@ This Portfolio is a documentation of the contributions that I have made during t
 titled *NUSSU Connect*.
 
 *NUSSU Connect* is a CLI application developed by team https://cs2113-ay1819s1-f09-1.github.io/main/AboutUs.html[F09-1] and it
- is developed to be used by the executive committee members of the NUS Student Union (NUSSU).
+ aims to cater to the needs of executive committee members of the NUS Student Union (NUSSU).
 
-It comes with multiple features that NUSSU executive members will find useful. This includes budgets and expenses management,
-human resource allocation, easy management of contacts database, and all these come with additional security guarantee
-by the multi-user access level feature.
+It comes with multiple features that NUSSU executive committee members will find useful. This includes budgets and expenses management,
+human resource allocation, easy management of contacts lists, and all the information stored within this application will have an additional security guarantee by the multi-user access level feature.
 
 == Summary of contributions
 
