@@ -548,7 +548,7 @@ Implementation of exporting to CSV is provided below. +
 
 The following sequence diagrams shows the note exporting process:
 
-image::NoteExportSequenceDiagram.png[width="700"]
+image::NoteExportSequenceDiagram.png[width="1000"]
 
 // end::notesexportimplementation[]
 
