@@ -56,7 +56,7 @@ public class EmailCommand extends Command {
     public static final String MESSAGE_NO_RECIPIENT = "Group contains no recipient";
     public static final String MESSAGE_NO_LOGIN = "No login credentials found. Please login using 'login' command";
     public static final String MESSAGE_AUTHENTICATION_FAIL = "Invalid login credentials entered";
-    public static final String SMTP_FAIL_EXCEPTION_MESSAGE = "Unable to send any more emails due to spam";
+    public static final String SMTP_FAIL_EXCEPTION_MESSAGE = "Account unable to send any more emails due to spam";
     private static final Logger logger = LogsCenter.getLogger(EmailCommand.class);
 
     private boolean isSingleTarget = false;
