@@ -524,7 +524,10 @@ All three variations of the `sort` command follows the same sequence during oper
 
 image::SortSequenceDiagram.png[width="800"]
 
-The following activity diagram summarizes what happens when a user executes `sort` command:
+The following activity diagram summarizes what happens when a user executes `sortc` command:
+
+[NOTE]
+All three variations of the `sort` command follows a similar activity flow, with different cases for switch(prefix).
 
 image::SortActivityDiagram.png[width="800"]
 
@@ -578,7 +581,7 @@ Unblacklisting a candidate who is not blacklisted will do likewise.
 
 The following sequence diagram shows how the blacklist operation works:
 
-image::blacklistSequenceDiagram.png[width="800"]
+image::BlacklistSequenceDiagram.png[width="1000"]
 
 ==== Design considerations
 ===== Aspect: How blacklist executes
