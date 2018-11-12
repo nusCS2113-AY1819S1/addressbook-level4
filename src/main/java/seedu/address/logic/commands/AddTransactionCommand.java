@@ -96,7 +96,7 @@ public class AddTransactionCommand extends Command {
             return new CommandResult("FYI: The inventory does not seem to be uptodate. You have less"
                     + " products then what you just sold\n" + MESSAGE_SUCCESS + toAdd.getTransactionTime());
         } else {
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getTransactionTime());
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getTransactionTime()));
         }
     }
 }
