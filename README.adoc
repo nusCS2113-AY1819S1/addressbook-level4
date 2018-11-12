@@ -32,7 +32,7 @@ RecruitBook contains many features that is designed specifically to aid job agen
 
 * Shortlist candidates for specific job offers
 
-* Automated email feature to send mass emails
+* Email feature to send mass emails
 
 * Blacklist candidates
 
