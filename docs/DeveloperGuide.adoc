@@ -234,14 +234,18 @@ image::SecurityClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/security/Security.java[`Security.java`]
 
-The `Security` component is an authentication module that ensures the users that are using the application are
-recognized, and an instance of a authenticated user will be created every time a user is logged in so as to allow
-the application to do user-specific tasks.
+The `Security` component is a module that ensures the users that are using the application are
+authenticated, and an instance of an authenticated user will be created and stored in `ModelManager` every time a user
+is logged in so as to allow the application to do user-specific tasks.
 
-The Sequence Diagram when a user logs in is given below:
+It also handles all the commands entered to check for security clearance. On top of that, it is able to hash passwords and
+save them into a file named users.json at root folder.
 
-.Interactions between the UI Component and Security Component for the `login` Command
-image::SecurityLoginSequenceDiagram.png[width="800"]
+In Figure 9, AppUsers is  an object that stores the list of AccountCredentials. This object is created when _FreeTime_
+runs. Storage Component will try to find a user.json file to convert that into the AppUsers object. If the file is not found, or the data is corrupted,
+this program will create a new AppUsers object with default Users in it.
+
+More information is detailed below in Security Implementation.
 // end::designSecurity[]
 
 [[Design-Storage]]
@@ -254,8 +258,10 @@ image::StorageClassDiagram.png[width="800"]
 
 The `Storage` component,
 
+* can save `AppUsers` objects in json format and read it back.
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
+// end::designSecurity[]
 
 [[Design-Commons]]
 === Common classes
@@ -502,9 +508,9 @@ image::ExportSequenceDiagram.png[width = "800"]
 // tag::securityImplementation[]
 === Security Implementation
 To begin this section, we would need to introduce the idea of a Authenticated User instance.
-Everytime a user successfully logs in, or creates a new account, the application will create an Authenticated User in
-Model. This User is an extension of the Person Class, which different UI and commands will access it. One example would
-be the friend's UI panel, where it has to know the current user to know his friends
+Whenever a user successfully logs in, or creates a new account, the application will create an Authenticated User in
+Model. This User is an extension of the Person Class, which different part of the UI and `SecurityManager` will access it. One example would
+be the friend's UI panel, where _FreeTime_ has to know the current user to display his friends
 
 ==== Current Implementation
 This section will be broken down into +
@@ -513,28 +519,64 @@ This section will be broken down into +
 
 ===== Front-End Implementation
 1. CLI +
-SecurityBox Class handles the command line interface, and passes every commands to
+CommandBox Class handles the command line interface, and passes every command to
 SecurityManager through the Security API.
 2. UI Prompt +
 Inside the UI package, there are two new windows created, LoginWindow and RegistrationWindow. Each Window would handle
 UI events such as clicks and passing relevant information to the SecurityManager
 similar to above. +
 
-Whenever login or register is called through the Security API, this raises their respective Events to the event bus. The preexisting UIManager is subscribed
-to this events, and will react accordingly to the events raised.
+''''
 
 ===== Back-End Implementation
-Users credentials are stored in a json file called users.json at root. The class managing the reading and writing of
-this file is JsonAppUserStorage. +
 
-The object that it is storing is the AppUsers class implemented in the Security Package. It contains an array of
+.Command Parsing
+
+The Sequence Diagram when a user enters a command is seen in the figure below:
+
+.Interactions between the UI Component and Security Component for the login Command
+image::SecurityParseCommandsSD.png[width="800"]
+
+`AuthReturn` is a enum type that contains the following definition:
+----
+COMMAND_ALLOWED, COMMAND_LOGOUTFIRST, COMMAND_LOGINFIRST, COMMAND_ERROR;
+----
+The above figure shows the sequence when the `AuthReturn` is `COMMAND_ALLOWED`. When it is not that, there will be an `SecurityAuthenticationException`
+thrown with the relevant message to the user.
+
+`CommandsEnum` is another enum type that contains the method `iscommandAllowed()`. They are found in `seedu.addressbook.commons` package.
+
+
+
+.Interactions between the UI Component and Security Component for the login Command
+image::SecurityLoginSequenceDiagram.png[width="800"]
+
+The figure above shows the steps when login is called after Figure 19 has completed (since login is a command too).
+
+AppUsers contains an array of
 AccountCredentials, which has the attribute of Username and Password, and methods such isPasswordValid(). Here it also
-calls the static Hasher class, which takes the password and a salt to create the hash of the password to store.
+calls the static Hasher class, which takes the password and a salt to create the hash of the password.
 
-Whenever a user logs in, the username is searched inside AppUsers. Once it matches the username, the input pasword is
-then salted and hashed (SHA-512), and finally compared to the stored hashed password.
+Whenever a user logs in, the username is searched from userList returned by AppUsers. Once it matches a username, the input pasword is
+then salted and hashed (SHA-512), and finally compared to the stored hashed password. A boolean is then returned to the
+SecurityManager.
 
 ==== Design Considerations
+===== Where to store Authenticated User object
+* **Alternative 1 (current choice):** Inside of ModelManager
+** Pros: All the methods in LogicManager can access User object
+** Cons: The concept of an authenticated user object should be inside SecurityManager
+* **Alternative 2:** Inside of SecurityManager
+** Pros: ModelManager does not have security related objects inside it
+** Cons: Logic and Model methods cannot access it
+
+===== How to store user password credentials
+* **Alternative 1 (current choice):** To encrypt with a hash function
+** Pros: Password is protected
+** Cons: There is a slight computational overhead and code complexity
+* **Alternative 2:** Store the plaintext password
+** Pros: Less work to do
+** Cons: Anyone who have access to the credential file can have access to all the application users
 // end::securityImplementation[]
 
 // tag::friend[]
