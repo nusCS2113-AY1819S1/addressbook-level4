@@ -57,6 +57,8 @@ include::../UserGuide.adoc[tag=add_milestone]
 
 include::../UserGuide.adoc[tag=check_milestone]
 
+=== FAQ
+
 include::../UserGuide.adoc[tag=FAQ_milestone]
 
 
@@ -68,7 +70,8 @@ include::../UserGuide.adoc[tag=FAQ_milestone]
 technical depth and details required for future developers of this application to maintain/expand it._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=milestone_feature]
 
+include::../DeveloperGuide.adoc[tag=usecase_milestone]
 
 

@@ -421,6 +421,45 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
+
+// tag::milestone_feature[]
+=== Add Milestone feature
+
+==== Current Implementation
+
+Whenever a `Task` object is created, it will be instantiated with an empty `List` of `Milestone` objects.
+
+When the user calls the `add_milestone` command,
+he/she will enter an `index` to select an existing `Task` and the desired arguments with the appropriate prefixes. (e.g `i/` INDEX `m/` MILESTONE DESCRIPTION `r/` RANK)
+
+The `index` represents the `Task` in the list from `PersonListPanel` displayed in the GUI.
+
+The following sequence diagram illustrates how the `add_milestone` command is implemented.
+
+image::DG_AddMilestoneCommand.png[width="790"]
+
+
+==== Design Considerations
+
+===== Aspect: How to order all the milestones for each task
+
+* **Alternative 1 (current choice):** Use an `ArrayList` to implement a `List` of `Milestone` objects for each `Task` and `sort` them each time a `Milestone` is added using a custom comparator.
+** Pros: Easy to implement.
+** Cons: `List` interface does not prevent adding of duplicate `Milestone` objects
+* **Alternative 2:** Use a `TreeSet` to implement a `List` of `Milestone` objects for each `Task`
+** Pros: Does not allow duplicate `Milestone` objects to be added.
+** Cons: Requires in-depth understanding of how to use the SortedSet interface.
+
+===== Aspect: Selecting an existing task to add a milestone to
+
+* **Alternative 1 (current choice):** Select an existing `Task` using the `index`
+** Pros: Prevents ambiguity when selecting the desired `Task` using other parameters such as `title` as the `index` of each `Task` is unique and ordered
+** Cons: User has to take time to scroll through the list to find the desired `Task` which can be quite troublesome and time-consuming if the list is long due to a large number of existing tasks.
+* **Alternative 2:** Select an existing `Task` using the `title`
+** Pros: More convenient for the user as there is no command to search for `index` of desired `Task`
+** Cons: May result in confusion especially if there are tasks with very similar `title`.
+// end::milestone_feature[]
+
 ////
 
 
@@ -738,6 +777,7 @@ Use case ends.
 // end::editTask[]
 
 [discrete]
+// tag::usecase_milestone[]
 === Use case: Add milestone
 
 *MSS*
@@ -763,6 +803,7 @@ Use case ends.
 ** 5a2. Student enters milestone description and rank with valid format
 +
 Use case resumes at step 6.
+// end::usecase_milestone[]
 
 [appendix]
 == Non Functional Requirements
