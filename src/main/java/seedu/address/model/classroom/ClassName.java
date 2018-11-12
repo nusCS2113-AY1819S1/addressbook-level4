@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ClassName {
     public static final String MESSAGE_CLASSNAME_CONSTRAINTS =
-            "Class Names should only contain between 1 to 3 alphanumeric characters and it should not be blank.";
+            "Class Name should only contain between 1 to 3 alphanumeric characters and it should not be blank.";
     private static final String MESSAGE_CLASSNAME_REGEX = "^[a-zA-Z0-9]{1,3}$";
     private String value;
 

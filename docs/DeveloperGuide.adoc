@@ -2038,6 +2038,32 @@ Use case ends.
 +
 Use case resumes at step 1.
 
+[discrete]
+=== Use case: List Class
+
+*Precondition(s)* :
+
+* Class(es) exists in data file.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  User enters command to list class(es).
+2.  All Classroom information is listed.
+3.  System displays message of successful listing of class(es).
++
+Use case ends.
+
+*Extensions* :
+
+* 1a. User entered invalid command.
++
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
 
 [discrete]
 === Use case: Update Class Enrollment Limits
@@ -2056,63 +2082,6 @@ Use case resumes at step 1.
 1.  User enters command to modify class enrollment limits.
 2.  Class enrollment limits gets updated.
 3.  System displays successful modification of class enrollment limits.
-+
-Use case ends.
-
-*Extensions* :
-
-* 1a. User entered invalid command.
-+
-** 1a1. System shows ‘invalid format’ error.
-+
-Use case resumes at step 1.
-
-
-[discrete]
-=== Use case: Modify Class Attendance List
-
-*Precondition(s)* :
-
-* Module code exists in data file.
-* Class belonging to the module code exists in data file.
-* Student exists in data file and must be marked present.
-
-*Guarantees* :
-
-* TBC
-
-*MSS* :
-
-1.  User enters command to modify class attendance list.
-2.  The class attendance list is updated.
-3.  System displays message of successful modification of class attendance list.
-+
-Use case ends.
-
-*Extensions* :
-
-* 1a. User entered invalid command.
-+
-** 1a1. System shows ‘invalid format’ error.
-+
-Use case resumes at step 1.
-
-[discrete]
-=== Use case: List Class
-
-*Precondition(s)* :
-
-* Class(es) exists in data file.
-
-*Guarantees* :
-
-* TBC
-
-*MSS* :
-
-1.  User enters command to list class(es).
-2.  All Classroom information is listed.
-3.  System displays message of successful listing of class(es).
 +
 Use case ends.
 
@@ -2158,14 +2127,13 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
-
 [discrete]
 === Use case: Assign Student To Class
 
 *Precondition(s)* :
 
-* Student exists in data file.
 * Module code exists in data file.
+* Student exists and enrolled into module in data file.
 * Class must not be full.
 * Class belonging to the module code exists in data file.
 
@@ -2195,14 +2163,13 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
-
 [discrete]
 === Use case: Unassign Student From Class
 
 *Precondition(s)* :
 
-* Student exists in data file.
 * Module code exists in data file.
+* Student exists and enrolled into module in data file.
 * Class belonging to the module code exists in data file.
 * Student must be assigned to class before unassigning them.
 
@@ -2237,7 +2204,6 @@ Use case resumes at step 1.
 ** 1c1. System displays specified student does not belong to class error.
 +
 Use case resumes at step 1.
-
 
 [discrete]
 === Use case: Mark Class Attendance List
@@ -2292,6 +2258,35 @@ Use case resumes at step 1.
 
 1.  User enters command to view class attendance list.
 2.  System displays the class attendance list.
++
+Use case ends.
+
+*Extensions* :
+
+* 1a. User entered invalid command.
++
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Modify Class Attendance List
+
+*Precondition(s)* :
+
+* Module code exists in data file.
+* Class belonging to the module code exists in data file.
+* Student exists in data file and must be marked present.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  User enters command to modify class attendance list.
+2.  The class attendance list is updated.
+3.  System displays message of successful modification of class attendance list.
 +
 Use case ends.
 
@@ -2626,6 +2621,176 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+
+// tag::classmanualtest[]
+=== Creating a class
+. Creates a class and assigns it to a module for the system.
+
+*Parameters (prefix):* +
+cn/CLASS_NAME, +
+mc/MODULE_CODE, +
+e/MAX_ENROLLMENT
+
+.. Prerequisites: Module code must exist before creating a class for the module.
+.. Test case: `class add cn/T16 mc/CG1111 e/20` +
+   Expected: A new class T16 of module code CG1111 and enrollment size of 20 will be created and reflected in the system.
+.. Test case: `class add cn/T16 mc/CG1111 e/9999` +
+   Expected: A message will be displayed to show that enrollment size should be of 1-425 and it should not be blank.
+.. Test case: `class add cn/T1600 mc/CG1111 e/20` +
+   Expected: A message will be displayed to show that class name should only contain between 1 to 3 alphanumeric characters and it should not be blank.
+.. Other incorrect class add commands to try: `class add`, +
+    `class add cn/T16 mc/XXYYYY e/20` (where XXYYYY is a valid module code that does not exist), +
+    `class add cn/VVV mc/ZZXXXX e/20` (where VVV and ZZXXXX is the classname and module code of a class already added into the system) +
+   Expected: A message will be displayed to show `Invalid command format!`, +
+    `Module code does not exist`, +
+    and `This classroom already exists in Trajectory` respectively.
+
+=== Listing a class
+. Lists class(es) with information of the class as well as students assigned to class (if any) for the system.
+
+*Parameters (prefix): NIL*
+
+.. Prerequisites: Class(es) must exist in order to be listed.
+.. Test case: `class list` +
+   Expected: The class information is display on the system.
+
+=== Update Class Enrollment Limits
+. Modifies the max enrollment size for a class for the system.
+
+*Parameters (prefix):* +
+cn/CLASS_NAME, +
+mc/MODULE_CODE, +
+e/ENROLLMENT_SIZE
+
+.. Prerequisites: Module code must exist before deleting a class for the module. The classroom must also belong to the module code.
+.. Test case: `class edit cn/T16 mc/CG1111 e/69` +
+   Expected: The max enrollment size of class T16 of module code CG1111 will be updated to 69 and reflected in the system.
+.. Test case: `class edit cn/T16 mc/CG1111 e/9999` +
+   Expected: A message will be displayed to show that enrollment size should be of 1-425 and it should not be blank.
+.. Other incorrect class edit commands to try: `class edit`, +
+    `class edit cn/T16 mc/XXYYYY e/20` (where XXYYYY is a valid module code that does not exist), +
+    `class edit cn/VVV mc/XXYYYY e/20` (where VVV is a valid class name that don't belong to existing module XXYYYY) +
+   Expected: A message will be displayed to show `Invalid command format!`, +
+    `Module code does not exist`, +
+    and `Class belonging to module not found!` respectively.
+
+=== Deleting a class
+. Deletes a class for a module in the system.
+
+*Parameters (prefix):* +
+cn/CLASS_NAME, +
+ mc/MODULE_CODE
+
+.. Prerequisites: Module code must exist before deleting a class for the module. The classroom must also belong to the module code.
+.. Test case: `class delete cn/T16 mc/CG1111` +
+   Expected: The class T16 of module code CG1111 deleted and reflected in the system.
+.. Other incorrect class delete commands to try: `class delete`, +
+   `class delete cn/VVV mc/XXYYYY` (where VVV is a valid class name not belonging to a valid module XXYYYY) +
+   Expected: A message will be displayed to show `Invalid command format!`, +
+   and `Class belonging to module not found!` respectively.
+
+=== Assign Student To Class
+. Assigns a student to a class in the system.
+
+*Parameters (prefix):* +
+cn/CLASS_NAME, +
+mc/MODULE_CODE, +
+i/MATRIC_NO
+
+.. Prerequisites: Student must exist in the system, module code must exist, student must be enrolled in the module, class cannot be full and class must exist and belong to the module code before assigning a student to the class.
+.. Test case: `class addstudent cn/T16 mc/CS2113 i/A0168000B` +
+   Expected: A new student of matric number A0168000B will be assigned to the classroom T16 of module CS2113 and be reflected in the system.
+.. Other incorrect class addstudent commands to try: `class addstudent`, +
+  `class addstudent cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where XXXXXXXXX is a valid matric number that does not exist, VVV and ZZZZZZ is a valid existing class), +
+  `class addstudent cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where XXXXXXXXX is an existing student matric number enrolled into ZZZZZZ, VVV is a valid class name format but do not belong to an existing module ZZZZZZ), +
+  `class addstudent cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where the student of matric number XXXXXXXXX is already assigned to the existing classroom comprised of VVV and ZZZZZZ), +
+  Expected: A message will be displayed to show `Invalid command format!`, +
+  `Student does not exist`, +
+  `Class belonging to module not found!`, +
+  `This student already exists in class: XXXXXXXXX` (where XXXXXXXXX is the matric number of the student already in the classroom)
+   respectively.
+
+=== Unassign Student From Class
+. Unassigns a student to a class in the system.
+
+*Parameters (prefix):* +
+cn/CLASS_NAME, +
+mc/MODULE_CODE, +
+i/MATRIC_NO
+
+.. Prerequisites: Student must exist in the system, module code must exist, student must be enrolled in the module, class must exist and belong to the module code
+and student must be assigned to the class before unassigning a student from the class.
+.. Test case: `class delstudent cn/T16 mc/CS2113 i/A0168000B` +
+   Expected: The student of matric number A0168000B will be unassigned from the classroom T16 of module CS2113 and be reflected in the system.
+.. Other incorrect class delstudent commands to try: `class delstudent`, +
+  `class delstudent cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where XXXXXXXXX is a valid matric number format that does not exist, VVV and ZZZZZZ is a valid existing class), +
+  `class delstudent cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where XXXXXXXXX is an existing student matric number enrolled into ZZZZZZ, VVV is a valid class name not belonging to an existing module ZZZZZZ), +
+  `class delstudent cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where the student of matric number XXXXXXXXX is already unassigned from the existing classroom comprised of VVV and ZZZZZZ), +
+  Expected: A message will be displayed to show `Invalid command format!`, +
+  `Student does not exist`, +
+  `Class belonging to module not found!`, +
+  `This student doesn't belong to class: XXXXXXXXX` (where XXXXXXXXX is the matric number of the student not in the classroom)
+   respectively.
+
+=== Marking class attendance list
+. Mark the class attendance list for a specified student for the system.
+
+*Parameters (prefix):* +
+cn/CLASS_NAME, +
+mc/MODULE_CODE, +
+i/MATRIC_NO
+
+.. Prerequisites: Student must exist in the system, module code must exist, class must exist and belong to the module code, student must belong to class before marking the student present for the class.
+.. Test case: `class markattendance cn/T16 mc/CS2113 i/A0168000B` +
+   Expected: The student of matric number A0168000B from the classroom T16 of module CS2113 will be marked present and be reflected in the system.
+.. Other incorrect class markattendance commands to try: `class markattendance`, +
+ `class markattendance cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where XXXXXXXXX is a valid matric number format but does not exist, VVV and ZZZZZZ is a valid existing class), +
+ `class markattendance cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where XXXXXXXXX is an existing student matric number enrolled into ZZZZZZ, VVV is a valid class name not belonging to an existing module ZZZZZZ), +
+ `class markattendance cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where the student of matric number XXXXXXXXX is already marked present in the existing classroom comprised of VVV and ZZZZZZ), +
+  Expected: A message will be displayed to show `Invalid command format!`, +
+ `Student does not exist`, +
+ `Class belonging to module not found!`, +
+ `This student already present in class: XXXXXXXXX` (where XXXXXXXXX is the matric number of the student already marked present)
+  respectively.
+
+=== Access class attendance list
+. Access the class attendance list for the system.
+
+*Parameters (prefix):* +
+cn/CLASS_NAME, +
+mc/MODULE_CODE
+
+.. Prerequisites: Module must exist, class must exist and belong to the module code, at least one student's attendance is marked before being able to be listed.
+.. Test case: `class listattendance cn/T16 mc/CS2113` +
+   Expected: The class attendance list for the class T16 of module CS2113 will be shown (if attendance is taken) and be reflected in the system.
+.. Other incorrect class listattendance commands to try: `class listattendance`, +
+`class listattendance cn/VVV mc/ZZZZZZ` (where VVV is a valid class name and ZZZZZZ is a valid non-existant module), +
+`class listattendance cn/VVV mc/ZZZZZZ` (where VVV is a valid class name not belonging to an existing module ZZZZZZ), +
+ Expected: A message will be displayed to show `Invalid command format!`, +
+`Module code does not exist`, +
+`Class belonging to module not found!` respectively.
+
+=== Modify class attendance list
+. Modifies the class attendance list for the system.
+
+*Parameters (prefix):* +
+cn/CLASS_NAME, +
+mc/MODULE_CODE, +
+i/MATRIC_NO
+
+.. Prerequisites: Module must exist, class must exist and belong to the module code, student must exist and belong to the class and marked present before being able to modify their attendance to absent.
+.. Test case: `class modattendance cn/T16 mc/CS2113 i/A0168000B` +
+   Expected: The student of matric number A0168000B from the classroom T16 of module CS2113 will be marked absent and be reflected in the system.
+.. Other incorrect class modattendance commands to try: `class modattendance`, +
+`class modattendance cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where XXXXXXXXX is a valid matric number that does not exist, VVV and ZZZZZZ is a valid existing class), +
+`class modattendance cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where XXXXXXXXX is an existing student matric number enrolled into ZZZZZZ, VVV is a valid class name not belonging to an existing module ZZZZZZ), +
+`class modattendance cn/VVV mc/ZZZZZZ i/XXXXXXXXX` (where the student of matric number XXXXXXXXX is already marked absent in the existing classroom comprised of VVV and ZZZZZZ), +
+   Expected: A message will be displayed to show `Invalid command format!`, +
+   `Student does not exist`, +
+   `Class belonging to module not found!`, +
+   `This student's attendance is already absent: XXXXXXXXX` (where XXXXXXXXX is the matric number of the student already marked absent)
+   respectively.
+// end::classmanualtest[]
 
 // tag::gradebookmanualtesting[]
 === Gradebook List

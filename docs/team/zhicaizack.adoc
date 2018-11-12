@@ -47,3 +47,5 @@ include::../UserGuide.adoc[tag=classmanagementdepth]
 include::../DeveloperGuide.adoc[tag=classmanagementbrief]
 
 include::../DeveloperGuide.adoc[tag=classmanagementdepth]
+
+include::../DeveloperGuide.adoc[tag=classmanualtest]
