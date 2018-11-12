@@ -512,7 +512,7 @@ Aspect implementation of `modifyPay` command:
 
 * Alternative 2: One command to handle all the modifications
 ** Pros: Lesser Class to handle different fields
-** Cons: User may accidentally touched on sensitive data and ended up editing them
+** Cons: User may accidentally touch on sensitive data and ended up editing them
 
 // end::modifyPay[]
 
