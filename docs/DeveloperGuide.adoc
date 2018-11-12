@@ -1284,8 +1284,8 @@ To-do list
 
 *MSS*
 
-1.The color of one task turns red which mean this task is uncompleted and the deadline has passed already
-2.The color of one task turns yellow which mean this task is uncompleted and the deadline will come within 7 days
+1.The color of one task turns red which means this task is uncompleted and the deadline has passed already
+2.The color of one task turns yellow which means this task is uncompleted and the deadline will come within 7 days
 
 [discrete]
 === Use case 14: Sort Uncompleted tasks by deadline
