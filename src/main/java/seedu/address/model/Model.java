@@ -129,6 +129,12 @@ public interface Model {
     void addTodo(Todo todo);
 
     /**
+     * Complete the given todo task.
+     * {@code todo} must already exist in the address book.
+     */
+    void finishTodo(Todo todo);
+
+    /**
      * Updates the filter of the filtered todo task list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

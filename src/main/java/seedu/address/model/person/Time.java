@@ -33,6 +33,17 @@ public class Time {
         return test.matches(TIME_VALIDATION_REGEX);
     }
 
+    /**
+     * Returns a value of time in minutes passed in the day, with a range of 0 to 1440.
+     */
+    public int timeToMinutesInDay() {
+        int convTime = Integer.parseInt(this.value);
+        int hrsToMins = (convTime / 100) * 60;
+        int minsToMins = convTime % 100;
+        int timeMinsInDay = hrsToMins + minsToMins;
+        return (timeMinsInDay);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

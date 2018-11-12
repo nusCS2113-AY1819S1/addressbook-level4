@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.TheDate;
 import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Schedule SAMPLE_SCHEDULE = new Schedule(new Date("09092018"), new Time("1230"),
+    public static final Schedule SAMPLE_SCHEDULE = new Schedule(new TheDate("09092018"), new Time("1230"),
             new Time ("1400") , new EventName("CS1231 Exam"));
 
     private static final Set<Schedule> schedules = new HashSet<>();

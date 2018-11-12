@@ -7,6 +7,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportAllCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FinishTodoCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -23,7 +24,7 @@ import seedu.address.logic.commands.UndoCommand;
 public class WrongCommandSuggestion {
     public static final String SUGGESTION_HEADER = "Did you mean: %1$s?";
     public static final String NO_SUGGESTION = "No suggestions available.";
-    private static final int WORD_DISTANCE_LIMIT = 2;
+    private static final int WORD_DISTANCE_LIMIT = 3;
 
     private static final String[] CommandList;
 
@@ -37,6 +38,7 @@ public class WrongCommandSuggestion {
             ExitCommand.COMMAND_WORD,
             ExportAllCommand.COMMAND_WORD,
             FindCommand.COMMAND_WORD,
+            FinishTodoCommand.COMMAND_WORD,
             HelpCommand.COMMAND_WORD,
             HistoryCommand.COMMAND_WORD,
             ListCommand.COMMAND_WORD,
@@ -55,7 +57,8 @@ public class WrongCommandSuggestion {
      * @return A {@code String} object containing the suggestion header and suggested similar command.
      */
     public String getSuggestion(String userCommand) {
-        String suggestedCommand = getNearestCommand(userCommand);
+        String userCommandInLowerCase = userCommand.toLowerCase();
+        String suggestedCommand = getNearestCommand(userCommandInLowerCase);
         if (suggestedCommand.isEmpty()) {
             return NO_SUGGESTION;
         } else {
