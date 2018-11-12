@@ -2,7 +2,6 @@ package com.t13g2.forum.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 
-import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -77,7 +76,7 @@ public class AddUserCommandTest {
 
 
     @Test
-    public void execute_userLoginWithNullUserName_loginFailed() throws Exception {
+    public void execute_userLoginWithNullUserName_loginFailed() {
         //set the current logged in user as a user.
 
         User validUser = TypicalUsers.JOSH;
@@ -87,7 +86,7 @@ public class AddUserCommandTest {
     }
 
     @Test
-    public void execute_userLoginWithNullUserPassword_loginFailed() throws Exception {
+    public void execute_userLoginWithNullUserPassword_loginFailed() {
         //set the current logged in user as a user.
 
         User validUser = TypicalUsers.JOSH;

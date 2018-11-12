@@ -44,7 +44,7 @@ public class UserLoginCommandTest {
     public void execute_validUserNameAndValidUserPassword_loginSuccess() {
         //set the current logged in user as an admin.
         Context.getInstance().setCurrentUser(null);
-        User validUser = new User("test user a","pwd",false,false,"1@1.com","12345678");
+        User validUser = new User("test user a", "pwd", false, false, "1@1.com", "12345678");
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             unitOfWork.getUserRepository().addUser(validUser);
             unitOfWork.commit();
