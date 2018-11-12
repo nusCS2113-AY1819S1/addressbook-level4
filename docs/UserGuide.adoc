@@ -186,6 +186,7 @@ Format: `track SUBCOMMAND PREFIX/VALUE`
 * `PREFIX/VALUE` follows the acceptable formats for the workout parameters as stated above.
 * `VALUE` has to be one string/value with no spaces.
 * To view the completed workouts that have been recorded, refer to <<#selecting-a-tracked-parameter-code-select-code, the `select` command>>
+* If completed workouts have been tracked, they will remain tracked even if a parameter stops being tracked. To view these workouts, start tracking the parameter again using `track start PREFIX/VALUE` and then use the `select` command to select the desired parameter.
 ****
 
 Examples:

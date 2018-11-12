@@ -58,7 +58,6 @@ include::../UserGuide.adoc[tag=select]
 The original undo/redo feature was created and implemented by the developer team behind AddressBook-level 4. However, in the WorkoutBook application, major extensions were made to the feature in order to fit the new functions of the application.
 The undo/redo section in the Developer Guide was originally written by the aforementioned developement team and has been modified for our Developer Guide.
 
-include::../DeveloperGuide.adoc[tag=undoredo]
 include::../DeveloperGuide.adoc[tag=trackfeature]
 include::../DeveloperGuide.adoc[tag=appendixgh]
 
