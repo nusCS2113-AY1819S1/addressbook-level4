@@ -240,7 +240,6 @@ public class Drink {
      */
     public void increaseQuantity(Quantity quantity) {
         BatchId tempId = new BatchId();
-        BatchPrice tempPrice = new BatchPrice(this.getCostPrice().toString());
         BatchQuantity tempQuantity = new BatchQuantity(quantity.toString());
         Batch toAdd = new Batch(tempId, tempQuantity);
         this.uniqueBatchList.addBatch(toAdd);
