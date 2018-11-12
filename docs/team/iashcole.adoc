@@ -9,33 +9,43 @@
 
 == Overview
 
-BookInventory is a desktop application used for small to medium book owners. It can be used to track activities such as revenue and stock of the books. The user mainly interacts with the application using Command Line Interface (CLI), and it also has a built-in GUI created with JavaFX. The main code is written in Java and contains approximately 10,000 Lines of Code (LoC).
+BookInventory is a desktop application used for small to medium book store company owners. It is used to store details of books and keeps track of sales. The application is directed to students who wish to purchase books over the application and specify his/her request to order. The request is sent to the administrator who then proceeds to fulfil his order.
+
+The application has THREE main users which are students, administrator (owner) and accountant. Both the accountant and the owner can tabulate data and calculate profits using in-built statistical functions. The user’s main interaction with the application is using the Command Line Interface (CLI), and it also has a built-in Graphical User Interface (GUI). The main code is written in Java and contains approximately 10,000 Lines of Code (LoC). Other libraries are used such as TextFX, ControlsFX, Jackson, Guava and Junit5.
+
 
 == Summary of contributions
 
 * *Major enhancement*: added a password field for security
-** What it does: allow users to key in a password before using the application. This is to prevent unauthorized users from using the application.
-** Justification: This is to prevent unauthorized users from using the application because they might temper with the data.
-** Highlights: The code is written before the application starts, this is to prevent any unnecessary load-up from the application, freeing space and data for the user. The implementation was challenging at first as you require a basic knowledge of JavaFX.
+** What it does: Allow users to key in a password before using the application.
+** Justification: To prevent unauthorized access of data.
+** Highlights: The implementation was challenging at first as a basic knowledge of JavaFX is required. I had to be careful with writing code down because it might overlap with someone else’s code, i.e. change their code. As for the design model, I had to come up with a new implementation of the code as there was no available open source libraries. It was one that I had to think of possible loopholes that may appear, and a model that is sustainable for future development.
 
-* *Minor enhancement*: change regular expressions (regex) in the code
+* *Minor enhancement*:
+** Change regular expressions (regex) in the code.
+*** What it does: To accept only possible inputs, for example, an ISBN field should only contain numbers and hyphens.
+*** Justification: To disallow false inputs.
+*** Highlights: Regex is a coding practice that at first, seemed incomprehensible to me. After having to learn it through trial and error and tutorials online, I managed to understand it fully.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+** Added full-screen mode
+** Created a few elements in the UI
+*** Created pop-up windows like the Alert Box, which acts like a safe mechanism in cases when users would close the application by accident.
+*** Added an additional side-bar for the command panel.
+*** Helped in creating the homepage design.
+*** Highlights: I had to understand other coding languages as well such as HTML and FXML.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=iashcole[Functional/Test code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.0` - `v1.1` (2 releases) on GitHub
+*** Managed releases `v1.3` - `v1.4` (3 releases) on GitHub
 ** Project morphing:
-*** Morphed model portion of addressbook 4.
-** Enhancements to existing features:
+*** Morphed the commands portion of addressbook 4.
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/58[1])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the stock feature I added was adopted by several other class mates
-** Tools:
-
+*** Reviewed Pull Requests with comments
+*** Reported bugs and suggestions for other teams in the class
+*** Fixed bugs and glitches found by others in the Issues section
 
 == Contributions to the User Guide
 
@@ -43,22 +53,117 @@ BookInventory is a desktop application used for small to medium book owners. It 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-=== Key-in password
 
-****
+. Key-in password
 * A password will be required by the application to use it.
 * If you do not know the password, please contact us using github directly.
 * For the sake of this early development of the program, the password for the admin: "owner"; student: "password"; accountant: "accountant".
-* Different roles have different sets of permission ie commands.
-****
+* You will have different access to the features, i.e. commands, depending on your role.
 
-Examples:
+.  Command Panel
 
+* A command panel is located at the right side of the application. This is suited for beginner users.
+* To select a command, click on any command.
+* A message will pop up on the result display, showing you information and the syntax of the command. A command template will also be given in the command box. You are then required to fill in the remaining fields by following the example given. A screenshot of an example is shown below for your reference.
+
+*Full Screen Mode*
+
+Hit F11 to toggle between full-screen mode and windowed mode. A full-screen toggle button can also be found under the drop-down menu of the top bar under “Window”.
+
+image::command_panel_result.png[align="left"]
+
+Note: For advanced users, you are still able to press kbd:[tab] to cycle through the ISBN.
 
 == Contributions to the Developer Guide
-
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+// tag::passwordprotection[]
+=== Password Protection
+==== Current Implementation
+A password is required by the user upon start-up of the application.
 
+The password must be secured. A secured password must consist of uppercase, lowercase, numbers and other special characters. For example, “$%GA2dg#” is a good password.
+
+image::password_activity_diagram.png[width="300"]
+
+In order to prevent attackers from using easy brute force methods, the application will shut down after 3 consecutive tries.
+
+The password will be generated from our team’s side and will only be passed to users discreetly, conveniently through the means of an email.
+
+In this stage of development, the default passwords will be as follows:
+.  Administrator: owner
+.  Accountant: accountant
+.  Student: password
+*Format: [ROLE OF USER: PASSWORD]
+The passwords can and are set by developers under CheckPassword.java.
+The following sequence diagram shows how the password interacts with the user.
+
+image::password_protection_diagram.png[width="800"]
+
+After UiManager is created, it will automatically construct a MainWindow. The MainWindow will also create an instance of a CheckPassword window.
+If password is valid, a role class will be created. Else, application will close after 3 wrong tries.
+
+==== Design Considerations
+
+===== Aspect: Required fields for password protection
+
+* **Alternative 1 (current choice): Use a password-only login UI.**
+** Pros: It tricks attackers to think there is only a single password to enter the application.
+Commands such as “add”, “edit”, “clear” etc will be unknown to the basic user i.e. students.
+** Cons: Password is difficult to remember, users will spend the extra time to refer to his/her allocated passwords.
+Passwords will be issued by us (the developer team) and must be secured.
+* **Alternative 2: Use a username/password login interface.**
+** Pros: Users can customize their usernames and passwords.
+** Cons: Users can forget their passwords. Developers need to spend extra time to implement changing passwords for users. A user can create multiple account and can take up too much storage.
+Difficult to handle sensitive data like passwords in plain text files, another implementation for encryption would be needed.
+
+===== Aspect: Usable commands
+
+* **Alternative 1 (current choice): Populate usable commands into role after entering password.**
+** Pros: : If attackers bypass the password UI, they will not be able to perform any commands. Commands are only enabled if the password entered matches the appropriate role.
+** Cons: Doing so might cause the application to lag a little, if the command list is extensive.
+Passwords will be issued by us (the developer team) and must be secured.
+* **Alternative 2: Assign commands based on passwords. (Role class is omitted in this case)**
+** Pros: Easier to implement.
+** Cons: Poor readability in code. If the password UI is bypassed, attackers will be able to have access to commands.
+
+// end::passwordprotection[]
+
+// tag::commandpanel[]
+=== Command List Panel UI
+==== Current Implementation
+
+A command list panel UI is made available for all user, to assist him/her better in the application.
+It is a quick access panel located at the side of the application. The command list is sorted alphabetically.
+
+This feature is geared towards beginner users.
+
+image::command_panel.png[width="240"]
+
+Selecting on any of the commands in the panel above, will show a brief message of the command in the result display.
+
+In addition, the text in the command box will be replaced with a template of the command selected.
+
+==== Design Considerations
+
+===== Aspect: UI design
+
+* **Alternative 1 (current choice): Use a table view (JavaFX).**
+** Pros: All commands are displayed on-screen without having to click double.
+** Cons: Takes up more space in the overall UI.
+* **Alternative 2: Use a drop-down menu.**
+** Pros: Slightly neater and aesthetically more pleasing.
+** Cons: Not the most functional option, users must click twice and scroll through the menu.
+
+===== Aspect: Selection Result
+
+* **Alternative 1 (current choice): Displays a message on-screen and replaces text in command box.**
+** Pros: : Allow users (especially beginners) to edit the command field when given the template of the command. They will be guided via a message on-screen.
+** Cons: Users need to spend the extra time clicking on and editing the command text provided instead of typing the command fluently.
+* **Alternative 2: : Pops a new window indicating the required fields for command.**
+** Pros: Highly sophisticated GUI handling.
+** Cons: Application is meant for CLI for faster execution. Pressing on the wrong command may induce user frustration.
+
+// end::commandpanel[]
