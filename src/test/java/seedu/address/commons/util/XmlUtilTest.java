@@ -53,8 +53,9 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_nullFile_throwsNullPointerException() throws Exception {
+        XmlUtil xmlUtil = new XmlUtil();
         thrown.expect(NullPointerException.class);
-        XmlUtil.getDataFromFile(null, AddressBook.class);
+        xmlUtil.getDataFromFile(null, AddressBook.class);
     }
 
     @Test

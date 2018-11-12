@@ -18,7 +18,7 @@ public class JobDescription {
      * The first character of the recruitment post must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String JOB_DESCRIPTION_VALIDATION_REGEX = "[a-zA-Z ,.']{1,200}";
+    public static final String JOB_DESCRIPTION_VALIDATION_REGEX = "[a-zA-Z ,.'’]{1,200}";
 
 
     public final String value;
