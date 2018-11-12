@@ -7,8 +7,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.address.testutil.Assert;
+
 /**
- * This is a test class for ModuleNameTest
+ * Provides test cases for {@code ModuleName}
  */
 public class ModuleNameTest {
 

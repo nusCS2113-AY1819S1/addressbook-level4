@@ -83,16 +83,17 @@ public class NoteManager {
 
         sb.append(NOTE_PAGE_IDENTIFIER);
         sb.append("\n");
+        sb.append(HtmlCardProcessor.getCardColumnsStart());
         for (Note note: filteredNotes) {
             sb.append(HtmlCardProcessor.getCardStart());
 
             if (note.getTitle().toString().trim().isEmpty()) {
                 sb.append(HtmlCardProcessor.renderCardHeader(
-                        "h4", "#" + listId + "&nbsp;&nbsp;"
+                        "h5", "#" + listId + "&nbsp;&nbsp;"
                                 + HtmlCardProcessor.CARD_NO_TITLE));
             } else {
                 sb.append(HtmlCardProcessor.renderCardHeader(
-                        "h4", "#" + listId + "&nbsp;&nbsp;"
+                        "h5", "#" + listId + "&nbsp;&nbsp;"
                                 + HtmlCardProcessor.adaptToHtml(note.getTitle().toString())));
             }
 
@@ -110,12 +111,13 @@ public class NoteManager {
                     .adaptToHtml(note.getLocation().toString())));
             sb.append(HtmlCardProcessor.renderCardText(HtmlCardProcessor
                     .adaptToHtml(note.getNoteText().toString())));
-            sb.append(HtmlCardProcessor.getDivEndTag()); // end of card-body
 
-            sb.append(HtmlCardProcessor.getDivEndTag()); // end of card
+            sb.append(HtmlCardProcessor.getCardBodyEnd()); // end of card-body
+            sb.append(HtmlCardProcessor.getCardEnd()); // end of card
 
             listId++;
         }
+        sb.append(HtmlCardProcessor.getCardColumnsEnd());
 
         return sb.toString();
     }

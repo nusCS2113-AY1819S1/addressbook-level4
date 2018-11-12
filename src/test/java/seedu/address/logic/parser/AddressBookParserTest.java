@@ -37,7 +37,7 @@ import seedu.address.model.user.User;
 import seedu.address.model.user.UserManager;
 
 /**
- * This is a test class for AddressBookParserTest
+ * Provides test cases for {@code AddressBookParser}
  */
 public class AddressBookParserTest {
     @Rule

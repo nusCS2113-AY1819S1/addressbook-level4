@@ -18,8 +18,9 @@ import seedu.address.logic.commands.ModuleEditCommand;
 import seedu.address.logic.commands.ModuleEditCommand.EditModuleDescriptor;
 import seedu.address.model.module.ModuleName;
 import seedu.address.testutil.EditModuleDescriptorBuilder;
+
 /**
- * This is a test class for ModuleEditCommandParserTest
+ * Contains unit tests for {@code ModuleEditCommandParser}
  */
 public class ModuleEditCommandParserTest {
 

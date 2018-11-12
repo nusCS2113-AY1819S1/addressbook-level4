@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:xmlSerializableStudentModuleList xmlns:ns2="seedu.address.storage.serializable">
+    <studentModules/>
+</ns2:xmlSerializableStudentModuleList>
