@@ -24,21 +24,46 @@ _BookInventory_ is catered solely for students as well as other managerial roles
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Downloading the program.
-* Visit https://github.com/CS2113-AY1819S1-W13-4/main and click on "Clone or download" as circled in the screenshot below.
+* You can download the latest `bookinventory.jar` link:{https://github.com/CS2113-AY1819S1-W13-4/main/releases}[here]
+* Copy the file to the folder you want to use as the home folder for your BookInventory.
+* Double-click the file to start the app.
+* You should be able to see the GUI with the following 'Enter Password' prompt as shown in Figure 1 below, in a few seconds.
 +
-image::download.png[width="450", align="left"]
+.Password Prompt
+image::FirstAppPopUp.png[width="800", align="left"]
 +
-* If you are a github user, clone the repository.
-* However, it is encouraged that you "Download ZIP" in the drop-down menu.
-* Once it is downloaded, unzip the file.
+
++
 . Key-in password
 * A password will be required by the application to use it.
 * If you do not know the password, please contact us using github directly.
 * For the sake of this early development of the program, the password for the admin: "owner"; student: "password"; accountant: "accountant".
-* Different roles have different sets of permission ie commands.
+* You will have different access to the features, i.e. commands, depending on your role.
+* If you have entered your password correctly, you should see the following prompts:
++
+.Prompt for Owner if password is correct
+image::OwnerAccess.png[width="450", align="left"]
++
+
++
+.Prompt for Accountant if password is correct
+image::AccountantAccess.png[width="450", align="left"]
++
+
++
+.Prompt for Other Users if password is correct
+image::OtherAccess.png[width="450", align="left"]
++
+
++
+* Now you are ready to explore _BookInventory_!
 . Input Commands
-* Type the command in the command box and press kbd:[Enter] to execute it. +
+* You can simply type the command in the command box as shown in Figure 5, and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
++
+.Command Box shown in red box
+image::CommandBox.png[width="800", align="left"]
++
 * Some example commands you can try:
 
 ** *`help`* : view all commands available

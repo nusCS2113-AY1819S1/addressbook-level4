@@ -534,11 +534,11 @@ After the function `navigateToNextIsbn()` is completed, `commandTextField.reques
 ===== Aspect: How tab executes
 
 * **Alternative 1 (current choice):** Accessing data in `BookInventory` using `Logic`.
-** Pros: Reuses current imports of `CommandBox` to function.
-** Cons: Increases coupling as it does not uphold the Law of Demeter.
+** Pros: Does not change current imports of `CommandBox` for it to function.
+** Cons: Increases coupling as it violates the Law of Demeter.
 * **Alternative 2:** Accessing data in `BookInventory` directly in `CommandBox`.
 ** Pros: Easy to access.
-** Cons: Increases coupling as `CommandBox` now imports both `Logic` and `Model.
+** Cons: Increases coupling as `CommandBox` now imports both `Logic` and `Model`.
 // end::tabfeature[]
 
 
