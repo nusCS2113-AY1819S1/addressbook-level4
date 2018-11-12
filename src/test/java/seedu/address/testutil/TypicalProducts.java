@@ -33,7 +33,7 @@ public class TypicalProducts {
             .withInfo("fruit").withDistributor("Ah Beng").withSerialNumber("002").withRemainingItems("2")
             .withTags("sweet").build();
     public static final Product CHOCOLATE = new ProductBuilder().withName("Chocolate").withSerialNumber("003")
-            .withDistributor("Ah Long").withRemainingItems("22").withInfo("snack").build();
+            .withDistributor("Ah Long").withRemainingItems("22").withInfo("snack").withTags("dark").build();
     public static final Product DORITOS = new ProductBuilder().withName("Doritos").withSerialNumber("004")
             .withDistributor("Ah Ting").withInfo("snack").withRemainingItems("10").withTags("unhealthy").build();
 
