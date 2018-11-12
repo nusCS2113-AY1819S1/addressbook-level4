@@ -1395,14 +1395,14 @@ Assume that user has already requested the System to display a list of patients.
 *MSS*
 
 1.  User requests to add additional information for patient.
-2.  System adds optional information for the patient and displays a message that entry for additional information is successful.
+2.  System adds additional information for the patient and displays a message that entry for additional information is successful.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. User uses the wrong format to add optional information i.e. wrong command or invalid data for the fields.
+* 1a. User uses the wrong format to add additional information i.e. wrong command or invalid data for the fields.
 +
 [none]
 ** 1a1. System shows error message that format is wrong and gives user an example on the correct format for adding of additional information.
