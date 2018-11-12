@@ -383,7 +383,6 @@ The sequence diagram of this entire process can be seen below:
 [[fig-RecommendNonEventSD]]
 .Interactions inside the `Logic` component for the `recommend mode/all calories/150` command.
 image::SDForRecommendNonEvent.png[width="900"]
-{nbsp} +
 
 However, for single mode `recommend`, a new `JumpToRecommendListRequestEvent` is created and posted to `EventsCenter`.
 Shown below is the component interactions for the `recommend mode/single calories/150` command.
@@ -391,7 +390,6 @@ Shown below is the component interactions for the `recommend mode/single calorie
 [[fig-RecommendEventSD]]
 .Component interactions for `recommend mode/single calories/150` command (part 1).
 image::SDForRecommendEvent.png[width="700"]
-{nbsp} +
 
 The event then propagates through `EventsCenter` to the `WorkoutListPanel`.
 The `WorkoutListPanel` will call `handleJumpToRecommendListRequestEvent()` and update the `UI` to scroll to and select the workout.
@@ -400,7 +398,6 @@ The process is shown in the Figure below.
 [[fig-RecommendEventHandlingSD]]
 .Component interactions for `recommend mode/single calories/150` command (part 2).
 image::SDForRecommendEventHandling.png[width="500"]
-{nbsp} +
 
 `recommend` command is integrated with the profile. User can find a workout with the respective data types `Calories`, `Difficulty` and `Duration` if specified under the workout presets in the profile.
 After that, user just have to type `recommend` in the command box and press enter to get the workout.
