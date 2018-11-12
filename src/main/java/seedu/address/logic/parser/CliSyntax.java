@@ -1,5 +1,11 @@
 package seedu.address.logic.parser;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -47,4 +53,65 @@ public class CliSyntax {
     public static final Prefix PREFIX_NOTE_START_DATE = new Prefix("sd/");
     public static final Prefix PREFIX_NOTE_START_TIME = new Prefix("st/");
     public static final Prefix PREFIX_NOTE_TITLE = new Prefix("tt/");
+
+    /* List of existing commands in Trajectory to be used for auto-completion */
+    public static final Map<String, List<String>> COMMAND_LIST =
+            Map.ofEntries(
+            new AbstractMap.SimpleEntry<>("class", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "addstudent",
+                    "delete",
+                    "delstudent",
+                    "edit",
+                    "list",
+                    "listattendance",
+                    "markattendance",
+                    "modattendance"
+            ))),
+            new AbstractMap.SimpleEntry<>("course", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "delete",
+                    "list",
+                    "liststudents"
+            ))),
+            new AbstractMap.SimpleEntry<>("grade", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "graph",
+                    "list"
+            ))),
+            new AbstractMap.SimpleEntry<>("gradebook", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "delete",
+                    "edit",
+                    "find",
+                    "list"
+            ))),
+            new AbstractMap.SimpleEntry<>("module", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "archive",
+                    "assign",
+                    "delete",
+                    "edit",
+                    "enrol",
+                    "find",
+                    "list",
+                    "view"
+            ))),
+            new AbstractMap.SimpleEntry<>("note", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "delete",
+                    "edit",
+                    "export",
+                    "find",
+                    "list"
+            ))),
+            new AbstractMap.SimpleEntry<>("student", new ArrayList<>(Arrays.asList(
+                    "add",
+                    "delete",
+                    "edit",
+                    "export",
+                    "find",
+                    "list"
+            )))
+    );
 }
