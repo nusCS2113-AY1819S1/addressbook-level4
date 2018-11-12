@@ -39,10 +39,10 @@ Responsibilities: Deadline features
 
 === Chan Chun Cheong
 image::chanchuncheong.png[width="150", align="left"]
-{empty}[https://github.com/ChanChunCheong[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/ChanChunCheong[github]] [http://localhost:63342/main/build/docs/html5/team/chanchuncheong.html?_ijt=l9dj775ero3uhjtkt2segmqrba[portfolio]]
 
 Role: Developer +
-Responsibilities: Task & Deadline features
+Responsibilities: Task , Deadline and Tag features
 
 '''
 

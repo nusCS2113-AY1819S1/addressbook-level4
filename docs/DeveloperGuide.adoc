@@ -459,6 +459,61 @@ image::DG_AddMilestoneCommand.png[width="790"]
 ** Cons: May result in confusion especially if there are tasks with very similar `title`.
 // end::milestone_feature[]
 
+// tag::deferDeadline_feature[]
+=== Defer Deadline feature
+==== Current Implementation
+The `defer deadline` mechanism is facilitated by `VersionedTaskBook`. The `defer deadline command` takes in the `index
+prefix` with `index` of the task to be deferred, followed by the `deadline prefix` with its corresponding `number of days`
+which will defer the deadline in the task by the number of days.
+
+The index represents the `Task` in the list from `PersonListPanel` displayed in the `GUI`.
+
+The validity of the input by the user is checked through the `DeferDeadlineCommandParser` and `TaskBookParser`. A
+`DeferDeadlineCommand` object is returned and the `execute()` method will be performed. The validity of the index will be
+checked and the task to be deferred is retrieve using the `getFilterTaskList()` method. A copy of the task will be
+instantiated as deferredTask. The deadline of `deferredTask` will be deferred by the number of days inputted by the user.
+The validity of the deadline and existence of duplicate tasks will be checked.  Task to be deferred will be updated with
+ `deferredTask` through `updateTask()` and `updateFiteredTaskList()` method in the Model Component.
+
+Step 1. The user launches the application. If it is the first time he/she is launching it, the `VersionedTaskBook` will be
+ initialized with a sample task book data. If the user has already launched it previously and made changes to it, the
+ `VersionedTaskBook` launched will contain the data that he/she has entered in the previous launch.
+
+Step 2. The user executes `defer i/1 dd/1` to defer the deadline of the selected task at index 1 in the list. The `defer`
+command obtains the data of the task that the user wants to change based on the input index.
+
+Step 3. The `defer` command will retrieve and copy the details of the task at index 1 and instantiate a new task
+`deferredTask` and `defer the deadline by 1 day`.
+
+Step 4. The defer command will call `Model#updateTask()` and update the task at index 1 with the details of `deferredTask`.
+Also, `Model#updateFilteredTaskList()` will be called to update the list that is being shown to the user with the updated task.
+
+Step 5.  Lastly, `Model#commitTaskBook()` will be called causing the modified state of the task book after the defer i/1 dd/1 command
+executes to be saved in the  `TaskBookStateList`, and the `currentStatePointer` to be updated.
+
+The following sequence diagram illustrates how the `defer` command is implemented.
+
+image::DeferDeadline_SequenceDiagram.png[width="790"]
+
+
+==== Design Considerations
+
+===== Aspect: How should the deadline of the task be deferred
+* **Alternative 1 (current choice):**  Choose to `defer` the task based on the `number of days required` and the
+deadline will be `automatically updated`.
+** Pros: More `user-friendly` as it allows user to defer the deadline by the `number of days required` and the deadline
+will be `automatically updated` without the user finding the exact deadline through calendar.
+** Cons: More `complex` implementation of the feature as `multiple conditional statements` are required to ensure the
+deadline is updated correctly by taking into consideration the `features of a calendar`. For example, which are the months
+ have 30 or 31 days and how is leap year calculated?
+* **Alternative 2:**  Choose to `defer` the task based on the `exact date`
+** Pros: `Easy` implementation of defer deadline command as just have to change the deadline `based on users input`.
+** Cons: By allowing users to `defer` the tasks by entering the `exact deadline` to defer will result in defer deadline
+command to be `similar to edit task` as it is simply just editing the task’s deadline by keying in a new deadline.
+
+// end::deferDeadline_feature[]
+
+
 // tag::lockunlock[]
 === Locking/Unlocking Task Book feature [coming in v2.0]
 ==== Proposed Implementation
@@ -737,10 +792,9 @@ Use case ends.
 
 * 1a. Student provided an invalid sorting method
 ** 1a1. TB outputs an error message to request for a valid sorting method
-** 1a2. Student returns a new sort sorting method
 +
 Use case ends.
-
+// tag::usecase_deferDeadlines[]
 [discrete]
 === Use case: Defer deadlines
 
@@ -748,18 +802,95 @@ Use case ends.
 
 1. Student requests to defer the deadline for an existing task by number of days
 2. TB checks the validity of the index and number of days.
-3. TB updates the new deadline for the existing task
+3. TB updates and display the new deadline for the existing task
 +
 Use case ends.
 
 *Extensions*
 
-* 1b. Student wants to defer a deadline for a task without deadline
+* 1a. Student wants to defer a deadline for an non-existent task
+** 1a1. TB outputs an error message
+
+* 1b. Student wants to defer to a invalid deadline for the selected task
 ** 1b1. TB outputs an error message
++
+Use case ends.
+// end::usecase_deferDeadlines[]
+[discrete]
+
+[discrete]
+// tag::usecase_milestone[]
+=== Use case: Add tag
+
+*MSS*
+
+1. Student requests to add a new tag and provides the index and the tag
+2. TB adds the tag to the selected task
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Student enters an invalid index when list of tasks added is empty
+** 1a1. TB outputs error message for invalid index
++
+Use case ends.
+
+* 1b. Student enters index, tag and rank without all the required prefixes
+** 1b1. TB outputs error message for invalid format
++
+Use case ends.
+
+* 1c. Student enters an invalid tag
+** 1c1. TB outputs error message for invalid format
 +
 Use case ends.
 
 [discrete]
+=== Use case: remove tag
+
+*MSS*
+
+1. Student requests to remove a tag and provides the index and the tag
+2. TB removes the tag from the selected task
++
+Use case ends.
+
+*Extensions*
+* 1a. Student enters an invalid index when list of tasks added is empty
+** 1a1. TB outputs error message for invalid index
++
+Use case ends.
+
+* 1b. Student enters index, tag and rank without all the required prefixes
+** 1b1. TB outputs error message for invalid format
++
+Use case ends.
+
+* 1c. Student enters an invalid tag
+** 1c1. TB outputs error message for invalid format
++
+Use case ends.
+
+* 1d. Student selected the task that doesn't have the tag indicated
+** 1d1. TB outputs error message for invalid format
++
+Use case ends.
+
+[discrete]
+=== Use case: select tag
+
+*MSS*
+
+1. Student requests to display list of task with the selected tag and provides the tag
+2. TB removes the tag from the selected task
++
+Use case ends.
+
+* 1c. Student enters an invalid tag
+** 1c1. TB outputs error message for invalid format
++
+Use case ends.
 // tag::editTask[]
 === Use case: Edit task
 
