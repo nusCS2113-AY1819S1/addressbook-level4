@@ -41,7 +41,7 @@ public class XmlUtilTest {
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
     private static final String VALID_POSTALCODE = "605565";
-    private static final String VALID_MAJOR ="Computer Engineering";
+    private static final String VALID_MAJOR = "Computer Engineering";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
     @Rule
