@@ -9,35 +9,41 @@
 
 == Overview
 
-BookInventory is a desktop application cater for small and medium bookstore owners. It designed to be primarily used as a stock management tool by book store owner with the added benefit for customers to directly browse through the stocks they have.
+BookInventory is a desktop application cater for small and medium bookstore owners. It designed to be primarily used as a *stock management tool* by book store owner with the added benefit for customers to directly browse through the stocks they have.
 
-Users interacts with BookInventory through the Command-Line Interface (CLI), and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Users interacts with BookInventory through the *Command-Line Interface (CLI)*, and a *Graphical User Interface (GUI)* created with JavaFX. It is written in Java, and has approximately 10 kLoC.
+
+BookInventory was developed by a team of four students over the course of a semester. It is morphed from the Address Book (Level 4) project by SE-EDU.
+
+BookInventory started as a project for the following modules offered by the School of Computing, National University of Singapore:
+
+* *CS2101* - Effective Communication for Computing Professionals
+
+* *CS2113* - Software Engineering & Object-Oriented Programming
+
+This project portfolio documents my contributions to the BookInventory project.
 
 == Summary of contributions
 
 * *Major enhancement*: added *statistic feature*
 ** What it does: allows the user to view the monthly performance of the store through key financial datas like revenue, expense and inventory.
-** Justification: This feature helps value-add the product significantly because financial datas are tedious to record and can be prone to human error. With the help of automation, financial datas are more reliable and accurate, further owners can access them swiftly.
-** Highlights: This enhancement requires a singleton class StatisticCenter which interacts with most of the existing commands and possibly future commands.
-** Credits: Singleton implementation - https://medium.com/exploring-code/how-to-make-the-perfect-singleton-de6b951dfdb0
+** Justification: This feature value-adds the product significantly because financial data are tedious to record and  prone to human error. With the help of software, financial data are more reliable, accurate, and owners can access them swiftly.
+** Highlights: This enhancement requires a singleton class `StatisticCenter` which interacts with most of the existing commands and possibly future commands.
 
-* *Minor enhancement*: added a stock command that allows the user to stock books.
+* *Minor enhancement*: added a stock command that allow admin users to stock books.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.0` - `v1.1` (2 releases) on GitHub
+*** Managed releases `v1.0` - `v1.4` (5 releases) on GitHub
 ** Project morphing:
 *** Morphed model portion of addressbook 4.
-** Enhancements to existing features:
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/58[1])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the stock feature I added was adopted by several other class mates
-** Tools:
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-2/main/issues/121[1], https://github.com/CS2113-AY1819S1-W12-2/main/issues/103[2], https://github.com/CS2113-AY1819S1-W12-2/main/issues/130[3])
 
 
 == Contributions to the User Guide

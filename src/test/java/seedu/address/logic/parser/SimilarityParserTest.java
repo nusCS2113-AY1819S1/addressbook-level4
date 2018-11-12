@@ -3,12 +3,11 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import seedu.address.logic.commands.CommandList;
-
-import java.util.ArrayList;
-
 
 public class SimilarityParserTest {
 

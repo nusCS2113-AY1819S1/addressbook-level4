@@ -18,13 +18,7 @@ By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-BookInventory is catered for a variety of users, ranging from inventory keeper,
-accountant to students. Inventory Keeper is able to increase/decrease stocks for each book.
-The accountant is able to check the total revenue and profits for individual books to make
-better decisions to improve the sales. Students will have access in checking the availability
-of materials related to their modules. Most importantly, BookInventory is optimized for those
-who prefer to work with Command Line Interface (CLI) while still having the benefits of a
-GraphicalUser Interface (GUI). Enjoy!
+_BookInventory_ is catered solely for students as well as other managerial roles such as store managers and accountant. _BookInventory_ allows store managers to increase/decrease stocks for each book. Accountants will be able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, _BookInventory_ is optimized for those who prefer to work with *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. Enjoy!
 
 == Getting Started
 
@@ -233,6 +227,11 @@ Examples:
 * `request i/978-2-12-345680-3 e/johnd@gmail.com q/5` +
 Requests for 5 same books with the corresponding iSBN13 with requester's email johnd@gmail.com
 
+=== Toggle request panel : `togglerequests`
+
+Toggle the request panel. When toggled off, requests are hidden and request panel can be minimized. Strictly for bookstore owners. +
+Format: `togglerequests`
+
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -251,7 +250,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the inventory book's content (`add`, `delete`, `increase`, `decrease` and `clear`).
+Undoable commands: those commands that modify the inventory book's content (`add`, `delete`, `stock`, `sell` and `clear`).
 ====
 
 Examples:
@@ -307,6 +306,26 @@ Format: `clear`
 
 Exits the program. +
 Format: `exit`
+
+// tag::tabfeature[]
+=== Cycling through existing Isbn: kbd:[Tab]
+
+You can auto-fill the Isbn field with existing ones in the Inventory to save the hassle having to type the entire Isbn of a book. +
+Format: kbd:[Tab]
+
+Examples:
+
+* `sell i/` +
+kbd:[Tab] (completes the `Isbn` field for `sell i/` with the Isbn of the first book in the inventory) +
+ E.g. `sell i/9782123456803`
+
+* `sell i/978` +
+kbd:[Tab] (completes the `Isbn` field for `sell i/978` with the first Isbn of a book that contains `978` in the inventory) +
+E.g. `sell i/9782123456803`
+
+* `sell i/777` +
+kbd:[Tab] (does not complete the `Isbn` field as inventory does not contains books with Isbn starting with `777`)
+// end::tabfeature[]
 
 === Saving the data
 

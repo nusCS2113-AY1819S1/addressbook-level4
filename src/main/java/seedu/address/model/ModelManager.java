@@ -44,7 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyBookInventory newData) {
         versionedBookInventory.resetData(newData);
-        indicateAddressBookChanged();
+        indicateBookInventoryChanged();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
+    private void indicateBookInventoryChanged() {
         raise(new BookInventoryChangedEvent(versionedBookInventory));
     }
 
@@ -72,14 +72,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteBook(Book target) {
         versionedBookInventory.removeBook(target);
-        indicateAddressBookChanged();
+        indicateBookInventoryChanged();
     }
 
     @Override
     public void addBook(Book book) {
         versionedBookInventory.addBook(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
-        indicateAddressBookChanged();
+        indicateBookInventoryChanged();
     }
 
     @Override
@@ -87,15 +87,17 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedBook);
 
         versionedBookInventory.updateBook(target, editedBook);
-        indicateAddressBookChanged();
+        indicateBookInventoryChanged();
     }
 
+    //@@author kennethcsj
     @Override
     public void sortBooksUsingQuantity() {
         versionedBookInventory.sortBooks();
     }
     //=========== Filtered Book List Accessors =============================================================
 
+    //@@author
     /**
      * Returns an unmodifiable view of the list of {@code Book} backed by the internal list of
      * {@code versionedBookInventory}
@@ -112,6 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //=========== Tab Pressed ===============================================================================
 
+    //@@author kennethcsj
     @Override
     public Queue<String> getCompleteIsbn(String isbnText) {
         return versionedBookInventory.getCompleteIsbn(isbnText);
@@ -119,26 +122,27 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Undo/Redo =================================================================================
 
+    //@author
     @Override
-    public boolean canUndoAddressBook() {
+    public boolean canUndoBookInventory() {
         return versionedBookInventory.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
+    public boolean canRedoBookInventory() {
         return versionedBookInventory.canRedo();
     }
 
     @Override
     public void undoBookInventory() {
         versionedBookInventory.undo();
-        indicateAddressBookChanged();
+        indicateBookInventoryChanged();
     }
 
     @Override
     public void redoBookInventory() {
         versionedBookInventory.redo();
-        indicateAddressBookChanged();
+        indicateBookInventoryChanged();
     }
 
     @Override
