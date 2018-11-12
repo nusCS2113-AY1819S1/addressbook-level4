@@ -2,7 +2,6 @@ package seedu.address.model.reminder;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_AGENDA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMINDER2_TITLE;
