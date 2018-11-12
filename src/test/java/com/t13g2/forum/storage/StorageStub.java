@@ -13,18 +13,18 @@ import com.t13g2.forum.storage.forum.IStorage;
 /**
  *
  */
-public class IStorageStub implements IStorage {
-    private static IStorageStub _instance;
+public class StorageStub implements IStorage {
+    private static StorageStub _instance;
 
     private HashMap<Class, Object> storage;
 
-    private IStorageStub() {
+    private StorageStub() {
         storage = new HashMap<>();
     }
 
-    public static IStorageStub getInstance() {
+    public static StorageStub getInstance() {
         if (_instance == null) {
-            _instance = new IStorageStub();
+            _instance = new StorageStub();
         }
         return _instance;
     }
@@ -56,7 +56,7 @@ public class IStorageStub implements IStorage {
     // }
 
     public void refreshInstantce() {
-        _instance = new IStorageStub();
+        _instance = new StorageStub();
     }
 
     /**
