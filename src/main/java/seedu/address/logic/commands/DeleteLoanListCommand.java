@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import seedu.address.MainApp;
@@ -45,26 +45,34 @@ public class DeleteLoanListCommand extends Command {
         if (!MainApp.getLoanListFile().exists()) {
             throw new CommandException(MESSAGE_EMPTY);
         }
+        File loanListFile = MainApp.getLoanListFile();
         try {
-            JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            XmlAdaptedLoanList xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
-                    .unmarshal(MainApp.getLoanListFile());
-            ArrayList<XmlAdaptedLoanerDescription> loanList = xmlAdaptedLoanList.getLoanList();
-
-            if (index.getOneBased() > loanList.size()) {
-                throw new CommandException(MESSAGE_INVALID_INDEX);
-            }
-
-            updateStatus(model, history, loanList.get(index.getZeroBased()));
-
-            loanList.remove(index.getZeroBased());
-
-            LoanListCommand.updateXmlLoanListFile(new XmlAdaptedLoanList(loanList));
-        } catch (JAXBException e) {
+            deleteLoanList(model, history, loanListFile);
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
+    }
+    /**
+     * Deletes an entry in the loan list base on the Index
+     */
+    void deleteLoanList(Model model, CommandHistory history, File loanListFile) throws Exception {
+
+        JAXBContext context = JAXBContext.newInstance(XmlAdaptedLoanList.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        XmlAdaptedLoanList xmlAdaptedLoanList = (XmlAdaptedLoanList) unmarshaller
+                .unmarshal(loanListFile);
+        ArrayList<XmlAdaptedLoanerDescription> loanList = xmlAdaptedLoanList.getLoanList();
+
+        if (index.getOneBased() > loanList.size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX);
+        }
+
+        updateStatus(model, history, loanList.get(index.getZeroBased()));
+
+        loanList.remove(index.getZeroBased());
+
+        LoanListCommand.updateXmlLoanListFile(new XmlAdaptedLoanList(loanList), loanListFile);
     }
     /**
      * Changes the status from Ready to On_Loan

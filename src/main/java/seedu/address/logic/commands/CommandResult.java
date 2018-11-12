@@ -13,4 +13,17 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof CommandResult)) {
+            return false;
+        }
+
+        CommandResult otherCommandResult = (CommandResult) other;
+        return (otherCommandResult.feedbackToUser.equals(feedbackToUser));
+    }
 }
