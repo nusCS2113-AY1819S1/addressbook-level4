@@ -432,12 +432,10 @@ The following sequence diagram shows how the AddCommentCommand operation works:
 .Sequence Diagram for AddCommentCommand
 image::addCommentSequenceDiagram.png[width="800"]
 
-[Note]
-====
-*Detailed description of diagram*: The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user.
+[NOTE]
+*Detailed description of diagram*: The user inputs "addComment 1 C/Hi". `LogicManager#execute("addComment 1 C/Hi")` and calls `EventManagerParser#parseCommand("addComment 1 C/Hi")`. +
+Then, `AddCommentCommandParser#parse("1 C/Hi")` will be called and `AddCommentCommand#execute()` will obtain the event needed from `eventmanager.xml`. Finally, `CommandFacade#addComment` will be called and `AddComment#addComment` will process and add the new comment into the comment section. After all this, results will be returned to the various receivers and display an updated comments section to the user. The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 
-The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
-====
 
 Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply the comment in step 2. `ReplyCommentCommand` command obtains the comment section from `eventmanager.xml` calls `CommentFacade` to reply comment with "Athletic attire", into the comment section and stores the comment section into `eventmanager.xml`
 
@@ -483,7 +481,7 @@ The RSVP feature consists of the `register`, `unregister`, and `attending` comma
 Below is an example usage scenario and how the RSVP mechanism behaves during a `register` operation:
 
 |===
-Step 1: The user launches the application, and logs in.
+|Step 1: The user launches the application, and logs in.
 
 Step 2: The user clicks on an event or types `select 2` into the CLI. Details of the 2nd event including event attendance are displayed.
 
@@ -492,13 +490,12 @@ Step 3: The user executes `register 2` to register for the 2nd event. With the `
 Step 4: The `register` command tries to add the username into the current attendance with `HashSet#add`. If the username already exists in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
 
 Step 5: The model is updated with the edited event and committed. The event page is reloaded to display the new event attendance.
-
 |===
 
 Below is another example usage scenario illustrating how the RSVP mechanism behaves during an `unregister` operation, with the use of `attending`.
 
 |===
-Step 1: The user launches the application, and logs in.
+|Step 1: The user launches the application, and logs in.
 
 Step 2: The user types `attending` into the CLI. `AttendingCommand#execute` retrieves the current user's username from `Model` and creates a `AttendanceContainsUsernamePredicate` predicate. The predicate is used with `Model#updateFilteredEventList` to filter out events without the user's username in their attendance. Events that the user has registered for are displayed.
 
