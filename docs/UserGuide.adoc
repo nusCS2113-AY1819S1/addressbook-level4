@@ -200,8 +200,8 @@ _{explain how the user can enable/disable data encryption}_
 
 == Main Features
 
+//tag::member[]
 === Members
-
 ==== Adding a member: `addmember`
 
 Adds a person to the ClubHub +
@@ -333,6 +333,8 @@ Deletes the 2nd person in ClubHub.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
+
+//end::member[]
 
 === Accounts
 
@@ -520,6 +522,7 @@ Shows a list of all items in the ClubHub. +
 Format: `listItems`
 // end::itemlist[]
 
+// tag::record[]
 == Record feature `[coming in v2.0]`
 
 Record feature allows the user to update many new club information all at once.
@@ -548,13 +551,14 @@ Furthermore, there will a panel at the bottom of Clubhub to show history of all 
 .Sample New UI
 image::AddRecordUI.PNG[width="790"]
 
-
+// end::record[]
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClubHub folder.
 
+// tag::summary[]
 == Command Summary
 
 * *Help* : `help`
@@ -587,3 +591,4 @@ e.g.`select 2`
 * *DecreaseItem* : `decreaseItem INDEX q/ITEM_QUANTITY`
 * *FindItem* : `findItem KEYWORD [MORE_KEYWORDS]`
 * *ListItem* : `listItems`
+// end::summary[]
