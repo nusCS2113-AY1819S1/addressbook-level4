@@ -1,8 +1,10 @@
 package seedu.address.logic;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_WORKOUT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
+import java.io.IOException;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -26,30 +28,42 @@ public class LogicManagerTest {
     private Logic logic = new LogicManager(model);
 
     @Test
-    public void execute_invalidCommandFormat_throwsParseException() {
+    public void execute_invalidCommandFormat_throwsParseException() throws IOException {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
         assertHistoryCorrect(invalidCommand);
     }
 
     @Test
-    public void execute_commandExecutionError_throwsCommandException() {
+    public void execute_commandExecutionError_throwsCommandException() throws IOException {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_WORKOUT_DISPLAYED_INDEX);
         assertHistoryCorrect(deleteCommand);
     }
 
     @Test
-    public void execute_validCommand_success() {
+    public void execute_validCommand_success() throws IOException {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
         assertHistoryCorrect(listCommand);
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredWorkoutList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        logic.getFilteredPersonList().remove(0);
+        logic.getFilteredWorkoutList().remove(0);
+    }
+
+    @Test
+    public void getFilteredTrackedData_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        logic.getFilteredTrackedData().remove(0);
+    }
+
+    @Test
+    public void getFilteredTrackedDataList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        logic.getFilteredTrackedDataList().remove(0);
     }
 
     /**
@@ -57,7 +71,8 @@ public class LogicManagerTest {
      * Also confirms that {@code expectedModel} is as specified.
      * @see #assertCommandBehavior(Class, String, String, Model)
      */
-    private void assertCommandSuccess(String inputCommand, String expectedMessage, Model expectedModel) {
+    private void assertCommandSuccess(String inputCommand, String expectedMessage, Model expectedModel) throws
+            IOException {
         assertCommandBehavior(null, inputCommand, expectedMessage, expectedModel);
     }
 
@@ -65,7 +80,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
      * @see #assertCommandBehavior(Class, String, String, Model)
      */
-    private void assertParseException(String inputCommand, String expectedMessage) {
+    private void assertParseException(String inputCommand, String expectedMessage) throws IOException {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
     }
 
@@ -73,7 +88,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * @see #assertCommandBehavior(Class, String, String, Model)
      */
-    private void assertCommandException(String inputCommand, String expectedMessage) {
+    private void assertCommandException(String inputCommand, String expectedMessage) throws IOException {
         assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
     }
 
@@ -81,8 +96,10 @@ public class LogicManagerTest {
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
      * @see #assertCommandBehavior(Class, String, String, Model)
      */
-    private void assertCommandFailure(String inputCommand, Class<?> expectedException, String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    private void assertCommandFailure(String inputCommand, Class<?> expectedException, String expectedMessage)
+            throws IOException {
+        Model expectedModel = new ModelManager(model.getWorkoutBook(), model.getTrackedDataList(),
+                model.getTrackedData(), new UserPrefs());
         assertCommandBehavior(expectedException, inputCommand, expectedMessage, expectedModel);
     }
 
@@ -90,10 +107,10 @@ public class LogicManagerTest {
      * Executes the command, confirms that the result message is correct and that the expected exception is thrown,
      * and also confirms that the following two parts of the LogicManager object's state are as expected:<br>
      *      - the internal model manager data are same as those in the {@code expectedModel} <br>
-     *      - {@code expectedModel}'s address book was saved to the storage file.
+     *      - {@code expectedModel}'s workout book was saved to the storage file.
      */
     private void assertCommandBehavior(Class<?> expectedException, String inputCommand,
-                                           String expectedMessage, Model expectedModel) {
+                                           String expectedMessage, Model expectedModel) throws IOException {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -111,7 +128,7 @@ public class LogicManagerTest {
      * Asserts that the result display shows all the {@code expectedCommands} upon the execution of
      * {@code HistoryCommand}.
      */
-    private void assertHistoryCorrect(String... expectedCommands) {
+    private void assertHistoryCorrect(String... expectedCommands) throws IOException {
         try {
             CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD);
             String expectedMessage = String.format(

@@ -12,7 +12,9 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
+    private Path workoutBookFilePath = Paths.get("data" , "workoutbook.xml");
+    private Path trackedDataListFilePath = Paths.get("data" , "trackeddatalist.xml");
+    private Path trackedDataFilePath = Paths.get("data", "trackeddata.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -30,12 +32,28 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+    public Path getWorkoutBookFilePath() {
+        return workoutBookFilePath;
     }
 
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        this.addressBookFilePath = addressBookFilePath;
+    public void setWorkoutBookFilePath(Path workoutBookFilePath) {
+        this.workoutBookFilePath = workoutBookFilePath;
+    }
+
+    public Path getTrackedDataListFilePath() {
+        return trackedDataListFilePath;
+    }
+
+    public void setTrackedDataListFilePath(Path trackedDataListFilePath) {
+        this.trackedDataListFilePath = trackedDataListFilePath;
+    }
+
+    public Path getTrackedDataFilePath() {
+        return trackedDataFilePath;
+    }
+
+    public void setTrackedDataFilePath(Path trackedDataFilePath) {
+        this.trackedDataFilePath = trackedDataFilePath;
     }
 
     @Override
@@ -50,19 +68,20 @@ public class UserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return Objects.equals(guiSettings, o.guiSettings)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath);
+                && Objects.equals(workoutBookFilePath, o.workoutBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, workoutBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal workoutbook data file location : " + workoutBookFilePath);
+        sb.append("\nLocal tracking data file location : " + trackedDataListFilePath);
         return sb.toString();
     }
 

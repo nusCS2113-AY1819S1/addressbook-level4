@@ -1,0 +1,64 @@
+= Yan YiCheng - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: WorkoutBook
+
+---
+
+== Overview
+
+Are you a professional athlete who is too lazy to manually search through your workout list to find your favourite workout?
+Are you an amateur who just started working out and doesn't know where to begin?
+Or are you just someone who prefers to have all of your workouts in one place and organized in a tidy manner. Then WorkoutBook is the solution for you!
+WorkoutBook is a desktop address book application used for anyone who does workouts to manage their workouts. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to traversing all workouts and remark selected workout*
+** What it does: allows the user to filter workouts based on three parameters, consisting of duration, type and equipment. Then select and remark a workout by remark command.
+** Justification: This feature improves the product because a user can find a target workout more efficiently and comment on a workout besides adding tags to the workout.
+** Highlights: The only way to remark a workout for users is through remark command, not through add or edit command. Model, UI, and logic need to be modified.
+
+** Credits: Team members
+
+* *Minor enhancement*: added a sort command that allows the user to sort the workouts based on name in ascending alphabetical order.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=yicheng12[project dashboard]]
+
+* *Other contributions*:
+
+** Project management:
+** Enhancements to existing features:
+*** Assisted in the morphing of the product from AB4 to Workout book.
+*** Wrote additional tests for existing features (https://github.com/CS2113-AY1819S1-T13-5/main/pull/166[#166], https://github.com/CS2113-AY1819S1-T13-5/main/pull/257[#257])
+
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide:
+https://github.com/CS2113-AY1819S1-T13-5/main/pull/119[#119]
+https://github.com/CS2113-AY1819S1-T13-5/main/pull/165[#165]
+https://github.com/CS2113-AY1819S1-T13-5/main/pull/166[#166]
+** Community:
+*** Reported bugs and suggestions for other teams in the class (https://github.com/CS2113-AY1819S1-F09-3/main/issues/248[#248], https://github.com/CS2113-AY1819S1-F09-3/main/issues/250[#250])
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=sort]
+include::../UserGuide.adoc[tag=filter]
+include::../UserGuide.adoc[tag=remark]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=TR]
+include::../DeveloperGuide.adoc[tag=appendixtr]

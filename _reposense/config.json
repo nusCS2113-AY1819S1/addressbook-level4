@@ -1,0 +1,30 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "sijieg",
+      "displayName": "GOH...JIE",
+      "authorNames": ["sijieg", "SJ"]
+    },
+    {
+      "githubId": "garyheng",
+      "displayName": "GAR...HEN",
+      "authorNames": ["garyheng", "Gary Heng Hui Shen"]
+    },
+    {
+      "githubId": "DarylTew",
+      "displayName": "TEW...RYL",
+      "authorNames": ["DarylTew", "Daryl Tew"]
+    },
+    {
+      "githubId": "shouteck",
+      "displayName": "TIN...ECK",
+      "authorNames": ["shouteck"]
+    },
+    {
+      "githubId": "yicheng12",
+      "displayName": "YAN...ENG",
+      "authorNames": ["yicheng12"]
+    }
+  ]
+}

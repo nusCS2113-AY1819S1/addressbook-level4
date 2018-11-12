@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- TrackedDataList save file which contains the
+ same Parameter values as in TypicalParameters#getTypicalTrackedDataList() -->
+<trackeddatalist>
+    <parameters>
+        <prefix>name/</prefix>
+        <value>commando</value>
+    </parameters>
+    <parameters>
+        <prefix>type/</prefix>
+        <value>strength</value>
+    </parameters>
+    <parameters>
+        <prefix>duration/</prefix>
+        <value>20m</value>
+    </parameters>
+    <parameters>
+        <prefix>difficulty/</prefix>
+        <value>advanced</value>
+    </parameters>
+    <parameters>
+        <prefix>equipment/</prefix>
+        <value>dumbbell</value>
+    </parameters>
+    <parameters>
+        <prefix>muscle/</prefix>
+        <value>bicep</value>
+    </parameters>
+    <parameters>
+        <prefix>calories/</prefix>
+        <value>150</value>
+    </parameters>
+    <parameters>
+        <prefix>instruction/</prefix>
+        <value>extension</value>
+    </parameters>
+</trackeddatalist>

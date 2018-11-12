@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -8,10 +9,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.WorkoutBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.workout.Parameter;
+import seedu.address.model.workout.Workout;
 
 /**
  * The main LogicManager of the app.
@@ -21,19 +23,19 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final CommandHistory history;
-    private final AddressBookParser addressBookParser;
+    private final WorkoutBookParser workoutBookParser;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
-        addressBookParser = new AddressBookParser();
+        workoutBookParser = new WorkoutBookParser();
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText) throws CommandException, ParseException , IOException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = addressBookParser.parseCommand(commandText);
+            Command command = workoutBookParser.parseCommand(commandText);
             return command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -41,8 +43,18 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Workout> getFilteredWorkoutList() {
+        return model.getFilteredWorkoutList();
+    }
+
+    @Override
+    public ObservableList<Parameter> getFilteredTrackedDataList() {
+        return model.getFilteredTrackedDataList();
+    }
+
+    @Override
+    public ObservableList<Workout> getFilteredTrackedData() {
+        return model.getFilteredTrackedData();
     }
 
     @Override

@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= WorkoutBook - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -11,117 +11,251 @@
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
+:warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T13-5/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T13-5`      Since: `Sept 2018`      #Licence: `MIT`
+
+
+
+
+
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+WorkoutBook is for those who *prefer to use a desktop app for managing workouts*. More importantly, WorkoutBook is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 == Quick Start
 
-.  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
-+
-image::Ui.png[width="790"]
-+
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
+* *`list`* : Lists all workouts in the WorkoutBook.
+* **`add`**`name/commando workout type/strength duration/20m difficulty/advanced equipment/dumbbell, bench muscle/bicep, tricep calories/150 instruction/set 1: bicep curl reps: 4-6 set 2: tricep extension reps: 4-6 tag/heavy` : adds a Workout named `commando workout` to the WorkoutBook.
+* **`delete`**`3` : Deletes the 3rd workout shown in the current list of workouts.
+* *`exit`* : Exits the application.
 
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
 == Features
 
+// tag::commandformat[]
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add name/NAME`, `NAME` is a parameter which can be used as `add name/commando workout`.
+* Below is a list of the remaining parameters with examples of their acceptable formats:
+
+** *_CALORIES_* are positive integers from 1 to 1000. E.g. `120`, `500`, etc.
+** *_DIFFICULTY_* should only be either beginner, intermediate or advanced.
+** *_DURATION_* should only be in this format: E.g. `20m`, `500m`, etc from 1m to 1000m.
+** *_EQUIPMENT_* is a list of equipment separated by commas, and it should not be blank. E.g. `dumbbell,bench,mat` and `dumbbell, bench, mat` are valid.
+** *_MUSCLE_* is a list of muscle groups separated by commas, and it should not be blank. E.g. `triceps,biceps,back` and `triceps, biceps, back` are valid.
+** *_TYPE_* is a list of workout types separated by commas, and it should not be blank. E.g. `cardio,strength,balance` and `cardio, strength, balance` are valid.
+** *_INSTRUCTION_* should only contain alphanumeric characters, punctuation, spaces, and it should not be blank. E.g. `set1: dumbbell curls reps: 4-6`.
+** *_TAG_* Tag names should be alphanumeric and cannot contain be any of the exact words `current` or `completed`.
+** *_USERNAME_* should only contain alphanumeric characters, and it should not be blank. E.g.  `John Doe` and `Jane` are valid.
+** *_HEIGHT_* should only be in the form x.xx whereby x is any integer. E.g. `1.72` and `1.88` are valid.
+** *_WEIGHT_* should only be in the form xx.x or xxx.x whereby x is any integer. E.g. `88.4` and `102.9` are valid.
+** *_GENDER_* should only be either male or female.
+** *_MODE_* should only be either `all`, `single` or `multiple INTEGER` where INTEGER are positive integers from 1 to 1000. E.g `multiple 777`.
+* Items in square brackets are optional e.g `name/NAME [tag/TAG]` can be used as `name/commando workout tag/strength` or as `name/commando workout`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[tag/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `tag/strength`, `tag/strength tag/fast-paced` etc.
+* Parameters can be in any order e.g. if the command specifies `name/NAME type/TYPE`, `type/TYPE name/NAME` is also acceptable.
+* White spaces after a slash are automatically trimmed. For example, `add name/ commando workout` and `add name/commando workout` are the same. However, the latter is more visually pleasing.
+
+[WARNING]
+Duplicate parameters after one another will only take the last parameter input. For example, `add name/commando workout name/arnold workout` will only add the workout as arnold workout. This applies to *add*, *edit*, *recommend* and *modify* commands.
 ====
+// end::commandformat[]
 
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a person: `add`
+[NOTE]
+====
+Pressing the kbd:[F1] key will display the help window as well!
+====
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+=== Adding a workout: `add`
+
+Adds a workout to the workout book +
+Format: `add name/NAME type/TYPE duration/DURATION difficulty/DIFFICULTY equipment/EQUIPMENT muscle/MUSCLE calories/CALORIES instruction/INSTRUCTION [tag/TAG]…​`
+
+****
+* The state tag "future" will automatically be added to any new workout.
+* The state tag is for the user to note the various things: future - untouched workouts, current - the workout that the user is currently focused on and completed - workouts that have been completed by the user.
+****
+
 
 [TIP]
-A person can have any number of tags (including 0)
+A workout can have any number of tags (minimally 1 which is the state tag)
+
+[NOTE]
+====
+Duplicate workouts will include same name, different name but every other parameter is exactly the same.
+====
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add name/commando workout type/strength, cardio duration/20m difficulty/advanced equipment/dumbbell, bench muscle/bicep, tricep calories/150 instruction/set 1: bicep curl reps: 4-6 set 2: tricep extension reps: 4-6 tag/heavy`
 
-=== Listing all persons : `list`
+=== Listing all workouts : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all workouts in the workout book. +
 Format: `list`
 
-=== Editing a person : `edit`
+=== Editing a workout : `edit`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing workout in the workout book. +
+Format: `edit INDEX name/NAME [type/TYPE] [duration/DURATION] [difficulty/DIFFICULTY] [equipment/EQUIPMENT] [muscle/MUSCLE] [calories/CALORIES] [instruction/INSTRUCTION] [tag/TAG]…​`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the workout at the specified `INDEX`. The index refers to the index number shown in the displayed workout list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the workout except the state tag will be removed i.e adding of tags is not cumulative.
+* You can remove all the workout's tags except the state tag by typing `tag/` without specifying any tags after it.
+* Regarding the editing of tags, parameters using words reserved for states i.e. "future", "current" or "completed" will be ignored.
 ****
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 type/strength duration/20m` +
+Edits the type and duration of the 1st workout to be `strength` and `20m` respectively.
+* `edit 2 name/Arnold's workout tag/` +
+Edits the name of the 2nd workout to be `Arnold's workout` and clears all existing tags except the state tag.
+* `edit 3 type/cardio tag/current tag/night difficulty/advanced` +
+Edits the third workout to have `cardio` as the type, tags continue to have the existing state tag and `night` and lastly, `advanced` as the difficulty.
 
-=== Locating persons by name: `find`
+// tag::current[]
+=== Changing a workout to current : `current`
 
-Finds persons whose names contain any of the given keywords. +
+Changes a workout to be the current workout in the workout book. +
+Format: `current INDEX`
+
+****
+* Changes the state tag of the workout at the specified `INDEX`. The index refers to the index number shown in the displayed workout list. The index *must be a positive integer* 1, 2, 3, ...
+* You can change the state tag from both `future` and `completed`.
+* You only can have either zero or one current workout at any point in time.
+* Use the list command before using the current command.
+* It will also jump to the targetted workout when current command is successfully executed.
+* However, it will jump to the workout which already has the current state tag if there is one and the current command is thus unsuccessfully executed.
+****
+
+Examples:
+
+* `list` + `current 1` +
+Changes the state tag of the 1st workout to be `current`.
+
+[NOTE]
+====
+The current command will receive a warning when the indexed workout's difficulty is harder than the your indicated difficulty, duration is higher than the your indicated duration or calories is higher than the your indicated calories in your user profile under workout presets. +
+Simply click the btn:[Yes] button if you want to proceed.
+====
+// end::current[]
+
+// tag::complete[]
+=== Changing a workout to completed : `complete`
+
+Changes a workout to be a completed workout in the workout book. +
+Format: `complete INDEX`
+
+****
+* Changes the state tag of the workout at the specified `INDEX`. The index refers to the index number shown in the displayed workout list. The index *must be a positive integer* 1, 2, 3, ...
+* You can change the state tag only from `current`.
+****
+
+Examples:
+
+* `complete 1` +
+Changes the state tag of the 1st workout to be `completed`.
+// end::complete[]
+
+// tag::tracking[]
+
+=== Tracking specific parameters in completed workouts: `track`
+Tracks user-specified parameters in workouts that are marked complete via the `complete` command.
+Format: `track SUBCOMMAND PREFIX/VALUE`
+
+****
+* `SUBCOMMAND` can only be either `start` or `stop`. If it's `start`, WorkoutBook will start tracking the parameter, and for `stop`, WorkoutBook will stop the tracking.
+* If `SUBCOMMAND` is `stop`, `PREFIX/VALUE` must already be in the list of parameters being tracked.
+* Completed workouts are recorded only if the value of the corresponding prefix matches `VALUE`.
+* `PREFIX/VALUE` follows the acceptable formats for the workout parameters as stated above.
+* `VALUE` has to be one string/value with no spaces.
+* To view the completed workouts that have been recorded, refer to <<#selecting-a-tracked-parameter-code-select-code, the `select` command>>
+* If completed workouts have been tracked, they will remain tracked even if a parameter stops being tracked. To view these workouts, start tracking the parameter again using `track start PREFIX/VALUE` and then use the `select` command to select the desired parameter.
+****
+
+Examples:
+
+* `track start muscle/bicep` +
+Starts tracking the parameter `muscle/bicep` in completed workouts. +
+Any completed workout after this command is entered, that has the parameter `muscle/bicep` present, will be recorded.
+* `track stop calories/100` +
+Stops tracking the parameter `calories/100`, if it is currently being tracked.
+
+// end::tracking[]
+
+//tag::filter[]
+=== Filtering workouts by type, duration, and equipment: `filter`
+
+Filters workouts whose types, durations, equipments contain any of the given keywords. +
+Format: `filter type/TYPE duration/DURATION equipment/EQUIPMENT`
+
+****
+* The search is case insensitive. e.g `filter type/strength` will match `filter type/STRENGTH`
+* The order of the keywords does not matter. e.g. `filter type/strength duration/20m` will match `filter duration/20m type/strength`
+* Three parameters: Duration, equipment, type are searched.
+* If the keywords are more than one word, only the first word will be filtered.
+****
+
+Examples:
+
+* `filter duration/20m equipment/dumbbell type/strength` +
+Returns any workout having duration of `20m`, with equipment of `dumbbell` and of type `strength`.
+
+* `filter duration/20m type/strength equipment/dumbbell` is the same as `filter duration/20m
+equipment/dumbbell type/strength`.
+
+* `filter duration/20m type/strength equipment/free weights` is the same as `filter duration/20m
+type/strength equipment/free`.
+
+//end::filter[]
+
+=== Locating workouts by name: `find`
+
+Finds workouts whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case insensitive. e.g `Commando workout` will match `commando workout`
+* The order of the keywords does not matter. e.g. `workout commando` will match `commando workout`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Substrings will be matched e.g. `command workout` will match `commando workout`
+* workouts matching at least one keyword will be returned (i.e. `OR` search). e.g. `commando arnold's` will return `commando workout`, `Arnold's workout`
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find commando` +
+Returns `command workout`.
+* `find commando arnold's` +
+Returns any workout having names `commando` or `arnold's`.
 
-=== Deleting a person : `delete`
+=== Deleting a workout : `delete`
 
-Deletes the specified person from the address book. +
+Deletes the specified workout from the workout book. +
 Format: `delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the workout at the specified `INDEX`.
+* The index refers to the index number shown in the displayed workout list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
@@ -129,30 +263,77 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
+Deletes the 2nd workout in the workout book.
+* `find commando` +
 `delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st workout in the results of the `find` command.
 
-=== Selecting a person : `select`
+//tag::remark[]
+=== Remarking a workout : `remark`
 
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
+Remarks the specified workout from the workout book. +
+Format: `remark INDEX [r/REMARK]`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
+* Remarks the workout at the specified `INDEX`. The index refers to the index number shown in the displayed workout list. The index *must be a positive integer* 1, 2, 3, ...
+* You can remove all the workout's remarks by typing `r/` without specifying any remarks after it.
 ****
 
 Examples:
 
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+* `remark 1 r/This workout trains bicep` +
+Remarks the 1st workout as `This workout trains bicep`.
+* `remark 2 r/` +
+Clears the remark of the 2nd workout.
+
+//end::remark[]
+
+// tag::select[]
+
+=== Selecting a tracked parameter : `select`
+
+Selects the parameter identified by the index number used in the displayed tracked parameters list. +
+Format: `select INDEX`
+
+****
+* Selects the parameter and displays the tracked completed workouts which contain the selected parameter.
+* `INDEX` refers to the index number shown in the displayed tracked parameters list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* The index cannot be larger than the last index number shown in the displayed tracked parameters list.
+* If workouts added before a parameter is tracked already contain the parameter, they will show up when the parameter is added.
+****
+
+Examples:
+
+* `select 2` +
+Selects the 2nd parameter in the tracked parameters list.
+Previously completed workouts that were tracked, which contain the selected parameter, will be displayed.
+
+// end::select[]
+
+// tag::sort[]
+
+=== Sorting a workout : `sort`
+
+Sorts the workouts. +
+Format: `sort`
+
+****
+* Sorts the workout.
+* The index refers to the index number shown in the displayed workout list.
+****
+
+Examples:
+
+* `add name/joe's workout type/strength duration/20m difficulty/beginner equipment/dumbbell muscle/bicep calories/200 instruction/bicep curl reps: 4-6 tag/future​` +
+`sort` +
+Sorts a list of all workouts in the workout book based on names after `add` a new workout.
+
+* `delete 1` +
+`sort` +
+Sorts workout after `delete` a workout.
+
+// end::sort[]
 
 === Listing entered commands : `history`
 
@@ -164,15 +345,143 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
+// tag::profile[]
+
+=== Viewing user profile : `profile`
+
+Shows the user profile. The user profile consists of username, gender, height, weight, BMI. It also contains the workout preset for users such as calories, difficulty and duration which the user can set base on their preference. +
+Format: `profile`
+
+[NOTE]
+====
+Pressing the kbd:[F3] key will display the user profile as well!
+====
+
+// end::profile[]
+
+// tag::modify[]
+
+=== Modifying user profile : `modify`
+
+Modify the user's profile. +
+Format: `modify [gender/GENDER] [username/USERNAME] [height/HEIGHT] [weight/WEIGHT] [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]`
+
+****
+* Accepts any combinations of the all the prefixes.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+****
+
+[NOTE]
+====
+The workout presets for calories, difficulty and duration accepts `any` as a input as well*. It would simply mean that the user wants any amount of calories, duration or any difficulty.
+
+*Be warned that it only accepts "any" under the profile, _NOT_ the add or edit command.
+====
+
+Examples:
+
+* `modify username/apple` +
+Change your user profile's username to apple.
+* `modify username/apple height/1.82` +
+Change your user profile's username to apple, height to 1.82m and update the BMI accordingly.
+
+// end::modify[]
+
+// tag::recommend[]
+=== Recommending a workout : `recommend`
+
+Recommends workout from the workout book.
+
+[NOTE]
+====
+Workouts that the `recommend` command returns are taken from the entire workout list
+====
+
+[NOTE]
+====
+When one workout is requested (either through the user's WorkoutPresets or the user input with a specified `Mode` of single) and there is more than one matching workout, a random matching workout is selected.
+====
+
+There are two ways to use the `recommend` command.
+
+****
+* Recommend directly from the Workout Presets in your profile.
+* Recommend through the inputs in the command box.
+****
+
+*Recommend directly from the Workout Presets in your profile*
+
+Format: `recommend`
+
+[[fig-UserProfileCard]]
+.After you have provided the appropriate properties in your profile.
+image::userprofilecard.png[width="200"]
+{nbsp} +
+Type `recommend` in the command box, press kbd:[Enter] and you have Figure 2. +
+{nbsp} +
+[[fig-NoPrefixRecommend]]
+.Recommended result with exactly the same properties as the workout presets in Figure 1.
+image::noprefixrecommend.PNG[width="450"]
+{nbsp} +
+
+*Recommend through the inputs in the command box*
+
+There are two ways to recommend through the inputs.
+
+****
+* Recommend without optional prefixes.
+* Recommend with optional prefixes.
+****
+
+**Recommend without optional prefixes**
+
+Format: `recommend mode/MODE [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]`
+
+****
+* At least one of the optional fields must be provided.
+* You can choose to recommend single, multiple or even all workouts based on the specified `MODE`.
+* Workout recommended will have properties exactly the same as the inputs you have entered in the command box.
+****
+
+Examples:
+
+* `recommend mode/single difficulty/beginner` +
+Recommends a beginner workout.
+* `recommend mode/multiple 2 duration/10m calories/150` +
+Recommends two 10 minute workout that burns 150 calories.
+* `recommend mode/all duration/35m calories/200 difficulty/advanced` +
+Recommends all advanced 35 minute workout that burns 200 calories.
+
+**Recommend with optional prefixes**
+
+Format: `recommend mode/MODE calories/CALORIES or ocalories/CALORIES difficulty/DIFFICULTY or odifficulty/DIFFICULTY duration/DURATION or oduration/DURATION`
+
+****
+* You can choose to recommend single, multiple or even all workouts based on the specified `MODE`.
+* Workout recommended will try to match as much as possible to the inputs you have entered in the command box.
+****
+
+Examples:
+
+* `recommend mode/single calories/150 difficulty/intermediate oduration/10m` +
+Recommends a 10 minute intermediate workout if there exist this workout or else it will recommend an intermediate workout that burns 150 calories.
+* `recommend mode/multiple 3 calories/125 odifficulty/beginner oduration/10m` +
+Recommends three 10 minute beginner workouts that burns 125 calories if there exist these workouts or else it will recommend the next best alternative.
+* `recommend mode/all ocalories/160 odifficulty/advanced oduration/10m` +
+Recommends all the 10 minute advanced workouts that burns 160 calories if there exist these workouts or else it will recommend the next best alternative.
+// end::recommend[]
+
 // tag::undoredo[]
+
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the workout book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the workout book's content (`add`, `current`, `complete`, `delete`, `edit`, `remark`, `sort`, `track` and `clear`).
 ====
 
 Examples:
@@ -216,7 +525,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the workout book. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -226,35 +535,90 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Workout book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
-== FAQ
-
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+// tag::commandsummary[]
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+[%header,cols=3*]
+|===
+|Command
+|Format
+|Example
+
+|Add
+|`add name/NAME type/TYPE duration/DURATION difficulty/DIFFICULTY equipment/EQUIPMENT muscle/MUSCLE calories/CALORIES instruction/INSTRUCTION [tag/TAG]...`
+|`add name/john doe's workout type/strength duration/20m difficulty/beginner equipment/dumbbell muscle/bicep calories/150 instruction/set1: bicep curl reps: 4-6 tag/heavy tag/favourite`
+
+|Clear
+|`clear`
+|`clear`
+
+|Complete
+|`complete INDEX`
+|`complete 1`
+
+|Current
+|`current INDEX`
+|`current 1`
+
+|Delete
+|`delete INDEX`
+|`delete 1`
+
+|Edit
+|`edit INDEX name/NAME [type/TYPE] [duration/DURATION] [difficulty/DIFFICULTY] [equipment/EQUIPMENT] [muscle/MUSCLE] [calories/CALORIES] [instruction/INSTRUCTION] [tag/TAG]…​`
+|`edit 1 type/Anaerobic difficulty/beginner`
+
+|Exit
+|`exit`
+|`exit`
+
+|Filter
+|`filter type/TYPE duration/DURATION equipment/EQUIPMENT`
+|`filter type/strength duration/20m equipment/dumbbell`
+
+|History
+|`history`
+|`history`
+
+|List
+|`list`
+|`list`
+
+|Modify
+|`modify [gender/GENDER] [username/USERNAME] [height/HEIGHT] [weight/WEIGHT] [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]`
+|`modify gender/female username/sarah height/1.69 weight/87.2 calories/150 difficulty/beginner duration/15m`
+
+|Recommend
+|`recommend mode/MODE [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]` `recommend` `recommend mode/MODE calories/CALORIES or ocalories/CALORIES difficulty/DIFFICULTY or odifficulty/DIFFICULTY duration/DURATION or oduration/DURATION`
+|`recommend mode/single difficulty/beginner` `recommend` `recommend mode/single ocalories/150 difficulty/beginner duration/10m`
+
+|Redo
+
+|`redo`
+
+|Remark
+|`remark 1 r/REMARK`
+|`remark 1 r/interesting...`
+
+|Select
+|`select INDEX`
+|`select 1`
+
+|Sort
+|`sort`
+|`sort`
+
+|Track
+|`track SUBCOMMAND PREFIX/VALUE`
+|`track start muscle/bicep`
+
+|Undo
+|`undo`
+|`undo`
+|===
+
+// end::commandsummary[]

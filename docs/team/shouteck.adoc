@@ -1,0 +1,56 @@
+= Ting Shou Teck - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: WorkoutBook
+
+---
+
+== Overview
+
+Are you a professional athlete who is too lazy to manually search through your workout list to find your favourite workout?
+Are you an amateur who just started working out and doesn't know where to begin?
+Or are you just someone who prefers to have all of your workouts in one place and organized in a tidy manner. Then WorkoutBook is the solution for you!
+WorkoutBook is a desktop address book application used for anyone who does workouts to manage their workouts. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to recommend workouts*
+** [.underline]#What it does#: Allows the user to find workouts that have the respective `Calories`, `Duration` and `Difficulty`.
+Moreover, the user is also able to find workouts that have the respective `Calories`, `Duration` and `Difficulty` under the workout presets in the user profile.
+With the notion of optional parameters, it allows the user the flexibility to decide whether any of these `Calories`, `Duration` and `Difficulty` is mandatory or good to have when finding workouts.
+** [.underline]#Justification#: User is able to conveniently find workouts to start if the user knows the respective `Calories`, `Duration` and `Difficulty` the user would want in a new workout.
+** [.underline]#Highlights#: This feature required an in-depth analysis of design alternatives where I implemented a builder pattern to accommodate the vast amount of different combinations of constructors that have to be called. Moreover, I have to decide on a meaningful way of expressing user inputs on the CLI so that it is intuitive to the user.
+
+* *Minor enhancement*:
+** Implemented a Facade pattern to provide a simpler interface to work on called `ProfileWindowManager` where it handles the methods of the user profile. (link:https://github.com/CS2103JAN2018-F09-B2/main/pull/12[#12])
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=shouteck[Project Code Dashboard]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.3` on GitHub.
+*** Morphed the application from AddressBook to WorkoutBook, which required changing the whole code base while maintaining interaction of components as well as correctness of the whole project.
+** Documentation:
+*** Added `Command Format` in the User Guide for a summary of parameters that are used in our application. (link:https://github.com/CS2113-AY1819S1-T13-5/main/pull/151[#151])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=commandformat]
+include::../UserGuide.adoc[tag=recommend]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=recommend]
+include::../DeveloperGuide.adoc[tag=appendixst]

@@ -8,12 +8,20 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.TrackCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+
 import seedu.address.model.tag.Tag;
+import seedu.address.model.workout.Calories;
+import seedu.address.model.workout.Difficulty;
+import seedu.address.model.workout.Duration;
+import seedu.address.model.workout.Equipment;
+import seedu.address.model.workout.Instruction;
+import seedu.address.model.workout.Mode;
+import seedu.address.model.workout.Muscle;
+import seedu.address.model.workout.Name;
+import seedu.address.model.workout.Remark;
+import seedu.address.model.workout.Type;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -51,48 +59,137 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String type} into a {@code type}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code type} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_PHONE_CONSTRAINTS);
+    public static Type parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!Type.isValidType(trimmedType)) {
+            throw new ParseException(Type.MESSAGE_TYPE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new Type(trimmedType);
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String duration} into a {@code duration}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code duration} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+    public static Duration parseDuration(String duration) throws ParseException {
+        requireNonNull(duration);
+        String trimmedDuration = duration.trim();
+        if (!Duration.isValidDuration(trimmedDuration)) {
+            throw new ParseException(Duration.MESSAGE_DURATION_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Duration(trimmedDuration);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String difficulty} into a {@code difficulty}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code difficulty} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_EMAIL_CONSTRAINTS);
+    public static Difficulty parseDifficulty(String difficulty) throws ParseException {
+        requireNonNull(difficulty);
+        String trimmedDifficulty = difficulty.trim();
+        if (!Difficulty.isValidDifficulty(trimmedDifficulty)) {
+            throw new ParseException(Difficulty.MESSAGE_DIFFICULTY_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Difficulty(trimmedDifficulty);
+    }
+
+    /**
+     * Parses a {@code String equipment} into a {@code equipment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code equipment} is invalid.
+     */
+    public static Equipment parseEquipment(String equipment) throws ParseException {
+        requireNonNull(equipment);
+        String trimmedEquipment = equipment.trim();
+        if (!Equipment.isValidEquipment(trimmedEquipment)) {
+            throw new ParseException(Equipment.MESSAGE_EQUIPMENT_CONSTRAINTS);
+        }
+        return new Equipment(trimmedEquipment);
+    }
+
+    /**
+     * Parses a {@code String muscle} into a {@code muscle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code muscle} is invalid.
+     */
+    public static Muscle parseMuscle(String muscle) throws ParseException {
+        requireNonNull(muscle);
+        String trimmedMuscle = muscle.trim();
+        if (!Muscle.isValidMuscle(trimmedMuscle)) {
+            throw new ParseException(Muscle.MESSAGE_MUSCLE_CONSTRAINTS);
+        }
+        return new Muscle(trimmedMuscle);
+    }
+
+    /**
+     * Parses a {@code String calories} into a {@code calories}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code calories} is invalid.
+     */
+    public static Calories parseCalories(String calories) throws ParseException {
+        requireNonNull(calories);
+        String trimmedCalories = calories.trim();
+        if (!Calories.isValidCalories(trimmedCalories)) {
+            throw new ParseException(Calories.MESSAGE_CALORIES_CONSTRAINTS);
+        }
+        return new Calories(trimmedCalories);
+    }
+
+    /**
+     * Parses a {@code String mode} into a {@code mode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code mode} is invalid.
+     */
+    public static Mode parseMode(String mode) throws ParseException {
+        requireNonNull(mode);
+        String trimmedMode = mode.trim();
+        if (!Mode.isValidMode(trimmedMode)) {
+            throw new ParseException(Mode.MESSAGE_MODE_CONSTRAINTS);
+        }
+        return new Mode(trimmedMode);
+    }
+
+    /**
+     * Parses a {@code String instruction} into a {@code instruction}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code instruction} is invalid.
+     */
+    public static Instruction parseInstruction(String instruction) throws ParseException {
+        requireNonNull(instruction);
+        String trimmedInstruction = instruction.trim();
+        if (!Instruction.isValidInstruction(trimmedInstruction)) {
+            throw new ParseException(Instruction.MESSAGE_INSTRUCTION_CONSTRAINTS);
+        }
+        return new Instruction(trimmedInstruction);
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
     }
 
     /**
@@ -121,4 +218,20 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String subcommand}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subcommand} is invalid.
+     */
+    public static String parseSubcommand(String subcommand) throws ParseException {
+        requireNonNull(subcommand);
+        String trimmedSubcommand = subcommand.trim();
+        if (!TrackCommand.isValidSubcommand(trimmedSubcommand)) {
+            throw new ParseException(TrackCommand.MESSAGE_SUBCOMMAND_CONSTRAINTS);
+        }
+        return trimmedSubcommand;
+    }
+
 }

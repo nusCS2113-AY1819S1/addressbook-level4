@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- TrackedData save file which contains the same Workout values as in TypicalWorkouts#getTypicalTrackedData() -->
+<trackeddata>
+    <workouts>
+        <name>Alice Pauline's workout</name>
+        <type>balance</type>
+        <duration>5m</duration>
+        <difficulty>advanced</difficulty>
+        <equipment>NIL</equipment>
+        <muscle>bicep</muscle>
+        <calories>20</calories>
+        <instruction>Set1: chin-ups as many as you can</instruction>
+        <tagged>rigorous</tagged>
+        <tagged>future</tagged>
+    </workouts>
+    <workouts>
+        <name>Benson Meier's workout</name>
+        <type>strength</type>
+        <duration>10m</duration>
+        <difficulty>intermediate</difficulty>
+        <equipment>bar</equipment>
+        <muscle>deltoids</muscle>
+        <calories>100</calories>
+        <instruction>set1: shoulder press reps: 5-7</instruction>
+        <tagged>heavy</tagged>
+        <tagged>future</tagged>
+    </workouts>
+    <workouts>
+        <name>Carl Kurz's workout</name>
+        <type>cardio</type>
+        <duration>25m</duration>
+        <difficulty>intermediate</difficulty>
+        <equipment>NIL</equipment>
+        <muscle>legs</muscle>
+        <calories>135</calories>
+        <instruction>set1: leg raises reps: 15-20</instruction>
+        <tagged>future</tagged>
+    </workouts>
+    <workouts>
+        <name>Daniel Meier's workout</name>
+        <type>cardio</type>
+        <duration>30m</duration>
+        <difficulty>intermediate</difficulty>
+        <equipment>NIL</equipment>
+        <muscle>legs</muscle>
+        <calories>200</calories>
+        <instruction>30 minutes slow jog</instruction>
+        <tagged>favourite</tagged>
+        <tagged>future</tagged>
+    </workouts>
+    <workouts>
+        <name>Elle Meyer's workout</name>
+        <type>endurance</type>
+        <duration>20m</duration>
+        <difficulty>beginner</difficulty>
+        <equipment>NIL</equipment>
+        <muscle>legs</muscle>
+        <calories>100</calories>
+        <instruction>20 minutes brisk walk</instruction>
+        <tagged>future</tagged>
+    </workouts>
+    <workouts>
+        <name>Fiona Kunz's workout</name>
+        <type>strength</type>
+        <duration>40m</duration>
+        <difficulty>advanced</difficulty>
+        <equipment>medicine ball</equipment>
+        <muscle>arms</muscle>
+        <calories>225</calories>
+        <instruction>set1: medicine ball throw reps: 25-30</instruction>
+        <tagged>future</tagged>
+    </workouts>
+    <workouts>
+        <name>George Best's workout</name>
+        <type>strength</type>
+        <duration>30m</duration>
+        <difficulty>intermediate</difficulty>
+        <equipment>free weights</equipment>
+        <muscle>chest</muscle>
+        <calories>175</calories>
+        <instruction>6 sets of bench press, 6 reps per set of 70% max</instruction>
+        <tagged>future</tagged>
+    </workouts>
+    <workouts>
+        <name>John Pauline's workout</name>
+        <type>cardio</type>
+        <duration>45m</duration>
+        <difficulty>intermediate</difficulty>
+        <equipment>NIL</equipment>
+        <muscle>legs</muscle>
+        <calories>300</calories>
+        <instruction>45 minutes slow jog</instruction>
+        <tagged>future</tagged>
+    </workouts>
+</trackeddata>

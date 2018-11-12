@@ -15,32 +15,36 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.AddressBook;
-import seedu.address.storage.XmlAdaptedPerson;
+import seedu.address.model.WorkoutBook;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.storage.XmlAdaptedWorkout;
+import seedu.address.storage.XmlSerializableWorkoutBook;
 import seedu.address.testutil.TestUtil;
+import seedu.address.testutil.WorkoutBookBuilder;
+import seedu.address.testutil.WorkoutBuilder;
 
 public class XmlUtilTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlUtilTest");
     private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.xml");
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.xml");
-    private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validAddressBook.xml");
-    private static final Path MISSING_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingPersonField.xml");
-    private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidPersonField.xml");
-    private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validPerson.xml");
-    private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml");
+    private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validWorkoutBook.xml");
+    private static final Path MISSING_WORKOUT_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingWorkoutField.xml");
+    private static final Path INVALID_WORKOUT_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidWorkoutField.xml");
+    private static final Path VALID_WORKOUT_FILE = TEST_DATA_FOLDER.resolve("validWorkout.xml");
+    private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempWorkoutBook.xml");
 
-    private static final String INVALID_PHONE = "9482asf424";
+    private static final String VALID_NAME = "Hans Muster's workout";
+    private static final String VALID_TYPE = "strength";
+    private static final String VALID_DURATION = "20m";
+    private static final String VALID_DIFFICULTY = "beginner";
+    private static final String VALID_EQUIPMENT = "dumbbell";
+    private static final String VALID_MUSCLE = "bicep";
+    private static final String VALID_CALORIES = "123";
+    private static final String VALID_INSTRUCTION = "set1: hammer curl reps: 4-6";
+    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("heavy"));
 
-    private static final String VALID_NAME = "Hans Muster";
-    private static final String VALID_PHONE = "9482424";
-    private static final String VALID_EMAIL = "hans@example";
-    private static final String VALID_ADDRESS = "4th street";
-    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final String INVALID_CALORIES = "123 calories";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -48,7 +52,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.getDataFromFile(null, AddressBook.class);
+        XmlUtil.getDataFromFile(null, WorkoutBook.class);
     }
 
     @Test
@@ -60,52 +64,57 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.getDataFromFile(MISSING_FILE, AddressBook.class);
+        XmlUtil.getDataFromFile(MISSING_FILE, WorkoutBook.class);
     }
 
     @Test
     public void getDataFromFile_emptyFile_dataFormatMismatchException() throws Exception {
         thrown.expect(JAXBException.class);
-        XmlUtil.getDataFromFile(EMPTY_FILE, AddressBook.class);
+        XmlUtil.getDataFromFile(EMPTY_FILE, WorkoutBook.class);
     }
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
-        assertEquals(9, dataFromFile.getPersonList().size());
+        WorkoutBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableWorkoutBook.class).toModelType();
+        assertEquals(9, dataFromFile.getWorkoutList().size());
     }
 
     @Test
-    public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-                null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        assertEquals(expectedPerson, actualPerson);
+    public void xmlAdaptedWorkoutFromFile_fileWithMissingWorkoutField_validResult() throws Exception {
+        XmlAdaptedWorkout actualWorkout = XmlUtil.getDataFromFile(
+                MISSING_WORKOUT_FIELD_FILE, XmlAdaptedWorkoutWithRootElement.class);
+        XmlAdaptedWorkout expectedWorkout = new XmlAdaptedWorkout(
+                null, VALID_TYPE, VALID_DURATION, VALID_DIFFICULTY, VALID_EQUIPMENT, VALID_MUSCLE,
+                VALID_CALORIES, VALID_INSTRUCTION, VALID_TAGS, null);
+        assertEquals(expectedWorkout, actualWorkout);
     }
 
-    @Test
-    public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-                VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        assertEquals(expectedPerson, actualPerson);
-    }
 
     @Test
-    public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        assertEquals(expectedPerson, actualPerson);
+    public void xmlAdaptedWorkoutFromFile_fileWithInvalidWorkoutField_validResult() throws Exception {
+        XmlAdaptedWorkout actualWorkout = XmlUtil.getDataFromFile(
+                INVALID_WORKOUT_FIELD_FILE, XmlAdaptedWorkoutWithRootElement.class);
+        XmlAdaptedWorkout expectedWorkout = new XmlAdaptedWorkout(
+                VALID_NAME, VALID_TYPE, VALID_DURATION, VALID_DIFFICULTY, VALID_EQUIPMENT, VALID_MUSCLE,
+                INVALID_CALORIES, VALID_INSTRUCTION, VALID_TAGS, null);
+        assertEquals(expectedWorkout, actualWorkout);
+    }
+
+
+    @Test
+    public void xmlAdaptedWorkoutFromFile_fileWithValidWorkout_validResult() throws Exception {
+        XmlAdaptedWorkout actualWorkout = XmlUtil.getDataFromFile(
+                VALID_WORKOUT_FILE, XmlAdaptedWorkoutWithRootElement.class);
+        XmlAdaptedWorkout expectedWorkout = new XmlAdaptedWorkout(
+                VALID_NAME, VALID_TYPE, VALID_DURATION, VALID_DIFFICULTY, VALID_EQUIPMENT, VALID_MUSCLE,
+                VALID_CALORIES, VALID_INSTRUCTION, VALID_TAGS, null);
+        assertEquals(expectedWorkout, actualWorkout);
     }
 
     @Test
     public void saveDataToFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.saveDataToFile(null, new AddressBook());
+        XmlUtil.saveDataToFile(null, new WorkoutBook());
     }
 
     @Test
@@ -117,30 +126,30 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.saveDataToFile(MISSING_FILE, new AddressBook());
+        XmlUtil.saveDataToFile(MISSING_FILE, new WorkoutBook());
     }
 
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         FileUtil.createFile(TEMP_FILE);
-        XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());
+        XmlSerializableWorkoutBook dataToWrite = new XmlSerializableWorkoutBook(new WorkoutBook());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        XmlSerializableWorkoutBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableWorkoutBook.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
-        dataToWrite = new XmlSerializableAddressBook(
-                builder.withPerson(new PersonBuilder().build()).build());
+        WorkoutBookBuilder builder = new WorkoutBookBuilder(new WorkoutBook());
+        dataToWrite = new XmlSerializableWorkoutBook(
+                builder.withWorkout(new WorkoutBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableWorkoutBook.class);
         assertEquals(dataToWrite, dataFromFile);
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedWorkout}
      * objects.
      */
-    @XmlRootElement(name = "person")
-    private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
+    @XmlRootElement(name = "workout")
+    private static class XmlAdaptedWorkoutWithRootElement extends XmlAdaptedWorkout {}
 }

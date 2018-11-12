@@ -52,9 +52,33 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns number of arguments stored in the map.
+     */
+    public int getNumberOfArgs() {
+        return argMultimap.size();
+    }
+
+    /**
+     * Returns the only Prefix in the map.
+     */
+    public Prefix getTheOnlyPrefix() {
+        for (Map.Entry<Prefix, List<String>> entry : argMultimap.entrySet()) {
+            if (!entry.getKey().getPrefix().equals("")) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    public int getSize() {
+        return argMultimap.size();
+    }
+
 }

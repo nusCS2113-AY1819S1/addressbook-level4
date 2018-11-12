@@ -52,6 +52,9 @@ jacocoTestReport {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        exceptionFormat "full"
+    }
 }
 
 dependencies {
@@ -66,6 +69,8 @@ dependencies {
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0'
     implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0'
     implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
+    compile 'org.jsoup:jsoup:1.10.3'
+    compile "commons-io:commons-io:+"
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
     testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion, {
@@ -82,7 +87,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'workoutbook.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
@@ -207,8 +212,8 @@ asciidoctor {
         idprefix: '',  // for compatibility with GitHub preview
         idseparator: '-',
         'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
-        'site-name': 'AddressBook-Level4',
-        'site-githuburl': 'https://github.com/se-edu/addressbook-level4',
+        'site-name': 'WorkoutBook',
+        'site-githuburl': 'https://github.com/CS2113-AY1819S1-T13-5/main',
         'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
     ]
 
@@ -239,6 +244,11 @@ task deployOfflineDocs(type: Copy) {
 task copyDummySearchPage(type: Copy) {
     from 'docs/DummySearchPage.html'
     into "${buildDir}/docs/html5"
+}
+
+task copyProfileWindow(type: Copy) {
+    from 'main/ProfileWindow.html'
+    into "${buildDir}"
 }
 
 deployOfflineDocs.dependsOn asciidoctor

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workoutbook>
+
+    <workouts>
+        <name>Alice's workout</name>
+        <type>strength</type>
+        <duration>20m</duration>
+        <difficulty>beginner</difficulty>
+		<equipment>dumbbell</equipment>
+		<muscle>bicep</muscle>
+		<calories>150</calories>
+		<instruction>set1: bicep curl reps: 4-6</instruction>
+        <tagged>current</tagged>
+    </workouts>
+
+    <!-- Workout with same identity as Alice -->
+    <workouts>
+        <name>Alice's workout</name>
+        <type>strength</type>
+        <duration>20m</duration>
+        <difficulty>beginner</difficulty>
+		<equipment>dumbbell</equipment>
+		<muscle>bicep</muscle>
+		<calories>150</calories>
+		<instruction>set1: bicep curl reps: 4-6</instruction>
+        <tagged>heavy</tagged>
+    </workouts>
+
+</workoutbook>

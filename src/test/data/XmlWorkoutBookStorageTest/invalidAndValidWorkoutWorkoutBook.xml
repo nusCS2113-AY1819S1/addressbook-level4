@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workoutbook>
+    <!-- Valid Workout -->
+    <workouts>
+		<name>Alice Pauline's workout</name>
+        <type>strength</type>
+        <duration>45m</duration>
+        <difficulty>advance</difficulty>
+		<equipment>NIL</equipment>
+		<muscle>quadriceps</muscle>
+		<calories>200</calories>
+		<instruction>set1: squats reps: 15-20</instruction>
+        <remark>This workout trains biceps</remark>
+        <tagged>intense</tagged>
+    </workouts>
+    <!-- Workout with invalid workout field -->
+    <workouts>
+		<name>Alice Pauline's workout</name>
+        <type>strength</type>
+        <duration>45m</duration>
+        <difficulty>easy</difficulty>
+		<equipment>NIL</equipment>
+		<muscle>quadriceps</muscle>
+		<calories>200</calories>
+		<instruction>set1: squats reps: 15-20</instruction>
+        <remark>This workout trains biceps</remark>
+        <tagged>intense</tagged>
+    </workouts>
+</workoutbook>

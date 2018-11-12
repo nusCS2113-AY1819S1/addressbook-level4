@@ -30,6 +30,18 @@ public class MainMenuHandle extends NodeHandle<Node> {
         guiRobot.push(KeyCode.F1);
     }
 
+    public void openProfileWindowUsingMenu() {
+        clickOnMenuItemsSequentially("Profile", "F3");
+    }
+
+    /**
+     * Opens the {@code ProfileWindow} by pressing the shortcut key associated
+     * with the menu bar in {@code MainWindow}.
+     */
+    public void openProfileWindowUsingAccelerator() {
+        guiRobot.push(KeyCode.F3);
+    }
+
     /**
      * Clicks on {@code menuItems} in order.
      */

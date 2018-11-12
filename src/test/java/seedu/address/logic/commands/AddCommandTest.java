@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -16,11 +17,15 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.ReadOnlyTrackedData;
+import seedu.address.model.ReadOnlyTrackedDataList;
+import seedu.address.model.ReadOnlyWorkoutBook;
+import seedu.address.model.RecommendArguments;
+import seedu.address.model.WorkoutBook;
+import seedu.address.model.workout.Parameter;
+import seedu.address.model.workout.Workout;
+import seedu.address.testutil.WorkoutBuilder;
 
 public class AddCommandTest {
 
@@ -32,56 +37,56 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullWorkout_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_workoutAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingWorkoutAdded modelStub = new ModelStubAcceptingWorkoutAdded();
+        Workout validWorkout = new WorkoutBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddCommand(validWorkout).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validWorkout), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validWorkout), modelStub.workoutsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateWorkout_throwsCommandException() throws Exception {
+        Workout validWorkout = new WorkoutBuilder().build();
+        AddCommand addCommand = new AddCommand(validWorkout);
+        ModelStub modelStub = new ModelStubWithWorkout(validWorkout);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_WORKOUT);
         addCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Workout aliceWorkout = new WorkoutBuilder().withName("Alice's workout").build();
+        Workout bobWorkout = new WorkoutBuilder().withName("Bob's workout").build();
+        AddCommand addAliceWorkoutCommand = new AddCommand(aliceWorkout);
+        AddCommand addBobWorkoutCommand = new AddCommand(bobWorkout);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addAliceWorkoutCommand.equals(addAliceWorkoutCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addAliceWorkoutCommandCopy = new AddCommand(aliceWorkout);
+        assertTrue(addAliceWorkoutCommand.equals(addAliceWorkoutCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addAliceWorkoutCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addAliceWorkoutCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different workout -> returns false
+        assertFalse(addAliceWorkoutCommand.equals(addBobWorkoutCommand));
     }
 
     /**
@@ -89,115 +94,250 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Person person) {
+        public void addWorkout(Workout workout) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlyWorkoutBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyWorkoutBook getWorkoutBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public ReadOnlyTrackedDataList getTrackedDataList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public ReadOnlyTrackedData getTrackedData() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updatePerson(Person target, Person editedPerson) {
+        public boolean hasWorkout(Workout workout) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public void deleteWorkout(Workout target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateWorkout(Workout target, Workout editedWorkout) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public ObservableList<Workout> getFilteredWorkoutList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public List<Workout> getFinalFilteredInternalList(RecommendArguments recommendArguments) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void updateFilteredWorkoutList(Predicate<Workout> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public ObservableList<Parameter> getFilteredTrackedDataList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void updateFilteredTrackedDataList(Predicate<Parameter> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Workout> getFilteredTrackedData() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTrackedData(Predicate<Workout> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoModel() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoModel() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoModel() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoModel() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoWorkoutBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoWorkoutBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoWorkoutBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoWorkoutBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoTrackedDataList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoTrackedDataList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoTrackedDataList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoTrackedDataList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoTrackedData() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoTrackedData() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoTrackedData() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoTrackedData() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitModel() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitWorkoutBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitTrackedDataList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitTrackedData() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredWorkoutList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addDataToTrack(Parameter parameter) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeDataFromTrack(Parameter parameter) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void checkDataForTrack(Workout workout) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasParameter(Parameter parameter) {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single workout.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithWorkout extends ModelStub {
+        private final Workout workout;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithWorkout(Workout workout) {
+            requireNonNull(workout);
+            this.workout = workout;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasWorkout(Workout workout) {
+            requireNonNull(workout);
+            return this.workout.isSameWorkout(workout);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the workout being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingWorkoutAdded extends ModelStub {
+        final ArrayList<Workout> workoutsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasWorkout(Workout workout) {
+            requireNonNull(workout);
+            return workoutsAdded.stream().anyMatch(workout::isSameWorkout);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addWorkout(Workout workout) {
+            requireNonNull(workout);
+            workoutsAdded.add(workout);
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitModel() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyWorkoutBook getWorkoutBook() {
+            return new WorkoutBook();
         }
     }
 

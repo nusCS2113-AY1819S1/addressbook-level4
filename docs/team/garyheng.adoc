@@ -1,0 +1,64 @@
+= Gary Heng Hui Shen - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: WorkoutBook
+
+---
+
+== Overview
+
+Are you a professional athlete who is too lazy to manually search through your workout list to find your favourite workout?
+Are you an amateur who just started working out and doesn't know where to begin?
+Or are you just someone who prefers to have all of your workouts in one place and organized in a tidy manner. Then WorkoutBook is the solution for you!
+WorkoutBook is a desktop address book application used for anyone who does workouts to manage their workouts. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to track completed workouts with desired parameters*
+** [.underline]#What it does#: This allowing the WorkoutBook user to have a history of completed workouts, based on their own preference of data to be kept. The user can hence keep track of completed workouts that match a user-defined criteria.
+** [.underline]#Justification#: This feature was implemented to allow WorkoutBook users to keep a separate history of completed workouts, based on their desired criteria, thus allowing them to modify workouts in the WorkoutBook while still being able to access previously completed workouts that they have tracked.
+** [.underline]#Highlights#: This feature requires heavy modification to the pre-existing Model and Storage components to facilitate the separate storage of both the tracked workouts and the user-defined criteria, to allow the user to maintain the tracking feature across separate instances of WorkoutBook usages.
+
+* *Minor enhancement*:
+** Modified the `undo` and `redo` commands to implement Model-level versioning in order to allow for undoing and redoing of any form of storage modification across the various storage .xml files.
+** Modified the overall WorkoutBook UI to fit the application's new functionality.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=garyheng[Project Code Dashboard]]
+
+* *Other contributions*:
+
+** Project management:
+*** Facilitated the management of project milestones `v1.3` - `v1.4`
+** Enhancements to existing features:
+*** Improved the searching function of WorkoutBook's `find` command (Pull request: https://github.com/CS2113-AY1819S1-T13-5/main/pull/53[#53])
+*** Wrote additional tests for existing features to increase coverage from 84% to 88% (https://github.com/CS2113-AY1819S1-T13-5/main/pull/250[#250])
+** Documentation:
+*** Improved the content of the User Guide and the Developer Guide to reflect new functions of the WorkoutBook (https://github.com/CS2113-AY1819S1-T13-5/main/pull/172[#172], https://github.com/CS2113-AY1819S1-T13-5/main/pull/250[#250])
+** Tools:
+*** Integrated a new Github plugin (Coverall) to the team repo (https://github.com/CS2113-AY1819S1-T13-5/main/pull/202[#202])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=tracking]
+include::../UserGuide.adoc[tag=select]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+The original undo/redo feature was created and implemented by the developer team behind AddressBook-level 4. However, in the WorkoutBook application, major extensions were made to the feature in order to fit the new functions of the application.
+The undo/redo section in the Developer Guide was originally written by the aforementioned developement team and has been modified for our Developer Guide.
+
+include::../DeveloperGuide.adoc[tag=trackfeature]
+include::../DeveloperGuide.adoc[tag=appendixgh]
+
+

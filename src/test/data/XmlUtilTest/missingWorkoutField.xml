@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Workout with missing name field -->
+<workout>
+    <type>strength</type>
+    <duration>20m</duration>
+    <difficulty>beginner</difficulty>
+    <equipment>dumbbell</equipment>
+    <muscle>bicep</muscle>
+    <calories>123</calories>
+    <instruction>set1: hammer curl reps: 4-6</instruction>
+    <tagged>heavy</tagged>
+</workout>

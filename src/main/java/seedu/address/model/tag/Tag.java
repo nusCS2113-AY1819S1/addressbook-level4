@@ -4,12 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the workout book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
 
-    public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric and cannot contain "
+            + "be any of the exact words \"current\" or \"completed\"";
     public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
@@ -35,8 +36,8 @@ public class Tag {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+            || (other instanceof Tag // instanceof handles nulls
+            && tagName.equals(((Tag) other).tagName)); // state check
     }
 
     @Override
@@ -50,5 +51,4 @@ public class Tag {
     public String toString() {
         return '[' + tagName + ']';
     }
-
 }

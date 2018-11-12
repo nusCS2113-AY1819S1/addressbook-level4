@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workoutbook>
+    <!-- Workout with invalid difficulty field -->
+    <workouts>
+		<name>Alice Pauline's workout</name>
+        <type>strength</type>
+        <duration>45m</duration>
+        <difficulty>easy</difficulty>
+		<equipment>NIL</equipment>
+		<muscle>quadriceps</muscle>
+		<calories>200</calories>
+		<instruction>set1: squats reps: 15-20</instruction>
+        <tagged>intense</tagged>
+    </workouts>
+</workoutbook>

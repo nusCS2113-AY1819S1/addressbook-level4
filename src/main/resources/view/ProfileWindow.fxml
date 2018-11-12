@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.web.WebView?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+         title="Profile" maximized="true">
+    <icons>
+        <Image url="@/images/profile.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <WebView fx:id="browser" />
+        </Scene>
+    </scene>
+</fx:root>

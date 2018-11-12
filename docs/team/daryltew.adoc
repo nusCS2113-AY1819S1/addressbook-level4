@@ -1,0 +1,57 @@
+= Daryl Tew - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: WorkoutBook
+
+---
+
+== Overview
+
+Are you a professional athlete who is too lazy to manually search through your workout list to find your favourite workout? Are you an amateur who just started working out and doesn’t know where to begin? Or are you just someone who prefers to have all of your workouts in one place and organized in a tidy manner. Then WorkoutBook is the solution for you! WorkoutBook is a desktop workout book application used for anyone who does workouts to manage their workouts. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the memory feature which enables users to manage future, current and completed workouts*
+** [.underline]#What it does#: This allows the WorkoutBook user add new workouts with an state tag of `future` being attached automatically. In order to set a workout to current, he uses the `current` command which changes the state tag to `current`. He can then finish the workout by setting the state tag to `completed` using the `complete` command. However, he can always choose to reactivate the workout by changing its state tag to `current` using the `current` command again. This flexibility enables users to fit the workouts to their changing preferences.
+** [.underline]#Justification#: Users can now remember easily the relevance of each workout according to their desired criteria. `future` reminds the user that they are untouched. `current` informs the user that he is focussing
+on this specific one. `completed` tells the user that he has finished this workout before. This is advantageous to the user who can now avoid forgetting whether he has already performed the workout or not.
+** [.underline]#Highlights#: This feature requires two new commands - current and complete as well as modification to the pre-existing
+add and edit commands to avoid affecting the state tag.
+
+* *Minor enhancement*:
+** Created the seven classes of Type, Difficulty, Duration, Equipment, Instruction, Muscle and Calories for the Workout. (https://github.com/CS2113-AY1819S1-T13-5/main/pull/3[#3])
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=daryltew[Project Code Dashboard]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.0` - `v1.1` on GitHub
+*** Assisted in the morphing of the product from AB4 to Workout book.
+*** Arranged for meetings and discussions for project pre-planning of `v1.0` and final demo.
+** Enhancements to existing features:
+*** Edit command has more responsiveness to different types of inputs (https://github.com/CS2113-AY1819S1-T13-5/main/pull/244[#244])
+** Documentation:
+*** Improved the content of the User Guide (https://github.com/CS2113-AY1819S1-T13-5/main/pull/217[#217]) and the Developer Guide to reflect new functions of the WorkoutBook (https://github.com/CS2113-AY1819S1-T13-5/main/pull/140[#140]
+** Tools:
+*** Integrated a new Github plugin (Travis) to the team repo (https://github.com/CS2113-AY1819S1-T13-5/main/pull/3[#3])
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=current]
+include::../UserGuide.adoc[tag=complete]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=memory]
+include::../DeveloperGuide.adoc[tag=appendixdt]
