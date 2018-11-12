@@ -26,6 +26,11 @@ import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.joboffer.JobOffer;
 
+/**
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
+ * and unit tests for {@code DeleteJobOfferCommand}.
+ */
+
 public class DeleteJobOfferCommandTest {
 
     private Model model;
