@@ -251,8 +251,7 @@ This section describes some noteworthy details on how certain features are imple
 === Select Deadline feature
 ==== Current Implementation
 
-The `select` mechanism is facilitated by `VersionedTaskBook`. The `select` command takes in a date either in the `String` dd/mm/yyyy format or prefixes with the corresponding values. Input format validation is done as the input goes through the `SelectDeadlineCommandParser` and `TaskBookParser`. A new `SelectDeadlineCommand` object is returned and the `execute` method will run. The date specified will be set as the deadline through `model.selectDeadline` before a success message is generated to indicate that the `select` command has been successfully executed and the deadline has been selected.
-Additionally, it implements the following operations:
+The `select` mechanism is facilitated by `VersionedTaskBook`.
 
 * `VersionedTaskBook#selectDeadline()` - Selects date to be set as deadline
 * `indicateTaskBookChanged()` — Event raised to indicate that the TaskBook in the model has changed.
@@ -298,7 +297,8 @@ image::SelectDeadline.PNG[width=”800”]
 === Edit Task feature
 ==== Current Implementation
 
-The `edit` mechanism is facilitated by `VersionedTaskBook`. The `edit` command takes in the index of the task to be edited, followed by prefixes and its corresponding new values which will replace existing values in the task specified to be edited. Input format validation is done as the user inupt goes through `EditTaskCommandParser` and `TaskBookParser`. A new `EditTaskCommand` object is returned and the `execute` method will run. The validity of the index given by the user is checked and the task to be edited is retrieved from `model.getFilteredTaskList()`. A new task `editedTask` is created containing the new values and the task to be edited is updated with the details of the `editedTask’ through `model.updateTask` and `model.updateFilteredTaskList`. Finally, an updated `filteredTaskList` is shown and an edit task success message is generated to indicate that the command has been successfully executed.
+The `edit` mechanism is facilitated by `VersionedTaskBook`.
+
 Additionally, it implements the following operations:
 
 * `Model#getFilteredTaskList()` — Obtains the current list of Tasks that is being displayed to the user
