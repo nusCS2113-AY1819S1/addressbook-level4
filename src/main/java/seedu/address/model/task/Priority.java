@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Priority {
     public static final String MESSAGE_PRIORITY_CONSTRAINTS =
-            "Task priority can only be 'HIGH', 'MED' or 'LOW' (case-insensitive), and it should not be blank";
+            "Task priority can only be 'HIGH/high', 'MED/med' or 'LOW/low', and it should not be blank";
     public static final String PRIORITY_VALIDATION_REGEX = "HIGH|high|MED|med|LOW|low";
 
     public final String priorityString;
