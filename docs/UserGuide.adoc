@@ -142,11 +142,14 @@ Format: `current INDEX`
 * Changes the state tag of the workout at the specified `INDEX`. The index refers to the index number shown in the displayed workout list. The index *must be a positive integer* 1, 2, 3, ...
 * You can change the state tag from both `future` and `completed`.
 * You only can have either zero or one current workout at any point in time.
+* Use the list command before using the current command.
+* It will also jump to the targetted workout when current command is successfully executed.
+* However, it will jump to the workout which already has the current state tag if there is one and the current command is thus unsuccessfully executed.
 ****
 
 Examples:
 
-* `current 1` +
+* `list` + `current 1` +
 Changes the state tag of the 1st workout to be `current`.
 
 [NOTE]

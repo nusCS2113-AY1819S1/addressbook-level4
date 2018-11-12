@@ -540,9 +540,10 @@ It implements following commands: +
 
 Given below is an example usage scenario and how the memory mechanism behaves at each step.
 
-Step 1. The user launches the application, `add` some workouts to the workout book and they automatically have a `future` tag.
+Step 1. The user launches the application, `add` some workouts to the workout book and they will automatically have a `future` tag.
 
-Step 2. The user executes the current command to change the `future` tag in the workout as specified by the index number to `current`.
+Step 2. The user executes the list command before the current command to change the `future` tag in the workout as specified by the index number to `current`.
+There will also be a jump to the targetted workout according to the index number.
 
 [[fig-Current]]
 .Interactions inside `Logic` component when pressing `current`
@@ -1451,8 +1452,9 @@ _{ more test cases ... }_
 * Steps:
 .. Ensure that the index input is valid and not out of bounds.
 .. Ensure that the target workout of the index input has a state tag of either `future` or `completed`.
-.. Test case: `current 1` +
+.. Test case: `list` + `current 1` +
    Expected: The workout at index 1 (filtered or unfiltered) will have its state tag change from `future` or `completed` to `current`.
+   There will also be a jump to the selected workout (1 in this case) according to the index number.
 
 . Current command with an invalid index input
 * Steps:
@@ -1461,8 +1463,9 @@ _{ more test cases ... }_
 
 . Current command when there is already a workout with the state tag `current`
 * Steps:
-.. Test case: `current 1` (this workout or another workout already has a `current` state tag) +
+.. Test case: `list` + `current 1` (this workout or another workout already has a `current` state tag) +
    Expected: A message saying "There is already a current workout. Complete that before attempting again."
+   There will also be a jump to the workout with the `current` state tag (1 if it already has the `current` state tag or another one with it).
 
 . Current command with an empty input
 * Steps:
@@ -1498,4 +1501,3 @@ _{ more test cases ... }_
    number used in the displayed workout list. Parameters: INDEX (must be a positive integer) Example: complete 1"
 
 // end::appendixdt[]
-
