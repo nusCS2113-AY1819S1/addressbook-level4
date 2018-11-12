@@ -51,7 +51,7 @@ get instructions and learn to improve your workflow with Drink I/O.
 === How to navigate Drink I/O's interface
 
 
-image::Ui.png[width="790"]
+image::uiguide.png[width="790"]
 
 
 == Quick Start
@@ -229,7 +229,7 @@ Format: `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
 ====
 [example-title]#Examples for create new account:#
 
-* [example]#`createAccount u/tester p/myPassword a/ADMIN`#
+* [example]#`createAccount u/tester2 p/myPassword a/ADMIN`#
 
 If create account is successful, a message will be shown:
 
