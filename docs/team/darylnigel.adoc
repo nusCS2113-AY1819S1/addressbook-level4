@@ -9,16 +9,27 @@
 
 == Overview
 
-ClubHub is a desktop address book application used for managing Co-Curricular Activities (CCAs). The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+This portfolio documents my contributions to the ClubHub software engineering project, an application targeted towards University students for managing Co-Curricular Activities (CCAs). ClubHub features a centralised management system of members, finances, events and inventory. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java and has about 10 kLoC.
+
+ClubHub is built on the code base of AddressBook-Level 4, an application used for teaching Software Engineering principles in the National University of Singapore (NUS). The project team is comprised of four Computing students, including myself. The following section gives a summary of my contributions to the project.
 
 == Summary of contributions
 
-* *Major enhancement*: added the Item List which stores entries of Items and their respective quantities and locations.
-** What it does: allows the user to add entries of Items into the Item List. Entries can then be deleted and/or edited using their respective commands.
-** Justification: This feature improves the product significantly because a user can manage Items in the Item List.
-** Highlights:
+* *Major enhancement*: Added the Item List GUI
+** What it does: The Item List GUI displays entries of items with their respective quantities and locations in a list, representing the inventory of the CCA.
+** Justification: This feature is important because it allows students to view existing and updated item entries added to the Item List.
 
-* *Minor enhancement*: added the undoAll/redoAll commands that allow the user to undo/redo all changes made to ClubHub.
+* *Major enhancement*: Added commands to manage Items in the Item List
+** What it does: These commands allow students to add, delete, and edit entries of items in the Item List. They also allow students to find specific items by typing in keywords found in item names.
+** Justification: This feature is important because it allows students to update items from their CCA inventory into the Item List. Students can then find items in the Item List quickly whenever they are needed.
+
+* *Major enhancement*: Added data storage for the Item List
+** What it does: The storage saves entries of items in the Item List into the application.
+** Justification: This feature is important because it allows students to view entries in the Item List that were recorded in previous sessions of use. The data can also be transferred from one device to another.
+
+* *Minor enhancement*: Added the ability to undo/redo all previous commands
+** What it does: This feature allows students to undo all previous commands at once. All following undo commands can then be reversed using the redoAll command. This includes all commands featured in ClubHub.
+** Justification: The ability to undo/redo all previous commands is important because it provides a convenient way for students to reverse all changes made to ClubHub in the same session of use.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=darylnigel]
 
@@ -26,14 +37,11 @@ ClubHub is a desktop address book application used for managing Co-Curricular Ac
 
 ** Project management:
 *** Managed releases `v1.3`, `v1.3.1` and `v1.4` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T09-3/main/pull/28
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-1/main/issues/171, https://github.com/CS2113-AY1819S1-W12-1/main/issues/163)
-** Tools:
-*** Integrated a new Github plugin (Travis CI) to the team repo
+
 
 == Contributions to the User Guide
 
@@ -46,6 +54,7 @@ include::../UserGuide.adoc[tag=itemlist]
 
 include::../UserGuide.adoc[tag=undoallredoall]
 
+
 == Contributions to the Developer Guide
 
 |===
@@ -54,7 +63,9 @@ include::../UserGuide.adoc[tag=undoallredoall]
 
 include::../DeveloperGuide.adoc[tag=itemlist]
 
-=== UndoAll/RedoAll feature
 include::../DeveloperGuide.adoc[tag=undoallredoall]
 
+include::../DeveloperGuide.adoc[tag=ui]
+
+include::../DeveloperGuide.adoc[tag=storage]
 
