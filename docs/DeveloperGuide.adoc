@@ -371,12 +371,7 @@ This feature has 2 different kind of modes as follows:
 
 . Duo Argument Mode - Input arguments must contain only 1 category and only 1 order, and can be input in no particular order
 
-The input given by the user
-
-
-
-
-is passed to `SortCommandParser` to split the input separated by whitespaces to ensure
+The input given by the useris passed to `SortCommandParser` to split the input separated by whitespaces to ensure
 there is either only one or two arguments input by the user. These arguments are stored in an array of strings and
 the size of the array determines the mode of the command.
 
@@ -408,16 +403,11 @@ The three argument modes are as listed below:
 * Dual Argument mode -- Requires 2 dates, a `start date` and an `end date`. It returns all records containing dates within the time frame of start date and end date, inclusive of both start date and end date
 The mechanism that facilitates these modes can be found in the `ListCommandParser#parse`. Below is a overview of the mechanism:
 
-. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
-. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes which returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
 . The string associated with `d/` is then passed into `ListCommandParser#splitByWhitespace` for further processing and returns an array.
 . The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
 
-The `ListCommand` has two constructors which makes use of overloading to reduce code complexity.
-
-* One constructor has no arguments and assigns default predicate for the `FilteredList` in `ModelManager`,
-`PREDICATE_SHOW_ALL_RECORDS` which will show all items in the list.
-* The second constructor takes in 2 `Date` arguments and assigns the predicate `DateIsWithinDateIntervalPredicate` which will only show items within the date interval.
+The `ListCommand` has two constructors which makes use of overloading to reduce code complexity, one with no argument and the other one with 2 `Date` arguments.
 
 The following sequence diagram shows how the list operation works:
 
@@ -454,7 +444,7 @@ The sequence diagram below details the sequence of program executions for the lo
 image::SummarySequenceDiagram.png[width="790"]
 
 . When the user types in the command "summary date d/1-1-2018 12-12-2018", the command is passed from LogicManager to FinancialPlannerParser. In here,
-the system chooses which parser to use which is SummaryCommandParser and calls its parse method which is polymorphic, meaning that every parser has the same function but use different
+the system chooses which parser to use and calls its parse method which is polymorphic, meaning that every parser has the same function but use different
 implementation.
 . In this class, based on the `mode` parameter given, the system chooses a SummaryCommand to instantiate and pass the reference back to the Logic Manager. The various checks for the validity of the
 parameters also occur during this stage.
@@ -475,15 +465,15 @@ The next phase of the program execution is performed in the UI components.
 * **Alternative 1 (current choice):** Generate the summary list whenever the summary command is called.
 ** Pros: Easier to implement and maintain. Sufficient for the intended target audience of FinancialPlanner.
 ** Cons: This requires looping through each record in the filtered record list obtained from the `Model`.
-To aid in the time complexity, the internal implementation of SummaryList was done using hash maps instead with allowed for
-constant time random access unlike list. However, the initial filtering is close to linear time complexity which could slow down the app if many records are inside.
+To aid in the time complexity, the internal implementation of SummaryList was done using hash maps instead which allowed for
+constant time random access.. However, the initial filtering is close to linear time complexity which could slow down the app if many records are inside.
 Also, the list had to be created every time `summary` is called which could be slow if the command is called multiple times.
 
 * **Alternative 2:** Morph the record list into a record hash map of record lists instead
 ** Pros: A hash map allows for constant random access to a record list of a particular date assuming the key for the hash map is using dates.
 Thus, the filtering function does not need to loop through as many records and the time taken would be lower especially when the database in the application is large.
 ** Cons: Might be too specific to only 1 type of category like categorising by date. If any other types are required, another map may have to be added. This implementation may make the
-system rigid and hard to modify in the future. Also, the summary list still had to be generated every time command is called.
+system rigid and hard to modify in the future.
 
 * **Alternative 3:** Cache the summary list in financial planner
 ** Pros: By caching the summary list in the financial planner and assigning a boolean variable along with information on the filter predicate to it to determine if it is modified, we can
@@ -495,7 +485,7 @@ Also, if the sequence of commands is as follows, *summary, add, summary*, the ti
 ==== Aspect: Method of switching UI panels
 * **Alternative 1(current choice):** Disable all UI panels within the Main UI placeholder before enabling the desired one
 ** Pros: Easy to implement and apply it to other newly created panels. To make use of the current implementation, the panel can simply be the children of
-the main Ui placeholder and the event handler can be placed in main window.
+the main Ui placeholder and its event handler can be placed in main window.
 ** Cons: Might be inefficient when there are many panels or many switching as the same process must be repeated for all panels.
 However, this is unrealistic and it is unlikely that there are a lot of UI panels for it to make a significant impact.
 
