@@ -31,7 +31,6 @@ import seedu.address.logic.commands.UiCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnfriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.security.SecurityAuthenticationException;
 
 /**
  * Parses user input.
@@ -70,12 +69,11 @@ public class AddressBookParser {
     }
 
     /**
-     * //TODO
-     * @return
-     * @throws ParseException
-     * @throws SecurityAuthenticationException
+     * Parses the arguments
+     * @return the command to be executed
+     * @throws ParseException when arguments are not valid
      */
-    public Command parseCommandArguments() throws ParseException, SecurityAuthenticationException {
+    public Command parseCommandArguments() throws ParseException {
 
         switch (commandWord) {
         case RegisterCommand.COMMAND_WORD:

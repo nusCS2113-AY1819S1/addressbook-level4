@@ -74,7 +74,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        //TODO Check whether this actually works when modifying your own data.
         if (user != null) {
             matchUserToPerson(user.getName().toString());
         }
@@ -268,7 +267,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public User getUser() {
-        //TODO Can you do this? Must you create a new object to be returned instead?
         return this.user;
     }
 
