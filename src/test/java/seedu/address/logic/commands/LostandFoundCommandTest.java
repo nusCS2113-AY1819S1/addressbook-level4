@@ -39,7 +39,7 @@ public class LostandFoundCommandTest {
 
     @Test
     public void checkSortSimpleItems() {
-        lostandfoundCommand.sortSimpleItems(lastShownList, actualLostItems,actualFoundItems);
+        lostandfoundCommand.sortSimpleItems(lastShownList, actualLostItems, actualFoundItems);
         assertEquals(actualLostItems, getExpectedLostItems());
         assertEquals(actualFoundItems, getExpectedFoundItems());
     }
