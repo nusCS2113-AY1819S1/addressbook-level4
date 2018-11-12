@@ -80,8 +80,8 @@ public class DeleteExpenditureCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_EXPENDITURE;
         // ensures that outOfBoundIndex is still in bounds of expenditure tracker list
-        assertTrue(outOfBoundIndex.getZeroBased() <
-                model.getExpenditureTracker().getExpenditureList().size());
+        assertTrue(outOfBoundIndex.getZeroBased()
+                < model.getExpenditureTracker().getExpenditureList().size());
 
         DeleteExpenditureCommand deleteExpenditureCommand = new DeleteExpenditureCommand(outOfBoundIndex);
 
