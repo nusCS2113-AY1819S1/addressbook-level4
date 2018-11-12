@@ -52,7 +52,7 @@ Responsibilities: Scheduling and tracking +
 === Low Jun Wei
 image::junweiljw.png[width="150", align="left"]
 {empty}[https://github.com/junweiljw[github]]
-{empty}[https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/docs/team/JunWei.adoc[portfolio]]
+[<<junweiljw#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Documentation +
