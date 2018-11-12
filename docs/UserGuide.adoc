@@ -542,11 +542,11 @@ Examples:
 Displays graph which shows result of 'Finals' grade component of all CS2113 students.
 // end::grade[]
 
-// tag::notesmanagementdepth[]
+// tag::notesmanagementfeatures[]
 === Notes Management
 ==== Add Note : `note add`
 Adds a note to a module. +
-Format: `note add mc/MODULE_CODE [tt/TITLE] [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [lc/LOCATION]`
+Format: `note add [mc/MODULE_CODE] [tt/TITLE] [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [lc/LOCATION]`
 
 - The START_DATE and END_DATE parameters allows the following date formats only. +
 * d-M-yyyy (e.g. 2-11-2018) +
@@ -563,7 +563,7 @@ NOTE: - MODULE_CODE strictly follows the following: +
 `Module code should begin with 2 or 3 uppercase letters, followed by a 4-digit number and an optional uppercase letter at the end.` +
 - The date and time fields are *case-insensitive* which means the user can enter `2-nOv-2018` as date. +
 - If dates are specified but not the time, the system defines a default time of `12:00 AM` for `START_DATE` and `11:59 PM` for `END_DATE`. +
-- Specifying an `END_DATE` or any time parameters requires the `START_DATE` to be defined. Otherwise, the system will inform the user. +
+- Specifying an `END_DATE` or any time parameters requires the `START_DATE` to be defined. Otherwise, the system will show an error message. +
 - The TITLE and LOCATION parameters allows characters up to 30 and 80 maximum respectively. Otherwise, an error message will be displayed. +
 - Omitting the TITLE will show a "(No title)" when the note is displayed. +
 - Defining the `START_DATE` but not the `END_DATE` automatically assigns the same date to it. +
@@ -579,10 +579,10 @@ NOTE: - MODULE_CODE strictly follows the following: +
 
 Examples:
 
-* `note add mc/CS2113` +
-This tells the system that the note is to be saved in the CS2113 module with no date.
+* `note add` +
+This creates a note in Trajectory without any other information except for the note's content itself.
 * `note add mc/CS2113 tt/Lecture sd/2.11.2018 st/4:00 PM et/6:00 pm lc/LT15` +
-This tells the system that the note is to be saved in the CS2113 module with a title named "Lecture", a start date (2 Nov 2018) and end date (2 Nov 2018) from 4PM to 6PM at LT15.
+This tells the system that the note is to be saved in the CS2113 module with a title "Lecture", a start date (2 Nov 2018) and end date (2 Nov 2018) from 4PM to 6PM at LT15.
 
 ==== Edit note : `note edit`
 Edits an existing note. +
@@ -607,23 +607,24 @@ The user will now be able to edit the note that corresponds to INDEX=3 in the li
 Delete notes. +
 Format: `note delete INDEX [MORE_INDEXES]..`
 
-* Delete notes with the specified INDEX.
+* Delete one or more notes with the specified INDEX.
 * The command allows for multiple deletion by entering multiple INDEXES separated by space.
+* Entering a range of INDEXES separated by a hyphen (e.g. 2-4) is also allowed.
 * The INDEX refers to the corresponding number of each note when `note list` command is invoked.
 
 Examples:
 
-* `note list mc/CS2040C` +
-A list of all notes saved in CS2040C module is displayed. +
-`note delete 2 1` +
-Delete notes that corresponds to INDEX=1 and INDEX=2 from the list.
+* `note list` +
+A list of all notes is displayed. +
+`note delete 2 1 4-6` +
+Delete notes that are numbered #1, #2, #4, #5, and #6 from the list.
 
 ==== Find note : `note find`
 Search and display existing notes using keywords. +
 Format: `note find k/KEYWORD [k/MORE_KEYWORDS]..`
 
-* The command searches for notes that contains *ALL* keywords. +
-* It only matches with `TITLE` and the note's `text content`. +
+* The command searches for notes that contains *ALL* of the keywords. +
+* It only matches with `TITLE` and the note's text. +
 * Multiple keywords can be accepted.
 * A minimum of one keyword is required for the command to work.
 * Keywords are *case-insensitive*.
@@ -652,10 +653,10 @@ Converts all exportable notes to CSV. +
 Format: `note export fn/FILE_NAME`
 
 - This command creates a <FILE_NAME>.csv file in the local storage. +
-- Directory: [Trajectory's path]\data\CSVexport\<FILE_NAME>.csv +
-- The format follows the Google Calendar's CSV import formatting. Hence, the user can import their notes to Google Calendar with this command.
+- Directory: {Trajectory's path}/data/CSVexport/<FILE_NAME>.csv +
+- The format follows the Google Calendar's CSV import formatting. Hence, the user can import their CSV notes to Google Calendar with this command.
 - Only notes with dates are exportable.
-// end::notesmanagementdepth[]
+// end::notesmanagementfeatures[]
 
 === Viewing help : `help`
 
@@ -784,16 +785,20 @@ e.g. `class markattendance cn/T16 mc/CG1111 i/A6942069M`
 e.g. `class listattendance cn/T16 mc/CG1111`
 * *Modifying class attendance list* `class modattendance cn/CLASS_NAME mc/MODULE_CODE i/MATRIC_NO` +
 e.g. `class modattendance cn/T16 mc/CG1111 i/A6942069M`
-* *Add a note* `note add mc/MODULE_CODE [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [lc/LOCATION]` +
-e.g. `note add mc/CS2040C`
+
+// tag::notescommandsummary[]
+* *Add a note* `note add [mc/MODULE_CODE] [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [lc/LOCATION]` +
+e.g. `note add tt/Consultation lc/NUS Techno Edge`
 * *List notes* `note list [mc/MODULE_CODE]` +
-e.g. `note list mc/CS2040C`
+e.g. `note list mc/CS2113`
 * *Delete a note* `note delete INDEX` +
 e.g. `note delete 8`
 * *Edit a note* `note edit INDEX [mc/NEW_MODULE_CODE] [sd/NEW_START_DATE] [st/NEW_START_TIME] [ed/NEW_END_DATE] [et/NEW_END_TIME] [lc/NEW_LOCATION]` +
-e.g. `note edit 5 mc/CS2040C`
+e.g. `note edit 5 ed/30-12-2018`
 * *Find a note* `note find k/KEYWORD [k/MORE_KEYWORDS]..` +
 e.g. `note find k/bubble k/queue`
 * *Export notes* `note export fn/FILE_NAME` +
 e.g. `note export fn/notes`
+// end::notescommandsummary[]
+
 * *History* : `history`
