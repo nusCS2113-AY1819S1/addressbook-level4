@@ -26,9 +26,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ReminderBuilder;
 
-public class AddCommandTest {
+//@@author junweiljw
+public class ReminderCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -38,56 +39,56 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullReminder_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new ReminderCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_reminderAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingReminderAdded modelStub = new ModelStubAcceptingReminderAdded();
+        Reminder validReminder = new ReminderBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new ReminderCommand(validReminder).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(ReminderCommand.MESSAGE_SUCCESS, validReminder), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validReminder), modelStub.remindersAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateReminder_throwsCommandException() throws Exception {
+        Reminder validReminder = new ReminderBuilder().build();
+        ReminderCommand reminderCommand = new ReminderCommand(validReminder);
+        ModelStub modelStub = new ModelStubWithReminder(validReminder);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(reminderCommand.MESSAGE_DUPLICATE_REMINDER);
+        reminderCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Reminder reminder1 = new ReminderBuilder().withTitle("Reminder1").build();
+        Reminder reminder2 = new ReminderBuilder().withTitle("Reminder2").build();
+        ReminderCommand addReminder1Command = new ReminderCommand(reminder1);
+        ReminderCommand addReminder2Command = new ReminderCommand(reminder2);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addReminder1Command.equals(addReminder1Command));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        ReminderCommand addReminder1CommandCopy = new ReminderCommand(reminder1);
+        assertTrue(addReminder1Command.equals(addReminder1CommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addReminder1Command.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addReminder1Command.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different reminder -> returns false
+        assertFalse(addReminder1Command.equals(addReminder2Command));
     }
 
     /**
@@ -185,7 +186,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void exportPerson(Person person) {
+        public void exportPerson(Person person) throws IOException {
             throw new AssertionError("This method should not be called");
         }
 
@@ -236,44 +237,44 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single reminder.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithReminder extends ModelStub {
+        private final Reminder reminder;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithReminder(Reminder reminder) {
+            requireNonNull(reminder);
+            this.reminder = reminder;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasReminder(Reminder reminder) {
+            requireNonNull(reminder);
+            return this.reminder.isSameReminder(reminder);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the reminder being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingReminderAdded extends ModelStub {
+        final ArrayList<Reminder> remindersAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasReminder(Reminder reminder) {
+            requireNonNull(reminder);
+            return remindersAdded.stream().anyMatch(reminder::isSameReminder);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addReminder(Reminder reminder) {
+            requireNonNull(reminder);
+            remindersAdded.add(reminder);
         }
 
         @Override
         public void commitAddressBook() {
-            // called by {@code AddCommand#execute()}
+            // called by {@code ReminderCommand#execute()}
         }
 
         @Override

@@ -23,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.todo.Todo;
 import seedu.address.testutil.TodoBuilder;
@@ -211,6 +212,26 @@ public class TodoCommandTest {
 
         @Override
         public void updateFilteredTodoList(Predicate<Todo> predicate) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Reminder> getFilteredReminderList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasReminder(Reminder reminder) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addReminder(Reminder reminder) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void updateFilteredReminderList(Predicate<Reminder> predicate) {
             throw new AssertionError("This method should not be called");
         }
     }
