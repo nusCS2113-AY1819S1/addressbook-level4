@@ -254,27 +254,27 @@ public class AddDistributorCommandTest {
 
         @Override
         public ArrayList<Reminder> getAllReminders() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ArrayList<Reminder> getOverdueReminders() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ArrayList<Reminder> getOverdueRemindersForThread() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public String getDaysTransactionsAsString(String date) throws InvalidTimeFormatException {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public String getTransactionAsString(String date) throws InvalidTimeFormatException {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

@@ -29,7 +29,7 @@ public class AddTransactionCommand extends Command {
             + PREFIX_PRODUCT + "Milk "
             + PREFIX_PRODUCT + "Milk";
 
-    private static final String MESSAGE_SUCCESS = "Transaction successfully recorded for time ";
+    private static final String MESSAGE_SUCCESS = "Transaction successfully recorded for time %s";
     private final Transaction toAdd;
 
     public AddTransactionCommand(Transaction transaction) {
@@ -46,7 +46,7 @@ public class AddTransactionCommand extends Command {
         } catch (DuplicateTransactionException e) {
             return new CommandResult(e.getLocalizedMessage() + ". Upon adding this transaction");
         }
-        model.commitAddressBook();
-        return new CommandResult(MESSAGE_SUCCESS + toAdd.getTransactionTime());
+        model.commitSalesHistory();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getTransactionTime()));
     }
 }
