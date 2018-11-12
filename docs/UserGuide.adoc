@@ -547,8 +547,6 @@ e.g. `unregister 1`
 * *View Attending* : `attending`
 * *Remove Attendee* : `removeAttendee INDEX u/USERNAME` +
 e.g. `removeAttendee 1 u/Peter Parker`
-* *Set reminders* : `setReminder INDEX` +
-e.g. `setReminder 1`
 * *Show reminders* : `reminder`
 * *Update event statuses* : `update`
 * *AddComment* : `addComment INDEX C/STRING` +
