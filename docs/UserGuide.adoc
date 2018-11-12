@@ -448,14 +448,13 @@ There is no need to save manually.
 *A*: Unfortunately, we do not support incremental updates right now, so users can only obtain the latest release from our GitHub directly. We are considering to use API from Google to implement over-the-air updating in future release.
 
 *Q*: Since it's a CLI based product, can I use terminal to run it locally or SSH remotely? +
-*A*: Although it's a CLI based product, we haven't adapted it to CLI yet, so you may can only run commands by opening the jar file.
+*A*: Although it's a CLI based product, we have not adapted it to CLI yet, so you can only run commands by opening the jar file.
 
 *Q*: How big is this software? +
-*A*: It's a light product, the jar file only have 20+ M and the source code is only 70+ M.
+*A*: It is a light product. The jar file is only 20+ MB and the source code is only 70+ MB.
 
 *Q*: I cannot add CS2113T to the to-do list. +
-*A*: Read the user guide carefully. For module codes with an additional character at the end that denotes a variant of
-a module, do remember to drop this character. Because you won't take both CS2113 and CS2113T.
+*A*: Do refer to the user guide. We currently do not support module codes with an additional character at the end that denotes a variant of a module. In future release, we will include support for it.
 // end::FAQ[]
 
 == Command Summary
