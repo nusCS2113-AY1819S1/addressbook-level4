@@ -20,6 +20,10 @@
 
 /* Overrides for asciidoctor.css */
 
+body {
+    background-image: linear-gradient(#aeffc6, #b8fff5, #aeffc6);
+}
+
 a {
     color: #0074c7;
 }

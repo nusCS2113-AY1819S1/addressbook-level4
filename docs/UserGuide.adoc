@@ -561,7 +561,7 @@ Auto-Completion: +
 ** Input text can be completed to months with year in the form e.g `nov-2018`.
 ** Suggestions are currently limited to inputs from `jan-2018` to `dec-2018`.
 
-* There will be no suggestions on parameters that co
+* There will be no suggestions on parameters that come after the fourth.
 // end::autocomplete-i[]
 
 // tag::stats[]
