@@ -145,7 +145,7 @@ public class TrieTest {
     }
 
     @Test
-    public void ListOfWords_withSameStartingNames() {
+    public void withSameStartingNames_getListOfWords() {
         dictionary.insert(ClearCommand.COMMAND_WORD);
         dictionary.insert(ClearScheduleCommand.COMMAND_WORD);
         List<String> cWordList = new ArrayList<>();
