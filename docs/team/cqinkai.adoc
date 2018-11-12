@@ -16,12 +16,12 @@ Event Manager is a desktop application for students living in Residential Colleg
 
 The following is a list of the main features in Event Manager:
 ===
-. Authentication |Admin accounts to manage events and user accounts to identify users.
-. Find |A search feature to filter events based on keywords in the events' data fields.
-. Registration |Users can indicate their attendance for events. Attendance is displayed to all other users.
-. Reminder |Automated reminders are sent to users who have registered for events that are happening in the next 24 hours.
-. Comment |A comment section to facilitate interactions amongst the users for an event.
-. Status |Displays the status of an event to users. Statuses can be 'Completed' or 'Upcoming'.
+.  Authentication |Admin accounts to manage events and user accounts to identify users.
+.  Find |A search feature to filter events based on keywords in the events' data fields.
+.  Registration |Users can indicate their attendance for events. Attendance is displayed to all other users.
+.  Reminder |Automated reminders are sent to users who have registered for events that are happening in the next 24 hours.
+.  Comment |A comment section to facilitate interactions amongst the users for an event.
+.  Status |Displays the status of an event to users. Statuses can be 'Completed' or 'Upcoming'.
 
 == Summary of contributions
 * *Major enhancement #1*: +
