@@ -1,0 +1,77 @@
+= Bhatt Paras Krishna - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Inventarie Pro
+
+---
+
+== Overview
+
+Inventarie PRO is for self employed business owners who prefer to use a desktop app for managing inventory. More importantly, Inventarie Pro is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Inventarie Pro can get your inventory management tasks done faster, simpler and easier than traditional GUI apps.
+
+== Summary of contributions
+
+* *Major enhancement*: added *Sales History feature*
+** What it does: This feature allow each users to store their respective
+transaction histories, and also to set reminders for themselves to help manage
+the day-to-day affairs of the provision shop.
+** Justification: This feature provides life to the application by allowing the user
+to actively keep track of the affairs of the provision shop. This helps the product achieve
+'real-time' status as it reflects the state of the shop, providing the provision shop
+owner the ability to use the data provided by the app to plan for and manage the inventory.
+** Highlights: This enhancement required a careful analysis of both user requirements and the
+existing code base. Code base modifications included significant changes to Model, Storage,
+and the creation of SalesHistory class with other associated classes.
+
+* *Minor enhancement*:
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=parask26&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Code Dashboard]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.4` on GitHub
+*** Enforced GitHub standards and helped team follow them.
+** Enhancements to existing features:
+*** Updated storage to accommodate unique individual sales histories for each user and file storage for the same (pull request https://github.com/CS2113-AY1819S1-T13-3/main/pull/106[#106])
+*** Improved test coverage for the added features (pull requests
+https://github.com/CS2113-AY1819S1-T13-3/main/pull/109[#109],
+https://github.com/CS2113-AY1819S1-T13-3/main/pull/159[#159],
+https://github.com/CS2113-AY1819S1-T13-3/main/pull/202[#202])
+
+** Documentation:
+*** Made updates to user and developer guides (pull requests)
+https://github.com/CS2113-AY1819S1-T13-3/main/pull/60[#60],
+https://github.com/CS2113-AY1819S1-T13-3/main/pull/112[#120],
+https://github.com/CS2113-AY1819S1-T13-3/main/pull/159[#159]
+
+** Community:
+*** PRs reviewed (with non-trivial review comments):
+https://github.com/CS2113-AY1819S1-T13-3/main/pull/114[#114],
+https://github.com/CS2113-AY1819S1-T13-3/main/pull/110[#110],
+https://github.com/CS2113-AY1819S1-T13-3/main/pull/151[#156],
+https://github.com/CS2113-AY1819S1-T13-3/main/pull/177[#177].
+*** Resolved issues found in PE1:
+https://github.com/CS2113-AY1819S1-T13-3/main/issues/132[#132],
+https://github.com/CS2113-AY1819S1-T13-3/main/issues/133[#133],
+https://github.com/CS2113-AY1819S1-T13-3/main/issues/141[#141].
+
+== Contributions to the User Guide
+
+
+|===
+|Given below is my major contribution to the User Guide
+|===
+
+include::../UserGuide.adoc[tag=saleshistory]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide
+|===
+
+include::../DeveloperGuide.adoc[tag=saleshistory]

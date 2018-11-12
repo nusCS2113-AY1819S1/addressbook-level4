@@ -20,10 +20,10 @@ Responsibilities: Security + Tester
 
 === Bhatt Paras Krishna
 image::parask26.png[width="150", align="left"]
-{empty}[https://github.com/ParasK26[github]]
+{empty}[https://github.com/ParasK26[github]][<<parask26#, portfolio>>]
 
 Role: Chief Programmer +
-Responsibilities: Integrator + Threading
+Responsibilities: Integrator + GitHub Manager
 
 '''
 

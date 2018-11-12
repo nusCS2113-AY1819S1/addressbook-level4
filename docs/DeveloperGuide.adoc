@@ -405,26 +405,50 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+//tag::saleshistory[]
 === Storing Transactions Feature
 ==== Current Implementation
-* The storage of transactions is facilitated by the `SalesHistory`, `ShopDay` and `Transactions` classes.
+* The storage of transactions is facilitated by the `SalesHistory` and `Transactions` classes.
 * When `AddressBook` is loaded, it creates an object of the `SalesHistory` class using the `SalesHistory` default
-constructor. The SalesHistory default constructor initialises its `ActiveDay` as the current day.
-* Now, when the user inputs `transaction pr/<product name> pr/<product name> ... pr/product name>` into the CLI, the
-`AddressBookParser` processes this command and creates an object of type `AddTransactionCommand`.
-* `LogicManager` receives this command object and executes it. In its execution, the transaction is added to the current
-day, that is, the active `ShopDay` in the `SalesHistory` of `AddressBook`.
+constructor, which uses data read from that specific user's saleshistory `.xml` file.
+When the file is not found/not in the correct format, the user will begin with an empty saleshistory.
+* When the user inputs `transaction pr/<product name> pr/<product name> ... pr/product name>` into the CLI, the
+`AddTransactionCommandParser` processes this command and creates an object of type `AddTransactionCommand`.
+* `LogicManager` receives this command object and executes it. In its execution, the saleshistory is updated
+with the required transaction and raises an event for the user's saleshistory file on the hard disk to be updated.
+
+image::transactionsequencediagram.png[widith="800"]
+
 
 [NOTE]
-It is important to note that the `ShopDay` class stores each `Transaction` on a `TreeMap`, where each `Transaction` has
-its `reminderTime` as its key. This is to facilitate quick access to any transaction on a given day, and to maintain
+It is important to note that the `SalesHistory` class stores each `Transaction` on a `TreeMap`, where each `Transaction` has
+its `transactionTime` as its key. This is to facilitate quick access to any transaction on a given day for large number of transactions, and to maintain
 the `Transaction` objects in order of their creation times within memory.
 
 ==== Alternative Implementations
 Currently, the `Transaction` objects are stored on a `TreeMap` to maintain their chronological order in memory. However,
 should this prove non-essential, this will be redone on a `HashMap` to facilitate quicker access and easier handling in
 the code.
+Alternatively, using the `ObservableList` may be sufficient if it turns out the sales volumes are small.
 
+=== Storing Reminders Feature
+* The storage of reminders is facilitated by the `SalesHistory` and the `Reminders` classes.
+* When `AddressBook` is loaded, it creates an object of the `SalesHistory` class using the `SalesHistory` default
+  constructor, which uses data read from that specific user's saleshistory `.xml` file.
+  When the file is not found/not in the correct format, the user will begin with an empty saleshistory
+* When the user stores a reminder, the `reminderTime` is used as the key. Hence, `Reminder`
+is a `TimeIdentifiedClass`
+* Each reminder is marked as not yet due for completion at the time of their creation.
+* Every second, `threadduereminders` command is sent from CommandBox. This compares the current time against the stored reminder times to
+determine which reminders have reached their deadlines. If there are any reminders due,
+the user receives a message for the same, and the reminder is marked as viewed by the thread.
+
+image::remindersequencediagram.png[width="800"]
+
+[NOTE]
+The `Reminders` are stored on a `TreeMap`, similar to the `Transaction`, in `SalesHistory`
+
+// end::saleshistory[]
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
@@ -458,9 +482,6 @@ Additionally, it implements the following operations:
                     vulnerability.
 // end::dataencryption[]
 
-// tag::threadreminders[]
-=== [Proposed] Thread Due Reminders
-// end::threadreminders[]
 == Documentation
 
 We use asciidoc for writing documentation.
