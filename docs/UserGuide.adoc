@@ -493,11 +493,11 @@ image::FreeTimeSuccess.png[width="800"]
 === Import Timetable : `import` (`im`)
 
 Use this command to import a timetable for the *current user* from a specified file. +
+See the example below for a quick start! +
 
 Format: `import FILE_NAME` +
 
 ****
-* See the example below for a quick start!
 * Command parameters:
 ** `FILE_NAME` refers to the name of the file that you want to import.
 *** Do not include the _.ics_ file extension when typing the command.
@@ -547,6 +547,7 @@ image::UG_import_step_4.png[width="790"]
 === Export Timetable : `export` (`ex`)
 
 Use this command to export the *currently-displayed* timetable as an _.ics_ file.
+See the example below for a quick start! +
 
 Format: `export FILE_NAME`
 
