@@ -30,7 +30,7 @@ public class XmlAdaptedExpenditure {
 
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedExpenditure.
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedExpenditure() {}

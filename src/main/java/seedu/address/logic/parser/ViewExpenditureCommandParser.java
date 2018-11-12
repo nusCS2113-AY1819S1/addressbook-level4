@@ -14,8 +14,8 @@ public class ViewExpenditureCommandParser implements Parser<ViewExpenditureComma
     public static final String DATE_VALIDATION_REGEX = "[\\d]{2}" + "-" + "[\\d]{2}" + "-" + "[\\d]{4}";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ViewTaskCommand
-     * and returns an ViewTaskCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ViewExpenditureCommand
+     * and returns an ViewExpenditureCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewExpenditureCommand parse(String args) throws ParseException {

@@ -18,13 +18,13 @@ import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.expenditureinfo.Money;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddExpenditureCommand object
  */
 public class AddExpenditureCommandParser implements Parser<AddExpenditureCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddExpenditureCommand
+     * and returns an AddExpenditureCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddExpenditureCommand parse(String args) throws ParseException {
