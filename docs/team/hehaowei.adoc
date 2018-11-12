@@ -20,7 +20,18 @@ Project: Jalil Enterprises Stock List
 
 == Overview
 
-JalilEnterprises is for those who prefer to use a desktop app for stock taking. More importantly, JalilEnterprises is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+This Project Portfolio is to illustrate the contribution of me, He Haowei (GitHub: HeHaowei) to the JalilEnterprises project. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java. +
+This project is completed by team T12-3 of module CS2113T in National University of Singapore, in the first semester of academic year 2018/2019.
+
+=== Project Overview
+
+This project was a part of the CS2113T (Software Engineering & Object-Oriented Programming) module, and our team was tasked to enhance the existing AddressBook application for a specific target audience group of our choice.
+
+=== Product Overview
+
+Morphed from AddressBook – Level 4 [link to AB4], Jalil Enterprises is a desktop inventory list application used for recording stocks in NUS Computer Engineering laboratories. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java and has ~10 kLoC.
+
+Some key features of the Jalil Enterprises application are storing quantities and statuses of stocks, creating loan lists for loaning of equipment, and saving and viewing archives of the inventory on command.
 
 == Summary of contributions
 
