@@ -891,7 +891,7 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-
+// tag::exportusecase[]
 [discrete]
 === Use case: Export contacts
 
@@ -916,6 +916,7 @@ Use case ends.
 ** 3a1. JitHub shows an error message.
 +
 Use case resumes at step 3.
+// end::exportusecase[]
 
 [appendix]
 == Non Functional Requirements
@@ -956,6 +957,7 @@ Cons:
 * ...
 * ...
 
+// tag::manualtesting[]
 [appendix]
 == Instructions for Manual Testing
 
@@ -963,6 +965,7 @@ Given below are instructions to test the app manually.
 
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+// end::manualtesting[]
 
 === Launch and Shutdown
 
@@ -994,6 +997,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
+// tag::testimportexport[]
 === Exporting and importing data
 
 . Exporting an empty list
@@ -1019,5 +1023,5 @@ _{ more test cases ... }_
    Expected:
    * The persons listed are cleared after the `clear` command.
    * The persons cleared are restored after the `import` command.
-
+// end::testimportexport[]
 _{ more test cases ... }_
