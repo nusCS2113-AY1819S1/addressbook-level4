@@ -316,6 +316,7 @@ Examples:
 * `matchSchedule d/01012018 st/0800 et/1800 i/1 i/2 i/3`
 // end::schedule[]
 
+// tag::todo[]
 === Add To-do task: `todo`
 
 Adds a to-do task, the to-do list panel will display the task's title and its content. +
@@ -332,6 +333,9 @@ image::TodoUsage1.png[width="1000"]
 
 image::TodoUsage2.png[width="200"]
 
+// end::todo[]
+
+// tag::finishTodo[]
 === Finish To-do task: `finishTodo`
 
 Complete a to-do task, and the to-do list panel will re-render the remaining unfinished to-do tasks. +
@@ -349,6 +353,8 @@ Examples:
 The following diagram illustrates how the `finishTodo` is being used on the JitHub CLI-GUI app:
 
 image::FinishTodoUsage.png[width="1000"]
+
+// end::finishTodo[]
 
 // tag::reminder[]
 === Add Reminder: `reminder`
@@ -432,6 +438,7 @@ Examples:
 and would suggest to you the command `select` instead.
 // end::suggestions[]
 
+// tag::calendar[]
 === Monthly Calendar View
 
 Once you start running the application and select a person from the person list panel, the calendar of the current month will be displayed on the calendar panel.
@@ -439,6 +446,8 @@ Once you start running the application and select a person from the person list 
 The following diagram shows how the calendar looks like for November 2018.
 
 image::CalendarView.png[width="500"]
+
+// end::calendar[]
 
 // tag::calendarViewSchedule[]
 === Calendar to view schedule [Coming in V2.0]
