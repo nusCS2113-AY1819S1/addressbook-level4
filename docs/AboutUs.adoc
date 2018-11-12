@@ -34,7 +34,7 @@ image::tztzt.png[width="150", align="left"]
 {empty}[http://github.com/tztzt[github]] [<<tztzt#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: UI + Data
 
 '''
 

@@ -50,9 +50,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
-
+[[autocomplete]]
 == Auto Complete Feature
-
+// tag::autocomplete-a[]
 This section describes the auto completing feature implemented on the input command box which
 makes the typing interface of Savee more friendly and efficient.
 
@@ -64,7 +64,7 @@ which will be described in <<Features>>.
 
 User may use the kbd:[&#x2191;] kbd:[&#x2193;] keys to navigate the list and select a word they wish to complete
 their input with using kbd:[Enter]. If user does not wish to select a word for completion, user may press kbd:[ESC] or
-kbd:[Space] or a mouseclick elsewhere in the command box to move onto another word.
+kbd:[Space] or mouseclick anywhere else in the command box to move onto another word.
 
 Auto completion is performed word by word and after completing a word, the typing caret will appear at the end
 of the newly completed word. Previously existing text before and after the completed word will not be lost and will
@@ -84,9 +84,12 @@ kbd:[Ctrl]+kbd:[A].
 * Whitespaces will not affect the accuracy of the autocomplete.
 ====
 
+
 image::AutoComplete.png[width="790"]
 *Screenshot of auto-complete in action*
+
 ** Typing `a` triggers suggestions of command words that begin with `a`.
+// end::autocomplete-a[]
 
 [[Features]]
 == Basic Features
@@ -144,8 +147,8 @@ Adds a record of a financial activity to Savee with the given name, date, money 
 Format: `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
 
 Name denotes the name of the financial activity, moneyflow denotes the money spent or gained in the financial activity
-and date denotes the date the financial activity was completed. Each financial activity can be labelled with maximum of 2
-of tags as these tags will be used to categorise each record to remove the need for user to specify another field.
+and date denotes the date the financial activity was completed. Each financial activity can be labelled with only 1
+name, moneyflow and date and a maximum of 2 tags as these tags will be used to categorise each record to remove the need for user to specify another field.
 
 [NOTE]
 Moneyflow can be either a debit (expense) or a credit (income). +
@@ -160,8 +163,8 @@ Examples:
 * `add n/PaymentFromBetty t/friend m/+10 d/10-11-2018 t/classmate`
 
 [[Add_Autocomplete]]
-
 Auto-Completion: +
+// tag::autocomplete-b[]
 
 * Names
 ** Inputs starting with `n/` and words that come after it but before the next prefix `m/`, `d/` or `t/` use can be completed with names.
@@ -186,6 +189,11 @@ e.g to have a suggestion of `01-11-2018` to appear, you have to key in `d/` `0` 
 *** travel
 *** school
 *** shopping
+
+[NOTE]
+* There is no autocompletion restriction on number of names, dates, moneyflow or tag inputs but command will still
+require the appropriate number of parameters.
+// end::autocomplete-b[]
 
 // tag::list[]
 === Listing all records within a date range : `list`
@@ -212,6 +220,7 @@ Examples:
 // end::list[]
 
 Auto-Completion: +
+// tag::autocomplete-c[]
 
 * Dates
 ** Inputs starting with `d/` can be completed with dates as well as the argument that come immediately
@@ -219,6 +228,7 @@ after the entire `d/START_DATE` input as long as there are only whitespaces betw
 ** Suggestions will only come from dates that have been entered in records.
 
 * There will be no suggestions on parameters of other prefixes or parameters after the third.
+// end::autocomplete-c[]
 
 === Locating records by name: `find`
 
@@ -241,10 +251,12 @@ Returns `dinner with family` and `family party`
 Returns all records having `family`, `food`, or `shopping` in their name
 
 Auto-Completion: +
+// tag::autocomplete-d[]
 
 * Keywords
 ** Input words can be completed with words that are used in existing records' names in Savee.
 ** All words that are entered after the `find` command can suggest words from existing records.
+// end::autocomplete-d[]
 
 [[findtag]]
 // tag::findtag[]
@@ -268,13 +280,15 @@ Examples:
 Returns any record tagged with `friend`
 * `findtag friend food shopping` +
 Returns all records having any of the tags `friend`, `food`, or `shopping`
+// end::findtag[]
 
 Auto-Completion: +
+// tag::autocomplete-e[]
 
 * Keywords
 ** Input words can be completed with words that are used in existing records' tags in Savee.
 ** All words that are entered after the `findtag` command can suggest words from existing records.
-// end::findtag[]
+// end::autocomplete-e[]
 
 === Selecting a record : `select`
 
@@ -328,14 +342,16 @@ Sorts the list of records by name in ascending order.
 
 * `sort moneyflow desc` +
 Sorts the list of records by moneyflow in descending order.
+// end::sort[]
 
 Auto-Completion: +
+// tag::autocomplete-f[]
 
 * Input word suggestions are suggested based on what can still be filled in.
 ** If a category has been specified, only an order can be suggested and vice versa.
 ** If neither has been specified, then both order and category are possible suggestions.
 * There will be no suggestions on parameters that come after the third.
-// end::sort[]
+// end::autocomplete-f[]
 
 === Editing a record : `edit`
 
@@ -358,8 +374,10 @@ Edits the moneyflow and date of the 1st record to be `+33` and `28-2-2018` respe
 Edits the name of the 2nd record to be `Shopping for clothes` and clears all existing tags.
 
 Auto-Completion: +
+// tag::autocomplete-g[]
 
-* Performs similarly as the `add` function. Please refer to <<Add_Autocomplete>>.
+* Performs similarly to the `add` function. Please refer to <<Add_Autocomplete>>.
+// end::autocomplete-g[]
 
 === Deleting a record : `delete`
 
@@ -397,10 +415,12 @@ Examples:
 Deletes the records with date 31-7-2018.
 
 Auto-Completion: +
+// tag::autocomplete-h[]
 
 * Input text can be completed to dates that already exist in records in Savee.
 * Text can also be completed to `today` or `ytd`.
 * There will be no suggestions on parameters that come after the second.
+// end::autocomplete-h[]
 
 // end::deletedate[]
 === Listing entered commands : `history`
@@ -534,8 +554,10 @@ image::UiSummaryByMonthTable.png[width="790"]
 
 image::UiSummaryByCategoryTable.png[width="790"]
 *Screenshot of app when `summary category d/1-1-2018 12-12-2018` is run*
+// end::summary[]
 
 Auto-Completion: +
+// tag::autocomplete-i[]
 
 * Mode Keyword
 ** First parameter after the `summary` keyword can be completed to `date`, `month` or `category`.
@@ -551,8 +573,8 @@ Auto-Completion: +
 ** Suggestions are currently limited to inputs from `jan-2018` to `dec-2018`.
 
 * There will be no suggestions on parameters that come after the fourth.
+// end::autocomplete-i[]
 
-// end::summary[]
 // tag::stats[]
 === Showing a breakdown of total expenses and income into categories: `stats`
 
@@ -590,6 +612,18 @@ image::UiPieChartIncome.png[width="790"]
 *Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run*
 
 // end::stats[]
+
+Auto-Completion: +
+// tag::autocomplete-j[]
+
+* Dates
+** Input text can be completed to dates that already exist in records in Savee.
+** Inputs starting with `d/` can be completed with dates as well as the argument that come immediately after the entire
+`d/DATE` input as long as there are only whitespaces between them.
+** Text can also be completed to `today` or `ytd`.
+* There will be no suggestions on parameters that come after the third.
+// end::autocomplete-j[]
+
 // tag::welcomepanel[]
 === Showing a breakdown of total expenses and income into categories of this month: `NO COMMAND REQUIRED TO BE TYPED`
 
@@ -686,6 +720,7 @@ As the size of the Chart is fixed initially. Sometimes, when user exports too ma
 // end::exportexcel[]
 
 Auto-Completion: +
+// tag::autocomplete-k[]
 
 * Dates
 ** Input text can be completed to dates that already exist in records in Savee.
@@ -695,6 +730,7 @@ Auto-Completion: +
 * Directory
 ** Does not offer auto-competion.
 * There will be no suggestions on parameters that come after the fourth.
+// end::autocomplete-k[]
 
 // tag::import[]
 
@@ -808,6 +844,7 @@ image::Export_Capture2_LinhChi.png[width:800]
 // end::archive[]
 
 Auto-Completion: +
+// tag::autocomplete-l[]
 
 * Dates
 ** Input text can be completed to dates that already exist in records in Savee.
@@ -817,7 +854,7 @@ Auto-Completion: +
 * Directory
 ** Does not offer auto-competion.
 * There will be no suggestions on parameters that come after the fourth.
-
+// end::autocomplete-l[]
 
 // tag::draw_line_chart[]
 
@@ -871,6 +908,7 @@ Example:
 * `addlimit d/20-8-2018 30-8-2018 m/100`
 
 Auto-Completion: +
+// tag::autocomplete-m[]
 
 * Dates
 ** Input text can be completed to dates that already exist in records in Savee.
@@ -881,6 +919,7 @@ Auto-Completion: +
 ** Does not offer auto-competion.
 
 * There will be no suggestions on parameters that come after the fourth.
+// end::autocomplete-m[]
 
 [[checklimit]]
 === Viewing all limits: `checkLimit`
@@ -915,6 +954,7 @@ Examples:
 * `deletelimit d/20-8-2018 30-8-2018`
 
 Auto-Completion: +
+// tag::autocomplete-n[]
 
 * Dates
 ** Input text can be completed to dates that already exist in limits in Savee.
@@ -924,6 +964,7 @@ Auto-Completion: +
 ** Text can also be completed to `today` or `ytd`.
 
 * There will be no suggestions on parameters that come after the third.
+// end::autocomplete-n[]
 
 [[editlimit]]
 
@@ -946,6 +987,7 @@ Examples:
 * `editlimit d/20-8-2018 30-8-2018 m/200`
 
 Auto-Completion: +
+// tag::autocomplete-o[]
 
 * Dates
 ** Input text can be completed to dates that already exist in limits in Savee.
@@ -957,6 +999,7 @@ Auto-Completion: +
 ** Does not offer auto-competion.
 
 * There will be no suggestions on parameters that come after the fourth.
+// end::autocomplete-o[]
 
 === Adding a monthly limit: `addmonthlylimit`
 
@@ -998,7 +1041,7 @@ The monthly limit will be deleted and no longer check the spend of the current m
 ****
 Examples:
 * `deletemonthlylimit`
-//end::limitfeatures[]
+// end::limitfeatures[]
 
 == Upcoming Features
 

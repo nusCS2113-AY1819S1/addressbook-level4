@@ -168,6 +168,7 @@ public class CustomSuggestionProvider {
             case ListCommand.COMMAND_WORD:
             case DeleteLimitCommand.COMMAND_WORD:
             case EditLimitCommand.COMMAND_WORD:
+            case StatisticCommand.COMMAND_WORD:
                 datesCommandKeyword(inputs, strIndex);
                 return;
 
@@ -299,7 +300,7 @@ public class CustomSuggestionProvider {
      */
     private void datesCommandKeyword(String[] inputs, int strIndex) {
         Set<String> suggestions;
-        if (inputs[0].equals(ListCommand.COMMAND_WORD) || inputs[0].equals(AddLimitCommand.COMMAND_WORD)) {
+        if (inputs[0].equals(ListCommand.COMMAND_WORD) || inputs[0].equals(StatisticCommand.COMMAND_WORD)) {
             suggestions = dateSuggestionSet;
         } else {
             suggestions = limitsDateSuggestionSet;

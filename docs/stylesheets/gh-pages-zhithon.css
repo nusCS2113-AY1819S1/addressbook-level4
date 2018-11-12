@@ -41,11 +41,16 @@ h5,
 h5 > a.link,
 h6,
 h6 > a.link {
-    color: #ff5565;
+    color: #ff2d65;
 }
 
 h2 > a.link:hover {
     text-decoration: underline;
+    color: red;
+}
+
+h5 > a.link {
+    font-size: 20px;
     color: red;
 }
 
@@ -149,8 +154,8 @@ p {
 }
 
 code {
-    background-color: #a3a3a3 !important;
-    color: #fbfbfb;
+    background-color: #d2d2d2 !important;
+    color: #000000;
 }
 
 /* Table styles */
@@ -241,7 +246,7 @@ video {
 }
 
 .navbar-light .nav-link.active {
-    border-bottom: 4px #ff5565 solid;
+    border-bottom: 4px #ff2d65 solid;
 }
 
 .navbar-lg .nav-link.active {

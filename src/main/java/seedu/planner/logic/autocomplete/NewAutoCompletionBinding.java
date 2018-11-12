@@ -44,19 +44,7 @@ public class NewAutoCompletionBinding<T> {
      * arguments to allow for accurate text suggestions.
      */
     private final ChangeListener<Number> caretChangedListener = (obs, oldPosition, newPosition) -> {
-        String newText = getCompletionTarget().getText();
-        String inputText;
-        if (newPosition.intValue() == newText.length()) {
-            inputText = caretAtEnd(newPosition, newText);
-        } else {
-            if (newPosition.intValue() == 0) {
-                inputText = resetTexts();
-            } else {
-                inputText = whitespaceAfterCaret(newPosition, newText);
-            }
-        }
-
-        checkPrefix(newText, inputText);
+        updateSuggestionWordBank(newPosition);
     };
 
     /**
@@ -95,6 +83,26 @@ public class NewAutoCompletionBinding<T> {
             }
         });
         init();
+    }
+
+    /**
+     * Update the Suggestion Provider when there is a change detected in the user text input
+     * @param newPosition is the position of the caret
+     */
+    private void updateSuggestionWordBank(Number newPosition) {
+        String newText = getCompletionTarget().getText();
+        String inputText;
+        if (newPosition.intValue() == newText.length()) {
+            inputText = caretAtEnd(newPosition, newText);
+        } else {
+            if (newPosition.intValue() == 0) {
+                inputText = resetTexts();
+            } else {
+                inputText = whitespaceAfterCaret(newPosition, newText);
+            }
+        }
+
+        checkPrefix(newText, inputText);
     }
 
     /**
