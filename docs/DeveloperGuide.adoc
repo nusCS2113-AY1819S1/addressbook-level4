@@ -541,8 +541,10 @@ image::SecurityParseCommandsSD.png[width="800"]
 ----
 COMMAND_ALLOWED, COMMAND_LOGOUTFIRST, COMMAND_LOGINFIRST, COMMAND_ERROR;
 ----
-Figure 10 displays when the `AuthReturn` is `COMMAND_ALLOWED`. When it is not that, there will be an `SecurityAuthenticationException`
+The above figure shows the sequence when the `AuthReturn` is `COMMAND_ALLOWED`. When it is not that, there will be an `SecurityAuthenticationException`
 thrown with the relevant message to the user.
+
+`CommandsEnum` is another enum type that contains iscommandAllowed(). They are found in `seedu.addressbook.commons` package.
 
 
 
