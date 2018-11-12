@@ -54,7 +54,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * To select a command, click on any command.
 * A message will pop up on the result display, showing you information and the syntax of the command. A command template will also be given in the command box. You are then required to fill in the remaining fields by following the example given. A screenshot of an example is shown below for your reference.
 +
-image::command_panel_result[align="left"]
+image::command_panel_result.png[align="left"]
 +
 Note: For advanced users, you are still able to press kbd:[tab] to cycle through the ISBN.
 

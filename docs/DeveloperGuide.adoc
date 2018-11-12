@@ -466,7 +466,7 @@ A password is required by the user upon start-up of the application.
 
 The password must be secured. A secured password must consist of uppercase, lowercase, numbers and other special characters. For example, “$%GA2dg#” is a good password.
 
-image::password_activity_diagram.png[width="800"]
+image::password_activity_diagram.png[width="300"]
 
 In order to prevent attackers from using easy brute force methods, the application will shut down after 3 consecutive tries.
 
