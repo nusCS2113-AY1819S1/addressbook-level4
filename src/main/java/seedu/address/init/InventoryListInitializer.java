@@ -70,20 +70,9 @@ public class InventoryListInitializer {
      * init Drink I/O after login
      */
     public void initAfterLogin() {
-        model = initModelManager(storage, userPrefs, loginInfoModel);
+        model = initModelManager();
         logic = new LogicManager (model);
         ui = new UiManager (logic, config, userPrefs);
-    }
-
-    @Subscribe
-    public void handleInitInventoryListEvent(InitInventoryListEvent event) {
-        initAfterLogin ();
-    }
-
-    @Subscribe
-    public void handleChangeModelEvent(ChangeModelEvent event) {
-        model = initModelManager(storage, userPrefs, loginInfoModel);
-        logic.changeModelAfterReLogin (model);
     }
 
     /**
@@ -91,43 +80,61 @@ public class InventoryListInitializer {
      * The data from the sample inventory list will be used instead if {@code storage}'s inventory list is not found,
      * or an empty inventory list will be used instead if errors occur when reading {@code storage}'s inventory list.
      */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs, LoginInfoModel loginInfoModel) {
+    private Model initModelManager() {
+
+        ReadOnlyInventoryList initialData = readInventoryDataFromStorage();
+        ReadOnlyTransactionList initialTransactionData = readTransactionListFromStorage();
+
+        return chooseModelAccordingToAuthentication (initialData, initialTransactionData);
+    }
+
+    /**
+     *  Returns {@code ReadOnlyInventoryList} after reading from storage
+     */
+    private ReadOnlyInventoryList readInventoryDataFromStorage() {
         Optional<ReadOnlyInventoryList> inventoryListOptional;
-        ReadOnlyInventoryList initialData;
-
-        Optional<ReadOnlyTransactionList> transactionListOptional;
-        ReadOnlyTransactionList initialTransactionData;
-
         try {
             inventoryListOptional = storage.readInventoryList();
             if (!inventoryListOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Inventory List");
             }
-            initialData = inventoryListOptional.orElseGet(SampleDataUtil::getSampleInventoryList);
+            return inventoryListOptional.orElseGet(SampleDataUtil::getSampleInventoryList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Inventory List");
-            initialData = new InventoryList();
+            return new InventoryList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty Inventory List");
-            initialData = new InventoryList();
+            return new InventoryList();
         }
 
+    }
+    /**
+     *  Returns {@code ReadOnlyTransactionList} after reading from storage
+     */
+    private ReadOnlyTransactionList readTransactionListFromStorage() {
+        Optional<ReadOnlyTransactionList> transactionListOptional;
         try {
             transactionListOptional = storage.readTransactionList();
             if (!transactionListOptional.isPresent()) {
                 logger.info("Transaction data file not found. Will be starting with a sample Transaction List");
             }
-            initialTransactionData = transactionListOptional.orElseGet(SampleDataUtil::getSampleTransactionList);
+            return transactionListOptional.orElseGet(SampleDataUtil::getSampleTransactionList);
         } catch (DataConversionException e) {
             logger.warning("Transaction data file not in the correct format."
                     + " Will be starting with an empty Transaction List");
-            initialTransactionData = new TransactionList();
+            return new TransactionList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the transaction datafile."
                     + "Will be starting with an empty Transaction List");
-            initialTransactionData = new TransactionList();
+            return new TransactionList();
         }
+    }
 
+    /**
+     * Returns {@code Model} according to their AuthenticationLevel
+     */
+    private Model chooseModelAccordingToAuthentication (ReadOnlyInventoryList initialData,
+                                                        ReadOnlyTransactionList initialTransactionData) {
         switch (CurrentUser.getAuthenticationLevel()) {
         case AUTH_ADMIN:
             return new AdminModelManager(initialData, userPrefs, loginInfoModel, initialTransactionData);
@@ -139,8 +146,19 @@ public class InventoryListInitializer {
             return new AccountantModelManager(initialData, userPrefs, loginInfoModel, initialTransactionData);
         default:
             logger.severe("Database authentication level do not match with predefined authentication level");
-            return new ModelManager(initialData, userPrefs, loginInfoModel,
-                   new TransactionList());
+            return new ModelManager(initialData, userPrefs, loginInfoModel, initialTransactionData);
         }
     }
+
+    @Subscribe
+    public void handleInitInventoryListEvent(InitInventoryListEvent event) {
+        initAfterLogin ();
+    }
+
+    @Subscribe
+    public void handleChangeModelEvent(ChangeModelEvent event) {
+        model = initModelManager();
+        logic.changeModelAfterReLogin (model);
+    }
+
 }
