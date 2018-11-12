@@ -38,7 +38,7 @@ public class ClassDeleteCommandParserTest {
         try {
             moduleManager.addModule(module);
         } catch (DuplicateModuleException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         moduleManager.saveModuleList();
         Classroom classroom = new ClassroomBuilder().build();

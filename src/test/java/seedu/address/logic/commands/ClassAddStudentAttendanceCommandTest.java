@@ -2,13 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.ClassAddStudentCommand.MESSAGE_DUPLICATE_CLASSROOM_STUDENT;
-import static seedu.address.logic.commands.ClassAddStudentCommand.MESSAGE_SUCCESS;
+import static seedu.address.logic.commands.ClassAddStudentAttendanceCommand.MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE;
+import static seedu.address.logic.commands.ClassAddStudentAttendanceCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_T16;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MATRIC_NO_MEGAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CG1111;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -17,9 +15,11 @@ import java.util.Set;
 
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runners.MethodSorters;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -44,9 +44,11 @@ import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Provides a test for the class assign student command
+ * Provides a test for the class add student attendance command
  */
-public class ClassAddStudentCommandTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class ClassAddStudentAttendanceCommandTest {
+
     private static ClassroomManager classroomManager;
 
     @Rule
@@ -56,11 +58,7 @@ public class ClassAddStudentCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     private Person student;
-    private Person student2;
-    private Person student3;
     private Classroom classroom;
-    private Classroom miniClassroom;
-
     @Before
     public void setUp() {
         StorageController.enterTestMode();
@@ -76,13 +74,7 @@ public class ClassAddStudentCommandTest {
 
         student = new PersonBuilder()
                 .withCourseCode("CEG").withMatricNo("A0168000B").build();
-        student2 = new PersonBuilder().withName(VALID_NAME_BOB)
-                .withCourseCode("CEG").withMatricNo("A0168001B").build();
-        student3 = new PersonBuilder().withName(VALID_NAME_AMY)
-                .withCourseCode("CEG").withMatricNo("A0168002B").build();
         model.addPerson(student);
-        model.addPerson(student2);
-        model.addPerson(student3);
         model.commitAddressBook();
 
         Module module = new ModuleBuilder().withModuleCode("CG1111").build();
@@ -95,7 +87,6 @@ public class ClassAddStudentCommandTest {
 
         Set<MatricNo> studentMatricNo = new HashSet<>();
         studentMatricNo.add(student.getMatricNo());
-        studentMatricNo.add(student3.getMatricNo());
         ModuleEnrolCommand moduleEnrolCommand = new ModuleEnrolCommand(module.getModuleCode(),
                 studentMatricNo);
 
@@ -106,88 +97,70 @@ public class ClassAddStudentCommandTest {
         }
 
         classroom = new ClassroomBuilder().withClassName("T16").withModuleCode("CG1111").build();
-        miniClassroom = new ClassroomBuilder().withClassName("T17")
-                .withEnrollment("1").build();
-        miniClassroom.getStudents().add(student.getMatricNo().matricNo);
         classroomManager.addClassroom(classroom);
-        classroomManager.addClassroom(miniClassroom);
     }
 
     @Test
     public void execute_classroomInvalidModule_throwsCommandException() throws CommandException {
-        ClassAddStudentCommand classAddStudentCommand = new ClassAddStudentCommand(classroom.getClassName().getValue(),
+        ClassAddStudentAttendanceCommand classAddStudentAttendanceCommand =
+                new ClassAddStudentAttendanceCommand(classroom.getClassName().getValue(),
                 "Invalid Module Code", student.getMatricNo().matricNo);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(ClassAddStudentCommand.MESSAGE_MODULE_CODE_INVALID);
-        classAddStudentCommand.execute(model, commandHistory);
-    }
-
-    @Test
-    public void execute_classroomValidModuleUnenrolledStudent_throwsCommandException() throws CommandException {
-        ClassAddStudentCommand classAddStudentCommand = new ClassAddStudentCommand(classroom.getClassName().getValue(),
-                classroom.getModuleCode().moduleCode, student2.getMatricNo().matricNo);
-
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(ClassAddStudentCommand.MESSAGE_INVALID_STUDENT_MODULE);
-        classAddStudentCommand.execute(model, commandHistory);
+        thrown.expectMessage(ClassAddStudentAttendanceCommand.MESSAGE_MODULE_CODE_INVALID);
+        classAddStudentAttendanceCommand.execute(model, commandHistory);
     }
 
     @Test
     public void execute_classroomInvalidStudent_throwsCommandException() throws CommandException {
-        ClassAddStudentCommand classAddStudentCommand = new ClassAddStudentCommand(classroom.getClassName().getValue(),
+        ClassAddStudentAttendanceCommand classAddStudentAttendanceCommand =
+                new ClassAddStudentAttendanceCommand(classroom.getClassName().getValue(),
                 classroom.getModuleCode().moduleCode, "Invalid Matric No");
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(ClassAddStudentCommand.MESSAGE_INVALID_STUDENT);
-        classAddStudentCommand.execute(model, commandHistory);
+        thrown.expectMessage(ClassAddStudentAttendanceCommand.MESSAGE_INVALID_STUDENT);
+        classAddStudentAttendanceCommand.execute(model, commandHistory);
     }
 
     @Test
     public void execute_invalidClassroom_throwsCommandException() throws CommandException {
-        ClassAddStudentCommand classAddStudentCommand = new ClassAddStudentCommand("Invalid Classroom",
+        ClassAddStudentAttendanceCommand classAddStudentAttendanceCommand =
+                new ClassAddStudentAttendanceCommand("Invalid Classroom",
                 classroom.getModuleCode().moduleCode, student.getMatricNo().matricNo);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(ClassAddStudentCommand.MESSAGE_FAIL);
-        classAddStudentCommand.execute(model, commandHistory);
+        thrown.expectMessage(ClassAddStudentAttendanceCommand.MESSAGE_FAIL);
+        classAddStudentAttendanceCommand.execute(model, commandHistory);
     }
 
     @Test
-    public void execute_duplicateClassroomStudent_throwsCommandException() throws CommandException {
-        String expectedMessage = String.format(MESSAGE_DUPLICATE_CLASSROOM_STUDENT, student.getMatricNo().matricNo);
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(expectedMessage);
-        ClassAddStudentCommand classAddStudentCommand = new ClassAddStudentCommand(classroom.getClassName().getValue(),
-                classroom.getModuleCode().moduleCode, student.getMatricNo().matricNo);
-        classAddStudentCommand.execute(model, commandHistory);
-    }
-
-    @Test
-    public void execute_classroomFull_throwsCommandException() throws CommandException {
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(ClassAddStudentCommand.MESSAGE_CLASSROOM_FULL);
-        ClassAddStudentCommand classAddStudentCommand = new ClassAddStudentCommand(
-                miniClassroom.getClassName().getValue(),
-                miniClassroom.getModuleCode().moduleCode, student3.getMatricNo().matricNo);
-        classAddStudentCommand.execute(model, commandHistory);
-    }
-
-    @Test
-    public void execute_classroomAssignStudentAccepted_addSuccessful() {
+    public void execute_classroomMarkStudentPresent_addSuccessful() {
         String expectedMessage = String.format(MESSAGE_SUCCESS, student.getMatricNo().matricNo,
                 classroom.getClassName(), classroom.getModuleCode());
-        ClassAddStudentCommand classAddStudentCommand = new ClassAddStudentCommand(classroom.getClassName().getValue(),
+        ClassAddStudentAttendanceCommand classAddStudentAttendanceCommand =
+                new ClassAddStudentAttendanceCommand(classroom.getClassName().getValue(),
                 classroom.getModuleCode().moduleCode, student.getMatricNo().matricNo);
-        assertCommandSuccess(classAddStudentCommand, model,
+        assertCommandSuccess(classAddStudentAttendanceCommand, model,
                 commandHistory, expectedMessage,
                 model);
     }
 
     @Test
-    public void constructor_nullClassroomInfo_throwsNullPointerException() {
+    public void execute_duplicateClassroomStudentAttendance_throwsCommandException() throws CommandException {
+        String expectedMessage = String.format(MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE,
+                student.getMatricNo().matricNo);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(expectedMessage);
+        ClassAddStudentAttendanceCommand classAddStudentAttendanceCommand =
+                new ClassAddStudentAttendanceCommand(classroom.getClassName().getValue(),
+                classroom.getModuleCode().moduleCode, student.getMatricNo().matricNo);
+        classAddStudentAttendanceCommand.execute(model, commandHistory);
+    }
+
+    @Test
+    public void constructor_nullClassroomAttendanceInfo_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new ClassAddStudentCommand(null, null, null);
+        new ClassAddStudentAttendanceCommand(null, null, null);
     }
 
     @Test
@@ -195,11 +168,11 @@ public class ClassAddStudentCommandTest {
         final String className = "T16";
         final String moduleCode = "CG1111";
         final String matricNo = "A0168412C";
-        final ClassAddStudentCommand standardCommand = new ClassAddStudentCommand(className,
+        final ClassAddStudentAttendanceCommand standardCommand = new ClassAddStudentAttendanceCommand(className,
                 moduleCode,
                 matricNo);
         // same values -> returns true
-        ClassAddStudentCommand commandWithSameValues = new ClassAddStudentCommand(VALID_CLASS_T16,
+        ClassAddStudentAttendanceCommand commandWithSameValues = new ClassAddStudentAttendanceCommand(VALID_CLASS_T16,
                 VALID_MODULE_CODE_CG1111,
                 VALID_MATRIC_NO_MEGAN);
         assertTrue(standardCommand.equals(commandWithSameValues));
