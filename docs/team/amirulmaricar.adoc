@@ -9,16 +9,16 @@
 
 == Overview
 
-Inventarie Pro is for self employed business owners who prefer to use a desktop app for managing inventory. More importantly, Inventarie Pro is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Inventarie Pro can get your inventory management tasks done faster, simpler and easier than traditional GUI apps. 
+Inventarie Pro is for self employed business owners who prefer to use a desktop app for managing inventory. More importantly, Inventarie Pro is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Inventarie Pro can get your inventory management tasks done faster, simpler and easier than traditional GUI apps.
 
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to login as users*
-** What it does: Inventarie Pro now supports multiple users on a single system by seperating user accounts and application data. 
-** Justification: This feature allows multiple employees to use a single system without the fear of intrusion on each other. It also prevents any unauthorized access which maintains a measure of integrity and confidentiality. 
+** What it does: Inventarie Pro now supports multiple users on a single system by seperating user accounts and application data.
+** Justification: This feature allows multiple employees to use a single system without the fear of intrusion on each other. It also prevents any unauthorized access which maintains a measure of integrity and confidentiality.
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. Model and Storage components were heavily modified to support a User Database.
 
-* *Minor enhancement*: 
+* *Minor enhancement*:
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=amirulmaricar&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Code Dashboard]]
 
@@ -35,7 +35,7 @@ Inventarie Pro is for self employed business owners who prefer to use a desktop 
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-3/main/pull/56[#56], https://github.com/CS2113-AY1819S1-T13-3/main/pull/151[#156]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Resolved issues found in PE1: https://github.com/CS2113-AY1819S1-T13-3/main/issues/142[#142] 
+*** Resolved issues found in PE1: https://github.com/CS2113-AY1819S1-T13-3/main/issues/142[#142]
 ** Tools:
 *** Integrated a continuous integration service (Travis CI) to the team repo (https://github.com[#42])
 *** Integrated a continuous integration service (AppVeyor) to the team repo (https://github.com[#42])
@@ -49,9 +49,9 @@ Inventarie Pro is for self employed business owners who prefer to use a desktop 
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=authentication]
+include::../UserGuide.adoc[tag=authentication
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=dataencryption
 
 == Contributions to the Developer Guide
 
