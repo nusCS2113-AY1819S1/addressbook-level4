@@ -39,7 +39,7 @@ ClubHub is a desktop application for Club leaders or managers to manage their cl
 *** Example: `listEvent`
 
 
-** *Code contributed* [https://github.com/CS2113-AY1819S1-T09-3/main[functional code]] [[test code]]
+** *Code contributed* [https://github.com/CS2113-AY1819S1-T09-3/main[functional code]] [https://github.com/CS2113-AY1819S1-T09-3/main/tree/master/src/test[test code]]
 
 ** *Other contribution*
 *** Fixed many checkstyle errors in our team(Pull Request #102, #96, #64).
