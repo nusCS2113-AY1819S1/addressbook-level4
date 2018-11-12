@@ -10,8 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.*;
-
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.TestStorage;
+import seedu.address.model.UserDatabase;
+import seedu.address.model.UserPrefs;
 public class UndoProductCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(), new UserPrefs(),
