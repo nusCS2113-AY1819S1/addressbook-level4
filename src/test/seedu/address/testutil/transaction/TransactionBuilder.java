@@ -6,6 +6,7 @@ import seedu.address.model.drink.Name;
 import seedu.address.model.drink.Price;
 import seedu.address.model.drink.Quantity;
 import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.TransactionId;
 import seedu.address.model.transaction.TransactionType;
 
 /**
@@ -17,12 +18,14 @@ public class TransactionBuilder {
     public static final String DEFAULT_DATE = new Date().toString();
     public static final String DEFAULT_QUANTITY = "200";
     public static final String DEFAULT_AMOUNT_EARNED = "10.00";
+    public static final String DEFAULT_ID = "10001";
 
     private TransactionType transactionType;
     private Date transactionDate;
     private Drink drinkTransacted;
     private Quantity quantityTransacted;
     private Price amountMoney;
+    private TransactionId id;
 
 
     public TransactionBuilder() {
@@ -31,6 +34,7 @@ public class TransactionBuilder {
         drinkTransacted = new Drink(new Name(DEFAULT_NAME));
         quantityTransacted = new Quantity(DEFAULT_QUANTITY);
         amountMoney = new Price(DEFAULT_AMOUNT_EARNED);
+        id = new TransactionId(DEFAULT_ID);
     }
 
     /**
@@ -43,6 +47,8 @@ public class TransactionBuilder {
         drinkTransacted = transactionToCopy.getDrinkTransacted();
         quantityTransacted = transactionToCopy.getQuantityTransacted();
         amountMoney = transactionToCopy.getAmountMoney();
+        transactionDate = transactionToCopy.getTransactionDate();
+        id = transactionToCopy.getTransactionId();
     }
 
     /**
@@ -60,6 +66,16 @@ public class TransactionBuilder {
         transactionDate = new Date(date);
         return this;
     }
+
+    /**
+     * Sets the {@code Date} of the {@code Transaction} that we are building to the current date
+     */
+    public TransactionBuilder withDateToday() {
+        transactionDate = new Date();
+        return this;
+    }
+
+
 
     /**
      * Sets the {@code Date} of the {@code Transaction} that we are building.
@@ -85,7 +101,10 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Creates and returns a new Transaction object with given attributes
+     */
     public Transaction build() {
-        return new Transaction(transactionType, drinkTransacted, quantityTransacted, amountMoney);
+        return new Transaction(transactionType, transactionDate, drinkTransacted, quantityTransacted, amountMoney, id);
     }
 }

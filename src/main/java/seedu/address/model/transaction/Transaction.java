@@ -21,6 +21,7 @@ public class Transaction {
     private Price amountMoney;
     private TransactionId id;
 
+    public Transaction() {}
 
     public Transaction(TransactionType transactionType, Drink drinkTransacted,
                        Quantity quantityTransacted, Price amountMoney) {
@@ -43,6 +44,7 @@ public class Transaction {
         transactionDate = new Date();
         id = new TransactionId();
     }
+
 
     /**
      * Constructor for use when loading transactions from storage.

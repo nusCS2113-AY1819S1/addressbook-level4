@@ -4,6 +4,7 @@ package seedu.address.logic.parser.accountant;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.analysis.AnalysisPeriodType;
+import seedu.address.analysis.TransactionPeriodPredicate;
 import seedu.address.logic.commands.accountant.AnalyseCostsCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
@@ -28,8 +29,9 @@ public class AnalyseCostsCommandParser implements Parser<AnalyseCostsCommand> {
         }
 
         period = ParserUtil.parseAnalysisPeriod(args);
+        TransactionPeriodPredicate predicateToFilterBy = period.getPeriodFilterPredicate();
 
-        return new AnalyseCostsCommand(period);
+        return new AnalyseCostsCommand(predicateToFilterBy);
     }
 
 }

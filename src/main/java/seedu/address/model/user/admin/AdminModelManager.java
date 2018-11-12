@@ -4,12 +4,12 @@ import java.util.Set;
 
 import seedu.address.analysis.Analysis;
 import seedu.address.analysis.AnalysisManager;
-import seedu.address.analysis.AnalysisPeriodType;
 import seedu.address.analysis.PurchaseTransactionPredicate;
 import seedu.address.analysis.SaleTransactionPredicate;
+import seedu.address.analysis.TransactionPeriodPredicate;
 import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
-import seedu.address.model.LoginInfoManager;
+import seedu.address.model.LoginInfoModel;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventoryList;
 import seedu.address.model.UserPrefs;
@@ -28,8 +28,8 @@ public class AdminModelManager extends ModelManager implements AdminModel {
     private final Analysis analysis = new AnalysisManager(transactionList, filteredTransactions);
 
     public AdminModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs,
-                             LoginInfoManager loginInfoManager, ReadOnlyTransactionList transactionList) {
-        super(inventoryList, userPrefs, loginInfoManager, transactionList);
+                             LoginInfoModel loginInfoModel, ReadOnlyTransactionList transactionList) {
+        super(inventoryList, userPrefs, loginInfoModel, transactionList);
     }
 
     /**
@@ -102,45 +102,53 @@ public class AdminModelManager extends ModelManager implements AdminModel {
     //=====================Manager command=========================
     @Override
     public void createNewAccount(LoginInfo loginInfo) {
-        loginInfoManager.createNewAccount(loginInfo);
+        loginInfoModel.createNewAccount(loginInfo);
     }
 
     @Override
     public void deleteAccount(UserName userName) {
-        loginInfoManager.deleteAccount(userName);
+        loginInfoModel.deleteAccount(userName);
     }
 
     //===================== Accountant commands ======================
     @Override
-    public Price analyseCosts(AnalysisPeriodType period) {
+    public Price analyseCosts(TransactionPeriodPredicate period) {
         updateFilteredTransactionListToShowPurchases(period);
-        return analysis.analyseCost(period);
+        return analysis.analyseCost();
     }
 
     @Override
-    public Price analyseRevenue(AnalysisPeriodType period) {
+    public Price analyseRevenue(TransactionPeriodPredicate period) {
         updateFilteredTransactionListToShowSales(period);
-        return analysis.analyseRevenue(period);
+        return analysis.analyseRevenue();
     }
 
     @Override
-    public Price analyseProfit(AnalysisPeriodType period) {
-        updateFilteredTransactionListToShowAll();
-        return analysis.analyseProfit(period);
+    public Price analyseProfit(TransactionPeriodPredicate period) {
+        updateFilteredTransactionListToShowProfitPeriod(period);
+        return analysis.analyseProfit();
     }
 
     /**
      * Updates the {@code filteredTransactions} with Purchase predicate and {@code period} predicate.
      */
-    private void updateFilteredTransactionListToShowPurchases(AnalysisPeriodType period) {
-        updateFilteredTransactionList(period.getPeriodFilterPredicate().and(new PurchaseTransactionPredicate()));
+    private void updateFilteredTransactionListToShowPurchases(TransactionPeriodPredicate period) {
+        updateFilteredTransactionList(period.and(new PurchaseTransactionPredicate()));
     }
 
     /**
      * Updates the {@code filteredTransactions} with Sale predicate and {@code period} predicate.
      */
-    private void updateFilteredTransactionListToShowSales(AnalysisPeriodType period) {
-        updateFilteredTransactionList(period.getPeriodFilterPredicate().and(new SaleTransactionPredicate()));
+    private void updateFilteredTransactionListToShowSales(TransactionPeriodPredicate period) {
+        updateFilteredTransactionList(period.and(new SaleTransactionPredicate()));
+    }
+
+    /**
+     * Updates the {@code filteredTransactions} with {@code period} predicate.
+     * For use by Profit analysis.
+     */
+    private void updateFilteredTransactionListToShowProfitPeriod(TransactionPeriodPredicate period) {
+        updateFilteredTransactionList(period);
     }
 
     private void updateFilteredTransactionListToShowAll() {

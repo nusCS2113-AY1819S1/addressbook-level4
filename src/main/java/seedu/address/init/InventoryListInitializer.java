@@ -23,7 +23,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.InventoryList;
-import seedu.address.model.LoginInfoManager;
+import seedu.address.model.LoginInfoModel;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventoryList;
@@ -53,15 +53,15 @@ public class InventoryListInitializer {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-    private LoginInfoManager loginInfoList;
+    private LoginInfoModel loginInfoModel;
     private TransactionList transactionList;
 
 
     public InventoryListInitializer (Config config, Storage storage,
-                                     UserPrefs userPrefs, LoginInfoManager loginInfoList) {
+                                     UserPrefs userPrefs, LoginInfoModel loginInfoModel) {
         this.storage = storage;
         this.userPrefs = userPrefs;
-        this.loginInfoList = loginInfoList;
+        this.loginInfoModel = loginInfoModel;
         this.config = config;
         EventsCenter.getInstance().registerHandler(this);
     }
@@ -70,7 +70,7 @@ public class InventoryListInitializer {
      * init Drink I/O after login
      */
     public void initAfterLogin() {
-        model = initModelManager(storage, userPrefs, loginInfoList);
+        model = initModelManager(storage, userPrefs, loginInfoModel);
         logic = new LogicManager (model);
         ui = new UiManager (logic, config, userPrefs);
     }
@@ -82,7 +82,7 @@ public class InventoryListInitializer {
 
     @Subscribe
     public void handleChangeModelEvent(ChangeModelEvent event) {
-        model = initModelManager(storage, userPrefs, loginInfoList);
+        model = initModelManager(storage, userPrefs, loginInfoModel);
         logic.changeModelAfterReLogin (model);
     }
 
@@ -91,7 +91,7 @@ public class InventoryListInitializer {
      * The data from the sample inventory list will be used instead if {@code storage}'s inventory list is not found,
      * or an empty inventory list will be used instead if errors occur when reading {@code storage}'s inventory list.
      */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs, LoginInfoManager loginInfoManager) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs, LoginInfoModel loginInfoModel) {
         Optional<ReadOnlyInventoryList> inventoryListOptional;
         ReadOnlyInventoryList initialData;
 
@@ -130,16 +130,16 @@ public class InventoryListInitializer {
 
         switch (CurrentUser.getAuthenticationLevel()) {
         case AUTH_ADMIN:
-            return new AdminModelManager(initialData, userPrefs, loginInfoManager, initialTransactionData);
+            return new AdminModelManager(initialData, userPrefs, loginInfoModel, new TransactionList());
         case AUTH_MANAGER:
-            return new ManagerModelManager(initialData, userPrefs, loginInfoManager, initialTransactionData);
+            return new ManagerModelManager(initialData, userPrefs, loginInfoModel, new TransactionList());
         case AUTH_STOCK_TAKER:
-            return new StockTakerModelManager(initialData, userPrefs, loginInfoManager, initialTransactionData);
+            return new StockTakerModelManager(initialData, userPrefs, loginInfoModel, new TransactionList());
         case AUTH_ACCOUNTANT:
-            return new AccountantModelManager(initialData, userPrefs, loginInfoManager, initialTransactionData);
+            return new AccountantModelManager(initialData, userPrefs, loginInfoModel, new TransactionList());
         default:
             logger.severe("Database authentication level do not match with predefined authentication level");
-            return new ModelManager(initialData, userPrefs, loginInfoManager,
+            return new ModelManager(initialData, userPrefs, loginInfoModel,
                    new TransactionList());
         }
     }

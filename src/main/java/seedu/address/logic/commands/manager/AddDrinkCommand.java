@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_COST_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_DEFAULT_SELLING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_TAG;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -24,11 +25,13 @@ public class AddDrinkCommand extends Command {
             + "Parameters: "
             + PREFIX_DRINK_NAME + "DRINK NAME "
             + PREFIX_DRINK_DEFAULT_SELLING_PRICE + "SELLING PRICE "
-            + PREFIX_DRINK_COST_PRICE + "COST PRICE \n"
+            + PREFIX_DRINK_COST_PRICE + "COST PRICE "
+            + "[" + PREFIX_DRINK_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DRINK_NAME + "Coca Cola Original "
             + PREFIX_DRINK_DEFAULT_SELLING_PRICE + "20.00 "
-            + PREFIX_DRINK_COST_PRICE + "10.00";
+            + PREFIX_DRINK_COST_PRICE + "10.00 "
+            + PREFIX_DRINK_TAG + "SoftDrink";
 
     public static final String MESSAGE_SUCCESS = "New drink added: %1$s";
     public static final String MESSAGE_DUPLICATE_DRINK = "This drink already exists in the inventory list";

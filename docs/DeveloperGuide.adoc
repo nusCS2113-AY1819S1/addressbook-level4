@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Drink I/O - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -201,34 +201,34 @@ image::DeletePersonSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelClassDiagram_new.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the InventoryList data.
+* exposes an unmodifiable `ObservableList<Drink>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the TransactionList data.
+* exposes an unmodifiable `ObservableList<Transaction>` that can be observed
 * does not depend on any of the other three components.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
 
 .Structure of the Storage Component
-image::StorageClassDiagram.png[width="800"]
+image::StorageClassDiagram_new.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
-* can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save `UserPref` objects in json format and read them back.
+* can save the `LoginInfo` objects in json format and read them back.
+* can save the Inventory List data in xml format and read it back.
+* can save the Transaction List data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -240,43 +240,138 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 // tag::analyses[]
-=== Analyses of profits and quantities sold in the company
+=== Analyses of costs, revenue and profit in the company over periods of time
 ==== Implementation
-To facilitate the analyses of total profit, revenue and costs of the company, as well as the quantities of drinks sold, transactions (sales and imports) are logged using `Transaction`. They will be logged when the drink stock increases due to import (`TransactionType` is `IMPORT`), or when they decrease due to a sale (`TransactionType` is `SALE`). These transactions are stored into a list of transactions, in `TransactionList`.
+To facilitate the analyses of total profit, revenue and costs of the company over various periods of time,
+transactions (sales and purchases) are logged using `Transaction` s.
+They will be logged when the drink stock increases due to a purchase (`TransactionType` is `PURCHASE`),
+or when they decrease due to a sale (`TransactionType` is `SALE`).
+These transactions are stored into a list of transactions, in `TransactionList`.
 
-Analyses are conducted in `Analysis`. The following operations are implemented for the analyses of profit, revenue and costs:
-* `Analysis#analyseProfit()`
-* `Analysis#analyseCost()`
-* `Analysis#analyseRevenue()`
+Analyses are conducted in `AnalysisManager`, with the API exposed in `Analysis`.
+The following operations are implemented for the analyses of profit, revenue and costs:
 
-The methods that enable the analyses of quantities sold are:
-* `Analysis#analyseQuantitiesSold(Drink drink)`
-* <to be added>
+* `Analysis#analyseCost(AnalysisPeriodType period)`
+* `Analysis#analyseRevenue(AnalysisPeriodType period)`
+* `Analysis#analyseProfit(AnalysisPeriodType period)`
 
-Internally, `Analysis#analyseProfit()` calls `Analysis#analyseCost()` and `Analysis#analyseRevenue()` to calculate the profit, using the formula “profit = revenue - cost”.
+The implementation of these operations are elaborated in the below sub-sections.
 
-`Analysis#analyseRevenue()` iterates through the `TransactionList` and checks the `Transaction`’s `TransactionType`. If the `TransactionType` is `SALE`, the `Price` at which the drink is sold is obtained and added to a sum of revenues. On the other hand, if the `TransactionType` is `IMPORT`, the `Transaction` will be ignored. The sum of revenues will be wrapped in a `Price` object and returned to the calling function.
+==== Indicating the analysis period with `AnalysisPeriodType`
+`AnalysisPeriodType` is an enum class that denotes the period for analysis:
 
-The opposite applies for `Analysis#analyseCost()`. It iterates through `TransactionList`, similar to `Analysis#analyseRevenue()`. Now, if the `TransactionType` is `IMPORT`, the `Price` at which the drink is bought for is obtained and added to a sum of costs. The sum of costs will be wrapped in `Price` and returned to the calling function.
+* in the current day
+* within the past 7 days (including the current day)
+* within the past 30 days (including the current day)
+
+These are indicated respectively as:
+
+* `AnalysisPeriodType.DAY`
+* `AnalysisPeriodType.WEEK`
+* `AnalysisPeriodType.MONTH`.
+
+A user may enter an analysis command with additional time period parameters.
+For the period of a day, no parameter is indicated.
+For the period of 7 days, `-w` is appended to the command. (e.g. `costs -w`)
+For the period of 30 days, `-m` is appended to the command. (e.g. `costs -m`)
+
+The following is the sequence of steps when the user enters an analysis command with a time period:
+
+*Step 1.* User enters an analysis command (e.g. AnalyseCostsCommand). +
+*Step 2.* The appropriate parser parses the time period parameter, and assigns the respective `AnalysisPeriodType`
+value to the analysis command. +
+*Step 3.* The analysis command is executed, and the `AnalysisPeriodType` value is passed to the `ModelManager`. +
+*Step 4.* In the `ModelManager`, the relevant Predicate for the time period is retrieved.
+
+The available Predicates corresponding to each `AnalysisPeriodType` are:
+
+* `DAY`: `TransactionInADayPredicate`
+* `WEEK`: `TransactionInSevenDaysPredicate`
+* `MONTH`: `TransactionInThirtyDaysPredicate`
+
+These are retrieved using `AnalysisPeriodType#getPeriodFilterPredicate()`.
+
+*Step 5.* The Predicate retrieved is passed to the filtered transaction list.
+This is in order to filter the transactions by their dates such that
+the filtered transaction list only contains transactions with dates within the relevant period.
+
+`FilteredList<Transaction>` handles the filtering using the given predicate.
+
+
+// INSERT DIAGRAM!!!!!!
+
+
+==== Implementation of `Analysis#analyseCost()`
+The actual analysis of costs continues from the the filtering of the filtered transaction list.
+This section focuses on the actual computation of the costs incurred by the company.
+
+*Step 1.* In addition to passing the analysis period Predicate, a `PurchaseTransactionPredicate` is
+also passed to the filtered transaction list simultaneously. +
+
+This filters the list further, leaving only the `TransactionType.PURCHASE` transactions, which contribute
+to the costs of the company. +
+
+Overall, the filtered transaction list will also be updated in the UI.
+
+*Step 2.* `ModelManager` passes control to the `AnalysisManager`. +
+*Step 3.* In `AnalysisManager`, the helper method `AnalysisManager#calculateTotalCost()` is called
+to compute the total costs of the filtered transactions.
+
+It iterates through the filtered transaction list, and checks the `Transaction` 's `TransactionType`
+as a precuation. If the `TransactionType` is `PURCHASE`, the `amountMoney` transacted is obtained and
+added to a sum of costs. The sum of costs is then wrapped in a `Price` object and returned to the calling function.
+
+// insert diagram!
+
+
+==== Implementation of `Analysis#analyseRevenue()`
+The implementation of the analysis of revenue is similar to that of costs. However, a `SaleTransactionPredicate`
+is passed to the filtered transaction list instead.
+
+In *Step 3*, the helper method `AnalysisManager#calculateTotalRevenue()` is called. It iterates
+through the filtered transaction list, and checks if the `Transaction` 's `TransactionType` is
+`SALE`. If so, the `amountMoney` transacted is added to the sum of revenues. The sum of revenues
+is then wrapped in a `Price` object and returned to the calling function.
+
+==== Implementation of `Analysis#analyseProfit()`
+The analysis of profit continues from the filtering of the filtered transaction list by period.
+This section focuses on the actual computation of the profit earned by the company.
+
+*Step 1.* `ModelManager` passes control to the `AnalysisManager`. No additional filtering is done. +
+*Step 2.* In `AnalysisManager`, the helper method `AnalysisManager#calculateTotalProfit()` is called
+to compute the total profit of the filtered transactions.
+
+It iterates through the filtered transaction list, and checks the `Transaction` 's `TransactionType`.
+
+* If the `TransactionType` is `PURCHASE`, the `amountMoney` transacted is obtained and added to a sum of costs.
+* If the `TransactionType` is `SALE`, the `amountMoney` transacted is obtained and added to a sum of revenues.
+
+*Step 3.* Total profit is calculated using the formula: "profit = revenue - cost".
+This total profit value is checked to determine whether it is negative.
+
+* If total profit is positive or zero, it is wrapped in a `Price` object and returned to the calling function.
+* If the total profit is negative, the absolute value is taken, and a special `NegativePrice` object is used to wrap the value.
+It is then returned to the calling function.
+** `NegativePrice` is a sub-class of `Price`, and is used only when calculating profit.
+** The `value` of the `NegativePrice` object is the absolute value of the profit.
+
 
 ==== Design Considerations
-* *Current implementation:* Currently, the entire `TransactionList` since the beginning of using the application is used for the analyses. This presents the overview of the company’s profit margin since it started using the application, and is useful for tracking long term growth.
-** Pros: Easy to implement
-** Cons: Inefficient in terms of time complexity.
+Aspect: Filtering the transactions by date
 
-* *Alternative:* Record the increases in revenue and cost when every transaction is logged.
-** Pros: More time efficient.
-** Cons: We must ensure that the additions are correct. Difficult to extend this to allow for the analyses over different time periods.
+* *Current implementation:* Passes a predicate to the filtered transaction list, before performing analyses using that list
+** Pros:
+*** Extensible as more Predicates can be created and passed to the filtered transaction list to filter
+the transactions by different facets.
+*** Enhances reusability especially of the `updateFilteredTransactionList(Predicate predicate)` method.
+*** Allows the transaction list panel in the UI to be updated automatically.
 
-==== Future Plans
-In the future, there will be a `TransactionList` for each calendar month, to allow for the analyses of desired attributes in time periods of: 1 day, 7 days and 1 month.
+* Cons: We must ensure that the implementation of each Predicate is correct.
 
-For the analyses over 1 month, the same approach as mentioned above will be implemented.
-
-For the analyses over 1 day, the `Date` of the `Transaction` will be checked before adding the respective `Price` into either the sum of revenues or costs. If the `Date` is the same as that of the current day’s date, then the `Price` will be added.
-
-For the analyses over 7 days, a similar concept as that for analyses over 1 day will be used. Special care will have to be taken to account for changes in month over the span of 7 days, and possibly changes in the year.
-
+* *Alternative:* Loop through all transactions in the `TransactionList`, and check if the transaction date
+is within the desired time period
+** Pros: Easy to implement.
+** Cons: May have time performance issues if there are many transactions.
 
 // end::analyses[]
 
@@ -331,6 +426,7 @@ image::LoginUMLDiagram/ReLoginEvent_sequence_diagram.png[width="800"]
 ** Pros: Have serialized code in original ab4.
 ** Cons: It has many rule to set before implementation.
 //end::login[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -624,296 +720,21 @@ A project often depends on third-party libraries. For example, Address Book depe
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
-[[GetStartedProgramming]]
-[appendix]
-== Suggested Programming Tasks to Get Started
 
-Suggested path for new programmers:
-
-1. First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <<GetStartedProgramming-EachComponent>>.
-
-2. Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <<GetStartedProgramming-RemarkCommand>> explains how to go about adding such a feature.
-
-[[GetStartedProgramming-EachComponent]]
-=== Improving each component
-
-Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).
-
-[discrete]
-==== `Logic` component
-
-*Scenario:* You are in charge of `logic`. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in order to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.
-
-[TIP]
-Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
-
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
-+
-****
-* Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
-* Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
-** Add new tests for each of the aliases that you have added.
-** Update the user guide to document the new aliases.
-** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
-****
-
-[discrete]
-==== `Model` component
-
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
-
-[TIP]
-Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
-
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
-+
-****
-* Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] API need to be updated.
-** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
-* Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each person, and remove the `tag` from each person.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
-** Add new tests for each of the new public methods that you have added.
-** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
-****
-
-[discrete]
-==== `Ui` component
-
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
-
-[TIP]
-Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
-
-. Use different colors for different tags inside person cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
-+
-**Before**
-+
-image::getting-started-ui-tag-before.png[width="300"]
-+
-**After**
-+
-image::getting-started-ui-tag-after.png[width="300"]
-+
-****
-* Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
-** Use the .css attribute `-fx-background-color` to add a color.
-** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
-* Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
-*** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
-****
-
-. Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
-+
-**Before**
-+
-image::getting-started-ui-result-before.png[width="200"]
-+
-**After**
-+
-image::getting-started-ui-result-after.png[width="200"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
-** Refer to link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
-* Solution
-** Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
-** Modify link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
-** You can write two different kinds of tests to ensure that the functionality works:
-*** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
-*** Do read the commits one at a time if you feel overwhelmed.
-****
-
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
-+
-**Before**
-+
-image::getting-started-ui-status-before.png[width="500"]
-+
-**After**
-+
-image::getting-started-ui-status-after.png[width="500"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
-* Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of persons when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
-** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of persons status bar.
-** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
-****
-
-[discrete]
-==== `Storage` component
-
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.
-
-[TIP]
-Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
-
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the address book can be saved in a fixed temporary location.
-+
-****
-* Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/XmlAddressBookStorage.java[`XmlAddressBookStorage`] class.
-* Solution
-** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
-****
-
-[[GetStartedProgramming-RemarkCommand]]
-=== Creating a new command: `remark`
-
-By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
-
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
-
-==== Description
-Edits the remark for a person specified in the `INDEX`. +
-Format: `remark INDEX r/[REMARK]`
-
-Examples:
-
-* `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first person to `Likes to drink coffee.`
-* `remark 1 r/` +
-Removes the remark for the first person.
-
-==== Step-by-step Instructions
-
-===== [Step 1] Logic: Teach the app to accept 'remark' which does nothing
-Let's start by teaching the application how to parse a `remark` command. We will add the logic of `remark` later.
-
-**Main:**
-
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
-
-**Tests:**
-
-. Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
-
-===== [Step 2] Logic: Teach the app to accept 'remark' arguments
-Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
-
-**Main:**
-
-. Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
-. Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
-
-**Tests:**
-
-. Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
-. Add `RemarkCommandParserTest` that tests different boundary values
-for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
-
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
-
-**Main:**
-
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
-
-===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
-
-**Main:**
-
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
-. Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
-
-**Tests:**
-
-. Add test for `Remark`, to test the `Remark#equals()` method.
-
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-
-**Main:**
-
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `addressBook.xml` so that the application will load the sample data when you launch it.)
-
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
-
-**Main:**
-
-. Add a new Xml field for `Remark`.
-
-**Tests:**
-
-. Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsAddressBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
-
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-
-**Tests:**
-
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the person that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
-
-===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
-
-**Main:**
-
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
-
-===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
-We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
-
-**Main:**
-
-. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a person.
-
-**Tests:**
-
-. Update `RemarkCommandTest` to test that the `execute()` logic works.
-
-==== Full Solution
-
-See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
 
 [appendix]
 == Product Scope
 
 *Target user profile*:
 
-* has the need to manage a small ice cream store
+* has the need to manage a small drinks distribution company
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: Manage a store from inventory management to accounting better than using separate software
+*Value proposition*: Manage a distribution company more conveniently than using paper or Excel,
+ with the incorporation of inventory management and accounting tools in one app.
 
 [appendix]
 == User Stories
@@ -1036,22 +857,6 @@ Windows, Linux, Unix, OS-X
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
 
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing

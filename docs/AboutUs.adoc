@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-DrinkIO was developed by Team CS2113-AY1819S1-W12-4. +
+*[blue]#_Drink I/O_#* was developed by Team CS2113-AY1819S1-W12-4. +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
@@ -16,7 +16,7 @@ image::bluein-green.png[width="150", align="left"]
 
 Role: Developer
 
-Responsibilities: <tbc>
+Responsibilities: Model
 
 '''
 
@@ -26,7 +26,7 @@ image::scottljw.png[width="150", align="left"]
 
 Role: Developer
 
-Responsibilities: <tbc>
+Responsibilities: Storage
 
 '''
 
@@ -46,6 +46,6 @@ image::liu-tianhang.png[width="150", align="left"]
 
 Role: Developer
 
-Responsibilities: Logic,Security
+Responsibilities: Logic, Security
 
 '''

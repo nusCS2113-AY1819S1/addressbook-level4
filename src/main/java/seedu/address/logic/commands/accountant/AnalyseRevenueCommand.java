@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.HYPHEN_DAY;
 import static seedu.address.logic.parser.CliSyntax.HYPHEN_MONTH;
 import static seedu.address.logic.parser.CliSyntax.HYPHEN_WEEK;
 
-import seedu.address.analysis.AnalysisPeriodType;
+import seedu.address.analysis.TransactionPeriodPredicate;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -30,13 +30,13 @@ public class AnalyseRevenueCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Total revenue: $%1$s";
 
-    private AnalysisPeriodType period;
+    private TransactionPeriodPredicate periodToFilterBy;
 
     /**
      * Creates an AnalyseRevenueCommand to compute total revenue earned.
      */
-    public AnalyseRevenueCommand(AnalysisPeriodType period) {
-        this.period = period;
+    public AnalyseRevenueCommand(TransactionPeriodPredicate periodToFilterBy) {
+        this.periodToFilterBy = periodToFilterBy;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class AnalyseRevenueCommand extends Command {
 
         AccountantModel accountantModel = (AccountantModel) model;
 
-        Price totalRevenue = accountantModel.analyseRevenue(period);
+        Price totalRevenue = accountantModel.analyseRevenue(periodToFilterBy);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, totalRevenue));
     }

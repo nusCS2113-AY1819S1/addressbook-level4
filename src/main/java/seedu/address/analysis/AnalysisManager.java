@@ -22,17 +22,17 @@ public class AnalysisManager extends ComponentManager implements Analysis {
     }
 
     @Override
-    public Price analyseProfit(AnalysisPeriodType period) {
+    public Price analyseProfit() {
         return calculateTotalProfit();
     }
 
     @Override
-    public Price analyseCost(AnalysisPeriodType period) {
+    public Price analyseCost() {
         return calculateTotalCost();
     }
 
     @Override
-    public Price analyseRevenue(AnalysisPeriodType period) {
+    public Price analyseRevenue() {
         return calculateTotalRevenue();
     }
 
