@@ -29,7 +29,7 @@ public class CheckCommandParser implements Parser<CheckCommand> {
                     CheckCommand.MESSAGE_USAGE));
         }
 
-        String particularDate = argMultimap.getValue(PREFIX_DATE).get();
+        String particularDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()).toString();
         return new CheckCommand(particularDate);
     }
 

@@ -105,16 +105,14 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public String checkTasksRecordsOnParticularDay (String particularDate) {
 
-        String castedDate;
         String records;
         String theDate;
         int index = 0;
         StringBuilder it = new StringBuilder();
-        castedDate = particularDate.substring(0, 5);
         it.append("Here's all the task due on this day:\n");
         while (index < internalList.size()) {
-            theDate = internalList.get(index).getDate().value;
-            if (theDate.equals(castedDate)) {
+            theDate = internalList.get(index).getDate().value + "-2018";
+            if (theDate.equals(particularDate)) {
                 it.append("Task name: " + internalList.get(index).getName().fullName + ", ")
                         .append("Module: " + internalList.get(index).getModule().value + ", ")
                         .append("Date: " + internalList.get(index).getDate().value + ", ")
