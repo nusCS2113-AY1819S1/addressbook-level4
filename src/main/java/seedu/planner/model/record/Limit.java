@@ -20,6 +20,13 @@ public class Limit {
         this.limitMoneyFlow = limitMoneyFlow;
     }
 
+    public Limit (Date date, MoneyFlow limitMoneyFlow) {
+        requireAllNonNull(date, limitMoneyFlow);
+        this.dateStart = date;
+        this.dateEnd = date;
+        this.limitMoneyFlow = limitMoneyFlow;
+    }
+
     @Override
     public String toString () {
         return String.format("LIMIT_FORMAT", dateStart, dateEnd, limitMoneyFlow);

@@ -25,6 +25,8 @@ public class AddLimitCommandParser implements Parser<AddLimitCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
 
+    private static final int DOUBLE_DATE = 2;
+    private static final int SINGLE_DATE = 1;
     private String [] datesIn; //the string is used to divide two the whole strings into two substrings.
     private String moneyString;
     private Date dateStart;
@@ -47,10 +49,10 @@ public class AddLimitCommandParser implements Parser<AddLimitCommand> {
         }
         MoneyFlow money = ParserUtil.parseMoneyFlow(moneyString);
         datesIn = argMultimap.getValue(PREFIX_DATE).get().split("\\s+");
-        if (datesIn.length == 2) {
+        if (datesIn.length == DOUBLE_DATE) {
             dateStart = ParserUtil.parseDate(datesIn[0]);
             dateEnd = ParserUtil.parseDate(datesIn[1]);
-        } else if (datesIn.length == 1) {
+        } else if (datesIn.length == SINGLE_DATE) {
             dateStart = ParserUtil.parseDate(datesIn[0]);
             dateEnd = ParserUtil.parseDate(datesIn[0]);
         } else {
