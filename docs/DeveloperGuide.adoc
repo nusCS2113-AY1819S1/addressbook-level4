@@ -1359,6 +1359,29 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
+=== Logging into the app
+. Logging without email
+
+.. Prerequisites: App is not login yet. Privilege is default
+
+.. Test Case: `login manager` +
+   Expected: login successfully as manager
+
+.. Test Case: `login employee` +
+   Expected: login successfully as manager
+
+.. Other incorrect login commands to try: `login`,`login ceo` (login without email only accepts manager and employee)
+
+. Logging with email
+
+.. Prerequisites: App is not login yet. Privilege is default. Email of an existing person in addressbook
+
+
+.. Test Case: `login as lol@example.com` +
+   Expected: login successfully as the designation of the person
+
+.. Other incorrect login commands to try: `login as` `login as invalidemail`
+
 === Deleting a person
 
 . Deleting a person while all persons are listed
@@ -1426,6 +1449,19 @@ and `add n/Mark p/93455678 e/mark@example.com a/Mark street, block 12, #05-01 de
 
 .. Test case: `list dep Admin Finance` or any DEPARTMENT -> `list all`
    Expected: The details of all personnel and events will be listed.
+
+=== Sorting of events
+. Sorting of the event list based on the given params
+
+.. Prerequisites: No prerequisites
+
+.. Test case: `sort name` +
+   Expected: Event list to be sorted according their name.
+
+.. Test case: `sort date` +
+   Expected: Event list to be sorted according to the date from the earliest to the latest
+
+.. Other incorrect sort command to try: `sort` , `sort random`
 
 _{ more test cases ... }_
 
