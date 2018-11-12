@@ -31,7 +31,8 @@ public class DeleteMemberCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: delete the first member in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteMemberCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
+        String command = "     " + DeleteMemberCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased()
+                + "       ";
         Person deletedPerson = removePerson(expectedModel, INDEX_FIRST_PERSON);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
@@ -122,7 +123,8 @@ public class DeleteMemberCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Deletes the member at {@code toDelete} by creating a default {@code DeleteMemberCommand} using {@code toDelete} and
+     * Deletes the member at {@code toDelete} by creating a default {@code DeleteMemberCommand} using {@code toDelete}
+     * and
      * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
      * @see DeleteMemberCommandSystemTest#assertCommandSuccess(String, Model, String)
      */
@@ -132,7 +134,8 @@ public class DeleteMemberCommandSystemTest extends AddressBookSystemTest {
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
 
         assertCommandSuccess(
-                DeleteMemberCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);
+                DeleteMemberCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel,
+                expectedResultMessage);
     }
 
     /**

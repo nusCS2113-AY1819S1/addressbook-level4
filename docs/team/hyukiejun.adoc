@@ -3,23 +3,54 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: Clubhub
 
 ---
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Clubhub is a desktop application for managing members, inventory, finances and events in a club.
+The main targets for this application are student clubs and groups in University and it includes features (i.e. majors) that are more relatable to University setting.
+Using Clubhub, users can create, edit and delete club information through the command-line interface (CLI). Graphical user interface (GUI) is also available to display these informations neatly and clearly.
+The development of Clubhub was team-based and the task was divided among the 4 team members. Each member developed one of the components of the application individually while code integration and documentations were done together as a team.
+Java programming language was used for the development. For the integrated development environment (IDE) and version control software (VCS), IntelliJ and Github were used respectively.
+
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: reformatted and refactored existing `Person` code base in the AB4 as `Member` to fit the context of the Clubhub
+ and added *new additional attributes* to each member object.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+** The following attributes were added to Clubhub:
+*** Major
+*** Postal code
+
+** What it does: It allows the user to add information about each member's major and postal code in the Clubhub.
+
+** Justification: These additional attributes allow the user to store more information about the club member such as major and postalcode.
+  Ability to store each member's major is relevant in a University club context as each club member is a student studying a particular major in the university. Furthermore,
+  storing of each member's home postal code as a separate attribute from home address will allow easier mailing procedure.
+
+** Highlights: This enhancement required modification in the add and edit function of the club member as they had to be adjusted to taken in the two new arguments.
+New models also had to be created for these new member attributes.
+
+* *Major enhancement*: created new `Find` features that allows the user to search for club members by major, phone number and postal code.
+
+** The following commands were added to Clubhub:
+*** findmajor
+*** findphone
+*** findpostalcode
+
+** What it does: These additions enable the user to find the club members by their majors, phone numbers and postal codes. After filtration,
+the graphical user interface will display the members that have the searched information.
+
+** Justification: There are many situations when managing a University club whereby a quick advanced search is needed to look for member with a particular attribute.
+With the help of the new find features, the user can now search the club members not only by their names but also their majors, phone numbers and postal codes.
+
+** Highlights: This enhancement required creation of `MajorContainsKeywordsPredicate`, `PhoneContainsKeywordsPredicate` and `PostalcodeContainsKeywordsPredicate` models together with the
+ corresponding sets of parsers and commands.
+
+* *Minor enhancement*: changed the duplicate check feature to fit the University context of the Clubhub better.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
