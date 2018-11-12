@@ -412,9 +412,7 @@ Once you start running the application and select a person from the person list 
 
 The following diagram shows how the calendar looks like for November 2018.
 
-+
 image::CalendarView.png[width="500"]
-+
 
 // tag::calendarViewSchedule[]
 === Calendar to view schedule [Coming in V2.0]
