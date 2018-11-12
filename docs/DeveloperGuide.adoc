@@ -875,7 +875,7 @@ Use case resumes at step 3.
 +
 Use Case ends.
 
-// to be removed once done
+
 [discrete]
 === Use case: Delete person
 

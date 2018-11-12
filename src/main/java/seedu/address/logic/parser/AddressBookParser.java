@@ -26,6 +26,7 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatchScheduleCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TodoCommand;
@@ -138,6 +139,10 @@ public class AddressBookParser {
 
         case TodoCommand.COMMAND_WORD:
             return new TodoCommandParser().parse(arguments);
+
+        case ReminderCommand.COMMAND_WORD:
+        case ReminderCommand.COMMAND_ALIAS:
+            return new ReminderCommandParser().parse(arguments);
 
         default:
             List<String> listOfCommands = new WrongCommandSuggestion().getSuggestions(commandWord);

@@ -18,6 +18,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatchScheduleCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TodoCommand;
@@ -56,7 +57,7 @@ public class WrongCommandSuggestion implements Suggestion {
             SelectCommand.COMMAND_WORD,
             TodoCommand.COMMAND_WORD,
             UndoCommand.COMMAND_WORD
-
+            ReminderCommand.COMMAND_WORD
         };
     }
 
