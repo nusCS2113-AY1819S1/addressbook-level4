@@ -66,3 +66,6 @@ include::../UserGuide.adoc[tag=accountManagement]
 
 include::../DeveloperGuide.adoc[tag=login]
 
+include::../DeveloperGuide.adoc[tag=accountUseCase]
+
+include::../DeveloperGuide.adoc[tag=accountTesting]
