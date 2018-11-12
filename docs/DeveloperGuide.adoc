@@ -497,11 +497,13 @@ image::ViewClubBudgetsCommandSequenceDiagram.png[width="800"]
 === Search Pruning Feature
 
 The Search Pruning mechanism is facilitated by the `SearchHistoryManager` class, and within it is a `searchHistoryStack` that stores `Predicate` objects.
+`Predicate` objects are used to filter `FilteredList` objects by calling the `setPredicate()` method of `FilteredList`. By storing `Predicate` objects
+in SearchHistoryManager, it stores the search logic that was previously used on the `FilteredList` object, and hence, simulates the effect of storing Search History
+without storing the actual data.
 
-In NUSSU Connect, the main `SearchHistoryManger` object is in `ModelManager` and it stores `Predicate<Person>` objects used for filtering `filteredPersons` list.
+In NUSSU Connect, the main `SearchHistoryManger` object is in `ModelManager` and it stores `Predicate<Person>` objects used for the filtering of `filteredPersons` list.
 
-NOTE: The `SearchHistoryManger` object in `ModelManager` only stores `Predicate<Person>` objects and is meant only for the filtering of `FilteredList<Person>`.
-If you want to utilize `SearchHistoryManager` for your own use case, you should initialize a new `SearchHistoryManager` object with its generic constructor.
+NOTE: If you want to utilize `SearchHistoryManager` for your own use case, you can initialize a new `SearchHistoryManager` object with its' generic constructor.
 
 ==== Current Implementation
 
@@ -571,16 +573,16 @@ utilize `SearchHistoryManager` to perform Search Pruning. Other variations of `F
 
  - `IncludeNameFind` command +
 
-image::SearchPruningSequenceDiagram.png[width="700"]
+image::SearchPruningSequenceDiagram.png[]
 
  - `UndoFind` command +
 
-image::UndoFindSequenceDiagram.png[width="700"]
+image::UndoFindSequenceDiagram.png[]
 
 
 ==== Design Considerations
 
-Aspect: What data is stored in search history stack +
+===== Aspect: What data is stored in search history stack +
 
 * **Alternative 1(current choice):**  Save a Stack of Predicates
 ** Pros:
@@ -600,7 +602,7 @@ Aspect: What data is stored in search history stack +
     . More memory is required as Person objects has to be duplicated multiple times into a new List.
     . Class is not reusable for Search Pruning of other objects other than those from Person classes.
 
-Aspect: How the Predicate at the top of the Stack is retrieved from SearchHistoryManager +
+===== Aspect: How the Predicate at the top of the Stack is retrieved from SearchHistoryManager +
 
 * **Alternative 1(current choice):** `Predicate` object is returned from the methods `executeSearch()` and `revertLastSearch()`
 ** Pros:
@@ -1385,8 +1387,6 @@ Use case ends.
 
 === Use case: Intuitive Filtering of Large Number of Contacts
 
-System: NUSSU Connect Application +
-Actor: Typical NUSSU member +
 *MSS*
 
 1.  User requests application to display list of contacts
@@ -1415,28 +1415,13 @@ Use case resumes at Step 3.
 +
 Use case ends.
 
-=== Use case: Excluding specific people from Search List
+=== Use case: Excluding specific people from displayed list
 
-System: NUSSU Connect Application +
-Actor: Typical NUSSU member +
 *MSS*
 
 1.  User requests application to display list of contacts
 2.  System returns list of contacts
 3.  User requests to exclude a specific group of people from list of contacts
-4.  System returns new List of contacts according to the criteria set by the user +
-
-Use case ends
-
-=== Use case: Enforced criteria in Search List
-
-System: NUSSU Connect Application +
-Actor: Typical NUSSU member +
-*MSS*
-
-1.  User requests application to display list of contacts
-2.  System returns list of contacts
-3.  User requests System to display a list of users that MUST follow a certain criteria
 4.  System returns new List of contacts according to the criteria set by the user +
 
 Use case ends
@@ -1649,6 +1634,69 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Account is not created. Error details shown in results display.
 .. Other incorrect delete commands to try: `createaccount`, `createaccount a1234566m zaq1xsw2cde3 member`, `createaccount A1234566M zaq1xsw2cde3 janitor`, `createaccount zaq1xsw2cde3 member`, `createaccount A1234566Mzaq1xsw2cde3member`
    Expected: Similar to previous.
+
+=== Finding a Person with a certain tag in the displayed list
+
+. Finding a person while all persons are listed
+
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Test case: `find \tag friends` +
+   Expected: All contacts with the tag friends is shown in the displayed list. Other contacts without the
+   tag friends will be removed from the displayed list.
+   Tag Keywords History with '+friends' message is shown in the results display
+.. Test case: `find \tag` +
+   Expected: Invalid Command Format. Error details shown in results display.
+
+=== Excluding a Person with a certain name from displayed list
+
+. Excluding a person while all persons are listed
+
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Test case: `find \exclude Alex` +
+   Expected: All contacts with the name Alex is removed from the displayed list.
+   Name Keywords History with '-alex' message is shown in the results display
+.. Test case: `find \exclude` +
+   Expected: Invalid Command Format. Error details shown in results display.
+
+=== Excluding a Person with a certain tag from displayed list
+
+. Excluding a person while all persons are listed
+
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Test case: `find \tag \exclude neighbours` +
+   Expected: All contacts with the tag neighbours is removed from the displayed list.
+   Tag Keywords History with '-neighbours' message is shown in the results display
+.. Test case: `find \exclude \tag classmates` +
+   Expected: All contacts with the tag classmates is removed from the displayed list.
+   Tag Keywords History with '-classmates' message is shown in the results display
+.. Test case: `find \tag \exclude` +
+   Expected: Invalid Command Format. Error details shown in results display.
+.. Other incorrect delete commands to try: `find \exclude \tag`
+
+=== UndoFind command
+
+. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Test case: `undofind` +
+   Expected: "SearchHistory is Empty" message in result display.
+.. Test case: `find \exclude Alex` and then `undofind` +
+   Expected: +
+        *After execution of first command* +
+        All contacts with the name Alex is removed from the displayed list. +
+        *After execution of second command* +
+        All contacts with the name Alex will be added back to the displayed list after the second command and
+        "Undo success!" message should shown in result display.
+
+=== Search Pruning Feature
+
+. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Test case: `find \tag friends` and then `find \tag colleagues`+
+      Expected: +
+      *After execution of first command* +
+      All contacts with the tag friends is shown in the displayed list.
+      Tag Keywords History with '+friends' is shown in the results display. +
+      *After execution of second command* +
+       All contacts that has both of the tag friends and colleagues is shown in the displayed list.
+       Tag Keywords History with '+colleagues +friends' message is shown in the results display.
 
 === Deleting a person
 
