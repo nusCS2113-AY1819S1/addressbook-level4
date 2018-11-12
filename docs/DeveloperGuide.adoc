@@ -638,9 +638,15 @@ Step 1: User launches application, then logs in
 Step 2: User adds a new event which will occur before some of the other events in the list +
 e.g: `add n/Jack Birthday Party ... d/10/10/2018 20:30...`
 
+.Add new event that need to be sorted
+image::autoSortingBefore.png[]
+
 Step 3: When add method is called, it performs the intended operation, then sorts the list before returning it to other components.
 
 Step 4: The event list panel is reloaded and displays the newly added event in the correct place.
+
+.Auto sorting results
+image::autoSortingAfter.png[width=350]
 
 ==== Aspect: How to sort the list
 * **Alternative 1 (current choice):** Event list will be sorted based on sort method implemented in `UniqueEventList` class to modify the internal list which event manager is backed on.
@@ -672,7 +678,7 @@ Current version implementation uses logic AND operator for different prefixes.
 ** Pros: Follows the current structure of `find` command, which means that current resources can be reused.
 ** Cons: With the current implementation of the predicate, scaling will severely affect product performance.
 
-==== Future enhancement:
+==== Future enhancement: [V2.0]
 * Search options for keywords contained or for the exact keywords.
 * Search with  both `logic AND and OR operator` with different prefixes.
 * Search for events within a time range.
@@ -687,11 +693,22 @@ Consider the following scenario:
 
 Step 1: User launches the application, then logs in.
 
-Step 2: User executes `export my event calendar` command. The export command receive argument to accept as filename
+Step 2: User executes `export mycal` command. The export command receive argument to accept as filename
 
 Step 3: Current user, who is logged in, will be used to receive an event filtered list that he/she has registered for.
 
-Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in *folder that you store EventManager*
+Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in *folder that you store EventManager.jar*
+
+.Command result show in the UI
+image::exportCommandResultUI.png[width=350]
+
+.Command result show in file folder
+image::exportCommandResultFile.png[width=350]
+
+The process is illustrated in the following diagram:
+
+.ExportCalendarCommand sequence diagram
+image::exportCalendarCommandSequencesDiagram.png[]
 
 ==== Aspect: How to export the event list
 * **Alternative 1 (current implementation):** Using ical4j external library to create methods to convert events to RFC5545 format, then stream to FileOutputStream with given filename from user. +
@@ -704,10 +721,10 @@ All method are written in the `ExportCalendarCommand` class.
 
 [NOTE]
 ====
-Calendar will be exported to your src/data folder.
+Calendar will be exported to your source folder.
 ====
 
-==== [Proposed]: Future enhancement
+==== [Proposed]: Future enhancement [V2.0]
 Export should be able to export the attendance list of an event according to user preference.
 // end::exportcalendar[]
 
