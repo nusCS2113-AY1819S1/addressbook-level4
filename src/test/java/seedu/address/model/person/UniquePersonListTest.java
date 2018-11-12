@@ -20,6 +20,9 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Provides a test for UniquePersonList
+ */
 public class UniquePersonListTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

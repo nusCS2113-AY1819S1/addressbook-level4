@@ -21,8 +21,6 @@ import seedu.address.model.note.NoteText;
  */
 public class NoteEntryPrompt {
 
-    private static final int NOTE_MAX_CHARACTER_LIMIT = 150;
-
     private static final String NOTE_TAB_OVERWRITE = "    ";
     private static final String NOTE_TEXT_EMPTY_MESSAGE = "Saving failed! The field is empty.";
 
@@ -116,19 +114,19 @@ public class NoteEntryPrompt {
         noteContent.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                int remaining = NOTE_MAX_CHARACTER_LIMIT - newValue.length();
+                int remaining = NoteText.NOTE_MAX_CHARACTER_LIMIT - newValue.length();
                 feedbackLabel.setStyle("-fx-font-size: 12; -fx-text-fill: white;");
                 feedbackLabel.setText("Characters remaining: " + remaining);
             }
         });
 
         noteContent.setTextFormatter(new TextFormatter<String>(text ->
-                text.getControlNewText().length() <= NOTE_MAX_CHARACTER_LIMIT
+                text.getControlNewText().length() <= NoteText.NOTE_MAX_CHARACTER_LIMIT
                         ? text : null));
     }
 
     public void setUpFeedbackLabel() {
-        int remaining = NOTE_MAX_CHARACTER_LIMIT - noteContent.getText().length();
+        int remaining = NoteText.NOTE_MAX_CHARACTER_LIMIT - noteContent.getText().length();
         feedbackLabel.setStyle("-fx-font-size: 12; -fx-text-fill: white;");
         feedbackLabel.setText("Characters remaining: " + remaining);
     }

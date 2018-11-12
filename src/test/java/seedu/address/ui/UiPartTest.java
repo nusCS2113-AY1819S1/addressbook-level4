@@ -14,6 +14,9 @@ import javafx.fxml.FXML;
 import seedu.address.MainApp;
 import seedu.address.testutil.Assert;
 
+/**
+ * Provides a test for UiPart
+ */
 public class UiPartTest {
 
     private static final String MISSING_FILE_PATH = "UiPartTest/missingFile.fxml";

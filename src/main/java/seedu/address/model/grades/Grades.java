@@ -1,7 +1,7 @@
 package seedu.address.model.grades;
 
 /**
- * Represents a note in Trajectory.
+ * Represents a grade in Trajectory.
  */
 public class Grades {
     private String moduleCode;

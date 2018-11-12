@@ -417,7 +417,7 @@ Format: `gradebook add mc/MODULE_CODE cn/COMPONENT_NAME [mm/MAX_MARKS] [w/WEIGHT
 ****
 * Inputs are case sensitive.
 * Module code must exist
-* Component name must not already exist in Trajectory.
+* Gradebook Component name must not already exist in Trajectory.
 * Accumulated weightage for grade components in module cannot exceed 100%.
 * Weightage can be 0 for grade components like Mock Practical Exam.
 ****
@@ -509,6 +509,22 @@ Examples:
 
 * `grade add mc/CS2113 cn/Assignment 1 i/A0167789S m/50` +
 Assigns 50 marks to CS2113 student with matric number A0167789S for Assignment 1.
+
+==== Edit Student Grade : `grade edit [coming in v2.0]`
+Edit marks of a student. +
+Format: `grade edit mc/MODULE_CODE cn/COMPONENT_NAME i/MATRIC_NO m/MARKS`
+
+****
+* Inputs are case sensitive.
+* Students must be enrolled to the module.
+* Grade component name must exist in existing module.
+* Marks assigned to student for the particular gradebook component must not exceed its maximum marks.
+****
+
+Examples:
+
+* `grade edit mc/CS2113 cn/Assignment 1 i/A0167789S m/20` +
+Assigns 20 marks to CS2113 student with matric number A0167789S for Assignment 1.
 
 ==== Display Graph of Student Grades : `grade graph`
 Displays graph of all students of one grade component of an existing module. +
@@ -744,6 +760,8 @@ e.g. `gradebook find mc/CS2113 cn/Assignment 1`
 e.g. `grade list`
 * *Add Student Grade* : `grade add mc/MODULE_CODE cn/COMPONENT_NAME i/MATRIC_NO m/MARKS` +
 e.g. `grade add mc/CS2113 cn/Assignment 1 i/A0167789S m/50`
+* *Edit Student Grade* : `grade edit mc/MODULE_CODE cn/COMPONENT_NAME i/MATRIC_NO m/MARKS` `[coming in v2.0]` +
+e.g. `grade edit mc/CS2113 cn/Assignment 1 i/A0167789S m/20`
 * *Display Graph of Student Grades* : `grade graph mc/MODULE_CODE cn/COMPONENT_NAME` +
 e.g. `grade graph mc/CS2113 cn/Finals`
 // end::gradecommandsummary[]

@@ -16,6 +16,9 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Provides a test for Person
+ */
 public class PersonTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

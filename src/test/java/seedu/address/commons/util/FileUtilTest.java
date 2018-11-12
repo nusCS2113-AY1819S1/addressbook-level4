@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
+/**
+ * Provides a test for FileUtil
+ */
 public class FileUtilTest {
 
     @Test

@@ -12,7 +12,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-T16-1/main/tree/master
 
 By: `T16-1`      Since: `Aug 2018`      Licence: `MIT`
 
@@ -179,44 +179,53 @@ The `UI` component,
 * The BrowserPanel will be updated with either the HtmlTableProcessor or the HtmlCardProcessor.
 
 [[Design-Logic]]
+// tag::logiccomponent[]
 === Logic component
 
 [[fig-LogicClassDiagram]]
-.Structure of the Logic Component
-image::LogicClassDiagram.png[width="800"]
+.Structure of Trajectory Logic Component
+image::TrajectoryLogicClassDiagram.png[width="800"]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+link:https://github.com/CS2113-AY1819S1-T16-1/main/blob/master/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+.  The command execution can affect the `Model` (e.g. deleting a gradebook component) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("gradebook delete mc/CS2113 cn/Assignment 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
-
+.Interactions Inside the Logic Component for the `gradebook delete mc/CS2113 cn/Assignment 1` Command
+image::GradebookDeleteSDForLogic.png[width="800"]
+// end::logiccomponent[]
 [[Design-Model]]
 === Model component
 
 .Structure of the Model Component
 image::ModelClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+*API* : +
+link:{repoURL}/src/main/java/seedu/address/model/course/CourseManager.java[`CourseManager.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/module/ModuleManager.java[`ModuleManager.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/classroom/ClassroomManager.java[`ClassroomManager.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/gradebook/GradebookManager.java[`GradebookManager.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/grades/GradesManager.java[`GradesManager.java`] +
+link:{repoURL}/src/main/java/seedu/address/model/note/NoteManager.java[`NoteManager.java`]
 
-The `Model`,
+The `Model` component is the memory of Trajectory.
 
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+It consists of several Manager classes which handles their respective dataset.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
+The responsibilities of the `Model` component are as follows:
+
+* temporarily holds the user's data for the duration that the application is running.
+* manages in-memory data changes due to user commands.
+* interacts with the `Storage` component for permanent storage of data to a local storage (e.g. PC's hard drive).
+* exposes a viewable list of data that can be 'observed' by the user. e.g. the UI can render an HTML page that displays the desired information through this list.
+
+Within the `Model` component, there are some information dependencies among the different Model Manager classes as shown in Figure 8. Hence, it should be noted that it is not possible to create a data before its parent data due to its hierarchical structure.
 
 [[Design-Storage]]
 === Storage component
@@ -418,7 +427,7 @@ Given below is an example usage scenario and how the gradebook data-to-graph mec
 
 Step 1. The user launches the application for the first time. The StorageController which interacts with #xmlAdaptedGradebook to retrieve data from Array List using #retrieveData.
 
-Step 2. The user executes `gradebook find m/cs2113 i/Finals` command to find the relevant gradebook component. The `find` command calls `GradebookManager#findGradebookComponent()`, which finds and filters the Array List to the relevant search.
+Step 2. The user executes `gradebook find mc/cs2113 cn/Finals` command to find the relevant gradebook component. The `find` command calls `GradebookManager#findGradebookComponent()`, which finds and filters the Array List to the relevant search.
 
 Step 3. The user executes `gradebook graph student`. GradebookManager#graphStudentProgress will convert the Array List to graph form and display to the user.
 
@@ -427,9 +436,9 @@ If a command fails its execution, it will not call `Gradebook#GradebookManager()
 
 Step 4. The user now decides to export graph according to the progress of a student, and that action is done by executing the `gradebook graph student` command. This command will call `GradebookManager#graphStudentProgress()`, which then displays the graph of the students progress.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a user executes grade graph command:
 
-image::dataToGraphActivityDiagram.png[width="650"]
+image::GradeGraphActivityDiagram.png[width="650"]
 
 ==== Design Considerations
 
@@ -2749,3 +2758,239 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+
+// tag::gradebookmanualtesting[]
+=== Gradebook List
+
+. Listing all gradebook components to existing module(s) in Trajectory. +
+*Parameters (prefix): NIL*
+
+.. Prerequisites: NIL
+.. Test case: `gradebook list` +
+   Expected: Gradebook list will be displayed on the system with all the gradebook components set to a module. The total number of gradebook components are indicated in the status message.
+
+=== Gradebook Add
+
+. Adding a gradebook component to an existing module in Trajectory. +
+*Parameters (prefix):* +
+Module code (mc/), +
+gradebook component name (cn/), +
+[optional] maximum marks (mm/), +
+[optional] weightage(w/).
+
+.. Prerequisites: Module code must already exist in system. Gradebook component name cannot already exist to module. In this case, take 'CS2113' as a module that already exist in Trajectory.
+.. Test case: `gradebook add mc/CS2113 cn/Assignment 1` +
+   Expected: Gradebook list will be displayed on the system with the newly added gradebook component 'Assignment 1'. The total number of gradebook components are indicated in the status message.
+.. Test case: `gradebook add mc/CS2113 cn/Assignment 1 mm/20` +
+   Expected: Gradebook component will not be added into the system as 'Assignment 1' is already found in the system. Error details shown in the status message.
+.. Other incorrect gradebook add commands to try: +
+`gradebook add`, +
+`gradebook add mc/CS2113 cn/x mm/y` (where x is *not* an existing component name to 'CS2113', y is a value *below 0 and above 100*), +
+`gradebook add mc/CS2113 cn/x w/y` (where x is *not* an existing component name to 'CS2113', y is a value *below 0 and above 100*), +
+`gradebook add mc/CS2113 cn/x w/y` (where x is *not* an existing component name to 'CS2113', where y is a value above the remaining weightage available to module code -> Add up all weightage of grade components set to 'CS2113''), +
+   Expected: Similar to previous.
+
+=== Gradebook Find
+
+. Finding a gradebook component to an existing module in Trajectory. +
+*Parameters (prefix):* +
+Module code (mc/), +
+gradebook component name (cn/).
+
+.. Prerequisites: Gradebook component name to a module must already exist in system. In this case, take 'Assignment 1' as the gradebook component set to 'CS2113' in Trajectory.
+.. Test case: `gradebook find mc/CS2113 cn/Assignment 1` +
+  Expected: Information of the gradebook component to module will be displayed on the system.
+.. Test case: `gradebook find mc/CS2113 cn/Finals` +
+  Expected: Since gradebook component is not found in the system, error details will be shown in the status message. +
+.. Other incorrect gradebook find commands to try: +
+`gradebook find`, +
+`gradebook find mc/MA1511 cn/Finals` +
+  Expected: Similar to previous.
+
+=== Gradebook Delete
+
+. Deleting a gradebook component to an existing module in Trajectory. +
+*Parameters (prefix):* +
+Module code (mc/), +
+gradebook component name (cn/).
+
+.. Prerequisites: Gradebook component name to a module must already exist in system. In this case, take 'Assignment 1' as *only* the gradebook component set to 'CS2113' in Trajectory.
+.. Test case: `gradebook delete mc/CS2113 cn/Assignment 1` +
+   Expected: Gradebook list will be displayed on the system with the deleted gradebook component missing from the list. The total number of gradebook components remaining are indicated in the status message.
+.. Test case: `gradebook delete mc/CS2113 cn/Finals` +
+   Expected: Since gradebook component is not found in the system, error details will be shown in the status message. +
+.. Other incorrect gradebook delete commands to try: +
+`gradebook delete`, +
+`gradebook delete mc/MA1511 cn/Finals` +
+   Expected: Similar to previous.
+
+=== Gradebook Edit
+
+. Editing a gradebook component to an existing module in Trajectory. +
+*Parameters (prefix):* +
+Module code (mc/), +
+gradebook component name (cn/), +
+[Optional] edited gradebook component name (en/), +
+[Optional] edited maximum marks (mm/), +
+[Optional] edited weightage [w/]. +
+**Take note that at least one optional parameter must be indicated in the command.*
+
+.. Prerequisites: Gradebook component name to a module must already exist in system. In this case, take 'Assignment 1' as the gradebook components set to 'CS2113' in Trajectory.
+.. Test case: `gradebook edit mc/CS2113 cn/Assignment 1 mm/20` +
+  Expected: Gradebook list will be displayed on the system with the edited gradebook component. The total number of gradebook components is indicated in the status message.
+.. Test case: `gradebook edit mc/CS2113 cn/Finals w/50` +
+  Expected: Since gradebook component is not found in the system, error details will be shown in the status message. +
+.. Other incorrect gradebook edit commands to try: +
+`gradebook edit`, +
+`gradebook edit mc/CS2113 cn/Assignment 1 w/x` where x is a value above the remaining weightage available to module code -> Add up all weightage of grade components set to 'CS2113'  +
+  Expected: Similar to previous.
+// end::gradebookmanualtesting[]
+// tag::grademanualtesting[]
+=== Grade Add
+
+. Adding marks to a student for grade component to a module. In this case, take 'Assignment 1' with maximum marks of 20 as the gradebook components set to 'CS2113' in Trajectory. Student enrolled to the module has matric no. 'A0169999A'  +
+*Parameters (prefix):* +
+Module code (mc/), +
+Gradebook component name (cn/), +
+Student Matric Number (i/), +
+Marks (m/).
+
+.. Prerequisites: Gradebook component name to a module must already exist in system. Student must be enrolled to the module.
+.. Test case: `grade add mc/CS2113 cn/Assignment 1 i/A0169999A m/15` +
+   Expected: Grade list will be displayed. The total number of gradebook components is indicated in the status message.
+.. Test case: `grade add mc/CS2113 cn/Assignment 1 i/A0169999A m/30` +
+  Expected: Since the marks indicated is above the maximum marks set of 20, error details will be shown in the status message. +
+.. Other incorrect grade add commands to try: +
+`grade add`, +
+`grade add mc/CS2113 cn/Assignment 1 i/x m/10` where x is a matric number of a student that is not enrolled in module. +
+Expected: Similar to previous.
+
+=== Grade List
+
+. Listing all grade of students of an existing gradebook component for module in Trajectory. +
+*Parameters (prefix): NIL*
+
+.. Prerequisites: NIL
+.. Test case: `grade list` +
+   Expected: Grade list will be displayed on the system with all the grade information. The total number of grade components remaining are indicated in the status message.
+
+=== Grade Graph
+
+. Displaying the graph of all students marks to a gradebook component for a module in Trajectory. In this case, take 'Assignment 1' as the gradebook components set to 'CS2113' in Trajectory. Alse, all marks of students enrolled to the module is already in the system. +
+*Parameters (prefix):* +
+Module code (mc/), +
+Gradebook component name (cn/).
+
+.. Prerequisites: All students enrolled in the module must have their marks recorded. Else, user has no access to graph.
+.. Test case: `grade graph mc/CS2113 cn/Assignment 1` +
+   Expected: Grade graph will be pop up.
+.. Other incorrect grade graph commands to try: +
+`grade graph`, +
+`grade add mc/CS2113 cn/x` where x is a grade component is either not associated to module *or* not all marks of students enrolled in module is recorded in Trajectory. +
+Expected: Similar to previous.
+// end::grademanualtesting[]
+
+// tag::notemanualtesting[]
+=== Adding a note
+
+. Adding a note in Trajectory while all notes are listed. +
+*Parameters (prefix):* +
+[optional] MODULE_CODE (mc/), +
+[optional] NOTE_TITLE (tt/), +
+[optional] NOTE_START_DATE (sd/), +
+[optional] NOTE_START_TIME (st/), +
+[optional] NOTE_END_DATE (ed/), +
+[optional] NOTE_END_TIME (et/), +
+[optional] NOTE_LOCATION (lc/)
+
+.. Prerequisites: List all notes using `note list` command. The displayed list can have 0 or more notes. MODULE_CODE must already exist in the system (if specified as parameter). Take 'CS2113' as a module that already exists in Trajectory.
+.. Test case: `note add` +
+   Expected: The application will prompt the user to enter note. Upon saving, the notes list should be displayed with the newly created note at the bottom. If cancelled, the note should not be saved.
+.. Test case: `note add tt/First note sd/16-11-2018 lc/NUS` +
+   Expected: Similar to previous, but the new note should contain more information when displayed.
+.. Test case: `note add mc/CS2113` +
+   Expected: Similar to previous. However, this note will be assigned to 'CS2113' module.
+.. Test case: `note add mc/GEQ1000` +
+   Expected: No note is added. An error message will be shown.
+.. Other incorrect add commands to try: `note add tt/x` (where x is a string of characters with character count greater than 30) +
+   Expected: Same as previous.
+
+=== Deleting a note
+
+. Deleting a note in Trajectory while all notes are listed. +
+*Parameters (prefix):* +
+INDEX (no prefix), +
+INDEX_RANGE (no prefix)
+
+.. Prerequisites: List all notes using `note list` command. The displayed list contains multiple notes.
+.. Test case: `note delete 1` +
+   Expected: The first note labeled '#1' in the list will be deleted. A message will be displayed upon successful deletion.
+.. Test case: `note delete 1-3` +
+   Expected: The notes #1, #2, and #3 will be deleted from the list. A message will be displayed upon successful deletion.
+.. Test case: `note delete 0` +
+   Expected: No note is deleted. An error message will be shown.
+.. Other incorrect delete commands to try: `note delete -1`, `note delete 3-1`, `note delete x` (where x is larger than the list size) +
+   Expected: Same as previous.
+
+=== Editing a note
+
+. Editing a note in Trajectory while all notes are listed. +
+*Parameters (prefix):* +
+INDEX (no prefix), +
+[optional] MODULE_CODE (mc/), +
+[optional] NOTE_TITLE (tt/), +
+[optional] NOTE_START_DATE (sd/), +
+[optional] NOTE_START_TIME (st/), +
+[optional] NOTE_END_DATE (ed/), +
+[optional] NOTE_END_TIME (et/), +
+[optional] NOTE_LOCATION (lc/)
+
+.. Prerequisites: List all notes using `note list` command. The displayed list contains multiple notes. MODULE_CODE must already exist in the system (if specified as parameter). Take 'CS2113' as a module that already exists in Trajectory.
+.. Test case: `note edit 1` +
+   Expected: The application will prompt the user to modify the note. Upon saving, the list will be updated. If cancelled, the modifications are discarded.
+.. Test case: `note edit 1 tt/Modified Title` +
+   Expected: Same as previous but the title of the note will also be edited.
+.. Test case: `note edit x` (where x is larger than the list size) +
+   Expected: No note is edited. An error message will be shown.
+
+=== Listing notes
+
+. Listing all existing notes in Trajectory. +
+*Parameters (prefix):* +
+[optional] MODULE_CODE (mc/)
+
+.. Prerequisites: Multiples notes are currently saved in Trajectory. At least one note should be assigned to 'CS2113'. Take 'CS2113' as a module that already exists in Trajectory.
+.. Test case: `note list` +
+   Expected: The list of all notes in Trajectory will be displayed.
+.. Test case: `note list mc/CS2113` +
+   Expected: The list of all notes assigned to 'CS2113' module will be displayed.
+.. Test case: `note list mc/GER1000` +
+   Expected: A message indicating that no notes were found should be displayed. The list will not be updated.
+
+=== Finding notes by keywords
+
+. Finding notes in Trajectory that matches keyword(s). +
+*Parameters (prefix):* +
+KEYWORD (k/), +
+[optional] MORE_KEYWORDS (k/)
+
+.. Prerequisites: Multiples notes are currently saved in Trajectory. At least one note should contain the word "hello" in its title or in the text of the note.
+.. Test case: `note find k/hello` +
+   Expected: The list of all notes containing the word "hello" will be displayed.
+.. Test case: `note find k/x` (where x is a word that does not exist in any note) +
+   Expected: A message indicating that no notes were found should be displayed. The list will not be updated.
+
+=== Exporting notes to CSV
+
+. Exporting notes in Trajectory. +
+*Parameters (prefix):* +
+FILE_NAME (fn/)
+
+.. Prerequisites: Multiples notes are currently saved in Trajectory. At least one note should have a date & time displayed in its information when `note list` command is used.
+.. Test case: `note export fn/test_case1` +
+   Expected: A message indicating a successful export will be displayed. A file named "test_case1.csv" will be saved in /data/CSVexport/ directory from Trajectory's location.
+.. Test case: `note export fn/test_case@` +
+   Expected: No notes will be exported and no file is created. An error message indicating an invalid filename will be displayed.
+
+// end::notemanualtesting[]
+

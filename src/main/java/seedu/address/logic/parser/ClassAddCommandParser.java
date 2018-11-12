@@ -37,11 +37,11 @@ public class ClassAddCommandParser implements Parser<ClassAddCommand> {
         }
 
         String className = argMultimap.getValue(PREFIX_CLASS_NAME).get().toUpperCase();
-        ClassroomParserUtil.parseClassName(className);
+        ParserUtil.parseClassName(className);
         String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get().toUpperCase();
         ParserUtil.parseModuleCode(moduleCode);
         String maxEnrollment = argMultimap.getValue(PREFIX_MAXENROLLMENT).get();
-        ClassroomParserUtil.parseEnrollment(maxEnrollment);
+        ParserUtil.parseEnrollment(maxEnrollment);
 
         Classroom classRoom = new Classroom(
                 new ClassName(className),
