@@ -204,11 +204,11 @@ image::DeletePersonSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="600"]
+image::ModelClassDiagram.png[width="620"]
+// end::Model[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
-// end::Model[]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
@@ -227,6 +227,7 @@ image:ModelClassBetterOopDiagram.png[width="800"]
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
+// end::Storage[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
@@ -235,7 +236,6 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book and Event List data in xml format and read it back.
 
-// end::Storage[]
 [[Design-Commons]]
 === Common classes
 
@@ -283,39 +283,48 @@ image::SortSequenceDiagram.png[width="650"]
 ==== Current Implementation
 
 The `invite` command allows users to add attendees to an existing event, which is represented by an `Event` object.
-The command currently only allows users to add a single person to an event, based on the indices on the UI.
+The command currently only allows users to add a single person to an event at a time, based on the indices on the UI.
 This command adds the to-be-invited `Person` 's email, which is unique, to the chosen `Event`, so that the attendees of a particular event is recorded.
 
-The adding of attendees is facilitated by the class: `Attendees`, a list of emails of type `String`.
+The adding of attendees is facilitated by the class: `Attendees`, which consists of a list of emails of type `String`.
 
-image::EventClassDiagram.png[width="300"]
+.Class Diagram of Event and Attendee class
+image::EventAndAttendeeClassDiagram.png[width="800"]
 
 The following is a more detailed description of the `Attendee` class:
 
 *  `Attendees`
-** Each `Event` object has an `Attendees`, which is a list of the emails of the different `Person` attending the event.
+** Each `Event` object consist of an `Attendees` object, which is a list of the emails of the different `Person` attending the event.
 ** This class is a wrapper class around the internal representation of a `Set` of emails.
 ** Only the email of the `Person` is recorded in an `Event`, as the email should be unique and uneditable.
 
-Storing only the *email* of `Person` in the `Attendees` object of `Event` saves memory storage and facilitates the `select` feature. As we select a person, we can simply iterate through the event list and check whether the person's email is in the attendees list.
+Storing only the *email* of `Person` in the `Attendees` object of `Event` saves memory storage and facilitates the `select`, `viewmine` and `selectEvent` feature.
+As we select a person, we can simply iterate through the event list and check whether the person's email is in the attendees list.
+Similarly, as we select an event, we can first obtain the list of emails from the `Attendees`, and filter the employee list accordingly.
 
 This command only executes successfully if the event does not not clash with the person's schedule.
 
 Given below is an illustration to describe the detection of whether two events clash, which is facilitated by the method `hasClash` in `Event`:
 
-image::EventClashDiagram.png[width="400"]
+.Logic behind `Event#hasClash`
+image::EventClashDiagram.png[width="450"]
 
-The `Event#hasClash` is widely used in other features such as `addEvent` and `editEvent` to ensure that
+Thus, to check whether the event clashes with an employee's schedule, we iterate through the `ObservableList<Event>` and check whether the `Event` contains the employee's email in the `Attendee` and clashes with the selected event.
+
+****
+`Event#hasClash` is widely used in other features such as `addEvent` and `editEvent` to ensure that
 
 1. Different events are not held at the same location and time.
 
 2. An employee do not have two events he/she needs to attend at the same time.
+****
 
-Implementation of `RemoveCommand` is similar to `InviteCommand`, but removes persons from attendees of events instead.
+Implementation of `RemoveCommand` is similar to `InviteCommand`, but removes persons from `Attendees` of events instead.
 
 ==== Execution of Command
 
 Given below is an example usage scenario and how the invite mechanism works.
+
 For example, the user inputs `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list.
 
 Step 1. The command text is passed to an instance of the `LogicManager` class.
@@ -349,7 +358,7 @@ image::InviteSequenceDiagram.png[width="700"]
 
 * **Alternative 1 (current choice):** Saves only the emails of the Persons in the Attendees of Events.
 ** Pros: Saves space. Able to filter EventList easily.
-** Cons: Requires going through the entire list of AddressBook to obtain details of persons attending the particular event.
+** Cons: Requires going through the entire list of EventList to obtain details of events attended by the person.
 
 * **Alternative 2:** Saves the entire information of Events for each Persons.
 ** Pros: Fast access to information of Events attended by any Persons.
@@ -379,6 +388,8 @@ One possible way to to implement this is to have the user
 The same concept can also be applied to events, being able to invite one person to multiple events with one single command.
 
 Implementation of this additional feature would require changes to both `InviteCommandParser` and `InviteCommand#execute`. Additionally, handling of clashing events needs to be considered as it now involves more than one participant and event.
+
+Similar improvements can be made to `remove` command, being able to remove a person from a number of events with one single command.
 // end::Invite[]
 
 // tag::Select[]

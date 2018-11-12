@@ -323,15 +323,19 @@ Example:
 * `invite 1 to/3` +
 Invite 1st employee on employee list to 3rd event on event list
 
-image::InviteCommandGuide.png[width="500"]
+image::InviteCommandGuide.png[width="480"]
 
 ****
 * Invites the employee at the specified `PERSON_INDEX` *TO* the event at the specified `EVENT_INDEX`.
 * The index refers to the index number shown in the displayed employee list and event list respectively.
 * The index *must be a positive integer* 1, 2, 3, ...
-* Employee should not have already been invited to the selected event.
-* Event invited to *should not clash* with the selected employee's event schedule.
 ****
+
+****
+WARNING: Employee should not have *already* been invited to the selected event. +
+Event invited to *should not clash* with the selected employee's event schedule.
+****
+
 // end::invite[]
 
 // tag::remove[]
@@ -345,13 +349,16 @@ Example:
 * `remove 2 from/4` +
 Remove 2nd employee at employee list from 4th event at event list
 
-image::RemoveCommandGuide.png[width="450"]
+image::RemoveCommandGuide.png[width="480"]
 
 ****
 * Remove the employee at the specified `PERSON_INDEX` *FROM* the event at the specified `EVENT_INDEX`.
 * The index refers to the index number shown in the displayed person list and event list respectively.
 * The index *must be a positive integer* 1, 2, 3, ...
-* The employee to be remove must be previously invited to an event in order to be removed.
+****
+
+****
+WARNING: The employee to be remove must be previously invited to an event in order to be removed.
 ****
 // end::remove[]
 
@@ -359,22 +366,28 @@ image::RemoveCommandGuide.png[width="450"]
 === Selecting a person: `select`
 Priority level: `all`
 
-Selects an employee and view the specified employee's events on a date, year, month, month and year, or all of his/her events. +
+Selects an employee and view the selected employee's events at the indicated time on the event list panel. +
 Format/Prompts: +
 Enter a command: `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
 ****
-* Select the employee at the specified `PERSON_INDEX` and view all his/her events or events at certain time if indicated.
-* The index refers to the index number shown in the displayed person list.
+* Select the employee at the specified `PERSON_INDEX` and view all his/her events at certain date if indicated.
+* The index refers to the index number shown in the displayed employee list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * DATE needs to be in YYYY-MM-DD format
 * MONTH needs to be in MM format (e.g. 01, 02, ... , 12)
 * YEAR needs to be in YYYY format. (e.g. 2018)
-* If DATE is indicated, MONTH and YEAR must NOT be indicated. Then, all events of the selected employee at the specific DATE will be displayed.
-* MONTH and YEAR can be both used at the same time, resulting in events on the selected MONTH and YEAR to be displayed.
 ****
 
-image::SelectCommandGuide.png[width="500"]
+****
+TIP: MONTH and YEAR can be both used at the same time, resulting in events on the selected MONTH and YEAR to be displayed.
+****
+
+****
+WARNING: If DATE is indicated, MONTH and YEAR must NOT be indicated. Then, all events of the selected employee at the specific DATE will be displayed.
+****
+
+image::SelectCommandGuide.png[width="650"]
 
 Examples:
 
