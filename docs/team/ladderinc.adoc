@@ -20,7 +20,7 @@ In this project, my main contribution is in the Search Pruning feature and the m
 ease the process of managing a large list of contacts.
 Further details about my contributions will be explained in this section.
 
-* *Major enhancement*: Added the ability to prune the list of contacts by keeping a record of Search HIstory.
+* *Major enhancement*: Added the ability to prune the list of contacts by keeping a record of Search History.
 
 ** What it does: Each subsequent execution of `find` commands allows users to search and reduce the size
 of the current displayed list of contacts. `undofind` command does the opposite and reverts the last `find`
