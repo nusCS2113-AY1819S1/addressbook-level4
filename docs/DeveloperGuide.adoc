@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 
 == Setting up
 
@@ -136,7 +136,7 @@ Each of the four components
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
-image::LogicClassDiagram.png[width="800"]
+image::LogicClassDiagram_new.png[width="800"]
 
 [discrete]
 ==== Events-Driven nature of the design
@@ -192,10 +192,6 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
-
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
@@ -277,13 +273,14 @@ For the period of 30 days, `-m` is appended to the command. (e.g. `costs -m`)
 
 The following is the sequence of steps when the user enters an analysis command with a time period:
 
-*Step 1.* User enters an analysis command (e.g. AnalyseCostsCommand). +
-*Step 2.* The appropriate parser parses the time period parameter, and assigns the respective `AnalysisPeriodType`
-value to the analysis command. +
-*Step 3.* The analysis command is executed, and the `AnalysisPeriodType` value is passed to the `ModelManager`. +
-*Step 4.* In the `ModelManager`, the relevant Predicate for the time period is retrieved.
+*Step 1.* User enters an analysis command (e.g. `costs -m`).
 
-The available Predicates corresponding to each `AnalysisPeriodType` are:
+*Step 2.* The appropriate parser (e.g. `AnalyseCostsCommandParser`) parses the time period parameter,
+and retrieves the `AnalysisPeriodType` value corresponding to the time period.
+
+*Step 3.* The relevant `TransactionPeriodPredicate` for the `AnalysisPeriodType` value is retrieved. It is assigned to an Analysis Command (e.g. `AnalyseCostsCommand`).
+
+The available `TransactionPeriodPredicate` s corresponding to each `AnalysisPeriodType` are:
 
 * `DAY`: `TransactionInADayPredicate`
 * `WEEK`: `TransactionInSevenDaysPredicate`
@@ -291,15 +288,19 @@ The available Predicates corresponding to each `AnalysisPeriodType` are:
 
 These are retrieved using `AnalysisPeriodType#getPeriodFilterPredicate()`.
 
-*Step 5.* The Predicate retrieved is passed to the filtered transaction list.
+*Step 4.* The analysis command is executed, and the `TransactionPeriodPredicate` predicate is passed to the appropriate `ModelManager`.
+This is done through the `analyseCosts()` method in the appropriate `ModelManager`.
+
+*Step 5.* In the appropriate `ModelManager` (Accountant or Manager), the predicate is passed to the filtered transaction list.
 This is in order to filter the transactions by their dates such that
 the filtered transaction list only contains transactions with dates within the relevant period.
 
 `FilteredList<Transaction>` handles the filtering using the given predicate.
 
 
-// INSERT DIAGRAM!!!!!!
+The following sequence diagram shows how the first part of the `AnalyseCostCommand` works, as described above:
 
+image::AnalyseCostsSequenceDiagram_p1.png[width="800"]
 
 ==== Implementation of `Analysis#analyseCost()`
 The actual analysis of costs continues from the the filtering of the filtered transaction list.
@@ -313,7 +314,8 @@ to the costs of the company. +
 
 Overall, the filtered transaction list will also be updated in the UI.
 
-*Step 2.* `ModelManager` passes control to the `AnalysisManager`. +
+*Step 2.* `ModelManager` passes control to the `AnalysisManager`.
+
 *Step 3.* In `AnalysisManager`, the helper method `AnalysisManager#calculateTotalCost()` is called
 to compute the total costs of the filtered transactions.
 
@@ -359,20 +361,19 @@ It is then returned to the calling function.
 ==== Design Considerations
 Aspect: Filtering the transactions by date
 
-* *Current implementation:* Passes a predicate to the filtered transaction list, before performing analyses using that list
+* *Current implementation:* Pass predicates to the filtered transaction list, before performing analyses using that list
 ** Pros:
 *** Extensible as more Predicates can be created and passed to the filtered transaction list to filter
 the transactions by different facets.
 *** Enhances reusability especially of the `updateFilteredTransactionList(Predicate predicate)` method.
 *** Allows the transaction list panel in the UI to be updated automatically.
 
-* Cons: We must ensure that the implementation of each Predicate is correct.
+** Cons: We must ensure that the implementation of each Predicate is correct.
 
 * *Alternative:* Loop through all transactions in the `TransactionList`, and check if the transaction date
 is within the desired time period
 ** Pros: Easy to implement.
 ** Cons: May have time performance issues if there are many transactions.
-
 // end::analyses[]
 
 //tag::commandPartition[]
