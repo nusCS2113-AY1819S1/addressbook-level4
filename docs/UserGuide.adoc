@@ -389,14 +389,23 @@ Removes the user with username `Alice` from the attendance of the 2nd event in t
 Admin/User: Shows event reminders for all upcoming events that you have registered for. +
 Format: `reminder`
 
-NOTE: Upcoming events are those that are occurring within the next 24 hours.
+[NOTE]
+====
+Upcoming events are those that are occurring within the next 24 hours.
+====
 
 ****
-* You will only receive reminders for events that they have *registered* for.
+* You will only receive reminders for events that you have *registered* for.
 * You have to be *logged-in* to receive reminders.
 * Reminders are *automatically* sent out every 6 hours, unless you initiate the command.
-* Close the event alert dialog using your mouse or by hitting 'enter' on your keyboard.
+* Close the reminder alert dialog using your mouse or by hitting 'enter' on your keyboard.
 ****
+
+--
+.Event Reminder Alert Dialog
+image::AlertDialog.png[width="400"]
+--
+
 // end::eventReminders[]
 
 // tag::eventStatus[]
@@ -406,18 +415,16 @@ Admin/User: Updates the statuses of events. +
 Format: `update`
 
 ****
-* Events that have already occurred will have the [COMPLETED] status.
-* Events that have yet to occur will have the [UPCOMING] status.
+* Events that have already occurred will have the image:Completed.png[width="100"] status.
+* Events that have yet to occur will have the image:Upcoming.png[width="100"] status.
 * The `update` command can be used *without* you having to log in.
 * Event statuses are automatically updated every 5 minutes.
 ****
 
-.A 'Completed' Status
-image::Completed.png[width="100"]
-.A 'Upcoming' Status
-image::Upcoming.png[width="100"]
-
-TIP: You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load and if the problem still persists, use the `update` command.
+[TIP]
+====
+You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load and if the problem still persists, use the `update` command.
+====
 // end::eventStatus[]
 
 
@@ -500,7 +507,7 @@ Format: `export FILENAME`
 Examples:
 
 * `export myCalendar` +
-Exports the iCalendar file with name 'myCalendar' to *folder that you store EventManager*
+Exports the iCalendar file with name 'myCalendar' to your *data* folder
 
 [NOTE]
 ====
