@@ -9,58 +9,31 @@
 
 == Overview
 
-=== Project Information
+=== Project & Product Information
 
-'Savee' is a desktop financial planner application my team created for our Software Engineering Principles module in
-Semester 1 of our 2nd year.
-
-I worked in a group of 4 members for the project and were each expected to make contributions to the project by adding
-both minor enhancements and major features to the software. Each group was initially provided with a base code written in
-Java with about 10 kLoC and was a simple Address Book desktop product. Our task was to morph the existing code into any
-other software we opted to.
-
-The module evaluated us based on our ability to work with existing base code and the quality of our new modifications to
-the existing code. Besides code, I also helped write User Guide and Developer Guide as well for the product
-as though my team were releasing an official product to simulate an actual project work schedule.
-
-=== Product Information
+'Savee' is a desktop financial planner application my team of 4 created for our Software Engineering Principles module in
+Semester 1 of our 2nd year. Our main project was to morph an existing code into any other software we opted to. We were
+ evaluated based on our ability to work with existing base code and the quality of our new modifications to
+the existing code. Besides code, I also helped write a User Guide and Developer Guide for the product.
 
 Users of Savee interact with its simple command-line interface (CLI), as well as its graphical user interface created
 using JavaFX. It is targeted at users who enjoy typing and are keen on managing their finances wellbeing responsibly
-using a desktop interface.
-
-The application revolves around usage of the CLI to manage one's finances. Users can store a `Record` consisting of
+using a desktop interface. The application revolves around usage of the CLI to manage one's finances. Users can store a `Record` consisting of
 `name`, `moneyflow`, `date` and `tags` of any form of financial activity in the application. `Moneyflow` would be the expenditure
 or income of the financial activity, `date` would be the actual date the activity was performed on and `tags` is a
 system for users to categorise their data.
 
-image::AutoComplete.png[width="950"]
-
-Above is a screenshot of my team's product on startup, as well as the key enhancement I made described in the next section.
-
 == Summary of Contributions
 
-=== *Major Enhancement #1*: ability to autocomplete text input
+=== *Major Enhancement*: ability to autocomplete text input
 
 ** *Function*: display a popup-box of suggested words to autocomplete with when user inputs parts of a word.
-** *Significance*: +
+** *Significance*: Improves the product significantly for users who may not be familiar with the software commands and can
+save time by keying in parts of a command word and simply complete the command using the list of suggested words.
 
-This enhancement improves the product significantly because users who may not be familiar with the software commands can
-save time using the software by keying in parts of a command word they want to use and simply complete the
-command using the list of suggested words. It also helps users to fill in command parameters which may be
-frequently used or likely to repeated.
-
-** *Key Highlights*:
-
-This enhancement was simple to implement but challenging to perfect in order to achieve the
-intended convenience it provides to users.
-
-I needed to accurately read the user input and provide a different range of suggestions depending on the
-command word input by the user as well as any other parameters that may be required by the command.
-While it may seem a simple feature, I wrote an extensive amount of code for this feature to ensure the auto complete
-performed its role successfully, which was to make the experience of typing on Savee more enjoyable. I implemented this
-enhancement for most of the commands in the software and as such, was no easy feat as every command
-                                                                                                   had its own unique format and function.
+** *Key Highlights*: To create an effective autocomplete by words instead of entire text, I needed to accurately read
+the the entire user input and provide a variable range of suggestions. While it may seem a simple feature, I wrote an extensive amount of code for this feature to ensure the auto complete
+performed its role successfully for most of the functions in our software.
 
 ** *Credits*: The Java TextFields (AutoComplete) Library and its inner classes were recreated and tweaked
 to achieve the necessary aims of our product autocomplete functionality.
@@ -68,55 +41,33 @@ to achieve the necessary aims of our product autocomplete functionality.
 === *Minor Enhancement #1*: ability to find data by tags
 
 ** *Function*: allows users to find and display all data with a specific attribute `tag`.
-** *Significance*: +
-
-As mentioned in <<Product Information>>, each piece of data can be categorised with up to 2 tags which is limited to
-1 word alphanumerics. This feature improves the product by providing another means of filtering data that they may
-wish to hide and show according to their needs.
-
-** *Key Highlights*: +
-
-This enhancement, while simple to implement, is still a key enhancement to complement the many other data filtering
-functions offered by Savee.
+** *Significance*: As mentioned in <<Product Information>>, each data can be categorised with tags. This feature
+improves the product by providing another means of filtering data according to their needs.
 
 === *Minor Enhancement #2*: ability to sort data
 
 ** *Function*: allows users to sort their data by a specific category and in a specific order
-** *Significance*: +
+** *Significance*: This feature improves the product by providing users with different means of manipulating
+and reorganising their data. This was a simple but much needed functionality.
+=
 
-This feature improves the product by providing users with another means of manipulating
-and reorganising their data to display in their desired manner. While there were other methods to organise data as
-well, there was no implementation yet to alter the order the records were displayed in.
+=== *Other Contributions*
 
-** *Key Highlights*: +
-
-This enhancement was slightly more challenging to implement than expected as it required use of
-multiple comparators as well as a suitable data structure that supported sorting. The base code utilised
-a *FilteredList* structure in order to set up the filters for the data search functions and hence did not
-support Sorting. Hence, while not an ideal implementation, sorting was performed on the underlying
-data structure which was a simple array list.
-
-* *Code contributed*:
-
-** [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tztzt&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Functional Code]] +
-
-* *Other contributions*:
+** [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tztzt&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Project Code]]
 
 ** Project management:
 *** Pull requests made had to be approved by one other team member and I helped to evaluate pull
 requests to ensure only necessary changes to the code was merged.
 
 ** Enhancements to existing features:
+*** Pull Requests reviewed (with non-trivial review comments) https://github.com/CS2113-AY1819S1-T09-4/main/pull/17[#17]
+
 *** Added and improved utility methods for comparison and sorting that were easily reusable.
 (Pull requests https://github.com/CS2113-AY1819S1-T09-4/main/pull/64/files[#64])
 
 ** Documentation:
 *** Made significant changes to reorganise User Guide user readability.
 (Pull Request https://github.com/CS2113-AY1819S1-T09-4/main/pull/114[#114])
-
-** Community:
-*** Pull Requests reviewed (with non-trivial review comments):
-https://github.com/CS2113-AY1819S1-T09-4/main/pull/17[#17]
 
 == Contributions to the User Guide
 
@@ -130,41 +81,17 @@ include::../UserGuide.adoc[tag=autocomplete-a]
 ==== Autocomplete for `add` Command
 include::../UserGuide.adoc[tag=autocomplete-b]
 
-==== Autocomplete for `list` Command
-include::../UserGuide.adoc[tag=autocomplete-c]
-
-==== Autocomplete for `find` Command
-include::../UserGuide.adoc[tag=autocomplete-d]
-
-==== Autocomplete for `findtag` Command
-include::../UserGuide.adoc[tag=autocomplete-e]
-
 ==== Autocomplete for `sort` Command
 include::../UserGuide.adoc[tag=autocomplete-f]
-
-==== Autocomplete for `deletedate` Command
-include::../UserGuide.adoc[tag=autocomplete-h]
 
 ==== Autocomplete for `summary` Command
 include::../UserGuide.adoc[tag=autocomplete-i]
 
-==== Autocomplete for `stats` Command
-include::../UserGuide.adoc[tag=autocomplete-j]
-
 ==== Autocomplete for `exportexcel` Command
 include::../UserGuide.adoc[tag=autocomplete-k]
 
-==== Autocomplete for `archive` Command
-include::../UserGuide.adoc[tag=autocomplete-l]
-
 ==== Autocomplete for `addlimit` Command
 include::../UserGuide.adoc[tag=autocomplete-m]
-
-==== Autocomplete for `deletelimit` Command
-include::../UserGuide.adoc[tag=autocomplete-n]
-
-==== Autocomplete for `editlimit` Command
-include::../UserGuide.adoc[tag=autocomplete-o]
 
 include::../UserGuide.adoc[tag=findtag]
 
