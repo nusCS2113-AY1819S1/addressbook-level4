@@ -15,7 +15,7 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 
 == Summary of contribution
 
-LINK TO CODE CONTRIBUTION
+https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=garagaristahir&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[Link to code contribution]
 
 ==== Main feature implemented:
 
