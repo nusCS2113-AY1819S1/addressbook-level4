@@ -1,0 +1,70 @@
+= Zhang Bo - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ClubHub
+
+---
+
+== Overview
+
+ClubHub is a desktop application for Club leaders or managers to manage their club. The user interacts with the program using a Command Line Interface (CLI), and it has a Graphic User Interface (GUI) created with JavaFX. It is written in Java and has about 10 thousand lines of codes.
+
+== Summary of Contributions:
+
+
+* *Major enhancement*: generate a calendar to record and manage events
+
+** *Event*
+*** An event contains four elements: name, venue, description, and date.
+
+** *addEvent*
+*** What it does: It allows users to add an event to the ClubHub.
+*** Justification: We design this command because it is necessary to add and event to the ClubHub to generate a event list, which can also be called as calendar If users want to use the it later.
+*** Highlights: This command is the most basic command but the most significant one.
+*** Example: `addEvent n/meeting v/meeting room D/be punctual d/10/12` ---Add an event named `meeting`, venue is `meeting room`, description is `be punctual`, date is `10/12`.
+
+** *deleteEvent*
+*** What it does: It allows users to delete a certain event.
+*** Highlights: This command is necessary for users when they made a mistakes and want to delete a certain event.
+*** Example: `delete 1` --- Delete the event who's index is 1.
+
+** *editEvent*
+*** What it does: It allows users to edit a existing event in the event list.
+*** Example: `editEvent 1 n/meeting v/university town D/bring your materials d/10/12` ---Edit the event who's index is 1.
+
+** *listEvent*
+*** What it does: It allows users to list all the events in the ClubHub.
+*** Example: `listEvent`
+
+
+** *Code contributed* [https://github.com/CS2113-AY1819S1-T09-3/main[functional code]] [[test code]]
+
+** *Other contribution*
+*** Fixed many checkstyle errors in our team(Pull Request #102, #96, #64).
+*** Fix some bus of my teammate. (example: change the date format from “[0-2][0-9]||3[0-1]/1[0-2]||[0-9]” to “0[1-9]||[1-2][0-9]||3[0-1]/[1[0-2]||0[1-9]” .
+*** Contributions to forum discussion.
+
+== Contribution to User Guide
+
+
+include::../UserGuide.adoc[tag = calendar]
+
+
+== Contribution to Developer Guide
+
+
+include::../DeveloperGuide.adoc[tag = events]
+
+** *Design considerations*
+
+*** *Aspect: implementation of listEvent*
+**** Alternative 1 (current choice): list all the events in the event list.
+***** It will list all the events with the index order 1,2,3...
+
+**** Alternative 2 : list all the events sorted by date.
+***** It will sort the events with their date and list all of them out.
+
+
+

@@ -1,19 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.MemberCommand.AddMemberCommand;
-import seedu.address.logic.commands.MemberCommand.EditMemberCommand.EditPersonDescriptor;
-import seedu.address.model.ledger.Ledger;
-import seedu.address.model.member.Person;
-import seedu.address.model.tag.Tag;
 
-import java.util.Set;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.address.logic.commands.MemberCommand.AddMemberCommand;
+import seedu.address.model.ledger.Ledger;
 
 /**
  * A utility class for Person.

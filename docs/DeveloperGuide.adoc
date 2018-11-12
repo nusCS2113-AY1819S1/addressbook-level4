@@ -164,15 +164,17 @@ Note how the event is propagated through the `EventsCenter` to the `Storage` and
 
 The sections below give more details of each component.
 
+// tag::ui[]
 [[Design-Ui]]
 === UI component
 
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
+// end::ui[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `LedgerListPanel`, `EventListPanel`, `ItemListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -222,11 +224,13 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
+// tag::storage[]
 [[Design-Storage]]
 === Storage component
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
+// end::storage[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
@@ -303,16 +307,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 image::UndoRedoActivityDiagram.png[width="650"]
 
-// tag::undoallredoall[]
-Step 7. The user executes many `add`, `delete`, and `clear` commands over a couple of hours, but decides at the end of the day that he does not want all the changes. He decides to undo all the changes by executing the `undoAll` command. The 'undoAll' command will call 'Model#undoAllAddressBook(), which will shift the 'currentStatePointer' to the start of the `addressBookStateList`, pointing it to the original address book state, and restores the address book to that state.
-
-image::UndoRedoExecuteUndoAllStateListDiagram.png[width="800"]
-
-Step 8. The user decides again that he wants all the changes after all, and decides to execute the `redoAll` command. `Model#redoAllAddressBook()` is called, shifts the currentStatePointer to the end of `addressBookStateList`, pointing to the furthest undone state, and restores the address book to that state.
-
-image::UndoRedoExecuteRedoAllStateListDiagram.png[width="800"]
-// end::undoallredoall[]
-
 ==== Design Considerations
 
 ===== Aspect: How undo & redo executes
@@ -333,6 +327,19 @@ image::UndoRedoExecuteRedoAllStateListDiagram.png[width="800"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
+
+// tag::undoallredoall[]
+=== UndoAll/RedoAll feature
+==== Extension of Undo/Redo feature
+
+Step 1. The user executes many `add`, `delete`, and `clear` commands over a couple of hours, but decides at the end of the day that he does not want all the changes. He decides to undo all the changes by executing the `undoAll` command. The 'undoAll' command will call 'Model#undoAllAddressBook(), which will shift the 'currentStatePointer' to the start of the `addressBookStateList`, pointing it to the original address book state, and restores the address book to that state.
+
+image::UndoRedoExecuteUndoAllStateListDiagram.png[width="800"]
+
+Step 2. The user decides again that he wants all the changes after all, and decides to execute the `redoAll` command. `Model#redoAllAddressBook()` is called, shifts the currentStatePointer to the end of `addressBookStateList`, pointing to the furthest undone state, and restores the address book to that state.
+
+image::UndoRedoExecuteRedoAllStateListDiagram.png[width="800"]
+// end::undoallredoall[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -405,7 +412,8 @@ UniquePersonList instead.
 
 === Events
 
-We create an Events package in modle, to combine the event element such as name and venue into an event list. In the Commands package, we create an package named EventCommand, which the commands are stored in. We have totally four commands:
+We create an Events package in model, to combine the event element such as name and venue into an event list. In the Commands package, we create an package named EventCommand, which the commands are stored in. We have totally four commands:
+
 * `addEventsCommand` -- Add a new event to the event list.
 * `editEvent` -- Change the information of the existing event.
 * `listEvent` -- List all the existing events.
