@@ -3,19 +3,6 @@ package seedu.address.testutil;
 import seedu.address.model.ledger.Account;
 import seedu.address.model.ledger.DateLedger;
 import seedu.address.model.ledger.Ledger;
-import seedu.address.model.member.Address;
-import seedu.address.model.member.Email;
-import seedu.address.model.member.Major;
-import seedu.address.model.member.Name;
-import seedu.address.model.member.Person;
-import seedu.address.model.member.Phone;
-import seedu.address.model.member.Postalcode;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
-
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * A utility class to help with building Person objects.
  */

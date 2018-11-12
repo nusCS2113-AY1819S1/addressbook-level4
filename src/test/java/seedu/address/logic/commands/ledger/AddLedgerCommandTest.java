@@ -2,6 +2,11 @@ package seedu.address.logic.commands.ledger;
 
 
 import static org.junit.Assert.assertEquals;
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -21,11 +26,6 @@ import seedu.address.model.member.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.LedgerBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
 
 public class AddLedgerCommandTest {
 
