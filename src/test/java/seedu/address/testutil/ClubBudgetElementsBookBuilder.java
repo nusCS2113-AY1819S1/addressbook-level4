@@ -20,7 +20,7 @@ public class ClubBudgetElementsBookBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code ClubBudgetElements} to the {@code ClubBudgetElementsBook} that we are building.
      */
     public ClubBudgetElementsBookBuilder withClubBudgetElements(ClubBudgetElements clubBudgetElements) {
         clubBudgetElementsBook.addClub(clubBudgetElements);

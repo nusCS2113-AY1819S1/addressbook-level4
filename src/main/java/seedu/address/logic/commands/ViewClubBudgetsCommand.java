@@ -9,7 +9,6 @@ import seedu.address.logic.BudgetCalculationManager;
 import seedu.address.logic.CommandHistory;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-//import seedu.address.model.FinalBudgetsBook;
 import seedu.address.model.Model;
 import seedu.address.model.budgetelements.ClubName;
 import seedu.address.model.clubbudget.FinalClubBudget;
@@ -62,7 +61,7 @@ public class ViewClubBudgetsCommand extends Command {
                 FinalClubBudget currentBudget = listOfBudgets.get(i);
 
                 if (currentBudget.getClubName().equals(toShow)) {
-                    budgetToShow = Integer.toString(currentBudget.getAllocatedBudget());
+                    budgetToShow = Double.toString(currentBudget.getAllocatedBudget());
                     return new CommandResult(String.format(MESSAGE_SUCCESS, budgetToShow));
                 }
 

@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -15,6 +14,7 @@ import seedu.address.model.searchhistory.KeywordType;
 public class IncludeNameFindCommand extends FindCommand {
 
     private final NameContainsKeywordsPredicate predicate;
+    private final KeywordType type = KeywordType.IncludeNames;
 
     public IncludeNameFindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
@@ -23,12 +23,8 @@ public class IncludeNameFindCommand extends FindCommand {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.recordKeywords(KeywordType.IncludeNames, predicate.getLowerCaseKeywords());
-        model.executeSearch(predicate);
-        String keywordHistoryString = getKeywordHistoryString(model.getReadOnlyKeywordsRecord());
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
-                        + keywordHistoryString);
+        executeSearch(model, predicate, type, predicate.getLowerCaseKeywords());
+        return getCommandResultWithKeywordsHistory(model);
     }
 
     @Override

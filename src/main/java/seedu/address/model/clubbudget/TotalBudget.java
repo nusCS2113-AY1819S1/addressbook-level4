@@ -11,7 +11,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TotalBudget {
 
     public static final String MESSAGE_TOTAL_BUDGET_CONSTRAINTS =
-            "Please enter a valid total budget! Total Budget can only be positive numbers, even zero.";
+            "Please enter a valid total budget! Total Budget can only be positive whole numbers, i.e. even zero.";
     public static final String TOTAL_BUDGET_VALIDATION_REGEX = "\\d{1,}";
     public final String value;
 

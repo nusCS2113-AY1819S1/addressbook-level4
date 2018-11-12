@@ -12,7 +12,7 @@ public class FinalClubBudgetBuilder {
     public static final String DEFAULT_ALLOCATED_BUDGET = "1000";
 
     private ClubName clubName;
-    private int allocatedBudget;
+    private double allocatedBudget;
 
     public FinalClubBudgetBuilder() {
         clubName = new ClubName(DEFAULT_CLUB_NAME);
