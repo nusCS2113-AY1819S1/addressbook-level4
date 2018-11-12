@@ -57,6 +57,39 @@ include::../UserGuide.adoc[tag = Calendar]
 
 include::../DeveloperGuide.adoc[tag = Calendar]
 
+=== Events
+
+We create an Events package in model, to combine the event element such as name and venue into an event list. In the Commands package, we create an package named EventCommand, which the commands are stored in. We have totally four commands:
+
+* `addEventsCommand` -- Add a new event to the event list.
+* `editEvent` -- Change the information of the existing event.
+* `listEvent` -- List all the existing events.
+* `deleteEvent` -- Delete the a certain event.
+
+The AddEvent/DeleteEvent mechanism is facilitated by `AddressBook`.
+It extends `AddressBook` with the `AddEvent` and `DeleteEvent` methods, and implements the following operations:
+
+* `AddressBook#addEvent()` -- Adds an `Event` object to the `UniqueEventList`.
+* `AddressBook#deleteEvent()` -- Removes an `Event` object from the `UniqueEventList`.
+
+These operations are exposed in the `Model` interface as `Model#addEvent()` and `Model#removeEvent()` respectively.
+
+Below is a scenario of how a user adds an `Event` into the club book.
+
+Step 1. The user inputs the command addEvent n/[eventName] v/[eventVenue] D/[eventDescription] d[eventDate] into the command box.
+
+Step 2. The `CommandBox` UI will create a `Logic` object which parses the command to ascertain that it is an `addEvent` command.
+
+Step 3. The `AddressBookParser` will then parse the command to create a new `addEventParser` object.
+
+Step 4. This `addEventParser` will parse the arguments of the command line and create a new `AddEvent` object.
+
+Step 5. This will then be put into the `model`, into the `VersionedAddressBook`.
+
+The `Event` class creates an object that instantiates an `EventName` object, an `EventVenue`, an `EventDescription` and an `EventDate` objects. The multiple `Event` objects created will be stored in a `UniqueEventList`, where the uniqueness of every `Event` is in its `EventName`.
+
+This uniqueness is attained by comparing the `EventName` object in the `Event` to be added and the `Event's already in the `UniqueEventList` using the `getEventName()` method in `Event`.
+
 ** *Design considerations*
 
 *** *Aspect: implementation of listEvent*
