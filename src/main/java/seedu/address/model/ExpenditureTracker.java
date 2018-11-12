@@ -11,8 +11,7 @@ import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.expenditureinfo.ExpenditureList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the Expenditure Tracker level
  */
 public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
 
@@ -30,7 +29,7 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
     public ExpenditureTracker() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an Expenditure Tracker using the Expenditures in the {@code toBeCopied}
      */
     public ExpenditureTracker(ReadOnlyExpenditureTracker toBeCopied) {
         this();
@@ -40,15 +39,14 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the expenditure list with {@code expenditures}.
      */
     public void setExpenditures(List<Expenditure> expenditures) {
         this.expenditures.setExpenditures(expenditures);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Expenditure Tracker} with {@code newData}.
      */
     public void resetData(ReadOnlyExpenditureTracker newData) {
         requireNonNull(newData);
@@ -66,11 +64,10 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
     }
 
 
-    //// person-level operations
+    //// expenditure-level operations
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds an expenditure to the expenditure tracker.
      */
     public void addExpenditure(Expenditure e) {
         expenditures.add(e);
@@ -91,7 +88,7 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
     }
 
     /**
-     * Removes a person to the address book.
+     * Removes an expenditure of the expenditure tracker.
      */
     public void removeExpenditure(Expenditure key) {
         expenditures.remove(key);
