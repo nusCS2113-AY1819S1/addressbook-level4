@@ -27,8 +27,11 @@ It also has a Graphical User Interface created with JavaFX and has a codebase of
    Enables job agents to record and access required information of job candidates, job offers and companies in RecruitBook efficiently.
 
 * *Minor enhancement #1*: +
-Added a functionality that changes the logic state of LogicManager +
+Added a functionality that changes the logic state of LogicManager  +
 * *Minor enhancement #2*: +
+Added a functionality that allows user to delete multiple entries and multiple indexes +
+* *Minor enhancement #3*: +
+Added the ability to set a password to password protect RecruitBook +
 
 * *Code contributed*: [https://github.com/CS2113-AY1819S1-F09-4/main/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Aclosed+assignee%3Asxqnicholas96+[Pull Requests]]
 
