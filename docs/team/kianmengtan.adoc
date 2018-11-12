@@ -28,11 +28,8 @@ This fundamental feature proved to be extremely important for other features imp
 ** Justification: `Find` command returns a very general list of entries based on the searched criteria and might still be a broad list based on the number of entries in the database.
 As such, having a `filter` command to locate the specific entries makes it more convenient and user-friendly for the user.
 ** Highlights: This enhancement allows the user to look locate the entry easily if he/she already knows what to look for
-e.g. `filterj c/Google j/Software Engineer s/4000` will return only `Software Engineer` jobs from `Google` that has a starting pay of at least $`4000`.
 
 * *Minor enhancement*: automatically switches the user interface to the correct book when a command belonging to the other book is entered.
-** What it does: RecruitBook contains two books namely the CandidateBook and CompanyBook which allows user to find and filter entries based on the books that they are on.
-Entering a `findC [prefix][keyword]` command to find companies in the CandidateBook automatically switches the user's view to the CompanyBook and displays the correct intended results. Doing so otherwise yields the opposite result.
 ** Credits: used methods `ShowCandidateBookRequestEvent()` and `ShowCompanyBookRequestEvent()` that were implemented by my colleague https://github.com/orgs/CS2113-AY1819S1-F09-4/people/leerachel[leerachel] to switch the current view to the respective views.
 
 * **Code contributed**:
