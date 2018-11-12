@@ -929,7 +929,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -968,7 +968,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -992,7 +992,7 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 [discrete]
-
+// end::studcourseusecases[]
 === Use case: Add Student
 *Precondition(s)* :
 
@@ -1000,7 +1000,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1039,7 +1039,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1077,7 +1077,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1115,7 +1115,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1154,7 +1154,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1192,7 +1192,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1238,7 +1238,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1284,7 +1284,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1324,7 +1324,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1358,7 +1358,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1403,7 +1403,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1444,7 +1444,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1472,7 +1472,7 @@ Use case resumes at step 1.
 ** 2c1. System shows 'no courses in system' message.
 +
 Use case resumes at step 1.
-// end::studcourseusecases[]
+
 
 [discrete]
 === Use case: Add module
@@ -1922,7 +1922,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1977,7 +1977,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2035,7 +2035,7 @@ Use case resumes from step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2066,7 +2066,7 @@ Use case resumes from step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2096,7 +2096,7 @@ Use case resumes from step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2127,7 +2127,7 @@ Use case resumes from step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2154,7 +2154,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2182,7 +2182,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2210,7 +2210,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2246,7 +2246,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2282,7 +2282,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2324,7 +2324,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2359,7 +2359,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2387,7 +2387,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2416,7 +2416,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2454,7 +2454,7 @@ Use case ends.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2488,7 +2488,7 @@ Use case ends.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2586,7 +2586,7 @@ Use case resumes at step 2.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2619,7 +2619,7 @@ Use case ends.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
