@@ -2284,6 +2284,8 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: Enter `list d/1-1-2018 12-12-2018`
 .. Expected: System will list all records equal to or between the 2 dates
 
+
+
 === Viewing summary
 . Entering `summary` command without modes
 .. Test case: Enter `summary abcd`

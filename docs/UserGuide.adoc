@@ -544,7 +544,6 @@ image::UiSummaryByMonthTable.png[width="790"]
 
 image::UiSummaryByCategoryTable.png[width="790"]
 *Screenshot of app when `summary category d/1-1-2018 12-12-2018` is run*
-// end::summary[]
 
 Auto-Completion: +
 // tag::autocomplete-i[]
@@ -581,18 +580,18 @@ Format:`stats d/START_DATE END_DATE`
 Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range. +
 At the same time, currently selected record will be unselected to reduce confusion for the user. If there are many categories shown and
 the box is not large enough, you can use the scroll bar at the side of each legend to view the other categories which are not in view.
-// end::stats[]
+
 
 [NOTE]
 Due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
 is too small. To improve readability, we have decided to hide some labels in such scenarios. Also, when the label is too long, since the pie charts
 need to fit the labels, the pie chart may become small as a result. To prevent such situations, please keep your labels short. This will be improved in
 later versions of the product to remove the labels completely and use a mouse over input instead.
-// tag::stats[]
+// end::stats[]
 Examples:
 
 * `stats d/1-1-2018 12-12-2018`
-// end::stats[]
+
 Below are some screenshots of what you can see when the command has been accepted. The commands entered have been left
 in for visualisation purposes. These screenshots are taken in *fullscreen mode* at 1080p resolution.
 
@@ -601,8 +600,6 @@ image::UiPieChartExpense.png[width="790"]
 
 image::UiPieChartIncome.png[width="790"]
 *Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run*
-
-// end::stats[]
 
 Auto-Completion: +
 // tag::autocomplete-j[]
