@@ -28,7 +28,7 @@ ClubHub is a desktop application for Club leaders or managers to manage their cl
 ** *deleteEvent*
 *** What it does: It allows users to delete a certain event.
 *** Highlights: This command is necessary for users when they made a mistakes and want to delete a certain event.
-*** Example: `delete 1` --- Delete the event who's index is 1.
+*** Example: `delete 1` --- Delete the event whose index is 1.
 
 ** *editEvent*
 *** What it does: It allows users to edit a existing event in the event list.
