@@ -134,10 +134,10 @@ Each of the four components
 * Exposes its functionality using a `{Component Name}Manager` class.
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
-
+// tag::logicclassdiagram[]
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[width="800"]
-
+// end::logicclassdiagram[]
 [discrete]
 ==== Events-Driven nature of the design
 
@@ -161,9 +161,10 @@ The sections below give more details of each component.
 
 [[Design-Ui]]
 === UI component
-
+// tag::uiclassdiagram[]
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
+// tag::uiclassdiagram[]
 
 *API* : link:{repoURL}/src/main/java/seedu/productInfo/ui/Ui.java[`Ui.java`]
 
@@ -933,6 +934,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
+// tag::productuserstories[]
 |`* * *` |self-employed provision shop owner |see usage instructions |refer to instructions when I forget how to use the App
 
 |`* * *` |self-employed provision shop owner |add a new product to my record of products | keep track of all the products that my shop owns
@@ -942,7 +944,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |self-employed provision shop owner |find a product by name | locate details of products without having to go through the entire list
 
 |`* * *` |self-employed provision shop owner |find a product by relevant tags | retrieve a list of products that are of a certain type
-
+// end::productuserstories[]
+// tag::distributoruserstories[]
 |`* * *` |self-employed provision shop owner |add a distributor to my record of distributors | keep track of who supplies my products to me
 
 |`* * *` |self-employed provision shop owner |delete a distributor from my record of distributors | declutter the distributors I keep in contact with if I choose to stop business with a certain distributor
@@ -954,7 +957,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |self-employed provision shop owner |find a distributor by relevant tags | retrieve a list of distributors who supply a certain type of products
 
 |`* * *` |self-employed provision shop owner |view what products a distributor supplies | retrieve a list of all the products that a distributor supplies at one go, in case I need to make an order
-
+// end::distributoruserstories[]
 |`* *` |self-employed provision shop owner |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many products in the productInfo book |sort products by name |locate a product easily
