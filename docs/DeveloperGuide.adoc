@@ -565,7 +565,7 @@ Implementation of exporting to CSV is provided below. +
 2. For each Note object to be exported, a corresponding CsvAdaptedNote object will be created. It is used to generate the correct formatting for the Google Calendar. +
 3. A CSV utility class will then be used to handle the writing to CSV. The file is saved to "/data/CSVexport" folder in the application's directory. +
 
-The following sequence diagrams shows the note exporting process:
+The following sequence diagram shows the note exporting process:
 
 image::NoteExportSequenceDiagram.png[width="1000"]
 
