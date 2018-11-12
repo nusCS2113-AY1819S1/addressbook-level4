@@ -94,7 +94,7 @@ CAUTION: You are required to to enter a password that contains more or equal to 
 To ensure that your account is well-protected, do use a password that is not common.
 
 === Registering: `register` (`re`)
-Command: `register u/[Username] pw/[Password] e/[Email] p/[MobilePhone] a/[Address]`
+Command: `register u/USERNAME pw/PASSWORD e/[EMAIL] p/[MOBILEPHONE] a/[ADDRESS]`
 
 Examples:
 

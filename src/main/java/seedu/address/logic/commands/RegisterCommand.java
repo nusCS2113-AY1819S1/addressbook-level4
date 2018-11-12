@@ -31,7 +31,7 @@ public class RegisterCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_USERNAME + "John Doe "
+            + PREFIX_USERNAME + "John Goe "
             + PREFIX_PASSWORD + "testpassword "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -39,7 +39,7 @@ public class RegisterCommand extends Command {
             + PREFIX_TAG + "CS2113T ";
 
     public static final String MESSAGE_SUCCESS = "New person registered: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in FreeTime";
 
     private final Person toAdd;
     private final String password;

@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.security.SecurityAuthenticationException;
 
 /**
- * Lists all persons in the address book to the user.
+ * Logout the user
  */
 public class LogoutCommand extends Command {
 
