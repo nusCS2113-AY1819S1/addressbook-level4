@@ -12,11 +12,14 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.commands.GradebookDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Contains tests for GradebookDeleteCommandParser.
+ */
 public class GradebookDeleteCommandParserTest {
-    private GradebookDeleteCommandParser parser = new GradebookDeleteCommandParser();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private GradebookDeleteCommandParser parser = new GradebookDeleteCommandParser();
 
     @Test
     public void parse_invalidFormat_throwsParseException() throws ParseException {

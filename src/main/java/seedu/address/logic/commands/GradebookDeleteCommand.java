@@ -37,6 +37,7 @@ public class GradebookDeleteCommand extends Command {
      * Command deletes a gradebook component.
      */
     public GradebookDeleteCommand(String moduleCode, String gradebookComponentName) {
+        requireNonNull(moduleCode, gradebookComponentName);
         gradebookManager = new GradebookManager();
         gradesManager = new GradesManager();
         this.toDeleteGradebookComponent = gradebookManager.findGradebookComponent(moduleCode, gradebookComponentName);
