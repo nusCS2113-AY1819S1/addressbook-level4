@@ -18,7 +18,7 @@ import seedu.planner.model.record.exceptions.RedundantLimitDatesException;
  * Once these two dates are confirmed, the user will be able to remove or modify the certain limit.
  * Since during the same dates period, having two different limit money is meaningless.
  */
-public class DateBasedLimitList { //implements Iterable<Limit> {
+public class DateBasedLimitList { 
 
     private final ObservableList<Limit> internalList = FXCollections.observableArrayList();
 
