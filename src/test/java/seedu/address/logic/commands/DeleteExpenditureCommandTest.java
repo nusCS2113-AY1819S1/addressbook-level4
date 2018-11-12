@@ -31,7 +31,7 @@ public class DeleteExpenditureCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void executeValidIndexUnfilteredListSuccess() {
         Expenditure expenditureToDelete =
                 model.getFilteredExpenditureList().get(INDEX_FIRST_EXPENDITURE.getZeroBased());
         DeleteExpenditureCommand deleteExpenditureCommand = new DeleteExpenditureCommand(INDEX_FIRST_EXPENDITURE);
@@ -47,7 +47,7 @@ public class DeleteExpenditureCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void executeInvalidIndexUnfilteredListThrowsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredExpenditureList().size() + 1);
         DeleteExpenditureCommand deleteExpenditureCommand = new DeleteExpenditureCommand(outOfBoundIndex);
 
@@ -56,7 +56,7 @@ public class DeleteExpenditureCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void executeValidIndexFilteredListSuccess() {
         showExpenditureAtIndex(model, INDEX_FIRST_EXPENDITURE);
 
         Expenditure expenditureToDelete =
@@ -75,7 +75,7 @@ public class DeleteExpenditureCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void executeInvalidIndexFilteredListThrowsCommandException() {
         showExpenditureAtIndex(model, INDEX_FIRST_EXPENDITURE);
 
         Index outOfBoundIndex = INDEX_SECOND_EXPENDITURE;
@@ -111,7 +111,7 @@ public class DeleteExpenditureCommandTest {
     }*/
 
     @Test
-    public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
+    public void executeUndoRedoInvalidIndexUnfilteredListFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredExpenditureList().size() + 1);
         DeleteExpenditureCommand deleteExpenditureCommand = new DeleteExpenditureCommand(outOfBoundIndex);
 
