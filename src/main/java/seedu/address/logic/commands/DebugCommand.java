@@ -83,8 +83,8 @@ public class DebugCommand extends Command {
                 new ModuleName("Engineering Principles and Practices I")));
         moduleManager.addModule(new Module(new ModuleCode("IS3150"),
                 new ModuleName("Digital Media Marketing")));
-        moduleManager.addModule(new Module(new ModuleCode("CG2271"),
-                new ModuleName("Real Time Operating Systems")));
+        moduleManager.addModule(new Module(new ModuleCode("NM2213"),
+                new ModuleName("Introduction to Human-Computer Interaction Design")));
         moduleManager.addModule(new Module(new ModuleCode("CS1010"),
                 new ModuleName("Programming Methodology")));
         moduleManager.addModule(new Module(new ModuleCode("CS2040C"),
