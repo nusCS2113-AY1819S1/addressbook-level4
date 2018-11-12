@@ -16,9 +16,8 @@ Event Manager is a desktop address book application used for managing events in 
 ** What it does: Allows users to indicate their attendance for events, and view the usernames of other attendees.
 ** Justification: This feature allows event ICs to have an idea of the number of attendees for planning purposes, as well as users to see who else is attending the event so they might connect with people they know.
 ** Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: -
 
-* *Minor enhancement*: Created EventSearchPage to display all event details on selection.
+* *Minor enhancement*: Formatting and display of event page in BrowserPanel
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
 
@@ -31,7 +30,6 @@ Event Manager is a desktop address book application used for managing events in 
 *** Updated User and Developer Guides to describe new features: https://github.com/CS2113-AY1819S1-T12-1/main/pull/81[#81]
 ** Community:
 *** PRs reviewed: https://github.com/CS2113-AY1819S1-T12-1/main/pull/22[#22], https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58], https://github.com/CS2113-AY1819S1-T12-1/main/pull/59[#59]
-** Tools: -
 
 == Contributions to the User Guide
 
@@ -50,4 +48,5 @@ include::../UserGuide.adoc[tag=rsvp]
 |===
 
 include::../DeveloperGuide.adoc[tag=rsvp]
+include::../DeveloperGuide.adoc[tag=rsvpUsecase]
 
