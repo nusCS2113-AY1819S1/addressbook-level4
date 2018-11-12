@@ -16,7 +16,7 @@ import seedu.planner.model.record.MoneyFlow;
  * Xml Adapted Limit
  */
 public class XmlAdaptedLimit {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Limit's %s field is missing!";
+    private static final String MISSING_FIELD_MESSAGE_FORMAT = "Limit's %s field is missing!";
 
     @XmlElement(required = true)
     private String dateStart;
@@ -40,7 +40,6 @@ public class XmlAdaptedLimit {
 
     /**
      * Given Limit type constructor.
-     * @param limit
      */
     public XmlAdaptedLimit(Limit limit) {
         this.dateStart = limit.getDateStart().value;
@@ -50,8 +49,6 @@ public class XmlAdaptedLimit {
 
     /**
      * Change the xml file storage into the actual limit module.
-     * @return
-     * @throws IllegalValueException
      */
     public Limit toModelType() throws IllegalValueException {
         if (dateStart == null) {

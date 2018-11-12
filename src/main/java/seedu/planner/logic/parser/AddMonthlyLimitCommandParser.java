@@ -38,7 +38,7 @@ public class AddMonthlyLimitCommandParser implements Parser<AddMonthlyLimitComma
         }
         MoneyFlow money = ParserUtil.parseMoneyFlow(moneyString);
         dateSpecial = ParserUtil.parseDate(DATE_SPECIAL_FOR_MONTHLY);
-        Limit limit = new Limit(dateSpecial, dateSpecial, money);
+        Limit limit = new Limit(dateSpecial, money);
 
         return new AddMonthlyLimitCommand(limit);
     }

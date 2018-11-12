@@ -27,14 +27,14 @@ public class EditMonthlyLimitCommand extends Command {
     public static final String MESSAGE_FAILURE = "There is no monthly limit. \n";
     public static final String MESSAGE_SAME_LIMIT = "The edited monthly is same as the original monthly limit";
 
-    private Limit limit;
+    private Limit newLimit;
     private Limit originalLimit;
 
     private String output;
 
     public EditMonthlyLimitCommand (Limit limitIn) {
         requireNonNull(limitIn);
-        limit = limitIn;
+        newLimit = limitIn;
 
     }
 
@@ -42,20 +42,20 @@ public class EditMonthlyLimitCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
-        if (!model.hasSameDateLimit(limit)) {
+        if (!model.hasSameDateLimit(newLimit)) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-        originalLimit = model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd());
-        model.updateLimit(originalLimit, limit);
-        if (originalLimit.equals(limit)) {
+        originalLimit = model.getSameDatesLimit(newLimit.getDateStart(), newLimit.getDateEnd());
+        model.updateLimit(originalLimit, newLimit);
+        if (originalLimit.equals(newLimit)) {
             throw new CommandException(MESSAGE_SAME_LIMIT);
         }
         output = MESSAGE_SUCCESS + "Original Limit:\n"
                 + model.generateLimitOutput(model.isExceededLimit(originalLimit),
                 model.getTotalSpend(originalLimit), originalLimit)
                 + "Modified Limit: \n"
-                + model.generateLimitOutput(model.isExceededLimit(limit),
-                model.getTotalSpend(limit), limit);
+                + model.generateLimitOutput(model.isExceededLimit(newLimit),
+                model.getTotalSpend(newLimit), newLimit);
         model.commitFinancialPlanner();
         return new CommandResult(output);
     }
@@ -64,6 +64,6 @@ public class EditMonthlyLimitCommand extends Command {
     public boolean equals (Object other) {
         return other == this // short circuit if same object
                 || (other instanceof seedu.planner.logic.commands.EditMonthlyLimitCommand // instanceof handles nulls
-                && limit.equals(((seedu.planner.logic.commands.EditMonthlyLimitCommand) other).limit));
+                && newLimit.equals(((seedu.planner.logic.commands.EditMonthlyLimitCommand) other).newLimit));
     }
 }
