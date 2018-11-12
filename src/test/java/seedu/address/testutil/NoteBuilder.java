@@ -97,6 +97,22 @@ public class NoteBuilder {
     }
 
     /**
+     * Sets all properties of Note to null.
+     */
+    public NoteBuilder withAllNull() {
+        this.moduleCode = null;
+        this.title = null;
+        this.startDate = null;
+        this.startTime = null;
+        this.endDate = null;
+        this.endTime = null;
+        this.location = null;
+        this.noteText = null;
+
+        return this;
+    }
+
+    /**
      * Sets the {@code startDate} of the {@code Note} to null.
      */
     public NoteBuilder withNullStartDate() {

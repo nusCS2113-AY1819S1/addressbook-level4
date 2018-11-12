@@ -278,7 +278,7 @@ public class ParserUtil {
      */
     public static NoteDate parseNoteDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.trim().replaceAll(" +", " ");
+        String trimmedDate = date.trim().replaceAll("\\s+", " ");
         if (!NoteDate.isValidDate(trimmedDate)) {
             throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
@@ -295,7 +295,7 @@ public class ParserUtil {
      */
     public static NoteTime parseNoteTime(String time) throws ParseException {
         requireNonNull(time);
-        String trimmedTime = time.trim().replaceAll(" +", " ");
+        String trimmedTime = time.trim().replaceAll("\\s+", " ");
         if (!NoteTime.isValidTime(trimmedTime)) {
             throw new ParseException(MESSAGE_INVALID_TIME_FORMAT);
         }
@@ -326,7 +326,7 @@ public class ParserUtil {
     public static NoteLocation parseNoteLocation(String location) throws ParseException {
         requireNonNull(location);
         String trimmedLocation = location.trim();
-        if (!NoteTitle.isValidTitle(trimmedLocation)) {
+        if (!NoteLocation.isValidLocation(trimmedLocation)) {
             throw new ParseException(NoteLocation.MESSAGE_LOCATION_EXCEED_MAX_CHAR_COUNT);
         }
         return new NoteLocation(trimmedLocation);
