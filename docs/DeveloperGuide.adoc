@@ -1228,6 +1228,7 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 
+// tag::rsvpTestingInstructions[]
 === Displaying event details
 
 . Viewing event details with special characters
@@ -1300,4 +1301,4 @@ Username of target attendee `Charlotte Oliveiro` is not in the attendance of the
    Expected: Target attendee does not exist in second event. Error details shown in the status message. Status bar remains the same.
 .. Test case: `removeAttendee x u/Charlotte Oliveiro` (where x is non-positive, larger than the list size or not an integer) +
    Expected: Target user is not removed from attendance of any event. Error details shown in the status message. Status bar remains the same.
-
+// end::rsvpTestingInstructions[]
