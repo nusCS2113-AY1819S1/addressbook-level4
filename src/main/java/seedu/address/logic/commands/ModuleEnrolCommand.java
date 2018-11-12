@@ -58,13 +58,14 @@ public class ModuleEnrolCommand extends Command {
             throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, moduleCode.moduleCode));
         }
 
+        Module moduleToEnrol = moduleManager.getModuleByModuleCode(moduleCode.moduleCode);
+
         int numEnrolled = 0;
         int numDuplicates = 0;
         int numInvalid = 0;
         StringBuilder sb = new StringBuilder();
         for (MatricNo matricNo : matricNoSet) {
             if (studentManager.doesStudentExistForGivenMatricNo(matricNo.matricNo)) {
-                Module moduleToEnrol = moduleManager.getModuleByModuleCode(moduleCode.moduleCode);
                 Person studentToEnrol = studentManager.retrieveStudentByMatricNo(matricNo.matricNo);
 
                 if (moduleManager.isStudentEnrolledInModule(moduleToEnrol, studentToEnrol)) {
@@ -100,7 +101,8 @@ public class ModuleEnrolCommand extends Command {
                 numInvalid, determinePluralOrSingularForStudent(numInvalid),
                 determinePluralOrSingularForDo(numInvalid)));
 
-        return new CommandResult(sb.toString());
+        return new CommandResult(sb.toString(),
+                ModuleManager.getInstance().getModuleAsHtmlRepresentation(moduleToEnrol));
     }
 
     /**
