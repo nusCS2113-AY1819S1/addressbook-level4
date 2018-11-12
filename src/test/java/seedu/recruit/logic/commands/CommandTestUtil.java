@@ -440,7 +440,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered company list to show only the company at the given {@code targetIndex} in the
      * {@code model}'s company book.
      */
-    public static void showCompanyAtIndex(Model model, Index targetIndex) {
+    public static void showCompanyAtIndex(Model model, Index targetIndex) throws ParseException {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyList().size());
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
         final String[] splitName = company.getName().value.split("\\s+");
@@ -453,7 +453,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered job list to show only the job offer at the given {@code targetIndex} in the
      * {@code model}'s company book.
      */
-    public static void showJobOfferAtIndex(Model model, Index targetIndex) {
+    public static void showJobOfferAtIndex(Model model, Index targetIndex) throws ParseException {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyJobList().size());
         JobOffer jobOffer = model.getFilteredCompanyJobList().get(targetIndex.getZeroBased());
         final String[] splitName = jobOffer.getJob().value.split("\\s+");

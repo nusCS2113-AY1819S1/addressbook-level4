@@ -72,7 +72,7 @@ public class DeleteShortlistedCandidateParserTest {
     @Test
     public void parse_invalidArgsForFindCompanyCommand_throwsParseException() {
         assertFindCompanyCommandForDeleteShortlistParseFailure(parser, " abc/",
-                MESSAGE_INVALID_COMMAND_FORMAT + FindCompanyCommand.MESSAGE_USAGE);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCompanyCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class DeleteShortlistedCandidateParserTest {
     @Test
     public void parse_invalidArgsForFilterCompanyCommand_throwsParseException() {
         assertFilterCompanyCommandForDeleteShortlistParseFailure(parser, " abc/",
-                MESSAGE_INVALID_COMMAND_FORMAT + FilterCompanyCommand.MESSAGE_USAGE);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCompanyCommand.MESSAGE_USAGE));
     }
 
     // ================================ 3RD STAGE: SELECT JOB ===================================== //

@@ -18,6 +18,7 @@ import seedu.recruit.commons.events.logic.ChangeLogicStateEvent;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.logic.CommandHistory;
 
+import seedu.recruit.logic.parser.FilterCandidateCommandParser;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.CandidateContainsFilterKeywordsPredicate;
@@ -46,11 +47,11 @@ public class FilterCandidateCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_SALARY + "2500";
 
     private final CandidateContainsFilterKeywordsPredicate candidatePredicate;
-    private final String args;
+    private final String userInput;
 
-    public FilterCandidateCommand(CandidateContainsFilterKeywordsPredicate candidatePredicate, String args) {
+    public FilterCandidateCommand(CandidateContainsFilterKeywordsPredicate candidatePredicate) {
         this.candidatePredicate = candidatePredicate;
-        this.args = args;
+        this.userInput = FilterCandidateCommandParser.getUserInput();
     }
 
     @Override
@@ -68,7 +69,7 @@ public class FilterCandidateCommand extends Command {
         }
 
         EventsCenter.getInstance().post(new ShowCandidateBookRequestEvent());
-        return new CommandResult("Candidate Book showing: " + COMMAND_WORD + args + "\n"
+        return new CommandResult("Candidate Book showing: " + COMMAND_WORD + userInput + "\n"
                 + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredCandidateList().size()));
     }
 

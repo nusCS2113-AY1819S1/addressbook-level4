@@ -10,18 +10,18 @@ import java.util.HashMap;
 import java.util.List;
 
 import seedu.recruit.commons.core.Messages;
-import seedu.recruit.logic.commands.FindCompanyCommand;
+import seedu.recruit.logic.commands.FilterCandidateCommand;
 import seedu.recruit.logic.parser.ArgumentMultimap;
 import seedu.recruit.logic.parser.ArgumentTokenizer;
 import seedu.recruit.logic.parser.exceptions.ParseException;
-import seedu.recruit.model.company.CompanyContainsFindKeywordsPredicate;
+import seedu.recruit.model.company.CompanyContainsFilterKeywordsPredicate;
 
 /**
- * A utility class that helps with building predicate for {@Code CompanyContainsFindKeywordsPredicate}
+ * A utility class that helps with building predicate for {@Code CompanyContainsFilterKeywordsPredicate}
  * from a string of input arguments
  */
 
-public class CompanyContainsFindKeywordsPredicateBuilder {
+public class CompanyContainsFilterKeywordsPredicateBuilder {
 
     public static final String KEY_NAME = "CompanyName";
     public static final String KEY_PHONE = "Phone";
@@ -30,13 +30,13 @@ public class CompanyContainsFindKeywordsPredicateBuilder {
 
 
     private HashMap<String, List<String>> keywordsList = new HashMap<>();
-    private CompanyContainsFindKeywordsPredicate companyPredicate;
+    private CompanyContainsFilterKeywordsPredicate companyPredicate;
 
-    public CompanyContainsFindKeywordsPredicateBuilder(String userInput) throws ParseException {
+    public CompanyContainsFilterKeywordsPredicateBuilder(String userInput) throws ParseException {
         this.companyPredicate = preparePredicate(userInput);
     }
 
-    public CompanyContainsFindKeywordsPredicate getCompanyPredicate() {
+    public CompanyContainsFilterKeywordsPredicate getCompanyPredicate() {
         return companyPredicate;
     }
 
@@ -46,14 +46,12 @@ public class CompanyContainsFindKeywordsPredicateBuilder {
 
     /**
      * Parses the @param userInput and
-     * @return CompanyContainsFindKeywordsPredicate as a predicate
+     * @return CompanyContainsFilterKeywordsPredicate as a predicate
      */
-    public CompanyContainsFindKeywordsPredicate preparePredicate (String userInput) throws ParseException {
+    public CompanyContainsFilterKeywordsPredicate preparePredicate (String userInput) throws ParseException {
         requireNonNull(userInput);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_COMPANY_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-
-        //HashMap<String,List<String>> keywordsList = new HashMap<>();
 
         if (argMultimap.getValue(PREFIX_COMPANY_NAME).isPresent()) {
             this.keywordsList.put(KEY_NAME, (argMultimap.getAllValues(PREFIX_COMPANY_NAME)));
@@ -70,9 +68,9 @@ public class CompanyContainsFindKeywordsPredicateBuilder {
 
         if (keywordsList.isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindCompanyCommand.MESSAGE_USAGE));
+                    FilterCandidateCommand.MESSAGE_USAGE));
         }
 
-        return new CompanyContainsFindKeywordsPredicate(keywordsList);
+        return new CompanyContainsFilterKeywordsPredicate(keywordsList);
     }
 }
