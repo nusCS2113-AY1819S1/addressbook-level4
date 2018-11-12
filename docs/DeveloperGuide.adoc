@@ -506,7 +506,7 @@ image::GradeGraphActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that needs to interact with storage controller or xml adapters directly but command should not have direct interaction from StorageController.
 // end::graph[]
 
-// tag::modulebidding[]
+// tag::modulebiddingimplementation[]
 === [Proposed] Module bidding feature
 
 ==== Proposed Implementation
@@ -565,7 +565,7 @@ to the students.
 * Alternative 2: Teacher can input the start time for a module's bidding round
 ** Pros: The actual start time will be consistent and reliable, leading to user (student) satisfaction.
 ** Cons: More difficult to implement; Handling date objects is tricky because there are many popular date formats.
-// end::modulebidding[]
+// end::modulebiddingimplementation[]
 
 // tag::notesexportimplementation[]
 === Notes data to Google Calendar feature
@@ -1474,16 +1474,17 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 
+
 [discrete]
 === Use case: Add module
 
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* NIL
 
 *Guarantees* :
 
-* TBC
+* No duplicate modules will be allowed.
 
 *MSS* :
 
@@ -1523,11 +1524,11 @@ Use case resumes at step 1.
 === Use case: Update module
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* The module should already exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1567,18 +1568,16 @@ Use case resumes at step 1.
 === Use case: Remove module
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* The module should already exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
 1.  Teacher wants to delete a module in the system.
 2.  System prompts for confirmation to delete the module.
-3.  Teacher confirms the deletion of the module.
-4.  System successfully deletes the module.
 +
 Use case ends.
 
@@ -1602,20 +1601,16 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
-* 3a. Teacher rejects the confirmation to delete the module.
-+
-Use case resumes at step 1.
-
-
+// tag::moduleusecases[]
 [discrete]
 === Use case: View module details
 *Precondition(s)* :
 
-* The module must exist in the system.
+* The module should already exist in Trajectory.
 
 *Guarantees* :
 
-* None.
+* NIL
 
 *MSS* :
 
@@ -1637,11 +1632,11 @@ Use case resumes at step 1.
 === Use case: Find module
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NONE IF NONE
+* At least one module should exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1663,23 +1658,17 @@ Use case resumes at step 1.
 ** 2b1. System informs the user that no active modules were found.
 +
 Use case resumes at step 1.
-
-* 2c. Teacher enters the `--all` option in the command
-+
-** 2c1. System displays all matching modules including archived modules.
-+
-Use case resumes at step 1.
-
+// end::moduleusecases[]
 
 [discrete]
 === Use case: List modules
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* At least one module should exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1696,66 +1685,17 @@ Use case ends.
 +
 Use case resumes at step 1.
 
-* 2b. Teacher enters the `--all` option in the command
-+
-** 2b1. System displays all matching modules including archived modules.
-+
-Use case resumes at step 1.
-
-
-[discrete]
-=== Use case: Archive module
-*Precondition(s)* :
-
-* TO BE INSERTED | STATE NIL IF NONE
-
-*Guarantees* :
-
-* TBC
-
-*MSS* :
-
-1.  Teacher wants to archive a module in the system.
-2.  System prompts for confirmation to archive the module.
-3.  Teacher confirms archiving of the module.
-4.  System successfully archives the module.
-+
-Use case ends.
-
-*Extensions* :
-
-* 2a. Teacher enters an invalid command.
-+
-** 2a1. System displays the list of valid commands.
-+
-Use case resumes at step 1.
-
-* 2b. Teacher enters the wrong parameter prefix.
-+
-** 2b1. System displays the correct format for the command.
-+
-Use case resumes at step 1.
-
-* 2c. Teacher enters a module code that doesn’t exist in the system.
-+
-** 2c1. System informs the user that the module doesn’t exist.
-+
-Use case resumes at step 1.
-
-* 3a. Teacher rejects the confirmation to delete the module.
-+
-Use case resumes at step 1.
-
 
 [discrete]
 === Use case: Enrol students in modules
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* The module should already exist in Trajectory.
+* The student(s) should exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1804,14 +1744,59 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Assign a TA
+=== Use case: Archive module [coming in v2.0]
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* The module should already exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
+
+*MSS* :
+
+1.  Teacher wants to archive a module in the system.
+2.  System prompts for confirmation to archive the module.
+3.  Teacher confirms archiving of the module.
+4.  System successfully archives the module.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 2b. Teacher enters the wrong parameter prefix.
++
+** 2b1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+* 2c. Teacher enters a module code that doesn’t exist in the system.
++
+** 2c1. System informs the user that the module doesn’t exist.
++
+Use case resumes at step 1.
+
+* 3a. Teacher rejects the confirmation to delete the module.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Assign a TA [coming in v2.0]
+*Precondition(s)* :
+
+* The module should already exist in Trajectory.
+* The student(s) should exist in Trajectory.
+
+*Guarantees* :
+
+* NIL
 
 *MSS* :
 
@@ -1857,6 +1842,7 @@ Use case resumes at step 1.
 ** 2f1. System informs the user that the student doesn’t exist in the system.
 +
 Use case resumes at step 1.
+
 
 [discrete]
 // tag::gradebookusecase[]
@@ -2750,6 +2736,49 @@ Expected: The student will have her course code changed to EEE.
 .. Test case: `student delete 1` +
 Expected: The student at INDEX 1 will be deleted from the system.
 
+// tag::modulemanualtest[]
+=== Module Management
+. Adding a module
+.. Prerequisites: The module must not already exist.
+.. Test case: `module add mc/NM2212 mn/Visual Design` +
+Expected: This module will be added into the system.
+.. Test case: `module add mc/NNNNNN mn/Visual Design` +
+Expected: The module code is not valid. You will not be able to add the module.
+.. Test case: `module add mc/NM2212 mn/Visual!@@$%#` +
+Expected: The module name contains special characters that are not allowed. You will not be able to add the module.
+
+. Editing a module
+.. Prerequisites: There must be a module with code NM2212.
+.. Test case: `module edit mc/NM2212 mn/VD` +
+Expected: The module name will be changed to VD.
+
+. Deleting a module
+.. Prerequisites: There must be a module with code NM2212.
+.. Test case: `module delete mc/NM2212` +
+Expected: The module name will be changed to VD.
+.. Test case: `module delete mc/NE1000 mn/Non-existent module` +
+Expected: The module with code NE1000 cannot be found. You won't be able to delete it.
+
+. Listing modules
+.. Prerequisites: NONE.
+.. Test case: `module list` +
+Expected: The list of modules in the system will be displayed. If there are no modules, the output should be blank.
+
+. Finding a module
+.. Prerequisites: There should be a module with the word `Design`, either in the module code or module name.
+.. Test case: `module find design` +
+Expected: The list of modules with the word `Design` in the name will be displayed.
+
+. Enrolling a student into a module
+.. Prerequisites: There should be a student with matric no. A0168000B, and a module with module code NM2212.
+.. Test case: `module enrol mc/NM2212 i/A0168000B` +
+Expected: The student with matric no. A0168000B will be enrolled in the module. The module details will be displayed.
+
+. Viewing a module's details
+.. Prerequisites: There should be a module with module code NM2212.
+.. Test case: `module view mc/NM2212` +
+Expected: The module details for NM2212 will be displayed, including the list of students enrolled in the module.
+// end::modulemanualtest[]
 
 // tag::classmanualtest[]
 === Creating a class
@@ -2782,6 +2811,8 @@ e/MAX_ENROLLMENT
 .. Prerequisites: Class(es) must exist in order to be listed.
 .. Test case: `class list` +
    Expected: The class information is display on the system.
+
+
 
 === Update Class Enrollment Limits
 . Modifies the max enrollment size for a class for the system.
