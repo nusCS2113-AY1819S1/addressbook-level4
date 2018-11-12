@@ -102,6 +102,12 @@ public class ModelManagerTestUserStub extends ComponentManager implements Model 
     }
 
     @Override
+    public boolean hasPersonToRegister(Person person) {
+        requireNonNull(person);
+        return versionedAddressBook.hasPersonToRegister(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();

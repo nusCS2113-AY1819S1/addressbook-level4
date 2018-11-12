@@ -30,9 +30,9 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "im";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Imports your timetable from the file (.\\import_export\\[FILENAME].ics). "
+            + ": Imports your timetable from the file (.\\import_export\\FILENAME.ics). "
             + "Parameters: "
-            + "FILE_NAME (without the .ics extension) \n"
+            + "FILENAME (without the .ics extension) \n"
             + "Example: " + COMMAND_WORD
             + " my_import_file_name";
 
