@@ -14,7 +14,7 @@ endif::[]
 
 == Overview
 
-_BookInventory_ is a *multi-platform* desktop application catered *primarily* for store owners to manage their book supplies. It includes many basic and advance features such as adding, deleting and requesting of books in the inventory. Users interact with _BookInventory_ using *Command Line Interface (CLI)*, and has a *Graphic User Interface (GUI)* created with JavaFX.
+_BookInventory_ is a *multi-platform* desktop application catered *primarily* for store owners to manage their book supplies. It includes many features such as adding, deleting and requesting of books in the inventory. Users interact with _BookInventory_ using *Command Line Interface (CLI)*, and has a *Graphic User Interface (GUI)* created with JavaFX.
 
 _BookInventory_ was developed by a team of four students over a period of one semester. The original source code was adapted from the Address Book (Level 4) project by SE-EDU. It started as a project for the following modules offered by the School of Computing, National University of Singapore:
 
@@ -49,6 +49,8 @@ This Project Portfolio documents my contributions and demonstrates my ability to
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T12-3/main/issues/174[1], https://github.com/CS2113-AY1819S1-T12-3/main/issues/176[2], https://github.com/CS2113-AY1819S1-T12-3/main/issues/182[3], https://github.com/CS2113-AY1819S1-T12-3/main/issues/196[4])
 *** Some parts of the kbd:[Tab] feature I added was adopted by several other classmates
+
+<<<
 
 == Contributions to the User Guide
 
