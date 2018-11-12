@@ -41,7 +41,7 @@ public class LostandFoundCommand extends Command {
      * Sorts the lost item from the Stock List.
      */
     private void sortSimpleItems (List<Item> lastShownList, List<SimpleItem> lostItems
-                          ) {
+    ) {
         for (Item item : lastShownList) {
             if (item.getLoststatus().getLoststatusLost() > 0) {
                 lostItems.add(new SimpleItem(item.getName(),
