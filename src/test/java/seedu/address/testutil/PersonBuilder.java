@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Department;
+import seedu.address.model.person.Designation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -18,13 +20,17 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_EMAIL = "alice@example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DEPARTMENT = "Head";
+    public static final String DEFAULT_DESIGNATION = "manager";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Department department;
+    private Designation designation;
     private Set<Tag> tags;
 
     public PersonBuilder() {
@@ -32,6 +38,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        department = new Department(DEFAULT_DEPARTMENT);
+        designation = new Designation(DEFAULT_DESIGNATION);
         tags = new HashSet<>();
     }
 
@@ -43,6 +51,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        department = personToCopy.getDepartment();
+        designation = personToCopy.getDesignation();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -86,8 +96,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Department} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDepartment(String department) {
+        this.department = new Department(department);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Designation} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDesignation(String designation) {
+        this.designation = new Designation(designation);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, department, designation, tags);
     }
 
 }

@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
@@ -11,7 +13,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -24,14 +28,14 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalEventList(), new UserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().withEmail(VALID_EMAIL_BOB).build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
         expectedModel.addPerson(validPerson);
         expectedModel.commitAddressBook();
 
@@ -40,10 +44,30 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
+    public void execute_newEvent_success() {
+        Event validEvent = new EventBuilder().build();
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
+        expectedModel.addEvent(validEvent);
+        expectedModel.commitEventList();
+
+        assertCommandSuccess(new AddEventCommand(validEvent), model, commandHistory,
+                String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), expectedModel);
+    }
+
+
+    @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void execute_duplicateEvent_throwsCommandException() {
+        Event eventInList = model.getEventList().getEventList().get(0);
+        assertCommandFailure(new AddEventCommand(eventInList), model, commandHistory,
+                AddEventCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
 }

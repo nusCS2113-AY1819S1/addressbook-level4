@@ -1,0 +1,87 @@
+= Perry Wang - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ProManage
+
+ProManage is a *professional desktop application* for companies that specialises in executing projects that undergoes a
+long and tedious planning phase. ProManage allow *Manager* and *Employees* of project teams to manage their team members and events easily.
+ProManage is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+== Overview
+
+This project portfolio documents my contributions to the development of the CS2113 project, as part of my team T16-2.
+
+== Summary of contributions
+
+* *Major enhancement*: Extended *undo and redo capability of the model* via the `undo` and `redo` commands to all existing or new commands.
+** Justification: With so many commands with different purposes, it can be very easy to make mistakes with unintended
+effects. For example, if an employee was wrongly renamed, without the undo command, the employee's original name
+would be irreversibly lost. Being able to undo or redo commands improves the flexibility of the app, where
+users do not have to be worried that their wrongly entered commands have irreversible effects.
+** Highlights: This implementation required an overhaul of the existing `Model` to enable intelligent undo and redo
+capability to both the address book and event list, where the model recognises which of them to undo or redo.
+As they are intertwined with all other modifying commands, extensive testing was required to harden the app
+against bugs and ensure that the commands worked properly in all scenarios.
+
+
+* *Minor enhancement*:
+** Created EditEvent command which allows the user to edit an event in the event list according to the parameters
+they entered. Regex was used to ensure that the input parameters were valid.
+** Created DeleteEvent command which allows the user to delete an event specified by its index on the filtered
+event list.
+** Created SelectEvent command which allows the user to select an event to show its attendees. It filters the
+person list on the UI to show only the attendees.
+** Implemented `VersionedEventList` class as a subclass of `EventList` but with historical record.
+** Implemented `EventModel` interface and `PersonModel` interface which are extended by the `Model` interface.
+
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=perrythewang[Functional code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Helped to manage releases on GitHub
+*** Managed the issue tracker on GitHub by creating new issues and closed existing issues that have been resolved.
+*** Wrote test cases to increase coverage by 1.2% in total +
+ PR 1: https://github.com/CS2113-AY1819S1-T16-2/main/pull/147 +
+ PR 2: https://github.com/CS2113-AY1819S1-T16-2/main/pull/148 +
+ PR 3: https://github.com/CS2113-AY1819S1-T16-2/main/pull/150 +
+
+
+** Documentation:
+*** Updated the User Guide for `deleteEvent`, `selectEvent`, `undo`, and `redo` commands.
+*** Updated the Developer Guide to include implementation and usage example of `undo` and `redo` commands.
+
+** Community:
+*** PRs reviewed and merged
+*** Helped other teammates to debug their code
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=deleteEvent]
+
+include::../UserGuide.adoc[tag=selectEvent]
+
+include::../UserGuide.adoc[tag=undoredo]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=UndoRedo]
+
+
+
+
+

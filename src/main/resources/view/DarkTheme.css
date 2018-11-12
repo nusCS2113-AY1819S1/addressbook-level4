@@ -108,11 +108,18 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #4a3759;
+}
+
+.list-cell:filled:selected #eventCardPane {
+    -fx-background-color: #008080;
+    -fx-border-color: #4682B4;
+    -fx-border-width: 1;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
+    -fx-background-color: #4a3759;
+    -fx-border-color: #583d91;
     -fx-border-width: 1;
 }
 
@@ -306,6 +313,11 @@
     -fx-padding: 8 1 8 1;
 }
 
+#eventCardPane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
@@ -342,10 +354,49 @@
 }
 
 #tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#tags .red {
+    -fx-text-fill: white;
+    -fx-background-color: red;
+}
+
+#tags .orange {
+    -fx-text-fill: black;
+    -fx-background-color: orange;
+}
+
+#tags .yellow {
+    -fx-text-fill: black;
+    -fx-background-color: yellow;
+}
+
+#tags .blue {
+    -fx-text-fill: white;
+    -fx-background-color: blue;
+}
+
+#tags .green {
+    -fx-text-fill: white;
+    -fx-background-color: green;
+}
+
+#tags .indigo {
+    -fx-text-fill: white;
+    -fx-background-color: indigo;
+}
+
+#tags .purple {
+    -fx-text-fill: white;
+    -fx-background-color: purple;
+}
+
+#tags .pink {
+    -fx-text-fill: black;
+    -fx-background-color: pink;
+}
+

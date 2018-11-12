@@ -1,0 +1,48 @@
+= Ruslan Farkhutdinov - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ProManage
+
+---
+
+== Overview
+
+This project portfolio documents my contributions to the development of the CS2113 project, as part of my team T16-2.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to find events using keywords events* via the `findEvent` command
+** What it does: allows the user to search for an event using some keywords.
+** Justification: This feature is important as it allows users to access the required events quickly if they know its name or some parts of description.
+
+
+* *Minor enhancement*:
+** Created the test cases for classes of findEvent command
+** Updated the documentation
+** Created the event sorting function
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=fr3ddy4[Functional code]]
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=findEvent]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=FindEvent]
+
+
+

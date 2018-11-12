@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<eventlist>
+
+    <events>
+        <eventName>CS2113 Java session</eventName>
+        <description>Java Camp help!</description>
+        <date>2018-09-28</date>
+        <startTime>16:00</startTime>
+        <endTime>23:00</endTime>
+        <location>Utown</location>
+    </events>
+    <!-- Event that is the same with the previous -->
+    <events>
+        <eventName>CS2113 Java session</eventName>
+        <description>Java Camp help!</description>
+        <date>2018-09-28</date>
+        <startTime>16:00</startTime>
+        <endTime>23:00</endTime>
+        <location>Utown</location>
+    </events>
+
+</eventlist>

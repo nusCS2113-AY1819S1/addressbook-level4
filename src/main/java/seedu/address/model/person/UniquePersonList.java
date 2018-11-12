@@ -35,6 +35,37 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent email as the given argument.
+     */
+    public boolean containsEmail(Email email) {
+        requireNonNull(email);
+
+        for (int i = 0; i < internalList.size(); i++) {
+            if (email.equals(internalList.get(i).getEmail())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param email input
+     * @return the person who has the same email as the input
+     */
+    public Person getPerson(Email email) {
+        requireNonNull(email);
+
+        for (int i = 0; i < internalList.size(); i++) {
+            if (email.equals(internalList.get(i).getEmail())) {
+                return internalList.get(i);
+            }
+        }
+        return null;
+
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -132,4 +163,6 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+
 }

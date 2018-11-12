@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -67,6 +68,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person in the addressbook has the same email.
+     */
+    public boolean hasEmail(Email email) {
+        requireNonNull(email);
+        return persons.containsEmail(email);
+    }
+
+    /**
+     *
+     * @param email
+     * @return the person who has the same email
+     */
+    public Person getPerson(Email email) {
+        requireNonNull(email);
+        return persons.getPerson(email);
+    }
+
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -117,4 +137,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
+
 }

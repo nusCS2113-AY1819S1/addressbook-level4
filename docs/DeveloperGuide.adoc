@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= ProManage - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,9 +12,8 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
-
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+:repoURL: https://github.com/CS2113-AY1819S1-T16-2/main
+By: `T16-2`      Since: `September 2018`      Licence: `NUS`
 
 == Setting up
 
@@ -159,16 +158,18 @@ Note how the event is propagated through the `EventsCenter` to the `Storage` and
 
 The sections below give more details of each component.
 
+// tag::Ui[]
 [[Design-Ui]]
 === UI component
 
 .Structure of the UI Component
-image::UiClassDiagram.png[width="800"]
+image::UiClassDiagram.png[width="500"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `EventListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
+// end::Ui[]
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
@@ -176,6 +177,7 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+
 
 [[Design-Logic]]
 === Logic component
@@ -187,7 +189,7 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `ProManageParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -197,19 +199,41 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
+// tag::Parser[]
+[[Design-Parser]]
+=== Parser component
+[[fig-ParserClassDiagram]]
+.Structure of the Parser Component
+image::ParserClassDiagram.png[width="800"]
+
+*API* :
+link:{repoURL}/src/main/java/seedu/address/logic/parser/ProManageParser.java[`ProManageParser.java`]
+
+. `ProManageParser` use children class of `CommandParser` (eg. ManagerParser) to parse the user command.
+.  When login/logout command is executed, the CommandParser object within ProManageParser is changed accordingly to DefaultParser,
+ManagerParser or EmployeeParser.
+.  DefaultParser, ManagerParser or EmployeeParser are subclass of the abstract class CommandParser
+.  This display the behaviour of polymorphism as ProManageParser will always pass the input into CommandParser
+but its behaviour depends on implementation of its subclass.
+.  Each of it subclass will only know commands that is according to the privilege level.
+// end::Parser[]
+
+
+// tag::Model[]
 [[Design-Model]]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelClassDiagram.png[width="620"]
+// end::Model[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Address Book and Event List data.
+* exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
@@ -217,18 +241,20 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
+// tag::Storage[]
 [[Design-Storage]]
 === Storage component
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
+// end::Storage[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Address Book and Event List data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -239,92 +265,413 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
-=== Undo/Redo feature
+
+// tag::Sort[]
+
+=== Event Sorting
+
 ==== Current Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
+The sort mechanism is facilitated by Comparator<Event>.
+When the sort method for FXObservableList is called, it will take a Comparator object to be use for sorting the list.
+The comparator is able to take in two Event class objects and compare the relative parameter values.
+The parameter can be `EventName`, `Date` & `StartTime`.
+To allow sorting of these parameters, there are three types of comparators.
 
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+image::SortNewCommand1StateListDiagram.png[width="650"]
+
+image::SortSequenceDiagram.png[width="650"]
+
+==== Design Considerations
+
+===== Committing Event List after sorting
+ * **Alternative 1 (current choice):** Commits and saves the entire event list.
+** Pros: Easy to implement and able to use undo to the previous state.
+** Cons: May have performance issues in terms of memory usage.
+* **Alternative 2:** Does not commit the event list.
+** Pros: Will use less memory.
+** Cons: Unable to use undo function to revert back to the previous view.
+
+// end::Sort[]
+
+
+
+// tag::Invite[]
+=== Invite feature
+
+==== Current Implementation
+
+The `invite` command allows users to add attendees to an existing event, which is represented by an `Event` object.
+The command currently only allows users to add a single person to an event at a time, based on the indices on the UI.
+This command adds the to-be-invited `Person` 's email, which is unique, to the chosen `Event`, so that the attendees of a particular event is recorded.
+
+The adding of attendees is facilitated by the class: `Attendees`, which consists of a list of emails of type `String`.
+
+.Class Diagram of Event and Attendee class
+image::EventAndAttendeeClassDiagram.png[width="800"]
+
+The following is a more detailed description of the `Attendee` class:
+
+*  `Attendees`
+** Each `Event` object consist of an `Attendees` object, which is a list of the emails of the different `Person` attending the event.
+** This class is a wrapper class around the internal representation of a `Set` of emails.
+** Only the email of the `Person` is recorded in an `Event`, as the email should be unique and uneditable.
+
+Storing only the *email* of `Person` in the `Attendees` object of `Event` saves memory storage and facilitates the `select`, `viewmine` and `selectEvent` feature.
+As we select a person, we can simply iterate through the event list and check whether the person's email is in the attendees list.
+Similarly, as we select an event, we can first obtain the list of emails from the `Attendees`, and filter the employee list accordingly.
+
+This command only executes successfully if the event does not not clash with the person's schedule.
+
+Given below is an illustration to describe the detection of whether two events clash, which is facilitated by the method `hasClash` in `Event`:
+
+.Logic behind `Event#hasClash`
+image::EventClashDiagram.png[width="450"]
+
+Thus, to check whether the event clashes with an employee's schedule, we iterate through the `ObservableList<Event>` and check whether the `Event` 1) contains the employee's email in the `Attendee` and 2) clashes with the selected event.
+
+****
+`Event#hasClash` is widely used in other features such as `addEvent` and `editEvent` to ensure that
+
+1. Different events are not held at the same location and time.
+
+2. An employee do not have two events he/she needs to attend at the same time.
+****
+
+Implementation of `RemoveCommand` is similar to `InviteCommand`, but removes persons from `Attendees` of events instead.
+
+==== Execution of Command
+
+Given below is an example usage scenario and how the invite mechanism works.
+
+For example, the user inputs `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list.
+
+Step 1. The command text is passed to an instance of the `LogicManager` class.
+
+Step 2. The `LogicManager` instance calls `ProManageParser#parseCommand`, which parses the invite command phrase.
+
+Step 3. `InviteCommandParser#parse` parses the person and event index. An instance of the `InviteCommand` encapsulating the two indices information is then returned after parsing.
+
+Step 4. `Logic Manager` then executes this `InviteCommand` by calling `InviteCommand#execute`.
+
+Step 5. The filtered person list and event list is first obtained by calling `PersonModel#getFilteredPersonList` and `EventModel#getFilteredEventList`. Based on the indices, the `Person` and `Event` is selected. Then, the `Person` object's email is obtained by calling `Person#getEmail`
+
+Step 6. Two steps of verification is required before the person is invited to the event.
+
+* First, `Event#hasAttendee` checks whether the person is already invited to the event.
+* Second, `Model#hasClash` checks whether the event clashes with the person's schedule.
+
+Step 7. After successful verification, the person's email is added to the obtained `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
+
+Step 8. The new `Event` object is updated to the model by calling `Model#updateEvent`.
+
+Step 9. The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
+
+The sequence diagram below illustrates the execution of the `invite` command.
+
+image::InviteSequenceDiagram.png[width="700"]
+
+==== Design Consideration
+
+===== Aspect: How to link `Person` and `Event`
+
+* **Alternative 1 (current choice):** Saves only the emails of the Persons in the Attendees of Events.
+** Pros: Saves space. Able to filter EventList easily.
+** Cons: Requires going through the entire list of EventList to obtain details of events attended by the person.
+
+* **Alternative 2:** Saves the entire information of Events for each Persons.
+** Pros: Fast access to information of Events attended by any Persons.
+** Cons: Takes up a lot of storage space and memory. Many repeated items within the storage files.
+
+===== Aspect: Data structure to support `invite` command
+
+* **Alternative 1 (current choice):** Use `HashSet` to store persons emails.
+** Pros: Easier and faster to retrieve or validate names stored. Able to handle duplicates easily.
+** Cons: Sequence of persons added is lost. Currently, this feature is not important for the project.
+
+* **Alternative 2:** Use `ArrayList` to store persons emails.
+** Pros: Emails are stored in order of addition.
+** Cons: Inefficient when handling data.
+
+==== Future Improvements
+
+===== Adding entire department or multiple persons to an event
+
+The current `invite` command only invites one person to a chosen event based on the index chosen. This feature can be further extended to enable inviting more than one person or an entire department to an event.
+One possible way to to implement this is to have the user
+
+* input a certain range (2-5) or
+* multiple indices (1,3,6,7,8) or
+* input the department name
+
+The same concept can also be applied to events, being able to invite one person to multiple events with one single command.
+
+Implementation of this additional feature would require changes to both `InviteCommandParser` and `InviteCommand#execute`. Additionally, handling of clashing events needs to be considered as it now involves more than one participant and event.
+
+Similar improvements can be made to `remove` command, being able to remove a person from a number of events with one single command.
+// end::Invite[]
+
+// tag::Select[]
+=== Select feature
+
+==== Current Implementation
+The `select` command allows users to view the event schedules of an employee on a certain date, month, and year, or all of his/her events.
+The command currently only allows users to view the event of a single employee, based on the indices of the employee list on the UI.
+This command only executes successfully if the input index is valid (not out of bound).
+
+The command is facilitated by the class: `Attendees`, a `HashSet` of emails of type `String`, as described in Section 3.2.1.
+
+==== Execution of Command
+Given below is an example usage scenario and how the `select` mechanism works.
+
+For example, the user inputs `select 1 y/2018 m/06` to select the 1st person in the address book and view his/her event schedule on June 2018.
+
+* The command text is passed to an instance of the `LogicManager` class.
+
+* The `LogicManager` instance calls `ProManageParser#parsecommand`, which parses the `select` command phrase.
+
+* `InviteCommandParser#parse` parses the person and date parameter(optional). Depending on whether the date parameter is inputted,  an instance of the `SelectCommand` encapsulating the relevant information is then returned.
+
+* `Logic Manager` then executes this `SelectCommand` by calling `SelectCommand#execute`.
+
+* The filtered person list is first obtained by calling `PersonModel#getFilteredPersonList`. Based on the index, the `Person` is selected. The `Person` object's email is obtained by calling `Person#getEmail`
+
+* A `Predicate` will be constructed to generate the filtered event list.
+** If the user chose to view all the events of the person (e.g. `select 1`), an `AttendeeContainsEmailPredicate` object will be instantiated.
+** If the user chose to view the events of the person on a certain time period (e.g. `select 1 y/2018 m/12`), an `EventContainsAttendeeAndDatePredicate` object will be instantiated.
+
+* The filtered event list is then updated by calling `Model#updateFilteredEventList` with the predicate.
+
+* The filtered event list is then sorted by calling `Model#sortByDate`.
+
+* The `SelectCommand#execute` finally returns a `CommandResult` with a success message.
+
+The sequence diagram below illustrates the execution of the `invite` command.
+
+image::SelectSequenceDiagram.png[width="700"]
+
+// end::Select[]
+
+// tag::FindEvent[]
+=== Find Event feature
+
+==== Current Implementation
+The `findEvent` allows the user to search for an event using some keywords. It searches for such events which contain at least
+one of keywords in their names or description.
+
+
+==== Execution of Command
+Given below is an example usage scenario and how the `findEvent` mechanism works.
+
+Step 1. The user inputs `findEvent meeting` to find the event containing the word meeting in its name or description.
+
+Step 2. The command is parsed and the result is shown.
+
+
+// end::FindEvent[]
+
+// tag::List[]
+=== List Feature
+
+==== Current Implementation
+
+The `list` feature allows users to filter through all the individual people in ProManage and understand which department
+they are from. The command currently has 4 sub-features; `list all` , `list all people`, `list all events` and `list dep DEPARTMENT`. The user can list all the
+people and events in ProManage by simply typing `list all`. Alternatively, the user can filter through ProManage and get the
+relevant Person's information by listing those of the specified department. The user can list multiple departments such
+as `list dep Admin Finance`. As of now, each person can only be inside one department.
+
+The listing of people from the respective departments is facilitated by the class: `Departments`,
+a list of departments of type `String`.
+
+The following is a more detailed description of the classes involved:
+
+*  `Department`
+** Each `Person` object has a `Department`, which is the department in which the person is in.
+** This class is essentially another piece of information about the person.
+** Each `Person` can only be in one `Department`.
+
+==== Execution of Command
+
+Given below is an example usage scenario and how the list mechanism works.
+
+Step 1. The user executes `list dep Admin` to list only the people in the Admin department. The command text is passed
+to an instance of the `LogicManager` class.
+
+Step 2. The `LogicManager` instance calls `ProManage#parsecommand`, which parses the `list` command prefix
+"list".
+
+Step 3. `ListCommandParser#parse` parses the type of command that is called upon and if applicable, the departments
+listed. The list command can take in either `all`, `all people` , `all events` or `dep`. `all` means that are no predicates and 'dep' means specific
+departments are about to be listed. An instance of the `ListCommand` encapsulating the type of `ListCommand` and if
+applicable, the predicates involved, is then returned to `Logic Manager`.
+
+Step 4. `Logic Manager` then executes this `ListCommand` by calling `ListCommand#execute`.
+
+Step 5. The filtered person list is first obtained by calling `PersonModel#updateFilteredPersonList`. Based on the departments, the list of `Person` are selected.
+
+Step 9. The `ListCommand#execute` finally returns a `CommandResult` with a success message.
+
+The sequence diagram below illustrates the execution of the `list` command.
+
+image::ListSequenceDiagram.png[width="800"]
+
+==== Future Improvements
+
+===== Listing people who stay in the same town
+
+The current `list` command does not utilize the address of each person. Thus, to make data more easily accessible, ProManage can implement Google Maps API and mark out where each employee stays on the map.
+
+* Utilize Google Maps API and store the map - `list map`
+
+===== Listing people's birthdays
+
+The current person has no date of birth attribute. Thus, a date of birth attribute could be implemented. On top of that, ProManage can display the current date and time. Along with this,
+it can list out the upcoming birthdays of the personnel in the company.
+
+* Implement date of birth attribute and display current date and time the moment the application is launched. List out upcoming birthdays - `list birthdays`
+// end::List[]
+
+// tag::UndoRedo[]
+=== Undo/Redo Feature
+
+==== Current Implementation
+
+The `undo` and `redo` feature allows users to undo and redo their previous commands. The commands that can
+be undone are only those that modify the contents of the address book or event list, such as adding a person
+or event within the app. This is managed within `ModelManager`.
+
+The undo/redo mechanism is implemented separately for the address book and event list by the
+`VersionedAddressBook` and `VersionedEventList`. They are extensions of the superclass `AddressBook` and
+`EventList` respectively with a history of states stored internally as an `addressBookStateList`
+for the address book, `eventListStateList` for the event list, and a `currentStatePointer` in each of them.
+To ensure that the address book and event list are undone/redone correctly, a `StateHistoryList` (sub-class
+of `LinkedList`) is kept in the `ModelManager` to keep track of the list that was modified.
+
+The following operations were implemented:
+
+* `VersionedAddressBook#commit()` — Saves the current address book state in its internal history.
+
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its internal history.
+
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its internal history.
+
+* `VersionedEventList#commit()` — Saves the current event list in its internal history.
+
+* `VersionedEventList#undo()` — Restores the previous event list state from its internal history.
+
+* `VersionedEventList#redo()` — Restores a previously undone event list state from its internal history.
+
+These operations are exposed in the Model interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
+and `Model#redoAddressBook()` for the address book, and `Model#commitEventList()`, `Model#undoEventList()`
+and `Model#redoEventList()` for the event list. Two wrapper methods, `Model#undo()` and `Model#redo()`
+are also implemented. These will be the methods called by the commands `undo` and `redo`.
+
+The `StateHistoryList` implements the following operations for the `Model` to decide whether to
+undo/redo the address book or event list:
+
+* `StateHistoryList#getCurrentState()` - Retrieves the latest record state.
+
+* `StateHistoryList#getNextState()` - Retrieves the next (previously undone) record state.
+
+* `StateHistoryList#decrementPointer()` - Shifts record state pointer back. Called during `undo`.
+
+* `StateHistoryList#incrementPointer()` - Shifts record state pointer forward. Called during `redo`.
+
+A command can either modify the address book, event list, or both. Within the model, the `StateHistoryList`
+keeps track of all model methods which modify the address book or event list, and stores a history
+record value within itself for each method called.
+
+When undoing a command, the `ModelManager` requests for the latest record by `StateHistoryList#getCurrentState()`
+and calls the corresponding `VersionedAddressBook#undo()` and/or `VersionedEventList#undo()`. The ModelManager
+also informs the `StateHistoryList` that an undo command was issued to shift the pointer back.
+
+When redoing a command,the `ModelManager` requests for the next record from `StateHistoryList` and
+calls the corresponding `VersionedAddressBook#redo()` and/or `VersionedEventList#redo()`. The ModelManager
+also informs the `StateHistoryList` that an undo command was issued to shift the pointer forward.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The VersionedAddressBook and VersionedEventList
+will be initialized with the initial address book and event list states, and the currentStatePointers will
+point to their single state respectively. The StateHistoryList is instantiated as an empty list.
 
-image::UndoRedoStartingStateListDiagram.png[width="800"]
+image::UndoRedoModelInitializationStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `add` (with valid input arguments) to add a person to the address book. The `add` command calls
+`Model#addPerson()`, which will add a state record index integer `STATE_ADDRESSBOOK` to the `StateHistoryList`.
+This command is the last entered command, therefore the `pointer` in `StateHistoryList` shifts forward.
+The `add` command also calls `Model#commitAddressBook()`, causing the modified state of the address book after
+the `add` command executes to be saved in the `addressBookStateList`, and the address book `currentStatePointer`
+is shifted to the newly inserted address book state. The `currentStatePointer` for `VersionedEventList` remains unchanged
+as only the `VersionedAddressBook` was modified..
 
-image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
-
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
-
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
+image::UndoRedoNewCommandAB1StateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If a command fails its execution, it will not call `Model#commitAddressBook()` or `Model#commitEventList()`,
+so the address book or event list state will not be saved into `addressBookStateList` or `eventListStateList`.
+The `StateHistoryList` will also not save a record state.
+
+Step 3. The user realises that they have accidentally added the wrong person, and decides to undo the action by
+executing the `undo` command. The `undo` command calls `Model#undo()`, which gets the latest record state
+from `StateHistoryList` and recognises that the `VersionedAddressBook` was modified in the previous command.
+The `Model#undoAddressBook()` is then called, which shift the currentStatePointer once to the left, pointing it to
+the previous address book state, and restores the address book to that state. Also, the `pointer` in `StateHistoryList`
+is shifted to the left by `StateHistoryList#decrementPointer`.
+
+image::UndoRedoNewCommandAB2StateListDiagram.png[width="800"]
+
+[NOTE]
+If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous
+address book states to restore. The undo command uses `Model#canUndo()` to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the undo. +
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+Step 4.
+The redo command does the opposite — it calls `Model#redo()`, which shifts the `currentStatePointer` in either
+the `VersionedAddressBook` and/or `VersionedEventList` once to the right, pointing to the previously
+undone state, and restores it to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `pointer` is at index `stateHistoryList.size() - 1`, pointing to the latest memory state, then
+there are no undone states to restore. The redo command uses `Model#canRedo()` to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+image::UndoRedoNewCommandAB3StateListDiagram.png[width="800"]
 
-image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
+Step 5.
+The user then decides to add a new event to the event list, by the `addEvent` command. The `addEvent` command calls
+`Model#addEvent()`, which will add a state record index integer `STATE_EVENTLIST` to the `StateHistoryList`.
+This command is the last entered command, therefore the `pointer` in `StateHistoryList` shifts forward.
+The `addEvent` command also calls `Model#commitEventList()`, causing the modified state of the event list after
+the `addEvent` command executes to be saved in the `eventListStateList`, and the event list `currentStatePointer`
+is shifted to the newly inserted address book state. The `currentStatePointer` for `VersionedAddressBook` remains unchanged
+as only the `VersionedEventList` was modified.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+image::UndoRedoNewCommandELStateListDiagram.png[width="800"]
 
-image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
+Step 6.
+The user then decides to execute `clear`. Since this command must clear both the address book and event list,
+the `clear` command calls both `Model#commitAddressBook()` and `Model#commitEventList()`. It adds a state
+record index integer `STATE_BOTH` to the `StateHistoryList`. The `currentStatePointer` in both
+`VersionedAddressBook` and `VersionedEventList` shifts to point to the newly added states respectively.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+image::UndoRedoNewCommandBothStateListDiagram.png[width="800"]
 
-image::UndoRedoActivityDiagram.png[width="650"]
+==== Future Improvements
 
-==== Design Considerations
+===== Façade Class for VersionedAddressBook and VersionedEventList
 
-===== Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
-
-===== Aspect: Data structure to support the undo/redo commands
-
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-// end::undoredo[]
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
+To improve abstraction and shift the responsibility of deciding which list to undo or redo away from the
+`Model`, a façade class can be created, e.g. `VersionedProManage`, to hold the `StateHistoryList`,
+`VersionedAddressBook` and `VersionedEventList`. The model will then only have to call the `VersionedProManage#undo()`
+or `VersionedProManage#redo()` methods.
+// end::UndoRedo[]
 
 === Logging
 
@@ -532,334 +879,146 @@ A project often depends on third-party libraries. For example, Address Book depe
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
-[[GetStartedProgramming]]
-[appendix]
-== Suggested Programming Tasks to Get Started
-
-Suggested path for new programmers:
-
-1. First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <<GetStartedProgramming-EachComponent>>.
-
-2. Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <<GetStartedProgramming-RemarkCommand>> explains how to go about adding such a feature.
-
-[[GetStartedProgramming-EachComponent]]
-=== Improving each component
-
-Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).
-
-[discrete]
-==== `Logic` component
-
-*Scenario:* You are in charge of `logic`. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in order to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.
-
-[TIP]
-Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
-
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
-+
-****
-* Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
-* Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
-** Add new tests for each of the aliases that you have added.
-** Update the user guide to document the new aliases.
-** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
-****
-
-[discrete]
-==== `Model` component
-
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
-
-[TIP]
-Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
-
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
-+
-****
-* Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] API need to be updated.
-** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
-* Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each person, and remove the `tag` from each person.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
-** Add new tests for each of the new public methods that you have added.
-** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
-****
-
-[discrete]
-==== `Ui` component
-
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
-
-[TIP]
-Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
-
-. Use different colors for different tags inside person cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
-+
-**Before**
-+
-image::getting-started-ui-tag-before.png[width="300"]
-+
-**After**
-+
-image::getting-started-ui-tag-after.png[width="300"]
-+
-****
-* Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
-** Use the .css attribute `-fx-background-color` to add a color.
-** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
-* Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
-*** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
-****
-
-. Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
-+
-**Before**
-+
-image::getting-started-ui-result-before.png[width="200"]
-+
-**After**
-+
-image::getting-started-ui-result-after.png[width="200"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
-** Refer to link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
-* Solution
-** Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
-** Modify link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
-** You can write two different kinds of tests to ensure that the functionality works:
-*** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
-*** Do read the commits one at a time if you feel overwhelmed.
-****
-
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
-+
-**Before**
-+
-image::getting-started-ui-status-before.png[width="500"]
-+
-**After**
-+
-image::getting-started-ui-status-after.png[width="500"]
-+
-****
-* Hints
-** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
-* Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of persons when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
-** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of persons status bar.
-** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
-****
-
-[discrete]
-==== `Storage` component
-
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.
-
-[TIP]
-Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
-
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the address book can be saved in a fixed temporary location.
-+
-****
-* Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/XmlAddressBookStorage.java[`XmlAddressBookStorage`] class.
-* Solution
-** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
-****
-
-[[GetStartedProgramming-RemarkCommand]]
-=== Creating a new command: `remark`
-
-By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
-
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
-
-==== Description
-Edits the remark for a person specified in the `INDEX`. +
-Format: `remark INDEX r/[REMARK]`
-
-Examples:
-
-* `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first person to `Likes to drink coffee.`
-* `remark 1 r/` +
-Removes the remark for the first person.
-
-==== Step-by-step Instructions
-
-===== [Step 1] Logic: Teach the app to accept 'remark' which does nothing
-Let's start by teaching the application how to parse a `remark` command. We will add the logic of `remark` later.
-
-**Main:**
-
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
-
-**Tests:**
-
-. Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
-
-===== [Step 2] Logic: Teach the app to accept 'remark' arguments
-Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
-
-**Main:**
-
-. Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
-. Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
-
-**Tests:**
-
-. Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
-. Add `RemarkCommandParserTest` that tests different boundary values
-for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
-
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
-
-**Main:**
-
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
-
-===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
-
-**Main:**
-
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
-. Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
-
-**Tests:**
-
-. Add test for `Remark`, to test the `Remark#equals()` method.
-
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-
-**Main:**
-
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `addressBook.xml` so that the application will load the sample data when you launch it.)
-
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
-
-**Main:**
-
-. Add a new Xml field for `Remark`.
-
-**Tests:**
-
-. Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsAddressBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
-
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-
-**Tests:**
-
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the person that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
-
-===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
-
-**Main:**
-
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
-
-**Tests:**
-
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
-
-===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
-We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
-
-**Main:**
-
-. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a person.
-
-**Tests:**
-
-. Update `RemarkCommandTest` to test that the `execute()` logic works.
-
-==== Full Solution
-
-See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
-
+// tag::productscope[]
 [appendix]
 == Product Scope
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* Companies have project management teams. Delegation of tasks and events can become complicated.
+* Project teams comprises of project managers, and the various sub branches : Admin, Logistics, Programmes, Publicity, Marketing and Safety.
+* This application aims to provide an all in one platform to ease the mode of task and event allocation.
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+**Project Manager:**
+
+* In charge of overall project.
+* He/She has the autonomy to add/edit/view/delete all of the events and tasks of his/her employees.
+
+**Employees:**
+
+  * He/she is only entitled to view all of the events of himself/herself within
+    the department.
+
+*Value proposition*:
+
+* Facilitates workflow faster than a typical mouse/GUI driven app.
+* Saves consumers' efficiency, money and time tremendously.
 
 [appendix]
+// end::productscope[]
+
+// tag::userstories[]
 == User Stories
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
 
-[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
+[width="125%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |New Project Manager|See usage instructions |Refer to instructions when I forget how to use the ProManage
 
-|`* * *` |user |add a new person |
+|`* * *` |Project Manager |Add a new person  |Maintain a record of that employee
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |Project Manager |Delete a person  |Remove employees that left the company
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |Project Manager |Edit a person's details |Change the relevant information
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |Project Manager |Find a person by name |Locate details of people without having to go through the entire list
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |Project Manager |Find a person by email |Locate people through their unique work email address
+
+|`* * *` |Project Manager |List the people in alphabetical order by name or by department |View the whole list of
+relevant people
+
+|`* * *` |Project Manager |Add a new event |Maintain a record of that event
+
+|`* * *` |Project Manager |Delete an event |Remove events that are no longer relevant
+
+|`* * *` |Project Manager |Edit the information of an event |Update the relevant information
+
+|`* * *` |Project Manager |View a colleague's events |To monitor my colleague's event schedule before I plan an event
+
+|`* * *` |Project Manager |View an employee's events on a certain date, month or year |To view the employee's events on a certain date, month or year
+
+|`* * *` |Project Manager |View a colleague's events on a certain date, month or year |To check if he/she is free for an important meeting
+
+|`* * *` |Project Manager |Invite an employee to events |Add the person to the a department meeting
+
+|`* * *` |Project Manager |Invite an employee to events |Add the person to the a company outing
+
+|`* * *` |Project Manager |Remove people from the event |Remove irrelevant people from an event
+
+|`* * *` |Project Manager |Remove people from the event |Remove people who I accidentally invited
+
+|`* * *` |Project Manager |Find an event |Locate details of the event without having to look through the entire list
+
+|`* * *` |Project Manager |Sort the event list by name |View the events by alphabetical order
+
+|`* * *` |Project Manager |Sort the event list by time and date |View what are the more recent events of the event list
+
+|`* * *` |Project Manager |Select an event |To know more information about the event
+
+|`* * *` |Project Manager |History of commands |To view the commands previously inserted into ProManage
+
+|`* * *` |Project Manager |Undo command |Undo my previously entered command
+
+|`* * *` |Project Manager |Redo command |Redo my previously undo command
+
+|`* * *` |Project Manager |View events related to myself| To avoid looking through the entire event list to find out which events I
+need to attend
+
+|=======================================================================
+// end::userstories[]
+[width="125%",cols="22%,<23%,<25%,<30%",options="header",]
+|=======================================================================
+|Priority |As a ... |I want to ... |So that I can...
+|`* * *` |User |Exit command |
+
+|`* * *` |New Employee |See usage instructions |Refer to instructions when I forget how to use the ProManage
+
+|`* * *` |Employee |Find a person by name |Locate details of people without having to go through the entire list
+
+|`* * *` |Employee |Find a person by email |Locate people through their unique work email address
+
+|`* * *` |Employee  |Sort the event list by name |View the events by alphabetical order
+
+|`* * *` |Employee  |Sort the event list by time and date |View what are the more recent events of the event list
+
+|`* * *` |Employee |Undo command |Undo my previously entered command
+
+|`* * *` |Employee |Redo command |Redo my previously undo command
+
+|`* * *` |Employee |View a colleague's events |To check out what have my colleague been up to
+
+|`* * *` |Employee |View events related to myself| To avoid looking through the entire event list to find out which events I
+need to attend
+
+|`* * *` |Employee |Invite my colleagues to events |Add persons to the selected event
+
+
 |=======================================================================
 
 _{More to be added}_
 
 [appendix]
+
+
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `ProManage` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Add person
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a person.
+2.  ProManage adds records down the input information of the person.
+3.  ProManage adds person.
 +
 Use case ends.
 
@@ -873,22 +1032,333 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+[discrete]
+=== Use case: Edit person
+
+*MSS*
+
+1.  User requests to edit information of person
+2.  ProManage shows a list of persons
+3.  User requests to edit a specific person in the list
+4.  ProManage edits the person
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. ProManage shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Delete person
+
+*MSS*
+
+1.  User requests to list persons
+2.  ProManage shows a list of persons
+3.  User requests to delete a specific person in the list
+4.  ProManage deletes the person
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. ProManage shows an error message.
++
+Use case resumes at step 2.
+
+// tag::usecases[]
+[discrete]
+=== Use case: Add Event
+
+*MSS*
+
+1.  User requests to create an event.
+2.  ProManage displays input format and requests user to enter event input details according to format.
+3. User enters event details.
+4.  Program displays users input and confirm the input with user.
+5. User confirms with ProManage
+6. ProManage adds event to user's event list.
+
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. User input incorrect format.
+[none]
+** 3a1. ProManage shows an error message.
++
+Use case resumes at step 2.
+// end::usecases[]
+[discrete]
+=== Use case: Delete event
+
+*MSS*
+
+1.  User requests to delete an event
+2.  ProManage shows a list of events
+3.  User requests to delete a specific event in the list
+4.  ProManage deletes the event
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. ProManage shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Edit event
+
+*MSS*
+
+1.  User requests to edit an event.
+2.  ProManage shows a list of events to the user.
+3.  User requests to edit a specific event in the list
+4.  User enters the updated details of the event.
+5.  ProManage confirms edited details with the user.
+6.  User confirms with ProManage.
+7.  ProManage edits confirmed details of the chosen event.
+
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. ProManage shows an error message.
++
+Use case resumes at step 2.
+
+
+[discrete]
+=== Use case: Sorting the event list based on the parameter given
+
+*MSS*
+
+1.  User requests to list event in a particular order.
+2.  ProManage request what order to list the event.
+3.  User enters the order he/she wishes to list the event.
+4.  ProManage list the event in that particular order
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Invalid parameters
+** 3a1. ProManage shows an error message.
+** Use case ends
+
+[discrete]
+=== Use case: Finding out events which is associated with user
+
+*MSS*
+
+1.  User login the app
+2.  User request to list event associated with he/she
+3.  ProManage list the event that is associated with the user
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. User did not login
+** 3a1. ProManage shows an error message to prompt user to login before using this function
+** Use case ends
 
 [appendix]
+
+
+// tag::usecases_invite[]
+[discrete]
+=== Use case: Invite employees to events
+
+*Guarantee*:
+
+* The invite will not result in clash of events in the employee schedule
+
+*MSS*
+
+1.  User requests to add employee to events.
+2.  ProManage request employee details and event details.
+3.  User enters employee and event information.
+4.  ProManage adds employee to events
+
++
+Use case ends.
+
+
+*Extensions*
+
+* 3a. Invalid employee.
+** 3a1. ProManage shows an error message.
+** Use case ends
++
+
+* 3b. Invalid event.
+** 3b1. ProManage shows an error message.
+** Use case ends
++
+* 3c. Employee is already invited to event.
+** 3c1. AddressBook shows an error message.
+
+** Use case ends
++
+* 3d. Event conflicts with employee's schedule
+** 3d1. AddressBook shows an error message.
+** Use case ends
+
+// end::usecases_invite[]
+[discrete]
+=== Use case: Remove employees from events
+
+*Precondition*: User must be of manager or default privilege
+
+*MSS*
+
+1.  User requests to remove employee from an event.
+2.  ProManage request employee details and event details.
+3.  User enters employee and event information.
+4.  ProManage remove employee from events
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Invalid employee.
+** 3a1. ProManage shows an error message.
+** Use case ends
++
+
+* 3b. Invalid event.
+** 3b1. ProManage shows an error message.
+** Use case ends
++
+* 3c. Event has no attendees
+** 3c1. ProManage shows an error message.
+** Use case ends
++
+* 3d. Employee is not originally invited to event.
+** 3d1. ProManage shows an error message.
+
+** Use case ends
+
+
+[discrete]
+=== Use case: View an employee's schedule on a date/month/year
+
+*MSS*
+
+1.  User requests to view an employee's schedule.
+2.  ProManage request employee details and date details.
+3.  User enters employee and date information.
+4.  ProManage remove employee from events
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Invalid employee.
+** 3a1. ProManage shows an error message.
+** Use case ends
++
+* 3b. Invalid date format
+** 3b1. ProManage shows an error message.
+** Use case ends
+
+// tag::usecases_undo[]
+=== Use case: Undo the previously entered command.
+*MSS*
+
+1.  User requests to undo previous command
+2.  ProManage undos the command, restoring the previous state.
+
++
+Use case ends.
+
+*Extensions*
+
+* 1a. No commands left to undo.
+** 1a1. ProManage shows an error message.
+** Use case ends
++
+// end::usecases_undo[]
+
+// tag::usecases_redo[]
+=== Use case: Redo the previously undone command.
+*MSS*
+
+1.  User requests to redo the previously undone command
+2.  ProManage redos the command, restoring the address book or event list state.
+
++
+Use case ends.
+
+*Extensions*
+
+* 1a. No previously undone commands available.
+** 1a1. ProManage shows an error message.
+** Use case ends
++
+// end::usecases_undo[]
+
+// tag::nonfunctionalrequirements[]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  A user new to the program should be able to navigate and utilize the CLI easily.
+.  Experienced CLI users should be able to be familiar with all the commands and navigation within the program.
+.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should
+be able to accomplish most of the tasks faster using commands than using the mouse.
+.  User cannot be in multiple departments.
+.  The program should respond within 2 seconds after creation, editing, and deletion of events.
 
 [appendix]
+// end::nonfunctionalrequirements[]
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
@@ -938,11 +1408,35 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
+=== Logging into the app
+. Logging without email
+
+.. Prerequisites: App is not login yet. Privilege is default
+
+.. Test Case: `login manager` +
+   Expected: login successfully as manager
+
+.. Test Case: `login employee` +
+   Expected: login successfully as manager
+
+.. Other incorrect login commands to try: `login`,`login ceo` (login without email only accepts manager and employee)
+
+. Logging with email
+
+.. Prerequisites: App is not login yet. Privilege is default. Email of an existing person in addressbook
+
+
+.. Test Case: `login as lol@example.com` +
+   Expected: login successfully as the designation of the person
+
+.. Other incorrect login commands to try: `login as` `login as invalidemail`
+
 === Deleting a person
 
 . Deleting a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list all people` command. Multiple persons in the list.
+
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
@@ -950,7 +1444,95 @@ _{ more test cases ... }_
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
+=== Inviting a person to an event
+
+. Inviting a person while all persons and events are listed
+
+.. Prerequisites: List all persons using the `list all` command. Multiple persons and events in the list.
+.. Test case: `invite 1 to/1` +
+   Expected: First employee is added to first event. Use `select 1` to verify that the fifth event is present in the event list.
+.. Test case: `invite 1 to/1` (continued from test case above) +
+   Expected: Error message as employee is already invited to event.
+.. Test case: `invite 0 to/1` +
+   Expected: No employee is invited. Error details shown in the status message.
+.. Other incorrect invite commands to try: `invite`, `invite x to/1` (where x is larger than the person list size), `invite 1 to/y` (where y is larger than the event list size) +
+   Expected: Error message.
+
+=== Removing a person from an event
+
+. Removing a person while all persons and events are listed
+
+.. Prerequisites: List all persons using the `list all` command. Multiple persons and events in the list.
+.. Test case: `invite 1 to/1` then `remove 1 from/1`+
+   Expected: First employee is added to first event and then removed. Use `select 1` to verify that the person is uninvited from the event.
+.. Test case: `remove 1 to/1` (continued from test case above) +
+   Expected: Error message as employee is currently not invited to event.
+.. Test case: `delete 0 to/1` +
+   Expected: No employee is removed. Error details shown in the status message.
+.. Other incorrect invite commands to try: `remove`, `remove x to/1` (where x is larger than the person list size), `remove 1 to/y` (where y is larger than the event list size) +
+   Expected: Similar to error message.
+
+
+=== Listing people and events
+
+. Listing personnel of specific departments
+
+.. Prerequisites: Add personnel of different departments into ProManage using the `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN des/Manager`
+and `add n/Mark p/93455678 e/mark@example.com a/Mark street, block 12, #05-01 dep/Marketing des/Manager` and `add n/Tracy p/98213456 e/tracy@example.com a/Tracy Street, WaterWorks Condo, block J1, #01-01 dep/Finance des/Employee`
+.. Test case: `list dep Marketing` +
+   Expected: The details of Mark or any personnel who is in the Marketing department will appear. Details of the listed personnel will be listed.
+.. Test case: `list dep Admin Finance` +
+   Expected: The details of John and Tracy or any personnel who is in the Admin and Finance department will appear. Details of the listed personnel will be listed.
+.. Test case: `list all people` +
+   Expected: The details of all personnel will be listed.
+.. Other incorrect delete commands to try: `list admn`, `list al people` (where the input is not of correct spelling form) +
+   Expected: Error thrown.
+
+. Listing all personnel and events
+
+.. Prerequisites: Add personnel of different departments such as the example above. Add different events into ProManage using the `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` and
+`addEvent n/Financial Review d/Review the financial quarter l/Conference Room 4 date/2018-10-23 s/14:00 e/16:30`.
+
+.. Test case: `list all events`
+   Expected: The details of all events will be listed.
+
+.. Test case: `list dep Admin Finance` or any DEPARTMENT -> `list all`
+   Expected: The details of all personnel and events will be listed.
+
+=== Selecting an Event
+
+. Selecting event while all events are listed
+
+.. Prerequisites: List all persons using the `list all` command. There must be at least one person and one event in the list.
+
+.. Test case: `invite 1 to/1` then `selectEvent 1` +
+   Expected: First event in the list is highlighted. Employee list is filtered to only show the first person.
+
+.. Test case: `selectEvent 2` (continued from test case above) +
+   Expected: Second event in the list is highlighted. Employee list is empty.
+
+.. Test case: `selectEvent 0` +
+   Expected: Error thrown.
+
+.. Other incorrect selectEvent commands to try: `selectevent` (command is case-sensitive),
+   `selectEvent a`, `selectEvent x` (where x is larger than the event list shown).
+
+=== Sorting of events
+. Sorting of the event list based on the given params
+
+.. Prerequisites: No prerequisites
+
+.. Test case: `sort name` +
+   Expected: Event list to be sorted according their name.
+
+.. Test case: `sort date` +
+   Expected: Event list to be sorted according to the date from the earliest to the latest
+
+.. Other incorrect sort command to try: `sort` , `sort random`
+
 _{ more test cases ... }_
+
+
 
 === Saving data
 

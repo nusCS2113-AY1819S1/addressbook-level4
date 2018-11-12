@@ -29,6 +29,11 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_MONTH = "13";
+    private static final String INVALID_YEAR = "18";
+    private static final String INVALID_START_TIME = "25:00";
+    private static final String INVALID_END_TIME = "25:00";
+    private static final String INVALID_DATE = "2018-13-32";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -36,6 +41,11 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_MONTH = "12";
+    private static final String VALID_YEAR = "2018";
+    private static final String VALID_START_TIME = "12:00";
+    private static final String VALID_END_TIME = "1:00";
+    private static final String VALID_DATE = "2018-10-31";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -154,6 +164,36 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseMonth_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseMonth((String) null));
+    }
+
+    @Test
+    public void parseMonth_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseMonth(INVALID_MONTH));
+    }
+
+    @Test
+    public void parseMonth_validValue_returnsString() throws Exception {
+        assertEquals(VALID_MONTH, ParserUtil.parseMonth(VALID_MONTH));
+    }
+
+    @Test
+    public void parseYear_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseYear((String) null));
+    }
+
+    @Test
+    public void parseYear_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseYear(INVALID_YEAR));
+    }
+
+    @Test
+    public void parseYear_validValue_returnsString() throws Exception {
+        assertEquals(VALID_YEAR, ParserUtil.parseYear(VALID_YEAR));
     }
 
     @Test
