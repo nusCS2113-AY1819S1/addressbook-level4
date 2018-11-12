@@ -18,7 +18,7 @@ Students living in Residential Colleges are presented with a myraid of activitie
 Thus, Event Manager offers a pragmatic solution to the students' problem of managing events in colleges, by allowing them to view and register for any event in one setting. Additionally, it is supported by other features to enhance the user's experience, such as the Comment feature and the Reminder feature. +
 
 
-The following is a list of the main features in Event Manager:
+*The following is a list of the main features in Event Manager:*
 ====
 .  *Authentication:* Admin accounts to manage events and user accounts to register for events.
 .  *Find:* A search feature to filter events based on keywords in the events' data fields.
