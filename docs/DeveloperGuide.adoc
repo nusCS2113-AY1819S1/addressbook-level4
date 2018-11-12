@@ -18,7 +18,7 @@ By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-BookInventory™ is catered solely for students as well as other managerial roles such as store managers and accountant. BookInventory™ allows store managers to increase/decrease stocks for each book. Accountants will be able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, BookInventory™ is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+_BookInventory_ is catered solely for students as well as other managerial roles such as store managers and accountant. _BookInventory_ allows store managers to increase/decrease stocks for each book. Accountants will be able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, _BookInventory_ is optimized for those who prefer to work with *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*.
 
 == Setting up
 
@@ -212,7 +212,7 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Book Inventory data.
+* stores the `Book Inventory` data.
 * exposes an unmodifiable `ObservableList<Book>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -232,12 +232,12 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Book Inventory data in xml format and read it back.
+* can save the `Book Inventory` data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.bookinventory.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
@@ -325,7 +325,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 // tag::checkcommand[]
 === Check feature
-One of the *important* features for BookInventory is for users, especially store owners, to be able to check the remaining stocks for the books.
+One of the *important* features for BookInventory is for users, especially store owners, to be able to check the remaining stocks of the books in the inventory.
 To do so, we have added a `check` command to the existing list of commands.
 
 ==== Current Implementation
@@ -345,7 +345,7 @@ image::CheckSequenceDiagram.png[width="800"]
 ** Cons: Unable to retrieve the original order of the BookInventory.
 * **Alternative 2:** Only the displayed list is sorted.
 ** Pros: Original order of the BookInventory is kept.
-** Cons: Changes to the original code to display the list is required.
+** Cons: Changes in the original code to display the list is required.
 // end::checkcommand[]
 
 // tag::stockcommand[]
@@ -579,17 +579,25 @@ unintended by the user.
 
 // tag::tabfeature[]
 === Tab feature
-For users' *convenience*, we have implemented this feature for them to easily cycle through existing `ISBN` in the inventory without the need to manually type them out.
+For users' *convenience*, we have implemented this feature to easily cycle through existing `ISBN` in the inventory without the need to manually type them out.
 
 ==== Current Implementation
-The tab mechanism utilises `Ui`, `Model` and `Logic` component to complete its function.
+The tab mechanism utilises `Ui`, `Model` and `Logic` components. It stores the list of Isbn in a Queue Data Structure.
+
+Given below is an example usage scenario and how the tab mechanism works
+
+Step 1: The user enters `sell i/978` in the `CommandBox` to sell a book with the Isbn starting with '978'.
+
+Step 2: The user now feels that keying the whole 13 digit of the Isbn is a hassle, and decides to complete the Isbn using pressing `tab`. The `tab` feature will take in `sell i/978` in the `CommandBox` and retrieve `978` from the Isbn field.
 
 The following sequence diagram shows how the tab operation works:
 
 .Sequence Diagram for Tab Operation
 image::TabSequenceDiagram.png[width="800"]
 
-After the function `navigateToNextIsbn()` is completed, `commandTextField.requestFocus()` and `commandTextField.positionCaret(commandTextField.getLength())` are called to bring the caret to the end of the line for users to finish typing their command.
+After the function `navigateToNextIsbn()` is completed, `commandTextField.requestFocus()` and `commandTextField.positionCaret(commandTextField.getLength())` are called to bring the caret to the end of the line for users to continue typing the command.
+
+Step 3: The user presses `tab` again as the Isbn is not correct. The `tab` feature will then check if the Isbn matches the first Isbn in the Queue. If it matches, the first Isbn in the Queue will be removed and added to the end of the Queue. The next Isbn in the Queue will be displayed.
 
 ==== Design Considerations
 

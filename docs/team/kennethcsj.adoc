@@ -27,9 +27,9 @@ This Project Portfolio demonstrates my contributions and ability to write docume
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to conveniently stock, sell and delete books* from the inventory
-** What it does: allows user to execute `stock`/`sell`/`delete` commands by selecting the target book either from a list or with their unique ISBN. To facilitate the typing of ISBN, users can cycle through the existing ISBNs in the inventory using their incompleted ISBN entry by pressing kbd:[Tab].
-** Justification: These features improve the product significantly as stocking up and selling of books are done *daily* which make them the core functions of _BookInventory_. As such, the application should provide a convenient way to address them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** What it does: users can execute `stock`/`sell`/`delete` commands by selecting the book either from a list or with their unique ISBN. To facilitate the typing of ISBN, users can cycle through existing ISBNs in the inventory by pressing kbd:[Tab].
+** Justification: These features improve the product significantly as books are bought and sold *daily* which make them the core functions of _BookInventory_. As such, there should be a more convenient way to execute them.
+** Highlights: This enhancement affects existing commands and commands to be added in future. The implementation was challenging as it required changes to existing commands.
 
 * *Minor enhancement*: added *the ability to display a list of books less than or equal to a given quantity* using the `check` command.
 
@@ -41,9 +41,7 @@ This Project Portfolio demonstrates my contributions and ability to write docume
 *** Managed releases `v1.1` - `v1.4` (5 releases) on GitHub.
 ** Additional enhancement to existing features:
 *** Added a new cost field to the `add` command.
-*** Updated the unique identifier for books to `ISBN`.
-*** Updated the `edit` command to prevent edits to `quantity`.
-*** Updated `find` command to allow substrings as an input to find for books.
+*** Enhanced `find` command to allow substrings as an input to find for books.
 ** Documentation:
 *** Updated the initial User Guide to be a representation of _BookInventory_.
 ** Community:
