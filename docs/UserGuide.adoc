@@ -331,9 +331,9 @@ Examples:
 
 The following diagram illustrates how the `todo` is being used on the JitHub CLI-GUI app:
 
-image::TodoUsage1.png[width="500"]
+image::TodoUsage1.png[width="1000"]
 
-image::TodoUsage2.png[width="500"]
+image::TodoUsage2.png[width="200"]
 
 === Finish To-do task: `finishTodo`
 
@@ -351,7 +351,7 @@ Examples:
 
 The following diagram illustrates how the `finishTodo` is being used on the JitHub CLI-GUI app:
 
-image::FinishTodoUsage.png[width="500"]
+image::FinishTodoUsage.png[width="1000"]
 
 === Add Reminder: `reminder` [coming in v1.4]
 
