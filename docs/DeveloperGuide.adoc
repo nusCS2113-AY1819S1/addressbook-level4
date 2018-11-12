@@ -132,7 +132,7 @@ Note how the `Model` simply raises a `CompanyBookChangedEvent` when the data in 
 
 The diagram in Figure 4 shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
-.Component interactions for `delete 1` command (part 2)
+.Component interactions for `deleteC 1` command (part 2)
 image::SDforDeleteCompanyEventHandling.png[width="800"]
 
 [NOTE]
@@ -1744,9 +1744,9 @@ _{ more test cases ... }_
 . Deleting a candidate while all candidates are listed
 
 .. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
-.. Test case: `delete 1` +
+.. Test case: `deletec 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
+.. Test case: `deletec 0` +
    Expected: No candidate is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.

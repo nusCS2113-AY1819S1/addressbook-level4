@@ -181,7 +181,7 @@ public class DeleteCandidateCommandTest {
         // delete -> deletes second candidate in unfiltered candidate list / first candidate in filtered candidate list
         deleteCandidateCommand.execute(model, commandHistory, userPrefs);
 
-        // undo -> reverts addressbook back to previous state and filtered candidate list to show all persons
+        // undo -> reverts RecruitBook back to previous state and filtered candidate list to show all persons
         expectedModel.undoRecruitBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory,
                 UndoCommand.MESSAGE_SUCCESS, expectedModel);
