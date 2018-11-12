@@ -694,17 +694,31 @@ schedule 1 at a time.
 // end::schedule[]
 
 // tag::Expenses[]
-=== Expenses Feature
+=== Add Expenses
 The expenses feature contains to two commands.
 
-* The command `addex` allows the user to add expenses for each employee.
-* The command `removeex` allows the user to remove expenses for each employee.
+* The command `addExpenses` allows the user to add expenses for each employee.
 
-==== Current Implementation for `addex` command
-The `addex` mechanism is facilitated by `AddExpensesCommandParser`.
-The `AddExpensesCommandParser` implements the `Parser` interface, parses the arguments parameter, which is the input from the user, and creates a new `AddExpensesCommand` object.
-Checks on whether the input complies with the required format is handled by other classes.
-This checking of input compliance is facilitated by two helper methods, namely `isValidEmployeeId` from `EmployeeId` class and `isValidExpensesAmount` from `ExpensesAmount` class.
+==== Current Implementation for `addExpenses` command
+
+===== Phase 1
+The `addExpenses` command is handled by `AddExpensesCommandParser`.
+The `AddExpensesCommandParser` implements the `Parser` interface, takes in input from the user as a form of argument,
+The `AddExpensesCommandParser` will then check if user input contains too many prefixes or check for multiple entries of
+same prefix.
+
+Next, the `AddExpensesCommandParser` will compute the value of `expensesAmount` to be added by summing the
+the values of `travelExpenses`, `medicalExpenses` and `miscellaneousExpenses`. The `AddExpensesCommandParser` will then
+create the `Expenses` and `EditExpensesDescriptor` objects. Other classes will handle validation of the input, check if
+it has the correct input format.
+
+The five methods that helps to valid the input are:
+
+* `isValidEmployeeId` from `EmployeeId` class
+* `isValidExpensesAmount` from `ExpensesAmount` class
+* `isValidTravelExpenses` from `TravelExpenses` class
+* `isValidMedicalExpenses` from `MedicalExpenses` class
+* `isValidMiscellaneousExpenses` from `MiscellaneousExpenses` class
 
 [NOTE]
 If the input does not comply with the required format, an error message will be shown to the user.
@@ -727,7 +741,7 @@ Code snippet of `isValidExpensesAmount` that shows the checking of the input com
 
 [source, java]
 ----
-public static final String EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = "\\d{1,}";
+public static final String EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = "[-]?[0-9]+(.[0-9]{0,2})?";
 
 /**
      * Returns true if a given string is a valid Expenses Amount.
@@ -737,7 +751,11 @@ public static final String EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = "\\d{1,}";
     }
 ----
 
-==== Current Implementation for `removeex` command
+===== Phase 2
+The `AddExpensesCommand` will take in the `Expenses` and `EditExpensesDescriptor` objects.
+
+
+==== Current Implementation for `deleteExpenses` command
 
 The `removeex` mechanism is facilitated by `RemoveExpensesCommandParser`.
 The `RemoveExpensesCommandParser` implements the `Parser` interface, parses the arguments parameter, which is the input from the user, and creates a new `RemoveExpensesCommand` object.
@@ -1693,7 +1711,7 @@ Use case ends.
 ** 1a1. CHRS informs user that the employee does not exist.
 +
 Use case resumes at step 1.
-* 1b. CHRS detects invalid input format or missing details.
+* 1b. CHRS detects invalid input format or expenses exceed limit or result in negative value.
 [none]
 ** 1b1. CHRS shows an error message containing either the details of the command usage or parameters constraints.
 +
