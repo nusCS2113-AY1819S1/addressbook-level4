@@ -441,30 +441,10 @@ image::FilterSequenceDiagram.png[width="800"]
 ==== Design Considerations
 
 ===== Aspect: How filter feature executes
-* **Alternative 1 (current choice):** Having three variations of filter feature for different entities.
-** Pros:
-*** Greater distinction between the entities.
-*** More direct and intuitive for users as candidate and company objects contain same prefixes such as phone, address and email address etc.
-
-** Cons:
-*** More commands to deal with, same changes have to be made across all three commands.
-*** It might not be that user-friendly for users who prefer an all-in-one `filter` command.
-
-* **Alternative 2:** Have a central `filterManager` that handles all filters.
-** Pros: Lesser commands to handle, makes application easier for user to use
-** Cons: Some fields are found in both `candidate` and `company`, making it difficult to distinguish between the two if the same prefix is entered.
 
 ===== Aspect: Data structure to support the filter feature
-* ** Alternative 1 (current choice):** Parses the user's input into various arguments and compares each argument with each value in the object to test if it is contained in the object.
-** Pros:
-*** Putting to and getting from a `HashMap` is O(1), making it quick to add value or retrieve value for each comparison.
-*** User can input more than one field of the same prefix as a `HashMap` is used here.
-** Cons: It is messy to implement, especially when different checks have to be made for different fields.
 
-* ** Alternative 2:** Creates a `List` for each prefix instead.
-*** Pros: Easier to manage, `test` method should look neater.
-*** Cons: Takes O(N) to iterate through the `List`, and does not check for duplicates.
-
+Design considerations for `filter` command is largely similar to `find` command as they both use similar mechanism.
 // end::filter[]
 
 // tag::edit[]

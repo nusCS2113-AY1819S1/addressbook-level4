@@ -214,6 +214,7 @@ Our app’s GUI provides two different views where the Candidate Book view and t
 
 Entering commands in the other book will automatically switch your view to the correct book and still display the details of the results that you are searching for. +
 
+This note works for the below `filter` command as well:
 ****
 * Each search field has to come with a preceding prefix e.g. `n/NAME`, `p/PHONE`
 * The search is case insensitive e.g `n/hans` will match `Hans`
@@ -233,17 +234,11 @@ Examples:
 * `findc n/alice p/91234567` +
 (Returns all candidates with the name `alice` or candidates with phone number `91234567`)
 
-* `findc e/helloworld@example.com` +
-(Returns all candidates with the email `helloworld@example.com`)
-
 ==== Finds names of companies from RecruitBook based on searched fields that you have entered.
 Format: `findC <tag>/KEYWORD` +
 Supported tags: `c/COMPANY NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
 
 Examples:
-
-* `findC c/KFC c/McDonalds` +
-(Returns all companies with the name either `KFC` or `McDonalds`)
 
 * `findC n/HanBaoBao Pte Ltd a/Yishun MRT` +
 (Returns all companies with the name `HanBaoBao Pte Ltd` or with address saved as `Yishun MRT`)
@@ -254,8 +249,6 @@ Supported tags: `c/COMPANY NAME`, `j/JOB OFFER`, `g/GENDER`, `s/SALARY`, `x/AGE`
 
 Examples:
 
-* `findj j/cashier` +
-(Returns all `cashier` job offers)
 * `findj c/KFC x/18` +
 (Returns all job offers either listed by `KFC` or job offers with age range that is suitable for the entered age)
 
@@ -268,14 +261,7 @@ By using the `filter` command, you can search for candidates/companies/job offer
 
 Our app’s GUI provides two different views where the Candidate Book view and the Company Book view shows the details of all the candidates and companies respectively. +
 
-Entering commands in the other book will automatically switch your view to the correct book and still display the details of the results that you are searching for. +
-
-****
-* Each search field has to come with a preceding prefix e.g. `n/NAME`, `p/PHONE`
-* The search is case insensitive e.g `n/hans` will match `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Candidates matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
-****
+Entering commands in the other book will automatically switch your view to the correct book and still display the details of the results that you are searching for.
 
 ==== Filters names of candidates from RecruitBook based on search fields that you have entered.
 Format: `filterc <tag>/KEYWORD` +
@@ -283,23 +269,14 @@ Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `x/AGE`, `h/HIGHEST
 
 Examples:
 
-* `filterc n/john` +
-(Returns all candidates with the name `John`)
-
 * `filterc n/alice p/91234567` +
 (Returns all candidates with the name `alice` *and* phone number `91234567`)
-
-* `filterc e/helloworld@example.com` +
-(Returns all candidates with the email `helloworld@example.com`)
 
 ==== Filters names of companies from RecruitBook based on searched fields that you have entered.
 Format: `filterC <tag>/KEYWORD` +
 Supported tags: `c/COMPANY NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
 
 Examples:
-
-* `filterC c/KFC c/McDonalds` +
-(Returns all companies with the name `KFC` or `McDonalds`)
 
 * `filterC n/HanBaoBao Pte Ltd a/Yishun MRT` +
 (Returns all companies with the name `HanBaoBao Pte Ltd` *and* address saved as `Yishun MRT`)
@@ -318,6 +295,7 @@ To look for job offers listed by KFC only, include the name of company in the se
 
 * `filterj c/KFC j/cashier` +
 (Returns all `cashier` job offers listed by `KFC`)
+
 * `filterj c/KFC s/1500` +
 (Returns all job offers listed by `KFC` that has pay higher than $`1500`(inclusive))
 
