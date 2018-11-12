@@ -1603,12 +1603,14 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
+.. Log in with the default account credentials +
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 . Saving window preferences
 
 .. Resize the window to an optimum size. Move the window to a different location. Close the window.
 .. Re-launch the app by double-clicking the jar file. +
+.. Log into the application again with the relevant account details. +
    Expected: The most recent window size and location is retained.
 
 === Creating an account
