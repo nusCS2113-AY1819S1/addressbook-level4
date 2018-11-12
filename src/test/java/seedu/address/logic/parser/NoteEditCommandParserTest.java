@@ -23,9 +23,12 @@ import seedu.address.logic.commands.NoteEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.StorageController;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleManager;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.note.NoteLocation;
 import seedu.address.model.note.NoteManager;
 import seedu.address.model.note.NoteTitle;
+import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.NoteBuilder;
 
 /**
@@ -34,6 +37,9 @@ import seedu.address.testutil.NoteBuilder;
 public class NoteEditCommandParserTest {
 
     private static NoteManager noteManager = NoteManager.getInstance();
+    private static ModuleManager moduleManager = ModuleManager.getInstance();
+    private static ModuleBuilder module = new ModuleBuilder();
+    private static boolean moduleDoesExist;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -92,6 +98,19 @@ public class NoteEditCommandParserTest {
 
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessage);
+        parser.parse(args);
+    }
+
+    @Test
+    public void parse_moduleDoesNotExist_throwsParseException() throws ParseException {
+        String expectedMessage = NoteEditCommand.MESSAGE_MODULE_CODE_DOES_NOT_EXIST;
+        String moduleCode = "XX5920F";
+
+        // invalid args, module does not exist in data file
+        String args = " 1 " + PREFIX_MODULE_CODE + moduleCode;
+
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(String.format(expectedMessage, moduleCode));
         parser.parse(args);
     }
 
@@ -177,9 +196,18 @@ public class NoteEditCommandParserTest {
         noteManager.addNote(new NoteBuilder().build());
         noteManager.saveNoteList();
 
+        try {
+            moduleManager.addModule(module.build());
+        } catch (DuplicateModuleException dme) {
+            moduleDoesExist = true;
+        }
+
+        String moduleCode = "CS2113";
+
         // valid args
         String args1 = " 1  ";
         String args2 = "1 " + PREFIX_NOTE_TITLE + "New title";
+        String args3 = "1 " + PREFIX_MODULE_CODE + moduleCode;
 
         NoteEditCommand noteEditCommand = parser.parse(args1);
         assertNotNull(noteEditCommand);
@@ -187,11 +215,18 @@ public class NoteEditCommandParserTest {
         noteEditCommand = null;
         noteEditCommand = parser.parse(args2);
         assertNotNull(noteEditCommand);
+
+        noteEditCommand = null;
+        noteEditCommand = parser.parse(args3);
+        assertNotNull(noteEditCommand);
     }
 
     @AfterClass
     public static void tearDown() {
         noteManager.clearNotes();
         noteManager.saveNoteList();
+        if (!moduleDoesExist) {
+            moduleManager.deleteModule(module.build());
+        }
     }
 }

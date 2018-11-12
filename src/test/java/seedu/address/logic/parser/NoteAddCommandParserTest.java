@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_TITLE;
 
+import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -20,14 +21,21 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleManager;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.note.NoteDate;
 import seedu.address.model.note.NoteLocation;
 import seedu.address.model.note.NoteTitle;
+import seedu.address.testutil.ModuleBuilder;
 
 /**
  * Contains tests for NoteAddCommandParser.
  */
 public class NoteAddCommandParserTest {
+
+    private static ModuleManager moduleManager = ModuleManager.getInstance();
+    private static ModuleBuilder module = new ModuleBuilder();
+    private static boolean moduleDoesExist;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -213,7 +221,26 @@ public class NoteAddCommandParserTest {
     }
 
     @Test
+    public void parse_moduleDoesNotExist_throwsParseException() throws ParseException {
+        String expectedMessage = NoteAddCommand.MESSAGE_MODULE_CODE_DOES_NOT_EXIST;
+        String moduleCode = "XX1234F";
+
+        // invalid args, module does not exist in data file
+        String args = " " + PREFIX_MODULE_CODE + moduleCode;
+
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(String.format(expectedMessage, moduleCode));
+        parser.parse(args);
+    }
+
+    @Test
     public void parse_validArgs_success() throws ParseException {
+        try {
+            moduleManager.addModule(module.build());
+        } catch (DuplicateModuleException dme) {
+            moduleDoesExist = true;
+        }
+
         // valid args with no parameters
         String args = "";
         NoteAddCommand noteAddCommand = parser.parse(args);
@@ -237,5 +264,12 @@ public class NoteAddCommandParserTest {
         noteAddCommand = null;
         noteAddCommand = parser.parse(args);
         assertNotNull(noteAddCommand);
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        if (!moduleDoesExist) {
+            moduleManager.deleteModule(module.build());
+        }
     }
 }
