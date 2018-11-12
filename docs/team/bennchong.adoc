@@ -50,7 +50,7 @@ of them implemented. For example, to have an extra level of security such as 2FA
 but does this application warrants the extra steps to log in? Not so in my opinion.
 
 
-* *Minor enhancement*: Used a hashing feature together with a salt to store user's password. This is to improve security by
+* *Minor enhancement*: Used a hashing feature together with a salt to store user's password in json format. This is to improve security by
 not storing users' password in plaintext, but encrypted securely.
 
 * *Project Overheads*
@@ -82,6 +82,7 @@ new users to use the application.
 |===
 
 include::../UserGuide.adoc[tag=security]
+include::../UserGuide.adoc[tag=securityP2]
 
 
 == My Developer Guide Contribution

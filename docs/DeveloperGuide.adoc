@@ -532,7 +532,7 @@ similar to above. +
 
 .Command Parsing
 
-The Sequence Diagram when a user enters a command is seen below Figure 10:
+The Sequence Diagram when a user enters a command is seen in the figure below:
 
 .Interactions between the UI Component and Security Component for the login Command
 image::SecurityParseCommandsSD.png[width="800"]
@@ -549,7 +549,7 @@ thrown with the relevant message to the user.
 .Interactions between the UI Component and Security Component for the login Command
 image::SecurityLoginSequenceDiagram.png[width="800"]
 
-Figure 20 shows the steps when login is called after Figure 19 has completed (since login is a command too).
+The figure above shows the steps when login is called after Figure 19 has completed (since login is a command too).
 
 AppUsers contains an array of
 AccountCredentials, which has the attribute of Username and Password, and methods such isPasswordValid(). Here it also
