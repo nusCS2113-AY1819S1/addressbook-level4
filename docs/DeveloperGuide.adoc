@@ -700,7 +700,7 @@ All method are written in the `ExportCalendarCommand` class.
 
 [NOTE]
 ====
-Calendar will be exported to your src/data folder.
+Calendar will be exported to your source folder.
 ====
 
 ==== [Proposed]: Future enhancement
