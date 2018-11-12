@@ -102,7 +102,7 @@ public class ScheduleCommandParserTest {
 
         // valid date followed by invalid date. The test case for invalid date followed by valid date
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + VALID_DATE_EVENT1 +INVALID_DATE_DESC + START_TIME_DESC_EVENT1
+        assertParseFailure(parser, "1" + VALID_DATE_EVENT1 + INVALID_DATE_DESC + START_TIME_DESC_EVENT1
                 + END_TIME_DESC_EVENT1 + EVENT_NAME_DESC_EVENT1, TheDate.MESSAGE_DATE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
@@ -115,56 +115,56 @@ public class ScheduleCommandParserTest {
     }
 
 
-        @Test
-        public void parse_multipleRepeatedFields_acceptsLast() { //accepts last
-            Index targetIndex = INDEX_FIRST_PERSON;
-            String userInput = targetIndex.getOneBased() + DATE_DESC_EVENT1 + START_TIME_DESC_EVENT1
-                    + END_TIME_DESC_EVENT1 + EVENT_NAME_DESC_EVENT1 + DATE_DESC_EVENT2 + START_TIME_DESC_EVENT2
-                    + END_TIME_DESC_EVENT2 + EVENT_NAME_DESC_EVENT2;
+    @Test
+    public void parse_multipleRepeatedFields_acceptsLast() { //accepts last
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + DATE_DESC_EVENT1 + START_TIME_DESC_EVENT1
+                + END_TIME_DESC_EVENT1 + EVENT_NAME_DESC_EVENT1 + DATE_DESC_EVENT2 + START_TIME_DESC_EVENT2
+                + END_TIME_DESC_EVENT2 + EVENT_NAME_DESC_EVENT2;
 
-            Schedule schedule = new ScheduleBuilder().withTheDate(VALID_DATE_EVENT2)
-                    .withStartTime(VALID_START_TIME_EVENT2)
-                    .withEndTime(VALID_END_TIME_EVENT2)
-                    .withEventName(VALID_EVENT_NAME_EVENT2).build();
+        Schedule schedule = new ScheduleBuilder().withTheDate(VALID_DATE_EVENT2)
+                .withStartTime(VALID_START_TIME_EVENT2)
+                .withEndTime(VALID_END_TIME_EVENT2)
+                .withEventName(VALID_EVENT_NAME_EVENT2).build();
 
-            ScheduleCommand expectedCommand = new ScheduleCommand(schedule, targetIndex);
+        ScheduleCommand expectedCommand = new ScheduleCommand(schedule, targetIndex);
 
-            assertParseSuccess(parser, userInput, expectedCommand);
-        }
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 
-        @Test
-        public void parse_invalidValueFollowedByValidValue_success() { //invalid date followed by valid
-            // invalid date followed by valid date
-            Index targetIndex = INDEX_FIRST_PERSON;
-            String userInput = targetIndex.getOneBased() + INVALID_DATE_DESC + START_TIME_DESC_EVENT1
-                    + END_TIME_DESC_EVENT1 + EVENT_NAME_DESC_EVENT1 + DATE_DESC_EVENT2 + START_TIME_DESC_EVENT2
-                    + END_TIME_DESC_EVENT2 + EVENT_NAME_DESC_EVENT2;
+    @Test
+    public void parse_invalidValueFollowedByValidValue_success() { //invalid date followed by valid
+        // invalid date followed by valid date
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + INVALID_DATE_DESC + START_TIME_DESC_EVENT1
+                + END_TIME_DESC_EVENT1 + EVENT_NAME_DESC_EVENT1 + DATE_DESC_EVENT2 + START_TIME_DESC_EVENT2
+                + END_TIME_DESC_EVENT2 + EVENT_NAME_DESC_EVENT2;
 
-            Schedule schedule = new ScheduleBuilder().withTheDate(VALID_DATE_EVENT1)
-                    .withStartTime(VALID_START_TIME_EVENT1)
-                    .withEndTime(VALID_END_TIME_EVENT1)
-                    .withEventName(VALID_EVENT_NAME_EVENT1).build();
+        Schedule schedule = new ScheduleBuilder().withTheDate(VALID_DATE_EVENT1)
+                .withStartTime(VALID_START_TIME_EVENT1)
+                .withEndTime(VALID_END_TIME_EVENT1)
+                .withEventName(VALID_EVENT_NAME_EVENT1).build();
 
-            ScheduleCommand expectedCommand = new ScheduleCommand(schedule, targetIndex);
+        ScheduleCommand expectedCommand = new ScheduleCommand(schedule, targetIndex);
 
-            assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, userInput, expectedCommand);
 
-        }
+    }
 
-        @Test
-        public void parse_allFieldsSpecified_success() { //all valid
-            Index targetIndex = INDEX_SECOND_PERSON;
-            String userInput = targetIndex.getOneBased() + DATE_DESC_EVENT1 + START_TIME_DESC_EVENT1
-                    + END_TIME_DESC_EVENT1 + EVENT_NAME_DESC_EVENT1;
+    @Test
+    public void parse_allFieldsSpecified_success() { //all valid
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String userInput = targetIndex.getOneBased() + DATE_DESC_EVENT1 + START_TIME_DESC_EVENT1
+                + END_TIME_DESC_EVENT1 + EVENT_NAME_DESC_EVENT1;
 
-            Schedule schedule = new ScheduleBuilder().withTheDate(VALID_DATE_EVENT1)
-                    .withStartTime(VALID_START_TIME_EVENT1)
-                    .withEndTime(VALID_END_TIME_EVENT1)
-                    .withEventName(VALID_EVENT_NAME_EVENT1).build();
+        Schedule schedule = new ScheduleBuilder().withTheDate(VALID_DATE_EVENT1)
+                .withStartTime(VALID_START_TIME_EVENT1)
+                .withEndTime(VALID_END_TIME_EVENT1)
+                .withEventName(VALID_EVENT_NAME_EVENT1).build();
 
-            ScheduleCommand command = new ScheduleCommand(schedule, targetIndex);
+        ScheduleCommand command = new ScheduleCommand(schedule, targetIndex);
 
-            assertParseSuccess(parser, userInput, command);
-        }
+        assertParseSuccess(parser, userInput, command);
+    }
 
 }

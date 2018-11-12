@@ -88,7 +88,7 @@ public class MatchScheduleCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput =  DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+        String userInput = DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
                 + PREFIX_INDEX + targetIndex.getOneBased();
 
         List<Index> listIndex = new ArrayList<>();
@@ -104,7 +104,7 @@ public class MatchScheduleCommandParserTest {
     public void parse_multipleIndexSpecified_success() {
         Index targetIndex1 = INDEX_FIRST_PERSON;
         Index targetIndex2 = INDEX_SECOND_PERSON;
-        String userInput =  DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+        String userInput = DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
                 + PREFIX_INDEX + targetIndex1.getOneBased() + " "
                 + PREFIX_INDEX + targetIndex2.getOneBased();
 
@@ -121,7 +121,7 @@ public class MatchScheduleCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput =  INVALID_DATE_DESC + DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+        String userInput = INVALID_DATE_DESC + DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
                 + PREFIX_INDEX + targetIndex.getOneBased();
 
         List<Index> listIndex = new ArrayList<>();
