@@ -199,6 +199,26 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
+// tag::Parser[]
+[[Design-Parser]]
+=== Parser component
+[[fig-ParserClassDiagram]]
+.Structure of the Parser Component
+image::ParserClassDiagram.png[width="800"]
+
+*API* :
+link:{repoURL}/src/main/java/seedu/address/logic/parser/ProManageParser.java[`ProManageParser.java`]
+
+. `ProManageParser` use children class of `CommandParser` (eg. ManagerParser) to parse the user command.
+.  When login/logout command is executed, the CommandParser object within ProManageParser is changed accordingly to DefaultParser,
+ManagerParser or EmployeeParser.
+.  DefaultParser, ManagerParser or EmployeeParser are subclass of the abstract class CommandParser
+.  This display the behaviour of polymorphism as ProManageParser will always pass the input into CommandParser
+but its behaviour depends on implementation of its subclass.
+.  Each of it subclass will only know commands that is according to the privilege level.
+// end::Parser[]
+
+
 // tag::Model[]
 [[Design-Model]]
 === Model component
