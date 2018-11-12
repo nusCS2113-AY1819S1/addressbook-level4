@@ -51,7 +51,7 @@ public class AddProductCommandTest {
     public void constructor_nullPerson_throwsNullPointerException() {
         Distributor validDistributor = new DistributorBuilder().build();
         thrown.expect(NullPointerException.class);
-        new AddCommand(null,validDistributor);
+        new AddCommand(null, validDistributor);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class AddProductCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Product validPerson = new ProductBuilder().build();
         Distributor validDistributor = new DistributorBuilder().build();
-        CommandResult commandResult = new AddCommand(validPerson,validDistributor).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddCommand(validPerson, validDistributor).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
@@ -71,7 +71,7 @@ public class AddProductCommandTest {
         Product validPerson = new ProductBuilder().build();
         Distributor validDistributor = new DistributorBuilder().build();
 
-        AddCommand addCommand = new AddCommand(validPerson,validDistributor);
+        AddCommand addCommand = new AddCommand(validPerson, validDistributor);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         thrown.expect(CommandException.class);
@@ -85,14 +85,14 @@ public class AddProductCommandTest {
 
         Product alice = new ProductBuilder().withName("Alice").build();
         Product bob = new ProductBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice,validDistributor);
-        AddCommand addBobCommand = new AddCommand(bob,validDistributor);
+        AddCommand addAliceCommand = new AddCommand(alice, validDistributor);
+        AddCommand addBobCommand = new AddCommand(bob, validDistributor);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice,validDistributor);
+        AddCommand addAliceCommandCopy = new AddCommand(alice, validDistributor);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
