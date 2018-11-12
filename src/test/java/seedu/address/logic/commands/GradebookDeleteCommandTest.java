@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.model.StorageController;
 import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.testutil.GradebookBuilder;

@@ -11,6 +11,9 @@ import org.junit.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Provides a test for NameContainsKeywordsPredicate
+ */
 public class NameContainsKeywordsPredicateTest {
 
     @Test

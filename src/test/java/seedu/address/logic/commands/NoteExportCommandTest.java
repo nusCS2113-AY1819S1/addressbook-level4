@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.address.commons.util.CsvUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
@@ -32,19 +32,20 @@ public class NoteExportCommandTest {
 
     @Test
     public void execute_containsExportableNotes_success() throws CommandException {
-        // String expectedMessage = NoteExportCommand.MESSAGE_SUCCESS;
-        String unwantedMessage = NoteExportCommand.MESSAGE_NO_EXPORTABLE_NOTES;
+        String expectedMessage = NoteExportCommand.MESSAGE_SUCCESS;
 
         noteManager.addNote(new NoteBuilder().build());
         noteManager.addNote(new NoteBuilder().build());
         noteManager.addNote(new NoteBuilder().build());
         noteManager.saveNoteList(); // three exportable notes
 
-        NoteExportCommand noteExportCommand = new NoteExportCommand("valid_file_name");
+        String fileName = "valid_file_name";
+        NoteExportCommand noteExportCommand = new NoteExportCommand(fileName);
         CommandResult result = noteExportCommand.execute(new ModelManager(), new CommandHistory());
 
-        // assertEquals(String.format(expectedMessage, 3), result.feedbackToUser);
-        assertNotEquals(unwantedMessage, result.feedbackToUser);
+        assertEquals(
+                String.format(expectedMessage, 3, CsvUtil.BASE_DIRECTORY + fileName + ".csv"),
+                result.feedbackToUser);
     }
 
     @Test
