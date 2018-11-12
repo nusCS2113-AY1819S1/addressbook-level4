@@ -1,37 +1,46 @@
 package seedu.address.logic.suggestions;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNull;
 
+import java.util.ArrayList;
+
+import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.logic.commands.ExportAllCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.TodoCommand;
+import seedu.address.logic.commands.UndoCommand;
 
 public class WrongCommandSuggestionTest {
-    private WrongCommandSuggestion wrongCommandSuggestion = new WrongCommandSuggestion();
+    private Suggestion wrongCommandSuggestion = new WrongCommandSuggestion();
+    private ArrayList<String> outputCommandList;
+
+    @Before
+    public void setup() {
+        outputCommandList = new ArrayList<>();
+    }
 
     @Test
-    public void getSuggestion() {
-        // "abcDEF" input is not similar to any command
-        assertSame(wrongCommandSuggestion.getSuggestion("abcDEF"), WrongCommandSuggestion.NO_SUGGESTION);
+    public void getSuggestion_noSuggestions() {
+        // "abcDEFGH" input is not similar to any command
+        assertNull(wrongCommandSuggestion.getSuggestions("abcDEFGH"));
+    }
 
-        // "hist" input is similar to "list" command
-        assertEquals(wrongCommandSuggestion.getSuggestion("hist"),
-            String.format(WrongCommandSuggestion.SUGGESTION_HEADER, ListCommand.COMMAND_WORD));
+    @Test
+    public void getSuggestion_oneSuggestion() {
+        // "histary" input is similar to history command and has only one suggestion available
+        outputCommandList.add(HistoryCommand.COMMAND_WORD);
+        assertEquals(outputCommandList, wrongCommandSuggestion.getSuggestions("histary"));
+    }
 
-        // "shedule" input is similar to "schedule" command
-        assertEquals(wrongCommandSuggestion.getSuggestion("shedule"),
-            String.format(WrongCommandSuggestion.SUGGESTION_HEADER, ScheduleCommand.COMMAND_WORD));
-
-        // "exportalll" input is similar to "exportall" command
-        assertEquals(wrongCommandSuggestion.getSuggestion("exportalll"),
-            String.format(WrongCommandSuggestion.SUGGESTION_HEADER, ExportAllCommand.COMMAND_WORD));
-
-        // "shadule" input is similar to "schedule" command
-        assertEquals(wrongCommandSuggestion.getSuggestion("shadule"),
-            String.format(WrongCommandSuggestion.SUGGESTION_HEADER, ScheduleCommand.COMMAND_WORD));
+    @Test
+    public void getSuggestion_multipleSuggestions() {
+        outputCommandList.add(RedoCommand.COMMAND_WORD);
+        outputCommandList.add(TodoCommand.COMMAND_WORD);
+        outputCommandList.add(UndoCommand.COMMAND_WORD);
+        assertEquals(outputCommandList, wrongCommandSuggestion.getSuggestions("wido"));
     }
 
 }

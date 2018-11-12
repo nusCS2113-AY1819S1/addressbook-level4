@@ -26,7 +26,7 @@ import seedu.address.logic.commands.UndoCommand;
 /**
  * Checks whether input is valid in the commands after each key press
  */
-public class InputCommandSuggestion {
+public class InputCommandSuggestion implements Suggestion {
     public static final String NO_REQUIRED_PARAMETERS = "This command does not require any parameters.\n";
     public static final String INVALID_COMMAND_PARAMETERS = "There are no available parameters!\n";
 
@@ -54,6 +54,16 @@ public class InputCommandSuggestion {
         commandList.insert(SelectCommand.COMMAND_WORD);
         commandList.insert(TodoCommand.COMMAND_WORD);
         commandList.insert(UndoCommand.COMMAND_WORD);
+    }
+
+    /**
+     * Gets a list of suggested commands
+     * @param userInput the current string to check for suggested commands
+     * @return ArrayList of possible commands
+     */
+    public ArrayList<String> getSuggestions(String userInput) {
+        String command = userInput.split(" ")[0];
+        return commandList.getListOfWords(command);
     }
 
     /**
@@ -102,24 +112,6 @@ public class InputCommandSuggestion {
      */
     public void resetSearchCrawler() {
         commandList.resetSearchCrawlerToRoot();
-    }
-
-    /**
-     * Checks if current word typed is the end of a word
-     * @return True it is the end of a word
-     */
-    public boolean getIsEndOfWord() {
-        return commandList.getIsEndOfWord();
-    }
-
-    /**
-     * Gets a list of suggested commands
-     * @param userInput the current string to check for suggested commands
-     * @return ArrayList of possible commands
-     */
-    public ArrayList<String> getSuggestedCommands(String userInput) {
-        String command = userInput.split(" ")[0];
-        return commandList.getListOfWords(command);
     }
 
     /**

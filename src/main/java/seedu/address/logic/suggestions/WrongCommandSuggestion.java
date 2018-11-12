@@ -1,5 +1,8 @@
 package seedu.address.logic.suggestions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearScheduleCommand;
@@ -24,7 +27,7 @@ import seedu.address.logic.commands.UndoCommand;
 /**
  * Suggests a command with the closest match to the inputted string.
  */
-public class WrongCommandSuggestion {
+public class WrongCommandSuggestion implements Suggestion {
     public static final String SUGGESTION_HEADER = "Did you mean: %1$s?";
     public static final String NO_SUGGESTION = "No suggestions available.";
     private static final int WORD_DISTANCE_LIMIT = 3;
@@ -63,16 +66,13 @@ public class WrongCommandSuggestion {
      * @param userCommand A {@code String} object of the user's command input
      * @return A {@code String} object containing the suggestion header and suggested similar command.
      */
-    public String getSuggestion(String userCommand) {
+    public List<String> getSuggestions(String userCommand) {
         String userCommandInLowerCase = userCommand.toLowerCase();
-        String suggestedCommand = getNearestCommand(userCommandInLowerCase);
-        if (suggestedCommand.isEmpty()) {
-            return NO_SUGGESTION;
-        } else {
-            return String.format(SUGGESTION_HEADER, suggestedCommand);
-        }
+        List<String> suggestedCommand = getNearestCommands(userCommandInLowerCase);
+        return suggestedCommand;
     }
 
+    /*
     private String getNearestCommand(String userCommand) {
         int shortestEditDistance = WORD_DISTANCE_LIMIT;
         String shortestEditCommand = "";
@@ -84,5 +84,29 @@ public class WrongCommandSuggestion {
             }
         }
         return shortestEditCommand;
+    }*/
+
+    private List<String> getNearestCommands(String userCommand) {
+        ArrayList<String>[] commandEditDistances = new ArrayList[WORD_DISTANCE_LIMIT];
+
+        for (int i = 0; i < WORD_DISTANCE_LIMIT; i++) {
+            commandEditDistances[i] = new ArrayList<>();
+        }
+
+        for (String commands: CommandList) {
+            int distance = new StringSimilarity().editDistance(userCommand, commands);
+
+            if (distance < WORD_DISTANCE_LIMIT) {
+                commandEditDistances[1].add(commands);
+            }
+        }
+
+        for (ArrayList<String> suggestedCommands: commandEditDistances) {
+            if (!suggestedCommands.isEmpty()) {
+                return suggestedCommands;
+            }
+        }
+
+        return null;
     }
 }
