@@ -17,11 +17,14 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.commands.GradebookAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Contains tests for GradebookAddCommandParser.
+ */
 public class GradebookAddCommandParserTest {
-    private GradebookAddCommandParser parser = new GradebookAddCommandParser();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private GradebookAddCommandParser parser = new GradebookAddCommandParser();
 
     @Test
     public void parse_invalidFormat_throwsParseException() throws ParseException {

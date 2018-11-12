@@ -2,6 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.model.gradebook.Gradebook;
 
+/**
+ * Creates dummy gradebook components for testing.
+ */
 public class GradebookBuilder {
     public static final String DEFAULT_MODULE_CODE = "CS2113";
     public static final String DEFAULT_GRADEBOOK_COMPONENT_NAME = "Finals";
@@ -12,6 +15,10 @@ public class GradebookBuilder {
     private int gradebookMaxMarks;
     private int gradebookWeightage;
 
+    /**
+     * Empty constructor for GradebookBuilder that initializes the
+     * gradebook with default values.
+     */
     public GradebookBuilder() {
         moduleCode = DEFAULT_MODULE_CODE;
         gradebookComponentName = DEFAULT_GRADEBOOK_COMPONENT_NAME;
@@ -74,6 +81,11 @@ public class GradebookBuilder {
         this.gradebookWeightage = gradebookWeightage;
     }
 
+    /**
+     * Creates a gradebook component from the data in the GradebookBuilder object.
+     *
+     * @return Gradebook object
+     */
     public Gradebook build() {
         return new Gradebook(
                 moduleCode,

@@ -15,6 +15,9 @@ import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.testutil.GradebookBuilder;
 
+/**
+ * Contains tests for GradebookEditCommand.
+ */
 public class GradebookEditCommandTest {
     private static GradebookBuilder dummyGradebookComponent = new GradebookBuilder();
     private static GradebookManager gradebookManager = new GradebookManager();
