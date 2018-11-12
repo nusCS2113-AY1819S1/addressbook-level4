@@ -41,7 +41,6 @@ Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_inter
 ** Justification: This feature improves the product significantly because only one member from the group is required to key in all the details, in contrast to requiring everyone in the team to type in the exact same details, which is tedious and inefficient.
 ** Highlights: This enhancement required an in-depth analysis of design alternatives regarding reading and writing data. The implementation too was challenging as it required thorough understanding of all the components related to data storage in the application.
 ** Credits: http://opencsv.sourceforge.net/[OpenCSV]
-// TODO: add screenshot here
 
 // Excluded for 2113T
 //* *Minor enhancement*: added an UI enhancement that *displays the total number of persons* in the application and the ability for the application to *backup the storage file* locally.
@@ -54,7 +53,6 @@ Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_inter
 ** Project management:
 *** Managed milestones `v1.1` - `v1.4` (3 milestones) on GitHub
 ** Enhancements to existing features:
-// TODO: edit the following line
 *** Updated the GUI to reflect persons and todos (Pull requests https://github.com[#117])
 *** Wrote additional tests for existing features to increase coverage from 77% to 80% (Pull requests https://github
 .com[#200])
