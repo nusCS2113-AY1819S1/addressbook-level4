@@ -213,7 +213,7 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Transaction>` that can be observed
 * does not depend on any of the other three components.
 
-
+// tag::storage[]
 [[Design-Storage]]
 === Storage component
 
@@ -228,6 +228,8 @@ The `Storage` component,
 * can save the `LoginInfo` objects in json format and read them back.
 * can save the Inventory List data in xml format and read it back.
 * can save the Transaction List data in xml format and read it back.
+
+// end::storage[]
 
 [[Design-Commons]]
 === Common classes
