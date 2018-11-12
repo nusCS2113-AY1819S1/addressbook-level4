@@ -774,6 +774,14 @@ Format: `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
 This enables the user to change their password after manager create a default account.
 ====
 
+==== List all drinks: `list`
+Lists all the drinks in the inventory.
+Format: `list`
+
+==== View all transactions: `viewTrans`
+Lists all the transactions.
+Format: `viewTrans`
+
 
 [#manager-commandSummary]
 === Manager Commands
@@ -790,6 +798,10 @@ Add a new drink to the drink inventory.
 All the drinks added will be in a predefined list. As such, stock taker only able to add batches that is in this predefined list.
 ====
 
+=== Edit attributes of a drink: `edit`
+Edits the cost price, selling price and tags of a drink.
+Format: `edit INDEX [cp/COST_PRICE] [p/SELLING_PRICE] [t/TAG]...` +
+One or more of the parameters must be included in the command.
 
 [#stocktaker-commandSummary]
 === Stock Taker Commands
@@ -812,8 +824,8 @@ In addition, drink name is *case-sensitive*.
 ====
 
 ==== Decrease stock of a drink: `sell`
-Record sale of a drink.
-           Format: `sell n/DRINK_NAME  q/QUANTITY_SOLD`
+Record sale of a drink. +
+Format: `sell n/DRINK_NAME  q/QUANTITY_SOLD` +
 Examples:
 
 * `sell n/coca cola q/15`
@@ -831,10 +843,6 @@ not in the inventory list
 ==== Viewing Help: `help`
 Shows available commands with brief description of what the accountant account can do. +
     Format: `help`
-
-=== Viewing transactions: `viewTrans`
-Shows transactions made since the start of use of Drink I/O. +
-    Format: `viewTrans`
 
 ==== Get the total profit of the company over specified periods: `profit`
 View the total profit earned in time periods of a day, 7 days and 30 days (including current day).
@@ -858,7 +866,7 @@ To view revenue earned in last 7 days, append `-w`
 To view revenue earned in last 30 days, append `-m`
 ====
 
-==== Get the total costs of the company over specified periods: `revenue`
+==== Get the total costs of the company over specified periods: `costs`
 View the total costs incurred in time periods of a day, 7 days and 30 days (including current day).
 	Format: `costs`
 
