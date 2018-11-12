@@ -1,3 +1,4 @@
+//@@author XiaoYunhan
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
@@ -17,7 +18,7 @@ public class EditExpenditureDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditExpenditureCommand.EditExpenditureDescriptor descriptorWithSameValues = 
+        EditExpenditureCommand.EditExpenditureDescriptor descriptorWithSameValues =
                 new EditExpenditureCommand.EditExpenditureDescriptor(DESC_IPHONE);
         assertTrue(DESC_IPHONE.equals(descriptorWithSameValues));
 
