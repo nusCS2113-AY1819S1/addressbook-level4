@@ -35,13 +35,14 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
             if (MainWindow.getDisplayedBook().equals("candidateBook")) {
                 if (addCandidates(model, emailUtil)) {
                     emailUtil.setAreRecipientsCandidates(true);
+                    emailUtil.setHasRecipientsAdded(true);
                 }
             } else {
                 if (addJobOffers(model, emailUtil)) {
                     emailUtil.setAreRecipientsCandidates(false);
+                    emailUtil.setHasRecipientsAdded(true);
                 }
             }
-            emailUtil.setHasRecipientsAdded(true);
         //else check if objects being added are the same as the initial added objects
         } else {
             if (emailUtil.getAreRecipientsCandidates()) {
@@ -95,7 +96,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsCommand {
             output.append(duplicates);
         }
         //only include recipients string if it's not empty
-        if (!recipients.toString().equals("Recipients added:\n")) {
+        if (!recipients.toString().equals(ADD_RECIPIENTS_RECIPIENTS_ADDED)) {
             output.append(recipients);
         }
         output.append(EmailRecipientsCommand.MESSAGE_USAGE);

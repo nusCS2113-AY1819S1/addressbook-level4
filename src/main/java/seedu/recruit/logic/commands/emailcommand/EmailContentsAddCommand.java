@@ -44,7 +44,7 @@ public class EmailContentsAddCommand extends EmailContentsCommand {
         StringBuilder contents = new StringBuilder(ADD_CONTENTS_CONTENTS_ADDED);
         generateContents(emailUtil, contents);
 
-        //Check if both recipients string and duplicate string is empty
+        //Check if both contents string and duplicate string is empty
         if (duplicates.toString().equals(ADD_CONTENTS_DUPLICATE_MESSAGE)
             && contents.toString().equals(ADD_CONTENTS_CONTENTS_ADDED)) {
             return new CommandResult(ADD_CONTENTS_NOTHING_SELECTED + MESSAGE_USAGE);
@@ -72,15 +72,15 @@ public class EmailContentsAddCommand extends EmailContentsCommand {
             output.append(duplicates);
         }
 
-        //only include recipients string if it's not empty
+        //only include contents string if it's not empty
         if (!contents.toString().equals("Contents added:\n")) {
             output.append(contents);
         }
-        output.append(EmailRecipientsCommand.MESSAGE_USAGE);
+        output.append(EmailContentsCommand.MESSAGE_USAGE);
     }
 
     /**
-     * generates recipients string
+     * generates contents string
      * @param emailUtil
      * @param contents
      */
