@@ -163,12 +163,13 @@ The sections below give more details of each component.
 === UI component
 
 .Structure of the UI Component
-image::UiClassDiagram.png[width="800"]
+image::UiClassDiagram.png[width="500"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `EventListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
+// end::Ui[]
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
@@ -176,7 +177,7 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
-// end::Ui[]
+
 
 [[Design-Logic]]
 === Logic component
@@ -203,10 +204,11 @@ image::DeletePersonSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelClassDiagram.png[width="600"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
+// end::Model[]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
@@ -214,7 +216,6 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-// end::Model[]
 [NOTE]
 As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
@@ -283,9 +284,11 @@ image::SortSequenceDiagram.png[width="650"]
 
 The `invite` command allows users to add attendees to an existing event, which is represented by an `Event` object.
 The command currently only allows users to add a single person to an event, based on the indices on the UI.
-This command adds the invited `Person`'s email, which is unique, to a chosen `Event`, so that the attendees of a particular event is recorded.
+This command adds the to-be-invited `Person` 's email, which is unique, to the chosen `Event`, so that the attendees of a particular event is recorded.
 
 The adding of attendees is facilitated by the class: `Attendees`, a list of emails of type `String`.
+
+image::EventClassDiagram.png[width="300"]
 
 The following is a more detailed description of the `Attendee` class:
 
@@ -304,9 +307,9 @@ image::EventClashDiagram.png[width="400"]
 
 The `Event#hasClash` is widely used in other features such as `addEvent` and `editEvent` to ensure that
 
-* Different events are not held at the same location and time.
+1. Different events are not held at the same location and time.
 
-* An employee do not have two events to attend at the same time.
+2. An employee do not have two events he/she needs to attend at the same time.
 
 Implementation of `RemoveCommand` is similar to `InviteCommand`, but removes persons from attendees of events instead.
 
@@ -315,23 +318,26 @@ Implementation of `RemoveCommand` is similar to `InviteCommand`, but removes per
 Given below is an example usage scenario and how the invite mechanism works.
 For example, the user inputs `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list.
 
-* The command text is passed to an instance of the `LogicManager` class.
+Step 1. The command text is passed to an instance of the `LogicManager` class.
 
-* The `LogicManager` instance calls `ProManageParser#parsecommand`, which parses the `invite` command phrase.
+Step 2. The `LogicManager` instance calls `ProManageParser#parseCommand`, which parses the `invite` command phrase.
 
-* `InviteCommandParser#parse` parses the person and event index. An instance of the `InviteCommand` encapsulating the two indices information is then returned after parsing.
+Step 3. `InviteCommandParser#parse` parses the person and event index. An instance of the `InviteCommand` encapsulating the two indices information is then returned after parsing.
 
-* `Logic Manager` then executes this `InviteCommand` by calling `InviteCommand#execute`.
+Step 4. `Logic Manager` then executes this `InviteCommand` by calling `InviteCommand#execute`.
 
-* The filtered person list and event list is first obtained by calling `PersonModel#getFilteredPersonList` and `EventModel#getFilteredEventList`. Based on the indices, the `Person` and `Event` is selected. Then, the `Person` object's email is obtained by calling `Person#getEmail`
+Step 5. The filtered person list and event list is first obtained by calling `PersonModel#getFilteredPersonList` and `EventModel#getFilteredEventList`. Based on the indices, the `Person` and `Event` is selected. Then, the `Person` object's email is obtained by calling `Person#getEmail`
 
-* Two steps of verification is required before the person is invited to the event. First, `Event#hasAttendee` checks whether the person is already invited to the event. Secondly, `Model#hasClash` checks whether the event clashes with the person's schedule.
+Step 6. Two steps of verification is required before the person is invited to the event.
 
-* After successful verification, the person's email is added to the obtained `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
+* First, `Event#hasAttendee` checks whether the person is already invited to the event.
+* Second, `Model#hasClash` checks whether the event clashes with the person's schedule.
 
-* The new `Event` object is updated to the model by calling `Model#updateEvent`.
+Step 7. After successful verification, the person's email is added to the obtained `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
 
-* The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
+Step 8. The new `Event` object is updated to the model by calling `Model#updateEvent`.
+
+Step 9. The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
 
 The sequence diagram below illustrates the execution of the `invite` command.
 
@@ -383,12 +389,12 @@ The `select` command allows users to view the event schedules of an employee on 
 The command currently only allows users to view the event of a single employee, based on the indices of the employee list on the UI.
 This command only executes successfully if the input index is valid (not out of bound).
 
-The command is facilitated by the class: `Attendees`, a list of emails of type `String`, as described in Section 3.2.1.
+The command is facilitated by the class: `Attendees`, a `HashSet` of emails of type `String`, as described in Section 3.2.1.
 
 ==== Execution of Command
 Given below is an example usage scenario and how the `select` mechanism works.
 
-The user inputs `select 1 y/2018 m/06` to select the 1st person in the address book and view his/her event schedule on June 2018.
+For example, the user inputs `select 1 y/2018 m/06` to select the 1st person in the address book and view his/her event schedule on June 2018.
 
 * The command text is passed to an instance of the `LogicManager` class.
 
@@ -1003,13 +1009,10 @@ Use case ends.
 ** 3a1. ProManage shows an error message to prompt user to login before using this function
 ** Use case ends
 
-
-_{More to be added}_
-
 [appendix]
 // end::usecases[]
 
-// tag::usecases_inviteremoveselect[]
+// tag::usecases_invite[]
 [discrete]
 === Use case: Invite employees to events
 
@@ -1046,7 +1049,7 @@ Use case ends.
 ** 3d1. AddressBook shows an error message.
 ** Use case ends
 
-
+// end::usecases_invite[]
 [discrete]
 === Use case: Remove employees from events
 
@@ -1104,7 +1107,7 @@ Use case ends.
 ** 3b1. AddressBook shows an error message.
 ** Use case ends
 
-// end::usecases_inviteremoveselect[]
+
 
 
 // tag::nonfunctionalrequirements[]

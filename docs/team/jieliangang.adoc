@@ -7,21 +7,24 @@
 ---
 == Overview
 
+ProManage is a *professional desktop application* for companies that specialises in executing projects that undergoes a
+long and tedious planning phase. ProManage allow *Manager* and *Employees* of project teams to manage their team members and events easily.
+ProManage is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
 This project portfolio documents my contributions to the development of the CS2113 project, as part of my team T16-2.
 
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to manage and view employees' events* via the `invite`, `remove` and `select` commands
-** What it does: allows the user to invite employees to events, remove employees from events, and view an employee's event schedule on a selected date, month or year.
-** Justification: This feature facilitates managing and scheduling of events among teams of employees, and allow managers and employees to handle their own work schedules easily.
-** Highlights: This feature considers whether the event an employee is invited to clashes with the employee's work schedule. The `select` feature also allows user to view the selected employee's schedule by day, month, or year.
+** What it does: allows the user to invite employees to events, remove employees from events, and view an employee's event schedule on a selected date, month or year which is displayed on the event list panel.
+** Justification: This feature facilitates managing and scheduling of events among teams of employees who have different work schedules, and allow managers and employees to monitor and handle their event schedules easily.
+** Highlights: This feature considers whether the event an employee is invited to *clashes* with the particular employee's work schedule, and *guarantees* that schedule conflict will not occur. The underlying model structure implemented for this enhancement is carefully designed and allows extension commands `viewmine` and `selectEvent` to be easily implemented.
 
 
 * *Minor enhancement*:
+** set up the event list panel to display the events for the UI
 ** added the `addEvent` command, which also warns the user when the planned event clashes or coincides with other existing events at the same location and time
-** improved the `editEvent` command, which warns the user when the changed time or date of the event leads to schedule conflicts with any of the event's attendees
-** set up the event list panel to display the events on the UI
-** set up the underlying `Event` model to facilitate other extension commands: `viewmine` and `selectEvent`
+** improved the `editEvent` command, which warns the user when the changed time or date of the edited event leads to schedule conflicts with any of the event's attendees
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jieliangang[Functional and Test code]]
 
@@ -32,16 +35,17 @@ This project portfolio documents my contributions to the development of the CS21
 *** Managed the issue tracker and project dashboard on GitHub
 ** Enhancements to existing features:
 *** Updated the GUI color scheme https://github.com/CS2113-AY1819S1-T16-2/main/pull/134[#134]
-*** Updated the `add` and `edit` command to distinguish different employees by their unique work email address
+*** Updated the `add` and `edit` command to distinguish different employees by their unique email address
 *** Updated the `find` command to search for employees via their email address
 *** Updated the UI for `selectEvent` command to highlight selected event
 *** Wrote additional tests for existing features to increase coverage from 82% to 87% https://github.com/CS2113-AY1819S1-T16-2/main/pull/128[#128] https://github.com/CS2113-AY1819S1-T16-2/main/pull/130[#130] https://github.com/CS2113-AY1819S1-T16-2/main/pull/131[#131]
 ** Documentation:
 *** Updated the User Guide to include `addEvent`, `editEvent`, `invite`, `remove` and `select` command
-*** Updated the Developer Guide to include `invite` and `select` command, use case and user stories.
+*** Updated the Developer Guide to include implementation details, use case and user stories for `invite` and `select` command.
+*** Updated the Model, UI and Logic class diagram in Developer Guide
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T16-2/main/pull/65[#65] https://github.com/CS2113-AY1819S1-T16-2/main/pull/77[#77] https://github.com/CS2113-AY1819S1-T16-2/main/pull/114[#114] https://github.com/CS2113-AY1819S1-T16-2/main/pull/122[#122]
-*** Reported/fixed feature bugs discovered during system testing (Issue: https://github.com/CS2113-AY1819S1-T16-2/main/issues/74[#74] https://github.com/CS2113-AY1819S1-T16-2/main/issues/75[#75] https://github.com/CS2113-AY1819S1-T16-2/main/issues/125[#125] https://github.com/CS2113-AY1819S1-T16-2/main/issues/126[#126])
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T16-2/main/pull/114[#114] https://github.com/CS2113-AY1819S1-T16-2/main/pull/122[#122]
+*** Reported feature bugs discovered during system testing (Issue: https://github.com/CS2113-AY1819S1-T16-2/main/issues/125[#125] https://github.com/CS2113-AY1819S1-T16-2/main/issues/126[#126])
 ** Tools:
 *** Integrated GitHub Plugins (Coveralls, Travis CI, AppVeyor)
 *** Automated team documentation build on GitHub pages
@@ -54,13 +58,12 @@ This project portfolio documents my contributions to the development of the CS21
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=addevent]
-
 include::../UserGuide.adoc[tag=invite]
 
 include::../UserGuide.adoc[tag=remove]
 
 include::../UserGuide.adoc[tag=select]
+
 
 == Contributions to the Developer Guide
 
@@ -76,8 +79,6 @@ include::../DeveloperGuide.adoc[tag=Model]
 
 include::../DeveloperGuide.adoc[tag=Invite]
 
-include::../DeveloperGuide.adoc[tag=Select]
-
-include::../DeveloperGuide.adoc[tag=usecases_inviteremoveselect]
+include::../DeveloperGuide.adoc[tag=usecases_invite]
 
 
