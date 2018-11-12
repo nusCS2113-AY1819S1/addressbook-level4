@@ -117,13 +117,13 @@ Format: `togglerequests`
 // tag::Request[]
 === Request feature
 ==== Current implementation
-The Request command utilises both the `RequestModel` and `Logic` component to fulfil its function.
+The `Request` command utilises both the `RequestModel` and `Logic` component to fulfil its function.
 This is accessible for all users.
 
 ==== Design Considerations
 ===== Aspect: Request command is implemented in a different category
-As mentioned above, Request is called in RequestModel and RequestStorage.
-A request object consists of three objects, Isbn, Email, and Quantity.
+As mentioned above, `Request` is called in `RequestModel` and `RequestStorage`.
+A request object consists of three objects, `Isbn`, `Email`, and `Quantity`.
 
 ===== RequestModel component
 
@@ -162,7 +162,7 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 image::ToggleRequestSequenceDiagram.png[width="800"]
 
 ** When the user types `togglerequests`, a `RequestPanelChangedEvent` exception is raised.
-** A function in the UI page, MainWindow, handles this event by toggling the display.
+** A function in the UI page, `MainWindow`, handles this event by toggling the display.
 ** A message will then be sent to the user, indicating that the request panel is toggled.
 
 // end::Request[]
