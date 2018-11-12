@@ -1,14 +1,10 @@
-/*package seedu.address.logic.commands;
 package seedu.address.logic.commands;
-import static org.junit.Assert.assertEquals;
+
+/*
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_ITEMS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAccounts.getTypicalAccountList;
-import static seedu.address.testutil.TypicalItems.ARDUINO;
-import static seedu.address.testutil.TypicalItems.RPLIDAR;
-import static seedu.address.testutil.TypicalItems.getTypicalStockList;
+
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,22 +15,16 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.account.Username;
-import seedu.address.model.item.NameContainsKeywordsPredicate;
 */
-/*
+
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
-/*
 public class FindCommandTest {
     /*
-
-    Username admin = new Username("admin");
-    private Model model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
-    private Model expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
-
 
     @Test
     public void equals() {
@@ -59,35 +49,36 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different item -> returns false
+        // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
-    } */
-    /*@Test
-    public void execute_zeroKeywords_noItemFound() {
-        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(predicate);
-        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
 
     @Test
-    public void execute_multipleKeywords_multipleItemsFound() {
-        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Ar Rp");
+    public void execute_zeroKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ARDUINO, RPLIDAR), model.getFilteredItemList());
-    }*/
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
 
-   /* /**
+    @Test
+    public void execute_multipleKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    }
+
+    /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-
-/*
+    /*
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
-    }*/
+    }
+    */
+}
