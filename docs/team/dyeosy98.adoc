@@ -15,8 +15,8 @@ Inventarie PRO is a desktop inventory application intended for use by self-emplo
 
 * *Major enhancement*: Added *the ability to manage distributors engaged with a provision shop*
 ** What it does: Allows the user to add, edit, delete and find distributors that the user would like a record of. It also allows the user to see which distributor provides what products for the shop.
-** Justification: This feature is an essential part of a digitised inventory management system, given that a self-employed provision shop owner would want
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Justification: This feature is an essential part of a digitised inventory management system, given that products which a self-employed provision shop owner wants to sell must have a source of supply (a distributor).
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands which other members were working on too.
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
 * *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
@@ -26,25 +26,17 @@ Inventarie PRO is a desktop inventory application intended for use by self-emplo
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed releases `v1.2.1`, `v1.3.1` and `v1.3.2` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Increased functionality of find commands - finding products / distributors by their tag and not just by name (Pull request https://github.com[#182])
+*** Updated the GUI to fit new features (distributor, transaction, reminder) (Pull requests https://github.com[#101] and https://github.com[#148]) and removed the unnecessary browser panel (Pull request https://github.com[#]
+*** Adapted existing tests to incorporate new features
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Updated class diagrams for UI, Logic and Model in the Developer Guide (Pull requests https://github.com[#187] and https://github.com[#189])
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
