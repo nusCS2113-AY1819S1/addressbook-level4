@@ -44,7 +44,7 @@ class DateTest {
         // null date
         Assert.assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
 
-        // invalid date
+        // invalid date string
         assertFalse(Date.isValidDate("")); // empty string
         assertFalse(Date.isValidDate(" ")); // spaces only
         assertFalse(Date.isValidDate("^")); // only non-alphanumeric characters
@@ -55,11 +55,37 @@ class DateTest {
         assertFalse(Date.isValidDate("15/10/18")); // date format DD/MM/YY
         assertFalse(Date.isValidDate("15-10-2018")); // other date separators
 
-        // valid date
+        // valid date string
+        assertTrue(Date.isValidDate("30/02/2018")); // Non-existing date
         assertTrue(Date.isValidDate("15/10/2018")); // date format DD/MM/YYYY
         assertTrue(Date.isValidDate("15/1/2018")); // date format DD/M/YYYY
         assertTrue(Date.isValidDate("1/10/2018")); // date format D/MM/YYYY
         assertTrue(Date.isValidDate("1/1/2018")); // date format D/M/YYYY
+    }
+
+    @Test
+    void isExistingDate() {
+        // null date
+        Assert.assertThrows(NullPointerException.class, () -> Date.isExistingDate(null));
+
+        // invalid date
+        assertFalse(Date.isExistingDate("")); // empty string
+        assertFalse(Date.isExistingDate(" ")); // spaces only
+        assertFalse(Date.isExistingDate("^")); // only non-alphanumeric characters
+        assertFalse(Date.isExistingDate("*1/10/2018")); // contains non-alphanumeric characters
+        assertFalse(Date.isExistingDate("2018/10/15")); // date format YYYY/MM/DD
+        assertFalse(Date.isExistingDate("2018/15/10")); // date format YYYY/DD/MM
+        assertFalse(Date.isExistingDate("10/15/2018")); // date format MM/DD/YYYY
+        assertFalse(Date.isExistingDate("15/10/18")); // date format DD/MM/YY
+        assertFalse(Date.isExistingDate("15/1/2018")); // date format DD/M/YYYY
+        assertFalse(Date.isExistingDate("1/1/2018")); // date format D/M/YYYY
+        assertFalse(Date.isExistingDate("15-10-2018")); // other date separators
+        assertFalse(Date.isExistingDate("30/02/2018")); // Non-existing date
+
+        // valid date
+        assertTrue(Date.isExistingDate("15/10/2018")); // date format DD/MM/YYYY
+        assertTrue(Date.isExistingDate("1/10/2018")); // date format D/MM/YYYY
+
     }
 
     @Test

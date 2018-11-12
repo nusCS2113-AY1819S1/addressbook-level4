@@ -14,15 +14,30 @@ This project portfolio documents my role in the CS2113T module project. My main 
 As part of the module, my teammates and I collaborated to develop a drink management application - Drink I/O. Drink I/O is targeted at small drink distribution companies and provides inventory management and financial tools. Users interact with the app using CLI, and it has a GUI created with JavaFX. This project is written in Java and has approximately <To be filled> kLoC.
 
 
+*TO BE CHANGED*
+
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: *Added Batch List and Batch Handling functionality* +
+In drink companies, whenever drinks are imported, they are imported in batches and cartons. This enhancement simulates the situation in the real world and helps drink companies to manage their stock better.
+** *Functionality:* Each drink has its own batches stored in a batch list. Whenever drinks are purchased, they are assigned to a batch based on date of import and stored in the batch list for that drink. Whenever drinks are sold, the stocks are automatically deducted across the batches, deducting from the batch with the earliest import date first.
+** *Justification:* This feature improves inventory management significantly as it ensures that drinks that were imported first into the warehouse are sold first. This reduces turnover time and wastage due to drinks expiring. This is especially applicable as drink distribution companies often have multiple batches of the same drink with different import dates in their warehouse at any time.
+** *Highlights:* This enhancement required in-depth knowledge of the model and the associations between the different classes to properly handle updates to the objects.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Major enhancement*: *Displaying of Drink Details* +
+Added display panels to summarise and display more details about a drink allowing users to view the information they need in a organised and easy to understand manner.
+In drink companies, whenever drinks are imported, they are imported in batches and cartons. This enhancement simulates the situation in the real world and helps drink companies to manage their stock better.
+** *Functionality:*  Allows users to see at a glance a summary of the details of the drinks and upon selecting the relevant drink, to see all other details such as every batch in the batch list of a drink and the import date of the earliest and latest batch.
+** *Justification:* Applications should be easy for the user to use to be effective, so this enables users to easily retrieve more details and data in an easy to read and understand form with a single click or a single command.
+** *Highlights:* Required knowledge of JavaFx and FXML to construct the various panels and an understanding of event handlers to ensure that the panels remain updated when there were changes to the batches.
+
+* *Major enhancement*: *Enhancement of Search function*
+Enhanced the Search function allowing users to search through the inventory based on name, quantity and date.
+** *Functionality:* Users can search through the entire inventory list for drinks by name, drinks that have quantity less than or equal to the input, and drinks that have dates earlier than or equal to the input.
+** *Justification:* The main concern of small drink distribution companies when managing their inventory is how to know which drink is low on stock and requires restocking or which drink batches have been in the inventory for very long and need to be cleared before they expire. This feature allows them to get this information quickly and easily via just 1 command.
+** *Highlights:* Implementing this feature required in-depth knowledge of the logic and model components and the way in which they interact together.
+
+* *Minor enhancement*: Morphed the existing storage to store the drinks and their respective batch lists. Required knowledge of XML to wrap the batch lists in a wrapper such that they would be stored properly.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
@@ -31,8 +46,7 @@ As part of the module, my teammates and I collaborated to develop a drink manage
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Updated the GUI color scheme (Pull requests https://github.com[#55], https://github.com[#34])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
@@ -48,14 +62,15 @@ _{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 
-
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_This section documents my contributions to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=find]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=list]
+
+include::../UserGuide.adoc[tag=viewDrinkDetails]
 
 == Contributions to the Developer Guide
 

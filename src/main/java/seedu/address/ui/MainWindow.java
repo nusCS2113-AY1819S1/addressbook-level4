@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.FXCollections;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -17,6 +18,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
+import seedu.address.commons.events.model.InventoryListChangedEvent;
 import seedu.address.commons.events.model.TransactionListChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.InventoryPanelSelectionChangedEvent;
@@ -171,6 +173,17 @@ public class MainWindow extends UiPart<Stage> {
 
     @Subscribe
     private void handleDrinkAttributeChangedEvent(DrinkAttributeChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        drinkListPanel = new DrinkListPanel(logic.getFilteredDrinkList());
+        drinkListPanelPlaceholder.getChildren().add(drinkListPanel.getRoot());
+        batchListPanel = new BatchListPanel(FXCollections.observableArrayList());
+        batchListPanelPlaceholder.getChildren().add(batchListPanel.getRoot());
+        drinkDetailPane = new DrinkDetailPane(new Drink(null));
+        drinkDetailPanePlaceholder.getChildren().add(drinkDetailPane.getRoot());
+    }
+
+    @Subscribe
+    private void handleIndicateInventoryListChangedEvent(InventoryListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         drinkListPanel = new DrinkListPanel(logic.getFilteredDrinkList());
         drinkListPanelPlaceholder.getChildren().add(drinkListPanel.getRoot());

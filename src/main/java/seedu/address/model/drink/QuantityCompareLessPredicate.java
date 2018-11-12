@@ -3,7 +3,7 @@ package seedu.address.model.drink;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Drink}'s {@code Quantity} is less than the quantity given.
+ * Tests that a {@code Drink}'s {@code Quantity} is less than or equal to the quantity given.
  */
 public class QuantityCompareLessPredicate implements Predicate<Drink> {
     public final Quantity quantity;
@@ -14,7 +14,7 @@ public class QuantityCompareLessPredicate implements Predicate<Drink> {
 
     @Override
     public boolean test(Drink drink) {
-        return drink.getQuantity().getValue() < quantity.getValue();
+        return drink.getQuantity().getValue() <= quantity.getValue();
     }
 
     @Override

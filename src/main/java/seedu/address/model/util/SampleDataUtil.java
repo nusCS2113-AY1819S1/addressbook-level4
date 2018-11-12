@@ -26,7 +26,6 @@ import seedu.address.model.transaction.TransactionType;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-
     /**
      * Initialising sample drinks for use
      */
@@ -152,14 +151,6 @@ public class SampleDataUtil {
     // TransactionType transactionType, Date transactionDate, Drink drinkTransacted,
     // Quantity quantityTransacted, Price amountMoney, long id
     // Coke Transactions
-
-
-
-
-
-
-
-
     private static List<Transaction> getSampleTransactions() {
         return new ArrayList<>(Arrays.asList(
                 BUY_COKE_1, SALE_COKE_1, BUY_COKE_2, BUY_COKE_3, SALE_COKE_2, BUY_COKE_4,
