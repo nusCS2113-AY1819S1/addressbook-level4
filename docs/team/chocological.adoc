@@ -53,7 +53,7 @@ My contributions to the project are detailed below, covering aspects such as enh
 ** Community:
 *** Made non-trivial comments on team members' Pull Requests: https://github.com/CS2113-AY1819S1-F09-1/main/pull/29[#29], https://github.com/CS2113-AY1819S1-F09-1/main/pull/80[#80]
 *** Reported bugs and follow-ups in another team's product. (https://github.com/CS2113-AY1819S1-T16-3/main/issues/112[#112], https://github.com/CS2113-AY1819S1-T16-3/main/issues/123[#123], https://github.com/CS2113-AY1819S1-T16-3/main/issues/127[#127])
-*** Multi-user access level feature was utilized by the budgeting feature. (https://github.com/CS2113-AY1819S1-F09-1/main/blob/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java[link])
+*** Multi-user access level feature was utilized by the budgeting feature. (https://github.com/CS2113-AY1819S1-F09-1/main/blob/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java[Link])
 *** Renamed the product to "NUSSU-Connect"
 *** Introduced a tool to enable team members to convert Asciidoc files to PDF format
 ** Tools:
