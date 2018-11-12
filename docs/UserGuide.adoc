@@ -55,13 +55,6 @@ e.g. typing *`help`* or *`h`* and pressing kbd:[Enter] will open the help window
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-* Commands argument can be in any order +
-e.g. 'AddCommand' Format:
-+
-`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS
-[t/TAG]` +
-can also be +
-`n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL add` [available in V1.4]
 ====
 
 === Viewing help : `help` / `h`
@@ -173,7 +166,6 @@ Selects the 1st person in the results of the `find` command.
 Upon selecting a person, the calendar of the current month will be displayed, instead of the
 welcome message.
 For additional calendar features, please view `calendar to view schedule`.
-//todo link the link to calendar view schedule below
 
 === Listing entered commands : `history` / `hs`
 
@@ -427,25 +419,40 @@ The following diagram illustrates how the `finishTodo` is being used on the JitH
 
 image::FinishTodoUsage.png[width="1000"]
 
-=== Add Reminder: `reminder` [coming in v1.4]
+// tag::reminder[]
+=== Add Reminder: `reminder`
 
-Adds a Reminder for your next meeting, along with details to be displayed
+Adds a reminder for your next meeting, containing details like the title, date, time and agenda of the meeting. +
+Format: `reminder tt/TITLE d/DATE(DDMMYYYY) st/START_TIME ag/AGENDA`
 
+[NOTE]
 ====
-Format: `reminder d/DDMMYY tm/TIME lc/LOCATION tp/TOPIC`
+Reminders with the same `TITLE` are allowed but not with the same `DATE` *and* `START_TIME`
 ====
+
+****
+* Only 1 of each field is allowed.
+* `TITLE`, `DATE`, `START_TIME` `AGENDA` all cannot be blank fields.
+* `TITLE` and `AGENDA` accepts any alphanumerical input of any length.
+* `DATE` must be in DDMMYYYY format, and only numbers will be accepted.
+* `START_TIME` must be in 24 hours format, cannot exceed 2359 and only numbers will be accepted.
+****
 
 Examples:
 
-* `reminder d/031118 tm/1900 lc/COM2 tp/CS2113T Milestone 1.4`
+* `reminder tt/CS2113T Meeting d/03112018 st/1900 ag/Milestone 1.4`
 
-=== Meeting Minutes: `minutes` [coming in v1.4]
+* The following sequence of images illustrate how the example `ReminderCommand` is executed in JitHub.
+** Step 1: User inputs command in Jithub's command box.
 
-Opens up a text box to take meeting minutes
+image::ReminderExample.png[width="1000"]
+** Step 2: On successful addition, the results box will display this message.
 
-====
-Format: `minutes`
-====
+image::ReminderSuccess.png[width="1000"]
+** Step 3: The newly added `Reminder` will be displayed on the `Reminder` pane of the `UI` sidebar, below the `Todo` pane.
+
+image::ReminderPane.png[width="200"]
+// end::reminder[]
 
 === Exiting the program : `exit` / `x`
 
@@ -467,18 +474,28 @@ Receive smart suggestions while typing in your commands. Press the `TAB` key whi
 suggestions on possible commands without having to navigate to the help window. If only one command is available,
 pressing `TAB` will auto-complete the command for you without the need to type it in manually.
 
+This is particularly helpful when you are new to the commands and require time to get used to it. Pressing `TAB` would
+show all helpful and useful information needed, and this would definitely benefit you as the learning curve to using our
+application would not be steep.
+
 Examples:
 
 * While typing `his` to get `history` command, press `TAB`. The `history` command will automatically be filled in for
 you as it is the only suggestion available. The command parameters would then be shown as a prompt to help you with your
 input.
 * While typing `e`, press `TAB`. The system will suggest to you all possible commands that start with `e`, which would
-be `exportall`, `exit`, and `edit`.
+be `exportall`, `export`, `exit`, and `edit`.
 
 === Getting Wrong Command Suggestions
 
 Should you type in a wrong command, fear not, as our system will automatically suggest to you what you have typed wrongly,
 by giving you a closest approximation of word through the message box after you press enter.
+
+The input is not case sensitive when looking for suggestions, hence it would increase the chance of getting a closer approximation of your
+desired command!
+
+This is particularly useful when you are typing very quickly, as sometimes you might make minor mistakes which can be
+easily correctable from our application.
 
 Examples:
 
@@ -547,6 +564,7 @@ e.g.`select 2`
 e.g. `exportall csv`
 * *Mail* : `mail [i/INDEX]` (to be added)
 * *Todo* : `todo tt/TITLE c/CONTENT`
+* *Reminder* : `reminder tt/TITLE d/DATE(DDMMYYYY) st/START_TIME ag/AGENDA`
 * *FinishTodo* : `finishTodo INDEX`
 * *Schedule* : `schedule INDEX-OF-PERSON d/DATE(DDMMYYYY) st/START-TIME et/END_TIME en/EVENT-NAME`
 * *Clear Schedule* : `clearSchedule IndexOfPerson`
