@@ -2,14 +2,14 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DATE_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_MODULE_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.address.testutil.TypicalExpenditures.getTypicalExpenditureTracker;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
@@ -76,8 +76,8 @@ public class EditTaskCommandTest {
 
     @Test
     public void executeNoFieldSpecifiedUnfilteredListSuccess() {
-        EditTaskCommand editTaskCommand
-                = new EditTaskCommand(INDEX_FIRST_TASK, new EditTaskCommand.EditTaskDescriptor());
+        EditTaskCommand editTaskCommand =
+                new EditTaskCommand(INDEX_FIRST_TASK, new EditTaskCommand.EditTaskDescriptor());
         Task editedTask = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
 
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
@@ -132,8 +132,8 @@ public class EditTaskCommandTest {
     @Test
     public void executeInvalidTaskIndexUnfilteredListFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
-        EditTaskCommand.EditTaskDescriptor descriptor
-                = new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_TUTORIAL).build();
+        EditTaskCommand.EditTaskDescriptor descriptor =
+                new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_TUTORIAL).build();
         EditTaskCommand editTaskCommand = new EditTaskCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editTaskCommand, model, commandHistory, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -183,8 +183,8 @@ public class EditTaskCommandTest {
     @Test
     public void executeUndoRedoInvalidIndexUnfilteredListFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
-        EditTaskCommand.EditTaskDescriptor descriptor
-                = new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_TUTORIAL).build();
+        EditTaskCommand.EditTaskDescriptor descriptor =
+                new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_TUTORIAL).build();
         EditTaskCommand editTaskCommand = new EditTaskCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> to-do list state not added into model
@@ -243,7 +243,7 @@ public class EditTaskCommandTest {
         assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertFalse(standardCommand == null);
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));

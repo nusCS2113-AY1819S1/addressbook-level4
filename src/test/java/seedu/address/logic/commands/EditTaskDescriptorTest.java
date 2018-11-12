@@ -17,15 +17,15 @@ public class EditTaskDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditTaskCommand.EditTaskDescriptor descriptorWithSameValues
-                = new EditTaskCommand.EditTaskDescriptor(DESC_ASSIGNMENT);
+        EditTaskCommand.EditTaskDescriptor descriptorWithSameValues =
+                new EditTaskCommand.EditTaskDescriptor(DESC_ASSIGNMENT);
         assertTrue(DESC_ASSIGNMENT.equals(descriptorWithSameValues));
 
         // same object -> returns true
         assertTrue(DESC_ASSIGNMENT.equals(DESC_ASSIGNMENT));
 
         // null -> returns false
-        assertFalse(DESC_ASSIGNMENT.equals(null));
+        assertFalse(DESC_ASSIGNMENT == null);
 
         // different types -> returns false
         assertFalse(DESC_ASSIGNMENT.equals(5));
@@ -34,8 +34,8 @@ public class EditTaskDescriptorTest {
         assertFalse(DESC_ASSIGNMENT.equals(DESC_TUTORIAL));
 
         // different name -> returns false
-        EditTaskCommand.EditTaskDescriptor editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).
-                withName(VALID_TASK_NAME_TUTORIAL).build();
+        EditTaskCommand.EditTaskDescriptor editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT)
+                .withName(VALID_TASK_NAME_TUTORIAL).build();
         assertFalse(DESC_ASSIGNMENT.equals(editedAssignment));
 
         // different date -> returns false
