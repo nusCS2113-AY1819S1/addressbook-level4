@@ -16,15 +16,9 @@ My role as a developer in this project was to manage the modifying and handling 
 
 RecruitBook is a desktop application created for job agents. It serves as a management tool to better manage both a list of job applicants and job offers. The user interacts with it using a Command Line Interface, and it has a GUI created with JavaFX. It is written in Java, and has about 10k lines of code.
 
-Here is a list of the main features currently available in RecruitBook.
+Currently, these are the features available in RecruitBook:
 
-* Adding and Deletion of data
-* Modifying of data
-* Fetching of data
-* Shortlisting
-* Emailing
-* Blacklisting
-
+* Adding and deleting of data, modifying of data, fetching of data, shortlisting, emailing and blacklisting
 
 == Summary of contributions
 
@@ -47,7 +41,7 @@ Apart from the attributes, users can also do a reverse sort to list out the curr
 * *Minor enhancement*: +
 ** Added a *Blacklist Command* that blacklists undesired candidates. Serves like a blocking feature that prevents users from carelessly shortlisting or editing these candidates. Blacklisted candidated are tagged with "BLACKLISTED".
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=mingxunseah[Functional code]] [https://github.com/CS2113-AY1819S1-F09-4/main/tree/master/src/test[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=mingxunseah[Functional/Test code]]
 
 * *Other contributions*:
 
