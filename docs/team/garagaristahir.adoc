@@ -1,0 +1,214 @@
+= Gara Tahir - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+By: `Gara Tahir`
+Project: `Iventarei Pro`
+
+
+
+== Overview
+
+Inventarie Pro is for self employed business owners who *prefer to use a desktop app for managing inventory*. More importantly, Inventarie Pro is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Inventarie Pro can get your inventory management tasks done faster than traditional GUI apps.
+
+== Summary of contribution
+
+LINK TO CODE CONTTIBUTION
+
+Main feature implemented:
+I have changed the whole foundation of the code. I changed the class person to product. The attributes and their constrains where changed accordingly.
+
+The class Product now consists of the attributes:
+* Name
+* SerialNumber
+* Product information
+* Remaining items
+* Distributor
+* Tag(s)
+
+
+Other contributions:
+I integrated Paras feature "Transaction" with my attribute Remaining items.
+Now when a transaction is made the program first sees if the products exist then it sees if there is enough products in the inventory and lastly it subtract the number of items that are removed from the inventory.
+
+Minor contributions
+The use can search for a product with both name and Serialnumber (The primary key)
+
+I changed transaction so that it is made with serialnumber and not name. (Becuase serialNumber is the primary key).
+
+I have adapted existing tests to work with the new program.
+Community:
+Reported bugs and suggestions to team W13-1.
+
+== Contribution to the User Guide
+
+I created and added the first design of the UI to the User Guide so the team could visualize our end-product.
+image::orgUI.png[width="790"]
+
+=== Contribution to the Developper guide
+We all sat together during a skype conversation and wrote this:
+== Product Scope
+
+*Target user profile*: Small business owners
+
+* has a need to manage a significant number of contacts
+* prefer desktop apps over other types
+* can type fast
+* prefers typing over mouse input
+* is reasonably comfortable using CLI apps
+
+*Value proposition*: tracks inventory faster than a typical mouse/GUI driven app
+
+[appendix]
+== User Stories
+
+Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
+
+[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
+|=======================================================================
+|Priority |As a ... |I want to ... |So that I can...
+|`* * *` |self-employed provision shop owner |see usage instructions |refer to instructions when I forget how to use the App
+
+|`* * *` |self-employed provision shop owner |add a new product to my record of products | keep track of all the products that my shop owns
+
+|`* * *` |self-employed provision shop owner |delete a product from my record of products | stop tracking products I no longer want to sell in my store
+
+|`* * *` |self-employed provision shop owner |find a product by name | locate details of products without having to go through the entire list
+
+|`* * *` |self-employed provision shop owner |find a product by relevant tags | retrieve a list of products that are of a certain type
+
+|`* * *` |self-employed provision shop owner |add a distributor to my record of distributors | keep track of who supplies my products to me
+
+|`* * *` |self-employed provision shop owner |delete a distributor from my record of distributors | declutter the distributors I keep in contact with if I choose to stop business with a certain distributor
+
+|`* * *` |self-employed provision shop owner |edit a distributor in my record of distributors | change the name or phone number of a distributor in case their details change, and keep up to date with their contacts
+
+|`* * *` |self-employed provision shop owner |find a distributor by name | retrieve contact details of distributors without having to go through the entire list
+
+|`* * *` |self-employed provision shop owner |find a distributor by relevant tags | retrieve a list of distributors who supply a certain type of products
+
+|`* * *` |self-employed provision shop owner |view what products a distributor supplies | retrieve a list of all the products that a distributor supplies at one go, in case I need to make an order
+
+|`* *` |self-employed provision shop owner |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+
+|`*` |user with many products in the productInfo book |sort products by name |locate a product easily
+|=======================================================================
+
+_{More to be added}_
+
+[appendix]
+== Use Cases
+
+(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+
+[discrete]
+=== Use case: Delete product
+
+*MSS*
+
+1.  User requests to list products
+2.  Inventarie PRO shows a list of products
+3.  User requests to delete a specific product in the list
+4.  Inventarie PRO deletes the product
++
+Use case ends.
+
+[discrete]
+=== Use case: Add distributor
+
+*MSS*
+
+1.  User requests to add distributors
+2.  Inventarie PRO adds the distributor into the list of distributors
++
+Use case ends.
+
+[discrete]
+=== Use case: List distributor
+
+*MSS*
+
+1.  User requests to list all distributors
+2.  Inventarie PRO shows the entire list of distributors
++
+Use case ends.
+
+[discrete]
+=== Use case: Edit distributor
+
+*MSS*
+
+1.  User requests to list all distributors
+2.  Inventarie PRO shows the entire list of distributors
+3.  User requests to edit a specific distributor by index
+4.  Inventarie PRO edits the specific distributor in the list of distributors
++
+Use case ends.
+
+[discrete]
+=== Use case: Find distributor by name
+
+*MSS*
+
+1.  User requests to find the distributor or distributors that have a certain name
+2.  Inventarie PRO shows the list of distributors with names that match the keyword given
++
+Use case ends.
+
+[discrete]
+=== Use case: Find distributor by tag
+
+*MSS*
+
+1.  User requests to find the distributor or distributors that have a certain tag
+2.  Inventarie PRO shows the list of distributors with tags that match the keyword given
++
+Use case ends.
+
+[discrete]
+=== Use case: List products supplied by a distributor
+
+*MSS*
+
+1.  User requests to list all distributors
+2.  Inventarie PRO shows the entire list of distributors
+3.  User requests to view the products supplied by a specific distributor by index
+4.  Inventarie PRO lists the products supplied by the specific distributor in the list of distributors
++
+Use case ends.
+
+[discrete]
+=== Use case: Delete distributor
+
+*MSS*
+
+1.  User requests to list distributors
+2.  Inventarie PRO shows a list of distributors
+3.  User requests to delete a specific distributor in the list
+4.  Inventarie PRO deletes the product
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
+
+_{More to be added}_
+
+[appendix]
+== Non Functional Requirements
+
+.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
+.  Should be able to hold up to 1000 products without a noticeable sluggishness in performance for typical usage.
+.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.

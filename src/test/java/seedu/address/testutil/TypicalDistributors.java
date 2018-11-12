@@ -17,10 +17,14 @@ import seedu.address.model.distributor.Distributor;
  */
 public class TypicalDistributors {
 
-    public static final Distributor AHBENG = new DistributorBuilder().withName("Ah Beng").withPhone("11111111").build();
-    public static final Distributor AHHUAT = new DistributorBuilder().withName("Ah Huat").withPhone("22222222").build();
-    public static final Distributor AHLONG = new DistributorBuilder().withName("Ah Long").withPhone("55555555").build();
-    public static final Distributor AHTING = new DistributorBuilder().withName("Ah Ting").withPhone("66666666").build();
+    public static final Distributor AHBENG = new DistributorBuilder().withName("Ah Beng").withPhone("11111111")
+            .withProds("Grape").withTags("fruits").build();
+    public static final Distributor AHHUAT = new DistributorBuilder().withName("Ah Huat").withPhone("22222222")
+            .withProds("Orange").withTags("meat").build();
+    public static final Distributor AHLONG = new DistributorBuilder().withName("Ah Long").withPhone("55555555")
+            .withProds("Chocolate").withTags("snacks").build();
+    public static final Distributor AHTING = new DistributorBuilder().withName("Ah Ting").withPhone("66666666")
+            .withProds("Doritos").withTags("snacks").build();
 
     // Manually added
     public static final Distributor AHKUAH = new DistributorBuilder().withName("Ah Kuah").withPhone("77777777").build();
@@ -48,6 +52,6 @@ public class TypicalDistributors {
     }
 
     public static List<Distributor> getTypicalDistributors() {
-        return new ArrayList<>(Arrays.asList(AHBENG, AHHUAT, AHKUAH, AHMEI, AHLEE, AHSENG));
+        return new ArrayList<>(Arrays.asList(AHBENG, AHHUAT, AHLONG, AHTING, AHLEE, AHKUAH));
     }
 }

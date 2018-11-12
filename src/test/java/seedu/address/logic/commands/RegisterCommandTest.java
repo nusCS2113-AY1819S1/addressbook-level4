@@ -180,7 +180,19 @@ public class RegisterCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Product product) {
+        public boolean hasDistributorName(Distributor distributor) {
+            fail("This method should not be called.");
+            return false;
+        }
+
+        @Override
+        public boolean hasDistributorPhone(Distributor distributor) {
+            fail("This method should not be called.");
+            return false;
+        }
+
+        @Override
+        public boolean hasProduct(Product product) {
             fail("This method should not be called.");
             return false;
         }
@@ -191,12 +203,12 @@ public class RegisterCommandTest {
         }
 
         @Override
-        public void deletePerson(Product product) {
+        public void deleteProduct(Product product) {
             fail("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Product product) {
+        public void addProduct(Product product) {
             fail("This method should not be called.");
         }
 
@@ -211,7 +223,7 @@ public class RegisterCommandTest {
         }
 
         @Override
-        public void updatePerson(Product target, Product editedProduct) {
+        public void updateProduct(Product target, Product editedProduct) {
             fail("This method should not be called.");
         }
 
@@ -265,7 +277,7 @@ public class RegisterCommandTest {
             fail("This method should not be called.");
         }
 
-        public void redoAddressBook() {
+        public void redoProductDatabase() {
             fail("This method should not be called.");
         }
 
@@ -273,7 +285,7 @@ public class RegisterCommandTest {
             fail("This method should not be called.");
         }
 
-        public void commitAddressBook() {
+        public void commitProductDatabase() {
             fail("This method should not be called.");
         }
 
@@ -310,9 +322,18 @@ public class RegisterCommandTest {
         }
 
         @Override
+<<<<<<< HEAD
         public void commitSalesHistory() {
             fail("This method should not be called");
         }
+=======
+        public boolean hasProductName(String name) {
+            return false;
+        }
+
+        @Override
+        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
+>>>>>>> bc77c9d0f047eb8e2d53296dc4e350a09781d7db
 
         @Override
         public String getTransactionAsString(String date) throws InvalidTimeFormatException {
@@ -360,6 +381,37 @@ public class RegisterCommandTest {
     private class ModelStubThrowingDuplicateUserException extends RegisterCommandTest.ModelStub {
 
         @Override
+<<<<<<< HEAD
+=======
+        public boolean hasProductName(String name) {
+            return false;
+        }
+
+        @Override
+        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
+
+        @Override
+        public ArrayList<Reminder> getAllReminders() {
+            return null;
+        }
+
+        @Override
+        public ArrayList<Reminder> getOverdueRemindersForThread() {
+            return null;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            return null;
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            fail("This method should not be called.");
+        }
+
+        @Override
+>>>>>>> bc77c9d0f047eb8e2d53296dc4e350a09781d7db
         public void addUser(User person) throws DuplicateUserException {
             throw new DuplicateUserException();
         }

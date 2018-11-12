@@ -167,7 +167,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/productInfo/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ProductListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/productInfo/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -187,15 +187,15 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/productInfo/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `AllCommandsParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a product) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteproduct 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+.Interactions Inside the Logic Component for the `deleteproduct 1` Command
+image::DeleteProductSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
@@ -208,12 +208,23 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the
+.   Product data
+.   Distributor Book data
+.   User data
+
+* exposes an unmodifiable
+.   `ObservableList<Product>`
+.   `ObservableList<Distributor>`
+.   `ObservableList<Transaction>`
+.   `ObservableList<Reminder>`  +
+
+that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in both `Product Database` and `Distributor Book`, which `Product`/`Distributor`
+can reference. This would allow `Product Database` and `Distributor Book` to only require one `Tag` object per unique `Tag`, instead of each `Product`/`Distributor` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
@@ -244,14 +255,47 @@ This section describes some noteworthy details on how certain features are imple
 // tag::authentication[]
 === Authentication
 ==== Current Implementation
+===== Multiple Users
+Each storage file is now stored in separate XML files. They are identified in the following format:
+
+.   `addressbook-[USERNAME].xml`
+.   `distributorbook-[USERNAME].xml`
+.   `saleshistory-[USERNAME].xml`
+
 ===== Login
 The following sequence diagram shows how the user authentication process works: +
 
 image::AuthenticationSequenceDiagram.png[width="800]
 
 ===== Logout
+This feature allows the user to log out from the application, securing data.
+When the user is logged out, some of the user commands are limited. This is handled by `LogicManager`.
+
+The user will be unable to logout if not logged in.
+
+===== Deregistration
+When the user is deleted, the following storage files stored in the system managed by the user will be deleted.
+
+.   `addressbook-[USERNAME].xml`
+.   `distributorbook-[USERNAME].xml`
+.   `saleshistory-[USERNAME].xml`
+
+
+
+==== Proposed Enhancements
+.   Hiding/showing of panels when logged in/out for confidentiality.
+.   2-FA
+.   Login Status Identifier
+
 
 ==== Design Considerations
+
+===== Aspect: Implementation of Users Database
+*   **Alternative 1 (current choice):** All users stored collectively in one XML file.
+    (users.xml)
+
+*   **Alternative 2:** SQL/NoSQL Databases.
+
 // end::authentication[]
 // tag::undoredo[]
 === Undo/Redo feature
@@ -333,13 +377,6 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
-
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -380,6 +417,37 @@ Currently, the `Transaction` objects are stored on a `TreeMap` to maintain their
 should this prove non-essential, this will be redone on a `HashMap` to facilitate quicker access and easier handling in
 the code.
 
+// tag::dataencryption[]
+=== [Proposed] Data Encryption
+
+==== Proposed Implementation
+Data needs to be encrypted to protect from unauthorized access.
+The process to transform data stored in the databases is to be facilitated by `DataEncryptionUtil` class.
+It is a class containing utility methods to encrypt and decrypt files for Storage.
+Additionally, it implements the following operations:
+
+*   `DataEncryptionUtil#encrypt()` - Encrypts file using a secret key.
+*   `DataEncryptionUtil#decrypt()` - Decrypts file using a secret key.
+*   `DataEncryptionUtil#processFile()` - Encrypts or decrypts a given file using a cipher.
+
+
+==== Design Considerations
+===== Aspect: Possible schemes
+
+*   **Alternative 1 (proposed choice):** AES/CBC/PKCS5Padding
+
+*   **Alternative 2:** AES/ECB/PKCS5Padding
+
+===== Aspect: How encryption and decryption executes
+
+*   *Alternative 1 (proposed choice):* Intercept `XMLUtil` when reading and saving XML Storage files.
+*   **Aleternative 2:** Individual encrypt and decrypt command.
+
+// end::dataencryption[]
+
+// tag::threadreminders[]
+=== [Proposed] Thread Due Reminders
+// end::threadreminders[]
 == Documentation
 
 We use asciidoc for writing documentation.
@@ -614,9 +682,9 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/productInfo/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/productInfo/model/AddressBook.java[`AddressBook`] API need to be updated.
+** The link:{repoURL}/src/main/java/seedu/productInfo/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/productInfo/model/AddressBook.java[`Product Database`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/productInfo/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/productInfo/model/AddressBook.java[`AddressBook`] allows you to update a product, and link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/productInfo/model/AddressBook.java[`Product Database`] and link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Product`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/productInfo/model/AddressBook.java[`Product Database`] allows you to update a product, and link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Product`] allows you to update the tags.
 * Solution
 ** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/productInfo/model/AddressBook.java[`AddressBook`]. Loop through each product, and remove the `tag` from each product.
 ** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/productInfo/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/productInfo/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
@@ -644,11 +712,11 @@ image::getting-started-ui-tag-after.png[width="300"]
 +
 ****
 * Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/productInfo/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
+** The tag labels are created inside link:{repoURL}/src/main/java/seedu/productInfo/ui/PersonCard.java[the `ProductCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
 ** Use the .css attribute `-fx-background-color` to add a color.
 ** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
 * Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
+** You can modify the existing test methods for `ProductCard` 's to include testing the tag's color as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
 *** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
 ****
@@ -766,20 +834,20 @@ Let's teach the application to parse arguments that our `remark` command will ac
 for `RemarkCommandParser`.
 . Modify link:{repoURL}/src/test/java/seedu/productInfo/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
 
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/productInfo/ui/PersonCard.java[`PersonCard`] s to display a remark for each product later.
+===== [Step 3] Ui: Add a placeholder for remark in `ProductCard`
+Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/productInfo/ui/PersonCard.java[`ProductCard`] s to display a remark for each product later.
 
 **Main:**
 
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/productInfo/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
+. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`ProductListCard.fxml`].
+. Add FXML annotation in link:{repoURL}/src/main/java/seedu/productInfo/ui/PersonCard.java[`ProductCard`] to tie the variable to the actual label.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
+. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`ProductCardHandle`] so that future tests can read the contents of the remark label.
 
 ===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
+We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Product`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
 
 **Main:**
 
@@ -790,17 +858,17 @@ We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/s
 
 . Add test for `Remark`, to test the `Remark#equals()` method.
 
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Person`].
+===== [Step 5] Model: Modify `Product` to support a `Remark` field
+Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Product`].
 
 **Main:**
 
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Person`].
+. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Product`].
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the product will be created without a remark).
 . Modify link:{repoURL}/src/main/java/seedu/productInfo/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `productDatabase.xml` so that the application will load the sample data when you launch it.)
 
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/productInfo/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
+===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedProduct` class
+We now have `Remark` s for `Product` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/productInfo/storage/XmlAdaptedPerson.java[`XmlAdaptedProduct`] to include a `Remark` field so that it will be saved.
 
 **Main:**
 
@@ -810,20 +878,20 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 
 . Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsAddressBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/productInfo/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Person`].
+===== [Step 6b] Test: Add withRemark() for `ProductBuilder`
+Since `Product` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/productInfo/testutil/PersonBuilder.java[`ProductBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/productInfo/model/product/Person.java[`Person`].
 
 **Tests:**
 
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/productInfo/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the product that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/productInfo/testutil/TypicalPersons.java[`TypicalPersons`].
+. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/productInfo/testutil/PersonBuilder.java[`ProductBuilder`]. This method will create a new `Remark` for the product that it is currently building.
+. Try and use the method on any sample `Product` in link:{repoURL}/src/test/java/seedu/productInfo/testutil/TypicalPersons.java[`TypicalProducts`].
 
-===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/productInfo/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
+===== [Step 7] Ui: Connect `Remark` field to `ProductCard`
+Our remark label in link:{repoURL}/src/main/java/seedu/productInfo/ui/PersonCard.java[`ProductCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
 
 **Main:**
 
-. Modify link:{repoURL}/src/main/java/seedu/productInfo/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
+. Modify link:{repoURL}/src/main/java/seedu/productInfo/ui/PersonCard.java[`ProductCard`]'s constructor to bind the `Remark` field to the `Product` 's remark.
 
 **Tests:**
 
@@ -847,7 +915,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-*Target user profile*:
+*Target user profile*: Small business owners
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
@@ -855,7 +923,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: tracks inventory faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -865,15 +933,29 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |self-employed provision shop owner |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new product |
+|`* * *` |self-employed provision shop owner |add a new product to my record of products | keep track of all the products that my shop owns
 
-|`* * *` |user |delete a product |remove entries that I no longer need
+|`* * *` |self-employed provision shop owner |delete a product from my record of products | stop tracking products I no longer want to sell in my store
 
-|`* * *` |user |find a product by name |locate details of products without having to go through the entire list
+|`* * *` |self-employed provision shop owner |find a product by name | locate details of products without having to go through the entire list
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |self-employed provision shop owner |find a product by relevant tags | retrieve a list of products that are of a certain type
+
+|`* * *` |self-employed provision shop owner |add a distributor to my record of distributors | keep track of who supplies my products to me
+
+|`* * *` |self-employed provision shop owner |delete a distributor from my record of distributors | declutter the distributors I keep in contact with if I choose to stop business with a certain distributor
+
+|`* * *` |self-employed provision shop owner |edit a distributor in my record of distributors | change the name or phone number of a distributor in case their details change, and keep up to date with their contacts
+
+|`* * *` |self-employed provision shop owner |find a distributor by name | retrieve contact details of distributors without having to go through the entire list
+
+|`* * *` |self-employed provision shop owner |find a distributor by relevant tags | retrieve a list of distributors who supply a certain type of products
+
+|`* * *` |self-employed provision shop owner |view what products a distributor supplies | retrieve a list of all the products that a distributor supplies at one go, in case I need to make an order
+
+|`* *` |self-employed provision shop owner |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many products in the productInfo book |sort products by name |locate a product easily
 |=======================================================================
@@ -894,6 +976,70 @@ _{More to be added}_
 2.  Inventarie PRO shows a list of products
 3.  User requests to delete a specific product in the list
 4.  Inventarie PRO deletes the product
++
+Use case ends.
+
+[discrete]
+=== Use case: Add distributor
+
+*MSS*
+
+1.  User requests to add distributors
+2.  Inventarie PRO adds the distributor into the list of distributors
++
+Use case ends.
+
+[discrete]
+=== Use case: List distributor
+
+*MSS*
+
+1.  User requests to list all distributors
+2.  Inventarie PRO shows the entire list of distributors
++
+Use case ends.
+
+[discrete]
+=== Use case: Edit distributor
+
+*MSS*
+
+1.  User requests to list all distributors
+2.  Inventarie PRO shows the entire list of distributors
+3.  User requests to edit a specific distributor by index
+4.  Inventarie PRO edits the specific distributor in the list of distributors
++
+Use case ends.
+
+[discrete]
+=== Use case: Find distributor by name
+
+*MSS*
+
+1.  User requests to find the distributor or distributors that have a certain name
+2.  Inventarie PRO shows the list of distributors with names that match the keyword given
++
+Use case ends.
+
+[discrete]
+=== Use case: Find distributor by tag
+
+*MSS*
+
+1.  User requests to find the distributor or distributors that have a certain tag
+2.  Inventarie PRO shows the list of distributors with tags that match the keyword given
++
+Use case ends.
+
+[discrete]
+=== Use case: List products supplied by a distributor
+
+*MSS*
+
+1.  User requests to list all distributors
+2.  Inventarie PRO shows the entire list of distributors
+3.  User requests to view the products supplied by a specific distributor by index
+4.  Inventarie PRO lists the products supplied by the specific distributor in the list of distributors
 +
 Use case ends.
 
@@ -982,7 +1128,18 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+_{ more test cases ... }
+
+=== Deleting a distributor
+
+. Deleting a distributor while all distributors are listed
+ .. Prerequisites: List all distributors using the `listDistributor` command. Multiple products in the list.
+.. Test case: `deleteDistributor 1` +
+   Expected: First contact is deleted from the list. Details of the deleted distributor shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `deleteDistributor 0` +
+   Expected: No distributor is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+   Expected: Similar to previous.
 
 === Deleting a product
 
@@ -998,19 +1155,28 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 
-=== Deleting a distributor
+=== Editing an existing product
 
 . Deleting a distributor while all distributors are listed
 
-.. Prerequisites: List all distributors using the `listDistributor` command. Multiple products in the list.
-.. Test case: `deleteDistributor 1` +
-   Expected: First contact is deleted from the list. Details of the deleted distributor shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `deleteDistributor 0` +
-   Expected: No distributor is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+.. Prerequisites: There should be a atleast 2 products to edit. The second one has Serial Number = 123.
+.. Test case: `Edit product 1 inv/12` +
+   Expected: First product from the list is edited. The current inventory should now be 12, and a success message is shown in the result display panel.
+.. Test case: `edit 1 s/123` +
+   Expected: No product is updated. Error details of invalid serialnumber because a product with serial number = 123 already exists  is shown in the result display panel. Status bar remains the same.
+.. Other incorrect edit commands to try: `delete x n/y` (where x is larger than the list size and y does not exist) +
+   Expected: Error details of invalid index is shown in the result display panel.
 
 _{ more test cases ... }_
+
+=== Listing all products
+
+.
+
+.. Prerequisites: There is more then two products and the user has filtred the list by searching for a product.
+.. Test case: `listproducts` +
+   Expected: All products should be visible again and a message saying that all products are listed should appear in the result display panel.
+
 
 === Saving data
 

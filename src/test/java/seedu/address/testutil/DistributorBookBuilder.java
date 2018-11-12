@@ -6,7 +6,7 @@ import seedu.address.model.distributor.Distributor;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code ProductDatabase ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code ProductDatabase ab = new ProductDatabaseBuilder().withProduct("John", "Doe").build();}
  */
 public class DistributorBookBuilder {
 

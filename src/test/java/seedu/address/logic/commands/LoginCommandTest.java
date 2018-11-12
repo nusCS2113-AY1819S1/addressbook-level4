@@ -146,7 +146,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public void addUser(User person) throws DuplicateUserException {
+        public void addUser(User product) throws DuplicateUserException {
             fail("This method should not be called.");
         }
 
@@ -185,10 +185,29 @@ public class LoginCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Product product) {
+        public boolean hasDistributorName(Distributor distributor) {
             fail("This method should not be called.");
             return false;
         }
+
+        @Override
+        public boolean hasDistributorPhone(Distributor distributor) {
+            fail("This method should not be called.");
+            return false;
+        }
+
+        @Override
+        public boolean hasProduct(Product product) {
+            fail("This method should not be called.");
+            return false;
+        }
+
+        @Override
+        public boolean hasProductName(String name) {
+            fail ("This methos should not be called.");
+            return false;
+        }
+
 
         @Override
         public void deleteDistributor(Distributor distributor) {
@@ -196,12 +215,12 @@ public class LoginCommandTest {
         }
 
         @Override
-        public void deletePerson(Product product) {
+        public void deleteProduct(Product product) {
             fail("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Product product) {
+        public void addProduct(Product product) {
             fail("This method should not be called.");
         }
 
@@ -216,7 +235,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public void updatePerson(Product target, Product editedProduct) {
+        public void updateProduct(Product target, Product editedProduct) {
             fail("This method should not be called.");
         }
 
@@ -270,7 +289,7 @@ public class LoginCommandTest {
             fail("This method should not be called.");
         }
 
-        public void redoAddressBook() {
+        public void redoProductDatabase() {
             fail("This method should not be called.");
         }
 
@@ -278,7 +297,7 @@ public class LoginCommandTest {
             fail("This method should not be called.");
         }
 
-        public void commitAddressBook() {
+        public void commitProductDatabase() {
             fail("This method should not be called.");
         }
 

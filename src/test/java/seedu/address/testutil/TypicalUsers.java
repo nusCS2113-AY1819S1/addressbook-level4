@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,9 +15,22 @@ import seedu.address.model.login.Username;
  */
 public class TypicalUsers {
 
-    public static final User DEFAULT_USER = new User(new Username("user"), new Password("pass"));
-    public static final User AMY = new User(new Username("amy"), new Password("pass"));
-    public static final User BOB = new User(new Username("bob"), new Password("pass"));
+    public static final String DEFAULT_AB_PATH = "data/addressbook-user.xml";
+    public static final String AMY_AB_PATH = "data/addressbook-amy.xml";
+    public static final String BOB_AB_PATH = "data/addressbook-bob.xml";
+    public static final String DEFAULT_DB_PATH = "data/distributor-user.xml";
+    public static final String AMY_DB_PATH = "data/distributor-amy.xml";
+    public static final String BOB_DB_PATH = "data/distributor-bob.xml";
+    public static final String DEFAULT_SALESHISTORY_PATH = "data/saleshistory-user.xml";
+    public static final String AMY_SALESHISTORY_PATH = "data/saleshistory-amy.xml";
+    public static final String BOB_SALESHISTORY_PATH = "data/saleshistory-bob.xml";
+
+    public static final User DEFAULT_USER = new User(new Username("user"), new Password("pass"),
+            Paths.get(DEFAULT_AB_PATH), Paths.get(DEFAULT_DB_PATH), Paths.get(DEFAULT_SALESHISTORY_PATH));
+    public static final User AMY = new User(new Username("amy"), new Password("pass"),
+            Paths.get(AMY_AB_PATH), Paths.get(AMY_DB_PATH), Paths.get(AMY_SALESHISTORY_PATH));
+    public static final User BOB = new User(new Username("bob"), new Password("pass"),
+            Paths.get(BOB_AB_PATH), Paths.get(BOB_DB_PATH), Paths.get(BOB_SALESHISTORY_PATH));
 
     public static final User JOHN = new User(new Username("John"), new Password("pass"));
     public static final User RICK = new User(new Username("Rick"), new Password("pass"));

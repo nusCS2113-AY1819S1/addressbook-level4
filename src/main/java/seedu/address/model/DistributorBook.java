@@ -31,7 +31,7 @@ public class DistributorBook implements ReadOnlyDistributorBook {
     public DistributorBook() {}
 
     /**
-     * Creates an DistributorBook using the Persons in the {@code toBeCopied}
+     * Creates an DistributorBook using the Distirbutors in the {@code toBeCopied}
      */
     public DistributorBook(ReadOnlyDistributorBook toBeCopied) {
         this();
@@ -41,8 +41,8 @@ public class DistributorBook implements ReadOnlyDistributorBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the product data base with {@code products}.
+     * {@code Distributor} must not contain duplicate Distributors.
      */
     public void setDistributors(List<Distributor> distributors) {
         this.distributors.setDistributors(distributors);
@@ -59,7 +59,7 @@ public class DistributorBook implements ReadOnlyDistributorBook {
     //// product-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a distributor with the same identity as {@code distributor} exists in the distributor book.
      */
     public boolean hasDistributor(Distributor distributor) {
         requireNonNull(distributor);
@@ -67,8 +67,24 @@ public class DistributorBook implements ReadOnlyDistributorBook {
     }
 
     /**
+     * Returns true if a distributor with the same name as {@code distributor} exists in the distributor book.
+     */
+    public boolean hasDistributorName(Distributor distributor) {
+        requireNonNull(distributor);
+        return distributors.containsName(distributor);
+    }
+
+    /**
+     * Returns true if a distributor with the same phone as {@code distributor} exists in the distributor book.
+     */
+    public boolean hasDistributorPhone(Distributor distributor) {
+        requireNonNull(distributor);
+        return distributors.containsPhone(distributor);
+    }
+
+    /**
      * Adds a distributor to the address book.
-     * The distributor must not already exist in the address book.
+     * The distributor must not already exist in the distributor book.
      */
     public void addDistributor(Distributor d) {
         distributors.add(d);
@@ -76,7 +92,7 @@ public class DistributorBook implements ReadOnlyDistributorBook {
 
     /**
      * Replaces the given distrbutor {@code target} in the list with {@code editedDistributor}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the distributor book.
      * The distributor identity of {@code editedDistributor} must not be the same as another existing distributor
      * in the Inventarie.
      */

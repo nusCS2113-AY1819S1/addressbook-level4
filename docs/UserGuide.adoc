@@ -23,7 +23,7 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 == Quick Start
 
 .  Ensure you have Java version 9 installed in your Computer.
-.  Download the latest Inventarie.jar here (link will be added later).
+.  Download the latest `Inventarie.jar` link:https://github.com/CS2113-AY1819S1-T13-3/main/releases/download/v1.3.2/inventariepro.jar[here].
 .  Copy the file to the folder you want to use as the home folder for your Inventarie Pro.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 .  Register a new user account (Jump to `register` in <<Authentication>>.
@@ -31,7 +31,7 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 .  Refer to <<Features>> for a detailed list of commands.
 
 +
-image::UI2.png[width="790"]
+image::Ui.png[width="790"]
 
 == Features
 
@@ -93,18 +93,18 @@ Examples:
 
 ==== Add a product: `addproduct`
 
-Format: `addproduct n/PRODUCT_NAME s/SERIAL_NUMBER d/DISTRIBUTOR i/INFO t/TAGS`
+Format: `addproduct n/PRODUCT_NAME s/SERIAL_NUMBER d/DISTRIBUTOR inv/QUANTITY i/INFO t/TAGS`
 
 Adds a product to the list of products offered by the store
-and adds the distributor to the list of distributors if the distributor
-is not yet added. +
+and adds the distributor to the list of distributors if the distributor is not yet added
+and there is no other distributor with the default phone number, 00000000. +
 
 *  Distributor's name is the key.
 
 Examples:
 
-* `addproduct n/G2 s/08382 d/Pilot Pens i/Use proper stift t/Stationary`
-* `addproduct n/Black Tea s/10041 d/Lim Siang i/175mg t/Beverages`
+* `addproduct n/G2 s/08382 d/Pilot Pens i/Use proper stift t/Stationary inv/12`
+* `addproduct n/Black Tea s/10041 d/Lim Siang i/175mg t/Beverages inv/13`
 
 ==== Search for a product: `findproduct`
 
@@ -120,11 +120,27 @@ Examples:
 * `findproduct Cap`
 * `findproduct 1021`
 
+==== Find a product by tag: `findtag`
+
+Format: `findtagproduct PRODUCT_TAG`
+
+Locates products./ that are related to the PRODUCT_TAG entered.
+
+Examples:
+
+* `findtagproduct snack`
+
 ==== List all products: `listproducts`
 
 Format: `listproducts`
 
 Provides the list of products
+
+==== Clear the inventory: `clearproducts`
+
+Format: `clearproducts`
+
+Deletes all products from the product database.
 
 // end::inventorymanagement[]
 
@@ -133,7 +149,7 @@ Provides the list of products
 
 ==== Add a distributor: `adddistributor`
 
-Format: `adddistributor dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
+Format: `adddistributor dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER t/TAG`
 
 Adds a distributor to the list of distributors engaged with the store.
 
@@ -148,7 +164,7 @@ Format: `listdistributors`
 
 Provides the list of distributors engaged with the store.
 
-==== Edit a distributor: `editdistributor index`
+==== Edit a distributor: `editdistributor`
 
 Format: `editdistributor index dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
@@ -157,7 +173,7 @@ Index should be a positive number.
 
 Examples:
 
-* `editdistributor 1 dn/Ben Lok dp/93120000`
+* `editdistributor 1 dn/Apple Farm Lok dp/93120000`
 
 ==== Find a distributor: `finddistributor`
 
@@ -167,7 +183,28 @@ Locates distributors that are related to the DISTRIBUTOR_NAME entered.
 
 Examples:
 
-* `finddistributor Taylor`
+* `finddistributor Farm`
+
+==== Find a distributor by tag: `findtagdistributor`
+
+Format: `findtagdistributor DISTRIBUTOR_TAG`
+
+Locates distributors that are related to the DISTRIBUTOR_TAG entered.
+
+Examples:
+
+* `findtagdistributor snack`
+
+==== See a list of products that a distributor can provide: `listdistributorproducts`
+
+Format: `listdistributorproducts index`
+
+Lists products that the indexed distributor from the list of distributors engaged with the store may supply.
+Index should be a positive number.
+
+Examples:
+
+* `listdistributorproducts 2`
 
 ==== Delete a distributor: `deletedistributor`
 
@@ -184,7 +221,11 @@ Deletes the 2nd distributor in the contacts panel.
   `delete 1` +
    Deletes the 1st distributor in the results of the find command.
 
+==== Clear the distributor book: `cleardistributors`
 
+Format: `cleardistributors`
+
+Deletes all distributors from the distributor book.
 
 // end::distributormanagement[]
 
@@ -261,6 +302,7 @@ Removes a reminder in the system. There must only be a single
 space between "dd" and "HH" in the command format.
 
 Examples:
+
 * `removereminder time/ 2018/10/26 12:30:00`
 // end::journal[]
 
@@ -289,7 +331,7 @@ Recommended requirements:
 
 *   Operating system: Windows 10 64-bit/ Mac OS X +
 
-Please ensure the latest version of Java is installed on your system.
+Please ensure that Java 9 is installed on your system.
 
 
 Q: Why is the software called `Inventarie Pro`?

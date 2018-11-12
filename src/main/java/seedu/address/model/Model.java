@@ -28,7 +28,7 @@ public interface Model {
 
     Predicate<Distributor> PREDICATE_SHOW_ALL_DISTRIBUTORS = unused -> true;
 
-    Predicate<Product> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Product> PREDICATE_SHOW_ALL_PRODUCTS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyProductDatabase newData);
@@ -36,7 +36,7 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyDistributorBook newData);
 
-    /** Returns the AddressBook */
+    /** Returns the Product database */
     ReadOnlyProductDatabase getProductInfoBook();
 
     /** Returns the DistributorBook */
@@ -47,9 +47,23 @@ public interface Model {
     boolean hasDistributor(Distributor distributor);
 
     /**
+     * Returns true if a distributor with the same name as {@code distributor} exists in the Inventarie.
+     */
+    boolean hasDistributorName(Distributor distributor);
+
+    /**
+     * Returns true if a distributor with the same phone as {@code distributor} exists in the Inventarie.
+     */
+    boolean hasDistributorPhone(Distributor distributor);
+
+    /**
      * Returns true if a product with the same identity as {@code product} exists in the address book.
      */
-    boolean hasPerson(Product product);
+    boolean hasProduct(Product product);
+
+
+    boolean hasProductName(String name);
+
 
     /**
      * Deletes the given distributor.
@@ -61,7 +75,7 @@ public interface Model {
      * Deletes the given product.
      * The product must exist in the address book.
      */
-    void deletePerson(Product target);
+    void deleteProduct(Product target);
 
     /**
      * Adds the given distributor.
@@ -69,13 +83,11 @@ public interface Model {
      */
     void addDistributor(Distributor distributor);
 
-    //void getDistributor(Distributor distributor);
-
     /**
      * Adds the given product.
      * {@code product} must not already exist in the address book.
      */
-    void addPerson(Product product);
+    void addProduct(Product product);
 
     /**
      * Replaces the given distributor {@code target} with {@code editedDistributor}.
@@ -90,7 +102,8 @@ public interface Model {
      * The product identity of {@code editedProduct} must not be the same as another existing
      * product in the address book.
      */
-    void updatePerson(Product target, Product editedProduct);
+    void updateProduct(Product target, Product editedProduct);
+
 
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();
@@ -141,7 +154,7 @@ public interface Model {
     /**
      * Restores the model's address book to its previously undone state.
      */
-    void redoAddressBook();
+    void redoProductDatabase();
 
     /**
      * Restores the model's address book to its previously undone state.
@@ -151,7 +164,7 @@ public interface Model {
     /**
      * Saves the current address book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitProductDatabase();
 
     /**
      * Saves the current address book state for undo/redo.

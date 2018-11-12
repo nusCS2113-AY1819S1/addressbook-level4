@@ -154,10 +154,6 @@ public class AddReminderCommandTest {
      * The following is a {@code ModelStub} stub class that throws Assertion error for all methods in {@link Model}
      */
     private class ModelStub implements Model {
-        @Override
-        public void addPerson(Product product) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public void addDistributor(Distributor distributor) {
@@ -165,11 +161,17 @@ public class AddReminderCommandTest {
         }
 
         @Override
-        public void updatePerson(Product target, Product editedProduct) {
+        public void addProduct(Product product) {
+
         }
 
         @Override
         public void updateDistributor(Distributor target, Distributor editedDistributor) {
+        }
+
+        @Override
+        public void updateProduct(Product target, Product editedProduct) {
+
         }
 
         @Override
@@ -194,21 +196,36 @@ public class AddReminderCommandTest {
 
         @Override
         public boolean hasDistributor(Distributor distributor) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Product product) {
+        public boolean hasDistributorName(Distributor distributor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDistributorPhone(Distributor distributor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasProduct(Product product) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasProductName(String name) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteDistributor(Distributor target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Product target) {
+        public void deleteProduct(Product target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -248,16 +265,6 @@ public class AddReminderCommandTest {
         }
 
         @Override
-        public void redoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void commitAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean canUndoDistributorBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -273,8 +280,18 @@ public class AddReminderCommandTest {
         }
 
         @Override
+        public void redoProductDatabase() {
+
+        }
+
+        @Override
         public void redoDistributorBook() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitProductDatabase() {
+
         }
 
         @Override

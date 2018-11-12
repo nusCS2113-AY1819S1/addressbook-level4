@@ -11,11 +11,13 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.distributor.DistributorProduct;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.Username;
 import seedu.address.model.product.Email;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.ProductInfo;
+import seedu.address.model.product.RemainingItems;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.timeidentifiedclass.Reminder;
@@ -172,6 +174,51 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_EMAIL_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String remainingItems} into a {@code RemainingItems}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remainingItems} is invalid.
+     */
+    public static RemainingItems parseRemainingItems(String remainingItems) throws ParseException {
+        requireNonNull(remainingItems);
+        String trimmedRemainingItems = remainingItems.trim();
+        if (!RemainingItems.isValidRemainingItems(trimmedRemainingItems)) {
+            throw new ParseException(RemainingItems.MESSAGE_REMAINING_ITEMS_CONSTRAINTS);
+        }
+        return new RemainingItems(trimmedRemainingItems);
+    }
+
+    /**
+     * Parses a {@code String distributorproduct} into a {@code DistributorProduct}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code distributorproduct} is invalid.
+     */
+
+    public static DistributorProduct parseDistProd(String distributorproduct) throws ParseException {
+        requireNonNull(distributorproduct);
+        String trimmedProd = distributorproduct.trim();
+        if (!Name.isValidName(trimmedProd)) {
+            throw new ParseException(DistributorProduct.MESSAGE_DISTPROD_CONSTRAINTS);
+        }
+        return new DistributorProduct(trimmedProd);
+    }
+
+    /**
+     * Parses {@code Collection<String> distributorproducts} into a {@code Set<DistributorProduct>}.
+     */
+
+    public static Set<DistributorProduct> parseDistProds(Collection<String> distributorproducts)
+            throws ParseException {
+        requireNonNull(distributorproducts);
+        final Set<DistributorProduct> prodSet = new HashSet<>();
+        for (String prodName : distributorproducts) {
+            prodSet.add(parseDistProd(prodName));
+        }
+        return prodSet;
     }
 
     /**

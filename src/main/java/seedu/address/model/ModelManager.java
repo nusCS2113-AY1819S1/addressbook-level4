@@ -118,14 +118,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Product product) {
+    public boolean hasProduct(Product product) {
         requireNonNull(product);
-        return versionedAddressBook.hasPerson(product);
+        return versionedAddressBook.hasProduct(product);
     }
 
     @Override
-    public void deletePerson(Product target) {
-        versionedAddressBook.removePerson(target);
+    public boolean hasProductName(String name) {
+        requireNonNull(name);
+        return versionedAddressBook.hasProductName(name);
+    }
+
+    @Override
+    public void deleteProduct(Product target) {
+        versionedAddressBook.removeProduct(target);
         indicateAddressBookChanged();
     }
 
@@ -206,6 +212,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasDistributorName(Distributor distributor) {
+        return versionedDistributorBook.hasDistributorName(distributor);
+    }
+
+    @Override
+    public boolean hasDistributorPhone(Distributor distributor) {
+        return versionedDistributorBook.hasDistributorPhone(distributor);
+    }
+
+    @Override
     public void deleteDistributor(Distributor target) {
         versionedDistributorBook.removeDistributor(target);
         indicateDistributorBookChanged();
@@ -221,15 +237,15 @@ public class ModelManager extends ComponentManager implements Model {
         try {
             distributorBookOptional = storage.readDistributorBook();
             if (!distributorBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample DistributorBook");
             }
             newData = distributorBookOptional.orElseGet(SampleDistributorsUtil::getSampleDistributorBook);
         } catch (DataConversionException e) {
             newData = new DistributorBook();
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty DistributorBook");
         } catch (IOException e) {
             newData = new DistributorBook();
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty DistributorBook");
         }
         versionedDistributorBook.resetData(newData);
     }
@@ -324,18 +340,20 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Product List Modifiers =================================================================
 
     @Override
-    public void addPerson(Product product) {
+    public void addProduct(Product product) {
         versionedAddressBook.addProduct(product);
-        updateFilteredProductList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(Product target, Product editedProduct) {
+    public void updateProduct(Product target, Product editedProduct) {
         requireAllNonNull(target, editedProduct);
-        versionedAddressBook.updatePerson(target, editedProduct);
+        versionedAddressBook.updateProducts(target, editedProduct);
         indicateAddressBookChanged();
     }
+
+
 
     //=========== Filtered Distributor List Modifiers =============================================================
 
@@ -403,13 +421,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void redoAddressBook() {
+    public void redoProductDatabase() {
         versionedAddressBook.redo();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void commitAddressBook() {
+    public void commitProductDatabase() {
         versionedAddressBook.commit();
     }
 

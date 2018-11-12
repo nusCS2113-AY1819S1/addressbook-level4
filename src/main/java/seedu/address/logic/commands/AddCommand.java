@@ -4,13 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRIBUTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMAINING_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorProduct;
 import seedu.address.model.product.Product;
 
 /**
@@ -27,16 +32,23 @@ public class AddCommand extends Command {
             + PREFIX_SERIAL_NR + "SERIAL NUMBER "
             + PREFIX_DISTRIBUTOR + "DISTRIBUTOR "
             + PREFIX_PRODUCT_INFO + "PRODUCT INFO "
+            + PREFIX_REMAINING_ITEMS + "REMAINING ITEMS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Apple "
             + PREFIX_SERIAL_NR + "98765432 "
             + PREFIX_DISTRIBUTOR + "Alfred "
             + PREFIX_PRODUCT_INFO + "Contains chicken etc "
-            + PREFIX_TAG + "fruit ";
+            + PREFIX_TAG + "fruit "
+            + PREFIX_REMAINING_ITEMS + "12";
 
-    public static final String MESSAGE_SUCCESS = "New product added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New product added: %1$s \n\nRemember to edit the added distributor's"
+            + " phone number instead of leaving it as the default 00000000!";
+    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the product database";
+    public static final String MESSAGE_EDIT_DIST_PHONE = "The product was successfully added!\n\n"
+            + "The distributor has not been added because"
+            + "\n1. The distributor already exists, or"
+            + "\n2. Another distributor with the default 00000000 phone number exists.";
 
 
     private final Product toAdd;
@@ -56,17 +68,31 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasProduct(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
-        model.addPerson(toAdd);
+        model.addProduct(toAdd);
 
-        if (!(model.hasDistributor(distToAdd))) {
+        if (model.hasDistributorName(distToAdd)) {
+
+            List<Distributor> distList = model.getFilteredDistributorList();
+            Integer index = distList.indexOf(distToAdd);
+
+            Distributor originalDist = distList.get(index + 1);
+
+            Set<DistributorProduct> newDistProds = distToAdd.getDistProds();
+            originalDist.getDistProds().addAll(newDistProds);
+
+            Distributor prodEditedDist = new Distributor(originalDist.getDistName(), originalDist.getDistPhone(),
+                    originalDist.getDistProds(), distToAdd.getTags());
+
+            model.updateDistributor(distToAdd, prodEditedDist);
+        } else {
             model.addDistributor(distToAdd);
         }
 
-        model.commitAddressBook();
+        model.commitProductDatabase();
         model.commitDistributorBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

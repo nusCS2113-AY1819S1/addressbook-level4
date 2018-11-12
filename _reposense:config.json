@@ -1,17 +1,16 @@
 {
-  "ignoreGlobList": ["about-us/**", "**index.html"],
-  "formats": ["html", "css","xml","adoc","java"],
-  "ignoreCommitList": [],
-  "authors":
+  "ignoreGlobList": ["**index.html"],
+  "formats": ["html", "css","Java"],
+  "authors": ["amirulmaricar","garagaristahir","dyeosy98","ParasK26"]
   [
     {
-      "githubId": "garagaristahir",
-      "displayName": "Gara Tahir",
-      "authorNames": ["GT", "garagaristahir"],
+      "githubId": ["amirulmaricar","garagaristahir","dyeosy98","ParasK26"],
+      "displayName": ["Amirul","Gara Tahir","Denice","Paras"],
+      "authorNames": ["GT", "A"],
       "ignoreGlobList": ["**.css"]
     },
     {
-      "githubId": "bob"
+      "githubId": ["amirulmaricar","garagaristahir","dyeosy98","ParasK26"]
     }
   ]
 }

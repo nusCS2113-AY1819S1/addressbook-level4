@@ -14,6 +14,7 @@ import seedu.address.model.product.Email;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductInfo;
+import seedu.address.model.product.RemainingItems;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 
@@ -32,6 +33,9 @@ public class XmlAdaptedProduct {
     private String distributor;
     @XmlElement(required = true)
     private String info;
+    @XmlElement(required = true)
+    private String remainingItems;
+
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -46,11 +50,12 @@ public class XmlAdaptedProduct {
      * Constructs an {@code XmlAdaptedProduct} with the given product details.
      */
     public XmlAdaptedProduct(String name, String serialNumber, String distributor,
-                             String info, List<XmlAdaptedTag> tagged) {
+                             String info, List<XmlAdaptedTag> tagged, String remainingItems) {
         this.name = name;
         this.serialNumber = serialNumber;
         this.distributor = distributor;
         this.info = info;
+        this.remainingItems = remainingItems;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -66,6 +71,7 @@ public class XmlAdaptedProduct {
         serialNumber = source.getSerialNumber().value;
         distributor = source.getDistributor().fullDistName;
         info = source.getProductInfo().value;
+        remainingItems = source.getRemainingItems().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -77,9 +83,9 @@ public class XmlAdaptedProduct {
      * @throws IllegalValueException if there were any data constraints violated in the adapted product
      */
     public Product toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> productTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            productTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -116,8 +122,18 @@ public class XmlAdaptedProduct {
         }
         final ProductInfo modelProductInfo = new ProductInfo(info);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Product(modelName, modelSerialNumber, modelDistName, modelProductInfo, modelTags);
+        if (remainingItems == null) {
+            throw new IllegalValueException(String.format
+                    (MISSING_FIELD_MESSAGE_FORMAT, RemainingItems.class.getSimpleName()));
+        }
+        if (!RemainingItems.isValidRemainingItems(remainingItems)) {
+            throw new IllegalValueException(RemainingItems.MESSAGE_REMAINING_ITEMS_CONSTRAINTS);
+        }
+        final RemainingItems modelRemainingItems = new RemainingItems(remainingItems);
+
+        final Set<Tag> modelTags = new HashSet<>(productTags);
+        return new Product(modelName, modelSerialNumber,
+                modelDistName, modelProductInfo, modelRemainingItems, modelTags);
     }
 
     @Override
@@ -130,11 +146,12 @@ public class XmlAdaptedProduct {
             return false;
         }
 
-        XmlAdaptedProduct otherPerson = (XmlAdaptedProduct) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(serialNumber, otherPerson.serialNumber)
-                && Objects.equals(distributor, otherPerson.distributor)
-                && Objects.equals(info, otherPerson.info)
-                && tagged.equals(otherPerson.tagged);
+        XmlAdaptedProduct otherProduct = (XmlAdaptedProduct) other;
+        return Objects.equals(name, otherProduct.name)
+                && Objects.equals(serialNumber, otherProduct.serialNumber)
+                && Objects.equals(distributor, otherProduct.distributor)
+                && Objects.equals(info, otherProduct.info)
+                && tagged.equals(otherProduct.tagged)
+              && Objects.equals(remainingItems, otherProduct.remainingItems);
     }
 }
