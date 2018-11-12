@@ -3,7 +3,7 @@ package seedu.address.model.drink;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Drink}'s {@code Date} is earlier than the date given.
+ * Tests that a {@code Drink}'s {@code Date} is earlier than or equal the date given.
  */
 public class DateCompareBeforePredicate implements Predicate<Drink> {
     public final Date date;
@@ -14,7 +14,8 @@ public class DateCompareBeforePredicate implements Predicate<Drink> {
 
     @Override
     public boolean test(Drink drink) {
-        return drink.getEarliestBatchDate().isBefore(date);
+        return (drink.getEarliestBatchDate().isBefore(date)
+                || drink.getEarliestBatchDate().equals(date));
     }
 
     @Override

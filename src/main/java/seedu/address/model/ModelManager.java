@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,6 +15,7 @@ import seedu.address.commons.core.LoginInfo;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.InventoryListChangedEvent;
 import seedu.address.commons.events.model.TransactionListChangedEvent;
+import seedu.address.commons.events.ui.RestartUiEvent;
 import seedu.address.model.drink.Drink;
 import seedu.address.model.transaction.ReadOnlyTransactionList;
 import seedu.address.model.transaction.Transaction;
@@ -48,6 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.loginInfoModel = loginInfoModel;
         this.transactionList = new TransactionList(transactionList);
         filteredTransactions = new FilteredList<>(this.transactionList.getTransactionList());
+
     }
 
 
@@ -96,6 +99,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredDrinkList(Predicate<Drink> predicate) {
         requireNonNull(predicate);
         filteredDrinks.setPredicate(predicate);
+        indicateInventoryListChanged();
     }
 
 
@@ -160,5 +164,8 @@ public class ModelManager extends ComponentManager implements Model {
         return loginInfoModel.isUserNameExist(userName);
     }
 
-
+    @Subscribe
+    private void handleRestartUiEvent(RestartUiEvent event) {
+        updateFilteredDrinkList(PREDICATE_SHOW_ALL_DRINKS);
+    }
 }

@@ -91,7 +91,6 @@ public class AdminModelManager extends ModelManager implements AdminModel {
 
         indicateDrinkAttributesChanged(transaction.getDrinkTransacted());
         indicateTransactionListChanged();
-
     }
 
     private void recordTransaction(Transaction transaction) {
