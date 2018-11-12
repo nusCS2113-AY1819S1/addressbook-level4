@@ -1119,50 +1119,53 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |Helpful user |Add/remove books |Share my knowledge with others
+|`* * *` |Store Owner |Add/remove books |Manage my stocks.
 
-|`* * *` |Student |Find for books related to my module |Easily access the correct materials
+|`* * *` |Store Owner |Check the quantity of each book |Stock up of the books that are low in quantity.
 
-|`* * *` |Overachiever |See peer reviews for books related to my module |Get access to helpful materials
+|`* * *` |Store Owner |Stock/sell books |Easily increase and decrease the quantity of my books.
 
-|`* *` |NSF |Find out which books are relevant to the modules I'm about to take in university |Read the books during my free time
+|`* * *` |Store Owner |Have security features |Keep my stocks safe from edits.
 
-|`* *` |Professor |Add rating/review to books |Recommend this book to others
+|`* * *` |Student |Check if the bookstore have the book I want |Save on a trip down to the book store.
 
-|`* *` |NUS Staff |Use the program as and when |Easily sieve out the books that i want to read
+|`* *` |Store Owner with many books in the BookInventory |Delete my books by Isbn |Locate the book easily.
 
-|`* *` |Non-Tech Savvy User|Have a straightforward easy-to-understand help page |Search on the books i would like to find with
+|`* *` |Accountant |View the revenue statistics |Analyse the selling trend for each book.
 
-|`* *` |Careless user |Undo/Redo my command |Easily remove/get back to the current/next state
+|`* *` |Student |Find books |Check if the book store has the book that I need.
+
+|`* *` |Student |Use the program as and when |Easily sieve out the books that i want to buy.
+
+|`* *` |Non-Tech Savvy User|Have a straightforward easy-to-understand help page |Search on the books i would like to find with.
+
+|`* *` |Careless user |Undo/Redo my command |Easily remove/get back to the current/next state.
 
 |`* *` |User |Have an application with minimal downtime |Use the application at any point of time.
 
-|`*` |Unmotivated student |Have a colorful GUI |Have a better mood to study
+|`* *` |Lazy User |Be able to enter my commands faster |Save the energy of moving my fingers.
 
-|`*` |New User |Have a user-friendly application |Use the catalogue easily
+|`*` |Unmotivated student |Have a colorful GUI |Have a better mood to study.
 
-|`*` |Exchange student |Use the program in my native language |Understand the program easily
+|`*` |New User |Have a user-friendly application |Use the catalogue easily.
 
-|`*` |Bookshop owner |Sell the books that people want |Know which books are in demand
+|`*` |Exchange student |Use the program in my native language |Understand the program easily.
 
-|`*` |Underachiever |Have reviews for books which are easy to understand |Grasp on concepts quickly
+|`*` |Store Owner |View requests |Know which books are in demand.
 
-|`*` |Student nearing the exams |Have reviews for books which summarises the module |Recap on concepts quickly
+|`*` |Accountant |Have stats for total revenue and cost |make correct analysis.
 
-|`*` |Teaching assistant |Have a list of recommended books |Help underachieving students learn better
+|`*` |Resourceful |Delete my request |Prevent myself from getting duplicate books.
 
-|`*` |Author |Have the books listed neatly and visibly under users' module selection |Help students in their studies and also help them gain an appreciation to the module
+|`*` |Store Owner |Be able to edit the details of my book |Sell the books at discounted price.
 
-|`*` |Passionate student willing to help others |Have a moderately long word limit for the review |Share my personal experience with this book and how this book is recommended
+|`*` |Thrifty User |Be able to compare prices of the book |Get the cheaper alternatives.
 
-|`*` |Book enthusiast |Have a review for all the books I read |Allow people to acquire knowledge.
+|`*` |Store Owner |Have a means to contact the requester |Confirm his/her orders.
 
-|`*` |user |Hide <<private-contact-detail,private contact details>> by default |Minimize chance of someone else seeing them by accident
+|`*` |Store Owner |Hide <<private-request-detail,private request details>> by default |Minimize chance of someone else seeing them by accident
 
-|`*` |user with many books in the BookInventory |Sort books by name |Locate a book easily
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
@@ -1195,7 +1198,38 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+[discrete]
+=== Use case: Sell book
+
+*MSS*
+
+1.  User requests to list books
+2.  BookInventory shows a list of books
+3.  User requests to sell a specific book in the list
+4.  BookInventory decrease the quantity of the book
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. BookInventory shows an error message.
++
+Use case resumes at step 2.
+
+* 3b. The given quantity cause book to have negative quantity.
++
+[none]
+** 3b1. BookInventory shows an error message.
++
+Use case resumes at step 2.
 
 [appendix]
 == Non Functional Requirements
@@ -1212,7 +1246,7 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
+[[private-request-detail]] Private request detail::
 A contact detail that is not meant to be shared with others
 
 [appendix]
