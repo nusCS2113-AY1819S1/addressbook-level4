@@ -49,13 +49,13 @@ ClubHub is a desktop application for Club leaders or managers to manage their cl
 == Contribution to User Guide
 
 
-include::../UserGuide.adoc[tag = calendar]
+include::../UserGuide.adoc[tag = Calendar]
 
 
 == Contribution to Developer Guide
 
 
-include::../DeveloperGuide.adoc[tag = events]
+include::../DeveloperGuide.adoc[tag = Calendar]
 
 ** *Design considerations*
 
