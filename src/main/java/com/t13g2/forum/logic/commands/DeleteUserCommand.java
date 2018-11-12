@@ -13,8 +13,9 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
+//@@author e0191729
 /**
- * Deletes a specific user by admin
+ * Self deletes a user from the ForumBook
  */
 public class DeleteUserCommand extends Command {
     public static final String COMMAND_WORD = "deleteUser";

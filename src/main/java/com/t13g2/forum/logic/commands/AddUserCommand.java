@@ -11,8 +11,9 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
+//@@author e0191729
 /**
- *
+ * Add a person to the ForumBook
  */
 public class AddUserCommand extends Command {
     /**
@@ -29,7 +30,6 @@ public class AddUserCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "WELCOME : %1$s. You had been successfully been registered.";
-    //public static final String MESSAGE_FAIL = "No user named %1$s found or password is wrong";
     public static final String MESSAGE_DUPLICATE_PERSON = "This user name already exists, Please use another name.";
     private final User userToAdd;
 
@@ -62,8 +62,7 @@ public class AddUserCommand extends Command {
             unitOfWork.getUserRepository().addUser(userToAdd);
             unitOfWork.commit();
         } else {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON));
-            //return new CommandResult(String.format(MESSAGE_DUPLICATE_PERSON, userToAdd.getUsername()));
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, userToAdd.getUsername()));

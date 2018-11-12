@@ -8,8 +8,10 @@ import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Context;
 import com.t13g2.forum.model.Model;
+
+//@@author e0191729
 /**
- *
+ *LogOut of ForumBook
  */
 public class LogoutCommand extends Command {
     public static final String COMMAND_WORD = "logout";
