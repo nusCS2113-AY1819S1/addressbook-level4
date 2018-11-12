@@ -37,7 +37,7 @@ import seedu.planner.model.summary.CategoryStatisticsList;
  * Represents the in-memory model of the financial planner data.
  */
 public class ModelManager extends ComponentManager implements Model {
-    public static final Date DATE_SPECIAL_FOR_MONTHLY = new Date("01-01-9999");
+    private static final Date DATE_SPECIAL_FOR_MONTHLY = new Date("01-01-9999");
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final int STARTING_ELEMENT = 0;
 
@@ -245,73 +245,127 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(limitIn);
         return versionedFinancialPlanner.getTotalSpend(limitIn);
     }
+
     @Override
     public String autoLimitCheck () {
         String output = "";
-        int numExceeded = 0;
-        int count = 1;
-        for (Limit i: limits) {
-            if (isExceededLimit(i) && i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
-                output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
-                numExceeded = numExceeded + 1;
-            }
-        }
-        for (Limit i: limits) {
-            if (isExceededLimit(i) && !i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
-                output += "\n" + String.format("%d.", count++) + generateLimitOutput(true, getTotalSpend(i), i);
-                numExceeded = numExceeded + 1;
-            }
-        }
-        if (numExceeded != 0 && numExceeded != 1) {
-            output = String.format("\n%d limits exceeded: ", numExceeded) + output;
-        } else if (numExceeded == 1) {
-            output = "\n1 limit exceeded: " + output;
-        }
+        int numExceeded;
+        boolean isAutoCheck = true;
+        numExceeded = getNumExceeded();
+
+        output = output + briefLimitCheck(numExceeded);
+
+        output = output + monthlyLimitCheck(isAutoCheck);
+
+        output = output + normalLimitCheck(isAutoCheck);
         return output;
     }
+
 
     @Override
     public String manualLimitCheck () {
         String output = "";
-        int count = 1;
-        for (Limit i: limits) {
-            if (i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
-                output += "Monthly Limit:\n"
-                        + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
+        boolean isAutoCheck = false;
+        int numExceeded;
+
+        numExceeded = getNumExceeded();
+
+        output = output + briefLimitCheck(numExceeded);
+
+        output = output + monthlyLimitCheck(isAutoCheck);
+
+        output = output + normalLimitCheck(isAutoCheck);
+
+        return output;
+    }
+
+    /**
+     * This function is to generate the monthly limit information output for the second part.
+     */
+    private String monthlyLimitCheck (boolean isAutoCheck) {
+        String output = "";
+        if (isAutoCheck) {
+            for (Limit i: limits) {
+                if (isExceededLimit(i) && i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+                    output = output + "Monthly Limit:\n"
+                            + generateLimitOutput(true, getTotalSpend(i), i) + "\n";
+                }
             }
-        }
-        output += "Normal limits:";
-        for (Limit i: limits) {
-            if (i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
-                continue;
+        } else {
+            for (Limit i : limits) {
+                if (i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+                    output = output + "Monthly Limit:\n"
+                            + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i) + "\n";
+                }
             }
-            output += "\n" + String.format("%d.", count++)
-                    + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
         }
         return output;
+    }
+
+    /**
+     * This function is to generate the normal limits' information output for the third part.
+     */
+    private String normalLimitCheck (boolean isAutoCheck) {
+        String output = "Normal limits:";
+        int count = 1;
+        if (isAutoCheck) {
+            for (Limit i: limits) {
+                if (isExceededLimit(i) && !i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+                    output = output + "\n"
+                            + String.format("%d.", count++)
+                            + generateLimitOutput(true, getTotalSpend(i), i);
+                }
+            }
+        } else {
+            for (Limit i: limits) {
+                if (!i.getDateEnd().equals(DATE_SPECIAL_FOR_MONTHLY)) {
+                    output = output + "\n"
+                            + String.format("%d.", count++)
+                            + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
+                }
+            }
+        }
+        return output;
+    }
+
+    /**
+     * This function is to generate the number of exceeded limits information output for the first part.
+     */
+    private String briefLimitCheck (int numExceeded) {
+        String output = "";
+        if (numExceeded != 0 && numExceeded != 1) {
+            output = String.format("\n%d limits exceeded:\n", numExceeded) + output;
+        } else if (numExceeded == 1) {
+            output = "\n1 limit exceeded:\n" + output;
+        }
+        return output;
+    }
+
+    private int getNumExceeded() {
+        int numExceeded = 0;
+        for (Limit i: limits) {
+            if (isExceededLimit(i)) {
+                numExceeded = numExceeded + 1;
+            }
+        }
+        return numExceeded;
     }
 
     /**
      * This function is to generate the limit for this month when the according to the
      * monthly limit.
-     * @param limitIn
-     * @return
      */
-    public Limit generateThisMonthLimit (Limit limitIn) {
+    private Limit generateThisMonthLimit (Limit limitIn) {
         requireNonNull(limitIn);
         Date today = DateUtil.getDateToday();
         Month thisMonth = new Month(today.getMonth(), today.getYear());
         Date dateStart = DateUtil.generateFirstOfMonth(thisMonth);
         Date dateEnd = DateUtil.generateLastOfMonth(thisMonth);
-        Limit thisMonthLimit = new Limit(dateStart, dateEnd, limitIn.getLimitMoneyFlow());
 
-        return thisMonthLimit;
+        return new Limit(dateStart, dateEnd, limitIn.getLimitMoneyFlow());
     }
     /**
      * This function is to generate the limit output.
-     * @param isExceeded
-     * @param limit
-     * @return
      */
     public String generateLimitOutput (boolean isExceeded, Double totalMoney, Limit limit) {
         String output;
@@ -319,25 +373,54 @@ public class ModelManager extends ComponentManager implements Model {
         Date dateEnd;
         dateStart = limit.getDateStart();
         dateEnd = limit.getDateEnd();
+        output = generateIsExceededInformation(isExceeded);
+
+        output = output + generateLimitTypeInformation(dateStart, dateEnd);
+
+        output = output + generateBasicInformation(totalMoney, limit);
+
+        return output;
+    }
+
+    /**
+     * Generate isExceeded information for single limit as the first part.
+     */
+    private String generateIsExceededInformation (boolean isExceeded) {
+        String output;
         if (isExceeded) {
             output = MESSAGE_EXCEED;
         } else {
             output = MESSAGE_NOT_EXCEED;
         }
-        if (dateStart.equals(DATE_SPECIAL_FOR_MONTHLY)) {
-            output += String.format(MESSAGE_MONTHLY, DateUtil.getDateToday().getMonth());
-        } else if (dateEnd.equals(dateStart)) {
-            output += String.format(MESSAGE_SINGLE_DATE, dateStart);
-        } else {
-            output += String.format(MESSAGE_DOUBLE_DATE, dateStart, dateEnd);
-        }
+        return output;
+    }
 
+    /**
+     * Generate limit type information for single limit as the second part.
+     */
+    private String generateLimitTypeInformation (Date dateStart, Date dateEnd) {
+        String output;
+        if (dateStart.equals(DATE_SPECIAL_FOR_MONTHLY)) {
+            output = String.format(MESSAGE_MONTHLY, DateUtil.getDateToday().getMonth());
+        } else if (dateEnd.equals(dateStart)) {
+            output = String.format(MESSAGE_SINGLE_DATE, dateStart);
+        } else {
+            output = String.format(MESSAGE_DOUBLE_DATE, dateStart, dateEnd);
+        }
+        return output;
+    }
+
+    /**
+     * Generate limit's basic information for single limit as the third part.
+     */
+    private String generateBasicInformation (Double totalMoney, Limit limit) {
+        String output;
         if (totalMoney >= 0) {
-            output += String.format(MESSAGE_BASIC_EARNED,
+            output = String.format(MESSAGE_BASIC_EARNED,
                     -1 * limit.getLimitMoneyFlow().toDouble(), totalMoney);
 
         } else {
-            output += String.format(MESSAGE_BASIC_SPEND,
+            output = String.format(MESSAGE_BASIC_SPEND,
                     -1 * limit.getLimitMoneyFlow().toDouble(), -1 * totalMoney);
         }
         return output;
