@@ -686,6 +686,54 @@ image::FutureCalendarUI.png[width="380"]
 
 // end::displayScheduleOnCalendar[]
 
+// tag::reminder[]
+=== Reminder Feature
+Add a reminder to notify users of an upcoming meeting.
+
+==== Current Implementation
+
+The reminder mechanism is facilitated by the `ReminderCommand`, which extends `Command`, from the `Logic` component. A `Reminder` object is instantiated and each `Reminder` object consists of `Title`, `Date`, `Time` and `Agenda` objects.
+
+The following diagram illustrates the Reminder class:
+
+image::ReminderClassDiagram.png[width="200"]
+
+Given below is an example usage scenario of how the reminder mechanism behaves at each step.
+
+Step 1. A student launches the application for the first time and types in a valid reminder command into the CommandBox Pane.
+
+Step 2. The command will be parsed into the `AddressBookParser` class.
+
+Step 3. AddressBookParser recognises the command word `reminder` and parses the remaining arguments into `ReminderCommandParser`.
+
+Step 4. `ReminderCommandParser` checks for the validity of the `title`, `date`, `time` and `agenda` parameters.
+
+Step 5. If the parameters are valid, `addReminder()` in the `Model` component updates the `VersionedAddressBook` with the new `Reminder`.
+
+Step 6. This exposes an unmodifiable `ObservableList<Reminder>` that the `ReminderListPane` in the `UI` is bound to, automatically updating itself upon the addition of the new `Reminder`.
+
+The following diagram illustrates how the `ReminderCommand` operation interactions with the `Logic` and `Model` components:
+
+image::ReminderSequenceDiagram.png[width="1000"]
+
+==== Design Considerations
+===== Aspect: Checking for duplications of reminders
+
+* **Alternative 1 (current choice):** `isSameReminder`
+** Pros: Easy to implement and write the test as it checks for all the parameters of a reminder.
+** Cons: This implementation may store too many similiar reminders.
+
+===== Aspect: Too many UI Windows
+
+* **Alternative 1 (current choice):** Implementing a `VBox` to split the `Todo` and `Reminder`
+** Pros: This makes the 2 panes take up only half the size of normal panes, reducing the clutter on the screen. Since there isn't a need for too many `Todo` and `Reminder` to be displayed concurrently, a small pane is useable. Furthermore, the individual panes are also scrollable and resizeable.
+** Cons: This results in a smaller pane for each component, which may cause them to be overlooked.
+
+* **Alternative 2:** A command to switch between the `Todo` and `Reminder` panes
+** Pros: More space is catered towards both panes, allowing for the display of more information.
+** Cons: Concurrent viewing of `Todo` and `Reminder` will not be possible.
+// end::reminder[]
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
