@@ -27,7 +27,7 @@ Further details about my contributions will be explained in this section.
 
 ** Why we need this feature: NUSSU exco is an organization that will most likely be required to keep track of
 a large database of important contacts. Therefore it will be time-consuming and tedious to locate specific contact information
-from the database. A search pruning feature will resolve this problem by allowing the users to narrow down the search space
+from the database. A search pruning feature will resolve this problem as users will be able to narrow down the search space
 in discrete steps so that they could retrieve the information they want in smaller and readable chunks.
 
 ** Highlights: This enhancement is mainly created from scratch with some help from documentations on how the `Predicate` class works.
