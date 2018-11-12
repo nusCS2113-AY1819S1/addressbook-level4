@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_LOCATION;
@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
@@ -24,7 +26,11 @@ public class AddItemCommand extends Command {
             + "parameters: "
             + PREFIX_ITEM_NAME + "ITEM NAME "
             + PREFIX_ITEM_QUANTITY + "ITEM QUANTITY "
-            + PREFIX_ITEM_LOCATION + "ITEM LOCATION";
+            + PREFIX_ITEM_LOCATION + "ITEM LOCATION\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_ITEM_NAME + "Bastketball "
+            + PREFIX_ITEM_QUANTITY + "1 "
+            + PREFIX_ITEM_LOCATION + "Storeroom ";
 
     public static final String MESSAGE_SUCCESS = "New item added: %1$s";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the item list";
@@ -48,7 +54,7 @@ public class AddItemCommand extends Command {
 
         logger.info("Adding item...");
         model.addItem(addItem);
-        logger.info("Added Item");
+        logger.info("Added item");
         model.commitAddressBook();
         logger.info("Committing Club Book");
 

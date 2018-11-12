@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,6 +7,8 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
@@ -24,7 +26,7 @@ public class DeleteItemCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_ITEM_SUCCESS = "Deleted Item: %1$s";
+    public static final String MESSAGE_DELETE_ITEM_SUCCESS = "Deleted item: %1$s";
 
     private final Index targetIndex;
 

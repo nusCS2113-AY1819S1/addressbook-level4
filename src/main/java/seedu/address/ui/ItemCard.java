@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.item.Item;
 
 /**
- * An UI component that displays information of a {@code Item}.
+ * An UI component that displays information of a {@code item}.
  */
 public class ItemCard extends UiPart<Region> {
 
