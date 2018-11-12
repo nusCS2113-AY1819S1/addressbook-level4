@@ -9,11 +9,13 @@ import static seedu.address.testutil.TypicalAccounts.getTypicalAccountList;
 import static seedu.address.testutil.TypicalItems.ARDUINO;
 import static seedu.address.testutil.TypicalItems.RPLIDAR;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
+
 import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -25,16 +27,15 @@ import seedu.address.model.item.NameContainsKeywordsPredicate;
  */
 
 public class FindCommandTest {
-
+    private Model model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+    private Model expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+    private CommandHistory commandHistory = new CommandHistory();
     @Before
     public void setup() {
         Username admin = new Username("admin");
         model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
         model.setLoggedInUser(admin);
     }
-    private Model model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
-    private Model expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
-    private CommandHistory commandHistory = new CommandHistory();
     @Test
     public void equals() {
         NameContainsKeywordsPredicate firstPredicate =

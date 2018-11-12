@@ -245,6 +245,86 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::undoredo[]
+=== Undo/Redo feature
+==== Current Implementation
+
+The undo/redo mechanism is facilitated by `VersionedStockList`.
+It extends `StockList` with an undo/redo history, stored internally as an `stockListStateList` and `currentStatePointer`.
+Additionally, it implements the following operations:
+
+* `VersionedStockList#commit()` -- Saves the current stock list state in its history.
+* `VersionedStockList#undo()` -- Restores the previous stock list state from its history.
+* `VersionedStockList#redo()` -- Restores a previously undone stock list state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitStockList()`, `Model#undoStockList()` and `Model#redoStockList()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedStockList` will be initialized with the initial stock list state, and the `currentStatePointer` pointing to that single stock list state.
+
+image::UndoRedoStartingStateListDiagram.png[width="800"]
+
+Step 2. The user executes `delete 5` command to delete the 5th item in the stock list. The `delete` command calls `Model#commitStockList()`, causing the modified state of the stock list after the `delete 5` command executes to be saved in the `stockListStateList`, and the `currentStatePointer` is shifted to the newly inserted stock list state.
+
+image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
+
+Step 3. The user executes `add n/David ...` to add a new item. The `add` command also calls `Model#commitStockList()`, causing another modified stock list state to be saved into the `stockListStateList`.
+
+image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
+
+[NOTE]
+If a command fails its execution, it will not call `Model#commitStockList()`, so the stock list state will not be saved into the `stockListStateList`.
+
+Step 4. The user now decides that adding the item was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoStockList()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous stock list state, and restores the stock list to that state.
+
+image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
+
+[NOTE]
+If the `currentStatePointer` is at index 0, pointing to the initial stock list state, then there are no previous stock list states to restore. The `undo` command uses `Model#canUndoStockList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+
+The following sequence diagram shows how the undo operation works:
+
+image::UndoRedoSequenceDiagram.png[width="800"]
+
+The `redo` command does the opposite -- it calls `Model#redoStockList()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the stock list to that state.
+
+[NOTE]
+If the `currentStatePointer` is at index `stockListStateList.size() - 1`, pointing to the latest stock list state, then there are no undone stock list states to restore. The `redo` command uses `Model#canRedoStockList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the stock list, such as `list`, will usually not call `Model#commitStockList()`, `Model#undoStockList()` or `Model#redoStockList()`. Thus, the `stockListStateList` remains unchanged.
+
+image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
+
+Step 6. The user executes `clear`, which calls `Model#commitStockList()`. Since the `currentStatePointer` is not pointing at the end of the `stockListStateList`, all stock list states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+
+image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+image::UndoRedoActivityDiagram.png[width="650"]
+
+==== Design Considerations
+
+===== Aspect: How undo & redo executes
+
+* **Alternative 1 (current choice):** Saves the entire stock list.
+** Pros: Easy to implement.
+** Cons: May have performance issues in terms of memory usage.
+* **Alternative 2:** Individual command knows how to undo/redo by itself.
+** Pros: Will use less memory (e.g. for `delete`, just save the item being deleted).
+** Cons: We must ensure that the implementation of each individual command are correct.
+
+===== Aspect: Data structure to support the undo/redo commands
+
+* **Alternative 1 (current choice):** Use a list to store the history of stock list states.
+** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedStockList`.
+* **Alternative 2:** Use `HistoryManager` for undo/redo
+** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
+** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
+// end::undoredo[]
+
 // tag::saveopen[]
 === Save/Open feature
 ==== Current Implementation
