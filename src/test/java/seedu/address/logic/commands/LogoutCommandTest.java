@@ -224,7 +224,7 @@ public class LogoutCommandTest {
             fail("This method should not be called.");
         }
 
-        public boolean canUndoAddressBook() {
+        public boolean canUndoProductDatabase() {
             fail("This method should not be called.");
             return false;
         }
@@ -234,7 +234,7 @@ public class LogoutCommandTest {
             return false;
         }
 
-        public boolean canRedoAddressBook() {
+        public boolean canRedoProductDatabase() {
             fail("This method should not be called.");
             return false;
         }
@@ -244,7 +244,7 @@ public class LogoutCommandTest {
             return false;
         }
 
-        public void undoAddressBook() {
+        public void undoProductDatabase() {
             fail("This method should not be called.");
         }
 

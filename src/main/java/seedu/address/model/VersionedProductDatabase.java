@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedProductDatabase extends ProductDatabase {
 
-    private final List<ReadOnlyProductDatabase> addressBookStateList;
+    private final List<ReadOnlyProductDatabase> productDatabaseStateList;
     private int currentStatePointer;
 
     public VersionedProductDatabase(ReadOnlyProductDatabase initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new ProductDatabase(initialState));
+        productDatabaseStateList = new ArrayList<>();
+        productDatabaseStateList.add(new ProductDatabase(initialState));
         currentStatePointer = 0;
     }
 
@@ -26,12 +26,12 @@ public class VersionedProductDatabase extends ProductDatabase {
 
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new ProductDatabase(this));
+        productDatabaseStateList.add(new ProductDatabase(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        productDatabaseStateList.subList(currentStatePointer + 1, productDatabaseStateList.size()).clear();
     }
 
     /**
@@ -42,7 +42,7 @@ public class VersionedProductDatabase extends ProductDatabase {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(productDatabaseStateList.get(currentStatePointer));
     }
 
     /**
@@ -53,7 +53,7 @@ public class VersionedProductDatabase extends ProductDatabase {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(productDatabaseStateList.get(currentStatePointer));
     }
 
     /**
@@ -67,7 +67,7 @@ public class VersionedProductDatabase extends ProductDatabase {
      * Returns true if {@code redo()} has address book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < productDatabaseStateList.size() - 1;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class VersionedProductDatabase extends ProductDatabase {
 
         // state check
         return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
+                && productDatabaseStateList.equals(otherVersionedAddressBook.productDatabaseStateList)
                 && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
     }
 

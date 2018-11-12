@@ -250,17 +250,17 @@ public class AddReminderCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoProductDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoProductDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoProductDatabase() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -405,17 +405,17 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo/Redo AB =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
+    public boolean canUndoProductDatabase() {
         return versionedAddressBook.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
+    public boolean canRedoProductDatabase() {
         return versionedAddressBook.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
+    public void undoProductDatabase() {
         versionedAddressBook.undo();
         indicateAddressBookChanged();
     }

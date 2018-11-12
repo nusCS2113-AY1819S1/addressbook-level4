@@ -155,7 +155,7 @@ public class EditProductCommandTest {
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoProductDatabase();
         assertCommandSuccess(new UndoProductCommand(), model, commandHistory,
                 UndoProductCommand.MESSAGE_SUCCESS, expectedModel);
 
@@ -204,7 +204,7 @@ public class EditProductCommandTest {
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoProductDatabase();
         assertCommandSuccess(new UndoProductCommand(), model, commandHistory,
                 UndoProductCommand.MESSAGE_SUCCESS, expectedModel);
 
