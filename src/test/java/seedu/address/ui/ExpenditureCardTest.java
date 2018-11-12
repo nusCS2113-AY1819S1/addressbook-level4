@@ -15,16 +15,12 @@ import seedu.address.testutil.ExpenditureBuilder;
 
 public class ExpenditureCardTest extends GuiUnitTest {
 
-    private void assertCardDisplay(ExpenditureCard expenditureCard, Expenditure expectedExpenditure, int expectedId) {
-        guiRobot.pauseForHuman();
-
-        ExpenditureCardHandle expenditureCardHandle = new ExpenditureCardHandle(expenditureCard.getRoot());
-
-        // verify id is displayed correctly
-        assertEquals(Integer.toString(expectedId) + ". ", expenditureCardHandle.getId());
-
-        // verify expenditure details are displayed correctly
-        assertCardDisplaysExpenditure(expectedExpenditure, expenditureCardHandle);
+    @Test
+    public void display() {
+        Expenditure expenditure = new ExpenditureBuilder().build();
+        ExpenditureCard expenditureCard = new ExpenditureCard(expenditure, 1);
+        uiPartRule.setUiPart(expenditureCard);
+        assertCardDisplay(expenditureCard, expenditure, 1);
     }
 
     @Test
@@ -57,5 +53,15 @@ public class ExpenditureCardTest extends GuiUnitTest {
      * Asserts that {@code expenditureCard} displays the details of {@code expectedExpenditure} correctly and matches
      * {@code expectedId}.
      */
+    private void assertCardDisplay(ExpenditureCard expenditureCard, Expenditure expectedExpenditure, int expectedId) {
+        guiRobot.pauseForHuman();
 
+        ExpenditureCardHandle expenditureCardHandle = new ExpenditureCardHandle(expenditureCard.getRoot());
+
+        // verify id is displayed correctly
+        assertEquals(Integer.toString(expectedId) + ". ", expenditureCardHandle.getId());
+
+        // verify expenditure details are displayed correctly
+        assertCardDisplaysExpenditure(expectedExpenditure, expenditureCardHandle);
+    }
 }
