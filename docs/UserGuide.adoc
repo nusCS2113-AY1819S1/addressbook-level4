@@ -308,7 +308,7 @@ Admin: Clears all entries from the Event Manager. +
 Format: `clear`
 
 // tag::rsvp[]
-=== Register for event : `register`
+=== Registering for an event : `register`
 
 User: Registers for an event by adding the current user's username to the attendance list. +
 Format: `register INDEX`
@@ -332,7 +332,7 @@ Registers User for the 1st event in the results of the `find` command.
 .Expected outcome after user Peter Parker registers for the event at index 5 (annotations in red).
 image::registerUG.png[width="800"]
 
-=== Remove registration from event : `unregister`
+=== Unregistering from an event : `unregister`
 
 User: Unregisters for an event by removing the current user's username from the attendance list. +
 Format: `unregister INDEX`
@@ -353,7 +353,7 @@ Unregisters user from the 1st event of the Event Manager.
 `unregister 2` +
 Unregisters user from the 2nd event in the results of the `find` command.
 
-=== List all registered events : `attending`
+=== Listing all registered events : `attending`
 
 User: Lists all events that the user has registered for. +
 Format: `attending`
@@ -361,7 +361,7 @@ Format: `attending`
 .Events that user Peter Parker is registered to are displayed, similar to find operation (annotations in red).
 image::attendingUG.png[width="700"]
 
-=== Remove user from event : `removeAttendee`
+=== Removing user from event : `removeAttendee`
 
 Admin: Removes a user registered for an event. +
 Format: `removeAttendee INDEX u/USERNAME`
