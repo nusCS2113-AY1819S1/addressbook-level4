@@ -80,7 +80,7 @@ The timetable that belongs to users that are not your friends will not be availa
 add them as friends.
 
 === Logging In: `login` (`li`)
-Command: `login u/[USERNAME] pw/[PASSWORD]`
+Command: `login u/USERNAME pw/PASSWORD`
 
 Examples:
 
@@ -94,7 +94,7 @@ CAUTION: You are required to to enter a password that contains more or equal to 
 To ensure that your account is well-protected, do use a password that is not common.
 
 === Registering: `register` (`re`)
-Command: `register u/[USERNAME] pw/[PASSWORD] e/[EMAIL] p/[MOBILEPHONE] a/[ADDRESS]`
+Command: `register u/USERNAME pw/PASSWORD e/[EMAIL] p/[MOBILEPHONE] a/[ADDRESS]`
 
 Examples:
 
