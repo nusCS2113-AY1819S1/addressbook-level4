@@ -18,7 +18,15 @@ By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-_BookInventory_ is catered for students as well as other managerial roles such as store managers and accountant. _BookInventory_ allows store managers to increase/decrease stocks for each book. Accountants will be able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, _BookInventory_ is optimized for those who prefer to work with *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. Enjoy!
+image::BookInventoryLogo.png[width="800", align="center"]
+
+_BookInventory_ is catered for students as well as other managerial roles such as bookstore owners and in-house accountants.
+In _BookInventory_, bookstore owners can manage and adjust their book supply.
+In house accountants can check the total revenue and profits for individual books to make better decisions to improve the sales.
+Lastly, students may access available materials as showcased by the bookstore owners.
+
+_BookInventory_ is optimized for those who prefer to work with *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*.
+Hope you enjoy!
 
 == Getting Started
 
@@ -115,7 +123,7 @@ This design will come in handy if you are new to _BookInventory_ or a non-tech s
 Simply click on a command and the Command Box will display the command.
 
 .Command Panel
-image::CommandPanel.png[width="400", align="left"]
+image::CommandPanel.png[width="250", align="left"]
 
 * A command panel is located at the right side of the application. This is suited for beginner users.
 * To select a command, click on any command.

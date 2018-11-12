@@ -52,11 +52,11 @@ public class LogicManager extends ComponentManager implements Logic {
         /*
          * Assign prevCommand appropriately, if Command History is not empty.
          */
-        prevCommand = differentiatingParser.getPreviousCommand(history);
+        prevCommand = getPreviousCommand(history);
         /*
          * Decide if user input belongs to BookInventoryParser or RequestListParser.
          */
-        if (differentiatingParser.parseInput(string, prevCommand, history)) {
+        if (differentiatingParser.parseInput(string, prevCommand)) {
             CommandSecondary command = requestListParser.parseCommandRequest(commandText);
             history.add(commandText);
             return command.execute(requestModel, history);
@@ -67,6 +67,14 @@ public class LogicManager extends ComponentManager implements Logic {
             } finally {
                 history.add(commandText);
             }
+        }
+    }
+
+    public String getPreviousCommand (CommandHistory commandHistory) {
+        if (!commandHistory.getHistory().isEmpty()) {
+            return commandHistory.getHistory().get(commandHistory.getHistory().size() - 1);
+        } else {
+            return "";
         }
     }
 

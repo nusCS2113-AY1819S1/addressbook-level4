@@ -24,7 +24,7 @@ public class DifferentiatingParser {
      *  requestlist or in bookinventory), and the command history.
      *  It returns true when the input is meant for requestlistparser.
      */
-    public boolean parseInput (String[] string, String prev, CommandHistory history) {
+    public boolean parseInput (String[] string, String prev) {
         if (diceCoefficient(string[0], RequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_ADJUSTED_THRESHOLD
                 || diceCoefficient(string[0], DeleteRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_ADJUSTED_THRESHOLD
                 || diceCoefficient(string[0], ToggleRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_ADJUSTED_THRESHOLD
@@ -33,14 +33,6 @@ public class DifferentiatingParser {
             return true;
         } else {
             return false;
-        }
-    }
-
-    public String getPreviousCommand (CommandHistory commandHistory) {
-        if (!commandHistory.getHistory().isEmpty()) {
-            return commandHistory.getHistory().get(commandHistory.getHistory().size() - 1);
-        } else {
-            return "";
         }
     }
 }
