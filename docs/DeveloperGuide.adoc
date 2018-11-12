@@ -1080,6 +1080,7 @@ Use case ends.
 Use case ends
 // end::updateStatusUsecase[]
 
+// tag::commentsUC[]
 [discrete]
 === Use case: Comments
 *MSS*
@@ -1101,6 +1102,7 @@ Use case ends
 ** 3a2. `addComment INDEX C/STRING` will adds the STRING to the bottom of the comment section at event INDEX.
 ** 3a3. `deleteComment INDEX L/LINE`  (only for admin) it will delete the comment at event INDEX and comment at LINE of comment section. +
 Resume use case at step 4.
+// end::commentsUC[]
 
 [discrete]
 === Use Case: Export calendar
@@ -1303,6 +1305,7 @@ Username of target attendee `Charlotte Oliveiro` is not in the attendance of the
    Expected: Target user is not removed from attendance of any event. Error details shown in the status message. Status bar remains the same.
 // end::rsvpTestingInstructions[]
 
+// tag::commentsMT[]
 === Adding a Comment
 
 . Adding a comment in the comment section of an event
@@ -1356,3 +1359,4 @@ Expected: Similar to previous
 
 .. Test case: `deleteComment x L/y`, where x or y does not exist.
 Expected:  Invalid command will be displayed in the result box. No changes will occur.
+// end::commentsMT[]
