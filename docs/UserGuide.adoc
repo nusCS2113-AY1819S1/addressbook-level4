@@ -431,10 +431,7 @@ Format: `gradebook add mc/MODULE_CODE cn/COMPONENT_NAME [mm/MAX_MARKS] [w/WEIGHT
 
 ****
 * Inputs are case sensitive.
-* Module code must exist
-* Gradebook Component name must not already exist in Trajectory.
-* Accumulated weightage for grade components in module cannot exceed 100%.
-* Weightage can be 0 for grade components like Mock Practical Exam.
+* Gradebook component name must NOT exist in existing module.
 ****
 
 Examples:
@@ -450,7 +447,6 @@ Format: `gradebook edit mc/MODULE_CODE cn/COMPONENT_NAME [ei/EDITED_COMPONENT_NA
 * Inputs are case sensitive.
 * Grade component name must exist in existing module.
 * Accumulated weightage including the updated weightage must not exceed 100%.
-* At least one optional parameter must be included in command.
 ****
 
 Examples:
