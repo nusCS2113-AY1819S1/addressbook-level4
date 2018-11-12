@@ -1075,6 +1075,16 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
+|`* * *` |user |add a new person |
+
+|`* * *` |user |edit a person | so that I can update a person's details
+
+|`* * *` |user |delete a person |remove entries that I no longer need
+
+|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+
+|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+
 |`* * *` |user |add a new task | track the tasks
 
 |`* * *` |user |list the tasks | view all the tasks available
@@ -1091,15 +1101,17 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user with many tasks in the address book |sort tasks by priority |locate important tasks easily
 
-|`* *` |paranoid user|backup tasks locally |I have a backup in case I accidentally delete my tasks file
+|`* * *` |paranoid user|backup data locally |I have a backup in case I accidentally delete my data
 
-|`* *` |paranoid user|backup tasks online |I have a backup in case my desktop computer dies or I have to switch computers.
+|`* * *` |paranoid user|restore data locally |I can restore data backups from other sessions
 
-|`* *` |user|be notified of upcoming deadlines |complete the tasks on time
+|`* * *` |paranoid user|backup data online |I have a backup in case my desktop computer dies or I have to switch computers.
+
+|`* * *` |paranoid user|restore data online |I can easily restore data from another device without having to use manual data backups.
+
+|`* * *` |user|be notified of upcoming deadlines |complete the tasks on time
 
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
@@ -1248,7 +1260,8 @@ Use case ends.
 //@@author QzSG
 [discrete]
 === Use case: Local Student Planner data backup (UC8)
-*Prerequisite*
+*Prerequisite* +
+None
 
 *MSS*
 
@@ -1260,9 +1273,9 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a. Folder provided cannot be written to
+* 2a. Data path cannot be written to
 [none]
-** 2a1. StudentPlanner informs user that folder cannot be used for backup
+** 2a1. StudentPlanner informs user about error during backup
 +
 Use case ends.
 
@@ -1293,9 +1306,62 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
+=== Use case: Local Student Planner data restore (UC10)
+*Prerequisite* +
+A backup has been made using the backup feature
+
+*MSS*
+
+1.  User requests to restore data locally
+2.  StudentPlanner restores data from local backup
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Backup provided has invalid data
+[none]
+** 2a1. StudentPlanner informs user about error restoring data
++
+
+Use case ends.
+
+[discrete]
+=== Use case: Online Student Planner data backup (UC11)
+*Prerequisite* +
+An online backup has been made using the backup feature
+
+*MSS*
+
+1.  User requests to restore all data from an online service
+2.  StudentPlanner restores data from online service
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User provides invalid credentials if required by online service
+[none]
+** 1a1. StudentPlanner shows error restoring data.
++
+Use case ends.
+
+[none]
+* 2a. Service is not recognised or unsupported
+[none]
+** 2a1. StudentPlanner shows error.
+** 2a2. StudentPlanner shows help for online restore.
++
+Use case ends.
+
+//@@author
 //@@author ian-tjahjono
 // tag::events[]
-=== Use case: Add Event (UC10)
+[discrete]
+=== Use case: Add Event (UC12)
 
 *MSS*
 
@@ -1321,7 +1387,7 @@ Use case ends.
 
 //@@author ChenSongJian
 [discrete]
-=== Use case: Add Expense(UC11)
+=== Use case: Add Expense(UC13)
 
 *MSS*
 
@@ -1338,11 +1404,8 @@ Use case ends.
 ** 2a1. StudentPlanner informs user about unsuccessful adding of expense
 +
 Use case ends.
-//@@
 
-[discrete]
-
-_{More to be added}_
+//@@author
 
 [appendix]
 == Non Functional Requirements
@@ -1353,8 +1416,6 @@ _{More to be added}_
 .  Should take no longer than 5 seconds on each startup
 .  Should have internet connectivity for features requiring online interactivity.
 
-_{More to be added}_
-
 [appendix]
 == Glossary
 
@@ -1364,7 +1425,9 @@ Windows, Linux, Unix, OS-X
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
 
+//@@author QzSG
 [appendix]
+// tag::evernotesurvey[]
 == Product Survey
 
 *EverNote*
@@ -1383,6 +1446,17 @@ Cons:
 * No power user friendly features like in built console based commands
 * Not free, good features are premium only
 * Not open source.
+
+Reasons why Student Planner is better:
+
+* We incorporate the popular features in EverNote such as events and tasks into our existing contacts feature
+ and also added expenses tracking so that we fit our mission of being a one stop management app for your user.
+* Our application works using text commands so that power users used to a console application can be more efficient
+when using Student Planner, saving time.
+* Student Planner is completely open source, our savvy target users can contribute and add more features if they want to which benefits all users.
+* Student Planner is completely free.
+// end::evernotesurvey[]
+//@@author
 
 [appendix]
 // tag::manualTestHeading[]

@@ -1,4 +1,4 @@
-= Adrian Tan - Project Portfolio
+= Adrian Tan Guo Hua - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
