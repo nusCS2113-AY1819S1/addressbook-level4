@@ -1,6 +1,6 @@
 = Gara Tahir - Project Portfolio
 :site-section: AboutUs
-:imagesDir: images
+:imagesDir: ../images
 :stylesDir: ../stylesheets
 
 By: `Gara Tahir`
@@ -54,7 +54,7 @@ Reported bugs and suggestions to team W13-1.
 == Contribution to the User Guide
 
 I created and added the first design of the UI to the User Guide so the team could visualize our end-product.
-image::orgUI.png[width="790"]
+image::orgUI.png
 
 == Contribution to the Developper guide
 
