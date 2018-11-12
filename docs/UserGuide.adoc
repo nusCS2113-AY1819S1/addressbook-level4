@@ -329,6 +329,9 @@ Registers user for the 3rd event of the Event Manager.
 `register 1` +
 Registers User for the 1st event in the results of the `find` command.
 
+.Expected outcome after user Peter Parker registers for the event at index 5 (annotations in red).
+image::registerUG.png[width="800"]
+
 === Remove registration from event : `unregister`
 
 User: Unregisters for an event by removing the current user's username from the attendance list. +
@@ -354,6 +357,9 @@ Unregisters user from the 2nd event in the results of the `find` command.
 
 User: Lists all events that the user has registered for. +
 Format: `attending`
+
+.Events that user Peter Parker is registered to are displayed, similar to find operation (annotations in red).
+image::attendingUG.png[width="700"]
 
 === Remove user from event : `removeAttendee`
 

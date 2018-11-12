@@ -1002,7 +1002,7 @@ Use Case resumes at step 1.
 
  1.  User requests to list events.
  2.  EventManager displays list of events.
- 3.  User selects event that is [UPCOMNG].
+ 3.  User selects event with status [UPCOMNG].
  4.  EventManager displays details of selected event, including current attendance list.
  5.  User requests to register for the event.
  6.  EventManager adds user to attendance list and displays confirmation message.
