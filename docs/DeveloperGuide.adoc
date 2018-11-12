@@ -1164,9 +1164,9 @@ _{ more test cases ... }_
 . Deleting a distributor while all distributors are listed
 
 .. Prerequisites: There should be a atleast 2 products to edit. The second one has Serial Number = 123.
-.. Test case: `Edit product 1 inv/12` +
+.. Test case: `Editproduct 1 inv/12` +
    Expected: First product from the list is edited. The current inventory should now be 12, and a success message is shown in the result display panel.
-.. Test case: `edit 1 s/123` +
+.. Test case: `editproduct 1 s/123` +
    Expected: No product is updated. Error details of invalid serialnumber because a product with serial number = 123 already exists  is shown in the result display panel. Status bar remains the same.
 .. Other incorrect edit commands to try: `delete x n/y` (where x is larger than the list size and y does not exist) +
    Expected: Error details of invalid index is shown in the result display panel.

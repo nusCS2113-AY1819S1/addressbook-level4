@@ -4,7 +4,8 @@
 :stylesDir: ../stylesheets
 
 By: `Gara Tahir`
-Project: `Iventarei Pro`
+
+Project: `Inventarie Pro`
 
 
 
@@ -16,38 +17,87 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 
 LINK TO CODE CONTTIBUTION
 
-Main feature implemented:
-I have changed the whole foundation of the code. I changed the class person to product. The attributes and their constrains where changed accordingly.
+==== Main feature implemented:
 
-The class Product now consists of the attributes:
+- I have changed the whole foundation of the code. I changed the class person to product. The attributes and their constrains where changed accordingly.
+
+The class Product now consists of the *attributes*:
+
+****
 * Name
 * SerialNumber
 * Product information
 * Remaining items
 * Distributor
 * Tag(s)
+****
 
+==== Other contributions:
 
-Other contributions:
 I integrated Paras feature "Transaction" with my attribute Remaining items.
-Now when a transaction is made the program first sees if the products exist then it sees if there is enough products in the inventory and lastly it subtract the number of items that are removed from the inventory.
+Now when a transaction is made the program subtracts the remaining items. It also first checks if the products exist in the inventory. It then sees if there is enough products in the inventory to make the transaction.
 
-Minor contributions
-The use can search for a product with both name and Serialnumber (The primary key)
+==== Minor contributions:
 
-I changed transaction so that it is made with serialnumber and not name. (Becuase serialNumber is the primary key).
+- The user can search for a product with both name and Serialnumber (The primary key)
 
-I have adapted existing tests to work with the new program.
-Community:
+- I changed transaction so that it is made with serialnumber and not name. (Becuase serialNumber is the primary key).
+
+- I have adapted existing tests to work with the new program.
+
+- I assigned all the issues that we got during practical exam to the correct team member(s)
+
+==== Community:
+
 Reported bugs and suggestions to team W13-1.
 
 == Contribution to the User Guide
 
 I created and added the first design of the UI to the User Guide so the team could visualize our end-product.
-image::orgUI.png[width="790"]
+image::orgUI.png[width="730"]
 
-=== Contribution to the Developper guide
-We all sat together during a skype conversation and wrote this:
+== Contribution to the Developper guide
+
+==== I added Instructions for Manual Testing:
+
+=== Deleting a product
+
+. Deleting a product while all products are listed
+
+.. Prerequisites: List all products using the `list` command. Multiple products in the list.
+.. Test case: `delete 1` +
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `delete 0` +
+   Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+   Expected: Similar to previous.
+
+_{ more test cases ... }_
+
+=== Editing an existing product
+
+. Deleting a distributor while all distributors are listed
+
+.. Prerequisites: There should be a atleast 2 products to edit. The second one has Serial Number = 123.
+.. Test case: `Editproduct 1 inv/12` +
+   Expected: First product from the list is edited. The current inventory should now be 12, and a success message is shown in the result display panel.
+.. Test case: `editproduct 1 s/123` +
+   Expected: No product is updated. Error details of invalid serialnumber because a product with serial number = 123 already exists  is shown in the result display panel. Status bar remains the same.
+.. Other incorrect edit commands to try: `delete x n/y` (where x is larger than the list size and y does not exist) +
+   Expected: Error details of invalid index is shown in the result display panel.
+
+_{ more test cases ... }_
+
+=== Listing all products
+
+.
+
+.. Prerequisites: There is more then two products and the user has filtred the list by searching for a product.
+.. Test case: `listproducts` +
+   Expected: All products should be visible again and a message saying that all products are listed should appear in the result display panel.
+
+=== We all sat together during a skype conversation and wrote this:
+
 == Product Scope
 
 *Target user profile*: Small business owners
@@ -212,3 +262,4 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 products without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
