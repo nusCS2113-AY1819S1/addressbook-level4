@@ -22,7 +22,7 @@ import seedu.address.model.user.manager.ManagerModel;
 public class CreateAccountCommand extends Command {
 
     public static final String COMMAND_WORD = "createAccount";
-    public static final String MESSAGE_DUPLICATE_USERNAME = "This userName already exists";
+    public static final String MESSAGE_DUPLICATE_USERNAME = "This user name already exists";
     public static final String MESSAGE_USAGE = COMMAND_WORD
                                                 + "Parameters: "
                                                 + PREFIX_USERNAME + "username: "

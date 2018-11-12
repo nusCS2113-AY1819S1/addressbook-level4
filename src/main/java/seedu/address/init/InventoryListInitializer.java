@@ -130,13 +130,13 @@ public class InventoryListInitializer {
 
         switch (CurrentUser.getAuthenticationLevel()) {
         case AUTH_ADMIN:
-            return new AdminModelManager(initialData, userPrefs, loginInfoModel, new TransactionList());
+            return new AdminModelManager(initialData, userPrefs, loginInfoModel, initialTransactionData);
         case AUTH_MANAGER:
-            return new ManagerModelManager(initialData, userPrefs, loginInfoModel, new TransactionList());
+            return new ManagerModelManager(initialData, userPrefs, loginInfoModel, initialTransactionData);
         case AUTH_STOCK_TAKER:
-            return new StockTakerModelManager(initialData, userPrefs, loginInfoModel, new TransactionList());
+            return new StockTakerModelManager(initialData, userPrefs, loginInfoModel, initialTransactionData);
         case AUTH_ACCOUNTANT:
-            return new AccountantModelManager(initialData, userPrefs, loginInfoModel, new TransactionList());
+            return new AccountantModelManager(initialData, userPrefs, loginInfoModel, initialTransactionData);
         default:
             logger.severe("Database authentication level do not match with predefined authentication level");
             return new ModelManager(initialData, userPrefs, loginInfoModel,

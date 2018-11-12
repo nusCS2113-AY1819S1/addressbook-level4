@@ -18,6 +18,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.DrinkAttributeChangedEvent;
 import seedu.address.commons.events.model.InventoryListChangedEvent;
+import seedu.address.commons.events.model.TransactionListChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.InventoryPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
@@ -190,7 +191,12 @@ public class MainWindow extends UiPart<Stage> {
         drinkDetailPane = new DrinkDetailPane(new Drink(null));
         drinkDetailPanePlaceholder.getChildren().add(drinkDetailPane.getRoot());
     }
-
+  
+    @Subscribe
+    private void handleTransactionListChangedEvent(TransactionListChangedEvent event) {
+        transactionsPanel = new TransactionsPanel(logic.getFilteredTransactionList());
+        transactionsPanelPlaceholder.getChildren().add(transactionsPanel.getRoot());
+    }
 
     void hide() {
         primaryStage.hide();
