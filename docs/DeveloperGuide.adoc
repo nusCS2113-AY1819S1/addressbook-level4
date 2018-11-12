@@ -1,4 +1,4 @@
-= Timetable Deconflicter (TBC) - Developer Guide
+= FreeTime - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -489,8 +489,6 @@ The following sequence diagram shows how the TimeTable is exported: +
 .Interactions between the various Components for the `export` Command
 image::ExportSequenceDiagram.png[ ]
 
-{nbsp}
-
 ==== Design Considerations
 ===== Aspect: Which Classes (and which system(s)) should parse the ics file format?
 * **Alternative 1 (current choice):** All code related to parsing _.ics_ timetable files are inside 'IcsUtil' class. When executing ImportCommand/ExportCommand, it directly calls a method in IcsUtil.
@@ -551,20 +549,10 @@ then salted and hashed (SHA-512), and finally compared to the stored hashed pass
 === Friend feature
 ==== Feature description
 The friend feature allows users to befriend and add other users to their friend list.
-Timetables are only viewable for users in your friend list and timetables can only be deconflicted within your friends.
+Timetables and personal information is only viewable for users in your friend list and timetables can only be deconflicted within your friends.
 
 ==== Current implementation
 The feature is implemented with two main parts. The frontend and the backend, which will be explained below.
-
-===== Backend implementation
-The `User` is associated with a specific `Person`. Each person can have any number of `Friend` objects.
-Every friend will have a `Name` object that corresponds to the specific `Person` object in the list.
-
-
-.Class diagram of Friend
-image::FriendClassDiagram.png[width="200"]
-
-{nbsp}
 
 ===== Frontend implementation
 On the left side users will now see two panes, one above for friends and one below for the rest of the users not inside the friend list.
@@ -572,6 +560,31 @@ PersonListPanel is adapted to now have two `Stackpane` instead of one and is nes
 
 .Class diagram of Friend
 image::FriendFeatureFrontEndDiagramFix.png[width="300"]
+
+The two panels will be filtered based on two predicates, `FriendListPredicate` and `OtherListPredicate`.
+The friends of the current user is iterated through and those that belong to the friend will be shown on the FriendListPanel.
+The rest of the users will be shown on PersonListPanel. Both predicates will filter out the current user.
+When additional filtering commands such as `group` or `find` are executed, the predicate produce from either of the commands will be added to a new `CombinedFriendListPredicate` and `CombinedOtherListPredicate`.
+This creates a new predicate in which will filter the two panels accordingly.
+
+===== Backend implementation
+The `User` is associated with a specific `Person`. Each person can have any number of `Friend` objects.
+Every friend will have a `Name` object that corresponds to the specific `Person` object in the list.
+
+.Class diagram of Friend
+image::FriendClassDiagram.png[width="200"]
+
+When the friend command is executed, the Person selected at the index will be added as a `Friend` to the current user.
+Likewise, the reverse will occur and the user will be added to the Person selected as a `Friend`.
+When the selected person logs in, he or she will see the user as a friend as well.
+
+The following sequence diagram shows the execution of the Friend command:
+
+.Sequence diagram of friend command
+image::FriendCommandSequenceDiagram.png[width="300"]
+
+
+{nbsp}
 
 ===== Design Considerations
 ===== How to store the friends of the User
@@ -581,6 +594,14 @@ image::FriendFeatureFrontEndDiagramFix.png[width="300"]
 * **Alternative 2:** Allowing every Friend to compose a Person object
 ** Pros: Friend contains more information that can be used
 ** Cons: Duplicated entries of the same Person
+
+===== How to display the friends and others of the current User
+* **Alternative 1 (current choice):** Use of predicates to set the list to reflect only the desired people.
+** Pros: Allow different predicates to be nested when more filtering commands are called. More dynamic filtering can be done.
+** Cons: The list internally contains all the users of the database, extra information is being loaded.
+* **Alternative 2:** Send a list of all friends and non-friends at the start of the application to individual panels.
+** Pros: Correct users will be loaded at the start for each panel.
+** Cons: Friends panel and others panel have to be repopulated again after every friend/unfriend
 // end::friend[]
 
 {nbsp}

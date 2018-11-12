@@ -14,9 +14,11 @@
 This Project Portfolio outlines my personal contributions to this team project.
 |===
 
-FreeTime is the product of my CS2113T project. In CS2113T, our team of 4 had to morph an existing application (AddressBook 4) into a different application, all the while ensuring the best coding practices and teamwork.
+FreeTime is the product of my CS2113T project, done at National University of Singapore. In CS2113T, our team of 4 had to morph an existing application (AddressBook 4) into a different application, all the while ensuring the best coding practices and teamwork.
 
 FreeTime is a Time-Planner application. It is primarily aimed at Students. The most unique feature about FreeTime is that it has the ability to quickly display the times when a group of friends are able to meet up. +
+
+Users can import existing timetables into FreeTime, and then proceed to do changes to it, such as adding or removing a timeslot. When they are satisfied with their timetable, they can view the times when they and their friends are mutually free, using the `freetime` feature.
 
 The main interaction is through a command-line interface (CLI), but the graphical user interface (GUI) is also available. It is written in Java, and has about 10 kLoC. +
 
@@ -33,7 +35,7 @@ This section is a brief summary of my personal contributions to this team projec
 ** Credits: biweekly third-party library (https://github.com/mangstadt/biweekly)
 
 * *Minor enhancement*: *Save user's timetable across application instances*.
-** What it does: Allows the application to save the timetable into the disk automatically. This means that it can remmeber our users' timetables across restarts.
+** What it does: Allows the application to save the timetable into the disk automatically. This means that it can remember our users' timetables across restarts.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=alexiscatnip[Link to RepoSense]]
 
