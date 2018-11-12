@@ -26,7 +26,7 @@ public class ChangePasswordCommand extends Command {
             + PREFIX_NEW_PASSWORD + "newPassword ";
 
     public static final String MESSAGE_SUCCESS = "Password has successfully changed to: %1$s";
-    public static final String MESSAGE_WRONG_PASSWORD = "THe old password is wrong";
+    public static final String MESSAGE_WRONG_PASSWORD = "The old password is wrong";
     private final Password newPassword;
     private final Password oldPassword;
 
