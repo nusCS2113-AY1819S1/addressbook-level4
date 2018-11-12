@@ -355,19 +355,19 @@ image::FinishTodoUsage.png[width="1000"]
 === Add Reminder: `reminder`
 
 Adds a reminder for your next meeting, containing details like the title, date, time and agenda of the meeting. +
-Format: `reminder tt/TITLE d/DATE st/TIME ag/AGENDA`
+Format: `reminder tt/TITLE d/DATE(DDMMYYYY) st/START_TIME ag/AGENDA`
 
 [NOTE]
 ====
-Reminders with the same `TITLE` are allowed but not with the same `DATE` *and* `TIME`
+Reminders with the same `TITLE` are allowed but not with the same `DATE` *and* `START_TIME`
 ====
 
 ****
 * Only 1 of each field is allowed.
-* `TITLE`, `DATE`, `TIME` `AGENDA` all cannot be blank fields.
+* `TITLE`, `DATE`, `START_TIME` `AGENDA` all cannot be blank fields.
 * `TITLE` and `AGENDA` accepts any alphanumerical input of any length.
 * `DATE` must be in DDMMYYYY format, and only numbers will be accepted.
-* `TIME` must be in 24 hours format, cannot exceed 2359 and only numbers will be accepted.
+* `START_TIME` must be in 24 hours format, cannot exceed 2359 and only numbers will be accepted.
 ****
 
 Examples:
@@ -471,6 +471,7 @@ e.g.`select 2`
 * *Export* : `export INDEX FILETYPE`
 * *Mail* : `mail [i/INDEX]` (to be added)
 * *Todo* : `todo tt/TITLE c/CONTENT`
+* *Reminder* : `reminder tt/TITLE d/DATE(DDMMYYYY) st/START_TIME ag/AGENDA`
 * *FinishTodo* : `finishTodo INDEX`
 * *Schedule* : `schedule INDEX-OF-PERSON d/DATE(DDMMYYYY) st/START-TIME et/END_TIME en/EVENT-NAME`
 * *Clear Schedule* : `clearSchedule IndexOfPerson`
