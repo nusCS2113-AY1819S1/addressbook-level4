@@ -5,10 +5,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BANANA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRODUCT_INFO_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIST_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SERIAL_NUMBER_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HEALTHY;
 
 import org.junit.Test;
 
