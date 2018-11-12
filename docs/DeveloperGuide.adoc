@@ -1301,13 +1301,71 @@ _{ more test cases ... }_
 
 .. Prerequisites: List all books using the `list` command. Multiple books in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First book is deleted from the list. Details of the deleted book shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No book is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+=== Checking quantity of books
+
+. Checks inventory for books less than or equal to the quantity
+
+.. Prerequisites: None.
+.. Test case: `check 1` +
+   Expected: Displays the list of books ordered in ascending order with quantity less than 1. Timestamp in the status bar is updated.
+.. Test case: `check -1` +
+   Expected: Error details shown in the status message. Status bar remains the same.
+.. Other incorrect sell commands to try: `check x`(where x is lesser than 0 or larger than 999), +
+   Expected: Similar to previous.
+
+=== Selling a book
+
+. Selling a book while all books are listed
+
+.. Prerequisites: List all books using the `list` command. Multiple books in the list.
+.. Test case: `sell 1 q/1` +
+   Expected: Quantity of first book is decreased by one. Number of books sold and details of the sold book shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `sell 0 q/1` +
+   Expected: No book is sold. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect sell commands to try: `sell`, `sell 1`, `sell x q/1` (where x is larger than the list size), +
+   Expected: Similar to previous.
+
+. Selling a book using Isbn
+
+.. Prerequisites: None.
+.. Test case: `sell i/9780321775658 q/1` +
+   Expected: Quantity of book with the isbn is decreased by one. Number of books sold and details of the sold book shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `sell i/1234567890 q/1` +
+   Expected: No book is sold. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect sell commands to try: `sell i/ q/1`, `sell i/9780321775658`, `sell i/x q/1` (where x is any invalid Isbn), +
+   Expected: Similar to previous.
+
+=== Using Tab
+
+. Complete empty Isbn field
+
+.. Prerequisites: Type `i/` in the `CommandBox`.
+.. Test case: Press `TAB` +
+   Expected: Isbn of first book in the list is displayed in the CommandBox.
+.. Test case: Press `TAB` twice +
+   Expected: Isbn of first book is displayed followed by the second book in the list in the CommandBox.
+
+. Complete half inputted Isbn field
+
+.. Prerequisites: Type `i/978` in the `CommandBox`.
+.. Test case: Press `TAB` +
+   Expected: Isbn of first book containing `978` in the list is displayed in the CommandBox.
+.. Test case: Press `TAB` twice +
+   Expected: Isbn of first book containing `978` is displayed followed by the second book containing `978` in the list in the CommandBox.
+
+. Complete invalid half inputted Isbn field
+
+.. Prerequisites: Type `i/777` in the `CommandBox`.
+.. Test case: Press `TAB` +
+   Expected: Nothing happens.
 
 === Saving data
 

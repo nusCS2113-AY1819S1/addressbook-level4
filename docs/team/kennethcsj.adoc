@@ -22,7 +22,7 @@ This section records my contributions for _BookInventory_.
 
 * *Major enhancement*: added *the ability to conveniently stock, sell and delete books* from the inventory
 ** What it does: to execute `stock`/`sell`/`delete` commands, one can select a book's unique ISBN using a shortcut that can scan through all available ISBN - kbd:[Tab] .
-** Justification: As sales are performed *daily*, commands should be executed conveniently in _BookInventory_.
+** Justification: As sales are performed *daily*, commands should be executed conveniently.
 ** Highlights: This enhancement not only affects existing commands, but also future commands.
 
 * *Minor enhancement*: added *the ability to display a list of books less than or equal to a given quantity* using the `check` command.
@@ -40,7 +40,6 @@ This section records my contributions for _BookInventory_.
 *** Updated the initial User Guide to be a representation of _BookInventory_.
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T12-3/main/issues/174[1], https://github.com/CS2113-AY1819S1-T12-3/main/issues/176[2], https://github.com/CS2113-AY1819S1-T12-3/main/issues/182[3], https://github.com/CS2113-AY1819S1-T12-3/main/issues/196[4])
-*** Some parts of the kbd:[Tab] feature I added was adopted by several other classmates
 
 == Contributions to the User Guide
 
