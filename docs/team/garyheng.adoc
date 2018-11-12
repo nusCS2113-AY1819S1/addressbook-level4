@@ -1,4 +1,4 @@
-= Gary Heng - Project Portfolio
+= Gary Heng Hui Shen - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
