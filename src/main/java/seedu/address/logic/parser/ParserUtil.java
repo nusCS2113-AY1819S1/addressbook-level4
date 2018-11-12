@@ -14,9 +14,9 @@ import seedu.address.model.distributor.DistributorPhone;
 import seedu.address.model.distributor.DistributorProduct;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.Username;
-import seedu.address.model.product.Email;
 import seedu.address.model.product.Name;
 import seedu.address.model.product.ProductInfo;
+import seedu.address.model.product.ProductsDistributorName;
 import seedu.address.model.product.RemainingItems;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
@@ -162,18 +162,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String email} into an {@code ProductsDistributorName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
     */
-    public static Email parseEmail(String email) throws ParseException {
+    public static ProductsDistributorName parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        if (!ProductsDistributorName.isValidEmail(trimmedEmail)) {
+            throw new ParseException(ProductsDistributorName.MESSAGE_EMAIL_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new ProductsDistributorName(trimmedEmail);
     }
 
     /**

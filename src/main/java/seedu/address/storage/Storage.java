@@ -37,7 +37,7 @@ public interface Storage extends ProductDatabaseStorage, DistributorBookStorage,
     Path getDistributorBookFilePath();
 
     @Override
-    Optional<ReadOnlyProductDatabase> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyProductDatabase> readProductDatabaseBook() throws DataConversionException, IOException;
 
     @Override
     Optional<ReadOnlyDistributorBook> readDistributorBook() throws DataConversionException, IOException;

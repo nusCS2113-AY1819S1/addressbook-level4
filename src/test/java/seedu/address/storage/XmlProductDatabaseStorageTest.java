@@ -37,7 +37,8 @@ public class XmlProductDatabaseStorageTest {
     }
 
     private java.util.Optional<ReadOnlyProductDatabase> readProductDatabase(String filePath) throws Exception {
-        return new XmlProductDatabaseStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlProductDatabaseStorage(Paths.get(filePath))
+                .readProductDatabaseBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -83,20 +84,20 @@ public class XmlProductDatabaseStorageTest {
 
         //Save in new file and read back
         xmlProductDatabaseStorage.saveAddressBook(original, filePath);
-        ReadOnlyProductDatabase readBack = xmlProductDatabaseStorage.readAddressBook(filePath).get();
+        ReadOnlyProductDatabase readBack = xmlProductDatabaseStorage.readProductDatabaseBook(filePath).get();
         assertEquals(original, new ProductDatabase(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addProduct(APPLE);
         original.removeProduct(GRAPE);
         xmlProductDatabaseStorage.saveAddressBook(original, filePath);
-        readBack = xmlProductDatabaseStorage.readAddressBook(filePath).get();
+        readBack = xmlProductDatabaseStorage.readProductDatabaseBook(filePath).get();
         assertEquals(original, new ProductDatabase(readBack));
 
         //Save and read without specifying file path
         original.addProduct(BANANA);
         xmlProductDatabaseStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlProductDatabaseStorage.readAddressBook().get(); //file path not specified
+        readBack = xmlProductDatabaseStorage.readProductDatabaseBook().get(); //file path not specified
         assertEquals(original, new ProductDatabase(readBack));
 
     }
