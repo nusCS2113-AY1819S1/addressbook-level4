@@ -22,7 +22,7 @@ Responsibilities: UI, Docs, Finance feature
 
 === Daryl Nigel
 image::darylnigel.png[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<darylnigel#, portfolio>>]
+{empty}[http://github.com/darylnigel[github]] [<<darylnigel#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data, Inventory feature
@@ -31,16 +31,16 @@ Responsibilities: Data, Inventory feature
 
 === Park Junhyuk
 image::hyukiejun.png[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<hyukiejun#, portfolio>>]
+{empty}[http://github.com/hyukiejun[github]] [<<hyukiejun#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Code clean-up, Member feature
+Responsibilities: Code clean-up, Member feature, Docs
 
 '''
 
 === Zhang Bo
 image::allenzb.png[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/abc-xx[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI, Calendar feature

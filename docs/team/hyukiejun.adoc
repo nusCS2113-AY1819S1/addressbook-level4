@@ -51,28 +51,19 @@ With the help of the new find features, the user can now search the club members
  corresponding sets of parsers and commands.
 
 * *Minor enhancement*: changed the duplicate check feature to fit the University context of the Clubhub better.
-
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+** Originally, it is recognized as *unique* only if the `new name` is added or *same* name with *different* `phone number` and `email address` is added.
+** Now, it is recognized as *unique* only if the `new name` is added or *same* name with *different* `phone number` and `major` is added
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=hyukiejun[RepoSense]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Wrote additional tests for the newly added attributes of the member object (Pull requests: https://github.com/CS2113-AY1819S1-T09-3/main/pull/36[#36], https://github.com/CS2113-AY1819S1-T09-3/main/pull/47[#47])
+** Version 2.0 Feature
+*** Thought of a potential integration feature [Records] for version 2.0 and updated the User guide accordingly
+** Reported bugs and suggestions for other teams in the class (Issues: https://github.com/CS2113-AY1819S1-T12-2/main/issues/162[#162], https://github.com/CS2113-AY1819S1-T12-2/main/issues/164[#164], https://github.com/CS2113-AY1819S1-T12-2/main/issues/170[#170], https://github.com/CS2113-AY1819S1-T12-2/main/issues/173[#173], https://github.com/CS2113-AY1819S1-T12-2/main/issues/179[#179])
 
 == Contributions to the User Guide
 
@@ -81,9 +72,12 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=member]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=record]
+
+include::../UserGuide.adoc[tag=summary]
+
 
 == Contributions to the Developer Guide
 
@@ -91,13 +85,5 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=member]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
