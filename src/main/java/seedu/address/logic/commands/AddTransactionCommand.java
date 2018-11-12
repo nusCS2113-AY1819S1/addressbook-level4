@@ -50,7 +50,7 @@ public class AddTransactionCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         Map<String, Integer> transactionRecord = toAdd.getTransactionRecord();
-        List<String> listWithProductsToAdd = new ArrayList<String>(transactionRecord.keySet());
+        List<String> listWithProductsToAdd = new ArrayList<>(transactionRecord.keySet());
         List<Integer> values = transactionRecord.values().stream().collect(Collectors.toList());
         boolean invalidInventory = false;
 
@@ -63,10 +63,9 @@ public class AddTransactionCommand extends Command {
 
         for (String name : listWithProductsToAdd) {
             for (Product product : model.getProductInfoBook().getProductList()) {
-                if (product.getName().fullName.equals(name)) {
-                    int foo = Integer.parseInt(product.getRemainingItems().value);
-                    int newRemainingItems = foo - values.get(listWithProductsToAdd.indexOf(name));
-
+                if (product.getName().fullName.equals(name.substring(0, 1).toUpperCase() + name.substring(1))) {
+                    int newRemainingItems = Integer.parseInt(product.getRemainingItems().value)
+                            - values.get(listWithProductsToAdd.indexOf(name));
                     if (newRemainingItems < 0) {
                         invalidInventory = true;
                         RemainingItems itemsRemaining = new RemainingItems("0");

@@ -1,0 +1,16 @@
+{
+  "ignoreGlobList": ["**index.html"],
+  "formats": ["html", "css","Java"],
+  "authors": ["amirulmaricar","garagaristahir","dyeosy98","ParasK26"]
+  [
+    {
+      "githubId": ["amirulmaricar","garagaristahir","dyeosy98","ParasK26"],
+      "displayName": ["Amirul","Gara Tahir","Denice","Paras"],
+      "authorNames": ["GT", "A"],
+      "ignoreGlobList": ["**.css"]
+    },
+    {
+      "githubId": ["amirulmaricar","garagaristahir","dyeosy98","ParasK26"]
+    }
+  ]
+}
