@@ -280,6 +280,10 @@ public class ModuleManager {
         return sb.toString();
     }
 
+    public void clearModules() {
+        modules = new ArrayList<>();
+    }
+
     public ArrayList<Module> getModules() {
         return this.modules;
     }
