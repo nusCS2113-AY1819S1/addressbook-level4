@@ -18,5 +18,9 @@ public abstract class SummaryCommand extends Command {
             + "OR \"" + COMMAND_WORD + " month " + PREFIX_DATE + "apr-2018 " + "may-2018\"\n"
             + "OR \"" + COMMAND_WORD + " category " + PREFIX_DATE + "18-9-2018 " + "20-9-2018\"";
 
+    public static final String MESSAGE_FAILURE = "An error has occurred and your summary list cannot be generated!\n "
+            + "Please ensure that the total expenses, total income and net moneyflow do not"
+            + " exceed the constraints of moneyflow. \n"
+            + "Error handled : %s";
     public static final String TOTAL_LABEL = "TOTAL";
 }

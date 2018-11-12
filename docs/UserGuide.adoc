@@ -461,7 +461,7 @@ Examples:
 * `summary month d/apr-2018 sep-2018`
 * `summary month d/APR-2018 SeP-2018`
 * `summary category d/1-1-2018 12-12-2018`
-
+// end::summary[]
 The screenshots below are examples of what you can see once the command has been accepted. The commands entered have been left
 in for visualisation purposes. These screenshots are taken in *fullscreen mode*  at 1080p resolution.
 
@@ -474,7 +474,7 @@ image::UiSummaryByMonthTable.png[width="790"]
 image::UiSummaryByCategoryTable.png[width="790"]
 *Screenshot of app when `summary category d/1-1-2018 12-12-2018` is run*
 
-// end::summary[]
+
 // tag::stats[]
 === Showing a breakdown of total expenses and income into categories: `stats`
 

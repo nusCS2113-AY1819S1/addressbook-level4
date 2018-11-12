@@ -26,6 +26,7 @@ public class MoneyFlow {
     public static final String NEGATIVE_SIGN = "-";
     public static final String REPRESENTATION_ZERO = "-0";
     public static final String FORMAT_STANDARD_MONEY = "%.2f";
+    public static final Double MAX_MONEY = 999999999999.99;
 
     private static final String MONEYFLOW_VALIDATION_REGEX = "^[+-](0|[1-9]\\d{0,11})(\\.\\d{1,2})?";
 

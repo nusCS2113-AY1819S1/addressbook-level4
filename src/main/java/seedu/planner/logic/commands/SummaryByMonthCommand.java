@@ -11,6 +11,7 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
+import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
 import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
@@ -47,15 +48,20 @@ public class SummaryByMonthCommand extends SummaryCommand {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredRecordList(predicate);
-        SummaryList summaryList = new SummaryByMonthList(model.getFilteredRecordList());
-        logger.info("Created SummaryByMonthList: " + summaryList.size() + " summaries");
-        String tabTitle = String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate),
-                DateUtil.formatDate(endDate));
-        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList, TOTAL_LABEL,
-                tabTitle));
+        SummaryList summaryList;
+        try {
+            model.updateFilteredRecordList(predicate);
+            summaryList = new SummaryByMonthList(model.getFilteredRecordList());
+            logger.info("Created SummaryByMonthList: " + summaryList.size() + " summaries");
+            String tabTitle = String.format(FORMAT_TITLE_SUMMARY, DateUtil.formatDate(startDate),
+                    DateUtil.formatDate(endDate));
+            EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList, TOTAL_LABEL,
+                    tabTitle));
+        } catch (Exception e) {
+            throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }
 
