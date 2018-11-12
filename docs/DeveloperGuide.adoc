@@ -424,6 +424,10 @@ Step 2. The user executes `class add c/16...` command to add a new classroom to 
 
 Step 3. The `classroomManager#saveClassroomList()` will be called to converts the classroom array list and invokes the StorageController to save the current classroom list to file. This is done by first converting our `Classroom` object into `XmlAdaptedClassroom` objects and saving it.
 
+The following sequence diagram summarizes what happens when a user executes a new command:
+
+image::sequencediagramclassadd.png[width="800"]
+
 === Class List feature
 ==== Current Implementation
 
@@ -447,10 +451,6 @@ Step 3. The classroom list with the corresponding classroom information will be 
 The following activity diagram summarizes what happens when a user executes a new command:
 
 image::classaddlist.PNG[width="800"]
-
-The following sequence diagram summarizes what happens when a user executes a new command:
-
-image::classaddsequencediagram.PNG[width="800"]
 
 // end::classmanagementbrief[]
 
