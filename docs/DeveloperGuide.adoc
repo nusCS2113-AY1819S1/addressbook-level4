@@ -946,7 +946,7 @@ The email command is a 4-stage process supported by `LogicManager` by keeping tr
 
 .The 4 stages are as follows:
 . *Initialisation*, facilitated by `EmailInitialiseCommand`.
-. *Choosing your recipients*, facilitated by`EmailRecipientsCommand`. Within which exists the following sub-stages:
+. *Choosing your recipients*, facilitated by `EmailRecipientsCommand`. Within which exists the following sub-stages:
 .. *Adding recipients*, facilitated by `EmailRecipientsAddCommand`.
 .. *Moving to the next step*, facilitated by `EmailRecipientsNextCommand`.
 . *Choosing your contents*, facilitated by `EmailContentsCommand`. Within which exists the following sub-stages:
@@ -963,12 +963,12 @@ As you can see, the email command is quite complicated, so in order to explain h
 . You launch the application. The application loads email settings from `preferences.json` which is stored in `Model#EmailUtil`.
 
 . You execute the `email` command. A new `EmailUtil` object is constructed and replaces the `EmailUtil` object in `Model`
-  using `model#resetEmailUtil`. `LogicState` is changed to reflect initialisation of the email command and to move it into recipients selection stage
+  using `model#resetEmailUtil`. `LogicState` is changed to reflect initialisation of the email command, moving the `LogicState` to recipients selection state.
 . You use `listc`, `findc`, `filterc`, `listC`, `findC`, `findj`, `filterC` and `filterj` to filter out who you wish to send the email to.
 . You execute the `add` command for the first time. This calls `EmailRecipientsAddCommand`.
 .. The add command first checks if there are recipients to add with `EmailRecipientsAddCommand#addCandidates or #addJobOffers`. If there is nothing to add, an error message will be displayed. If there are objects to add, then the following steps will be executed.
 .. `EmailUtil#hasRecipientsAdded` boolean value is changed to true to indicate that there are recipients added.
-.. `MainWindow#getCurrentBook()` is called to return which book you are on and `EmailUtil#areRecipientsCandidates` boolean value is changed accordingly
+.. `MainWindow#getCurrentBook()` is called to return which book you are on and `EmailUtil#areRecipientsCandidates` boolean value is changed accordingly:
 ... If recipients are candidates, `EmailUtil#areRecipientsCandidates` will be true.
 ... If recipients are companies, `EmailUtil#areRecipientsCandidates` will be false.
 .. Depending on `EmailUtil#areRecipientsCandidates`, the recipient objects are called with `Model#getFilteredCandidateList` or `Model#getFilteredJobList` and are stored in a linked hash set within `EmailUtil` to prevent duplicates and to preserve insertion order. +
@@ -995,7 +995,7 @@ commands pertaining to the current book can be used. This is to enforce that rec
 .... `To: Apple(apple@example.com) regarding job offers: [Cashier, Cleaner]`
 .... `To: DBS(dbs@example.com) regarding job offer: [Cafe Waiter]`
 . You are satisfied with the preview and execute the `send` command to send the email. This generates the email as a `MimeMessage` which is the Java format used for emails and is sent via `EmailUtil#sendMessage`.
-.. If recipients are candidates, one email will be sent to all candidates with their emails sent as `BCC` to preserve privacy of the candidates.
+.. If recipients are candidates, one email will be sent to all candidates with their emails sent under the `BCC` field to prevent recipients from seeing each other's emails, which preserves privacy of the candidates.
 .. If recipients are companies, one email will be sent per company detailing the specific job offer(s) that you have added during the selection of recipients.
 . `LogicState` is then reset back to original and this marks the end of the email command.
 

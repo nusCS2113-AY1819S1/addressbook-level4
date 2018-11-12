@@ -653,7 +653,7 @@ Other notes
 
 . You can type in `back` to go back to the previous step should you forget to add a certain recipient or content.
 . Adding duplicate candidate/job offers will be caught and will not be double counted.
-. If recipients are candidates, emails are sent via BCC to protect the privacy of your candidates.
+. If recipients are candidates, candidate email addresses are sent under the BCC field to protect the privacy of your candidates.
 . If recipients are companies, emails are sent individually to each company.
 
 You can also change the default email subject and email body text in `preference.json`. +
