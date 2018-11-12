@@ -21,7 +21,7 @@ Responsibilities: Responsible for overall project coordination
 
 === Andrew Ong
 image::andrewome.png[width="150", align="left"]
-{empty}[http://github.com/andrewome[github]]
+{empty}[http://github.com/andrewome[github]][https://cs2113-ay1819s1-f09-4.github.io/main/team/andrewome.html[portfolio]]
 
 Role: Developer +
 Responsibilities: API expert

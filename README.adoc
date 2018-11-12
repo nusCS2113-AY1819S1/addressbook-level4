@@ -2,15 +2,16 @@
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 image:https://travis-ci.org/CS2113-AY1819S1-F09-4/main.svg?branch=master["Build Status", link="https://travis-ci.org/CS2113-AY1819S1-F09-4/main"]
+image:https://coveralls.io/repos/github/CS2113-AY1819S1-F09-4/main/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/CS2113-AY1819S1-F09-4/main?branch=master"]
 
 Simplifying your job recruiting experience!
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/images/Ui.png[width="1000"]
 endif::[]
 
 ifndef::env-github[]
-image::images/Ui.png[width="600"]
+image::images/Ui.png[width="1000"]
 endif::[]
 
 Are you a job agent looking to keep track of interviewed candidates and available job offers?
@@ -19,29 +20,21 @@ Are you a job agent looking to keep track of interviewed candidates and availabl
 
 RecruitBook contains many features that is designed specifically to aid job agents:
 
-* Candidates:
+* Add candidates and their details
 
-** Add candidates with customisable tags
+* Add companies and their details
 
-** Filter and sort candidates based on expected salary, education level etc
+* Add jobs offers and their details
 
-** Shortlist candidates
+* Filter and sort candidates based on expected salary, education level etc.
 
-** Blacklist candidates
+* Filter and sort job offers based on expected salary, minimum education level etc.
 
-** Automated email feature
+* Shortlist candidates for specific job offers
 
-* Companies:
+* Automated email feature to send mass emails
 
-** Add companies and their details
-
-** Filter and sort companies
-
-* Job Offers:
-
-** Add jobs offers and their details
-
-** Filter and sort job offers based on expected salary, minimum education level etc.
+* Blacklist candidates
 
 == Site Map
 
