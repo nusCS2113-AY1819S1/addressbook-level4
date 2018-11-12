@@ -31,7 +31,6 @@ public class FoundCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     private Model model = new ModelManager(getStockList(), new UserPrefs(), getTypicalAccountList());
-    private List<Item> lastShownList = model.getFilteredItemList();
     private FoundCommand foundCommand = new FoundCommand(getExpectedIndextwo(), getFoundDescriptor());
 
     @Test

@@ -31,7 +31,6 @@ public class LostCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     private Model model = new ModelManager(getStockList(), new UserPrefs(), getTypicalAccountList());
-    private List<Item> lastShownList = model.getFilteredItemList();
     private LostCommand lostCommand = new LostCommand(getExpectedIndexone(), getLostDescriptor());
 
     @Test
