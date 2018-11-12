@@ -499,6 +499,9 @@ The sequence diagram below illustrates the operation of `modifyPay` command:
 
 image::ModifyPayCommandSequenceDiagram.png[width="850"]
 
+==== Employee's Pay Report: `payReport` _[Upcoming in 2.0]_
+Generate a report to show the break down of employee's pay such as base Salary, Bonus, Overtime Pay and CPF Contribution. [Upcoming in 2.0]
+
 ==== Design Considerations
 Aspect implementation of `modifyPay` command:
 
@@ -615,18 +618,22 @@ For each schedule commands, it comes with a dedicated schedule parser.
 First, the schedule parsers ensure that the prefix required are all present with `!arePrefixesPresent`.
 [source, java]
 ----
+    ...
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+    ...
 ----
 The parsers validate field inputs by creating a new `Type`, `Date`, `EmployeeId` and `Schedule` object.
 
 [source, java]
 ----
+        ...
         Type type = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_SCHEDULE_TYPE).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_SCHEDULE_DATE).get());
         EmployeeId id = ParserUtil.parseEmployeeId(argMultimap.getValue(PREFIX_EMPLOYEEID).get());
         Schedule schedule = new Schedule(id, type, date);
+        ...
 ----
 
 The objects will `throw exception` if it does not conform to the following field restrictions.
@@ -730,6 +737,7 @@ or existing work schedule `model.hasSchedule(hasLeaveSchedule)` is found on that
 
 [source, java]
 ----
+...
 for (Date date :setOfDates) {
     for (Person person : model.getFilteredPersonList()) {
         Schedule toAddSchedule = new Schedule(person.getEmployeeId(), work , date);
@@ -742,6 +750,7 @@ for (Date date :setOfDates) {
         }
     }
 }
+...
 ----
 
 ==== Delete Works
@@ -765,6 +774,7 @@ if found on that date `model.hasSchedule(toDeleteSchedule)`.
 
 [source, java]
 ----
+...
 for (Date date : setOfDates) {
     for (Person person : model.getFilteredPersonList()) {
         Schedule toDeleteSchedule = new Schedule(person.getEmployeeId(), work , date);
@@ -774,11 +784,10 @@ for (Date date : setOfDates) {
         }
     }
 }
+...
 ----
 
 // end::schedule1[]
-
-// tag::schedule2[]
 
 ==== Add Leaves
 `addLeaves` command allows multiple leave schedules to be added based on
@@ -805,6 +814,8 @@ In addition, Command Exception will be thrown due to the following:
 
 .. Size of the filtered person list is 0. This happens when there is no
 employees shown.
+
+// tag::schedule2[]
 
 ==== Calculate Leaves
 `calculateLeaves` command allows user to calculate leaves taken for the specified employee id and year.
@@ -837,6 +848,7 @@ increments the number of leaves `numLeaves`.
 
 [source, java]
 ----
+...
 for (Schedule schedule : model.getFilteredScheduleList()) {
     if (schedule.getScheduleYear().equals(year.toString())
             && schedule.getType().toString().equals(Type.LEAVE)) {
@@ -975,14 +987,12 @@ The implementation of this command is separated into two phases.
 The `filter` command's mechanism is facilitated by `FilterCommandParser`.
 The `FilterCommandParser` implements the `Parser` interface, parses the arguments parameter, which is the input from the user, and creates a new `FilterCommand` object.
 Apart from parsing the input, the `FilterCommandParser` also checks whether the input complies with the required format.
-The checking of input compliance is facilitated by two helper methods, namely `processDepartmentKeywords` and `processPositionKeywords`, that is within the class.
-This guide will focus on explaining how `processDepartmentKeywords` work instead of both as the methods `processDepartmentKeywords` and `processPositionKeywords` are quite similar.
+The checking of input compliance is assisted by a helper method, `didPrefixesAppearOnlyOnce`, which checks whether the department prefix and/or position prefix appears only once.
 
 [NOTE]
 If the input does not comply with the required format, an error message will be shown to the user.
 
-Code snippet of `FilterCommandParser` showing the input compliance checks:
-
+Code snippet of the `parse` method within `FilterCommandParser` showing the checks for input compliance:
 [source, java]
 ----
 public FilterCommand parse(String args) throws ParseException {
@@ -996,6 +1006,35 @@ public FilterCommand parse(String args) throws ParseException {
             || !ACCEPTED_ORDERS.contains(sortOrder)) {
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
+
+    ...
+    ...
+}
+----
+
+Code snippet of the helper method `didPrefixesAppearOnlyOnce`:
+[source, java]
+----
+public boolean didPrefixesAppearOnlyOnce(String argument) {
+    String departmentPrefix = " " + PREFIX_DEPARTMENT.toString();
+    String positionPrefix = " " + PREFIX_POSITION.toString();
+
+    return argument.indexOf(departmentPrefix) == argument.lastIndexOf(departmentPrefix)
+            && argument.indexOf(positionPrefix) == argument.lastIndexOf(positionPrefix);
+}
+----
+
+If the input complies with the required format, further checks will be performed on the keywords to ensure that the keywords are valid.
+This keywords checking is completed by the `processDepartmentKeywords` and `processPositionKeywords` methods that are both within the `FilterCommandParser` class.
+This guide will focus on explaining how `processDepartmentKeywords` work instead of both as the methods `processDepartmentKeywords` and `processPositionKeywords` are similar.
+
+Code snippet of the `parse` method in `FilterCommandParser` calling `processDepartmentKeywords` method:
+
+[source, java]
+----
+public FilterCommand parse(String args) throws ParseException {
+    ...
+    ...
 
     if (!argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
         filterCommand.setIsDepartmentPrefixPresent(false);
@@ -1021,8 +1060,14 @@ public boolean processDepartmentKeywords(ArgumentMultimap argMultimap, FilterCom
 }
 ----
 
-The `processDepartmentKeywords` is further assisted by two other helper methods, namely, `validityCheckForDepartments` and `areDepartmentKeywordsValid` which are also within the `FilterCommandParser` class.
-The code snippet of the two helper methods are as follow:
+The `processDepartmentKeywords` is further assisted by the `validityCheckForDepartments` method which calls another method `areDepartmentKeywordsValid` to check whether the given keywords comply with the `DEPARTMENT_KEYWORD_VALIDATION_REGEX`.
+If the keywords from the user are all valid, the departmentPredicate will be created and passed to the `FilterCommand` object through a setter.
+
+[NOTE]
+The `DEPARTMENT_KEYWORD_VALIDATION_REGEX` is a regular expression that accepts only spaces and case-insensitive alphabets.
+It only allows 1 to 30 characters per keyword.
+
+Code snippet of `validityCheckForDepartments` and `areDepartmentKeywordsValid` methods in `FilterCommandParser` class:
 
 [source, java]
 ----
@@ -1049,8 +1094,8 @@ public boolean areDepartmentKeywordsValid(String[] keywords) {
 ===== Phase 2
 The `FilterCommand` is being executed in this phase.
 `FilterCommand` first checks which prefix(es) is(are) present prior to calling the `updateFilteredPersonList` method, which updates `filteredPersonList`
- with the relevant department(s) and/or position(s) that matches the keyword(s) input from the user.
- Additionally, the methods `updateFilteredExpensesList` and `updateFilteredScheduleList` will be called to update the `filteredExpensesList` and `filteredScheduleList` respectively to show only the matched employees' expenses and schedules.
+ with the employees of the relevant department(s) and/or position(s) that matches the keyword(s) input from the user.
+ Additionally, the methods `updateFilteredExpensesList` and `updateFilteredScheduleList` will also be called to update the `filteredExpensesList` and `filteredScheduleList` respectively to show only the matched employees' expenses and schedules.
 
 [NOTE]
 If the keywords input from the user results in 0 person found. The CLI will show the user a list of currently available department(s) and/or position(s) in the PersonList.
@@ -1093,10 +1138,10 @@ public class FilterCommand extends Command {
 ----
 
 The result of the execution of `FilterCommand` is then encapsulated as a `CommandResult` object which is returned to the `LogicManager`.
-After the execution of `FilterCommand`, the `filteredPersonList`, `filteredExpensesList` and `filteredScheduleList` will be updated accordingly and the program will display only employees alongside their respective expenses and schedule that are of the specific department(s)
- and/or position(s) as specified by the input from the user.
+During the execution of `FilterCommand`, the `filteredPersonList`, `filteredExpensesList` and `filteredScheduleList` will be updated accordingly to display only employees, that belongs to the department(s)
+ and/or hold the specified position(s) as specified by the user input.
 
-The sequence diagram below illustrates the operation of the `filter` command:
+The sequence diagram below illustrates the operation of `filter` command:
 
 image::filterCommandSequenceDiagram.png[width="900"]
 
@@ -2130,14 +2175,13 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
-
 // tag::yisheng[]
 === Adding an employee
 
 . Adding an employee while the storage is empty
 
 .. Prerequisites: There must be no existing data in the system and the following `add` command must be executed first prior to all test cases.
+... `clear`
 ... `add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00`
 .. Test case: `add id/999999 n/Amanda dob/31/07/1995 d/Finance r/Intern p/92346668 a/21 Lower Kent Ridge Rd e/amanda@gmail.com s/1000.00` +
 Expected: No employee is added. Error details shown in the status message. The details of the employee with name "Amanda Chan" added during the prerequisite shown on Employees column. Status bar remains the same.
@@ -2151,6 +2195,7 @@ Expected: Employee is added to the list. Details of the added employee shown in 
 . Editing an employee while the storage is empty
 
 .. Prerequisites: There must be no existing data in the system and the following commands must be executed first prior to all test cases.
+... `clear`
 ... `add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00`
 ... `add id/888888 n/Belinda Chan dob/30/06/1995 d/Finance r/Intern p/91234555 a/21 Lower Kent Ridge Rd e/belinda@gmail.com s/1000.00` +
 ... `list`
@@ -2166,6 +2211,7 @@ Expected: No changes on Employees column. No employee is edited. Error details s
 . Filtering employees while storage is empty
 
 .. Prerequisites: There must be no existing data in the system and the following commands must be executed first prior to all test cases.
+... `clear`
 ... `add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00`
 ... `add id/888888 n/Belinda Chan dob/30/06/1995 d/Finance r/Manager p/91234555 a/21 Lower Kent Ridge Rd e/belinda@gmail.com s/1000.00` +
 ... `list`
@@ -2181,6 +2227,7 @@ Expected: No changes on Employees column. Error details shown in the status mess
 . Filtering employees while storage is empty
 
 .. Prerequisites: There must be no existing data in the system and the following commands must be executed first prior to all test cases.
+... `clear`
 ... `add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00`
 ... `add id/888888 n/Belinda Chan dob/30/06/1995 d/Finance r/Manager p/91234555 a/21 Lower Kent Ridge Rd e/belinda@gmail.com s/1000.00` +
 ... `list`
@@ -2194,7 +2241,7 @@ Expected: No changes on Employees column. Error details shown in the status mess
 === Selecting an employee
 
 . Selecting an employee while all employees are listed
-.. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
+.. Prerequisites: Ensure the storage is not empty and list all employees using the `list` command. Multiple employees should be in the list.
 .. Test case: selectPerson 1 +
 Expected: First employee is selected from the list. Selected employee index shown in the status message. Status bar remains the same.
 .. Test case: selectPerson 0 +
@@ -2352,7 +2399,9 @@ Expected: Leaves deleted for all observable employees that contain date : [04/02
 .. Prerequisites: none of the fields should be blank. As for job position field, it takes in only characters with
 maximum 20 character limits. As for working experience field, it takes in only integers from 0 to 30. As for
 job description field, it takes in only characters with character limits from 1 to 200 and punctuation marks
-including only comma, full stop and single right quote.
+including only comma, full stop and single right quote. At least one field should be different if there are more
+than 1 post added.
+
 
 .. Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server, and company's IT framework.
 Expected: New recruitment post is added:

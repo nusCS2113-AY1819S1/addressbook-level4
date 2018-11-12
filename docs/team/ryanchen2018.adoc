@@ -15,6 +15,9 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 
 == Summary of contributions
 
+* *Project Management*:
+** Assists in approving, reviewing and merging pull requests.
+
 * *Major enhancement*: added `addRecruitmentPostCommand`, `deleteRecruitmentPostCommand`, `clearRecruitmentPostCommand`
                        `editRecruitmentPostCommand`, `selectRecruitmentPostCommand`
 ** What it does: Allow users to manage recruitment posts for the company.

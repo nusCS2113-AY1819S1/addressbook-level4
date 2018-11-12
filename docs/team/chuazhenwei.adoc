@@ -15,6 +15,9 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 
 == Summary of contributions
 
+* *Project Management*:
+** Assists in approving, reviewing and merging pull requests.
+
 * *Major enhancement*: added `modifyPay` and `modifyAllPay` command
 ** What it does: allows the user to modify the salary and bonus of the employees. Additionally, the `modifyAllPay` command enhance the functionality of `modifyPay` command by enabling the user to modify the salary and bonus of every employees shown in the list.
 ** Justification: This feature improves the product significantly because the user can indicate the changes to be made to the employee(s) salary based on values or percentage, and to the bonus based on months of salary.
