@@ -329,7 +329,7 @@ Given below is an illustration to describe the detection of whether two events c
 .Logic behind `Event#hasClash`
 image::EventClashDiagram.png[width="450"]
 
-Thus, to check whether the event clashes with an employee's schedule, we iterate through the `ObservableList<Event>` and check whether the `Event` contains the employee's email in the `Attendee` and clashes with the selected event.
+Thus, to check whether the event clashes with an employee's schedule, we iterate through the `ObservableList<Event>` and check whether the `Event` 1) contains the employee's email in the `Attendee` and 2) clashes with the selected event.
 
 ****
 `Event#hasClash` is widely used in other features such as `addEvent` and `editEvent` to ensure that
@@ -349,7 +349,7 @@ For example, the user inputs `invite 1 to/1` to invite the 1st person in the add
 
 Step 1. The command text is passed to an instance of the `LogicManager` class.
 
-Step 2. The `LogicManager` instance calls `ProManageParser#parseCommand`, which parses the `invite` command phrase.
+Step 2. The `LogicManager` instance calls `ProManageParser#parseCommand`, which parses the invite command phrase.
 
 Step 3. `InviteCommandParser#parse` parses the person and event index. An instance of the `InviteCommand` encapsulating the two indices information is then returned after parsing.
 

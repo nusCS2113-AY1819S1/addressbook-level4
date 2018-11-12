@@ -18,7 +18,7 @@ This project portfolio documents my contributions to the development of the CS21
 * *Major enhancement*: added *the ability to manage and view employees' events* via the `invite`, `remove` and `select` commands
 ** What it does: allows the user to invite employees to events, remove employees from events, and select and view an employee's event schedule on the indicated date, month or year which is displayed on the *event list panel*.
 ** Justification: This feature facilitates managing and scheduling of events among teams of employees who have different work schedules, and allow managers and employees to monitor and handle their event schedules easily. Schedule conflicts can be avoided and resolved easily with this enhancement.
-** Highlights: This feature considers whether the event an employee is invited to *clashes* with the particular employee's work schedule, and *guarantees* that schedule conflict will not occur. The underlying model structure implemented for this enhancement is carefully designed and allows extension commands `viewmine` and `selectEvent` to be easily implemented.
+** Highlights: This feature considers whether the event an employee is invited to *clashes* with the particular employee's work schedule, and *guarantees* that schedule conflict will not occur. The underlying `Event` model structure implemented for this enhancement is carefully designed and allows extension commands `viewmine` and `selectEvent` to be easily implemented.
 
 
 * *Minor enhancement*:
@@ -36,11 +36,11 @@ This project portfolio documents my contributions to the development of the CS21
 ** Enhancements to existing features:
 *** Updated the GUI color scheme https://github.com/CS2113-AY1819S1-T16-2/main/pull/134[#134]
 *** Updated the `add` and `edit` command to distinguish employees by their unique email address
-*** Updated the `find` command to search for employees via their email address
+*** Updated the `find` command to also search for employees via their email address
 *** Wrote additional tests for existing features to increase coverage from 82% to 87% https://github.com/CS2113-AY1819S1-T16-2/main/pull/128[#128] https://github.com/CS2113-AY1819S1-T16-2/main/pull/130[#130] https://github.com/CS2113-AY1819S1-T16-2/main/pull/131[#131]
 ** Documentation:
 *** Updated the User Guide to include `addEvent`, `editEvent`, `invite`, `remove` and `select` command
-*** Updated the Developer Guide to include implementation details, use case and user stories for `invite` and `select` command.
+*** Updated the Developer Guide to include implementation details, use case, user stories and instructions for manual testing for `invite` and `select` command.
 *** Updated the `Model`, `UI` and `Logic` class diagram in Developer Guide
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T16-2/main/pull/77[#77] https://github.com/CS2113-AY1819S1-T16-2/main/pull/114[#114] https://github.com/CS2113-AY1819S1-T16-2/main/pull/122[#122]

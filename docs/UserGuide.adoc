@@ -372,7 +372,7 @@ Format/Prompts: +
 Enter a command: `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
 ****
-* Select the employee at the specified `PERSON_INDEX` and view all his/her events at certain date if indicated.
+* Select the employee at the specified `PERSON_INDEX` and view all his/her events at certain date/year/month if indicated.
 * The index refers to the index number shown in the displayed employee list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * DATE needs to be in YYYY-MM-DD format
