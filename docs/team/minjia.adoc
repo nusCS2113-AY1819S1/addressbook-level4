@@ -5,7 +5,6 @@
 
 == PROJECT: Drink I/O
 
----
 
 == Overview
 In the CS2113T Software Engineering and Object-Oriented Programming module,

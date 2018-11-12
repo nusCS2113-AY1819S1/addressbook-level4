@@ -281,6 +281,8 @@ To enter a new drink into *[blue]#_Drink I/O_#*,
 . Key in `p/`, followed by default selling price of 1 carton of the drink (`SELLING_PRICE`)
 . Key in `cp/`, followed by default cost price of 1 carton of the drink (`COST_PRICE`)
 . Press kbd:[enter]
+. Confirm the command by entering `y` or `Y`
+. Press kbd:[enter]
 . Check whether the drink has been recorded successfully in the system
 *  If you see the message "New drink added", followed by the drink's details that you entered,
  the drink has been successfully entered into *[blue]#_Drink I/O_#* +
@@ -407,7 +409,8 @@ You can do this by specifying multiple fields to edit in a single command.
 You can update multiple fields at once by indicating multiple fields to edit in one command. +
 *Command format*: `edit INDEX [cp/COST_PRICE] [p/SELLING_PRICE] [t/TAG]...`
 
-You must specify at least one of the fields.
+* `INDEX` refers to the numbered bullet shown in the displayed drink list.
+* You must specify at least one of the fields.
 ====
 
 ==== Updating cost price
@@ -417,6 +420,8 @@ You must specify at least one of the fields.
 ====
 *_Summary_* +
 *Command format*: `edit INDEX cp/COST_PRICE`
+
+* `INDEX` refers to the numbered bullet shown in the displayed drink list.
 ====
 
 *Step-by-Step Instructions* +
@@ -440,6 +445,8 @@ To edit the cost price of a drink in *[blue]#_Drink I/O_#*,
 ====
 *_Summary_* +
 *Command format*: `edit INDEX p/SELLING_PRICE`
+
+* `INDEX` refers to the numbered bullet shown in the displayed drink list.
 ====
 
 *Step-by-Step Instructions* +
@@ -462,7 +469,9 @@ To edit the selling price of a drink in *[blue]#_Drink I/O_#*,
 ====
 *_Summary_* +
 *Command format*: `edit INDEX t/TAG...` +
-You may enter any number of tags, including 0. To clear tags, enter `t/`.
+
+* `INDEX` refers to the numbered bullet shown in the displayed drink list.
+* You may enter any number of tags, including 0. To clear tags, enter `t/`.
 ====
 
 *Step-by-Step Instructions* +
@@ -480,11 +489,17 @@ To edit the tags of a drink in *[blue]#_Drink I/O_#*,
 ** The drink's updated details will also be updated in the inventory list panel
 *  If not, follow the instructions displayed in the message display pane, and re-enter the command +
 
+[NOTE]
+====
+Editing the tags will replace _all_ existing tags of the drink with the new specified tags.
+====
+
+
 // tag::transactions[]
 == Managing Transactions
 To manage the purchases and sales of drinks, you can record them into *[blue]#_Drink I/O_#*,
 and let *[blue]#_Drink I/O_#* handle the updating of the inventory for you in real-time.
-These transactions also facilitate financial analyses (see <<>> #TOBE ADDED#).
+These transactions also facilitate financial analyses (see <<Analysing Sales Performance>>).
 
 
 === Creating a purchase transaction
@@ -564,6 +579,8 @@ the transaction will not be entered into the system.
 - The recording will fail if `QUANTITY` is more than the available stock in *[blue]#_Drink I/O_#*.
 ====
 
+// end::transactions[]
+
 === Viewing transactions
 You can view all the transactions entered into *[blue]#_Drink I/O_#* to verify their accuracy.
 
@@ -624,6 +641,9 @@ You can check the total costs incurred by your company, over a specified period.
 *_Summary_* +
 *Command format*:
 `costs [PERIOD_PARAMETER]`
+
+* `[PERIOD_PARAMETER]` is the parameter indicating the time period for analyses.
+** It can be one of: (none), `-w` or `-m`
 ====
 
 *Step by Step Instructions* +
@@ -634,6 +654,7 @@ You can check the total costs incurred by your company, over a specified period.
 
 You should see the value of the total costs displayed in the results panel.
 
+
 * To view the total costs incurred within the *past 7 days* (inclusive of current day):
 . Enter `costs -w` into the command box
 . Press kbd:[enter]
@@ -643,6 +664,7 @@ You should see the value of the total costs incurred over the week displayed in 
 * To view the total costs incurred within the *past 30 days* (inclusive of current day):
 . Enter `costs -m` into the command box
 . Press kbd:[enter]
+
 
 You should see the value of the total costs incurred over the past 30 days displayed in the results panel.
 The transactions list will also show the relevant transactions included in the analysis.
@@ -657,6 +679,9 @@ You can check the total revenue earned by your company, over a specified period.
 *_Summary_* +
 *Command format*:
 `revenue [PERIOD_PARAMETER]`
+
+* `[PERIOD_PARAMETER]` is the parameter indicating the time period for analyses.
+** It can be one of: (none), `-w` or `-m`
 ====
 
 *Step by Step Instructions* +
@@ -679,7 +704,10 @@ You can check the total profit earned by your company, over a specified period.
 ====
 *_Summary_* +
 *Command format*:
-`proft [PERIOD_PARAMETER]`
+`profit [PERIOD_PARAMETER]`
+
+* `[PERIOD_PARAMETER]` is the parameter indicating the time period for analyses.
+** It can be one of: (none), `-w` or `-m`
 ====
 
 *Step by Step Instructions* +
@@ -695,6 +723,7 @@ The transactions list will also show the relevant transactions included in the a
 
 // insert picture
 
+// end::analysis[]
 
 === Filtering popular drinks `[Coming in v2.0]`
 === Viewing a drink's transactions `[Coming in v2.0]`
@@ -798,16 +827,17 @@ not in the inventory list
 === Accountant Commands
 
 ==== Viewing Help: `help`
-Shows available commands with brief description of what can accountant do. +
+Shows available commands with brief description of what the accountant account can do. +
     Format: `help`
 
 === Viewing transactions: `viewTrans`
 Shows transactions made since the start of use of Drink I/O. +
     Format: `viewTrans`
 
-==== Get the total profit of the shop over specified periods: `profit` `[Coming in v1.4]`
-View the total profit earned in time periods of a day, 7 days and 30 days.
+==== Get the total profit of the company over specified periods: `profit`
+View the total profit earned in time periods of a day, 7 days and 30 days (including current day).
 	Format: `profit`
+
 [NOTE]
 ====
 To view profit earned up to now in the current day, no parameters are used. i.e. just `profit`
@@ -815,17 +845,36 @@ To view profit earned in last 7 days, append `-w`
 To view profit earned in last 30 days, append `-m`
 ====
 
-==== Get the quantities of each drink item sold over specified periods: `sales` `[Coming in v1.4]`
+==== Get the total revenue of the company over specified periods: `revenue`
+View the total revenue earned in time periods of a day, 7 days and 30 days (including current day).
+	Format: `revenue`
+
+[NOTE]
+====
+To view revenue earned up to now in the current day, no parameters are used. i.e. just `profit`
+To view revenue earned in last 7 days, append `-w`
+To view revenue earned in last 30 days, append `-m`
+====
+
+==== Get the total costs of the company over specified periods: `revenue`
+View the total costs incurred in time periods of a day, 7 days and 30 days (including current day).
+	Format: `costs`
+
+[NOTE]
+====
+To view costs earned up to now in the current day, no parameters are used. i.e. just `profit`
+To view costs earned in last 7 days, append `-w`
+To view costs earned in last 30 days, append `-m`
+====
+
+
+==== Get the quantities of each drink item sold over specified periods: `sales` `[Coming in v2.0]`
 View the sales number of each drink item in a period specified by the starting date and ending date.
 	Format: `sales STARTING_DATE ENDING_DATE`
 
-==== Get the trend of cost of every drink over specified periods: `viewcost` `[Coming in v1.4]`
+==== Get the trend of cost of every drink over specified periods: `drinkcosts` `[Coming in v2.0]`
 View the variation tendency of the cost of every ingredient in a period specified by the starting date and ending date.
-	Format: `viewcost STARTING_DATE ENDING_DATE`
-
-==== Update the current cost of certain drinks: `editcost` `[Coming in v1.4]`
-Update the cost of ingredients every time they change to keep track.
-	Format: `editcost INGREDIENT_NAME UNIT_COST`
+	Format: `drinkcost STARTING_DATE ENDING_DATE`
 
 
 ////
@@ -850,10 +899,6 @@ Creates a new Drink I/O account.
 *[blue]#_Drink I/O_#* data is saved in the hard disk automatically after any command that changes the drinks data
 or updates the transactions. +
 There is no need to save manually.
-
-
-== Upcoming Features in Future Releases
-
 
 == FAQ
 
