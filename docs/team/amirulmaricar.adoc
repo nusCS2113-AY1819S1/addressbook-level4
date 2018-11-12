@@ -25,16 +25,14 @@ Inventarie Pro is for self employed business owners who prefer to use a desktop 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed releases `v1.1` - `v1.3.2` (6 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase converage from 21% to 25% (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main/pull/111[#111])
 *** Wrote additional tests for existing features to increase coverage from 30% to 42% (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main/pull/179[#179], https://github.com/CS2113-AY1819S1-T13-3/main/pull/186[#186])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T13-3/main/pull/186[#186]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-3/main/pull/56[#56], https://github.com/CS2113-AY1819S1-T13-3/main/pull/151[#156]
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 *** Resolved issues found in PE1: https://github.com/CS2113-AY1819S1-T13-3/main/issues/142[#142]
 ** Tools:
 *** Integrated a continuous integration service (Travis CI) to the team repo (https://github.com[#42])
@@ -49,9 +47,9 @@ Inventarie Pro is for self employed business owners who prefer to use a desktop 
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=authentication
+include::../UserGuide.adoc[tag=authentication]
 
-include::../UserGuide.adoc[tag=dataencryption
+include::../UserGuide.adoc[tag=dataencryption]
 
 == Contributions to the Developer Guide
 
