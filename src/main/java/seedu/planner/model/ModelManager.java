@@ -326,7 +326,7 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
         if (output != "") {
-            output = "Normal limit:\n" + output;
+            output = "Normal limit:" + output;
         }
         return output;
     }
