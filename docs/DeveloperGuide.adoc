@@ -1791,7 +1791,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
-//tag::spending limits feautres' manual tests
+//tag::limitUserCase[]
 === 13. Use case: Create a normal limit for a period of time or a day
 
 *MSS*
@@ -1988,6 +1988,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
+//end::limitUserCase[]
 === 20. Use case: Export record data from Savee to Excel file [Linh Chi]
 
 *MSS*
@@ -2360,7 +2361,7 @@ should allow you to navigate to the hidden tags within the legend.
 .. Prerequisites: Same as before. Just need to change the panel to see the effect.
 .. Test case: Add any record with date in current month/ Delete any record with date in current month/ Edit any record to a date in current month/ Clear
 .. Expected: Panel should show the welcome screen.
-
+//tag::limitsManualTest[]
 === Adding a normal limit
 
 . Adding a normal limit to the Financial Planner without the same time period limits inside.
@@ -2528,7 +2529,7 @@ should allow you to navigate to the hidden tags within the legend.
 .. Prerequisites: No limits inside the limit list.
 .. Test case: `checklimit` +
    Expected: The limits' detailed information will not be displayed, no limit in the list error message will be displayed.
-
+//end::limitsManualTest[]
 === Deleting a person
 
 . Deleting a records while all records are listed

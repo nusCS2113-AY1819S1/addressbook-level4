@@ -58,7 +58,7 @@ two dates.
 === `completed` *Major enhancement #2*: added the ability to set the monthly limit.
 
 ** What it does: allows the user to set the continuous monthly limit which will always check the total spending for the
-current month. For example, if the limit was set to be 200 at April, the limit will check the total spend for April.
+current month. For example, if the limit was set to be 200 at April, the limit will check the total spend for April in April.
 When the time comes to May, the limit will no longer check April, instead, the limit
 will check the total spend of May until the last second of May.
 The user will be reminded if the monthly limits have been exceeded and the monthly limit will always be placed at the top of limits' information.
@@ -117,7 +117,8 @@ include::../UserGuide.adoc[tag=limitfeatures]
 |===
 
 include::../DeveloperGuide.adoc[tag=limitfeatures]
-
+include::../DeveloperGuide.adoc[tag=limitUserCase]
+include::../DeveloperGuide.adoc[tag=limitsManualTest]
 
 ---
 
