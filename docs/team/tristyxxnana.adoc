@@ -54,8 +54,6 @@ include::../UserGuide.adoc[tag=grade]
 
 include::../UserGuide.adoc[tag=gradebookcommandsummary]
 
-include::../UserGuide.adoc[tag=gradecommandsummary]
-
 == Contributions to the Developer Guide
 
 |===
