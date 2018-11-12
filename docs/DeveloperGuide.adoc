@@ -1358,8 +1358,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect found commands to try: `found 1 q/x` (where x is larger than the lost quantity of the first item)  +
    Expected: Similar to previous.
 
-=======
-
 === Logging in
 
 . Logging in while all accounts are listed
