@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -16,6 +18,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.note.NoteDate;
+import seedu.address.model.note.NoteLocation;
+import seedu.address.model.note.NoteTime;
+import seedu.address.model.note.NoteTitle;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -29,6 +35,11 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_DATE = "Nov 12 2018";
+    private static final String INVALID_TIME = "11:59PM";
+    private static final String INVALID_TITLE = "Vjuhm5ooTKuDFUS6q3NzGSIk62P5JwV";
+    private static final String INVALID_LOCATION =
+            "je9i3t1FuugQhUI2FwWNDYBwxUqLjIZB8lbtNSMwARXdmgzz09DeD9rtdXcLtxxifDJme2BM6LNDRACj4";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -36,6 +47,10 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_DATE = "12 Nov 2018";
+    private static final String VALID_TIME = "11:59 PM";
+    private static final String VALID_TITLE = "Title";
+    private static final String VALID_LOCATION = "Location";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -204,5 +219,71 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseNoteDate_validValue_returnsNoteDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        String dateWithWhitespaceInBetween = "12" + WHITESPACE + "Nov" + WHITESPACE + "2018";
+
+        NoteDate expectedNoteDate = new NoteDate(VALID_DATE);
+        assertEquals(expectedNoteDate, ParserUtil.parseNoteDate(dateWithWhitespace));
+
+        assertEquals(expectedNoteDate, ParserUtil.parseNoteDate(dateWithWhitespaceInBetween));
+    }
+
+    @Test
+    public void parseNoteDate_invalidValue_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(MESSAGE_INVALID_DATE_FORMAT);
+        ParserUtil.parseNoteDate(INVALID_DATE);
+    }
+
+    @Test
+    public void parseNoteTime_validValue_returnsNoteTime() throws Exception {
+        String timeWithWhitespace = WHITESPACE + VALID_TIME + WHITESPACE;
+        String timeWithWhitespaceInBetween = "11:59" + WHITESPACE + "PM";
+
+        NoteTime expectedNoteTime = new NoteTime(VALID_TIME);
+        assertEquals(expectedNoteTime, ParserUtil.parseNoteTime(timeWithWhitespace));
+
+        assertEquals(expectedNoteTime, ParserUtil.parseNoteTime(timeWithWhitespaceInBetween));
+    }
+
+    @Test
+    public void parseNoteTime_invalidValue_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(MESSAGE_INVALID_TIME_FORMAT);
+        ParserUtil.parseNoteTime(INVALID_TIME);
+    }
+
+    @Test
+    public void parseNoteTitle_validValue_returnsNoteTitle() throws Exception {
+        String titleWithWhitespace = WHITESPACE + VALID_TITLE + WHITESPACE;
+
+        NoteTitle expectedNoteTitle = new NoteTitle(VALID_TITLE);
+        assertEquals(expectedNoteTitle, ParserUtil.parseNoteTitle(titleWithWhitespace));
+    }
+
+    @Test
+    public void parseNoteTitle_invalidValue_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(NoteTitle.MESSAGE_TITLE_EXCEED_MAX_CHAR_COUNT);
+        ParserUtil.parseNoteTitle(INVALID_TITLE);
+    }
+
+    @Test
+    public void parseNoteLocation_validValue_returnsNoteLocation() throws Exception {
+        String locationWithWhitespace = WHITESPACE + VALID_LOCATION + WHITESPACE;
+
+        NoteLocation expectedNoteLocation = new NoteLocation(VALID_LOCATION);
+        assertEquals(expectedNoteLocation, ParserUtil.parseNoteLocation(locationWithWhitespace));
+    }
+
+    @Test
+    public void parseNoteLocation_invalidValue_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(NoteLocation.MESSAGE_LOCATION_EXCEED_MAX_CHAR_COUNT);
+        ParserUtil.parseNoteLocation(INVALID_LOCATION);
     }
 }

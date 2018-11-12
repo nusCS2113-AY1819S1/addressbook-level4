@@ -31,4 +31,11 @@ public class NoteTitle {
     public String toString() {
         return this.title;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof NoteTitle // instanceof handles nulls
+                && title.equals(((NoteTitle) other).title)); // state check
+    }
 }

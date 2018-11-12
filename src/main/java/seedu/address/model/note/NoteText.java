@@ -24,4 +24,11 @@ public class NoteText {
     public String toString() {
         return this.noteText;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof NoteText // instanceof handles nulls
+                && noteText.equals(((NoteText) other).noteText)); // state check
+    }
 }
