@@ -155,4 +155,11 @@ public class MatchScheduleCommand extends Command {
 
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof MatchScheduleCommand // instanceof handles nulls
+                && index.equals(((MatchScheduleCommand) other).index)); // state check
+    }
+
 }

@@ -576,6 +576,42 @@ available commands.
 
 //end::suggestion[]
 
+// tag::schedule[]
+=== Schedule Feature
+==== Current implementation
+The schedule mechanism is facilitated by `Person`. It adds a schedule data set into a `Person` that was previously created
+to keep track of events and allow for searching of common available time slots later on.
+
+Given below is an example of a usage scenario and how the schedule mechanism behaves at each step.
+
+/ This part is to be done later /
+
+==== Design considerations
+Aspect: How schedule is stored
+* Alternative 1 ( Current choice ): Schedule is stored with the Person
+
+** Pros: Easy to implement, easy to display from UI
+** Cons: /TO BE DONE/ Test case constraints
+
+* Alternative 2: Schedule is stored on it's own, with a reference tag from the Person to retrieve and display it.
+** Pros: Separate from the person to improve SOC.
+** Cons: Expensive and difficult to implement.
+
+
+Aspect: How match schedule executes
+
+* Alternative 1 ( Current choice ): Matches schedule only for 1 day
+
+** Pros: Easy to implement, less expensive in memory usage
+** Cons: Unable to check across different dates
+
+* Alternative 2: Matches schedule across entire span
+
+** Pros: Allows for a more friendly usage of matching schedules
+** Cons: Very expensive in memory usage
+
+//end::schedule[]
+
 // tag::calendar[]
 === Calendar Feature
 This feature allows users to complete the to-do task he/she has created.
@@ -598,6 +634,19 @@ image::CalendarSequenceDiagram.png[width="800"]
 ** Pros: Cleaner code since it will be imported from external libraries and better UI. It could potentially speed up the development process.
 ** Cons: CalendarFx so far has version 8, 10 and 11. It does not support Travis which complies most of the packages using jdk9, which potentially hinder the debugging process done by Travis.
 // end::calendar[]
+
+// tag::displayScheduleOnCalendar[]
+=== [Proposed] Display Schedule on Calendar [V2.0]
+
+When a person is selected, the person's schedule should be displayed on the calendar panel.
+
+The string of common time slots printed on the resultCommandWindow should be displayed on the calendar panel, under the
+correct date.
+
+.Calendar UI Component
+image::FutureCalendarUI.png[width="800"]
+
+// end::displayScheduleOnCalendar[]
 
 === Logging
 
@@ -848,6 +897,8 @@ Additional user stories:
 |Priority |As a/an ... |I want to ... |So that I can...
 |`* * *` |student who interacts with a lot of people |export my contacts |share/print them
 
+|`* * *` |student who wishes to schedule project meetings |see common available time slots between selected persons |schedule a project meeting
+
 |`* * *` |student with different group projects |group my contacts into different categories |I can send out messages to different project groups
 
 |`* * *` |team leader of a group project |save the timetable of my project group mates |find potential time slot for
@@ -874,16 +925,16 @@ details manually
 *MSS*
 
 1.  User requests to add personal schedule.
-2.  User adds in non-available time slots with event tag.
-3.  Jithub shows user available time slots.
-4.  User selects a group of persons.
-5.  Jithub shows the common available time slots among all selected persons.
+2.  User adds in non-available time slots for selected persons with event name.
+3.  User selects a group of persons.
+4.  Jithub shows the common available time slots among all selected persons.
 +
 Use Case ends.
 
 *Extensions*
 
-* 2a. User requests to delete added schedule.
+* 2a. User requests to clear added schedule of a person.
+** 2ai. Schedule of selected person is cleared.
 +
 Use case resumes at step 3.
 
@@ -891,7 +942,7 @@ Use case resumes at step 3.
 +
 Use case resumes at step 3.
 
-* 5a. No common time slots available.
+* 4a. No common time slots available.
 +
 Use Case ends.
 

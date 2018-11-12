@@ -72,11 +72,11 @@ public class SampleDataUtil {
     /**
      * Returns a schedule set containing the schedule given.
      */
-    //TODO AS OF RIGHT NOW THIS IS NOT USED
-    //    public static Set<Schedule> getScheduleSet(Date date, Time startTime, Time endTime, EventName eventName) {
-    //        return Arrays.stream(date,startTime,endTime,eventName)
-    //                .map(Schedule::new)
-    //                .collect(Collectors.toSet());
-    //    }
+
+    public static Set<Schedule> getScheduleSet(Schedule... schedules) {
+        Set<Schedule> schedule = new HashSet<>();
+        schedule.add(SAMPLE_SCHEDULE);
+        return schedule;
+    }
 
 }
