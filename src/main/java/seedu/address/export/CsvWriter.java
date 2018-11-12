@@ -32,14 +32,12 @@ public class CsvWriter {
 
     private final String[] header = { "Name", "Phone", "Address", "Email" };
     private final ObservableList<Person> listOfPersons;
-    // private final Path outputFilepath = Paths.get("data" , "pineapple.csv");
     private final Path outputFilepath;
     private final Person person;
 
     public CsvWriter(Person person, Path outputFilepath) {
         requireAllNonNull(person, outputFilepath);
 
-        // TODO: Refactor this to a exportFileWriter interface
         if (!FileUtil.isFileExists(outputFilepath)) {
             try {
                 FileUtil.createFile(outputFilepath);
@@ -87,7 +85,6 @@ public class CsvWriter {
 
             writer.writeNext(header);
 
-            // TODO: think of a better way to minimize LOC
             if (listOfPersons != null) {
                 writeMultiplePersons(writer);
             } else if (person != null) {

@@ -5,12 +5,10 @@
 :imagesDir: ../images/jitwei98.png
 :stylesDir: ../stylesheets
 
-// image::../jitwei98.png[width="150", align="left"]
+//image::../jitwei98.png[width="150", align="left"]
 
-// TODO: one line description of the product
 == PROJECT: https://github.com/CS2113-AY1819S1-W12-1/main[JitHub]
 
-// TODO: include UI screenshot here
 image::../Ui.png[width="600"]
 ---
 
@@ -28,44 +26,35 @@ Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_inter
 
 *JitHub* can:
 
-** Suggest available timeslot for  group project meetings
-** Import/Export data between group members
-** Keep track of meeting minutes
-** Keep track of tasks assigned to group members
-
-// TODO: add more stuff here
+** Suggest available timeslot for group project meetings
+** Import/Export contacts details between group members
+** Keep track of your todos
+** Suggest/Autocomplete your commands
 
 
 == Summary of contributions
 
-// TODO: add file format supported in appendix?
-// TODO: add preface?
-// TODO: how many LOC?
-* *Major enhancement*: added the ability to *import/export data of different project groups*
+* *Major enhancement*: added the ability to *import/export contacts details of different project groups*
 
-** What it does: allows students to share data specific to different projects among his/her group members.
+** What it does: allows students to share contact details specific to different projects among his/her group members.
 
 ** Justification: This feature improves the product significantly because only one member from the group is required to key in all the details, in contrast to requiring everyone in the team to type in the exact same details, which is tedious and inefficient.
-// TODO: edit this part
 ** Highlights: This enhancement required an in-depth analysis of design alternatives regarding reading and writing data. The implementation too was challenging as it required thorough understanding of all the components related to data storage in the application.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
-// TODO: end
-// TODO: add screenshot here
+** Credits: http://opencsv.sourceforge.net/[OpenCSV]
 
 // Excluded for 2113T
 //* *Minor enhancement*: added an UI enhancement that *displays the total number of persons* in the application and the ability for the application to *backup the storage file* locally.
 
-// TODO: edit this part
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jitwei98[Functional code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jitwei98[Functional code]] -
+ about 2K LoC(Lines of Code) including tests.
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed milestones `v1.1` - `v1.4` (3 milestones) on GitHub
+*** Managed milestones `v1.1` - `v1.4` (4 milestones) on GitHub
 ** Enhancements to existing features:
-// TODO: edit the following line
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Updated the GUI to reflect persons and todos (Pull requests https://github.com[#117])
+*** Wrote additional tests for existing features to increase coverage from 77% to 80% (Pull requests https://github.com[#200])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 // end edit
@@ -86,9 +75,10 @@ Our end product, *JitHub*, is a https://en.wikipedia.org/wiki/Command-line_inter
  _They showcase my ability to **write documentation targeting end-users.**_
 |===
 
-//include::../UserGuide.adoc[tag=undoredo]
-//
-//include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=export]
+include::../UserGuide.adoc[tag=import]
+include::../UserGuide.adoc[tag=exportall]
+
 
 == Contributions to the Developer Guide
 
@@ -99,9 +89,138 @@ _They showcase my ability to **write technical documentation and the technical d
 project.**_
 |===
 
-//include::../DeveloperGuide.adoc[tag=undoredo]
-//
-//include::../DeveloperGuide.adoc[tag=dataencryption]
+// tag::export[]
+[[Design-Export]]
+=== Export component
+
+.Structure of the Export Component
+image::../ExportClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/export/Export.java[`Export.java`]
+
+The `Export` component can save the filtered persons to the specified file in xml format.
+// end::export[]
+
+// tag::import[]
+[[Design-Import]]
+=== Import component
+
+.Structure of the Import Component
+image::../ImportClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/export/Import.java[`Import.java`]
+
+The `Import` component can read the Address Book data from the specified file in xml format.
+
+[NOTE]
+====
+The import component (Import.java and ImportManager.java) is packaged under the export package.
+====
+// end::import[]
+
+
+// tag::exportall[]
+[[exportall]]
+=== ExportAll feature
+==== Current Implementation
+
+The exportall mechanism is facilitated by `CsvWriter`. Internally, a CSVWriter object from the http://opencsv.sourceforge.net/[OpenCSV]
+library is instantiated to write all persons to the default file path `/data/jithub.csv`. Currently, it implements
+ the following operation(s):
+
+* `CsvWriter#write()` -- Writes the name, phone, address, and email of all persons in the current address book to
+`/data/jithub.csv`, and overwrites the file if an older version is available.
+
+This operation is exposed in the `Model` interface as `Model#exportAddressBook()`.
+
+Given below is an example usage scenario and how the exportall mechanism behaves at each step.
+
+Step 1. The user calls the exportall command with `exportall csv`.
+
+Step 2. The LogicManager calls parseCommand with the user input.
+
+Step 3. The AddressBookParser is called and it returns a ExportAllCommand object to LogicManager.
+
+Step 4. The LogicManager calls execute() on the ExportAllCommand object
+
+Step 5. The Logic component then interacts with the Model component by calling `exportAddressBook()` of the Model
+interface.
+
+Step 6. The Model interface creates a new CsvWriter object and invokes the method `write()`.
+
+Step 7. The CsvWriter writes the data to the defined file path.
+
+[NOTE]
+The file path is defined in `outputFilepath`, and is hardcoded as `/data/jithub.csv` for now.
+
+[NOTE]
+Any existing file named as `jithub.csv` at the defined path will be overwritten.
+
+The following sequence diagram shows how the ExportAll operation works:
+
+image::../ExportAllSequenceDiagram.png[width="800"]
+
+// The following activity diagram summarizes what happens when `CsvWriter#write()` is called:
+// TODO: show the if condition for file exists and not exists
+// image::UndoRedoActivityDiagram.png[width="650"]
+
+// TODO: implementation details of write()
+==== Implementation of CsvWriter#write()
+Given below is the algorithm behind the write() method used in the `ExportAll` Command:
+
+Step 1. Instantiate an OpenCSV writer.
+
+Step 2. Write the header to the csv file.
+
+Step 3. Declare a `List<String[]> data`.
+
+Step 4. Loop through an
+https://docs.oracle.com/javase/8/javafx/api/javafx/collections/ObservableList.html[`ObservableList<Person>`]
+containing all persons in the AddressBook and push `String[] personDetails` to `data`.
+
+    // Generates a string array for each person and stores the details
+    String[] personDetails = new String[header.length];
+    personDetails[INDEX_PERSON_NAME] = person.getName().toString();
+    personDetails[INDEX_PERSON_PHONE] = person.getPhone().toString();
+    personDetails[INDEX_PERSON_ADDRESS] = person.getAddress().toString();
+    personDetails[INDEX_PERSON_EMAIL] = person.getEmail().toString();
+
+Step 5. Write `data` to the csv file.
+
+Step 6. Close the OpenCSV writer.
+
+==== Design Considerations
+
+===== Aspect: How data in the AddressBook is passed into the CsvWriter object
+
+* **Alternative 1 (current choice):** `ObservableList<Person>`
+** Pros: Easy to implement since `getFilteredPersonList()` is already implemented.
+** Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** `versionedAddressBook`
+** Pros: Looks more direct since the whole AddressBook is passed into the `CsvWriter`.
+** Cons: Hard to write tests and requires more methods to process the data.
+
+* **Solution**: The data is passed into the `CsvWriter` object through its constructor as an `ObservableList<Person>`.
+// end::exportall[]
+
+[appendix]
+== User Stories
+[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
+|===========================================================================================================================================
+|Priority |As a/an ... |I want to ... |So that I can...
+|`* * *` |student who does not like to do unnecessary work |import the contact details my group members saved before
+|avoid unnecessary typing
+
+|`* * *` |student who likes to save the trouble of my group mates |export the contact details of my other group members
+that I have saved |share it to my group members for them to import to their JitHub
+|===========================================================================================================================================
+
+include::../DeveloperGuide.adoc[tag=exportusecase]
+
+include::../DeveloperGuide.adoc[tag=manualtesting]
+
+include::../DeveloperGuide.adoc[tag=testimportexport]
+
 //TODO: end edit
 
 // TODO: include links

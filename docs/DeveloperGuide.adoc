@@ -232,6 +232,35 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
 
+// tag::export[]
+[[Design-Export]]
+=== Export component
+
+.Structure of the Export Component
+image::ExportClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/export/Export.java[`Export.java`]
+
+The `Export` component can save the filtered persons to the specified file in xml format.
+// end::export[]
+
+// tag::import[]
+[[Design-Import]]
+=== Import component
+
+.Structure of the Import Component
+image::ImportClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/export/Import.java[`Import.java`]
+
+The `Import` component can read the Address Book data from the specified file in xml format.
+
+[NOTE]
+====
+The import component (Import.java and ImportManager.java) is packaged under the export package.
+====
+// end::import[]
+
 [[Design-Commons]]
 === Common classes
 
@@ -322,15 +351,16 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // end::undoredo[]
 
 // tag::exportall[]
-=== ExportAll Feature
+[[exportall]]
+=== ExportAll feature
 ==== Current Implementation
 
 The exportall mechanism is facilitated by `CsvWriter`. Internally, a CSVWriter object from the http://opencsv.sourceforge.net/[OpenCSV]
-library is instantiated to write all persons to the default file path `/data/addressbook.csv`. Currently, it implements
+library is instantiated to write all persons to the default file path `/data/jithub.csv`. Currently, it implements
  the following operation(s):
 
 * `CsvWriter#write()` -- Writes the name, phone, address, and email of all persons in the current address book to
-`/data/addressbook.csv`, and overwrites the file if an older version is available.
+`/data/jithub.csv`, and overwrites the file if an older version is available.
 
 This operation is exposed in the `Model` interface as `Model#exportAddressBook()`.
 
@@ -352,10 +382,10 @@ Step 6. The Model interface creates a new CsvWriter object and invokes the metho
 Step 7. The CsvWriter writes the data to the defined file path.
 
 [NOTE]
-The file path is defined in `outputFilepath`, and is hardcoded as `/data/addressbook.csv` for now.
+The file path is defined in `outputFilepath`, and is hardcoded as `/data/jithub.csv` for now.
 
 [NOTE]
-Any existing file named as `addressbook.csv` at the defined path will be overwritten.
+Any existing file named as `jithub.csv` at the defined path will be overwritten.
 
 The following sequence diagram shows how the ExportAll operation works:
 
@@ -366,7 +396,7 @@ image::ExportAllSequenceDiagram.png[width="800"]
 // image::UndoRedoActivityDiagram.png[width="650"]
 
 // TODO: implementation details of write()
-==== write()
+==== Implementation of CsvWriter#write()
 Given below is the algorithm behind the write() method used in the `ExportAll` Command:
 
 Step 1. Instantiate an OpenCSV writer.
@@ -949,7 +979,6 @@ A project often depends on third-party libraries. For example, Address Book depe
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
-
 [appendix]
 == Product Scope
 
@@ -990,7 +1019,11 @@ Additional user stories:
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |===========================================================================================================================================
 |Priority |As a/an ... |I want to ... |So that I can...
-|`* * *` |student who interacts with a lot of people |export my contacts |share/print them
+|`* * *` |student who does not like to do unnecessary work |import the contact details my group members saved before
+|avoid unnecessary typing
+
+|`* * *` |student who likes to save the trouble of my group mates |export the contact details of my other group members
+that I have saved |share it to my group members for them to import to their JitHub
 
 |`* * *` |student who wishes to schedule project meetings |see common available time slots between selected persons |schedule a project meeting
 
@@ -1012,7 +1045,7 @@ details manually
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `JitHub` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Add and Match schedule
@@ -1068,37 +1101,32 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
-
+// tag::exportusecase[]
 [discrete]
 === Use case: Export contacts
 
 *MSS*
 
-. User requests to export contacts.
-. AddressBook shows a list of persons and prompts user to select contacts to export.
-. User chooses contacts with specific tags in the list to export.
-. AddressBook prompts user for the filename and format (csv/vcf) of the output file.
-. User chooses a filename and format.
-. AddressBook generates the output file.
-+
+. User finds the contacts he wants to export.
+. JitHub shows a list of contacts matching the search criteria.
+. User requests to export the contacts shown to a file with specific filename.
+. JitHub exports the list of contacts to the specific file.
+. User sends the file to his/her group members.
 Use case ends.
 
 *Extensions*
 
 * 2a. The list is empty.
+** 2a1. User requests to export the empty contacts to a file with specific filename.
+** 2a2. JitHub indicates there is nothing to export.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
-** 3a1. AddressBook shows an error message.
+* 3a. The given filename is invalid.
+** 3a1. JitHub shows an error message.
 +
-Use case resumes at step 2.
-
-* 5a. The given format is invalid.
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 4.
+Use case resumes at step 3.
+// end::exportusecase[]
 
 // tag::useCaseSuggestions[]
 [discrete]
@@ -1165,6 +1193,7 @@ Given below are instructions to test the app manually.
 
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+// end::manualtesting[]
 
 === Launch and Shutdown
 
@@ -1219,10 +1248,31 @@ These instructions only provide a starting point for testers to work on; testers
 
 //end::testCaseSuggestions[]
 
-=== Saving data
+// tag::testimportexport[]
+=== Exporting and importing data
 
-. Dealing with missing/corrupted data files
+. Exporting an empty list
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Prerequisites: Clear all persons using the `clear` command.
+.. Test case: `export somefile` +
+   Expected: Error message "Invalid command format!"
+.. Test case: `export somefile.xml` +
+   Expected: Error message "There is nothing to export!"
 
+. Importing a non-existent file
+
+.. Prerequisites: The file `somefile.xml` does not exist at `<DIRECTORY OF YOUR JAR>/data/`
+.. Test case: `import somefile` +
+   Expected: Error message "Invalid command format!"
+.. Test case: `import somefile.xml` +
+   Expected: Error message "File not found!"
+
+. Exporting and importing the whole JitHub
+
+.. Prerequisites: List all persons using the `list` command.
+.. Test case: `export somefile.xml` + `clear` + `import somefile.xml` +
+   Expected:
+   * The persons listed are cleared after the `clear` command.
+   * The persons cleared are restored after the `import` command.
+// end::testimportexport[]
 _{ more test cases ... }_

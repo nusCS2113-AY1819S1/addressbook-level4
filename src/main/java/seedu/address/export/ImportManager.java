@@ -17,7 +17,6 @@ import seedu.address.storage.XmlFileStorage;
 import seedu.address.storage.XmlSerializableAddressBook;
 
 //@@author jitwei98
-// TODO: add interface and headers
 /**
  * Manages importing of AddressBook data.
  */
@@ -52,7 +51,6 @@ public class ImportManager implements Import {
 
         XmlSerializableAddressBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
         try {
-            // TODO: how to handle the returned addressbook and addPersons?
             return Optional.of(xmlAddressBook.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
