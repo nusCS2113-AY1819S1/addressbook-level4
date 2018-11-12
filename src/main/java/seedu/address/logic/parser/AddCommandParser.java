@@ -72,7 +72,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static String rewordDepartment(String input) {
         String lowercase = input.toLowerCase();
-        String output = lowercase.substring(0,1).toUpperCase() + lowercase.substring(1);
+        String output = lowercase.substring(0, 1).toUpperCase() + lowercase.substring(1);
         return output;
     }
 
