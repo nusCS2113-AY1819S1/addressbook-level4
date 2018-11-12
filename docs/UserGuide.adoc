@@ -330,8 +330,14 @@ Examples:
 * `todo tt/Buy grocery c/Buy tomato and potato on the way back home`
 
 The following diagram illustrates how the `todo` is being used on the JitHub CLI-GUI app:
+
++
 image::TodoUsage1.png[width="500"]
++
+
++
 image::TodoUsage2.png[width="500"]
++
 
 === Finish To-do task: `finishTodo`
 
@@ -348,7 +354,10 @@ Examples:
 ====
 
 The following diagram illustrates how the `finishTodo` is being used on the JitHub CLI-GUI app:
+
++
 image::FinishTodoUsage.png[width="500"]
++
 
 === Add Reminder: `reminder` [coming in v1.4]
 
@@ -409,7 +418,9 @@ Once you start running the application and select a person from the person list 
 
 The following diagram shows how the calendar looks like for November 2018.
 
++
 image::CalendarView.png[width="500"]
++
 
 // tag::calendarViewSchedule[]
 === Calendar to view schedule [Coming in V2.0]
