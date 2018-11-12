@@ -11,7 +11,7 @@ Project: Club Hub
 
 [width="100%",cols="50%,50%",]
 |=======================================================================
-|image:image001.png[Tip icon,width=15,height=15] |Club Hub is
+|image:image004.png[Tip icon,width=15,height=15] |Club Hub is
 a desktop address book application designed for University interest
 group/club leaders as its primary users. This application aims to help
 these leaders better manage their members, finances, calendar, and
@@ -26,7 +26,7 @@ JavaFX. It is written in Java and has about 10 thousand lines of codes.
 
 [width="100%",cols="50%,50%",]
 |=======================================================================
-|image:image002.png[Tip icon,width=15,height=15] a|
+|image:image004.png[Tip icon,width=15,height=15] a|
 Major enhancements: implemented the Club Account feature
 
 -        Function 1: adding or removing a ledger record.
@@ -65,7 +65,7 @@ indexes as mentioned in the description for function 2.
 
 [width="100%",cols="50%,50%",]
 |=======================================================================
-|image:image001.png[Tip icon,width=15,height=15] a|
+|image:image004.png[Tip icon,width=15,height=15] a|
 Code:
 [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-10-18&timeframe=day&reverse=false&repoSort=true[Functional
 Code]]
