@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.module.Module;
-
+/**
+ * This is a class to assist Module-related tests.
+ */
 public class TypicalModules {
 
     public static final Module CS2113 = new ModuleBuilder().withModuleCode("CS2113")

@@ -73,6 +73,13 @@ public class CourseEditCommand extends Command {
                 updatedCourse.getCourseName()), cm.getTableRepresentation());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CourseEditCommand // instanceof handles nulls
+                && editCourseDescriptor.equals(((CourseEditCommand) other).editCourseDescriptor));
+    }
+
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.

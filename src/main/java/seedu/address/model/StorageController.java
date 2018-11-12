@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import seedu.address.commons.util.XmlUtil;
+import seedu.address.model.user.User;
+import seedu.address.model.user.UserManager;
 import seedu.address.storage.adapter.XmlAdaptedClassroom;
 import seedu.address.storage.adapter.XmlAdaptedClassroomAttendance;
 import seedu.address.storage.adapter.XmlAdaptedCourse;
@@ -300,5 +302,11 @@ public class StorageController {
     public static void setGradeStorage(ArrayList<XmlAdaptedGrades> gradesStorage) {
         StorageController.gradesStorage = gradesStorage;
 
+    }
+
+    public static void setUpSampleData() {
+        createFiles();
+        UserManager.getInstance().addUser(new User("defaultUser", "password", 1));
+        UserManager.getInstance().saveUserList();
     }
 }

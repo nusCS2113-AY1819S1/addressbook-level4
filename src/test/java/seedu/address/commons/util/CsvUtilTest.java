@@ -10,7 +10,9 @@ import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
+/**
+ * This is a test class for CsvUtilTest
+ */
 public class CsvUtilTest {
 
     private static String fileName = "test_file";

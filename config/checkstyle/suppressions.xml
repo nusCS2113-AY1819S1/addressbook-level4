@@ -5,6 +5,5 @@
 "http://checkstyle.sourceforge.net/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-  <suppress checks="JavadocType" files=".*Test\.java"/>
-  <suppress checks="[a-zA-Z0-9]*" files="[\\/]test[\\/]*"/>
+
 </suppressions>

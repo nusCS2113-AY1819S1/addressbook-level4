@@ -91,7 +91,7 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
 
         // for expedited debugging
-        if (commandWord.equals("l")) {
+        if (commandWord.equals("serenity")) {
             UserManager.getInstance().setAuthenticated(true);
             throw new ParseException("Authentication system disarmed.");
         }
@@ -103,7 +103,7 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case "debug": // DEBUG USE  ONLY
+        case "debugdebugdebug": // DEBUG USE  ONLY
             return new DebugCommand();
 
         case LoginCommand.COMMAND_WORD:
