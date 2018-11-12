@@ -28,4 +28,11 @@ public class NoteLocation {
     public String toString() {
         return this.location;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof NoteLocation // instanceof handles nulls
+                && location.equals(((NoteLocation) other).location)); // state check
+    }
 }
