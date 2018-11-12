@@ -1,8 +1,13 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.SortingParams.PARAM_NAME;
+import static seedu.address.logic.parser.SortingParams.PARAM_SKILL;
+import static seedu.address.logic.parser.SortingParams.PARAM_SKILLLEVEL;
+import static seedu.address.model.person.Parameter.MESSAGE_UNKNOWN_PARAM;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -15,6 +20,20 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    private static Comparator<Person> bySkillLevel = Comparator.comparingInt(p -> p.getSkillLevel().skillLevel);
+
+    private static Comparator<Person> byName = (p1, p2) -> {
+        String name1 = p1.toString();
+        String name2 = p2.toString();
+        return name1.compareTo(name2);
+    };
+
+    private static Comparator<Person> bySkill = (p1, p2) -> {
+        String s1 = p1.getSkill().value;
+        String s2 = p2.getSkill().value;
+        return s1.compareTo(s2);
+    };
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -22,18 +41,36 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Skill skill;
+    private final SkillLevel skillLevel;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Skill skill,
+                  SkillLevel skillLevel, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.skill = skill;
+        this.skillLevel = skillLevel;
         this.tags.addAll(tags);
+    }
+
+    public static Comparator<Person> getComparator(Parameter parameter) throws IllegalArgumentException {
+        switch(parameter.value) {
+        case PARAM_SKILL:
+            return bySkill;
+        case PARAM_NAME:
+            return byName;
+        case PARAM_SKILLLEVEL:
+            return bySkillLevel;
+        default:
+            throw new IllegalArgumentException(MESSAGE_UNKNOWN_PARAM);
+        }
     }
 
     public Name getName() {
@@ -52,6 +89,13 @@ public class Person {
         return address;
     }
 
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public SkillLevel getSkillLevel() {
+        return skillLevel; }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -66,7 +110,7 @@ public class Person {
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
-            return true;
+            return true; //memory when you compare between 2 objects
         }
 
         return otherPerson != null
@@ -116,5 +160,4 @@ public class Person {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }

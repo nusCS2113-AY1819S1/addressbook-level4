@@ -18,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
+import seedu.address.logic.LoginManager;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -116,23 +117,35 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Starts a pop-up window which prompts the user for input of login credentials.
+     */
+    private void initializeLoginProcess() {
+        LoginWindow loginWindow = new LoginWindow();
+        loginWindow.initializeLogin(logic);
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        do {
+            initializeLoginProcess();
+        } while(!(LoginManager.getIsLoginSuccessful()));
+
+        CommandBox commandBox = new CommandBox(logic);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        ResultDisplay resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(logic);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     void hide() {

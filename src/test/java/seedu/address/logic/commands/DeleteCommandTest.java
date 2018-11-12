@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalAccounts.getTypicalLoginBook;
+import static seedu.address.testutil.TypicalClubBudgetElements.getTypicalClubBudgetElementsBook;
+import static seedu.address.testutil.TypicalFinalClubBudget.getTypicalFinalBudgetsBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -26,7 +29,8 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(),
+            getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -36,7 +40,9 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getLoginBook(), model.getAddressBook(),
+                model.getClubBudgetElementsBook(),
+                model.getFinalBudgetsBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         expectedModel.commitAddressBook();
 
@@ -60,7 +66,8 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLoginBook(), model.getAddressBook(),
+                model.getClubBudgetElementsBook(), model.getFinalBudgetsBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         expectedModel.commitAddressBook();
         showNoPerson(expectedModel);
@@ -85,7 +92,9 @@ public class DeleteCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLoginBook(), model.getAddressBook(),
+                model.getClubBudgetElementsBook(),
+                model.getFinalBudgetsBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         expectedModel.commitAddressBook();
 
@@ -124,7 +133,8 @@ public class DeleteCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getLoginBook(), model.getAddressBook(),
+                model.getClubBudgetElementsBook(), model.getFinalBudgetsBook(), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -170,7 +180,7 @@ public class DeleteCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+        model.executeSearch(p -> false);
 
         assertTrue(model.getFilteredPersonList().isEmpty());
     }

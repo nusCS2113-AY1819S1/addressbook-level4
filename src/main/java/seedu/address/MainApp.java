@@ -18,20 +18,33 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ClubBudgetElementsBook;
+import seedu.address.model.FinalBudgetsBook;
+import seedu.address.model.LoginBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClubBudgetElementsBook;
+import seedu.address.model.ReadOnlyFinalBudgetBook;
+import seedu.address.model.ReadOnlyLoginBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.ClubBudgetElementsBookStorage;
+import seedu.address.storage.FinalBudgetsBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.LoginBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.XmlClubBudgetElementsBookStorage;
+import seedu.address.storage.XmlFinalBudgetsBookStorage;
+import seedu.address.storage.XmlLoginBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -40,7 +53,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -50,7 +63,6 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
 
     @Override
     public void init() throws Exception {
@@ -62,8 +74,14 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
+        LoginBookStorage loginBookStorage = new XmlLoginBookStorage(userPrefs.getLoginBookFilePath());
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ClubBudgetElementsBookStorage clubBudgetElementsBookStorage =
+                new XmlClubBudgetElementsBookStorage(userPrefs.getClubBudgetElementsBookFilePath());
+        FinalBudgetsBookStorage finalBudgetsBookStorage =
+                new XmlFinalBudgetsBookStorage(userPrefs.getFinalBudgetsBookFilePath());
+        storage = new StorageManager(loginBookStorage, addressBookStorage, clubBudgetElementsBookStorage,
+                finalBudgetsBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -77,13 +95,36 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address book, club budget elements book
+     * final budgets book and {@code userPrefs}. <br>
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Similarly for club budget elements book.
+     * However, for final budgets book if {@code storage}'s final budgets book is not found then an empty final budgets
+     * book will be used.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+        Optional<ReadOnlyLoginBook> loginBookOptional;
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyClubBudgetElementsBook> clubBudgetElementsBookOptional;
+        Optional<ReadOnlyFinalBudgetBook> finalBudgetBookOptional;
+        ReadOnlyLoginBook initialLoginData;
         ReadOnlyAddressBook initialData;
+        ReadOnlyClubBudgetElementsBook initialClubBudgetData;
+        ReadOnlyFinalBudgetBook initialFinalBudgetData;
+        try {
+            loginBookOptional = storage.readLoginBook();
+            if (!loginBookOptional.isPresent()) {
+                logger.info("Login data file not found. Will be starting with a new LoginBook");
+            }
+            initialLoginData = loginBookOptional.orElseGet(SampleDataUtil::getSampleLoginBook);
+        } catch (DataConversionException e) {
+            logger.warning("Login data file not in the correct format. Will be starting with an empty LoginBook");
+            initialLoginData = new LoginBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty LoginBook");
+            initialLoginData = new LoginBook();
+        }
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -97,8 +138,41 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
+        try {
+            clubBudgetElementsBookOptional = storage.readClubBudgetElementsBook();
+            if (!clubBudgetElementsBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample ClubBudgetElementsBook");
+            }
+            initialClubBudgetData = clubBudgetElementsBookOptional
+                    .orElseGet(SampleDataUtil::getSampleClubBudgetElementsBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty"
+                    + "ClubBudgetElementsBook");
+            initialClubBudgetData = new ClubBudgetElementsBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty"
+                    + "ClubBudgetElementsBook");
+            initialClubBudgetData = new ClubBudgetElementsBook();
+        }
+        try {
+            finalBudgetBookOptional = storage.readFinalBudgetsBook();
+            if (!finalBudgetBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with an empty FinalBudgetsBook");
+            }
+            initialFinalBudgetData = finalBudgetBookOptional
+                    .orElseGet(SampleDataUtil::getSampleFinalBudgetsBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty"
+                    + "FinalBudgetsBook");
+            initialFinalBudgetData = new FinalBudgetsBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty"
+                    + "FinalBudgetsBook");
+            initialFinalBudgetData = new FinalBudgetsBook();
+        }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialLoginData, initialData, initialClubBudgetData, initialFinalBudgetData,
+                userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -180,7 +254,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
+        CommandHistory history = new CommandHistory();
+        ui.start(primaryStage, model, history);
     }
 
     @Override
