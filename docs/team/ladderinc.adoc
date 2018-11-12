@@ -3,16 +3,16 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: NUSSU Connect
-
-
 == Introduction and Overview
-This Portfolio is a documentation of the contributions that I have made during the development of this application, named
-*NUSSU Connect*. It is a CLI application developed by team https://cs2113-ay1819s1-f09-1.github.io/main/AboutUs.html[F09-1] and
-it mainly caters to executive committee members of the NUS Student Union (NUSSU).
+This Portfolio is a documentation of the contributions that I have made during the development of the application,
+titled *NUSSU Connect*.
 
-Being a part of many projects and initiatives, this application aims to let the exco members manage their
-budgets, expenses, human resource allocation and contacts with an additional security guarantee so that they could complete their tasks with high efficiency.
+*NUSSU Connect* is a CLI application developed by team https://cs2113-ay1819s1-f09-1.github.io/main/AboutUs.html[F09-1] and it
+ is developed to be used by the executive committee members of the NUS Student Union (NUSSU).
+
+It comes with multiple features that NUSSU executive members will find useful. This includes budgets and expenses management,
+human resource allocation, easy management of contacts database, and all these come with additional security guarantee
+by the multi-user access level feature.
 
 == Summary of contributions
 
@@ -22,27 +22,28 @@ Further details about my contributions will be explained in this section.
 
 * *Major enhancement*: Added the ability to prune the list of contacts by keeping a record of Search History.
 
-** What it does: Each subsequent execution of `find` commands allows users to search and reduce the size
-of the current displayed list of contacts. `undofind` command does the opposite and reverts the last `find`
-command executed.
+** What it does: Each subsequent execution of `find` commands allows users to search according to the
+ current displayed list of contacts. `undofind` command does the opposite and reverts the last `find`
+ command executed.
 
-** Justification: NUSSU exco is an organization that will most likely be required to keep track of
-a large list of important contacts. Therefore it will be time-consuming to locate one/a specific group of contact information from the list.
-Hence, a search pruning feature allows the users to narrow the search space in discrete steps and help them
+** Why we need this feature: NUSSU exco is an organization that will most likely be required to keep track of
+a large database of important contacts. Therefore it will be time-consuming and tedious to locate specific contacts information
+from the database. Hence, a search pruning feature allows the users to narrow down the search space in discrete steps and help any users
 retrieve the relevant contact information much more efficiently.
 
 ** Highlights: This enhancement is mainly created from scratch with some help from documentations on how the `Predicate` class works.
 This enhancement was also created with re-usability in mind and any form of filtering done with `Predicate` will be able to
 utilize this feature.
 
-* *Minor enhancement*: Added the feature that allows users to see a history of keywords they used in their search when utilizing the Search Pruning feature.
+* *Minor enhancement*: Added an enhancement to Search Pruning Feature that allows users to see a history of keywords
+that they have executed previously.
 
 ** What it does: Every time a user performs a search, the command result box will display the list of keywords describing how the current displayed list is being filtered.
 
 * *Minor enhancement*: Improved find command by introducing searching by tags and exclude functionality
 
-** What it does: Searching by tags allows users to filter the contacts according to the tagged description of each contact. Exclude functionality allows users to remove
-unwanted results from their search.
+** What it does: Searching by tags allows users to filter the contacts according to the tagged description of each contact.
+Exclude functionality allows users to remove unwanted results from their search.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=ladderinc[Overview]]
 
