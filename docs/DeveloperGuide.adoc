@@ -1367,14 +1367,14 @@ Expected:  Invalid command will be displayed in the result box. No changes will 
 .. Prerequisites: +
 Added an event that is happening in the next 24 hours +
 Logged in as user +
-Registered to upcoming event 
+Registered to upcoming event
 .. Testcase: `reminder` +
 Expected: An alert dialog shows up for the relevant event, showing the name of the event and the event's start time. Hitting 'enter' should close the alert dialog.
 
 . Requesting for reminders as a user not registered for an upcoming event
 .. Prerequisites: +
 Added an event that is happening in the next 24 hours +
-Logged in as user 
+Logged in as user
 .. Testcase: `reminder` +
 Expected: Event Manager shows message that there are no upcoming events for you in the logger.
 
