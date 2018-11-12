@@ -276,7 +276,7 @@ public class ClassroomManager {
     public String getClassroomHtmlRepresentation() {
         final StringBuilder builder = new StringBuilder();
 
-        builder.append(HtmlTableProcessor.getH3Representation("Class List"));
+        builder.append(HtmlTableProcessor.getBanner("Class List"));
 
         for (Classroom c : classroomList) {
             builder.append(HtmlTableProcessor.renderTableStart(new ArrayList<>(
@@ -305,7 +305,7 @@ public class ClassroomManager {
      */
     public String getClassroomAttendanceHtmlRepresentation(Classroom classToListAttendance) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(HtmlTableProcessor.getH3Representation(String.format(
+        builder.append(HtmlTableProcessor.getBanner(String.format(
                 ClassListStudentAttendanceCommand.HTML_TABLE_TITLE_ATTENDANCE,
                 classToListAttendance.getClassName(), classToListAttendance.getModuleCode())));
         String studentStatus = "";
