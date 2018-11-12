@@ -65,11 +65,9 @@ which will be described in <<Features>>.
 User may use the kbd:[&#x2191;] kbd:[&#x2193;] keys to navigate the list and select a word they wish to complete
 their input with using kbd:[Enter]. If user does not wish to select a word for completion, user may press kbd:[ESC] or
 kbd:[Space] or mouseclick anywhere else in the command box to move onto another word.
-
 Auto completion is performed word by word and after completing a word, the typing caret will appear at the end
 of the newly completed word. Previously existing text before and after the completed word will not be lost and will
-be shifted accordingly. For purposes of auto completion, words are not restricted to just alphabetical inputs
-but also numerics and the necessary symbols for the functions.
+be shifted accordingly.
 
 When the suggestion window is not open, user may use kbd:[&#x2190;] and kbd:[&#x2192;] to navigate the text and
 may go back to change previously entered texts. These texts will also allow autocompletion if possible, depending on the
@@ -83,13 +81,12 @@ kbd:[Ctrl]+kbd:[A].
 * Word suggestions are not case sensitive. e.g. `HEL` will have a possible suggestion `help`.
 * Whitespaces will not affect the accuracy of the autocomplete.
 ====
-
+// end::autocomplete-a[]
 
 image::AutoComplete.png[width="790"]
 *Screenshot of auto-complete in action*
 
 ** Typing `a` triggers suggestions of command words that begin with `a`.
-// end::autocomplete-a[]
 
 [[Features]]
 == Basic Features
@@ -328,17 +325,9 @@ asc name`.
 
 Examples:
 
-* `sort date` +
-Sorts the list of records by date in ascending order.
-
-* `sort desc` +
-Sorts the list of records by name in descending order.
-
-* `sort name asc` +
-Sorts the list of records by name in ascending order.
-
-* `sort moneyflow desc` +
-Sorts the list of records by moneyflow in descending order.
+* `sort date` - Sorts records by date in ascending order.
+* `sort desc` - Sorts records by name in descending order.
+* `sort moneyflow desc` - Sorts records by moneyflow in descending order.
 // end::sort[]
 
 Auto-Completion: +
@@ -573,6 +562,7 @@ Auto-Completion: +
 ** Suggestions are currently limited to inputs from `jan-2018` to `dec-2018`.
 
 * There will be no suggestions on parameters that co
+// end::autocomplete-i[]
 
 // tag::stats[]
 === Showing a breakdown of total expenses and income into categories: `stats`

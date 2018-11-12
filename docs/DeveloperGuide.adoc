@@ -464,16 +464,9 @@ sorted by and the sort order.
 This feature has one keyword `sort` and takes in arguments of either category or order of sort. Keywords are not
 case sensitive.
 
-Category can be either of the following keywords:
+Category can be either of the following keywords: `name`, `date`, `money`, `moneyflow`
 
-* `name` - To sort in lexicographical order by the name attribute of the record
-* `date` - To sort by the date attribute of the record
-* `money`/`moneyflow` - To sort by the expenditure or income of the record
-
-Order can be either of the following keywords:
-
-* `desc` - To sort in descending order
-* `asc` - To sort in ascending order
+Order can be either of the following keywords: `desc` - descending, `asc` - ascending
 
 This feature has 2 different kind of modes as follows:
 
@@ -704,17 +697,6 @@ and obtain a new `filteredRecords` based on the predicate, which will also trigg
 The following sequence diagram shows how the limit operation works:
 
 image::FindTagSequenceDiagram.png[width:800]
-
-==== Design Considerations
-===== Aspect: Data structure to support statistic command
-* **Alternative 1 (current choice):** The pie chart breakdown is regenerated from the filtered list every time this command is called.
-** Pros: Reduce overhead during normal operations like adding, deleting and editing if we do not have to update the statistics in real time.
-** Cons: If the command is called multiple times, this process could be repeated many times which may make the app sluggish when there are many records.
-
-* **Alternative 2:** Use a data structure to store the statistic information when there is mutation of data
-** Pros: Since the statistics are constantly updated, whenever the command is called, system can read directly and not have to recompute.
-** Cons: Adds overhead to usual operations. Benefits may not be visible if the command is not called frequently.
-
 // end::findtag[]
 
 // tag::limitfeatures[]
