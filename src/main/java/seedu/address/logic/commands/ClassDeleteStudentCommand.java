@@ -35,12 +35,12 @@ public class ClassDeleteStudentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Student unassigned from class: %1$s"
             + ", Class: %2$s"
             + ", Module code: %3$s";
-    private static final String MESSAGE_FAIL = "Class belonging to module not found!";
+    public static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
-    private static final String MESSAGE_CLASSROOM_STUDENT_NOT_FOUND = "This student doesn't belong to class: %1$s";
-    private static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
-    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
-    private static final String MESSAGE_INVALID_STUDENT_MODULE = "Student is not enrolled in module!";
+    public static final String MESSAGE_CLASSROOM_STUDENT_NOT_FOUND = "This student doesn't belong to class: %1$s";
+    public static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
+    public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
+    public static final String MESSAGE_INVALID_STUDENT_MODULE = "Student is not enrolled in module!";
 
     private Classroom classToUnassignStudent;
     private final String className;
@@ -103,7 +103,9 @@ public class ClassDeleteStudentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ClassDeleteStudentCommand // instanceof handles nulls
-                && classToUnassignStudent.equals(((ClassDeleteStudentCommand) other).classToUnassignStudent));
+                && className.equals(((ClassDeleteStudentCommand) other).className)
+                && moduleCode.equals(((ClassDeleteStudentCommand) other).moduleCode)
+                && matricNo.equals(((ClassDeleteStudentCommand) other).matricNo));
 
     }
 }

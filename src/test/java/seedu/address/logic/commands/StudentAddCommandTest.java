@@ -20,7 +20,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.StorageController;
-import seedu.address.model.course.*;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseCode;
+import seedu.address.model.course.CourseManager;
+import seedu.address.model.course.CourseName;
+import seedu.address.model.course.FacultyName;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -45,8 +49,8 @@ public class StudentAddCommandTest {
         Person validPerson = new PersonBuilder().build();
 
         StorageController.enterTestMode();
-        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG")
-                , new CourseName("Computer Engineering"), new FacultyName("Faculty of Engineering")));
+        CourseManager.getInstance().addCourse(new Course(new CourseCode("CEG"),
+                new CourseName("Computer Engineering"), new FacultyName("Faculty of Engineering")));
 
         CommandResult commandResult = new StudentAddCommand(validPerson).execute(modelStub, commandHistory);
 

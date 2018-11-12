@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.NoteDeleteCommand;
 import seedu.address.model.StorageController;
+import seedu.address.storage.adapter.CsvAdaptedNote;
 import seedu.address.storage.adapter.XmlAdaptedNote;
 import seedu.address.ui.HtmlCardProcessor;
 
@@ -259,13 +260,35 @@ public class NoteManager {
         return NOTE_CSV_HEADERS;
     }
 
-    public ArrayList<Note> getExportableNotes() {
+    /**
+     * This method filters notes that do not contain start date & end date
+     * and returns the remaining notes as an array list.
+     */
+    private ArrayList<Note> getExportableNotes() {
         ArrayList<Note> exportableNotes;
 
         exportableNotes = notes.stream()
                 .filter(p -> (p.getStartDate() != null)).collect(Collectors.toCollection(ArrayList::new));
 
         return exportableNotes;
+    }
+
+    /**
+     * Builds an array list that contains CSV-formatted Note data.
+     *
+     * @return ArrayList of CSV-friendly representation of notes
+     */
+    public ArrayList<String> getCsvAdaptedNotes() {
+        ArrayList<Note> exportableNotes = getExportableNotes();
+        ArrayList<String> csvAdaptedNoteList = new ArrayList<>();
+        CsvAdaptedNote csvAdaptedNote;
+
+        for (Note noteToConvert : exportableNotes) {
+            csvAdaptedNote = new CsvAdaptedNote(noteToConvert);
+            csvAdaptedNoteList.add(csvAdaptedNote.toString());
+        }
+
+        return csvAdaptedNoteList;
     }
 
     /**

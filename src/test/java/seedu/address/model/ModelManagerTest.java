@@ -16,6 +16,9 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
+/**
+ * Provides a test for ModelManager
+ */
 public class ModelManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

@@ -12,6 +12,9 @@ import org.junit.Test;
 
 import javafx.application.Application;
 
+/**
+ * Provides a test for the AppParameters
+ */
 public class AppParametersTest {
 
     private final ParametersStub parametersStub = new ParametersStub();
@@ -37,6 +40,9 @@ public class AppParametersTest {
         assertEquals(expected, AppParameters.parse(parametersStub));
     }
 
+    /**
+     * A default ParametersStub
+     */
     private static class ParametersStub extends Application.Parameters {
         private Map<String, String> namedParameters = new HashMap<>();
 

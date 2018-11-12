@@ -25,7 +25,7 @@ import seedu.address.ui.BrowserPanel;
  */
 public class NoteDeleteCommandTest {
 
-    private static NoteManager noteManager = NoteManager.getInstance();;
+    private static NoteManager noteManager = NoteManager.getInstance();
 
     private static NoteBuilder dummyNote = new NoteBuilder();
 

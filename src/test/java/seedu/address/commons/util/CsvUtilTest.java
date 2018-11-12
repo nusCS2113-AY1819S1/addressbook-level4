@@ -57,4 +57,9 @@ public class CsvUtilTest {
                 new ArrayList<>(Arrays.asList("unused,unused", "unused,unused"))
         ));
     }
+
+    @AfterClass
+    public static void tearDown() {
+        // TODO
+    }
 }

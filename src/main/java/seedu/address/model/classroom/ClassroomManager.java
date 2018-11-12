@@ -375,4 +375,11 @@ public class ClassroomManager {
             }
         }
     }
+
+    /**
+     * Clears the memory for classroom
+     */
+    public void clearClassrooms() {
+        classroomList.clear();
+    }
 }

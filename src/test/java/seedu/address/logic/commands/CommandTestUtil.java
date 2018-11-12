@@ -3,15 +3,16 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +21,6 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -49,9 +49,10 @@ public class CommandTestUtil {
     public static final String VALID_MATRIC_NO_MEGAN = "A0168412C";
     public static final String VALID_MATRIC_NO_TAYLOR = "A0168412D";
     public static final String VALID_CLASS_T16 = "T16";
-    public static final String VALID_MODULE_CODE = "CG1111";
-    public static final String VALID_MAX_ENROLLMENT = "20";
+    public static final String VALID_MAX_ENROLLMENT_20 = "20";
+    public static final String VALID_MAX_ENROLLMENT_99 = "99";
 
+    public static final String VALID_MODULE_CODE_CG1111 = "CG1111";
     public static final String VALID_MODULE_CODE_CS2040C = "CS2040C";
     public static final String VALID_MODULE_CODE_MA1508E = "MA1508E";
     public static final String VALID_MODULE_NAME_CS2040C = "Data Structures & Algorithms";
@@ -67,14 +68,24 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String MATRIC_DESC_MEGAN = " "  + PREFIX_MATRIC + VALID_MATRIC_NO_MEGAN;
-    public static final String MATRIC_DESC_BOB = " "  + PREFIX_MATRIC + VALID_MATRIC_NO_TAYLOR;
+    public static final String MATRIC_DESC_MEGAN = " " + PREFIX_MATRIC + VALID_MATRIC_NO_MEGAN;
+    public static final String MATRIC_DESC_BOB = " " + PREFIX_MATRIC + VALID_MATRIC_NO_TAYLOR;
     public static final String COURSE_CODE_DESC_CEG = " " + PREFIX_COURSE_CODE + VALID_COURSE_CODE_CEG;
 
+    public static final String MODULE_CODE_DESC_CG1111 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CG1111;
     public static final String MODULE_CODE_DESC_CS2040C = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2040C;
     public static final String MODULE_CODE_DESC_MA1508E = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_MA1508E;
     public static final String MODULE_NAME_DESC_CS2040C = " " + PREFIX_MODULE_NAME + VALID_MODULE_NAME_CS2040C;
     public static final String MODULE_NAME_DESC_MA1508E = " " + PREFIX_MODULE_NAME + VALID_MODULE_NAME_MA1508E;
+
+    public static final String CLASS_NAME_DESC_T16 = " " + PREFIX_CLASS_NAME + VALID_CLASS_T16;
+    public static final String CLASS_ENROLLMENT_DESC_20 = " " + PREFIX_MAXENROLLMENT + VALID_MAX_ENROLLMENT_20;
+    public static final String CLASS_ENROLLMENT_DESC_99 = " " + PREFIX_MAXENROLLMENT + VALID_MAX_ENROLLMENT_99;
+
+    public static final String INVALID_CLASS_NAME_DESC = " " + PREFIX_CLASS_NAME
+            + "T1000"; // more than 3 alphanumeric characters
+    public static final String INVALID_CLASS_ENROLLMENT_DESC = " " + PREFIX_MAXENROLLMENT
+            + "290E"; // 'e' not allowed in max enrollment size
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
+/**
+ * Provides a test for ClearCommand
+ */
 public class ClearCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
