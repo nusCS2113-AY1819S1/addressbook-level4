@@ -322,18 +322,13 @@ public class RegisterCommandTest {
         }
 
         @Override
-<<<<<<< HEAD
         public void commitSalesHistory() {
             fail("This method should not be called");
         }
-=======
+
         public boolean hasProductName(String name) {
             return false;
         }
-
-        @Override
-        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
->>>>>>> bc77c9d0f047eb8e2d53296dc4e350a09781d7db
 
         @Override
         public String getTransactionAsString(String date) throws InvalidTimeFormatException {
@@ -381,8 +376,6 @@ public class RegisterCommandTest {
     private class ModelStubThrowingDuplicateUserException extends RegisterCommandTest.ModelStub {
 
         @Override
-<<<<<<< HEAD
-=======
         public boolean hasProductName(String name) {
             return false;
         }
@@ -411,7 +404,6 @@ public class RegisterCommandTest {
         }
 
         @Override
->>>>>>> bc77c9d0f047eb8e2d53296dc4e350a09781d7db
         public void addUser(User person) throws DuplicateUserException {
             throw new DuplicateUserException();
         }
