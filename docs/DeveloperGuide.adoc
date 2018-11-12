@@ -1297,15 +1297,15 @@ Use case ends.
 *MSS*
 
 1.  User requests to undo previous command
-4.  ProManage undos the command, restoring the previous state.
+2.  ProManage undos the command, restoring the previous state.
 
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. No commands left to undo.
-** 3a1. ProManage shows an error message.
+* 1a. No commands left to undo.
+** 1a1. ProManage shows an error message.
 ** Use case ends
 +
 // end::usecases_undo[]
@@ -1315,15 +1315,15 @@ Use case ends.
 *MSS*
 
 1.  User requests to redo the previously undone command
-4.  ProManage redos the command, restoring the address book or event list state.
+2.  ProManage redos the command, restoring the address book or event list state.
 
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. No commands left to redo.
-** 3a1. ProManage shows an error message.
+* 1a. No previously undone commands available.
+** 1a1. ProManage shows an error message.
 ** Use case ends
 +
 // end::usecases_undo[]
@@ -1459,6 +1459,23 @@ and `add n/Mark p/93455678 e/mark@example.com a/Mark street, block 12, #05-01 de
 .. Test case: `list dep Admin Finance` or any DEPARTMENT -> `list all`
    Expected: The details of all personnel and events will be listed.
 
+=== Selecting an Event
+
+. Selecting event while all events are listed
+
+.. Prerequisites: List all persons using the `list all` command. There must be at least one person and one event in the list.
+
+.. Test case: `invite 1 to/1` then `selectEvent 1` +
+   Expected: First event in the list is highlighted. Employee list is filtered to only show the first person.
+
+.. Test case: `selectEvent 2` (continued from test case above) +
+   Expected: Second event in the list is highlighted. Employee list is empty.
+
+.. Test case: `selectEvent 0` +
+   Expected: Error thrown.
+
+.. Other incorrect selectEvent commands to try: `selectevent` (command is case-sensitive),
+   `selectEvent a`, `selectEvent x` (where x is larger than the event list shown).
 
 
 === Saving data
