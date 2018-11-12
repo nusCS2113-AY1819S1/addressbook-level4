@@ -2117,7 +2117,6 @@ Steps 1a1-1a2 are repeated until the data entered is correct.
 Use case resumes from step 1.
 // end::gradeusecase[]
 
-// tag::classmanagementdepth[]
 [discrete]
 === Use case: Add Class
 
@@ -2234,6 +2233,7 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
+// tag::classmanagementdepth[]
 [discrete]
 === Use case: Assign Student To Class
 
