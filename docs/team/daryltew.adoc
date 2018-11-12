@@ -44,7 +44,8 @@ add and edit commands to avoid affecting the state tag.
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=current,tag=complete]
+include::../UserGuide.adoc[tag=current]
+include::../UserGuide.adoc[tag=complete]
 
 == Contributions to the Developer Guide
 
@@ -53,3 +54,4 @@ include::../UserGuide.adoc[tag=current,tag=complete]
 |===
 
 include::../DeveloperGuide.adoc[tag=memory]
+include::../DeveloperGuide.adoc[tag=appendixdt]
