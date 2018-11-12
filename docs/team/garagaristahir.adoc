@@ -54,6 +54,7 @@ Reported bugs and suggestions to team W13-1.
 == Contribution to the User Guide
 
 I created and added the first design of the UI to the User Guide so the team could visualize our end-product.
+
 image::orgUI.png[width="790"]
 
 == Contribution to the Developper guide
@@ -79,7 +80,7 @@ _{ more test cases ... }_
 . Deleting a distributor while all distributors are listed
 
 .. Prerequisites: There should be a atleast 2 products to edit. The second one has Serial Number = 123.
-.. Test case: `Editproduct 1 inv/12` +
+.. Test case: `editproduct 1 inv/12` +
    Expected: First product from the list is edited. The current inventory should now be 12, and a success message is shown in the result display panel.
 .. Test case: `editproduct 1 s/123` +
    Expected: No product is updated. Error details of invalid serialnumber because a product with serial number = 123 already exists  is shown in the result display panel. Status bar remains the same.
