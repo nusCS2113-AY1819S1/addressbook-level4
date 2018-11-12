@@ -87,7 +87,6 @@ public class EditEventCommandTest {
 
     }
 
-    // @@author: AB4
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Event editedEvent = new EventBuilder().build();

@@ -971,8 +971,13 @@ relevant people
 |`* * *` |Project Manager |View events related to myself| To avoid looking through the entire event list to find out which events I
 need to attend
 
-|`* * *` |User |Exit command |
+|=======================================================================
 // end::userstories[]
+[width="125%",cols="22%,<23%,<25%,<30%",options="header",]
+|=======================================================================
+|Priority |As a ... |I want to ... |So that I can...
+|`* * *` |User |Exit command |
+
 |`* * *` |New Employee |See usage instructions |Refer to instructions when I forget how to use the ProManage
 
 |`* * *` |Employee |Find a person by name |Locate details of people without having to go through the entire list
@@ -1001,7 +1006,7 @@ _{More to be added}_
 
 [appendix]
 
-// tag::usecases[]
+
 == Use Cases
 
 (For all use cases below, the *System* is the `ProManage` and the *Actor* is the `user`, unless specified otherwise)
@@ -1082,7 +1087,8 @@ Use case ends.
 ** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
-// end::usecases[]
+
+// tag::usecases[]
 [discrete]
 === Use case: Add Event
 
@@ -1106,7 +1112,7 @@ Use case ends.
 ** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
-
+// end::usecases[]
 [discrete]
 === Use case: Delete event
 

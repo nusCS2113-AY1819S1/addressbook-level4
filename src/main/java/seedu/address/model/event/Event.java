@@ -228,7 +228,7 @@ public class Event implements Comparable<Event> {
             endTime2 = event.endTime;
         }
 
-        // Two sufficient conditions to prove overlap of intervals
+        // Two sufficient and necessary conditions to prove overlap of intervals
         boolean doesEvent1BeginEarlierBeforeEvent2Ends = startTime1.compareTo(endTime2) < 0;
         boolean doesEvent2BeginBeforeEvent1Ends = startTime2.compareTo(endTime1) < 0;
 
