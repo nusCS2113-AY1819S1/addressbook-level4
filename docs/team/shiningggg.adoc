@@ -13,7 +13,7 @@ Something Daily is a desktop application using command-line interface. It allows
 
 Something Daily is designed to help NUS SoC students to manage the significant number of academic tasks and keep track on daily expenditures. Moreover, it helps alleviate the inconvenience caused by switching between apps for example between `Google Calendar` and `ExpensePoint` as user could manage daily stuffs such as expenditures and tasks in one application.
 
-This product was developed by a team of four, for more information about the rest developers, you may find it in the `About Us` page.
+This product was developed by a team of four, for more information about the rest developers, you may find it in the `About Us` page. Given below are my contributions to the whole project.
 
 == Summary of contributions
 
@@ -88,7 +88,7 @@ include::../UserGuide.adoc[tag=ETadvice]
 == Contributions to the Developer Guide
 
 |===
-|_The user stories of Expenditure Tracker given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
 include::../DeveloperGuide.adoc[tag=calendar]
