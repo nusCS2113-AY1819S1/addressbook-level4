@@ -15,7 +15,7 @@ import seedu.address.model.StorageController;
 public class CourseListCommandTest {
 
     @Test
-    public void execute_addSuccessful() {
+    public void execute_listSuccessful() {
 
         StorageController.enterTestMode();
 
