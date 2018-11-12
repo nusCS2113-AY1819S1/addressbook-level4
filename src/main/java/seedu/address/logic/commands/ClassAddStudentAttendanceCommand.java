@@ -36,12 +36,12 @@ public class ClassAddStudentAttendanceCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Student is marked present: %1$s"
             + ", Class: %2$s"
             + ", Module code: %3$s";
-    private static final String MESSAGE_FAIL = "Class belonging to module not found!";
+    public static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
-    private static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE = "This student already"
+    public static final String MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE = "This student already"
             + " present in class: %1$s";
-    private static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
-    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
+    public static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
+    public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
 
     private final String className;
     private final String moduleCode;
@@ -85,6 +85,9 @@ public class ClassAddStudentAttendanceCommand extends Command {
         }
 
         Attendance attendance = classroomManager.findAttendanceForClass(classToMarkAttendance, date);
+        if (attendance == null) {
+            attendance = new Attendance();
+        }
 
         if (classroomManager.isDuplicateClassroomStudentAttendance(classToMarkAttendance, matricNo, date)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_CLASSROOM_STUDENT_ATTENDANCE, matricNo));
@@ -96,5 +99,15 @@ public class ClassAddStudentAttendanceCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
                 classToMarkAttendance.getClassName(), classToMarkAttendance.getModuleCode()),
                 classroomManager.getClassroomAttendanceHtmlRepresentation(classToMarkAttendance));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ClassAddStudentAttendanceCommand // instanceof handles nulls
+                && className.equals(((ClassAddStudentAttendanceCommand) other).className)
+                && moduleCode.equals(((ClassAddStudentAttendanceCommand) other).moduleCode)
+                && matricNo.equals(((ClassAddStudentAttendanceCommand) other).matricNo));
+
     }
 }

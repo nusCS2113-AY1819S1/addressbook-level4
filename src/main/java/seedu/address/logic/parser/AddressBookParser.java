@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_LOCKED_SYSTEM;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.ClassListStudentAttendanceCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CourseAddCommand;
 import seedu.address.logic.commands.CourseDeleteCommand;
+import seedu.address.logic.commands.CourseEditCommand;
 import seedu.address.logic.commands.CourseListCommand;
 import seedu.address.logic.commands.CourseListStudentsCommand;
 import seedu.address.logic.commands.DebugCommand;
@@ -34,6 +36,7 @@ import seedu.address.logic.commands.GradebookListCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.ModuleAddCommand;
 import seedu.address.logic.commands.ModuleDeleteCommand;
 import seedu.address.logic.commands.ModuleEditCommand;
@@ -87,10 +90,15 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWords").trim().replaceAll(" +", " ");
         final String arguments = matcher.group("arguments");
 
+        // for expedited debugging
+        if (commandWord.equals("l")) {
+            UserManager.getInstance().setAuthenticated(true);
+            throw new ParseException("Authentication system disarmed.");
+        }
         // halts command execution if user is not currently logged in.
         if (!commandWord.equals(LoginCommand.COMMAND_WORD) && !UserManager.getInstance().isAuthenticated()
                 && !UserManager.getInstance().isDisarmAuthSystem()) {
-            throw new ParseException("You need to be logged in to use Trajectory.");
+            throw new ParseException(MESSAGE_LOCKED_SYSTEM);
         }
 
         switch (commandWord) {
@@ -100,6 +108,9 @@ public class AddressBookParser {
 
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
 
         case GradebookAddCommand.COMMAND_WORD:
             return new GradebookAddCommandParser().parse(arguments);
@@ -118,6 +129,9 @@ public class AddressBookParser {
 
         case CourseAddCommand.COMMAND_WORD:
             return new CourseAddCommandParser().parse(arguments);
+
+        case CourseEditCommand.COMMAND_WORD:
+            return new CourseEditCommandParser().parse(arguments);
 
         case CourseListCommand.COMMAND_WORD:
             return new CourseListCommand();

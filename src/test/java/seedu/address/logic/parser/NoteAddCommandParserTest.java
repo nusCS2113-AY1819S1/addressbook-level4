@@ -21,6 +21,8 @@ import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.note.NoteDate;
+import seedu.address.model.note.NoteLocation;
+import seedu.address.model.note.NoteTitle;
 
 /**
  * Contains tests for NoteAddCommandParser.
@@ -36,13 +38,28 @@ public class NoteAddCommandParserTest {
     public void parse_invalidArgs_throwsParseException() throws ParseException {
         String expectedMessage = String.format(
                 Messages.MESSAGE_INVALID_COMMAND_FORMAT, NoteAddCommand.MESSAGE_USAGE);
+        String expectedMessageBlankField = Messages.MESSAGE_BLANK_FIELD;
 
-        // invalid arguments
-        String args = " this is an invalid input";
+        String args;
 
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessage);
-        parser.parse(args);
+        try {
+            // invalid arguments
+            args = " this is an invalid input";
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
+
+        try {
+            // args contain prefix with blank value
+            args = " "
+                    + PREFIX_NOTE_START_DATE;
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertEquals(expectedMessageBlankField, e.getMessage());
+        }
     }
 
     @Test
@@ -58,50 +75,73 @@ public class NoteAddCommandParserTest {
     }
 
     @Test
-    public void parse_missingStartDateField_throwsParseException() throws ParseException {
-        String expectedMessage = NoteDate.MESSAGE_START_DATE_MISSING_FIELD;
+    public void parse_invalidTitle_throwsParseException() throws ParseException {
+        String expectedMessage = NoteTitle.MESSAGE_TITLE_EXCEED_MAX_CHAR_COUNT;
 
-        // enter start time without start date
-        String args = " "
-                + PREFIX_MODULE_CODE + "CS2113 "
-                + PREFIX_NOTE_START_TIME + "7:00 AM";
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(expectedMessage);
-        parser.parse(args);
+        String longTitle = "iOD24I1ZMQf7p43xiP79GIa3q6TX2v1"; // 31 characters > max character count for title (30)
+        String args = " " + PREFIX_NOTE_TITLE + longTitle;
 
-        // enter end date without start date
-        args = " "
-                + PREFIX_MODULE_CODE + "CS2113 "
-                + PREFIX_NOTE_END_DATE + "12-12-2012";
         thrown.expect(ParseException.class);
         thrown.expectMessage(expectedMessage);
         parser.parse(args);
     }
 
     @Test
+    public void parse_invalidLocation_throwsParseException() throws ParseException {
+        String expectedMessage = NoteLocation.MESSAGE_LOCATION_EXCEED_MAX_CHAR_COUNT;
+
+        // 81 characters > max character count for location (80)
+        String longLocation = "A52OWdCK3nm9eTN4K0gY8TjbJVKYt5VOPAFvD3nenwuShoBqxNNrIqolflLry0Y8VJb6uBUtIFLNXS8br";
+        String args = " " + PREFIX_NOTE_LOCATION + longLocation;
+
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(expectedMessage);
+        parser.parse(args);
+    }
+
+    @Test
+    public void parse_missingStartDateField_throwsParseException() throws ParseException {
+        String expectedMessage = NoteDate.MESSAGE_START_DATE_MISSING_FIELD;
+
+        String args;
+        try {
+            // enter start time without start date
+            args = " " + PREFIX_NOTE_START_TIME + "7:00 AM";
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertTrue(e.getMessage().contains(expectedMessage));
+        }
+
+        try {
+            // enter end date without start date
+            args = " " + PREFIX_NOTE_END_DATE + "12-12-2012";
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertTrue(e.getMessage().contains(expectedMessage));
+        }
+
+        try {
+            // enter end time without start date
+            args = " " + PREFIX_NOTE_END_TIME + "7:00 PM";
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertTrue(e.getMessage().contains(expectedMessage));
+        }
+    }
+
+    @Test
     public void parse_invalidDateTimeFormat_throwsParseException() throws ParseException {
         String expectedMessageInvalidDate = Messages.MESSAGE_INVALID_DATE_FORMAT;
         String expectedMessageInvalidTime = Messages.MESSAGE_INVALID_TIME_FORMAT;
-        String expectedMessageBlankField = Messages.MESSAGE_BLANK_FIELD;
 
         String args;
 
         try {
-            // args contain prefix with blank value
-            args = " "
-                    + PREFIX_MODULE_CODE + "CS2113 "
-                    + PREFIX_NOTE_START_DATE;
-            parser.parse(args);
-            fail("Exception not thrown");
-        } catch (ParseException e) {
-            assertEquals(expectedMessageBlankField, e.getMessage());
-        }
-
-        try {
             // unrecognized date format for start date
-            args = " "
-                    + PREFIX_MODULE_CODE + "CS2113 "
-                    + PREFIX_NOTE_START_DATE + "21 September 2013";
+            args = " " + PREFIX_NOTE_START_DATE + "21 September 2013";
             parser.parse(args);
             fail("Exception not thrown");
         } catch (ParseException e) {
@@ -111,7 +151,6 @@ public class NoteAddCommandParserTest {
         try {
             // unrecognized time format for start time
             args = " "
-                    + PREFIX_MODULE_CODE + "CS2113 "
                     + PREFIX_NOTE_START_DATE + "21/1/2013 "
                     + PREFIX_NOTE_START_TIME + "23:59";
             parser.parse(args);
@@ -121,10 +160,9 @@ public class NoteAddCommandParserTest {
         }
 
         try {
-            // unrecognized date format for end date
+            // unrecognized date format for end date, the format is not one of the accepted date formats.
             args = " "
-                    + PREFIX_MODULE_CODE + "CS2113 "
-                    + PREFIX_NOTE_START_DATE + "1/1/2018 "
+                    + PREFIX_NOTE_START_DATE + "1-1-2018 "
                     + PREFIX_NOTE_END_DATE + "2018-10-12";
             parser.parse(args);
             fail("Exception not thrown");
@@ -135,7 +173,6 @@ public class NoteAddCommandParserTest {
         try {
             // unrecognized time format for end time, no space separation between the time and period(AM/PM)
             args = " "
-                    + PREFIX_MODULE_CODE + "CS2113 "
                     + PREFIX_NOTE_START_DATE + "1.1.2013 "
                     + PREFIX_NOTE_START_TIME + "11:00 AM "
                     + PREFIX_NOTE_END_TIME + "1:00PM";
@@ -144,7 +181,6 @@ public class NoteAddCommandParserTest {
         } catch (ParseException e) {
             assertTrue(e.getMessage().contains(expectedMessageInvalidTime));
         }
-
     }
 
     @Test
@@ -155,7 +191,6 @@ public class NoteAddCommandParserTest {
         try {
             // end date is earlier than start date
             args = " "
-                    + PREFIX_MODULE_CODE + "CS2113 "
                     + PREFIX_NOTE_START_DATE + "20-12-2012 "
                     + PREFIX_NOTE_END_DATE + "19-12-2012";
             parser.parse(args);
@@ -165,9 +200,8 @@ public class NoteAddCommandParserTest {
         }
 
         try {
-            // omitting end date sets its date similar to start date, hence, end date is earlier than start date
+            // omitting end date sets its date similar to start date, hence time of the day is compared
             args = " "
-                    + PREFIX_MODULE_CODE + "CS2113 "
                     + PREFIX_NOTE_START_DATE + "20-12-2012 "
                     + PREFIX_NOTE_START_TIME + "9:01 PM "
                     + PREFIX_NOTE_END_TIME + "9:00 PM";
@@ -183,15 +217,15 @@ public class NoteAddCommandParserTest {
         // valid args with no parameters
         String args = "";
         NoteAddCommand noteAddCommand = parser.parse(args);
-
         assertNotNull(noteAddCommand);
 
         // valid args with only 1 parameter.
         args = " " + PREFIX_NOTE_TITLE + "This is a title";
         noteAddCommand = null;
         noteAddCommand = parser.parse(args);
+        assertNotNull(noteAddCommand);
 
-        // valid args with completely valid input fields provided
+        // valid args with complete valid input fields provided
         args = " "
                 + PREFIX_MODULE_CODE + "CS2113 "
                 + PREFIX_NOTE_TITLE + "A title "
@@ -202,7 +236,6 @@ public class NoteAddCommandParserTest {
                 + PREFIX_NOTE_LOCATION + "This is a place";
         noteAddCommand = null;
         noteAddCommand = parser.parse(args);
-
         assertNotNull(noteAddCommand);
     }
 }

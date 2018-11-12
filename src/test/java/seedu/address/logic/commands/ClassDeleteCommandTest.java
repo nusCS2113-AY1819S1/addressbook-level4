@@ -53,7 +53,6 @@ public class ClassDeleteCommandTest {
             e.printStackTrace();
         }
 
-        moduleManager.saveModuleList();
         classroomManager = ClassroomManager.getInstance();
         Classroom classroom = new ClassroomBuilder().build();
         classroomManager.addClassroom(classroom);

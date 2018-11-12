@@ -1,10 +1,18 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.parser.CliSyntax.COMMAND_LIST;
+
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -25,6 +33,13 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private static final Pattern LAST_WORD_REGEX =
+            Pattern.compile("(?<previousWord>(\\S*\\s+)*)(?<lastWord>\\S+\\s*$)");
+    private static KeyCode previousKeyPressed;
+    private static String commandTextSnapshot;
+    private static String lastWord;
+    private static int index;
+
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
@@ -37,7 +52,76 @@ public class CommandBox extends UiPart<Region> {
         this.logic = logic;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.TAB) {
+                event.consume();
+
+                if (!commandTextField.getText().trim().isEmpty()) {
+                    executeAutoComplete();
+                }
+            }
+            previousKeyPressed = event.getCode();
+        });
         historySnapshot = logic.getHistorySnapshot();
+    }
+
+    /**
+     * Handles the auto-completing of command words.
+     *
+     * This method attempts to match the user's premature input to one of
+     * the existing commands words.
+     *
+     * First word matches only with the command identifier keywords(e.g. "student", "module", etc.)
+     *
+     * For second word, the search is narrowed down to command words available only from the first word.
+     */
+    private void executeAutoComplete() {
+        String commandText = commandTextField.getText();
+
+        String[] previousWords = new String[0];
+        Matcher matcher = LAST_WORD_REGEX.matcher(commandText);
+        if (matcher.find()) {
+            String previous = matcher.group("previousWord");
+            if (!previous.trim().isEmpty()) {
+                previousWords = previous.trim().split("\\s+");
+            }
+
+            if (previousKeyPressed != KeyCode.TAB) {
+                lastWord = matcher.group("lastWord");
+            }
+        }
+
+        List<String> matches = null;
+        if (previousWords.length == 0) {
+            matches = COMMAND_LIST.keySet()
+                    .stream()
+                    .filter(first -> first.indexOf(lastWord) == 0)
+                    .collect(Collectors.toList());
+        } else if (previousWords.length == 1) {
+            String firstCommandWord = previousWords[0];
+            for (Map.Entry<String, List<String>> entry : COMMAND_LIST.entrySet()) {
+                if (entry.getKey().equals(firstCommandWord)) {
+                    matches = entry.getValue()
+                            .stream()
+                            .filter(second -> second.indexOf(lastWord) == 0)
+                            .collect(Collectors.toList());
+                }
+            }
+        }
+
+        String wordToAppend;
+        if (matches != null && matches.size() >= 1) {
+            if (previousKeyPressed == KeyCode.TAB && !lastWord.isEmpty()) {
+                index = (index + 1) % matches.size();
+                wordToAppend = matches.get(index).replaceFirst(lastWord, "");
+                commandTextField.setText(commandTextSnapshot);
+            } else {
+                index = 0;
+                wordToAppend = matches.get(index).replaceFirst(lastWord, "");
+                commandTextSnapshot = commandText;
+            }
+            commandTextField.appendText(wordToAppend);
+        }
     }
 
     /**
@@ -50,7 +134,6 @@ public class CommandBox extends UiPart<Region> {
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
@@ -58,14 +141,17 @@ public class CommandBox extends UiPart<Region> {
             navigateToNextInput();
             break;
         case RIGHT:
-            commandTextField.setText(ExpeditedInputs.getNextCommand());
+            if (keyEvent.isControlDown()) {
+                commandTextField.setText(ExpeditedInputs.getNextCommand());
+            }
             break;
         case LEFT:
-            commandTextField.setText(ExpeditedInputs.getPreviousCommand());
+            if (keyEvent.isControlDown()) {
+                commandTextField.setText(ExpeditedInputs.getPreviousCommand());
+            }
             break;
-
         default:
-            // let JavaFx handle the keypress
+                // let JavaFx handle the keypress
         }
     }
 

@@ -61,4 +61,11 @@ public class NoteTime {
     public String toString() {
         return time.format(TIME_FORMAT);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof NoteTime // instanceof handles nulls
+                && time.equals(((NoteTime) other).time)); // state check
+    }
 }

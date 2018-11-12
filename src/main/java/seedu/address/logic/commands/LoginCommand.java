@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTH_PASSWORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,20 +15,18 @@ import seedu.address.ui.HtmlTableProcessor;
  */
 public class LoginCommand extends Command {
 
-    public static final String COMMAND_WORD = "login";
+    public static final String COMMAND_WORD = "unlock";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Logs you into Trajectory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unlocks access to the system. "
             + "Parameters: "
-            + PREFIX_EMAIL + "EMAIL "
             + PREFIX_AUTH_PASSWORD + "PASSWORD "
             + "\n"
             + "Example: "
             + COMMAND_WORD + " "
-            + PREFIX_EMAIL + "megannicole@nus.edu.sg "
             + PREFIX_AUTH_PASSWORD + "password ";
 
-    public static final String MESSAGE_AUTH_SUCCESS = "You has successfully logged in.";
-    public static final String MESSAGE_AUTH_FAILURE = "Your login attempt has failed. Please try again later.";
+    public static final String MESSAGE_AUTH_SUCCESS = "You has successfully unlocked the system.";
+    public static final String MESSAGE_AUTH_FAILURE = "Your unlock attempt has failed. Please try again.";
 
     private User internalUser;
     /**

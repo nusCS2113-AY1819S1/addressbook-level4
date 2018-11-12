@@ -37,17 +37,17 @@ public class ClassDeleteStudentAttendanceCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Student is marked absent: %1$s"
             + ", Class: %2$s"
             + ", Module code: %3$s";
-    private static final String MESSAGE_FAIL = "Class belonging to module not found!";
+    public static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
-    private static final String MESSAGE_NOT_CLASSROOM_STUDENT_ATTENDANCE = "This student does not belong"
+    public static final String MESSAGE_NOT_CLASSROOM_STUDENT_ATTENDANCE = "This student does not belong"
             + " to class: %1$s";
 
-    private static final String MESSAGE_UNMARKED_CLASSROOM_STUDENT_ATTENDANCE = "This student's attendance"
+    public static final String MESSAGE_UNMARKED_CLASSROOM_STUDENT_ATTENDANCE = "This student's attendance"
             + " is already absent: %1$s";
-    private static final String MESSAGE_NO_CLASSROOM_STUDENT_ATTENDANCE = "There is no classroom attendance marked"
+    public static final String MESSAGE_NO_CLASSROOM_STUDENT_ATTENDANCE = "There is no classroom attendance marked"
             + " for this class";
-    private static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
-    private static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
+    public static final String MESSAGE_INVALID_STUDENT = "Student does not exist";
+    public static final String MESSAGE_MODULE_CODE_INVALID = "Module code does not exist";
 
     private final String className;
     private final String moduleCode;
@@ -109,5 +109,15 @@ public class ClassDeleteStudentAttendanceCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, matricNo,
                 classToModifyAttendance.getClassName(), classToModifyAttendance.getModuleCode()),
                 classroomManager.getClassroomAttendanceHtmlRepresentation(classToModifyAttendance));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ClassDeleteStudentAttendanceCommand // instanceof handles nulls
+                && className.equals(((ClassDeleteStudentAttendanceCommand) other).className)
+                && moduleCode.equals(((ClassDeleteStudentAttendanceCommand) other).moduleCode)
+                && matricNo.equals(((ClassDeleteStudentAttendanceCommand) other).matricNo));
+
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,8 +26,19 @@ public class NoteDeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() throws ParseException {
         String expectedMessageIndexError = NoteDeleteCommand.MESSAGE_PARSE_INDEX_ERROR;
+        String expectedMessageInvalidFormat = String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, NoteDeleteCommand.MESSAGE_USAGE);
 
         String args;
+
+        try {
+            // empty args
+            args = "";
+            parser.parse(args);
+            fail("Exception not thrown");
+        } catch (ParseException e) {
+            assertEquals(expectedMessageInvalidFormat, e.getMessage());
+        }
 
         try {
             // invalid args, contains non-numeric input

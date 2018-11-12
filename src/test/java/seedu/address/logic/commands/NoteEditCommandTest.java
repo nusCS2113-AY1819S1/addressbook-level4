@@ -119,6 +119,44 @@ public class NoteEditCommandTest {
     }
 
     @Test
+    public void execute_missingStartDateField_throwsCommandException() throws CommandException {
+        String expectedMessage = NoteDate.MESSAGE_START_DATE_MISSING_FIELD;
+
+        // setup note with null date
+        NoteBuilder note = new NoteBuilder();
+        note = note.withNullStartDate();
+        note = note.withNullEndDate();
+
+        noteManager.addNote(note.build());
+        noteManager.saveNoteList();
+        noteManager.setFilteredNotesNoFilter();
+
+        // simulate user input to only edit end date
+        NoteBuilder editedNoteBuilder = new NoteBuilder(note.build());
+        editedNoteBuilder = editedNoteBuilder.withAllNull();
+        editedNoteBuilder = editedNoteBuilder.withEndDate("12-11-2018");
+
+        Note editedNote = editedNoteBuilder.build();
+
+        int index = 1;
+        NoteEditCommand noteEditCommand =
+                new NoteEditCommand(
+                        index,
+                        editedNote.getModuleCode(),
+                        editedNote.getTitle(),
+                        editedNote.getStartDate(),
+                        editedNote.getStartTime(),
+                        editedNote.getEndDate(),
+                        editedNote.getEndTime(),
+                        editedNote.getLocation()
+                );
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(expectedMessage);
+        noteEditCommand.execute(new ModelManager(), new CommandHistory());
+    }
+
+    @Test
     public void execute_indexOutOfBounds_throwsCommandException() throws CommandException {
         // Change some fields
         note2 = note2.withStartDate("22-12-2018");
@@ -131,7 +169,6 @@ public class NoteEditCommandTest {
         noteManager.setFilteredNotesNoFilter();
 
         int index = 5; // arraylist size: 3, accessed index = 4 (zero-based) -> out of bounds
-        ModuleCode newModuleCode = new ModuleCode("CS5000");
         NoteTitle newTitle = new NoteTitle("My new title");
         NoteDate newStartDate = new NoteDate("1-1-2019");
         NoteTime newStartTime = new NoteTime("11:00 AM");
@@ -143,7 +180,7 @@ public class NoteEditCommandTest {
         NoteEditCommand noteEditCommand =
                 new NoteEditCommand(
                         index,
-                        newModuleCode,
+                        null,
                         newTitle,
                         newStartDate,
                         newStartTime,

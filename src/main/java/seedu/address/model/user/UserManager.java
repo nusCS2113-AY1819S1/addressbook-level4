@@ -21,7 +21,7 @@ public class UserManager {
     private ArrayList<User> userList = new ArrayList<User>();
     private User loggedInUser;
     private boolean isAuthenticated = false;
-    private boolean disarmAuthSystem = true;
+    private boolean disarmAuthSystem = false;
 
 
     public UserManager() {
@@ -155,5 +155,16 @@ public class UserManager {
 
     public void setUsers(ArrayList<User> users) {
         this.userList = users;
+    }
+
+    /**
+     * Logs out the currently logged-in user.
+     */
+    public void logout() {
+        if (isAuthenticated) {
+            isAuthenticated = false;
+            loggedInUser = null;
+            logger.info("User has logged out.");
+        }
     }
 }
