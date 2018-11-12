@@ -1310,13 +1310,13 @@ Username of target attendee `Charlotte Oliveiro` is not in the attendance of the
 
 .. Prerequisite: User/Admin has to be logged in and event 1 has to exist.
 
-.. Test case: `addComment 1 C/Hello`
+.. Test case: `addComment 1 C/Hello` + 
  Expected: Adds to event at index 1 the comment "Hello". The new comment will be displayed under last comment available or if not below the comment section.
 
-.. Test case: `addComment 0 C/Hello`
+.. Test case: `addComment 0 C/Hello` + 
 Expected: The Command Result box will return an invalid format and no changes will occur.
 
-.. Test case: `addComment x C/STRING`, when x < 0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1` 
+.. Test case: `addComment x C/STRING`, when x < 0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1` + 
 Expected: Similar to previous because x has to be a signed integer that exists within the index of events.
 
 === Replying a Comment
@@ -1325,19 +1325,19 @@ Expected: Similar to previous because x has to be a signed integer that exists w
 
 .. Prerequisite: User/Admin has to be logged in, event 1 has to have one valid comment.
 
-.. Test case: `replyComment 1 C/Hello L/1`
+.. Test case: `replyComment 1 C/Hello L/1` + 
 Expected: Adds to event at index 1 and replies a comment "Hello" to line 1 of the comments section.
 
-.. Test case: `replyComment 0 C/Hello L/1`
+.. Test case: `replyComment 0 C/Hello L/1` + 
 Expected: The Command Result box will return an invalid format and no changes will occur.
 
-.. Test case: `replyComment x C/Hello L/1`, x < 0 or x > event list size
+.. Test case: `replyComment x C/Hello L/1`, x < 0 or x > event list size. + 
 Expected: Similar to previous
 
-.. Test case: `replyComment 1 C/Hello L/x`, where x < = 0 or x > number of comments in the comment section
+.. Test case: `replyComment 1 C/Hello L/x`, where x < = 0 or x > number of comments in the comment section. + 
 Expected: Similar to previous
 
-.. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. 
+.. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. + 
 Expected: Invalid command will be displayed in the result box. No changes will occur.
 
 === Deleting a Comment
@@ -1346,15 +1346,15 @@ Expected: Invalid command will be displayed in the result box. No changes will o
 
 .. Prerequisites: Admin and logged in, event 1 has to have at least 1 valid comment.
 
-.. Test case: `deleteComment 1 L/1`
+.. Test case: `deleteComment 1 L/1` +
 Expected: Deletes a comment into the comment section at the given line parameter.
 
-.. Test case: `deleteComment x L/1`, where x < = 0 or x > event list size
+.. Test case: `deleteComment x L/1`, where x < = 0 or x > event list size. +
 Expected: The Command Result box will return an invalid format and no changes will occur.
 
-.. Test case: `deleteComment 1 L/x`, where x < = 0 or x > number of comments in the comment section.
+.. Test case: `deleteComment 1 L/x`, where x < = 0 or x > number of comments in the comment section. +
 Expected: Similar to previous
 
-.. Test case: `deleteComment x L/y`, where x or y does not exist.
+.. Test case: `deleteComment x L/y`, where x or y does not exist. +
 Expected:  Invalid command will be displayed in the result box. No changes will occur.
 // end::commentsMT[]
