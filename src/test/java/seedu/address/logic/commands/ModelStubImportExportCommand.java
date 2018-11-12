@@ -16,7 +16,7 @@ import seedu.address.testutil.TypicalPersons;
 public class ModelStubImportExportCommand extends ModelStub {
     private Person person;
     private User user;
-    private final TimeTable timeTable;
+    private TimeTable timeTable;
 
     public ModelStubImportExportCommand() {
         person = TypicalPersons.TEST;
@@ -47,7 +47,8 @@ public class ModelStubImportExportCommand extends ModelStub {
     @Override
     public void updateTimeTable(TimeTable newTimeTable) {
         requireNonNull(newTimeTable);
-        this.timeTable.updateTimeTable(newTimeTable);
+        //this.timeTable.updateTimeTable(newTimeTable);
+        timeTable = newTimeTable;
     }
 
     @Override

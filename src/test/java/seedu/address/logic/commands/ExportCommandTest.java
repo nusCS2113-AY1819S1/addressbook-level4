@@ -13,6 +13,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.DeconflictTimeTable;
 import seedu.address.model.person.TimeTable;
 import seedu.address.testutil.TestUtil;
 import seedu.address.testutil.TypicalTimeSlots;
@@ -46,6 +47,23 @@ public class ExportCommandTest {
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(String.format(ExportCommand.MESSAGE_EMPTY));
+
+        command.execute(actualModelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_deconflictTimeTable_failure() throws Exception {
+        ModelStubImportExportCommand actualModelStub = new ModelStubImportExportCommand();
+
+        //update the timetable in the modelstub with a deconflictTimeTable
+        DeconflictTimeTable deconflict = new DeconflictTimeTable();
+        deconflict.addTimeTable(TYPICAL_TIMETABLE);
+        actualModelStub.updateTimeTable(deconflict);
+
+        Command command = new ExportCommand(TEMP_FILE);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(String.format(ExportCommand.MESSAGE_INVALID_TIMETABLE));
 
         command.execute(actualModelStub, commandHistory);
     }
