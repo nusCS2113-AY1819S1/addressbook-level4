@@ -13,11 +13,13 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* This is a desktop task and expenditure tracker application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is a Java application intended to assist students in managing all of their academic work and spendings.
-* It is *written in OOP fashion*. It provides a *reasonably well-written* code that is based on https://github.com/se-edu/addressbook-level4[Address Book L4], a Java sample application intended for students in learning Software Engineering while using Java as the main programming language.
+* Something Daily is a desktop task and expenditure tracker application. It has a GUI (Graphical User Interface) but most of the user interactions happen using a CLI (Command Line Interface).
+* It is a Java application for busy students who needs help in better managing their student life.
+* The application aims to assist students in managing all of their academic work and spendings, hence improving their student life.
+* It has 3 key components: To-do List, Expenditure Tracker, and Calendar.
+* It is built upon https://github.com/se-edu/addressbook-level4[Address Book L4], a Java application intended for students in learning Software Engineering principles while using Java as the main programming language.
 * Features:
-** A more sophisticated GUI that includes a list  panel and an in-built Browser.
+** A sophisticated GUI that includes two list panels and an in-built calendar.
 ** More test cases, including automated GUI testing.
 ** Support for _Build Automation_ using Gradle and for _Continuous Integration_ using Travis CI.
 
