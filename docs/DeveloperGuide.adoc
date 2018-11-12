@@ -427,16 +427,11 @@ The three argument modes are as listed below:
 * Dual Argument mode -- Requires 2 dates, a `start date` and an `end date`. It returns all records containing dates within the time frame of start date and end date, inclusive of both start date and end date
 The mechanism that facilitates these modes can be found in the `ListCommandParser#parse`. Below is a overview of the mechanism:
 
-. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
-. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes which returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
 . The string associated with `d/` is then passed into `ListCommandParser#splitByWhitespace` for further processing and returns an array.
 . The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
 
-The `ListCommand` has two constructors which makes use of overloading to reduce code complexity.
-
-* One constructor has no arguments and assigns default predicate for the `FilteredList` in `ModelManager`,
-`PREDICATE_SHOW_ALL_RECORDS` which will show all items in the list.
-* The second constructor takes in 2 `Date` arguments and assigns the predicate `DateIsWithinDateIntervalPredicate` which will only show items within the date interval.
+The `ListCommand` has two constructors which makes use of overloading to reduce code complexity, one with no argument and the other one with 2 `Date` arguments.
 
 The following sequence diagram shows how the list operation works:
 
@@ -528,12 +523,24 @@ The corresponding command required for this feature is `summary` and the user wi
 they are viewing *summary by date, by month or by category*. This feature involves most components of FinancialPlanner with the exception of `Storage`. It can also be broadly split into
 2 phases, the logic phase which generates the summary and the UI phase which allows users to view the summary in a table.
 
+As shown below, `SummaryByDateCommand`, `SummaryByCategoryCommand`, `SummaryByMonthCommand` is a type of SummaryCommand and thus inherits from `SummaryCommand`. The rationale behind this design choice is that
+code shared by these classes can be placed in `SummaryCommand` for code reuse. This makes it easier for future developers to easily extend this functionality.
+
+.Class diagram showing the inheritance from SummaryCommand
+image::SummaryCommandClassDiagram.png[width="500"]
+
+Also, these commands utilise their own version of summary lists which is also inherited from the parent class `SummaryList` as shown below.
+
+.Class diagram showing the inheritance from SummaryList
+image::SummaryListClassDiagram.png[width="500"]
+
 The sequence diagram below details the sequence of program executions for the logic phase.
 
+.Sequence diagram for high level interactions in logic phase
 image::SummarySequenceDiagram.png[width="790"]
 
 . When the user types in the command "summary date d/1-1-2018 12-12-2018", the command is passed from LogicManager to FinancialPlannerParser. In here,
-the system chooses which parser to use which is SummaryCommandParser and calls its parse method which is polymorphic, meaning that every parser has the same function but use different
+the system chooses which parser to use and calls its parse method which is polymorphic, meaning that every parser has the same function but use different
 implementation.
 . In this class, based on the `mode` parameter given, the system chooses a SummaryCommand to instantiate and pass the reference back to the Logic Manager. The various checks for the validity of the
 parameters also occur during this stage.
@@ -554,15 +561,15 @@ The next phase of the program execution is performed in the UI components.
 * **Alternative 1 (current choice):** Generate the summary list whenever the summary command is called.
 ** Pros: Easier to implement and maintain. Sufficient for the intended target audience of FinancialPlanner.
 ** Cons: This requires looping through each record in the filtered record list obtained from the `Model`.
-To aid in the time complexity, the internal implementation of SummaryList was done using hash maps instead with allowed for
-constant time random access unlike list. However, the initial filtering is close to linear time complexity which could slow down the app if many records are inside.
+To aid in the time complexity, the internal implementation of SummaryList was done using hash maps instead which allowed for
+constant time random access.. However, the initial filtering is close to linear time complexity which could slow down the app if many records are inside.
 Also, the list had to be created every time `summary` is called which could be slow if the command is called multiple times.
 
 * **Alternative 2:** Morph the record list into a record hash map of record lists instead
 ** Pros: A hash map allows for constant random access to a record list of a particular date assuming the key for the hash map is using dates.
 Thus, the filtering function does not need to loop through as many records and the time taken would be lower especially when the database in the application is large.
 ** Cons: Might be too specific to only 1 type of category like categorising by date. If any other types are required, another map may have to be added. This implementation may make the
-system rigid and hard to modify in the future. Also, the summary list still had to be generated every time command is called.
+system rigid and hard to modify in the future.
 
 * **Alternative 3:** Cache the summary list in financial planner
 ** Pros: By caching the summary list in the financial planner and assigning a boolean variable along with information on the filter predicate to it to determine if it is modified, we can
@@ -574,7 +581,7 @@ Also, if the sequence of commands is as follows, *summary, add, summary*, the ti
 ==== Aspect: Method of switching UI panels
 * **Alternative 1(current choice):** Disable all UI panels within the Main UI placeholder before enabling the desired one
 ** Pros: Easy to implement and apply it to other newly created panels. To make use of the current implementation, the panel can simply be the children of
-the main Ui placeholder and the event handler can be placed in main window.
+the main Ui placeholder and its event handler can be placed in main window.
 ** Cons: Might be inefficient when there are many panels or many switching as the same process must be repeated for all panels.
 However, this is unrealistic and it is unlikely that there are a lot of UI panels for it to make a significant impact.
 
@@ -593,6 +600,7 @@ The corresponding command required for this feature is `stats`.For this feature,
 This feature is facilitated by a few key components of FinancialPlanner, `Logic`, `Model`, `UI` and function executions can be split into 2 phases, the `Logic phase` and the `UI phase`.
 The detailed execution sequence of functions used for `Logic phase` are as shown below.
 
+.Sequence diagram for high level interactions in logic phase
 image::StatisticLogicSequenceDiagram.png[width="790"]
 
 Consider the situation where the user enters *"stats d/1-1-2018 12-12-2018"*:
@@ -603,6 +611,7 @@ parameter to StatisticCommandParser.
 * The StatisticCommandParser will then parse the arguments and create a new StatisticCommand object before returning its reference. The activity diagram below details the mechanism
 within the `StatisticCommandParser#parse` method.
 
+.Activity diagram for details in StatisticCommandParser
 image::StatisticParserActivityDiagram.png[width="790"]
 
 * Once `StatisticCommand#execute` is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
@@ -617,8 +626,9 @@ is in the map.
 an event constructor before posting the event `ShowPieChartStatsEvent`.
 
 After the event is posted, the execution proceeds to the `UI phase` where there is a listener in `MainWindow` listening to this event. This is facilitated by
-the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in `UI phase`.
+the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in `UI phase` for creating the pie chart for total expense.
 
+.Sequence diagram for high level interactions in UI phase
 image::StatisticUiSequenceDiagram.png[width="790"]
 
 * When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
@@ -626,6 +636,7 @@ This will make all children hidden from view in the UI which ensures that the UI
 * As shown above, the function `StatsDisplayPanel#handleShowPieChartDataEvent` is called which will call the constructor of `MixedPieChartData`. The detailed execution details within this class is as shown in
 the activity diagram below.
 
+.Activity diagram for details in MixedPieChartDataList
 image::StatisticUiActivityDiagram.png[width="790"]
 
 The program flow is then as shown above where the `CategoryBreakdown` is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
@@ -634,6 +645,7 @@ In the current implementation, whenever `stats` is called, 2 tabs will be create
 
 The sequence diagram below details the program flow after the constructor of CategoryBreakdown class is called.
 
+.Sequence diagram for creation of pie charts
 image::StatisticUiDetailedSequenceDiagram.png[width="790"]
 
 [NOTE]
@@ -784,7 +796,7 @@ The user enters two dates (or one date) after the one "d/" index.
 
 The following sequence diagram shows how the deleteLimit operation works:
 
-image::DeleteLimitSequenceDiagram.png[width:800]
+image::deleteLimitSequenceDiagram.png[width:800]
 // end::deleteLimit[]
 // tag::editLimit[]
 
@@ -800,7 +812,7 @@ The user enter two dates after the one "d/" index followed by money with m/ inde
 
 The following sequence diagram shows how the limit operation works:
 
-image::EditLimitSequenceDiagram.png[width:800]
+image::editLimitSequenceDiagram.png[width:800]
 // end::editLimit[]
 // tag::addMonthlyLimit[]
 ==== addMonthlyLimit feature
@@ -869,17 +881,11 @@ image::checkLimitSequenceDiagram.png[width:800]
 === Delete all the record whose date is required
 ==== Current implementation
 The delete by date entry mechanism is facilitated by `ModelManager`.
-It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
-
-DeleteByDateEntryCommand calls `ModelManager#getFilteredRecordList` to retrieve the list of all current records in the Financial Planner. Then, it will loop through the list of records and call `ModelManger#deleteRecord(Record record)` to delete the record whose date is required.
-
-If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Financial Planner and the message, which states records have been deleted. Then, `ModelManager#autoLimitCheck` will be called to check the current change in limit as we delete some records exceeds the limit or not.
-
-This feature has only one keyword `deletedate` and implements only 1 argument mode.
+It represents an in-memory model of Savee and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`. DeleteByDateEntryCommand calls `ModelManager#getFilteredRecordList` to retrieve the list of all current records in the Savee. Then, it will loop through the list of records and call `ModelManger#deleteRecord(Record record)` to delete the record whose date is required. If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Savee and the message, which states records have been deleted. Then, `ModelManager#autoLimitCheck` will be called to check the current change in limit as we delete some records exceeds the limit or *not*. This feature has only one keyword `deletedate` and implements only 1 argument mode.
 The three argument modes are as listed below:
 
 * Single Argument mode -- Requires only one date. It deletes all records whose date is required.
-The date must follow the format: dd-mm-yyyy, error will be thrown if the format is not correct or the date entered is not real.
+The date must follow the format: dd-mm-yyyy, error will be thrown if the format is *not* correct or the date entered is *not* real.
 
 The following sequence diagram shows how the list operation works:
 
@@ -888,37 +894,22 @@ image::DeleteByDateEntrySequenceDiagram.png[width:800]
 // end::deletedate[]
 
 // tag::exportexcel[]
-=== Export the records from Financial Planner into the Excel file.
+=== Export the records from Savee to the Excel file.
 ==== Current implementation
-The export into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
+The export into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the Savee and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`. ExportExcelCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode. The List<Record> is retrieved by calling `ModelManager#getFilteredRecordList`. Meanwhile, it also called `ModelManager#getFinancialPlanner` to get the `ReadOnlyFinancialPlanner`. The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List<SummaryEntry> is easily retrieved from SummaryByDateList by calling `SummaryByDateList#getSummaryList`. `ExcelUtil#setNameExcelFile` is called to make the Excel name based on the condition of startDate and endDate. After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default *User's Working Directory*. With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file.
 
-ExportExcelCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode. The List<Record> is retrieved by calling `ModelManager#getFilteredRecordList`.
-
-Meanwhile, it also called `ModelManager#getFinancialPlanner` to get the `ReadOnlyFinancialPlanner` Financial Planner.
-
-The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List<SummaryEntry> is easily retrieved from SummaryByDateList by calling `SummaryByDateList#getSummaryList`.
-
-`ExcelUtil#setNameExcelFile` is called to make the Excel name based on the condition of startDate and endDate.
-
-After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User's Working Directory.
-
-With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file.
-
-The mechanism that facilitates these modes can be found in the `ExportExcelCommandParser#parse`. Below is a overview of the mechanism:
+There are 6 modes for this feature [refer to *Export the record data from Savee to the Excel file* part in *User Guide*]. The mechanism that facilitates these modes can be found in the `ExportExcelCommandParser#parse`. Below is a overview of the mechanism:
 
 . Method `ExportExcelCommandParser#createExportExcelCommand` takes the input argument and further analyse it.
 . The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
 . This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
 . The string associated with `d/`
-.. It is then passed into `ExportExcelCommandParser#splitByWhitespace` for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format.
-.. If the size of the string equals 1, it is constructed as a date type variable after being passed to `ParseUtil#parseDate`, it must follow the format dd-mm-yyyy. Error will be thrown if the format is not correct or the date entered is not real.
-.. If the size of the string equals 2, each sub-string is constructed as a date type variable after being passed to `ParseUtil#parseDate`, and an additional check is conducted to check if the first date entered, known as Start date is smaller than the second date entered, known as End Date.
+.. It is then passed into `ExportExcelCommandParser#splitByWhitespace` for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format. *If the size of the string equals 1*, it is constructed as a date type variable after being passed to `ParseUtil#parseDate`, it must follow the format dd-mm-yyyy. Error will be thrown if the format is *not* correct or the date entered is *not* real. *If the size of the string equals 2*, each sub-string is constructed as a date type variable after being passed to `ParseUtil#parseDate`, and an additional check is conducted to check if the first date entered, known as Start date is smaller than or equal to the second date entered, known as End Date.
 . The String associated with `dir/`
-.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing.
-.. If the Directory is unreal, an error is thrown to inform the user.
+.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing. *If the Directory path is unreal*, an error is thrown to inform the user.
 . Please take note that:
-.. If the prefix `d/` is not entered in the input, meaning that all the records will be included in the Excel sheet.
-.. If the prefix `dir/` is not entered in the input, meaning that the Directory Path is default as the *User's Working Directory*.
+.. If the prefix `d/` is *not* entered in the input, meaning that all the records will be included in the Excel sheet.
+.. If the prefix `dir/` is *not* entered in the input, meaning that the Directory Path is default as the *User's Working Directory*.
 
 The `ExportExcelCommand` has four constructors which makes use of overloading to reduce code complexity.
 
@@ -932,51 +923,29 @@ The following sequence diagram shows how the list operation works:
 
 image::ExportExcelSequenceDiagram.png[width:800]
 
-[NOTE]
-Please note that the `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `exportexcel` command, the Excel file created will not be deleted.
+If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it *must* be closed before we enter the command. +
+
+Please note that `undo` and `redo` command can only affect Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `export` command, Savee will inform the user that *No more command to undo*, the records remain the same and the Excel file created will *not* be deleted.
 
 // end::exportexcel[]
 
 // tag::import[]
 
-=== Import the record data from the Excel file to the Financial Planner
+=== Import the record data from the Excel file to Savee
 ==== Current implementation
-The import from Excel file mechanism is facilitated by `ExcelUtil`, the utility created to handle all method relating to Excel.
+The import from Excel file mechanism is facilitated by `ExcelUtil`, the utility created to handle all method relating to Excel. ImportExcelCommand calls `ExcelUtil#readExcelSheet` to read the Excel file and retrieve data of records from them to create a list of record List<Record>. In `ExcelUtil#readExcelSheet`, by using method `XSSFWorkbook#setMissingCellPolicy`, every missing cell will be considered as Null cell, quite useful when you export or archive the record data if the record does *not* have tag. If blank row is found, the `ExcelUtil#readExcelSheet` will ignore and read the next line, until the last line is read. This concept also applies to read multiple sheets until all sheets have been read. However, please take note that in order to prevent errors, there are certain constraints of Excel file list in *User Guide* with *Import the record data from the Excel file to the Savee* part. After that, `ModelManager#addListUniqueRecord` is called to add the records in the List<Record>. If the record has already existed in the Savee, it will be ignored and *not* added into the Savee. Eventually, when all the records are added in the Savee, `ModelManager#commitFinancialPlanner` will be called to update the current version of Savee and the message, which states records have been added.
 
-ImportExcelCommand calls `ExcelUtil#readExcelSheet` to read the Excel file and retrieve data of records from them to create a list of record List<Record>.
-
-In `ExcelUtil#readExcelSheet`, by using method `XSSFWorkbook#setMissingCellPolicy`, every missing cell will be considered as Null cell, quite useful when you export or archive the record data if the record does not have tag.
-
-If blank row is found, the `ExcelUtil#readExcelSheet` will ignore and read the next line, until the last line is read. This concept also applies to read multiple sheets until all sheets have been read.
-
-However, please take note that in order to prevent errors, every sheet that user want to read have to set the First row of the table *must* have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will *not* be read.
-
-After that, `ModelManager#addListUniqueRecord` is called to add the records in the List<Record>. If the record has already existed in the Financial Planner, it will be ignored and not added into the Financial Planner.
-
-Eventually, when all the records are added in the Financial Planner, `ModelManager#commitFinancialPlanner` will be called to update the current version of Financial Planner and the message, which states records have been added.
-
-This feature has only one keyword `archive` but implements 2 different argument modes to allow users to access multiple versions of the same command.
-The two argument modes are as listed below:
-
-* *Single argument File Path mode* `import dir/FILE_PATH` will open the Excel file using the given File Path, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.
-
-* *Single argument File Path + single argument File name mode* `import dir/DIRECTORY_PATH  n/NAME_FILE` will open the Excel file using the given Directory path and given file name, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.
-+
-
-The mechanism that facilitates these modes can be found in the `ImportExcelCommandParser#parse`. Below is a overview of the mechanism:
+This feature has 2 different modes [refer to in *Import the record data from the Excel file to the Savee* part in *User Guide*]. The mechanism that facilitates these modes can be found in the `ImportExcelCommandParser#parse`. Below is a overview of the mechanism:
 
 . Method `ImportExcelCommandParser#createArchiveCommand` takes the input argument and further analyse it.
 . The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
 . This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
 
 . The String associated with `dir/`
-.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing.
-.. If the Directory is unreal, an error is thrown to inform the user.
+.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing. If the Directory is unreal, an error is thrown to inform the user.
 
 . The String associated with `n/`
-.. It is then passed into `ExcelUtil#getPathFile` together with the String associated with `dir/` to create the File Path.
-.. The File Path is then passed into `ParseUtil#parseFilePathString` to check if the File path given is existing.
-.. If the File Path is unreal, an error is thrown to inform the user.
+.. It is then passed into `ExcelUtil#getPathFile` together with the String associated with `dir/` to create the File Path. The File Path is then passed into `ParseUtil#parseFilePathString` to check if the File path given is existing. If the File Path is unreal, an error is thrown to inform the user.
 . Please take note that:
 .. The String associated with `dir/` *must* be entered.
 .. The String associated with `n/` is optionally entered.
@@ -992,42 +961,29 @@ The following sequence diagram shows how the list operation works:
 
 image::ImportExcelSequenceDiagram.png[width:800]
 
+The file user want to import *must* be closed before entering the command. +
+
+Please note that the `undo` and `redo` command can only affect the Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `import` command, the records imported will be deleted.
+
 // end::import[]
 
 // tag::archive[]
-=== Archive the record data from Financial Planner to the Excel file
+=== Archive the record data from Savee to the Excel file
 ==== Current implementation
-The archive into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`.
+The archive into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of Savee and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`. ArchiveCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode. The List<Record> is retrieved by calling `ModelManager#getFilteredRecordList`. Meanwhile, it also called `ModelManager#getFinancialPlanner` to get the `ReadOnlyFinancialPlanner`. The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List<SummaryEntry> is easily retrieved from SummaryByDateList by calling `SummaryByDateList#getSummaryList`. `ExcelUtil#setNameExcelFile` is called to make the Excel name based on the condition of startDate and endDate. After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default *User's Working Directory*. With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file. After records are archived to Excel file, `ModelManager#deleteListRecord` is called to delete the archived records.If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Savee and the message, which states records have been deleted.
 
-ArchiveCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode. The List<Record> is retrieved by calling `ModelManager#getFilteredRecordList`.
-
-Meanwhile, it also called `ModelManager#getFinancialPlanner` to get the `ReadOnlyFinancialPlanner` Financial Planner.
-
-The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List<SummaryEntry> is easily retrieved from SummaryByDateList by calling `SummaryByDateList#getSummaryList`.
-
-`ExcelUtil#setNameExcelFile` is called to make the Excel name based on the condition of startDate and endDate.
-
-After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User's Working Directory.
-
-With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file.
-
-After records are archived to Excel file, `ModelManager#deleteListRecord` is called to delete the archived records.If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Financial Planner and the message, which states records have been deleted.
-
-The mechanism that facilitates these modes can be found in the `ArchiveCommandParser#parse`. Below is a overview of the mechanism:
+This feature has 6 different modes [refer to Archive the record data from Savee to the Excel file in *User Guide*]The mechanism that facilitates these modes can be found in the `ArchiveCommandParser#parse`. Below is a overview of the mechanism:
 
 . Method `ArchiveCommandParser#createArchiveCommand` takes the input argument and further analyse it.
 . The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
 . This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
 . The string associated with `d/`
-.. It is then passed into `ArchiveCommandParser#splitByWhitespace` for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format.
-.. If the size of the string equals 1, it is constructed as a date type variable after being passed to `ParseUtil#parseDate`, it must follow the format dd-mm-yyyy. Error will be thrown if the format is not correct or the date entered is not real.
-.. If the size of the string equals 2, each sub-string is constructed as a date type variable after being passed to `ParseUtil#parseDate`, and an additional check is conducted to check if the first date entered, known as Start date is smaller than the second date entered, known as End Date.
+.. It is then passed into `ArchiveCommandParser#splitByWhitespace` for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format. *If the size of the string equals 1*, it is constructed as a date type variable after being passed to `ParseUtil#parseDate`, it must follow the format dd-mm-yyyy. Error will be thrown if the format is *not* correct or the date entered is *not* real. *If the size of the string equals 2*, each sub-string is constructed as a date type variable after being passed to `ParseUtil#parseDate`, and an additional check is conducted to check if the first date entered, known as Start date is smaller than or equal to the second date entered, known as End Date.
 . The String associated with `dir/`
-.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing.
-.. If the Directory is unreal, an error is thrown to inform the user.
+.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing. *If the Directory path is unreal*, an error is thrown to inform the user.
 . Please take note that:
-.. If the prefix `d/` is not entered in the input, meaning that all the records will be included in the Excel sheet.
-.. If the prefix `dir/` is not entered in the input, meaning that the Directory Path is default as the *User's Working Directory*.
+.. If the prefix `d/` is *not* entered in the input, meaning that all the records will be included in the Excel sheet.
+.. If the prefix `dir/` is *not* entered in the input, meaning that the Directory Path is default as the *User's Working Directory*.
 
 The `ArchiveCommand` has four constructors which makes use of overloading to reduce code complexity.
 
@@ -1041,8 +997,9 @@ The following sequence diagram shows how the list operation works:
 
 image::ArchiveSequenceDiagram.png[width:800]
 
-[NOTE]
-Please note that the `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `archive` command, the records archived will be added again back to the Financial Planner but the Excel file created will not be deleted.
+If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it *must* be closed before we enter the command. +
+
+Please note that the `undo` and `redo` command can only affect the Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `archive` command, the records archived will be added again back to the Savee but the Excel file created will *not* be deleted.
 
 // end::archive[]
 
@@ -1051,9 +1008,7 @@ Please note that the `undo` and `redo` command can only affect the Financial Pla
 === Draw a line chart automatically inside the Excel sheet
 ==== Current implementation
 
-This feature will automatically uses the the summary data from the `SUMMARY DATA` sheet in the Excel sheet after the command `archive` or `export_excel` is called.
-
-The feature mechanism is facilitated by `ExcelUtil`, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with `ExcelUtil#drawChart`.
+This feature will automatically uses the the summary data from the `SUMMARY DATA` sheet in the Excel sheet after the command `archive` or `export_excel` is called. The feature mechanism is facilitated by `ExcelUtil`, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with `ExcelUtil#drawChart`.
 
 // end::draw_line_chart[]
 // tag::dataencryption[]
@@ -1883,6 +1838,7 @@ Use case ends.
 ** Use case ends.
 
 [discrete]
+//tag::limitUserCase[]
 === 13. Use case: Create a normal limit for a period of time or a day
 
 *MSS*
@@ -2079,6 +2035,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
+//end::limitUserCase[]
 === 20. Use case: Export record data from Savee to Excel file [Linh Chi]
 
 *MSS*
@@ -2277,7 +2234,7 @@ Activity where an individual engage in exchange of money, can comprise of income
 Resolution refers to the number of pixels that are available in the screen. It determines how wide or tall a screen will look like.
 
 [[Appname]] App Name: (FinancialPlanner/Savee)
-Both FinancialPlanner and Savee refers to the app. Savee is the official name of the app when it is marketed for the users. FInancialPlanner
+Both FinancialPlanner and Savee refers to the app. Savee is the official name of the app when it is marketed for the users. FinancialPlanner
 is the name used when referring to the app in the developer guide and code.
 
 [appendix]
@@ -2451,7 +2408,7 @@ should allow you to navigate to the hidden tags within the legend.
 .. Prerequisites: Same as before. Just need to change the panel to see the effect.
 .. Test case: Add any record with date in current month/ Delete any record with date in current month/ Edit any record to a date in current month/ Clear
 .. Expected: Panel should show the welcome screen.
-
+//tag::limitsManualTest[]
 === Adding a normal limit
 
 . Adding a normal limit to the Financial Planner without the same time period limits inside.
@@ -2619,7 +2576,7 @@ should allow you to navigate to the hidden tags within the legend.
 .. Prerequisites: No limits inside the limit list.
 .. Test case: `checklimit` +
    Expected: The limits' detailed information will not be displayed, no limit in the list error message will be displayed.
-
+//end::limitsManualTest[]
 === Deleting a person
 
 . Deleting a records while all records are listed

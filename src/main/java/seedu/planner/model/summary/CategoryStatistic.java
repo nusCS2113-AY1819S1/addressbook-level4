@@ -44,8 +44,14 @@ public class CategoryStatistic {
         assert(record.getTags().equals(tags));
         if (isExpense(record)) {
             totalExpense += Math.abs(record.getMoneyFlow().toDouble());
+            if (totalExpense > MoneyFlow.MAX_MONEY) {
+                throw new IllegalArgumentException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
+            }
         } else {
             totalIncome += Math.abs(record.getMoneyFlow().toDouble());
+            if (totalIncome > MoneyFlow.MAX_MONEY) {
+                throw new IllegalArgumentException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
+            }
         }
     }
 

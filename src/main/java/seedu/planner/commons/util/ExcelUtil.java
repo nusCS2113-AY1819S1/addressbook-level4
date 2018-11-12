@@ -78,7 +78,7 @@ public class ExcelUtil {
     private static final String MONEY_TITLE = "MONEY";
     private static final String TAG_TITLE = "TAGS";
     private static final String INCOME_TITLE = "INCOME";
-    private static final String OUTCOME_TITLE = "EXPENSE";
+    private static final String OUTCOME_TITLE = "OUTCOME";
     private static final String TOTAL_MONEY = "TOTAL";
     private static final String TAG_SEPARATOR = "  ... ";
 
