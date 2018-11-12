@@ -1922,7 +1922,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1977,7 +1977,7 @@ Use case resumes at step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2035,7 +2035,7 @@ Use case resumes from step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2066,7 +2066,7 @@ Use case resumes from step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -2096,7 +2096,7 @@ Use case resumes from step 1.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
