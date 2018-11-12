@@ -64,6 +64,10 @@ public class CommandTestUtil {
     public static final String VALID_DIST_PHONE_AHLONG = "55555555";
     public static final String VALID_DIST_PHONE_AHSENG = "44444444";
 
+    public static final String VALID_SERIAL_NUMBER_APPLE = "123123";
+    public static final String VALID_SERIAL_NUMBER_BANANA = "11111";
+
+
     public static final String NAME_DESC_APPLE = " " + PREFIX_NAME + VALID_NAME_APPLE;
     public static final String NAME_DESC_BANANA = " " + PREFIX_NAME + VALID_NAME_BANANA;
     public static final String SN_DESC_AMY = " " + PREFIX_SERIAL_NR + VALID_SN_APPLE;
