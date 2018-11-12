@@ -172,6 +172,7 @@ Format: `editdistributor index dn/DISTRIBUTOR_NAME dp/PHONE_NUMBER`
 
 Edits details of the indexed distributor from the list of distributors engaged with the store.
 Index should be a positive number.
+The products that a distributor supplies cannot be edited.
 
 Examples:
 

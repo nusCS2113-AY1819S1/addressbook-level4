@@ -1,9 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.EditDistributorCommand.EditDistributorDescriptor;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
+import seedu.address.model.tag.Tag;
 
 /**
  * A utility class to help with building EditDistributorDescriptor objects.
@@ -47,6 +52,15 @@ public class EditDistributorDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditDistributorDescriptor}
+     * that we are building.
+     */
+    public EditDistributorDescriptorBuilder withTags(String... tags) {
+        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setTags(tagSet);
+        return this;
+    }
 
     public EditDistributorDescriptor build() {
         return descriptor;

@@ -149,7 +149,7 @@ public class EditDistributorCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone);
+            return CollectionUtil.isAnyNonNull(name, phone, tags);
         }
 
         public void setDistName(DistributorName name) {
