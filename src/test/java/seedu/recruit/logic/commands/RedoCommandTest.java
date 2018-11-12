@@ -14,7 +14,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
-public class RedoCandidateBookCommandTest {
+public class RedoCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());

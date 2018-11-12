@@ -116,7 +116,7 @@ image::switchBook.png[width="390"]
 === Adding a candidate / company / job  : `addc` `addC` `addj`
 
 .GUI of Adding entries in RecruitBook
-image::addingRB.gif[width="500"]
+image::addingRB.gif[width="800"]
 
 ==== Adds a candidate to the RecruitBook
 Format: `addc` +
