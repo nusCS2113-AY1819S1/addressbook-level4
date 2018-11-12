@@ -134,10 +134,8 @@ Each of the four components
 * Exposes its functionality using a `{Component Name}Manager` class.
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
-// tag::logicclassdiagram[]
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[width="800"]
-// end::logicclassdiagram[]
 [discrete]
 ==== Events-Driven nature of the design
 
@@ -164,7 +162,6 @@ The sections below give more details of each component.
 // tag::uiclassdiagram[]
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
-// end::uiclassdiagram[]
 
 *API* : link:{repoURL}/src/main/java/seedu/productInfo/ui/Ui.java[`Ui.java`]
 
@@ -178,7 +175,10 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
+// end::uiclassdiagram[]
+
 [[Design-Logic]]
+// tag::logiccomponent[]
 === Logic component
 
 [[fig-LogicClassDiagram]]
@@ -197,6 +197,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 .Interactions Inside the Logic Component for the `deleteproduct 1` Command
 image::DeleteProductSdForLogic.png[width="800"]
+
+// tag::logiccomponent[]
 
 [[Design-Model]]
 === Model component
