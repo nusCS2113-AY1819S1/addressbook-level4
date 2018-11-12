@@ -580,7 +580,6 @@ The following sequence diagrams shows you how the `IncludeNameFindCommand` and `
 utilize `SearchHistoryManager` to perform Search Pruning. Other variations of `FindCommand` works similarly to
 `IncludeNameFindCommand` and the sequence diagram for `IncludeNameFindCommand` is also relevant to them.
 
-
  - `IncludeNameFind` command +
 
 image::SearchPruningSequenceDiagram.png[]
@@ -594,38 +593,38 @@ image::UndoFindSequenceDiagram.png[]
 
 ===== Aspect: What data is stored in search history stack +
 
-* **Alternative 1(current choice):**  Save a Stack of Predicates
+* **Alternative 1(current choice):**  Save a Stack of `Predicate` objects
 ** Pros:
     . Does not need to store the data in search history explicitly which saves memory +
-    . Any form of Search Pruning done with Predicates can reuse `SearchHistoryManager` class +
+    . `SearchHistoryManager` class is reusable for any Search Pruning done with `Predicate` +
 
 ** Cons:
-. Need to understand how `Predicate` works before utilizing this Class.
-. `Predicate` objects by itself does not perform the Search Pruning. We have to call the `setPredicate()` method
-   of the `FilteredList` class with the `Predicate` object as one of the parameters to do the Search Pruning.
+. Developers need to understand how `Predicate` works before utilizing `SearchHistoryManager` to perform Search Pruning.
+. `Predicate` objects by itself does not perform the Search Pruning. We have to make an additional call to the
+  `setPredicate()` method of the `FilteredList` class with the `Predicate` object.
 
-* ** Alternative 2: ** Save a Stack of Lists containing Person objects in search history
+* ** Alternative 2: ** Save a Stack of Lists containing `Person` objects in search history
 ** Pros:
-    . It is easy to understand that we are filtering according to Person objects from `SearchHistoryManager` class
+    . It is easy to understand from the code that we are filtering according to `Person` objects.
 
 ** Cons:
-    . More memory is required as Person objects has to be duplicated multiple times into a new List.
-    . Class is not reusable for Search Pruning of other objects other than those from Person classes.
+    . More memory is required as `Person` objects has to be duplicated multiple times into a new Lists.
+    . `SearchHistoryManager` can only be used for Search Pruning on objects that is a `Person`.
 
 ===== Aspect: How the Predicate at the top of the Stack is retrieved from SearchHistoryManager +
 
-* **Alternative 1(current choice):** `Predicate` object is returned from the methods `executeSearch()` and `revertLastSearch()`
+* **Alternative 1(current choice):** `Predicate` is returned from the methods `executeSearch()` and `revertLastSearch()`
 ** Pros:
-    . No need for an extra method call to retrieve search logic in the form of `Predicate` object from SearchHistoryManager. +
+    . No need for an extra method call to retrieve system search logic in the form of `Predicate` from `SearchHistoryManager`. +
 ** Cons:
-    . No clear distinction between Update and Retrieval of search logic. +
+    . No clear distinction between Update and Retrieval of system search logic. +
 
-* ** Alternative 2: ** `Predicate` object is not returned from the methods `executeSearch()` and `revertLastSearch()`, but is instead retrieved with another method.
+* ** Alternative 2: ** `Predicate` is not returned from the methods `executeSearch()` and `revertLastSearch()`, but is instead retrieved with another method.
 ** Pros:
-    . Clearer distinction between Update and Retrieval of search logic.
+    . Clearer distinction between Update and Retrieval of system search logic.
 
 ** Cons:
-    . Need to perform 2 method calls separately to retrieve `Predicate` object after an update to search logic.
+    . Need to perform 2 method calls separately to retrieve `Predicate` object from `SearchHistoryManager` after an update to search logic.
     . Need to implement another method specifically for retrieval of `Predicate` object.
     . Other developers utilizing `SearchHistoryManger` need to remember that they need to retrieve `Predicate` object from `SearchHistoryManager` separately
       after an update to search logic.
