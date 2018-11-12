@@ -396,50 +396,54 @@ image::SellSequenceDiagramSd.png[width="800"]
 
 // tag::Request[]
 === Request feature
-==== Current Implementation
-The Request command utilises both the `RequestModel` and `Logic` component to fulfil its function.
+==== Current implementation
+The `Request` command utilises both the `RequestModel` and `Logic` component to fulfil its function.
 This is accessible for all users.
 
 ==== Design Considerations
 ===== Aspect: Request command is implemented in a different category
-As mentioned above, Request is called in RequestModel and RequestStorage.
-A request object consists of three objects, Isbn, Email, and Quantity.
+As mentioned above, `Request` is called in `RequestModel` and `RequestStorage`.
+A request object consists of three objects, `Isbn`, `Email`, and `Quantity`.
 
 ===== RequestModel component
 
-.Structure of the RequestModel Component
+.Structure of the `RequestModel` Component
 image::RequestModelClassDiagram.jpg[width="800"]
 
 The implementation is similar to 2.4. Model component.
-Note that XmlAdaptedTag class is removed as request has no tags.
+Note that `XmlAdaptedTag` class is removed as request has no tags.
 
 ===== RequestStorage component
 
-.Structure of the RequestStorage Component
+.Structure of the `RequestStorage` Component
 image::RequestStorageClassDiagram.jpg[width="800"]
 
-Likewise, this implementation is similar to 2.5. Storage component.
+Likewise, this implementation is similar to 2.5. Storage Component.
 
 ===== Aspect: How Request command is implemented
 
-.Structure of Request (High Level Sequence Diagram)
+.Structure of `Request` (High Level Sequence Diagram)
 image::HighLevelRequestSequenceDiagram.png[width="800"]
 
-* **Similar to Add Command**
-** After request command is called by the user, it gets parsed through a RequestListParser.
-** The UI also prompts to EventCenter and logs out that the Request List has changed.
-** Request object is created and added to the model.
+* **Similar to `Add` Command**
+** After request command is called by the user, it gets parsed through a `RequestListParser`.
+** The UI also prompts to `EventCenter` and shows that the `RequestList` has changed.
+** `Request` object is created and added to the model.
 ** The storage then receives the request and returns message to model, which is then transferred to the UI.
 ** This notifies the user that the request is successfully submitted.
 
-* **Similar to Delete Command**
+* **Similar to `Delete` Command**
 ** The bookstore owner may decide whether to accept or reject a request offer.
-** After deciding, he or she can type deleterequest to remove Request from the RequestList.
+** After deciding, he or she can type `deleterequest` to remove `Request` from the `RequestList`.
 
 ===== Aspect: How ToggleRequests command functions
 
-.Sequence Diagram of the ToggleRequests Component
+.Sequence Diagram of the `ToggleRequests` Component
 image::ToggleRequestSequenceDiagram.png[width="800"]
+
+** When the user types `togglerequests`, a `RequestPanelChangedEvent` exception is raised.
+** A function in the UI page, `MainWindow`, handles this event by toggling the display.
+** A message will then be sent to the user, indicating that the request panel is toggled.
 
 // end::Request[]
 
@@ -556,18 +560,41 @@ In addition, the text in the command box will be replaced with a template of the
 // tag::commandprediction[]
 === Command Prediction
 
-==== Current Implementation
+==== Rationale
 To maximize user friendliness, we have implemented predictive text which will appear
-familiar for phone users. BookInventory users may inadvertently misspell command words,
+familiar for phone users. *[yellow]#_BookInventory_#* users may inadvertently misspell command words,
 e.g. lis (Expected command: list). This will now prompt a GUI log stating, "Did you mean,
-list?". To achieve this, we have utilized the Dice Coefficient.
+list?" To achieve this, we have utilized the Dice Coefficient.
+
+==== Current Implementation
+
+.Logic Sequence Diagram (Command "Togglereq" called)
+image::CommandPredictionSequenceDiagram.png[width="800"]
+
+Here is a step-by-step walk-through on how this algorithm works.
+
+Step 1: When the user types "togglereq" in the command box and hits enter, the command is accepted by the UI
+and passed to the `LogicManager`.
+
+Step 2: It first gets the `previousCommand` keyed in by the user. This is necessary
+as the commands undo/redo are only accepted in `RequestList` if the previous command keyed in
+belongs to `RequestList`.
+
+Step 3: `parseInput` is then called, which returns true as `DifferentiatingParser` detects that the command should
+ belong to `RequestListParser`. `LogicManager` then calls `parseCommandRequest`.
+
+Step 4: `RequestListParser` calls `performSimilarityCheck` in `SimilarityParser`. Dice Coefficient detects that the
+command is similar to the command `togglerequests`, and return it in the form of a String, in `predictedCommand`.
+
+Step 5: `ParseException` is eventually thrown in `RequestListParser`, signalling to the user that
+a spelling error is detected.
 
 ==== Design Considerations
 
 ===== Aspect: How does Dice Coefficient works?
 
-Dice's coefficient measures the similarity between two sets. It can also be used to help measure how
-similar two strings are in terms of the number of common bigrams (a bigram is a pair of adjacent
+Dice's coefficient measures the similarity between two sets. In *[yellow]#_BookInventory_#*, we use it to help measure how
+similar two strings are in terms of the number of common bigrams (A bigram is a pair of adjacent
 letters in the string).The Coefficient result of 1 indicates identical vectors (completely equal strings) as
 where a 0 equals orthogonal vectors (completely unequal strings).
 
@@ -575,10 +602,10 @@ Formula: Dice's coefficient = (2 * Common Terms) / (Number of terms in String1 +
 
 ===== Aspect: How well does this algorithm predicts?
 
-Our current implementation sets Dice's Coefficient to 0.5. Through our testing, this appears
-fine for most spelling errors. However, it will not predict too ridiculous errors because we
-do not wish to face a scenario where the suggestion offers another command word which is
-unintended by the user.
+Our current implementation sets Dice's Coefficient to 0.5. For some scenarios, we have implemented
+an adjusted value of 0.7. Through our testing, this appears fine for most spelling errors.
+However, it will not predict too ridiculous errors because we do not wish to face a scenario where
+the suggestion offers another command word which is unintended by the user.
 
 // end::commandprediction[]
 
@@ -1301,13 +1328,71 @@ _{ more test cases ... }_
 
 .. Prerequisites: List all books using the `list` command. Multiple books in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First book is deleted from the list. Details of the deleted book shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No book is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+=== Checking quantity of books
+
+. Checks inventory for books less than or equal to the quantity
+
+.. Prerequisites: None.
+.. Test case: `check 1` +
+   Expected: Displays the list of books ordered in ascending order with quantity less than 1. Timestamp in the status bar is updated.
+.. Test case: `check -1` +
+   Expected: Error details shown in the status message. Status bar remains the same.
+.. Other incorrect sell commands to try: `check x`(where x is lesser than 0 or larger than 999), +
+   Expected: Similar to previous.
+
+=== Selling a book
+
+. Selling a book while all books are listed
+
+.. Prerequisites: List all books using the `list` command. Multiple books in the list.
+.. Test case: `sell 1 q/1` +
+   Expected: Quantity of first book is decreased by one. Number of books sold and details of the sold book shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `sell 0 q/1` +
+   Expected: No book is sold. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect sell commands to try: `sell`, `sell 1`, `sell x q/1` (where x is larger than the list size), +
+   Expected: Similar to previous.
+
+. Selling a book using Isbn
+
+.. Prerequisites: None.
+.. Test case: `sell i/9780321775658 q/1` +
+   Expected: Quantity of book with the isbn is decreased by one. Number of books sold and details of the sold book shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `sell i/1234567890 q/1` +
+   Expected: No book is sold. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect sell commands to try: `sell i/ q/1`, `sell i/9780321775658`, `sell i/x q/1` (where x is any invalid Isbn), +
+   Expected: Similar to previous.
+
+=== Using Tab
+
+. Complete empty Isbn field
+
+.. Prerequisites: Type `i/` in the `CommandBox`.
+.. Test case: Press `TAB` +
+   Expected: Isbn of first book in the list is displayed in the CommandBox.
+.. Test case: Press `TAB` twice +
+   Expected: Isbn of first book is displayed followed by the second book in the list in the CommandBox.
+
+. Complete half inputted Isbn field
+
+.. Prerequisites: Type `i/978` in the `CommandBox`.
+.. Test case: Press `TAB` +
+   Expected: Isbn of first book containing `978` in the list is displayed in the CommandBox.
+.. Test case: Press `TAB` twice +
+   Expected: Isbn of first book containing `978` is displayed followed by the second book containing `978` in the list in the CommandBox.
+
+. Complete invalid half inputted Isbn field
+
+.. Prerequisites: Type `i/777` in the `CommandBox`.
+.. Test case: Press `TAB` +
+   Expected: Nothing happens.
 
 === Saving data
 

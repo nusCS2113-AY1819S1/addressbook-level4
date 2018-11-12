@@ -14,16 +14,16 @@ endif::[]
 
 == Overview
 
-This Project Portfolio documents my contributions and demonstrates my ability to write documentation for both User Guide and Developer Guide for _BookInventory_.
-
-_BookInventory_ is a *multi-platform* desktop application catered *primarily* for store owners to manage their book supplies. It includes features such as adding, deleting and requesting of books in the inventory. Users interact with _BookInventory_ using *Command Line Interface (CLI)*, and has a *Graphic User Interface (GUI)* created with JavaFX. This application was developed by a *team of four* students over a period of one semester with the original source code adapted from the Address Book (Level 4) project by SE-EDU.
+This Project Portfolio summarises my overall contributions to _BookInventory_. It is a *multi-platform* desktop application catered *primarily* for store owners to manage their book supplies - adding, deleting, requesting of books, etc.. Users interact with _BookInventory_ using *Command Line Interface (CLI)*, and has a *Graphic User Interface (GUI)* created with JavaFX. This application was developed by a *team of four* students over a semester with the original source code adapted from the Address Book (Level 4) project by SE-EDU.
 
 == Summary of contributions
 
+This section records my contributions for _BookInventory_.
+
 * *Major enhancement*: added *the ability to conveniently stock, sell and delete books* from the inventory
-** What it does: users can now execute `stock`/`sell`/`delete` commands by selecting books with their unique ISBN. To facilitate typing of ISBN, users can cycle through existing ISBNs in the inventory by pressing kbd:[Tab].
-** Justification: As books are bought and sold on a *daily* basis, there should be a faster and more convenient way executing them in _BookInventory_.
-** Highlights: This enhancement affects existing commands and commands to be added in future. The implementation was challenging as it required changes to existing commands.
+** What it does: to execute `stock`/`sell`/`delete` commands, one can select a book's unique ISBN using a shortcut that can scan through all available ISBN - kbd:[Tab] .
+** Justification: As sales are performed *daily*, commands should be executed conveniently.
+** Highlights: This enhancement not only affects existing commands, but also future commands.
 
 * *Minor enhancement*: added *the ability to display a list of books less than or equal to a given quantity* using the `check` command.
 
@@ -40,7 +40,6 @@ _BookInventory_ is a *multi-platform* desktop application catered *primarily* fo
 *** Updated the initial User Guide to be a representation of _BookInventory_.
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T12-3/main/issues/174[1], https://github.com/CS2113-AY1819S1-T12-3/main/issues/176[2], https://github.com/CS2113-AY1819S1-T12-3/main/issues/182[3], https://github.com/CS2113-AY1819S1-T12-3/main/issues/196[4])
-*** Some parts of the kbd:[Tab] feature I added was adopted by several other classmates
 
 == Contributions to the User Guide
 

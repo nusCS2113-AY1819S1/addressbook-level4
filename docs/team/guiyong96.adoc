@@ -9,7 +9,7 @@
 
 == Overview
 
-*BookInventory* is a desktop application to assist store managers in managing their books stock supply and engaging netizens who do not frequently visit book stores. This *3 in 1 application* is catered for the bookstore owner, bookstore in-house accountants and students. Bookstore in-house accountants may assist the managers with a separate set of privileges specifically to manage profit margins and make subsequent plans. Lastly, students may access the app to browse the book of their choice and issue requests to the store owners to express interest.
+*[blue]#_BookInventory_#* is a desktop application to assist bookstore *owners* in managing their books stock supply and engaging netizens who do not frequently visit book stores. This *3 in 1 application* is catered to not only the bookstore *owner*, but also the bookstore in-house *accountants* and *students*. Bookstore in-house *accountants* may assist the managers with a separate set of privileges specifically to manage profit margins and make subsequent plans. Lastly, *students* may access the app to browse the book of their choice and issue requests on *[blue]#_BookInventory_#* to the store owners to express interest.
 
 This application is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). In this paper, I will bring you through my thought process for each implementation as well as elaborating on how each implementation is done.
 
@@ -17,15 +17,15 @@ This application is optimized for those who prefer to work with Command Line Int
 
 *Major enhancement*
 
-*  Added a command for students to *request* for books.
-** Functionality: Students may request for any book by typing the command in the format given in the user guide. Students may request for any book, regardless of whether the book exists in the book store.
-** Justification: This feature brings about convenience for students who can demand a book at the comfort of their homes. This is also advantageous for bookstore owners in gauging which books are popular and hence increase the supply of those books accordingly.
+*  Added a command for *students* to *request* for books.
+** Functionality: *Students* may request for any book by typing the command in the format given in the user guide. *Students* may request for any book, regardless of whether the book exists in the book store.
+** Justification: This feature brings about convenience for *students* who can demand a book at the comfort of their homes. This is also advantageous for *bookstore owners* in gauging which books are popular and hence increase the supply of those books accordingly.
 ** Highlights: The implementation of an additional panel requires a separated segment from the original code. Through this process, I have learnt to be well-versed in JavaFX. The design approach and precautions taken required careful analysis and a considerably long period of time. Thorough checking and elaborate lengthy tests were also necessary to minimise undesirable bugs surfacing.
 
 *Minor enhancements*
 
 * Secondary UI panel now enabled strictly for store owners to view ongoing requests.
-** Functionality: Owners are able to view a list of requests sent in by students.
+** Functionality: Owners are able to view a list of requests sent in by *students*.
 ** Justification: This feature is necessary for owners to view and decide whether to accept or reject a request.
 ** Highlights: This feature requires heavy implementation in coding as we require an additional storage and an additional model which require due amount of time to implement.
 
@@ -39,15 +39,17 @@ This application is optimized for those who prefer to work with Command Line Int
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=guiyong96[Functional/Test code]]
 
-* *Other contributions*:
+*Other contributions*:
 
-** Project management:
-*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
-** Project morphing:
-*** Morphed storage portion of addressbook 4.
-** Community:
-*** Perform refactoring for the majority of the code.
-*** Several parts of the request feature implemented were adopted by others.
+* Project management:
+** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
+* Miscellaneous:
+** Perform refactoring for the majority of the code.
+** Morphed storage portion of AB4.
+** Rearranged user guide layout.
+* Community:
+** Addressed bugs found by peers in bug testing session.
+** Several parts of the request feature implemented were adopted by others.
 
 == Contributions to the User Guide
 
@@ -61,15 +63,30 @@ Requests to buy a book in the inventory. +
 Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 
 ****
-*   Students may indicate interest by requesting an item of a certain ISBN.
-•	The email given helps bookstore owners confirm order with the requester. It is up to the owner's preference to decide whether he/she wishes to accept the request.
+*   *Students* may indicate interest by requesting an item of a certain ISBN.
+•	The email given helps *bookstore owners* confirm order with the requester. It is up to the owner's preference to decide whether he/she wishes to accept the request.
 •	Possible reasons may include: Item is not a book, item not found in bookstore (Unable to find stock), quantity demanded too high.
 •	Note: This app does not have an automatic email response from owner. Thus, it depends on the owner’s personal preference to decide if he/she wishes to reply.
 ****
 
+Examples:
+
+* `request i/9780321693624 e/lxh1996@gmail.com q/2` +
+Request for 2 books of book ISBN 9780321693624, with email provided.
+
+* `request i/9780205677207 e/krw1998@gmail.com q/21` +
+Request for 21 books of book ISBN 9780205677207, with email provided.
+
+[NOTE]
+====
+* ISBN input must be valid. Please refer to an online website to search for the book ISBN.
+* It is necessary for you to provide an email so that the owner can contact you.
+* Quantity input is capped at 999. You are unable to request beyond this amount.
+====
+
 === Deleting a request : `deleterequest`
 
-Deletes the specified request from the request list. Strictly for bookstore owners. +
+Deletes the specified request from the request list. Strictly for *bookstore owners*. +
 Format: `deleterequest INDEX`
 
 Examples:
@@ -82,8 +99,14 @@ Deletes the 27th request in the displayed request list.
 
 === Toggle request panel : `togglerequests`
 
-Toggle the request panel. When toggled off, requests are hidden and request panel can be minimized. Strictly for bookstore owners. +
+Toggle the request panel.  Strictly for *bookstore owners*. +
 Format: `togglerequests`
+
+****
+*   *Bookstore owners* may choose to use this command when they find it a hassle to handle too many UI panels.
+•	When toggled off, requests will be hidden and request panel can be minimized.
+•	When toggled back on, request panel is readjusted and re-displayed.
+****
 
 == Contributions to the Developer Guide
 
@@ -94,66 +117,93 @@ Format: `togglerequests`
 // tag::Request[]
 === Request feature
 ==== Current implementation
-The Request command utilises both the `RequestModel` and `Logic` component to fulfil its function.
+The `Request` command utilises both the `RequestModel` and `Logic` component to fulfil its function.
 This is accessible for all users.
 
 ==== Design Considerations
 ===== Aspect: Request command is implemented in a different category
-As mentioned above, Request is called in RequestModel and RequestStorage.
-A request object consists of three objects, Isbn, Email, and Quantity.
+As mentioned above, `Request` is called in `RequestModel` and `RequestStorage`.
+A request object consists of three objects, `Isbn`, `Email`, and `Quantity`.
 
 ===== RequestModel component
 
-.Structure of the RequestModel Component
+.Structure of the `RequestModel` Component
 image::RequestModelClassDiagram.jpg[width="800"]
 
 The implementation is similar to 2.4. Model component.
-Note that XmlAdaptedTag class is removed as request has no tags.
+Note that `XmlAdaptedTag` class is removed as request has no tags.
 
 ===== RequestStorage component
 
-.Structure of the RequestStorage Component
+.Structure of the `RequestStorage` Component
 image::RequestStorageClassDiagram.jpg[width="800"]
 
-Likewise, this implementation is similar to 2.5. Storage component.
+Likewise, this implementation is similar to 2.5. Storage Component.
 
 ===== Aspect: How Request command is implemented
 
-.Structure of Request (High Level Sequence Diagram)
+.Structure of `Request` (High Level Sequence Diagram)
 image::HighLevelRequestSequenceDiagram.png[width="800"]
 
-* **Similar to Add Command**
-** After request command is called by the user, it gets parsed through a RequestListParser.
-** The UI also prompts to EventCenter and logs out that the Request List has changed.
-** Request object is created and added to the model.
+* **Similar to `Add` Command**
+** After request command is called by the user, it gets parsed through a `RequestListParser`.
+** The UI also prompts to `EventCenter` and shows that the `RequestList` has changed.
+** `Request` object is created and added to the model.
 ** The storage then receives the request and returns message to model, which is then transferred to the UI.
 ** This notifies the user that the request is successfully submitted.
 
-* **Similar to Delete Command**
+* **Similar to `Delete` Command**
 ** The bookstore owner may decide whether to accept or reject a request offer.
-** After deciding, he or she can type deleterequest to remove Request from the RequestList.
+** After deciding, he or she can type `deleterequest` to remove `Request` from the `RequestList`.
 
 ===== Aspect: How ToggleRequests command functions
 
-.Sequence Diagram of the ToggleRequests Component
+.Sequence Diagram of the `ToggleRequests` Component
 image::ToggleRequestSequenceDiagram.png[width="800"]
+
+** When the user types `togglerequests`, a `RequestPanelChangedEvent` exception is raised.
+** A function in the UI page, `MainWindow`, handles this event by toggling the display.
+** A message will then be sent to the user, indicating that the request panel is toggled.
 
 // end::Request[]
 
 // tag::commandprediction[]
 === Command Prediction
 
-==== Current Implementation
+==== Rationale
 To maximize user friendliness, we have implemented predictive text which will appear
-familiar for phone users. *BookInventory* users may inadvertently misspell command words,
+familiar for phone users. *[blue]#_BookInventory_#* users may inadvertently misspell command words,
 e.g. lis (Expected command: list). This will now prompt a GUI log stating, "Did you mean,
 list?" To achieve this, we have utilized the Dice Coefficient.
+
+==== Current Implementation
+
+.Logic Sequence Diagram (Command "Togglereq" called)
+image::CommandPredictionSequenceDiagram.png[width="800"]
+
+Here is a step-by-step walk-through on how this algorithm works.
+
+Step 1: When the user types "togglereq" in the command box and hits enter, the command is accepted by the UI
+and passed to the `LogicManager`.
+
+Step 2: It first gets the `previousCommand` keyed in by the user. This is necessary
+as the commands undo/redo are only accepted in `RequestList` if the previous command keyed in
+belongs to `RequestList`.
+
+Step 3: `parseInput` is then called, which returns true as `DifferentiatingParser` detects that the command should
+ belong to `RequestListParser`. `LogicManager` then calls `parseCommandRequest`.
+
+Step 4: `RequestListParser` calls `performSimilarityCheck` in `SimilarityParser`. Dice Coefficient detects that the
+command is similar to the command `togglerequests`, and return it in the form of a String, in `predictedCommand`.
+
+Step 5: `ParseException` is eventually thrown in `RequestListParser`, signalling to the user that
+a spelling error is detected.
 
 ==== Design Considerations
 
 ===== Aspect: How does Dice Coefficient works?
 
-Dice's coefficient measures the similarity between two sets. In *BookInventory*, we use it to help measure how
+Dice's coefficient measures the similarity between two sets. In *[blue]#_BookInventory_#*, we use it to help measure how
 similar two strings are in terms of the number of common bigrams (A bigram is a pair of adjacent
 letters in the string).The Coefficient result of 1 indicates identical vectors (completely equal strings) as
 where a 0 equals orthogonal vectors (completely unequal strings).
