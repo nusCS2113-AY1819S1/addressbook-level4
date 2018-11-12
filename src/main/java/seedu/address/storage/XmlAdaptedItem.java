@@ -11,11 +11,11 @@ import seedu.address.model.item.ItemName;
 import seedu.address.model.item.ItemQuantity;
 
 /**
- * JAXB-friendly version of the Item.
+ * JAXB-friendly version of the item.
  */
 public class XmlAdaptedItem {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Item's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "item's %s field is missing!";
 
     @XmlElement(required = true)
     private String itemName;
@@ -41,7 +41,7 @@ public class XmlAdaptedItem {
     }
 
     /**
-     * Converts a given Item into this class for JAXB use.
+     * Converts a given item into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedItem
      */
@@ -52,7 +52,7 @@ public class XmlAdaptedItem {
     }
 
     /**
-     * Converts this jaxb-friendly adapted item object into the model's Item object.
+     * Converts this jaxb-friendly adapted item object into the model's item object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted item
      */

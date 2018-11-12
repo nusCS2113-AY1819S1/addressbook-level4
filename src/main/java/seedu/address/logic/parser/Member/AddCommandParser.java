@@ -27,6 +27,7 @@ import seedu.address.model.member.Person;
 import seedu.address.model.member.Phone;
 import seedu.address.model.member.Postalcode;
 import seedu.address.model.tag.Tag;
+import seedu.address.logic.commands.MemberCommand.AddMemberCommand;
 
 /**
  * Parses input arguments and creates a new AddMemberCommand object
@@ -42,6 +43,7 @@ public class AddCommandParser implements Parser<AddMemberCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_POSTALCODE, PREFIX_MAJOR, PREFIX_TAG);
+
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_MAJOR,
                 PREFIX_POSTALCODE)
                 || !argMultimap.getPreamble().isEmpty()) {

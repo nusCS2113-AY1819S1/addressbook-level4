@@ -42,7 +42,7 @@ public class AddMemberCommandTest {
     public void constructor_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddMemberCommand(null);
-    }
+}
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
