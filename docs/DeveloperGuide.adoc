@@ -198,7 +198,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `deleteproduct 1` Command
 image::DeleteProductSdForLogic.png[width="800"]
 
-// tag::logiccomponent[]
+// end::logiccomponent[]
 
 [[Design-Model]]
 // tag::modelcomponent[]
