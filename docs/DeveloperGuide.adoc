@@ -699,7 +699,7 @@ image::exportCommandResultUI.png[]
 .Command result show in file folder
 image::exportCommandResultFile.png[]
 
-The process is illustrated in the following diagram: (Fig 15)
+The process is illustrated in the following diagram:
 
 .ExportCalendarCommand sequence diagram
 image::exportCalendarCommandSequencesDiagram.png[]
