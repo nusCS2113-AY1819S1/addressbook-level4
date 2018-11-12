@@ -19,6 +19,9 @@ import seedu.address.logic.commands.ModuleEditCommand.EditModuleDescriptor;
 import seedu.address.model.module.ModuleName;
 import seedu.address.testutil.EditModuleDescriptorBuilder;
 
+/**
+ * Contains unit tests for {@code ModuleEditCommandParser}
+ */
 public class ModuleEditCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
