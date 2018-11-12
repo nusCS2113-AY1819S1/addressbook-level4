@@ -271,7 +271,7 @@ Step 4. Lastly, `Model#commitTaskBook()` will be called to update the `TaskBookS
 The following sequence diagram illustrates how the `select` command is implemented.
 
 .Sequence diagram for `select` command
-image::SelectDeadline.PNG[width=”800”]
+image::SelectDeadline.PNG[width=”600”]
 
 ==== Design considerations
 ===== Aspect: Format for selection of date
@@ -321,7 +321,7 @@ Step 5. Lastly, `Model#commitTaskBook()` will be called to update the `TaskBookS
 The following sequence diagram illustrates how the `edit` command is implemented.
 
 .Sequence diagram for `edit` command
-image::EditTaskSequenceDiagram.PNG[width=”800”]
+image::EditTaskSequenceDiagram.PNG[width=”600”]
 
 ==== Design considerations
 ===== Aspect: How to edit different fields of a task
