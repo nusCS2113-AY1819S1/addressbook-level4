@@ -284,8 +284,6 @@ Format: `deletedate DATE`
 * Date refers to the date of the expected records to be deleted.
 ****
 
-
-[NOTE]
 Date should follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while *yyyy* requires exactly 4 digits. +
 
 
@@ -550,31 +548,24 @@ This section describe features for the user to manage his/her records data in Sa
 Exports the records into an Excel file. +
 
 There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
+
 Format: +
 
-. Default mode: `exportexcel`
-. Single argument Date mode: `exportexcel d/DATE`
-. Dual argument Date mode: `exportexcel d/START_DATE END_DATE`
-. Single argument Directory Path mode: `exportexcel dir/DIRECTORY_PATH`
-. Single argument Directory Path + Single argument Date mode: `exportexcel d/DATE dir/DIRECTORY_PATH`
-. Single argument Directory Path + Dual argument Date mode: `exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH`
-
 ****
-* *Default mode* will list down all records in Savee and exports all of them to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.
+* *Default mode* `exportexcel` will list down all records in Savee and exports all of them to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.
 
-* *Single argument Date mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.
+* *Single argument Date mode* `exportexcel d/DATE` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.
 
-* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.
+* *Dual argument Date mode* `exportexcel d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.
 
-* *Single argument Directory Path mode* will list down all records in Savee and exports all of them to an Excel file and store the file in the chosen Directory Path.
+* *Single argument Directory Path mode* `exportexcel dir/DIRECTORY_PATH` will list down all records in Savee and exports all of them to an Excel file and store the file in the chosen Directory Path.
 
-* *Single argument Date mode + Single argument Directory path mode* will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
+* *Single argument Date mode + Single argument Directory path mode* `exportexcel d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
 
-* *Dual argument Date mode + Single argument Directory path mode* will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.
+* *Dual argument Date mode + Single argument Directory path mode* `exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.
 +
 ****
 
-[NOTE]
 If the command is in *Dual argument Date mode*, START_DATE (the first `Date`) should be earlier than or equal to the END_DATE (the second `Date`). +
 Date should follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while *yyyy* requires exactly 4 digits.
 
@@ -583,7 +574,6 @@ The Excel file name will be named based on the command, relating to Date: +
 * *Default mode*: The Excel file will be named `Financial_Planner_ALL.xlsx`
 * *Single argument Date mode*: The Excel file will be named `Financial_Planner_dd-mm-yyyy.xlsx`
 * *Dual argument Date*: The Excel file will be named `Financial_Planner_dd-mm-yyyy_dd-mm-yyyy.xlsx`
-
 
 If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it *must* be closed before we enter the command.
 
@@ -619,13 +609,11 @@ There are 2 modes, single argument File Path mode and (single argument Directory
 
 Format: +
 
-. Single argument File Path mode: `import dir/FILE_PATH` +
-. Single argument File Path + single argument File name mode: `import dir/DIRECTORY_PATH  n/NAME_FILE` +
 
 ****
-* *Single argument File Path mode* will open the Excel file using the given File Path, import all records in Savee and check if these records exist in the Savee, then exports all of non-existent records to Savee.
+* *Single argument File Path mode* `import dir/FILE_PATH` will open the Excel file using the given File Path, import all records in Savee and check if these records exist in the Savee, then exports all of non-existent records to Savee.
 
-* *Single argument File Path + single argument File name mode* will open the Excel file using the given Directory path and given file name, import all records in Savee and check if these records exist in Savee, then exports all of non-existent records to Savee.
+* *Single argument File Path + single argument File name mode* `import dir/DIRECTORY_PATH  n/NAME_FILE` will open the Excel file using the given Directory path and given file name, import all records in Savee and check if these records exist in Savee, then exports all of non-existent records to Savee.
 
 +
 ****
@@ -644,15 +632,12 @@ Please note that the `undo` and `redo` command can only affect the Savee but the
 
 When performing `import` command to import all the records data from the Excel file to Savee, user should take note that there are some constraints which may help the `import` command performs smoothly.
 
-* The excel file can have multiple sheets, containing records data. The starting row of the table does *not* have to be first row of the sheet. This also applies to the column.
-* There can be blank row blending in the table, but there must be *no* blank column.
-* The First row of the table should have 4 cells, namely *NAME*, *DATE*, *MONEY*, *TAGS*. These 4 cells can be case-insensitive. The sheet with records data but does *not* have the first row, *NAME*, *DATE*, *MONEY*, *TAGS* will *not* be read.
-* The information of *NAME*, *DATE*, *MONEY* columns should be fully filled, while the *TAGS* columns is optionally filled.
-* Each tag should be separated by ... (*3 consecutive dots*). Beside ... , numbers and alphabet character, there should be no other character.
+* The excel file can have multiple sheets, containing records data. The starting row of the table does *not* have to be first row of the sheet. This also applies to the column. There can be blank row blending in the table, but there must be *no* blank column.
+* The First row of the table should have 4 cells, namely *NAME*, *DATE*, *MONEY*, *TAGS*. These 4 cells can be case-insensitive. The sheet with records data but does *not* have the first row, *NAME*, *DATE*, *MONEY*, *TAGS* will *not* be read. The information of *NAME*, *DATE*, *MONEY* columns should be fully filled, while the *TAGS* columns is optionally filled. Each tag should be separated by ... (*3 consecutive dots*). Beside ... , numbers and alphabet character, there should be no other character.
 
 The picture below shows a good example for the Excel Sheet.
 
-image::Export_Capture1_LinhChi.png[width="300"]
+image::Export_Capture1_LinhChi.png[width="350"]
 
 // end::import[]
 
@@ -663,31 +648,24 @@ image::Export_Capture1_LinhChi.png[width="300"]
 Archives the records into an Excel file. +
 
 There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
+
 Format: +
 
-. Default mode: `archive` +
-. Single argument Date mode: `archive d/DATE` +
-. Dual argument Date mode: `archive d/START_DATE END_DATE`
-. Single argument Directory Path mode: `archive dir/DIRECTORY_PATH`
-. Single argument Directory Path + Single argument Date mode: `archive d/DATE dir/DIRECTORY_PATH`
-. Single argument Directory Path + Dual argument Date mode: `archive d/START_DATE END_DATE dir/DIRECTORY_PATH`
-
 ****
-* *Default mode* will list down all records in Savee and archives all of them to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*. Then, the records stored in the Excel file will be deleted automatically in Savee.
+* *Default mode* `archive` will list down all records in Savee and archives all of them to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*. Then, the records stored in the Excel file will be deleted automatically in Savee.
 
-* *Single argument Date mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
+* *Single argument Date mode* `archive d/DATE` will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
 
-* *Dual argument Date mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
+* *Dual argument Date mode* `archive d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
 
-* *Single argument Directory Path mode* will list down all records in Savee and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
+* *Single argument Directory Path mode* `archive dir/DIRECTORY_PATH` will list down all records in Savee and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
 
-* *Single argument Date mode + Single argument Directory path mode* will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
+* *Single argument Date mode + Single argument Directory path mode* `archive d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
 
-* *Dual argument Date mode + Single argument Directory path mode* will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
+* *Dual argument Date mode + Single argument Directory path mode* `archive d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
 +
 ****
 
-[NOTE]
 If the command is in *Dual argument Date mode*, START_DATE (the first `Date`) should be earlier than or equal to the END_DATE (the second `Date`). +
 Date follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
 *yyyy* requires exactly 4 digits.
