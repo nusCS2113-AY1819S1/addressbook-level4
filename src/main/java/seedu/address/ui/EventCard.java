@@ -8,12 +8,11 @@ import seedu.address.model.event.Event;
 
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Event}.
  */
 public class EventCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
-    private static final String[] TAG_COLOR = {"red", "orange", "yellow", "green", "blue", "indigo", "purple", "pink"};
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -26,7 +25,7 @@ public class EventCard extends UiPart<Region> {
     public final Event event;
 
     @FXML
-    private HBox cardPane;
+    private HBox eventCardPane;
     @FXML
     private Label eventName;
     @FXML
@@ -48,10 +47,10 @@ public class EventCard extends UiPart<Region> {
         eventId.setText(displayedIndex + ". ");
         eventName.setText(event.getEventName().fullName);
         description.setText(event.getDescription().value);
-        eventLocation.setText(String.format("Location: %s", event.getLocation().value));
-        eventDate.setText(String.format("Date: %s", event.getDate().eventDate));
-        startTime.setText(String.format("Start time: %s", event.getStartTime().time));
-        endTime.setText(String.format("End time: %s", event.getEndTime().time));
+        eventLocation.setText(String.format(event.getLocation().value));
+        eventDate.setText(String.format(event.getDate().eventDate));
+        startTime.setText(String.format(event.getStartTime().time));
+        endTime.setText(String.format(event.getEndTime().time));
     }
 
     @Override

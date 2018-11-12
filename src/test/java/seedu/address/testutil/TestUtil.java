@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,5 +52,12 @@ public class TestUtil {
      */
     public static Person getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns the event in the {@code model}'s event list at {@code index}.
+     */
+    public static Event getEvent(Model model, Index index) {
+        return model.getFilteredEventList().get(index.getZeroBased());
     }
 }

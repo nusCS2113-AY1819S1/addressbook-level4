@@ -7,7 +7,7 @@ package seedu.address.model.event;
 public class EndTime extends Time {
 
     public static final String MESSAGE_INVALID_END_TIME =
-            "End time should not be earlier than start time.";
+            "End time should be later than start time.";
 
     /**
      * Constructs a {@code Name}.

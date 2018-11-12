@@ -41,6 +41,7 @@ import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
 
+
 /**
  * The main entry point to the application.
  */
@@ -108,8 +109,8 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialAddressData = new AddressBook();
         }
-
-
+        //@@author: IcedCoffeeBoy
+        // Done by IcedCoffeeBoy
         try {
             eventListOptional = storage.readEventList();
             if (!eventListOptional.isPresent()) {
@@ -125,6 +126,8 @@ public class MainApp extends Application {
         }
         initialEventListData.sortByName();
         return new ModelManager(initialAddressData, initialEventListData, userPrefs);
+        //End of modification
+        //@@author:
     }
 
     private void initLogging(Config config) {
@@ -205,13 +208,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting ProManage " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping ProManage ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

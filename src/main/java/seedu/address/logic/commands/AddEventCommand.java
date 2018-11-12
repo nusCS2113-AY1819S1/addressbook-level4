@@ -13,7 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
-//@@author: jieliangang
+//@@author jieliangang
 /**
  * Creates an event in event list.
  */
@@ -44,7 +44,7 @@ public class AddEventCommand extends Command {
     private final Event toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddEventCommand to add the specified {@code event}
      */
     public AddEventCommand(Event event) {
         requireNonNull(event);

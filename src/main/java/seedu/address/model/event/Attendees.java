@@ -1,15 +1,17 @@
 package seedu.address.model.event;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 //@@author: jieliangang
 /**
  * Represents a the attendees with emails in a event.
  */
 public class Attendees {
-    private final Set<String> attendeesSet;
+    private Set<String> attendeesSet;
 
     public Attendees() {
         this.attendeesSet = new HashSet<>();
@@ -20,12 +22,9 @@ public class Attendees {
         this.attendeesSet = attendeesSet;
     }
 
-    public Attendees(Set<String>... attendeesSet) {
+    public Attendees(String... emails) {
         this();
-        for (Set<String> emails: attendeesSet) {
-            Objects.requireNonNull(emails);
-            this.attendeesSet.addAll(emails);
-        }
+        attendeesSet = Arrays.stream(emails).collect(Collectors.toSet());
     }
 
     public Set<String> getAttendeesSet() {

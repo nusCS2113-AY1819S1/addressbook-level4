@@ -3,7 +3,7 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-
+//@@author: IcedCoffeeBoy
 /**
  * Represents a Event's location in the event list.
  * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}
@@ -50,7 +50,7 @@ public class Location {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Location// instanceof handles nulls
-                && value.equals(((Location) other).value)); // state check
+                && value.toLowerCase().equals(((Location) other).value.toLowerCase())); // state check
     }
 
     @Override

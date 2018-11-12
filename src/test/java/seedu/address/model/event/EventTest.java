@@ -39,87 +39,22 @@ public class EventTest {
     }
 
     @Test
-    public void isSameEvent() {
-        // same object -> returns true
-        assertTrue(EVENT_1.isSameEvent(EVENT_1));
-
-        // null -> returns false
-        assertFalse(EVENT_1.isSameEvent(null));
-
-        // different location and clash  returns false
-        Event editedEvent = new EventBuilder(EVENT_1).withLocation(VALID_LOCATION_LT).build();
-        assertFalse(EVENT_1.isSameEvent(editedEvent));
-
-        // same location and does not clash -> returns false
-        editedEvent = new EventBuilder(EVENT_1).withStartTime(VALID_TIME_MORNING).withEndTime(VALID_TIME_NOON).build();
-        assertFalse(EVENT_1.isSameEvent(editedEvent));
-
-        // different name and description -> returns true
-        editedEvent = new EventBuilder(EVENT_1).withEventName(VALID_EVENT_NAME_BIRTHDAY)
-                .withDescription(VALID_DESCRIPTION_PUNCTUAL).build();
-        assertTrue(EVENT_1.isSameEvent(editedEvent));
-    }
-
-    @Test
-    public void equals() {
-        // same values -> returns true
-        Event eventCopy = new EventBuilder(EVENT_1).build();
-        assertTrue(EVENT_1.equals(eventCopy));
-
-        // same object -> returns true
-        assertTrue(EVENT_1.equals(EVENT_1));
-
-        // null -> returns false
-        assertFalse(EVENT_1.equals(null));
-
-        // different type -> returns false
-        assertFalse(EVENT_1.equals(5));
-
-        // different event -> returns false
-        assertFalse(EVENT_1.equals(EVENT_2));
-
-        // different name -> returns false
-        Event editedEvent = new EventBuilder(EVENT_1).withEventName(VALID_EVENT_NAME_BIRTHDAY).build();
-        assertFalse(EVENT_1.equals(editedEvent));
-
-        // different location -> returns false
-        editedEvent = new EventBuilder(EVENT_1).withLocation(VALID_LOCATION_LT).build();
-        assertFalse(EVENT_1.equals(editedEvent));
-
-        // different description -> returns false
-        editedEvent = new EventBuilder(EVENT_1).withDescription(VALID_DESCRIPTION_PUNCTUAL).build();
-        assertFalse(EVENT_1.equals(editedEvent));
-
-        // different start time -> returns false
-        editedEvent = new EventBuilder(EVENT_1).withStartTime(VALID_TIME_MORNING).build();
-        assertFalse(EVENT_1.equals(editedEvent));
-
-        // different end time -> returns false
-        editedEvent = new EventBuilder(EVENT_1).withEndTime(VALID_TIME_NOON).build();
-        assertFalse(EVENT_1.equals(editedEvent));
-
-        // different date -> returns false
-        editedEvent = new EventBuilder(EVENT_1).withDate(VALID_DATE).build();
-        assertFalse(EVENT_1.equals(editedEvent));
-    }
-
-    @Test
-    public void addPersonToAttendee_validNameAdded_success() {
+    public void addPersonToAttendee_validEmailAdded_success() {
         Event eventToUpdate = new EventBuilder(EVENT_1).build();
         Event eventUpdated = new EventBuilder(EVENT_1).withAttendee(setOne).build();
 
-        //add name
+        //add email
         Event event = eventToUpdate.createEventWithUpdatedAttendee(VALID_EMAIL_ALICE);
 
         assertEquals(event, eventUpdated);
     }
 
     @Test
-    public void removePersonFromAttendee_validNameRemoved_success() {
+    public void removePersonFromAttendee_validEmailRemoved_success() {
         Event eventToUpdate = new EventBuilder(EVENT_1).withAttendee(setOne).build();
         Event eventUpdated = new EventBuilder(EVENT_1).build();
 
-        //remove name
+        //remove email
         Event event = eventToUpdate.removePersonFromAttendee(VALID_EMAIL_ALICE);
 
         assertEquals(event, eventUpdated);
@@ -129,7 +64,6 @@ public class EventTest {
     public void hasAttendee_invitedPerson_returnsTrue() {
         Event event = new EventBuilder(EVENT_1).withAttendee(setOne).build();
         assertTrue(event.hasAttendee(VALID_EMAIL_ALICE));
-
     }
 
     @Test
@@ -156,7 +90,7 @@ public class EventTest {
     }
 
     @Test
-    public void hasClash_eventHasDifferentDateAndTimeClash_returnsFalse() {
+    public void hasClash_eventHasDifferentDateAndTimeOverlap_returnsFalse() {
         Event event = new EventBuilder(EVENT_1).withDate(VALID_DATE).build();
         assertFalse(EVENT_1.hasClash(event));
         assertFalse(event.hasClash(EVENT_1));
@@ -202,14 +136,81 @@ public class EventTest {
 
     @Test
     public void hasClash_eventHasSameDateDifferentTimeWhichDoesNotOverlap_returnsTrue() {
-        // right of event
+        // after event
         Event event = new EventBuilder(EVENT_1).withStartTime("16:00").withEndTime("23:59").build();
         assertFalse(EVENT_1.hasClash(event));
         assertFalse(event.hasClash(EVENT_1));
-        // left of event
+        // before event
         event = new EventBuilder(EVENT_1).withStartTime("00:00").withEndTime("12:00").build();
         assertFalse(EVENT_1.hasClash(event));
         assertFalse(event.hasClash(EVENT_1));
     }
+
+    @Test
+    public void isSameEvent() {
+        // same object -> returns true
+        assertTrue(EVENT_1.isSameEvent(EVENT_1));
+
+        // null -> returns false
+        assertFalse(EVENT_1.isSameEvent(null));
+
+        // different location and time clash returns false
+        Event editedEvent = new EventBuilder(EVENT_1).withLocation(VALID_LOCATION_LT).build();
+        assertFalse(EVENT_1.isSameEvent(editedEvent));
+
+        // same location and time does not clash -> returns false
+        editedEvent = new EventBuilder(EVENT_1).withStartTime(VALID_TIME_MORNING).withEndTime(VALID_TIME_NOON).build();
+        assertFalse(EVENT_1.isSameEvent(editedEvent));
+
+        // same location and time clash, different name and description -> returns true
+        editedEvent = new EventBuilder(EVENT_1).withEventName(VALID_EVENT_NAME_BIRTHDAY)
+                .withDescription(VALID_DESCRIPTION_PUNCTUAL).build();
+        assertTrue(EVENT_1.isSameEvent(editedEvent));
+    }
+
+
+    @Test
+    public void equals() {
+        // same values -> returns true
+        Event eventCopy = new EventBuilder(EVENT_1).build();
+        assertTrue(EVENT_1.equals(eventCopy));
+
+        // same object -> returns true
+        assertTrue(EVENT_1.equals(EVENT_1));
+
+        // null -> returns false
+        assertFalse(EVENT_1.equals(null));
+
+        // different type -> returns false
+        assertFalse(EVENT_1.equals(5));
+
+        // different event -> returns false
+        assertFalse(EVENT_1.equals(EVENT_2));
+
+        // different name -> returns false
+        Event editedEvent = new EventBuilder(EVENT_1).withEventName(VALID_EVENT_NAME_BIRTHDAY).build();
+        assertFalse(EVENT_1.equals(editedEvent));
+
+        // different location -> returns false
+        editedEvent = new EventBuilder(EVENT_1).withLocation(VALID_LOCATION_LT).build();
+        assertFalse(EVENT_1.equals(editedEvent));
+
+        // different description -> returns false
+        editedEvent = new EventBuilder(EVENT_1).withDescription(VALID_DESCRIPTION_PUNCTUAL).build();
+        assertFalse(EVENT_1.equals(editedEvent));
+
+        // different start time -> returns false
+        editedEvent = new EventBuilder(EVENT_1).withStartTime(VALID_TIME_MORNING).build();
+        assertFalse(EVENT_1.equals(editedEvent));
+
+        // different end time -> returns false
+        editedEvent = new EventBuilder(EVENT_1).withEndTime(VALID_TIME_NOON).build();
+        assertFalse(EVENT_1.equals(editedEvent));
+
+        // different date -> returns false
+        editedEvent = new EventBuilder(EVENT_1).withDate(VALID_DATE).build();
+        assertFalse(EVENT_1.equals(editedEvent));
+    }
+
 
 }

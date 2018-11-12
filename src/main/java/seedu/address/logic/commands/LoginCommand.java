@@ -10,7 +10,6 @@ import seedu.address.logic.parser.ManagerParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
 
-//@@author: IcedCoffeeBoy
 
 /**
  * Login the person into ProManage
@@ -22,13 +21,14 @@ public class LoginCommand extends Command {
             + "\nExample: login manager"
             + "\nExample: login as hello@gmail.com";
 
+    public static final String MESSAGE_SUCCESS = "Successfully login as %s";
+
+    public static final String MESSAGE_INVALID_DESIGNATION = "Designation of input email is neither 'manager'"
+            + "nor 'employee'";
     private static final String KEY_MANAGER = "manager";
     private static final String KEY_EMPLOYEE = "employee";
 
-    private static final String MESSAGE_SUCCESS = "Successfully login as %s";
-
     private String loginIdentity;
-
     /**
      * type == 1 -> argument is an email, there is a need to check if email is present in addressbook and check the
      * person's designation to see whether the person is a manager or employee
@@ -49,12 +49,15 @@ public class LoginCommand extends Command {
         this.model = model;
 
         if (type == 1 && isEmailPresent(loginIdentity)) {
+            String loginEmail = loginIdentity;
             if (isEmailManager(loginIdentity)) {
                 loginIdentity = KEY_MANAGER;
+                return new ManagerParser(loginEmail);
             } else if (isEmailEmployee(loginIdentity)) {
                 loginIdentity = KEY_EMPLOYEE;
+                return new EmployeeParser(loginEmail);
             } else {
-                throw new CommandException(MESSAGE_INVALID_LOGIN);
+                throw new CommandException(MESSAGE_INVALID_DESIGNATION);
             }
         }
         switch (loginIdentity) {

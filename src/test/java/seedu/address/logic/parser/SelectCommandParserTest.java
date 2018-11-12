@@ -81,10 +81,10 @@ public class SelectCommandParserTest {
 
         //date with month or year
         assertParseFailure(parser, "1" + DATE_DESC + MONTH_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(SelectCommandParser.MESSAGE_INVALID_PREFIX));
         assertParseFailure(parser, "1" + DATE_DESC + YEAR_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(SelectCommandParser.MESSAGE_INVALID_PREFIX));
         assertParseFailure(parser, "1" + MONTHANDYEAR_DESC + DATE_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                String.format(SelectCommandParser.MESSAGE_INVALID_PREFIX));
     }
 }

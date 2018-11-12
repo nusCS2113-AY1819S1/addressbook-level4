@@ -20,6 +20,7 @@ import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
 
 //@@author: IcedCoffeeBoy
+
 /**
  * JAXB-friendly version of the Event.
  */

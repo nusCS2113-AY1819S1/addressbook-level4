@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author: IcedCoffeeBoy
 /**
  * Represents a Event's name in the event list.
  * Guarantees: immutable;

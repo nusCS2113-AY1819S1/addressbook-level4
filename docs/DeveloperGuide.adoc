@@ -158,16 +158,18 @@ Note how the event is propagated through the `EventsCenter` to the `Storage` and
 
 The sections below give more details of each component.
 
+// tag::Ui[]
 [[Design-Ui]]
 === UI component
 
 .Structure of the UI Component
-image::UiClassDiagram.png[width="800"]
+image::UiClassDiagram.png[width="500"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `EventListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
+// end::Ui[]
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
@@ -175,6 +177,7 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+
 
 [[Design-Logic]]
 === Logic component
@@ -186,7 +189,7 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `ProManageParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -196,19 +199,21 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
+// tag::Model[]
 [[Design-Model]]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelClassDiagram.png[width="600"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
+// end::Model[]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Address Book and Event List data.
+* exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
@@ -216,6 +221,7 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
+// tag::Storage[]
 [[Design-Storage]]
 === Storage component
 
@@ -227,8 +233,9 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Address Book and Event List data in xml format and read it back.
 
+// end::Storage[]
 [[Design-Commons]]
 === Common classes
 
@@ -238,6 +245,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+// tag::Sort[]
 
 === Event Sorting
 
@@ -264,7 +273,8 @@ image::SortSequenceDiagram.png[width="650"]
 ** Pros: Will use less memory.
 ** Cons: Unable to use undo function to revert back to the previous view.
 
-// end::Sorting[]
+// end::Sort[]
+
 
 
 // tag::Invite[]
@@ -274,53 +284,64 @@ image::SortSequenceDiagram.png[width="650"]
 
 The `invite` command allows users to add attendees to an existing event, which is represented by an `Event` object.
 The command currently only allows users to add a single person to an event, based on the indices on the UI.
-This command adds the invited `Person` 's email, which is unique, to a chosen `Event`, so that the attendees of a particular event is recorded.
-This command only executes successfully if the event does not not clash with the person's schedule.
+This command adds the to-be-invited `Person` 's email, which is unique, to the chosen `Event`, so that the attendees of a particular event is recorded.
 
 The adding of attendees is facilitated by the class: `Attendees`, a list of emails of type `String`.
 
-The following is a more detailed description of the class:
+image::EventClassDiagram.png[width="300"]
+
+The following is a more detailed description of the `Attendee` class:
 
 *  `Attendees`
 ** Each `Event` object has an `Attendees`, which is a list of the emails of the different `Person` attending the event.
-** This class is a wrapper class around the internal representation of a list of attendees that exposes only a few functions of a `Set` of `String`.
+** This class is a wrapper class around the internal representation of a `Set` of emails.
 ** Only the email of the `Person` is recorded in an `Event`, as the email should be unique and uneditable.
 
 Storing only the *email* of `Person` in the `Attendees` object of `Event` saves memory storage and facilitates the `select` feature. As we select a person, we can simply iterate through the event list and check whether the person's email is in the attendees list.
 
+This command only executes successfully if the event does not not clash with the person's schedule.
+
 Given below is an illustration to describe the detection of whether two events clash, which is facilitated by the method `hasClash` in `Event`:
 
+image::EventClashDiagram.png[width="400"]
 
+The `Event#hasClash` is widely used in other features such as `addEvent` and `editEvent` to ensure that
+
+1. Different events are not held at the same location and time.
+
+2. An employee do not have two events he/she needs to attend at the same time.
 
 Implementation of `RemoveCommand` is similar to `InviteCommand`, but removes persons from attendees of events instead.
 
 ==== Execution of Command
 
 Given below is an example usage scenario and how the invite mechanism works.
+For example, the user inputs `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list.
 
-Step 1. The user inputs `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list. The command text is passed to an instance of the `LogicManager` class.
+Step 1. The command text is passed to an instance of the `LogicManager` class.
 
-Step 2. The `LogicManager` instance calls `AddressBookParser#parsecommand`, which parses the `invite` command phrase.
+Step 2. The `LogicManager` instance calls `ProManageParser#parseCommand`, which parses the `invite` command phrase.
 
-Step 3. `InviteCommandParser#parse` parses the person and event index. An instance of the `InviteCommand` encapsulating the two indices information is then returned.
+Step 3. `InviteCommandParser#parse` parses the person and event index. An instance of the `InviteCommand` encapsulating the two indices information is then returned after parsing.
 
 Step 4. `Logic Manager` then executes this `InviteCommand` by calling `InviteCommand#execute`.
 
-Step 5. The filtered person list and event list is first obtained by calling `PersonModel#getFilteredPersonList` and `EventModel#getFilteredEventList`. Based on the indices, the `Person` and `Event` is selected.
+Step 5. The filtered person list and event list is first obtained by calling `PersonModel#getFilteredPersonList` and `EventModel#getFilteredEventList`. Based on the indices, the `Person` and `Event` is selected. Then, the `Person` object's email is obtained by calling `Person#getEmail`
 
-Step 6. Next, the `Person` object's email is obtained by calling `Person#getEmail`
+Step 6. Two steps of verification is required before the person is invited to the event.
 
-Step 7. Two steps of verification is required before the person is invited to the event. First, `Event#hasAttendee` checks whether the person is already invited to the event. Secondly, `Model#hasClash` checks whether the event clashes with the person's schedule.
+* First, `Event#hasAttendee` checks whether the person is already invited to the event.
+* Second, `Model#hasClash` checks whether the event clashes with the person's schedule.
 
-Step 8. After verification, the person's email is added to the obtained `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
+Step 7. After successful verification, the person's email is added to the obtained `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
 
-Step 9. The new `Event` object is updated to the model by calling `Model#updateEvent`.
+Step 8. The new `Event` object is updated to the model by calling `Model#updateEvent`.
 
-Step 10. The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
+Step 9. The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
 
 The sequence diagram below illustrates the execution of the `invite` command.
 
-image::InviteSequenceDiagram.png[width="800"]
+image::InviteSequenceDiagram.png[width="700"]
 
 ==== Design Consideration
 
@@ -336,12 +357,12 @@ image::InviteSequenceDiagram.png[width="800"]
 
 ===== Aspect: Data structure to support `invite` command
 
-* **Alternative 1 (current choice):** Use `HashSet` to store persons names.
+* **Alternative 1 (current choice):** Use `HashSet` to store persons emails.
 ** Pros: Easier and faster to retrieve or validate names stored. Able to handle duplicates easily.
 ** Cons: Sequence of persons added is lost. Currently, this feature is not important for the project.
 
-* **Alternative 2:** Use `ArrayList` to store persons names.
-** Pros: Names are stored in order of addition.
+* **Alternative 2:** Use `ArrayList` to store persons emails.
+** Pros: Emails are stored in order of addition.
 ** Cons: Inefficient when handling data.
 
 ==== Future Improvements
@@ -352,13 +373,12 @@ The current `invite` command only invites one person to a chosen event based on 
 One possible way to to implement this is to have the user
 
 * input a certain range (2-5) or
-* multiple indices (1, 3, 6) or
-* a mixture of both (1-3, 4, 6-10)
+* multiple indices (1,3,6,7,8) or
 * input the department name
 
 The same concept can also be applied to events, being able to invite one person to multiple events with one single command.
 
-Implementation of this additional feature would require changes to both `InviteCommandParser` and `InviteCommand#execute`. Additionally, handling of clashing events needs to be considered as it now involves more than one participants.
+Implementation of this additional feature would require changes to both `InviteCommandParser` and `InviteCommand#execute`. Additionally, handling of clashing events needs to be considered as it now involves more than one participant and event.
 // end::Invite[]
 
 // tag::Select[]
@@ -369,40 +389,38 @@ The `select` command allows users to view the event schedules of an employee on 
 The command currently only allows users to view the event of a single employee, based on the indices of the employee list on the UI.
 This command only executes successfully if the input index is valid (not out of bound).
 
-The command is facilitated by the class: `Attendees`, a list of emails of type `String`, as described in Section 3.2.1.
+The command is facilitated by the class: `Attendees`, a `HashSet` of emails of type `String`, as described in Section 3.2.1.
 
 ==== Execution of Command
 Given below is an example usage scenario and how the `select` mechanism works.
 
-Step 1. The user inputs `select 1 y/2018 m/06` to select the 1st person in the address book and view his/her event schedule on June 2018.
+For example, the user inputs `select 1 y/2018 m/06` to select the 1st person in the address book and view his/her event schedule on June 2018.
 
-Step 2. The command text is passed to an instance of the `LogicManager` class.
+* The command text is passed to an instance of the `LogicManager` class.
 
-Step 3. The `LogicManager` instance calls `AddressBookParser#parsecommand`, which parses the `select` command phrase.
+* The `LogicManager` instance calls `ProManageParser#parsecommand`, which parses the `select` command phrase.
 
-Step 3. `InviteCommandParser#parse` parses the person and date parameter(optional). Depending on whether the date parameter is inputted,  an instance of the `Select` encapsulating the relevant information is then returned.
+* `InviteCommandParser#parse` parses the person and date parameter(optional). Depending on whether the date parameter is inputted,  an instance of the `SelectCommand` encapsulating the relevant information is then returned.
 
-Step 4. `Logic Manager` then executes this `SelectCommand` by calling `SelectCommand#execute`.
+* `Logic Manager` then executes this `SelectCommand` by calling `SelectCommand#execute`.
 
-Step 5. The filtered person list is first obtained by calling `PersonModel#getFilteredPersonList`. Based on the index, the `Person` is selected.
+* The filtered person list is first obtained by calling `PersonModel#getFilteredPersonList`. Based on the index, the `Person` is selected. The `Person` object's email is obtained by calling `Person#getEmail`
 
-Step 6. Next, the `Person` object's email is obtained by calling `Person#getEmail`
+* A `Predicate` will be constructed to generate the filtered event list.
+** If the user chose to view all the events of the person (e.g. `select 1`), an `AttendeeContainsEmailPredicate` object will be instantiated.
+** If the user chose to view the events of the person on a certain time period (e.g. `select 1 y/2018 m/12`), an `EventContainsAttendeeAndDatePredicate` object will be instantiated.
 
-Step 7a. If the user chose to view all the events of the person (e.g. `select 1`), an `AttendeeContainsEmailPredicate` object will be instantiated.
+* The filtered event list is then updated by calling `Model#updateFilteredEventList` with the predicate.
 
-Step 7b. If the user chose to view the events of the person on a certain time period (e.g. `select 1 y/2018 m/12`), an `EventContainsAttendeeAndDatePredicate` object will be instantiated.
+* The filtered event list is then sorted by calling `Model#sortByDate`.
 
-Step 8. The filtered event list is then updated by calling `Model#updateFilteredEventList` with the generated predicate.
-
-Step 9. The filtered event list is then sorted by calling `Model@sortByDate`.
-
-Step 10. The `SelectCommand#execute` finally returns a `CommandResult` with a success message.
+* The `SelectCommand#execute` finally returns a `CommandResult` with a success message.
 
 The sequence diagram below illustrates the execution of the `invite` command.
 
+image::SelectSequenceDiagram.png[width="700"]
 
 // end::Select[]
-
 
 // tag::FindEvent[]
 === Find Event feature
@@ -422,14 +440,15 @@ Step 2. The command is parsed and the result is shown.
 
 // end::FindEvent[]
 
+// tag::List[]
 === List Feature
 
 ==== Current Implementation
 
 The `list` feature allows users to filter through all the individual people in ProManage and understand which department
-they are from. The command currently has 2 sub-features; `list all` and `list dep DEPARTMENT`. The user can list all the
-people in ProManage by simply typing `list all`. Alternatively, the user can filter through ProManage and get the
-relevant Person's information by listing those of the relevant department. The user can list multiple departments such
+they are from. The command currently has 4 sub-features; `list all`. `list all people`, `list all events` and `list dep DEPARTMENT`. The user can list all the
+people and events in ProManage by simply typing `list all`. Alternatively, the user can filter through ProManage and get the
+relevant Person's information by listing those of the specified department. The user can list multiple departments such
 as `list dep Admin Finance`. As of now, each person can only be inside one department.
 
 The listing of people from the respective departments is facilitated by the class: `Departments`,
@@ -463,16 +482,25 @@ Step 5. The filtered person list is first obtained by calling `PersonModel#updat
 
 Step 9. The `ListCommand#execute` finally returns a `CommandResult` with a success message.
 
-The sequence diagram below illustrates the execution of the `invite` command.
+The sequence diagram below illustrates the execution of the `list` command.
 
 image::ListSequenceDiagram.png[width="800"]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
+==== Future Improvements
 
+===== Listing people who stay in the same town
 
+The current `list` command does not utilize the address of each person. Thus, to make data more easily accessible, ProManage can implement Google Maps API and mark out where each employee stays on the map.
 
-// end::dataencryption[]
+* Utilize Google Maps API and store the map - `list map`
+
+===== Listing people's birthdays
+
+The current person has no date of birth attribute. Thus, a date of birth attribute could be implemented. On top of that, ProManage can display the current date and time. Along with this,
+it can list out the upcoming birthdays of the personnel in the company.
+
+* Implement date of birth attribute and display current date and time the moment the application is launched. List out upcoming birthdays - `list birthdays`
+// end::List[]
 
 === Logging
 
@@ -680,6 +708,7 @@ A project often depends on third-party libraries. For example, Address Book depe
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
+// tag::productscope[]
 [appendix]
 == Product Scope
 
@@ -698,17 +727,9 @@ b. Require developers to download those libraries manually (this creates extra w
 * In charge of overall project.
 * He/She has the autonomy to add/edit/view/delete all of the events and tasks of his/her employees.
 
-**Department Head:**
-
-* In charge of his/her department .
-* He/she has the autonomy to communicate with
-  other department heads within the system.
-* He/she has the autonomy to add/edit/view/delete all of
-  the events of his/her employees within the department.
-
 **Employees:**
 
-  * He/she is only entitled to add/edit/view/delete all of the events of himself/herself within
+  * He/she is only entitled to view all of the events of himself/herself within
     the department.
 
 *Value proposition*:
@@ -717,6 +738,9 @@ b. Require developers to download those libraries manually (this creates extra w
 * Saves consumers' efficiency, money and time tremendously.
 
 [appendix]
+// end::productscope[]
+
+// tag::userstories[]
 == User Stories
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
@@ -745,13 +769,9 @@ relevant people
 
 |`* * *` |Project Manager |Edit the information of an event |Update the relevant information
 
-|`* * *` |Project Manager |View an employee's events |To monitor my employee's event schedule
-
 |`* * *` |Project Manager |View a colleague's events |To monitor my colleague's event schedule before I plan an event
 
 |`* * *` |Project Manager |View an employee's events on a certain date, month or year |To view the employee's events on a certain date, month or year
-
-|`* * *` |Project Manager |View an underling's events on a certain date, month or year |To check what have my underlings have been busy with
 
 |`* * *` |Project Manager |View a colleague's events on a certain date, month or year |To check if he/she is free for an important meeting
 
@@ -777,6 +797,9 @@ relevant people
 
 |`* * *` |Project Manager |Redo command |Redo my previously undo command
 
+|`* * *` |Project Manager |View events related to myself| To avoid looking through the entire event list to find out which events I
+need to attend
+
 |`* * *` |User |Exit command |
 
 |`* * *` |New Employee |See usage instructions |Refer to instructions when I forget how to use the ProManage
@@ -789,7 +812,14 @@ relevant people
 
 |`* * *` |Employee  |Sort the event list by time and date |View what are the more recent events of the event list
 
+|`* * *` |Employee |Undo command |Undo my previously entered command
+
+|`* * *` |Employee |Redo command |Redo my previously undo command
+
 |`* * *` |Employee |View a colleague's events |To check out what have my colleague been up to
+
+|`* * *` |Employee |View events related to myself| To avoid looking through the entire event list to find out which events I
+need to attend
 
 |`* * *` |Employee |Invite my colleagues to events |Add persons to the selected event
 
@@ -799,6 +829,8 @@ relevant people
 _{More to be added}_
 
 [appendix]
+// end::userstories[]
+// tag::usecases[]
 == Use Cases
 
 (For all use cases below, the *System* is the `ProManage` and the *Actor* is the `user`, unless specified otherwise)
@@ -824,7 +856,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
@@ -836,7 +868,7 @@ Use case resumes at step 2.
 1.  User requests to edit information of person
 2.  ProManage shows a list of persons
 3.  User requests to edit a specific person in the list
-4.  AddressBook edits the person
+4.  ProManage edits the person
 +
 Use case ends.
 
@@ -850,7 +882,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
@@ -860,9 +892,9 @@ Use case resumes at step 2.
 *MSS*
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  ProManage shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  ProManage deletes the person
 +
 Use case ends.
 
@@ -876,7 +908,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
@@ -912,7 +944,7 @@ Use case resumes at step 2.
 1.  User requests to delete an event
 2.  ProManage shows a list of events
 3.  User requests to delete a specific event in the list
-4.  AddressBook deletes the event
+4.  ProManage deletes the event
 +
 Use case ends.
 
@@ -926,7 +958,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
@@ -956,12 +988,58 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
 
+
+[discrete]
+=== Use case: Sorting the event list based on the parameter given
+
+*MSS*
+
+1.  User requests to list event in a particular order.
+2.  ProManage request what order to list the event.
+3.  User enters the order he/she wishes to list the event.
+4.  ProManage list the event in that particular order
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. Invalid parameters
+** 3a1. ProManage shows an error message.
+** Use case ends
+
+[discrete]
+=== Use case: Finding out events which is associated with user
+
+*MSS*
+
+1.  User login the app
+2.  User request to list event associated with he/she
+3.  ProManage list the event that is associated with the user
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. User did not login
+** 3a1. ProManage shows an error message to prompt user to login before using this function
+** Use case ends
+
+[appendix]
+// end::usecases[]
+
+// tag::usecases_invite[]
 [discrete]
 === Use case: Invite employees to events
+
+*Guarantee*:
+
+* The invite will not result in clash of events in the employee schedule
 
 *MSS*
 
@@ -973,22 +1051,32 @@ Use case resumes at step 2.
 +
 Use case ends.
 
+
 *Extensions*
 
 * 3a. Invalid employee.
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 ** Use case ends
 +
-* 3b. Employee is not originally invited to event.
-** 3b1. AddressBook shows an error message.
+
+* 3b. Invalid event.
+** 3b1. ProManage shows an error message.
 ** Use case ends
 +
-* 3c. Event has no attendees
+* 3c. Employee is already invited to event.
 ** 3c1. AddressBook shows an error message.
+
+** Use case ends
++
+* 3d. Event conflicts with employee's schedule
+** 3d1. AddressBook shows an error message.
 ** Use case ends
 
+// end::usecases_invite[]
 [discrete]
 === Use case: Remove employees from events
+
+*Precondition*: User must be of manager or default privilege
 
 *MSS*
 
@@ -1003,16 +1091,23 @@ Use case ends.
 *Extensions*
 
 * 3a. Invalid employee.
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 ** Use case ends
 +
-* 3b. Employee is already invited to event.
-** 3b1. AddressBook shows an error message.
+
+* 3b. Invalid event.
+** 3b1. ProManage shows an error message.
 ** Use case ends
 +
-* 3c. Event conflicts with employee's schedule
-** 3c1. AddressBook shows an error message.
+* 3c. Event has no attendees
+** 3c1. ProManage shows an error message.
 ** Use case ends
++
+* 3d. Employee is not originally invited to event.
+** 3d1. ProManage shows an error message.
+
+** Use case ends
+
 
 [discrete]
 === Use case: View an employee's schedule on a date/month/year
@@ -1030,17 +1125,16 @@ Use case ends.
 *Extensions*
 
 * 3a. Invalid employee.
-** 3a1. AddressBook shows an error message.
+** 3a1. ProManage shows an error message.
 ** Use case ends
 +
 * 3b. Invalid date format
-** 3b1. AddressBook shows an error message.
+** 3b1. ProManage shows an error message.
 ** Use case ends
 
 
-_{More to be added}_
 
-[appendix]
+// tag::nonfunctionalrequirements[]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
@@ -1055,6 +1149,7 @@ be able to accomplish most of the tasks faster using commands than using the mou
 _{More to be added}_
 
 [appendix]
+// end::nonfunctionalrequirements[]
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
@@ -1108,13 +1203,69 @@ _{ more test cases ... }_
 
 . Deleting a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list all people` command. Multiple persons in the list.
+
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
+
+=== Inviting a person
+
+. Inviting a person while all persons are listed
+
+.. Prerequisites: List all persons using the `list all` command. Multiple persons and events in the list.
+.. Test case: `invite 1 to/1` +
+   Expected: First employee is added to first event. Use `select 1` to verify that the fifth event is present in the event list.
+.. Test case: `invite 1 to/1` (continued from test case above) +
+   Expected: Error message as employee is already invited to event.
+.. Test case: `invite 0 to/1` +
+   Expected: No employee is invited. Error details shown in the status message.
+.. Other incorrect invite commands to try: `invite`, `invite x to/1` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
+=== Removing a person
+
+. Inviting a person while all persons are listed
+
+.. Prerequisites: List all persons using the `list all` command. Multiple persons and events in the list.
+.. Test case: `invite 1 to/1` then `remove 1 from/1`+
+   Expected: First employee is added to first event and then removed. Use `select 1` to verify that the person is uninvited from the event.
+.. Test case: `remove 1 to/1` (continued from test case above) +
+   Expected: Error message as employee is currently not invited to event.
+.. Test case: `delete 0 to/1` +
+   Expected: No employee is removed. Error details shown in the status message.
+.. Other incorrect invite commands to try: `remove`, `remove x to/1` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
+
+=== Listing people and events
+
+. Listing personnel of specific departments
+
+.. Prerequisites: Add personnel of different departments into ProManage using the `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN des/Manager`
+and `add n/Mark p/93455678 e/mark@example.com a/Mark street, block 12, #05-01 dep/Marketing des/Manager` and `add n/Tracy p/98213456 e/tracy@example.com a/Tracy Street, WaterWorks Condo, block J1, #01-01 dep/Finance des/Employee`
+.. Test case: `list dep Marketing` +
+   Expected: The details of Mark or any personnel who is in the Marketing department will appear. Details of the listed personnel will be listed.
+.. Test case: `list dep Admin Finance` +
+   Expected: The details of John and Tracy or any personnel who is in the Admin and Finance department will appear. Details of the listed personnel will be listed.
+.. Test case: `list all people` +
+   Expected: The details of all personnel will be listed.
+.. Other incorrect delete commands to try: `list admn`, `list al people` (where the input is not of correct spelling form)+
+   Expected: Error thrown.
+
+. Listing all personnel and events
+
+.. Prerequisites: Add personnel of different departments such as the example above. Add different events into ProManage using the `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` and
+`addEvent n/Financial Review d/Review the financial quarter l/Conference Room 4 date/2018-10-23 s/14:00 e/16:30`.
+
+.. Test case: `list all events` +
+   Expected: The details of all events will be listed.
+
+.. Test case: `list dep Admin Finance` or any DEPARTMENT -> `list all`
+   Expected: The details of all personnel and events will be listed.
 
 _{ more test cases ... }_
 

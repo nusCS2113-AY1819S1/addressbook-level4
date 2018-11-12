@@ -58,6 +58,15 @@ public class EventList implements ReadOnlyEventList {
     }
 
     /**
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
+     */
+    public boolean hasEventAfterEdit(Event eventToEdit, Event editedEvent) {
+        requireNonNull(eventToEdit);
+        requireNonNull(editedEvent);
+        return events.containsAfterEdit(eventToEdit, editedEvent);
+    }
+
+    /**
      * Adds an event to the address book.
      * The event must not already exist in the event list.
      */
@@ -94,12 +103,22 @@ public class EventList implements ReadOnlyEventList {
     }
 
     /**
-     * Removes {@code Person} from the Attendee of {@code EventList}.
+     * Returns true if {@code personEmail}'s schedule clashes with {@code event}.
      */
     public boolean hasClash(Event event, String personEmail) {
         requireNonNull(event);
         requireNonNull(personEmail);
         return events.hasClash(event, personEmail);
+    }
+
+    /**
+     * Returns true if {@code personEmail}'s schedule clashes with an edited{@code event}.
+     */
+    public boolean hasClashAfterEdit(Event eventBeforeEdit, Event eventAfterEdit, String personEmail) {
+        requireNonNull(eventBeforeEdit);
+        requireNonNull(eventAfterEdit);
+        requireNonNull(personEmail);
+        return events.hasClashAfterEdit(eventBeforeEdit, eventAfterEdit, personEmail);
     }
 
     public List<Event> getSortedEventList() {

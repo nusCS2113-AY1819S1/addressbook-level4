@@ -1,7 +1,8 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.model.EventList;
 import seedu.address.model.event.Attendees;
@@ -43,16 +44,18 @@ public class TypicalEvents {
             new EventDate("2018-09-18"),
             new StartTime("09:00"),
             new EndTime("21:00"),
-            new Location("Test Location 3")
+            new Location("Test Location 3"),
+            new Attendees("alice@example.com")
     );
 
     public static final Event EVENT_4 = new Event(
             new EventName("Test Event 4"),
             new Description("Test Description 4"),
-            new EventDate("2018-09-18"),
+            new EventDate("2018-08-18"),
             new StartTime("06:00"),
             new EndTime("08:00"),
-            new Location("Test Location 4")
+            new Location("Test Location 4"),
+            new Attendees("lydia@example.com")
     );
 
 
@@ -62,24 +65,18 @@ public class TypicalEvents {
             new EventDate("2018-11-18"),
             new StartTime("06:00"),
             new EndTime("12:00"),
-            new Location("Test Location 5")
+            new Location("Test Location 5"),
+            new Attendees("johnd@example.com", "alice@example.com")
     );
 
-    /**
-     * Returns test event with attendees.
-     */
-    public static final Event eventwithAttendee() {
-        Set<String> attendee = new HashSet<>();
-        attendee.add("alice@example.com");
-        return new Event(
-                new EventName("Test Event 3"),
-                new Description("Test Description 3"),
-                new EventDate("2018-09-18"),
-                new StartTime("09:00"),
-                new EndTime("21:00"),
-                new Location("Test Location 3"),
-                new Attendees(attendee));
-    }
+    public static final Event EVENT_6 = new Event(
+            new EventName("Test Event 6"),
+            new Description("Test Description 6"),
+            new EventDate("2018-11-10"),
+            new StartTime("09:00"),
+            new EndTime("13:00"),
+            new Location("Test Location 6")
+    );
 
     /**
      * Returns test event list.
@@ -88,7 +85,9 @@ public class TypicalEvents {
         EventList eventList = new EventList();
         eventList.addEvent(EVENT_1);
         eventList.addEvent(EVENT_2);
-        eventList.addEvent(eventwithAttendee());
+        eventList.addEvent(EVENT_3);
+        eventList.addEvent(EVENT_4);
+        eventList.addEvent(EVENT_5);
 
         return eventList;
     }
@@ -146,6 +145,10 @@ public class TypicalEvents {
         eventList.addEvent(EVENT_3);
 
         return eventList;
+    }
+
+    public static List<Event> getTypicalEvents() {
+        return new ArrayList<>(Arrays.asList(EVENT_1, EVENT_2, EVENT_3, EVENT_4, EVENT_5));
     }
 
 }

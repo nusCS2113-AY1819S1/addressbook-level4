@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CALVIN;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
@@ -17,9 +16,6 @@ import seedu.address.testutil.Assert;
 
 public class AttendeesTest {
 
-    private Set<String> attendeesSetOne;
-    private Set<String> attendeesSetTwo;
-    private Set<String> attendeesSetThree;
     private Set<String> attendeesSetNull;
     private Attendees attendeesOne;
     private Attendees attendeesTwo;
@@ -27,19 +23,10 @@ public class AttendeesTest {
 
     @Before
     public void setup() {
-        attendeesSetOne = new HashSet<>();
-        attendeesSetTwo = new HashSet<>();
-        attendeesSetThree = new HashSet<>();
-        attendeesSetNull = null;
 
-        attendeesSetOne.add(VALID_EMAIL_AMY);
-        attendeesSetTwo.add(VALID_EMAIL_BOB);
-        attendeesSetThree.add(VALID_EMAIL_BOB);
-        attendeesSetThree.add(VALID_EMAIL_CALVIN);
-
-        attendeesOne = new Attendees(attendeesSetOne);
-        attendeesTwo = new Attendees(attendeesSetTwo);
-        attendeesThree = new Attendees(attendeesSetThree);
+        attendeesOne = new Attendees(VALID_EMAIL_AMY);
+        attendeesTwo = new Attendees(VALID_EMAIL_BOB);
+        attendeesThree = new Attendees(VALID_EMAIL_BOB, VALID_EMAIL_CALVIN);
     }
 
 
@@ -48,10 +35,42 @@ public class AttendeesTest {
         Assert.assertThrows(NullPointerException.class, () -> new Attendees(attendeesSetNull));
     }
 
+
     @Test
-    public void constructor_nullMultipleSet_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Attendees(attendeesSetOne,
-                attendeesSetTwo, attendeesSetNull));
+    public void hasEmail_presentEmail_returnsTrue() {
+        // Attendees has emails it contain
+        assertTrue(attendeesOne.hasPerson(VALID_EMAIL_AMY));
+
+    }
+
+    @Test
+    public void hasEmail_absentEmail_returnsTrue() {
+        // Attendees does not have emails in list
+        assertFalse(attendeesOne.hasPerson(VALID_EMAIL_BOB));
+    }
+
+
+    @Test
+    public void createAttendeesWithAddedEmail_validEmail_success() {
+        Attendees attendeesTwoNew = attendeesTwo.createAttendeesWithAddedEmail(VALID_EMAIL_CALVIN);
+        assertEquals(attendeesTwoNew, attendeesThree);
+    }
+
+    @Test
+    public void createAttendeesWithRemovedEmail_validEmail_success() {
+        Attendees attendeesThreeNew = attendeesThree.createAttendeesWithRemovedEmail(VALID_EMAIL_CALVIN);
+        assertEquals(attendeesTwo, attendeesThreeNew);
+    }
+
+    @Test
+    public void isSetEmpty_attendeeIsEmpty_returnsTrue() {
+        Attendees attendeesNull = new Attendees();
+        assertTrue(attendeesNull.isSetEmpty());
+    }
+
+    @Test
+    public void isSetEmpty_attendeeIsFilled_returnsFalse() {
+        assertFalse(attendeesOne.isSetEmpty());
     }
 
     @Test
@@ -73,44 +92,5 @@ public class AttendeesTest {
         Attendees attendeesTest = attendeesTwo.createAttendeesWithAddedEmail(VALID_EMAIL_CALVIN);
         assertTrue(attendeesTest.equals(attendeesThree));
     }
-
-    @Test
-    public void hasEmail_presentEmail_success() {
-        // Attendees has emails it contain
-        assertTrue(attendeesOne.hasPerson(VALID_EMAIL_AMY));
-
-    }
-
-    @Test
-    public void hasEmail_absentEmail_success() {
-        // Attendees does not have emails absent in list
-        assertFalse(attendeesOne.hasPerson(VALID_EMAIL_BOB));
-    }
-
-
-    @Test
-    public void createAttendeesWithAddedEmail() {
-        Attendees attendeesTwoNew = attendeesTwo.createAttendeesWithAddedEmail(VALID_EMAIL_CALVIN);
-        assertEquals(attendeesTwoNew, attendeesThree);
-    }
-
-    @Test
-    public void createAttendeesWithRemovedEmail() {
-        Attendees attendeesThreeNew = attendeesThree.createAttendeesWithRemovedEmail(VALID_EMAIL_CALVIN);
-        assertEquals(attendeesTwo, attendeesThreeNew);
-    }
-
-    @Test
-    public void isSetEmpty_attendeeIsEmpty_success() {
-        Attendees attendeesNull = new Attendees();
-        assertTrue(attendeesNull.isSetEmpty());
-    }
-
-    @Test
-    public void isSetEmpty_attendeeIsFilled_success() {
-        assertFalse(attendeesOne.isSetEmpty());
-    }
-
-
 
 }

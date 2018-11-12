@@ -16,6 +16,7 @@ endif::[]
 
 By: `T16-2`      Since: `Sept 2018`      Licence: `MIT`
 
+// tag::introduction[]
 == Introduction
 
 ProManage is a *professional desktop application* for companies that specialises in executing projects that undergoes a
@@ -30,6 +31,7 @@ their project team setting. There is no better way to work than a CLI applicatio
 More importantly, ProManage is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
 having the benefits of a Graphical User Interface (GUI). ProManage can help you manage project scheduling effectively.
 Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+// end::introduction[]
 
 == Quick Start
 
@@ -42,7 +44,7 @@ Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN` : adds an employee named
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN des/Manager` : adds an employee named
  `John Doe` to the Employee List.
 * **`addEvent`**`n/Annual General Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` : creates
 a new event `Annual General Meeting`
@@ -79,26 +81,40 @@ All clicking features are disabled. Clicking on persons and events will not trig
 
 Format: `help`
 
-
+// tag::login[]
 === Login the app: `login`
 Priority level: `default`
 
-Login to the app as one of the following identity: `manager` or `employee` or `as EMAIL` +
+Login to the app as one of the following identity: `manager` or `employee` or `as EMAIL`. +
 The user can only login into ProManage if his/her email has been registered in the ProManage system before. +
-Once login, the user is unable to logout till the app is closed.
+Once login, you will not be able to login again unless the user chooses to logout
 
 Format: login `identity`
 
 Example: +
 `login manager` +
 `login as johnd@example.com`
+// end::login[]
+
+// tag::logout[]
+=== Logout the app: `logout`
+Priority level: `manager`, `employee`
+
+Logout the app once you have login. +
+After successfully logging out, you will be able to login again.
+
+Format: logout
+
+Example: +
+`logout`
+// end::logout[]
 
 === Adding an employee : `add`
 Priority level: `default`,`manager`
 
 
 Adds an employee to ProManage +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT des/DESIGNATION [t/TAG]...`
 
 [NOTE]
 ====
@@ -114,7 +130,7 @@ An employee can have any number of tags (including 0)
 
 Example:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN des/Manager`
 
 
 === Editing an employee : `edit`
@@ -123,7 +139,7 @@ Priority level: `default`,`manager`
 
 Edits the details of the employee: +
 Format:
-`edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
+`edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [dep/DEPARTMENT] [des/DESIGNATION] [t/TAG]…​`
 
 ****
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
@@ -158,6 +174,7 @@ Examples:
 `delete 2` +
 Deletes the 2nd person in the employee list.
 
+// tag::list[]
 === Listing all personnel of the company : `list`
 
 Shows a list of all the personnel, all the events, or those people in the specific department in the project team +
@@ -171,6 +188,7 @@ Enter a command to list people in the specific `DEPARTMENT`: `list dep DEPARTMEN
 Example: +
 `list dep Admin` +
 `list dep Admin Finance`
+// end::list[]
 
 // tag::addevent[]
 === Adding an event: `addEvent`
@@ -181,21 +199,22 @@ Format: `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_T
 
 ****
 * DATE needs to be in YYYY-MM-DD format
-* TIME needs to be in 00:00 format
-* START_TIME must not be later than END_TIME
+* START_TIME and END_TIME needs to be in HH:MM format
+* START_TIME must be earlier than END_TIME
 ****
 
 [NOTE]
 ====
 * One location can only hold one event at any time.
-* Events created cannot span multiple days.
+* Location is case insensitive
+* Events created cannot span multiple days with a single command.
 * Leap years are not considered during date validation.
 ====
 
 Example:
 
-* `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` +
-Creates an event named Board Meeting at Conference Room 1 at 2018-09-28, 12:00 to 23:59.
+* `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/14:00 e/15:45` +
+Creates an event named Board Meeting at Conference Room 1 at 2018-09-28, from 14:00 to 15:45.
 // end::addevent[]
 
 // tag::editevent[]
@@ -203,7 +222,7 @@ Creates an event named Board Meeting at Conference Room 1 at 2018-09-28, 12:00 t
 Priority level: `default`,`manager`
 
 Edits the details of the events: +
-Format: `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME [e/END_TIME]`
+Format: `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME] [e/END_TIME]`
 
 ****
 * Edits the event at the specified `EVENT_INDEX`. The index refers to the index number shown in the displayed event list. The
@@ -211,9 +230,12 @@ index *must be a positive integer* 1, 2, 3, ... +
 * At least one of the optional fields must be provided.
 * DATE needs to be in YYYY-MM-DD format
 * TIME needs to be in 00:00 format
-* START_TIME must not be later than END_TIME
-* Existing values will be updated to the input values.
+* START_TIME must be earlier than END_TIME
+* Leap years are not considered during date validation.
 * One location can only hold one event at any time.
+* Location is case insensitive
+* Event cannot be editted if result clashes with any of the attendees' event schedule
+* Existing values will be updated to the input values.
 ****
 
 Examples:
@@ -239,11 +261,14 @@ Examples:
 * `deleteEvent 2` +
 Deletes the 2nd event in the address book.
 
+// tag::sort[]
 === Sorting all events: `sort`
 Priority level: all
 
 Sort the event listing based on the key words provided. +
 Able to sort with event's name, event's date, event's starttime, event's endtime.  +
+
+If both event's have the same date then starttime will be compared. +
 *Key word:* +
 1) event's name: `name` +
 2) event's date: `date` +
@@ -254,7 +279,20 @@ Able to sort with event's name, event's date, event's starttime, event's endtime
 Format: sort `key word` +
 Example:
 
-* `sort name`
+* `sort name` +
+Sort the event list alphabetically
+// end::sort[]
+
+// tag::showmine[]
+=== Sorting all events: `showmine`
+Priority level: `manager`, `employee`
+
+This function is only applicable to users who have login with their email. +
+Filter and list out events which they are listed as attendees.
+
+
+Format: `showmine`
+// end::showmine[]
 
 // tag::findEvent[]
 === Searching for the events using keywords: `findEvent`
@@ -262,10 +300,13 @@ Priority level: all
 
 Finds events whose names contain any of the given keywords or whose description contains any of the given keywords (case-insensitive). +
 Format: `findEvent KEYWORD [MORE_KEYWORDS]`
+Example:
+
+* `findEvent Meeting Weekly`
 
 ****
 * The search is case insensitive
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the keywords does not matter. e.g. `Weekly Meeting` will match `Meeting Weekly`
 * Only full words will be matched
 * Events matching at least one keyword will be returned
 ****
@@ -281,16 +322,16 @@ Format: `invite PERSON_INDEX to/EVENT_INDEX` +
 Example:
 
 * `invite 1 to/3` +
-Invite 1st employee at employee list to 3rd event at event list
+Invite 1st employee on employee list to 3rd event on event list
 
-image::InviteCommandGuide.png[width="800"]
+image::InviteCommandGuide.png[width="500"]
 
 ****
 * Invites the employee at the specified `PERSON_INDEX` *TO* the event at the specified `EVENT_INDEX`.
-* The index refers to the index number shown in the displayed person list and event list respectively.
+* The index refers to the index number shown in the displayed employee list and event list respectively.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Employee should not have already been invited to the selected event.
-* Event invited to should not clash with the selected employee's schedule or other events at the same location and time.
+* Event invited to *should not clash* with the selected employee's event schedule.
 ****
 // end::invite[]
 
@@ -299,11 +340,13 @@ image::InviteCommandGuide.png[width="800"]
 Priority level: `default`,`manager`
 
 Removes an employee from the an event. +
-Format/Prompts: `remove PERSON_INDEX  from/EVENT_INDEX` +
+Format/Prompts: `remove PERSON_INDEX from/EVENT_INDEX` +
 Example:
 
-* `remove 1 from/2` +
-Remove 1st employee at employee list from 2nd event at event list
+* `remove 2 from/4` +
+Remove 2nd employee at employee list from 4th event at event list
+
+image::RemoveCommandGuide.png[width="450"]
 
 ****
 * Remove the employee at the specified `PERSON_INDEX` *FROM* the event at the specified `EVENT_INDEX`.
@@ -317,34 +360,61 @@ Remove 1st employee at employee list from 2nd event at event list
 === Selecting a person: `select`
 Priority level: `all`
 
-Selects an employee and view the specified employee's events by date, year, month, month and year, or all his/her events. +
+Selects an employee and view the specified employee's events on a date, year, month, month and year, or all of his/her events. +
 Format/Prompts: +
 Enter a command: `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
 ****
-* Select the employee at the specified `PERSON_INDEX` and view all his/her events or events at certain time as indicated.
+* Select the employee at the specified `PERSON_INDEX` and view all his/her events or events at certain time if indicated.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * DATE needs to be in YYYY-MM-DD format
-* MONTH needs to be in 00 format (e.g. 01, 02, ... , 12)
-* YEAR needs to be in 0000 format. (e.g. 2018)
+* MONTH needs to be in MM format (e.g. 01, 02, ... , 12)
+* YEAR needs to be in YYYY format. (e.g. 2018)
 * If DATE is indicated, MONTH and YEAR must NOT be indicated. Then, all events of the selected employee at the specific DATE will be displayed.
 * MONTH and YEAR can be both used at the same time, resulting in events on the selected MONTH and YEAR to be displayed.
 ****
 
+image::SelectCommandGuide.png[width="500"]
+
 Examples:
 
-* `select 1` +
-view all events of employee at index 1
-* `select 1 date/2018-10-31` +
-view all events of employee at index 1 at 2018-10-31
-* `select 1 m/08` +
-view all events of employee at index 1 in August
-* `select 1 y/2018` +
-view all events of employee at index 1 in 2018
-* `select 1 y/2018 m/08` +
-view all events of employee at index 1 in August 2018
+* `select 1` : view all events of employee at index 1
+* `select 1 date/2018-10-31` : view all events of employee at index 1 at 2018-10-31
+* `select 1 m/08` : view all events of employee at index 1 in August
+* `select 1 y/2018` : view all events of employee at index 1 in 2018
+* `select 1 y/2018 m/08` : view all events of employee at index 1 in August 2018
 // end::select[]
+
+// tag::selectEvent[]
+=== Selecting an event : `selectEvent`
+Priority level: all
+
+Selects the specified event by index and displays all employees attending the event. +
+Format: `selectEvent 1` +
+
+[NOTE]
+====
+If any of the attendees are edited or removed, the filtered employee list will not update. The `selectEvent` command must be input again to view the updated list of attendees. +
+====
+
+****
+* Selects the event at the specified `EVENT_INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Event list will be filtered to show only the specified event.
+****
+
+Examples:
+
+* `selectEvent 2` +
+Selects the 2nd event in the address book and shows its attendees.
+
+* `invite 1 to/1` (adds an attendee) +
+`selectEvent 1` (select the event to show the attendee) +
+`edit 1 n/New Name` (edit the name of the attendee) +
+`selectEvent 1` (re-selects the event to show the updated name of the attendee)
+// end::selectEvent[]
 
 === Locating persons by name: `find`
 Priority level: all
@@ -374,6 +444,7 @@ Enter a command: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
+// tag::undoredo[]
 === Undoing previous command : `undo`
 Priority level: all
 
@@ -425,7 +496,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
-// end::undoredo[]_v1.4
+// end::undoredo[]
 
 === Clearing all entries : `clear`
 Priority level: all
@@ -452,37 +523,45 @@ There is no need to save manually.
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
+// tag::commandSummary[]
 == Command Summary
 
 * *Help*: `help`
 
-* *Login*: `login IDENTITY`
+
+* *Login*: `login IDENTITY` where IDENTITY is either manager or employee or `login as existingemail@example.com`
+
+* *Logout*: `logout`
+
+* *Add Employee*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT des/DESIGNATION [t/TAG]...`
+
+* *Edit Employee* : `edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [des/DESIGNATION] [t/TAG]…​`
 
 * *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
 
-* *Edit* : `edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
+* *Delete Employee* : `delete PERSON_INDEX`
 
-* *Delete* : `delete PERSON_INDEX`
+* *Find Employee* : `find KEYWORD [MORE_KEYWORDS]`
 
-* *List* : `list all` OR `list all people` OR `list all events` or `list dep Admin`
+* *List* : `list all` OR `list all people` OR `list all events` or `list dep DEPARTMENT`
 
 * *Sort* : `sort KEYWORD`
 
-* *addEvent* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`
+* *Add Event* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`
 
-* *editEvent* : `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME] [e/END_TIME]`
+* *Edit Event* : `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME] [e/END_TIME]`
 
-* *deleteEvent* : `deleteEvent EVENT_INDEX`
+* *Delete Event* : `deleteEvent EVENT_INDEX`
 
-* *findEvent* : `findEvent KEYWORD [MORE KEYWORDS]`
+* *Find Event* : `findEvent KEYWORD [MORE KEYWORDS]`
 
 * *Invite* : `invite PERSON_INDEX to/EVENT_INDEX`
 
 * *Remove* : `remove PERSON_INDEX  from/EVENT_INDEX`
 
-* *Select* : `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
+* *Select Employee* : `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
-* *Find* : `find KEYWORD [MORE_KEYWORDS]`
+* *selectEvent* : `selectEvent EVENT_INDEX`
 
 * *History* : `history`
 
@@ -493,4 +572,4 @@ There is no need to save manually.
 * *Clear* : `clear`
 
 * *Exit* : `exit`
-
+// end::commandSummary[]

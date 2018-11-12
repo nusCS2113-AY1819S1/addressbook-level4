@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +36,16 @@ public class UniqueEventList implements Iterable<Event> {
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameEvent);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent person as the given argument.
+     */
+    public boolean containsAfterEdit(Event eventToEdit, Event editedEvent) {
+        requireNonNull(eventToEdit);
+        requireNonNull(editedEvent);
+        Predicate<Event> eventPredicate = event -> !event.equals(eventToEdit) && event.isSameEvent(editedEvent);
+        return internalList.stream().anyMatch(eventPredicate);
     }
 
     /**
@@ -116,7 +127,20 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public boolean hasClash(Event toCheck, String personEmail) {
         requireNonNull(toCheck);
+        requireNonNull(personEmail);
         EventClashPredicate predicate = new EventClashPredicate(toCheck, personEmail);
+        return internalList.stream().anyMatch(predicate);
+    }
+
+    /**
+     * Returns true if the edited event clashes with the person's event list.
+     */
+    public boolean hasClashAfterEdit(Event eventBeforeEdit, Event eventAfterEdit, String personEmail) {
+        requireNonNull(eventBeforeEdit);
+        requireNonNull(eventAfterEdit);
+        requireNonNull(personEmail);
+        EventClashAfterEditPredicate predicate =
+                new EventClashAfterEditPredicate(eventBeforeEdit, eventAfterEdit, personEmail);
         return internalList.stream().anyMatch(predicate);
     }
 
