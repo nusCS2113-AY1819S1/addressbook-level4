@@ -44,7 +44,7 @@ Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN` : adds an employee named
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN des/Manager` : adds an employee named
  `John Doe` to the Employee List.
 * **`addEvent`**`n/Annual General Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` : creates
 a new event `Annual General Meeting`
@@ -139,7 +139,7 @@ Priority level: `default`,`manager`
 
 Edits the details of the employee: +
 Format:
-`edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
+`edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [dep/DEPARTMENT] [des/DESIGNATION] [t/TAG]…​`
 
 ****
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
@@ -501,14 +501,13 @@ There is no need to save manually.
 
 * *Logout*: `logout`
 
+* *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT des/DESIGNATION [t/TAG]...`
 
-* *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
-
-* *Edit* : `edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [t/TAG]…​`
+* *Edit* : `edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [des/DESIGNATION] [t/TAG]…​`
 
 * *Delete* : `delete PERSON_INDEX`
 
-* *List* : `list all` OR `list all people` OR `list all events` or `list dep Admin`
+* *List* : `list all` OR `list all people` OR `list all events` or `list dep DEPARTMENT`
 
 * *Sort* : `sort KEYWORD`
 
