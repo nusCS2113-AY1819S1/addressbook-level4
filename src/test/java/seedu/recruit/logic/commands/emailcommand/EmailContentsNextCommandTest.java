@@ -5,8 +5,8 @@ import static seedu.recruit.logic.commands.emailcommand.EmailContentsCommand.NEX
 
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-
 import org.junit.rules.ExpectedException;
+
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.LogicState;

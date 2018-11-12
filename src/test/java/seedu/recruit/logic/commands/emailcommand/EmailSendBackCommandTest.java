@@ -3,8 +3,8 @@ package seedu.recruit.logic.commands.emailcommand;
 import org.junit.Rule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import org.junit.rules.ExpectedException;
+
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.model.ModelManager;
