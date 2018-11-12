@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_IPHONE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CLOTHES;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_IPHONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENDITURE_CATEGORY_CLOTHES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENDITURE_DATE_CLOTHES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENDITURE_DESCRIPTION_CLOTHES;
