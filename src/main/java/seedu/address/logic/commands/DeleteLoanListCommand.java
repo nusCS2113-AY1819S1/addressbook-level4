@@ -43,15 +43,17 @@ public class DeleteLoanListCommand extends Command {
         if (!model.getLoginStatus()) {
             throw new CommandException(MESSAGE_LOGIN);
         }
-
         if (!MainApp.getLoanListFile().exists()) {
             throw new CommandException(MESSAGE_EMPTY);
         }
         File loanListFile = MainApp.getLoanListFile();
         try {
+
             deleteLoanList(model, history, loanListFile);
         } catch (Exception e) {
-            System.out.println(e.toString());
+            if (e.getClass() == CommandException.class) {
+                throw new CommandException(e.getMessage());
+            }
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
