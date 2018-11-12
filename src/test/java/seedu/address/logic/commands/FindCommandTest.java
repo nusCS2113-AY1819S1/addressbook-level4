@@ -22,6 +22,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.account.Username;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 */
+/*
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
@@ -80,9 +81,10 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(ARDUINO, RPLIDAR), model.getFilteredItemList());
     }*/
 
-    /**
+   /* /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
+
 /*
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
