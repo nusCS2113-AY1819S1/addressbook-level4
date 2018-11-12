@@ -163,31 +163,31 @@ public class AddExpensesCommand extends Command {
      * Creates and returns a {@code Expenses} with the details of {@code expensesToEdit}
      * edited with {@code editExpensesDescriptor}.
      */
-        private Expenses createEditedExpenses(Expenses expensesToEdit, EditExpensesDescriptor
+    private Expenses createEditedExpenses(Expenses expensesToEdit, EditExpensesDescriptor
                 editExpensesDescriptor) {
-            assert expensesToEdit != null;
-            ExpensesAmount updatedExpensesAmount = null;
-            TravelExpenses updatedTravelExpenses = null;
-            MedicalExpenses updatedMedicalExpenses = null;
-            MiscellaneousExpenses updatedMiscellaneousExpenses = null;
+        assert expensesToEdit != null;
+        ExpensesAmount updatedExpensesAmount = null;
+        TravelExpenses updatedTravelExpenses = null;
+        MedicalExpenses updatedMedicalExpenses = null;
+        MiscellaneousExpenses updatedMiscellaneousExpenses = null;
 
-            EmployeeId updatedEmployeeId = expensesToEdit.getEmployeeId();
-            try {
-                updatedExpensesAmount = ParserUtil.parseExpensesAmount(modifyExpensesAmount(expensesToEdit,
-                        editExpensesDescriptor));
-                updatedTravelExpenses = ParserUtil.parseTravelExpenses(modifyTravelExpenses(expensesToEdit,
-                        editExpensesDescriptor));
-                updatedMedicalExpenses = ParserUtil.parseMedicalExpenses(modifyMedicalExpenses(expensesToEdit,
-                        editExpensesDescriptor));
-                updatedMiscellaneousExpenses = ParserUtil.parseMiscellaneousExpenses(modifyMiscellaneousExpenses(
-                        expensesToEdit, editExpensesDescriptor));
-            } catch (ParseException pe) {
-                pe.printStackTrace();
-            }
-
-            return new Expenses(updatedEmployeeId, updatedExpensesAmount, updatedTravelExpenses, updatedMedicalExpenses,
-                    updatedMiscellaneousExpenses);
+        EmployeeId updatedEmployeeId = expensesToEdit.getEmployeeId();
+        try {
+            updatedExpensesAmount = ParserUtil.parseExpensesAmount(modifyExpensesAmount(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedTravelExpenses = ParserUtil.parseTravelExpenses(modifyTravelExpenses(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedMedicalExpenses = ParserUtil.parseMedicalExpenses(modifyMedicalExpenses(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedMiscellaneousExpenses = ParserUtil.parseMiscellaneousExpenses(modifyMiscellaneousExpenses(
+                    expensesToEdit, editExpensesDescriptor));
+        } catch (ParseException pe) {
+            pe.printStackTrace();
         }
+
+        return new Expenses(updatedEmployeeId, updatedExpensesAmount, updatedTravelExpenses, updatedMedicalExpenses,
+                updatedMiscellaneousExpenses);
+    }
 
     /**
      * Creates and returns a new String of Expenses with the details of {@code expensesToEdit}
