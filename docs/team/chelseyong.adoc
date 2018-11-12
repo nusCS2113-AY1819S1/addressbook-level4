@@ -1,0 +1,91 @@
+= Chelsey Ong Hee - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+This portfolio documents my ability to write functional code,
+user and developer documentation and respond to pull requests.
+
+== PROJECT: Task Book
+
+---
+
+== Overview
+
+`*_Task Book_*` is a desktop to-do list application. It is a GUI app but most of its user interactions happen in the Command Line Interface (CLI).
+It is targeted at *helping busy students manage their daily tasks*
+by keeping track of their to-do things, approaching deadlines and categorise them in an orderly manner.
+Furthermore, `*_Task Book_*` allows you to set milestones for big projects so that you can finish them manageably on time.
+If you can type fast, `*_Task Book_*` can manage your tasks faster than traditional paper notebooks or a mobile application.
+
+== Summary of contributions
+Here is an overview of what I have done to support my team in achieving the final goal of our project.
+
+* *Code contributions*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=chelseyong[tracked by Reposense]
+* *Main feature implemented*: Allows students *to add tasks into the* `*_Task Book_*`
+** What it does: Adds a new task with its title, description, priority level and expected hours of completion
+** Justification: This is a core feature that serves the main purpose of `*_Task Book_*` and lays the foundation for other features to be built upon
+** Highlights: Written model stubs and applied equivalence partitioning for unit-testing the feature to ensure sufficient coverage for the feature
+
+* *Other minor enhancements*:
+
+** Feature that allows students to *complete existing tasks* in the `*_Task Book_*`
+*** What it does: Strikes off an incomplete task
+*** Justification: Another crucial feature that allows students to focus on incomplete tasks and also track productivity
+
+** Feature that allows students to *track their productivity*
+*** What it does: Calculates the average productivity for all the completed tasks
+*** Justification: Helps students be more aware of their productivity rate
+
+** Modified code to follow software engineering principles such as Open-Closed Principle (OCP) over
+https://github.com/CS2113-AY1819S1-W13-3/main/commit/81afea553395e947d162b64f1120c7ec8bb80ca2#diff-4e59bb2089ae847de1ffd4ff31f38cb9R42[here] and https://github.com/CS2113-AY1819S1-W13-3/main/commit/81afea553395e947d162b64f1120c7ec8bb80ca2#diff-bb522e2a9d767e5adac5bf64bb9ed87eR31[there]
+
+** Beautified the User Interface (UI) to be more user-friendly (Pull request https://github.com/CS2113-AY1819S1-W13-3/main/pull/63[#63])
+
+* *Other contributions*:
+
+** Project management:
+*** Set up the organization repository and its issue tracker
+*** Closes milestones and tags repository biweekly
+*** Managed releases `v1.1` - `v1.4` (4 https://github.com/CS2113-AY1819S1-W13-3/main/releases[releases]) on GitHub
+*** Added https://github.com/CS2113-AY1819S1-W13-3/main/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Achelseyong+[issue labels and assigned milestones] to the team's pull requests
+*** Opened issues https://github.com/CS2113-AY1819S1-W13-3/main/issues/7[#7], https://github.com/CS2113-AY1819S1-W13-3/main/issues/8[#8], https://github.com/CS2113-AY1819S1-W13-3/main/issues/22[#22]
+to describe user stories of the product as well as to break down user stories into smaller tasks e.g. https://github.com/CS2113-AY1819S1-W13-3/main/issues/39[#39], https://github.com/CS2113-AY1819S1-W13-3/main/issues/40[#40]
+** Documentation:
+*** Wrote the use cases and user stories for other feature enhancements, as well
+*** Drawn architecture and sequence diagrams to further substantiate how the feature is developed
+** Community:
+*** Reviewed my teammates’ pull requests like https://github.com/CS2113-AY1819S1-W13-3/main/pull/46[#46], https://github.com/CS2113-AY1819S1-W13-3/main/pull/48[#48] and ensure that Travis build is successful before merging the pull requests
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T09-2/main/issues/94[#94], https://github.com/CS2113-AY1819S1-T09-2/main/issues/96[#96], https://github.com/CS2113-AY1819S1-T09-2/main/issues/98[#98], https://github.com/CS2113-AY1819S1-T09-2/main/issues/102[#102])
+
+== Contributions to the User Guide
+
+|===
+|_The following showcases my ability to write user documentation for add task, complete task,
+  and locking/unlocking the_ `*_Task Book_*`
+|===
+
+include::../UserGuide.adoc[tag=add]
+
+include::../UserGuide.adoc[tag=complete]
+
+include::../UserGuide.adoc[tag=lockunlock]
+
+== Contributions to the Developer Guide
+
+|===
+|_The following showcases my ability to write use cases for add task, complete task,
+developer documentation for locking_ `*_Task Book_*`, _and the appendix._
+|===
+
+include::../DeveloperGuide.adoc[tag=addTask]
+
+include::../DeveloperGuide.adoc[tag=completeTask]
+
+include::../DeveloperGuide.adoc[tag=lockunlock]
+
+[appendix]
+include::../DeveloperGuide.adoc[tag=appendix]
+
+[appendix]
+include::../DeveloperGuide.adoc[tag=nonFunctionalReq]

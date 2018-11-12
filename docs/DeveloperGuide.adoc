@@ -459,30 +459,48 @@ image::DG_AddMilestoneCommand.png[width="790"]
 ** Cons: May result in confusion especially if there are tasks with very similar `title`.
 // end::milestone_feature[]
 
-////
+// tag::lockunlock[]
+=== Locking/Unlocking Task Book feature [coming in v2.0]
+==== Proposed Implementation
+To ensure encryption keys are both sufficiently random and hard to brute force,
+we will use standard password-based encryption (PBE) key derivation methods. +
+
+When the student uses Task Book for the first time, he or she will be requested to enter a new password.
+Since password recovery methods may not be implemented, this password must be easy to remember by the student.
+Along with the password text provided by the student, a salt is appended to produce a hash (Figure below). +
+
+.Hashing of the password
+image::salt_hashing.png[width="500"]
+
+An AES or DES encryption key is thus derived from this process.
+To unlock the Task Book, the same salt is appended to the password provided to generate the decryption key.
 
 
-=== Logging
+In the Sequence Diagram, these are the interactions within the Logic component for the execute("lock") API call (Figure below):
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
+.  `Logic` parses the command and returns the LockCommand.
+.  During the command execution, `Model` checks whether a password has been set.
+.  If so, `Encryptor` will encrypt `taskbook.xml` file so the Task Book cannot be seen by anyone without the password.
+.  Else, a `CommandException` is returned to prompt the user to set a password.
 
-* The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
-* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level
-* Currently log messages are output through: `Console` and to a `.log` file.
+.Sequence diagram of user locking Task Book
+image::EncryptionLogicSequenceDiagram.png[width="500"]
 
-*Logging Levels*
+==== Design Considerations
+There are a few ways to implement the password encryption for our product. +
+However, each method has its strengths and weaknesses. We will be explaining why we chose this particular implementation design.
 
-* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
+===== Aspect: Online password authentication
+* **Alternative 1:** Offline password authentication
+** Pros: Simple and efficient method to log into Task Book with a lower risk of data breach
+*** If student has set a complex password, it will be harder to hack into Task Book
+** Cons: Possible data loss if student's password is forgotten
+* **Alternative 2:** Connect student logging session to an online authentication system
+** Pros: Allows students to reset their password, if forgotten
+** Cons: Extra step to connect to the internet and send hashed password to verify with the database.
+Additional space is also required in database to store users and their passwords securely.
 
-[[Implementation-Configuration]]
-=== Configuration
-
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
-
-////
+// end::lockunlock[]
 
 [[Testing]]
 == Testing
@@ -637,53 +655,57 @@ Use case ends.
 Use case resumes at step 2.
 // end::select[]
 
+//tag::addTask[]
 [discrete]
 === Use case: Add new task
 
 *MSS*
 
 1.  Student selects the deadline for a task
-2.  TB updates the selected date.
-3.  Student requests to add a new task with its title, description, priority level and expected hours to complete
+2.  TB updates the selected date
+3.  Student requests to add a new task with some details
 4.  TB checks for the validity of command and adds the task to the list
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. Student enters an invalid priority level for the command
-** 3a1. TB outputs an error message.
-Use case ends.
-
-* 3b. Student enters a duplicated task
-** 3b1. TB outputs an error message
+* 3a. Student did not enter one or more compulsory input(s) for the task
+** 3a1. TB tells student that input(s) is/are empty
 +
 Use case ends.
 
+* 3b. Student enters a duplicated task
+** 3b1. TB shows that task already exists in TB
++
+Use case ends.
+//end::addTask[]
+
+//tag::completeTask[]
 [discrete]
 === Use case: Complete task
 
 *MSS*
 
 1.  Student selects the date of completed task
-2.  TB updates the selected date.
-3.  Student requests to complete the task by providing its index and the number of hours taken to complete it
-4.  TB checks for validity of the index and marks the task as completed
+2.  TB updates the selected date
+3.  Student requests to complete the task
+4.  TB checks for its validity and completes the task in TB
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. Student provided an invalid index or number of hours
-** 3a1. TB requests for a valid command again
-** 3a2. Student returns a new Complete command
+* 3a. Student attempts to complete the task in less than 1 hour
+** 3a1. TB requests for student to enter a more suitable number of hour(s)
 +
-Use case ends.
+Use case resumes at step 4.
 
-* 3a. Task is already completed
-** 3a1. TB returns an info message for user.
+* 3a. Student wants to complete a completed task
+** 3a1. TB gives an error to show that task is completed already
 +
 Use case ends.
+//end::completeTask[]
 
 [discrete]
 === Use case: Delete task
@@ -810,7 +832,10 @@ Use case ends.
 // end::usecase_milestone[]
 
 [appendix]
+//tag::nonFunctionalReq[]
 == Non Functional Requirements
+Here are some conditions that are not explicitly stated in the features that Task Book provides,
+but are crucial features that allow users to operate the system functionally.
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to respond within 2 seconds.
@@ -818,7 +843,7 @@ Use case ends.
 .  Will be offered free for students.
 .  Not built to contain sensitive information due to lack of password protection.
 .  Tasks dated as far as 10 years ago may be difficult to retrieve, unless data is backed up in the cloud storage.
-
+//end::nonFunctionalReq[]
 
 [appendix]
 == Glossary
@@ -950,10 +975,30 @@ _{ more test cases ... }_
    Expected: Task is not edited. Message of task not edited error is shown.
 // end::editTaskTest[]
 
+//tag::appendix[]
+=== Adding a task
+
+. Select a particular date
+
+.. Select the date using the `select` command, or the date-picker in the UI.
+.. Test case: `select 11/11/2018` +
+   Expected: Tasks with the similar deadline are listed. Timestamp in the status bar is updated.
+. Add a task with title, description, priority and expected number of hours entered.
+.. Test case: `add t/Do project portfolio d/convert to pdf format p/high h/3 c/CS2101` +
+   Expected: A task will be added to the list, together with the other tasks with the same deadline.
+.. Other incorrect add commands: `add` or `add t/ d/ p/ h/` with compulsory fields not entered
+or `add t/Do coding d/very fun p/midhigh h/1` with invalid priority level.
+
+
 === Saving data
 
 . Dealing with missing/corrupted data files
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. If the file is corrupted due to illegal values in the data
+* Go to `data/taskbook.xml` and delete the file
 
-_{ more test cases ... }_
+.. If the file is missing:
+* The filename may be incorrect, i.e. not `taskbook.xml`, or
+* `taskbook.xml` may not be in the `/data` folder
+
+//end::appendix[]
