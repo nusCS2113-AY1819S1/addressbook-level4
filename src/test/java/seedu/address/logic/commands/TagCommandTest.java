@@ -32,7 +32,7 @@ public class TagCommandTest {
     private Model expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
     private CommandHistory commandHistory = new CommandHistory();
     @Before
-    public void setup() {
+    public void setUp() {
         Username admin = new Username("admin");
         model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
         model.setLoggedInUser(admin);
@@ -50,12 +50,12 @@ public class TagCommandTest {
         // different types -> returns false
         assertFalse(tagFirstCommand.equals(1));
         // null -> returns false
-        assertFalse(tagFirstCommand.equals(null));
+        assertFalse(tagFirstCommand == (null));
         // different item -> returns false
         assertFalse(tagFirstCommand.equals(tagSecondCommand));
     }
     @Test
-    public void execute_zeroKeywords_noItemFound() {
+    public void executeZeroKeywordsNoItemFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
         TagContainsKeywordsPredicate predicate = preparePredicate(" ");
         TagCommand command = new TagCommand(predicate);
@@ -64,7 +64,7 @@ public class TagCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
     @Test
-    public void execute_multipleKeywords_multipleItemsFound() {
+    public void executeMultipleKeywordsMultipleItemsFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
         TagContainsKeywordsPredicate predicate = preparePredicate("Lab1 Lab2");
         TagCommand command = new TagCommand(predicate);
