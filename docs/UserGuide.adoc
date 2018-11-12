@@ -389,7 +389,10 @@ Removes the user with username `Alice` from the attendance of the 2nd event in t
 Admin/User: Shows event reminders for all upcoming events that you have registered for. +
 Format: `reminder`
 
-NOTE: Upcoming events are those that are occurring within the next 24 hours.
+[NOTE]
+====
+Upcoming events are those that are occurring within the next 24 hours.
+====
 
 ****
 * You will only receive reminders for events that they have *registered* for.
@@ -398,8 +401,10 @@ NOTE: Upcoming events are those that are occurring within the next 24 hours.
 * Close the event alert dialog using your mouse or by hitting 'enter' on your keyboard.
 ****
 
+--
 .Event Reminder Alert Dialog
 image::AlertDialog.png[width="400"]
+--
 
 // end::eventReminders[]
 
@@ -416,7 +421,10 @@ Format: `update`
 * Event statuses are automatically updated every 5 minutes.
 ****
 
-TIP: You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load and if the problem still persists, use the `update` command.
+[TIP]
+====
+You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load and if the problem still persists, use the `update` command.
+====
 // end::eventStatus[]
 
 
