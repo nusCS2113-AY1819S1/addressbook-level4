@@ -9,11 +9,10 @@ import static seedu.planner.commons.util.DateUtil.isLaterThan;
 * Limit used to offer a function as a reminder to user about their money usage.
 * */
 public class Limit {
-
+    public static final String LIMIT_FORMAT = "dateStart: %s, dateEnd%s, moneyFlow:%s";
     private Date dateStart;
     private Date dateEnd;
     private MoneyFlow limitMoneyFlow;
-    public static final String LIMIT_FORMAT = "dateStart: %s, dateEnd%s, moneyFlow:%s";
     public Limit (Date dateStart , Date dateEnd, MoneyFlow limitMoneyFlow) {
         requireAllNonNull(dateEnd, dateStart, limitMoneyFlow);
         this.dateStart = dateStart;
