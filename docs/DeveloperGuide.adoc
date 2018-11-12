@@ -1322,7 +1322,8 @@ Expected: The Command Result box will return an invalid format and no changes wi
  .. Test case: `addComment x C/STRING`, when x<0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1` 
 .. Test case: `addComment x C/STRING`, when x < 0 or x is larger than the list size, or `addComment C/Hello` or `addComment 1` + 
 Expected: Similar to previous because x has to be a signed integer that exists within the index of events.
- === Replying a Comment
+
+=== Replying a Comment
  
  . Replying a comment in the comment section of an event
  .. Prerequisite: User/Admin has to be logged in, event 1 has to have one valid comment.
@@ -1341,7 +1342,8 @@ Expected: Similar to previous
  .. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. 
 .. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. + 
 Expected: Invalid command will be displayed in the result box. No changes will occur.
- === Deleting a Comment
+
+=== Deleting a Comment
  
  . Deleting a comment in the comment section 
  .. Prerequisites: Admin and logged in, event 1 has to have at least 1 valid comment.
