@@ -16,7 +16,6 @@ import seedu.recruit.model.UserPrefs;
 public class EmailInitialiseCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();

@@ -3,7 +3,7 @@ package seedu.recruit.logic.commands.emailcommand;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -40,7 +40,7 @@ public class EmailSendSendCommand extends EmailSendCommand {
         }
 
         //Generating recipients
-        Set<String> recipientEmails = new HashSet<>();
+        Set<String> recipientEmails = new LinkedHashSet<>();
         generateRecipients(recipientEmails, model, emailUtil);
 
         //Generate subject
