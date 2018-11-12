@@ -10,6 +10,7 @@
 
 FinancialPlanner is a PC software specially designed for students who love typing.
 This purpose of this product is to help users better manage their finances, including their daily spend and income.
+
 Users are able to record their finances and modify these records, set and modify limits, summarize their financial status and export their records into excel file.
 The product is based on Command Line Interface (CLI), users are able input their commands and related information at the TextBox.
 Graphic User Interface is used for displaying statistic and other information, which will provide user with a clear and direct understanding about their financial status.
@@ -57,7 +58,7 @@ two dates.
 === `completed` *Major enhancement #2*: added the ability to set the monthly limit.
 
 ** What it does: allows the user to set the continuous monthly limit which will always check the total spending for the
-current month. For example, if the limit was set to be 200 at April, the limit will check the total spend for April.
+current month. For example, if the limit was set to be 200 at April, the limit will check the total spend for April in April.
 When the time comes to May, the limit will no longer check April, instead, the limit
 will check the total spend of May until the last second of May.
 The user will be reminded if the monthly limits have been exceeded and the monthly limit will always be placed at the top of limits' information.
@@ -116,7 +117,8 @@ include::../UserGuide.adoc[tag=limitfeatures]
 |===
 
 include::../DeveloperGuide.adoc[tag=limitfeatures]
-
+include::../DeveloperGuide.adoc[tag=limitUserCase]
+include::../DeveloperGuide.adoc[tag=limitsManualTest]
 
 ---
 

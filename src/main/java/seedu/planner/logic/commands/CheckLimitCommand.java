@@ -11,7 +11,7 @@ import seedu.planner.model.Model;
  */
 public class CheckLimitCommand extends Command {
     public static final String COMMAND_WORD = "checklimit";
-    public static final String MESSAGE_SUCCESS = "Listed %d limits.\n";
+    public static final String MESSAGE_SUCCESS = "Listed %d limits.";
     public static final String MESSAGE_FAILURE = "No more limits to list!";
 
     @Override
