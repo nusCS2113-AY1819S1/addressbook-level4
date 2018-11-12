@@ -1078,6 +1078,7 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The user `john` will be deleted from the UserStorage and a success message will be shown in the result display panel.
 .. Test case: `deleteUser uName/abcd`
    Expected: Since the given user `abcd` does not exist in the UserStorage, an error message will be shown in the result display panel.
+
 // tag::UserManagement3[]
 === Deleting a user(User)
 
@@ -1089,3 +1090,4 @@ These instructions only provide a starting point for testers to work on; testers
    Expected Fail: Since the given user is not logged in, an error message will be shown in the result display panel.
 // end::UserManagement3[].. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 // end::others[]
+
