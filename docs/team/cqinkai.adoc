@@ -95,4 +95,8 @@ include::../DeveloperGuide.adoc[tag=reminderUsecase]
 
 include::../DeveloperGuide.adoc[tag=updateStatusUsecase]
 
+include::../DeveloperGuide.adoc[tag=reminderMT]
+
+include::../DeveloperGuide.adoc[tag=statusMT]
+
 ---
