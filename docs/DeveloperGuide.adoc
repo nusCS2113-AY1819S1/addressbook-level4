@@ -443,6 +443,9 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 ==== Current Implementation
 The statistic feature is facilitated by a singleton class StatisticCenter. It is called directly from many existing commands and is stored in Json format.
 
+[NOTE]
+Currently this feature isn't integrated with the undo/redo feature. It is planned for v2.0.
+
 The following sequence diagram shows how the StatisticCenter interact with sell command:
 
 image::statisticSequenceDiagram.png[width="800"]

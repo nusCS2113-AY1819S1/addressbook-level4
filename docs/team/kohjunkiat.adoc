@@ -9,11 +9,11 @@
 
 == Overview
 
-BookInventory is a desktop application cater for small and medium bookstore owners. It designed to be primarily used as a *stock management tool* by book store owner with the added benefit for customers to directly browse through the stocks they have.
+BookInventory is a desktop application cater for small and medium bookstore owners. It is designed to be primarily used as a *stock management tool* by book store owners with the added benefit for customers to directly browse through the stocks they have.
 
-Users interacts with BookInventory through the *Command-Line Interface (CLI)*, and a *Graphical User Interface (GUI)* created with JavaFX. It is written in Java, and has approximately 10 kLoC.
+Users interacts with BookInventory through the *Command-Line Interface (CLI)*, and a *Graphical User Interface (GUI)* created with JavaFX. It is written in Java, and has approximately 10 thousand lines of code (LoC).
 
-BookInventory was developed by a team of four students over the course of a semester. It is morphed from the Address Book (Level 4) project by SE-EDU.
+BookInventory was developed by a team of four students over the course of a semester. It was morphed from the Address Book (Level 4) project by SE-EDU.
 
 BookInventory started as a project for the following modules offered by the School of Computing, National University of Singapore:
 
@@ -26,13 +26,13 @@ This project portfolio documents my contributions to the BookInventory project.
 == Summary of contributions
 
 * *Major enhancement*: added *statistic feature*
-** What it does: allows the user to view the monthly performance of the store through key financial datas like revenue, expense and inventory.
+** What it does: It allows the user to gauge the monthly performance of the store through key financial datas like revenue, expense and inventory.
 ** Justification: This feature value-adds the product significantly because financial data are tedious to record and  prone to human error. With the help of software, financial data are more reliable, accurate, and owners can access them swiftly.
 ** Highlights: This enhancement requires a singleton class `StatisticCenter` which interacts with most of the existing commands and possibly future commands.
 
 * *Minor enhancement*: added a stock command that allow admin users to stock books.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Code contributed*: [#[Functional code]] [#[Test code]]
 
 * *Other contributions*:
 
@@ -41,7 +41,6 @@ This project portfolio documents my contributions to the BookInventory project.
 ** Project morphing:
 *** Morphed model portion of addressbook 4.
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com/nusCS2113-AY1819S1/forum/issues/58[1])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-2/main/issues/121[1], https://github.com/CS2113-AY1819S1-W12-2/main/issues/103[2], https://github.com/CS2113-AY1819S1-W12-2/main/issues/130[3])
 
@@ -68,7 +67,7 @@ You can send in a request via the `Command Box`.
 
 === Increase Book Quantity (Ordered more books): `stock`
 
-Increase an existing book quantity in the inventory list. +
+You can use this command to increase an existing book quantity in the inventory list. +
 Format: `stock INDEX q/QUANTITY` OR `stock i/ISBN13 q/QUANTITY`
 
 ****
@@ -96,6 +95,9 @@ Increase the quantity available for the book with the corresponding ISBN13 by 5.
 ==== Current Implementation
 The statistic feature is facilitated by a singleton class StatisticCenter. It is called directly from many existing commands and is stored in Json format.
 
+[NOTE]
+Currently this feature isn't integrated with the undo/redo feature. It is planned for v2.0.
+
 The following sequence diagram shows how the StatisticCenter interact with sell command:
 
 image::statisticSequenceDiagram.png[width="800"]
@@ -117,7 +119,7 @@ image::statisticSequenceDiagram.png[width="800"]
 ==== Current implementation
 The sell command utilises both the `Model` and `Logic` component to fulfil its function.
 
-The stock operation is similar to the sell operation, refer to sell command for sequence diagram:
+The stock operation is similar to the sell operation, refer to Sell Feature for sequence diagram.
 
 ==== Design Considerations
 
