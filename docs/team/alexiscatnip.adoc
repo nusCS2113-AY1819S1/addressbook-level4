@@ -69,10 +69,3 @@ Here are my contributions to the Developer Guide. I tried to write it to be as i
 |===
 
 include::../DeveloperGuide.adoc[tag=import_export_timetable]
-
-
-== PROJECT: <some other project>
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

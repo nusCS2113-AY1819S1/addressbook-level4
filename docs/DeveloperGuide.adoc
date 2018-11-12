@@ -433,17 +433,9 @@ image::UpdateTimeTableSequenceDiagram.png[width="1600"]
 
 The import and export timetable feature allows users to import and export their timetables from and to external applications as _.ics_ files.
 
-The currently supported applications are: +
+The Import command currently supports timetables from NUSMODS. [https://nusmods.com] This makes it easy for existing users of NUSMODS to bring their timetables into FreeTime +
 
-Import:
-
-* NUSMODS [https://nusmods.com] +
-
-Export:
-
-* FreeTime (you can export a user's timetable and then import it back in)
-
-* Google Calendar (Preliminary support, untested: TimeSlots show up as individual events for 1 week.)
+The Export command currently supports FreeTime. This makes it possible to make backups of your timetable, or to share it with other users of FreeTime.
 
 ==== Current implementation
 
@@ -459,8 +451,8 @@ Similar to the other commands; see <<Events-Driven-Nature,*`Events-Driven nature
 
 The `IcsUtil` class implements two public methods for handling _.ics_ files: +
 
-1. `IcsUtil#readTimeTableFromFile()` - to read a `TimeTable` from an _.ics_ file; accepts the `filePath` of the _.ics_ file as parameter +
-2. `IcsUtil#saveTimeTableToFile()` - to write a `TimeTable` to disk; accepts the `TimeTable` and `filePath` of the _.ics_ file as parameter +
+1. `IcsUtil#readTimeTableFromFile()` - to read a `TimeTable` from a specified _.ics_ file on the disk +
+2. `IcsUtil#saveTimeTableToFile()` - to write a `TimeTable` to a specified location on the disk +
 
 
 ===== Backend implementation - Import
@@ -474,7 +466,7 @@ The general implementation are as follows: +
 The following sequence diagram shows how the TimeTable is imported: +
 
 .Interactions between the various Components for the Import Command
-image::ImportSequenceDiagram.png[ ]
+image::ImportSequenceDiagram.png[width="800"]
 
 ===== Backend implementation - Export
 
@@ -487,7 +479,7 @@ The general implementation are as follows: +
 The following sequence diagram shows how the TimeTable is exported: +
 
 .Interactions between the various Components for the `export` Command
-image::ExportSequenceDiagram.png[ ]
+image::ExportSequenceDiagram.png[width = "800"]
 
 ==== Design Considerations
 ===== Aspect: Which Classes (and which system(s)) should parse the ics file format?
@@ -497,12 +489,12 @@ image::ExportSequenceDiagram.png[ ]
 *** Less dependencies. (directly call IcsUtil to read/write .ics files; compared to having to call IcsStorage which then calls IcsUtil).
 ** Cons:
 *** Single responsibility principle is broken. Also, difficult to manage if the class expands and has more methods.
-* **Alternative 2 (Go through the <<Design-Storage,*`Storage`*>> subsystem):** Follow the existing IO implementation of the other files: `addressbook.xml` and `preferences.json`; create an IcsTimeTableStorage class to access the ics file in hard disk.
+* **Alternative 2 (Go through the <<Design-Storage,*`Storage`*>> subsystem):** Follow the existing IO implementation of `addressbook.xml`; create an IcsTimeTableStorage class to access the ics file in hard disk.
 ** Pros:
 *** Similar implementation to existing: Classes that have to do with IO are accessed using the Storage Interface.
 ** Cons:
 *** Increased dependency: LogicManager will then have increased dependency on Storage.
-*** More difficult to implement: Storage subsystem needs to be created on starting the app, whereas the import and export is ad-hoc.
+*** More difficult to implement: Storage subsystem needs to be created on starting the app, whereas the import and export commands are called  ad-hoc.
 // end::import_export_timetable[]
 
 {nbsp}
