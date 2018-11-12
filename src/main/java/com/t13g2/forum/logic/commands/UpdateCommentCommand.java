@@ -70,6 +70,7 @@ public class UpdateCommentCommand extends Command {
             if (Context.getInstance().getCurrentUser().getId() == comment.getCreatedByUserId()
                     || Context.getInstance().isCurrentUserAdmin()) {
                 comment.setContent(contentToUpdate);
+                unitOfWork.getCommentRepository().updateComment(comment);
                 unitOfWork.commit();
             } else {
                 throw new CommandException(MESSAGE_NOT_COMMENT_OWNER);

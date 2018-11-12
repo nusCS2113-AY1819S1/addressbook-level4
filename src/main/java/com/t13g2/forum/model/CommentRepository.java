@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.sun.istack.NotNull;
+import com.t13g2.forum.commons.util.Extensions;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
@@ -55,6 +56,17 @@ public class CommentRepository extends BaseRepository implements ICommentReposit
     @Override
     public void deleteComment(int commentId) {
         forumBookStorage.getComments().getList().removeIf(comment -> comment.getId() == commentId);
+        forumBookStorage.getComments().setDirty();
+    }
+
+    /**
+     * Updates an {@link Comment}
+     *
+     * @param comment
+     */
+    @Override
+    public void updateComment(Comment comment) {
+        Extensions.updateObjectInList(forumBookStorage.getComments().getList(), comment);
         forumBookStorage.getComments().setDirty();
     }
 
