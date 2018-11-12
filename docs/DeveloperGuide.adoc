@@ -1098,7 +1098,7 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The user `john` will be deleted from the UserStorage and a success message will be shown in the result display panel.
 .. Test case: `deleteUser uName/abcd`
    Expected: Since the given user `abcd` does not exist in the UserStorage, an error message will be shown in the result display panel.
-// end::UserManagement3[]
+// tag::UserManagement3[]
 === Deleting a user(User)
 
 . Self Deleting a user.
