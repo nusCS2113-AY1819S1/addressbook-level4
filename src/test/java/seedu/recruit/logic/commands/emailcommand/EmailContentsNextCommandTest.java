@@ -3,8 +3,10 @@ package seedu.recruit.logic.commands.emailcommand;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.recruit.logic.commands.emailcommand.EmailContentsCommand.NEXT_CONTENTS_ERROR_NO_CONTENTS;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 
+import org.junit.rules.ExpectedException;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.LogicState;
@@ -16,6 +18,8 @@ import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.JobOfferBuilder;
 
 public class EmailContentsNextCommandTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();

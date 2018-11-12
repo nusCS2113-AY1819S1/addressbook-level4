@@ -40,7 +40,6 @@ import seedu.recruit.testutil.CandidateContainsFindKeywordsPredicateBuilder;
  * unit test for email parser .java
  */
 public class EmailParserTest {
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

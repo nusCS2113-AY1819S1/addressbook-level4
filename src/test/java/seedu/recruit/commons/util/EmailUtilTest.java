@@ -4,14 +4,19 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 
+import org.junit.rules.ExpectedException;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.JobOfferBuilder;
 
 public class EmailUtilTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private CandidateBuilder candidateBuilder = new CandidateBuilder();
     private Candidate testCandidate = candidateBuilder.build();
     private JobOfferBuilder jobOfferBuilder = new JobOfferBuilder();

@@ -2,12 +2,16 @@ package seedu.recruit.commons.core;
 
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Unit test for emailsettings class
  */
 public class EmailSettingsTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private static final String DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT = "New job offers that I have found for you!";
     private static final String DEFAULT_SUBJECT_COMPANY_AS_RECIPIENT = "New candidates found for your company!";
