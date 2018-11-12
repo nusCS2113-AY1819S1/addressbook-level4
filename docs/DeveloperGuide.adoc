@@ -1227,3 +1227,77 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+
+=== Displaying event details
+
+. Viewing event details with special characters
+
+.. Prerequisites: +
+First event in list contains special characters in details, e.g. `?`, `#`, `&`, `=`, `/`, `@`, `:`.
+.. Test case: `select 1` +
+   Expected: Event page displays all special characters. Status bar remains the same.
+
+=== Registering for an event
+
+. Registering for an event while all events are listed/filtered
+
+.. Prerequisites: +
+Username is not in attendance of first event. +
+Username is in attendance of second event.
+.. Test case: `register 1` +
+   Expected: Username is added to attendance of first event. Index of the event is shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `register 2` +
+   Expected: No duplicate username in attendance of second event. Error details shown in the status message. Status bar remains the same.
+.. Test case: `register x` (where x is non-positive, larger than the list size or not an integer)+
+   Expected: Username is not added to attendance of any event. Error details shown in the status message. Status bar remains the same.
+
+=== Unregistering for an event
+
+. Unregistering for an event while all events are listed/filtered
+
+.. Prerequisites: +
+Username is in attendance of first event. +
+Username is not in attendance of second event.
+
+.. Test case: `unregister 1` +
+   Expected: Username is removed from attendance of first event. Index of the event is shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `unregister 2` +
+   Expected: Error details shown in the status message. Status bar remains the same.
+.. Test case: `unregister x` (where x is non-positive, larger than the list size or not an integer)+
+   Expected: Username is not removed from attendance of any event. Error details shown in the status message. Status bar remains the same.
+
+=== Viewing all attending events
+
+. Viewing attending events while all events are listed
+
+.. Prerequisites: +
+List all events using the `list` command. Multiple events in the list. +
+User has registered for some events using the `register` command.
+.. Test case: `attending` +
+   Expected: Only events which the user has registered for are shown. Number of events the user has registered for are shown in the status message. Timestamp in the status bar remains the same.
+
+. Viewing attending events while events are filtered
+
+.. Prerequisites: +
+Filter events with the `find` command. +
+User has registered for some events using the `register` command.
+.. Test case: `attending` +
+   Expected: Only events which the user has registered for are shown, including events not in the filtered list. Number of events the user has registered for are shown in the status message. Timestamp in the status bar remains the same.
+
+=== Removing an attendee from event
+
+. Removing an attendee by username from an event while all events are listed/filtered
+
+.. Prerequisites: +
+Logged in as admin. +
+Username of target attendee `Charlotte Oliveiro` is in the attendance of the first event.
+Username of target attendee `Charlotte Oliveiro` is not in the attendance of the second event.
+.. Test case: `removeAttendee 1 u/Charlotte Oliveiro` +
+   Expected: Target attendee is removed from attendance of first event. Username of target attendee and index of the event is shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `removeAttendee 1 u/charlotte oliveiro` +
+   Expected: Target attendee username is case-sensitive. Error details shown in the status message. Status bar remains the same.
+.. Test case: `removeAttendee 2 u/Charlotte Oliveiro` +
+   Expected: Target attendee does not exist in second event. Error details shown in the status message. Status bar remains the same.
+.. Test case: `removeAttendee x u/Charlotte Oliveiro` (where x is non-positive, larger than the list size or not an integer) +
+   Expected: Target user is not removed from attendance of any event. Error details shown in the status message. Status bar remains the same.
+
