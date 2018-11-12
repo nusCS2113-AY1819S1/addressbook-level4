@@ -9,8 +9,6 @@ ProManage is a *professional desktop application* for companies that specialises
 long and tedious planning phase. ProManage allow *Manager* and *Employees* of project teams to manage their team members and events easily.
 ProManage is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-image::Ui.png[width="800"]
-
 == Overview
 
 This project portfolio documents my contributions to the development of the CS2113 project, as part of my team T16-2.
@@ -82,10 +80,6 @@ include::../UserGuide.adoc[tag=undoredo]
 |===
 
 include::../DeveloperGuide.adoc[tag=UndoRedo]
-
-include::../DeveloperGuide.adoc[tag=usecases_undo]
-
-include::../DeveloperGuide.adoc[tag=usecases_redo]
 
 
 
