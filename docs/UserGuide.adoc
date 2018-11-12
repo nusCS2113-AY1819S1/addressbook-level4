@@ -329,6 +329,9 @@ Registers user for the 3rd event of the Event Manager.
 `register 1` +
 Registers User for the 1st event in the results of the `find` command.
 
+.Expected outcome after user Peter Parker registers for the event at index 5 (annotations in red).
+image::registerUG.png[width="800"]
+
 === Remove registration from event : `unregister`
 
 User: Unregisters for an event by removing the current user's username from the attendance list. +
@@ -355,6 +358,9 @@ Unregisters user from the 2nd event in the results of the `find` command.
 User: Lists all events that the user has registered for. +
 Format: `attending`
 
+.Events that user Peter Parker is registered to are displayed, similar to find operation (annotations in red).
+image::attendingUG.png[width="700"]
+
 === Remove user from event : `removeAttendee`
 
 Admin: Removes a user registered for an event. +
@@ -377,32 +383,42 @@ Removes the user with username `Peter Parker` from the attendance of the 1st eve
 Removes the user with username `Alice` from the attendance of the 2nd event in the results of the `find` command.
 // end::rsvp[]
 
-//tag::eventState&Reminder[]
+// tag::eventReminders[]
 === Show event reminders : `reminder`
 
-Admin/User: Shows event reminders for all upcoming events that the user has registered for.
+Admin/User: Shows event reminders for all upcoming events that you have registered for. +
 Format: `reminder`
 
 NOTE: Upcoming events are those that are occurring within the next 24 hours.
 
 ****
-* Users will only receive reminders for events that they have registered for.
-* Reminders are automatically sent out every 6 hours, unless the user initiates the command.
+* You will only receive reminders for events that they have *registered* for.
+* You have to be *logged-in* to receive reminders.
+* Reminders are *automatically* sent out every 6 hours, unless you initiate the command.
+* Close the event alert dialog using your mouse or by hitting 'enter' on your keyboard.
 ****
+// end::eventReminders[]
 
+// tag::eventStatus[]
 === Updates the statuses of events : `update`
 
 Admin/User: Updates the statuses of events. +
 Format: `update`
 
 ****
-* Events that have already occurred will have the [COMPLETED] status. Events that have yet to occur will have the [UPCOMING] status.
-* The `update` command can be used without the user having to log in.
+* Events that have already occurred will have the [COMPLETED] status.
+* Events that have yet to occur will have the [UPCOMING] status.
+* The `update` command can be used *without* you having to log in.
 * Event statuses are automatically updated every 5 minutes.
 ****
 
-TIP: You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load, and if the problem still persists, use the `update` command.
-//end::eventState&Reminder
+.A 'Completed' Status
+image::Completed.png[width="100"]
+.A 'Upcoming' Status
+image::Upcoming.png[width="100"]
+
+TIP: You may experience some disruptions to the UI during the automatic update due to high load, especially if your computer is using an older processor. Give it a few seconds to load and if the problem still persists, use the `update` command.
+// end::eventStatus[]
 
 
 //tag::comment[]
@@ -503,9 +519,9 @@ Event Manager's data are saved in the hard disk automatically after any command 
 There is no need to save manually.
 
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+//=== Encrypting data files `[coming in v2.0]`
 
-_{explain how the user can enable/disable data encryption}_
+//_{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
 == FAQ
@@ -542,8 +558,6 @@ e.g. `unregister 1`
 * *View Attending* : `attending`
 * *Remove Attendee* : `removeAttendee INDEX u/USERNAME` +
 e.g. `removeAttendee 1 u/Peter Parker`
-* *Set reminders* : `setReminder INDEX` +
-e.g. `setReminder 1`
 * *Show reminders* : `reminder`
 * *Update event statuses* : `update`
 * *AddComment* : `addComment INDEX C/STRING` +

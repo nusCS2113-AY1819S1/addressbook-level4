@@ -1,0 +1,86 @@
+= Qin Kai - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+This portfolio summarizes my contributions to the https://github.com/CS2113-AY1819S1-T12-1/main/releases/download/v1.3/eventmanager.jar[Event Manager] Application, whereby our team of 5 (http://github.com/chiaxr[Xiang Rong], https://github.com/Geraldcdx[Gerald], http://github.com/jamesyaputra[James], http://github.com/tertium3[Long], http://github.com/cqinkai[Qin Kai]) worked on it as part of our module on software engineering, over a period of 8 weeks. I was the developer in charge of the Event Status feature and the Event Reminder feature in Event Manager.
+
+== PROJECT: Event Manager
+
+Event Manager is an enhanced version of the https://github.com/se-edu/addressbook-level4/releases/download/v0.8/addressbook.jar[Address Book] Application
+---
+
+== Overview
+
+Event Manager is a desktop application for students living in Residential Colleges to manage all the activities happening throughout the college. The user interacts with it using a Command Line Interface (CLI), and it has a GUI created with JavaFX. It is written in Java, and has about 10k lines of code (LoC).
+
+The following is a list of the main features in Event Manager:
+====
+.  *Authentication* -- Admin accounts to manage events and user accounts to identify users.
+.  *Find* -- A search feature to filter events based on keywords in the events' data fields.
+.  *Registration* -- Users can indicate their attendance for events. Attendance is displayed to all other users.
+.  *Reminder* -- Automated reminders are sent to users who have registered for events that are happening in the next 24 hours.
+.  *Comment* -- A comment section to facilitate interactions amongst the users for an event.
+.  *Status* -- Displays the status of an event to users. Statuses can be 'Completed' or 'Upcoming'.
+====
+
+== Summary of contributions
+* *Major enhancement #1*: +
+** added *a new self-updating status field for events*
+** What it does: allows the user to easily discern completed events from upcoming ones. Completed events are events that have taken place while the upcoming events are those that have yet to occur.
+** Justification: This feature is important and enhances the product because a user would have to strain his/her eyes to look through each event's details to ascertain which events have occurred and which ones are coming up.
+** Highlights: This enhancement changes the current model and increases the list of commands available to users. It required an in-depth analysis of design alternatives.
+
+* *Major enhancement #2*: +
+** added *a reminder mechanism for user-registered events*
+** What it does: Sends a reminder to users for any upcoming events (those happening in the next 24 hours) that they have registered for.
+** Justification: This
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+
+* *Minor enhancement*: added new information fields for the events.
+** a contact field for the name of the person in-charge of the event. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/14[#14])
+** a comment field for the comment section. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/91[#91])
+** an attendee field for the event's attendees. (https://github.com/CS2113-AY1819S1-T12-1/main/pull/58[#58])
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Set up milestones and issue labels for the project on GitHub
+** Enhancements to existing features:
+*** Morphed the address field into a venue field (https://github.com/CS2113-AY1819S1-T12-1/main/pull/53[#53])
+*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14])
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-T09-4/main/issues/132[1], https://github.com/CS2113-AY1819S1-T09-4/main/issues/135[2], https://github.com/CS2113-AY1819S1-T09-4/main/issues/146[3])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=eventReminders]
+
+include::../UserGuide.adoc[tag=eventStatus]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=eventStatus&Reminder]
+
+include::../DeveloperGuide.adoc[tag=reminderUsecase]
+
+include::../DeveloperGuide.adoc[tag=updateStatusUsecase]
+
+== PROJECT: PowerPointLabs
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_

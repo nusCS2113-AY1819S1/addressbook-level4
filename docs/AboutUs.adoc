@@ -20,7 +20,7 @@ Responsibilities: RSVP/Attendance
 
 === Gerald Chua Deng Xiang
 image::geraldcdx.png[width="250", align="left"]
-{empty}[https://www.comp.nus.edu.sg/~geraldc/website2-0/index.html[homepage]] [https://github.com/Geraldcdx[github]] [<<GCDX#, portfolio>>]
+{empty}[https://www.comp.nus.edu.sg/~geraldc/website2-0/index.html[homepage]] [https://github.com/Geraldcdx[github]][<<geraldcdx#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Comment Section Architect
@@ -38,7 +38,7 @@ Responsibilities: User Authentication
 
 === Chuang Qin Kai
 image::cqinkai.png[width="150", align="left"]
-{empty}[http://github.com/cqinkai[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/cqinkai[github]] [<<cqinkai#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Event Reminders

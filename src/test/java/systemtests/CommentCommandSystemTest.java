@@ -194,7 +194,7 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
     }
 
     /**
-     *
+     * To test if command is successful
      * @param expectedModel
      * @param model
      * @param command to run
@@ -212,7 +212,7 @@ public class CommentCommandSystemTest extends EventManagerSystemTest {
     }
 
     /**
-     *
+     * For login command success written by James
      * @param expectedModel
      * @param model
      * @param command to run
