@@ -477,6 +477,7 @@ In v2.0, your account and inventory data can be encrypted for added security. Yo
 === minQuantity checking `[coming in v2.0]`
 
 This would constantly check the Quantity with the minQuantity and notify the user whenever the Quantity drops below the minQuantity.
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
