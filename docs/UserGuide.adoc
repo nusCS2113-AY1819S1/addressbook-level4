@@ -72,7 +72,9 @@ Examples:
 * `select 1/1/2018`
 
 |===
-A. Using select command
+|===
+*A. Using select command*
+|===
 |===
 
 How it should look like:
@@ -80,50 +82,39 @@ How it should look like:
 Step 1. Entering `select 1/1/2018` will select a date as the deadline for tasks to be added. Type the command into the command box as shown below.
 
 .GUI before using the select command to select a date
-image::BeforeSelectDeadlineGUI.PNG[width="800"]
+image::BeforeSelectDeadlineGUI.PNG[width="600"]
 
 Step 2. If you have chosen a valid date, you should be able to see a success message as shown below, highlighted with a red box.
 
 .GUI after using the select command to select a date
-image::AfterSelectDeadlineGUI.PNG[width="800"]
+image::AfterSelectDeadlineGUI.PNG[width="600"]
 
- You have successfully selected a date.
+ You have successfully selected a date. Nice!
 
 |===
-B. Using Date Picker
+|===
+*B. Using Date Picker*
+|===
 |===
 
 How it should look like:
 
-Step 1. Alternatively, to make things even simpler, you can choose to use the Date Picker as highlighted below.
-
-.Date Picker beside the command box
-image::DatePickerPosition.PNG[width="800"]
-
-Step 2. To use the Date Picker, click on the calender icon.
+Step 1. Alternatively, to make things even simpler, you can choose to use the Date Picker as highlighted below. To use the Date Picker, click on the calender icon.
 
 .Calander icon on Date Picker
-image::DatePickerWhereToPress.PNG[width="800"]
+image::DatePickerWhereToPress.PNG[width="600"]
 
-Step 3.  you should be able to see a calendar.
-
-.Calendar view of Date Picker after clicking on Calendar iocn
-image::DatePickerSelectDate.PNG[width="800"]
-
-Step 4. Use the left and right arrows to navigate to different months and years.
+Step 3.  After clicking on the icon, you should be able to see a calendar. Use the left and right arrows to navigate to different months and years.
 
 .Left and right arrow keys in Date Picker
-image::DatePickerLeftRightArrows.PNG[width="800"]
+image::DatePickerLeftRightArrows.PNG[width="600"]
 
 Step 5. Click on the date you want to select.
 
 .GUI after using Date Picker to select a date
-image::DatePickerSelectDate.PNG[width="800"]
+image::DatePickerSelectDate.PNG[width="600"]
 
-Step 6. A success message will be shown as highlighted below.
-
-.GUI after using Date Picker to select a date
-image::DatePickerSelectDate.PNG[width="800"]
+Step 6. A success message will be shown (refer to Figure 2).
 
  You have successfully selected a date. Good job!
 
@@ -223,7 +214,7 @@ image::DeferDeadlineCommand_after.png[width="790"]
 Edits one or more fields in a selected task. +
 Format: `edit i/INDEX [t/TITLE] [d/DESCRIPTION] [c/MODULE CODE] [p/PRIORITY] [h/HOURS]`
 
-[NOTE]
+[WARNING]
 ====
 * Index must be present and must be a non-zero positive integer
 * Index selected must exist in the Task Display Panel
@@ -243,15 +234,16 @@ How it should look like:
  As you can see, the current title of the first task (highlighted with a red box) is 'COMPLETE CODE REFACTORING'.
 
 
-.GUI before using edit command to change the title_
-image::EditCommandBefore.PNG[width="800"]
+.GUI before using edit command to change the title
+image::EditCommandBefore.PNG[width="600"]
 
 * After entering a valid command, you should see that the title of the first task has been edited to 'Complete CS2113 tutorial' and also a success message as highlighted below.
 
 .GUI after using edit command to change the title
-image::EditCommandAfter.PNG[width="800"]
+image::EditCommandAfter.PNG[width="600"]
 
-* You have successfully edited the title of the task. Well done!
+ You have successfully edited the title of the task. Well done!
+
 // end::editTask[]
 
 // tag::add_milestone[]
