@@ -67,8 +67,7 @@ public class Module {
         }
 
         return otherModule != null
-                && otherModule.getModuleCode().equals(getModuleCode())
-                && otherModule.getModuleName().equals(getModuleName());
+                && otherModule.getModuleCode().equals(getModuleCode());
     }
 
     @Override

@@ -29,6 +29,8 @@ public class NoteEditCommand extends Command {
 
     public static final String COMMAND_WORD = "note edit";
 
+    public static final String MESSAGE_MODULE_CODE_DOES_NOT_EXIST = "Module %s does not exist in Trajectory.";
+
     public static final String MESSAGE_CANCEL = "Edit note operation has been cancelled.";
 
     public static final String MESSAGE_INVALID_DATE_TIME_DIFFERENCE =
