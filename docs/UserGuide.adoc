@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-F09-1/main
 
-image::NUSSU-ConnectPNGBanner.png[width="680", align=center"]
+image::NUSSU-ConnectPNGBanner.png[width="800", align=center"]
 By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
@@ -202,7 +202,6 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 Shows a list of all persons in the NUSSU-Connect. +
 Format: `list`
 
-// tag::find[]
 === Locating persons: `find`
 
 Finds persons in the displayed list whose names/tags contain any of the given keywords. +
@@ -246,48 +245,53 @@ Format: `undofind`
 * To be used in Search Pruning feature
 ****
 
+// tag::searchpruningtitle[]
 === Search Pruning Feature with list, find and undofind commands
+// end::searchpruningtitle[]
 
+// tag::searchpruningpreface[]
 Since v1.1, the Search Pruning feature was introduced to NUSSU Connect that helps you
 trim the list of contacts with every successive find command. This lets you search through the list
 of contacts in a much more intuitive manner without the hassle of typing a long single line command that is
 usually error-prone.
 
 The concept of the Search Pruning feature will be illustrated below. +
+// end::searchpruningpreface[]
 
+// tag::searchpruningguide[]
 **1. Search Pruning with Find Commands**
 
 ****
 Assume that the original list of contacts contains the following six persons and you wanted to search for all persons
 with the science tag. You could do this by executing the command `find \tag science`. +
 
-image::SearchPruning1st.png[align="left"]
+image::SearchPruning1st.png[align="left", width = 200]
 
 After executing the command the displayed list will now contain 2 persons,
 both with the science tag.
 
-image::SearchPruning2nd.png[align="left"]
+image::SearchPruning2nd.png[align="left", width = 200]
 
 The following message will be displayed in the Command Result Box to tell you the keywords that you have previously executed.
 The "+" prefix before a keyword is used to denote that you chose to include all persons with the relevant keyword in
 the displayed list. +
 
-image::SearchPruning3rd.png[align="left"]
+image::SearchPruning3rd.png[align="left", width = 350]
 
 Next, you wanted to exclude everyone that has the tag `VPresident` and you could do that by executing the command +
 `find \tag \exclude VPresident`. +
 
-image::SearchPruning4th.png[align="left"]
+image::SearchPruning4th.png[align="left", width = 200]
 
 The command will filter according to the previous displayed list instead of the original contacts list and the
 displayed list now contains only 1 person with the President Tag as everyone with the VPresident tag have been excluded. +
 
-image::SearchPruning5th.png[align="left"]
+image::SearchPruning5th.png[align="left", width = 200]
 
 The Command Result Box will now display an extra vpresident keyword with the "-" prefix, denoting that all persons
 with the vpresident tag has been excluded from the list +
 
-image::SearchPruning6th.png[align="left"]
+image::SearchPruning6th.png[align="left", width = 350]
 ****
 
 **2 . Making a mistake and undoing it with undofind command**
@@ -296,24 +300,26 @@ image::SearchPruning6th.png[align="left"]
 Now assume that you have made a mistake and you want to revert to the list before you execute your most
 recent find command. You can do so with the undofind command +
 
-image::SearchPruning7th.png[align="left"]
+image::SearchPruning7th.png[align="left", width = 200]
 
 After executing the undofind command, the displayed list is reverted to the state before the +
 `find \tag \exclude VPresident` command was executed +
 
-image::SearchPruning8th.png[align="left"]
+image::SearchPruning8th.png[align="left", width = 200]
 ****
+
+// end::searchpruningguide[]
 
 **3 . Reverting to initial state with list command**
 
 ****
 You can revert to the initial state before any find commands are executed with the list command
 
-image::SearchPruning9th.png[align="left"]
+image::SearchPruning9th.png[align="left", width = 200]
 
 After executing the list command, all search history is cleared and the displayed list now contains all six persons.
 
-image::SearchPruning10th.png[align="left"]
+image::SearchPruning10th.png[align="left", width = 200]
 ****
 
 // end::find[]
@@ -478,7 +484,7 @@ Step 3: Viewing the allocated budget of a club which can be done by either *club
 ==== Submitting data for budget allocation: `budget`
 This is the first step in the budgeting process!
 
-This command allows club members to submit budget calculation data - the name of their club, number of events the club is planning to hold and the expected turnout of the events  +
+This command allows you to submit the budget calculation data for your club - the name of your club, number of events your club is planning to host and the expected turnout of the events. Remember to be logged in with member credentials to gain access to this command! +
 Format: `budget c/CLUB NAME t/EXPECTED TURNOUT e/NUMBER OF EVENTS`
 
 Example: +
@@ -494,10 +500,16 @@ CLUB NAME is case sensitive. Hence `c/Computing Club` and `c/computing club` wil
 EXPECTED TURNOUT and NUMBER OF EVENTS must be postive whole numbers.
 ====
 
+[NOTE]
+====
+In the v1.4 `budgetcommand` does not undergo undoing and redoing as explained in the `undo` and `redo` commands. To make up for this an
+`editbudget` command is in works for *v2.0* to allow users to edit the budget calculation data as required.
+====
+
 ==== Calculating the budgets : `calculatebudget`
 This is the second step in the budgeting process!
 
-After all the clubs' budget calculation data has been submitted by the club members, NUSSU treasurers must use this command to calculate and allocate budgets to all the clubs based on the total available budget +
+After all the clubs' budget calculation data has been submitted by the club members, you can log in with treasurer credentials and use this command to calculate and allocate budgets to all the clubs based on the total available budget you have specified +
 Format: `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD`
 
 Example: +
@@ -510,13 +522,14 @@ Ensure that TOTAL AVAILABLE BUDGET is a positive whole number, i.e. it can also 
 
 [NOTE]
 ====
-Remember to only use the `calculatebudget` command once ALL the clubs' data has been collected since NUSSU-Connect only supports a one-time calculation of budgets in v1.4
+Remember to only use the `calculatebudget` command once ALL the clubs' data has been collected since NUSSU-Connect only supports a one-time calculation of budgets in v1.4.
+In *v2.0* users will be able to use the `calculatebudget` multiple times, as required.
 ====
 
 ==== Viewing the allocated budget for a club : `viewbudget`
 This is the third and final step in the budgeting process!
 
-This command shows the budget allocated to that particular club to the user. Both club members and NUSSU treasurers have access to this command.
+This command shows you the budget allocated to the club that you have specified. Remember to be logged in with either member, treasurer or president credentials to have access to this command!
 Format: `viewbudget c/CLUB NAME`
 
 Example: +
@@ -547,10 +560,10 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Login* : `login USERID PASSWORD ROLE`
+* *Login* : `login USERID PASSWORD ROLE` +
 e.g. `login A1234568M zaq1xsw2cde3 member`
 * *Create Account* : `createaccount USERID PASSWORD ROLE` +
-e.g. `createaccount A1234567M zaq1xsw2cde3 member`
+e.g. `createaccount A1234566M zaq1xsw2cde3 member`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 * *Add Skill*: `asl [INDEX] s/{SKILL} l/[SKILLLEVEL]` +
 * *Clear* : `clear`
