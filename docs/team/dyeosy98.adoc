@@ -41,7 +41,9 @@ Inventarie PRO is a desktop inventory application intended for use by self-emplo
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-Feature descriptions related to distributor functions: include::../UserGuide.adoc[tag=distributormanagement]
+Feature descriptions related to distributor functions:
+
+include::../UserGuide.adoc[tag=distributormanagement]
 
 == Contributions to the Developer Guide
 
@@ -50,8 +52,13 @@ Feature descriptions related to distributor functions: include::../UserGuide.ado
 |===
 
 I updated:
-the Logic class diagram: include::../DeveloperGuide.adoc[tag=logicclassdiagram],
-the UI class diagram: include::../DeveloperGuide.adoc[tag=uiclassdiagram]
+the Logic class diagram:
+
+include::../DeveloperGuide.adoc[tag=logicclassdiagram],
+
+the UI class diagram:
+
+include::../DeveloperGuide.adoc[tag=uiclassdiagram]
 
 In the appendices, I included:
 the user stories related to product features: include::../DeveloperGuide.adoc[tag=productuserstories],

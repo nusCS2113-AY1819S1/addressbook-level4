@@ -164,7 +164,7 @@ The sections below give more details of each component.
 // tag::uiclassdiagram[]
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
-// tag::uiclassdiagram[]
+// end::uiclassdiagram[]
 
 *API* : link:{repoURL}/src/main/java/seedu/productInfo/ui/Ui.java[`Ui.java`]
 
