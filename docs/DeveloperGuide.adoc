@@ -304,7 +304,7 @@ list of accounts in `LoginBook` is filtered to the extent where only one or no a
 
 Given below is an example usage scenario and how the login mechanism behaves at each step. The sequence diagram below
 demonstrates the flow of operation and interaction between the `Logic` and `Model` component in the login mechanism.
-Specifically, the diagram shows what happens when the user inputs the correct login credentials.
+The diagram shows what happens when the user inputs the correct login details.
 
 image::LoginSequenceDiagram.png[width="700"]
 
@@ -324,7 +324,7 @@ an `LoginUserIdPasswordRoleCommand` object with the user input, parsed, to `Addr
 Step 4. `LogicManager` calls the `execute()` method in `LoginUserIdPasswordRoleCommand`. Next, `LoginUserIdPasswordRoleCommand`
 calls `updateFilteredLoginDetailsList(updatedIdPredicate)` in `Model` with the computed predicate from user ID field input.
 
-Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, which then filters out accounts whose user Id is a
+Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, and filters out accounts whose user Id is a
 mismatch with updatedIdPredicate. `filteredLoginDetails` is updated as shown below.
 
 image::ParseCorrectLoginDetailList.PNG[width="200"]
