@@ -1721,16 +1721,31 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: A new club budget elements object is created with the input specified by the user. A successful creation of club budget elements message is shown in the results display.
 .. Test case: `budget c/Computing Club t/300 e/7` +
    Expected: A new club budget elements object is not created because a club budget elements object with club name as 'Computing Club' already exists after the execution of the test case above. Since club names entered by the user have to be a unique the command is not executed.
-.. Other incorrect `budget` commands to try: `budget`, `budget c/Comput!ng Club t/200 e/5`, `budget c.Computing Club t/200 e/5`, `budget c/Computing t/200.0 e/5`, `budget c/Computing t/200 e/five` +
+.. Other incorrect `budget` commands to try: `budget`, `budget c/Comput!ng Club t/200 e/5`, `budget c Computing Club t/200 e/5`, `budget c/Computing t/200.0 e/5`, `budget c/Computing t/200 e/five` +
    Expected: similar to the previous test case.
 
 === Calculating and allocating final budgets to all the clubs
 
 . Calculating and allocating budgets to all the clubs using the `calculatebudget` command
 
-.. Prerequisites: Need to be logged in with treasurer role, the 'filteredClubsList' is *not* empty and 'filteredClubBudgetsList' *is* empty.
+.. Prerequisites: Need to be logged in with treasurer role, at *least* one club's budget calculation data needs to have been submitted, and `calculatebudget` command must not have been used previously.
 .. Test case: `calculatebudget b/50000` +
    Expected: The budgets for all the clubs in the NUSSU-Connect memory are calculated and allocated
+.. Test case: `calculatebudget b/10000` +
+   Expected: The budgeets will not be recalculated after having been calculated once already in the previous test case.
+.. Other incorrect `calculatebudget` commands to try: `calculatebudget`, `calculatebudget b 50000`, calculatebudget 50000`, `calculatebudget b/fifty`, `calculatebudget b/50000` when no budget calculation data has yet been submitted, etc.
+   Expected: similar to the previous test case.
+
+=== Viewing the allocated budget of a club
+
+. Viewing the allocated budget of a club using the `viewbudget` command
+
+.. Prerequisites: Need to be logged in with either member, treasurer or president role, and the budgets need to already have been calculated (i.e. `calculatebudget` command needs to have been used)
+.. Test case: `viewbudget c/Computing Club` +
+   Expected: The budget allocated to the 'Computing Club' will be shown to the user.
+.. Test case: `viewbudget c/Music` (where the budget calculation data for the club 'Music' had not been submitted)
+   Expected: The budget for the club 'Music' will not be found and an error message will be shown to the user.
+.. Other incorrect `viewbudget` commands to try: `viewbudget`, `viewbudget c Computing Club`, `viewbudget Computing Club`, etc.
 
 === Saving data
 

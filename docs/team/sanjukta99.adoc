@@ -4,6 +4,7 @@
 :stylesDir: ../stylesheets
 
 == PROJECT: NUSSU Connect
+image::NUSSU-ConnectPNGBanner.png[width="800", align=center"]
 
 === Introduction
 image::longdivider.png[align="center", width = "1000"]
