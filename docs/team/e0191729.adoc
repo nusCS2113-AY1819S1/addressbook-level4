@@ -17,7 +17,6 @@ ForumBook is a desktop forum application which allows students to exchange infor
 
 * *Main feature implemented:*: added *various commands to enable admin to manage ForumBook*
 ** What it does: allows admin to better manage ForumBook by providing the following commands:
-<Edit from here to the end>
 *** `AddUser`: add user to the ForumBook database.
 *** `Login`: allow user to login to the ForumBook to Read and Share comments.
 *** `Logout`: allow user to logout of the ForumBook safely
@@ -27,13 +26,13 @@ ForumBook is a desktop forum application which allows students to exchange infor
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
+*** Managed releases `v1.1`(1 releases) on GitHub
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/85[#85], https://github.com/CS2113-AY1819S1-T13-2/main/pull/107[#107], https://github.com/CS2113-AY1819S1-T13-2/main/pull/119[119],https://github.com/CS2113-AY1819S1-T13-2/main/pull/187[187]
-*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/8[#8], https://github.com/CS2113-AY1819S1-T13-2/main/pull/107[#107], https://github.com/CS2113-AY1819S1-T13-2/main/pull/119[119],https://github.com/CS2113-AY1819S1-T13-2/main/pull/187[187]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/85[#85], https://github.com/CS2113-AY1819S1-T13-2/main/pull/107[#107], https://github.com/CS2113-AY1819S1-T13-2/main/pull/119[119], https://github.com/CS2113-AY1819S1-T13-2/main/pull/187[#187]
+*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/8[#8], https://github.com/CS2113-AY1819S1-T13-2/main/pull/107[#107], https://github.com/CS2113-AY1819S1-T13-2/main/pull/119[119], https://github.com/CS2113-AY1819S1-T13-2/main/pull/187[#187]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-2/main/pull/48[#48], https://github.com/CS2113-AY1819S1-T13-2/main/pull/50[#50], https://github.com/CS2113-AY1819S1-T13-2/main/pull/81[#81]
-*** Reported bugs and suggestions for other teams in the class: https://github.com/nusCS2113-AY1819S1/pe-1/issues/46[#46], https://github.com/nusCS2113-AY1819S1/pe-1/issues/145[#145], https://github.com/nusCS2113-AY1819S1/pe-1/issues/218[#218], https://github.com/nusCS2113-AY1819S1/pe-1/issues/323[#323], https://github.com/nusCS2113-AY1819S1/pe-1/issues/394[#394], https://github.com/nusCS2113-AY1819S1/pe-1/issues/453[#453], https://github.com/nusCS2113-AY1819S1/pe-1/issues/511[#511]
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-2/main/issues/154[#154], https://github.com/CS2113-AY1819S1-T13-2/main/issues/45[#45], https://github.com/CS2113-AY1819S1-T13-2/main/issues/29[#29],
+*** Reported bugs and suggestions for other teams in the class: https://github.com/CS2113-AY1819S1-T09-1/main/issues/123[#123], https://github.com/CS2113-AY1819S1-T09-1/main/issues/119[#119], https://github.com/CS2113-AY1819S1-T09-1/main/issues/116[#116], https://github.com/CS2113-AY1819S1-T09-1/main/issues/104[#104]
 
 == Contributions to the User Guide
 
