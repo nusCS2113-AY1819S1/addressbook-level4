@@ -2334,7 +2334,7 @@ how many records were found and the tag searched.
 . Sorting with multiple arguments +
 Test case: Enter `findtag anystring haha funny` +
 Expected: System will display all records with the tag `anystring` `haha` `funny` and display message showing
-how many records were found and the tags searched. 
+how many records were found and the tags searched.
 
 === Viewing summary
 . Entering `summary` command without modes
