@@ -17,7 +17,7 @@ public class JobOfferBuilder {
 
 
     public static final String DEFAULT_AGE_RANGE = "20-30";
-    public static final String DEFAULT_COMPANY_NAME = "Mercedes Pte Ltd";
+    public static final String DEFAULT_COMPANY_NAME = "Audi AG";
     public static final String DEFAULT_EDUCATION = "OLEVELS";
     public static final String DEFAULT_GENDER = "M";
     public static final String DEFAULT_JOB = "Sales Assistant";
