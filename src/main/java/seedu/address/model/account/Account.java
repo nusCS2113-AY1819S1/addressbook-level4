@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+//@@author Davindran
 /**
  * Represents an Account in the stock list.
  * Guarantees: details are present and not null, field values are validated, immutable.
