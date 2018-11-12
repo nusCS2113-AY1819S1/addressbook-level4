@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * This class defines a thread which is responsible for showing due reminders.
- * NOT USED AS OF YET TO FACILITATE REMINDERS - CURRENTLY USING TIMELINE IN COMMANDBOX [FOR v2.0]
+ * NOT USED AS OF YET TO FACILITATE REMINDERS - CURRENTLY USING TIMELINE IN COMMANDBOX [THIS IS FOR v2.0]
  */
 public class ReminderRunnable implements Runnable {
 
@@ -44,7 +44,6 @@ public class ReminderRunnable implements Runnable {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 executeThreadDueReminders();
-                continue;
             }
         }
     }

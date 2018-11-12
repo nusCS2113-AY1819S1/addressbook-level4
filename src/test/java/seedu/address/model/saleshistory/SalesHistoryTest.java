@@ -66,7 +66,11 @@ public class SalesHistoryTest {
         }
     }
 
-    //=================== Stubs =================================
+    /**
+     * =============================== STUBS ====================================================
+     * In the following stubs, we often use valid and invalid times. To understand what these {@code String} are,
+     * please refer to {@link Transaction} and {@link Reminder}.
+     */
 
     private class InvalidTransactionTimeStub extends Transaction {
         @Override

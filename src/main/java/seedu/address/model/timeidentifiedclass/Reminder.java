@@ -13,8 +13,9 @@ public class Reminder extends TimeIdentifiedClass {
     public static final String REMINDER_TIME_CONSTRAINTS = "Reminder times must be in yyyy/MM/dd HH:mm:ss format "
             + "and must represent valid dates and times (eg: 2018/02/30 as date will cause this error)";
 
-    private String time;
-    private String reminderMessage;
+    protected String time;
+    protected String reminderMessage;
+
     private boolean hasBeenShownByThread;
 
     /**

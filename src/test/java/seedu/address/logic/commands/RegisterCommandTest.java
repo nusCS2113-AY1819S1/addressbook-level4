@@ -321,6 +321,39 @@ public class RegisterCommandTest {
             return null;
         }
 
+        @Override
+        public void commitSalesHistory() {
+            fail("This method should not be called");
+        }
+
+        public boolean hasProductName(String name) {
+            return false;
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            fail("This method should not be called");
+            return null;
+        }
+
+        @Override
+        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {
+            fail("This method should not be called");
+        }
+
+        @Override
+        public ArrayList<Reminder> getAllReminders() {
+            fail("This method should not be called");
+            return null;
+        }
+
+        @Override
+        public ArrayList<Reminder> getOverdueRemindersForThread() {
+            fail("This method should not be called");
+            return null;
+        }
+
+
     }
 
     /**
@@ -328,34 +361,6 @@ public class RegisterCommandTest {
      */
     private class ModelStubAcceptingRegisterUser extends RegisterCommandTest.ModelStub {
         final ArrayList<User> usersAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasProductName(String name) {
-            return false;
-        }
-
-        @Override
-        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {}
-
-        @Override
-        public ArrayList<Reminder> getAllReminders() {
-            return null;
-        }
-
-        @Override
-        public ArrayList<Reminder> getOverdueRemindersForThread() {
-            return null;
-        }
-
-        @Override
-        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
-            return null;
-        }
-
-        @Override
-        public void commitSalesHistory() {
-            fail("This method should not be called");
-        }
 
         @Override
         public void addUser(User user) throws DuplicateUserException {

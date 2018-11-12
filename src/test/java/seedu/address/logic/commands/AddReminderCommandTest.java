@@ -6,7 +6,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
@@ -16,7 +15,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.DistributorBook;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyDistributorBook;
 import seedu.address.model.ReadOnlyProductDatabase;
@@ -28,80 +27,133 @@ import seedu.address.model.login.Username;
 import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.testutil.DistributorBuilder;
 
-public class AddDistributorCommandTest {
+public class AddReminderCommandTest {
 
+    private static final String FAILURE_METHOD_MESSAGE = "This method should not be called.";
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private CommandHistory commandHistory = new CommandHistory();
-
     @Test
-    public void constructor_nullDistributor_throwsNullPointerException() {
+    public void constructor_nullReminder_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddDistributorCommand(null);
+        new AddReminderCommand(null);
     }
 
     @Test
-    public void execute_distributorAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingDistributorAdded modelStub = new ModelStubAcceptingDistributorAdded();
-        Distributor validDistributor = new DistributorBuilder().build();
-
-        CommandResult commandResult = new AddDistributorCommand(validDistributor).execute(modelStub, commandHistory);
-
-        assertEquals(String.format(AddDistributorCommand.MESSAGE_SUCCESS, validDistributor),
-                commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validDistributor), modelStub.distributorsAdded);
-        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    public void constructor_validNonNullReminder() {
+        new AddReminderCommand(new ValidReminderStub());
     }
 
-    /*@Test
-    public void execute_duplicateDistributor_throwsCommandException() throws Exception {
-        Distributor validDistributor = new DistributorBuilder().build();
-        AddDistributorCommand addDistributorCommand = new AddDistributorCommand(validDistributor);
-        ModelStub modelStub = new ModelStubWithDistributor(validDistributor);
+    @Test
+    public void execute_reminderAddedByModel_addSuccessful() throws Exception {
+        Reminder reminder = new ValidReminderStub();
+        Model model = new ModelStubAcceptsReminder();
+        CommandHistory commandHistory = new CommandHistory();
+        CommandResult commandResult = new AddReminderCommand(reminder).execute(model, commandHistory);
+
+        assertEquals(commandResult.feedbackToUser, String.format(AddReminderCommand.MESSAGE_SUCCESS,
+                reminder.getReminderMessage(), reminder.getReminderTime()));
+        assertEquals(commandHistory, EMPTY_COMMAND_HISTORY);
+    }
+
+    @Test
+    public void execute_invalidTimeFormat_throwsCommandException() throws Exception {
+        Reminder reminder = new ValidReminderStub();
+        Model modelThrowsInvalidTime = new ModelStubThrowsInvalidTimeFormatException();
+        CommandHistory commandHistory = new CommandHistory();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddDistributorCommand.MESSAGE_DUPLICATE_DISTRIBUTOR);
-        addDistributorCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(InvalidTimeFormatException.EXCEPTION_MESSAGE + ". Upon adding this reminder");
+        new AddReminderCommand(reminder).execute(modelThrowsInvalidTime, commandHistory);
     }
-    */
+
+    @Test
+    public void execute_duplicateReminder_throwsCommandException() throws Exception {
+        Reminder reminder = new ValidReminderStub();
+        Model modelThrowsInvalidTime = new ModelStubThrowsDuplicateReminderException();
+        CommandHistory commandHistory = new CommandHistory();
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(DuplicateReminderException.EXCEPTION_MESSAGE);
+        new AddReminderCommand(reminder).execute(modelThrowsInvalidTime, commandHistory);
+    }
+
     @Test
     public void equals() {
-        Distributor ahHuat = new DistributorBuilder().withName("Ah Huat").build();
-        Distributor ahBeng = new DistributorBuilder().withName("Ah Beng").build();
-        AddDistributorCommand addAhHuatCommand = new AddDistributorCommand(ahHuat);
-        AddDistributorCommand addAhBengCommand = new AddDistributorCommand(ahBeng);
+        Reminder equalReminder = new ValidReminderStub();
+        AddReminderCommand toTest = new AddReminderCommand(equalReminder);
+        int someIntegerValue = 1;
+        String someString = "This is just a random string that can be anything for this test.";
 
-        // same object -> returns true
-        assertTrue(addAhHuatCommand.equals(addAhHuatCommand));
+        // object should equal itself
+        assertTrue(toTest.equals(toTest));
 
-        // same values -> returns true
-        AddDistributorCommand addAhHuatCommandCopy = new AddDistributorCommand(ahHuat);
-        assertTrue(addAhHuatCommand.equals(addAhHuatCommandCopy));
+        // should equal another AddReminderCommand with the same reminder
+        assertTrue(toTest.equals(new AddReminderCommand(equalReminder)));
 
-        // different types -> returns false
-        assertFalse(addAhHuatCommand.equals(1));
+        // should not equal to null
+        assertFalse(toTest.equals(null));
 
-        // null -> returns false
-        assertFalse(addAhHuatCommand.equals(null));
+        // should not equal to other data types
+        assertFalse(toTest.equals(someIntegerValue));
+        assertFalse(toTest.equals(someString));
 
-        // different product -> returns false
-        assertFalse(addAhHuatCommand.equals(addAhBengCommand));
+        // should not equal to another AddReminderCommand with different reminder
+        Reminder differentReminder = new ValidReminderStub();
+
+        AddReminderCommand unequalReminder = new AddReminderCommand(differentReminder);
+        assertFalse(toTest.equals(unequalReminder));
+
+    }
+
+    // ========================================== Stub classes ======================================
+    private class ModelStubAcceptsReminder extends ModelStub {
+        public ModelStubAcceptsReminder () {
+            //do nothing.
+        }
+
+        @Override
+        public void addReminder(Reminder toAdd) {
+            // do nothing.
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            // do nothing.
+        }
+    }
+
+    private class ModelStubThrowsInvalidTimeFormatException extends ModelStub {
+        public ModelStubThrowsInvalidTimeFormatException() {
+            //do nothing.
+        }
+
+        @Override
+        public void addReminder(Reminder toAdd) throws InvalidTimeFormatException {
+            throw new InvalidTimeFormatException();
+        }
+    }
+
+    private class ModelStubThrowsDuplicateReminderException extends ModelStub {
+        public ModelStubThrowsDuplicateReminderException() {
+            //do nothing.
+        }
+
+        @Override
+        public void addReminder(Reminder toAdd) throws DuplicateReminderException {
+            throw new DuplicateReminderException();
+        }
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * The following is a {@code ModelStub} stub class that throws Assertion error for all methods in {@link Model}
      */
     private class ModelStub implements Model {
-        @Override
-        public void addProduct(Product product) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public void addDistributor(Distributor distributor) {
@@ -109,13 +161,17 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void updateProduct(Product target, Product editedProduct) {
-            throw new AssertionError("This method should not be called.");
+        public void addProduct(Product product) {
+
         }
 
         @Override
         public void updateDistributor(Distributor target, Distributor editedDistributor) {
-            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateProduct(Product target, Product editedProduct) {
+
         }
 
         @Override
@@ -140,17 +196,17 @@ public class AddDistributorCommandTest {
 
         @Override
         public boolean hasDistributor(Distributor distributor) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasDistributorName(Distributor distributor) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasDistributorPhone(Distributor distributor) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -160,7 +216,7 @@ public class AddDistributorCommandTest {
 
         @Override
         public boolean hasProductName(String name) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -209,16 +265,6 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void redoProductDatabase() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void commitProductDatabase() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean canUndoDistributorBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -234,8 +280,18 @@ public class AddDistributorCommandTest {
         }
 
         @Override
+        public void redoProductDatabase() {
+
+        }
+
+        @Override
         public void redoDistributorBook() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitProductDatabase() {
+
         }
 
         @Override
@@ -259,7 +315,7 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void addReminder(Reminder reminder) {
+        public void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -337,7 +393,7 @@ public class AddDistributorCommandTest {
         }
 
         @Override
-        public void addUser(User product) {
+        public void addUser(User person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -356,52 +412,22 @@ public class AddDistributorCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
+    private class ValidReminderStub extends Reminder {
+        /**
+         * An example of valid {@code Reminder} time and message. For more details on what constitutes a valid time
+         * and message, please refer to {@link Reminder}
+         */
+        private static final String VALID_TIME = "2018/11/11 12:00:00";
+        private static final String DIFFERENT_VALID_TIME = "2018/11/11 12:00:01";
+        private static final String MESSAGE = "Some random message";
 
-    /**
-     * A Model stub that contains a single product.
-     */
-    private class ModelStubWithDistributor extends ModelStub {
-        private final Distributor distributor;
-
-        ModelStubWithDistributor(Distributor distributor) {
-            requireNonNull(distributor);
-            this.distributor = distributor;
+        public ValidReminderStub() {
+            this.time = VALID_TIME;
+            this.reminderMessage = MESSAGE;
         }
 
-        @Override
-        public boolean hasDistributor(Distributor distributor) {
-            requireNonNull(distributor);
-            return this.distributor.isSameDistributor(distributor);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the product being added.
-     */
-    private class ModelStubAcceptingDistributorAdded extends ModelStub {
-        final ArrayList<Distributor> distributorsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasDistributor(Distributor distributor) {
-            requireNonNull(distributor);
-            return distributorsAdded.stream().anyMatch(distributor::isSameDistributor);
-        }
-
-        @Override
-        public void addDistributor(Distributor distributor) {
-            requireNonNull(distributor);
-            distributorsAdded.add(distributor);
-        }
-
-        @Override
-        public void commitDistributorBook() {
-            // called by {@code AddCommand#execute()}
-        }
-
-        @Override
-        public ReadOnlyDistributorBook getDistributorInfoBook() {
-            return new DistributorBook();
+        public void setDifferentTime() {
+            this.time = DIFFERENT_VALID_TIME;
         }
     }
-
 }

@@ -6,7 +6,7 @@ package seedu.address.model.timeidentifiedclass.exceptions;
 
 public class DuplicateReminderException extends Exception {
 
-    private static final String EXCEPTION_MESSAGE = "This reminder has already been set.";
+    public static final String EXCEPTION_MESSAGE = "This reminder has already been set.";
 
     public DuplicateReminderException() { }
 
