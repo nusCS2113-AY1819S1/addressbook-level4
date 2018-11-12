@@ -63,16 +63,18 @@ public class InputCommandSuggestionTest {
     public void getSuggestedCommands() {
         suggestedCommands = new ArrayList<>();
         suggestedCommands.add("add");
-        assertEquals(ics.getSuggestedCommands("a"), suggestedCommands);
-        assertEquals(ics.getSuggestedCommands("a n/JOHN DOE"), suggestedCommands);
-        assertNotEquals(ics.getSuggestedCommands("az n/JOHN DOE"), suggestedCommands);
+        assertEquals(ics.getSuggestions("a"), suggestedCommands);
+        assertEquals(ics.getSuggestions("a n/JOHN DOE"), suggestedCommands);
+        assertNotEquals(ics.getSuggestions("az n/JOHN DOE"), suggestedCommands);
 
         suggestedCommands = new ArrayList<>();
         suggestedCommands.add(EditCommand.COMMAND_WORD);
+        suggestedCommands.add(ExportCommand.COMMAND_WORD);
         suggestedCommands.add(ExportAllCommand.COMMAND_WORD);
         suggestedCommands.add(ExitCommand.COMMAND_WORD);
-        assertEquals(ics.getSuggestedCommands("e"), suggestedCommands);
-        assertNotEquals(ics.getSuggestedCommands("ex"), suggestedCommands);
+
+        assertEquals(ics.getSuggestions("e"), suggestedCommands);
+        assertNotEquals(ics.getSuggestions("ex"), suggestedCommands);
     }
 
     @Test

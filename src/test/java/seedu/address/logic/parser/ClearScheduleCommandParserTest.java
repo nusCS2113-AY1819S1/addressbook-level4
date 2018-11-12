@@ -7,22 +7,23 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ClearScheduleCommand;
 
 /**
  * Test scope: similar to {@code DeleteCommandParserTest}.
  * @see DeleteCommandParserTest
  */
-public class SelectCommandParserTest {
-    private SelectCommandParser parser = new SelectCommandParser();
+public class ClearScheduleCommandParserTest {
+    private ClearScheduleCommandParser parser = new ClearScheduleCommandParser();
 
     @Test
-    public void parse_validArgs_returnsSelectCommand() {
-        assertParseSuccess(parser, "1", new SelectCommand(INDEX_FIRST_PERSON));
+    public void parse_validArgs_returnsClearScheduleCommand() {
+        assertParseSuccess(parser, "1", new ClearScheduleCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ClearScheduleCommand.MESSAGE_USAGE));
     }
 }

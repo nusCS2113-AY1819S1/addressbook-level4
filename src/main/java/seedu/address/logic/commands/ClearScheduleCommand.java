@@ -46,7 +46,6 @@ public class ClearScheduleCommand extends Command {
      * @param index of the person in the filtered person list to clear schedule
      */
     public ClearScheduleCommand(Index index) {
-        requireNonNull(index);
         this.index = index;
     }
 
@@ -64,7 +63,8 @@ public class ClearScheduleCommand extends Command {
         model.updatePerson(personToClearSchedule, scheduledPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_CLEAR_SCHEDULE_SUCCESS, scheduledPerson));
+
+        return new CommandResult(String.format(MESSAGE_CLEAR_SCHEDULE_SUCCESS, index.getOneBased()));
 
     }
 
@@ -83,6 +83,13 @@ public class ClearScheduleCommand extends Command {
         Set<Schedule> updatedSchedule = new HashSet<>(); //clears schedule
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSchedule);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ClearScheduleCommand // instanceof handles nulls
+                && index.equals(((ClearScheduleCommand) other).index)); // state check
     }
 
 }
