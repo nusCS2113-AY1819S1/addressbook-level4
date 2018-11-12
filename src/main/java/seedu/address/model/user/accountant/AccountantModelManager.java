@@ -47,6 +47,7 @@ public class AccountantModelManager extends ModelManager implements AccountantMo
      */
     private void updateFilteredTransactionListToShowPurchases(TransactionPeriodPredicate period) {
         updateFilteredTransactionList(period.and(new PurchaseTransactionPredicate()));
+        indicateTransactionListChanged();
     }
 
     /**
@@ -54,6 +55,7 @@ public class AccountantModelManager extends ModelManager implements AccountantMo
      */
     private void updateFilteredTransactionListToShowSales(TransactionPeriodPredicate period) {
         updateFilteredTransactionList(period.and(new SaleTransactionPredicate()));
+        indicateTransactionListChanged();
     }
 
     /**
@@ -62,9 +64,11 @@ public class AccountantModelManager extends ModelManager implements AccountantMo
      */
     private void updateFilteredTransactionListToShowProfitPeriod(TransactionPeriodPredicate period) {
         updateFilteredTransactionList(period);
+        indicateTransactionListChanged();
     }
 
     private void updateFilteredTransactionListToShowAll() {
         updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
+        indicateTransactionListChanged();
     }
 }

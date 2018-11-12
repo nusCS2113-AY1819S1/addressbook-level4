@@ -133,6 +133,7 @@ public class AdminModelManager extends ModelManager implements AdminModel {
      */
     private void updateFilteredTransactionListToShowPurchases(TransactionPeriodPredicate period) {
         updateFilteredTransactionList(period.and(new PurchaseTransactionPredicate()));
+        indicateTransactionListChanged();
     }
 
     /**
@@ -140,6 +141,7 @@ public class AdminModelManager extends ModelManager implements AdminModel {
      */
     private void updateFilteredTransactionListToShowSales(TransactionPeriodPredicate period) {
         updateFilteredTransactionList(period.and(new SaleTransactionPredicate()));
+        indicateTransactionListChanged();
     }
 
     /**
@@ -148,10 +150,12 @@ public class AdminModelManager extends ModelManager implements AdminModel {
      */
     private void updateFilteredTransactionListToShowProfitPeriod(TransactionPeriodPredicate period) {
         updateFilteredTransactionList(period);
+        indicateTransactionListChanged();
     }
 
     private void updateFilteredTransactionListToShowAll() {
         updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
+        indicateTransactionListChanged();
     }
 
 
