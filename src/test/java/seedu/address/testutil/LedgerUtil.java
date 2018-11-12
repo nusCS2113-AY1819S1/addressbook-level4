@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import seedu.address.logic.commands.MemberCommand.AddMemberCommand;
