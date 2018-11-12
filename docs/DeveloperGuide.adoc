@@ -465,9 +465,9 @@ image::statisticSequenceDiagram.png[width="800"]
 A password is required by the user upon start-up of the application.
 
 The password must be secured. A secured password must consist of uppercase, lowercase, numbers and other special characters. For example, “$%GA2dg#” is a good password.
-+
-image::password_activity_diagram.png[width="450"]
-+
+
+image::password_activity_diagram.png[width="800"]
+
 In order to prevent attackers from using easy brute force methods, the application will shut down after 3 consecutive tries.
 
 The password will be generated from our team’s side and will only be passed to users discreetly, conveniently through the means of an email.
@@ -479,9 +479,9 @@ In this stage of development, the default passwords will be as follows:
 *Format: [ROLE OF USER: PASSWORD]
 The passwords can and are set by developers under CheckPassword.java.
 The following sequence diagram shows how the password interacts with the user.
-+
-image::password_protection_diagram.png[width="450"]
-+
+
+image::password_protection_diagram.png[width="800"]
+
 After UiManager is created, it will automatically construct a MainWindow. The MainWindow will also create an instance of a CheckPassword window.
 If password is valid, a role class will be created. Else, application will close after 3 wrong tries.
 
@@ -514,12 +514,16 @@ Passwords will be issued by us (the developer team) and must be secured.
 // tag::commandpanel[]
 === Command List Panel UI
 ==== Current Implementation
+
 A command list panel UI is made available for all user, to assist him/her better in the application.
-It is a quick access panel located at the side of the application. The command list is sorted alphabetically. This feature is geared towards beginner users.
-+
+It is a quick access panel located at the side of the application. The command list is sorted alphabetically.
+
+This feature is geared towards beginner users.
+
 image::command_panel.png[width="240"]
-+
+
 Selecting on any of the commands in the panel above, will show a brief message of the command in the result display.
+
 In addition, the text in the command box will be replaced with a template of the command selected.
 
 ==== Design Considerations
