@@ -1,22 +1,12 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.EventName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.person.TheDate;
 import seedu.address.model.person.Time;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Schedule objects.
  */
 public class ScheduleBuilder {
 
@@ -62,7 +52,7 @@ public class ScheduleBuilder {
         return this;
     }
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code EventName} of the {@code Schedule} that we are building.
      */
     public ScheduleBuilder withEventName(String eventName) {
         this.eventName = new EventName(eventName);

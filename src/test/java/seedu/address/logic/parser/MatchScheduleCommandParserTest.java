@@ -49,47 +49,47 @@ public class MatchScheduleCommandParserTest {
     @Test
     public void parse_invalidIndexes_failure() {
         // negative index
-        assertParseFailure(parser, DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " " +
-                PREFIX_INDEX + "-5", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+                + PREFIX_INDEX + "-5", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // zero index
-        assertParseFailure(parser, DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " " +
-                PREFIX_INDEX + "0", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+                + PREFIX_INDEX + "0", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as index
-        assertParseFailure(parser, DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " " +
-                PREFIX_INDEX + "abc", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+                + PREFIX_INDEX + "abc", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // invalid prefix being parsed as index
-        assertParseFailure(parser, DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " " +
-                PREFIX_INDEX + "-5 k/bob", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+                + PREFIX_INDEX + "-5 k/bob", ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, INVALID_DATE_DESC + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " " +
-                PREFIX_INDEX + "1", TheDate.MESSAGE_DATE_CONSTRAINTS); // invalid date
+        assertParseFailure(parser, INVALID_DATE_DESC + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+                + PREFIX_INDEX + "1", TheDate.MESSAGE_DATE_CONSTRAINTS); // invalid date
 
-        assertParseFailure(parser, DATE_DESC_MATCH1 + INVALID_START_TIME_DESC + END_TIME_DESC_MATCH1 + " " +
-                PREFIX_INDEX + "1", Time.MESSAGE_TIME_CONSTRAINTS); // invalid start time
+        assertParseFailure(parser, DATE_DESC_MATCH1 + INVALID_START_TIME_DESC + END_TIME_DESC_MATCH1 + " "
+                + PREFIX_INDEX + "1", Time.MESSAGE_TIME_CONSTRAINTS); // invalid start time
 
-        assertParseFailure(parser, DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + INVALID_END_TIME_DESC + " " +
-                PREFIX_INDEX + "1", Time.MESSAGE_TIME_CONSTRAINTS); // invalid end time
+        assertParseFailure(parser, DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + INVALID_END_TIME_DESC + " "
+                + PREFIX_INDEX + "1", Time.MESSAGE_TIME_CONSTRAINTS); // invalid end time
 
         // valid date followed by invalid date.
-        assertParseFailure(parser, DATE_DESC_MATCH1 + INVALID_DATE_DESC + START_TIME_DESC_MATCH1 +
-                END_TIME_DESC_MATCH1 + " " + PREFIX_INDEX + "1", TheDate.MESSAGE_DATE_CONSTRAINTS);
+        assertParseFailure(parser, DATE_DESC_MATCH1 + INVALID_DATE_DESC + START_TIME_DESC_MATCH1
+                + END_TIME_DESC_MATCH1 + " " + PREFIX_INDEX + "1", TheDate.MESSAGE_DATE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, INVALID_DATE_DESC + INVALID_START_TIME_DESC + INVALID_END_TIME_DESC + " " +
-                PREFIX_INDEX + "1", TheDate.MESSAGE_DATE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_DATE_DESC + INVALID_START_TIME_DESC + INVALID_END_TIME_DESC + " "
+                + PREFIX_INDEX + "1", TheDate.MESSAGE_DATE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput =  DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " " +
-                PREFIX_INDEX + targetIndex.getOneBased();
+        String userInput =  DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+                + PREFIX_INDEX + targetIndex.getOneBased();
 
         List<Index> listIndex = new ArrayList<>();
         listIndex.add(targetIndex);
@@ -104,9 +104,9 @@ public class MatchScheduleCommandParserTest {
     public void parse_multipleIndexSpecified_success() {
         Index targetIndex1 = INDEX_FIRST_PERSON;
         Index targetIndex2 = INDEX_SECOND_PERSON;
-        String userInput =  DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " " +
-                PREFIX_INDEX + targetIndex1.getOneBased() + " " +
-                PREFIX_INDEX + targetIndex2.getOneBased();
+        String userInput =  DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+                + PREFIX_INDEX + targetIndex1.getOneBased() + " "
+                + PREFIX_INDEX + targetIndex2.getOneBased();
 
         List<Index> listIndex = new ArrayList<>();
         listIndex.add(targetIndex1);
@@ -121,8 +121,8 @@ public class MatchScheduleCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput =  INVALID_DATE_DESC + DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " " +
-                PREFIX_INDEX + targetIndex.getOneBased();
+        String userInput =  INVALID_DATE_DESC + DATE_DESC_MATCH1 + START_TIME_DESC_MATCH1 + END_TIME_DESC_MATCH1 + " "
+                + PREFIX_INDEX + targetIndex.getOneBased();
 
         List<Index> listIndex = new ArrayList<>();
         listIndex.add(targetIndex);

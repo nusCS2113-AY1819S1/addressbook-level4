@@ -65,8 +65,8 @@ public class ScheduleCommandTest {
     }
 
     /**
-     * Executes a {@code ScheduleCommand} with the given {@code schedule and index},
-     * and checks that a {@code CommandException is thrown with the {@code expectedMessage}.
+     * Executes a {@code ScheduleCommand} with the given @param schedule @param index @param expectedMessage
+     * and checks that a {@code CommandException} is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailure(Schedule schedule, Index index, String expectedMessage) {
         ScheduleCommand scheduleCommand = new ScheduleCommand(schedule, index);

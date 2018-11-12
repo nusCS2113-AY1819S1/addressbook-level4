@@ -7,12 +7,15 @@ import java.util.List;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
 
+/**
+ * A utility class containing a list of {@code Schedule} objects to be used in tests.
+ */
+
 public class TypicalSchedules {
     public static final Schedule CS1231 = new ScheduleBuilder().withTheDate("09092018").withStartTime("1230")
             .withEndTime("1400").withEventName("CS1231 Exam").build();
 
     // Manually added
-
     public static final Schedule GERQUIZ = new ScheduleBuilder().withTheDate("09092018").withStartTime("0900")
             .withEndTime("1000").withEventName("GER QUIZ").build();
 
