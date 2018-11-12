@@ -36,13 +36,14 @@ public class GradebookEditCommand extends Command {
             + PREFIX_GRADEBOOK_WEIGHTAGE + "50]";
     private static final String MESSAGE_INVALID_ENTRY = "You need to fill in at least one optional parameter!";
     private final Gradebook toEditGradebookItem;
+
     public GradebookEditCommand (Gradebook gradebookComponent) {
+        requireNonNull(gradebookComponent);
         toEditGradebookItem = gradebookComponent;
     }
 
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
         String newGradeComponentName = toEditGradebookItem.getgradebookNewComponentName();
         int newMaxMarks = toEditGradebookItem.getGradeComponentMaxMarks();
         int newWeightage = toEditGradebookItem.getGradeComponentWeightage();
