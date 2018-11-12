@@ -103,8 +103,9 @@ image::CommandBox.png[width="800", align="left"]
 
 === Book List
 
-Beginning from the left, you should see a panel of books arranged. These are the available books
-which the bookstore owners have placed up for display.
+Beginning from the left, you should find a panel of books, each with 4 parameters.
+They are `TAGS`, books `ISBN`, `QUANTITY` of books and `COST` of book respectively.
+These are the available books which the bookstore owners have placed up for display.
 .  If you are an owner, refer to <<Commands for Bookstore Owners>> to begin managing your book inventory.
 
 .Command Panel
