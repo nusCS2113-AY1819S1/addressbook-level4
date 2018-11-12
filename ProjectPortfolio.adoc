@@ -45,6 +45,8 @@ Now when a transaction is made the program first sees if the products exist then
 Minor contributions
 The use can search for a product with both name and Serialnumber (The primary key)
 
+I changed transaction so that it is made with serialnumber and not name. (Becuase serialNumber is the primary key).
+
 == Contribution to the User Guide
 
 I did the first design of the UI so the team could visualize our endproduct.
