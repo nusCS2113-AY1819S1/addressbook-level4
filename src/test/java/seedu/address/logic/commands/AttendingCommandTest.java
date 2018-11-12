@@ -1,7 +1,14 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.NUM_EVENTS_ATTENDING_ADMIN;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -10,12 +17,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.event.AttendanceContainsUserPredicate;
 import seedu.address.model.user.User;
 import seedu.address.testutil.UserBuilder;
-
-import static seedu.address.logic.commands.CommandTestUtil.NUM_EVENTS_ATTENDING_ADMIN;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
-import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
 
 /**
