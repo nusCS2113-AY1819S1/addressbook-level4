@@ -51,8 +51,7 @@ https://github.com/CS2113-AY1819S1-F09-3/main/issues/257[#257]
 
 == Contributions to the User Guide
 |===
-| This section showcases my contribution to the User Guide in relation to the sales performance analysis feature.
-The performance statistics that can be calculated are cost, revenue and profit, and they can be computed over specific time periods.
+| This section showcases my contribution to the User Guide in relation to the sales performance analysis feature. The performance statistics that can be calculated are cost, revenue and profit, and they can be computed over specific time periods.
 |===
 
 include::../UserGuide.adoc[tag=analysis]
