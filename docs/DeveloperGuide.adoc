@@ -942,55 +942,64 @@ The email command is facilitated by `EmailInitialiseCommand`, `EmailRecipientsCo
 classes which extends the `Command` class, and `EmailUtil` attribute in `Model` which stores variables and methods pertaining to the email command
 and the `EmailSettings` class which stores email subject and email body text settings.
 
-._Some of these classes also contain children classes which act as sub-commands:_
-. `EmailRecipientsAddCommand`, `EmailRecipientsNextCommand` extends `EmailRecipientsCommand`.
-. `EmailContentsAddCommand`, `EmailContentsBackCommand` and `EmailContentsNextCommand` extends `EmailContentsCommand`.
-. `EmailSendBackCommand`, `EmailSendPreviewCommand` and `EmailSendSendCommand` extends `EmailSendCommand`.
-
 The email command is a 4-stage process supported by `LogicManager` by keeping track of the `LogicState`.
 
-. `EmailInitialiseCommand`
-. `EmailRecipientsCommand`
-. `EmailContentsCommand`
-. `EmailSendCommand`
+.The 4 stages are as follows:
+. *Initialisation*, facilitated by `EmailInitialiseCommand`.
+. *Choosing your recipients*, facilitated by`EmailRecipientsCommand`. Within which exists the following sub-stages:
+.. *Adding recipients*, facilitated by `EmailRecipientsAddCommand`.
+.. *Moving to the next step*, facilitated by `EmailRecipientsNextCommand`.
+. *Choosing your contents*, facilitated by `EmailContentsCommand`. Within which exists the following sub-stages:
+.. *Adding contents*, facilitated by `EmailContentsAddCommand`.
+.. *Moving back to the previous step*, facilitated by `EmailContentsBackCommand`.
+.. *Moving to the next step*, facilitated by `EmailContentsNextCommand`.
+. *Sending your email*, facilitated by `EmailSendCommand`. Within which exists the following sub-stages:
+.. *Moving back to the previous step*, facilitated by `EmailSendBackCommand`.
+.. *Previewing your email*, facilitated by `EmailSendPreviewCommand`.
+.. *Sending the email*, facilitated by `EmailSendSendCommand`.
 
-Given below is an example usage scenario of how the email command behaves at each step.
+As you can see, the email command is quite complicated, so in order to explain how it works, given below is an example usage scenario of how the email command behaves at each step.
 
-. The user launches the application. The application loads email settings from `preferences.json` which is stored in `Model#EmailUtil`.
+. You launch the application. The application loads email settings from `preferences.json` which is stored in `Model#EmailUtil`.
 
-. The user executes the `email` command. A new `EmailUtil` object is constructed and replaces the `EmailUtil` object in `Model`
-  using model#resetEmailUtil. `LogicState` is changed to reflect initialisation of the email command and to move it into recipients selection stage
-. The user executes the `add` command for the first time. This calls `EmailRecipientsAddCommand`.
-.. In `EmailRecipientsAddCommand`, `EmailUtil#hasRecipientsAdded` boolean value will be changed to true.
-.. `MainWindow#getCurrentBook()` is called to determine the current book that the user is on and
-   `EmailUtil#areRecipientsCandidates` boolean value will be changed accordingly
+. You execute the `email` command. A new `EmailUtil` object is constructed and replaces the `EmailUtil` object in `Model`
+  using `model#resetEmailUtil`. `LogicState` is changed to reflect initialisation of the email command and to move it into recipients selection stage
+. You use `listc`, `findc`, `filterc`, `listC`, `findC`, `findj`, `filterC` and `filterj` to filter out who you wish to send the email to.
+. You execute the `add` command for the first time. This calls `EmailRecipientsAddCommand`.
+.. The add command first checks if there are recipients to add with `EmailRecipientsAddCommand#addCandidates or #addJobOffers`. If there is nothing to add, an error message will be displayed. If there are objects to add, then the following steps will be executed.
+.. `EmailUtil#hasRecipientsAdded` boolean value is changed to true to indicate that there are recipients added.
+.. `MainWindow#getCurrentBook()` is called to return which book you are on and `EmailUtil#areRecipientsCandidates` boolean value is changed accordingly
 ... If recipients are candidates, `EmailUtil#areRecipientsCandidates` will be true.
 ... If recipients are companies, `EmailUtil#areRecipientsCandidates` will be false.
-.. Depending on `EmailUtil#areRecipientsCandidates`, the recipient objects are called with `Model#getFilteredCandidateList`
-   or `Model#getFilteredJobList` and are stored in a linked hash set within `EmailUtil`. +
-   Using `LinkedHashSet#add()` boolean return value, it is possible to determine if object added is a duplicate.
-   Duplicates are not added and are noted down inside an `ArrayList` within `EmailRecipientsAddCommand` which will be
-   reflected back to the user.
-. The user executes another `add` command to add more recipients. This calls `EmailRecipientsAddCommand`
-.. If `MainWindow#getCurrentBook()` and `EmailUtil#areRecipientsCandidates` do not match, user will be notified and nothing will be done.
-   This is to prevent adding different objects into the recipients linked hash set.
-.. If `MainWindow#getCurrentBook()` and `EmailUtil#areRecipientsCandidates` match, then adds recipients as seen above.
-. The user executes `next` command. This calls `EmailRecipientsNextCommand` which based on
-  `EmailUtil#areRecipientsCandidates`, switches the current book and changes `LogicState` to select contents phase.
+.. Depending on `EmailUtil#areRecipientsCandidates`, the recipient objects are called with `Model#getFilteredCandidateList` or `Model#getFilteredJobList` and are stored in a linked hash set within `EmailUtil` to prevent duplicates and to preserve insertion order. +
+   Using the `LinkedHashSet#add()` boolean return value, it is possible to determine if object added is a duplicate. Duplicates are not added and are noted down inside an `ArrayList` within `EmailRecipientsAddCommand` which will be reflected back to the user.
+. You then use `listc`, `findc` and `filterc` or `listC`, `findC`, `findj`, `filterC` and `filterj` to filter out more recipients.
+. You execute another `add` command to add more recipients. This calls `EmailRecipientsAddCommand`
+.. If `MainWindow#getCurrentBook()` and `EmailUtil#areRecipientsCandidates` do not match, for example, if `MainWindow#getCurrentBook()` returns `companyBook`, and `emailUtil#areRecipientsCandidates` is `true`, you will be notified with an error message because you have already added candidates as recipients, and you should not be allowed to add job offers.
+.. If `MainWindow#getCurrentBook()` and `EmailUtil#areRecipientsCandidates` match, recipients are added as per normal, as seen above.
+.. If there are duplicate recipients, RecruitBook will inform you about them and they will not be added.
+. You have added your recipients. So now you wish to move on to the next step, so you execute the `next` command. This calls `EmailRecipientsNextCommand` which based on `EmailUtil#areRecipientsCandidates`, which switches the current book and changes `LogicState` to select contents phase.
 [NOTE]
 In `EmailContentSelectionCommand` phase, depending on `EmailUtil#areRecipientsCandidates`, the book displayed will be locked and only
-commands pertaining to the current book can be used. This is to enforce that recipients and contents are either candidates and job offers or
-job offers and candidates.
-. The user executes `add` command. This calls `EmailContentsAddCommand` which adds contents similarly to `EmailRecipientsAddCommand` as seen above.
-. The user executes `next` command. This calls `EmailContentsNextCommand` which changes `LogicState` to the send phase.
-. The user executes `preview` command. This calls `EmailSendPreviewCommand`.
-.. This generates a string of the email based on recipients and contents in `EmailUtil` which calls `EventCenter` to post `ShowEmailPreviewEvent`
-   with the email String and shows the string in a new window, `EmailPreview`.
-. The user is satisfied with the preview and executes the `send` command. This generates the email as a `MimeMessage`
-  which is the Java format used for emails and is sent via `EmailUtil#sendMessage`. `LogicState` is reset back to orignal and this marks the end of the email command.
+commands pertaining to the current book can be used. This is to enforce that recipients and contents are either candidates and job offers or job offers and candidates.
 
-This is the simplified action diagram and sequence diagram when the user executes the email command, assuming the user is only executing the `add`
-command once per `selectRecipients` and `selectContents` step.
+. You use `listc`, `findc` and `filterc` or `listC`, `findC`, `findj`, `filterC` and `filterj` to filter out the contents of the email.
+. You then execute the `add` command. This calls `EmailContentsAddCommand` which adds contents in the same manner as `EmailRecipientsAddCommand` as seen above. Having no contents to be added and duplicates will be caught and reflected back to you in the form of an error.
+. You execute `next` command to move on to the confirmation step. This calls `EmailContentsNextCommand` which changes `LogicState` to the send phase.
+. In order to double check if you have picked the correct recipients and contents, you execute the `preview` command. This calls `EmailSendPreviewCommand`.
+.. This generates a string of the email based on recipients and contents in `EmailUtil` which calls `EventCenter` to post `ShowEmailPreviewEvent` with the email String and shows the string in a new window, `EmailPreview`.
+.. The string is generated differently, depending if your recipients are candidates or companies.
+... If your recipients are candidates, then the `To` field of the email will contain all the recipients.
+... If your recipients are job offers, then the job offers are paired with its company, and each company will have its own `To` field, to show that an email will be sent individually to each company. +
+ For example, if I am sending an email to `Apple` regarding a job offer on `Cashier` and `Cleaner`, and `DBS` regarding a job offer on `Cafe Waiter`, there will be 2 `To` fields that look like this:
+.... `To: Apple(apple@example.com) regarding job offers: [Cashier, Cleaner]`
+.... `To: DBS(dbs@example.com) regarding job offer: [Cafe Waiter]`
+. You are satisfied with the preview and execute the `send` command to send the email. This generates the email as a `MimeMessage` which is the Java format used for emails and is sent via `EmailUtil#sendMessage`.
+.. If recipients are candidates, one email will be sent to all candidates with their emails sent as `BCC` to preserve privacy of the candidates.
+.. If recipients are companies, one email will be sent per company detailing the specific job offer(s) that you have added during the selection of recipients.
+. `LogicState` is then reset back to original and this marks the end of the email command.
+
+This is the simplified action diagram and sequence diagram when one executes the email command, assuming that the `add` command is used once per `selectRecipients` and `selectContents` step.
 
 .Action Diagram
 image::EmailActivityDiagram.png[width="1000", align="center"]
@@ -998,7 +1007,7 @@ image::EmailActivityDiagram.png[width="1000", align="center"]
 image::EmailSequenceDiagram.png[width="1000", align="center"]
 
 ==== Design Considerations
-===== Aspect: Data structure to store recipients and candidates
+===== Aspect: Data structure to store recipients and contents
 
 * **Alternative 1:** Array List
 ** Pros: General purpose data structure that will work for this use case
@@ -1011,7 +1020,7 @@ image::EmailSequenceDiagram.png[width="1000", align="center"]
 * **Alternative 3 (current choice):** Linked Hash Set
 ** Pros: Does not allow duplicates, indicates if an object being added is successful or not,
    and maintains order in which objects were added in.
-** Cons: Not as fast as a hash set, but speed can be sacrificed for the pros.
+** Cons: Not as fast as a hash set, but speed can be sacrificed for the benefits.
 
 ===== Aspect: The design choice of the Email command
 
