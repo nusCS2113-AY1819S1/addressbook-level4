@@ -32,7 +32,7 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_EMPTY = "Export Failed: Current Timetable is empty! ";
     public static final String MESSAGE_IO_ERROR =
             "Export Failed: Failed to write the timetable to the path: ";
-    public static final String MESSAGE_INVALID_TIMETABLE=
+    public static final String MESSAGE_INVALID_TIMETABLE =
             "Export Failed: Please select someone's timetable! ";
     private final Path filePath;
 
