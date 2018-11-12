@@ -9,7 +9,7 @@
 
 == Overview
 This project portfolio page serves to document my contributions to the project "RecruitBook". The project was created for the "CS2113T: Software Engineering & Object-Oriented Programming" module that I took during my second year of study in the National University Of Singapore(NUS).
-RecruitBook is referenced from AddressBook 4 created by the SE-EDU team from NUS and further developed by my team.
+RecruitBook is referenced from AddressBook 4 created by the SE-EDU team from NUS and it is then further developed by my team.
 
 My team consists of 5 members who majored in the field of Computing and we each handled different aspects of RecruitBook ranging from its Graphical User Interface(GUI) to its core functionalities.
 My role as a developer in this project was to manage the modifying and handling of data. I had to ensure that different components are properly integrated in such a way that any data modifications would be propagated throughout RecruitBook. This ensures that the data present in RecruitBook is always consistent.
