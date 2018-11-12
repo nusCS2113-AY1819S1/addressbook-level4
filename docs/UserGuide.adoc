@@ -659,7 +659,7 @@ Currently there is no other way to enable mailing services than to let your Gmai
 If your operating system is *macOS Mojave*, please make an *important* note of the following:
 
 1. If you use any of the email-related commands (i.e. _email_, _emailAll_ or _emailSpecific_), you will be presented with an EmailWindow similar to
-the one in *Figure 4*.
+the one in *Figure 5*.
 
 2. If you use the *command-tab* keys *when the EmailWindow is open* to switch windows, the application will crash. This is due to
 Apple's latest macOS release, in which some of the bindings are not compatible with key JavaFX functions.
