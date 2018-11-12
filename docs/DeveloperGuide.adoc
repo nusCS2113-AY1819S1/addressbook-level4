@@ -501,7 +501,7 @@ image::ViewClubBudgetsCommandSequenceDiagram.png[width="800"]
 
 The Search Pruning mechanism is facilitated by the `SearchHistoryManager` class, and within it is a `searchHistoryStack` that stores `Predicate` objects.
 `Predicate` objects are used to filter `FilteredList` objects by calling the `setPredicate()` method of `FilteredList`. By storing `Predicate` objects
-in SearchHistoryManager, it stores the search logic that was previously used on the `FilteredList` object, and hence, simulates the effect of storing Search History
+in SearchHistoryManager, it stores the search logic that was previously used by the `FilteredList` object, and hence, simulates the storing Search History
 without storing the actual data.
 
 In NUSSU Connect, the main `SearchHistoryManger` object is in `ModelManager` and it stores `Predicate<Person>` objects used for the filtering of `filteredPersons` list.
@@ -522,28 +522,28 @@ clears all system search logic from in-app memory. +
 * `isEmpty()` +
 returns true if `searchHistoryStack` is empty. +
 
-Given below are illustrations to help you understand how the first three method works internally
+Given below are illustrations to help you understand how the first three method works internally.
+But before carrying on, you need to take note of the following.
 
- In the diagrams, 'UP' is the short-form for User Predicate and 'SP' is the short-form for System Predicate.
- . User Predicate stores the logic specified by the user. This will not be used to filter FilteredList objects.
- . System Predicate stores the search logic for the system which will be used to filter FilteredList objects.
+NOTE: In the diagrams, 'UP' is the short-form for User Predicate and 'SP' is the short-form for System Predicate.
+ User Predicate stores the logic specified by the user and it is not the actual search logic used for filtering of FilteredList objects.
+ On the other hand, System Predicate stores the search logic for the system and it will be used to filter FilteredList objects.
 
-NOTE: User Predicate and System Predicate are not actual Classes, they are simply there to help simplify the explanation.
-In the actual implementation, there is no way to differentiate one `Predicate` from the other.
+NOTE: User Predicate and System Predicate are not actual Classes and they are simply there to help simplify the explanation.
+In the actual implementation, there is no way to differentiate one from the other.
 
 '''
-
-`executeNewSearch(Predicate<T> predicate)` +
+**executeNewSearch(Predicate<T> predicate)** +
 
 Upon calling this method, there will be two different situations +
 
-* Situation 1: `searchHistoryStack` is empty +
+* *Situation 1*: `searchHistoryStack` is empty +
 Upon receiving a new User Predicate, SearchHistoryManager will simply push the new User Predicate into `searchHistoryStack`
 as a System Predicate.
 
 image::executeNewSearchEmptyStack.png[width="550"]
 
-* Situation 2: `searchHistoryStack` is not empty +
+* *Situation 2*: `searchHistoryStack` is not empty +
 Before pushing the new `Predicate` into the stack, `SearchHistoryManager` will first retrieve the System Predicate object at the top of the stack.
 After retrieving it, it will call the `and()` method with the User Predicate, creating a new System Predicate which will then be pushed into the top
 of the stack.
@@ -552,7 +552,7 @@ image::executeNewSearchNonEmptyStack.png[width="700"]
 This method will return the new System Predicate at the top of the stack.
 
 '''
-`revertLastSearch()` +
+**revertLastSearch()** +
 
 This method will pop the System Predicate at the top of the stack.
 In the event that the stack is already empty, this method will throw `EmptyHistoryException`.
@@ -562,13 +562,15 @@ If the stack is not empty after the pop, this method will return the System Pred
 it will return a `Predicate` object with a search logic that always defaults to true.
 
 '''
-`clearSearchHistory()` +
+**clearSearchHistory()** +
 
 This method will simply empty the stack.
 
 image::clearSearchHistoryStack.png[width="350"]
 
 '''
+
+===== How SearchHistory
 The following sequence diagrams shows you how the `IncludeNameFindCommand` and `UndoFind` commands
 utilize `SearchHistoryManager` to perform Search Pruning. Other variations of `FindCommand` works similarly to
 `IncludeNameFindCommand` and the sequence diagram for `IncludeNameFindCommand` is also relevant to them.
@@ -620,7 +622,7 @@ image::UndoFindSequenceDiagram.png[]
 ** Cons:
     . Need to perform 2 method calls separately to retrieve `Predicate` object after an update to search logic.
     . Need to implement another method specifically for retrieval of `Predicate` object.
-    . Future developers utilizing `SearchHistoryManger` need to remember that they need to retrieve `Predicate` object from `SearchHistoryManager` separately
+    . Other developers utilizing `SearchHistoryManger` need to remember that they need to retrieve `Predicate` object from `SearchHistoryManager` separately
       after an update to search logic.
 // end::searchpruning[]
 
