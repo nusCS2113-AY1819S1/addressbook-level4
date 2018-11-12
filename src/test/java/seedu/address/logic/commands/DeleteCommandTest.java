@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-/*
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -32,7 +32,7 @@ import seedu.address.model.item.Item;
 
 public class DeleteCommandTest {
 
-    /*
+
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -43,6 +43,7 @@ public class DeleteCommandTest {
         model.setLoggedInUser(admin);
     }
 
+    /*
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
@@ -56,7 +57,7 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
-
+*/
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
@@ -64,7 +65,7 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
-
+/*
     @Test
     public void execute_validIndexFilteredList_success() {
         showItemAtIndex(model, INDEX_FIRST_ITEM);
@@ -81,7 +82,7 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
-
+*/
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showItemAtIndex(model, INDEX_FIRST_ITEM);
@@ -94,7 +95,7 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
-
+/*
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
@@ -114,7 +115,7 @@ public class DeleteCommandTest {
         expectedModel.redoStockList();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
-
+*/
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
@@ -159,7 +160,7 @@ public class DeleteCommandTest {
         expectedModel.redoStockList();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
-
+*/
     @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_ITEM);
@@ -186,12 +187,12 @@ public class DeleteCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
 
-/*
+
     private void showNoItem(Model model) {
         model.updateFilteredItemList(p -> false);
 
         assertTrue(model.getFilteredItemList().isEmpty());
     }
-*/
+
 }
 
