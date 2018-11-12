@@ -49,6 +49,10 @@ Feature descriptions related to distributor functions: include::../UserGuide.ado
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+I updated:
+the Logic class diagram: include::../DeveloperGuide.adoc[tag=logicclassdiagram],
+the UI class diagram: include::../DeveloperGuide.adoc[tag=uiclassdiagram]
+
 In the appendices, I included:
 the user stories related to product features: include::../DeveloperGuide.adoc[tag=productuserstories],
 the user stories related to distributor features: include::../DeveloperGuide.adoc[tag=distributoruserstories],

@@ -134,10 +134,10 @@ Each of the four components
 * Exposes its functionality using a `{Component Name}Manager` class.
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
-
+// tag::logicclassdiagram[]
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[width="800"]
-
+// end::logicclassdiagram[]
 [discrete]
 ==== Events-Driven nature of the design
 
@@ -161,9 +161,10 @@ The sections below give more details of each component.
 
 [[Design-Ui]]
 === UI component
-
+// tag::uiclassdiagram[]
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
+// tag::uiclassdiagram[]
 
 *API* : link:{repoURL}/src/main/java/seedu/productInfo/ui/Ui.java[`Ui.java`]
 
