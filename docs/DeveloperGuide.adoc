@@ -391,23 +391,29 @@ Step 3. Depending on the filter, `ViewTaskCommand` class will use the `Model#upd
 
 Sorting tasks in the to-do list uses both `Logic` and `Model` components.
 Generally, the implementation of `TDL_sort date`, `TDL_sort priority` and `TDL_sort module` are quite similar,
-and they use different comparators. These features sort ObservableList<Task> and use the method sort()
-from List<>.
+and they use different comparators which are stored in `SortComparator`.
+
+Firstly, after getting the input from user, `SortCommandParser` split command to get the parameter
+and choose the corresponding sorting method. Then, we use `Collection.sort()` in `UniqueTaskList` to sort
+ObservableList<Task> versionedTodoList
 
 `TDL_sort reverse` use the method `Collection.reverse()` to reverse the sequence of tasks in to-do list.
 
 To avoid the sequential order of upper case and lower case, we use `TaskName a -> a.toString().toLowerCase()` transfer all upper case into lower case.
 
+The following sequence diagram shows how the `TDL_complete` operation works:
+
+image::SortTaskSequenceDiagram.png[width="800"]
+
 ==== Design Considerations
 
 ===== Aspect: Methods to support the sort commands
 
-* **Alternative 1 (current choice):**
-** Pros:
-** Cons:
-* **Alternative 2:**
-** Pros:
-** Cons:
+* **Alternative 1 (current choice):** write methods for each sort parameter separately
+** Pros: easily to implement and have already gathered all comparators in `SortComparator`
+** Cons: hard to read and debug
+* **Alternative 2:** In `Model` part, write only one methods and use if sentence to execute corresponding one.
+** Pros: Easy to read and debug
 
 
 // end::sorttask[]
@@ -431,12 +437,12 @@ and deadline for distinguishing uncompleted tasks with different deadline.
 
 ==== Aspect: Methods to support the deadline notification feature
 
-* **Alternative 1 (current choice):**
-** Pros:
-** Cons:
-* **Alternative 2:**
-** Pros:
-** Cons:
+* **Alternative 1 (current choice):** Add related methods to `Task` class and `Model` class directly
+** Pros: Easy to implement
+** Cons: Hard to read and debug
+* **Alternative 2:** build a new class for Deadline notification
+** Pros: Easy to debug and increase new features like notify deadline with CLI output
+** Cons: Hard to implement
 
 // end::deadlinenotification[]
 
