@@ -11,10 +11,10 @@ import java.util.HashMap;
 import com.t13g2.forum.storage.forum.IStorage;
 
 /**
- *
+ * Defines a stub for Storage
  */
 public class StorageStub implements IStorage {
-    private static StorageStub _instance;
+    private static StorageStub instance;
 
     private HashMap<Class, Object> storage;
 
@@ -23,10 +23,10 @@ public class StorageStub implements IStorage {
     }
 
     public static StorageStub getInstance() {
-        if (_instance == null) {
-            _instance = new StorageStub();
+        if (instance == null) {
+            instance = new StorageStub();
         }
-        return _instance;
+        return instance;
     }
 
 
@@ -56,7 +56,7 @@ public class StorageStub implements IStorage {
     // }
 
     public void refreshInstantce() {
-        _instance = new StorageStub();
+        instance = new StorageStub();
     }
 
     /**

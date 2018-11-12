@@ -11,6 +11,9 @@ import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
+/**
+ * Defines unit test for UnitOfWork
+ */
 public class UnitOfWorkTest {
 
     @Rule
@@ -103,6 +106,12 @@ public class UnitOfWorkTest {
         return new User("username", "password", true, false, "Email@1.com", "12345678");
     }
 
+    /**
+     * Checks if two user are the same
+     *
+     * @param user1
+     * @param user2
+     */
     private void checkUserEqual(User user1, User user2) {
         Assert.assertEquals(user1.getUsername(), user2.getUsername());
         Assert.assertEquals(user1.getPassword(), user2.getPassword());

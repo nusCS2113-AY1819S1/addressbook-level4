@@ -2,122 +2,115 @@ package com.t13g2.forum.storage;
 
 import com.t13g2.forum.storage.forum.AnnouncementStorage;
 import com.t13g2.forum.storage.forum.CommentStorage;
+import com.t13g2.forum.storage.forum.ForumBookStorage;
 import com.t13g2.forum.storage.forum.ForumThreadStorage;
 import com.t13g2.forum.storage.forum.IForumBookStorage;
 import com.t13g2.forum.storage.forum.IStorage;
 import com.t13g2.forum.storage.forum.ModuleStorage;
 import com.t13g2.forum.storage.forum.UserStorage;
 
+/**
+ * Defines a stub for ForumBookStorage
+ */
 public class ForumBookStorageStub implements IForumBookStorage {
-    private AnnouncementStorage announcementStorage;
-    private ForumThreadStorage forumThreadStorage;
-    private UserStorage userStorage;
-    private ModuleStorage moduleStorage;
-    private CommentStorage commentStorage;
+    private ForumBookStorage forumBookStorage;
 
-    private IStorage underlyingStorage;
-
-    public ForumBookStorageStub() {
-        loadAnnouncement();
-        loadComment();
-        loadForumThread();
-        loadUser();
-        loadModule();
-        underlyingStorage = StorageStub.getInstance();
+    public ForumBookStorageStub(IStorage storage) {
+        forumBookStorage = new ForumBookStorage(storage);
     }
 
     @Override
     public void commit() {
-
+        forumBookStorage.commit();
     }
 
     @Override
     public void save(Class clazz) {
-
+        forumBookStorage.save(clazz);
     }
 
     @Override
     public void load(Class clazz) {
-
+        forumBookStorage.load(clazz);
     }
 
     @Override
     public void saveAnnouncement() {
-
+        forumBookStorage.saveAnnouncement();
     }
 
     @Override
     public void loadAnnouncement() {
-        announcementStorage = new AnnouncementStorage();
+        forumBookStorage.loadAnnouncement();
     }
 
     @Override
     public void saveComment() {
-
+        forumBookStorage.saveComment();
     }
 
     @Override
     public void loadComment() {
-        commentStorage = new CommentStorage();
+        forumBookStorage.loadComment();
     }
 
     @Override
     public void saveForumThread() {
-
+        forumBookStorage.saveForumThread();
     }
 
     @Override
     public void loadForumThread() {
-        forumThreadStorage = new ForumThreadStorage();
+        forumBookStorage.loadForumThread();
     }
 
     @Override
     public void saveUser() {
-
+        forumBookStorage.saveUser();
     }
 
     @Override
     public void loadUser() {
-        userStorage = new UserStorage();
+        forumBookStorage.loadUser();
     }
 
     @Override
     public void saveModule() {
-
+        forumBookStorage.saveModule();
     }
 
     @Override
     public void loadModule() {
-        moduleStorage = new ModuleStorage();
+        forumBookStorage.loadModule();
     }
 
     @Override
     public boolean isFresh() {
-        return false;
+        return forumBookStorage.isFresh();
     }
 
     @Override
     public AnnouncementStorage getAnnouncements() {
-        return announcementStorage;
+        return forumBookStorage.getAnnouncements();
     }
 
     @Override
     public ForumThreadStorage getForumThreads() {
-        return forumThreadStorage;
+        return forumBookStorage.getForumThreads();
     }
 
     @Override
     public UserStorage getUsers() {
-        return userStorage;
+        return forumBookStorage.getUsers();
     }
 
     @Override
     public ModuleStorage getModules() {
-        return moduleStorage;
+        return forumBookStorage.getModules();
     }
 
     @Override
     public CommentStorage getComments() {
-        return commentStorage;
+        return forumBookStorage.getComments();
     }
 }
