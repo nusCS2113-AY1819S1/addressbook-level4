@@ -499,7 +499,7 @@ Given below is an example usage scenario and how the list mechanism works.
 Step 1. The user executes `list dep Admin` to list only the people in the Admin department. The command text is passed
 to an instance of the `LogicManager` class.
 
-Step 2. The `LogicManager` instance calls `AddressBookParser#parsecommand`, which parses the `list` command prefix
+Step 2. The `LogicManager` instance calls `ProManage#parsecommand`, which parses the `list` command prefix
 "list".
 
 Step 3. `ListCommandParser#parse` parses the type of command that is called upon and if applicable, the departments
