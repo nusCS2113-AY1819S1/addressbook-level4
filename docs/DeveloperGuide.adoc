@@ -478,26 +478,35 @@ Step 5. If the admin wants to reset or make a new comment section of an event, t
 // tag::rsvp[]
 === RSVP
 ==== Current Implementation
-The RSVP feature consists of the `register` & `unregister` command. A `removeAttendee` command is included for admin use to remove users forcibly if required. The implementations of the commands use the `EditEventDescriptor` class and `createEditedEvent` method from `EditCommand` to aid in updating event attendance. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
+The RSVP feature consists of the `register`, `unregister`, and `attending` command. A `removeAttendee` command is included for admin use to remove users forcibly if required. The implementations of the commands use the `EditEventDescriptor` class and `createEditedEvent` method from `EditCommand` to aid in updating event attendance. The `AttendanceContainsUserPredicate` class is used to filter events that the user has registered for. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
 
-Below is an example usage scenario and how the RSVP mechanism behaves:
+Below is an example usage scenario and how the RSVP mechanism behaves during a `register` operation:
 
 |===
 Step 1: The user launches the application, and logs in.
 
 Step 2: The user clicks on an event or types `select 2` into the CLI. Details of the 2nd event including event attendance are displayed.
 
-Step 3: The user executes `register 2` to register for the 2nd event. The `register` command takes in the current model and event at index 2, getting the username of the current user via `Model#getUsername`, and the current attendance of the event as a `HashSet` with `Event#getAttendance`.
+Step 3: The user executes `register 2` to register for the 2nd event. With the `Model`, the `RegisterCommand#execute` method gets the event at index 2, the username of the current user, and the current attendance of the event as a `HashSet` with `Event#getAttendance`.
 
 Step 4: The `register` command tries to add the username into the current attendance with `HashSet#add`. If the username already exists in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
 
-Step 5: The model is updated and committed, overwriting `eventmanager.xml`. The event page is reloaded to display the new event attendance.
+Step 5: The model is updated with the edited event and committed. The event page is reloaded to display the new event attendance.
 
-Step 6: If the user decides to unregister from the event, the user executes `unregister 2`, and the `unregister` command gets the username and attendance in the same manner as the `register` command in Step 3.
+|===
 
-Step 7: The `unregister` command command tries to remove the username from the current attendance with `HashSet#remove`. If the username does not exist in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
+Below is another example usage scenario illustrating how the RSVP mechanism behaves during an `unregister` operation, with the use of `attending`.
 
-Step 8: The model is updated and committed as in Step 4, and the event page is again reloaded.
+|===
+Step 1: The user launches the application, and logs in.
+
+Step 2: The user types `attending` into the CLI. `AttendingCommand#execute` retrieves the current user's username from `Model` and creates a `AttendanceContainsUsernamePredicate` predicate. The predicate is used with `Model#updateFilteredEventList` to filter out events without the user's username in their attendance. Events that the user has registered for are displayed.
+
+Step 3: The user executes `unregister 2` to unregister from the 2nd event. With the `Model`, the `UnregisterCommand#execute` method gets the event at index 2, the username of the current user, and the current attendance of the event as a `HashSet` with `Event#getAttendance`.
+
+Step 4: The `unregister` command command tries to remove the username from the current attendance with `HashSet#remove`. If the username does not exist in the attendance, a `CommandException` is thrown. Else, `EditCommand#EditEventDescriptor` is used with the new attendance to create an edited event.
+
+Step 5: The model is updated with the edited event and committed. The event page is reloaded to display the new event attendance..
 |===
 
 [NOTE]
