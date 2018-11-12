@@ -24,7 +24,6 @@ public class ModuleViewCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Viewing details of %1$s.";
     private static final String MESSAGE_MODULE_NOT_FOUND = "Module with code %s doesn't exist in Trajectory!";
-    private static final String ENROLLED_STUDENT_LIST_FORMAT = "%1$s. %2$s (%3$s)";
 
     private final ModuleCode moduleCode;
 

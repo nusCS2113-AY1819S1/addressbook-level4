@@ -61,7 +61,8 @@ public class ModuleEditCommand extends Command {
         moduleManager.updateModule(moduleToEdit, editedModule);
         moduleManager.saveModuleList();
 
-        return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, moduleToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, moduleToEdit),
+                ModuleManager.getInstance().getModuleAsHtmlRepresentation(moduleToEdit));
     }
 
     /**

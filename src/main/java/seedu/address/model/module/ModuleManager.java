@@ -258,13 +258,17 @@ public class ModuleManager {
         StringBuilder sb = new StringBuilder();
         StringBuilder studentEntries = new StringBuilder();
 
-        studentEntries.append(HtmlProcessor.getOrderedListStart());
-        for (Person s : module.getEnrolledStudents()) {
-            studentEntries.append(HtmlProcessor.getListItem(
-                    String.format(listItemFormat, s.getName().toString(), s.getMatricNo())
-            ));
+        if (module.getEnrolledStudents().isEmpty()) {
+            studentEntries.append("There are no students enrolled in this module.");
+        } else {
+            studentEntries.append(HtmlProcessor.getOrderedListStart());
+            for (Person s : module.getEnrolledStudents()) {
+                studentEntries.append(HtmlProcessor.getListItem(
+                        String.format(listItemFormat, s.getName().toString(), s.getMatricNo())
+                ));
+            }
+            studentEntries.append(HtmlProcessor.getOrderedListEnd());
         }
-        studentEntries.append(HtmlProcessor.getOrderedListEnd());
 
         List<AbstractMap.SimpleEntry<String, String>> details = new ArrayList<>();
         details.add(new AbstractMap.SimpleEntry<>("Module Code: ", module.getModuleCode().toString()));

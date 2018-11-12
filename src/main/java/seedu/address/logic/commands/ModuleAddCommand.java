@@ -48,7 +48,7 @@ public class ModuleAddCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, moduleToAdd.getModuleCode(),
-                moduleToAdd.getModuleName()));
+                moduleToAdd.getModuleName()), ModuleManager.getInstance().getModuleTableRepresentation());
     }
 
     @Override
