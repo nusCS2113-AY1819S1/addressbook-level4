@@ -214,7 +214,7 @@ Format: `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_T
 Example:
 
 * `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/14:00 e/15:45` +
-Creates an event named Board Meeting at Conference Room 1 at 2018-09-28, from 14:00 to 15:45.
+Creates an event named Board Meeting with description "Weekly Meeting" at Conference Room 1 at 2018-09-28, from 14:00 to 15:45.
 // end::addevent[]
 
 // tag::editevent[]
@@ -232,10 +232,13 @@ index *must be a positive integer* 1, 2, 3, ... +
 * TIME needs to be in 00:00 format
 * START_TIME must be earlier than END_TIME
 * Leap years are not considered during date validation.
-* One location can only hold one event at any time.
 * Location is case insensitive
-* Event cannot be editted if result clashes with any of the attendees' event schedule
 * Existing values will be updated to the input values.
+****
+
+****
+WARNING: One location can only hold one event at any time. +
+Event cannot be editted if result clashes with any of the attendees' event schedule
 ****
 
 Examples:
@@ -373,6 +376,7 @@ Enter a command: `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
 ****
 * Select the employee at the specified `PERSON_INDEX` and view all his/her events at certain date/year/month if indicated.
+* Events will be displayed on the event list panel on the right in chronological order.
 * The index refers to the index number shown in the displayed employee list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * DATE needs to be in YYYY-MM-DD format
@@ -541,16 +545,13 @@ There is no need to save manually.
 
 * *Help*: `help`
 
-
 * *Login*: `login IDENTITY` where IDENTITY is either manager or employee or `login as existingemail@example.com`
 
 * *Logout*: `logout`
 
 * *Add Employee*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT des/DESIGNATION [t/TAG]...`
 
-* *Edit Employee* : `edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [des/DESIGNATION] [t/TAG]…​`
-
-* *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
+* *Edit Employee* : `edit PERSON_INDEX [p/PHONE_NUMBER] [a/ADDRESS] [dep/DEPARTMENT] [des/DESIGNATION] [t/TAG]…​`
 
 * *Delete Employee* : `delete PERSON_INDEX`
 
@@ -574,7 +575,7 @@ There is no need to save manually.
 
 * *Select Employee* : `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
-* *selectEvent* : `selectEvent EVENT_INDEX`
+* *Select Event* : `selectEvent EVENT_INDEX`
 
 * *History* : `history`
 
