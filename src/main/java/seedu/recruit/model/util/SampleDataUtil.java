@@ -74,7 +74,27 @@ public class SampleDataUtil {
             new Candidate(new Name("Eugene Yu"), new Gender("M"), new Age ("17"), new Phone("8121313"),
                     new Email("eugeneyu@example.com"), new Address("Blk 34, Marymount Road, #01-23"),
                     new Job("Cashier"), new Education("OLEVELS"),
-                    new Salary("1000"), getTagSet("Student"))
+                    new Salary("1000"), getTagSet("Student")),
+            new Candidate(new Name("Eugene Ong"), new Gender("M"), new Age ("50"), new Phone("99881123"),
+                    new Email("eugeneong@example.com"), new Address("Blk 31, Marymount Road, #01-06"),
+                    new Job("Cleaner"), new Education("OLEVELS"),
+                    new Salary("1200"), getTagSet("HighBlood")),
+            new Candidate(new Name("Patricia Low"), new Gender("F"), new Age ("25"), new Phone("81233233"),
+                    new Email("patlow@example.com"), new Address("Blk 321, Clementi Ave 1, #03-06"),
+                    new Job("Receptionist"), new Education("DIPLOMA"),
+                    new Salary("1200"), getTagSet("HighBlood")),
+            new Candidate(new Name("Bill Watson"), new Gender("M"), new Age ("26"), new Phone("82664584"),
+                    new Email("billwatson@example.com"), new Address("Blk 31,Eunos Crescent, #02-01"),
+                    new Job("Software Engineer"), new Education("BACHELOR"),
+                    new Salary("4000"), getTagSet("Referral")),
+            new Candidate(new Name("Mary Watson"), new Gender("F"), new Age ("25"), new Phone("82664585"),
+                    new Email("marywatson@example.com"), new Address("Blk 31,Eunos Crescent, #02-01"),
+                    new Job("Designer"), new Education("BACHELOR"),
+                    new Salary("3500"), getTagSet("Referral")),
+            new Candidate(new Name("Michelle Kuek"), new Gender("F"), new Age ("30"), new Phone("91350305"),
+                    new Email("michellekuek@example.com"), new Address("Blk 1, Tampines Central 5, #08-01"),
+                    new Job("Account Executive"), new Education("DIPLOMA"),
+                    new Salary("2500"), getTagSet("LCCI"))
         };
     }
 
@@ -134,7 +154,7 @@ public class SampleDataUtil {
             new JobOffer(new CompanyName("DBS"), new Job("Bank Teller"),
                     new Gender("M"), new AgeRange("25-35"), new Education("DIPLOMA"),
                     new Salary("3000"), new UniqueCandidateList()),
-            new JobOffer(new CompanyName("DBS"), new Job("Data Entry Assistan"),
+            new JobOffer(new CompanyName("DBS"), new Job("Data Entry Assistant"),
                     new Gender("M"), new AgeRange("17-50"), new Education("OLEVELS"),
                     new Salary("1200"), new UniqueCandidateList())
         };
