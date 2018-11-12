@@ -141,10 +141,10 @@ image::LogicClassDiagram.png[width="800"]
 [discrete]
 ==== Events-Driven nature of the design
 
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete m/CS2113 i/1`.
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `deleteModule mCode/CS2113`.
 
-.Component interactions for `delete m/CS2113 i/1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+.Component interactions for `deleteModule mCode/CS2113` command (part 1)
+image::SDDeleteModule.png[width="800"]
 
 [NOTE]
 Note how the `Model` simply raises a `ForumBookChangedEvent` when the Forum Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
@@ -167,7 +167,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/t13g2/forum/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ModuleListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/t13g2/forum/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -192,30 +192,10 @@ link:{repoURL}/src/main/java/t13g2/forum/logic/Logic.java[`Logic.java`]
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete m/CS2113 i/1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteModule mCode/CS2113")` API call.
 
-.Interactions Inside the Logic Component for the `delete m/CS2113 i/1` Command
-image::DeleteThreadSdForLogic.png[width="800"]
-
-[[Design-Model]]
-=== Model component
-
-.Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
-
-*API* : link:{repoURL}/src/main/java/t13g2/forum/model/Model.java[`Model.java`]
-
-The `Model`,
-
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Forum Book data.
-* exposes an unmodifiable `ObservableList<Thread>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
-
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Forum Book`, which `Thread` can reference. This would allow `Forum Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
+.Interactions Inside the Logic Component for the `deleteModule mCode/CS2113` Command
+image::DeleteModuleSdForLogic.png[width="800"]
 
 [[Design-Storage]]
 
@@ -1092,10 +1072,3 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The user `john` will be deleted from the UserStorage and a success message will be shown in the result display panel.
 .. Test case: `deleteUser uName/abcd`
    Expected: Since the given user `abcd` does not exist in the UserStorage, an error message will be shown in the result display panel.
-
-=== Saving data
-
-. Dealing with missing/corrupted data files
-
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-// end::others[]
