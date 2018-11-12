@@ -436,6 +436,11 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 ** The bookstore owner may decide whether to accept or reject a request offer.
 ** After deciding, he or she can type deleterequest to remove Request from the RequestList.
 
+===== Aspect: How ToggleRequests command functions
+
+.Sequence Diagram of the ToggleRequests Component
+image::ToggleRequestSequenceDiagram.png[width="800"]
+
 // end::Request[]
 
 // tag::statistic[]
