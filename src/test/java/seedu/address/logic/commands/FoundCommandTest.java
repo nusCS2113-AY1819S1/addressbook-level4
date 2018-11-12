@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.Command.MESSAGE_LOGIN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.LostandFoundFeatureTest.getExpectedIndextwo;
 import static seedu.address.testutil.LostandFoundFeatureTest.getExpectedUpdatedItemtwo;
-import static seedu.address.testutil.LostandFoundFeatureTest.getItemtwoToUpdate;
 import static seedu.address.testutil.LostandFoundFeatureTest.getFoundDescriptor;
+import static seedu.address.testutil.LostandFoundFeatureTest.getItemtwoToUpdate;
 import static seedu.address.testutil.LostandFoundFeatureTest.getStockList;
 import static seedu.address.testutil.TypicalAccounts.getTypicalAccountList;
 
@@ -37,13 +37,13 @@ public class FoundCommandTest {
     @Test
     public void constructorNullFoundDescriptorThrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new FoundCommand(getExpectedIndextwo(),null);
+        new FoundCommand(getExpectedIndextwo(), null);
     }
 
     @Test
     public void createUpdatedItemTest() {
         try {
-            Item actualUpdatedItem = foundCommand.createFoundItem(getItemtwoToUpdate(),getFoundDescriptor());
+            Item actualUpdatedItem = foundCommand.createFoundItem(getItemtwoToUpdate(), getFoundDescriptor());
             assertEquals(actualUpdatedItem, getExpectedUpdatedItemtwo());
         } catch (Exception e) {
             throw new AssertionError("The updated item does not have invalid status");

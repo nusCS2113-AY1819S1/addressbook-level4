@@ -37,13 +37,13 @@ public class LostCommandTest {
     @Test
     public void constructorNullLostDescriptorThrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new LostCommand(getExpectedIndexone(),null);
+        new LostCommand(getExpectedIndexone(), null);
     }
 
     @Test
     public void createUpdatedItemTest() {
         try {
-            Item actualUpdatedItem = lostCommand.createLostItem(getItemoneToUpdate(),getLostDescriptor());
+            Item actualUpdatedItem = lostCommand.createLostItem(getItemoneToUpdate(), getLostDescriptor());
             assertEquals(actualUpdatedItem, getExpectedUpdatedItemone());
         } catch (Exception e) {
             throw new AssertionError("The updated item does not have invalid status");
