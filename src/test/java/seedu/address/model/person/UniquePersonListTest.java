@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,6 +20,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.testutil.Assert;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -195,5 +197,20 @@ public class UniquePersonListTest {
         UniquePersonList uniqueSamePersonList = new UniquePersonList();
         uniquePersonList.add(ALICE);
         assertNotEquals(uniquePersonList.hashCode(), uniqueSamePersonList.hashCode());
+    }
+
+    @Test
+    public void iterator_emptyUniquePersonList_hasNoNextPerson() {
+        assertFalse(uniquePersonList.iterator().hasNext());
+    }
+
+    @Test
+    public void iterator_nextPersonEmptyUniquePersonList_throwsNoSuchElementException() {
+        Assert.assertThrows(NoSuchElementException.class, () -> uniquePersonList.iterator().next());
+    }
+
+    @Test
+    public void sort_noSuchSortOrder_throwsAssertionError() {
+        Assert.assertThrows(AssertionError.class, () -> uniquePersonList.sortByName("ascdsc"));
     }
 }

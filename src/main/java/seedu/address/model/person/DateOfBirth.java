@@ -16,7 +16,7 @@ public class DateOfBirth {
             "(0?[0-9]|[12][0-9]|3[01])/(0?[0-9]|1[0-2])/(19[0-9]{2}|200[0-2])";
 
     // Error message for different date cases
-    private static final String MESSAGE_DATEOFBIRTH_CONSTRAINTS_DEFAULT =
+    public static final String MESSAGE_DATEOFBIRTH_CONSTRAINTS_DEFAULT =
             "Date of Birth should only be integers in the format of DD/MM/YYYY, it should not be blank and within "
                     + "01/01/1900 to 31/12/2002";
     private static final String MESSAGE_DATE_INVALID_FEB_DATE_LEAPYEAR =

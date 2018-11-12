@@ -3,9 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showScheduleAtIndex;
+import static seedu.address.model.VersionedModelList.MESSAGE_NO_REDOABLE_STATE_EXCEPTION;
+import static seedu.address.model.VersionedModelList.MESSAGE_NO_UNDOABLE_STATE_EXCEPTION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -15,7 +18,10 @@ import static seedu.address.testutil.TypicalRecruitments.getTypicalRecruitmentLi
 import static seedu.address.testutil.expenses.TypicalExpenses.getTypicalExpensesList;
 import static seedu.address.testutil.schedule.TypicalSchedules.getTypicalScheduleList;
 
+import org.junit.Rule;
 import org.junit.Test;
+
+import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -24,6 +30,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.VersionedModelList;
 import seedu.address.model.schedule.Schedule;
 
 
@@ -32,9 +39,14 @@ import seedu.address.model.schedule.Schedule;
  * {@code DeleteCommand}.
  */
 public class DeleteScheduleCommandTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    private CommandHistory commandHistory = new CommandHistory();
+
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalExpensesList(), getTypicalScheduleList(),
             getTypicalRecruitmentList(), new UserPrefs());
-    private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -104,7 +116,31 @@ public class DeleteScheduleCommandTest {
     }
 
     @Test
+    public void executeUndo_validIndexUnfilteredList_failure() throws Exception {
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getExpensesList(), model.getScheduleList(),
+                model.getRecruitmentList(), new UserPrefs());
+
+        // undo -> no more states to undo
+        thrown.expect(VersionedModelList.NoUndoableStateException.class);
+        thrown.expectMessage(MESSAGE_NO_UNDOABLE_STATE_EXCEPTION);
+        expectedModel.getLastCommitType();
+        expectedModel.undoModelList();
+    }
+
+    @Test
+    public void executeRedo_validIndexUnfilteredList_failure() throws Exception {
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getExpensesList(), model.getScheduleList(),
+                model.getRecruitmentList(), new UserPrefs());
+        // redo -> no more states to redo
+        thrown.expect(VersionedModelList.NoRedoableStateException.class);
+        thrown.expectMessage(MESSAGE_NO_REDOABLE_STATE_EXCEPTION);
+        expectedModel.getNextCommitType();
+        expectedModel.redoModelList();
+    }
+
+    @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
+
         Schedule scheduleToDelete = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
         DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(INDEX_FIRST_SCHEDULE);
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getExpensesList(), model.getScheduleList(),
@@ -124,6 +160,7 @@ public class DeleteScheduleCommandTest {
         RedoCommand redoCommand = new RedoCommand();
         redoCommand.execute(expectedModel, commandHistory);
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+
     }
 
     @Test

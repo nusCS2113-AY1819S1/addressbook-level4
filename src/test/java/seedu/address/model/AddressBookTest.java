@@ -93,6 +93,12 @@ public class AddressBookTest {
         addressBook.getPersonList().remove(0);
     }
 
+    @Test
+    public void hashCodeSameObject_equals() {
+        AddressBook addressBookCopy = addressBook;
+        assertEquals(addressBook.hashCode(), addressBookCopy.hashCode());
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */

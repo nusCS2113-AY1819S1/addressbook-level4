@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TRAVEL_EXPENSES;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.StringTokenizer;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddExpensesCommand;
 import seedu.address.logic.commands.AddExpensesCommand.EditExpensesDescriptor;
@@ -50,7 +49,7 @@ public class AddExpensesCommandParser implements Parser<AddExpensesCommand> {
 
         if (!didPrefixAppearOnlyOnce(args, PREFIX_MEDICAL_EXPENSES.toString()) || !didPrefixAppearOnlyOnce(args,
                 PREFIX_MISCELLANEOUS_EXPENSES.toString()) || !didPrefixAppearOnlyOnce(args,
-                        PREFIX_TRAVEL_EXPENSES.toString())) {
+                PREFIX_TRAVEL_EXPENSES.toString())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpensesCommand.MESSAGE_USAGE));
         }
 
@@ -77,6 +76,8 @@ public class AddExpensesCommandParser implements Parser<AddExpensesCommand> {
                 + Double.parseDouble((medicalExpenses).toString())
                 + Double.parseDouble((miscellaneousExpenses).toString());
         expensesAmount = ParserUtil.parseExpensesAmount(String.valueOf(formatter.format(sumOfExpenses)));
+
+
         Expenses expenses = new Expenses (employeeId, expensesAmount, travelExpenses, medicalExpenses,
                 miscellaneousExpenses);
 
@@ -85,20 +86,15 @@ public class AddExpensesCommandParser implements Parser<AddExpensesCommand> {
         editExpensesDescriptor.setTravelExpenses(travelExpenses);
         editExpensesDescriptor.setMedicalExpenses(medicalExpenses);
         editExpensesDescriptor.setMiscellaneousExpenses(miscellaneousExpenses);
-
         if (!editExpensesDescriptor.isAnyFieldEdited()) {
             throw new ParseException(AddExpensesCommand.MESSAGE_NOT_EDITED);
         }
         return new AddExpensesCommand(expenses, editExpensesDescriptor);
     }
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
 
+    /**
+     * Returns true if prefix has been repeated
+     */
     private boolean didPrefixAppearOnlyOnce(String argument, String prefix) {
         return argument.indexOf(prefix) == argument.lastIndexOf(prefix);
     }

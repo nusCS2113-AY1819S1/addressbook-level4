@@ -88,7 +88,7 @@ public class Expenses {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, expensesAmount);
+        return Objects.hash(expensesAmount, travelExpenses, medicalExpenses, miscellaneousExpenses);
     }
 
     @Override

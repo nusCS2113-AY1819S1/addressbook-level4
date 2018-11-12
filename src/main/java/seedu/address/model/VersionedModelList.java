@@ -10,6 +10,10 @@ import java.util.Set;
  */
 
 public class VersionedModelList {
+    public static final String MESSAGE_NO_REDOABLE_STATE_EXCEPTION =
+            "Current state pointer at start of storage list in all Storages, unable to redo.";
+    public static final String MESSAGE_NO_UNDOABLE_STATE_EXCEPTION =
+            "Current state pointer at start of storage list in all Storages, unable to undo.";
     private boolean hasUndo;
     private int currentStatePointer;
     private List<Set<ModelTypes>> modelTypesStateList;
@@ -78,7 +82,7 @@ public class VersionedModelList {
      */
     public Set<ModelTypes> getLastCommitType () {
         if (!canUndoStorage()) {
-            throw new NoRedoableStateException();
+            throw new NoUndoableStateException();
         }
         return modelTypesStateList.get(currentStatePointer - 1);
     }
@@ -110,12 +114,7 @@ public class VersionedModelList {
      */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
-            super("Current state pointer at start of storage list in all Storages, unable to undo.");
-            /*
-            super("Current state pointer at start of storage list in all Storages, unable to undo."
-                + " [pointer:" + versionedModelList.currentStatePointer + "] "
-                + " [list size:" + versionedModelList.myCommitModelTypes.size() + "]");
-            */
+            super(MESSAGE_NO_UNDOABLE_STATE_EXCEPTION);
         }
     }
 
@@ -124,12 +123,7 @@ public class VersionedModelList {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of storage list in all storages, unable to redo.");
-            /*
-            super("Current state pointer at end of storage list in all storages, unable to redo."
-                + " [pointer:" + versionedModelList.currentStatePointer + "] "
-                + " [list size:" + versionedModelList.myCommitModelTypes.size() + "]");
-            */
+            super(MESSAGE_NO_REDOABLE_STATE_EXCEPTION);
         }
     }
 }

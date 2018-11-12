@@ -8,6 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEEID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSES_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL_EXPENSES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MISCELLANEOUS_EXPENSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -16,6 +19,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TRAVEL_EXPENSES;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +34,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelTypes;
 import seedu.address.model.addressbook.AddressBook;
+import seedu.address.model.expenses.EmployeeIdExpensesContainsKeywordsPredicate;
+import seedu.address.model.expenses.Expenses;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.recruitment.PostContainsKeywordsPredicate;
@@ -39,6 +45,7 @@ import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ModAllSalaryDescriptorBuilder;
 import seedu.address.testutil.ModSalaryDescriptorBuilder;
+import seedu.address.testutil.expenses.EditExpensesDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -97,6 +104,49 @@ public class CommandTestUtil {
     public static final String INVALID_SCHEDULE_DATE_PAST_DESC = " " + PREFIX_SCHEDULE_DATE
             + "1/1/2000"; //cannot schedule for date in the past
 
+    //expenses test fields
+    public static final String VALID_EXPENSESAMOUNT_AMY = "1035";
+    public static final String VALID_EXPENSESAMOUNT_BOB = "1368";
+    public static final String VALID_EXPENSESAMOUNT_CARL = "1701";
+    public static final String VALID_EXPENSESAMOUNT_EMPTY = "0";
+    public static final String VALID_TRAVELEXPENSES_AMY = "234";
+    public static final String VALID_TRAVELEXPENSES_BOB = "345";
+    public static final String VALID_TRAVELEXPENSES_CARL = "456";
+    public static final String VALID_TRAVELEXPENSES_EMPTY = "0";
+    public static final String VALID_MEDICALEXPENSES_AMY = "345";
+    public static final String VALID_MEDICALEXPENSES_BOB = "456";
+    public static final String VALID_MEDICALEXPENSES_CARL = "567";
+    public static final String VALID_MEDICALEXPENSES_EMPTY = "0";
+    public static final String VALID_MISCELLANEOUSEXPENSES_AMY = "456";
+    public static final String VALID_MISCELLANEOUSEXPENSES_BOB = "567";
+    public static final String VALID_MISCELLANEOUSEXPENSES_CARL = "678";
+    public static final String VALID_MISCELLANEOUSEXPENSES_EMPTY = "0";
+
+    public static final String EXPENSESAMOUNT_DESC_AMY = " " + PREFIX_EXPENSES_AMOUNT + VALID_EXPENSESAMOUNT_AMY;
+    public static final String EXPENSESAMOUNT_DESC_BOB = " " + PREFIX_EXPENSES_AMOUNT + VALID_EXPENSESAMOUNT_BOB;
+    public static final String EXPENSESAMOUNT_DESC_EMPTY = " " + PREFIX_EXPENSES_AMOUNT + VALID_EXPENSESAMOUNT_EMPTY;
+    public static final String MEDICALEXPENSES_DESC_AMY = " " + PREFIX_MEDICAL_EXPENSES + VALID_MEDICALEXPENSES_AMY;
+    public static final String MEDICALEXPENSES_DESC_BOB = " " + PREFIX_MEDICAL_EXPENSES + VALID_MEDICALEXPENSES_BOB;
+    public static final String MEDICALEXPENSES_DESC_EMPTY = " " + PREFIX_MEDICAL_EXPENSES + VALID_MEDICALEXPENSES_EMPTY;
+    public static final String MISCELLANEOUSEXPENSES_DESC_AMY = " " + PREFIX_MISCELLANEOUS_EXPENSES
+            + VALID_MISCELLANEOUSEXPENSES_AMY;
+    public static final String MISCELLANEOUSEXPENSES_DESC_BOB = " " + PREFIX_MISCELLANEOUS_EXPENSES
+            + VALID_MISCELLANEOUSEXPENSES_BOB;
+    public static final String MISCELLANEOUSEXPENSES_DESC_EMPTY = " " + PREFIX_MISCELLANEOUS_EXPENSES
+            + VALID_MISCELLANEOUSEXPENSES_EMPTY;
+    public static final String TRAVELEXPENSES_DESC_AMY = " " + PREFIX_TRAVEL_EXPENSES + VALID_TRAVELEXPENSES_AMY;
+    public static final String TRAVELEXPENSES_DESC_BOB = " " + PREFIX_TRAVEL_EXPENSES + VALID_TRAVELEXPENSES_BOB;
+    public static final String TRAVELEXPENSES_DESC_EMPTY = " " + PREFIX_TRAVEL_EXPENSES + VALID_TRAVELEXPENSES_EMPTY;
+
+    public static final String INVALID_EXPENSESAMOUNT_DESC = " " + PREFIX_EXPENSES_AMOUNT + "123z.12";
+    // 'z' not allowed in expensesAmounnt
+    public static final String INVALID_TRAVELEXPENSES_DESC = " " + PREFIX_TRAVEL_EXPENSES + "123z.12";
+    // 'z' not allowed in travelExpenses
+    public static final String INVALID_MEDICALEXPENSES_DESC = " " + PREFIX_MEDICAL_EXPENSES + "123z.12";
+    // 'z' not allowed in medicalExpenses
+    public static final String INVALID_MISCELLANEOUSEXPENSES_DESC = " " + PREFIX_MISCELLANEOUS_EXPENSES + "123z.12";
+    // 'z' not allowed in miscellaneousExpenses
+
     public static final String EMPLOYEEID_DESC_AMY = " " + PREFIX_EMPLOYEEID + VALID_EMPLOYEEID_AMY;
     public static final String EMPLOYEEID_DESC_BOB = " " + PREFIX_EMPLOYEEID + VALID_EMPLOYEEID_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -142,11 +192,27 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
+    public static final AddExpensesCommand.EditExpensesDescriptor CLAIM_AMY;
+    public static final AddExpensesCommand.EditExpensesDescriptor CLAIM_BOB;
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final ModifyPayCommand.ModSalaryDescriptor PAY_AMY;
     public static final ModifyPayCommand.ModSalaryDescriptor PAY_BOB;
     public static final ModifyAllPayCommand.ModSalaryDescriptor PAY_ALL;
+
+    //recruitment test field
+    public static final String VALID_POST_RE3 = "Finance Manager";
+    public static final String VALID_WORK_EXP_RE3 = "8";
+    public static final String VALID_JOB_DESCRIPTION_RE3 = "To ensure the financial health for the organisation";
+
+    static {
+        CLAIM_AMY = new EditExpensesDescriptorBuilder().withExpensesAmount(VALID_EXPENSESAMOUNT_AMY)
+                .withTravelExpenses(VALID_TRAVELEXPENSES_AMY).withMedicalExpenses(VALID_MEDICALEXPENSES_AMY)
+                .withMiscellaneousExpenses(VALID_MISCELLANEOUSEXPENSES_AMY).build();
+        CLAIM_BOB = new EditExpensesDescriptorBuilder().withExpensesAmount(VALID_EXPENSESAMOUNT_BOB)
+                .withTravelExpenses(VALID_TRAVELEXPENSES_BOB).withMedicalExpenses(VALID_MEDICALEXPENSES_BOB)
+                .withMiscellaneousExpenses(VALID_MISCELLANEOUSEXPENSES_BOB).build();
+    }
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -277,5 +343,19 @@ public class CommandTestUtil {
                 Arrays.asList(recruitment.getPost().value)));
 
         assertEquals(1, model.getFilteredRecruitmentList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the recruitment post at the given {@code targetIndex} in the
+     * {@code model}'s recruitment list.
+     */
+    public static void showExpensesAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredExpensesList().size());
+
+        Expenses expenses = model.getFilteredExpensesList().get(targetIndex.getZeroBased());
+        model.updateFilteredExpensesList(new EmployeeIdExpensesContainsKeywordsPredicate(
+                Arrays.asList(expenses.getEmployeeId().value)));
+
+        assertEquals(1, model.getFilteredExpensesList().size());
     }
 }

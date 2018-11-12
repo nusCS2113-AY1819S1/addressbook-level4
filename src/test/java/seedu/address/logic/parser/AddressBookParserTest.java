@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_YEAR;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECRUITMENT;
 import static seedu.address.testutil.recruitment.RecruitmentBuilder.DEFAULT_JOB_DESCRIPTION;
 import static seedu.address.testutil.recruitment.RecruitmentBuilder.DEFAULT_POST;
 import static seedu.address.testutil.recruitment.RecruitmentBuilder.DEFAULT_WORK_EXP;
@@ -32,6 +33,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddExpensesCommand;
 import seedu.address.logic.commands.AddLeavesCommand;
 import seedu.address.logic.commands.AddRecruitmentPostCommand;
 import seedu.address.logic.commands.AddScheduleCommand;
@@ -48,12 +50,15 @@ import seedu.address.logic.commands.DeleteScheduleCommand;
 import seedu.address.logic.commands.DeleteWorksCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditRecruitmentPostCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ModifyAllPayCommand;
+import seedu.address.logic.commands.ModifyPayCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemoveExpensesCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -63,6 +68,7 @@ import seedu.address.logic.commands.SelectScheduleCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addressbook.DayHourGreeting;
+import seedu.address.model.expenses.Expenses;
 import seedu.address.model.person.DepartmentContainsKeywordsPredicate;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
@@ -72,8 +78,13 @@ import seedu.address.model.schedule.Date;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.Year;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.ModAllSalaryDescriptorBuilder;
+import seedu.address.testutil.ModSalaryDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.expenses.EditExpensesDescriptorBuilder;
+import seedu.address.testutil.expenses.ExpensesBuilder;
+import seedu.address.testutil.recruitment.EditPostDescriptorBuilder;
 import seedu.address.testutil.recruitment.RecruitmentBuilder;
 import seedu.address.testutil.schedule.ScheduleBuilder;
 
@@ -151,6 +162,30 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_modifyPay() throws Exception {
+        Person person = new PersonBuilder().build();
+        ModifyPayCommand.ModSalaryDescriptor descriptor = new ModSalaryDescriptorBuilder(person).build();
+        ModifyPayCommand command = (ModifyPayCommand) parser.parseCommand(ModifyPayCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getModSalaryDescriptorDetails(descriptor));
+        assertEquals(new ModifyPayCommand(INDEX_FIRST_PERSON, descriptor), command);
+        command = (ModifyPayCommand) parser.parseCommand(ModifyPayCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getModSalaryDescriptorDetails(descriptor));
+        assertEquals(new ModifyPayCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_modifyAllPay() throws Exception {
+        Person person = new PersonBuilder().build();
+        ModifyAllPayCommand.ModSalaryDescriptor descriptor = new ModAllSalaryDescriptorBuilder(person).build();
+        ModifyAllPayCommand command = (ModifyAllPayCommand) parser.parseCommand(ModifyAllPayCommand
+                .COMMAND_WORD + " " + PersonUtil.getModAllSalaryDescriptorDetails(descriptor));
+        assertEquals(new ModifyAllPayCommand(descriptor), command);
+        command = (ModifyAllPayCommand) parser.parseCommand(ModifyAllPayCommand
+                .COMMAND_ALIAS + " " + PersonUtil.getModAllSalaryDescriptorDetails(descriptor));
+        assertEquals(new ModifyAllPayCommand(descriptor), command);
     }
 
     @Test
@@ -236,6 +271,20 @@ public class AddressBookParserTest {
         command = (DeleteScheduleCommand) parser.parseCommand(
                 DeleteScheduleCommand.COMMAND_ALIAS + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteScheduleCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_addExpenses() throws Exception {
+        Expenses expenses = new ExpensesBuilder().build();
+        AddExpensesCommand.EditExpensesDescriptor descriptor = new EditExpensesDescriptorBuilder(expenses).build();
+        AddExpensesCommand command = (AddExpensesCommand) parser.parseCommand(AddExpensesCommand.COMMAND_WORD
+                + " " + PREFIX_EMPLOYEEID + DEFAULT_EMPLOYEEID + " "
+                + PersonUtil.getEditExpensesDescriptorDetails(descriptor));
+        assertEquals(new AddExpensesCommand(expenses, descriptor), command);
+        command = (AddExpensesCommand) parser.parseCommand(AddExpensesCommand.COMMAND_ALIAS
+                + " " + PREFIX_EMPLOYEEID + DEFAULT_EMPLOYEEID + " "
+                + PersonUtil.getEditExpensesDescriptorDetails(descriptor));
+        assertEquals(new AddExpensesCommand(expenses, descriptor), command);
     }
 
     @Test
@@ -344,6 +393,20 @@ public class AddressBookParserTest {
                         + " " + PREFIX_MINIMUM_EXPERIENCE + DEFAULT_WORK_EXP
                         + " " + PREFIX_JOB_DESCRIPTION + DEFAULT_JOB_DESCRIPTION);
         assertEquals(new AddRecruitmentPostCommand(recruitment), command);
+    }
+
+    @Test
+    public void parseCommand_editRecruitmentPost() throws Exception {
+        Recruitment recruitment = new RecruitmentBuilder().build();
+        EditRecruitmentPostCommand.EditPostDescriptor descriptor = new EditPostDescriptorBuilder(recruitment).build();
+        EditRecruitmentPostCommand command = (EditRecruitmentPostCommand) parser.parseCommand(
+                EditRecruitmentPostCommand.COMMAND_WORD + " " + INDEX_FIRST_RECRUITMENT.getOneBased() + " "
+                + PersonUtil.getEditPostDescriptorDetails(descriptor));
+        assertEquals(new EditRecruitmentPostCommand(INDEX_FIRST_PERSON, descriptor), command);
+        command = (EditRecruitmentPostCommand) parser.parseCommand(
+                EditRecruitmentPostCommand.COMMAND_ALIAS + " " + INDEX_FIRST_RECRUITMENT.getOneBased() + " "
+                        + PersonUtil.getEditPostDescriptorDetails(descriptor));
+        assertEquals(new EditRecruitmentPostCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

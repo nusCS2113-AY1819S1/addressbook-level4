@@ -13,9 +13,9 @@ import seedu.address.testutil.recruitment.RecruitmentBuilder;
  */
 public class TypicalRecruitments {
 
-    public static final String VALID_JOB_POSITION = "IT Manager";
-    public static final String VALID_MINIMUM_EXPERIENCE = "5";
-    public static final String VALID_JOB_DESCRIPTION = "To maintain IT related equipment in the company";
+    public static final String VALID_JOB_POSITION = "Network Engineer";
+    public static final String VALID_MINIMUM_EXPERIENCE = "3";
+    public static final String VALID_JOB_DESCRIPTION = "Ensure all networking devices are in working condition";
 
     public static final Recruitment RECRUITMENT_EXAMPLE = new RecruitmentBuilder().withPost("Network Engineer")
             .withWorkExp("3").withJobDescription("Ensure all networking devices are in working condition").build();
@@ -23,6 +23,9 @@ public class TypicalRecruitments {
                 .withWorkExp("5").withJobDescription("To perform audits and financial statement analysis").build();
     public static final Recruitment RECRUITMENT_EXAMPLE2 = new RecruitmentBuilder().withPost("Purchaser")
             .withWorkExp("2").withJobDescription("To handle company's purchase orders").build();
+    public static final Recruitment RECRUITMENT_EXAMPLE5 = new RecruitmentBuilder().withPost("Secretary")
+            .withWorkExp("4").withJobDescription(" to handle correspondence and manage routine "
+                    + "and detail work for a superior").build();
 
     //Manually added recruitment post examples
     public static final Recruitment RECRUITMENT_EXAMPLE3 = new RecruitmentBuilder().withPost("Finance Manager")

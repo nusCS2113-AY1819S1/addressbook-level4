@@ -102,7 +102,7 @@ public class VersionedExpensesList extends ExpensesList {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of addressBookState list, unable to redo.");
+            super("Current state pointer at end of expensesListState list, unable to redo.");
         }
     }
 }
