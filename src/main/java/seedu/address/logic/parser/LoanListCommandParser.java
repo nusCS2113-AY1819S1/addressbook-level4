@@ -13,6 +13,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.LoanerDescription;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
+
+//@@author ChewKinWhye
+
 /**
  * Parses input arguments and creates a new LoanListCommand object
  */

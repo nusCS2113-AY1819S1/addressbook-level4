@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
-/*
+
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalItems.getTypicalAccountList;
+import static seedu.address.testutil.TypicalAccounts.getTypicalAccountList;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
 
 import org.junit.Before;
@@ -12,6 +12,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.account.Username;
 import seedu.address.model.item.Item;
 import seedu.address.testutil.ItemBuilder;
 
@@ -21,14 +22,17 @@ import seedu.address.testutil.ItemBuilder;
 
 
 public class AddCommandIntegrationTest {
-/*
+
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
 
     @Before
-    public void setUp() {
+    public void setup() {
+        Username admin = new Username("admin");
         model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+        model.setLoggedInUser(admin);
     }
+
 
     @Test
     public void execute_newItem_success() {
@@ -48,5 +52,5 @@ public class AddCommandIntegrationTest {
         assertCommandFailure(new AddCommand(itemInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_ITEM);
     }
-*/
+
 }

@@ -31,10 +31,10 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        /*if (!model.getLoginStatus()) {
+        if (!model.getLoginStatus()) {
             throw new CommandException(MESSAGE_LOGIN);
         }
-*/
+
         model.updateFilteredItemList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_ITEMS_LISTED_OVERVIEW, model.getFilteredItemList().size()));

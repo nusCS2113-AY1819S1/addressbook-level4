@@ -1,17 +1,18 @@
 package seedu.address.logic.commands;
-/*
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
+import static seedu.address.testutil.TypicalAccounts.getTypicalAccountList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
-import static seedu.address.testutil.TypicalItems.getTypicalAccountList;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -22,6 +23,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.account.Username;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
@@ -29,13 +31,23 @@ import seedu.address.ui.testutil.EventsCollectorRule;
  */
 
 public class SelectCommandTest {
-    /*
+
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
-    private Model model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
-    private Model expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+    private Model model;
+    private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setup() {
+        Username admin = new Username("admin");
+        model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+        expectedModel = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+        model.setLoggedInUser(admin);
+        expectedModel.setLoggedInUser(admin);
+    }
+
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -99,7 +111,7 @@ public class SelectCommandTest {
      * Executes a {@code SelectCommand} with the given {@code index}, and checks that {@code JumpToListRequestEvent}
      * is raised with the correct index.
      */
-/*
+
     private void assertExecutionSuccess(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);
         String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_ITEM_SUCCESS, index.getOneBased());
@@ -114,11 +126,11 @@ public class SelectCommandTest {
      * Executes a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
      * is thrown with the {@code expectedMessage}.
      */
-/*
+
     private void assertExecutionFailure(Index index, String expectedMessage) {
         SelectCommand selectCommand = new SelectCommand(index);
         assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
         assertTrue(eventsCollectorRule.eventsCollector.isEmpty());
     }
-    */
+
 }

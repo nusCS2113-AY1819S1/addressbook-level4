@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-/*
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,11 +11,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB1;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
+import static seedu.address.testutil.TypicalAccounts.getTypicalAccountList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
-import static seedu.address.testutil.TypicalItems.getTypicalAccountList;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -26,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.StockList;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.account.Username;
 import seedu.address.model.item.Item;
 import seedu.address.testutil.EditItemDescriptorBuilder;
 import seedu.address.testutil.ItemBuilder;
@@ -35,9 +37,18 @@ import seedu.address.testutil.ItemBuilder;
  */
 
 public class EditCommandTest {
-/*
-    private Model model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+
+    private Model model;
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setup() {
+        Username admin = new Username("admin");
+        model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+        model.setLoggedInUser(admin);
+    }
+
+
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -48,7 +59,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new StockList(model.getStockList()), new UserPrefs(), model
-        .getAccountList());
+                .getAccountList());
         expectedModel.updateItem(model.getFilteredItemList().get(0), editedItem);
         expectedModel.commitStockList();
 
@@ -70,7 +81,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new StockList(model.getStockList()), new UserPrefs(), model
-        .getAccountList());
+                .getAccountList());
         expectedModel.updateItem(lastItem, editedItem);
         expectedModel.commitStockList();
 
@@ -85,7 +96,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new StockList(model.getStockList()), new UserPrefs(), model
-        .getAccountList());
+                .getAccountList());
         expectedModel.commitStockList();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -103,7 +114,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new StockList(model.getStockList()), new UserPrefs(), model
-        .getAccountList());
+                .getAccountList());
         expectedModel.updateItem(model.getFilteredItemList().get(0), editedItem);
         expectedModel.commitStockList();
 
@@ -144,7 +155,7 @@ public class EditCommandTest {
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
      */
-/*
+
     @Test
     public void execute_invalidItemIndexFilteredList_failure() {
         showItemAtIndex(model, INDEX_FIRST_ITEM);
@@ -165,7 +176,7 @@ public class EditCommandTest {
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
         Model expectedModel = new ModelManager(new StockList(model.getStockList()), new UserPrefs(), model
-        .getAccountList());
+                .getAccountList());
         expectedModel.updateItem(itemToEdit, editedItem);
         expectedModel.commitStockList();
 
@@ -202,14 +213,14 @@ public class EditCommandTest {
      * unfiltered list is different from the index at the filtered list.
      * 4. Redo the edit. This ensures {@code RedoCommand} edits the item object regardless of indexing.
      */
-/*
+
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameItemEdited() throws Exception {
         Item editedItem = new ItemBuilder().build();
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
         Model expectedModel = new ModelManager(new StockList(model.getStockList()), new UserPrefs(), model
-        .getAccountList());
+                .getAccountList());
 
         showItemAtIndex(model, INDEX_SECOND_ITEM);
         Item itemToEdit = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
@@ -253,6 +264,6 @@ public class EditCommandTest {
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_ITEM, DESC_RPLIDAR)));
     }
-*/
+
 }
 

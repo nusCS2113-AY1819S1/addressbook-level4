@@ -13,6 +13,8 @@ import seedu.address.model.Model;
 import seedu.address.storage.XmlAdaptedLoanList;
 import seedu.address.storage.XmlAdaptedLoanerDescription;
 
+//@@author ChewKinWhye
+
 /**
  * Lists all the entries in the loan list to the user.
  */
@@ -36,7 +38,7 @@ public class ViewLoanListCommand extends Command {
         return new CommandResult(messageOutput);
     }
 
-    private String getMessageOutput(File loanListFile) throws CommandException {
+    public String getMessageOutput(File loanListFile) throws CommandException {
         try {
             Integer counter = 1;
             String messageOutput = new String();

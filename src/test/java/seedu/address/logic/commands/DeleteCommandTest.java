@@ -1,4 +1,5 @@
 package seedu.address.logic.commands;
+
 /*
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -6,11 +7,12 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
+import static seedu.address.testutil.TypicalAccounts.getTypicalAccountList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
-import static seedu.address.testutil.TypicalItems.getTypicalAccountList;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -19,6 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.account.Username;
 import seedu.address.model.item.Item;
 
 /**
@@ -28,9 +31,17 @@ import seedu.address.model.item.Item;
 
 
 public class DeleteCommandTest {
-/*
-    private Model model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+
+    /*
+    private Model model;
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setup() {
+        Username admin = new Username("admin");
+        model = new ModelManager(getTypicalStockList(), new UserPrefs(), getTypicalAccountList());
+        model.setLoggedInUser(admin);
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -181,6 +192,6 @@ public class DeleteCommandTest {
 
         assertTrue(model.getFilteredItemList().isEmpty());
     }
-    */
+*/
 }
 

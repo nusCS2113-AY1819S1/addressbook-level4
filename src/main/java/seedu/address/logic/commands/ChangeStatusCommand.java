@@ -74,7 +74,7 @@ public class ChangeStatusCommand extends Command {
 
     }
 
-    private static Index getIndex(List<Item> lastShownList, ChangeStatusDescriptor changeStatusDescriptor)
+    public Index getIndex(List<Item> lastShownList, ChangeStatusDescriptor changeStatusDescriptor)
             throws CommandException {
         Index index;
         int counter = 0;
@@ -91,8 +91,8 @@ public class ChangeStatusCommand extends Command {
      * Creates and returns a {@code Item} with the details of {@code itemToUpdate}
      * edited with {@code changeStatusDescriptor}.
      */
-    private static Item createUpdatedItem(Item itemToUpdate,
-                                          ChangeStatusDescriptor changeStatusDescriptor) throws CommandException {
+    public Item createUpdatedItem(Item itemToUpdate,
+                                   ChangeStatusDescriptor changeStatusDescriptor) throws CommandException {
         assert itemToUpdate != null;
         Status currentStatus = itemToUpdate.getStatus();
         Status updatedStatus;
@@ -189,6 +189,23 @@ public class ChangeStatusCommand extends Command {
         }
         public String getUpdatedStatus() {
             return updatedStatus;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            if (!(other instanceof ChangeStatusDescriptor)) {
+                return false;
+            }
+
+            ChangeStatusDescriptor otherItem = (ChangeStatusDescriptor) other;
+            return (otherItem.getName().equals(this.getName())
+                    && otherItem.getQuantity().equals(this.getQuantity())
+                    && otherItem.getInitialStatus().equals(this.getInitialStatus())
+                    && otherItem.getUpdatedStatus().equals(this.getUpdatedStatus()));
         }
 
     }

@@ -77,6 +77,11 @@ public class EditAccountCommand extends Command {
 
         model.updateAccount(accountToEdit, editedAccount);
         model.updateFilteredAccountList(PREDICATE_SHOW_ALL_ACCOUNTS);
+
+        if (accountToEdit.getUsername().toString().equals(model.getLoggedInUser())) {
+            model.setLoggedInUser(editedAccount.getUsername());
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_ACCOUNT_SUCCESS, editedAccount));
 
     }

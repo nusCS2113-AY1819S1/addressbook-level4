@@ -33,11 +33,11 @@ This project is completed by team T12-3 of module CS2113T in National University
 
 * Added the ability to add tags to a specific item.
 ** What it does: Add some tags to a specific item and keep the existing tags as well.
-** Justification: Although the user can use the “edit” command to modify an item’s tags, it would be complicated to add tags while keeping the existing tags because the “edit” command was implemented for you to replace the existing tags with new ones.
+** Justification: Although the user can use the “edit” command to modify an item’s tags, it would be complicated to add tags while keeping the existing tags because the “edit” command was implemented for the user to replace the existing tags with new ones.
 
 * Added the ability to delete some of the tags of a specific item.
 ** What it does: Delete accidentally added tags or unwanted tags of an item.
-** Justification: The "edit" command does this in an different way. “deleteTag” command allows the user to delete tags by choosing which tags to remove, but “edit” command is doing so by choosing which tags to keep.
+** Justification: The "edit" command does this in a different way. “deleteTag” command allows the user to delete tags by choosing which tags to remove, but “edit” command is doing so by choosing which tags to keep.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=gaoqikai[Functional Code]]
 
@@ -50,7 +50,7 @@ This project is completed by team T12-3 of module CS2113T in National University
 
 ** Tools:
 
-*** Integrated new Github plugins (https://travis-ci.org/CS2113-AY1819S1-T12-3/main[Travis CI], https://ci.appveyor.com/project/gaoqikai/main[AppVeyor], and https://app.codacy.com/project/CS2113-AY1819S1-T12-3/main/dashboard[Codacy]) to the team repo.
+*** Integrated new Github plugins (https://travis-ci.org/CS2113-AY1819S1-T12-3/main[Travis CI], https://ci.appveyor.com/project/gaoqikai/main[AppVeyor], and https://app.codacy.com/project/CS2113-AY1819S1-T12-3/main/dashboard[Codacy]) to the team repo to monitor code qualities.
 *** Implemented auto-documenting and auto-publishing function to our project. https://cs2113-ay1819s1-t12-3.github.io/main/[Project Page].
 
 == Contributions to the User Guide
