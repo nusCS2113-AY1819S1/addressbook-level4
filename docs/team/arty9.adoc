@@ -57,6 +57,7 @@ This section highlights all of my contributions to the project and the applicati
 
 1. Updated application icon and application name to reflect accurately on our product
 2. Modified and polished console messages in the application to enhance user experience
+3. Wrote various test files to test different components of the application. This is to ensure the application is functional per component.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=arty9[RepoSense Dashboard]]
 
@@ -75,6 +76,7 @@ This section highlights all of my contributions to the project and the applicati
 *** Updated class diagrams for model, storage and UI components in the Developer Guide
 *** Updated various sequence diagrams in the Developer Guide
 *** Wrote the user stories and use cases for the to-do list under the Appendix section of the Developer Guide
+*** Wrote the manual testing instructions for the to-do list under the Appendix section of the Developer Guide
 
 ** Tools:
 *** Set up Travis CI for the team repository
