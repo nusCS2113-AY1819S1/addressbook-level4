@@ -303,7 +303,7 @@ Filters both the others list and the friends list to show only users with both g
 image::TagCommandDefaultFix.png[width="790"]
 +
 
-.  After executing `group CS2113T`, all the users with the group `CS2113T` will be filtered and shown on the respective panels.
+.  After executing `group CS2113T-W13-1`, all the users with the  group `CS2113T` will be filtered and shown on the respective panels.
 +
 .FreeTime after executing group command
 image::TagCommandExecutedPS.png[width="790"]
