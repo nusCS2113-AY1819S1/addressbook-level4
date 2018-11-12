@@ -12,6 +12,10 @@ import seedu.address.model.course.CourseCode;
 import seedu.address.model.course.CourseManager;
 import seedu.address.model.course.CourseName;
 import seedu.address.model.course.FacultyName;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleManager;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.MatricNo;
@@ -33,10 +37,13 @@ public class DebugCommand extends Command {
 
         StringBuilder sb = new StringBuilder();
 
+        ModuleManager moduleManager = ModuleManager.getInstance();
+
         StorageController.wipeAllProductionData();
         StorageController.createFiles();
         CourseManager.getInstance().clearAll();
         StudentManager.getInstance().initializeModel(model);
+        moduleManager.clearModules();
         model.resetData(new AddressBook());
         model.commitAddressBook();
 
@@ -72,6 +79,27 @@ public class DebugCommand extends Command {
                 new HashSet<>(), new CourseCode("EEE"), new MatricNo("A0196361C")));
         model.commitAddressBook();
 
+        moduleManager.addModule(new Module(new ModuleCode("CG1111"),
+                new ModuleName("Engineering Principles and Practices I")));
+        moduleManager.addModule(new Module(new ModuleCode("IS3150"),
+                new ModuleName("Digital Media Marketing")));
+        moduleManager.addModule(new Module(new ModuleCode("NM2213"),
+                new ModuleName("Introduction to Human-Computer Interaction Design")));
+        moduleManager.addModule(new Module(new ModuleCode("CS1010"),
+                new ModuleName("Programming Methodology")));
+        moduleManager.addModule(new Module(new ModuleCode("CS2040C"),
+                new ModuleName("Data Structures and Algorithms")));
+        moduleManager.addModule(new Module(new ModuleCode("CS2113"),
+                new ModuleName("Software Engineering & Object-Oriented Programming")));
+        moduleManager.addModule(new Module(new ModuleCode("MA1508E"),
+                new ModuleName("Linear Algebra for Engineering")));
+        moduleManager.addModule(new Module(new ModuleCode("GEQ1000"),
+                new ModuleName("Asking Questions")));
+        moduleManager.addModule(new Module(new ModuleCode("GER1000"),
+                new ModuleName("Quantitative Reasoning")));
+        moduleManager.addModule(new Module(new ModuleCode("MA1511"),
+                new ModuleName("Engineering Calculus")));
+        moduleManager.saveModuleList();
 
         return new CommandResult("DEBUG COMMAND EXECUTED. ",
                 HtmlTableProcessor.getH1Representation("Populated data set."));
