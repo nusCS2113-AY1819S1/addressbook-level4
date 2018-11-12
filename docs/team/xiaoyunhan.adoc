@@ -47,8 +47,7 @@ Given below are sections I contributed to the code.
 
 * *Minor enhancement #2*: add test cases to increase coverage.
 
-* *Code contributed*:
-https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[codes]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=XiaoYunhan[RepoSense Dashboard]]
 
 * *Other contributions*:
 
@@ -57,10 +56,12 @@ https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayN
 *** Add implementation of deadline notification in the Developer Guide
 *** Update deadline notification and calendar in the User Guide.
 *** Update Q&A in the user guide
+*** Update use cases in the user guide
 
 ** Community:
-*** PRs reviewed: https://github.com[#20], https://github.com[#24], https://github.com[#47], https://github.com[#48], https://github.com[#74], https://github.com[#78], https://github.com[#82], https://github.com[#122]
+*** PRs reviewed: [https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3AXiaoYunhan[PRs]]
 *** Participating in group discussion on WhatsApp
+*** Helped debug and provide suggestion for other group: [https://github.com/CS2113-AY1819S1-W12-4/main/issues?q=mentions%3AXiaoYunhan+is%3Aclosed[Bug report & suggestions]]
 
 
 == Contributions to the User Guide
@@ -88,9 +89,5 @@ include::../DeveloperGuide.adoc[tag=sorttask]
 
 include::../DeveloperGuide.adoc[tag=deadlinenotification]
 
+include::../DeveloperGuide.adoc[tag=otherTaskUseCases]
 
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
