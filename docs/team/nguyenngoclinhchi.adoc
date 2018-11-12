@@ -24,7 +24,6 @@ Milestones were set every fortnight. Each member was expected to contribute to t
 *_Major enhancements_* : Morphed the AddressBook4 to Savee.
 
 ** `Reason for enhancement`: To enable Savee to keep track of the daily financial activities of the user..
-** `Overview`: Significant effort was required to morph this application.
 ** `Highlights`: A long time was required to read through all 10 kLoc to understand and modify the code.
 ** `My contributions`: I re-factored functions together with variables across classes to make the components compatible and consistent for the application. I also re-structured the code.
 
@@ -32,14 +31,12 @@ Milestones were set every fortnight. Each member was expected to contribute to t
 *_Major enhancements_* : Added the feature that allows the user delete all the record whose date is same as date entered.
 
 ** `Reason for enhancement`:The application is designed for daily expense/income management. In case the user types in a wrong date at the beginning. This feature allows user to delete multiple records at the same time, compared to the original delete one record at the time.
-** `Overview`: I developed this enhancement with the hope to increase the user-friendliness of the application by decreasing the time spent on delete feature.
 ** `Highlights`: This major enhancement was simple to code but unexpectedly difficult to debug as it requires a in-depth knowledge for the Internal List structure building up the list of records, and pointer when looping through the list and deleting records.
 ** `My contributions`: I wrote the code for the command, parser, and tests, and modify other classes and codes to adjust when a new command is added.
 
 *_Major enhancements_* : Added the feature that allows the user archive the record data from Savee to the Excel file.
 
 ** `Reason for enhancement`: The feature lessens the memory burden of the computer by enabling users to store large amounts of data out of the computer. Users will also be able to share record data with their friends and family members.
-** `Overview`: The feature allows users to archive the data in excel file, this Excel file can be saved in other locations (e.g., external computer drive, google drive, one drive)
 ** `Highlights`: This major enhancement requires significant effort and time, as initially, the library is not included in Java 10 library, I have to read the documentation as well as learn how to utilize the library in the short time. Therefore, it is reasonable to consider this feature as *advanced* feature. Effort was also spent on designing a user-friendly Excel file.
 ** `My contributions`: This feature can take in *6 different input modes*. This complexity also opens many different routes of errors and much time was spent on testing and debugging.
 ** `Credits`: Apache Poi Library and its inner class were used and modified to fit into the feature.
@@ -48,7 +45,6 @@ Milestones were set every fortnight. Each member was expected to contribute to t
 *_Major enhancements_* : Added the feature that allows the user import the record data from the Excel file to the Savee.
 
 ** `Reason for enhancement`: To enable users to import data back into Savee. There will be unlimited number of sheets that can be imported.
-** `Overview`: The feature allows user to import the record data from the Excel file.
 ** `Highlights`: Similar to the archive feature, a significant effort and time was spent to read and utilize the required documentation. The existence of the directory path of the Excel file was also examined.
 ** `My contributions`: This feature takes in *2 different input modes*. I have set up the pre-conditions for the Excel file to be successfully imported [refer to the *User guide*].
 ** `Credits`: Apache Poi Library and its inner class were used and modified to fit into the feature.
@@ -57,7 +53,6 @@ Milestones were set every fortnight. Each member was expected to contribute to t
 *_Major enhancements_* : Added the feature that allows the user export the record data from Savee to the Excel file.
 
 ** `Reason for enhancement`: Users will also be able to share record data with their friends and family members through Excel file.
-** `Overview`: This feature allows user export data into Excel file.
 ** `Highlights`: Similar to the archive feature, a significant effort and time was spent to read and utilize the required documentation. Effort was also spent on designing a user-friendly Excel file.
 ** `My contributions`: This feature takes in *6 different input modes*. This complexity also opens many different routes of errors and much time was spent on testing and debugging.
 ** `Credits`: Apache Poi Library and its inner class were used and modified to fit into the feature.
@@ -65,12 +60,12 @@ Milestones were set every fortnight. Each member was expected to contribute to t
 *_Minor enhancement_* : Added the feature that automatically draw a line chart in the Excel file.
 
 ** `Reason for enhancement`: A line chart into Excel file will be drawn next to the summary data after executing the `exportexcel` or `archive` command. This line chart will offer the user a visual display of income, outcome and net financial status based on date.
-** `Overview`: This feature will draw a line chart about the summary of Income, Outcome, and Net based on Date.
 ** `Highlights`: : This major enhancement requires significant effort and time, as initially, the library is not included in Java 10 library, I have to read the documentation as well as learn how to utilize the library in the short time. Therefore, it is reasonable to consider this feature as *advanced* feature.
 ** `My contributions`: This feature does not take in any input, as it will be automatically drawn after the Excel file is created, meaning that user enter the `exportexcel` command or `archive` command.
 ** `Credits`: Apache Poi Library and its inner class were used and modified to fit into the feature.
 
 *_Code contributed_* :
+
 https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=nguyenngoclinhchi
 
 === Non-enhancement related contributions:

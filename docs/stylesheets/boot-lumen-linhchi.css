@@ -55,16 +55,16 @@ h2 {
   font-size: 23px;
 }
 h3 {
-  font-size: 18px;
+  font-size: 20px;
 }
 h4 {
-  font-size: 13px;
+  font-size: 18px;
 }
 h5 {
-  font-size: 11px;
+  font-size: 15px;
 }
 h6 {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 /* plain paragraph text */
@@ -243,7 +243,7 @@ samp {
   font-size: 1em;
 }
 code {
-  padding: 1px 1px;
+  padding: 2px 2px;
   font-size: 90%;
   color: #ffffff;
   background-color: #006666;
