@@ -96,3 +96,5 @@ include::../DeveloperGuide.adoc[tag=expenditureViewing]
 
 include::../DeveloperGuide.adoc[tag=getAdvice]
 
+include::../DeveloperGuide.adoc[tag=popup]
+
