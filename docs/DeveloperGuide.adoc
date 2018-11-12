@@ -994,10 +994,30 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
-=== Saving data
+=== Exporting and importing data
 
-. Dealing with missing/corrupted data files
+. Exporting an empty list
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Prerequisites: Clear all persons using the `clear` command.
+.. Test case: `export somefile` +
+   Expected: Error message "Invalid command format!"
+.. Test case: `export somefile.xml` +
+   Expected: Error message "There is nothing to export!"
+
+. Importing a non-existent file
+
+.. Prerequisites: The file `somefile.xml` does not exist at `<DIRECTORY OF YOUR JAR>/data/`
+.. Test case: `import somefile` +
+   Expected: Error message "Invalid command format!"
+.. Test case: `import somefile.xml` +
+   Expected: Error message "File not found!"
+
+. Exporting and importing the whole JitHub
+
+.. Prerequisites: List all persons using the `list` command.
+.. Test case: `export somefile.xml` + `clear` + `import somefile.xml` +
+   Expected:
+   * The persons listed are cleared after the `clear` command.
+   * The persons cleared are restored after the `import` command.
 
 _{ more test cases ... }_
