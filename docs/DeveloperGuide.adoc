@@ -979,6 +979,7 @@ _{More to be added}_
 +
 Use case ends.
 
+// tag::distributorusecases[]
 [discrete]
 === Use case: Add distributor
 
@@ -1054,6 +1055,7 @@ Use case ends.
 4.  Inventarie PRO deletes the product
 +
 Use case ends.
+// end::distributorusecases[]
 
 *Extensions*
 

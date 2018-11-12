@@ -3,45 +3,42 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: Inventarie Pro
 
 ---
 
 == Overview
 
-AddressBook - Level 4 is a desktop productInfo book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Inventarie Pro is for self employed business owners who prefer to use a desktop app for managing inventory. More importantly, Inventarie Pro is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Inventarie Pro can get your inventory management tasks done faster, simpler and easier than traditional GUI apps.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: added *the ability to login as users*
+** What it does: Inventarie Pro now supports multiple users on a single system by seperating user accounts and application data.
+** Justification: This feature allows multiple employees to use a single system without the fear of intrusion on each other. It also prevents any unauthorized access which maintains a measure of integrity and confidentiality.
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. Model and Storage components were heavily modified to support a User Database.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*:
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=amirulmaricar&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Code Dashboard]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed releases `v1.1` - `v1.3.2` (6 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Wrote additional tests for existing features to increase converage from 21% to 25% (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main/pull/111[#111])
+*** Wrote additional tests for existing features to increase coverage from 30% to 42% (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main/pull/179[#179], https://github.com/CS2113-AY1819S1-T13-3/main/pull/186[#186])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T13-3/main/pull/186[#186]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T13-3/main/pull/56[#56], https://github.com/CS2113-AY1819S1-T13-3/main/pull/151[#156]
+*** Resolved issues found in PE1: https://github.com/CS2113-AY1819S1-T13-3/main/issues/142[#142]
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Integrated a continuous integration service (Travis CI) to the team repo (https://github.com[#42])
+*** Integrated a continuous integration service (AppVeyor) to the team repo (https://github.com[#42])
+*** Integrated a coverage reporting service (Coveralls) to the team repo
+*** Integrated an automated code quality tool (Codacy) to the team repo
 
 == Contributions to the User Guide
 
@@ -50,7 +47,7 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=authentication]
 
 include::../UserGuide.adoc[tag=dataencryption]
 
@@ -60,13 +57,6 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=authentication]
 
 include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
