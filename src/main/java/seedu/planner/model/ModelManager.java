@@ -306,7 +306,7 @@ public class ModelManager extends ComponentManager implements Model {
      * This function is to generate the normal limits' information output for the third part.
      */
     private String normalLimitCheck (boolean isAutoCheck) {
-        String output = "Normal limits:";
+        String output = "";
         int count = 1;
         if (isAutoCheck) {
             for (Limit i: limits) {
@@ -324,6 +324,9 @@ public class ModelManager extends ComponentManager implements Model {
                             + generateLimitOutput(isExceededLimit(i), getTotalSpend(i), i);
                 }
             }
+        }
+        if (output != "") {
+            output = "Normal limit:\n" + output;
         }
         return output;
     }

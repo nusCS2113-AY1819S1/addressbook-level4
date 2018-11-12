@@ -37,31 +37,31 @@ public class EditLimitCommand extends Command {
     public static final String MESSAGE_SAME_LIMIT = "The edited limit has the same moneyFlow as the original limit.\n";
     private Limit originalLimit;
     private String output;
-    private Limit limit;
+    private Limit newLimit;
 
     public EditLimitCommand (Limit limitIn) {
         requireNonNull(limitIn);
-        limit = limitIn;
+        newLimit = limitIn;
     }
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
-        if (!model.hasSameDateLimit(limit)) {
+        if (!model.hasSameDateLimit(newLimit)) {
             throw new CommandException(Messages.MESSAGE_LIMITS_DO_NOT_EXIST);
         }
-        originalLimit = model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd());
+        originalLimit = model.getSameDatesLimit(newLimit.getDateStart(), newLimit.getDateEnd());
 
-        if (originalLimit.getLimitMoneyFlow().equals(limit.getLimitMoneyFlow())) {
+        if (originalLimit.getLimitMoneyFlow().equals(newLimit.getLimitMoneyFlow())) {
             throw new CommandException(MESSAGE_SAME_LIMIT);
         }
-        model.updateLimit(originalLimit, limit);
+        model.updateLimit(originalLimit, newLimit);
 
         output = MESSAGE_SUCCESS + "Original Limit:\n"
                 + model.generateLimitOutput(model.isExceededLimit(originalLimit),
                 model.getTotalSpend(originalLimit), originalLimit)
                 + "Modified Limit: \n"
-                + model.generateLimitOutput(model.isExceededLimit(limit),
-                model.getTotalSpend(limit), limit);
+                + model.generateLimitOutput(model.isExceededLimit(newLimit),
+                model.getTotalSpend(newLimit), newLimit);
         model.commitFinancialPlanner();
         return new CommandResult(output);
     }
@@ -70,7 +70,7 @@ public class EditLimitCommand extends Command {
     public boolean equals (Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditLimitCommand // instanceof handles nulls
-                && limit.equals(((EditLimitCommand) other).limit));
+                && newLimit.equals(((EditLimitCommand) other).newLimit));
     }
 
 }
