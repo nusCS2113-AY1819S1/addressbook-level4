@@ -59,12 +59,5 @@ include::../DeveloperGuide.adoc[tag=addinfo]
 
 include::../DeveloperGuide.adoc[tag=dataencryption]
 
-=== Use Case for addinfo
-Access the use case for `addinfo` https://cs2113-ay1819s1-t12-2.github.io/main/DeveloperGuide.html#use-case-adding-additional-information-of-patient-code-addinfo-code[here]
-
-
-=== Use Case for `encrypt`
-Access the use case for `encrypt` https://cs2113-ay1819s1-t12-2.github.io/main/DeveloperGuide.html#use-case-data-encryption-code-encrypt-code[here]
-
 
 
