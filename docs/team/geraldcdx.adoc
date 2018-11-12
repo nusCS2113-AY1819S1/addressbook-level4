@@ -109,7 +109,7 @@ This enhancement is tedious as it requires a new field to display the comments i
 *** Offered help to team members
 ** Enhancements to existing features:
 *** Added code to `EditCommand` to take in another parameter for comments
-*** Adding test cases to improve coverage
+*** Adding test cases to improve coverage by 6.06% [https://github.com/CS2113-AY1819S1-T12-1/main/pull/154[Pull Request #154]][https://github.com/CS2113-AY1819S1-T12-1/main/pull/156[Pull Request #156]][https://github.com/CS2113-AY1819S1-T12-1/main/pull/157[Pull Request #157]]
 ** Documentation:
 *** Ported User Guide from team's Google docs to the repository's User Guide and making tweaks to the User guide.
 *** Ported a huge section of Developer Guide from team's Google docs to the repository's Developer guide.
