@@ -19,16 +19,16 @@ In this project, my main contribution is in the Search Pruning feature and the m
 ease the process of managing a large list of contacts.
 Further details about my contributions will be explained in this section.
 
-* *Major enhancement*: Added the ability to prune the list of contacts by keeping a record of Search History.
+* *Major enhancement*: Search Pruning feature with `find` and `undofind` commands.
 
 ** What it does: Each subsequent execution of `find` commands allows users to search according to the
  current displayed list of contacts. `undofind` command does the opposite and reverts the last `find`
  command executed.
 
 ** Why we need this feature: NUSSU exco is an organization that will most likely be required to keep track of
-a large database of important contacts. Therefore it will be time-consuming and tedious to locate specific contacts information
-from the database. Hence, a search pruning feature allows the users to narrow down the search space in discrete steps and help any users
-retrieve the relevant contact information much more efficiently.
+a large database of important contacts. Therefore it will be time-consuming and tedious to locate specific contact information
+from the database. A search pruning feature will resolve this problem by allowing the users to narrow down the search space
+in discrete steps so that they could retrieve the information they want in smaller and readable chunks.
 
 ** Highlights: This enhancement is mainly created from scratch with some help from documentations on how the `Predicate` class works.
 This enhancement was also created with re-usability in mind and any form of filtering done with `Predicate` will be able to
