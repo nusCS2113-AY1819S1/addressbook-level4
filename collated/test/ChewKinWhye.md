@@ -61,7 +61,7 @@ public class ChangeStatusCommandTest {
 
 }
 ```
-###### \java\seedu\address\logic\commands\LoanListCommandsTest.java
+\java\seedu\address\logic\commands\LoanListCommandsTest.java
 ``` java
 
 public class LoanListCommandsTest {
@@ -121,7 +121,7 @@ public class LoanListCommandsTest {
     }*/
 }
 ```
-###### \java\seedu\address\logic\commands\StatusCommandTest.java
+\java\seedu\address\logic\commands\StatusCommandTest.java
 ``` java
 
 public class StatusCommandTest {
@@ -165,7 +165,7 @@ public class StatusCommandTest {
     }
 }
 ```
-###### \java\seedu\address\testutil\StatusFeatureTestObjects.java
+\java\seedu\address\testutil\StatusFeatureTestObjects.java
 ``` java
 
 /**
