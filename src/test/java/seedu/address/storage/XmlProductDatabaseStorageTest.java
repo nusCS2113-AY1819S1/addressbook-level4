@@ -37,7 +37,8 @@ public class XmlProductDatabaseStorageTest {
     }
 
     private java.util.Optional<ReadOnlyProductDatabase> readProductDatabase(String filePath) throws Exception {
-        return new XmlProductDatabaseStorage(Paths.get(filePath)).readProductDatabaseBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlProductDatabaseStorage(Paths.get(filePath))
+                .readProductDatabaseBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {

@@ -12,8 +12,11 @@ import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.product.*;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.ProductInfo;
 import seedu.address.model.product.ProductsDistributorName;
+import seedu.address.model.product.RemainingItems;
+import seedu.address.model.product.SerialNumber;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedProductTest {
@@ -86,7 +89,8 @@ public class XmlAdaptedProductTest {
     public void toModelType_nullDistributorName_throwsIllegalValueException() {
         XmlAdaptedProduct product = new XmlAdaptedProduct(VALID_NAME, VALID_SERIAL_NUMBER, null,
                 VALID_PRODUCT_INFO, VALID_TAGS, VALID_REMAINING_ITEMS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ProductsDistributorName.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                ProductsDistributorName.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, product::toModelType);
     }
 
