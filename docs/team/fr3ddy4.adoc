@@ -15,7 +15,7 @@ This project portfolio documents my contributions to the development of the CS21
 
 * *Major enhancement*: added *the ability to find events using keywords events* via the `findEvent` command
 ** What it does: allows the user to search for an event using some keywords.
-** Justification: This feature is important as it allows users to access the reuqired events quickly if they know its name or some parts of description.
+** Justification: This feature is important as it allows users to access the required events quickly if they know its name or some parts of description.
 
 
 * *Minor enhancement*:
@@ -24,10 +24,6 @@ This project portfolio documents my contributions to the development of the CS21
 ** Created the event sorting function
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=fr3ddy4[Functional code]]
-
-** Tools:
-*** Integrated GitHub Plugins (Coveralls, Travis CI, AppVeyor)
-*** Automated team documentation build on GitHub pages
 
 
 == Contributions to the User Guide
