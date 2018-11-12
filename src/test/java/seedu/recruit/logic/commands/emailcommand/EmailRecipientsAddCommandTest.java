@@ -33,7 +33,7 @@ import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.CompanyBuilder;
 import seedu.recruit.testutil.JobOfferBuilder;
 
-@Ignore
+@Ignore("Can't test without MainWindow.getCurrentBook")
 public class EmailRecipientsAddCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
