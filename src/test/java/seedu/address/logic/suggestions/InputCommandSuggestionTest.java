@@ -69,8 +69,10 @@ public class InputCommandSuggestionTest {
 
         suggestedCommands = new ArrayList<>();
         suggestedCommands.add(EditCommand.COMMAND_WORD);
+        suggestedCommands.add(ExportCommand.COMMAND_WORD);
         suggestedCommands.add(ExportAllCommand.COMMAND_WORD);
         suggestedCommands.add(ExitCommand.COMMAND_WORD);
+
         assertEquals(ics.getSuggestedCommands("e"), suggestedCommands);
         assertNotEquals(ics.getSuggestedCommands("ex"), suggestedCommands);
     }
