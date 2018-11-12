@@ -62,8 +62,7 @@ public class ClearApptsCommand extends Command {
 
         if (!hasApptsToBeCleared) {
             throw new CommandException(MESSAGE_NO_OLD_APPTS);
-        }
-        else {
+        } else {
             for (Person personToEdit : addressBook.getPersonList()) {
                 Set<Appt> apptsCopy = new TreeSet<>(new ApptComparator());
                 Set<Appt> oldAppts = personToEdit.getAppts();
