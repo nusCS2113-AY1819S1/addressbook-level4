@@ -199,6 +199,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 image::DeleteProductSdForLogic.png[width="800"]
 
 [[Design-Model]]
+// tag::modelcomponent[]
 === Model component
 
 .Structure of the Model Component
@@ -228,8 +229,9 @@ As a more OOP model, we can store a `Tag` list in both `Product Database` and `D
 can reference. This would allow `Product Database` and `Distributor Book` to only require one `Tag` object per unique `Tag`, instead of each `Product`/`Distributor` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
-
+// end::modelcomponent[]
 [[Design-Storage]]
+// tag::storagecomponent[]
 === Storage component
 
 .Structure of the Storage Component
@@ -244,6 +246,7 @@ The `Storage` component,
 * can save the User Database data in xml format and read it back.
 * can save the Product Database data in xml format and read it back.
 
+// end::storagecomponent[]
 [[Design-Commons]]
 === Common classes
 
@@ -294,8 +297,12 @@ When the user is deleted, the following storage files stored in the system manag
 ===== Aspect: Implementation of Users Database
 *   **Alternative 1 (current choice):** All users stored collectively in one XML file.
     (users.xml)
+    ** Pros: Inexpensive and adapts well to existing codebase
+    ** Cons: Maintenance
 
 *   **Alternative 2:** SQL/NoSQL Databases.
+    ** Pros: Powerful and stable
+    ** Cons: Complexity
 
 // end::authentication[]
 // tag::undoredo[]
@@ -442,8 +449,13 @@ Additionally, it implements the following operations:
 ===== Aspect: How encryption and decryption executes
 
 *   *Alternative 1 (proposed choice):* Intercept `XMLUtil` when reading and saving XML Storage files.
-*   **Aleternative 2:** Individual encrypt and decrypt command.
-
+        ** Pros:    Best practice
+        ** Cons:    Require remodeling of application
+*   **Alternative 2:** Individual encrypt and decrypt command.
+*   **Alternative 3:** Create temporary file to contain decrypted data
+        ** Pros:    This will work with current architecture style.
+        ** Cons:    Bad information security practice as there is a momentary
+                    vulnerability.
 // end::dataencryption[]
 
 // tag::threadreminders[]
