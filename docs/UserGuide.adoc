@@ -71,7 +71,6 @@ Format: `login USERID PASSWORD ROLE`
 * The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during login
 * There must not be any additional unnecessary parameters in user input during the login process
 * There must not be any spaces in USERID, PASSWORD and ROLE
-* Order of parameters, USERID, PASSWORD and ROLE matters
 ****
 
 Examples:
@@ -119,7 +118,6 @@ Format: `createaccount USERID PASSWORD ROLE`
 * USERID, PASSWORD and ROLE must be present in user input during the account creation process
 * There must not be any unnecessary parameters in user input during the account creation process
 * There must not be any spaces in USERID, PASSWORD and ROLE
-* Order of parameters, USERID, PASSWORD and ROLE matters
 ****
 
 Examples:
