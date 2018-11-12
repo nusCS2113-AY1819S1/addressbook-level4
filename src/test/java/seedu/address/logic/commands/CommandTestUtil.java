@@ -3,10 +3,16 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGENDA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
@@ -45,6 +51,58 @@ public class CommandTestUtil {
     public static final String VALID_TITLE_TASK1 = "To eat or not to eat";
     public static final String VALID_TITLE_TASK2 = "To do or not to do";
 
+    //@@author junweiljw
+    public static final String VALID_REMINDER1_TITLE = "CS2113T Milestone 1 Meeting";
+    public static final String VALID_REMINDER1_DATE = "08022018";
+    public static final String VALID_REMINDER1_TIME = "2359";
+    public static final String VALID_REMINDER1_AGENDA = "To decide on what features to assign to members";
+    public static final String VALID_REMINDER2_TITLE = "CS2101 OP2 Meeting";
+    public static final String VALID_REMINDER2_DATE = "05122018";
+    public static final String VALID_REMINDER2_TIME = "2300";
+    public static final String VALID_REMINDER2_AGENDA = "To decide on what features to assign to members";
+
+    //@@author driedmelon
+    public static final String VALID_DATE_EVENT1 = "09092018";
+    public static final String VALID_DATE_EVENT2 = "01012018";
+    public static final String VALID_START_TIME_EVENT1 = "1230";
+    public static final String VALID_START_TIME_EVENT2 = "0900";
+    public static final String VALID_END_TIME_EVENT1 = "1400";
+    public static final String VALID_END_TIME_EVENT2 = "1100";
+    public static final String VALID_EVENT_NAME_EVENT1 = "CS1231 Exam";
+    public static final String VALID_EVENT_NAME_EVENT2 = "Meeting for work";
+
+    //@@author driedmelon
+    public static final String DATE_DESC_EVENT1 = " " + PREFIX_DATE + VALID_DATE_EVENT1;
+    public static final String DATE_DESC_EVENT2 = " " + PREFIX_DATE + VALID_DATE_EVENT2;
+    public static final String START_TIME_DESC_EVENT1 = " " + PREFIX_START_TIME + VALID_START_TIME_EVENT1;
+    public static final String START_TIME_DESC_EVENT2 = " " + PREFIX_START_TIME + VALID_START_TIME_EVENT2;
+    public static final String END_TIME_DESC_EVENT1 = " " + PREFIX_END_TIME + VALID_END_TIME_EVENT1;
+    public static final String END_TIME_DESC_EVENT2 = " " + PREFIX_END_TIME + VALID_END_TIME_EVENT2;
+    public static final String EVENT_NAME_DESC_EVENT1 = " " + PREFIX_EVENT_NAME + VALID_EVENT_NAME_EVENT1;
+    public static final String EVENT_NAME_DESC_EVENT2 = " " + PREFIX_EVENT_NAME + VALID_EVENT_NAME_EVENT2;
+
+    //@@author driedmelon
+    public static final String VALID_DATE_MATCH1 = "09092018";
+    public static final String VALID_START_TIME_MATCH1 = "1000";
+    public static final String VALID_END_TIME_MATCH1 = "1600";
+    public static final String VALID_MATCH_INDEX1 = "1";
+    public static final String VALID_MATCH_INDEX2 = "2";
+
+    //@@author driedmelon
+    public static final String DATE_DESC_MATCH1 = " " + PREFIX_DATE + VALID_DATE_MATCH1;
+    public static final String START_TIME_DESC_MATCH1 = " " + PREFIX_START_TIME + VALID_START_TIME_MATCH1;
+    public static final String END_TIME_DESC_MATCH1 = " " + PREFIX_END_TIME + VALID_END_TIME_MATCH1;
+    public static final String INDEX_DESC_MATCH1 = " " + PREFIX_INDEX + VALID_MATCH_INDEX1;
+    public static final String INDEX_DESC_MATCH2 = " " + PREFIX_INDEX + VALID_MATCH_INDEX2;
+
+    //@@author driedmelon
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "50502018";
+    public static final String INVALID_START_TIME_DESC = " " + PREFIX_START_TIME + "1280";
+    public static final String INVALID_LATE_START_TIME_DESC = " " + PREFIX_START_TIME + "1200";
+    public static final String INVALID_END_TIME_DESC = " " + PREFIX_END_TIME + "2520";
+    public static final String INVALID_EARLY_END_TIME_DESC = " " + PREFIX_END_TIME + "0100";
+    public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_EVENT_NAME + "BOB@!#@";
+
     //@@author
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -63,6 +121,16 @@ public class CommandTestUtil {
     public static final String TITLE_DESC_TASK1 = " " + PREFIX_TITLE + VALID_TITLE_TASK1;
     public static final String TITLE_DESC_TASK2 = " " + PREFIX_TITLE + VALID_TITLE_TASK2;
 
+    //@@author junweiljw
+    public static final String TITLE_DESC_REMINDER1 = " " + PREFIX_TITLE + VALID_REMINDER1_TITLE;
+    public static final String DATE_DESC_REMINDER1 = " " + PREFIX_DATE + VALID_REMINDER1_DATE;
+    public static final String TIME_DESC_REMINDER1 = " " + PREFIX_START_TIME + VALID_REMINDER1_TIME;
+    public static final String AGENDA_DESC_REMINDER1 = " " + PREFIX_AGENDA + VALID_REMINDER1_AGENDA;
+    public static final String TITLE_DESC_REMINDER2 = " " + PREFIX_TITLE + VALID_REMINDER2_TITLE;
+    public static final String DATE_DESC_REMINDER2 = " " + PREFIX_DATE + VALID_REMINDER2_DATE;
+    public static final String TIME_DESC_REMINDER2 = " " + PREFIX_START_TIME + VALID_REMINDER2_TIME;
+    public static final String AGENDA_DESC_REMINDER2 = " " + PREFIX_AGENDA + VALID_REMINDER2_AGENDA;
+
     //@@author
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -73,6 +141,10 @@ public class CommandTestUtil {
     //@@author linnnruoo
     public static final String INVALID_CONTENT_DESC = " " + PREFIX_CONTENT; // empty string not allowed for content
     public static final String INVALID_TITLE_DESC = " " + PREFIX_TITLE; // empty string not allowed for titles
+
+    //@@author junweiljw
+    public static final String INVALID_TIME_DESC = " " + PREFIX_START_TIME + "2359a"; // 'a' not allowed in times
+    public static final String INVALID_AGENDA_DESC = " " + PREFIX_AGENDA; // empty string not allowed for agenda
 
     //@@author
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

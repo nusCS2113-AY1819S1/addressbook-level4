@@ -170,6 +170,11 @@ Selects the 2nd person in the address book.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
+Upon selecting a person, the calendar of the current month will be displayed, instead of the
+welcome message.
+For additional calendar features, please view `calendar to view schedule`.
+//todo link the link to calendar view schedule below
+
 === Listing entered commands : `history` / `hs`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -398,6 +403,30 @@ Examples:
 * `todo tt/Write tests c/Need to write test for this command`
 * `todo tt/Buy grocery c/Buy tomato and potato on the way back home`
 
+The following diagram illustrates how the `todo` is being used on the JitHub CLI-GUI app:
+
+image::TodoUsage1.png[width="1000"]
+
+image::TodoUsage2.png[width="200"]
+
+=== Finish To-do task: `finishTodo`
+
+Complete a to-do task, and the to-do list panel will re-render the remaining unfinished to-do tasks. +
+Format: `finishTodo INDEX`
+
+Examples:
+
+* `finishTodo 1`
+
+[NOTE]
+====
+1.  The completed to-do task will be removed from your JitHub.
+====
+
+The following diagram illustrates how the `finishTodo` is being used on the JitHub CLI-GUI app:
+
+image::FinishTodoUsage.png[width="1000"]
+
 === Add Reminder: `reminder` [coming in v1.4]
 
 Adds a Reminder for your next meeting, along with details to be displayed
@@ -457,6 +486,14 @@ Examples:
 and would suggest to you the command `select` instead.
 // end::suggestions[]
 
+=== Monthly Calendar View
+
+Once you start running the application and select a person from the person list panel, the calendar of the current month will be displayed on the calendar panel.
+
+The following diagram shows how the calendar looks like for November 2018.
+
+image::CalendarView.png[width="500"]
+
 // tag::calendarViewSchedule[]
 === Calendar to view schedule [Coming in V2.0]
 
@@ -510,6 +547,7 @@ e.g.`select 2`
 e.g. `exportall csv`
 * *Mail* : `mail [i/INDEX]` (to be added)
 * *Todo* : `todo tt/TITLE c/CONTENT`
+* *FinishTodo* : `finishTodo INDEX`
 * *Schedule* : `schedule INDEX-OF-PERSON d/DATE(DDMMYYYY) st/START-TIME et/END_TIME en/EVENT-NAME`
 * *Clear Schedule* : `clearSchedule IndexOfPerson`
 * *Match Schedule* : `matchSchedule d/SELECTED-DATE st/START-TIME et/END-TIME i/INDEX-OF-PERSON...[INDEX]`
