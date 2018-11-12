@@ -14,7 +14,7 @@ image::shouteck.png[width="150", align="left"]
 {empty}[https://github.com/shouteck[github]] [<<shouteck#, portfolio>>]
 
 Role: Team Leader +
-Responsibilities: Data
+Responsibilities: Recommend feature
 
 '''
 
