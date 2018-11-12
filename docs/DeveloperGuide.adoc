@@ -1313,6 +1313,7 @@ Use case ends.
 Use case resumes at step 2.
 
 // tag::saveopen[]
+
 [discrete]
 === Use case: Save stocklist
 
