@@ -18,7 +18,7 @@ TB is managed by a dedicated team of 4 members and we were tasked to morph an ex
 
 == Summary of contributions
 |===
-|_This section summarises my contributions to the project, including a range of enhancements, from simple and minor ones to major and more complex enhancements._
+|_This section summarises my contributions to the project, including major and minor enhancements to features in TB as well as other contributions made._
 |===
 
 * *Major enhancement*:
@@ -30,10 +30,10 @@ TB is managed by a dedicated team of 4 members and we were tasked to morph an ex
 
 * *Minor enhancement*:
 
-** 1)   Added the ability for TB to filter tasks added based on their deadlines when users select a date.
-*** What it does: This feature allows TB to only show tasks that have the selected date as their deadline in the task panel of the GUI.
+** Added the ability for TB to filter tasks added based on their deadlines when users select a date.
+//*** What it does: This feature allows TB to only show tasks that have the selected date as their deadline in the task panel of the GUI.
 *** Justification: This allows users to view how many tasks with the same deadline have already been added and possibly defer the deadline of some less important tasks.
-** 2)	Modified the edit command to fit the use of TB where task details can be edited by the user.
+** Modified the edit command to fit the use of TB where task details can be edited by the user.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=emobeany[Functional code/Test code]]
 
@@ -46,10 +46,9 @@ TB is managed by a dedicated team of 4 members and we were tasked to morph an ex
 
 ** Community:
 
-*** Reported bugs and suggestions for other teams in the class: (Issues https://github.com/CS2113-AY1819S1-T12-3/main/issues/184[#184], https://github.com/CS2113-AY1819S1-T12-3/main/issues/187[#187], https://github.com/CS2113-AY1819S1-T12-3/main/issues/190[#190], https://github.com/CS2113-AY1819S1-T12-3/main/issues/201[#201])
+*** Reported bugs and suggestions for other teams in the class: (Issues https://github.com/CS2113-AY1819S1-T12-3/main/issues/184[#184], https://github.com/CS2113-AY1819S1-T12-3/main/issues/190[#190], https://github.com/CS2113-AY1819S1-T12-3/main/issues/201[#201])
 
 == Contributions to the User Guide
-
 
 |===
 |_This section highlights the documentation I have contributed to the User Guide. They showcase my ability to write documentation targeting end-users to provide simple and effective instructions to help them when using TB._
@@ -59,9 +58,7 @@ include::../UserGuide.adoc[tag=selectDeadline]
 
 include::../UserGuide.adoc[tag=editTask]
 
-|===
-Future releases v2.0
-|===
+=== Future releases v2.0
 
 include::../UserGuide.adoc[tag=calendar_synchronisation]
 
@@ -72,12 +69,19 @@ include::../UserGuide.adoc[tag=reminder_setting]
 |===
 |_This section highlights the technical documentation I have contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project as well as provide sufficient details for future developers to maintain TaskBook._
 |===
-
+////
 include::../DeveloperGuide.adoc[tag=select]
-
+////
 include::../DeveloperGuide.adoc[tag=selectDeadlineImplementation]
-
+////
 include::../DeveloperGuide.adoc[tag=editTask]
-
+////
 include::../DeveloperGuide.adoc[tag=editTaskImplementation]
 
+////
+=== Manual testing instructions
+
+include::../DeveloperGuide.adoc[tag=selectDeadlineTest]
+
+include::../DeveloperGuide.adoc[tag=editTaskTest]
+////
