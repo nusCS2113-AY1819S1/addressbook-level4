@@ -339,6 +339,8 @@ about other people who have access to your computer steal your information.
 *Q*: How do I uninstall this application? +
 *A*: Just delete the folder containing this application, it does not touch any other part of your computer.
 
+*Q*: What if I want change my password? +
+*A*: Ask an admin to help, he/she has the privilege to change your password. Alternatively, User can delete their account and re-create with your desired Password.
 // end::faq[]
 
 == Command Summary
