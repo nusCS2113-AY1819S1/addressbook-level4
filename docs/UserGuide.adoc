@@ -26,7 +26,7 @@ Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `jithub.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your JitHub.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
