@@ -33,10 +33,9 @@ public class JobOfferContainsFilterKeywordsPredicateBuilder {
     public static final String KEY_AGE = "Age";
     public static final String KEY_EDUCATION = "Education";
 
-
     private HashMap<String, List<String>> keywordsList = new HashMap<>();
     private JobOfferContainsFilterKeywordsPredicate jobOfferPredicate;
-    
+
     public JobOfferContainsFilterKeywordsPredicateBuilder(String userInput) throws ParseException {
         this.jobOfferPredicate = preparePredicate(userInput);
     }
