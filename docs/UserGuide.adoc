@@ -255,11 +255,9 @@ Format:
 * The selected person will be searched on google. Refer to `select` on how to select a person.
 
 // TODO: update according to the latest features
-// TODO: Add preface
 // tag::export[]
+[[export]]
 === Export contacts displayed: `export`
-
-// preface
 You can save the hassle of your group mates typing in the exact same contact details of your group members if you
  have already save them into your JitHub.
 
@@ -293,6 +291,11 @@ Examples: +
 2.  This command overwrites any files with the same name at +
 `<DIRECTORY OF YOUR JAR FILE>/data/`
 ====
+
+[TIP]
+====
+Your team members can import the contact details to their JitHub. Please refer to <<import>>.
+====
 // end::export[]
 
 === Exporting all contacts : `exportall`
@@ -312,6 +315,7 @@ Examples:
 ====
 
 // tag::import[]
+[[import]]
 === Import contacts: `import`
 You can save the hassle of typing in the exact same contact details of your group members if one of your group members
  have already save them into his/her JitHub.
@@ -334,30 +338,12 @@ Examples: +
 To import an existing person in JitHub with different contact details, please `delete` them first.
 3.  The `undo` command works with the `import` command.
 ====
+[TIP]
+====
+You can refer to <<export>> for instructions on how to export contact details.
+====
 // TODO: screenshot of success message
-// endtag::import[]
-
-// TODO: Add preface
-=== Exporting contact details of a selected person: `export`
-
-Export the name, phone, address and email of the specified person from the addressbook under the specified filetype. +
-Format: `export INDEX FILETYPE`
-
-****
-* Export the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`export 2 csv` +
-Exports the 2nd person in the address book as a csv file.
-
-* `find Betsy` +
-`export 1 csv` +
-Exports the 1st person starting from the 1st person in the results of the `find` command as a csv file.
+// end::import[]
 
 // tag::schedule[]
 === Add personal schedule : `schedule` / `sc`
