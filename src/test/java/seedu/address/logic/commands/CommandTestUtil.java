@@ -124,6 +124,11 @@ public class CommandTestUtil {
     public static final String TAG_DESC_IVLE = " " + PREFIX_TAG + VALID_TAG_IVLE;
     public static final String TAG_DESC_HARDCOPY = " " + PREFIX_TAG + VALID_TAG_HARDCOPY;
 
+    public static final String INVALID_TASK_NAME_DESC = " " + PREFIX_NAME + "Quiz&"; // '&' not allowed in taskNames
+    public static final String INVALID_START_DATETIME_DESC = " " + PREFIX_START + "3a/11"; // 'a' not allowed
+    public static final String INVALID_END_DATETIME_DESC = " " + PREFIX_END + "6/11"; // missing '_hh:mm'
+    public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY; // empty string not allowed for priority
+
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
@@ -193,6 +198,7 @@ public class CommandTestUtil {
 
         try {
             command.execute(actualModel, actualCommandHistory);
+
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
@@ -234,14 +240,4 @@ public class CommandTestUtil {
         model.commitExpenseBook();
     }
 
-
-    /**
-     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s expense book.
-     */
-    /*
-    public static void deleteFirstExpense(Model model) {
-        Expense firstExpense = model.getFilteredExpenseList().get(0);
-        model.deleteExpense(firstExpense);
-        model.commitExpenseBook();
-    }*/
 }

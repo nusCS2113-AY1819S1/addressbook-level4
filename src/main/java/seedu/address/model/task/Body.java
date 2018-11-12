@@ -1,5 +1,8 @@
 package seedu.address.model.task;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Task's datails in the task list .
  * Guarantees: immutable.
@@ -17,8 +20,11 @@ public class Body {
 
     public final String bodyString;
 
-    public Body(String bodyString) {
-        this.bodyString = bodyString;
+    public Body(String body) {
+        requireNonNull(body);
+        checkArgument(isValidBody(body), MESSAGE_BODY_CONSTRAINTS);
+        bodyString = body;
+        //this.bodyString = bodyString;
     }
 
     @Override

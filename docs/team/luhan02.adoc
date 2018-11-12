@@ -28,12 +28,6 @@ Student Planner is a all-in-one desktop manager application that allows students
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=luhan02[Overview]]
 
-* *Other contributions*:
-
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T13-1/main/pull/[#29], https://github.com/CS2113-AY1819S1-T13-1/main/pull/[#90], https://github.com/CS2113-AY1819S1-T13-1/main/pull/[#95]
-*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-T13-1/main/pull/[#59], https://github.com/CS2113-AY1819S1-T13-1/main/pull/[#95]
-
 == Contributions to the User Guide
 
 
@@ -41,7 +35,7 @@ Student Planner is a all-in-one desktop manager application that allows students
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=task]
+include::../UserGuide.adoc[tag=tasks]
 
 == Contributions to the Developer Guide
 

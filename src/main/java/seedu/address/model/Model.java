@@ -41,9 +41,6 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns the TaskBook */
-    ReadOnlyTaskBook getTaskBook();
-
     /** Returns the UserPreferences */
     UserPrefs getUserPrefs();
 
@@ -130,6 +127,9 @@ public interface Model {
     void restoreTaskBook(ReadOnlyTaskBook restoredTaskBook);
 
     //@@author luhan02
+    /** Returns the TaskBook */
+    ReadOnlyTaskBook getTaskBook();
+
     /**
      * Saves the current task book state.
      */

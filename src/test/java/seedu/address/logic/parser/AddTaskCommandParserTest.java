@@ -5,6 +5,11 @@ import static seedu.address.logic.commands.CommandTestUtil.BODY_DESC_ASSIGN;
 import static seedu.address.logic.commands.CommandTestUtil.BODY_DESC_QUIZ;
 import static seedu.address.logic.commands.CommandTestUtil.END_DATETIME_DECS_ASSIGN;
 import static seedu.address.logic.commands.CommandTestUtil.END_DATETIME_DECS_QUIZ;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_END_DATETIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_DATETIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_ASSIGN;
 import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_QUIZ;
@@ -29,7 +34,11 @@ import static seedu.address.testutil.TypicalTasks.QUIZ9;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.DateTime;
+import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
 import seedu.address.testutil.TaskBuilder;
 
 public class AddTaskCommandParserTest {
@@ -119,36 +128,38 @@ public class AddTaskCommandParserTest {
                 expectedMessage);
     }
 
-    /*
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_NAME_CONSTRAINTS);
+        // invalid taskName
+        assertParseFailure(parser, INVALID_TASK_NAME_DESC + BODY_DESC_ASSIGN + START_DATETIME_DECS_ASSIGN
+                + END_DATETIME_DECS_ASSIGN + PRIORITY_DESC_ASSIGN
+                + TAG_DESC_HARDCOPY + TAG_DESC_IVLE, TaskName.MESSAGE_NAME_CONSTRAINTS);
 
-        // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_PHONE_CONSTRAINTS);
+        // invalid startDateTime
+        assertParseFailure(parser, TASKNAME_DESC_ASSIGN + BODY_DESC_ASSIGN + INVALID_START_DATETIME_DESC
+                + END_DATETIME_DECS_ASSIGN + PRIORITY_DESC_ASSIGN
+                + TAG_DESC_HARDCOPY + TAG_DESC_IVLE, DateTime.MESSAGE_START_DATETIME_CONSTRAINTS);
 
-        // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_EMAIL_CONSTRAINTS);
+        // invalid endDateTime
+        assertParseFailure(parser, TASKNAME_DESC_ASSIGN + BODY_DESC_ASSIGN + START_DATETIME_DECS_ASSIGN
+                + INVALID_END_DATETIME_DESC + PRIORITY_DESC_ASSIGN
+                + TAG_DESC_HARDCOPY + TAG_DESC_IVLE, DateTime.MESSAGE_END_DATETIME_CONSTRAINTS);
 
-        // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        // invalid priority
+        assertParseFailure(parser, TASKNAME_DESC_ASSIGN + BODY_DESC_ASSIGN + START_DATETIME_DECS_ASSIGN
+                + END_DATETIME_DECS_ASSIGN + INVALID_PRIORITY_DESC
+                + TAG_DESC_HARDCOPY + TAG_DESC_IVLE, Priority.MESSAGE_PRIORITY_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, TASKNAME_DESC_ASSIGN + BODY_DESC_ASSIGN + START_DATETIME_DECS_ASSIGN
+                + END_DATETIME_DECS_ASSIGN + PRIORITY_DESC_ASSIGN
+                + INVALID_TAG_DESC + VALID_TAG_IVLE, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
-                Name.MESSAGE_NAME_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_TASK_NAME_DESC + BODY_DESC_ASSIGN + START_DATETIME_DECS_ASSIGN
+                        + END_DATETIME_DECS_ASSIGN + INVALID_PRIORITY_DESC,
+                TaskName.MESSAGE_NAME_CONSTRAINTS);
 
-        // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-    }*/
+    }
+
 }

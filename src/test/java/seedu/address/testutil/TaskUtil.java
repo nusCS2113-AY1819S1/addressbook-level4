@@ -35,28 +35,4 @@ public class TaskUtil {
         return sb.toString();
     }
 
-    /**
-     * Returns the part of command string for the given {@code UpdateTaskDescriptor}'s details.
-     */
-    /*
-    public static String getUpdateTaskDescriptorDetails(UpdateTaskCommand.UpdateTaskDescriptor descriptor) {
-        StringBuilder sb = new StringBuilder();
-        descriptor.getTaskName().ifPresent(taskName -> sb.append(PREFIX_NAME).append(taskName.fullName).append(" "));
-        descriptor.getBody().isPresent(body -> sb.append(PREFIX_BODY).append(body.bodyString).append(" "));
-        descriptor.getStartDateTime().isPresent(startDateTime -> sb.append(PREFIX_START)
-                .append(startDateTime.dateTimeString).append(" "));
-        descriptor.getEndDateTime().isPresent(endDateTime -> sb.append(PREFIX_END)
-                .append(endDateTime.dateTimeString).append(" "));
-        descriptor.getPriority().isPresent(priority -> sb.append(PREFIX_PRIORITY)
-                .append(priority.priorityString).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
-        return sb.toString();
-    }*/
 }

@@ -14,6 +14,8 @@ public class Messages {
 
     //@@author luhan02
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
+    public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
+
 
     //@@author ian-tjahjono
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";

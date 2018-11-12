@@ -1,5 +1,8 @@
 package seedu.address.model.task;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Task's priority in the task list.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
@@ -11,8 +14,11 @@ public class Priority {
 
     public final String priorityString;
 
-    public Priority(String priorityString) {
-        this.priorityString = priorityString;
+    public Priority(String priority) {
+        requireNonNull(priority);
+        checkArgument(isValidPriority(priority), MESSAGE_PRIORITY_CONSTRAINTS);
+        priorityString = priority;
+        //this.priorityString = priorityString;
     }
 
     /**
