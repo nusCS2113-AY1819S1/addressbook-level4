@@ -21,6 +21,11 @@ The application has THREE main users which are students, administrator (owner) a
 ** Justification: To prevent unauthorized access of data.
 ** Highlights: The implementation was challenging at first as a basic knowledge of JavaFX is required. I had to be careful with writing code down because it might overlap with someone else’s code, i.e. change their code. As for the design model, I had to come up with a new implementation of the code as there was no available open source libraries. It was one that I had to think of possible loopholes that may appear, and a model that is sustainable for future development.
 
+* *Major enhancement*: added a command panel interface
+** What it does: Users are able to view available commands. Selecting on any command will give a prompt message of what it does.
+** Justification: Help beginner users to navigate with the application more efficiently.
+** Highlights: To be able to understand .fxml files and how they work are no easy tasks. I had to work from integrating with Java and other languages (html included). This feature is a stand-alone feature that is isolated from the other UI elements.
+
 * *Minor enhancement*:
 ** Change regular expressions (regex) in the code.
 *** What it does: To accept only possible inputs, for example, an ISBN field should only contain numbers and hyphens.
