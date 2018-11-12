@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -72,11 +73,11 @@ public class SampleDataUtil {
     /**
      * Returns a schedule set containing the schedule given.
      */
-    //TODO AS OF RIGHT NOW THIS IS NOT USED
-    //    public static Set<Schedule> getScheduleSet(Date date, Time startTime, Time endTime, EventName eventName) {
-    //        return Arrays.stream(date,startTime,endTime,eventName)
-    //                .map(Schedule::new)
-    //                .collect(Collectors.toSet());
-    //    }
+
+    public static Set<Schedule> getScheduleSet(Schedule... schedules) {
+        Set<Schedule> schedule = new HashSet<>();
+        schedule.add(SAMPLE_SCHEDULE);
+        return schedule;
+    }
 
 }
