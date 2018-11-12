@@ -39,13 +39,12 @@ public class LostandFoundCommandTest {
 
     @Test
     public void checkSortSimpleItems() {
-        lostandfoundCommand.sortSimpleItems(lastShownList, actualLostItems, actualFoundItems);
+        lostandfoundCommand.sortSimpleItems(lastShownList, actualLostItems);
         assertEquals(actualLostItems, getExpectedLostItems());
-        assertEquals(actualFoundItems, getExpectedFoundItems());
     }
     @Test
     public void checkGetMessageOutput() {
-        lostandfoundCommand.sortSimpleItems(lastShownList, actualLostItems, actualFoundItems);
+        lostandfoundCommand.sortSimpleItems(lastShownList, actualLostItems);
         String actualMessageOutput = lostandfoundCommand.getMessageOutput(actualLostItems);
         assertEquals(actualMessageOutput, getExpectedMessageOutput());
     }
