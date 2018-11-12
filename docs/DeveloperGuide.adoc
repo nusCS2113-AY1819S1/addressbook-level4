@@ -1314,6 +1314,45 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+// tag::saveopen[]
+[discrete]
+=== Use case: Save stocklist
+
+*MSS*
+
+1.  User requests to save stocklist
+2.  StockList saves current inventory as .xml file with specified file name.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The file name is invalid.
+* 1b. Stocklist shows an error message.
++
+Use case ends.
+
+
+[discrete]
+=== Use case: Open stocklist version
+
+*MSS*
+
+1.  User requests to open stocklist version
+2.  StockList opens specified .xml file and displays as table.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The file name is invalid.
+* 1b. Stocklist shows an error message.
++
+Use case ends.
+// end::saveopen[]
+
 [discrete]
 === Use case: List items by status
 

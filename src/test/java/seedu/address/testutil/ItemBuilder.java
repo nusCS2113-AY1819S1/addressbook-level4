@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Loststatus;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
 import seedu.address.model.item.Status;
@@ -22,6 +23,7 @@ public class ItemBuilder {
     private Name name;
     private Quantity quantity;
     private Quantity minQuantity;
+    private Loststatus loststatus;
     private Status status;
     private Set<Tag> tags;
 
@@ -29,6 +31,7 @@ public class ItemBuilder {
         name = new Name(DEFAULT_NAME);
         quantity = new Quantity(DEFAULT_QUANTITY);
         minQuantity = new Quantity(DEFAULT_MIN_QUANTITY);
+        loststatus = new Loststatus(Integer.parseInt(DEFAULT_QUANTITY), 0);
         status = new Status(Integer.parseInt(DEFAULT_QUANTITY), 0, 0);
         tags = new HashSet<>();
     }
@@ -41,6 +44,7 @@ public class ItemBuilder {
         quantity = itemToCopy.getQuantity();
         minQuantity = itemToCopy.getMinQuantity();
         status = itemToCopy.getStatus();
+        loststatus = itemToCopy.getLoststatus();
         tags = new HashSet<>(itemToCopy.getTags());
     }
 
@@ -78,6 +82,14 @@ public class ItemBuilder {
     }
 
     /**
+     * Sets the {@code Loststatus} of the {@code Item} that we are building.
+     */
+    public ItemBuilder withLoststatus(Loststatus loststatus) {
+        this.loststatus = loststatus;
+        return this;
+    }
+
+    /**
      * Sets the {@code Status} of the {@code Item} that we are building.
      */
     public ItemBuilder withStatus(Status status) {
@@ -86,7 +98,7 @@ public class ItemBuilder {
     }
 
     public Item build() {
-        return new Item(name, quantity, minQuantity, status, tags);
+        return new Item(name, quantity, minQuantity, loststatus, status, tags);
     }
 
 }
