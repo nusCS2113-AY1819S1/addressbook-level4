@@ -199,21 +199,22 @@ Format: `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_T
 
 ****
 * DATE needs to be in YYYY-MM-DD format
-* TIME needs to be in 00:00 format
+* START_TIME and END_TIME needs to be in HH:MM format
 * START_TIME must be earlier than END_TIME
 ****
 
 [NOTE]
 ====
 * One location can only hold one event at any time.
-* Events created cannot span multiple days.
+* Location is case insensitive
+* Events created cannot span multiple days with a single command.
 * Leap years are not considered during date validation.
 ====
 
 Example:
 
-* `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` +
-Creates an event named Board Meeting at Conference Room 1 at 2018-09-28, 12:00 to 23:59.
+* `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/14:00 e/15:45` +
+Creates an event named Board Meeting at Conference Room 1 at 2018-09-28, from 14:00 to 15:45.
 // end::addevent[]
 
 // tag::editevent[]
@@ -232,6 +233,7 @@ index *must be a positive integer* 1, 2, 3, ... +
 * START_TIME must be earlier than END_TIME
 * Leap years are not considered during date validation.
 * One location can only hold one event at any time.
+* Location is case insensitive
 * Event cannot be editted if result clashes with any of the attendees' event schedule
 * Existing values will be updated to the input values.
 ****
@@ -325,10 +327,10 @@ image::InviteCommandGuide.png[width="500"]
 
 ****
 * Invites the employee at the specified `PERSON_INDEX` *TO* the event at the specified `EVENT_INDEX`.
-* The index refers to the index number shown in the displayed person list and event list respectively.
+* The index refers to the index number shown in the displayed employee list and event list respectively.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Employee should not have already been invited to the selected event.
-* Event invited to *should not clash* with the selected employee's schedule.
+* Event invited to *should not clash* with the selected employee's event schedule.
 ****
 // end::invite[]
 
@@ -337,11 +339,13 @@ image::InviteCommandGuide.png[width="500"]
 Priority level: `default`,`manager`
 
 Removes an employee from the an event. +
-Format/Prompts: `remove PERSON_INDEX  from/EVENT_INDEX` +
+Format/Prompts: `remove PERSON_INDEX from/EVENT_INDEX` +
 Example:
 
-* `remove 1 from/2` +
-Remove 1st employee at employee list from 2nd event at event list
+* `remove 2 from/4` +
+Remove 2nd employee at employee list from 4th event at event list
+
+image::RemoveCommandGuide.png[width="450"]
 
 ****
 * Remove the employee at the specified `PERSON_INDEX` *FROM* the event at the specified `EVENT_INDEX`.
@@ -355,34 +359,61 @@ Remove 1st employee at employee list from 2nd event at event list
 === Selecting a person: `select`
 Priority level: `all`
 
-Selects an employee and view the specified employee's events by date, year, month, month and year, or all his/her events. +
+Selects an employee and view the specified employee's events on a date, year, month, month and year, or all of his/her events. +
 Format/Prompts: +
 Enter a command: `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
 ****
-* Select the employee at the specified `PERSON_INDEX` and view all his/her events or events at certain time as indicated.
+* Select the employee at the specified `PERSON_INDEX` and view all his/her events or events at certain time if indicated.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * DATE needs to be in YYYY-MM-DD format
-* MONTH needs to be in 00 format (e.g. 01, 02, ... , 12)
-* YEAR needs to be in 0000 format. (e.g. 2018)
+* MONTH needs to be in MM format (e.g. 01, 02, ... , 12)
+* YEAR needs to be in YYYY format. (e.g. 2018)
 * If DATE is indicated, MONTH and YEAR must NOT be indicated. Then, all events of the selected employee at the specific DATE will be displayed.
 * MONTH and YEAR can be both used at the same time, resulting in events on the selected MONTH and YEAR to be displayed.
 ****
 
+image::SelectCommandGuide.png[width="500"]
+
 Examples:
 
-* `select 1` +
-view all events of employee at index 1
-* `select 1 date/2018-10-31` +
-view all events of employee at index 1 at 2018-10-31
-* `select 1 m/08` +
-view all events of employee at index 1 in August
-* `select 1 y/2018` +
-view all events of employee at index 1 in 2018
-* `select 1 y/2018 m/08` +
-view all events of employee at index 1 in August 2018
+* `select 1` : view all events of employee at index 1
+* `select 1 date/2018-10-31` : view all events of employee at index 1 at 2018-10-31
+* `select 1 m/08` : view all events of employee at index 1 in August
+* `select 1 y/2018` : view all events of employee at index 1 in 2018
+* `select 1 y/2018 m/08` : view all events of employee at index 1 in August 2018
 // end::select[]
+
+// tag::selectEvent[]
+=== Selecting an event : `selectEvent`
+Priority level: all
+
+Selects the specified event by index and displays all employees attending the event. +
+Format: `selectEvent 1` +
+
+[NOTE]
+====
+If any of the attendees are edited or removed, the filtered employee list will not update. The `selectEvent` command must be input again to view the updated list of attendees. +
+====
+
+****
+* Selects the event at the specified `EVENT_INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Event list will be filtered to show only the specified event.
+****
+
+Examples:
+
+* `selectEvent 2` +
+Selects the 2nd event in the address book and shows its attendees.
+
+* `invite 1 to/1` (adds an attendee) +
+`selectEvent 1` (select the event to show the attendee) +
+`edit 1 n/New Name` (edit the name of the attendee) +
+`selectEvent 1` (re-selects the event to show the updated name of the attendee)
+// end::selectEvent[]
 
 === Locating persons by name: `find`
 Priority level: all
@@ -501,31 +532,35 @@ There is no need to save manually.
 
 * *Logout*: `logout`
 
-* *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT des/DESIGNATION [t/TAG]...`
+* *Add Employee*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT des/DESIGNATION [t/TAG]...`
 
-* *Edit* : `edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [des/DESIGNATION] [t/TAG]…​`
+* *Edit Employee* : `edit PERSON_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dep/DEPARTMENT] [des/DESIGNATION] [t/TAG]…​`
 
-* *Delete* : `delete PERSON_INDEX`
+* *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
+
+* *Delete Employee* : `delete PERSON_INDEX`
+
+* *Find Employee* : `find KEYWORD [MORE_KEYWORDS]`
 
 * *List* : `list all` OR `list all people` OR `list all events` or `list dep DEPARTMENT`
 
 * *Sort* : `sort KEYWORD`
 
-* *addEvent* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`
+* *Add Event* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START_TIME e/END_TIME`
 
-* *editEvent* : `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME] [e/END_TIME]`
+* *Edit Event* : `editEvent EVENT_INDEX [n/NAME] [d/DESCRIPTION] [l/LOCATION] [date/DATE] [s/START_TIME] [e/END_TIME]`
 
-* *deleteEvent* : `deleteEvent EVENT_INDEX`
+* *Delete Event* : `deleteEvent EVENT_INDEX`
 
-* *findEvent* : `findEvent KEYWORD [MORE KEYWORDS]`
+* *Find Event* : `findEvent KEYWORD [MORE KEYWORDS]`
 
 * *Invite* : `invite PERSON_INDEX to/EVENT_INDEX`
 
 * *Remove* : `remove PERSON_INDEX  from/EVENT_INDEX`
 
-* *Select* : `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
+* *Select Employee* : `select PERSON_INDEX [date/DATE] [m/MONTH] [y/YEAR]`
 
-* *Find* : `find KEYWORD [MORE_KEYWORDS]`
+* *selectEvent* : `selectEvent EVENT_INDEX`
 
 * *History* : `history`
 
