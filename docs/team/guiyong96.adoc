@@ -43,10 +43,12 @@ This application is optimized for those who prefer to work with Command Line Int
 
 ** Project management:
 *** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
-** Project morphing:
-*** Morphed storage portion of addressbook 4.
-** Community:
+** Miscellaneous:
 *** Perform refactoring for the majority of the code.
+*** Morphed storage portion of addressbook 4.
+*** Rearranging user guide layout.
+** Community:
+*** Addressed bugs found by peers in bug testing session.
 *** Several parts of the request feature implemented were adopted by others.
 
 == Contributions to the User Guide
@@ -79,7 +81,7 @@ Request for 21 books of book ISBN 9780205677207, with email provided.
 ====
 * ISBN input must be valid. Please refer to an online website to search for the book ISBN.
 * It is necessary for you to provide an email so that the owner can contact you.
-* Quantity input is capped at 1000. You are unable to request beyond this amount.
+* Quantity input is capped at 999. You are unable to request beyond this amount.
 ====
 
 === Deleting a request : `deleterequest`
