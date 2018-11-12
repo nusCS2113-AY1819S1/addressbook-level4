@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+﻿= Savee - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -6,25 +6,35 @@
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
+:stylesheet: gh-pages.css
 :xrefstyle: full
 :experimental:
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T09-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `T09-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Savee is a financial planner application for those who *prefer to use a desktop app for managing their finances*. More
+importantly, Savee is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
+having the benefits of a Graphical User Interface (GUI). To enjoy the *full* benefits of the GUI of this app,
+the best screen resolution to use would be `1920 x 1080 (1080p)` with the app in fullscreen. Other screen resolutions are also
+supported, but the GUI display would be slightly different from the ones shown in the picture.
+If you can type fast, Savee can get your finance management tasks done faster than traditional GUI apps.
+Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
+Before users are able to use our software, he/she is required to do the following simple steps to set up other software
+that is required.
+
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `Savee.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your copy of Savee.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -33,127 +43,374 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list`* : lists all records
+* **`add`**`n/Grocery shopping m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to Savee.
+* **`delete`**`3` : deletes the 3rd record shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
 
+[[autocomplete]]
+== Auto Complete Feature
+// tag::autocomplete-a[]
+This section describes the auto completing feature implemented on the input command box which
+makes the typing interface of Savee more friendly and efficient.
+
+A list of possible words will be displayed in a popup-box under the command box according
+to the user input. Word suggestions are displayed when all letters of the current input word match the beginning of
+the word in the suggestion word bank. e.g to suggest the word `expenditure` user can key in either `e`, `ex`, `exp`
+and so on, which can all suggest the expected word. However, the expected word must exist in the appropriate word bank
+which will be described in <<Features>>.
+
+User may use the kbd:[&#x2191;] kbd:[&#x2193;] keys to navigate the list and select a word they wish to complete
+their input with using kbd:[Enter]. If user does not wish to select a word for completion, user may press kbd:[ESC] or
+kbd:[Space] or mouseclick anywhere else in the command box to move onto another word.
+Auto completion is performed word by word and after completing a word, the typing caret will appear at the end
+of the newly completed word. Previously existing text before and after the completed word will not be lost and will
+be shifted accordingly.
+
+When the suggestion window is not open, user may use kbd:[&#x2190;] and kbd:[&#x2192;] to navigate the text and
+may go back to change previously entered texts. These texts will also allow autocompletion if possible, depending on the
+command in use and parameters already entered.
+
+[NOTE]
+
+====
+* While a list of suggestions is active, users may not perform some actions such as kbd:[&#x2190;] kbd:[&#x2192;] or
+kbd:[Ctrl]+kbd:[A].
+* Word suggestions are not case sensitive. e.g. `HEL` will have a possible suggestion `help`.
+* Whitespaces will not affect the accuracy of the autocomplete.
+====
+// end::autocomplete-a[]
+
+image::AutoComplete.png[width="790"]
+*Screenshot of auto-complete in action*
+
+** Typing `a` triggers suggestions of command words that begin with `a`.
+
 [[Features]]
-== Features
+== Basic Features
+
+This section describes the basic features essential to using Savee.
+
+Input of the first few characters of a single word into an empty command box will suggest a list of
+command words available in Savee that match the input word. Most features require additional input paramaters to
+perform their unique functions.
+
+Majority of our features come with their own auto-completion feature and will require the exact command word
+to be entered as the first word in the input before the described completion for that command is enabled.
 
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter
+which can be used as `add n/Grocery shopping`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Grocery shopping t/friend` or as
+`n/Grocery shopping`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}`
+(i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME m/MONEYFLOW`, `m/MONEYFLOW n/NAME` is also acceptable.
+====
+
+====
+[[constraints]]
+*Parameter Constraints*
+
+* `NAME` can be any word, phrase or sentence.
+* `MONEYFLOW` must be made up of only digits, a single "+" or "-" and at most one decimal point. Also, note that the maximum number of
+digits the whole number part of this parameter can have is 12 digits.
+* `DATE` is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year.
+*dd* and *mm* both require 1 to 2 digits while *yyyy* requires exactly 4 digits.
+* `DATE` entered must also be a valid date, no fake dates e.g. *60-11-2018*, *30-02-2018*. Leap years are also accounted for, meaning that you
+can enter *29-2-2016* and it will still be accepted.
+* `DATE` can be entered as `today` or `ytd` to conveniently input the local date today or yesterday.
+* `TAG` is completely optional and can be any alphanumerical word, but limited to only 1 whole word, no whitespaces are allowed.
+The maximum character length of the tag is 20 characters and the maximum allowed number of tags is 2 as these tags will be used to categorise each
+record, to reduce effort on user's part in specifying another field.
+* `TAG` is not case sensitive, all capital letters in tags are converted to lower case.
+* `INDEX` *must be a positive integer* `1, 2, 3, ...`
+
 ====
 
 === Viewing help : `help`
 
+Displays a help page with information on all commands in Savee.
+
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a record: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a record of a financial activity to Savee with the given name, date, money earned or spent and tags. +
+Format: `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
 
-[TIP]
-A person can have any number of tags (including 0)
+Name denotes the name of the financial activity, moneyflow denotes the money spent or gained in the financial activity
+and date denotes the date the financial activity was completed. Each financial activity can be labelled with only 1
+name, moneyflow and date and a maximum of 2 tags as these tags will be used to categorise each record to remove the need for user to specify another field.
 
-Examples:
-
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-=== Listing all persons : `list`
-
-Shows a list of all persons in the address book. +
-Format: `list`
-
-=== Editing a person : `edit`
-
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
+[NOTE]
+Moneyflow can be either a debit (expense) or a credit (income). +
+To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the
+money amount. +
+Only 1 record of the same name, same date and same moneyflow is allowed in the application. Duplicates of the same record is not
+allowed unless it is of a different date, of a different moneyflow or of a different name.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `add n/Payment To John d/20-8-2018 m/-10`
+* `add n/PaymentFromBetty t/friend m/+10 d/10-11-2018 t/classmate`
 
-=== Locating persons by name: `find`
+[[Add_Autocomplete]]
+Auto-Completion: +
+// tag::autocomplete-b[]
 
-Finds persons whose names contain any of the given keywords. +
+* Names
+** Inputs starting with `n/` and words that come after it but before the next prefix `m/`, `d/` or `t/` use can be completed with names.
+** Suggested words will be suggested based on words used in existing records' names e.g if an earlier
+inserted record is named `Dinner with Family`, then `Dinner` `with` `Family` can all be possible suggestions.
+
+* Dates
+** Inputs starting with `d/` can be completed with dates.
+** Dates must be entered as with the normal constraints and also have 2-digits for both day and months.
+e.g to have a suggestion of `01-11-2018` to appear, you have to key in `d/` `0` for that date to appear.
+`d/` `1/` will not work.
+** Dates that are suggested will also only come from earlier saved records.
+** Can also be completed to `today` or `ytd`.
+
+* Moneyflow
+** Does not offer auto completion.
+
+* Tags
+** Inputs starting with `t/` can be completed with tags.
+** Tags will also only from from earlier saved records' tags and a pre-existing set of tags such as e.g.
+food, travel, bills, shopping.
+
+[NOTE]
+* There is no autocompletion restriction on number of names, dates, moneyflow or tag inputs but command will still
+require the appropriate number of parameters.
+// end::autocomplete-b[]
+
+// tag::list[]
+=== Listing all records within a date range : `list`
+
+Shows a list of all records in Savee which is within a certain date range. +
+There are 3 modes, *default* mode, *single argument* mode and *dual argument* mode. +
+Format: +
+Default mode: `list` +
+Single argument mode: `list d/DATE` +
+Dual argument mode: `list d/START_DATE END_DATE`
+
+****
+* Default mode will list down all records in Savee. +
+* Single argument mode will list down all records with the date specified. +
+* Dual argument mode will list down all records with the date that fall on either dates or between both dates.
+* Refer to <<constraints>> for the more information on the parameters.
+****
+
+Examples:
+
+* `list`
+* `list d/10-11-2018`
+* `list d/10-11-2018 11-11-2018`
+// end::list[]
+
+Auto-Completion: +
+// tag::autocomplete-c[]
+
+* Dates
+** Inputs starting with `d/` can be completed with dates as well as the argument that come immediately
+after the entire `d/START_DATE` input as long as there are only whitespaces between them.
+** Suggestions will only come from dates that have been entered in records.
+
+* There will be no suggestions on parameters of other prefixes or parameters after the third.
+// end::autocomplete-c[]
+
+=== Locating records by name: `find`
+
+Finds records whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `grocery` will match `Grocery`
+* The order of the keywords does not matter. e.g. `Grocery Shopping` will match `Shopping Grocery`
+* Only the name of the record is searched.
+* Only full words will be matched e.g. `Grocer` will not match `Grocery`
+* Records matching at least one keyword will be returned (i.e. `OR` search). e.g. `Grocery Shopping` will return `Grocery`, `Shirt Shopping`
+****
+
+Examples:
+
+* `find Family` +
+Returns `dinner with family` and `family party`
+* `find family food shopping` +
+Returns all records having `family`, `food`, or `shopping` in their name
+
+Auto-Completion: +
+// tag::autocomplete-d[]
+
+* Keywords
+** Input words can be completed with words that are used in existing records' names in Savee.
+** All words that are entered after the `find` command can suggest words from existing records.
+// end::autocomplete-d[]
+
+[[findtag]]
+// tag::findtag[]
+=== Locating records by tag: `findtag`
+
+Finds records with tags that match any of the given keywords. +
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Records with tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `friends food` will return
+all records tagged with either `friends` or `food`.
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `findtag friend` +
+Returns any record tagged with `friend`
+* `findtag friend food shopping` +
+Returns all records having any of the tags `friend`, `food`, or `shopping`
+// end::findtag[]
 
-=== Deleting a person : `delete`
+Auto-Completion: +
+// tag::autocomplete-e[]
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+* Keywords
+** Input words can be completed with words that are used in existing records' tags in Savee.
+** All words that are entered after the `findtag` command can suggest words from existing records.
+// end::autocomplete-e[]
 
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+=== Selecting a record : `select`
 
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
-
-=== Selecting a person : `select`
-
-Selects the person identified by the index number used in the displayed person list. +
+Selects the record identified by the specified index number in the displayed record list. +
 Format: `select INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
+* Selects the record at `INDEX` and display the record information in a more detailed format.
+* The index refers to the index number shown in the displayed record list.
 ****
 
 Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
+Selects the 2nd record in the expense book.
+* `find Dinner` +
 `select 1` +
-Selects the 1st person in the results of the `find` command.
+Selects the 1st record in the results of the `find` command.
 
+
+// tag::sort[]
+[[sort]]
+=== Sorting displayed records : `sort`
+
+Sorts the list of records in the record book by a category.
+There are 3 categories to sort by `name`, `date`, `moneyflow`/`money` and
+records can be sorted in either ascending order `asc` or descending order `desc`. +
+Format: `sort [CATEGORY] [ORDER]`
+
+****
+* Only the abovementioned keywords for category and order are supported.
+* Keyword matching is case insensitive, e.g `sort Name Desc` will work the same as `sort name desc`.
+* Either one or both of the optionals fields are to be provided.
+* Order of the input fields is not significant, e.g. `sort name asc` will work the same as `sort
+asc name`.
+* If order is not specified, default sort order is ascending.
+* If category is not specified, default sort category is by name.
+****
+
+Examples:
+
+* `sort date` - Sorts records by date in ascending order.
+* `sort desc` - Sorts records by name in descending order.
+* `sort moneyflow desc` - Sorts records by moneyflow in descending order.
+// end::sort[]
+
+Auto-Completion: +
+// tag::autocomplete-f[]
+
+* Input word suggestions are suggested based on what can still be filled in.
+** If a category has been specified, only an order can be suggested and vice versa.
+** If neither has been specified, then both order and category are possible suggestions.
+* There will be no suggestions on parameters that come after the third.
+// end::autocomplete-f[]
+
+=== Editing a record : `edit`
+
+Edits an existing record in the application. +
+Format: `edit INDEX [n/NAME] [m/MONEYFLOW] [d/DATE] [t/TAG]...`
+
+****
+* Edits the record at the specified `INDEX`. The index refers to the index number shown in the displayed record list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the record will be removed i.e adding of tags is not cumulative.
+* You can remove all the record's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 m/+33 d/28-2-2018` +
+Edits the moneyflow and date of the 1st record to be `+33` and `28-2-2018` respectively.
+* `edit 2 n/Shopping for clothes t/` +
+Edits the name of the 2nd record to be `Shopping for clothes` and clears all existing tags.
+
+Auto-Completion: +
+// tag::autocomplete-g[]
+
+* Performs similarly to the `add` function. Please refer to <<Add_Autocomplete>>.
+// end::autocomplete-g[]
+
+=== Deleting a record : `delete`
+
+Deletes an existing record from the expense book. +
+Format: `delete INDEX`
+
+****
+* Deletes the record at the specified `INDEX`.
+* The index refers to the index number shown in the displayed record list.
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd record in the expense book.
+* `find Dinner` +
+`delete 1` +
+Deletes the 1st record in the results of the `find` command.
+
+// tag::deletedate[]
+=== Delete all the record whose date is required: `deletedate`
+
+Deletes the records with a specified date from the Savee. +
+Format: `deletedate DATE`
+
+****
+* Deletes records with the specified `DATE`.
+* Date refers to the date of the expected records to be deleted.
+****
+
+Date should follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while *yyyy* requires exactly 4 digits. +
+
+
+Examples:
+
+* `deletedate 31-7-2018` +
+
+Auto-Completion: +
+// tag::autocomplete-h[]
+
+* Input text can be completed to dates that already exist in records in Savee.
+* Text can also be completed to `today` or `ytd`.
+* There will be no suggestions on parameters that come after the second.
+// end::autocomplete-h[]
+
+// end::deletedate[]
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -167,12 +424,17 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores Savee to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+* Undoable commands: those commands that modify Savee's stored content (
+`add`, `delete`, `deletedate`, `archive`, `import`, `edit`, `addlimit`, `deletelimit`, `editlimit` and `clear`).
+* Please note that the `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `archive` command, the records archived will be added again back to the Financial Planner but the Excel file created will not be deleted.
+* Please note that `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `export` command, the Financial Planner will inform the user that *No more command to undo*, the records remain the same and the Excel file created will not be deleted.
+* Please note that the `undo` and `redo` command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter `undo` command after you enter the `import` command, the records imported will be deleted.
+
 ====
 
 Examples:
@@ -185,11 +447,6 @@ Examples:
 `list` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
 
 === Redoing the previously undone command : `redo`
 
@@ -214,9 +471,9 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+=== Clearing all records : `clear`
 
-Clears all entries from the address book. +
+Clears all records from Savee. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -226,35 +483,683 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+All data in Savee is saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually. In the event that the storage data cannot be read successfully due to parsing error,
+the system would initiate Savee with a blank state.
+
+[[morefeatures]]
+
+// tag::summary[]
+== Data Analysis Features
+
+This section describe features for the user to analyse his/her financial status in greater detail.
+
+=== Showing a summary table of all financial activity in a time period: `summary`
+
+Shows a summary table listing by day, month or categories within a given time specified by the user. +
+A `summary` is an item that contains information on the *date or month that is represented*, the *total expense calculated*, the *total income calculated* and
+the *net money flow calculated.* A `category` refers to any `set of tags` that are assigned to any records in the application. +
+
+The summary command supports both listing by date, by month and by categories. +
+Format: +
+
+* By Date: `summary date d/START_DATE END_DATE`
+* By Month: `summary month d/START_MONTH END_MONTH`
+* By Category: `summary category d/START_DATE END_DATE`
+
+****
+* Note that there are specific formats required for the dates and months entered.
+* For the commands *"summary date"* and *"summary category"*, START_DATE/END_DATE must be in the format of
+`dd-mm-yyyy` where `dd` represents day, `mm` represents month, `yyyy` represents year.
+* For command *"summary month"*, START_MONTH/END_MONTH must in the format of `mmm-yyyy`, `mmm` represents the month with its three letter representations, and
+`yyyy` represents the year in its numerical form.
+* Refer to <<constraints>> for the more information on the parameters.
+* Note that for mmm, it is case-insensitive, meaning both *"APR"* and *"apr"* are accepted.
+****
+// end::summary[]
+Once the command has been executed, a panel will appear showing the summary table containing data that is relevant in the range. +
+The table entries are sorted according to either date, month or category depending on the mode used in ascending order. +
+At the same time, currently selected record will be unselected to reduce confusion for the user.
+
+[NOTE]
+The table listing is currently non-resizable. If either the date, month or category is too long, the default behaviour of this app is to truncate
+those words and replace the parts truncated with ellipses("...").
+
+// tag::summary[]
+Examples:
+
+* `summary date d/1-1-2018 12-12-2018`
+* `summary month d/apr-2018 sep-2018`
+* `summary month d/APR-2018 SeP-2018`
+* `summary category d/1-1-2018 12-12-2018`
+// end::summary[]
+The screenshots below are examples of what you can see once the command has been accepted. The commands entered have been left
+in for visualisation purposes. These screenshots are taken in *fullscreen mode*  at 1080p resolution.
+
+image::UiSummaryByDateTable.png[width="790"]
+*Screenshot of app when `summary date d/1-1-2018 12-12-2018` is run*
+
+image::UiSummaryByMonthTable.png[width="790"]
+*Screenshot of app when `summary month d/jan-2018 dec-2018` is run*
+
+image::UiSummaryByCategoryTable.png[width="790"]
+*Screenshot of app when `summary category d/1-1-2018 12-12-2018` is run*
+
+Auto-Completion: +
+// tag::autocomplete-i[]
+
+* Mode Keyword
+** First parameter after the `summary` keyword can be completed to `date`, `month` or `category`.
+
+* Dates
+** Input text can be completed to dates that already exist in records in Savee.
+** Inputs starting with `d/` can be completed with dates as well as the argument that come immediately after the entire
+`d/DATE` input as long as there are only whitespaces between them.
+** Text can also be completed to `today` or `ytd`.
+
+* Months
+** Input text can be completed to months with year in the form e.g `nov-2018`.
+** Suggestions are currently limited to inputs from `jan-2018` to `dec-2018`.
+
+* There will be no suggestions on parameters that come after the fourth.
+// end::autocomplete-i[]
+
+// tag::stats[]
+=== Showing a breakdown of total expenses and income into categories: `stats`
+
+Shows a breakdown of total expenses and income into categories and displays these information in a pie chart. +
+Format:`stats d/START_DATE END_DATE`
+
+****
+* START_DATE/END_DATE follow the same configurations as date parameters required when adding records. It is in the form of
+*dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
+*yyyy* requires exactly 4 digits.
+* Refer to <<constraints>> for the more information on the parameters.
+****
+
+Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range. +
+At the same time, currently selected record will be unselected to reduce confusion for the user. If there are many categories shown and
+the box is not large enough, you can use the scroll bar at the side of each legend to view the other categories which are not in view.
+
+
+[NOTE]
+Due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
+is too small. To improve readability, we have decided to hide some labels in such scenarios. Also, when the label is too long, since the pie charts
+need to fit the labels, the pie chart may become small as a result. To prevent such situations, please keep your labels short. This will be improved in
+later versions of the product to remove the labels completely and use a mouse over input instead.
+// end::stats[]
+Examples:
+
+* `stats d/1-1-2018 12-12-2018`
+
+Below are some screenshots of what you can see when the command has been accepted. The commands entered have been left
+in for visualisation purposes. These screenshots are taken in *fullscreen mode* at 1080p resolution.
+
+image::UiPieChartExpense.png[width="790"]
+*Screenshot of app displaying expense breakdown when `stats d/1-1-2018 12-12-2018` is run*
+
+image::UiPieChartIncome.png[width="790"]
+*Screenshot of app displaying income breakdown when `stats d/1-1-2018 12-12-2018` is run*
+
+Auto-Completion: +
+// tag::autocomplete-j[]
+
+* Dates
+** Input text can be completed to dates that already exist in records in Savee.
+** Inputs starting with `d/` can be completed with dates as well as the argument that come immediately after the entire
+`d/DATE` input as long as there are only whitespaces between them.
+** Text can also be completed to `today` or `ytd`.
+* There will be no suggestions on parameters that come after the third.
+// end::autocomplete-j[]
+// tag::welcomepanel[]
+=== Showing a breakdown of total expenses and income into categories of this month: `NO COMMAND REQUIRED TO BE TYPED`
+
+Shows a breakdown of total expenses and income into categories using data of this month. +
+No format is required for this feature as the feature is automatically triggered when there is any mutation of data within the application.
+Another way of returning to the welcome panel from anywhere in the app is to press `HOME` on the keyboard or click `Home` on the menu.
+
+This feature automatically tracks the *current date* and ensures that the data presented is updated regardless regardless of whether the application is *off* or *on for
+prolonged periods of time*. This feature also works offline and retrieves information from the system clock to determine the current date. +
+
+Even in the event where the user is using the application at close to 12 midnight of the last day of a particular month and the clocks strikes 12,
+the application will update the data whenever it detects any record data modifications in the app to reflect the next month.
+
+[NOTE]
+The data used to represent the pie charts in the welcome panel is *only updated* whenever there are any changes to records within Savee. +
+This includes adding records, deleting records and editing records in Savee, but not sorting, listing, summary, stats, etc.
+
+Below shows a snapshot of what the user can see when there are records available of the current month. If the screen is too small, the welcome message may be
+truncated to allow more space for the charts.
+
+image::WelcomePanelWithPieCharts.png[width="790"]
+*Screenshot of app on startup when records of current month are available*
+
+// end::welcomepanel[]
+
+== Data management features:
+
+This section describe features for the user to manage his/her records data in Savee, with the help of Excel.
+
+// tag::exportexcel[]
+
+=== Export the record data from Savee to the Excel file: `exportexcel`
+
+Exports the records into an Excel file. +
+
+There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
+
+Format: +
+
+****
+* *Default mode* `exportexcel` will list down all records in Savee and exports all of them to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.
+
+* *Single argument Date mode* `exportexcel d/DATE` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.
+
+* *Dual argument Date mode* `exportexcel d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.
+
+* *Single argument Directory Path mode* `exportexcel dir/DIRECTORY_PATH` will list down all records in Savee and exports all of them to an Excel file and store the file in the chosen Directory Path.
+
+* *Single argument Date mode + Single argument Directory path mode* `exportexcel d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.
+
+* *Dual argument Date mode + Single argument Directory path mode* `exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.
++
+****
+
+If the command is in *Dual argument Date mode*, START_DATE (the first `Date`) should be earlier than or equal to the END_DATE (the second `Date`). +
+Date should follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while *yyyy* requires exactly 4 digits.
+
+The Excel file name will be named based on the command, relating to Date: +
+
+* *Default mode*: The Excel file will be named `Financial_Planner_ALL.xlsx`
+* *Single argument Date mode*: The Excel file will be named `Financial_Planner_dd-mm-yyyy.xlsx`
+* *Dual argument Date*: The Excel file will be named `Financial_Planner_dd-mm-yyyy_dd-mm-yyyy.xlsx`
+
+If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it *must* be closed before we enter the command.
+
+After you enter the `exportexcel` command, you should *wait for few minutes* for the Excel file to be written.
+
+Please note that `undo` and `redo` command can only affect Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `export` command, the Savee will inform the user that *No more command to undo*, the records remain the same and the Excel file created will *not* be deleted.
+
+Examples:
+
+* `exportexcel`
+* `exportexcel d/31-3-1999`
+* `exportexcel dir/C:\`
+* `exportexcel d/31-3-1999 31-03-2019`
+* `exportexcel d/31-3-1999 dir/C:\`
+* `exportexcel d/31-3-1999 31-3-2019 dir/C:\`
+
+
+There will be two sheets in the Excel file, namely *RECORD DATA* and *SUMMARY DATA*.
+
+* *RECORD DATA* stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit.
+
+* *SUMMARY DATA* stored the summary statistics for the period you exported, and there is a *Line Chart* next to the table for visual statistic [refer to *Draw a line chart automatically inside the Excel sheet* part in *User guide* for more information].
+
+* As the size of the Chart is fixed initially. Sometimes, when user exports too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
+
+image::Export_Capture3_LinhChi.PNG[width:800]
+
+// end::exportexcel[]
+
+Auto-Completion: +
+// tag::autocomplete-k[]
+
+* Dates
+** Input text can be completed to dates that already exist in records in Savee.
+** Inputs starting with `d/` can be completed with dates as well as the argument that come immediately after the entire
+`d/DATE` input as long as there are only whitespaces between them.
+** Text can also be completed to `today` or `ytd`.
+* Directory
+** Does not offer auto-competion.
+* There will be no suggestions on parameters that come after the fourth.
+// end::autocomplete-k[]
+
+// tag::import[]
+
+=== Import the record data from the Excel file to the Savee: `import`
+
+There are 2 modes, single argument File Path mode and (single argument Directory Path + single argument File Name) mode +
+
+Format: +
+
+
+****
+* *Single argument File Path mode* `import dir/FILE_PATH` will open the Excel file using the given File Path, import all records in Savee and check if these records exist in the Savee, then exports all of non-existent records to Savee.
+
+* *Single argument File Path + single argument File name mode* `import dir/DIRECTORY_PATH  n/NAME_FILE` will open the Excel file using the given Directory path and given file name, import all records in Savee and check if these records exist in Savee, then exports all of non-existent records to Savee.
+
++
+****
+
+Examples:
+
+* `import dir/C:\Financial_Planner_ALL.xlsx`
+* `import dir/C:\ n/Financial_Planner_All.xlsx`
+* `import dir/C:\ n/Financial_Planner_ALL`
+
+Please note that User have to add the post-fix `.xlsx` at the end to indicate this is a Excel file (in first and second example).
+
+The file user want to import *must* be closed before entering the command.
+
+Please note that the `undo` and `redo` command can only affect the Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `import` command, the records imported will be deleted.
+
+When performing `import` command to import all the records data from the Excel file to Savee, user should take note that there are some constraints which may help the `import` command performs smoothly.
+
+* The excel file can have multiple sheets, containing records data. The starting row of the table does *not* have to be first row of the sheet. This also applies to the column. There can be blank row blending in the table, but there must be *no* blank column.
+* The First row of the table should have 4 cells, namely *NAME*, *DATE*, *MONEY*, *TAGS*. These 4 cells can be case-insensitive. The sheet with records data but does *not* have the first row, *NAME*, *DATE*, *MONEY*, *TAGS* will *not* be read. The information of *NAME*, *DATE*, *MONEY* columns should be fully filled, while the *TAGS* columns is optionally filled. Each tag should be separated by ... (*3 consecutive dots*). Beside ... , numbers and alphabet character, there should be no other character.
+
+The picture below shows a good example for the Excel Sheet.
+
+image::Export_Capture1_LinhChi.png[width="270"]
+
+// end::import[]
+
+// tag::archive[]
+
+=== Archive the record data from Savee to the Excel file: `archive`
+
+Archives the records into an Excel file. +
+
+There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path). +
+
+Format: +
+
+****
+* *Default mode* `archive` will list down all records in Savee and archives all of them to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*. Then, the records stored in the Excel file will be deleted automatically in Savee.
+
+* *Single argument Date mode* `archive d/DATE` will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
+
+* *Dual argument Date mode* `archive d/START_DATE END_DATE` will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default *Working Directory*, it will *detect automatically user's Working Directory*.Then, the records stored in the Excel file will be deleted automatically in the Savee.
+
+* *Single argument Directory Path mode* `archive dir/DIRECTORY_PATH` will list down all records in Savee and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
+
+* *Single argument Date mode + Single argument Directory path mode* `archive d/DATE dir/DIRECTORY_PATH` will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
+
+* *Dual argument Date mode + Single argument Directory path mode* `archive d/START_DATE END_DATE dir/DIRECTORY_PATH` will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.
++
+****
+
+If the command is in *Dual argument Date mode*, START_DATE (the first `Date`) should be earlier than or equal to the END_DATE (the second `Date`). +
+Date follow the same configurations as date parameters required when adding records. It is in the form of *dd-mm-yyyy* where *dd* represents day, *mm* represents month and *yyyy* represents the year. *dd* and *mm* both require 1 to 2 digits while
+*yyyy* requires exactly 4 digits.
+
+
+The Excel file name will be named based on the command, relating to Date: +
+
+* *Default mode*: The Excel file will be named `Financial_Planner_ALL.xlsx`
+* *Single argument Date mode*: The Excel file will be named `Financial_Planner_dd-mm-yyyy.xlsx`
+* *Dual argument Date*: The Excel file will be named `Financial_Planner_dd-mm-yyyy_dd-mm-yyyy.xlsx`
++
+
+If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it *must* be closed before we enter the command.
+
+After you enter the `archive` command, you should *wait for few minutes* for the Excel file to be written.
+
+Please note that the `undo` and `redo` command can only affect the Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `archive` command, the records archived will be added again back to Savee but the Excel file created will *not* be deleted.
+
+Examples:
+
+* `archive`
+* `archive d/31-3-1999`
+* `archive dir/C:\`
+* `archive d/31-3-1999 31-03-2019`
+* `archive d/31-3-1999 dir/C:\`
+* `archive d/31-3-1999 31-3-2019 dir/C:\`
+
+There will be two sheets in the Excel file, namely *RECORD DATA* and *SUMMARY DATA*.
+
+* *RECORD DATA* stores all the data of record the user want to archive, there are 4 columns: Name, date, money and tags, the tags names will be separated by ..., for visual benefit.
+
+* *SUMMARY DATA* stored the summary statistics for the period you archived, and there is a *Line Chart* next to the table for visual statistic [refer to *Draw a line chart automatically inside the Excel sheet* part in *User guide* for more information].
+
+* As the size of the Chart is fixed initially. Sometimes, when user archive too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
+
+image::Export_Capture3_LinhChi.PNG[width:800]
+
+// end::archive[]
+
+Auto-Completion: +
+// tag::autocomplete-l[]
+
+* Dates
+** Input text can be completed to dates that already exist in records in Savee.
+** Inputs starting with `d/` can be completed with dates as well as the argument that come immediately after the entire
+`d/DATE` input as long as there are only whitespaces between them.
+** Text can also be completed to `today` or `ytd`.
+* Directory
+** Does not offer auto-competion.
+* There will be no suggestions on parameters that come after the fourth.
+// end::autocomplete-l[]
+
+// tag::draw_line_chart[]
+
+=== Draw a line chart automatically inside the Excel sheet : `NO COMMAND REQUIRED TO BE TYPED`
+
+Automatically uses the the summary data from the *SUMMARY DATA* sheet in the Excel sheet after the command `archive` or `exportexcel` is called.
+
+As you can see the screenshot below, in the *SUMMARY DATA* sheet, next to the summary table:
+
+image::Export_Capture2_LinhChi.png[width="500"]
+
+* On the top left of the chart, the legend shows 3 lines, namely Income, Outcome, and Net.
+** The first blue line shows the Income based on Date.
+** The second orange line shows the Outcome based on Date
+** The third grey line shows the Net (total of income and outcome) based on Date.
+
+
+// end::draw_line_chart[]
+
+// tag::limitfeatures[]
+
+== Spending Limit Features
+
+* This section describes the limit feature that allows users to set values to control their future spending.
+Constraints that apply to records also apply to each limit. Refer to <<constraints>> for more information.
+
+
+[[addlimit]]
+=== Adding a limit: `addlimit`
+
+Adds a spending limit for a time period or a particular day to Savee. +
+Format: `addlimit d/START_DATE END_DATE m/MONEYFLOW` (`limit d/DATE m/MONEYFLOW`)+
+
+When inputting two days, START_DATE and END_DATE indicates the starting date and ending date for the limit.
+If there is only one date, that day will be the time period.
+MONEYFLOW denotes the money spending limit for that period of time.
+
+* After the limits have been added, Savee will keep checking the latest condition of these limits.
+Once the total amount of money spent during this time period exceeds the spending limit,
+Savee will warn the user by sending the warning message.
+****
+* DATE_START must be earlier or equal than DATE_END. When DATE_START and DATE_END are the same, this will be equivalent to single DATE.
+* Moneyflow for limit features can only be a positive integer, and does not require a "+" or "-".
+* Any date or period of time can only have at most 1 assigned limit.
+****
+
+Example:
+
+* `addlimit d/20-8-2018 m/100`
+* `addlimit d/20-8-2018 30-8-2018 m/632`
+* `addlimit d/20-8-2018 30-8-2018 m/100`
+
+Auto-Completion: +
+// tag::autocomplete-m[]
+
+* Dates
+** Input text can be completed to dates that already exist in records in Savee.
+** Inputs starting with `d/` can be completed with dates as well as the argument that come immediately after the entire
+`d/DATE` input as long as there are only whitespaces between them.
+** Text can also be completed to `today` or `ytd`.
+* Moneyflow
+** Does not offer auto-competion.
+
+* There will be no suggestions on parameters that come after the fourth.
+// end::autocomplete-m[]
+
+[[checklimit]]
+=== Viewing all limits: `checkLimit`
+
+Displays all limits information stored in Savee +
+Format: `checklimit`
+
+Example:
+
+* `checklimit`
+
+
+[[deletelimit]]
+=== Deleting a limit: `deleteLimit`
+
+Deletes an existing spending limit from Savee +
+Format: `deleteLimit d/START_DATE END_DATE` (`deleteLimit d/START_DATE`) +
+
+The deleting command is based on the date period, since there will be at most one limit
+for one period of time, user only need to enter a period of time or a single date. The limit
+with the same dates will be deleted. If there is no limit for that period, the program will
+throw errors.
+Delete
+****
+* There must be a limit with the same dates.
+* Limits cannot be partially deleted with incorrect dates.
+****
+
+Examples:
+
+* `deletelimit d/20-8-2018`
+* `deletelimit d/20-8-2018 30-8-2018`
+
+Auto-Completion: +
+// tag::autocomplete-n[]
+
+* Dates
+** Input text can be completed to dates that already exist in limits in Savee.
+** Dates suggested can only come from limits, it will not include dates entered in records in Savee.
+** Inputs starting with `d/` can be completed with dates as well as the argument that come immediately after the entire
+`d/DATE` input as long as there are only whitespaces between them.
+** Text can also be completed to `today` or `ytd`.
+
+* There will be no suggestions on parameters that come after the third.
+// end::autocomplete-n[]
+
+[[editlimit]]
+
+=== Editing a limit: `editLimit`
+
+Edit a limit to Savee +
+Format: `editLimit d/START_DATE END_DATE m/MONEYFLOW` (`editLimit d/START_DATE END_DATE m/MONEYFLOW`)+
+
+Editlimit is similar to <<deletelimit>> command, it is also based on the date period.
+The editlimit command will check the input date period or the single day and
+replace the original moneyFlow with the new moneyFlow.
+****
+* `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
+* There must be a limit with the same dates.
+****
+
+Examples:
+
+* `editlimit d/20-8-2018 m/200`
+* `editlimit d/20-8-2018 30-8-2018 m/200`
+
+Auto-Completion: +
+// tag::autocomplete-o[]
+
+* Dates
+** Input text can be completed to dates that already exist in limits in Savee.
+** Dates suggested can only come from limits, it will not include dates entered in records in Savee.
+** Inputs starting with `d/` can be completed with dates as well as the argument that come immediately after the entire
+`d/DATE` input as long as there are only whitespaces between them.
+** Text can also be completed to `today` or `ytd`.
+* Moneyflow
+** Does not offer auto-competion.
+
+* There will be no suggestions on parameters that come after the fourth.
+// end::autocomplete-o[]
+
+=== Adding a monthly limit: `addmonthlylimit`
+
+Add a continuous monthly limit always for the current month.
+Format: `addmonthlylimit m/MONEYFLOW`
+
+The monthly limit will always check the spend of the current month according to the current time.
+For example, if the limit was set to be 200 at April, the limit will check the total spend for April.
+When the time comes to May, the limit will no longer check April, instead, the limit
+will check the total spend of May until the last second of May.
+
+****
+* `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
+****
+
+Examples:
+
+* `addmonthlylimit m/200`
+
+=== Editing the monthly limit: `editmonthlylimit`
+
+Edit an existing monthly limit.
+Format: `editmonthlylimit m/MONEYFLOW`
+
+The monthly limit will be replaced by the new monthly limit.
+****
+* `MONEYFLOW` can only be a positive integer, and does not require a "+" or "-".
+* There must be an existing monthly limit.
+****
+
+Examples:
+
+* `editmonthlylimit m/200`
+
+=== Deleting the monthly limit: `deletemonthlylimit`
+
+Delete the monthly limit.
+Format: `deletemonthlylimit`
+
+The monthly limit will be deleted and no longer check the spend of the current month.
+****
+* There must be an existing monthly limit.
+****
+
+Examples:
+
+* `deletemonthlylimit`
+// end::limitfeatures[]
+
+== Upcoming Features
+
+=== Showing a visual representation of daily/monthly summary `[Coming in v2.0]`
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
+
+=== Adding description to records `[Coming in v2.0]`
+
+=== Changing app configurations `[Coming in v2.0]`
+
+=== View bank balances `[Coming in v2.0]`
+
+=== Record parties to make payment to `[Coming in v2.0]`
+
+=== Adding regular payments/income to be automatically recorded `[Coming in v2.0]`
+
+=== Auto Complete for wider range of inputs and accuracy `[Coming in v2.0]`
+
+===
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Savee folder.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
+* *Help* : `help`
+
+* *Add* : `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
+e.g. `add n/Dinner with family d/20-12-2017 m/-10 t/food t/family`
+
+* *List* : `list [d/DATE] [DATE]` +
+e.g. +
+.  `list`
+. `list d/20-12-2017`
+. `list d/20-12-2017 30-09-2018`
+
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
+
+* *Find tag* : `findtag KEYWORD [MORE_KEYWORDS]` +
+e.g. `findtag friend`
+
 * *Select* : `select INDEX` +
-e.g.`select 2`
+e.g. `select 2`
+
+* *Sort* : `sort [CATEGORY] [ORDER]` +
+e.g.
+. `sort name`
+. `sort asc`
+. `sort date asc`
+. `sort money desc`
+. `sort asc moneyflow`
+
+* *Edit* : `edit INDEX [n/NAME] [d/DATE] [m/MONEYFLOW] [t/TAG]...` +
+e.g. `edit 2 n/Present d/12-11-2018`
+
+* *Delete* : `delete INDEX` +
+e.g. `delete 3`
+
+* *Delete by date* : `deletedate DATE` +
+e.g. `deletedate 31-7-2018`
+
 * *History* : `history`
+
 * *Undo* : `undo`
+
 * *Redo* : `redo`
+
+* *Clear* : `clear`
+
+* *Exit* : `exit`
+
+* *View summary* : multiple modes of `summary` +
+e.g.
+. `summary date d/1-1-2018 12-12-2018`
+. `summary month d/apr-2018 sep-2018`
+. `summary month d/APR-2018 SeP-2018`
+. `summary category d/1-1-2018 12-12-2018`
+
+* *View pie chart breakdown* : `stats d/DATE DATE` +
+e.g. `stats d/20-12-2017 31-09-2018`
+
+* *Export into Excel* : multiple modes of `exportexcel` +
+e.g. +
+. `exportexcel`
+. `exportexcel d/31-3-1999`
+. `exportexcel dir/C:\`
+. `exportexcel d/31-3-1999 31-03-2019`
+. `exportexcel d/31-3-1999 dir/C:\`
+. `exportexcel d/31-3-1999 31-3-2019 dir/C:\`
+
+* *Import from Excel file into app* : multiple modes of `import` +
+e.g. +
+. `import dir/C:\Financial_Planner_ALL.xlsx`
+. `import dir/C:\ n/Financial_Planner_ALL`
+. `import dir/C:\ n/Financial_Planner_All.xlsx`
+
+* *Archive records into Excel file* : multiple modes of `archive` +
+e.g. +
+. `archive`
+. `archive d/31-3-1999`
+. `archive dir/C:\`
+. `archive d/31-3-1999 31-03-2019`
+. `archive d/31-3-1999 dir/C:\`
+. `archive d/31-3-1999 31-3-2019 dir/C:\`
+
+* *Add limit* : `addlimit d/DATE [DATE] m/MONEYFLOW` +
+e.g. +
+. `addlimit d/20-12-2017 m/100`
+. `addlimit d/20-12-2017 30-09-2018 m/100`
+
+* *Check limit* : `checklimit` +
+
+* *Delete limit* `deletelimit d/DATE [DATE]` +
+e.g. +
+. `deleteLimit d/20-12-2017`
+. `deleteLimit d/20-12-2017 30-09-2018`
+
+* *Edit limit* `editlimit d/DATE [DATE] m/MONEYFLOW` +
+e.g. +
+. `editlimit d/20-12-2017 m/200`
+. `editlimit d/20-12-2017 30-09-2018 m/200`
+
+
+* *Add monthly limit* : `addmonthlylimit m/MONEYFLOW` +
+e.g. +
+`addmonthlylimit m/500` +
+
+* *Edit monthly limit* : `editmonthlylimit m/MONEYFLOW` +
+e.g. +
+`editmonthlylimit m/300` +
+
+* *Delete monthly limit* : `deletemonthlylimit`
+

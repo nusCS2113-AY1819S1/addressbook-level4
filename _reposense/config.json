@@ -1,0 +1,25 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "nguyenngoclinhchi",
+      "displayName": "NGU...CHI",
+      "authorNames": ["nguyenngoclinhchi"]
+    },
+    {
+      "githubId": "tztzt",
+      "displayName": "TEH...HON",
+      "authorNames": ["tztzt"]
+    },
+    {
+      "githubId": "Tenvinc",
+      "displayName": "VIN...ONG",
+      "authorNames": ["Tenvinc", "Vincent", "tenvinc"]
+    },
+    {
+      "githubId": "oscarzeng",
+      "displayName": "ZEN...HAO",
+      "authorNames": ["oscarzeng"]
+    }
+  ]
+}

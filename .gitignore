@@ -5,10 +5,10 @@ build/
 .idea/
 lib/*
 *.iml
+*.xlsx
 *.log
 *.log.*
 *.csv
-config.json
 src/test/data/sandbox/
 preferences.json
 .DS_Store
@@ -18,3 +18,4 @@ classes/
 /bin/
 src/main/resources/docs/
 out/
+/collated/

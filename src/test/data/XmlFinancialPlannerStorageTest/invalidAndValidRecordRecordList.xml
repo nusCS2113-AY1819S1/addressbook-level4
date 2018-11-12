@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<financialplanner>
+    <!-- Valid Record -->
+    <records>
+        <name>Payment for HM</name>
+        <date isPrivate="false">10-12-1994</date>
+        <moneyFlow isPrivate="false">-20.90</moneyFlow>
+    </records>
+    <!-- Record with invalid date field -->
+    <records>
+
+        <name>Payment for HM</name>
+        <date isPrivate="false">948asdf2424</date>
+        <moneyFlow isPrivate="false">-20.90</moneyFlow>
+    </records>
+</financialplanner>

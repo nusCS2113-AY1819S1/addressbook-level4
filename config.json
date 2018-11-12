@@ -1,0 +1,5 @@
+{
+  "appTitle" : "Savee",
+  "logLevel" : "INFO",
+  "userPrefsFilePath" : "preferences.json"
+}

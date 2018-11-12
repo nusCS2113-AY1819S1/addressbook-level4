@@ -1,0 +1,98 @@
+= Teh Zhi Thon - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets/
+:stylesheet: gh-pages-zhithon.css
+:sectnums:
+
+== Project: 'Savee' - A Desktop Financial Planner
+
+== Overview
+
+=== Project & Product Information
+
+'Savee' is a desktop financial planner application my team of 4 created for our Software Engineering Principles module.
+Our main project was to morph an existing code into any other software we opted to. We were evaluated based on our ability to work with existing base code and the quality of our new modifications to
+the existing code.
+
+Savee has a command-line interface (CLI) and graphical user interface created using JavaFX. It is for users who enjoy typing to manage their finances responsibly using a desktop interface. The application revolves around usage of the CLI to manage one's finances. Users can store a `Record` consisting of
+`name`, `moneyflow`, `date` and `tags` of any form of financial activity in the application.
+
+== Summary of Contributions
+
+=== *Major Enhancement*: ability to autocomplete text input
+
+** *Function*: display a popup-box of suggested words to autocomplete with when user inputs parts of a word.
+** *Significance*: Improves the product significantly for users who may not be familiar with the software commands and can
+save time by keying in parts of a command word and simply complete the command using the list of suggested words.
+
+** *Key Highlights*: To create an effective autocomplete by words instead of entire text, I needed to accurately read
+the the entire user input and provide a variable range of suggestions. While it may seem a simple feature, I wrote an extensive amount of code for this feature to ensure the auto complete
+performed its role successfully for most of the functions in our software.
+
+** *Credits*: The Java TextFields (AutoComplete) Library and its inner classes were recreated and tweaked
+to achieve the necessary aims of our product autocomplete functionality.
+
+=== *Minor Enhancement #1*: ability to find data by tags
+
+** *Function*: allows users to find and display all data with a specific attribute `tag`.
+** *Significance*: As mentioned in <<Product Information>>, each data can be categorised with tags. This feature
+improves the product by providing another means of filtering data according to their needs.
+
+=== *Minor Enhancement #2*: ability to sort data
+
+** *Function*: allows users to sort their data by a specific category and in a specific order
+** *Significance*: This feature improves the product by providing users with different means of manipulating
+and reorganising their data. This was a simple but much needed functionality.
+=
+
+=== *Other Contributions*
+
+** [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=tztzt&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[My Project Code]]
+
+** Project management:
+*** Pull requests made had to be approved by one other team member and I helped to evaluate pull
+requests to ensure only necessary changes to the code was merged.
+*** Pull Requests reviewed (with non-trivial review comments) https://github.com/CS2113-AY1819S1-T09-4/main/pull/17[#17]
+*** Added and improved utility methods for comparison and sorting that were easily reusable.
+(Pull requests https://github.com/CS2113-AY1819S1-T09-4/main/pull/64/files[#64])
+*** Made significant changes to reorganise User Guide user readability.
+(Pull Request https://github.com/CS2113-AY1819S1-T09-4/main/pull/114[#114])
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the <<../UserGuide, User Guide>>. They showcase my ability to write documentation targeting end-users._
+|===
+
+=== AutoComplete
+
+include::../UserGuide.adoc[tag=autocomplete-a]
+
+==== Autocomplete for `add` Command
+include::../UserGuide.adoc[tag=autocomplete-b]
+
+==== Autocomplete for `sort` Command
+include::../UserGuide.adoc[tag=autocomplete-f]
+
+==== Autocomplete for `summary` Command
+include::../UserGuide.adoc[tag=autocomplete-i]
+
+==== Autocomplete for `exportexcel` Command
+include::../UserGuide.adoc[tag=autocomplete-k]
+
+include::../UserGuide.adoc[tag=findtag]
+
+include::../UserGuide.adoc[tag=sort]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=autocomplete]
+include::../DeveloperGuide.adoc[tag=findtag]
+include::../DeveloperGuide.adoc[tag=sort]
+
+---

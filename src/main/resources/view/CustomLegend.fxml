@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" styleClass="default-legend-scroll">
+      <GridPane fx:id="legendGrid" hgap="10.0" vgap="10.0" styleClass="default-legend-bg">
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+</ScrollPane>

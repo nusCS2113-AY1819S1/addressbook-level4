@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+﻿= Savee - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -6,15 +6,16 @@
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
+:stylesheet: gh-pages.css
 :xrefstyle: full
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-T09-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T09-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -49,7 +50,7 @@ This will generate all resources required by the application and tests.
 
 === Verifying the setup
 
-. Run the `seedu.address.MainApp` and try a few commands
+. Run the `seedu.planner.MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
 
 === Configurations to do before writing code
@@ -109,9 +110,9 @@ image::Architecture.png[width="600"]
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
-The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/tree/master/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has only one class called link:{repoURL}/src/main/java/seedu/planner/MainApp.java[`MainApp`]. It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -144,15 +145,15 @@ image::LogicClassDiagram.png[width="800"]
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
 
 .Component interactions for `delete 1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+image::SDforDeleteRecord.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `FinancialPlannerChangedEvent` when the Financial Planner data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
 .Component interactions for `delete 1` command (part 2)
-image::SDforDeletePersonEventHandling.png[width="800"]
+image::SDforDeleteRecordEventHandling.png[width="800"]
 
 [NOTE]
 Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -165,11 +166,12 @@ The sections below give more details of each component.
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
+*API* : link:{repoURL}/src/main/java/seedu/expense/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `WelcomePanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+For example, the layout of the link:{repoURL}/src/main/java/seedu/expense/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
@@ -185,11 +187,11 @@ The `UI` component,
 image::LogicClassDiagram.png[width="800"]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+link:{repoURL}/src/main/java/seedu/expense/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `FinancialPlannerParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+.  The command execution can affect the `Model` (e.g. adding a record) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -199,41 +201,44 @@ image::DeletePersonSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
-
+//@@tztzt(Zhithon)
 .Structure of the Model Component
 image::ModelClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+*API* : link:{repoURL}/src/main/java/seedu/planner/model/Model.java[`Model.java`]
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Financial Planner data.
+* exposes an unmodifiable `ObservableList<Record>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Limit>` that can be `observed`
+* contains a `FilteredList<Record>` of all records in the current month which is updated automatically and has listeners bound to it that will notify the Ui of any changes
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `Financial Planner`, which `Record` can reference. This would allow `Financial Planner` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
-
+//@@tztzt(Zhithon)
 [[Design-Storage]]
 === Storage component
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/src/main/java/seedu/planner/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the RecordList data in xml format and read it back.
+* can save the LimitList data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.planner.commons` package.
 
 == Implementation
 
@@ -243,54 +248,71 @@ This section describes some noteworthy details on how certain features are imple
 === Undo/Redo feature
 ==== Current Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+The undo/redo mechanism is facilitated by `VersionedFinancialPlanner`.
+It extends `FinancialPlanner` with an undo/redo history, stored internally as an `financialPlannerStateList` and
+`currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
+* `VersionedFinancialPlanner#commit()` -- Saves the current financial planner state in its history.
+* `VersionedFinancialPlanner#undo()` -- Restores the previous financial planner state from its history.
+* `VersionedFinancialPlanner#redo()` -- Restores a previously undone financial planner state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitFinancialPlanner()`,
+`Model#undoFinancialPlanner()` and `Model#redoFinancialPlanner()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedFinancialPlanner` will be initialized with
+the initial financial planner state, and the `currentStatePointer` pointing to that single financial planner state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the financial planner. The `delete` command calls
+`Model#commitFinancialPlanner()`, causing the modified state of the financial planner after the `delete 5` command executes
+to be saved in the `financialPlannerStateList`, and the `currentStatePointer` is shifted to the newly inserted financial planner state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/Mala ...` to add a new record. The `add` command also calls
+`Model#commitFinancialPlanner()`, causing another modified financial planner state to be saved into the
+`financialPlannerStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+If a command fails its execution, it will not call `Model#commitFinancialPlanner()`, so the financial planner state will
+not be saved into the `financialPlannerStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the record was a mistake, and decides to undo that action by executing the
+`undo` command. The `undo` command will call `Model#undoFinancialPlanner()`, which will shift the `currentStatePointer`
+once to the left, pointing it to the previous financial planner state, and restores the financial planner to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial financial planner state, then there are no previous
+financial planner states to restore. The `undo` command uses `Model#canUndoFinancialPlanner()` to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite -- it calls `Model#redoFinancialPlanner()`, which shifts the `currentStatePointer`
+once to the right, pointing to the previously undone state, and restores the financial planner to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `financialPlannerStateList.size() - 1`, pointing to the latest financial planner
+state, then there are no undone financial planner states to restore. The `redo` command uses `Model#canRedoFinancialPlanner()`
+to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the financial planner, such as
+`list`, will usually not call `Model#commitFinancialPlanner()`, `Model#undoFinancialPlanner()` or
+`Model#redoFinancialPlanner()`. Thus, the `financialPlannerStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitFinancialPlanner()`. Since the `currentStatePointer` is not pointing at the end of the `financialPlannerStateList`, all financial planner states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -302,7 +324,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire financial planner.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
@@ -311,14 +333,663 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+* **Alternative 1 (current choice):** Use a list to store the history of financial planner states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedFinancialPlanner`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+//tag::autocomplete[]
+=== Auto Complete Feature
+==== Current Implementation
+The autocomplete mechanism is facilitated by the `NewAutoCompletionBinding` class. It represents the binding of the
+autocomplete window to the `CommandBox` and is the component that manages the interactions between the text input and
+the contents of the autocomplete list that is displayed in the window. This feature observes the text input in the
+CommandBox and displays a list of words in another window under the
+CommandBox for the user to select and complete his current focus text - the word he is currently typing.
+
+The key components in this class are the `autoCompletionPopup` and the `caretChangedListener` that perform the key
+functionalities.
+
+`caretChangedListener` is an observer that checks the caret in the command box and is triggered whenever the caret
+changes its position, whether a character is typed or the caret is moved using the arrow keys. When triggered, it reads
+the text in the command box and checks the position of the caret, then extracts the current word of target to be
+completed as well as the current input text and the prefix of the current word if any. Extraction is done by tracing back from the caret
+position and as well as tracing forward. Any characters that are not a whitespace and are not separated by a whitespace
+are considered to be the same word as the current word to be completed. The text before and after the word to completed
+are also saved so they will not be lost upon completion.
+
+This listener passes the extracted String input to the `CustomSuggestionProvider` through `updateSuggestions`.
+
+`CustomSuggestionProvider` reads the word to be competed and the input text. It trims and splits the input text and
+find the index of the word to completed. It reads the first input first as it is the key command word and performs a
+different operation on the input string depending on the command word as well as any possible following parameters.
+
+Functions which are supported by autocomplete will parse the input individually through the different private methods
+available in `CustomSuggestionProvider`. Once it has decided which set of texts to be the new word suggestion bank,
+it calls the `CustomSuggestionProvider#updateSuggestions` overloaded method to update the `SuggestionProvider`.
+
+After updating the `SuggestionProvider`, `NewAutoCompletionBinding#SetUserInput` calls `onUserInputChanged` which
+is responsible for updating the suggestions list according to what the word to be completed is. As this class was
+tweaked from the library implementation, the threading involved in this method will not be detailed. It updates
+the list of suggestions
+by comparing the user input word to the list of suggestions and passes the resultant list to the `autoCompletionPopup`
+which will proceed to display the list of text in the popup below the command box.
+
+Now back to the `autoCompletionPopup`, whenever the user highlights a selected word input and selects it, the
+`autoCompletionPopup#setOnSuggestion` is triggered and will try to complete the word with the selected text and once
+completed, it hides the popup and sets the caret to the end of the newly completed word.
+
+The following sequence diagram shows how the auto completion operation works:
+
+image::AutoCompleteSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+===== Aspect: Method to Update Suggestion Bank to use for comparison to input word
+* **Alternative 1 (current choice):** Use listeners to the caret in the command box
+** Pros: Accurate parsing of input and able to detect which word is currently in focus.
+** Cons: Difficult to correctly parse text, as need to avoid whitespaces. Also led to many index array exceptions that
+can occur when checking the input.
+
+* **Alternative 2:** Use text listeners in the command box
+** Pros: Simple to implement, similar to library implementation. Safe and minimal room for errors.
+** Cons: Cannot autocomplete by word, can only complete the last word input in the command box. Unable to perform
+completion for texts before the last word.
+
+===== Aspect: Method to compare input word to Suggestion Bank to obtain displayed list of words
+* **Alternative 1 (current choice):** Check if suggestion bank word *begins* with input word
+** Pros: Simple, straightforward autocomplete for users. Users that are already good at typing and spelling
+will have a breeze using this implementation.
+** Cons: Smaller range of completion texts as users need to accurately type the first few letters before getting a
+an expected completion suggestion.
+
+* **Alternative 2:** Check if suggestion bank word *contains* input word e.g type `tag` -> suggests `findtag`
+** Pros: User can type whichever word is convenient to them to obtain a suggestion they desire. Users who may not know
+the full spelling of a word and only partially will enjoy this.
+** Cons: Range of texts displayed may be excessive and not appealing to all users.
+
+//end::autocomplete[]
+
+//tag::list[]
+=== List history feature
+==== Current Implementation
+The list mechanism is facilitated by `ModelManager`.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
+ListCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode.
+
+This feature has only one keyword `list` but implements 3 different argument modes to allow users to access multiple versions of the same command.
+The three argument modes are as listed below:
+
+* No Argument mode -- Requires no arguments and returns the entire list of records in the FinancialPlanner.
+* Single Argument mode -- Requires a single date and returns all records containing that date
+* Dual Argument mode -- Requires 2 dates, a `start date` and an `end date`. It returns all records containing dates within the time frame of start date and end date, inclusive of both start date and end date
+The mechanism that facilitates these modes can be found in the `ListCommandParser#parse`. Below is a overview of the mechanism:
+
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes which returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/` is then passed into `ListCommandParser#splitByWhitespace` for further processing and returns an array.
+. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+
+The `ListCommand` has two constructors which makes use of overloading to reduce code complexity, one with no argument and the other one with 2 `Date` arguments.
+
+The following sequence diagram shows how the list operation works:
+
+image::ListSequenceDiagram.png[width="800"]
+
+For simplicity, interactions with the UI is not shown in the diagram above. +
+The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList
+implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
+listener is present in `RecordListPanel` and will update the UI list automatically.
+
+==== Design Considerations
+===== Aspect: Data structure to support listing of records
+
+* **Alternative 1 (current choice):** Uses a FilteredList that is tracked by the UI. FilteredLIst is a wrapper around the ObservableList<Record> that is stored in UniquePersonList which allows for any changes in the observable list to be propagated to the filtered list automatically.
+** Pros: Easy to implement
+** Cons: May take a significantly longer time to list records if there are many records spanning across a large timeframe.
+
+* **Alternative 2:** Implement a HashMap with Date as the key and Record as the value.
+** Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.
+** Cons: Current UI implementation relies on `FilteredList`. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to `ObservableMap` instead. Alternatively, one can utilise a `HashMap` to first generate the list and pass the list reference into `FilteredList`. However, there is a need to code a filter function.
+//end::list[]
+
+// tag::sort[]
+=== Sort records feature
+==== Current Implementation
+The sort mechanism is facilitated by `ModelManager`. It extends `FinancialPlanner` with a component that sorts the
+internal list of records. SortCommand calls `ModelManager#sortFilteredRecordList` and passes in the category to be
+sorted by and the sort order.
+
+This feature has one keyword `sort` and takes in arguments of either category or order of sort. Keywords are not
+case sensitive.
+
+Category can be either of the following keywords: `name`, `date`, `money`, `moneyflow`
+
+Order can be either of the following keywords: `desc` - descending, `asc` - ascending
+
+This feature has 2 different kind of modes as follows:
+
+. Single Argument Mode - Input argument can be either the category or the order of sort
+* If category specified, records are sorted in ascending order of that category
+* If order specified, records will be sorted by name in the specified order
+
+. Duo Argument Mode - Input arguments must contain only 1 category and only 1 order, and can be input in no particular order
+
+The input given by the user is passed to `SortCommandParser` to split the input separated by whitespaces to ensure
+there is either only one or two arguments input by the user. These arguments are stored in an array of strings and
+the size of the array determines the mode of the command.
+
+The strings are compared to two sets of strings containing the supported categories and orders of the function.
+The string of the category and a boolean representing whether the records are to be reversed will then be passed to
+`ModelManager` to sort the records.
+
+Since the displayed list in the UI is a `FilteredList` which is a wrapper for the underlying list `UniqueRecordList` structure,
+sorting the internal list of records in `versionedFinancialPlanner` will post an event that notifies the UI to update
+the displayed list.
+
+The following sequence diagram shows how the sort operation works:
+
+image::SortSequenceDiagram.png[width:800]
+
+==== Design Considerations
+===== Aspect: Method of sorting data
+
+* **Alternative 1 (current choice):** Sort the observable array list in the underlying data structure in `UniqueRecordList`
+** Pros: Easy to implement, sorting will be permanent, user need not sort again with every following command
+** Cons: Not very intuitive, user may not have intended to modify the underlying data arrangement instead only want to
+sort the data just this once for viewing
+
+* **Alternative 2:** Sort the FilteredList of records obtained after filtering the underlying array list
+** Pros: Does not allow the user to alter the arrangement of the underlying data, and only obtains a sorted version of
+the read only data.
+** Cons: Unable to sort a FilteredList as it does not support it, implementations could instead use SortedList but it
+will not be able to perform the filtering function
+// end::sort[]
+
+//tag::summary[]
+=== View summary feature
+This feature allows the user to view a summary table of all their financial activity within a period of time. There are 3 different ways the user can
+view the summary, one is summary by date which means the summary of each day in the period will be provided, summary by month or summary by category.
+
+The corresponding command required for this feature is `summary` and the user will have to supply 2 dates and a compulsory parameter `mode` which determines whether
+they are viewing *summary by date, by month or by category*. This feature involves most components of FinancialPlanner with the exception of `Storage`. It can also be broadly split into
+2 phases, the logic phase which generates the summary and the UI phase which allows users to view the summary in a table.
+
+As shown below, `SummaryByDateCommand`, `SummaryByCategoryCommand`, `SummaryByMonthCommand` is a type of SummaryCommand and thus inherits from `SummaryCommand`. The rationale behind this design choice is that
+code shared by these classes can be placed in `SummaryCommand` for code reuse. This makes it easier for future developers to easily extend this functionality.
+
+.Class diagram showing the inheritance from SummaryCommand
+image::SummaryCommandClassDiagram.png[width="500"]
+
+Also, these commands utilise their own version of summary lists which is also inherited from the parent class `SummaryList` as shown below. Below details the logic phase.
+
+. When the user types in the command "summary date d/1-1-2018 12-12-2018", the command is passed from LogicManager to FinancialPlannerParser. In here,
+the system chooses which parser to use and calls its parse method which is polymorphic, meaning that every parser has the same function but use different
+implementation.
+. In this class, based on the `mode` parameter given, the system chooses a SummaryCommand to instantiate and pass the reference back to the Logic Manager. The various checks for the validity of the
+parameters also occur during this stage.
+. After the SummaryCommandObject is created, `SummaryByDateCommand#execute` is called. The responsibility of SummaryByDateCommand is a manager that has retrieves information from model and passes it to other components.
+SummaryByDateCommand gets the filtered list from Model using `Model#getFilteredRecordList` and passes it to the constructor of SummaryByDateList. The creates `SummaryList` object which is then
+passed into a `ShowSummaryTableEvent` before triggering the event.
+. The entire logic process is the same for SummaryByMonthCommand and SummaryByCategoryCommand but uses different lists.
+
+The sequence diagram below details the sequence of program executions for the logic phase.
+
+.Sequence diagram for high level interactions in logic phase
+image::SummarySequenceDiagram.png[width="790"]
+
+The next phase of the program execution is performed in the UI components.
+
+. `MainWindow` will listen for the `ShowSummaryTableEvent` and render all Main UI panels invisible before rendering `StatsDisplayPanel` visible.
+. It then calls the handler function in `StatsDisplayPanel` which will create tabs and call the constructor of `SummaryDisplay`.
+. Within the constructor of `SummaryDisplay`, the table is created and the SummaryList is converted into a Ui friendly list.
+
+==== Design Considerations
+===== Aspect: Method of generating the summary
+
+* **Alternative 1 (current choice):** Generate the summary list whenever the summary command is called.
+** Pros: Easier to implement and maintain. Sufficient for the intended target audience of FinancialPlanner.
+** Cons: This requires looping through each record in the filtered record list obtained from the `Model`.
+To aid in the time complexity, the internal implementation of SummaryList was done using hash maps instead which allowed for
+constant time random access.. However, the initial filtering is close to linear time complexity which could slow down the app if many records are inside.
+Also, the list had to be created every time `summary` is called which could be slow if the command is called multiple times.
+
+* **Alternative 2:** Morph the record list into a record hash map of record lists instead
+** Pros: A hash map allows for constant random access to a record list of a particular date assuming the key for the hash map is using dates.
+Thus, the filtering function does not need to loop through as many records and the time taken would be lower especially when the database in the application is large.
+** Cons: Might be too specific to only 1 type of category like categorising by date. If any other types are required, another map may have to be added. This implementation may make the
+system rigid and hard to modify in the future.
+
+* **Alternative 3:** Cache the summary list in financial planner
+** Pros: By caching the summary list in the financial planner and assigning a boolean variable along with information on the filter predicate to it to determine if it is modified, we can
+reduce the number of times summary list is recreated every time the `summary` command is called. When the `summary` command is called, it checks the
+boolean variable to see if summary list needs to be modified. If it doesn't need to be regenerated, the system will simply read directly from `ModelManager`.
+** Cons: This implementation involves tracking of the state of the summary list. If it is not done systematically, it may have some hidden bugs which can be hard to test.
+Also, if the sequence of commands is as follows, *summary, add, summary*, the time required is still long.
+
+//end::summary[]
+==== Aspect: Method of switching UI panels
+* **Alternative 1(current choice):** Disable all UI panels within the Main UI placeholder before enabling the desired one
+** Pros: Easy to implement and apply it to other newly created panels. To make use of the current implementation, the panel can simply be the children of
+the main Ui placeholder and its event handler can be placed in main window.
+** Cons: Might be inefficient when there are many panels or many switching as the same process must be repeated for all panels.
+However, this is unrealistic and it is unlikely that there are a lot of UI panels for it to make a significant impact.
+
+* **Alternative 2:** Track which UI panel is visible and only hide that panel
+** Pros: Might have some benefits if the amount of resources available is low
+** Cons: Slightly harder to implement but unlikely to have visible benefits.
+
+//tag::stats[]
+=== View category breakdown feature
+==== Current Implementation
+This feature allows the user to view a pie chart breakdown o
+f all expenses and all income within a date range which the user can specify.
+
+The corresponding command required for this feature is `stats`.For this feature, users have to enter 2 dates, one starting date and one ending date.
+This feature is facilitated by a few key components of FinancialPlanner, `Logic`, `Model`, `UI` and function executions can be split into 2 phases, the `Logic phase` and the `UI phase`.
+The detailed execution sequence of functions used for `Logic phase` are as shown below.
+
+.Sequence diagram for high level interactions in logic phase
+image::StatisticLogicSequenceDiagram.png[width="790"]
+
+Consider the situation where the user enters *"stats d/1-1-2018 12-12-2018"*:
+
+* When user enters the command, the `LogicManager` recognises the command and calls the `FinancialPlannerParser` to process the new command as shown above.
+* The FinancialPlannerParser will then search for the `stats` keyword required and once it is found, the rest of the command minus the keyword is passed in as a
+parameter to StatisticCommandParser.
+* The StatisticCommandParser will then parse the arguments and create a new StatisticCommand object before returning its reference. The activity diagram below details the mechanism
+within the `StatisticCommandParser#parse` method.
+
+.Activity diagram for details in StatisticCommandParser
+image::StatisticParserActivityDiagram.png[width="790"]
+
+* Once `StatisticCommand#execute` is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
+both the start dates and end dates. This functionality is facilitated by the `ModelManager` which is the class that manages all interactions between
+`Logic` and `Model` component, by`ModelManager#updateFilteredRecords`. The command then retrieves the filteredList from ModelManager and passes it into
+the constructor of `CategoryStatisticsList`.
+* In this constructor, it will loop through all the records in the list and add them into an internal map. The internal data structure in `CategoryStatisticsList` is a hash map,
+to aid in the adding process, however it only outputs lists and not the map. This functionality is facilitated by `CategoryStatisticsList#addToCategoryStatistics` which checks whether the record
+is in the map.
+* If the record is not present, it creates a new `CategoryStatistic` object and adds that to the map. If the record is present, the record is then added to the existing `CategoryStatistic` object.
+* The flow of control returns to StatisticCommand and StatisticCommand calls the read function of CategoryStatisticsList to obtain a read-only list and passes it into
+an event constructor before posting the event `ShowPieChartStatsEvent`.
+
+After the event is posted, the execution proceeds to the `UI phase` where there is a listener in `MainWindow` listening to this event. This is facilitated by
+the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in `UI phase` for creating the pie chart for total expense.
+
+.Sequence diagram for high level interactions in UI phase
+image::StatisticUiSequenceDiagram.png[width="790"]
+
+* When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
+This will make all children hidden from view in the UI which ensures that the UI is displayed correctly.
+* As shown above, the function `StatsDisplayPanel#handleShowPieChartDataEvent` is called which will call the constructor of `MixedPieChartData`. The detailed execution details within this class is as shown in
+the activity diagram below.
+
+.Activity diagram for details in MixedPieChartDataList
+image::StatisticUiActivityDiagram.png[width="790"]
+
+The program flow is then as shown above where the `CategoryBreakdown` is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
+In the current implementation, whenever `stats` is called, 2 tabs will be created, one for total income and one for total expense. Thus, the same program sequence after construction for
+`CategoryBreakdown` is also repeated for total income.
+
+The sequence diagram below details the program flow after the constructor of CategoryBreakdown class is called.
+
+.Sequence diagram for creation of pie charts
+image::StatisticUiDetailedSequenceDiagram.png[width="790"]
+
+[NOTE]
+Note that the CustomLegend class is located within the CustomPieChart class which inherits from the JavaFX PieChart class. This legend class can
+only be accessed within CustomPieChart for security purposes.
+
+==== Design Considerations
+===== Aspect: Data structure to support statistic command
+* **Alternative 1 (current choice):** The pie chart breakdown is regenerated from the filtered list every time this command is called.
+** Pros: Reduce overhead during normal operations like adding, deleting and editing if we do not have to update the statistics in real time.
+** Cons: If the command is called multiple times, this process could be repeated many times which may make the app sluggish when there are many records.
+
+* **Alternative 2:** Use a data structure to store the statistic information when there is mutation of data
+** Pros: Since the statistics are constantly updated, whenever the command is called, system can read directly and not have to recompute.
+** Cons: Adds overhead to usual operations. Benefits may not be visible if the command is not called frequently.
+
+//end::stats[]
+
+//tag::welcomepanel[]
+=== View current month's breakdown
+This feature does not require user to type any command into the command box or update manually. It provides information about the category breakdown for
+the current month, presenting income and expense statistics together in one panel. In addition, to improve usability, accelerators were assigned to the menu bar
+and *HOME* key is the corresponding accelerator for this feature.
+
+The current implementation of this feature closely follows the *observer design pattern*. Whenever the system detects changes to the underlying list, like adding, deleting or editing
+records, it updates a listener which is attached to the `FilteredList` recordsInCurrentMonth present in ModelManager. To check if the current month is the same as the cached month,
+the listener will run a check by creating a separate `DateIsWithinIntervalPredicate` and comparing it with the current `Predicate` of the filtered list.
+This listener will then process changes in the list and compute a `CategoryStatisticsList` before passing it into the constructor of `UpdateWelcomePanelEvent`.
+Then the event is triggered, and the corresponding listener on the UI side is called.
+
+The program flow on the UI side is similar to that of viewing category breakdown of a time period with the exception that tabs are not created.
+
+The accelerators and the menu bar is connected to the UI component and will trigger `MainWindow#handleHome` whenever the accelerator *HOME* key or *Home* is selected using the menu.
+
+//end::welcomepanel[]
+
+// tag::findtag[]
+=== Find records by tag feature
+==== Current Implementation
+The findtag mechanism is also facilitated by `ModelManager`. FindTagCommand calls `ModelManager#updateFilteredRecords`
+and passes in different predicates depending on the input by the user.
+
+This feature has only one keyword `findtag` and a single working mode which takes in any number of input arguments. The
+input given by the user is passed to `FindTagCommandParser#parse` to split the desired tags the user wants to search by
+into an array of strings. The array of strings is passed into `TagsContainsKeywordsPredicate` to create the predicate
+for `updateFilteredRecordList` required in `ModelManager`.
+
+In `TagsContainsKeywordsPredicate`, to compare for a match, every keyword in the array is compared
+against the set of tags of each record and as long as any tag matches any of the keywords,
+the predicate will evaluate to true and allows the `FilteredList` to filter out the records that do not fulfil the
+predicate.
+
+`FindTagCommandParser` returns a `FindTagCommand` object which calls `updateFilteredRecordList` to set the new predicate
+and obtain a new `filteredRecords` based on the predicate, which will also trigger an event for the UI to read in and display the new records.
+
+The following sequence diagram shows how the limit operation works:
+
+image::FindTagSequenceDiagram.png[width:800]
+// end::findtag[]
+
+// tag::limitfeatures[]
+=== Limit features
+
+* Limit features' storage:
+** The limit features are based on the data type `Limit`, which includes two `Date` s and one `moneyFlow`.
+When entering only one date, the parser will let the date be both dateStart and dateEnd.
+It is equivalent to entering two same dates.
+** DateStart will always be earlier than or equal to dateEnd.
+** The limit storage is based on the `Date` . More than one limit for the same
+period of time is not allowed.
+
+* Limit features's check:
+** Whenever the user change the recordList information, including adding a record, deleting a record
+and editing a record, all the limits will be checked automatically by calling the function `autoLimitCheck()`.
+** The `autoCheckLimit()` function will look through all the records, calculate the total money for each limit
+, generate a string which contains all the exceeded limits' information and print the string
+out to warn the user.
+** To get the output, the function will execute a loop, which will
+execute the `isExceeded()`, `getTotalSpend()` and `generateLimitOutput()` for every limit
+and combine all the limits' output into one string.
+
+* Limit features' MoneyFlow:
+** Unlike the moneyFlow used by addCommand, the limit moneyFlow input can only be normal real number, which does not have "-" or
+"+" in front of the number. For example, `m/500`.
+** After user input the normal real number, the parser will add a "-"
+at the beginning of the real number, which makes it a normal moneyFlow.
+** If user input wrong form of limit moneyFlow, the program will throw an error.
+
+* Limit features' parsers:
+** `All the limitCommand Parsers are similar to each other. However, there are some differences between different commands.
+Detailed information will be provided in specific commands.`
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `m/` will be checked. If the form is correct. If the form is wrong, the program will throw an error,
+otherwise it will be constructed as a `MoneyFlow` type.
+. The string associated with `d/` is then passed into `xxxLimitCommandParser#splitByWhitespace` for further processing and returns an array.
+This string will be split into two strings and each of them will be constructed as a `Date` type variable.
+If there is only one date string, this date will be set to both dateStart and dateEnd.
+. After parsing the two dates, the parser will check whether the dateStart is earlier than dateEnd.
+. Lastly a new limit will be generated with the dateStart, dateEnd and money and return the xxxLimitCommand with the limit.
+
+* Monthly Limit:
+** The addMonthlyLimit command is to add a continuous limit always for the current month. The limit will always check
+the spend of the month according to the current time. For example, if the limit was set to be 200 at April, the
+limit will check the total spend for April. When the time comes to May, the limit will no longer check April, instead, the limit
+will check the total spend of May until the last second of May.
+** The user will input only the money they want to set.
+** The parser will make the limit with a special date `01-01-9999`, which is not likely to be used.
+** Once the monthly limit is going to be checked, the function `generateThisMonthLimit()` will be called, which
+will generate a temporary limit according to the current date. Then use this temporary limit to do the limit check and generate output.
+
+// tag::addlimit[]
+==== addLimit feature
+===== Current Implementation
+This command is to add a new limit according to the dates input.
+The command will read in a limit and store the limit by calling the `addLimit()` function.
+
+The user enters two dates (or one date) after the one "d/" index followed by money with m/ index.
+
+* If there is already a limit with the exactly same dates, the program will throw an error and the limit can not be added.
+
+The following sequence diagram shows how the limit operation works:
+
+image::LimitSequenceDiagram.png[width:800]
+// end::addlimit[]
+// tag::deleteLimit[]
+==== deleteLimit feature
+===== Current Implementation
+This command is to delete an existing limit.
+The command will read in a limit with the input dates and delete the limit with the same dates by calling the `deleteLimit` function.
+
+The user enters two dates (or one date) after the one "d/" index.
+
+* The deleteLimitCommandParser will use the dates and a dummy valid moneyFlow to make it a complete limit.
+
+* If there is no limit with the same dates, the program will throw an error.
+
+The following sequence diagram shows how the deleteLimit operation works:
+
+image::deleteLimitSequenceDiagram.png[width:800]
+// end::deleteLimit[]
+// tag::editLimit[]
+
+==== editLimit feature
+===== Current Implementation
+The editLimit command is to edit an existing limit.
+The command will read in a limit and replace the limit with the same dates by calliing the `updateLimit()` function.
+
+
+The user enter two dates after the one "d/" index followed by money with m/ index.
+
+* If there is no limit with the same dates, the program will throw an error.
+
+The following sequence diagram shows how the limit operation works:
+
+image::editLimitSequenceDiagram.png[width:800]
+// end::editLimit[]
+// tag::addMonthlyLimit[]
+==== addMonthlyLimit feature
+===== Current Implementation
+The addMonthlyLimit command is to add a monthly limit.
+The command will read in the monthly limit and store it by calling the `addLimit()` function.
+
+The user only enter money after the one "m/" index.
+
+* The parser will use the special date and the input money to make a complete limit.
+
+* If there is already a monthly limit, the program will throw an error.
+
+The following sequence diagram shows how the limit operation works:
+
+image::AddMonthlyLimitSequenceDiagram.png[width:800]
+// end::addMonthlyLimit[]
+// tag::editMonthlyLimit[]
+==== editMonthlyLimit feature
+===== Current Implementation
+The editMonthlyLimit command is to edit the monthly limit.
+The command will read in the monthly limit and update the monthly limit by calling the `updateLimit()` function.
+
+The user only enter money after the one "m/" index.
+
+* The parser will use the special date and the input money to make a complete limit.
+
+* If there is no monthly limit, the program will throw an error.
+
+The following sequence diagram shows how the limit operation works:
+
+image::EditMonthlyLimitSequenceDiagram.png[width:800]
+// end::editMonthlyLimit[]
+// tag::deleteMonthlyLimit[]
+==== deleteMonthlyLimit feature
+===== Current Implementation
+The deleteMonthlyLimit command is to delete the monthly limit.
+The command will read in the monthly limit and update the monthly limit by calling the `deleteLimit()` function.
+
+The user will only enter the command word.
+
+* The parser will use the special date and a dummy moneyFlow to make a complete limit.
+
+* If there is no monthly limit, the program will throw an error.
+
+The following sequence diagram shows how the limit operation works:
+
+image::DeleteMonthlyLimitSequenceDiagram.png[width:800]
+// end::deleteMonthlyLimit[]
+// tag::checkLimit[]
+==== checkLimit feature
+===== Current Implementation
+This feature is to help the user to check all the limits stored inside the limitList. The function will call
+manualLimitCheck(), which will generate a string that contains all limits' information.
+
+* When there is no limits inside the limitList, the program will throw an error.
+
+The following sequence diagram shows how the limit operation works:
+
+image::checkLimitSequenceDiagram.png[width:800]
+// end::checkLimit[]
+// end::limitfeatures[]
+
+// tag::deletedate[]
+
+=== Delete all the record whose date is required
+==== Current implementation
+The delete by date entry mechanism is facilitated by `ModelManager`.
+It represents an in-memory model of Savee and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`. DeleteByDateEntryCommand calls `ModelManager#getFilteredRecordList` to retrieve the list of all current records in the Savee. Then, it will loop through the list of records and call `ModelManger#deleteRecord(Record record)` to delete the record whose date is required. If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Savee and the message, which states records have been deleted. Then, `ModelManager#autoLimitCheck` will be called to check the current change in limit as we delete some records exceeds the limit or *not*. This feature has only one keyword `deletedate` and implements only 1 argument mode.
+The three argument modes are as listed below:
+
+* Single Argument mode -- Requires only one date. It deletes all records whose date is required.
+The date must follow the format: dd-mm-yyyy, error will be thrown if the format is *not* correct or the date entered is *not* real.
+
+The following sequence diagram shows how the list operation works:
+
+image::DeleteByDateEntrySequenceDiagram.png[width:800]
+
+// end::deletedate[]
+
+// tag::exportexcel[]
+=== Export the records from Savee to the Excel file.
+==== Current implementation
+The export into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of the Savee and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`. ExportExcelCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode. The List<Record> is retrieved by calling `ModelManager#getFilteredRecordList`. Meanwhile, it also called `ModelManager#getFinancialPlanner` to get the `ReadOnlyFinancialPlanner`. The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List<SummaryEntry> is easily retrieved from SummaryByDateList by calling `SummaryByDateList#getSummaryList`. `ExcelUtil#setNameExcelFile` is called to make the Excel name based on the condition of startDate and endDate. After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default *User's Working Directory*. With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file.
+
+There are 6 modes for this feature [refer to *Export the record data from Savee to the Excel file* part in *User Guide*]. The mechanism that facilitates these modes can be found in the `ExportExcelCommandParser#parse`. Below is a overview of the mechanism:
+
+. Method `ExportExcelCommandParser#createExportExcelCommand` takes the input argument and further analyse it.
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/`
+.. It is then passed into `ExportExcelCommandParser#splitByWhitespace` for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format. *If the size of the string equals 1*, it is constructed as a date type variable after being passed to `ParseUtil#parseDate`, it must follow the format dd-mm-yyyy. Error will be thrown if the format is *not* correct or the date entered is *not* real. *If the size of the string equals 2*, each sub-string is constructed as a date type variable after being passed to `ParseUtil#parseDate`, and an additional check is conducted to check if the first date entered, known as Start date is smaller than or equal to the second date entered, known as End Date.
+. The String associated with `dir/`
+.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing. *If the Directory path is unreal*, an error is thrown to inform the user.
+. Please take note that:
+.. If the prefix `d/` is *not* entered in the input, meaning that all the records will be included in the Excel sheet.
+.. If the prefix `dir/` is *not* entered in the input, meaning that the Directory Path is default as the *User's Working Directory*.
+
+The `ExportExcelCommand` has four constructors which makes use of overloading to reduce code complexity.
+
+* One constructor has no arguments and assigns default predicate for the `FilteredList` in `ModelManager`,
+`PREDICATE_SHOW_ALL_RECORDS` which will show all items in the list and the Directory path is *User's Working Directory*.
+* The second constructor takes in 2 `Date` arguments and assigns the predicate `DateIsWithinDateIntervalPredicate` which will only show items within the date interval and the Directory path is *User's Working Directory*.
+* The third constructor takes in 1 `Directory Path` argument and assigns the predicate as `PREDICATE_SHOW_ALL_RECORDS`, which will show all items in the list and the Directory path is the entered directory path.
+* The fourth constructor takes in 1 `Directory Path` and 2 `Date` arguments and assigns the predicate as `DateIsWithinDateIntervalPredicate` which will only show items within the date interval and the Directory path is the entered Directory Path.
+
+The following sequence diagram shows how the list operation works:
+
+image::ExportExcelSequenceDiagram.png[width:800]
+
+If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it *must* be closed before we enter the command. +
+
+Please note that `undo` and `redo` command can only affect Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `export` command, Savee will inform the user that *No more command to undo*, the records remain the same and the Excel file created will *not* be deleted.
+
+// end::exportexcel[]
+
+// tag::import[]
+
+=== Import the record data from the Excel file to Savee
+==== Current implementation
+The import from Excel file mechanism is facilitated by `ExcelUtil`, the utility created to handle all method relating to Excel. ImportExcelCommand calls `ExcelUtil#readExcelSheet` to read the Excel file and retrieve data of records from them to create a list of record List<Record>. In `ExcelUtil#readExcelSheet`, by using method `XSSFWorkbook#setMissingCellPolicy`, every missing cell will be considered as Null cell, quite useful when you export or archive the record data if the record does *not* have tag. If blank row is found, the `ExcelUtil#readExcelSheet` will ignore and read the next line, until the last line is read. This concept also applies to read multiple sheets until all sheets have been read. However, please take note that in order to prevent errors, there are certain constraints of Excel file list in *User Guide* with *Import the record data from the Excel file to the Savee* part. After that, `ModelManager#addListUniqueRecord` is called to add the records in the List<Record>. If the record has already existed in the Savee, it will be ignored and *not* added into the Savee. Eventually, when all the records are added in the Savee, `ModelManager#commitFinancialPlanner` will be called to update the current version of Savee and the message, which states records have been added.
+
+This feature has 2 different modes [refer to in *Import the record data from the Excel file to the Savee* part in *User Guide*]. The mechanism that facilitates these modes can be found in the `ImportExcelCommandParser#parse`. Below is a overview of the mechanism:
+
+. Method `ImportExcelCommandParser#createArchiveCommand` takes the input argument and further analyse it.
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+
+. The String associated with `dir/`
+.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing. If the Directory is unreal, an error is thrown to inform the user.
+
+. The String associated with `n/`
+.. It is then passed into `ExcelUtil#getPathFile` together with the String associated with `dir/` to create the File Path. The File Path is then passed into `ParseUtil#parseFilePathString` to check if the File path given is existing. If the File Path is unreal, an error is thrown to inform the user.
+. Please take note that:
+.. The String associated with `dir/` *must* be entered.
+.. The String associated with `n/` is optionally entered.
+.. Please note that User have to add the post-fix `.xlsx` at the end to indicate this is a Excel file.
+
+. If the string associated with `n/`, method `ExcelUtil#setPathFile` is called to combine the name of the Excel file to the string associated with `dir/`.
+
+The `ImportExcelCommand` has only one constructor.
+
+* The constructor takes in file path argument and read the Excel file using that file path. After that, all the record data in the Excel file is retrieved and transform into Record object. The list of records are then added into the Model by using `ModelManager#addListUniqueRecord`
+
+The following sequence diagram shows how the list operation works:
+
+image::ImportExcelSequenceDiagram.png[width:800]
+
+The file user want to import *must* be closed before entering the command. +
+
+Please note that the `undo` and `redo` command can only affect the Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `import` command, the records imported will be deleted.
+
+// end::import[]
+
+// tag::archive[]
+=== Archive the record data from Savee to the Excel file
+==== Current implementation
+The archive into excel file mechanism is facilitated by `ModelManager` with the help of `ExcelUtil`, the utility created to handle all methods relating to Excel. It represents an in-memory model of Savee and is the component which manages the interactions between the commands, `ExcelUtil` and the `VersionedFinancialPlanner`. ArchiveCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode. The List<Record> is retrieved by calling `ModelManager#getFilteredRecordList`. Meanwhile, it also called `ModelManager#getFinancialPlanner` to get the `ReadOnlyFinancialPlanner`. The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List<SummaryEntry> is easily retrieved from SummaryByDateList by calling `SummaryByDateList#getSummaryList`. `ExcelUtil#setNameExcelFile` is called to make the Excel name based on the condition of startDate and endDate. After that, `ExcelUtil#setPathFile` is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default *User's Working Directory*. With the sufficient information, `List<Record> records`, `List<SummaryByDateEntry> summaryList`, `file path`, `ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords` is called to start the processing of producing Excel file. After records are archived to Excel file, `ModelManager#deleteListRecord` is called to delete the archived records.If there exists target records, `ModelManager#commitFinancialPlanner` will be called to update the current version of Savee and the message, which states records have been deleted.
+
+This feature has 6 different modes [refer to Archive the record data from Savee to the Excel file in *User Guide*]The mechanism that facilitates these modes can be found in the `ArchiveCommandParser#parse`. Below is a overview of the mechanism:
+
+. Method `ArchiveCommandParser#createArchiveCommand` takes the input argument and further analyse it.
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/`
+.. It is then passed into `ArchiveCommandParser#splitByWhitespace` for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format. *If the size of the string equals 1*, it is constructed as a date type variable after being passed to `ParseUtil#parseDate`, it must follow the format dd-mm-yyyy. Error will be thrown if the format is *not* correct or the date entered is *not* real. *If the size of the string equals 2*, each sub-string is constructed as a date type variable after being passed to `ParseUtil#parseDate`, and an additional check is conducted to check if the first date entered, known as Start date is smaller than or equal to the second date entered, known as End Date.
+. The String associated with `dir/`
+.. It is then passed into `ParseUtil#parseDirectoryString` to check if the Directory path given is existing. *If the Directory path is unreal*, an error is thrown to inform the user.
+. Please take note that:
+.. If the prefix `d/` is *not* entered in the input, meaning that all the records will be included in the Excel sheet.
+.. If the prefix `dir/` is *not* entered in the input, meaning that the Directory Path is default as the *User's Working Directory*.
+
+The `ArchiveCommand` has four constructors which makes use of overloading to reduce code complexity.
+
+* One constructor has no arguments and assigns default predicate for the `FilteredList` in `ModelManager`,
+`PREDICATE_SHOW_ALL_RECORDS` which will show all items in the list and the Directory path is *User's Working Directory*.
+* The second constructor takes in 2 `Date` arguments and assigns the predicate `DateIsWithinDateIntervalPredicate` which will only show items within the date interval and the Directory path is *User's Working Directory*.
+* The third constructor takes in 1 `Directory Path` argument and assigns the predicate as `PREDICATE_SHOW_ALL_RECORDS`, which will show all items in the list and the Directory path is the entered directory path.
+* The fourth constructor takes in 1 `Directory Path` and 2 `Date` arguments and assigns the predicate as `DateIsWithinDateIntervalPredicate` which will only show items within the date interval and the Directory path is the entered Directory Path.
+
+The following sequence diagram shows how the list operation works:
+
+image::ArchiveSequenceDiagram.png[width:800]
+
+If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it *must* be closed before we enter the command. +
+
+Please note that the `undo` and `redo` command can only affect the Savee but the *not* the Excel file created, meaning that when you enter `undo` command after you enter the `archive` command, the records archived will be added again back to the Savee but the Excel file created will *not* be deleted.
+
+// end::archive[]
+
+// tag::draw_line_chart[]
+
+=== Draw a line chart automatically inside the Excel sheet
+==== Current implementation
+
+This feature will automatically uses the the summary data from the `SUMMARY DATA` sheet in the Excel sheet after the command `archive` or `export_excel` is called. The feature mechanism is facilitated by `ExcelUtil`, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with `ExcelUtil#drawChart`.
+
+// end::draw_line_chart[]
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
@@ -484,14 +1155,14 @@ We have two types of tests:
 
 .  *GUI Tests* - These are tests involving the GUI. They include,
 .. _System Tests_ that test the entire App by simulating user actions on the GUI. These are in the `systemtests` package.
-.. _Unit tests_ that test the individual components. These are in `seedu.address.ui` package.
+.. _Unit tests_ that test the individual components. These are in `seedu.planner.ui` package.
 .  *Non-GUI Tests* - These are tests not involving the GUI. They include,
 ..  _Unit tests_ targeting the lowest level methods/classes. +
-e.g. `seedu.address.commons.StringUtilTest`
+e.g. `seedu.planner.commons.StringUtilTest`
 ..  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
-e.g. `seedu.address.storage.StorageManagerTest`
+e.g. `seedu.planner.storage.StorageManagerTest`
 ..  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
-e.g. `seedu.address.logic.LogicManagerTest`
+e.g. `seedu.planner.logic.LogicManagerTest`
 
 
 === Troubleshooting Testing
@@ -521,14 +1192,14 @@ When a pull request has changes to asciidoc files, you can use https://www.netli
 
 Here are the steps to create a new release.
 
-.  Update the version number in link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp.java`].
+.  Update the version number in link:{repoURL}/src/main/java/seedu/expense/MainApp.java[`MainApp.java`].
 .  Generate a JAR file <<UsingGradle#creating-the-jar-file, using Gradle>>.
 .  Tag the repo with the version number. e.g. `v0.1`
 .  https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
 
 === Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
+A project often depends on third-party libraries. For example, Financial Planner depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
@@ -555,14 +1226,14 @@ Each individual exercise in this section is component-based (i.e. you would not 
 [TIP]
 Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
 
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
+. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all records in the list.
 +
 ****
 * Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
+** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
+** link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] is responsible for analyzing command words.
 * Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
+** Modify the switch statement in link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
 ** Add new tests for each of the aliases that you have added.
 ** Update the user guide to document the new aliases.
 ** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
@@ -571,21 +1242,21 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 [discrete]
 ==== `Model` component
 
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
+*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the financial planner, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
 
 [TIP]
 Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
 
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
+. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the financial planner.
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] API need to be updated.
+** The link:{repoURL}/tree/master/src/main/java/seedu/planner/model/Model.java[`Model`] and the link:{repoURL}/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java[`FinancialPlanner`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java[`FinancialPlanner`] and link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`] classes can be used to implement the tag removal logic. link:{repoURL}/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java[`FinancialPlanner`] allows you to update a record, and link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each person, and remove the `tag` from each person.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java[`FinancialPlanner`]. Loop through each record, and remove the `tag` from each record.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}/tree/master/src/main/java/seedu/planner/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/tree/master/src/main/java/seedu/planner/model/ModelManager.java[`ModelManager`] should call `FinancialPlanner#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
 ****
@@ -593,12 +1264,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your financial planner application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
 
-. Use different colors for different tags inside person cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
+. Use different colors for different tags inside record cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
 +
 **Before**
 +
@@ -610,16 +1281,16 @@ image::getting-started-ui-tag-after.png[width="300"]
 +
 ****
 * Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
+** The tag labels are created inside link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/RecordCard.java[the `RecordCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
 ** Use the .css attribute `-fx-background-color` to add a color.
-** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
+** You may wish to modify link:{repoURL}/tree/master/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
 * Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
+** You can modify the existing test methods for `RecordCard` 's to include testing the tag's color as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
 *** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
 ****
 
-. Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
+. Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
 +
 **Before**
 +
@@ -631,19 +1302,19 @@ image::getting-started-ui-result-after.png[width="200"]
 +
 ****
 * Hints
-** link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
-** Refer to link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
+** link:{repoURL}/tree/master/src/main/java/seedu/planner/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
+** Refer to link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
 * Solution
-** Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
-** Modify link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
+** Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
+** Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
 ** You can write two different kinds of tests to ensure that the functionality works:
 *** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
+*** The system tests link:{repoURL}/tree/master/src/test/java/systemtests/FinancialPlannerSystemTest.java[`FinancialPlannerSystemTest#assertCommandBoxShowsDefaultStyle() and FinancialPlannerSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
+. Modify the link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the financial planner
 +
 **Before**
 +
@@ -655,30 +1326,30 @@ image::getting-started-ui-status-after.png[width="500"]
 +
 ****
 * Hints
-** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
+** link:{repoURL}/tree/master/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
+** link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the financial planner is updated.
 * Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of persons when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
-** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of persons status bar.
+** Modify the constructor of link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of records when the application just started.
+** Use link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java[`StatusBarFooter#handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent)`] to update the number of records whenever there are new changes to the financial planner.
+** For tests, modify link:{repoURL}/tree/master/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of record status, just like what we did for save location and sync status.
+** For system tests, modify link:{repoURL}/tree/master/src/test/java/systemtests/FinancialPlannerSystemTest.java[`FinancialPlannerSystemTest`] to also verify the new total number of records status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
 ****
 
 [discrete]
 ==== `Storage` component
 
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.
+*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the financial planner to the cloud. However, the current implementation of the application constantly saves the financial planner after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the financial planner storage.
 
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the address book can be saved in a fixed temporary location.
+. Add a new method `backupFinancialPlanner(ReadOnlyFinancialPlanner)`, so that the financial planner can be saved in a fixed temporary location.
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/XmlAddressBookStorage.java[`XmlAddressBookStorage`] class.
+** Add the API method in link:{repoURL}/tree/master/src/main/java/seedu/planner/storage/FinancialPlannerStorage.java[`FinancialPlannerStorage`] interface.
+** Implement the logic in link:{repoURL}/tree/master/src/main/java/seedu/planner/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/tree/master/src/main/java/seedu/planner/storage/XmlFinancialPlannerStorage.java[`XmlFinancialPlannerStorage`] class.
 * Solution
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
@@ -688,18 +1359,18 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 
 By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
+*Scenario:* You are a software maintainer for `financialplanner`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
-Edits the remark for a person specified in the `INDEX`. +
+Edits the remark for a record specified in the `INDEX`. +
 Format: `remark INDEX r/[REMARK]`
 
 Examples:
 
 * `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first person to `Likes to drink coffee.`
+Edits the remark for the first record to `Likes to drink coffee.`
 * `remark 1 r/` +
-Removes the remark for the first person.
+Removes the remark for the first record.
 
 ==== Step-by-step Instructions
 
@@ -708,13 +1379,13 @@ Let's start by teaching the application how to parse a `remark` command. We will
 
 **Main:**
 
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
+. Add a `RemarkCommand` that extends link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
+. Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] to accept a `RemarkCommand`.
 
 **Tests:**
 
 . Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
+. Add new test method to link:{repoURL}/tree/master/src/test/java/seedu/planner/logic/parser/FinancialPlannerParserTest.java[`FinancialPlannerParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
 
 ===== [Step 2] Logic: Teach the app to accept 'remark' arguments
 Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
@@ -723,50 +1394,50 @@ Let's teach the application to parse arguments that our `remark` command will ac
 
 . Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
 . Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
+. Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] to use the newly implemented `RemarkCommandParser`.
 
 **Tests:**
 
 . Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
 . Add `RemarkCommandParserTest` that tests different boundary values
 for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
+. Modify link:{repoURL}/tree/master/src/test/java/seedu/planner/logic/parser/FinancialPlannerParserTest.java[`FinancialPlannerParserTest`] to test that the correct command is generated according to the user input.
 
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
+===== [Step 3] Ui: Add a placeholder for remark in `RecordCard`
+Let's add a placeholder on all our link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/RecordCard.java[`RecordCard`] s to display a remark for each record later.
 
 **Main:**
 
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
+. Add a `Label` with any random text inside link:{repoURL}/tree/master/src/main/resources/view/RecordListCard.fxml[`RecordListCard.fxml`].
+. Add FXML annotation in link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/RecordCard.java[`RecordCard`] to tie the variable to the actual label.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
+. Modify link:{repoURL}/tree/master/src/test/java/guitests/guihandles/RecordCardHandle.java[`RecordCardHandle`] so that future tests can read the contents of the remark label.
 
 ===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
+We have to properly encapsulate the remark in our link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
 
 **Main:**
 
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
+. Add `Remark` to model component (you can copy from link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Name.java[`Name`], remove the regex and change the names accordingly).
 . Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
 
 **Tests:**
 
 . Add test for `Remark`, to test the `Remark#equals()` method.
 
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
+===== [Step 5] Model: Modify `Record` to support a `Remark` field
+Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`].
 
 **Main:**
 
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
+. Add `getRemark()` in link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`].
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `addressBook.xml` so that the application will load the sample data when you launch it.)
+. Modify link:{repoURL}/tree/master/src/main/java/seedu/expense/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `financialPlanner.xml` so that the application will load the sample data when you launch it.)
 
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
+===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedRecord` class
+We now have `Remark` s for `Record` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/tree/master/src/main/java/seedu/planner/storage/XmlAdaptedRecord.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
 
 **Main:**
 
@@ -774,26 +1445,26 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 
 **Tests:**
 
-. Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsAddressBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidPersonFinancialPlanner.xml`, `typicalPersonsFinancialPlanner.xml`, `validFinancialPlanner.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
+===== [Step 6b] Test: Add withRemark() for `RecordBuilder`
+Since `Record` can now have a `Remark`, we should add a helper method to link:{repoURL}/tree/master/src/test/java/seedu/planner/testutil/PersonBuilder.java[`RecordBuilder`], so that users are able to create remarks when building a link:{repoURL}/tree/master/src/main/java/seedu/planner/model/record/Record.java[`Record`].
 
 **Tests:**
 
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the person that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
+. Add a new method `withRemark()` for link:{repoURL}/tree/master/src/test/java/seedu/planner/testutil/RecordBuilder.java[`RecordBuilder`]. This method will create a new `Remark` for the record that it is currently building.
+. Try and use the method on any sample `Record` in link:{repoURL}/tree/master/src/test/java/seedu/planner/testutil/TypicalRecords.java[`TypicalRecords`].
 
 ===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
+Our remark label in link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/RecordCard.java[`RecordCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
 
 **Main:**
 
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
+. Modify link:{repoURL}/tree/master/src/main/java/seedu/planner/ui/RecordCard.java[`RecordCard`]'s constructor to bind the `Remark` field to the `Record` 's remark.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
+. Modify link:{repoURL}/tree/master/src/test/java/seedu/planner/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
 
 ===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
 We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
@@ -815,13 +1486,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* has a need to manage his finances using other means because user is not as good at saving
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: manage income and spending faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -831,62 +1502,700 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |user |be able to input my expenses and income along with a timestamp | record how much I am spending
 
-|`* * *` |user |add a new person |
+|`* * *` |user |be able to delete existing entries |remove records which I do not need
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |user |be able to edit existing entries |update records with the correct information
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |user |be able to undo and redo |Revert any unwanted changes
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |user |be able to retain my financial information when app shuts down |Not have the app open all the time
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |user |be able to see the history of my financial activities |Can keep track of my financial activities
+
+|`* * *` |user with many records in the FinancialPlanner |have an ordered list of records |locate records easily
+
+|`* * *` |user with many records in the FinancialPlanner |find a record easily by name |access any record I want easily
+
+|`* * *` |user |be able to clear history |to reduce the clutter in the app
+
+|`* * *` |user |be able to create a limit for my daily final activities | stop myself from overspending
+
+|`* * *` |user |be able to see a summary expenditure of each category | see the areas where I am spending the most
+
+|`* * *` |user |be able to see a summary of each day or month | see how much I am spending per day or month
+
+|`* * *` |new user |see usage instructions | refer to instructions when i forget how to use the app
+
+|`* * *` |user |access the history within a few seconds | do not have the time to wait for the app to update
+
+|`* *` |advanced user |be able to freely edit the tags | define my own categories
+
+|`* *` |user |be able to tag my financial activities with a category|To figure out in which part money spent on.
+
+|`* *` |advanced user |export my financial activities into other forms |log it and store it in a place different from the app
+
+|`* *` |user |search based on the categories |monitor the expenditure in a specific category
+
+|`* *` |user | search based on a time period|observe spending during different time periods, e.g holidays, school period
+
+|`* *` |advanced user |plan out my future expenses | allocate money properly, to ensure I can make my payments
+
+|`* *` |user |have a visual representation of daily and monthly financial activity |visualise the amount spend each day or month
+
+|`* *` |user |have a visual representation of financial activity broken down into categories |easily identify the areas where I am spending the most
+
+|`* *` |user |record parties to make payment to |allocate money and ensure I do not owe anyone
+
+|`* *` |user |know my current monthly financial activity |have a sense of how much I am spending currently
+
+|`* *` |user |view balances in bank accounts |keep track of my bank savings or current without having to login to accounts
+
+|`* *` |user |have an intuitive user interface |so that I don't have to think too much when using the app
+
+|`* *` |user |have a visually appealing user interface |so that I feel happy when using the app
+
+|`*` |user |be able to access basic app configurations |so that I can adjust the app to my liking
+
+|`*` |user |hide private details by default | minimize chance of someone else seeing them by accident
+
+|`*` |user |a secure place to store my finance records |keep my financial data safe
+
+|`*` |user |archive my old finance history |look back at my finance history whenever I need it
+
+|`*` |inexperienced user |have command suggestions |use the commands without having to remember them
+
+|`*` |advanced user |add notes to each finance record | know where my money went
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `Savee` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== 1.  Use case: Input expense for a certain activity.
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+.  User requests to add record into Savee.
+.  Save requests for record information to be added.
+.  User inputs record information.
+.  System adds the record into the system.
+.  System displays the record added to the user.
 +
 Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. The list is empty.
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 1a. The record to be added is a duplicate of existing record in the system.
+** Savee throws duplicated record error.
+** Use case ends.
+
+[discrete]
+=== 2.  Use case: delete past finance records
+
+*MSS*
+
+1.  User requests to delete record.
+2.  System deletes the record from the system and shows the user the result.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
-+
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
+*Extensions*
 
-_{More to be added}_
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+[discrete]
+=== 3.  Use case: update past finance records with information
+
+*MSS*
+
+1.  User requests to update records and enters the parameters needed.
+2.  System updates the record in the system and shows the user the result.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 1a. The record to be added is a duplicate of existing record in the system.
+** Savee throws duplicated record error.
+** Use case ends.
+
+[discrete]
+=== 4.  Use case: See history of expenses for a certain period
+
+*MSS*
+
+1.  User requests to see history within a certain date period.
+2.  Savee returns the history of all expenses within the period.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. User’s command is of invalid form.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
+
+* 1a. User does not specify any arguments.
+** Savee returns all records in the Savee.
+** Use case ends.
+
+* 1a. The arguments are of incorrect format
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case resumes at step 1.
+
+* 2a. There is no history.
+** Savee shows a blank list.
+** Use case ends.
+
+[discrete]
+[discrete]
+=== 5.  Use case: Delete expense entry whose date is required. [Linh Chi]
+
+*MSS*
+
+1.  User requests to delete records whose date is required. User enters the date entry he/she wants to delete.
+2.  Savee checks whether the day required is valid.
+3.  Savee deletes all records whose date is required.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. User’s command is of invalid.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
+
+* 1b. The date entered is of incorrect format.
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case resumes at step 1.
+
+* 1c. There is no date entered.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
+
+
+[discrete]
+=== 6.  Use case: Clear history of expenses
+
+*MSS*
+
+1.  User requests to clear history of expenses.
+2.  System clears the history
++
+Use case ends.
+
+[discrete]
+=== 7.  Use case: View breakdown of financial activity into category
+
+*MSS*
+
+1.  User requests for category breakdown within a period of time.
+2.  System retrieves the category breakdown report.
+3.  System shows the report to the user in format of pie charts.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 2a. There are no records within the time range specified. +
+** System shows an empty page with warning that nothing has been found.
+** Use case ends.
+
+[discrete]
+=== 8.  Use case: Search expenses based on tags [Zhi Thon]
+
+*MSS*
+
+1.  User requests to search for expenses by tags
+2.  Savee requests for tag of expenditure
+3.  User enters tag desired
+4.  Savee displays each expenditure tagged with specified word.
++
+Use case ends.
+
+*Extensions*
+
+* 3a User’s input tag cannot be found.
+** Savee shows no expenditure for selected category
+
+[discrete]
+=== 9.  Use case: View daily/monthly summary within a period of time
+
+*MSS*
+
+1.  User requests for summary report within a period of time.
+2.  System retrieves the summary report.
+3.  System shows the report to the user in format of a table.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 2a. There are no records within the time range specified. +
+** System shows an empty table.
+** Use case ends.
+
+[discrete]
+=== 10.  Use case: Usage Instructions guide
+
+*MSS*
+
+1.  User requests for usage instructions
+2.  System returns a help window with all the instructions.
++
+Use case ends.
+
+[discrete]
+=== 11.  Use case: Undo record entry
+
+*MSS*
+
+1.  User requests for undo
+2.  Savee undo the last undoable command
++
+Use case ends.
+
+[discrete]
+=== 12. Use case: Add notes to each expense
+
+*MSS*
+
+1.  User requests for adding notes and enters the notes
+2.  Savee adds the notes into the system and notifies the user.
++
+Use case ends.
+
+*Extensions*
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 1a. User's input parameters are missing or invalid. +
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+[discrete]
+//tag::limitUserCase[]
+=== 13. Use case: Create a normal limit for a period of time or a day
+
+*MSS*
+
+1.  User requests to create a normal limit for expenses different period of time or a day.
+2.  Savee requests for the dateStart and dateEnd of that period of time or the date of the day and the maximum amount of spending.
+3.  User enters the dateStart and dateEnd or the date and the amount of spending.
+4.  Savee records the limit in the hard drive.
+5.  Savee keeps tracking the spending during limit's date period of time or that day.
+6.  Savee warns user when the total spend exceeds the limit amount of spending.
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. The dateStart is later than dateEnd. +
+** System shows date error.
+** Use case ends.
+
+* 3c. There is already a limit for the time period or the day. +
+** System shows redundant limit error.
+** Use case ends.
+
+[discrete]
+=== 14. Use case: Edit an existing normal limit
+
+*MSS*
+
+1.  User requests to edit an existing normal limit.
+2.  Savee requests for the new maximum amount of spending for the period of time or the day.
+3.  User enters the dateStart and dateEnd or the date and the new amount of spending.
+4.  Savee updates the new limit in the hard drive.
+5.  Savee keeps tracking the spending during the limit's date period of time or that day.
+6.  Savee warns user when the total spend exceeds the limit amount of spending.
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. The dateStart is later than dateEnd. +
+** System shows date error.
+** Use case ends.
+
+* 3c. There is no existing limit for the time period or the day. +
+** System shows no existing limit error.
+** Use case ends.
+
+* 3d. The edit limit is exactly the same as the original one. +
+** System shows same limit error.
+** Use case ends.
+
+[discrete]
+=== 15. Use case: Delete an existing limit
+
+*MSS*
+
+1.  User requests to delete an existing limit.
+2.  Savee requests for the date period of the limit to be deleted.
+3.  User enters the dateStart and dateEnd or the date.
+4.  Savee deletes the limit in the hard drive.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. The dateStart is later than dateEnd. +
+** System shows date error.
+** Use case ends.
+
+* 3c. There is no existing limit for the time period or the day. +
+** System shows no existing limit error.
+** Use case ends.
+
+[discrete]
+=== 16. Use case: Add a monthly limit
+
+*MSS*
+
+1.  User requests to add the monthly limit.
+2.  Savee requests the monthly maximum amount of spending.
+3.  User enters the maximum amount of spending.
+4.  Savee adds the monthly limit.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. There is already a monthly limit. +
+** System shows existing monthly limit error.
+** Use case ends.
+
+[discrete]
+=== 17. Use case: Edit the monthly limit
+
+*MSS*
+
+1.  User requests to edit the monthly limit.
+2.  Savee requests the new monthly maximum amount of spending.
+3.  User enters the new maximum amount of spending.
+4.  Savee updates the monthly limit.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's input parameters are missing or invalid. +
+** System throws invalid command error and notifies user of the correct format.
+** Use case ends.
+
+* 3b. There is no monthly limit. +
+** System shows no monthly limit error.
+** Use case ends.
+
+[discrete]
+=== 18. Use case: Delete the monthly limit
+
+*MSS*
+
+1.  User requests to delete the monthly limit.
+2.  Savee updates the monthly limit.
+
+
++
+Use case ends.
+
+*Extensions*
+
+
+* 1a. User’s input command is invalid. +
+** System throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 2a. There is no monthly limit. +
+** System shows no monthly limit error.
+** Use case ends.
+
+[discrete]
+=== 19. Use case: Check all the existing limits
+
+*MSS*
+
+1.  User requests to check all the existing limits.
+2.  Savee displays all the existing limits.
++
+Use case ends.
+
+[discrete]
+//end::limitUserCase[]
+=== 20. Use case: Export record data from Savee to Excel file [Linh Chi]
+
+*MSS*
+
+.  User requests to export the data from Savee to Excel file.
+.  Savee exports the records data in Excel file.
+.  Savee informs the user the directory where the Excel file is saved.
+
+*Extensions*
+
+* 1a. User’s command is of invalid form.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
+
+* 1b. The parameters entered is of incorrect format.
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case resumes at step 1.
+
+* 1c. The directory path parameters entered is non-existent.
+** Savee throws invalid command error and notifies user of the user non-existent directory path.
+** Use case resumes at step 1.
+
+* 1d. The user enters the parameters but does not enter the prefix.
+** Savee throws invalid command error.
+** Use case resumes at the step 1.
+
+* 1e. The user enters the prefix but does not enter the parameters.
+** Savee throws invalid command error.
+** Use case resumes at the step 1.
+
+* 1f. The user enters more than 3 dates.
+** Savee throws invalid command error and notifies user the maximum number of dates enter is 2.
+** Use case resumes at step 1.
+
+* 1g. The user enters exact 2 dates and the first date is later than the second date.
+** Savee throws invalid command error and notifies user the first data should be earlier or equal to the second date.
+** Use case resumes at step 1.
+
+
+
+[discrete]
+==== 21. Use case: Import the Excel file into Financial Planner. [Linh Chi]
+
+*MSS*
+
+. User requests to import the record data from Excel file to Financial Planner.
+. Savee reads the Excel file and transfer all the data in the Excel file into Record object and add them into current Savee.
+
+*Extensions*
+
+* 1a. User’s command is of invalid form.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
+
+* 1b. User input wrong file path that the Excel file is stored.
+** Savee throws invalid command error and notifies the user the directory path is not existent.
+** Use case resumes at step 1.
+
+* 1c. User input the parameter but does not enter the prefix.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
+
+[discrete]
+=== 22. Use case: Archive the records data into Excel file. [Linh Chi]
+
+*MSS*
+
+.  User requests to archive the record from Savee to Excel file.
+.  Savee archives the records data in Excel file.
+.  Savee informs the user the directory where the Excel file is saved.
+
+*Extensions*
+
+* 1a. User’s command is of invalid form.
+** Savee throws invalid command error.
+** Use case resumes at step 1.
+
+* 1b. The parameters entered is of incorrect format.
+** Savee throws invalid command error and notifies user of the correct format.
+** Use case resumes at step 1.
+
+* 1c. The directory path parameters entered is non-existent.
+** Savee throws invalid command error and notifies user of the user non-existent directory path.
+** Use case resumes at step 1.
+
+* 1d. The user enters the parameters but does not enter the prefix.
+** Savee throws invalid command error.
+** Use case resumes at the step 1.
+
+* 1e. The user enters the prefix but does not enter the parameters.
+** Savee throws invalid command error.
+** Use case resumes at the step 1.
+
+* 1f. The user enters more than 3 dates.
+** Savee throws invalid command error and notifies user the maximum number of dates enter is 2.
+** Use case resumes at step 1.
+
+* 1g. The user enters exact 2 dates and the first date is later than the second date.
+** Savee throws invalid command error and notifies user the first data should be earlier or equal to the second date.
+** Use case resumes at step 1.
+
+[discrete]
+=== 23. Use case: See monthly financial activity
+
+*MSS*
+
+1. User requests to see monthly financial activity.
+2. Savee returns a report on monthly financial activity.
+
+[discrete]
+=== 24. Use case: Freely edit expenses tags
+
+*MSS*
+
+1.  User requests to edit expenses tags.
+2.  Savee requests for date of entry to edit tags
+3.  User enters date to edit entry for
+4.  Savee shows list of entries on specified date
+5.  User enters entry to edit.
+6.  Savee shows current tags of selected entry.
+7.  User enters tag to remove
+8.  Savee removes tag entered.
+
+*Extensions*
+
+* 3a User inputs invalid date
+** Savee throws invalid date error.
+** Use case resumes at step 2.
+* 3b Date input has no entries to edit
+** Savee throws no entry error.
+** Use case resumes at step 2.
+* 5a User’s input is not a valid entry.
+** Savee throws invalid data error and resumes at step 4.
+* 5a User’s input entry has no tags.
+** Savee displays ‘No tags’ and continues to step 7.
+* 7a User’s input tag does not exist
+** Savee adds tag to entry.
+
+[discrete]
+=== 25. View bank balance
+
+*MSS*
+
+1.  User requests to view bank balance.
+2.  Savee asks for authentication.
+3.  User provides authentication.
+4.  Savee verifies the authentication and shows the bank balance.
+
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
+
+* 3a. User's authentication is invalid. +
+** Savee returns error and asks for authentication again.
+** Use case resumes at 2.
+
+[discrete]
+=== 26. Adjust configurations
+
+*MSS*
+
+1.  User requests to change application configurations.
+2.  Savee returns the configuration page.
+3.  User changes configuration.
+4.  Savee confirms the configuration and applies it to the system.
+
+* 1a. User’s input command is invalid. +
+** Savee throws invalid command error and shows an example command input needed.
+** Use case ends.
 
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 records without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should be able to retain data in the event of app exiting or crashing.
+.  The data is not expected to be secure.
+.  The application can function as per normal in the absence of network.
+.  For best view, the optimal resolution is 1080p (1920 x 1080).
 
-_{More to be added}_
 
 [appendix]
 == Glossary
@@ -896,6 +2205,16 @@ Windows, Linux, Unix, OS-X
 
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
+
+[[Finance-activity]] Finance Activity::
+Activity where an individual engage in exchange of money, can comprise of income or spending
+
+[[Resolution]] Resolution:
+Resolution refers to the number of pixels that are available in the screen. It determines how wide or tall a screen will look like.
+
+[[Appname]] App Name: (FinancialPlanner/Savee)
+Both FinancialPlanner and Savee refers to the app. Savee is the official name of the app when it is marketed for the users. FinancialPlanner
+is the name used when referring to the app in the developer guide and code.
 
 [appendix]
 == Product Survey
@@ -928,7 +2247,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample records. The window size may not be optimum.
 
 . Saving window preferences
 
@@ -936,26 +2255,594 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+=== Listing by date
+. Listing with no argument
+.. Test case: Enter `list`
+.. Expected: System would list down all the records along with a result saying that it has listed all records.
 
+. Listing with arguments but no prefix
+.. Test case: Enter `list abcd`
+.. Expected: System will throw error saying invalid command and show the correct format
+
+. Listing with arguments but wrong prefix
+.. Test case: Enter `list m/1-1-2018 12-12-2018`
+.. Expected: System will throw error saying invalid command and show the correct format
+
+. Listing with valid prefix but invalid arguments
+.. Test case: Enter `list d/1-1-201`
+.. Expected: System will throw error saying invalid command and show the correct format
+
+. Listing with valid prefix but 1 date
+.. Test case: Enter `list d/1-1-2018`
+.. Expected: System will list only records of that date and show a command result stating the date that the records are listed by
+
+. Listing with valid prefix and 2nd date earlier than 1st date
+.. Test case: Enter `list d/1-1-2018 12-12-2017`
+.. Expected: System will throw error saying invalid command and show the correct format
+
+. Listing with valid prefix and 1st date earlier than 2nd date
+.. Test case: Enter `list d/1-1-2018 12-12-2018`
+.. Expected: System will list all records equal to or between the 2 dates
+
+=== Sorting records
+. Sorting with no argument +
+Test case: Enter `sort` +
+Expected: System will throw error saying invalid command and show the correct format
+
+. Sorting with invalid argument +
+ Test case: Enter `sort invalidargument` +
+ Expected: System will throw error saying invalid command and show the correct format
+
+. Sorting with valid and invalid argument +
+ Test case: Enter `sort money haha` +
+ Expected: System will throw error saying invalid command and show the correct format
+
+. Sorting with name only +
+ Test case: Enter `sort` +
+ Expected: System will sort all records by date in ascending order.
+
+. Sorting with date only +
+ Test case: Enter `sort date` +
+ Expected: System will sort all records by date in ascending order.
+
+. Sorting with money only +
+ Test case: Enter `sort money` +
+ Expected: System will sort all records by money in ascending order.
+
+. Sorting with ascending order only +
+ Test case: Enter `sort asc` +
+ Expected: System will sort all records by name in ascending order.
+
+. Sorting with descending order only +
+ Test case: Enter `sort desc` +
+ Expected: System will sort all records by name in ascending order.
+
+. Sorting with no argument +
+ Test case: Enter `sort money desc` +
+ Expected: System will sort all records by money in descending order.
+
+=== Finding Records by Tag
+. Sorting with no argument +
+Test case: Enter `findtag` +
+Expected: System will throw error saying invalid command and show the correct format
+
+. Sorting with single argument +
+.est case: Enter `findtag anystring` +
+Expected: System will display all records with the tag `anystring` and display message showing
+how many records were found and the tag searched.
+
+. Sorting with multiple arguments +
+Test case: Enter `findtag anystring haha funny` +
+Expected: System will display all records with the tag `anystring` `haha` `funny` and display message showing
+how many records were found and the tags searched.
+
+=== Viewing summary
+. Entering `summary` command without modes
+.. Test case: Enter `summary abcd`
+.. Expected: System would throw an error saying invalid command and provide the error message for the generic summary command
+
+. Entering `summary` command with modes but no arguments
+.. Test case: Enter `summary date` or `summary month` or `summary category`
+.. Expected:
+.. System would throw an error saying invalid command.
+.. System will provide a different error message depending on the mode and provide more information about the format of
+the command in that specific mode.
+.. for e.g. `summary date` will give you an error message specific to viewing summary by date and `summary month` will give you
+and error message specific to viewing summary by month.
+
+. Entering `summary` command with modes and invalid prefixes or no prefix
+.. Test case: Enter `summary date m/` or `summary month m/` or `summary category m/`
+.. Expected: System would throw error saying invalid command and provide the error message for the generic summary command
+
+. Entering `summary` command with modes and date prefix but only 1 argument
+.. Test case: Enter `summary date d/1-1-2018` or `summary month d/1-1` or `summary category d/1-1-1`
+.. Expected:
+.. System would throw an error saying invalid command.
+.. System will provide a different error message depending on the mode and provide more information about the format of
+the command in that specific mode.
+.. for e.g. `summary date` will give you an error message specific to viewing summary by date and `summary month` will give you
+and error message specific to viewing summary by month.
+
+. Entering `summary` command with modes and 2 arguments with either invalid
+.. Test case: Enter `summary date d/1--1 1--1` or `summary month d/1---1 1--1` or summary category d/apr-2018 1--1`
+.. Expected:
+.. System would throw error regarding the constraints of dates/months depending on the mode. If mode is `date` or `category`, the error message is
+about the date. If mode is `month`, the error message will be about the month.
+.. The error message should give reasons why the argument is invalid.
+
+. View summary of range with no records inside
+.. Prerequisite: Choose 2 dates/months such that no records are inside that range and select a record in the list.
+.. Test case: Execute the summary command.
+.. Expected: The table should be empty with just an entry saying total is 0 for all the money columns and record should be unselected.
+
+. View summary of range with some records inside
+.. Prerequisite: Choose 2 dates/months such that records have these characteristics and select a record in the list.
+.. Test case: Execute the summary command.
+.. Expected:
+.. Record should be unselected.
+.. The table would be filled and the total is reflective of all the entries within the table.
+.. If the table is too long, the scrollbars should allow you to view all the entries.
+
+=== Viewing statistics about category breakdown
+. Entering `stats` command without arguments and prefixes
+.. Test case: Enter `stats`
+.. Expected: System would throw an error saying invalid command and show the format the command should have been in.
+
+. Entering `stats` command with valid prefixes but no arguments
+.. Test case: Enter `stats d/`
+.. Expected: System would throw an error saying invalid command and show the format the command should have been in.
+
+. Entering `stats` command with invalid prefixes
+.. Test case: Enter `stats m/`
+.. Expected: System would throw an error saying invalid command and show the format the command should have been in.
+
+. Entering `stats` command with valid prefixes but invalid arguments
+.. Test case: Enter `stats d/1--1`
+.. Expected: System would throw an error regarding the dates entered and give reasons for why the argument is invalid.
+
+. View statistics of a range with no records inside
+.. Prerequisite: Choose 2 dates such that no records are inside that range and select a random record in the list.
+.. Test case: Execute the stats command.
+.. Expected:
+.. The record would be unselected.
+.. The 2 tabs should still be created but have a message that tells user that nothing has been found.
+
+. View statistics of a range with some records inside but all income/expense
+.. Prerequisites: Choose 2 dates such that the records have these characteristics and select a random record in the list.
+.. Test case: Execute the stats command.
+.. Expected:
+.. The record would be unselected.
+.. The 2 tabs should still be created but 1 of the tab would have a message telling user that nothing has been found
+
+. View statistics of a range with records with income and records with expense
+.. Prerequisites: Choose 2 dates such that the records have these characteristics and select a random record in the list
+.. Test case: Execute the stats command.
+.. Expected:
+.. The record would be unselected.
+.. The 2 tabs should be created with pie charts.
+
+. View statistics of a range with too many tags
+.. Prerequisites: Choose 2 dates such that the records have these characteristics and select a random record in the list
+.. Test case: Execute the stats command
+.. Expected:
+.. The record would be unselected.
+.. The 2 tabs should be created with pie charts. The legends should have scrollbars attached if there are too many tags. These scrollbars
+should allow you to navigate to the hidden tags within the legend.
+
+=== Viewing current month's breakdown
+. Navigating to welcome screen from anywhere using keyboard
+.. Prerequisites: Click on any record in the list. Panel should change to display details of the record along with an image.
+.. Test case: Press `HOME` on the keyboard
+.. Expected: Panel should show the welcome screen.
+
+. Navigating to welcome screen from anywhere automatically
+.. Prerequisites: Same as before. Just need to change the panel to see the effect.
+.. Test case: Add any record with date in current month/ Delete any record with date in current month/ Edit any record to a date in current month/ Clear
+.. Expected: Panel should show the welcome screen.
+
+//tag::limitsManualTest[]
+
+=== Adding a normal limit
+
+. Adding a normal limit to the Financial Planner without the same time period limits inside.
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There is no limit with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
+.. Test case: `addlimit d/11-11-2018 17-11-2018 m/100` +
+   Expected: The information shows that the new limit has been added followed by detailed information about the newly added limit.
+.. Test case: `addlimit d/12-11-2018 m/200` +
+   Expected: The information shows that the new limit has been added followed by detailed information about the newly added limit.
+
+. Trying to add a normal limit to the Financial Planner with command errors.
+
+.. Test case: `addlimit d/17-11-2018 11-11-2018 m/200` +
+   Expected: No limit will be added. Error message about the dateStart must be earlier than dateEnd will be displayed.
+.. Test case: `addlimit d/11-11-2018 17-11-2018 m/+200` +
+   Expected: No limit will be added. Error message about wrong type of limit MoneyFlow will be displayed.
+.. Test case: `addlimit d/11-11-2018 17-11-2018` +
+   Expected: No limit will be added. Error message about wrong addlimit command format will be displayed.
+.. Test case: `addlimit 11-11-2018 17-11-2018 m/100` +
+   Expected: No limit will be added. Error message about wrong addlimit command format will be displayed.
+
+. Trying to add a normal limit to the Financial Planner with the same time period limits inside.
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There are existing limits with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
+.. Test case: `addlimit d/11-11-2018 17-11-2018 m/100` +
+   Expected: No limit will be added.  Error message about already existing limit will be displayed.
+.. Test case: `addlimit d/12-11-2018 m/100` +
+   Expected: No limit will be added.  Error message about already existing limit will be displayed.
+
+.. Other incorrect addlimit commands to try: `addlimit asd `, `addlimit x` (where x is an integer), `addlimit x/12-11-2018 m/asd` +
+   Expected: No limit will be added, related error information will be displayed.
+
+=== Editing an existing normal limit
+
+. Editing an existing normal limit in the Financial Planner
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There are limits with date period "11-11-2018 -- 17-11-2018" with the limit MoneyFlow isn't "100" and "12-11-2018" with the limit MoneyFlow isn't "200".
+.. Test case: `editlimit d/11-11-2018 17-11-2018 m/100` +
+   Expected: The information shows that the limit has been edited followed by detailed information about both the original limit and the new limit.
+.. Test case: `editlimit d/12-11-2018 m/200` +
+   Expected: The information shows that the limit has been edited followed by detailed information about both the original limit and the new limit.
+
+. Trying to edit a normal limit in the Financial Planner with command errors.
+.. Test case: `editlimit d/17-11-2018 11-11-2018 m/200` +
+   Expected: No limit will be edited. Error message about the dateStart must be earlier than dateEnd will be displayed.
+.. Test case: `editlimit d/11-11-2018 17-11-2018 m/+200` +
+   Expected: No limit will be edited. Error message about wrong type of limit MoneyFlow will be displayed.
+.. Test case: `editlimit d/11-11-2018 17-11-2018` +
+   Expected: No limit will be edited. Error message about wrong editlimit command format will be displayed.
+.. Test case: `editlimit 11-11-2018 17-11-2018 m/200` +
+   Expected: No limit will be edited. Error message about wrong editlimit command format will be displayed.
+
+. Trying to edit a normal limit in the Financial Planner with wrong command format.
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is no existing limit with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
+.. Test case: `editlimit d/11-11-2018 17-11-2018 m/100` +
+   Expected: No limit will be edited. Error message about no existing limit will be displayed.
+.. Test case: `editlimit d/12-11-2018 m/100` +
+   Expected: No limit will be edited. Error message about no existing limit will be displayed.
+
+. Trying to edit a normal limit in the Financial Planner with the same limit inside.
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is no existing limit with date period "11-11-2018 -- 17-11-2018"  with the limit MoneyFlow isn't "100".
+.. Test case: `editlimit d/11-11-2018 17-11-2018 m/100` +
+   Expected: No limit will be edited. Error message about same limit will be displayed.
+
+.. Other incorrect editlimit commands to try: `editlimit asd `, `editlimit x` (where x is an integer), `editlimit x/12-11-2018 m/asd` +
+   Expected: No limit will be edited, related error information will be displayed.
+
+=== Deleting an existing normal limit
+
+. Deleting an existing normal limit in the Financial Planner
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There are limits with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
+.. Test case: `deletelimit d/11-11-2018 17-11-2018` +
+   Expected: The information shows that the limit has been deleted.
+.. Test case: `deletelimit d/12-11-2018` +
+   Expected: The information shows that the limit has been deleted.
+
+. Trying to delete a normal limit in the Financial Planner with command format error.
+.. Test case: `deletelimit d/17-11-2018 11-11-2018` +
+   Expected: No limit will be deleted. Error message about the dateStart must be earlier than dateEnd will be displayed.
+.. Test case: `deletelimit 11-11-2018 17-11-2018 m/100` +
+   Expected: No limit will be deleted. Error message about wrong deletelimit command format will be displayed.
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is no existing limit with date period "11-11-2018 -- 17-11-2018" and "12-11-2018".
+.. Test case: `deletelimit d/11-11-2018 17-11-2018` +
+   Expected: No limit will be deleted. Error message about no existing limit will be displayed.
+.. Test case: `deletelimit d/12-11-2018` +
+   Expected: No limit will be deleted. Error message about no existing limit will be displayed.
+
+.. Other incorrect delete commands to try: `deletelimit asd `, `deletelimit x` (where x is an integer), `deletelimit x/12-11-2018 m/asd` +
+   Expected: No limit will be deleted, related error information will be displayed.
+
+=== Adding a monthly limit
+
+. Adding a monthly limit to the Financial Planner
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There is no monthly limit in the FinancialPlanner.
+.. Test case: `addmonthlylimit m/500` +
+   Expected: The monthly limit will be added, detailed monthly limit's information will be displayed.
+
+. Trying to add a monthly limit to the Financial Planner with command format error.
+.. Test case: `addmonthlylimit 500` +
+   Expected: No limit will be added. Error message about wrong addmonthlylimit command format will be displayed.
+
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is already an existing monthly limit.
+.. Test case: `addmonthlylimit m/200` +
+   Expected: No limit will be added. Error message about existing monthly limit will be displayed.
+
+.. Other incorrect addmonthlylimit commands to try: `addmonthlylimit asd `, `addmonthlylimit  m/asd` +
+   Expected: The monthly limit will not be added, related error information will be displayed.
+=== Editing the monthly limit
+
+. Editing the monthly limit existing the Financial Planner
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There is already a monthly limit in the FinancialPlanner.
+.. Test case: `editmonthlylimit m/500` +
+   Expected: The monthly limit will be edited, detailed information for both original monthly limit and new monthly limit will be displayed.
+
+. Trying to edit the monthly limit in the Financial Planner with command format error.
+.. Test case: `editmonthlylimit 500` +
+   Expected: No limit will be edited. Error message about wrong editmonthlylimit command format will be displayed.
+
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is no existing monthly limit.
+.. Test case: `editmonthlylimit m/200` +
+   Expected: No limit will be edited. Error message about no monthly limit will be displayed.
+
+.. Other incorrect editmonthlylimit commands to try: `editmonthlylimit asd `, `editmonthlylimit m/asd` +
+   Expected: The monthly limit will not be edited, related error information will be displayed.
+
+=== Deleting the monthly limit
+
+. Deleting the monthly limit existing the Financial Planner
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+ There is already a monthly limit in the FinancialPlanner.
+.. Test case: `deletemonthlylimit` +
+   Expected: The monthly limit will be deleted.
+
+.. Prerequisites: Check all the existing limit using the `checklimit` command.
+  There is no existing monthly limit.
+.. Test case: `deletemonthlylimit` +
+   Expected: The monthly limit will not be deleted, no monthly limit error message will be displayed.
+
+=== Checking all the limits
+
+. Checking all limits
+
+.. Prerequisites: There are limits inside the LimitList.
+.. Test case: `checklimit` +
+   Expected: All the detailed limits' information will be displayed.
+
+.. Prerequisites: No limits inside the limit list.
+.. Test case: `checklimit` +
+   Expected: The limits' detailed information will not be displayed, no limit in the list error message will be displayed.
+//end::limitsManualTest[]
 === Deleting a person
 
-. Deleting a person while all persons are listed
+. Deleting a records while all records are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all records using the `list` command. Multiple persons in the list.
+
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First record is deleted from the list. Details of the deleted record shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+   Expected: No record is deleted. Error details shown in the status message. Status bar remains the same.
+
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+=== Deleting all records whose date is required.
+
+. Deleting all records whose date is required when all records are listed.
+
+.. Prerequisites: List all records using the `list` command. Multiple records in the list.
+
+.. Test case: `deletedate 31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be deleted. The message of successful deleting records will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record existing will be shown. Status bar remains the same.
+
+.. Incorrect delete commands to try: `delete 30-2-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect delete commands to try: `delete 30-2A-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect delete commands to try: `deletedate`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+.. Incorrect delete commands to try: `deletedate x` (where x is invalid date, meaning that date have alphabetical character or non-existent date) +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+=== Archiving records data from Savee to Excel file and store it in a specific directory.
+
+. Archiving records whose date is required when all records are listed.
+
+.. Prerequisites: List all records using the `list` command. Multiple records in the list.
+.. Test case: `archive` +
+   Expected: All records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `archive d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Test case: `archive d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Test case: `archive dir/C:\` +
+   Expected: All records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `archive dir/C:\ d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Test case: `archive dir/C:\ d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record archived will be shown. Status bar remains the same. +
+
+.. Incorrect archive commands to try: `archive d/30-2-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect archive commands to try: `archive d/30-2A-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect archive commands to try: `archive 31-3-1999`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+.. Incorrect archive commands to try: `archive C:\`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+=== Import all record data from Excel file to Savee
+
+. Import record data from Excel file into Savee.
+
+.. Prerequisites: `archive dir/C:\` +
+
+.. Test case: `import dir/C:\ n/Financial_Planner_ALL.xlsx` +
+   Expected: All record data from the Excel file are shown in Savee.
+
+.. Test case: `import dir/C:\ n/Financial_Planner_ALL` +
+   Expected: All record data from the Excel file are shown in Savee.
+
+.. Test case: `import dir/C:\Financial_Planner_ALL.xlsx` +
+   Expected: All record data from the Excel file are shown in Savee.
+
+.. Incorrect import commands to try: `import` +
+   Expected: Invalid date entered. Error indicating invalid command format. Status bar remains the same.
+
+=== Exporting records data from Savee to Excel file and store it in a specific directory.
+
+. Exporting records whose date is required when all records are listed.
+
+.. Prerequisites: List all records using the `list` command. Multiple records in the list.
+.. Test case: `exportexcel` +
+   Expected: All records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `exportexcel d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Test case: `exportexcel d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Test case: `exportexcel dir/C:\` +
+   Expected: All records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+
+.. Test case: `exportexcel dir/C:\ d/31-3-1999` +
+   Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Test case: `exportexcel dir/C:\ d/31-3-1999 31-03-2019` +
+   Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated. +
+   If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record exported will be shown. Status bar remains the same. +
+
+.. Incorrect export commands to try: `exportexcel d/30-2-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect export commands to try: `exportexcel d/30-2A-2018` +
+   Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.
+
+.. Incorrect export commands to try: `exportexcel 31-3-1999`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+.. Incorrect export commands to try: `exportexcel C:\`+
+   Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.
+
+=== Auto Complete Feature
+. Typing part of a command word +
+Test case: Enter `ad`. +
+Expected: Suggestions pop up with the words "add", "addlimit", "addmonthlylimit".
+
+. Typing a complete command word +
+Test case: Enter `add`. +
+Expected: No Suggestions appear.
+
+. Typing a complete command word with extra text +
+Test case: Enter `addm`. +
+Expected: Suggestions pop up with the word "addmonthlylimit" only.
+
+. Typing name arguments for add command word
+Test case: Enter `add n/s`. +
+Expected: Suggestions pop up with the words that begin with "s", only if there are record names that have words that
+begin with 's'.
+
+. Typing name arguments for add command word
+Test case: Enter `add n/Buying it`. +
+Expected: Suggestions pop up with the words that begin with "it", only if there are record names that have words that
+begin with 'it'.
+
+. Typing date arguments for add command word
+Test case: Enter `add d/1`. +
+Expected: Suggestions pop up with the dates that begin with "1", only if there are record dates that have words that
+begin with '1'. Does not show dates that begin with '01'.
+
+. Typing date arguments for add command word
+Test case: Enter `add d/t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing moneyflow arguments for add command word
+Test case: Enter `add m/1`. +
+Expected: No suggestions popup no matter what records are in the data. No suggestion expected for moneyflow at all.
+
+. Typing tag arguments for add command word
+Test case: Enter `add t/f`. +
+Expected: Suggestions pop up with the words that begin with "f", only if there are record tags that have words that
+          begin with 'f', such as food and family, which are some default words for tags.
+
+. Typing name arguments for add command word with a 'n/' prefix
+Test case: Enter `add n/Buying m/-50 it`. +
+Expected: No suggestions pop up for 'it' no matter what. No suggestions are expected for this invalid input.
+
+. Typing date arguments for list command word
+Test case: Enter `list t`. +
+Expected: no suggestions pop up as prefix is required.
+
+. Typing date arguments for list command word with a 'd/' prefix
+Test case: Enter `list d/t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing date arguments for list command word after a date with 'd/' prefix
+Test case: Enter `list d/ytd t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing date arguments for list command word after a date with 'd/' prefix
+Test case: Enter `list d/ytd t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing arguments for sort command word
+Test case: Enter `sort d`. +
+Expected: Suggestions pop up with the words "date" and "desc" only. Any category or order can be suggested.
+
+. Typing arguments for sort command word with a category specified
+Test case: Enter `sort money d`. +
+Expected: Suggestions pop up with the word "desc" only. Only order can be suggested.
+
+. Typing arguments for sort command word with a order specified
+Test case: Enter `sort asc m`. +
+Expected: Suggestions pop up with the words "money" and "moneyflow" only. Only category can be suggested.
+
+. Typing arguments for sort command word with a order specified
+Test case: Enter `sort asc m`. +
+Expected: Suggestions pop up with the words "money" and "moneyflow" only. Only category can be suggested.
+
+. Typing date arguments for addlimit command word
+Test case: Enter `addlimit d/t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing secondary date arguments for addlimit command word
+Test case: Enter `addlimit d/ytd t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing date arguments for addlimit command word with money included
+Test case: Enter `addlimit m/999 d/ytd t`. +
+Expected: Suggestions pop up with the word "today" only.
+
+. Typing date arguments for addlimit command word with money included
+Test case: Enter `addlimit d/ytd t m/999`. Move the caret in the command box back to right after the 't'.
+Expected: Caret will be stopped right after 't' and suggestions pop up with the word "today" only.
 
 === Saving data
 
 . Dealing with missing/corrupted data files
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Prerequisites: Have a data file ready. Go to the application and add a record. A data xml file should be created.
+.. Test case: Go to the file and remove 1 of the field tags. It should look like "<name></name>" where name is the name of the field.
+Then, open the app.
+.. Expected: The app should initialise with an empty record list.
 
-_{ more test cases ... }_
+.. Test case: Delete the data file
+.. Expected: The app should initialise with a sample record list.

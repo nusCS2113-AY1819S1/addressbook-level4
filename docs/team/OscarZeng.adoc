@@ -1,0 +1,78 @@
+= Oscar Zeng Hao - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets/
+:stylesheet: gh-pages-oscar.css
+
+== PROJECT: Savee
+
+== Savee Overview
+
+Savee is a PC software specially designed for students who love typing.
+This purpose of this product is to help users better manage their finances.
+This project is under the NUS CS2113 (Software Engineering & Object-Oriented Programming) module.
+Students were asked to form a group with four members and develop a production with the base code https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4] provided.
+
+== Summary of contributions
+
+=== `completed` *Major enhancement #1*: added the ability to set limits for multiple periods of time.
+
+** What it does: allows the user to add, edit and delete multiple limits for different periods of time or a single day to better manage their spend.
+All the limits will be stored and automatically checked whenever the records were updated.
+The user will be reminded if any of the limits have been exceeded.
+** Justification:This feature improves the product significantly because the user will be able to better manage their finances by setting limits.
+This feature is challenging because it requires me to build a storage for limits to store limits' details and read from the storage.
+Besides that, I also need to keep limits' information updated whenever there is a change of records and generate output if any limit has been exceeded.
+
+=== `completed` *Major enhancement #2*: added the ability to set the monthly limit.
+
+** What it does: allows the user to add, edit and delete the continuous monthly limit which will always check the total spending for the
+current month. The user will be reminded if the monthly limits have been exceeded and the monthly limit will always be placed at the top of limits' information.
+** Justification:This feature improves the product significantly because the user will be able to make continuous limit for every month. Since user may not
+want to set the limit for every month, this function will provide the user with a convenient method to manage their monthly spend without entering
+similar commands every month.
+This feature is challenging because it requires me to get the current time and generate a special limit that will change according to different time.
+
+=== `completed` *Major enhancement #3*: added the ability to check all limits' condition.
+
+** What it does: allows the user to check all the existing limits' condition.
+** Justification: This feature improves the product significantly because the user is able to check all the limit he/she had set
+and have a better understanding about limits' conditions.
+
+*Code contributed(including tests)*:
+Example:
+https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=oscarzeng[oscarzeng]
+
+=== *Other contributions*:
+
+** Project management:
+*** Provide teammates with valid suggestions about their features error.
+(Examples: https://github.com/CS2113-AY1819S1-T09-4/main/issues/167[1], https://github.com/CS2113-AY1819S1-T09-4/main/issues/149[2])
+
+** Community:
+*** Reported bugs and suggestions for other teams in the class both in Whatsapp and Github.
+(Examples: https://github.com/CS2113-AY1819S1-T16-1/main/issues/267[1], https://github.com/CS2113-AY1819S1-T16-1/main/issues/272#event-1952348734[2])
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=limitfeatures]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=limitfeatures]
+
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/Latest_UGDG_Update/docs/DeveloperGuide.adoc#13-use-case-create-a-normal-limit-for-a-period-of-time-or-a-day[LimitUserCase]
+
+https://github.com/CS2113-AY1819S1-T09-4/main/blob/Latest_UGDG_Update/docs/DeveloperGuide.adoc#h5-viewing-current-months-breakdown[LimitManualTest]
+---
+

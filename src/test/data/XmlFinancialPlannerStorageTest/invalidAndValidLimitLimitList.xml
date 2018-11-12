@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LimitList>
+    <!-- Limit with invalid date field -->
+    <limits>
+        <dateStart>28--9-2018</dateStart>
+        <dateEnd>30-9-2018</dateEnd>
+        <moneyFlow>-100</moneyFlow>
+    </limits>
+    <!-- Limit with valid date field -->
+    <limits>
+        <dateStart>28-9-2018</dateStart>
+        <dateEnd>30-9-2018</dateEnd>
+        <moneyFlow>-100</moneyFlow>
+    </limits>
+</LimitList>
