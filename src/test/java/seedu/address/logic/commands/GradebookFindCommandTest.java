@@ -11,8 +11,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
+import seedu.address.model.StorageController;
 import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.testutil.GradebookBuilder;
@@ -22,56 +22,59 @@ import seedu.address.testutil.GradebookBuilder;
  */
 public class GradebookFindCommandTest {
     private static GradebookManager gradebookManager = new GradebookManager();
-    private static GradebookBuilder dummyGradebookComponent = new GradebookBuilder();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() {
+        StorageController.enterTestMode();
         gradebookManager.clearGradebook();
+        Gradebook gradebook = new GradebookBuilder()
+                .withModuleCode("CS2113")
+                .withComponentName("Finals")
+                .withMaxmarks(50)
+                .withWeightage(60)
+                .build();
+        gradebookManager.addGradebookComponent(gradebook);
         gradebookManager.saveGradebookList();
     }
 
     @Test
-    public void execute_gradebookFind_success() throws CommandException {
+    public void constructor_nullGradebook_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        new GradebookFindCommand(null);
+    }
+
+    @Test
+    public void execute_gradebookFind_success() {
         String moduleCode = "CS2113";
         String gradebookComponentName = "Finals";
         String expectedMessage = MESSAGE_FIND_SUCCESS + "\n";
 
-        gradebookManager.addGradebookComponent(dummyGradebookComponent.build());
-        gradebookManager.saveGradebookList();
-
-        Gradebook gradebook = new Gradebook(moduleCode, gradebookComponentName);
+        Gradebook gradebook = new Gradebook(
+                moduleCode,
+                gradebookComponentName);
         GradebookFindCommand gradebookFindCommand = new GradebookFindCommand(gradebook);
         CommandResult result = gradebookFindCommand.execute(new ModelManager(), new CommandHistory());
 
-        assertEquals(expectedMessage, result.feedbackToUser);
+        assertEquals(String.format(expectedMessage), result.feedbackToUser);
     }
 
     @Test
-    public void execute_gradebookFind_fail() throws CommandException {
-        String moduleCode = "CS2113";
-        String gradebookComponentName = "Test";
-        int gradebookMaxMarks = 50;
-        int gradebookWeightage = 10;
-        String expectedMessage = String.format(
-                MESSAGE_FIND_FAIL,
+    public void execute_gradebookFindInvalid_success() {
+        String moduleCode = "MA1511";
+        String gradebookComponentName = "Assignment 1";
+        String expectedMessage = MESSAGE_FIND_FAIL;
+
+        Gradebook gradebook = new Gradebook(
                 moduleCode,
-                gradebookComponentName,
-                gradebookMaxMarks,
-                gradebookWeightage);
-
-        gradebookManager.addGradebookComponent(dummyGradebookComponent.build());
-        gradebookManager.saveGradebookList();
-
-        Gradebook gradebook = new Gradebook(moduleCode, gradebookComponentName);
+                gradebookComponentName);
         GradebookFindCommand gradebookFindCommand = new GradebookFindCommand(gradebook);
         CommandResult result = gradebookFindCommand.execute(new ModelManager(), new CommandHistory());
 
-        assertEquals(expectedMessage, result.feedbackToUser);
+        assertEquals(String.format(expectedMessage), result.feedbackToUser);
     }
-
 
     @AfterClass
     public static void tearDown() {

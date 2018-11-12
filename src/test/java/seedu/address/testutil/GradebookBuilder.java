@@ -27,58 +27,35 @@ public class GradebookBuilder {
     }
 
     /**
-     * Initializes the GradebookBuilder with the data of {@code gradebookToCopy}.
+     * Sets the {@code moduleCode} of the {@code Gradebook} that we are building.
      */
-    public GradebookBuilder(Gradebook gradebookToCopy) {
-        moduleCode = gradebookToCopy.getModuleCode();
-        gradebookComponentName = gradebookToCopy.getGradeComponentName();
-        gradebookMaxMarks = gradebookToCopy.getGradeComponentMaxMarks();
-        gradebookWeightage = gradebookToCopy.getGradeComponentWeightage();
+    public GradebookBuilder withModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
+        return this;
     }
 
     /**
-     * Initializes the GradebookBuilder with given parameters.
+     * Sets the {@code gradebookComponentName} of the {@code Gradebook} that we are building.
      */
-    public GradebookBuilder(String moduleCode,
-                            String gradebookComponentName,
-                            int gradebookMaxMarks,
-                            int gradebookWeightage) {
-        this.moduleCode = moduleCode;
-        this.gradebookComponentName = gradebookComponentName;
-        this.gradebookMaxMarks = gradebookMaxMarks;
-        this.gradebookWeightage = gradebookWeightage;
+    public GradebookBuilder withComponentName(String componentName) {
+        this.gradebookComponentName = componentName;
+        return this;
     }
 
-    public String getModuleCode() {
-        return moduleCode;
+    /**
+     * Sets the {@code gradebookMaxMarks} of the {@code Gradebook} that we are building.
+     */
+    public GradebookBuilder withMaxmarks(int maxMarks) {
+        this.gradebookMaxMarks = maxMarks;
+        return this;
     }
 
-    public void setModuleCode(String moduleCode) {
-        this.moduleCode = moduleCode;
-    }
-
-    public String getGradebookComponentName() {
-        return gradebookComponentName;
-    }
-
-    public void setGradebookComponentName(String gradebookComponentName) {
-        this.gradebookComponentName = gradebookComponentName;
-    }
-
-    public int getGradebookMaxMarks() {
-        return this.gradebookMaxMarks;
-    }
-
-    public void setGradebookMaxMarks(int gradebookMaxMarks) {
-        this.gradebookMaxMarks = gradebookMaxMarks;
-    }
-
-    public int getGradebookWeightage() {
-        return gradebookWeightage;
-    }
-
-    public void setGradebookWeightage(int gradebookWeightage) {
-        this.gradebookWeightage = gradebookWeightage;
+    /**
+     * Sets the {@code gradebookWeightage} of the {@code Gradebook} that we are building.
+     */
+    public GradebookBuilder withWeightage(int weightage) {
+        this.gradebookWeightage = weightage;
+        return this;
     }
 
     /**
@@ -87,10 +64,6 @@ public class GradebookBuilder {
      * @return Gradebook object
      */
     public Gradebook build() {
-        return new Gradebook(
-                moduleCode,
-                gradebookComponentName,
-                gradebookMaxMarks,
-                gradebookWeightage);
+        return new Gradebook(moduleCode, gradebookComponentName, gradebookMaxMarks, gradebookWeightage);
     }
 }

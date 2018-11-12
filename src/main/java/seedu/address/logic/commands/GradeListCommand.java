@@ -14,7 +14,7 @@ import seedu.address.ui.HtmlTableProcessor;
  */
 public class GradeListCommand extends Command {
     public static final String COMMAND_WORD = "grade list";
-    private static final String MESSAGE_LIST_GRADE_SUCCESS = "Number of Student Grades Listed: ";
+    public static final String MESSAGE_LIST_GRADE_SUCCESS = "Number of Student Grades Listed: ";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
