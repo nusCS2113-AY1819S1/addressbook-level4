@@ -3,7 +3,7 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-This portfolio summarizes my contributions to the https://github.com/CS2113-AY1819S1-T12-1/main/releases/download/v1.3/eventmanager.jar[Event Manager] Application, whereby our team of 5 (http://github.com/chiaxr[Xiang Rong], https://github.com/Geraldcdx[Gerald], http://github.com/jamesyaputra[James], http://github.com/tertium3[Long], http://github.com/cqinkai[Qin Kai]) worked on it as part of our module on software engineering, over a period of 8 weeks. I was the developer in charge of the Event Status feature and the Event Reminder feature in Event Manager.  
+This portfolio summarizes my contributions to the https://github.com/CS2113-AY1819S1-T12-1/main/releases/download/v1.3/eventmanager.jar[Event Manager] Application, whereby our team of 5 (http://github.com/chiaxr[Xiang Rong], https://github.com/Geraldcdx[Gerald], http://github.com/jamesyaputra[James], http://github.com/tertium3[Long], http://github.com/cqinkai[Qin Kai]) worked on it as part of our module on software engineering, over a period of 8 weeks. I was the developer in charge of the Event Status feature and the Event Reminder feature in Event Manager.
 
 == PROJECT: Event Manager
 
@@ -32,9 +32,9 @@ The following is a list of the main features in Event Manager:
 ** Highlights: This enhancement changes the current model and increases the list of commands available to users. It required an in-depth analysis of design alternatives.
 
 * *Major enhancement #2*: +
-** added *a reminder mechanism for user-registered events* 
+** added *a reminder mechanism for user-registered events*
 ** What it does: Sends a reminder to users for any upcoming events (those happening in the next 24 hours) that they have registered for.
-** Justification: This 
+** Justification: This
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 
 * *Minor enhancement*: added new information fields for the events.
