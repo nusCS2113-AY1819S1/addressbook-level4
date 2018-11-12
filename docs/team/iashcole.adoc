@@ -167,7 +167,7 @@ In addition, the text in the command box will be replaced with a template of the
 * **Alternative 1 (current choice): Displays a message on-screen and replaces text in command box.**
 ** Pros: : Allow users (especially beginners) to edit the command field when given the template of the command. They will be guided via a message on-screen.
 ** Cons: Users need to spend the extra time clicking on and editing the command text provided instead of typing the command fluently.
-* **Alternative 2: : Pops a new window indicating the required fields for command.**
+* **Alternative 2: Pops a new window indicating the required fields for command.**
 ** Pros: Highly sophisticated GUI handling.
 ** Cons: Application is meant for CLI for faster execution. Pressing on the wrong command may induce user frustration.
 
