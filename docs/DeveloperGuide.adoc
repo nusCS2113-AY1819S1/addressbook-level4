@@ -133,10 +133,12 @@ Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[width="800"]
+
+In Trajectory's implementation, the `Model` and `Storage` components have been modified slightly to simpler code for the developer team to use. The modifications are explained in greater detail in the sections below.
 
 [discrete]
 ==== Events-Driven nature of the design
@@ -158,6 +160,23 @@ image::SDforDeletePersonEventHandling.png[width="800"]
 Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
 
 The sections below give more details of each component.
+
+[discrete]
+==== MVC-inspired design
+
+The event-driven design detailed above was inherited from AddressBook. In Trajectory, a simpler design pattern inspired by the MVC pattern was adopted for the communication between the `Model` and `Storage` components.
+
+Every new entity in Trajectory exposes its functionality in a `{Entity Name}Manager` class. These new manager classes are part of the `Model` layer.
+
+On the `Storage` layer, a new class `StorageController` was added to behave like a proxy for the actual file storage, but without the event-driven design to make things simpler for the team members to add their individual code.
+
+The _Sequence Diagram_ below shows how the Model and Storage components interact in Trajectory's MVC implementation for the scenario where the user issues the command `module delete mc/CS2113`.
+
+.Component interactions for `module delete mc/CS2113` command in the MVC implementation
+image::SDforMVCPattern.png[width="800"]
+
+[NOTE]
+Note how the `ModuleManager` makes a direct call to `StorageController` to save the data to the hard disk. This behaviour was partly inspired by the simplicity in Entity Framework's implementation. It is meant to simplify the storage process and speed up development time.
 
 [[Design-Ui]]
 === UI component
@@ -186,8 +205,7 @@ The `UI` component,
 .Structure of Trajectory Logic Component
 image::TrajectoryLogicClassDiagram.png[width="800"]
 
-*API* :
-link:https://github.com/CS2113-AY1819S1-T16-1/main/blob/master/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+*API* : link:{repoUrl}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
