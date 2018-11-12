@@ -32,6 +32,7 @@ import com.t13g2.forum.logic.commands.SetAdminCommand;
 import com.t13g2.forum.logic.commands.UpdateCommentCommand;
 import com.t13g2.forum.logic.commands.UpdateModuleCommand;
 import com.t13g2.forum.logic.commands.UpdateThreadCommand;
+import com.t13g2.forum.logic.commands.UserDeleteCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
 /**
@@ -160,6 +161,9 @@ public class AddressBookParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
+
+        case UserDeleteCommand.COMMAND_WORD:
+            return  new UserDeleteCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -14,8 +14,9 @@ import com.t13g2.forum.model.UnitOfWork;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 
+//@@author e0191729
 /**
- *
+ * Login to the ForumBook
  */
 public class LoginCommand extends Command {
     public static final String COMMAND_WORD = "login";
