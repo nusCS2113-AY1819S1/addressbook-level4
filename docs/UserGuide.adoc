@@ -691,7 +691,7 @@ Format: `setPW`
 You might have seen the below welcome message on your very first login.
 
 .GUI of Welcome Message
-image::SetPasswordWelcomeMessage.png[width="600"]
+image::SetPasswordWelcomeMessage.PNG[width="600"]
 
 To help protect your data confidentiality and integrity, you can enter `setPW` to set/change your password!
 
