@@ -424,6 +424,13 @@ Step 2. The user executes ...
 [NOTE]
 Any duplicates formed after editing will not replace the original object. It will prompt an error message
 
+The following sequence diagram shows how the edit operation works for editc:
+
+[NOTE]
+All three variations of `edit` follows the same sequence during operation
+
+image::EditSequenceDiagram.png[width="800"]
+
 ==== Design Considerations
 
 ===== How edit executes
@@ -506,15 +513,29 @@ Step 2. The user executes...
 ... `s/` prefix is used which calls the `UniqueCandidateList#sortBySalary()` from `CandidateBook`.
 ... The `internalList` within `CandidateBook` is then sorted numerically based on salary and the newly sorted list will be reflected in the `MainWindow` of RecruitBook.
 .. `sortC c/` to sort the list of companies based on their names.
-... `c/` prefix is used which calls the `UniqueCompanyList`#sortByCompanyName()` from `CompanyBook`.
+... `c/` prefix is used which calls the `UniqueCompanyList#sortByCompanyName()` from `CompanyBook`.
 ... The `internalList` within `CompanyBook` is then sorted lexicographically based on their names and the newly sorted list will be reflected in the `MainWindow` of RecruitBook.
 .. `sortj j/` to sort the list of job offers based on their title.
-... `j/` prefix is used which calls the `UniqueCompanyJobList`#sortByJob()` from `CompanyBook`.
+... `j/` prefix is used which calls the `UniqueCompanyJobList#sortByJob()` from `CompanyBook`.
 ... The `internalList` within `UniqueCompanyJobList` is then sorted lexicographically based on their titles and the newly sorted list will be reflected in the `MainWindow` of RecruitBook.
 
 Step 3. The user does not want the candidates to be sorted in increasing order of their salaries but decreasing order. So, the user executes
 
 .. `sortc r/` to sort the list of candidates in the reverse order of the current order.
+
+The following sequence diagram shows how the sort operation works:
+
+[NOTE]
+All three variations of the `sort` command follows the same sequence during operation.
+
+image::SortSequenceDiagram.png[width="800"]
+
+The following activity diagram summarizes what happens when a user executes `sortc` command:
+
+[NOTE]
+All three variations of the `sort` command follows a similar activity flow, with different cases for switch(prefix).
+
+image::SortActivityDiagram.png[width="800"]
 
 ==== Design Considerations
 ===== Aspect: How sort executes
@@ -538,7 +559,7 @@ Additionally, it implements the following operations:
 This operation is exposed in the `Model` interface as `Model#updateCandidate(Candidate target, Candidate editedCandidate)`.
 
 [NOTE]
-There is *no* duplicate check as no two candidate objects share the same name and changing the tags (blacklist) does not violate the uniqueness of their names.
+There is *no* duplicate check unlike edit as blacklist only involve tags and they are not attributes that determine the uniqueness of candidates.
 
 Given below is an example usage scenario and how the blacklist command behaves at each step.
 
@@ -563,6 +584,10 @@ Step 4. The user decides that blacklisting the candidate was a mistake and proce
 [NOTE]
 Trying to blacklist an already blacklisted candidate will prompt an error message. +
 Unblacklisting a candidate who is not blacklisted will do likewise.
+
+The following sequence diagram shows how the blacklist operation works:
+
+image::BlacklistSequenceDiagram.png[width="1000"]
 
 ==== Design considerations
 ===== Aspect: How blacklist executes
@@ -594,9 +619,7 @@ is facilitated by `ShortlistParser`.
 
 It extends `CompanyBook` with a list of shortlisted candidate(s) for each job offer, stored internally as a
 Unique Candidate List called `candidateList`. The reason for storing as a unique list is to prevent duplicated
-candidates from being added into the same `candidateList`.
-
-It also uses `EventsCenter` to post a new `ChangeLogicStateEvent` so that
+candidates from being added into the same `candidateList`. It also uses `EventsCenter` to post a new `ChangeLogicStateEvent` so that
 `LogicManager` will handle the event with its `handleChangeLogicStateEvent` method.
 
 It is a 5-stage process supported by `LogicManager` by keeping track of the `LogicState`.
@@ -658,11 +681,11 @@ You can access this list by calling `selectedJob.getUniqueCandidateList()`.
 
 The following sequence diagram shows how the shortlist operation works:
 
-image::shortlistSequenceDiagram.png[width="800"]
+image::shortlistSequenceDiagram.png[width="400"]
 
 The following activity diagram summarizes what happens when a user executes `shortlist` command:
 
-image::shortlistActivityDiagram.png[width="650"]
+image::shortlistActivityDiagram.png[width="400"]
 
 ===== Deleting a Shortlisted Candidate
 
@@ -728,7 +751,7 @@ this command returns a message to be displayed to inform the user.
 
 The following activity diagram summarizes what happens when a user executes `deleteShortlist` command:
 
-image::deleteShortlistActivityDiagram.png[width="650"]
+image::deleteShortlistActivityDiagram.png[width="400"]
 
 ==== Design Considerations
 
