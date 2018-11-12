@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.CheckCommand;
-import seedu.address.model.expenditureinfo.Date;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
