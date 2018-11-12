@@ -311,11 +311,19 @@ Step 4. The user executes ...
         .. `deleteC 1,3-4` to delete multiple companies. `DeleteCompanyCommand` calls `Model#removeCompany(Company company)` for the companies listed at index 1, and 4.
         .. `deletej 1,3-4` to delete multiple job offers. `DeleteJobOfferCommand` calls `Model#deleteJobOffer(JobOffer jobOffer)` for the job offers listed at index 1, and 4.
 
+Here is a sequence Diagram to help illustrate the flow of adding an entries.
+
+image::AddSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
 ===== Aspect: How add/delete feature executes
-
+* **Alternative 1 (current choice):** Start an adding interface. Users can continually add entries for the same object until they enter 'cancel'
+** Pros: User can keep adding multiple entries of the same object without having to entering the `addc`, `addC` or `addj.
+** Cons: Not very convenient for user if he/she just needs to add one entry.
+* **Alternative 2:** Enter command_word and argument
+** Pros: Adding entries of specific objects is straightforward. Enter the respective command word and the respective details
+** Cons: Entering the command word becomes a hassle when adding a large number of entries
 ===== Aspect: Data structure to support the add/delete feature
 * **Alternative 1 (current choice):** Create a new list object to store objects e.g. `UniqueCompanyList`
 ** Pros: Easy to implement, allows for manipulation of data within the data structure (e.g) sorting.
