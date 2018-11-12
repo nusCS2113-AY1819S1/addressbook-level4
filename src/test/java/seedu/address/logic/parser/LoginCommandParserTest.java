@@ -40,7 +40,7 @@ public class LoginCommandParserTest {
                 + LOGIN_VALID_DESC_PASSWORD, validLoginCommand);
 
         // multiple usernames with valid last username - last username accepted
-        assertParseSuccess(parser,  LOGIN_INVALID_DESC_USERNAME + LOGIN_VALID_DESC_USERNAME
+        assertParseSuccess(parser, LOGIN_INVALID_DESC_USERNAME + LOGIN_VALID_DESC_USERNAME
                 + LOGIN_VALID_DESC_PASSWORD, validLoginCommand);
 
         // multiple passwords with valid last password - last password accepted
