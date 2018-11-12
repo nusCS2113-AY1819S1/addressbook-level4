@@ -688,9 +688,9 @@ Export should be able to export the attendance list of an event according to use
 // end::exportcalendar[]
 
 // tag::dataencryption[]
-=== [Proposed] Data Encryption
+//=== [Proposed] Data Encryption
 
-_{Explain here how the data encryption feature will be implemented}_
+//_{Explain here how the data encryption feature will be implemented}_
 
 // end::dataencryption[]
 
