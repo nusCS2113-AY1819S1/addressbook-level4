@@ -1134,38 +1134,6 @@ Aspect: `Expenses List` Storage
 
 Generates an expenses report with the total expenses amount claimed and have not been claimed for a year _[Upcoming in 2.0]_
 
-==== Current Implementation for `deleteExpenses` command
-
-The `removeex` mechanism is facilitated by `RemoveExpensesCommandParser`.
-The `RemoveExpensesCommandParser` implements the `Parser` interface, parses the arguments parameter, which is the input from the user, and creates a new `RemoveExpensesCommand` object.
-Only Index will be required as input.
-Removing of expenses is to delete selected expenses from the list based on the input Index.
-Checking of whether Index is within list is facilitated by a method, `CommandResult` of the `RemoveExpensesCommand` class.
-The `CommandResult` method also calls the `deleteExpenses` method and `commitExpenses` method from `model` interface to delete the expenses and commit the changes into the xml storage.
-
-[NOTE]
-If the input Index isn't found in the list, an error message will be shown to the user.
-
-Code snippet of `CommandResult` from `RemoveExpensesCommand` class that checks the input Index and calling the `deleteExpenses` method and `commitExpenses` to delete the expenses and commit the changes:
-
-[source, java]
-----
-@Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
-        List<Expenses> lastShownList = model.getFilteredExpensesList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EXPENSES_DISPLAYED_INDEX);
-        }
-
-        Expenses expensesToRemove = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteExpenses(expensesToRemove);
-        model.commitExpensesList();
-        return new CommandResult(String.format(MESSAGE_REMOVE_EXPENSES_SUCCESS, expensesToRemove));
-    }
-----
-
 // end::Expenses[]
 
 // tag::filter[]

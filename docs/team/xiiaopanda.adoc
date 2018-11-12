@@ -53,6 +53,7 @@ include::../UserGuide.adoc[tag=selectExpensesCommand]
 
 include::../UserGuide.adoc[tag=clearExpensesCommand]
 
+include::../UserGuide.adoc[tag=expenses2.0Feature]
 
 == Contributions to the Developer Guide
 
