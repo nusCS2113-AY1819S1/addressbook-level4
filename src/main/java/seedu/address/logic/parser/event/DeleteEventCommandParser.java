@@ -2,15 +2,11 @@ package seedu.address.logic.parser.event;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.stream.Stream;
-
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.eventCommand.DeleteEventCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.commons.core.index.Index;
 
 /**
  * Parses input arguments and creates a new DeleteEventCommand object
