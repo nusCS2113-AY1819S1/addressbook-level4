@@ -13,6 +13,7 @@ public class Limit {
     private Date dateStart;
     private Date dateEnd;
     private MoneyFlow limitMoneyFlow;
+    public static final String LIMIT_FORMAT = "dateStart: %s, dateEnd%s, moneyFlow:%s";
     public Limit (Date dateStart , Date dateEnd, MoneyFlow limitMoneyFlow) {
         requireAllNonNull(dateEnd, dateStart, limitMoneyFlow);
         this.dateStart = dateStart;
@@ -29,7 +30,7 @@ public class Limit {
 
     @Override
     public String toString () {
-        return String.format("LIMIT_FORMAT", dateStart, dateEnd, limitMoneyFlow);
+        return String.format(LIMIT_FORMAT, dateStart, dateEnd, limitMoneyFlow);
     }
 
 
