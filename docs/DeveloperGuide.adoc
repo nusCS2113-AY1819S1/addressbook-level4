@@ -205,8 +205,7 @@ The `UI` component,
 .Structure of Trajectory Logic Component
 image::TrajectoryLogicClassDiagram.png[width="800"]
 
-*API* :
-link:https://github.com/CS2113-AY1819S1-T16-1/main/blob/master/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+*API* : link:{repoUrl}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
