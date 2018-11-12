@@ -11,6 +11,7 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowPieChartStatsEvent;
 import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
+import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
@@ -32,6 +33,9 @@ public class StatisticCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "1-1-2018 " + "12-12-2018";
 
     public static final String MESSAGE_SUCCESS = "Stats generated for data from %s to %s!";
+    public static final String MESSAGE_FAILURE = "An error has occurred and your statistics cannot be generated!\n " +
+            "Please ensure that the total expenses and total income do not exceed the constraints of moneyflow. \n" +
+            "Error handled : %s";
 
     private final Predicate<Record> predicate;
     private final Date startDate;
@@ -47,14 +51,20 @@ public class StatisticCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
-        model.updateFilteredRecordList(predicate);
-        CategoryStatisticsList categoryStats = new CategoryStatisticsList(model.getFilteredRecordList());
-        String startDateFormatted = DateUtil.formatDate(startDate);
-        String endDateFormatted = DateUtil.formatDate(endDate);
-        logger.info("Created stats: " + String.format("%s from %s", startDateFormatted, endDateFormatted));
-        EventsCenter.getInstance().post(new ShowPieChartStatsEvent(categoryStats.getReadOnlyStatsList(),
-                startDateFormatted, endDateFormatted));
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException{
+        String startDateFormatted;
+        String endDateFormatted;
+        try {
+            model.updateFilteredRecordList(predicate);
+            CategoryStatisticsList categoryStats = new CategoryStatisticsList(model.getFilteredRecordList());
+            startDateFormatted = DateUtil.formatDate(startDate);
+            endDateFormatted = DateUtil.formatDate(endDate);
+            logger.info("Created stats: " + String.format("%s from %s", startDateFormatted, endDateFormatted));
+            EventsCenter.getInstance().post(new ShowPieChartStatsEvent(categoryStats.getReadOnlyStatsList(),
+                    startDateFormatted, endDateFormatted));
+        } catch (Exception e) {
+            throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, startDateFormatted, endDateFormatted));
     }
 
