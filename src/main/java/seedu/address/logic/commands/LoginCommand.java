@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.account.Account;
 import seedu.address.model.account.UsernameMatchPredicate;
 
+//@@author Davindran
 /**
  * Logs in account into Stock List.
  */

@@ -1220,6 +1220,7 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+// tag::accountUseCase[]
 [discrete]
 === Use case: Login
 
@@ -1306,6 +1307,7 @@ Use case ends.
 ** 3a1. StockList shows an error message.
 +
 Use case resumes at step 2.
+// end::accountUseCase[]
 
 _{More to be added}_
 
@@ -1382,6 +1384,7 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 
+// tag::accountTesting[]
 === Logging in
 
 . Logging in while all accounts are listed
@@ -1424,7 +1427,7 @@ _{ more test cases ... }_
    Expected: No account is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect deleteAccount commands to try: `deleteAccount`, `deleteAccount x` (where x is larger than the account list size) +
    Expected: Similar to previous.
-
+// end::accountTesting[]
 
 === Saving data
 

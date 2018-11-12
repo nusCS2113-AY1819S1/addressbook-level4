@@ -123,6 +123,7 @@ public class ParserUtil {
         return tagSet;
     }
 
+    //@@author Davindran
     /**
      * Parses a {@code String username} into a {@code Password}.
      * Leading and trailing whitespaces will be trimmed.

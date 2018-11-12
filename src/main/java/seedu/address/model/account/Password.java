@@ -3,6 +3,7 @@ package seedu.address.model.account;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author Davindran
 /**
  * Represents an Account's password in the stock list login command.
  * Guarantees: immutable; is valid as declared in {@link #isValidPassword(String)}
