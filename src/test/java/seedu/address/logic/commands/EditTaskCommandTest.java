@@ -2,9 +2,14 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DATE_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_MODULE_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_TUTORIAL;
 import static seedu.address.testutil.TypicalExpenditures.getTypicalExpenditureTracker;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
