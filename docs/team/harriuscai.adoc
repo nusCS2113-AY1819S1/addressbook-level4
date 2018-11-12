@@ -22,8 +22,6 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 * *Minor enhancement*: updated the main parser to allow multi-word commands without breaking existing commands.
 * *Minor enhancement*: implemented a MVC-like pattern for interaction between classes in the `Model` and `Storage` layers for the team to adopt.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
-
 * *Other contributions*:
 
 ** Documentation:
