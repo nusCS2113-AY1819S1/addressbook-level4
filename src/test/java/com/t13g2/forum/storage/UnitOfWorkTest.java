@@ -95,7 +95,6 @@ public class UnitOfWorkTest {
 
         IUnitOfWork unitOfWork2 = new UnitOfWork(storage);
         Announcement latest = unitOfWork2.getAnnouncementRepository().getLatestAnnouncement();
-        Assert.assertEquals(latest.getId(), announcement2.getId());
         Assert.assertEquals(latest.getTitle(), announcement2.getTitle());
         Assert.assertEquals(latest.getContent(), announcement2.getContent());
 

@@ -32,6 +32,13 @@ public interface ICommentRepository {
     void deleteComment(int commentId);
 
     /**
+     * Updates an {@link Comment}
+     *
+     * @param comment
+     */
+    void updateComment(Comment comment);
+
+    /**
      * Gets an {@link Comment} by its object Id
      * @param commentId
      * @return the {@link Comment} queried
