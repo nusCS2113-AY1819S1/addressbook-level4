@@ -17,14 +17,10 @@ public class ClearScheduleCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ClearScheduleCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args);
-
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(args);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ClearScheduleCommand.MESSAGE_USAGE), pe);

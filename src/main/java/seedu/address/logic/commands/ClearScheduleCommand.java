@@ -64,6 +64,7 @@ public class ClearScheduleCommand extends Command {
         model.updatePerson(personToClearSchedule, scheduledPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
+
         return new CommandResult(String.format(MESSAGE_CLEAR_SCHEDULE_SUCCESS, scheduledPerson));
 
     }
