@@ -52,8 +52,8 @@ public class SalesHistoryTest {
     @Test
     public void addReminder_invalidTimeFormat() {
         SalesHistory salesHistory = new SalesHistory();
-        Assert.assertThrows(
-                InvalidTimeFormatException.class, () -> salesHistory.addReminder(new InvalidReminderTimeStub()));
+        Assert.assertThrows(InvalidTimeFormatException.class,
+                () -> salesHistory.addReminder(new InvalidReminderTimeStub()));
     }
 
     @Test
