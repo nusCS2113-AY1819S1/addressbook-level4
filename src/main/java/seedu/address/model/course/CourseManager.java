@@ -59,6 +59,16 @@ public class CourseManager {
     }
 
     /**
+     * Updates a course
+     * @param oldCourse
+     * @param newCourse
+     */
+    public void updateCourse(Course oldCourse, Course newCourse) {
+        courseList.set(courseList.indexOf(oldCourse), newCourse);
+
+    }
+
+    /**
      * Removes all courses.
      */
     public void clearAll() {
@@ -89,7 +99,7 @@ public class CourseManager {
             }
         }
 
-        throw new NullPointerException();
+        return null;
 
     }
 
