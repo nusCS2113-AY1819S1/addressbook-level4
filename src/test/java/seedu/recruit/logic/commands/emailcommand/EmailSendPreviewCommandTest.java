@@ -10,7 +10,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
-class EmailSendPreviewCommandTest {
+public class EmailSendPreviewCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();
@@ -18,7 +18,7 @@ class EmailSendPreviewCommandTest {
     private EmailSendPreviewCommand command = new EmailSendPreviewCommand();
 
     @Test
-    void execute_emailSendPreview() {
+    public void execute_emailSendPreview() {
         assertEquals(EMAIL_SEND_SHOWING_PREVIEW_MESSAGE
                 + EmailSendCommand.MESSAGE_USAGE, command.execute(model, commandHistory, userPrefs).feedbackToUser);
     }

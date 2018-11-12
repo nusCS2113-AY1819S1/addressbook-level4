@@ -15,7 +15,7 @@ import seedu.recruit.model.UserPrefs;
 import seedu.recruit.testutil.CandidateBuilder;
 import seedu.recruit.testutil.JobOfferBuilder;
 
-class EmailRecipientsNextCommandTest {
+public class EmailRecipientsNextCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();
@@ -24,7 +24,7 @@ class EmailRecipientsNextCommandTest {
     private EmailRecipientsNextCommand emailRecipientsNextCommand = new EmailRecipientsNextCommand();
 
     @Test
-    void execute_emailRecipientNextCommand_withJobOffer() {
+    public void execute_emailRecipientNextCommand_withJobOffer() {
         Model model = new ModelManager();
         LogicManager logic = new LogicManager(model, userPrefs);
         model.getEmailUtil().addJobOffer(jobOfferBuilder.build());
@@ -36,7 +36,7 @@ class EmailRecipientsNextCommandTest {
     }
 
     @Test
-    void execute_emailRecipientNextCommand_withCandidate() {
+    public void execute_emailRecipientNextCommand_withCandidate() {
         Model model = new ModelManager();
         LogicManager logic = new LogicManager(model, userPrefs);
         model.getEmailUtil().addCandidate(candidateBuilder.build());
@@ -48,7 +48,7 @@ class EmailRecipientsNextCommandTest {
     }
 
     @Test
-    void execute_emailRecipientNextCommand_empty() {
+    public void execute_emailRecipientNextCommand_empty() {
         Model model = new ModelManager();
         model.resetEmailUtil();
         LogicManager logic = new LogicManager(model, userPrefs);

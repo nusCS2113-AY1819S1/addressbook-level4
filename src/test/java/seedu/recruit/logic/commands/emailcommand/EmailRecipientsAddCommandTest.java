@@ -7,7 +7,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
-class EmailRecipientsAddCommandTest {
+public class EmailRecipientsAddCommandTest {
 
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
@@ -15,6 +15,6 @@ class EmailRecipientsAddCommandTest {
 
     @Test
 
-    void execute_emailRecipientsAdd_noRecipients() {
+    public void execute_emailRecipientsAdd_noRecipients() {
     }
 }

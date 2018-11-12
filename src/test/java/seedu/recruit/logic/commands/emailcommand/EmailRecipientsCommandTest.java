@@ -11,14 +11,14 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
-class EmailRecipientsCommandTest {
+public class EmailRecipientsCommandTest {
 
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();
 
     @Test
-    void execute_emailRecipientsCommand() {
+    public void execute_emailRecipientsCommand() {
         try {
             new EmailRecipientsCommand().execute(model, commandHistory, userPrefs);
         } catch (ParseException pe) {

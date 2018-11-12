@@ -11,7 +11,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
-class EmailInitialiseCommandTest {
+public class EmailInitialiseCommandTest {
 
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit test for emailsettings class
  */
-class EmailSettingsTest {
+public class EmailSettingsTest {
 
     private static final String DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT = "New job offers that I have found for you!";
     private static final String DEFAULT_SUBJECT_COMPANY_AS_RECIPIENT = "New candidates found for your company!";
@@ -20,27 +20,27 @@ class EmailSettingsTest {
     private EmailSettings defaultEmailSettings = new EmailSettings();
 
     @Test
-    void getSubjectCandidateAsRecipient_emailSettings_customObject() {
+    public void getSubjectCandidateAsRecipient_emailSettings_customObject() {
         assertTrue(customEmailSettings.getSubjectCandidateAsRecipient().equals("test1"));
     }
 
     @Test
-    void getSubjectCompanyAsRecipient_emailSettings_customObject() {
+    public void getSubjectCompanyAsRecipient_emailSettings_customObject() {
         assertTrue(customEmailSettings.getSubjectCompanyAsRecipient().equals("test2"));
     }
 
     @Test
-    void getBodyTextCandidateAsRecipient_emailSettings_customObject() {
+    public void getBodyTextCandidateAsRecipient_emailSettings_customObject() {
         assertTrue(customEmailSettings.getBodyTextCandidateAsRecipient().equals("test3"));
     }
 
     @Test
-    void getBodyTextCompanyAsRecipient_emailSettings_customObject() {
+    public void getBodyTextCompanyAsRecipient_emailSettings_customObject() {
         assertTrue(customEmailSettings.getBodyTextCompanyAsRecipient().equals("test4"));
     }
 
     @Test
-    void toString_emailSettings_customObject() {
+    public void toString_emailSettings_customObject() {
         String correctString = "Subject for Candidates as recipients : test1\n"
                 + "Subject for Companies as recipients : test2\n"
                 + "Body text for Candidates as recipients : test3\n"
@@ -49,18 +49,18 @@ class EmailSettingsTest {
     }
 
     @Test
-    void getSubjectCandidateAsRecipient_emailSettings_defaultObject() {
+    public void getSubjectCandidateAsRecipient_emailSettings_defaultObject() {
         assertTrue(defaultEmailSettings.getSubjectCandidateAsRecipient()
                 .equals(DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT));
     }
 
     @Test
-    void getSubjectCompanyAsRecipient_emailSettings_defaultObject() {
+    public void getSubjectCompanyAsRecipient_emailSettings_defaultObject() {
         assertTrue(defaultEmailSettings.getSubjectCompanyAsRecipient().equals(DEFAULT_SUBJECT_COMPANY_AS_RECIPIENT));
     }
 
     @Test
-    void getBodyTextCandidateAsRecipient_emailSettings_defaultObject() {
+    public void getBodyTextCandidateAsRecipient_emailSettings_defaultObject() {
         assertTrue(defaultEmailSettings.getBodyTextCandidateAsRecipient()
                 .equals(DEFAULT_BODYTEXT_CANDIDATE_AS_RECIPIENT));
     }
@@ -71,7 +71,7 @@ class EmailSettingsTest {
     }
 
     @Test
-    void toString_emailSettings_defaultObject() {
+    public void toString_emailSettings_defaultObject() {
         String correctString = "Subject for Candidates as recipients : "
                 + DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT + '\n'
                 + "Subject for Companies as recipients : "

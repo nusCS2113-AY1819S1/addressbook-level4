@@ -10,14 +10,14 @@ import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
-class EmailSendCommandTest {
+public class EmailSendCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     private UserPrefs userPrefs = new UserPrefs();
     private ModelManager model = new ModelManager();
 
     @Test
-    void execute_sendCommand() {
+    public void execute_sendCommand() {
         try {
             new EmailSendCommand().execute(model, commandHistory, userPrefs);
         } catch (ParseException pe) {
