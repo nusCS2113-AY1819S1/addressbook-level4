@@ -489,8 +489,6 @@ The following sequence diagram shows how the TimeTable is exported: +
 .Interactions between the various Components for the `export` Command
 image::ExportSequenceDiagram.png[ ]
 
-{nbsp}
-
 ==== Design Considerations
 ===== Aspect: Which Classes (and which system(s)) should parse the ics file format?
 * **Alternative 1 (current choice):** All code related to parsing _.ics_ timetable files are inside 'IcsUtil' class. When executing ImportCommand/ExportCommand, it directly calls a method in IcsUtil.
