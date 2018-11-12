@@ -32,6 +32,8 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Added tags to the selected item.";
 
+    public static final String MESSAGE_DUPLICATE = "This item already has the inputted tags. Please try again.";
+
     public static final String MESSAGE_NO_TAG = "Please include the tags you want to add.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add the inputted tags to the selected item "
@@ -72,6 +74,9 @@ public class AddTagCommand extends Command {
         model.updateItem(itemToEdit, editedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
+        if(itemToEdit.getTags().size() == lastShownList.get(index.getZeroBased()).getTags().size()) {
+            return new CommandResult(MESSAGE_DUPLICATE);
+        }
         return new CommandResult(MESSAGE_SUCCESS);
 
     }

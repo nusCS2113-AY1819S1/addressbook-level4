@@ -19,6 +19,8 @@ public class FoundCommand extends Command {
 
     public static final String MESSAGE_FOUND_ITEM_SUCCESS = "Found Item: %1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "The found quantity input is invalid";
+    public static final String MESSAGE_FOUND_LARGER_THAN_LOST = "The quantity of found items "
+            + "must be less than or equal to quantity of lost items";
 
     private final Index targetIndex;
     private final FoundDescriptor foundDescriptor;
@@ -33,6 +35,11 @@ public class FoundCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Item> lastShownList = model.getFilteredItemList();
 
 
@@ -64,22 +71,27 @@ public class FoundCommand extends Command {
         Integer updatedLost = currentLoststatus.getLoststatusLost();
         Integer updatedFound = currentLoststatus.getLoststatusFound();
 
+        Integer initialReadyValue = itemToFound.getStatus().getStatusReady();
+
         Integer updatedValue = foundDescriptor.getFoundQuantity();
         Integer initialValue = itemToFound.getQuantity().toInteger();
 
         updatedLost -= updatedValue;
         updatedFound += updatedValue;
         if (updatedLost < 0) {
-            throw new CommandException(MESSAGE_INVALID_QUANTITY);
+            throw new CommandException(MESSAGE_FOUND_LARGER_THAN_LOST);
         }
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue + updatedValue));
+        Status updatedStatus = new Status(initialReadyValue + updatedValue,
+                itemToFound.getStatus().getStatusOnLoan(), itemToFound.getStatus().getStatusFaulty());
+
 
 
 
         return new Item(itemToFound.getName(), updatedQuantity,
-                itemToFound.getMinQuantity(), updatedLoststatus, itemToFound.getTags());
+                itemToFound.getMinQuantity(), updatedLoststatus, updatedStatus, itemToFound.getTags());
     }
 
     /**
@@ -121,8 +133,13 @@ public class LostandFoundCommand extends Command {
     public static final String COMMAND_WORD = "lost&found";
     public static final String MESSAGE_SUCCESS = "Lost items listed";
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         ArrayList<SimpleItem> lostItems = new ArrayList<>();
         List<Item> lastShownList = model.getFilteredItemList();
         sortSimpleItems(lastShownList, lostItems);
@@ -188,6 +205,8 @@ public class LostCommand extends Command {
 
     public static final String MESSAGE_LOST_ITEM_SUCCESS = "Lost Item: %1$s";
     public static final String MESSAGE_INVALID_QUANTITY = "The lost quantity input is invalid";
+    public static final String MESSAGE_LOST_LARGER_THAN_READY = "The lost quantity much be larger than "
+            + "or equal to the quantity of Ready items";
 
     private final Index targetIndex;
     private final LostDescriptor lostDescriptor;
@@ -202,6 +221,11 @@ public class LostCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN);
+        }
+
         List<Item> lastShownList = model.getFilteredItemList();
 
 
@@ -235,19 +259,21 @@ public class LostCommand extends Command {
 
         Integer updatedValue = lostDescriptor.getLostQuantity();
         Integer initialValue = itemToLost.getQuantity().toInteger();
-        if (initialValue - updatedValue < 0) {
-            throw new CommandException(MESSAGE_INVALID_QUANTITY);
+        Integer initialReadyValue = itemToLost.getStatus().getStatusReady();
+        if (initialReadyValue - updatedValue < 0) {
+            throw new CommandException(MESSAGE_LOST_LARGER_THAN_READY);
         }
         updatedLost += updatedValue;
         updatedFound -= updatedValue;
         updatedLoststatus = new Loststatus(updatedLost, updatedFound);
 
         Quantity updatedQuantity = new Quantity(Integer.toString(initialValue - updatedValue));
-
+        Status updatedStatus = new Status(initialReadyValue - updatedValue,
+                itemToLost.getStatus().getStatusOnLoan(), itemToLost.getStatus().getStatusFaulty());
 
 
         return new Item(itemToLost.getName(), updatedQuantity,
-                itemToLost.getMinQuantity(), updatedLoststatus, itemToLost.getTags());
+                itemToLost.getMinQuantity(), updatedLoststatus, updatedStatus, itemToLost.getTags());
     }
 
     /**
