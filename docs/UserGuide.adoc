@@ -395,10 +395,10 @@ Upcoming events are those that are occurring within the next 24 hours.
 ====
 
 ****
-* You will only receive reminders for events that they have *registered* for.
+* You will only receive reminders for events that you have *registered* for.
 * You have to be *logged-in* to receive reminders.
 * Reminders are *automatically* sent out every 6 hours, unless you initiate the command.
-* Close the event alert dialog using your mouse or by hitting 'enter' on your keyboard.
+* Close the reminder alert dialog using your mouse or by hitting 'enter' on your keyboard.
 ****
 
 --
