@@ -16,18 +16,23 @@ public class OpenCommandParser implements Parser<OpenCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public OpenCommand parse(String args) throws ParseException {
-        String fileName = ParserUtil.parseFileName(args);
-        fileName = fileName + ".xml";
-        if ((".xml").equals(fileName)) {
+        try {
+            String fileName = ParserUtil.parseFileName(args);
+            fileName = fileName + ".xml";
+            if ((".xml").equals(fileName)) {
+                throw new ParseException(
+                        String.format(OpenCommand.MESSAGE_EMPTY_FILE_NAME, OpenCommand.MESSAGE_USAGE)
+                );
+            } else if (!isValidFile(fileName)) {
+                throw new ParseException(
+                        String.format(OpenCommand.MESSAGE_FILE_NOT_EXIST, OpenCommand.MESSAGE_USAGE)
+                );
+            }
+            return new OpenCommand(fileName);
+        } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(OpenCommand.MESSAGE_EMPTY_FILE_NAME, OpenCommand.MESSAGE_USAGE)
-            );
-        } else if (!isValidFile(fileName)) {
-            throw new ParseException(
-                    String.format(OpenCommand.MESSAGE_FILE_NOT_EXIST, OpenCommand.MESSAGE_USAGE)
-            );
+                    String.format(OpenCommand.MESSAGE_INVALID_FILE_NAME, OpenCommand.MESSAGE_USAGE), pe);
         }
-        return new OpenCommand(fileName);
     }
 
     /**
