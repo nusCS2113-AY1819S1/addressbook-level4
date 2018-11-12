@@ -1,5 +1,5 @@
 # gaoqikai
-###### \java\seedu\address\logic\commands\TagCommandTest.java
+\java\seedu\address\logic\commands\TagCommandTest.java
 ``` java
 package seedu.address.logic.commands;
 

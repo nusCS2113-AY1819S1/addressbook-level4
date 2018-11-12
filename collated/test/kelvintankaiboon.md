@@ -1,5 +1,5 @@
 # kelvintankaiboon
-###### \java\seedu\address\logic\commands\AddCommandTest.java
+\java\seedu\address\logic\commands\AddCommandTest.java
 ``` java
         @Override
         public void saveStockList(String fileName) {
