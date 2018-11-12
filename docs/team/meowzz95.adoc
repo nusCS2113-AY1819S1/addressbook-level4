@@ -46,7 +46,7 @@ classes that provide APIs for other developers to manipulate application databas
 *** Managed releases `v1.1` - `v1.2` (2 releases) on GitHub
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/168[#168]
-*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/5[#5], https://github.com/CS2113-AY1819S1-T13-2/main/pull/9[#9], https://github.com/CS2113-AY1819S1-T13-2/main/pull/17[#17], https://github.com/CS2113-AY1819S1-T13-2/main/pull/20[#20], https://github.com/CS2113-AY1819S1-T13-2/main/pull/64[#64], https://github.com/CS2113-AY1819S1-T13-2/main/pull/109[#109], https://github.com/CS2113-AY1819S1-T13-2/main/pull/121[#121], https://github.com/CS2113-AY1819S1-T13-2/main/pull/167[#167]，https://github.com/CS2113-AY1819S1-T13-2/main/pull/169[#169]
+*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-T13-2/main/pull/5[#5], https://github.com/CS2113-AY1819S1-T13-2/main/pull/9[#9], https://github.com/CS2113-AY1819S1-T13-2/main/pull/17[#17], https://github.com/CS2113-AY1819S1-T13-2/main/pull/20[#20], https://github.com/CS2113-AY1819S1-T13-2/main/pull/64[#64], https://github.com/CS2113-AY1819S1-T13-2/main/pull/109[#109], https://github.com/CS2113-AY1819S1-T13-2/main/pull/121[#121], https://github.com/CS2113-AY1819S1-T13-2/main/pull/167[#167], https://github.com/CS2113-AY1819S1-T13-2/main/pull/169[#169]
 *** Documented most(~95%) of new java code written.
 ** Community:
 *** PRs reviewed : https://github.com/CS2113-AY1819S1-T13-2/main/pull/76[#76], https://github.com/CS2113-AY1819S1-T13-2/main/pull/77[#77], https://github.com/CS2113-AY1819S1-T13-2/main/pull/78[#78]
