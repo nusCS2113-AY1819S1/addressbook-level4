@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
         ReadOnlyProductDatabase newAddressBook;
 
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readProductDatabaseBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample ProductDatabase");
             }

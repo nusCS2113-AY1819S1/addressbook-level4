@@ -11,13 +11,13 @@ public class DistributorTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new ProductDistributor(null));
+        Assert.assertThrows(NullPointerException.class, () -> new ProductsDistributorName(null));
     }
 
     @Test
     public void constructor_invalidEmail_throwsIllegalArgumentException() {
         String invalidEmail = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new ProductDistributor(invalidEmail));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new ProductsDistributorName(invalidEmail));
     }
 
     @Test

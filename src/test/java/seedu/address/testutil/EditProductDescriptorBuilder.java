@@ -57,7 +57,7 @@ public class EditProductDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code ProductDistributor} of the {@code EditProductDescriptor} that we are building.
+     * Sets the {@code ProductsDistributorName} of the {@code EditProductDescriptor} that we are building.
      */
     public EditProductDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new DistributorName(email));

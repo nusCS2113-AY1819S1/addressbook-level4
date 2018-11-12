@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Product's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
-public class ProductDistributor {
+public class ProductsDistributorName {
 
     public static final String EMAIL_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public static final String MESSAGE_EMAIL_CONSTRAINTS =
@@ -16,11 +16,11 @@ public class ProductDistributor {
     public final String value;
 
     /**
-     * Constructs an {@code ProductDistributor}.
+     * Constructs an {@code ProductsDistributorName}.
      *
      * @param email A valid email address.
      */
-    public ProductDistributor(String email) {
+    public ProductsDistributorName(String email) {
         requireNonNull(email);
         checkArgument(isValidEmail(email), MESSAGE_EMAIL_CONSTRAINTS);
         value = email;
@@ -41,8 +41,8 @@ public class ProductDistributor {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ProductDistributor // instanceof handles nulls
-                && value.equals(((ProductDistributor) other).value)); // state check
+                || (other instanceof ProductsDistributorName // instanceof handles nulls
+                && value.equals(((ProductsDistributorName) other).value)); // state check
     }
 
     @Override

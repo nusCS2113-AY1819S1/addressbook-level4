@@ -85,7 +85,7 @@ public class ProductBuilder {
     }
 
     /**
-     * Sets the {@code ProductDistributor} of the {@code Product} that we are building.
+     * Sets the {@code ProductsDistributorName} of the {@code Product} that we are building.
      */
     public ProductBuilder withDistributor(String email) {
         this.distname = new DistributorName(email);
