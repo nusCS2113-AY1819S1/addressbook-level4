@@ -1,4 +1,4 @@
-= Daryl Lim - Project Portfolio
+= Zhang Bo - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
