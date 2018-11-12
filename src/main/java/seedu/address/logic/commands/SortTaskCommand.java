@@ -22,7 +22,6 @@ public class SortTaskCommand extends Command implements CommandParser {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SORT + "modules";
 
-    //public static final String MESSAGE_NOT_IMPLEMENTED_YET = "SortTask command not implemented yet";
     public static final String MESSAGE_ARGUMENTS = "method: %1$s";
     public static final String MESSAGE_SUCCESS = "Sort task based on: %1$s";
     private final String method;
@@ -43,7 +42,6 @@ public class SortTaskCommand extends Command implements CommandParser {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-
         requireNonNull(model);
         model.sortTask(method);
         model.commitTaskBook();
@@ -66,21 +64,4 @@ public class SortTaskCommand extends Command implements CommandParser {
     public String getCommandWord() {
         return COMMAND_WORD;
     }
-
-    /*
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-        // instanceof handles nulls
-        if (!(other instanceof SortTaskCommand)) {
-            return false;
-        }
-        // state check
-        SortTaskCommand e = (SortTaskCommand) other;
-        return method.equals(e.method);
-    }
-    */
 }

@@ -460,7 +460,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |tidy student |delete a task |remove tasks that I do not intend to complete
 
-|`* * *` |organized student |sort tasks by decreasing importance/categorise in module codes| complete tasks with more urgent deadlines first/ focus on modules with heavier workloads
+|`* * *` |organized student |sort the tasks in the order preferred to have a more organised task list| complete tasks with more urgent deadlines/ highest priority firsts. View tasks in a list sorted by the lexicographical order of the title or module codes.
+
+|`* * *` |tidy student |Add tags to tasks | to organise, categorise and identify the tasks easily
+
+|`* * *` |organized student |Remove tags to tasks | to remove the unsuitable tags that were added previously for better organisation, categorisation and identification of the tasks easily
+
+|`* * *` |structured student |Select a tag to view |shows a list of tasks with the selected tag to help with the planning of work schedule for that type of tasks
 
 |`* * *` |busy student |defer deadlines |allow for a more flexible schedule when workload becomes too heavy
 
@@ -566,33 +572,28 @@ Use case ends.
 
 *MSS*
 
-1.  Student requests to sort his or her tasks for the day
-2.  TB asks for the criteria to sort the tasks.
-3.  Student returns the method to sort tasks
-4.  TB checks for its validity and display the sorted task list
+1. Student requests to sort his or her tasks in the lists and provides the sorting method
+2. TB checks for the validity of the sorting method
+3. TB displays the sorted tasks list based on the sorting method.
 +
 Use case ends.
 
 *Extensions*
 
-* 1b. Student requested to sort an empty taskbook
-** 1b1. TB outputs an error message
+* 1a. Student provided an invalid sorting method
+** 1a1. TB outputs an error message to request for a valid sorting method
+** 1a2. Student returns a new sort sorting method
 +
 Use case ends.
-
-* 3a. Student provided an invalid sorting criteria
-** 3a1. TB requests for a valid sorting criteria
-** 3a2. Student enters a new criteria
-+
-Use case resumes at step 4.
 
 [discrete]
 === Use case: Defer deadlines
 
 *MSS*
 
-1. Student requests to defer deadline for an existing task to a requested date
-2. TB sets the new deadline for the existing task
+1. Student requests to defer the deadline for an existing task by number of days
+2. TB checks the validity of the index and number of days.
+3. TB updates the new deadline for the existing task
 +
 Use case ends.
 

@@ -25,7 +25,7 @@ public class SortTaskCommandParser implements Parser<SortTaskCommand> {
         String method = argMultimap.getValue(PREFIX_SORT).orElse("");
 
         //method entered has to be one of the 4 methods
-        if (method.equals("modules") || method.equals("deadlines") || method.equals("priority")
+        if (method.equals("module") || method.equals("deadline") || method.equals("priority")
                 || method.equals("title")) {
             return new SortTaskCommand(method);
         } else {

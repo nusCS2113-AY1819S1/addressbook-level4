@@ -1,0 +1,99 @@
+= Chan Chun Cheong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Task Book
+
+---
+
+== Overview
+
+This portfolio is to document my contributions to the CS2113T Software Engineering project, Task Book, to showcase my
+ability to work in a team in terms of writing functionalities, pull requests, adhering to software engineering
+principles etc.
+
+*Task Book* is a desktop task management application that is designed for students. The objective of *Task Book* is to
+improve users' productivity through efficient task management This is done by enabling busy students to organise
+their daily tasks, keep track, check, set deadlines,  and improve their productivity in the long run. *Task Book* is
+is optimized for students who prefer Command Line Interface (CLI), and it has a Graphical User Interface implemented
+with JavaFX.
+
+== Summary of contributions
+
+|===
+|_This section summarises my contributions to the project. These contributions range from simple, minor enhancements
+to complex, major enhancements._
+|===
+
+* *Major enhancement*: added the ability to *sort tasks* in the task management system.
+** What it does: It allows the user to sort the tasks displayed based on the title, description, priority, module codes of the tasks.
+** Justification: This feature improves the product significantly because it provides a convenient way for user to organise
+the task list based on the order they preferred. It helps to make the task list more reader-friendly for the user. In addition,
+it allows user to plan their work schedule based on the priorities, deadlines of the tasks. This helps user to improve his
+productivity.
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth
+analysis and consideration of user interaction and needs plays a huge part in the sorting manner the function offer.
+For example, user might prefer tasks to be shown from higher to lower priority. However, if the tasks are sort according
+ to the strings values in the priority level, by lexicographical order, tasks will be shown from lower to higher
+ priority. Therefore, integer values have to be added to the priority levels. In addition, the implementation too was
+ challenging as it required changes in multiple components in the application .
+
+
+* *Major enhancement*: added the ability to defer deadline of tasks in the task management system.
+** What it does: It allows the user to defer the deadline of the tasks easily.
+** Justification: This feature improves the product significantly because it helps to provide a better user experience
+of the application by enabling user to defer the deadline of their tasks easily by stating the number of days to defer from the deadline,
+ without having to key in the  exact dates.
+** Highlights: It required an in-depth understanding of the calendar, knowing which months have 30 days or 31 days, how
+is the leap year counted and establishing multiple conditional statements to ensure that the deadline is deferred
+correctly by just entering the number of days to defer . User interaction is a key factor in this function. During the
+prototype stage, to defer a deadline, it required an exact date from the user. However, through considerations for the
+user needs, I decided to simplify the process to just keying in the number of days to defer as  the objective of
+taskbook is to help user to better organise their tasks easily.
+
+
+* *Minor enhancement*: Implemented an add tag command which  for each task such that the *milestones for each task are
+sorted by their ranks*. The list of milestones will be displayed in the order that the user should go about doing, starting with the most important milestone(*Rank 1*) at the top.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=jeremyinelysium[Functional/Test code]]
+
+* *Other contributions*:
+
+** Project management:
+** Enhancements to existing features:
+*** Modified the GUI for each task to include a list of the milestones for that particular task (Pull requests https://github.com/CS2113-AY1819S1-W13-3/main/pull/54[#54], https://github.com/CS2113-AY1819S1-W13-3/main/pull/97[#97])
+*** Wrote tests for milestone feature to ensure adequate code coverage(Pull requests https://github.com/CS2113-AY1819S1-W13-3/main/pull/100[#100], https://github.com/CS2113-AY1819S1-W13-3/main/pull/102[#102], https://github.com/CS2113-AY1819S1-W13-3/main/pull/108[#108], https://github.com/CS2113-AY1819S1-W13-3/main/pull/109[#109])
+** Documentation:
+*** Did cosmetic tweaks and revised existing contents of the User Guide(Pull requests https://github.com/CS2113-AY1819S1-W13-3/main/pull/109[#109])
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-W13-3/main/pull/18[#18]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-F09-2/main/issues/146[1], https://github.com/CS2113-AY1819S1-F09-2/main/issues/151[2], https://github.com/CS2113-AY1819S1-F09-2/main/issues/154[3], https://github.com/CS2113-AY1819S1-F09-2/main/issues/164[4])
+
+== Contributions to the User Guide
+
+
+|===
+|_This section highlights the documentation I contributed towards the User Guide with the aim of providing clear and
+concise instructions at a level that is easy for the end-user to follow._
+|===
+
+include::../UserGuide.adoc[tag=add_milestone]
+
+include::../UserGuide.adoc[tag=check_milestone]
+
+include::../UserGuide.adoc[tag=FAQ_milestone]
+
+
+
+== Contributions to the Developer Guide
+
+|===
+|_This section highlights the technical documentation I contributed towards the Developer Guide. It provides the
+technical depth and details required for future developers of this application to maintain/expand it._
+|===
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+
+

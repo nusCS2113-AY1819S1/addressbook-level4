@@ -101,27 +101,65 @@ Examples:
 * `delete 1`
 
 === Sort the taskbook: `sort`
+|===
+|Need to view the tasks in a specific order you prefer? For example, you would like the tasks to be displayed from the
+highest priority, so you can focus your attention on the most importan task at hand? You can sort the tasks based on
+their priority!
+|===
 
-Sort the tasks in the task book via `priority`, `deadlines`, `modules`, or `title` +
+[NOTE]
+====
+* Tasks will be sorted in lexicographical order for `title` and `module` sorting methods.
+* Tasks will be sorted from higher to lower priority for `priority` sorting method.
+* Tasks will be sorted in ascending order of deadlines for `deadline` sorting method.
+* An empty TaskBook will accept the sort command.
+* Sort command uses stable sorting method
+* Two Tasks with equal values will appear in the same order in sorted output as they appear in the input array to be sorted.
+====
+
+Sort the tasks in the task book via `priority`, `deadline`, `module`, or `title` +
 Format: `sort s/METHOD`
 
 Examples:
 
 * `sort s/priority`
 
-=== Deferring a deadline: `defer`
+*Before*
 
+image::SortTaskCommand_before.png[width="790"]
+
+*After*
+
+image::SortTaskCommand_after.png[width="790"]
+=== Deferring a deadline: `defer`
+|===
+|Need a way to quickly extend your deadline by a few days or up to a month? You can easily defer the deadline of your
+task and the deadline will be automatically adjusted.
+|===
 Defers a deadline for a task +
-Format: `defer i/INDEX dd/DAY mm/MONTH yyyy/YEAR`
+Format: `defer i/INDEX dd/DAY`
 
 [NOTE]
 ====
-A valid year _must_ be between 2018 and 9999 (inclusive)
+* Deadline of the selected task will be automatically updated by the number of days deferred from the deadline
 ====
 
+[WARNING]
+====
+* Selected task must exist in the TaskBook
+* A task cannot be deferred by the number of days if it will result in two similar tasks with the same deadlines.
+====
 Examples:
 
-* `defer i/1 dd/04 mm/01 yyyy/2018`
+* `defer i/1 dd/04`
+
+*Before*
+
+image::DeferDeadlineCommand_before.png[width="790"]
+
+*After*
+
+image::DeferDeadlineCommand_after.png[width="790"]
 
 // tag::editTask[]
 === Editing a task: `edit`
@@ -181,6 +219,96 @@ Rank is the level of importance assigned to that particular milestone by the use
 ====
 
 // end::add_milestone[]
+
+=== Adding a tag: `add_tag`
+|===
+|Want a way to better mark your tasks, or to quickly tell what a task is about? Adding tags to your tasks will make it
+ easier for you to identify the tasks!
+|===
+Add a tag to a task +
+Format: `add_tag i/INDEX t/TAG`
+
+[NOTE]
+====
+* Tag names are all in lower case.
+* Duplicate tags are ignored and the tag list for the selected task will remain unchanged
+====
+[WARNING]
+====
+* Tag names has to be alphanumeric
+* Selected task must exist in the TaskBook
+====
+Examples:
+
+* `add_tag i/1 t/homework`
+
+*Before*
+
+image::AddTagCommand_before.png[width="790"]
+
+*After*
+
+image::AddTagCommand_after.png[width="790"]
+
+=== Removing a tag: `remove_tag`
+|===
+|Found the tags added previously to your tasks not suitable? You can remove the tags easily and conveniently!
+|===
+Removes a tag from a task +
+Format: `remove_tag i/INDEX t/TAG`
+
+[NOTE]
+====
+* Selected tag to be removed from the task is case-insensitive.
+====
+
+[WARNING]
+====
+* Tag names has to be alphanumeric
+* Selected task must exist in the TaskBook
+====
+
+Examples:
+
+* `remove_tag i/1 t/homework`
+
+*Before*
+
+image::RemoveTagCommand_before.png[width="790"]
+
+*After*
+
+image::RemoveTagCommand_after.png[width="790"]
+
+=== Selecting a tag: `select_tag`
+|===
+|Need to view your tasks with the specific tag? For example, viewing all the tasks which are tagged with "homework"?
+You can easily do it via selecting the tag you want!
+|===
+Show a list of tasks with the selected tag +
+Format: `select_tag t/TAG`
+
+[NOTE]
+====
+* Selected tag is case-insensitive.
+====
+
+[WARNING]
+====
+* Tag names has to be alphanumeric
+====
+
+Examples:
+
+* `select_tag t/homework`
+
+*Before*
+
+image::SelectTagCommand_before.png[width="790"]
+
+*After*
+
+image::SelectTagCommand_after.png[width="790"]
 
 === Tracking productivity : `track`
 

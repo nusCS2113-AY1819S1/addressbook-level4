@@ -47,14 +47,6 @@ public class SelectTagCommand extends Command implements CommandParser {
         return new CommandResult(String.format(MESSAGE_SUCCESS, selectedTag.toString()));
     }
 
-    /*
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof SelectDeadlineCommand // instanceof handles nulls
-                && selectedTag.equals(((SelectDeadlineCommand) other).selectedTag));
-    }
-    */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -125,25 +125,6 @@ public class Deadline {
                 return (day > 0 && day < 29);
             }
         }
-
-        /*
-        if (Integer.parseInt(month) < 1 || Integer.parseInt(month) > 12) {
-            return false;
-        } else if (Integer.parseInt(year) < 2018 || Integer.parseInt(year) > 9999) {
-            return false;
-        } else if (monthsWith30Days.contains(Integer.parseInt(month))) {
-            return (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 31);
-        } else if (monthsWith31Days.contains(Integer.parseInt(month))) {
-            return (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 32);
-        } else {
-            if (isLeapYear(Integer.parseInt(year))) {
-                return (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 30);
-            } else {
-                return (Integer.parseInt(day) > 0 && Integer.parseInt(day) < 29);
-            }
-        }
-        */
-
     }
 
     //@@author ChanChunCheong

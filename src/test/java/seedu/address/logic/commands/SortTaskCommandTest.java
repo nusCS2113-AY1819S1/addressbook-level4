@@ -34,7 +34,7 @@ public class SortTaskCommandTest {
 
     @Test
     public void execute_sortedByModuleCode_success() {
-        String method = "modules";
+        String method = "module";
         SortTaskCommand sortTaskCommand = new SortTaskCommand(method);
         String expectedMessage = String.format(sortTaskCommand.MESSAGE_SUCCESS, method);
 
@@ -96,7 +96,7 @@ public class SortTaskCommandTest {
 
     @Test
     public void execute_sortedByDeadlines_success() {
-        String method = "deadlines";
+        String method = "deadline";
         SortTaskCommand sortTaskCommand = new SortTaskCommand(method);
         String expectedMessage = String.format(sortTaskCommand.MESSAGE_SUCCESS, method);
 
@@ -117,7 +117,7 @@ public class SortTaskCommandTest {
     @Test
     public void execute_stableSorting_success() {
         String priority = "priority";
-        String deadlines = "deadlines";
+        String deadlines = "deadline";
         SortTaskCommand sortTaskCommandPriority = new SortTaskCommand(priority);
         String expectedMessagePriority = String.format(sortTaskCommandPriority.MESSAGE_SUCCESS, priority);
         SortTaskCommand sortTaskCommandDeadlines = new SortTaskCommand(deadlines);

@@ -22,11 +22,11 @@ public class SortTaskList {
             @Override
             public int compare(Task self, Task other) {
                 switch(method) {
-                    case ("modules"): {
+                    case ("module"): {
                         return self.getModuleCode().toString().toLowerCase()
                                 .compareTo(other.getModuleCode().toString().toLowerCase());
                     }
-                    case ("deadlines"): {
+                    case ("deadline"): {
                         return self.getDeadline().getDate().compareTo(other.getDeadline().getDate());
                     }
                     case ("priority"): {
