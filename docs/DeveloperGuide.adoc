@@ -375,11 +375,9 @@ In all cases where you input either the wrong ID, password, or role, there will 
 
 image::RepeatLoginSequenceDiagram.png[width="200"]
 
-The activity diagram below shows the overall picture of how the login mechanism works.
+The activity diagrams below shows the overall picture of how the login mechanism works.
 
 image::LoginActivityDiagram.png[width="400"]
-The activity diagram below is an extension of the activity diagram above.
-
 image::LoginExtendedActivityDiagram.png[width="400"]
 
 ==== Design Considerations

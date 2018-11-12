@@ -34,7 +34,7 @@ Responsibilities: Login System
 
 === Jonathan Ng
 image::derpyplops.png[width="150", align="left"]
-{empty}[http://github.com/derpyplops[github]][https://github.com/derpyplops/NUSSU-Connect/blob/master/docs/team/derpyplops.adoc[portfolio]]
+{empty}[http://github.com/derpyplops[github]][<<derpyplops#, portfolio>>]
 
 Role: Documentation and Team Lead +
 Responsibilities: HR & Roles
