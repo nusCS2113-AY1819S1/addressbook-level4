@@ -35,8 +35,8 @@ public class SelectCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(), new UserPrefs(),
             new UserDatabase(), new TestStorage());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(), new UserPrefs(),
-            new UserDatabase(), new TestStorage());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(),
+            new UserPrefs(), new UserDatabase(), new TestStorage());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
