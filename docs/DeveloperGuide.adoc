@@ -1863,14 +1863,10 @@ Use case resumes at step 1.
 === Use case: Add Gradebook Component
 *Precondition(s)* :
 
-* Module code must exist
-* Component name must not already exist in Trajectory.
+* Gradebook component name NOT exist in existing module.
 * Accumulated weightage for gradebook components in module cannot exceed 100%.
-* Weightage can be 0 for gradebook components like Mock Practical Exam.
 
-*Guarantees* :
-
-* Gradebook component will not be added if it does not meet validation requirements.
+*Guarantees* : NIL
 
 *MSS* :
 
@@ -1893,24 +1889,6 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
-* 2c. Teacher enters a component name that already exists to module code.
-+
-** 2c1. System informs the user that component name already exists to module code.
-+
-Use case resumes at step 1.
-
-* 2d. Teacher enters a non-integer input for maximum marks and weightage.
-+
-** 2d1. System informs the user of incorrect input.
-+
-Use case resumes at step 1.
-
-* 2d. Teacher does not enter any inputs after prefix.
-+
-** 2d1. System informs the user of invalid input.
-+
-Use case resumes at step 1.
-
 
 [discrete]
 === Use case: Update Gradebook Component
@@ -1920,9 +1898,7 @@ Use case resumes at step 1.
 * Accumulated weightage including the updated weightage must not exceed 100%.
 * At least one optional parameter must be included in command.
 
-*Guarantees* :
-
-* NIL
+*Guarantees* : NIL
 
 *MSS* :
 
@@ -1975,9 +1951,7 @@ Use case resumes at step 1.
 
 * Gradebook component name must exist in existing module.
 
-*Guarantees* :
-
-* NIL
+*Guarantees* : NIL
 
 *MSS* :
 
@@ -2006,9 +1980,7 @@ Use case resumes at step 1.
 
 * Gradebook component name must exist in existing module.
 
-*Guarantees* :
-
-* NIL
+*Guarantees* : NIL
 
 *MSS* :
 
@@ -2033,9 +2005,7 @@ Use case resumes from step 1.
 
 * Students must be enrolled to the module.
 
-*Guarantees* :
-
-* NIL
+*Guarantees* : NIL
 
 *MSS* :
 
@@ -2064,9 +2034,7 @@ Use case resumes from step 1.
 * Grade component name must exist in existing module.
 * Marks assigned to student for the particular gradebook component must not exceed its maximum marks.
 
-*Guarantees* :
-
-* NIL
+*Guarantees* : NIL
 
 *MSS* :
 
@@ -2094,9 +2062,7 @@ Use case resumes from step 1.
 * Grade component name must exist in existing module.
 * Marks of all students taking the module should be added in.
 
-*Guarantees* :
-
-* NIL
+*Guarantees* : NIL
 
 *MSS* :
 
