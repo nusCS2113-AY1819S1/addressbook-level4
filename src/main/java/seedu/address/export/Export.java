@@ -3,7 +3,8 @@ package seedu.address.export;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import javafx.collections.transformation.FilteredList;
+import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
 
 /**
@@ -14,13 +15,14 @@ public interface Export {
     /**
      * Saves the filteredPersons to the storage.
      * @throws IOException if there was any problem writing to the file.
+     * @throws IllegalValueException if the current addressbook is empty.
      */
-    void saveFilteredAddressBook() throws IOException;
+    void saveFilteredPersons() throws IOException, IllegalValueException;
 
     /**
-     * @see #saveFilteredAddressBook()
+     * @see #saveFilteredPersons()
      */
-    void saveFilteredAddressBook(FilteredList<Person> filteredPersons, Path filePath)
-            throws IOException;
+    void saveFilteredPersons(ObservableList<Person> filteredPersons, Path filePath)
+            throws IOException, IllegalValueException;
 
 }

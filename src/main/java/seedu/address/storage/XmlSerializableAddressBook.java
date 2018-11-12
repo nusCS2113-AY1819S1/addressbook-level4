@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javafx.collections.transformation.FilteredList;
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -50,7 +50,7 @@ public class XmlSerializableAddressBook {
     /**
      * Conversion with filtered Persons instead of the whole address book.
      */
-    public XmlSerializableAddressBook(FilteredList<Person> filteredPersons) {
+    public XmlSerializableAddressBook(ObservableList<Person> filteredPersons) {
         this();
         persons.addAll(filteredPersons.stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
