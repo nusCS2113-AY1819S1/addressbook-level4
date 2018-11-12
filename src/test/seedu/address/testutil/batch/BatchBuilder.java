@@ -10,21 +10,17 @@ import seedu.address.model.drink.BatchQuantity;
  * A utility class to help with building Batch objects.
  */
 public class BatchBuilder {
-
-    public static final String DEFAULT_BATCH_ID = "0001";
-    public static final String DEFAULT_BATCH_QUANTITY = "10";
-    public static final String DEFAULT_BATCH_PRICE = "15";
-    public static final String DEFAULT_BATCH_DATE = "1/11/1996";
+    public static final String DEFAULT_BATCH_ID = "1000000001";
+    public static final String DEFAULT_BATCH_QUANTITY = "30";
+    public static final String DEFAULT_BATCH_DATE = "1/11/2018";
 
     private BatchId batchId;
     private BatchQuantity batchQuantity;
-    private BatchPrice batchPrice;
     private BatchDate batchDate;
 
     public BatchBuilder() {
-        batchId = new BatchId();
+        batchId = new BatchId(DEFAULT_BATCH_ID);
         batchQuantity = new BatchQuantity(DEFAULT_BATCH_QUANTITY);
-        batchPrice = new BatchPrice(DEFAULT_BATCH_PRICE);
         batchDate = new BatchDate(DEFAULT_BATCH_DATE);
     }
 
@@ -46,18 +42,18 @@ public class BatchBuilder {
     }
 
     /**
-     * Sets the {@code BatchQuantity} of the {@code Batch} that we are building.
+     * Sets the {@code BatchId} of the {@code Batch} that we are building with the automatically generated batch Id.
      */
-    public BatchBuilder withQuantity(String input) {
-        this.batchQuantity = new BatchQuantity(input);
+    public BatchBuilder withId() {
+        this.batchId = new BatchId();
         return this;
     }
 
     /**
-     * Sets the {@code BatchPrice} of the {@code Batch} that we are building.
+     * Sets the {@code BatchQuantity} of the {@code Batch} that we are building.
      */
-    public BatchBuilder withPrice(String input) {
-        this.batchPrice = new BatchPrice(input);
+    public BatchBuilder withQuantity(String input) {
+        this.batchQuantity = new BatchQuantity(input);
         return this;
     }
 
