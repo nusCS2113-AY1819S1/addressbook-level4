@@ -21,13 +21,15 @@ import seedu.address.model.person.Person;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
-
+    public static final String COMMAND_PARAMETERS = "Parameters: FILENAME (must end with .xml)\n";
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " import.xml";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import the persons in the file specified to the "
             + "address book.\n"
             + "Parameters: FILENAME (required)\n"
-            + "Example: " + COMMAND_WORD + " export.xml ";
+            + "Example: " + COMMAND_WORD + " import.xml ";
 
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported %1$s persons.";
+
     private static final String MESSAGE_FAILURE = "Import failed! Error: %1$s";
     private static final String MESSAGE_INVALID_LIST_SIZE = "Invalid list size.";
     private static final String MESSAGE_FILE_NOT_FOUND = "File not found!";
