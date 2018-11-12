@@ -772,6 +772,180 @@ public static final String EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = "[-]?[0-9]
 ===== Phase 2
 The `AddExpensesCommand` will take in the `Expenses` and `EditExpensesDescriptor` objects.
 
+The `AddExpensesCommand` will first check if there exists a person in the person list that has the same employeeId  as
+`Expenses` object using the condition `(!model.hasEmployeeId(toCheckEmployeeId)`.
+The `AddExpensesCommand` will next check if there exists an expenses in the expenses list that has the same employeeId
+as `Expenses` object using the condition `(!model.hasExpenses(toAddExpenses)`.
+
+Code snippet of condition that checks the person and expenses list for person and expenses with same employeeId:
+
+[source, java]
+----
+if (!model.hasEmployeeId(toCheckEmployeeId)) {
+            throw new CommandException(MESSAGE_EMPLOYEE_ID_NOT_FOUND);
+        } else if (!model.hasExpenses(toAddExpenses)) {
+----
+
+** If Expenses List don't have expenses with same EmployeeId,
+*** The `AddExpensesCommand` will then check if any of the fields will contains negative value or exceed the limit. An exception will be
+thrown if at least one of the fields contains negative value or exceed the limit.
+*** The `AddExpensesCommand` will then add the expenses into CHRS.
+
+Code snippet of `If Expenses List don't have expenses with same EmployeeId`
+[source, java]
+----
+else if (!model.hasExpenses(toAddExpenses)) {
+    if (Double.parseDouble(toAddExpenses.getExpensesAmount().toString()) < 0
+        || Double.parseDouble(toAddExpenses.getTravelExpenses().toString()) < 0
+        || Double.parseDouble(toAddExpenses.getMedicalExpenses().toString()) < 0
+        || Double.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) < 0) {
+        throw new CommandException(MESSAGE_NEGATIVE_LEFTOVER);
+    } else if (Double.parseDouble(toAddExpenses.getExpensesAmount().toString()) > MAX_TOTAL_EXPENSES
+        || Double.parseDouble(toAddExpenses.getTravelExpenses().toString()) > MAX_EXPENSES_AMOUNT
+        || Double.parseDouble(toAddExpenses.getMedicalExpenses().toString()) > MAX_EXPENSES_AMOUNT
+        || Double.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) > MAX_EXPENSES_AMOUNT
+    ) {
+        throw new CommandException(MESSAGE_VALUE_OVER_LIMIT);
+    } else if (Double.parseDouble(toAddExpenses.getExpensesAmount().toString()) >= 0
+            && Double.parseDouble(toAddExpenses.getTravelExpenses().toString()) >= 0
+            && Double.parseDouble(toAddExpenses.getMedicalExpenses().toString()) >= 0
+            && Double.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) >= 0
+            && Double.parseDouble(toAddExpenses.getExpensesAmount().toString()) <= MAX_TOTAL_EXPENSES
+            && Double.parseDouble(toAddExpenses.getTravelExpenses().toString()) <= MAX_EXPENSES_AMOUNT
+            && Double.parseDouble(toAddExpenses.getMedicalExpenses().toString()) <= MAX_EXPENSES_AMOUNT
+            && Double.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) <= MAX_EXPENSES_AMOUNT
+    ) {
+        model.addExpenses(toAddExpenses);
+        model.commitExpensesList();
+        messageToShow = MESSAGE_SUCCESS;
+    }
+----
+
+** If Expenses List have expenses with same EmployeeId,
+*** The `AddExpensesCommand` will create an `expensesToEdit` object The `AddExpensesCommand` will then call
+`createEditedExpenses` method with `expensesToEdit` and `EditExpensesDescriptor` object as parameters.
+
+Code snippet creating `expensesToEdit` object and calling `createdEditedExpenses` method
+[source, java]
+----
+else if (model.hasExpenses(toAddExpenses)) {
+    EmployeeIdExpensesContainsKeywordsPredicate predicatEmployeeId;
+    List<String> employeeIdList = new ArrayList<>();
+    List<Expenses> lastShownListExpenses;
+
+    employeeIdList.add(toCheckEmployeeId.getEmployeeId().value);
+    predicatEmployeeId = new EmployeeIdExpensesContainsKeywordsPredicate(employeeIdList);
+
+    model.updateFilteredExpensesList(predicatEmployeeId);
+    lastShownListExpenses = model.getFilteredExpensesList();
+
+    Expenses expensesToEdit = lastShownListExpenses.get(0);
+    Expenses editedExpenses = createEditedExpenses(expensesToEdit, editExpensesDescriptor);
+----
+
+*** The `createEditedExpenses` method will call `modifyExpensesAmount`, `modifyTravelExpenses`, `modifyMedicalExpenses`,
+`modifyMiscellaneousExpenses`, methods with `expensesToEdit` and `EditExpensesDescriptor` object as parameter.
+
+Code snippet `createdEditedExpenses` method
+[source, java]
+----
+    private Expenses createEditedExpenses(Expenses expensesToEdit, EditExpensesDescriptor
+            editExpensesDescriptor) {
+        assert expensesToEdit != null;
+        ExpensesAmount updatedExpensesAmount = null;
+        TravelExpenses updatedTravelExpenses = null;
+        MedicalExpenses updatedMedicalExpenses = null;
+        MiscellaneousExpenses updatedMiscellaneousExpenses = null;
+
+        EmployeeId updatedEmployeeId = expensesToEdit.getEmployeeId();
+        try {
+            updatedExpensesAmount = ParserUtil.parseExpensesAmount(modifyExpensesAmount(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedTravelExpenses = ParserUtil.parseTravelExpenses(modifyTravelExpenses(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedMedicalExpenses = ParserUtil.parseMedicalExpenses(modifyMedicalExpenses(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedMiscellaneousExpenses = ParserUtil.parseMiscellaneousExpenses(modifyMiscellaneousExpenses(
+                    expensesToEdit, editExpensesDescriptor));
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+
+        return new Expenses(updatedEmployeeId, updatedExpensesAmount, updatedTravelExpenses, updatedMedicalExpenses,
+                updatedMiscellaneousExpenses);
+    }
+----
+
+*** Each method will edit their respective field from `expensesToEdit` with the same field from `EditExpensesDescriptor`.
+The method will set isNegativeLeftover to be true and set isOverLimit to be true if the values is below 0 or exceed max
+value.
+
+Code snippet `modifyExpensesAmount` method, one of the methods being called
+[source, java]
+----
+private String modifyExpensesAmount (Expenses expensesToEdit, EditExpensesDescriptor
+        editExpensesDescriptor) {
+    NumberFormat formatter = new DecimalFormat("#0.00");
+    String newExpensesAmount = expensesToEdit.getExpensesAmount().toString();
+    double updateExpensesAmount = Double.parseDouble(newExpensesAmount);
+    String change = editExpensesDescriptor.getExpensesAmount().toString().replaceAll("[^0-9.-]",
+            "");
+    updateExpensesAmount += Double.parseDouble(change);
+    if (updateExpensesAmount < 0) {
+        setIsNegativeLeftover(true);
+    } else if (updateExpensesAmount > MAX_TOTAL_EXPENSES) {
+        setIsOverLimit(true);
+    } else if (updateExpensesAmount >= 0) {
+        newExpensesAmount = String.valueOf(formatter.format(updateExpensesAmount));
+    }
+    return newExpensesAmount;
+}
+----
+*** The `AddExpensesCommand` will check for isNegativeLeftover and isOverLimit. If both are false, the
+`AddExpensesCommand` will then update the updated expenses into CHRS.
+
+Code snippet of isNegativeLeftover and isOverLimit check
+[source, java]
+----
+if (getIsNegativeLeftover()) {
+        throw new CommandException(MESSAGE_NEGATIVE_LEFTOVER);
+    } else if (getIsOverLimit()) {
+        throw new CommandException(MESSAGE_VALUE_OVER_LIMIT);
+    } else if (!getIsNegativeLeftover() && !getIsOverLimit()) {
+        messageToShow = MESSAGE_SUCCESS;
+        model.updateExpenses(expensesToEdit, editedExpenses);
+        model.commitExpensesList();
+    }
+    model.updateFilteredExpensesList(PREDICATE_SHOW_ALL_EXPENSES);
+}
+----
+
+The sequence diagram below illustrates the operation of the `AddExpensesCommand`:
+
+image::Add_ExpensesCommandSequenceDiagram.png[width="900"]
+
+==== Design Considerations
+Aspect implementation of `AddExpenses` command:
+
+* **Alternative 1 (current choice):** Have a single command to add and modify expenses.
+** Pros: User isn't require to ensure that there exist an expenses for the employee before modifying the expenses
+** Cons: Have to handle more conditions and possibly more prone to bugs.
+* **Alternative 2:** Have separate commands to add or modify expenses.
+** Pros: User won't have the possibly of mixing up if they want to add new expenses or modify old expenses.
+** Cons: Requires user to know more commands.
+
+Aspect: `Expenses List` Storage
+
+* **Alternative 1 (current choice):** Have expenses stored in XML format.
+** Pros: Easier to read, code and test XML files.
+** Cons: Can't compute or tabulate data from file.
+* **Alternative 2:** Have schedules stored in CSV format.
+** Pros: More efficient way of storing tabular data like expenses
+** Cons: Harder to read as compared to XML file.
+
+==== Expenses Report: `expensesReport` _[Upcoming in 2.0]_
+
+Generates an expenses report with the total expenses amount claimed and have not been claimed for a year _[Upcoming in 2.0]_
 
 ==== Current Implementation for `deleteExpenses` command
 
@@ -2185,6 +2359,34 @@ Expected: Leaves deleted for all observable employees that contain date : [04/02
 // end::william[]
 
 // tag::vernon[]
+
+=== Add Expenses
+. Add an expenses or modify existing expenses
+.. Prerequisites: Employee with employeeId "000001" must exist in person list and doesn't have an expenses in the expenses list +
+.. Test Case: addExpenses id/000001 tra/50 med/100 misc/150 +
+Expected: Travel Expenses has value of 50.00. Medical Expenses has value of 100.00. Miscellaneous Expenses has value of 150.00. Total Expenses has value of 300.00. Timestamp in the status bar is updated. +
++
+Test Case: addExpenses id/000001 tra/100 med/50 misc/25 +
+Expected: Travel expenses is increased to 150.00, medical expenses is increased to 150.00 and miscellaneous expenses is increased to 175.00, total expenses is increased to 475.00. Timestamp in the status bar is updated.
+.. Test Case: addExpenses id/000001 tra/50 med/100 misc/150 +
+Expected: Travel Expenses has value of 50.00. Medical Expenses has value of 100.00. Miscellaneous Expenses has value of 150.00. Total Expenses has value of 300.00. Timestamp in the status bar is updated. +
++
+Test Case: addExpenses id/000001 tra/-20 med/-30 misc/-50 +
+Expected: Travel expenses is decreased to 30.00, medical expenses is decreased to 70.00 and miscellaneous expenses is decreased to 100.00, total expenses is decreased to 200.00. Timestamp in the status bar is updated.
+
+
+=== Delete Expenses
+. Delete an expenses
+.. There must be at least 1 employee in the observable expenses list panel
+.. Test Case: deleteExpenses 1 +
+Expected: Deletes expenses claim from expenses list with Index '1' in the expenses list.
+
+=== Select Expenses
+. Select an expenses
+.. There must be at least 1 employee in the observable expenses list panel
+.. Test Case: selectExpenses 1 +
+Expected: Select an expenses claim from expenses list with Index '1' in the expenses list.
+
 
 // end::vernon[]
 
