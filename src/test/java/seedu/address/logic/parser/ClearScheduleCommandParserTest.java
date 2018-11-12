@@ -9,11 +9,15 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.ClearScheduleCommand;
 
+/**
+ * Test scope: similar to {@code DeleteCommandParserTest}.
+ * @see DeleteCommandParserTest
+ */
 public class ClearScheduleCommandParserTest {
     private ClearScheduleCommandParser parser = new ClearScheduleCommandParser();
 
     @Test
-    public void parse_validArgs_returnsSelectCommand() {
+    public void parse_validArgs_returnsClearScheduleCommand() {
         assertParseSuccess(parser, "1", new ClearScheduleCommand(INDEX_FIRST_PERSON));
     }
 

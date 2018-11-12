@@ -101,4 +101,11 @@ public class ScheduleCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedSchedule);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ScheduleCommand // instanceof handles nulls
+                && index.equals(((ScheduleCommand) other).index)); // state check
+    }
+
 }

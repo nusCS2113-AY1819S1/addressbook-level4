@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -70,9 +71,25 @@ public class CommandTestUtil {
     public static final String EVENT_NAME_DESC_EVENT2 = " " + PREFIX_EVENT_NAME + VALID_EVENT_NAME_EVENT2;
 
     //@@author driedmelon
+    public static final String VALID_DATE_MATCH1 = "09092018";
+    public static final String VALID_START_TIME_MATCH1 = "1000";
+    public static final String VALID_END_TIME_MATCH1 = "1600";
+    public static final String VALID_MATCH_INDEX1 = "1";
+    public static final String VALID_MATCH_INDEX2 = "2";
+
+    //@@author driedmelon
+    public static final String DATE_DESC_MATCH1 = " " + PREFIX_DATE + VALID_DATE_MATCH1;
+    public static final String START_TIME_DESC_MATCH1 = " " + PREFIX_START_TIME + VALID_START_TIME_MATCH1;
+    public static final String END_TIME_DESC_MATCH1 = " " + PREFIX_END_TIME + VALID_END_TIME_MATCH1;
+    public static final String INDEX_DESC_MATCH1 = " " + PREFIX_INDEX + VALID_MATCH_INDEX1;
+    public static final String INDEX_DESC_MATCH2 = " " + PREFIX_INDEX + VALID_MATCH_INDEX2;
+
+    //@@author driedmelon
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "50502018";
     public static final String INVALID_START_TIME_DESC = " " + PREFIX_START_TIME + "1280";
+    public static final String INVALID_LATE_START_TIME_DESC = " " + PREFIX_START_TIME + "1200";
     public static final String INVALID_END_TIME_DESC = " " + PREFIX_END_TIME + "2520";
+    public static final String INVALID_EARLY_END_TIME_DESC = " " + PREFIX_END_TIME + "0100";
     public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_EVENT_NAME + "BOB@!#@";
 
     //@@author
