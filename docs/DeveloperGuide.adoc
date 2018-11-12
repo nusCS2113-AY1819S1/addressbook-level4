@@ -291,11 +291,17 @@ Step 1. The user launches the application for the first time.
 
 Step 2. The user executes ...
 
-        .. `addc n/John Doe ...` to add a new candidate. `AddCandidateCommand` calls `Model#hasCandidate(Candidate candidate)` to check if a duplicate entry exists. Then `Model#addCandidate(Candidate candidate)` and adds the candidate to the CandidateBook.
-        .. `addC c/McDonalds ...` to add a new company. `AddCompanyCommand` calls `Model#hasCompany(Company company)` to check if a duplicate entry exists. Then `Model#addCompany(Company company)` and adds the company to the CompanyBook.
-        .. `addj c/McDonalds ...` to add a new job offer. `AddJobDetailsCommand` calls `Model#hasJobOffer(JobOffer jobOffer)` to check if a duplicate entry exists. Then `Model#addJobOffer(JobOffer jobOffer)` and adds the job offer to the CompanyBook.
+        .. `addc` to start the Add Candidate Interface
+        .. `addC` to start the Add Company Interface
+        .. `addj` to start the Add Job Interface
 
-Step 3. The user executes ...
+Step 2. The user executes ...
+
+        .. `n/John Doe g/M ...` to add a new candidate. `AddCandidateCommand` calls `Model#hasCandidate(Candidate candidate)` to check if a duplicate entry exists. Then `Model#addCandidate(Candidate candidate)` and adds the candidate to the CandidateBook.
+        .. `c/McDonalds a/101, Teban Gardens, #01-01 ...` to add a new company. `AddCompanyCommand` calls `Model#hasCompany(Company company)` to check if a duplicate entry exists. Then `Model#addCompany(Company company)` and adds the company to the CompanyBook.
+        .. `c/McDonalds j/Cashier ...` to add a new job offer. `AddJobDetailsCommand` calls `Model#hasJobOffer(JobOffer jobOffer)` to check if a duplicate entry exists. Then `Model#addJobOffer(JobOffer jobOffer)` and adds the job offer to the CompanyBook.
+
+Step 4. The user executes ...
 
         .. `deletec 1,3-4` to delete multiple candidates. `DeleteCandidateCommand` calls `Model#removeCandidate(Candidate candidate)` for the candidates listed at index 1, and 4.
         .. `deleteC 1,3-4` to delete multiple companies. `DeleteCompanyCommand` calls `Model#removeCompany(Company company)` for the companies listed at index 1, and 4.
@@ -905,44 +911,33 @@ image::EmailSequenceDiagram.png[width="1000", align="center"]
 === Undo/Redo feature
 ==== Current Implementation
 ===== CandidateBook
-The undo/redo mechanism for changes made to CandidateBook is facilitated by `VersionedCandidateBook`.
-It extends `CandidateBook` with an undo/redo history, stored internally as an `candidateBookStateList` and `currentStatePointer`.
+The undo/redo mechanism for changes made to RecruitBook is facilitated by `VersionedRecruitBook`.
+It extends `RecruitBook` with an undo/redo history, stored internally as a `recruitBookStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedCandidateBook#commit()` -- Saves the current candidate book state in its history.
-* `VersionedCandidateBook#undo()` -- Restores the previous candidate book state from its history.
-* `VersionedCandidateBook#redo()` -- Restores a previously undone candidate book state from its history.
+* `VersionedRecruitBook#commit()` -- Saves the current RecruitBook state in its history.
+* `VersionedRecruitBook#undo()` -- Restores the previous RecruitBook state from its history.
+* `VersionedRecruiteBook#redo()` -- Restores a previously undone RecruitBook state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitCandidateBook()`, `Model#UndoRecruitBook()` and `Model#redoCandidateBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitRecruitBook()`, `Model#UndoRecruitBook()` and `Model#redoRecruitBook()` respectively.
 
-===== CompanyBook
-
-The undo/redo mechanism for changes made to CompanyBook is facilitated by `VersionedCompanyBook`.
-It extends `CompanyBook` with an undo/redo history, stored internally as an `companyBookStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
-
-* `VersionedCompanyBook#commit()` -- Saves the current company book state in its history.
-* `VersionedCompanyBook#undo()` -- Restores the previous company book state from its history.
-* `VersionedCompanyBook#redo()` -- Restores a previously undone company book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitRecruitBook()`, `Model#undoCompanyBook()`
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedCandidateBook` will be initialized with the initial candidate book state, and the `currentStatePointer` pointing to that single candidate book state.
+Step 1. The user launches the application for the first time. The `VersionedRecruitBook` will be initialized with the initial candidate book state, and the `currentStatePointer` pointing to that single candidate book state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `deletec 5` command to delete the 5th candidate in the candidate book. The `deletec` command calls `Model#commitCandidateBook()`, causing the modified state of the candidate book after the `deletec 5` command executes to be saved in the `candidateBookStateList`, and the `currentStatePointer` is shifted to the newly inserted candidate book state.
+Step 2. The user executes `deletec 5` command to delete the 5th candidate in the candidate book. The `deletec` command calls `Model#commitRecruitBook()`, causing the modified state of the candidate book after the `deletec 5` command executes to be saved in the `candidateBookStateList`, and the `currentStatePointer` is shifted to the newly inserted candidate book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `addc`, `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitCandidateBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
+Step 3. The user executes `addc`, `n/David ...` to add a new candidate. The `addc` command also calls `Model#commitRecruitBook()`, causing another modified candidate book state to be saved into the `candidateBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitCandidateBook()`, so the candidate book state will not be saved into the `candidateBookStateList`.
+If a command fails its execution, it will not call `Model#commitRecruitBook()`, so the candidate book state will not be saved into the `candidateBookStateList`.
 
 Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undoc` command. The `undoc` command will call `Model#UndoRecruitBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous candidate book state, and restores the candidate book to that state.
 
@@ -960,11 +955,11 @@ The `redoc` command does the opposite -- it calls `Model#redoCandidateBook()`, w
 [NOTE]
 If the `currentStatePointer` is at index `candidateBookStateList.size() - 1`, pointing to the latest candidate book state, then there are no undone candidate book states to restore. The `redoc` command uses `Model#canRedoCandidateBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `listc`. Commands that do not modify the candidate book, such as `listc`, will usually not call `Model#commitCandidateBook()`, `Model#UndoRecruitBook()` or `Model#redoCandidateBook()`. Thus, the `candidateBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `listc`. Commands that do not modify the candidate book, such as `listc`, will usually not call `Model#commitRecruitBook()`, `Model#UndoRecruitBook()` or `Model#redoCandidateBook()`. Thus, the `candidateBookStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clearc`, which calls `Model#commitCandidateBook()`. Since the `currentStatePointer` is not pointing at the end of the `candidateBookStateList`, all candidate book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clearc`, which calls `Model#commitRecruitBook()`. Since the `currentStatePointer` is not pointing at the end of the `candidateBookStateList`, all candidate book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -976,7 +971,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire candidate book.
+* **Alternative 1 (current choice):** Saves the entire RecruitBook.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
@@ -985,20 +980,13 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of candidate book states.
+* **Alternative 1 (current choice):** Use a list to store the history of RecruitBook states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedCandidateBook`.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedRecruitBook`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
 
 === Logging
 
@@ -1125,11 +1113,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |User |Add a new candidate
+|`* * *` |User |Add a new candidate|
 
-|`* * *` |User |Add a new company
+|`* * *` |User |Add a new company|
 
-|`* * *` |User |Add a new job offer to a company
+|`* * *` |User |Add a new job offer to a company|
 
 |`* * *` |User |Delete a candidate |Remove entries that I no longer need
 
