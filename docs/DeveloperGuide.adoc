@@ -439,8 +439,20 @@ The corresponding command required for this feature is `summary` and the user wi
 they are viewing *summary by date, by month or by category*. This feature involves most components of FinancialPlanner with the exception of `Storage`. It can also be broadly split into
 2 phases, the logic phase which generates the summary and the UI phase which allows users to view the summary in a table.
 
+As shown below, `SummaryByDateCommand`, `SummaryByCategoryCommand`, `SummaryByMonthCommand` is a type of SummaryCommand and thus inherits from `SummaryCommand`. The rationale behind this design choice is that
+code shared by these classes can be placed in `SummaryCommand` for code reuse. This makes it easier for future developers to easily extend this functionality.
+
+.Class diagram showing the inheritance from SummaryCommand
+image::SummaryCommandClassDiagram.png[width="500"]
+
+Also, these commands utilise their own version of summary lists which is also inherited from the parent class `SummaryList` as shown below.
+
+.Class diagram showing the inheritance from SummaryList
+image::SummaryListClassDiagram.png[width="500"]
+
 The sequence diagram below details the sequence of program executions for the logic phase.
 
+.Sequence diagram for high level interactions in logic phase
 image::SummarySequenceDiagram.png[width="790"]
 
 . When the user types in the command "summary date d/1-1-2018 12-12-2018", the command is passed from LogicManager to FinancialPlannerParser. In here,
@@ -504,6 +516,7 @@ The corresponding command required for this feature is `stats`.For this feature,
 This feature is facilitated by a few key components of FinancialPlanner, `Logic`, `Model`, `UI` and function executions can be split into 2 phases, the `Logic phase` and the `UI phase`.
 The detailed execution sequence of functions used for `Logic phase` are as shown below.
 
+.Sequence diagram for high level interactions in logic phase
 image::StatisticLogicSequenceDiagram.png[width="790"]
 
 Consider the situation where the user enters *"stats d/1-1-2018 12-12-2018"*:
@@ -514,6 +527,7 @@ parameter to StatisticCommandParser.
 * The StatisticCommandParser will then parse the arguments and create a new StatisticCommand object before returning its reference. The activity diagram below details the mechanism
 within the `StatisticCommandParser#parse` method.
 
+.Activity diagram for details in StatisticCommandParser
 image::StatisticParserActivityDiagram.png[width="790"]
 
 * Once `StatisticCommand#execute` is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
@@ -528,8 +542,9 @@ is in the map.
 an event constructor before posting the event `ShowPieChartStatsEvent`.
 
 After the event is posted, the execution proceeds to the `UI phase` where there is a listener in `MainWindow` listening to this event. This is facilitated by
-the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in `UI phase`.
+the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in `UI phase` for creating the pie chart for total expense.
 
+.Sequence diagram for high level interactions in UI phase
 image::StatisticUiSequenceDiagram.png[width="790"]
 
 * When the event is caught by the listener in `MainWindow`, `MainWindow` looks through all children of the `MainWindow#mainUiPanelPlaceholder` and executes the hide function in them.
@@ -537,6 +552,7 @@ This will make all children hidden from view in the UI which ensures that the UI
 * As shown above, the function `StatsDisplayPanel#handleShowPieChartDataEvent` is called which will call the constructor of `MixedPieChartData`. The detailed execution details within this class is as shown in
 the activity diagram below.
 
+.Activity diagram for details in MixedPieChartDataList
 image::StatisticUiActivityDiagram.png[width="790"]
 
 The program flow is then as shown above where the `CategoryBreakdown` is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
@@ -545,6 +561,7 @@ In the current implementation, whenever `stats` is called, 2 tabs will be create
 
 The sequence diagram below details the program flow after the constructor of CategoryBreakdown class is called.
 
+.Sequence diagram for creation of pie charts
 image::StatisticUiDetailedSequenceDiagram.png[width="790"]
 
 [NOTE]
