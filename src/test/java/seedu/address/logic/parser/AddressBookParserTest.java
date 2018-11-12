@@ -13,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MINIMUM_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_YEAR;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECRUITMENT;
 import static seedu.address.testutil.recruitment.RecruitmentBuilder.DEFAULT_JOB_DESCRIPTION;
@@ -95,27 +94,27 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_add_equals() throws Exception {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
+    public void parseCommand_clear_returnsTrue() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_delete_equals() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_edit_equals() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
@@ -124,13 +123,13 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_exit() throws Exception {
+    public void parseCommand_exit_returnsTrue() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_find_equals() throws Exception {
         String keyword = ("foo");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keyword);
@@ -138,13 +137,13 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_help() throws Exception {
+    public void parseCommand_help_returnsTrue() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
-    public void parseCommand_history() throws Exception {
+    public void parseCommand_history_returnsTrue() throws Exception {
         assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD) instanceof HistoryCommand);
         assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3") instanceof HistoryCommand);
 
@@ -159,13 +158,13 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_list_returnsTrue() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
-    public void parseCommand_modifyPay() throws Exception {
+    public void parseCommand_modifyPay_equals() throws Exception {
         Person person = new PersonBuilder().build();
         ModifyPayCommand.ModSalaryDescriptor descriptor = new ModSalaryDescriptorBuilder(person).build();
         ModifyPayCommand command = (ModifyPayCommand) parser.parseCommand(ModifyPayCommand.COMMAND_WORD + " "
@@ -177,7 +176,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_modifyAllPay() throws Exception {
+    public void parseCommand_modifyAllPay_equals() throws Exception {
         Person person = new PersonBuilder().build();
         ModifyAllPayCommand.ModSalaryDescriptor descriptor = new ModAllSalaryDescriptorBuilder(person).build();
         ModifyAllPayCommand command = (ModifyAllPayCommand) parser.parseCommand(ModifyAllPayCommand
@@ -189,7 +188,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_selectPerson() throws Exception {
+    public void parseCommand_selectPerson_equals() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
                 SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
@@ -199,7 +198,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addSchedule() throws Exception {
+    public void parseCommand_addSchedule_equals() throws Exception {
         Schedule schedule = new ScheduleBuilder().build();
         AddScheduleCommand command = (AddScheduleCommand) parser.parseCommand(
                 AddScheduleCommand.COMMAND_WORD + " " + PREFIX_EMPLOYEEID + DEFAULT_EMPLOYEEID
@@ -212,7 +211,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addLeaves() throws Exception {
+    public void parseCommand_addLeaves_equals() throws Exception {
         Set<Date> dates = new HashSet<>(Arrays.asList(new Date("31/12/2018")));
         AddLeavesCommand command = (AddLeavesCommand) parser.parseCommand(
                 AddLeavesCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE_DATE + "31/12/2018");
@@ -223,7 +222,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_deleteLeaves() throws Exception {
+    public void parseCommand_deleteLeaves_equals() throws Exception {
         Set<Date> dates = new HashSet<>(Arrays.asList(new Date("31/12/2018")));
         DeleteLeavesCommand command = (DeleteLeavesCommand) parser.parseCommand(
                 DeleteLeavesCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE_DATE + "31/12/2018");
@@ -234,7 +233,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addWorks() throws Exception {
+    public void parseCommand_addWorks_equals() throws Exception {
         Set<Date> dates = new HashSet<>(Arrays.asList(new Date("31/12/2018")));
         AddWorksCommand command = (AddWorksCommand) parser.parseCommand(
                 AddWorksCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE_DATE + "31/12/2018");
@@ -245,7 +244,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_deleteWorks() throws Exception {
+    public void parseCommand_deleteWorks_equals() throws Exception {
         Set<Date> dates = new HashSet<>(Arrays.asList(new Date("31/12/2018")));
         DeleteWorksCommand command = (DeleteWorksCommand) parser.parseCommand(
                 DeleteWorksCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE_DATE + "31/12/2018");
@@ -256,15 +255,20 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_calculateLeaves() throws Exception {
+    public void parseCommand_calculateLeaves_equals() throws Exception {
+        CliSyntax cliSyntax = new CliSyntax();
         CalculateLeavesCommand command = (CalculateLeavesCommand) parser.parseCommand(
                 CalculateLeavesCommand.COMMAND_WORD + " " + PREFIX_EMPLOYEEID + "000001"
-                + " " + PREFIX_SCHEDULE_YEAR + "2018");
+                + " " + cliSyntax.PREFIX_SCHEDULE_YEAR + "2018");
+        assertEquals(new CalculateLeavesCommand(new EmployeeId("000001"), new Year("2018")), command);
+        command = (CalculateLeavesCommand) parser.parseCommand(
+                CalculateLeavesCommand.COMMAND_ALIAS + " " + PREFIX_EMPLOYEEID + "000001"
+                        + " " + cliSyntax.PREFIX_SCHEDULE_YEAR + "2018");
         assertEquals(new CalculateLeavesCommand(new EmployeeId("000001"), new Year("2018")), command);
     }
 
     @Test
-    public void parseCommand_deleteSchedule() throws Exception {
+    public void parseCommand_deleteSchedule_equals() throws Exception {
         DeleteScheduleCommand command = (DeleteScheduleCommand) parser.parseCommand(
                 DeleteScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteScheduleCommand(INDEX_FIRST_PERSON), command);
@@ -274,7 +278,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addExpenses() throws Exception {
+    public void parseCommand_addExpenses_equals() throws Exception {
         Expenses expenses = new ExpensesBuilder().build();
         AddExpensesCommand.EditExpensesDescriptor descriptor = new EditExpensesDescriptorBuilder(expenses).build();
         AddExpensesCommand command = (AddExpensesCommand) parser.parseCommand(AddExpensesCommand.COMMAND_WORD
@@ -288,7 +292,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_removeExpenses() throws Exception {
+    public void parseCommand_removeExpenses_equals() throws Exception {
         RemoveExpensesCommand command = (RemoveExpensesCommand) parser.parseCommand(
                 RemoveExpensesCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new RemoveExpensesCommand(INDEX_FIRST_PERSON), command);
@@ -298,7 +302,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_deleteRecruitmentPost() throws Exception {
+    public void parseCommand_deleteRecruitmentPost_equals() throws Exception {
         DeleteRecruitmentPostCommand command = (DeleteRecruitmentPostCommand) parser.parseCommand(
                 DeleteRecruitmentPostCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteRecruitmentPostCommand(INDEX_FIRST_PERSON), command);
@@ -308,7 +312,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_selectSchedule() throws Exception {
+    public void parseCommand_selectSchedule_equals() throws Exception {
         SelectScheduleCommand command = (SelectScheduleCommand) parser.parseCommand(
                 SelectScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new SelectScheduleCommand(INDEX_FIRST_PERSON), command);
@@ -317,7 +321,7 @@ public class AddressBookParserTest {
         assertEquals(new SelectScheduleCommand(INDEX_FIRST_PERSON), command);
     }
     @Test
-    public void parseCommand_selectExpenses() throws Exception {
+    public void parseCommand_selectExpenses_equals() throws Exception {
         SelectExpensesCommand command = (SelectExpensesCommand) parser.parseCommand(
                 SelectExpensesCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new SelectExpensesCommand(INDEX_FIRST_PERSON), command);
@@ -326,7 +330,7 @@ public class AddressBookParserTest {
         assertEquals(new SelectExpensesCommand(INDEX_FIRST_PERSON), command);
     }
     @Test
-    public void parseCommand_selectRecruitmentPost() throws Exception {
+    public void parseCommand_selectRecruitmentPost_equals() throws Exception {
         SelectRecruitmentPostCommand command = (SelectRecruitmentPostCommand) parser.parseCommand(
                 SelectRecruitmentPostCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new SelectRecruitmentPostCommand(INDEX_FIRST_PERSON), command);
@@ -336,7 +340,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_clearSchedule() throws Exception {
+    public void parseCommand_clearSchedule_returnsTrue() throws Exception {
         assertTrue(parser.parseCommand(ClearScheduleCommand.COMMAND_WORD) instanceof ClearScheduleCommand);
         assertTrue(parser.parseCommand(ClearScheduleCommand.COMMAND_WORD + " 3")
                 instanceof ClearScheduleCommand);
@@ -346,7 +350,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_clearExpenses() throws Exception {
+    public void parseCommand_clearExpenses_returnsTrue() throws Exception {
         assertTrue(parser.parseCommand(ClearExpensesCommand.COMMAND_WORD) instanceof ClearExpensesCommand);
         assertTrue(parser.parseCommand(ClearExpensesCommand.COMMAND_WORD + " 3")
                 instanceof ClearExpensesCommand);
@@ -356,7 +360,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_clearRecruitmentPost() throws Exception {
+    public void parseCommand_clearRecruitmentPost_returnsTrue() throws Exception {
         assertTrue(parser.parseCommand(ClearRecruitmentPostCommand.COMMAND_WORD)
                 instanceof ClearRecruitmentPostCommand);
         assertTrue(parser.parseCommand(ClearRecruitmentPostCommand.COMMAND_WORD + " 3")
@@ -368,7 +372,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_filter() throws Exception {
+    public void parseCommand_filter_equals() throws Exception {
         String sortOrder = "asc";
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " " + sortOrder + " " + PREFIX_DEPARTMENT + "Finance "
@@ -381,7 +385,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addRecruitmentPost() throws Exception {
+    public void parseCommand_addRecruitmentPost_equals() throws Exception {
         Recruitment recruitment = new RecruitmentBuilder().build();
         AddRecruitmentPostCommand command = (AddRecruitmentPostCommand) parser.parseCommand(
                 AddRecruitmentPostCommand.COMMAND_WORD + " " + PREFIX_JOB_POSITION + DEFAULT_POST
@@ -396,7 +400,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_editRecruitmentPost() throws Exception {
+    public void parseCommand_editRecruitmentPost_equals() throws Exception {
         Recruitment recruitment = new RecruitmentBuilder().build();
         EditRecruitmentPostCommand.EditPostDescriptor descriptor = new EditPostDescriptorBuilder(recruitment).build();
         EditRecruitmentPostCommand command = (EditRecruitmentPostCommand) parser.parseCommand(

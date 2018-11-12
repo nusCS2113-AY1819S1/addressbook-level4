@@ -15,35 +15,60 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Project Management*:
+** Assists in approving, reviewing and merging pull requests.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Major enhancement*: added `addRecruitmentPostCommand`, `deleteRecruitmentPostCommand`, `clearRecruitmentPostCommand`
+                       `editRecruitmentPostCommand`, `selectRecruitmentPostCommand`
+** What it does: Allow users to manage recruitment posts for the company.
+** Justification: This feature improves the product significantly because managing recruitment is one of the main responsibilities for HR admin.
+** Highlights: This enhancement provides an integrated function for HR admin to manage internal recruitment posts easily before publish to the public.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=ryanchen2018&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[Reposense Dashboard]]
 
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+** Test cases:
+*** Wrote additional tests for existing features to increase coverage from 70.2% to 80.4%(https://github.com/CS2113-AY1819S1-T16-4/main/pull/229[#229]),
+82.3% to 84.9%(https://github.com/CS2113-AY1819S1-T16-4/main/pull/239[#239]),
+84.9% to 88.7%(https://github.com/CS2113-AY1819S1-T16-4/main/pull/243[#243])
 
-_{you can add/remove categories in the list above}_
+** Documentation:
+*** Update developer guide for recruitment feature(https://github.com/CS2113-AY1819S1-T16-4/main/pull/101[#101],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/107[#107],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/108[#108],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/259[#259],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/260[#260])
+
+*** Update user guide for recruitment feature(https://github.com/CS2113-AY1819S1-T16-4/main/pull/108[#108],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/125[#125],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/147[#147],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/149[#149],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/151[#151],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/155[#155],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/157[#157],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/160[#160],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/175[#175],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/179[#179],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/239[#239],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/259[#259])
+
+** Community:
+*** PRs reviewed (with non-trivial review comments): (
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/74[#74],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/75[#75],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/76[#76],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/95[#95],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/97[#97],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/112[#112],
+https://github.com/CS2113-AY1819S1-T16-4/main/pull/120[#120])
+*** Reported bugs and suggestions for other teams in the class (
+https://github.com/CS2113-AY1819S1-W13-2/main/issues/83[#83],
+https://github.com/CS2113-AY1819S1-W13-2/main/issues/85[#85],
+https://github.com/CS2113-AY1819S1-W13-2/main/issues/91[#91],
+https://github.com/CS2113-AY1819S1-W13-2/main/issues/95[#95],
+https://github.com/CS2113-AY1819S1-W13-2/main/issues/99[#99],
+https://github.com/CS2113-AY1819S1-W13-2/main/issues/103[#103])
 
 == Contributions to the User Guide
 
@@ -52,8 +77,17 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=addRecruitmentPostCommand]
 
+include::../UserGuide.adoc[tag=editRecruitmentPostCommand]
+
+include::../UserGuide.adoc[tag=selectRecruitmentPostCommand]
+
+include::../UserGuide.adoc[tag=deleteRecruitmentPostCommand]
+
+include::../UserGuide.adoc[tag=clearRecruitmentPostCommand]
+
+include::../UserGuide.adoc[tag=recruitment2.0Feature]
 
 == Contributions to the Developer Guide
 
@@ -61,11 +95,6 @@ include::../UserGuide.adoc[tag=undoredo]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=RecruitmentPost]
 
 
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

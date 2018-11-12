@@ -135,9 +135,9 @@ Minimum 1 digit
 punctuation mark. And users are not allowed to exceed the character limit which is from 1 to 20
 |MINIMAL_YEARS_OF_WORKING_EXPERIENCE |me/ | Minimal years of working experience must be integers and should not be blank
 . And It is limited from 0 to 30
-|JOB_DESCRIPTION |jd/ | Job description accepts only characters. It must not be blank and should not include numbers.
-Punctuation mark only allows comma, full stop, and single right quote. And users are not allowed to exceed the character
-limit which is from 1 to 200
+|JOB_DESCRIPTION |jd/ | Job description accepts only characters and punctuation marks including only comma,
+full stop and single right quote. It must not be blank and should not include numbers. And users are not
+allowed to exceed the character limit which is from 1 to 200
 |=======================================================================
 
 [[Features]]
@@ -194,7 +194,8 @@ Any usage of `edit` command that will result in duplicated phone number or email
 // tag::findCommand[]
 === Locating persons by name or employee ID : `find`
 
-Find the employee's Name whose name contains the input or find the Employee Id that matches the input.
+Find the employee's name that contains the input or find the employee id that matches the input.
+The expenses and schedule list will also be updated accordingly to show only the matched employee(s)' expenses and schedule.
 
 Format: `find [NAME] [EMPLOYEEID]`
 
@@ -205,9 +206,9 @@ The NAME parameter is case-insensitive, i.e. The command `find john` will find t
 Examples:
 
 * `find John` +
-Find all instances of John
+Find all instances of John, and his associated expenses and schedule
 * `find 000001` +
-Find the employee with employee ID `000001`
+Find the employee with employee ID `000001`, and his/her associated expenses and schedule
 
 [NOTE]
 Any usage of `find` command will be rejected if it contains special characters or alphanumeric input. It accepts only either alphabets or numbers in a single input, not both.
@@ -215,7 +216,8 @@ Any usage of `find` command will be rejected if it contains special characters o
 
 // tag::filterCommand[]
 === Filter and list of specific employee's data : `filter`
-Filters the employee list by their department and/or rank/position and list the employees whose department and/or rank/position contains the keyword(s) input from the user in ascending or descending name order.
+Filters out the employees whose department and/or rank/position contains the keyword(s) input from the user and list them in ascending or descending name order.
+The expenses and schedule list will also be updated accordingly to show only the matched employees' expenses and schedule.
 
 Format: `filter SORT_ORDER [d/DEPARTMENT] [r/POSITION]`
 
@@ -226,18 +228,15 @@ Include either department or rank/position or both, at least one of the field mu
 Examples:
 
 * `filter asc d/Human Resource r/Manager` +
-List all employees whose department contains the keyword of either human or resource and rank/position contains the keyword of manager
+List all employees whose department contains the keyword of either human or resource and rank/position contains the keyword of manager in ascending name order.
+Expenses and schedule list will also be updated to show only matched employee(s)' expenses and schedule(s).
 * `filter dsc d/Finance` +
-List all employees whose department contains the keyword of finance
+List all employees whose department contains the keyword of finance in descending name order.
+Expenses and schedule list will also be updated to show only matched employee(s)' expenses and schedule(s).
 
 [NOTE]
 Any usage of `filter` command that results in the same prefix appearing more than once will be rejected. Example: filter asc d/Human d/Finance will be rejected.
 // end::filterCommand[]
-
-// tag::yisheng2.0Feature[]
-=== Keyword suggestion and auto complete feature _[Upcoming in 2.0]_
-This feature will suggest keywords when filtering or finding employee and the keyword will be auto-completed by pressing `TAB` key. _[Upcoming in 2.0]_
-// end::yisheng2.0Feature[]
 
 // tag::deleteCommand[]
 === Delete an employee’s data : `delete`
@@ -561,10 +560,6 @@ Examples:
 
 * `clearSchedules` +
 Clear the entire Schedule List.
-
-=== Send Calendar: `sendCalendar` _[Upcoming in 2.0]_
-
-Send calendar to the employee for employee to import schedule, sent using the Employee's email address. _[Upcoming in 2.0]_
 // end::clearSchedulesCommand[]
 
 // tag::addRecruitmentPostCommand[]
@@ -617,7 +612,7 @@ Minimal one field should be changed in order to make the editing recruitment pos
 // end::editRecruitmentPostCommand[]
 
 // tag::selectRecruitmentPostCommand[]
-=== Select recruitment post : `selectRecruitmentPost`
+=== Select an existing recruitment post : `selectRecruitmentPost`
 Select a recruitment post based on post index ID.
 
 Format: `selectRecruitmentPost INDEX` or `srp INDEX`
@@ -626,10 +621,13 @@ Examples:
 
 * `selectRecruitmentPost 1` +
 Select the recruitment post with the index of '1'
+
+[NOTE]
+At least one recruitment post should be added in the recruitment post list panel before performing this function.
 // end::selectRecruitmentPostCommand[]
 
 // tag::deleteRecruitmentPostCommand[]
-=== Delete recruitment post : `deleteRecruitmentPost`
+=== Delete an existing recruitment post : `deleteRecruitmentPost`
 Delete a recruitment post based on post index ID.
 
 Format: `deleteRecruitmentPost INDEX` or `drp INDEX`
@@ -638,6 +636,9 @@ Examples:
 
 * `deleteRecruitmentPost 1` +
 Deletes the recruitment post with the index of '1'
+
+[NOTE]
+At least one recruitment post should be added in the recruitment post list panel before performing this function.
 // end::deleteRecruitmentPostCommand[]
 
 // tag::clearRecruitmentPostCommand[]
@@ -766,6 +767,27 @@ Format: `exit`
 
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
+
+// tag::yisheng2.0Feature[]
+=== Keyword suggestion and auto complete feature _[Upcoming in 2.0]_
+This feature will suggest keywords when filtering or finding employee and the keyword will be auto-completed by pressing `TAB` key. _[Upcoming in 2.0]_
+// end::yisheng2.0Feature[]
+
+// tag::casper2.0Feature[]
+=== Employees' income report generation feature _[Upcoming in 2.0]_
+This feature will generate an employee payout report to show the break down of the Salary and Bonus in term of Base Salary, Bonus, Overtime Pay and CPF Contribution. _[Upcoming in 2.0]_
+// end::casper2.0Feature[]
+
+// tag::william2.0Feature[]
+=== Send Calendar: `sendCalendar` _[Upcoming in 2.0]_
+Send calendar to the employee for employee to import schedule, sent using the Employee's email address. _[Upcoming in 2.0]_
+// end::william2.0Feature[]
+
+// tag::recruitment2.0Feature[]
+=== Publish recruitment posts to job portal: `publishRecruitmentPost` _[Upcoming in 2.0]_
+`publishRecruitmentPost` command allows users to publish an existing recruitment post to job portal such as job street
+website. _[Upcoming in 2.0]_
+// end::recruitment2.0Feature[]
 
 === Encrypting data files `[coming in v2.0]`
 
