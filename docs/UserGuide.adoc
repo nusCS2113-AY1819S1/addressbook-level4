@@ -597,7 +597,7 @@ There will be two sheets in the Excel file, namely *RECORD DATA* and *SUMMARY DA
 
 * As the size of the Chart is fixed initially. Sometimes, when user exports too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
 
-image::Export_Capture3_LinhChi.png[width:800]
+image::Export_Capture3_LinhChi.PNG[width:800]
 
 // end::exportexcel[]
 
@@ -699,7 +699,7 @@ There will be two sheets in the Excel file, namely *RECORD DATA* and *SUMMARY DA
 
 * As the size of the Chart is fixed initially. Sometimes, when user archive too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
 
-image::Export_Capture3_LinhChi.png[width:800]
+image::Export_Capture3_LinhChi.PNG[width:800]
 
 // end::archive[]
 
