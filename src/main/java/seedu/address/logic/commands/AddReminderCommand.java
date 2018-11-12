@@ -17,14 +17,14 @@ import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatExcep
 
 public class AddReminderCommand extends Command {
     public static final String COMMAND_WORD = "addreminder";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder. Example: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder.\nExample: "
             + "addreminder "
             + PREFIX_TIME
-            + "2018/08/15 15:06:00"
+            + "2018/08/15 15:06:00 "
             + PREFIX_REMINDER_MESSAGE
             + "replace expired milk in aisle 6.";
 
-    private static final String MESSAGE_SUCCESS = "Reminder \"%s\" successfully recorded for time %s";
+    public static final String MESSAGE_SUCCESS = "Reminder \"%s\" successfully recorded for time %s";
 
     private final Reminder toAdd;
 
@@ -38,9 +38,9 @@ public class AddReminderCommand extends Command {
         try {
             model.addReminder(toAdd);
         } catch (InvalidTimeFormatException e) {
-            return new CommandResult(e.getExceptionMessage() + ". Upon adding this reminder");
+            throw new CommandException(e.getExceptionMessage() + ". Upon adding this reminder");
         } catch (DuplicateReminderException e) {
-            return new CommandResult(e.getExceptionMessage());
+            throw new CommandException(e.getExceptionMessage());
         }
         model.commitSalesHistory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getReminderMessage(), toAdd.getReminderTime()));

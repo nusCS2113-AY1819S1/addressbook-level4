@@ -1,42 +1,39 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.fail;
+import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.function.Predicate;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.events.model.DistributorBookChangedEvent;
-import seedu.address.commons.events.model.ProductDatabaseChangedEvent;
-import seedu.address.commons.events.model.SalesHistoryChangedEvent;
-import seedu.address.commons.events.model.UserDatabaseChangedEvent;
-import seedu.address.commons.events.model.UserDeletedEvent;
-import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyDistributorBook;
 import seedu.address.model.ReadOnlyProductDatabase;
-import seedu.address.model.ReadOnlyUserDatabase;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.distributor.Distributor;
+import seedu.address.model.login.Password;
+import seedu.address.model.login.UniqueUserList;
 import seedu.address.model.login.User;
+import seedu.address.model.login.Username;
 import seedu.address.model.product.Product;
-import seedu.address.model.saleshistory.ReadOnlySalesHistory;
 import seedu.address.model.timeidentifiedclass.Reminder;
+import seedu.address.model.timeidentifiedclass.Transaction;
+import seedu.address.model.timeidentifiedclass.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.storage.Storage;
 
 public class AddReminderCommandTest {
 
     private static final String FAILURE_METHOD_MESSAGE = "This method should not be called.";
-    private Model model = new ModelManager(new ReadOnlyProductDatabaseStub(), new ReadOnlyDistributorBookStub(),
-            new UserPrefsStub(), new ReadOnlyUserDatabaseStub(), new StorageStub());
+    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -47,291 +44,373 @@ public class AddReminderCommandTest {
         new AddReminderCommand(null);
     }
 
-
-    // Stub class declarations
-    private class ReadOnlyProductDatabaseStub implements ReadOnlyProductDatabase {
-        @Override
-        public ObservableList<Product> getProductList() {
-            fail(FAILURE_METHOD_MESSAGE);
-            return null;
-        }
+    @Test
+    public void constructor_validNonNullReminder() {
+        new AddReminderCommand(new ValidReminderStub());
     }
 
-    private class ReadOnlyDistributorBookStub implements ReadOnlyDistributorBook {
-        @Override
-        public ObservableList<Distributor> getDistributorList() {
-            fail(FAILURE_METHOD_MESSAGE);
-            return null;
-        }
+    @Test
+    public void execute_reminderAddedByModel_addSuccessful() throws Exception {
+        Reminder reminder = new ValidReminderStub();
+        Model model = new ModelStubAcceptsReminder();
+        CommandHistory commandHistory = new CommandHistory();
+        CommandResult commandResult = new AddReminderCommand(reminder).execute(model, commandHistory);
+
+        assertEquals(commandResult.feedbackToUser, String.format(AddReminderCommand.MESSAGE_SUCCESS,
+                reminder.getReminderMessage(), reminder.getReminderTime()));
+        assertEquals(commandHistory, EMPTY_COMMAND_HISTORY);
     }
 
-    private class UserPrefsStub extends UserPrefs {
+    @Test
+    public void execute_invalidTimeFormat_throwsCommandException() throws Exception {
+        Reminder reminder = new ValidReminderStub();
+        Model modelThrowsInvalidTime = new ModelStubThrowsInvalidTimeFormatException();
+        CommandHistory commandHistory = new CommandHistory();
 
-        public UserPrefsStub() {
-            //do nothing
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            fail(FAILURE_METHOD_MESSAGE);
-            return null;
-        }
-
-        @Override
-        public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
-            fail(FAILURE_METHOD_MESSAGE);
-        }
-
-        @Override
-        public void setGuiSettings(double width, double height, int x, int y) {
-            super.setGuiSettings(width, height, x, y);
-        }
-
-        @Override
-        public Path getAddressBookFilePath() {
-            fail(FAILURE_METHOD_MESSAGE);
-            return null;
-        }
-
-        @Override
-        public Path getSalesHistoryFilePath() {
-            fail(FAILURE_METHOD_MESSAGE);
-            return null;
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            fail(FAILURE_METHOD_MESSAGE);
-        }
-
-        @Override
-        public Path getDistributorBookFilePath() {
-            fail(FAILURE_METHOD_MESSAGE);
-            return null;
-        }
-
-        @Override
-        public void setDistributorBookFilePath(Path addressBookFilePath) {
-            fail(FAILURE_METHOD_MESSAGE);
-        }
-
-        @Override
-        public Path getUsersFilePath() {
-            fail(FAILURE_METHOD_MESSAGE);
-            return null;
-        }
-
-        @Override
-        public void setUsersFilePath(Path usersFilePath) {
-            fail(FAILURE_METHOD_MESSAGE);
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            return super.equals(other);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString();
-        }
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(InvalidTimeFormatException.EXCEPTION_MESSAGE + ". Upon adding this reminder");
+        new AddReminderCommand(reminder).execute(modelThrowsInvalidTime, commandHistory);
     }
 
-    private class ReadOnlyUserDatabaseStub implements ReadOnlyUserDatabase {
+    @Test
+    public void execute_duplicateReminder_throwsCommandException() throws Exception {
+        Reminder reminder = new ValidReminderStub();
+        Model modelThrowsInvalidTime = new ModelStubThrowsDuplicateReminderException();
+        CommandHistory commandHistory = new CommandHistory();
 
-        public ReadOnlyUserDatabaseStub() {
-            // do nothing
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(DuplicateReminderException.EXCEPTION_MESSAGE);
+        new AddReminderCommand(reminder).execute(modelThrowsInvalidTime, commandHistory);
+    }
+
+    @Test
+    public void equals() {
+        Reminder equalReminder = new ValidReminderStub();
+        AddReminderCommand toTest = new AddReminderCommand(equalReminder);
+        int someIntegerValue = 1;
+        String someString = "This is just a random string that can be anything for this test.";
+
+        // object should equal itself
+        assertTrue(toTest.equals(toTest));
+
+        // should equal another AddReminderCommand with the same reminder
+        assertTrue(toTest.equals(new AddReminderCommand(equalReminder)));
+
+        // should not equal to null
+        assertFalse(toTest.equals(null));
+
+        // should not equal to other data types
+        assertFalse(toTest.equals(someIntegerValue));
+        assertFalse(toTest.equals(someString));
+
+        // should not equal to another AddReminderCommand with different reminder
+        Reminder differentReminder = new ValidReminderStub();
+
+        AddReminderCommand unequalReminder = new AddReminderCommand(differentReminder);
+        assertFalse(toTest.equals(unequalReminder));
+
+    }
+
+    // ========================================== Stub classes ======================================
+    private class ModelStubAcceptsReminder extends ModelStub {
+        public ModelStubAcceptsReminder () {
+            //do nothing.
         }
 
         @Override
-        public ObservableList<User> getUsersList() {
-            fail(FAILURE_METHOD_MESSAGE);
-            return null;
-        }
-    }
-
-    /**
-     * This is a storage stub that does nothing.
-     */
-    private class StorageStub implements Storage {
-
-        public StorageStub() {
+        public void addReminder(Reminder toAdd) {
             // do nothing.
         }
 
         @Override
-        public Path getUserPrefsFilePath() {
-            return null;
-        }
-
-        @Override
-        public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
-            return Optional.empty();
-        }
-
-        @Override
-        public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
-
-        }
-
-        @Override
-        public Path getProductInfoBookFilePath() {
-            return null;
-        }
-
-        @Override
-        public Path getDistributorBookFilePath() {
-            return null;
-        }
-
-        @Override
-        public Optional<ReadOnlyProductDatabase> readAddressBook() throws DataConversionException, IOException {
-            return Optional.empty();
-        }
-
-        @Override
-        public Optional<ReadOnlyProductDatabase> readAddressBook(Path filePath) throws DataConversionException,
-                IOException {
-            return Optional.empty();
-        }
-
-        @Override
-        public Optional<ReadOnlyDistributorBook> readDistributorBook() throws DataConversionException,
-                IOException {
-            return Optional.empty();
-        }
-
-        @Override
-        public Optional<ReadOnlyDistributorBook> readDistributorBook(Path filePath) throws DataConversionException {
-            return Optional.empty();
-        }
-
-        @Override
-        public void saveAddressBook(ReadOnlyProductDatabase addressBook) throws IOException {
-
-        }
-
-        @Override
-        public void saveAddressBook(ReadOnlyProductDatabase addressBook, Path filePath) throws IOException {
-
-        }
-
-        @Override
-        public void saveDistributorBook(ReadOnlyDistributorBook distributorBook) throws IOException {
-
-        }
-
-        @Override
-        public void saveDistributorBook(ReadOnlyDistributorBook distributorBook, Path filePath) throws IOException {
-
-        }
-
-        @Override
-        public void handleAddressBookChangedEvent(ProductDatabaseChangedEvent abce) {
-
-        }
-
-        @Override
-        public void handleDistributorBookChangedEvent(DistributorBookChangedEvent abce) {
-
-        }
-
-        @Override
-        public void handleUserDatabaseChangedEvent(UserDatabaseChangedEvent abce) {
-
-        }
-
-        @Override
-        public void handleUserDeletedEvent(UserDeletedEvent event) throws IOException {
-
-        }
-
-        @Override
-        public void handleSalesHistoryChangedEvent(SalesHistoryChangedEvent event) {
-
-        }
-
-        @Override
-        public Path getUserDatabaseFilePath() {
-            return null;
-        }
-
-        @Override
-        public Optional<ReadOnlyUserDatabase> readUserDatabase() throws DataConversionException, IOException {
-            return Optional.empty();
-        }
-
-        @Override
-        public Optional<ReadOnlyUserDatabase> readUserDatabase(Path filePath) throws DataConversionException, IOException {
-            return Optional.empty();
-        }
-
-        @Override
-        public void saveUserDatabase(ReadOnlyUserDatabase userDatabase) throws IOException {
-
-        }
-
-        @Override
-        public void saveUserDatabase(ReadOnlyUserDatabase userDatabase, Path filePath) throws IOException {
-
-        }
-
-        @Override
-        public void deleteAddressBook(User user) throws IOException {
-
-        }
-
-        @Override
-        public Path getSalesHistoryFilePath() {
-            return null;
-        }
-
-        @Override
-        public Optional<ReadOnlySalesHistory> readSalesHistory() throws DataConversionException, IOException {
-            return Optional.empty();
-        }
-
-        @Override
-        public Optional<ReadOnlySalesHistory> readSalesHistory(Path filePath) throws DataConversionException, IOException {
-            return Optional.empty();
-        }
-
-        @Override
-        public void saveSalesHistory(ReadOnlySalesHistory salesHistory) throws IOException {
-
-        }
-
-        @Override
-        public void saveSalesHistory(ReadOnlySalesHistory salesHistory, Path filePath) throws IOException {
-
-        }
-
-        @Override
-        public void deleteSalesHistory() throws IOException {
-
-        }
-
-        @Override
-        public void deleteDistributorBook(User user) throws IOException {
-
-        }
-
-        @Override
-        public void update(User user) {
-
+        public void commitSalesHistory() {
+            // do nothing.
         }
     }
 
+    private class ModelStubThrowsInvalidTimeFormatException extends ModelStub {
+        public ModelStubThrowsInvalidTimeFormatException() {
+            //do nothing.
+        }
+
+        @Override
+        public void addReminder(Reminder toAdd) throws InvalidTimeFormatException {
+            throw new InvalidTimeFormatException();
+        }
+    }
+
+    private class ModelStubThrowsDuplicateReminderException extends ModelStub {
+        public ModelStubThrowsDuplicateReminderException() {
+            //do nothing.
+        }
+
+        @Override
+        public void addReminder(Reminder toAdd) throws DuplicateReminderException {
+            throw new DuplicateReminderException();
+        }
+    }
+
+    /**
+     * The following is a {@code ModelStub} stub class that throws Assertion error for all methods in {@link Model}
+     */
+    private class ModelStub implements Model {
+        @Override
+        public void addPerson(Product product) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addDistributor(Distributor distributor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePerson(Product target, Product editedProduct) {
+        }
+
+        @Override
+        public void updateDistributor(Distributor target, Distributor editedDistributor) {
+        }
+
+        @Override
+        public void resetData(ReadOnlyProductDatabase newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetData(ReadOnlyDistributorBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProductDatabase getProductInfoBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyDistributorBook getDistributorInfoBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDistributor(Distributor distributor) {
+            return false;
+        }
+
+        @Override
+        public boolean hasPerson(Product product) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteDistributor(Distributor target) {
+
+        }
+
+        @Override
+        public void deletePerson(Product target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Product> getFilteredProductList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Distributor> getFilteredDistributorList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredDistributorList(Predicate<Distributor> predicate) {
+
+        }
+
+        @Override
+        public void updateFilteredProductList(Predicate<Product> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoDistributorBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoDistributorBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoDistributorBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoDistributorBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitDistributorBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTransaction(Transaction transaction) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Transaction getLastTransaction() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitSalesHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeReminder(String reminderTime) throws InvalidTimeFormatException, NoSuchElementException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Reminder> getAllReminders() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Reminder> getOverdueReminders() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Reminder> getOverdueRemindersForThread() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getDaysTransactionsAsString(String date) throws InvalidTimeFormatException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getTransactionAsString(String date) throws InvalidTimeFormatException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasLoggedIn() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLoginStatus(boolean status) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public User getLoggedInUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkCredentials(Username username, Password password) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkAuthentication(Username username, Password password) {
+            requireNonNull(username);
+            requireNonNull(password);
+            setLoginStatus(true);
+            return true;
+        }
+
+        @Override
+        public void updateUserPassword(User target, User userWithNewPassword) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProductDatabase getAddressBook() {
+            return null;
+        }
+
+        @Override
+        public ReadOnlyDistributorBook getDistributorBook() {
+            return null;
+        }
+
+        @Override
+        public void addUser(User person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteUser(User target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProductDatabase getUserDatabase() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUsersList(UniqueUserList uniqueUserList) {
+            throw new AssertionError("This method should not be called.");
+        }
+    }
     private class ValidReminderStub extends Reminder {
         /**
          * An example of valid {@code Reminder} time and message. For more details on what constitutes a valid time
          * and message, please refer to {@link Reminder}
          */
         private static final String VALID_TIME = "2018/11/11 12:00:00";
-        private static final String VALID_MESSAGE = "Can be anything except null.";
+        private static final String DIFFERENT_VALID_TIME = "2018/11/11 12:00:01";
+        private static final String MESSAGE = "Some random message";
 
-        public ValidReminderStub() throws InvalidTimeFormatException {
-            super(VALID_TIME, VALID_MESSAGE);
+        public ValidReminderStub() {
+            this.time = VALID_TIME;
+            this.reminderMessage = MESSAGE;
+        }
+
+        public void setDifferentTime() {
+            this.time = DIFFERENT_VALID_TIME;
         }
     }
 }
