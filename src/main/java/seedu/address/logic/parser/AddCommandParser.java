@@ -42,12 +42,14 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        String newDepartment = rewordDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get());
+
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Department department = ParserUtil.parseDepartment(argMultimap.getValue(PREFIX_DEPARTMENT).get());
+        Department department = ParserUtil.parseDepartment(newDepartment);
         Designation designation = ParserUtil.parseDesignation(argMultimap.getValue(PREFIX_DESIGNATION).get());
 
         Person person = new Person(name, phone, email, address, department, designation, tagList);
@@ -61,6 +63,17 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     *
+     * @param input contains a department word that may be of varying cases
+     * @return a string whose first letter is capital letter and the rest is lower case
+     */
+    private static String rewordDepartment(String input) {
+        String lowercase = input.toLowerCase();
+        String output = lowercase.substring(0, 1).toUpperCase() + lowercase.substring(1);
+        return output;
     }
 
 }
