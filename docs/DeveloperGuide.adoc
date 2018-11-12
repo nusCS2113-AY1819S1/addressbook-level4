@@ -1361,11 +1361,39 @@ Expected: Similar to previous
 Expected:  Invalid command will be displayed in the result box. No changes will occur.
 // end::commentsMT[]
 
+// tag::exportManualTest
 === Exporting a file
 . Prerequisites: Must be logged in and have registered for 1 event
 
 .. Test case: `export file` +
-Expected: A iCalendar file called file will be exported to the source folder
+Expected: A iCalendar file with name file.ics will be exported to the source folder
 
 .. Test case: `export` +
 Expected: Command Result box will notify that no file name is given and no changes will occur
+
+.. Test case: `export COM1` on Windows system
+Expected: Command Result box will notify that file cannot be opened/created or filename is not allowed in current system
+// end::exportManual
+
+// tag::findManualtest
+. Prerequisites: Must be logged in
+
+.. Test case: `find n/party`
+Expected: Event having Party in it's name
+
+.. Test case: `find k/ n/Party`
+Expected: No event found
+// end::findManualtest
+
+// tag::autosortManual
+. Prerequisites: Must be logged in
+
+.. Test case: add new event with earlier date than first event
+Expected: the added event should appear in the first position
+
+.. Test case: Edit third event with earlier date than second event.
+Expected: Third event after edited will be placed higher in the list
+// end::autosortManual
+
+
+
