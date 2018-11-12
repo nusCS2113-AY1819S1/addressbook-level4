@@ -50,7 +50,7 @@ public class UpdateTaskCommand extends Command {
 
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book.";
+    //public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book.";
 
 
     private final Index index;
@@ -84,9 +84,10 @@ public class UpdateTaskCommand extends Command {
         //model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.commitTaskBook();
 
+        /*
         if (!taskToUpdate.isSameTask(updatedTask) && model.hasTask(updatedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }
+        }*/
 
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, updatedTask));
     }
