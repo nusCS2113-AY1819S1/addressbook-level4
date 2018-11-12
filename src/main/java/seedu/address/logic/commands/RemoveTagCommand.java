@@ -67,7 +67,6 @@ public class RemoveTagCommand extends Command implements CommandParser {
         Task taskToRemove = lastShownList.get(index.getZeroBased());
         Set<Tag> newTags = new HashSet<>(taskToRemove.getTags());
         if (!(newTags.contains(tag))) {
-            System.out.println("yo");
             throw new CommandException(MESSAGE_TAG_NOT_FOUND);
         }
 

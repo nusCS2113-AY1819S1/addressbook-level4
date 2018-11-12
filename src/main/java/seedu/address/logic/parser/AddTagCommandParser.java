@@ -40,8 +40,6 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
             throw new ParseException(MESSAGE_TAG_CONSTRAINTS);
         }
         Tag tagName = new Tag(tag.toLowerCase());
-        System.out.println(String.format("%1$s", tagName.tagName));
-
 
         return new AddTagCommand(index, tagName);
     }
