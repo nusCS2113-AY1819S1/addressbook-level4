@@ -558,8 +558,9 @@ image::FriendFeatureFrontEndDiagramFix.png[width="300"]
 
 The two panels will be filtered based on two predicates, `FriendListPredicate` and `OtherListPredicate`.
 The friends of the current user is iterated through and those that belong to the friend will be shown on the FriendListPanel.
-The rest of the users will be shown on PersonListPanel.
-Both predicates will filter out the current user.
+The rest of the users will be shown on PersonListPanel. Both predicates will filter out the current user.
+When additional filtering commands such as `group` or `find` are executed, the predicate produce from either of the commands will be added to a new `CombinedFriendListPredicate` and `CombinedOtherListPredicate`.
+This creates a new predicate in which will filter the two panels accordingly.
 
 ===== Backend implementation
 The `User` is associated with a specific `Person`. Each person can have any number of `Friend` objects.

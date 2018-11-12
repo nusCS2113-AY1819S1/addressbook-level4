@@ -138,6 +138,7 @@ to your timetable might be lost.
 
 [[Features]]
 == Features
+This section contains all of the features that are currently present in _FreeTime_. Feel free to click any one of the links to quickly jump to the feature!
 
 //tag::featureoverview
 .Overview of all the features in FreeTime
@@ -234,7 +235,7 @@ After filtering your results by executing commands such as `group` or `find`, ex
 <<Features,Jump back to _FreeTime_'s feature list>>
 
 [[edit]]
-=== Editing a person : `edit` (`e`)
+=== Editing a person : `edit` (`ed`)
 
 Edits your information in the database. +
 

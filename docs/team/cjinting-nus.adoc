@@ -11,7 +11,10 @@
 
 _FreeTime_ is a desktop application targeted at students who have many projects that require meeting many people at different times.
 _FreeTime_ aims to reduce the hassle of find available timeslots in which everyone is mutually available.
-This project is part of the deliverables for modules offered by the School of Computing in the National University of Singapore.
+This project is part of the deliverables for the following modules offered by the School of Computing in the National University of Singapore:
+
+* *CS2113T - Software Engineering and Object-Oriented Programming*
+* *CS2101 - Communication for Computing Professionals*
 
 The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. It is written in Java, and has about 10 kLoC.
 
