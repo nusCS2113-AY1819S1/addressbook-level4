@@ -1,15 +1,17 @@
 //@@author feijunzi
 package seedu.address.ui;
 
-import guitests.guihandles.ExpenditureCardHandle;
-import org.junit.Test;
-import seedu.address.model.expenditureinfo.Expenditure;
-import seedu.address.testutil.ExpenditureBuilder;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysExpenditure;
+
+import org.junit.Test;
+
+import guitests.guihandles.ExpenditureCardHandle;
+import seedu.address.model.expenditureinfo.Expenditure;
+import seedu.address.testutil.ExpenditureBuilder;
+
 
 public class ExpenditureCardTest extends GuiUnitTest {
     @Test
