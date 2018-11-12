@@ -26,7 +26,8 @@ public class ModuleAddCommand extends Command {
             + PREFIX_MODULE_NAME + "Software Engineering & Object-Oriented Programming";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s %2$s";
-    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in Trajectory.";
+    private static final String MESSAGE_DUPLICATE_MODULE =
+            "A module with module code %1$s already exists in Trajectory.";
 
     private final Module moduleToAdd;
 
@@ -41,7 +42,9 @@ public class ModuleAddCommand extends Command {
             moduleManager.addModule(moduleToAdd);
             moduleManager.saveModuleList();
         } catch (DuplicateModuleException dme) {
-            throw new CommandException(MESSAGE_DUPLICATE_MODULE, dme);
+            throw new CommandException(
+                    String.format(MESSAGE_DUPLICATE_MODULE, moduleToAdd.getModuleCode().toString()),
+                    dme);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, moduleToAdd.getModuleCode(),
