@@ -637,7 +637,7 @@ Step 3: When add method is called, it performs the intended operation, then sort
 Step 4: The event list panel is reloaded and displays the newly added event in the correct place.
 
 .Auto sorting results
-image::autoSortingAfter.png[]
+image::autoSortingAfter.png[width=350]
 
 ==== Aspect: How to sort the list
 * **Alternative 1 (current choice):** Event list will be sorted based on sort method implemented in `UniqueEventList` class to modify the internal list which event manager is backed on.
@@ -691,10 +691,10 @@ Step 3: Current user, who is logged in, will be used to receive an event filtere
 Step 4: An FileOutputStream will be created to create new file/re-write if the file exist will the data from the filtered event list convert to iCalendar file format. File will be stored in *folder that you store EventManager.jar*
 
 .Command result show in the UI
-image::exportCommandResultUI.png[]
+image::exportCommandResultUI.png[width=350]
 
 .Command result show in file folder
-image::exportCommandResultFile.png[]
+image::exportCommandResultFile.png[width=350]
 
 The process is illustrated in the following diagram:
 
