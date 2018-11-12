@@ -5,25 +5,25 @@
 :stylesheet: gh-pages-vincent.css
 ---
 
-== PROJECT: FinancialPlanner
+== PROJECT: Savee
 
-== What FinancialPlanner is about:
+== What Savee is about:
 
-FinancialPlanner is an application my team has created for the NUS module CS2113T on Software Engineering Principles and Object Oriented Programming.
+Savee is an application my team has created for the NUS module CS2113T on Software Engineering Principles and Object Oriented Programming.
 This project lasted for 10 weeks and we were tasked to develop a desktop application for a particular group of users.
-FinancialPlanner's main target audience are students who need help managing their finances and likes typing. In FinancialPlanner,
+Savee's main target audience are students who need help managing their finances and likes typing. In Savee,
 there is a text box located at the topmost part of the application which users can use to type commands into the system. Graphic user interface(GUI)
 created using JavaFX was also used to display the output of the system to create a more intuitive and engaging user experience.
 
 == Summary of contributions
-FinancialPlanner was adapted from https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4], a sample codebase given by the module.
+Savee was adapted from https://nuscs2113-ay1819s1.github.io/addressbook-level4/[AddressBook Level 4], a sample codebase given by the module.
 Throughout this development cycle, I have made much contributions to the team and below shows a summary of my
 contributions.
 
 === Application Code related contributions
 
-* *Major Enhancements*: Facilitated the morph from AddressBook Level 4 to FinancialPlanner
-** `Reason for the enhancement` FinancialPlanner is mainly targeted at users who wants to store and keep track of their daily financial activity. This is significantly
+* *Major Enhancements*: Facilitated the morph from AddressBook Level 4 to Savee
+** `Reason for the enhancement` Savee is mainly targeted at users who wants to store and keep track of their daily financial activity. This is significantly
 different from the original AddressBook Level 4.
 ** `My contributions` I adapted all model and storage components. I also fixed
 all the tests that broke as a result of the morph.
@@ -36,7 +36,7 @@ generate a summary table.
 report was generated on a table panel which can be switched around with other user interface panels as necessary. I created all java logic components and the Java fxml layout files.
 
 * *Major Enhancements*: Added a feature that shows the breakdown of financial activity into categories
-** `Reason for the enhancement` FinancialPlanner also allows users to tag each financial activity with a tag that they can define. These tags can be used for analysing financial activity.
+** `Reason for the enhancement` Savee also allows users to tag each financial activity with a tag that they can define. These tags can be used for analysing financial activity.
 ** `Overview` To further empower users to make informed choices, the statistics feature was designed to provide a detailed breakdown of all financial
 activity within a given period.
 ** `My contributions` For this feature, there were 3 main parts, logic for the command, model to support statistics and the GUI. I created all the components necessary for this feature, with the most noteworthy implementation being user interface. Similar to summary,
