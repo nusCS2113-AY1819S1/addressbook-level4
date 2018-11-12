@@ -93,6 +93,8 @@ public class PersonListPanelTest extends GuiUnitTest {
      */
     private Path createXmlFileWithPersons(int personCount) throws Exception {
         StringBuilder builder = new StringBuilder();
+        // Solution for character array below adapted from
+        // https://stackoverflow.com/questions/17575840/better-way-to-generate-array-of-all-letters-in-the-alphabet
         char[] alphabets = IntStream.rangeClosed('a', 'z')
                 .mapToObj(c -> "" + (char) c).collect(Collectors.joining()).toCharArray();
         int j = 0;
@@ -106,7 +108,7 @@ public class PersonListPanelTest extends GuiUnitTest {
             builder.append("<persons>\n");
             String employeeIdFormatted = String.format("%06d", i);
             builder.append("<employeeId>" + employeeIdFormatted + "</employeeId>\n");
-            builder.append("<name>").append(nameStr[l]).append("</name>\n");
+            builder.append("<name>" + nameStr[l] + "</name>\n");
             if ((i + 1) % 100 == 0) {
                 j++;
                 nameStr[l] = nameStr[l].substring(0, k - 1);

@@ -567,7 +567,7 @@ Below is the schedule class diagram.
 
 image::Schedule/schedule_class.png[width="400"]
 
-All logic commands comes with a dedicated parser. These parsers ensures that the input conforms to the following
+All logic commands come with a dedicated parser. These parsers ensure that the input conforms to the following
 field restrictions before in phase 1 before parsing to the actual command for execution in phase 2:
 
 [width="90%",cols="25%,<15%,50%",options="header",]
@@ -598,7 +598,7 @@ Shown below is the normal flow of the sequence diagram for adding a new schedule
 
 image::Schedule/addSchedule_seq.png[width="650"]
 
-In addtion, Command Exception will be thrown due to the following:
+In addition, Command Exception will be thrown due to the following:
 
 .. Employee Id of the schedule to be added is not found in address book.
 .. A duplicated schedule exists.
@@ -611,20 +611,20 @@ Shown below is the normal flow of the sequence diagram for adding a new schedule
 
 image::Schedule/deleteSchedule_seq.png[width="650"]
 
-In addtion, Command Exception will be thrown due to the following:
+In addition, Command Exception will be thrown due to the following:
 
-.. Index parsed is a invalid index in the ScheduleList panel.
+.. Index parsed is an invalid index in the ScheduleList panel.
 
 ==== Add Works
 `addWorks` command allows multiple work schedules to be added based on
 the employees shown in the employee's panel.
-Shown below is the normal flow of the sequence diagram for adding a working schedules.
+Shown below is the normal flow of the sequence diagram for adding a working schedule.
 
 image::Schedule/addWorks_seq.png[width="650"]
 
 In addtion, Command Exception will be thrown due to the following:
 
-.. Size of the filtered person list is 0. This happens when there is no
+.. Size of the filtered person list is 0. This happens when there are no
 employees shown.
 .. Commit is false. This happens either when all employees have been
 added work, or some had leave on the same day.
@@ -636,21 +636,21 @@ Shown below is the normal flow of the sequence diagram for deleting multiple wor
 
 image::Schedule/deleteWorks_seq.png[width="650"]
 
-In addtion, Command Exception will be thrown due to the following:
+In addition, Command Exception will be thrown due to the following:
 
-.. Size of the filtered person list is 0. This happens when there is no
+.. Size of the filtered person list is 0. This happens when there are no
 employees shown.
 
 ==== Add Leaves
 `addLeaves` command allows multiple leave schedules to be added based on
 the employees shown in the employee's panel.
-Shown below is the normal flow of the sequence diagram for adding a leave schedules.
+Shown below is the normal flow of the sequence diagram for adding a leave schedule.
 
 image::Schedule/addLeaves_seq.png[width="650"]
 
-In addtion, Command Exception will be thrown due to the following:
+In addition, Command Exception will be thrown due to the following:
 
-.. Size of the filtered person list is 0. This happens when there is no
+.. Size of the filtered person list is 0. This happens when there are no
 employees shown.
 .. Commit is false. This happens either when all employees have been
 added work, or some had leave on the same day.
@@ -662,7 +662,7 @@ Shown below is the normal flow of the sequence diagram for deleting multiple lea
 
 image::Schedule/deleteLeaves_seq.png[width="650"]
 
-In addtion, Command Exception will be thrown due to the following:
+In addition, Command Exception will be thrown due to the following:
 
 .. Size of the filtered person list is 0. This happens when there is no
 employees shown.
@@ -678,7 +678,12 @@ In addition, Command Exception will be thrown due to the following:
 .. Employee Id to be calculated is not found in address book.
 .. Employee Id has not taken any leaves in the specified year.
 
+==== Send Schedule: `sendSchedule` _[Upcoming in 2.0]_
+
+Send schedules to the employee for calendar import using the Employee's email address. _[Upcoming in 2.0]_
+
 ==== Design considerations for Schedule Features
+Aspect: Command
 
 * **Alternative 1 (current choice):** Have separate commands
 to add work/leave schedules.
@@ -686,10 +691,23 @@ to add work/leave schedules.
 the type of schedule.
 ** Cons: More codes needed, but easier for user to schedule
 for multiple employees with multiple dates.
-* **Alternative 2:**Have a single command to add work/leave schedule.
+* **Alternative 2:** Have a single command to add work/leave schedule.
 ** Pros: Easier to code.
 ** Cons: Requires user to specify type of schedule. Can only
 schedule 1 at a time.
+
+Aspect: Storage
+
+* **Alternative 1 (current choice):** Have schedules stored in a separate
+XML file.
+** Pros: Easier to manage scalability issues as schedules grow in numbers.
+Possibility of having a database for schedule in future.
+** Cons: More codes needed. Extra time is needed to delete schedules when
+employee is deleted.
+* **Alternative 2:** Have schedules stored in the same XML file as addressbook.xml
+** Pros: Pros: Easier to implement, as only an additional field is required by modeling it as a set of schedules.
+** Cons: Very hard to manage large number of schedules, or add additional
+fields to describe the schedule.
 
 // end::schedule[]
 
@@ -797,18 +815,16 @@ The command `filter` allows the user to filter employees based on their respecti
 The implementation of this command is separated into two phases.
 
 ===== Phase 1
-The `filter` mechanism is facilitated by `FilterCommandParser`.
+The `filter` command's mechanism is facilitated by `FilterCommandParser`.
 The `FilterCommandParser` implements the `Parser` interface, parses the arguments parameter, which is the input from the user, and creates a new `FilterCommand` object.
-Apart from parsing the input, the `FilterCommandParser` checks whether the input complies with the required format.
-This checking of input compliance is facilitated by two helper methods, namely `processDepartmentKeywords` and `processPositionKeywords`, that is within the class.
-
-[NOTE]
-The `processDepartmentKeywords` and `processPositionKeywords` methods are quite similar. Therefore, the code snippets will include only `processDepartmentKeywords` rather than both.
+Apart from parsing the input, the `FilterCommandParser` also checks whether the input complies with the required format.
+The checking of input compliance is facilitated by two helper methods, namely `processDepartmentKeywords` and `processPositionKeywords`, that is within the class.
+This guide will focus on explaining how `processDepartmentKeywords` work instead of both as the methods `processDepartmentKeywords` and `processPositionKeywords` are quite similar.
 
 [NOTE]
 If the input does not comply with the required format, an error message will be shown to the user.
 
-Code snippet of `FilterCommandParser` that shows the checking of the input compliance:
+Code snippet of `FilterCommandParser` showing the input compliance checks:
 
 [source, java]
 ----
@@ -848,7 +864,8 @@ public boolean processDepartmentKeywords(ArgumentMultimap argMultimap, FilterCom
 }
 ----
 
-The `processDepartmentKeywords` is further assisted by two other helper methods, namely, `validityCheckForDepartments` and `areDepartmentKeywordsValid` which are also within the `FilterCommandParser` class. The code snippet of the two mentioned methods are as follow:
+The `processDepartmentKeywords` is further assisted by two other helper methods, namely, `validityCheckForDepartments` and `areDepartmentKeywordsValid` which are also within the `FilterCommandParser` class.
+The code snippet of the two helper methods are as follow:
 
 [source, java]
 ----
@@ -876,12 +893,12 @@ public boolean areDepartmentKeywordsValid(String[] keywords) {
 The `FilterCommand` is being executed in this phase.
 `FilterCommand` first checks which prefix(es) is(are) present prior to calling the `updateFilteredPersonList` method, which updates `filteredPersonList`
  with the relevant department(s) and/or position(s) that matches the keyword(s) input from the user.
- Additionally, the method `updateFilteredExpensesList` and `updateFilteredScheduleList` will be called to update the `filteredExpensesList` and `filteredScheduleList` respectively to show only the matched employees' expenses and schedules.
+ Additionally, the methods `updateFilteredExpensesList` and `updateFilteredScheduleList` will be called to update the `filteredExpensesList` and `filteredScheduleList` respectively to show only the matched employees' expenses and schedules.
 
 [NOTE]
 If the keywords input from the user results in 0 person found. The CLI will show the user a list of currently available department(s) and/or position(s) in the PersonList.
 The listing of available department(s) and/or position(s) depends on the presence of the prefix. +
-Example: If `filter asc d/hello` results in 0 person found, the CLI will list the currently available department(s) in CHRS.
+Example: If `filter asc d/hello` results in 0 person found, the CLI will list all the currently available department(s) in CHRS.
 
 Code snippet of `FilterCommand` that checks which prefix is present prior to updating `filteredPersonList`, `filteredExpensesList` and `filteredScheduleList`:
 
@@ -919,22 +936,26 @@ public class FilterCommand extends Command {
 ----
 
 The result of the execution of `FilterCommand` is then encapsulated as a `CommandResult` object which is returned to the `LogicManager`.
-Upon the update of `filteredPersonList`, `filteredExpensesList` and `filteredScheduleList`, the program will display only employees alongside their respective expenses and schedule that are of the specific department(s)
+After the execution of `FilterCommand`, the `filteredPersonList`, `filteredExpensesList` and `filteredScheduleList` will be updated accordingly and the program will display only employees alongside their respective expenses and schedule that are of the specific department(s)
  and/or position(s) as specified by the input from the user.
 
-The sequence diagram below illustrates the operation of `filter` command:
+The sequence diagram below illustrates the operation of the `filter` command:
 
-image::filterCommandSequenceDiagram.png[width="850"]
+image::filterCommandSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
 Aspect: Implementation of `filter` command
 
 * **Alternative 1 (current choice)**: One command to handle filtering by department(s) and/or position(s)
 ** Pros: Does not require several command and parser files to handle filtering of different fields
-** Cons: Additional methods required to check prefix and validity of input
-* **Alternative 2**: Separate commands for filter, one for department and one for position
+** Cons: Additional methods required to check for presence of prefix and input validity
+* **Alternative 2**: Separate commands for filtering department and position, one for department and one for position
 ** Pros: Easy to implement as it follows the existing `find` command
-** Cons: More commands to create and implementation can get quite complicated when filter includes both fields
+** Cons: More commands to create and implementation can get quite complicated when filter requires both fields
+
+==== Future improvements: Keyword suggestion and auto complete feature _[Upcoming in 2.0]_
+This feature will suggest keywords when filtering or finding employee and the keyword will be auto-completed by pressing `TAB` key. _[Upcoming in 2.0]_
+
 // end::filter[]
 
 === Logging

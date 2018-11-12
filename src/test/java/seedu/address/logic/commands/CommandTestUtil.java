@@ -200,6 +200,11 @@ public class CommandTestUtil {
     public static final ModifyPayCommand.ModSalaryDescriptor PAY_BOB;
     public static final ModifyAllPayCommand.ModSalaryDescriptor PAY_ALL;
 
+    //recruitment test field
+    public static final String VALID_POST_RE3 = "Finance Manager";
+    public static final String VALID_WORK_EXP_RE3 = "8";
+    public static final String VALID_JOB_DESCRIPTION_RE3 = "To ensure the financial health for the organisation";
+
     static {
         CLAIM_AMY = new EditExpensesDescriptorBuilder().withExpensesAmount(VALID_EXPENSESAMOUNT_AMY)
                 .withTravelExpenses(VALID_TRAVELEXPENSES_AMY).withMedicalExpenses(VALID_MEDICALEXPENSES_AMY)

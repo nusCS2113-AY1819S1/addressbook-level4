@@ -92,11 +92,25 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
+        /* Case: add -> added */
+        toAdd = AMY;
+        command = "   " + AddCommand.COMMAND_WORD + "  " + EMPLOYEEID_DESC_AMY + " " + NAME_DESC_AMY + "  "
+                + DATEOFBIRTH_DESC_AMY + " " + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + " " + DEPARTMENT_DESC_AMY
+                + " " + POSITION_DESC_AMY + "   " + ADDRESS_DESC_AMY + " " + SALARY_DESC_AMY + "   "
+                + TAG_DESC_FRIEND + " ";
+        assertCommandSuccess(command, toAdd);
+
+        /* Case: undo adding Amy to the list -> Amy deleted */
+        command = UndoCommand.COMMAND_WORD;
+        expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        assertCommandSuccess(command, model, expectedResultMessage);
+
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
         model.addPerson(toAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
+
 
         /* Case: add a person with all fields same as another person in the address book except employeeId,
          * name, phone and email -> added

@@ -16,35 +16,39 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 == Summary of contributions
 
 * *Major enhancement*: Added `filter` and enhanced `find` command
-** What it does: It provides the end user with search functions whereby they can choose to filter employees by their department or rank/position or both. Additionally, the find command has been enhanced to be capable of searching by either the employee's name or his/her employee ID.
-** Justification: This feature gives the users the capability of searching for either a specific employee or all employees of a certain rank/position or employees within a certain department.
-** Highlights: This enhancement enhances the user experience when searching for certain employee(s) within CHRS, users will no longer need to scroll through the whole list to search for a specific employee(s) data. This enhancement required an in-depth understanding of the human resource department needs. Additionally, the implementation was challenging as it requires a great understanding of how predicates work in java to allow the commands to show the right employee(s) that the user is searching for.
+** What it does: The `filter` command allows user to filter out employees of a certain department, rank/position or both and the `find` command allows user to  search for a specific employee via their name or employee ID.
+** Justification: This feature improves the product significantly as the user is able to search for the required employee's details quickly.
+** Highlights: This enhancement enhances the user experience as the user can now search for an employee's details without having the need to go through the whole list of employees. This feature required in-depth analysis of possible design alternatives and in-depth understanding of the HR needs when searching. The implementation of this feature was challenging as it required enhancement to existing commands and understanding of predicates.
+
+* *Minor enhancements*:
+*** Added  sorting to PersonList, ExpensesList and ScheduleList to ensure that the lists stay sorted in ascending order. (Pull request: https://github.com/CS2113-AY1819S1-T16-4/main/pull/219[#219])
+*** Enhanced `add` and `edit` commands to reject having employees with duplication in these fields: `EmployeeId` OR `Email` OR `Phone` OR `Name` and `DateOfBirth`. Should any attempt of duplication occur, the application will display the employee being duplicated and reject the command. (Pull requests: https://github.com/CS2113-AY1819S1-T16-4/main/pull/124[#124], https://github.com/CS2113-AY1819S1-T16-4/main/pull/134[#134], https://github.com/CS2113-AY1819S1-T16-4/main/pull/136[#136], https://github.com/CS2113-AY1819S1-T16-4/main/pull/219[#219])
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=limyisheng&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[Reposense Dashboard]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.1` - `v1.4` (5 releases) on GitHub.
-**** Managed the release of .jar file.
-**** Managed the description of each release.
-*** Managed the approval of pull requests.
-*** Setting up issue tracker, milestones and tags.
-*** Setting up Travis-CI and AppVeyor.
-*** Ensures that the team is on track and is able to complete the requirements of each milestone.
+*** Managed releases `v1.1` - `v1.4` (5 releases) on GitHub
+**** Managed .jar file release and description of each release
+*** Managed the approval of pull requests
+*** Set up issue tracker, milestones and labels
+*** Ensures that the team is on track and is able to complete each milestone's requirements
 ** Enhancements to existing features:
 *** Added `EmployeeId`, `DateOfBirth`, `Department`, `Rank/Position`, `Salary` and `Bonus` fields (Pull request: https://github.com/CS2113-AY1819S1-T16-4/main/pull/18[#18])
-*** Added  sorting to PersonList, ExpensesList and ScheduleList to ensure that the lists stay sorted (Pull request: https://github.com/CS2113-AY1819S1-T16-4/main/pull/219[#219])
-*** Updated `add` and `edit` commands to reject commands that will lead to duplication in these fields: `EmployeeId` OR `Email` OR `Phone` OR `Name` alongside `DateOfBirth`. Additionally, the GUI will show the employee that the user is trying to duplicate. (Pull requests: https://github.com/CS2113-AY1819S1-T16-4/main/pull/18[#18], https://github.com/CS2113-AY1819S1-T16-4/main/pull/124[#124], https://github.com/CS2113-AY1819S1-T16-4/main/pull/134[#134], https://github.com/CS2113-AY1819S1-T16-4/main/pull/136[#136], https://github.com/CS2113-AY1819S1-T16-4/main/pull/219[#219])
+** Test Cases:
+*** Wrote additional tests for existing features to increase coverage from 88.7% to 92.6% (https://github.com/CS2113-AY1819S1-T16-4/main/pull/240[#240]), 61.2% to 63.7% (https://github.com/CS2113-AY1819S1-T16-4/main/pull/223[#223]), 53.7% to 61.2% (https://github.com/CS2113-AY1819S1-T16-4/main/pull/221[#221]) and 72.9% to 74.1% (https://github.com/CS2113-AY1819S1-T16-4/main/pull/104[#104])
 ** Documentation:
-*** Updated Read Me page. (Pull requests: https://github.com/CS2113-AY1819S1-T16-4/main/pull/3/[#3], https://github.com/CS2113-AY1819S1-T16-4/main/pull/235[#235])
-*** Updated About Us page to include team members' images, roles and responsibilities alongside GitHub and Portfolio links. (Pull requests:  https://github.com/CS2113-AY1819S1-T16-4/main/pull/1[#1], https://github.com/CS2113-AY1819S1-T16-4/main/pull/3[#3], https://github.com/CS2113-AY1819S1-T16-4/main/pull/8[#8], https://github.com/CS2113-AY1819S1-T16-4/main/pull/11[#11], https://github.com/CS2113-AY1819S1-T16-4/main/pull/41[#41], https://github.com/CS2113-AY1819S1-T16-4/main/pull/127[#127])
-*** Updated Developer Guide on `filter` feature alongside the user stories, use cases and instructions for manual testing. (Pull requests:  https://github.com/CS2113-AY1819S1-T16-4/main/pull/11[#11], https://github.com/CS2113-AY1819S1-T16-4/main/pull/13[#13], https://github.com/CS2113-AY1819S1-T16-4/main/pull/14[#14], https://github.com/CS2113-AY1819S1-T16-4/main/pull/15[#15], https://github.com/CS2113-AY1819S1-T16-4/main/pull/97[#97], https://github.com/CS2113-AY1819S1-T16-4/main/pull/109[#109], https://github.com/CS2113-AY1819S1-T16-4/main/pull/235[#235])
-*** Updated User Guide to ensure all listed commands are up to date. (Pull requests:  https://github.com/CS2113-AY1819S1-T16-4/main/pull/95[#95], https://github.com/CS2113-AY1819S1-T16-4/main/pull/156[#156], https://github.com/CS2113-AY1819S1-T16-4/main/pull/167[#167], https://github.com/CS2113-AY1819S1-T16-4/main/pull/169[#169], https://github.com/CS2113-AY1819S1-T16-4/main/pull/172[#172], https://github.com/CS2113-AY1819S1-T16-4/main/pull/176[#176], https://github.com/CS2113-AY1819S1-T16-4/main/pull/181[#181], https://github.com/CS2113-AY1819S1-T16-4/main/pull/183[#183])
+*** Updated Read Me (Pull requests: https://github.com/CS2113-AY1819S1-T16-4/main/pull/3/[#3], https://github.com/CS2113-AY1819S1-T16-4/main/pull/235[#235])
+*** Updated About Us to include team members' images, roles and responsibilities alongside GitHub and Portfolio links (Pull requests:  https://github.com/CS2113-AY1819S1-T16-4/main/pull/1[#1], https://github.com/CS2113-AY1819S1-T16-4/main/pull/3[#3], https://github.com/CS2113-AY1819S1-T16-4/main/pull/8[#8], https://github.com/CS2113-AY1819S1-T16-4/main/pull/41[#41], https://github.com/CS2113-AY1819S1-T16-4/main/pull/127[#127])
+*** Updated Developer Guide on `filter` feature alongside model component, user stories, use cases and instructions for manual testing (Pull requests:  https://github.com/CS2113-AY1819S1-T16-4/main/pull/11[#11], https://github.com/CS2113-AY1819S1-T16-4/main/pull/13[#13], https://github.com/CS2113-AY1819S1-T16-4/main/pull/14[#14], https://github.com/CS2113-AY1819S1-T16-4/main/pull/15[#15], https://github.com/CS2113-AY1819S1-T16-4/main/pull/97[#97], https://github.com/CS2113-AY1819S1-T16-4/main/pull/109[#109], https://github.com/CS2113-AY1819S1-T16-4/main/pull/235[#235], https://github.com/CS2113-AY1819S1-T16-4/main/pull/240[#240])
+*** Updated User Guide to ensure `add`, `edit`, `find` and `filter` commands alongside the fields added by me are up to date (Pull requests:  https://github.com/CS2113-AY1819S1-T16-4/main/pull/95[#95], https://github.com/CS2113-AY1819S1-T16-4/main/pull/156[#156], https://github.com/CS2113-AY1819S1-T16-4/main/pull/167[#167], https://github.com/CS2113-AY1819S1-T16-4/main/pull/172[#172], https://github.com/CS2113-AY1819S1-T16-4/main/pull/183[#183])
 ** Community:
-*** PRs reviewed (with non-trivial review comments). (Pull requests: https://github.com/CS2113-AY1819S1-T16-4/main/pull/36[#36], https://github.com/CS2113-AY1819S1-T16-4/main/pull/69[#69], https://github.com/CS2113-AY1819S1-T16-4/main/pull/70[#70], https://github.com/CS2113-AY1819S1-T16-4/main/pull/73[#73], https://github.com/CS2113-AY1819S1-T16-4/main/pull/99[#99] https://github.com/CS2113-AY1819S1-T16-4/main/pull/123[#123], https://github.com/CS2113-AY1819S1-T16-4/main/pull/125[#125], https://github.com/CS2113-AY1819S1-T16-4/main/pull/130[#130], https://github.com/CS2113-AY1819S1-T16-4/main/pull/140[#140], https://github.com/CS2113-AY1819S1-T16-4/main/pull/182[#182], https://github.com/CS2113-AY1819S1-T16-4/main/pull/218[#218])
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-T16-4/main/pull/73[#73], https://github.com/CS2113-AY1819S1-T16-4/main/pull/123[#123], https://github.com/CS2113-AY1819S1-T16-4/main/pull/125[#125], https://github.com/CS2113-AY1819S1-T16-4/main/pull/130[#130], https://github.com/CS2113-AY1819S1-T16-4/main/pull/140[#140], https://github.com/CS2113-AY1819S1-T16-4/main/pull/182[#182], https://github.com/CS2113-AY1819S1-T16-4/main/pull/218[#218]
 *** Contributed to forum discussions (examples: https://github.com/nusCS2113-AY1819S1/forum/issues/40[1], https://github.com/nusCS2113-AY1819S1/forum/issues/62[2])
 *** Reported bugs and suggestions for other teams in the class (examples: https://github.com/CS2113-AY1819S1-W13-4/main/issues/106[1], https://github.com/CS2113-AY1819S1-W13-4/main/issues/104[2], https://github.com/CS2113-AY1819S1-W13-4/main/issues/99[3], https://github.com/CS2113-AY1819S1-W13-4/main/issues/109[4], https://github.com/CS2113-AY1819S1-W13-4/main/issues/122[5])
+** Tools:
+*** Travis-CI (https://github.com/CS2113-AY1819S1-T16-4/main/pull/3[#3]) and AppVeyor (https://github.com/LimYiSheng/main/pull/9[#9])
 
 == Contributions to the User Guide
 
@@ -60,6 +64,8 @@ include::../UserGuide.adoc[tag=editCommand]
 include::../UserGuide.adoc[tag=findCommand]
 
 include::../UserGuide.adoc[tag=filterCommand]
+
+include::../UserGuide.adoc[tag=yisheng2.0Feature]
 
 
 == Contributions to the Developer Guide

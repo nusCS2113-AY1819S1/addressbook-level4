@@ -27,7 +27,7 @@ to save and keep track of which storage has been committed changes, which is ess
 to work properly with multiple storages.
 (https://github.com/CS2113-AY1819S1-T16-4/main/pull/123[#123]). Enhanced `list` command to lists schedules as well
 (https://github.com/CS2113-AY1819S1-T16-4/main/pull/73[#73]).
-Enhanced `delete` command such that when a employee is deleted and all schedules linked to the person.
+Enhanced `delete` command such that when an employee is deleted and all schedules linked to the person.
 (https://github.com/CS2113-AY1819S1-T16-4/main/pull/73[#73])
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=zhihong8888&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[Reposense Dashboard]]
