@@ -1,20 +1,25 @@
 package seedu.address.request;
 
-import javafx.collections.ObservableList;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.request.requestcommands.RequestCommand;
-import seedu.address.request.requestmodel.RequestModel;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.*;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import javafx.collections.ObservableList;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.request.requestcommands.RequestCommand;
+import seedu.address.request.requestmodel.RequestModel;
+
+
+
 
 public class RequestCommandTest {
 
@@ -65,6 +70,9 @@ public class RequestCommandTest {
 
         // different Request -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
+    }
+
+    private void assertTrue(boolean equals) {
     }
 
     /**

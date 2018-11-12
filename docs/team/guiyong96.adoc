@@ -55,7 +55,6 @@ This application is optimized for those who prefer to work with Command Line Int
 |_This segment highlights my potential in writing documentations targeting end-users. Users are shown how the commands are called and the rationale behind these implementations._
 |===
 
-include::../UserGuide.adoc#311-requesting-for-a-book--request
 === Requesting for a book : `request`
 
 Requests to buy a book in the inventory. +

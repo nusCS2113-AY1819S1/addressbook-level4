@@ -3,25 +3,18 @@ package seedu.address.request;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static seedu.address.request.TypicalRequests.REQUEST_STUDENT_A;
 import static seedu.address.request.TypicalRequests.getTypicalRequestList;
-
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import seedu.address.request.ReadOnlyRequests;
-import seedu.address.request.Request;
-import seedu.address.request.RequestList;
 
 import java.util.Collection;
 import java.util.Collections;
 
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * RequestListTest is similar to BookInventoryTest.
