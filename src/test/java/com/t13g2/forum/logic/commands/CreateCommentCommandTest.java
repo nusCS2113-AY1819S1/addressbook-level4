@@ -2,6 +2,8 @@ package com.t13g2.forum.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -48,7 +50,7 @@ public class CreateCommentCommandTest {
         new CreateThreadCommand(null, null, null);
     }
 
-    /**
+    @Test
     public void execute_userLoggedInCreateComment_createCommentSuccess() throws Exception {
         //set the current logged in user as a user.
         User validUser = TypicalUsers.JANEDOE;
@@ -71,16 +73,25 @@ public class CreateCommentCommandTest {
         CreateCommentCommand createCommentCommand =
                 new CreateCommentCommand(forumThread.getId(), comment.getContent());
 
+        CommandResult commandResult = createCommentCommand.execute(model, commandHistory);
+
+        int commentId = 0;
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            List<Comment> commentList = unitOfWork.getCommentRepository().getCommentsByThread(forumThread);
+            commentId = commentList.get(1).getId();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         String message = "\n"
                 + "Module ID: " + moduleId + "\n"
                 + "Thread ID: " + forumThread.getId() + "\n"
-                + "Comment ID: " + comment.getId() + "\n"
+                + "Comment ID: " + commentId + "\n"
                 + "Comment Content: " + comment.getContent();
 
-        CommandTestUtil.assertCommandSuccess(createCommentCommand, model, commandHistory,
-                String.format(createCommentCommand.MESSAGE_SUCCESS, message), expectedModel);
+        assertEquals(String.format(createCommentCommand.MESSAGE_SUCCESS, message), commandResult.feedbackToUser);
     }
-    */
+
     @Test
     public void execute_notLoggedIn_createCommentFailed() throws Exception {
         //set the current logged in user as null.
