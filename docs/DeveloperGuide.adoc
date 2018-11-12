@@ -1118,12 +1118,12 @@ All following sections assume that the user is currently logged into FreeTime.
 
 . Exporting a timetable
 
-.. Prerequisite: Has previously added a timeslot to the user's timetable
+.. Prerequisite: The User's timetable is not empty.
 .. Test case: `select me`, followed by `export file` +
    Expected: The user's timetable is exported to `[root]/import_export/file.ics`, where `[root]` represents the directory where FreeTime.jar is located.
 
 . Importing a timetable
 
-.. Prerequisite: Has previously exported a timetable with the file name `file.ics`, or has generated an .ics file using NUSMods, moved said file to the `import_export` directory under the root directory, and renamed the file to `file.ics` +
-.. Test case: `import file` +
-   Expected: The user's timetable is imported from the .ics file and should be shown on the timetable panel.
+.. Prerequisite: An `nusmods_calendar.ics` file should be present in the `import_export` directory. This directory is located in the root directory (where the FreeTime.jar file resides). The file should have been downloaded from NUSMODS. +
+.. Test case: `import nusmods_calendar` +
+   Expected: The user's timetable is imported from the .ics file. The timetable will be shown on the timetable panel.
