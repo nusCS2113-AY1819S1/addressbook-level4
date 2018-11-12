@@ -5,64 +5,75 @@
 
 == PROJECT: NUSSU Connect
 
-
-== Introduction
+=== Introduction
 image::longdivider.png[align="center", width = "1000"]
-This Portfolio is a documentation of the contributions that I have made for this project, titled NUSSU Connect.
 
-NUSSU Connect is a CLI application mainly targeted towards executive committee (exco) members of the NUS Student Union (NUSSU).
-Being representatives of the NUS student body, the exco members has a part in many projects and initiatives.
-This application therefore aims to help them perform some of these miscellaneous tasks that often comes from these projects much more easily.
+This Portfolio is a documentation of the contributions that I have made for this project, titled NUSSU-Connect.
 
-To do so, the application comes with several features. This includes budgets/expenses management, human resource allocation and managing of important contacts.
+NUSSU-Connect is a resource management application targeting the members of the NUS Student Union (NUSSU). This application aims to simplify the tedious and time consuming management duties that an average club carries out. Hence the functions of our app are :
+*Storing* the details about every member of the NUSSU, facilitating a comprehensive *search* feature and *financial logistics management*, integrated in a platform that supports *multi-level user access*.
+
+NUSSU-Connect aims to be an *Efficient*, *Intuitive* and most of all *Secure* application.
+
 The original source code of this project is the https://github.com/se-edu/[AddressBook-Level4] project created by SE-EDU initiative, and hence,
 it also comes with some features from the AB4 project.
 
-== Summary of contributions
+=== Summary of contributions
 image::longdivider.png[align="center", width = "1000"]
-My main contribution to this project is the Budgeting Feature. This intended purpose of this feature is to help the NUSSU treasurers allocate budgets fairly and equitably to all the clubs under the NUSSU based on the budget calculation data collected from the clubs.
+
+My main contribution to this project is the Budgeting Feature. The intended purpose of this feature is to help the NUSSU treasurers allocate budgets fairly and equitably to all the clubs under the NUSSU based on the budget calculation data collected from the clubs.
+
+The main aim of the budgeting feature is to boost the efficiency of one aspect of financial logistics management. Hence, the feature was designed keeping in mind *ease of use* for the users, and is an attempt to *speed up* one of the more tedious management duties performed by clubs.
 
 I will further elaborate on my contributions in the following sections.
 
-* *Major enhancement*: added *the ability for club members to submit data for budget calculation* and *calculation of the final budgets to be allocated.*
+==== Major enhancement: added the ability for club members to submit data for budget calculation and calculation of the final budgets to be allocated
 
 ** What it does: Allows the members of clubs to submit the data - the number of events that the club is planning to hold and the expected turnout of each of these events - for the calculation of their club's budget using the `budget` command. Once data from all of the clubs has been collected NUSSU treasurers can use the `calculatebudget` command to calculate and allocate a fair and equitable budget for each of the clubs based on the total available budget.
 
-** Justification: Managing finances is one of the most important and time consuming functions of an organization. The budgeting feature implemented in NUSSU-Connect is a simple and less tedious alternative to the present budget allocation system in place in the NUSSU. It allows
+** Justification: Managing finances is one of the most important and time consuming functions of an organization. The budgeting feature implemented in NUSSU-Connect is a simple and less tedious alternative to the present budget allocation system in place in the NUSSU.
+This feature helps its users save on precious time, which can now be spent on other tasks which require their attention.
 
 ** Highlights: The `calculatebudget` command was created almost entirely from scratch. The algorithm used to equitably calculate budgets is entirely my design.
 
-* *Minor enhancement*: added a feature that *allows club members and NUSSU treasurers to view the budget allocated to a club*.
+==== Minor enhancement: added a feature that allows club members, NUSSU treasurers and club Presidents to view the budget allocated to a club
 
 ** What it does: Using the `viewbudget` command, club members and NUSSU treasurers can enter the name of a club and view its budget.
 
 ** Justification: This command is to be used by members of clubs to view the budget allocated to their club so that they can manage their club's expenses accordingly.
+The main aim of the budgeting feature is to boost the efficiency of one aspect of
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+==== Code contributed: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=sanjukta99[Sanjukta Saha]
 
-* *Other contributions*:
+==== Other contributions:
 
 ** Documentation:
 *** Created a logo and banner for our project, NUSSU-Connect
-*** Edited the AboutUs Minor, UserGuide and DeveloperGuide documents. (Pull Requests https://github.com[#12], https://github.com[#14], https://github.com[#23])
+*** Edited the README document with some of our product's notable features.
+*** Made cosmetic tweaks to the AboutUs, UserGuide and DeveloperGuide documents. (Pull Requests https://github.com/CS2113-AY1819S1-F09-1/main/pull/56[56], https://github.com/CS2113-AY1819S1-F09-1/main/pull/102[102], https://github.com/CS2113-AY1819S1-F09-1/main/pull/103[103],
+https://github.com/CS2113-AY1819S1-F09-1/main/pull/137[137], etc.)
+*** Edited the class diagrams for Model and Storage to include the changes made with regards to the ClubBudgetElementsBook and FinalBudgetsBook.
 
-**  Others:
+**  Community:
 *** Helped teammates edit variable and constant names in order to fit the naming conventions of the Java coding standard.
+*** Made non-trivial comments on team member's pull request (Pull request https://github.com/CS2113-AY1819S1-F09-1/main/pull/122[122])
+*** Identified functionality and documentation bugs in another team's product (Issues https://github.com/CS2113-AY1819S1-T09-1/main/issues/122[122], https://github.com/CS2113-AY1819S1-T09-1/main/issues/114[114],
+https://github.com/CS2113-AY1819S1-T09-1/main/issues/111[111],
+https://github.com/CS2113-AY1819S1-T09-1/main/issues/100[100],
+https://github.com/CS2113-AY1819S1-T09-1/main/issues/107[107],
+https://github.com/CS2113-AY1819S1-T09-1/main/issues/102[102], and https://github.com/CS2113-AY1819S1-T09-1/main/issues/118[118])
 *** Helped a classmate from another project group implement a way to list items according to categories.
 
-== Contributions to the User Guide
+=== Contributions to the User Guide
 image::longdivider.png[align="center", width = "1000"]
 
-The following sections will detail the budget allocation process while providing guidance to the users on how to use the commands that I have implemented.
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_The following section will detail the budget allocation process while providing guidance to the users on how to use the commands that I have implemented. This section is my contribution to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
 include::../UserGuide.adoc[tag=budget]
 
-
-
-== Contributions to the Developer Guide
+=== Contributions to the Developer Guide
 image::longdivider.png[align="center", width = "1000"]
 
 |===
