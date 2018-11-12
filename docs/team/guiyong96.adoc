@@ -39,17 +39,17 @@ This application is optimized for those who prefer to work with Command Line Int
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=guiyong96[Functional/Test code]]
 
-* *Other contributions*:
+*Other contributions*:
 
-** Project management:
-*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
-** Miscellaneous:
-*** Perform refactoring for the majority of the code.
-*** Morphed storage portion of addressbook 4.
-*** Rearranging user guide layout.
-** Community:
-*** Addressed bugs found by peers in bug testing session.
-*** Several parts of the request feature implemented were adopted by others.
+* Project management:
+** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
+* Miscellaneous:
+** Perform refactoring for the majority of the code.
+** Morphed storage portion of AB4.
+** Rearranged user guide layout.
+* Community:
+** Addressed bugs found by peers in bug testing session.
+** Several parts of the request feature implemented were adopted by others.
 
 == Contributions to the User Guide
 
@@ -131,14 +131,14 @@ A request object consists of three objects, Isbn, Email, and Quantity.
 image::RequestModelClassDiagram.jpg[width="800"]
 
 The implementation is similar to 2.4. Model component.
-Note that XmlAdaptedTag class is removed as request has no tags.
+Note that `XmlAdaptedTag` class is removed as request has no tags.
 
 ===== RequestStorage component
 
 .Structure of the `RequestStorage` Component
 image::RequestStorageClassDiagram.jpg[width="800"]
 
-Likewise, this implementation is similar to 2.5. Storage component.
+Likewise, this implementation is similar to 2.5. Storage Component.
 
 ===== Aspect: How Request command is implemented
 
@@ -147,7 +147,7 @@ image::HighLevelRequestSequenceDiagram.png[width="800"]
 
 * **Similar to `Add` Command**
 ** After request command is called by the user, it gets parsed through a `RequestListParser`.
-** The UI also prompts to `EventCenter` and logs out that the `RequestList` has changed.
+** The UI also prompts to `EventCenter` and shows that the `RequestList` has changed.
 ** `Request` object is created and added to the model.
 ** The storage then receives the request and returns message to model, which is then transferred to the UI.
 ** This notifies the user that the request is successfully submitted.
