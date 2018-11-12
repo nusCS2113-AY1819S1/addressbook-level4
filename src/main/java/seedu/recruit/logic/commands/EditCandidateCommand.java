@@ -128,9 +128,9 @@ public class EditCandidateCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(candidateToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(candidateToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(candidateToEdit.getAddress());
-        Job updatedJob = editPersonDescriptor.getJob().orElse(candidateToEdit.getJob());
+        Job updatedJob = editPersonDescriptor.getJob().orElse(candidateToEdit.getDesiredJob());
         Education updatedEducation = editPersonDescriptor.getEducation().orElse(candidateToEdit.getEducation());
-        Salary updatedSalary = editPersonDescriptor.getSalary().orElse(candidateToEdit.getSalary());
+        Salary updatedSalary = editPersonDescriptor.getSalary().orElse(candidateToEdit.getExpectedSalary());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(candidateToEdit.getTags());
 
         return new Candidate(updatedName, updatedGender, updatedAge, updatedPhone, updatedEmail, updatedAddress,

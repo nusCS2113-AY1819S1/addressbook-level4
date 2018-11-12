@@ -50,7 +50,7 @@ public class AddJobDetailsCommandIntegrationTest {
     @Test
     public void execute_duplicateJobOffer_throwsCommandException() {
         JobOffer jobOffer = new JobOfferBuilder().withCompanyName(model.getCompanyFromIndex(0)
-                .getCompanyName().toString()).build();
+                .getName().toString()).build();
         model.addJobOffer(jobOffer);
 
         assertCommandFailure(new AddJobDetailsCommand(jobOffer), model, commandHistory,

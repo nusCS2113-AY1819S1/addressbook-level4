@@ -443,7 +443,7 @@ public class CommandTestUtil {
     public static void showCompanyAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyList().size());
         Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
-        final String[] splitName = company.getCompanyName().value.split("\\s+");
+        final String[] splitName = company.getName().value.split("\\s+");
         model.updateFilteredCompanyList(new CompanyContainsFindKeywordsPredicateBuilder(
                 " c/" + splitName[0]).getCompanyPredicate());
         assertEquals(1, model.getFilteredCompanyList().size());

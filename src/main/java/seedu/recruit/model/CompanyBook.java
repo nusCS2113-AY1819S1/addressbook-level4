@@ -136,7 +136,7 @@ public class CompanyBook implements ReadOnlyCompanyBook {
         companyList.remove(key);
         List<JobOffer> jobOffersToRemove = new ArrayList<>();
         for (JobOffer jobOffer: companyJobList) {
-            if (jobOffer.getCompanyName().equals(key.getCompanyName())) {
+            if (jobOffer.getCompanyName().equals(key.getName())) {
                 jobOffersToRemove.add(jobOffer);
             }
         }

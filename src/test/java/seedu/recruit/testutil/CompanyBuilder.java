@@ -35,7 +35,7 @@ public class CompanyBuilder {
      * Initializes the CompanyBuilder with the data of {@code companyToCopy}.
      */
     public CompanyBuilder(Company companyToCopy) {
-        companyName = companyToCopy.getCompanyName();
+        companyName = companyToCopy.getName();
         phone = companyToCopy.getPhone();
         email = companyToCopy.getEmail();
         address = companyToCopy.getAddress();

@@ -16,7 +16,7 @@ import seedu.recruit.model.commons.Phone;
 public class Company {
 
     // Identity fields
-    private final CompanyName companyName;
+    private final CompanyName name;
 
     // Data fields
     private final Address address;
@@ -27,17 +27,17 @@ public class Company {
      * Every field must be present and not null.
      */
 
-    public Company (CompanyName companyName, Address address, Email email, Phone phone) {
-        requireAllNonNull(companyName, address, email, phone);
-        this.companyName = companyName;
+    public Company (CompanyName name, Address address, Email email, Phone phone) {
+        requireAllNonNull(name, address, email, phone);
+        this.name = name;
         this.address = address;
         this.email = email;
         this.phone = phone;
     }
 
 
-    public CompanyName getCompanyName() {
-        return companyName;
+    public CompanyName getName() {
+        return name;
     }
 
     public Address getAddress() {
@@ -64,7 +64,7 @@ public class Company {
         }
 
         return otherCompany != null
-                && otherCompany.getCompanyName().equals(getCompanyName());
+                && otherCompany.getName().equals(getName());
     }
 
     /**
@@ -84,7 +84,7 @@ public class Company {
         }
 
         Company otherCompany = (Company) other;
-        return otherCompany.getCompanyName().equals(getCompanyName())
+        return otherCompany.getName().equals(getName())
                 && otherCompany.getPhone().equals(getPhone())
                 && otherCompany.getEmail().equals(getEmail())
                 && otherCompany.getAddress().equals(getAddress());
@@ -93,14 +93,14 @@ public class Company {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(companyName, address, email, phone);
+        return Objects.hash(name, address, email, phone);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Company Name: ")
-                .append(getCompanyName())
+                .append(getName())
                 .append(" Address: ")
                 .append(getAddress())
                 .append(" Email: ")

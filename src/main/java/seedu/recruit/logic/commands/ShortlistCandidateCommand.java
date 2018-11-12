@@ -47,7 +47,7 @@ public class ShortlistCandidateCommand extends Command {
         // If selected candidate already exists in shortlisted candidate list of the selected job offer
         if (selectedJobOffer.getUniqueCandidateList().contains(selectedCandidate)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_CANDIDATE_SHORTLISTED,
-                    selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value)
+                    selectedJobOffer.getJob().value, selectedCompany.getName().value)
                     + MESSAGE_USAGE);
         }
 
@@ -64,7 +64,7 @@ public class ShortlistCandidateCommand extends Command {
             ShortlistCandidateInitializationCommand.isDoneShortlisting();
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, selectedCandidate.getName().fullName,
-                selectedJobOffer.getJob().value, selectedCompany.getCompanyName().value));
+                selectedJobOffer.getJob().value, selectedCompany.getName().value));
     }
 
     /**
@@ -77,7 +77,7 @@ public class ShortlistCandidateCommand extends Command {
         Tag shortlistedTag = new Tag("SHORTLISTED");
         tags.add(shortlistedTag);
         return new Candidate(shortlistee.getName(), shortlistee.getGender(), shortlistee.getAge(),
-                shortlistee.getPhone(), shortlistee.getEmail(), shortlistee.getAddress(), shortlistee.getJob(),
-                shortlistee.getEducation(), shortlistee.getSalary(), tags);
+                shortlistee.getPhone(), shortlistee.getEmail(), shortlistee.getAddress(), shortlistee.getDesiredJob(),
+                shortlistee.getEducation(), shortlistee.getExpectedSalary(), tags);
     }
 }

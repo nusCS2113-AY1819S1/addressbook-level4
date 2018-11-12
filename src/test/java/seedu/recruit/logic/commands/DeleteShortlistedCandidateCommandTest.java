@@ -64,7 +64,7 @@ public class DeleteShortlistedCandidateCommandTest {
         }
 
         String expectedMessage = String.format(DeleteShortlistedCandidateCommand.MESSAGE_DELETE_CANDIDATE_SUCCESS,
-                ALICE.getName(), CASHIER_AUDI.getJob(), AUDI.getCompanyName());
+                ALICE.getName(), CASHIER_AUDI.getJob(), AUDI.getName());
 
         assertCommandSuccess(new DeleteShortlistedCandidateCommand(INDEX_FIRST), model, commandHistory,
                 expectedMessage, expectedModel);

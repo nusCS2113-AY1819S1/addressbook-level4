@@ -141,7 +141,7 @@ public class FindCompanyCommandSystemTest extends CompanyBookSystemTest {
         showAllCompanies();
         selectCompany(Index.fromOneBased(1));
         assertFalse(getCompanyJobDetailsPanel().getHandleToSelectedCard().getName()
-                .equals(DODGE.getCompanyName().value));
+                .equals(DODGE.getName().value));
         command = FindCompanyCommand.COMMAND_WORD + " Dodge";
         ModelHelper.setCompanyFilteredList(expectedModel, DODGE);
         assertCommandSuccess(command, expectedModel);

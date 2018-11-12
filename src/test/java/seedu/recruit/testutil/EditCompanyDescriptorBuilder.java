@@ -27,7 +27,7 @@ public class EditCompanyDescriptorBuilder {
      */
     public EditCompanyDescriptorBuilder(Company company) {
         descriptor = new EditCompanyDescriptor();
-        descriptor.setName(company.getCompanyName());
+        descriptor.setName(company.getName());
         descriptor.setPhone(company.getPhone());
         descriptor.setEmail(company.getEmail());
         descriptor.setAddress(company.getAddress());
