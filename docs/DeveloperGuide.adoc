@@ -477,7 +477,6 @@ image::FilterSequenceDiagram.png[width="800"]
 *** Pros: Easier to manage, `test` method should look neater.
 *** Cons: Takes O(N) to iterate through the `List`, and does not check for duplicates.
 
-image::FilterSequenceDiagram.png[width="800"]
 // end::filter[]
 
 // tag::edit[]
