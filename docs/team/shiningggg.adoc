@@ -3,11 +3,7 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: Something Daily
-
----
-
-== Overview
+== Overview: Something Daily
 
 Something Daily is a desktop application using command-line interface. It allows user to add, delete or edit the task and expenditure. It also provides advanced features such as getting spending advice for following days and checking the tasks information and expenditure records of a particular day.
 
