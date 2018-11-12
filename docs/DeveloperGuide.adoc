@@ -1334,10 +1334,10 @@ Expected: Adds to event at index 1 and replies a comment "Hello" to line 1 of th
 .. Test case: `replyComment 0 C/Hello L/1` + 
 Expected: The Command Result box will return an invalid format and no changes will occur.
 
-.. Test case: `replyComment x C/Hello L/1`, x < 0 or x > event list size + 
+.. Test case: `replyComment x C/Hello L/1`, x < 0 or x > event list size. + 
 Expected: Similar to previous
 
-.. Test case: `replyComment 1 C/Hello L/x`, where x < = 0 or x > number of comments in the comment section + 
+.. Test case: `replyComment 1 C/Hello L/x`, where x < = 0 or x > number of comments in the comment section. + 
 Expected: Similar to previous
 
 .. Test case: `replyComment x C/y L/z`, where x, y or z does not exist. + 
