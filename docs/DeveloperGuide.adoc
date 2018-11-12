@@ -1294,6 +1294,7 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+=======
 * 3a. The given tag does not exist.
 +
 [none]
@@ -1363,6 +1364,7 @@ Use case resumes at step 2.
 +
 Use case ends.
 
+// tag::accountUseCase[]
 [discrete]
 === Use case: Login
 
@@ -1449,6 +1451,7 @@ Use case ends.
 ** 3a1. StockList shows an error message.
 +
 Use case resumes at step 2.
+// end::accountUseCase[]
 
 // tag::saveopen[]
 
@@ -1598,6 +1601,9 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
+_{ more test cases ... }_
+
+// tag::accountTesting[]
 === Logging in
 
 . Logging in while all accounts are listed
@@ -1640,4 +1646,13 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: No account is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect deleteAccount commands to try: `deleteAccount`, `deleteAccount x` (where x is larger than the account list size) +
    Expected: Similar to previous.
+// end::accountTesting[]
+
+=== Saving data
+
+. Dealing with missing/corrupted data files
+
+.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+
+_{ more test cases ... }_
 
