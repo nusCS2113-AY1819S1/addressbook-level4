@@ -10,6 +10,7 @@ import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.DeconflictTimeTable;
 import seedu.address.model.person.TimeTable;
 
 /**
@@ -28,9 +29,11 @@ public class ExportCommand extends Command {
             + " my_export_file_name";
 
     public static final String MESSAGE_EXPORT_SUCCESS = "Exported timetable to %1$s.";
-    public static final String MESSAGE_EMPTY = "Timetable is empty. Export failed.";
+    public static final String MESSAGE_EMPTY = "Export Failed: Current Timetable is empty! ";
     public static final String MESSAGE_IO_ERROR =
-            "Failed to write the timetable to the path: ";
+            "Export Failed: Failed to write the timetable to the path: ";
+    public static final String MESSAGE_INVALID_TIMETABLE=
+            "Export Failed: Please select someone's timetable! ";
     private final Path filePath;
 
     /**
@@ -52,6 +55,10 @@ public class ExportCommand extends Command {
         TimeTable timeTable = model.getTimeTable();
         if (timeTable.isEmpty()) {
             throw new CommandException(MESSAGE_EMPTY);
+        }
+        //do not allow export free-timetable
+        if (timeTable instanceof DeconflictTimeTable) {
+            throw new CommandException(MESSAGE_INVALID_TIMETABLE);
         }
         try {
             IcsUtil.getInstance().saveTimeTableToFile(timeTable, zoneIdSingapore, filePath);

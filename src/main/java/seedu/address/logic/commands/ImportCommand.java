@@ -41,8 +41,8 @@ public class ImportCommand extends Command {
             + "\nPlease check that the file is not empty, and contains timetable data.";
     public static final String MESSAGE_IO_ERROR =
             "Failed to read the file at: %1$s.\nPlease check the file exists.";
-    public static final String MESSAGE_FILE_OVERLAP_TIMESLOT = "There was at least 1 overlapping timeslot "
-            + "in the file: %1$s. Overlapping timeslots are currently not supported in FreeTime!";
+    public static final String MESSAGE_FILE_OVERLAP_TIMESLOT = "Import failed because there was at least 1 overlapping timeslot "
+            + "in the file: %1$s. \nOverlapping timeslots are currently not supported in FreeTime!";
     private final Path filePath;
 
     /**
