@@ -442,6 +442,23 @@ Step 6. The user executes the `DeleteLoanListCommand` to delete the loan list wh
 * The `ArrayList#remove()` is called to remove the loan list entry
 * The `LoanListCommand#updateXmlLoanListFile()` is called to save the changes in storage.
 
+==== Design Considerations
+
+===== Aspect: How StatusCommand executes
+
+* **Alternative 1:** Storing the items as an Item instead of SimpleItem.
+** Pros: Easier to implement as I would not have to create a new class.
+** Cons: This slows down the code, and it contains redundant information that is not required.
+* **Alternative 2:** Iterate through the item list 3 times, one for each Status field.
+** Pros: We would not have to create 3 ArrayList to store the items as they can be printed out immediately.
+** Cons: This slows down the code significantly, and makes the code longer.
+
+===== Aspect: How ChangeStatusCommand executes
+
+* **Alternative 1:** Not creating a ChangeStatusDescriptor class to store the user inputs
+** Pros: Easier to implement as I would not have to create a new class.
+** Cons: This would make the code extremely messy as there would be multiple parameters to handle.
+
 // end::statusfeature[]
 
 // tag::login[]
