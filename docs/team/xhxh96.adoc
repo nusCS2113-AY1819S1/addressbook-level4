@@ -6,13 +6,9 @@
 == Health Book
 === Overview
 
-Health care professionals deal with hundreds and thousands of patients on a daily basis. Not only do they have to attend to the patients physically, they need to have a clear understanding of each patient's health related issues, in addition to basic bio data.
-
-Currently, most health care professionals rely on paper documents that contain such data for each patients. Not only do they have to perform the menial task of searching through the piles of patient documents, sometimes, they have to look through the entire patient document to get what they need to know about the patient.
+Health care professionals deal with hundreds and thousands of patients on a daily basis. Not only do they have to attend to the patients physically, they need to have a clear understanding of each patient's health related issues, in addition to basic bio data. Currently, most health care professionals rely on paper documents that contain such data for each patients. Not only do they have to perform the menial task of searching through the piles of patient documents, sometimes, they have to look through the entire patient document to get what they need to know about the patient.
 
 Health Book is aimed at solving such administrative woes of health care professionals. By digitizing such data into an application, health care professionals can easily retrieve the required patient data.
-
-The application provides both a Command Line Interface (CLI) for input of data and a Graphical User Interface (GUI) for displaying of patient's personal details and health-related information. The application is fully written in Java, allowing cross-platform compatibility.
 
 == Summary of Contributions
 

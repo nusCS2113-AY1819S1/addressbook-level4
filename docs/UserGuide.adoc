@@ -161,7 +161,7 @@ Add/Edit the following additional information: NRIC, Date Of Birth (in DD-MMY-YY
 gender, occupation, and marital status. +
 
 [NOTE]
-`age` field will be auto-calculated once Date Of Birth is populated. It will be displayed on the UI in parenthesis under Date of Birth field.+
+`age` field will be auto-calculated once Date Of Birth is populated. It will be displayed on the UI in parenthesis under Date of Birth field.
 
 .Using the addinfo command. Notice that the age is displayed beside the date of birth in parenthesis.
 image::addinfo.png[width="600"]
