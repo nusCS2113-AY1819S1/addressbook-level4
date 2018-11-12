@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearScheduleCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -141,6 +142,16 @@ public class TrieTest {
         assertTrue(exWordList.containsAll(dictionary.getListOfWords("ex")));
         assertFalse(exWordList.containsAll(dictionary.getListOfWords("e")));
 
+    }
+
+    @Test
+    public void withSameStartingNames_getListOfWords() {
+        dictionary.insert(ClearCommand.COMMAND_WORD);
+        dictionary.insert(ClearScheduleCommand.COMMAND_WORD);
+        List<String> cWordList = new ArrayList<>();
+        cWordList.add(ClearCommand.COMMAND_WORD);
+        cWordList.add(ClearScheduleCommand.COMMAND_WORD);
+        assertTrue(cWordList.containsAll(dictionary.getListOfWords("c")));
     }
 
 }

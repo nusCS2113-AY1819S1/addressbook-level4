@@ -3,8 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -137,8 +140,14 @@ public class AddressBookParser {
             return new TodoCommandParser().parse(arguments);
 
         default:
-            String suggestion = new WrongCommandSuggestion().getSuggestion(commandWord);
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND + System.lineSeparator() + suggestion);
+            List<String> listOfCommands = new WrongCommandSuggestion().getSuggestions(commandWord);
+            if (listOfCommands == null) {
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND + "\n" + WrongCommandSuggestion.NO_SUGGESTION);
+            } else {
+                String suggestionsToString = StringUtils.join(listOfCommands, ", ");
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND + '\n'
+                    + String.format(WrongCommandSuggestion.SUGGESTION_HEADER, suggestionsToString));
+            }
         }
     }
 
