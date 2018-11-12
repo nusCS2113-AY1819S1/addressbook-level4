@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
 
 == Setting up
 
@@ -136,7 +136,7 @@ Each of the four components
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
-image::LogicClassDiagram.png[width="800"]
+image::LogicClassDiagram_new.png[width="800"]
 
 [discrete]
 ==== Events-Driven nature of the design
@@ -195,10 +195,6 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
-
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
@@ -280,13 +276,14 @@ For the period of 30 days, `-m` is appended to the command. (e.g. `costs -m`)
 
 The following is the sequence of steps when the user enters an analysis command with a time period:
 
-*Step 1.* User enters an analysis command (e.g. AnalyseCostsCommand). +
-*Step 2.* The appropriate parser parses the time period parameter, and assigns the respective `AnalysisPeriodType`
-value to the analysis command. +
-*Step 3.* The analysis command is executed, and the `AnalysisPeriodType` value is passed to the `ModelManager`. +
-*Step 4.* In the `ModelManager`, the relevant Predicate for the time period is retrieved.
+*Step 1.* User enters an analysis command (e.g. `costs -m`).
 
-The available Predicates corresponding to each `AnalysisPeriodType` are:
+*Step 2.* The appropriate parser (e.g. `AnalyseCostsCommandParser`) parses the time period parameter,
+and retrieves the `AnalysisPeriodType` value corresponding to the time period.
+
+*Step 3.* The relevant `TransactionPeriodPredicate` for the `AnalysisPeriodType` value is retrieved. It is assigned to an Analysis Command (e.g. `AnalyseCostsCommand`).
+
+The available `TransactionPeriodPredicate` s corresponding to each `AnalysisPeriodType` are:
 
 * `DAY`: `TransactionInADayPredicate`
 * `WEEK`: `TransactionInSevenDaysPredicate`
@@ -294,15 +291,19 @@ The available Predicates corresponding to each `AnalysisPeriodType` are:
 
 These are retrieved using `AnalysisPeriodType#getPeriodFilterPredicate()`.
 
-*Step 5.* The Predicate retrieved is passed to the filtered transaction list.
+*Step 4.* The analysis command is executed, and the `TransactionPeriodPredicate` predicate is passed to the appropriate `ModelManager`.
+This is done through the `analyseCosts()` method in the appropriate `ModelManager`.
+
+*Step 5.* In the appropriate `ModelManager` (Accountant or Manager), the predicate is passed to the filtered transaction list.
 This is in order to filter the transactions by their dates such that
 the filtered transaction list only contains transactions with dates within the relevant period.
 
 `FilteredList<Transaction>` handles the filtering using the given predicate.
 
 
-// INSERT DIAGRAM!!!!!!
+The following sequence diagram shows how the first part of the `AnalyseCostCommand` works, as described above:
 
+image::AnalyseCostsSequenceDiagram_p1.png[width="800"]
 
 ==== Implementation of `Analysis#analyseCost()`
 The actual analysis of costs continues from the the filtering of the filtered transaction list.
@@ -316,7 +317,8 @@ to the costs of the company. +
 
 Overall, the filtered transaction list will also be updated in the UI.
 
-*Step 2.* `ModelManager` passes control to the `AnalysisManager`. +
+*Step 2.* `ModelManager` passes control to the `AnalysisManager`.
+
 *Step 3.* In `AnalysisManager`, the helper method `AnalysisManager#calculateTotalCost()` is called
 to compute the total costs of the filtered transactions.
 
@@ -362,22 +364,40 @@ It is then returned to the calling function.
 ==== Design Considerations
 Aspect: Filtering the transactions by date
 
-* *Current implementation:* Passes a predicate to the filtered transaction list, before performing analyses using that list
+* *Current implementation:* Pass predicates to the filtered transaction list, before performing analyses using that list
 ** Pros:
 *** Extensible as more Predicates can be created and passed to the filtered transaction list to filter
 the transactions by different facets.
 *** Enhances reusability especially of the `updateFilteredTransactionList(Predicate predicate)` method.
 *** Allows the transaction list panel in the UI to be updated automatically.
 
-* Cons: We must ensure that the implementation of each Predicate is correct.
+** Cons: We must ensure that the implementation of each Predicate is correct.
 
 * *Alternative:* Loop through all transactions in the `TransactionList`, and check if the transaction date
 is within the desired time period
 ** Pros: Easy to implement.
 ** Cons: May have time performance issues if there are many transactions.
-
 // end::analyses[]
 
+//tag::commandPartition[]
+=== Command partition
+
+==== Current Implementation
+
+The command partition is an implementation of the role system.
+
+The `model` contain all the
+API that is common for every user. `StockTakerModel` contains API for for stockTaker. Similar
+idea applied to `AccountantModel` and `ManagerModel`. However, `AdminModel` extends all three models.
+As such, `adminModel` will contains all APIs.
+
+.Class diagram for Login related model
+image::LoginUMLDiagram/Logic-UML-design-Login.png[width="800"]
+
+After login, `logicManager` will assign a particular role to user according to their
+`authenticationLevel`. As such, it will prevent one role from accessing other role's
+command.
+//end::commandPartition[]
 
 //tag::login[]
 === Login/logout feature
@@ -386,28 +406,41 @@ is within the desired time period
 
 The login feature is a standalone feature that enable security check on user. It has a fxml page that name `LoginPage.fxml` at `main\resources\view`
 The controller of the fxml page named `LoginController` at `seedu.address\controller`
+The model of is at `loginInfo` which storage the format in JSON with the help of `JsonUtils`.
+Also, there is a `loginInfoManager` which include all the API for `loginInfo`.
+As such, this is a design that fulfil the Model-View-Controller pattern.
 
-Given below is a class diagram for login function
+Given below is a class diagram for login function. LoginUtils has attributes of `LoginInfoModel`
+ `userName` and `Password`. It also use `passwordUtils` to hashed verify the password with `LoginInfoModel`
 
+.Class diagram for Login related Utils
 image::LoginUMLDiagram/Login_Class_Diagram.png[width="800"]
 
 
 Given below is an example usage scenario and how login mechanism behave at each step.
 
-image::LoginUMLDiagram/Login_sequence_diagram.png[width="800"]
-The `LoginController` will check for username and password will the LoginUtils
-Once the username and password is correct, it will continue to `InventoryListInitializer`.
-It will also start the ui.
+image::LoginUMLDiagram/Login_sequence_diagram.png[width="600" height ="400"]
+The `LoginController` will check for username and password will the `LoginUtils`.
 
 
-image::LoginUMLDiagram/LoginUtils_Sequence_Diagram.png[width="800"]
-Given below is an example of access login information for `loginInfoList.json` during initiation of the application.
+image::LoginUMLDiagram/LoginUtils_Sequence_Diagram.png[width="600" height ="400"]
 
-image::LoginUMLDiagram/LoginList_Read_Sequence_Diagram.png[width="800"]
+=== Save information about user account
+Given below is a structure of `Model` components that is related to login feature.
+The model stores loginInfo of the user.
 
-Given below is an example of relogin under different account. `InventoryListInitializer` will call three event list below.
+image::LoginUMLDiagram/Logic_LoginInfo_Model.png[width="800" height "200"]
 
-image::LoginUMLDiagram/ReLoginEvent_sequence_diagram.png[width="800"]
+The sequence diagram below shows the interactions within the logic components for the execuion of `createAccount` command.
+
+
+image::LoginUMLDiagram/createAccountSequenceDiagram.png[width="800"]
+
+Given below is an sequence diagram of access login information for `loginInfoList.json` during initiation of the application.
+The program also save the the login information to `loginInfoList.json` when `logout` or `exit`.
+
+image::LoginUMLDiagram/Logic-UML-design-ReadLoginInfoList.png[width="800" height ="400"]
+
 
 ==== Design Considerations
 ===== Aspect: How to store the data
@@ -421,15 +454,14 @@ image::LoginUMLDiagram/ReLoginEvent_sequence_diagram.png[width="800"]
 ===== Aspect: Data format for store data
 
 * **Alternative 1 (current choice):** Store in Json file.
-** Pros: Json is popular and have have support online.
+** Pros: Json is popular and have many support online.
 ** Pros :JSON is relatively easier to implement compared to XML
 ** Cons: Have to write serialized method for JSON file.
 * **Alternative 2:** Store in XML file
 ** Pros: Classic and matured product
 ** Pros: Have serialized code in original ab4.
-** Cons: It has many rule to set before implementation.
+** Cons: It has many rules to set before implementation.
 //end::login[]
-
 
 // tag::inventory[]
 === Inventory Management
@@ -508,95 +540,7 @@ Aspect: Facilitating the Buy and Sell Commands
 ** Pros: When the `UniqueBatchList` is sorted differently, methods do not have to be rewritten.
 ** Cons: May have time performance issues if there are many batches.
 
-
 // end::inventory[]
-
-// tag::undoredo[]
-=== Undo/Redo feature
-==== Current Implementation
-
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-image::UndoRedoStartingStateListDiagram.png[width="800"]
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
-
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
-
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
-
-[NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-
-The following sequence diagram shows how the undo operation works:
-
-image::UndoRedoSequenceDiagram.png[width="800"]
-
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-[NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
-
-image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-image::UndoRedoActivityDiagram.png[width="650"]
-
-==== Design Considerations
-
-===== Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
-
-===== Aspect: Data structure to support the undo/redo commands
-
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-// end::undoredo[]
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
 
 === Logging
 

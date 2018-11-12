@@ -1,0 +1,65 @@
+= Jin Minjia - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Drink I/O
+
+
+== Overview
+As part of a NUS Software Engineering project, my group and I built *[blue]#_Drink I/O_#*,
+a *one-stop, comprehensive inventory manager* for small drink distribution companies.
+*[blue]#_Drink I/O_#* enables these companies to *keep track of their inventory* and
+*analyse their sales performance*, and hence increase their productivity.
+
+*[blue]#_Drink I/O_#* is optimised for Command Line Interface (CLI), with a Graphic User Interface (GUI)
+to make it easier for users to interact with the app. It is written in Java, and has about 10kLoC.
+
+This project portfolio documents my contributions to the project, in particular the major feature I made:
+the sales performance analyser feature.
+
+== Summary of contributions
+
+* *Major feature implemented*: Feature to *analyse cost, revenue and profit* over specific time periods
+** _What it does_: Allows the user to calculate the overall cost, revenue and profit of the company
+over based on its transactions. The statistics can be calculated over the time periods of:
+a day, the past 7 days (including the current day), the past 30 days (including the current day).
+** _Justification_: This feature enables the accountants in a small company to calculate the company's sales performance quickly.
+It also allows the company to keep track of its finances simultaneously with its inventory.
+** _Highlights_: This feature required the building of new classes to record the transactions: a `Transaction` class, and a `TransactionList` class to hold the `Transaction` s.
+I was also challenged to optimise the code by using `Predicate` s to filter the list of transactions by date and `TransactionType`.
+This filtered list of transactions is then used for the computation of the sales figures.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=bluein-green[Functional and test code]]
+* *Other contributions*:
+** *Morphing of existing model*:
+*** The original code base is for an address book. Hence, the fundamental model used has to be changed to suit
+*[blue]#_Drink I/O_#*. I morphed the model from that of a `Person` to a `Drink`, and created the relevant `Drink` attributes, such as `Price`.
+*** Commands to buy and sell drinks did not exist in the original code base, but are necessary for an app for a drink distribution company.
+ I implemented the `buy` and `sell` commands, which required an in-depth understanding of how the `Model` and `Logic` components worked.
+** *Minor feature implemented*: Feature to *edit* the details of a drink in the inventory
+*** This enables the user to edit the cost price, selling price and tags of a drink.
+** Project management:
+*** Managed releases for *[blue]#_Drink I/O_#*: `v1.2` and `v1.3` on GitHub
+** Community:
+*** Reported bugs for Team F09-3 in the class: https://github.com/CS2113-AY1819S1-F09-3/main/issues/244[#244],
+https://github.com/CS2113-AY1819S1-F09-3/main/issues/245[#245]
+https://github.com/CS2113-AY1819S1-F09-3/main/issues/249[#249],
+https://github.com/CS2113-AY1819S1-F09-3/main/issues/251[#251],
+https://github.com/CS2113-AY1819S1-F09-3/main/issues/257[#257]
+
+
+== Contributions to the User Guide
+|===
+| This section showcases my contribution to the User Guide in relation to the sales performance analysis feature.
+The performance statistics that can be calculated are cost, revenue and profit, and they can be computed over specific time periods.
+|===
+
+include::../UserGuide.adoc[tag=analysis]
+
+== Contributions to the Developer Guide
+|===
+| Shown below are the sections I contributed to the Developer Guide in relation to the sales performance analysis feature.
+|===
+
+include::../DeveloperGuide.adoc[tag=analyses]

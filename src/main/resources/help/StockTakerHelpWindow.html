@@ -1,11 +1,934 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Stock taker help window</title>
-</head>
-<body>
-<h1>This is a stock taker help window</h1>
-<h2>Contents will be added later</h2>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Drink I/O - Stock taker User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">Drink I/O</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Drink I/O</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://cs2113-ay1819s1-w12-4.github.io/main/"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Drink I/O - Stock taker User Guide</h1></div><div id="content"><div id="preamble">
+    <div class="sectionbody">
+        <div class="paragraph">
+            <p>By: <code>CS2113T-W12-4</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+        </div>
+    </div>
+    <div id="toc" class="toc">
+        <div id="toctitle"></div>
+        <ul class="sectlevel1">
+            <li><a href="#introduction">1. Introduction</a>
+                <ul class="sectlevel2">
+                    <li><a href="#how-to-use-this-guide">1.1. How to use this guide</a></li>
+                    <li><a href="#how-to-navigate-drink-i-o-s-interface">1.2. How to navigate Drink I/O&#8217;s interface</a></li>
+                </ul>
+            </li>
+            <li><a href="#quick-start">2. Quick Start</a></li>
+            <li><a href="#Features">3. Getting Started</a>
+                <ul class="sectlevel2">
+                    <li><a href="#login">3.1. Logging in</a></li>
+                    <li><a href="#logging-out">3.2. Logging out</a></li>
+                </ul>
+            </li>
+            <li><a href="#types-of-users">4. Types of Users</a>
+                <ul class="sectlevel2">
+                    <li><a href="#stock-taker">4.1. Stock Taker</a></li>
+                    <li><a href="#accountant">4.2. Accountant</a></li>
+                    <li><a href="#manager">4.3. Manager</a></li>
+                </ul>
+            </li>
+            <li><a href="#managing-your-drink-i-o-account">5. Managing Your Drink I/O Account</a>
+                <ul class="sectlevel2">
+                    <li><a href="#confirmation-of-command">5.1. Confirmation of Command</a></li>
+                    <li><a href="#changing-your-password">5.2. Changing your password</a></li>
+                </ul>
+            </li>
+            <li><a href="#managing-your-inventory">6. Managing Your Inventory</a>
+                <ul class="sectlevel2">
+                    <li><a href="#searching-for-specific-drink-s">6.1. Searching for specific drink(s)</a></li>
+                    <li><a href="#viewing-all-drinks-in-inventory">6.2. Viewing all drinks in inventory</a></li>
+                    <li><a href="#viewing-drink-details">6.3. Viewing drink details</a></li>
+                </ul>
+            </li>
+            <li><a href="#managing-transactions">7. Managing Transactions</a>
+                <ul class="sectlevel2">
+                    <li><a href="#creating-a-purchase-transaction">7.1. Creating a purchase transaction</a></li>
+                    <li><a href="#creating-a-sale-transaction">7.2. Creating a sale transaction</a></li>
+                    <li><a href="#viewing-transactions">7.3. Viewing transactions</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+    <div class="sect1">
+        <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
+        <div class="sectionbody">
+            <div class="imageblock">
+                <div class="content">
+                    <img src="images/drink_io_logo.png" alt="drink io logo" width="790">
+                </div>
+            </div>
+            <div class="paragraph">
+                <p><strong><span class="blue"><em>Drink I/O</em></span></strong> is a desktop application that helps you to manage your drink distribution company.
+                    You can use <strong><span class="blue"><em>Drink I/O</em></span></strong> to keep track of your inventory and analyse your company&#8217;s sales performance.
+                    <strong><span class="blue"><em>Drink I/O</em></span></strong> is optimised for Command Line Interface (CLI), allowing you to manage your company
+                    faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI</p>
+            </div>
+            <div class="paragraph">
+                <p>This user guide provides comprehensive documentation on the <strong><span class="blue"><em>Drink I/O</em></span></strong> setup process, the features you can
+                    access and the commands you can use. Choose a topic from the Table of Contents above to find answers,
+                    get instructions and learn to improve your workflow with Drink I/O.</p>
+            </div>
+            <div class="sect2">
+                <h3 id="how-to-use-this-guide"><a class="link" href="#how-to-use-this-guide">1.1. How to use this guide</a></h3>
+                <div class="exampleblock">
+                    <div class="content">
+                        <div class="paragraph">
+                            <p><strong>General Command Format</strong></p>
+                        </div>
+                        <div class="ulist">
+                            <ul>
+                                <li>
+                                    <p>Words in UPPER_CASE are the parameters supplied by users</p>
+                                </li>
+                                <li>
+                                    <p>Use underscore for spaces for fields other than <code>NAME</code></p>
+                                </li>
+                                <li>
+                                    <p>Parameters can be supplied in any order as tags are specified</p>
+                                    <div class="ulist">
+                                        <ul>
+                                            <li>
+                                                <p><strong>e.g.</strong> <code>p/' for selling price, `n/</code> for name</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>Parameters in square brackets are optional</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="how-to-navigate-drink-i-o-s-interface"><a class="link" href="#how-to-navigate-drink-i-o-s-interface">1.2. How to navigate Drink I/O&#8217;s interface</a></h3>
+                <div class="imageblock">
+                    <div class="content">
+                        <img src="images/Ui.png" alt="Ui" width="790">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
+        <div class="sectionbody">
+            <div class="olist arabic">
+                <ol class="arabic">
+                    <li>
+                        <p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
+                    </li>
+                    <li>
+                        <p>Download the latest <code>DrinkIO.jar</code> <a href="https://github.com/CS2113-AY1819S1-W12-4/main/releases">here</a>.</p>
+                    </li>
+                    <li>
+                        <p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
+                    </li>
+                    <li>
+                        <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+                    </li>
+                    <li>
+                        <p>Refer to <a href="#login">Section 3.1, &#8220;Logging in&#8221;</a> to login the product.</p>
+                        <div class="imageblock">
+                            <div class="content">
+                                <img src="images/login_page_main.PNG" alt="login page main" width="800">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <p>After login in, the main window will appear as shown below.</p>
+                        <div class="imageblock">
+                            <div class="content">
+                                <img src="images/Ui.png" alt="Ui" width="790">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
+                            e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
+                    </li>
+                    <li>
+                        <p>Some example commands you can try:<br>
+                            &lt;to be added&gt;</p>
+                    </li>
+                </ol>
+            </div>
+            <div class="olist arabic">
+                <ol class="arabic">
+                    <li>
+                        <p>Refer to <a href="#Features">Section 3, &#8220;Getting Started&#8221;</a> for details of each command.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="Features"><a class="link" href="#Features">3. Getting Started</a></h2>
+        <div class="sectionbody">
+            <div class="sect2">
+                <h3 id="login"><a class="link" href="#login">3.1. Logging in</a></h3>
+                <div class="paragraph">
+                    <p>Upon entering starting up the application, you will be met by the login page below:</p>
+                </div>
+                <div class="imageblock">
+                    <div class="content">
+                        <img src="images/login_page_main.PNG" alt="login page main" width="800">
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <p>To login, you can use either the CLI or GUI to input your <code>USERNAME</code> and <code>PASSWORD</code>.</p>
+                </div>
+                <div class="paragraph">
+                    <p><strong>GUI Login</strong></p>
+                </div>
+                <div class="olist arabic">
+                    <ol class="arabic">
+                        <li>
+                            <p>Enter your <code>USERNAME</code> and <code>PASSWORD</code> into the respective username and password fields</p>
+                        </li>
+                        <li>
+                            <p>Click on the <kbd>LOGIN</kbd> button</p>
+                        </li>
+                    </ol>
+                </div>
+                <div class="paragraph">
+                    <p><strong>CLI Login</strong></p>
+                </div>
+                <div class="olist arabic">
+                    <ol class="arabic">
+                        <li>
+                            <p>Enter your <code>USERNAME</code> and <code>PASSWORD</code> into the terminal in this format</p>
+                            <div class="olist loweralpha">
+                                <ol class="loweralpha" type="a">
+                                    <li>
+                                        <p>Format: <code>USERNAME</code> <code>PASSWORD</code></p>
+                                    </li>
+                                </ol>
+                            </div>
+                        </li>
+                        <li>
+                            <p>Press the <kbd>ENTER</kbd> key</p>
+                        </li>
+                    </ol>
+                </div>
+                <div class="admonitionblock note">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-note" title="Note"></i>
+                            </td>
+                            <td class="content">
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p>User name and password are seperated with a single space when using CLI input</p>
+                                        </li>
+                                        <li>
+                                            <p>Both username and password are single words. No spaces are allowed in username or password.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="exampleblock example">
+                    <div class="content">
+                        <div class="paragraph">
+                            <p><span class="example-title">Examples for CLI input:</span></p>
+                        </div>
+                        <table class="tableblock frame-all grid-all spread">
+                            <caption class="title">Table 1. Table List of user accounts at first launch or upon reset</caption>
+                            <colgroup>
+                                <col style="width: 33.3333%;">
+                                <col style="width: 33.3333%;">
+                                <col style="width: 33.3334%;">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="tableblock halign-left valign-top">User Name</th>
+                                <th class="tableblock halign-left valign-top">Password</th>
+                                <th class="tableblock halign-left valign-top">Authentication Level</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="tableblock halign-left valign-top"><p class="tableblock">stocktaker</p></td>
+                                <td class="tableblock halign-left valign-top"><p class="tableblock">123</p></td>
+                                <td class="tableblock halign-left valign-top"><p class="tableblock">STOCKTAKER</p></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="admonitionblock note">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-note" title="Note"></i>
+                            </td>
+                            <td class="content">
+                                <div class="paragraph">
+                                    <p>The example provided is a default login account for admins. This account is created only for testing purposes.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="paragraph">
+                    <p>After successfully logging in, a confirmation message would be shown indicating your authentication level:</p>
+                </div>
+                <div class="imageblock">
+                    <div class="content">
+                        <img src="images/login_confirmation.PNG" alt="login confirmation" width="">
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="logging-out"><a class="link" href="#logging-out">3.2. Logging out</a></h3>
+                <div class="paragraph">
+                    <p>Logging out of the application will bring you back to the login screen.</p>
+                </div>
+                <div class="olist arabic">
+                    <ol class="arabic">
+                        <li>
+                            <p>To log out, enter the following command into the command bar</p>
+                            <div class="olist loweralpha">
+                                <ol class="loweralpha" type="a">
+                                    <li>
+                                        <p>Command format: <code>logout</code></p>
+                                    </li>
+                                </ol>
+                            </div>
+                        </li>
+                        <li>
+                            <p>Press the <kbd>ENTER</kbd> key</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="types-of-users"><a class="link" href="#types-of-users">4. Types of Users</a></h2>
+        <div class="sectionbody">
+            <div class="paragraph">
+                <p>In small-scale drink distribution companies, there are generally 3 critical roles and responsibilities to
+                    keep the company running:</p>
+            </div>
+            <div class="olist arabic">
+                <ol class="arabic">
+                    <li>
+                        <p>Stock taker</p>
+                    </li>
+                    <li>
+                        <p>Accountant</p>
+                    </li>
+                    <li>
+                        <p>Manager</p>
+                    </li>
+                </ol>
+            </div>
+            <div class="paragraph">
+                <p>This is taken into account in <strong><span class="blue"><em>Drink I/O</em></span></strong>. Each role has a different type of <strong><span class="blue"><em>Drink I/O</em></span></strong>
+                    account, and in a specific role, you can work with functions that are tailored to your role.</p>
+            </div>
+            <div class="sect2">
+                <h3 id="stock-taker"><a class="link" href="#stock-taker">4.1. Stock Taker</a></h3>
+                <div class="paragraph">
+                    <p>As the stock taker is primarily in charge of updating inventory, the <strong>Stock Taker</strong> account has tailored
+                        access to the inventory manager. See <a href="#stocktaker-commandSummary">[stocktaker-commandSummary]</a> for a summary of the commands that you can use
+                        as a stock taker.</p>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="accountant"><a class="link" href="#accountant">4.2. Accountant</a></h3>
+                <div class="paragraph">
+                    <p>The accountant has access to <strong><span class="blue"><em>Drink I/O</em></span></strong>'s financial analysis tools in the <strong>Accountant</strong> account.
+                        See <a href="#accountant-commandSummary">[accountant-commandSummary]</a> for a summary of the commands that you can use
+                        as an accountant.</p>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="manager"><a class="link" href="#manager">4.3. Manager</a></h3>
+                <div class="paragraph">
+                    <p>A manager has access to all of <strong><span class="blue"><em>Drink I/O</em></span></strong>'s features and commands by using the <strong>Manager</strong> account.
+                        See <a href="#manager-commandSummary">[manager-commandSummary]</a> for a summary of the commands that you can use
+                        as a manager.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="managing-your-drink-i-o-account"><a class="link" href="#managing-your-drink-i-o-account">5. Managing Your Drink I/O Account</a></h2>
+        <div class="sectionbody">
+            <div class="paragraph">
+                <p><strong><span class="blue"><em>Drink I/O</em></span></strong> has a login feature. This ensure that every user has to have an account before using the application.
+                    Hence, it would increase the security of the application.</p>
+            </div>
+            <div class="sect2">
+                <h3 id="confirmation-of-command"><a class="link" href="#confirmation-of-command">5.1. Confirmation of Command</a></h3>
+                <div class="paragraph">
+                    <p>When you enter command that will change the data storage, you will be prompted with a message as shown below:</p>
+                </div>
+                <div class="imageblock">
+                    <div class="content">
+                        <img src="images/Command_confirmation.PNG" alt="Command confirmation" width="400">
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <p>If you have confirmed the command, key in y or Y to confirm.</p>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="changing-your-password"><a class="link" href="#changing-your-password">5.2. Changing your password</a></h3>
+                <div class="paragraph">
+                    <p>When you receive an account from manager, you want to change the password to increase security.
+                        Format: <code>changePassword o/[OLD_PASSWORD] n/[NEW_PASSWORD]</code></p>
+                </div>
+                <div class="exampleblock example">
+                    <div class="content">
+                        <div class="paragraph">
+                            <p><span class="example-title">Examples for changePassword:</span></p>
+                        </div>
+                        <div class="ulist">
+                            <ul>
+                                <li>
+                                    <p><span class="example"><code>changePassword o/123 n/1234</code></span></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="paragraph">
+                            <p>If password changes is successful, a message will be shown:</p>
+                        </div>
+                        <div class="imageblock">
+                            <div class="content">
+                                <img src="images/password_change_successful.PNG" alt="password change successful" width="300">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="managing-your-inventory"><a class="link" href="#managing-your-inventory">6. Managing Your Inventory</a></h2>
+        <div class="sectionbody">
+            <div class="paragraph">
+                <p>The core feature of <strong><span class="blue"><em>Drink I/O</em></span></strong> is to manage your company&#8217;s inventory.
+                    This includes the adding of drinks into the inventory, deleting, viewing their details
+                    and updating these details.</p>
+            </div>
+            <div class="paragraph">
+                <p>In <strong><span class="blue"><em>Drink I/O</em></span></strong>, each drink has a <em>unique</em> name, a selling price, a cost price,
+                    stock count and tags that allow you to classify the drink (e.g. soft drink, tea) and enter
+                    any other information.</p>
+            </div>
+            <div class="sect2">
+                <h3 id="searching-for-specific-drink-s"><a class="link" href="#searching-for-specific-drink-s">6.1. Searching for specific drink(s)</a></h3>
+                <div class="paragraph">
+                    <p>Finds drinks which meet specific criteria depending on the prefix of the input.</p>
+                </div>
+                <div class="admonitionblock tip">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-tip" title="Tip"></i>
+                            </td>
+                            <td class="content">
+                                <div class="paragraph">
+                                    <p><strong><em>Summary</em></strong><br>
+                                        <strong>Command format</strong>:<br>
+                                        <code>find n/</code> <code>DRINK NAME</code><br>
+                                        <code>find q/</code> <code>QUANTITY</code><br>
+                                        <code>find d/</code> <code>DATE</code></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="sect3">
+                    <h4 id="searching-by-drink-name"><a class="link" href="#searching-by-drink-name">6.1.1. Searching by drink name</a></h4>
+                    <div class="paragraph">
+                        <p>You can search for specific drinks by name using this search function</p>
+                    </div>
+                    <div class="paragraph">
+                        <p>Finds all drinks which names contain any of the given keywords.<br>
+                            Format: <code>find n/KEYWORD [MORE_KEYWORDS]</code></p>
+                    </div>
+                    <div class="sidebarblock">
+                        <div class="content">
+                            <div class="ulist">
+                                <ul>
+                                    <li>
+                                        <p>The search is case insensitive. e.g <code>coke</code> will match <code>Coke</code></p>
+                                    </li>
+                                    <li>
+                                        <p>The order of the keywords does not matter. e.g. <code>Tea Green</code> will match <code>Green Tea</code></p>
+                                    </li>
+                                    <li>
+                                        <p>Only the drink name is searched.</p>
+                                    </li>
+                                    <li>
+                                        <p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+                                    </li>
+                                    <li>
+                                        <p>Drinks matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Tea</code> will return <code>Green Tea</code>, <code>Milk Tea</code></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Examples:</p>
+                    </div>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p><code>find n/Tea</code><br>
+                                    Returns <code>Milk Tea</code> and <code>Green Tea</code></p>
+                            </li>
+                            <li>
+                                <p><code>find n/Tea Milk Coke</code><br>
+                                    Returns any drink having <code>Tea</code>, <code>Milk</code>, or <code>Coke</code> in their names</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="searching-by-drink-quantity"><a class="link" href="#searching-by-drink-quantity">6.1.2. Searching by drink quantity</a></h4>
+                    <div class="paragraph">
+                        <p>To find out which drinks in your drink company are in need of restocking, you can utilise this search function which will return the drinks with quantity less than the quantity input.<br></p>
+                    </div>
+                    <div class="paragraph">
+                        <p>Finds all drinks which have quantity less than the given quantity.<br>
+                            Format: <code>find q/QUANTITY</code></p>
+                    </div>
+                    <div class="sidebarblock">
+                        <div class="content">
+                            <div class="ulist">
+                                <ul>
+                                    <li>
+                                        <p>Only numbers are allowed in the Quantity field</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Examples:</p>
+                    </div>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p><code>find q/400</code><br>
+                                    Returns <code>Coke</code> and <code>Green Tea</code> which have a quantity less than 400</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sect3">
+                    <h4 id="searching-by-batch-import-date"><a class="link" href="#searching-by-batch-import-date">6.1.3. Searching by batch import date</a></h4>
+                    <div class="paragraph">
+                        <p>To find out which drinks have been in the warehouse for a long period of time you can utilise this search function which will return the drinks that have batches older than the date input.<br></p>
+                    </div>
+                    <div class="paragraph">
+                        <p>Find drinks which have batches that are older than the given date.<br>
+                            Format <code>find d/DATE</code></p>
+                    </div>
+                    <div class="sidebarblock">
+                        <div class="content">
+                            <div class="ulist">
+                                <ul>
+                                    <li>
+                                        <p>Date must be in either of the following formats:</p>
+                                        <div class="ulist">
+                                            <ul>
+                                                <li>
+                                                    <p>DD / MM / YYYY</p>
+                                                </li>
+                                                <li>
+                                                    <p>D / MM / YYYY</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>Date must be an existing date in the calendar</p>
+                                        <div class="ulist">
+                                            <ul>
+                                                <li>
+                                                    <p>i.e. 30/02/2018 is a nonexistent date</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>Even if a drink has only 1 batch that meets the requirements, it will be shown</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p>Examples:</p>
+                    </div>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p><code>find d/02/11/2018</code><br>
+                                    Returns all drinks which have batches imported before 2nd November 2018</p>
+                            </li>
+                            <li>
+                                <p><code>find d/9/11/2018</code><br>
+                                    Returns all drinks which have batches imported before 9th November 2018</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="viewing-all-drinks-in-inventory"><a class="link" href="#viewing-all-drinks-in-inventory">6.2. Viewing all drinks in inventory</a></h3>
+                <div class="paragraph">
+                    <p>To show the full list of drinks in the inventory list, use <code>list</code>.
+                        This is especially useful after using a <code>find</code> command.<br></p>
+                </div>
+                <div class="admonitionblock tip">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-tip" title="Tip"></i>
+                            </td>
+                            <td class="content">
+                                <div class="paragraph">
+                                    <p><strong><em>Summary</em></strong><br>
+                                        <strong>Command format</strong>: <code>list</code></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="paragraph">
+                    <p><strong>Step-by-Step Instructions</strong><br>
+                        To view all drinks in <strong><span class="blue"><em>Drink I/O</em></span></strong>,</p>
+                </div>
+                <div class="olist arabic">
+                    <ol class="arabic">
+                        <li>
+                            <p>Enter <code>list</code> into the command box</p>
+                        </li>
+                        <li>
+                            <p>Press <kbd>enter</kbd></p>
+                        </li>
+                        <li>
+                            <p>You will see alll the drinks listed in the inventory panel on the left of the interface.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="viewing-drink-details"><a class="link" href="#viewing-drink-details">6.3. Viewing drink details</a></h3>
+                <div class="paragraph">
+                    <p>To view further details of the drink such as its batches that are not displayed on the drink card panel, you can simply click on the relevant drink card to select it or use the select command.</p>
+                </div>
+                <div class="paragraph">
+                    <p>Selects the drink identified by the index number used in the displayed drink list.<br>
+                        Format: <code>select INDEX</code></p>
+                </div>
+                <div class="sidebarblock">
+                    <div class="content">
+                        <div class="ulist">
+                            <ul>
+                                <li>
+                                    <p>Selects the drink and loads the Drink detail page and the batch list page of the drink at the specified <code>INDEX</code>.</p>
+                                </li>
+                                <li>
+                                    <p>The index refers to the numbered bullet shown in the displayed drink list.</p>
+                                </li>
+                                <li>
+                                    <p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="managing-transactions"><a class="link" href="#managing-transactions">7. Managing Transactions</a></h2>
+        <div class="sectionbody">
+            <div class="paragraph">
+                <p>To manage the purchases and sales of drinks, you can record them into <strong><span class="blue"><em>Drink I/O</em></span></strong>,
+                    and let <strong><span class="blue"><em>Drink I/O</em></span></strong> handle the updating of the inventory for you in real-time.
+                    These transactions also facilitate financial analyses (see <a href="#Analysing Sales Performance">[Analysing Sales Performance]</a>).</p>
+            </div>
+            <div class="sect2">
+                <h3 id="creating-a-purchase-transaction"><a class="link" href="#creating-a-purchase-transaction">7.1. Creating a purchase transaction</a></h3>
+                <div class="paragraph">
+                    <p>When you make a purchase, you can increase your stocks by entering a purchase transaction.</p>
+                </div>
+                <div class="admonitionblock tip">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-tip" title="Tip"></i>
+                            </td>
+                            <td class="content">
+                                <div class="paragraph">
+                                    <p><strong><em>Summary</em></strong><br>
+                                        <strong>Command format</strong>:
+                                        <code>buy n/NAME q/QUANTITY</code></p>
+                                </div>
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p><code>NAME</code> is the name of the drink you are entering a transaction for</p>
+                                            <div class="ulist">
+                                                <ul>
+                                                    <li>
+                                                        <p>The desired drink must be recorded in <strong><span class="blue"><em>Drink I/O</em></span></strong></p>
+                                                    </li>
+                                                    <li>
+                                                        <p>The name entered is case-sensitive</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p><code>QUANTITY</code> is the number of cartons of drink that you are transacting</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="paragraph">
+                    <p><strong>Step-by-Step Instructions</strong><br>
+                        To record a purchase transaction,</p>
+                </div>
+                <div class="olist arabic">
+                    <ol class="arabic">
+                        <li>
+                            <p>Enter <code>buy</code> into the command box</p>
+                        </li>
+                        <li>
+                            <p>Key in <code>n/</code>, followed by name of drink (<code>NAME</code>)</p>
+                        </li>
+                        <li>
+                            <p>Key in <code>q/</code>, followed by quantity purchased (<code>QUANTITY</code>)</p>
+                        </li>
+                        <li>
+                            <p>Press <kbd>enter</kbd></p>
+                        </li>
+                        <li>
+                            <p>Confirm the command by entering <code>y</code> or <code>Y</code></p>
+                        </li>
+                        <li>
+                            <p>Press <kbd>enter</kbd></p>
+                        </li>
+                        <li>
+                            <p>Check whether the transaction has been recorded successfully</p>
+                            <div class="ulist">
+                                <ul>
+                                    <li>
+                                        <p>If you see the message "Purchase transaction recorded!", followed by the transaction details,
+                                            the transaction had been successfully entered into <strong><span class="blue"><em>Drink I/O</em></span></strong><br></p>
+                                        <div class="ulist">
+                                            <ul>
+                                                <li>
+                                                    <p>The transaction will also appear at the bottom of the transaction list panel</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>If not, follow the instructions displayed in the message display pane, and re-enter the command<br></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="admonitionblock warning">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-warning" title="Warning"></i>
+                            </td>
+                            <td class="content">
+                                <div class="paragraph">
+                                    <p>The drink you want to transact must be recorded in <strong><span class="blue"><em>Drink I/O</em></span></strong>. The drink name is <em>case-sensitive</em>.
+                                        Otherwise, you will see the message "The drink entered does not exist in the inventory list", and
+                                        the transaction will not be entered into the system.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="creating-a-sale-transaction"><a class="link" href="#creating-a-sale-transaction">7.2. Creating a sale transaction</a></h3>
+                <div class="paragraph">
+                    <p>When you make a sale, you can decrease your stocks by entering a sale transaction.</p>
+                </div>
+                <div class="admonitionblock tip">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-tip" title="Tip"></i>
+                            </td>
+                            <td class="content">
+                                <div class="paragraph">
+                                    <p><strong><em>Summary</em></strong><br>
+                                        <strong>Command format</strong>:
+                                        <code>sell n/NAME q/QUANTITY</code><br></p>
+                                </div>
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p><code>NAME</code> is the name of the drink you are entering a transaction for</p>
+                                            <div class="ulist">
+                                                <ul>
+                                                    <li>
+                                                        <p>The desired drink must be recorded in <strong><span class="blue"><em>Drink I/O</em></span></strong></p>
+                                                    </li>
+                                                    <li>
+                                                        <p>The name entered is case-sensitive</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p><code>QUANTITY</code> is the number of cartons of drink that you are transacting</p>
+                                            <div class="ulist">
+                                                <ul>
+                                                    <li>
+                                                        <p>Quantity must not exceed current stock</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="paragraph">
+                    <p><strong>Step-by-Step Instructions</strong><br>
+                        To record a sale transaction,</p>
+                </div>
+                <div class="olist arabic">
+                    <ol class="arabic">
+                        <li>
+                            <p>Enter <code>sell</code> into the command box</p>
+                        </li>
+                        <li>
+                            <p>Key in <code>n/</code>, followed by name of drink (<code>NAME</code>)</p>
+                        </li>
+                        <li>
+                            <p>Key in <code>q/</code>, followed by quantity transacted in sale (<code>QUANTITY</code>)</p>
+                        </li>
+                        <li>
+                            <p>Press <kbd>enter</kbd></p>
+                        </li>
+                        <li>
+                            <p>Confirm the command by entering <code>y</code> or <code>Y</code></p>
+                        </li>
+                        <li>
+                            <p>Press <kbd>enter</kbd></p>
+                        </li>
+                        <li>
+                            <p>Check whether the transaction has been recorded successfully,</p>
+                            <div class="ulist">
+                                <ul>
+                                    <li>
+                                        <p>If you see the message "Sale transaction recorded!", followed by the transaction details,
+                                            the transaction had been successfully entered into <strong><span class="blue"><em>Drink I/O</em></span></strong></p>
+                                        <div class="ulist">
+                                            <ul>
+                                                <li>
+                                                    <p>The transaction will also appear at the bottom of the transaction list panel</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>If not, follow the instructions displayed in the message display pane, and re-enter the command<br></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="admonitionblock warning">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-warning" title="Warning"></i>
+                            </td>
+                            <td class="content">
+                                <div class="ulist">
+                                    <ul>
+                                        <li>
+                                            <p>The drink you want to transact must be recorded in <strong><span class="blue"><em>Drink I/O</em></span></strong>. The drink name is <em>case-sensitive</em>.
+                                                Otherwise, you will see the message "The drink entered does not exist in the inventory list", and
+                                                the transaction will not be entered into the system.</p>
+                                        </li>
+                                        <li>
+                                            <p>The recording will fail if <code>QUANTITY</code> is more than the available stock in <strong><span class="blue"><em>Drink I/O</em></span></strong>.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="viewing-transactions"><a class="link" href="#viewing-transactions">7.3. Viewing transactions</a></h3>
+                <div class="paragraph">
+                    <p>You can view all the transactions entered into <strong><span class="blue"><em>Drink I/O</em></span></strong> to verify their accuracy.</p>
+                </div>
+                <div class="admonitionblock tip">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-tip" title="Tip"></i>
+                            </td>
+                            <td class="content">
+                                <div class="paragraph">
+                                    <p><strong><em>Summary</em></strong><br>
+                                        <strong>Command format</strong>:
+                                        <code>viewTrans</code></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="paragraph">
+                    <p><strong>Step by Step Instructions</strong><br>
+                        To view all transactions entered,</p>
+                </div>
+                <div class="olist arabic">
+                    <ol class="arabic">
+                        <li>
+                            <p>Enter <code>viewTrans</code> into the command box</p>
+                        </li>
+                        <li>
+                            <p>Press <kbd>enter</kbd></p>
+                        </li>
+                    </ol>
+                </div>
+                <div class="paragraph">
+                    <p>You will see a list of all transactions displayed in the transactions panel.</p>
+                </div>
+            </div>
+        </div>
+    </div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:17:07 UTC</div></div></div></body></html>
