@@ -32,10 +32,11 @@ public class RegisterCommandTest {
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
     private String currUsername;
+    private User user;
 
     @Before
     public void setUp() {
-        User user = new UserBuilder().build();
+        user = new UserBuilder().build();
         model = new ModelManager(getTypicalEventManager(), new UserPrefs());
         model.logUser(user);
         currUsername = model.getUsername().toString();
@@ -56,9 +57,33 @@ public class RegisterCommandTest {
         Event registeredEvent = new EventBuilder(eventToRegister).withAddAttendees(currUsername).build();
 
         ModelManager expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
-        expectedModel.logUser(new UserBuilder().build());
+        expectedModel.logUser(user);
         expectedModel.updateEvent(eventToRegister, registeredEvent);
         expectedModel.commitEventManager();
+
+        assertCommandSuccess(registerCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_unregisteredEventFilteredList_success() {
+        showEventAtIndex(model, INDEX_SECOND_EVENT);
+        Event eventToRegister = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+
+        // check current user is not registered for event
+        assertFalse(eventToRegister.getAttendance().contains(new Attendee(currUsername)));
+        RegisterCommand registerCommand = new RegisterCommand(INDEX_FIRST_EVENT);
+
+        String expectedMessage =
+                String.format(RegisterCommand.MESSAGE_REGISTER_EVENT_SUCCESS, INDEX_FIRST_EVENT.getOneBased());
+
+        // build new event with added attendee using current user username
+        Event registeredEvent = new EventBuilder(eventToRegister).withAddAttendees(currUsername).build();
+
+        ModelManager expectedModel = new ModelManager(getTypicalEventManager(), new UserPrefs());
+        expectedModel.logUser(user);
+        expectedModel.updateEvent(eventToRegister, registeredEvent);
+        expectedModel.commitEventManager();
+        showEventAtIndex(expectedModel, INDEX_SECOND_EVENT);
 
         assertCommandSuccess(registerCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -96,7 +121,7 @@ public class RegisterCommandTest {
         assertFalse(eventToRegister.getAttendance().contains(new Attendee(currUsername)));
 
         Event registeredEvent = new EventBuilder(eventToRegister).withAddAttendees(currUsername).build();
-        expectedModel.logUser(new UserBuilder().build());
+        expectedModel.logUser(user);
         expectedModel.updateEvent(eventToRegister, registeredEvent);
         expectedModel.commitEventManager();
 
