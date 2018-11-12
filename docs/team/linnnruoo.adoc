@@ -62,9 +62,9 @@ JitHub is developed throughout the summer in a team of 5 members as our first st
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-* https://github.com/linnnruoo/main_AB4/blob/master/docs/UserGuide.adoc#add-to-do-task-code-todo-code[To-do task]
-* https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/docs/UserGuide.adoc#finish-to-do-task-code-finishtodo-code[Finish to-do task]
-* https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/docs/UserGuide.adoc#monthly-calendar-view[Monthly Calendar View]
+* include::../UserGuide.adoc[tag=todo]
+* include::../UserGuide.adoc[tag=finishTodo]
+* include::../UserGuide.adoc[tag=calendar]
 
 == Contributions to the Developer Guide
 
@@ -72,9 +72,9 @@ JitHub is developed throughout the summer in a team of 5 members as our first st
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-* https://github.com/linnnruoo/main_AB4/blob/master/docs/DeveloperGuide.adoc#todo-feature[To-do feature]
-* https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/docs/DeveloperGuide.adoc#finishtodo-feature[Finish to-do feature]
-* https://github.com/CS2113-AY1819S1-W12-1/main/blob/master/docs/DeveloperGuide.adoc#calendar-feature[Calendar feature]
+* include::../DeveloperGuide.adoc[tag=todo]
+* include::../DeveloperGuide.adoc[tag=finishTodo]
+* include::../DeveloperGuide.adoc[tag=calendar]
 
 
 == PROJECT: EE2026 FPGA Design Project
