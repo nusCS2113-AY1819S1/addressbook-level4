@@ -1,5 +1,5 @@
 :product_name : Drink I/O
-= Drink I/O -  User Guide
+= Drink I/O - Stock taker User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:

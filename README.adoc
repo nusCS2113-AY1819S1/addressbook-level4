@@ -31,6 +31,10 @@ endif::[]
 * <<DeveloperGuide#, Developer Guide>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
+* https://cs2113-ay1819s1-w12-4.github.io/main/AccountantUserGuide.html[Accountant user guide]
+* https://cs2113-ay1819s1-w12-4.github.io/main/ManagerUserGuide.html [Manager user guide]
+* https://cs2113-ay1819s1-w12-4.github.io/main/StockTakerUserGuide.html [Stock taker user guide]
+* https://cs2113-ay1819s1-w12-4.github.io/main/AdminUserGuide.html [Admin user guide]
 
 == Acknowledgements
 * Original source of code: Addressbook-Level4 project created by SE-EDU initiative at [https://github.com/se-edu]
