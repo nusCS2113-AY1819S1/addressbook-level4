@@ -18,20 +18,20 @@ Inventarie PRO is a desktop inventory application intended for use by self-emplo
 ** Justification: This feature is an essential part of a digitised inventory management system, given that products which a self-employed provision shop owner wants to sell must have a source of supply (a distributor).
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands which other members were concurrently working on too.
 
-* *Minor enhancement*: Refactored some of the previous 'person' classes, methods and objects to a suitable 'product' name throughout the course of the project
+* *Minor enhancement*: I refactored some of the previous 'person' classes, methods and objects to a suitable 'product' name throughout the course of the project. I also edited some of the output messages to make them more suitable for our Inventarie PRO.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com/CS2113-AY1819S1-T13-3/main[Functional code]] [https://github.com/CS2113-AY1819S1-T13-3/main[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed releases `v1.2.1`, `v1.3.1` and `v1.3.2` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Increased functionality of find commands - finding products / distributors by their tag and not just by name (Pull request https://github.com[#182])
-*** Updated the GUI to fit new features (distributor, transaction, reminder) (Pull requests https://github.com[#101] and https://github.com[#148]) and removed the unnecessary browser panel (Pull request https://github.com[#]
+*** Increased functionality of find commands - finding products / distributors by their tag and not just by name (Pull request https://github.com/CS2113-AY1819S1-T13-3/main[#182])
+*** Updated the GUI to fit new features (distributor, transaction, reminder) (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main[#101] and https://github.com/CS2113-AY1819S1-T13-3/main[#148]) and removed the unnecessary browser panel (Pull request https://github.com/CS2113-AY1819S1-T13-3/main[#]
 *** Adapted existing tests to incorporate new features
 ** Documentation:
-*** Updated class diagrams for UI, Logic and Model in the Developer Guide (Pull requests https://github.com[#187] and https://github.com[#189])
+*** Updated class diagrams for UI, Logic and Model in the Developer Guide (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main[#187] and https://github.com/CS2113-AY1819S1-T13-3/main[#189])
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 
@@ -41,7 +41,7 @@ Inventarie PRO is a desktop inventory application intended for use by self-emplo
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=distributormanagement]
+Feature descriptions related to distributor functions: include::../UserGuide.adoc[tag=distributormanagement]
 
 == Contributions to the Developer Guide
 
@@ -49,11 +49,7 @@ include::../UserGuide.adoc[tag=distributormanagement]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=distributorusecases]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+In the appendices, I included:
+the user stories related to product features: include::../DeveloperGuide.adoc[tag=productuserstories],
+the user stories related to distributor features: include::../DeveloperGuide.adoc[tag=distributoruserstories],
+the use cases related to distributor features: include::../DeveloperGuide.adoc[tag=distributorusecases]
