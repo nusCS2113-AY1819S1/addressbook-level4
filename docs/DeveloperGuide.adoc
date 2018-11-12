@@ -506,7 +506,7 @@ image::GradeGraphActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that needs to interact with storage controller or xml adapters directly but command should not have direct interaction from StorageController.
 // end::graph[]
 
-// tag::modulebidding[]
+// tag::modulebiddingimplementation[]
 === [Proposed] Module bidding feature
 
 ==== Proposed Implementation
@@ -565,7 +565,7 @@ to the students.
 * Alternative 2: Teacher can input the start time for a module's bidding round
 ** Pros: The actual start time will be consistent and reliable, leading to user (student) satisfaction.
 ** Cons: More difficult to implement; Handling date objects is tricky because there are many popular date formats.
-// end::modulebidding[]
+// end::modulebiddingimplementation[]
 
 // tag::notesexportimplementation[]
 === Notes data to Google Calendar feature
@@ -1474,16 +1474,17 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 // end::studcourseusecases[]
 
+// tag::moduleusecases[]
 [discrete]
 === Use case: Add module
 
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* NIL
 
 *Guarantees* :
 
-* TBC
+* No duplicate modules will be allowed.
 
 *MSS* :
 
@@ -1523,11 +1524,11 @@ Use case resumes at step 1.
 === Use case: Update module
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* The module should already exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1567,18 +1568,16 @@ Use case resumes at step 1.
 === Use case: Remove module
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* The module should already exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
 1.  Teacher wants to delete a module in the system.
 2.  System prompts for confirmation to delete the module.
-3.  Teacher confirms the deletion of the module.
-4.  System successfully deletes the module.
 +
 Use case ends.
 
@@ -1602,20 +1601,16 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
-* 3a. Teacher rejects the confirmation to delete the module.
-+
-Use case resumes at step 1.
-
 
 [discrete]
 === Use case: View module details
 *Precondition(s)* :
 
-* The module must exist in the system.
+* The module should already exist in Trajectory.
 
 *Guarantees* :
 
-* None.
+* NIL
 
 *MSS* :
 
@@ -1637,11 +1632,11 @@ Use case resumes at step 1.
 === Use case: Find module
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NONE IF NONE
+* At least one module should exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1664,22 +1659,16 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
-* 2c. Teacher enters the `--all` option in the command
-+
-** 2c1. System displays all matching modules including archived modules.
-+
-Use case resumes at step 1.
-
 
 [discrete]
 === Use case: List modules
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* At least one module should exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1696,22 +1685,16 @@ Use case ends.
 +
 Use case resumes at step 1.
 
-* 2b. Teacher enters the `--all` option in the command
-+
-** 2b1. System displays all matching modules including archived modules.
-+
-Use case resumes at step 1.
-
 
 [discrete]
-=== Use case: Archive module
+=== Use case: Archive module [coming in v2.0]
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* The module should already exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1751,11 +1734,12 @@ Use case resumes at step 1.
 === Use case: Enrol students in modules
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* The module should already exist in Trajectory.
+* The student(s) should exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1804,14 +1788,15 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Assign a TA
+=== Use case: Assign a TA [coming in v2.0]
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* The module should already exist in Trajectory.
+* The student(s) should exist in Trajectory.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1857,6 +1842,7 @@ Use case resumes at step 1.
 ** 2f1. System informs the user that the student doesn’t exist in the system.
 +
 Use case resumes at step 1.
+// end::moduleusecases[]
 
 [discrete]
 // tag::gradebookusecase[]
