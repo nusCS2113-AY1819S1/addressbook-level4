@@ -107,7 +107,7 @@ Hit F11 to toggle between full-screen mode and windowed mode. A full-screen togg
 // tag::tabfeature[]
 === Cycling through existing Isbn: kbd:[Tab]
 
-You can auto-fill the Isbn field with existing ones in the Inventory to save the hassle having to type the entire Isbn of a book. +
+You can auto-fill the Isbn field with existing ones in the Inventory to save the hassle of having to type the entire Isbn of a book. +
 Format: kbd:[Tab]
 
 Examples:
@@ -121,7 +121,8 @@ kbd:[Tab] (completes the `Isbn` field for `sell i/978` with the first Isbn of a 
 E.g. `sell i/9782123456803`
 
 * `sell i/777` +
-kbd:[Tab] (does not complete the `Isbn` field as inventory does not contains books with Isbn starting with `777`)
+kbd:[Tab] (does not complete the `Isbn` field as inventory does not contains books with Isbn starting with `777`) +
+E.g. `sell i/777`
 // end::tabfeature[]
 
 == Commands for Students

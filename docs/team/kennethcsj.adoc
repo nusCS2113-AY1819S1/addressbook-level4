@@ -41,6 +41,8 @@ This Project Portfolio documents my contributions and demonstrates my ability to
 *** Managed releases `v1.1` - `v1.4` (5 releases) on GitHub.
 ** Additional enhancement to existing features:
 *** Added a new cost field to the `add` command.
+*** Enhanced `delete` command to allow delete by Isbn.
+*** Enhanced `edit` command to prevent direct edits to quantity.
 *** Enhanced `find` command to allow substrings as an input to find for books.
 ** Documentation:
 *** Updated the initial User Guide to be a representation of _BookInventory_.

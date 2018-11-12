@@ -15,17 +15,16 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* This is a desktop Book Inventory application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is specially designed just for Store Owners to keep track of their items and revenue for their shop.
-* Customers can also check the availability of the items they are looking for before heading down to the store.
+* This is a multi-platform _BookInventory_ desktop application. It has a Graphic User Interface (GUI) but most of the user interactions happen using a Command Line Interface (CLI).
+* It is specially designed just for Store Owners to keep manage their books and revenue for their store.
+* As customers, you can also check the availability of the items they are looking for before heading down to the store.
 * So what are you waiting for?
 ** Download it NOW!
 
-== Site Map (Unrelated Links will be remove later nearing the end of the project)
+== Site Map
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 
