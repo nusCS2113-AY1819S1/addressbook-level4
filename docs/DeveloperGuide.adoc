@@ -321,23 +321,32 @@ Also allows us to define a stricter form duplicity between objects.
 === Find Feature
 ==== Current Implementation
 
-The find mechanism is facilitated by `keywordsMap` which stores the searched keywords in a `Map`.
-It implements the following operations to support the checking of keywords with the data stored in the RecruitBook:
-
-* `keywordsMap#add(String arg)` - Adds a keyword into the `keywordMap` based on the preceding prefix
+The `find` mechanism is implemented by creating a `keywordsMap` which stores the searched keywords in a `HashMap`.
+Based on the preceding prefixes of the user input, the tokenized argument is being stored as the `value` of the respective prefix `key`.
 
 ===== Candidates
 The `findCandidateCommand` is facilitated by the `CandidateContainsFindKeywordsPredicate` which implements `Predicate<Candidate>`
-and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
 
 ===== Companies
 The `findCompanyCommand` is facilitated by the `CompanyContainsFindKeywordsPredicate` which implements `Predicate<Company>`
-and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
 
 ===== Job Offers
 The `findJobOfferCommand` is facilitated by the `JobOfferContainsFindKeywordsPredicate` which implements `Predicate<JobOffer>`
-and overrides the `test` and `equal` methods so that more fields can be searched at the same time.
+and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
 
+Through the `test` method, it compares every value in the `keywordsMap` with the respective field of each entry and returns `true` if the any part of the searched value can be found in the entry's field.
+
+The `test` method is facilitated by the following operations:
+
+* StringUtil#isWithinRange - checks whether the the job offer has an `AgeRange` that satisfies the `Age` of the `candidate`.
+* StringUtil#isMoreThanOrEqualTo - checks whether the job offer has a `salary` offer that is higher than the `candidate` 's expected `salary`.
+
+After which, the mechanism updates either of the respective list which is exposed in the `Model` interface as either `Model#updateFilteredCandidateList`, `Model#updateFilteredCompanyList` or `Model#updateCompanyJobList`.
+
+[NOTE]
+Entering a prefix that is not recognized will throw a command exception.
 [NOTE]
 The finding of all three entities (Candidate, Company, JobOffer) follow the same mechanism.
 
@@ -349,13 +358,119 @@ Step 1. The user launched the application for the first time.
 .. `UniqueCompanyList` will be initialised with the list of saved companies in `CompanyBook`.
 .. `UniqueCompanyJobList` will be initialised with the list of saved job offers in `CompanyBook`.
 
-Step 2. The user executes `findc n/Alex p/91234567 e/michelleyeoh@gmail.com` command to find the candidates who either have the name `Alex`,
-with phone number `91234567`,  or with email address `michelleyeoh@gmail.com`.
+Step 2. The user executes `findc n/Alex p/91234567` command to find the candidates who is named `Alex` or candidates who has the phone number `91234567`.
 
 The following sequence diagram shows how the find operation works:
 
 image::FindSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How find feature executes
+* **Alternative 1 (current choice):** Having three variations of find feature for different entities.
+** Pros:
+*** Greater distinction between the entities.
+*** More direct and intuitive for users as candidate and company objects contain same prefixes such as phone, address and email address etc.
+
+** Cons:
+*** More commands to deal with, same changes have to be made across all three commands.
+*** It might not be that user-friendly for users who prefer an all-in-one `find` command.
+
+* **Alternative 2:** Have a central `findManager` that handles all finds.
+** Pros: Lesser commands to handle, makes application easier for user to use
+** Cons: Some fields are found in both `candidate` and `company`, making it difficult to distinguish between the two if the same prefix is entered.
+
+===== Aspect: Data structure to support the find feature
+* ** Alternative 1 (current choice):** Parses the user's input into various arguments and compares each argument with each value in the object to test if it is contained in the object.
+** Pros:
+*** Putting to and getting from a `HashMap` is O(1), making it quick to add value or retrieve value for each comparison.
+*** User can input more than one field of the same prefix as a `HashMap` is used here.
+** Cons: It is messy to implement, especially when different checks have to be made for different fields.
+
+* ** Alternative 2:** Creates a `List` for each prefix instead.
+*** Pros: Easier to manage, `test` method should look neater.
+*** Cons: Takes O(N) to iterate through the `List`, and does not check for duplicates.
 // end::find[]
+
+// tag::filter[]
+=== Filter Feature
+==== Current Implementation
+
+The `filter` feature differs from the `find` feature based on the fact that if any of the searched parameter is fulfilled, the overridden `test` method for the `find` feature returns `true`.
+However, the overridden `test` method for `filter` is only asserted if all of the searched parameters are fulfilled.
+
+Similar to the `find` mechanism, `filter` is implemented by creating a `keywordsMap` which stores the searched keywords in a `HashMap`.
+Based on the preceding prefixes of the user input, the tokenized argument is being stored as the `value` of the respective prefix `key`.
+
+===== Candidates
+The `filterCandidateCommand` is facilitated by the `CandidateContainsFilterKeywordsPredicate` which implements `Predicate<Candidate>`
+and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
+
+===== Companies
+The `filterCompanyCommand` is facilitated by the `CompanyContainsFilterKeywordsPredicate` which implements `Predicate<Company>`
+and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
+
+===== Job Offers
+The `filterJobOfferCommand` is facilitated by the `JobOfferContainsFilterKeywordsPredicate` which implements `Predicate<JobOffer>`
+and overrides the `test` and `equal` methods such that more fields can be searched at the same time.
+
+Through the `test` method, it compares every value in the `keywordsMap` with the respective field of each entry and returns `true` if the object contains all the searched fields.
+
+The `test` method is facilitated by the following operations:
+
+* StringUtil#isWithinRange - checks whether the the job offer has an `ageRange` that satisfies the `age` of the `candidate`.
+* StringUtil#isMoreThanOrEqualTo - checks whether the job offer has a `salary` offer that is higher than the `candidate` 's expected `salary`.
+
+After which, the respective list which is exposed in the `Model` interface as either `Model#updateFilteredCandidateList`, `Model#updateFilteredCompanyList` or `Model#updateCompanyJobList` is being updated.
+
+[NOTE]
+Entering a prefix that is not recognized will throw a command exception.
+[NOTE]
+The filtering of all three entities (Candidate, Company, JobOffer) follow the same mechanism.
+
+An example usage scenario and how the filter mechanism behaves at each step is shown below.
+
+Step 1. The user launched the application for the first time.
+
+.. `UniqueCandidateList` will be initialised with the list of candidates in RecruitBook
+.. `UniqueCompanyList` will be initialised with the list of saved companies in `CompanyBook`.
+.. `UniqueCompanyJobList` will be initialised with the list of saved job offers in `CompanyBook`.
+
+Step 2. The user executes `filterc n/Alex e/alexyeoh@example.com` command to filter the candidates who is named `Alex` and has the email `alexyeoh@example.com`.
+
+The following sequence diagram shows how the find operation works:
+
+image::FilterSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How filter feature executes
+* **Alternative 1 (current choice):** Having three variations of filter feature for different entities.
+** Pros:
+*** Greater distinction between the entities.
+*** More direct and intuitive for users as candidate and company objects contain same prefixes such as phone, address and email address etc.
+
+** Cons:
+*** More commands to deal with, same changes have to be made across all three commands.
+*** It might not be that user-friendly for users who prefer an all-in-one `filter` command.
+
+* **Alternative 2:** Have a central `filterManager` that handles all filters.
+** Pros: Lesser commands to handle, makes application easier for user to use
+** Cons: Some fields are found in both `candidate` and `company`, making it difficult to distinguish between the two if the same prefix is entered.
+
+===== Aspect: Data structure to support the filter feature
+* ** Alternative 1 (current choice):** Parses the user's input into various arguments and compares each argument with each value in the object to test if it is contained in the object.
+** Pros:
+*** Putting to and getting from a `HashMap` is O(1), making it quick to add value or retrieve value for each comparison.
+*** User can input more than one field of the same prefix as a `HashMap` is used here.
+** Cons: It is messy to implement, especially when different checks have to be made for different fields.
+
+* ** Alternative 2:** Creates a `List` for each prefix instead.
+*** Pros: Easier to manage, `test` method should look neater.
+*** Cons: Takes O(N) to iterate through the `List`, and does not check for duplicates.
+
+image::FilterSequenceDiagram.png[width="800"]
+// end::filter[]
 
 // tag::edit[]
 === Edit Feature
