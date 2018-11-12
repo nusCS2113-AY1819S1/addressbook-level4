@@ -1,5 +1,7 @@
-Zhuang Yuan +
-project portfolio
+= Zhuang Yuan - project portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
 
 Project: Club Hub
 
@@ -9,14 +11,13 @@ Project: Club Hub
 
 [width="100%",cols="50%,50%",]
 |=======================================================================
-|image:Project%20Portfolio%20Page_files/image001.png[Tip
-icon,width=15,height=15] |Club Hub is a desktop address book application
-designed for University interest group/club leaders as its primary
-users. This application aims to help these leaders better manage their
-members, finances, calendar, and inventory. The user interacts with the
-program using a Command Line Interface (CLI), and it has a Graphic User
-Interface (GUI) created with JavaFX. It is written in Java and has about
-10 thousand lines of codes.
+|image:image001.png[Tip icon,width=15,height=15] |Club Hub is
+a desktop address book application designed for University interest
+group/club leaders as its primary users. This application aims to help
+these leaders better manage their members, finances, calendar, and
+inventory. The user interacts with the program using a Command Line
+Interface (CLI), and it has a Graphic User Interface (GUI) created with
+JavaFX. It is written in Java and has about 10 thousand lines of codes.
 |=======================================================================
 
  
@@ -25,8 +26,7 @@ Interface (GUI) created with JavaFX. It is written in Java and has about
 
 [width="100%",cols="50%,50%",]
 |=======================================================================
-|image:Project%20Portfolio%20Page_files/image002.png[Tip
-icon,width=15,height=15] a|
+|image:image002.png[Tip icon,width=15,height=15] a|
 Major enhancements: implemented the Club Account feature
 
 -        Function 1: adding or removing a ledger record.
@@ -65,16 +65,15 @@ indexes as mentioned in the description for function 2.
 
 [width="100%",cols="50%,50%",]
 |=======================================================================
-|image:Project%20Portfolio%20Page_files/image001.png[Tip
-icon,width=15,height=15] a|
+|image:image001.png[Tip icon,width=15,height=15] a|
 Code:
 [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=&sort=displayName&since=2018-09-12&until=2018-10-18&timeframe=day&reverse=false&repoSort=true[Functional
 Code]]
 
-To see more details of the code, extracts from the project?s developer
+To see more details of the code, extracts from the project’s developer
 and user guide are included below:
 
-=== 1.     The User Guide shown here provides details on how the commands are used on the client?s side.
+=== 1.     The User Guide shown here provides details on how the commands are used on the client’s side.
 
  
 
@@ -133,7 +132,7 @@ Format: debit d/[DD/MM] b/[NUM]
 
 Example: debit d/ 10/10 b/ 100
 
-=== 2.     The Developer Guide shown here provides details on how the commands are implemented on the developers? side.
+=== 2.     The Developer Guide shown here provides details on how the commands are implemented on the developers’ side.
 
  
 
@@ -164,11 +163,11 @@ extends AddressBook with an AddLedger and RemoveLedger method.
 
  
 
-AddressBook#addLedger() ? Adds a ledger object to the UniqueLedgerList.
+AddressBook#addLedger() — Adds a ledger object to the UniqueLedgerList.
 
  
 
-AddressBook#removeLedger() ? Removes a ledger object from the
+AddressBook#removeLedger() — Removes a ledger object from the
 UniqueLedgerList.
 
  
@@ -258,8 +257,8 @@ them to find one to edit.
 
 [width="100%",cols="50%,50%",]
 |=======================================================================
-|image:Project%20Portfolio%20Page_files/image001.png[Tip
-icon,width=15,height=15] |Some of the bugs identified a
+|image:ppp_files/image001.png[Tip icon,width=15,height=15] |Some of the
+bugs identified a
 |=======================================================================
 
  
@@ -267,25 +266,21 @@ icon,width=15,height=15] |Some of the bugs identified a
 === 4.    Design Considerations
 
 [width="100%",cols="50%,50%",]
-|=======================================================================
-|image:Project%20Portfolio%20Page_files/image003.png[Tip
-icon,width=15,height=15] a|
+|============================================================
+|image:image003.png[Tip icon,width=15,height=15] a|
 
  
 
-|=======================================================================
+|============================================================
 
  
 
 === 5.    Future Implementation
 
 [width="100%",cols="50%,50%",]
-|=======================================================================
-|image:Project%20Portfolio%20Page_files/image004.png[Tip
-icon,width=15,height=15] a|
+|============================================================
+|image:image004.png[Tip icon,width=15,height=15] a|
 
  
 
-|=======================================================================
-
- 
+|============================================================
