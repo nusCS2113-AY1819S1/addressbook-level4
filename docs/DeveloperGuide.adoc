@@ -466,7 +466,7 @@ Step 2. The command is parsed and the result is shown.
 ==== Current Implementation
 
 The `list` feature allows users to filter through all the individual people in ProManage and understand which department
-they are from. The command currently has 4 sub-features; `list all`. `list all people`, `list all events` and `list dep DEPARTMENT`. The user can list all the
+they are from. The command currently has 4 sub-features; `list all` , `list all people`, `list all events` and `list dep DEPARTMENT`. The user can list all the
 people and events in ProManage by simply typing `list all`. Alternatively, the user can filter through ProManage and get the
 relevant Person's information by listing those of the specified department. The user can list multiple departments such
 as `list dep Admin Finance`. As of now, each person can only be inside one department.
@@ -492,7 +492,7 @@ Step 2. The `LogicManager` instance calls `AddressBookParser#parsecommand`, whic
 "list".
 
 Step 3. `ListCommandParser#parse` parses the type of command that is called upon and if applicable, the departments
-listed. The list command can take in either `all` or `dep`. `all` means that are no predicates and 'dep' means specific
+listed. The list command can take in either `all`, `all people` , `all events` or `dep`. `all` means that are no predicates and 'dep' means specific
 departments are about to be listed. An instance of the `ListCommand` encapsulating the type of `ListCommand` and if
 applicable, the predicates involved, is then returned to `Logic Manager`.
 
@@ -961,7 +961,7 @@ relevant people
 need to attend
 
 |`* * *` |User |Exit command |
-
+// end::userstories[]
 |`* * *` |New Employee |See usage instructions |Refer to instructions when I forget how to use the ProManage
 
 |`* * *` |Employee |Find a person by name |Locate details of people without having to go through the entire list
@@ -989,7 +989,7 @@ need to attend
 _{More to be added}_
 
 [appendix]
-// end::userstories[]
+
 // tag::usecases[]
 == Use Cases
 
@@ -1071,7 +1071,7 @@ Use case ends.
 ** 3a1. ProManage shows an error message.
 +
 Use case resumes at step 2.
-
+// end::usecases[]
 [discrete]
 === Use case: Add Event
 
@@ -1191,7 +1191,7 @@ Use case ends.
 ** Use case ends
 
 [appendix]
-// end::usecases[]
+
 
 // tag::usecases_invite[]
 [discrete]
@@ -1306,8 +1306,6 @@ be able to accomplish most of the tasks faster using commands than using the mou
 .  User cannot be in multiple departments.
 .  The program should respond within 2 seconds after creation, editing, and deletion of events.
 
-_{More to be added}_
-
 [appendix]
 // end::nonfunctionalrequirements[]
 == Glossary
@@ -1413,7 +1411,7 @@ and `add n/Mark p/93455678 e/mark@example.com a/Mark street, block 12, #05-01 de
    Expected: The details of John and Tracy or any personnel who is in the Admin and Finance department will appear. Details of the listed personnel will be listed.
 .. Test case: `list all people` +
    Expected: The details of all personnel will be listed.
-.. Other incorrect delete commands to try: `list admn`, `list al people` (where the input is not of correct spelling form)+
+.. Other incorrect delete commands to try: `list admn`, `list al people` (where the input is not of correct spelling form) +
    Expected: Error thrown.
 
 . Listing all personnel and events
@@ -1421,13 +1419,13 @@ and `add n/Mark p/93455678 e/mark@example.com a/Mark street, block 12, #05-01 de
 .. Prerequisites: Add personnel of different departments such as the example above. Add different events into ProManage using the `addEvent n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59` and
 `addEvent n/Financial Review d/Review the financial quarter l/Conference Room 4 date/2018-10-23 s/14:00 e/16:30`.
 
-.. Test case: `list all events` +
+.. Test case: `list all events`
    Expected: The details of all events will be listed.
 
 .. Test case: `list dep Admin Finance` or any DEPARTMENT -> `list all`
    Expected: The details of all personnel and events will be listed.
 
-_{ more test cases ... }_
+
 
 === Saving data
 
