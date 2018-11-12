@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.Command.MESSAGE_LOGIN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 
 import static seedu.address.testutil.LostandFoundFeatureTest.getExpectedCommandResult;
-import static seedu.address.testutil.LostandFoundFeatureTest.getExpectedFoundItems;
 import static seedu.address.testutil.LostandFoundFeatureTest.getExpectedLostItems;
 import static seedu.address.testutil.LostandFoundFeatureTest.getExpectedMessageOutput;
 import static seedu.address.testutil.LostandFoundFeatureTest.getStockList;
@@ -35,17 +34,15 @@ public class LostandFoundCommandTest {
     private List<Item> lastShownList = model.getFilteredItemList();
     private LostandFoundCommand lostandfoundCommand = new LostandFoundCommand();
     private ArrayList<SimpleItem> actualLostItems = new ArrayList<>();
-    private ArrayList<SimpleItem> actualFoundItems = new ArrayList<>();
 
     @Test
     public void checkSortSimpleItems() {
-        lostandfoundCommand.sortSimpleItems(lastShownList, actualLostItems, actualFoundItems);
+        lostandfoundCommand.sortSimpleItems(lastShownList, actualLostItems);
         assertEquals(actualLostItems, getExpectedLostItems());
-        assertEquals(actualFoundItems, getExpectedFoundItems());
     }
     @Test
     public void checkGetMessageOutput() {
-        lostandfoundCommand.sortSimpleItems(lastShownList, actualLostItems, actualFoundItems);
+        lostandfoundCommand.sortSimpleItems(lastShownList, actualLostItems);
         String actualMessageOutput = lostandfoundCommand.getMessageOutput(actualLostItems);
         assertEquals(actualMessageOutput, getExpectedMessageOutput());
     }

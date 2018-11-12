@@ -29,11 +29,9 @@ public class LostandFoundCommand extends Command {
         if (!model.getLoginStatus()) {
             throw new CommandException(MESSAGE_LOGIN);
         }
-
         ArrayList<SimpleItem> lostItems = new ArrayList<>();
-        ArrayList<SimpleItem> foundItems = new ArrayList<>();
         List<Item> lastShownList = model.getFilteredItemList();
-        sortSimpleItems(lastShownList, lostItems, foundItems);
+        sortSimpleItems(lastShownList, lostItems);
         String messageOutput = getMessageOutput(lostItems);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult(messageOutput);
@@ -42,18 +40,14 @@ public class LostandFoundCommand extends Command {
     /**
      * Sorts the lost item from the Stock List.
      */
-    void sortSimpleItems (List<Item> lastShownList, List<SimpleItem> lostItems, List<SimpleItem> foundItems
-                          ) {
+    public void sortSimpleItems (List<Item> lastShownList, List<SimpleItem> lostItems
+    ) {
         for (Item item : lastShownList) {
             if (item.getLoststatus().getLoststatusLost() > 0) {
                 lostItems.add(new SimpleItem(item.getName(),
                         new Quantity(Integer.toString(item.getLoststatus().getLoststatusLost()))));
             }
 
-            if (item.getLoststatus().getLoststatusFound() > 0) {
-                foundItems.add(new SimpleItem(item.getName(),
-                        new Quantity(Integer.toString(item.getLoststatus().getLoststatusFound()))));
-            }
         }
     }
     String getMessageOutput (List<SimpleItem> lostItems) {
