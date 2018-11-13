@@ -6,6 +6,7 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -19,6 +20,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,7 +37,14 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
+
+    private CalendarPanel calendarPanel;
+
+    //private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
+    private ExpenditureListPanel expenditureListPanel;
     private PersonListPanel personListPanel;
+
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -44,13 +53,22 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane browserPlaceholder;
 
     @FXML
+    private StackPane calendarPlaceholder;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
+    private StackPane expenditureListPanelPlaceholder;
 
     @FXML
+    private MenuItem helpMenuItem;
+    /*
+    @FXML
     private StackPane personListPanelPlaceholder;
+    */
+    @FXML
+    private StackPane taskListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -119,11 +137,23 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        //browserPanel = new BrowserPanel();
+        //browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
+        calendarPanel = new CalendarPanel();
+        Node x = calendarPanel.getRoot();
+        calendarPlaceholder.getChildren().add(x);
+
+        expenditureListPanel = new ExpenditureListPanel(logic.getFilteredExpenditureList());
+        expenditureListPanelPlaceholder.getChildren().add(expenditureListPanel.getRoot());
+
+        /*
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        */
+
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -186,9 +216,21 @@ public class MainWindow extends UiPart<Stage> {
     private void handleExit() {
         raise(new ExitAppRequestEvent());
     }
-
+    /*
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+    */
+    public TaskListPanel getTaskListPanel() {
+        return taskListPanel;
+    }
+
+    public ExpenditureListPanel getExpenditureListPanel() {
+        return expenditureListPanel;
+    }
+
+    public CalendarPanel getCalendarPanel() {
+        return calendarPanel;
     }
 
     void releaseResources() {

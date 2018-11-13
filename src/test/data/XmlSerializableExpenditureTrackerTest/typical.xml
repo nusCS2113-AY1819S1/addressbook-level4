@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- ExpenditureTracker save file which contains the same Task values as in TypicalTasks#getTypicalTodoList() -->
+<expendituretracker>
+    <expenditures>
+        <description>Chicken rice</description>
+        <category>Food</category>
+        <money>12</money>
+        <date>01-01-2018</date>
+    </expenditures>
+    <expenditures>
+        <description>HM hoodie</description>
+        <category>Clothing</category>
+        <money>100</money>
+        <date>01-01-2018</date>
+    </expenditures>
+    <expenditures>
+        <description>iPhone</description>
+        <category>Electronics</category>
+        <money>2000</money>
+        <date>03-02-2018</date>
+    </expenditures>
+    <expenditures>
+        <description>Nike shoes</description>
+        <category>Shopping</category>
+        <money>199</money>
+        <date>06-12-2018</date>
+    </expenditures>
+    <expenditures>
+        <description>Coke</description>
+        <category>Drink</category>
+        <money>1</money>
+        <date>05-12-2018</date>
+    </expenditures>
+    <expenditures>
+        <description>Air conditioner</description>
+        <category>Furniture</category>
+        <money>700</money>
+        <date>04-03-2017</date>
+    </expenditures>
+    <expenditures>
+        <description>Bose speaker</description>
+        <category>Electronics</category>
+        <money>400</money>
+        <date>09-10-2018</date>
+    </expenditures>
+</expendituretracker>

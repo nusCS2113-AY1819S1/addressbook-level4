@@ -1,0 +1,115 @@
+= Tay Ran Tian - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Project: Something Daily
+
+---
+
+This project portfolio documents my contributions to the project and our desktop application, Something Daily.
+
+== Overview of Something Daily
+
+Something Daily is a desktop task and expenditure tracker application that helps in the management of tasks and expenses.
+The application aims to be an all-in-one package with 3 key components: To-do List, Expenditure Tracker, and Calendar.
+The application is created for NUS SoC students to assist them in managing all of their academic work and spendings which will improve their busy student life.
+
+The user mainly interacts with the application using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX.
+The application is built upon Address Book L4, a Java application intended for NUS students in learning Software Engineering principles while using Java as the main programming language.
+The project currently has over 10,000 lines of code.
+
+Main features of Something Daily includes:
+
+* tracks and view all added academic tasks
+* provides easy-to-read deadline reminder for tasks
+* records all added expenses
+* provides expenditure advices based on user's expenses history
+* provides daily summary on all due tasks and expenses
+
+The project is developed by 4 NUS students and it is our goal that Something Daily can be a product that all students use on a daily basis.
+We are committed in helping students like us and we plan to make the product better for years to come.
+
+== Summary of contributions
+
+This section highlights all of my contributions to the project and the application.
+
+* *Major enhancement*:
+
+1. Designed *model component for To-do List*
+** What it does: It is the component that holds all to-do list related data of the application in-memory.
+** Justification: This component is a core building block of the to-do list in the application.
+
+2. Designed *storage component for To-do List*
+** What it does: It is the component that reads and writes to-do list data to the hard disk.
+** Justification: This component allows user's to-do list data to be stored, hence allowing the user to keep track of his/her task's progress.
+
+3. Added *the ability to mark a task as completed/uncompleted*
+** What it does: The command allows the user to mark a specific task in the to-do list as completed or uncompleted. The status is then updated accordingly in the UI of the to-do list.
+** Justification: This feature is key to a functioning to-do list, where users can keep track of the status of his/her tasks.
+** Highlights: This enhancement enables commands like viewing a filtered list based on task's status.
+
+4. Added *the ability to view a filtered list of tasks*
+** What it does: The command allows the user to view a list of tasks based on the task's completion status.
+** Justification: This feature improves the user experience and efficiency as it helps the user in navigating through all of the tasks in the to-do list. Users can now easily separate out uncompleted tasks from completed task.
+
+* *Minor enhancement*:
+
+1. Updated application icon and application name to reflect accurately on our product
+2. Modified and polished console messages in the application to enhance user experience
+3. Wrote various test files to test different components of the application. This is to ensure the application is functional per component.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=arty9[RepoSense Dashboard]]
+
+* *Other contributions*:
+
+** Project management:
+*** Set up team organisation on GitHub
+*** Set up and managed GitHub issue tracker and labels
+*** Set up and managed milestones on GitHub
+*** Managed releases `v1.2` - `v1.4` (4 releases) on GitHub
+
+** Documentation:
+*** Updated README document
+*** Updated the About Us page
+*** Restructured commands listing in section 3 & 5 of the User Guide
+*** Updated class diagrams for model, storage and UI components in the Developer Guide
+*** Updated various sequence diagrams in the Developer Guide
+*** Wrote the user stories and use cases for the to-do list under the Appendix section of the Developer Guide
+*** Wrote the manual testing instructions for the to-do list under the Appendix section of the Developer Guide
+
+** Tools:
+*** Set up Travis CI for the team repository
+*** Set up Coveralls for the team repository
+*** Set up Codacy for the team repository
+*** Set up auto-publishing of documentations for the team repository
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=TDLadd]
+
+include::../UserGuide.adoc[tag=TDLedit]
+
+include::../UserGuide.adoc[tag=TDLdelete]
+
+include::../UserGuide.adoc[tag=TDLcomplete]
+
+include::../UserGuide.adoc[tag=TDLuncomplete]
+
+include::../UserGuide.adoc[tag=TDLview]
+
+include::../UserGuide.adoc[tag=check]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide and its appendix. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=completeuncomplete]
+
+include::../DeveloperGuide.adoc[tag=viewtask]

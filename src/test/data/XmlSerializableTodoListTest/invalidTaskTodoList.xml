@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<todolist>
+    <!-- Task with invalid date field -->
+    <tasks>
+        <name>Milestone v9.9</name>
+        <module>CS2113</module>
+        <date>10-023</date>
+        <priority>3</priority>
+        <status>false</status>
+    </tasks>
+</todolist>

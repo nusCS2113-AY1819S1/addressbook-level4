@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<expendituretracker>
+
+    <expenditures>
+        <description>Milestone v9.9</description>
+        <category>CS2113</category>
+        <money>10-02</money>
+        <date>3</date>
+    </expenditures>
+
+    <!-- Expenditure with same identity as Milestone v9.9 -->
+    <expenditures>
+        <description>Milestone v9.9</description>
+        <category>CS2113</category>
+        <money>10-02</money>
+        <date>3</date>
+    </expenditures>
+
+</expendituretracker>

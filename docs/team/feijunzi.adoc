@@ -1,0 +1,77 @@
+= Xin Shenzi - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Something Daily
+
+---
+
+== Overview
+
+Something Daily is a desktop application as a combination of to-do list and
+expenditure tracker which is written in Java. The target users are NUS SoC students.
+This application aims to improve students' life efficiency from helping them deal
+with their numerous deadlines and plan their daily expenditures. The user interacts
+with it using a CLI, and it has a GUI created with JavaFX. This project portfolio is
+aimed to show my contribution to our project.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the check command for Expenditure Tracker*
+** What it does: allows the user to check how much money they have spent in a specific period.
+** Justification: This feature improves the product significantly because if a user want to know how much money they have spent in a period, they can easily get the value.
+
+* *Major enhancement*: added *a pie-chart to show the expenditure*
+** What it does: allows the user to see where and how much they have spent when they want to use the check command.
+** Justification: This feature improves the product significantly because users can see their each expense in a period directly.
+** Highlights: This enhancement will appear a new window to show the chart.
+** Credits: This feature needs another library *jfreechart* to draw the chart.
+
+* *Major enhancement*: added *the ability to delete an expenditure*
+** What it does: allows the user to delete an expenditure by index.
+** Justification: This feature improves the product significantly because users may add a wrong expenditure.
+
+* *Major enhancement*: added *the ability to edit an expenditure*
+** What it does: allows the user to edit an expenditure by index.
+** Justification: This feature improves the product significantly because users may want to change some parts of an expenditure.
+
+* *Minor enhancement*: change GUI for expenditure description
+* *Minor enhancement*: some test files for expenditure tracker
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=feijunzi[RepoSense Dashboard]]
+
+* *Other contributions*:
+
+** Documentation:
+*** Add implementation of ET_check command in the Developer Guide.
+*** Add some command of Expenditure tracker in the Users Guide.
+*** Update use cases in the Developer Guide.
+
+** Community:
+*** PRs reviewed (with review comments): https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#18], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#20], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#53], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#65], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#91], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#117], https://github.com/CS2113-AY1819S1-T09-2/main/pulls?q=is%3Apr+is%3Aclosed[#120]
+
+** Tools:
+*** Integrated a third party library (jFreeChart) to the project
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability
+to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=ETcheck]
+include::../UserGuide.adoc[tag=ETdelete]
+include::../UserGuide.adoc[tag=ETedit]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my
+ability to write technical documentation and the technical depth of my contributions
+to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=checkexpenditure]
+include::../DeveloperGuide.adoc[tag=expenditureUseCases]
