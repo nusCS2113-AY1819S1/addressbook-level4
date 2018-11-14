@@ -25,12 +25,13 @@ public interface ProductDatabaseStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyProductDatabase> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyProductDatabase> readProductDatabaseBook() throws DataConversionException, IOException;
 
     /**
      * @see #getProductInfoBookFilePath()
      */
-    Optional<ReadOnlyProductDatabase> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyProductDatabase> readProductDatabaseBook(Path filePath) throws DataConversionException,
+            IOException;
 
     /**
      * Saves the given {@link ReadOnlyProductDatabase} to the storage.

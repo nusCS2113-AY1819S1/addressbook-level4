@@ -32,7 +32,9 @@ import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.Transaction;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 
+
 //@@amirulmaricar
+
 public class DeregisterCommandTest {
 
     @Rule

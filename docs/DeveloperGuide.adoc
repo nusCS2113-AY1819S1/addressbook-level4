@@ -201,6 +201,7 @@ image::DeleteProductSdForLogic.png[width="800"]
 // end::logiccomponent[]
 
 [[Design-Model]]
+// tag::modelcomponent[]
 === Model component
 
 .Structure of the Model Component
@@ -230,8 +231,9 @@ As a more OOP model, we can store a `Tag` list in both `Product Database` and `D
 can reference. This would allow `Product Database` and `Distributor Book` to only require one `Tag` object per unique `Tag`, instead of each `Product`/`Distributor` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
-
+// end::modelcomponent[]
 [[Design-Storage]]
+// tag::storagecomponent[]
 === Storage component
 
 .Structure of the Storage Component
@@ -246,6 +248,7 @@ The `Storage` component,
 * can save the User Database data in xml format and read it back.
 * can save the Product Database data in xml format and read it back.
 
+// end::storagecomponent[]
 [[Design-Commons]]
 === Common classes
 
@@ -296,8 +299,12 @@ When the user is deleted, the following storage files stored in the system manag
 ===== Aspect: Implementation of Users Database
 *   **Alternative 1 (current choice):** All users stored collectively in one XML file.
     (users.xml)
+    ** Pros: Inexpensive and adapts well to existing codebase
+    ** Cons: Maintenance
 
 *   **Alternative 2:** SQL/NoSQL Databases.
+    ** Pros: Powerful and stable
+    ** Cons: Complexity
 
 // end::authentication[]
 // tag::undoredo[]
@@ -400,26 +407,50 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+//tag::saleshistory[]
 === Storing Transactions Feature
 ==== Current Implementation
-* The storage of transactions is facilitated by the `SalesHistory`, `ShopDay` and `Transactions` classes.
+* The storage of transactions is facilitated by the `SalesHistory` and `Transactions` classes.
 * When `AddressBook` is loaded, it creates an object of the `SalesHistory` class using the `SalesHistory` default
-constructor. The SalesHistory default constructor initialises its `ActiveDay` as the current day.
-* Now, when the user inputs `transaction pr/<product name> pr/<product name> ... pr/product name>` into the CLI, the
-`AddressBookParser` processes this command and creates an object of type `AddTransactionCommand`.
-* `LogicManager` receives this command object and executes it. In its execution, the transaction is added to the current
-day, that is, the active `ShopDay` in the `SalesHistory` of `AddressBook`.
+constructor, which uses data read from that specific user's saleshistory `.xml` file.
+When the file is not found/not in the correct format, the user will begin with an empty saleshistory.
+* When the user inputs `transaction pr/<product name> pr/<product name> ... pr/product name>` into the CLI, the
+`AddTransactionCommandParser` processes this command and creates an object of type `AddTransactionCommand`.
+* `LogicManager` receives this command object and executes it. In its execution, the saleshistory is updated
+with the required transaction and raises an event for the user's saleshistory file on the hard disk to be updated.
+
+image::TransactionSequenceDiagram.png[width="800"]
+
 
 [NOTE]
-It is important to note that the `ShopDay` class stores each `Transaction` on a `TreeMap`, where each `Transaction` has
-its `reminderTime` as its key. This is to facilitate quick access to any transaction on a given day, and to maintain
+It is important to note that the `SalesHistory` class stores each `Transaction` on a `TreeMap`, where each `Transaction` has
+its `transactionTime` as its key. This is to facilitate quick access to any transaction on a given day for large number of transactions, and to maintain
 the `Transaction` objects in order of their creation times within memory.
 
 ==== Alternative Implementations
 Currently, the `Transaction` objects are stored on a `TreeMap` to maintain their chronological order in memory. However,
 should this prove non-essential, this will be redone on a `HashMap` to facilitate quicker access and easier handling in
 the code.
+Alternatively, using the `ObservableList` may be sufficient if it turns out the sales volumes are small.
 
+=== Storing Reminders Feature
+* The storage of reminders is facilitated by the `SalesHistory` and the `Reminders` classes.
+* When `AddressBook` is loaded, it creates an object of the `SalesHistory` class using the `SalesHistory` default
+  constructor, which uses data read from that specific user's saleshistory `.xml` file.
+  When the file is not found/not in the correct format, the user will begin with an empty saleshistory
+* When the user stores a reminder, the `reminderTime` is used as the key. Hence, `Reminder`
+is a `TimeIdentifiedClass`
+* Each reminder is marked as not yet due for completion at the time of their creation.
+* Every second, `threadduereminders` command is sent from CommandBox. This compares the current time against the stored reminder times to
+determine which reminders have reached their deadlines. If there are any reminders due,
+the user receives a message for the same, and the reminder is marked as viewed by the thread.
+
+image::remindersequencediagram.png[width="800"]
+
+[NOTE]
+The `Reminders` are stored on a `TreeMap`, similar to the `Transaction`, in `SalesHistory`
+
+// end::saleshistory[]
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
@@ -444,13 +475,15 @@ Additionally, it implements the following operations:
 ===== Aspect: How encryption and decryption executes
 
 *   *Alternative 1 (proposed choice):* Intercept `XMLUtil` when reading and saving XML Storage files.
-*   **Aleternative 2:** Individual encrypt and decrypt command.
-
+        ** Pros:    Best practice
+        ** Cons:    Require remodeling of application
+*   **Alternative 2:** Individual encrypt and decrypt command.
+*   **Alternative 3:** Create temporary file to contain decrypted data
+        ** Pros:    This will work with current architecture style.
+        ** Cons:    Bad information security practice as there is a momentary
+                    vulnerability.
 // end::dataencryption[]
 
-// tag::threadreminders[]
-=== [Proposed] Thread Due Reminders
-// end::threadreminders[]
 == Documentation
 
 We use asciidoc for writing documentation.
@@ -764,7 +797,7 @@ image::getting-started-ui-status-after.png[width="500"]
 ** link:{repoURL}/src/main/java/seedu/productInfo/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the productInfo book is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu/productInfo/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of products when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/productInfo/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of products whenever there are new changes to the addressbook.
+** Use link:{repoURL}/src/main/java/seedu/productInfo/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of products whenever there are new changes to the Product Database.
 ** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
 ** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of products status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
@@ -793,7 +826,7 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 
 By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
+*Scenario:* You are a software maintainer for `Product Database`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
 Edits the remark for a product specified in the `INDEX`. +
@@ -1152,12 +1185,12 @@ _{ more test cases ... }
 
 . Deleting a product while all products are listed
 
-.. Prerequisites: List all products using the `list` command. Multiple products in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
+.. Prerequisites: There should be multiple products in the list.
+.. Test case: `deleteproduct 1` +
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+.. Test case: `deleteproduct 0` +
    Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `deleteproduct`, `deleteproduct x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
 _{ more test cases ... }_
@@ -1166,19 +1199,19 @@ _{ more test cases ... }_
 
 . Deleting a distributor while all distributors are listed
 
-.. Prerequisites: There should be a atleast 2 products to edit. The second one has Serial Number = 123.
-.. Test case: `Editproduct 1 inv/12` +
+.. Prerequisites: There should be a at least 2 products to edit. The second one has Serial Number = 123.
+.. Test case: `editproduct 1 inv/12` +
    Expected: First product from the list is edited. The current inventory should now be 12, and a success message is shown in the result display panel.
 .. Test case: `editproduct 1 s/123` +
    Expected: No product is updated. Error details of invalid serialnumber because a product with serial number = 123 already exists  is shown in the result display panel. Status bar remains the same.
-.. Other incorrect edit commands to try: `delete x n/y` (where x is larger than the list size and y does not exist) +
-   Expected: Error details of invalid index is shown in the result display panel.
+.. Other incorrect edit commands to try: `deleteproduct x n/y` (where x is larger than the list size and y does not exist) +
+   Expected: Error details of invalid command format is shown in the result display panel.
 
 _{ more test cases ... }_
 
 === Listing all products
 
-.
+. Listing all products
 
 .. Prerequisites: There is more then two products and the user has filtred the list by searching for a product.
 .. Test case: `listproducts` +

@@ -73,15 +73,15 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyProductDatabase> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(productDatabaseStorage.getProductInfoBookFilePath());
+    public Optional<ReadOnlyProductDatabase> readProductDatabaseBook() throws DataConversionException, IOException {
+        return readProductDatabaseBook(productDatabaseStorage.getProductInfoBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyProductDatabase> readAddressBook(Path filePath)
+    public Optional<ReadOnlyProductDatabase> readProductDatabaseBook(Path filePath)
             throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return productDatabaseStorage.readAddressBook(filePath);
+        return productDatabaseStorage.readProductDatabaseBook(filePath);
     }
 
     @Override

@@ -35,11 +35,11 @@ public class AddCommand extends Command {
             + PREFIX_REMAINING_ITEMS + "REMAINING ITEMS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Apple "
+            + PREFIX_NAME + "Pasta sallad "
             + PREFIX_SERIAL_NR + "98765432 "
             + PREFIX_DISTRIBUTOR + "Alfred "
             + PREFIX_PRODUCT_INFO + "Contains chicken etc "
-            + PREFIX_TAG + "fruit "
+            + PREFIX_TAG + "Sallad "
             + PREFIX_REMAINING_ITEMS + "12";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s \n\nRemember to edit the added distributor's"

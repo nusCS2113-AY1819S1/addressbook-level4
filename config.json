@@ -1,0 +1,25 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "ParasK26",
+      "displayName": "BHA...HNA",
+      "authorNames": ["ParasK26"]
+    },
+    {
+      "githubId": ["amirulmaricar","Amirul Maricar"],
+      "displayName": "MOH...OFF",
+      "authorNames": ["amirulmaricar","Amirul Maricar"]
+    },
+    {
+      "githubId": ["garagaristahir","Gara Tahir"],
+      "displayName": "TAH...ARA",
+      "authorNames": ["garagaristahir","Gara Tahir"]
+    },
+    {
+      "githubId": "dyeosy98",
+      "displayName": "YEO...ISE",
+      "authorNames": ["dyeosy98"]
+    }
+  ]
+}

@@ -232,7 +232,7 @@ Deletes all distributors from the distributor book.
 
 // end::distributormanagement[]
 
-// tag::journal[]
+// tag::saleshistory[]
 
 === Sales History
 
@@ -247,6 +247,8 @@ individual product quantities will be stored.
 Examples:
 
 * `transaction pr/Apple pr/Banana pr/Cherries`
+
+==== Making a transaction while there is multiple products with the same name `[coming in v2.0]`
 
 ==== View the latest transaction: `latest`
 
@@ -307,7 +309,7 @@ space between "dd" and "HH" in the command format.
 Examples:
 
 * `removereminder time/ 2018/10/26 12:30:00`
-// end::journal[]
+// end::saleshistory[]
 
 === Clearing all entries : `clear`
 Format: `clear` +

@@ -34,16 +34,16 @@ public class XmlProductDatabaseStorage implements ProductDatabaseStorage {
     }
 
     @Override
-    public Optional<ReadOnlyProductDatabase> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyProductDatabase> readProductDatabaseBook() throws DataConversionException, IOException {
+        return readProductDatabaseBook(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readProductDatabaseBook()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyProductDatabase> readAddressBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyProductDatabase> readProductDatabaseBook(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 

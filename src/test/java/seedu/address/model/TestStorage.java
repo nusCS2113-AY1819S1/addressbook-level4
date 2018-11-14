@@ -50,12 +50,12 @@ public class TestStorage extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyProductDatabase> readAddressBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyProductDatabase> readProductDatabaseBook() throws DataConversionException, IOException {
         return null;
     }
 
     @Override
-    public Optional<ReadOnlyProductDatabase> readAddressBook(Path filePath) {
+    public Optional<ReadOnlyProductDatabase> readProductDatabaseBook(Path filePath) {
         return null;
     }
 
