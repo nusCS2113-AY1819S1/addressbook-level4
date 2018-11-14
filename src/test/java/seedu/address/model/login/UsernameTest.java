@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
-//@@author amirulmaricar
+//@@amirulmaricar
 public class UsernameTest {
 
     @Test

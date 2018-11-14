@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.address.testutil.Assert;
-//@@author Gara
+//@@garagaristahir
 public class RemainingItemsTest {
 
     @Test
