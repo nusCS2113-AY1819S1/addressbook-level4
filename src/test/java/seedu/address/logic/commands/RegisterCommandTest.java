@@ -31,7 +31,7 @@ import seedu.address.model.timeidentifiedclass.Reminder;
 import seedu.address.model.timeidentifiedclass.Transaction;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 
-//@@author Amirul
+//@@amirulmaricar
 public class RegisterCommandTest {
 
     @Rule

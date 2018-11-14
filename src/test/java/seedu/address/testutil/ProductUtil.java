@@ -15,7 +15,7 @@ import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
 
-//@@author Gara
+//@@garagaristahir
 /**
  * A utility class for Product.
  */

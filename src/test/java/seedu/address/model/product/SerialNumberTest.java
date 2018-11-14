@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
-//@@author Gara
+//@@garagaristahir
 public class SerialNumberTest {
 
     @Test

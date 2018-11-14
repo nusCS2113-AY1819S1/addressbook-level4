@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
-//@@author Amirul
+//@@amirulmaricar
 public class UserTest {
 
     private static final Username VALID_USERNAME = new Username("inventarie");

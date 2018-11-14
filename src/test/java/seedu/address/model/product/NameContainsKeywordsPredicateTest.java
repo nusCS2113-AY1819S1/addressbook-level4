@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.ProductBuilder;
 
-//@@author Gara
+//@@garagaristahir
 public class NameContainsKeywordsPredicateTest {
 
     @Test

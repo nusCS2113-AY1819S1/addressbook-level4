@@ -19,7 +19,7 @@ import seedu.address.model.ProductDatabase;
 import seedu.address.model.product.Product;
 import seedu.address.model.util.SampleDataUtil;
 
-//@@author Gara
+//@@garagaristahir
 /**
  * A utility class containing a list of {@code Product} objects to be used in tests.
  */
