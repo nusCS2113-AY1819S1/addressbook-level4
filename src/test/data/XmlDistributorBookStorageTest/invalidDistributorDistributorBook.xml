@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<distributorbook>
+    <!-- Distributor with invalid name field -->
+    <distributors>
+        <name>Ha!ns Mu@ster</name>
+        <phone isPrivate="false">099</phone>
+    </distributors>
+</distributorbook>

@@ -20,18 +20,30 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.model.DistributorBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ProductDatabase;
+import seedu.address.model.ReadOnlyDistributorBook;
+import seedu.address.model.ReadOnlyProductDatabase;
+import seedu.address.model.ReadOnlyUserDatabase;
+import seedu.address.model.UserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
+import seedu.address.model.util.SampleDistributorsUtil;
+import seedu.address.model.util.SampleUsersUtil;
+import seedu.address.storage.DistributorBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ProductDatabaseStorage;
+import seedu.address.storage.SalesHistoryStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserDatabaseStorage;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.XmlDistributorBookStorage;
+import seedu.address.storage.XmlProductDatabaseStorage;
+import seedu.address.storage.XmlSalesHistoryStorage;
+import seedu.address.storage.XmlUserDatabaseStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -40,7 +52,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -54,16 +66,25 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Inventarie PRO ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
 
-        UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+        UserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        UserDatabaseStorage usersStorage =
+                new XmlUserDatabaseStorage(userPrefs.getUsersFilePath());
+        ProductDatabaseStorage productDatabaseStorage =
+                new XmlProductDatabaseStorage(userPrefs.getProductDatabaseFilePath());
+        SalesHistoryStorage salesHistoryStorage =
+                new XmlSalesHistoryStorage(userPrefs.getSalesHistoryFilePath());
+        DistributorBookStorage distributorBookStorage =
+                new XmlDistributorBookStorage(userPrefs.getDistributorBookFilePath());
+        storage = new StorageManager(productDatabaseStorage, distributorBookStorage,
+                userPrefsStorage, usersStorage, salesHistoryStorage);
 
         initLogging(config);
 
@@ -77,28 +98,61 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s Product database and {@code userPrefs}. <br>
+     * The data from the sample address book will be used instead if {@code storage}'s Product database is not found,
+     * or an empty Product database will be usedinstead if errors occur when reading {@code storage}'s
+     * Product database.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyProductDatabase> productDatabaseOptional;
+        ReadOnlyProductDatabase initialData;
+        Optional<ReadOnlyUserDatabase> userDatabaseOptional;
+        ReadOnlyUserDatabase initialUsers;
+        Optional<ReadOnlyDistributorBook> distributorBookOptional;
+        ReadOnlyDistributorBook initialDist;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            userDatabaseOptional = storage.readUserDatabase();
+            if (!userDatabaseOptional.isPresent()) {
+                logger.info("Users file not found. Will be starting with a empty UserDatabase");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialUsers = userDatabaseOptional.orElseGet(SampleUsersUtil::getSampleUserDatabase);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Users file not in the correct format."
+                    + " Will be starting with an empty ProductDatabase");
+            initialUsers = new UserDatabase();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Users while reading from the file. Will be starting with an empty ProductDatabase");
+            initialUsers = new UserDatabase();
+        }
+        try {
+            productDatabaseOptional = storage.readProductDatabaseBook();
+            if (!productDatabaseOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample ProductDatabase");
+            }
+            initialData = productDatabaseOptional.orElseGet(SampleDataUtil::getSampleProductDatabase);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty ProductDatabase");
+            initialData = new ProductDatabase();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty ProductDatabase");
+            initialData = new ProductDatabase();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        try {
+            distributorBookOptional = storage.readDistributorBook();
+            if (!distributorBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample DistributorBook");
+            }
+            initialDist = distributorBookOptional.orElseGet(SampleDistributorsUtil::getSampleDistributorBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty DistributorBook");
+            initialDist = new DistributorBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty DistributorBook");
+            initialDist = new DistributorBook();
+        }
+
+        return new ModelManager(initialData, initialDist, userPrefs, initialUsers, this.storage);
     }
 
     private void initLogging(Config config) {
@@ -159,7 +213,8 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+
+            logger.warning("Problem while reading from the file. Will be starting with an empty ProductDatabase");
             initializedPrefs = new UserPrefs();
         }
 
@@ -179,13 +234,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting Inventory PRO " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping ProductInfo Book ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

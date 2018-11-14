@@ -1,19 +1,28 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.ThreadDueRemindersCommand.NO_THREAD_REMINDERS;
+
 import java.util.logging.Logger;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ThreadDueRemindersCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -21,11 +30,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You have not logged in yet. Please log in.";
     private static final String FXML = "CommandBox.fxml";
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
+    private Timeline reminderChecker;
 
     @FXML
     private TextField commandTextField;
@@ -36,6 +47,27 @@ public class CommandBox extends UiPart<Region> {
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
+
+        // Checks for due reminders every second ...
+        reminderChecker = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    CommandResult commandResult = logic.execute(ThreadDueRemindersCommand.COMMAND_WORD);
+                    if (commandResult != null && !commandResult.feedbackToUser.equals(NO_THREAD_REMINDERS)) {
+                        logger.info("Reminders due: " + commandResult.feedbackToUser);
+                        raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+                    }
+                } catch (CommandException | ParseException e) {
+                    // handle command failure
+                    setStyleToIndicateCommandFailure();
+                    logger.info("Invalid command: " + commandTextField.getText());
+                    raise(new NewResultAvailableEvent(e.getMessage()));
+                }
+            }
+        }));
+        reminderChecker.setCycleCount(Timeline.INDEFINITE);
+        reminderChecker.play();
     }
 
     /**
@@ -95,6 +127,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(commandTextField.getText().length());
     }
 
+
     /**
      * Handles the Enter button pressed event.
      */
@@ -106,8 +139,13 @@ public class CommandBox extends UiPart<Region> {
             historySnapshot.next();
             // process result of the command
             commandTextField.setText("");
-            logger.info("Result: " + commandResult.feedbackToUser);
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            if (commandResult != null) {
+                logger.info("Result: " + commandResult.feedbackToUser);
+                raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            } else {
+                logger.info("Result: " + "User is not logged in yet.");
+                raise(new NewResultAvailableEvent(MESSAGE_NOT_LOGGED_IN));
+            }
 
         } catch (CommandException | ParseException e) {
             initHistory();

@@ -2,58 +2,63 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
+import static seedu.address.testutil.TypicalDistributors.getTypicalDistributorBook;
+import static seedu.address.testutil.TypicalProducts.APPLE;
+import static seedu.address.testutil.TypicalProducts.GRAPE;
+import static seedu.address.testutil.TypicalProducts.ORANGE;
+import static seedu.address.testutil.TypicalProducts.getTypicalAddressBook;
 
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.model.product.NameContainsKeywordsPredicate;
+import seedu.address.testutil.ProductDatabaseBuilder;
 
 public class ModelManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private ModelManager modelManager = new ModelManager();
+    private ModelManager modelManager = new ModelManager(getTypicalAddressBook(), getTypicalDistributorBook(),
+            new UserPrefs(), new UserDatabase(), new TestStorage());
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasProduct_nullProduct_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.hasPerson(null);
+        modelManager.hasProduct(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasProduct_personNotInProductDatabase_returnsFalse() {
+        assertFalse(modelManager.hasProduct(APPLE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasProduct_personInProductDatabase_returnsTrue() {
+        modelManager.addProduct(APPLE);
+        assertTrue(modelManager.hasProduct(APPLE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredProductList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        modelManager.getFilteredPersonList().remove(0);
+        modelManager.getFilteredProductList().remove(0);
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        ProductDatabase productDatabase = new ProductDatabaseBuilder().withProduct(GRAPE).withProduct(ORANGE).build();
+        ProductDatabase differentProductDatabase = new ProductDatabase();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(productDatabase, getTypicalDistributorBook(),
+                new UserPrefs(), new UserDatabase(), new TestStorage());
+        ModelManager modelManagerCopy = new ModelManager(productDatabase, getTypicalDistributorBook(),
+                new UserPrefs(), new UserDatabase(), new TestStorage());
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -65,20 +70,17 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different productDatabase -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentProductDatabase, getTypicalDistributorBook(),
+                new UserPrefs(), new UserDatabase(), new TestStorage())));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        String[] keywords = GRAPE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredProductList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(productDatabase, getTypicalDistributorBook(),
+                new UserPrefs(), new UserDatabase(), new TestStorage())));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-        // different userPrefs -> returns true
-        UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        modelManager.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
     }
 }

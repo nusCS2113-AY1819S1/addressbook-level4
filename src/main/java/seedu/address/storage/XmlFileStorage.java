@@ -9,13 +9,13 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.XmlUtil;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores addressbook, distributorbook and user database data in an XML file
  */
 public class XmlFileStorage {
     /**
      * Saves the given addressbook data to the specified file.
      */
-    public static void saveDataToFile(Path file, XmlSerializableAddressBook addressBook)
+    public static void saveDataToFile(Path file, XmlSerializableProductDatabase addressBook)
             throws FileNotFoundException {
         try {
             XmlUtil.saveDataToFile(file, addressBook);
@@ -27,10 +27,83 @@ public class XmlFileStorage {
     /**
      * Returns address book in the file or an empty address book
      */
-    public static XmlSerializableAddressBook loadDataFromSaveFile(Path file) throws DataConversionException,
+    public static XmlSerializableProductDatabase loadDataFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {
         try {
-            return XmlUtil.getDataFromFile(file, XmlSerializableAddressBook.class);
+            return XmlUtil.getDataFromFile(file, XmlSerializableProductDatabase.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
+
+    /**
+     * Saves the given distributorbook data to the specified file.
+     */
+    public static void saveDistributorDataToFile(Path file, XmlSerializableDistributorBook distributorBook)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, distributorBook);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Returns address book in the file or an empty distributor book
+     */
+    public static XmlSerializableDistributorBook loadDistributorDataFromSaveFile(Path file)
+            throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableDistributorBook.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
+
+    /**
+     * Saves the given user database data to the specified file.
+     */
+    public static void saveUsersToFile(Path file, XmlSerializableUserDatabase userDatabase)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, userDatabase);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage());
+        }
+    }
+
+    /**
+     * Returns user database in the file or an empty address book
+     */
+    public static XmlSerializableUserDatabase loadUsersFromSaveFile(Path file) throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableUserDatabase.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
+
+    /**
+     * Saves the {@code SalesHistory} data to the specified file
+     */
+    public static void saveSalesHistoryToFile(Path file, XmlSerializableSalesHistory salesHistory)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, salesHistory);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Returns {@code XmlSerializableSalesHistory} from the file.
+     */
+    public static XmlSerializableSalesHistory loadSalesHistoryFromFile(Path file) throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableSalesHistory.class);
         } catch (JAXBException e) {
             throw new DataConversionException(e);
         }
