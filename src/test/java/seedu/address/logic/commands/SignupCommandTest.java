@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+//@@author jamesyaputra
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalUsers.ALICE;
@@ -20,7 +21,6 @@ import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.UserBuilder;
 
-//@@ jamesyaputra
 public class SignupCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();

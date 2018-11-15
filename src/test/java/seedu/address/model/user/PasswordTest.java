@@ -1,5 +1,6 @@
 package seedu.address.model.user;
 
+//@@author jamesyaputra
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

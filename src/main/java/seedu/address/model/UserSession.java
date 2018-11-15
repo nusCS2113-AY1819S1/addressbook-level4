@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+//@@author jamesyaputra
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -17,7 +18,6 @@ import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.storage.JsonUserStorage;
 
-//@@ jamesyaputra
 /**
  * Represents user account authentication
  */

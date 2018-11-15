@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+//@@author jamesyaputra
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,7 +16,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-//@@ jamesyaputra
 /**
  * A class to access UserSession stored in the hard disk as a JSON file
  */

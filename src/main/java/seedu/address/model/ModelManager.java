@@ -64,46 +64,46 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Authentication Accessors  =============================================================
 
-    //@@ jamesyaputra
+    //@@author jamesyaputra
     @Override
     public boolean getLoginStatus() {
         return userSession.getLoginStatus();
     }
 
-    //@@ jamesyaputra
+    //@@author jamesyaputra
     @Override
     public boolean getAdminStatus() {
         return userSession.getAdminStatus();
     }
 
-    //@@ jamesyaputra
+    //@@author jamesyaputra
     @Override
     public boolean userExists(User user) {
         requireNonNull(user);
         return userSession.userExists(user);
     }
 
-    //@@ jamesyaputra
+    //@@author jamesyaputra
     @Override
     public void createUser(User user) {
         requireNonNull(user);
         userSession.createUser(user);
     }
 
-    //@@ jamesyaputra
+    //@@author jamesyaputra
     @Override
     public void logUser(User user) {
         requireNonNull(user);
         userSession.logUser(user);
     }
 
-    //@@ jamesyaputra
+    //@@author jamesyaputra
     @Override
     public Username getUsername() {
         return userSession.getUsername();
     }
 
-    //@@ jamesyaputra
+    //@@author jamesyaputra
     @Override
     public void clearUser() {
         userSession.clearUser();

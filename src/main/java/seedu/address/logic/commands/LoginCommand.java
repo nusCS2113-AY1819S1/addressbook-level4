@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+//@@author jamesyaputra
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
@@ -9,7 +10,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.user.User;
 
-//@@ jamesyaputra
 /**
  * Logs user into the Event Manager Application
  */

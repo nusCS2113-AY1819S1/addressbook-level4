@@ -7,7 +7,7 @@ import java.security.spec.InvalidKeySpecException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-//@@ jamesyaputra
+//@@author jamesyaputra
 /**
  * Utility class to encrypt and decrypt passwords.
  */

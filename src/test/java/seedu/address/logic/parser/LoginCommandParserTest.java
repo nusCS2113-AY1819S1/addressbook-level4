@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+//@@author jamesyaputra
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERNAME_DESC;
@@ -19,7 +20,6 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
-//@@ jamesyaputra
 public class LoginCommandParserTest {
     private LoginCommandParser parser = new LoginCommandParser();
 

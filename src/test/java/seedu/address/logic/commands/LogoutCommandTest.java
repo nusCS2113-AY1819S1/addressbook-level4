@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+//@@author jamesyaputra
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.Rule;
@@ -13,7 +14,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.user.User;
 import seedu.address.testutil.UserBuilder;
 
-//@@ jamesyaputra
 public class LogoutCommandTest {
 
     @Rule

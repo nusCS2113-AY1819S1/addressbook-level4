@@ -1,11 +1,11 @@
 package seedu.address.storage;
 
+//@@author jamesyaputra
 import java.io.IOException;
 import java.util.Map;
 
 import seedu.address.model.UserSession;
 
-//@@ jamesyaputra
 /**
  * Represents a storage for {@link UserSession}.
  */

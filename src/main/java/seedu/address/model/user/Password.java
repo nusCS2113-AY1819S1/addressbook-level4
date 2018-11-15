@@ -1,9 +1,9 @@
 package seedu.address.model.user;
 
+//@@author jamesyaputra
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-//@@ jamesyaputra
 /**
  * Represents a user's password credential.
  */

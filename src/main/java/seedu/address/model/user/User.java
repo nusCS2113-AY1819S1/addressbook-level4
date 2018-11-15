@@ -1,8 +1,8 @@
 package seedu.address.model.user;
 
+//@@author jamesyaputra
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-//@@ jamesyaputra
 /**
  * Represents a user account.
  */
