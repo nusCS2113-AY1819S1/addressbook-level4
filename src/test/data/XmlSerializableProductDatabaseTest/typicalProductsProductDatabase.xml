@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <products>
+        <name>Orange</name>
+        <serialNumber>001</serialNumber>
+        <distributor>Ah Huat</distributor>
+        <info>fruit</info>
+        <remainingItems>12</remainingItems>
+        <tagged>healthy</tagged>
+    </products>
+    <products>
+        <name>Grape</name>
+        <serialNumber>002</serialNumber>
+        <distributor>Ah Beng</distributor>
+        <info>fruit</info>
+        <remainingItems>2</remainingItems>
+        <tagged>sweet</tagged>
+    </products>
+    <products>
+        <name>Chocolate</name>
+        <serialNumber>003</serialNumber>
+        <distributor>Ah Long</distributor>
+        <info>snack</info>
+        <remainingItems>22</remainingItems>
+        <tagged>dark</tagged>
+    </products>
+    <products>
+        <name>Doritos</name>
+        <serialNumber>004</serialNumber>
+        <distributor>Ah Ting</distributor>
+        <info>snack</info>
+        <remainingItems>10</remainingItems>
+        <tagged>unhealthy</tagged>
+    </products>
+</addressbook>

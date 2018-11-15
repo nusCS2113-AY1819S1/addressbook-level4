@@ -34,23 +34,23 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private DistributorListPanel distributorListPanel;
+    private ProductListPanel productListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
 
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane commandBoxPlaceholder;
 
     @FXML
-    private StackPane commandBoxPlaceholder;
+    private StackPane distributorListPanelPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane productListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -119,16 +119,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        distributorListPanel = new DistributorListPanel(logic.getFilteredDistributorList());
+        distributorListPanelPlaceholder.getChildren().add(distributorListPanel.getRoot());
+
+        productListPanel = new ProductListPanel(logic.getFilteredProductList());
+        productListPanelPlaceholder.getChildren().add(productListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getProductDatabaseFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
@@ -187,12 +188,8 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
+    public ProductListPanel getProductListPanel() {
+        return productListPanel;
     }
 
     @Subscribe

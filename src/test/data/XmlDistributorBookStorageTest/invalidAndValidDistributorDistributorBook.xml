@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<distributorbook>
+    <!-- Valid Distributor -->
+    <distributors>
+        <name>Hans Muster</name>
+        <phone isPrivate="false">9482424</phone>
+    </distributors>
+    <!-- Distributor with invalid phone field -->
+    <distributors>
+        <name>Hans Muster</name>
+        <phone isPrivate="false">948asdf2424</phone>
+    </distributors>
+</distributorbook>

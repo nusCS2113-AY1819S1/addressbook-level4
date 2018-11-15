@@ -1,0 +1,74 @@
+= Yeo Su Yia, Denise - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Inventarie PRO
+
+---
+
+== Overview
+
+Inventarie PRO is a desktop inventory application intended for use by self-employed provision shop owners who wish to digitise their inventory records. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: Added *the ability to manage distributors engaged with a provision shop*
+** What it does: Allows the user to add, edit, delete and find distributors that the user would like a record of. It also allows the user to see which distributor provides what products for the shop.
+** Justification: This feature is an essential part of a digitised inventory management system, given that products which a self-employed provision shop owner wants to sell must have a source of supply (a distributor).
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands which other members were concurrently working on too.
+
+* *Minor enhancement*: I refactored some of the previous 'person' classes, methods and objects to a suitable 'product' name throughout the course of the project. I also edited some of the output messages to make them more suitable for our Inventarie PRO.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=su%20yia&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Code Dashboard]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.2.1`, `v1.3.1` and `v1.3.2` (3 releases) on GitHub
+** Enhancements to existing features:
+*** Increased functionality of find commands - finding products / distributors by their tag and not just by name (Pull request https://github.com/CS2113-AY1819S1-T13-3/main/pull/182[#182])
+*** Updated the GUI to fit new features (distributor, transaction, reminder) (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main/pull/101[#101] and https://github.com/CS2113-AY1819S1-T13-3/main/pull/148[#148]) and removed the unnecessary browser panel (Pull request https://github.com/CS2113-AY1819S1-T13-3/main/pull/180[#180]
+*** Adapted existing tests to incorporate new features
+** Documentation:
+*** Updated class diagrams for UI and Logic in the Developer Guide (Pull requests https://github.com/CS2113-AY1819S1-T13-3/main[#187] and https://github.com/CS2113-AY1819S1-T13-3/main/pull/189[#189])
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-F09-2/main/issues/155[1], https://github.com/CS2113-AY1819S1-F09-2/main/issues/163[2], https://https://github.com/CS2113-AY1819S1-F09-2/main/issues/162.com[3], https://github.com/CS2113-AY1819S1-F09-2/main/issues/160[4], and more)
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+Feature descriptions related to distributor functions:
+
+include::../UserGuide.adoc[tag=distributormanagement]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+I updated:
+the Logic class diagram:
+
+include::../DeveloperGuide.adoc[tag=logiccomponent]
+
+and the UI class diagram:
+
+include::../DeveloperGuide.adoc[tag=uiclassdiagram]
+
+In the appendices, I included:
+the user stories related to product features:
+
+include::../DeveloperGuide.adoc[tag=productuserstories]
+
+,the user stories related to distributor features:
+
+include::../DeveloperGuide.adoc[tag=distributoruserstories]
+
+and the use cases related to distributor features:
+
+include::../DeveloperGuide.adoc[tag=distributorusecases]

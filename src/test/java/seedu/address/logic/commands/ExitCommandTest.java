@@ -11,13 +11,14 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TestStorage;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 public class ExitCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
-    private Model model = new ModelManager();
+    private Model model = new ModelManager(new TestStorage());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<userdatabase>
+    <!-- Valid User -->
+    <users>
+        <username>amy</username>
+        <password>pass</password>
+        <addressBookFilePath>data/addressbook-amy.xml</addressBookFilePath>
+        <salesHistoryFilePath>data/saleshistory-amy.xml</salesHistoryFilePath>
+    </users>
+    <!-- Invalid User with invalid password field -->
+    <users>
+        <username>John</username>
+        <password>p@ss</password>
+        <addressBookFilePath>data/addressbook-u.xml</addressBookFilePath>
+        <salesHistoryFilePath>data/saleshistory-John.xml</salesHistoryFilePath>
+    </users>
+</userdatabase>
