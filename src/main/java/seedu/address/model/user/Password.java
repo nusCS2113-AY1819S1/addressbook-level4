@@ -1,4 +1,4 @@
-
+//@@author liu-tianhang
 package seedu.address.model.user;
 
 import static java.util.Objects.requireNonNull;

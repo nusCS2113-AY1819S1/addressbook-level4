@@ -1,0 +1,25 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "bluein-green",
+      "displayName": "JIN...JIA",
+      "authorNames": ["bluein-green", "Jin Minjia"]
+    },
+    {
+      "githubId": "scottljw",
+      "displayName": "LI ...WEI",
+      "authorNames": ["scottljw", "Li Jiawei", "Scott Lee"]
+    },
+    {
+      "githubId": "Lunastryke",
+      "displayName": "LIM...HAO",
+      "authorNames": ["Lunastryke"]
+    },
+    {
+      "githubId": "liu-tianhang",
+      "displayName": "LIU...ANG",
+      "authorNames": ["liu-tianhang"]
+    }
+  ]
+}
