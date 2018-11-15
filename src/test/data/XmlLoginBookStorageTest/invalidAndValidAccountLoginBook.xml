@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<loginbook>
+    <!-- Valid account -->
+    <accounts>
+        <userId>QTEyMzQ1NjdN</userId>
+        <userPassword>emFxMXhzdzJjZGUz</userPassword>
+        <userRole>bWVtYmVy</userRole>
+    </accounts>
+    <!-- account with invalid user ID field -->
+    <accounts>
+        <userId>QUEyMzQ1NjVN</userId>
+        <userPassword>emFxMXhzdzJjZGUz</userPassword>
+        <userRole>bWVtYmVy</userRole>
+    </accounts>
+</loginbook>

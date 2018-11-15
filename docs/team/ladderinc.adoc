@@ -1,0 +1,86 @@
+= Boon Jun - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Introduction and Overview
+This Portfolio is a documentation of the contributions that I have made during the development of the application,
+titled *NUSSU Connect*.
+
+*NUSSU Connect* is a CLI application developed by team https://cs2113-ay1819s1-f09-1.github.io/main/AboutUs.html[F09-1] and it
+ aims to cater to the needs of executive committee members of the NUS Student Union (NUSSU).
+
+It comes with multiple features that NUSSU executive committee members will find useful. This includes budgets and expenses management,
+human resource allocation, easy management of contacts lists, and all the information stored within this application will have an additional security guarantee by the multi-user access level feature.
+
+== Summary of contributions
+
+In this project, my main contribution is in the Search Pruning feature and the main purpose of this feature is to
+ease the process of managing a large list of contacts.
+Further details about my contributions will be explained in this section.
+
+* *Major enhancement*: Search Pruning feature with `find` and `undofind` commands.
+
+** What it does: Each subsequent execution of `find` commands allows users to search according to the
+ current displayed list of contacts. `undofind` command does the opposite and reverts the last `find`
+ command executed.
+
+** Why we need this feature: NUSSU exco is an organization that will most likely be required to keep track of
+a large database of important contacts. Therefore it will be time-consuming and tedious to locate specific contact information
+from the database. A search pruning feature will resolve this problem as users will be able to narrow down the search space
+in discrete steps so that they could retrieve the information they want in smaller and readable chunks.
+
+** Highlights: This enhancement is mainly created from scratch with some help from documentations on how the `Predicate` class works.
+This enhancement was also created with re-usability in mind and any form of filtering done with `Predicate` will be able to
+utilize this feature.
+
+* *Minor enhancement*: Added an enhancement to Search Pruning Feature that allows users to see a history of keywords
+that they have executed previously.
+
+** What it does: Every time a user performs a search, the command result box will display the list of keywords previously executed by the user and
+it describes how the current displayed list is being filtered.
+
+* *Minor enhancement*: Improved find command by introducing searching by tags and exclude functionality.
+
+** What it does: Searching by tags allows users to filter the contacts according to the tagged description of each contact.
+Exclude functionality allows users to remove unwanted results from their search.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=ladderinc[Overview]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1`, `v1.2`, `v1.2.1` and `v1.3` (4 releases) on GitHub.
+*** Managed milestones and deadlines of the project.
+
+** Documentatations:
+*** Updating Class Diagrams of Model in developer guide to reflect the changes in implementation. (Pull Requests https://github.com/CS2113-AY1819S1-F09-1/main/pull/144[#144]).
+*** Minor Tweaks to ReadMe, User Guide and Developer Guide to meet module requirements.
+
+** Tools:
+*** Setting up of Coveralls in team repository
+
+**  Community:
+*** Provided teammates with non-trivial PR reviews and comments. (Pull Requests https://github.com/CS2113-AY1819S1-F09-1/main/pull/25[#25], https://github.com/CS2113-AY1819S1-F09-1/main/pull/80[#80], https://github.com/CS2113-AY1819S1-F09-1/main/pull/81[#81])
+*** Search Pruning Feature reused in Login/Logout feature of this application. (https://github.com/CS2113-AY1819S1-F09-1/main/blob/master/src/main/java/seedu/address/logic/commands/LoginCommand.java[LoginCommand.java])
+*** Identified bugs and provided follow-ups in another team’s product. (Issue https://github.com/CS2113-AY1819S1-T13-1/main/issues/109[#109], https://github.com/CS2113-AY1819S1-T13-1/main/issues/112[#112], https://github.com/CS2113-AY1819S1-T13-1/main/issues/116[#116], https://github.com/CS2113-AY1819S1-T13-1/main/issues/124[#124])
+
+== Contributions to the User Guide
+
+|===
+|_This section shows part of my contributions in the User Guide that explains to end-users about how they
+can utilize the Search Pruning Feature._
+|===
+
+include::../UserGuide.adoc[tag=searchpruningtitle]
+include::../UserGuide.adoc[tag=searchpruningpreface]
+include::../UserGuide.adoc[tag=searchpruningguide]
+
+== Contributions to the Developer Guide
+
+|===
+|_This section shows part of my contributions in the Developer Guide that explains the underlying implementation
+behind the Search Pruning feature._
+|===
+
+include::../DeveloperGuide.adoc[tag=searchpruning]
