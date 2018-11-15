@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.model.tag;
 
 import org.junit.Test;

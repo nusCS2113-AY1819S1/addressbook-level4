@@ -173,6 +173,8 @@ Format: `delete [INDEX]`
 Examples:
 
 * `delete 1`
+//@@author ChanChunCheong
+
 // tag::sort_task[]
 === Sort the taskbook: `sort`
 |===
@@ -243,6 +245,7 @@ image::DeferDeadlineCommand_before.png[width="790"]
 
 image::DeferDeadlineCommand_after.png[width="790"]
 // end::defer_deadline[]
+//@@author
 
 // tag::editTask[]
 === Editing a task: `edit`
@@ -326,6 +329,8 @@ Rank is the level of importance assigned to that particular milestone by the use
 ====
 
 // end::add_milestone[]
+
+//@@author ChanChunChoeng
 
 // tag::add_tag[]
 === Adding a tag: `add_tag`
@@ -433,6 +438,9 @@ image::SelectTagCommand_before.png[width="790"]
 
 image::SelectTagCommand_after.png[width="790"]
 // end::select_tag[]
+
+//@@author
+
 === Tracking productivity : `track`
 
 Tracks your productivity for all completed tasks, by returning an average productivity (in percentage). +
