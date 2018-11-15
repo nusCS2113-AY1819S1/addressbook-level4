@@ -147,7 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
     private Predicate<Task> predicateShowTasksWithSameTag(Tag tag) {
         return task -> task.getTags().contains(tag);
     }
-    //@author
+    //@@author
 
     @Override
     public Deadline getDeadline() {

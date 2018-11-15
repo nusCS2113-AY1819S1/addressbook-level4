@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;

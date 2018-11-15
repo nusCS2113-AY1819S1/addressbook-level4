@@ -203,7 +203,6 @@ public class AddTaskCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        //author ChanChunCheong
         @Override
         public void addTag(Task task, Tag tag) {
             throw new AssertionError("This method should not be called.");
@@ -223,7 +222,6 @@ public class AddTaskCommandTest {
         public void sortTask(String method) {
             throw new AssertionError("This method should not be called.");
         }
-        //author
 
         @Override
         public Deadline getDeadline() {

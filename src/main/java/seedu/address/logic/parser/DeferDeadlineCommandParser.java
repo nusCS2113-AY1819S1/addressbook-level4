@@ -11,7 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeferDeadlineCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-//@@ChanChunCheong
+//@@author ChanChunCheong
 /**
  * Parses input arguments and creates a new DeferDeadlineCommand object
  */
@@ -48,3 +48,4 @@ public class DeferDeadlineCommandParser implements Parser<DeferDeadlineCommand> 
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
+//@@author
