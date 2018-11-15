@@ -17,7 +17,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.searchhistory.KeywordType;
 
-//@@ladderinc
+//@@author ladderinc
 public class UndoFindCommandTest {
     private final Model model = new ModelManager(getTypicalLoginBook(), getTypicalAddressBook(),
             getTypicalClubBudgetElementsBook(), getTypicalFinalBudgetsBook(), new UserPrefs());
