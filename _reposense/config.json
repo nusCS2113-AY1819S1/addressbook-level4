@@ -1,0 +1,30 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "xhxh96",
+      "displayName": "CHE...HAO",
+      "authorNames": ["xhxh96", "Xian Hao"]
+    },
+    {
+      "githubId": "brandonccm1996",
+      "displayName": "CHE...DON",
+      "authorNames": ["brandonccm1996"]
+    },
+    {
+      "githubId": "chewkahmeng",
+      "displayName": "CHE...ENG",
+      "authorNames": ["chewkahmeng", "Chew Kah Meng"]
+    },
+    {
+      "githubId": "chokxy",
+      "displayName": "CHO...YAN",
+      "authorNames": ["chokxy", "Chok XIn Yan"]
+    },
+    {
+      "githubId": "xShaivan",
+      "displayName": "HOV...HAO",
+      "authorNames": ["xShaivan", "Hovan Tan Fang Hao"]
+    }
+  ]
+}

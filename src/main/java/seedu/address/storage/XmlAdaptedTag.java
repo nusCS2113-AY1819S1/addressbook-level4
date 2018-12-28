@@ -29,7 +29,7 @@ public class XmlAdaptedTag {
     /**
      * Converts a given Tag into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created
+     * @param source future changes to this will not affect the created XmlAdaptedTag
      */
     public XmlAdaptedTag(Tag source) {
         tagName = source.tagName;
@@ -38,7 +38,7 @@ public class XmlAdaptedTag {
     /**
      * Converts this jaxb-friendly adapted tag object into the model's Tag object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted tag
      */
     public Tag toModelType() throws IllegalValueException {
         if (!Tag.isValidTagName(tagName)) {

@@ -3,12 +3,14 @@
     background-color: #383838; /* Used in the default.html file */
 }
 
+/*
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
+*/
 
 .label-bright {
     -fx-font-size: 11pt;
@@ -304,6 +306,38 @@
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 8 1 8 1;
+}
+
+.infoPanelNameLabel {
+    -fx-font-size: 20px;
+}
+
+.MedHistoryCard {
+    -fx-padding: 5;
+    -fx-background-color: #d3ffce;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+}
+
+.medAppts {
+    -fx-padding: 5;
+    -fx-margin: 5;
+}
+
+.apptCard {
+    -fx-padding: 5;
+    -fx-background-color: #CEFFFE;
+    -fx-effect: dropshadow(gaussian, gray, 2, 2, 0, 0);
+}
+
+.medReports {
+    -fx-padding: 5;
+    -fx-margin: 5;
+}
+.reportCard {
+    -fx-padding: 5;
+    -fx-background-color: #FCFF33;
+    -fx-effect: dropshadow(gaussian, gray, 2, 2, 0, 0);
 }
 
 #cardPane {

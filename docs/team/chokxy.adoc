@@ -1,0 +1,100 @@
+= Chok Xin Yan - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+[discrete]
+== Project: Health Book
+
+---
+== Introduction
+
+My team comprises of 5 members of different roles: Project Manager, Development Lead, Quality Assurance Lead, User Interface Lead and Subject Matter Expert and together, we created our unique version of a Health Book application.
+The purpose of this portfolio is to document my contributions towards the Health Book and showcase the implementation of my features, the codes I have written and the changes I have made to the User and Developer Guides.
+
+== Overview
+
+Health Book is an application written in Java catered to *healthcare professionals* in _retrieving patients’ personal information and health-related information all in one place_. Command Line Interface (CLI) is utilized mainly for user input, while Graphical User Interface (GUI) is used mainly to display the output. Combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
+
+.Start up page of Health Book
+image::../images/Ui.png[width="800"]
+
+.List of Health Book's main features
+|===
+|Feature |Description
+
+|Additional Information
+|To store extra patient details such as NRIC, date of birth, height, weight etc.
+
+|Medical History
+|To store multiple entries of medical history of a patient which each record includes allergy, previous visited country etc.
+
+|Medical Report
+|To store multiple entries of medical reports of a patient which each record includes title, information etc.
+
+|Medical Appointment
+|To store appointments in a patient's schedule.
+
+|Sort and Find
+|To filter patients by specified categories efficiently and systematically
+|===
+
+For more features and their usages, please refer to the user guide: https://cs2113-ay1819s1-t12-2.github.io/main/UserGuide.html[Click Here]
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to find patients by personal (name, phone, email, address, tags and NRIC) and medical details (medical Information, blood type, last country of visit and allergy).*
+** What it does: allows the user to filter patients by desired patient detail.
+** Justification: This feature allows user to find specific types of patients (to administer drugs or quarantine patients) and expedite patient registration especially in an environment (hospital or clinics) where time is precious.
+** Highlights: This enhancement affects the existing find command. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+
+* *Minor enhancement*: added *the ability to sort patients by certain details (name, phone, email, NRIC).*
+** What it does: allows the user to sort patients by alphabetical or reversed order according to specified detail.
+** Justification: This feature generates an organised sorted list by relevant detail for users to work on the targeted patients systematically.
+
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=chokxy&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Click Here]
+
+* *Other contributions*:
+
+** Project management:
+*** Role of UI Lead: Managed the presentation and layout of the Health Book application to ensure the user interface can be easily utilized by healthcare professionals regardless of their technical background.
+*** Wrote tests to increase coverage by 1.6%: https://github.com/CS2113-AY1819S1-T12-2/main/pull/142[#142]
+** Enhancements to existing features:
+*** Created a java class for Blood Type: https://github.com/CS2113-AY1819S1-T12-2/main/blob/master/src/main/java/seedu/address/model/person/addinfo/BloodType.java[Blood Type]
+** Documentation:
+*** Updated User Guide and Developer Guide: https://github.com/CS2113-AY1819S1-T12-2/main/pull/114[#114], https://github.com/CS2113-AY1819S1-T12-2/main/pull/135[#135]
+** Community:
+*** Pull Requests reviewed: https://github.com/CS2113-AY1819S1-T12-2/main/pulls?q=is%3Apr+is%3Aclosed[Closed Pull Requests]
+*** Reported bugs and suggestions for other teams in the class (Issues https://github.com/CS2113-AY1819S1-T16-3/main/issues/121[#121], https://github.com/CS2113-AY1819S1-T16-3/main/issues/122[#122])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=findcommand]
+
+include::../UserGuide.adoc[tag=sortcommand]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=find]
+
+include::../DeveloperGuide.adoc[tag=sort]
+
+include::../DeveloperGuide.adoc[tag=findusecase]
+
+include::../DeveloperGuide.adoc[tag=sortusecase]

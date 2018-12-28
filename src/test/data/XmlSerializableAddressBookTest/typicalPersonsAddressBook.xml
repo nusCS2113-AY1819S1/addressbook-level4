@@ -6,6 +6,14 @@
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
+        <nric></nric>
+        <dateOfBirth></dateOfBirth>
+        <height></height>
+        <weight></weight>
+        <gender></gender>
+        <bloodType></bloodType>
+        <occupation></occupation>
+        <maritalStatus></maritalStatus>
         <tagged>friends</tagged>
     </persons>
     <persons>
@@ -13,6 +21,50 @@
         <phone>98765432</phone>
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
+        <nric></nric>
+        <dateOfBirth></dateOfBirth>
+        <height></height>
+        <weight></weight>
+        <gender></gender>
+        <bloodType></bloodType>
+        <occupation></occupation>
+        <maritalStatus></maritalStatus>
+        <reports>
+            <title>Asthma</title>
+            <date>01-01-2018</date>
+            <information>Prescribed XXX medicine, next appointment on 02-02-2018.</information>
+        </reports>
+        <reports>
+            <title>Depression</title>
+            <date>02-02-2018</date>
+            <information>Prescribed XXX medicine, next appointment on 03-03-2018.</information>
+        </reports>
+        <medHistories>
+            <medHistDate>10-10-2010</medHistDate>
+            <allergy>Pollen</allergy>
+            <prevCountry>USA</prevCountry>
+            <dischargeStatus>Discharged to home</dischargeStatus>
+        </medHistories>
+        <medHistories>
+            <medHistDate>20-10-2010</medHistDate>
+            <allergy>Alcohol</allergy>
+            <prevCountry>Russia</prevCountry>
+            <dischargeStatus>Admitted as an inpatient to this hospital</dischargeStatus>
+        </medHistories>
+        <appts>
+            <apptStart>01-01-2018 14:00</apptStart>
+            <apptEnd>01-01-2018 15:00</apptEnd>
+            <apptVenue>Consultation Room 1</apptVenue>
+            <apptInfo>Diabetes Checkup</apptInfo>
+            <apptDrName>Dr Tan</apptDrName>
+        </appts>
+        <appts>
+            <apptStart>02-02-2018 15:00</apptStart>
+            <apptEnd>02-02-2018 16:00</apptEnd>
+            <apptVenue>Consultation Room 2</apptVenue>
+            <apptInfo>Asthma Checkup</apptInfo>
+            <apptDrName>Dr Chan</apptDrName>
+        </appts>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </persons>
@@ -21,12 +73,28 @@
         <phone>95352563</phone>
         <email>heinz@example.com</email>
         <address>wall street</address>
+        <nric></nric>
+        <dateOfBirth></dateOfBirth>
+        <height></height>
+        <weight></weight>
+        <gender></gender>
+        <bloodType></bloodType>
+        <occupation></occupation>
+        <maritalStatus></maritalStatus>
     </persons>
     <persons>
         <name>Daniel Meier</name>
         <phone>87652533</phone>
         <email>cornelia@example.com</email>
         <address>10th street</address>
+        <nric></nric>
+        <dateOfBirth></dateOfBirth>
+        <height></height>
+        <weight></weight>
+        <gender></gender>
+        <bloodType></bloodType>
+        <occupation></occupation>
+        <maritalStatus></maritalStatus>
         <tagged>friends</tagged>
     </persons>
     <persons>
@@ -34,17 +102,59 @@
         <phone>9482224</phone>
         <email>werner@example.com</email>
         <address>michegan ave</address>
+        <nric></nric>
+        <dateOfBirth></dateOfBirth>
+        <height></height>
+        <weight></weight>
+        <gender></gender>
+        <bloodType></bloodType>
+        <occupation></occupation>
+        <maritalStatus></maritalStatus>
     </persons>
     <persons>
         <name>Fiona Kunz</name>
         <phone>9482427</phone>
         <email>lydia@example.com</email>
         <address>little tokyo</address>
+        <nric></nric>
+        <dateOfBirth></dateOfBirth>
+        <height></height>
+        <weight></weight>
+        <gender></gender>
+        <bloodType></bloodType>
+        <occupation></occupation>
+        <maritalStatus></maritalStatus>
     </persons>
     <persons>
         <name>George Best</name>
         <phone>9482442</phone>
         <email>anna@example.com</email>
         <address>4th street</address>
+        <nric>S5185093I</nric>
+        <dateOfBirth></dateOfBirth>
+        <height></height>
+        <weight></weight>
+        <gender></gender>
+        <bloodType></bloodType>
+        <occupation></occupation>
+        <maritalStatus></maritalStatus>
+        <reports>
+            <title>Asthma</title>
+            <date>01-01-2018</date>
+            <information>Prescribed XXX medicine, next appointment on 02-02-2018.</information>
+        </reports>
+        <medHistories>
+            <medHistDate>10-10-2010</medHistDate>
+            <allergy>Pollen</allergy>
+            <prevCountry>USA</prevCountry>
+            <dischargeStatus>Discharged to home</dischargeStatus>
+        </medHistories>
+        <appts>
+            <apptStart>01-01-2018 14:00</apptStart>
+            <apptEnd>01-01-2018 15:00</apptEnd>
+            <apptVenue>Consultation Room 1</apptVenue>
+            <apptInfo>Diabetes Checkup</apptInfo>
+            <apptDrName>Dr Tan</apptDrName>
+        </appts>
     </persons>
 </addressbook>

@@ -1,6 +1,14 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_INFO_BLOODTYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_INFO_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_INFO_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_INFO_HEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_INFO_MARITAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_INFO_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_INFO_OCCUPATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_INFO_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -9,6 +17,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddInfoCommand.AddInfoPersonDescriptor;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -57,6 +66,25 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        return sb.toString();
+    }
+
+    public static String getAddInfoPersonDescriptorDetails(AddInfoPersonDescriptor descriptor) {
+        StringBuilder sb = new StringBuilder();
+        descriptor.getNric().ifPresent(nric -> sb.append(PREFIX_ADD_INFO_NRIC).append(nric.value).append(" "));
+        descriptor.getDateOfBirth().ifPresent(dateOfBirth -> sb.append(PREFIX_ADD_INFO_DOB).append(dateOfBirth
+                .toString()).append(" "));
+        descriptor.getHeight().ifPresent(height -> sb.append(PREFIX_ADD_INFO_HEIGHT).append(height.value).append(" "));
+        descriptor.getWeight().ifPresent(weight -> sb.append(PREFIX_ADD_INFO_WEIGHT).append(weight.value).append(" "));
+        descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_ADD_INFO_GENDER).append(gender.toString())
+                .append(" "));
+        descriptor.getBloodType().ifPresent(bloodType -> sb.append(PREFIX_ADD_INFO_BLOODTYPE).append(bloodType.value)
+                .append(" "));
+        descriptor.getOccupation().ifPresent(occupation -> sb.append(PREFIX_ADD_INFO_OCCUPATION)
+                .append(occupation.value).append(" "));
+        descriptor.getMaritalStatus().ifPresent(maritalStatus -> sb.append(PREFIX_ADD_INFO_MARITAL)
+                .append(maritalStatus.toString()).append(" "));
+
         return sb.toString();
     }
 }

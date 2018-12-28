@@ -43,11 +43,11 @@ When running a Gradle task, Gradle will try to figure out if the task needs runn
 == Creating the JAR file
 
 * *`shadowJar`* +
-Creates the `addressbook.jar` file in the `build/jar` folder, _if the current file is outdated_. +
+Creates the `healthbook.jar` file in the `build/jar` folder, _if the current file is outdated_. +
 e.g. `./gradlew shadowJar`
 
 ****
-To force Gradle to create the JAR file even if the current one is up-to-date, you can '`clean`' first. +
+To force Gradle to create the JAR file even if the current one is up-to-reportDate, you can '`clean`' first. +
 e.g. `./gradlew clean shadowJar`
 ****
 

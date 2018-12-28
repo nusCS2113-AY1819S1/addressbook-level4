@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ScrollPane fx:id="infoPanel" fitToWidth="true">
+            <content>
+                <VBox>
+                    <children>
+                        <AnchorPane fx:id="additionalInfo">
+                            <children>
+                                <Label fx:id="nameLabel1" layoutX="14.0" layoutY="14.0" styleClass="infoPanelNameLabel" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                            </children>
+                        </AnchorPane>
+                  <AnchorPane minHeight="200.0">
+                     <children>
+                        <GridPane prefHeight="90.0" prefWidth="410.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="fullNameTag">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="maritalStatusTag" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="nricTag" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="dateOfBirthTag" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="addressTag" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="phoneTag" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="fullNameLabel" GridPane.columnIndex="1" />
+                              <Label fx:id="maritalStatusLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="addressLabel" GridPane.columnIndex="3" />
+                              <Label fx:id="nricLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="dateOfBirthLabel" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <Label fx:id="phoneLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="heightTag" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="heightLabel" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="weightTag" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="weightLabel" maxWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                              <Label fx:id="genderTag" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="genderLabel" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <Label fx:id="emailTag" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="emailLabel" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Label fx:id="bloodTypeTag" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <Label fx:id="bloodTypeLabel" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label fx:id="occupationTag" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="occupationLabel" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+                        <AnchorPane fx:id="medHistory">
+                            <children>
+                                <Label fx:id="nameLabel2" layoutX="14.0" layoutY="14.0" styleClass="infoPanelNameLabel" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                <VBox fx:id="medHistoryVBox" spacing ="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="10.0"></VBox>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="medAppts">
+                            <children>
+                                <Label fx:id="nameLabel3" layoutX="14.0" layoutY="14.0" styleClass="infoPanelNameLabel" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                <VBox fx:id="apptsVBox" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="medReports">
+                            <children>
+                                <Label fx:id="nameLabel4" layoutX="14.0" layoutY="14.0" styleClass="infoPanelNameLabel" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                <VBox fx:id="medReportsVBox" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</StackPane>

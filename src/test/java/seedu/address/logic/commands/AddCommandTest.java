@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -104,6 +105,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public UserPrefs getUserPrefs() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -125,6 +131,15 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getSortedPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public void updateSortedPersonList(String prefix, int order) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -12,7 +12,10 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
+    private Path addressBookFilePath = Paths.get("data" , "healthbook.xml");
+    private Path encryptedFilePath = Paths.get("data", "healthbook_encrypted.xml");
+    private Path secretKeyPath = Paths.get("data", "key");
+    private boolean encryption = false;
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -26,6 +29,10 @@ public class UserPrefs {
         this.guiSettings = guiSettings;
     }
 
+    public void toggleEncryption() {
+        encryption = !encryption;
+    }
+
     public void setGuiSettings(double width, double height, int x, int y) {
         guiSettings = new GuiSettings(width, height, x, y);
     }
@@ -37,6 +44,19 @@ public class UserPrefs {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;
     }
+
+    public Path getEncryptedFilePath() {
+        return encryptedFilePath;
+    }
+
+    public Path getSecretKeyPath() {
+        return secretKeyPath;
+    }
+
+    public boolean getEncryption() {
+        return encryption;
+    }
+
 
     @Override
     public boolean equals(Object other) {

@@ -20,11 +20,22 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appt.Appt;
+import seedu.address.model.medhistory.MedHistory;
+import seedu.address.model.medicalreport.MedicalReport;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.addinfo.BloodType;
+import seedu.address.model.person.addinfo.DateOfBirth;
+import seedu.address.model.person.addinfo.Gender;
+import seedu.address.model.person.addinfo.Height;
+import seedu.address.model.person.addinfo.MaritalStatus;
+import seedu.address.model.person.addinfo.Nric;
+import seedu.address.model.person.addinfo.Occupation;
+import seedu.address.model.person.addinfo.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -101,7 +112,21 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        Nric nric = personToEdit.getNric();
+        DateOfBirth dateOfBirth = personToEdit.getDateOfBirth();
+        Height height = personToEdit.getHeight();
+        Weight weight = personToEdit.getWeight();
+        Gender gender = personToEdit.getGender();
+        BloodType bloodType = personToEdit.getBloodType();
+        Occupation occupation = personToEdit.getOccupation();
+        MaritalStatus maritalStatus = personToEdit.getMaritalStatus();
+
+        Set<MedicalReport> reports = personToEdit.getMedicalReports(); // edit command disallow editing reports
+        Set<MedHistory> medHistory = personToEdit.getMedHistory(); // edit command does not edit MedHistory now
+        Set<Appt> appts = personToEdit.getAppts(); // edit command does not allow editing appts
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, reports, medHistory, appts, nric,
+                dateOfBirth, height, weight, gender, bloodType, occupation, maritalStatus, updatedTags);
     }
 
     @Override

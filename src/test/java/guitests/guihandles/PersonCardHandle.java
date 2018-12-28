@@ -38,11 +38,8 @@ public class PersonCardHandle extends NodeHandle<Node> {
         emailLabel = getChildNode(EMAIL_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
-        tagLabels = tagsContainer
-                .getChildrenUnmodifiable()
-                .stream()
-                .map(Label.class::cast)
-                .collect(Collectors.toList());
+        tagLabels = tagsContainer.getChildrenUnmodifiable().stream()
+                .map(Label.class::cast).collect(Collectors.toList());
     }
 
     public String getId() {
@@ -66,10 +63,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     }
 
     public List<String> getTags() {
-        return tagLabels
-                .stream()
-                .map(Label::getText)
-                .collect(Collectors.toList());
+        return tagLabels.stream().map(Label::getText).collect(Collectors.toList());
     }
 
     /**
@@ -81,7 +75,6 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 && getPhone().equals(person.getPhone().value)
                 && getEmail().equals(person.getEmail().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
-                        .map(tag -> tag.tagName)
-                        .collect(Collectors.toList())));
+                        .map(tag -> tag.tagName).collect(Collectors.toList())));
     }
 }

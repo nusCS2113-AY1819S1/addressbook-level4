@@ -1,9 +1,15 @@
 package seedu.address;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
+
+import javax.crypto.SecretKey;
+
+import org.apache.xml.security.encryption.XMLCipher;
+import org.w3c.dom.Document;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -16,8 +22,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.EncryptionException;
 import seedu.address.commons.util.ConfigUtil;
+import seedu.address.commons.util.SecretKeyUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.XmlUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -40,7 +49,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -49,6 +58,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    protected SecretKey secretKey;
     protected UserPrefs userPrefs;
 
 
@@ -63,6 +73,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
+
+        secretKey = initSecretKey();
+
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
@@ -84,7 +97,15 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+        File encryptedXmlFile = new File(userPrefs.getEncryptedFilePath().toString());
+
         try {
+            if (encryptedXmlFile.exists() && !encryptedXmlFile.isDirectory()) {
+                Document encryptedFile = XmlUtil.loadEncryptedXmlFile(userPrefs.getEncryptedFilePath().toString());
+                Document decryptedFile = XmlUtil.decryptDocument(encryptedFile, secretKey, XMLCipher.AES_128);
+                XmlUtil.saveFile(decryptedFile, userPrefs.getAddressBookFilePath().toString());
+            }
+
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
@@ -96,9 +117,35 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
+        } catch (EncryptionException e) {
+            logger.warning("Problem with opening the encrypted file or decrypting the file.");
+            initialData = new AddressBook();
         }
 
+
         return new ModelManager(initialData, userPrefs);
+    }
+
+    /**
+     * Returns a {@code SecretKey} using the AES algorithm
+     * If an existing key exists, the existing key will be used instead.
+     */
+    private SecretKey initSecretKey() {
+        SecretKey secretKey;
+        File savedSecretKey = new File(userPrefs.getSecretKeyPath().toString());
+
+        if (savedSecretKey.exists() && !savedSecretKey.isDirectory()) {
+            try {
+                secretKey = SecretKeyUtil.readSecretKey(userPrefs.getSecretKeyPath().toString());
+            } catch (IOException e) {
+                logger.warning("Problem with opening the existing secret key. Generating a new secret key."
+                        + StringUtil.getDetails(e));
+                secretKey = SecretKeyUtil.getSecretKey("AES");
+            }
+        } else {
+            secretKey = SecretKeyUtil.getSecretKey("AES");
+        }
+        return secretKey;
     }
 
     private void initLogging(Config config) {
@@ -185,13 +232,43 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
+        File decryptedFile;
         logger.info("============================ [ Stopping Address Book ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
+
+            if (userPrefs.getEncryption()) {
+                decryptedFile = new File(userPrefs.getAddressBookFilePath().toString());
+                if (decryptedFile.exists() && !decryptedFile.isDirectory()) {
+                    Document decryptedXmlFile = XmlUtil.loadDecryptedXmlFile(userPrefs.getAddressBookFilePath()
+                            .toString());
+                    Document encryptedXmlFile = XmlUtil.encryptDocument(decryptedXmlFile, secretKey, XMLCipher.AES_128);
+                    XmlUtil.saveFile(encryptedXmlFile, userPrefs.getEncryptedFilePath().toString());
+                    SecretKeyUtil.saveSecretKey(secretKey, userPrefs.getSecretKeyPath().toString());
+                }
+            }
         } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+            if (userPrefs.getEncryption()) {
+                logger.severe("Failed to save secret key" + StringUtil.getDetails(e));
+            } else {
+                logger.severe("Failed to save preferences" + StringUtil.getDetails(e));
+            }
+        } catch (EncryptionException e) {
+            logger.severe("Failed to get XML file for encryption");
         }
+
+        if (userPrefs.getEncryption()) {
+            File decryptedXmlfile = new File(userPrefs.getAddressBookFilePath().toString());
+            decryptedXmlfile.deleteOnExit();
+        } else {
+            File encryptedXmlFile = new File(userPrefs.getEncryptedFilePath().toString());
+            File secretKeyFile = new File(userPrefs.getSecretKeyPath().toString());
+
+            encryptedXmlFile.deleteOnExit();
+            secretKeyFile.deleteOnExit();
+        }
+
         Platform.exit();
         System.exit(0);
     }

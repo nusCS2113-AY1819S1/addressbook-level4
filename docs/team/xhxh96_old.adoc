@@ -1,0 +1,102 @@
+= Cheng Xianhao - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:toc:
+:sectnums:
+
+== Health Book
+=== Overview
+
+Health care professionals deal with hundreds and thousands of patients on a daily basis. Not only do they have to attend to the patients physically, they need to have a clear understanding of each patient's health related issues, in addition to basic bio data.
+
+Currently, most health care professionals rely on paper documents that contain such data for each patients. Not only do they have to perform the menial task of searching through the piles of patient documents, sometimes, they have to look through the entire patient document to get what they need to know about the patient.
+
+Health Book is aimed at solving such administrative woes of health care professionals. By digitizing such data into an application, health care professionals can easily retrieve the required patient data.
+
+The application provides both a Command Line Interface (CLI) for input of data and a Graphical User Interface (GUI) for displaying of patient's personal details and health-related information. The application is fully written in Java, allowing cross-platform compatibility.
+
+=== Team Composition:
+[cols="1,2,3", options="header"]
+|============================
+|Name |Feature |Description
+
+|Hovan Tan |Project Manager |Oversee the project deadline and deliverable
+
+|Brandon Cheong |Development Lead |Oversee the overall development of features
+
+|Chew Kah Meng |Quality Assurance Lead |Oversee the overall testing of system
+
+|Chok Xin Yan |Design Lead |Oversee the look and feel of the system
+
+|Cheng Xianhao |Subject Matter Expert |Oversee the requirements of the project
+|============================
+
+=== Features
+[cols="1,2", options="header"]
+|============================
+|Feature|Description
+
+|Manage Patient |Create, edit or delete a patient profile
+|Manage Additional Information| Add or edit additional information such as patient's bio-data
+|Manage Medical History| Create, edit or delete a patient's medical history
+|Manage Medical Appointment| Create, edit or delete a patient's medical appointment
+|Manage Medical Report| Create, edit or delete a patient's medical report
+|Find/Sort Patient | Filter or arrange patient list based on parameters
+|Encryption| Encrypt patient's data so that the saved data is not human-readable.
+
+|============================
+
+== Summary of Contributions
+
+* *Major enhancement*: Added *the ability to add/edit additional information*.
+** What it does: Allows users to selectively add or edit additional information of patients that are not required for the creation of a patient profile in Health Book.
+** Justification: Based on the team's interview with health care professionals, the team understood that some of the information that health care professionals are interested about their patients include bio-data like NRIC, gender, blood type, occupation, height and weight which might not be available upon the creation of the patient's profile. Giving the user the ability to add or edit such information after the creation of patient profile provides user with more flexibility on managing such information.
+** Highlights: To ensure that users input the correct type of data for the correct type of information, a dual-layer check system is implemented for most fields - the first layer is done by using Java Regular Expressions, while the second layer is done using checksum algorithms and exception handling. The different types of information to be added means that an iterative approach has to be taken. However, this would also mean that care needs to be taken to ensure that there are no regression.
+
+* *Minor enhancement*:
+** Presented the additional information in a table view format in the main window.
+*** Justification: Health care professionals interact with such information frequently. A table view format is best able to present these information in a systematic manner.
+** Toggleable encryption with AES 128-bit symmetric encryption
+*** Justification: As the application is targeted at the health care industry where privacy is of major concern, encryption is the solution to ensure that the application remains socially responsible. However, to handle the project constraint of "human-editable-file", the encryption functionality is a toggled feature so that user can choose to disable encryption should they require the human-editable saved data.
+*** Credits: http://santuario.apache.org/[Apache Santuario]'s encryption library is used for this feature.
+
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=xhxh96[CodeDashboard]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed the use of issue tracker and kanban board.
+*** Managed the setup and use of Continuous Integration tools (Travis, Codacy, AppVeyor and Coveralls).
+*** Designed the workflow for using of GitHub
+** Enhancements to existing features:
+*** Increased code coverage from 78% to 82% (Pull requests https://github.com/CS2113-AY1819S1-T12-2/main/pull/213[#213])
+** Community:
+*** PRs review with non-trivial comments: (Pull request https://github.com/CS2113-AY1819S1-T12-2/main/pull/50[#50])
+*** Reported bugs and suggestions for other teams in class(Issue https://github.com/CS2113-AY1819S1-T16-2/main/issues/103[#103], https://github.com/CS2113-AY1819S1-T16-2/main/issues/93[#93], https://github.com/CS2113-AY1819S1-T16-2/main/issues/98[#98])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=addinfocommands]
+
+include::../UserGuide.adoc[tag=dataencryption]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=addinfo]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]
+
+include::../DeveloperGuide.adoc[tag=addinfousecase]
+
+include::../DeveloperGuide.adoc[tag=dataencryptionusecase]
+

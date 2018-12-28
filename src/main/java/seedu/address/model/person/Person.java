@@ -6,7 +6,22 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
+import seedu.address.model.appt.Appt;
+import seedu.address.model.appt.ApptComparator;
+import seedu.address.model.medhistory.MedHistory;
+import seedu.address.model.medhistory.MedHistoryComparator;
+import seedu.address.model.medicalreport.MedicalReport;
+import seedu.address.model.medicalreport.ReportComparator;
+import seedu.address.model.person.addinfo.BloodType;
+import seedu.address.model.person.addinfo.DateOfBirth;
+import seedu.address.model.person.addinfo.Gender;
+import seedu.address.model.person.addinfo.Height;
+import seedu.address.model.person.addinfo.MaritalStatus;
+import seedu.address.model.person.addinfo.Nric;
+import seedu.address.model.person.addinfo.Occupation;
+import seedu.address.model.person.addinfo.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,17 +37,44 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Set<MedHistory> medHistories = new TreeSet<>(new MedHistoryComparator());
+    private final Set<Appt> appts = new TreeSet<>(new ApptComparator());
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<MedicalReport> reports = new TreeSet<>(new ReportComparator());
+
+    // Additional information fields
+    private final Nric nric;
+    private final DateOfBirth dateOfBirth;
+    private final Height height;
+    private final Weight weight;
+    private final Gender gender;
+    private final BloodType bloodType;
+    private final Occupation occupation;
+    private final MaritalStatus maritalStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<MedicalReport> reports,
+                  Set<MedHistory> medHistories, Set<Appt> appts, Nric nric, DateOfBirth dateOfBirth, Height height,
+                  Weight weight, Gender gender, BloodType bloodType, Occupation occupation, MaritalStatus maritalStatus,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.nric = nric;
+        this.dateOfBirth = dateOfBirth;
+        this.height = height;
+        this.weight = weight;
+        this.gender = gender;
+        this.bloodType = bloodType;
+        this.occupation = occupation;
+        this.maritalStatus = maritalStatus;
+        this.reports.addAll(reports);
+        this.medHistories.addAll(medHistories);
+        this.appts.addAll(appts);
         this.tags.addAll(tags);
     }
 
@@ -52,6 +94,55 @@ public class Person {
         return address;
     }
 
+    //@@author chewkahmeng
+    public Set<MedicalReport> getMedicalReports() {
+        return Collections.unmodifiableSet(reports);
+    }
+
+    //@@author xShaivan
+    public Set<MedHistory> getMedHistory() {
+        return Collections.unmodifiableSet(medHistories);
+    }
+
+    //@@author xhxh96
+    public Nric getNric() {
+        return nric;
+    }
+
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public Height getHeight() {
+        return height;
+    }
+
+    public Weight getWeight() {
+        return weight;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public BloodType getBloodType() {
+        return bloodType;
+    }
+
+    public Occupation getOccupation() {
+        return occupation;
+    }
+
+    public MaritalStatus getMaritalStatus() {
+        return maritalStatus;
+    }
+
+    //@@author brandonccm1996
+    public Set<Appt> getAppts() {
+        return Collections.unmodifiableSet(appts);
+    }
+
+    //@@author
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -93,6 +184,17 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getNric().equals(getNric())
+                && otherPerson.getDateOfBirth().equals(getDateOfBirth())
+                && otherPerson.getHeight().equals(getHeight())
+                && otherPerson.getWeight().equals(getWeight())
+                && otherPerson.getGender().equals(getGender())
+                && otherPerson.getBloodType().equals(getBloodType())
+                && otherPerson.getOccupation().equals(getOccupation())
+                && otherPerson.getMaritalStatus().equals(getMaritalStatus())
+                && otherPerson.getMedHistory().equals(getMedHistory())
+                && otherPerson.getAppts().equals(getAppts())
+                && otherPerson.getMedicalReports().equals(getMedicalReports())
                 && otherPerson.getTags().equals(getTags());
     }
 

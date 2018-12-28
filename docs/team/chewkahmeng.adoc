@@ -1,0 +1,78 @@
+= Chew Kah Meng - Project Portfolio
+:site-section: AboutUs
+:toc:
+:sectnums:
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+[discrete]
+== PROJECT: Health Book
+---
+
+== Overview
+a) *Introduction*: This portfolio records my contributions to Health Book. My code contributions shows my technical competence in software engineering and my contributions to the User Guide and Developer Guide highlights my documentation writing skills.
+
+b) *Product Summary*: Health Book is a desktop application written in Java. A Command Line Interface (CLI) is used to input commands and a Graphical User Interface (GUI) is used to display the patients’ information.
+
+c) *Current Problem*: Healthcare professionals are spending a lot of time and effort to retrieve their patients' information from their medical records.
+
+d) *Our Solution*: Health Book was developed to help healthcare professionals retrieve their patients’ personal and health-related information more efficiently.
+
+e) *Our features*:
+
+* *Additional Information Feature*: This feature allows the user to add and edit additional information of the patient so that he is able to differentiate patients with the same name by their additional details such as height and weight.
+
+* *Medical History Feature*: This feature allows the user to add and edit the medical history of a patient so that he is able to identify the patient' allergies and prescribe medication correctly, as well as to predict future health risks.
+
+* *Medical Appointment Feature*: This feature allows the user to add, edit and delete the medical appointments so that he is able to keep track of them while making sure that there are no scheduling clashes. This feature also helps the user remind his patients about their medical appointments.
+
+* *Medical Report Feature*: This feature allows the user to add and edit medical reports of a patient so that he and other healthcare providers can refer to them in the future and correct any mistakes in the medical report.
+
+* *Find and Sort Feature*: This feature saves time for the user to find a certain patient in the patient list and the sorted list makes it easier to facilitate administration.
+
+f) *Team Summary*: My team consisted of a Project Manager, a Development Lead, a Design Lead, a Subject Matter Expert and myself, the Quality Assurance Lead. Besides developing Health Book, I was in charge of ensuring that Health Book runs smoothly.
+
+== Summary of Contributions
+
+|===
+|_This section showcases my main contributions to Health Book and demonstrates my ability to write functional and test code while performing in a team setting._
+|===
+
+* *Major enhancement*: added the ability to *add a list of medical reports for patients so that the user can view all their medical reports.*
+** What it does: This feature allows the user to add a list of medical reports to a patient and access any medical report from the list.
+** Justification: This feature makes it easier for the user to add and store medical reports. The user can conveniently access all the medical reports of a patient as compared to the past where a doctor has to spend time and effort to retrieve a patient's medical report from a large inventory.
+
+* *Minor enhancement*: added the ability to *edit a medical report.*
+** What it does: This feature allows the user to edit a patient’s medical report.
+** Justification: This feature allows the user to correct errors in a patient's medical report.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=chewkahmeng[Code Dashboard]]
+
+* *Other contributions*:
+
+** Project management:
+*** As the Quality Assurance Lead, I was in charge of:
+**** Making sure that our application has a test coverage of at least 80%.
+**** Checking that our application has as few bugs as possible and passes all test cases.
+** Community:
+*** Reported bugs and suggestions for other teams in the class, while providing technical suggestions for further improvement: (Issues: https://github.com/CS2113-AY1819S1-T16-4/main/issues/203[#203], https://github.com/CS2113-AY1819S1-T16-4/main/issues/210[#208])
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=reportcommands]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=addreport]
+
+include::../DeveloperGuide.adoc[tag=editreport]
+
+include::../DeveloperGuide.adoc[tag=reportusecases]

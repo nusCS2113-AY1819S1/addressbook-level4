@@ -19,6 +19,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,14 +35,14 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    private InfoPanel infoPanel;
     private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
 
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane infoPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -119,8 +120,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        infoPanel = new InfoPanel();
+        infoPanelPlaceholder.getChildren().add(infoPanel.getRoot());
+        infoPanel.showEmptyMessage();
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -191,13 +193,24 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
+    //void releaseResources() {
+    //browserPanel.freeResources();
+    //}
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    //@@author brandonccm1996
+    void showPersonDetailsOnInfoPanel(Person person) {
+        infoPanel.clearVBoxes();
+        infoPanel.setPerson(person);
+    }
+
+    void showInfoPanelEmptyMessage() {
+        infoPanel.clearVBoxes();
+        infoPanel.showEmptyMessage();
     }
 }

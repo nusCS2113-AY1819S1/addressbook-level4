@@ -15,7 +15,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
+    //private final UniqueReportList reports;
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -27,6 +27,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
+    /*{
+        reports = new UniqueReportList();
+    }*/
     public AddressBook() {}
 
     /**
@@ -66,12 +69,25 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+    /*public boolean hasReport(MedicalReport report) {
+        requireNonNull(report);
+        return reports.contains(report);
+    }*/
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Sorts the persons in the address book by specified prefix
+     * by increasing or decreasing order
+     */
+    public void sortPersons(String prefix, int order) {
+        persons.sortPersons(prefix, order);
     }
 
     /**
@@ -106,6 +122,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -117,4 +134,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
 }
