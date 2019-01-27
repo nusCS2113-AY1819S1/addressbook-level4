@@ -3,7 +3,7 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: Jalil Enterprises Stock List
 
 ---
 
@@ -41,7 +41,6 @@ JalilEnterprises StockList is a stock managing application used for accounting f
 *** Morphed the Developer Guide from AddressBook into one tailored for our StockList: https://github.com[#13]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#96], https://github.com[#97]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class
 ** Tools:
 *** Integrated a new Github plugin (TravisCI) to the team repo
