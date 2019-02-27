@@ -5,16 +5,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
-import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -24,14 +19,15 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -49,8 +45,6 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
-    protected UserPrefs userPrefs;
-
 
     @Override
     public void init() throws Exception {
@@ -61,19 +55,17 @@ public class MainApp extends Application {
         config = initConfig(appParameters.getConfigPath());
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-        userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
+        UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model);
+        logic = new LogicManager(model, storage);
 
-        ui = new UiManager(logic, config, userPrefs);
-
-        initEventsCenter();
+        ui = new UiManager(logic);
     }
 
     /**
@@ -81,7 +73,7 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         try {
@@ -173,10 +165,6 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
-    private void initEventsCenter() {
-        EventsCenter.getInstance().registerHandler(this);
-    }
-
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
@@ -186,20 +174,11 @@ public class MainApp extends Application {
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
-        ui.stop();
         try {
-            storage.saveUserPrefs(userPrefs);
+            storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
-        Platform.exit();
-        System.exit(0);
-    }
-
-    @Subscribe
-    public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        stop();
     }
 
     public static void main(String[] args) {

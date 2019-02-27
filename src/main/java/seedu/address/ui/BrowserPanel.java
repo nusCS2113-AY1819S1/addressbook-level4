@@ -1,18 +1,18 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.net.URL;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,9 +20,9 @@ import seedu.address.model.person.Person;
  */
 public class BrowserPanel extends UiPart<Region> {
 
-    public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+    public static final URL DEFAULT_PAGE =
+            requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "default.html"));
+    public static final String SEARCH_PAGE_URL = "https://se-education.org/dummy-search-page/?name=";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -31,14 +31,22 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private WebView browser;
 
-    public BrowserPanel() {
+    public BrowserPanel(ObservableValue<Person> selectedPerson) {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
+        // Load person page when selected person changes.
+        selectedPerson.addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                loadDefaultPage();
+                return;
+            }
+            loadPersonPage(newValue);
+        });
+
         loadDefaultPage();
-        registerAsAnEventHandler(this);
     }
 
     private void loadPersonPage(Person person) {
@@ -53,20 +61,7 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads a default HTML file with a background that matches the general theme.
      */
     private void loadDefaultPage() {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
-        loadPage(defaultPage.toExternalForm());
+        loadPage(DEFAULT_PAGE.toExternalForm());
     }
 
-    /**
-     * Frees resources allocated to the browser.
-     */
-    public void freeResources() {
-        browser = null;
-    }
-
-    @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection());
-    }
 }

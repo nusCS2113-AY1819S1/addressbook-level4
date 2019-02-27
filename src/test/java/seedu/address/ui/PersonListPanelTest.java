@@ -3,37 +3,33 @@ package seedu.address.ui;
 import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
-import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Collections;
 
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.model.person.Phone;
 
 public class PersonListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =
             FXCollections.observableList(getTypicalPersons());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PERSON);
-
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
-
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
+    private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
     private PersonListPanelHandle personListPanelHandle;
 
     @Test
@@ -51,9 +47,10 @@ public class PersonListPanelTest extends GuiUnitTest {
     }
 
     @Test
-    public void handleJumpToListRequestEvent() {
+    public void selection_modelSelectedPersonChanged_selectionChanges() {
         initUi(TYPICAL_PERSONS);
-        postNow(JUMP_TO_SECOND_EVENT);
+        Person secondPerson = TYPICAL_PERSONS.get(INDEX_SECOND_PERSON.getZeroBased());
+        guiRobot.interact(() -> selectedPerson.set(secondPerson));
         guiRobot.pauseForHuman();
 
         PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
@@ -66,7 +63,7 @@ public class PersonListPanelTest extends GuiUnitTest {
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
-    public void performanceTest() throws Exception {
+    public void performanceTest() {
         ObservableList<Person> backingList = createBackingList(10000);
 
         assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
@@ -79,35 +76,17 @@ public class PersonListPanelTest extends GuiUnitTest {
      * Returns a list of persons containing {@code personCount} persons that is used to populate the
      * {@code PersonListPanel}.
      */
-    private ObservableList<Person> createBackingList(int personCount) throws Exception {
-        Path xmlFile = createXmlFileWithPersons(personCount);
-        XmlSerializableAddressBook xmlAddressBook =
-                XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getPersonList());
-    }
-
-    /**
-     * Returns a .xml file containing {@code personCount} persons. This file will be deleted when the JVM terminates.
-     */
-    private Path createXmlFileWithPersons(int personCount) throws Exception {
-        StringBuilder builder = new StringBuilder();
-        builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
-        builder.append("<addressbook>\n");
+    private ObservableList<Person> createBackingList(int personCount) {
+        ObservableList<Person> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < personCount; i++) {
-            builder.append("<persons>\n");
-            builder.append("<name>").append(i).append("a</name>\n");
-            builder.append("<phone>000</phone>\n");
-            builder.append("<email>a@aa</email>\n");
-            builder.append("<address>a</address>\n");
-            builder.append("</persons>\n");
+            Name name = new Name(i + "a");
+            Phone phone = new Phone("000");
+            Email email = new Email("a@aa");
+            Address address = new Address("a");
+            Person person = new Person(name, phone, email, address, Collections.emptySet());
+            backingList.add(person);
         }
-        builder.append("</addressbook>\n");
-
-        Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");
-        FileUtil.createFile(manyPersonsFile);
-        FileUtil.writeToFile(manyPersonsFile, builder.toString());
-        manyPersonsFile.toFile().deleteOnExit();
-        return manyPersonsFile;
+        return backingList;
     }
 
     /**
@@ -115,7 +94,8 @@ public class PersonListPanelTest extends GuiUnitTest {
      * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
      */
     private void initUi(ObservableList<Person> backingList) {
-        PersonListPanel personListPanel = new PersonListPanel(backingList);
+        PersonListPanel personListPanel =
+                new PersonListPanel(backingList, selectedPerson, selectedPerson::set);
         uiPartRule.setUiPart(personListPanel);
 
         personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),

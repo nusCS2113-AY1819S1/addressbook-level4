@@ -1,11 +1,11 @@
 language: java
 matrix:
   include:
-    - jdk: oraclejdk9
+    - jdk: oraclejdk8
 
 script: >-
     ./config/travis/run-checks.sh &&
-    travis_retry ./gradlew clean checkstyleMain checkstyleTest headless allTests coverage coveralls asciidoctor copyDummySearchPage
+    ./gradlew clean checkstyleMain checkstyleTest headless allTests coverage coveralls asciidoctor
 
 deploy:
   skip_cleanup: true
@@ -17,7 +17,7 @@ deploy:
 addons:
   apt:
     packages:
-      - oracle-java9-installer
+      - oracle-java8-installer
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

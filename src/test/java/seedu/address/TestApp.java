@@ -9,15 +9,13 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.TestUtil;
 import systemtests.ModelHelper;
 
@@ -27,8 +25,7 @@ import systemtests.ModelHelper;
  */
 public class TestApp extends MainApp {
 
-    public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.xml");
-    public static final String APP_TITLE = "Test App";
+    public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.json");
 
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
@@ -45,15 +42,18 @@ public class TestApp extends MainApp {
 
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
-            createDataFileWithData(new XmlSerializableAddressBook(this.initialDataSupplier.get()),
-                    this.saveFileLocation);
+            JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(saveFileLocation);
+            try {
+                jsonAddressBookStorage.saveAddressBook(initialDataSupplier.get());
+            } catch (IOException ioe) {
+                throw new AssertionError(ioe);
+            }
         }
     }
 
     @Override
     protected Config initConfig(Path configFilePath) {
         Config config = super.initConfig(configFilePath);
-        config.setAppTitle(APP_TITLE);
         config.setUserPrefsFilePath(DEFAULT_PREF_FILE_LOCATION_FOR_TESTING);
         return config;
     }
@@ -63,7 +63,7 @@ public class TestApp extends MainApp {
         UserPrefs userPrefs = super.initPrefs(storage);
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
-        userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
+        userPrefs.setGuiSettings(new GuiSettings(600.0, 600.0, (int) x, (int) y));
         userPrefs.setAddressBookFilePath(saveFileLocation);
         return userPrefs;
     }
@@ -106,15 +106,4 @@ public class TestApp extends MainApp {
         launch(args);
     }
 
-    /**
-     * Creates an XML file at the {@code filePath} with the {@code data}.
-     */
-    private <T> void createDataFileWithData(T data, Path filePath) {
-        try {
-            FileUtil.createIfMissing(filePath);
-            XmlUtil.saveDataToFile(filePath, data);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
