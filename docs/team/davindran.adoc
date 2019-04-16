@@ -53,9 +53,103 @@ JalilEnterprises StockList is a stock managing application used for accounting f
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=login]
+// tag::login[]
+=== List registered accounts: `listAccounts`
 
-include::../UserGuide.adoc[tag=accountManagement]
+Lists all the accounts currently registered in StockList. +
+Format: `listAccounts`
+
+=== Find a registered account: `findAccount`
+
+Finds a registered account whose names contain any of the given keywords. +
+Format: `findAccount KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `admin` will match `Admin`
+* The order of the keywords does not matter. e.g. `admin jalil` will match `jalil admin`
+* Only the name is searched.
+* Partial words will be matched e.g. `ad` will match `admin`
+* Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `admin jalil` will return `admin tan`, `admin lee`
+****
+
+Examples:
+
+* `findAccount admin` +
+Returns `admin` and `Admin Jalil`
+* `findAccount admin tom` +
+Returns any items having names `admin` or `tom`
+
+=== Logging in: `login`
+
+Logs into Stock List. +
+Format: `login u/USERNAME p/PASSWORD`
+
+Examples:
+
+* `login u/admin p/admin`
+
+=== Checking login status: `loginStatus`
+
+Checks login status of Stock List. +
+Format: `loginStatus`
+// end::login[]
+
+// tag::accountManagement[]
+=== Adding an account: `addAccount`
+
+Adds an account to the database. +
+Format: `addAccount u/USERNAME p/PASSWORD`
+
+Examples:
+
+* `addAccount u/john p/doe`
+* `addAccount u/jalil p/boss123`
+
+=== Deleting an account: `deleteAccount`
+
+Deletes an account from the database. +
+Format: `delete INDEX` +
+
+Index can be found using `listAccounts`
+
+Examples:
+
+* `deleteAccount 2` +
+Deletes the second account in the database, according to the index via `listAccounts`.
+
+NOTE: It is strongly NOT recommended to delete the first account i.e. the admin account.
+
+
+=== Editing an account currently in the database: `editAccount`
+
+Edits a registered account in the database. +
+Format: `edit INDEX u/USERNAME [p/PASSWORD]`
+
+****
+* Edits the account at the specified INDEX. The index refers to the index number shown in the displayed list when 'listAccounts' is used. The index must be a positive integer 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing credentials will be updated to the input credentials.
+****
+Examples:
+
+* `editAccount 2 p/password123!` +
+Changes the password of the second account to `password123!`
+
+NOTE: Exercise caution when editing the admin account.
+
+=== Resetting the account database: `resetAccounts`
+
+Resets the account database. +
+All accounts will be deleted and a default admin account will be created. +
+Credentials of the default account: `u/admin p/admin`
+
+Format: `resetAccounts`
+
+=== Logging out: `logout`
+
+Logs out of Stock List. +
+Format: `logout`
+// end::accountManagement[]
 
 == Contributions to the Developer Guide
 
@@ -63,8 +157,179 @@ include::../UserGuide.adoc[tag=accountManagement]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=login]
+// tag::login[]
+=== Login feature
+==== Current Implementation
 
-include::../DeveloperGuide.adoc[tag=accountUseCase]
+The login mechanism is facilitated by `LoginCommand`. It extends `Command` and implements the following operations:
 
-include::../DeveloperGuide.adoc[tag=accountTesting]
+
+* `LoginCommand#modifyLoginStatus()` -- checks if the password matches the account in the database, if it exists. If true, updates the logged in account status in `Model` accordingly.
+
+* `LoginCommand#execute()` -- calls `LoginCommand#modifyLoginStatus()`. Then, checks login status in `Model` and displays a login success message if true and displays a failure message otherwise.
+
+These operations are exposed in the `Model` interface as `Model#setLoggedInUser()` and `Model#getLoginStatus()` respectively.
+
+
+Given below is an example usage scenario and how the LoginCommand mechanism behaves at each step.
+
+Step 1. The user executes `login u/admin p/admin` command to log into StockList with *admin* and *admin* being the username and password credentials respectively.
+
+Step 2. The `execute` command calls `Model#getLoginStatus()` and checks if the user is already logged in. If true, `execute` throws a `CommandException` notifying the user that he is already logged in.
+
+Step 3. The `execute` command then calls `LoginCommand#modifyLoginStatus()`, which checks if the username *admin* exists in the account list, and if it does, checks if the given password *admin* matches the password associated with the username *admin*.
+
+Step 4. If the *admin* password matches, `LoginCommand#modifyLoginStatus()` calls `Model#setLoggedInUser()` which updates the logged in account status in `model` with the logged in account set to *admin* and logged in status set to true.
+
+Step 5. The `execute` command then checks the log in status via `Model#getLoginStatus()`. A success message is printed if true; otherwise a failure message is printed.
+
+The following sequence diagram shows how the login operation works:
+
+image::LoginSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How login executes
+
+* **Alternative 1** (current choice) Check against various accounts stored in a file and allow access if match.
+** Pros: Allows for multiple accounts with access to StockList.
+** Cons: More memory usage.
+
+* **Alternative 2** Checks against a single account that can be modified.
+** Pros: Simple to implement, minimal memory usage, allows for only one access account.
+** Cons: Does not allow access for multiple accounts, locked out of app if credentials lost.
+// end::login[]
+
+// tag::accountUseCase[]
+[discrete]
+=== Use case: Login
+
+*MSS*
+
+1.  User requests to list accounts
+2.  StockList shows the list of accounts
+3.  User requests to login using his account credentials
+4.  StockList shows that the user has successfully logged in
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list does not contain user's account.
++
+Use case ends.
+
+* 3a. The given account credentials are invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Delete account
+
+*MSS*
+
+1.  User requests to list accounts
+2.  StockList shows a list of accounts
+3.  User requests to delete a specific account in the list
+4.  StockList deletes the account
++
+Use case ends.
+
+*Extensions*
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Add account
+
+*MSS*
+
+1.  User requests to add an account
+2.  StockList adds the account to the database.
++
+Use case ends.
+
+*Extensions*
+
+* 1a. The given account is already in the database.
++
+[none]
+** 1a1. StockList shows an error message.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Edit account
+
+*MSS*
+
+1.  User requests to list accounts
+2.  StockList shows a list of accounts
+3.  User requests to edit a specific account in the list
+4.  StockList edits the account
++
+Use case ends.
+
+*Extensions*
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+// end::accountUseCase[]
+
+// tag::accountTesting[]
+=== Logging in
+
+. Logging in while all accounts are listed
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Only default account 'admin' in the list, with the default credentials. Login status is currently logged out.
+.. Test case: `login u/admin p/lol` +
+   Expected: Account is not logged in. Error details shown in the status message. Status bar remains the same.
+.. Test case: `login u/admin p/admin` +
+   Expected: Account is logged in. Details of the logged in account shown in the status message. Timestamp in the status bar is updated.
+.. Other incorrect login commands to try: `login`, `login u/x p/y` (where x and y differ from the registered account data) +
+   Expected: Similar to the first test case.
+
+=== Account management
+
+. Adding an account
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Only default account 'admin' in the list, with the default credentials. Login status is currently logged in as 'admin'.
+.. Test case: `addAccount u/admin p/lol` +
+   Expected: Account is not added. Error details shown in the status message. Status bar remains the same.
+.. Test case: `addAccount u/john p/doe` +
+   Expected: Account is added. Details of the added account shown in the status message. Timestamp in the status bar is updated.
+.. Other incorrect addAccount commands to try: `addAccount`, `addAccount u/x p/y` (where x matches an account already in the database) +
+   Expected: Similar to first test case.
+
+. Editing an account while all accounts are listed
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Accounts 'admin' and 'john' are in the list. Login status is currently logged in as 'admin'.
+.. Test case: `editAccount 2 u/john p/password123!` +
+   Expected: Account is edited. Details of the edited account shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `editAccount 0 u/chew p/lol` +
+   Expected: Account is not edited. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect editAccount commands to try: `editAccount`, `editAccount x u/y p/z` (where x is larger than the account list size) +
+
+. Deleting an account while all accounts are listed
+
+.. Prerequisites: List all accounts using the `listAccounts` command. Accounts 'admin' and 'john' are in the list. Login status is currently logged in as 'admin'.
+.. Test case: `deleteAccount 2` +
+   Expected: Account is deleted. Details of the deleted account shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `deleteAccount 0` +
+   Expected: No account is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect deleteAccount commands to try: `deleteAccount`, `deleteAccount x` (where x is larger than the account list size) +
+   Expected: Similar to previous.
+// end::accountTesting[]
